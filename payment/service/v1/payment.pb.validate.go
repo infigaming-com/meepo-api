@@ -5752,6 +5752,1091 @@ var _ interface {
 	ErrorName() string
 } = UpdatePaymentMethodResponseValidationError{}
 
+// Validate checks the field values on BankCard with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *BankCard) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BankCard with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in BankCardMultiError, or nil
+// if none found.
+func (m *BankCard) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BankCard) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for CardNumber
+
+	// no validation rules for CardAccountFirstname
+
+	// no validation rules for CardAccountLastname
+
+	// no validation rules for MinAmount
+
+	// no validation rules for MaxAmount
+
+	// no validation rules for Currency
+
+	// no validation rules for Country
+
+	// no validation rules for Enabled
+
+	if len(errors) > 0 {
+		return BankCardMultiError(errors)
+	}
+
+	return nil
+}
+
+// BankCardMultiError is an error wrapping multiple validation errors returned
+// by BankCard.ValidateAll() if the designated constraints aren't met.
+type BankCardMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BankCardMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BankCardMultiError) AllErrors() []error { return m }
+
+// BankCardValidationError is the validation error returned by
+// BankCard.Validate if the designated constraints aren't met.
+type BankCardValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BankCardValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BankCardValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BankCardValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BankCardValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BankCardValidationError) ErrorName() string { return "BankCardValidationError" }
+
+// Error satisfies the builtin error interface
+func (e BankCardValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBankCard.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BankCardValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BankCardValidationError{}
+
+// Validate checks the field values on GetBankCardListRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetBankCardListRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetBankCardListRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetBankCardListRequestMultiError, or nil if none found.
+func (m *GetBankCardListRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetBankCardListRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetBankCardListRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetBankCardListRequestMultiError is an error wrapping multiple validation
+// errors returned by GetBankCardListRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetBankCardListRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetBankCardListRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetBankCardListRequestMultiError) AllErrors() []error { return m }
+
+// GetBankCardListRequestValidationError is the validation error returned by
+// GetBankCardListRequest.Validate if the designated constraints aren't met.
+type GetBankCardListRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetBankCardListRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetBankCardListRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetBankCardListRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetBankCardListRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetBankCardListRequestValidationError) ErrorName() string {
+	return "GetBankCardListRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetBankCardListRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetBankCardListRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetBankCardListRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetBankCardListRequestValidationError{}
+
+// Validate checks the field values on GetBankCardListResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetBankCardListResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetBankCardListResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetBankCardListResponseMultiError, or nil if none found.
+func (m *GetBankCardListResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetBankCardListResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetBankCardLsit() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetBankCardListResponseValidationError{
+						field:  fmt.Sprintf("BankCardLsit[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetBankCardListResponseValidationError{
+						field:  fmt.Sprintf("BankCardLsit[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetBankCardListResponseValidationError{
+					field:  fmt.Sprintf("BankCardLsit[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetBankCardListResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetBankCardListResponseMultiError is an error wrapping multiple validation
+// errors returned by GetBankCardListResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetBankCardListResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetBankCardListResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetBankCardListResponseMultiError) AllErrors() []error { return m }
+
+// GetBankCardListResponseValidationError is the validation error returned by
+// GetBankCardListResponse.Validate if the designated constraints aren't met.
+type GetBankCardListResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetBankCardListResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetBankCardListResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetBankCardListResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetBankCardListResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetBankCardListResponseValidationError) ErrorName() string {
+	return "GetBankCardListResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetBankCardListResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetBankCardListResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetBankCardListResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetBankCardListResponseValidationError{}
+
+// Validate checks the field values on AddBankCardRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AddBankCardRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AddBankCardRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AddBankCardRequestMultiError, or nil if none found.
+func (m *AddBankCardRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddBankCardRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetBankCard()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AddBankCardRequestValidationError{
+					field:  "BankCard",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AddBankCardRequestValidationError{
+					field:  "BankCard",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetBankCard()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AddBankCardRequestValidationError{
+				field:  "BankCard",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return AddBankCardRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// AddBankCardRequestMultiError is an error wrapping multiple validation errors
+// returned by AddBankCardRequest.ValidateAll() if the designated constraints
+// aren't met.
+type AddBankCardRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddBankCardRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddBankCardRequestMultiError) AllErrors() []error { return m }
+
+// AddBankCardRequestValidationError is the validation error returned by
+// AddBankCardRequest.Validate if the designated constraints aren't met.
+type AddBankCardRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddBankCardRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddBankCardRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddBankCardRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddBankCardRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddBankCardRequestValidationError) ErrorName() string {
+	return "AddBankCardRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AddBankCardRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddBankCardRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddBankCardRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddBankCardRequestValidationError{}
+
+// Validate checks the field values on AddBankCardResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AddBankCardResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AddBankCardResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AddBankCardResponseMultiError, or nil if none found.
+func (m *AddBankCardResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddBankCardResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetBankCard()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AddBankCardResponseValidationError{
+					field:  "BankCard",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AddBankCardResponseValidationError{
+					field:  "BankCard",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetBankCard()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AddBankCardResponseValidationError{
+				field:  "BankCard",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return AddBankCardResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// AddBankCardResponseMultiError is an error wrapping multiple validation
+// errors returned by AddBankCardResponse.ValidateAll() if the designated
+// constraints aren't met.
+type AddBankCardResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddBankCardResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddBankCardResponseMultiError) AllErrors() []error { return m }
+
+// AddBankCardResponseValidationError is the validation error returned by
+// AddBankCardResponse.Validate if the designated constraints aren't met.
+type AddBankCardResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddBankCardResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddBankCardResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddBankCardResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddBankCardResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddBankCardResponseValidationError) ErrorName() string {
+	return "AddBankCardResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AddBankCardResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddBankCardResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddBankCardResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddBankCardResponseValidationError{}
+
+// Validate checks the field values on UpdateBankCardRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateBankCardRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateBankCardRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateBankCardRequestMultiError, or nil if none found.
+func (m *UpdateBankCardRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateBankCardRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetBankCard()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateBankCardRequestValidationError{
+					field:  "BankCard",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateBankCardRequestValidationError{
+					field:  "BankCard",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetBankCard()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateBankCardRequestValidationError{
+				field:  "BankCard",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return UpdateBankCardRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateBankCardRequestMultiError is an error wrapping multiple validation
+// errors returned by UpdateBankCardRequest.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateBankCardRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateBankCardRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateBankCardRequestMultiError) AllErrors() []error { return m }
+
+// UpdateBankCardRequestValidationError is the validation error returned by
+// UpdateBankCardRequest.Validate if the designated constraints aren't met.
+type UpdateBankCardRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateBankCardRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateBankCardRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateBankCardRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateBankCardRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateBankCardRequestValidationError) ErrorName() string {
+	return "UpdateBankCardRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateBankCardRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateBankCardRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateBankCardRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateBankCardRequestValidationError{}
+
+// Validate checks the field values on UpdateBankCardResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateBankCardResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateBankCardResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateBankCardResponseMultiError, or nil if none found.
+func (m *UpdateBankCardResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateBankCardResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetBankCard()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateBankCardResponseValidationError{
+					field:  "BankCard",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateBankCardResponseValidationError{
+					field:  "BankCard",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetBankCard()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateBankCardResponseValidationError{
+				field:  "BankCard",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return UpdateBankCardResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateBankCardResponseMultiError is an error wrapping multiple validation
+// errors returned by UpdateBankCardResponse.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateBankCardResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateBankCardResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateBankCardResponseMultiError) AllErrors() []error { return m }
+
+// UpdateBankCardResponseValidationError is the validation error returned by
+// UpdateBankCardResponse.Validate if the designated constraints aren't met.
+type UpdateBankCardResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateBankCardResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateBankCardResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateBankCardResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateBankCardResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateBankCardResponseValidationError) ErrorName() string {
+	return "UpdateBankCardResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateBankCardResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateBankCardResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateBankCardResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateBankCardResponseValidationError{}
+
+// Validate checks the field values on DeleteBankCardRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteBankCardRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteBankCardRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteBankCardRequestMultiError, or nil if none found.
+func (m *DeleteBankCardRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteBankCardRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for BankCardId
+
+	if len(errors) > 0 {
+		return DeleteBankCardRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteBankCardRequestMultiError is an error wrapping multiple validation
+// errors returned by DeleteBankCardRequest.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteBankCardRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteBankCardRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteBankCardRequestMultiError) AllErrors() []error { return m }
+
+// DeleteBankCardRequestValidationError is the validation error returned by
+// DeleteBankCardRequest.Validate if the designated constraints aren't met.
+type DeleteBankCardRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteBankCardRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteBankCardRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteBankCardRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteBankCardRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteBankCardRequestValidationError) ErrorName() string {
+	return "DeleteBankCardRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteBankCardRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteBankCardRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteBankCardRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteBankCardRequestValidationError{}
+
+// Validate checks the field values on DeleteBankCardResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteBankCardResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteBankCardResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteBankCardResponseMultiError, or nil if none found.
+func (m *DeleteBankCardResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteBankCardResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return DeleteBankCardResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteBankCardResponseMultiError is an error wrapping multiple validation
+// errors returned by DeleteBankCardResponse.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteBankCardResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteBankCardResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteBankCardResponseMultiError) AllErrors() []error { return m }
+
+// DeleteBankCardResponseValidationError is the validation error returned by
+// DeleteBankCardResponse.Validate if the designated constraints aren't met.
+type DeleteBankCardResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteBankCardResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteBankCardResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteBankCardResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteBankCardResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteBankCardResponseValidationError) ErrorName() string {
+	return "DeleteBankCardResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteBankCardResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteBankCardResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteBankCardResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteBankCardResponseValidationError{}
+
 // Validate checks the field values on GetAddressResponse_Data with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

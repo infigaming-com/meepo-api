@@ -818,6 +818,50 @@ message UpdatePaymentMethodResponse {
 	repeated string channel_ids = 1;
 }
 
+message BankCard {
+  string id = 1;
+  string card_number = 2;
+  string card_account_firstname = 3;
+  string card_account_lastname = 4;
+  string min_amount = 5;
+  string max_amount = 6;
+  string currency = 7;
+  string country = 8;
+  bool enabled = 9;
+}
+
+message GetBankCardListRequest {
+  
+}
+
+message GetBankCardListResponse {
+  repeated BankCard bank_card_lsit = 1;
+}
+
+message AddBankCardRequest {
+  BankCard bank_card = 1;
+}
+
+message AddBankCardResponse {
+  BankCard bank_card = 1;
+}
+
+message UpdateBankCardRequest {
+  BankCard bank_card = 1;
+}
+
+message UpdateBankCardResponse {
+  BankCard bank_card = 1;
+}
+
+message DeleteBankCardRequest {
+  string bank_card_id = 1;
+}
+
+message DeleteBankCardResponse {
+  
+}
+
 // Payment Service
 // Provides methods for managing payment methods, channels, and transactions
 service Payment {
@@ -984,5 +1028,33 @@ service Payment {
 	}
 
   rpc GetOperatorPaymentChannelPage(GetOperatorPaymentChannelPageRequest) returns (GetPaymentChannelPageResponse) {
+  }
+
+  rpc GetBankCardList(GetBankCardListRequest) returns (GetBankCardListResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/bankcard/list"
+      body: "*"
+    };
+  }
+
+  rpc AddBankCard(AddBankCardRequest) returns (AddBankCardResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/bankcard/add"
+      body: "*"
+    };
+  }
+
+  rpc UpdateBankCard(UpdateBankCardRequest) returns (UpdateBankCardResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/bankcard/update"
+      body: "*"
+    };
+  }
+
+  rpc DeleteBankCard(DeleteBankCardRequest) returns (DeleteBankCardResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/bankcard/delete"
+      body: "*"
+    };
   }
 }
