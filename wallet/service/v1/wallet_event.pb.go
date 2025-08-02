@@ -111,18 +111,25 @@ func (*EventResponse) Descriptor() ([]byte, []int) {
 }
 
 type BalanceUpdateEvent struct {
-	state           protoimpl.MessageState  `protogen:"open.v1"`
-	TransactionId   int64                   `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	TransactionType string                  `protobuf:"bytes,2,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	UserId          int64                   `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	Currency        string                  `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
-	BeforeBalance   string                  `protobuf:"bytes,6,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
-	AfterBalance    string                  `protobuf:"bytes,7,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
-	Amount          string                  `protobuf:"bytes,8,opt,name=amount,proto3" json:"amount,omitempty"`
-	CreatedAt       int64                   `protobuf:"varint,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                          protoimpl.MessageState  `protogen:"open.v1"`
+	TransactionId                  int64                   `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	TransactionType                string                  `protobuf:"bytes,2,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	UserId                         int64                   `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OperatorContext                *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Currency                       string                  `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"` // settlement currency
+	ReportingCurrency              string                  `protobuf:"bytes,6,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	BeforeBalance                  string                  `protobuf:"bytes,7,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
+	BeforeBalanceUsd               string                  `protobuf:"bytes,8,opt,name=before_balance_usd,json=beforeBalanceUsd,proto3" json:"before_balance_usd,omitempty"`
+	BeforeBalanceReportingCurrency string                  `protobuf:"bytes,9,opt,name=before_balance_reporting_currency,json=beforeBalanceReportingCurrency,proto3" json:"before_balance_reporting_currency,omitempty"`
+	AfterBalance                   string                  `protobuf:"bytes,10,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
+	AfterBalanceUsd                string                  `protobuf:"bytes,11,opt,name=after_balance_usd,json=afterBalanceUsd,proto3" json:"after_balance_usd,omitempty"`
+	AfterBalanceReportingCurrency  string                  `protobuf:"bytes,12,opt,name=after_balance_reporting_currency,json=afterBalanceReportingCurrency,proto3" json:"after_balance_reporting_currency,omitempty"`
+	Amount                         string                  `protobuf:"bytes,13,opt,name=amount,proto3" json:"amount,omitempty"`
+	AmountUsd                      string                  `protobuf:"bytes,14,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
+	AmountReportingCurrency        string                  `protobuf:"bytes,15,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
+	CreatedAt                      int64                   `protobuf:"varint,16,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
 func (x *BalanceUpdateEvent) Reset() {
@@ -190,9 +197,30 @@ func (x *BalanceUpdateEvent) GetCurrency() string {
 	return ""
 }
 
+func (x *BalanceUpdateEvent) GetReportingCurrency() string {
+	if x != nil {
+		return x.ReportingCurrency
+	}
+	return ""
+}
+
 func (x *BalanceUpdateEvent) GetBeforeBalance() string {
 	if x != nil {
 		return x.BeforeBalance
+	}
+	return ""
+}
+
+func (x *BalanceUpdateEvent) GetBeforeBalanceUsd() string {
+	if x != nil {
+		return x.BeforeBalanceUsd
+	}
+	return ""
+}
+
+func (x *BalanceUpdateEvent) GetBeforeBalanceReportingCurrency() string {
+	if x != nil {
+		return x.BeforeBalanceReportingCurrency
 	}
 	return ""
 }
@@ -204,9 +232,37 @@ func (x *BalanceUpdateEvent) GetAfterBalance() string {
 	return ""
 }
 
+func (x *BalanceUpdateEvent) GetAfterBalanceUsd() string {
+	if x != nil {
+		return x.AfterBalanceUsd
+	}
+	return ""
+}
+
+func (x *BalanceUpdateEvent) GetAfterBalanceReportingCurrency() string {
+	if x != nil {
+		return x.AfterBalanceReportingCurrency
+	}
+	return ""
+}
+
 func (x *BalanceUpdateEvent) GetAmount() string {
 	if x != nil {
 		return x.Amount
+	}
+	return ""
+}
+
+func (x *BalanceUpdateEvent) GetAmountUsd() string {
+	if x != nil {
+		return x.AmountUsd
+	}
+	return ""
+}
+
+func (x *BalanceUpdateEvent) GetAmountReportingCurrency() string {
+	if x != nil {
+		return x.AmountReportingCurrency
 	}
 	return ""
 }
@@ -219,17 +275,24 @@ func (x *BalanceUpdateEvent) GetCreatedAt() int64 {
 }
 
 type OperatorBalanceUpdateEvent struct {
-	state              protoimpl.MessageState  `protogen:"open.v1"`
-	TransactionId      int64                   `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	TransactionType    string                  `protobuf:"bytes,2,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	OperatorContext    *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	SettlementCurrency string                  `protobuf:"bytes,6,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
-	BeforeBalance      string                  `protobuf:"bytes,7,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
-	AfterBalance       string                  `protobuf:"bytes,8,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
-	Amount             string                  `protobuf:"bytes,9,opt,name=amount,proto3" json:"amount,omitempty"`
-	CreatedAt          int64                   `protobuf:"varint,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                          protoimpl.MessageState  `protogen:"open.v1"`
+	TransactionId                  int64                   `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	TransactionType                string                  `protobuf:"bytes,2,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	OperatorContext                *common.OperatorContext `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	SettlementCurrency             string                  `protobuf:"bytes,4,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
+	ReportingCurrency              string                  `protobuf:"bytes,5,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	BeforeBalance                  string                  `protobuf:"bytes,6,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
+	BeforeBalanceUsd               string                  `protobuf:"bytes,7,opt,name=before_balance_usd,json=beforeBalanceUsd,proto3" json:"before_balance_usd,omitempty"`
+	BeforeBalanceReportingCurrency string                  `protobuf:"bytes,8,opt,name=before_balance_reporting_currency,json=beforeBalanceReportingCurrency,proto3" json:"before_balance_reporting_currency,omitempty"`
+	AfterBalance                   string                  `protobuf:"bytes,9,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
+	AfterBalanceUsd                string                  `protobuf:"bytes,10,opt,name=after_balance_usd,json=afterBalanceUsd,proto3" json:"after_balance_usd,omitempty"`
+	AfterBalanceReportingCurrency  string                  `protobuf:"bytes,11,opt,name=after_balance_reporting_currency,json=afterBalanceReportingCurrency,proto3" json:"after_balance_reporting_currency,omitempty"`
+	Amount                         string                  `protobuf:"bytes,12,opt,name=amount,proto3" json:"amount,omitempty"`
+	AmountUsd                      string                  `protobuf:"bytes,13,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
+	AmountReportingCurrency        string                  `protobuf:"bytes,14,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
+	CreatedAt                      int64                   `protobuf:"varint,15,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
 func (x *OperatorBalanceUpdateEvent) Reset() {
@@ -290,9 +353,30 @@ func (x *OperatorBalanceUpdateEvent) GetSettlementCurrency() string {
 	return ""
 }
 
+func (x *OperatorBalanceUpdateEvent) GetReportingCurrency() string {
+	if x != nil {
+		return x.ReportingCurrency
+	}
+	return ""
+}
+
 func (x *OperatorBalanceUpdateEvent) GetBeforeBalance() string {
 	if x != nil {
 		return x.BeforeBalance
+	}
+	return ""
+}
+
+func (x *OperatorBalanceUpdateEvent) GetBeforeBalanceUsd() string {
+	if x != nil {
+		return x.BeforeBalanceUsd
+	}
+	return ""
+}
+
+func (x *OperatorBalanceUpdateEvent) GetBeforeBalanceReportingCurrency() string {
+	if x != nil {
+		return x.BeforeBalanceReportingCurrency
 	}
 	return ""
 }
@@ -304,9 +388,37 @@ func (x *OperatorBalanceUpdateEvent) GetAfterBalance() string {
 	return ""
 }
 
+func (x *OperatorBalanceUpdateEvent) GetAfterBalanceUsd() string {
+	if x != nil {
+		return x.AfterBalanceUsd
+	}
+	return ""
+}
+
+func (x *OperatorBalanceUpdateEvent) GetAfterBalanceReportingCurrency() string {
+	if x != nil {
+		return x.AfterBalanceReportingCurrency
+	}
+	return ""
+}
+
 func (x *OperatorBalanceUpdateEvent) GetAmount() string {
 	if x != nil {
 		return x.Amount
+	}
+	return ""
+}
+
+func (x *OperatorBalanceUpdateEvent) GetAmountUsd() string {
+	if x != nil {
+		return x.AmountUsd
+	}
+	return ""
+}
+
+func (x *OperatorBalanceUpdateEvent) GetAmountReportingCurrency() string {
+	if x != nil {
+		return x.AmountReportingCurrency
 	}
 	return ""
 }
@@ -327,29 +439,46 @@ const file_wallet_service_v1_wallet_event_proto_rawDesc = "" +
 	"\x0fsubscription_id\x18\x01 \x01(\tR\x0esubscriptionId\x12\x1d\n" +
 	"\n" +
 	"event_data\x18\x02 \x01(\fR\teventData\"\x0f\n" +
-	"\rEventResponse\"\xe6\x02\n" +
+	"\rEventResponse\"\xde\x05\n" +
 	"\x12BalanceUpdateEvent\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12)\n" +
 	"\x10transaction_type\x18\x02 \x01(\tR\x0ftransactionType\x12\x17\n" +
 	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12F\n" +
 	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
-	"\bcurrency\x18\x05 \x01(\tR\bcurrency\x12%\n" +
-	"\x0ebefore_balance\x18\x06 \x01(\tR\rbeforeBalance\x12#\n" +
-	"\rafter_balance\x18\a \x01(\tR\fafterBalance\x12\x16\n" +
-	"\x06amount\x18\b \x01(\tR\x06amount\x12\x1d\n" +
+	"\bcurrency\x18\x05 \x01(\tR\bcurrency\x12-\n" +
+	"\x12reporting_currency\x18\x06 \x01(\tR\x11reportingCurrency\x12%\n" +
+	"\x0ebefore_balance\x18\a \x01(\tR\rbeforeBalance\x12,\n" +
+	"\x12before_balance_usd\x18\b \x01(\tR\x10beforeBalanceUsd\x12I\n" +
+	"!before_balance_reporting_currency\x18\t \x01(\tR\x1ebeforeBalanceReportingCurrency\x12#\n" +
+	"\rafter_balance\x18\n" +
+	" \x01(\tR\fafterBalance\x12*\n" +
+	"\x11after_balance_usd\x18\v \x01(\tR\x0fafterBalanceUsd\x12G\n" +
+	" after_balance_reporting_currency\x18\f \x01(\tR\x1dafterBalanceReportingCurrency\x12\x16\n" +
+	"\x06amount\x18\r \x01(\tR\x06amount\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\t \x01(\x03R\tcreatedAt\"\xea\x02\n" +
+	"amount_usd\x18\x0e \x01(\tR\tamountUsd\x12:\n" +
+	"\x19amount_reporting_currency\x18\x0f \x01(\tR\x17amountReportingCurrency\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\x10 \x01(\x03R\tcreatedAt\"\xe2\x05\n" +
 	"\x1aOperatorBalanceUpdateEvent\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12)\n" +
 	"\x10transaction_type\x18\x02 \x01(\tR\x0ftransactionType\x12F\n" +
-	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12/\n" +
-	"\x13settlement_currency\x18\x06 \x01(\tR\x12settlementCurrency\x12%\n" +
-	"\x0ebefore_balance\x18\a \x01(\tR\rbeforeBalance\x12#\n" +
-	"\rafter_balance\x18\b \x01(\tR\fafterBalance\x12\x16\n" +
-	"\x06amount\x18\t \x01(\tR\x06amount\x12\x1d\n" +
+	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12/\n" +
+	"\x13settlement_currency\x18\x04 \x01(\tR\x12settlementCurrency\x12-\n" +
+	"\x12reporting_currency\x18\x05 \x01(\tR\x11reportingCurrency\x12%\n" +
+	"\x0ebefore_balance\x18\x06 \x01(\tR\rbeforeBalance\x12,\n" +
+	"\x12before_balance_usd\x18\a \x01(\tR\x10beforeBalanceUsd\x12I\n" +
+	"!before_balance_reporting_currency\x18\b \x01(\tR\x1ebeforeBalanceReportingCurrency\x12#\n" +
+	"\rafter_balance\x18\t \x01(\tR\fafterBalance\x12*\n" +
+	"\x11after_balance_usd\x18\n" +
+	" \x01(\tR\x0fafterBalanceUsd\x12G\n" +
+	" after_balance_reporting_currency\x18\v \x01(\tR\x1dafterBalanceReportingCurrency\x12\x16\n" +
+	"\x06amount\x18\f \x01(\tR\x06amount\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\n" +
-	" \x01(\x03R\tcreatedAt2c\n" +
+	"amount_usd\x18\r \x01(\tR\tamountUsd\x12:\n" +
+	"\x19amount_reporting_currency\x18\x0e \x01(\tR\x17amountReportingCurrency\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\x0f \x01(\x03R\tcreatedAt2c\n" +
 	"\vWalletEvent\x12T\n" +
 	"\x05Event\x12#.api.wallet.service.v1.EventRequest\x1a$.api.wallet.service.v1.EventResponse\"\x00BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
