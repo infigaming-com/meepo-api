@@ -43,18 +43,18 @@ type GameHTTPServer interface {
 
 func RegisterGameHTTPServer(s *http.Server, srv GameHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/game/providers/list", _Game_ListProviders1_HTTP_Handler(srv))
-	r.POST("/v1/game/categories/list", _Game_ListCategories1_HTTP_Handler(srv))
-	r.POST("/v1/game/list", _Game_ListGames1_HTTP_Handler(srv))
+	r.POST("/v1/game/providers/list", _Game_ListProviders0_HTTP_Handler(srv))
+	r.POST("/v1/game/categories/list", _Game_ListCategories0_HTTP_Handler(srv))
+	r.POST("/v1/game/list", _Game_ListGames0_HTTP_Handler(srv))
 	r.POST("/v1/game/get", _Game_GetGame0_HTTP_Handler(srv))
 	r.POST("/v1/game/create-session", _Game_CreateSession0_HTTP_Handler(srv))
 	r.POST("/v1/game/balance", _Game_Balance0_HTTP_Handler(srv))
 	r.POST("/v1/game/play", _Game_Play0_HTTP_Handler(srv))
 	r.POST("/v1/game/rollback", _Game_Rollback0_HTTP_Handler(srv))
-	r.POST("/v1/game/bets/list", _Game_ListBets1_HTTP_Handler(srv))
+	r.POST("/v1/game/bets/list", _Game_ListBets0_HTTP_Handler(srv))
 }
 
-func _Game_ListProviders1_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
+func _Game_ListProviders0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListProvidersRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -76,7 +76,7 @@ func _Game_ListProviders1_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context
 	}
 }
 
-func _Game_ListCategories1_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
+func _Game_ListCategories0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListCategoriesRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -98,7 +98,7 @@ func _Game_ListCategories1_HTTP_Handler(srv GameHTTPServer) func(ctx http.Contex
 	}
 }
 
-func _Game_ListGames1_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
+func _Game_ListGames0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListGamesRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -230,7 +230,7 @@ func _Game_Rollback0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) err
 	}
 }
 
-func _Game_ListBets1_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
+func _Game_ListBets0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListBetsRequest
 		if err := ctx.Bind(&in); err != nil {

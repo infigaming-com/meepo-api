@@ -3015,28 +3015,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.UpdateBankCardResponse'
-    /v1/payment/channel/create:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Create payment channel
-                 Creates a new payment channel with specified configuration
-                 Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-            operationId: Payment_CreatePaymentChannel
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.CreatePaymentChannelRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.CreatePaymentChannelResponse'
     /v1/payment/channel/page:
         post:
             tags:
@@ -3059,28 +3037,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelPageResponse'
-    /v1/payment/channel/update:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Create payment channel
-                 Creates a new payment channel with specified configuration
-                 Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-            operationId: Payment_UpdatePaymentChannel
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.UpdatePaymentChannelRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.UpdatePaymentChannelResponse'
     /v1/payment/deposit/callback:
         post:
             tags:
@@ -3126,50 +3082,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.InitiateDepositResponse'
-    /v1/payment/method/create:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Create payment channel
-                 Creates a new payment channel with specified configuration
-                 Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-            operationId: Payment_CreatePaymentMethod
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.CreatePaymentMethodRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.CreatePaymentMethodResponse'
-    /v1/payment/method/list:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Get list of payment methods
-                 Retrieves all available payment methods supported by the system
-                 Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
-            operationId: Payment_GetPaymentMethodList
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListResponse'
     /v1/payment/operator/deposit/callback:
         post:
             tags:
@@ -3216,28 +3128,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.WithdrawCallbackResponse'
-    /v1/payment/supportedmethod/list:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Get list of payment methods
-                 Retrieves all available payment methods supported by the system
-                 Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
-            operationId: Payment_GetSupportedPaymentMethodList
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetSupportedPaymentMethodListRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.GetSupportedPaymentMethodListResponse'
     /v1/payment/transaction/page:
         post:
             tags:
@@ -10376,52 +10266,6 @@ components:
                     type: string
                 enabled:
                     type: boolean
-        payment.service.v1.CreatePaymentChannelRequest:
-            type: object
-            properties:
-                merchantId:
-                    type: string
-                    description: ID of the merchant creating this channel
-                operatorContext:
-                    allOf:
-                        - $ref: '#/components/schemas/api.common.OperatorContext'
-                    description: ID of the Operator connect with this channel
-                paymentMethodId:
-                    type: string
-                    description: ID of the payment method to be used
-                contact:
-                    type: string
-                    description: Contact Info email
-                fixedFee:
-                    type: string
-                    description: PSP Fixed Fee on the Amount
-                feeRate:
-                    type: string
-                    description: PSP Rate Fee
-                minFee:
-                    type: string
-                    description: Minimum Fee
-                userFixedFee:
-                    type: string
-                    description: User Fixed Fee on the Amount
-                userFeeRate:
-                    type: string
-                    description: User Rate Fee
-                userMinFee:
-                    type: string
-                    description: Minimum Fee
-                minAmount:
-                    type: string
-                    description: Min Amount
-                maxAmount:
-                    type: string
-                    description: Max Amount
-                key:
-                    type: object
-                    description: Configuration fields for the payment channel in JSON format
-            description: |-
-                Request to create a payment channel
-                 Used to create a new payment channel with specified merchant and method
         payment.service.v1.CreatePaymentChannelResponse:
             type: object
             properties:
@@ -10431,37 +10275,6 @@ components:
             description: |-
                 Response for channel creation
                  Returns the ID of the newly created payment channel
-        payment.service.v1.CreatePaymentMethodRequest:
-            type: object
-            properties:
-                paymentMethodId:
-                    type: string
-                    description: ID of the payment method to be used
-                contact:
-                    type: string
-                    description: Currency Type
-                sysFixedFee:
-                    type: string
-                    description: Fixed Fee on the Amount
-                sysFeeRate:
-                    type: string
-                    description: Rate Fee
-                sysMinAmount:
-                    type: string
-                    description: Min Amount
-                sysMaxAmount:
-                    type: string
-                    description: Max Amount
-                sysMinFee:
-                    type: string
-                    description: Minmum Fee
-                operatorContext:
-                    allOf:
-                        - $ref: '#/components/schemas/api.common.OperatorContext'
-                    description: ID of the Operator connect with this channel
-            description: |-
-                Request to create a payment channel
-                 Used to create a new payment channel with specified merchant and method
         payment.service.v1.CreatePaymentMethodResponse:
             type: object
             properties:
@@ -10688,25 +10501,6 @@ components:
             description: |-
                 Response for payment channel page
                  Contains paginated list of payment channels and pagination metadata
-        payment.service.v1.GetPaymentMethodListRequest:
-            type: object
-            properties:
-                currency:
-                    type: string
-                psp:
-                    type: string
-                page:
-                    type: integer
-                    description: Page number to retrieve (1-based)
-                    format: int32
-                pageSize:
-                    type: integer
-                    description: Number of items per page
-                    format: int32
-                enabled:
-                    type: boolean
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
         payment.service.v1.GetPaymentMethodListResponse:
             type: object
             properties:

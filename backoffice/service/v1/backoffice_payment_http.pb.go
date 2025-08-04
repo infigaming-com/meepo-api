@@ -81,11 +81,11 @@ func RegisterBackofficePaymentHTTPServer(s *http.Server, srv BackofficePaymentHT
 	r.POST("/v1/backoffice/payment/transaction/detail", _BackofficePayment_GetPaymentTransactionById0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/payment/operator/transaction/page", _BackofficePayment_GetPaymentOperatorTransactionPage0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/payment/operator/transaction/detail", _BackofficePayment_GetPaymentOperatorTransactionById0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/payment/supportedmethod/list", _BackofficePayment_GetSupportedPaymentMethodList1_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/payment/method/list", _BackofficePayment_GetPaymentMethodList1_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/payment/method/create", _BackofficePayment_CreatePaymentMethod1_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/payment/channel/update", _BackofficePayment_UpdatePaymentChannel1_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/payment/channel/create", _BackofficePayment_CreatePaymentChannel1_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/payment/supportedmethod/list", _BackofficePayment_GetSupportedPaymentMethodList0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/payment/method/list", _BackofficePayment_GetPaymentMethodList0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/payment/method/create", _BackofficePayment_CreatePaymentMethod0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/payment/channel/update", _BackofficePayment_UpdatePaymentChannel0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/payment/channel/create", _BackofficePayment_CreatePaymentChannel0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/payment/operator/address/get", _BackofficePayment_GetOperatorAddress0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/payment/channel/page", _BackofficePayment_GetOperatorPaymentChannelPage0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/payment/method/update", _BackofficePayment_UpdatePaymentMethod0_HTTP_Handler(srv))
@@ -179,7 +179,7 @@ func _BackofficePayment_GetPaymentOperatorTransactionById0_HTTP_Handler(srv Back
 	}
 }
 
-func _BackofficePayment_GetSupportedPaymentMethodList1_HTTP_Handler(srv BackofficePaymentHTTPServer) func(ctx http.Context) error {
+func _BackofficePayment_GetSupportedPaymentMethodList0_HTTP_Handler(srv BackofficePaymentHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in v1.GetSupportedPaymentMethodListRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -201,7 +201,7 @@ func _BackofficePayment_GetSupportedPaymentMethodList1_HTTP_Handler(srv Backoffi
 	}
 }
 
-func _BackofficePayment_GetPaymentMethodList1_HTTP_Handler(srv BackofficePaymentHTTPServer) func(ctx http.Context) error {
+func _BackofficePayment_GetPaymentMethodList0_HTTP_Handler(srv BackofficePaymentHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetPaymentMethodListRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -223,7 +223,7 @@ func _BackofficePayment_GetPaymentMethodList1_HTTP_Handler(srv BackofficePayment
 	}
 }
 
-func _BackofficePayment_CreatePaymentMethod1_HTTP_Handler(srv BackofficePaymentHTTPServer) func(ctx http.Context) error {
+func _BackofficePayment_CreatePaymentMethod0_HTTP_Handler(srv BackofficePaymentHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in CreatePaymentMethodRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -245,7 +245,7 @@ func _BackofficePayment_CreatePaymentMethod1_HTTP_Handler(srv BackofficePaymentH
 	}
 }
 
-func _BackofficePayment_UpdatePaymentChannel1_HTTP_Handler(srv BackofficePaymentHTTPServer) func(ctx http.Context) error {
+func _BackofficePayment_UpdatePaymentChannel0_HTTP_Handler(srv BackofficePaymentHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in v1.UpdatePaymentChannelRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -267,7 +267,7 @@ func _BackofficePayment_UpdatePaymentChannel1_HTTP_Handler(srv BackofficePayment
 	}
 }
 
-func _BackofficePayment_CreatePaymentChannel1_HTTP_Handler(srv BackofficePaymentHTTPServer) func(ctx http.Context) error {
+func _BackofficePayment_CreatePaymentChannel0_HTTP_Handler(srv BackofficePaymentHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in CreatePaymentChannelRequest
 		if err := ctx.Bind(&in); err != nil {
