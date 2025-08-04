@@ -4605,6 +4605,14 @@ func (m *ListMonthlyRevenueShareResponse_RevenueShareItem) validate(all bool) er
 
 	// no validation rules for OperatorMode
 
+	// no validation rules for RetailerOperatorId
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for CompanyOperatorName
+
 	// no validation rules for Deposits
 
 	// no validation rules for Withdrawals

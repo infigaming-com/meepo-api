@@ -4144,25 +4144,29 @@ func (x *ListThirdPartyFeesResponse_ThirdPartyFeeItem) GetDescription() string {
 type ListMonthlyRevenueShareResponse_RevenueShareItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Basic information
-	OperatorId   int64  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	OperatorName string `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	OperatorMode string `protobuf:"bytes,3,opt,name=operator_mode,json=operatorMode,proto3" json:"operator_mode,omitempty"` // Individual, Co-Operation, Co-Operation (Self-Managed Payment)
+	OperatorId           int64  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorName         string `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	OperatorMode         string `protobuf:"bytes,3,opt,name=operator_mode,json=operatorMode,proto3" json:"operator_mode,omitempty"` // Individual, Co-Operation, Co-Operation (Self-Managed Payment)
+	RetailerOperatorId   string `protobuf:"bytes,4,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	RetailerOperatorName string `protobuf:"bytes,5,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	CompanyOperatorId    string `protobuf:"bytes,6,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	CompanyOperatorName  string `protobuf:"bytes,7,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
 	// Financial data
-	Deposits    string `protobuf:"bytes,4,opt,name=deposits,proto3" json:"deposits,omitempty"`       // Deposit amounts
-	Withdrawals string `protobuf:"bytes,5,opt,name=withdrawals,proto3" json:"withdrawals,omitempty"` // Withdrawal amounts
-	Balance     string `protobuf:"bytes,6,opt,name=balance,proto3" json:"balance,omitempty"`         // Current balance
-	Ngr         string `protobuf:"bytes,7,opt,name=ngr,proto3" json:"ngr,omitempty"`                 // Net Gaming Revenue
-	Ggr         string `protobuf:"bytes,8,opt,name=ggr,proto3" json:"ggr,omitempty"`                 // Gross Gaming Revenue
+	Deposits    string `protobuf:"bytes,8,opt,name=deposits,proto3" json:"deposits,omitempty"`       // Deposit amounts
+	Withdrawals string `protobuf:"bytes,9,opt,name=withdrawals,proto3" json:"withdrawals,omitempty"` // Withdrawal amounts
+	Balance     string `protobuf:"bytes,10,opt,name=balance,proto3" json:"balance,omitempty"`        // Current balance
+	Ngr         string `protobuf:"bytes,11,opt,name=ngr,proto3" json:"ngr,omitempty"`                // Net Gaming Revenue
+	Ggr         string `protobuf:"bytes,12,opt,name=ggr,proto3" json:"ggr,omitempty"`                // Gross Gaming Revenue
 	// Revenue breakdown
-	GameProviderRs string `protobuf:"bytes,9,opt,name=game_provider_rs,json=gameProviderRs,proto3" json:"game_provider_rs,omitempty"`  // Game Provider Revenue Share
-	ThirdPartyFees string `protobuf:"bytes,10,opt,name=third_party_fees,json=thirdPartyFees,proto3" json:"third_party_fees,omitempty"` // Other 3rd-Party Fees
-	Adjustments    string `protobuf:"bytes,11,opt,name=adjustments,proto3" json:"adjustments,omitempty"`                               // Adjustments
-	NetProfit      string `protobuf:"bytes,13,opt,name=net_profit,json=netProfit,proto3" json:"net_profit,omitempty"`                  // Net Profit
+	GameProviderRs string `protobuf:"bytes,13,opt,name=game_provider_rs,json=gameProviderRs,proto3" json:"game_provider_rs,omitempty"` // Game Provider Revenue Share
+	ThirdPartyFees string `protobuf:"bytes,14,opt,name=third_party_fees,json=thirdPartyFees,proto3" json:"third_party_fees,omitempty"` // Other 3rd-Party Fees
+	Adjustments    string `protobuf:"bytes,15,opt,name=adjustments,proto3" json:"adjustments,omitempty"`                               // Adjustments
+	NetProfit      string `protobuf:"bytes,16,opt,name=net_profit,json=netProfit,proto3" json:"net_profit,omitempty"`                  // Net Profit
 	// Revenue share details
-	RsRate               string `protobuf:"bytes,14,opt,name=rs_rate,json=rsRate,proto3" json:"rs_rate,omitempty"`                                             // Revenue Share Rate (e.g., "80%")
-	RevenueShareDisburse string `protobuf:"bytes,15,opt,name=revenue_share_disburse,json=revenueShareDisburse,proto3" json:"revenue_share_disburse,omitempty"` // Revenue Share (Disburse)
-	RevenueShareCollect  string `protobuf:"bytes,16,opt,name=revenue_share_collect,json=revenueShareCollect,proto3" json:"revenue_share_collect,omitempty"`    // Revenue Share (Collect)
-	EstCosts             string `protobuf:"bytes,17,opt,name=est_costs,json=estCosts,proto3" json:"est_costs,omitempty"`                                       // Est. Costs
+	RsRate               string `protobuf:"bytes,17,opt,name=rs_rate,json=rsRate,proto3" json:"rs_rate,omitempty"`                                             // Revenue Share Rate (e.g., "80%")
+	RevenueShareDisburse string `protobuf:"bytes,18,opt,name=revenue_share_disburse,json=revenueShareDisburse,proto3" json:"revenue_share_disburse,omitempty"` // Revenue Share (Disburse)
+	RevenueShareCollect  string `protobuf:"bytes,19,opt,name=revenue_share_collect,json=revenueShareCollect,proto3" json:"revenue_share_collect,omitempty"`    // Revenue Share (Collect)
+	EstCosts             string `protobuf:"bytes,20,opt,name=est_costs,json=estCosts,proto3" json:"est_costs,omitempty"`                                       // Est. Costs
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -4214,6 +4218,34 @@ func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetOperatorName() str
 func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetOperatorMode() string {
 	if x != nil {
 		return x.OperatorMode
+	}
+	return ""
+}
+
+func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetRetailerOperatorId() string {
+	if x != nil {
+		return x.RetailerOperatorId
+	}
+	return ""
+}
+
+func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetRetailerOperatorName() string {
+	if x != nil {
+		return x.RetailerOperatorName
+	}
+	return ""
+}
+
+func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetCompanyOperatorId() string {
+	if x != nil {
+		return x.CompanyOperatorId
+	}
+	return ""
+}
+
+func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetCompanyOperatorName() string {
+	if x != nil {
+		return x.CompanyOperatorName
 	}
 	return ""
 }
@@ -4865,34 +4897,38 @@ const file_operator_service_v1_operator_proto_rawDesc = "" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_sizeB\r\n" +
-	"\v_period_key\"\xb1\b\n" +
+	"\v_period_key\"\xfd\t\n" +
 	"\x1fListMonthlyRevenueShareResponse\x12_\n" +
 	"\x05items\x18\x01 \x03(\v2I.api.operator.service.v1.ListMonthlyRevenueShareResponse.RevenueShareItemR\x05items\x12Z\n" +
 	"\asummary\x18\x02 \x01(\v2@.api.operator.service.v1.ListMonthlyRevenueShareResponse.SummaryR\asummary\x12\x1f\n" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
 	"totalCount\x12\x12\n" +
 	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x1a\xae\x04\n" +
+	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x1a\xfa\x05\n" +
 	"\x10RevenueShareItem\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12#\n" +
 	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12#\n" +
-	"\roperator_mode\x18\x03 \x01(\tR\foperatorMode\x12\x1a\n" +
-	"\bdeposits\x18\x04 \x01(\tR\bdeposits\x12 \n" +
-	"\vwithdrawals\x18\x05 \x01(\tR\vwithdrawals\x12\x18\n" +
-	"\abalance\x18\x06 \x01(\tR\abalance\x12\x10\n" +
-	"\x03ngr\x18\a \x01(\tR\x03ngr\x12\x10\n" +
-	"\x03ggr\x18\b \x01(\tR\x03ggr\x12(\n" +
-	"\x10game_provider_rs\x18\t \x01(\tR\x0egameProviderRs\x12(\n" +
-	"\x10third_party_fees\x18\n" +
-	" \x01(\tR\x0ethirdPartyFees\x12 \n" +
-	"\vadjustments\x18\v \x01(\tR\vadjustments\x12\x1d\n" +
+	"\roperator_mode\x18\x03 \x01(\tR\foperatorMode\x120\n" +
+	"\x14retailer_operator_id\x18\x04 \x01(\tR\x12retailerOperatorId\x124\n" +
+	"\x16retailer_operator_name\x18\x05 \x01(\tR\x14retailerOperatorName\x12.\n" +
+	"\x13company_operator_id\x18\x06 \x01(\tR\x11companyOperatorId\x122\n" +
+	"\x15company_operator_name\x18\a \x01(\tR\x13companyOperatorName\x12\x1a\n" +
+	"\bdeposits\x18\b \x01(\tR\bdeposits\x12 \n" +
+	"\vwithdrawals\x18\t \x01(\tR\vwithdrawals\x12\x18\n" +
+	"\abalance\x18\n" +
+	" \x01(\tR\abalance\x12\x10\n" +
+	"\x03ngr\x18\v \x01(\tR\x03ngr\x12\x10\n" +
+	"\x03ggr\x18\f \x01(\tR\x03ggr\x12(\n" +
+	"\x10game_provider_rs\x18\r \x01(\tR\x0egameProviderRs\x12(\n" +
+	"\x10third_party_fees\x18\x0e \x01(\tR\x0ethirdPartyFees\x12 \n" +
+	"\vadjustments\x18\x0f \x01(\tR\vadjustments\x12\x1d\n" +
 	"\n" +
-	"net_profit\x18\r \x01(\tR\tnetProfit\x12\x17\n" +
-	"\ars_rate\x18\x0e \x01(\tR\x06rsRate\x124\n" +
-	"\x16revenue_share_disburse\x18\x0f \x01(\tR\x14revenueShareDisburse\x122\n" +
-	"\x15revenue_share_collect\x18\x10 \x01(\tR\x13revenueShareCollect\x12\x1b\n" +
-	"\test_costs\x18\x11 \x01(\tR\bestCosts\x1a\xcd\x01\n" +
+	"net_profit\x18\x10 \x01(\tR\tnetProfit\x12\x17\n" +
+	"\ars_rate\x18\x11 \x01(\tR\x06rsRate\x124\n" +
+	"\x16revenue_share_disburse\x18\x12 \x01(\tR\x14revenueShareDisburse\x122\n" +
+	"\x15revenue_share_collect\x18\x13 \x01(\tR\x13revenueShareCollect\x12\x1b\n" +
+	"\test_costs\x18\x14 \x01(\tR\bestCosts\x1a\xcd\x01\n" +
 	"\aSummary\x12\x1a\n" +
 	"\bsubtotal\x18\x01 \x01(\tR\bsubtotal\x12?\n" +
 	"\x1crevenue_share_disburse_total\x18\x02 \x01(\tR\x19revenueShareDisburseTotal\x12=\n" +

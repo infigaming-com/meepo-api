@@ -6783,6 +6783,14 @@ components:
                     type: string
                 operatorMode:
                     type: string
+                retailerOperatorId:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                companyOperatorId:
+                    type: string
+                companyOperatorName:
+                    type: string
                 deposits:
                     type: string
                     description: Financial data
