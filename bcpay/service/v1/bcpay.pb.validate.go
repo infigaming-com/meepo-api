@@ -715,21 +715,29 @@ func (m *BankAccount) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Id
+
 	// no validation rules for MerchantId
 
-	// no validation rules for CardId
+	// no validation rules for BankAccount
 
 	// no validation rules for BankFirstName
 
 	// no validation rules for BankLastName
 
+	// no validation rules for Currency
+
+	// no validation rules for Country
+
 	// no validation rules for MaxAmount
 
 	// no validation rules for MinAmount
 
-	// no validation rules for Currency
+	// no validation rules for MaxAmountPerTrans
 
-	// no validation rules for Country
+	// no validation rules for MaxTransLimit
+
+	// no validation rules for Priority
 
 	// no validation rules for Enable
 
@@ -835,8 +843,6 @@ func (m *BankAccountListRequest) validate(all bool) error {
 	// no validation rules for MerchantId
 
 	// no validation rules for Currency
-
-	// no validation rules for Country
 
 	if len(errors) > 0 {
 		return BankAccountListRequestMultiError(errors)
@@ -1726,7 +1732,11 @@ func (m *Transaction) validate(all bool) error {
 
 	// no validation rules for Audit
 
+	// no validation rules for Auditor
+
 	// no validation rules for AuditTime
+
+	// no validation rules for AuditNote
 
 	// no validation rules for CreateTime
 
@@ -2181,3 +2191,242 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = AuditTransactionResponseValidationError{}
+
+// Validate checks the field values on AddNoteToTransactionRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AddNoteToTransactionRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AddNoteToTransactionRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AddNoteToTransactionRequestMultiError, or nil if none found.
+func (m *AddNoteToTransactionRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddNoteToTransactionRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TransactionId
+
+	// no validation rules for Note
+
+	if len(errors) > 0 {
+		return AddNoteToTransactionRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// AddNoteToTransactionRequestMultiError is an error wrapping multiple
+// validation errors returned by AddNoteToTransactionRequest.ValidateAll() if
+// the designated constraints aren't met.
+type AddNoteToTransactionRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddNoteToTransactionRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddNoteToTransactionRequestMultiError) AllErrors() []error { return m }
+
+// AddNoteToTransactionRequestValidationError is the validation error returned
+// by AddNoteToTransactionRequest.Validate if the designated constraints
+// aren't met.
+type AddNoteToTransactionRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddNoteToTransactionRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddNoteToTransactionRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddNoteToTransactionRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddNoteToTransactionRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddNoteToTransactionRequestValidationError) ErrorName() string {
+	return "AddNoteToTransactionRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AddNoteToTransactionRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddNoteToTransactionRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddNoteToTransactionRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddNoteToTransactionRequestValidationError{}
+
+// Validate checks the field values on AddNoteToTransactionResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AddNoteToTransactionResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AddNoteToTransactionResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AddNoteToTransactionResponseMultiError, or nil if none found.
+func (m *AddNoteToTransactionResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddNoteToTransactionResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTransaction()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AddNoteToTransactionResponseValidationError{
+					field:  "Transaction",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AddNoteToTransactionResponseValidationError{
+					field:  "Transaction",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTransaction()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AddNoteToTransactionResponseValidationError{
+				field:  "Transaction",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return AddNoteToTransactionResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// AddNoteToTransactionResponseMultiError is an error wrapping multiple
+// validation errors returned by AddNoteToTransactionResponse.ValidateAll() if
+// the designated constraints aren't met.
+type AddNoteToTransactionResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddNoteToTransactionResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddNoteToTransactionResponseMultiError) AllErrors() []error { return m }
+
+// AddNoteToTransactionResponseValidationError is the validation error returned
+// by AddNoteToTransactionResponse.Validate if the designated constraints
+// aren't met.
+type AddNoteToTransactionResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddNoteToTransactionResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddNoteToTransactionResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddNoteToTransactionResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddNoteToTransactionResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddNoteToTransactionResponseValidationError) ErrorName() string {
+	return "AddNoteToTransactionResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AddNoteToTransactionResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddNoteToTransactionResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddNoteToTransactionResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddNoteToTransactionResponseValidationError{}
