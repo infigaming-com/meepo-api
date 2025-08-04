@@ -332,25 +332,29 @@ message ListMonthlyRevenueShareResponse {
 		int64 operator_id = 1;
 		string operator_name = 2;
 		string operator_mode = 3; // Individual, Co-Operation, Co-Operation (Self-Managed Payment)
+		string retailer_operator_id = 4;
+		string retailer_operator_name = 5;
+		string company_operator_id = 6;
+		string company_operator_name = 7;
 		
 		// Financial data
-		string deposits = 4; // Deposit amounts
-		string withdrawals = 5; // Withdrawal amounts
-		string balance = 6; // Current balance
-		string ngr = 7; // Net Gaming Revenue
-		string ggr = 8; // Gross Gaming Revenue
+		string deposits = 8; // Deposit amounts
+		string withdrawals = 9; // Withdrawal amounts
+		string balance = 10; // Current balance
+		string ngr = 11; // Net Gaming Revenue
+		string ggr = 12; // Gross Gaming Revenue
 		
 		// Revenue breakdown
-		string game_provider_rs = 9; // Game Provider Revenue Share
-		string third_party_fees = 10; // Other 3rd-Party Fees
-		string adjustments = 11; // Adjustments
-		string net_profit = 13; // Net Profit
+		string game_provider_rs = 13; // Game Provider Revenue Share
+		string third_party_fees = 14; // Other 3rd-Party Fees
+		string adjustments = 15; // Adjustments
+		string net_profit = 16; // Net Profit
 		
 		// Revenue share details
-		string rs_rate = 14; // Revenue Share Rate (e.g., "80%")
-		string revenue_share_disburse = 15; // Revenue Share (Disburse)
-		string revenue_share_collect = 16; // Revenue Share (Collect)
-		string est_costs = 17; // Est. Costs
+		string rs_rate = 17; // Revenue Share Rate (e.g., "80%")
+		string revenue_share_disburse = 18; // Revenue Share (Disburse)
+		string revenue_share_collect = 19; // Revenue Share (Collect)
+		string est_costs = 20; // Est. Costs
 	}
 	
 	repeated RevenueShareItem items = 1;
