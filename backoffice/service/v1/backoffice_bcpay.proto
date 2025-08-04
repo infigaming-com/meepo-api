@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package api.backoffice.service.v1;
+
+import "google/api/annotations.proto";
+import "bcpay/service/v1/bcpay.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.backoffice.service.v1";
+
+// BackofficeBcpay service
+// Provides methods for backoffice bcpay management
+service BackofficeBcpay {
+  
+	rpc CreateMerchant(bcpay.service.v1.CreateMerchantRequest) returns (bcpay.service.v1.CreateMerchantResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/bcpay/merchant/add"
+      body: "*"
+    };
+  }
+
+	rpc BankAccountList(bcpay.service.v1.BankAccountListRequest) returns (bcpay.service.v1.BankAccountListResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/bcpay/bankaccount/list"
+      body: "*"
+    };
+	}
+
+	rpc AddBankAccount(bcpay.service.v1.AddBankAccountRequest) returns (bcpay.service.v1.AddBankAccountResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/bcpay/bankaccount/add"
+      body: "*"
+    };
+	}
+
+	rpc UpdateBankAccount(bcpay.service.v1.UpdateBankAccountRequest) returns (bcpay.service.v1.UpdateBankAccountResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/bcpay/bankaccount/update"
+      body: "*"
+    };
+	}
+
+	rpc TransactionList(bcpay.service.v1.TransactionListRequest) returns (bcpay.service.v1.TransactionListResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/bcpay/transaction/list"
+      body: "*"
+    };
+	}
+
+	rpc AuditTransaction(bcpay.service.v1.AuditTransactionRequest) returns (bcpay.service.v1.AuditTransactionResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/bcpay/transaction/add"
+      body: "*"
+    };
+	}
+}
+

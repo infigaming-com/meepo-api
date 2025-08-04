@@ -460,6 +460,114 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListAuditLogsResponse'
+    /v1/backoffice/bcpay/bankaccount/add:
+        post:
+            tags:
+                - BackofficeBcpay
+            operationId: BackofficeBcpay_AddBankAccount
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.bcpay.service.v1.AddBankAccountRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.bcpay.service.v1.AddBankAccountResponse'
+    /v1/backoffice/bcpay/bankaccount/list:
+        post:
+            tags:
+                - BackofficeBcpay
+            operationId: BackofficeBcpay_BankAccountList
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.bcpay.service.v1.BankAccountListRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.bcpay.service.v1.BankAccountListResponse'
+    /v1/backoffice/bcpay/bankaccount/update:
+        post:
+            tags:
+                - BackofficeBcpay
+            operationId: BackofficeBcpay_UpdateBankAccount
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.bcpay.service.v1.UpdateBankAccountRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.bcpay.service.v1.UpdateBankAccountResponse'
+    /v1/backoffice/bcpay/merchant/add:
+        post:
+            tags:
+                - BackofficeBcpay
+            operationId: BackofficeBcpay_CreateMerchant
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.bcpay.service.v1.CreateMerchantRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.bcpay.service.v1.CreateMerchantResponse'
+    /v1/backoffice/bcpay/transaction/add:
+        post:
+            tags:
+                - BackofficeBcpay
+            operationId: BackofficeBcpay_AuditTransaction
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.bcpay.service.v1.AuditTransactionRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.bcpay.service.v1.AuditTransactionResponse'
+    /v1/backoffice/bcpay/transaction/list:
+        post:
+            tags:
+                - BackofficeBcpay
+            operationId: BackofficeBcpay_TransactionList
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.bcpay.service.v1.TransactionListRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.bcpay.service.v1.TransactionListResponse'
     /v1/backoffice/company/register:
         post:
             tags:
@@ -2487,6 +2595,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.OperatorBalanceSettleResponse'
+    /v1/backoffice/wallet/operator/balance/get:
+        post:
+            tags:
+                - BackofficeWallet
+            description: GetOperatorBalances gets the balances of an operator
+            operationId: BackofficeWallet_GetOperatorBalances
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.GetOperatorBalancesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetOperatorBalancesResponse'
     /v1/backoffice/wallet/operator/balance/update:
         post:
             tags:
@@ -2600,6 +2727,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateWalletResponse'
+    /v1/bcpay/bankaccount/get:
+        post:
+            tags:
+                - Bcpay
+            operationId: Bcpay_GetBankAccount
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.bcpay.service.v1.GetBankAccountRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.bcpay.service.v1.GetBankAccountResponse'
+    /v1/bcpay/withdraw/add:
+        post:
+            tags:
+                - Bcpay
+            operationId: Bcpay_CreateWithdraw
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.bcpay.service.v1.CreateWithdrawRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.bcpay.service.v1.CreateWithdrawResponse'
     /v1/game/balance:
         post:
             tags:
@@ -2780,6 +2943,78 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetAddressResponse'
+    /v1/payment/bankcard/add:
+        post:
+            tags:
+                - Payment
+            operationId: Payment_AddBankCard
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.AddBankCardRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.AddBankCardResponse'
+    /v1/payment/bankcard/delete:
+        post:
+            tags:
+                - Payment
+            operationId: Payment_DeleteBankCard
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.DeleteBankCardRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.DeleteBankCardResponse'
+    /v1/payment/bankcard/list:
+        post:
+            tags:
+                - Payment
+            operationId: Payment_GetBankCardList
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.GetBankCardListRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetBankCardListResponse'
+    /v1/payment/bankcard/update:
+        post:
+            tags:
+                - Payment
+            operationId: Payment_UpdateBankCard
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.UpdateBankCardRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.UpdateBankCardResponse'
     /v1/payment/channel/create:
         post:
             tags:
@@ -8656,6 +8891,185 @@ components:
                 decimalPlaces:
                     type: integer
                     format: int32
+        api.bcpay.service.v1.AddBankAccountRequest:
+            type: object
+            properties:
+                bankAccount:
+                    $ref: '#/components/schemas/api.bcpay.service.v1.BankAccount'
+        api.bcpay.service.v1.AddBankAccountResponse:
+            type: object
+            properties:
+                bankAccount:
+                    $ref: '#/components/schemas/api.bcpay.service.v1.BankAccount'
+        api.bcpay.service.v1.AuditTransactionRequest:
+            type: object
+            properties:
+                transactionId:
+                    type: string
+                audit:
+                    type: string
+                    description: audit a transaction "approve" or "deline"
+        api.bcpay.service.v1.AuditTransactionResponse:
+            type: object
+            properties:
+                transaction:
+                    $ref: '#/components/schemas/api.bcpay.service.v1.Transaction'
+        api.bcpay.service.v1.BankAccount:
+            type: object
+            properties:
+                merchantId:
+                    type: string
+                cardId:
+                    type: string
+                bankFirstName:
+                    type: string
+                bankLastName:
+                    type: string
+                maxAmount:
+                    type: string
+                minAmount:
+                    type: string
+                currency:
+                    type: string
+                country:
+                    type: string
+                enable:
+                    type: boolean
+        api.bcpay.service.v1.BankAccountListRequest:
+            type: object
+            properties:
+                merchantId:
+                    type: string
+                currency:
+                    type: string
+                country:
+                    type: string
+        api.bcpay.service.v1.BankAccountListResponse:
+            type: object
+            properties:
+                bankAccounts:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.bcpay.service.v1.BankAccount'
+        api.bcpay.service.v1.CreateMerchantRequest:
+            type: object
+            properties:
+                name:
+                    type: string
+                operatorId:
+                    type: string
+        api.bcpay.service.v1.CreateMerchantResponse:
+            type: object
+            properties:
+                merchantId:
+                    type: string
+                apiKeyPublic:
+                    type: string
+                apiKeySecret:
+                    type: string
+        api.bcpay.service.v1.CreateWithdrawRequest:
+            type: object
+            properties:
+                operatorOrderNo:
+                    type: string
+                merchantId:
+                    type: string
+                amount:
+                    type: string
+                notifyUrl:
+                    type: string
+                payerId:
+                    type: string
+                accountName:
+                    type: string
+                iban:
+                    type: string
+                bankCode:
+                    type: string
+        api.bcpay.service.v1.CreateWithdrawResponse:
+            type: object
+            properties:
+                status:
+                    type: string
+                transactionId:
+                    type: string
+        api.bcpay.service.v1.GetBankAccountRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                merchantId:
+                    type: string
+                payerId:
+                    type: string
+                notifyUrl:
+                    type: string
+        api.bcpay.service.v1.GetBankAccountResponse:
+            type: object
+            properties:
+                notifyUrl:
+                    type: string
+                    description: operator id allocated by operator service
+                referenceNumber:
+                    type: string
+                accountName:
+                    type: string
+                iban:
+                    type: string
+        api.bcpay.service.v1.Transaction:
+            type: object
+            properties:
+                id:
+                    type: string
+                merchantId:
+                    type: string
+                userId:
+                    type: string
+                bankAccountFirstName:
+                    type: string
+                bankAccountLastName:
+                    type: string
+                type:
+                    type: string
+                cardId:
+                    type: string
+                amount:
+                    type: string
+                currency:
+                    type: string
+                country:
+                    type: string
+                status:
+                    type: string
+                audit:
+                    type: string
+                    description: audit a transaction "approve" or "deline"
+                auditTime:
+                    type: string
+                createTime:
+                    type: string
+                updateTime:
+                    type: string
+        api.bcpay.service.v1.TransactionListRequest:
+            type: object
+            properties: {}
+        api.bcpay.service.v1.TransactionListResponse:
+            type: object
+            properties:
+                transaction:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.bcpay.service.v1.Transaction'
+        api.bcpay.service.v1.UpdateBankAccountRequest:
+            type: object
+            properties:
+                bankAccount:
+                    $ref: '#/components/schemas/api.bcpay.service.v1.BankAccount'
+        api.bcpay.service.v1.UpdateBankAccountResponse:
+            type: object
+            properties:
+                bankAccount:
+                    $ref: '#/components/schemas/api.bcpay.service.v1.BankAccount'
         api.common.OperatorContext:
             type: object
             properties:
@@ -9851,6 +10265,20 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.Currency'
+        api.wallet.service.v1.GetOperatorBalancesRequest:
+            type: object
+            properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.wallet.service.v1.GetOperatorBalancesResponse:
+            type: object
+            properties:
+                operatorBalances:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.OperatorBalance'
+                totalCashUsd:
+                    type: string
         api.wallet.service.v1.GetUserBalancesRequest:
             type: object
             properties:
@@ -9874,6 +10302,27 @@ components:
                     type: string
                 providerBonus:
                     type: string
+        api.wallet.service.v1.OperatorBalance:
+            type: object
+            properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                retailerOperatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                operatorName:
+                    type: string
+                currency:
+                    type: string
+                protocol:
+                    type: string
+                cash:
+                    type: string
+                cashUsd:
+                    type: string
+                enabled:
+                    type: boolean
         google.protobuf.ListValue:
             type: object
             properties:
@@ -9888,6 +10337,37 @@ components:
                  The JSON representation for `ListValue` is JSON array.
         google.protobuf.Value:
             description: Represents a dynamically typed value which can be either null, a number, a string, a boolean, a recursive struct value, or a list of values.
+        payment.service.v1.AddBankCardRequest:
+            type: object
+            properties:
+                bankCard:
+                    $ref: '#/components/schemas/payment.service.v1.BankCard'
+        payment.service.v1.AddBankCardResponse:
+            type: object
+            properties:
+                bankCard:
+                    $ref: '#/components/schemas/payment.service.v1.BankCard'
+        payment.service.v1.BankCard:
+            type: object
+            properties:
+                id:
+                    type: string
+                cardNumber:
+                    type: string
+                cardAccountFirstname:
+                    type: string
+                cardAccountLastname:
+                    type: string
+                minAmount:
+                    type: string
+                maxAmount:
+                    type: string
+                currency:
+                    type: string
+                country:
+                    type: string
+                enabled:
+                    type: boolean
         payment.service.v1.CreatePaymentChannelRequest:
             type: object
             properties:
@@ -9979,6 +10459,14 @@ components:
             properties:
                 paymentMethod:
                     $ref: '#/components/schemas/payment.service.v1.PaymentMethodInfo'
+        payment.service.v1.DeleteBankCardRequest:
+            type: object
+            properties:
+                bankCardId:
+                    type: string
+        payment.service.v1.DeleteBankCardResponse:
+            type: object
+            properties: {}
         payment.service.v1.DepositCallbackRequest:
             type: object
             properties:
@@ -10070,6 +10558,16 @@ components:
                 address:
                     type: string
                     description: Digital Currency address
+        payment.service.v1.GetBankCardListRequest:
+            type: object
+            properties: {}
+        payment.service.v1.GetBankCardListResponse:
+            type: object
+            properties:
+                bankCardLsit:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/payment.service.v1.BankCard'
         payment.service.v1.GetOperatorAddressResponse:
             type: object
             properties:
@@ -10770,6 +11268,16 @@ components:
             description: |-
                 Transaction information
                  Detailed information about a specific transaction
+        payment.service.v1.UpdateBankCardRequest:
+            type: object
+            properties:
+                bankCard:
+                    $ref: '#/components/schemas/payment.service.v1.BankCard'
+        payment.service.v1.UpdateBankCardResponse:
+            type: object
+            properties:
+                bankCard:
+                    $ref: '#/components/schemas/payment.service.v1.BankCard'
         payment.service.v1.UpdatePaymentChannelRequest:
             type: object
             properties:
@@ -10881,6 +11389,10 @@ components:
 tags:
     - name: BackofficeAccount
     - name: BackofficeAudit
+    - name: BackofficeBcpay
+      description: |-
+        BackofficeBcpay service
+         Provides methods for backoffice bcpay management
     - name: BackofficeCompany
     - name: BackofficeDashboard
     - name: BackofficeFileStore
@@ -10896,6 +11408,8 @@ tags:
     - name: BackofficeSystem
     - name: BackofficeUser
     - name: BackofficeWallet
+    - name: Bcpay
+      description: User service provides authentication and user management functionality.
     - name: Game
     - name: Payment
       description: |-

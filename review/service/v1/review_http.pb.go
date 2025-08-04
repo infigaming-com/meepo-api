@@ -27,10 +27,10 @@ type ReviewHTTPServer interface {
 
 func RegisterReviewHTTPServer(s *http.Server, srv ReviewHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/review/withdraw", _Review_CreateWithdraw0_HTTP_Handler(srv))
+	r.POST("/v1/review/withdraw", _Review_CreateWithdraw1_HTTP_Handler(srv))
 }
 
-func _Review_CreateWithdraw0_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Context) error {
+func _Review_CreateWithdraw1_HTTP_Handler(srv ReviewHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in CreateWithdrawRequest
 		if err := ctx.Bind(&in); err != nil {
