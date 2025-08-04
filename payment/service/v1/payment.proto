@@ -679,6 +679,7 @@ message GetTransactionPageRequest {
   // Optional minimum amount filter
   string min_amount = 15;
   // Optional maximum amount filter
+  string max_amount = 16;
   int64 user_id = 17;
   api.common.OperatorContextFilters operator_context_filters = 18;
   api.common.OperatorContext operator_context = 19;

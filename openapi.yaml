@@ -8815,22 +8815,32 @@ components:
         api.bcpay.service.v1.BankAccount:
             type: object
             properties:
+                id:
+                    type: string
                 merchantId:
                     type: string
-                cardId:
+                bankAccount:
                     type: string
                 bankFirstName:
                     type: string
                 bankLastName:
                     type: string
-                maxAmount:
-                    type: string
-                minAmount:
-                    type: string
                 currency:
                     type: string
                 country:
                     type: string
+                maxAmount:
+                    type: string
+                minAmount:
+                    type: string
+                maxAmountPerTrans:
+                    type: string
+                maxTransLimit:
+                    type: integer
+                    format: int32
+                priority:
+                    type: integer
+                    format: int32
                 enable:
                     type: boolean
         api.bcpay.service.v1.BankAccountListRequest:
@@ -8839,8 +8849,6 @@ components:
                 merchantId:
                     type: string
                 currency:
-                    type: string
-                country:
                     type: string
         api.bcpay.service.v1.BankAccountListResponse:
             type: object
@@ -8942,7 +8950,11 @@ components:
                 audit:
                     type: string
                     description: audit a transaction "approve" or "deline"
+                auditor:
+                    type: string
                 auditTime:
+                    type: string
+                auditNote:
                     type: string
                 createTime:
                     type: string
@@ -10642,9 +10654,11 @@ components:
                 minAmount:
                     type: string
                     description: Optional minimum amount filter
-                userId:
+                maxAmount:
                     type: string
                     description: Optional maximum amount filter
+                userId:
+                    type: string
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 operatorContext:

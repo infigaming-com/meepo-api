@@ -4309,6 +4309,8 @@ func (m *GetTransactionPageRequest) validate(all bool) error {
 
 	// no validation rules for MinAmount
 
+	// no validation rules for MaxAmount
+
 	// no validation rules for UserId
 
 	if all {
