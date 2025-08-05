@@ -640,6 +640,8 @@ message TransactionInfo {
   string amount_reporting_currency = 30;
   string amount_sent_reporting_currency = 31;
   string processing_fee_reporting_currency = 32;
+  string amount_sent_usd = 33;
+  string processing_fee_usd = 34;
 }
 
 message TransactionDetail {
