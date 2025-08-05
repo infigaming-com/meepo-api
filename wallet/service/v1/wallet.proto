@@ -519,18 +519,17 @@ message GetUserTransactionSummaryRequest {
 }
 
 message GetUserTransactionSummaryResponse {
-	string reporting_currency = 1;
-	string total_deposit_usd = 2;
-	string total_withdraw_usd = 3;
-	string deposit_minus_withdraw_usd = 4;
-	string total_valid_bet_usd = 5;
-	string total_deposit_reporting_currency = 6;
-	string total_withdraw_reporting_currency = 7;
-	string deposit_minus_withdraw_reporting_currency = 8;
-	string total_valid_bet_reporting_currency = 9;
-	int32 total_deposit_count = 10;
-	int32 total_withdraw_count = 11;
-	int32 today_withdraw_count = 12;
+	string total_deposit_usd = 1;
+	string total_withdraw_usd = 2;
+	string deposit_minus_withdraw_usd = 3;
+	string total_valid_bet_usd = 4;
+	string total_deposit_reporting_currency = 5;
+	string total_withdraw_reporting_currency = 6;
+	string deposit_minus_withdraw_reporting_currency = 7;
+	string total_valid_bet_reporting_currency = 8;
+	int32 total_deposit_count = 9;
+	int32 total_withdraw_count = 10;
+	int32 today_withdraw_count = 11;
 }
 
 message GetBackofficeUserOverviewFromWalletRequest {
@@ -564,23 +563,22 @@ message GetBackofficeUserOverviewFromWalletResponse {
 	string turnover_multiplier = 21; // Round to 2 decimal places
 	string withdraw_to_deposit_ratio = 22; // Round to 2 decimal places
 	string rtp = 23; // Round to 2 decimal places
-	string reporting_currency = 24;
-	string balance_reporting_currency = 25;
-	string deposit_minus_withdraw_reporting_currency = 26;
-	string turnover_reporting_currency = 27;
-	string cash_turnover_reporting_currency = 28;
-	string bonus_turnover_reporting_currency = 29;
-	string deposit_reporting_currency = 30;
-	string last_deposit_reporting_currency = 31;
-	string withdraw_reporting_currency = 32;
-	string last_withdraw_reporting_currency = 33;
-	string bonus_reporting_currency = 34;
-	string valid_turnover_reporting_currency = 35;
-	string average_bet_amount_reporting_currency = 36;
-	string ggr_reporting_currency = 37;
-	string manually_added_balance_reporting_currency = 38;
-	string bonus_claimed_reporting_currency = 39;
-	string ngr_reporting_currency = 40;
+	string balance_reporting_currency = 24;
+	string deposit_minus_withdraw_reporting_currency = 25;
+	string turnover_reporting_currency = 26;
+	string cash_turnover_reporting_currency = 27;
+	string bonus_turnover_reporting_currency = 28;
+	string deposit_reporting_currency = 29;
+	string last_deposit_reporting_currency = 30;
+	string withdraw_reporting_currency = 31;
+	string last_withdraw_reporting_currency = 32;
+	string bonus_reporting_currency = 33; // Not available for now, only return 0
+	string valid_turnover_reporting_currency = 34; // Not available for now, only return 0
+	string average_bet_amount_reporting_currency = 35;
+	string ggr_reporting_currency = 36;
+	string manually_added_balance_reporting_currency = 37; // Not available for now, only return 0
+	string bonus_claimed_reporting_currency = 38; // Not available for now, only return 0
+	string ngr_reporting_currency = 39;
 }
 
 message GetOverviewDashboardFromWalletRequest {
@@ -703,12 +701,11 @@ message OperatorBalance {
 	string company_operator_name = 3;
 	string operator_name = 4;
 	string currency = 5;
-	string reporting_currency = 6;
-	string protocol = 7; // placeholder for future use
-	string cash = 8;
-	string cash_usd = 9;
-	string cash_reporting_currency = 10;
-	bool enabled = 11;
+	string protocol = 6; // placeholder for future use
+	string cash = 7;
+	string cash_usd = 8;
+	string cash_reporting_currency = 9;
+	bool enabled = 10;
 }
 
 message ListBottomOperatorBalancesResponse {

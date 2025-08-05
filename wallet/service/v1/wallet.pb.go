@@ -2269,18 +2269,17 @@ func (x *GetUserTransactionSummaryRequest) GetOperatorContext() *common.Operator
 
 type GetUserTransactionSummaryResponse struct {
 	state                                 protoimpl.MessageState `protogen:"open.v1"`
-	ReportingCurrency                     string                 `protobuf:"bytes,1,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
-	TotalDepositUsd                       string                 `protobuf:"bytes,2,opt,name=total_deposit_usd,json=totalDepositUsd,proto3" json:"total_deposit_usd,omitempty"`
-	TotalWithdrawUsd                      string                 `protobuf:"bytes,3,opt,name=total_withdraw_usd,json=totalWithdrawUsd,proto3" json:"total_withdraw_usd,omitempty"`
-	DepositMinusWithdrawUsd               string                 `protobuf:"bytes,4,opt,name=deposit_minus_withdraw_usd,json=depositMinusWithdrawUsd,proto3" json:"deposit_minus_withdraw_usd,omitempty"`
-	TotalValidBetUsd                      string                 `protobuf:"bytes,5,opt,name=total_valid_bet_usd,json=totalValidBetUsd,proto3" json:"total_valid_bet_usd,omitempty"`
-	TotalDepositReportingCurrency         string                 `protobuf:"bytes,6,opt,name=total_deposit_reporting_currency,json=totalDepositReportingCurrency,proto3" json:"total_deposit_reporting_currency,omitempty"`
-	TotalWithdrawReportingCurrency        string                 `protobuf:"bytes,7,opt,name=total_withdraw_reporting_currency,json=totalWithdrawReportingCurrency,proto3" json:"total_withdraw_reporting_currency,omitempty"`
-	DepositMinusWithdrawReportingCurrency string                 `protobuf:"bytes,8,opt,name=deposit_minus_withdraw_reporting_currency,json=depositMinusWithdrawReportingCurrency,proto3" json:"deposit_minus_withdraw_reporting_currency,omitempty"`
-	TotalValidBetReportingCurrency        string                 `protobuf:"bytes,9,opt,name=total_valid_bet_reporting_currency,json=totalValidBetReportingCurrency,proto3" json:"total_valid_bet_reporting_currency,omitempty"`
-	TotalDepositCount                     int32                  `protobuf:"varint,10,opt,name=total_deposit_count,json=totalDepositCount,proto3" json:"total_deposit_count,omitempty"`
-	TotalWithdrawCount                    int32                  `protobuf:"varint,11,opt,name=total_withdraw_count,json=totalWithdrawCount,proto3" json:"total_withdraw_count,omitempty"`
-	TodayWithdrawCount                    int32                  `protobuf:"varint,12,opt,name=today_withdraw_count,json=todayWithdrawCount,proto3" json:"today_withdraw_count,omitempty"`
+	TotalDepositUsd                       string                 `protobuf:"bytes,1,opt,name=total_deposit_usd,json=totalDepositUsd,proto3" json:"total_deposit_usd,omitempty"`
+	TotalWithdrawUsd                      string                 `protobuf:"bytes,2,opt,name=total_withdraw_usd,json=totalWithdrawUsd,proto3" json:"total_withdraw_usd,omitempty"`
+	DepositMinusWithdrawUsd               string                 `protobuf:"bytes,3,opt,name=deposit_minus_withdraw_usd,json=depositMinusWithdrawUsd,proto3" json:"deposit_minus_withdraw_usd,omitempty"`
+	TotalValidBetUsd                      string                 `protobuf:"bytes,4,opt,name=total_valid_bet_usd,json=totalValidBetUsd,proto3" json:"total_valid_bet_usd,omitempty"`
+	TotalDepositReportingCurrency         string                 `protobuf:"bytes,5,opt,name=total_deposit_reporting_currency,json=totalDepositReportingCurrency,proto3" json:"total_deposit_reporting_currency,omitempty"`
+	TotalWithdrawReportingCurrency        string                 `protobuf:"bytes,6,opt,name=total_withdraw_reporting_currency,json=totalWithdrawReportingCurrency,proto3" json:"total_withdraw_reporting_currency,omitempty"`
+	DepositMinusWithdrawReportingCurrency string                 `protobuf:"bytes,7,opt,name=deposit_minus_withdraw_reporting_currency,json=depositMinusWithdrawReportingCurrency,proto3" json:"deposit_minus_withdraw_reporting_currency,omitempty"`
+	TotalValidBetReportingCurrency        string                 `protobuf:"bytes,8,opt,name=total_valid_bet_reporting_currency,json=totalValidBetReportingCurrency,proto3" json:"total_valid_bet_reporting_currency,omitempty"`
+	TotalDepositCount                     int32                  `protobuf:"varint,9,opt,name=total_deposit_count,json=totalDepositCount,proto3" json:"total_deposit_count,omitempty"`
+	TotalWithdrawCount                    int32                  `protobuf:"varint,10,opt,name=total_withdraw_count,json=totalWithdrawCount,proto3" json:"total_withdraw_count,omitempty"`
+	TodayWithdrawCount                    int32                  `protobuf:"varint,11,opt,name=today_withdraw_count,json=todayWithdrawCount,proto3" json:"today_withdraw_count,omitempty"`
 	unknownFields                         protoimpl.UnknownFields
 	sizeCache                             protoimpl.SizeCache
 }
@@ -2313,13 +2312,6 @@ func (x *GetUserTransactionSummaryResponse) ProtoReflect() protoreflect.Message 
 // Deprecated: Use GetUserTransactionSummaryResponse.ProtoReflect.Descriptor instead.
 func (*GetUserTransactionSummaryResponse) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{30}
-}
-
-func (x *GetUserTransactionSummaryResponse) GetReportingCurrency() string {
-	if x != nil {
-		return x.ReportingCurrency
-	}
-	return ""
 }
 
 func (x *GetUserTransactionSummaryResponse) GetTotalDepositUsd() string {
@@ -2492,23 +2484,22 @@ type GetBackofficeUserOverviewFromWalletResponse struct {
 	TurnoverMultiplier                    string                 `protobuf:"bytes,21,opt,name=turnover_multiplier,json=turnoverMultiplier,proto3" json:"turnover_multiplier,omitempty"`                 // Round to 2 decimal places
 	WithdrawToDepositRatio                string                 `protobuf:"bytes,22,opt,name=withdraw_to_deposit_ratio,json=withdrawToDepositRatio,proto3" json:"withdraw_to_deposit_ratio,omitempty"` // Round to 2 decimal places
 	Rtp                                   string                 `protobuf:"bytes,23,opt,name=rtp,proto3" json:"rtp,omitempty"`                                                                         // Round to 2 decimal places
-	ReportingCurrency                     string                 `protobuf:"bytes,24,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
-	BalanceReportingCurrency              string                 `protobuf:"bytes,25,opt,name=balance_reporting_currency,json=balanceReportingCurrency,proto3" json:"balance_reporting_currency,omitempty"`
-	DepositMinusWithdrawReportingCurrency string                 `protobuf:"bytes,26,opt,name=deposit_minus_withdraw_reporting_currency,json=depositMinusWithdrawReportingCurrency,proto3" json:"deposit_minus_withdraw_reporting_currency,omitempty"`
-	TurnoverReportingCurrency             string                 `protobuf:"bytes,27,opt,name=turnover_reporting_currency,json=turnoverReportingCurrency,proto3" json:"turnover_reporting_currency,omitempty"`
-	CashTurnoverReportingCurrency         string                 `protobuf:"bytes,28,opt,name=cash_turnover_reporting_currency,json=cashTurnoverReportingCurrency,proto3" json:"cash_turnover_reporting_currency,omitempty"`
-	BonusTurnoverReportingCurrency        string                 `protobuf:"bytes,29,opt,name=bonus_turnover_reporting_currency,json=bonusTurnoverReportingCurrency,proto3" json:"bonus_turnover_reporting_currency,omitempty"`
-	DepositReportingCurrency              string                 `protobuf:"bytes,30,opt,name=deposit_reporting_currency,json=depositReportingCurrency,proto3" json:"deposit_reporting_currency,omitempty"`
-	LastDepositReportingCurrency          string                 `protobuf:"bytes,31,opt,name=last_deposit_reporting_currency,json=lastDepositReportingCurrency,proto3" json:"last_deposit_reporting_currency,omitempty"`
-	WithdrawReportingCurrency             string                 `protobuf:"bytes,32,opt,name=withdraw_reporting_currency,json=withdrawReportingCurrency,proto3" json:"withdraw_reporting_currency,omitempty"`
-	LastWithdrawReportingCurrency         string                 `protobuf:"bytes,33,opt,name=last_withdraw_reporting_currency,json=lastWithdrawReportingCurrency,proto3" json:"last_withdraw_reporting_currency,omitempty"`
-	BonusReportingCurrency                string                 `protobuf:"bytes,34,opt,name=bonus_reporting_currency,json=bonusReportingCurrency,proto3" json:"bonus_reporting_currency,omitempty"`
-	ValidTurnoverReportingCurrency        string                 `protobuf:"bytes,35,opt,name=valid_turnover_reporting_currency,json=validTurnoverReportingCurrency,proto3" json:"valid_turnover_reporting_currency,omitempty"`
-	AverageBetAmountReportingCurrency     string                 `protobuf:"bytes,36,opt,name=average_bet_amount_reporting_currency,json=averageBetAmountReportingCurrency,proto3" json:"average_bet_amount_reporting_currency,omitempty"`
-	GgrReportingCurrency                  string                 `protobuf:"bytes,37,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
-	ManuallyAddedBalanceReportingCurrency string                 `protobuf:"bytes,38,opt,name=manually_added_balance_reporting_currency,json=manuallyAddedBalanceReportingCurrency,proto3" json:"manually_added_balance_reporting_currency,omitempty"`
-	BonusClaimedReportingCurrency         string                 `protobuf:"bytes,39,opt,name=bonus_claimed_reporting_currency,json=bonusClaimedReportingCurrency,proto3" json:"bonus_claimed_reporting_currency,omitempty"`
-	NgrReportingCurrency                  string                 `protobuf:"bytes,40,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
+	BalanceReportingCurrency              string                 `protobuf:"bytes,24,opt,name=balance_reporting_currency,json=balanceReportingCurrency,proto3" json:"balance_reporting_currency,omitempty"`
+	DepositMinusWithdrawReportingCurrency string                 `protobuf:"bytes,25,opt,name=deposit_minus_withdraw_reporting_currency,json=depositMinusWithdrawReportingCurrency,proto3" json:"deposit_minus_withdraw_reporting_currency,omitempty"`
+	TurnoverReportingCurrency             string                 `protobuf:"bytes,26,opt,name=turnover_reporting_currency,json=turnoverReportingCurrency,proto3" json:"turnover_reporting_currency,omitempty"`
+	CashTurnoverReportingCurrency         string                 `protobuf:"bytes,27,opt,name=cash_turnover_reporting_currency,json=cashTurnoverReportingCurrency,proto3" json:"cash_turnover_reporting_currency,omitempty"`
+	BonusTurnoverReportingCurrency        string                 `protobuf:"bytes,28,opt,name=bonus_turnover_reporting_currency,json=bonusTurnoverReportingCurrency,proto3" json:"bonus_turnover_reporting_currency,omitempty"`
+	DepositReportingCurrency              string                 `protobuf:"bytes,29,opt,name=deposit_reporting_currency,json=depositReportingCurrency,proto3" json:"deposit_reporting_currency,omitempty"`
+	LastDepositReportingCurrency          string                 `protobuf:"bytes,30,opt,name=last_deposit_reporting_currency,json=lastDepositReportingCurrency,proto3" json:"last_deposit_reporting_currency,omitempty"`
+	WithdrawReportingCurrency             string                 `protobuf:"bytes,31,opt,name=withdraw_reporting_currency,json=withdrawReportingCurrency,proto3" json:"withdraw_reporting_currency,omitempty"`
+	LastWithdrawReportingCurrency         string                 `protobuf:"bytes,32,opt,name=last_withdraw_reporting_currency,json=lastWithdrawReportingCurrency,proto3" json:"last_withdraw_reporting_currency,omitempty"`
+	BonusReportingCurrency                string                 `protobuf:"bytes,33,opt,name=bonus_reporting_currency,json=bonusReportingCurrency,proto3" json:"bonus_reporting_currency,omitempty"`                           // Not available for now, only return 0
+	ValidTurnoverReportingCurrency        string                 `protobuf:"bytes,34,opt,name=valid_turnover_reporting_currency,json=validTurnoverReportingCurrency,proto3" json:"valid_turnover_reporting_currency,omitempty"` // Not available for now, only return 0
+	AverageBetAmountReportingCurrency     string                 `protobuf:"bytes,35,opt,name=average_bet_amount_reporting_currency,json=averageBetAmountReportingCurrency,proto3" json:"average_bet_amount_reporting_currency,omitempty"`
+	GgrReportingCurrency                  string                 `protobuf:"bytes,36,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
+	ManuallyAddedBalanceReportingCurrency string                 `protobuf:"bytes,37,opt,name=manually_added_balance_reporting_currency,json=manuallyAddedBalanceReportingCurrency,proto3" json:"manually_added_balance_reporting_currency,omitempty"` // Not available for now, only return 0
+	BonusClaimedReportingCurrency         string                 `protobuf:"bytes,38,opt,name=bonus_claimed_reporting_currency,json=bonusClaimedReportingCurrency,proto3" json:"bonus_claimed_reporting_currency,omitempty"`                           // Not available for now, only return 0
+	NgrReportingCurrency                  string                 `protobuf:"bytes,39,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
 	unknownFields                         protoimpl.UnknownFields
 	sizeCache                             protoimpl.SizeCache
 }
@@ -2700,13 +2691,6 @@ func (x *GetBackofficeUserOverviewFromWalletResponse) GetWithdrawToDepositRatio(
 func (x *GetBackofficeUserOverviewFromWalletResponse) GetRtp() string {
 	if x != nil {
 		return x.Rtp
-	}
-	return ""
-}
-
-func (x *GetBackofficeUserOverviewFromWalletResponse) GetReportingCurrency() string {
-	if x != nil {
-		return x.ReportingCurrency
 	}
 	return ""
 }
@@ -3806,12 +3790,11 @@ type OperatorBalance struct {
 	CompanyOperatorName   string                  `protobuf:"bytes,3,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
 	OperatorName          string                  `protobuf:"bytes,4,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
 	Currency              string                  `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
-	ReportingCurrency     string                  `protobuf:"bytes,6,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
-	Protocol              string                  `protobuf:"bytes,7,opt,name=protocol,proto3" json:"protocol,omitempty"` // placeholder for future use
-	Cash                  string                  `protobuf:"bytes,8,opt,name=cash,proto3" json:"cash,omitempty"`
-	CashUsd               string                  `protobuf:"bytes,9,opt,name=cash_usd,json=cashUsd,proto3" json:"cash_usd,omitempty"`
-	CashReportingCurrency string                  `protobuf:"bytes,10,opt,name=cash_reporting_currency,json=cashReportingCurrency,proto3" json:"cash_reporting_currency,omitempty"`
-	Enabled               bool                    `protobuf:"varint,11,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Protocol              string                  `protobuf:"bytes,6,opt,name=protocol,proto3" json:"protocol,omitempty"` // placeholder for future use
+	Cash                  string                  `protobuf:"bytes,7,opt,name=cash,proto3" json:"cash,omitempty"`
+	CashUsd               string                  `protobuf:"bytes,8,opt,name=cash_usd,json=cashUsd,proto3" json:"cash_usd,omitempty"`
+	CashReportingCurrency string                  `protobuf:"bytes,9,opt,name=cash_reporting_currency,json=cashReportingCurrency,proto3" json:"cash_reporting_currency,omitempty"`
+	Enabled               bool                    `protobuf:"varint,10,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -3877,13 +3860,6 @@ func (x *OperatorBalance) GetOperatorName() string {
 func (x *OperatorBalance) GetCurrency() string {
 	if x != nil {
 		return x.Currency
-	}
-	return ""
-}
-
-func (x *OperatorBalance) GetReportingCurrency() string {
-	if x != nil {
-		return x.ReportingCurrency
 	}
 	return ""
 }
@@ -7507,21 +7483,20 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x10operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\v\n" +
 	"\t_currencyB\r\n" +
 	"\v_start_timeB\v\n" +
-	"\t_end_time\"\xe6\x05\n" +
-	"!GetUserTransactionSummaryResponse\x12-\n" +
-	"\x12reporting_currency\x18\x01 \x01(\tR\x11reportingCurrency\x12*\n" +
-	"\x11total_deposit_usd\x18\x02 \x01(\tR\x0ftotalDepositUsd\x12,\n" +
-	"\x12total_withdraw_usd\x18\x03 \x01(\tR\x10totalWithdrawUsd\x12;\n" +
-	"\x1adeposit_minus_withdraw_usd\x18\x04 \x01(\tR\x17depositMinusWithdrawUsd\x12-\n" +
-	"\x13total_valid_bet_usd\x18\x05 \x01(\tR\x10totalValidBetUsd\x12G\n" +
-	" total_deposit_reporting_currency\x18\x06 \x01(\tR\x1dtotalDepositReportingCurrency\x12I\n" +
-	"!total_withdraw_reporting_currency\x18\a \x01(\tR\x1etotalWithdrawReportingCurrency\x12X\n" +
-	")deposit_minus_withdraw_reporting_currency\x18\b \x01(\tR%depositMinusWithdrawReportingCurrency\x12J\n" +
-	"\"total_valid_bet_reporting_currency\x18\t \x01(\tR\x1etotalValidBetReportingCurrency\x12.\n" +
-	"\x13total_deposit_count\x18\n" +
-	" \x01(\x05R\x11totalDepositCount\x120\n" +
-	"\x14total_withdraw_count\x18\v \x01(\x05R\x12totalWithdrawCount\x120\n" +
-	"\x14today_withdraw_count\x18\f \x01(\x05R\x12todayWithdrawCount\"\xa5\x02\n" +
+	"\t_end_time\"\xb7\x05\n" +
+	"!GetUserTransactionSummaryResponse\x12*\n" +
+	"\x11total_deposit_usd\x18\x01 \x01(\tR\x0ftotalDepositUsd\x12,\n" +
+	"\x12total_withdraw_usd\x18\x02 \x01(\tR\x10totalWithdrawUsd\x12;\n" +
+	"\x1adeposit_minus_withdraw_usd\x18\x03 \x01(\tR\x17depositMinusWithdrawUsd\x12-\n" +
+	"\x13total_valid_bet_usd\x18\x04 \x01(\tR\x10totalValidBetUsd\x12G\n" +
+	" total_deposit_reporting_currency\x18\x05 \x01(\tR\x1dtotalDepositReportingCurrency\x12I\n" +
+	"!total_withdraw_reporting_currency\x18\x06 \x01(\tR\x1etotalWithdrawReportingCurrency\x12X\n" +
+	")deposit_minus_withdraw_reporting_currency\x18\a \x01(\tR%depositMinusWithdrawReportingCurrency\x12J\n" +
+	"\"total_valid_bet_reporting_currency\x18\b \x01(\tR\x1etotalValidBetReportingCurrency\x12.\n" +
+	"\x13total_deposit_count\x18\t \x01(\x05R\x11totalDepositCount\x120\n" +
+	"\x14total_withdraw_count\x18\n" +
+	" \x01(\x05R\x12totalWithdrawCount\x120\n" +
+	"\x14today_withdraw_count\x18\v \x01(\x05R\x12todayWithdrawCount\"\xa5\x02\n" +
 	"*GetBackofficeUserOverviewFromWalletRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12>\n" +
 	"\n" +
@@ -7529,7 +7504,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\bend_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\aendTime\x88\x01\x01\x12F\n" +
 	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\r\n" +
 	"\v_start_timeB\v\n" +
-	"\t_end_time\"\xf0\x10\n" +
+	"\t_end_time\"\xc1\x10\n" +
 	"+GetBackofficeUserOverviewFromWalletResponse\x12\x1f\n" +
 	"\vbalance_usd\x18\x01 \x01(\tR\n" +
 	"balanceUsd\x12;\n" +
@@ -7556,24 +7531,23 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x15ggr_to_ngr_percentage\x18\x14 \x01(\tR\x12ggrToNgrPercentage\x12/\n" +
 	"\x13turnover_multiplier\x18\x15 \x01(\tR\x12turnoverMultiplier\x129\n" +
 	"\x19withdraw_to_deposit_ratio\x18\x16 \x01(\tR\x16withdrawToDepositRatio\x12\x10\n" +
-	"\x03rtp\x18\x17 \x01(\tR\x03rtp\x12-\n" +
-	"\x12reporting_currency\x18\x18 \x01(\tR\x11reportingCurrency\x12<\n" +
-	"\x1abalance_reporting_currency\x18\x19 \x01(\tR\x18balanceReportingCurrency\x12X\n" +
-	")deposit_minus_withdraw_reporting_currency\x18\x1a \x01(\tR%depositMinusWithdrawReportingCurrency\x12>\n" +
-	"\x1bturnover_reporting_currency\x18\x1b \x01(\tR\x19turnoverReportingCurrency\x12G\n" +
-	" cash_turnover_reporting_currency\x18\x1c \x01(\tR\x1dcashTurnoverReportingCurrency\x12I\n" +
-	"!bonus_turnover_reporting_currency\x18\x1d \x01(\tR\x1ebonusTurnoverReportingCurrency\x12<\n" +
-	"\x1adeposit_reporting_currency\x18\x1e \x01(\tR\x18depositReportingCurrency\x12E\n" +
-	"\x1flast_deposit_reporting_currency\x18\x1f \x01(\tR\x1clastDepositReportingCurrency\x12>\n" +
-	"\x1bwithdraw_reporting_currency\x18  \x01(\tR\x19withdrawReportingCurrency\x12G\n" +
-	" last_withdraw_reporting_currency\x18! \x01(\tR\x1dlastWithdrawReportingCurrency\x128\n" +
-	"\x18bonus_reporting_currency\x18\" \x01(\tR\x16bonusReportingCurrency\x12I\n" +
-	"!valid_turnover_reporting_currency\x18# \x01(\tR\x1evalidTurnoverReportingCurrency\x12P\n" +
-	"%average_bet_amount_reporting_currency\x18$ \x01(\tR!averageBetAmountReportingCurrency\x124\n" +
-	"\x16ggr_reporting_currency\x18% \x01(\tR\x14ggrReportingCurrency\x12X\n" +
-	")manually_added_balance_reporting_currency\x18& \x01(\tR%manuallyAddedBalanceReportingCurrency\x12G\n" +
-	" bonus_claimed_reporting_currency\x18' \x01(\tR\x1dbonusClaimedReportingCurrency\x124\n" +
-	"\x16ngr_reporting_currency\x18( \x01(\tR\x14ngrReportingCurrency\"\xcd\x01\n" +
+	"\x03rtp\x18\x17 \x01(\tR\x03rtp\x12<\n" +
+	"\x1abalance_reporting_currency\x18\x18 \x01(\tR\x18balanceReportingCurrency\x12X\n" +
+	")deposit_minus_withdraw_reporting_currency\x18\x19 \x01(\tR%depositMinusWithdrawReportingCurrency\x12>\n" +
+	"\x1bturnover_reporting_currency\x18\x1a \x01(\tR\x19turnoverReportingCurrency\x12G\n" +
+	" cash_turnover_reporting_currency\x18\x1b \x01(\tR\x1dcashTurnoverReportingCurrency\x12I\n" +
+	"!bonus_turnover_reporting_currency\x18\x1c \x01(\tR\x1ebonusTurnoverReportingCurrency\x12<\n" +
+	"\x1adeposit_reporting_currency\x18\x1d \x01(\tR\x18depositReportingCurrency\x12E\n" +
+	"\x1flast_deposit_reporting_currency\x18\x1e \x01(\tR\x1clastDepositReportingCurrency\x12>\n" +
+	"\x1bwithdraw_reporting_currency\x18\x1f \x01(\tR\x19withdrawReportingCurrency\x12G\n" +
+	" last_withdraw_reporting_currency\x18  \x01(\tR\x1dlastWithdrawReportingCurrency\x128\n" +
+	"\x18bonus_reporting_currency\x18! \x01(\tR\x16bonusReportingCurrency\x12I\n" +
+	"!valid_turnover_reporting_currency\x18\" \x01(\tR\x1evalidTurnoverReportingCurrency\x12P\n" +
+	"%average_bet_amount_reporting_currency\x18# \x01(\tR!averageBetAmountReportingCurrency\x124\n" +
+	"\x16ggr_reporting_currency\x18$ \x01(\tR\x14ggrReportingCurrency\x12X\n" +
+	")manually_added_balance_reporting_currency\x18% \x01(\tR%manuallyAddedBalanceReportingCurrency\x12G\n" +
+	" bonus_claimed_reporting_currency\x18& \x01(\tR\x1dbonusClaimedReportingCurrency\x124\n" +
+	"\x16ngr_reporting_currency\x18' \x01(\tR\x14ngrReportingCurrency\"\xcd\x01\n" +
 	"%GetOverviewDashboardFromWalletRequest\x12\\\n" +
 	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xe3\x06\n" +
@@ -7685,20 +7659,19 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\tpage_size\x18\x05 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xd0\x03\n" +
+	"_page_size\"\xa1\x03\n" +
 	"\x0fOperatorBalance\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x124\n" +
 	"\x16retailer_operator_name\x18\x02 \x01(\tR\x14retailerOperatorName\x122\n" +
 	"\x15company_operator_name\x18\x03 \x01(\tR\x13companyOperatorName\x12#\n" +
 	"\roperator_name\x18\x04 \x01(\tR\foperatorName\x12\x1a\n" +
-	"\bcurrency\x18\x05 \x01(\tR\bcurrency\x12-\n" +
-	"\x12reporting_currency\x18\x06 \x01(\tR\x11reportingCurrency\x12\x1a\n" +
-	"\bprotocol\x18\a \x01(\tR\bprotocol\x12\x12\n" +
-	"\x04cash\x18\b \x01(\tR\x04cash\x12\x19\n" +
-	"\bcash_usd\x18\t \x01(\tR\acashUsd\x126\n" +
-	"\x17cash_reporting_currency\x18\n" +
-	" \x01(\tR\x15cashReportingCurrency\x12\x18\n" +
-	"\aenabled\x18\v \x01(\bR\aenabled\"\xa9\x02\n" +
+	"\bcurrency\x18\x05 \x01(\tR\bcurrency\x12\x1a\n" +
+	"\bprotocol\x18\x06 \x01(\tR\bprotocol\x12\x12\n" +
+	"\x04cash\x18\a \x01(\tR\x04cash\x12\x19\n" +
+	"\bcash_usd\x18\b \x01(\tR\acashUsd\x126\n" +
+	"\x17cash_reporting_currency\x18\t \x01(\tR\x15cashReportingCurrency\x12\x18\n" +
+	"\aenabled\x18\n" +
+	" \x01(\bR\aenabled\"\xa9\x02\n" +
 	"\"ListBottomOperatorBalancesResponse\x12S\n" +
 	"\x11operator_balances\x18\x01 \x03(\v2&.api.wallet.service.v1.OperatorBalanceR\x10operatorBalances\x12$\n" +
 	"\x0etotal_cash_usd\x18\x02 \x01(\tR\ftotalCashUsd\x12A\n" +
