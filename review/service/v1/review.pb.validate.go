@@ -1623,27 +1623,39 @@ func (m *ListTicketsResponse) validate(all bool) error {
 
 	// no validation rules for TotalCount
 
-	// no validation rules for TotalAmount
+	// no validation rules for TotalAmountUsd
+
+	// no validation rules for TotalAmountReportingCurrency
 
 	// no validation rules for TotalPendingCount
 
-	// no validation rules for TotalPendingAmount
+	// no validation rules for TotalPendingAmountUsd
+
+	// no validation rules for TotalPendingAmountReportingCurrency
 
 	// no validation rules for TotalPayingCount
 
-	// no validation rules for TotalPayingAmount
+	// no validation rules for TotalPayingAmountUsd
+
+	// no validation rules for TotalPayingAmountReportingCurrency
 
 	// no validation rules for TotalPaidCount
 
-	// no validation rules for TotalPaidAmount
+	// no validation rules for TotalPaidAmountUsd
+
+	// no validation rules for TotalPaidAmountReportingCurrency
 
 	// no validation rules for TotalFailedCount
 
-	// no validation rules for TotalFailedAmount
+	// no validation rules for TotalFailedAmountUsd
+
+	// no validation rules for TotalFailedAmountReportingCurrency
 
 	// no validation rules for TotalRejectedCount
 
-	// no validation rules for TotalRejectedAmount
+	// no validation rules for TotalRejectedAmountUsd
+
+	// no validation rules for TotalRejectedAmountReportingCurrency
 
 	// no validation rules for AverageReviewTime
 
@@ -2632,13 +2644,19 @@ func (m *ListTicketsResponse_Ticket) validate(all bool) error {
 
 	// no validation rules for BeforeBalanceUsd
 
+	// no validation rules for BeforeBalanceReportingCurrency
+
 	// no validation rules for Amount
 
 	// no validation rules for AmountUsd
 
+	// no validation rules for AmountReportingCurrency
+
 	// no validation rules for AfterBalance
 
 	// no validation rules for AfterBalanceUsd
+
+	// no validation rules for AfterBalanceReportingCurrency
 
 	// no validation rules for Currency
 
@@ -2647,6 +2665,10 @@ func (m *ListTicketsResponse_Ticket) validate(all bool) error {
 	// no validation rules for Protocol
 
 	// no validation rules for Fee
+
+	// no validation rules for FeeUsd
+
+	// no validation rules for FeeReportingCurrency
 
 	// no validation rules for Status
 
@@ -3154,11 +3176,17 @@ func (m *GetTicketResponse_PaymentTransactionInfo) validate(all bool) error {
 
 	// no validation rules for AmountUsd
 
+	// no validation rules for AmountReportingCurrency
+
 	// no validation rules for PaymentChannel
 
 	// no validation rules for Protocol
 
 	// no validation rules for Fee
+
+	// no validation rules for FeeUsd
+
+	// no validation rules for FeeReportingCurrency
 
 	if all {
 		switch v := interface{}(m.GetExtra()).(type) {
@@ -3357,9 +3385,21 @@ func (m *GetTicketResponse_WalletTransactionInfo) validate(all bool) error {
 
 	// no validation rules for Amount
 
+	// no validation rules for AmountUsd
+
+	// no validation rules for AmountReportingCurrency
+
 	// no validation rules for BeforeBalance
 
+	// no validation rules for BeforeBalanceUsd
+
+	// no validation rules for BeforeBalanceReportingCurrency
+
 	// no validation rules for AfterBalance
+
+	// no validation rules for AfterBalanceUsd
+
+	// no validation rules for AfterBalanceReportingCurrency
 
 	if all {
 		switch v := interface{}(m.GetCreatedAt()).(type) {
@@ -3498,11 +3538,19 @@ func (m *GetTicketResponse_WalletTransactionSummary) validate(all bool) error {
 
 	// no validation rules for TotalDepositUsd
 
+	// no validation rules for TotalDepositReportingCurrency
+
 	// no validation rules for TotalWithdrawUsd
+
+	// no validation rules for TotalWithdrawReportingCurrency
 
 	// no validation rules for TotalDepositMinusWithdrawUsd
 
+	// no validation rules for TotalDepositMinusWithdrawReportingCurrency
+
 	// no validation rules for ValidTurnoverUsd
+
+	// no validation rules for ValidTurnoverReportingCurrency
 
 	// no validation rules for TotalDepositCount
 
@@ -3916,7 +3964,15 @@ func (m *GetOperatorTicketResponse_PaymentTransactionInfo) validate(all bool) er
 
 	// no validation rules for Amount
 
+	// no validation rules for AmountUsd
+
+	// no validation rules for AmountReportingCurrency
+
 	// no validation rules for AmountSent
+
+	// no validation rules for AmountSentUsd
+
+	// no validation rules for AmountSentReportingCurrency
 
 	// no validation rules for Gas
 
@@ -4066,6 +4122,10 @@ func (m *GetOperatorTicketResponse_WalletBalanceInfo) validate(all bool) error {
 
 	// no validation rules for Balance
 
+	// no validation rules for BalanceUsd
+
+	// no validation rules for BalanceReportingCurrency
+
 	if len(errors) > 0 {
 		return GetOperatorTicketResponse_WalletBalanceInfoMultiError(errors)
 	}
@@ -4174,9 +4234,21 @@ func (m *GetOperatorTicketResponse_WalletTransactionInfo) validate(all bool) err
 
 	// no validation rules for BeforeBalance
 
+	// no validation rules for BeforeBalanceUsd
+
+	// no validation rules for BeforeBalanceReportingCurrency
+
 	// no validation rules for AfterBalance
 
+	// no validation rules for AfterBalanceUsd
+
+	// no validation rules for AfterBalanceReportingCurrency
+
 	// no validation rules for Amount
+
+	// no validation rules for AmountUsd
+
+	// no validation rules for AmountReportingCurrency
 
 	if len(errors) > 0 {
 		return GetOperatorTicketResponse_WalletTransactionInfoMultiError(errors)
@@ -4292,19 +4364,35 @@ func (m *GetOperatorTicketResponse_WalletTransactionSummary) validate(all bool) 
 
 	// no validation rules for TotalWithdrawUsd
 
+	// no validation rules for TotalWithdrawReportingCurrency
+
 	// no validation rules for TotalDepositUsd
+
+	// no validation rules for TotalDepositReportingCurrency
 
 	// no validation rules for TotalTransferUsd
 
+	// no validation rules for TotalTransferReportingCurrency
+
 	// no validation rules for TotalSwapOutUsd
+
+	// no validation rules for TotalSwapOutReportingCurrency
 
 	// no validation rules for TotalSwapInUsd
 
+	// no validation rules for TotalSwapInReportingCurrency
+
 	// no validation rules for TotalFreezeUsd
+
+	// no validation rules for TotalFreezeReportingCurrency
 
 	// no validation rules for TotalWriteOffUsd
 
+	// no validation rules for TotalWriteOffReportingCurrency
+
 	// no validation rules for TotalPendingUsd
+
+	// no validation rules for TotalPendingReportingCurrency
 
 	if len(errors) > 0 {
 		return GetOperatorTicketResponse_WalletTransactionSummaryMultiError(errors)
