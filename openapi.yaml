@@ -9643,6 +9643,10 @@ components:
                     type: string
                 fee:
                     type: string
+                feeUsd:
+                    type: string
+                feeReportingCurrency:
+                    type: string
                 createdAt:
                     type: string
                     format: date-time
