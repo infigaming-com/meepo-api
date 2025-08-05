@@ -11273,6 +11273,8 @@ components:
                     type: string
                 amountSentReportingCurrency:
                     type: string
+                processingFeeReportingCurrency:
+                    type: string
             description: |-
                 Transaction information
                  Detailed information about a specific transaction
