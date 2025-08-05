@@ -64,7 +64,7 @@ service BackofficeWallet {
         };
     }
 	// ListOperatorBalances lists all operator balances which belong to the backoffice operator
-	rpc ListOperatorBalances(ListOperatorBalancesRequest) returns (ListOperatorBalancesResponse) {
+	rpc ListOperatorBalances(ListOperatorBalancesRequest) returns (wallet.service.v1.ListBottomOperatorBalancesResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/operator/balances/list"
 			body: "*"
@@ -347,26 +347,6 @@ message ListOperatorBalancesRequest {
 	repeated string currencies = 2;
 	optional int32 page = 3; // default 1
 	optional int32 page_size = 4; // default 20
-}
-
-message OperatorBalance {
-	api.common.OperatorContext operator_context = 1;
-	string retailer_operator_name = 2;
-	string company_operator_name = 3;
-	string operator_name = 4;
-	string currency = 5;
-	string protocol = 6; // placeholder for future use
-	string cash = 7;
-	string cash_usd = 8;
-	bool enabled = 9;
-}
-
-message ListOperatorBalancesResponse {
-	repeated OperatorBalance operator_balances = 1;
-	string total_cash_usd = 2;
-	int32 total = 4;
-	int32 page = 5;
-	int32 page_size = 6;
 }
 
 message GetExchangeRatesRequest {

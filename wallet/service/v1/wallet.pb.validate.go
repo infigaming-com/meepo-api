@@ -4096,15 +4096,23 @@ func (m *GetUserTransactionSummaryResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Currency
+	// no validation rules for ReportingCurrency
 
-	// no validation rules for TotalDeposit
+	// no validation rules for TotalDepositUsd
 
-	// no validation rules for TotalWithdraw
+	// no validation rules for TotalWithdrawUsd
 
-	// no validation rules for DepositMinusWithdraw
+	// no validation rules for DepositMinusWithdrawUsd
 
-	// no validation rules for TotalValidBet
+	// no validation rules for TotalValidBetUsd
+
+	// no validation rules for TotalDepositReportingCurrency
+
+	// no validation rules for TotalWithdrawReportingCurrency
+
+	// no validation rules for DepositMinusWithdrawReportingCurrency
+
+	// no validation rules for TotalValidBetReportingCurrency
 
 	// no validation rules for TotalDepositCount
 
@@ -4421,51 +4429,85 @@ func (m *GetBackofficeUserOverviewFromWalletResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Balance
+	// no validation rules for BalanceUsd
 
-	// no validation rules for DepositMinusWithdraw
+	// no validation rules for DepositMinusWithdrawUsd
 
-	// no validation rules for Turnover
+	// no validation rules for TurnoverUsd
 
-	// no validation rules for CashTurnover
+	// no validation rules for CashTurnoverUsd
 
-	// no validation rules for BonusTurnover
+	// no validation rules for BonusTurnoverUsd
 
-	// no validation rules for Deposit
+	// no validation rules for DepositUsd
 
-	// no validation rules for LastDeposit
+	// no validation rules for LastDepositUsd
 
 	// no validation rules for DepositCount
 
-	// no validation rules for Withdraw
+	// no validation rules for WithdrawUsd
 
-	// no validation rules for LastWithdraw
+	// no validation rules for LastWithdrawUsd
 
 	// no validation rules for WithdrawCount
 
-	// no validation rules for Bonus
+	// no validation rules for BonusUsd
 
-	// no validation rules for ValidTurnover
+	// no validation rules for ValidTurnoverUsd
 
-	// no validation rules for AverageBetAmount
+	// no validation rules for AverageBetAmountUsd
 
-	// no validation rules for Ggr
+	// no validation rules for GgrUsd
 
 	// no validation rules for GgrPercentage
 
-	// no validation rules for ManuallyAddedBalance
+	// no validation rules for ManuallyAddedBalanceUsd
 
-	// no validation rules for BonusClaimed
+	// no validation rules for BonusClaimedUsd
 
-	// no validation rules for Ngr
+	// no validation rules for NgrUsd
 
 	// no validation rules for GgrToNgrPercentage
 
 	// no validation rules for TurnoverMultiplier
 
-	// no validation rules for DepositToWithdrawRatio
+	// no validation rules for WithdrawToDepositRatio
 
 	// no validation rules for Rtp
+
+	// no validation rules for ReportingCurrency
+
+	// no validation rules for BalanceReportingCurrency
+
+	// no validation rules for DepositMinusWithdrawReportingCurrency
+
+	// no validation rules for TurnoverReportingCurrency
+
+	// no validation rules for CashTurnoverReportingCurrency
+
+	// no validation rules for BonusTurnoverReportingCurrency
+
+	// no validation rules for DepositReportingCurrency
+
+	// no validation rules for LastDepositReportingCurrency
+
+	// no validation rules for WithdrawReportingCurrency
+
+	// no validation rules for LastWithdrawReportingCurrency
+
+	// no validation rules for BonusReportingCurrency
+
+	// no validation rules for ValidTurnoverReportingCurrency
+
+	// no validation rules for AverageBetAmountReportingCurrency
+
+	// no validation rules for GgrReportingCurrency
+
+	// no validation rules for ManuallyAddedBalanceReportingCurrency
+
+	// no validation rules for BonusClaimedReportingCurrency
+
+	// no validation rules for NgrReportingCurrency
 
 	if len(errors) > 0 {
 		return GetBackofficeUserOverviewFromWalletResponseMultiError(errors)
@@ -6790,11 +6832,15 @@ func (m *OperatorBalance) validate(all bool) error {
 
 	// no validation rules for Currency
 
+	// no validation rules for ReportingCurrency
+
 	// no validation rules for Protocol
 
 	// no validation rules for Cash
 
 	// no validation rules for CashUsd
+
+	// no validation rules for CashReportingCurrency
 
 	// no validation rules for Enabled
 
@@ -6934,6 +6980,8 @@ func (m *ListBottomOperatorBalancesResponse) validate(all bool) error {
 	}
 
 	// no validation rules for TotalCashUsd
+
+	// no validation rules for TotalCashReportingCurrency
 
 	// no validation rules for Total
 
@@ -8626,6 +8674,8 @@ func (m *GetOperatorBalancesResponse) validate(all bool) error {
 
 	// no validation rules for TotalCashUsd
 
+	// no validation rules for TotalCashReportingCurrency
+
 	if len(errors) > 0 {
 		return GetOperatorBalancesResponseMultiError(errors)
 	}
@@ -10039,6 +10089,24 @@ func (m *GetOperatorTransactionSummaryResponse) validate(all bool) error {
 	// no validation rules for TotalFreezeUsd
 
 	// no validation rules for TotalRollbackUsd
+
+	// no validation rules for ReportingCurrency
+
+	// no validation rules for TotalWithdrawReportingCurrency
+
+	// no validation rules for TotalDepositReportingCurrency
+
+	// no validation rules for TotalTransferOutReportingCurrency
+
+	// no validation rules for TotalTransferInReportingCurrency
+
+	// no validation rules for TotalSwapOutReportingCurrency
+
+	// no validation rules for TotalSwapInReportingCurrency
+
+	// no validation rules for TotalFreezeReportingCurrency
+
+	// no validation rules for TotalRollbackReportingCurrency
 
 	if len(errors) > 0 {
 		return GetOperatorTransactionSummaryResponseMultiError(errors)
