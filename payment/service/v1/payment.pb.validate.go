@@ -3967,6 +3967,12 @@ func (m *TransactionInfo) validate(all bool) error {
 
 	// no validation rules for Gas
 
+	// no validation rules for ReportingCurrency
+
+	// no validation rules for AmountReportingCurrency
+
+	// no validation rules for AmountSentReportingCurrency
+
 	if len(errors) > 0 {
 		return TransactionInfoMultiError(errors)
 	}

@@ -11267,6 +11267,12 @@ components:
                     description: Transaction amount actually sent through
                 gas:
                     type: string
+                reportingCurrency:
+                    type: string
+                amountReportingCurrency:
+                    type: string
+                amountSentReportingCurrency:
+                    type: string
             description: |-
                 Transaction information
                  Detailed information about a specific transaction
