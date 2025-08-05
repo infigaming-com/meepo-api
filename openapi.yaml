@@ -9629,7 +9629,15 @@ components:
                     type: string
                 amount:
                     type: string
+                amountUsd:
+                    type: string
+                amountReportingCurrency:
+                    type: string
                 amountSent:
+                    type: string
+                amountSentUsd:
+                    type: string
+                amountSentReportingCurrency:
                     type: string
                 gas:
                     type: string
@@ -9663,33 +9671,65 @@ components:
             properties:
                 balance:
                     type: string
+                balanceUsd:
+                    type: string
+                balanceReportingCurrency:
+                    type: string
         api.review.service.v1.GetOperatorTicketResponse_WalletTransactionInfo:
             type: object
             properties:
                 beforeBalance:
                     type: string
+                beforeBalanceUsd:
+                    type: string
+                beforeBalanceReportingCurrency:
+                    type: string
                 afterBalance:
                     type: string
+                afterBalanceUsd:
+                    type: string
+                afterBalanceReportingCurrency:
+                    type: string
                 amount:
+                    type: string
+                amountUsd:
+                    type: string
+                amountReportingCurrency:
                     type: string
         api.review.service.v1.GetOperatorTicketResponse_WalletTransactionSummary:
             type: object
             properties:
                 totalWithdrawUsd:
                     type: string
+                totalWithdrawReportingCurrency:
+                    type: string
                 totalDepositUsd:
+                    type: string
+                totalDepositReportingCurrency:
                     type: string
                 totalTransferUsd:
                     type: string
+                totalTransferReportingCurrency:
+                    type: string
                 totalSwapOutUsd:
+                    type: string
+                totalSwapOutReportingCurrency:
                     type: string
                 totalSwapInUsd:
                     type: string
+                totalSwapInReportingCurrency:
+                    type: string
                 totalFreezeUsd:
+                    type: string
+                totalFreezeReportingCurrency:
                     type: string
                 totalWriteOffUsd:
                     type: string
+                totalWriteOffReportingCurrency:
+                    type: string
                 totalPendingUsd:
+                    type: string
+                totalPendingReportingCurrency:
                     type: string
         api.review.service.v1.GetTicketResponse:
             type: object
@@ -9731,11 +9771,17 @@ components:
                     type: string
                 amountUsd:
                     type: string
+                amountReportingCurrency:
+                    type: string
                 paymentChannel:
                     type: string
                 protocol:
                     type: string
                 fee:
+                    type: string
+                feeUsd:
+                    type: string
+                feeReportingCurrency:
                     type: string
                 extra:
                     type: object
@@ -9787,9 +9833,21 @@ components:
                     type: string
                 amount:
                     type: string
+                amountUsd:
+                    type: string
+                amountReportingCurrency:
+                    type: string
                 beforeBalance:
                     type: string
+                beforeBalanceUsd:
+                    type: string
+                beforeBalanceReportingCurrency:
+                    type: string
                 afterBalance:
+                    type: string
+                afterBalanceUsd:
+                    type: string
+                afterBalanceReportingCurrency:
                     type: string
                 createdAt:
                     type: string
@@ -9799,11 +9857,19 @@ components:
             properties:
                 totalDepositUsd:
                     type: string
+                totalDepositReportingCurrency:
+                    type: string
                 totalWithdrawUsd:
+                    type: string
+                totalWithdrawReportingCurrency:
                     type: string
                 totalDepositMinusWithdrawUsd:
                     type: string
+                totalDepositMinusWithdrawReportingCurrency:
+                    type: string
                 validTurnoverUsd:
+                    type: string
+                validTurnoverReportingCurrency:
                     type: string
                 totalDepositCount:
                     type: integer
