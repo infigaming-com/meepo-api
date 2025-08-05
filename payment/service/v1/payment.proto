@@ -193,7 +193,7 @@ message UpdatePaymentChannelRequest {
   // Max Amount
   string max_amount = 10;
   // enable status
-  bool enable = 11;
+  optional bool enable = 11;
   // Configuration fields for the payment channel in JSON format
   google.protobuf.Struct key = 12;
 }

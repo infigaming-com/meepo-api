@@ -1383,8 +1383,6 @@ func (m *UpdatePaymentChannelRequest) validate(all bool) error {
 
 	// no validation rules for MaxAmount
 
-	// no validation rules for Enable
-
 	if all {
 		switch v := interface{}(m.GetKey()).(type) {
 		case interface{ ValidateAll() error }:
@@ -1412,6 +1410,10 @@ func (m *UpdatePaymentChannelRequest) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	if m.Enable != nil {
+		// no validation rules for Enable
 	}
 
 	if len(errors) > 0 {

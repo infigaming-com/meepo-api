@@ -8,10 +8,12 @@ package v1
 
 import (
 	v1 "github.com/infigaming-com/meepo-api/bcpay/service/v1"
+	common "github.com/infigaming-com/meepo-api/common"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
+	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -22,52 +24,366 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type GetMerchantRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMerchantRequest) Reset() {
+	*x = GetMerchantRequest{}
+	mi := &file_backoffice_service_v1_backoffice_bcpay_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMerchantRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMerchantRequest) ProtoMessage() {}
+
+func (x *GetMerchantRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_bcpay_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMerchantRequest.ProtoReflect.Descriptor instead.
+func (*GetMerchantRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_bcpay_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *GetMerchantRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type BankAccountListRequest struct {
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	Currency               string                         `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *BankAccountListRequest) Reset() {
+	*x = BankAccountListRequest{}
+	mi := &file_backoffice_service_v1_backoffice_bcpay_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BankAccountListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BankAccountListRequest) ProtoMessage() {}
+
+func (x *BankAccountListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_bcpay_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BankAccountListRequest.ProtoReflect.Descriptor instead.
+func (*BankAccountListRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_bcpay_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *BankAccountListRequest) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *BankAccountListRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
+type AddBankAccountRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	BankAccount   *v1.BankAccount        `protobuf:"bytes,1,opt,name=bank_account,json=bankAccount,proto3" json:"bank_account,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddBankAccountRequest) Reset() {
+	*x = AddBankAccountRequest{}
+	mi := &file_backoffice_service_v1_backoffice_bcpay_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddBankAccountRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddBankAccountRequest) ProtoMessage() {}
+
+func (x *AddBankAccountRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_bcpay_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddBankAccountRequest.ProtoReflect.Descriptor instead.
+func (*AddBankAccountRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_bcpay_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *AddBankAccountRequest) GetBankAccount() *v1.BankAccount {
+	if x != nil {
+		return x.BankAccount
+	}
+	return nil
+}
+
+type UpdateBankAccountRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	BankAccount   *v1.BankAccount        `protobuf:"bytes,1,opt,name=bank_account,json=bankAccount,proto3" json:"bank_account,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateBankAccountRequest) Reset() {
+	*x = UpdateBankAccountRequest{}
+	mi := &file_backoffice_service_v1_backoffice_bcpay_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateBankAccountRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateBankAccountRequest) ProtoMessage() {}
+
+func (x *UpdateBankAccountRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_bcpay_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateBankAccountRequest.ProtoReflect.Descriptor instead.
+func (*UpdateBankAccountRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_bcpay_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *UpdateBankAccountRequest) GetBankAccount() *v1.BankAccount {
+	if x != nil {
+		return x.BankAccount
+	}
+	return nil
+}
+
+type TransactionListRequest struct {
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *TransactionListRequest) Reset() {
+	*x = TransactionListRequest{}
+	mi := &file_backoffice_service_v1_backoffice_bcpay_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TransactionListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TransactionListRequest) ProtoMessage() {}
+
+func (x *TransactionListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_bcpay_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TransactionListRequest.ProtoReflect.Descriptor instead.
+func (*TransactionListRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_bcpay_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *TransactionListRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
+type AuditTransactionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId string                 `protobuf:"bytes,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	// audit a transaction "approve" or "deline"
+	Audit         string `protobuf:"bytes,2,opt,name=audit,proto3" json:"audit,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AuditTransactionRequest) Reset() {
+	*x = AuditTransactionRequest{}
+	mi := &file_backoffice_service_v1_backoffice_bcpay_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AuditTransactionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AuditTransactionRequest) ProtoMessage() {}
+
+func (x *AuditTransactionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_bcpay_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AuditTransactionRequest.ProtoReflect.Descriptor instead.
+func (*AuditTransactionRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_bcpay_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *AuditTransactionRequest) GetTransactionId() string {
+	if x != nil {
+		return x.TransactionId
+	}
+	return ""
+}
+
+func (x *AuditTransactionRequest) GetAudit() string {
+	if x != nil {
+		return x.Audit
+	}
+	return ""
+}
+
 var File_backoffice_service_v1_backoffice_bcpay_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_bcpay_proto_rawDesc = "" +
 	"\n" +
-	",backoffice/service/v1/backoffice_bcpay.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cbcpay/service/v1/bcpay.proto2\xe2\a\n" +
-	"\x0fBackofficeBcpay\x12\x99\x01\n" +
-	"\x0eCreateMerchant\x12+.api.bcpay.service.v1.CreateMerchantRequest\x1a,.api.bcpay.service.v1.CreateMerchantResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/bcpay/merchant/add\x12\xa0\x01\n" +
-	"\x0fBankAccountList\x12,.api.bcpay.service.v1.BankAccountListRequest\x1a-.api.bcpay.service.v1.BankAccountListResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/bcpay/bankaccount/list\x12\x9c\x01\n" +
-	"\x0eAddBankAccount\x12+.api.bcpay.service.v1.AddBankAccountRequest\x1a,.api.bcpay.service.v1.AddBankAccountResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/bcpay/bankaccount/add\x12\xa8\x01\n" +
-	"\x11UpdateBankAccount\x12..api.bcpay.service.v1.UpdateBankAccountRequest\x1a/.api.bcpay.service.v1.UpdateBankAccountResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/bcpay/bankaccount/update\x12\xa0\x01\n" +
-	"\x0fTransactionList\x12,.api.bcpay.service.v1.TransactionListRequest\x1a-.api.bcpay.service.v1.TransactionListResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/bcpay/transaction/list\x12\xa2\x01\n" +
-	"\x10AuditTransaction\x12-.api.bcpay.service.v1.AuditTransactionRequest\x1a..api.bcpay.service.v1.AuditTransactionResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/bcpay/transaction/addB[\n" +
+	",backoffice/service/v1/backoffice_bcpay.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cbcpay/service/v1/bcpay.proto\x1a\x13common/common.proto\"(\n" +
+	"\x12GetMerchantRequest\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"\x92\x01\n" +
+	"\x16BankAccountListRequest\x12\x1a\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\\\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"]\n" +
+	"\x15AddBankAccountRequest\x12D\n" +
+	"\fbank_account\x18\x01 \x01(\v2!.api.bcpay.service.v1.BankAccountR\vbankAccount\"`\n" +
+	"\x18UpdateBankAccountRequest\x12D\n" +
+	"\fbank_account\x18\x01 \x01(\v2!.api.bcpay.service.v1.BankAccountR\vbankAccount\"v\n" +
+	"\x16TransactionListRequest\x12\\\n" +
+	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"V\n" +
+	"\x17AuditTransactionRequest\x12%\n" +
+	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12\x14\n" +
+	"\x05audit\x18\x02 \x01(\tR\x05audit2\xf7\a\n" +
+	"\x0fBackofficeBcpay\x12\x95\x01\n" +
+	"\vGetMerchant\x12-.api.backoffice.service.v1.GetMerchantRequest\x1a).api.bcpay.service.v1.GetMerchantResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/bcpay/merchant/add\x12\xa5\x01\n" +
+	"\x0fBankAccountList\x121.api.backoffice.service.v1.BankAccountListRequest\x1a-.api.bcpay.service.v1.BankAccountListResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/bcpay/bankaccount/list\x12\xa1\x01\n" +
+	"\x0eAddBankAccount\x120.api.backoffice.service.v1.AddBankAccountRequest\x1a,.api.bcpay.service.v1.AddBankAccountResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/bcpay/bankaccount/add\x12\xad\x01\n" +
+	"\x11UpdateBankAccount\x123.api.backoffice.service.v1.UpdateBankAccountRequest\x1a/.api.bcpay.service.v1.UpdateBankAccountResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/bcpay/bankaccount/update\x12\xa5\x01\n" +
+	"\x0fTransactionList\x121.api.backoffice.service.v1.TransactionListRequest\x1a-.api.bcpay.service.v1.TransactionListResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/bcpay/transaction/list\x12\xa7\x01\n" +
+	"\x10AuditTransaction\x122.api.backoffice.service.v1.AuditTransactionRequest\x1a..api.bcpay.service.v1.AuditTransactionResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/bcpay/transaction/addB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
+var (
+	file_backoffice_service_v1_backoffice_bcpay_proto_rawDescOnce sync.Once
+	file_backoffice_service_v1_backoffice_bcpay_proto_rawDescData []byte
+)
+
+func file_backoffice_service_v1_backoffice_bcpay_proto_rawDescGZIP() []byte {
+	file_backoffice_service_v1_backoffice_bcpay_proto_rawDescOnce.Do(func() {
+		file_backoffice_service_v1_backoffice_bcpay_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_bcpay_proto_rawDesc), len(file_backoffice_service_v1_backoffice_bcpay_proto_rawDesc)))
+	})
+	return file_backoffice_service_v1_backoffice_bcpay_proto_rawDescData
+}
+
+var file_backoffice_service_v1_backoffice_bcpay_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_backoffice_service_v1_backoffice_bcpay_proto_goTypes = []any{
-	(*v1.CreateMerchantRequest)(nil),     // 0: api.bcpay.service.v1.CreateMerchantRequest
-	(*v1.BankAccountListRequest)(nil),    // 1: api.bcpay.service.v1.BankAccountListRequest
-	(*v1.AddBankAccountRequest)(nil),     // 2: api.bcpay.service.v1.AddBankAccountRequest
-	(*v1.UpdateBankAccountRequest)(nil),  // 3: api.bcpay.service.v1.UpdateBankAccountRequest
-	(*v1.TransactionListRequest)(nil),    // 4: api.bcpay.service.v1.TransactionListRequest
-	(*v1.AuditTransactionRequest)(nil),   // 5: api.bcpay.service.v1.AuditTransactionRequest
-	(*v1.CreateMerchantResponse)(nil),    // 6: api.bcpay.service.v1.CreateMerchantResponse
-	(*v1.BankAccountListResponse)(nil),   // 7: api.bcpay.service.v1.BankAccountListResponse
-	(*v1.AddBankAccountResponse)(nil),    // 8: api.bcpay.service.v1.AddBankAccountResponse
-	(*v1.UpdateBankAccountResponse)(nil), // 9: api.bcpay.service.v1.UpdateBankAccountResponse
-	(*v1.TransactionListResponse)(nil),   // 10: api.bcpay.service.v1.TransactionListResponse
-	(*v1.AuditTransactionResponse)(nil),  // 11: api.bcpay.service.v1.AuditTransactionResponse
+	(*GetMerchantRequest)(nil),            // 0: api.backoffice.service.v1.GetMerchantRequest
+	(*BankAccountListRequest)(nil),        // 1: api.backoffice.service.v1.BankAccountListRequest
+	(*AddBankAccountRequest)(nil),         // 2: api.backoffice.service.v1.AddBankAccountRequest
+	(*UpdateBankAccountRequest)(nil),      // 3: api.backoffice.service.v1.UpdateBankAccountRequest
+	(*TransactionListRequest)(nil),        // 4: api.backoffice.service.v1.TransactionListRequest
+	(*AuditTransactionRequest)(nil),       // 5: api.backoffice.service.v1.AuditTransactionRequest
+	(*common.OperatorContextFilters)(nil), // 6: api.common.OperatorContextFilters
+	(*v1.BankAccount)(nil),                // 7: api.bcpay.service.v1.BankAccount
+	(*v1.GetMerchantResponse)(nil),        // 8: api.bcpay.service.v1.GetMerchantResponse
+	(*v1.BankAccountListResponse)(nil),    // 9: api.bcpay.service.v1.BankAccountListResponse
+	(*v1.AddBankAccountResponse)(nil),     // 10: api.bcpay.service.v1.AddBankAccountResponse
+	(*v1.UpdateBankAccountResponse)(nil),  // 11: api.bcpay.service.v1.UpdateBankAccountResponse
+	(*v1.TransactionListResponse)(nil),    // 12: api.bcpay.service.v1.TransactionListResponse
+	(*v1.AuditTransactionResponse)(nil),   // 13: api.bcpay.service.v1.AuditTransactionResponse
 }
 var file_backoffice_service_v1_backoffice_bcpay_proto_depIdxs = []int32{
-	0,  // 0: api.backoffice.service.v1.BackofficeBcpay.CreateMerchant:input_type -> api.bcpay.service.v1.CreateMerchantRequest
-	1,  // 1: api.backoffice.service.v1.BackofficeBcpay.BankAccountList:input_type -> api.bcpay.service.v1.BankAccountListRequest
-	2,  // 2: api.backoffice.service.v1.BackofficeBcpay.AddBankAccount:input_type -> api.bcpay.service.v1.AddBankAccountRequest
-	3,  // 3: api.backoffice.service.v1.BackofficeBcpay.UpdateBankAccount:input_type -> api.bcpay.service.v1.UpdateBankAccountRequest
-	4,  // 4: api.backoffice.service.v1.BackofficeBcpay.TransactionList:input_type -> api.bcpay.service.v1.TransactionListRequest
-	5,  // 5: api.backoffice.service.v1.BackofficeBcpay.AuditTransaction:input_type -> api.bcpay.service.v1.AuditTransactionRequest
-	6,  // 6: api.backoffice.service.v1.BackofficeBcpay.CreateMerchant:output_type -> api.bcpay.service.v1.CreateMerchantResponse
-	7,  // 7: api.backoffice.service.v1.BackofficeBcpay.BankAccountList:output_type -> api.bcpay.service.v1.BankAccountListResponse
-	8,  // 8: api.backoffice.service.v1.BackofficeBcpay.AddBankAccount:output_type -> api.bcpay.service.v1.AddBankAccountResponse
-	9,  // 9: api.backoffice.service.v1.BackofficeBcpay.UpdateBankAccount:output_type -> api.bcpay.service.v1.UpdateBankAccountResponse
-	10, // 10: api.backoffice.service.v1.BackofficeBcpay.TransactionList:output_type -> api.bcpay.service.v1.TransactionListResponse
-	11, // 11: api.backoffice.service.v1.BackofficeBcpay.AuditTransaction:output_type -> api.bcpay.service.v1.AuditTransactionResponse
-	6,  // [6:12] is the sub-list for method output_type
-	0,  // [0:6] is the sub-list for method input_type
-	0,  // [0:0] is the sub-list for extension type_name
-	0,  // [0:0] is the sub-list for extension extendee
-	0,  // [0:0] is the sub-list for field type_name
+	6,  // 0: api.backoffice.service.v1.BankAccountListRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	7,  // 1: api.backoffice.service.v1.AddBankAccountRequest.bank_account:type_name -> api.bcpay.service.v1.BankAccount
+	7,  // 2: api.backoffice.service.v1.UpdateBankAccountRequest.bank_account:type_name -> api.bcpay.service.v1.BankAccount
+	6,  // 3: api.backoffice.service.v1.TransactionListRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	0,  // 4: api.backoffice.service.v1.BackofficeBcpay.GetMerchant:input_type -> api.backoffice.service.v1.GetMerchantRequest
+	1,  // 5: api.backoffice.service.v1.BackofficeBcpay.BankAccountList:input_type -> api.backoffice.service.v1.BankAccountListRequest
+	2,  // 6: api.backoffice.service.v1.BackofficeBcpay.AddBankAccount:input_type -> api.backoffice.service.v1.AddBankAccountRequest
+	3,  // 7: api.backoffice.service.v1.BackofficeBcpay.UpdateBankAccount:input_type -> api.backoffice.service.v1.UpdateBankAccountRequest
+	4,  // 8: api.backoffice.service.v1.BackofficeBcpay.TransactionList:input_type -> api.backoffice.service.v1.TransactionListRequest
+	5,  // 9: api.backoffice.service.v1.BackofficeBcpay.AuditTransaction:input_type -> api.backoffice.service.v1.AuditTransactionRequest
+	8,  // 10: api.backoffice.service.v1.BackofficeBcpay.GetMerchant:output_type -> api.bcpay.service.v1.GetMerchantResponse
+	9,  // 11: api.backoffice.service.v1.BackofficeBcpay.BankAccountList:output_type -> api.bcpay.service.v1.BankAccountListResponse
+	10, // 12: api.backoffice.service.v1.BackofficeBcpay.AddBankAccount:output_type -> api.bcpay.service.v1.AddBankAccountResponse
+	11, // 13: api.backoffice.service.v1.BackofficeBcpay.UpdateBankAccount:output_type -> api.bcpay.service.v1.UpdateBankAccountResponse
+	12, // 14: api.backoffice.service.v1.BackofficeBcpay.TransactionList:output_type -> api.bcpay.service.v1.TransactionListResponse
+	13, // 15: api.backoffice.service.v1.BackofficeBcpay.AuditTransaction:output_type -> api.bcpay.service.v1.AuditTransactionResponse
+	10, // [10:16] is the sub-list for method output_type
+	4,  // [4:10] is the sub-list for method input_type
+	4,  // [4:4] is the sub-list for extension type_name
+	4,  // [4:4] is the sub-list for extension extendee
+	0,  // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_bcpay_proto_init() }
@@ -81,12 +397,13 @@ func file_backoffice_service_v1_backoffice_bcpay_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_bcpay_proto_rawDesc), len(file_backoffice_service_v1_backoffice_bcpay_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   0,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_backoffice_service_v1_backoffice_bcpay_proto_goTypes,
 		DependencyIndexes: file_backoffice_service_v1_backoffice_bcpay_proto_depIdxs,
+		MessageInfos:      file_backoffice_service_v1_backoffice_bcpay_proto_msgTypes,
 	}.Build()
 	File_backoffice_service_v1_backoffice_bcpay_proto = out.File
 	file_backoffice_service_v1_backoffice_bcpay_proto_goTypes = nil

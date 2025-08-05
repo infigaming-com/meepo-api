@@ -1155,7 +1155,7 @@ type UpdatePaymentChannelRequest struct {
 	// Max Amount
 	MaxAmount string `protobuf:"bytes,10,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
 	// enable status
-	Enable bool `protobuf:"varint,11,opt,name=enable,proto3" json:"enable,omitempty"`
+	Enable *bool `protobuf:"varint,11,opt,name=enable,proto3,oneof" json:"enable,omitempty"`
 	// Configuration fields for the payment channel in JSON format
 	Key           *structpb.Struct `protobuf:"bytes,12,opt,name=key,proto3" json:"key,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1263,8 +1263,8 @@ func (x *UpdatePaymentChannelRequest) GetMaxAmount() string {
 }
 
 func (x *UpdatePaymentChannelRequest) GetEnable() bool {
-	if x != nil {
-		return x.Enable
+	if x != nil && x.Enable != nil {
+		return *x.Enable
 	}
 	return false
 }
@@ -4988,7 +4988,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"min_amount\x18\v \x01(\tR\tminAmount\x12\x1d\n" +
 	"\n" +
 	"max_amount\x18\f \x01(\tR\tmaxAmount\x12)\n" +
-	"\x03key\x18\r \x01(\v2\x17.google.protobuf.StructR\x03key\"\xa3\x03\n" +
+	"\x03key\x18\r \x01(\v2\x17.google.protobuf.StructR\x03key\"\xb3\x03\n" +
 	"\x1bUpdatePaymentChannelRequest\x12,\n" +
 	"\x12payment_channel_id\x18\x01 \x01(\tR\x10paymentChannelId\x12\x18\n" +
 	"\acontact\x18\x02 \x01(\tR\acontact\x12\x1b\n" +
@@ -5003,9 +5003,10 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"min_amount\x18\t \x01(\tR\tminAmount\x12\x1d\n" +
 	"\n" +
 	"max_amount\x18\n" +
-	" \x01(\tR\tmaxAmount\x12\x16\n" +
-	"\x06enable\x18\v \x01(\bR\x06enable\x12)\n" +
-	"\x03key\x18\f \x01(\v2\x17.google.protobuf.StructR\x03key\"=\n" +
+	" \x01(\tR\tmaxAmount\x12\x1b\n" +
+	"\x06enable\x18\v \x01(\bH\x00R\x06enable\x88\x01\x01\x12)\n" +
+	"\x03key\x18\f \x01(\v2\x17.google.protobuf.StructR\x03keyB\t\n" +
+	"\a_enable\"=\n" +
 	"\x1cCreatePaymentChannelResponse\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xa8\f\n" +
@@ -5577,6 +5578,7 @@ func file_payment_service_v1_payment_proto_init() {
 		return
 	}
 	file_payment_service_v1_payment_proto_msgTypes[1].OneofWrappers = []any{}
+	file_payment_service_v1_payment_proto_msgTypes[9].OneofWrappers = []any{}
 	file_payment_service_v1_payment_proto_msgTypes[31].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

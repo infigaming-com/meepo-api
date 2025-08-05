@@ -23,22 +23,22 @@ const _ = http.SupportPackageIsVersion1
 const OperationBackofficeBcpayAddBankAccount = "/api.backoffice.service.v1.BackofficeBcpay/AddBankAccount"
 const OperationBackofficeBcpayAuditTransaction = "/api.backoffice.service.v1.BackofficeBcpay/AuditTransaction"
 const OperationBackofficeBcpayBankAccountList = "/api.backoffice.service.v1.BackofficeBcpay/BankAccountList"
-const OperationBackofficeBcpayCreateMerchant = "/api.backoffice.service.v1.BackofficeBcpay/CreateMerchant"
+const OperationBackofficeBcpayGetMerchant = "/api.backoffice.service.v1.BackofficeBcpay/GetMerchant"
 const OperationBackofficeBcpayTransactionList = "/api.backoffice.service.v1.BackofficeBcpay/TransactionList"
 const OperationBackofficeBcpayUpdateBankAccount = "/api.backoffice.service.v1.BackofficeBcpay/UpdateBankAccount"
 
 type BackofficeBcpayHTTPServer interface {
-	AddBankAccount(context.Context, *v1.AddBankAccountRequest) (*v1.AddBankAccountResponse, error)
-	AuditTransaction(context.Context, *v1.AuditTransactionRequest) (*v1.AuditTransactionResponse, error)
-	BankAccountList(context.Context, *v1.BankAccountListRequest) (*v1.BankAccountListResponse, error)
-	CreateMerchant(context.Context, *v1.CreateMerchantRequest) (*v1.CreateMerchantResponse, error)
-	TransactionList(context.Context, *v1.TransactionListRequest) (*v1.TransactionListResponse, error)
-	UpdateBankAccount(context.Context, *v1.UpdateBankAccountRequest) (*v1.UpdateBankAccountResponse, error)
+	AddBankAccount(context.Context, *AddBankAccountRequest) (*v1.AddBankAccountResponse, error)
+	AuditTransaction(context.Context, *AuditTransactionRequest) (*v1.AuditTransactionResponse, error)
+	BankAccountList(context.Context, *BankAccountListRequest) (*v1.BankAccountListResponse, error)
+	GetMerchant(context.Context, *GetMerchantRequest) (*v1.GetMerchantResponse, error)
+	TransactionList(context.Context, *TransactionListRequest) (*v1.TransactionListResponse, error)
+	UpdateBankAccount(context.Context, *UpdateBankAccountRequest) (*v1.UpdateBankAccountResponse, error)
 }
 
 func RegisterBackofficeBcpayHTTPServer(s *http.Server, srv BackofficeBcpayHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/backoffice/bcpay/merchant/add", _BackofficeBcpay_CreateMerchant0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/bcpay/merchant/add", _BackofficeBcpay_GetMerchant0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/bcpay/bankaccount/list", _BackofficeBcpay_BankAccountList0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/bcpay/bankaccount/add", _BackofficeBcpay_AddBankAccount0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/bcpay/bankaccount/update", _BackofficeBcpay_UpdateBankAccount0_HTTP_Handler(srv))
@@ -46,31 +46,31 @@ func RegisterBackofficeBcpayHTTPServer(s *http.Server, srv BackofficeBcpayHTTPSe
 	r.POST("/v1/backoffice/bcpay/transaction/add", _BackofficeBcpay_AuditTransaction0_HTTP_Handler(srv))
 }
 
-func _BackofficeBcpay_CreateMerchant0_HTTP_Handler(srv BackofficeBcpayHTTPServer) func(ctx http.Context) error {
+func _BackofficeBcpay_GetMerchant0_HTTP_Handler(srv BackofficeBcpayHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.CreateMerchantRequest
+		var in GetMerchantRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeBcpayCreateMerchant)
+		http.SetOperation(ctx, OperationBackofficeBcpayGetMerchant)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.CreateMerchant(ctx, req.(*v1.CreateMerchantRequest))
+			return srv.GetMerchant(ctx, req.(*GetMerchantRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*v1.CreateMerchantResponse)
+		reply := out.(*v1.GetMerchantResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
 func _BackofficeBcpay_BankAccountList0_HTTP_Handler(srv BackofficeBcpayHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.BankAccountListRequest
+		var in BankAccountListRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -79,7 +79,7 @@ func _BackofficeBcpay_BankAccountList0_HTTP_Handler(srv BackofficeBcpayHTTPServe
 		}
 		http.SetOperation(ctx, OperationBackofficeBcpayBankAccountList)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.BankAccountList(ctx, req.(*v1.BankAccountListRequest))
+			return srv.BankAccountList(ctx, req.(*BankAccountListRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -92,7 +92,7 @@ func _BackofficeBcpay_BankAccountList0_HTTP_Handler(srv BackofficeBcpayHTTPServe
 
 func _BackofficeBcpay_AddBankAccount0_HTTP_Handler(srv BackofficeBcpayHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.AddBankAccountRequest
+		var in AddBankAccountRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -101,7 +101,7 @@ func _BackofficeBcpay_AddBankAccount0_HTTP_Handler(srv BackofficeBcpayHTTPServer
 		}
 		http.SetOperation(ctx, OperationBackofficeBcpayAddBankAccount)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.AddBankAccount(ctx, req.(*v1.AddBankAccountRequest))
+			return srv.AddBankAccount(ctx, req.(*AddBankAccountRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -114,7 +114,7 @@ func _BackofficeBcpay_AddBankAccount0_HTTP_Handler(srv BackofficeBcpayHTTPServer
 
 func _BackofficeBcpay_UpdateBankAccount0_HTTP_Handler(srv BackofficeBcpayHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.UpdateBankAccountRequest
+		var in UpdateBankAccountRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -123,7 +123,7 @@ func _BackofficeBcpay_UpdateBankAccount0_HTTP_Handler(srv BackofficeBcpayHTTPSer
 		}
 		http.SetOperation(ctx, OperationBackofficeBcpayUpdateBankAccount)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.UpdateBankAccount(ctx, req.(*v1.UpdateBankAccountRequest))
+			return srv.UpdateBankAccount(ctx, req.(*UpdateBankAccountRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -136,7 +136,7 @@ func _BackofficeBcpay_UpdateBankAccount0_HTTP_Handler(srv BackofficeBcpayHTTPSer
 
 func _BackofficeBcpay_TransactionList0_HTTP_Handler(srv BackofficeBcpayHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.TransactionListRequest
+		var in TransactionListRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -145,7 +145,7 @@ func _BackofficeBcpay_TransactionList0_HTTP_Handler(srv BackofficeBcpayHTTPServe
 		}
 		http.SetOperation(ctx, OperationBackofficeBcpayTransactionList)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.TransactionList(ctx, req.(*v1.TransactionListRequest))
+			return srv.TransactionList(ctx, req.(*TransactionListRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -158,7 +158,7 @@ func _BackofficeBcpay_TransactionList0_HTTP_Handler(srv BackofficeBcpayHTTPServe
 
 func _BackofficeBcpay_AuditTransaction0_HTTP_Handler(srv BackofficeBcpayHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.AuditTransactionRequest
+		var in AuditTransactionRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -167,7 +167,7 @@ func _BackofficeBcpay_AuditTransaction0_HTTP_Handler(srv BackofficeBcpayHTTPServ
 		}
 		http.SetOperation(ctx, OperationBackofficeBcpayAuditTransaction)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.AuditTransaction(ctx, req.(*v1.AuditTransactionRequest))
+			return srv.AuditTransaction(ctx, req.(*AuditTransactionRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -179,12 +179,12 @@ func _BackofficeBcpay_AuditTransaction0_HTTP_Handler(srv BackofficeBcpayHTTPServ
 }
 
 type BackofficeBcpayHTTPClient interface {
-	AddBankAccount(ctx context.Context, req *v1.AddBankAccountRequest, opts ...http.CallOption) (rsp *v1.AddBankAccountResponse, err error)
-	AuditTransaction(ctx context.Context, req *v1.AuditTransactionRequest, opts ...http.CallOption) (rsp *v1.AuditTransactionResponse, err error)
-	BankAccountList(ctx context.Context, req *v1.BankAccountListRequest, opts ...http.CallOption) (rsp *v1.BankAccountListResponse, err error)
-	CreateMerchant(ctx context.Context, req *v1.CreateMerchantRequest, opts ...http.CallOption) (rsp *v1.CreateMerchantResponse, err error)
-	TransactionList(ctx context.Context, req *v1.TransactionListRequest, opts ...http.CallOption) (rsp *v1.TransactionListResponse, err error)
-	UpdateBankAccount(ctx context.Context, req *v1.UpdateBankAccountRequest, opts ...http.CallOption) (rsp *v1.UpdateBankAccountResponse, err error)
+	AddBankAccount(ctx context.Context, req *AddBankAccountRequest, opts ...http.CallOption) (rsp *v1.AddBankAccountResponse, err error)
+	AuditTransaction(ctx context.Context, req *AuditTransactionRequest, opts ...http.CallOption) (rsp *v1.AuditTransactionResponse, err error)
+	BankAccountList(ctx context.Context, req *BankAccountListRequest, opts ...http.CallOption) (rsp *v1.BankAccountListResponse, err error)
+	GetMerchant(ctx context.Context, req *GetMerchantRequest, opts ...http.CallOption) (rsp *v1.GetMerchantResponse, err error)
+	TransactionList(ctx context.Context, req *TransactionListRequest, opts ...http.CallOption) (rsp *v1.TransactionListResponse, err error)
+	UpdateBankAccount(ctx context.Context, req *UpdateBankAccountRequest, opts ...http.CallOption) (rsp *v1.UpdateBankAccountResponse, err error)
 }
 
 type BackofficeBcpayHTTPClientImpl struct {
@@ -195,7 +195,7 @@ func NewBackofficeBcpayHTTPClient(client *http.Client) BackofficeBcpayHTTPClient
 	return &BackofficeBcpayHTTPClientImpl{client}
 }
 
-func (c *BackofficeBcpayHTTPClientImpl) AddBankAccount(ctx context.Context, in *v1.AddBankAccountRequest, opts ...http.CallOption) (*v1.AddBankAccountResponse, error) {
+func (c *BackofficeBcpayHTTPClientImpl) AddBankAccount(ctx context.Context, in *AddBankAccountRequest, opts ...http.CallOption) (*v1.AddBankAccountResponse, error) {
 	var out v1.AddBankAccountResponse
 	pattern := "/v1/backoffice/bcpay/bankaccount/add"
 	path := binding.EncodeURL(pattern, in, false)
@@ -208,7 +208,7 @@ func (c *BackofficeBcpayHTTPClientImpl) AddBankAccount(ctx context.Context, in *
 	return &out, nil
 }
 
-func (c *BackofficeBcpayHTTPClientImpl) AuditTransaction(ctx context.Context, in *v1.AuditTransactionRequest, opts ...http.CallOption) (*v1.AuditTransactionResponse, error) {
+func (c *BackofficeBcpayHTTPClientImpl) AuditTransaction(ctx context.Context, in *AuditTransactionRequest, opts ...http.CallOption) (*v1.AuditTransactionResponse, error) {
 	var out v1.AuditTransactionResponse
 	pattern := "/v1/backoffice/bcpay/transaction/add"
 	path := binding.EncodeURL(pattern, in, false)
@@ -221,7 +221,7 @@ func (c *BackofficeBcpayHTTPClientImpl) AuditTransaction(ctx context.Context, in
 	return &out, nil
 }
 
-func (c *BackofficeBcpayHTTPClientImpl) BankAccountList(ctx context.Context, in *v1.BankAccountListRequest, opts ...http.CallOption) (*v1.BankAccountListResponse, error) {
+func (c *BackofficeBcpayHTTPClientImpl) BankAccountList(ctx context.Context, in *BankAccountListRequest, opts ...http.CallOption) (*v1.BankAccountListResponse, error) {
 	var out v1.BankAccountListResponse
 	pattern := "/v1/backoffice/bcpay/bankaccount/list"
 	path := binding.EncodeURL(pattern, in, false)
@@ -234,11 +234,11 @@ func (c *BackofficeBcpayHTTPClientImpl) BankAccountList(ctx context.Context, in 
 	return &out, nil
 }
 
-func (c *BackofficeBcpayHTTPClientImpl) CreateMerchant(ctx context.Context, in *v1.CreateMerchantRequest, opts ...http.CallOption) (*v1.CreateMerchantResponse, error) {
-	var out v1.CreateMerchantResponse
+func (c *BackofficeBcpayHTTPClientImpl) GetMerchant(ctx context.Context, in *GetMerchantRequest, opts ...http.CallOption) (*v1.GetMerchantResponse, error) {
+	var out v1.GetMerchantResponse
 	pattern := "/v1/backoffice/bcpay/merchant/add"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeBcpayCreateMerchant))
+	opts = append(opts, http.Operation(OperationBackofficeBcpayGetMerchant))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -247,7 +247,7 @@ func (c *BackofficeBcpayHTTPClientImpl) CreateMerchant(ctx context.Context, in *
 	return &out, nil
 }
 
-func (c *BackofficeBcpayHTTPClientImpl) TransactionList(ctx context.Context, in *v1.TransactionListRequest, opts ...http.CallOption) (*v1.TransactionListResponse, error) {
+func (c *BackofficeBcpayHTTPClientImpl) TransactionList(ctx context.Context, in *TransactionListRequest, opts ...http.CallOption) (*v1.TransactionListResponse, error) {
 	var out v1.TransactionListResponse
 	pattern := "/v1/backoffice/bcpay/transaction/list"
 	path := binding.EncodeURL(pattern, in, false)
@@ -260,7 +260,7 @@ func (c *BackofficeBcpayHTTPClientImpl) TransactionList(ctx context.Context, in 
 	return &out, nil
 }
 
-func (c *BackofficeBcpayHTTPClientImpl) UpdateBankAccount(ctx context.Context, in *v1.UpdateBankAccountRequest, opts ...http.CallOption) (*v1.UpdateBankAccountResponse, error) {
+func (c *BackofficeBcpayHTTPClientImpl) UpdateBankAccount(ctx context.Context, in *UpdateBankAccountRequest, opts ...http.CallOption) (*v1.UpdateBankAccountResponse, error) {
 	var out v1.UpdateBankAccountResponse
 	pattern := "/v1/backoffice/bcpay/bankaccount/update"
 	path := binding.EncodeURL(pattern, in, false)
