@@ -272,7 +272,9 @@ message GetOperatorTicketResponse {
 		string amount_sent_reporting_currency = 10;
 		string gas = 11;
 		string fee = 12;
-		google.protobuf.Timestamp created_at = 13;
+		string fee_usd = 13;
+		string fee_reporting_currency = 14;
+		google.protobuf.Timestamp created_at = 15;
 	}
 	message WalletBalanceInfo {
 		string balance = 1;
