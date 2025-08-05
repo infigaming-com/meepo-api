@@ -256,6 +256,10 @@ service User {
 	// ListOperatorDetails returns a list of operator details
 	rpc ListOperatorDetails(ListOperatorDetailsRequest) returns (ListOperatorDetailsResponse) {
 	}
+
+	// GetOperatorDetailsByUserId returns the operator details which the user belongs to
+	rpc GetOperatorDetailsByUserId(GetOperatorDetailsByUserIdRequest) returns (GetOperatorDetailsByUserIdResponse) {
+	}
 }
 
 // UserInfo contains basic user information.
@@ -1180,4 +1184,12 @@ message ListOperatorDetailsRequest {
 
 message ListOperatorDetailsResponse {
 	repeated OperatorDetails operator_details_list = 1;
+}
+
+message GetOperatorDetailsByUserIdRequest {
+	int64 user_id = 1;
+}
+
+message GetOperatorDetailsByUserIdResponse {
+	OperatorDetails operator_details = 1;
 }

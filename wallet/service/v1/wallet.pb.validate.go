@@ -4096,8 +4096,6 @@ func (m *GetUserTransactionSummaryResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for ReportingCurrency
-
 	// no validation rules for TotalDepositUsd
 
 	// no validation rules for TotalWithdrawUsd
@@ -4474,8 +4472,6 @@ func (m *GetBackofficeUserOverviewFromWalletResponse) validate(all bool) error {
 	// no validation rules for WithdrawToDepositRatio
 
 	// no validation rules for Rtp
-
-	// no validation rules for ReportingCurrency
 
 	// no validation rules for BalanceReportingCurrency
 
@@ -6831,8 +6827,6 @@ func (m *OperatorBalance) validate(all bool) error {
 	// no validation rules for OperatorName
 
 	// no validation rules for Currency
-
-	// no validation rules for ReportingCurrency
 
 	// no validation rules for Protocol
 
