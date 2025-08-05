@@ -10308,8 +10308,6 @@ components:
                     type: string
                 currency:
                     type: string
-                reportingCurrency:
-                    type: string
                 protocol:
                     type: string
                 cash:
