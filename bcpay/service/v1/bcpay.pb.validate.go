@@ -479,22 +479,22 @@ var _ interface {
 	ErrorName() string
 } = CreateWithdrawResponseValidationError{}
 
-// Validate checks the field values on CreateMerchantRequest with the rules
+// Validate checks the field values on GetMerchantRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *CreateMerchantRequest) Validate() error {
+func (m *GetMerchantRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on CreateMerchantRequest with the rules
+// ValidateAll checks the field values on GetMerchantRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// CreateMerchantRequestMultiError, or nil if none found.
-func (m *CreateMerchantRequest) ValidateAll() error {
+// GetMerchantRequestMultiError, or nil if none found.
+func (m *GetMerchantRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *CreateMerchantRequest) validate(all bool) error {
+func (m *GetMerchantRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -503,22 +503,49 @@ func (m *CreateMerchantRequest) validate(all bool) error {
 
 	// no validation rules for Name
 
-	// no validation rules for OperatorId
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetMerchantRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetMerchantRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetMerchantRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
-		return CreateMerchantRequestMultiError(errors)
+		return GetMerchantRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// CreateMerchantRequestMultiError is an error wrapping multiple validation
-// errors returned by CreateMerchantRequest.ValidateAll() if the designated
-// constraints aren't met.
-type CreateMerchantRequestMultiError []error
+// GetMerchantRequestMultiError is an error wrapping multiple validation errors
+// returned by GetMerchantRequest.ValidateAll() if the designated constraints
+// aren't met.
+type GetMerchantRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m CreateMerchantRequestMultiError) Error() string {
+func (m GetMerchantRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -527,11 +554,11 @@ func (m CreateMerchantRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m CreateMerchantRequestMultiError) AllErrors() []error { return m }
+func (m GetMerchantRequestMultiError) AllErrors() []error { return m }
 
-// CreateMerchantRequestValidationError is the validation error returned by
-// CreateMerchantRequest.Validate if the designated constraints aren't met.
-type CreateMerchantRequestValidationError struct {
+// GetMerchantRequestValidationError is the validation error returned by
+// GetMerchantRequest.Validate if the designated constraints aren't met.
+type GetMerchantRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -539,24 +566,24 @@ type CreateMerchantRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e CreateMerchantRequestValidationError) Field() string { return e.field }
+func (e GetMerchantRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e CreateMerchantRequestValidationError) Reason() string { return e.reason }
+func (e GetMerchantRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e CreateMerchantRequestValidationError) Cause() error { return e.cause }
+func (e GetMerchantRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e CreateMerchantRequestValidationError) Key() bool { return e.key }
+func (e GetMerchantRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e CreateMerchantRequestValidationError) ErrorName() string {
-	return "CreateMerchantRequestValidationError"
+func (e GetMerchantRequestValidationError) ErrorName() string {
+	return "GetMerchantRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e CreateMerchantRequestValidationError) Error() string {
+func (e GetMerchantRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -568,14 +595,14 @@ func (e CreateMerchantRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sCreateMerchantRequest.%s: %s%s",
+		"invalid %sGetMerchantRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = CreateMerchantRequestValidationError{}
+var _ error = GetMerchantRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -583,24 +610,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = CreateMerchantRequestValidationError{}
+} = GetMerchantRequestValidationError{}
 
-// Validate checks the field values on CreateMerchantResponse with the rules
+// Validate checks the field values on GetMerchantResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *CreateMerchantResponse) Validate() error {
+func (m *GetMerchantResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on CreateMerchantResponse with the rules
+// ValidateAll checks the field values on GetMerchantResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// CreateMerchantResponseMultiError, or nil if none found.
-func (m *CreateMerchantResponse) ValidateAll() error {
+// GetMerchantResponseMultiError, or nil if none found.
+func (m *GetMerchantResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *CreateMerchantResponse) validate(all bool) error {
+func (m *GetMerchantResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -609,24 +636,20 @@ func (m *CreateMerchantResponse) validate(all bool) error {
 
 	// no validation rules for MerchantId
 
-	// no validation rules for ApiKeyPublic
-
-	// no validation rules for ApiKeySecret
-
 	if len(errors) > 0 {
-		return CreateMerchantResponseMultiError(errors)
+		return GetMerchantResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// CreateMerchantResponseMultiError is an error wrapping multiple validation
-// errors returned by CreateMerchantResponse.ValidateAll() if the designated
+// GetMerchantResponseMultiError is an error wrapping multiple validation
+// errors returned by GetMerchantResponse.ValidateAll() if the designated
 // constraints aren't met.
-type CreateMerchantResponseMultiError []error
+type GetMerchantResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m CreateMerchantResponseMultiError) Error() string {
+func (m GetMerchantResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -635,11 +658,11 @@ func (m CreateMerchantResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m CreateMerchantResponseMultiError) AllErrors() []error { return m }
+func (m GetMerchantResponseMultiError) AllErrors() []error { return m }
 
-// CreateMerchantResponseValidationError is the validation error returned by
-// CreateMerchantResponse.Validate if the designated constraints aren't met.
-type CreateMerchantResponseValidationError struct {
+// GetMerchantResponseValidationError is the validation error returned by
+// GetMerchantResponse.Validate if the designated constraints aren't met.
+type GetMerchantResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -647,24 +670,24 @@ type CreateMerchantResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e CreateMerchantResponseValidationError) Field() string { return e.field }
+func (e GetMerchantResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e CreateMerchantResponseValidationError) Reason() string { return e.reason }
+func (e GetMerchantResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e CreateMerchantResponseValidationError) Cause() error { return e.cause }
+func (e GetMerchantResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e CreateMerchantResponseValidationError) Key() bool { return e.key }
+func (e GetMerchantResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e CreateMerchantResponseValidationError) ErrorName() string {
-	return "CreateMerchantResponseValidationError"
+func (e GetMerchantResponseValidationError) ErrorName() string {
+	return "GetMerchantResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e CreateMerchantResponseValidationError) Error() string {
+func (e GetMerchantResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -676,14 +699,14 @@ func (e CreateMerchantResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sCreateMerchantResponse.%s: %s%s",
+		"invalid %sGetMerchantResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = CreateMerchantResponseValidationError{}
+var _ error = GetMerchantResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -691,7 +714,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = CreateMerchantResponseValidationError{}
+} = GetMerchantResponseValidationError{}
 
 // Validate checks the field values on BankAccount with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
@@ -840,9 +863,65 @@ func (m *BankAccountListRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for MerchantId
-
 	// no validation rules for Currency
+
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, BankAccountListRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, BankAccountListRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return BankAccountListRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, BankAccountListRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, BankAccountListRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return BankAccountListRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
 		return BankAccountListRequestMultiError(errors)
@@ -1111,6 +1190,35 @@ func (m *AddBankAccountRequest) validate(all bool) error {
 		}
 	}
 
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AddBankAccountRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AddBankAccountRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AddBankAccountRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return AddBankAccountRequestMultiError(errors)
 	}
@@ -1373,6 +1481,35 @@ func (m *UpdateBankAccountRequest) validate(all bool) error {
 		}
 	}
 
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateBankAccountRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateBankAccountRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateBankAccountRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return UpdateBankAccountRequestMultiError(errors)
 	}
@@ -1605,6 +1742,64 @@ func (m *TransactionListRequest) validate(all bool) error {
 	}
 
 	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, TransactionListRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, TransactionListRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return TransactionListRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, TransactionListRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, TransactionListRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return TransactionListRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
 		return TransactionListRequestMultiError(errors)
@@ -1980,6 +2175,35 @@ func (m *AuditTransactionRequest) validate(all bool) error {
 	// no validation rules for TransactionId
 
 	// no validation rules for Audit
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AuditTransactionRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AuditTransactionRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AuditTransactionRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
 		return AuditTransactionRequestMultiError(errors)

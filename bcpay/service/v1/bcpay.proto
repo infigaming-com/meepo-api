@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 import "google/api/annotations.proto";
+import "common/common.proto";
 
 package api.bcpay.service.v1;
 
@@ -25,7 +26,7 @@ service Bcpay {
 	}
 	
 
-	rpc CreateMerchant(CreateMerchantRequest) returns (CreateMerchantResponse) { }
+	rpc GetMerchant(GetMerchantRequest) returns (GetMerchantResponse) { }
 
 	rpc BankAccountList(BankAccountListRequest) returns (BankAccountListResponse) { }
 
@@ -73,15 +74,15 @@ message CreateWithdrawResponse {
 
 
 
-message CreateMerchantRequest {
+message GetMerchantRequest {
 	string name = 1;
-	string operator_id = 2;
+  api.common.OperatorContext operator_context = 2;
 }
 
-message CreateMerchantResponse {
+message GetMerchantResponse {
 	string merchant_id = 1;
-	string api_key_public = 2;
-	string api_key_secret = 3;
+	// string api_key_public = 2;
+	// string api_key_secret = 3;
 	
 }
 
@@ -102,8 +103,9 @@ message BankAccount {
 }
 
 message BankAccountListRequest {
-	string merchant_id = 1;
-	string currency = 2;
+	string currency = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  api.common.OperatorContext operator_context = 3;
 }
 
 message BankAccountListResponse {
@@ -112,6 +114,7 @@ message BankAccountListResponse {
 
 message AddBankAccountRequest {
 	BankAccount bank_account = 1;
+  api.common.OperatorContext operator_context = 2;
 }
 
 message AddBankAccountResponse {
@@ -120,6 +123,7 @@ message AddBankAccountResponse {
 
 message UpdateBankAccountRequest {
 	BankAccount bank_account = 1;
+  api.common.OperatorContext operator_context = 2;
 }
 
 message UpdateBankAccountResponse {
@@ -127,6 +131,8 @@ message UpdateBankAccountResponse {
 }
 
 message TransactionListRequest {
+  api.common.OperatorContextFilters operator_context_filters = 1;
+  api.common.OperatorContext operator_context = 2;
 }
 
 message Transaction {
@@ -156,9 +162,8 @@ message TransactionListResponse {
 
 message AuditTransactionRequest {
 	string transaction_id = 1;
-	// audit a transaction "approve" or "deline"
 	string audit = 2;
-	
+  api.common.OperatorContext operator_context = 3;
 }
 
 message AuditTransactionResponse {

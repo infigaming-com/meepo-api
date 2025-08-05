@@ -469,7 +469,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.bcpay.service.v1.AddBankAccountRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AddBankAccountRequest'
                 required: true
             responses:
                 "200":
@@ -487,7 +487,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.bcpay.service.v1.BankAccountListRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BankAccountListRequest'
                 required: true
             responses:
                 "200":
@@ -505,7 +505,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.bcpay.service.v1.UpdateBankAccountRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateBankAccountRequest'
                 required: true
             responses:
                 "200":
@@ -518,12 +518,12 @@ paths:
         post:
             tags:
                 - BackofficeBcpay
-            operationId: BackofficeBcpay_CreateMerchant
+            operationId: BackofficeBcpay_GetMerchant
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.bcpay.service.v1.CreateMerchantRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetMerchantRequest'
                 required: true
             responses:
                 "200":
@@ -531,7 +531,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.bcpay.service.v1.CreateMerchantResponse'
+                                $ref: '#/components/schemas/api.bcpay.service.v1.GetMerchantResponse'
     /v1/backoffice/bcpay/transaction/add:
         post:
             tags:
@@ -541,7 +541,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.bcpay.service.v1.AuditTransactionRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AuditTransactionRequest'
                 required: true
             responses:
                 "200":
@@ -559,7 +559,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.bcpay.service.v1.TransactionListRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.TransactionListRequest'
                 required: true
             responses:
                 "200":
@@ -3523,6 +3523,11 @@ components:
         api.backoffice.service.v1.AddAdjustmentResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.AddBankAccountRequest:
+            type: object
+            properties:
+                bankAccount:
+                    $ref: '#/components/schemas/api.bcpay.service.v1.BankAccount'
         api.backoffice.service.v1.AddCommentRequest:
             type: object
             properties:
@@ -3633,6 +3638,21 @@ components:
                     type: string
                 errorMessage:
                     type: string
+        api.backoffice.service.v1.AuditTransactionRequest:
+            type: object
+            properties:
+                transactionId:
+                    type: string
+                audit:
+                    type: string
+                    description: audit a transaction "approve" or "deline"
+        api.backoffice.service.v1.BankAccountListRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.Bet:
             type: object
             properties:
@@ -4574,6 +4594,11 @@ components:
                 totalOutcome:
                     type: string
                 billingPeriod:
+                    type: string
+        api.backoffice.service.v1.GetMerchantRequest:
+            type: object
+            properties:
+                name:
                     type: string
         api.backoffice.service.v1.GetOperatorAddressRequest:
             type: object
@@ -8564,6 +8589,11 @@ components:
                     type: string
                 endTime:
                     type: string
+        api.backoffice.service.v1.TransactionListRequest:
+            type: object
+            properties:
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.Unbind2faRequest:
             type: object
             properties:
@@ -8598,6 +8628,11 @@ components:
         api.backoffice.service.v1.UpdateAdjustmentConfigResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.UpdateBankAccountRequest:
+            type: object
+            properties:
+                bankAccount:
+                    $ref: '#/components/schemas/api.bcpay.service.v1.BankAccount'
         api.backoffice.service.v1.UpdateGameRequest:
             type: object
             properties:
@@ -8789,24 +8824,11 @@ components:
                 decimalPlaces:
                     type: integer
                     format: int32
-        api.bcpay.service.v1.AddBankAccountRequest:
-            type: object
-            properties:
-                bankAccount:
-                    $ref: '#/components/schemas/api.bcpay.service.v1.BankAccount'
         api.bcpay.service.v1.AddBankAccountResponse:
             type: object
             properties:
                 bankAccount:
                     $ref: '#/components/schemas/api.bcpay.service.v1.BankAccount'
-        api.bcpay.service.v1.AuditTransactionRequest:
-            type: object
-            properties:
-                transactionId:
-                    type: string
-                audit:
-                    type: string
-                    description: audit a transaction "approve" or "deline"
         api.bcpay.service.v1.AuditTransactionResponse:
             type: object
             properties:
@@ -8843,13 +8865,6 @@ components:
                     format: int32
                 enable:
                     type: boolean
-        api.bcpay.service.v1.BankAccountListRequest:
-            type: object
-            properties:
-                merchantId:
-                    type: string
-                currency:
-                    type: string
         api.bcpay.service.v1.BankAccountListResponse:
             type: object
             properties:
@@ -8857,22 +8872,6 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.bcpay.service.v1.BankAccount'
-        api.bcpay.service.v1.CreateMerchantRequest:
-            type: object
-            properties:
-                name:
-                    type: string
-                operatorId:
-                    type: string
-        api.bcpay.service.v1.CreateMerchantResponse:
-            type: object
-            properties:
-                merchantId:
-                    type: string
-                apiKeyPublic:
-                    type: string
-                apiKeySecret:
-                    type: string
         api.bcpay.service.v1.CreateWithdrawRequest:
             type: object
             properties:
@@ -8922,6 +8921,11 @@ components:
                     type: string
                 iban:
                     type: string
+        api.bcpay.service.v1.GetMerchantResponse:
+            type: object
+            properties:
+                merchantId:
+                    type: string
         api.bcpay.service.v1.Transaction:
             type: object
             properties:
@@ -8960,9 +8964,6 @@ components:
                     type: string
                 updateTime:
                     type: string
-        api.bcpay.service.v1.TransactionListRequest:
-            type: object
-            properties: {}
         api.bcpay.service.v1.TransactionListResponse:
             type: object
             properties:
@@ -8970,11 +8971,6 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.bcpay.service.v1.Transaction'
-        api.bcpay.service.v1.UpdateBankAccountRequest:
-            type: object
-            properties:
-                bankAccount:
-                    $ref: '#/components/schemas/api.bcpay.service.v1.BankAccount'
         api.bcpay.service.v1.UpdateBankAccountResponse:
             type: object
             properties:
