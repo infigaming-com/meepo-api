@@ -3014,13 +3014,14 @@ type TransactionInfo struct {
 	// Transaction amount in USD
 	AmountUsd string `protobuf:"bytes,26,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
 	// Transaction amount actually sent through
-	AmountSent                  string `protobuf:"bytes,27,opt,name=amount_sent,json=amountSent,proto3" json:"amount_sent,omitempty"`
-	Gas                         string `protobuf:"bytes,28,opt,name=gas,proto3" json:"gas,omitempty"`
-	ReportingCurrency           string `protobuf:"bytes,29,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
-	AmountReportingCurrency     string `protobuf:"bytes,30,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
-	AmountSentReportingCurrency string `protobuf:"bytes,31,opt,name=amount_sent_reporting_currency,json=amountSentReportingCurrency,proto3" json:"amount_sent_reporting_currency,omitempty"`
-	unknownFields               protoimpl.UnknownFields
-	sizeCache                   protoimpl.SizeCache
+	AmountSent                     string `protobuf:"bytes,27,opt,name=amount_sent,json=amountSent,proto3" json:"amount_sent,omitempty"`
+	Gas                            string `protobuf:"bytes,28,opt,name=gas,proto3" json:"gas,omitempty"`
+	ReportingCurrency              string `protobuf:"bytes,29,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	AmountReportingCurrency        string `protobuf:"bytes,30,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
+	AmountSentReportingCurrency    string `protobuf:"bytes,31,opt,name=amount_sent_reporting_currency,json=amountSentReportingCurrency,proto3" json:"amount_sent_reporting_currency,omitempty"`
+	ProcessingFeeReportingCurrency string `protobuf:"bytes,32,opt,name=processing_fee_reporting_currency,json=processingFeeReportingCurrency,proto3" json:"processing_fee_reporting_currency,omitempty"`
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
 func (x *TransactionInfo) Reset() {
@@ -3266,6 +3267,13 @@ func (x *TransactionInfo) GetAmountReportingCurrency() string {
 func (x *TransactionInfo) GetAmountSentReportingCurrency() string {
 	if x != nil {
 		return x.AmountSentReportingCurrency
+	}
+	return ""
+}
+
+func (x *TransactionInfo) GetProcessingFeeReportingCurrency() string {
+	if x != nil {
+		return x.ProcessingFeeReportingCurrency
 	}
 	return ""
 }
@@ -5199,7 +5207,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x05nonce\x18\f \x01(\tR\x05nonce\"N\n" +
 	"\x18WithdrawCallbackResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"\xa2\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"\xed\n" +
 	"\n" +
 	"\x0fTransactionInfo\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
@@ -5238,7 +5246,8 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x03gas\x18\x1c \x01(\tR\x03gas\x12-\n" +
 	"\x12reporting_currency\x18\x1d \x01(\tR\x11reportingCurrency\x12:\n" +
 	"\x19amount_reporting_currency\x18\x1e \x01(\tR\x17amountReportingCurrency\x12C\n" +
-	"\x1eamount_sent_reporting_currency\x18\x1f \x01(\tR\x1bamountSentReportingCurrency\"\x9c\x01\n" +
+	"\x1eamount_sent_reporting_currency\x18\x1f \x01(\tR\x1bamountSentReportingCurrency\x12I\n" +
+	"!processing_fee_reporting_currency\x18  \x01(\tR\x1eprocessingFeeReportingCurrency\"\x9c\x01\n" +
 	"\x11TransactionDetail\x12E\n" +
 	"\vtransaction\x18\x01 \x01(\v2#.payment.service.v1.TransactionInfoR\vtransaction\x12@\n" +
 	"\achannel\x18\x02 \x01(\v2&.payment.service.v1.PaymentChannelInfoR\achannel\"\xc0\x06\n" +
