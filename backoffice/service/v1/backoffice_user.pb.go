@@ -359,33 +359,50 @@ func (x *GetUserOverviewRequest) GetFilter() string {
 }
 
 type GetUserOverviewResponse struct {
-	state                  protoimpl.MessageState              `protogen:"open.v1"`
-	Balance                string                              `protobuf:"bytes,1,opt,name=balance,proto3" json:"balance,omitempty"`
-	DepositMinusWithdraw   string                              `protobuf:"bytes,2,opt,name=deposit_minus_withdraw,json=depositMinusWithdraw,proto3" json:"deposit_minus_withdraw,omitempty"`
-	Turnover               string                              `protobuf:"bytes,3,opt,name=turnover,proto3" json:"turnover,omitempty"`
-	CashTurnover           string                              `protobuf:"bytes,4,opt,name=cash_turnover,json=cashTurnover,proto3" json:"cash_turnover,omitempty"`
-	BonusTurnover          string                              `protobuf:"bytes,5,opt,name=bonus_turnover,json=bonusTurnover,proto3" json:"bonus_turnover,omitempty"`
-	Deposit                string                              `protobuf:"bytes,6,opt,name=deposit,proto3" json:"deposit,omitempty"`
-	LastDeposit            string                              `protobuf:"bytes,7,opt,name=last_deposit,json=lastDeposit,proto3" json:"last_deposit,omitempty"`
-	DepositCount           int32                               `protobuf:"varint,8,opt,name=deposit_count,json=depositCount,proto3" json:"deposit_count,omitempty"`
-	Withdraw               string                              `protobuf:"bytes,9,opt,name=withdraw,proto3" json:"withdraw,omitempty"`                                  // withdrawal
-	LastWithdraw           string                              `protobuf:"bytes,10,opt,name=last_withdraw,json=lastWithdraw,proto3" json:"last_withdraw,omitempty"`     // last withdrawal
-	WithdrawCount          int32                               `protobuf:"varint,11,opt,name=withdraw_count,json=withdrawCount,proto3" json:"withdraw_count,omitempty"` // withdrawal count
-	Bonus                  string                              `protobuf:"bytes,12,opt,name=bonus,proto3" json:"bonus,omitempty"`                                       // Not available for now, only return 0
-	ValidTurnover          string                              `protobuf:"bytes,13,opt,name=valid_turnover,json=validTurnover,proto3" json:"valid_turnover,omitempty"`  // Not available for now, only return 0
-	AverageBetAmount       string                              `protobuf:"bytes,14,opt,name=average_bet_amount,json=averageBetAmount,proto3" json:"average_bet_amount,omitempty"`
-	Ggr                    string                              `protobuf:"bytes,15,opt,name=ggr,proto3" json:"ggr,omitempty"`
-	GgrPercentage          string                              `protobuf:"bytes,16,opt,name=ggr_percentage,json=ggrPercentage,proto3" json:"ggr_percentage,omitempty"`                        // Round to 2 decimal places
-	ManuallyAddedBalance   string                              `protobuf:"bytes,17,opt,name=manually_added_balance,json=manuallyAddedBalance,proto3" json:"manually_added_balance,omitempty"` // Not available for now, only return 0
-	BonusClaimed           string                              `protobuf:"bytes,18,opt,name=bonus_claimed,json=bonusClaimed,proto3" json:"bonus_claimed,omitempty"`                           // Not available for now, only return 0
-	Ngr                    string                              `protobuf:"bytes,19,opt,name=ngr,proto3" json:"ngr,omitempty"`
-	GgrToNgrPercentage     string                              `protobuf:"bytes,20,opt,name=ggr_to_ngr_percentage,json=ggrToNgrPercentage,proto3" json:"ggr_to_ngr_percentage,omitempty"`             // Round to 2 decimal places
-	TurnoverMultiplier     string                              `protobuf:"bytes,21,opt,name=turnover_multiplier,json=turnoverMultiplier,proto3" json:"turnover_multiplier,omitempty"`                 // Round to 2 decimal places
-	DepositToWithdrawRatio string                              `protobuf:"bytes,22,opt,name=deposit_to_withdraw_ratio,json=depositToWithdrawRatio,proto3" json:"deposit_to_withdraw_ratio,omitempty"` // Round to 2 decimal places
-	Rtp                    string                              `protobuf:"bytes,23,opt,name=rtp,proto3" json:"rtp,omitempty"`                                                                         // Round to 2 decimal places
-	GameData               []*GetUserOverviewResponse_GameData `protobuf:"bytes,24,rep,name=game_data,json=gameData,proto3" json:"game_data,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                                 protoimpl.MessageState              `protogen:"open.v1"`
+	BalanceUsd                            string                              `protobuf:"bytes,1,opt,name=balance_usd,json=balanceUsd,proto3" json:"balance_usd,omitempty"`
+	DepositMinusWithdrawUsd               string                              `protobuf:"bytes,2,opt,name=deposit_minus_withdraw_usd,json=depositMinusWithdrawUsd,proto3" json:"deposit_minus_withdraw_usd,omitempty"`
+	TurnoverUsd                           string                              `protobuf:"bytes,3,opt,name=turnover_usd,json=turnoverUsd,proto3" json:"turnover_usd,omitempty"`
+	CashTurnoverUsd                       string                              `protobuf:"bytes,4,opt,name=cash_turnover_usd,json=cashTurnoverUsd,proto3" json:"cash_turnover_usd,omitempty"`
+	BonusTurnoverUsd                      string                              `protobuf:"bytes,5,opt,name=bonus_turnover_usd,json=bonusTurnoverUsd,proto3" json:"bonus_turnover_usd,omitempty"`
+	DepositUsd                            string                              `protobuf:"bytes,6,opt,name=deposit_usd,json=depositUsd,proto3" json:"deposit_usd,omitempty"`
+	LastDepositUsd                        string                              `protobuf:"bytes,7,opt,name=last_deposit_usd,json=lastDepositUsd,proto3" json:"last_deposit_usd,omitempty"`
+	DepositCount                          int32                               `protobuf:"varint,8,opt,name=deposit_count,json=depositCount,proto3" json:"deposit_count,omitempty"`
+	WithdrawUsd                           string                              `protobuf:"bytes,9,opt,name=withdraw_usd,json=withdrawUsd,proto3" json:"withdraw_usd,omitempty"`                   // withdrawal
+	LastWithdrawUsd                       string                              `protobuf:"bytes,10,opt,name=last_withdraw_usd,json=lastWithdrawUsd,proto3" json:"last_withdraw_usd,omitempty"`    // last withdrawal
+	WithdrawCount                         int32                               `protobuf:"varint,11,opt,name=withdraw_count,json=withdrawCount,proto3" json:"withdraw_count,omitempty"`           // withdrawal count
+	BonusUsd                              string                              `protobuf:"bytes,12,opt,name=bonus_usd,json=bonusUsd,proto3" json:"bonus_usd,omitempty"`                           // Not available for now, only return 0
+	ValidTurnoverUsd                      string                              `protobuf:"bytes,13,opt,name=valid_turnover_usd,json=validTurnoverUsd,proto3" json:"valid_turnover_usd,omitempty"` // Not available for now, only return 0
+	AverageBetAmountUsd                   string                              `protobuf:"bytes,14,opt,name=average_bet_amount_usd,json=averageBetAmountUsd,proto3" json:"average_bet_amount_usd,omitempty"`
+	GgrUsd                                string                              `protobuf:"bytes,15,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
+	GgrPercentage                         string                              `protobuf:"bytes,16,opt,name=ggr_percentage,json=ggrPercentage,proto3" json:"ggr_percentage,omitempty"`                                   // Round to 2 decimal places
+	ManuallyAddedBalanceUsd               string                              `protobuf:"bytes,17,opt,name=manually_added_balance_usd,json=manuallyAddedBalanceUsd,proto3" json:"manually_added_balance_usd,omitempty"` // Not available for now, only return 0
+	BonusClaimedUsd                       string                              `protobuf:"bytes,18,opt,name=bonus_claimed_usd,json=bonusClaimedUsd,proto3" json:"bonus_claimed_usd,omitempty"`                           // Not available for now, only return 0
+	NgrUsd                                string                              `protobuf:"bytes,19,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
+	GgrToNgrPercentage                    string                              `protobuf:"bytes,20,opt,name=ggr_to_ngr_percentage,json=ggrToNgrPercentage,proto3" json:"ggr_to_ngr_percentage,omitempty"`             // Round to 2 decimal places
+	TurnoverMultiplier                    string                              `protobuf:"bytes,21,opt,name=turnover_multiplier,json=turnoverMultiplier,proto3" json:"turnover_multiplier,omitempty"`                 // Round to 2 decimal places
+	WithdrawToDepositRatio                string                              `protobuf:"bytes,22,opt,name=withdraw_to_deposit_ratio,json=withdrawToDepositRatio,proto3" json:"withdraw_to_deposit_ratio,omitempty"` // Round to 2 decimal places
+	Rtp                                   string                              `protobuf:"bytes,23,opt,name=rtp,proto3" json:"rtp,omitempty"`                                                                         // Round to 2 decimal places
+	ReportingCurrency                     string                              `protobuf:"bytes,24,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	BalanceReportingCurrency              string                              `protobuf:"bytes,25,opt,name=balance_reporting_currency,json=balanceReportingCurrency,proto3" json:"balance_reporting_currency,omitempty"`
+	DepositMinusWithdrawReportingCurrency string                              `protobuf:"bytes,26,opt,name=deposit_minus_withdraw_reporting_currency,json=depositMinusWithdrawReportingCurrency,proto3" json:"deposit_minus_withdraw_reporting_currency,omitempty"`
+	TurnoverReportingCurrency             string                              `protobuf:"bytes,27,opt,name=turnover_reporting_currency,json=turnoverReportingCurrency,proto3" json:"turnover_reporting_currency,omitempty"`
+	CashTurnoverReportingCurrency         string                              `protobuf:"bytes,28,opt,name=cash_turnover_reporting_currency,json=cashTurnoverReportingCurrency,proto3" json:"cash_turnover_reporting_currency,omitempty"`
+	BonusTurnoverReportingCurrency        string                              `protobuf:"bytes,29,opt,name=bonus_turnover_reporting_currency,json=bonusTurnoverReportingCurrency,proto3" json:"bonus_turnover_reporting_currency,omitempty"`
+	DepositReportingCurrency              string                              `protobuf:"bytes,30,opt,name=deposit_reporting_currency,json=depositReportingCurrency,proto3" json:"deposit_reporting_currency,omitempty"`
+	LastDepositReportingCurrency          string                              `protobuf:"bytes,31,opt,name=last_deposit_reporting_currency,json=lastDepositReportingCurrency,proto3" json:"last_deposit_reporting_currency,omitempty"`
+	WithdrawReportingCurrency             string                              `protobuf:"bytes,32,opt,name=withdraw_reporting_currency,json=withdrawReportingCurrency,proto3" json:"withdraw_reporting_currency,omitempty"`
+	LastWithdrawReportingCurrency         string                              `protobuf:"bytes,33,opt,name=last_withdraw_reporting_currency,json=lastWithdrawReportingCurrency,proto3" json:"last_withdraw_reporting_currency,omitempty"`
+	BonusReportingCurrency                string                              `protobuf:"bytes,34,opt,name=bonus_reporting_currency,json=bonusReportingCurrency,proto3" json:"bonus_reporting_currency,omitempty"`
+	ValidTurnoverReportingCurrency        string                              `protobuf:"bytes,35,opt,name=valid_turnover_reporting_currency,json=validTurnoverReportingCurrency,proto3" json:"valid_turnover_reporting_currency,omitempty"`
+	AverageBetAmountReportingCurrency     string                              `protobuf:"bytes,36,opt,name=average_bet_amount_reporting_currency,json=averageBetAmountReportingCurrency,proto3" json:"average_bet_amount_reporting_currency,omitempty"`
+	GgrReportingCurrency                  string                              `protobuf:"bytes,37,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
+	ManuallyAddedBalanceReportingCurrency string                              `protobuf:"bytes,38,opt,name=manually_added_balance_reporting_currency,json=manuallyAddedBalanceReportingCurrency,proto3" json:"manually_added_balance_reporting_currency,omitempty"`
+	BonusClaimedReportingCurrency         string                              `protobuf:"bytes,39,opt,name=bonus_claimed_reporting_currency,json=bonusClaimedReportingCurrency,proto3" json:"bonus_claimed_reporting_currency,omitempty"`
+	NgrReportingCurrency                  string                              `protobuf:"bytes,40,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
+	GameData                              []*GetUserOverviewResponse_GameData `protobuf:"bytes,41,rep,name=game_data,json=gameData,proto3" json:"game_data,omitempty"`
+	unknownFields                         protoimpl.UnknownFields
+	sizeCache                             protoimpl.SizeCache
 }
 
 func (x *GetUserOverviewResponse) Reset() {
@@ -418,51 +435,51 @@ func (*GetUserOverviewResponse) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *GetUserOverviewResponse) GetBalance() string {
+func (x *GetUserOverviewResponse) GetBalanceUsd() string {
 	if x != nil {
-		return x.Balance
+		return x.BalanceUsd
 	}
 	return ""
 }
 
-func (x *GetUserOverviewResponse) GetDepositMinusWithdraw() string {
+func (x *GetUserOverviewResponse) GetDepositMinusWithdrawUsd() string {
 	if x != nil {
-		return x.DepositMinusWithdraw
+		return x.DepositMinusWithdrawUsd
 	}
 	return ""
 }
 
-func (x *GetUserOverviewResponse) GetTurnover() string {
+func (x *GetUserOverviewResponse) GetTurnoverUsd() string {
 	if x != nil {
-		return x.Turnover
+		return x.TurnoverUsd
 	}
 	return ""
 }
 
-func (x *GetUserOverviewResponse) GetCashTurnover() string {
+func (x *GetUserOverviewResponse) GetCashTurnoverUsd() string {
 	if x != nil {
-		return x.CashTurnover
+		return x.CashTurnoverUsd
 	}
 	return ""
 }
 
-func (x *GetUserOverviewResponse) GetBonusTurnover() string {
+func (x *GetUserOverviewResponse) GetBonusTurnoverUsd() string {
 	if x != nil {
-		return x.BonusTurnover
+		return x.BonusTurnoverUsd
 	}
 	return ""
 }
 
-func (x *GetUserOverviewResponse) GetDeposit() string {
+func (x *GetUserOverviewResponse) GetDepositUsd() string {
 	if x != nil {
-		return x.Deposit
+		return x.DepositUsd
 	}
 	return ""
 }
 
-func (x *GetUserOverviewResponse) GetLastDeposit() string {
+func (x *GetUserOverviewResponse) GetLastDepositUsd() string {
 	if x != nil {
-		return x.LastDeposit
+		return x.LastDepositUsd
 	}
 	return ""
 }
@@ -474,16 +491,16 @@ func (x *GetUserOverviewResponse) GetDepositCount() int32 {
 	return 0
 }
 
-func (x *GetUserOverviewResponse) GetWithdraw() string {
+func (x *GetUserOverviewResponse) GetWithdrawUsd() string {
 	if x != nil {
-		return x.Withdraw
+		return x.WithdrawUsd
 	}
 	return ""
 }
 
-func (x *GetUserOverviewResponse) GetLastWithdraw() string {
+func (x *GetUserOverviewResponse) GetLastWithdrawUsd() string {
 	if x != nil {
-		return x.LastWithdraw
+		return x.LastWithdrawUsd
 	}
 	return ""
 }
@@ -495,30 +512,30 @@ func (x *GetUserOverviewResponse) GetWithdrawCount() int32 {
 	return 0
 }
 
-func (x *GetUserOverviewResponse) GetBonus() string {
+func (x *GetUserOverviewResponse) GetBonusUsd() string {
 	if x != nil {
-		return x.Bonus
+		return x.BonusUsd
 	}
 	return ""
 }
 
-func (x *GetUserOverviewResponse) GetValidTurnover() string {
+func (x *GetUserOverviewResponse) GetValidTurnoverUsd() string {
 	if x != nil {
-		return x.ValidTurnover
+		return x.ValidTurnoverUsd
 	}
 	return ""
 }
 
-func (x *GetUserOverviewResponse) GetAverageBetAmount() string {
+func (x *GetUserOverviewResponse) GetAverageBetAmountUsd() string {
 	if x != nil {
-		return x.AverageBetAmount
+		return x.AverageBetAmountUsd
 	}
 	return ""
 }
 
-func (x *GetUserOverviewResponse) GetGgr() string {
+func (x *GetUserOverviewResponse) GetGgrUsd() string {
 	if x != nil {
-		return x.Ggr
+		return x.GgrUsd
 	}
 	return ""
 }
@@ -530,23 +547,23 @@ func (x *GetUserOverviewResponse) GetGgrPercentage() string {
 	return ""
 }
 
-func (x *GetUserOverviewResponse) GetManuallyAddedBalance() string {
+func (x *GetUserOverviewResponse) GetManuallyAddedBalanceUsd() string {
 	if x != nil {
-		return x.ManuallyAddedBalance
+		return x.ManuallyAddedBalanceUsd
 	}
 	return ""
 }
 
-func (x *GetUserOverviewResponse) GetBonusClaimed() string {
+func (x *GetUserOverviewResponse) GetBonusClaimedUsd() string {
 	if x != nil {
-		return x.BonusClaimed
+		return x.BonusClaimedUsd
 	}
 	return ""
 }
 
-func (x *GetUserOverviewResponse) GetNgr() string {
+func (x *GetUserOverviewResponse) GetNgrUsd() string {
 	if x != nil {
-		return x.Ngr
+		return x.NgrUsd
 	}
 	return ""
 }
@@ -565,9 +582,9 @@ func (x *GetUserOverviewResponse) GetTurnoverMultiplier() string {
 	return ""
 }
 
-func (x *GetUserOverviewResponse) GetDepositToWithdrawRatio() string {
+func (x *GetUserOverviewResponse) GetWithdrawToDepositRatio() string {
 	if x != nil {
-		return x.DepositToWithdrawRatio
+		return x.WithdrawToDepositRatio
 	}
 	return ""
 }
@@ -575,6 +592,125 @@ func (x *GetUserOverviewResponse) GetDepositToWithdrawRatio() string {
 func (x *GetUserOverviewResponse) GetRtp() string {
 	if x != nil {
 		return x.Rtp
+	}
+	return ""
+}
+
+func (x *GetUserOverviewResponse) GetReportingCurrency() string {
+	if x != nil {
+		return x.ReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetUserOverviewResponse) GetBalanceReportingCurrency() string {
+	if x != nil {
+		return x.BalanceReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetUserOverviewResponse) GetDepositMinusWithdrawReportingCurrency() string {
+	if x != nil {
+		return x.DepositMinusWithdrawReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetUserOverviewResponse) GetTurnoverReportingCurrency() string {
+	if x != nil {
+		return x.TurnoverReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetUserOverviewResponse) GetCashTurnoverReportingCurrency() string {
+	if x != nil {
+		return x.CashTurnoverReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetUserOverviewResponse) GetBonusTurnoverReportingCurrency() string {
+	if x != nil {
+		return x.BonusTurnoverReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetUserOverviewResponse) GetDepositReportingCurrency() string {
+	if x != nil {
+		return x.DepositReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetUserOverviewResponse) GetLastDepositReportingCurrency() string {
+	if x != nil {
+		return x.LastDepositReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetUserOverviewResponse) GetWithdrawReportingCurrency() string {
+	if x != nil {
+		return x.WithdrawReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetUserOverviewResponse) GetLastWithdrawReportingCurrency() string {
+	if x != nil {
+		return x.LastWithdrawReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetUserOverviewResponse) GetBonusReportingCurrency() string {
+	if x != nil {
+		return x.BonusReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetUserOverviewResponse) GetValidTurnoverReportingCurrency() string {
+	if x != nil {
+		return x.ValidTurnoverReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetUserOverviewResponse) GetAverageBetAmountReportingCurrency() string {
+	if x != nil {
+		return x.AverageBetAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetUserOverviewResponse) GetGgrReportingCurrency() string {
+	if x != nil {
+		return x.GgrReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetUserOverviewResponse) GetManuallyAddedBalanceReportingCurrency() string {
+	if x != nil {
+		return x.ManuallyAddedBalanceReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetUserOverviewResponse) GetBonusClaimedReportingCurrency() string {
+	if x != nil {
+		return x.BonusClaimedReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetUserOverviewResponse) GetNgrReportingCurrency() string {
+	if x != nil {
+		return x.NgrReportingCurrency
 	}
 	return ""
 }
@@ -1702,33 +1838,35 @@ func (*SetUserTagsResponse) Descriptor() ([]byte, []int) {
 }
 
 type ListUsersResponse_User struct {
-	state                protoimpl.MessageState `protogen:"open.v1"`
-	OperatorName         string                 `protobuf:"bytes,1,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	CompanyOperatorName  string                 `protobuf:"bytes,2,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
-	RetailerOperatorName string                 `protobuf:"bytes,3,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
-	SystemOperatorName   string                 `protobuf:"bytes,4,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
-	UserId               int64                  `protobuf:"varint,5,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Username             string                 `protobuf:"bytes,6,opt,name=username,proto3" json:"username,omitempty"`
-	Email                string                 `protobuf:"bytes,7,opt,name=email,proto3" json:"email,omitempty"`
-	Mobile               string                 `protobuf:"bytes,8,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	VipLevel             int32                  `protobuf:"varint,9,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
-	KycLevel             int32                  `protobuf:"varint,10,opt,name=kyc_level,json=kycLevel,proto3" json:"kyc_level,omitempty"`
-	Deposit              string                 `protobuf:"bytes,11,opt,name=deposit,proto3" json:"deposit,omitempty"`
-	Withdraw             string                 `protobuf:"bytes,12,opt,name=withdraw,proto3" json:"withdraw,omitempty"`
-	Tags                 []string               `protobuf:"bytes,13,rep,name=tags,proto3" json:"tags,omitempty"`
-	BanWithdraw          bool                   `protobuf:"varint,14,opt,name=ban_withdraw,json=banWithdraw,proto3" json:"ban_withdraw,omitempty"`
-	BanGame              bool                   `protobuf:"varint,15,opt,name=ban_game,json=banGame,proto3" json:"ban_game,omitempty"`
-	BanLogin             bool                   `protobuf:"varint,16,opt,name=ban_login,json=banLogin,proto3" json:"ban_login,omitempty"`
-	Online               bool                   `protobuf:"varint,17,opt,name=online,proto3" json:"online,omitempty"`
-	LastLoginAt          *timestamppb.Timestamp `protobuf:"bytes,18,opt,name=last_login_at,json=lastLoginAt,proto3" json:"last_login_at,omitempty"`
-	RegisteredAt         *timestamppb.Timestamp `protobuf:"bytes,19,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
+	state                     protoimpl.MessageState `protogen:"open.v1"`
+	OperatorName              string                 `protobuf:"bytes,1,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	CompanyOperatorName       string                 `protobuf:"bytes,2,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	RetailerOperatorName      string                 `protobuf:"bytes,3,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	SystemOperatorName        string                 `protobuf:"bytes,4,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
+	UserId                    int64                  `protobuf:"varint,5,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Username                  string                 `protobuf:"bytes,6,opt,name=username,proto3" json:"username,omitempty"`
+	Email                     string                 `protobuf:"bytes,7,opt,name=email,proto3" json:"email,omitempty"`
+	Mobile                    string                 `protobuf:"bytes,8,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	VipLevel                  int32                  `protobuf:"varint,9,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
+	KycLevel                  int32                  `protobuf:"varint,10,opt,name=kyc_level,json=kycLevel,proto3" json:"kyc_level,omitempty"`
+	DepositUsd                string                 `protobuf:"bytes,11,opt,name=deposit_usd,json=depositUsd,proto3" json:"deposit_usd,omitempty"`
+	WithdrawUsd               string                 `protobuf:"bytes,12,opt,name=withdraw_usd,json=withdrawUsd,proto3" json:"withdraw_usd,omitempty"`
+	DepositReportingCurrency  string                 `protobuf:"bytes,13,opt,name=deposit_reporting_currency,json=depositReportingCurrency,proto3" json:"deposit_reporting_currency,omitempty"`
+	WithdrawReportingCurrency string                 `protobuf:"bytes,14,opt,name=withdraw_reporting_currency,json=withdrawReportingCurrency,proto3" json:"withdraw_reporting_currency,omitempty"`
+	Tags                      []string               `protobuf:"bytes,15,rep,name=tags,proto3" json:"tags,omitempty"`
+	BanWithdraw               bool                   `protobuf:"varint,16,opt,name=ban_withdraw,json=banWithdraw,proto3" json:"ban_withdraw,omitempty"`
+	BanGame                   bool                   `protobuf:"varint,17,opt,name=ban_game,json=banGame,proto3" json:"ban_game,omitempty"`
+	BanLogin                  bool                   `protobuf:"varint,18,opt,name=ban_login,json=banLogin,proto3" json:"ban_login,omitempty"`
+	Online                    bool                   `protobuf:"varint,19,opt,name=online,proto3" json:"online,omitempty"`
+	LastLoginAt               *timestamppb.Timestamp `protobuf:"bytes,20,opt,name=last_login_at,json=lastLoginAt,proto3" json:"last_login_at,omitempty"`
+	RegisteredAt              *timestamppb.Timestamp `protobuf:"bytes,21,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
 	// int32 risk_level = 19;
 	// string referral_code = 20;
 	// string affiliate_code = 21;
-	Country string `protobuf:"bytes,20,opt,name=country,proto3" json:"country,omitempty"`
+	Country string `protobuf:"bytes,22,opt,name=country,proto3" json:"country,omitempty"`
 	// string device = 23;
 	// string source = 24;
-	RegistrationIp string `protobuf:"bytes,21,opt,name=registration_ip,json=registrationIp,proto3" json:"registration_ip,omitempty"`
+	RegistrationIp string `protobuf:"bytes,23,opt,name=registration_ip,json=registrationIp,proto3" json:"registration_ip,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1833,16 +1971,30 @@ func (x *ListUsersResponse_User) GetKycLevel() int32 {
 	return 0
 }
 
-func (x *ListUsersResponse_User) GetDeposit() string {
+func (x *ListUsersResponse_User) GetDepositUsd() string {
 	if x != nil {
-		return x.Deposit
+		return x.DepositUsd
 	}
 	return ""
 }
 
-func (x *ListUsersResponse_User) GetWithdraw() string {
+func (x *ListUsersResponse_User) GetWithdrawUsd() string {
 	if x != nil {
-		return x.Withdraw
+		return x.WithdrawUsd
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetDepositReportingCurrency() string {
+	if x != nil {
+		return x.DepositReportingCurrency
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetWithdrawReportingCurrency() string {
+	if x != nil {
+		return x.WithdrawReportingCurrency
 	}
 	return ""
 }
@@ -2454,12 +2606,12 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\a_mobileB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x8b\a\n" +
+	"_page_size\"\x97\b\n" +
 	"\x11ListUsersResponse\x12G\n" +
 	"\x05users\x18\x01 \x03(\v21.api.backoffice.service.v1.ListUsersResponse.UserR\x05users\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\xe5\x05\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\xf1\x06\n" +
 	"\x04User\x12#\n" +
 	"\roperator_name\x18\x01 \x01(\tR\foperatorName\x122\n" +
 	"\x15company_operator_name\x18\x02 \x01(\tR\x13companyOperatorName\x124\n" +
@@ -2471,48 +2623,70 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x06mobile\x18\b \x01(\tR\x06mobile\x12\x1b\n" +
 	"\tvip_level\x18\t \x01(\x05R\bvipLevel\x12\x1b\n" +
 	"\tkyc_level\x18\n" +
-	" \x01(\x05R\bkycLevel\x12\x18\n" +
-	"\adeposit\x18\v \x01(\tR\adeposit\x12\x1a\n" +
-	"\bwithdraw\x18\f \x01(\tR\bwithdraw\x12\x12\n" +
-	"\x04tags\x18\r \x03(\tR\x04tags\x12!\n" +
-	"\fban_withdraw\x18\x0e \x01(\bR\vbanWithdraw\x12\x19\n" +
-	"\bban_game\x18\x0f \x01(\bR\abanGame\x12\x1b\n" +
-	"\tban_login\x18\x10 \x01(\bR\bbanLogin\x12\x16\n" +
-	"\x06online\x18\x11 \x01(\bR\x06online\x12>\n" +
-	"\rlast_login_at\x18\x12 \x01(\v2\x1a.google.protobuf.TimestampR\vlastLoginAt\x12?\n" +
-	"\rregistered_at\x18\x13 \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\x12\x18\n" +
-	"\acountry\x18\x14 \x01(\tR\acountry\x12'\n" +
-	"\x0fregistration_ip\x18\x15 \x01(\tR\x0eregistrationIp\"Y\n" +
+	" \x01(\x05R\bkycLevel\x12\x1f\n" +
+	"\vdeposit_usd\x18\v \x01(\tR\n" +
+	"depositUsd\x12!\n" +
+	"\fwithdraw_usd\x18\f \x01(\tR\vwithdrawUsd\x12<\n" +
+	"\x1adeposit_reporting_currency\x18\r \x01(\tR\x18depositReportingCurrency\x12>\n" +
+	"\x1bwithdraw_reporting_currency\x18\x0e \x01(\tR\x19withdrawReportingCurrency\x12\x12\n" +
+	"\x04tags\x18\x0f \x03(\tR\x04tags\x12!\n" +
+	"\fban_withdraw\x18\x10 \x01(\bR\vbanWithdraw\x12\x19\n" +
+	"\bban_game\x18\x11 \x01(\bR\abanGame\x12\x1b\n" +
+	"\tban_login\x18\x12 \x01(\bR\bbanLogin\x12\x16\n" +
+	"\x06online\x18\x13 \x01(\bR\x06online\x12>\n" +
+	"\rlast_login_at\x18\x14 \x01(\v2\x1a.google.protobuf.TimestampR\vlastLoginAt\x12?\n" +
+	"\rregistered_at\x18\x15 \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\x12\x18\n" +
+	"\acountry\x18\x16 \x01(\tR\acountry\x12'\n" +
+	"\x0fregistration_ip\x18\x17 \x01(\tR\x0eregistrationIp\"Y\n" +
 	"\x16GetUserOverviewRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1b\n" +
 	"\x06filter\x18\x02 \x01(\tH\x00R\x06filter\x88\x01\x01B\t\n" +
-	"\a_filter\"\xa0\b\n" +
-	"\x17GetUserOverviewResponse\x12\x18\n" +
-	"\abalance\x18\x01 \x01(\tR\abalance\x124\n" +
-	"\x16deposit_minus_withdraw\x18\x02 \x01(\tR\x14depositMinusWithdraw\x12\x1a\n" +
-	"\bturnover\x18\x03 \x01(\tR\bturnover\x12#\n" +
-	"\rcash_turnover\x18\x04 \x01(\tR\fcashTurnover\x12%\n" +
-	"\x0ebonus_turnover\x18\x05 \x01(\tR\rbonusTurnover\x12\x18\n" +
-	"\adeposit\x18\x06 \x01(\tR\adeposit\x12!\n" +
-	"\flast_deposit\x18\a \x01(\tR\vlastDeposit\x12#\n" +
-	"\rdeposit_count\x18\b \x01(\x05R\fdepositCount\x12\x1a\n" +
-	"\bwithdraw\x18\t \x01(\tR\bwithdraw\x12#\n" +
-	"\rlast_withdraw\x18\n" +
-	" \x01(\tR\flastWithdraw\x12%\n" +
-	"\x0ewithdraw_count\x18\v \x01(\x05R\rwithdrawCount\x12\x14\n" +
-	"\x05bonus\x18\f \x01(\tR\x05bonus\x12%\n" +
-	"\x0evalid_turnover\x18\r \x01(\tR\rvalidTurnover\x12,\n" +
-	"\x12average_bet_amount\x18\x0e \x01(\tR\x10averageBetAmount\x12\x10\n" +
-	"\x03ggr\x18\x0f \x01(\tR\x03ggr\x12%\n" +
-	"\x0eggr_percentage\x18\x10 \x01(\tR\rggrPercentage\x124\n" +
-	"\x16manually_added_balance\x18\x11 \x01(\tR\x14manuallyAddedBalance\x12#\n" +
-	"\rbonus_claimed\x18\x12 \x01(\tR\fbonusClaimed\x12\x10\n" +
-	"\x03ngr\x18\x13 \x01(\tR\x03ngr\x121\n" +
+	"\a_filter\"\x9f\x12\n" +
+	"\x17GetUserOverviewResponse\x12\x1f\n" +
+	"\vbalance_usd\x18\x01 \x01(\tR\n" +
+	"balanceUsd\x12;\n" +
+	"\x1adeposit_minus_withdraw_usd\x18\x02 \x01(\tR\x17depositMinusWithdrawUsd\x12!\n" +
+	"\fturnover_usd\x18\x03 \x01(\tR\vturnoverUsd\x12*\n" +
+	"\x11cash_turnover_usd\x18\x04 \x01(\tR\x0fcashTurnoverUsd\x12,\n" +
+	"\x12bonus_turnover_usd\x18\x05 \x01(\tR\x10bonusTurnoverUsd\x12\x1f\n" +
+	"\vdeposit_usd\x18\x06 \x01(\tR\n" +
+	"depositUsd\x12(\n" +
+	"\x10last_deposit_usd\x18\a \x01(\tR\x0elastDepositUsd\x12#\n" +
+	"\rdeposit_count\x18\b \x01(\x05R\fdepositCount\x12!\n" +
+	"\fwithdraw_usd\x18\t \x01(\tR\vwithdrawUsd\x12*\n" +
+	"\x11last_withdraw_usd\x18\n" +
+	" \x01(\tR\x0flastWithdrawUsd\x12%\n" +
+	"\x0ewithdraw_count\x18\v \x01(\x05R\rwithdrawCount\x12\x1b\n" +
+	"\tbonus_usd\x18\f \x01(\tR\bbonusUsd\x12,\n" +
+	"\x12valid_turnover_usd\x18\r \x01(\tR\x10validTurnoverUsd\x123\n" +
+	"\x16average_bet_amount_usd\x18\x0e \x01(\tR\x13averageBetAmountUsd\x12\x17\n" +
+	"\aggr_usd\x18\x0f \x01(\tR\x06ggrUsd\x12%\n" +
+	"\x0eggr_percentage\x18\x10 \x01(\tR\rggrPercentage\x12;\n" +
+	"\x1amanually_added_balance_usd\x18\x11 \x01(\tR\x17manuallyAddedBalanceUsd\x12*\n" +
+	"\x11bonus_claimed_usd\x18\x12 \x01(\tR\x0fbonusClaimedUsd\x12\x17\n" +
+	"\angr_usd\x18\x13 \x01(\tR\x06ngrUsd\x121\n" +
 	"\x15ggr_to_ngr_percentage\x18\x14 \x01(\tR\x12ggrToNgrPercentage\x12/\n" +
 	"\x13turnover_multiplier\x18\x15 \x01(\tR\x12turnoverMultiplier\x129\n" +
-	"\x19deposit_to_withdraw_ratio\x18\x16 \x01(\tR\x16depositToWithdrawRatio\x12\x10\n" +
-	"\x03rtp\x18\x17 \x01(\tR\x03rtp\x12X\n" +
-	"\tgame_data\x18\x18 \x03(\v2;.api.backoffice.service.v1.GetUserOverviewResponse.GameDataR\bgameData\x1ag\n" +
+	"\x19withdraw_to_deposit_ratio\x18\x16 \x01(\tR\x16withdrawToDepositRatio\x12\x10\n" +
+	"\x03rtp\x18\x17 \x01(\tR\x03rtp\x12-\n" +
+	"\x12reporting_currency\x18\x18 \x01(\tR\x11reportingCurrency\x12<\n" +
+	"\x1abalance_reporting_currency\x18\x19 \x01(\tR\x18balanceReportingCurrency\x12X\n" +
+	")deposit_minus_withdraw_reporting_currency\x18\x1a \x01(\tR%depositMinusWithdrawReportingCurrency\x12>\n" +
+	"\x1bturnover_reporting_currency\x18\x1b \x01(\tR\x19turnoverReportingCurrency\x12G\n" +
+	" cash_turnover_reporting_currency\x18\x1c \x01(\tR\x1dcashTurnoverReportingCurrency\x12I\n" +
+	"!bonus_turnover_reporting_currency\x18\x1d \x01(\tR\x1ebonusTurnoverReportingCurrency\x12<\n" +
+	"\x1adeposit_reporting_currency\x18\x1e \x01(\tR\x18depositReportingCurrency\x12E\n" +
+	"\x1flast_deposit_reporting_currency\x18\x1f \x01(\tR\x1clastDepositReportingCurrency\x12>\n" +
+	"\x1bwithdraw_reporting_currency\x18  \x01(\tR\x19withdrawReportingCurrency\x12G\n" +
+	" last_withdraw_reporting_currency\x18! \x01(\tR\x1dlastWithdrawReportingCurrency\x128\n" +
+	"\x18bonus_reporting_currency\x18\" \x01(\tR\x16bonusReportingCurrency\x12I\n" +
+	"!valid_turnover_reporting_currency\x18# \x01(\tR\x1evalidTurnoverReportingCurrency\x12P\n" +
+	"%average_bet_amount_reporting_currency\x18$ \x01(\tR!averageBetAmountReportingCurrency\x124\n" +
+	"\x16ggr_reporting_currency\x18% \x01(\tR\x14ggrReportingCurrency\x12X\n" +
+	")manually_added_balance_reporting_currency\x18& \x01(\tR%manuallyAddedBalanceReportingCurrency\x12G\n" +
+	" bonus_claimed_reporting_currency\x18' \x01(\tR\x1dbonusClaimedReportingCurrency\x124\n" +
+	"\x16ngr_reporting_currency\x18( \x01(\tR\x14ngrReportingCurrency\x12X\n" +
+	"\tgame_data\x18) \x03(\v2;.api.backoffice.service.v1.GetUserOverviewResponse.GameDataR\bgameData\x1ag\n" +
 	"\bGameData\x12\x1b\n" +
 	"\tgame_type\x18\x01 \x01(\tR\bgameType\x12\x10\n" +
 	"\x03ggr\x18\x02 \x01(\tR\x03ggr\x12\x1a\n" +

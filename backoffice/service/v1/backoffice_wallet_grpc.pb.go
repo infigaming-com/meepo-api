@@ -54,7 +54,7 @@ type BackofficeWalletClient interface {
 	ListWalletCurrencies(ctx context.Context, in *ListWalletCurrenciesRequest, opts ...grpc.CallOption) (*ListWalletCurrenciesResponse, error)
 	UpdateWalletCurrency(ctx context.Context, in *UpdateWalletCurrencyRequest, opts ...grpc.CallOption) (*UpdateWalletCurrencyResponse, error)
 	// ListOperatorBalances lists all operator balances which belong to the backoffice operator
-	ListOperatorBalances(ctx context.Context, in *ListOperatorBalancesRequest, opts ...grpc.CallOption) (*ListOperatorBalancesResponse, error)
+	ListOperatorBalances(ctx context.Context, in *ListOperatorBalancesRequest, opts ...grpc.CallOption) (*v1.ListBottomOperatorBalancesResponse, error)
 	GetExchangeRates(ctx context.Context, in *GetExchangeRatesRequest, opts ...grpc.CallOption) (*GetExchangeRatesResponse, error)
 	// OperatorTransfer transfers cash from one operator to its company operator, only allow USD, USDT, USDC, 1:1 exchange
 	OperatorTransfer(ctx context.Context, in *OperatorTransferRequest, opts ...grpc.CallOption) (*OperatorTransferResponse, error)
@@ -162,9 +162,9 @@ func (c *backofficeWalletClient) UpdateWalletCurrency(ctx context.Context, in *U
 	return out, nil
 }
 
-func (c *backofficeWalletClient) ListOperatorBalances(ctx context.Context, in *ListOperatorBalancesRequest, opts ...grpc.CallOption) (*ListOperatorBalancesResponse, error) {
+func (c *backofficeWalletClient) ListOperatorBalances(ctx context.Context, in *ListOperatorBalancesRequest, opts ...grpc.CallOption) (*v1.ListBottomOperatorBalancesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListOperatorBalancesResponse)
+	out := new(v1.ListBottomOperatorBalancesResponse)
 	err := c.cc.Invoke(ctx, BackofficeWallet_ListOperatorBalances_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -276,7 +276,7 @@ type BackofficeWalletServer interface {
 	ListWalletCurrencies(context.Context, *ListWalletCurrenciesRequest) (*ListWalletCurrenciesResponse, error)
 	UpdateWalletCurrency(context.Context, *UpdateWalletCurrencyRequest) (*UpdateWalletCurrencyResponse, error)
 	// ListOperatorBalances lists all operator balances which belong to the backoffice operator
-	ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*ListOperatorBalancesResponse, error)
+	ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*v1.ListBottomOperatorBalancesResponse, error)
 	GetExchangeRates(context.Context, *GetExchangeRatesRequest) (*GetExchangeRatesResponse, error)
 	// OperatorTransfer transfers cash from one operator to its company operator, only allow USD, USDT, USDC, 1:1 exchange
 	OperatorTransfer(context.Context, *OperatorTransferRequest) (*OperatorTransferResponse, error)
@@ -328,7 +328,7 @@ func (UnimplementedBackofficeWalletServer) ListWalletCurrencies(context.Context,
 func (UnimplementedBackofficeWalletServer) UpdateWalletCurrency(context.Context, *UpdateWalletCurrencyRequest) (*UpdateWalletCurrencyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateWalletCurrency not implemented")
 }
-func (UnimplementedBackofficeWalletServer) ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*ListOperatorBalancesResponse, error) {
+func (UnimplementedBackofficeWalletServer) ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*v1.ListBottomOperatorBalancesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperatorBalances not implemented")
 }
 func (UnimplementedBackofficeWalletServer) GetExchangeRates(context.Context, *GetExchangeRatesRequest) (*GetExchangeRatesResponse, error) {

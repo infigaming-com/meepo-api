@@ -50,7 +50,7 @@ type BackofficeWalletHTTPServer interface {
 	// ListOperatorBalanceTransactions ListOperatorBalanceTransactions lists the balance transactions of an operator
 	ListOperatorBalanceTransactions(context.Context, *ListOperatorBalanceTransactionsRequest) (*ListOperatorBalanceTransactionsResponse, error)
 	// ListOperatorBalances ListOperatorBalances lists all operator balances which belong to the backoffice operator
-	ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*ListOperatorBalancesResponse, error)
+	ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*v1.ListBottomOperatorBalancesResponse, error)
 	// ListWalletBalanceTransactions ListWalletBalanceTransactions provides balance transactions for a specific user in User transactions page.
 	ListWalletBalanceTransactions(context.Context, *ListWalletBalanceTransactionsRequest) (*ListWalletBalanceTransactionsResponse, error)
 	ListWalletCurrencies(context.Context, *ListWalletCurrenciesRequest) (*ListWalletCurrenciesResponse, error)
@@ -285,7 +285,7 @@ func _BackofficeWallet_ListOperatorBalances0_HTTP_Handler(srv BackofficeWalletHT
 		if err != nil {
 			return err
 		}
-		reply := out.(*ListOperatorBalancesResponse)
+		reply := out.(*v1.ListBottomOperatorBalancesResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -496,7 +496,7 @@ type BackofficeWalletHTTPClient interface {
 	GetWalletCredits(ctx context.Context, req *GetWalletCreditsRequest, opts ...http.CallOption) (rsp *GetWalletCreditsResponse, err error)
 	GetWallets(ctx context.Context, req *GetWalletsRequest, opts ...http.CallOption) (rsp *GetWalletsResponse, err error)
 	ListOperatorBalanceTransactions(ctx context.Context, req *ListOperatorBalanceTransactionsRequest, opts ...http.CallOption) (rsp *ListOperatorBalanceTransactionsResponse, err error)
-	ListOperatorBalances(ctx context.Context, req *ListOperatorBalancesRequest, opts ...http.CallOption) (rsp *ListOperatorBalancesResponse, err error)
+	ListOperatorBalances(ctx context.Context, req *ListOperatorBalancesRequest, opts ...http.CallOption) (rsp *v1.ListBottomOperatorBalancesResponse, err error)
 	ListWalletBalanceTransactions(ctx context.Context, req *ListWalletBalanceTransactionsRequest, opts ...http.CallOption) (rsp *ListWalletBalanceTransactionsResponse, err error)
 	ListWalletCurrencies(ctx context.Context, req *ListWalletCurrenciesRequest, opts ...http.CallOption) (rsp *ListWalletCurrenciesResponse, err error)
 	OperatorBalanceFreeze(ctx context.Context, req *OperatorBalanceFreezeRequest, opts ...http.CallOption) (rsp *OperatorBalanceFreezeResponse, err error)
@@ -608,8 +608,8 @@ func (c *BackofficeWalletHTTPClientImpl) ListOperatorBalanceTransactions(ctx con
 	return &out, nil
 }
 
-func (c *BackofficeWalletHTTPClientImpl) ListOperatorBalances(ctx context.Context, in *ListOperatorBalancesRequest, opts ...http.CallOption) (*ListOperatorBalancesResponse, error) {
-	var out ListOperatorBalancesResponse
+func (c *BackofficeWalletHTTPClientImpl) ListOperatorBalances(ctx context.Context, in *ListOperatorBalancesRequest, opts ...http.CallOption) (*v1.ListBottomOperatorBalancesResponse, error) {
+	var out v1.ListBottomOperatorBalancesResponse
 	pattern := "/v1/backoffice/wallet/operator/balances/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletListOperatorBalances))

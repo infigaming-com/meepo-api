@@ -14220,9 +14220,13 @@ func (m *ListUsersResponse_User) validate(all bool) error {
 
 	// no validation rules for KycLevel
 
-	// no validation rules for Deposit
+	// no validation rules for DepositUsd
 
-	// no validation rules for Withdraw
+	// no validation rules for WithdrawUsd
+
+	// no validation rules for DepositReportingCurrency
+
+	// no validation rules for WithdrawReportingCurrency
 
 	// no validation rules for BanWithdraw
 
