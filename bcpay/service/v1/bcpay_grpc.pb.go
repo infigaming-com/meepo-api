@@ -19,14 +19,15 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Bcpay_GetBankAccount_FullMethodName    = "/api.bcpay.service.v1.Bcpay/GetBankAccount"
-	Bcpay_CreateWithdraw_FullMethodName    = "/api.bcpay.service.v1.Bcpay/CreateWithdraw"
-	Bcpay_CreateMerchant_FullMethodName    = "/api.bcpay.service.v1.Bcpay/CreateMerchant"
-	Bcpay_BankAccountList_FullMethodName   = "/api.bcpay.service.v1.Bcpay/BankAccountList"
-	Bcpay_AddBankAccount_FullMethodName    = "/api.bcpay.service.v1.Bcpay/AddBankAccount"
-	Bcpay_UpdateBankAccount_FullMethodName = "/api.bcpay.service.v1.Bcpay/UpdateBankAccount"
-	Bcpay_TransactionList_FullMethodName   = "/api.bcpay.service.v1.Bcpay/TransactionList"
-	Bcpay_AuditTransaction_FullMethodName  = "/api.bcpay.service.v1.Bcpay/AuditTransaction"
+	Bcpay_GetBankAccount_FullMethodName       = "/api.bcpay.service.v1.Bcpay/GetBankAccount"
+	Bcpay_CreateWithdraw_FullMethodName       = "/api.bcpay.service.v1.Bcpay/CreateWithdraw"
+	Bcpay_GetMerchant_FullMethodName          = "/api.bcpay.service.v1.Bcpay/GetMerchant"
+	Bcpay_BankAccountList_FullMethodName      = "/api.bcpay.service.v1.Bcpay/BankAccountList"
+	Bcpay_AddBankAccount_FullMethodName       = "/api.bcpay.service.v1.Bcpay/AddBankAccount"
+	Bcpay_UpdateBankAccount_FullMethodName    = "/api.bcpay.service.v1.Bcpay/UpdateBankAccount"
+	Bcpay_TransactionList_FullMethodName      = "/api.bcpay.service.v1.Bcpay/TransactionList"
+	Bcpay_AuditTransaction_FullMethodName     = "/api.bcpay.service.v1.Bcpay/AuditTransaction"
+	Bcpay_AddNoteToTransaction_FullMethodName = "/api.bcpay.service.v1.Bcpay/AddNoteToTransaction"
 )
 
 // BcpayClient is the client API for Bcpay service.
@@ -37,12 +38,13 @@ const (
 type BcpayClient interface {
 	GetBankAccount(ctx context.Context, in *GetBankAccountRequest, opts ...grpc.CallOption) (*GetBankAccountResponse, error)
 	CreateWithdraw(ctx context.Context, in *CreateWithdrawRequest, opts ...grpc.CallOption) (*CreateWithdrawResponse, error)
-	CreateMerchant(ctx context.Context, in *CreateMerchantRequest, opts ...grpc.CallOption) (*CreateMerchantResponse, error)
+	GetMerchant(ctx context.Context, in *GetMerchantRequest, opts ...grpc.CallOption) (*GetMerchantResponse, error)
 	BankAccountList(ctx context.Context, in *BankAccountListRequest, opts ...grpc.CallOption) (*BankAccountListResponse, error)
 	AddBankAccount(ctx context.Context, in *AddBankAccountRequest, opts ...grpc.CallOption) (*AddBankAccountResponse, error)
 	UpdateBankAccount(ctx context.Context, in *UpdateBankAccountRequest, opts ...grpc.CallOption) (*UpdateBankAccountResponse, error)
 	TransactionList(ctx context.Context, in *TransactionListRequest, opts ...grpc.CallOption) (*TransactionListResponse, error)
 	AuditTransaction(ctx context.Context, in *AuditTransactionRequest, opts ...grpc.CallOption) (*AuditTransactionResponse, error)
+	AddNoteToTransaction(ctx context.Context, in *AddNoteToTransactionRequest, opts ...grpc.CallOption) (*AddNoteToTransactionResponse, error)
 }
 
 type bcpayClient struct {
@@ -73,10 +75,10 @@ func (c *bcpayClient) CreateWithdraw(ctx context.Context, in *CreateWithdrawRequ
 	return out, nil
 }
 
-func (c *bcpayClient) CreateMerchant(ctx context.Context, in *CreateMerchantRequest, opts ...grpc.CallOption) (*CreateMerchantResponse, error) {
+func (c *bcpayClient) GetMerchant(ctx context.Context, in *GetMerchantRequest, opts ...grpc.CallOption) (*GetMerchantResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateMerchantResponse)
-	err := c.cc.Invoke(ctx, Bcpay_CreateMerchant_FullMethodName, in, out, cOpts...)
+	out := new(GetMerchantResponse)
+	err := c.cc.Invoke(ctx, Bcpay_GetMerchant_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -133,6 +135,16 @@ func (c *bcpayClient) AuditTransaction(ctx context.Context, in *AuditTransaction
 	return out, nil
 }
 
+func (c *bcpayClient) AddNoteToTransaction(ctx context.Context, in *AddNoteToTransactionRequest, opts ...grpc.CallOption) (*AddNoteToTransactionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddNoteToTransactionResponse)
+	err := c.cc.Invoke(ctx, Bcpay_AddNoteToTransaction_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BcpayServer is the server API for Bcpay service.
 // All implementations must embed UnimplementedBcpayServer
 // for forward compatibility.
@@ -141,12 +153,13 @@ func (c *bcpayClient) AuditTransaction(ctx context.Context, in *AuditTransaction
 type BcpayServer interface {
 	GetBankAccount(context.Context, *GetBankAccountRequest) (*GetBankAccountResponse, error)
 	CreateWithdraw(context.Context, *CreateWithdrawRequest) (*CreateWithdrawResponse, error)
-	CreateMerchant(context.Context, *CreateMerchantRequest) (*CreateMerchantResponse, error)
+	GetMerchant(context.Context, *GetMerchantRequest) (*GetMerchantResponse, error)
 	BankAccountList(context.Context, *BankAccountListRequest) (*BankAccountListResponse, error)
 	AddBankAccount(context.Context, *AddBankAccountRequest) (*AddBankAccountResponse, error)
 	UpdateBankAccount(context.Context, *UpdateBankAccountRequest) (*UpdateBankAccountResponse, error)
 	TransactionList(context.Context, *TransactionListRequest) (*TransactionListResponse, error)
 	AuditTransaction(context.Context, *AuditTransactionRequest) (*AuditTransactionResponse, error)
+	AddNoteToTransaction(context.Context, *AddNoteToTransactionRequest) (*AddNoteToTransactionResponse, error)
 	mustEmbedUnimplementedBcpayServer()
 }
 
@@ -163,8 +176,8 @@ func (UnimplementedBcpayServer) GetBankAccount(context.Context, *GetBankAccountR
 func (UnimplementedBcpayServer) CreateWithdraw(context.Context, *CreateWithdrawRequest) (*CreateWithdrawResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateWithdraw not implemented")
 }
-func (UnimplementedBcpayServer) CreateMerchant(context.Context, *CreateMerchantRequest) (*CreateMerchantResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateMerchant not implemented")
+func (UnimplementedBcpayServer) GetMerchant(context.Context, *GetMerchantRequest) (*GetMerchantResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMerchant not implemented")
 }
 func (UnimplementedBcpayServer) BankAccountList(context.Context, *BankAccountListRequest) (*BankAccountListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BankAccountList not implemented")
@@ -180,6 +193,9 @@ func (UnimplementedBcpayServer) TransactionList(context.Context, *TransactionLis
 }
 func (UnimplementedBcpayServer) AuditTransaction(context.Context, *AuditTransactionRequest) (*AuditTransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AuditTransaction not implemented")
+}
+func (UnimplementedBcpayServer) AddNoteToTransaction(context.Context, *AddNoteToTransactionRequest) (*AddNoteToTransactionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddNoteToTransaction not implemented")
 }
 func (UnimplementedBcpayServer) mustEmbedUnimplementedBcpayServer() {}
 func (UnimplementedBcpayServer) testEmbeddedByValue()               {}
@@ -238,20 +254,20 @@ func _Bcpay_CreateWithdraw_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Bcpay_CreateMerchant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateMerchantRequest)
+func _Bcpay_GetMerchant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMerchantRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BcpayServer).CreateMerchant(ctx, in)
+		return srv.(BcpayServer).GetMerchant(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Bcpay_CreateMerchant_FullMethodName,
+		FullMethod: Bcpay_GetMerchant_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BcpayServer).CreateMerchant(ctx, req.(*CreateMerchantRequest))
+		return srv.(BcpayServer).GetMerchant(ctx, req.(*GetMerchantRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -346,6 +362,24 @@ func _Bcpay_AuditTransaction_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Bcpay_AddNoteToTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddNoteToTransactionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BcpayServer).AddNoteToTransaction(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Bcpay_AddNoteToTransaction_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BcpayServer).AddNoteToTransaction(ctx, req.(*AddNoteToTransactionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Bcpay_ServiceDesc is the grpc.ServiceDesc for Bcpay service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -362,8 +396,8 @@ var Bcpay_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Bcpay_CreateWithdraw_Handler,
 		},
 		{
-			MethodName: "CreateMerchant",
-			Handler:    _Bcpay_CreateMerchant_Handler,
+			MethodName: "GetMerchant",
+			Handler:    _Bcpay_GetMerchant_Handler,
 		},
 		{
 			MethodName: "BankAccountList",
@@ -384,6 +418,10 @@ var Bcpay_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AuditTransaction",
 			Handler:    _Bcpay_AuditTransaction_Handler,
+		},
+		{
+			MethodName: "AddNoteToTransaction",
+			Handler:    _Bcpay_AddNoteToTransaction_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

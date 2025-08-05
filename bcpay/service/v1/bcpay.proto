@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 import "google/api/annotations.proto";
+import "common/common.proto";
 
 package api.bcpay.service.v1;
 
@@ -25,7 +26,7 @@ service Bcpay {
 	}
 	
 
-	rpc CreateMerchant(CreateMerchantRequest) returns (CreateMerchantResponse) { }
+	rpc GetMerchant(GetMerchantRequest) returns (GetMerchantResponse) { }
 
 	rpc BankAccountList(BankAccountListRequest) returns (BankAccountListResponse) { }
 
@@ -36,6 +37,8 @@ service Bcpay {
 	rpc TransactionList(TransactionListRequest) returns (TransactionListResponse) { }
 
 	rpc AuditTransaction(AuditTransactionRequest) returns (AuditTransactionResponse) { }
+
+	rpc AddNoteToTransaction(AddNoteToTransactionRequest) returns (AddNoteToTransactionResponse) { }
 }
 
 message GetBankAccountRequest {
@@ -71,34 +74,38 @@ message CreateWithdrawResponse {
 
 
 
-message CreateMerchantRequest {
+message GetMerchantRequest {
 	string name = 1;
-	string operator_id = 2;
+  api.common.OperatorContext operator_context = 2;
 }
 
-message CreateMerchantResponse {
+message GetMerchantResponse {
 	string merchant_id = 1;
-	string api_key_public = 2;
-	string api_key_secret = 3;
+	// string api_key_public = 2;
+	// string api_key_secret = 3;
 	
 }
 
 message BankAccount {
-	string merchant_id = 1;
-	string card_id = 2;
-	string bank_first_name = 3;
-	string bank_last_name = 4;
-	string max_amount = 5;
-	string min_amount = 6;
-	string currency = 7;
-	string country = 8;
-	bool enable = 9;
+	int64 id = 1;
+	string merchant_id = 2;
+	string bank_account = 3;
+	string bank_first_name = 4;
+	string bank_last_name = 5;
+	string currency = 6;
+	string country = 7;
+	string max_amount = 8;
+	string min_amount = 9;
+	string max_amount_per_trans = 10;
+	int32 max_trans_limit = 11;
+	int32 priority = 12;
+	bool enable = 13;
 }
 
 message BankAccountListRequest {
-	string merchant_id = 1;
-	string currency = 2;
-	string country = 3;
+	string currency = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  api.common.OperatorContext operator_context = 3;
 }
 
 message BankAccountListResponse {
@@ -107,6 +114,7 @@ message BankAccountListResponse {
 
 message AddBankAccountRequest {
 	BankAccount bank_account = 1;
+  api.common.OperatorContext operator_context = 2;
 }
 
 message AddBankAccountResponse {
@@ -115,6 +123,7 @@ message AddBankAccountResponse {
 
 message UpdateBankAccountRequest {
 	BankAccount bank_account = 1;
+  api.common.OperatorContext operator_context = 2;
 }
 
 message UpdateBankAccountResponse {
@@ -122,6 +131,8 @@ message UpdateBankAccountResponse {
 }
 
 message TransactionListRequest {
+  api.common.OperatorContextFilters operator_context_filters = 1;
+  api.common.OperatorContext operator_context = 2;
 }
 
 message Transaction {
@@ -138,9 +149,11 @@ message Transaction {
  	string status = 11;
 	// audit a transaction "approve" or "deline"
 	string audit = 12;
-	string audit_time = 13;
-	string create_time = 14;
-	string update_time = 15;
+ 	string auditor = 13;
+	string audit_time = 14;
+ 	string audit_note = 15;
+	string create_time = 16;
+	string update_time = 17;
 }
 
 message TransactionListResponse {
@@ -149,11 +162,21 @@ message TransactionListResponse {
 
 message AuditTransactionRequest {
 	string transaction_id = 1;
-	// audit a transaction "approve" or "deline"
 	string audit = 2;
-	
+  api.common.OperatorContext operator_context = 3;
 }
 
 message AuditTransactionResponse {
+	Transaction transaction = 1;
+}
+
+message AddNoteToTransactionRequest {
+	string transaction_id = 1;
+	// note
+	string note = 2;
+	
+}
+
+message AddNoteToTransactionResponse {
 	Transaction transaction = 1;
 }

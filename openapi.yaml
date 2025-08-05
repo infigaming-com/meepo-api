@@ -469,7 +469,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.bcpay.service.v1.AddBankAccountRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AddBankAccountRequest'
                 required: true
             responses:
                 "200":
@@ -487,7 +487,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.bcpay.service.v1.BankAccountListRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.BankAccountListRequest'
                 required: true
             responses:
                 "200":
@@ -505,7 +505,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.bcpay.service.v1.UpdateBankAccountRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateBankAccountRequest'
                 required: true
             responses:
                 "200":
@@ -518,12 +518,12 @@ paths:
         post:
             tags:
                 - BackofficeBcpay
-            operationId: BackofficeBcpay_CreateMerchant
+            operationId: BackofficeBcpay_GetMerchant
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.bcpay.service.v1.CreateMerchantRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetMerchantRequest'
                 required: true
             responses:
                 "200":
@@ -531,7 +531,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.bcpay.service.v1.CreateMerchantResponse'
+                                $ref: '#/components/schemas/api.bcpay.service.v1.GetMerchantResponse'
     /v1/backoffice/bcpay/transaction/add:
         post:
             tags:
@@ -541,7 +541,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.bcpay.service.v1.AuditTransactionRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AuditTransactionRequest'
                 required: true
             responses:
                 "200":
@@ -559,7 +559,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.bcpay.service.v1.TransactionListRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.TransactionListRequest'
                 required: true
             responses:
                 "200":
@@ -3015,28 +3015,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.UpdateBankCardResponse'
-    /v1/payment/channel/create:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Create payment channel
-                 Creates a new payment channel with specified configuration
-                 Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-            operationId: Payment_CreatePaymentChannel
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.CreatePaymentChannelRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.CreatePaymentChannelResponse'
     /v1/payment/channel/page:
         post:
             tags:
@@ -3059,28 +3037,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetPaymentChannelPageResponse'
-    /v1/payment/channel/update:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Create payment channel
-                 Creates a new payment channel with specified configuration
-                 Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-            operationId: Payment_UpdatePaymentChannel
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.UpdatePaymentChannelRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.UpdatePaymentChannelResponse'
     /v1/payment/deposit/callback:
         post:
             tags:
@@ -3126,50 +3082,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.InitiateDepositResponse'
-    /v1/payment/method/create:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Create payment channel
-                 Creates a new payment channel with specified configuration
-                 Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-            operationId: Payment_CreatePaymentMethod
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.CreatePaymentMethodRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.CreatePaymentMethodResponse'
-    /v1/payment/method/list:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Get list of payment methods
-                 Retrieves all available payment methods supported by the system
-                 Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
-            operationId: Payment_GetPaymentMethodList
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.GetPaymentMethodListResponse'
     /v1/payment/operator/deposit/callback:
         post:
             tags:
@@ -3216,28 +3128,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.WithdrawCallbackResponse'
-    /v1/payment/supportedmethod/list:
-        post:
-            tags:
-                - Payment
-            description: |-
-                Get list of payment methods
-                 Retrieves all available payment methods supported by the system
-                 Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
-            operationId: Payment_GetSupportedPaymentMethodList
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetSupportedPaymentMethodListRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.GetSupportedPaymentMethodListResponse'
     /v1/payment/transaction/page:
         post:
             tags:
@@ -3633,6 +3523,11 @@ components:
         api.backoffice.service.v1.AddAdjustmentResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.AddBankAccountRequest:
+            type: object
+            properties:
+                bankAccount:
+                    $ref: '#/components/schemas/api.bcpay.service.v1.BankAccount'
         api.backoffice.service.v1.AddCommentRequest:
             type: object
             properties:
@@ -3743,6 +3638,21 @@ components:
                     type: string
                 errorMessage:
                     type: string
+        api.backoffice.service.v1.AuditTransactionRequest:
+            type: object
+            properties:
+                transactionId:
+                    type: string
+                audit:
+                    type: string
+                    description: audit a transaction "approve" or "deline"
+        api.backoffice.service.v1.BankAccountListRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.Bet:
             type: object
             properties:
@@ -4684,6 +4594,11 @@ components:
                 totalOutcome:
                     type: string
                 billingPeriod:
+                    type: string
+        api.backoffice.service.v1.GetMerchantRequest:
+            type: object
+            properties:
+                name:
                     type: string
         api.backoffice.service.v1.GetOperatorAddressRequest:
             type: object
@@ -8674,6 +8589,11 @@ components:
                     type: string
                 endTime:
                     type: string
+        api.backoffice.service.v1.TransactionListRequest:
+            type: object
+            properties:
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.Unbind2faRequest:
             type: object
             properties:
@@ -8708,6 +8628,11 @@ components:
         api.backoffice.service.v1.UpdateAdjustmentConfigResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.UpdateBankAccountRequest:
+            type: object
+            properties:
+                bankAccount:
+                    $ref: '#/components/schemas/api.bcpay.service.v1.BankAccount'
         api.backoffice.service.v1.UpdateGameRequest:
             type: object
             properties:
@@ -8899,24 +8824,11 @@ components:
                 decimalPlaces:
                     type: integer
                     format: int32
-        api.bcpay.service.v1.AddBankAccountRequest:
-            type: object
-            properties:
-                bankAccount:
-                    $ref: '#/components/schemas/api.bcpay.service.v1.BankAccount'
         api.bcpay.service.v1.AddBankAccountResponse:
             type: object
             properties:
                 bankAccount:
                     $ref: '#/components/schemas/api.bcpay.service.v1.BankAccount'
-        api.bcpay.service.v1.AuditTransactionRequest:
-            type: object
-            properties:
-                transactionId:
-                    type: string
-                audit:
-                    type: string
-                    description: audit a transaction "approve" or "deline"
         api.bcpay.service.v1.AuditTransactionResponse:
             type: object
             properties:
@@ -8925,33 +8837,34 @@ components:
         api.bcpay.service.v1.BankAccount:
             type: object
             properties:
+                id:
+                    type: string
                 merchantId:
                     type: string
-                cardId:
+                bankAccount:
                     type: string
                 bankFirstName:
                     type: string
                 bankLastName:
                     type: string
+                currency:
+                    type: string
+                country:
+                    type: string
                 maxAmount:
                     type: string
                 minAmount:
                     type: string
-                currency:
+                maxAmountPerTrans:
                     type: string
-                country:
-                    type: string
+                maxTransLimit:
+                    type: integer
+                    format: int32
+                priority:
+                    type: integer
+                    format: int32
                 enable:
                     type: boolean
-        api.bcpay.service.v1.BankAccountListRequest:
-            type: object
-            properties:
-                merchantId:
-                    type: string
-                currency:
-                    type: string
-                country:
-                    type: string
         api.bcpay.service.v1.BankAccountListResponse:
             type: object
             properties:
@@ -8959,22 +8872,6 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.bcpay.service.v1.BankAccount'
-        api.bcpay.service.v1.CreateMerchantRequest:
-            type: object
-            properties:
-                name:
-                    type: string
-                operatorId:
-                    type: string
-        api.bcpay.service.v1.CreateMerchantResponse:
-            type: object
-            properties:
-                merchantId:
-                    type: string
-                apiKeyPublic:
-                    type: string
-                apiKeySecret:
-                    type: string
         api.bcpay.service.v1.CreateWithdrawRequest:
             type: object
             properties:
@@ -9024,6 +8921,11 @@ components:
                     type: string
                 iban:
                     type: string
+        api.bcpay.service.v1.GetMerchantResponse:
+            type: object
+            properties:
+                merchantId:
+                    type: string
         api.bcpay.service.v1.Transaction:
             type: object
             properties:
@@ -9052,15 +8954,16 @@ components:
                 audit:
                     type: string
                     description: audit a transaction "approve" or "deline"
+                auditor:
+                    type: string
                 auditTime:
+                    type: string
+                auditNote:
                     type: string
                 createTime:
                     type: string
                 updateTime:
                     type: string
-        api.bcpay.service.v1.TransactionListRequest:
-            type: object
-            properties: {}
         api.bcpay.service.v1.TransactionListResponse:
             type: object
             properties:
@@ -9068,11 +8971,6 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.bcpay.service.v1.Transaction'
-        api.bcpay.service.v1.UpdateBankAccountRequest:
-            type: object
-            properties:
-                bankAccount:
-                    $ref: '#/components/schemas/api.bcpay.service.v1.BankAccount'
         api.bcpay.service.v1.UpdateBankAccountResponse:
             type: object
             properties:
@@ -10376,52 +10274,6 @@ components:
                     type: string
                 enabled:
                     type: boolean
-        payment.service.v1.CreatePaymentChannelRequest:
-            type: object
-            properties:
-                merchantId:
-                    type: string
-                    description: ID of the merchant creating this channel
-                operatorContext:
-                    allOf:
-                        - $ref: '#/components/schemas/api.common.OperatorContext'
-                    description: ID of the Operator connect with this channel
-                paymentMethodId:
-                    type: string
-                    description: ID of the payment method to be used
-                contact:
-                    type: string
-                    description: Contact Info email
-                fixedFee:
-                    type: string
-                    description: PSP Fixed Fee on the Amount
-                feeRate:
-                    type: string
-                    description: PSP Rate Fee
-                minFee:
-                    type: string
-                    description: Minimum Fee
-                userFixedFee:
-                    type: string
-                    description: User Fixed Fee on the Amount
-                userFeeRate:
-                    type: string
-                    description: User Rate Fee
-                userMinFee:
-                    type: string
-                    description: Minimum Fee
-                minAmount:
-                    type: string
-                    description: Min Amount
-                maxAmount:
-                    type: string
-                    description: Max Amount
-                key:
-                    type: object
-                    description: Configuration fields for the payment channel in JSON format
-            description: |-
-                Request to create a payment channel
-                 Used to create a new payment channel with specified merchant and method
         payment.service.v1.CreatePaymentChannelResponse:
             type: object
             properties:
@@ -10431,37 +10283,6 @@ components:
             description: |-
                 Response for channel creation
                  Returns the ID of the newly created payment channel
-        payment.service.v1.CreatePaymentMethodRequest:
-            type: object
-            properties:
-                paymentMethodId:
-                    type: string
-                    description: ID of the payment method to be used
-                contact:
-                    type: string
-                    description: Currency Type
-                sysFixedFee:
-                    type: string
-                    description: Fixed Fee on the Amount
-                sysFeeRate:
-                    type: string
-                    description: Rate Fee
-                sysMinAmount:
-                    type: string
-                    description: Min Amount
-                sysMaxAmount:
-                    type: string
-                    description: Max Amount
-                sysMinFee:
-                    type: string
-                    description: Minmum Fee
-                operatorContext:
-                    allOf:
-                        - $ref: '#/components/schemas/api.common.OperatorContext'
-                    description: ID of the Operator connect with this channel
-            description: |-
-                Request to create a payment channel
-                 Used to create a new payment channel with specified merchant and method
         payment.service.v1.CreatePaymentMethodResponse:
             type: object
             properties:
@@ -10688,25 +10509,6 @@ components:
             description: |-
                 Response for payment channel page
                  Contains paginated list of payment channels and pagination metadata
-        payment.service.v1.GetPaymentMethodListRequest:
-            type: object
-            properties:
-                currency:
-                    type: string
-                psp:
-                    type: string
-                page:
-                    type: integer
-                    description: Page number to retrieve (1-based)
-                    format: int32
-                pageSize:
-                    type: integer
-                    description: Number of items per page
-                    format: int32
-                enabled:
-                    type: boolean
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
         payment.service.v1.GetPaymentMethodListResponse:
             type: object
             properties:
@@ -10848,9 +10650,11 @@ components:
                 minAmount:
                     type: string
                     description: Optional minimum amount filter
-                userId:
+                maxAmount:
                     type: string
                     description: Optional maximum amount filter
+                userId:
+                    type: string
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 operatorContext:

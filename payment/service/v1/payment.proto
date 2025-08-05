@@ -193,7 +193,7 @@ message UpdatePaymentChannelRequest {
   // Max Amount
   string max_amount = 10;
   // enable status
-  bool enable = 11;
+  optional bool enable = 11;
   // Configuration fields for the payment channel in JSON format
   google.protobuf.Struct key = 12;
 }
@@ -679,6 +679,7 @@ message GetTransactionPageRequest {
   // Optional minimum amount filter
   string min_amount = 15;
   // Optional maximum amount filter
+  string max_amount = 16;
   int64 user_id = 17;
   api.common.OperatorContextFilters operator_context_filters = 18;
   api.common.OperatorContext operator_context = 19;
@@ -869,50 +870,30 @@ service Payment {
   // Retrieves all available payment methods supported by the system
   // Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
   rpc GetSupportedPaymentMethodList(GetSupportedPaymentMethodListRequest) returns (GetSupportedPaymentMethodListResponse) {
-    option (google.api.http) = {
-      post: "/v1/payment/supportedmethod/list"
-      body: "*"
-    };
   }
 
   // Create payment channel
   // Creates a new payment channel with specified configuration
   // Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
   rpc CreatePaymentMethod(CreatePaymentMethodRequest) returns (CreatePaymentMethodResponse) {
-    option (google.api.http) = {
-      post: "/v1/payment/method/create"
-      body: "*"
-    };
   }
 
   // Get list of payment methods
   // Retrieves all available payment methods supported by the system
   // Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
   rpc GetPaymentMethodList(GetPaymentMethodListRequest) returns (GetPaymentMethodListResponse) {
-    option (google.api.http) = {
-      post: "/v1/payment/method/list"
-      body: "*"
-    };
   }
 
   // Create payment channel
   // Creates a new payment channel with specified configuration
   // Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
   rpc UpdatePaymentChannel(UpdatePaymentChannelRequest) returns (UpdatePaymentChannelResponse) {
-    option (google.api.http) = {
-      post: "/v1/payment/channel/update"
-      body: "*"
-    };
   }
 
   // Create payment channel
   // Creates a new payment channel with specified configuration
   // Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
   rpc CreatePaymentChannel(CreatePaymentChannelRequest) returns (CreatePaymentChannelResponse) {
-    option (google.api.http) = {
-      post: "/v1/payment/channel/create"
-      body: "*"
-    };
   }
 
   rpc GetAddress(GetAddressRequest) returns (GetAddressResponse) {

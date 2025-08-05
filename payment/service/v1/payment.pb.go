@@ -1155,7 +1155,7 @@ type UpdatePaymentChannelRequest struct {
 	// Max Amount
 	MaxAmount string `protobuf:"bytes,10,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
 	// enable status
-	Enable bool `protobuf:"varint,11,opt,name=enable,proto3" json:"enable,omitempty"`
+	Enable *bool `protobuf:"varint,11,opt,name=enable,proto3,oneof" json:"enable,omitempty"`
 	// Configuration fields for the payment channel in JSON format
 	Key           *structpb.Struct `protobuf:"bytes,12,opt,name=key,proto3" json:"key,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1263,8 +1263,8 @@ func (x *UpdatePaymentChannelRequest) GetMaxAmount() string {
 }
 
 func (x *UpdatePaymentChannelRequest) GetEnable() bool {
-	if x != nil {
-		return x.Enable
+	if x != nil && x.Enable != nil {
+		return *x.Enable
 	}
 	return false
 }
@@ -3335,6 +3335,7 @@ type GetTransactionPageRequest struct {
 	// Optional minimum amount filter
 	MinAmount string `protobuf:"bytes,15,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
 	// Optional maximum amount filter
+	MaxAmount              string                         `protobuf:"bytes,16,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
 	UserId                 int64                          `protobuf:"varint,17,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,18,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	OperatorContext        *common.OperatorContext        `protobuf:"bytes,19,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
@@ -3473,6 +3474,13 @@ func (x *GetTransactionPageRequest) GetSort() Sort {
 func (x *GetTransactionPageRequest) GetMinAmount() string {
 	if x != nil {
 		return x.MinAmount
+	}
+	return ""
+}
+
+func (x *GetTransactionPageRequest) GetMaxAmount() string {
+	if x != nil {
+		return x.MaxAmount
 	}
 	return ""
 }
@@ -4980,7 +4988,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"min_amount\x18\v \x01(\tR\tminAmount\x12\x1d\n" +
 	"\n" +
 	"max_amount\x18\f \x01(\tR\tmaxAmount\x12)\n" +
-	"\x03key\x18\r \x01(\v2\x17.google.protobuf.StructR\x03key\"\xa3\x03\n" +
+	"\x03key\x18\r \x01(\v2\x17.google.protobuf.StructR\x03key\"\xb3\x03\n" +
 	"\x1bUpdatePaymentChannelRequest\x12,\n" +
 	"\x12payment_channel_id\x18\x01 \x01(\tR\x10paymentChannelId\x12\x18\n" +
 	"\acontact\x18\x02 \x01(\tR\acontact\x12\x1b\n" +
@@ -4995,9 +5003,10 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"min_amount\x18\t \x01(\tR\tminAmount\x12\x1d\n" +
 	"\n" +
 	"max_amount\x18\n" +
-	" \x01(\tR\tmaxAmount\x12\x16\n" +
-	"\x06enable\x18\v \x01(\bR\x06enable\x12)\n" +
-	"\x03key\x18\f \x01(\v2\x17.google.protobuf.StructR\x03key\"=\n" +
+	" \x01(\tR\tmaxAmount\x12\x1b\n" +
+	"\x06enable\x18\v \x01(\bH\x00R\x06enable\x88\x01\x01\x12)\n" +
+	"\x03key\x18\f \x01(\v2\x17.google.protobuf.StructR\x03keyB\t\n" +
+	"\a_enable\"=\n" +
 	"\x1cCreatePaymentChannelResponse\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xa8\f\n" +
@@ -5204,7 +5213,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x03gas\x18\x1c \x01(\tR\x03gas\"\x9c\x01\n" +
 	"\x11TransactionDetail\x12E\n" +
 	"\vtransaction\x18\x01 \x01(\v2#.payment.service.v1.TransactionInfoR\vtransaction\x12@\n" +
-	"\achannel\x18\x02 \x01(\v2&.payment.service.v1.PaymentChannelInfoR\achannel\"\xa1\x06\n" +
+	"\achannel\x18\x02 \x01(\v2&.payment.service.v1.PaymentChannelInfoR\achannel\"\xc0\x06\n" +
 	"\x19GetTransactionPageRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12%\n" +
@@ -5223,7 +5232,9 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\bend_time\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12,\n" +
 	"\x04sort\x18\x0e \x01(\x0e2\x18.payment.service.v1.SortR\x04sort\x12\x1d\n" +
 	"\n" +
-	"min_amount\x18\x0f \x01(\tR\tminAmount\x12\x17\n" +
+	"min_amount\x18\x0f \x01(\tR\tminAmount\x12\x1d\n" +
+	"\n" +
+	"max_amount\x18\x10 \x01(\tR\tmaxAmount\x12\x17\n" +
 	"\auser_id\x18\x11 \x01(\x03R\x06userId\x12\\\n" +
 	"\x18operator_context_filters\x18\x12 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
 	"\x10operator_context\x18\x13 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xd1\x02\n" +
@@ -5340,13 +5351,13 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\vChannelType\x12\x14\n" +
 	"\x10CHANNEL_TYPE_ALL\x10\x00\x12\x18\n" +
 	"\x14CHANNEL_TYPE_DEPOSIT\x10\x01\x12\x19\n" +
-	"\x15CHANNEL_TYPE_WITHDRAW\x10\x022\xf4\x1d\n" +
-	"\aPayment\x12\xc1\x01\n" +
-	"\x1dGetSupportedPaymentMethodList\x128.payment.service.v1.GetSupportedPaymentMethodListRequest\x1a9.payment.service.v1.GetSupportedPaymentMethodListResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/payment/supportedmethod/list\x12\x9c\x01\n" +
-	"\x13CreatePaymentMethod\x12..payment.service.v1.CreatePaymentMethodRequest\x1a/.payment.service.v1.CreatePaymentMethodResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/payment/method/create\x12\x9d\x01\n" +
-	"\x14GetPaymentMethodList\x12/.payment.service.v1.GetPaymentMethodListRequest\x1a0.payment.service.v1.GetPaymentMethodListResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v1/payment/method/list\x12\xa0\x01\n" +
-	"\x14UpdatePaymentChannel\x12/.payment.service.v1.UpdatePaymentChannelRequest\x1a0.payment.service.v1.UpdatePaymentChannelResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v1/payment/channel/update\x12\xa0\x01\n" +
-	"\x14CreatePaymentChannel\x12/.payment.service.v1.CreatePaymentChannelRequest\x1a0.payment.service.v1.CreatePaymentChannelResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v1/payment/channel/create\x12\x7f\n" +
+	"\x15CHANNEL_TYPE_WITHDRAW\x10\x022\xb5\x1c\n" +
+	"\aPayment\x12\x96\x01\n" +
+	"\x1dGetSupportedPaymentMethodList\x128.payment.service.v1.GetSupportedPaymentMethodListRequest\x1a9.payment.service.v1.GetSupportedPaymentMethodListResponse\"\x00\x12x\n" +
+	"\x13CreatePaymentMethod\x12..payment.service.v1.CreatePaymentMethodRequest\x1a/.payment.service.v1.CreatePaymentMethodResponse\"\x00\x12{\n" +
+	"\x14GetPaymentMethodList\x12/.payment.service.v1.GetPaymentMethodListRequest\x1a0.payment.service.v1.GetPaymentMethodListResponse\"\x00\x12{\n" +
+	"\x14UpdatePaymentChannel\x12/.payment.service.v1.UpdatePaymentChannelRequest\x1a0.payment.service.v1.UpdatePaymentChannelResponse\"\x00\x12{\n" +
+	"\x14CreatePaymentChannel\x12/.payment.service.v1.CreatePaymentChannelRequest\x1a0.payment.service.v1.CreatePaymentChannelResponse\"\x00\x12\x7f\n" +
 	"\n" +
 	"GetAddress\x12%.payment.service.v1.GetAddressRequest\x1a&.payment.service.v1.GetAddressResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v1/payment/address/get\x12\x93\x01\n" +
 	"\x0fInitiateDeposit\x12*.payment.service.v1.InitiateDepositRequest\x1a+.payment.service.v1.InitiateDepositResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/payment/deposit/initiate\x12o\n" +
@@ -5567,6 +5578,7 @@ func file_payment_service_v1_payment_proto_init() {
 		return
 	}
 	file_payment_service_v1_payment_proto_msgTypes[1].OneofWrappers = []any{}
+	file_payment_service_v1_payment_proto_msgTypes[9].OneofWrappers = []any{}
 	file_payment_service_v1_payment_proto_msgTypes[31].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
