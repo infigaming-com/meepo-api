@@ -41,10 +41,12 @@ const (
 	Payment_GetChannelsByIds_FullMethodName                 = "/payment.service.v1.Payment/GetChannelsByIds"
 	Payment_UpdatePaymentMethod_FullMethodName              = "/payment.service.v1.Payment/UpdatePaymentMethod"
 	Payment_GetOperatorPaymentChannelPage_FullMethodName    = "/payment.service.v1.Payment/GetOperatorPaymentChannelPage"
-	Payment_GetBankCardList_FullMethodName                  = "/payment.service.v1.Payment/GetBankCardList"
-	Payment_AddBankCard_FullMethodName                      = "/payment.service.v1.Payment/AddBankCard"
-	Payment_UpdateBankCard_FullMethodName                   = "/payment.service.v1.Payment/UpdateBankCard"
-	Payment_DeleteBankCard_FullMethodName                   = "/payment.service.v1.Payment/DeleteBankCard"
+	Payment_GetUserBankCardList_FullMethodName              = "/payment.service.v1.Payment/GetUserBankCardList"
+	Payment_AddUserBankCard_FullMethodName                  = "/payment.service.v1.Payment/AddUserBankCard"
+	Payment_UpdateUserBankCard_FullMethodName               = "/payment.service.v1.Payment/UpdateUserBankCard"
+	Payment_DeleteUsesrBankCard_FullMethodName              = "/payment.service.v1.Payment/DeleteUsesrBankCard"
+	Payment_GetDepositBankAccount_FullMethodName            = "/payment.service.v1.Payment/GetDepositBankAccount"
+	Payment_GetBankSchema_FullMethodName                    = "/payment.service.v1.Payment/GetBankSchema"
 )
 
 // PaymentClient is the client API for Payment service.
@@ -125,10 +127,12 @@ type PaymentClient interface {
 	GetChannelsByIds(ctx context.Context, in *GetChannelsByIdsRequest, opts ...grpc.CallOption) (*GetChannelsByIdsResponse, error)
 	UpdatePaymentMethod(ctx context.Context, in *UpdatePaymentMethodRequest, opts ...grpc.CallOption) (*CreatePaymentMethodResponse, error)
 	GetOperatorPaymentChannelPage(ctx context.Context, in *GetOperatorPaymentChannelPageRequest, opts ...grpc.CallOption) (*GetPaymentChannelPageResponse, error)
-	GetBankCardList(ctx context.Context, in *GetBankCardListRequest, opts ...grpc.CallOption) (*GetBankCardListResponse, error)
-	AddBankCard(ctx context.Context, in *AddBankCardRequest, opts ...grpc.CallOption) (*AddBankCardResponse, error)
-	UpdateBankCard(ctx context.Context, in *UpdateBankCardRequest, opts ...grpc.CallOption) (*UpdateBankCardResponse, error)
-	DeleteBankCard(ctx context.Context, in *DeleteBankCardRequest, opts ...grpc.CallOption) (*DeleteBankCardResponse, error)
+	GetUserBankCardList(ctx context.Context, in *GetBankCardListRequest, opts ...grpc.CallOption) (*GetBankCardListResponse, error)
+	AddUserBankCard(ctx context.Context, in *AddBankCardRequest, opts ...grpc.CallOption) (*AddBankCardResponse, error)
+	UpdateUserBankCard(ctx context.Context, in *UpdateBankCardRequest, opts ...grpc.CallOption) (*UpdateBankCardResponse, error)
+	DeleteUsesrBankCard(ctx context.Context, in *DeleteBankCardRequest, opts ...grpc.CallOption) (*DeleteBankCardResponse, error)
+	GetDepositBankAccount(ctx context.Context, in *GetBankAccountRequest, opts ...grpc.CallOption) (*GetBankAccountResponse, error)
+	GetBankSchema(ctx context.Context, in *GetBankSchemaRequest, opts ...grpc.CallOption) (*GetBankSchemaResponse, error)
 }
 
 type paymentClient struct {
@@ -359,40 +363,60 @@ func (c *paymentClient) GetOperatorPaymentChannelPage(ctx context.Context, in *G
 	return out, nil
 }
 
-func (c *paymentClient) GetBankCardList(ctx context.Context, in *GetBankCardListRequest, opts ...grpc.CallOption) (*GetBankCardListResponse, error) {
+func (c *paymentClient) GetUserBankCardList(ctx context.Context, in *GetBankCardListRequest, opts ...grpc.CallOption) (*GetBankCardListResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetBankCardListResponse)
-	err := c.cc.Invoke(ctx, Payment_GetBankCardList_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Payment_GetUserBankCardList_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *paymentClient) AddBankCard(ctx context.Context, in *AddBankCardRequest, opts ...grpc.CallOption) (*AddBankCardResponse, error) {
+func (c *paymentClient) AddUserBankCard(ctx context.Context, in *AddBankCardRequest, opts ...grpc.CallOption) (*AddBankCardResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AddBankCardResponse)
-	err := c.cc.Invoke(ctx, Payment_AddBankCard_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Payment_AddUserBankCard_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *paymentClient) UpdateBankCard(ctx context.Context, in *UpdateBankCardRequest, opts ...grpc.CallOption) (*UpdateBankCardResponse, error) {
+func (c *paymentClient) UpdateUserBankCard(ctx context.Context, in *UpdateBankCardRequest, opts ...grpc.CallOption) (*UpdateBankCardResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateBankCardResponse)
-	err := c.cc.Invoke(ctx, Payment_UpdateBankCard_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Payment_UpdateUserBankCard_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *paymentClient) DeleteBankCard(ctx context.Context, in *DeleteBankCardRequest, opts ...grpc.CallOption) (*DeleteBankCardResponse, error) {
+func (c *paymentClient) DeleteUsesrBankCard(ctx context.Context, in *DeleteBankCardRequest, opts ...grpc.CallOption) (*DeleteBankCardResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteBankCardResponse)
-	err := c.cc.Invoke(ctx, Payment_DeleteBankCard_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Payment_DeleteUsesrBankCard_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) GetDepositBankAccount(ctx context.Context, in *GetBankAccountRequest, opts ...grpc.CallOption) (*GetBankAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBankAccountResponse)
+	err := c.cc.Invoke(ctx, Payment_GetDepositBankAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) GetBankSchema(ctx context.Context, in *GetBankSchemaRequest, opts ...grpc.CallOption) (*GetBankSchemaResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBankSchemaResponse)
+	err := c.cc.Invoke(ctx, Payment_GetBankSchema_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -477,10 +501,12 @@ type PaymentServer interface {
 	GetChannelsByIds(context.Context, *GetChannelsByIdsRequest) (*GetChannelsByIdsResponse, error)
 	UpdatePaymentMethod(context.Context, *UpdatePaymentMethodRequest) (*CreatePaymentMethodResponse, error)
 	GetOperatorPaymentChannelPage(context.Context, *GetOperatorPaymentChannelPageRequest) (*GetPaymentChannelPageResponse, error)
-	GetBankCardList(context.Context, *GetBankCardListRequest) (*GetBankCardListResponse, error)
-	AddBankCard(context.Context, *AddBankCardRequest) (*AddBankCardResponse, error)
-	UpdateBankCard(context.Context, *UpdateBankCardRequest) (*UpdateBankCardResponse, error)
-	DeleteBankCard(context.Context, *DeleteBankCardRequest) (*DeleteBankCardResponse, error)
+	GetUserBankCardList(context.Context, *GetBankCardListRequest) (*GetBankCardListResponse, error)
+	AddUserBankCard(context.Context, *AddBankCardRequest) (*AddBankCardResponse, error)
+	UpdateUserBankCard(context.Context, *UpdateBankCardRequest) (*UpdateBankCardResponse, error)
+	DeleteUsesrBankCard(context.Context, *DeleteBankCardRequest) (*DeleteBankCardResponse, error)
+	GetDepositBankAccount(context.Context, *GetBankAccountRequest) (*GetBankAccountResponse, error)
+	GetBankSchema(context.Context, *GetBankSchemaRequest) (*GetBankSchemaResponse, error)
 	mustEmbedUnimplementedPaymentServer()
 }
 
@@ -557,17 +583,23 @@ func (UnimplementedPaymentServer) UpdatePaymentMethod(context.Context, *UpdatePa
 func (UnimplementedPaymentServer) GetOperatorPaymentChannelPage(context.Context, *GetOperatorPaymentChannelPageRequest) (*GetPaymentChannelPageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorPaymentChannelPage not implemented")
 }
-func (UnimplementedPaymentServer) GetBankCardList(context.Context, *GetBankCardListRequest) (*GetBankCardListResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetBankCardList not implemented")
+func (UnimplementedPaymentServer) GetUserBankCardList(context.Context, *GetBankCardListRequest) (*GetBankCardListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserBankCardList not implemented")
 }
-func (UnimplementedPaymentServer) AddBankCard(context.Context, *AddBankCardRequest) (*AddBankCardResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddBankCard not implemented")
+func (UnimplementedPaymentServer) AddUserBankCard(context.Context, *AddBankCardRequest) (*AddBankCardResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddUserBankCard not implemented")
 }
-func (UnimplementedPaymentServer) UpdateBankCard(context.Context, *UpdateBankCardRequest) (*UpdateBankCardResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateBankCard not implemented")
+func (UnimplementedPaymentServer) UpdateUserBankCard(context.Context, *UpdateBankCardRequest) (*UpdateBankCardResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserBankCard not implemented")
 }
-func (UnimplementedPaymentServer) DeleteBankCard(context.Context, *DeleteBankCardRequest) (*DeleteBankCardResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteBankCard not implemented")
+func (UnimplementedPaymentServer) DeleteUsesrBankCard(context.Context, *DeleteBankCardRequest) (*DeleteBankCardResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteUsesrBankCard not implemented")
+}
+func (UnimplementedPaymentServer) GetDepositBankAccount(context.Context, *GetBankAccountRequest) (*GetBankAccountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDepositBankAccount not implemented")
+}
+func (UnimplementedPaymentServer) GetBankSchema(context.Context, *GetBankSchemaRequest) (*GetBankSchemaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBankSchema not implemented")
 }
 func (UnimplementedPaymentServer) mustEmbedUnimplementedPaymentServer() {}
 func (UnimplementedPaymentServer) testEmbeddedByValue()                 {}
@@ -986,74 +1018,110 @@ func _Payment_GetOperatorPaymentChannelPage_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Payment_GetBankCardList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Payment_GetUserBankCardList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetBankCardListRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PaymentServer).GetBankCardList(ctx, in)
+		return srv.(PaymentServer).GetUserBankCardList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Payment_GetBankCardList_FullMethodName,
+		FullMethod: Payment_GetUserBankCardList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentServer).GetBankCardList(ctx, req.(*GetBankCardListRequest))
+		return srv.(PaymentServer).GetUserBankCardList(ctx, req.(*GetBankCardListRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Payment_AddBankCard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Payment_AddUserBankCard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AddBankCardRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PaymentServer).AddBankCard(ctx, in)
+		return srv.(PaymentServer).AddUserBankCard(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Payment_AddBankCard_FullMethodName,
+		FullMethod: Payment_AddUserBankCard_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentServer).AddBankCard(ctx, req.(*AddBankCardRequest))
+		return srv.(PaymentServer).AddUserBankCard(ctx, req.(*AddBankCardRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Payment_UpdateBankCard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Payment_UpdateUserBankCard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateBankCardRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PaymentServer).UpdateBankCard(ctx, in)
+		return srv.(PaymentServer).UpdateUserBankCard(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Payment_UpdateBankCard_FullMethodName,
+		FullMethod: Payment_UpdateUserBankCard_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentServer).UpdateBankCard(ctx, req.(*UpdateBankCardRequest))
+		return srv.(PaymentServer).UpdateUserBankCard(ctx, req.(*UpdateBankCardRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Payment_DeleteBankCard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Payment_DeleteUsesrBankCard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteBankCardRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PaymentServer).DeleteBankCard(ctx, in)
+		return srv.(PaymentServer).DeleteUsesrBankCard(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Payment_DeleteBankCard_FullMethodName,
+		FullMethod: Payment_DeleteUsesrBankCard_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentServer).DeleteBankCard(ctx, req.(*DeleteBankCardRequest))
+		return srv.(PaymentServer).DeleteUsesrBankCard(ctx, req.(*DeleteBankCardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_GetDepositBankAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBankAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).GetDepositBankAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_GetDepositBankAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).GetDepositBankAccount(ctx, req.(*GetBankAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_GetBankSchema_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBankSchemaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).GetBankSchema(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_GetBankSchema_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).GetBankSchema(ctx, req.(*GetBankSchemaRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1154,20 +1222,28 @@ var Payment_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Payment_GetOperatorPaymentChannelPage_Handler,
 		},
 		{
-			MethodName: "GetBankCardList",
-			Handler:    _Payment_GetBankCardList_Handler,
+			MethodName: "GetUserBankCardList",
+			Handler:    _Payment_GetUserBankCardList_Handler,
 		},
 		{
-			MethodName: "AddBankCard",
-			Handler:    _Payment_AddBankCard_Handler,
+			MethodName: "AddUserBankCard",
+			Handler:    _Payment_AddUserBankCard_Handler,
 		},
 		{
-			MethodName: "UpdateBankCard",
-			Handler:    _Payment_UpdateBankCard_Handler,
+			MethodName: "UpdateUserBankCard",
+			Handler:    _Payment_UpdateUserBankCard_Handler,
 		},
 		{
-			MethodName: "DeleteBankCard",
-			Handler:    _Payment_DeleteBankCard_Handler,
+			MethodName: "DeleteUsesrBankCard",
+			Handler:    _Payment_DeleteUsesrBankCard_Handler,
+		},
+		{
+			MethodName: "GetDepositBankAccount",
+			Handler:    _Payment_GetDepositBankAccount_Handler,
+		},
+		{
+			MethodName: "GetBankSchema",
+			Handler:    _Payment_GetBankSchema_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

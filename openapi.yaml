@@ -514,7 +514,43 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.bcpay.service.v1.UpdateBankAccountResponse'
+    /v1/backoffice/bcpay/bankinfoschema/get:
+        post:
+            tags:
+                - BackofficeBcpay
+            operationId: BackofficeBcpay_GetBankSchema
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.bcpay.service.v1.GetBankSchemaRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.bcpay.service.v1.GetBankSchemaResponse'
     /v1/backoffice/bcpay/merchant/add:
+        post:
+            tags:
+                - BackofficeBcpay
+            operationId: BackofficeBcpay_CreateMerchant
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateMerchantRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.bcpay.service.v1.CreateMerchantResponse'
+    /v1/backoffice/bcpay/merchant/get:
         post:
             tags:
                 - BackofficeBcpay
@@ -2961,11 +2997,29 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetAddressResponse'
+    /v1/payment/bankaccount/get:
+        post:
+            tags:
+                - Payment
+            operationId: Payment_GetDepositBankAccount
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.GetBankAccountRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetBankAccountResponse'
     /v1/payment/bankcard/add:
         post:
             tags:
                 - Payment
-            operationId: Payment_AddBankCard
+            operationId: Payment_AddUserBankCard
             requestBody:
                 content:
                     application/json:
@@ -2983,7 +3037,7 @@ paths:
         post:
             tags:
                 - Payment
-            operationId: Payment_DeleteBankCard
+            operationId: Payment_DeleteUsesrBankCard
             requestBody:
                 content:
                     application/json:
@@ -3001,7 +3055,7 @@ paths:
         post:
             tags:
                 - Payment
-            operationId: Payment_GetBankCardList
+            operationId: Payment_GetUserBankCardList
             requestBody:
                 content:
                     application/json:
@@ -3019,7 +3073,7 @@ paths:
         post:
             tags:
                 - Payment
-            operationId: Payment_UpdateBankCard
+            operationId: Payment_UpdateUserBankCard
             requestBody:
                 content:
                     application/json:
@@ -3033,6 +3087,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.UpdateBankCardResponse'
+    /v1/payment/bankinfo/schema/get:
+        post:
+            tags:
+                - Payment
+            operationId: Payment_GetBankSchema
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.GetBankSchemaRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.GetBankSchemaResponse'
     /v1/payment/channel/page:
         post:
             tags:
@@ -3545,7 +3617,7 @@ components:
             type: object
             properties:
                 bankAccount:
-                    $ref: '#/components/schemas/api.bcpay.service.v1.BankAccount'
+                    $ref: '#/components/schemas/api.bcpay.service.v1.DepositBankAccount'
         api.backoffice.service.v1.AddCommentRequest:
             type: object
             properties:
@@ -3668,6 +3740,14 @@ components:
             type: object
             properties:
                 currency:
+                    type: string
+                bankAccount:
+                    type: string
+                bankAccountFirstname:
+                    type: string
+                bankAccountLastname:
+                    type: string
+                cardId:
                     type: string
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
@@ -3826,6 +3906,11 @@ components:
                 token:
                     type: string
                 backofficeSubdomain:
+                    type: string
+        api.backoffice.service.v1.CreateMerchantRequest:
+            type: object
+            properties:
+                name:
                     type: string
         api.backoffice.service.v1.CreateOperatorRequest:
             type: object
@@ -4615,9 +4700,7 @@ components:
                     type: string
         api.backoffice.service.v1.GetMerchantRequest:
             type: object
-            properties:
-                name:
-                    type: string
+            properties: {}
         api.backoffice.service.v1.GetOperatorAddressRequest:
             type: object
             properties:
@@ -8691,8 +8774,22 @@ components:
         api.backoffice.service.v1.TransactionListRequest:
             type: object
             properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                type:
+                    type: string
+                transactionId:
+                    type: string
+                depositBankAccountFirstname:
+                    type: string
+                depositBankAccountLastname:
+                    type: string
+                userId:
+                    type: string
+                userName:
+                    type: string
+                payerBankAccountFirstname:
+                    type: string
+                payerBankAccountLastname:
+                    type: string
         api.backoffice.service.v1.Unbind2faRequest:
             type: object
             properties:
@@ -8731,7 +8828,7 @@ components:
             type: object
             properties:
                 bankAccount:
-                    $ref: '#/components/schemas/api.bcpay.service.v1.BankAccount'
+                    $ref: '#/components/schemas/api.bcpay.service.v1.DepositBankAccount'
         api.backoffice.service.v1.UpdateGameRequest:
             type: object
             properties:
@@ -8927,50 +9024,24 @@ components:
             type: object
             properties:
                 bankAccount:
-                    $ref: '#/components/schemas/api.bcpay.service.v1.BankAccount'
+                    $ref: '#/components/schemas/api.bcpay.service.v1.DepositBankAccount'
         api.bcpay.service.v1.AuditTransactionResponse:
             type: object
             properties:
                 transaction:
                     $ref: '#/components/schemas/api.bcpay.service.v1.Transaction'
-        api.bcpay.service.v1.BankAccount:
-            type: object
-            properties:
-                id:
-                    type: string
-                merchantId:
-                    type: string
-                bankAccount:
-                    type: string
-                bankFirstName:
-                    type: string
-                bankLastName:
-                    type: string
-                currency:
-                    type: string
-                country:
-                    type: string
-                maxAmount:
-                    type: string
-                minAmount:
-                    type: string
-                maxAmountPerTrans:
-                    type: string
-                maxTransLimit:
-                    type: integer
-                    format: int32
-                priority:
-                    type: integer
-                    format: int32
-                enable:
-                    type: boolean
         api.bcpay.service.v1.BankAccountListResponse:
             type: object
             properties:
                 bankAccounts:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.bcpay.service.v1.BankAccount'
+                        $ref: '#/components/schemas/api.bcpay.service.v1.DepositBankAccount'
+        api.bcpay.service.v1.CreateMerchantResponse:
+            type: object
+            properties:
+                merchantId:
+                    type: string
         api.bcpay.service.v1.CreateWithdrawRequest:
             type: object
             properties:
@@ -8997,6 +9068,40 @@ components:
                     type: string
                 transactionId:
                     type: string
+        api.bcpay.service.v1.DepositBankAccount:
+            type: object
+            properties:
+                id:
+                    type: string
+                merchantId:
+                    type: string
+                bankAccount:
+                    type: string
+                bankFirstName:
+                    type: string
+                bankLastName:
+                    type: string
+                currency:
+                    type: string
+                country:
+                    type: string
+                maxAmount:
+                    type: string
+                minAmount:
+                    type: string
+                maxAmountPerTrans:
+                    type: string
+                maxTransLimit:
+                    type: integer
+                    format: int32
+                currentTransTime:
+                    type: integer
+                    format: int32
+                priority:
+                    type: integer
+                    format: int32
+                enable:
+                    type: boolean
         api.bcpay.service.v1.GetBankAccountRequest:
             type: object
             properties:
@@ -9016,10 +9121,20 @@ components:
                     description: operator id allocated by operator service
                 referenceNumber:
                     type: string
-                accountName:
+                bankAccountName:
                     type: string
-                iban:
+                bankAccountNumber:
                     type: string
+        api.bcpay.service.v1.GetBankSchemaRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+        api.bcpay.service.v1.GetBankSchemaResponse:
+            type: object
+            properties:
+                schema:
+                    $ref: '#/components/schemas/google.protobuf.ListValue'
         api.bcpay.service.v1.GetMerchantResponse:
             type: object
             properties:
@@ -9033,6 +9148,10 @@ components:
                 merchantId:
                     type: string
                 userId:
+                    type: string
+                userName:
+                    type: string
+                bankAccount:
                     type: string
                 bankAccountFirstName:
                     type: string
@@ -9074,7 +9193,7 @@ components:
             type: object
             properties:
                 bankAccount:
-                    $ref: '#/components/schemas/api.bcpay.service.v1.BankAccount'
+                    $ref: '#/components/schemas/api.bcpay.service.v1.DepositBankAccount'
         api.common.OperatorContext:
             type: object
             properties:
@@ -10363,10 +10482,6 @@ components:
                     type: string
                 cardAccountLastname:
                     type: string
-                minAmount:
-                    type: string
-                maxAmount:
-                    type: string
                 currency:
                     type: string
                 country:
@@ -10486,6 +10601,28 @@ components:
                 address:
                     type: string
                     description: Digital Currency address
+        payment.service.v1.GetBankAccountRequest:
+            type: object
+            properties:
+                channelId:
+                    type: string
+                extra:
+                    type: object
+                    description: |-
+                        Additional information needed for the deposit
+                         May include clientOrderId, productId, userInfo, etc.
+        payment.service.v1.GetBankAccountResponse:
+            type: object
+            properties:
+                notifyUrl:
+                    type: string
+                    description: operator id allocated by operator service
+                referenceNumber:
+                    type: string
+                bankAccountName:
+                    type: string
+                bankAccountNumber:
+                    type: string
         payment.service.v1.GetBankCardListRequest:
             type: object
             properties: {}
@@ -10496,6 +10633,16 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/payment.service.v1.BankCard'
+        payment.service.v1.GetBankSchemaRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+        payment.service.v1.GetBankSchemaResponse:
+            type: object
+            properties:
+                schema:
+                    $ref: '#/components/schemas/google.protobuf.ListValue'
         payment.service.v1.GetOperatorAddressResponse:
             type: object
             properties:
