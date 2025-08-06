@@ -96,8 +96,8 @@ service Wallet {
 	// Settle frozen cash of an operator
 	rpc OperatorSettle (OperatorSettleRequest) returns (OperatorSettleResponse) {}
 
-	// GetOperatorBalances gets the balances of an operator
-	rpc GetOperatorBalances(GetOperatorBalancesRequest) returns (GetOperatorBalancesResponse) {}
+	// GetOperatorBalance gets the balances of an operator
+	rpc GetOperatorBalance(GetOperatorBalanceRequest) returns (GetOperatorBalanceResponse) {}
 
 	// List Operator Balance Transactions based on filter
 	rpc ListOperatorBalanceTransactions (ListOperatorBalanceTransactionsRequest) returns (ListOperatorBalanceTransactionsResponse) {}
@@ -332,11 +332,16 @@ message GetWalletsRequest {
 
 message GetWalletsResponse {
 	message TotalAssets {
-		string balance = 1;
-		string deposit = 2;
-		string withdraw = 3;
-		string deposit_minus_withdraw = 4;
-		string valid_turnover = 5;
+		string balance_usd = 1;
+		string deposit_usd = 2;
+		string withdraw_usd = 3;
+		string deposit_minus_withdraw_usd = 4;
+		string valid_turnover_usd = 5;
+		string balance_reporting_currency = 6;
+		string deposit_reporting_currency = 7;
+		string withdraw_reporting_currency = 8;
+		string deposit_minus_withdraw_reporting_currency = 9;
+		string valid_turnover_reporting_currency = 10;
 	}
 	message Credit {
 		google.protobuf.Timestamp created_at = 1;
@@ -806,11 +811,11 @@ message OperatorSettleResponse {
 	string cash_amount_reporting_currency = 5;
 }
 
-message GetOperatorBalancesRequest {
+message GetOperatorBalanceRequest {
 	api.common.OperatorContext operator_context = 1;
 }
 
-message GetOperatorBalancesResponse {
+message GetOperatorBalanceResponse {
 	repeated OperatorBalance operator_balances = 1;
 	string total_cash_usd = 2;
 	string total_cash_reporting_currency = 3;

@@ -2555,7 +2555,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletsResponse'
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetWalletsResponse'
     /v1/backoffice/wallet/operator/balance-freeze:
         post:
             tags:
@@ -2617,13 +2617,13 @@ paths:
         post:
             tags:
                 - BackofficeWallet
-            description: GetOperatorBalances gets the balances of an operator
-            operationId: BackofficeWallet_GetOperatorBalances
+            description: GetOperatorBalance gets the balances of an operator
+            operationId: BackofficeWallet_GetOperatorBalance
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.wallet.service.v1.GetOperatorBalancesRequest'
+                            $ref: '#/components/schemas/api.wallet.service.v1.GetOperatorBalanceRequest'
                 required: true
             responses:
                 "200":
@@ -2631,7 +2631,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.wallet.service.v1.GetOperatorBalancesResponse'
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetOperatorBalanceResponse'
     /v1/backoffice/wallet/operator/balance/update:
         post:
             tags:
@@ -4749,16 +4749,24 @@ components:
         api.backoffice.service.v1.GetOverviewDashboardResponse_DepositAmount:
             type: object
             properties:
-                today:
+                todayUsd:
                     type: string
-                yesterday:
+                yesterdayUsd:
+                    type: string
+                todayReportingCurrency:
+                    type: string
+                yesterdayReportingCurrency:
                     type: string
         api.backoffice.service.v1.GetOverviewDashboardResponse_DepositMinusWithdrawalAmount:
             type: object
             properties:
-                today:
+                todayUsd:
                     type: string
-                yesterday:
+                yesterdayUsd:
+                    type: string
+                todayReportingCurrency:
+                    type: string
+                yesterdayReportingCurrency:
                     type: string
         api.backoffice.service.v1.GetOverviewDashboardResponse_FirstDepositUsers:
             type: object
@@ -4772,16 +4780,24 @@ components:
         api.backoffice.service.v1.GetOverviewDashboardResponse_GGR:
             type: object
             properties:
-                today:
+                todayUsd:
                     type: string
-                yesterday:
+                yesterdayUsd:
+                    type: string
+                todayReportingCurrency:
+                    type: string
+                yesterdayReportingCurrency:
                     type: string
         api.backoffice.service.v1.GetOverviewDashboardResponse_NGR:
             type: object
             properties:
-                today:
+                todayUsd:
                     type: string
-                yesterday:
+                yesterdayUsd:
+                    type: string
+                todayReportingCurrency:
+                    type: string
+                yesterdayReportingCurrency:
                     type: string
         api.backoffice.service.v1.GetOverviewDashboardResponse_RegisteredUsers:
             type: object
@@ -4795,9 +4811,13 @@ components:
         api.backoffice.service.v1.GetOverviewDashboardResponse_WithdrawalAmount:
             type: object
             properties:
-                today:
+                todayUsd:
                     type: string
-                yesterday:
+                yesterdayUsd:
+                    type: string
+                todayReportingCurrency:
+                    type: string
+                yesterdayReportingCurrency:
                     type: string
         api.backoffice.service.v1.GetPaymentMethodListRequest:
             type: object
@@ -5759,81 +5779,6 @@ components:
                     type: array
                     items:
                         type: string
-        api.backoffice.service.v1.GetWalletsResponse:
-            type: object
-            properties:
-                totalAssets:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletsResponse_TotalAssets'
-                wallets:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletsResponse_Wallet'
-        api.backoffice.service.v1.GetWalletsResponse_Credit:
-            type: object
-            properties:
-                createdAt:
-                    type: string
-                    format: date-time
-                transactionId:
-                    type: string
-                cash:
-                    type: string
-                originalCash:
-                    type: string
-                bonus:
-                    type: string
-                originalBonus:
-                    type: string
-                turnoverThreshold:
-                    type: string
-                turnover:
-                    type: string
-                cashTurnover:
-                    type: string
-                bonusTurnover:
-                    type: string
-                turnoverMultiplier:
-                    type: string
-        api.backoffice.service.v1.GetWalletsResponse_TotalAssets:
-            type: object
-            properties:
-                balance:
-                    type: string
-                deposit:
-                    type: string
-                withdraw:
-                    type: string
-                depositMinusWithdraw:
-                    type: string
-                validTurnover:
-                    type: string
-        api.backoffice.service.v1.GetWalletsResponse_Wallet:
-            type: object
-            properties:
-                currency:
-                    type: string
-                cash:
-                    type: string
-                originalCash:
-                    type: string
-                bonus:
-                    type: string
-                originalBonus:
-                    type: string
-                turnoverThreshold:
-                    type: string
-                turnover:
-                    type: string
-                cashTurnover:
-                    type: string
-                bonusTurnover:
-                    type: string
-                turnoverMultiplier:
-                    type: string
-                credits:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletsResponse_Credit'
         api.backoffice.service.v1.GetWithdrawSummariesRequest:
             type: object
             properties:
@@ -10341,12 +10286,12 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.Currency'
-        api.wallet.service.v1.GetOperatorBalancesRequest:
+        api.wallet.service.v1.GetOperatorBalanceRequest:
             type: object
             properties:
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
-        api.wallet.service.v1.GetOperatorBalancesResponse:
+        api.wallet.service.v1.GetOperatorBalanceResponse:
             type: object
             properties:
                 operatorBalances:
@@ -10380,6 +10325,91 @@ components:
                     type: string
                 providerBonus:
                     type: string
+        api.wallet.service.v1.GetWalletsResponse:
+            type: object
+            properties:
+                totalAssets:
+                    $ref: '#/components/schemas/api.wallet.service.v1.GetWalletsResponse_TotalAssets'
+                wallets:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.GetWalletsResponse_Wallet'
+        api.wallet.service.v1.GetWalletsResponse_Credit:
+            type: object
+            properties:
+                createdAt:
+                    type: string
+                    format: date-time
+                transactionId:
+                    type: string
+                cash:
+                    type: string
+                originalCash:
+                    type: string
+                bonus:
+                    type: string
+                originalBonus:
+                    type: string
+                turnoverThreshold:
+                    type: string
+                turnover:
+                    type: string
+                cashTurnover:
+                    type: string
+                bonusTurnover:
+                    type: string
+                turnoverMultiplier:
+                    type: string
+        api.wallet.service.v1.GetWalletsResponse_TotalAssets:
+            type: object
+            properties:
+                balanceUsd:
+                    type: string
+                depositUsd:
+                    type: string
+                withdrawUsd:
+                    type: string
+                depositMinusWithdrawUsd:
+                    type: string
+                validTurnoverUsd:
+                    type: string
+                balanceReportingCurrency:
+                    type: string
+                depositReportingCurrency:
+                    type: string
+                withdrawReportingCurrency:
+                    type: string
+                depositMinusWithdrawReportingCurrency:
+                    type: string
+                validTurnoverReportingCurrency:
+                    type: string
+        api.wallet.service.v1.GetWalletsResponse_Wallet:
+            type: object
+            properties:
+                currency:
+                    type: string
+                cash:
+                    type: string
+                originalCash:
+                    type: string
+                bonus:
+                    type: string
+                originalBonus:
+                    type: string
+                turnoverThreshold:
+                    type: string
+                turnover:
+                    type: string
+                cashTurnover:
+                    type: string
+                bonusTurnover:
+                    type: string
+                turnoverMultiplier:
+                    type: string
+                credits:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.GetWalletsResponse_Credit'
         api.wallet.service.v1.ListBottomOperatorBalancesResponse:
             type: object
             properties:

@@ -4815,27 +4815,27 @@ func (x *OperatorSettleResponse) GetCashAmountReportingCurrency() string {
 	return ""
 }
 
-type GetOperatorBalancesRequest struct {
+type GetOperatorBalanceRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
 
-func (x *GetOperatorBalancesRequest) Reset() {
-	*x = GetOperatorBalancesRequest{}
+func (x *GetOperatorBalanceRequest) Reset() {
+	*x = GetOperatorBalanceRequest{}
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[61]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetOperatorBalancesRequest) String() string {
+func (x *GetOperatorBalanceRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetOperatorBalancesRequest) ProtoMessage() {}
+func (*GetOperatorBalanceRequest) ProtoMessage() {}
 
-func (x *GetOperatorBalancesRequest) ProtoReflect() protoreflect.Message {
+func (x *GetOperatorBalanceRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[61]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -4847,19 +4847,19 @@ func (x *GetOperatorBalancesRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetOperatorBalancesRequest.ProtoReflect.Descriptor instead.
-func (*GetOperatorBalancesRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetOperatorBalanceRequest.ProtoReflect.Descriptor instead.
+func (*GetOperatorBalanceRequest) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{61}
 }
 
-func (x *GetOperatorBalancesRequest) GetOperatorContext() *common.OperatorContext {
+func (x *GetOperatorBalanceRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
 	return nil
 }
 
-type GetOperatorBalancesResponse struct {
+type GetOperatorBalanceResponse struct {
 	state                      protoimpl.MessageState `protogen:"open.v1"`
 	OperatorBalances           []*OperatorBalance     `protobuf:"bytes,1,rep,name=operator_balances,json=operatorBalances,proto3" json:"operator_balances,omitempty"`
 	TotalCashUsd               string                 `protobuf:"bytes,2,opt,name=total_cash_usd,json=totalCashUsd,proto3" json:"total_cash_usd,omitempty"`
@@ -4868,20 +4868,20 @@ type GetOperatorBalancesResponse struct {
 	sizeCache                  protoimpl.SizeCache
 }
 
-func (x *GetOperatorBalancesResponse) Reset() {
-	*x = GetOperatorBalancesResponse{}
+func (x *GetOperatorBalanceResponse) Reset() {
+	*x = GetOperatorBalanceResponse{}
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[62]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetOperatorBalancesResponse) String() string {
+func (x *GetOperatorBalanceResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetOperatorBalancesResponse) ProtoMessage() {}
+func (*GetOperatorBalanceResponse) ProtoMessage() {}
 
-func (x *GetOperatorBalancesResponse) ProtoReflect() protoreflect.Message {
+func (x *GetOperatorBalanceResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[62]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -4893,26 +4893,26 @@ func (x *GetOperatorBalancesResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetOperatorBalancesResponse.ProtoReflect.Descriptor instead.
-func (*GetOperatorBalancesResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetOperatorBalanceResponse.ProtoReflect.Descriptor instead.
+func (*GetOperatorBalanceResponse) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{62}
 }
 
-func (x *GetOperatorBalancesResponse) GetOperatorBalances() []*OperatorBalance {
+func (x *GetOperatorBalanceResponse) GetOperatorBalances() []*OperatorBalance {
 	if x != nil {
 		return x.OperatorBalances
 	}
 	return nil
 }
 
-func (x *GetOperatorBalancesResponse) GetTotalCashUsd() string {
+func (x *GetOperatorBalanceResponse) GetTotalCashUsd() string {
 	if x != nil {
 		return x.TotalCashUsd
 	}
 	return ""
 }
 
-func (x *GetOperatorBalancesResponse) GetTotalCashReportingCurrency() string {
+func (x *GetOperatorBalanceResponse) GetTotalCashReportingCurrency() string {
 	if x != nil {
 		return x.TotalCashReportingCurrency
 	}
@@ -6068,14 +6068,19 @@ func (x *CreditRequest_Ratio) GetOperatorBonus() string {
 }
 
 type GetWalletsResponse_TotalAssets struct {
-	state                protoimpl.MessageState `protogen:"open.v1"`
-	Balance              string                 `protobuf:"bytes,1,opt,name=balance,proto3" json:"balance,omitempty"`
-	Deposit              string                 `protobuf:"bytes,2,opt,name=deposit,proto3" json:"deposit,omitempty"`
-	Withdraw             string                 `protobuf:"bytes,3,opt,name=withdraw,proto3" json:"withdraw,omitempty"`
-	DepositMinusWithdraw string                 `protobuf:"bytes,4,opt,name=deposit_minus_withdraw,json=depositMinusWithdraw,proto3" json:"deposit_minus_withdraw,omitempty"`
-	ValidTurnover        string                 `protobuf:"bytes,5,opt,name=valid_turnover,json=validTurnover,proto3" json:"valid_turnover,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	state                                 protoimpl.MessageState `protogen:"open.v1"`
+	BalanceUsd                            string                 `protobuf:"bytes,1,opt,name=balance_usd,json=balanceUsd,proto3" json:"balance_usd,omitempty"`
+	DepositUsd                            string                 `protobuf:"bytes,2,opt,name=deposit_usd,json=depositUsd,proto3" json:"deposit_usd,omitempty"`
+	WithdrawUsd                           string                 `protobuf:"bytes,3,opt,name=withdraw_usd,json=withdrawUsd,proto3" json:"withdraw_usd,omitempty"`
+	DepositMinusWithdrawUsd               string                 `protobuf:"bytes,4,opt,name=deposit_minus_withdraw_usd,json=depositMinusWithdrawUsd,proto3" json:"deposit_minus_withdraw_usd,omitempty"`
+	ValidTurnoverUsd                      string                 `protobuf:"bytes,5,opt,name=valid_turnover_usd,json=validTurnoverUsd,proto3" json:"valid_turnover_usd,omitempty"`
+	BalanceReportingCurrency              string                 `protobuf:"bytes,6,opt,name=balance_reporting_currency,json=balanceReportingCurrency,proto3" json:"balance_reporting_currency,omitempty"`
+	DepositReportingCurrency              string                 `protobuf:"bytes,7,opt,name=deposit_reporting_currency,json=depositReportingCurrency,proto3" json:"deposit_reporting_currency,omitempty"`
+	WithdrawReportingCurrency             string                 `protobuf:"bytes,8,opt,name=withdraw_reporting_currency,json=withdrawReportingCurrency,proto3" json:"withdraw_reporting_currency,omitempty"`
+	DepositMinusWithdrawReportingCurrency string                 `protobuf:"bytes,9,opt,name=deposit_minus_withdraw_reporting_currency,json=depositMinusWithdrawReportingCurrency,proto3" json:"deposit_minus_withdraw_reporting_currency,omitempty"`
+	ValidTurnoverReportingCurrency        string                 `protobuf:"bytes,10,opt,name=valid_turnover_reporting_currency,json=validTurnoverReportingCurrency,proto3" json:"valid_turnover_reporting_currency,omitempty"`
+	unknownFields                         protoimpl.UnknownFields
+	sizeCache                             protoimpl.SizeCache
 }
 
 func (x *GetWalletsResponse_TotalAssets) Reset() {
@@ -6108,37 +6113,72 @@ func (*GetWalletsResponse_TotalAssets) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{20, 0}
 }
 
-func (x *GetWalletsResponse_TotalAssets) GetBalance() string {
+func (x *GetWalletsResponse_TotalAssets) GetBalanceUsd() string {
 	if x != nil {
-		return x.Balance
+		return x.BalanceUsd
 	}
 	return ""
 }
 
-func (x *GetWalletsResponse_TotalAssets) GetDeposit() string {
+func (x *GetWalletsResponse_TotalAssets) GetDepositUsd() string {
 	if x != nil {
-		return x.Deposit
+		return x.DepositUsd
 	}
 	return ""
 }
 
-func (x *GetWalletsResponse_TotalAssets) GetWithdraw() string {
+func (x *GetWalletsResponse_TotalAssets) GetWithdrawUsd() string {
 	if x != nil {
-		return x.Withdraw
+		return x.WithdrawUsd
 	}
 	return ""
 }
 
-func (x *GetWalletsResponse_TotalAssets) GetDepositMinusWithdraw() string {
+func (x *GetWalletsResponse_TotalAssets) GetDepositMinusWithdrawUsd() string {
 	if x != nil {
-		return x.DepositMinusWithdraw
+		return x.DepositMinusWithdrawUsd
 	}
 	return ""
 }
 
-func (x *GetWalletsResponse_TotalAssets) GetValidTurnover() string {
+func (x *GetWalletsResponse_TotalAssets) GetValidTurnoverUsd() string {
 	if x != nil {
-		return x.ValidTurnover
+		return x.ValidTurnoverUsd
+	}
+	return ""
+}
+
+func (x *GetWalletsResponse_TotalAssets) GetBalanceReportingCurrency() string {
+	if x != nil {
+		return x.BalanceReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetWalletsResponse_TotalAssets) GetDepositReportingCurrency() string {
+	if x != nil {
+		return x.DepositReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetWalletsResponse_TotalAssets) GetWithdrawReportingCurrency() string {
+	if x != nil {
+		return x.WithdrawReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetWalletsResponse_TotalAssets) GetDepositMinusWithdrawReportingCurrency() string {
+	if x != nil {
+		return x.DepositMinusWithdrawReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetWalletsResponse_TotalAssets) GetValidTurnoverReportingCurrency() string {
+	if x != nil {
+		return x.ValidTurnoverReportingCurrency
 	}
 	return ""
 }
@@ -7329,16 +7369,24 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\n" +
 	"currencies\x18\x02 \x03(\tR\n" +
 	"currencies\x12F\n" +
-	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xd3\t\n" +
+	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xd7\f\n" +
 	"\x12GetWalletsResponse\x12X\n" +
 	"\ftotal_assets\x18\x01 \x01(\v25.api.wallet.service.v1.GetWalletsResponse.TotalAssetsR\vtotalAssets\x12J\n" +
-	"\awallets\x18\x02 \x03(\v20.api.wallet.service.v1.GetWalletsResponse.WalletR\awallets\x1a\xba\x01\n" +
-	"\vTotalAssets\x12\x18\n" +
-	"\abalance\x18\x01 \x01(\tR\abalance\x12\x18\n" +
-	"\adeposit\x18\x02 \x01(\tR\adeposit\x12\x1a\n" +
-	"\bwithdraw\x18\x03 \x01(\tR\bwithdraw\x124\n" +
-	"\x16deposit_minus_withdraw\x18\x04 \x01(\tR\x14depositMinusWithdraw\x12%\n" +
-	"\x0evalid_turnover\x18\x05 \x01(\tR\rvalidTurnover\x1a\xa8\x03\n" +
+	"\awallets\x18\x02 \x03(\v20.api.wallet.service.v1.GetWalletsResponse.WalletR\awallets\x1a\xbe\x04\n" +
+	"\vTotalAssets\x12\x1f\n" +
+	"\vbalance_usd\x18\x01 \x01(\tR\n" +
+	"balanceUsd\x12\x1f\n" +
+	"\vdeposit_usd\x18\x02 \x01(\tR\n" +
+	"depositUsd\x12!\n" +
+	"\fwithdraw_usd\x18\x03 \x01(\tR\vwithdrawUsd\x12;\n" +
+	"\x1adeposit_minus_withdraw_usd\x18\x04 \x01(\tR\x17depositMinusWithdrawUsd\x12,\n" +
+	"\x12valid_turnover_usd\x18\x05 \x01(\tR\x10validTurnoverUsd\x12<\n" +
+	"\x1abalance_reporting_currency\x18\x06 \x01(\tR\x18balanceReportingCurrency\x12<\n" +
+	"\x1adeposit_reporting_currency\x18\a \x01(\tR\x18depositReportingCurrency\x12>\n" +
+	"\x1bwithdraw_reporting_currency\x18\b \x01(\tR\x19withdrawReportingCurrency\x12X\n" +
+	")deposit_minus_withdraw_reporting_currency\x18\t \x01(\tR%depositMinusWithdrawReportingCurrency\x12I\n" +
+	"!valid_turnover_reporting_currency\x18\n" +
+	" \x01(\tR\x1evalidTurnoverReportingCurrency\x1a\xa8\x03\n" +
 	"\x06Credit\x129\n" +
 	"\n" +
 	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12%\n" +
@@ -7755,10 +7803,10 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\vcash_amount\x18\x03 \x01(\tR\n" +
 	"cashAmount\x12&\n" +
 	"\x0fcash_amount_usd\x18\x04 \x01(\tR\rcashAmountUsd\x12C\n" +
-	"\x1ecash_amount_reporting_currency\x18\x05 \x01(\tR\x1bcashAmountReportingCurrency\"d\n" +
-	"\x1aGetOperatorBalancesRequest\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xdb\x01\n" +
-	"\x1bGetOperatorBalancesResponse\x12S\n" +
+	"\x1ecash_amount_reporting_currency\x18\x05 \x01(\tR\x1bcashAmountReportingCurrency\"c\n" +
+	"\x19GetOperatorBalanceRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xda\x01\n" +
+	"\x1aGetOperatorBalanceResponse\x12S\n" +
 	"\x11operator_balances\x18\x01 \x03(\v2&.api.wallet.service.v1.OperatorBalanceR\x10operatorBalances\x12$\n" +
 	"\x0etotal_cash_usd\x18\x02 \x01(\tR\ftotalCashUsd\x12A\n" +
 	"\x1dtotal_cash_reporting_currency\x18\x03 \x01(\tR\x1atotalCashReportingCurrency\"\x8b\x05\n" +
@@ -7872,7 +7920,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0ftransaction_ids\x18\x01 \x03(\x03R\x0etransactionIds\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x84\x01\n" +
 	"+GetOperatorBalanceTransactionsByIdsResponse\x12U\n" +
-	"\ftransactions\x18\x01 \x03(\v21.api.wallet.service.v1.OperatorBalanceTransactionR\ftransactions2\xdc\"\n" +
+	"\ftransactions\x18\x01 \x03(\v21.api.wallet.service.v1.OperatorBalanceTransactionR\ftransactions2\xd9\"\n" +
 	"\x06Wallet\x12\x95\x01\n" +
 	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/wallet/balances/list\x12o\n" +
 	"\x0eGetUserBalance\x12,.api.wallet.service.v1.GetUserBalanceRequest\x1a-.api.wallet.service.v1.GetUserBalanceResponse\"\x00\x12W\n" +
@@ -7904,8 +7952,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\fOperatorSwap\x12*.api.wallet.service.v1.OperatorSwapRequest\x1a+.api.wallet.service.v1.OperatorSwapResponse\"\x00\x12o\n" +
 	"\x0eOperatorFreeze\x12,.api.wallet.service.v1.OperatorFreezeRequest\x1a-.api.wallet.service.v1.OperatorFreezeResponse\"\x00\x12u\n" +
 	"\x10OperatorRollback\x12..api.wallet.service.v1.OperatorRollbackRequest\x1a/.api.wallet.service.v1.OperatorRollbackResponse\"\x00\x12o\n" +
-	"\x0eOperatorSettle\x12,.api.wallet.service.v1.OperatorSettleRequest\x1a-.api.wallet.service.v1.OperatorSettleResponse\"\x00\x12~\n" +
-	"\x13GetOperatorBalances\x121.api.wallet.service.v1.GetOperatorBalancesRequest\x1a2.api.wallet.service.v1.GetOperatorBalancesResponse\"\x00\x12\xa2\x01\n" +
+	"\x0eOperatorSettle\x12,.api.wallet.service.v1.OperatorSettleRequest\x1a-.api.wallet.service.v1.OperatorSettleResponse\"\x00\x12{\n" +
+	"\x12GetOperatorBalance\x120.api.wallet.service.v1.GetOperatorBalanceRequest\x1a1.api.wallet.service.v1.GetOperatorBalanceResponse\"\x00\x12\xa2\x01\n" +
 	"\x1fListOperatorBalanceTransactions\x12=.api.wallet.service.v1.ListOperatorBalanceTransactionsRequest\x1a>.api.wallet.service.v1.ListOperatorBalanceTransactionsResponse\"\x00\x12l\n" +
 	"\rOperatorDebit\x12+.api.wallet.service.v1.OperatorDebitRequest\x1a,.api.wallet.service.v1.OperatorDebitResponse\"\x00\x12\x84\x01\n" +
 	"\x15UpdateOperatorBalance\x123.api.wallet.service.v1.UpdateOperatorBalanceRequest\x1a4.api.wallet.service.v1.UpdateOperatorBalanceResponse\"\x00\x12\x9c\x01\n" +
@@ -7988,8 +8036,8 @@ var file_wallet_service_v1_wallet_proto_goTypes = []any{
 	(*OperatorRollbackResponse)(nil),                                     // 58: api.wallet.service.v1.OperatorRollbackResponse
 	(*OperatorSettleRequest)(nil),                                        // 59: api.wallet.service.v1.OperatorSettleRequest
 	(*OperatorSettleResponse)(nil),                                       // 60: api.wallet.service.v1.OperatorSettleResponse
-	(*GetOperatorBalancesRequest)(nil),                                   // 61: api.wallet.service.v1.GetOperatorBalancesRequest
-	(*GetOperatorBalancesResponse)(nil),                                  // 62: api.wallet.service.v1.GetOperatorBalancesResponse
+	(*GetOperatorBalanceRequest)(nil),                                    // 61: api.wallet.service.v1.GetOperatorBalanceRequest
+	(*GetOperatorBalanceResponse)(nil),                                   // 62: api.wallet.service.v1.GetOperatorBalanceResponse
 	(*ListOperatorBalanceTransactionsRequest)(nil),                       // 63: api.wallet.service.v1.ListOperatorBalanceTransactionsRequest
 	(*OperatorBalanceTransaction)(nil),                                   // 64: api.wallet.service.v1.OperatorBalanceTransaction
 	(*ListOperatorBalanceTransactionsResponse)(nil),                      // 65: api.wallet.service.v1.ListOperatorBalanceTransactionsResponse
@@ -8075,8 +8123,8 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	88,  // 52: api.wallet.service.v1.OperatorRollbackRequest.target_operator_context:type_name -> api.common.OperatorContext
 	88,  // 53: api.wallet.service.v1.OperatorSettleRequest.operator_context:type_name -> api.common.OperatorContext
 	88,  // 54: api.wallet.service.v1.OperatorSettleRequest.target_operator_context:type_name -> api.common.OperatorContext
-	88,  // 55: api.wallet.service.v1.GetOperatorBalancesRequest.operator_context:type_name -> api.common.OperatorContext
-	49,  // 56: api.wallet.service.v1.GetOperatorBalancesResponse.operator_balances:type_name -> api.wallet.service.v1.OperatorBalance
+	88,  // 55: api.wallet.service.v1.GetOperatorBalanceRequest.operator_context:type_name -> api.common.OperatorContext
+	49,  // 56: api.wallet.service.v1.GetOperatorBalanceResponse.operator_balances:type_name -> api.wallet.service.v1.OperatorBalance
 	90,  // 57: api.wallet.service.v1.ListOperatorBalanceTransactionsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
 	89,  // 58: api.wallet.service.v1.ListOperatorBalanceTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
 	89,  // 59: api.wallet.service.v1.ListOperatorBalanceTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
@@ -8126,7 +8174,7 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	55,  // 103: api.wallet.service.v1.Wallet.OperatorFreeze:input_type -> api.wallet.service.v1.OperatorFreezeRequest
 	57,  // 104: api.wallet.service.v1.Wallet.OperatorRollback:input_type -> api.wallet.service.v1.OperatorRollbackRequest
 	59,  // 105: api.wallet.service.v1.Wallet.OperatorSettle:input_type -> api.wallet.service.v1.OperatorSettleRequest
-	61,  // 106: api.wallet.service.v1.Wallet.GetOperatorBalances:input_type -> api.wallet.service.v1.GetOperatorBalancesRequest
+	61,  // 106: api.wallet.service.v1.Wallet.GetOperatorBalance:input_type -> api.wallet.service.v1.GetOperatorBalanceRequest
 	63,  // 107: api.wallet.service.v1.Wallet.ListOperatorBalanceTransactions:input_type -> api.wallet.service.v1.ListOperatorBalanceTransactionsRequest
 	66,  // 108: api.wallet.service.v1.Wallet.OperatorDebit:input_type -> api.wallet.service.v1.OperatorDebitRequest
 	68,  // 109: api.wallet.service.v1.Wallet.UpdateOperatorBalance:input_type -> api.wallet.service.v1.UpdateOperatorBalanceRequest
@@ -8161,7 +8209,7 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	56,  // 138: api.wallet.service.v1.Wallet.OperatorFreeze:output_type -> api.wallet.service.v1.OperatorFreezeResponse
 	58,  // 139: api.wallet.service.v1.Wallet.OperatorRollback:output_type -> api.wallet.service.v1.OperatorRollbackResponse
 	60,  // 140: api.wallet.service.v1.Wallet.OperatorSettle:output_type -> api.wallet.service.v1.OperatorSettleResponse
-	62,  // 141: api.wallet.service.v1.Wallet.GetOperatorBalances:output_type -> api.wallet.service.v1.GetOperatorBalancesResponse
+	62,  // 141: api.wallet.service.v1.Wallet.GetOperatorBalance:output_type -> api.wallet.service.v1.GetOperatorBalanceResponse
 	65,  // 142: api.wallet.service.v1.Wallet.ListOperatorBalanceTransactions:output_type -> api.wallet.service.v1.ListOperatorBalanceTransactionsResponse
 	67,  // 143: api.wallet.service.v1.Wallet.OperatorDebit:output_type -> api.wallet.service.v1.OperatorDebitResponse
 	69,  // 144: api.wallet.service.v1.Wallet.UpdateOperatorBalance:output_type -> api.wallet.service.v1.UpdateOperatorBalanceResponse
