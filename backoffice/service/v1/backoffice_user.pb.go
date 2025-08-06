@@ -2055,13 +2055,15 @@ func (x *ListUsersResponse_User) GetRegistrationIp() string {
 }
 
 type GetUserOverviewResponse_GameData struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	GameType      string                 `protobuf:"bytes,1,opt,name=game_type,json=gameType,proto3" json:"game_type,omitempty"` // game category
-	Ggr           string                 `protobuf:"bytes,2,opt,name=ggr,proto3" json:"ggr,omitempty"`
-	Turnover      string                 `protobuf:"bytes,3,opt,name=turnover,proto3" json:"turnover,omitempty"`
-	Rtp           string                 `protobuf:"bytes,4,opt,name=rtp,proto3" json:"rtp,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                     protoimpl.MessageState `protogen:"open.v1"`
+	GameType                  string                 `protobuf:"bytes,1,opt,name=game_type,json=gameType,proto3" json:"game_type,omitempty"` // game category
+	GgrUsd                    string                 `protobuf:"bytes,2,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
+	GgrReportingCurrency      string                 `protobuf:"bytes,3,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
+	TurnoverUsd               string                 `protobuf:"bytes,4,opt,name=turnover_usd,json=turnoverUsd,proto3" json:"turnover_usd,omitempty"`
+	TurnoverReportingCurrency string                 `protobuf:"bytes,5,opt,name=turnover_reporting_currency,json=turnoverReportingCurrency,proto3" json:"turnover_reporting_currency,omitempty"`
+	Rtp                       string                 `protobuf:"bytes,6,opt,name=rtp,proto3" json:"rtp,omitempty"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *GetUserOverviewResponse_GameData) Reset() {
@@ -2101,16 +2103,30 @@ func (x *GetUserOverviewResponse_GameData) GetGameType() string {
 	return ""
 }
 
-func (x *GetUserOverviewResponse_GameData) GetGgr() string {
+func (x *GetUserOverviewResponse_GameData) GetGgrUsd() string {
 	if x != nil {
-		return x.Ggr
+		return x.GgrUsd
 	}
 	return ""
 }
 
-func (x *GetUserOverviewResponse_GameData) GetTurnover() string {
+func (x *GetUserOverviewResponse_GameData) GetGgrReportingCurrency() string {
 	if x != nil {
-		return x.Turnover
+		return x.GgrReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetUserOverviewResponse_GameData) GetTurnoverUsd() string {
+	if x != nil {
+		return x.TurnoverUsd
+	}
+	return ""
+}
+
+func (x *GetUserOverviewResponse_GameData) GetTurnoverReportingCurrency() string {
+	if x != nil {
+		return x.TurnoverReportingCurrency
 	}
 	return ""
 }
@@ -2633,7 +2649,7 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x16GetUserOverviewRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1b\n" +
 	"\x06filter\x18\x02 \x01(\tH\x00R\x06filter\x88\x01\x01B\t\n" +
-	"\a_filter\"\xf0\x11\n" +
+	"\a_filter\"\xf5\x12\n" +
 	"\x17GetUserOverviewResponse\x12\x1f\n" +
 	"\vbalance_usd\x18\x01 \x01(\tR\n" +
 	"balanceUsd\x12;\n" +
@@ -2677,12 +2693,14 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	")manually_added_balance_reporting_currency\x18& \x01(\tR%manuallyAddedBalanceReportingCurrency\x12G\n" +
 	" bonus_claimed_reporting_currency\x18' \x01(\tR\x1dbonusClaimedReportingCurrency\x124\n" +
 	"\x16ngr_reporting_currency\x18( \x01(\tR\x14ngrReportingCurrency\x12X\n" +
-	"\tgame_data\x18) \x03(\v2;.api.backoffice.service.v1.GetUserOverviewResponse.GameDataR\bgameData\x1ag\n" +
+	"\tgame_data\x18) \x03(\v2;.api.backoffice.service.v1.GetUserOverviewResponse.GameDataR\bgameData\x1a\xeb\x01\n" +
 	"\bGameData\x12\x1b\n" +
-	"\tgame_type\x18\x01 \x01(\tR\bgameType\x12\x10\n" +
-	"\x03ggr\x18\x02 \x01(\tR\x03ggr\x12\x1a\n" +
-	"\bturnover\x18\x03 \x01(\tR\bturnover\x12\x10\n" +
-	"\x03rtp\x18\x04 \x01(\tR\x03rtp\"\xa4\x01\n" +
+	"\tgame_type\x18\x01 \x01(\tR\bgameType\x12\x17\n" +
+	"\aggr_usd\x18\x02 \x01(\tR\x06ggrUsd\x124\n" +
+	"\x16ggr_reporting_currency\x18\x03 \x01(\tR\x14ggrReportingCurrency\x12!\n" +
+	"\fturnover_usd\x18\x04 \x01(\tR\vturnoverUsd\x12>\n" +
+	"\x1bturnover_reporting_currency\x18\x05 \x01(\tR\x19turnoverReportingCurrency\x12\x10\n" +
+	"\x03rtp\x18\x06 \x01(\tR\x03rtp\"\xa4\x01\n" +
 	"\x15GetUserProfileRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\"\n" +
 	"\n" +

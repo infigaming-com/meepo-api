@@ -185,9 +185,11 @@ message GetUserOverviewRequest {
 message GetUserOverviewResponse {
 	message GameData {
 		string game_type = 1; // game category
-		string ggr = 2;
-		string turnover = 3;
-		string rtp = 4;
+		string ggr_usd = 2;
+		string ggr_reporting_currency = 3;
+		string turnover_usd = 4;
+		string turnover_reporting_currency = 5;
+		string rtp = 6;
 	}
 	string balance_usd = 1;
 	string deposit_minus_withdraw_usd = 2;

@@ -3440,9 +3440,13 @@ func (m *GetUserOverviewResponse_GameData) validate(all bool) error {
 
 	// no validation rules for GameType
 
-	// no validation rules for Ggr
+	// no validation rules for GgrUsd
 
-	// no validation rules for Turnover
+	// no validation rules for GgrReportingCurrency
+
+	// no validation rules for TurnoverUsd
+
+	// no validation rules for TurnoverReportingCurrency
 
 	// no validation rules for Rtp
 

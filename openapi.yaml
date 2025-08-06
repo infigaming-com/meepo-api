@@ -5517,9 +5517,13 @@ components:
             properties:
                 gameType:
                     type: string
-                ggr:
+                ggrUsd:
                     type: string
-                turnover:
+                ggrReportingCurrency:
+                    type: string
+                turnoverUsd:
+                    type: string
+                turnoverReportingCurrency:
                     type: string
                 rtp:
                     type: string
