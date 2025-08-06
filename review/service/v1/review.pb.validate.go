@@ -3978,6 +3978,10 @@ func (m *GetOperatorTicketResponse_PaymentTransactionInfo) validate(all bool) er
 
 	// no validation rules for Fee
 
+	// no validation rules for FeeUsd
+
+	// no validation rules for FeeReportingCurrency
+
 	if all {
 		switch v := interface{}(m.GetCreatedAt()).(type) {
 		case interface{ ValidateAll() error }:
