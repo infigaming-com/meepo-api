@@ -3476,6 +3476,8 @@ components:
                     $ref: '#/components/schemas/api.backoffice.service.v1.Role'
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+                reportingCurrency:
+                    $ref: '#/components/schemas/api.wallet.service.v1.Currency'
         api.backoffice.service.v1.ActiveUsersData_Data:
             type: object
             properties:

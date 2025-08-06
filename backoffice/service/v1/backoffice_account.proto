@@ -5,6 +5,7 @@ package api.backoffice.service.v1;
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "common/common.proto";
+import "wallet/service/v1/wallet.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -281,6 +282,7 @@ message AccountInfoResponse {
 	bool enabled = 6;
 	Role role = 7;
     api.common.OperatorContext operator_context = 8;
+    wallet.service.v1.Currency reporting_currency = 9;
 }
 
 message Role {
