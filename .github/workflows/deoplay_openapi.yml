@@ -9,6 +9,7 @@ on:
   #     - 'openapi.yaml'
   #     - 'openapi.yml'
   #     - 'docs/**'
+  workflow_dispatch:
   push:
     branches:
       - main
