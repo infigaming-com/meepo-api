@@ -1,11 +1,11 @@
 syntax = "proto3";
 
+package payment.service.v1;
+
 import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "common/common.proto";
-
-package payment.service.v1;
 
 option go_package = "github.com/infigaming-com/meepo-api/payment/service/v1;v1";
 option java_multiple_files = true;
@@ -824,11 +824,9 @@ message BankCard {
   string card_number = 2;
   string card_account_firstname = 3;
   string card_account_lastname = 4;
-  string min_amount = 5;
-  string max_amount = 6;
-  string currency = 7;
-  string country = 8;
-  bool enabled = 9;
+  string currency = 5;
+  string country = 6;
+  bool enabled = 7;
 }
 
 message GetBankCardListRequest {
@@ -861,6 +859,29 @@ message DeleteBankCardRequest {
 
 message DeleteBankCardResponse {
   
+}
+
+message GetBankAccountRequest {
+  string channel_id = 1;
+  // Additional information needed for the deposit
+  // May include clientOrderId, productId, userInfo, etc.
+  google.protobuf.Struct extra = 2;
+}
+
+message GetBankAccountResponse {
+	// operator id allocated by operator service
+	string notify_url = 1;
+	string reference_number = 2;
+	string bank_account_name = 3;
+	string bank_account_number = 4;
+}
+
+message GetBankSchemaRequest {
+	string currency = 1;
+}
+
+message GetBankSchemaResponse {
+  google.protobuf.ListValue schema = 1;
 }
 
 // Payment Service
@@ -1031,31 +1052,45 @@ service Payment {
   rpc GetOperatorPaymentChannelPage(GetOperatorPaymentChannelPageRequest) returns (GetPaymentChannelPageResponse) {
   }
 
-  rpc GetBankCardList(GetBankCardListRequest) returns (GetBankCardListResponse) {
+  rpc GetUserBankCardList(GetBankCardListRequest) returns (GetBankCardListResponse) {
     option (google.api.http) = {
       post: "/v1/payment/bankcard/list"
       body: "*"
     };
   }
 
-  rpc AddBankCard(AddBankCardRequest) returns (AddBankCardResponse) {
+  rpc AddUserBankCard(AddBankCardRequest) returns (AddBankCardResponse) {
     option (google.api.http) = {
       post: "/v1/payment/bankcard/add"
       body: "*"
     };
   }
 
-  rpc UpdateBankCard(UpdateBankCardRequest) returns (UpdateBankCardResponse) {
+  rpc UpdateUserBankCard(UpdateBankCardRequest) returns (UpdateBankCardResponse) {
     option (google.api.http) = {
       post: "/v1/payment/bankcard/update"
       body: "*"
     };
   }
 
-  rpc DeleteBankCard(DeleteBankCardRequest) returns (DeleteBankCardResponse) {
+  rpc DeleteUsesrBankCard(DeleteBankCardRequest) returns (DeleteBankCardResponse) {
     option (google.api.http) = {
       post: "/v1/payment/bankcard/delete"
       body: "*"
     };
   }
+
+	rpc GetDepositBankAccount(GetBankAccountRequest) returns (GetBankAccountResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/bankaccount/get"
+      body: "*"
+    };
+	}
+
+	rpc GetBankSchema(GetBankSchemaRequest) returns (GetBankSchemaResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/bankinfo/schema/get"
+      body: "*"
+    };
+	}
 }

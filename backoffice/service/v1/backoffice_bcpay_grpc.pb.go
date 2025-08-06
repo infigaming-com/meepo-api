@@ -21,11 +21,13 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	BackofficeBcpay_GetMerchant_FullMethodName       = "/api.backoffice.service.v1.BackofficeBcpay/GetMerchant"
+	BackofficeBcpay_CreateMerchant_FullMethodName    = "/api.backoffice.service.v1.BackofficeBcpay/CreateMerchant"
 	BackofficeBcpay_BankAccountList_FullMethodName   = "/api.backoffice.service.v1.BackofficeBcpay/BankAccountList"
 	BackofficeBcpay_AddBankAccount_FullMethodName    = "/api.backoffice.service.v1.BackofficeBcpay/AddBankAccount"
 	BackofficeBcpay_UpdateBankAccount_FullMethodName = "/api.backoffice.service.v1.BackofficeBcpay/UpdateBankAccount"
 	BackofficeBcpay_TransactionList_FullMethodName   = "/api.backoffice.service.v1.BackofficeBcpay/TransactionList"
 	BackofficeBcpay_AuditTransaction_FullMethodName  = "/api.backoffice.service.v1.BackofficeBcpay/AuditTransaction"
+	BackofficeBcpay_GetBankSchema_FullMethodName     = "/api.backoffice.service.v1.BackofficeBcpay/GetBankSchema"
 )
 
 // BackofficeBcpayClient is the client API for BackofficeBcpay service.
@@ -36,11 +38,13 @@ const (
 // Provides methods for backoffice bcpay management
 type BackofficeBcpayClient interface {
 	GetMerchant(ctx context.Context, in *GetMerchantRequest, opts ...grpc.CallOption) (*v1.GetMerchantResponse, error)
+	CreateMerchant(ctx context.Context, in *CreateMerchantRequest, opts ...grpc.CallOption) (*v1.CreateMerchantResponse, error)
 	BankAccountList(ctx context.Context, in *BankAccountListRequest, opts ...grpc.CallOption) (*v1.BankAccountListResponse, error)
 	AddBankAccount(ctx context.Context, in *AddBankAccountRequest, opts ...grpc.CallOption) (*v1.AddBankAccountResponse, error)
 	UpdateBankAccount(ctx context.Context, in *UpdateBankAccountRequest, opts ...grpc.CallOption) (*v1.UpdateBankAccountResponse, error)
 	TransactionList(ctx context.Context, in *TransactionListRequest, opts ...grpc.CallOption) (*v1.TransactionListResponse, error)
 	AuditTransaction(ctx context.Context, in *AuditTransactionRequest, opts ...grpc.CallOption) (*v1.AuditTransactionResponse, error)
+	GetBankSchema(ctx context.Context, in *v1.GetBankSchemaRequest, opts ...grpc.CallOption) (*v1.GetBankSchemaResponse, error)
 }
 
 type backofficeBcpayClient struct {
@@ -55,6 +59,16 @@ func (c *backofficeBcpayClient) GetMerchant(ctx context.Context, in *GetMerchant
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.GetMerchantResponse)
 	err := c.cc.Invoke(ctx, BackofficeBcpay_GetMerchant_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeBcpayClient) CreateMerchant(ctx context.Context, in *CreateMerchantRequest, opts ...grpc.CallOption) (*v1.CreateMerchantResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.CreateMerchantResponse)
+	err := c.cc.Invoke(ctx, BackofficeBcpay_CreateMerchant_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -111,6 +125,16 @@ func (c *backofficeBcpayClient) AuditTransaction(ctx context.Context, in *AuditT
 	return out, nil
 }
 
+func (c *backofficeBcpayClient) GetBankSchema(ctx context.Context, in *v1.GetBankSchemaRequest, opts ...grpc.CallOption) (*v1.GetBankSchemaResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetBankSchemaResponse)
+	err := c.cc.Invoke(ctx, BackofficeBcpay_GetBankSchema_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeBcpayServer is the server API for BackofficeBcpay service.
 // All implementations must embed UnimplementedBackofficeBcpayServer
 // for forward compatibility.
@@ -119,11 +143,13 @@ func (c *backofficeBcpayClient) AuditTransaction(ctx context.Context, in *AuditT
 // Provides methods for backoffice bcpay management
 type BackofficeBcpayServer interface {
 	GetMerchant(context.Context, *GetMerchantRequest) (*v1.GetMerchantResponse, error)
+	CreateMerchant(context.Context, *CreateMerchantRequest) (*v1.CreateMerchantResponse, error)
 	BankAccountList(context.Context, *BankAccountListRequest) (*v1.BankAccountListResponse, error)
 	AddBankAccount(context.Context, *AddBankAccountRequest) (*v1.AddBankAccountResponse, error)
 	UpdateBankAccount(context.Context, *UpdateBankAccountRequest) (*v1.UpdateBankAccountResponse, error)
 	TransactionList(context.Context, *TransactionListRequest) (*v1.TransactionListResponse, error)
 	AuditTransaction(context.Context, *AuditTransactionRequest) (*v1.AuditTransactionResponse, error)
+	GetBankSchema(context.Context, *v1.GetBankSchemaRequest) (*v1.GetBankSchemaResponse, error)
 	mustEmbedUnimplementedBackofficeBcpayServer()
 }
 
@@ -136,6 +162,9 @@ type UnimplementedBackofficeBcpayServer struct{}
 
 func (UnimplementedBackofficeBcpayServer) GetMerchant(context.Context, *GetMerchantRequest) (*v1.GetMerchantResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMerchant not implemented")
+}
+func (UnimplementedBackofficeBcpayServer) CreateMerchant(context.Context, *CreateMerchantRequest) (*v1.CreateMerchantResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateMerchant not implemented")
 }
 func (UnimplementedBackofficeBcpayServer) BankAccountList(context.Context, *BankAccountListRequest) (*v1.BankAccountListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BankAccountList not implemented")
@@ -151,6 +180,9 @@ func (UnimplementedBackofficeBcpayServer) TransactionList(context.Context, *Tran
 }
 func (UnimplementedBackofficeBcpayServer) AuditTransaction(context.Context, *AuditTransactionRequest) (*v1.AuditTransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AuditTransaction not implemented")
+}
+func (UnimplementedBackofficeBcpayServer) GetBankSchema(context.Context, *v1.GetBankSchemaRequest) (*v1.GetBankSchemaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBankSchema not implemented")
 }
 func (UnimplementedBackofficeBcpayServer) mustEmbedUnimplementedBackofficeBcpayServer() {}
 func (UnimplementedBackofficeBcpayServer) testEmbeddedByValue()                         {}
@@ -187,6 +219,24 @@ func _BackofficeBcpay_GetMerchant_Handler(srv interface{}, ctx context.Context, 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BackofficeBcpayServer).GetMerchant(ctx, req.(*GetMerchantRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeBcpay_CreateMerchant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateMerchantRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeBcpayServer).CreateMerchant(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeBcpay_CreateMerchant_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeBcpayServer).CreateMerchant(ctx, req.(*CreateMerchantRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -281,6 +331,24 @@ func _BackofficeBcpay_AuditTransaction_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeBcpay_GetBankSchema_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.GetBankSchemaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeBcpayServer).GetBankSchema(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeBcpay_GetBankSchema_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeBcpayServer).GetBankSchema(ctx, req.(*v1.GetBankSchemaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeBcpay_ServiceDesc is the grpc.ServiceDesc for BackofficeBcpay service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -291,6 +359,10 @@ var BackofficeBcpay_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetMerchant",
 			Handler:    _BackofficeBcpay_GetMerchant_Handler,
+		},
+		{
+			MethodName: "CreateMerchant",
+			Handler:    _BackofficeBcpay_CreateMerchant_Handler,
 		},
 		{
 			MethodName: "BankAccountList",
@@ -311,6 +383,10 @@ var BackofficeBcpay_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AuditTransaction",
 			Handler:    _BackofficeBcpay_AuditTransaction_Handler,
+		},
+		{
+			MethodName: "GetBankSchema",
+			Handler:    _BackofficeBcpay_GetBankSchema_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

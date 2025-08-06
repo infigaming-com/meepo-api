@@ -16,6 +16,13 @@ service BackofficeBcpay {
   
 	rpc GetMerchant(GetMerchantRequest) returns (bcpay.service.v1.GetMerchantResponse) {
     option (google.api.http) = {
+      post: "/v1/backoffice/bcpay/merchant/get"
+      body: "*"
+    };
+  }
+
+	rpc CreateMerchant(CreateMerchantRequest) returns (bcpay.service.v1.CreateMerchantResponse) {
+    option (google.api.http) = {
       post: "/v1/backoffice/bcpay/merchant/add"
       body: "*"
     };
@@ -55,28 +62,49 @@ service BackofficeBcpay {
       body: "*"
     };
 	}
+
+	rpc GetBankSchema(bcpay.service.v1.GetBankSchemaRequest) returns (bcpay.service.v1.GetBankSchemaResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/bcpay/bankinfoschema/get"
+      body: "*"
+    };
+	}
 }
 
 
 message GetMerchantRequest {
+}
+
+message CreateMerchantRequest {
 	string name = 1;
 }
 
 message BankAccountListRequest {
 	string currency = 1;
-  api.common.OperatorContextFilters operator_context_filters = 2;
+	string bank_account = 2;
+	string bank_account_firstname = 3;
+	string bank_account_lastname = 4;
+	string card_id = 5;
+  api.common.OperatorContextFilters operator_context_filters = 6;
 }
 
 message AddBankAccountRequest {
-	bcpay.service.v1.BankAccount bank_account = 1;
+	bcpay.service.v1.DepositBankAccount bank_account = 1;
 }
 
 message UpdateBankAccountRequest {
-	bcpay.service.v1.BankAccount bank_account = 1;
+	bcpay.service.v1.DepositBankAccount bank_account = 1;
 }
 
 message TransactionListRequest {
-  api.common.OperatorContextFilters operator_context_filters = 1;
+	string type = 1;
+	string transaction_id = 2;
+	string deposit_bank_account_firstname = 3;
+	string deposit_bank_account_lastname = 4;
+	string user_id = 5;
+	string user_name = 6;
+	string payer_bank_account_firstname = 7;
+	string payer_bank_account_lastname = 8;
 }
 
 message AuditTransactionRequest {
