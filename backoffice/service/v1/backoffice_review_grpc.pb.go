@@ -28,7 +28,6 @@ const (
 	BackofficeReview_ReviewTicket_FullMethodName           = "/api.backoffice.service.v1.BackofficeReview/ReviewTicket"
 	BackofficeReview_AddComment_FullMethodName             = "/api.backoffice.service.v1.BackofficeReview/AddComment"
 	BackofficeReview_CancelTicket_FullMethodName           = "/api.backoffice.service.v1.BackofficeReview/CancelTicket"
-	BackofficeReview_GetTicketById_FullMethodName          = "/api.backoffice.service.v1.BackofficeReview/GetTicketById"
 )
 
 // BackofficeReviewClient is the client API for BackofficeReview service.
@@ -37,13 +36,12 @@ const (
 type BackofficeReviewClient interface {
 	CreateOperatorWithdraw(ctx context.Context, in *CreateOperatorWithdrawRequest, opts ...grpc.CallOption) (*CreateWithdrawResponse, error)
 	ListTickets(ctx context.Context, in *ListTicketsRequest, opts ...grpc.CallOption) (*ListTicketsResponse, error)
-	ListOperatorTickets(ctx context.Context, in *ListOperatorTicketsRequest, opts ...grpc.CallOption) (*ListTicketsResponse, error)
+	ListOperatorTickets(ctx context.Context, in *ListOperatorTicketsRequest, opts ...grpc.CallOption) (*v1.ListTicketsResponse, error)
 	GetTicket(ctx context.Context, in *GetTicketRequest, opts ...grpc.CallOption) (*v1.GetTicketResponse, error)
 	GetOperatorTicket(ctx context.Context, in *GetOperatorTicketRequest, opts ...grpc.CallOption) (*v1.GetOperatorTicketResponse, error)
 	ReviewTicket(ctx context.Context, in *ReviewTicketRequest, opts ...grpc.CallOption) (*ReviewTicketResponse, error)
 	AddComment(ctx context.Context, in *AddCommentRequest, opts ...grpc.CallOption) (*AddCommentResponse, error)
 	CancelTicket(ctx context.Context, in *CancelTicketRequest, opts ...grpc.CallOption) (*CancelTicketResponse, error)
-	GetTicketById(ctx context.Context, in *GetTicketByIdRequest, opts ...grpc.CallOption) (*GetTicketByIdResponse, error)
 }
 
 type backofficeReviewClient struct {
@@ -74,9 +72,9 @@ func (c *backofficeReviewClient) ListTickets(ctx context.Context, in *ListTicket
 	return out, nil
 }
 
-func (c *backofficeReviewClient) ListOperatorTickets(ctx context.Context, in *ListOperatorTicketsRequest, opts ...grpc.CallOption) (*ListTicketsResponse, error) {
+func (c *backofficeReviewClient) ListOperatorTickets(ctx context.Context, in *ListOperatorTicketsRequest, opts ...grpc.CallOption) (*v1.ListTicketsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListTicketsResponse)
+	out := new(v1.ListTicketsResponse)
 	err := c.cc.Invoke(ctx, BackofficeReview_ListOperatorTickets_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -134,29 +132,18 @@ func (c *backofficeReviewClient) CancelTicket(ctx context.Context, in *CancelTic
 	return out, nil
 }
 
-func (c *backofficeReviewClient) GetTicketById(ctx context.Context, in *GetTicketByIdRequest, opts ...grpc.CallOption) (*GetTicketByIdResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetTicketByIdResponse)
-	err := c.cc.Invoke(ctx, BackofficeReview_GetTicketById_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // BackofficeReviewServer is the server API for BackofficeReview service.
 // All implementations must embed UnimplementedBackofficeReviewServer
 // for forward compatibility.
 type BackofficeReviewServer interface {
 	CreateOperatorWithdraw(context.Context, *CreateOperatorWithdrawRequest) (*CreateWithdrawResponse, error)
 	ListTickets(context.Context, *ListTicketsRequest) (*ListTicketsResponse, error)
-	ListOperatorTickets(context.Context, *ListOperatorTicketsRequest) (*ListTicketsResponse, error)
+	ListOperatorTickets(context.Context, *ListOperatorTicketsRequest) (*v1.ListTicketsResponse, error)
 	GetTicket(context.Context, *GetTicketRequest) (*v1.GetTicketResponse, error)
 	GetOperatorTicket(context.Context, *GetOperatorTicketRequest) (*v1.GetOperatorTicketResponse, error)
 	ReviewTicket(context.Context, *ReviewTicketRequest) (*ReviewTicketResponse, error)
 	AddComment(context.Context, *AddCommentRequest) (*AddCommentResponse, error)
 	CancelTicket(context.Context, *CancelTicketRequest) (*CancelTicketResponse, error)
-	GetTicketById(context.Context, *GetTicketByIdRequest) (*GetTicketByIdResponse, error)
 	mustEmbedUnimplementedBackofficeReviewServer()
 }
 
@@ -173,7 +160,7 @@ func (UnimplementedBackofficeReviewServer) CreateOperatorWithdraw(context.Contex
 func (UnimplementedBackofficeReviewServer) ListTickets(context.Context, *ListTicketsRequest) (*ListTicketsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListTickets not implemented")
 }
-func (UnimplementedBackofficeReviewServer) ListOperatorTickets(context.Context, *ListOperatorTicketsRequest) (*ListTicketsResponse, error) {
+func (UnimplementedBackofficeReviewServer) ListOperatorTickets(context.Context, *ListOperatorTicketsRequest) (*v1.ListTicketsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperatorTickets not implemented")
 }
 func (UnimplementedBackofficeReviewServer) GetTicket(context.Context, *GetTicketRequest) (*v1.GetTicketResponse, error) {
@@ -190,9 +177,6 @@ func (UnimplementedBackofficeReviewServer) AddComment(context.Context, *AddComme
 }
 func (UnimplementedBackofficeReviewServer) CancelTicket(context.Context, *CancelTicketRequest) (*CancelTicketResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CancelTicket not implemented")
-}
-func (UnimplementedBackofficeReviewServer) GetTicketById(context.Context, *GetTicketByIdRequest) (*GetTicketByIdResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetTicketById not implemented")
 }
 func (UnimplementedBackofficeReviewServer) mustEmbedUnimplementedBackofficeReviewServer() {}
 func (UnimplementedBackofficeReviewServer) testEmbeddedByValue()                          {}
@@ -359,24 +343,6 @@ func _BackofficeReview_CancelTicket_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeReview_GetTicketById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTicketByIdRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeReviewServer).GetTicketById(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeReview_GetTicketById_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeReviewServer).GetTicketById(ctx, req.(*GetTicketByIdRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // BackofficeReview_ServiceDesc is the grpc.ServiceDesc for BackofficeReview service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -415,10 +381,6 @@ var BackofficeReview_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CancelTicket",
 			Handler:    _BackofficeReview_CancelTicket_Handler,
-		},
-		{
-			MethodName: "GetTicketById",
-			Handler:    _BackofficeReview_GetTicketById_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
