@@ -2078,7 +2078,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListTicketsResponse'
+                                $ref: '#/components/schemas/api.review.service.v1.ListTicketsResponse'
     /v1/backoffice/review/tickets/review:
         post:
             tags:
@@ -7523,106 +7523,6 @@ components:
                     type: integer
                     format: int32
                 pageSize:
-                    type: integer
-                    format: int32
-        api.backoffice.service.v1.ListTicketsResponse:
-            type: object
-            properties:
-                tickets:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListTicketsResponse_Ticket'
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
-                totalCount:
-                    type: integer
-                    format: int32
-                totalAmount:
-                    type: string
-                totalPendingCount:
-                    type: integer
-                    format: int32
-                totalPendingAmount:
-                    type: string
-                totalPayingCount:
-                    type: integer
-                    format: int32
-                totalPayingAmount:
-                    type: string
-                totalPaidCount:
-                    type: integer
-                    format: int32
-                totalPaidAmount:
-                    type: string
-                totalFailedCount:
-                    type: integer
-                    format: int32
-                totalFailedAmount:
-                    type: string
-                totalRejectedCount:
-                    type: integer
-                    format: int32
-                totalRejectedAmount:
-                    type: string
-                averageReviewTime:
-                    type: integer
-                    format: int32
-        api.backoffice.service.v1.ListTicketsResponse_Ticket:
-            type: object
-            properties:
-                createdAt:
-                    type: string
-                    format: date-time
-                ticketId:
-                    type: string
-                userId:
-                    type: string
-                operatorName:
-                    type: string
-                companyOperatorName:
-                    type: string
-                retailerOperatorName:
-                    type: string
-                systemOperatorName:
-                    type: string
-                realOperatorName:
-                    type: string
-                vipLevel:
-                    type: integer
-                    format: int32
-                userTags:
-                    type: array
-                    items:
-                        type: string
-                beforeBalance:
-                    type: string
-                beforeBalanceUsd:
-                    type: string
-                amount:
-                    type: string
-                amountUsd:
-                    type: string
-                afterBalance:
-                    type: string
-                afterBalanceUsd:
-                    type: string
-                currency:
-                    type: string
-                paymentChannel:
-                    type: string
-                protocol:
-                    type: string
-                fee:
-                    type: string
-                status:
-                    type: string
-                reviewerUsername:
-                    type: string
-                reviewDuration:
                     type: integer
                     format: int32
         api.backoffice.service.v1.ListUserCommentsRequest:

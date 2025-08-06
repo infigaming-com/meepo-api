@@ -20,7 +20,7 @@ service BackofficeReview {
 		};
 	}
 
-	rpc ListTickets(ListTicketsRequest) returns (ListTicketsResponse) {
+	rpc ListTickets(ListTicketsRequest) returns (review.service.v1.ListTicketsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/review/tickets/list"
 			body: "*"

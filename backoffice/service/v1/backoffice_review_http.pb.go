@@ -36,7 +36,7 @@ type BackofficeReviewHTTPServer interface {
 	GetOperatorTicket(context.Context, *GetOperatorTicketRequest) (*v1.GetOperatorTicketResponse, error)
 	GetTicket(context.Context, *GetTicketRequest) (*v1.GetTicketResponse, error)
 	ListOperatorTickets(context.Context, *ListOperatorTicketsRequest) (*v1.ListTicketsResponse, error)
-	ListTickets(context.Context, *ListTicketsRequest) (*ListTicketsResponse, error)
+	ListTickets(context.Context, *ListTicketsRequest) (*v1.ListTicketsResponse, error)
 	ReviewTicket(context.Context, *ReviewTicketRequest) (*ReviewTicketResponse, error)
 }
 
@@ -91,7 +91,7 @@ func _BackofficeReview_ListTickets0_HTTP_Handler(srv BackofficeReviewHTTPServer)
 		if err != nil {
 			return err
 		}
-		reply := out.(*ListTicketsResponse)
+		reply := out.(*v1.ListTicketsResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -235,7 +235,7 @@ type BackofficeReviewHTTPClient interface {
 	GetOperatorTicket(ctx context.Context, req *GetOperatorTicketRequest, opts ...http.CallOption) (rsp *v1.GetOperatorTicketResponse, err error)
 	GetTicket(ctx context.Context, req *GetTicketRequest, opts ...http.CallOption) (rsp *v1.GetTicketResponse, err error)
 	ListOperatorTickets(ctx context.Context, req *ListOperatorTicketsRequest, opts ...http.CallOption) (rsp *v1.ListTicketsResponse, err error)
-	ListTickets(ctx context.Context, req *ListTicketsRequest, opts ...http.CallOption) (rsp *ListTicketsResponse, err error)
+	ListTickets(ctx context.Context, req *ListTicketsRequest, opts ...http.CallOption) (rsp *v1.ListTicketsResponse, err error)
 	ReviewTicket(ctx context.Context, req *ReviewTicketRequest, opts ...http.CallOption) (rsp *ReviewTicketResponse, err error)
 }
 
@@ -325,8 +325,8 @@ func (c *BackofficeReviewHTTPClientImpl) ListOperatorTickets(ctx context.Context
 	return &out, nil
 }
 
-func (c *BackofficeReviewHTTPClientImpl) ListTickets(ctx context.Context, in *ListTicketsRequest, opts ...http.CallOption) (*ListTicketsResponse, error) {
-	var out ListTicketsResponse
+func (c *BackofficeReviewHTTPClientImpl) ListTickets(ctx context.Context, in *ListTicketsRequest, opts ...http.CallOption) (*v1.ListTicketsResponse, error) {
+	var out v1.ListTicketsResponse
 	pattern := "/v1/backoffice/review/tickets/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeReviewListTickets))

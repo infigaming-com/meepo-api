@@ -35,7 +35,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BackofficeReviewClient interface {
 	CreateOperatorWithdraw(ctx context.Context, in *CreateOperatorWithdrawRequest, opts ...grpc.CallOption) (*CreateWithdrawResponse, error)
-	ListTickets(ctx context.Context, in *ListTicketsRequest, opts ...grpc.CallOption) (*ListTicketsResponse, error)
+	ListTickets(ctx context.Context, in *ListTicketsRequest, opts ...grpc.CallOption) (*v1.ListTicketsResponse, error)
 	ListOperatorTickets(ctx context.Context, in *ListOperatorTicketsRequest, opts ...grpc.CallOption) (*v1.ListTicketsResponse, error)
 	GetTicket(ctx context.Context, in *GetTicketRequest, opts ...grpc.CallOption) (*v1.GetTicketResponse, error)
 	GetOperatorTicket(ctx context.Context, in *GetOperatorTicketRequest, opts ...grpc.CallOption) (*v1.GetOperatorTicketResponse, error)
@@ -62,9 +62,9 @@ func (c *backofficeReviewClient) CreateOperatorWithdraw(ctx context.Context, in 
 	return out, nil
 }
 
-func (c *backofficeReviewClient) ListTickets(ctx context.Context, in *ListTicketsRequest, opts ...grpc.CallOption) (*ListTicketsResponse, error) {
+func (c *backofficeReviewClient) ListTickets(ctx context.Context, in *ListTicketsRequest, opts ...grpc.CallOption) (*v1.ListTicketsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListTicketsResponse)
+	out := new(v1.ListTicketsResponse)
 	err := c.cc.Invoke(ctx, BackofficeReview_ListTickets_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -137,7 +137,7 @@ func (c *backofficeReviewClient) CancelTicket(ctx context.Context, in *CancelTic
 // for forward compatibility.
 type BackofficeReviewServer interface {
 	CreateOperatorWithdraw(context.Context, *CreateOperatorWithdrawRequest) (*CreateWithdrawResponse, error)
-	ListTickets(context.Context, *ListTicketsRequest) (*ListTicketsResponse, error)
+	ListTickets(context.Context, *ListTicketsRequest) (*v1.ListTicketsResponse, error)
 	ListOperatorTickets(context.Context, *ListOperatorTicketsRequest) (*v1.ListTicketsResponse, error)
 	GetTicket(context.Context, *GetTicketRequest) (*v1.GetTicketResponse, error)
 	GetOperatorTicket(context.Context, *GetOperatorTicketRequest) (*v1.GetOperatorTicketResponse, error)
@@ -157,7 +157,7 @@ type UnimplementedBackofficeReviewServer struct{}
 func (UnimplementedBackofficeReviewServer) CreateOperatorWithdraw(context.Context, *CreateOperatorWithdrawRequest) (*CreateWithdrawResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOperatorWithdraw not implemented")
 }
-func (UnimplementedBackofficeReviewServer) ListTickets(context.Context, *ListTicketsRequest) (*ListTicketsResponse, error) {
+func (UnimplementedBackofficeReviewServer) ListTickets(context.Context, *ListTicketsRequest) (*v1.ListTicketsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListTickets not implemented")
 }
 func (UnimplementedBackofficeReviewServer) ListOperatorTickets(context.Context, *ListOperatorTicketsRequest) (*v1.ListTicketsResponse, error) {
