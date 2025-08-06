@@ -6958,11 +6958,13 @@ func (x *GetWalletCreditTransactionsResponse_CreditTransaction) GetBonus() strin
 }
 
 type GetOverviewDashboardFromWalletResponse_GGR struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Today         string                 `protobuf:"bytes,1,opt,name=today,proto3" json:"today,omitempty"`
-	Yesterday     string                 `protobuf:"bytes,2,opt,name=yesterday,proto3" json:"yesterday,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState `protogen:"open.v1"`
+	TodayUsd                   string                 `protobuf:"bytes,1,opt,name=today_usd,json=todayUsd,proto3" json:"today_usd,omitempty"`
+	YesterdayUsd               string                 `protobuf:"bytes,2,opt,name=yesterday_usd,json=yesterdayUsd,proto3" json:"yesterday_usd,omitempty"`
+	TodayReportingCurrency     string                 `protobuf:"bytes,3,opt,name=today_reporting_currency,json=todayReportingCurrency,proto3" json:"today_reporting_currency,omitempty"`
+	YesterdayReportingCurrency string                 `protobuf:"bytes,4,opt,name=yesterday_reporting_currency,json=yesterdayReportingCurrency,proto3" json:"yesterday_reporting_currency,omitempty"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *GetOverviewDashboardFromWalletResponse_GGR) Reset() {
@@ -6995,26 +6997,42 @@ func (*GetOverviewDashboardFromWalletResponse_GGR) Descriptor() ([]byte, []int) 
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{34, 0}
 }
 
-func (x *GetOverviewDashboardFromWalletResponse_GGR) GetToday() string {
+func (x *GetOverviewDashboardFromWalletResponse_GGR) GetTodayUsd() string {
 	if x != nil {
-		return x.Today
+		return x.TodayUsd
 	}
 	return ""
 }
 
-func (x *GetOverviewDashboardFromWalletResponse_GGR) GetYesterday() string {
+func (x *GetOverviewDashboardFromWalletResponse_GGR) GetYesterdayUsd() string {
 	if x != nil {
-		return x.Yesterday
+		return x.YesterdayUsd
+	}
+	return ""
+}
+
+func (x *GetOverviewDashboardFromWalletResponse_GGR) GetTodayReportingCurrency() string {
+	if x != nil {
+		return x.TodayReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetOverviewDashboardFromWalletResponse_GGR) GetYesterdayReportingCurrency() string {
+	if x != nil {
+		return x.YesterdayReportingCurrency
 	}
 	return ""
 }
 
 type GetOverviewDashboardFromWalletResponse_NGR struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Today         string                 `protobuf:"bytes,1,opt,name=today,proto3" json:"today,omitempty"`
-	Yesterday     string                 `protobuf:"bytes,2,opt,name=yesterday,proto3" json:"yesterday,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState `protogen:"open.v1"`
+	TodayUsd                   string                 `protobuf:"bytes,1,opt,name=today_usd,json=todayUsd,proto3" json:"today_usd,omitempty"`
+	YesterdayUsd               string                 `protobuf:"bytes,2,opt,name=yesterday_usd,json=yesterdayUsd,proto3" json:"yesterday_usd,omitempty"`
+	TodayReportingCurrency     string                 `protobuf:"bytes,3,opt,name=today_reporting_currency,json=todayReportingCurrency,proto3" json:"today_reporting_currency,omitempty"`
+	YesterdayReportingCurrency string                 `protobuf:"bytes,4,opt,name=yesterday_reporting_currency,json=yesterdayReportingCurrency,proto3" json:"yesterday_reporting_currency,omitempty"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *GetOverviewDashboardFromWalletResponse_NGR) Reset() {
@@ -7047,26 +7065,42 @@ func (*GetOverviewDashboardFromWalletResponse_NGR) Descriptor() ([]byte, []int) 
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{34, 1}
 }
 
-func (x *GetOverviewDashboardFromWalletResponse_NGR) GetToday() string {
+func (x *GetOverviewDashboardFromWalletResponse_NGR) GetTodayUsd() string {
 	if x != nil {
-		return x.Today
+		return x.TodayUsd
 	}
 	return ""
 }
 
-func (x *GetOverviewDashboardFromWalletResponse_NGR) GetYesterday() string {
+func (x *GetOverviewDashboardFromWalletResponse_NGR) GetYesterdayUsd() string {
 	if x != nil {
-		return x.Yesterday
+		return x.YesterdayUsd
+	}
+	return ""
+}
+
+func (x *GetOverviewDashboardFromWalletResponse_NGR) GetTodayReportingCurrency() string {
+	if x != nil {
+		return x.TodayReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetOverviewDashboardFromWalletResponse_NGR) GetYesterdayReportingCurrency() string {
+	if x != nil {
+		return x.YesterdayReportingCurrency
 	}
 	return ""
 }
 
 type GetOverviewDashboardFromWalletResponse_Deposit struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Today         string                 `protobuf:"bytes,1,opt,name=today,proto3" json:"today,omitempty"`
-	Yesterday     string                 `protobuf:"bytes,2,opt,name=yesterday,proto3" json:"yesterday,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState `protogen:"open.v1"`
+	TodayUsd                   string                 `protobuf:"bytes,1,opt,name=today_usd,json=todayUsd,proto3" json:"today_usd,omitempty"`
+	YesterdayUsd               string                 `protobuf:"bytes,2,opt,name=yesterday_usd,json=yesterdayUsd,proto3" json:"yesterday_usd,omitempty"`
+	TodayReportingCurrency     string                 `protobuf:"bytes,3,opt,name=today_reporting_currency,json=todayReportingCurrency,proto3" json:"today_reporting_currency,omitempty"`
+	YesterdayReportingCurrency string                 `protobuf:"bytes,4,opt,name=yesterday_reporting_currency,json=yesterdayReportingCurrency,proto3" json:"yesterday_reporting_currency,omitempty"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *GetOverviewDashboardFromWalletResponse_Deposit) Reset() {
@@ -7099,26 +7133,42 @@ func (*GetOverviewDashboardFromWalletResponse_Deposit) Descriptor() ([]byte, []i
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{34, 2}
 }
 
-func (x *GetOverviewDashboardFromWalletResponse_Deposit) GetToday() string {
+func (x *GetOverviewDashboardFromWalletResponse_Deposit) GetTodayUsd() string {
 	if x != nil {
-		return x.Today
+		return x.TodayUsd
 	}
 	return ""
 }
 
-func (x *GetOverviewDashboardFromWalletResponse_Deposit) GetYesterday() string {
+func (x *GetOverviewDashboardFromWalletResponse_Deposit) GetYesterdayUsd() string {
 	if x != nil {
-		return x.Yesterday
+		return x.YesterdayUsd
+	}
+	return ""
+}
+
+func (x *GetOverviewDashboardFromWalletResponse_Deposit) GetTodayReportingCurrency() string {
+	if x != nil {
+		return x.TodayReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetOverviewDashboardFromWalletResponse_Deposit) GetYesterdayReportingCurrency() string {
+	if x != nil {
+		return x.YesterdayReportingCurrency
 	}
 	return ""
 }
 
 type GetOverviewDashboardFromWalletResponse_Withdraw struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Today         string                 `protobuf:"bytes,1,opt,name=today,proto3" json:"today,omitempty"`
-	Yesterday     string                 `protobuf:"bytes,2,opt,name=yesterday,proto3" json:"yesterday,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState `protogen:"open.v1"`
+	TodayUsd                   string                 `protobuf:"bytes,1,opt,name=today_usd,json=todayUsd,proto3" json:"today_usd,omitempty"`
+	YesterdayUsd               string                 `protobuf:"bytes,2,opt,name=yesterday_usd,json=yesterdayUsd,proto3" json:"yesterday_usd,omitempty"`
+	TodayReportingCurrency     string                 `protobuf:"bytes,3,opt,name=today_reporting_currency,json=todayReportingCurrency,proto3" json:"today_reporting_currency,omitempty"`
+	YesterdayReportingCurrency string                 `protobuf:"bytes,4,opt,name=yesterday_reporting_currency,json=yesterdayReportingCurrency,proto3" json:"yesterday_reporting_currency,omitempty"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *GetOverviewDashboardFromWalletResponse_Withdraw) Reset() {
@@ -7151,26 +7201,42 @@ func (*GetOverviewDashboardFromWalletResponse_Withdraw) Descriptor() ([]byte, []
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{34, 3}
 }
 
-func (x *GetOverviewDashboardFromWalletResponse_Withdraw) GetToday() string {
+func (x *GetOverviewDashboardFromWalletResponse_Withdraw) GetTodayUsd() string {
 	if x != nil {
-		return x.Today
+		return x.TodayUsd
 	}
 	return ""
 }
 
-func (x *GetOverviewDashboardFromWalletResponse_Withdraw) GetYesterday() string {
+func (x *GetOverviewDashboardFromWalletResponse_Withdraw) GetYesterdayUsd() string {
 	if x != nil {
-		return x.Yesterday
+		return x.YesterdayUsd
+	}
+	return ""
+}
+
+func (x *GetOverviewDashboardFromWalletResponse_Withdraw) GetTodayReportingCurrency() string {
+	if x != nil {
+		return x.TodayReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetOverviewDashboardFromWalletResponse_Withdraw) GetYesterdayReportingCurrency() string {
+	if x != nil {
+		return x.YesterdayReportingCurrency
 	}
 	return ""
 }
 
 type GetOverviewDashboardFromWalletResponse_DepositMinusWithdraw struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Today         string                 `protobuf:"bytes,1,opt,name=today,proto3" json:"today,omitempty"`
-	Yesterday     string                 `protobuf:"bytes,2,opt,name=yesterday,proto3" json:"yesterday,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState `protogen:"open.v1"`
+	TodayUsd                   string                 `protobuf:"bytes,1,opt,name=today_usd,json=todayUsd,proto3" json:"today_usd,omitempty"`
+	YesterdayUsd               string                 `protobuf:"bytes,2,opt,name=yesterday_usd,json=yesterdayUsd,proto3" json:"yesterday_usd,omitempty"`
+	TodayReportingCurrency     string                 `protobuf:"bytes,3,opt,name=today_reporting_currency,json=todayReportingCurrency,proto3" json:"today_reporting_currency,omitempty"`
+	YesterdayReportingCurrency string                 `protobuf:"bytes,4,opt,name=yesterday_reporting_currency,json=yesterdayReportingCurrency,proto3" json:"yesterday_reporting_currency,omitempty"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *GetOverviewDashboardFromWalletResponse_DepositMinusWithdraw) Reset() {
@@ -7203,16 +7269,30 @@ func (*GetOverviewDashboardFromWalletResponse_DepositMinusWithdraw) Descriptor()
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{34, 4}
 }
 
-func (x *GetOverviewDashboardFromWalletResponse_DepositMinusWithdraw) GetToday() string {
+func (x *GetOverviewDashboardFromWalletResponse_DepositMinusWithdraw) GetTodayUsd() string {
 	if x != nil {
-		return x.Today
+		return x.TodayUsd
 	}
 	return ""
 }
 
-func (x *GetOverviewDashboardFromWalletResponse_DepositMinusWithdraw) GetYesterday() string {
+func (x *GetOverviewDashboardFromWalletResponse_DepositMinusWithdraw) GetYesterdayUsd() string {
 	if x != nil {
-		return x.Yesterday
+		return x.YesterdayUsd
+	}
+	return ""
+}
+
+func (x *GetOverviewDashboardFromWalletResponse_DepositMinusWithdraw) GetTodayReportingCurrency() string {
+	if x != nil {
+		return x.TodayReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetOverviewDashboardFromWalletResponse_DepositMinusWithdraw) GetYesterdayReportingCurrency() string {
+	if x != nil {
+		return x.YesterdayReportingCurrency
 	}
 	return ""
 }
@@ -7598,28 +7678,38 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x16ngr_reporting_currency\x18' \x01(\tR\x14ngrReportingCurrency\"\xcd\x01\n" +
 	"%GetOverviewDashboardFromWalletRequest\x12\\\n" +
 	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
-	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xe3\x06\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x9a\f\n" +
 	"&GetOverviewDashboardFromWalletResponse\x12S\n" +
 	"\x03ggr\x18\x01 \x01(\v2A.api.wallet.service.v1.GetOverviewDashboardFromWalletResponse.GGRR\x03ggr\x12S\n" +
 	"\x03ngr\x18\x02 \x01(\v2A.api.wallet.service.v1.GetOverviewDashboardFromWalletResponse.NGRR\x03ngr\x12_\n" +
 	"\adeposit\x18\x03 \x01(\v2E.api.wallet.service.v1.GetOverviewDashboardFromWalletResponse.DepositR\adeposit\x12b\n" +
 	"\bwithdraw\x18\x04 \x01(\v2F.api.wallet.service.v1.GetOverviewDashboardFromWalletResponse.WithdrawR\bwithdraw\x12\x88\x01\n" +
-	"\x16deposit_minus_withdraw\x18\x05 \x01(\v2R.api.wallet.service.v1.GetOverviewDashboardFromWalletResponse.DepositMinusWithdrawR\x14depositMinusWithdraw\x1a9\n" +
-	"\x03GGR\x12\x14\n" +
-	"\x05today\x18\x01 \x01(\tR\x05today\x12\x1c\n" +
-	"\tyesterday\x18\x02 \x01(\tR\tyesterday\x1a9\n" +
-	"\x03NGR\x12\x14\n" +
-	"\x05today\x18\x01 \x01(\tR\x05today\x12\x1c\n" +
-	"\tyesterday\x18\x02 \x01(\tR\tyesterday\x1a=\n" +
-	"\aDeposit\x12\x14\n" +
-	"\x05today\x18\x01 \x01(\tR\x05today\x12\x1c\n" +
-	"\tyesterday\x18\x02 \x01(\tR\tyesterday\x1a>\n" +
-	"\bWithdraw\x12\x14\n" +
-	"\x05today\x18\x01 \x01(\tR\x05today\x12\x1c\n" +
-	"\tyesterday\x18\x02 \x01(\tR\tyesterday\x1aJ\n" +
-	"\x14DepositMinusWithdraw\x12\x14\n" +
-	"\x05today\x18\x01 \x01(\tR\x05today\x12\x1c\n" +
-	"\tyesterday\x18\x02 \x01(\tR\tyesterday\"\xbf\x01\n" +
+	"\x16deposit_minus_withdraw\x18\x05 \x01(\v2R.api.wallet.service.v1.GetOverviewDashboardFromWalletResponse.DepositMinusWithdrawR\x14depositMinusWithdraw\x1a\xc3\x01\n" +
+	"\x03GGR\x12\x1b\n" +
+	"\ttoday_usd\x18\x01 \x01(\tR\btodayUsd\x12#\n" +
+	"\ryesterday_usd\x18\x02 \x01(\tR\fyesterdayUsd\x128\n" +
+	"\x18today_reporting_currency\x18\x03 \x01(\tR\x16todayReportingCurrency\x12@\n" +
+	"\x1cyesterday_reporting_currency\x18\x04 \x01(\tR\x1ayesterdayReportingCurrency\x1a\xc3\x01\n" +
+	"\x03NGR\x12\x1b\n" +
+	"\ttoday_usd\x18\x01 \x01(\tR\btodayUsd\x12#\n" +
+	"\ryesterday_usd\x18\x02 \x01(\tR\fyesterdayUsd\x128\n" +
+	"\x18today_reporting_currency\x18\x03 \x01(\tR\x16todayReportingCurrency\x12@\n" +
+	"\x1cyesterday_reporting_currency\x18\x04 \x01(\tR\x1ayesterdayReportingCurrency\x1a\xc7\x01\n" +
+	"\aDeposit\x12\x1b\n" +
+	"\ttoday_usd\x18\x01 \x01(\tR\btodayUsd\x12#\n" +
+	"\ryesterday_usd\x18\x02 \x01(\tR\fyesterdayUsd\x128\n" +
+	"\x18today_reporting_currency\x18\x03 \x01(\tR\x16todayReportingCurrency\x12@\n" +
+	"\x1cyesterday_reporting_currency\x18\x04 \x01(\tR\x1ayesterdayReportingCurrency\x1a\xc8\x01\n" +
+	"\bWithdraw\x12\x1b\n" +
+	"\ttoday_usd\x18\x01 \x01(\tR\btodayUsd\x12#\n" +
+	"\ryesterday_usd\x18\x02 \x01(\tR\fyesterdayUsd\x128\n" +
+	"\x18today_reporting_currency\x18\x03 \x01(\tR\x16todayReportingCurrency\x12@\n" +
+	"\x1cyesterday_reporting_currency\x18\x04 \x01(\tR\x1ayesterdayReportingCurrency\x1a\xd4\x01\n" +
+	"\x14DepositMinusWithdraw\x12\x1b\n" +
+	"\ttoday_usd\x18\x01 \x01(\tR\btodayUsd\x12#\n" +
+	"\ryesterday_usd\x18\x02 \x01(\tR\fyesterdayUsd\x128\n" +
+	"\x18today_reporting_currency\x18\x03 \x01(\tR\x16todayReportingCurrency\x12@\n" +
+	"\x1cyesterday_reporting_currency\x18\x04 \x01(\tR\x1ayesterdayReportingCurrency\"\xbf\x01\n" +
 	"\bCurrency\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
 	"\aenabled\x18\x02 \x01(\bR\aenabled\x12\x16\n" +

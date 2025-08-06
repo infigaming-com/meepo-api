@@ -11691,9 +11691,13 @@ func (m *GetOverviewDashboardFromWalletResponse_GGR) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Today
+	// no validation rules for TodayUsd
 
-	// no validation rules for Yesterday
+	// no validation rules for YesterdayUsd
+
+	// no validation rules for TodayReportingCurrency
+
+	// no validation rules for YesterdayReportingCurrency
 
 	if len(errors) > 0 {
 		return GetOverviewDashboardFromWalletResponse_GGRMultiError(errors)
@@ -11801,9 +11805,13 @@ func (m *GetOverviewDashboardFromWalletResponse_NGR) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Today
+	// no validation rules for TodayUsd
 
-	// no validation rules for Yesterday
+	// no validation rules for YesterdayUsd
+
+	// no validation rules for TodayReportingCurrency
+
+	// no validation rules for YesterdayReportingCurrency
 
 	if len(errors) > 0 {
 		return GetOverviewDashboardFromWalletResponse_NGRMultiError(errors)
@@ -11911,9 +11919,13 @@ func (m *GetOverviewDashboardFromWalletResponse_Deposit) validate(all bool) erro
 
 	var errors []error
 
-	// no validation rules for Today
+	// no validation rules for TodayUsd
 
-	// no validation rules for Yesterday
+	// no validation rules for YesterdayUsd
+
+	// no validation rules for TodayReportingCurrency
+
+	// no validation rules for YesterdayReportingCurrency
 
 	if len(errors) > 0 {
 		return GetOverviewDashboardFromWalletResponse_DepositMultiError(errors)
@@ -12024,9 +12036,13 @@ func (m *GetOverviewDashboardFromWalletResponse_Withdraw) validate(all bool) err
 
 	var errors []error
 
-	// no validation rules for Today
+	// no validation rules for TodayUsd
 
-	// no validation rules for Yesterday
+	// no validation rules for YesterdayUsd
+
+	// no validation rules for TodayReportingCurrency
+
+	// no validation rules for YesterdayReportingCurrency
 
 	if len(errors) > 0 {
 		return GetOverviewDashboardFromWalletResponse_WithdrawMultiError(errors)
@@ -12140,9 +12156,13 @@ func (m *GetOverviewDashboardFromWalletResponse_DepositMinusWithdraw) validate(a
 
 	var errors []error
 
-	// no validation rules for Today
+	// no validation rules for TodayUsd
 
-	// no validation rules for Yesterday
+	// no validation rules for YesterdayUsd
+
+	// no validation rules for TodayReportingCurrency
+
+	// no validation rules for YesterdayReportingCurrency
 
 	if len(errors) > 0 {
 		return GetOverviewDashboardFromWalletResponse_DepositMinusWithdrawMultiError(errors)

@@ -593,24 +593,34 @@ message GetOverviewDashboardFromWalletRequest {
 
 message GetOverviewDashboardFromWalletResponse {
 	message GGR {
-		string today = 1;
-		string yesterday = 2;
+		string today_usd = 1;
+		string yesterday_usd = 2;
+		string today_reporting_currency = 3;
+		string yesterday_reporting_currency = 4;
 	}
 	message NGR {
-		string today = 1;
-		string yesterday = 2;
+		string today_usd = 1;
+		string yesterday_usd = 2;
+		string today_reporting_currency = 3;
+		string yesterday_reporting_currency = 4;
 	}
 	message Deposit {
-		string today = 1;
-		string yesterday = 2;
+		string today_usd = 1;
+		string yesterday_usd = 2;
+		string today_reporting_currency = 3;
+		string yesterday_reporting_currency = 4;
 	}
 	message Withdraw {
-		string today = 1;
-		string yesterday = 2;
+		string today_usd = 1;
+		string yesterday_usd = 2;
+		string today_reporting_currency = 3;
+		string yesterday_reporting_currency = 4;
 	}
 	message DepositMinusWithdraw {
-		string today = 1;
-		string yesterday = 2;
+		string today_usd = 1;
+		string yesterday_usd = 2;
+		string today_reporting_currency = 3;
+		string yesterday_reporting_currency = 4;
 	}
 	GGR ggr = 1;
 	NGR ngr = 2;
