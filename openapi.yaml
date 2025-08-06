@@ -5476,8 +5476,6 @@ components:
                     type: string
                 rtp:
                     type: string
-                reportingCurrency:
-                    type: string
                 balanceReportingCurrency:
                     type: string
                 depositMinusWithdrawReportingCurrency:

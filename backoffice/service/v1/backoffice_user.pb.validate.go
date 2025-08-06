@@ -616,8 +616,6 @@ func (m *GetUserOverviewResponse) validate(all bool) error {
 
 	// no validation rules for Rtp
 
-	// no validation rules for ReportingCurrency
-
 	// no validation rules for BalanceReportingCurrency
 
 	// no validation rules for DepositMinusWithdrawReportingCurrency

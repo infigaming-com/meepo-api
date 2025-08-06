@@ -383,7 +383,6 @@ type GetUserOverviewResponse struct {
 	TurnoverMultiplier                    string                              `protobuf:"bytes,21,opt,name=turnover_multiplier,json=turnoverMultiplier,proto3" json:"turnover_multiplier,omitempty"`                 // Round to 2 decimal places
 	WithdrawToDepositRatio                string                              `protobuf:"bytes,22,opt,name=withdraw_to_deposit_ratio,json=withdrawToDepositRatio,proto3" json:"withdraw_to_deposit_ratio,omitempty"` // Round to 2 decimal places
 	Rtp                                   string                              `protobuf:"bytes,23,opt,name=rtp,proto3" json:"rtp,omitempty"`                                                                         // Round to 2 decimal places
-	ReportingCurrency                     string                              `protobuf:"bytes,24,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
 	BalanceReportingCurrency              string                              `protobuf:"bytes,25,opt,name=balance_reporting_currency,json=balanceReportingCurrency,proto3" json:"balance_reporting_currency,omitempty"`
 	DepositMinusWithdrawReportingCurrency string                              `protobuf:"bytes,26,opt,name=deposit_minus_withdraw_reporting_currency,json=depositMinusWithdrawReportingCurrency,proto3" json:"deposit_minus_withdraw_reporting_currency,omitempty"`
 	TurnoverReportingCurrency             string                              `protobuf:"bytes,27,opt,name=turnover_reporting_currency,json=turnoverReportingCurrency,proto3" json:"turnover_reporting_currency,omitempty"`
@@ -592,13 +591,6 @@ func (x *GetUserOverviewResponse) GetWithdrawToDepositRatio() string {
 func (x *GetUserOverviewResponse) GetRtp() string {
 	if x != nil {
 		return x.Rtp
-	}
-	return ""
-}
-
-func (x *GetUserOverviewResponse) GetReportingCurrency() string {
-	if x != nil {
-		return x.ReportingCurrency
 	}
 	return ""
 }
@@ -2641,7 +2633,7 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x16GetUserOverviewRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1b\n" +
 	"\x06filter\x18\x02 \x01(\tH\x00R\x06filter\x88\x01\x01B\t\n" +
-	"\a_filter\"\x9f\x12\n" +
+	"\a_filter\"\xf0\x11\n" +
 	"\x17GetUserOverviewResponse\x12\x1f\n" +
 	"\vbalance_usd\x18\x01 \x01(\tR\n" +
 	"balanceUsd\x12;\n" +
@@ -2668,8 +2660,7 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x15ggr_to_ngr_percentage\x18\x14 \x01(\tR\x12ggrToNgrPercentage\x12/\n" +
 	"\x13turnover_multiplier\x18\x15 \x01(\tR\x12turnoverMultiplier\x129\n" +
 	"\x19withdraw_to_deposit_ratio\x18\x16 \x01(\tR\x16withdrawToDepositRatio\x12\x10\n" +
-	"\x03rtp\x18\x17 \x01(\tR\x03rtp\x12-\n" +
-	"\x12reporting_currency\x18\x18 \x01(\tR\x11reportingCurrency\x12<\n" +
+	"\x03rtp\x18\x17 \x01(\tR\x03rtp\x12<\n" +
 	"\x1abalance_reporting_currency\x18\x19 \x01(\tR\x18balanceReportingCurrency\x12X\n" +
 	")deposit_minus_withdraw_reporting_currency\x18\x1a \x01(\tR%depositMinusWithdrawReportingCurrency\x12>\n" +
 	"\x1bturnover_reporting_currency\x18\x1b \x01(\tR\x19turnoverReportingCurrency\x12G\n" +

@@ -212,7 +212,6 @@ message GetUserOverviewResponse {
 	string turnover_multiplier = 21; // Round to 2 decimal places
 	string withdraw_to_deposit_ratio = 22; // Round to 2 decimal places
 	string rtp = 23; // Round to 2 decimal places
-	string reporting_currency = 24;
 	string balance_reporting_currency = 25;
 	string deposit_minus_withdraw_reporting_currency = 26;
 	string turnover_reporting_currency = 27;
