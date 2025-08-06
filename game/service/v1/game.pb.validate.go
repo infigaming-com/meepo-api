@@ -7554,6 +7554,244 @@ var _ interface {
 	ErrorName() string
 } = GetDailyGameTransactionDataResponseValidationError{}
 
+// Validate checks the field values on ListProviderByIDsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListProviderByIDsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListProviderByIDsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListProviderByIDsRequestMultiError, or nil if none found.
+func (m *ListProviderByIDsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListProviderByIDsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ListProviderByIDsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListProviderByIDsRequestMultiError is an error wrapping multiple validation
+// errors returned by ListProviderByIDsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListProviderByIDsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListProviderByIDsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListProviderByIDsRequestMultiError) AllErrors() []error { return m }
+
+// ListProviderByIDsRequestValidationError is the validation error returned by
+// ListProviderByIDsRequest.Validate if the designated constraints aren't met.
+type ListProviderByIDsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListProviderByIDsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListProviderByIDsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListProviderByIDsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListProviderByIDsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListProviderByIDsRequestValidationError) ErrorName() string {
+	return "ListProviderByIDsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListProviderByIDsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListProviderByIDsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListProviderByIDsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListProviderByIDsRequestValidationError{}
+
+// Validate checks the field values on ListProviderByIDsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListProviderByIDsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListProviderByIDsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListProviderByIDsResponseMultiError, or nil if none found.
+func (m *ListProviderByIDsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListProviderByIDsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetProviders() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListProviderByIDsResponseValidationError{
+						field:  fmt.Sprintf("Providers[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListProviderByIDsResponseValidationError{
+						field:  fmt.Sprintf("Providers[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListProviderByIDsResponseValidationError{
+					field:  fmt.Sprintf("Providers[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ListProviderByIDsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListProviderByIDsResponseMultiError is an error wrapping multiple validation
+// errors returned by ListProviderByIDsResponse.ValidateAll() if the
+// designated constraints aren't met.
+type ListProviderByIDsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListProviderByIDsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListProviderByIDsResponseMultiError) AllErrors() []error { return m }
+
+// ListProviderByIDsResponseValidationError is the validation error returned by
+// ListProviderByIDsResponse.Validate if the designated constraints aren't met.
+type ListProviderByIDsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListProviderByIDsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListProviderByIDsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListProviderByIDsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListProviderByIDsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListProviderByIDsResponseValidationError) ErrorName() string {
+	return "ListProviderByIDsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListProviderByIDsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListProviderByIDsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListProviderByIDsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListProviderByIDsResponseValidationError{}
+
 // Validate checks the field values on ListProvidersResponse_Provider with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -9578,3 +9816,114 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetDailyGameTransactionDataResponse_GameTransactionDataValidationError{}
+
+// Validate checks the field values on ListProviderByIDsResponse_Provider with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ListProviderByIDsResponse_Provider) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListProviderByIDsResponse_Provider
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListProviderByIDsResponse_ProviderMultiError, or nil if none found.
+func (m *ListProviderByIDsResponse_Provider) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListProviderByIDsResponse_Provider) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ProviderId
+
+	// no validation rules for ProviderName
+
+	// no validation rules for Enabled
+
+	if len(errors) > 0 {
+		return ListProviderByIDsResponse_ProviderMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListProviderByIDsResponse_ProviderMultiError is an error wrapping multiple
+// validation errors returned by
+// ListProviderByIDsResponse_Provider.ValidateAll() if the designated
+// constraints aren't met.
+type ListProviderByIDsResponse_ProviderMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListProviderByIDsResponse_ProviderMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListProviderByIDsResponse_ProviderMultiError) AllErrors() []error { return m }
+
+// ListProviderByIDsResponse_ProviderValidationError is the validation error
+// returned by ListProviderByIDsResponse_Provider.Validate if the designated
+// constraints aren't met.
+type ListProviderByIDsResponse_ProviderValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListProviderByIDsResponse_ProviderValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListProviderByIDsResponse_ProviderValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListProviderByIDsResponse_ProviderValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListProviderByIDsResponse_ProviderValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListProviderByIDsResponse_ProviderValidationError) ErrorName() string {
+	return "ListProviderByIDsResponse_ProviderValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListProviderByIDsResponse_ProviderValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListProviderByIDsResponse_Provider.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListProviderByIDsResponse_ProviderValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListProviderByIDsResponse_ProviderValidationError{}

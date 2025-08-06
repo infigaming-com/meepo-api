@@ -114,6 +114,20 @@ service BackofficeFinance {
 			body: "*"
 		};
 	}
+
+	rpc ListBillingPeriods(ListBillingPeriodsRequest) returns (ListBillingPeriodsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/billing-periods/list"
+			body: "*"
+		};
+	}
+
+	rpc ListBalanceMonthlyRevenueShares(ListBalanceMonthlyRevenueSharesRequest) returns (ListBalanceMonthlyRevenueSharesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/balance/monthly-revenue-shares/list"
+			body: "*"
+		};
+	}
 }
 
 message ListInvoicesRequest {
@@ -236,6 +250,7 @@ message ListOperatorRevenueShareRequest {
 	// Pagination
 	optional int32 page = 3;
 	optional int32 page_size = 4;
+	optional string period_key = 5;
 }
 
 message ListOperatorRevenueShareResponse {
@@ -281,6 +296,7 @@ message ListThirdPartyFeesRequest {
 	// Pagination
 	optional int32 page = 3;
 	optional int32 page_size = 4;
+	optional string period_key = 5;
 }
 
 message ListThirdPartyFeesResponse {
@@ -314,13 +330,7 @@ message ListMonthlyRevenueShareRequest {
 	// Pagination
 	optional int32 page = 3;
 	optional int32 page_size = 4;
-	
-	// Type of data to return
-	enum Type {
-		TYPE_CURRENT_MONTH = 0; // Default: return current month's data
-		TYPE_ALL = 1; // Return all data
-	}
-	optional Type type = 5;
+	optional string period_key = 5;
 }
 
 message ListMonthlyRevenueShareResponse {
@@ -329,25 +339,29 @@ message ListMonthlyRevenueShareResponse {
 		int64 operator_id = 1;
 		string operator_name = 2;
 		string operator_mode = 3; // Individual, Co-Operation, Co-Operation (Self-Managed Payment)
+		string retailer_operator_id = 4;
+		string retailer_operator_name = 5;
+		string company_operator_id = 6;
+		string company_operator_name = 7;
 		
 		// Financial data
-		string deposits = 4; // Deposit amounts
-		string withdrawals = 5; // Withdrawal amounts
-		string balance = 6; // Current balance
-		string ngr = 7; // Net Gaming Revenue
-		string ggr = 8; // Gross Gaming Revenue
+		string deposits = 8; // Deposit amounts
+		string withdrawals = 9; // Withdrawal amounts
+		string balance = 10; // Current balance
+		string ngr = 11; // Net Gaming Revenue
+		string ggr = 12; // Gross Gaming Revenue
 		
 		// Revenue breakdown
-		string game_provider_rs = 9; // Game Provider Revenue Share
-		string third_party_fees = 10; // Other 3rd-Party Fees
-		string adjustments = 11; // Adjustments
-		string net_profit = 13; // Net Profit
+		string game_provider_rs = 13; // Game Provider Revenue Share
+		string third_party_fees = 14; // Other 3rd-Party Fees
+		string adjustments = 15; // Adjustments
+		string net_profit = 16; // Net Profit
 		
 		// Revenue share details
-		string rs_rate = 14; // Revenue Share Rate (e.g., "80%")
-		string revenue_share_disburse = 15; // Revenue Share (Disburse)
-		string revenue_share_collect = 16; // Revenue Share (Collect)
-		string est_costs = 17; // Est. Costs
+		string rs_rate = 17; // Revenue Share Rate (e.g., "80%")
+		string revenue_share_disburse = 18; // Revenue Share (Disburse)
+		string revenue_share_collect = 19; // Revenue Share (Collect)
+		string est_costs = 20; // Est. Costs
 	}
 	
 	repeated RevenueShareItem items = 1;
@@ -429,6 +443,7 @@ message ListAdjustmentsRequest {
 	// Pagination
 	optional int32 page = 3;
 	optional int32 page_size = 4;
+	optional string period_key = 5;
 }
 
 message ListAdjustmentsResponse {
@@ -464,6 +479,7 @@ message CreateAdjustmentConfigResponse {
 }
 
 message SendInvoicesRequest {
+	string period_key = 1;
 }
 
 message SendInvoicesResponse {
@@ -479,6 +495,7 @@ message GetInvoiceSummaryResponse {
 }
 
 message GetBalanceSummaryRequest {
+	api.common.OperatorContextFilters operator_context_filters = 1;
 }
 
 message GetBalanceSummaryResponse {
@@ -488,6 +505,7 @@ message GetBalanceSummaryResponse {
 }
 
 message GetBalancesSummaryRequest {
+	api.common.OperatorContextFilters operator_context_filters = 1;
 }
 
 message GetBalancesSummaryResponse {
@@ -502,4 +520,74 @@ message GetBalancesSummaryResponse {
 	string revenue_share_disburse = 9;
 	string revenue_share_collect = 10;
 	string est_net_costs = 11;
+}
+
+message ListBillingPeriodsRequest {
+	optional int32 page = 1;
+	optional int32 page_size = 2;
+}
+
+message ListBillingPeriodsResponse {
+	message BillingPeriod {
+		string start_time = 1;
+		string end_time = 2;
+		string status = 3;
+		string created_at = 4;
+		string updated_at = 5;
+		string period_key = 6;
+	}
+	repeated BillingPeriod billing_periods = 1;
+	int32 total_count = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}
+
+message ListBalanceMonthlyRevenueSharesRequest {
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	int32 page = 2;
+	int32 page_size = 3;
+	enum Type {
+		TYPE_NET_SHARE = 0;
+		TYPE_EST_COSTS = 1;
+	}
+	Type type = 4;
+}
+
+message ListBalanceMonthlyRevenueSharesResponse {
+	message RevenueShareItem{
+		// Basic information
+		int64 operator_id = 1;
+		string operator_name = 2;
+		string operator_mode = 3; // Individual, Co-Operation, Co-Operation (Self-Managed Payment)
+		string retailer_operator_id = 4;
+		string retailer_operator_name = 5;
+		string company_operator_id = 6;
+		string company_operator_name = 7;
+		
+		// Financial data
+		string deposits = 8; // Deposit amounts
+		string withdrawals = 9; // Withdrawal amounts
+		string balance = 10; // Current balance
+		string ngr = 11; // Net Gaming Revenue
+		string ggr = 12; // Gross Gaming Revenue
+		
+		// Revenue breakdown
+		string game_provider_rs = 13; // Game Provider Revenue Share
+		string third_party_fees = 14; // Other 3rd-Party Fees
+		string adjustments = 15; // Adjustments
+		string net_profit = 16; // Net Profit
+		
+		// Revenue share details
+		string rs_rate = 17; // Revenue Share Rate (e.g., "80%")
+		string revenue_share_disburse = 18; // Revenue Share (Disburse)
+		string revenue_share_collect = 19; // Revenue Share (Collect)
+		string est_costs = 20; // Est. Costs
+	}
+	
+	repeated RevenueShareItem items = 1;
+
+	// Pagination information
+	int32 total_count = 2;
+	int32 page = 3;
+	int32 page_size = 4;
 }

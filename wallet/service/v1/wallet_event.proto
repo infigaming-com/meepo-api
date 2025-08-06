@@ -24,20 +24,34 @@ message BalanceUpdateEvent {
 	string transaction_type = 2;
 	int64 user_id = 3;
 	common.OperatorContext operator_context = 4;
-	string currency = 5;
-	string before_balance = 6;
-	string after_balance = 7;
-	string amount = 8;
-	int64 created_at = 9;
+	string currency = 5; // settlement currency
+	string reporting_currency = 6;
+	string before_balance = 7;
+	string before_balance_usd = 8;
+	string before_balance_reporting_currency = 9;
+	string after_balance = 10;
+	string after_balance_usd = 11;
+	string after_balance_reporting_currency = 12;
+	string amount = 13;
+	string amount_usd = 14;
+	string amount_reporting_currency = 15;
+	int64 created_at = 16;
 }
 
 message OperatorBalanceUpdateEvent {
 	int64 transaction_id = 1;
 	string transaction_type = 2;
-	common.OperatorContext operator_context = 4;
-	string settlement_currency = 6;
-	string before_balance = 7;
-	string after_balance = 8;
-	string amount = 9;
-	int64 created_at = 10;
+	common.OperatorContext operator_context = 3;
+	string settlement_currency = 4;
+	string reporting_currency = 5;
+	string before_balance = 6;
+	string before_balance_usd = 7;
+	string before_balance_reporting_currency = 8;
+	string after_balance = 9;
+	string after_balance_usd = 10;
+	string after_balance_reporting_currency = 11;
+	string amount = 12;
+	string amount_usd = 13;
+	string amount_reporting_currency = 14;
+	int64 created_at = 15;
 }

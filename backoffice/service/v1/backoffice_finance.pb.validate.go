@@ -630,6 +630,10 @@ func (m *ListOperatorRevenueShareRequest) validate(all bool) error {
 		// no validation rules for PageSize
 	}
 
+	if m.PeriodKey != nil {
+		// no validation rules for PeriodKey
+	}
+
 	if len(errors) > 0 {
 		return ListOperatorRevenueShareRequestMultiError(errors)
 	}
@@ -923,6 +927,10 @@ func (m *ListThirdPartyFeesRequest) validate(all bool) error {
 		// no validation rules for PageSize
 	}
 
+	if m.PeriodKey != nil {
+		// no validation rules for PeriodKey
+	}
+
 	if len(errors) > 0 {
 		return ListThirdPartyFeesRequestMultiError(errors)
 	}
@@ -1210,8 +1218,8 @@ func (m *ListMonthlyRevenueShareRequest) validate(all bool) error {
 		// no validation rules for PageSize
 	}
 
-	if m.Type != nil {
-		// no validation rules for Type
+	if m.PeriodKey != nil {
+		// no validation rules for PeriodKey
 	}
 
 	if len(errors) > 0 {
@@ -2428,6 +2436,10 @@ func (m *ListAdjustmentsRequest) validate(all bool) error {
 		// no validation rules for PageSize
 	}
 
+	if m.PeriodKey != nil {
+		// no validation rules for PeriodKey
+	}
+
 	if len(errors) > 0 {
 		return ListAdjustmentsRequestMultiError(errors)
 	}
@@ -2884,6 +2896,8 @@ func (m *SendInvoicesRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for PeriodKey
+
 	if len(errors) > 0 {
 		return SendInvoicesRequestMultiError(errors)
 	}
@@ -3298,6 +3312,35 @@ func (m *GetBalanceSummaryRequest) validate(all bool) error {
 
 	var errors []error
 
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetBalanceSummaryRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetBalanceSummaryRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetBalanceSummaryRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return GetBalanceSummaryRequestMultiError(errors)
 	}
@@ -3508,6 +3551,35 @@ func (m *GetBalancesSummaryRequest) validate(all bool) error {
 
 	var errors []error
 
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetBalancesSummaryRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetBalancesSummaryRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetBalancesSummaryRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return GetBalancesSummaryRequestMultiError(errors)
 	}
@@ -3711,6 +3783,545 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetBalancesSummaryResponseValidationError{}
+
+// Validate checks the field values on ListBillingPeriodsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListBillingPeriodsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListBillingPeriodsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListBillingPeriodsRequestMultiError, or nil if none found.
+func (m *ListBillingPeriodsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListBillingPeriodsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return ListBillingPeriodsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListBillingPeriodsRequestMultiError is an error wrapping multiple validation
+// errors returned by ListBillingPeriodsRequest.ValidateAll() if the
+// designated constraints aren't met.
+type ListBillingPeriodsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListBillingPeriodsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListBillingPeriodsRequestMultiError) AllErrors() []error { return m }
+
+// ListBillingPeriodsRequestValidationError is the validation error returned by
+// ListBillingPeriodsRequest.Validate if the designated constraints aren't met.
+type ListBillingPeriodsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListBillingPeriodsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListBillingPeriodsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListBillingPeriodsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListBillingPeriodsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListBillingPeriodsRequestValidationError) ErrorName() string {
+	return "ListBillingPeriodsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListBillingPeriodsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListBillingPeriodsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListBillingPeriodsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListBillingPeriodsRequestValidationError{}
+
+// Validate checks the field values on ListBillingPeriodsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListBillingPeriodsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListBillingPeriodsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListBillingPeriodsResponseMultiError, or nil if none found.
+func (m *ListBillingPeriodsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListBillingPeriodsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetBillingPeriods() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListBillingPeriodsResponseValidationError{
+						field:  fmt.Sprintf("BillingPeriods[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListBillingPeriodsResponseValidationError{
+						field:  fmt.Sprintf("BillingPeriods[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListBillingPeriodsResponseValidationError{
+					field:  fmt.Sprintf("BillingPeriods[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for TotalCount
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if len(errors) > 0 {
+		return ListBillingPeriodsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListBillingPeriodsResponseMultiError is an error wrapping multiple
+// validation errors returned by ListBillingPeriodsResponse.ValidateAll() if
+// the designated constraints aren't met.
+type ListBillingPeriodsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListBillingPeriodsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListBillingPeriodsResponseMultiError) AllErrors() []error { return m }
+
+// ListBillingPeriodsResponseValidationError is the validation error returned
+// by ListBillingPeriodsResponse.Validate if the designated constraints aren't met.
+type ListBillingPeriodsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListBillingPeriodsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListBillingPeriodsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListBillingPeriodsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListBillingPeriodsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListBillingPeriodsResponseValidationError) ErrorName() string {
+	return "ListBillingPeriodsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListBillingPeriodsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListBillingPeriodsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListBillingPeriodsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListBillingPeriodsResponseValidationError{}
+
+// Validate checks the field values on ListBalanceMonthlyRevenueSharesRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ListBalanceMonthlyRevenueSharesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ListBalanceMonthlyRevenueSharesRequest with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// ListBalanceMonthlyRevenueSharesRequestMultiError, or nil if none found.
+func (m *ListBalanceMonthlyRevenueSharesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListBalanceMonthlyRevenueSharesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListBalanceMonthlyRevenueSharesRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListBalanceMonthlyRevenueSharesRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListBalanceMonthlyRevenueSharesRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	// no validation rules for Type
+
+	if len(errors) > 0 {
+		return ListBalanceMonthlyRevenueSharesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListBalanceMonthlyRevenueSharesRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// ListBalanceMonthlyRevenueSharesRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListBalanceMonthlyRevenueSharesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListBalanceMonthlyRevenueSharesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListBalanceMonthlyRevenueSharesRequestMultiError) AllErrors() []error { return m }
+
+// ListBalanceMonthlyRevenueSharesRequestValidationError is the validation
+// error returned by ListBalanceMonthlyRevenueSharesRequest.Validate if the
+// designated constraints aren't met.
+type ListBalanceMonthlyRevenueSharesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListBalanceMonthlyRevenueSharesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListBalanceMonthlyRevenueSharesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListBalanceMonthlyRevenueSharesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListBalanceMonthlyRevenueSharesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListBalanceMonthlyRevenueSharesRequestValidationError) ErrorName() string {
+	return "ListBalanceMonthlyRevenueSharesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListBalanceMonthlyRevenueSharesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListBalanceMonthlyRevenueSharesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListBalanceMonthlyRevenueSharesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListBalanceMonthlyRevenueSharesRequestValidationError{}
+
+// Validate checks the field values on ListBalanceMonthlyRevenueSharesResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ListBalanceMonthlyRevenueSharesResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ListBalanceMonthlyRevenueSharesResponse with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// ListBalanceMonthlyRevenueSharesResponseMultiError, or nil if none found.
+func (m *ListBalanceMonthlyRevenueSharesResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListBalanceMonthlyRevenueSharesResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetItems() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListBalanceMonthlyRevenueSharesResponseValidationError{
+						field:  fmt.Sprintf("Items[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListBalanceMonthlyRevenueSharesResponseValidationError{
+						field:  fmt.Sprintf("Items[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListBalanceMonthlyRevenueSharesResponseValidationError{
+					field:  fmt.Sprintf("Items[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for TotalCount
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if len(errors) > 0 {
+		return ListBalanceMonthlyRevenueSharesResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListBalanceMonthlyRevenueSharesResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// ListBalanceMonthlyRevenueSharesResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListBalanceMonthlyRevenueSharesResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListBalanceMonthlyRevenueSharesResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListBalanceMonthlyRevenueSharesResponseMultiError) AllErrors() []error { return m }
+
+// ListBalanceMonthlyRevenueSharesResponseValidationError is the validation
+// error returned by ListBalanceMonthlyRevenueSharesResponse.Validate if the
+// designated constraints aren't met.
+type ListBalanceMonthlyRevenueSharesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListBalanceMonthlyRevenueSharesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListBalanceMonthlyRevenueSharesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListBalanceMonthlyRevenueSharesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListBalanceMonthlyRevenueSharesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListBalanceMonthlyRevenueSharesResponseValidationError) ErrorName() string {
+	return "ListBalanceMonthlyRevenueSharesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListBalanceMonthlyRevenueSharesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListBalanceMonthlyRevenueSharesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListBalanceMonthlyRevenueSharesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListBalanceMonthlyRevenueSharesResponseValidationError{}
 
 // Validate checks the field values on ListInvoicesResponse_Invoice with the
 // rules defined in the proto definition for this message. If any rules are
@@ -4281,6 +4892,14 @@ func (m *ListMonthlyRevenueShareResponse_RevenueShareItem) validate(all bool) er
 
 	// no validation rules for OperatorMode
 
+	// no validation rules for RetailerOperatorId
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for CompanyOperatorName
+
 	// no validation rules for Deposits
 
 	// no validation rules for Withdrawals
@@ -4742,3 +5361,279 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListAdjustmentsResponse_AdjustmentItemValidationError{}
+
+// Validate checks the field values on ListBillingPeriodsResponse_BillingPeriod
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ListBillingPeriodsResponse_BillingPeriod) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ListBillingPeriodsResponse_BillingPeriod with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// ListBillingPeriodsResponse_BillingPeriodMultiError, or nil if none found.
+func (m *ListBillingPeriodsResponse_BillingPeriod) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListBillingPeriodsResponse_BillingPeriod) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for StartTime
+
+	// no validation rules for EndTime
+
+	// no validation rules for Status
+
+	// no validation rules for CreatedAt
+
+	// no validation rules for UpdatedAt
+
+	// no validation rules for PeriodKey
+
+	if len(errors) > 0 {
+		return ListBillingPeriodsResponse_BillingPeriodMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListBillingPeriodsResponse_BillingPeriodMultiError is an error wrapping
+// multiple validation errors returned by
+// ListBillingPeriodsResponse_BillingPeriod.ValidateAll() if the designated
+// constraints aren't met.
+type ListBillingPeriodsResponse_BillingPeriodMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListBillingPeriodsResponse_BillingPeriodMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListBillingPeriodsResponse_BillingPeriodMultiError) AllErrors() []error { return m }
+
+// ListBillingPeriodsResponse_BillingPeriodValidationError is the validation
+// error returned by ListBillingPeriodsResponse_BillingPeriod.Validate if the
+// designated constraints aren't met.
+type ListBillingPeriodsResponse_BillingPeriodValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListBillingPeriodsResponse_BillingPeriodValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListBillingPeriodsResponse_BillingPeriodValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListBillingPeriodsResponse_BillingPeriodValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListBillingPeriodsResponse_BillingPeriodValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListBillingPeriodsResponse_BillingPeriodValidationError) ErrorName() string {
+	return "ListBillingPeriodsResponse_BillingPeriodValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListBillingPeriodsResponse_BillingPeriodValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListBillingPeriodsResponse_BillingPeriod.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListBillingPeriodsResponse_BillingPeriodValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListBillingPeriodsResponse_BillingPeriodValidationError{}
+
+// Validate checks the field values on
+// ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListBalanceMonthlyRevenueSharesResponse_RevenueShareItemMultiError, or nil
+// if none found.
+func (m *ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for OperatorId
+
+	// no validation rules for OperatorName
+
+	// no validation rules for OperatorMode
+
+	// no validation rules for RetailerOperatorId
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for Deposits
+
+	// no validation rules for Withdrawals
+
+	// no validation rules for Balance
+
+	// no validation rules for Ngr
+
+	// no validation rules for Ggr
+
+	// no validation rules for GameProviderRs
+
+	// no validation rules for ThirdPartyFees
+
+	// no validation rules for Adjustments
+
+	// no validation rules for NetProfit
+
+	// no validation rules for RsRate
+
+	// no validation rules for RevenueShareDisburse
+
+	// no validation rules for RevenueShareCollect
+
+	// no validation rules for EstCosts
+
+	if len(errors) > 0 {
+		return ListBalanceMonthlyRevenueSharesResponse_RevenueShareItemMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListBalanceMonthlyRevenueSharesResponse_RevenueShareItemMultiError is an
+// error wrapping multiple validation errors returned by
+// ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem.ValidateAll() if
+// the designated constraints aren't met.
+type ListBalanceMonthlyRevenueSharesResponse_RevenueShareItemMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListBalanceMonthlyRevenueSharesResponse_RevenueShareItemMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListBalanceMonthlyRevenueSharesResponse_RevenueShareItemMultiError) AllErrors() []error {
+	return m
+}
+
+// ListBalanceMonthlyRevenueSharesResponse_RevenueShareItemValidationError is
+// the validation error returned by
+// ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem.Validate if the
+// designated constraints aren't met.
+type ListBalanceMonthlyRevenueSharesResponse_RevenueShareItemValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListBalanceMonthlyRevenueSharesResponse_RevenueShareItemValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e ListBalanceMonthlyRevenueSharesResponse_RevenueShareItemValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e ListBalanceMonthlyRevenueSharesResponse_RevenueShareItemValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e ListBalanceMonthlyRevenueSharesResponse_RevenueShareItemValidationError) Key() bool {
+	return e.key
+}
+
+// ErrorName returns error name.
+func (e ListBalanceMonthlyRevenueSharesResponse_RevenueShareItemValidationError) ErrorName() string {
+	return "ListBalanceMonthlyRevenueSharesResponse_RevenueShareItemValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListBalanceMonthlyRevenueSharesResponse_RevenueShareItemValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListBalanceMonthlyRevenueSharesResponse_RevenueShareItem.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListBalanceMonthlyRevenueSharesResponse_RevenueShareItemValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListBalanceMonthlyRevenueSharesResponse_RevenueShareItemValidationError{}
