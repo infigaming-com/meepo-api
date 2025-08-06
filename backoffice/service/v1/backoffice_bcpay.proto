@@ -63,6 +63,13 @@ service BackofficeBcpay {
     };
 	}
 
+	rpc AddNoteToTransaction(bcpay.service.v1.AddNoteToTransactionRequest) returns (bcpay.service.v1.AddNoteToTransactionResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/bcpay/transaction/note/update"
+      body: "*"
+    };
+  }
+
 	rpc GetBankSchema(bcpay.service.v1.GetBankSchemaRequest) returns (bcpay.service.v1.GetBankSchemaResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/bcpay/bankinfoschema/get"

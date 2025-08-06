@@ -21,6 +21,7 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationBackofficeBcpayAddBankAccount = "/api.backoffice.service.v1.BackofficeBcpay/AddBankAccount"
+const OperationBackofficeBcpayAddNoteToTransaction = "/api.backoffice.service.v1.BackofficeBcpay/AddNoteToTransaction"
 const OperationBackofficeBcpayAuditTransaction = "/api.backoffice.service.v1.BackofficeBcpay/AuditTransaction"
 const OperationBackofficeBcpayBankAccountList = "/api.backoffice.service.v1.BackofficeBcpay/BankAccountList"
 const OperationBackofficeBcpayCreateMerchant = "/api.backoffice.service.v1.BackofficeBcpay/CreateMerchant"
@@ -31,6 +32,7 @@ const OperationBackofficeBcpayUpdateBankAccount = "/api.backoffice.service.v1.Ba
 
 type BackofficeBcpayHTTPServer interface {
 	AddBankAccount(context.Context, *AddBankAccountRequest) (*v1.AddBankAccountResponse, error)
+	AddNoteToTransaction(context.Context, *v1.AddNoteToTransactionRequest) (*v1.AddNoteToTransactionResponse, error)
 	AuditTransaction(context.Context, *AuditTransactionRequest) (*v1.AuditTransactionResponse, error)
 	BankAccountList(context.Context, *BankAccountListRequest) (*v1.BankAccountListResponse, error)
 	CreateMerchant(context.Context, *CreateMerchantRequest) (*v1.CreateMerchantResponse, error)
@@ -49,6 +51,7 @@ func RegisterBackofficeBcpayHTTPServer(s *http.Server, srv BackofficeBcpayHTTPSe
 	r.POST("/v1/backoffice/bcpay/bankaccount/update", _BackofficeBcpay_UpdateBankAccount0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/bcpay/transaction/list", _BackofficeBcpay_TransactionList0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/bcpay/transaction/add", _BackofficeBcpay_AuditTransaction0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/bcpay/transaction/note/update", _BackofficeBcpay_AddNoteToTransaction0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/bcpay/bankinfoschema/get", _BackofficeBcpay_GetBankSchema1_HTTP_Handler(srv))
 }
 
@@ -206,6 +209,28 @@ func _BackofficeBcpay_AuditTransaction0_HTTP_Handler(srv BackofficeBcpayHTTPServ
 	}
 }
 
+func _BackofficeBcpay_AddNoteToTransaction0_HTTP_Handler(srv BackofficeBcpayHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in v1.AddNoteToTransactionRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeBcpayAddNoteToTransaction)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.AddNoteToTransaction(ctx, req.(*v1.AddNoteToTransactionRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.AddNoteToTransactionResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _BackofficeBcpay_GetBankSchema1_HTTP_Handler(srv BackofficeBcpayHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in v1.GetBankSchemaRequest
@@ -230,6 +255,7 @@ func _BackofficeBcpay_GetBankSchema1_HTTP_Handler(srv BackofficeBcpayHTTPServer)
 
 type BackofficeBcpayHTTPClient interface {
 	AddBankAccount(ctx context.Context, req *AddBankAccountRequest, opts ...http.CallOption) (rsp *v1.AddBankAccountResponse, err error)
+	AddNoteToTransaction(ctx context.Context, req *v1.AddNoteToTransactionRequest, opts ...http.CallOption) (rsp *v1.AddNoteToTransactionResponse, err error)
 	AuditTransaction(ctx context.Context, req *AuditTransactionRequest, opts ...http.CallOption) (rsp *v1.AuditTransactionResponse, err error)
 	BankAccountList(ctx context.Context, req *BankAccountListRequest, opts ...http.CallOption) (rsp *v1.BankAccountListResponse, err error)
 	CreateMerchant(ctx context.Context, req *CreateMerchantRequest, opts ...http.CallOption) (rsp *v1.CreateMerchantResponse, err error)
@@ -252,6 +278,19 @@ func (c *BackofficeBcpayHTTPClientImpl) AddBankAccount(ctx context.Context, in *
 	pattern := "/v1/backoffice/bcpay/bankaccount/add"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeBcpayAddBankAccount))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeBcpayHTTPClientImpl) AddNoteToTransaction(ctx context.Context, in *v1.AddNoteToTransactionRequest, opts ...http.CallOption) (*v1.AddNoteToTransactionResponse, error) {
+	var out v1.AddNoteToTransactionResponse
+	pattern := "/v1/backoffice/bcpay/transaction/note/update"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeBcpayAddNoteToTransaction))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

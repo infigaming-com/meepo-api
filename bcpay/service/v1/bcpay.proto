@@ -84,7 +84,7 @@ message GetMerchantRequest {
 
 message GetMerchantResponse {
 	string merchant_id = 1;
-	// string api_key_public = 2;
+	string api_key_public = 2;
 	// string api_key_secret = 3;
 }
 
@@ -95,7 +95,7 @@ message CreateMerchantRequest {
 
 message CreateMerchantResponse {
 	string merchant_id = 1;
-	// string api_key_public = 2;
+	string api_key_public = 2;
 	// string api_key_secret = 3;
 }
 

@@ -360,6 +360,7 @@ func (x *GetMerchantRequest) GetOperatorContext() *common.OperatorContext {
 type GetMerchantResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	MerchantId    string                 `protobuf:"bytes,1,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
+	ApiKeyPublic  string                 `protobuf:"bytes,2,opt,name=api_key_public,json=apiKeyPublic,proto3" json:"api_key_public,omitempty"` // string api_key_secret = 3;
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -397,6 +398,13 @@ func (*GetMerchantResponse) Descriptor() ([]byte, []int) {
 func (x *GetMerchantResponse) GetMerchantId() string {
 	if x != nil {
 		return x.MerchantId
+	}
+	return ""
+}
+
+func (x *GetMerchantResponse) GetApiKeyPublic() string {
+	if x != nil {
+		return x.ApiKeyPublic
 	}
 	return ""
 }
@@ -456,6 +464,7 @@ func (x *CreateMerchantRequest) GetOperatorContext() *common.OperatorContext {
 type CreateMerchantResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	MerchantId    string                 `protobuf:"bytes,1,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
+	ApiKeyPublic  string                 `protobuf:"bytes,2,opt,name=api_key_public,json=apiKeyPublic,proto3" json:"api_key_public,omitempty"` // string api_key_secret = 3;
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -493,6 +502,13 @@ func (*CreateMerchantResponse) Descriptor() ([]byte, []int) {
 func (x *CreateMerchantResponse) GetMerchantId() string {
 	if x != nil {
 		return x.MerchantId
+	}
+	return ""
+}
+
+func (x *CreateMerchantResponse) GetApiKeyPublic() string {
+	if x != nil {
+		return x.ApiKeyPublic
 	}
 	return ""
 }
@@ -1637,16 +1653,18 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"\x06status\x18\x01 \x01(\tR\x06status\x12%\n" +
 	"\x0etransaction_id\x18\x02 \x01(\tR\rtransactionId\"\\\n" +
 	"\x12GetMerchantRequest\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"6\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\\\n" +
 	"\x13GetMerchantResponse\x12\x1f\n" +
 	"\vmerchant_id\x18\x01 \x01(\tR\n" +
-	"merchantId\"s\n" +
+	"merchantId\x12$\n" +
+	"\x0eapi_key_public\x18\x02 \x01(\tR\fapiKeyPublic\"s\n" +
 	"\x15CreateMerchantRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12F\n" +
-	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"9\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"_\n" +
 	"\x16CreateMerchantResponse\x12\x1f\n" +
 	"\vmerchant_id\x18\x01 \x01(\tR\n" +
-	"merchantId\"2\n" +
+	"merchantId\x12$\n" +
+	"\x0eapi_key_public\x18\x02 \x01(\tR\fapiKeyPublic\"2\n" +
 	"\x14GetBankSchemaRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\"K\n" +
 	"\x15GetBankSchemaResponse\x122\n" +

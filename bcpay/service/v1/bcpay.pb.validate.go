@@ -634,6 +634,8 @@ func (m *GetMerchantResponse) validate(all bool) error {
 
 	// no validation rules for MerchantId
 
+	// no validation rules for ApiKeyPublic
+
 	if len(errors) > 0 {
 		return GetMerchantResponseMultiError(errors)
 	}
@@ -870,6 +872,8 @@ func (m *CreateMerchantResponse) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for MerchantId
+
+	// no validation rules for ApiKeyPublic
 
 	if len(errors) > 0 {
 		return CreateMerchantResponseMultiError(errors)

@@ -604,6 +604,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.bcpay.service.v1.TransactionListResponse'
+    /v1/backoffice/bcpay/transaction/note/update:
+        post:
+            tags:
+                - BackofficeBcpay
+            operationId: BackofficeBcpay_AddNoteToTransaction
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.bcpay.service.v1.AddNoteToTransactionRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.bcpay.service.v1.AddNoteToTransactionResponse'
     /v1/backoffice/company/register:
         post:
             tags:
@@ -9025,6 +9043,19 @@ components:
             properties:
                 bankAccount:
                     $ref: '#/components/schemas/api.bcpay.service.v1.DepositBankAccount'
+        api.bcpay.service.v1.AddNoteToTransactionRequest:
+            type: object
+            properties:
+                transactionId:
+                    type: string
+                note:
+                    type: string
+                    description: note
+        api.bcpay.service.v1.AddNoteToTransactionResponse:
+            type: object
+            properties:
+                transaction:
+                    $ref: '#/components/schemas/api.bcpay.service.v1.Transaction'
         api.bcpay.service.v1.AuditTransactionResponse:
             type: object
             properties:
@@ -9041,6 +9072,8 @@ components:
             type: object
             properties:
                 merchantId:
+                    type: string
+                apiKeyPublic:
                     type: string
         api.bcpay.service.v1.CreateWithdrawRequest:
             type: object
@@ -9139,6 +9172,8 @@ components:
             type: object
             properties:
                 merchantId:
+                    type: string
+                apiKeyPublic:
                     type: string
         api.bcpay.service.v1.Transaction:
             type: object
