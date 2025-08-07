@@ -8979,6 +8979,26 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.bcpay.service.v1.DepositBankAccount'
+                page:
+                    type: integer
+                    description: Current page number
+                    format: int32
+                pageSize:
+                    type: integer
+                    description: Number of items per page
+                    format: int32
+                totalPages:
+                    type: integer
+                    description: Total number of pages available
+                    format: int32
+                totalEnabled:
+                    type: integer
+                    description: Total number of enabled bank account
+                    format: int32
+                totalDisabled:
+                    type: integer
+                    description: Total number of disabled bank account
+                    format: int32
         api.bcpay.service.v1.CreateMerchantResponse:
             type: object
             properties:
@@ -9135,6 +9155,30 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.bcpay.service.v1.Transaction'
+                page:
+                    type: integer
+                    description: Current page number
+                    format: int32
+                pageSize:
+                    type: integer
+                    description: Number of items per page
+                    format: int32
+                totalPages:
+                    type: integer
+                    description: Total number of pages available
+                    format: int32
+                totalApproved:
+                    type: integer
+                    description: Total number of approved transactions
+                    format: int32
+                totalFailed:
+                    type: integer
+                    description: Total number of failed transactions
+                    format: int32
+                totalPending:
+                    type: integer
+                    description: Total number of pending transactions
+                    format: int32
         api.bcpay.service.v1.UpdateBankAccountResponse:
             type: object
             properties:

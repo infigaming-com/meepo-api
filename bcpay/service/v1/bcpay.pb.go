@@ -842,8 +842,18 @@ func (x *BankAccountListRequest) GetOperatorContext() *common.OperatorContext {
 }
 
 type BankAccountListResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	BankAccounts  []*DepositBankAccount  `protobuf:"bytes,1,rep,name=bank_accounts,json=bankAccounts,proto3" json:"bank_accounts,omitempty"`
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	BankAccounts []*DepositBankAccount  `protobuf:"bytes,1,rep,name=bank_accounts,json=bankAccounts,proto3" json:"bank_accounts,omitempty"`
+	// Current page number
+	Page int32 `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	// Number of items per page
+	PageSize int32 `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Total number of pages available
+	TotalPages int32 `protobuf:"varint,4,opt,name=total_pages,json=totalPages,proto3" json:"total_pages,omitempty"`
+	// Total number of enabled bank account
+	TotalEnabled int32 `protobuf:"varint,5,opt,name=total_enabled,json=totalEnabled,proto3" json:"total_enabled,omitempty"`
+	// Total number of disabled bank account
+	TotalDisabled int32 `protobuf:"varint,6,opt,name=total_disabled,json=totalDisabled,proto3" json:"total_disabled,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -883,6 +893,41 @@ func (x *BankAccountListResponse) GetBankAccounts() []*DepositBankAccount {
 		return x.BankAccounts
 	}
 	return nil
+}
+
+func (x *BankAccountListResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *BankAccountListResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *BankAccountListResponse) GetTotalPages() int32 {
+	if x != nil {
+		return x.TotalPages
+	}
+	return 0
+}
+
+func (x *BankAccountListResponse) GetTotalEnabled() int32 {
+	if x != nil {
+		return x.TotalEnabled
+	}
+	return 0
+}
+
+func (x *BankAccountListResponse) GetTotalDisabled() int32 {
+	if x != nil {
+		return x.TotalDisabled
+	}
+	return 0
 }
 
 type AddBankAccountRequest struct {
@@ -1495,8 +1540,20 @@ func (x *Transaction) GetUpdateTime() string {
 }
 
 type TransactionListResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Transaction   []*Transaction         `protobuf:"bytes,1,rep,name=transaction,proto3" json:"transaction,omitempty"`
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	Transaction []*Transaction         `protobuf:"bytes,1,rep,name=transaction,proto3" json:"transaction,omitempty"`
+	// Current page number
+	Page int32 `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	// Number of items per page
+	PageSize int32 `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Total number of pages available
+	TotalPages int32 `protobuf:"varint,4,opt,name=total_pages,json=totalPages,proto3" json:"total_pages,omitempty"`
+	// Total number of approved transactions
+	TotalApproved int32 `protobuf:"varint,5,opt,name=total_approved,json=totalApproved,proto3" json:"total_approved,omitempty"`
+	// Total number of failed transactions
+	TotalFailed int32 `protobuf:"varint,6,opt,name=total_failed,json=totalFailed,proto3" json:"total_failed,omitempty"`
+	// Total number of pending transactions
+	TotalPending  int32 `protobuf:"varint,7,opt,name=total_pending,json=totalPending,proto3" json:"total_pending,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1536,6 +1593,48 @@ func (x *TransactionListResponse) GetTransaction() []*Transaction {
 		return x.Transaction
 	}
 	return nil
+}
+
+func (x *TransactionListResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *TransactionListResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *TransactionListResponse) GetTotalPages() int32 {
+	if x != nil {
+		return x.TotalPages
+	}
+	return 0
+}
+
+func (x *TransactionListResponse) GetTotalApproved() int32 {
+	if x != nil {
+		return x.TotalApproved
+	}
+	return 0
+}
+
+func (x *TransactionListResponse) GetTotalFailed() int32 {
+	if x != nil {
+		return x.TotalFailed
+	}
+	return 0
+}
+
+func (x *TransactionListResponse) GetTotalPending() int32 {
+	if x != nil {
+		return x.TotalPending
+	}
+	return 0
 }
 
 type AuditTransactionRequest struct {
@@ -1815,9 +1914,15 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"\x15bank_account_lastname\x18\x04 \x01(\tR\x13bankAccountLastname\x12\x17\n" +
 	"\acard_id\x18\x05 \x01(\tR\x06cardId\x12\\\n" +
 	"\x18operator_context_filters\x18\x06 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
-	"\x10operator_context\x18\a \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"h\n" +
+	"\x10operator_context\x18\a \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x86\x02\n" +
 	"\x17BankAccountListResponse\x12M\n" +
-	"\rbank_accounts\x18\x01 \x03(\v2(.api.bcpay.service.v1.DepositBankAccountR\fbankAccounts\"\xfe\x02\n" +
+	"\rbank_accounts\x18\x01 \x03(\v2(.api.bcpay.service.v1.DepositBankAccountR\fbankAccounts\x12\x12\n" +
+	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x1f\n" +
+	"\vtotal_pages\x18\x04 \x01(\x05R\n" +
+	"totalPages\x12#\n" +
+	"\rtotal_enabled\x18\x05 \x01(\x05R\ftotalEnabled\x12%\n" +
+	"\x0etotal_disabled\x18\x06 \x01(\x05R\rtotalDisabled\"\xfe\x02\n" +
 	"\x15AddBankAccountRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
 	"\acountry\x18\x02 \x01(\tR\acountry\x12\x1d\n" +
@@ -1883,9 +1988,16 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"\vcreate_time\x18\x12 \x01(\tR\n" +
 	"createTime\x12\x1f\n" +
 	"\vupdate_time\x18\x13 \x01(\tR\n" +
-	"updateTime\"^\n" +
+	"updateTime\"\x9f\x02\n" +
 	"\x17TransactionListResponse\x12C\n" +
-	"\vtransaction\x18\x01 \x03(\v2!.api.bcpay.service.v1.TransactionR\vtransaction\"\x9e\x01\n" +
+	"\vtransaction\x18\x01 \x03(\v2!.api.bcpay.service.v1.TransactionR\vtransaction\x12\x12\n" +
+	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x1f\n" +
+	"\vtotal_pages\x18\x04 \x01(\x05R\n" +
+	"totalPages\x12%\n" +
+	"\x0etotal_approved\x18\x05 \x01(\x05R\rtotalApproved\x12!\n" +
+	"\ftotal_failed\x18\x06 \x01(\x05R\vtotalFailed\x12#\n" +
+	"\rtotal_pending\x18\a \x01(\x05R\ftotalPending\"\x9e\x01\n" +
 	"\x17AuditTransactionRequest\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12\x14\n" +
 	"\x05audit\x18\x02 \x01(\tR\x05audit\x12F\n" +
