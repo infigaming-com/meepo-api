@@ -49,7 +49,7 @@ func RegisterBackofficeBcpayHTTPServer(s *http.Server, srv BackofficeBcpayHTTPSe
 	r.POST("/v1/backoffice/bcpay/bankaccount/update", _BackofficeBcpay_UpdateBankAccount0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/bcpay/transaction/list", _BackofficeBcpay_TransactionList0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/bcpay/transaction/add", _BackofficeBcpay_AuditTransaction0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/bcpay/bankinfoschema/get", _BackofficeBcpay_GetBankSchema0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/bcpay/bankinfoschema/get", _BackofficeBcpay_GetBankSchema1_HTTP_Handler(srv))
 }
 
 func _BackofficeBcpay_GetMerchant0_HTTP_Handler(srv BackofficeBcpayHTTPServer) func(ctx http.Context) error {
@@ -206,7 +206,7 @@ func _BackofficeBcpay_AuditTransaction0_HTTP_Handler(srv BackofficeBcpayHTTPServ
 	}
 }
 
-func _BackofficeBcpay_GetBankSchema0_HTTP_Handler(srv BackofficeBcpayHTTPServer) func(ctx http.Context) error {
+func _BackofficeBcpay_GetBankSchema1_HTTP_Handler(srv BackofficeBcpayHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in v1.GetBankSchemaRequest
 		if err := ctx.Bind(&in); err != nil {

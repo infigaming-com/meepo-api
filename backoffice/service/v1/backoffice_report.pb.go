@@ -2936,13 +2936,14 @@ func (x *GetPlayerGameDataResponse_List) GetSettlementCurrency() string {
 }
 
 type GetDepositSummariesResponse_DepositSummary struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	Date               string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
-	Currency           string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	DepositSuccessRate string                 `protobuf:"bytes,3,opt,name=deposit_success_rate,json=depositSuccessRate,proto3" json:"deposit_success_rate,omitempty"` // decimal number between 0-100, two decimal places
-	DepositAmount      string                 `protobuf:"bytes,4,opt,name=deposit_amount,json=depositAmount,proto3" json:"deposit_amount,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                          protoimpl.MessageState `protogen:"open.v1"`
+	Date                           string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
+	Currency                       string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	DepositSuccessRate             string                 `protobuf:"bytes,3,opt,name=deposit_success_rate,json=depositSuccessRate,proto3" json:"deposit_success_rate,omitempty"` // decimal number between 0-100, two decimal places
+	DepositAmountUsd               string                 `protobuf:"bytes,4,opt,name=deposit_amount_usd,json=depositAmountUsd,proto3" json:"deposit_amount_usd,omitempty"`
+	DepositAmountReportingCurrency string                 `protobuf:"bytes,5,opt,name=deposit_amount_reporting_currency,json=depositAmountReportingCurrency,proto3" json:"deposit_amount_reporting_currency,omitempty"`
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
 func (x *GetDepositSummariesResponse_DepositSummary) Reset() {
@@ -2996,9 +2997,16 @@ func (x *GetDepositSummariesResponse_DepositSummary) GetDepositSuccessRate() str
 	return ""
 }
 
-func (x *GetDepositSummariesResponse_DepositSummary) GetDepositAmount() string {
+func (x *GetDepositSummariesResponse_DepositSummary) GetDepositAmountUsd() string {
 	if x != nil {
-		return x.DepositAmount
+		return x.DepositAmountUsd
+	}
+	return ""
+}
+
+func (x *GetDepositSummariesResponse_DepositSummary) GetDepositAmountReportingCurrency() string {
+	if x != nil {
+		return x.DepositAmountReportingCurrency
 	}
 	return ""
 }
@@ -4805,14 +4813,15 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x05 \x03(\tR\n" +
-	"currencies\"\xad\x02\n" +
+	"currencies\"\xff\x02\n" +
 	"\x1bGetDepositSummariesResponse\x12r\n" +
-	"\x11deposit_summaries\x18\x01 \x03(\v2E.api.backoffice.service.v1.GetDepositSummariesResponse.DepositSummaryR\x10depositSummaries\x1a\x99\x01\n" +
+	"\x11deposit_summaries\x18\x01 \x03(\v2E.api.backoffice.service.v1.GetDepositSummariesResponse.DepositSummaryR\x10depositSummaries\x1a\xeb\x01\n" +
 	"\x0eDepositSummary\x12\x12\n" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x120\n" +
-	"\x14deposit_success_rate\x18\x03 \x01(\tR\x12depositSuccessRate\x12%\n" +
-	"\x0edeposit_amount\x18\x04 \x01(\tR\rdepositAmount\"\xb0\x02\n" +
+	"\x14deposit_success_rate\x18\x03 \x01(\tR\x12depositSuccessRate\x12,\n" +
+	"\x12deposit_amount_usd\x18\x04 \x01(\tR\x10depositAmountUsd\x12I\n" +
+	"!deposit_amount_reporting_currency\x18\x05 \x01(\tR\x1edepositAmountReportingCurrency\"\xb0\x02\n" +
 	"\x19ListDepositDetailsRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +

@@ -4314,7 +4314,9 @@ components:
                     type: string
                 depositSuccessRate:
                     type: string
-                depositAmount:
+                depositAmountUsd:
+                    type: string
+                depositAmountReportingCurrency:
                     type: string
         api.backoffice.service.v1.GetExchangeRatesRequest:
             type: object

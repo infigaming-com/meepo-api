@@ -4559,7 +4559,9 @@ func (m *GetDepositSummariesResponse_DepositSummary) validate(all bool) error {
 
 	// no validation rules for DepositSuccessRate
 
-	// no validation rules for DepositAmount
+	// no validation rules for DepositAmountUsd
+
+	// no validation rules for DepositAmountReportingCurrency
 
 	if len(errors) > 0 {
 		return GetDepositSummariesResponse_DepositSummaryMultiError(errors)
