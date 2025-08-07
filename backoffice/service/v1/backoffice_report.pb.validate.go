@@ -330,31 +330,53 @@ func (m *GetSummaryResponse) validate(all bool) error {
 
 	// no validation rules for RegisteredUsers
 
-	// no validation rules for Ftd
+	// no validation rules for FtdUsd
 
 	// no validation rules for FtdConversionRate
 
-	// no validation rules for DepositAmount
+	// no validation rules for DepositAmountUsd
 
-	// no validation rules for WithdrawAmount
+	// no validation rules for WithdrawAmountUsd
 
-	// no validation rules for DepositMinusWithdrawAmount
+	// no validation rules for DepositMinusWithdrawAmountUsd
 
-	// no validation rules for AverageFtdAmount
+	// no validation rules for AverageFtdAmountUsd
 
 	// no validation rules for ArpuToArppuPercentage
 
-	// no validation rules for Turnover
+	// no validation rules for TurnoverUsd
 
-	// no validation rules for Bonus
+	// no validation rules for BonusUsd
 
-	// no validation rules for Ggr
+	// no validation rules for GgrUsd
 
-	// no validation rules for Ngr
+	// no validation rules for NgrUsd
 
-	// no validation rules for Arpu
+	// no validation rules for ArpuUsd
 
-	// no validation rules for Arppu
+	// no validation rules for ArppuUsd
+
+	// no validation rules for FtdReportingCurrency
+
+	// no validation rules for DepositAmountReportingCurrency
+
+	// no validation rules for WithdrawAmountReportingCurrency
+
+	// no validation rules for DepositMinusWithdrawAmountReportingCurrency
+
+	// no validation rules for AverageFtdAmountReportingCurrency
+
+	// no validation rules for TurnoverReportingCurrency
+
+	// no validation rules for BonusReportingCurrency
+
+	// no validation rules for GgrReportingCurrency
+
+	// no validation rules for NgrReportingCurrency
+
+	// no validation rules for ArpuReportingCurrency
+
+	// no validation rules for ArppuReportingCurrency
 
 	if len(errors) > 0 {
 		return GetSummaryResponseMultiError(errors)
@@ -4098,67 +4120,115 @@ func (m *ListSummariesResponse_List) validate(all bool) error {
 
 	// no validation rules for DepositCount
 
-	// no validation rules for DepositAmount
+	// no validation rules for DepositAmountUsd
 
-	// no validation rules for Arpu
+	// no validation rules for ArpuUsd
 
-	// no validation rules for Arppu
+	// no validation rules for ArppuUsd
 
-	// no validation rules for AverageFtdAmount
+	// no validation rules for AverageFtdAmountUsd
 
-	// no validation rules for WithdrawAmount
+	// no validation rules for WithdrawAmountUsd
 
 	// no validation rules for WithdrawedUsers
 
 	// no validation rules for FtwUsers
 
-	// no validation rules for AverageWithdrawAmount
+	// no validation rules for AverageWithdrawAmountUsd
 
-	// no validation rules for FtwAmount
+	// no validation rules for FtwAmountUsd
 
-	// no validation rules for AverageFtwAmount
+	// no validation rules for AverageFtwAmountUsd
 
 	// no validation rules for WuToAuPercentage
 
 	// no validation rules for WuToDuPercentage
 
-	// no validation rules for DepositMinusWithdrawAmount
+	// no validation rules for DepositMinusWithdrawAmountUsd
 
 	// no validation rules for WToDPercentage
 
-	// no validation rules for Turnover
+	// no validation rules for TurnoverUsd
 
-	// no validation rules for DepositBonus
+	// no validation rules for DepositBonusUsd
 
-	// no validation rules for RebateBonus
+	// no validation rules for RebateBonusUsd
 
-	// no validation rules for LossRebate
+	// no validation rules for LossRebateUsd
 
-	// no validation rules for VipBonus
+	// no validation rules for VipBonusUsd
 
-	// no validation rules for OtherBonus
+	// no validation rules for OtherBonusUsd
 
-	// no validation rules for ReferralCommission
+	// no validation rules for ReferralCommissionUsd
 
-	// no validation rules for DepositFeeSubsidyAmount
+	// no validation rules for DepositFeeSubsidyAmountUsd
 
-	// no validation rules for PlayerWithdrawFee
+	// no validation rules for PlayerWithdrawFeeUsd
 
-	// no validation rules for OperatorWithdrawFee
+	// no validation rules for OperatorWithdrawFeeUsd
 
-	// no validation rules for CashBalance
+	// no validation rules for CashBalanceUsd
 
-	// no validation rules for BonusBalance
+	// no validation rules for BonusBalanceUsd
 
-	// no validation rules for LockedBalance
+	// no validation rules for LockedBalanceUsd
 
-	// no validation rules for Ggr
+	// no validation rules for GgrUsd
 
-	// no validation rules for Ngr
+	// no validation rules for NgrUsd
 
 	// no validation rules for GgrToNgrPercentage
 
 	// no validation rules for HouseEdgePercentage
+
+	// no validation rules for DepositAmountReportingCurrency
+
+	// no validation rules for ArpuReportingCurrency
+
+	// no validation rules for ArppuReportingCurrency
+
+	// no validation rules for AverageFtdAmountReportingCurrency
+
+	// no validation rules for WithdrawAmountReportingCurrency
+
+	// no validation rules for AverageWithdrawAmountReportingCurrency
+
+	// no validation rules for FtwAmountReportingCurrency
+
+	// no validation rules for AverageFtwAmountReportingCurrency
+
+	// no validation rules for DepositMinusWithdrawAmountReportingCurrency
+
+	// no validation rules for TurnoverReportingCurrency
+
+	// no validation rules for DepositBonusReportingCurrency
+
+	// no validation rules for RebateBonusReportingCurrency
+
+	// no validation rules for LossRebateReportingCurrency
+
+	// no validation rules for VipBonusReportingCurrency
+
+	// no validation rules for OtherBonusReportingCurrency
+
+	// no validation rules for ReferralCommissionReportingCurrency
+
+	// no validation rules for DepositFeeSubsidyAmountReportingCurrency
+
+	// no validation rules for PlayerWithdrawFeeReportingCurrency
+
+	// no validation rules for OperatorWithdrawFeeReportingCurrency
+
+	// no validation rules for CashBalanceReportingCurrency
+
+	// no validation rules for BonusBalanceReportingCurrency
+
+	// no validation rules for LockedBalanceReportingCurrency
+
+	// no validation rules for GgrReportingCurrency
+
+	// no validation rules for NgrReportingCurrency
 
 	if len(errors) > 0 {
 		return ListSummariesResponse_ListMultiError(errors)
