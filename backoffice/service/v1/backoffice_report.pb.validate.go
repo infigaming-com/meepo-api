@@ -5414,11 +5414,15 @@ func (m *ListDepositVtgDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for DepositAmountUsd
 
+	// no validation rules for DepositAmountReportingCurrency
+
 	// no validation rules for DepositUsers
 
 	// no validation rules for FtdAmount
 
 	// no validation rules for FtdAmountUsd
+
+	// no validation rules for FtdAmountReportingCurrency
 
 	// no validation rules for FtdUsers
 
@@ -5426,25 +5430,31 @@ func (m *ListDepositVtgDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for SameDayFtdAmountUsd
 
+	// no validation rules for SameDayFtdAmountReportingCurrency
+
 	// no validation rules for SameDayFtdUsers
+
+	// no validation rules for NonSameDayFtdUsers
 
 	// no validation rules for RepeatedDepositAmount
 
 	// no validation rules for RepeatedDepositAmountUsd
 
+	// no validation rules for RepeatedDepositAmountReportingCurrency
+
 	// no validation rules for RepeatedDepositUsers
-
-	// no validation rules for SameDayFtd
-
-	// no validation rules for NonSameDayFtd
 
 	// no validation rules for AverageFtdAmountForSameDayRegistredUsers
 
 	// no validation rules for AverageFtdAmountUsdForSameDayRegistredUsers
 
+	// no validation rules for AverageFtdAmountReportingCurrencyForSameDayRegistredUsers
+
 	// no validation rules for AverageFtdAmountForNonSameDayRegistredUsers
 
 	// no validation rules for AverageFtdAmountUsdForNonSameDayRegistredUsers
+
+	// no validation rules for AverageFtdAmountReportingCurrencyForNonSameDayRegistredUsers
 
 	if len(errors) > 0 {
 		return ListDepositVtgDetailsResponse_DetailMultiError(errors)

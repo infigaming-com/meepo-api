@@ -4388,33 +4388,38 @@ func (x *ListRegisterRetentionResponse_List) GetD120PaidAmt() string {
 }
 
 type ListDepositVtgDetailsResponse_Detail struct {
-	state                                          protoimpl.MessageState `protogen:"open.v1"`
-	Date                                           string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
-	OperatorName                                   string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	CompanyOperatorName                            string                 `protobuf:"bytes,3,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
-	RetailerOperatorName                           string                 `protobuf:"bytes,4,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
-	SystemOperatorName                             string                 `protobuf:"bytes,5,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
-	Currency                                       string                 `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`
-	DepositAmount                                  string                 `protobuf:"bytes,7,opt,name=deposit_amount,json=depositAmount,proto3" json:"deposit_amount,omitempty"`
-	DepositAmountUsd                               string                 `protobuf:"bytes,8,opt,name=deposit_amount_usd,json=depositAmountUsd,proto3" json:"deposit_amount_usd,omitempty"`
-	DepositUsers                                   int32                  `protobuf:"varint,9,opt,name=deposit_users,json=depositUsers,proto3" json:"deposit_users,omitempty"`
-	FtdAmount                                      string                 `protobuf:"bytes,10,opt,name=ftd_amount,json=ftdAmount,proto3" json:"ftd_amount,omitempty"`
-	FtdAmountUsd                                   string                 `protobuf:"bytes,11,opt,name=ftd_amount_usd,json=ftdAmountUsd,proto3" json:"ftd_amount_usd,omitempty"`
-	FtdUsers                                       int32                  `protobuf:"varint,12,opt,name=ftd_users,json=ftdUsers,proto3" json:"ftd_users,omitempty"`
-	SameDayFtdAmount                               string                 `protobuf:"bytes,13,opt,name=same_day_ftd_amount,json=sameDayFtdAmount,proto3" json:"same_day_ftd_amount,omitempty"`
-	SameDayFtdAmountUsd                            string                 `protobuf:"bytes,14,opt,name=same_day_ftd_amount_usd,json=sameDayFtdAmountUsd,proto3" json:"same_day_ftd_amount_usd,omitempty"`
-	SameDayFtdUsers                                int32                  `protobuf:"varint,15,opt,name=same_day_ftd_users,json=sameDayFtdUsers,proto3" json:"same_day_ftd_users,omitempty"`
-	RepeatedDepositAmount                          string                 `protobuf:"bytes,16,opt,name=repeated_deposit_amount,json=repeatedDepositAmount,proto3" json:"repeated_deposit_amount,omitempty"`
-	RepeatedDepositAmountUsd                       string                 `protobuf:"bytes,17,opt,name=repeated_deposit_amount_usd,json=repeatedDepositAmountUsd,proto3" json:"repeated_deposit_amount_usd,omitempty"`
-	RepeatedDepositUsers                           int32                  `protobuf:"varint,18,opt,name=repeated_deposit_users,json=repeatedDepositUsers,proto3" json:"repeated_deposit_users,omitempty"`
-	SameDayFtd                                     string                 `protobuf:"bytes,19,opt,name=same_day_ftd,json=sameDayFtd,proto3" json:"same_day_ftd,omitempty"`
-	NonSameDayFtd                                  string                 `protobuf:"bytes,20,opt,name=non_same_day_ftd,json=nonSameDayFtd,proto3" json:"non_same_day_ftd,omitempty"`
-	AverageFtdAmountForSameDayRegistredUsers       string                 `protobuf:"bytes,21,opt,name=average_ftd_amount_for_same_day_registred_users,json=averageFtdAmountForSameDayRegistredUsers,proto3" json:"average_ftd_amount_for_same_day_registred_users,omitempty"`
-	AverageFtdAmountUsdForSameDayRegistredUsers    string                 `protobuf:"bytes,22,opt,name=average_ftd_amount_usd_for_same_day_registred_users,json=averageFtdAmountUsdForSameDayRegistredUsers,proto3" json:"average_ftd_amount_usd_for_same_day_registred_users,omitempty"`
-	AverageFtdAmountForNonSameDayRegistredUsers    string                 `protobuf:"bytes,23,opt,name=average_ftd_amount_for_non_same_day_registred_users,json=averageFtdAmountForNonSameDayRegistredUsers,proto3" json:"average_ftd_amount_for_non_same_day_registred_users,omitempty"`
-	AverageFtdAmountUsdForNonSameDayRegistredUsers string                 `protobuf:"bytes,24,opt,name=average_ftd_amount_usd_for_non_same_day_registred_users,json=averageFtdAmountUsdForNonSameDayRegistredUsers,proto3" json:"average_ftd_amount_usd_for_non_same_day_registred_users,omitempty"`
-	unknownFields                                  protoimpl.UnknownFields
-	sizeCache                                      protoimpl.SizeCache
+	state                                                        protoimpl.MessageState `protogen:"open.v1"`
+	Date                                                         string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
+	OperatorName                                                 string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	CompanyOperatorName                                          string                 `protobuf:"bytes,3,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	RetailerOperatorName                                         string                 `protobuf:"bytes,4,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	SystemOperatorName                                           string                 `protobuf:"bytes,5,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
+	Currency                                                     string                 `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`
+	DepositAmount                                                string                 `protobuf:"bytes,7,opt,name=deposit_amount,json=depositAmount,proto3" json:"deposit_amount,omitempty"`
+	DepositAmountUsd                                             string                 `protobuf:"bytes,8,opt,name=deposit_amount_usd,json=depositAmountUsd,proto3" json:"deposit_amount_usd,omitempty"`
+	DepositAmountReportingCurrency                               string                 `protobuf:"bytes,9,opt,name=deposit_amount_reporting_currency,json=depositAmountReportingCurrency,proto3" json:"deposit_amount_reporting_currency,omitempty"`
+	DepositUsers                                                 int32                  `protobuf:"varint,10,opt,name=deposit_users,json=depositUsers,proto3" json:"deposit_users,omitempty"`
+	FtdAmount                                                    string                 `protobuf:"bytes,11,opt,name=ftd_amount,json=ftdAmount,proto3" json:"ftd_amount,omitempty"`
+	FtdAmountUsd                                                 string                 `protobuf:"bytes,12,opt,name=ftd_amount_usd,json=ftdAmountUsd,proto3" json:"ftd_amount_usd,omitempty"`
+	FtdAmountReportingCurrency                                   string                 `protobuf:"bytes,13,opt,name=ftd_amount_reporting_currency,json=ftdAmountReportingCurrency,proto3" json:"ftd_amount_reporting_currency,omitempty"`
+	FtdUsers                                                     int32                  `protobuf:"varint,14,opt,name=ftd_users,json=ftdUsers,proto3" json:"ftd_users,omitempty"`
+	SameDayFtdAmount                                             string                 `protobuf:"bytes,15,opt,name=same_day_ftd_amount,json=sameDayFtdAmount,proto3" json:"same_day_ftd_amount,omitempty"`
+	SameDayFtdAmountUsd                                          string                 `protobuf:"bytes,16,opt,name=same_day_ftd_amount_usd,json=sameDayFtdAmountUsd,proto3" json:"same_day_ftd_amount_usd,omitempty"`
+	SameDayFtdAmountReportingCurrency                            string                 `protobuf:"bytes,17,opt,name=same_day_ftd_amount_reporting_currency,json=sameDayFtdAmountReportingCurrency,proto3" json:"same_day_ftd_amount_reporting_currency,omitempty"`
+	SameDayFtdUsers                                              int32                  `protobuf:"varint,18,opt,name=same_day_ftd_users,json=sameDayFtdUsers,proto3" json:"same_day_ftd_users,omitempty"`
+	NonSameDayFtdUsers                                           int32                  `protobuf:"varint,19,opt,name=non_same_day_ftd_users,json=nonSameDayFtdUsers,proto3" json:"non_same_day_ftd_users,omitempty"`
+	RepeatedDepositAmount                                        string                 `protobuf:"bytes,20,opt,name=repeated_deposit_amount,json=repeatedDepositAmount,proto3" json:"repeated_deposit_amount,omitempty"`
+	RepeatedDepositAmountUsd                                     string                 `protobuf:"bytes,21,opt,name=repeated_deposit_amount_usd,json=repeatedDepositAmountUsd,proto3" json:"repeated_deposit_amount_usd,omitempty"`
+	RepeatedDepositAmountReportingCurrency                       string                 `protobuf:"bytes,22,opt,name=repeated_deposit_amount_reporting_currency,json=repeatedDepositAmountReportingCurrency,proto3" json:"repeated_deposit_amount_reporting_currency,omitempty"`
+	RepeatedDepositUsers                                         int32                  `protobuf:"varint,23,opt,name=repeated_deposit_users,json=repeatedDepositUsers,proto3" json:"repeated_deposit_users,omitempty"`
+	AverageFtdAmountForSameDayRegistredUsers                     string                 `protobuf:"bytes,24,opt,name=average_ftd_amount_for_same_day_registred_users,json=averageFtdAmountForSameDayRegistredUsers,proto3" json:"average_ftd_amount_for_same_day_registred_users,omitempty"`
+	AverageFtdAmountUsdForSameDayRegistredUsers                  string                 `protobuf:"bytes,25,opt,name=average_ftd_amount_usd_for_same_day_registred_users,json=averageFtdAmountUsdForSameDayRegistredUsers,proto3" json:"average_ftd_amount_usd_for_same_day_registred_users,omitempty"`
+	AverageFtdAmountReportingCurrencyForSameDayRegistredUsers    string                 `protobuf:"bytes,26,opt,name=average_ftd_amount_reporting_currency_for_same_day_registred_users,json=averageFtdAmountReportingCurrencyForSameDayRegistredUsers,proto3" json:"average_ftd_amount_reporting_currency_for_same_day_registred_users,omitempty"`
+	AverageFtdAmountForNonSameDayRegistredUsers                  string                 `protobuf:"bytes,27,opt,name=average_ftd_amount_for_non_same_day_registred_users,json=averageFtdAmountForNonSameDayRegistredUsers,proto3" json:"average_ftd_amount_for_non_same_day_registred_users,omitempty"`
+	AverageFtdAmountUsdForNonSameDayRegistredUsers               string                 `protobuf:"bytes,28,opt,name=average_ftd_amount_usd_for_non_same_day_registred_users,json=averageFtdAmountUsdForNonSameDayRegistredUsers,proto3" json:"average_ftd_amount_usd_for_non_same_day_registred_users,omitempty"`
+	AverageFtdAmountReportingCurrencyForNonSameDayRegistredUsers string                 `protobuf:"bytes,29,opt,name=average_ftd_amount_reporting_currency_for_non_same_day_registred_users,json=averageFtdAmountReportingCurrencyForNonSameDayRegistredUsers,proto3" json:"average_ftd_amount_reporting_currency_for_non_same_day_registred_users,omitempty"`
+	unknownFields                                                protoimpl.UnknownFields
+	sizeCache                                                    protoimpl.SizeCache
 }
 
 func (x *ListDepositVtgDetailsResponse_Detail) Reset() {
@@ -4503,6 +4508,13 @@ func (x *ListDepositVtgDetailsResponse_Detail) GetDepositAmountUsd() string {
 	return ""
 }
 
+func (x *ListDepositVtgDetailsResponse_Detail) GetDepositAmountReportingCurrency() string {
+	if x != nil {
+		return x.DepositAmountReportingCurrency
+	}
+	return ""
+}
+
 func (x *ListDepositVtgDetailsResponse_Detail) GetDepositUsers() int32 {
 	if x != nil {
 		return x.DepositUsers
@@ -4520,6 +4532,13 @@ func (x *ListDepositVtgDetailsResponse_Detail) GetFtdAmount() string {
 func (x *ListDepositVtgDetailsResponse_Detail) GetFtdAmountUsd() string {
 	if x != nil {
 		return x.FtdAmountUsd
+	}
+	return ""
+}
+
+func (x *ListDepositVtgDetailsResponse_Detail) GetFtdAmountReportingCurrency() string {
+	if x != nil {
+		return x.FtdAmountReportingCurrency
 	}
 	return ""
 }
@@ -4545,9 +4564,23 @@ func (x *ListDepositVtgDetailsResponse_Detail) GetSameDayFtdAmountUsd() string {
 	return ""
 }
 
+func (x *ListDepositVtgDetailsResponse_Detail) GetSameDayFtdAmountReportingCurrency() string {
+	if x != nil {
+		return x.SameDayFtdAmountReportingCurrency
+	}
+	return ""
+}
+
 func (x *ListDepositVtgDetailsResponse_Detail) GetSameDayFtdUsers() int32 {
 	if x != nil {
 		return x.SameDayFtdUsers
+	}
+	return 0
+}
+
+func (x *ListDepositVtgDetailsResponse_Detail) GetNonSameDayFtdUsers() int32 {
+	if x != nil {
+		return x.NonSameDayFtdUsers
 	}
 	return 0
 }
@@ -4566,25 +4599,18 @@ func (x *ListDepositVtgDetailsResponse_Detail) GetRepeatedDepositAmountUsd() str
 	return ""
 }
 
+func (x *ListDepositVtgDetailsResponse_Detail) GetRepeatedDepositAmountReportingCurrency() string {
+	if x != nil {
+		return x.RepeatedDepositAmountReportingCurrency
+	}
+	return ""
+}
+
 func (x *ListDepositVtgDetailsResponse_Detail) GetRepeatedDepositUsers() int32 {
 	if x != nil {
 		return x.RepeatedDepositUsers
 	}
 	return 0
-}
-
-func (x *ListDepositVtgDetailsResponse_Detail) GetSameDayFtd() string {
-	if x != nil {
-		return x.SameDayFtd
-	}
-	return ""
-}
-
-func (x *ListDepositVtgDetailsResponse_Detail) GetNonSameDayFtd() string {
-	if x != nil {
-		return x.NonSameDayFtd
-	}
-	return ""
 }
 
 func (x *ListDepositVtgDetailsResponse_Detail) GetAverageFtdAmountForSameDayRegistredUsers() string {
@@ -4601,6 +4627,13 @@ func (x *ListDepositVtgDetailsResponse_Detail) GetAverageFtdAmountUsdForSameDayR
 	return ""
 }
 
+func (x *ListDepositVtgDetailsResponse_Detail) GetAverageFtdAmountReportingCurrencyForSameDayRegistredUsers() string {
+	if x != nil {
+		return x.AverageFtdAmountReportingCurrencyForSameDayRegistredUsers
+	}
+	return ""
+}
+
 func (x *ListDepositVtgDetailsResponse_Detail) GetAverageFtdAmountForNonSameDayRegistredUsers() string {
 	if x != nil {
 		return x.AverageFtdAmountForNonSameDayRegistredUsers
@@ -4611,6 +4644,13 @@ func (x *ListDepositVtgDetailsResponse_Detail) GetAverageFtdAmountForNonSameDayR
 func (x *ListDepositVtgDetailsResponse_Detail) GetAverageFtdAmountUsdForNonSameDayRegistredUsers() string {
 	if x != nil {
 		return x.AverageFtdAmountUsdForNonSameDayRegistredUsers
+	}
+	return ""
+}
+
+func (x *ListDepositVtgDetailsResponse_Detail) GetAverageFtdAmountReportingCurrencyForNonSameDayRegistredUsers() string {
+	if x != nil {
+		return x.AverageFtdAmountReportingCurrencyForNonSameDayRegistredUsers
 	}
 	return ""
 }
@@ -5340,13 +5380,12 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"currencies\x18\x03 \x03(\tR\n" +
 	"currencies\x12\x12\n" +
 	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\"\xd6\v\n" +
+	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\"\x93\x10\n" +
 	"\x1dListDepositVtgDetailsResponse\x12d\n" +
 	"\rdaily_details\x18\x01 \x03(\v2?.api.backoffice.service.v1.ListDepositVtgDetailsResponse.DetailR\fdailyDetails\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\x87\n" +
-	"\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\xc4\x0e\n" +
 	"\x06Detail\x12\x12\n" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12#\n" +
 	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x122\n" +
@@ -5355,26 +5394,30 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x14system_operator_name\x18\x05 \x01(\tR\x12systemOperatorName\x12\x1a\n" +
 	"\bcurrency\x18\x06 \x01(\tR\bcurrency\x12%\n" +
 	"\x0edeposit_amount\x18\a \x01(\tR\rdepositAmount\x12,\n" +
-	"\x12deposit_amount_usd\x18\b \x01(\tR\x10depositAmountUsd\x12#\n" +
-	"\rdeposit_users\x18\t \x01(\x05R\fdepositUsers\x12\x1d\n" +
+	"\x12deposit_amount_usd\x18\b \x01(\tR\x10depositAmountUsd\x12I\n" +
+	"!deposit_amount_reporting_currency\x18\t \x01(\tR\x1edepositAmountReportingCurrency\x12#\n" +
+	"\rdeposit_users\x18\n" +
+	" \x01(\x05R\fdepositUsers\x12\x1d\n" +
 	"\n" +
-	"ftd_amount\x18\n" +
-	" \x01(\tR\tftdAmount\x12$\n" +
-	"\x0eftd_amount_usd\x18\v \x01(\tR\fftdAmountUsd\x12\x1b\n" +
-	"\tftd_users\x18\f \x01(\x05R\bftdUsers\x12-\n" +
-	"\x13same_day_ftd_amount\x18\r \x01(\tR\x10sameDayFtdAmount\x124\n" +
-	"\x17same_day_ftd_amount_usd\x18\x0e \x01(\tR\x13sameDayFtdAmountUsd\x12+\n" +
-	"\x12same_day_ftd_users\x18\x0f \x01(\x05R\x0fsameDayFtdUsers\x126\n" +
-	"\x17repeated_deposit_amount\x18\x10 \x01(\tR\x15repeatedDepositAmount\x12=\n" +
-	"\x1brepeated_deposit_amount_usd\x18\x11 \x01(\tR\x18repeatedDepositAmountUsd\x124\n" +
-	"\x16repeated_deposit_users\x18\x12 \x01(\x05R\x14repeatedDepositUsers\x12 \n" +
-	"\fsame_day_ftd\x18\x13 \x01(\tR\n" +
-	"sameDayFtd\x12'\n" +
-	"\x10non_same_day_ftd\x18\x14 \x01(\tR\rnonSameDayFtd\x12a\n" +
-	"/average_ftd_amount_for_same_day_registred_users\x18\x15 \x01(\tR(averageFtdAmountForSameDayRegistredUsers\x12h\n" +
-	"3average_ftd_amount_usd_for_same_day_registred_users\x18\x16 \x01(\tR+averageFtdAmountUsdForSameDayRegistredUsers\x12h\n" +
-	"3average_ftd_amount_for_non_same_day_registred_users\x18\x17 \x01(\tR+averageFtdAmountForNonSameDayRegistredUsers\x12o\n" +
-	"7average_ftd_amount_usd_for_non_same_day_registred_users\x18\x18 \x01(\tR.averageFtdAmountUsdForNonSameDayRegistredUsers\"\x93\x02\n" +
+	"ftd_amount\x18\v \x01(\tR\tftdAmount\x12$\n" +
+	"\x0eftd_amount_usd\x18\f \x01(\tR\fftdAmountUsd\x12A\n" +
+	"\x1dftd_amount_reporting_currency\x18\r \x01(\tR\x1aftdAmountReportingCurrency\x12\x1b\n" +
+	"\tftd_users\x18\x0e \x01(\x05R\bftdUsers\x12-\n" +
+	"\x13same_day_ftd_amount\x18\x0f \x01(\tR\x10sameDayFtdAmount\x124\n" +
+	"\x17same_day_ftd_amount_usd\x18\x10 \x01(\tR\x13sameDayFtdAmountUsd\x12Q\n" +
+	"&same_day_ftd_amount_reporting_currency\x18\x11 \x01(\tR!sameDayFtdAmountReportingCurrency\x12+\n" +
+	"\x12same_day_ftd_users\x18\x12 \x01(\x05R\x0fsameDayFtdUsers\x122\n" +
+	"\x16non_same_day_ftd_users\x18\x13 \x01(\x05R\x12nonSameDayFtdUsers\x126\n" +
+	"\x17repeated_deposit_amount\x18\x14 \x01(\tR\x15repeatedDepositAmount\x12=\n" +
+	"\x1brepeated_deposit_amount_usd\x18\x15 \x01(\tR\x18repeatedDepositAmountUsd\x12Z\n" +
+	"*repeated_deposit_amount_reporting_currency\x18\x16 \x01(\tR&repeatedDepositAmountReportingCurrency\x124\n" +
+	"\x16repeated_deposit_users\x18\x17 \x01(\x05R\x14repeatedDepositUsers\x12a\n" +
+	"/average_ftd_amount_for_same_day_registred_users\x18\x18 \x01(\tR(averageFtdAmountForSameDayRegistredUsers\x12h\n" +
+	"3average_ftd_amount_usd_for_same_day_registred_users\x18\x19 \x01(\tR+averageFtdAmountUsdForSameDayRegistredUsers\x12\x85\x01\n" +
+	"Baverage_ftd_amount_reporting_currency_for_same_day_registred_users\x18\x1a \x01(\tR9averageFtdAmountReportingCurrencyForSameDayRegistredUsers\x12h\n" +
+	"3average_ftd_amount_for_non_same_day_registred_users\x18\x1b \x01(\tR+averageFtdAmountForNonSameDayRegistredUsers\x12o\n" +
+	"7average_ftd_amount_usd_for_non_same_day_registred_users\x18\x1c \x01(\tR.averageFtdAmountUsdForNonSameDayRegistredUsers\x12\x8c\x01\n" +
+	"Faverage_ftd_amount_reporting_currency_for_non_same_day_registred_users\x18\x1d \x01(\tR<averageFtdAmountReportingCurrencyForNonSameDayRegistredUsers\"\x93\x02\n" +
 	"\x1dListWithdrawVtgDetailsRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +
