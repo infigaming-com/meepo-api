@@ -3584,13 +3584,14 @@ func (x *ListDepositDetailsResponse_Detail) GetAmountProportion() string {
 }
 
 type GetWithdrawSummariesResponse_WithdrawSummary struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	Date                string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
-	Currency            string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	WithdrawSuccessRate string                 `protobuf:"bytes,3,opt,name=withdraw_success_rate,json=withdrawSuccessRate,proto3" json:"withdraw_success_rate,omitempty"` // decimal number between 0-100, two decimal places
-	WithdrawAmount      string                 `protobuf:"bytes,4,opt,name=withdraw_amount,json=withdrawAmount,proto3" json:"withdraw_amount,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state                           protoimpl.MessageState `protogen:"open.v1"`
+	Date                            string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
+	Currency                        string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	WithdrawSuccessRate             string                 `protobuf:"bytes,3,opt,name=withdraw_success_rate,json=withdrawSuccessRate,proto3" json:"withdraw_success_rate,omitempty"` // decimal number between 0-100, two decimal places
+	WithdrawAmountUsd               string                 `protobuf:"bytes,4,opt,name=withdraw_amount_usd,json=withdrawAmountUsd,proto3" json:"withdraw_amount_usd,omitempty"`
+	WithdrawAmountReportingCurrency string                 `protobuf:"bytes,5,opt,name=withdraw_amount_reporting_currency,json=withdrawAmountReportingCurrency,proto3" json:"withdraw_amount_reporting_currency,omitempty"`
+	unknownFields                   protoimpl.UnknownFields
+	sizeCache                       protoimpl.SizeCache
 }
 
 func (x *GetWithdrawSummariesResponse_WithdrawSummary) Reset() {
@@ -3644,9 +3645,16 @@ func (x *GetWithdrawSummariesResponse_WithdrawSummary) GetWithdrawSuccessRate() 
 	return ""
 }
 
-func (x *GetWithdrawSummariesResponse_WithdrawSummary) GetWithdrawAmount() string {
+func (x *GetWithdrawSummariesResponse_WithdrawSummary) GetWithdrawAmountUsd() string {
 	if x != nil {
-		return x.WithdrawAmount
+		return x.WithdrawAmountUsd
+	}
+	return ""
+}
+
+func (x *GetWithdrawSummariesResponse_WithdrawSummary) GetWithdrawAmountReportingCurrency() string {
+	if x != nil {
+		return x.WithdrawAmountReportingCurrency
 	}
 	return ""
 }
@@ -5194,14 +5202,15 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x05 \x03(\tR\n" +
-	"currencies\"\xb7\x02\n" +
+	"currencies\"\x8b\x03\n" +
 	"\x1cGetWithdrawSummariesResponse\x12v\n" +
-	"\x12withdraw_summaries\x18\x01 \x03(\v2G.api.backoffice.service.v1.GetWithdrawSummariesResponse.WithdrawSummaryR\x11withdrawSummaries\x1a\x9e\x01\n" +
+	"\x12withdraw_summaries\x18\x01 \x03(\v2G.api.backoffice.service.v1.GetWithdrawSummariesResponse.WithdrawSummaryR\x11withdrawSummaries\x1a\xf2\x01\n" +
 	"\x0fWithdrawSummary\x12\x12\n" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x122\n" +
-	"\x15withdraw_success_rate\x18\x03 \x01(\tR\x13withdrawSuccessRate\x12'\n" +
-	"\x0fwithdraw_amount\x18\x04 \x01(\tR\x0ewithdrawAmount\"\xb1\x02\n" +
+	"\x15withdraw_success_rate\x18\x03 \x01(\tR\x13withdrawSuccessRate\x12.\n" +
+	"\x13withdraw_amount_usd\x18\x04 \x01(\tR\x11withdrawAmountUsd\x12K\n" +
+	"\"withdraw_amount_reporting_currency\x18\x05 \x01(\tR\x1fwithdrawAmountReportingCurrency\"\xb1\x02\n" +
 	"\x1aListWithdrawDetailsRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +

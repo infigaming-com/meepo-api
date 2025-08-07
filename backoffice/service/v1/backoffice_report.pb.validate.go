@@ -4914,7 +4914,9 @@ func (m *GetWithdrawSummariesResponse_WithdrawSummary) validate(all bool) error 
 
 	// no validation rules for WithdrawSuccessRate
 
-	// no validation rules for WithdrawAmount
+	// no validation rules for WithdrawAmountUsd
+
+	// no validation rules for WithdrawAmountReportingCurrency
 
 	if len(errors) > 0 {
 		return GetWithdrawSummariesResponse_WithdrawSummaryMultiError(errors)
