@@ -41,9 +41,9 @@ type BackofficeReportClient interface {
 	GetSummary(ctx context.Context, in *GetSummaryRequest, opts ...grpc.CallOption) (*GetSummaryResponse, error)
 	ListSummaries(ctx context.Context, in *ListSummariesRequest, opts ...grpc.CallOption) (*ListSummariesResponse, error)
 	GetGameDataSummary(ctx context.Context, in *GetGameSummaryRequest, opts ...grpc.CallOption) (*GetGameSummaryResponse, error)
-	ListGameData(ctx context.Context, in *GetGameDataRequest, opts ...grpc.CallOption) (*GetGameDataResponse, error)
+	ListGameData(ctx context.Context, in *ListGameDataRequest, opts ...grpc.CallOption) (*ListGameDataResponse, error)
 	GetPlayerGameDataSummary(ctx context.Context, in *GetPlayerGameSummaryRequest, opts ...grpc.CallOption) (*GetPlayerGameSummaryResponse, error)
-	ListPlayerGameData(ctx context.Context, in *GetPlayerGameDataRequest, opts ...grpc.CallOption) (*GetPlayerGameDataResponse, error)
+	ListPlayerGameData(ctx context.Context, in *ListPlayerGameDataRequest, opts ...grpc.CallOption) (*ListPlayerGameDataResponse, error)
 	GetDepositSummaries(ctx context.Context, in *GetDepositSummariesRequest, opts ...grpc.CallOption) (*GetDepositSummariesResponse, error)
 	ListDepositDetails(ctx context.Context, in *ListDepositDetailsRequest, opts ...grpc.CallOption) (*ListDepositDetailsResponse, error)
 	GetWithdrawSummaries(ctx context.Context, in *GetWithdrawSummariesRequest, opts ...grpc.CallOption) (*GetWithdrawSummariesResponse, error)
@@ -91,9 +91,9 @@ func (c *backofficeReportClient) GetGameDataSummary(ctx context.Context, in *Get
 	return out, nil
 }
 
-func (c *backofficeReportClient) ListGameData(ctx context.Context, in *GetGameDataRequest, opts ...grpc.CallOption) (*GetGameDataResponse, error) {
+func (c *backofficeReportClient) ListGameData(ctx context.Context, in *ListGameDataRequest, opts ...grpc.CallOption) (*ListGameDataResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetGameDataResponse)
+	out := new(ListGameDataResponse)
 	err := c.cc.Invoke(ctx, BackofficeReport_ListGameData_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -111,9 +111,9 @@ func (c *backofficeReportClient) GetPlayerGameDataSummary(ctx context.Context, i
 	return out, nil
 }
 
-func (c *backofficeReportClient) ListPlayerGameData(ctx context.Context, in *GetPlayerGameDataRequest, opts ...grpc.CallOption) (*GetPlayerGameDataResponse, error) {
+func (c *backofficeReportClient) ListPlayerGameData(ctx context.Context, in *ListPlayerGameDataRequest, opts ...grpc.CallOption) (*ListPlayerGameDataResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetPlayerGameDataResponse)
+	out := new(ListPlayerGameDataResponse)
 	err := c.cc.Invoke(ctx, BackofficeReport_ListPlayerGameData_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -198,9 +198,9 @@ type BackofficeReportServer interface {
 	GetSummary(context.Context, *GetSummaryRequest) (*GetSummaryResponse, error)
 	ListSummaries(context.Context, *ListSummariesRequest) (*ListSummariesResponse, error)
 	GetGameDataSummary(context.Context, *GetGameSummaryRequest) (*GetGameSummaryResponse, error)
-	ListGameData(context.Context, *GetGameDataRequest) (*GetGameDataResponse, error)
+	ListGameData(context.Context, *ListGameDataRequest) (*ListGameDataResponse, error)
 	GetPlayerGameDataSummary(context.Context, *GetPlayerGameSummaryRequest) (*GetPlayerGameSummaryResponse, error)
-	ListPlayerGameData(context.Context, *GetPlayerGameDataRequest) (*GetPlayerGameDataResponse, error)
+	ListPlayerGameData(context.Context, *ListPlayerGameDataRequest) (*ListPlayerGameDataResponse, error)
 	GetDepositSummaries(context.Context, *GetDepositSummariesRequest) (*GetDepositSummariesResponse, error)
 	ListDepositDetails(context.Context, *ListDepositDetailsRequest) (*ListDepositDetailsResponse, error)
 	GetWithdrawSummaries(context.Context, *GetWithdrawSummariesRequest) (*GetWithdrawSummariesResponse, error)
@@ -227,13 +227,13 @@ func (UnimplementedBackofficeReportServer) ListSummaries(context.Context, *ListS
 func (UnimplementedBackofficeReportServer) GetGameDataSummary(context.Context, *GetGameSummaryRequest) (*GetGameSummaryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGameDataSummary not implemented")
 }
-func (UnimplementedBackofficeReportServer) ListGameData(context.Context, *GetGameDataRequest) (*GetGameDataResponse, error) {
+func (UnimplementedBackofficeReportServer) ListGameData(context.Context, *ListGameDataRequest) (*ListGameDataResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListGameData not implemented")
 }
 func (UnimplementedBackofficeReportServer) GetPlayerGameDataSummary(context.Context, *GetPlayerGameSummaryRequest) (*GetPlayerGameSummaryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPlayerGameDataSummary not implemented")
 }
-func (UnimplementedBackofficeReportServer) ListPlayerGameData(context.Context, *GetPlayerGameDataRequest) (*GetPlayerGameDataResponse, error) {
+func (UnimplementedBackofficeReportServer) ListPlayerGameData(context.Context, *ListPlayerGameDataRequest) (*ListPlayerGameDataResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPlayerGameData not implemented")
 }
 func (UnimplementedBackofficeReportServer) GetDepositSummaries(context.Context, *GetDepositSummariesRequest) (*GetDepositSummariesResponse, error) {
@@ -333,7 +333,7 @@ func _BackofficeReport_GetGameDataSummary_Handler(srv interface{}, ctx context.C
 }
 
 func _BackofficeReport_ListGameData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetGameDataRequest)
+	in := new(ListGameDataRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -345,7 +345,7 @@ func _BackofficeReport_ListGameData_Handler(srv interface{}, ctx context.Context
 		FullMethod: BackofficeReport_ListGameData_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeReportServer).ListGameData(ctx, req.(*GetGameDataRequest))
+		return srv.(BackofficeReportServer).ListGameData(ctx, req.(*ListGameDataRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -369,7 +369,7 @@ func _BackofficeReport_GetPlayerGameDataSummary_Handler(srv interface{}, ctx con
 }
 
 func _BackofficeReport_ListPlayerGameData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPlayerGameDataRequest)
+	in := new(ListPlayerGameDataRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -381,7 +381,7 @@ func _BackofficeReport_ListPlayerGameData_Handler(srv interface{}, ctx context.C
 		FullMethod: BackofficeReport_ListPlayerGameData_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeReportServer).ListPlayerGameData(ctx, req.(*GetPlayerGameDataRequest))
+		return srv.(BackofficeReportServer).ListPlayerGameData(ctx, req.(*ListPlayerGameDataRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
