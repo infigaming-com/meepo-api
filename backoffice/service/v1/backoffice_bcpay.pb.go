@@ -12,6 +12,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -189,10 +190,17 @@ func (x *BankAccountListRequest) GetOperatorContextFilters() *common.OperatorCon
 }
 
 type AddBankAccountRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	BankAccount   *v1.DepositBankAccount `protobuf:"bytes,1,opt,name=bank_account,json=bankAccount,proto3" json:"bank_account,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Currency          string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	Country           string                 `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
+	MaxAmount         string                 `protobuf:"bytes,3,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
+	MinAmount         string                 `protobuf:"bytes,4,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
+	MaxAmountPerTrans string                 `protobuf:"bytes,5,opt,name=max_amount_per_trans,json=maxAmountPerTrans,proto3" json:"max_amount_per_trans,omitempty"`
+	MaxTransLimit     int32                  `protobuf:"varint,6,opt,name=max_trans_limit,json=maxTransLimit,proto3" json:"max_trans_limit,omitempty"`
+	Priority          int32                  `protobuf:"varint,7,opt,name=priority,proto3" json:"priority,omitempty"`
+	BankInfo          *structpb.Struct       `protobuf:"bytes,8,opt,name=bank_info,json=bankInfo,proto3" json:"bank_info,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *AddBankAccountRequest) Reset() {
@@ -225,18 +233,75 @@ func (*AddBankAccountRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_bcpay_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *AddBankAccountRequest) GetBankAccount() *v1.DepositBankAccount {
+func (x *AddBankAccountRequest) GetCurrency() string {
 	if x != nil {
-		return x.BankAccount
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *AddBankAccountRequest) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *AddBankAccountRequest) GetMaxAmount() string {
+	if x != nil {
+		return x.MaxAmount
+	}
+	return ""
+}
+
+func (x *AddBankAccountRequest) GetMinAmount() string {
+	if x != nil {
+		return x.MinAmount
+	}
+	return ""
+}
+
+func (x *AddBankAccountRequest) GetMaxAmountPerTrans() string {
+	if x != nil {
+		return x.MaxAmountPerTrans
+	}
+	return ""
+}
+
+func (x *AddBankAccountRequest) GetMaxTransLimit() int32 {
+	if x != nil {
+		return x.MaxTransLimit
+	}
+	return 0
+}
+
+func (x *AddBankAccountRequest) GetPriority() int32 {
+	if x != nil {
+		return x.Priority
+	}
+	return 0
+}
+
+func (x *AddBankAccountRequest) GetBankInfo() *structpb.Struct {
+	if x != nil {
+		return x.BankInfo
 	}
 	return nil
 }
 
 type UpdateBankAccountRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	BankAccount   *v1.DepositBankAccount `protobuf:"bytes,1,opt,name=bank_account,json=bankAccount,proto3" json:"bank_account,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Id                int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Currency          string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	Country           string                 `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
+	MaxAmount         string                 `protobuf:"bytes,4,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
+	MinAmount         string                 `protobuf:"bytes,5,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
+	MaxAmountPerTrans string                 `protobuf:"bytes,6,opt,name=max_amount_per_trans,json=maxAmountPerTrans,proto3" json:"max_amount_per_trans,omitempty"`
+	MaxTransLimit     int32                  `protobuf:"varint,7,opt,name=max_trans_limit,json=maxTransLimit,proto3" json:"max_trans_limit,omitempty"`
+	Priority          int32                  `protobuf:"varint,8,opt,name=priority,proto3" json:"priority,omitempty"`
+	BankInfo          *structpb.Struct       `protobuf:"bytes,9,opt,name=bank_info,json=bankInfo,proto3" json:"bank_info,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *UpdateBankAccountRequest) Reset() {
@@ -269,9 +334,65 @@ func (*UpdateBankAccountRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_bcpay_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *UpdateBankAccountRequest) GetBankAccount() *v1.DepositBankAccount {
+func (x *UpdateBankAccountRequest) GetId() int64 {
 	if x != nil {
-		return x.BankAccount
+		return x.Id
+	}
+	return 0
+}
+
+func (x *UpdateBankAccountRequest) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *UpdateBankAccountRequest) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *UpdateBankAccountRequest) GetMaxAmount() string {
+	if x != nil {
+		return x.MaxAmount
+	}
+	return ""
+}
+
+func (x *UpdateBankAccountRequest) GetMinAmount() string {
+	if x != nil {
+		return x.MinAmount
+	}
+	return ""
+}
+
+func (x *UpdateBankAccountRequest) GetMaxAmountPerTrans() string {
+	if x != nil {
+		return x.MaxAmountPerTrans
+	}
+	return ""
+}
+
+func (x *UpdateBankAccountRequest) GetMaxTransLimit() int32 {
+	if x != nil {
+		return x.MaxTransLimit
+	}
+	return 0
+}
+
+func (x *UpdateBankAccountRequest) GetPriority() int32 {
+	if x != nil {
+		return x.Priority
+	}
+	return 0
+}
+
+func (x *UpdateBankAccountRequest) GetBankInfo() *structpb.Struct {
+	if x != nil {
+		return x.BankInfo
 	}
 	return nil
 }
@@ -433,7 +554,7 @@ var File_backoffice_service_v1_backoffice_bcpay_proto protoreflect.FileDescripto
 
 const file_backoffice_service_v1_backoffice_bcpay_proto_rawDesc = "" +
 	"\n" +
-	",backoffice/service/v1/backoffice_bcpay.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cbcpay/service/v1/bcpay.proto\x1a\x13common/common.proto\"\x14\n" +
+	",backoffice/service/v1/backoffice_bcpay.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cbcpay/service/v1/bcpay.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13common/common.proto\"\x14\n" +
 	"\x12GetMerchantRequest\"+\n" +
 	"\x15CreateMerchantRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\"\xb8\x02\n" +
@@ -443,11 +564,30 @@ const file_backoffice_service_v1_backoffice_bcpay_proto_rawDesc = "" +
 	"\x16bank_account_firstname\x18\x03 \x01(\tR\x14bankAccountFirstname\x122\n" +
 	"\x15bank_account_lastname\x18\x04 \x01(\tR\x13bankAccountLastname\x12\x17\n" +
 	"\acard_id\x18\x05 \x01(\tR\x06cardId\x12\\\n" +
-	"\x18operator_context_filters\x18\x06 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"d\n" +
-	"\x15AddBankAccountRequest\x12K\n" +
-	"\fbank_account\x18\x01 \x01(\v2(.api.bcpay.service.v1.DepositBankAccountR\vbankAccount\"g\n" +
-	"\x18UpdateBankAccountRequest\x12K\n" +
-	"\fbank_account\x18\x01 \x01(\v2(.api.bcpay.service.v1.DepositBankAccountR\vbankAccount\"\x91\x03\n" +
+	"\x18operator_context_filters\x18\x06 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\xb6\x02\n" +
+	"\x15AddBankAccountRequest\x12\x1a\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
+	"\acountry\x18\x02 \x01(\tR\acountry\x12\x1d\n" +
+	"\n" +
+	"max_amount\x18\x03 \x01(\tR\tmaxAmount\x12\x1d\n" +
+	"\n" +
+	"min_amount\x18\x04 \x01(\tR\tminAmount\x12/\n" +
+	"\x14max_amount_per_trans\x18\x05 \x01(\tR\x11maxAmountPerTrans\x12&\n" +
+	"\x0fmax_trans_limit\x18\x06 \x01(\x05R\rmaxTransLimit\x12\x1a\n" +
+	"\bpriority\x18\a \x01(\x05R\bpriority\x124\n" +
+	"\tbank_info\x18\b \x01(\v2\x17.google.protobuf.StructR\bbankInfo\"\xc9\x02\n" +
+	"\x18UpdateBankAccountRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1a\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x18\n" +
+	"\acountry\x18\x03 \x01(\tR\acountry\x12\x1d\n" +
+	"\n" +
+	"max_amount\x18\x04 \x01(\tR\tmaxAmount\x12\x1d\n" +
+	"\n" +
+	"min_amount\x18\x05 \x01(\tR\tminAmount\x12/\n" +
+	"\x14max_amount_per_trans\x18\x06 \x01(\tR\x11maxAmountPerTrans\x12&\n" +
+	"\x0fmax_trans_limit\x18\a \x01(\x05R\rmaxTransLimit\x12\x1a\n" +
+	"\bpriority\x18\b \x01(\x05R\bpriority\x124\n" +
+	"\tbank_info\x18\t \x01(\v2\x17.google.protobuf.StructR\bbankInfo\"\x91\x03\n" +
 	"\x16TransactionListRequest\x12\x12\n" +
 	"\x04type\x18\x01 \x01(\tR\x04type\x12%\n" +
 	"\x0etransaction_id\x18\x02 \x01(\tR\rtransactionId\x12C\n" +
@@ -494,7 +634,7 @@ var file_backoffice_service_v1_backoffice_bcpay_proto_goTypes = []any{
 	(*TransactionListRequest)(nil),          // 5: api.backoffice.service.v1.TransactionListRequest
 	(*AuditTransactionRequest)(nil),         // 6: api.backoffice.service.v1.AuditTransactionRequest
 	(*common.OperatorContextFilters)(nil),   // 7: api.common.OperatorContextFilters
-	(*v1.DepositBankAccount)(nil),           // 8: api.bcpay.service.v1.DepositBankAccount
+	(*structpb.Struct)(nil),                 // 8: google.protobuf.Struct
 	(*v1.AddNoteToTransactionRequest)(nil),  // 9: api.bcpay.service.v1.AddNoteToTransactionRequest
 	(*v1.GetBankSchemaRequest)(nil),         // 10: api.bcpay.service.v1.GetBankSchemaRequest
 	(*v1.GetMerchantResponse)(nil),          // 11: api.bcpay.service.v1.GetMerchantResponse
@@ -509,8 +649,8 @@ var file_backoffice_service_v1_backoffice_bcpay_proto_goTypes = []any{
 }
 var file_backoffice_service_v1_backoffice_bcpay_proto_depIdxs = []int32{
 	7,  // 0: api.backoffice.service.v1.BankAccountListRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	8,  // 1: api.backoffice.service.v1.AddBankAccountRequest.bank_account:type_name -> api.bcpay.service.v1.DepositBankAccount
-	8,  // 2: api.backoffice.service.v1.UpdateBankAccountRequest.bank_account:type_name -> api.bcpay.service.v1.DepositBankAccount
+	8,  // 1: api.backoffice.service.v1.AddBankAccountRequest.bank_info:type_name -> google.protobuf.Struct
+	8,  // 2: api.backoffice.service.v1.UpdateBankAccountRequest.bank_info:type_name -> google.protobuf.Struct
 	0,  // 3: api.backoffice.service.v1.BackofficeBcpay.GetMerchant:input_type -> api.backoffice.service.v1.GetMerchantRequest
 	1,  // 4: api.backoffice.service.v1.BackofficeBcpay.CreateMerchant:input_type -> api.backoffice.service.v1.CreateMerchantRequest
 	2,  // 5: api.backoffice.service.v1.BackofficeBcpay.BankAccountList:input_type -> api.backoffice.service.v1.BankAccountListRequest

@@ -838,7 +838,9 @@ message GetBankCardListResponse {
 }
 
 message AddBankCardRequest {
-  BankCard bank_card = 1;
+  string currency = 1;
+  string country = 2;
+  google.protobuf.Struct bank_card = 3;
 }
 
 message AddBankCardResponse {
@@ -846,7 +848,10 @@ message AddBankCardResponse {
 }
 
 message UpdateBankCardRequest {
-  BankCard bank_card = 1;
+  string id = 1;
+  string currency = 2;
+  string country = 3;
+  google.protobuf.Struct bank_card = 4;
 }
 
 message UpdateBankCardResponse {

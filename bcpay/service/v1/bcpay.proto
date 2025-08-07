@@ -139,8 +139,15 @@ message BankAccountListResponse {
 }
 
 message AddBankAccountRequest {
-	DepositBankAccount bank_account = 1;
-  api.common.OperatorContext operator_context = 2;
+	string currency = 1;
+	string country = 2;
+	string max_amount = 3;
+	string min_amount = 4;
+	string max_amount_per_trans = 5;
+	int32 max_trans_limit = 6;
+	int32 priority = 7;
+  google.protobuf.Struct bank_info = 8;
+  api.common.OperatorContext operator_context = 9;
 }
 
 message AddBankAccountResponse {
@@ -148,8 +155,16 @@ message AddBankAccountResponse {
 }
 
 message UpdateBankAccountRequest {
-	DepositBankAccount bank_account = 1;
-  api.common.OperatorContext operator_context = 2;
+	int64 id = 1;
+	string currency = 2;
+	string country = 3;
+	string max_amount = 4;
+	string min_amount = 5;
+	string max_amount_per_trans = 6;
+	int32 max_trans_limit = 7;
+	int32 priority = 8;
+  google.protobuf.Struct bank_info = 9;
+  api.common.OperatorContext operator_context = 10;
 }
 
 message UpdateBankAccountResponse {

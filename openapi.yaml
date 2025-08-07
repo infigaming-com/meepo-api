@@ -3634,8 +3634,24 @@ components:
         api.backoffice.service.v1.AddBankAccountRequest:
             type: object
             properties:
-                bankAccount:
-                    $ref: '#/components/schemas/api.bcpay.service.v1.DepositBankAccount'
+                currency:
+                    type: string
+                country:
+                    type: string
+                maxAmount:
+                    type: string
+                minAmount:
+                    type: string
+                maxAmountPerTrans:
+                    type: string
+                maxTransLimit:
+                    type: integer
+                    format: int32
+                priority:
+                    type: integer
+                    format: int32
+                bankInfo:
+                    type: object
         api.backoffice.service.v1.AddCommentRequest:
             type: object
             properties:
@@ -8845,8 +8861,26 @@ components:
         api.backoffice.service.v1.UpdateBankAccountRequest:
             type: object
             properties:
-                bankAccount:
-                    $ref: '#/components/schemas/api.bcpay.service.v1.DepositBankAccount'
+                id:
+                    type: string
+                currency:
+                    type: string
+                country:
+                    type: string
+                maxAmount:
+                    type: string
+                minAmount:
+                    type: string
+                maxAmountPerTrans:
+                    type: string
+                maxTransLimit:
+                    type: integer
+                    format: int32
+                priority:
+                    type: integer
+                    format: int32
+                bankInfo:
+                    type: object
         api.backoffice.service.v1.UpdateGameRequest:
             type: object
             properties:
@@ -10499,8 +10533,12 @@ components:
         payment.service.v1.AddBankCardRequest:
             type: object
             properties:
+                currency:
+                    type: string
+                country:
+                    type: string
                 bankCard:
-                    $ref: '#/components/schemas/payment.service.v1.BankCard'
+                    type: object
         payment.service.v1.AddBankCardResponse:
             type: object
             properties:
@@ -11364,8 +11402,14 @@ components:
         payment.service.v1.UpdateBankCardRequest:
             type: object
             properties:
+                id:
+                    type: string
+                currency:
+                    type: string
+                country:
+                    type: string
                 bankCard:
-                    $ref: '#/components/schemas/payment.service.v1.BankCard'
+                    type: object
         payment.service.v1.UpdateBankCardResponse:
             type: object
             properties:

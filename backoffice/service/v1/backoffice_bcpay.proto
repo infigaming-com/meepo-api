@@ -4,6 +4,7 @@ package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
 import "bcpay/service/v1/bcpay.proto";
+import "google/protobuf/struct.proto";
 import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
@@ -96,11 +97,26 @@ message BankAccountListRequest {
 }
 
 message AddBankAccountRequest {
-	bcpay.service.v1.DepositBankAccount bank_account = 1;
+	string currency = 1;
+	string country = 2;
+	string max_amount = 3;
+	string min_amount = 4;
+	string max_amount_per_trans = 5;
+	int32 max_trans_limit = 6;
+	int32 priority = 7;
+  google.protobuf.Struct bank_info = 8;
 }
 
 message UpdateBankAccountRequest {
-	bcpay.service.v1.DepositBankAccount bank_account = 1;
+	int64 id = 1;
+	string currency = 2;
+	string country = 3;
+	string max_amount = 4;
+	string min_amount = 5;
+	string max_amount_per_trans = 6;
+	int32 max_trans_limit = 7;
+	int32 priority = 8;
+  google.protobuf.Struct bank_info = 9;
 }
 
 message TransactionListRequest {
