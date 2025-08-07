@@ -34,3 +34,39 @@ func IsBcpayNotFound(err error) bool {
 func ErrorBcpayNotFound(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_BCPAY_NOT_FOUND.String(), fmt.Sprintf(format, args...))
 }
+
+func IsBcpayGetBankFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_BCPAY_GET_BANK_FAILED.String() && e.Code == 500
+}
+
+func ErrorBcpayGetBankFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_BCPAY_GET_BANK_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsBcpayCreateWithdrawFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_BCPAY_CREATE_WITHDRAW_FAILED.String() && e.Code == 500
+}
+
+func ErrorBcpayCreateWithdrawFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_BCPAY_CREATE_WITHDRAW_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsBcpayGetSchemaFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_BCPAY_GET_SCHEMA_FAILED.String() && e.Code == 500
+}
+
+func ErrorBcpayGetSchemaFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_BCPAY_GET_SCHEMA_FAILED.String(), fmt.Sprintf(format, args...))
+}

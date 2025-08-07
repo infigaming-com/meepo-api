@@ -634,6 +634,8 @@ func (m *GetMerchantResponse) validate(all bool) error {
 
 	// no validation rules for MerchantId
 
+	// no validation rules for ApiKeyPublic
+
 	if len(errors) > 0 {
 		return GetMerchantResponseMultiError(errors)
 	}
@@ -870,6 +872,8 @@ func (m *CreateMerchantResponse) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for MerchantId
+
+	// no validation rules for ApiKeyPublic
 
 	if len(errors) > 0 {
 		return CreateMerchantResponseMultiError(errors)
@@ -1644,12 +1648,26 @@ func (m *AddBankAccountRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Currency
+
+	// no validation rules for Country
+
+	// no validation rules for MaxAmount
+
+	// no validation rules for MinAmount
+
+	// no validation rules for MaxAmountPerTrans
+
+	// no validation rules for MaxTransLimit
+
+	// no validation rules for Priority
+
 	if all {
-		switch v := interface{}(m.GetBankAccount()).(type) {
+		switch v := interface{}(m.GetBankInfo()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, AddBankAccountRequestValidationError{
-					field:  "BankAccount",
+					field:  "BankInfo",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -1657,16 +1675,16 @@ func (m *AddBankAccountRequest) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, AddBankAccountRequestValidationError{
-					field:  "BankAccount",
+					field:  "BankInfo",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetBankAccount()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetBankInfo()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return AddBankAccountRequestValidationError{
-				field:  "BankAccount",
+				field:  "BankInfo",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -1935,12 +1953,28 @@ func (m *UpdateBankAccountRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Id
+
+	// no validation rules for Currency
+
+	// no validation rules for Country
+
+	// no validation rules for MaxAmount
+
+	// no validation rules for MinAmount
+
+	// no validation rules for MaxAmountPerTrans
+
+	// no validation rules for MaxTransLimit
+
+	// no validation rules for Priority
+
 	if all {
-		switch v := interface{}(m.GetBankAccount()).(type) {
+		switch v := interface{}(m.GetBankInfo()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, UpdateBankAccountRequestValidationError{
-					field:  "BankAccount",
+					field:  "BankInfo",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -1948,16 +1982,16 @@ func (m *UpdateBankAccountRequest) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, UpdateBankAccountRequestValidationError{
-					field:  "BankAccount",
+					field:  "BankInfo",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetBankAccount()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetBankInfo()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return UpdateBankAccountRequestValidationError{
-				field:  "BankAccount",
+				field:  "BankInfo",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}

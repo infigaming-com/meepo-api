@@ -20,14 +20,15 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeBcpay_GetMerchant_FullMethodName       = "/api.backoffice.service.v1.BackofficeBcpay/GetMerchant"
-	BackofficeBcpay_CreateMerchant_FullMethodName    = "/api.backoffice.service.v1.BackofficeBcpay/CreateMerchant"
-	BackofficeBcpay_BankAccountList_FullMethodName   = "/api.backoffice.service.v1.BackofficeBcpay/BankAccountList"
-	BackofficeBcpay_AddBankAccount_FullMethodName    = "/api.backoffice.service.v1.BackofficeBcpay/AddBankAccount"
-	BackofficeBcpay_UpdateBankAccount_FullMethodName = "/api.backoffice.service.v1.BackofficeBcpay/UpdateBankAccount"
-	BackofficeBcpay_TransactionList_FullMethodName   = "/api.backoffice.service.v1.BackofficeBcpay/TransactionList"
-	BackofficeBcpay_AuditTransaction_FullMethodName  = "/api.backoffice.service.v1.BackofficeBcpay/AuditTransaction"
-	BackofficeBcpay_GetBankSchema_FullMethodName     = "/api.backoffice.service.v1.BackofficeBcpay/GetBankSchema"
+	BackofficeBcpay_GetMerchant_FullMethodName          = "/api.backoffice.service.v1.BackofficeBcpay/GetMerchant"
+	BackofficeBcpay_CreateMerchant_FullMethodName       = "/api.backoffice.service.v1.BackofficeBcpay/CreateMerchant"
+	BackofficeBcpay_BankAccountList_FullMethodName      = "/api.backoffice.service.v1.BackofficeBcpay/BankAccountList"
+	BackofficeBcpay_AddBankAccount_FullMethodName       = "/api.backoffice.service.v1.BackofficeBcpay/AddBankAccount"
+	BackofficeBcpay_UpdateBankAccount_FullMethodName    = "/api.backoffice.service.v1.BackofficeBcpay/UpdateBankAccount"
+	BackofficeBcpay_TransactionList_FullMethodName      = "/api.backoffice.service.v1.BackofficeBcpay/TransactionList"
+	BackofficeBcpay_AuditTransaction_FullMethodName     = "/api.backoffice.service.v1.BackofficeBcpay/AuditTransaction"
+	BackofficeBcpay_AddNoteToTransaction_FullMethodName = "/api.backoffice.service.v1.BackofficeBcpay/AddNoteToTransaction"
+	BackofficeBcpay_GetBankSchema_FullMethodName        = "/api.backoffice.service.v1.BackofficeBcpay/GetBankSchema"
 )
 
 // BackofficeBcpayClient is the client API for BackofficeBcpay service.
@@ -44,6 +45,7 @@ type BackofficeBcpayClient interface {
 	UpdateBankAccount(ctx context.Context, in *UpdateBankAccountRequest, opts ...grpc.CallOption) (*v1.UpdateBankAccountResponse, error)
 	TransactionList(ctx context.Context, in *TransactionListRequest, opts ...grpc.CallOption) (*v1.TransactionListResponse, error)
 	AuditTransaction(ctx context.Context, in *AuditTransactionRequest, opts ...grpc.CallOption) (*v1.AuditTransactionResponse, error)
+	AddNoteToTransaction(ctx context.Context, in *v1.AddNoteToTransactionRequest, opts ...grpc.CallOption) (*v1.AddNoteToTransactionResponse, error)
 	GetBankSchema(ctx context.Context, in *v1.GetBankSchemaRequest, opts ...grpc.CallOption) (*v1.GetBankSchemaResponse, error)
 }
 
@@ -125,6 +127,16 @@ func (c *backofficeBcpayClient) AuditTransaction(ctx context.Context, in *AuditT
 	return out, nil
 }
 
+func (c *backofficeBcpayClient) AddNoteToTransaction(ctx context.Context, in *v1.AddNoteToTransactionRequest, opts ...grpc.CallOption) (*v1.AddNoteToTransactionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.AddNoteToTransactionResponse)
+	err := c.cc.Invoke(ctx, BackofficeBcpay_AddNoteToTransaction_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *backofficeBcpayClient) GetBankSchema(ctx context.Context, in *v1.GetBankSchemaRequest, opts ...grpc.CallOption) (*v1.GetBankSchemaResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.GetBankSchemaResponse)
@@ -149,6 +161,7 @@ type BackofficeBcpayServer interface {
 	UpdateBankAccount(context.Context, *UpdateBankAccountRequest) (*v1.UpdateBankAccountResponse, error)
 	TransactionList(context.Context, *TransactionListRequest) (*v1.TransactionListResponse, error)
 	AuditTransaction(context.Context, *AuditTransactionRequest) (*v1.AuditTransactionResponse, error)
+	AddNoteToTransaction(context.Context, *v1.AddNoteToTransactionRequest) (*v1.AddNoteToTransactionResponse, error)
 	GetBankSchema(context.Context, *v1.GetBankSchemaRequest) (*v1.GetBankSchemaResponse, error)
 	mustEmbedUnimplementedBackofficeBcpayServer()
 }
@@ -180,6 +193,9 @@ func (UnimplementedBackofficeBcpayServer) TransactionList(context.Context, *Tran
 }
 func (UnimplementedBackofficeBcpayServer) AuditTransaction(context.Context, *AuditTransactionRequest) (*v1.AuditTransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AuditTransaction not implemented")
+}
+func (UnimplementedBackofficeBcpayServer) AddNoteToTransaction(context.Context, *v1.AddNoteToTransactionRequest) (*v1.AddNoteToTransactionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddNoteToTransaction not implemented")
 }
 func (UnimplementedBackofficeBcpayServer) GetBankSchema(context.Context, *v1.GetBankSchemaRequest) (*v1.GetBankSchemaResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBankSchema not implemented")
@@ -331,6 +347,24 @@ func _BackofficeBcpay_AuditTransaction_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeBcpay_AddNoteToTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.AddNoteToTransactionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeBcpayServer).AddNoteToTransaction(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeBcpay_AddNoteToTransaction_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeBcpayServer).AddNoteToTransaction(ctx, req.(*v1.AddNoteToTransactionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BackofficeBcpay_GetBankSchema_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(v1.GetBankSchemaRequest)
 	if err := dec(in); err != nil {
@@ -383,6 +417,10 @@ var BackofficeBcpay_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AuditTransaction",
 			Handler:    _BackofficeBcpay_AuditTransaction_Handler,
+		},
+		{
+			MethodName: "AddNoteToTransaction",
+			Handler:    _BackofficeBcpay_AddNoteToTransaction_Handler,
 		},
 		{
 			MethodName: "GetBankSchema",

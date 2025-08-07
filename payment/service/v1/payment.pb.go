@@ -4534,7 +4534,9 @@ func (x *GetBankCardListResponse) GetBankCardLsit() []*BankCard {
 
 type AddBankCardRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	BankCard      *BankCard              `protobuf:"bytes,1,opt,name=bank_card,json=bankCard,proto3" json:"bank_card,omitempty"`
+	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	Country       string                 `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
+	BankCard      *structpb.Struct       `protobuf:"bytes,3,opt,name=bank_card,json=bankCard,proto3" json:"bank_card,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4569,7 +4571,21 @@ func (*AddBankCardRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{42}
 }
 
-func (x *AddBankCardRequest) GetBankCard() *BankCard {
+func (x *AddBankCardRequest) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *AddBankCardRequest) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *AddBankCardRequest) GetBankCard() *structpb.Struct {
 	if x != nil {
 		return x.BankCard
 	}
@@ -4622,7 +4638,10 @@ func (x *AddBankCardResponse) GetBankCard() *BankCard {
 
 type UpdateBankCardRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	BankCard      *BankCard              `protobuf:"bytes,1,opt,name=bank_card,json=bankCard,proto3" json:"bank_card,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Currency      string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	Country       string                 `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
+	BankCard      *structpb.Struct       `protobuf:"bytes,4,opt,name=bank_card,json=bankCard,proto3" json:"bank_card,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4657,7 +4676,28 @@ func (*UpdateBankCardRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{44}
 }
 
-func (x *UpdateBankCardRequest) GetBankCard() *BankCard {
+func (x *UpdateBankCardRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *UpdateBankCardRequest) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *UpdateBankCardRequest) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *UpdateBankCardRequest) GetBankCard() *structpb.Struct {
 	if x != nil {
 		return x.BankCard
 	}
@@ -5568,13 +5608,18 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\aenabled\x18\a \x01(\bR\aenabled\"\x18\n" +
 	"\x16GetBankCardListRequest\"]\n" +
 	"\x17GetBankCardListResponse\x12B\n" +
-	"\x0ebank_card_lsit\x18\x01 \x03(\v2\x1c.payment.service.v1.BankCardR\fbankCardLsit\"O\n" +
-	"\x12AddBankCardRequest\x129\n" +
-	"\tbank_card\x18\x01 \x01(\v2\x1c.payment.service.v1.BankCardR\bbankCard\"P\n" +
+	"\x0ebank_card_lsit\x18\x01 \x03(\v2\x1c.payment.service.v1.BankCardR\fbankCardLsit\"\x80\x01\n" +
+	"\x12AddBankCardRequest\x12\x1a\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
+	"\acountry\x18\x02 \x01(\tR\acountry\x124\n" +
+	"\tbank_card\x18\x03 \x01(\v2\x17.google.protobuf.StructR\bbankCard\"P\n" +
 	"\x13AddBankCardResponse\x129\n" +
-	"\tbank_card\x18\x01 \x01(\v2\x1c.payment.service.v1.BankCardR\bbankCard\"R\n" +
-	"\x15UpdateBankCardRequest\x129\n" +
-	"\tbank_card\x18\x01 \x01(\v2\x1c.payment.service.v1.BankCardR\bbankCard\"S\n" +
+	"\tbank_card\x18\x01 \x01(\v2\x1c.payment.service.v1.BankCardR\bbankCard\"\x93\x01\n" +
+	"\x15UpdateBankCardRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x18\n" +
+	"\acountry\x18\x03 \x01(\tR\acountry\x124\n" +
+	"\tbank_card\x18\x04 \x01(\v2\x17.google.protobuf.StructR\bbankCard\"S\n" +
 	"\x16UpdateBankCardResponse\x129\n" +
 	"\tbank_card\x18\x01 \x01(\v2\x1c.payment.service.v1.BankCardR\bbankCard\"9\n" +
 	"\x15DeleteBankCardRequest\x12 \n" +
@@ -5774,9 +5819,9 @@ var file_payment_service_v1_payment_proto_depIdxs = []int32{
 	31, // 48: payment.service.v1.GetTransactionDetailByIdResponse.detail:type_name -> payment.service.v1.TransactionDetail
 	15, // 49: payment.service.v1.GetChannelsByIdsResponse.channels:type_name -> payment.service.v1.PaymentChannelInfo
 	43, // 50: payment.service.v1.GetBankCardListResponse.bank_card_lsit:type_name -> payment.service.v1.BankCard
-	43, // 51: payment.service.v1.AddBankCardRequest.bank_card:type_name -> payment.service.v1.BankCard
+	60, // 51: payment.service.v1.AddBankCardRequest.bank_card:type_name -> google.protobuf.Struct
 	43, // 52: payment.service.v1.AddBankCardResponse.bank_card:type_name -> payment.service.v1.BankCard
-	43, // 53: payment.service.v1.UpdateBankCardRequest.bank_card:type_name -> payment.service.v1.BankCard
+	60, // 53: payment.service.v1.UpdateBankCardRequest.bank_card:type_name -> google.protobuf.Struct
 	43, // 54: payment.service.v1.UpdateBankCardResponse.bank_card:type_name -> payment.service.v1.BankCard
 	60, // 55: payment.service.v1.GetBankAccountRequest.extra:type_name -> google.protobuf.Struct
 	59, // 56: payment.service.v1.GetBankSchemaResponse.schema:type_name -> google.protobuf.ListValue

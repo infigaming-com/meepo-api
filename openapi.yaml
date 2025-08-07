@@ -604,6 +604,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.bcpay.service.v1.TransactionListResponse'
+    /v1/backoffice/bcpay/transaction/note/update:
+        post:
+            tags:
+                - BackofficeBcpay
+            operationId: BackofficeBcpay_AddNoteToTransaction
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.bcpay.service.v1.AddNoteToTransactionRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.bcpay.service.v1.AddNoteToTransactionResponse'
     /v1/backoffice/company/register:
         post:
             tags:
@@ -3602,8 +3620,24 @@ components:
         api.backoffice.service.v1.AddBankAccountRequest:
             type: object
             properties:
-                bankAccount:
-                    $ref: '#/components/schemas/api.bcpay.service.v1.DepositBankAccount'
+                currency:
+                    type: string
+                country:
+                    type: string
+                maxAmount:
+                    type: string
+                minAmount:
+                    type: string
+                maxAmountPerTrans:
+                    type: string
+                maxTransLimit:
+                    type: integer
+                    format: int32
+                priority:
+                    type: integer
+                    format: int32
+                bankInfo:
+                    type: object
         api.backoffice.service.v1.AddCommentRequest:
             type: object
             properties:
@@ -8653,8 +8687,26 @@ components:
         api.backoffice.service.v1.UpdateBankAccountRequest:
             type: object
             properties:
-                bankAccount:
-                    $ref: '#/components/schemas/api.bcpay.service.v1.DepositBankAccount'
+                id:
+                    type: string
+                currency:
+                    type: string
+                country:
+                    type: string
+                maxAmount:
+                    type: string
+                minAmount:
+                    type: string
+                maxAmountPerTrans:
+                    type: string
+                maxTransLimit:
+                    type: integer
+                    format: int32
+                priority:
+                    type: integer
+                    format: int32
+                bankInfo:
+                    type: object
         api.backoffice.service.v1.UpdateGameRequest:
             type: object
             properties:
@@ -8851,6 +8903,19 @@ components:
             properties:
                 bankAccount:
                     $ref: '#/components/schemas/api.bcpay.service.v1.DepositBankAccount'
+        api.bcpay.service.v1.AddNoteToTransactionRequest:
+            type: object
+            properties:
+                transactionId:
+                    type: string
+                note:
+                    type: string
+                    description: note
+        api.bcpay.service.v1.AddNoteToTransactionResponse:
+            type: object
+            properties:
+                transaction:
+                    $ref: '#/components/schemas/api.bcpay.service.v1.Transaction'
         api.bcpay.service.v1.AuditTransactionResponse:
             type: object
             properties:
@@ -8867,6 +8932,8 @@ components:
             type: object
             properties:
                 merchantId:
+                    type: string
+                apiKeyPublic:
                     type: string
         api.bcpay.service.v1.CreateWithdrawRequest:
             type: object
@@ -8965,6 +9032,8 @@ components:
             type: object
             properties:
                 merchantId:
+                    type: string
+                apiKeyPublic:
                     type: string
         api.bcpay.service.v1.Transaction:
             type: object
@@ -10591,8 +10660,12 @@ components:
         payment.service.v1.AddBankCardRequest:
             type: object
             properties:
+                currency:
+                    type: string
+                country:
+                    type: string
                 bankCard:
-                    $ref: '#/components/schemas/payment.service.v1.BankCard'
+                    type: object
         payment.service.v1.AddBankCardResponse:
             type: object
             properties:
@@ -11468,8 +11541,14 @@ components:
         payment.service.v1.UpdateBankCardRequest:
             type: object
             properties:
+                id:
+                    type: string
+                currency:
+                    type: string
+                country:
+                    type: string
                 bankCard:
-                    $ref: '#/components/schemas/payment.service.v1.BankCard'
+                    type: object
         payment.service.v1.UpdateBankCardResponse:
             type: object
             properties:
