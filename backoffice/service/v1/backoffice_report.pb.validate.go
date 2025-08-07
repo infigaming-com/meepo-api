@@ -5219,7 +5219,9 @@ func (m *ListRegisterRetentionResponse_List) validate(all bool) error {
 
 	// no validation rules for DepositConvertionRate
 
-	// no validation rules for Arppu
+	// no validation rules for ArppuUsd
+
+	// no validation rules for ArppuReportingCurrency
 
 	// no validation rules for D1ActiveUsers
 
@@ -5269,29 +5271,53 @@ func (m *ListRegisterRetentionResponse_List) validate(all bool) error {
 
 	// no validation rules for D120PaidUsers
 
-	// no validation rules for D1PaidAmt
+	// no validation rules for D1PaidAmtUsd
 
-	// no validation rules for D2PaidAmt
+	// no validation rules for D1PaidAmtReportingCurrency
 
-	// no validation rules for D3PaidAmt
+	// no validation rules for D2PaidAmtUsd
 
-	// no validation rules for D4PaidAmt
+	// no validation rules for D2PaidAmtReportingCurrency
 
-	// no validation rules for D5PaidAmt
+	// no validation rules for D3PaidAmtUsd
 
-	// no validation rules for D6PaidAmt
+	// no validation rules for D3PaidAmtReportingCurrency
 
-	// no validation rules for D7PaidAmt
+	// no validation rules for D4PaidAmtUsd
 
-	// no validation rules for D15PaidAmt
+	// no validation rules for D4PaidAmtReportingCurrency
 
-	// no validation rules for D30PaidAmt
+	// no validation rules for D5PaidAmtUsd
 
-	// no validation rules for D45PaidAmt
+	// no validation rules for D5PaidAmtReportingCurrency
 
-	// no validation rules for D60PaidAmt
+	// no validation rules for D6PaidAmtUsd
 
-	// no validation rules for D120PaidAmt
+	// no validation rules for D6PaidAmtReportingCurrency
+
+	// no validation rules for D7PaidAmtUsd
+
+	// no validation rules for D7PaidAmtReportingCurrency
+
+	// no validation rules for D15PaidAmtUsd
+
+	// no validation rules for D15PaidAmtReportingCurrency
+
+	// no validation rules for D30PaidAmtUsd
+
+	// no validation rules for D30PaidAmtReportingCurrency
+
+	// no validation rules for D45PaidAmtUsd
+
+	// no validation rules for D45PaidAmtReportingCurrency
+
+	// no validation rules for D60PaidAmtUsd
+
+	// no validation rules for D60PaidAmtReportingCurrency
+
+	// no validation rules for D120PaidAmtUsd
+
+	// no validation rules for D120PaidAmtReportingCurrency
 
 	if len(errors) > 0 {
 		return ListRegisterRetentionResponse_ListMultiError(errors)
