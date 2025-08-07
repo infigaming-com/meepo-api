@@ -5577,11 +5577,15 @@ func (m *ListWithdrawVtgDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for WithdrawAmountUsd
 
+	// no validation rules for WithdrawAmountReportingCurrency
+
 	// no validation rules for WithdrawUsers
 
 	// no validation rules for FtwAmount
 
 	// no validation rules for FtwAmountUsd
+
+	// no validation rules for FtwAmountReportingCurrency
 
 	// no validation rules for FtwUsers
 
@@ -5589,29 +5593,37 @@ func (m *ListWithdrawVtgDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for SameDayFtwAmountUsd
 
+	// no validation rules for SameDayFtwAmountReportingCurrency
+
 	// no validation rules for SameDayFtwUsers
+
+	// no validation rules for NonSameDayFtwUsers
 
 	// no validation rules for RepeatedWithdrawAmount
 
 	// no validation rules for RepeatedWithdrawAmountUsd
 
+	// no validation rules for RepeatedWithdrawAmountReportingCurrency
+
 	// no validation rules for RepeatedWithdrawUsers
-
-	// no validation rules for SameDayFtw
-
-	// no validation rules for NonSameDayFtw
 
 	// no validation rules for AverageFtwAmountForSameDayRegistredUsers
 
 	// no validation rules for AverageFtwAmountUsdForSameDayRegistredUsers
 
+	// no validation rules for AverageFtwAmountReportingCurrencyForSameDayRegistredUsers
+
 	// no validation rules for AverageFtwAmountForNonSameDayRegistredUsers
 
 	// no validation rules for AverageFtwAmountUsdForNonSameDayRegistredUsers
 
+	// no validation rules for AverageFtwAmountReportingCurrencyForNonSameDayRegistredUsers
+
 	// no validation rules for DepositMinusWithdrawAmount
 
 	// no validation rules for DepositMinusWithdrawAmountUsd
+
+	// no validation rules for DepositMinusWithdrawAmountReportingCurrency
 
 	if len(errors) > 0 {
 		return ListWithdrawVtgDetailsResponse_DetailMultiError(errors)
