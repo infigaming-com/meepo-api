@@ -497,6 +497,7 @@ message AddAdjustmentRequest {
 	string currency = 6; // Currency code (e.g., "USDT", "USD")
 	string amount = 7; // Adjustment amount as string to preserve precision
 	string description = 8; // Description of the adjustment
+	string period_key = 9; // Period key
 }
 
 message AddAdjustmentResponse {

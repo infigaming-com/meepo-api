@@ -951,6 +951,7 @@ type AddAdjustmentRequest struct {
 	Currency      string `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`                          // Currency code (e.g., "USDT", "USD")
 	Amount        string `protobuf:"bytes,7,opt,name=amount,proto3" json:"amount,omitempty"`                              // Adjustment amount as string to preserve precision
 	Description   string `protobuf:"bytes,8,opt,name=description,proto3" json:"description,omitempty"`                    // Description of the adjustment
+	PeriodKey     string `protobuf:"bytes,9,opt,name=period_key,json=periodKey,proto3" json:"period_key,omitempty"`       // Period key
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1037,6 +1038,13 @@ func (x *AddAdjustmentRequest) GetAmount() string {
 func (x *AddAdjustmentRequest) GetDescription() string {
 	if x != nil {
 		return x.Description
+	}
+	return ""
+}
+
+func (x *AddAdjustmentRequest) GetPeriodKey() string {
+	if x != nil {
+		return x.PeriodKey
 	}
 	return ""
 }
@@ -3839,7 +3847,7 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\bsubtotal\x18\x01 \x01(\tR\bsubtotal\x12?\n" +
 	"\x1crevenue_share_disburse_total\x18\x02 \x01(\tR\x19revenueShareDisburseTotal\x12=\n" +
 	"\x1brevenue_share_collect_total\x18\x03 \x01(\tR\x18revenueShareCollectTotal\x12&\n" +
-	"\x0fest_costs_total\x18\x04 \x01(\tR\restCostsTotal\"\xa6\x02\n" +
+	"\x0fest_costs_total\x18\x04 \x01(\tR\restCostsTotal\"\xc5\x02\n" +
 	"\x14AddAdjustmentRequest\x12\x12\n" +
 	"\x04item\x18\x01 \x01(\tR\x04item\x120\n" +
 	"\x14retailer_operator_id\x18\x02 \x01(\x03R\x12retailerOperatorId\x12.\n" +
@@ -3849,7 +3857,9 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\fapplied_date\x18\x05 \x01(\tR\vappliedDate\x12\x1a\n" +
 	"\bcurrency\x18\x06 \x01(\tR\bcurrency\x12\x16\n" +
 	"\x06amount\x18\a \x01(\tR\x06amount\x12 \n" +
-	"\vdescription\x18\b \x01(\tR\vdescription\"\x17\n" +
+	"\vdescription\x18\b \x01(\tR\vdescription\x12\x1d\n" +
+	"\n" +
+	"period_key\x18\t \x01(\tR\tperiodKey\"\x17\n" +
 	"\x15AddAdjustmentResponse\"p\n" +
 	"\x1cListAdjustmentConfigsRequest\x12\x17\n" +
 	"\x04page\x18\x01 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
