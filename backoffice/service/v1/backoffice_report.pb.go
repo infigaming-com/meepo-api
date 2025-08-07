@@ -3984,55 +3984,68 @@ func (x *ListWithdrawDetailsResponse_Detail) GetAmountProportion() string {
 }
 
 type ListRegisterRetentionResponse_List struct {
-	state                 protoimpl.MessageState `protogen:"open.v1"`
-	Date                  string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
-	OperatorName          string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	CompanyOperatorName   string                 `protobuf:"bytes,3,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
-	RetailerOperatorName  string                 `protobuf:"bytes,4,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
-	SystemOperatorName    string                 `protobuf:"bytes,5,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
-	RegUsers              int32                  `protobuf:"varint,6,opt,name=reg_users,json=regUsers,proto3" json:"reg_users,omitempty"`
-	PaidUsers             int32                  `protobuf:"varint,7,opt,name=paid_users,json=paidUsers,proto3" json:"paid_users,omitempty"`
-	ActiveUsers           int32                  `protobuf:"varint,8,opt,name=active_users,json=activeUsers,proto3" json:"active_users,omitempty"`
-	DepositConvertionRate string                 `protobuf:"bytes,9,opt,name=deposit_convertion_rate,json=depositConvertionRate,proto3" json:"deposit_convertion_rate,omitempty"`
-	Arppu                 int32                  `protobuf:"varint,10,opt,name=arppu,proto3" json:"arppu,omitempty"`
-	D1ActiveUsers         int32                  `protobuf:"varint,11,opt,name=d1_active_users,json=d1ActiveUsers,proto3" json:"d1_active_users,omitempty"`
-	D2ActiveUsers         int32                  `protobuf:"varint,12,opt,name=d2_active_users,json=d2ActiveUsers,proto3" json:"d2_active_users,omitempty"`
-	D3ActiveUsers         int32                  `protobuf:"varint,13,opt,name=d3_active_users,json=d3ActiveUsers,proto3" json:"d3_active_users,omitempty"`
-	D4ActiveUsers         int32                  `protobuf:"varint,14,opt,name=d4_active_users,json=d4ActiveUsers,proto3" json:"d4_active_users,omitempty"`
-	D5ActiveUsers         int32                  `protobuf:"varint,15,opt,name=d5_active_users,json=d5ActiveUsers,proto3" json:"d5_active_users,omitempty"`
-	D6ActiveUsers         int32                  `protobuf:"varint,16,opt,name=d6_active_users,json=d6ActiveUsers,proto3" json:"d6_active_users,omitempty"`
-	D7ActiveUsers         int32                  `protobuf:"varint,17,opt,name=d7_active_users,json=d7ActiveUsers,proto3" json:"d7_active_users,omitempty"`
-	D15ActiveUsers        int32                  `protobuf:"varint,18,opt,name=d15_active_users,json=d15ActiveUsers,proto3" json:"d15_active_users,omitempty"`
-	D30ActiveUsers        int32                  `protobuf:"varint,19,opt,name=d30_active_users,json=d30ActiveUsers,proto3" json:"d30_active_users,omitempty"`
-	D45ActiveUsers        int32                  `protobuf:"varint,20,opt,name=d45_active_users,json=d45ActiveUsers,proto3" json:"d45_active_users,omitempty"`
-	D60ActiveUsers        int32                  `protobuf:"varint,21,opt,name=d60_active_users,json=d60ActiveUsers,proto3" json:"d60_active_users,omitempty"`
-	D120ActiveUsers       int32                  `protobuf:"varint,22,opt,name=d120_active_users,json=d120ActiveUsers,proto3" json:"d120_active_users,omitempty"`
-	D1PaidUsers           int32                  `protobuf:"varint,23,opt,name=d1_paid_users,json=d1PaidUsers,proto3" json:"d1_paid_users,omitempty"`
-	D2PaidUsers           int32                  `protobuf:"varint,24,opt,name=d2_paid_users,json=d2PaidUsers,proto3" json:"d2_paid_users,omitempty"`
-	D3PaidUsers           int32                  `protobuf:"varint,25,opt,name=d3_paid_users,json=d3PaidUsers,proto3" json:"d3_paid_users,omitempty"`
-	D4PaidUsers           int32                  `protobuf:"varint,26,opt,name=d4_paid_users,json=d4PaidUsers,proto3" json:"d4_paid_users,omitempty"`
-	D5PaidUsers           int32                  `protobuf:"varint,27,opt,name=d5_paid_users,json=d5PaidUsers,proto3" json:"d5_paid_users,omitempty"`
-	D6PaidUsers           int32                  `protobuf:"varint,28,opt,name=d6_paid_users,json=d6PaidUsers,proto3" json:"d6_paid_users,omitempty"`
-	D7PaidUsers           int32                  `protobuf:"varint,29,opt,name=d7_paid_users,json=d7PaidUsers,proto3" json:"d7_paid_users,omitempty"`
-	D15PaidUsers          int32                  `protobuf:"varint,30,opt,name=d15_paid_users,json=d15PaidUsers,proto3" json:"d15_paid_users,omitempty"`
-	D30PaidUsers          int32                  `protobuf:"varint,31,opt,name=d30_paid_users,json=d30PaidUsers,proto3" json:"d30_paid_users,omitempty"`
-	D45PaidUsers          int32                  `protobuf:"varint,32,opt,name=d45_paid_users,json=d45PaidUsers,proto3" json:"d45_paid_users,omitempty"`
-	D60PaidUsers          int32                  `protobuf:"varint,33,opt,name=d60_paid_users,json=d60PaidUsers,proto3" json:"d60_paid_users,omitempty"`
-	D120PaidUsers         int32                  `protobuf:"varint,34,opt,name=d120_paid_users,json=d120PaidUsers,proto3" json:"d120_paid_users,omitempty"`
-	D1PaidAmt             string                 `protobuf:"bytes,35,opt,name=d1_paid_amt,json=d1PaidAmt,proto3" json:"d1_paid_amt,omitempty"`
-	D2PaidAmt             string                 `protobuf:"bytes,36,opt,name=d2_paid_amt,json=d2PaidAmt,proto3" json:"d2_paid_amt,omitempty"`
-	D3PaidAmt             string                 `protobuf:"bytes,37,opt,name=d3_paid_amt,json=d3PaidAmt,proto3" json:"d3_paid_amt,omitempty"`
-	D4PaidAmt             string                 `protobuf:"bytes,38,opt,name=d4_paid_amt,json=d4PaidAmt,proto3" json:"d4_paid_amt,omitempty"`
-	D5PaidAmt             string                 `protobuf:"bytes,39,opt,name=d5_paid_amt,json=d5PaidAmt,proto3" json:"d5_paid_amt,omitempty"`
-	D6PaidAmt             string                 `protobuf:"bytes,40,opt,name=d6_paid_amt,json=d6PaidAmt,proto3" json:"d6_paid_amt,omitempty"`
-	D7PaidAmt             string                 `protobuf:"bytes,41,opt,name=d7_paid_amt,json=d7PaidAmt,proto3" json:"d7_paid_amt,omitempty"`
-	D15PaidAmt            string                 `protobuf:"bytes,42,opt,name=d15_paid_amt,json=d15PaidAmt,proto3" json:"d15_paid_amt,omitempty"`
-	D30PaidAmt            string                 `protobuf:"bytes,43,opt,name=d30_paid_amt,json=d30PaidAmt,proto3" json:"d30_paid_amt,omitempty"`
-	D45PaidAmt            string                 `protobuf:"bytes,44,opt,name=d45_paid_amt,json=d45PaidAmt,proto3" json:"d45_paid_amt,omitempty"`
-	D60PaidAmt            string                 `protobuf:"bytes,45,opt,name=d60_paid_amt,json=d60PaidAmt,proto3" json:"d60_paid_amt,omitempty"`
-	D120PaidAmt           string                 `protobuf:"bytes,46,opt,name=d120_paid_amt,json=d120PaidAmt,proto3" json:"d120_paid_amt,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	state                        protoimpl.MessageState `protogen:"open.v1"`
+	Date                         string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
+	OperatorName                 string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	CompanyOperatorName          string                 `protobuf:"bytes,3,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	RetailerOperatorName         string                 `protobuf:"bytes,4,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	SystemOperatorName           string                 `protobuf:"bytes,5,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
+	RegUsers                     int32                  `protobuf:"varint,6,opt,name=reg_users,json=regUsers,proto3" json:"reg_users,omitempty"`
+	PaidUsers                    int32                  `protobuf:"varint,7,opt,name=paid_users,json=paidUsers,proto3" json:"paid_users,omitempty"`
+	ActiveUsers                  int32                  `protobuf:"varint,8,opt,name=active_users,json=activeUsers,proto3" json:"active_users,omitempty"`
+	DepositConvertionRate        string                 `protobuf:"bytes,9,opt,name=deposit_convertion_rate,json=depositConvertionRate,proto3" json:"deposit_convertion_rate,omitempty"`
+	ArppuUsd                     int32                  `protobuf:"varint,10,opt,name=arppu_usd,json=arppuUsd,proto3" json:"arppu_usd,omitempty"`
+	ArppuReportingCurrency       int32                  `protobuf:"varint,11,opt,name=arppu_reporting_currency,json=arppuReportingCurrency,proto3" json:"arppu_reporting_currency,omitempty"`
+	D1ActiveUsers                int32                  `protobuf:"varint,12,opt,name=d1_active_users,json=d1ActiveUsers,proto3" json:"d1_active_users,omitempty"`
+	D2ActiveUsers                int32                  `protobuf:"varint,13,opt,name=d2_active_users,json=d2ActiveUsers,proto3" json:"d2_active_users,omitempty"`
+	D3ActiveUsers                int32                  `protobuf:"varint,14,opt,name=d3_active_users,json=d3ActiveUsers,proto3" json:"d3_active_users,omitempty"`
+	D4ActiveUsers                int32                  `protobuf:"varint,15,opt,name=d4_active_users,json=d4ActiveUsers,proto3" json:"d4_active_users,omitempty"`
+	D5ActiveUsers                int32                  `protobuf:"varint,16,opt,name=d5_active_users,json=d5ActiveUsers,proto3" json:"d5_active_users,omitempty"`
+	D6ActiveUsers                int32                  `protobuf:"varint,17,opt,name=d6_active_users,json=d6ActiveUsers,proto3" json:"d6_active_users,omitempty"`
+	D7ActiveUsers                int32                  `protobuf:"varint,18,opt,name=d7_active_users,json=d7ActiveUsers,proto3" json:"d7_active_users,omitempty"`
+	D15ActiveUsers               int32                  `protobuf:"varint,19,opt,name=d15_active_users,json=d15ActiveUsers,proto3" json:"d15_active_users,omitempty"`
+	D30ActiveUsers               int32                  `protobuf:"varint,20,opt,name=d30_active_users,json=d30ActiveUsers,proto3" json:"d30_active_users,omitempty"`
+	D45ActiveUsers               int32                  `protobuf:"varint,21,opt,name=d45_active_users,json=d45ActiveUsers,proto3" json:"d45_active_users,omitempty"`
+	D60ActiveUsers               int32                  `protobuf:"varint,22,opt,name=d60_active_users,json=d60ActiveUsers,proto3" json:"d60_active_users,omitempty"`
+	D120ActiveUsers              int32                  `protobuf:"varint,23,opt,name=d120_active_users,json=d120ActiveUsers,proto3" json:"d120_active_users,omitempty"`
+	D1PaidUsers                  int32                  `protobuf:"varint,24,opt,name=d1_paid_users,json=d1PaidUsers,proto3" json:"d1_paid_users,omitempty"`
+	D2PaidUsers                  int32                  `protobuf:"varint,25,opt,name=d2_paid_users,json=d2PaidUsers,proto3" json:"d2_paid_users,omitempty"`
+	D3PaidUsers                  int32                  `protobuf:"varint,26,opt,name=d3_paid_users,json=d3PaidUsers,proto3" json:"d3_paid_users,omitempty"`
+	D4PaidUsers                  int32                  `protobuf:"varint,27,opt,name=d4_paid_users,json=d4PaidUsers,proto3" json:"d4_paid_users,omitempty"`
+	D5PaidUsers                  int32                  `protobuf:"varint,28,opt,name=d5_paid_users,json=d5PaidUsers,proto3" json:"d5_paid_users,omitempty"`
+	D6PaidUsers                  int32                  `protobuf:"varint,29,opt,name=d6_paid_users,json=d6PaidUsers,proto3" json:"d6_paid_users,omitempty"`
+	D7PaidUsers                  int32                  `protobuf:"varint,30,opt,name=d7_paid_users,json=d7PaidUsers,proto3" json:"d7_paid_users,omitempty"`
+	D15PaidUsers                 int32                  `protobuf:"varint,31,opt,name=d15_paid_users,json=d15PaidUsers,proto3" json:"d15_paid_users,omitempty"`
+	D30PaidUsers                 int32                  `protobuf:"varint,32,opt,name=d30_paid_users,json=d30PaidUsers,proto3" json:"d30_paid_users,omitempty"`
+	D45PaidUsers                 int32                  `protobuf:"varint,33,opt,name=d45_paid_users,json=d45PaidUsers,proto3" json:"d45_paid_users,omitempty"`
+	D60PaidUsers                 int32                  `protobuf:"varint,34,opt,name=d60_paid_users,json=d60PaidUsers,proto3" json:"d60_paid_users,omitempty"`
+	D120PaidUsers                int32                  `protobuf:"varint,35,opt,name=d120_paid_users,json=d120PaidUsers,proto3" json:"d120_paid_users,omitempty"`
+	D1PaidAmtUsd                 string                 `protobuf:"bytes,36,opt,name=d1_paid_amt_usd,json=d1PaidAmtUsd,proto3" json:"d1_paid_amt_usd,omitempty"`
+	D1PaidAmtReportingCurrency   string                 `protobuf:"bytes,37,opt,name=d1_paid_amt_reporting_currency,json=d1PaidAmtReportingCurrency,proto3" json:"d1_paid_amt_reporting_currency,omitempty"`
+	D2PaidAmtUsd                 string                 `protobuf:"bytes,38,opt,name=d2_paid_amt_usd,json=d2PaidAmtUsd,proto3" json:"d2_paid_amt_usd,omitempty"`
+	D2PaidAmtReportingCurrency   string                 `protobuf:"bytes,39,opt,name=d2_paid_amt_reporting_currency,json=d2PaidAmtReportingCurrency,proto3" json:"d2_paid_amt_reporting_currency,omitempty"`
+	D3PaidAmtUsd                 string                 `protobuf:"bytes,40,opt,name=d3_paid_amt_usd,json=d3PaidAmtUsd,proto3" json:"d3_paid_amt_usd,omitempty"`
+	D3PaidAmtReportingCurrency   string                 `protobuf:"bytes,41,opt,name=d3_paid_amt_reporting_currency,json=d3PaidAmtReportingCurrency,proto3" json:"d3_paid_amt_reporting_currency,omitempty"`
+	D4PaidAmtUsd                 string                 `protobuf:"bytes,42,opt,name=d4_paid_amt_usd,json=d4PaidAmtUsd,proto3" json:"d4_paid_amt_usd,omitempty"`
+	D4PaidAmtReportingCurrency   string                 `protobuf:"bytes,43,opt,name=d4_paid_amt_reporting_currency,json=d4PaidAmtReportingCurrency,proto3" json:"d4_paid_amt_reporting_currency,omitempty"`
+	D5PaidAmtUsd                 string                 `protobuf:"bytes,44,opt,name=d5_paid_amt_usd,json=d5PaidAmtUsd,proto3" json:"d5_paid_amt_usd,omitempty"`
+	D5PaidAmtReportingCurrency   string                 `protobuf:"bytes,45,opt,name=d5_paid_amt_reporting_currency,json=d5PaidAmtReportingCurrency,proto3" json:"d5_paid_amt_reporting_currency,omitempty"`
+	D6PaidAmtUsd                 string                 `protobuf:"bytes,46,opt,name=d6_paid_amt_usd,json=d6PaidAmtUsd,proto3" json:"d6_paid_amt_usd,omitempty"`
+	D6PaidAmtReportingCurrency   string                 `protobuf:"bytes,47,opt,name=d6_paid_amt_reporting_currency,json=d6PaidAmtReportingCurrency,proto3" json:"d6_paid_amt_reporting_currency,omitempty"`
+	D7PaidAmtUsd                 string                 `protobuf:"bytes,48,opt,name=d7_paid_amt_usd,json=d7PaidAmtUsd,proto3" json:"d7_paid_amt_usd,omitempty"`
+	D7PaidAmtReportingCurrency   string                 `protobuf:"bytes,49,opt,name=d7_paid_amt_reporting_currency,json=d7PaidAmtReportingCurrency,proto3" json:"d7_paid_amt_reporting_currency,omitempty"`
+	D15PaidAmtUsd                string                 `protobuf:"bytes,50,opt,name=d15_paid_amt_usd,json=d15PaidAmtUsd,proto3" json:"d15_paid_amt_usd,omitempty"`
+	D15PaidAmtReportingCurrency  string                 `protobuf:"bytes,51,opt,name=d15_paid_amt_reporting_currency,json=d15PaidAmtReportingCurrency,proto3" json:"d15_paid_amt_reporting_currency,omitempty"`
+	D30PaidAmtUsd                string                 `protobuf:"bytes,52,opt,name=d30_paid_amt_usd,json=d30PaidAmtUsd,proto3" json:"d30_paid_amt_usd,omitempty"`
+	D30PaidAmtReportingCurrency  string                 `protobuf:"bytes,53,opt,name=d30_paid_amt_reporting_currency,json=d30PaidAmtReportingCurrency,proto3" json:"d30_paid_amt_reporting_currency,omitempty"`
+	D45PaidAmtUsd                string                 `protobuf:"bytes,54,opt,name=d45_paid_amt_usd,json=d45PaidAmtUsd,proto3" json:"d45_paid_amt_usd,omitempty"`
+	D45PaidAmtReportingCurrency  string                 `protobuf:"bytes,55,opt,name=d45_paid_amt_reporting_currency,json=d45PaidAmtReportingCurrency,proto3" json:"d45_paid_amt_reporting_currency,omitempty"`
+	D60PaidAmtUsd                string                 `protobuf:"bytes,56,opt,name=d60_paid_amt_usd,json=d60PaidAmtUsd,proto3" json:"d60_paid_amt_usd,omitempty"`
+	D60PaidAmtReportingCurrency  string                 `protobuf:"bytes,57,opt,name=d60_paid_amt_reporting_currency,json=d60PaidAmtReportingCurrency,proto3" json:"d60_paid_amt_reporting_currency,omitempty"`
+	D120PaidAmtUsd               string                 `protobuf:"bytes,58,opt,name=d120_paid_amt_usd,json=d120PaidAmtUsd,proto3" json:"d120_paid_amt_usd,omitempty"`
+	D120PaidAmtReportingCurrency string                 `protobuf:"bytes,59,opt,name=d120_paid_amt_reporting_currency,json=d120PaidAmtReportingCurrency,proto3" json:"d120_paid_amt_reporting_currency,omitempty"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *ListRegisterRetentionResponse_List) Reset() {
@@ -4128,9 +4141,16 @@ func (x *ListRegisterRetentionResponse_List) GetDepositConvertionRate() string {
 	return ""
 }
 
-func (x *ListRegisterRetentionResponse_List) GetArppu() int32 {
+func (x *ListRegisterRetentionResponse_List) GetArppuUsd() int32 {
 	if x != nil {
-		return x.Arppu
+		return x.ArppuUsd
+	}
+	return 0
+}
+
+func (x *ListRegisterRetentionResponse_List) GetArppuReportingCurrency() int32 {
+	if x != nil {
+		return x.ArppuReportingCurrency
 	}
 	return 0
 }
@@ -4303,86 +4323,170 @@ func (x *ListRegisterRetentionResponse_List) GetD120PaidUsers() int32 {
 	return 0
 }
 
-func (x *ListRegisterRetentionResponse_List) GetD1PaidAmt() string {
+func (x *ListRegisterRetentionResponse_List) GetD1PaidAmtUsd() string {
 	if x != nil {
-		return x.D1PaidAmt
+		return x.D1PaidAmtUsd
 	}
 	return ""
 }
 
-func (x *ListRegisterRetentionResponse_List) GetD2PaidAmt() string {
+func (x *ListRegisterRetentionResponse_List) GetD1PaidAmtReportingCurrency() string {
 	if x != nil {
-		return x.D2PaidAmt
+		return x.D1PaidAmtReportingCurrency
 	}
 	return ""
 }
 
-func (x *ListRegisterRetentionResponse_List) GetD3PaidAmt() string {
+func (x *ListRegisterRetentionResponse_List) GetD2PaidAmtUsd() string {
 	if x != nil {
-		return x.D3PaidAmt
+		return x.D2PaidAmtUsd
 	}
 	return ""
 }
 
-func (x *ListRegisterRetentionResponse_List) GetD4PaidAmt() string {
+func (x *ListRegisterRetentionResponse_List) GetD2PaidAmtReportingCurrency() string {
 	if x != nil {
-		return x.D4PaidAmt
+		return x.D2PaidAmtReportingCurrency
 	}
 	return ""
 }
 
-func (x *ListRegisterRetentionResponse_List) GetD5PaidAmt() string {
+func (x *ListRegisterRetentionResponse_List) GetD3PaidAmtUsd() string {
 	if x != nil {
-		return x.D5PaidAmt
+		return x.D3PaidAmtUsd
 	}
 	return ""
 }
 
-func (x *ListRegisterRetentionResponse_List) GetD6PaidAmt() string {
+func (x *ListRegisterRetentionResponse_List) GetD3PaidAmtReportingCurrency() string {
 	if x != nil {
-		return x.D6PaidAmt
+		return x.D3PaidAmtReportingCurrency
 	}
 	return ""
 }
 
-func (x *ListRegisterRetentionResponse_List) GetD7PaidAmt() string {
+func (x *ListRegisterRetentionResponse_List) GetD4PaidAmtUsd() string {
 	if x != nil {
-		return x.D7PaidAmt
+		return x.D4PaidAmtUsd
 	}
 	return ""
 }
 
-func (x *ListRegisterRetentionResponse_List) GetD15PaidAmt() string {
+func (x *ListRegisterRetentionResponse_List) GetD4PaidAmtReportingCurrency() string {
 	if x != nil {
-		return x.D15PaidAmt
+		return x.D4PaidAmtReportingCurrency
 	}
 	return ""
 }
 
-func (x *ListRegisterRetentionResponse_List) GetD30PaidAmt() string {
+func (x *ListRegisterRetentionResponse_List) GetD5PaidAmtUsd() string {
 	if x != nil {
-		return x.D30PaidAmt
+		return x.D5PaidAmtUsd
 	}
 	return ""
 }
 
-func (x *ListRegisterRetentionResponse_List) GetD45PaidAmt() string {
+func (x *ListRegisterRetentionResponse_List) GetD5PaidAmtReportingCurrency() string {
 	if x != nil {
-		return x.D45PaidAmt
+		return x.D5PaidAmtReportingCurrency
 	}
 	return ""
 }
 
-func (x *ListRegisterRetentionResponse_List) GetD60PaidAmt() string {
+func (x *ListRegisterRetentionResponse_List) GetD6PaidAmtUsd() string {
 	if x != nil {
-		return x.D60PaidAmt
+		return x.D6PaidAmtUsd
 	}
 	return ""
 }
 
-func (x *ListRegisterRetentionResponse_List) GetD120PaidAmt() string {
+func (x *ListRegisterRetentionResponse_List) GetD6PaidAmtReportingCurrency() string {
 	if x != nil {
-		return x.D120PaidAmt
+		return x.D6PaidAmtReportingCurrency
+	}
+	return ""
+}
+
+func (x *ListRegisterRetentionResponse_List) GetD7PaidAmtUsd() string {
+	if x != nil {
+		return x.D7PaidAmtUsd
+	}
+	return ""
+}
+
+func (x *ListRegisterRetentionResponse_List) GetD7PaidAmtReportingCurrency() string {
+	if x != nil {
+		return x.D7PaidAmtReportingCurrency
+	}
+	return ""
+}
+
+func (x *ListRegisterRetentionResponse_List) GetD15PaidAmtUsd() string {
+	if x != nil {
+		return x.D15PaidAmtUsd
+	}
+	return ""
+}
+
+func (x *ListRegisterRetentionResponse_List) GetD15PaidAmtReportingCurrency() string {
+	if x != nil {
+		return x.D15PaidAmtReportingCurrency
+	}
+	return ""
+}
+
+func (x *ListRegisterRetentionResponse_List) GetD30PaidAmtUsd() string {
+	if x != nil {
+		return x.D30PaidAmtUsd
+	}
+	return ""
+}
+
+func (x *ListRegisterRetentionResponse_List) GetD30PaidAmtReportingCurrency() string {
+	if x != nil {
+		return x.D30PaidAmtReportingCurrency
+	}
+	return ""
+}
+
+func (x *ListRegisterRetentionResponse_List) GetD45PaidAmtUsd() string {
+	if x != nil {
+		return x.D45PaidAmtUsd
+	}
+	return ""
+}
+
+func (x *ListRegisterRetentionResponse_List) GetD45PaidAmtReportingCurrency() string {
+	if x != nil {
+		return x.D45PaidAmtReportingCurrency
+	}
+	return ""
+}
+
+func (x *ListRegisterRetentionResponse_List) GetD60PaidAmtUsd() string {
+	if x != nil {
+		return x.D60PaidAmtUsd
+	}
+	return ""
+}
+
+func (x *ListRegisterRetentionResponse_List) GetD60PaidAmtReportingCurrency() string {
+	if x != nil {
+		return x.D60PaidAmtReportingCurrency
+	}
+	return ""
+}
+
+func (x *ListRegisterRetentionResponse_List) GetD120PaidAmtUsd() string {
+	if x != nil {
+		return x.D120PaidAmtUsd
+	}
+	return ""
+}
+
+func (x *ListRegisterRetentionResponse_List) GetD120PaidAmtReportingCurrency() string {
+	if x != nil {
+		return x.D120PaidAmtReportingCurrency
 	}
 	return ""
 }
@@ -5361,12 +5465,12 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +
 	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\xfe\x0e\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\xcf\x16\n" +
 	"\x1dListRegisterRetentionResponse\x12W\n" +
 	"\adetails\x18\x01 \x03(\v2=.api.backoffice.service.v1.ListRegisterRetentionResponse.ListR\adetails\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\xbc\r\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\x1a\x8d\x15\n" +
 	"\x04List\x12\x12\n" +
 	"\x04date\x18\x01 \x01(\tR\x04date\x12#\n" +
 	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x122\n" +
@@ -5377,49 +5481,58 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\n" +
 	"paid_users\x18\a \x01(\x05R\tpaidUsers\x12!\n" +
 	"\factive_users\x18\b \x01(\x05R\vactiveUsers\x126\n" +
-	"\x17deposit_convertion_rate\x18\t \x01(\tR\x15depositConvertionRate\x12\x14\n" +
-	"\x05arppu\x18\n" +
-	" \x01(\x05R\x05arppu\x12&\n" +
-	"\x0fd1_active_users\x18\v \x01(\x05R\rd1ActiveUsers\x12&\n" +
-	"\x0fd2_active_users\x18\f \x01(\x05R\rd2ActiveUsers\x12&\n" +
-	"\x0fd3_active_users\x18\r \x01(\x05R\rd3ActiveUsers\x12&\n" +
-	"\x0fd4_active_users\x18\x0e \x01(\x05R\rd4ActiveUsers\x12&\n" +
-	"\x0fd5_active_users\x18\x0f \x01(\x05R\rd5ActiveUsers\x12&\n" +
-	"\x0fd6_active_users\x18\x10 \x01(\x05R\rd6ActiveUsers\x12&\n" +
-	"\x0fd7_active_users\x18\x11 \x01(\x05R\rd7ActiveUsers\x12(\n" +
-	"\x10d15_active_users\x18\x12 \x01(\x05R\x0ed15ActiveUsers\x12(\n" +
-	"\x10d30_active_users\x18\x13 \x01(\x05R\x0ed30ActiveUsers\x12(\n" +
-	"\x10d45_active_users\x18\x14 \x01(\x05R\x0ed45ActiveUsers\x12(\n" +
-	"\x10d60_active_users\x18\x15 \x01(\x05R\x0ed60ActiveUsers\x12*\n" +
-	"\x11d120_active_users\x18\x16 \x01(\x05R\x0fd120ActiveUsers\x12\"\n" +
-	"\rd1_paid_users\x18\x17 \x01(\x05R\vd1PaidUsers\x12\"\n" +
-	"\rd2_paid_users\x18\x18 \x01(\x05R\vd2PaidUsers\x12\"\n" +
-	"\rd3_paid_users\x18\x19 \x01(\x05R\vd3PaidUsers\x12\"\n" +
-	"\rd4_paid_users\x18\x1a \x01(\x05R\vd4PaidUsers\x12\"\n" +
-	"\rd5_paid_users\x18\x1b \x01(\x05R\vd5PaidUsers\x12\"\n" +
-	"\rd6_paid_users\x18\x1c \x01(\x05R\vd6PaidUsers\x12\"\n" +
-	"\rd7_paid_users\x18\x1d \x01(\x05R\vd7PaidUsers\x12$\n" +
-	"\x0ed15_paid_users\x18\x1e \x01(\x05R\fd15PaidUsers\x12$\n" +
-	"\x0ed30_paid_users\x18\x1f \x01(\x05R\fd30PaidUsers\x12$\n" +
-	"\x0ed45_paid_users\x18  \x01(\x05R\fd45PaidUsers\x12$\n" +
-	"\x0ed60_paid_users\x18! \x01(\x05R\fd60PaidUsers\x12&\n" +
-	"\x0fd120_paid_users\x18\" \x01(\x05R\rd120PaidUsers\x12\x1e\n" +
-	"\vd1_paid_amt\x18# \x01(\tR\td1PaidAmt\x12\x1e\n" +
-	"\vd2_paid_amt\x18$ \x01(\tR\td2PaidAmt\x12\x1e\n" +
-	"\vd3_paid_amt\x18% \x01(\tR\td3PaidAmt\x12\x1e\n" +
-	"\vd4_paid_amt\x18& \x01(\tR\td4PaidAmt\x12\x1e\n" +
-	"\vd5_paid_amt\x18' \x01(\tR\td5PaidAmt\x12\x1e\n" +
-	"\vd6_paid_amt\x18( \x01(\tR\td6PaidAmt\x12\x1e\n" +
-	"\vd7_paid_amt\x18) \x01(\tR\td7PaidAmt\x12 \n" +
-	"\fd15_paid_amt\x18* \x01(\tR\n" +
-	"d15PaidAmt\x12 \n" +
-	"\fd30_paid_amt\x18+ \x01(\tR\n" +
-	"d30PaidAmt\x12 \n" +
-	"\fd45_paid_amt\x18, \x01(\tR\n" +
-	"d45PaidAmt\x12 \n" +
-	"\fd60_paid_amt\x18- \x01(\tR\n" +
-	"d60PaidAmt\x12\"\n" +
-	"\rd120_paid_amt\x18. \x01(\tR\vd120PaidAmt\"\x92\x02\n" +
+	"\x17deposit_convertion_rate\x18\t \x01(\tR\x15depositConvertionRate\x12\x1b\n" +
+	"\tarppu_usd\x18\n" +
+	" \x01(\x05R\barppuUsd\x128\n" +
+	"\x18arppu_reporting_currency\x18\v \x01(\x05R\x16arppuReportingCurrency\x12&\n" +
+	"\x0fd1_active_users\x18\f \x01(\x05R\rd1ActiveUsers\x12&\n" +
+	"\x0fd2_active_users\x18\r \x01(\x05R\rd2ActiveUsers\x12&\n" +
+	"\x0fd3_active_users\x18\x0e \x01(\x05R\rd3ActiveUsers\x12&\n" +
+	"\x0fd4_active_users\x18\x0f \x01(\x05R\rd4ActiveUsers\x12&\n" +
+	"\x0fd5_active_users\x18\x10 \x01(\x05R\rd5ActiveUsers\x12&\n" +
+	"\x0fd6_active_users\x18\x11 \x01(\x05R\rd6ActiveUsers\x12&\n" +
+	"\x0fd7_active_users\x18\x12 \x01(\x05R\rd7ActiveUsers\x12(\n" +
+	"\x10d15_active_users\x18\x13 \x01(\x05R\x0ed15ActiveUsers\x12(\n" +
+	"\x10d30_active_users\x18\x14 \x01(\x05R\x0ed30ActiveUsers\x12(\n" +
+	"\x10d45_active_users\x18\x15 \x01(\x05R\x0ed45ActiveUsers\x12(\n" +
+	"\x10d60_active_users\x18\x16 \x01(\x05R\x0ed60ActiveUsers\x12*\n" +
+	"\x11d120_active_users\x18\x17 \x01(\x05R\x0fd120ActiveUsers\x12\"\n" +
+	"\rd1_paid_users\x18\x18 \x01(\x05R\vd1PaidUsers\x12\"\n" +
+	"\rd2_paid_users\x18\x19 \x01(\x05R\vd2PaidUsers\x12\"\n" +
+	"\rd3_paid_users\x18\x1a \x01(\x05R\vd3PaidUsers\x12\"\n" +
+	"\rd4_paid_users\x18\x1b \x01(\x05R\vd4PaidUsers\x12\"\n" +
+	"\rd5_paid_users\x18\x1c \x01(\x05R\vd5PaidUsers\x12\"\n" +
+	"\rd6_paid_users\x18\x1d \x01(\x05R\vd6PaidUsers\x12\"\n" +
+	"\rd7_paid_users\x18\x1e \x01(\x05R\vd7PaidUsers\x12$\n" +
+	"\x0ed15_paid_users\x18\x1f \x01(\x05R\fd15PaidUsers\x12$\n" +
+	"\x0ed30_paid_users\x18  \x01(\x05R\fd30PaidUsers\x12$\n" +
+	"\x0ed45_paid_users\x18! \x01(\x05R\fd45PaidUsers\x12$\n" +
+	"\x0ed60_paid_users\x18\" \x01(\x05R\fd60PaidUsers\x12&\n" +
+	"\x0fd120_paid_users\x18# \x01(\x05R\rd120PaidUsers\x12%\n" +
+	"\x0fd1_paid_amt_usd\x18$ \x01(\tR\fd1PaidAmtUsd\x12B\n" +
+	"\x1ed1_paid_amt_reporting_currency\x18% \x01(\tR\x1ad1PaidAmtReportingCurrency\x12%\n" +
+	"\x0fd2_paid_amt_usd\x18& \x01(\tR\fd2PaidAmtUsd\x12B\n" +
+	"\x1ed2_paid_amt_reporting_currency\x18' \x01(\tR\x1ad2PaidAmtReportingCurrency\x12%\n" +
+	"\x0fd3_paid_amt_usd\x18( \x01(\tR\fd3PaidAmtUsd\x12B\n" +
+	"\x1ed3_paid_amt_reporting_currency\x18) \x01(\tR\x1ad3PaidAmtReportingCurrency\x12%\n" +
+	"\x0fd4_paid_amt_usd\x18* \x01(\tR\fd4PaidAmtUsd\x12B\n" +
+	"\x1ed4_paid_amt_reporting_currency\x18+ \x01(\tR\x1ad4PaidAmtReportingCurrency\x12%\n" +
+	"\x0fd5_paid_amt_usd\x18, \x01(\tR\fd5PaidAmtUsd\x12B\n" +
+	"\x1ed5_paid_amt_reporting_currency\x18- \x01(\tR\x1ad5PaidAmtReportingCurrency\x12%\n" +
+	"\x0fd6_paid_amt_usd\x18. \x01(\tR\fd6PaidAmtUsd\x12B\n" +
+	"\x1ed6_paid_amt_reporting_currency\x18/ \x01(\tR\x1ad6PaidAmtReportingCurrency\x12%\n" +
+	"\x0fd7_paid_amt_usd\x180 \x01(\tR\fd7PaidAmtUsd\x12B\n" +
+	"\x1ed7_paid_amt_reporting_currency\x181 \x01(\tR\x1ad7PaidAmtReportingCurrency\x12'\n" +
+	"\x10d15_paid_amt_usd\x182 \x01(\tR\rd15PaidAmtUsd\x12D\n" +
+	"\x1fd15_paid_amt_reporting_currency\x183 \x01(\tR\x1bd15PaidAmtReportingCurrency\x12'\n" +
+	"\x10d30_paid_amt_usd\x184 \x01(\tR\rd30PaidAmtUsd\x12D\n" +
+	"\x1fd30_paid_amt_reporting_currency\x185 \x01(\tR\x1bd30PaidAmtReportingCurrency\x12'\n" +
+	"\x10d45_paid_amt_usd\x186 \x01(\tR\rd45PaidAmtUsd\x12D\n" +
+	"\x1fd45_paid_amt_reporting_currency\x187 \x01(\tR\x1bd45PaidAmtReportingCurrency\x12'\n" +
+	"\x10d60_paid_amt_usd\x188 \x01(\tR\rd60PaidAmtUsd\x12D\n" +
+	"\x1fd60_paid_amt_reporting_currency\x189 \x01(\tR\x1bd60PaidAmtReportingCurrency\x12)\n" +
+	"\x11d120_paid_amt_usd\x18: \x01(\tR\x0ed120PaidAmtUsd\x12F\n" +
+	" d120_paid_amt_reporting_currency\x18; \x01(\tR\x1cd120PaidAmtReportingCurrency\"\x92\x02\n" +
 	"\x1cListDepositVtgDetailsRequest\x12C\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2$.api.backoffice.service.v1.TimeRangeR\ttimeRange\x12\\\n" +

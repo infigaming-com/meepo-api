@@ -7258,7 +7258,10 @@ components:
                     format: int32
                 depositConvertionRate:
                     type: string
-                arppu:
+                arppuUsd:
+                    type: integer
+                    format: int32
+                arppuReportingCurrency:
                     type: integer
                     format: int32
                 d1ActiveUsers:
@@ -7333,29 +7336,53 @@ components:
                 d120PaidUsers:
                     type: integer
                     format: int32
-                d1PaidAmt:
+                d1PaidAmtUsd:
                     type: string
-                d2PaidAmt:
+                d1PaidAmtReportingCurrency:
                     type: string
-                d3PaidAmt:
+                d2PaidAmtUsd:
                     type: string
-                d4PaidAmt:
+                d2PaidAmtReportingCurrency:
                     type: string
-                d5PaidAmt:
+                d3PaidAmtUsd:
                     type: string
-                d6PaidAmt:
+                d3PaidAmtReportingCurrency:
                     type: string
-                d7PaidAmt:
+                d4PaidAmtUsd:
                     type: string
-                d15PaidAmt:
+                d4PaidAmtReportingCurrency:
                     type: string
-                d30PaidAmt:
+                d5PaidAmtUsd:
                     type: string
-                d45PaidAmt:
+                d5PaidAmtReportingCurrency:
                     type: string
-                d60PaidAmt:
+                d6PaidAmtUsd:
                     type: string
-                d120PaidAmt:
+                d6PaidAmtReportingCurrency:
+                    type: string
+                d7PaidAmtUsd:
+                    type: string
+                d7PaidAmtReportingCurrency:
+                    type: string
+                d15PaidAmtUsd:
+                    type: string
+                d15PaidAmtReportingCurrency:
+                    type: string
+                d30PaidAmtUsd:
+                    type: string
+                d30PaidAmtReportingCurrency:
+                    type: string
+                d45PaidAmtUsd:
+                    type: string
+                d45PaidAmtReportingCurrency:
+                    type: string
+                d60PaidAmtUsd:
+                    type: string
+                d60PaidAmtReportingCurrency:
+                    type: string
+                d120PaidAmtUsd:
+                    type: string
+                d120PaidAmtReportingCurrency:
                     type: string
         api.backoffice.service.v1.ListRetailerOperatorsRequest:
             type: object
