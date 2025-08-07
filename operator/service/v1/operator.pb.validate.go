@@ -4262,6 +4262,8 @@ func (m *AddAdjustmentRequest) validate(all bool) error {
 
 	// no validation rules for Description
 
+	// no validation rules for PeriodKey
+
 	if len(errors) > 0 {
 		return AddAdjustmentRequestMultiError(errors)
 	}
