@@ -425,7 +425,8 @@ message GetWithdrawSummariesResponse {
 		string date = 1;
 		string currency = 2;
 		string withdraw_success_rate = 3;  // decimal number between 0-100, two decimal places
-		string withdraw_amount = 4;
+		string withdraw_amount_usd = 4;
+		string withdraw_amount_reporting_currency = 5;
 	}
 	repeated WithdrawSummary withdraw_summaries = 1;
 }
