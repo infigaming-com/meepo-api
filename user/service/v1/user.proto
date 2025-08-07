@@ -256,6 +256,10 @@ service User {
 	// ListOperatorDetails returns a list of operator details
 	rpc ListOperatorDetails(ListOperatorDetailsRequest) returns (ListOperatorDetailsResponse) {
 	}
+
+	// GetOperatorDetailsByUserId returns the operator details which the user belongs to
+	rpc GetOperatorDetailsByUserId(GetOperatorDetailsByUserIdRequest) returns (GetOperatorDetailsByUserIdResponse) {
+	}
 }
 
 // UserInfo contains basic user information.
@@ -663,25 +667,27 @@ message ListUsersResponse {
 		string mobile = 8;
 		int32 vip_level = 9;
 		int32 kyc_level = 10;
-		string deposit = 11;
-		string withdraw = 12;
-		repeated string tags = 13;
-		bool ban_withdraw = 14;
-		bool ban_game = 15;
-		bool ban_login = 16;
-		bool online = 17;
-		google.protobuf.Timestamp last_login_at = 18;
-		google.protobuf.Timestamp registered_at = 19;
+		string deposit_usd = 11;
+		string withdraw_usd = 12;
+		string deposit_reporting_currency = 13;
+		string withdraw_reporting_currency = 14;
+		repeated string tags = 15;
+		bool ban_withdraw = 16;
+		bool ban_game = 17;
+		bool ban_login = 18;
+		bool online = 19;
+		google.protobuf.Timestamp last_login_at = 20;
+		google.protobuf.Timestamp registered_at = 21;
 		// int32 risk_level = 19;
 		// string referral_code = 20;
 		// string affiliate_code = 21;
-		string country = 20;
+		string country = 22;
 		// string device = 23;
 		// string source = 24;
-		string registration_ip = 21;
-		bool enabled = 22;
-		google.protobuf.Timestamp created_at = 23;
-		Role role = 24;
+		string registration_ip = 23;
+		bool enabled = 24;
+		google.protobuf.Timestamp created_at = 25;
+		Role role = 26;
 	}
 	repeated User users = 1;
 	int32 page = 2;
@@ -1178,4 +1184,12 @@ message ListOperatorDetailsRequest {
 
 message ListOperatorDetailsResponse {
 	repeated OperatorDetails operator_details_list = 1;
+}
+
+message GetOperatorDetailsByUserIdRequest {
+	int64 user_id = 1;
+}
+
+message GetOperatorDetailsByUserIdResponse {
+	OperatorDetails operator_details = 1;
 }

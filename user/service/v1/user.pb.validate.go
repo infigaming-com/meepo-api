@@ -14178,6 +14178,247 @@ var _ interface {
 	ErrorName() string
 } = ListOperatorDetailsResponseValidationError{}
 
+// Validate checks the field values on GetOperatorDetailsByUserIdRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetOperatorDetailsByUserIdRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetOperatorDetailsByUserIdRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetOperatorDetailsByUserIdRequestMultiError, or nil if none found.
+func (m *GetOperatorDetailsByUserIdRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOperatorDetailsByUserIdRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	if len(errors) > 0 {
+		return GetOperatorDetailsByUserIdRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOperatorDetailsByUserIdRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// GetOperatorDetailsByUserIdRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetOperatorDetailsByUserIdRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOperatorDetailsByUserIdRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOperatorDetailsByUserIdRequestMultiError) AllErrors() []error { return m }
+
+// GetOperatorDetailsByUserIdRequestValidationError is the validation error
+// returned by GetOperatorDetailsByUserIdRequest.Validate if the designated
+// constraints aren't met.
+type GetOperatorDetailsByUserIdRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOperatorDetailsByUserIdRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOperatorDetailsByUserIdRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOperatorDetailsByUserIdRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOperatorDetailsByUserIdRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOperatorDetailsByUserIdRequestValidationError) ErrorName() string {
+	return "GetOperatorDetailsByUserIdRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOperatorDetailsByUserIdRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOperatorDetailsByUserIdRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOperatorDetailsByUserIdRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOperatorDetailsByUserIdRequestValidationError{}
+
+// Validate checks the field values on GetOperatorDetailsByUserIdResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetOperatorDetailsByUserIdResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetOperatorDetailsByUserIdResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetOperatorDetailsByUserIdResponseMultiError, or nil if none found.
+func (m *GetOperatorDetailsByUserIdResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOperatorDetailsByUserIdResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorDetails()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetOperatorDetailsByUserIdResponseValidationError{
+					field:  "OperatorDetails",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetOperatorDetailsByUserIdResponseValidationError{
+					field:  "OperatorDetails",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorDetails()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetOperatorDetailsByUserIdResponseValidationError{
+				field:  "OperatorDetails",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetOperatorDetailsByUserIdResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOperatorDetailsByUserIdResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// GetOperatorDetailsByUserIdResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetOperatorDetailsByUserIdResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOperatorDetailsByUserIdResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOperatorDetailsByUserIdResponseMultiError) AllErrors() []error { return m }
+
+// GetOperatorDetailsByUserIdResponseValidationError is the validation error
+// returned by GetOperatorDetailsByUserIdResponse.Validate if the designated
+// constraints aren't met.
+type GetOperatorDetailsByUserIdResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOperatorDetailsByUserIdResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOperatorDetailsByUserIdResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOperatorDetailsByUserIdResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOperatorDetailsByUserIdResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOperatorDetailsByUserIdResponseValidationError) ErrorName() string {
+	return "GetOperatorDetailsByUserIdResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOperatorDetailsByUserIdResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOperatorDetailsByUserIdResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOperatorDetailsByUserIdResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOperatorDetailsByUserIdResponseValidationError{}
+
 // Validate checks the field values on ListUsersResponse_User with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -14220,9 +14461,13 @@ func (m *ListUsersResponse_User) validate(all bool) error {
 
 	// no validation rules for KycLevel
 
-	// no validation rules for Deposit
+	// no validation rules for DepositUsd
 
-	// no validation rules for Withdraw
+	// no validation rules for WithdrawUsd
+
+	// no validation rules for DepositReportingCurrency
+
+	// no validation rules for WithdrawReportingCurrency
 
 	// no validation rules for BanWithdraw
 

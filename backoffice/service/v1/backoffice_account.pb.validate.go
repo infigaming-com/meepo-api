@@ -3346,6 +3346,35 @@ func (m *AccountInfoResponse) validate(all bool) error {
 		}
 	}
 
+	if all {
+		switch v := interface{}(m.GetReportingCurrency()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AccountInfoResponseValidationError{
+					field:  "ReportingCurrency",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AccountInfoResponseValidationError{
+					field:  "ReportingCurrency",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetReportingCurrency()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AccountInfoResponseValidationError{
+				field:  "ReportingCurrency",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return AccountInfoResponseMultiError(errors)
 	}

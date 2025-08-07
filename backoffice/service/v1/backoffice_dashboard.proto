@@ -51,24 +51,34 @@ message GetOverviewDashboardResponse {
 		int32 yesterday = 2;
 	}
 	message GGR {
-		string today = 1;
-		string yesterday = 2;
+		string today_usd = 1;
+		string yesterday_usd = 2;
+		string today_reporting_currency = 3;
+		string yesterday_reporting_currency = 4;
 	}
 	message NGR {
-		string today = 1;
-		string yesterday = 2;
+		string today_usd = 1;
+		string yesterday_usd = 2;
+		string today_reporting_currency = 3;
+		string yesterday_reporting_currency = 4;
 	}
 	message DepositAmount {
-		string today = 1;
-		string yesterday = 2;
+		string today_usd = 1;
+		string yesterday_usd = 2;
+		string today_reporting_currency = 3;
+		string yesterday_reporting_currency = 4;
 	}
 	message WithdrawalAmount {
-		string today = 1;
-		string yesterday = 2;
+		string today_usd = 1;
+		string yesterday_usd = 2;
+		string today_reporting_currency = 3;
+		string yesterday_reporting_currency = 4;
 	}
 	message DepositMinusWithdrawalAmount {
-		string today = 1;
-		string yesterday = 2;
+		string today_usd = 1;
+		string yesterday_usd = 2;
+		string today_reporting_currency = 3;
+		string yesterday_reporting_currency = 4;
 	}
 	RegisteredUsers registered_users = 1;
 	FirstDepositUsers first_deposit_users = 2;

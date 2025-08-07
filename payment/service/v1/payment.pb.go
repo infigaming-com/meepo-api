@@ -3014,10 +3014,16 @@ type TransactionInfo struct {
 	// Transaction amount in USD
 	AmountUsd string `protobuf:"bytes,26,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
 	// Transaction amount actually sent through
-	AmountSent    string `protobuf:"bytes,27,opt,name=amount_sent,json=amountSent,proto3" json:"amount_sent,omitempty"`
-	Gas           string `protobuf:"bytes,28,opt,name=gas,proto3" json:"gas,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	AmountSent                     string `protobuf:"bytes,27,opt,name=amount_sent,json=amountSent,proto3" json:"amount_sent,omitempty"`
+	Gas                            string `protobuf:"bytes,28,opt,name=gas,proto3" json:"gas,omitempty"`
+	ReportingCurrency              string `protobuf:"bytes,29,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	AmountReportingCurrency        string `protobuf:"bytes,30,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
+	AmountSentReportingCurrency    string `protobuf:"bytes,31,opt,name=amount_sent_reporting_currency,json=amountSentReportingCurrency,proto3" json:"amount_sent_reporting_currency,omitempty"`
+	ProcessingFeeReportingCurrency string `protobuf:"bytes,32,opt,name=processing_fee_reporting_currency,json=processingFeeReportingCurrency,proto3" json:"processing_fee_reporting_currency,omitempty"`
+	AmountSentUsd                  string `protobuf:"bytes,33,opt,name=amount_sent_usd,json=amountSentUsd,proto3" json:"amount_sent_usd,omitempty"`
+	ProcessingFeeUsd               string `protobuf:"bytes,34,opt,name=processing_fee_usd,json=processingFeeUsd,proto3" json:"processing_fee_usd,omitempty"`
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
 func (x *TransactionInfo) Reset() {
@@ -3242,6 +3248,48 @@ func (x *TransactionInfo) GetAmountSent() string {
 func (x *TransactionInfo) GetGas() string {
 	if x != nil {
 		return x.Gas
+	}
+	return ""
+}
+
+func (x *TransactionInfo) GetReportingCurrency() string {
+	if x != nil {
+		return x.ReportingCurrency
+	}
+	return ""
+}
+
+func (x *TransactionInfo) GetAmountReportingCurrency() string {
+	if x != nil {
+		return x.AmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *TransactionInfo) GetAmountSentReportingCurrency() string {
+	if x != nil {
+		return x.AmountSentReportingCurrency
+	}
+	return ""
+}
+
+func (x *TransactionInfo) GetProcessingFeeReportingCurrency() string {
+	if x != nil {
+		return x.ProcessingFeeReportingCurrency
+	}
+	return ""
+}
+
+func (x *TransactionInfo) GetAmountSentUsd() string {
+	if x != nil {
+		return x.AmountSentUsd
+	}
+	return ""
+}
+
+func (x *TransactionInfo) GetProcessingFeeUsd() string {
+	if x != nil {
+		return x.ProcessingFeeUsd
 	}
 	return ""
 }
@@ -5370,7 +5418,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x05nonce\x18\f \x01(\tR\x05nonce\"N\n" +
 	"\x18WithdrawCallbackResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"\xf2\b\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"\xc3\v\n" +
 	"\x0fTransactionInfo\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
 	"\x11pa_transaction_id\x18\x02 \x01(\tR\x0fpaTransactionId\x124\n" +
@@ -5405,7 +5453,13 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"amount_usd\x18\x1a \x01(\tR\tamountUsd\x12\x1f\n" +
 	"\vamount_sent\x18\x1b \x01(\tR\n" +
 	"amountSent\x12\x10\n" +
-	"\x03gas\x18\x1c \x01(\tR\x03gas\"\x9c\x01\n" +
+	"\x03gas\x18\x1c \x01(\tR\x03gas\x12-\n" +
+	"\x12reporting_currency\x18\x1d \x01(\tR\x11reportingCurrency\x12:\n" +
+	"\x19amount_reporting_currency\x18\x1e \x01(\tR\x17amountReportingCurrency\x12C\n" +
+	"\x1eamount_sent_reporting_currency\x18\x1f \x01(\tR\x1bamountSentReportingCurrency\x12I\n" +
+	"!processing_fee_reporting_currency\x18  \x01(\tR\x1eprocessingFeeReportingCurrency\x12&\n" +
+	"\x0famount_sent_usd\x18! \x01(\tR\ramountSentUsd\x12,\n" +
+	"\x12processing_fee_usd\x18\" \x01(\tR\x10processingFeeUsd\"\x9c\x01\n" +
 	"\x11TransactionDetail\x12E\n" +
 	"\vtransaction\x18\x01 \x01(\v2#.payment.service.v1.TransactionInfoR\vtransaction\x12@\n" +
 	"\achannel\x18\x02 \x01(\v2&.payment.service.v1.PaymentChannelInfoR\achannel\"\xc0\x06\n" +
