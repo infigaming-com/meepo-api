@@ -3867,6 +3867,224 @@ var _ interface {
 	ErrorName() string
 } = GetExchangeRatesResponseValidationError{}
 
+// Validate checks the field values on GetExchangeRatesWithBaseCurrencyRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetExchangeRatesWithBaseCurrencyRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetExchangeRatesWithBaseCurrencyRequest with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// GetExchangeRatesWithBaseCurrencyRequestMultiError, or nil if none found.
+func (m *GetExchangeRatesWithBaseCurrencyRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetExchangeRatesWithBaseCurrencyRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.BaseCurrency != nil {
+		// no validation rules for BaseCurrency
+	}
+
+	if len(errors) > 0 {
+		return GetExchangeRatesWithBaseCurrencyRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetExchangeRatesWithBaseCurrencyRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// GetExchangeRatesWithBaseCurrencyRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetExchangeRatesWithBaseCurrencyRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetExchangeRatesWithBaseCurrencyRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetExchangeRatesWithBaseCurrencyRequestMultiError) AllErrors() []error { return m }
+
+// GetExchangeRatesWithBaseCurrencyRequestValidationError is the validation
+// error returned by GetExchangeRatesWithBaseCurrencyRequest.Validate if the
+// designated constraints aren't met.
+type GetExchangeRatesWithBaseCurrencyRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetExchangeRatesWithBaseCurrencyRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetExchangeRatesWithBaseCurrencyRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetExchangeRatesWithBaseCurrencyRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetExchangeRatesWithBaseCurrencyRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetExchangeRatesWithBaseCurrencyRequestValidationError) ErrorName() string {
+	return "GetExchangeRatesWithBaseCurrencyRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetExchangeRatesWithBaseCurrencyRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetExchangeRatesWithBaseCurrencyRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetExchangeRatesWithBaseCurrencyRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetExchangeRatesWithBaseCurrencyRequestValidationError{}
+
+// Validate checks the field values on GetExchangeRatesWithBaseCurrencyResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetExchangeRatesWithBaseCurrencyResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetExchangeRatesWithBaseCurrencyResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// GetExchangeRatesWithBaseCurrencyResponseMultiError, or nil if none found.
+func (m *GetExchangeRatesWithBaseCurrencyResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetExchangeRatesWithBaseCurrencyResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ExchangeRates
+
+	if len(errors) > 0 {
+		return GetExchangeRatesWithBaseCurrencyResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetExchangeRatesWithBaseCurrencyResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// GetExchangeRatesWithBaseCurrencyResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetExchangeRatesWithBaseCurrencyResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetExchangeRatesWithBaseCurrencyResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetExchangeRatesWithBaseCurrencyResponseMultiError) AllErrors() []error { return m }
+
+// GetExchangeRatesWithBaseCurrencyResponseValidationError is the validation
+// error returned by GetExchangeRatesWithBaseCurrencyResponse.Validate if the
+// designated constraints aren't met.
+type GetExchangeRatesWithBaseCurrencyResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetExchangeRatesWithBaseCurrencyResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetExchangeRatesWithBaseCurrencyResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetExchangeRatesWithBaseCurrencyResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetExchangeRatesWithBaseCurrencyResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetExchangeRatesWithBaseCurrencyResponseValidationError) ErrorName() string {
+	return "GetExchangeRatesWithBaseCurrencyResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetExchangeRatesWithBaseCurrencyResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetExchangeRatesWithBaseCurrencyResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetExchangeRatesWithBaseCurrencyResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetExchangeRatesWithBaseCurrencyResponseValidationError{}
+
 // Validate checks the field values on GetUserTransactionSummaryRequest with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the first error encountered is returned, or nil if there are
