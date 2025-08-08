@@ -52,6 +52,8 @@ service Wallet {
 
 	rpc GetExchangeRates (GetExchangeRatesRequest) returns (GetExchangeRatesResponse) {}
 
+	rpc GetExchangeRatesWithBaseCurrency (GetExchangeRatesWithBaseCurrencyRequest) returns (GetExchangeRatesWithBaseCurrencyResponse) {}
+
 	// GetUserTransactionSummary returns the summary of user's transactions 
 	// It returns the total deposit, withdraw, deposit minus withdraw, valid bet
 	rpc GetUserTransactionSummary (GetUserTransactionSummaryRequest) returns (GetUserTransactionSummaryResponse) {}
@@ -511,7 +513,17 @@ message GetExchangeRatesRequest {
 }
 
 message GetExchangeRatesResponse {
-	// map key is source currency, value is target currency rate
+	// map key is currency code, value is currency exchange rate
+	map<string, string> exchange_rates = 1;
+}
+
+message GetExchangeRatesWithBaseCurrencyRequest {
+	repeated string currencies = 1;
+	optional string base_currency = 2; // USD if not provided
+}
+
+message GetExchangeRatesWithBaseCurrencyResponse {
+	// map key is currency code, value is currency exchange rate
 	map<string, string> exchange_rates = 1;
 }
 

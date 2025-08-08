@@ -33,6 +33,7 @@ const (
 	Wallet_GetWalletBalanceTransactionsByIds_FullMethodName   = "/api.wallet.service.v1.Wallet/GetWalletBalanceTransactionsByIds"
 	Wallet_GetWalletCreditTransactions_FullMethodName         = "/api.wallet.service.v1.Wallet/GetWalletCreditTransactions"
 	Wallet_GetExchangeRates_FullMethodName                    = "/api.wallet.service.v1.Wallet/GetExchangeRates"
+	Wallet_GetExchangeRatesWithBaseCurrency_FullMethodName    = "/api.wallet.service.v1.Wallet/GetExchangeRatesWithBaseCurrency"
 	Wallet_GetUserTransactionSummary_FullMethodName           = "/api.wallet.service.v1.Wallet/GetUserTransactionSummary"
 	Wallet_GetBackofficeUserOverviewFromWallet_FullMethodName = "/api.wallet.service.v1.Wallet/GetBackofficeUserOverviewFromWallet"
 	Wallet_GetOverviewDashboardFromWallet_FullMethodName      = "/api.wallet.service.v1.Wallet/GetOverviewDashboardFromWallet"
@@ -81,6 +82,7 @@ type WalletClient interface {
 	GetWalletBalanceTransactionsByIds(ctx context.Context, in *GetWalletBalanceTransactionsByIdsRequest, opts ...grpc.CallOption) (*GetWalletBalanceTransactionsByIdsResponse, error)
 	GetWalletCreditTransactions(ctx context.Context, in *GetWalletCreditTransactionsRequest, opts ...grpc.CallOption) (*GetWalletCreditTransactionsResponse, error)
 	GetExchangeRates(ctx context.Context, in *GetExchangeRatesRequest, opts ...grpc.CallOption) (*GetExchangeRatesResponse, error)
+	GetExchangeRatesWithBaseCurrency(ctx context.Context, in *GetExchangeRatesWithBaseCurrencyRequest, opts ...grpc.CallOption) (*GetExchangeRatesWithBaseCurrencyResponse, error)
 	// GetUserTransactionSummary returns the summary of user's transactions
 	// It returns the total deposit, withdraw, deposit minus withdraw, valid bet
 	GetUserTransactionSummary(ctx context.Context, in *GetUserTransactionSummaryRequest, opts ...grpc.CallOption) (*GetUserTransactionSummaryResponse, error)
@@ -261,6 +263,16 @@ func (c *walletClient) GetExchangeRates(ctx context.Context, in *GetExchangeRate
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetExchangeRatesResponse)
 	err := c.cc.Invoke(ctx, Wallet_GetExchangeRates_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) GetExchangeRatesWithBaseCurrency(ctx context.Context, in *GetExchangeRatesWithBaseCurrencyRequest, opts ...grpc.CallOption) (*GetExchangeRatesWithBaseCurrencyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetExchangeRatesWithBaseCurrencyResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetExchangeRatesWithBaseCurrency_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -502,6 +514,7 @@ type WalletServer interface {
 	GetWalletBalanceTransactionsByIds(context.Context, *GetWalletBalanceTransactionsByIdsRequest) (*GetWalletBalanceTransactionsByIdsResponse, error)
 	GetWalletCreditTransactions(context.Context, *GetWalletCreditTransactionsRequest) (*GetWalletCreditTransactionsResponse, error)
 	GetExchangeRates(context.Context, *GetExchangeRatesRequest) (*GetExchangeRatesResponse, error)
+	GetExchangeRatesWithBaseCurrency(context.Context, *GetExchangeRatesWithBaseCurrencyRequest) (*GetExchangeRatesWithBaseCurrencyResponse, error)
 	// GetUserTransactionSummary returns the summary of user's transactions
 	// It returns the total deposit, withdraw, deposit minus withdraw, valid bet
 	GetUserTransactionSummary(context.Context, *GetUserTransactionSummaryRequest) (*GetUserTransactionSummaryResponse, error)
@@ -589,6 +602,9 @@ func (UnimplementedWalletServer) GetWalletCreditTransactions(context.Context, *G
 }
 func (UnimplementedWalletServer) GetExchangeRates(context.Context, *GetExchangeRatesRequest) (*GetExchangeRatesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetExchangeRates not implemented")
+}
+func (UnimplementedWalletServer) GetExchangeRatesWithBaseCurrency(context.Context, *GetExchangeRatesWithBaseCurrencyRequest) (*GetExchangeRatesWithBaseCurrencyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetExchangeRatesWithBaseCurrency not implemented")
 }
 func (UnimplementedWalletServer) GetUserTransactionSummary(context.Context, *GetUserTransactionSummaryRequest) (*GetUserTransactionSummaryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserTransactionSummary not implemented")
@@ -922,6 +938,24 @@ func _Wallet_GetExchangeRates_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(WalletServer).GetExchangeRates(ctx, req.(*GetExchangeRatesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_GetExchangeRatesWithBaseCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetExchangeRatesWithBaseCurrencyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetExchangeRatesWithBaseCurrency(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetExchangeRatesWithBaseCurrency_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetExchangeRatesWithBaseCurrency(ctx, req.(*GetExchangeRatesWithBaseCurrencyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1366,6 +1400,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetExchangeRates",
 			Handler:    _Wallet_GetExchangeRates_Handler,
+		},
+		{
+			MethodName: "GetExchangeRatesWithBaseCurrency",
+			Handler:    _Wallet_GetExchangeRatesWithBaseCurrency_Handler,
 		},
 		{
 			MethodName: "GetUserTransactionSummary",
