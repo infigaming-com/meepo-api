@@ -8,6 +8,7 @@ package v1
 
 import (
 	context "context"
+	v1 "github.com/infigaming-com/meepo-api/game/service/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -55,14 +56,14 @@ type BackofficeGameClient interface {
 	ListThemes(ctx context.Context, in *ListThemesRequest, opts ...grpc.CallOption) (*ListThemesResponse, error)
 	ListCurrencies(ctx context.Context, in *ListCurrenciesRequest, opts ...grpc.CallOption) (*ListCurrenciesResponse, error)
 	ListBets(ctx context.Context, in *ListBetsRequest, opts ...grpc.CallOption) (*ListBetsResponse, error)
-	GetBetById(ctx context.Context, in *GetBetByIdRequest, opts ...grpc.CallOption) (*GetBetByIdResponse, error)
+	GetBetById(ctx context.Context, in *GetBetByIdRequest, opts ...grpc.CallOption) (*v1.GetBetByIdResponse, error)
 	GetUserBetsOverview(ctx context.Context, in *GetUserBetsOverviewRequest, opts ...grpc.CallOption) (*GetUserBetsOverviewResponse, error)
 	GetGameTransactionsForBet(ctx context.Context, in *GetGameTransactionsForBetRequest, opts ...grpc.CallOption) (*GetGameTransactionsForBetResponse, error)
 	ListGames(ctx context.Context, in *ListGamesRequest, opts ...grpc.CallOption) (*ListGamesResponse, error)
 	UpdateGame(ctx context.Context, in *UpdateGameRequest, opts ...grpc.CallOption) (*UpdateGameResponse, error)
 	UpdateProvider(ctx context.Context, in *UpdateProviderRequest, opts ...grpc.CallOption) (*UpdateProviderResponse, error)
 	ListProviderRates(ctx context.Context, in *ListProviderRatesRequest, opts ...grpc.CallOption) (*ListProviderRatesResponse, error)
-	GetGameTransactionById(ctx context.Context, in *GetGameTransactionByIdRequest, opts ...grpc.CallOption) (*GetGameTransactionByIdResponse, error)
+	GetGameTransactionById(ctx context.Context, in *GetGameTransactionByIdRequest, opts ...grpc.CallOption) (*v1.GetGameTransactionByIdResponse, error)
 }
 
 type backofficeGameClient struct {
@@ -153,9 +154,9 @@ func (c *backofficeGameClient) ListBets(ctx context.Context, in *ListBetsRequest
 	return out, nil
 }
 
-func (c *backofficeGameClient) GetBetById(ctx context.Context, in *GetBetByIdRequest, opts ...grpc.CallOption) (*GetBetByIdResponse, error) {
+func (c *backofficeGameClient) GetBetById(ctx context.Context, in *GetBetByIdRequest, opts ...grpc.CallOption) (*v1.GetBetByIdResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetBetByIdResponse)
+	out := new(v1.GetBetByIdResponse)
 	err := c.cc.Invoke(ctx, BackofficeGame_GetBetById_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -223,9 +224,9 @@ func (c *backofficeGameClient) ListProviderRates(ctx context.Context, in *ListPr
 	return out, nil
 }
 
-func (c *backofficeGameClient) GetGameTransactionById(ctx context.Context, in *GetGameTransactionByIdRequest, opts ...grpc.CallOption) (*GetGameTransactionByIdResponse, error) {
+func (c *backofficeGameClient) GetGameTransactionById(ctx context.Context, in *GetGameTransactionByIdRequest, opts ...grpc.CallOption) (*v1.GetGameTransactionByIdResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetGameTransactionByIdResponse)
+	out := new(v1.GetGameTransactionByIdResponse)
 	err := c.cc.Invoke(ctx, BackofficeGame_GetGameTransactionById_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -251,14 +252,14 @@ type BackofficeGameServer interface {
 	ListThemes(context.Context, *ListThemesRequest) (*ListThemesResponse, error)
 	ListCurrencies(context.Context, *ListCurrenciesRequest) (*ListCurrenciesResponse, error)
 	ListBets(context.Context, *ListBetsRequest) (*ListBetsResponse, error)
-	GetBetById(context.Context, *GetBetByIdRequest) (*GetBetByIdResponse, error)
+	GetBetById(context.Context, *GetBetByIdRequest) (*v1.GetBetByIdResponse, error)
 	GetUserBetsOverview(context.Context, *GetUserBetsOverviewRequest) (*GetUserBetsOverviewResponse, error)
 	GetGameTransactionsForBet(context.Context, *GetGameTransactionsForBetRequest) (*GetGameTransactionsForBetResponse, error)
 	ListGames(context.Context, *ListGamesRequest) (*ListGamesResponse, error)
 	UpdateGame(context.Context, *UpdateGameRequest) (*UpdateGameResponse, error)
 	UpdateProvider(context.Context, *UpdateProviderRequest) (*UpdateProviderResponse, error)
 	ListProviderRates(context.Context, *ListProviderRatesRequest) (*ListProviderRatesResponse, error)
-	GetGameTransactionById(context.Context, *GetGameTransactionByIdRequest) (*GetGameTransactionByIdResponse, error)
+	GetGameTransactionById(context.Context, *GetGameTransactionByIdRequest) (*v1.GetGameTransactionByIdResponse, error)
 	mustEmbedUnimplementedBackofficeGameServer()
 }
 
@@ -293,7 +294,7 @@ func (UnimplementedBackofficeGameServer) ListCurrencies(context.Context, *ListCu
 func (UnimplementedBackofficeGameServer) ListBets(context.Context, *ListBetsRequest) (*ListBetsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBets not implemented")
 }
-func (UnimplementedBackofficeGameServer) GetBetById(context.Context, *GetBetByIdRequest) (*GetBetByIdResponse, error) {
+func (UnimplementedBackofficeGameServer) GetBetById(context.Context, *GetBetByIdRequest) (*v1.GetBetByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBetById not implemented")
 }
 func (UnimplementedBackofficeGameServer) GetUserBetsOverview(context.Context, *GetUserBetsOverviewRequest) (*GetUserBetsOverviewResponse, error) {
@@ -314,7 +315,7 @@ func (UnimplementedBackofficeGameServer) UpdateProvider(context.Context, *Update
 func (UnimplementedBackofficeGameServer) ListProviderRates(context.Context, *ListProviderRatesRequest) (*ListProviderRatesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListProviderRates not implemented")
 }
-func (UnimplementedBackofficeGameServer) GetGameTransactionById(context.Context, *GetGameTransactionByIdRequest) (*GetGameTransactionByIdResponse, error) {
+func (UnimplementedBackofficeGameServer) GetGameTransactionById(context.Context, *GetGameTransactionByIdRequest) (*v1.GetGameTransactionByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGameTransactionById not implemented")
 }
 func (UnimplementedBackofficeGameServer) mustEmbedUnimplementedBackofficeGameServer() {}

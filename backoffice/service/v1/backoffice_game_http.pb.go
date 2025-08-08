@@ -10,6 +10,7 @@ import (
 	context "context"
 	http "github.com/go-kratos/kratos/v2/transport/http"
 	binding "github.com/go-kratos/kratos/v2/transport/http/binding"
+	v1 "github.com/infigaming-com/meepo-api/game/service/v1"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -37,8 +38,8 @@ const OperationBackofficeGameUpdateGame = "/api.backoffice.service.v1.Backoffice
 const OperationBackofficeGameUpdateProvider = "/api.backoffice.service.v1.BackofficeGame/UpdateProvider"
 
 type BackofficeGameHTTPServer interface {
-	GetBetById(context.Context, *GetBetByIdRequest) (*GetBetByIdResponse, error)
-	GetGameTransactionById(context.Context, *GetGameTransactionByIdRequest) (*GetGameTransactionByIdResponse, error)
+	GetBetById(context.Context, *GetBetByIdRequest) (*v1.GetBetByIdResponse, error)
+	GetGameTransactionById(context.Context, *GetGameTransactionByIdRequest) (*v1.GetGameTransactionByIdResponse, error)
 	GetGameTransactionsForBet(context.Context, *GetGameTransactionsForBetRequest) (*GetGameTransactionsForBetResponse, error)
 	GetUserBetsOverview(context.Context, *GetUserBetsOverviewRequest) (*GetUserBetsOverviewResponse, error)
 	ListBets(context.Context, *ListBetsRequest) (*ListBetsResponse, error)
@@ -274,7 +275,7 @@ func _BackofficeGame_GetBetById0_HTTP_Handler(srv BackofficeGameHTTPServer) func
 		if err != nil {
 			return err
 		}
-		reply := out.(*GetBetByIdResponse)
+		reply := out.(*v1.GetBetByIdResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -428,14 +429,14 @@ func _BackofficeGame_GetGameTransactionById0_HTTP_Handler(srv BackofficeGameHTTP
 		if err != nil {
 			return err
 		}
-		reply := out.(*GetGameTransactionByIdResponse)
+		reply := out.(*v1.GetGameTransactionByIdResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
 type BackofficeGameHTTPClient interface {
-	GetBetById(ctx context.Context, req *GetBetByIdRequest, opts ...http.CallOption) (rsp *GetBetByIdResponse, err error)
-	GetGameTransactionById(ctx context.Context, req *GetGameTransactionByIdRequest, opts ...http.CallOption) (rsp *GetGameTransactionByIdResponse, err error)
+	GetBetById(ctx context.Context, req *GetBetByIdRequest, opts ...http.CallOption) (rsp *v1.GetBetByIdResponse, err error)
+	GetGameTransactionById(ctx context.Context, req *GetGameTransactionByIdRequest, opts ...http.CallOption) (rsp *v1.GetGameTransactionByIdResponse, err error)
 	GetGameTransactionsForBet(ctx context.Context, req *GetGameTransactionsForBetRequest, opts ...http.CallOption) (rsp *GetGameTransactionsForBetResponse, err error)
 	GetUserBetsOverview(ctx context.Context, req *GetUserBetsOverviewRequest, opts ...http.CallOption) (rsp *GetUserBetsOverviewResponse, err error)
 	ListBets(ctx context.Context, req *ListBetsRequest, opts ...http.CallOption) (rsp *ListBetsResponse, err error)
@@ -460,8 +461,8 @@ func NewBackofficeGameHTTPClient(client *http.Client) BackofficeGameHTTPClient {
 	return &BackofficeGameHTTPClientImpl{client}
 }
 
-func (c *BackofficeGameHTTPClientImpl) GetBetById(ctx context.Context, in *GetBetByIdRequest, opts ...http.CallOption) (*GetBetByIdResponse, error) {
-	var out GetBetByIdResponse
+func (c *BackofficeGameHTTPClientImpl) GetBetById(ctx context.Context, in *GetBetByIdRequest, opts ...http.CallOption) (*v1.GetBetByIdResponse, error) {
+	var out v1.GetBetByIdResponse
 	pattern := "/v1/backoffice/game/bets/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameGetBetById))
@@ -473,8 +474,8 @@ func (c *BackofficeGameHTTPClientImpl) GetBetById(ctx context.Context, in *GetBe
 	return &out, nil
 }
 
-func (c *BackofficeGameHTTPClientImpl) GetGameTransactionById(ctx context.Context, in *GetGameTransactionByIdRequest, opts ...http.CallOption) (*GetGameTransactionByIdResponse, error) {
-	var out GetGameTransactionByIdResponse
+func (c *BackofficeGameHTTPClientImpl) GetGameTransactionById(ctx context.Context, in *GetGameTransactionByIdRequest, opts ...http.CallOption) (*v1.GetGameTransactionByIdResponse, error) {
+	var out v1.GetGameTransactionByIdResponse
 	pattern := "/v1/backoffice/game/transaction/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameGetGameTransactionById))

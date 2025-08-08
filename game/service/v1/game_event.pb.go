@@ -109,6 +109,282 @@ func (*EventResponse) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_event_proto_rawDescGZIP(), []int{1}
 }
 
+type GameTransactionEvent struct {
+	state                        protoimpl.MessageState `protogen:"open.v1"`
+	OperatorId                   int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorName                 string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	ProviderId                   string                 `protobuf:"bytes,3,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
+	ProviderName                 string                 `protobuf:"bytes,4,opt,name=provider_name,json=providerName,proto3" json:"provider_name,omitempty"`
+	UserId                       int64                  `protobuf:"varint,5,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	GameId                       string                 `protobuf:"bytes,6,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
+	GameName                     string                 `protobuf:"bytes,7,opt,name=game_name,json=gameName,proto3" json:"game_name,omitempty"`
+	GameAction                   string                 `protobuf:"bytes,8,opt,name=game_action,json=gameAction,proto3" json:"game_action,omitempty"`
+	RoundId                      int64                  `protobuf:"varint,9,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
+	BetId                        int64                  `protobuf:"varint,10,opt,name=bet_id,json=betId,proto3" json:"bet_id,omitempty"`
+	TransactionId                int64                  `protobuf:"varint,11,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	FeeGroup                     string                 `protobuf:"bytes,12,opt,name=fee_group,json=feeGroup,proto3" json:"fee_group,omitempty"`
+	Currency                     string                 `protobuf:"bytes,13,opt,name=currency,proto3" json:"currency,omitempty"`
+	SettlementCurrency           string                 `protobuf:"bytes,14,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
+	ExchangeRate                 string                 `protobuf:"bytes,15,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
+	AmountCurrency               string                 `protobuf:"bytes,16,opt,name=amount_currency,json=amountCurrency,proto3" json:"amount_currency,omitempty"`
+	AmountSettlementCurrency     string                 `protobuf:"bytes,17,opt,name=amount_settlement_currency,json=amountSettlementCurrency,proto3" json:"amount_settlement_currency,omitempty"`
+	AmountUsd                    string                 `protobuf:"bytes,18,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
+	AmountReportingCurrency      string                 `protobuf:"bytes,19,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
+	CashAmountCurrency           string                 `protobuf:"bytes,20,opt,name=cash_amount_currency,json=cashAmountCurrency,proto3" json:"cash_amount_currency,omitempty"`
+	CashAmountSettlementCurrency string                 `protobuf:"bytes,21,opt,name=cash_amount_settlement_currency,json=cashAmountSettlementCurrency,proto3" json:"cash_amount_settlement_currency,omitempty"`
+	CashAmountUsd                string                 `protobuf:"bytes,22,opt,name=cash_amount_usd,json=cashAmountUsd,proto3" json:"cash_amount_usd,omitempty"`
+	CashAmountReportingCurrency  string                 `protobuf:"bytes,23,opt,name=cash_amount_reporting_currency,json=cashAmountReportingCurrency,proto3" json:"cash_amount_reporting_currency,omitempty"`
+	Turnover                     string                 `protobuf:"bytes,24,opt,name=turnover,proto3" json:"turnover,omitempty"`
+	TurnoverUsd                  string                 `protobuf:"bytes,25,opt,name=turnover_usd,json=turnoverUsd,proto3" json:"turnover_usd,omitempty"`
+	TurnoverReportingCurrency    string                 `protobuf:"bytes,26,opt,name=turnover_reporting_currency,json=turnoverReportingCurrency,proto3" json:"turnover_reporting_currency,omitempty"`
+	CreatedAt                    int64                  `protobuf:"varint,27,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	SystemOperatorId             int64                  `protobuf:"varint,28,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
+	RetailerOperatorId           int64                  `protobuf:"varint,29,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	CompanyOperatorId            int64                  `protobuf:"varint,30,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
+}
+
+func (x *GameTransactionEvent) Reset() {
+	*x = GameTransactionEvent{}
+	mi := &file_game_service_v1_game_event_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GameTransactionEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GameTransactionEvent) ProtoMessage() {}
+
+func (x *GameTransactionEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_game_service_v1_game_event_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GameTransactionEvent.ProtoReflect.Descriptor instead.
+func (*GameTransactionEvent) Descriptor() ([]byte, []int) {
+	return file_game_service_v1_game_event_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *GameTransactionEvent) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *GameTransactionEvent) GetOperatorName() string {
+	if x != nil {
+		return x.OperatorName
+	}
+	return ""
+}
+
+func (x *GameTransactionEvent) GetProviderId() string {
+	if x != nil {
+		return x.ProviderId
+	}
+	return ""
+}
+
+func (x *GameTransactionEvent) GetProviderName() string {
+	if x != nil {
+		return x.ProviderName
+	}
+	return ""
+}
+
+func (x *GameTransactionEvent) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *GameTransactionEvent) GetGameId() string {
+	if x != nil {
+		return x.GameId
+	}
+	return ""
+}
+
+func (x *GameTransactionEvent) GetGameName() string {
+	if x != nil {
+		return x.GameName
+	}
+	return ""
+}
+
+func (x *GameTransactionEvent) GetGameAction() string {
+	if x != nil {
+		return x.GameAction
+	}
+	return ""
+}
+
+func (x *GameTransactionEvent) GetRoundId() int64 {
+	if x != nil {
+		return x.RoundId
+	}
+	return 0
+}
+
+func (x *GameTransactionEvent) GetBetId() int64 {
+	if x != nil {
+		return x.BetId
+	}
+	return 0
+}
+
+func (x *GameTransactionEvent) GetTransactionId() int64 {
+	if x != nil {
+		return x.TransactionId
+	}
+	return 0
+}
+
+func (x *GameTransactionEvent) GetFeeGroup() string {
+	if x != nil {
+		return x.FeeGroup
+	}
+	return ""
+}
+
+func (x *GameTransactionEvent) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *GameTransactionEvent) GetSettlementCurrency() string {
+	if x != nil {
+		return x.SettlementCurrency
+	}
+	return ""
+}
+
+func (x *GameTransactionEvent) GetExchangeRate() string {
+	if x != nil {
+		return x.ExchangeRate
+	}
+	return ""
+}
+
+func (x *GameTransactionEvent) GetAmountCurrency() string {
+	if x != nil {
+		return x.AmountCurrency
+	}
+	return ""
+}
+
+func (x *GameTransactionEvent) GetAmountSettlementCurrency() string {
+	if x != nil {
+		return x.AmountSettlementCurrency
+	}
+	return ""
+}
+
+func (x *GameTransactionEvent) GetAmountUsd() string {
+	if x != nil {
+		return x.AmountUsd
+	}
+	return ""
+}
+
+func (x *GameTransactionEvent) GetAmountReportingCurrency() string {
+	if x != nil {
+		return x.AmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *GameTransactionEvent) GetCashAmountCurrency() string {
+	if x != nil {
+		return x.CashAmountCurrency
+	}
+	return ""
+}
+
+func (x *GameTransactionEvent) GetCashAmountSettlementCurrency() string {
+	if x != nil {
+		return x.CashAmountSettlementCurrency
+	}
+	return ""
+}
+
+func (x *GameTransactionEvent) GetCashAmountUsd() string {
+	if x != nil {
+		return x.CashAmountUsd
+	}
+	return ""
+}
+
+func (x *GameTransactionEvent) GetCashAmountReportingCurrency() string {
+	if x != nil {
+		return x.CashAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *GameTransactionEvent) GetTurnover() string {
+	if x != nil {
+		return x.Turnover
+	}
+	return ""
+}
+
+func (x *GameTransactionEvent) GetTurnoverUsd() string {
+	if x != nil {
+		return x.TurnoverUsd
+	}
+	return ""
+}
+
+func (x *GameTransactionEvent) GetTurnoverReportingCurrency() string {
+	if x != nil {
+		return x.TurnoverReportingCurrency
+	}
+	return ""
+}
+
+func (x *GameTransactionEvent) GetCreatedAt() int64 {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return 0
+}
+
+func (x *GameTransactionEvent) GetSystemOperatorId() int64 {
+	if x != nil {
+		return x.SystemOperatorId
+	}
+	return 0
+}
+
+func (x *GameTransactionEvent) GetRetailerOperatorId() int64 {
+	if x != nil {
+		return x.RetailerOperatorId
+	}
+	return 0
+}
+
+func (x *GameTransactionEvent) GetCompanyOperatorId() int64 {
+	if x != nil {
+		return x.CompanyOperatorId
+	}
+	return 0
+}
+
 var File_game_service_v1_game_event_proto protoreflect.FileDescriptor
 
 const file_game_service_v1_game_event_proto_rawDesc = "" +
@@ -118,7 +394,44 @@ const file_game_service_v1_game_event_proto_rawDesc = "" +
 	"\x0fsubscription_id\x18\x01 \x01(\tR\x0esubscriptionId\x12\x1d\n" +
 	"\n" +
 	"event_data\x18\x02 \x01(\fR\teventData\"\x0f\n" +
-	"\rEventResponse2]\n" +
+	"\rEventResponse\"\xd0\t\n" +
+	"\x14GameTransactionEvent\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
+	"operatorId\x12#\n" +
+	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12\x1f\n" +
+	"\vprovider_id\x18\x03 \x01(\tR\n" +
+	"providerId\x12#\n" +
+	"\rprovider_name\x18\x04 \x01(\tR\fproviderName\x12\x17\n" +
+	"\auser_id\x18\x05 \x01(\x03R\x06userId\x12\x17\n" +
+	"\agame_id\x18\x06 \x01(\tR\x06gameId\x12\x1b\n" +
+	"\tgame_name\x18\a \x01(\tR\bgameName\x12\x1f\n" +
+	"\vgame_action\x18\b \x01(\tR\n" +
+	"gameAction\x12\x19\n" +
+	"\bround_id\x18\t \x01(\x03R\aroundId\x12\x15\n" +
+	"\x06bet_id\x18\n" +
+	" \x01(\x03R\x05betId\x12%\n" +
+	"\x0etransaction_id\x18\v \x01(\x03R\rtransactionId\x12\x1b\n" +
+	"\tfee_group\x18\f \x01(\tR\bfeeGroup\x12\x1a\n" +
+	"\bcurrency\x18\r \x01(\tR\bcurrency\x12/\n" +
+	"\x13settlement_currency\x18\x0e \x01(\tR\x12settlementCurrency\x12#\n" +
+	"\rexchange_rate\x18\x0f \x01(\tR\fexchangeRate\x12'\n" +
+	"\x0famount_currency\x18\x10 \x01(\tR\x0eamountCurrency\x12<\n" +
+	"\x1aamount_settlement_currency\x18\x11 \x01(\tR\x18amountSettlementCurrency\x12\x1d\n" +
+	"\n" +
+	"amount_usd\x18\x12 \x01(\tR\tamountUsd\x12:\n" +
+	"\x19amount_reporting_currency\x18\x13 \x01(\tR\x17amountReportingCurrency\x120\n" +
+	"\x14cash_amount_currency\x18\x14 \x01(\tR\x12cashAmountCurrency\x12E\n" +
+	"\x1fcash_amount_settlement_currency\x18\x15 \x01(\tR\x1ccashAmountSettlementCurrency\x12&\n" +
+	"\x0fcash_amount_usd\x18\x16 \x01(\tR\rcashAmountUsd\x12C\n" +
+	"\x1ecash_amount_reporting_currency\x18\x17 \x01(\tR\x1bcashAmountReportingCurrency\x12\x1a\n" +
+	"\bturnover\x18\x18 \x01(\tR\bturnover\x12!\n" +
+	"\fturnover_usd\x18\x19 \x01(\tR\vturnoverUsd\x12>\n" +
+	"\x1bturnover_reporting_currency\x18\x1a \x01(\tR\x19turnoverReportingCurrency\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\x1b \x01(\x03R\tcreatedAt\x12,\n" +
+	"\x12system_operator_id\x18\x1c \x01(\x03R\x10systemOperatorId\x120\n" +
+	"\x14retailer_operator_id\x18\x1d \x01(\x03R\x12retailerOperatorId\x12.\n" +
+	"\x13company_operator_id\x18\x1e \x01(\x03R\x11companyOperatorId2]\n" +
 	"\tGameEvent\x12P\n" +
 	"\x05Event\x12!.api.game.service.v1.EventRequest\x1a\".api.game.service.v1.EventResponse\"\x00BO\n" +
 	"\x13api.game.service.v1P\x01Z6github.com/infigaming-com/meepo-api/game/service/v1;v1b\x06proto3"
@@ -135,10 +448,11 @@ func file_game_service_v1_game_event_proto_rawDescGZIP() []byte {
 	return file_game_service_v1_game_event_proto_rawDescData
 }
 
-var file_game_service_v1_game_event_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_game_service_v1_game_event_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_game_service_v1_game_event_proto_goTypes = []any{
-	(*EventRequest)(nil),  // 0: api.game.service.v1.EventRequest
-	(*EventResponse)(nil), // 1: api.game.service.v1.EventResponse
+	(*EventRequest)(nil),         // 0: api.game.service.v1.EventRequest
+	(*EventResponse)(nil),        // 1: api.game.service.v1.EventResponse
+	(*GameTransactionEvent)(nil), // 2: api.game.service.v1.GameTransactionEvent
 }
 var file_game_service_v1_game_event_proto_depIdxs = []int32{
 	0, // 0: api.game.service.v1.GameEvent.Event:input_type -> api.game.service.v1.EventRequest
@@ -161,7 +475,7 @@ func file_game_service_v1_game_event_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_game_service_v1_game_event_proto_rawDesc), len(file_game_service_v1_game_event_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
