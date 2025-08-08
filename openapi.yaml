@@ -1854,7 +1854,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetGameDataRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListGameDataRequest'
                 required: true
             responses:
                 "200":
@@ -1862,7 +1862,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetGameDataResponse'
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListGameDataResponse'
     /v1/backoffice/report/player-game-data/get:
         post:
             tags:
@@ -1890,7 +1890,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameDataRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListPlayerGameDataRequest'
                 required: true
             responses:
                 "200":
@@ -1898,7 +1898,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameDataResponse'
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListPlayerGameDataResponse'
     /v1/backoffice/report/register-retention/list:
         post:
             tags:
@@ -4078,9 +4078,13 @@ components:
         api.backoffice.service.v1.GameData_Data:
             type: object
             properties:
-                ggr:
+                ggrUsd:
                     type: string
-                ngr:
+                ngrUsd:
+                    type: string
+                ggrReportingCurrency:
+                    type: string
+                ngrReportingCurrency:
                     type: string
         api.backoffice.service.v1.GameTransaction_Amount:
             type: object
@@ -4367,104 +4371,6 @@ components:
                     additionalProperties:
                         type: string
                     description: map key is source currency, value is target currency rate
-        api.backoffice.service.v1.GetGameDataRequest:
-            type: object
-            properties:
-                timeRange:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                providerIds:
-                    type: array
-                    items:
-                        type: string
-                gameCategories:
-                    type: array
-                    items:
-                        type: string
-                gameNames:
-                    type: array
-                    items:
-                        type: string
-                gameIds:
-                    type: array
-                    items:
-                        type: string
-                currencies:
-                    type: array
-                    items:
-                        type: string
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
-        api.backoffice.service.v1.GetGameDataResponse:
-            type: object
-            properties:
-                list:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.GetGameDataResponse_List'
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
-                total:
-                    type: integer
-                    format: int32
-        api.backoffice.service.v1.GetGameDataResponse_List:
-            type: object
-            properties:
-                date:
-                    type: string
-                operatorName:
-                    type: string
-                companyOperatorName:
-                    type: string
-                retailerOperatorName:
-                    type: string
-                systemOperatorName:
-                    type: string
-                provider:
-                    type: string
-                gameType:
-                    type: string
-                gameName:
-                    type: string
-                gameId:
-                    type: string
-                playerCount:
-                    type: integer
-                    format: int32
-                turnover:
-                    type: string
-                turnoverUsd:
-                    type: string
-                turnoverPercentage:
-                    type: string
-                winAmount:
-                    type: string
-                winAmountUsd:
-                    type: string
-                ggr:
-                    type: string
-                ggrUsd:
-                    type: string
-                ggrPercentage:
-                    type: string
-                betCount:
-                    type: integer
-                    format: int32
-                averageBetAmount:
-                    type: string
-                rtpPercentage:
-                    type: string
-                settlementCurrency:
-                    type: string
         api.backoffice.service.v1.GetGameSummaryRequest:
             type: object
             properties:
@@ -4495,18 +4401,26 @@ components:
         api.backoffice.service.v1.GetGameSummaryResponse:
             type: object
             properties:
-                turnover:
+                turnoverUsd:
                     type: string
-                winAmount:
+                winAmountUsd:
                     type: string
-                ggr:
+                ggrUsd:
                     type: string
                 betCount:
                     type: integer
                     format: int32
-                averageBetAmount:
+                averageBetAmountUsd:
                     type: string
                 rtpPercentage:
+                    type: string
+                turnoverReportingCurrency:
+                    type: string
+                winAmountReportingCurrency:
+                    type: string
+                ggrReportingCurrency:
+                    type: string
+                averageBetAmountReportingCurrency:
                     type: string
         api.backoffice.service.v1.GetGameTransactionByIdRequest:
             type: object
@@ -4942,107 +4856,6 @@ components:
                     format: int32
                 enabled:
                     type: boolean
-        api.backoffice.service.v1.GetPlayerGameDataRequest:
-            type: object
-            properties:
-                timeRange:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                providerIds:
-                    type: array
-                    items:
-                        type: string
-                gameCategories:
-                    type: array
-                    items:
-                        type: string
-                gameTags:
-                    type: array
-                    items:
-                        type: string
-                gameNames:
-                    type: array
-                    items:
-                        type: string
-                gameIds:
-                    type: array
-                    items:
-                        type: string
-                currencies:
-                    type: array
-                    items:
-                        type: string
-                userIds:
-                    type: array
-                    items:
-                        type: string
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
-        api.backoffice.service.v1.GetPlayerGameDataResponse:
-            type: object
-            properties:
-                list:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameDataResponse_List'
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
-                total:
-                    type: integer
-                    format: int32
-        api.backoffice.service.v1.GetPlayerGameDataResponse_List:
-            type: object
-            properties:
-                date:
-                    type: string
-                operatorName:
-                    type: string
-                companyOperatorName:
-                    type: string
-                retailerOperatorName:
-                    type: string
-                systemOperatorName:
-                    type: string
-                provider:
-                    type: string
-                gameType:
-                    type: string
-                gameId:
-                    type: string
-                gameName:
-                    type: string
-                userId:
-                    type: string
-                turnover:
-                    type: string
-                turnoverUsd:
-                    type: string
-                winAmount:
-                    type: string
-                winAmountUsd:
-                    type: string
-                ggr:
-                    type: string
-                ggrUsd:
-                    type: string
-                rtpPercentage:
-                    type: string
-                betCount:
-                    type: integer
-                    format: int32
-                averageBetAmount:
-                    type: string
-                settlementCurrency:
-                    type: string
         api.backoffice.service.v1.GetPlayerGameSummaryRequest:
             type: object
             properties:
@@ -5081,18 +4894,26 @@ components:
         api.backoffice.service.v1.GetPlayerGameSummaryResponse:
             type: object
             properties:
-                turnover:
+                turnoverUsd:
                     type: string
-                winAmount:
+                winAmountUsd:
                     type: string
-                ggr:
+                ggrUsd:
                     type: string
                 betCount:
                     type: integer
                     format: int32
-                averageBetAmount:
+                averageBetAmountUsd:
                     type: string
                 rtpPercentage:
+                    type: string
+                turnoverReportingCurrency:
+                    type: string
+                winAmountReportingCurrency:
+                    type: string
+                ggrReportingCurrency:
+                    type: string
+                averageBetAmountReportingCurrency:
                     type: string
         api.backoffice.service.v1.GetSummaryRequest:
             type: object
@@ -6602,6 +6423,110 @@ components:
                     type: array
                     items:
                         type: string
+        api.backoffice.service.v1.ListGameDataRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                providerIds:
+                    type: array
+                    items:
+                        type: string
+                gameCategories:
+                    type: array
+                    items:
+                        type: string
+                gameNames:
+                    type: array
+                    items:
+                        type: string
+                gameIds:
+                    type: array
+                    items:
+                        type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListGameDataResponse:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListGameDataResponse_List'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListGameDataResponse_List:
+            type: object
+            properties:
+                date:
+                    type: string
+                operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
+                provider:
+                    type: string
+                gameType:
+                    type: string
+                gameName:
+                    type: string
+                gameId:
+                    type: string
+                playerCount:
+                    type: integer
+                    format: int32
+                turnover:
+                    type: string
+                turnoverUsd:
+                    type: string
+                turnoverPercentage:
+                    type: string
+                winAmount:
+                    type: string
+                winAmountUsd:
+                    type: string
+                ggr:
+                    type: string
+                ggrUsd:
+                    type: string
+                ggrPercentage:
+                    type: string
+                betCount:
+                    type: integer
+                    format: int32
+                averageBetAmount:
+                    type: string
+                rtpPercentage:
+                    type: string
+                settlementCurrency:
+                    type: string
+                turnoverReportingCurrency:
+                    type: string
+                winAmountReportingCurrency:
+                    type: string
+                ggrReportingCurrency:
+                    type: string
         api.backoffice.service.v1.ListGamesRequest:
             type: object
             properties:
@@ -7095,6 +7020,113 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.ListPlayerGameDataRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                providerIds:
+                    type: array
+                    items:
+                        type: string
+                gameCategories:
+                    type: array
+                    items:
+                        type: string
+                gameTags:
+                    type: array
+                    items:
+                        type: string
+                gameNames:
+                    type: array
+                    items:
+                        type: string
+                gameIds:
+                    type: array
+                    items:
+                        type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                userIds:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListPlayerGameDataResponse:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListPlayerGameDataResponse_List'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListPlayerGameDataResponse_List:
+            type: object
+            properties:
+                date:
+                    type: string
+                operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
+                provider:
+                    type: string
+                gameType:
+                    type: string
+                gameId:
+                    type: string
+                gameName:
+                    type: string
+                userId:
+                    type: string
+                turnover:
+                    type: string
+                turnoverUsd:
+                    type: string
+                winAmount:
+                    type: string
+                winAmountUsd:
+                    type: string
+                ggr:
+                    type: string
+                ggrUsd:
+                    type: string
+                rtpPercentage:
+                    type: string
+                betCount:
+                    type: integer
+                    format: int32
+                averageBetAmount:
+                    type: string
+                settlementCurrency:
+                    type: string
+                turnoverReportingCurrency:
+                    type: string
+                winAmountReportingCurrency:
+                    type: string
+                ggrReportingCurrency:
+                    type: string
         api.backoffice.service.v1.ListProviderRatesRequest:
             type: object
             properties:
@@ -8490,9 +8522,13 @@ components:
         api.backoffice.service.v1.PaymentData_Data:
             type: object
             properties:
-                deposit:
+                depositUsd:
                     type: string
-                withdrawal:
+                withdrawalUsd:
+                    type: string
+                depositReportingCurrency:
+                    type: string
+                withdrawalReportingCurrency:
                     type: string
         api.backoffice.service.v1.Permission:
             type: object

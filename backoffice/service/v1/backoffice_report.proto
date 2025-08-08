@@ -28,7 +28,7 @@ service BackofficeReport {
           body: "*"
       };
   }
-  rpc ListGameData(GetGameDataRequest) returns (GetGameDataResponse) {
+  rpc ListGameData(ListGameDataRequest) returns (ListGameDataResponse) {
       option (google.api.http) = {
           post: "/v1/backoffice/report/game-data/list"
           body: "*"
@@ -40,7 +40,7 @@ service BackofficeReport {
           body: "*"
       };
   }
-  rpc ListPlayerGameData(GetPlayerGameDataRequest) returns (GetPlayerGameDataResponse) {
+  rpc ListPlayerGameData(ListPlayerGameDataRequest) returns (ListPlayerGameDataResponse) {
       option (google.api.http) = {
           post: "/v1/backoffice/report/player-game-data/list"
           body: "*"
@@ -233,15 +233,19 @@ message GetGameSummaryRequest {
 }
 
 message GetGameSummaryResponse {
-	string turnover = 1;
-	string win_amount =  2;
-	string ggr = 3;
+	string turnover_usd = 1; // usd
+	string win_amount_usd = 2; // usd
+	string ggr_usd = 3; // usd
 	int32 bet_count = 4;
-	string average_bet_amount = 5;
+	string average_bet_amount_usd = 5; // usd
 	string rtp_percentage = 6;
+	string turnover_reporting_currency = 7; // reporting currency
+	string win_amount_reporting_currency = 8; // reporting currency
+	string ggr_reporting_currency = 9; // reporting currency
+	string average_bet_amount_reporting_currency = 10; // reporting currency
 }
 
-message GetGameDataRequest {
+message ListGameDataRequest {
 	TimeRange time_range = 1;
 	api.common.OperatorContextFilters operator_context_filters = 2;
 	repeated string provider_ids = 3;
@@ -253,7 +257,7 @@ message GetGameDataRequest {
 	int32 page_size = 9;
 }
 
-message GetGameDataResponse {
+message ListGameDataResponse {
 	message List {
 		string date = 1;
 		string operator_name = 2;
@@ -277,6 +281,9 @@ message GetGameDataResponse {
 		string average_bet_amount = 20;
 		string rtp_percentage = 21;
 		string settlement_currency = 22;
+		string turnover_reporting_currency = 23; // reporting currency
+		string win_amount_reporting_currency = 24; // reporting currency
+		string ggr_reporting_currency = 25; // reporting currency
 	}
 	repeated List list = 7;
 	int32 page = 8;
@@ -297,15 +304,19 @@ message GetPlayerGameSummaryRequest {
 }
 
 message GetPlayerGameSummaryResponse {
-	string turnover = 1;
-	string win_amount = 2;
-	string ggr = 3;
+	string turnover_usd = 1; // usd
+	string win_amount_usd = 2; // usd
+	string ggr_usd = 3; // usd
 	int32 bet_count = 4;
-	string average_bet_amount = 5;
+	string average_bet_amount_usd = 5; // usd
 	string rtp_percentage = 6;
+	string turnover_reporting_currency = 7; // reporting currency
+	string win_amount_reporting_currency = 8; // reporting currency
+	string ggr_reporting_currency = 9; // reporting currency
+	string average_bet_amount_reporting_currency = 10; // reporting currency
 }
 
-message GetPlayerGameDataRequest {
+message ListPlayerGameDataRequest {
 	TimeRange time_range = 1;
 	api.common.OperatorContextFilters operator_context_filters = 2;
 	repeated string provider_ids = 3;
@@ -319,7 +330,7 @@ message GetPlayerGameDataRequest {
 	int32 page_size = 11;
 }
 
-message GetPlayerGameDataResponse {
+message ListPlayerGameDataResponse {
 	message List {
 		string date = 1;
 		string operator_name = 2;
@@ -341,6 +352,9 @@ message GetPlayerGameDataResponse {
 		int32 bet_count = 18;
 		string average_bet_amount = 19;
 		string settlement_currency = 20;
+		string turnover_reporting_currency = 21; // reporting currency
+		string win_amount_reporting_currency = 22; // reporting currency
+		string ggr_reporting_currency = 23; // reporting currency
 	}
 	repeated List list = 7;
 	int32 page = 8;
