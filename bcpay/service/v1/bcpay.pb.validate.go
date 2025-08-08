@@ -35,50 +35,64 @@ var (
 	_ = sort.Sort
 )
 
-// Validate checks the field values on GetBankAccountRequest with the rules
+// Validate checks the field values on CreateDepositRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetBankAccountRequest) Validate() error {
+func (m *CreateDepositRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetBankAccountRequest with the rules
+// ValidateAll checks the field values on CreateDepositRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// GetBankAccountRequestMultiError, or nil if none found.
-func (m *GetBankAccountRequest) ValidateAll() error {
+// CreateDepositRequestMultiError, or nil if none found.
+func (m *CreateDepositRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetBankAccountRequest) validate(all bool) error {
+func (m *CreateDepositRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
-
-	// no validation rules for OperatorId
 
 	// no validation rules for MerchantId
 
-	// no validation rules for PayerId
+	// no validation rules for UserId
+
+	// no validation rules for UserName
+
+	// no validation rules for Currency
+
+	// no validation rules for Country
 
 	// no validation rules for NotifyUrl
 
+	// no validation rules for Amount
+
+	// no validation rules for BankAccount
+
+	// no validation rules for BankAccountFirstname
+
+	// no validation rules for BankAccountLastname
+
+	// no validation rules for BankIban
+
 	if len(errors) > 0 {
-		return GetBankAccountRequestMultiError(errors)
+		return CreateDepositRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetBankAccountRequestMultiError is an error wrapping multiple validation
-// errors returned by GetBankAccountRequest.ValidateAll() if the designated
+// CreateDepositRequestMultiError is an error wrapping multiple validation
+// errors returned by CreateDepositRequest.ValidateAll() if the designated
 // constraints aren't met.
-type GetBankAccountRequestMultiError []error
+type CreateDepositRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetBankAccountRequestMultiError) Error() string {
+func (m CreateDepositRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -87,11 +101,11 @@ func (m GetBankAccountRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetBankAccountRequestMultiError) AllErrors() []error { return m }
+func (m CreateDepositRequestMultiError) AllErrors() []error { return m }
 
-// GetBankAccountRequestValidationError is the validation error returned by
-// GetBankAccountRequest.Validate if the designated constraints aren't met.
-type GetBankAccountRequestValidationError struct {
+// CreateDepositRequestValidationError is the validation error returned by
+// CreateDepositRequest.Validate if the designated constraints aren't met.
+type CreateDepositRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -99,24 +113,24 @@ type GetBankAccountRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetBankAccountRequestValidationError) Field() string { return e.field }
+func (e CreateDepositRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetBankAccountRequestValidationError) Reason() string { return e.reason }
+func (e CreateDepositRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetBankAccountRequestValidationError) Cause() error { return e.cause }
+func (e CreateDepositRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetBankAccountRequestValidationError) Key() bool { return e.key }
+func (e CreateDepositRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetBankAccountRequestValidationError) ErrorName() string {
-	return "GetBankAccountRequestValidationError"
+func (e CreateDepositRequestValidationError) ErrorName() string {
+	return "CreateDepositRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetBankAccountRequestValidationError) Error() string {
+func (e CreateDepositRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -128,14 +142,14 @@ func (e GetBankAccountRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetBankAccountRequest.%s: %s%s",
+		"invalid %sCreateDepositRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetBankAccountRequestValidationError{}
+var _ error = CreateDepositRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -143,52 +157,54 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetBankAccountRequestValidationError{}
+} = CreateDepositRequestValidationError{}
 
-// Validate checks the field values on GetBankAccountResponse with the rules
+// Validate checks the field values on CreateDepositResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetBankAccountResponse) Validate() error {
+func (m *CreateDepositResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetBankAccountResponse with the rules
+// ValidateAll checks the field values on CreateDepositResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// GetBankAccountResponseMultiError, or nil if none found.
-func (m *GetBankAccountResponse) ValidateAll() error {
+// CreateDepositResponseMultiError, or nil if none found.
+func (m *CreateDepositResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetBankAccountResponse) validate(all bool) error {
+func (m *CreateDepositResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	// no validation rules for NotifyUrl
+	// no validation rules for TransactionID
 
-	// no validation rules for ReferenceNumber
+	// no validation rules for DepositReference
+
+	// no validation rules for BankAccount
 
 	// no validation rules for BankAccountName
 
-	// no validation rules for BankAccountNumber
+	// no validation rules for BankIban
 
 	if len(errors) > 0 {
-		return GetBankAccountResponseMultiError(errors)
+		return CreateDepositResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetBankAccountResponseMultiError is an error wrapping multiple validation
-// errors returned by GetBankAccountResponse.ValidateAll() if the designated
+// CreateDepositResponseMultiError is an error wrapping multiple validation
+// errors returned by CreateDepositResponse.ValidateAll() if the designated
 // constraints aren't met.
-type GetBankAccountResponseMultiError []error
+type CreateDepositResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetBankAccountResponseMultiError) Error() string {
+func (m CreateDepositResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -197,11 +213,11 @@ func (m GetBankAccountResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetBankAccountResponseMultiError) AllErrors() []error { return m }
+func (m CreateDepositResponseMultiError) AllErrors() []error { return m }
 
-// GetBankAccountResponseValidationError is the validation error returned by
-// GetBankAccountResponse.Validate if the designated constraints aren't met.
-type GetBankAccountResponseValidationError struct {
+// CreateDepositResponseValidationError is the validation error returned by
+// CreateDepositResponse.Validate if the designated constraints aren't met.
+type CreateDepositResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -209,24 +225,24 @@ type GetBankAccountResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetBankAccountResponseValidationError) Field() string { return e.field }
+func (e CreateDepositResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetBankAccountResponseValidationError) Reason() string { return e.reason }
+func (e CreateDepositResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetBankAccountResponseValidationError) Cause() error { return e.cause }
+func (e CreateDepositResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetBankAccountResponseValidationError) Key() bool { return e.key }
+func (e CreateDepositResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetBankAccountResponseValidationError) ErrorName() string {
-	return "GetBankAccountResponseValidationError"
+func (e CreateDepositResponseValidationError) ErrorName() string {
+	return "CreateDepositResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetBankAccountResponseValidationError) Error() string {
+func (e CreateDepositResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -238,14 +254,14 @@ func (e GetBankAccountResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetBankAccountResponse.%s: %s%s",
+		"invalid %sCreateDepositResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetBankAccountResponseValidationError{}
+var _ error = CreateDepositResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -253,7 +269,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetBankAccountResponseValidationError{}
+} = CreateDepositResponseValidationError{}
 
 // Validate checks the field values on CreateWithdrawRequest with the rules
 // defined in the proto definition for this message. If any rules are
@@ -283,15 +299,23 @@ func (m *CreateWithdrawRequest) validate(all bool) error {
 
 	// no validation rules for Amount
 
+	// no validation rules for Currency
+
+	// no validation rules for Country
+
 	// no validation rules for NotifyUrl
 
-	// no validation rules for PayerId
+	// no validation rules for UserId
 
-	// no validation rules for AccountName
+	// no validation rules for UserName
 
-	// no validation rules for Iban
+	// no validation rules for BankAccount
 
-	// no validation rules for BankCode
+	// no validation rules for BankAccountFirstname
+
+	// no validation rules for BankAccountLastname
+
+	// no validation rules for BankIban
 
 	if len(errors) > 0 {
 		return CreateWithdrawRequestMultiError(errors)
@@ -394,8 +418,6 @@ func (m *CreateWithdrawResponse) validate(all bool) error {
 	}
 
 	var errors []error
-
-	// no validation rules for Status
 
 	// no validation rules for TransactionId
 
@@ -979,6 +1001,8 @@ func (m *GetBankSchemaRequest) validate(all bool) error {
 
 	// no validation rules for Currency
 
+	// no validation rules for Country
+
 	if len(errors) > 0 {
 		return GetBankSchemaRequestMultiError(errors)
 	}
@@ -1222,6 +1246,8 @@ func (m *DepositBankAccount) validate(all bool) error {
 
 	// no validation rules for BankLastName
 
+	// no validation rules for Iban
+
 	// no validation rules for Currency
 
 	// no validation rules for Country
@@ -1352,34 +1378,7 @@ func (m *BankAccountListRequest) validate(all bool) error {
 
 	// no validation rules for CardId
 
-	if all {
-		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, BankAccountListRequestValidationError{
-					field:  "OperatorContextFilters",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, BankAccountListRequestValidationError{
-					field:  "OperatorContextFilters",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return BankAccountListRequestValidationError{
-				field:  "OperatorContextFilters",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for Enabled
 
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
@@ -1979,6 +1978,8 @@ func (m *UpdateBankAccountRequest) validate(all bool) error {
 
 	// no validation rules for Priority
 
+	// no validation rules for Enabled
+
 	if all {
 		switch v := interface{}(m.GetBankInfo()).(type) {
 		case interface{ ValidateAll() error }:
@@ -2272,6 +2273,8 @@ func (m *TransactionListRequest) validate(all bool) error {
 
 	// no validation rules for Type
 
+	// no validation rules for Status
+
 	// no validation rules for TransactionId
 
 	// no validation rules for DepositBankAccountFirstname
@@ -2282,9 +2285,9 @@ func (m *TransactionListRequest) validate(all bool) error {
 
 	// no validation rules for UserName
 
-	// no validation rules for PayerBankAccountFirstname
+	// no validation rules for UserBankAccountFirstname
 
-	// no validation rules for PayerBankAccountLastname
+	// no validation rules for UserBankAccountLastname
 
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
@@ -2425,11 +2428,17 @@ func (m *Transaction) validate(all bool) error {
 
 	// no validation rules for UserName
 
-	// no validation rules for BankAccount
+	// no validation rules for DepositBankAccount
 
-	// no validation rules for BankAccountFirstName
+	// no validation rules for DepositBankAccountFirstName
 
-	// no validation rules for BankAccountLastName
+	// no validation rules for DepositBankAccountLastName
+
+	// no validation rules for UserBankAccount
+
+	// no validation rules for UserBankAccountFirstName
+
+	// no validation rules for UserBankAccountLastName
 
 	// no validation rules for Type
 
@@ -2442,8 +2451,6 @@ func (m *Transaction) validate(all bool) error {
 	// no validation rules for Country
 
 	// no validation rules for Status
-
-	// no validation rules for Audit
 
 	// no validation rules for Auditor
 

@@ -8,7 +8,6 @@ package v1
 
 import (
 	v1 "github.com/infigaming-com/meepo-api/bcpay/service/v1"
-	common "github.com/infigaming-com/meepo-api/common"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -106,15 +105,15 @@ func (x *CreateMerchantRequest) GetName() string {
 }
 
 type BankAccountListRequest struct {
-	state                  protoimpl.MessageState         `protogen:"open.v1"`
-	Currency               string                         `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	BankAccount            string                         `protobuf:"bytes,2,opt,name=bank_account,json=bankAccount,proto3" json:"bank_account,omitempty"`
-	BankAccountFirstname   string                         `protobuf:"bytes,3,opt,name=bank_account_firstname,json=bankAccountFirstname,proto3" json:"bank_account_firstname,omitempty"`
-	BankAccountLastname    string                         `protobuf:"bytes,4,opt,name=bank_account_lastname,json=bankAccountLastname,proto3" json:"bank_account_lastname,omitempty"`
-	CardId                 string                         `protobuf:"bytes,5,opt,name=card_id,json=cardId,proto3" json:"card_id,omitempty"`
-	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,6,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	Currency             string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	BankAccount          string                 `protobuf:"bytes,2,opt,name=bank_account,json=bankAccount,proto3" json:"bank_account,omitempty"`
+	BankAccountFirstname string                 `protobuf:"bytes,3,opt,name=bank_account_firstname,json=bankAccountFirstname,proto3" json:"bank_account_firstname,omitempty"`
+	BankAccountLastname  string                 `protobuf:"bytes,4,opt,name=bank_account_lastname,json=bankAccountLastname,proto3" json:"bank_account_lastname,omitempty"`
+	CardId               string                 `protobuf:"bytes,5,opt,name=card_id,json=cardId,proto3" json:"card_id,omitempty"`
+	Enabled              bool                   `protobuf:"varint,6,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *BankAccountListRequest) Reset() {
@@ -182,11 +181,11 @@ func (x *BankAccountListRequest) GetCardId() string {
 	return ""
 }
 
-func (x *BankAccountListRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+func (x *BankAccountListRequest) GetEnabled() bool {
 	if x != nil {
-		return x.OperatorContextFilters
+		return x.Enabled
 	}
-	return nil
+	return false
 }
 
 type AddBankAccountRequest struct {
@@ -400,13 +399,14 @@ func (x *UpdateBankAccountRequest) GetBankInfo() *structpb.Struct {
 type TransactionListRequest struct {
 	state                       protoimpl.MessageState `protogen:"open.v1"`
 	Type                        string                 `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
-	TransactionId               string                 `protobuf:"bytes,2,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	DepositBankAccountFirstname string                 `protobuf:"bytes,3,opt,name=deposit_bank_account_firstname,json=depositBankAccountFirstname,proto3" json:"deposit_bank_account_firstname,omitempty"`
-	DepositBankAccountLastname  string                 `protobuf:"bytes,4,opt,name=deposit_bank_account_lastname,json=depositBankAccountLastname,proto3" json:"deposit_bank_account_lastname,omitempty"`
-	UserId                      string                 `protobuf:"bytes,5,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	UserName                    string                 `protobuf:"bytes,6,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
-	PayerBankAccountFirstname   string                 `protobuf:"bytes,7,opt,name=payer_bank_account_firstname,json=payerBankAccountFirstname,proto3" json:"payer_bank_account_firstname,omitempty"`
-	PayerBankAccountLastname    string                 `protobuf:"bytes,8,opt,name=payer_bank_account_lastname,json=payerBankAccountLastname,proto3" json:"payer_bank_account_lastname,omitempty"`
+	Audit                       string                 `protobuf:"bytes,2,opt,name=audit,proto3" json:"audit,omitempty"`
+	TransactionId               string                 `protobuf:"bytes,3,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	DepositBankAccountFirstname string                 `protobuf:"bytes,4,opt,name=deposit_bank_account_firstname,json=depositBankAccountFirstname,proto3" json:"deposit_bank_account_firstname,omitempty"`
+	DepositBankAccountLastname  string                 `protobuf:"bytes,5,opt,name=deposit_bank_account_lastname,json=depositBankAccountLastname,proto3" json:"deposit_bank_account_lastname,omitempty"`
+	UserId                      string                 `protobuf:"bytes,6,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserName                    string                 `protobuf:"bytes,7,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
+	PayerBankAccountFirstname   string                 `protobuf:"bytes,8,opt,name=payer_bank_account_firstname,json=payerBankAccountFirstname,proto3" json:"payer_bank_account_firstname,omitempty"`
+	PayerBankAccountLastname    string                 `protobuf:"bytes,9,opt,name=payer_bank_account_lastname,json=payerBankAccountLastname,proto3" json:"payer_bank_account_lastname,omitempty"`
 	unknownFields               protoimpl.UnknownFields
 	sizeCache                   protoimpl.SizeCache
 }
@@ -444,6 +444,13 @@ func (*TransactionListRequest) Descriptor() ([]byte, []int) {
 func (x *TransactionListRequest) GetType() string {
 	if x != nil {
 		return x.Type
+	}
+	return ""
+}
+
+func (x *TransactionListRequest) GetAudit() string {
+	if x != nil {
+		return x.Audit
 	}
 	return ""
 }
@@ -554,17 +561,17 @@ var File_backoffice_service_v1_backoffice_bcpay_proto protoreflect.FileDescripto
 
 const file_backoffice_service_v1_backoffice_bcpay_proto_rawDesc = "" +
 	"\n" +
-	",backoffice/service/v1/backoffice_bcpay.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cbcpay/service/v1/bcpay.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13common/common.proto\"\x14\n" +
+	",backoffice/service/v1/backoffice_bcpay.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cbcpay/service/v1/bcpay.proto\x1a\x1cgoogle/protobuf/struct.proto\"\x14\n" +
 	"\x12GetMerchantRequest\"+\n" +
 	"\x15CreateMerchantRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"\xb8\x02\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"\xf4\x01\n" +
 	"\x16BankAccountListRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12!\n" +
 	"\fbank_account\x18\x02 \x01(\tR\vbankAccount\x124\n" +
 	"\x16bank_account_firstname\x18\x03 \x01(\tR\x14bankAccountFirstname\x122\n" +
 	"\x15bank_account_lastname\x18\x04 \x01(\tR\x13bankAccountLastname\x12\x17\n" +
-	"\acard_id\x18\x05 \x01(\tR\x06cardId\x12\\\n" +
-	"\x18operator_context_filters\x18\x06 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\xb6\x02\n" +
+	"\acard_id\x18\x05 \x01(\tR\x06cardId\x12\x18\n" +
+	"\aenabled\x18\x06 \x01(\bR\aenabled\"\xb6\x02\n" +
 	"\x15AddBankAccountRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
 	"\acountry\x18\x02 \x01(\tR\acountry\x12\x1d\n" +
@@ -587,16 +594,17 @@ const file_backoffice_service_v1_backoffice_bcpay_proto_rawDesc = "" +
 	"\x14max_amount_per_trans\x18\x06 \x01(\tR\x11maxAmountPerTrans\x12&\n" +
 	"\x0fmax_trans_limit\x18\a \x01(\x05R\rmaxTransLimit\x12\x1a\n" +
 	"\bpriority\x18\b \x01(\x05R\bpriority\x124\n" +
-	"\tbank_info\x18\t \x01(\v2\x17.google.protobuf.StructR\bbankInfo\"\x91\x03\n" +
+	"\tbank_info\x18\t \x01(\v2\x17.google.protobuf.StructR\bbankInfo\"\xa7\x03\n" +
 	"\x16TransactionListRequest\x12\x12\n" +
-	"\x04type\x18\x01 \x01(\tR\x04type\x12%\n" +
-	"\x0etransaction_id\x18\x02 \x01(\tR\rtransactionId\x12C\n" +
-	"\x1edeposit_bank_account_firstname\x18\x03 \x01(\tR\x1bdepositBankAccountFirstname\x12A\n" +
-	"\x1ddeposit_bank_account_lastname\x18\x04 \x01(\tR\x1adepositBankAccountLastname\x12\x17\n" +
-	"\auser_id\x18\x05 \x01(\tR\x06userId\x12\x1b\n" +
-	"\tuser_name\x18\x06 \x01(\tR\buserName\x12?\n" +
-	"\x1cpayer_bank_account_firstname\x18\a \x01(\tR\x19payerBankAccountFirstname\x12=\n" +
-	"\x1bpayer_bank_account_lastname\x18\b \x01(\tR\x18payerBankAccountLastname\"V\n" +
+	"\x04type\x18\x01 \x01(\tR\x04type\x12\x14\n" +
+	"\x05audit\x18\x02 \x01(\tR\x05audit\x12%\n" +
+	"\x0etransaction_id\x18\x03 \x01(\tR\rtransactionId\x12C\n" +
+	"\x1edeposit_bank_account_firstname\x18\x04 \x01(\tR\x1bdepositBankAccountFirstname\x12A\n" +
+	"\x1ddeposit_bank_account_lastname\x18\x05 \x01(\tR\x1adepositBankAccountLastname\x12\x17\n" +
+	"\auser_id\x18\x06 \x01(\tR\x06userId\x12\x1b\n" +
+	"\tuser_name\x18\a \x01(\tR\buserName\x12?\n" +
+	"\x1cpayer_bank_account_firstname\x18\b \x01(\tR\x19payerBankAccountFirstname\x12=\n" +
+	"\x1bpayer_bank_account_lastname\x18\t \x01(\tR\x18payerBankAccountLastname\"V\n" +
 	"\x17AuditTransactionRequest\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12\x14\n" +
 	"\x05audit\x18\x02 \x01(\tR\x05audit2\xf0\v\n" +
@@ -633,47 +641,45 @@ var file_backoffice_service_v1_backoffice_bcpay_proto_goTypes = []any{
 	(*UpdateBankAccountRequest)(nil),        // 4: api.backoffice.service.v1.UpdateBankAccountRequest
 	(*TransactionListRequest)(nil),          // 5: api.backoffice.service.v1.TransactionListRequest
 	(*AuditTransactionRequest)(nil),         // 6: api.backoffice.service.v1.AuditTransactionRequest
-	(*common.OperatorContextFilters)(nil),   // 7: api.common.OperatorContextFilters
-	(*structpb.Struct)(nil),                 // 8: google.protobuf.Struct
-	(*v1.AddNoteToTransactionRequest)(nil),  // 9: api.bcpay.service.v1.AddNoteToTransactionRequest
-	(*v1.GetBankSchemaRequest)(nil),         // 10: api.bcpay.service.v1.GetBankSchemaRequest
-	(*v1.GetMerchantResponse)(nil),          // 11: api.bcpay.service.v1.GetMerchantResponse
-	(*v1.CreateMerchantResponse)(nil),       // 12: api.bcpay.service.v1.CreateMerchantResponse
-	(*v1.BankAccountListResponse)(nil),      // 13: api.bcpay.service.v1.BankAccountListResponse
-	(*v1.AddBankAccountResponse)(nil),       // 14: api.bcpay.service.v1.AddBankAccountResponse
-	(*v1.UpdateBankAccountResponse)(nil),    // 15: api.bcpay.service.v1.UpdateBankAccountResponse
-	(*v1.TransactionListResponse)(nil),      // 16: api.bcpay.service.v1.TransactionListResponse
-	(*v1.AuditTransactionResponse)(nil),     // 17: api.bcpay.service.v1.AuditTransactionResponse
-	(*v1.AddNoteToTransactionResponse)(nil), // 18: api.bcpay.service.v1.AddNoteToTransactionResponse
-	(*v1.GetBankSchemaResponse)(nil),        // 19: api.bcpay.service.v1.GetBankSchemaResponse
+	(*structpb.Struct)(nil),                 // 7: google.protobuf.Struct
+	(*v1.AddNoteToTransactionRequest)(nil),  // 8: api.bcpay.service.v1.AddNoteToTransactionRequest
+	(*v1.GetBankSchemaRequest)(nil),         // 9: api.bcpay.service.v1.GetBankSchemaRequest
+	(*v1.GetMerchantResponse)(nil),          // 10: api.bcpay.service.v1.GetMerchantResponse
+	(*v1.CreateMerchantResponse)(nil),       // 11: api.bcpay.service.v1.CreateMerchantResponse
+	(*v1.BankAccountListResponse)(nil),      // 12: api.bcpay.service.v1.BankAccountListResponse
+	(*v1.AddBankAccountResponse)(nil),       // 13: api.bcpay.service.v1.AddBankAccountResponse
+	(*v1.UpdateBankAccountResponse)(nil),    // 14: api.bcpay.service.v1.UpdateBankAccountResponse
+	(*v1.TransactionListResponse)(nil),      // 15: api.bcpay.service.v1.TransactionListResponse
+	(*v1.AuditTransactionResponse)(nil),     // 16: api.bcpay.service.v1.AuditTransactionResponse
+	(*v1.AddNoteToTransactionResponse)(nil), // 17: api.bcpay.service.v1.AddNoteToTransactionResponse
+	(*v1.GetBankSchemaResponse)(nil),        // 18: api.bcpay.service.v1.GetBankSchemaResponse
 }
 var file_backoffice_service_v1_backoffice_bcpay_proto_depIdxs = []int32{
-	7,  // 0: api.backoffice.service.v1.BankAccountListRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	8,  // 1: api.backoffice.service.v1.AddBankAccountRequest.bank_info:type_name -> google.protobuf.Struct
-	8,  // 2: api.backoffice.service.v1.UpdateBankAccountRequest.bank_info:type_name -> google.protobuf.Struct
-	0,  // 3: api.backoffice.service.v1.BackofficeBcpay.GetMerchant:input_type -> api.backoffice.service.v1.GetMerchantRequest
-	1,  // 4: api.backoffice.service.v1.BackofficeBcpay.CreateMerchant:input_type -> api.backoffice.service.v1.CreateMerchantRequest
-	2,  // 5: api.backoffice.service.v1.BackofficeBcpay.BankAccountList:input_type -> api.backoffice.service.v1.BankAccountListRequest
-	3,  // 6: api.backoffice.service.v1.BackofficeBcpay.AddBankAccount:input_type -> api.backoffice.service.v1.AddBankAccountRequest
-	4,  // 7: api.backoffice.service.v1.BackofficeBcpay.UpdateBankAccount:input_type -> api.backoffice.service.v1.UpdateBankAccountRequest
-	5,  // 8: api.backoffice.service.v1.BackofficeBcpay.TransactionList:input_type -> api.backoffice.service.v1.TransactionListRequest
-	6,  // 9: api.backoffice.service.v1.BackofficeBcpay.AuditTransaction:input_type -> api.backoffice.service.v1.AuditTransactionRequest
-	9,  // 10: api.backoffice.service.v1.BackofficeBcpay.AddNoteToTransaction:input_type -> api.bcpay.service.v1.AddNoteToTransactionRequest
-	10, // 11: api.backoffice.service.v1.BackofficeBcpay.GetBankSchema:input_type -> api.bcpay.service.v1.GetBankSchemaRequest
-	11, // 12: api.backoffice.service.v1.BackofficeBcpay.GetMerchant:output_type -> api.bcpay.service.v1.GetMerchantResponse
-	12, // 13: api.backoffice.service.v1.BackofficeBcpay.CreateMerchant:output_type -> api.bcpay.service.v1.CreateMerchantResponse
-	13, // 14: api.backoffice.service.v1.BackofficeBcpay.BankAccountList:output_type -> api.bcpay.service.v1.BankAccountListResponse
-	14, // 15: api.backoffice.service.v1.BackofficeBcpay.AddBankAccount:output_type -> api.bcpay.service.v1.AddBankAccountResponse
-	15, // 16: api.backoffice.service.v1.BackofficeBcpay.UpdateBankAccount:output_type -> api.bcpay.service.v1.UpdateBankAccountResponse
-	16, // 17: api.backoffice.service.v1.BackofficeBcpay.TransactionList:output_type -> api.bcpay.service.v1.TransactionListResponse
-	17, // 18: api.backoffice.service.v1.BackofficeBcpay.AuditTransaction:output_type -> api.bcpay.service.v1.AuditTransactionResponse
-	18, // 19: api.backoffice.service.v1.BackofficeBcpay.AddNoteToTransaction:output_type -> api.bcpay.service.v1.AddNoteToTransactionResponse
-	19, // 20: api.backoffice.service.v1.BackofficeBcpay.GetBankSchema:output_type -> api.bcpay.service.v1.GetBankSchemaResponse
-	12, // [12:21] is the sub-list for method output_type
-	3,  // [3:12] is the sub-list for method input_type
-	3,  // [3:3] is the sub-list for extension type_name
-	3,  // [3:3] is the sub-list for extension extendee
-	0,  // [0:3] is the sub-list for field type_name
+	7,  // 0: api.backoffice.service.v1.AddBankAccountRequest.bank_info:type_name -> google.protobuf.Struct
+	7,  // 1: api.backoffice.service.v1.UpdateBankAccountRequest.bank_info:type_name -> google.protobuf.Struct
+	0,  // 2: api.backoffice.service.v1.BackofficeBcpay.GetMerchant:input_type -> api.backoffice.service.v1.GetMerchantRequest
+	1,  // 3: api.backoffice.service.v1.BackofficeBcpay.CreateMerchant:input_type -> api.backoffice.service.v1.CreateMerchantRequest
+	2,  // 4: api.backoffice.service.v1.BackofficeBcpay.BankAccountList:input_type -> api.backoffice.service.v1.BankAccountListRequest
+	3,  // 5: api.backoffice.service.v1.BackofficeBcpay.AddBankAccount:input_type -> api.backoffice.service.v1.AddBankAccountRequest
+	4,  // 6: api.backoffice.service.v1.BackofficeBcpay.UpdateBankAccount:input_type -> api.backoffice.service.v1.UpdateBankAccountRequest
+	5,  // 7: api.backoffice.service.v1.BackofficeBcpay.TransactionList:input_type -> api.backoffice.service.v1.TransactionListRequest
+	6,  // 8: api.backoffice.service.v1.BackofficeBcpay.AuditTransaction:input_type -> api.backoffice.service.v1.AuditTransactionRequest
+	8,  // 9: api.backoffice.service.v1.BackofficeBcpay.AddNoteToTransaction:input_type -> api.bcpay.service.v1.AddNoteToTransactionRequest
+	9,  // 10: api.backoffice.service.v1.BackofficeBcpay.GetBankSchema:input_type -> api.bcpay.service.v1.GetBankSchemaRequest
+	10, // 11: api.backoffice.service.v1.BackofficeBcpay.GetMerchant:output_type -> api.bcpay.service.v1.GetMerchantResponse
+	11, // 12: api.backoffice.service.v1.BackofficeBcpay.CreateMerchant:output_type -> api.bcpay.service.v1.CreateMerchantResponse
+	12, // 13: api.backoffice.service.v1.BackofficeBcpay.BankAccountList:output_type -> api.bcpay.service.v1.BankAccountListResponse
+	13, // 14: api.backoffice.service.v1.BackofficeBcpay.AddBankAccount:output_type -> api.bcpay.service.v1.AddBankAccountResponse
+	14, // 15: api.backoffice.service.v1.BackofficeBcpay.UpdateBankAccount:output_type -> api.bcpay.service.v1.UpdateBankAccountResponse
+	15, // 16: api.backoffice.service.v1.BackofficeBcpay.TransactionList:output_type -> api.bcpay.service.v1.TransactionListResponse
+	16, // 17: api.backoffice.service.v1.BackofficeBcpay.AuditTransaction:output_type -> api.bcpay.service.v1.AuditTransactionResponse
+	17, // 18: api.backoffice.service.v1.BackofficeBcpay.AddNoteToTransaction:output_type -> api.bcpay.service.v1.AddNoteToTransactionResponse
+	18, // 19: api.backoffice.service.v1.BackofficeBcpay.GetBankSchema:output_type -> api.bcpay.service.v1.GetBankSchemaResponse
+	11, // [11:20] is the sub-list for method output_type
+	2,  // [2:11] is the sub-list for method input_type
+	2,  // [2:2] is the sub-list for extension type_name
+	2,  // [2:2] is the sub-list for extension extendee
+	0,  // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_bcpay_proto_init() }
