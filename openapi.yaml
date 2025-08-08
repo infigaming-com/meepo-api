@@ -2785,12 +2785,12 @@ paths:
         post:
             tags:
                 - Bcpay
-            operationId: Bcpay_GetBankAccount
+            operationId: Bcpay_CreateDeposit
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.bcpay.service.v1.GetBankAccountRequest'
+                            $ref: '#/components/schemas/api.bcpay.service.v1.CreateDepositRequest'
                 required: true
             responses:
                 "200":
@@ -2798,7 +2798,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.bcpay.service.v1.GetBankAccountResponse'
+                                $ref: '#/components/schemas/api.bcpay.service.v1.CreateDepositResponse'
     /v1/bcpay/withdraw/add:
         post:
             tags:
@@ -3769,8 +3769,8 @@ components:
                     type: string
                 cardId:
                     type: string
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                enabled:
+                    type: boolean
         api.backoffice.service.v1.Bet:
             type: object
             properties:
@@ -8468,6 +8468,8 @@ components:
             properties:
                 type:
                     type: string
+                audit:
+                    type: string
                 transactionId:
                     type: string
                 depositBankAccountFirstname:
@@ -8780,6 +8782,45 @@ components:
                     type: integer
                     description: Total number of disabled bank account
                     format: int32
+        api.bcpay.service.v1.CreateDepositRequest:
+            type: object
+            properties:
+                merchantId:
+                    type: string
+                userId:
+                    type: string
+                userName:
+                    type: string
+                currency:
+                    type: string
+                country:
+                    type: string
+                notifyUrl:
+                    type: string
+                amount:
+                    type: string
+                bankAccount:
+                    type: string
+                bankAccountFirstname:
+                    type: string
+                bankAccountLastname:
+                    type: string
+                bankIban:
+                    type: string
+        api.bcpay.service.v1.CreateDepositResponse:
+            type: object
+            properties:
+                transactionID:
+                    type: string
+                    description: operator id allocated by operator service
+                depositReference:
+                    type: string
+                bankAccount:
+                    type: string
+                bankAccountName:
+                    type: string
+                bankIban:
+                    type: string
         api.bcpay.service.v1.CreateMerchantResponse:
             type: object
             properties:
@@ -8796,21 +8837,27 @@ components:
                     type: string
                 amount:
                     type: string
+                currency:
+                    type: string
+                country:
+                    type: string
                 notifyUrl:
                     type: string
-                payerId:
+                userId:
                     type: string
-                accountName:
+                userName:
                     type: string
-                iban:
+                bankAccount:
                     type: string
-                bankCode:
+                bankAccountFirstname:
+                    type: string
+                bankAccountLastname:
+                    type: string
+                bankIban:
                     type: string
         api.bcpay.service.v1.CreateWithdrawResponse:
             type: object
             properties:
-                status:
-                    type: string
                 transactionId:
                     type: string
         api.bcpay.service.v1.DepositBankAccount:
@@ -8825,6 +8872,8 @@ components:
                 bankFirstName:
                     type: string
                 bankLastName:
+                    type: string
+                iban:
                     type: string
                 currency:
                     type: string
@@ -8847,33 +8896,12 @@ components:
                     format: int32
                 enable:
                     type: boolean
-        api.bcpay.service.v1.GetBankAccountRequest:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-                merchantId:
-                    type: string
-                payerId:
-                    type: string
-                notifyUrl:
-                    type: string
-        api.bcpay.service.v1.GetBankAccountResponse:
-            type: object
-            properties:
-                notifyUrl:
-                    type: string
-                    description: operator id allocated by operator service
-                referenceNumber:
-                    type: string
-                bankAccountName:
-                    type: string
-                bankAccountNumber:
-                    type: string
         api.bcpay.service.v1.GetBankSchemaRequest:
             type: object
             properties:
                 currency:
+                    type: string
+                country:
                     type: string
         api.bcpay.service.v1.GetBankSchemaResponse:
             type: object
@@ -8898,11 +8926,17 @@ components:
                     type: string
                 userName:
                     type: string
-                bankAccount:
+                depositBankAccount:
                     type: string
-                bankAccountFirstName:
+                depositBankAccountFirstName:
                     type: string
-                bankAccountLastName:
+                depositBankAccountLastName:
+                    type: string
+                userBankAccount:
+                    type: string
+                userBankAccountFirstName:
+                    type: string
+                userBankAccountLastName:
                     type: string
                 type:
                     type: string
@@ -8916,11 +8950,9 @@ components:
                     type: string
                 status:
                     type: string
-                audit:
-                    type: string
-                    description: audit a transaction "approve" or "deline"
                 auditor:
                     type: string
+                    description: audit a transaction "approve" or "decline"
                 auditTime:
                     type: string
                 auditNote:
