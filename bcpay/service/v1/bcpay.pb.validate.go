@@ -1546,6 +1546,16 @@ func (m *BankAccountListResponse) validate(all bool) error {
 
 	}
 
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	// no validation rules for TotalPages
+
+	// no validation rules for TotalEnabled
+
+	// no validation rules for TotalDisabled
+
 	if len(errors) > 0 {
 		return BankAccountListResponseMultiError(errors)
 	}
@@ -2577,6 +2587,18 @@ func (m *TransactionListResponse) validate(all bool) error {
 		}
 
 	}
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	// no validation rules for TotalPages
+
+	// no validation rules for TotalApproved
+
+	// no validation rules for TotalFailed
+
+	// no validation rules for TotalPending
 
 	if len(errors) > 0 {
 		return TransactionListResponseMultiError(errors)
