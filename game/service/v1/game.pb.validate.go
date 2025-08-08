@@ -6676,13 +6676,19 @@ func (m *GetGameTransactionByIdResponse) validate(all bool) error {
 
 	// no validation rules for AmountUsd
 
+	// no validation rules for AmountReportingCurrency
+
 	// no validation rules for SettlementAmount
 
 	// no validation rules for SettlementAmountUsd
 
+	// no validation rules for SettlementAmountReportingCurrency
+
 	// no validation rules for Turnover
 
 	// no validation rules for TurnoverUsd
+
+	// no validation rules for TurnoverReportingCurrency
 
 	// no validation rules for UserId
 
@@ -6700,9 +6706,13 @@ func (m *GetGameTransactionByIdResponse) validate(all bool) error {
 
 	// no validation rules for JackpotContributionUsd
 
+	// no validation rules for JackpotContributionReportingCurrency
+
 	// no validation rules for JackpotWin
 
 	// no validation rules for JackpotWinUsd
+
+	// no validation rules for JackpotWinReportingCurrency
 
 	if all {
 		switch v := interface{}(m.GetBetTime()).(type) {
@@ -6794,6 +6804,8 @@ func (m *GetGameTransactionByIdResponse) validate(all bool) error {
 	// no validation rules for BonusAmount
 
 	// no validation rules for BonusAmountUsd
+
+	// no validation rules for BonusAmountReportingCurrency
 
 	if all {
 		switch v := interface{}(m.GetOperatorTimestamp()).(type) {
@@ -8701,13 +8713,19 @@ func (m *GetBetByIdResponse_Action) validate(all bool) error {
 
 	// no validation rules for AmountUsd
 
+	// no validation rules for AmountReportingCurrency
+
 	// no validation rules for SettlementAmount
 
 	// no validation rules for SettlementAmountUsd
 
+	// no validation rules for SettlementAmountReportingCurrency
+
 	// no validation rules for Turnover
 
 	// no validation rules for TurnoverUsd
+
+	// no validation rules for TurnoverReportingCurrency
 
 	// no validation rules for UserId
 
@@ -8725,9 +8743,13 @@ func (m *GetBetByIdResponse_Action) validate(all bool) error {
 
 	// no validation rules for JackpotContributionUsd
 
+	// no validation rules for JackpotContributionReportingCurrency
+
 	// no validation rules for JackpotWin
 
 	// no validation rules for JackpotWinUsd
+
+	// no validation rules for JackpotWinReportingCurrency
 
 	if all {
 		switch v := interface{}(m.GetBetTime()).(type) {
@@ -8819,6 +8841,8 @@ func (m *GetBetByIdResponse_Action) validate(all bool) error {
 	// no validation rules for BonusAmount
 
 	// no validation rules for BonusAmountUsd
+
+	// no validation rules for BonusAmountReportingCurrency
 
 	if all {
 		switch v := interface{}(m.GetOperatorTimestamp()).(type) {
@@ -9074,29 +9098,43 @@ func (m *GetBetByIdResponse_Bet) validate(all bool) error {
 
 	// no validation rules for BetAmountUsd
 
+	// no validation rules for BetAmountReportingCurrency
+
 	// no validation rules for SettlementBetAmount
 
 	// no validation rules for SettlementBetAmountUsd
+
+	// no validation rules for SettlementBetAmountReportingCurrency
 
 	// no validation rules for WinAmount
 
 	// no validation rules for WinAmountUsd
 
+	// no validation rules for WinAmountReportingCurrency
+
 	// no validation rules for SettlementWinAmount
 
 	// no validation rules for SettlementWinAmountUsd
+
+	// no validation rules for SettlementWinAmountReportingCurrency
 
 	// no validation rules for Turnover
 
 	// no validation rules for TurnoverUsd
 
+	// no validation rules for TurnoverReportingCurrency
+
 	// no validation rules for RollbackBetAmount
 
 	// no validation rules for RollbackBetAmountUsd
 
+	// no validation rules for RollbackBetAmountReportingCurrency
+
 	// no validation rules for RollbackWinAmount
 
 	// no validation rules for RollbackWinAmountUsd
+
+	// no validation rules for RollbackWinAmountReportingCurrency
 
 	if all {
 		switch v := interface{}(m.GetCreatedAt()).(type) {
@@ -9297,9 +9335,13 @@ func (m *GetBackofficeUserOverviewFromGameResponse_GameData) validate(all bool) 
 
 	// no validation rules for GameType
 
-	// no validation rules for Ggr
+	// no validation rules for GgrUsd
 
-	// no validation rules for Turnover
+	// no validation rules for GgrReportingCurrency
+
+	// no validation rules for TurnoverUsd
+
+	// no validation rules for TurnoverReportingCurrency
 
 	// no validation rules for Rtp
 
@@ -9714,13 +9756,19 @@ func (m *GetDailyGameTransactionDataResponse_GameTransactionData) validate(all b
 
 	// no validation rules for AmountUsd
 
+	// no validation rules for AmountReportingCurrency
+
 	// no validation rules for TotalBet
 
 	// no validation rules for TotalBetUsd
 
+	// no validation rules for TotalBetReportingCurrency
+
 	// no validation rules for TotalPayout
 
 	// no validation rules for TotalPayoutUsd
+
+	// no validation rules for TotalPayoutReportingCurrency
 
 	// no validation rules for BetsCount
 
