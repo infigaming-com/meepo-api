@@ -40,6 +40,7 @@ const (
 	Wallet_AddCurrency_FullMethodName                         = "/api.wallet.service.v1.Wallet/AddCurrency"
 	Wallet_UpdateCurrency_FullMethodName                      = "/api.wallet.service.v1.Wallet/UpdateCurrency"
 	Wallet_GetCurrencies_FullMethodName                       = "/api.wallet.service.v1.Wallet/GetCurrencies"
+	Wallet_GetOperatorCurrencies_FullMethodName               = "/api.wallet.service.v1.Wallet/GetOperatorCurrencies"
 	Wallet_ListCurrencies_FullMethodName                      = "/api.wallet.service.v1.Wallet/ListCurrencies"
 	Wallet_UpdateOperatorCurrency_FullMethodName              = "/api.wallet.service.v1.Wallet/UpdateOperatorCurrency"
 	Wallet_UpdateUserCurrency_FullMethodName                  = "/api.wallet.service.v1.Wallet/UpdateUserCurrency"
@@ -92,6 +93,7 @@ type WalletClient interface {
 	AddCurrency(ctx context.Context, in *AddCurrencyRequest, opts ...grpc.CallOption) (*AddCurrencyResponse, error)
 	UpdateCurrency(ctx context.Context, in *UpdateCurrencyRequest, opts ...grpc.CallOption) (*UpdateCurrencyResponse, error)
 	GetCurrencies(ctx context.Context, in *GetCurrenciesRequest, opts ...grpc.CallOption) (*GetCurrenciesResponse, error)
+	GetOperatorCurrencies(ctx context.Context, in *GetOperatorCurrenciesRequest, opts ...grpc.CallOption) (*GetOperatorCurrenciesResponse, error)
 	ListCurrencies(ctx context.Context, in *ListCurrenciesRequest, opts ...grpc.CallOption) (*ListCurrenciesResponse, error)
 	UpdateOperatorCurrency(ctx context.Context, in *UpdateOperatorCurrencyRequest, opts ...grpc.CallOption) (*UpdateOperatorCurrencyResponse, error)
 	UpdateUserCurrency(ctx context.Context, in *UpdateUserCurrencyRequest, opts ...grpc.CallOption) (*UpdateUserCurrencyResponse, error)
@@ -339,6 +341,16 @@ func (c *walletClient) GetCurrencies(ctx context.Context, in *GetCurrenciesReque
 	return out, nil
 }
 
+func (c *walletClient) GetOperatorCurrencies(ctx context.Context, in *GetOperatorCurrenciesRequest, opts ...grpc.CallOption) (*GetOperatorCurrenciesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorCurrenciesResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetOperatorCurrencies_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *walletClient) ListCurrencies(ctx context.Context, in *ListCurrenciesRequest, opts ...grpc.CallOption) (*ListCurrenciesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListCurrenciesResponse)
@@ -524,6 +536,7 @@ type WalletServer interface {
 	AddCurrency(context.Context, *AddCurrencyRequest) (*AddCurrencyResponse, error)
 	UpdateCurrency(context.Context, *UpdateCurrencyRequest) (*UpdateCurrencyResponse, error)
 	GetCurrencies(context.Context, *GetCurrenciesRequest) (*GetCurrenciesResponse, error)
+	GetOperatorCurrencies(context.Context, *GetOperatorCurrenciesRequest) (*GetOperatorCurrenciesResponse, error)
 	ListCurrencies(context.Context, *ListCurrenciesRequest) (*ListCurrenciesResponse, error)
 	UpdateOperatorCurrency(context.Context, *UpdateOperatorCurrencyRequest) (*UpdateOperatorCurrencyResponse, error)
 	UpdateUserCurrency(context.Context, *UpdateUserCurrencyRequest) (*UpdateUserCurrencyResponse, error)
@@ -623,6 +636,9 @@ func (UnimplementedWalletServer) UpdateCurrency(context.Context, *UpdateCurrency
 }
 func (UnimplementedWalletServer) GetCurrencies(context.Context, *GetCurrenciesRequest) (*GetCurrenciesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCurrencies not implemented")
+}
+func (UnimplementedWalletServer) GetOperatorCurrencies(context.Context, *GetOperatorCurrenciesRequest) (*GetOperatorCurrenciesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorCurrencies not implemented")
 }
 func (UnimplementedWalletServer) ListCurrencies(context.Context, *ListCurrenciesRequest) (*ListCurrenciesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCurrencies not implemented")
@@ -1068,6 +1084,24 @@ func _Wallet_GetCurrencies_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_GetOperatorCurrencies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorCurrenciesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetOperatorCurrencies(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetOperatorCurrencies_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetOperatorCurrencies(ctx, req.(*GetOperatorCurrenciesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Wallet_ListCurrencies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListCurrenciesRequest)
 	if err := dec(in); err != nil {
@@ -1428,6 +1462,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCurrencies",
 			Handler:    _Wallet_GetCurrencies_Handler,
+		},
+		{
+			MethodName: "GetOperatorCurrencies",
+			Handler:    _Wallet_GetOperatorCurrencies_Handler,
 		},
 		{
 			MethodName: "ListCurrencies",
