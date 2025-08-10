@@ -273,34 +273,7 @@ func (m *BankAccountListRequest) validate(all bool) error {
 
 	// no validation rules for CardId
 
-	if all {
-		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, BankAccountListRequestValidationError{
-					field:  "OperatorContextFilters",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, BankAccountListRequestValidationError{
-					field:  "OperatorContextFilters",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return BankAccountListRequestValidationError{
-				field:  "OperatorContextFilters",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for Enabled
 
 	if len(errors) > 0 {
 		return BankAccountListRequestMultiError(errors)
@@ -697,6 +670,8 @@ func (m *TransactionListRequest) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for Type
+
+	// no validation rules for Audit
 
 	// no validation rules for TransactionId
 
