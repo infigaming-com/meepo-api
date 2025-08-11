@@ -965,3 +965,33 @@ message GetOperatorBalanceTransactionsByIdsRequest {
 message GetOperatorBalanceTransactionsByIdsResponse {
 	repeated OperatorBalanceTransaction transactions = 1;
 }
+
+message RewardSequence {
+	message TierConfig {
+		string min_deposit_amount = 1;
+		string max_deposit_amount = 2;
+		string reward_percentage = 3;
+		string max_bonus_amount = 4;
+		string max_withdrawal_amount = 5;
+	}
+	int64 serial_number = 1;
+	string name = 2;
+	bool enabled = 3;
+	string reward_type = 4;
+	int32 wagering_requirement = 5; // coefficient
+	int64 reward_validity = 6; // milliseconds
+	repeated TierConfig tier_configs = 7;
+	google.protobuf.Timestamp start_time = 8;
+	google.protobuf.Timestamp end_time = 9;
+}
+
+// Deposit reward config for an operator with specific currency
+message DepositRewardConfig {
+	api.common.OperatorContext operator_context = 1;
+	string currency = 2;
+	bool follow_parent = 3;
+	repeated RewardSequence welcome_reward_sequences = 4;
+	repeated RewardSequence daily_reward_sequences = 5;
+	google.protobuf.Timestamp created_at = 6;
+	google.protobuf.Timestamp updated_at = 7;
+}

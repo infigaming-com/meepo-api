@@ -10945,6 +10945,471 @@ var _ interface {
 	ErrorName() string
 } = GetOperatorBalanceTransactionsByIdsResponseValidationError{}
 
+// Validate checks the field values on RewardSequence with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *RewardSequence) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RewardSequence with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in RewardSequenceMultiError,
+// or nil if none found.
+func (m *RewardSequence) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RewardSequence) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for SerialNumber
+
+	// no validation rules for Name
+
+	// no validation rules for Enabled
+
+	// no validation rules for RewardType
+
+	// no validation rules for WageringRequirements
+
+	// no validation rules for RewardValidity
+
+	for idx, item := range m.GetTierConfigs() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, RewardSequenceValidationError{
+						field:  fmt.Sprintf("TierConfigs[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, RewardSequenceValidationError{
+						field:  fmt.Sprintf("TierConfigs[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return RewardSequenceValidationError{
+					field:  fmt.Sprintf("TierConfigs[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if all {
+		switch v := interface{}(m.GetStartTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RewardSequenceValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RewardSequenceValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RewardSequenceValidationError{
+				field:  "StartTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetEndTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RewardSequenceValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RewardSequenceValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RewardSequenceValidationError{
+				field:  "EndTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return RewardSequenceMultiError(errors)
+	}
+
+	return nil
+}
+
+// RewardSequenceMultiError is an error wrapping multiple validation errors
+// returned by RewardSequence.ValidateAll() if the designated constraints
+// aren't met.
+type RewardSequenceMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RewardSequenceMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RewardSequenceMultiError) AllErrors() []error { return m }
+
+// RewardSequenceValidationError is the validation error returned by
+// RewardSequence.Validate if the designated constraints aren't met.
+type RewardSequenceValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RewardSequenceValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RewardSequenceValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RewardSequenceValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RewardSequenceValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RewardSequenceValidationError) ErrorName() string { return "RewardSequenceValidationError" }
+
+// Error satisfies the builtin error interface
+func (e RewardSequenceValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRewardSequence.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RewardSequenceValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RewardSequenceValidationError{}
+
+// Validate checks the field values on DepositRewardConfig with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DepositRewardConfig) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DepositRewardConfig with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DepositRewardConfigMultiError, or nil if none found.
+func (m *DepositRewardConfig) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DepositRewardConfig) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, DepositRewardConfigValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, DepositRewardConfigValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return DepositRewardConfigValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Currency
+
+	// no validation rules for FollowParent
+
+	for idx, item := range m.GetWelcomeRewardSequences() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, DepositRewardConfigValidationError{
+						field:  fmt.Sprintf("WelcomeRewardSequences[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, DepositRewardConfigValidationError{
+						field:  fmt.Sprintf("WelcomeRewardSequences[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return DepositRewardConfigValidationError{
+					field:  fmt.Sprintf("WelcomeRewardSequences[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	for idx, item := range m.GetDailyRewardSequences() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, DepositRewardConfigValidationError{
+						field:  fmt.Sprintf("DailyRewardSequences[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, DepositRewardConfigValidationError{
+						field:  fmt.Sprintf("DailyRewardSequences[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return DepositRewardConfigValidationError{
+					field:  fmt.Sprintf("DailyRewardSequences[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if all {
+		switch v := interface{}(m.GetCreatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, DepositRewardConfigValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, DepositRewardConfigValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return DepositRewardConfigValidationError{
+				field:  "CreatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetUpdatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, DepositRewardConfigValidationError{
+					field:  "UpdatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, DepositRewardConfigValidationError{
+					field:  "UpdatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetUpdatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return DepositRewardConfigValidationError{
+				field:  "UpdatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return DepositRewardConfigMultiError(errors)
+	}
+
+	return nil
+}
+
+// DepositRewardConfigMultiError is an error wrapping multiple validation
+// errors returned by DepositRewardConfig.ValidateAll() if the designated
+// constraints aren't met.
+type DepositRewardConfigMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DepositRewardConfigMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DepositRewardConfigMultiError) AllErrors() []error { return m }
+
+// DepositRewardConfigValidationError is the validation error returned by
+// DepositRewardConfig.Validate if the designated constraints aren't met.
+type DepositRewardConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DepositRewardConfigValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DepositRewardConfigValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DepositRewardConfigValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DepositRewardConfigValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DepositRewardConfigValidationError) ErrorName() string {
+	return "DepositRewardConfigValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DepositRewardConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDepositRewardConfig.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DepositRewardConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DepositRewardConfigValidationError{}
+
 // Validate checks the field values on GetUserBalancesResponse_Balance with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -12743,3 +13208,115 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetOverviewDashboardFromWalletResponse_DepositMinusWithdrawValidationError{}
+
+// Validate checks the field values on RewardSequence_TierConfig with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RewardSequence_TierConfig) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RewardSequence_TierConfig with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RewardSequence_TierConfigMultiError, or nil if none found.
+func (m *RewardSequence_TierConfig) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RewardSequence_TierConfig) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for MinDepositAmount
+
+	// no validation rules for MaxDepositAmount
+
+	// no validation rules for RewardPercentage
+
+	// no validation rules for MaxBonusAmount
+
+	// no validation rules for MaxWithdrawalAmount
+
+	if len(errors) > 0 {
+		return RewardSequence_TierConfigMultiError(errors)
+	}
+
+	return nil
+}
+
+// RewardSequence_TierConfigMultiError is an error wrapping multiple validation
+// errors returned by RewardSequence_TierConfig.ValidateAll() if the
+// designated constraints aren't met.
+type RewardSequence_TierConfigMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RewardSequence_TierConfigMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RewardSequence_TierConfigMultiError) AllErrors() []error { return m }
+
+// RewardSequence_TierConfigValidationError is the validation error returned by
+// RewardSequence_TierConfig.Validate if the designated constraints aren't met.
+type RewardSequence_TierConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RewardSequence_TierConfigValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RewardSequence_TierConfigValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RewardSequence_TierConfigValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RewardSequence_TierConfigValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RewardSequence_TierConfigValidationError) ErrorName() string {
+	return "RewardSequence_TierConfigValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RewardSequence_TierConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRewardSequence_TierConfig.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RewardSequence_TierConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RewardSequence_TierConfigValidationError{}
