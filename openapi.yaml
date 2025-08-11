@@ -2781,24 +2781,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateWalletResponse'
-    /v1/bcpay/bankaccount/get:
-        post:
-            tags:
-                - Bcpay
-            operationId: Bcpay_CreateDeposit
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.bcpay.service.v1.CreateDepositRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.bcpay.service.v1.CreateDepositResponse'
     /v1/bcpay/withdraw/add:
         post:
             tags:

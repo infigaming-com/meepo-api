@@ -14,7 +14,7 @@ option java_package = "api.bcpay.service.v1";
 service Bcpay {
 	rpc CreateDeposit(CreateDepositRequest) returns (CreateDepositResponse) {
     option (google.api.http) = {
-      post: "/v1/bcpay/bankaccount/get"
+      post: "/v1/bcpay/withdraw/add"
       body: "*"
     };
 	}
