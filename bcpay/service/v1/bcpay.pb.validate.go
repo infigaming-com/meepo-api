@@ -1368,6 +1368,10 @@ func (m *BankAccountListRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
 	// no validation rules for Currency
 
 	// no validation rules for BankAccount
@@ -2249,6 +2253,212 @@ var _ interface {
 	ErrorName() string
 } = UpdateBankAccountResponseValidationError{}
 
+// Validate checks the field values on DeleteBankAccountRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteBankAccountRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteBankAccountRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteBankAccountRequestMultiError, or nil if none found.
+func (m *DeleteBankAccountRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteBankAccountRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if len(errors) > 0 {
+		return DeleteBankAccountRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteBankAccountRequestMultiError is an error wrapping multiple validation
+// errors returned by DeleteBankAccountRequest.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteBankAccountRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteBankAccountRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteBankAccountRequestMultiError) AllErrors() []error { return m }
+
+// DeleteBankAccountRequestValidationError is the validation error returned by
+// DeleteBankAccountRequest.Validate if the designated constraints aren't met.
+type DeleteBankAccountRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteBankAccountRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteBankAccountRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteBankAccountRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteBankAccountRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteBankAccountRequestValidationError) ErrorName() string {
+	return "DeleteBankAccountRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteBankAccountRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteBankAccountRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteBankAccountRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteBankAccountRequestValidationError{}
+
+// Validate checks the field values on DeleteBankAccountResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteBankAccountResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteBankAccountResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteBankAccountResponseMultiError, or nil if none found.
+func (m *DeleteBankAccountResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteBankAccountResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return DeleteBankAccountResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteBankAccountResponseMultiError is an error wrapping multiple validation
+// errors returned by DeleteBankAccountResponse.ValidateAll() if the
+// designated constraints aren't met.
+type DeleteBankAccountResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteBankAccountResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteBankAccountResponseMultiError) AllErrors() []error { return m }
+
+// DeleteBankAccountResponseValidationError is the validation error returned by
+// DeleteBankAccountResponse.Validate if the designated constraints aren't met.
+type DeleteBankAccountResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteBankAccountResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteBankAccountResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteBankAccountResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteBankAccountResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteBankAccountResponseValidationError) ErrorName() string {
+	return "DeleteBankAccountResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteBankAccountResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteBankAccountResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteBankAccountResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteBankAccountResponseValidationError{}
+
 // Validate checks the field values on TransactionListRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -2270,6 +2480,10 @@ func (m *TransactionListRequest) validate(all bool) error {
 	}
 
 	var errors []error
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
 
 	// no validation rules for Type
 

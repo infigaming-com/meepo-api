@@ -263,6 +263,10 @@ func (m *BankAccountListRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
 	// no validation rules for Currency
 
 	// no validation rules for BankAccount
@@ -669,9 +673,13 @@ func (m *TransactionListRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
 	// no validation rules for Type
 
-	// no validation rules for Audit
+	// no validation rules for Status
 
 	// no validation rules for TransactionId
 
@@ -683,9 +691,9 @@ func (m *TransactionListRequest) validate(all bool) error {
 
 	// no validation rules for UserName
 
-	// no validation rules for PayerBankAccountFirstname
+	// no validation rules for UserBankAccountFirstname
 
-	// no validation rules for PayerBankAccountLastname
+	// no validation rules for UserBankAccountLastname
 
 	if len(errors) > 0 {
 		return TransactionListRequestMultiError(errors)

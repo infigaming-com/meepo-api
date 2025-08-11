@@ -38,6 +38,8 @@ service Bcpay {
 
 	rpc UpdateBankAccount(UpdateBankAccountRequest) returns (UpdateBankAccountResponse) { }
 
+	rpc DeleteBankAccount(DeleteBankAccountRequest) returns (DeleteBankAccountResponse) { }
+
 	rpc TransactionList(TransactionListRequest) returns (TransactionListResponse) { }
 
 	rpc AuditTransaction(AuditTransactionRequest) returns (AuditTransactionResponse) { }
@@ -138,13 +140,17 @@ message DepositBankAccount {
 }
 
 message BankAccountListRequest {
-	string currency = 1;
-	string bank_account = 2;
-	string bank_account_firstname = 3;
-	string bank_account_lastname = 4;
-	string card_id = 5;
-	bool enabled = 6;
-  api.common.OperatorContext operator_context = 7;
+  // Page number to retrieve (1-based)
+  int32 page = 1;
+  // Number of items per page
+  int32 page_size = 2;
+	string currency = 3;
+	string bank_account = 4;
+	string bank_account_firstname = 5;
+	string bank_account_lastname = 6;
+	string card_id = 7;
+	bool enabled = 8;
+  api.common.OperatorContext operator_context = 9;
 }
 
 message BankAccountListResponse {
@@ -195,17 +201,28 @@ message UpdateBankAccountResponse {
 	DepositBankAccount bank_account = 1;
 }
 
+message DeleteBankAccountRequest {
+	int64 id = 1;
+}
+
+message DeleteBankAccountResponse { }
+
+
 message TransactionListRequest {
-	string type = 1;
-	string status = 2;
-	int64 transaction_id = 3;
-	string deposit_bank_account_firstname = 4;
-	string deposit_bank_account_lastname = 5;
-	string user_id = 6;
-	string user_name = 7;
-	string user_bank_account_firstname = 8;
-	string user_bank_account_lastname = 9;
-  api.common.OperatorContext operator_context = 10;
+  // Page number to retrieve (1-based)
+  int32 page = 1;
+  // Number of items per page
+  int32 page_size = 2;
+	string type = 3;
+	string status = 4;
+	int64 transaction_id = 5;
+	string deposit_bank_account_firstname = 6;
+	string deposit_bank_account_lastname = 7;
+	string user_id = 8;
+	string user_name = 9;
+	string user_bank_account_firstname = 10;
+	string user_bank_account_lastname = 11;
+  api.common.OperatorContext operator_context = 12;
 }
 
 message Transaction {

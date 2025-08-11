@@ -478,6 +478,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.bcpay.service.v1.AddBankAccountResponse'
+    /v1/backoffice/bcpay/bankaccount/delete:
+        post:
+            tags:
+                - BackofficeBcpay
+            operationId: BackofficeBcpay_DeleteBankAccount
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.bcpay.service.v1.DeleteBankAccountRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.bcpay.service.v1.DeleteBankAccountResponse'
     /v1/backoffice/bcpay/bankaccount/list:
         post:
             tags:
@@ -3741,6 +3759,14 @@ components:
         api.backoffice.service.v1.BankAccountListRequest:
             type: object
             properties:
+                page:
+                    type: integer
+                    description: Page number to retrieve (1-based)
+                    format: int32
+                pageSize:
+                    type: integer
+                    description: Number of items per page
+                    format: int32
                 currency:
                     type: string
                 bankAccount:
@@ -8448,9 +8474,17 @@ components:
         api.backoffice.service.v1.TransactionListRequest:
             type: object
             properties:
+                page:
+                    type: integer
+                    description: Page number to retrieve (1-based)
+                    format: int32
+                pageSize:
+                    type: integer
+                    description: Number of items per page
+                    format: int32
                 type:
                     type: string
-                audit:
+                status:
                     type: string
                 transactionId:
                     type: string
@@ -8462,9 +8496,9 @@ components:
                     type: string
                 userName:
                     type: string
-                payerBankAccountFirstname:
+                userBankAccountFirstname:
                     type: string
-                payerBankAccountLastname:
+                userBankAccountLastname:
                     type: string
         api.backoffice.service.v1.Unbind2faRequest:
             type: object
@@ -8842,6 +8876,14 @@ components:
             properties:
                 transactionId:
                     type: string
+        api.bcpay.service.v1.DeleteBankAccountRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+        api.bcpay.service.v1.DeleteBankAccountResponse:
+            type: object
+            properties: {}
         api.bcpay.service.v1.DepositBankAccount:
             type: object
             properties:
