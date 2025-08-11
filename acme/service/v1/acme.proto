@@ -32,7 +32,7 @@ service acme {
 message CertificateInfo {
 	string domain = 1;      // Domain name
 	string status = 2;      // Certificate status
-	int64 expires_at = 3;	// Certificate expiry date
+	int64 expired_at = 3;	// Certificate expiry date
 	int64 issued_at = 4;    // Certificate issue date
 	string issuer = 5;      // Certificate issuer (e.g., "ZeroSSL")
 	repeated string san_domains = 6;	// Subject Alternative Names
@@ -48,7 +48,7 @@ message IssueCertificateRequest {
 message IssueCertificateResponse {
 	string domain = 1;      // Domain name
 	string status = 2;      // Certificate status
-	int64 expires_at = 3;   // Certificate expiry date
+	int64 expired_at = 3;   // Certificate expiry date
 }
 
 // Request to renew a certificate
@@ -60,7 +60,7 @@ message RenewCertificateRequest {
 message RenewCertificateResponse {
 	string domain = 1;      // Domain name
 	string status = 2;      // Certificate status
-	int64 expires_at = 3;	// New expiry date
+	int64 expired_at = 3;	// New expiry date
 }
 
 // Request to revoke a certificate
@@ -81,7 +81,7 @@ message GetCertificateRequest {
 message GetCertificateResponse {
 	string domain = 1;		// Domain name
 	string status = 2;      // Certificate status
-	int64 expires_at = 3;   // Certificate expiry date
+	int64 expired_at = 3;   // Certificate expiry date
 }
 
 // Request to list all certificates

@@ -26,7 +26,7 @@ type CertificateInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Domain        string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`                           // Domain name
 	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`                           // Certificate status
-	ExpiresAt     int64                  `protobuf:"varint,3,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`   // Certificate expiry date
+	ExpiredAt     int64                  `protobuf:"varint,3,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"`   // Certificate expiry date
 	IssuedAt      int64                  `protobuf:"varint,4,opt,name=issued_at,json=issuedAt,proto3" json:"issued_at,omitempty"`      // Certificate issue date
 	Issuer        string                 `protobuf:"bytes,5,opt,name=issuer,proto3" json:"issuer,omitempty"`                           // Certificate issuer (e.g., "ZeroSSL")
 	SanDomains    []string               `protobuf:"bytes,6,rep,name=san_domains,json=sanDomains,proto3" json:"san_domains,omitempty"` // Subject Alternative Names
@@ -78,9 +78,9 @@ func (x *CertificateInfo) GetStatus() string {
 	return ""
 }
 
-func (x *CertificateInfo) GetExpiresAt() int64 {
+func (x *CertificateInfo) GetExpiredAt() int64 {
 	if x != nil {
-		return x.ExpiresAt
+		return x.ExpiredAt
 	}
 	return 0
 }
@@ -164,7 +164,7 @@ type IssueCertificateResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Domain        string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`                         // Domain name
 	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`                         // Certificate status
-	ExpiresAt     int64                  `protobuf:"varint,3,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"` // Certificate expiry date
+	ExpiredAt     int64                  `protobuf:"varint,3,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"` // Certificate expiry date
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -213,9 +213,9 @@ func (x *IssueCertificateResponse) GetStatus() string {
 	return ""
 }
 
-func (x *IssueCertificateResponse) GetExpiresAt() int64 {
+func (x *IssueCertificateResponse) GetExpiredAt() int64 {
 	if x != nil {
-		return x.ExpiresAt
+		return x.ExpiredAt
 	}
 	return 0
 }
@@ -270,7 +270,7 @@ type RenewCertificateResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Domain        string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`                         // Domain name
 	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`                         // Certificate status
-	ExpiresAt     int64                  `protobuf:"varint,3,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"` // New expiry date
+	ExpiredAt     int64                  `protobuf:"varint,3,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"` // New expiry date
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -319,9 +319,9 @@ func (x *RenewCertificateResponse) GetStatus() string {
 	return ""
 }
 
-func (x *RenewCertificateResponse) GetExpiresAt() int64 {
+func (x *RenewCertificateResponse) GetExpiredAt() int64 {
 	if x != nil {
-		return x.ExpiresAt
+		return x.ExpiredAt
 	}
 	return 0
 }
@@ -458,7 +458,7 @@ type GetCertificateResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Domain        string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`                         // Domain name
 	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`                         // Certificate status
-	ExpiresAt     int64                  `protobuf:"varint,3,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"` // Certificate expiry date
+	ExpiredAt     int64                  `protobuf:"varint,3,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"` // Certificate expiry date
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -507,9 +507,9 @@ func (x *GetCertificateResponse) GetStatus() string {
 	return ""
 }
 
-func (x *GetCertificateResponse) GetExpiresAt() int64 {
+func (x *GetCertificateResponse) GetExpiredAt() int64 {
 	if x != nil {
-		return x.ExpiresAt
+		return x.ExpiredAt
 	}
 	return 0
 }
@@ -630,7 +630,7 @@ const file_acme_service_v1_acme_proto_rawDesc = "" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12\x1d\n" +
 	"\n" +
-	"expires_at\x18\x03 \x01(\x03R\texpiresAt\x12\x1b\n" +
+	"expired_at\x18\x03 \x01(\x03R\texpiredAt\x12\x1b\n" +
 	"\tissued_at\x18\x04 \x01(\x03R\bissuedAt\x12\x16\n" +
 	"\x06issuer\x18\x05 \x01(\tR\x06issuer\x12\x1f\n" +
 	"\vsan_domains\x18\x06 \x03(\tR\n" +
@@ -642,14 +642,14 @@ const file_acme_service_v1_acme_proto_rawDesc = "" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12\x1d\n" +
 	"\n" +
-	"expires_at\x18\x03 \x01(\x03R\texpiresAt\"1\n" +
+	"expired_at\x18\x03 \x01(\x03R\texpiredAt\"1\n" +
 	"\x17RenewCertificateRequest\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\"i\n" +
 	"\x18RenewCertificateResponse\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12\x1d\n" +
 	"\n" +
-	"expires_at\x18\x03 \x01(\x03R\texpiresAt\"2\n" +
+	"expired_at\x18\x03 \x01(\x03R\texpiredAt\"2\n" +
 	"\x18RevokeCertificateRequest\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\"\x1b\n" +
 	"\x19RevokeCertificateResponse\"/\n" +
@@ -659,7 +659,7 @@ const file_acme_service_v1_acme_proto_rawDesc = "" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12\x1d\n" +
 	"\n" +
-	"expires_at\x18\x03 \x01(\x03R\texpiresAt\"\x97\x01\n" +
+	"expired_at\x18\x03 \x01(\x03R\texpiredAt\"\x97\x01\n" +
 	"\x17ListCertificatesRequest\x12(\n" +
 	"\rstatus_filter\x18\x01 \x01(\tH\x00R\fstatusFilter\x88\x01\x01\x12,\n" +
 	"\x0finclude_expired\x18\x02 \x01(\bH\x01R\x0eincludeExpired\x88\x01\x01B\x10\n" +

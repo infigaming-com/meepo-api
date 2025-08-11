@@ -61,7 +61,7 @@ func (m *CertificateInfo) validate(all bool) error {
 
 	// no validation rules for Status
 
-	// no validation rules for ExpiresAt
+	// no validation rules for ExpiredAt
 
 	// no validation rules for IssuedAt
 
@@ -277,7 +277,7 @@ func (m *IssueCertificateResponse) validate(all bool) error {
 
 	// no validation rules for Status
 
-	// no validation rules for ExpiresAt
+	// no validation rules for ExpiredAt
 
 	if len(errors) > 0 {
 		return IssueCertificateResponseMultiError(errors)
@@ -489,7 +489,7 @@ func (m *RenewCertificateResponse) validate(all bool) error {
 
 	// no validation rules for Status
 
-	// no validation rules for ExpiresAt
+	// no validation rules for ExpiredAt
 
 	if len(errors) > 0 {
 		return RenewCertificateResponseMultiError(errors)
@@ -907,7 +907,7 @@ func (m *GetCertificateResponse) validate(all bool) error {
 
 	// no validation rules for Status
 
-	// no validation rules for ExpiresAt
+	// no validation rules for ExpiredAt
 
 	if len(errors) > 0 {
 		return GetCertificateResponseMultiError(errors)
