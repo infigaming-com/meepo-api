@@ -1011,12 +1011,12 @@ func (m *ListCertificatesRequest) validate(all bool) error {
 
 	var errors []error
 
-	if m.StatusFilter != nil {
-		// no validation rules for StatusFilter
+	if m.Status != nil {
+		// no validation rules for Status
 	}
 
-	if m.IncludeExpired != nil {
-		// no validation rules for IncludeExpired
+	if m.Expired != nil {
+		// no validation rules for Expired
 	}
 
 	if len(errors) > 0 {

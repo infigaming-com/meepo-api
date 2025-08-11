@@ -518,10 +518,10 @@ func (x *GetCertificateResponse) GetExpiredAt() int64 {
 type ListCertificatesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Optional filters
-	StatusFilter   *string `protobuf:"bytes,1,opt,name=status_filter,json=statusFilter,proto3,oneof" json:"status_filter,omitempty"`        // Filter by status
-	IncludeExpired *bool   `protobuf:"varint,2,opt,name=include_expired,json=includeExpired,proto3,oneof" json:"include_expired,omitempty"` // Include expired certificates
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	Status        *string `protobuf:"bytes,1,opt,name=status,proto3,oneof" json:"status,omitempty"`    // Filter by status
+	Expired       *bool   `protobuf:"varint,2,opt,name=expired,proto3,oneof" json:"expired,omitempty"` // Include expired certificates
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListCertificatesRequest) Reset() {
@@ -554,16 +554,16 @@ func (*ListCertificatesRequest) Descriptor() ([]byte, []int) {
 	return file_acme_service_v1_acme_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *ListCertificatesRequest) GetStatusFilter() string {
-	if x != nil && x.StatusFilter != nil {
-		return *x.StatusFilter
+func (x *ListCertificatesRequest) GetStatus() string {
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return ""
 }
 
-func (x *ListCertificatesRequest) GetIncludeExpired() bool {
-	if x != nil && x.IncludeExpired != nil {
-		return *x.IncludeExpired
+func (x *ListCertificatesRequest) GetExpired() bool {
+	if x != nil && x.Expired != nil {
+		return *x.Expired
 	}
 	return false
 }
@@ -659,12 +659,13 @@ const file_acme_service_v1_acme_proto_rawDesc = "" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12\x1d\n" +
 	"\n" +
-	"expired_at\x18\x03 \x01(\x03R\texpiredAt\"\x97\x01\n" +
-	"\x17ListCertificatesRequest\x12(\n" +
-	"\rstatus_filter\x18\x01 \x01(\tH\x00R\fstatusFilter\x88\x01\x01\x12,\n" +
-	"\x0finclude_expired\x18\x02 \x01(\bH\x01R\x0eincludeExpired\x88\x01\x01B\x10\n" +
-	"\x0e_status_filterB\x12\n" +
-	"\x10_include_expired\"\x85\x01\n" +
+	"expired_at\x18\x03 \x01(\x03R\texpiredAt\"l\n" +
+	"\x17ListCertificatesRequest\x12\x1b\n" +
+	"\x06status\x18\x01 \x01(\tH\x00R\x06status\x88\x01\x01\x12\x1d\n" +
+	"\aexpired\x18\x02 \x01(\bH\x01R\aexpired\x88\x01\x01B\t\n" +
+	"\a_statusB\n" +
+	"\n" +
+	"\b_expired\"\x85\x01\n" +
 	"\x18ListCertificatesResponse\x12H\n" +
 	"\fcertificates\x18\x01 \x03(\v2$.api.acme.service.v1.CertificateInfoR\fcertificates\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +

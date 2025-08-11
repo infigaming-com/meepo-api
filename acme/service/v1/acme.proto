@@ -87,8 +87,8 @@ message GetCertificateResponse {
 // Request to list all certificates
 message ListCertificatesRequest {
 	// Optional filters
-	optional string status_filter = 1;	// Filter by status
-	optional bool include_expired = 2;  // Include expired certificates
+	optional string status = 1;	// Filter by status
+	optional bool expired = 2;  // Include expired certificates
 }
 
 // Response with list of certificates
