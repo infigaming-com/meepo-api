@@ -10975,7 +10975,7 @@ func (m *RewardSequence) validate(all bool) error {
 
 	// no validation rules for RewardType
 
-	// no validation rules for WageringRequirements
+	// no validation rules for WageringRequirement
 
 	// no validation rules for RewardValidity
 

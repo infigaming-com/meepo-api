@@ -6141,18 +6141,18 @@ func (x *GetOperatorBalanceTransactionsByIdsResponse) GetTransactions() []*Opera
 }
 
 type RewardSequence struct {
-	state                protoimpl.MessageState       `protogen:"open.v1"`
-	SerialNumber         int64                        `protobuf:"varint,1,opt,name=serial_number,json=serialNumber,proto3" json:"serial_number,omitempty"`
-	Name                 string                       `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Enabled              bool                         `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	RewardType           string                       `protobuf:"bytes,4,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"`
-	WageringRequirements int32                        `protobuf:"varint,5,opt,name=wagering_requirements,json=wageringRequirements,proto3" json:"wagering_requirements,omitempty"` // coefficient
-	RewardValidity       int64                        `protobuf:"varint,6,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"`                   // milliseconds
-	TierConfigs          []*RewardSequence_TierConfig `protobuf:"bytes,7,rep,name=tier_configs,json=tierConfigs,proto3" json:"tier_configs,omitempty"`
-	StartTime            *timestamppb.Timestamp       `protobuf:"bytes,8,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	EndTime              *timestamppb.Timestamp       `protobuf:"bytes,9,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	state               protoimpl.MessageState       `protogen:"open.v1"`
+	SerialNumber        int64                        `protobuf:"varint,1,opt,name=serial_number,json=serialNumber,proto3" json:"serial_number,omitempty"`
+	Name                string                       `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Enabled             bool                         `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	RewardType          string                       `protobuf:"bytes,4,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"`
+	WageringRequirement int32                        `protobuf:"varint,5,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"` // coefficient
+	RewardValidity      int64                        `protobuf:"varint,6,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"`                // milliseconds
+	TierConfigs         []*RewardSequence_TierConfig `protobuf:"bytes,7,rep,name=tier_configs,json=tierConfigs,proto3" json:"tier_configs,omitempty"`
+	StartTime           *timestamppb.Timestamp       `protobuf:"bytes,8,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime             *timestamppb.Timestamp       `protobuf:"bytes,9,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *RewardSequence) Reset() {
@@ -6213,9 +6213,9 @@ func (x *RewardSequence) GetRewardType() string {
 	return ""
 }
 
-func (x *RewardSequence) GetWageringRequirements() int32 {
+func (x *RewardSequence) GetWageringRequirement() int32 {
 	if x != nil {
-		return x.WageringRequirements
+		return x.WageringRequirement
 	}
 	return 0
 }
@@ -8500,14 +8500,14 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0ftransaction_ids\x18\x01 \x03(\x03R\x0etransactionIds\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x84\x01\n" +
 	"+GetOperatorBalanceTransactionsByIdsResponse\x12U\n" +
-	"\ftransactions\x18\x01 \x03(\v21.api.wallet.service.v1.OperatorBalanceTransactionR\ftransactions\"\x9f\x05\n" +
+	"\ftransactions\x18\x01 \x03(\v21.api.wallet.service.v1.OperatorBalanceTransactionR\ftransactions\"\x9d\x05\n" +
 	"\x0eRewardSequence\x12#\n" +
 	"\rserial_number\x18\x01 \x01(\x03R\fserialNumber\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n" +
 	"\aenabled\x18\x03 \x01(\bR\aenabled\x12\x1f\n" +
 	"\vreward_type\x18\x04 \x01(\tR\n" +
-	"rewardType\x123\n" +
-	"\x15wagering_requirements\x18\x05 \x01(\x05R\x14wageringRequirements\x12'\n" +
+	"rewardType\x121\n" +
+	"\x14wagering_requirement\x18\x05 \x01(\x05R\x13wageringRequirement\x12'\n" +
 	"\x0freward_validity\x18\x06 \x01(\x03R\x0erewardValidity\x12S\n" +
 	"\ftier_configs\x18\a \x03(\v20.api.wallet.service.v1.RewardSequence.TierConfigR\vtierConfigs\x129\n" +
 	"\n" +
