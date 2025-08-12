@@ -10895,19 +10895,19 @@ components:
                     type: object
         payment.service.v1.AddBankCardResponse:
             type: object
-            properties:
-                bankCard:
-                    $ref: '#/components/schemas/payment.service.v1.BankCard'
+            properties: {}
         payment.service.v1.BankCard:
             type: object
             properties:
                 id:
                     type: string
-                cardNumber:
+                cardAccount:
                     type: string
                 cardAccountFirstname:
                     type: string
                 cardAccountLastname:
+                    type: string
+                cardIban:
                     type: string
                 currency:
                     type: string
@@ -11760,9 +11760,7 @@ components:
                     type: object
         payment.service.v1.UpdateBankCardResponse:
             type: object
-            properties:
-                bankCard:
-                    $ref: '#/components/schemas/payment.service.v1.BankCard'
+            properties: {}
         payment.service.v1.UpdatePaymentChannelRequest:
             type: object
             properties:

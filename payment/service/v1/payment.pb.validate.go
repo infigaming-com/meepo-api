@@ -5796,11 +5796,13 @@ func (m *BankCard) validate(all bool) error {
 
 	// no validation rules for Id
 
-	// no validation rules for CardNumber
+	// no validation rules for CardAccount
 
 	// no validation rules for CardAccountFirstname
 
 	// no validation rules for CardAccountLastname
+
+	// no validation rules for CardIban
 
 	// no validation rules for Currency
 
@@ -6280,35 +6282,6 @@ func (m *AddBankCardResponse) validate(all bool) error {
 
 	var errors []error
 
-	if all {
-		switch v := interface{}(m.GetBankCard()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, AddBankCardResponseValidationError{
-					field:  "BankCard",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, AddBankCardResponseValidationError{
-					field:  "BankCard",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetBankCard()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return AddBankCardResponseValidationError{
-				field:  "BankCard",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	if len(errors) > 0 {
 		return AddBankCardResponseMultiError(errors)
 	}
@@ -6547,35 +6520,6 @@ func (m *UpdateBankCardResponse) validate(all bool) error {
 	}
 
 	var errors []error
-
-	if all {
-		switch v := interface{}(m.GetBankCard()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UpdateBankCardResponseValidationError{
-					field:  "BankCard",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, UpdateBankCardResponseValidationError{
-					field:  "BankCard",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetBankCard()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UpdateBankCardResponseValidationError{
-				field:  "BankCard",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
 
 	if len(errors) > 0 {
 		return UpdateBankCardResponseMultiError(errors)

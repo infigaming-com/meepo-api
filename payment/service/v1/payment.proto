@@ -829,12 +829,13 @@ message UpdatePaymentMethodResponse {
 
 message BankCard {
   int64 id = 1;
-  string card_number = 2;
+  string card_account = 2;
   string card_account_firstname = 3;
   string card_account_lastname = 4;
-  string currency = 5;
-  string country = 6;
-  bool enabled = 7;
+  string card_iban = 5;
+  string currency = 6;
+  string country = 7;
+  bool enabled = 8;
 }
 
 message GetBankCardListRequest {
@@ -852,7 +853,6 @@ message AddBankCardRequest {
 }
 
 message AddBankCardResponse {
-  BankCard bank_card = 1;
 }
 
 message UpdateBankCardRequest {
@@ -863,7 +863,6 @@ message UpdateBankCardRequest {
 }
 
 message UpdateBankCardResponse {
-  BankCard bank_card = 1;
 }
 
 message DeleteBankCardRequest {
@@ -871,7 +870,6 @@ message DeleteBankCardRequest {
 }
 
 message DeleteBankCardResponse {
-  
 }
 
 message GetBankAccountRequest {
