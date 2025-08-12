@@ -27,6 +27,7 @@ const (
 	Bcpay_BankAccountList_FullMethodName      = "/api.bcpay.service.v1.Bcpay/BankAccountList"
 	Bcpay_AddBankAccount_FullMethodName       = "/api.bcpay.service.v1.Bcpay/AddBankAccount"
 	Bcpay_UpdateBankAccount_FullMethodName    = "/api.bcpay.service.v1.Bcpay/UpdateBankAccount"
+	Bcpay_DeleteBankAccount_FullMethodName    = "/api.bcpay.service.v1.Bcpay/DeleteBankAccount"
 	Bcpay_TransactionList_FullMethodName      = "/api.bcpay.service.v1.Bcpay/TransactionList"
 	Bcpay_AuditTransaction_FullMethodName     = "/api.bcpay.service.v1.Bcpay/AuditTransaction"
 	Bcpay_AddNoteToTransaction_FullMethodName = "/api.bcpay.service.v1.Bcpay/AddNoteToTransaction"
@@ -46,6 +47,7 @@ type BcpayClient interface {
 	BankAccountList(ctx context.Context, in *BankAccountListRequest, opts ...grpc.CallOption) (*BankAccountListResponse, error)
 	AddBankAccount(ctx context.Context, in *AddBankAccountRequest, opts ...grpc.CallOption) (*AddBankAccountResponse, error)
 	UpdateBankAccount(ctx context.Context, in *UpdateBankAccountRequest, opts ...grpc.CallOption) (*UpdateBankAccountResponse, error)
+	DeleteBankAccount(ctx context.Context, in *DeleteBankAccountRequest, opts ...grpc.CallOption) (*DeleteBankAccountResponse, error)
 	TransactionList(ctx context.Context, in *TransactionListRequest, opts ...grpc.CallOption) (*TransactionListResponse, error)
 	AuditTransaction(ctx context.Context, in *AuditTransactionRequest, opts ...grpc.CallOption) (*AuditTransactionResponse, error)
 	AddNoteToTransaction(ctx context.Context, in *AddNoteToTransactionRequest, opts ...grpc.CallOption) (*AddNoteToTransactionResponse, error)
@@ -139,6 +141,16 @@ func (c *bcpayClient) UpdateBankAccount(ctx context.Context, in *UpdateBankAccou
 	return out, nil
 }
 
+func (c *bcpayClient) DeleteBankAccount(ctx context.Context, in *DeleteBankAccountRequest, opts ...grpc.CallOption) (*DeleteBankAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteBankAccountResponse)
+	err := c.cc.Invoke(ctx, Bcpay_DeleteBankAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *bcpayClient) TransactionList(ctx context.Context, in *TransactionListRequest, opts ...grpc.CallOption) (*TransactionListResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(TransactionListResponse)
@@ -183,6 +195,7 @@ type BcpayServer interface {
 	BankAccountList(context.Context, *BankAccountListRequest) (*BankAccountListResponse, error)
 	AddBankAccount(context.Context, *AddBankAccountRequest) (*AddBankAccountResponse, error)
 	UpdateBankAccount(context.Context, *UpdateBankAccountRequest) (*UpdateBankAccountResponse, error)
+	DeleteBankAccount(context.Context, *DeleteBankAccountRequest) (*DeleteBankAccountResponse, error)
 	TransactionList(context.Context, *TransactionListRequest) (*TransactionListResponse, error)
 	AuditTransaction(context.Context, *AuditTransactionRequest) (*AuditTransactionResponse, error)
 	AddNoteToTransaction(context.Context, *AddNoteToTransactionRequest) (*AddNoteToTransactionResponse, error)
@@ -219,6 +232,9 @@ func (UnimplementedBcpayServer) AddBankAccount(context.Context, *AddBankAccountR
 }
 func (UnimplementedBcpayServer) UpdateBankAccount(context.Context, *UpdateBankAccountRequest) (*UpdateBankAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateBankAccount not implemented")
+}
+func (UnimplementedBcpayServer) DeleteBankAccount(context.Context, *DeleteBankAccountRequest) (*DeleteBankAccountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteBankAccount not implemented")
 }
 func (UnimplementedBcpayServer) TransactionList(context.Context, *TransactionListRequest) (*TransactionListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TransactionList not implemented")
@@ -394,6 +410,24 @@ func _Bcpay_UpdateBankAccount_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Bcpay_DeleteBankAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteBankAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BcpayServer).DeleteBankAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Bcpay_DeleteBankAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BcpayServer).DeleteBankAccount(ctx, req.(*DeleteBankAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Bcpay_TransactionList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(TransactionListRequest)
 	if err := dec(in); err != nil {
@@ -486,6 +520,10 @@ var Bcpay_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateBankAccount",
 			Handler:    _Bcpay_UpdateBankAccount_Handler,
+		},
+		{
+			MethodName: "DeleteBankAccount",
+			Handler:    _Bcpay_DeleteBankAccount_Handler,
 		},
 		{
 			MethodName: "TransactionList",
