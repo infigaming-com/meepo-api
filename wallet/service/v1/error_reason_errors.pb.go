@@ -934,3 +934,51 @@ func IsGetReportingCurrencyFailed(err error) bool {
 func ErrorGetReportingCurrencyFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_REPORTING_CURRENCY_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsAddOperatorCurrencyConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ADD_OPERATOR_CURRENCY_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorAddOperatorCurrencyConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_OPERATOR_CURRENCY_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetOperatorCurrencyConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATOR_CURRENCY_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorCurrencyConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_CURRENCY_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSetDepositRewardSequencesFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SET_DEPOSIT_REWARD_SEQUENCES_FAILED.String() && e.Code == 500
+}
+
+func ErrorSetDepositRewardSequencesFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SET_DEPOSIT_REWARD_SEQUENCES_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsAddUserDepositStatsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ADD_USER_DEPOSIT_STATS_FAILED.String() && e.Code == 500
+}
+
+func ErrorAddUserDepositStatsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_USER_DEPOSIT_STATS_FAILED.String(), fmt.Sprintf(format, args...))
+}
