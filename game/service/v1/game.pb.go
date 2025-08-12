@@ -2373,16 +2373,16 @@ func (x *RollbackRequest) GetActions() []*RollbackAction {
 }
 
 type RollbackAction struct {
-	state                 protoimpl.MessageState `protogen:"open.v1"`
-	Action                string                 `protobuf:"bytes,1,opt,name=action,proto3" json:"action,omitempty"`
-	BetId                 string                 `protobuf:"bytes,2,opt,name=bet_id,json=betId,proto3" json:"bet_id,omitempty"`
-	TxnId                 string                 `protobuf:"bytes,3,opt,name=txn_id,json=txnId,proto3" json:"txn_id,omitempty"`
-	ExtTxnId              string                 `protobuf:"bytes,4,opt,name=ext_txn_id,json=extTxnId,proto3" json:"ext_txn_id,omitempty"`
-	OriginalTxnId         string                 `protobuf:"bytes,5,opt,name=original_txn_id,json=originalTxnId,proto3" json:"original_txn_id,omitempty"`
-	OriginalExternalTxnId string                 `protobuf:"bytes,6,opt,name=original_external_txn_id,json=originalExternalTxnId,proto3" json:"original_external_txn_id,omitempty"`
-	ProviderTimestamp     int64                  `protobuf:"varint,7,opt,name=provider_timestamp,json=providerTimestamp,proto3" json:"provider_timestamp,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Action            string                 `protobuf:"bytes,1,opt,name=action,proto3" json:"action,omitempty"`
+	BetId             string                 `protobuf:"bytes,2,opt,name=bet_id,json=betId,proto3" json:"bet_id,omitempty"`
+	TxnId             string                 `protobuf:"bytes,3,opt,name=txn_id,json=txnId,proto3" json:"txn_id,omitempty"`
+	ExtTxnId          string                 `protobuf:"bytes,4,opt,name=ext_txn_id,json=extTxnId,proto3" json:"ext_txn_id,omitempty"`
+	OriginalTxnId     string                 `protobuf:"bytes,5,opt,name=original_txn_id,json=originalTxnId,proto3" json:"original_txn_id,omitempty"`
+	OriginalExtTxnId  string                 `protobuf:"bytes,6,opt,name=original_ext_txn_id,json=originalExtTxnId,proto3" json:"original_ext_txn_id,omitempty"`
+	ProviderTimestamp int64                  `protobuf:"varint,7,opt,name=provider_timestamp,json=providerTimestamp,proto3" json:"provider_timestamp,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *RollbackAction) Reset() {
@@ -2450,9 +2450,9 @@ func (x *RollbackAction) GetOriginalTxnId() string {
 	return ""
 }
 
-func (x *RollbackAction) GetOriginalExternalTxnId() string {
+func (x *RollbackAction) GetOriginalExtTxnId() string {
 	if x != nil {
-		return x.OriginalExternalTxnId
+		return x.OriginalExtTxnId
 	}
 	return ""
 }
@@ -6515,15 +6515,15 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\bround_id\x18\x04 \x01(\tR\aroundId\x12\x1a\n" +
 	"\bfinished\x18\x05 \x01(\bR\bfinished\x12\x1b\n" +
 	"\tsm_result\x18\x06 \x01(\tR\bsmResult\x12=\n" +
-	"\aactions\x18\a \x03(\v2#.api.game.service.v1.RollbackActionR\aactions\"\x84\x02\n" +
+	"\aactions\x18\a \x03(\v2#.api.game.service.v1.RollbackActionR\aactions\"\xfa\x01\n" +
 	"\x0eRollbackAction\x12\x16\n" +
 	"\x06action\x18\x01 \x01(\tR\x06action\x12\x15\n" +
 	"\x06bet_id\x18\x02 \x01(\tR\x05betId\x12\x15\n" +
 	"\x06txn_id\x18\x03 \x01(\tR\x05txnId\x12\x1c\n" +
 	"\n" +
 	"ext_txn_id\x18\x04 \x01(\tR\bextTxnId\x12&\n" +
-	"\x0foriginal_txn_id\x18\x05 \x01(\tR\roriginalTxnId\x127\n" +
-	"\x18original_external_txn_id\x18\x06 \x01(\tR\x15originalExternalTxnId\x12-\n" +
+	"\x0foriginal_txn_id\x18\x05 \x01(\tR\roriginalTxnId\x12-\n" +
+	"\x13original_ext_txn_id\x18\x06 \x01(\tR\x10originalExtTxnId\x12-\n" +
 	"\x12provider_timestamp\x18\a \x01(\x03R\x11providerTimestamp\"\xdf\x01\n" +
 	"\x10RollbackResponse\x12>\n" +
 	"\x04data\x18\x01 \x01(\v2*.api.game.service.v1.RollbackResponse.DataR\x04data\x1a\x8a\x01\n" +
