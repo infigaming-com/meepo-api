@@ -4202,7 +4202,7 @@ func (m *RollbackAction) validate(all bool) error {
 
 	// no validation rules for OriginalTxnId
 
-	// no validation rules for OriginalExtTxnId
+	// no validation rules for OriginalExternalTxnId
 
 	// no validation rules for ProviderTimestamp
 

@@ -396,7 +396,7 @@ message RollbackAction {
 	string txn_id = 3;
 	string ext_txn_id = 4;
 	string original_txn_id = 5;
-	string original_ext_txn_id = 6;
+	string original_external_txn_id = 6;
 	int64 provider_timestamp = 7;
 }
 

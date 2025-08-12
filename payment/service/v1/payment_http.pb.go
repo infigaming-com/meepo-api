@@ -91,7 +91,7 @@ func RegisterPaymentHTTPServer(s *http.Server, srv PaymentHTTPServer) {
 	r.POST("/v1/payment/bankcard/update", _Payment_UpdateUserBankCard0_HTTP_Handler(srv))
 	r.POST("/v1/payment/bankcard/delete", _Payment_DeleteUsesrBankCard0_HTTP_Handler(srv))
 	r.POST("/v1/payment/bankaccount/get", _Payment_GetDepositBankAccount0_HTTP_Handler(srv))
-	r.POST("/v1/payment/bankinfo/schema/get", _Payment_GetBankSchema0_HTTP_Handler(srv))
+	r.POST("/v1/payment/bankinfo/schema/get", _Payment_GetBankSchema1_HTTP_Handler(srv))
 }
 
 func _Payment_GetAddress0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
@@ -380,7 +380,7 @@ func _Payment_GetDepositBankAccount0_HTTP_Handler(srv PaymentHTTPServer) func(ct
 	}
 }
 
-func _Payment_GetBankSchema0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
+func _Payment_GetBankSchema1_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetBankSchemaRequest
 		if err := ctx.Bind(&in); err != nil {
