@@ -82,6 +82,7 @@ message PaymentMethodInfo {
   string success_rate = 24;
   // JSON schema defining the required fields for this payment method
   google.protobuf.ListValue key_schema = 25; 
+  string psp_id = 26;
 }
 
 // Response for payment method list

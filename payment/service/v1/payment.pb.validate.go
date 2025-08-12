@@ -383,6 +383,8 @@ func (m *PaymentMethodInfo) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for PspId
+
 	if len(errors) > 0 {
 		return PaymentMethodInfoMultiError(errors)
 	}
