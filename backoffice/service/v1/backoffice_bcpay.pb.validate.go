@@ -387,8 +387,6 @@ func (m *AddBankAccountRequest) validate(all bool) error {
 
 	// no validation rules for MaxAmount
 
-	// no validation rules for MinAmount
-
 	// no validation rules for MaxAmountPerTrans
 
 	// no validation rules for MaxTransLimit
@@ -533,8 +531,6 @@ func (m *UpdateBankAccountRequest) validate(all bool) error {
 	// no validation rules for Country
 
 	// no validation rules for MaxAmount
-
-	// no validation rules for MinAmount
 
 	// no validation rules for MaxAmountPerTrans
 

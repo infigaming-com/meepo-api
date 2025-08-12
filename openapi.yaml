@@ -3626,8 +3626,6 @@ components:
                     type: string
                 maxAmount:
                     type: string
-                minAmount:
-                    type: string
                 maxAmountPerTrans:
                     type: string
                 maxTransLimit:
@@ -3755,7 +3753,7 @@ components:
                     type: string
                 audit:
                     type: string
-                    description: audit a transaction "approve" or "deline"
+                    description: audit a transaction "approved" or "delined"
         api.backoffice.service.v1.BankAccountListRequest:
             type: object
             properties:
@@ -8484,8 +8482,10 @@ components:
                     format: int32
                 type:
                     type: string
+                    description: type "payin" "payout"
                 status:
                     type: string
+                    description: status "pending" "approved" "declined"
                 transactionId:
                     type: string
                 depositBankAccountFirstname:
@@ -8544,8 +8544,6 @@ components:
                 country:
                     type: string
                 maxAmount:
-                    type: string
-                minAmount:
                     type: string
                 maxAmountPerTrans:
                     type: string
@@ -8798,6 +8796,9 @@ components:
                     type: integer
                     description: Total number of disabled bank account
                     format: int32
+                totalCount:
+                    type: integer
+                    format: int32
         api.bcpay.service.v1.CreateDepositRequest:
             type: object
             properties:
@@ -8904,8 +8905,6 @@ components:
                 country:
                     type: string
                 maxAmount:
-                    type: string
-                minAmount:
                     type: string
                 maxAmountPerTrans:
                     type: string
@@ -9015,6 +9014,9 @@ components:
                 totalPending:
                     type: integer
                     description: Total number of pending transactions
+                    format: int32
+                totalCount:
+                    type: integer
                     format: int32
         api.bcpay.service.v1.UpdateBankAccountResponse:
             type: object
@@ -11641,6 +11643,8 @@ components:
                     allOf:
                         - $ref: '#/components/schemas/google.protobuf.ListValue'
                     description: JSON schema defining the required fields for this payment method
+                pspId:
+                    type: string
             description: |-
                 Details of a single payment method
                  Contains information about a specific payment method including its ID, currency, and required fields schema
