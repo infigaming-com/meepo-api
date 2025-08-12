@@ -2799,6 +2799,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateWalletResponse'
+    /v1/bcpay/order/add:
+        post:
+            tags:
+                - Bcpay
+            operationId: Bcpay_CreateDeposit
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.bcpay.service.v1.CreateDepositRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.bcpay.service.v1.CreateDepositResponse'
     /v1/bcpay/withdraw/add:
         post:
             tags:
@@ -2997,24 +3015,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetAddressResponse'
-    /v1/payment/bankaccount/get:
-        post:
-            tags:
-                - Payment
-            operationId: Payment_GetDepositBankAccount
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetBankAccountRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.GetBankAccountResponse'
     /v1/payment/bankcard/add:
         post:
             tags:
@@ -11028,28 +11028,6 @@ components:
                 address:
                     type: string
                     description: Digital Currency address
-        payment.service.v1.GetBankAccountRequest:
-            type: object
-            properties:
-                channelId:
-                    type: string
-                extra:
-                    type: object
-                    description: |-
-                        Additional information needed for the deposit
-                         May include clientOrderId, productId, userInfo, etc.
-        payment.service.v1.GetBankAccountResponse:
-            type: object
-            properties:
-                notifyUrl:
-                    type: string
-                    description: operator id allocated by operator service
-                referenceNumber:
-                    type: string
-                bankAccountName:
-                    type: string
-                bankAccountNumber:
-                    type: string
         payment.service.v1.GetBankCardListRequest:
             type: object
             properties: {}
@@ -11559,6 +11537,8 @@ components:
                 systemOperatorName:
                     type: string
                 operatorType:
+                    type: string
+                pspId:
                     type: string
             description: |-
                 Payment channel information

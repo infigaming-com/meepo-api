@@ -2273,9 +2273,9 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x12\n" +
 	"\x04note\x18\x02 \x01(\tR\x04note\"c\n" +
 	"\x1cAddNoteToTransactionResponse\x12C\n" +
-	"\vtransaction\x18\x01 \x01(\v2!.api.bcpay.service.v1.TransactionR\vtransaction2\xa0\v\n" +
-	"\x05Bcpay\x12\x8b\x01\n" +
-	"\rCreateDeposit\x12*.api.bcpay.service.v1.CreateDepositRequest\x1a+.api.bcpay.service.v1.CreateDepositResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/bcpay/withdraw/add\x12\x8e\x01\n" +
+	"\vtransaction\x18\x01 \x01(\v2!.api.bcpay.service.v1.TransactionR\vtransaction2\x9d\v\n" +
+	"\x05Bcpay\x12\x88\x01\n" +
+	"\rCreateDeposit\x12*.api.bcpay.service.v1.CreateDepositRequest\x1a+.api.bcpay.service.v1.CreateDepositResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/bcpay/order/add\x12\x8e\x01\n" +
 	"\x0eCreateWithdraw\x12+.api.bcpay.service.v1.CreateWithdrawRequest\x1a,.api.bcpay.service.v1.CreateWithdrawResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/bcpay/withdraw/add\x12j\n" +
 	"\rGetBankSchema\x12*.api.bcpay.service.v1.GetBankSchemaRequest\x1a+.api.bcpay.service.v1.GetBankSchemaResponse\"\x00\x12d\n" +
 	"\vGetMerchant\x12(.api.bcpay.service.v1.GetMerchantRequest\x1a).api.bcpay.service.v1.GetMerchantResponse\"\x00\x12m\n" +

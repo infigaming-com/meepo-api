@@ -1745,6 +1745,8 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 
 	// no validation rules for OperatorType
 
+	// no validation rules for PspId
+
 	if len(errors) > 0 {
 		return PaymentChannelInfoMultiError(errors)
 	}

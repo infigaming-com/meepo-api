@@ -291,6 +291,7 @@ message PaymentChannelInfo {
   string retailer_operator_name = 44;
   string system_operator_name = 46;
   string operator_type = 47;
+  string psp_id = 48;
 }
 
 // Request to initiate a deposit
@@ -827,7 +828,7 @@ message UpdatePaymentMethodResponse {
 }
 
 message BankCard {
-  string id = 1;
+  int64 id = 1;
   string card_number = 2;
   string card_account_firstname = 3;
   string card_account_lastname = 4;
@@ -866,7 +867,7 @@ message UpdateBankCardResponse {
 }
 
 message DeleteBankCardRequest {
-  string bank_card_id = 1;
+  int64 bank_card_id = 1;
 }
 
 message DeleteBankCardResponse {
@@ -1072,12 +1073,12 @@ service Payment {
     };
   }
 
-	rpc GetDepositBankAccount(GetBankAccountRequest) returns (GetBankAccountResponse) {
-    option (google.api.http) = {
-      post: "/v1/payment/bankaccount/get"
-      body: "*"
-    };
-	}
+	// rpc GetDepositBankAccount(GetBankAccountRequest) returns (GetBankAccountResponse) {
+ //    option (google.api.http) = {
+ //      post: "/v1/payment/bankaccount/get"
+ //      body: "*"
+ //    };
+	// }
 
 	rpc GetBankSchema(GetBankSchemaRequest) returns (GetBankSchemaResponse) {
     option (google.api.http) = {
