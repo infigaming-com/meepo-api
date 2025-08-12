@@ -22,3 +22,231 @@ func IsUnspecified(err error) bool {
 func ErrorUnspecified(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_UNSPECIFIED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsInvalidAcmeManagerConfig(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_ACME_MANAGER_CONFIG.String() && e.Code == 500
+}
+
+func ErrorInvalidAcmeManagerConfig(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_ACME_MANAGER_CONFIG.String(), fmt.Sprintf(format, args...))
+}
+
+func IsFailToCreateDirectory(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_FAIL_TO_CREATE_DIRECTORY.String() && e.Code == 500
+}
+
+func ErrorFailToCreateDirectory(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_FAIL_TO_CREATE_DIRECTORY.String(), fmt.Sprintf(format, args...))
+}
+
+func IsFailToGeneratePrivateKey(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_FAIL_TO_GENERATE_PRIVATE_KEY.String() && e.Code == 500
+}
+
+func ErrorFailToGeneratePrivateKey(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_FAIL_TO_GENERATE_PRIVATE_KEY.String(), fmt.Sprintf(format, args...))
+}
+
+func IsFailToCreateLegoClient(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_FAIL_TO_CREATE_LEGO_CLIENT.String() && e.Code == 500
+}
+
+func ErrorFailToCreateLegoClient(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_FAIL_TO_CREATE_LEGO_CLIENT.String(), fmt.Sprintf(format, args...))
+}
+
+func IsFailToRegisterAccount(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_FAIL_TO_REGISTER_ACCOUNT.String() && e.Code == 500
+}
+
+func ErrorFailToRegisterAccount(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_FAIL_TO_REGISTER_ACCOUNT.String(), fmt.Sprintf(format, args...))
+}
+
+func IsFailToCreateAcmeHttpProvider(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_FAIL_TO_CREATE_ACME_HTTP_PROVIDER.String() && e.Code == 500
+}
+
+func ErrorFailToCreateAcmeHttpProvider(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_FAIL_TO_CREATE_ACME_HTTP_PROVIDER.String(), fmt.Sprintf(format, args...))
+}
+
+func IsFailToSetHttp01Provider(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_FAIL_TO_SET_HTTP_01_PROVIDER.String() && e.Code == 500
+}
+
+func ErrorFailToSetHttp01Provider(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_FAIL_TO_SET_HTTP_01_PROVIDER.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidDomain(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_DOMAIN.String() && e.Code == 500
+}
+
+func ErrorInvalidDomain(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_DOMAIN.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCertificateAlreadyExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CERTIFICATE_ALREADY_EXISTS.String() && e.Code == 500
+}
+
+func ErrorCertificateAlreadyExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CERTIFICATE_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCertificateNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CERTIFICATE_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorCertificateNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CERTIFICATE_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsFailToObtainCertificate(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_FAIL_TO_OBTAIN_CERTIFICATE.String() && e.Code == 500
+}
+
+func ErrorFailToObtainCertificate(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_FAIL_TO_OBTAIN_CERTIFICATE.String(), fmt.Sprintf(format, args...))
+}
+
+func IsFailToSaveCertificate(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_FAIL_TO_SAVE_CERTIFICATE.String() && e.Code == 500
+}
+
+func ErrorFailToSaveCertificate(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_FAIL_TO_SAVE_CERTIFICATE.String(), fmt.Sprintf(format, args...))
+}
+
+func IsFailToGetCertificateInfo(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_FAIL_TO_GET_CERTIFICATE_INFO.String() && e.Code == 500
+}
+
+func ErrorFailToGetCertificateInfo(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_FAIL_TO_GET_CERTIFICATE_INFO.String(), fmt.Sprintf(format, args...))
+}
+
+func IsFailToRenewCertificate(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_FAIL_TO_RENEW_CERTIFICATE.String() && e.Code == 500
+}
+
+func ErrorFailToRenewCertificate(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_FAIL_TO_RENEW_CERTIFICATE.String(), fmt.Sprintf(format, args...))
+}
+
+func IsFailToReadCertificate(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_FAIL_TO_READ_CERTIFICATE.String() && e.Code == 500
+}
+
+func ErrorFailToReadCertificate(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_FAIL_TO_READ_CERTIFICATE.String(), fmt.Sprintf(format, args...))
+}
+
+func IsFailToRevokeCertificate(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_FAIL_TO_REVOKE_CERTIFICATE.String() && e.Code == 500
+}
+
+func ErrorFailToRevokeCertificate(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_FAIL_TO_REVOKE_CERTIFICATE.String(), fmt.Sprintf(format, args...))
+}
+
+func IsFailToReadCertificateDirectory(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_FAIL_TO_READ_CERTIFICATE_DIRECTORY.String() && e.Code == 500
+}
+
+func ErrorFailToReadCertificateDirectory(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_FAIL_TO_READ_CERTIFICATE_DIRECTORY.String(), fmt.Sprintf(format, args...))
+}
+
+func IsFailToDecodeCertificate(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_FAIL_TO_DECODE_CERTIFICATE.String() && e.Code == 500
+}
+
+func ErrorFailToDecodeCertificate(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_FAIL_TO_DECODE_CERTIFICATE.String(), fmt.Sprintf(format, args...))
+}
+
+func IsFailToParseCertificate(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_FAIL_TO_PARSE_CERTIFICATE.String() && e.Code == 500
+}
+
+func ErrorFailToParseCertificate(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_FAIL_TO_PARSE_CERTIFICATE.String(), fmt.Sprintf(format, args...))
+}

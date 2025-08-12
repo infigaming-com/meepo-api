@@ -25,16 +25,73 @@ const (
 type ErrorReason int32
 
 const (
-	ErrorReason_UNSPECIFIED ErrorReason = 0
+	ErrorReason_UNSPECIFIED                        ErrorReason = 0
+	ErrorReason_INVALID_ACME_MANAGER_CONFIG        ErrorReason = 100000
+	ErrorReason_FAIL_TO_CREATE_DIRECTORY           ErrorReason = 100001
+	ErrorReason_FAIL_TO_GENERATE_PRIVATE_KEY       ErrorReason = 100002
+	ErrorReason_FAIL_TO_CREATE_LEGO_CLIENT         ErrorReason = 100003
+	ErrorReason_FAIL_TO_REGISTER_ACCOUNT           ErrorReason = 100004
+	ErrorReason_FAIL_TO_CREATE_ACME_HTTP_PROVIDER  ErrorReason = 100005
+	ErrorReason_FAIL_TO_SET_HTTP_01_PROVIDER       ErrorReason = 100006
+	ErrorReason_INVALID_DOMAIN                     ErrorReason = 100007
+	ErrorReason_CERTIFICATE_ALREADY_EXISTS         ErrorReason = 100008
+	ErrorReason_CERTIFICATE_NOT_FOUND              ErrorReason = 100009
+	ErrorReason_FAIL_TO_OBTAIN_CERTIFICATE         ErrorReason = 100010
+	ErrorReason_FAIL_TO_SAVE_CERTIFICATE           ErrorReason = 100011
+	ErrorReason_FAIL_TO_GET_CERTIFICATE_INFO       ErrorReason = 100012
+	ErrorReason_FAIL_TO_RENEW_CERTIFICATE          ErrorReason = 100013
+	ErrorReason_FAIL_TO_READ_CERTIFICATE           ErrorReason = 100014
+	ErrorReason_FAIL_TO_REVOKE_CERTIFICATE         ErrorReason = 100015
+	ErrorReason_FAIL_TO_READ_CERTIFICATE_DIRECTORY ErrorReason = 100016
+	ErrorReason_FAIL_TO_DECODE_CERTIFICATE         ErrorReason = 100017
+	ErrorReason_FAIL_TO_PARSE_CERTIFICATE          ErrorReason = 100018
 )
 
 // Enum value maps for ErrorReason.
 var (
 	ErrorReason_name = map[int32]string{
-		0: "UNSPECIFIED",
+		0:      "UNSPECIFIED",
+		100000: "INVALID_ACME_MANAGER_CONFIG",
+		100001: "FAIL_TO_CREATE_DIRECTORY",
+		100002: "FAIL_TO_GENERATE_PRIVATE_KEY",
+		100003: "FAIL_TO_CREATE_LEGO_CLIENT",
+		100004: "FAIL_TO_REGISTER_ACCOUNT",
+		100005: "FAIL_TO_CREATE_ACME_HTTP_PROVIDER",
+		100006: "FAIL_TO_SET_HTTP_01_PROVIDER",
+		100007: "INVALID_DOMAIN",
+		100008: "CERTIFICATE_ALREADY_EXISTS",
+		100009: "CERTIFICATE_NOT_FOUND",
+		100010: "FAIL_TO_OBTAIN_CERTIFICATE",
+		100011: "FAIL_TO_SAVE_CERTIFICATE",
+		100012: "FAIL_TO_GET_CERTIFICATE_INFO",
+		100013: "FAIL_TO_RENEW_CERTIFICATE",
+		100014: "FAIL_TO_READ_CERTIFICATE",
+		100015: "FAIL_TO_REVOKE_CERTIFICATE",
+		100016: "FAIL_TO_READ_CERTIFICATE_DIRECTORY",
+		100017: "FAIL_TO_DECODE_CERTIFICATE",
+		100018: "FAIL_TO_PARSE_CERTIFICATE",
 	}
 	ErrorReason_value = map[string]int32{
-		"UNSPECIFIED": 0,
+		"UNSPECIFIED":                        0,
+		"INVALID_ACME_MANAGER_CONFIG":        100000,
+		"FAIL_TO_CREATE_DIRECTORY":           100001,
+		"FAIL_TO_GENERATE_PRIVATE_KEY":       100002,
+		"FAIL_TO_CREATE_LEGO_CLIENT":         100003,
+		"FAIL_TO_REGISTER_ACCOUNT":           100004,
+		"FAIL_TO_CREATE_ACME_HTTP_PROVIDER":  100005,
+		"FAIL_TO_SET_HTTP_01_PROVIDER":       100006,
+		"INVALID_DOMAIN":                     100007,
+		"CERTIFICATE_ALREADY_EXISTS":         100008,
+		"CERTIFICATE_NOT_FOUND":              100009,
+		"FAIL_TO_OBTAIN_CERTIFICATE":         100010,
+		"FAIL_TO_SAVE_CERTIFICATE":           100011,
+		"FAIL_TO_GET_CERTIFICATE_INFO":       100012,
+		"FAIL_TO_RENEW_CERTIFICATE":          100013,
+		"FAIL_TO_READ_CERTIFICATE":           100014,
+		"FAIL_TO_REVOKE_CERTIFICATE":         100015,
+		"FAIL_TO_READ_CERTIFICATE_DIRECTORY": 100016,
+		"FAIL_TO_DECODE_CERTIFICATE":         100017,
+		"FAIL_TO_PARSE_CERTIFICATE":          100018,
 	}
 )
 
@@ -69,9 +126,28 @@ var File_acme_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_acme_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"acme/service/v1/error_reason.proto\x12\x13api.acme.service.v1\x1a\x13errors/errors.proto*$\n" +
+	"\"acme/service/v1/error_reason.proto\x12\x13api.acme.service.v1\x1a\x13errors/errors.proto*\xa5\x05\n" +
 	"\vErrorReason\x12\x0f\n" +
-	"\vUNSPECIFIED\x10\x00\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\vUNSPECIFIED\x10\x00\x12!\n" +
+	"\x1bINVALID_ACME_MANAGER_CONFIG\x10\xa0\x8d\x06\x12\x1e\n" +
+	"\x18FAIL_TO_CREATE_DIRECTORY\x10\xa1\x8d\x06\x12\"\n" +
+	"\x1cFAIL_TO_GENERATE_PRIVATE_KEY\x10\xa2\x8d\x06\x12 \n" +
+	"\x1aFAIL_TO_CREATE_LEGO_CLIENT\x10\xa3\x8d\x06\x12\x1e\n" +
+	"\x18FAIL_TO_REGISTER_ACCOUNT\x10\xa4\x8d\x06\x12'\n" +
+	"!FAIL_TO_CREATE_ACME_HTTP_PROVIDER\x10\xa5\x8d\x06\x12\"\n" +
+	"\x1cFAIL_TO_SET_HTTP_01_PROVIDER\x10\xa6\x8d\x06\x12\x14\n" +
+	"\x0eINVALID_DOMAIN\x10\xa7\x8d\x06\x12 \n" +
+	"\x1aCERTIFICATE_ALREADY_EXISTS\x10\xa8\x8d\x06\x12\x1b\n" +
+	"\x15CERTIFICATE_NOT_FOUND\x10\xa9\x8d\x06\x12 \n" +
+	"\x1aFAIL_TO_OBTAIN_CERTIFICATE\x10\xaa\x8d\x06\x12\x1e\n" +
+	"\x18FAIL_TO_SAVE_CERTIFICATE\x10\xab\x8d\x06\x12\"\n" +
+	"\x1cFAIL_TO_GET_CERTIFICATE_INFO\x10\xac\x8d\x06\x12\x1f\n" +
+	"\x19FAIL_TO_RENEW_CERTIFICATE\x10\xad\x8d\x06\x12\x1e\n" +
+	"\x18FAIL_TO_READ_CERTIFICATE\x10\xae\x8d\x06\x12 \n" +
+	"\x1aFAIL_TO_REVOKE_CERTIFICATE\x10\xaf\x8d\x06\x12(\n" +
+	"\"FAIL_TO_READ_CERTIFICATE_DIRECTORY\x10\xb0\x8d\x06\x12 \n" +
+	"\x1aFAIL_TO_DECODE_CERTIFICATE\x10\xb1\x8d\x06\x12\x1f\n" +
+	"\x19FAIL_TO_PARSE_CERTIFICATE\x10\xb2\x8d\x06\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.acme.service.v1P\x01Z6github.com/infigaming-com/meepo-api/acme/service/v1;v1b\x06proto3"
 
 var (
