@@ -9842,7 +9842,7 @@ components:
                     type: string
                 originalTxnId:
                     type: string
-                originalExtTxnId:
+                originalExternalTxnId:
                     type: string
                 providerTimestamp:
                     type: string
