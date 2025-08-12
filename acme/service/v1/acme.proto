@@ -79,9 +79,7 @@ message GetCertificateRequest {
 
 // Response with certificate information
 message GetCertificateResponse {
-	string domain = 1;		// Domain name
-	string status = 2;      // Certificate status
-	int64 expired_at = 3;   // Certificate expiry date
+	CertificateInfo certificate = 1;
 }
 
 // Request to list all certificates
