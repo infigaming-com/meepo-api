@@ -162,9 +162,7 @@ func (x *IssueCertificateRequest) GetEmail() string {
 // Response for certificate issuance
 type IssueCertificateResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Domain        string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`                         // Domain name
-	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`                         // Certificate status
-	ExpiredAt     int64                  `protobuf:"varint,3,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"` // Certificate expiry date
+	Certificate   *CertificateInfo       `protobuf:"bytes,1,opt,name=certificate,proto3" json:"certificate,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -199,25 +197,11 @@ func (*IssueCertificateResponse) Descriptor() ([]byte, []int) {
 	return file_acme_service_v1_acme_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *IssueCertificateResponse) GetDomain() string {
+func (x *IssueCertificateResponse) GetCertificate() *CertificateInfo {
 	if x != nil {
-		return x.Domain
+		return x.Certificate
 	}
-	return ""
-}
-
-func (x *IssueCertificateResponse) GetStatus() string {
-	if x != nil {
-		return x.Status
-	}
-	return ""
-}
-
-func (x *IssueCertificateResponse) GetExpiredAt() int64 {
-	if x != nil {
-		return x.ExpiredAt
-	}
-	return 0
+	return nil
 }
 
 // Request to renew a certificate
@@ -268,9 +252,7 @@ func (x *RenewCertificateRequest) GetDomain() string {
 // Response for certificate renewal
 type RenewCertificateResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Domain        string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`                         // Domain name
-	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`                         // Certificate status
-	ExpiredAt     int64                  `protobuf:"varint,3,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"` // New expiry date
+	Certificate   *CertificateInfo       `protobuf:"bytes,1,opt,name=certificate,proto3" json:"certificate,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -305,25 +287,11 @@ func (*RenewCertificateResponse) Descriptor() ([]byte, []int) {
 	return file_acme_service_v1_acme_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *RenewCertificateResponse) GetDomain() string {
+func (x *RenewCertificateResponse) GetCertificate() *CertificateInfo {
 	if x != nil {
-		return x.Domain
+		return x.Certificate
 	}
-	return ""
-}
-
-func (x *RenewCertificateResponse) GetStatus() string {
-	if x != nil {
-		return x.Status
-	}
-	return ""
-}
-
-func (x *RenewCertificateResponse) GetExpiredAt() int64 {
-	if x != nil {
-		return x.ExpiredAt
-	}
-	return 0
+	return nil
 }
 
 // Request to revoke a certificate
@@ -621,19 +589,13 @@ const file_acme_service_v1_acme_proto_rawDesc = "" +
 	"sanDomains\"G\n" +
 	"\x17IssueCertificateRequest\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x14\n" +
-	"\x05email\x18\x02 \x01(\tR\x05email\"i\n" +
-	"\x18IssueCertificateResponse\x12\x16\n" +
-	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x16\n" +
-	"\x06status\x18\x02 \x01(\tR\x06status\x12\x1d\n" +
-	"\n" +
-	"expired_at\x18\x03 \x01(\x03R\texpiredAt\"1\n" +
+	"\x05email\x18\x02 \x01(\tR\x05email\"b\n" +
+	"\x18IssueCertificateResponse\x12F\n" +
+	"\vcertificate\x18\x01 \x01(\v2$.api.acme.service.v1.CertificateInfoR\vcertificate\"1\n" +
 	"\x17RenewCertificateRequest\x12\x16\n" +
-	"\x06domain\x18\x01 \x01(\tR\x06domain\"i\n" +
-	"\x18RenewCertificateResponse\x12\x16\n" +
-	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x16\n" +
-	"\x06status\x18\x02 \x01(\tR\x06status\x12\x1d\n" +
-	"\n" +
-	"expired_at\x18\x03 \x01(\x03R\texpiredAt\"2\n" +
+	"\x06domain\x18\x01 \x01(\tR\x06domain\"b\n" +
+	"\x18RenewCertificateResponse\x12F\n" +
+	"\vcertificate\x18\x01 \x01(\v2$.api.acme.service.v1.CertificateInfoR\vcertificate\"2\n" +
 	"\x18RevokeCertificateRequest\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\"\x1b\n" +
 	"\x19RevokeCertificateResponse\"/\n" +
@@ -686,23 +648,25 @@ var file_acme_service_v1_acme_proto_goTypes = []any{
 	(*ListCertificatesResponse)(nil),  // 10: api.acme.service.v1.ListCertificatesResponse
 }
 var file_acme_service_v1_acme_proto_depIdxs = []int32{
-	0,  // 0: api.acme.service.v1.GetCertificateResponse.certificate:type_name -> api.acme.service.v1.CertificateInfo
-	0,  // 1: api.acme.service.v1.ListCertificatesResponse.certificates:type_name -> api.acme.service.v1.CertificateInfo
-	1,  // 2: api.acme.service.v1.acme.IssueCertificate:input_type -> api.acme.service.v1.IssueCertificateRequest
-	3,  // 3: api.acme.service.v1.acme.RenewCertificate:input_type -> api.acme.service.v1.RenewCertificateRequest
-	5,  // 4: api.acme.service.v1.acme.RevokeCertificate:input_type -> api.acme.service.v1.RevokeCertificateRequest
-	7,  // 5: api.acme.service.v1.acme.GetCertificate:input_type -> api.acme.service.v1.GetCertificateRequest
-	9,  // 6: api.acme.service.v1.acme.ListCertificates:input_type -> api.acme.service.v1.ListCertificatesRequest
-	2,  // 7: api.acme.service.v1.acme.IssueCertificate:output_type -> api.acme.service.v1.IssueCertificateResponse
-	4,  // 8: api.acme.service.v1.acme.RenewCertificate:output_type -> api.acme.service.v1.RenewCertificateResponse
-	6,  // 9: api.acme.service.v1.acme.RevokeCertificate:output_type -> api.acme.service.v1.RevokeCertificateResponse
-	8,  // 10: api.acme.service.v1.acme.GetCertificate:output_type -> api.acme.service.v1.GetCertificateResponse
-	10, // 11: api.acme.service.v1.acme.ListCertificates:output_type -> api.acme.service.v1.ListCertificatesResponse
-	7,  // [7:12] is the sub-list for method output_type
-	2,  // [2:7] is the sub-list for method input_type
-	2,  // [2:2] is the sub-list for extension type_name
-	2,  // [2:2] is the sub-list for extension extendee
-	0,  // [0:2] is the sub-list for field type_name
+	0,  // 0: api.acme.service.v1.IssueCertificateResponse.certificate:type_name -> api.acme.service.v1.CertificateInfo
+	0,  // 1: api.acme.service.v1.RenewCertificateResponse.certificate:type_name -> api.acme.service.v1.CertificateInfo
+	0,  // 2: api.acme.service.v1.GetCertificateResponse.certificate:type_name -> api.acme.service.v1.CertificateInfo
+	0,  // 3: api.acme.service.v1.ListCertificatesResponse.certificates:type_name -> api.acme.service.v1.CertificateInfo
+	1,  // 4: api.acme.service.v1.acme.IssueCertificate:input_type -> api.acme.service.v1.IssueCertificateRequest
+	3,  // 5: api.acme.service.v1.acme.RenewCertificate:input_type -> api.acme.service.v1.RenewCertificateRequest
+	5,  // 6: api.acme.service.v1.acme.RevokeCertificate:input_type -> api.acme.service.v1.RevokeCertificateRequest
+	7,  // 7: api.acme.service.v1.acme.GetCertificate:input_type -> api.acme.service.v1.GetCertificateRequest
+	9,  // 8: api.acme.service.v1.acme.ListCertificates:input_type -> api.acme.service.v1.ListCertificatesRequest
+	2,  // 9: api.acme.service.v1.acme.IssueCertificate:output_type -> api.acme.service.v1.IssueCertificateResponse
+	4,  // 10: api.acme.service.v1.acme.RenewCertificate:output_type -> api.acme.service.v1.RenewCertificateResponse
+	6,  // 11: api.acme.service.v1.acme.RevokeCertificate:output_type -> api.acme.service.v1.RevokeCertificateResponse
+	8,  // 12: api.acme.service.v1.acme.GetCertificate:output_type -> api.acme.service.v1.GetCertificateResponse
+	10, // 13: api.acme.service.v1.acme.ListCertificates:output_type -> api.acme.service.v1.ListCertificatesResponse
+	9,  // [9:14] is the sub-list for method output_type
+	4,  // [4:9] is the sub-list for method input_type
+	4,  // [4:4] is the sub-list for extension type_name
+	4,  // [4:4] is the sub-list for extension extendee
+	0,  // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_acme_service_v1_acme_proto_init() }

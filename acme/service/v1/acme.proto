@@ -46,9 +46,7 @@ message IssueCertificateRequest {
 
 // Response for certificate issuance
 message IssueCertificateResponse {
-	string domain = 1;      // Domain name
-	string status = 2;      // Certificate status
-	int64 expired_at = 3;   // Certificate expiry date
+	CertificateInfo certificate = 1;
 }
 
 // Request to renew a certificate
@@ -58,9 +56,7 @@ message RenewCertificateRequest {
 
 // Response for certificate renewal
 message RenewCertificateResponse {
-	string domain = 1;      // Domain name
-	string status = 2;      // Certificate status
-	int64 expired_at = 3;	// New expiry date
+	CertificateInfo certificate = 1;
 }
 
 // Request to revoke a certificate
