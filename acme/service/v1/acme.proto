@@ -1,0 +1,92 @@
+syntax = "proto3";
+
+package api.acme.service.v1;
+
+option go_package = "github.com/infigaming-com/meepo-api/acme/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.acme.service.v1";
+
+service acme {
+	// Issue a new TLS certificate for a domain
+	rpc IssueCertificate(IssueCertificateRequest) returns (IssueCertificateResponse) {
+	}
+	
+	// Renew an existing certificate
+	rpc RenewCertificate(RenewCertificateRequest) returns (RenewCertificateResponse) {
+	}
+
+	// Revoke a certificate
+	rpc RevokeCertificate(RevokeCertificateRequest) returns (RevokeCertificateResponse) {
+	}
+	
+	// Get certificate information for a domain
+	rpc GetCertificate(GetCertificateRequest) returns (GetCertificateResponse) {
+	}
+	
+	// List all certificates
+	rpc ListCertificates(ListCertificatesRequest) returns (ListCertificatesResponse) {
+	}
+}
+
+// Certificate information
+message CertificateInfo {
+	string domain = 1;      // Domain name
+	string status = 2;      // Certificate status
+	int64 expired_at = 3;	// Certificate expiry date
+	int64 issued_at = 4;    // Certificate issue date
+	string issuer = 5;      // Certificate issuer (e.g., "ZeroSSL")
+	repeated string san_domains = 6;	// Subject Alternative Names
+}
+
+// Request to issue a new certificate
+message IssueCertificateRequest {
+	string domain = 1;  // Domain name (e.g., "acme.mini.bet")
+	string email = 2;   // Email for certificate notifications
+}
+
+// Response for certificate issuance
+message IssueCertificateResponse {
+	CertificateInfo certificate = 1;
+}
+
+// Request to renew a certificate
+message RenewCertificateRequest {
+	string domain = 1;  // Domain name to renew
+}
+
+// Response for certificate renewal
+message RenewCertificateResponse {
+	CertificateInfo certificate = 1;
+}
+
+// Request to revoke a certificate
+message RevokeCertificateRequest {
+	string domain = 1;  // Domain name to revoke
+}
+
+// Response for certificate revocation
+message RevokeCertificateResponse {
+}
+
+// Request to get certificate information
+message GetCertificateRequest {
+	string domain = 1;  // Domain name
+}
+
+// Response with certificate information
+message GetCertificateResponse {
+	CertificateInfo certificate = 1;
+}
+
+// Request to list all certificates
+message ListCertificatesRequest {
+	// Optional filters
+	optional string status = 1;	// Filter by status
+	optional bool expired = 2;  // Include expired certificates
+}
+
+// Response with list of certificates
+message ListCertificatesResponse {
+	repeated CertificateInfo certificates = 1;   // List of certificates
+	int32 total_count = 2;                       // Total number of certificates
+}
