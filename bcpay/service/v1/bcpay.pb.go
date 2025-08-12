@@ -708,12 +708,11 @@ type DepositBankAccount struct {
 	Currency          string                 `protobuf:"bytes,7,opt,name=currency,proto3" json:"currency,omitempty"`
 	Country           string                 `protobuf:"bytes,8,opt,name=country,proto3" json:"country,omitempty"`
 	MaxAmount         string                 `protobuf:"bytes,9,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
-	MinAmount         string                 `protobuf:"bytes,10,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
-	MaxAmountPerTrans string                 `protobuf:"bytes,11,opt,name=max_amount_per_trans,json=maxAmountPerTrans,proto3" json:"max_amount_per_trans,omitempty"`
-	MaxTransLimit     int32                  `protobuf:"varint,12,opt,name=max_trans_limit,json=maxTransLimit,proto3" json:"max_trans_limit,omitempty"`
-	CurrentTransTime  int32                  `protobuf:"varint,13,opt,name=current_trans_time,json=currentTransTime,proto3" json:"current_trans_time,omitempty"`
-	Priority          int32                  `protobuf:"varint,14,opt,name=priority,proto3" json:"priority,omitempty"`
-	Enable            bool                   `protobuf:"varint,15,opt,name=enable,proto3" json:"enable,omitempty"`
+	MaxAmountPerTrans string                 `protobuf:"bytes,10,opt,name=max_amount_per_trans,json=maxAmountPerTrans,proto3" json:"max_amount_per_trans,omitempty"`
+	MaxTransLimit     int32                  `protobuf:"varint,11,opt,name=max_trans_limit,json=maxTransLimit,proto3" json:"max_trans_limit,omitempty"`
+	CurrentTransTime  int32                  `protobuf:"varint,12,opt,name=current_trans_time,json=currentTransTime,proto3" json:"current_trans_time,omitempty"`
+	Priority          int32                  `protobuf:"varint,13,opt,name=priority,proto3" json:"priority,omitempty"`
+	Enable            bool                   `protobuf:"varint,14,opt,name=enable,proto3" json:"enable,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -807,13 +806,6 @@ func (x *DepositBankAccount) GetCountry() string {
 func (x *DepositBankAccount) GetMaxAmount() string {
 	if x != nil {
 		return x.MaxAmount
-	}
-	return ""
-}
-
-func (x *DepositBankAccount) GetMinAmount() string {
-	if x != nil {
-		return x.MinAmount
 	}
 	return ""
 }
@@ -976,6 +968,7 @@ type BankAccountListResponse struct {
 	TotalEnabled int32 `protobuf:"varint,5,opt,name=total_enabled,json=totalEnabled,proto3" json:"total_enabled,omitempty"`
 	// Total number of disabled bank account
 	TotalDisabled int32 `protobuf:"varint,6,opt,name=total_disabled,json=totalDisabled,proto3" json:"total_disabled,omitempty"`
+	TotalCount    int32 `protobuf:"varint,7,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1052,17 +1045,23 @@ func (x *BankAccountListResponse) GetTotalDisabled() int32 {
 	return 0
 }
 
+func (x *BankAccountListResponse) GetTotalCount() int32 {
+	if x != nil {
+		return x.TotalCount
+	}
+	return 0
+}
+
 type AddBankAccountRequest struct {
 	state             protoimpl.MessageState  `protogen:"open.v1"`
 	Currency          string                  `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
 	Country           string                  `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
 	MaxAmount         string                  `protobuf:"bytes,3,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
-	MinAmount         string                  `protobuf:"bytes,4,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
-	MaxAmountPerTrans string                  `protobuf:"bytes,5,opt,name=max_amount_per_trans,json=maxAmountPerTrans,proto3" json:"max_amount_per_trans,omitempty"`
-	MaxTransLimit     int32                   `protobuf:"varint,6,opt,name=max_trans_limit,json=maxTransLimit,proto3" json:"max_trans_limit,omitempty"`
-	Priority          int32                   `protobuf:"varint,7,opt,name=priority,proto3" json:"priority,omitempty"`
-	BankInfo          *structpb.Struct        `protobuf:"bytes,8,opt,name=bank_info,json=bankInfo,proto3" json:"bank_info,omitempty"`
-	OperatorContext   *common.OperatorContext `protobuf:"bytes,9,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	MaxAmountPerTrans string                  `protobuf:"bytes,4,opt,name=max_amount_per_trans,json=maxAmountPerTrans,proto3" json:"max_amount_per_trans,omitempty"`
+	MaxTransLimit     int32                   `protobuf:"varint,5,opt,name=max_trans_limit,json=maxTransLimit,proto3" json:"max_trans_limit,omitempty"`
+	Priority          int32                   `protobuf:"varint,6,opt,name=priority,proto3" json:"priority,omitempty"`
+	BankInfo          *structpb.Struct        `protobuf:"bytes,7,opt,name=bank_info,json=bankInfo,proto3" json:"bank_info,omitempty"`
+	OperatorContext   *common.OperatorContext `protobuf:"bytes,8,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -1114,13 +1113,6 @@ func (x *AddBankAccountRequest) GetCountry() string {
 func (x *AddBankAccountRequest) GetMaxAmount() string {
 	if x != nil {
 		return x.MaxAmount
-	}
-	return ""
-}
-
-func (x *AddBankAccountRequest) GetMinAmount() string {
-	if x != nil {
-		return x.MinAmount
 	}
 	return ""
 }
@@ -1210,13 +1202,12 @@ type UpdateBankAccountRequest struct {
 	Currency          string                  `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	Country           string                  `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
 	MaxAmount         string                  `protobuf:"bytes,4,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
-	MinAmount         string                  `protobuf:"bytes,5,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
-	MaxAmountPerTrans string                  `protobuf:"bytes,6,opt,name=max_amount_per_trans,json=maxAmountPerTrans,proto3" json:"max_amount_per_trans,omitempty"`
-	MaxTransLimit     int32                   `protobuf:"varint,7,opt,name=max_trans_limit,json=maxTransLimit,proto3" json:"max_trans_limit,omitempty"`
-	Priority          int32                   `protobuf:"varint,8,opt,name=priority,proto3" json:"priority,omitempty"`
-	Enabled           bool                    `protobuf:"varint,9,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	BankInfo          *structpb.Struct        `protobuf:"bytes,10,opt,name=bank_info,json=bankInfo,proto3" json:"bank_info,omitempty"`
-	OperatorContext   *common.OperatorContext `protobuf:"bytes,11,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	MaxAmountPerTrans string                  `protobuf:"bytes,5,opt,name=max_amount_per_trans,json=maxAmountPerTrans,proto3" json:"max_amount_per_trans,omitempty"`
+	MaxTransLimit     int32                   `protobuf:"varint,6,opt,name=max_trans_limit,json=maxTransLimit,proto3" json:"max_trans_limit,omitempty"`
+	Priority          int32                   `protobuf:"varint,7,opt,name=priority,proto3" json:"priority,omitempty"`
+	Enabled           bool                    `protobuf:"varint,8,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	BankInfo          *structpb.Struct        `protobuf:"bytes,9,opt,name=bank_info,json=bankInfo,proto3" json:"bank_info,omitempty"`
+	OperatorContext   *common.OperatorContext `protobuf:"bytes,10,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -1275,13 +1266,6 @@ func (x *UpdateBankAccountRequest) GetCountry() string {
 func (x *UpdateBankAccountRequest) GetMaxAmount() string {
 	if x != nil {
 		return x.MaxAmount
-	}
-	return ""
-}
-
-func (x *UpdateBankAccountRequest) GetMinAmount() string {
-	if x != nil {
-		return x.MinAmount
 	}
 	return ""
 }
@@ -1806,6 +1790,7 @@ type TransactionListResponse struct {
 	TotalFailed int32 `protobuf:"varint,6,opt,name=total_failed,json=totalFailed,proto3" json:"total_failed,omitempty"`
 	// Total number of pending transactions
 	TotalPending  int32 `protobuf:"varint,7,opt,name=total_pending,json=totalPending,proto3" json:"total_pending,omitempty"`
+	TotalCount    int32 `protobuf:"varint,8,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1885,6 +1870,13 @@ func (x *TransactionListResponse) GetTotalFailed() int32 {
 func (x *TransactionListResponse) GetTotalPending() int32 {
 	if x != nil {
 		return x.TotalPending
+	}
+	return 0
+}
+
+func (x *TransactionListResponse) GetTotalCount() int32 {
+	if x != nil {
+		return x.TotalCount
 	}
 	return 0
 }
@@ -2149,7 +2141,7 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
 	"\acountry\x18\x02 \x01(\tR\acountry\"K\n" +
 	"\x15GetBankSchemaResponse\x122\n" +
-	"\x06schema\x18\x01 \x01(\v2\x1a.google.protobuf.ListValueR\x06schema\"\xf9\x03\n" +
+	"\x06schema\x18\x01 \x01(\v2\x1a.google.protobuf.ListValueR\x06schema\"\xda\x03\n" +
 	"\x12DepositBankAccount\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1f\n" +
 	"\vmerchant_id\x18\x02 \x01(\tR\n" +
@@ -2161,15 +2153,13 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"\bcurrency\x18\a \x01(\tR\bcurrency\x12\x18\n" +
 	"\acountry\x18\b \x01(\tR\acountry\x12\x1d\n" +
 	"\n" +
-	"max_amount\x18\t \x01(\tR\tmaxAmount\x12\x1d\n" +
-	"\n" +
-	"min_amount\x18\n" +
-	" \x01(\tR\tminAmount\x12/\n" +
-	"\x14max_amount_per_trans\x18\v \x01(\tR\x11maxAmountPerTrans\x12&\n" +
-	"\x0fmax_trans_limit\x18\f \x01(\x05R\rmaxTransLimit\x12,\n" +
-	"\x12current_trans_time\x18\r \x01(\x05R\x10currentTransTime\x12\x1a\n" +
-	"\bpriority\x18\x0e \x01(\x05R\bpriority\x12\x16\n" +
-	"\x06enable\x18\x0f \x01(\bR\x06enable\"\xed\x02\n" +
+	"max_amount\x18\t \x01(\tR\tmaxAmount\x12/\n" +
+	"\x14max_amount_per_trans\x18\n" +
+	" \x01(\tR\x11maxAmountPerTrans\x12&\n" +
+	"\x0fmax_trans_limit\x18\v \x01(\x05R\rmaxTransLimit\x12,\n" +
+	"\x12current_trans_time\x18\f \x01(\x05R\x10currentTransTime\x12\x1a\n" +
+	"\bpriority\x18\r \x01(\x05R\bpriority\x12\x16\n" +
+	"\x06enable\x18\x0e \x01(\bR\x06enable\"\xed\x02\n" +
 	"\x16BankAccountListRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1a\n" +
@@ -2179,7 +2169,7 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"\x15bank_account_lastname\x18\x06 \x01(\tR\x13bankAccountLastname\x12\x17\n" +
 	"\acard_id\x18\a \x01(\tR\x06cardId\x12\x18\n" +
 	"\aenabled\x18\b \x01(\bR\aenabled\x12F\n" +
-	"\x10operator_context\x18\t \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x86\x02\n" +
+	"\x10operator_context\x18\t \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xa7\x02\n" +
 	"\x17BankAccountListResponse\x12M\n" +
 	"\rbank_accounts\x18\x01 \x03(\v2(.api.bcpay.service.v1.DepositBankAccountR\fbankAccounts\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
@@ -2187,36 +2177,34 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"\vtotal_pages\x18\x04 \x01(\x05R\n" +
 	"totalPages\x12#\n" +
 	"\rtotal_enabled\x18\x05 \x01(\x05R\ftotalEnabled\x12%\n" +
-	"\x0etotal_disabled\x18\x06 \x01(\x05R\rtotalDisabled\"\xfe\x02\n" +
+	"\x0etotal_disabled\x18\x06 \x01(\x05R\rtotalDisabled\x12\x1f\n" +
+	"\vtotal_count\x18\a \x01(\x05R\n" +
+	"totalCount\"\xdf\x02\n" +
 	"\x15AddBankAccountRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
 	"\acountry\x18\x02 \x01(\tR\acountry\x12\x1d\n" +
 	"\n" +
-	"max_amount\x18\x03 \x01(\tR\tmaxAmount\x12\x1d\n" +
-	"\n" +
-	"min_amount\x18\x04 \x01(\tR\tminAmount\x12/\n" +
-	"\x14max_amount_per_trans\x18\x05 \x01(\tR\x11maxAmountPerTrans\x12&\n" +
-	"\x0fmax_trans_limit\x18\x06 \x01(\x05R\rmaxTransLimit\x12\x1a\n" +
-	"\bpriority\x18\a \x01(\x05R\bpriority\x124\n" +
-	"\tbank_info\x18\b \x01(\v2\x17.google.protobuf.StructR\bbankInfo\x12F\n" +
-	"\x10operator_context\x18\t \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"e\n" +
+	"max_amount\x18\x03 \x01(\tR\tmaxAmount\x12/\n" +
+	"\x14max_amount_per_trans\x18\x04 \x01(\tR\x11maxAmountPerTrans\x12&\n" +
+	"\x0fmax_trans_limit\x18\x05 \x01(\x05R\rmaxTransLimit\x12\x1a\n" +
+	"\bpriority\x18\x06 \x01(\x05R\bpriority\x124\n" +
+	"\tbank_info\x18\a \x01(\v2\x17.google.protobuf.StructR\bbankInfo\x12F\n" +
+	"\x10operator_context\x18\b \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"e\n" +
 	"\x16AddBankAccountResponse\x12K\n" +
-	"\fbank_account\x18\x01 \x01(\v2(.api.bcpay.service.v1.DepositBankAccountR\vbankAccount\"\xab\x03\n" +
+	"\fbank_account\x18\x01 \x01(\v2(.api.bcpay.service.v1.DepositBankAccountR\vbankAccount\"\x8c\x03\n" +
 	"\x18UpdateBankAccountRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x18\n" +
 	"\acountry\x18\x03 \x01(\tR\acountry\x12\x1d\n" +
 	"\n" +
-	"max_amount\x18\x04 \x01(\tR\tmaxAmount\x12\x1d\n" +
-	"\n" +
-	"min_amount\x18\x05 \x01(\tR\tminAmount\x12/\n" +
-	"\x14max_amount_per_trans\x18\x06 \x01(\tR\x11maxAmountPerTrans\x12&\n" +
-	"\x0fmax_trans_limit\x18\a \x01(\x05R\rmaxTransLimit\x12\x1a\n" +
-	"\bpriority\x18\b \x01(\x05R\bpriority\x12\x18\n" +
-	"\aenabled\x18\t \x01(\bR\aenabled\x124\n" +
-	"\tbank_info\x18\n" +
-	" \x01(\v2\x17.google.protobuf.StructR\bbankInfo\x12F\n" +
-	"\x10operator_context\x18\v \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"h\n" +
+	"max_amount\x18\x04 \x01(\tR\tmaxAmount\x12/\n" +
+	"\x14max_amount_per_trans\x18\x05 \x01(\tR\x11maxAmountPerTrans\x12&\n" +
+	"\x0fmax_trans_limit\x18\x06 \x01(\x05R\rmaxTransLimit\x12\x1a\n" +
+	"\bpriority\x18\a \x01(\x05R\bpriority\x12\x18\n" +
+	"\aenabled\x18\b \x01(\bR\aenabled\x124\n" +
+	"\tbank_info\x18\t \x01(\v2\x17.google.protobuf.StructR\bbankInfo\x12F\n" +
+	"\x10operator_context\x18\n" +
+	" \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"h\n" +
 	"\x19UpdateBankAccountResponse\x12K\n" +
 	"\fbank_account\x18\x01 \x01(\v2(.api.bcpay.service.v1.DepositBankAccountR\vbankAccount\"*\n" +
 	"\x18DeleteBankAccountRequest\x12\x0e\n" +
@@ -2263,7 +2251,7 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"\vcreate_time\x18\x14 \x01(\tR\n" +
 	"createTime\x12\x1f\n" +
 	"\vupdate_time\x18\x15 \x01(\tR\n" +
-	"updateTime\"\x9f\x02\n" +
+	"updateTime\"\xc0\x02\n" +
 	"\x17TransactionListResponse\x12C\n" +
 	"\vtransaction\x18\x01 \x03(\v2!.api.bcpay.service.v1.TransactionR\vtransaction\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
@@ -2272,7 +2260,9 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"totalPages\x12%\n" +
 	"\x0etotal_approved\x18\x05 \x01(\x05R\rtotalApproved\x12!\n" +
 	"\ftotal_failed\x18\x06 \x01(\x05R\vtotalFailed\x12#\n" +
-	"\rtotal_pending\x18\a \x01(\x05R\ftotalPending\"\x9e\x01\n" +
+	"\rtotal_pending\x18\a \x01(\x05R\ftotalPending\x12\x1f\n" +
+	"\vtotal_count\x18\b \x01(\x05R\n" +
+	"totalCount\"\x9e\x01\n" +
 	"\x17AuditTransactionRequest\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x14\n" +
 	"\x05audit\x18\x02 \x01(\tR\x05audit\x12F\n" +

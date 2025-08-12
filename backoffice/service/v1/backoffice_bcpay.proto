@@ -111,11 +111,10 @@ message AddBankAccountRequest {
 	string currency = 1;
 	string country = 2;
 	string max_amount = 3;
-	string min_amount = 4;
-	string max_amount_per_trans = 5;
-	int32 max_trans_limit = 6;
-	int32 priority = 7;
-  google.protobuf.Struct bank_info = 8;
+	string max_amount_per_trans = 4;
+	int32 max_trans_limit = 5;
+	int32 priority = 6;
+  google.protobuf.Struct bank_info = 7;
 }
 
 message UpdateBankAccountRequest {
@@ -123,11 +122,10 @@ message UpdateBankAccountRequest {
 	string currency = 2;
 	string country = 3;
 	string max_amount = 4;
-	string min_amount = 5;
-	string max_amount_per_trans = 6;
-	int32 max_trans_limit = 7;
-	int32 priority = 8;
-  google.protobuf.Struct bank_info = 9;
+	string max_amount_per_trans = 5;
+	int32 max_trans_limit = 6;
+	int32 priority = 7;
+  google.protobuf.Struct bank_info = 8;
 }
 
 message TransactionListRequest {
@@ -135,7 +133,9 @@ message TransactionListRequest {
   int32 page = 1;
   // Number of items per page
   int32 page_size = 2;
+  // type "payin" "payout"
 	string type = 3;
+	// status "pending" "approved" "declined"
 	string status = 4;
 	int64 transaction_id = 5;
 	string deposit_bank_account_firstname = 6;
@@ -148,6 +148,6 @@ message TransactionListRequest {
 
 message AuditTransactionRequest {
 	string transaction_id = 1;
-	// audit a transaction "approve" or "deline"
+	// audit a transaction "approved" or "delined"
 	string audit = 2;
 }

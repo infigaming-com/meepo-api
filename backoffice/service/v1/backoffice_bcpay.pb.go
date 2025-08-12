@@ -211,11 +211,10 @@ type AddBankAccountRequest struct {
 	Currency          string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
 	Country           string                 `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
 	MaxAmount         string                 `protobuf:"bytes,3,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
-	MinAmount         string                 `protobuf:"bytes,4,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
-	MaxAmountPerTrans string                 `protobuf:"bytes,5,opt,name=max_amount_per_trans,json=maxAmountPerTrans,proto3" json:"max_amount_per_trans,omitempty"`
-	MaxTransLimit     int32                  `protobuf:"varint,6,opt,name=max_trans_limit,json=maxTransLimit,proto3" json:"max_trans_limit,omitempty"`
-	Priority          int32                  `protobuf:"varint,7,opt,name=priority,proto3" json:"priority,omitempty"`
-	BankInfo          *structpb.Struct       `protobuf:"bytes,8,opt,name=bank_info,json=bankInfo,proto3" json:"bank_info,omitempty"`
+	MaxAmountPerTrans string                 `protobuf:"bytes,4,opt,name=max_amount_per_trans,json=maxAmountPerTrans,proto3" json:"max_amount_per_trans,omitempty"`
+	MaxTransLimit     int32                  `protobuf:"varint,5,opt,name=max_trans_limit,json=maxTransLimit,proto3" json:"max_trans_limit,omitempty"`
+	Priority          int32                  `protobuf:"varint,6,opt,name=priority,proto3" json:"priority,omitempty"`
+	BankInfo          *structpb.Struct       `protobuf:"bytes,7,opt,name=bank_info,json=bankInfo,proto3" json:"bank_info,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -271,13 +270,6 @@ func (x *AddBankAccountRequest) GetMaxAmount() string {
 	return ""
 }
 
-func (x *AddBankAccountRequest) GetMinAmount() string {
-	if x != nil {
-		return x.MinAmount
-	}
-	return ""
-}
-
 func (x *AddBankAccountRequest) GetMaxAmountPerTrans() string {
 	if x != nil {
 		return x.MaxAmountPerTrans
@@ -312,11 +304,10 @@ type UpdateBankAccountRequest struct {
 	Currency          string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	Country           string                 `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
 	MaxAmount         string                 `protobuf:"bytes,4,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
-	MinAmount         string                 `protobuf:"bytes,5,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
-	MaxAmountPerTrans string                 `protobuf:"bytes,6,opt,name=max_amount_per_trans,json=maxAmountPerTrans,proto3" json:"max_amount_per_trans,omitempty"`
-	MaxTransLimit     int32                  `protobuf:"varint,7,opt,name=max_trans_limit,json=maxTransLimit,proto3" json:"max_trans_limit,omitempty"`
-	Priority          int32                  `protobuf:"varint,8,opt,name=priority,proto3" json:"priority,omitempty"`
-	BankInfo          *structpb.Struct       `protobuf:"bytes,9,opt,name=bank_info,json=bankInfo,proto3" json:"bank_info,omitempty"`
+	MaxAmountPerTrans string                 `protobuf:"bytes,5,opt,name=max_amount_per_trans,json=maxAmountPerTrans,proto3" json:"max_amount_per_trans,omitempty"`
+	MaxTransLimit     int32                  `protobuf:"varint,6,opt,name=max_trans_limit,json=maxTransLimit,proto3" json:"max_trans_limit,omitempty"`
+	Priority          int32                  `protobuf:"varint,7,opt,name=priority,proto3" json:"priority,omitempty"`
+	BankInfo          *structpb.Struct       `protobuf:"bytes,8,opt,name=bank_info,json=bankInfo,proto3" json:"bank_info,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -379,13 +370,6 @@ func (x *UpdateBankAccountRequest) GetMaxAmount() string {
 	return ""
 }
 
-func (x *UpdateBankAccountRequest) GetMinAmount() string {
-	if x != nil {
-		return x.MinAmount
-	}
-	return ""
-}
-
 func (x *UpdateBankAccountRequest) GetMaxAmountPerTrans() string {
 	if x != nil {
 		return x.MaxAmountPerTrans
@@ -419,8 +403,10 @@ type TransactionListRequest struct {
 	// Page number to retrieve (1-based)
 	Page int32 `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
 	// Number of items per page
-	PageSize                    int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Type                        string `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
+	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// type "payin" "payout"
+	Type string `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
+	// status "pending" "approved" "declined"
 	Status                      string `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
 	TransactionId               int64  `protobuf:"varint,5,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	DepositBankAccountFirstname string `protobuf:"bytes,6,opt,name=deposit_bank_account_firstname,json=depositBankAccountFirstname,proto3" json:"deposit_bank_account_firstname,omitempty"`
@@ -543,7 +529,7 @@ func (x *TransactionListRequest) GetUserBankAccountLastname() string {
 type AuditTransactionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TransactionId string                 `protobuf:"bytes,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	// audit a transaction "approve" or "deline"
+	// audit a transaction "approved" or "delined"
 	Audit         string `protobuf:"bytes,2,opt,name=audit,proto3" json:"audit,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -609,30 +595,26 @@ const file_backoffice_service_v1_backoffice_bcpay_proto_rawDesc = "" +
 	"\x16bank_account_firstname\x18\x05 \x01(\tR\x14bankAccountFirstname\x122\n" +
 	"\x15bank_account_lastname\x18\x06 \x01(\tR\x13bankAccountLastname\x12\x17\n" +
 	"\acard_id\x18\a \x01(\tR\x06cardId\x12\x18\n" +
-	"\aenabled\x18\b \x01(\bR\aenabled\"\xb6\x02\n" +
+	"\aenabled\x18\b \x01(\bR\aenabled\"\x97\x02\n" +
 	"\x15AddBankAccountRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
 	"\acountry\x18\x02 \x01(\tR\acountry\x12\x1d\n" +
 	"\n" +
-	"max_amount\x18\x03 \x01(\tR\tmaxAmount\x12\x1d\n" +
-	"\n" +
-	"min_amount\x18\x04 \x01(\tR\tminAmount\x12/\n" +
-	"\x14max_amount_per_trans\x18\x05 \x01(\tR\x11maxAmountPerTrans\x12&\n" +
-	"\x0fmax_trans_limit\x18\x06 \x01(\x05R\rmaxTransLimit\x12\x1a\n" +
-	"\bpriority\x18\a \x01(\x05R\bpriority\x124\n" +
-	"\tbank_info\x18\b \x01(\v2\x17.google.protobuf.StructR\bbankInfo\"\xc9\x02\n" +
+	"max_amount\x18\x03 \x01(\tR\tmaxAmount\x12/\n" +
+	"\x14max_amount_per_trans\x18\x04 \x01(\tR\x11maxAmountPerTrans\x12&\n" +
+	"\x0fmax_trans_limit\x18\x05 \x01(\x05R\rmaxTransLimit\x12\x1a\n" +
+	"\bpriority\x18\x06 \x01(\x05R\bpriority\x124\n" +
+	"\tbank_info\x18\a \x01(\v2\x17.google.protobuf.StructR\bbankInfo\"\xaa\x02\n" +
 	"\x18UpdateBankAccountRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x18\n" +
 	"\acountry\x18\x03 \x01(\tR\acountry\x12\x1d\n" +
 	"\n" +
-	"max_amount\x18\x04 \x01(\tR\tmaxAmount\x12\x1d\n" +
-	"\n" +
-	"min_amount\x18\x05 \x01(\tR\tminAmount\x12/\n" +
-	"\x14max_amount_per_trans\x18\x06 \x01(\tR\x11maxAmountPerTrans\x12&\n" +
-	"\x0fmax_trans_limit\x18\a \x01(\x05R\rmaxTransLimit\x12\x1a\n" +
-	"\bpriority\x18\b \x01(\x05R\bpriority\x124\n" +
-	"\tbank_info\x18\t \x01(\v2\x17.google.protobuf.StructR\bbankInfo\"\xd6\x03\n" +
+	"max_amount\x18\x04 \x01(\tR\tmaxAmount\x12/\n" +
+	"\x14max_amount_per_trans\x18\x05 \x01(\tR\x11maxAmountPerTrans\x12&\n" +
+	"\x0fmax_trans_limit\x18\x06 \x01(\x05R\rmaxTransLimit\x12\x1a\n" +
+	"\bpriority\x18\a \x01(\x05R\bpriority\x124\n" +
+	"\tbank_info\x18\b \x01(\v2\x17.google.protobuf.StructR\bbankInfo\"\xd6\x03\n" +
 	"\x16TransactionListRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x12\n" +

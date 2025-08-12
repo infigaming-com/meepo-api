@@ -1254,8 +1254,6 @@ func (m *DepositBankAccount) validate(all bool) error {
 
 	// no validation rules for MaxAmount
 
-	// no validation rules for MinAmount
-
 	// no validation rules for MaxAmountPerTrans
 
 	// no validation rules for MaxTransLimit
@@ -1559,6 +1557,8 @@ func (m *BankAccountListResponse) validate(all bool) error {
 
 	// no validation rules for TotalDisabled
 
+	// no validation rules for TotalCount
+
 	if len(errors) > 0 {
 		return BankAccountListResponseMultiError(errors)
 	}
@@ -1666,8 +1666,6 @@ func (m *AddBankAccountRequest) validate(all bool) error {
 	// no validation rules for Country
 
 	// no validation rules for MaxAmount
-
-	// no validation rules for MinAmount
 
 	// no validation rules for MaxAmountPerTrans
 
@@ -1973,8 +1971,6 @@ func (m *UpdateBankAccountRequest) validate(all bool) error {
 	// no validation rules for Country
 
 	// no validation rules for MaxAmount
-
-	// no validation rules for MinAmount
 
 	// no validation rules for MaxAmountPerTrans
 
@@ -2820,6 +2816,8 @@ func (m *TransactionListResponse) validate(all bool) error {
 	// no validation rules for TotalFailed
 
 	// no validation rules for TotalPending
+
+	// no validation rules for TotalCount
 
 	if len(errors) > 0 {
 		return TransactionListResponseMultiError(errors)

@@ -428,6 +428,7 @@ type PaymentMethodInfo struct {
 	SuccessRate string `protobuf:"bytes,24,opt,name=success_rate,json=successRate,proto3" json:"success_rate,omitempty"`
 	// JSON schema defining the required fields for this payment method
 	KeySchema     *structpb.ListValue `protobuf:"bytes,25,opt,name=key_schema,json=keySchema,proto3" json:"key_schema,omitempty"`
+	PspId         string              `protobuf:"bytes,26,opt,name=psp_id,json=pspId,proto3" json:"psp_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -635,6 +636,13 @@ func (x *PaymentMethodInfo) GetKeySchema() *structpb.ListValue {
 		return x.KeySchema
 	}
 	return nil
+}
+
+func (x *PaymentMethodInfo) GetPspId() string {
+	if x != nil {
+		return x.PspId
+	}
+	return ""
 }
 
 // Response for payment method list
@@ -5198,7 +5206,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\aenabled\x18\x05 \x01(\bH\x00R\aenabled\x88\x01\x01\x12F\n" +
 	"\x10operator_context\x18\x06 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\n" +
 	"\n" +
-	"\b_enabled\"\xc3\x06\n" +
+	"\b_enabled\"\xda\x06\n" +
 	"\x11PaymentMethodInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x10\n" +
 	"\x03psp\x18\x02 \x01(\tR\x03psp\x12%\n" +
@@ -5228,7 +5236,8 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\faverage_time\x18\x17 \x01(\x05R\vaverageTime\x12!\n" +
 	"\fsuccess_rate\x18\x18 \x01(\tR\vsuccessRate\x129\n" +
 	"\n" +
-	"key_schema\x18\x19 \x01(\v2\x1a.google.protobuf.ListValueR\tkeySchema\"w\n" +
+	"key_schema\x18\x19 \x01(\v2\x1a.google.protobuf.ListValueR\tkeySchema\x12\x15\n" +
+	"\x06psp_id\x18\x1a \x01(\tR\x05pspId\"w\n" +
 	"%GetSupportedPaymentMethodListResponse\x12N\n" +
 	"\x0fpayment_methods\x18\x01 \x03(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"\xf8\x01\n" +
 	"\x1cGetPaymentMethodListResponse\x12N\n" +
