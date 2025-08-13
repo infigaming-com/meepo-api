@@ -6390,6 +6390,8 @@ func (m *UpdateBankCardRequest) validate(all bool) error {
 
 	// no validation rules for Country
 
+	// no validation rules for Enabled
+
 	if all {
 		switch v := interface{}(m.GetBankCard()).(type) {
 		case interface{ ValidateAll() error }:
