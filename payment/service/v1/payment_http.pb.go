@@ -24,7 +24,6 @@ const OperationPaymentDeleteUsesrBankCard = "/payment.service.v1.Payment/DeleteU
 const OperationPaymentDepositCallback = "/payment.service.v1.Payment/DepositCallback"
 const OperationPaymentGetAddress = "/payment.service.v1.Payment/GetAddress"
 const OperationPaymentGetBankSchema = "/payment.service.v1.Payment/GetBankSchema"
-const OperationPaymentGetDepositBankAccount = "/payment.service.v1.Payment/GetDepositBankAccount"
 const OperationPaymentGetPaymentChannelPage = "/payment.service.v1.Payment/GetPaymentChannelPage"
 const OperationPaymentGetTransactionPage = "/payment.service.v1.Payment/GetTransactionPage"
 const OperationPaymentGetUserBankCardList = "/payment.service.v1.Payment/GetUserBankCardList"
@@ -44,7 +43,6 @@ type PaymentHTTPServer interface {
 	DepositCallback(context.Context, *DepositCallbackRequest) (*DepositCallbackResponse, error)
 	GetAddress(context.Context, *GetAddressRequest) (*GetAddressResponse, error)
 	GetBankSchema(context.Context, *GetBankSchemaRequest) (*GetBankSchemaResponse, error)
-	GetDepositBankAccount(context.Context, *GetBankAccountRequest) (*GetBankAccountResponse, error)
 	// GetPaymentChannelPage Get payment channel page with pagination and filters
 	// Retrieves a paginated list of payment channels with optional filtering
 	// Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
@@ -90,8 +88,7 @@ func RegisterPaymentHTTPServer(s *http.Server, srv PaymentHTTPServer) {
 	r.POST("/v1/payment/bankcard/add", _Payment_AddUserBankCard0_HTTP_Handler(srv))
 	r.POST("/v1/payment/bankcard/update", _Payment_UpdateUserBankCard0_HTTP_Handler(srv))
 	r.POST("/v1/payment/bankcard/delete", _Payment_DeleteUsesrBankCard0_HTTP_Handler(srv))
-	r.POST("/v1/payment/bankaccount/get", _Payment_GetDepositBankAccount0_HTTP_Handler(srv))
-	r.POST("/v1/payment/bankinfo/schema/get", _Payment_GetBankSchema1_HTTP_Handler(srv))
+	r.POST("/v1/payment/bankinfo/schema/get", _Payment_GetBankSchema0_HTTP_Handler(srv))
 }
 
 func _Payment_GetAddress0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
@@ -358,29 +355,7 @@ func _Payment_DeleteUsesrBankCard0_HTTP_Handler(srv PaymentHTTPServer) func(ctx 
 	}
 }
 
-func _Payment_GetDepositBankAccount0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetBankAccountRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationPaymentGetDepositBankAccount)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetDepositBankAccount(ctx, req.(*GetBankAccountRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*GetBankAccountResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Payment_GetBankSchema1_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
+func _Payment_GetBankSchema0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetBankSchemaRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -408,7 +383,6 @@ type PaymentHTTPClient interface {
 	DepositCallback(ctx context.Context, req *DepositCallbackRequest, opts ...http.CallOption) (rsp *DepositCallbackResponse, err error)
 	GetAddress(ctx context.Context, req *GetAddressRequest, opts ...http.CallOption) (rsp *GetAddressResponse, err error)
 	GetBankSchema(ctx context.Context, req *GetBankSchemaRequest, opts ...http.CallOption) (rsp *GetBankSchemaResponse, err error)
-	GetDepositBankAccount(ctx context.Context, req *GetBankAccountRequest, opts ...http.CallOption) (rsp *GetBankAccountResponse, err error)
 	GetPaymentChannelPage(ctx context.Context, req *GetPaymentChannelPageRequest, opts ...http.CallOption) (rsp *GetPaymentChannelPageResponse, err error)
 	GetTransactionPage(ctx context.Context, req *GetTransactionPageRequest, opts ...http.CallOption) (rsp *GetTransactionPageResponse, err error)
 	GetUserBankCardList(ctx context.Context, req *GetBankCardListRequest, opts ...http.CallOption) (rsp *GetBankCardListResponse, err error)
@@ -484,19 +458,6 @@ func (c *PaymentHTTPClientImpl) GetBankSchema(ctx context.Context, in *GetBankSc
 	pattern := "/v1/payment/bankinfo/schema/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationPaymentGetBankSchema))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *PaymentHTTPClientImpl) GetDepositBankAccount(ctx context.Context, in *GetBankAccountRequest, opts ...http.CallOption) (*GetBankAccountResponse, error) {
-	var out GetBankAccountResponse
-	pattern := "/v1/payment/bankaccount/get"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationPaymentGetDepositBankAccount))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

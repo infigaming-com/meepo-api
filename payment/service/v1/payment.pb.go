@@ -1417,6 +1417,7 @@ type PaymentChannelInfo struct {
 	RetailerOperatorName string `protobuf:"bytes,44,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
 	SystemOperatorName   string `protobuf:"bytes,46,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
 	OperatorType         string `protobuf:"bytes,47,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
+	PspId                string `protobuf:"bytes,48,opt,name=psp_id,json=pspId,proto3" json:"psp_id,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -1769,6 +1770,13 @@ func (x *PaymentChannelInfo) GetSystemOperatorName() string {
 func (x *PaymentChannelInfo) GetOperatorType() string {
 	if x != nil {
 		return x.OperatorType
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetPspId() string {
+	if x != nil {
+		return x.PspId
 	}
 	return ""
 }
@@ -4370,13 +4378,14 @@ func (x *UpdatePaymentMethodResponse) GetChannelIds() []string {
 
 type BankCard struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
-	Id                   string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	CardNumber           string                 `protobuf:"bytes,2,opt,name=card_number,json=cardNumber,proto3" json:"card_number,omitempty"`
+	Id                   int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	CardAccount          string                 `protobuf:"bytes,2,opt,name=card_account,json=cardAccount,proto3" json:"card_account,omitempty"`
 	CardAccountFirstname string                 `protobuf:"bytes,3,opt,name=card_account_firstname,json=cardAccountFirstname,proto3" json:"card_account_firstname,omitempty"`
 	CardAccountLastname  string                 `protobuf:"bytes,4,opt,name=card_account_lastname,json=cardAccountLastname,proto3" json:"card_account_lastname,omitempty"`
-	Currency             string                 `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
-	Country              string                 `protobuf:"bytes,6,opt,name=country,proto3" json:"country,omitempty"`
-	Enabled              bool                   `protobuf:"varint,7,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	CardIban             string                 `protobuf:"bytes,5,opt,name=card_iban,json=cardIban,proto3" json:"card_iban,omitempty"`
+	Currency             string                 `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`
+	Country              string                 `protobuf:"bytes,7,opt,name=country,proto3" json:"country,omitempty"`
+	Enabled              bool                   `protobuf:"varint,8,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -4411,16 +4420,16 @@ func (*BankCard) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{39}
 }
 
-func (x *BankCard) GetId() string {
+func (x *BankCard) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
-	return ""
+	return 0
 }
 
-func (x *BankCard) GetCardNumber() string {
+func (x *BankCard) GetCardAccount() string {
 	if x != nil {
-		return x.CardNumber
+		return x.CardAccount
 	}
 	return ""
 }
@@ -4435,6 +4444,13 @@ func (x *BankCard) GetCardAccountFirstname() string {
 func (x *BankCard) GetCardAccountLastname() string {
 	if x != nil {
 		return x.CardAccountLastname
+	}
+	return ""
+}
+
+func (x *BankCard) GetCardIban() string {
+	if x != nil {
+		return x.CardIban
 	}
 	return ""
 }
@@ -4602,7 +4618,6 @@ func (x *AddBankCardRequest) GetBankCard() *structpb.Struct {
 
 type AddBankCardResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	BankCard      *BankCard              `protobuf:"bytes,1,opt,name=bank_card,json=bankCard,proto3" json:"bank_card,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4635,13 +4650,6 @@ func (x *AddBankCardResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use AddBankCardResponse.ProtoReflect.Descriptor instead.
 func (*AddBankCardResponse) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{43}
-}
-
-func (x *AddBankCardResponse) GetBankCard() *BankCard {
-	if x != nil {
-		return x.BankCard
-	}
-	return nil
 }
 
 type UpdateBankCardRequest struct {
@@ -4714,7 +4722,6 @@ func (x *UpdateBankCardRequest) GetBankCard() *structpb.Struct {
 
 type UpdateBankCardResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	BankCard      *BankCard              `protobuf:"bytes,1,opt,name=bank_card,json=bankCard,proto3" json:"bank_card,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4749,16 +4756,9 @@ func (*UpdateBankCardResponse) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{45}
 }
 
-func (x *UpdateBankCardResponse) GetBankCard() *BankCard {
-	if x != nil {
-		return x.BankCard
-	}
-	return nil
-}
-
 type DeleteBankCardRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	BankCardId    string                 `protobuf:"bytes,1,opt,name=bank_card_id,json=bankCardId,proto3" json:"bank_card_id,omitempty"`
+	BankCardId    int64                  `protobuf:"varint,1,opt,name=bank_card_id,json=bankCardId,proto3" json:"bank_card_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4793,11 +4793,11 @@ func (*DeleteBankCardRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{46}
 }
 
-func (x *DeleteBankCardRequest) GetBankCardId() string {
+func (x *DeleteBankCardRequest) GetBankCardId() int64 {
 	if x != nil {
 		return x.BankCardId
 	}
-	return ""
+	return 0
 }
 
 type DeleteBankCardResponse struct {
@@ -5301,7 +5301,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\a_enable\"=\n" +
 	"\x1cCreatePaymentChannelResponse\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xa8\f\n" +
+	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xbf\f\n" +
 	"\x12PaymentChannelInfo\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\x12!\n" +
@@ -5356,7 +5356,8 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x15company_operator_name\x18+ \x01(\tR\x13companyOperatorName\x124\n" +
 	"\x16retailer_operator_name\x18, \x01(\tR\x14retailerOperatorName\x120\n" +
 	"\x14system_operator_name\x18. \x01(\tR\x12systemOperatorName\x12#\n" +
-	"\roperator_type\x18/ \x01(\tR\foperatorType\"\x9a\x01\n" +
+	"\roperator_type\x18/ \x01(\tR\foperatorType\x12\x15\n" +
+	"\x06psp_id\x180 \x01(\tR\x05pspId\"\x9a\x01\n" +
 	"\x16InitiateDepositRequest\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1d\n" +
@@ -5605,34 +5606,32 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x06status\x18\x02 \x01(\bR\x06status\">\n" +
 	"\x1bUpdatePaymentMethodResponse\x12\x1f\n" +
 	"\vchannel_ids\x18\x01 \x03(\tR\n" +
-	"channelIds\"\xf5\x01\n" +
+	"channelIds\"\x94\x02\n" +
 	"\bBankCard\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1f\n" +
-	"\vcard_number\x18\x02 \x01(\tR\n" +
-	"cardNumber\x124\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12!\n" +
+	"\fcard_account\x18\x02 \x01(\tR\vcardAccount\x124\n" +
 	"\x16card_account_firstname\x18\x03 \x01(\tR\x14cardAccountFirstname\x122\n" +
-	"\x15card_account_lastname\x18\x04 \x01(\tR\x13cardAccountLastname\x12\x1a\n" +
-	"\bcurrency\x18\x05 \x01(\tR\bcurrency\x12\x18\n" +
-	"\acountry\x18\x06 \x01(\tR\acountry\x12\x18\n" +
-	"\aenabled\x18\a \x01(\bR\aenabled\"\x18\n" +
+	"\x15card_account_lastname\x18\x04 \x01(\tR\x13cardAccountLastname\x12\x1b\n" +
+	"\tcard_iban\x18\x05 \x01(\tR\bcardIban\x12\x1a\n" +
+	"\bcurrency\x18\x06 \x01(\tR\bcurrency\x12\x18\n" +
+	"\acountry\x18\a \x01(\tR\acountry\x12\x18\n" +
+	"\aenabled\x18\b \x01(\bR\aenabled\"\x18\n" +
 	"\x16GetBankCardListRequest\"]\n" +
 	"\x17GetBankCardListResponse\x12B\n" +
 	"\x0ebank_card_lsit\x18\x01 \x03(\v2\x1c.payment.service.v1.BankCardR\fbankCardLsit\"\x80\x01\n" +
 	"\x12AddBankCardRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
 	"\acountry\x18\x02 \x01(\tR\acountry\x124\n" +
-	"\tbank_card\x18\x03 \x01(\v2\x17.google.protobuf.StructR\bbankCard\"P\n" +
-	"\x13AddBankCardResponse\x129\n" +
-	"\tbank_card\x18\x01 \x01(\v2\x1c.payment.service.v1.BankCardR\bbankCard\"\x93\x01\n" +
+	"\tbank_card\x18\x03 \x01(\v2\x17.google.protobuf.StructR\bbankCard\"\x15\n" +
+	"\x13AddBankCardResponse\"\x93\x01\n" +
 	"\x15UpdateBankCardRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x18\n" +
 	"\acountry\x18\x03 \x01(\tR\acountry\x124\n" +
-	"\tbank_card\x18\x04 \x01(\v2\x17.google.protobuf.StructR\bbankCard\"S\n" +
-	"\x16UpdateBankCardResponse\x129\n" +
-	"\tbank_card\x18\x01 \x01(\v2\x1c.payment.service.v1.BankCardR\bbankCard\"9\n" +
+	"\tbank_card\x18\x04 \x01(\v2\x17.google.protobuf.StructR\bbankCard\"\x18\n" +
+	"\x16UpdateBankCardResponse\"9\n" +
 	"\x15DeleteBankCardRequest\x12 \n" +
-	"\fbank_card_id\x18\x01 \x01(\tR\n" +
+	"\fbank_card_id\x18\x01 \x01(\x03R\n" +
 	"bankCardId\"\x18\n" +
 	"\x16DeleteBankCardResponse\"e\n" +
 	"\x15GetBankAccountRequest\x12\x1d\n" +
@@ -5664,7 +5663,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\vChannelType\x12\x14\n" +
 	"\x10CHANNEL_TYPE_ALL\x10\x00\x12\x18\n" +
 	"\x14CHANNEL_TYPE_DEPOSIT\x10\x01\x12\x19\n" +
-	"\x15CHANNEL_TYPE_WITHDRAW\x10\x022\xf2\x1e\n" +
+	"\x15CHANNEL_TYPE_WITHDRAW\x10\x022\xd9\x1d\n" +
 	"\aPayment\x12\x96\x01\n" +
 	"\x1dGetSupportedPaymentMethodList\x128.payment.service.v1.GetSupportedPaymentMethodListRequest\x1a9.payment.service.v1.GetSupportedPaymentMethodListResponse\"\x00\x12x\n" +
 	"\x13CreatePaymentMethod\x12..payment.service.v1.CreatePaymentMethodRequest\x1a/.payment.service.v1.CreatePaymentMethodResponse\"\x00\x12{\n" +
@@ -5692,8 +5691,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x13GetUserBankCardList\x12*.payment.service.v1.GetBankCardListRequest\x1a+.payment.service.v1.GetBankCardListResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/payment/bankcard/list\x12\x87\x01\n" +
 	"\x0fAddUserBankCard\x12&.payment.service.v1.AddBankCardRequest\x1a'.payment.service.v1.AddBankCardResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/payment/bankcard/add\x12\x93\x01\n" +
 	"\x12UpdateUserBankCard\x12).payment.service.v1.UpdateBankCardRequest\x1a*.payment.service.v1.UpdateBankCardResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/payment/bankcard/update\x12\x94\x01\n" +
-	"\x13DeleteUsesrBankCard\x12).payment.service.v1.DeleteBankCardRequest\x1a*.payment.service.v1.DeleteBankCardResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/payment/bankcard/delete\x12\x96\x01\n" +
-	"\x15GetDepositBankAccount\x12).payment.service.v1.GetBankAccountRequest\x1a*.payment.service.v1.GetBankAccountResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/payment/bankaccount/get\x12\x90\x01\n" +
+	"\x13DeleteUsesrBankCard\x12).payment.service.v1.DeleteBankCardRequest\x1a*.payment.service.v1.DeleteBankCardResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/payment/bankcard/delete\x12\x90\x01\n" +
 	"\rGetBankSchema\x12(.payment.service.v1.GetBankSchemaRequest\x1a).payment.service.v1.GetBankSchemaResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/payment/bankinfo/schema/getBU\n" +
 	"\x16api.payment.service.v1P\x01Z9github.com/infigaming-com/meepo-api/payment/service/v1;v1b\x06proto3"
 
@@ -5829,72 +5827,68 @@ var file_payment_service_v1_payment_proto_depIdxs = []int32{
 	15, // 49: payment.service.v1.GetChannelsByIdsResponse.channels:type_name -> payment.service.v1.PaymentChannelInfo
 	43, // 50: payment.service.v1.GetBankCardListResponse.bank_card_lsit:type_name -> payment.service.v1.BankCard
 	60, // 51: payment.service.v1.AddBankCardRequest.bank_card:type_name -> google.protobuf.Struct
-	43, // 52: payment.service.v1.AddBankCardResponse.bank_card:type_name -> payment.service.v1.BankCard
-	60, // 53: payment.service.v1.UpdateBankCardRequest.bank_card:type_name -> google.protobuf.Struct
-	43, // 54: payment.service.v1.UpdateBankCardResponse.bank_card:type_name -> payment.service.v1.BankCard
-	60, // 55: payment.service.v1.GetBankAccountRequest.extra:type_name -> google.protobuf.Struct
-	59, // 56: payment.service.v1.GetBankSchemaResponse.schema:type_name -> google.protobuf.ListValue
-	4,  // 57: payment.service.v1.Payment.GetSupportedPaymentMethodList:input_type -> payment.service.v1.GetSupportedPaymentMethodListRequest
-	9,  // 58: payment.service.v1.Payment.CreatePaymentMethod:input_type -> payment.service.v1.CreatePaymentMethodRequest
-	5,  // 59: payment.service.v1.Payment.GetPaymentMethodList:input_type -> payment.service.v1.GetPaymentMethodListRequest
-	13, // 60: payment.service.v1.Payment.UpdatePaymentChannel:input_type -> payment.service.v1.UpdatePaymentChannelRequest
-	12, // 61: payment.service.v1.Payment.CreatePaymentChannel:input_type -> payment.service.v1.CreatePaymentChannelRequest
-	18, // 62: payment.service.v1.Payment.GetAddress:input_type -> payment.service.v1.GetAddressRequest
-	16, // 63: payment.service.v1.Payment.InitiateDeposit:input_type -> payment.service.v1.InitiateDepositRequest
-	22, // 64: payment.service.v1.Payment.InitiateWithdraw:input_type -> payment.service.v1.InitiateWithdrawRequest
-	26, // 65: payment.service.v1.Payment.DepositCallback:input_type -> payment.service.v1.DepositCallbackRequest
-	28, // 66: payment.service.v1.Payment.WithdrawCallback:input_type -> payment.service.v1.WithdrawCallbackRequest
-	20, // 67: payment.service.v1.Payment.GetOperatorAddress:input_type -> payment.service.v1.GetOperatorAddressRequest
-	24, // 68: payment.service.v1.Payment.InitiateOperatorWithdraw:input_type -> payment.service.v1.InitiateOperatorWithdrawRequest
-	26, // 69: payment.service.v1.Payment.OperatorDepositCallback:input_type -> payment.service.v1.DepositCallbackRequest
-	28, // 70: payment.service.v1.Payment.OperatorWithdrawCallback:input_type -> payment.service.v1.WithdrawCallbackRequest
-	32, // 71: payment.service.v1.Payment.GetTransactionPage:input_type -> payment.service.v1.GetTransactionPageRequest
-	34, // 72: payment.service.v1.Payment.GetPaymentChannelPage:input_type -> payment.service.v1.GetPaymentChannelPageRequest
-	37, // 73: payment.service.v1.Payment.GetTransactionDetailById:input_type -> payment.service.v1.GetTransactionDetailByIdRequest
-	32, // 74: payment.service.v1.Payment.GetOperatorTransactionPage:input_type -> payment.service.v1.GetTransactionPageRequest
-	37, // 75: payment.service.v1.Payment.GetOperatorTransactionDetailById:input_type -> payment.service.v1.GetTransactionDetailByIdRequest
-	39, // 76: payment.service.v1.Payment.GetChannelsByIds:input_type -> payment.service.v1.GetChannelsByIdsRequest
-	41, // 77: payment.service.v1.Payment.UpdatePaymentMethod:input_type -> payment.service.v1.UpdatePaymentMethodRequest
-	35, // 78: payment.service.v1.Payment.GetOperatorPaymentChannelPage:input_type -> payment.service.v1.GetOperatorPaymentChannelPageRequest
-	44, // 79: payment.service.v1.Payment.GetUserBankCardList:input_type -> payment.service.v1.GetBankCardListRequest
-	46, // 80: payment.service.v1.Payment.AddUserBankCard:input_type -> payment.service.v1.AddBankCardRequest
-	48, // 81: payment.service.v1.Payment.UpdateUserBankCard:input_type -> payment.service.v1.UpdateBankCardRequest
-	50, // 82: payment.service.v1.Payment.DeleteUsesrBankCard:input_type -> payment.service.v1.DeleteBankCardRequest
-	52, // 83: payment.service.v1.Payment.GetDepositBankAccount:input_type -> payment.service.v1.GetBankAccountRequest
-	54, // 84: payment.service.v1.Payment.GetBankSchema:input_type -> payment.service.v1.GetBankSchemaRequest
-	7,  // 85: payment.service.v1.Payment.GetSupportedPaymentMethodList:output_type -> payment.service.v1.GetSupportedPaymentMethodListResponse
-	10, // 86: payment.service.v1.Payment.CreatePaymentMethod:output_type -> payment.service.v1.CreatePaymentMethodResponse
-	8,  // 87: payment.service.v1.Payment.GetPaymentMethodList:output_type -> payment.service.v1.GetPaymentMethodListResponse
-	11, // 88: payment.service.v1.Payment.UpdatePaymentChannel:output_type -> payment.service.v1.UpdatePaymentChannelResponse
-	14, // 89: payment.service.v1.Payment.CreatePaymentChannel:output_type -> payment.service.v1.CreatePaymentChannelResponse
-	19, // 90: payment.service.v1.Payment.GetAddress:output_type -> payment.service.v1.GetAddressResponse
-	17, // 91: payment.service.v1.Payment.InitiateDeposit:output_type -> payment.service.v1.InitiateDepositResponse
-	23, // 92: payment.service.v1.Payment.InitiateWithdraw:output_type -> payment.service.v1.InitiateWithdrawResponse
-	27, // 93: payment.service.v1.Payment.DepositCallback:output_type -> payment.service.v1.DepositCallbackResponse
-	29, // 94: payment.service.v1.Payment.WithdrawCallback:output_type -> payment.service.v1.WithdrawCallbackResponse
-	21, // 95: payment.service.v1.Payment.GetOperatorAddress:output_type -> payment.service.v1.GetOperatorAddressResponse
-	25, // 96: payment.service.v1.Payment.InitiateOperatorWithdraw:output_type -> payment.service.v1.InitiateOperatorWithdrawResponse
-	27, // 97: payment.service.v1.Payment.OperatorDepositCallback:output_type -> payment.service.v1.DepositCallbackResponse
-	29, // 98: payment.service.v1.Payment.OperatorWithdrawCallback:output_type -> payment.service.v1.WithdrawCallbackResponse
-	33, // 99: payment.service.v1.Payment.GetTransactionPage:output_type -> payment.service.v1.GetTransactionPageResponse
-	36, // 100: payment.service.v1.Payment.GetPaymentChannelPage:output_type -> payment.service.v1.GetPaymentChannelPageResponse
-	38, // 101: payment.service.v1.Payment.GetTransactionDetailById:output_type -> payment.service.v1.GetTransactionDetailByIdResponse
-	33, // 102: payment.service.v1.Payment.GetOperatorTransactionPage:output_type -> payment.service.v1.GetTransactionPageResponse
-	38, // 103: payment.service.v1.Payment.GetOperatorTransactionDetailById:output_type -> payment.service.v1.GetTransactionDetailByIdResponse
-	40, // 104: payment.service.v1.Payment.GetChannelsByIds:output_type -> payment.service.v1.GetChannelsByIdsResponse
-	10, // 105: payment.service.v1.Payment.UpdatePaymentMethod:output_type -> payment.service.v1.CreatePaymentMethodResponse
-	36, // 106: payment.service.v1.Payment.GetOperatorPaymentChannelPage:output_type -> payment.service.v1.GetPaymentChannelPageResponse
-	45, // 107: payment.service.v1.Payment.GetUserBankCardList:output_type -> payment.service.v1.GetBankCardListResponse
-	47, // 108: payment.service.v1.Payment.AddUserBankCard:output_type -> payment.service.v1.AddBankCardResponse
-	49, // 109: payment.service.v1.Payment.UpdateUserBankCard:output_type -> payment.service.v1.UpdateBankCardResponse
-	51, // 110: payment.service.v1.Payment.DeleteUsesrBankCard:output_type -> payment.service.v1.DeleteBankCardResponse
-	53, // 111: payment.service.v1.Payment.GetDepositBankAccount:output_type -> payment.service.v1.GetBankAccountResponse
-	55, // 112: payment.service.v1.Payment.GetBankSchema:output_type -> payment.service.v1.GetBankSchemaResponse
-	85, // [85:113] is the sub-list for method output_type
-	57, // [57:85] is the sub-list for method input_type
-	57, // [57:57] is the sub-list for extension type_name
-	57, // [57:57] is the sub-list for extension extendee
-	0,  // [0:57] is the sub-list for field type_name
+	60, // 52: payment.service.v1.UpdateBankCardRequest.bank_card:type_name -> google.protobuf.Struct
+	60, // 53: payment.service.v1.GetBankAccountRequest.extra:type_name -> google.protobuf.Struct
+	59, // 54: payment.service.v1.GetBankSchemaResponse.schema:type_name -> google.protobuf.ListValue
+	4,  // 55: payment.service.v1.Payment.GetSupportedPaymentMethodList:input_type -> payment.service.v1.GetSupportedPaymentMethodListRequest
+	9,  // 56: payment.service.v1.Payment.CreatePaymentMethod:input_type -> payment.service.v1.CreatePaymentMethodRequest
+	5,  // 57: payment.service.v1.Payment.GetPaymentMethodList:input_type -> payment.service.v1.GetPaymentMethodListRequest
+	13, // 58: payment.service.v1.Payment.UpdatePaymentChannel:input_type -> payment.service.v1.UpdatePaymentChannelRequest
+	12, // 59: payment.service.v1.Payment.CreatePaymentChannel:input_type -> payment.service.v1.CreatePaymentChannelRequest
+	18, // 60: payment.service.v1.Payment.GetAddress:input_type -> payment.service.v1.GetAddressRequest
+	16, // 61: payment.service.v1.Payment.InitiateDeposit:input_type -> payment.service.v1.InitiateDepositRequest
+	22, // 62: payment.service.v1.Payment.InitiateWithdraw:input_type -> payment.service.v1.InitiateWithdrawRequest
+	26, // 63: payment.service.v1.Payment.DepositCallback:input_type -> payment.service.v1.DepositCallbackRequest
+	28, // 64: payment.service.v1.Payment.WithdrawCallback:input_type -> payment.service.v1.WithdrawCallbackRequest
+	20, // 65: payment.service.v1.Payment.GetOperatorAddress:input_type -> payment.service.v1.GetOperatorAddressRequest
+	24, // 66: payment.service.v1.Payment.InitiateOperatorWithdraw:input_type -> payment.service.v1.InitiateOperatorWithdrawRequest
+	26, // 67: payment.service.v1.Payment.OperatorDepositCallback:input_type -> payment.service.v1.DepositCallbackRequest
+	28, // 68: payment.service.v1.Payment.OperatorWithdrawCallback:input_type -> payment.service.v1.WithdrawCallbackRequest
+	32, // 69: payment.service.v1.Payment.GetTransactionPage:input_type -> payment.service.v1.GetTransactionPageRequest
+	34, // 70: payment.service.v1.Payment.GetPaymentChannelPage:input_type -> payment.service.v1.GetPaymentChannelPageRequest
+	37, // 71: payment.service.v1.Payment.GetTransactionDetailById:input_type -> payment.service.v1.GetTransactionDetailByIdRequest
+	32, // 72: payment.service.v1.Payment.GetOperatorTransactionPage:input_type -> payment.service.v1.GetTransactionPageRequest
+	37, // 73: payment.service.v1.Payment.GetOperatorTransactionDetailById:input_type -> payment.service.v1.GetTransactionDetailByIdRequest
+	39, // 74: payment.service.v1.Payment.GetChannelsByIds:input_type -> payment.service.v1.GetChannelsByIdsRequest
+	41, // 75: payment.service.v1.Payment.UpdatePaymentMethod:input_type -> payment.service.v1.UpdatePaymentMethodRequest
+	35, // 76: payment.service.v1.Payment.GetOperatorPaymentChannelPage:input_type -> payment.service.v1.GetOperatorPaymentChannelPageRequest
+	44, // 77: payment.service.v1.Payment.GetUserBankCardList:input_type -> payment.service.v1.GetBankCardListRequest
+	46, // 78: payment.service.v1.Payment.AddUserBankCard:input_type -> payment.service.v1.AddBankCardRequest
+	48, // 79: payment.service.v1.Payment.UpdateUserBankCard:input_type -> payment.service.v1.UpdateBankCardRequest
+	50, // 80: payment.service.v1.Payment.DeleteUsesrBankCard:input_type -> payment.service.v1.DeleteBankCardRequest
+	54, // 81: payment.service.v1.Payment.GetBankSchema:input_type -> payment.service.v1.GetBankSchemaRequest
+	7,  // 82: payment.service.v1.Payment.GetSupportedPaymentMethodList:output_type -> payment.service.v1.GetSupportedPaymentMethodListResponse
+	10, // 83: payment.service.v1.Payment.CreatePaymentMethod:output_type -> payment.service.v1.CreatePaymentMethodResponse
+	8,  // 84: payment.service.v1.Payment.GetPaymentMethodList:output_type -> payment.service.v1.GetPaymentMethodListResponse
+	11, // 85: payment.service.v1.Payment.UpdatePaymentChannel:output_type -> payment.service.v1.UpdatePaymentChannelResponse
+	14, // 86: payment.service.v1.Payment.CreatePaymentChannel:output_type -> payment.service.v1.CreatePaymentChannelResponse
+	19, // 87: payment.service.v1.Payment.GetAddress:output_type -> payment.service.v1.GetAddressResponse
+	17, // 88: payment.service.v1.Payment.InitiateDeposit:output_type -> payment.service.v1.InitiateDepositResponse
+	23, // 89: payment.service.v1.Payment.InitiateWithdraw:output_type -> payment.service.v1.InitiateWithdrawResponse
+	27, // 90: payment.service.v1.Payment.DepositCallback:output_type -> payment.service.v1.DepositCallbackResponse
+	29, // 91: payment.service.v1.Payment.WithdrawCallback:output_type -> payment.service.v1.WithdrawCallbackResponse
+	21, // 92: payment.service.v1.Payment.GetOperatorAddress:output_type -> payment.service.v1.GetOperatorAddressResponse
+	25, // 93: payment.service.v1.Payment.InitiateOperatorWithdraw:output_type -> payment.service.v1.InitiateOperatorWithdrawResponse
+	27, // 94: payment.service.v1.Payment.OperatorDepositCallback:output_type -> payment.service.v1.DepositCallbackResponse
+	29, // 95: payment.service.v1.Payment.OperatorWithdrawCallback:output_type -> payment.service.v1.WithdrawCallbackResponse
+	33, // 96: payment.service.v1.Payment.GetTransactionPage:output_type -> payment.service.v1.GetTransactionPageResponse
+	36, // 97: payment.service.v1.Payment.GetPaymentChannelPage:output_type -> payment.service.v1.GetPaymentChannelPageResponse
+	38, // 98: payment.service.v1.Payment.GetTransactionDetailById:output_type -> payment.service.v1.GetTransactionDetailByIdResponse
+	33, // 99: payment.service.v1.Payment.GetOperatorTransactionPage:output_type -> payment.service.v1.GetTransactionPageResponse
+	38, // 100: payment.service.v1.Payment.GetOperatorTransactionDetailById:output_type -> payment.service.v1.GetTransactionDetailByIdResponse
+	40, // 101: payment.service.v1.Payment.GetChannelsByIds:output_type -> payment.service.v1.GetChannelsByIdsResponse
+	10, // 102: payment.service.v1.Payment.UpdatePaymentMethod:output_type -> payment.service.v1.CreatePaymentMethodResponse
+	36, // 103: payment.service.v1.Payment.GetOperatorPaymentChannelPage:output_type -> payment.service.v1.GetPaymentChannelPageResponse
+	45, // 104: payment.service.v1.Payment.GetUserBankCardList:output_type -> payment.service.v1.GetBankCardListResponse
+	47, // 105: payment.service.v1.Payment.AddUserBankCard:output_type -> payment.service.v1.AddBankCardResponse
+	49, // 106: payment.service.v1.Payment.UpdateUserBankCard:output_type -> payment.service.v1.UpdateBankCardResponse
+	51, // 107: payment.service.v1.Payment.DeleteUsesrBankCard:output_type -> payment.service.v1.DeleteBankCardResponse
+	55, // 108: payment.service.v1.Payment.GetBankSchema:output_type -> payment.service.v1.GetBankSchemaResponse
+	82, // [82:109] is the sub-list for method output_type
+	55, // [55:82] is the sub-list for method input_type
+	55, // [55:55] is the sub-list for extension type_name
+	55, // [55:55] is the sub-list for extension extendee
+	0,  // [0:55] is the sub-list for field type_name
 }
 
 func init() { file_payment_service_v1_payment_proto_init() }
