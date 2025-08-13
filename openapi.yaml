@@ -10915,7 +10915,7 @@ components:
                     type: string
                 enabled:
                     type: boolean
-                bankInfo:
+                cardDetail:
                     type: object
         payment.service.v1.CreatePaymentChannelResponse:
             type: object

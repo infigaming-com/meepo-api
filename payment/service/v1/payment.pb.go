@@ -4386,7 +4386,7 @@ type BankCard struct {
 	Currency             string                 `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`
 	Country              string                 `protobuf:"bytes,7,opt,name=country,proto3" json:"country,omitempty"`
 	Enabled              bool                   `protobuf:"varint,8,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	BankInfo             *structpb.Struct       `protobuf:"bytes,9,opt,name=bank_info,json=bankInfo,proto3" json:"bank_info,omitempty"`
+	CardDetail           *structpb.Struct       `protobuf:"bytes,9,opt,name=card_detail,json=cardDetail,proto3" json:"card_detail,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -4477,9 +4477,9 @@ func (x *BankCard) GetEnabled() bool {
 	return false
 }
 
-func (x *BankCard) GetBankInfo() *structpb.Struct {
+func (x *BankCard) GetCardDetail() *structpb.Struct {
 	if x != nil {
-		return x.BankInfo
+		return x.CardDetail
 	}
 	return nil
 }
@@ -5622,7 +5622,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x06status\x18\x02 \x01(\bR\x06status\">\n" +
 	"\x1bUpdatePaymentMethodResponse\x12\x1f\n" +
 	"\vchannel_ids\x18\x01 \x03(\tR\n" +
-	"channelIds\"\xca\x02\n" +
+	"channelIds\"\xce\x02\n" +
 	"\bBankCard\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12!\n" +
 	"\fcard_account\x18\x02 \x01(\tR\vcardAccount\x124\n" +
@@ -5631,8 +5631,9 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\tcard_iban\x18\x05 \x01(\tR\bcardIban\x12\x1a\n" +
 	"\bcurrency\x18\x06 \x01(\tR\bcurrency\x12\x18\n" +
 	"\acountry\x18\a \x01(\tR\acountry\x12\x18\n" +
-	"\aenabled\x18\b \x01(\bR\aenabled\x124\n" +
-	"\tbank_info\x18\t \x01(\v2\x17.google.protobuf.StructR\bbankInfo\"\x18\n" +
+	"\aenabled\x18\b \x01(\bR\aenabled\x128\n" +
+	"\vcard_detail\x18\t \x01(\v2\x17.google.protobuf.StructR\n" +
+	"cardDetail\"\x18\n" +
 	"\x16GetBankCardListRequest\"]\n" +
 	"\x17GetBankCardListResponse\x12B\n" +
 	"\x0ebank_card_lsit\x18\x01 \x03(\v2\x1c.payment.service.v1.BankCardR\fbankCardLsit\"\x80\x01\n" +
@@ -5843,7 +5844,7 @@ var file_payment_service_v1_payment_proto_depIdxs = []int32{
 	15, // 47: payment.service.v1.GetPaymentChannelPageResponse.payment_channels:type_name -> payment.service.v1.PaymentChannelInfo
 	31, // 48: payment.service.v1.GetTransactionDetailByIdResponse.detail:type_name -> payment.service.v1.TransactionDetail
 	15, // 49: payment.service.v1.GetChannelsByIdsResponse.channels:type_name -> payment.service.v1.PaymentChannelInfo
-	60, // 50: payment.service.v1.BankCard.bank_info:type_name -> google.protobuf.Struct
+	60, // 50: payment.service.v1.BankCard.card_detail:type_name -> google.protobuf.Struct
 	43, // 51: payment.service.v1.GetBankCardListResponse.bank_card_lsit:type_name -> payment.service.v1.BankCard
 	60, // 52: payment.service.v1.AddBankCardRequest.bank_card:type_name -> google.protobuf.Struct
 	60, // 53: payment.service.v1.UpdateBankCardRequest.bank_card:type_name -> google.protobuf.Struct
