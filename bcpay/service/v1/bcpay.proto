@@ -14,7 +14,7 @@ option java_package = "api.bcpay.service.v1";
 service Bcpay {
 	rpc CreateDeposit(CreateDepositRequest) returns (CreateDepositResponse) {
     option (google.api.http) = {
-      post: "/v1/bcpay/withdraw/add"
+      post: "/v1/bcpay/order/add"
       body: "*"
     };
 	}
@@ -37,6 +37,8 @@ service Bcpay {
 	rpc AddBankAccount(AddBankAccountRequest) returns (AddBankAccountResponse) { }
 
 	rpc UpdateBankAccount(UpdateBankAccountRequest) returns (UpdateBankAccountResponse) { }
+
+	rpc DeleteBankAccount(DeleteBankAccountRequest) returns (DeleteBankAccountResponse) { }
 
 	rpc TransactionList(TransactionListRequest) returns (TransactionListResponse) { }
 
@@ -129,22 +131,25 @@ message DepositBankAccount {
 	string currency = 7;
 	string country = 8;
 	string max_amount = 9;
-	string min_amount = 10;
-	string max_amount_per_trans = 11;
-	int32 max_trans_limit = 12;
-	int32 current_trans_time = 13;
-	int32 priority = 14;
-	bool enable = 15;
+	string max_amount_per_trans = 10;
+	int32 max_trans_limit = 11;
+	int32 current_trans_time = 12;
+	int32 priority = 13;
+	bool enable = 14;
 }
 
 message BankAccountListRequest {
-	string currency = 1;
-	string bank_account = 2;
-	string bank_account_firstname = 3;
-	string bank_account_lastname = 4;
-	string card_id = 5;
-	bool enabled = 6;
-  api.common.OperatorContext operator_context = 7;
+  // Page number to retrieve (1-based)
+  int32 page = 1;
+  // Number of items per page
+  int32 page_size = 2;
+	string currency = 3;
+	string bank_account = 4;
+	string bank_account_firstname = 5;
+	string bank_account_lastname = 6;
+	string card_id = 7;
+	bool enabled = 8;
+  api.common.OperatorContext operator_context = 9;
 }
 
 message BankAccountListResponse {
@@ -159,18 +164,18 @@ message BankAccountListResponse {
   int32 total_enabled = 5;
   // Total number of disabled bank account
   int32 total_disabled = 6;
+  int32 total_count = 7;
 }
 
 message AddBankAccountRequest {
 	string currency = 1;
 	string country = 2;
 	string max_amount = 3;
-	string min_amount = 4;
-	string max_amount_per_trans = 5;
-	int32 max_trans_limit = 6;
-	int32 priority = 7;
-  google.protobuf.Struct bank_info = 8;
-  api.common.OperatorContext operator_context = 9;
+	string max_amount_per_trans = 4;
+	int32 max_trans_limit = 5;
+	int32 priority = 6;
+  google.protobuf.Struct bank_info = 7;
+  api.common.OperatorContext operator_context = 8;
 }
 
 message AddBankAccountResponse {
@@ -182,30 +187,40 @@ message UpdateBankAccountRequest {
 	string currency = 2;
 	string country = 3;
 	string max_amount = 4;
-	string min_amount = 5;
-	string max_amount_per_trans = 6;
-	int32 max_trans_limit = 7;
-	int32 priority = 8;
-	bool enabled = 9;
-  google.protobuf.Struct bank_info = 10;
-  api.common.OperatorContext operator_context = 11;
+	string max_amount_per_trans = 5;
+	int32 max_trans_limit = 6;
+	int32 priority = 7;
+	bool enabled = 8;
+  google.protobuf.Struct bank_info = 9;
+  api.common.OperatorContext operator_context = 10;
 }
 
 message UpdateBankAccountResponse {
 	DepositBankAccount bank_account = 1;
 }
 
+message DeleteBankAccountRequest {
+	int64 id = 1;
+}
+
+message DeleteBankAccountResponse { }
+
+
 message TransactionListRequest {
-	string type = 1;
-	string status = 2;
-	int64 transaction_id = 3;
-	string deposit_bank_account_firstname = 4;
-	string deposit_bank_account_lastname = 5;
-	string user_id = 6;
-	string user_name = 7;
-	string user_bank_account_firstname = 8;
-	string user_bank_account_lastname = 9;
-  api.common.OperatorContext operator_context = 10;
+  // Page number to retrieve (1-based)
+  int32 page = 1;
+  // Number of items per page
+  int32 page_size = 2;
+	string type = 3;
+	string status = 4;
+	int64 transaction_id = 5;
+	string deposit_bank_account_firstname = 6;
+	string deposit_bank_account_lastname = 7;
+	string user_id = 8;
+	string user_name = 9;
+	string user_bank_account_firstname = 10;
+	string user_bank_account_lastname = 11;
+  api.common.OperatorContext operator_context = 12;
 }
 
 message Transaction {
@@ -247,6 +262,7 @@ message TransactionListResponse {
   int32 total_failed = 6;
   // Total number of pending transactions
   int32 total_pending = 7;
+  int32 total_count = 8;
 }
 
 message AuditTransactionRequest {

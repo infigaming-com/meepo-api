@@ -708,12 +708,11 @@ type DepositBankAccount struct {
 	Currency          string                 `protobuf:"bytes,7,opt,name=currency,proto3" json:"currency,omitempty"`
 	Country           string                 `protobuf:"bytes,8,opt,name=country,proto3" json:"country,omitempty"`
 	MaxAmount         string                 `protobuf:"bytes,9,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
-	MinAmount         string                 `protobuf:"bytes,10,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
-	MaxAmountPerTrans string                 `protobuf:"bytes,11,opt,name=max_amount_per_trans,json=maxAmountPerTrans,proto3" json:"max_amount_per_trans,omitempty"`
-	MaxTransLimit     int32                  `protobuf:"varint,12,opt,name=max_trans_limit,json=maxTransLimit,proto3" json:"max_trans_limit,omitempty"`
-	CurrentTransTime  int32                  `protobuf:"varint,13,opt,name=current_trans_time,json=currentTransTime,proto3" json:"current_trans_time,omitempty"`
-	Priority          int32                  `protobuf:"varint,14,opt,name=priority,proto3" json:"priority,omitempty"`
-	Enable            bool                   `protobuf:"varint,15,opt,name=enable,proto3" json:"enable,omitempty"`
+	MaxAmountPerTrans string                 `protobuf:"bytes,10,opt,name=max_amount_per_trans,json=maxAmountPerTrans,proto3" json:"max_amount_per_trans,omitempty"`
+	MaxTransLimit     int32                  `protobuf:"varint,11,opt,name=max_trans_limit,json=maxTransLimit,proto3" json:"max_trans_limit,omitempty"`
+	CurrentTransTime  int32                  `protobuf:"varint,12,opt,name=current_trans_time,json=currentTransTime,proto3" json:"current_trans_time,omitempty"`
+	Priority          int32                  `protobuf:"varint,13,opt,name=priority,proto3" json:"priority,omitempty"`
+	Enable            bool                   `protobuf:"varint,14,opt,name=enable,proto3" json:"enable,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -811,13 +810,6 @@ func (x *DepositBankAccount) GetMaxAmount() string {
 	return ""
 }
 
-func (x *DepositBankAccount) GetMinAmount() string {
-	if x != nil {
-		return x.MinAmount
-	}
-	return ""
-}
-
 func (x *DepositBankAccount) GetMaxAmountPerTrans() string {
 	if x != nil {
 		return x.MaxAmountPerTrans
@@ -854,14 +846,18 @@ func (x *DepositBankAccount) GetEnable() bool {
 }
 
 type BankAccountListRequest struct {
-	state                protoimpl.MessageState  `protogen:"open.v1"`
-	Currency             string                  `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	BankAccount          string                  `protobuf:"bytes,2,opt,name=bank_account,json=bankAccount,proto3" json:"bank_account,omitempty"`
-	BankAccountFirstname string                  `protobuf:"bytes,3,opt,name=bank_account_firstname,json=bankAccountFirstname,proto3" json:"bank_account_firstname,omitempty"`
-	BankAccountLastname  string                  `protobuf:"bytes,4,opt,name=bank_account_lastname,json=bankAccountLastname,proto3" json:"bank_account_lastname,omitempty"`
-	CardId               string                  `protobuf:"bytes,5,opt,name=card_id,json=cardId,proto3" json:"card_id,omitempty"`
-	Enabled              bool                    `protobuf:"varint,6,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	OperatorContext      *common.OperatorContext `protobuf:"bytes,7,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Page number to retrieve (1-based)
+	Page int32 `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	// Number of items per page
+	PageSize             int32                   `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Currency             string                  `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
+	BankAccount          string                  `protobuf:"bytes,4,opt,name=bank_account,json=bankAccount,proto3" json:"bank_account,omitempty"`
+	BankAccountFirstname string                  `protobuf:"bytes,5,opt,name=bank_account_firstname,json=bankAccountFirstname,proto3" json:"bank_account_firstname,omitempty"`
+	BankAccountLastname  string                  `protobuf:"bytes,6,opt,name=bank_account_lastname,json=bankAccountLastname,proto3" json:"bank_account_lastname,omitempty"`
+	CardId               string                  `protobuf:"bytes,7,opt,name=card_id,json=cardId,proto3" json:"card_id,omitempty"`
+	Enabled              bool                    `protobuf:"varint,8,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	OperatorContext      *common.OperatorContext `protobuf:"bytes,9,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -894,6 +890,20 @@ func (x *BankAccountListRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use BankAccountListRequest.ProtoReflect.Descriptor instead.
 func (*BankAccountListRequest) Descriptor() ([]byte, []int) {
 	return file_bcpay_service_v1_bcpay_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *BankAccountListRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *BankAccountListRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
 }
 
 func (x *BankAccountListRequest) GetCurrency() string {
@@ -958,6 +968,7 @@ type BankAccountListResponse struct {
 	TotalEnabled int32 `protobuf:"varint,5,opt,name=total_enabled,json=totalEnabled,proto3" json:"total_enabled,omitempty"`
 	// Total number of disabled bank account
 	TotalDisabled int32 `protobuf:"varint,6,opt,name=total_disabled,json=totalDisabled,proto3" json:"total_disabled,omitempty"`
+	TotalCount    int32 `protobuf:"varint,7,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1034,17 +1045,23 @@ func (x *BankAccountListResponse) GetTotalDisabled() int32 {
 	return 0
 }
 
+func (x *BankAccountListResponse) GetTotalCount() int32 {
+	if x != nil {
+		return x.TotalCount
+	}
+	return 0
+}
+
 type AddBankAccountRequest struct {
 	state             protoimpl.MessageState  `protogen:"open.v1"`
 	Currency          string                  `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
 	Country           string                  `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
 	MaxAmount         string                  `protobuf:"bytes,3,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
-	MinAmount         string                  `protobuf:"bytes,4,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
-	MaxAmountPerTrans string                  `protobuf:"bytes,5,opt,name=max_amount_per_trans,json=maxAmountPerTrans,proto3" json:"max_amount_per_trans,omitempty"`
-	MaxTransLimit     int32                   `protobuf:"varint,6,opt,name=max_trans_limit,json=maxTransLimit,proto3" json:"max_trans_limit,omitempty"`
-	Priority          int32                   `protobuf:"varint,7,opt,name=priority,proto3" json:"priority,omitempty"`
-	BankInfo          *structpb.Struct        `protobuf:"bytes,8,opt,name=bank_info,json=bankInfo,proto3" json:"bank_info,omitempty"`
-	OperatorContext   *common.OperatorContext `protobuf:"bytes,9,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	MaxAmountPerTrans string                  `protobuf:"bytes,4,opt,name=max_amount_per_trans,json=maxAmountPerTrans,proto3" json:"max_amount_per_trans,omitempty"`
+	MaxTransLimit     int32                   `protobuf:"varint,5,opt,name=max_trans_limit,json=maxTransLimit,proto3" json:"max_trans_limit,omitempty"`
+	Priority          int32                   `protobuf:"varint,6,opt,name=priority,proto3" json:"priority,omitempty"`
+	BankInfo          *structpb.Struct        `protobuf:"bytes,7,opt,name=bank_info,json=bankInfo,proto3" json:"bank_info,omitempty"`
+	OperatorContext   *common.OperatorContext `protobuf:"bytes,8,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -1096,13 +1113,6 @@ func (x *AddBankAccountRequest) GetCountry() string {
 func (x *AddBankAccountRequest) GetMaxAmount() string {
 	if x != nil {
 		return x.MaxAmount
-	}
-	return ""
-}
-
-func (x *AddBankAccountRequest) GetMinAmount() string {
-	if x != nil {
-		return x.MinAmount
 	}
 	return ""
 }
@@ -1192,13 +1202,12 @@ type UpdateBankAccountRequest struct {
 	Currency          string                  `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	Country           string                  `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
 	MaxAmount         string                  `protobuf:"bytes,4,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
-	MinAmount         string                  `protobuf:"bytes,5,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
-	MaxAmountPerTrans string                  `protobuf:"bytes,6,opt,name=max_amount_per_trans,json=maxAmountPerTrans,proto3" json:"max_amount_per_trans,omitempty"`
-	MaxTransLimit     int32                   `protobuf:"varint,7,opt,name=max_trans_limit,json=maxTransLimit,proto3" json:"max_trans_limit,omitempty"`
-	Priority          int32                   `protobuf:"varint,8,opt,name=priority,proto3" json:"priority,omitempty"`
-	Enabled           bool                    `protobuf:"varint,9,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	BankInfo          *structpb.Struct        `protobuf:"bytes,10,opt,name=bank_info,json=bankInfo,proto3" json:"bank_info,omitempty"`
-	OperatorContext   *common.OperatorContext `protobuf:"bytes,11,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	MaxAmountPerTrans string                  `protobuf:"bytes,5,opt,name=max_amount_per_trans,json=maxAmountPerTrans,proto3" json:"max_amount_per_trans,omitempty"`
+	MaxTransLimit     int32                   `protobuf:"varint,6,opt,name=max_trans_limit,json=maxTransLimit,proto3" json:"max_trans_limit,omitempty"`
+	Priority          int32                   `protobuf:"varint,7,opt,name=priority,proto3" json:"priority,omitempty"`
+	Enabled           bool                    `protobuf:"varint,8,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	BankInfo          *structpb.Struct        `protobuf:"bytes,9,opt,name=bank_info,json=bankInfo,proto3" json:"bank_info,omitempty"`
+	OperatorContext   *common.OperatorContext `protobuf:"bytes,10,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -1257,13 +1266,6 @@ func (x *UpdateBankAccountRequest) GetCountry() string {
 func (x *UpdateBankAccountRequest) GetMaxAmount() string {
 	if x != nil {
 		return x.MaxAmount
-	}
-	return ""
-}
-
-func (x *UpdateBankAccountRequest) GetMinAmount() string {
-	if x != nil {
-		return x.MinAmount
 	}
 	return ""
 }
@@ -1354,25 +1356,109 @@ func (x *UpdateBankAccountResponse) GetBankAccount() *DepositBankAccount {
 	return nil
 }
 
+type DeleteBankAccountRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteBankAccountRequest) Reset() {
+	*x = DeleteBankAccountRequest{}
+	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteBankAccountRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteBankAccountRequest) ProtoMessage() {}
+
+func (x *DeleteBankAccountRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteBankAccountRequest.ProtoReflect.Descriptor instead.
+func (*DeleteBankAccountRequest) Descriptor() ([]byte, []int) {
+	return file_bcpay_service_v1_bcpay_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *DeleteBankAccountRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type DeleteBankAccountResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteBankAccountResponse) Reset() {
+	*x = DeleteBankAccountResponse{}
+	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteBankAccountResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteBankAccountResponse) ProtoMessage() {}
+
+func (x *DeleteBankAccountResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteBankAccountResponse.ProtoReflect.Descriptor instead.
+func (*DeleteBankAccountResponse) Descriptor() ([]byte, []int) {
+	return file_bcpay_service_v1_bcpay_proto_rawDescGZIP(), []int{18}
+}
+
 type TransactionListRequest struct {
-	state                       protoimpl.MessageState  `protogen:"open.v1"`
-	Type                        string                  `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
-	Status                      string                  `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
-	TransactionId               int64                   `protobuf:"varint,3,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	DepositBankAccountFirstname string                  `protobuf:"bytes,4,opt,name=deposit_bank_account_firstname,json=depositBankAccountFirstname,proto3" json:"deposit_bank_account_firstname,omitempty"`
-	DepositBankAccountLastname  string                  `protobuf:"bytes,5,opt,name=deposit_bank_account_lastname,json=depositBankAccountLastname,proto3" json:"deposit_bank_account_lastname,omitempty"`
-	UserId                      string                  `protobuf:"bytes,6,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	UserName                    string                  `protobuf:"bytes,7,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
-	UserBankAccountFirstname    string                  `protobuf:"bytes,8,opt,name=user_bank_account_firstname,json=userBankAccountFirstname,proto3" json:"user_bank_account_firstname,omitempty"`
-	UserBankAccountLastname     string                  `protobuf:"bytes,9,opt,name=user_bank_account_lastname,json=userBankAccountLastname,proto3" json:"user_bank_account_lastname,omitempty"`
-	OperatorContext             *common.OperatorContext `protobuf:"bytes,10,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Page number to retrieve (1-based)
+	Page int32 `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	// Number of items per page
+	PageSize                    int32                   `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Type                        string                  `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
+	Status                      string                  `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	TransactionId               int64                   `protobuf:"varint,5,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	DepositBankAccountFirstname string                  `protobuf:"bytes,6,opt,name=deposit_bank_account_firstname,json=depositBankAccountFirstname,proto3" json:"deposit_bank_account_firstname,omitempty"`
+	DepositBankAccountLastname  string                  `protobuf:"bytes,7,opt,name=deposit_bank_account_lastname,json=depositBankAccountLastname,proto3" json:"deposit_bank_account_lastname,omitempty"`
+	UserId                      string                  `protobuf:"bytes,8,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserName                    string                  `protobuf:"bytes,9,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
+	UserBankAccountFirstname    string                  `protobuf:"bytes,10,opt,name=user_bank_account_firstname,json=userBankAccountFirstname,proto3" json:"user_bank_account_firstname,omitempty"`
+	UserBankAccountLastname     string                  `protobuf:"bytes,11,opt,name=user_bank_account_lastname,json=userBankAccountLastname,proto3" json:"user_bank_account_lastname,omitempty"`
+	OperatorContext             *common.OperatorContext `protobuf:"bytes,12,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields               protoimpl.UnknownFields
 	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *TransactionListRequest) Reset() {
 	*x = TransactionListRequest{}
-	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[17]
+	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1384,7 +1470,7 @@ func (x *TransactionListRequest) String() string {
 func (*TransactionListRequest) ProtoMessage() {}
 
 func (x *TransactionListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[17]
+	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1397,7 +1483,21 @@ func (x *TransactionListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransactionListRequest.ProtoReflect.Descriptor instead.
 func (*TransactionListRequest) Descriptor() ([]byte, []int) {
-	return file_bcpay_service_v1_bcpay_proto_rawDescGZIP(), []int{17}
+	return file_bcpay_service_v1_bcpay_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *TransactionListRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *TransactionListRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
 }
 
 func (x *TransactionListRequest) GetType() string {
@@ -1500,7 +1600,7 @@ type Transaction struct {
 
 func (x *Transaction) Reset() {
 	*x = Transaction{}
-	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[18]
+	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1512,7 +1612,7 @@ func (x *Transaction) String() string {
 func (*Transaction) ProtoMessage() {}
 
 func (x *Transaction) ProtoReflect() protoreflect.Message {
-	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[18]
+	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1525,7 +1625,7 @@ func (x *Transaction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Transaction.ProtoReflect.Descriptor instead.
 func (*Transaction) Descriptor() ([]byte, []int) {
-	return file_bcpay_service_v1_bcpay_proto_rawDescGZIP(), []int{18}
+	return file_bcpay_service_v1_bcpay_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *Transaction) GetId() int64 {
@@ -1690,13 +1790,14 @@ type TransactionListResponse struct {
 	TotalFailed int32 `protobuf:"varint,6,opt,name=total_failed,json=totalFailed,proto3" json:"total_failed,omitempty"`
 	// Total number of pending transactions
 	TotalPending  int32 `protobuf:"varint,7,opt,name=total_pending,json=totalPending,proto3" json:"total_pending,omitempty"`
+	TotalCount    int32 `protobuf:"varint,8,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *TransactionListResponse) Reset() {
 	*x = TransactionListResponse{}
-	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[19]
+	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1708,7 +1809,7 @@ func (x *TransactionListResponse) String() string {
 func (*TransactionListResponse) ProtoMessage() {}
 
 func (x *TransactionListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[19]
+	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1721,7 +1822,7 @@ func (x *TransactionListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TransactionListResponse.ProtoReflect.Descriptor instead.
 func (*TransactionListResponse) Descriptor() ([]byte, []int) {
-	return file_bcpay_service_v1_bcpay_proto_rawDescGZIP(), []int{19}
+	return file_bcpay_service_v1_bcpay_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *TransactionListResponse) GetTransaction() []*Transaction {
@@ -1773,6 +1874,13 @@ func (x *TransactionListResponse) GetTotalPending() int32 {
 	return 0
 }
 
+func (x *TransactionListResponse) GetTotalCount() int32 {
+	if x != nil {
+		return x.TotalCount
+	}
+	return 0
+}
+
 type AuditTransactionRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	TransactionId   int64                   `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
@@ -1784,7 +1892,7 @@ type AuditTransactionRequest struct {
 
 func (x *AuditTransactionRequest) Reset() {
 	*x = AuditTransactionRequest{}
-	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[20]
+	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1796,7 +1904,7 @@ func (x *AuditTransactionRequest) String() string {
 func (*AuditTransactionRequest) ProtoMessage() {}
 
 func (x *AuditTransactionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[20]
+	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1809,7 +1917,7 @@ func (x *AuditTransactionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AuditTransactionRequest.ProtoReflect.Descriptor instead.
 func (*AuditTransactionRequest) Descriptor() ([]byte, []int) {
-	return file_bcpay_service_v1_bcpay_proto_rawDescGZIP(), []int{20}
+	return file_bcpay_service_v1_bcpay_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *AuditTransactionRequest) GetTransactionId() int64 {
@@ -1842,7 +1950,7 @@ type AuditTransactionResponse struct {
 
 func (x *AuditTransactionResponse) Reset() {
 	*x = AuditTransactionResponse{}
-	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[21]
+	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1854,7 +1962,7 @@ func (x *AuditTransactionResponse) String() string {
 func (*AuditTransactionResponse) ProtoMessage() {}
 
 func (x *AuditTransactionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[21]
+	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1867,7 +1975,7 @@ func (x *AuditTransactionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AuditTransactionResponse.ProtoReflect.Descriptor instead.
 func (*AuditTransactionResponse) Descriptor() ([]byte, []int) {
-	return file_bcpay_service_v1_bcpay_proto_rawDescGZIP(), []int{21}
+	return file_bcpay_service_v1_bcpay_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *AuditTransactionResponse) GetTransaction() *Transaction {
@@ -1888,7 +1996,7 @@ type AddNoteToTransactionRequest struct {
 
 func (x *AddNoteToTransactionRequest) Reset() {
 	*x = AddNoteToTransactionRequest{}
-	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[22]
+	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1900,7 +2008,7 @@ func (x *AddNoteToTransactionRequest) String() string {
 func (*AddNoteToTransactionRequest) ProtoMessage() {}
 
 func (x *AddNoteToTransactionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[22]
+	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1913,7 +2021,7 @@ func (x *AddNoteToTransactionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddNoteToTransactionRequest.ProtoReflect.Descriptor instead.
 func (*AddNoteToTransactionRequest) Descriptor() ([]byte, []int) {
-	return file_bcpay_service_v1_bcpay_proto_rawDescGZIP(), []int{22}
+	return file_bcpay_service_v1_bcpay_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *AddNoteToTransactionRequest) GetTransactionId() int64 {
@@ -1939,7 +2047,7 @@ type AddNoteToTransactionResponse struct {
 
 func (x *AddNoteToTransactionResponse) Reset() {
 	*x = AddNoteToTransactionResponse{}
-	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[23]
+	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1951,7 +2059,7 @@ func (x *AddNoteToTransactionResponse) String() string {
 func (*AddNoteToTransactionResponse) ProtoMessage() {}
 
 func (x *AddNoteToTransactionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[23]
+	mi := &file_bcpay_service_v1_bcpay_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1964,7 +2072,7 @@ func (x *AddNoteToTransactionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddNoteToTransactionResponse.ProtoReflect.Descriptor instead.
 func (*AddNoteToTransactionResponse) Descriptor() ([]byte, []int) {
-	return file_bcpay_service_v1_bcpay_proto_rawDescGZIP(), []int{23}
+	return file_bcpay_service_v1_bcpay_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *AddNoteToTransactionResponse) GetTransaction() *Transaction {
@@ -2033,7 +2141,7 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
 	"\acountry\x18\x02 \x01(\tR\acountry\"K\n" +
 	"\x15GetBankSchemaResponse\x122\n" +
-	"\x06schema\x18\x01 \x01(\v2\x1a.google.protobuf.ListValueR\x06schema\"\xf9\x03\n" +
+	"\x06schema\x18\x01 \x01(\v2\x1a.google.protobuf.ListValueR\x06schema\"\xda\x03\n" +
 	"\x12DepositBankAccount\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1f\n" +
 	"\vmerchant_id\x18\x02 \x01(\tR\n" +
@@ -2045,23 +2153,23 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"\bcurrency\x18\a \x01(\tR\bcurrency\x12\x18\n" +
 	"\acountry\x18\b \x01(\tR\acountry\x12\x1d\n" +
 	"\n" +
-	"max_amount\x18\t \x01(\tR\tmaxAmount\x12\x1d\n" +
-	"\n" +
-	"min_amount\x18\n" +
-	" \x01(\tR\tminAmount\x12/\n" +
-	"\x14max_amount_per_trans\x18\v \x01(\tR\x11maxAmountPerTrans\x12&\n" +
-	"\x0fmax_trans_limit\x18\f \x01(\x05R\rmaxTransLimit\x12,\n" +
-	"\x12current_trans_time\x18\r \x01(\x05R\x10currentTransTime\x12\x1a\n" +
-	"\bpriority\x18\x0e \x01(\x05R\bpriority\x12\x16\n" +
-	"\x06enable\x18\x0f \x01(\bR\x06enable\"\xbc\x02\n" +
-	"\x16BankAccountListRequest\x12\x1a\n" +
-	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12!\n" +
-	"\fbank_account\x18\x02 \x01(\tR\vbankAccount\x124\n" +
-	"\x16bank_account_firstname\x18\x03 \x01(\tR\x14bankAccountFirstname\x122\n" +
-	"\x15bank_account_lastname\x18\x04 \x01(\tR\x13bankAccountLastname\x12\x17\n" +
-	"\acard_id\x18\x05 \x01(\tR\x06cardId\x12\x18\n" +
-	"\aenabled\x18\x06 \x01(\bR\aenabled\x12F\n" +
-	"\x10operator_context\x18\a \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x86\x02\n" +
+	"max_amount\x18\t \x01(\tR\tmaxAmount\x12/\n" +
+	"\x14max_amount_per_trans\x18\n" +
+	" \x01(\tR\x11maxAmountPerTrans\x12&\n" +
+	"\x0fmax_trans_limit\x18\v \x01(\x05R\rmaxTransLimit\x12,\n" +
+	"\x12current_trans_time\x18\f \x01(\x05R\x10currentTransTime\x12\x1a\n" +
+	"\bpriority\x18\r \x01(\x05R\bpriority\x12\x16\n" +
+	"\x06enable\x18\x0e \x01(\bR\x06enable\"\xed\x02\n" +
+	"\x16BankAccountListRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1a\n" +
+	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12!\n" +
+	"\fbank_account\x18\x04 \x01(\tR\vbankAccount\x124\n" +
+	"\x16bank_account_firstname\x18\x05 \x01(\tR\x14bankAccountFirstname\x122\n" +
+	"\x15bank_account_lastname\x18\x06 \x01(\tR\x13bankAccountLastname\x12\x17\n" +
+	"\acard_id\x18\a \x01(\tR\x06cardId\x12\x18\n" +
+	"\aenabled\x18\b \x01(\bR\aenabled\x12F\n" +
+	"\x10operator_context\x18\t \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xa7\x02\n" +
 	"\x17BankAccountListResponse\x12M\n" +
 	"\rbank_accounts\x18\x01 \x03(\v2(.api.bcpay.service.v1.DepositBankAccountR\fbankAccounts\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
@@ -2069,50 +2177,53 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"\vtotal_pages\x18\x04 \x01(\x05R\n" +
 	"totalPages\x12#\n" +
 	"\rtotal_enabled\x18\x05 \x01(\x05R\ftotalEnabled\x12%\n" +
-	"\x0etotal_disabled\x18\x06 \x01(\x05R\rtotalDisabled\"\xfe\x02\n" +
+	"\x0etotal_disabled\x18\x06 \x01(\x05R\rtotalDisabled\x12\x1f\n" +
+	"\vtotal_count\x18\a \x01(\x05R\n" +
+	"totalCount\"\xdf\x02\n" +
 	"\x15AddBankAccountRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
 	"\acountry\x18\x02 \x01(\tR\acountry\x12\x1d\n" +
 	"\n" +
-	"max_amount\x18\x03 \x01(\tR\tmaxAmount\x12\x1d\n" +
-	"\n" +
-	"min_amount\x18\x04 \x01(\tR\tminAmount\x12/\n" +
-	"\x14max_amount_per_trans\x18\x05 \x01(\tR\x11maxAmountPerTrans\x12&\n" +
-	"\x0fmax_trans_limit\x18\x06 \x01(\x05R\rmaxTransLimit\x12\x1a\n" +
-	"\bpriority\x18\a \x01(\x05R\bpriority\x124\n" +
-	"\tbank_info\x18\b \x01(\v2\x17.google.protobuf.StructR\bbankInfo\x12F\n" +
-	"\x10operator_context\x18\t \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"e\n" +
+	"max_amount\x18\x03 \x01(\tR\tmaxAmount\x12/\n" +
+	"\x14max_amount_per_trans\x18\x04 \x01(\tR\x11maxAmountPerTrans\x12&\n" +
+	"\x0fmax_trans_limit\x18\x05 \x01(\x05R\rmaxTransLimit\x12\x1a\n" +
+	"\bpriority\x18\x06 \x01(\x05R\bpriority\x124\n" +
+	"\tbank_info\x18\a \x01(\v2\x17.google.protobuf.StructR\bbankInfo\x12F\n" +
+	"\x10operator_context\x18\b \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"e\n" +
 	"\x16AddBankAccountResponse\x12K\n" +
-	"\fbank_account\x18\x01 \x01(\v2(.api.bcpay.service.v1.DepositBankAccountR\vbankAccount\"\xab\x03\n" +
+	"\fbank_account\x18\x01 \x01(\v2(.api.bcpay.service.v1.DepositBankAccountR\vbankAccount\"\x8c\x03\n" +
 	"\x18UpdateBankAccountRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x18\n" +
 	"\acountry\x18\x03 \x01(\tR\acountry\x12\x1d\n" +
 	"\n" +
-	"max_amount\x18\x04 \x01(\tR\tmaxAmount\x12\x1d\n" +
-	"\n" +
-	"min_amount\x18\x05 \x01(\tR\tminAmount\x12/\n" +
-	"\x14max_amount_per_trans\x18\x06 \x01(\tR\x11maxAmountPerTrans\x12&\n" +
-	"\x0fmax_trans_limit\x18\a \x01(\x05R\rmaxTransLimit\x12\x1a\n" +
-	"\bpriority\x18\b \x01(\x05R\bpriority\x12\x18\n" +
-	"\aenabled\x18\t \x01(\bR\aenabled\x124\n" +
-	"\tbank_info\x18\n" +
-	" \x01(\v2\x17.google.protobuf.StructR\bbankInfo\x12F\n" +
-	"\x10operator_context\x18\v \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"h\n" +
-	"\x19UpdateBankAccountResponse\x12K\n" +
-	"\fbank_account\x18\x01 \x01(\v2(.api.bcpay.service.v1.DepositBankAccountR\vbankAccount\"\xed\x03\n" +
-	"\x16TransactionListRequest\x12\x12\n" +
-	"\x04type\x18\x01 \x01(\tR\x04type\x12\x16\n" +
-	"\x06status\x18\x02 \x01(\tR\x06status\x12%\n" +
-	"\x0etransaction_id\x18\x03 \x01(\x03R\rtransactionId\x12C\n" +
-	"\x1edeposit_bank_account_firstname\x18\x04 \x01(\tR\x1bdepositBankAccountFirstname\x12A\n" +
-	"\x1ddeposit_bank_account_lastname\x18\x05 \x01(\tR\x1adepositBankAccountLastname\x12\x17\n" +
-	"\auser_id\x18\x06 \x01(\tR\x06userId\x12\x1b\n" +
-	"\tuser_name\x18\a \x01(\tR\buserName\x12=\n" +
-	"\x1buser_bank_account_firstname\x18\b \x01(\tR\x18userBankAccountFirstname\x12;\n" +
-	"\x1auser_bank_account_lastname\x18\t \x01(\tR\x17userBankAccountLastname\x12F\n" +
+	"max_amount\x18\x04 \x01(\tR\tmaxAmount\x12/\n" +
+	"\x14max_amount_per_trans\x18\x05 \x01(\tR\x11maxAmountPerTrans\x12&\n" +
+	"\x0fmax_trans_limit\x18\x06 \x01(\x05R\rmaxTransLimit\x12\x1a\n" +
+	"\bpriority\x18\a \x01(\x05R\bpriority\x12\x18\n" +
+	"\aenabled\x18\b \x01(\bR\aenabled\x124\n" +
+	"\tbank_info\x18\t \x01(\v2\x17.google.protobuf.StructR\bbankInfo\x12F\n" +
 	"\x10operator_context\x18\n" +
-	" \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x87\x06\n" +
+	" \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"h\n" +
+	"\x19UpdateBankAccountResponse\x12K\n" +
+	"\fbank_account\x18\x01 \x01(\v2(.api.bcpay.service.v1.DepositBankAccountR\vbankAccount\"*\n" +
+	"\x18DeleteBankAccountRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"\x1b\n" +
+	"\x19DeleteBankAccountResponse\"\x9e\x04\n" +
+	"\x16TransactionListRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x12\n" +
+	"\x04type\x18\x03 \x01(\tR\x04type\x12\x16\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\x12%\n" +
+	"\x0etransaction_id\x18\x05 \x01(\x03R\rtransactionId\x12C\n" +
+	"\x1edeposit_bank_account_firstname\x18\x06 \x01(\tR\x1bdepositBankAccountFirstname\x12A\n" +
+	"\x1ddeposit_bank_account_lastname\x18\a \x01(\tR\x1adepositBankAccountLastname\x12\x17\n" +
+	"\auser_id\x18\b \x01(\tR\x06userId\x12\x1b\n" +
+	"\tuser_name\x18\t \x01(\tR\buserName\x12=\n" +
+	"\x1buser_bank_account_firstname\x18\n" +
+	" \x01(\tR\x18userBankAccountFirstname\x12;\n" +
+	"\x1auser_bank_account_lastname\x18\v \x01(\tR\x17userBankAccountLastname\x12F\n" +
+	"\x10operator_context\x18\f \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x87\x06\n" +
 	"\vTransaction\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1f\n" +
 	"\vmerchant_id\x18\x02 \x01(\tR\n" +
@@ -2140,7 +2251,7 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"\vcreate_time\x18\x14 \x01(\tR\n" +
 	"createTime\x12\x1f\n" +
 	"\vupdate_time\x18\x15 \x01(\tR\n" +
-	"updateTime\"\x9f\x02\n" +
+	"updateTime\"\xc0\x02\n" +
 	"\x17TransactionListResponse\x12C\n" +
 	"\vtransaction\x18\x01 \x03(\v2!.api.bcpay.service.v1.TransactionR\vtransaction\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
@@ -2149,7 +2260,9 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"totalPages\x12%\n" +
 	"\x0etotal_approved\x18\x05 \x01(\x05R\rtotalApproved\x12!\n" +
 	"\ftotal_failed\x18\x06 \x01(\x05R\vtotalFailed\x12#\n" +
-	"\rtotal_pending\x18\a \x01(\x05R\ftotalPending\"\x9e\x01\n" +
+	"\rtotal_pending\x18\a \x01(\x05R\ftotalPending\x12\x1f\n" +
+	"\vtotal_count\x18\b \x01(\x05R\n" +
+	"totalCount\"\x9e\x01\n" +
 	"\x17AuditTransactionRequest\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x14\n" +
 	"\x05audit\x18\x02 \x01(\tR\x05audit\x12F\n" +
@@ -2160,17 +2273,17 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x12\n" +
 	"\x04note\x18\x02 \x01(\tR\x04note\"c\n" +
 	"\x1cAddNoteToTransactionResponse\x12C\n" +
-	"\vtransaction\x18\x01 \x01(\v2!.api.bcpay.service.v1.TransactionR\vtransaction2\xa8\n" +
-	"\n" +
-	"\x05Bcpay\x12\x8b\x01\n" +
-	"\rCreateDeposit\x12*.api.bcpay.service.v1.CreateDepositRequest\x1a+.api.bcpay.service.v1.CreateDepositResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/bcpay/withdraw/add\x12\x8e\x01\n" +
+	"\vtransaction\x18\x01 \x01(\v2!.api.bcpay.service.v1.TransactionR\vtransaction2\x9d\v\n" +
+	"\x05Bcpay\x12\x88\x01\n" +
+	"\rCreateDeposit\x12*.api.bcpay.service.v1.CreateDepositRequest\x1a+.api.bcpay.service.v1.CreateDepositResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/bcpay/order/add\x12\x8e\x01\n" +
 	"\x0eCreateWithdraw\x12+.api.bcpay.service.v1.CreateWithdrawRequest\x1a,.api.bcpay.service.v1.CreateWithdrawResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/bcpay/withdraw/add\x12j\n" +
 	"\rGetBankSchema\x12*.api.bcpay.service.v1.GetBankSchemaRequest\x1a+.api.bcpay.service.v1.GetBankSchemaResponse\"\x00\x12d\n" +
 	"\vGetMerchant\x12(.api.bcpay.service.v1.GetMerchantRequest\x1a).api.bcpay.service.v1.GetMerchantResponse\"\x00\x12m\n" +
 	"\x0eCreateMerchant\x12+.api.bcpay.service.v1.CreateMerchantRequest\x1a,.api.bcpay.service.v1.CreateMerchantResponse\"\x00\x12p\n" +
 	"\x0fBankAccountList\x12,.api.bcpay.service.v1.BankAccountListRequest\x1a-.api.bcpay.service.v1.BankAccountListResponse\"\x00\x12m\n" +
 	"\x0eAddBankAccount\x12+.api.bcpay.service.v1.AddBankAccountRequest\x1a,.api.bcpay.service.v1.AddBankAccountResponse\"\x00\x12v\n" +
-	"\x11UpdateBankAccount\x12..api.bcpay.service.v1.UpdateBankAccountRequest\x1a/.api.bcpay.service.v1.UpdateBankAccountResponse\"\x00\x12p\n" +
+	"\x11UpdateBankAccount\x12..api.bcpay.service.v1.UpdateBankAccountRequest\x1a/.api.bcpay.service.v1.UpdateBankAccountResponse\"\x00\x12v\n" +
+	"\x11DeleteBankAccount\x12..api.bcpay.service.v1.DeleteBankAccountRequest\x1a/.api.bcpay.service.v1.DeleteBankAccountResponse\"\x00\x12p\n" +
 	"\x0fTransactionList\x12,.api.bcpay.service.v1.TransactionListRequest\x1a-.api.bcpay.service.v1.TransactionListResponse\"\x00\x12s\n" +
 	"\x10AuditTransaction\x12-.api.bcpay.service.v1.AuditTransactionRequest\x1a..api.bcpay.service.v1.AuditTransactionResponse\"\x00\x12\x7f\n" +
 	"\x14AddNoteToTransaction\x121.api.bcpay.service.v1.AddNoteToTransactionRequest\x1a2.api.bcpay.service.v1.AddNoteToTransactionResponse\"\x00BQ\n" +
@@ -2188,7 +2301,7 @@ func file_bcpay_service_v1_bcpay_proto_rawDescGZIP() []byte {
 	return file_bcpay_service_v1_bcpay_proto_rawDescData
 }
 
-var file_bcpay_service_v1_bcpay_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_bcpay_service_v1_bcpay_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
 var file_bcpay_service_v1_bcpay_proto_goTypes = []any{
 	(*CreateDepositRequest)(nil),         // 0: api.bcpay.service.v1.CreateDepositRequest
 	(*CreateDepositResponse)(nil),        // 1: api.bcpay.service.v1.CreateDepositResponse
@@ -2207,34 +2320,36 @@ var file_bcpay_service_v1_bcpay_proto_goTypes = []any{
 	(*AddBankAccountResponse)(nil),       // 14: api.bcpay.service.v1.AddBankAccountResponse
 	(*UpdateBankAccountRequest)(nil),     // 15: api.bcpay.service.v1.UpdateBankAccountRequest
 	(*UpdateBankAccountResponse)(nil),    // 16: api.bcpay.service.v1.UpdateBankAccountResponse
-	(*TransactionListRequest)(nil),       // 17: api.bcpay.service.v1.TransactionListRequest
-	(*Transaction)(nil),                  // 18: api.bcpay.service.v1.Transaction
-	(*TransactionListResponse)(nil),      // 19: api.bcpay.service.v1.TransactionListResponse
-	(*AuditTransactionRequest)(nil),      // 20: api.bcpay.service.v1.AuditTransactionRequest
-	(*AuditTransactionResponse)(nil),     // 21: api.bcpay.service.v1.AuditTransactionResponse
-	(*AddNoteToTransactionRequest)(nil),  // 22: api.bcpay.service.v1.AddNoteToTransactionRequest
-	(*AddNoteToTransactionResponse)(nil), // 23: api.bcpay.service.v1.AddNoteToTransactionResponse
-	(*common.OperatorContext)(nil),       // 24: api.common.OperatorContext
-	(*structpb.ListValue)(nil),           // 25: google.protobuf.ListValue
-	(*structpb.Struct)(nil),              // 26: google.protobuf.Struct
+	(*DeleteBankAccountRequest)(nil),     // 17: api.bcpay.service.v1.DeleteBankAccountRequest
+	(*DeleteBankAccountResponse)(nil),    // 18: api.bcpay.service.v1.DeleteBankAccountResponse
+	(*TransactionListRequest)(nil),       // 19: api.bcpay.service.v1.TransactionListRequest
+	(*Transaction)(nil),                  // 20: api.bcpay.service.v1.Transaction
+	(*TransactionListResponse)(nil),      // 21: api.bcpay.service.v1.TransactionListResponse
+	(*AuditTransactionRequest)(nil),      // 22: api.bcpay.service.v1.AuditTransactionRequest
+	(*AuditTransactionResponse)(nil),     // 23: api.bcpay.service.v1.AuditTransactionResponse
+	(*AddNoteToTransactionRequest)(nil),  // 24: api.bcpay.service.v1.AddNoteToTransactionRequest
+	(*AddNoteToTransactionResponse)(nil), // 25: api.bcpay.service.v1.AddNoteToTransactionResponse
+	(*common.OperatorContext)(nil),       // 26: api.common.OperatorContext
+	(*structpb.ListValue)(nil),           // 27: google.protobuf.ListValue
+	(*structpb.Struct)(nil),              // 28: google.protobuf.Struct
 }
 var file_bcpay_service_v1_bcpay_proto_depIdxs = []int32{
-	24, // 0: api.bcpay.service.v1.GetMerchantRequest.operator_context:type_name -> api.common.OperatorContext
-	24, // 1: api.bcpay.service.v1.CreateMerchantRequest.operator_context:type_name -> api.common.OperatorContext
-	25, // 2: api.bcpay.service.v1.GetBankSchemaResponse.schema:type_name -> google.protobuf.ListValue
-	24, // 3: api.bcpay.service.v1.BankAccountListRequest.operator_context:type_name -> api.common.OperatorContext
+	26, // 0: api.bcpay.service.v1.GetMerchantRequest.operator_context:type_name -> api.common.OperatorContext
+	26, // 1: api.bcpay.service.v1.CreateMerchantRequest.operator_context:type_name -> api.common.OperatorContext
+	27, // 2: api.bcpay.service.v1.GetBankSchemaResponse.schema:type_name -> google.protobuf.ListValue
+	26, // 3: api.bcpay.service.v1.BankAccountListRequest.operator_context:type_name -> api.common.OperatorContext
 	10, // 4: api.bcpay.service.v1.BankAccountListResponse.bank_accounts:type_name -> api.bcpay.service.v1.DepositBankAccount
-	26, // 5: api.bcpay.service.v1.AddBankAccountRequest.bank_info:type_name -> google.protobuf.Struct
-	24, // 6: api.bcpay.service.v1.AddBankAccountRequest.operator_context:type_name -> api.common.OperatorContext
+	28, // 5: api.bcpay.service.v1.AddBankAccountRequest.bank_info:type_name -> google.protobuf.Struct
+	26, // 6: api.bcpay.service.v1.AddBankAccountRequest.operator_context:type_name -> api.common.OperatorContext
 	10, // 7: api.bcpay.service.v1.AddBankAccountResponse.bank_account:type_name -> api.bcpay.service.v1.DepositBankAccount
-	26, // 8: api.bcpay.service.v1.UpdateBankAccountRequest.bank_info:type_name -> google.protobuf.Struct
-	24, // 9: api.bcpay.service.v1.UpdateBankAccountRequest.operator_context:type_name -> api.common.OperatorContext
+	28, // 8: api.bcpay.service.v1.UpdateBankAccountRequest.bank_info:type_name -> google.protobuf.Struct
+	26, // 9: api.bcpay.service.v1.UpdateBankAccountRequest.operator_context:type_name -> api.common.OperatorContext
 	10, // 10: api.bcpay.service.v1.UpdateBankAccountResponse.bank_account:type_name -> api.bcpay.service.v1.DepositBankAccount
-	24, // 11: api.bcpay.service.v1.TransactionListRequest.operator_context:type_name -> api.common.OperatorContext
-	18, // 12: api.bcpay.service.v1.TransactionListResponse.transaction:type_name -> api.bcpay.service.v1.Transaction
-	24, // 13: api.bcpay.service.v1.AuditTransactionRequest.operator_context:type_name -> api.common.OperatorContext
-	18, // 14: api.bcpay.service.v1.AuditTransactionResponse.transaction:type_name -> api.bcpay.service.v1.Transaction
-	18, // 15: api.bcpay.service.v1.AddNoteToTransactionResponse.transaction:type_name -> api.bcpay.service.v1.Transaction
+	26, // 11: api.bcpay.service.v1.TransactionListRequest.operator_context:type_name -> api.common.OperatorContext
+	20, // 12: api.bcpay.service.v1.TransactionListResponse.transaction:type_name -> api.bcpay.service.v1.Transaction
+	26, // 13: api.bcpay.service.v1.AuditTransactionRequest.operator_context:type_name -> api.common.OperatorContext
+	20, // 14: api.bcpay.service.v1.AuditTransactionResponse.transaction:type_name -> api.bcpay.service.v1.Transaction
+	20, // 15: api.bcpay.service.v1.AddNoteToTransactionResponse.transaction:type_name -> api.bcpay.service.v1.Transaction
 	0,  // 16: api.bcpay.service.v1.Bcpay.CreateDeposit:input_type -> api.bcpay.service.v1.CreateDepositRequest
 	2,  // 17: api.bcpay.service.v1.Bcpay.CreateWithdraw:input_type -> api.bcpay.service.v1.CreateWithdrawRequest
 	8,  // 18: api.bcpay.service.v1.Bcpay.GetBankSchema:input_type -> api.bcpay.service.v1.GetBankSchemaRequest
@@ -2243,22 +2358,24 @@ var file_bcpay_service_v1_bcpay_proto_depIdxs = []int32{
 	11, // 21: api.bcpay.service.v1.Bcpay.BankAccountList:input_type -> api.bcpay.service.v1.BankAccountListRequest
 	13, // 22: api.bcpay.service.v1.Bcpay.AddBankAccount:input_type -> api.bcpay.service.v1.AddBankAccountRequest
 	15, // 23: api.bcpay.service.v1.Bcpay.UpdateBankAccount:input_type -> api.bcpay.service.v1.UpdateBankAccountRequest
-	17, // 24: api.bcpay.service.v1.Bcpay.TransactionList:input_type -> api.bcpay.service.v1.TransactionListRequest
-	20, // 25: api.bcpay.service.v1.Bcpay.AuditTransaction:input_type -> api.bcpay.service.v1.AuditTransactionRequest
-	22, // 26: api.bcpay.service.v1.Bcpay.AddNoteToTransaction:input_type -> api.bcpay.service.v1.AddNoteToTransactionRequest
-	1,  // 27: api.bcpay.service.v1.Bcpay.CreateDeposit:output_type -> api.bcpay.service.v1.CreateDepositResponse
-	3,  // 28: api.bcpay.service.v1.Bcpay.CreateWithdraw:output_type -> api.bcpay.service.v1.CreateWithdrawResponse
-	9,  // 29: api.bcpay.service.v1.Bcpay.GetBankSchema:output_type -> api.bcpay.service.v1.GetBankSchemaResponse
-	5,  // 30: api.bcpay.service.v1.Bcpay.GetMerchant:output_type -> api.bcpay.service.v1.GetMerchantResponse
-	7,  // 31: api.bcpay.service.v1.Bcpay.CreateMerchant:output_type -> api.bcpay.service.v1.CreateMerchantResponse
-	12, // 32: api.bcpay.service.v1.Bcpay.BankAccountList:output_type -> api.bcpay.service.v1.BankAccountListResponse
-	14, // 33: api.bcpay.service.v1.Bcpay.AddBankAccount:output_type -> api.bcpay.service.v1.AddBankAccountResponse
-	16, // 34: api.bcpay.service.v1.Bcpay.UpdateBankAccount:output_type -> api.bcpay.service.v1.UpdateBankAccountResponse
-	19, // 35: api.bcpay.service.v1.Bcpay.TransactionList:output_type -> api.bcpay.service.v1.TransactionListResponse
-	21, // 36: api.bcpay.service.v1.Bcpay.AuditTransaction:output_type -> api.bcpay.service.v1.AuditTransactionResponse
-	23, // 37: api.bcpay.service.v1.Bcpay.AddNoteToTransaction:output_type -> api.bcpay.service.v1.AddNoteToTransactionResponse
-	27, // [27:38] is the sub-list for method output_type
-	16, // [16:27] is the sub-list for method input_type
+	17, // 24: api.bcpay.service.v1.Bcpay.DeleteBankAccount:input_type -> api.bcpay.service.v1.DeleteBankAccountRequest
+	19, // 25: api.bcpay.service.v1.Bcpay.TransactionList:input_type -> api.bcpay.service.v1.TransactionListRequest
+	22, // 26: api.bcpay.service.v1.Bcpay.AuditTransaction:input_type -> api.bcpay.service.v1.AuditTransactionRequest
+	24, // 27: api.bcpay.service.v1.Bcpay.AddNoteToTransaction:input_type -> api.bcpay.service.v1.AddNoteToTransactionRequest
+	1,  // 28: api.bcpay.service.v1.Bcpay.CreateDeposit:output_type -> api.bcpay.service.v1.CreateDepositResponse
+	3,  // 29: api.bcpay.service.v1.Bcpay.CreateWithdraw:output_type -> api.bcpay.service.v1.CreateWithdrawResponse
+	9,  // 30: api.bcpay.service.v1.Bcpay.GetBankSchema:output_type -> api.bcpay.service.v1.GetBankSchemaResponse
+	5,  // 31: api.bcpay.service.v1.Bcpay.GetMerchant:output_type -> api.bcpay.service.v1.GetMerchantResponse
+	7,  // 32: api.bcpay.service.v1.Bcpay.CreateMerchant:output_type -> api.bcpay.service.v1.CreateMerchantResponse
+	12, // 33: api.bcpay.service.v1.Bcpay.BankAccountList:output_type -> api.bcpay.service.v1.BankAccountListResponse
+	14, // 34: api.bcpay.service.v1.Bcpay.AddBankAccount:output_type -> api.bcpay.service.v1.AddBankAccountResponse
+	16, // 35: api.bcpay.service.v1.Bcpay.UpdateBankAccount:output_type -> api.bcpay.service.v1.UpdateBankAccountResponse
+	18, // 36: api.bcpay.service.v1.Bcpay.DeleteBankAccount:output_type -> api.bcpay.service.v1.DeleteBankAccountResponse
+	21, // 37: api.bcpay.service.v1.Bcpay.TransactionList:output_type -> api.bcpay.service.v1.TransactionListResponse
+	23, // 38: api.bcpay.service.v1.Bcpay.AuditTransaction:output_type -> api.bcpay.service.v1.AuditTransactionResponse
+	25, // 39: api.bcpay.service.v1.Bcpay.AddNoteToTransaction:output_type -> api.bcpay.service.v1.AddNoteToTransactionResponse
+	28, // [28:40] is the sub-list for method output_type
+	16, // [16:28] is the sub-list for method input_type
 	16, // [16:16] is the sub-list for extension type_name
 	16, // [16:16] is the sub-list for extension extendee
 	0,  // [0:16] is the sub-list for field type_name
@@ -2275,7 +2392,7 @@ func file_bcpay_service_v1_bcpay_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_bcpay_service_v1_bcpay_proto_rawDesc), len(file_bcpay_service_v1_bcpay_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   24,
+			NumMessages:   26,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -25,6 +25,7 @@ const (
 	BackofficeBcpay_BankAccountList_FullMethodName      = "/api.backoffice.service.v1.BackofficeBcpay/BankAccountList"
 	BackofficeBcpay_AddBankAccount_FullMethodName       = "/api.backoffice.service.v1.BackofficeBcpay/AddBankAccount"
 	BackofficeBcpay_UpdateBankAccount_FullMethodName    = "/api.backoffice.service.v1.BackofficeBcpay/UpdateBankAccount"
+	BackofficeBcpay_DeleteBankAccount_FullMethodName    = "/api.backoffice.service.v1.BackofficeBcpay/DeleteBankAccount"
 	BackofficeBcpay_TransactionList_FullMethodName      = "/api.backoffice.service.v1.BackofficeBcpay/TransactionList"
 	BackofficeBcpay_AuditTransaction_FullMethodName     = "/api.backoffice.service.v1.BackofficeBcpay/AuditTransaction"
 	BackofficeBcpay_AddNoteToTransaction_FullMethodName = "/api.backoffice.service.v1.BackofficeBcpay/AddNoteToTransaction"
@@ -43,6 +44,7 @@ type BackofficeBcpayClient interface {
 	BankAccountList(ctx context.Context, in *BankAccountListRequest, opts ...grpc.CallOption) (*v1.BankAccountListResponse, error)
 	AddBankAccount(ctx context.Context, in *AddBankAccountRequest, opts ...grpc.CallOption) (*v1.AddBankAccountResponse, error)
 	UpdateBankAccount(ctx context.Context, in *UpdateBankAccountRequest, opts ...grpc.CallOption) (*v1.UpdateBankAccountResponse, error)
+	DeleteBankAccount(ctx context.Context, in *v1.DeleteBankAccountRequest, opts ...grpc.CallOption) (*v1.DeleteBankAccountResponse, error)
 	TransactionList(ctx context.Context, in *TransactionListRequest, opts ...grpc.CallOption) (*v1.TransactionListResponse, error)
 	AuditTransaction(ctx context.Context, in *AuditTransactionRequest, opts ...grpc.CallOption) (*v1.AuditTransactionResponse, error)
 	AddNoteToTransaction(ctx context.Context, in *v1.AddNoteToTransactionRequest, opts ...grpc.CallOption) (*v1.AddNoteToTransactionResponse, error)
@@ -107,6 +109,16 @@ func (c *backofficeBcpayClient) UpdateBankAccount(ctx context.Context, in *Updat
 	return out, nil
 }
 
+func (c *backofficeBcpayClient) DeleteBankAccount(ctx context.Context, in *v1.DeleteBankAccountRequest, opts ...grpc.CallOption) (*v1.DeleteBankAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.DeleteBankAccountResponse)
+	err := c.cc.Invoke(ctx, BackofficeBcpay_DeleteBankAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *backofficeBcpayClient) TransactionList(ctx context.Context, in *TransactionListRequest, opts ...grpc.CallOption) (*v1.TransactionListResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.TransactionListResponse)
@@ -159,6 +171,7 @@ type BackofficeBcpayServer interface {
 	BankAccountList(context.Context, *BankAccountListRequest) (*v1.BankAccountListResponse, error)
 	AddBankAccount(context.Context, *AddBankAccountRequest) (*v1.AddBankAccountResponse, error)
 	UpdateBankAccount(context.Context, *UpdateBankAccountRequest) (*v1.UpdateBankAccountResponse, error)
+	DeleteBankAccount(context.Context, *v1.DeleteBankAccountRequest) (*v1.DeleteBankAccountResponse, error)
 	TransactionList(context.Context, *TransactionListRequest) (*v1.TransactionListResponse, error)
 	AuditTransaction(context.Context, *AuditTransactionRequest) (*v1.AuditTransactionResponse, error)
 	AddNoteToTransaction(context.Context, *v1.AddNoteToTransactionRequest) (*v1.AddNoteToTransactionResponse, error)
@@ -187,6 +200,9 @@ func (UnimplementedBackofficeBcpayServer) AddBankAccount(context.Context, *AddBa
 }
 func (UnimplementedBackofficeBcpayServer) UpdateBankAccount(context.Context, *UpdateBankAccountRequest) (*v1.UpdateBankAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateBankAccount not implemented")
+}
+func (UnimplementedBackofficeBcpayServer) DeleteBankAccount(context.Context, *v1.DeleteBankAccountRequest) (*v1.DeleteBankAccountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteBankAccount not implemented")
 }
 func (UnimplementedBackofficeBcpayServer) TransactionList(context.Context, *TransactionListRequest) (*v1.TransactionListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TransactionList not implemented")
@@ -311,6 +327,24 @@ func _BackofficeBcpay_UpdateBankAccount_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeBcpay_DeleteBankAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.DeleteBankAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeBcpayServer).DeleteBankAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeBcpay_DeleteBankAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeBcpayServer).DeleteBankAccount(ctx, req.(*v1.DeleteBankAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BackofficeBcpay_TransactionList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(TransactionListRequest)
 	if err := dec(in); err != nil {
@@ -409,6 +443,10 @@ var BackofficeBcpay_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateBankAccount",
 			Handler:    _BackofficeBcpay_UpdateBankAccount_Handler,
+		},
+		{
+			MethodName: "DeleteBankAccount",
+			Handler:    _BackofficeBcpay_DeleteBankAccount_Handler,
 		},
 		{
 			MethodName: "TransactionList",

@@ -82,6 +82,7 @@ message PaymentMethodInfo {
   string success_rate = 24;
   // JSON schema defining the required fields for this payment method
   google.protobuf.ListValue key_schema = 25; 
+  string psp_id = 26;
 }
 
 // Response for payment method list
@@ -290,6 +291,7 @@ message PaymentChannelInfo {
   string retailer_operator_name = 44;
   string system_operator_name = 46;
   string operator_type = 47;
+  string psp_id = 48;
 }
 
 // Request to initiate a deposit
@@ -826,13 +828,15 @@ message UpdatePaymentMethodResponse {
 }
 
 message BankCard {
-  string id = 1;
-  string card_number = 2;
+  int64 id = 1;
+  string card_account = 2;
   string card_account_firstname = 3;
   string card_account_lastname = 4;
-  string currency = 5;
-  string country = 6;
-  bool enabled = 7;
+  string card_iban = 5;
+  string currency = 6;
+  string country = 7;
+  bool enabled = 8;
+  google.protobuf.Struct card_detail = 9;
 }
 
 message GetBankCardListRequest {
@@ -850,26 +854,24 @@ message AddBankCardRequest {
 }
 
 message AddBankCardResponse {
-  BankCard bank_card = 1;
 }
 
 message UpdateBankCardRequest {
-  string id = 1;
+  int64 id = 1;
   string currency = 2;
   string country = 3;
-  google.protobuf.Struct bank_card = 4;
+  bool enabled = 4;
+  google.protobuf.Struct bank_card = 5;
 }
 
 message UpdateBankCardResponse {
-  BankCard bank_card = 1;
 }
 
 message DeleteBankCardRequest {
-  string bank_card_id = 1;
+  int64 bank_card_id = 1;
 }
 
 message DeleteBankCardResponse {
-  
 }
 
 message GetBankAccountRequest {
@@ -1071,12 +1073,12 @@ service Payment {
     };
   }
 
-	rpc GetDepositBankAccount(GetBankAccountRequest) returns (GetBankAccountResponse) {
-    option (google.api.http) = {
-      post: "/v1/payment/bankaccount/get"
-      body: "*"
-    };
-	}
+	// rpc GetDepositBankAccount(GetBankAccountRequest) returns (GetBankAccountResponse) {
+ //    option (google.api.http) = {
+ //      post: "/v1/payment/bankaccount/get"
+ //      body: "*"
+ //    };
+	// }
 
 	rpc GetBankSchema(GetBankSchemaRequest) returns (GetBankSchemaResponse) {
     option (google.api.http) = {
