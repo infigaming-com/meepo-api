@@ -38,6 +38,9 @@ const (
 	BackofficeWallet_ListOperatorBalanceTransactions_FullMethodName = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorBalanceTransactions"
 	BackofficeWallet_UpdateOperatorBalance_FullMethodName           = "/api.backoffice.service.v1.BackofficeWallet/UpdateOperatorBalance"
 	BackofficeWallet_GetOperatorBalance_FullMethodName              = "/api.backoffice.service.v1.BackofficeWallet/GetOperatorBalance"
+	BackofficeWallet_SetDepositRewardSequences_FullMethodName       = "/api.backoffice.service.v1.BackofficeWallet/SetDepositRewardSequences"
+	BackofficeWallet_DeleteDepositRewardSequences_FullMethodName    = "/api.backoffice.service.v1.BackofficeWallet/DeleteDepositRewardSequences"
+	BackofficeWallet_GetDepositRewardConfig_FullMethodName          = "/api.backoffice.service.v1.BackofficeWallet/GetDepositRewardConfig"
 )
 
 // BackofficeWalletClient is the client API for BackofficeWallet service.
@@ -72,6 +75,12 @@ type BackofficeWalletClient interface {
 	UpdateOperatorBalance(ctx context.Context, in *UpdateOperatorBalanceRequest, opts ...grpc.CallOption) (*UpdateOperatorBalanceResponse, error)
 	// GetOperatorBalance gets the balances of an operator
 	GetOperatorBalance(ctx context.Context, in *v1.GetOperatorBalanceRequest, opts ...grpc.CallOption) (*v1.GetOperatorBalanceResponse, error)
+	// SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
+	SetDepositRewardSequences(ctx context.Context, in *SetDepositRewardSequencesRequest, opts ...grpc.CallOption) (*v1.SetDepositRewardSequencesResponse, error)
+	// DeleteDepositRewardSequences deletes a deposit reward sequence of a operator currency config
+	DeleteDepositRewardSequences(ctx context.Context, in *DeleteDepositRewardSequencesRequest, opts ...grpc.CallOption) (*v1.DeleteDepositRewardSequencesResponse, error)
+	// GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
+	GetDepositRewardConfig(ctx context.Context, in *GetDepositRewardConfigRequest, opts ...grpc.CallOption) (*v1.GetDepositRewardConfigResponse, error)
 }
 
 type backofficeWalletClient struct {
@@ -262,6 +271,36 @@ func (c *backofficeWalletClient) GetOperatorBalance(ctx context.Context, in *v1.
 	return out, nil
 }
 
+func (c *backofficeWalletClient) SetDepositRewardSequences(ctx context.Context, in *SetDepositRewardSequencesRequest, opts ...grpc.CallOption) (*v1.SetDepositRewardSequencesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.SetDepositRewardSequencesResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_SetDepositRewardSequences_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) DeleteDepositRewardSequences(ctx context.Context, in *DeleteDepositRewardSequencesRequest, opts ...grpc.CallOption) (*v1.DeleteDepositRewardSequencesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.DeleteDepositRewardSequencesResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_DeleteDepositRewardSequences_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) GetDepositRewardConfig(ctx context.Context, in *GetDepositRewardConfigRequest, opts ...grpc.CallOption) (*v1.GetDepositRewardConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetDepositRewardConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_GetDepositRewardConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeWalletServer is the server API for BackofficeWallet service.
 // All implementations must embed UnimplementedBackofficeWalletServer
 // for forward compatibility.
@@ -294,6 +333,12 @@ type BackofficeWalletServer interface {
 	UpdateOperatorBalance(context.Context, *UpdateOperatorBalanceRequest) (*UpdateOperatorBalanceResponse, error)
 	// GetOperatorBalance gets the balances of an operator
 	GetOperatorBalance(context.Context, *v1.GetOperatorBalanceRequest) (*v1.GetOperatorBalanceResponse, error)
+	// SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
+	SetDepositRewardSequences(context.Context, *SetDepositRewardSequencesRequest) (*v1.SetDepositRewardSequencesResponse, error)
+	// DeleteDepositRewardSequences deletes a deposit reward sequence of a operator currency config
+	DeleteDepositRewardSequences(context.Context, *DeleteDepositRewardSequencesRequest) (*v1.DeleteDepositRewardSequencesResponse, error)
+	// GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
+	GetDepositRewardConfig(context.Context, *GetDepositRewardConfigRequest) (*v1.GetDepositRewardConfigResponse, error)
 	mustEmbedUnimplementedBackofficeWalletServer()
 }
 
@@ -357,6 +402,15 @@ func (UnimplementedBackofficeWalletServer) UpdateOperatorBalance(context.Context
 }
 func (UnimplementedBackofficeWalletServer) GetOperatorBalance(context.Context, *v1.GetOperatorBalanceRequest) (*v1.GetOperatorBalanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorBalance not implemented")
+}
+func (UnimplementedBackofficeWalletServer) SetDepositRewardSequences(context.Context, *SetDepositRewardSequencesRequest) (*v1.SetDepositRewardSequencesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetDepositRewardSequences not implemented")
+}
+func (UnimplementedBackofficeWalletServer) DeleteDepositRewardSequences(context.Context, *DeleteDepositRewardSequencesRequest) (*v1.DeleteDepositRewardSequencesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteDepositRewardSequences not implemented")
+}
+func (UnimplementedBackofficeWalletServer) GetDepositRewardConfig(context.Context, *GetDepositRewardConfigRequest) (*v1.GetDepositRewardConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDepositRewardConfig not implemented")
 }
 func (UnimplementedBackofficeWalletServer) mustEmbedUnimplementedBackofficeWalletServer() {}
 func (UnimplementedBackofficeWalletServer) testEmbeddedByValue()                          {}
@@ -703,6 +757,60 @@ func _BackofficeWallet_GetOperatorBalance_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeWallet_SetDepositRewardSequences_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetDepositRewardSequencesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).SetDepositRewardSequences(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_SetDepositRewardSequences_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).SetDepositRewardSequences(ctx, req.(*SetDepositRewardSequencesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_DeleteDepositRewardSequences_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteDepositRewardSequencesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).DeleteDepositRewardSequences(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_DeleteDepositRewardSequences_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).DeleteDepositRewardSequences(ctx, req.(*DeleteDepositRewardSequencesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_GetDepositRewardConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDepositRewardConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).GetDepositRewardConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_GetDepositRewardConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).GetDepositRewardConfig(ctx, req.(*GetDepositRewardConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeWallet_ServiceDesc is the grpc.ServiceDesc for BackofficeWallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -781,6 +889,18 @@ var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOperatorBalance",
 			Handler:    _BackofficeWallet_GetOperatorBalance_Handler,
+		},
+		{
+			MethodName: "SetDepositRewardSequences",
+			Handler:    _BackofficeWallet_SetDepositRewardSequences_Handler,
+		},
+		{
+			MethodName: "DeleteDepositRewardSequences",
+			Handler:    _BackofficeWallet_DeleteDepositRewardSequences_Handler,
+		},
+		{
+			MethodName: "GetDepositRewardConfig",
+			Handler:    _BackofficeWallet_GetDepositRewardConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

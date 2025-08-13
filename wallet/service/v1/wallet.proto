@@ -117,6 +117,23 @@ service Wallet {
 
 	// GetOperatorBalanceTransactionsByIds returns the balance transactions with specific transaction ids
 	rpc GetOperatorBalanceTransactionsByIds(GetOperatorBalanceTransactionsByIdsRequest) returns (GetOperatorBalanceTransactionsByIdsResponse) {}
+
+	// SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
+	rpc SetDepositRewardSequences(SetDepositRewardSequencesRequest) returns (SetDepositRewardSequencesResponse) {}
+
+	// DeleteDepositRewardSequences deletes a deposit reward sequence of a operator currency config
+	rpc DeleteDepositRewardSequences(DeleteDepositRewardSequencesRequest) returns (DeleteDepositRewardSequencesResponse) {}
+
+	// GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
+	rpc GetDepositRewardConfig(GetDepositRewardConfigRequest) returns (GetDepositRewardConfigResponse) {}
+
+	// // GetUserDepositRewardSequence returns the current available deposit reward sequence of the user based on the user deposit stats
+	// rpc GetUserDepositRewardSequence(GetUserDepositRewardSequenceRequest) returns (GetUserDepositRewardSequenceResponse) {
+	// 	option (google.api.http) = {
+	// 		post: "/v1/wallet/deposit-reward/user-sequence"
+	// 		body: "*"
+	// 	};
+	// }
 }
 
 message GetUserBalancesRequest {
@@ -974,7 +991,7 @@ message RewardSequence {
 		string max_bonus_amount = 4;
 		string max_withdrawal_amount = 5;
 	}
-	int64 serial_number = 1;
+	int32 serial_number = 1;
 	string name = 2;
 	bool enabled = 3;
 	string reward_type = 4;
@@ -987,11 +1004,54 @@ message RewardSequence {
 
 // Deposit reward config for an operator with specific currency
 message DepositRewardConfig {
-	api.common.OperatorContext operator_context = 1;
-	string currency = 2;
-	bool follow_parent = 3;
 	repeated RewardSequence welcome_reward_sequences = 4;
 	repeated RewardSequence daily_reward_sequences = 5;
 	google.protobuf.Timestamp created_at = 6;
 	google.protobuf.Timestamp updated_at = 7;
 }
+
+message SetDepositRewardSequencesRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	int64 user_id = 3;
+	string currency = 4;
+	bool follow_parent = 5;
+	repeated RewardSequence welcome_reward_sequences = 6;
+	repeated RewardSequence daily_reward_sequences = 7;
+}
+
+message SetDepositRewardSequencesResponse {}
+
+message DeleteDepositRewardSequencesRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	int64 user_id = 3;
+	string currency = 4;
+	repeated int32 welcome_reward_sequence_serial_numbers = 5;
+	repeated int32 daily_reward_sequence_serial_numbers = 6;
+}
+
+message DeleteDepositRewardSequencesResponse {}
+
+message GetDepositRewardConfigRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	string currency = 3;
+}
+
+message GetDepositRewardConfigResponse {
+	api.common.OperatorContext operator_context = 1;
+	string currency = 2;
+	bool follow_parent = 3;
+	DepositRewardConfig default_deposit_reward_config = 4;
+	DepositRewardConfig custom_deposit_reward_config = 5;
+}
+
+// message GetUserDepositRewardSequenceRequest {
+// 	string currency = 1;
+// }
+
+// message GetUserDepositRewardSequenceResponse {
+// 	RewardSequence reward_sequence = 1;
+// }
+

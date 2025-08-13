@@ -133,6 +133,27 @@ service BackofficeWallet {
 			body: "*"
 		};
 	}
+	// SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
+	rpc SetDepositRewardSequences(SetDepositRewardSequencesRequest) returns (wallet.service.v1.SetDepositRewardSequencesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/deposit-reward/sequences/set"
+			body: "*"
+		};
+	}
+	// DeleteDepositRewardSequences deletes a deposit reward sequence of a operator currency config
+	rpc DeleteDepositRewardSequences(DeleteDepositRewardSequencesRequest) returns (wallet.service.v1.DeleteDepositRewardSequencesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/deposit-reward/sequences/delete"
+			body: "*"
+		};
+	}
+	// GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
+	rpc GetDepositRewardConfig(GetDepositRewardConfigRequest) returns (wallet.service.v1.GetDepositRewardConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/deposit-reward/config/get"
+			body: "*"
+		};
+	}
 }
 
 message GetWalletsRequest {
@@ -436,4 +457,24 @@ message UpdateOperatorBalanceRequest {
 
 message UpdateOperatorBalanceResponse {
 	bool enabled = 1;
+}
+
+message SetDepositRewardSequencesRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string currency = 2;
+	bool follow_parent = 3;
+	repeated wallet.service.v1.RewardSequence welcome_reward_sequences = 4;
+	repeated wallet.service.v1.RewardSequence daily_reward_sequences = 5;
+}
+
+message DeleteDepositRewardSequencesRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string currency = 2;
+	repeated int32 welcome_reward_sequence_serial_numbers = 3;
+	repeated int32 daily_reward_sequence_serial_numbers = 4;
+}
+
+message GetDepositRewardConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string currency = 2;
 }

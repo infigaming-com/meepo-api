@@ -2556,6 +2556,63 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateWalletCurrencyResponse'
+    /v1/backoffice/wallet/deposit-reward/config/get:
+        post:
+            tags:
+                - BackofficeWallet
+            description: GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
+            operationId: BackofficeWallet_GetDepositRewardConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetDepositRewardConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetDepositRewardConfigResponse'
+    /v1/backoffice/wallet/deposit-reward/sequences/delete:
+        post:
+            tags:
+                - BackofficeWallet
+            description: DeleteDepositRewardSequences deletes a deposit reward sequence of a operator currency config
+            operationId: BackofficeWallet_DeleteDepositRewardSequences
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteDepositRewardSequencesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.DeleteDepositRewardSequencesResponse'
+    /v1/backoffice/wallet/deposit-reward/sequences/set:
+        post:
+            tags:
+                - BackofficeWallet
+            description: SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
+            operationId: BackofficeWallet_SetDepositRewardSequences
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetDepositRewardSequencesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.SetDepositRewardSequencesResponse'
     /v1/backoffice/wallet/exchange-rates/get:
         post:
             tags:
@@ -4049,6 +4106,23 @@ components:
         api.backoffice.service.v1.DeleteAdjustmentConfigResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.DeleteDepositRewardSequencesRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                currency:
+                    type: string
+                welcomeRewardSequenceSerialNumbers:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                dailyRewardSequenceSerialNumbers:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
         api.backoffice.service.v1.DeleteRoleRequest:
             type: object
             properties:
@@ -4140,6 +4214,13 @@ components:
             properties:
                 operatorDetails:
                     $ref: '#/components/schemas/api.backoffice.service.v1.OperatorDetails'
+        api.backoffice.service.v1.GetDepositRewardConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                currency:
+                    type: string
         api.backoffice.service.v1.GetDepositSummariesRequest:
             type: object
             properties:
@@ -8373,6 +8454,23 @@ components:
         api.backoffice.service.v1.SendRegisterVerificationCodeResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.SetDepositRewardSequencesRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                currency:
+                    type: string
+                followParent:
+                    type: boolean
+                welcomeRewardSequences:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
+                dailyRewardSequences:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
         api.backoffice.service.v1.SetOperatorTagsConfigRequest:
             type: object
             properties:
@@ -10645,6 +10743,27 @@ components:
                 decimalPlaces:
                     type: integer
                     format: int32
+        api.wallet.service.v1.DeleteDepositRewardSequencesResponse:
+            type: object
+            properties: {}
+        api.wallet.service.v1.DepositRewardConfig:
+            type: object
+            properties:
+                welcomeRewardSequences:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
+                dailyRewardSequences:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+            description: Deposit reward config for an operator with specific currency
         api.wallet.service.v1.GetCurrenciesRequest:
             type: object
             properties:
@@ -10659,6 +10778,19 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.Currency'
+        api.wallet.service.v1.GetDepositRewardConfigResponse:
+            type: object
+            properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                currency:
+                    type: string
+                followParent:
+                    type: boolean
+                defaultDepositRewardConfig:
+                    $ref: '#/components/schemas/api.wallet.service.v1.DepositRewardConfig'
+                customDepositRewardConfig:
+                    $ref: '#/components/schemas/api.wallet.service.v1.DepositRewardConfig'
         api.wallet.service.v1.GetOperatorBalanceRequest:
             type: object
             properties:
@@ -10826,6 +10958,49 @@ components:
                     type: string
                 enabled:
                     type: boolean
+        api.wallet.service.v1.RewardSequence:
+            type: object
+            properties:
+                serialNumber:
+                    type: integer
+                    format: int32
+                name:
+                    type: string
+                enabled:
+                    type: boolean
+                rewardType:
+                    type: string
+                wageringRequirement:
+                    type: integer
+                    format: int32
+                rewardValidity:
+                    type: string
+                tierConfigs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence_TierConfig'
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+        api.wallet.service.v1.RewardSequence_TierConfig:
+            type: object
+            properties:
+                minDepositAmount:
+                    type: string
+                maxDepositAmount:
+                    type: string
+                rewardPercentage:
+                    type: string
+                maxBonusAmount:
+                    type: string
+                maxWithdrawalAmount:
+                    type: string
+        api.wallet.service.v1.SetDepositRewardSequencesResponse:
+            type: object
+            properties: {}
         google.protobuf.ListValue:
             type: object
             properties:
