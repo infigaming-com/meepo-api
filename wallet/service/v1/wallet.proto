@@ -994,7 +994,7 @@ message RewardSequence {
 	int32 serial_number = 1;
 	string name = 2;
 	bool enabled = 3;
-	string reward_type = 4;
+	string reward_type = 4; // cash or bonus
 	int32 wagering_requirement = 5; // coefficient
 	int64 reward_validity = 6; // milliseconds
 	repeated TierConfig tier_configs = 7;

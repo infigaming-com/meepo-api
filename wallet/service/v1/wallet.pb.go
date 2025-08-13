@@ -6145,7 +6145,7 @@ type RewardSequence struct {
 	SerialNumber        int32                        `protobuf:"varint,1,opt,name=serial_number,json=serialNumber,proto3" json:"serial_number,omitempty"`
 	Name                string                       `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Enabled             bool                         `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	RewardType          string                       `protobuf:"bytes,4,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"`
+	RewardType          string                       `protobuf:"bytes,4,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"`                             // cash or bonus
 	WageringRequirement int32                        `protobuf:"varint,5,opt,name=wagering_requirement,json=wageringRequirement,proto3" json:"wagering_requirement,omitempty"` // coefficient
 	RewardValidity      int64                        `protobuf:"varint,6,opt,name=reward_validity,json=rewardValidity,proto3" json:"reward_validity,omitempty"`                // milliseconds
 	TierConfigs         []*RewardSequence_TierConfig `protobuf:"bytes,7,rep,name=tier_configs,json=tierConfigs,proto3" json:"tier_configs,omitempty"`
