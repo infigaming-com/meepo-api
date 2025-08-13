@@ -836,7 +836,7 @@ message BankCard {
   string currency = 6;
   string country = 7;
   bool enabled = 8;
-  google.protobuf.Struct bank_info = 9;
+  google.protobuf.Struct card_detail = 9;
 }
 
 message GetBankCardListRequest {
