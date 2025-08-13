@@ -4654,10 +4654,11 @@ func (*AddBankCardResponse) Descriptor() ([]byte, []int) {
 
 type UpdateBankCardRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Currency      string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	Country       string                 `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
-	BankCard      *structpb.Struct       `protobuf:"bytes,4,opt,name=bank_card,json=bankCard,proto3" json:"bank_card,omitempty"`
+	Enabled       bool                   `protobuf:"varint,4,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	BankCard      *structpb.Struct       `protobuf:"bytes,5,opt,name=bank_card,json=bankCard,proto3" json:"bank_card,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4692,11 +4693,11 @@ func (*UpdateBankCardRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{44}
 }
 
-func (x *UpdateBankCardRequest) GetId() string {
+func (x *UpdateBankCardRequest) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
-	return ""
+	return 0
 }
 
 func (x *UpdateBankCardRequest) GetCurrency() string {
@@ -4711,6 +4712,13 @@ func (x *UpdateBankCardRequest) GetCountry() string {
 		return x.Country
 	}
 	return ""
+}
+
+func (x *UpdateBankCardRequest) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
 }
 
 func (x *UpdateBankCardRequest) GetBankCard() *structpb.Struct {
@@ -5623,12 +5631,13 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
 	"\acountry\x18\x02 \x01(\tR\acountry\x124\n" +
 	"\tbank_card\x18\x03 \x01(\v2\x17.google.protobuf.StructR\bbankCard\"\x15\n" +
-	"\x13AddBankCardResponse\"\x93\x01\n" +
+	"\x13AddBankCardResponse\"\xad\x01\n" +
 	"\x15UpdateBankCardRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x18\n" +
-	"\acountry\x18\x03 \x01(\tR\acountry\x124\n" +
-	"\tbank_card\x18\x04 \x01(\v2\x17.google.protobuf.StructR\bbankCard\"\x18\n" +
+	"\acountry\x18\x03 \x01(\tR\acountry\x12\x18\n" +
+	"\aenabled\x18\x04 \x01(\bR\aenabled\x124\n" +
+	"\tbank_card\x18\x05 \x01(\v2\x17.google.protobuf.StructR\bbankCard\"\x18\n" +
 	"\x16UpdateBankCardResponse\"9\n" +
 	"\x15DeleteBankCardRequest\x12 \n" +
 	"\fbank_card_id\x18\x01 \x01(\x03R\n" +

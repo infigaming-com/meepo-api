@@ -11756,6 +11756,8 @@ components:
                     type: string
                 country:
                     type: string
+                enabled:
+                    type: boolean
                 bankCard:
                     type: object
         payment.service.v1.UpdateBankCardResponse:
