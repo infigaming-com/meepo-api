@@ -56,6 +56,9 @@ const (
 	Wallet_UpdateOperatorBalance_FullMethodName               = "/api.wallet.service.v1.Wallet/UpdateOperatorBalance"
 	Wallet_GetOperatorTransactionSummary_FullMethodName       = "/api.wallet.service.v1.Wallet/GetOperatorTransactionSummary"
 	Wallet_GetOperatorBalanceTransactionsByIds_FullMethodName = "/api.wallet.service.v1.Wallet/GetOperatorBalanceTransactionsByIds"
+	Wallet_SetDepositRewardSequences_FullMethodName           = "/api.wallet.service.v1.Wallet/SetDepositRewardSequences"
+	Wallet_DeleteDepositRewardSequences_FullMethodName        = "/api.wallet.service.v1.Wallet/DeleteDepositRewardSequences"
+	Wallet_GetDepositRewardConfig_FullMethodName              = "/api.wallet.service.v1.Wallet/GetDepositRewardConfig"
 )
 
 // WalletClient is the client API for Wallet service.
@@ -121,6 +124,12 @@ type WalletClient interface {
 	GetOperatorTransactionSummary(ctx context.Context, in *GetOperatorTransactionSummaryRequest, opts ...grpc.CallOption) (*GetOperatorTransactionSummaryResponse, error)
 	// GetOperatorBalanceTransactionsByIds returns the balance transactions with specific transaction ids
 	GetOperatorBalanceTransactionsByIds(ctx context.Context, in *GetOperatorBalanceTransactionsByIdsRequest, opts ...grpc.CallOption) (*GetOperatorBalanceTransactionsByIdsResponse, error)
+	// SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
+	SetDepositRewardSequences(ctx context.Context, in *SetDepositRewardSequencesRequest, opts ...grpc.CallOption) (*SetDepositRewardSequencesResponse, error)
+	// DeleteDepositRewardSequences deletes a deposit reward sequence of a operator currency config
+	DeleteDepositRewardSequences(ctx context.Context, in *DeleteDepositRewardSequencesRequest, opts ...grpc.CallOption) (*DeleteDepositRewardSequencesResponse, error)
+	// GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
+	GetDepositRewardConfig(ctx context.Context, in *GetDepositRewardConfigRequest, opts ...grpc.CallOption) (*GetDepositRewardConfigResponse, error)
 }
 
 type walletClient struct {
@@ -501,6 +510,36 @@ func (c *walletClient) GetOperatorBalanceTransactionsByIds(ctx context.Context, 
 	return out, nil
 }
 
+func (c *walletClient) SetDepositRewardSequences(ctx context.Context, in *SetDepositRewardSequencesRequest, opts ...grpc.CallOption) (*SetDepositRewardSequencesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetDepositRewardSequencesResponse)
+	err := c.cc.Invoke(ctx, Wallet_SetDepositRewardSequences_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) DeleteDepositRewardSequences(ctx context.Context, in *DeleteDepositRewardSequencesRequest, opts ...grpc.CallOption) (*DeleteDepositRewardSequencesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteDepositRewardSequencesResponse)
+	err := c.cc.Invoke(ctx, Wallet_DeleteDepositRewardSequences_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) GetDepositRewardConfig(ctx context.Context, in *GetDepositRewardConfigRequest, opts ...grpc.CallOption) (*GetDepositRewardConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDepositRewardConfigResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetDepositRewardConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServer is the server API for Wallet service.
 // All implementations must embed UnimplementedWalletServer
 // for forward compatibility.
@@ -564,6 +603,12 @@ type WalletServer interface {
 	GetOperatorTransactionSummary(context.Context, *GetOperatorTransactionSummaryRequest) (*GetOperatorTransactionSummaryResponse, error)
 	// GetOperatorBalanceTransactionsByIds returns the balance transactions with specific transaction ids
 	GetOperatorBalanceTransactionsByIds(context.Context, *GetOperatorBalanceTransactionsByIdsRequest) (*GetOperatorBalanceTransactionsByIdsResponse, error)
+	// SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
+	SetDepositRewardSequences(context.Context, *SetDepositRewardSequencesRequest) (*SetDepositRewardSequencesResponse, error)
+	// DeleteDepositRewardSequences deletes a deposit reward sequence of a operator currency config
+	DeleteDepositRewardSequences(context.Context, *DeleteDepositRewardSequencesRequest) (*DeleteDepositRewardSequencesResponse, error)
+	// GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
+	GetDepositRewardConfig(context.Context, *GetDepositRewardConfigRequest) (*GetDepositRewardConfigResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -684,6 +729,15 @@ func (UnimplementedWalletServer) GetOperatorTransactionSummary(context.Context, 
 }
 func (UnimplementedWalletServer) GetOperatorBalanceTransactionsByIds(context.Context, *GetOperatorBalanceTransactionsByIdsRequest) (*GetOperatorBalanceTransactionsByIdsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorBalanceTransactionsByIds not implemented")
+}
+func (UnimplementedWalletServer) SetDepositRewardSequences(context.Context, *SetDepositRewardSequencesRequest) (*SetDepositRewardSequencesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetDepositRewardSequences not implemented")
+}
+func (UnimplementedWalletServer) DeleteDepositRewardSequences(context.Context, *DeleteDepositRewardSequencesRequest) (*DeleteDepositRewardSequencesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteDepositRewardSequences not implemented")
+}
+func (UnimplementedWalletServer) GetDepositRewardConfig(context.Context, *GetDepositRewardConfigRequest) (*GetDepositRewardConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDepositRewardConfig not implemented")
 }
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
@@ -1372,6 +1426,60 @@ func _Wallet_GetOperatorBalanceTransactionsByIds_Handler(srv interface{}, ctx co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_SetDepositRewardSequences_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetDepositRewardSequencesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).SetDepositRewardSequences(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_SetDepositRewardSequences_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).SetDepositRewardSequences(ctx, req.(*SetDepositRewardSequencesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_DeleteDepositRewardSequences_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteDepositRewardSequencesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).DeleteDepositRewardSequences(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_DeleteDepositRewardSequences_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).DeleteDepositRewardSequences(ctx, req.(*DeleteDepositRewardSequencesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_GetDepositRewardConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDepositRewardConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetDepositRewardConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetDepositRewardConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetDepositRewardConfig(ctx, req.(*GetDepositRewardConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Wallet_ServiceDesc is the grpc.ServiceDesc for Wallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1526,6 +1634,18 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOperatorBalanceTransactionsByIds",
 			Handler:    _Wallet_GetOperatorBalanceTransactionsByIds_Handler,
+		},
+		{
+			MethodName: "SetDepositRewardSequences",
+			Handler:    _Wallet_SetDepositRewardSequences_Handler,
+		},
+		{
+			MethodName: "DeleteDepositRewardSequences",
+			Handler:    _Wallet_DeleteDepositRewardSequences_Handler,
+		},
+		{
+			MethodName: "GetDepositRewardConfig",
+			Handler:    _Wallet_GetDepositRewardConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
