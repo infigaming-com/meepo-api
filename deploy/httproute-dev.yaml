@@ -77,6 +77,14 @@ spec:
   - matches:
     - path:
         type: PathPrefix
+        value: "/v1/bcpay"
+    backendRefs:
+    - name: bcpay-svc
+      port: 8000
+      weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
         value: "/v1/review"
     backendRefs:
     - name: review-svc

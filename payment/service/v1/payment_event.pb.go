@@ -166,9 +166,10 @@ type PaymentTransactionEvent struct {
 	ReportingCurrency string                  `protobuf:"bytes,7,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
 	Amount            string                  `protobuf:"bytes,8,opt,name=amount,proto3" json:"amount,omitempty"` // cash amount of the currency
 	Status            string                  `protobuf:"bytes,9,opt,name=status,proto3" json:"status,omitempty"` // payment status
-	Timestamp         int64                   `protobuf:"varint,10,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
-	Extra             *structpb.Struct        `protobuf:"bytes,11,opt,name=extra,proto3" json:"extra,omitempty"`
-	ChannelInfo       *ChannelInfo            `protobuf:"bytes,12,opt,name=channel_info,json=channelInfo,proto3" json:"channel_info,omitempty"`
+	CreateAt          int64                   `protobuf:"varint,10,opt,name=create_at,json=createAt,proto3" json:"create_at,omitempty"`
+	SettleAt          int64                   `protobuf:"varint,11,opt,name=settle_at,json=settleAt,proto3" json:"settle_at,omitempty"`
+	Extra             *structpb.Struct        `protobuf:"bytes,12,opt,name=extra,proto3" json:"extra,omitempty"`
+	ChannelInfo       *ChannelInfo            `protobuf:"bytes,13,opt,name=channel_info,json=channelInfo,proto3" json:"channel_info,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -266,9 +267,16 @@ func (x *PaymentTransactionEvent) GetStatus() string {
 	return ""
 }
 
-func (x *PaymentTransactionEvent) GetTimestamp() int64 {
+func (x *PaymentTransactionEvent) GetCreateAt() int64 {
 	if x != nil {
-		return x.Timestamp
+		return x.CreateAt
+	}
+	return 0
+}
+
+func (x *PaymentTransactionEvent) GetSettleAt() int64 {
+	if x != nil {
+		return x.SettleAt
 	}
 	return 0
 }
@@ -300,9 +308,10 @@ type OperatorPaymentTransactionEvent struct {
 	ExchangeRate          string                  `protobuf:"bytes,9,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"` // exchange rate of the currency to the settlement currency
 	Amount                string                  `protobuf:"bytes,10,opt,name=amount,proto3" json:"amount,omitempty"`                                // cash amount of the currency
 	Status                string                  `protobuf:"bytes,11,opt,name=status,proto3" json:"status,omitempty"`                                // payment status
-	Timestamp             int64                   `protobuf:"varint,12,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
-	Extra                 *structpb.Struct        `protobuf:"bytes,13,opt,name=extra,proto3" json:"extra,omitempty"`
-	ChannelInfo           *ChannelInfo            `protobuf:"bytes,14,opt,name=channel_info,json=channelInfo,proto3" json:"channel_info,omitempty"`
+	CreateAt              int64                   `protobuf:"varint,12,opt,name=create_at,json=createAt,proto3" json:"create_at,omitempty"`
+	SettleAt              int64                   `protobuf:"varint,13,opt,name=settle_at,json=settleAt,proto3" json:"settle_at,omitempty"`
+	Extra                 *structpb.Struct        `protobuf:"bytes,14,opt,name=extra,proto3" json:"extra,omitempty"`
+	ChannelInfo           *ChannelInfo            `protobuf:"bytes,15,opt,name=channel_info,json=channelInfo,proto3" json:"channel_info,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -414,9 +423,16 @@ func (x *OperatorPaymentTransactionEvent) GetStatus() string {
 	return ""
 }
 
-func (x *OperatorPaymentTransactionEvent) GetTimestamp() int64 {
+func (x *OperatorPaymentTransactionEvent) GetCreateAt() int64 {
 	if x != nil {
-		return x.Timestamp
+		return x.CreateAt
+	}
+	return 0
+}
+
+func (x *OperatorPaymentTransactionEvent) GetSettleAt() int64 {
+	if x != nil {
+		return x.SettleAt
 	}
 	return 0
 }
@@ -446,7 +462,7 @@ const file_payment_service_v1_payment_event_proto_rawDesc = "" +
 	"event_data\x18\x02 \x01(\fR\teventData\"\x0f\n" +
 	"\rEventResponse\"U\n" +
 	"\vChannelInfo\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x88\x04\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xa4\x04\n" +
 	"\x17PaymentTransactionEvent\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
 	"\x11pa_transaction_id\x18\x02 \x01(\tR\x0fpaTransactionId\x12)\n" +
@@ -456,11 +472,12 @@ const file_payment_service_v1_payment_event_proto_rawDesc = "" +
 	"\bcurrency\x18\x06 \x01(\tR\bcurrency\x12-\n" +
 	"\x12reporting_currency\x18\a \x01(\tR\x11reportingCurrency\x12\x16\n" +
 	"\x06amount\x18\b \x01(\tR\x06amount\x12\x16\n" +
-	"\x06status\x18\t \x01(\tR\x06status\x12\x1c\n" +
-	"\ttimestamp\x18\n" +
-	" \x01(\x03R\ttimestamp\x12-\n" +
-	"\x05extra\x18\v \x01(\v2\x17.google.protobuf.StructR\x05extra\x12F\n" +
-	"\fchannel_info\x18\f \x01(\v2#.api.payment.service.v1.ChannelInfoR\vchannelInfo\"\xaf\x05\n" +
+	"\x06status\x18\t \x01(\tR\x06status\x12\x1b\n" +
+	"\tcreate_at\x18\n" +
+	" \x01(\x03R\bcreateAt\x12\x1b\n" +
+	"\tsettle_at\x18\v \x01(\x03R\bsettleAt\x12-\n" +
+	"\x05extra\x18\f \x01(\v2\x17.google.protobuf.StructR\x05extra\x12F\n" +
+	"\fchannel_info\x18\r \x01(\v2#.api.payment.service.v1.ChannelInfoR\vchannelInfo\"\xcb\x05\n" +
 	"\x1fOperatorPaymentTransactionEvent\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
 	"\x11pa_transaction_id\x18\x02 \x01(\tR\x0fpaTransactionId\x12)\n" +
@@ -473,10 +490,11 @@ const file_payment_service_v1_payment_event_proto_rawDesc = "" +
 	"\rexchange_rate\x18\t \x01(\tR\fexchangeRate\x12\x16\n" +
 	"\x06amount\x18\n" +
 	" \x01(\tR\x06amount\x12\x16\n" +
-	"\x06status\x18\v \x01(\tR\x06status\x12\x1c\n" +
-	"\ttimestamp\x18\f \x01(\x03R\ttimestamp\x12-\n" +
-	"\x05extra\x18\r \x01(\v2\x17.google.protobuf.StructR\x05extra\x12F\n" +
-	"\fchannel_info\x18\x0e \x01(\v2#.api.payment.service.v1.ChannelInfoR\vchannelInfo2f\n" +
+	"\x06status\x18\v \x01(\tR\x06status\x12\x1b\n" +
+	"\tcreate_at\x18\f \x01(\x03R\bcreateAt\x12\x1b\n" +
+	"\tsettle_at\x18\r \x01(\x03R\bsettleAt\x12-\n" +
+	"\x05extra\x18\x0e \x01(\v2\x17.google.protobuf.StructR\x05extra\x12F\n" +
+	"\fchannel_info\x18\x0f \x01(\v2#.api.payment.service.v1.ChannelInfoR\vchannelInfo2f\n" +
 	"\fPaymentEvent\x12V\n" +
 	"\x05Event\x12$.api.payment.service.v1.EventRequest\x1a%.api.payment.service.v1.EventResponse\"\x00BU\n" +
 	"\x16api.payment.service.v1P\x01Z9github.com/infigaming-com/meepo-api/payment/service/v1;v1b\x06proto3"

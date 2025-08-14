@@ -2799,7 +2799,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateWalletResponse'
-    /v1/bcpay/order/add:
+    /v1/bcpay/deposit/add:
         post:
             tags:
                 - Bcpay
