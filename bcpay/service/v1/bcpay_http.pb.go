@@ -29,7 +29,7 @@ type BcpayHTTPServer interface {
 
 func RegisterBcpayHTTPServer(s *http.Server, srv BcpayHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/bcpay/order/add", _Bcpay_CreateDeposit0_HTTP_Handler(srv))
+	r.POST("/v1/bcpay/deposit/add", _Bcpay_CreateDeposit0_HTTP_Handler(srv))
 	r.POST("/v1/bcpay/withdraw/add", _Bcpay_CreateWithdraw0_HTTP_Handler(srv))
 }
 
@@ -92,7 +92,7 @@ func NewBcpayHTTPClient(client *http.Client) BcpayHTTPClient {
 
 func (c *BcpayHTTPClientImpl) CreateDeposit(ctx context.Context, in *CreateDepositRequest, opts ...http.CallOption) (*CreateDepositResponse, error) {
 	var out CreateDepositResponse
-	pattern := "/v1/bcpay/order/add"
+	pattern := "/v1/bcpay/deposit/add"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBcpayCreateDeposit))
 	opts = append(opts, http.PathTemplate(pattern))
