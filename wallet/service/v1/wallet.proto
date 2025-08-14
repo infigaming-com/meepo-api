@@ -1040,11 +1040,13 @@ message GetDepositRewardConfigRequest {
 }
 
 message GetDepositRewardConfigResponse {
-	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext custom_operator_context = 1;
 	string currency = 2;
-	bool follow_parent = 3;
-	DepositRewardConfig default_deposit_reward_config = 4;
-	DepositRewardConfig custom_deposit_reward_config = 5;
+	api.common.OperatorContext inherited_operator_context = 3;
+	string inherited_from_operator_name = 4;
+	bool follow_parent = 5;
+	DepositRewardConfig default_deposit_reward_config = 6;
+	DepositRewardConfig custom_deposit_reward_config = 7;
 }
 
 // message GetUserDepositRewardSequenceRequest {
