@@ -8846,9 +8846,7 @@ components:
                     format: int32
         api.bcpay.service.v1.AddBankAccountResponse:
             type: object
-            properties:
-                bankAccount:
-                    $ref: '#/components/schemas/api.bcpay.service.v1.DepositBankAccount'
+            properties: {}
         api.bcpay.service.v1.AddNoteToTransactionRequest:
             type: object
             properties:
@@ -8859,14 +8857,10 @@ components:
                     description: note
         api.bcpay.service.v1.AddNoteToTransactionResponse:
             type: object
-            properties:
-                transaction:
-                    $ref: '#/components/schemas/api.bcpay.service.v1.Transaction'
+            properties: {}
         api.bcpay.service.v1.AuditTransactionResponse:
             type: object
-            properties:
-                transaction:
-                    $ref: '#/components/schemas/api.bcpay.service.v1.Transaction'
+            properties: {}
         api.bcpay.service.v1.BankAccountListResponse:
             type: object
             properties:
@@ -9009,7 +9003,7 @@ components:
                 maxTransLimit:
                     type: integer
                     format: int32
-                currentTransTime:
+                currentTransTimes:
                     type: integer
                     format: int32
                 priority:
@@ -9076,12 +9070,15 @@ components:
                     description: audit a transaction "approve" or "decline"
                 auditTime:
                     type: string
+                    format: date-time
                 auditNote:
                     type: string
                 createTime:
                     type: string
+                    format: date-time
                 updateTime:
                     type: string
+                    format: date-time
         api.bcpay.service.v1.TransactionListResponse:
             type: object
             properties:
@@ -9118,9 +9115,7 @@ components:
                     format: int32
         api.bcpay.service.v1.UpdateBankAccountResponse:
             type: object
-            properties:
-                bankAccount:
-                    $ref: '#/components/schemas/api.bcpay.service.v1.DepositBankAccount'
+            properties: {}
         api.common.OperatorContext:
             type: object
             properties:
