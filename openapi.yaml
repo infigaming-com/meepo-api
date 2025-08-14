@@ -10825,9 +10825,13 @@ components:
         api.wallet.service.v1.GetDepositRewardConfigResponse:
             type: object
             properties:
-                operatorContext:
+                customOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 currency:
+                    type: string
+                inheritedOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                inheritedFromOperatorName:
                     type: string
                 followParent:
                     type: boolean
