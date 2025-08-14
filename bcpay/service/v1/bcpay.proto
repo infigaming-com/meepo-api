@@ -2,6 +2,7 @@ syntax = "proto3";
 
 import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
 import "common/common.proto";
 
 package api.bcpay.service.v1;
@@ -133,7 +134,7 @@ message DepositBankAccount {
 	string max_amount = 9;
 	string max_amount_per_trans = 10;
 	int32 max_trans_limit = 11;
-	int32 current_trans_time = 12;
+	int32 current_trans_times = 12;
 	int32 priority = 13;
 	bool enable = 14;
 }
@@ -242,10 +243,10 @@ message Transaction {
  	string status = 16;
 	// audit a transaction "approve" or "decline"
  	string auditor = 17;
-	string audit_time = 18;
+	google.protobuf.Timestamp audit_time = 18;
  	string audit_note = 19;
-	string create_time = 20;
-	string update_time = 21;
+	google.protobuf.Timestamp create_time = 20;
+	google.protobuf.Timestamp update_time = 21;
 }
 
 message TransactionListResponse {

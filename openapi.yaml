@@ -8911,7 +8911,7 @@ components:
                 maxTransLimit:
                     type: integer
                     format: int32
-                currentTransTime:
+                currentTransTimes:
                     type: integer
                     format: int32
                 priority:
@@ -8978,12 +8978,15 @@ components:
                     description: audit a transaction "approve" or "decline"
                 auditTime:
                     type: string
+                    format: date-time
                 auditNote:
                     type: string
                 createTime:
                     type: string
+                    format: date-time
                 updateTime:
                     type: string
+                    format: date-time
         api.bcpay.service.v1.TransactionListResponse:
             type: object
             properties:
