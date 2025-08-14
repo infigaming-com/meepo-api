@@ -1833,35 +1833,6 @@ func (m *AddBankAccountResponse) validate(all bool) error {
 
 	var errors []error
 
-	if all {
-		switch v := interface{}(m.GetBankAccount()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, AddBankAccountResponseValidationError{
-					field:  "BankAccount",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, AddBankAccountResponseValidationError{
-					field:  "BankAccount",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetBankAccount()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return AddBankAccountResponseValidationError{
-				field:  "BankAccount",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	if len(errors) > 0 {
 		return AddBankAccountResponseMultiError(errors)
 	}
@@ -2139,35 +2110,6 @@ func (m *UpdateBankAccountResponse) validate(all bool) error {
 	}
 
 	var errors []error
-
-	if all {
-		switch v := interface{}(m.GetBankAccount()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UpdateBankAccountResponseValidationError{
-					field:  "BankAccount",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, UpdateBankAccountResponseValidationError{
-					field:  "BankAccount",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetBankAccount()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UpdateBankAccountResponseValidationError{
-				field:  "BankAccount",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
 
 	if len(errors) > 0 {
 		return UpdateBankAccountResponseMultiError(errors)
@@ -3006,6 +2948,8 @@ func (m *AuditTransactionRequest) validate(all bool) error {
 
 	// no validation rules for Audit
 
+	// no validation rules for UserId
+
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
@@ -3136,35 +3080,6 @@ func (m *AuditTransactionResponse) validate(all bool) error {
 	}
 
 	var errors []error
-
-	if all {
-		switch v := interface{}(m.GetTransaction()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, AuditTransactionResponseValidationError{
-					field:  "Transaction",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, AuditTransactionResponseValidationError{
-					field:  "Transaction",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetTransaction()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return AuditTransactionResponseValidationError{
-				field:  "Transaction",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
 
 	if len(errors) > 0 {
 		return AuditTransactionResponseMultiError(errors)
@@ -3374,35 +3289,6 @@ func (m *AddNoteToTransactionResponse) validate(all bool) error {
 	}
 
 	var errors []error
-
-	if all {
-		switch v := interface{}(m.GetTransaction()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, AddNoteToTransactionResponseValidationError{
-					field:  "Transaction",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, AddNoteToTransactionResponseValidationError{
-					field:  "Transaction",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetTransaction()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return AddNoteToTransactionResponseValidationError{
-				field:  "Transaction",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
 
 	if len(errors) > 0 {
 		return AddNoteToTransactionResponseMultiError(errors)

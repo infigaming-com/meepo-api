@@ -50,7 +50,7 @@ service Bcpay {
 
 message CreateDepositRequest {
 	string merchant_id  = 1;
-	string user_id  = 2;
+	int64 user_id  = 2;
 	string user_name  = 3;
 	string currency = 4;
 	string country = 5;
@@ -78,7 +78,7 @@ message CreateWithdrawRequest {
 	string currency = 4;
 	string country = 5;
 	string notifyUrl = 6;
-	string user_id  = 7;
+	int64 user_id  = 7;
 	string user_name  = 8;
 	string bank_account = 9;
 	string bank_account_firstname = 10;
@@ -180,7 +180,6 @@ message AddBankAccountRequest {
 }
 
 message AddBankAccountResponse {
-	DepositBankAccount bank_account = 1;
 }
 
 message UpdateBankAccountRequest {
@@ -197,7 +196,6 @@ message UpdateBankAccountRequest {
 }
 
 message UpdateBankAccountResponse {
-	DepositBankAccount bank_account = 1;
 }
 
 message DeleteBankAccountRequest {
@@ -217,7 +215,7 @@ message TransactionListRequest {
 	int64 transaction_id = 5;
 	string deposit_bank_account_firstname = 6;
 	string deposit_bank_account_lastname = 7;
-	string user_id = 8;
+	int64 user_id = 8;
 	string user_name = 9;
 	string user_bank_account_firstname = 10;
 	string user_bank_account_lastname = 11;
@@ -227,7 +225,7 @@ message TransactionListRequest {
 message Transaction {
 	int64 id = 1;
 	string merchant_id = 2;
-	string user_id = 3;
+	int64 user_id = 3;
 	string user_name = 4;
 	string deposit_bank_account = 5;
 	string deposit_bank_account_first_name = 6;
@@ -269,11 +267,11 @@ message TransactionListResponse {
 message AuditTransactionRequest {
 	int64 transaction_id = 1;
 	string audit = 2;
-  api.common.OperatorContext operator_context = 3;
+	int64 user_id = 3;
+  api.common.OperatorContext operator_context = 4;
 }
 
 message AuditTransactionResponse {
-	Transaction transaction = 1;
 }
 
 message AddNoteToTransactionRequest {
@@ -283,5 +281,4 @@ message AddNoteToTransactionRequest {
 }
 
 message AddNoteToTransactionResponse {
-	Transaction transaction = 1;
 }

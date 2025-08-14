@@ -8748,9 +8748,7 @@ components:
                     format: int32
         api.bcpay.service.v1.AddBankAccountResponse:
             type: object
-            properties:
-                bankAccount:
-                    $ref: '#/components/schemas/api.bcpay.service.v1.DepositBankAccount'
+            properties: {}
         api.bcpay.service.v1.AddNoteToTransactionRequest:
             type: object
             properties:
@@ -8761,14 +8759,10 @@ components:
                     description: note
         api.bcpay.service.v1.AddNoteToTransactionResponse:
             type: object
-            properties:
-                transaction:
-                    $ref: '#/components/schemas/api.bcpay.service.v1.Transaction'
+            properties: {}
         api.bcpay.service.v1.AuditTransactionResponse:
             type: object
-            properties:
-                transaction:
-                    $ref: '#/components/schemas/api.bcpay.service.v1.Transaction'
+            properties: {}
         api.bcpay.service.v1.BankAccountListResponse:
             type: object
             properties:
@@ -9023,9 +9017,7 @@ components:
                     format: int32
         api.bcpay.service.v1.UpdateBankAccountResponse:
             type: object
-            properties:
-                bankAccount:
-                    $ref: '#/components/schemas/api.bcpay.service.v1.DepositBankAccount'
+            properties: {}
         api.common.OperatorContext:
             type: object
             properties:
