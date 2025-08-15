@@ -127,13 +127,13 @@ service Wallet {
 	// GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
 	rpc GetDepositRewardConfig(GetDepositRewardConfigRequest) returns (GetDepositRewardConfigResponse) {}
 
-	// // GetUserDepositRewardSequence returns the current available deposit reward sequence of the user based on the user deposit stats
-	// rpc GetUserDepositRewardSequence(GetUserDepositRewardSequenceRequest) returns (GetUserDepositRewardSequenceResponse) {
-	// 	option (google.api.http) = {
-	// 		post: "/v1/wallet/deposit-reward/user-sequence"
-	// 		body: "*"
-	// 	};
-	// }
+	// GetUserDepositRewardSequence returns the current available deposit reward sequence of the user based on the user deposit stats
+	rpc GetUserDepositRewardSequence(GetUserDepositRewardSequenceRequest) returns (GetUserDepositRewardSequenceResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/deposit-reward/user-sequence"
+			body: "*"
+		};
+	}
 }
 
 message GetUserBalancesRequest {
@@ -1004,10 +1004,12 @@ message RewardSequence {
 
 // Deposit reward config for an operator with specific currency
 message DepositRewardConfig {
-	repeated RewardSequence welcome_reward_sequences = 4;
-	repeated RewardSequence daily_reward_sequences = 5;
-	google.protobuf.Timestamp created_at = 6;
-	google.protobuf.Timestamp updated_at = 7;
+	bool welcome_reward_enabled = 1;
+	bool daily_reward_enabled = 2;
+	repeated RewardSequence welcome_reward_sequences = 3;
+	repeated RewardSequence daily_reward_sequences = 4;
+	google.protobuf.Timestamp created_at = 5;
+	google.protobuf.Timestamp updated_at = 6;
 }
 
 message SetDepositRewardSequencesRequest {
@@ -1015,9 +1017,11 @@ message SetDepositRewardSequencesRequest {
 	api.common.OperatorContext target_operator_context = 2;
 	int64 user_id = 3;
 	string currency = 4;
-	bool follow_parent = 5;
-	repeated RewardSequence welcome_reward_sequences = 6;
-	repeated RewardSequence daily_reward_sequences = 7;
+	optional bool follow_parent = 5;
+	optional bool welcome_reward_enabled = 6;
+	optional bool daily_reward_enabled = 7;
+	repeated RewardSequence welcome_reward_sequences = 8;
+	repeated RewardSequence daily_reward_sequences = 9;
 }
 
 message SetDepositRewardSequencesResponse {}
@@ -1045,15 +1049,20 @@ message GetDepositRewardConfigResponse {
 	api.common.OperatorContext inherited_operator_context = 3;
 	string inherited_from_operator_name = 4;
 	bool follow_parent = 5;
-	DepositRewardConfig default_deposit_reward_config = 6;
-	DepositRewardConfig custom_deposit_reward_config = 7;
+	int32 welcome_reward_sequences_min_count = 6;
+	int32 daily_reward_sequences_min_count = 7;
+	DepositRewardConfig default_deposit_reward_config = 8;
+	DepositRewardConfig custom_deposit_reward_config = 9;
 }
 
-// message GetUserDepositRewardSequenceRequest {
-// 	string currency = 1;
-// }
+message GetUserDepositRewardSequenceRequest {
+	string currency = 1;
+}
 
-// message GetUserDepositRewardSequenceResponse {
-// 	RewardSequence reward_sequence = 1;
-// }
+message GetUserDepositRewardSequenceResponse {
+	string current_sequence_type = 1;
+	int32 welcome_reward_count = 2;
+	int32 daily_reward_count = 3;
+	RewardSequence current_reward_sequence = 4;
+}
 

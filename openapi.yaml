@@ -3599,6 +3599,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.GetCurrenciesResponse'
+    /v1/wallet/deposit-reward/user-sequence:
+        post:
+            tags:
+                - Wallet
+            description: GetUserDepositRewardSequence returns the current available deposit reward sequence of the user based on the user deposit stats
+            operationId: Wallet_GetUserDepositRewardSequence
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.GetUserDepositRewardSequenceRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetUserDepositRewardSequenceResponse'
 components:
     schemas:
         api.backoffice.service.v1.AccountInfoRequest:
@@ -8487,6 +8506,10 @@ components:
                     type: string
                 followParent:
                     type: boolean
+                welcomeRewardEnabled:
+                    type: boolean
+                dailyRewardEnabled:
+                    type: boolean
                 welcomeRewardSequences:
                     type: array
                     items:
@@ -10793,6 +10816,10 @@ components:
         api.wallet.service.v1.DepositRewardConfig:
             type: object
             properties:
+                welcomeRewardEnabled:
+                    type: boolean
+                dailyRewardEnabled:
+                    type: boolean
                 welcomeRewardSequences:
                     type: array
                     items:
@@ -10835,6 +10862,12 @@ components:
                     type: string
                 followParent:
                     type: boolean
+                welcomeRewardSequencesMinCount:
+                    type: integer
+                    format: int32
+                dailyRewardSequencesMinCount:
+                    type: integer
+                    format: int32
                 defaultDepositRewardConfig:
                     $ref: '#/components/schemas/api.wallet.service.v1.DepositRewardConfig'
                 customDepositRewardConfig:
@@ -10878,6 +10911,24 @@ components:
                     type: string
                 providerBonus:
                     type: string
+        api.wallet.service.v1.GetUserDepositRewardSequenceRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+        api.wallet.service.v1.GetUserDepositRewardSequenceResponse:
+            type: object
+            properties:
+                currentSequenceType:
+                    type: string
+                welcomeRewardCount:
+                    type: integer
+                    format: int32
+                dailyRewardCount:
+                    type: integer
+                    format: int32
+                currentRewardSequence:
+                    $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
         api.wallet.service.v1.GetWalletsResponse:
             type: object
             properties:

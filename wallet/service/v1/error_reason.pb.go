@@ -109,6 +109,8 @@ const (
 	ErrorReason_DELETE_DEPOSIT_REWARD_SEQUENCE_FAILED                           ErrorReason = 30081
 	ErrorReason_INVALID_OPERATOR_MODE                                           ErrorReason = 30082
 	ErrorReason_INVALID_DEPOSIT_REWARD_CONFIG                                   ErrorReason = 30083
+	ErrorReason_INVALID_OPERATOR_CONTEXT                                        ErrorReason = 30084
+	ErrorReason_GET_OPERATOR_MIN_SEQUENCES_FAILED                               ErrorReason = 30085
 )
 
 // Enum value maps for ErrorReason.
@@ -198,6 +200,8 @@ var (
 		30081: "DELETE_DEPOSIT_REWARD_SEQUENCE_FAILED",
 		30082: "INVALID_OPERATOR_MODE",
 		30083: "INVALID_DEPOSIT_REWARD_CONFIG",
+		30084: "INVALID_OPERATOR_CONTEXT",
+		30085: "GET_OPERATOR_MIN_SEQUENCES_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                                     0,
@@ -284,6 +288,8 @@ var (
 		"DELETE_DEPOSIT_REWARD_SEQUENCE_FAILED":                           30081,
 		"INVALID_OPERATOR_MODE":                                           30082,
 		"INVALID_DEPOSIT_REWARD_CONFIG":                                   30083,
+		"INVALID_OPERATOR_CONTEXT":                                        30084,
+		"GET_OPERATOR_MIN_SEQUENCES_FAILED":                               30085,
 	}
 )
 
@@ -318,7 +324,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xa7\x19\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xf0\x19\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -403,7 +409,9 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1dADD_USER_DEPOSIT_STATS_FAILED\x10\x80\xeb\x01\x12+\n" +
 	"%DELETE_DEPOSIT_REWARD_SEQUENCE_FAILED\x10\x81\xeb\x01\x12\x1b\n" +
 	"\x15INVALID_OPERATOR_MODE\x10\x82\xeb\x01\x12#\n" +
-	"\x1dINVALID_DEPOSIT_REWARD_CONFIG\x10\x83\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\x1dINVALID_DEPOSIT_REWARD_CONFIG\x10\x83\xeb\x01\x12\x1e\n" +
+	"\x18INVALID_OPERATOR_CONTEXT\x10\x84\xeb\x01\x12'\n" +
+	"!GET_OPERATOR_MIN_SEQUENCES_FAILED\x10\x85\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (

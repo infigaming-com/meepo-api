@@ -1018,3 +1018,27 @@ func IsInvalidDepositRewardConfig(err error) bool {
 func ErrorInvalidDepositRewardConfig(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_INVALID_DEPOSIT_REWARD_CONFIG.String(), fmt.Sprintf(format, args...))
 }
+
+func IsInvalidOperatorContext(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_OPERATOR_CONTEXT.String() && e.Code == 500
+}
+
+func ErrorInvalidOperatorContext(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_OPERATOR_CONTEXT.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetOperatorMinSequencesFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATOR_MIN_SEQUENCES_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorMinSequencesFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_MIN_SEQUENCES_FAILED.String(), fmt.Sprintf(format, args...))
+}

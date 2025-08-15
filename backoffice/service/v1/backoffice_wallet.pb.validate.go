@@ -4603,8 +4603,6 @@ func (m *SetDepositRewardSequencesRequest) validate(all bool) error {
 
 	// no validation rules for Currency
 
-	// no validation rules for FollowParent
-
 	for idx, item := range m.GetWelcomeRewardSequences() {
 		_, _ = idx, item
 
@@ -4671,6 +4669,18 @@ func (m *SetDepositRewardSequencesRequest) validate(all bool) error {
 			}
 		}
 
+	}
+
+	if m.FollowParent != nil {
+		// no validation rules for FollowParent
+	}
+
+	if m.WelcomeRewardEnabled != nil {
+		// no validation rules for WelcomeRewardEnabled
+	}
+
+	if m.DailyRewardEnabled != nil {
+		// no validation rules for DailyRewardEnabled
 	}
 
 	if len(errors) > 0 {
