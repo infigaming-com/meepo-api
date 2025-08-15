@@ -411,7 +411,7 @@ type TransactionListRequest struct {
 	TransactionId               int64  `protobuf:"varint,5,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	DepositBankAccountFirstname string `protobuf:"bytes,6,opt,name=deposit_bank_account_firstname,json=depositBankAccountFirstname,proto3" json:"deposit_bank_account_firstname,omitempty"`
 	DepositBankAccountLastname  string `protobuf:"bytes,7,opt,name=deposit_bank_account_lastname,json=depositBankAccountLastname,proto3" json:"deposit_bank_account_lastname,omitempty"`
-	UserId                      string `protobuf:"bytes,8,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId                      int64  `protobuf:"varint,8,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	UserName                    string `protobuf:"bytes,9,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 	UserBankAccountFirstname    string `protobuf:"bytes,10,opt,name=user_bank_account_firstname,json=userBankAccountFirstname,proto3" json:"user_bank_account_firstname,omitempty"`
 	UserBankAccountLastname     string `protobuf:"bytes,11,opt,name=user_bank_account_lastname,json=userBankAccountLastname,proto3" json:"user_bank_account_lastname,omitempty"`
@@ -498,11 +498,11 @@ func (x *TransactionListRequest) GetDepositBankAccountLastname() string {
 	return ""
 }
 
-func (x *TransactionListRequest) GetUserId() string {
+func (x *TransactionListRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
-	return ""
+	return 0
 }
 
 func (x *TransactionListRequest) GetUserName() string {
@@ -528,7 +528,7 @@ func (x *TransactionListRequest) GetUserBankAccountLastname() string {
 
 type AuditTransactionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TransactionId string                 `protobuf:"bytes,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	TransactionId int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	// audit a transaction "approved" or "delined"
 	Audit         string `protobuf:"bytes,2,opt,name=audit,proto3" json:"audit,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -565,11 +565,11 @@ func (*AuditTransactionRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_bcpay_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *AuditTransactionRequest) GetTransactionId() string {
+func (x *AuditTransactionRequest) GetTransactionId() int64 {
 	if x != nil {
 		return x.TransactionId
 	}
-	return ""
+	return 0
 }
 
 func (x *AuditTransactionRequest) GetAudit() string {
@@ -623,13 +623,13 @@ const file_backoffice_service_v1_backoffice_bcpay_proto_rawDesc = "" +
 	"\x0etransaction_id\x18\x05 \x01(\x03R\rtransactionId\x12C\n" +
 	"\x1edeposit_bank_account_firstname\x18\x06 \x01(\tR\x1bdepositBankAccountFirstname\x12A\n" +
 	"\x1ddeposit_bank_account_lastname\x18\a \x01(\tR\x1adepositBankAccountLastname\x12\x17\n" +
-	"\auser_id\x18\b \x01(\tR\x06userId\x12\x1b\n" +
+	"\auser_id\x18\b \x01(\x03R\x06userId\x12\x1b\n" +
 	"\tuser_name\x18\t \x01(\tR\buserName\x12=\n" +
 	"\x1buser_bank_account_firstname\x18\n" +
 	" \x01(\tR\x18userBankAccountFirstname\x12;\n" +
 	"\x1auser_bank_account_lastname\x18\v \x01(\tR\x17userBankAccountLastname\"V\n" +
 	"\x17AuditTransactionRequest\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12\x14\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x14\n" +
 	"\x05audit\x18\x02 \x01(\tR\x05audit2\x9b\r\n" +
 	"\x0fBackofficeBcpay\x12\x95\x01\n" +
 	"\vGetMerchant\x12-.api.backoffice.service.v1.GetMerchantRequest\x1a).api.bcpay.service.v1.GetMerchantResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/bcpay/merchant/get\x12\x9e\x01\n" +
