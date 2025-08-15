@@ -1949,20 +1949,6 @@ func (m *UpdateBankAccountRequest) validate(all bool) error {
 
 	// no validation rules for Id
 
-	// no validation rules for Currency
-
-	// no validation rules for Country
-
-	// no validation rules for MaxAmount
-
-	// no validation rules for MaxAmountPerTrans
-
-	// no validation rules for MaxTransLimit
-
-	// no validation rules for Priority
-
-	// no validation rules for Enabled
-
 	if all {
 		switch v := interface{}(m.GetBankInfo()).(type) {
 		case interface{ ValidateAll() error }:
@@ -2019,6 +2005,34 @@ func (m *UpdateBankAccountRequest) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	if m.Currency != nil {
+		// no validation rules for Currency
+	}
+
+	if m.Country != nil {
+		// no validation rules for Country
+	}
+
+	if m.MaxAmount != nil {
+		// no validation rules for MaxAmount
+	}
+
+	if m.MaxAmountPerTrans != nil {
+		// no validation rules for MaxAmountPerTrans
+	}
+
+	if m.MaxTransLimit != nil {
+		// no validation rules for MaxTransLimit
+	}
+
+	if m.Priority != nil {
+		// no validation rules for Priority
+	}
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
 	}
 
 	if len(errors) > 0 {

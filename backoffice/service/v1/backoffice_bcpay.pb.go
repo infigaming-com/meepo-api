@@ -301,13 +301,14 @@ func (x *AddBankAccountRequest) GetBankInfo() *structpb.Struct {
 type UpdateBankAccountRequest struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
 	Id                int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Currency          string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	Country           string                 `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
-	MaxAmount         string                 `protobuf:"bytes,4,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
-	MaxAmountPerTrans string                 `protobuf:"bytes,5,opt,name=max_amount_per_trans,json=maxAmountPerTrans,proto3" json:"max_amount_per_trans,omitempty"`
-	MaxTransLimit     int32                  `protobuf:"varint,6,opt,name=max_trans_limit,json=maxTransLimit,proto3" json:"max_trans_limit,omitempty"`
-	Priority          int32                  `protobuf:"varint,7,opt,name=priority,proto3" json:"priority,omitempty"`
-	BankInfo          *structpb.Struct       `protobuf:"bytes,8,opt,name=bank_info,json=bankInfo,proto3" json:"bank_info,omitempty"`
+	Currency          *string                `protobuf:"bytes,2,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
+	Country           *string                `protobuf:"bytes,3,opt,name=country,proto3,oneof" json:"country,omitempty"`
+	MaxAmount         *string                `protobuf:"bytes,4,opt,name=max_amount,json=maxAmount,proto3,oneof" json:"max_amount,omitempty"`
+	MaxAmountPerTrans *string                `protobuf:"bytes,5,opt,name=max_amount_per_trans,json=maxAmountPerTrans,proto3,oneof" json:"max_amount_per_trans,omitempty"`
+	MaxTransLimit     *int32                 `protobuf:"varint,6,opt,name=max_trans_limit,json=maxTransLimit,proto3,oneof" json:"max_trans_limit,omitempty"`
+	Priority          *int32                 `protobuf:"varint,7,opt,name=priority,proto3,oneof" json:"priority,omitempty"`
+	Enabled           *bool                  `protobuf:"varint,8,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	BankInfo          *structpb.Struct       `protobuf:"bytes,9,opt,name=bank_info,json=bankInfo,proto3" json:"bank_info,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -350,45 +351,52 @@ func (x *UpdateBankAccountRequest) GetId() int64 {
 }
 
 func (x *UpdateBankAccountRequest) GetCurrency() string {
-	if x != nil {
-		return x.Currency
+	if x != nil && x.Currency != nil {
+		return *x.Currency
 	}
 	return ""
 }
 
 func (x *UpdateBankAccountRequest) GetCountry() string {
-	if x != nil {
-		return x.Country
+	if x != nil && x.Country != nil {
+		return *x.Country
 	}
 	return ""
 }
 
 func (x *UpdateBankAccountRequest) GetMaxAmount() string {
-	if x != nil {
-		return x.MaxAmount
+	if x != nil && x.MaxAmount != nil {
+		return *x.MaxAmount
 	}
 	return ""
 }
 
 func (x *UpdateBankAccountRequest) GetMaxAmountPerTrans() string {
-	if x != nil {
-		return x.MaxAmountPerTrans
+	if x != nil && x.MaxAmountPerTrans != nil {
+		return *x.MaxAmountPerTrans
 	}
 	return ""
 }
 
 func (x *UpdateBankAccountRequest) GetMaxTransLimit() int32 {
-	if x != nil {
-		return x.MaxTransLimit
+	if x != nil && x.MaxTransLimit != nil {
+		return *x.MaxTransLimit
 	}
 	return 0
 }
 
 func (x *UpdateBankAccountRequest) GetPriority() int32 {
-	if x != nil {
-		return x.Priority
+	if x != nil && x.Priority != nil {
+		return *x.Priority
 	}
 	return 0
+}
+
+func (x *UpdateBankAccountRequest) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
 }
 
 func (x *UpdateBankAccountRequest) GetBankInfo() *structpb.Struct {
@@ -612,17 +620,27 @@ const file_backoffice_service_v1_backoffice_bcpay_proto_rawDesc = "" +
 	"\x14max_amount_per_trans\x18\x04 \x01(\tR\x11maxAmountPerTrans\x12&\n" +
 	"\x0fmax_trans_limit\x18\x05 \x01(\x05R\rmaxTransLimit\x12\x1a\n" +
 	"\bpriority\x18\x06 \x01(\x05R\bpriority\x124\n" +
-	"\tbank_info\x18\a \x01(\v2\x17.google.protobuf.StructR\bbankInfo\"\xaa\x02\n" +
+	"\tbank_info\x18\a \x01(\v2\x17.google.protobuf.StructR\bbankInfo\"\xd5\x03\n" +
 	"\x18UpdateBankAccountRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x18\n" +
-	"\acountry\x18\x03 \x01(\tR\acountry\x12\x1d\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1f\n" +
+	"\bcurrency\x18\x02 \x01(\tH\x00R\bcurrency\x88\x01\x01\x12\x1d\n" +
+	"\acountry\x18\x03 \x01(\tH\x01R\acountry\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"max_amount\x18\x04 \x01(\tR\tmaxAmount\x12/\n" +
-	"\x14max_amount_per_trans\x18\x05 \x01(\tR\x11maxAmountPerTrans\x12&\n" +
-	"\x0fmax_trans_limit\x18\x06 \x01(\x05R\rmaxTransLimit\x12\x1a\n" +
-	"\bpriority\x18\a \x01(\x05R\bpriority\x124\n" +
-	"\tbank_info\x18\b \x01(\v2\x17.google.protobuf.StructR\bbankInfo\"\xc8\x05\n" +
+	"max_amount\x18\x04 \x01(\tH\x02R\tmaxAmount\x88\x01\x01\x124\n" +
+	"\x14max_amount_per_trans\x18\x05 \x01(\tH\x03R\x11maxAmountPerTrans\x88\x01\x01\x12+\n" +
+	"\x0fmax_trans_limit\x18\x06 \x01(\x05H\x04R\rmaxTransLimit\x88\x01\x01\x12\x1f\n" +
+	"\bpriority\x18\a \x01(\x05H\x05R\bpriority\x88\x01\x01\x12\x1d\n" +
+	"\aenabled\x18\b \x01(\bH\x06R\aenabled\x88\x01\x01\x124\n" +
+	"\tbank_info\x18\t \x01(\v2\x17.google.protobuf.StructR\bbankInfoB\v\n" +
+	"\t_currencyB\n" +
+	"\n" +
+	"\b_countryB\r\n" +
+	"\v_max_amountB\x17\n" +
+	"\x15_max_amount_per_transB\x12\n" +
+	"\x10_max_trans_limitB\v\n" +
+	"\t_priorityB\n" +
+	"\n" +
+	"\b_enabled\"\xc8\x05\n" +
 	"\x16TransactionListRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x17\n" +
@@ -735,6 +753,7 @@ func file_backoffice_service_v1_backoffice_bcpay_proto_init() {
 		return
 	}
 	file_backoffice_service_v1_backoffice_bcpay_proto_msgTypes[2].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_bcpay_proto_msgTypes[4].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_bcpay_proto_msgTypes[5].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
