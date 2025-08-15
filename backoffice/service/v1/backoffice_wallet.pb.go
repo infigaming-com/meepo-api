@@ -2408,9 +2408,11 @@ type SetDepositRewardSequencesRequest struct {
 	state                  protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext  *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	Currency               string                  `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	FollowParent           bool                    `protobuf:"varint,3,opt,name=follow_parent,json=followParent,proto3" json:"follow_parent,omitempty"`
-	WelcomeRewardSequences []*v1.RewardSequence    `protobuf:"bytes,4,rep,name=welcome_reward_sequences,json=welcomeRewardSequences,proto3" json:"welcome_reward_sequences,omitempty"`
-	DailyRewardSequences   []*v1.RewardSequence    `protobuf:"bytes,5,rep,name=daily_reward_sequences,json=dailyRewardSequences,proto3" json:"daily_reward_sequences,omitempty"`
+	FollowParent           *bool                   `protobuf:"varint,3,opt,name=follow_parent,json=followParent,proto3,oneof" json:"follow_parent,omitempty"`
+	WelcomeRewardEnabled   *bool                   `protobuf:"varint,4,opt,name=welcome_reward_enabled,json=welcomeRewardEnabled,proto3,oneof" json:"welcome_reward_enabled,omitempty"`
+	DailyRewardEnabled     *bool                   `protobuf:"varint,5,opt,name=daily_reward_enabled,json=dailyRewardEnabled,proto3,oneof" json:"daily_reward_enabled,omitempty"`
+	WelcomeRewardSequences []*v1.RewardSequence    `protobuf:"bytes,6,rep,name=welcome_reward_sequences,json=welcomeRewardSequences,proto3" json:"welcome_reward_sequences,omitempty"`
+	DailyRewardSequences   []*v1.RewardSequence    `protobuf:"bytes,7,rep,name=daily_reward_sequences,json=dailyRewardSequences,proto3" json:"daily_reward_sequences,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -2460,8 +2462,22 @@ func (x *SetDepositRewardSequencesRequest) GetCurrency() string {
 }
 
 func (x *SetDepositRewardSequencesRequest) GetFollowParent() bool {
-	if x != nil {
-		return x.FollowParent
+	if x != nil && x.FollowParent != nil {
+		return *x.FollowParent
+	}
+	return false
+}
+
+func (x *SetDepositRewardSequencesRequest) GetWelcomeRewardEnabled() bool {
+	if x != nil && x.WelcomeRewardEnabled != nil {
+		return *x.WelcomeRewardEnabled
+	}
+	return false
+}
+
+func (x *SetDepositRewardSequencesRequest) GetDailyRewardEnabled() bool {
+	if x != nil && x.DailyRewardEnabled != nil {
+		return *x.DailyRewardEnabled
 	}
 	return false
 }
@@ -3136,13 +3152,18 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x18\n" +
 	"\aenabled\x18\x03 \x01(\bR\aenabled\"9\n" +
 	"\x1dUpdateOperatorBalanceResponse\x12\x18\n" +
-	"\aenabled\x18\x01 \x01(\bR\aenabled\"\xf6\x02\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabled\"\xb3\x04\n" +
 	" SetDepositRewardSequencesRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12#\n" +
-	"\rfollow_parent\x18\x03 \x01(\bR\ffollowParent\x12_\n" +
-	"\x18welcome_reward_sequences\x18\x04 \x03(\v2%.api.wallet.service.v1.RewardSequenceR\x16welcomeRewardSequences\x12[\n" +
-	"\x16daily_reward_sequences\x18\x05 \x03(\v2%.api.wallet.service.v1.RewardSequenceR\x14dailyRewardSequences\"\xba\x02\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12(\n" +
+	"\rfollow_parent\x18\x03 \x01(\bH\x00R\ffollowParent\x88\x01\x01\x129\n" +
+	"\x16welcome_reward_enabled\x18\x04 \x01(\bH\x01R\x14welcomeRewardEnabled\x88\x01\x01\x125\n" +
+	"\x14daily_reward_enabled\x18\x05 \x01(\bH\x02R\x12dailyRewardEnabled\x88\x01\x01\x12_\n" +
+	"\x18welcome_reward_sequences\x18\x06 \x03(\v2%.api.wallet.service.v1.RewardSequenceR\x16welcomeRewardSequences\x12[\n" +
+	"\x16daily_reward_sequences\x18\a \x03(\v2%.api.wallet.service.v1.RewardSequenceR\x14dailyRewardSequencesB\x10\n" +
+	"\x0e_follow_parentB\x19\n" +
+	"\x17_welcome_reward_enabledB\x17\n" +
+	"\x15_daily_reward_enabled\"\xba\x02\n" +
 	"#DeleteDepositRewardSequencesRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12R\n" +
@@ -3338,6 +3359,7 @@ func file_backoffice_service_v1_backoffice_wallet_proto_init() {
 	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[14].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[16].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[29].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[34].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

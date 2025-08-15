@@ -462,9 +462,11 @@ message UpdateOperatorBalanceResponse {
 message SetDepositRewardSequencesRequest {
 	api.common.OperatorContext target_operator_context = 1;
 	string currency = 2;
-	bool follow_parent = 3;
-	repeated wallet.service.v1.RewardSequence welcome_reward_sequences = 4;
-	repeated wallet.service.v1.RewardSequence daily_reward_sequences = 5;
+	optional bool follow_parent = 3;
+	optional bool welcome_reward_enabled = 4;
+	optional bool daily_reward_enabled = 5;
+	repeated wallet.service.v1.RewardSequence welcome_reward_sequences = 6;
+	repeated wallet.service.v1.RewardSequence daily_reward_sequences = 7;
 }
 
 message DeleteDepositRewardSequencesRequest {

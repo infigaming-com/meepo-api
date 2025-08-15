@@ -11171,6 +11171,10 @@ func (m *DepositRewardConfig) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for WelcomeRewardEnabled
+
+	// no validation rules for DailyRewardEnabled
+
 	for idx, item := range m.GetWelcomeRewardSequences() {
 		_, _ = idx, item
 
@@ -11462,8 +11466,6 @@ func (m *SetDepositRewardSequencesRequest) validate(all bool) error {
 
 	// no validation rules for Currency
 
-	// no validation rules for FollowParent
-
 	for idx, item := range m.GetWelcomeRewardSequences() {
 		_, _ = idx, item
 
@@ -11530,6 +11532,18 @@ func (m *SetDepositRewardSequencesRequest) validate(all bool) error {
 			}
 		}
 
+	}
+
+	if m.FollowParent != nil {
+		// no validation rules for FollowParent
+	}
+
+	if m.WelcomeRewardEnabled != nil {
+		// no validation rules for WelcomeRewardEnabled
+	}
+
+	if m.DailyRewardEnabled != nil {
+		// no validation rules for DailyRewardEnabled
 	}
 
 	if len(errors) > 0 {
@@ -12240,6 +12254,10 @@ func (m *GetDepositRewardConfigResponse) validate(all bool) error {
 
 	// no validation rules for FollowParent
 
+	// no validation rules for WelcomeRewardSequencesMinCount
+
+	// no validation rules for DailyRewardSequencesMinCount
+
 	if all {
 		switch v := interface{}(m.GetDefaultDepositRewardConfig()).(type) {
 		case interface{ ValidateAll() error }:
@@ -12378,6 +12396,253 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetDepositRewardConfigResponseValidationError{}
+
+// Validate checks the field values on GetUserDepositRewardSequenceRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetUserDepositRewardSequenceRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserDepositRewardSequenceRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetUserDepositRewardSequenceRequestMultiError, or nil if none found.
+func (m *GetUserDepositRewardSequenceRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserDepositRewardSequenceRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Currency
+
+	if len(errors) > 0 {
+		return GetUserDepositRewardSequenceRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserDepositRewardSequenceRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// GetUserDepositRewardSequenceRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetUserDepositRewardSequenceRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserDepositRewardSequenceRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserDepositRewardSequenceRequestMultiError) AllErrors() []error { return m }
+
+// GetUserDepositRewardSequenceRequestValidationError is the validation error
+// returned by GetUserDepositRewardSequenceRequest.Validate if the designated
+// constraints aren't met.
+type GetUserDepositRewardSequenceRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserDepositRewardSequenceRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserDepositRewardSequenceRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserDepositRewardSequenceRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserDepositRewardSequenceRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserDepositRewardSequenceRequestValidationError) ErrorName() string {
+	return "GetUserDepositRewardSequenceRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserDepositRewardSequenceRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserDepositRewardSequenceRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserDepositRewardSequenceRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserDepositRewardSequenceRequestValidationError{}
+
+// Validate checks the field values on GetUserDepositRewardSequenceResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetUserDepositRewardSequenceResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserDepositRewardSequenceResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetUserDepositRewardSequenceResponseMultiError, or nil if none found.
+func (m *GetUserDepositRewardSequenceResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserDepositRewardSequenceResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for CurrentSequenceType
+
+	// no validation rules for WelcomeRewardCount
+
+	// no validation rules for DailyRewardCount
+
+	if all {
+		switch v := interface{}(m.GetCurrentRewardSequence()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetUserDepositRewardSequenceResponseValidationError{
+					field:  "CurrentRewardSequence",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetUserDepositRewardSequenceResponseValidationError{
+					field:  "CurrentRewardSequence",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCurrentRewardSequence()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetUserDepositRewardSequenceResponseValidationError{
+				field:  "CurrentRewardSequence",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetUserDepositRewardSequenceResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserDepositRewardSequenceResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// GetUserDepositRewardSequenceResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetUserDepositRewardSequenceResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserDepositRewardSequenceResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserDepositRewardSequenceResponseMultiError) AllErrors() []error { return m }
+
+// GetUserDepositRewardSequenceResponseValidationError is the validation error
+// returned by GetUserDepositRewardSequenceResponse.Validate if the designated
+// constraints aren't met.
+type GetUserDepositRewardSequenceResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserDepositRewardSequenceResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserDepositRewardSequenceResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserDepositRewardSequenceResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserDepositRewardSequenceResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserDepositRewardSequenceResponseValidationError) ErrorName() string {
+	return "GetUserDepositRewardSequenceResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserDepositRewardSequenceResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserDepositRewardSequenceResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserDepositRewardSequenceResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserDepositRewardSequenceResponseValidationError{}
 
 // Validate checks the field values on GetUserBalancesResponse_Balance with the
 // rules defined in the proto definition for this message. If any rules are
