@@ -8674,6 +8674,8 @@ components:
                 priority:
                     type: integer
                     format: int32
+                enabled:
+                    type: boolean
                 bankInfo:
                     type: object
         api.backoffice.service.v1.UpdateGameRequest:

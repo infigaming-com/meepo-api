@@ -144,12 +144,12 @@ message BankAccountListRequest {
   int32 page = 1;
   // Number of items per page
   int32 page_size = 2;
-	string currency = 3;
-	string bank_account = 4;
-	string bank_account_firstname = 5;
-	string bank_account_lastname = 6;
-	string card_id = 7;
-	bool enabled = 8;
+	optional string currency = 3;
+	optional string bank_account = 4;
+	optional string bank_account_firstname = 5;
+	optional string bank_account_lastname = 6;
+	optional string card_id = 7;
+	optional bool enabled = 8;
   api.common.OperatorContext operator_context = 9;
 }
 
@@ -184,13 +184,13 @@ message AddBankAccountResponse {
 
 message UpdateBankAccountRequest {
 	int64 id = 1;
-	string currency = 2;
-	string country = 3;
-	string max_amount = 4;
-	string max_amount_per_trans = 5;
-	int32 max_trans_limit = 6;
-	int32 priority = 7;
-	bool enabled = 8;
+	optional string currency = 2;
+	optional string country = 3;
+	optional string max_amount = 4;
+	optional string max_amount_per_trans = 5;
+	optional int32 max_trans_limit = 6;
+	optional int32 priority = 7;
+	optional bool enabled = 8;
   google.protobuf.Struct bank_info = 9;
   api.common.OperatorContext operator_context = 10;
 }
@@ -210,15 +210,15 @@ message TransactionListRequest {
   int32 page = 1;
   // Number of items per page
   int32 page_size = 2;
-	string type = 3;
-	string status = 4;
-	int64 transaction_id = 5;
-	string deposit_bank_account_firstname = 6;
-	string deposit_bank_account_lastname = 7;
-	int64 user_id = 8;
-	string user_name = 9;
-	string user_bank_account_firstname = 10;
-	string user_bank_account_lastname = 11;
+	optional string type = 3;
+	optional string status = 4;
+	optional int64 transaction_id = 5;
+	optional string deposit_bank_account_firstname = 6;
+	optional string deposit_bank_account_lastname = 7;
+	optional int64 user_id = 8;
+	optional string user_name = 9;
+	optional string user_bank_account_firstname = 10;
+	optional string user_bank_account_lastname = 11;
   api.common.OperatorContext operator_context = 12;
 }
 

@@ -1370,18 +1370,6 @@ func (m *BankAccountListRequest) validate(all bool) error {
 
 	// no validation rules for PageSize
 
-	// no validation rules for Currency
-
-	// no validation rules for BankAccount
-
-	// no validation rules for BankAccountFirstname
-
-	// no validation rules for BankAccountLastname
-
-	// no validation rules for CardId
-
-	// no validation rules for Enabled
-
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
@@ -1409,6 +1397,30 @@ func (m *BankAccountListRequest) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	if m.Currency != nil {
+		// no validation rules for Currency
+	}
+
+	if m.BankAccount != nil {
+		// no validation rules for BankAccount
+	}
+
+	if m.BankAccountFirstname != nil {
+		// no validation rules for BankAccountFirstname
+	}
+
+	if m.BankAccountLastname != nil {
+		// no validation rules for BankAccountLastname
+	}
+
+	if m.CardId != nil {
+		// no validation rules for CardId
+	}
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
 	}
 
 	if len(errors) > 0 {
@@ -1937,20 +1949,6 @@ func (m *UpdateBankAccountRequest) validate(all bool) error {
 
 	// no validation rules for Id
 
-	// no validation rules for Currency
-
-	// no validation rules for Country
-
-	// no validation rules for MaxAmount
-
-	// no validation rules for MaxAmountPerTrans
-
-	// no validation rules for MaxTransLimit
-
-	// no validation rules for Priority
-
-	// no validation rules for Enabled
-
 	if all {
 		switch v := interface{}(m.GetBankInfo()).(type) {
 		case interface{ ValidateAll() error }:
@@ -2007,6 +2005,34 @@ func (m *UpdateBankAccountRequest) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	if m.Currency != nil {
+		// no validation rules for Currency
+	}
+
+	if m.Country != nil {
+		// no validation rules for Country
+	}
+
+	if m.MaxAmount != nil {
+		// no validation rules for MaxAmount
+	}
+
+	if m.MaxAmountPerTrans != nil {
+		// no validation rules for MaxAmountPerTrans
+	}
+
+	if m.MaxTransLimit != nil {
+		// no validation rules for MaxTransLimit
+	}
+
+	if m.Priority != nil {
+		// no validation rules for Priority
+	}
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
 	}
 
 	if len(errors) > 0 {
@@ -2423,24 +2449,6 @@ func (m *TransactionListRequest) validate(all bool) error {
 
 	// no validation rules for PageSize
 
-	// no validation rules for Type
-
-	// no validation rules for Status
-
-	// no validation rules for TransactionId
-
-	// no validation rules for DepositBankAccountFirstname
-
-	// no validation rules for DepositBankAccountLastname
-
-	// no validation rules for UserId
-
-	// no validation rules for UserName
-
-	// no validation rules for UserBankAccountFirstname
-
-	// no validation rules for UserBankAccountLastname
-
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
@@ -2468,6 +2476,42 @@ func (m *TransactionListRequest) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	if m.Type != nil {
+		// no validation rules for Type
+	}
+
+	if m.Status != nil {
+		// no validation rules for Status
+	}
+
+	if m.TransactionId != nil {
+		// no validation rules for TransactionId
+	}
+
+	if m.DepositBankAccountFirstname != nil {
+		// no validation rules for DepositBankAccountFirstname
+	}
+
+	if m.DepositBankAccountLastname != nil {
+		// no validation rules for DepositBankAccountLastname
+	}
+
+	if m.UserId != nil {
+		// no validation rules for UserId
+	}
+
+	if m.UserName != nil {
+		// no validation rules for UserName
+	}
+
+	if m.UserBankAccountFirstname != nil {
+		// no validation rules for UserBankAccountFirstname
+	}
+
+	if m.UserBankAccountLastname != nil {
+		// no validation rules for UserBankAccountLastname
 	}
 
 	if len(errors) > 0 {

@@ -6415,12 +6415,6 @@ func (m *UpdateBankCardRequest) validate(all bool) error {
 
 	// no validation rules for Id
 
-	// no validation rules for Currency
-
-	// no validation rules for Country
-
-	// no validation rules for Enabled
-
 	if all {
 		switch v := interface{}(m.GetBankCard()).(type) {
 		case interface{ ValidateAll() error }:
@@ -6448,6 +6442,18 @@ func (m *UpdateBankCardRequest) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	if m.Currency != nil {
+		// no validation rules for Currency
+	}
+
+	if m.Country != nil {
+		// no validation rules for Country
+	}
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
 	}
 
 	if len(errors) > 0 {

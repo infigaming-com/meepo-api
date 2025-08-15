@@ -858,9 +858,9 @@ message AddBankCardResponse {
 
 message UpdateBankCardRequest {
   int64 id = 1;
-  string currency = 2;
-  string country = 3;
-  bool enabled = 4;
+  optional string currency = 2;
+  optional string country = 3;
+  optional bool enabled = 4;
   google.protobuf.Struct bank_card = 5;
 }
 
