@@ -140,14 +140,14 @@ message TransactionListRequest {
 	int64 transaction_id = 5;
 	string deposit_bank_account_firstname = 6;
 	string deposit_bank_account_lastname = 7;
-	string user_id = 8;
+	int64 user_id = 8;
 	string user_name = 9;
 	string user_bank_account_firstname = 10;
 	string user_bank_account_lastname = 11;
 }
 
 message AuditTransactionRequest {
-	string transaction_id = 1;
+	int64 transaction_id = 1;
 	// audit a transaction "approved" or "delined"
 	string audit = 2;
 }
