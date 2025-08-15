@@ -109,13 +109,13 @@ type BankAccountListRequest struct {
 	// Page number to retrieve (1-based)
 	Page int32 `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
 	// Number of items per page
-	PageSize             int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Currency             string `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
-	BankAccount          string `protobuf:"bytes,4,opt,name=bank_account,json=bankAccount,proto3" json:"bank_account,omitempty"`
-	BankAccountFirstname string `protobuf:"bytes,5,opt,name=bank_account_firstname,json=bankAccountFirstname,proto3" json:"bank_account_firstname,omitempty"`
-	BankAccountLastname  string `protobuf:"bytes,6,opt,name=bank_account_lastname,json=bankAccountLastname,proto3" json:"bank_account_lastname,omitempty"`
-	CardId               string `protobuf:"bytes,7,opt,name=card_id,json=cardId,proto3" json:"card_id,omitempty"`
-	Enabled              bool   `protobuf:"varint,8,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	PageSize             int32   `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Currency             *string `protobuf:"bytes,3,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
+	BankAccount          *string `protobuf:"bytes,4,opt,name=bank_account,json=bankAccount,proto3,oneof" json:"bank_account,omitempty"`
+	BankAccountFirstname *string `protobuf:"bytes,5,opt,name=bank_account_firstname,json=bankAccountFirstname,proto3,oneof" json:"bank_account_firstname,omitempty"`
+	BankAccountLastname  *string `protobuf:"bytes,6,opt,name=bank_account_lastname,json=bankAccountLastname,proto3,oneof" json:"bank_account_lastname,omitempty"`
+	CardId               *string `protobuf:"bytes,7,opt,name=card_id,json=cardId,proto3,oneof" json:"card_id,omitempty"`
+	Enabled              *bool   `protobuf:"varint,8,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -165,43 +165,43 @@ func (x *BankAccountListRequest) GetPageSize() int32 {
 }
 
 func (x *BankAccountListRequest) GetCurrency() string {
-	if x != nil {
-		return x.Currency
+	if x != nil && x.Currency != nil {
+		return *x.Currency
 	}
 	return ""
 }
 
 func (x *BankAccountListRequest) GetBankAccount() string {
-	if x != nil {
-		return x.BankAccount
+	if x != nil && x.BankAccount != nil {
+		return *x.BankAccount
 	}
 	return ""
 }
 
 func (x *BankAccountListRequest) GetBankAccountFirstname() string {
-	if x != nil {
-		return x.BankAccountFirstname
+	if x != nil && x.BankAccountFirstname != nil {
+		return *x.BankAccountFirstname
 	}
 	return ""
 }
 
 func (x *BankAccountListRequest) GetBankAccountLastname() string {
-	if x != nil {
-		return x.BankAccountLastname
+	if x != nil && x.BankAccountLastname != nil {
+		return *x.BankAccountLastname
 	}
 	return ""
 }
 
 func (x *BankAccountListRequest) GetCardId() string {
-	if x != nil {
-		return x.CardId
+	if x != nil && x.CardId != nil {
+		return *x.CardId
 	}
 	return ""
 }
 
 func (x *BankAccountListRequest) GetEnabled() bool {
-	if x != nil {
-		return x.Enabled
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
 	}
 	return false
 }
@@ -405,16 +405,16 @@ type TransactionListRequest struct {
 	// Number of items per page
 	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// type "payin" "payout"
-	Type string `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
+	Type *string `protobuf:"bytes,3,opt,name=type,proto3,oneof" json:"type,omitempty"`
 	// status "pending" "approved" "declined"
-	Status                      string `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
-	TransactionId               int64  `protobuf:"varint,5,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	DepositBankAccountFirstname string `protobuf:"bytes,6,opt,name=deposit_bank_account_firstname,json=depositBankAccountFirstname,proto3" json:"deposit_bank_account_firstname,omitempty"`
-	DepositBankAccountLastname  string `protobuf:"bytes,7,opt,name=deposit_bank_account_lastname,json=depositBankAccountLastname,proto3" json:"deposit_bank_account_lastname,omitempty"`
-	UserId                      int64  `protobuf:"varint,8,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	UserName                    string `protobuf:"bytes,9,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
-	UserBankAccountFirstname    string `protobuf:"bytes,10,opt,name=user_bank_account_firstname,json=userBankAccountFirstname,proto3" json:"user_bank_account_firstname,omitempty"`
-	UserBankAccountLastname     string `protobuf:"bytes,11,opt,name=user_bank_account_lastname,json=userBankAccountLastname,proto3" json:"user_bank_account_lastname,omitempty"`
+	Status                      *string `protobuf:"bytes,4,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	TransactionId               *int64  `protobuf:"varint,5,opt,name=transaction_id,json=transactionId,proto3,oneof" json:"transaction_id,omitempty"`
+	DepositBankAccountFirstname *string `protobuf:"bytes,6,opt,name=deposit_bank_account_firstname,json=depositBankAccountFirstname,proto3,oneof" json:"deposit_bank_account_firstname,omitempty"`
+	DepositBankAccountLastname  *string `protobuf:"bytes,7,opt,name=deposit_bank_account_lastname,json=depositBankAccountLastname,proto3,oneof" json:"deposit_bank_account_lastname,omitempty"`
+	UserId                      *int64  `protobuf:"varint,8,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	UserName                    *string `protobuf:"bytes,9,opt,name=user_name,json=userName,proto3,oneof" json:"user_name,omitempty"`
+	UserBankAccountFirstname    *string `protobuf:"bytes,10,opt,name=user_bank_account_firstname,json=userBankAccountFirstname,proto3,oneof" json:"user_bank_account_firstname,omitempty"`
+	UserBankAccountLastname     *string `protobuf:"bytes,11,opt,name=user_bank_account_lastname,json=userBankAccountLastname,proto3,oneof" json:"user_bank_account_lastname,omitempty"`
 	unknownFields               protoimpl.UnknownFields
 	sizeCache                   protoimpl.SizeCache
 }
@@ -464,64 +464,64 @@ func (x *TransactionListRequest) GetPageSize() int32 {
 }
 
 func (x *TransactionListRequest) GetType() string {
-	if x != nil {
-		return x.Type
+	if x != nil && x.Type != nil {
+		return *x.Type
 	}
 	return ""
 }
 
 func (x *TransactionListRequest) GetStatus() string {
-	if x != nil {
-		return x.Status
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return ""
 }
 
 func (x *TransactionListRequest) GetTransactionId() int64 {
-	if x != nil {
-		return x.TransactionId
+	if x != nil && x.TransactionId != nil {
+		return *x.TransactionId
 	}
 	return 0
 }
 
 func (x *TransactionListRequest) GetDepositBankAccountFirstname() string {
-	if x != nil {
-		return x.DepositBankAccountFirstname
+	if x != nil && x.DepositBankAccountFirstname != nil {
+		return *x.DepositBankAccountFirstname
 	}
 	return ""
 }
 
 func (x *TransactionListRequest) GetDepositBankAccountLastname() string {
-	if x != nil {
-		return x.DepositBankAccountLastname
+	if x != nil && x.DepositBankAccountLastname != nil {
+		return *x.DepositBankAccountLastname
 	}
 	return ""
 }
 
 func (x *TransactionListRequest) GetUserId() int64 {
-	if x != nil {
-		return x.UserId
+	if x != nil && x.UserId != nil {
+		return *x.UserId
 	}
 	return 0
 }
 
 func (x *TransactionListRequest) GetUserName() string {
-	if x != nil {
-		return x.UserName
+	if x != nil && x.UserName != nil {
+		return *x.UserName
 	}
 	return ""
 }
 
 func (x *TransactionListRequest) GetUserBankAccountFirstname() string {
-	if x != nil {
-		return x.UserBankAccountFirstname
+	if x != nil && x.UserBankAccountFirstname != nil {
+		return *x.UserBankAccountFirstname
 	}
 	return ""
 }
 
 func (x *TransactionListRequest) GetUserBankAccountLastname() string {
-	if x != nil {
-		return x.UserBankAccountLastname
+	if x != nil && x.UserBankAccountLastname != nil {
+		return *x.UserBankAccountLastname
 	}
 	return ""
 }
@@ -586,16 +586,24 @@ const file_backoffice_service_v1_backoffice_bcpay_proto_rawDesc = "" +
 	",backoffice/service/v1/backoffice_bcpay.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cbcpay/service/v1/bcpay.proto\x1a\x1cgoogle/protobuf/struct.proto\"\x14\n" +
 	"\x12GetMerchantRequest\"+\n" +
 	"\x15CreateMerchantRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"\xa5\x02\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"\xae\x03\n" +
 	"\x16BankAccountListRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1a\n" +
-	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12!\n" +
-	"\fbank_account\x18\x04 \x01(\tR\vbankAccount\x124\n" +
-	"\x16bank_account_firstname\x18\x05 \x01(\tR\x14bankAccountFirstname\x122\n" +
-	"\x15bank_account_lastname\x18\x06 \x01(\tR\x13bankAccountLastname\x12\x17\n" +
-	"\acard_id\x18\a \x01(\tR\x06cardId\x12\x18\n" +
-	"\aenabled\x18\b \x01(\bR\aenabled\"\x97\x02\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1f\n" +
+	"\bcurrency\x18\x03 \x01(\tH\x00R\bcurrency\x88\x01\x01\x12&\n" +
+	"\fbank_account\x18\x04 \x01(\tH\x01R\vbankAccount\x88\x01\x01\x129\n" +
+	"\x16bank_account_firstname\x18\x05 \x01(\tH\x02R\x14bankAccountFirstname\x88\x01\x01\x127\n" +
+	"\x15bank_account_lastname\x18\x06 \x01(\tH\x03R\x13bankAccountLastname\x88\x01\x01\x12\x1c\n" +
+	"\acard_id\x18\a \x01(\tH\x04R\x06cardId\x88\x01\x01\x12\x1d\n" +
+	"\aenabled\x18\b \x01(\bH\x05R\aenabled\x88\x01\x01B\v\n" +
+	"\t_currencyB\x0f\n" +
+	"\r_bank_accountB\x19\n" +
+	"\x17_bank_account_firstnameB\x18\n" +
+	"\x16_bank_account_lastnameB\n" +
+	"\n" +
+	"\b_card_idB\n" +
+	"\n" +
+	"\b_enabled\"\x97\x02\n" +
 	"\x15AddBankAccountRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
 	"\acountry\x18\x02 \x01(\tR\acountry\x12\x1d\n" +
@@ -614,20 +622,31 @@ const file_backoffice_service_v1_backoffice_bcpay_proto_rawDesc = "" +
 	"\x14max_amount_per_trans\x18\x05 \x01(\tR\x11maxAmountPerTrans\x12&\n" +
 	"\x0fmax_trans_limit\x18\x06 \x01(\x05R\rmaxTransLimit\x12\x1a\n" +
 	"\bpriority\x18\a \x01(\x05R\bpriority\x124\n" +
-	"\tbank_info\x18\b \x01(\v2\x17.google.protobuf.StructR\bbankInfo\"\xd6\x03\n" +
+	"\tbank_info\x18\b \x01(\v2\x17.google.protobuf.StructR\bbankInfo\"\xc8\x05\n" +
 	"\x16TransactionListRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x12\n" +
-	"\x04type\x18\x03 \x01(\tR\x04type\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\tR\x06status\x12%\n" +
-	"\x0etransaction_id\x18\x05 \x01(\x03R\rtransactionId\x12C\n" +
-	"\x1edeposit_bank_account_firstname\x18\x06 \x01(\tR\x1bdepositBankAccountFirstname\x12A\n" +
-	"\x1ddeposit_bank_account_lastname\x18\a \x01(\tR\x1adepositBankAccountLastname\x12\x17\n" +
-	"\auser_id\x18\b \x01(\x03R\x06userId\x12\x1b\n" +
-	"\tuser_name\x18\t \x01(\tR\buserName\x12=\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x17\n" +
+	"\x04type\x18\x03 \x01(\tH\x00R\x04type\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\x04 \x01(\tH\x01R\x06status\x88\x01\x01\x12*\n" +
+	"\x0etransaction_id\x18\x05 \x01(\x03H\x02R\rtransactionId\x88\x01\x01\x12H\n" +
+	"\x1edeposit_bank_account_firstname\x18\x06 \x01(\tH\x03R\x1bdepositBankAccountFirstname\x88\x01\x01\x12F\n" +
+	"\x1ddeposit_bank_account_lastname\x18\a \x01(\tH\x04R\x1adepositBankAccountLastname\x88\x01\x01\x12\x1c\n" +
+	"\auser_id\x18\b \x01(\x03H\x05R\x06userId\x88\x01\x01\x12 \n" +
+	"\tuser_name\x18\t \x01(\tH\x06R\buserName\x88\x01\x01\x12B\n" +
 	"\x1buser_bank_account_firstname\x18\n" +
-	" \x01(\tR\x18userBankAccountFirstname\x12;\n" +
-	"\x1auser_bank_account_lastname\x18\v \x01(\tR\x17userBankAccountLastname\"V\n" +
+	" \x01(\tH\aR\x18userBankAccountFirstname\x88\x01\x01\x12@\n" +
+	"\x1auser_bank_account_lastname\x18\v \x01(\tH\bR\x17userBankAccountLastname\x88\x01\x01B\a\n" +
+	"\x05_typeB\t\n" +
+	"\a_statusB\x11\n" +
+	"\x0f_transaction_idB!\n" +
+	"\x1f_deposit_bank_account_firstnameB \n" +
+	"\x1e_deposit_bank_account_lastnameB\n" +
+	"\n" +
+	"\b_user_idB\f\n" +
+	"\n" +
+	"_user_nameB\x1e\n" +
+	"\x1c_user_bank_account_firstnameB\x1d\n" +
+	"\x1b_user_bank_account_lastname\"V\n" +
 	"\x17AuditTransactionRequest\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x14\n" +
 	"\x05audit\x18\x02 \x01(\tR\x05audit2\x9b\r\n" +
@@ -715,6 +734,8 @@ func file_backoffice_service_v1_backoffice_bcpay_proto_init() {
 	if File_backoffice_service_v1_backoffice_bcpay_proto != nil {
 		return
 	}
+	file_backoffice_service_v1_backoffice_bcpay_proto_msgTypes[2].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_bcpay_proto_msgTypes[5].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

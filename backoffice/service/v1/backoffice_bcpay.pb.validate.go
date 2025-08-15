@@ -267,17 +267,29 @@ func (m *BankAccountListRequest) validate(all bool) error {
 
 	// no validation rules for PageSize
 
-	// no validation rules for Currency
+	if m.Currency != nil {
+		// no validation rules for Currency
+	}
 
-	// no validation rules for BankAccount
+	if m.BankAccount != nil {
+		// no validation rules for BankAccount
+	}
 
-	// no validation rules for BankAccountFirstname
+	if m.BankAccountFirstname != nil {
+		// no validation rules for BankAccountFirstname
+	}
 
-	// no validation rules for BankAccountLastname
+	if m.BankAccountLastname != nil {
+		// no validation rules for BankAccountLastname
+	}
 
-	// no validation rules for CardId
+	if m.CardId != nil {
+		// no validation rules for CardId
+	}
 
-	// no validation rules for Enabled
+	if m.Enabled != nil {
+		// no validation rules for Enabled
+	}
 
 	if len(errors) > 0 {
 		return BankAccountListRequestMultiError(errors)
@@ -673,23 +685,41 @@ func (m *TransactionListRequest) validate(all bool) error {
 
 	// no validation rules for PageSize
 
-	// no validation rules for Type
+	if m.Type != nil {
+		// no validation rules for Type
+	}
 
-	// no validation rules for Status
+	if m.Status != nil {
+		// no validation rules for Status
+	}
 
-	// no validation rules for TransactionId
+	if m.TransactionId != nil {
+		// no validation rules for TransactionId
+	}
 
-	// no validation rules for DepositBankAccountFirstname
+	if m.DepositBankAccountFirstname != nil {
+		// no validation rules for DepositBankAccountFirstname
+	}
 
-	// no validation rules for DepositBankAccountLastname
+	if m.DepositBankAccountLastname != nil {
+		// no validation rules for DepositBankAccountLastname
+	}
 
-	// no validation rules for UserId
+	if m.UserId != nil {
+		// no validation rules for UserId
+	}
 
-	// no validation rules for UserName
+	if m.UserName != nil {
+		// no validation rules for UserName
+	}
 
-	// no validation rules for UserBankAccountFirstname
+	if m.UserBankAccountFirstname != nil {
+		// no validation rules for UserBankAccountFirstname
+	}
 
-	// no validation rules for UserBankAccountLastname
+	if m.UserBankAccountLastname != nil {
+		// no validation rules for UserBankAccountLastname
+	}
 
 	if len(errors) > 0 {
 		return TransactionListRequestMultiError(errors)

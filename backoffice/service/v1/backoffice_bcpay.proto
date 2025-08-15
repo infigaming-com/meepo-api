@@ -99,12 +99,12 @@ message BankAccountListRequest {
   int32 page = 1;
   // Number of items per page
   int32 page_size = 2;
-	string currency = 3;
-	string bank_account = 4;
-	string bank_account_firstname = 5;
-	string bank_account_lastname = 6;
-	string card_id = 7;
-	bool enabled = 8;
+	optional string currency = 3;
+	optional string bank_account = 4;
+	optional string bank_account_firstname = 5;
+	optional string bank_account_lastname = 6;
+	optional string card_id = 7;
+	optional bool enabled = 8;
 }
 
 message AddBankAccountRequest {
@@ -134,16 +134,16 @@ message TransactionListRequest {
   // Number of items per page
   int32 page_size = 2;
   // type "payin" "payout"
-	string type = 3;
+	optional string type = 3;
 	// status "pending" "approved" "declined"
-	string status = 4;
-	int64 transaction_id = 5;
-	string deposit_bank_account_firstname = 6;
-	string deposit_bank_account_lastname = 7;
-	int64 user_id = 8;
-	string user_name = 9;
-	string user_bank_account_firstname = 10;
-	string user_bank_account_lastname = 11;
+	optional string status = 4;
+	optional int64 transaction_id = 5;
+	optional string deposit_bank_account_firstname = 6;
+	optional string deposit_bank_account_lastname = 7;
+	optional int64 user_id = 8;
+	optional string user_name = 9;
+	optional string user_bank_account_firstname = 10;
+	optional string user_bank_account_lastname = 11;
 }
 
 message AuditTransactionRequest {
