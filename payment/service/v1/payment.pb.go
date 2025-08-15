@@ -4663,9 +4663,9 @@ func (*AddBankCardResponse) Descriptor() ([]byte, []int) {
 type UpdateBankCardRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Currency      string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	Country       string                 `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
-	Enabled       bool                   `protobuf:"varint,4,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Currency      *string                `protobuf:"bytes,2,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
+	Country       *string                `protobuf:"bytes,3,opt,name=country,proto3,oneof" json:"country,omitempty"`
+	Enabled       *bool                  `protobuf:"varint,4,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
 	BankCard      *structpb.Struct       `protobuf:"bytes,5,opt,name=bank_card,json=bankCard,proto3" json:"bank_card,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -4709,22 +4709,22 @@ func (x *UpdateBankCardRequest) GetId() int64 {
 }
 
 func (x *UpdateBankCardRequest) GetCurrency() string {
-	if x != nil {
-		return x.Currency
+	if x != nil && x.Currency != nil {
+		return *x.Currency
 	}
 	return ""
 }
 
 func (x *UpdateBankCardRequest) GetCountry() string {
-	if x != nil {
-		return x.Country
+	if x != nil && x.Country != nil {
+		return *x.Country
 	}
 	return ""
 }
 
 func (x *UpdateBankCardRequest) GetEnabled() bool {
-	if x != nil {
-		return x.Enabled
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
 	}
 	return false
 }
@@ -5641,13 +5641,18 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
 	"\acountry\x18\x02 \x01(\tR\acountry\x124\n" +
 	"\tbank_card\x18\x03 \x01(\v2\x17.google.protobuf.StructR\bbankCard\"\x15\n" +
-	"\x13AddBankCardResponse\"\xad\x01\n" +
+	"\x13AddBankCardResponse\"\xe1\x01\n" +
 	"\x15UpdateBankCardRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x18\n" +
-	"\acountry\x18\x03 \x01(\tR\acountry\x12\x18\n" +
-	"\aenabled\x18\x04 \x01(\bR\aenabled\x124\n" +
-	"\tbank_card\x18\x05 \x01(\v2\x17.google.protobuf.StructR\bbankCard\"\x18\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1f\n" +
+	"\bcurrency\x18\x02 \x01(\tH\x00R\bcurrency\x88\x01\x01\x12\x1d\n" +
+	"\acountry\x18\x03 \x01(\tH\x01R\acountry\x88\x01\x01\x12\x1d\n" +
+	"\aenabled\x18\x04 \x01(\bH\x02R\aenabled\x88\x01\x01\x124\n" +
+	"\tbank_card\x18\x05 \x01(\v2\x17.google.protobuf.StructR\bbankCardB\v\n" +
+	"\t_currencyB\n" +
+	"\n" +
+	"\b_countryB\n" +
+	"\n" +
+	"\b_enabled\"\x18\n" +
 	"\x16UpdateBankCardResponse\"9\n" +
 	"\x15DeleteBankCardRequest\x12 \n" +
 	"\fbank_card_id\x18\x01 \x01(\x03R\n" +
@@ -5919,6 +5924,7 @@ func file_payment_service_v1_payment_proto_init() {
 	file_payment_service_v1_payment_proto_msgTypes[1].OneofWrappers = []any{}
 	file_payment_service_v1_payment_proto_msgTypes[9].OneofWrappers = []any{}
 	file_payment_service_v1_payment_proto_msgTypes[31].OneofWrappers = []any{}
+	file_payment_service_v1_payment_proto_msgTypes[44].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
