@@ -20,19 +20,19 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeOperator_ListAllOperators_FullMethodName                  = "/api.backoffice.service.v1.BackofficeOperator/ListAllOperators"
-	BackofficeOperator_CreateOperator_FullMethodName                    = "/api.backoffice.service.v1.BackofficeOperator/CreateOperator"
-	BackofficeOperator_GetCurrentOperatorDetails_FullMethodName         = "/api.backoffice.service.v1.BackofficeOperator/GetCurrentOperatorDetails"
-	BackofficeOperator_ListOperatorsByParentOperatorId_FullMethodName   = "/api.backoffice.service.v1.BackofficeOperator/ListOperatorsByParentOperatorId"
-	BackofficeOperator_ListRetailerOperators_FullMethodName             = "/api.backoffice.service.v1.BackofficeOperator/ListRetailerOperators"
-	BackofficeOperator_ListCompanyOperators_FullMethodName              = "/api.backoffice.service.v1.BackofficeOperator/ListCompanyOperators"
-	BackofficeOperator_ListBottomOperators_FullMethodName               = "/api.backoffice.service.v1.BackofficeOperator/ListBottomOperators"
-	BackofficeOperator_UpdateOperatorStatus_FullMethodName              = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorStatus"
-	BackofficeOperator_ListOperatorsByAdminEmail_FullMethodName         = "/api.backoffice.service.v1.BackofficeOperator/ListOperatorsByAdminEmail"
-	BackofficeOperator_AddOperatorByoSubdomain_FullMethodName           = "/api.backoffice.service.v1.BackofficeOperator/AddOperatorByoSubdomain"
-	BackofficeOperator_DeleteOperatorByoSubdomain_FullMethodName        = "/api.backoffice.service.v1.BackofficeOperator/DeleteOperatorByoSubdomain"
-	BackofficeOperator_AddOperatorBackofficeSubdomain_FullMethodName    = "/api.backoffice.service.v1.BackofficeOperator/AddOperatorBackofficeSubdomain"
-	BackofficeOperator_DeleteOperatorBackofficeSubdomain_FullMethodName = "/api.backoffice.service.v1.BackofficeOperator/DeleteOperatorBackofficeSubdomain"
+	BackofficeOperator_ListAllOperators_FullMethodName                     = "/api.backoffice.service.v1.BackofficeOperator/ListAllOperators"
+	BackofficeOperator_CreateOperator_FullMethodName                       = "/api.backoffice.service.v1.BackofficeOperator/CreateOperator"
+	BackofficeOperator_GetCurrentOperatorDetails_FullMethodName            = "/api.backoffice.service.v1.BackofficeOperator/GetCurrentOperatorDetails"
+	BackofficeOperator_ListOperatorsByParentOperatorId_FullMethodName      = "/api.backoffice.service.v1.BackofficeOperator/ListOperatorsByParentOperatorId"
+	BackofficeOperator_ListRetailerOperators_FullMethodName                = "/api.backoffice.service.v1.BackofficeOperator/ListRetailerOperators"
+	BackofficeOperator_ListCompanyOperators_FullMethodName                 = "/api.backoffice.service.v1.BackofficeOperator/ListCompanyOperators"
+	BackofficeOperator_ListBottomOperators_FullMethodName                  = "/api.backoffice.service.v1.BackofficeOperator/ListBottomOperators"
+	BackofficeOperator_UpdateOperatorStatus_FullMethodName                 = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorStatus"
+	BackofficeOperator_ListOperatorsByAdminEmail_FullMethodName            = "/api.backoffice.service.v1.BackofficeOperator/ListOperatorsByAdminEmail"
+	BackofficeOperator_AddOperatorByoSubdomain_FullMethodName              = "/api.backoffice.service.v1.BackofficeOperator/AddOperatorByoSubdomain"
+	BackofficeOperator_DeleteOperatorByoSubdomain_FullMethodName           = "/api.backoffice.service.v1.BackofficeOperator/DeleteOperatorByoSubdomain"
+	BackofficeOperator_AddOperatorBackofficeByoSubdomain_FullMethodName    = "/api.backoffice.service.v1.BackofficeOperator/AddOperatorBackofficeByoSubdomain"
+	BackofficeOperator_DeleteOperatorBackofficeByoSubdomain_FullMethodName = "/api.backoffice.service.v1.BackofficeOperator/DeleteOperatorBackofficeByoSubdomain"
 )
 
 // BackofficeOperatorClient is the client API for BackofficeOperator service.
@@ -59,10 +59,10 @@ type BackofficeOperatorClient interface {
 	AddOperatorByoSubdomain(ctx context.Context, in *AddOperatorByoSubdomainRequest, opts ...grpc.CallOption) (*AddOperatorByoSubdomainResponse, error)
 	// DeleteOperatorByoSubdomain deletes a byo subdomain for the given operator
 	DeleteOperatorByoSubdomain(ctx context.Context, in *DeleteOperatorByoSubdomainRequest, opts ...grpc.CallOption) (*DeleteOperatorByoSubdomainResponse, error)
-	// AddOperatorBackofficeSubdomain adds a backoffice subdomain for the given operator
-	AddOperatorBackofficeSubdomain(ctx context.Context, in *AddOperatorBackofficeSubdomainRequest, opts ...grpc.CallOption) (*AddOperatorBackofficeSubdomainResponse, error)
-	// DeleteOperatorBackofficeSubdomain deletes a backoffice subdomain for the given operator
-	DeleteOperatorBackofficeSubdomain(ctx context.Context, in *DeleteOperatorBackofficeSubdomainRequest, opts ...grpc.CallOption) (*DeleteOperatorBackofficeSubdomainResponse, error)
+	// AddOperatorBackofficeByoSubdomain adds a backoffice byo subdomain for the given operator
+	AddOperatorBackofficeByoSubdomain(ctx context.Context, in *AddOperatorBackofficeByoSubdomainRequest, opts ...grpc.CallOption) (*AddOperatorBackofficeByoSubdomainResponse, error)
+	// DeleteOperatorBackofficeByoSubdomain deletes a backoffice byo subdomain for the given operator
+	DeleteOperatorBackofficeByoSubdomain(ctx context.Context, in *DeleteOperatorBackofficeByoSubdomainRequest, opts ...grpc.CallOption) (*DeleteOperatorBackofficeByoSubdomainResponse, error)
 }
 
 type backofficeOperatorClient struct {
@@ -183,20 +183,20 @@ func (c *backofficeOperatorClient) DeleteOperatorByoSubdomain(ctx context.Contex
 	return out, nil
 }
 
-func (c *backofficeOperatorClient) AddOperatorBackofficeSubdomain(ctx context.Context, in *AddOperatorBackofficeSubdomainRequest, opts ...grpc.CallOption) (*AddOperatorBackofficeSubdomainResponse, error) {
+func (c *backofficeOperatorClient) AddOperatorBackofficeByoSubdomain(ctx context.Context, in *AddOperatorBackofficeByoSubdomainRequest, opts ...grpc.CallOption) (*AddOperatorBackofficeByoSubdomainResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AddOperatorBackofficeSubdomainResponse)
-	err := c.cc.Invoke(ctx, BackofficeOperator_AddOperatorBackofficeSubdomain_FullMethodName, in, out, cOpts...)
+	out := new(AddOperatorBackofficeByoSubdomainResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_AddOperatorBackofficeByoSubdomain_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backofficeOperatorClient) DeleteOperatorBackofficeSubdomain(ctx context.Context, in *DeleteOperatorBackofficeSubdomainRequest, opts ...grpc.CallOption) (*DeleteOperatorBackofficeSubdomainResponse, error) {
+func (c *backofficeOperatorClient) DeleteOperatorBackofficeByoSubdomain(ctx context.Context, in *DeleteOperatorBackofficeByoSubdomainRequest, opts ...grpc.CallOption) (*DeleteOperatorBackofficeByoSubdomainResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DeleteOperatorBackofficeSubdomainResponse)
-	err := c.cc.Invoke(ctx, BackofficeOperator_DeleteOperatorBackofficeSubdomain_FullMethodName, in, out, cOpts...)
+	out := new(DeleteOperatorBackofficeByoSubdomainResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_DeleteOperatorBackofficeByoSubdomain_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -227,10 +227,10 @@ type BackofficeOperatorServer interface {
 	AddOperatorByoSubdomain(context.Context, *AddOperatorByoSubdomainRequest) (*AddOperatorByoSubdomainResponse, error)
 	// DeleteOperatorByoSubdomain deletes a byo subdomain for the given operator
 	DeleteOperatorByoSubdomain(context.Context, *DeleteOperatorByoSubdomainRequest) (*DeleteOperatorByoSubdomainResponse, error)
-	// AddOperatorBackofficeSubdomain adds a backoffice subdomain for the given operator
-	AddOperatorBackofficeSubdomain(context.Context, *AddOperatorBackofficeSubdomainRequest) (*AddOperatorBackofficeSubdomainResponse, error)
-	// DeleteOperatorBackofficeSubdomain deletes a backoffice subdomain for the given operator
-	DeleteOperatorBackofficeSubdomain(context.Context, *DeleteOperatorBackofficeSubdomainRequest) (*DeleteOperatorBackofficeSubdomainResponse, error)
+	// AddOperatorBackofficeByoSubdomain adds a backoffice byo subdomain for the given operator
+	AddOperatorBackofficeByoSubdomain(context.Context, *AddOperatorBackofficeByoSubdomainRequest) (*AddOperatorBackofficeByoSubdomainResponse, error)
+	// DeleteOperatorBackofficeByoSubdomain deletes a backoffice byo subdomain for the given operator
+	DeleteOperatorBackofficeByoSubdomain(context.Context, *DeleteOperatorBackofficeByoSubdomainRequest) (*DeleteOperatorBackofficeByoSubdomainResponse, error)
 	mustEmbedUnimplementedBackofficeOperatorServer()
 }
 
@@ -274,11 +274,11 @@ func (UnimplementedBackofficeOperatorServer) AddOperatorByoSubdomain(context.Con
 func (UnimplementedBackofficeOperatorServer) DeleteOperatorByoSubdomain(context.Context, *DeleteOperatorByoSubdomainRequest) (*DeleteOperatorByoSubdomainResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteOperatorByoSubdomain not implemented")
 }
-func (UnimplementedBackofficeOperatorServer) AddOperatorBackofficeSubdomain(context.Context, *AddOperatorBackofficeSubdomainRequest) (*AddOperatorBackofficeSubdomainResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddOperatorBackofficeSubdomain not implemented")
+func (UnimplementedBackofficeOperatorServer) AddOperatorBackofficeByoSubdomain(context.Context, *AddOperatorBackofficeByoSubdomainRequest) (*AddOperatorBackofficeByoSubdomainResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddOperatorBackofficeByoSubdomain not implemented")
 }
-func (UnimplementedBackofficeOperatorServer) DeleteOperatorBackofficeSubdomain(context.Context, *DeleteOperatorBackofficeSubdomainRequest) (*DeleteOperatorBackofficeSubdomainResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteOperatorBackofficeSubdomain not implemented")
+func (UnimplementedBackofficeOperatorServer) DeleteOperatorBackofficeByoSubdomain(context.Context, *DeleteOperatorBackofficeByoSubdomainRequest) (*DeleteOperatorBackofficeByoSubdomainResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteOperatorBackofficeByoSubdomain not implemented")
 }
 func (UnimplementedBackofficeOperatorServer) mustEmbedUnimplementedBackofficeOperatorServer() {}
 func (UnimplementedBackofficeOperatorServer) testEmbeddedByValue()                            {}
@@ -499,38 +499,38 @@ func _BackofficeOperator_DeleteOperatorByoSubdomain_Handler(srv interface{}, ctx
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeOperator_AddOperatorBackofficeSubdomain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddOperatorBackofficeSubdomainRequest)
+func _BackofficeOperator_AddOperatorBackofficeByoSubdomain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddOperatorBackofficeByoSubdomainRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeOperatorServer).AddOperatorBackofficeSubdomain(ctx, in)
+		return srv.(BackofficeOperatorServer).AddOperatorBackofficeByoSubdomain(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeOperator_AddOperatorBackofficeSubdomain_FullMethodName,
+		FullMethod: BackofficeOperator_AddOperatorBackofficeByoSubdomain_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeOperatorServer).AddOperatorBackofficeSubdomain(ctx, req.(*AddOperatorBackofficeSubdomainRequest))
+		return srv.(BackofficeOperatorServer).AddOperatorBackofficeByoSubdomain(ctx, req.(*AddOperatorBackofficeByoSubdomainRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeOperator_DeleteOperatorBackofficeSubdomain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteOperatorBackofficeSubdomainRequest)
+func _BackofficeOperator_DeleteOperatorBackofficeByoSubdomain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteOperatorBackofficeByoSubdomainRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeOperatorServer).DeleteOperatorBackofficeSubdomain(ctx, in)
+		return srv.(BackofficeOperatorServer).DeleteOperatorBackofficeByoSubdomain(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeOperator_DeleteOperatorBackofficeSubdomain_FullMethodName,
+		FullMethod: BackofficeOperator_DeleteOperatorBackofficeByoSubdomain_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeOperatorServer).DeleteOperatorBackofficeSubdomain(ctx, req.(*DeleteOperatorBackofficeSubdomainRequest))
+		return srv.(BackofficeOperatorServer).DeleteOperatorBackofficeByoSubdomain(ctx, req.(*DeleteOperatorBackofficeByoSubdomainRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -587,12 +587,12 @@ var BackofficeOperator_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BackofficeOperator_DeleteOperatorByoSubdomain_Handler,
 		},
 		{
-			MethodName: "AddOperatorBackofficeSubdomain",
-			Handler:    _BackofficeOperator_AddOperatorBackofficeSubdomain_Handler,
+			MethodName: "AddOperatorBackofficeByoSubdomain",
+			Handler:    _BackofficeOperator_AddOperatorBackofficeByoSubdomain_Handler,
 		},
 		{
-			MethodName: "DeleteOperatorBackofficeSubdomain",
-			Handler:    _BackofficeOperator_DeleteOperatorBackofficeSubdomain_Handler,
+			MethodName: "DeleteOperatorBackofficeByoSubdomain",
+			Handler:    _BackofficeOperator_DeleteOperatorBackofficeByoSubdomain_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
