@@ -5717,39 +5717,41 @@ func (x *CreateBusinessResponse) GetBusinessId() int64 {
 }
 
 type OperatorDetails struct {
-	state                 protoimpl.MessageState `protogen:"open.v1"`
-	Id                    int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"` // real operator id
-	OperatorName          string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	ParentOperatorId      int64                  `protobuf:"varint,3,opt,name=parent_operator_id,json=parentOperatorId,proto3" json:"parent_operator_id,omitempty"`
-	ParentOperatorName    string                 `protobuf:"bytes,4,opt,name=parent_operator_name,json=parentOperatorName,proto3" json:"parent_operator_name,omitempty"`
-	OperatorType          string                 `protobuf:"bytes,5,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
-	ExternalId            string                 `protobuf:"bytes,6,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
-	ApiKey                string                 `protobuf:"bytes,7,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
-	Subdomain             string                 `protobuf:"bytes,8,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
-	BackofficeSubdomain   string                 `protobuf:"bytes,9,opt,name=backoffice_subdomain,json=backofficeSubdomain,proto3" json:"backoffice_subdomain,omitempty"`
-	BackofficeChildDomain string                 `protobuf:"bytes,10,opt,name=backoffice_child_domain,json=backofficeChildDomain,proto3" json:"backoffice_child_domain,omitempty"`
-	DomainPool            []string               `protobuf:"bytes,11,rep,name=domain_pool,json=domainPool,proto3" json:"domain_pool,omitempty"`
-	Enabled               bool                   `protobuf:"varint,12,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	Mode                  string                 `protobuf:"bytes,13,opt,name=mode,proto3" json:"mode,omitempty"`
-	OperatorKey           string                 `protobuf:"bytes,14,opt,name=operator_key,json=operatorKey,proto3" json:"operator_key,omitempty"`
-	ReportingCurrency     string                 `protobuf:"bytes,15,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
-	BackofficeTimezone    string                 `protobuf:"bytes,16,opt,name=backoffice_timezone,json=backofficeTimezone,proto3" json:"backoffice_timezone,omitempty"`
-	SupportedLanguages    []string               `protobuf:"bytes,17,rep,name=supported_languages,json=supportedLanguages,proto3" json:"supported_languages,omitempty"`
-	SupportedCurrencies   []string               `protobuf:"bytes,18,rep,name=supported_currencies,json=supportedCurrencies,proto3" json:"supported_currencies,omitempty"`
-	Status                string                 `protobuf:"bytes,19,opt,name=status,proto3" json:"status,omitempty"`
-	IsMaintenance         bool                   `protobuf:"varint,20,opt,name=is_maintenance,json=isMaintenance,proto3" json:"is_maintenance,omitempty"`
-	MaintenanceStartTime  int64                  `protobuf:"varint,21,opt,name=maintenance_start_time,json=maintenanceStartTime,proto3" json:"maintenance_start_time,omitempty"`
-	MaintenanceEndTime    int64                  `protobuf:"varint,22,opt,name=maintenance_end_time,json=maintenanceEndTime,proto3" json:"maintenance_end_time,omitempty"`
-	OperatorId            int64                  `protobuf:"varint,23,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`                                // operator id in the operator hierarchy
-	CompanyOperatorId     int64                  `protobuf:"varint,24,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`         // company operator id in the operator hierarchy
-	CompanyOperatorName   string                 `protobuf:"bytes,25,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`    // company operator name in the operator hierarchy, or empty string if not exists
-	RetailerOperatorId    int64                  `protobuf:"varint,26,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`      // retailer operator id in the operator hierarchy
-	RetailerOperatorName  string                 `protobuf:"bytes,27,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"` // retailer operator name in the operator hierarchy, or empty string if not exists
-	SystemOperatorId      int64                  `protobuf:"varint,28,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`            // system operator id in the operator hierarchy
-	SystemOperatorName    string                 `protobuf:"bytes,29,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`       // system operator name in the operator hierarchy, or empty string if not exists
-	Config                string                 `protobuf:"bytes,30,opt,name=config,proto3" json:"config,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"open.v1"`
+	Id                      int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"` // real operator id
+	OperatorName            string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	ParentOperatorId        int64                  `protobuf:"varint,3,opt,name=parent_operator_id,json=parentOperatorId,proto3" json:"parent_operator_id,omitempty"`
+	ParentOperatorName      string                 `protobuf:"bytes,4,opt,name=parent_operator_name,json=parentOperatorName,proto3" json:"parent_operator_name,omitempty"`
+	OperatorType            string                 `protobuf:"bytes,5,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
+	ExternalId              string                 `protobuf:"bytes,6,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
+	ApiKey                  string                 `protobuf:"bytes,7,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
+	Subdomain               string                 `protobuf:"bytes,8,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
+	ByoSubdomains           []string               `protobuf:"bytes,9,rep,name=byo_subdomains,json=byoSubdomains,proto3" json:"byo_subdomains,omitempty"`
+	BackofficeSubdomain     string                 `protobuf:"bytes,10,opt,name=backoffice_subdomain,json=backofficeSubdomain,proto3" json:"backoffice_subdomain,omitempty"`
+	BackofficeByoSubdomains []string               `protobuf:"bytes,11,rep,name=backoffice_byo_subdomains,json=backofficeByoSubdomains,proto3" json:"backoffice_byo_subdomains,omitempty"`
+	BackofficeChildDomain   string                 `protobuf:"bytes,12,opt,name=backoffice_child_domain,json=backofficeChildDomain,proto3" json:"backoffice_child_domain,omitempty"`
+	DomainPool              []string               `protobuf:"bytes,13,rep,name=domain_pool,json=domainPool,proto3" json:"domain_pool,omitempty"`
+	Enabled                 bool                   `protobuf:"varint,14,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Mode                    string                 `protobuf:"bytes,15,opt,name=mode,proto3" json:"mode,omitempty"`
+	OperatorKey             string                 `protobuf:"bytes,16,opt,name=operator_key,json=operatorKey,proto3" json:"operator_key,omitempty"`
+	ReportingCurrency       string                 `protobuf:"bytes,17,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	BackofficeTimezone      string                 `protobuf:"bytes,18,opt,name=backoffice_timezone,json=backofficeTimezone,proto3" json:"backoffice_timezone,omitempty"`
+	SupportedLanguages      []string               `protobuf:"bytes,19,rep,name=supported_languages,json=supportedLanguages,proto3" json:"supported_languages,omitempty"`
+	SupportedCurrencies     []string               `protobuf:"bytes,20,rep,name=supported_currencies,json=supportedCurrencies,proto3" json:"supported_currencies,omitempty"`
+	Status                  string                 `protobuf:"bytes,21,opt,name=status,proto3" json:"status,omitempty"`
+	IsMaintenance           bool                   `protobuf:"varint,22,opt,name=is_maintenance,json=isMaintenance,proto3" json:"is_maintenance,omitempty"`
+	MaintenanceStartTime    int64                  `protobuf:"varint,23,opt,name=maintenance_start_time,json=maintenanceStartTime,proto3" json:"maintenance_start_time,omitempty"`
+	MaintenanceEndTime      int64                  `protobuf:"varint,24,opt,name=maintenance_end_time,json=maintenanceEndTime,proto3" json:"maintenance_end_time,omitempty"`
+	OperatorId              int64                  `protobuf:"varint,25,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`                                // operator id in the operator hierarchy
+	CompanyOperatorId       int64                  `protobuf:"varint,26,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`         // company operator id in the operator hierarchy
+	CompanyOperatorName     string                 `protobuf:"bytes,27,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`    // company operator name in the operator hierarchy, or empty string if not exists
+	RetailerOperatorId      int64                  `protobuf:"varint,28,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`      // retailer operator id in the operator hierarchy
+	RetailerOperatorName    string                 `protobuf:"bytes,29,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"` // retailer operator name in the operator hierarchy, or empty string if not exists
+	SystemOperatorId        int64                  `protobuf:"varint,30,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`            // system operator id in the operator hierarchy
+	SystemOperatorName      string                 `protobuf:"bytes,31,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`       // system operator name in the operator hierarchy, or empty string if not exists
+	Config                  string                 `protobuf:"bytes,32,opt,name=config,proto3" json:"config,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *OperatorDetails) Reset() {
@@ -5838,11 +5840,25 @@ func (x *OperatorDetails) GetSubdomain() string {
 	return ""
 }
 
+func (x *OperatorDetails) GetByoSubdomains() []string {
+	if x != nil {
+		return x.ByoSubdomains
+	}
+	return nil
+}
+
 func (x *OperatorDetails) GetBackofficeSubdomain() string {
 	if x != nil {
 		return x.BackofficeSubdomain
 	}
 	return ""
+}
+
+func (x *OperatorDetails) GetBackofficeByoSubdomains() []string {
+	if x != nil {
+		return x.BackofficeByoSubdomains
+	}
+	return nil
 }
 
 func (x *OperatorDetails) GetBackofficeChildDomain() string {
@@ -7080,6 +7096,390 @@ func (x *GetOperatorDetailsByUserIdResponse) GetOperatorDetails() *OperatorDetai
 	return nil
 }
 
+type AddOperatorByoSubdomainRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	OperatorId      int64                   `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	Subdomain       string                  `protobuf:"bytes,3,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *AddOperatorByoSubdomainRequest) Reset() {
+	*x = AddOperatorByoSubdomainRequest{}
+	mi := &file_user_service_v1_user_proto_msgTypes[117]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddOperatorByoSubdomainRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddOperatorByoSubdomainRequest) ProtoMessage() {}
+
+func (x *AddOperatorByoSubdomainRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[117]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddOperatorByoSubdomainRequest.ProtoReflect.Descriptor instead.
+func (*AddOperatorByoSubdomainRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{117}
+}
+
+func (x *AddOperatorByoSubdomainRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *AddOperatorByoSubdomainRequest) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *AddOperatorByoSubdomainRequest) GetSubdomain() string {
+	if x != nil {
+		return x.Subdomain
+	}
+	return ""
+}
+
+type AddOperatorByoSubdomainResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddOperatorByoSubdomainResponse) Reset() {
+	*x = AddOperatorByoSubdomainResponse{}
+	mi := &file_user_service_v1_user_proto_msgTypes[118]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddOperatorByoSubdomainResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddOperatorByoSubdomainResponse) ProtoMessage() {}
+
+func (x *AddOperatorByoSubdomainResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[118]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddOperatorByoSubdomainResponse.ProtoReflect.Descriptor instead.
+func (*AddOperatorByoSubdomainResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{118}
+}
+
+type DeleteOperatorByoSubdomainRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	OperatorId      int64                   `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	Subdomain       string                  `protobuf:"bytes,3,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *DeleteOperatorByoSubdomainRequest) Reset() {
+	*x = DeleteOperatorByoSubdomainRequest{}
+	mi := &file_user_service_v1_user_proto_msgTypes[119]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteOperatorByoSubdomainRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteOperatorByoSubdomainRequest) ProtoMessage() {}
+
+func (x *DeleteOperatorByoSubdomainRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[119]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteOperatorByoSubdomainRequest.ProtoReflect.Descriptor instead.
+func (*DeleteOperatorByoSubdomainRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{119}
+}
+
+func (x *DeleteOperatorByoSubdomainRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *DeleteOperatorByoSubdomainRequest) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *DeleteOperatorByoSubdomainRequest) GetSubdomain() string {
+	if x != nil {
+		return x.Subdomain
+	}
+	return ""
+}
+
+type DeleteOperatorByoSubdomainResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteOperatorByoSubdomainResponse) Reset() {
+	*x = DeleteOperatorByoSubdomainResponse{}
+	mi := &file_user_service_v1_user_proto_msgTypes[120]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteOperatorByoSubdomainResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteOperatorByoSubdomainResponse) ProtoMessage() {}
+
+func (x *DeleteOperatorByoSubdomainResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[120]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteOperatorByoSubdomainResponse.ProtoReflect.Descriptor instead.
+func (*DeleteOperatorByoSubdomainResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{120}
+}
+
+type AddOperatorBackofficeSubdomainRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	OperatorId      int64                   `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	Subdomain       string                  `protobuf:"bytes,3,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *AddOperatorBackofficeSubdomainRequest) Reset() {
+	*x = AddOperatorBackofficeSubdomainRequest{}
+	mi := &file_user_service_v1_user_proto_msgTypes[121]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddOperatorBackofficeSubdomainRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddOperatorBackofficeSubdomainRequest) ProtoMessage() {}
+
+func (x *AddOperatorBackofficeSubdomainRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[121]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddOperatorBackofficeSubdomainRequest.ProtoReflect.Descriptor instead.
+func (*AddOperatorBackofficeSubdomainRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{121}
+}
+
+func (x *AddOperatorBackofficeSubdomainRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *AddOperatorBackofficeSubdomainRequest) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *AddOperatorBackofficeSubdomainRequest) GetSubdomain() string {
+	if x != nil {
+		return x.Subdomain
+	}
+	return ""
+}
+
+type AddOperatorBackofficeSubdomainResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddOperatorBackofficeSubdomainResponse) Reset() {
+	*x = AddOperatorBackofficeSubdomainResponse{}
+	mi := &file_user_service_v1_user_proto_msgTypes[122]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddOperatorBackofficeSubdomainResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddOperatorBackofficeSubdomainResponse) ProtoMessage() {}
+
+func (x *AddOperatorBackofficeSubdomainResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[122]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddOperatorBackofficeSubdomainResponse.ProtoReflect.Descriptor instead.
+func (*AddOperatorBackofficeSubdomainResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{122}
+}
+
+type DeleteOperatorBackofficeSubdomainRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	OperatorId      int64                   `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	Subdomain       string                  `protobuf:"bytes,3,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *DeleteOperatorBackofficeSubdomainRequest) Reset() {
+	*x = DeleteOperatorBackofficeSubdomainRequest{}
+	mi := &file_user_service_v1_user_proto_msgTypes[123]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteOperatorBackofficeSubdomainRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteOperatorBackofficeSubdomainRequest) ProtoMessage() {}
+
+func (x *DeleteOperatorBackofficeSubdomainRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[123]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteOperatorBackofficeSubdomainRequest.ProtoReflect.Descriptor instead.
+func (*DeleteOperatorBackofficeSubdomainRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{123}
+}
+
+func (x *DeleteOperatorBackofficeSubdomainRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *DeleteOperatorBackofficeSubdomainRequest) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *DeleteOperatorBackofficeSubdomainRequest) GetSubdomain() string {
+	if x != nil {
+		return x.Subdomain
+	}
+	return ""
+}
+
+type DeleteOperatorBackofficeSubdomainResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteOperatorBackofficeSubdomainResponse) Reset() {
+	*x = DeleteOperatorBackofficeSubdomainResponse{}
+	mi := &file_user_service_v1_user_proto_msgTypes[124]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteOperatorBackofficeSubdomainResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteOperatorBackofficeSubdomainResponse) ProtoMessage() {}
+
+func (x *DeleteOperatorBackofficeSubdomainResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_user_proto_msgTypes[124]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteOperatorBackofficeSubdomainResponse.ProtoReflect.Descriptor instead.
+func (*DeleteOperatorBackofficeSubdomainResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_user_proto_rawDescGZIP(), []int{124}
+}
+
 type ListUsersResponse_User struct {
 	state                     protoimpl.MessageState `protogen:"open.v1"`
 	OperatorName              string                 `protobuf:"bytes,1,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
@@ -7119,7 +7519,7 @@ type ListUsersResponse_User struct {
 
 func (x *ListUsersResponse_User) Reset() {
 	*x = ListUsersResponse_User{}
-	mi := &file_user_service_v1_user_proto_msgTypes[117]
+	mi := &file_user_service_v1_user_proto_msgTypes[125]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7131,7 +7531,7 @@ func (x *ListUsersResponse_User) String() string {
 func (*ListUsersResponse_User) ProtoMessage() {}
 
 func (x *ListUsersResponse_User) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[117]
+	mi := &file_user_service_v1_user_proto_msgTypes[125]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7342,7 +7742,7 @@ type GetCommentsByUserIdResponse_Comment struct {
 
 func (x *GetCommentsByUserIdResponse_Comment) Reset() {
 	*x = GetCommentsByUserIdResponse_Comment{}
-	mi := &file_user_service_v1_user_proto_msgTypes[118]
+	mi := &file_user_service_v1_user_proto_msgTypes[126]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7354,7 +7754,7 @@ func (x *GetCommentsByUserIdResponse_Comment) String() string {
 func (*GetCommentsByUserIdResponse_Comment) ProtoMessage() {}
 
 func (x *GetCommentsByUserIdResponse_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[118]
+	mi := &file_user_service_v1_user_proto_msgTypes[126]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7416,7 +7816,7 @@ type GetUserProfileResponse_IpInfo struct {
 
 func (x *GetUserProfileResponse_IpInfo) Reset() {
 	*x = GetUserProfileResponse_IpInfo{}
-	mi := &file_user_service_v1_user_proto_msgTypes[119]
+	mi := &file_user_service_v1_user_proto_msgTypes[127]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7428,7 +7828,7 @@ func (x *GetUserProfileResponse_IpInfo) String() string {
 func (*GetUserProfileResponse_IpInfo) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_IpInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[119]
+	mi := &file_user_service_v1_user_proto_msgTypes[127]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7483,7 +7883,7 @@ type GetUserProfileResponse_RegistrationRecord struct {
 
 func (x *GetUserProfileResponse_RegistrationRecord) Reset() {
 	*x = GetUserProfileResponse_RegistrationRecord{}
-	mi := &file_user_service_v1_user_proto_msgTypes[120]
+	mi := &file_user_service_v1_user_proto_msgTypes[128]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7495,7 +7895,7 @@ func (x *GetUserProfileResponse_RegistrationRecord) String() string {
 func (*GetUserProfileResponse_RegistrationRecord) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_RegistrationRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[120]
+	mi := &file_user_service_v1_user_proto_msgTypes[128]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7598,7 +7998,7 @@ type GetUserProfileResponse_LoginRecord struct {
 
 func (x *GetUserProfileResponse_LoginRecord) Reset() {
 	*x = GetUserProfileResponse_LoginRecord{}
-	mi := &file_user_service_v1_user_proto_msgTypes[121]
+	mi := &file_user_service_v1_user_proto_msgTypes[129]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7610,7 +8010,7 @@ func (x *GetUserProfileResponse_LoginRecord) String() string {
 func (*GetUserProfileResponse_LoginRecord) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_LoginRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[121]
+	mi := &file_user_service_v1_user_proto_msgTypes[129]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7702,7 +8102,7 @@ type GetUserProfileResponse_Comment struct {
 
 func (x *GetUserProfileResponse_Comment) Reset() {
 	*x = GetUserProfileResponse_Comment{}
-	mi := &file_user_service_v1_user_proto_msgTypes[122]
+	mi := &file_user_service_v1_user_proto_msgTypes[130]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7714,7 +8114,7 @@ func (x *GetUserProfileResponse_Comment) String() string {
 func (*GetUserProfileResponse_Comment) ProtoMessage() {}
 
 func (x *GetUserProfileResponse_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[122]
+	mi := &file_user_service_v1_user_proto_msgTypes[130]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7775,7 +8175,7 @@ type GetOverviewDashboardFromUserResponse_RegisteredUsers struct {
 
 func (x *GetOverviewDashboardFromUserResponse_RegisteredUsers) Reset() {
 	*x = GetOverviewDashboardFromUserResponse_RegisteredUsers{}
-	mi := &file_user_service_v1_user_proto_msgTypes[123]
+	mi := &file_user_service_v1_user_proto_msgTypes[131]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7787,7 +8187,7 @@ func (x *GetOverviewDashboardFromUserResponse_RegisteredUsers) String() string {
 func (*GetOverviewDashboardFromUserResponse_RegisteredUsers) ProtoMessage() {}
 
 func (x *GetOverviewDashboardFromUserResponse_RegisteredUsers) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[123]
+	mi := &file_user_service_v1_user_proto_msgTypes[131]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7827,7 +8227,7 @@ type GetOverviewDashboardFromUserResponse_FirstDepositUsers struct {
 
 func (x *GetOverviewDashboardFromUserResponse_FirstDepositUsers) Reset() {
 	*x = GetOverviewDashboardFromUserResponse_FirstDepositUsers{}
-	mi := &file_user_service_v1_user_proto_msgTypes[124]
+	mi := &file_user_service_v1_user_proto_msgTypes[132]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7839,7 +8239,7 @@ func (x *GetOverviewDashboardFromUserResponse_FirstDepositUsers) String() string
 func (*GetOverviewDashboardFromUserResponse_FirstDepositUsers) ProtoMessage() {}
 
 func (x *GetOverviewDashboardFromUserResponse_FirstDepositUsers) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[124]
+	mi := &file_user_service_v1_user_proto_msgTypes[132]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7879,7 +8279,7 @@ type GetOverviewDashboardFromUserResponse_ActiveUsers struct {
 
 func (x *GetOverviewDashboardFromUserResponse_ActiveUsers) Reset() {
 	*x = GetOverviewDashboardFromUserResponse_ActiveUsers{}
-	mi := &file_user_service_v1_user_proto_msgTypes[125]
+	mi := &file_user_service_v1_user_proto_msgTypes[133]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7891,7 +8291,7 @@ func (x *GetOverviewDashboardFromUserResponse_ActiveUsers) String() string {
 func (*GetOverviewDashboardFromUserResponse_ActiveUsers) ProtoMessage() {}
 
 func (x *GetOverviewDashboardFromUserResponse_ActiveUsers) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[125]
+	mi := &file_user_service_v1_user_proto_msgTypes[133]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7932,7 +8332,7 @@ type GetOperatorResponse_Operator struct {
 
 func (x *GetOperatorResponse_Operator) Reset() {
 	*x = GetOperatorResponse_Operator{}
-	mi := &file_user_service_v1_user_proto_msgTypes[126]
+	mi := &file_user_service_v1_user_proto_msgTypes[134]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7944,7 +8344,7 @@ func (x *GetOperatorResponse_Operator) String() string {
 func (*GetOperatorResponse_Operator) ProtoMessage() {}
 
 func (x *GetOperatorResponse_Operator) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[126]
+	mi := &file_user_service_v1_user_proto_msgTypes[134]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7992,7 +8392,7 @@ type GetOperatorsByIdsResponse_Operator struct {
 
 func (x *GetOperatorsByIdsResponse_Operator) Reset() {
 	*x = GetOperatorsByIdsResponse_Operator{}
-	mi := &file_user_service_v1_user_proto_msgTypes[127]
+	mi := &file_user_service_v1_user_proto_msgTypes[135]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8004,7 +8404,7 @@ func (x *GetOperatorsByIdsResponse_Operator) String() string {
 func (*GetOperatorsByIdsResponse_Operator) ProtoMessage() {}
 
 func (x *GetOperatorsByIdsResponse_Operator) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[127]
+	mi := &file_user_service_v1_user_proto_msgTypes[135]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8055,7 +8455,7 @@ type ListAllOperatorsResponse_Operator struct {
 
 func (x *ListAllOperatorsResponse_Operator) Reset() {
 	*x = ListAllOperatorsResponse_Operator{}
-	mi := &file_user_service_v1_user_proto_msgTypes[128]
+	mi := &file_user_service_v1_user_proto_msgTypes[136]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8067,7 +8467,7 @@ func (x *ListAllOperatorsResponse_Operator) String() string {
 func (*ListAllOperatorsResponse_Operator) ProtoMessage() {}
 
 func (x *ListAllOperatorsResponse_Operator) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[128]
+	mi := &file_user_service_v1_user_proto_msgTypes[136]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8141,7 +8541,7 @@ type ListRetailerOperatorsResponse_OperatorInfo struct {
 
 func (x *ListRetailerOperatorsResponse_OperatorInfo) Reset() {
 	*x = ListRetailerOperatorsResponse_OperatorInfo{}
-	mi := &file_user_service_v1_user_proto_msgTypes[129]
+	mi := &file_user_service_v1_user_proto_msgTypes[137]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8153,7 +8553,7 @@ func (x *ListRetailerOperatorsResponse_OperatorInfo) String() string {
 func (*ListRetailerOperatorsResponse_OperatorInfo) ProtoMessage() {}
 
 func (x *ListRetailerOperatorsResponse_OperatorInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[129]
+	mi := &file_user_service_v1_user_proto_msgTypes[137]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8233,7 +8633,7 @@ type ListCompanyOperatorsResponse_OperatorInfo struct {
 
 func (x *ListCompanyOperatorsResponse_OperatorInfo) Reset() {
 	*x = ListCompanyOperatorsResponse_OperatorInfo{}
-	mi := &file_user_service_v1_user_proto_msgTypes[130]
+	mi := &file_user_service_v1_user_proto_msgTypes[138]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8245,7 +8645,7 @@ func (x *ListCompanyOperatorsResponse_OperatorInfo) String() string {
 func (*ListCompanyOperatorsResponse_OperatorInfo) ProtoMessage() {}
 
 func (x *ListCompanyOperatorsResponse_OperatorInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[130]
+	mi := &file_user_service_v1_user_proto_msgTypes[138]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8318,7 +8718,7 @@ type ListBottomOperatorsResponse_OperatorInfo struct {
 
 func (x *ListBottomOperatorsResponse_OperatorInfo) Reset() {
 	*x = ListBottomOperatorsResponse_OperatorInfo{}
-	mi := &file_user_service_v1_user_proto_msgTypes[131]
+	mi := &file_user_service_v1_user_proto_msgTypes[139]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8330,7 +8730,7 @@ func (x *ListBottomOperatorsResponse_OperatorInfo) String() string {
 func (*ListBottomOperatorsResponse_OperatorInfo) ProtoMessage() {}
 
 func (x *ListBottomOperatorsResponse_OperatorInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_user_proto_msgTypes[131]
+	mi := &file_user_service_v1_user_proto_msgTypes[139]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8915,7 +9315,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"_affiliate\"9\n" +
 	"\x16CreateBusinessResponse\x12\x1f\n" +
 	"\vbusiness_id\x18\x01 \x01(\x03R\n" +
-	"businessId\"\xd0\t\n" +
+	"businessId\"\xb3\n" +
+	"\n" +
 	"\x0fOperatorDetails\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12#\n" +
 	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12,\n" +
@@ -8925,32 +9326,34 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\vexternal_id\x18\x06 \x01(\tR\n" +
 	"externalId\x12\x17\n" +
 	"\aapi_key\x18\a \x01(\tR\x06apiKey\x12\x1c\n" +
-	"\tsubdomain\x18\b \x01(\tR\tsubdomain\x121\n" +
-	"\x14backoffice_subdomain\x18\t \x01(\tR\x13backofficeSubdomain\x126\n" +
-	"\x17backoffice_child_domain\x18\n" +
-	" \x01(\tR\x15backofficeChildDomain\x12\x1f\n" +
-	"\vdomain_pool\x18\v \x03(\tR\n" +
+	"\tsubdomain\x18\b \x01(\tR\tsubdomain\x12%\n" +
+	"\x0ebyo_subdomains\x18\t \x03(\tR\rbyoSubdomains\x121\n" +
+	"\x14backoffice_subdomain\x18\n" +
+	" \x01(\tR\x13backofficeSubdomain\x12:\n" +
+	"\x19backoffice_byo_subdomains\x18\v \x03(\tR\x17backofficeByoSubdomains\x126\n" +
+	"\x17backoffice_child_domain\x18\f \x01(\tR\x15backofficeChildDomain\x12\x1f\n" +
+	"\vdomain_pool\x18\r \x03(\tR\n" +
 	"domainPool\x12\x18\n" +
-	"\aenabled\x18\f \x01(\bR\aenabled\x12\x12\n" +
-	"\x04mode\x18\r \x01(\tR\x04mode\x12!\n" +
-	"\foperator_key\x18\x0e \x01(\tR\voperatorKey\x12-\n" +
-	"\x12reporting_currency\x18\x0f \x01(\tR\x11reportingCurrency\x12/\n" +
-	"\x13backoffice_timezone\x18\x10 \x01(\tR\x12backofficeTimezone\x12/\n" +
-	"\x13supported_languages\x18\x11 \x03(\tR\x12supportedLanguages\x121\n" +
-	"\x14supported_currencies\x18\x12 \x03(\tR\x13supportedCurrencies\x12\x16\n" +
-	"\x06status\x18\x13 \x01(\tR\x06status\x12%\n" +
-	"\x0eis_maintenance\x18\x14 \x01(\bR\risMaintenance\x124\n" +
-	"\x16maintenance_start_time\x18\x15 \x01(\x03R\x14maintenanceStartTime\x120\n" +
-	"\x14maintenance_end_time\x18\x16 \x01(\x03R\x12maintenanceEndTime\x12\x1f\n" +
-	"\voperator_id\x18\x17 \x01(\x03R\n" +
+	"\aenabled\x18\x0e \x01(\bR\aenabled\x12\x12\n" +
+	"\x04mode\x18\x0f \x01(\tR\x04mode\x12!\n" +
+	"\foperator_key\x18\x10 \x01(\tR\voperatorKey\x12-\n" +
+	"\x12reporting_currency\x18\x11 \x01(\tR\x11reportingCurrency\x12/\n" +
+	"\x13backoffice_timezone\x18\x12 \x01(\tR\x12backofficeTimezone\x12/\n" +
+	"\x13supported_languages\x18\x13 \x03(\tR\x12supportedLanguages\x121\n" +
+	"\x14supported_currencies\x18\x14 \x03(\tR\x13supportedCurrencies\x12\x16\n" +
+	"\x06status\x18\x15 \x01(\tR\x06status\x12%\n" +
+	"\x0eis_maintenance\x18\x16 \x01(\bR\risMaintenance\x124\n" +
+	"\x16maintenance_start_time\x18\x17 \x01(\x03R\x14maintenanceStartTime\x120\n" +
+	"\x14maintenance_end_time\x18\x18 \x01(\x03R\x12maintenanceEndTime\x12\x1f\n" +
+	"\voperator_id\x18\x19 \x01(\x03R\n" +
 	"operatorId\x12.\n" +
-	"\x13company_operator_id\x18\x18 \x01(\x03R\x11companyOperatorId\x122\n" +
-	"\x15company_operator_name\x18\x19 \x01(\tR\x13companyOperatorName\x120\n" +
-	"\x14retailer_operator_id\x18\x1a \x01(\x03R\x12retailerOperatorId\x124\n" +
-	"\x16retailer_operator_name\x18\x1b \x01(\tR\x14retailerOperatorName\x12,\n" +
-	"\x12system_operator_id\x18\x1c \x01(\x03R\x10systemOperatorId\x120\n" +
-	"\x14system_operator_name\x18\x1d \x01(\tR\x12systemOperatorName\x12\x16\n" +
-	"\x06config\x18\x1e \x01(\tR\x06config\"<\n" +
+	"\x13company_operator_id\x18\x1a \x01(\x03R\x11companyOperatorId\x122\n" +
+	"\x15company_operator_name\x18\x1b \x01(\tR\x13companyOperatorName\x120\n" +
+	"\x14retailer_operator_id\x18\x1c \x01(\x03R\x12retailerOperatorId\x124\n" +
+	"\x16retailer_operator_name\x18\x1d \x01(\tR\x14retailerOperatorName\x12,\n" +
+	"\x12system_operator_id\x18\x1e \x01(\x03R\x10systemOperatorId\x120\n" +
+	"\x14system_operator_name\x18\x1f \x01(\tR\x12systemOperatorName\x12\x16\n" +
+	"\x06config\x18  \x01(\tR\x06config\"<\n" +
 	"\x19GetOperatorDetailsRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\"m\n" +
@@ -9047,7 +9450,31 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"!GetOperatorDetailsByUserIdRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\"u\n" +
 	"\"GetOperatorDetailsByUserIdResponse\x12O\n" +
-	"\x10operator_details\x18\x01 \x01(\v2$.api.user.service.v1.OperatorDetailsR\x0foperatorDetails*j\n" +
+	"\x10operator_details\x18\x01 \x01(\v2$.api.user.service.v1.OperatorDetailsR\x0foperatorDetails\"\xa7\x01\n" +
+	"\x1eAddOperatorByoSubdomainRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1f\n" +
+	"\voperator_id\x18\x02 \x01(\x03R\n" +
+	"operatorId\x12\x1c\n" +
+	"\tsubdomain\x18\x03 \x01(\tR\tsubdomain\"!\n" +
+	"\x1fAddOperatorByoSubdomainResponse\"\xaa\x01\n" +
+	"!DeleteOperatorByoSubdomainRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1f\n" +
+	"\voperator_id\x18\x02 \x01(\x03R\n" +
+	"operatorId\x12\x1c\n" +
+	"\tsubdomain\x18\x03 \x01(\tR\tsubdomain\"$\n" +
+	"\"DeleteOperatorByoSubdomainResponse\"\xae\x01\n" +
+	"%AddOperatorBackofficeSubdomainRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1f\n" +
+	"\voperator_id\x18\x02 \x01(\x03R\n" +
+	"operatorId\x12\x1c\n" +
+	"\tsubdomain\x18\x03 \x01(\tR\tsubdomain\"(\n" +
+	"&AddOperatorBackofficeSubdomainResponse\"\xb1\x01\n" +
+	"(DeleteOperatorBackofficeSubdomainRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1f\n" +
+	"\voperator_id\x18\x02 \x01(\x03R\n" +
+	"operatorId\x12\x1c\n" +
+	"\tsubdomain\x18\x03 \x01(\tR\tsubdomain\"+\n" +
+	")DeleteOperatorBackofficeSubdomainResponse*j\n" +
 	"\bAuthType\x12\x19\n" +
 	"\x15AUTH_TYPE_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12AUTH_TYPE_PASSWORD\x10\x01\x12\x13\n" +
@@ -9067,7 +9494,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x19OPERATOR_TYPE_UNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x16OPERATOR_TYPE_RETAILER\x10\x01\x12\x17\n" +
 	"\x13OPERATOR_TYPE_GROUP\x10\x02\x12\x1a\n" +
-	"\x16OPERATOR_TYPE_OPERATOR\x10\x032\xe06\n" +
+	"\x16OPERATOR_TYPE_OPERATOR\x10\x032\xc0;\n" +
 	"\x04User\x12v\n" +
 	"\bRegister\x12$.api.user.service.v1.RegisterRequest\x1a!.api.user.service.v1.AuthResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/user/auth/register\x12m\n" +
 	"\x05Login\x12!.api.user.service.v1.LoginRequest\x1a!.api.user.service.v1.AuthResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/user/auth/login\x12_\n" +
@@ -9132,7 +9559,11 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\fListAllUsers\x12(.api.user.service.v1.ListAllUsersRequest\x1a).api.user.service.v1.ListAllUsersResponse\"\x00\x12\x8c\x01\n" +
 	"\x19ListOperatorsByAdminEmail\x125.api.user.service.v1.ListOperatorsByAdminEmailRequest\x1a6.api.user.service.v1.ListOperatorsByAdminEmailResponse\"\x00\x12z\n" +
 	"\x13ListOperatorDetails\x12/.api.user.service.v1.ListOperatorDetailsRequest\x1a0.api.user.service.v1.ListOperatorDetailsResponse\"\x00\x12\x8f\x01\n" +
-	"\x1aGetOperatorDetailsByUserId\x126.api.user.service.v1.GetOperatorDetailsByUserIdRequest\x1a7.api.user.service.v1.GetOperatorDetailsByUserIdResponse\"\x00BO\n" +
+	"\x1aGetOperatorDetailsByUserId\x126.api.user.service.v1.GetOperatorDetailsByUserIdRequest\x1a7.api.user.service.v1.GetOperatorDetailsByUserIdResponse\"\x00\x12\x86\x01\n" +
+	"\x17AddOperatorByoSubdomain\x123.api.user.service.v1.AddOperatorByoSubdomainRequest\x1a4.api.user.service.v1.AddOperatorByoSubdomainResponse\"\x00\x12\x8f\x01\n" +
+	"\x1aDeleteOperatorByoSubdomain\x126.api.user.service.v1.DeleteOperatorByoSubdomainRequest\x1a7.api.user.service.v1.DeleteOperatorByoSubdomainResponse\"\x00\x12\x9b\x01\n" +
+	"\x1eAddOperatorBackofficeSubdomain\x12:.api.user.service.v1.AddOperatorBackofficeSubdomainRequest\x1a;.api.user.service.v1.AddOperatorBackofficeSubdomainResponse\"\x00\x12\xa4\x01\n" +
+	"!DeleteOperatorBackofficeSubdomain\x12=.api.user.service.v1.DeleteOperatorBackofficeSubdomainRequest\x1a>.api.user.service.v1.DeleteOperatorBackofficeSubdomainResponse\"\x00BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
@@ -9148,7 +9579,7 @@ func file_user_service_v1_user_proto_rawDescGZIP() []byte {
 }
 
 var file_user_service_v1_user_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_user_service_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 132)
+var file_user_service_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 140)
 var file_user_service_v1_user_proto_goTypes = []any{
 	(AuthType)(0),                                                  // 0: api.user.service.v1.AuthType
 	(PasswordProvider)(0),                                          // 1: api.user.service.v1.PasswordProvider
@@ -9271,24 +9702,32 @@ var file_user_service_v1_user_proto_goTypes = []any{
 	(*ListOperatorDetailsResponse)(nil),                            // 118: api.user.service.v1.ListOperatorDetailsResponse
 	(*GetOperatorDetailsByUserIdRequest)(nil),                      // 119: api.user.service.v1.GetOperatorDetailsByUserIdRequest
 	(*GetOperatorDetailsByUserIdResponse)(nil),                     // 120: api.user.service.v1.GetOperatorDetailsByUserIdResponse
-	(*ListUsersResponse_User)(nil),                                 // 121: api.user.service.v1.ListUsersResponse.User
-	(*GetCommentsByUserIdResponse_Comment)(nil),                    // 122: api.user.service.v1.GetCommentsByUserIdResponse.Comment
-	(*GetUserProfileResponse_IpInfo)(nil),                          // 123: api.user.service.v1.GetUserProfileResponse.IpInfo
-	(*GetUserProfileResponse_RegistrationRecord)(nil),              // 124: api.user.service.v1.GetUserProfileResponse.RegistrationRecord
-	(*GetUserProfileResponse_LoginRecord)(nil),                     // 125: api.user.service.v1.GetUserProfileResponse.LoginRecord
-	(*GetUserProfileResponse_Comment)(nil),                         // 126: api.user.service.v1.GetUserProfileResponse.Comment
-	(*GetOverviewDashboardFromUserResponse_RegisteredUsers)(nil),   // 127: api.user.service.v1.GetOverviewDashboardFromUserResponse.RegisteredUsers
-	(*GetOverviewDashboardFromUserResponse_FirstDepositUsers)(nil), // 128: api.user.service.v1.GetOverviewDashboardFromUserResponse.FirstDepositUsers
-	(*GetOverviewDashboardFromUserResponse_ActiveUsers)(nil),       // 129: api.user.service.v1.GetOverviewDashboardFromUserResponse.ActiveUsers
-	(*GetOperatorResponse_Operator)(nil),                           // 130: api.user.service.v1.GetOperatorResponse.Operator
-	(*GetOperatorsByIdsResponse_Operator)(nil),                     // 131: api.user.service.v1.GetOperatorsByIdsResponse.Operator
-	(*ListAllOperatorsResponse_Operator)(nil),                      // 132: api.user.service.v1.ListAllOperatorsResponse.Operator
-	(*ListRetailerOperatorsResponse_OperatorInfo)(nil),             // 133: api.user.service.v1.ListRetailerOperatorsResponse.OperatorInfo
-	(*ListCompanyOperatorsResponse_OperatorInfo)(nil),              // 134: api.user.service.v1.ListCompanyOperatorsResponse.OperatorInfo
-	(*ListBottomOperatorsResponse_OperatorInfo)(nil),               // 135: api.user.service.v1.ListBottomOperatorsResponse.OperatorInfo
-	(*common.OperatorContext)(nil),                                 // 136: api.common.OperatorContext
-	(*timestamppb.Timestamp)(nil),                                  // 137: google.protobuf.Timestamp
-	(*common.OperatorContextFilters)(nil),                          // 138: api.common.OperatorContextFilters
+	(*AddOperatorByoSubdomainRequest)(nil),                         // 121: api.user.service.v1.AddOperatorByoSubdomainRequest
+	(*AddOperatorByoSubdomainResponse)(nil),                        // 122: api.user.service.v1.AddOperatorByoSubdomainResponse
+	(*DeleteOperatorByoSubdomainRequest)(nil),                      // 123: api.user.service.v1.DeleteOperatorByoSubdomainRequest
+	(*DeleteOperatorByoSubdomainResponse)(nil),                     // 124: api.user.service.v1.DeleteOperatorByoSubdomainResponse
+	(*AddOperatorBackofficeSubdomainRequest)(nil),                  // 125: api.user.service.v1.AddOperatorBackofficeSubdomainRequest
+	(*AddOperatorBackofficeSubdomainResponse)(nil),                 // 126: api.user.service.v1.AddOperatorBackofficeSubdomainResponse
+	(*DeleteOperatorBackofficeSubdomainRequest)(nil),               // 127: api.user.service.v1.DeleteOperatorBackofficeSubdomainRequest
+	(*DeleteOperatorBackofficeSubdomainResponse)(nil),              // 128: api.user.service.v1.DeleteOperatorBackofficeSubdomainResponse
+	(*ListUsersResponse_User)(nil),                                 // 129: api.user.service.v1.ListUsersResponse.User
+	(*GetCommentsByUserIdResponse_Comment)(nil),                    // 130: api.user.service.v1.GetCommentsByUserIdResponse.Comment
+	(*GetUserProfileResponse_IpInfo)(nil),                          // 131: api.user.service.v1.GetUserProfileResponse.IpInfo
+	(*GetUserProfileResponse_RegistrationRecord)(nil),              // 132: api.user.service.v1.GetUserProfileResponse.RegistrationRecord
+	(*GetUserProfileResponse_LoginRecord)(nil),                     // 133: api.user.service.v1.GetUserProfileResponse.LoginRecord
+	(*GetUserProfileResponse_Comment)(nil),                         // 134: api.user.service.v1.GetUserProfileResponse.Comment
+	(*GetOverviewDashboardFromUserResponse_RegisteredUsers)(nil),   // 135: api.user.service.v1.GetOverviewDashboardFromUserResponse.RegisteredUsers
+	(*GetOverviewDashboardFromUserResponse_FirstDepositUsers)(nil), // 136: api.user.service.v1.GetOverviewDashboardFromUserResponse.FirstDepositUsers
+	(*GetOverviewDashboardFromUserResponse_ActiveUsers)(nil),       // 137: api.user.service.v1.GetOverviewDashboardFromUserResponse.ActiveUsers
+	(*GetOperatorResponse_Operator)(nil),                           // 138: api.user.service.v1.GetOperatorResponse.Operator
+	(*GetOperatorsByIdsResponse_Operator)(nil),                     // 139: api.user.service.v1.GetOperatorsByIdsResponse.Operator
+	(*ListAllOperatorsResponse_Operator)(nil),                      // 140: api.user.service.v1.ListAllOperatorsResponse.Operator
+	(*ListRetailerOperatorsResponse_OperatorInfo)(nil),             // 141: api.user.service.v1.ListRetailerOperatorsResponse.OperatorInfo
+	(*ListCompanyOperatorsResponse_OperatorInfo)(nil),              // 142: api.user.service.v1.ListCompanyOperatorsResponse.OperatorInfo
+	(*ListBottomOperatorsResponse_OperatorInfo)(nil),               // 143: api.user.service.v1.ListBottomOperatorsResponse.OperatorInfo
+	(*common.OperatorContext)(nil),                                 // 144: api.common.OperatorContext
+	(*timestamppb.Timestamp)(nil),                                  // 145: google.protobuf.Timestamp
+	(*common.OperatorContextFilters)(nil),                          // 146: api.common.OperatorContextFilters
 }
 var file_user_service_v1_user_proto_depIdxs = []int32{
 	1,   // 0: api.user.service.v1.RegisterRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
@@ -9299,197 +9738,209 @@ var file_user_service_v1_user_proto_depIdxs = []int32{
 	4,   // 5: api.user.service.v1.AuthResponse.user_info:type_name -> api.user.service.v1.UserInfo
 	4,   // 6: api.user.service.v1.GetUserResponse.user_info:type_name -> api.user.service.v1.UserInfo
 	4,   // 7: api.user.service.v1.GetUsersByIdsResponse.users:type_name -> api.user.service.v1.UserInfo
-	136, // 8: api.user.service.v1.SetOperatorTagsConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	136, // 9: api.user.service.v1.SetOperatorTagsRequest.operator_context:type_name -> api.common.OperatorContext
-	136, // 10: api.user.service.v1.GetOperatorTagsConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	136, // 11: api.user.service.v1.GetOperatorTagsRequest.operator_context:type_name -> api.common.OperatorContext
-	136, // 12: api.user.service.v1.GetUserTagsByIdRequest.operator_context:type_name -> api.common.OperatorContext
-	136, // 13: api.user.service.v1.SetUserTagsByIdRequest.operator_context:type_name -> api.common.OperatorContext
-	136, // 14: api.user.service.v1.SendEmailVerificationCodeRequest.operator_context:type_name -> api.common.OperatorContext
-	136, // 15: api.user.service.v1.SendPasswordResetCodeRequest.operator_context:type_name -> api.common.OperatorContext
-	136, // 16: api.user.service.v1.ResetPasswordWithCodeRequest.operator_context:type_name -> api.common.OperatorContext
-	136, // 17: api.user.service.v1.UpdateUserRequest.operator_context:type_name -> api.common.OperatorContext
-	137, // 18: api.user.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
-	137, // 19: api.user.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
-	136, // 20: api.user.service.v1.ListUsersRequest.operator_context:type_name -> api.common.OperatorContext
-	138, // 21: api.user.service.v1.ListUsersRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	121, // 22: api.user.service.v1.ListUsersResponse.users:type_name -> api.user.service.v1.ListUsersResponse.User
-	136, // 23: api.user.service.v1.CreateUserRequest.operator_context:type_name -> api.common.OperatorContext
-	136, // 24: api.user.service.v1.VerifyEmailRequest.operator_context:type_name -> api.common.OperatorContext
-	136, // 25: api.user.service.v1.AddCommentRequest.operator_context:type_name -> api.common.OperatorContext
-	122, // 26: api.user.service.v1.GetCommentsByUserIdResponse.comments:type_name -> api.user.service.v1.GetCommentsByUserIdResponse.Comment
-	136, // 27: api.user.service.v1.GetUserProfileRequest.operator_context:type_name -> api.common.OperatorContext
-	124, // 28: api.user.service.v1.GetUserProfileResponse.registration_record:type_name -> api.user.service.v1.GetUserProfileResponse.RegistrationRecord
-	125, // 29: api.user.service.v1.GetUserProfileResponse.login_records:type_name -> api.user.service.v1.GetUserProfileResponse.LoginRecord
-	126, // 30: api.user.service.v1.GetUserProfileResponse.comments:type_name -> api.user.service.v1.GetUserProfileResponse.Comment
+	144, // 8: api.user.service.v1.SetOperatorTagsConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	144, // 9: api.user.service.v1.SetOperatorTagsRequest.operator_context:type_name -> api.common.OperatorContext
+	144, // 10: api.user.service.v1.GetOperatorTagsConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	144, // 11: api.user.service.v1.GetOperatorTagsRequest.operator_context:type_name -> api.common.OperatorContext
+	144, // 12: api.user.service.v1.GetUserTagsByIdRequest.operator_context:type_name -> api.common.OperatorContext
+	144, // 13: api.user.service.v1.SetUserTagsByIdRequest.operator_context:type_name -> api.common.OperatorContext
+	144, // 14: api.user.service.v1.SendEmailVerificationCodeRequest.operator_context:type_name -> api.common.OperatorContext
+	144, // 15: api.user.service.v1.SendPasswordResetCodeRequest.operator_context:type_name -> api.common.OperatorContext
+	144, // 16: api.user.service.v1.ResetPasswordWithCodeRequest.operator_context:type_name -> api.common.OperatorContext
+	144, // 17: api.user.service.v1.UpdateUserRequest.operator_context:type_name -> api.common.OperatorContext
+	145, // 18: api.user.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
+	145, // 19: api.user.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
+	144, // 20: api.user.service.v1.ListUsersRequest.operator_context:type_name -> api.common.OperatorContext
+	146, // 21: api.user.service.v1.ListUsersRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	129, // 22: api.user.service.v1.ListUsersResponse.users:type_name -> api.user.service.v1.ListUsersResponse.User
+	144, // 23: api.user.service.v1.CreateUserRequest.operator_context:type_name -> api.common.OperatorContext
+	144, // 24: api.user.service.v1.VerifyEmailRequest.operator_context:type_name -> api.common.OperatorContext
+	144, // 25: api.user.service.v1.AddCommentRequest.operator_context:type_name -> api.common.OperatorContext
+	130, // 26: api.user.service.v1.GetCommentsByUserIdResponse.comments:type_name -> api.user.service.v1.GetCommentsByUserIdResponse.Comment
+	144, // 27: api.user.service.v1.GetUserProfileRequest.operator_context:type_name -> api.common.OperatorContext
+	132, // 28: api.user.service.v1.GetUserProfileResponse.registration_record:type_name -> api.user.service.v1.GetUserProfileResponse.RegistrationRecord
+	133, // 29: api.user.service.v1.GetUserProfileResponse.login_records:type_name -> api.user.service.v1.GetUserProfileResponse.LoginRecord
+	134, // 30: api.user.service.v1.GetUserProfileResponse.comments:type_name -> api.user.service.v1.GetUserProfileResponse.Comment
 	63,  // 31: api.user.service.v1.CreateRoleRequest.permissions:type_name -> api.user.service.v1.Permission
 	63,  // 32: api.user.service.v1.Role.permissions:type_name -> api.user.service.v1.Permission
 	66,  // 33: api.user.service.v1.ListRolesResponse.roles:type_name -> api.user.service.v1.Role
 	63,  // 34: api.user.service.v1.UpdateRoleRequest.permissions:type_name -> api.user.service.v1.Permission
 	66,  // 35: api.user.service.v1.GetRoleResponse.role:type_name -> api.user.service.v1.Role
-	136, // 36: api.user.service.v1.GetOverviewDashboardFromUserRequest.operator_context:type_name -> api.common.OperatorContext
-	138, // 37: api.user.service.v1.GetOverviewDashboardFromUserRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	127, // 38: api.user.service.v1.GetOverviewDashboardFromUserResponse.registered_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.RegisteredUsers
-	128, // 39: api.user.service.v1.GetOverviewDashboardFromUserResponse.first_deposit_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.FirstDepositUsers
-	129, // 40: api.user.service.v1.GetOverviewDashboardFromUserResponse.active_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.ActiveUsers
-	136, // 41: api.user.service.v1.GetOperatorIdsByOriginResponse.operator_context:type_name -> api.common.OperatorContext
-	130, // 42: api.user.service.v1.GetOperatorResponse.operator:type_name -> api.user.service.v1.GetOperatorResponse.Operator
-	131, // 43: api.user.service.v1.GetOperatorsByIdsResponse.operators:type_name -> api.user.service.v1.GetOperatorsByIdsResponse.Operator
-	136, // 44: api.user.service.v1.ListAllOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
-	132, // 45: api.user.service.v1.ListAllOperatorsResponse.operators:type_name -> api.user.service.v1.ListAllOperatorsResponse.Operator
-	136, // 46: api.user.service.v1.CreateBusinessRequest.operator_context:type_name -> api.common.OperatorContext
+	144, // 36: api.user.service.v1.GetOverviewDashboardFromUserRequest.operator_context:type_name -> api.common.OperatorContext
+	146, // 37: api.user.service.v1.GetOverviewDashboardFromUserRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	135, // 38: api.user.service.v1.GetOverviewDashboardFromUserResponse.registered_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.RegisteredUsers
+	136, // 39: api.user.service.v1.GetOverviewDashboardFromUserResponse.first_deposit_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.FirstDepositUsers
+	137, // 40: api.user.service.v1.GetOverviewDashboardFromUserResponse.active_users:type_name -> api.user.service.v1.GetOverviewDashboardFromUserResponse.ActiveUsers
+	144, // 41: api.user.service.v1.GetOperatorIdsByOriginResponse.operator_context:type_name -> api.common.OperatorContext
+	138, // 42: api.user.service.v1.GetOperatorResponse.operator:type_name -> api.user.service.v1.GetOperatorResponse.Operator
+	139, // 43: api.user.service.v1.GetOperatorsByIdsResponse.operators:type_name -> api.user.service.v1.GetOperatorsByIdsResponse.Operator
+	144, // 44: api.user.service.v1.ListAllOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
+	140, // 45: api.user.service.v1.ListAllOperatorsResponse.operators:type_name -> api.user.service.v1.ListAllOperatorsResponse.Operator
+	144, // 46: api.user.service.v1.CreateBusinessRequest.operator_context:type_name -> api.common.OperatorContext
 	100, // 47: api.user.service.v1.GetOperatorDetailsResponse.operator_details:type_name -> api.user.service.v1.OperatorDetails
 	100, // 48: api.user.service.v1.ListOperatorsByParentOperatorIdResponse.operator_details_list:type_name -> api.user.service.v1.OperatorDetails
-	136, // 49: api.user.service.v1.ListRetailerOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
-	133, // 50: api.user.service.v1.ListRetailerOperatorsResponse.retailer_operators:type_name -> api.user.service.v1.ListRetailerOperatorsResponse.OperatorInfo
-	136, // 51: api.user.service.v1.ListCompanyOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
-	134, // 52: api.user.service.v1.ListCompanyOperatorsResponse.company_operators:type_name -> api.user.service.v1.ListCompanyOperatorsResponse.OperatorInfo
-	136, // 53: api.user.service.v1.ListBottomOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
-	135, // 54: api.user.service.v1.ListBottomOperatorsResponse.bottom_operators:type_name -> api.user.service.v1.ListBottomOperatorsResponse.OperatorInfo
-	136, // 55: api.user.service.v1.UpdateOperatorStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
-	136, // 56: api.user.service.v1.UpdateOperatorStatusRequest.operator_context:type_name -> api.common.OperatorContext
-	136, // 57: api.user.service.v1.ListAllUsersRequest.operator_context:type_name -> api.common.OperatorContext
+	144, // 49: api.user.service.v1.ListRetailerOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
+	141, // 50: api.user.service.v1.ListRetailerOperatorsResponse.retailer_operators:type_name -> api.user.service.v1.ListRetailerOperatorsResponse.OperatorInfo
+	144, // 51: api.user.service.v1.ListCompanyOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
+	142, // 52: api.user.service.v1.ListCompanyOperatorsResponse.company_operators:type_name -> api.user.service.v1.ListCompanyOperatorsResponse.OperatorInfo
+	144, // 53: api.user.service.v1.ListBottomOperatorsRequest.operator_context:type_name -> api.common.OperatorContext
+	143, // 54: api.user.service.v1.ListBottomOperatorsResponse.bottom_operators:type_name -> api.user.service.v1.ListBottomOperatorsResponse.OperatorInfo
+	144, // 55: api.user.service.v1.UpdateOperatorStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
+	144, // 56: api.user.service.v1.UpdateOperatorStatusRequest.operator_context:type_name -> api.common.OperatorContext
+	144, // 57: api.user.service.v1.ListAllUsersRequest.operator_context:type_name -> api.common.OperatorContext
 	4,   // 58: api.user.service.v1.ListAllUsersResponse.users:type_name -> api.user.service.v1.UserInfo
-	136, // 59: api.user.service.v1.ListOperatorsByAdminEmailRequest.operator_context:type_name -> api.common.OperatorContext
+	144, // 59: api.user.service.v1.ListOperatorsByAdminEmailRequest.operator_context:type_name -> api.common.OperatorContext
 	100, // 60: api.user.service.v1.ListOperatorsByAdminEmailResponse.retailer_operator_details_list:type_name -> api.user.service.v1.OperatorDetails
 	100, // 61: api.user.service.v1.ListOperatorsByAdminEmailResponse.company_operator_details_list:type_name -> api.user.service.v1.OperatorDetails
 	100, // 62: api.user.service.v1.ListOperatorsByAdminEmailResponse.operator_details_list:type_name -> api.user.service.v1.OperatorDetails
 	100, // 63: api.user.service.v1.ListOperatorDetailsResponse.operator_details_list:type_name -> api.user.service.v1.OperatorDetails
 	100, // 64: api.user.service.v1.GetOperatorDetailsByUserIdResponse.operator_details:type_name -> api.user.service.v1.OperatorDetails
-	137, // 65: api.user.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
-	137, // 66: api.user.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
-	137, // 67: api.user.service.v1.ListUsersResponse.User.created_at:type_name -> google.protobuf.Timestamp
-	66,  // 68: api.user.service.v1.ListUsersResponse.User.role:type_name -> api.user.service.v1.Role
-	137, // 69: api.user.service.v1.GetUserProfileResponse.RegistrationRecord.registered_at:type_name -> google.protobuf.Timestamp
-	123, // 70: api.user.service.v1.GetUserProfileResponse.RegistrationRecord.ip_info:type_name -> api.user.service.v1.GetUserProfileResponse.IpInfo
-	137, // 71: api.user.service.v1.GetUserProfileResponse.LoginRecord.login_at:type_name -> google.protobuf.Timestamp
-	123, // 72: api.user.service.v1.GetUserProfileResponse.LoginRecord.ip_info:type_name -> api.user.service.v1.GetUserProfileResponse.IpInfo
-	137, // 73: api.user.service.v1.GetUserProfileResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
-	136, // 74: api.user.service.v1.ListAllOperatorsResponse.Operator.operator_context:type_name -> api.common.OperatorContext
-	136, // 75: api.user.service.v1.ListRetailerOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
-	136, // 76: api.user.service.v1.ListCompanyOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
-	136, // 77: api.user.service.v1.ListBottomOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
-	5,   // 78: api.user.service.v1.User.Register:input_type -> api.user.service.v1.RegisterRequest
-	6,   // 79: api.user.service.v1.User.Login:input_type -> api.user.service.v1.LoginRequest
-	8,   // 80: api.user.service.v1.User.LoginWithInfo:input_type -> api.user.service.v1.LoginWithInfoRequest
-	9,   // 81: api.user.service.v1.User.RegisterOrLoginWithOAuth:input_type -> api.user.service.v1.OAuthRequest
-	10,  // 82: api.user.service.v1.User.RegisterOrLoginWithTelegram:input_type -> api.user.service.v1.TelegramAuthRequest
-	11,  // 83: api.user.service.v1.User.RefreshToken:input_type -> api.user.service.v1.RefreshTokenRequest
-	14,  // 84: api.user.service.v1.User.GetUser:input_type -> api.user.service.v1.GetUserRequest
-	16,  // 85: api.user.service.v1.User.GetUsersByIds:input_type -> api.user.service.v1.GetUsersByIdsRequest
-	18,  // 86: api.user.service.v1.User.GetUserIdsByOperatorIds:input_type -> api.user.service.v1.GetUserIdsByOperatorIdsRequest
-	20,  // 87: api.user.service.v1.User.Logout:input_type -> api.user.service.v1.LogoutRequest
-	22,  // 88: api.user.service.v1.User.IsTokenRevoked:input_type -> api.user.service.v1.IsTokenRevokedRequest
-	24,  // 89: api.user.service.v1.User.SetOperatorTagsConfig:input_type -> api.user.service.v1.SetOperatorTagsConfigRequest
-	26,  // 90: api.user.service.v1.User.SetOperatorTags:input_type -> api.user.service.v1.SetOperatorTagsRequest
-	28,  // 91: api.user.service.v1.User.GetOperatorTagsConfig:input_type -> api.user.service.v1.GetOperatorTagsConfigRequest
-	30,  // 92: api.user.service.v1.User.GetOperatorTags:input_type -> api.user.service.v1.GetOperatorTagsRequest
-	32,  // 93: api.user.service.v1.User.GetUserTags:input_type -> api.user.service.v1.GetUserTagsRequest
-	34,  // 94: api.user.service.v1.User.GetUserTagsById:input_type -> api.user.service.v1.GetUserTagsByIdRequest
-	36,  // 95: api.user.service.v1.User.SetUserTagsById:input_type -> api.user.service.v1.SetUserTagsByIdRequest
-	38,  // 96: api.user.service.v1.User.CheckPermission:input_type -> api.user.service.v1.CheckPermissionRequest
-	40,  // 97: api.user.service.v1.User.AddOperator:input_type -> api.user.service.v1.AddOperatorRequest
-	42,  // 98: api.user.service.v1.User.SendEmailVerificationCode:input_type -> api.user.service.v1.SendEmailVerificationCodeRequest
-	44,  // 99: api.user.service.v1.User.SendPasswordResetCode:input_type -> api.user.service.v1.SendPasswordResetCodeRequest
-	46,  // 100: api.user.service.v1.User.ResetPasswordWithCode:input_type -> api.user.service.v1.ResetPasswordWithCodeRequest
-	48,  // 101: api.user.service.v1.User.UpdateUser:input_type -> api.user.service.v1.UpdateUserRequest
-	50,  // 102: api.user.service.v1.User.ListUsers:input_type -> api.user.service.v1.ListUsersRequest
-	52,  // 103: api.user.service.v1.User.CreateUser:input_type -> api.user.service.v1.CreateUserRequest
-	54,  // 104: api.user.service.v1.User.VerifyEmail:input_type -> api.user.service.v1.VerifyEmailRequest
-	56,  // 105: api.user.service.v1.User.AddComment:input_type -> api.user.service.v1.AddCommentRequest
-	58,  // 106: api.user.service.v1.User.GetCommentsByUserId:input_type -> api.user.service.v1.GetCommentsByUserIdRequest
-	60,  // 107: api.user.service.v1.User.GetUserProfile:input_type -> api.user.service.v1.GetUserProfileRequest
-	62,  // 108: api.user.service.v1.User.CreateRole:input_type -> api.user.service.v1.CreateRoleRequest
-	65,  // 109: api.user.service.v1.User.ListRoles:input_type -> api.user.service.v1.ListRolesRequest
-	68,  // 110: api.user.service.v1.User.CreateOperator:input_type -> api.user.service.v1.CreateOperatorRequest
-	70,  // 111: api.user.service.v1.User.UpdateRole:input_type -> api.user.service.v1.UpdateRoleRequest
-	72,  // 112: api.user.service.v1.User.GetRole:input_type -> api.user.service.v1.GetRoleRequest
-	76,  // 113: api.user.service.v1.User.DeleteRole:input_type -> api.user.service.v1.DeleteRoleRequest
-	74,  // 114: api.user.service.v1.User.GetOverviewDashboardFromUser:input_type -> api.user.service.v1.GetOverviewDashboardFromUserRequest
-	78,  // 115: api.user.service.v1.User.GetOperatorIdByOrigin:input_type -> api.user.service.v1.GetOperatorIdByOriginRequest
-	80,  // 116: api.user.service.v1.User.GetOperatorIdsByOrigin:input_type -> api.user.service.v1.GetOperatorIdsByOriginRequest
-	82,  // 117: api.user.service.v1.User.GetOperator:input_type -> api.user.service.v1.GetOperatorRequest
-	84,  // 118: api.user.service.v1.User.GetOperatorsByIds:input_type -> api.user.service.v1.GetOperatorsByIdsRequest
-	86,  // 119: api.user.service.v1.User.ListAllOperators:input_type -> api.user.service.v1.ListAllOperatorsRequest
-	88,  // 120: api.user.service.v1.User.GetParentOperatorIds:input_type -> api.user.service.v1.GetParentOperatorIdsRequest
-	90,  // 121: api.user.service.v1.User.GetChildOperatorIds:input_type -> api.user.service.v1.GetChildOperatorIdsRequest
-	92,  // 122: api.user.service.v1.User.CheckEmailExists:input_type -> api.user.service.v1.CheckEmailExistsRequest
-	94,  // 123: api.user.service.v1.User.CheckSubdomainExists:input_type -> api.user.service.v1.CheckSubdomainExistsRequest
-	96,  // 124: api.user.service.v1.User.CheckOperatorKeyExists:input_type -> api.user.service.v1.CheckOperatorKeyExistsRequest
-	98,  // 125: api.user.service.v1.User.CreateBusiness:input_type -> api.user.service.v1.CreateBusinessRequest
-	101, // 126: api.user.service.v1.User.GetOperatorDetails:input_type -> api.user.service.v1.GetOperatorDetailsRequest
-	103, // 127: api.user.service.v1.User.ListOperatorsByParentOperatorId:input_type -> api.user.service.v1.ListOperatorsByParentOperatorIdRequest
-	105, // 128: api.user.service.v1.User.ListRetailerOperators:input_type -> api.user.service.v1.ListRetailerOperatorsRequest
-	107, // 129: api.user.service.v1.User.ListCompanyOperators:input_type -> api.user.service.v1.ListCompanyOperatorsRequest
-	109, // 130: api.user.service.v1.User.ListBottomOperators:input_type -> api.user.service.v1.ListBottomOperatorsRequest
-	111, // 131: api.user.service.v1.User.UpdateOperatorStatus:input_type -> api.user.service.v1.UpdateOperatorStatusRequest
-	113, // 132: api.user.service.v1.User.ListAllUsers:input_type -> api.user.service.v1.ListAllUsersRequest
-	115, // 133: api.user.service.v1.User.ListOperatorsByAdminEmail:input_type -> api.user.service.v1.ListOperatorsByAdminEmailRequest
-	117, // 134: api.user.service.v1.User.ListOperatorDetails:input_type -> api.user.service.v1.ListOperatorDetailsRequest
-	119, // 135: api.user.service.v1.User.GetOperatorDetailsByUserId:input_type -> api.user.service.v1.GetOperatorDetailsByUserIdRequest
-	12,  // 136: api.user.service.v1.User.Register:output_type -> api.user.service.v1.AuthResponse
-	12,  // 137: api.user.service.v1.User.Login:output_type -> api.user.service.v1.AuthResponse
-	12,  // 138: api.user.service.v1.User.LoginWithInfo:output_type -> api.user.service.v1.AuthResponse
-	12,  // 139: api.user.service.v1.User.RegisterOrLoginWithOAuth:output_type -> api.user.service.v1.AuthResponse
-	12,  // 140: api.user.service.v1.User.RegisterOrLoginWithTelegram:output_type -> api.user.service.v1.AuthResponse
-	13,  // 141: api.user.service.v1.User.RefreshToken:output_type -> api.user.service.v1.RefreshTokenResponse
-	15,  // 142: api.user.service.v1.User.GetUser:output_type -> api.user.service.v1.GetUserResponse
-	17,  // 143: api.user.service.v1.User.GetUsersByIds:output_type -> api.user.service.v1.GetUsersByIdsResponse
-	19,  // 144: api.user.service.v1.User.GetUserIdsByOperatorIds:output_type -> api.user.service.v1.GetUserIdsByOperatorIdsResponse
-	21,  // 145: api.user.service.v1.User.Logout:output_type -> api.user.service.v1.LogoutResponse
-	23,  // 146: api.user.service.v1.User.IsTokenRevoked:output_type -> api.user.service.v1.IsTokenRevokedResponse
-	25,  // 147: api.user.service.v1.User.SetOperatorTagsConfig:output_type -> api.user.service.v1.SetOperatorTagsConfigResponse
-	27,  // 148: api.user.service.v1.User.SetOperatorTags:output_type -> api.user.service.v1.SetOperatorTagsResponse
-	29,  // 149: api.user.service.v1.User.GetOperatorTagsConfig:output_type -> api.user.service.v1.GetOperatorTagsConfigResponse
-	31,  // 150: api.user.service.v1.User.GetOperatorTags:output_type -> api.user.service.v1.GetOperatorTagsResponse
-	33,  // 151: api.user.service.v1.User.GetUserTags:output_type -> api.user.service.v1.GetUserTagsResponse
-	35,  // 152: api.user.service.v1.User.GetUserTagsById:output_type -> api.user.service.v1.GetUserTagsByIdResponse
-	37,  // 153: api.user.service.v1.User.SetUserTagsById:output_type -> api.user.service.v1.SetUserTagsByIdResponse
-	39,  // 154: api.user.service.v1.User.CheckPermission:output_type -> api.user.service.v1.CheckPermissionResponse
-	41,  // 155: api.user.service.v1.User.AddOperator:output_type -> api.user.service.v1.AddOperatorResponse
-	43,  // 156: api.user.service.v1.User.SendEmailVerificationCode:output_type -> api.user.service.v1.SendEmailVerificationCodeResponse
-	45,  // 157: api.user.service.v1.User.SendPasswordResetCode:output_type -> api.user.service.v1.SendPasswordResetCodeResponse
-	47,  // 158: api.user.service.v1.User.ResetPasswordWithCode:output_type -> api.user.service.v1.ResetPasswordWithCodeResponse
-	49,  // 159: api.user.service.v1.User.UpdateUser:output_type -> api.user.service.v1.UpdateUserResponse
-	51,  // 160: api.user.service.v1.User.ListUsers:output_type -> api.user.service.v1.ListUsersResponse
-	53,  // 161: api.user.service.v1.User.CreateUser:output_type -> api.user.service.v1.CreateUserResponse
-	55,  // 162: api.user.service.v1.User.VerifyEmail:output_type -> api.user.service.v1.VerifyEmailResponse
-	57,  // 163: api.user.service.v1.User.AddComment:output_type -> api.user.service.v1.AddCommentResponse
-	59,  // 164: api.user.service.v1.User.GetCommentsByUserId:output_type -> api.user.service.v1.GetCommentsByUserIdResponse
-	61,  // 165: api.user.service.v1.User.GetUserProfile:output_type -> api.user.service.v1.GetUserProfileResponse
-	64,  // 166: api.user.service.v1.User.CreateRole:output_type -> api.user.service.v1.CreateRoleResponse
-	67,  // 167: api.user.service.v1.User.ListRoles:output_type -> api.user.service.v1.ListRolesResponse
-	69,  // 168: api.user.service.v1.User.CreateOperator:output_type -> api.user.service.v1.CreateOperatorResponse
-	71,  // 169: api.user.service.v1.User.UpdateRole:output_type -> api.user.service.v1.UpdateRoleResponse
-	73,  // 170: api.user.service.v1.User.GetRole:output_type -> api.user.service.v1.GetRoleResponse
-	77,  // 171: api.user.service.v1.User.DeleteRole:output_type -> api.user.service.v1.DeleteRoleResponse
-	75,  // 172: api.user.service.v1.User.GetOverviewDashboardFromUser:output_type -> api.user.service.v1.GetOverviewDashboardFromUserResponse
-	79,  // 173: api.user.service.v1.User.GetOperatorIdByOrigin:output_type -> api.user.service.v1.GetOperatorIdByOriginResponse
-	81,  // 174: api.user.service.v1.User.GetOperatorIdsByOrigin:output_type -> api.user.service.v1.GetOperatorIdsByOriginResponse
-	83,  // 175: api.user.service.v1.User.GetOperator:output_type -> api.user.service.v1.GetOperatorResponse
-	85,  // 176: api.user.service.v1.User.GetOperatorsByIds:output_type -> api.user.service.v1.GetOperatorsByIdsResponse
-	87,  // 177: api.user.service.v1.User.ListAllOperators:output_type -> api.user.service.v1.ListAllOperatorsResponse
-	89,  // 178: api.user.service.v1.User.GetParentOperatorIds:output_type -> api.user.service.v1.GetParentOperatorIdsResponse
-	91,  // 179: api.user.service.v1.User.GetChildOperatorIds:output_type -> api.user.service.v1.GetChildOperatorIdsResponse
-	93,  // 180: api.user.service.v1.User.CheckEmailExists:output_type -> api.user.service.v1.CheckEmailExistsResponse
-	95,  // 181: api.user.service.v1.User.CheckSubdomainExists:output_type -> api.user.service.v1.CheckSubdomainExistsResponse
-	97,  // 182: api.user.service.v1.User.CheckOperatorKeyExists:output_type -> api.user.service.v1.CheckOperatorKeyExistsResponse
-	99,  // 183: api.user.service.v1.User.CreateBusiness:output_type -> api.user.service.v1.CreateBusinessResponse
-	102, // 184: api.user.service.v1.User.GetOperatorDetails:output_type -> api.user.service.v1.GetOperatorDetailsResponse
-	104, // 185: api.user.service.v1.User.ListOperatorsByParentOperatorId:output_type -> api.user.service.v1.ListOperatorsByParentOperatorIdResponse
-	106, // 186: api.user.service.v1.User.ListRetailerOperators:output_type -> api.user.service.v1.ListRetailerOperatorsResponse
-	108, // 187: api.user.service.v1.User.ListCompanyOperators:output_type -> api.user.service.v1.ListCompanyOperatorsResponse
-	110, // 188: api.user.service.v1.User.ListBottomOperators:output_type -> api.user.service.v1.ListBottomOperatorsResponse
-	112, // 189: api.user.service.v1.User.UpdateOperatorStatus:output_type -> api.user.service.v1.UpdateOperatorStatusResponse
-	114, // 190: api.user.service.v1.User.ListAllUsers:output_type -> api.user.service.v1.ListAllUsersResponse
-	116, // 191: api.user.service.v1.User.ListOperatorsByAdminEmail:output_type -> api.user.service.v1.ListOperatorsByAdminEmailResponse
-	118, // 192: api.user.service.v1.User.ListOperatorDetails:output_type -> api.user.service.v1.ListOperatorDetailsResponse
-	120, // 193: api.user.service.v1.User.GetOperatorDetailsByUserId:output_type -> api.user.service.v1.GetOperatorDetailsByUserIdResponse
-	136, // [136:194] is the sub-list for method output_type
-	78,  // [78:136] is the sub-list for method input_type
-	78,  // [78:78] is the sub-list for extension type_name
-	78,  // [78:78] is the sub-list for extension extendee
-	0,   // [0:78] is the sub-list for field type_name
+	144, // 65: api.user.service.v1.AddOperatorByoSubdomainRequest.operator_context:type_name -> api.common.OperatorContext
+	144, // 66: api.user.service.v1.DeleteOperatorByoSubdomainRequest.operator_context:type_name -> api.common.OperatorContext
+	144, // 67: api.user.service.v1.AddOperatorBackofficeSubdomainRequest.operator_context:type_name -> api.common.OperatorContext
+	144, // 68: api.user.service.v1.DeleteOperatorBackofficeSubdomainRequest.operator_context:type_name -> api.common.OperatorContext
+	145, // 69: api.user.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
+	145, // 70: api.user.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
+	145, // 71: api.user.service.v1.ListUsersResponse.User.created_at:type_name -> google.protobuf.Timestamp
+	66,  // 72: api.user.service.v1.ListUsersResponse.User.role:type_name -> api.user.service.v1.Role
+	145, // 73: api.user.service.v1.GetUserProfileResponse.RegistrationRecord.registered_at:type_name -> google.protobuf.Timestamp
+	131, // 74: api.user.service.v1.GetUserProfileResponse.RegistrationRecord.ip_info:type_name -> api.user.service.v1.GetUserProfileResponse.IpInfo
+	145, // 75: api.user.service.v1.GetUserProfileResponse.LoginRecord.login_at:type_name -> google.protobuf.Timestamp
+	131, // 76: api.user.service.v1.GetUserProfileResponse.LoginRecord.ip_info:type_name -> api.user.service.v1.GetUserProfileResponse.IpInfo
+	145, // 77: api.user.service.v1.GetUserProfileResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	144, // 78: api.user.service.v1.ListAllOperatorsResponse.Operator.operator_context:type_name -> api.common.OperatorContext
+	144, // 79: api.user.service.v1.ListRetailerOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
+	144, // 80: api.user.service.v1.ListCompanyOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
+	144, // 81: api.user.service.v1.ListBottomOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
+	5,   // 82: api.user.service.v1.User.Register:input_type -> api.user.service.v1.RegisterRequest
+	6,   // 83: api.user.service.v1.User.Login:input_type -> api.user.service.v1.LoginRequest
+	8,   // 84: api.user.service.v1.User.LoginWithInfo:input_type -> api.user.service.v1.LoginWithInfoRequest
+	9,   // 85: api.user.service.v1.User.RegisterOrLoginWithOAuth:input_type -> api.user.service.v1.OAuthRequest
+	10,  // 86: api.user.service.v1.User.RegisterOrLoginWithTelegram:input_type -> api.user.service.v1.TelegramAuthRequest
+	11,  // 87: api.user.service.v1.User.RefreshToken:input_type -> api.user.service.v1.RefreshTokenRequest
+	14,  // 88: api.user.service.v1.User.GetUser:input_type -> api.user.service.v1.GetUserRequest
+	16,  // 89: api.user.service.v1.User.GetUsersByIds:input_type -> api.user.service.v1.GetUsersByIdsRequest
+	18,  // 90: api.user.service.v1.User.GetUserIdsByOperatorIds:input_type -> api.user.service.v1.GetUserIdsByOperatorIdsRequest
+	20,  // 91: api.user.service.v1.User.Logout:input_type -> api.user.service.v1.LogoutRequest
+	22,  // 92: api.user.service.v1.User.IsTokenRevoked:input_type -> api.user.service.v1.IsTokenRevokedRequest
+	24,  // 93: api.user.service.v1.User.SetOperatorTagsConfig:input_type -> api.user.service.v1.SetOperatorTagsConfigRequest
+	26,  // 94: api.user.service.v1.User.SetOperatorTags:input_type -> api.user.service.v1.SetOperatorTagsRequest
+	28,  // 95: api.user.service.v1.User.GetOperatorTagsConfig:input_type -> api.user.service.v1.GetOperatorTagsConfigRequest
+	30,  // 96: api.user.service.v1.User.GetOperatorTags:input_type -> api.user.service.v1.GetOperatorTagsRequest
+	32,  // 97: api.user.service.v1.User.GetUserTags:input_type -> api.user.service.v1.GetUserTagsRequest
+	34,  // 98: api.user.service.v1.User.GetUserTagsById:input_type -> api.user.service.v1.GetUserTagsByIdRequest
+	36,  // 99: api.user.service.v1.User.SetUserTagsById:input_type -> api.user.service.v1.SetUserTagsByIdRequest
+	38,  // 100: api.user.service.v1.User.CheckPermission:input_type -> api.user.service.v1.CheckPermissionRequest
+	40,  // 101: api.user.service.v1.User.AddOperator:input_type -> api.user.service.v1.AddOperatorRequest
+	42,  // 102: api.user.service.v1.User.SendEmailVerificationCode:input_type -> api.user.service.v1.SendEmailVerificationCodeRequest
+	44,  // 103: api.user.service.v1.User.SendPasswordResetCode:input_type -> api.user.service.v1.SendPasswordResetCodeRequest
+	46,  // 104: api.user.service.v1.User.ResetPasswordWithCode:input_type -> api.user.service.v1.ResetPasswordWithCodeRequest
+	48,  // 105: api.user.service.v1.User.UpdateUser:input_type -> api.user.service.v1.UpdateUserRequest
+	50,  // 106: api.user.service.v1.User.ListUsers:input_type -> api.user.service.v1.ListUsersRequest
+	52,  // 107: api.user.service.v1.User.CreateUser:input_type -> api.user.service.v1.CreateUserRequest
+	54,  // 108: api.user.service.v1.User.VerifyEmail:input_type -> api.user.service.v1.VerifyEmailRequest
+	56,  // 109: api.user.service.v1.User.AddComment:input_type -> api.user.service.v1.AddCommentRequest
+	58,  // 110: api.user.service.v1.User.GetCommentsByUserId:input_type -> api.user.service.v1.GetCommentsByUserIdRequest
+	60,  // 111: api.user.service.v1.User.GetUserProfile:input_type -> api.user.service.v1.GetUserProfileRequest
+	62,  // 112: api.user.service.v1.User.CreateRole:input_type -> api.user.service.v1.CreateRoleRequest
+	65,  // 113: api.user.service.v1.User.ListRoles:input_type -> api.user.service.v1.ListRolesRequest
+	68,  // 114: api.user.service.v1.User.CreateOperator:input_type -> api.user.service.v1.CreateOperatorRequest
+	70,  // 115: api.user.service.v1.User.UpdateRole:input_type -> api.user.service.v1.UpdateRoleRequest
+	72,  // 116: api.user.service.v1.User.GetRole:input_type -> api.user.service.v1.GetRoleRequest
+	76,  // 117: api.user.service.v1.User.DeleteRole:input_type -> api.user.service.v1.DeleteRoleRequest
+	74,  // 118: api.user.service.v1.User.GetOverviewDashboardFromUser:input_type -> api.user.service.v1.GetOverviewDashboardFromUserRequest
+	78,  // 119: api.user.service.v1.User.GetOperatorIdByOrigin:input_type -> api.user.service.v1.GetOperatorIdByOriginRequest
+	80,  // 120: api.user.service.v1.User.GetOperatorIdsByOrigin:input_type -> api.user.service.v1.GetOperatorIdsByOriginRequest
+	82,  // 121: api.user.service.v1.User.GetOperator:input_type -> api.user.service.v1.GetOperatorRequest
+	84,  // 122: api.user.service.v1.User.GetOperatorsByIds:input_type -> api.user.service.v1.GetOperatorsByIdsRequest
+	86,  // 123: api.user.service.v1.User.ListAllOperators:input_type -> api.user.service.v1.ListAllOperatorsRequest
+	88,  // 124: api.user.service.v1.User.GetParentOperatorIds:input_type -> api.user.service.v1.GetParentOperatorIdsRequest
+	90,  // 125: api.user.service.v1.User.GetChildOperatorIds:input_type -> api.user.service.v1.GetChildOperatorIdsRequest
+	92,  // 126: api.user.service.v1.User.CheckEmailExists:input_type -> api.user.service.v1.CheckEmailExistsRequest
+	94,  // 127: api.user.service.v1.User.CheckSubdomainExists:input_type -> api.user.service.v1.CheckSubdomainExistsRequest
+	96,  // 128: api.user.service.v1.User.CheckOperatorKeyExists:input_type -> api.user.service.v1.CheckOperatorKeyExistsRequest
+	98,  // 129: api.user.service.v1.User.CreateBusiness:input_type -> api.user.service.v1.CreateBusinessRequest
+	101, // 130: api.user.service.v1.User.GetOperatorDetails:input_type -> api.user.service.v1.GetOperatorDetailsRequest
+	103, // 131: api.user.service.v1.User.ListOperatorsByParentOperatorId:input_type -> api.user.service.v1.ListOperatorsByParentOperatorIdRequest
+	105, // 132: api.user.service.v1.User.ListRetailerOperators:input_type -> api.user.service.v1.ListRetailerOperatorsRequest
+	107, // 133: api.user.service.v1.User.ListCompanyOperators:input_type -> api.user.service.v1.ListCompanyOperatorsRequest
+	109, // 134: api.user.service.v1.User.ListBottomOperators:input_type -> api.user.service.v1.ListBottomOperatorsRequest
+	111, // 135: api.user.service.v1.User.UpdateOperatorStatus:input_type -> api.user.service.v1.UpdateOperatorStatusRequest
+	113, // 136: api.user.service.v1.User.ListAllUsers:input_type -> api.user.service.v1.ListAllUsersRequest
+	115, // 137: api.user.service.v1.User.ListOperatorsByAdminEmail:input_type -> api.user.service.v1.ListOperatorsByAdminEmailRequest
+	117, // 138: api.user.service.v1.User.ListOperatorDetails:input_type -> api.user.service.v1.ListOperatorDetailsRequest
+	119, // 139: api.user.service.v1.User.GetOperatorDetailsByUserId:input_type -> api.user.service.v1.GetOperatorDetailsByUserIdRequest
+	121, // 140: api.user.service.v1.User.AddOperatorByoSubdomain:input_type -> api.user.service.v1.AddOperatorByoSubdomainRequest
+	123, // 141: api.user.service.v1.User.DeleteOperatorByoSubdomain:input_type -> api.user.service.v1.DeleteOperatorByoSubdomainRequest
+	125, // 142: api.user.service.v1.User.AddOperatorBackofficeSubdomain:input_type -> api.user.service.v1.AddOperatorBackofficeSubdomainRequest
+	127, // 143: api.user.service.v1.User.DeleteOperatorBackofficeSubdomain:input_type -> api.user.service.v1.DeleteOperatorBackofficeSubdomainRequest
+	12,  // 144: api.user.service.v1.User.Register:output_type -> api.user.service.v1.AuthResponse
+	12,  // 145: api.user.service.v1.User.Login:output_type -> api.user.service.v1.AuthResponse
+	12,  // 146: api.user.service.v1.User.LoginWithInfo:output_type -> api.user.service.v1.AuthResponse
+	12,  // 147: api.user.service.v1.User.RegisterOrLoginWithOAuth:output_type -> api.user.service.v1.AuthResponse
+	12,  // 148: api.user.service.v1.User.RegisterOrLoginWithTelegram:output_type -> api.user.service.v1.AuthResponse
+	13,  // 149: api.user.service.v1.User.RefreshToken:output_type -> api.user.service.v1.RefreshTokenResponse
+	15,  // 150: api.user.service.v1.User.GetUser:output_type -> api.user.service.v1.GetUserResponse
+	17,  // 151: api.user.service.v1.User.GetUsersByIds:output_type -> api.user.service.v1.GetUsersByIdsResponse
+	19,  // 152: api.user.service.v1.User.GetUserIdsByOperatorIds:output_type -> api.user.service.v1.GetUserIdsByOperatorIdsResponse
+	21,  // 153: api.user.service.v1.User.Logout:output_type -> api.user.service.v1.LogoutResponse
+	23,  // 154: api.user.service.v1.User.IsTokenRevoked:output_type -> api.user.service.v1.IsTokenRevokedResponse
+	25,  // 155: api.user.service.v1.User.SetOperatorTagsConfig:output_type -> api.user.service.v1.SetOperatorTagsConfigResponse
+	27,  // 156: api.user.service.v1.User.SetOperatorTags:output_type -> api.user.service.v1.SetOperatorTagsResponse
+	29,  // 157: api.user.service.v1.User.GetOperatorTagsConfig:output_type -> api.user.service.v1.GetOperatorTagsConfigResponse
+	31,  // 158: api.user.service.v1.User.GetOperatorTags:output_type -> api.user.service.v1.GetOperatorTagsResponse
+	33,  // 159: api.user.service.v1.User.GetUserTags:output_type -> api.user.service.v1.GetUserTagsResponse
+	35,  // 160: api.user.service.v1.User.GetUserTagsById:output_type -> api.user.service.v1.GetUserTagsByIdResponse
+	37,  // 161: api.user.service.v1.User.SetUserTagsById:output_type -> api.user.service.v1.SetUserTagsByIdResponse
+	39,  // 162: api.user.service.v1.User.CheckPermission:output_type -> api.user.service.v1.CheckPermissionResponse
+	41,  // 163: api.user.service.v1.User.AddOperator:output_type -> api.user.service.v1.AddOperatorResponse
+	43,  // 164: api.user.service.v1.User.SendEmailVerificationCode:output_type -> api.user.service.v1.SendEmailVerificationCodeResponse
+	45,  // 165: api.user.service.v1.User.SendPasswordResetCode:output_type -> api.user.service.v1.SendPasswordResetCodeResponse
+	47,  // 166: api.user.service.v1.User.ResetPasswordWithCode:output_type -> api.user.service.v1.ResetPasswordWithCodeResponse
+	49,  // 167: api.user.service.v1.User.UpdateUser:output_type -> api.user.service.v1.UpdateUserResponse
+	51,  // 168: api.user.service.v1.User.ListUsers:output_type -> api.user.service.v1.ListUsersResponse
+	53,  // 169: api.user.service.v1.User.CreateUser:output_type -> api.user.service.v1.CreateUserResponse
+	55,  // 170: api.user.service.v1.User.VerifyEmail:output_type -> api.user.service.v1.VerifyEmailResponse
+	57,  // 171: api.user.service.v1.User.AddComment:output_type -> api.user.service.v1.AddCommentResponse
+	59,  // 172: api.user.service.v1.User.GetCommentsByUserId:output_type -> api.user.service.v1.GetCommentsByUserIdResponse
+	61,  // 173: api.user.service.v1.User.GetUserProfile:output_type -> api.user.service.v1.GetUserProfileResponse
+	64,  // 174: api.user.service.v1.User.CreateRole:output_type -> api.user.service.v1.CreateRoleResponse
+	67,  // 175: api.user.service.v1.User.ListRoles:output_type -> api.user.service.v1.ListRolesResponse
+	69,  // 176: api.user.service.v1.User.CreateOperator:output_type -> api.user.service.v1.CreateOperatorResponse
+	71,  // 177: api.user.service.v1.User.UpdateRole:output_type -> api.user.service.v1.UpdateRoleResponse
+	73,  // 178: api.user.service.v1.User.GetRole:output_type -> api.user.service.v1.GetRoleResponse
+	77,  // 179: api.user.service.v1.User.DeleteRole:output_type -> api.user.service.v1.DeleteRoleResponse
+	75,  // 180: api.user.service.v1.User.GetOverviewDashboardFromUser:output_type -> api.user.service.v1.GetOverviewDashboardFromUserResponse
+	79,  // 181: api.user.service.v1.User.GetOperatorIdByOrigin:output_type -> api.user.service.v1.GetOperatorIdByOriginResponse
+	81,  // 182: api.user.service.v1.User.GetOperatorIdsByOrigin:output_type -> api.user.service.v1.GetOperatorIdsByOriginResponse
+	83,  // 183: api.user.service.v1.User.GetOperator:output_type -> api.user.service.v1.GetOperatorResponse
+	85,  // 184: api.user.service.v1.User.GetOperatorsByIds:output_type -> api.user.service.v1.GetOperatorsByIdsResponse
+	87,  // 185: api.user.service.v1.User.ListAllOperators:output_type -> api.user.service.v1.ListAllOperatorsResponse
+	89,  // 186: api.user.service.v1.User.GetParentOperatorIds:output_type -> api.user.service.v1.GetParentOperatorIdsResponse
+	91,  // 187: api.user.service.v1.User.GetChildOperatorIds:output_type -> api.user.service.v1.GetChildOperatorIdsResponse
+	93,  // 188: api.user.service.v1.User.CheckEmailExists:output_type -> api.user.service.v1.CheckEmailExistsResponse
+	95,  // 189: api.user.service.v1.User.CheckSubdomainExists:output_type -> api.user.service.v1.CheckSubdomainExistsResponse
+	97,  // 190: api.user.service.v1.User.CheckOperatorKeyExists:output_type -> api.user.service.v1.CheckOperatorKeyExistsResponse
+	99,  // 191: api.user.service.v1.User.CreateBusiness:output_type -> api.user.service.v1.CreateBusinessResponse
+	102, // 192: api.user.service.v1.User.GetOperatorDetails:output_type -> api.user.service.v1.GetOperatorDetailsResponse
+	104, // 193: api.user.service.v1.User.ListOperatorsByParentOperatorId:output_type -> api.user.service.v1.ListOperatorsByParentOperatorIdResponse
+	106, // 194: api.user.service.v1.User.ListRetailerOperators:output_type -> api.user.service.v1.ListRetailerOperatorsResponse
+	108, // 195: api.user.service.v1.User.ListCompanyOperators:output_type -> api.user.service.v1.ListCompanyOperatorsResponse
+	110, // 196: api.user.service.v1.User.ListBottomOperators:output_type -> api.user.service.v1.ListBottomOperatorsResponse
+	112, // 197: api.user.service.v1.User.UpdateOperatorStatus:output_type -> api.user.service.v1.UpdateOperatorStatusResponse
+	114, // 198: api.user.service.v1.User.ListAllUsers:output_type -> api.user.service.v1.ListAllUsersResponse
+	116, // 199: api.user.service.v1.User.ListOperatorsByAdminEmail:output_type -> api.user.service.v1.ListOperatorsByAdminEmailResponse
+	118, // 200: api.user.service.v1.User.ListOperatorDetails:output_type -> api.user.service.v1.ListOperatorDetailsResponse
+	120, // 201: api.user.service.v1.User.GetOperatorDetailsByUserId:output_type -> api.user.service.v1.GetOperatorDetailsByUserIdResponse
+	122, // 202: api.user.service.v1.User.AddOperatorByoSubdomain:output_type -> api.user.service.v1.AddOperatorByoSubdomainResponse
+	124, // 203: api.user.service.v1.User.DeleteOperatorByoSubdomain:output_type -> api.user.service.v1.DeleteOperatorByoSubdomainResponse
+	126, // 204: api.user.service.v1.User.AddOperatorBackofficeSubdomain:output_type -> api.user.service.v1.AddOperatorBackofficeSubdomainResponse
+	128, // 205: api.user.service.v1.User.DeleteOperatorBackofficeSubdomain:output_type -> api.user.service.v1.DeleteOperatorBackofficeSubdomainResponse
+	144, // [144:206] is the sub-list for method output_type
+	82,  // [82:144] is the sub-list for method input_type
+	82,  // [82:82] is the sub-list for extension type_name
+	82,  // [82:82] is the sub-list for extension extendee
+	0,   // [0:82] is the sub-list for field type_name
 }
 
 func init() { file_user_service_v1_user_proto_init() }
@@ -9514,7 +9965,7 @@ func file_user_service_v1_user_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_service_v1_user_proto_rawDesc), len(file_user_service_v1_user_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   132,
+			NumMessages:   140,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

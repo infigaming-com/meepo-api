@@ -289,39 +289,41 @@ func (x *CreateOperatorResponse) GetPassword() string {
 }
 
 type OperatorDetails struct {
-	state                 protoimpl.MessageState `protogen:"open.v1"`
-	Id                    int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"` // real operator id
-	OperatorName          string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	ParentOperatorId      int64                  `protobuf:"varint,3,opt,name=parent_operator_id,json=parentOperatorId,proto3" json:"parent_operator_id,omitempty"`
-	ParentOperatorName    string                 `protobuf:"bytes,4,opt,name=parent_operator_name,json=parentOperatorName,proto3" json:"parent_operator_name,omitempty"`
-	OperatorType          string                 `protobuf:"bytes,5,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
-	ExternalId            string                 `protobuf:"bytes,6,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
-	ApiKey                string                 `protobuf:"bytes,7,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
-	Subdomain             string                 `protobuf:"bytes,8,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
-	BackofficeSubdomain   string                 `protobuf:"bytes,9,opt,name=backoffice_subdomain,json=backofficeSubdomain,proto3" json:"backoffice_subdomain,omitempty"`
-	BackofficeChildDomain string                 `protobuf:"bytes,10,opt,name=backoffice_child_domain,json=backofficeChildDomain,proto3" json:"backoffice_child_domain,omitempty"`
-	DomainPool            []string               `protobuf:"bytes,11,rep,name=domain_pool,json=domainPool,proto3" json:"domain_pool,omitempty"`
-	Enabled               bool                   `protobuf:"varint,12,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	Mode                  string                 `protobuf:"bytes,13,opt,name=mode,proto3" json:"mode,omitempty"`
-	OperatorKey           string                 `protobuf:"bytes,14,opt,name=operator_key,json=operatorKey,proto3" json:"operator_key,omitempty"`
-	ReportingCurrency     string                 `protobuf:"bytes,15,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
-	BackofficeTimezone    string                 `protobuf:"bytes,16,opt,name=backoffice_timezone,json=backofficeTimezone,proto3" json:"backoffice_timezone,omitempty"`
-	SupportedLanguages    []string               `protobuf:"bytes,17,rep,name=supported_languages,json=supportedLanguages,proto3" json:"supported_languages,omitempty"`
-	SupportedCurrencies   []string               `protobuf:"bytes,18,rep,name=supported_currencies,json=supportedCurrencies,proto3" json:"supported_currencies,omitempty"`
-	Status                string                 `protobuf:"bytes,19,opt,name=status,proto3" json:"status,omitempty"`
-	IsMaintenance         bool                   `protobuf:"varint,20,opt,name=is_maintenance,json=isMaintenance,proto3" json:"is_maintenance,omitempty"`
-	MaintenanceStartTime  int64                  `protobuf:"varint,21,opt,name=maintenance_start_time,json=maintenanceStartTime,proto3" json:"maintenance_start_time,omitempty"`
-	MaintenanceEndTime    int64                  `protobuf:"varint,22,opt,name=maintenance_end_time,json=maintenanceEndTime,proto3" json:"maintenance_end_time,omitempty"`
-	OperatorId            int64                  `protobuf:"varint,23,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`                                // operator id in the operator hierarchy
-	CompanyOperatorId     int64                  `protobuf:"varint,24,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`         // company operator id in the operator hierarchy
-	CompanyOperatorName   string                 `protobuf:"bytes,25,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`    // company operator name in the operator hierarchy, or empty string if not exists
-	RetailerOperatorId    int64                  `protobuf:"varint,26,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`      // retailer operator id in the operator hierarchy
-	RetailerOperatorName  string                 `protobuf:"bytes,27,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"` // retailer operator name in the operator hierarchy, or empty string if not exists
-	SystemOperatorId      int64                  `protobuf:"varint,28,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`            // system operator id in the operator hierarchy
-	SystemOperatorName    string                 `protobuf:"bytes,29,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`       // system operator name in the operator hierarchy, or empty string if not exists
-	Config                string                 `protobuf:"bytes,30,opt,name=config,proto3" json:"config,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"open.v1"`
+	Id                      int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"` // real operator id
+	OperatorName            string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	ParentOperatorId        int64                  `protobuf:"varint,3,opt,name=parent_operator_id,json=parentOperatorId,proto3" json:"parent_operator_id,omitempty"`
+	ParentOperatorName      string                 `protobuf:"bytes,4,opt,name=parent_operator_name,json=parentOperatorName,proto3" json:"parent_operator_name,omitempty"`
+	OperatorType            string                 `protobuf:"bytes,5,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
+	ExternalId              string                 `protobuf:"bytes,6,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
+	ApiKey                  string                 `protobuf:"bytes,7,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
+	Subdomain               string                 `protobuf:"bytes,8,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
+	ByoSubdomains           []string               `protobuf:"bytes,9,rep,name=byo_subdomains,json=byoSubdomains,proto3" json:"byo_subdomains,omitempty"`
+	BackofficeSubdomain     string                 `protobuf:"bytes,10,opt,name=backoffice_subdomain,json=backofficeSubdomain,proto3" json:"backoffice_subdomain,omitempty"`
+	BackofficeByoSubdomains []string               `protobuf:"bytes,11,rep,name=backoffice_byo_subdomains,json=backofficeByoSubdomains,proto3" json:"backoffice_byo_subdomains,omitempty"`
+	BackofficeChildDomain   string                 `protobuf:"bytes,12,opt,name=backoffice_child_domain,json=backofficeChildDomain,proto3" json:"backoffice_child_domain,omitempty"`
+	DomainPool              []string               `protobuf:"bytes,13,rep,name=domain_pool,json=domainPool,proto3" json:"domain_pool,omitempty"`
+	Enabled                 bool                   `protobuf:"varint,14,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Mode                    string                 `protobuf:"bytes,15,opt,name=mode,proto3" json:"mode,omitempty"`
+	OperatorKey             string                 `protobuf:"bytes,16,opt,name=operator_key,json=operatorKey,proto3" json:"operator_key,omitempty"`
+	ReportingCurrency       string                 `protobuf:"bytes,17,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	BackofficeTimezone      string                 `protobuf:"bytes,18,opt,name=backoffice_timezone,json=backofficeTimezone,proto3" json:"backoffice_timezone,omitempty"`
+	SupportedLanguages      []string               `protobuf:"bytes,19,rep,name=supported_languages,json=supportedLanguages,proto3" json:"supported_languages,omitempty"`
+	SupportedCurrencies     []string               `protobuf:"bytes,20,rep,name=supported_currencies,json=supportedCurrencies,proto3" json:"supported_currencies,omitempty"`
+	Status                  string                 `protobuf:"bytes,21,opt,name=status,proto3" json:"status,omitempty"`
+	IsMaintenance           bool                   `protobuf:"varint,22,opt,name=is_maintenance,json=isMaintenance,proto3" json:"is_maintenance,omitempty"`
+	MaintenanceStartTime    int64                  `protobuf:"varint,23,opt,name=maintenance_start_time,json=maintenanceStartTime,proto3" json:"maintenance_start_time,omitempty"`
+	MaintenanceEndTime      int64                  `protobuf:"varint,24,opt,name=maintenance_end_time,json=maintenanceEndTime,proto3" json:"maintenance_end_time,omitempty"`
+	OperatorId              int64                  `protobuf:"varint,25,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`                                // operator id in the operator hierarchy
+	CompanyOperatorId       int64                  `protobuf:"varint,26,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`         // company operator id in the operator hierarchy
+	CompanyOperatorName     string                 `protobuf:"bytes,27,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`    // company operator name in the operator hierarchy, or empty string if not exists
+	RetailerOperatorId      int64                  `protobuf:"varint,28,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`      // retailer operator id in the operator hierarchy
+	RetailerOperatorName    string                 `protobuf:"bytes,29,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"` // retailer operator name in the operator hierarchy, or empty string if not exists
+	SystemOperatorId        int64                  `protobuf:"varint,30,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`            // system operator id in the operator hierarchy
+	SystemOperatorName      string                 `protobuf:"bytes,31,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`       // system operator name in the operator hierarchy, or empty string if not exists
+	Config                  string                 `protobuf:"bytes,32,opt,name=config,proto3" json:"config,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *OperatorDetails) Reset() {
@@ -410,11 +412,25 @@ func (x *OperatorDetails) GetSubdomain() string {
 	return ""
 }
 
+func (x *OperatorDetails) GetByoSubdomains() []string {
+	if x != nil {
+		return x.ByoSubdomains
+	}
+	return nil
+}
+
 func (x *OperatorDetails) GetBackofficeSubdomain() string {
 	if x != nil {
 		return x.BackofficeSubdomain
 	}
 	return ""
+}
+
+func (x *OperatorDetails) GetBackofficeByoSubdomains() []string {
+	if x != nil {
+		return x.BackofficeByoSubdomains
+	}
+	return nil
 }
 
 func (x *OperatorDetails) GetBackofficeChildDomain() string {
@@ -1248,6 +1264,350 @@ func (x *ListOperatorsByAdminEmailRequest) GetEmail() string {
 	return ""
 }
 
+type AddOperatorByoSubdomainRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OperatorId    int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	Subdomain     string                 `protobuf:"bytes,2,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddOperatorByoSubdomainRequest) Reset() {
+	*x = AddOperatorByoSubdomainRequest{}
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddOperatorByoSubdomainRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddOperatorByoSubdomainRequest) ProtoMessage() {}
+
+func (x *AddOperatorByoSubdomainRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddOperatorByoSubdomainRequest.ProtoReflect.Descriptor instead.
+func (*AddOperatorByoSubdomainRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_operator_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *AddOperatorByoSubdomainRequest) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *AddOperatorByoSubdomainRequest) GetSubdomain() string {
+	if x != nil {
+		return x.Subdomain
+	}
+	return ""
+}
+
+type AddOperatorByoSubdomainResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddOperatorByoSubdomainResponse) Reset() {
+	*x = AddOperatorByoSubdomainResponse{}
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddOperatorByoSubdomainResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddOperatorByoSubdomainResponse) ProtoMessage() {}
+
+func (x *AddOperatorByoSubdomainResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddOperatorByoSubdomainResponse.ProtoReflect.Descriptor instead.
+func (*AddOperatorByoSubdomainResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_operator_proto_rawDescGZIP(), []int{19}
+}
+
+type DeleteOperatorByoSubdomainRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OperatorId    int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	Subdomain     string                 `protobuf:"bytes,2,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteOperatorByoSubdomainRequest) Reset() {
+	*x = DeleteOperatorByoSubdomainRequest{}
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteOperatorByoSubdomainRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteOperatorByoSubdomainRequest) ProtoMessage() {}
+
+func (x *DeleteOperatorByoSubdomainRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteOperatorByoSubdomainRequest.ProtoReflect.Descriptor instead.
+func (*DeleteOperatorByoSubdomainRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_operator_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *DeleteOperatorByoSubdomainRequest) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *DeleteOperatorByoSubdomainRequest) GetSubdomain() string {
+	if x != nil {
+		return x.Subdomain
+	}
+	return ""
+}
+
+type DeleteOperatorByoSubdomainResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteOperatorByoSubdomainResponse) Reset() {
+	*x = DeleteOperatorByoSubdomainResponse{}
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteOperatorByoSubdomainResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteOperatorByoSubdomainResponse) ProtoMessage() {}
+
+func (x *DeleteOperatorByoSubdomainResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteOperatorByoSubdomainResponse.ProtoReflect.Descriptor instead.
+func (*DeleteOperatorByoSubdomainResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_operator_proto_rawDescGZIP(), []int{21}
+}
+
+type AddOperatorBackofficeSubdomainRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OperatorId    int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	Subdomain     string                 `protobuf:"bytes,2,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddOperatorBackofficeSubdomainRequest) Reset() {
+	*x = AddOperatorBackofficeSubdomainRequest{}
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddOperatorBackofficeSubdomainRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddOperatorBackofficeSubdomainRequest) ProtoMessage() {}
+
+func (x *AddOperatorBackofficeSubdomainRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddOperatorBackofficeSubdomainRequest.ProtoReflect.Descriptor instead.
+func (*AddOperatorBackofficeSubdomainRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_operator_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *AddOperatorBackofficeSubdomainRequest) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *AddOperatorBackofficeSubdomainRequest) GetSubdomain() string {
+	if x != nil {
+		return x.Subdomain
+	}
+	return ""
+}
+
+type AddOperatorBackofficeSubdomainResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddOperatorBackofficeSubdomainResponse) Reset() {
+	*x = AddOperatorBackofficeSubdomainResponse{}
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddOperatorBackofficeSubdomainResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddOperatorBackofficeSubdomainResponse) ProtoMessage() {}
+
+func (x *AddOperatorBackofficeSubdomainResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddOperatorBackofficeSubdomainResponse.ProtoReflect.Descriptor instead.
+func (*AddOperatorBackofficeSubdomainResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_operator_proto_rawDescGZIP(), []int{23}
+}
+
+type DeleteOperatorBackofficeSubdomainRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OperatorId    int64                  `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteOperatorBackofficeSubdomainRequest) Reset() {
+	*x = DeleteOperatorBackofficeSubdomainRequest{}
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteOperatorBackofficeSubdomainRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteOperatorBackofficeSubdomainRequest) ProtoMessage() {}
+
+func (x *DeleteOperatorBackofficeSubdomainRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteOperatorBackofficeSubdomainRequest.ProtoReflect.Descriptor instead.
+func (*DeleteOperatorBackofficeSubdomainRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_operator_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *DeleteOperatorBackofficeSubdomainRequest) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+type DeleteOperatorBackofficeSubdomainResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteOperatorBackofficeSubdomainResponse) Reset() {
+	*x = DeleteOperatorBackofficeSubdomainResponse{}
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteOperatorBackofficeSubdomainResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteOperatorBackofficeSubdomainResponse) ProtoMessage() {}
+
+func (x *DeleteOperatorBackofficeSubdomainResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteOperatorBackofficeSubdomainResponse.ProtoReflect.Descriptor instead.
+func (*DeleteOperatorBackofficeSubdomainResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_operator_proto_rawDescGZIP(), []int{25}
+}
+
 type ListAllOperatorsResponse_Operator struct {
 	state            protoimpl.MessageState  `protogen:"open.v1"`
 	RealOperatorId   int64                   `protobuf:"varint,1,opt,name=real_operator_id,json=realOperatorId,proto3" json:"real_operator_id,omitempty"`
@@ -1262,7 +1622,7 @@ type ListAllOperatorsResponse_Operator struct {
 
 func (x *ListAllOperatorsResponse_Operator) Reset() {
 	*x = ListAllOperatorsResponse_Operator{}
-	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[18]
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1274,7 +1634,7 @@ func (x *ListAllOperatorsResponse_Operator) String() string {
 func (*ListAllOperatorsResponse_Operator) ProtoMessage() {}
 
 func (x *ListAllOperatorsResponse_Operator) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[18]
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1348,7 +1708,7 @@ type ListRetailerOperatorsResponse_OperatorInfo struct {
 
 func (x *ListRetailerOperatorsResponse_OperatorInfo) Reset() {
 	*x = ListRetailerOperatorsResponse_OperatorInfo{}
-	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[19]
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1360,7 +1720,7 @@ func (x *ListRetailerOperatorsResponse_OperatorInfo) String() string {
 func (*ListRetailerOperatorsResponse_OperatorInfo) ProtoMessage() {}
 
 func (x *ListRetailerOperatorsResponse_OperatorInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[19]
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1440,7 +1800,7 @@ type ListCompanyOperatorsResponse_OperatorInfo struct {
 
 func (x *ListCompanyOperatorsResponse_OperatorInfo) Reset() {
 	*x = ListCompanyOperatorsResponse_OperatorInfo{}
-	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[20]
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1452,7 +1812,7 @@ func (x *ListCompanyOperatorsResponse_OperatorInfo) String() string {
 func (*ListCompanyOperatorsResponse_OperatorInfo) ProtoMessage() {}
 
 func (x *ListCompanyOperatorsResponse_OperatorInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[20]
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1525,7 +1885,7 @@ type ListBottomOperatorsResponse_OperatorInfo struct {
 
 func (x *ListBottomOperatorsResponse_OperatorInfo) Reset() {
 	*x = ListBottomOperatorsResponse_OperatorInfo{}
-	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[21]
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1537,7 +1897,7 @@ func (x *ListBottomOperatorsResponse_OperatorInfo) String() string {
 func (*ListBottomOperatorsResponse_OperatorInfo) ProtoMessage() {}
 
 func (x *ListBottomOperatorsResponse_OperatorInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[21]
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1627,7 +1987,8 @@ const file_backoffice_service_v1_backoffice_operator_proto_rawDesc = "" +
 	"\tsubdomain\x18\x01 \x01(\tR\tsubdomain\x121\n" +
 	"\x14backoffice_subdomain\x18\x02 \x01(\tR\x13backofficeSubdomain\x120\n" +
 	"\x14operator_admin_email\x18\x03 \x01(\tR\x12operatorAdminEmail\x12\x1a\n" +
-	"\bpassword\x18\x04 \x01(\tR\bpassword\"\xd0\t\n" +
+	"\bpassword\x18\x04 \x01(\tR\bpassword\"\xb3\n" +
+	"\n" +
 	"\x0fOperatorDetails\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12#\n" +
 	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12,\n" +
@@ -1637,32 +1998,34 @@ const file_backoffice_service_v1_backoffice_operator_proto_rawDesc = "" +
 	"\vexternal_id\x18\x06 \x01(\tR\n" +
 	"externalId\x12\x17\n" +
 	"\aapi_key\x18\a \x01(\tR\x06apiKey\x12\x1c\n" +
-	"\tsubdomain\x18\b \x01(\tR\tsubdomain\x121\n" +
-	"\x14backoffice_subdomain\x18\t \x01(\tR\x13backofficeSubdomain\x126\n" +
-	"\x17backoffice_child_domain\x18\n" +
-	" \x01(\tR\x15backofficeChildDomain\x12\x1f\n" +
-	"\vdomain_pool\x18\v \x03(\tR\n" +
+	"\tsubdomain\x18\b \x01(\tR\tsubdomain\x12%\n" +
+	"\x0ebyo_subdomains\x18\t \x03(\tR\rbyoSubdomains\x121\n" +
+	"\x14backoffice_subdomain\x18\n" +
+	" \x01(\tR\x13backofficeSubdomain\x12:\n" +
+	"\x19backoffice_byo_subdomains\x18\v \x03(\tR\x17backofficeByoSubdomains\x126\n" +
+	"\x17backoffice_child_domain\x18\f \x01(\tR\x15backofficeChildDomain\x12\x1f\n" +
+	"\vdomain_pool\x18\r \x03(\tR\n" +
 	"domainPool\x12\x18\n" +
-	"\aenabled\x18\f \x01(\bR\aenabled\x12\x12\n" +
-	"\x04mode\x18\r \x01(\tR\x04mode\x12!\n" +
-	"\foperator_key\x18\x0e \x01(\tR\voperatorKey\x12-\n" +
-	"\x12reporting_currency\x18\x0f \x01(\tR\x11reportingCurrency\x12/\n" +
-	"\x13backoffice_timezone\x18\x10 \x01(\tR\x12backofficeTimezone\x12/\n" +
-	"\x13supported_languages\x18\x11 \x03(\tR\x12supportedLanguages\x121\n" +
-	"\x14supported_currencies\x18\x12 \x03(\tR\x13supportedCurrencies\x12\x16\n" +
-	"\x06status\x18\x13 \x01(\tR\x06status\x12%\n" +
-	"\x0eis_maintenance\x18\x14 \x01(\bR\risMaintenance\x124\n" +
-	"\x16maintenance_start_time\x18\x15 \x01(\x03R\x14maintenanceStartTime\x120\n" +
-	"\x14maintenance_end_time\x18\x16 \x01(\x03R\x12maintenanceEndTime\x12\x1f\n" +
-	"\voperator_id\x18\x17 \x01(\x03R\n" +
+	"\aenabled\x18\x0e \x01(\bR\aenabled\x12\x12\n" +
+	"\x04mode\x18\x0f \x01(\tR\x04mode\x12!\n" +
+	"\foperator_key\x18\x10 \x01(\tR\voperatorKey\x12-\n" +
+	"\x12reporting_currency\x18\x11 \x01(\tR\x11reportingCurrency\x12/\n" +
+	"\x13backoffice_timezone\x18\x12 \x01(\tR\x12backofficeTimezone\x12/\n" +
+	"\x13supported_languages\x18\x13 \x03(\tR\x12supportedLanguages\x121\n" +
+	"\x14supported_currencies\x18\x14 \x03(\tR\x13supportedCurrencies\x12\x16\n" +
+	"\x06status\x18\x15 \x01(\tR\x06status\x12%\n" +
+	"\x0eis_maintenance\x18\x16 \x01(\bR\risMaintenance\x124\n" +
+	"\x16maintenance_start_time\x18\x17 \x01(\x03R\x14maintenanceStartTime\x120\n" +
+	"\x14maintenance_end_time\x18\x18 \x01(\x03R\x12maintenanceEndTime\x12\x1f\n" +
+	"\voperator_id\x18\x19 \x01(\x03R\n" +
 	"operatorId\x12.\n" +
-	"\x13company_operator_id\x18\x18 \x01(\x03R\x11companyOperatorId\x122\n" +
-	"\x15company_operator_name\x18\x19 \x01(\tR\x13companyOperatorName\x120\n" +
-	"\x14retailer_operator_id\x18\x1a \x01(\x03R\x12retailerOperatorId\x124\n" +
-	"\x16retailer_operator_name\x18\x1b \x01(\tR\x14retailerOperatorName\x12,\n" +
-	"\x12system_operator_id\x18\x1c \x01(\x03R\x10systemOperatorId\x120\n" +
-	"\x14system_operator_name\x18\x1d \x01(\tR\x12systemOperatorName\x12\x16\n" +
-	"\x06config\x18\x1e \x01(\tR\x06config\"\"\n" +
+	"\x13company_operator_id\x18\x1a \x01(\x03R\x11companyOperatorId\x122\n" +
+	"\x15company_operator_name\x18\x1b \x01(\tR\x13companyOperatorName\x120\n" +
+	"\x14retailer_operator_id\x18\x1c \x01(\x03R\x12retailerOperatorId\x124\n" +
+	"\x16retailer_operator_name\x18\x1d \x01(\tR\x14retailerOperatorName\x12,\n" +
+	"\x12system_operator_id\x18\x1e \x01(\x03R\x10systemOperatorId\x120\n" +
+	"\x14system_operator_name\x18\x1f \x01(\tR\x12systemOperatorName\x12\x16\n" +
+	"\x06config\x18  \x01(\tR\x06config\"\"\n" +
 	" GetCurrentOperatorDetailsRequest\"z\n" +
 	"!GetCurrentOperatorDetailsResponse\x12U\n" +
 	"\x10operator_details\x18\x01 \x01(\v2*.api.backoffice.service.v1.OperatorDetailsR\x0foperatorDetails\"\xa2\x01\n" +
@@ -1729,7 +2092,26 @@ const file_backoffice_service_v1_backoffice_operator_proto_rawDesc = "" +
 	"\x1cUpdateOperatorStatusResponse\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\tR\x06status\"8\n" +
 	" ListOperatorsByAdminEmailRequest\x12\x14\n" +
-	"\x05email\x18\x01 \x01(\tR\x05email2\xbd\r\n" +
+	"\x05email\x18\x01 \x01(\tR\x05email\"_\n" +
+	"\x1eAddOperatorByoSubdomainRequest\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
+	"operatorId\x12\x1c\n" +
+	"\tsubdomain\x18\x02 \x01(\tR\tsubdomain\"!\n" +
+	"\x1fAddOperatorByoSubdomainResponse\"b\n" +
+	"!DeleteOperatorByoSubdomainRequest\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
+	"operatorId\x12\x1c\n" +
+	"\tsubdomain\x18\x02 \x01(\tR\tsubdomain\"$\n" +
+	"\"DeleteOperatorByoSubdomainResponse\"f\n" +
+	"%AddOperatorBackofficeSubdomainRequest\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
+	"operatorId\x12\x1c\n" +
+	"\tsubdomain\x18\x02 \x01(\tR\tsubdomain\"(\n" +
+	"&AddOperatorBackofficeSubdomainResponse\"K\n" +
+	"(DeleteOperatorBackofficeSubdomainRequest\x12\x1f\n" +
+	"\voperator_id\x18\x01 \x01(\x03R\n" +
+	"operatorId\"+\n" +
+	")DeleteOperatorBackofficeSubdomainResponse2\xb5\x14\n" +
 	"\x12BackofficeOperator\x12\xa8\x01\n" +
 	"\x10ListAllOperators\x122.api.backoffice.service.v1.ListAllOperatorsRequest\x1a3.api.backoffice.service.v1.ListAllOperatorsResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/operator/list/all\x12\xa0\x01\n" +
 	"\x0eCreateOperator\x120.api.backoffice.service.v1.CreateOperatorRequest\x1a1.api.backoffice.service.v1.CreateOperatorResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/backoffice/operator/create\x12\xc2\x01\n" +
@@ -1739,7 +2121,11 @@ const file_backoffice_service_v1_backoffice_operator_proto_rawDesc = "" +
 	"\x14ListCompanyOperators\x126.api.backoffice.service.v1.ListCompanyOperatorsRequest\x1a7.api.backoffice.service.v1.ListCompanyOperatorsResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/operator/list/company\x12\xb4\x01\n" +
 	"\x13ListBottomOperators\x125.api.backoffice.service.v1.ListBottomOperatorsRequest\x1a6.api.backoffice.service.v1.ListBottomOperatorsResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/operator/list/bottom\x12\xb9\x01\n" +
 	"\x14UpdateOperatorStatus\x126.api.backoffice.service.v1.UpdateOperatorStatusRequest\x1a7.api.backoffice.service.v1.UpdateOperatorStatusResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/operator/status/update\x12\xc8\x01\n" +
-	"\x19ListOperatorsByAdminEmail\x12;.api.backoffice.service.v1.ListOperatorsByAdminEmailRequest\x1a6.api.user.service.v1.ListOperatorsByAdminEmailResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/operator/list-by-admin-emailB[\n" +
+	"\x19ListOperatorsByAdminEmail\x12;.api.backoffice.service.v1.ListOperatorsByAdminEmailRequest\x1a6.api.user.service.v1.ListOperatorsByAdminEmailResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/operator/list-by-admin-email\x12\xc7\x01\n" +
+	"\x17AddOperatorByoSubdomain\x129.api.backoffice.service.v1.AddOperatorByoSubdomainRequest\x1a:.api.backoffice.service.v1.AddOperatorByoSubdomainResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/operator/byo-subdomains/add\x12\xd3\x01\n" +
+	"\x1aDeleteOperatorByoSubdomain\x12<.api.backoffice.service.v1.DeleteOperatorByoSubdomainRequest\x1a=.api.backoffice.service.v1.DeleteOperatorByoSubdomainResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/operator/byo-subdomains/delete\x12\xe3\x01\n" +
+	"\x1eAddOperatorBackofficeSubdomain\x12@.api.backoffice.service.v1.AddOperatorBackofficeSubdomainRequest\x1aA.api.backoffice.service.v1.AddOperatorBackofficeSubdomainResponse\"<\x82\xd3\xe4\x93\x026:\x01*\"1/v1/backoffice/operator/backoffice-subdomains/add\x12\xef\x01\n" +
+	"!DeleteOperatorBackofficeSubdomain\x12C.api.backoffice.service.v1.DeleteOperatorBackofficeSubdomainRequest\x1aD.api.backoffice.service.v1.DeleteOperatorBackofficeSubdomainResponse\"?\x82\xd3\xe4\x93\x029:\x01*\"4/v1/backoffice/operator/backoffice-subdomains/deleteB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -1754,7 +2140,7 @@ func file_backoffice_service_v1_backoffice_operator_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_operator_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_operator_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
+var file_backoffice_service_v1_backoffice_operator_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
 var file_backoffice_service_v1_backoffice_operator_proto_goTypes = []any{
 	(*ListAllOperatorsRequest)(nil),                    // 0: api.backoffice.service.v1.ListAllOperatorsRequest
 	(*ListAllOperatorsResponse)(nil),                   // 1: api.backoffice.service.v1.ListAllOperatorsResponse
@@ -1774,25 +2160,33 @@ var file_backoffice_service_v1_backoffice_operator_proto_goTypes = []any{
 	(*UpdateOperatorStatusRequest)(nil),                // 15: api.backoffice.service.v1.UpdateOperatorStatusRequest
 	(*UpdateOperatorStatusResponse)(nil),               // 16: api.backoffice.service.v1.UpdateOperatorStatusResponse
 	(*ListOperatorsByAdminEmailRequest)(nil),           // 17: api.backoffice.service.v1.ListOperatorsByAdminEmailRequest
-	(*ListAllOperatorsResponse_Operator)(nil),          // 18: api.backoffice.service.v1.ListAllOperatorsResponse.Operator
-	(*ListRetailerOperatorsResponse_OperatorInfo)(nil), // 19: api.backoffice.service.v1.ListRetailerOperatorsResponse.OperatorInfo
-	(*ListCompanyOperatorsResponse_OperatorInfo)(nil),  // 20: api.backoffice.service.v1.ListCompanyOperatorsResponse.OperatorInfo
-	(*ListBottomOperatorsResponse_OperatorInfo)(nil),   // 21: api.backoffice.service.v1.ListBottomOperatorsResponse.OperatorInfo
-	(*common.OperatorContext)(nil),                     // 22: api.common.OperatorContext
-	(*v1.ListOperatorsByAdminEmailResponse)(nil),       // 23: api.user.service.v1.ListOperatorsByAdminEmailResponse
+	(*AddOperatorByoSubdomainRequest)(nil),             // 18: api.backoffice.service.v1.AddOperatorByoSubdomainRequest
+	(*AddOperatorByoSubdomainResponse)(nil),            // 19: api.backoffice.service.v1.AddOperatorByoSubdomainResponse
+	(*DeleteOperatorByoSubdomainRequest)(nil),          // 20: api.backoffice.service.v1.DeleteOperatorByoSubdomainRequest
+	(*DeleteOperatorByoSubdomainResponse)(nil),         // 21: api.backoffice.service.v1.DeleteOperatorByoSubdomainResponse
+	(*AddOperatorBackofficeSubdomainRequest)(nil),      // 22: api.backoffice.service.v1.AddOperatorBackofficeSubdomainRequest
+	(*AddOperatorBackofficeSubdomainResponse)(nil),     // 23: api.backoffice.service.v1.AddOperatorBackofficeSubdomainResponse
+	(*DeleteOperatorBackofficeSubdomainRequest)(nil),   // 24: api.backoffice.service.v1.DeleteOperatorBackofficeSubdomainRequest
+	(*DeleteOperatorBackofficeSubdomainResponse)(nil),  // 25: api.backoffice.service.v1.DeleteOperatorBackofficeSubdomainResponse
+	(*ListAllOperatorsResponse_Operator)(nil),          // 26: api.backoffice.service.v1.ListAllOperatorsResponse.Operator
+	(*ListRetailerOperatorsResponse_OperatorInfo)(nil), // 27: api.backoffice.service.v1.ListRetailerOperatorsResponse.OperatorInfo
+	(*ListCompanyOperatorsResponse_OperatorInfo)(nil),  // 28: api.backoffice.service.v1.ListCompanyOperatorsResponse.OperatorInfo
+	(*ListBottomOperatorsResponse_OperatorInfo)(nil),   // 29: api.backoffice.service.v1.ListBottomOperatorsResponse.OperatorInfo
+	(*common.OperatorContext)(nil),                     // 30: api.common.OperatorContext
+	(*v1.ListOperatorsByAdminEmailResponse)(nil),       // 31: api.user.service.v1.ListOperatorsByAdminEmailResponse
 }
 var file_backoffice_service_v1_backoffice_operator_proto_depIdxs = []int32{
-	18, // 0: api.backoffice.service.v1.ListAllOperatorsResponse.operators:type_name -> api.backoffice.service.v1.ListAllOperatorsResponse.Operator
+	26, // 0: api.backoffice.service.v1.ListAllOperatorsResponse.operators:type_name -> api.backoffice.service.v1.ListAllOperatorsResponse.Operator
 	4,  // 1: api.backoffice.service.v1.GetCurrentOperatorDetailsResponse.operator_details:type_name -> api.backoffice.service.v1.OperatorDetails
 	4,  // 2: api.backoffice.service.v1.ListOperatorsByParentOperatorIdResponse.operator_details_list:type_name -> api.backoffice.service.v1.OperatorDetails
-	19, // 3: api.backoffice.service.v1.ListRetailerOperatorsResponse.retailer_operators:type_name -> api.backoffice.service.v1.ListRetailerOperatorsResponse.OperatorInfo
-	20, // 4: api.backoffice.service.v1.ListCompanyOperatorsResponse.company_operators:type_name -> api.backoffice.service.v1.ListCompanyOperatorsResponse.OperatorInfo
-	21, // 5: api.backoffice.service.v1.ListBottomOperatorsResponse.operators:type_name -> api.backoffice.service.v1.ListBottomOperatorsResponse.OperatorInfo
-	22, // 6: api.backoffice.service.v1.UpdateOperatorStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
-	22, // 7: api.backoffice.service.v1.ListAllOperatorsResponse.Operator.operator_context:type_name -> api.common.OperatorContext
-	22, // 8: api.backoffice.service.v1.ListRetailerOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
-	22, // 9: api.backoffice.service.v1.ListCompanyOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
-	22, // 10: api.backoffice.service.v1.ListBottomOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
+	27, // 3: api.backoffice.service.v1.ListRetailerOperatorsResponse.retailer_operators:type_name -> api.backoffice.service.v1.ListRetailerOperatorsResponse.OperatorInfo
+	28, // 4: api.backoffice.service.v1.ListCompanyOperatorsResponse.company_operators:type_name -> api.backoffice.service.v1.ListCompanyOperatorsResponse.OperatorInfo
+	29, // 5: api.backoffice.service.v1.ListBottomOperatorsResponse.operators:type_name -> api.backoffice.service.v1.ListBottomOperatorsResponse.OperatorInfo
+	30, // 6: api.backoffice.service.v1.UpdateOperatorStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
+	30, // 7: api.backoffice.service.v1.ListAllOperatorsResponse.Operator.operator_context:type_name -> api.common.OperatorContext
+	30, // 8: api.backoffice.service.v1.ListRetailerOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
+	30, // 9: api.backoffice.service.v1.ListCompanyOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
+	30, // 10: api.backoffice.service.v1.ListBottomOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
 	0,  // 11: api.backoffice.service.v1.BackofficeOperator.ListAllOperators:input_type -> api.backoffice.service.v1.ListAllOperatorsRequest
 	2,  // 12: api.backoffice.service.v1.BackofficeOperator.CreateOperator:input_type -> api.backoffice.service.v1.CreateOperatorRequest
 	5,  // 13: api.backoffice.service.v1.BackofficeOperator.GetCurrentOperatorDetails:input_type -> api.backoffice.service.v1.GetCurrentOperatorDetailsRequest
@@ -1802,17 +2196,25 @@ var file_backoffice_service_v1_backoffice_operator_proto_depIdxs = []int32{
 	13, // 17: api.backoffice.service.v1.BackofficeOperator.ListBottomOperators:input_type -> api.backoffice.service.v1.ListBottomOperatorsRequest
 	15, // 18: api.backoffice.service.v1.BackofficeOperator.UpdateOperatorStatus:input_type -> api.backoffice.service.v1.UpdateOperatorStatusRequest
 	17, // 19: api.backoffice.service.v1.BackofficeOperator.ListOperatorsByAdminEmail:input_type -> api.backoffice.service.v1.ListOperatorsByAdminEmailRequest
-	1,  // 20: api.backoffice.service.v1.BackofficeOperator.ListAllOperators:output_type -> api.backoffice.service.v1.ListAllOperatorsResponse
-	3,  // 21: api.backoffice.service.v1.BackofficeOperator.CreateOperator:output_type -> api.backoffice.service.v1.CreateOperatorResponse
-	6,  // 22: api.backoffice.service.v1.BackofficeOperator.GetCurrentOperatorDetails:output_type -> api.backoffice.service.v1.GetCurrentOperatorDetailsResponse
-	8,  // 23: api.backoffice.service.v1.BackofficeOperator.ListOperatorsByParentOperatorId:output_type -> api.backoffice.service.v1.ListOperatorsByParentOperatorIdResponse
-	10, // 24: api.backoffice.service.v1.BackofficeOperator.ListRetailerOperators:output_type -> api.backoffice.service.v1.ListRetailerOperatorsResponse
-	12, // 25: api.backoffice.service.v1.BackofficeOperator.ListCompanyOperators:output_type -> api.backoffice.service.v1.ListCompanyOperatorsResponse
-	14, // 26: api.backoffice.service.v1.BackofficeOperator.ListBottomOperators:output_type -> api.backoffice.service.v1.ListBottomOperatorsResponse
-	16, // 27: api.backoffice.service.v1.BackofficeOperator.UpdateOperatorStatus:output_type -> api.backoffice.service.v1.UpdateOperatorStatusResponse
-	23, // 28: api.backoffice.service.v1.BackofficeOperator.ListOperatorsByAdminEmail:output_type -> api.user.service.v1.ListOperatorsByAdminEmailResponse
-	20, // [20:29] is the sub-list for method output_type
-	11, // [11:20] is the sub-list for method input_type
+	18, // 20: api.backoffice.service.v1.BackofficeOperator.AddOperatorByoSubdomain:input_type -> api.backoffice.service.v1.AddOperatorByoSubdomainRequest
+	20, // 21: api.backoffice.service.v1.BackofficeOperator.DeleteOperatorByoSubdomain:input_type -> api.backoffice.service.v1.DeleteOperatorByoSubdomainRequest
+	22, // 22: api.backoffice.service.v1.BackofficeOperator.AddOperatorBackofficeSubdomain:input_type -> api.backoffice.service.v1.AddOperatorBackofficeSubdomainRequest
+	24, // 23: api.backoffice.service.v1.BackofficeOperator.DeleteOperatorBackofficeSubdomain:input_type -> api.backoffice.service.v1.DeleteOperatorBackofficeSubdomainRequest
+	1,  // 24: api.backoffice.service.v1.BackofficeOperator.ListAllOperators:output_type -> api.backoffice.service.v1.ListAllOperatorsResponse
+	3,  // 25: api.backoffice.service.v1.BackofficeOperator.CreateOperator:output_type -> api.backoffice.service.v1.CreateOperatorResponse
+	6,  // 26: api.backoffice.service.v1.BackofficeOperator.GetCurrentOperatorDetails:output_type -> api.backoffice.service.v1.GetCurrentOperatorDetailsResponse
+	8,  // 27: api.backoffice.service.v1.BackofficeOperator.ListOperatorsByParentOperatorId:output_type -> api.backoffice.service.v1.ListOperatorsByParentOperatorIdResponse
+	10, // 28: api.backoffice.service.v1.BackofficeOperator.ListRetailerOperators:output_type -> api.backoffice.service.v1.ListRetailerOperatorsResponse
+	12, // 29: api.backoffice.service.v1.BackofficeOperator.ListCompanyOperators:output_type -> api.backoffice.service.v1.ListCompanyOperatorsResponse
+	14, // 30: api.backoffice.service.v1.BackofficeOperator.ListBottomOperators:output_type -> api.backoffice.service.v1.ListBottomOperatorsResponse
+	16, // 31: api.backoffice.service.v1.BackofficeOperator.UpdateOperatorStatus:output_type -> api.backoffice.service.v1.UpdateOperatorStatusResponse
+	31, // 32: api.backoffice.service.v1.BackofficeOperator.ListOperatorsByAdminEmail:output_type -> api.user.service.v1.ListOperatorsByAdminEmailResponse
+	19, // 33: api.backoffice.service.v1.BackofficeOperator.AddOperatorByoSubdomain:output_type -> api.backoffice.service.v1.AddOperatorByoSubdomainResponse
+	21, // 34: api.backoffice.service.v1.BackofficeOperator.DeleteOperatorByoSubdomain:output_type -> api.backoffice.service.v1.DeleteOperatorByoSubdomainResponse
+	23, // 35: api.backoffice.service.v1.BackofficeOperator.AddOperatorBackofficeSubdomain:output_type -> api.backoffice.service.v1.AddOperatorBackofficeSubdomainResponse
+	25, // 36: api.backoffice.service.v1.BackofficeOperator.DeleteOperatorBackofficeSubdomain:output_type -> api.backoffice.service.v1.DeleteOperatorBackofficeSubdomainResponse
+	24, // [24:37] is the sub-list for method output_type
+	11, // [11:24] is the sub-list for method input_type
 	11, // [11:11] is the sub-list for extension type_name
 	11, // [11:11] is the sub-list for extension extendee
 	0,  // [0:11] is the sub-list for field type_name
@@ -1831,7 +2233,7 @@ func file_backoffice_service_v1_backoffice_operator_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_operator_proto_rawDesc), len(file_backoffice_service_v1_backoffice_operator_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   22,
+			NumMessages:   30,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

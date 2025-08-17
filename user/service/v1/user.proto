@@ -260,6 +260,22 @@ service User {
 	// GetOperatorDetailsByUserId returns the operator details which the user belongs to
 	rpc GetOperatorDetailsByUserId(GetOperatorDetailsByUserIdRequest) returns (GetOperatorDetailsByUserIdResponse) {
 	}
+
+	// AddOperatorByoSubdomain adds a byo subdomain for the given operator
+	rpc AddOperatorByoSubdomain(AddOperatorByoSubdomainRequest) returns (AddOperatorByoSubdomainResponse) {
+	}
+
+	// DeleteOperatorByoSubdomain deletes a byo subdomain for the given operator
+	rpc DeleteOperatorByoSubdomain(DeleteOperatorByoSubdomainRequest) returns (DeleteOperatorByoSubdomainResponse) {
+	}
+
+	// AddOperatorBackofficeSubdomain adds a backoffice subdomain for the given operator
+	rpc AddOperatorBackofficeSubdomain(AddOperatorBackofficeSubdomainRequest) returns (AddOperatorBackofficeSubdomainResponse) {
+	}
+
+	// DeleteOperatorBackofficeSubdomain deletes a backoffice subdomain for the given operator
+	rpc DeleteOperatorBackofficeSubdomain(DeleteOperatorBackofficeSubdomainRequest) returns (DeleteOperatorBackofficeSubdomainResponse) {
+	}
 }
 
 // UserInfo contains basic user information.
@@ -1036,28 +1052,30 @@ message OperatorDetails {
 	string external_id = 6;
 	string api_key = 7;
 	string subdomain = 8;
-	string backoffice_subdomain = 9;
-	string backoffice_child_domain = 10;
-	repeated string domain_pool = 11;
-	bool enabled = 12;
-	string mode = 13;
-	string operator_key = 14;
-	string reporting_currency = 15;
-	string backoffice_timezone = 16;
-	repeated string supported_languages = 17;
-	repeated string supported_currencies = 18;
-	string status = 19;
-	bool is_maintenance = 20;
-	int64 maintenance_start_time = 21;
-	int64 maintenance_end_time = 22;
-	int64 operator_id = 23; // operator id in the operator hierarchy
-	int64 company_operator_id = 24; // company operator id in the operator hierarchy
-	string company_operator_name = 25; // company operator name in the operator hierarchy, or empty string if not exists
-	int64 retailer_operator_id = 26; // retailer operator id in the operator hierarchy
-	string retailer_operator_name = 27; // retailer operator name in the operator hierarchy, or empty string if not exists
-	int64 system_operator_id = 28; // system operator id in the operator hierarchy
-	string system_operator_name = 29; // system operator name in the operator hierarchy, or empty string if not exists
-	string config = 30;
+	repeated string byo_subdomains = 9;
+	string backoffice_subdomain = 10;
+	repeated string backoffice_byo_subdomains = 11;
+	string backoffice_child_domain = 12;
+	repeated string domain_pool = 13;
+	bool enabled = 14;
+	string mode = 15;
+	string operator_key = 16;
+	string reporting_currency = 17;
+	string backoffice_timezone = 18;
+	repeated string supported_languages = 19;
+	repeated string supported_currencies = 20;
+	string status = 21;
+	bool is_maintenance = 22;
+	int64 maintenance_start_time = 23;
+	int64 maintenance_end_time = 24;
+	int64 operator_id = 25; // operator id in the operator hierarchy
+	int64 company_operator_id = 26; // company operator id in the operator hierarchy
+	string company_operator_name = 27; // company operator name in the operator hierarchy, or empty string if not exists
+	int64 retailer_operator_id = 28; // retailer operator id in the operator hierarchy
+	string retailer_operator_name = 29; // retailer operator name in the operator hierarchy, or empty string if not exists
+	int64 system_operator_id = 30; // system operator id in the operator hierarchy
+	string system_operator_name = 31; // system operator name in the operator hierarchy, or empty string if not exists
+	string config = 32;
 }
 
 message GetOperatorDetailsRequest {
@@ -1192,4 +1210,40 @@ message GetOperatorDetailsByUserIdRequest {
 
 message GetOperatorDetailsByUserIdResponse {
 	OperatorDetails operator_details = 1;
+}
+
+message AddOperatorByoSubdomainRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 operator_id = 2;
+	string subdomain = 3;
+}
+
+message AddOperatorByoSubdomainResponse {
+}
+
+message DeleteOperatorByoSubdomainRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 operator_id = 2;
+	string subdomain = 3;
+}
+
+message DeleteOperatorByoSubdomainResponse {
+}
+
+message AddOperatorBackofficeSubdomainRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 operator_id = 2;
+	string subdomain = 3;
+}
+
+message AddOperatorBackofficeSubdomainResponse {
+}
+
+message DeleteOperatorBackofficeSubdomainRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 operator_id = 2;
+	string subdomain = 3;
+}
+
+message DeleteOperatorBackofficeSubdomainResponse {
 }

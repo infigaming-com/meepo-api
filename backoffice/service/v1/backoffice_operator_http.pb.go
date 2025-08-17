@@ -20,7 +20,11 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationBackofficeOperatorAddOperatorBackofficeSubdomain = "/api.backoffice.service.v1.BackofficeOperator/AddOperatorBackofficeSubdomain"
+const OperationBackofficeOperatorAddOperatorByoSubdomain = "/api.backoffice.service.v1.BackofficeOperator/AddOperatorByoSubdomain"
 const OperationBackofficeOperatorCreateOperator = "/api.backoffice.service.v1.BackofficeOperator/CreateOperator"
+const OperationBackofficeOperatorDeleteOperatorBackofficeSubdomain = "/api.backoffice.service.v1.BackofficeOperator/DeleteOperatorBackofficeSubdomain"
+const OperationBackofficeOperatorDeleteOperatorByoSubdomain = "/api.backoffice.service.v1.BackofficeOperator/DeleteOperatorByoSubdomain"
 const OperationBackofficeOperatorGetCurrentOperatorDetails = "/api.backoffice.service.v1.BackofficeOperator/GetCurrentOperatorDetails"
 const OperationBackofficeOperatorListAllOperators = "/api.backoffice.service.v1.BackofficeOperator/ListAllOperators"
 const OperationBackofficeOperatorListBottomOperators = "/api.backoffice.service.v1.BackofficeOperator/ListBottomOperators"
@@ -31,7 +35,15 @@ const OperationBackofficeOperatorListRetailerOperators = "/api.backoffice.servic
 const OperationBackofficeOperatorUpdateOperatorStatus = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorStatus"
 
 type BackofficeOperatorHTTPServer interface {
+	// AddOperatorBackofficeSubdomain AddOperatorBackofficeSubdomain adds a backoffice subdomain for the given operator
+	AddOperatorBackofficeSubdomain(context.Context, *AddOperatorBackofficeSubdomainRequest) (*AddOperatorBackofficeSubdomainResponse, error)
+	// AddOperatorByoSubdomain AddOperatorByoSubdomain adds a byo subdomain for the given operator
+	AddOperatorByoSubdomain(context.Context, *AddOperatorByoSubdomainRequest) (*AddOperatorByoSubdomainResponse, error)
 	CreateOperator(context.Context, *CreateOperatorRequest) (*CreateOperatorResponse, error)
+	// DeleteOperatorBackofficeSubdomain DeleteOperatorBackofficeSubdomain deletes a backoffice subdomain for the given operator
+	DeleteOperatorBackofficeSubdomain(context.Context, *DeleteOperatorBackofficeSubdomainRequest) (*DeleteOperatorBackofficeSubdomainResponse, error)
+	// DeleteOperatorByoSubdomain DeleteOperatorByoSubdomain deletes a byo subdomain for the given operator
+	DeleteOperatorByoSubdomain(context.Context, *DeleteOperatorByoSubdomainRequest) (*DeleteOperatorByoSubdomainResponse, error)
 	// GetCurrentOperatorDetails GetCurrentOperatorDetails returns the current operator details.
 	GetCurrentOperatorDetails(context.Context, *GetCurrentOperatorDetailsRequest) (*GetCurrentOperatorDetailsResponse, error)
 	ListAllOperators(context.Context, *ListAllOperatorsRequest) (*ListAllOperatorsResponse, error)
@@ -60,6 +72,10 @@ func RegisterBackofficeOperatorHTTPServer(s *http.Server, srv BackofficeOperator
 	r.POST("/v1/backoffice/operator/list/bottom", _BackofficeOperator_ListBottomOperators0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/status/update", _BackofficeOperator_UpdateOperatorStatus0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/list-by-admin-email", _BackofficeOperator_ListOperatorsByAdminEmail0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/byo-subdomains/add", _BackofficeOperator_AddOperatorByoSubdomain0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/byo-subdomains/delete", _BackofficeOperator_DeleteOperatorByoSubdomain0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/backoffice-subdomains/add", _BackofficeOperator_AddOperatorBackofficeSubdomain0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/backoffice-subdomains/delete", _BackofficeOperator_DeleteOperatorBackofficeSubdomain0_HTTP_Handler(srv))
 }
 
 func _BackofficeOperator_ListAllOperators0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
@@ -260,8 +276,100 @@ func _BackofficeOperator_ListOperatorsByAdminEmail0_HTTP_Handler(srv BackofficeO
 	}
 }
 
+func _BackofficeOperator_AddOperatorByoSubdomain0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in AddOperatorByoSubdomainRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOperatorAddOperatorByoSubdomain)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.AddOperatorByoSubdomain(ctx, req.(*AddOperatorByoSubdomainRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*AddOperatorByoSubdomainResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeOperator_DeleteOperatorByoSubdomain0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DeleteOperatorByoSubdomainRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOperatorDeleteOperatorByoSubdomain)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteOperatorByoSubdomain(ctx, req.(*DeleteOperatorByoSubdomainRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*DeleteOperatorByoSubdomainResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeOperator_AddOperatorBackofficeSubdomain0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in AddOperatorBackofficeSubdomainRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOperatorAddOperatorBackofficeSubdomain)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.AddOperatorBackofficeSubdomain(ctx, req.(*AddOperatorBackofficeSubdomainRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*AddOperatorBackofficeSubdomainResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeOperator_DeleteOperatorBackofficeSubdomain0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DeleteOperatorBackofficeSubdomainRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOperatorDeleteOperatorBackofficeSubdomain)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteOperatorBackofficeSubdomain(ctx, req.(*DeleteOperatorBackofficeSubdomainRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*DeleteOperatorBackofficeSubdomainResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeOperatorHTTPClient interface {
+	AddOperatorBackofficeSubdomain(ctx context.Context, req *AddOperatorBackofficeSubdomainRequest, opts ...http.CallOption) (rsp *AddOperatorBackofficeSubdomainResponse, err error)
+	AddOperatorByoSubdomain(ctx context.Context, req *AddOperatorByoSubdomainRequest, opts ...http.CallOption) (rsp *AddOperatorByoSubdomainResponse, err error)
 	CreateOperator(ctx context.Context, req *CreateOperatorRequest, opts ...http.CallOption) (rsp *CreateOperatorResponse, err error)
+	DeleteOperatorBackofficeSubdomain(ctx context.Context, req *DeleteOperatorBackofficeSubdomainRequest, opts ...http.CallOption) (rsp *DeleteOperatorBackofficeSubdomainResponse, err error)
+	DeleteOperatorByoSubdomain(ctx context.Context, req *DeleteOperatorByoSubdomainRequest, opts ...http.CallOption) (rsp *DeleteOperatorByoSubdomainResponse, err error)
 	GetCurrentOperatorDetails(ctx context.Context, req *GetCurrentOperatorDetailsRequest, opts ...http.CallOption) (rsp *GetCurrentOperatorDetailsResponse, err error)
 	ListAllOperators(ctx context.Context, req *ListAllOperatorsRequest, opts ...http.CallOption) (rsp *ListAllOperatorsResponse, err error)
 	ListBottomOperators(ctx context.Context, req *ListBottomOperatorsRequest, opts ...http.CallOption) (rsp *ListBottomOperatorsResponse, err error)
@@ -280,11 +388,63 @@ func NewBackofficeOperatorHTTPClient(client *http.Client) BackofficeOperatorHTTP
 	return &BackofficeOperatorHTTPClientImpl{client}
 }
 
+func (c *BackofficeOperatorHTTPClientImpl) AddOperatorBackofficeSubdomain(ctx context.Context, in *AddOperatorBackofficeSubdomainRequest, opts ...http.CallOption) (*AddOperatorBackofficeSubdomainResponse, error) {
+	var out AddOperatorBackofficeSubdomainResponse
+	pattern := "/v1/backoffice/operator/backoffice-subdomains/add"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOperatorAddOperatorBackofficeSubdomain))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeOperatorHTTPClientImpl) AddOperatorByoSubdomain(ctx context.Context, in *AddOperatorByoSubdomainRequest, opts ...http.CallOption) (*AddOperatorByoSubdomainResponse, error) {
+	var out AddOperatorByoSubdomainResponse
+	pattern := "/v1/backoffice/operator/byo-subdomains/add"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOperatorAddOperatorByoSubdomain))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *BackofficeOperatorHTTPClientImpl) CreateOperator(ctx context.Context, in *CreateOperatorRequest, opts ...http.CallOption) (*CreateOperatorResponse, error) {
 	var out CreateOperatorResponse
 	pattern := "/v1/backoffice/operator/create"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeOperatorCreateOperator))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeOperatorHTTPClientImpl) DeleteOperatorBackofficeSubdomain(ctx context.Context, in *DeleteOperatorBackofficeSubdomainRequest, opts ...http.CallOption) (*DeleteOperatorBackofficeSubdomainResponse, error) {
+	var out DeleteOperatorBackofficeSubdomainResponse
+	pattern := "/v1/backoffice/operator/backoffice-subdomains/delete"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOperatorDeleteOperatorBackofficeSubdomain))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeOperatorHTTPClientImpl) DeleteOperatorByoSubdomain(ctx context.Context, in *DeleteOperatorByoSubdomainRequest, opts ...http.CallOption) (*DeleteOperatorByoSubdomainResponse, error) {
+	var out DeleteOperatorByoSubdomainResponse
+	pattern := "/v1/backoffice/operator/byo-subdomains/delete"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOperatorDeleteOperatorByoSubdomain))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

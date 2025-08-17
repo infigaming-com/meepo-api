@@ -2243,6 +2243,859 @@ var _ interface {
 	ErrorName() string
 } = ListOperatorsByAdminEmailRequestValidationError{}
 
+// Validate checks the field values on AddOperatorByoSubdomainRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AddOperatorByoSubdomainRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AddOperatorByoSubdomainRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// AddOperatorByoSubdomainRequestMultiError, or nil if none found.
+func (m *AddOperatorByoSubdomainRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddOperatorByoSubdomainRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for OperatorId
+
+	// no validation rules for Subdomain
+
+	if len(errors) > 0 {
+		return AddOperatorByoSubdomainRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// AddOperatorByoSubdomainRequestMultiError is an error wrapping multiple
+// validation errors returned by AddOperatorByoSubdomainRequest.ValidateAll()
+// if the designated constraints aren't met.
+type AddOperatorByoSubdomainRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddOperatorByoSubdomainRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddOperatorByoSubdomainRequestMultiError) AllErrors() []error { return m }
+
+// AddOperatorByoSubdomainRequestValidationError is the validation error
+// returned by AddOperatorByoSubdomainRequest.Validate if the designated
+// constraints aren't met.
+type AddOperatorByoSubdomainRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddOperatorByoSubdomainRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddOperatorByoSubdomainRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddOperatorByoSubdomainRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddOperatorByoSubdomainRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddOperatorByoSubdomainRequestValidationError) ErrorName() string {
+	return "AddOperatorByoSubdomainRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AddOperatorByoSubdomainRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddOperatorByoSubdomainRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddOperatorByoSubdomainRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddOperatorByoSubdomainRequestValidationError{}
+
+// Validate checks the field values on AddOperatorByoSubdomainResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AddOperatorByoSubdomainResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AddOperatorByoSubdomainResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// AddOperatorByoSubdomainResponseMultiError, or nil if none found.
+func (m *AddOperatorByoSubdomainResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddOperatorByoSubdomainResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return AddOperatorByoSubdomainResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// AddOperatorByoSubdomainResponseMultiError is an error wrapping multiple
+// validation errors returned by AddOperatorByoSubdomainResponse.ValidateAll()
+// if the designated constraints aren't met.
+type AddOperatorByoSubdomainResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddOperatorByoSubdomainResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddOperatorByoSubdomainResponseMultiError) AllErrors() []error { return m }
+
+// AddOperatorByoSubdomainResponseValidationError is the validation error
+// returned by AddOperatorByoSubdomainResponse.Validate if the designated
+// constraints aren't met.
+type AddOperatorByoSubdomainResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddOperatorByoSubdomainResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddOperatorByoSubdomainResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddOperatorByoSubdomainResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddOperatorByoSubdomainResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddOperatorByoSubdomainResponseValidationError) ErrorName() string {
+	return "AddOperatorByoSubdomainResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AddOperatorByoSubdomainResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddOperatorByoSubdomainResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddOperatorByoSubdomainResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddOperatorByoSubdomainResponseValidationError{}
+
+// Validate checks the field values on DeleteOperatorByoSubdomainRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *DeleteOperatorByoSubdomainRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteOperatorByoSubdomainRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// DeleteOperatorByoSubdomainRequestMultiError, or nil if none found.
+func (m *DeleteOperatorByoSubdomainRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteOperatorByoSubdomainRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for OperatorId
+
+	// no validation rules for Subdomain
+
+	if len(errors) > 0 {
+		return DeleteOperatorByoSubdomainRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteOperatorByoSubdomainRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// DeleteOperatorByoSubdomainRequest.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteOperatorByoSubdomainRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteOperatorByoSubdomainRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteOperatorByoSubdomainRequestMultiError) AllErrors() []error { return m }
+
+// DeleteOperatorByoSubdomainRequestValidationError is the validation error
+// returned by DeleteOperatorByoSubdomainRequest.Validate if the designated
+// constraints aren't met.
+type DeleteOperatorByoSubdomainRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteOperatorByoSubdomainRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteOperatorByoSubdomainRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteOperatorByoSubdomainRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteOperatorByoSubdomainRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteOperatorByoSubdomainRequestValidationError) ErrorName() string {
+	return "DeleteOperatorByoSubdomainRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteOperatorByoSubdomainRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteOperatorByoSubdomainRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteOperatorByoSubdomainRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteOperatorByoSubdomainRequestValidationError{}
+
+// Validate checks the field values on DeleteOperatorByoSubdomainResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *DeleteOperatorByoSubdomainResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteOperatorByoSubdomainResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// DeleteOperatorByoSubdomainResponseMultiError, or nil if none found.
+func (m *DeleteOperatorByoSubdomainResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteOperatorByoSubdomainResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return DeleteOperatorByoSubdomainResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteOperatorByoSubdomainResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// DeleteOperatorByoSubdomainResponse.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteOperatorByoSubdomainResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteOperatorByoSubdomainResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteOperatorByoSubdomainResponseMultiError) AllErrors() []error { return m }
+
+// DeleteOperatorByoSubdomainResponseValidationError is the validation error
+// returned by DeleteOperatorByoSubdomainResponse.Validate if the designated
+// constraints aren't met.
+type DeleteOperatorByoSubdomainResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteOperatorByoSubdomainResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteOperatorByoSubdomainResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteOperatorByoSubdomainResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteOperatorByoSubdomainResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteOperatorByoSubdomainResponseValidationError) ErrorName() string {
+	return "DeleteOperatorByoSubdomainResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteOperatorByoSubdomainResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteOperatorByoSubdomainResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteOperatorByoSubdomainResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteOperatorByoSubdomainResponseValidationError{}
+
+// Validate checks the field values on AddOperatorBackofficeSubdomainRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *AddOperatorBackofficeSubdomainRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AddOperatorBackofficeSubdomainRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// AddOperatorBackofficeSubdomainRequestMultiError, or nil if none found.
+func (m *AddOperatorBackofficeSubdomainRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddOperatorBackofficeSubdomainRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for OperatorId
+
+	// no validation rules for Subdomain
+
+	if len(errors) > 0 {
+		return AddOperatorBackofficeSubdomainRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// AddOperatorBackofficeSubdomainRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// AddOperatorBackofficeSubdomainRequest.ValidateAll() if the designated
+// constraints aren't met.
+type AddOperatorBackofficeSubdomainRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddOperatorBackofficeSubdomainRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddOperatorBackofficeSubdomainRequestMultiError) AllErrors() []error { return m }
+
+// AddOperatorBackofficeSubdomainRequestValidationError is the validation error
+// returned by AddOperatorBackofficeSubdomainRequest.Validate if the
+// designated constraints aren't met.
+type AddOperatorBackofficeSubdomainRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddOperatorBackofficeSubdomainRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddOperatorBackofficeSubdomainRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddOperatorBackofficeSubdomainRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddOperatorBackofficeSubdomainRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddOperatorBackofficeSubdomainRequestValidationError) ErrorName() string {
+	return "AddOperatorBackofficeSubdomainRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AddOperatorBackofficeSubdomainRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddOperatorBackofficeSubdomainRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddOperatorBackofficeSubdomainRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddOperatorBackofficeSubdomainRequestValidationError{}
+
+// Validate checks the field values on AddOperatorBackofficeSubdomainResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *AddOperatorBackofficeSubdomainResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// AddOperatorBackofficeSubdomainResponse with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// AddOperatorBackofficeSubdomainResponseMultiError, or nil if none found.
+func (m *AddOperatorBackofficeSubdomainResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddOperatorBackofficeSubdomainResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return AddOperatorBackofficeSubdomainResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// AddOperatorBackofficeSubdomainResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// AddOperatorBackofficeSubdomainResponse.ValidateAll() if the designated
+// constraints aren't met.
+type AddOperatorBackofficeSubdomainResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddOperatorBackofficeSubdomainResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddOperatorBackofficeSubdomainResponseMultiError) AllErrors() []error { return m }
+
+// AddOperatorBackofficeSubdomainResponseValidationError is the validation
+// error returned by AddOperatorBackofficeSubdomainResponse.Validate if the
+// designated constraints aren't met.
+type AddOperatorBackofficeSubdomainResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddOperatorBackofficeSubdomainResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddOperatorBackofficeSubdomainResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddOperatorBackofficeSubdomainResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddOperatorBackofficeSubdomainResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddOperatorBackofficeSubdomainResponseValidationError) ErrorName() string {
+	return "AddOperatorBackofficeSubdomainResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AddOperatorBackofficeSubdomainResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddOperatorBackofficeSubdomainResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddOperatorBackofficeSubdomainResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddOperatorBackofficeSubdomainResponseValidationError{}
+
+// Validate checks the field values on DeleteOperatorBackofficeSubdomainRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *DeleteOperatorBackofficeSubdomainRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// DeleteOperatorBackofficeSubdomainRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// DeleteOperatorBackofficeSubdomainRequestMultiError, or nil if none found.
+func (m *DeleteOperatorBackofficeSubdomainRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteOperatorBackofficeSubdomainRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for OperatorId
+
+	if len(errors) > 0 {
+		return DeleteOperatorBackofficeSubdomainRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteOperatorBackofficeSubdomainRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// DeleteOperatorBackofficeSubdomainRequest.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteOperatorBackofficeSubdomainRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteOperatorBackofficeSubdomainRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteOperatorBackofficeSubdomainRequestMultiError) AllErrors() []error { return m }
+
+// DeleteOperatorBackofficeSubdomainRequestValidationError is the validation
+// error returned by DeleteOperatorBackofficeSubdomainRequest.Validate if the
+// designated constraints aren't met.
+type DeleteOperatorBackofficeSubdomainRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteOperatorBackofficeSubdomainRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteOperatorBackofficeSubdomainRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteOperatorBackofficeSubdomainRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteOperatorBackofficeSubdomainRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteOperatorBackofficeSubdomainRequestValidationError) ErrorName() string {
+	return "DeleteOperatorBackofficeSubdomainRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteOperatorBackofficeSubdomainRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteOperatorBackofficeSubdomainRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteOperatorBackofficeSubdomainRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteOperatorBackofficeSubdomainRequestValidationError{}
+
+// Validate checks the field values on
+// DeleteOperatorBackofficeSubdomainResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *DeleteOperatorBackofficeSubdomainResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// DeleteOperatorBackofficeSubdomainResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// DeleteOperatorBackofficeSubdomainResponseMultiError, or nil if none found.
+func (m *DeleteOperatorBackofficeSubdomainResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteOperatorBackofficeSubdomainResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return DeleteOperatorBackofficeSubdomainResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteOperatorBackofficeSubdomainResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// DeleteOperatorBackofficeSubdomainResponse.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteOperatorBackofficeSubdomainResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteOperatorBackofficeSubdomainResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteOperatorBackofficeSubdomainResponseMultiError) AllErrors() []error { return m }
+
+// DeleteOperatorBackofficeSubdomainResponseValidationError is the validation
+// error returned by DeleteOperatorBackofficeSubdomainResponse.Validate if the
+// designated constraints aren't met.
+type DeleteOperatorBackofficeSubdomainResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteOperatorBackofficeSubdomainResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteOperatorBackofficeSubdomainResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteOperatorBackofficeSubdomainResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteOperatorBackofficeSubdomainResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteOperatorBackofficeSubdomainResponseValidationError) ErrorName() string {
+	return "DeleteOperatorBackofficeSubdomainResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteOperatorBackofficeSubdomainResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteOperatorBackofficeSubdomainResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteOperatorBackofficeSubdomainResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteOperatorBackofficeSubdomainResponseValidationError{}
+
 // Validate checks the field values on ListAllOperatorsResponse_Operator with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the first error encountered is returned, or nil if there are

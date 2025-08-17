@@ -1351,6 +1351,82 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateGameResponse'
+    /v1/backoffice/operator/backoffice-subdomains/add:
+        post:
+            tags:
+                - BackofficeOperator
+            description: AddOperatorBackofficeSubdomain adds a backoffice subdomain for the given operator
+            operationId: BackofficeOperator_AddOperatorBackofficeSubdomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AddOperatorBackofficeSubdomainRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.AddOperatorBackofficeSubdomainResponse'
+    /v1/backoffice/operator/backoffice-subdomains/delete:
+        post:
+            tags:
+                - BackofficeOperator
+            description: DeleteOperatorBackofficeSubdomain deletes a backoffice subdomain for the given operator
+            operationId: BackofficeOperator_DeleteOperatorBackofficeSubdomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOperatorBackofficeSubdomainRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOperatorBackofficeSubdomainResponse'
+    /v1/backoffice/operator/byo-subdomains/add:
+        post:
+            tags:
+                - BackofficeOperator
+            description: AddOperatorByoSubdomain adds a byo subdomain for the given operator
+            operationId: BackofficeOperator_AddOperatorByoSubdomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AddOperatorByoSubdomainRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.AddOperatorByoSubdomainResponse'
+    /v1/backoffice/operator/byo-subdomains/delete:
+        post:
+            tags:
+                - BackofficeOperator
+            description: DeleteOperatorByoSubdomain deletes a byo subdomain for the given operator
+            operationId: BackofficeOperator_DeleteOperatorByoSubdomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOperatorByoSubdomainRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOperatorByoSubdomainResponse'
     /v1/backoffice/operator/create:
         post:
             tags:
@@ -3724,6 +3800,26 @@ components:
             properties:
                 commentId:
                     type: string
+        api.backoffice.service.v1.AddOperatorBackofficeSubdomainRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                subdomain:
+                    type: string
+        api.backoffice.service.v1.AddOperatorBackofficeSubdomainResponse:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.AddOperatorByoSubdomainRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                subdomain:
+                    type: string
+        api.backoffice.service.v1.AddOperatorByoSubdomainResponse:
+            type: object
+            properties: {}
         api.backoffice.service.v1.AddSystemCurrencyRequest:
             type: object
             properties:
@@ -4166,6 +4262,24 @@ components:
                     items:
                         type: integer
                         format: int32
+        api.backoffice.service.v1.DeleteOperatorBackofficeSubdomainRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+        api.backoffice.service.v1.DeleteOperatorBackofficeSubdomainResponse:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.DeleteOperatorByoSubdomainRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+                subdomain:
+                    type: string
+        api.backoffice.service.v1.DeleteOperatorByoSubdomainResponse:
+            type: object
+            properties: {}
         api.backoffice.service.v1.DeleteRoleRequest:
             type: object
             properties:
@@ -8272,8 +8386,16 @@ components:
                     type: string
                 subdomain:
                     type: string
+                byoSubdomains:
+                    type: array
+                    items:
+                        type: string
                 backofficeSubdomain:
                     type: string
+                backofficeByoSubdomains:
+                    type: array
+                    items:
+                        type: string
                 backofficeChildDomain:
                     type: string
                 domainPool:
@@ -10587,8 +10709,16 @@ components:
                     type: string
                 subdomain:
                     type: string
+                byoSubdomains:
+                    type: array
+                    items:
+                        type: string
                 backofficeSubdomain:
                     type: string
+                backofficeByoSubdomains:
+                    type: array
+                    items:
+                        type: string
                 backofficeChildDomain:
                     type: string
                 domainPool:
