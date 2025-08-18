@@ -110,7 +110,6 @@ func (x *CertificateInfo) GetSanDomains() []string {
 type IssueCertificateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Domain        string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"` // Domain name (e.g., "acme.mini.bet")
-	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`   // Email for certificate notifications
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -148,13 +147,6 @@ func (*IssueCertificateRequest) Descriptor() ([]byte, []int) {
 func (x *IssueCertificateRequest) GetDomain() string {
 	if x != nil {
 		return x.Domain
-	}
-	return ""
-}
-
-func (x *IssueCertificateRequest) GetEmail() string {
-	if x != nil {
-		return x.Email
 	}
 	return ""
 }
@@ -573,6 +565,170 @@ func (x *ListCertificatesResponse) GetTotalCount() int32 {
 	return 0
 }
 
+// Request to update the nginx config for frontend byo domains
+type UpdateByoNginxConfigRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Domains       []string               `protobuf:"bytes,1,rep,name=domains,proto3" json:"domains,omitempty"` // Domain names
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateByoNginxConfigRequest) Reset() {
+	*x = UpdateByoNginxConfigRequest{}
+	mi := &file_acme_service_v1_acme_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateByoNginxConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateByoNginxConfigRequest) ProtoMessage() {}
+
+func (x *UpdateByoNginxConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_acme_service_v1_acme_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateByoNginxConfigRequest.ProtoReflect.Descriptor instead.
+func (*UpdateByoNginxConfigRequest) Descriptor() ([]byte, []int) {
+	return file_acme_service_v1_acme_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *UpdateByoNginxConfigRequest) GetDomains() []string {
+	if x != nil {
+		return x.Domains
+	}
+	return nil
+}
+
+// Response for updating the nginx config for frontend byo domains
+type UpdateByoNginxConfigResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateByoNginxConfigResponse) Reset() {
+	*x = UpdateByoNginxConfigResponse{}
+	mi := &file_acme_service_v1_acme_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateByoNginxConfigResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateByoNginxConfigResponse) ProtoMessage() {}
+
+func (x *UpdateByoNginxConfigResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_acme_service_v1_acme_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateByoNginxConfigResponse.ProtoReflect.Descriptor instead.
+func (*UpdateByoNginxConfigResponse) Descriptor() ([]byte, []int) {
+	return file_acme_service_v1_acme_proto_rawDescGZIP(), []int{12}
+}
+
+// Request to update the nginx config for backend byo domains
+type UpdateBackofficeNginxConfigRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Domains       []string               `protobuf:"bytes,1,rep,name=domains,proto3" json:"domains,omitempty"` // Domain names
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateBackofficeNginxConfigRequest) Reset() {
+	*x = UpdateBackofficeNginxConfigRequest{}
+	mi := &file_acme_service_v1_acme_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateBackofficeNginxConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateBackofficeNginxConfigRequest) ProtoMessage() {}
+
+func (x *UpdateBackofficeNginxConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_acme_service_v1_acme_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateBackofficeNginxConfigRequest.ProtoReflect.Descriptor instead.
+func (*UpdateBackofficeNginxConfigRequest) Descriptor() ([]byte, []int) {
+	return file_acme_service_v1_acme_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *UpdateBackofficeNginxConfigRequest) GetDomains() []string {
+	if x != nil {
+		return x.Domains
+	}
+	return nil
+}
+
+// Response for updating the nginx config for backend byo domains
+type UpdateBackofficeNginxConfigResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateBackofficeNginxConfigResponse) Reset() {
+	*x = UpdateBackofficeNginxConfigResponse{}
+	mi := &file_acme_service_v1_acme_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateBackofficeNginxConfigResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateBackofficeNginxConfigResponse) ProtoMessage() {}
+
+func (x *UpdateBackofficeNginxConfigResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_acme_service_v1_acme_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateBackofficeNginxConfigResponse.ProtoReflect.Descriptor instead.
+func (*UpdateBackofficeNginxConfigResponse) Descriptor() ([]byte, []int) {
+	return file_acme_service_v1_acme_proto_rawDescGZIP(), []int{14}
+}
+
 var File_acme_service_v1_acme_proto protoreflect.FileDescriptor
 
 const file_acme_service_v1_acme_proto_rawDesc = "" +
@@ -586,10 +742,9 @@ const file_acme_service_v1_acme_proto_rawDesc = "" +
 	"\tissued_at\x18\x04 \x01(\x03R\bissuedAt\x12\x16\n" +
 	"\x06issuer\x18\x05 \x01(\tR\x06issuer\x12\x1f\n" +
 	"\vsan_domains\x18\x06 \x03(\tR\n" +
-	"sanDomains\"G\n" +
+	"sanDomains\"1\n" +
 	"\x17IssueCertificateRequest\x12\x16\n" +
-	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x14\n" +
-	"\x05email\x18\x02 \x01(\tR\x05email\"b\n" +
+	"\x06domain\x18\x01 \x01(\tR\x06domain\"b\n" +
 	"\x18IssueCertificateResponse\x12F\n" +
 	"\vcertificate\x18\x01 \x01(\v2$.api.acme.service.v1.CertificateInfoR\vcertificate\"1\n" +
 	"\x17RenewCertificateRequest\x12\x16\n" +
@@ -612,13 +767,21 @@ const file_acme_service_v1_acme_proto_rawDesc = "" +
 	"\x18ListCertificatesResponse\x12H\n" +
 	"\fcertificates\x18\x01 \x03(\v2$.api.acme.service.v1.CertificateInfoR\fcertificates\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
-	"totalCount2\xc2\x04\n" +
+	"totalCount\"7\n" +
+	"\x1bUpdateByoNginxConfigRequest\x12\x18\n" +
+	"\adomains\x18\x01 \x03(\tR\adomains\"\x1e\n" +
+	"\x1cUpdateByoNginxConfigResponse\">\n" +
+	"\"UpdateBackofficeNginxConfigRequest\x12\x18\n" +
+	"\adomains\x18\x01 \x03(\tR\adomains\"%\n" +
+	"#UpdateBackofficeNginxConfigResponse2\xd6\x06\n" +
 	"\x04acme\x12q\n" +
 	"\x10IssueCertificate\x12,.api.acme.service.v1.IssueCertificateRequest\x1a-.api.acme.service.v1.IssueCertificateResponse\"\x00\x12q\n" +
 	"\x10RenewCertificate\x12,.api.acme.service.v1.RenewCertificateRequest\x1a-.api.acme.service.v1.RenewCertificateResponse\"\x00\x12t\n" +
 	"\x11RevokeCertificate\x12-.api.acme.service.v1.RevokeCertificateRequest\x1a..api.acme.service.v1.RevokeCertificateResponse\"\x00\x12k\n" +
 	"\x0eGetCertificate\x12*.api.acme.service.v1.GetCertificateRequest\x1a+.api.acme.service.v1.GetCertificateResponse\"\x00\x12q\n" +
-	"\x10ListCertificates\x12,.api.acme.service.v1.ListCertificatesRequest\x1a-.api.acme.service.v1.ListCertificatesResponse\"\x00BO\n" +
+	"\x10ListCertificates\x12,.api.acme.service.v1.ListCertificatesRequest\x1a-.api.acme.service.v1.ListCertificatesResponse\"\x00\x12}\n" +
+	"\x14UpdateByoNginxConfig\x120.api.acme.service.v1.UpdateByoNginxConfigRequest\x1a1.api.acme.service.v1.UpdateByoNginxConfigResponse\"\x00\x12\x92\x01\n" +
+	"\x1bUpdateBackofficeNginxConfig\x127.api.acme.service.v1.UpdateBackofficeNginxConfigRequest\x1a8.api.acme.service.v1.UpdateBackofficeNginxConfigResponse\"\x00BO\n" +
 	"\x13api.acme.service.v1P\x01Z6github.com/infigaming-com/meepo-api/acme/service/v1;v1b\x06proto3"
 
 var (
@@ -633,19 +796,23 @@ func file_acme_service_v1_acme_proto_rawDescGZIP() []byte {
 	return file_acme_service_v1_acme_proto_rawDescData
 }
 
-var file_acme_service_v1_acme_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_acme_service_v1_acme_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_acme_service_v1_acme_proto_goTypes = []any{
-	(*CertificateInfo)(nil),           // 0: api.acme.service.v1.CertificateInfo
-	(*IssueCertificateRequest)(nil),   // 1: api.acme.service.v1.IssueCertificateRequest
-	(*IssueCertificateResponse)(nil),  // 2: api.acme.service.v1.IssueCertificateResponse
-	(*RenewCertificateRequest)(nil),   // 3: api.acme.service.v1.RenewCertificateRequest
-	(*RenewCertificateResponse)(nil),  // 4: api.acme.service.v1.RenewCertificateResponse
-	(*RevokeCertificateRequest)(nil),  // 5: api.acme.service.v1.RevokeCertificateRequest
-	(*RevokeCertificateResponse)(nil), // 6: api.acme.service.v1.RevokeCertificateResponse
-	(*GetCertificateRequest)(nil),     // 7: api.acme.service.v1.GetCertificateRequest
-	(*GetCertificateResponse)(nil),    // 8: api.acme.service.v1.GetCertificateResponse
-	(*ListCertificatesRequest)(nil),   // 9: api.acme.service.v1.ListCertificatesRequest
-	(*ListCertificatesResponse)(nil),  // 10: api.acme.service.v1.ListCertificatesResponse
+	(*CertificateInfo)(nil),                     // 0: api.acme.service.v1.CertificateInfo
+	(*IssueCertificateRequest)(nil),             // 1: api.acme.service.v1.IssueCertificateRequest
+	(*IssueCertificateResponse)(nil),            // 2: api.acme.service.v1.IssueCertificateResponse
+	(*RenewCertificateRequest)(nil),             // 3: api.acme.service.v1.RenewCertificateRequest
+	(*RenewCertificateResponse)(nil),            // 4: api.acme.service.v1.RenewCertificateResponse
+	(*RevokeCertificateRequest)(nil),            // 5: api.acme.service.v1.RevokeCertificateRequest
+	(*RevokeCertificateResponse)(nil),           // 6: api.acme.service.v1.RevokeCertificateResponse
+	(*GetCertificateRequest)(nil),               // 7: api.acme.service.v1.GetCertificateRequest
+	(*GetCertificateResponse)(nil),              // 8: api.acme.service.v1.GetCertificateResponse
+	(*ListCertificatesRequest)(nil),             // 9: api.acme.service.v1.ListCertificatesRequest
+	(*ListCertificatesResponse)(nil),            // 10: api.acme.service.v1.ListCertificatesResponse
+	(*UpdateByoNginxConfigRequest)(nil),         // 11: api.acme.service.v1.UpdateByoNginxConfigRequest
+	(*UpdateByoNginxConfigResponse)(nil),        // 12: api.acme.service.v1.UpdateByoNginxConfigResponse
+	(*UpdateBackofficeNginxConfigRequest)(nil),  // 13: api.acme.service.v1.UpdateBackofficeNginxConfigRequest
+	(*UpdateBackofficeNginxConfigResponse)(nil), // 14: api.acme.service.v1.UpdateBackofficeNginxConfigResponse
 }
 var file_acme_service_v1_acme_proto_depIdxs = []int32{
 	0,  // 0: api.acme.service.v1.IssueCertificateResponse.certificate:type_name -> api.acme.service.v1.CertificateInfo
@@ -657,13 +824,17 @@ var file_acme_service_v1_acme_proto_depIdxs = []int32{
 	5,  // 6: api.acme.service.v1.acme.RevokeCertificate:input_type -> api.acme.service.v1.RevokeCertificateRequest
 	7,  // 7: api.acme.service.v1.acme.GetCertificate:input_type -> api.acme.service.v1.GetCertificateRequest
 	9,  // 8: api.acme.service.v1.acme.ListCertificates:input_type -> api.acme.service.v1.ListCertificatesRequest
-	2,  // 9: api.acme.service.v1.acme.IssueCertificate:output_type -> api.acme.service.v1.IssueCertificateResponse
-	4,  // 10: api.acme.service.v1.acme.RenewCertificate:output_type -> api.acme.service.v1.RenewCertificateResponse
-	6,  // 11: api.acme.service.v1.acme.RevokeCertificate:output_type -> api.acme.service.v1.RevokeCertificateResponse
-	8,  // 12: api.acme.service.v1.acme.GetCertificate:output_type -> api.acme.service.v1.GetCertificateResponse
-	10, // 13: api.acme.service.v1.acme.ListCertificates:output_type -> api.acme.service.v1.ListCertificatesResponse
-	9,  // [9:14] is the sub-list for method output_type
-	4,  // [4:9] is the sub-list for method input_type
+	11, // 9: api.acme.service.v1.acme.UpdateByoNginxConfig:input_type -> api.acme.service.v1.UpdateByoNginxConfigRequest
+	13, // 10: api.acme.service.v1.acme.UpdateBackofficeNginxConfig:input_type -> api.acme.service.v1.UpdateBackofficeNginxConfigRequest
+	2,  // 11: api.acme.service.v1.acme.IssueCertificate:output_type -> api.acme.service.v1.IssueCertificateResponse
+	4,  // 12: api.acme.service.v1.acme.RenewCertificate:output_type -> api.acme.service.v1.RenewCertificateResponse
+	6,  // 13: api.acme.service.v1.acme.RevokeCertificate:output_type -> api.acme.service.v1.RevokeCertificateResponse
+	8,  // 14: api.acme.service.v1.acme.GetCertificate:output_type -> api.acme.service.v1.GetCertificateResponse
+	10, // 15: api.acme.service.v1.acme.ListCertificates:output_type -> api.acme.service.v1.ListCertificatesResponse
+	12, // 16: api.acme.service.v1.acme.UpdateByoNginxConfig:output_type -> api.acme.service.v1.UpdateByoNginxConfigResponse
+	14, // 17: api.acme.service.v1.acme.UpdateBackofficeNginxConfig:output_type -> api.acme.service.v1.UpdateBackofficeNginxConfigResponse
+	11, // [11:18] is the sub-list for method output_type
+	4,  // [4:11] is the sub-list for method input_type
 	4,  // [4:4] is the sub-list for extension type_name
 	4,  // [4:4] is the sub-list for extension extendee
 	0,  // [0:4] is the sub-list for field type_name
@@ -681,7 +852,7 @@ func file_acme_service_v1_acme_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_acme_service_v1_acme_proto_rawDesc), len(file_acme_service_v1_acme_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
