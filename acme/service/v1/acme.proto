@@ -26,14 +26,6 @@ service acme {
 	// List all certificates
 	rpc ListCertificates(ListCertificatesRequest) returns (ListCertificatesResponse) {
 	}
-
-	// UpdateByoNginxConfig updates the nginx config for a byo domain
-	rpc UpdateByoNginxConfig(UpdateByoNginxConfigRequest) returns (UpdateByoNginxConfigResponse) {
-	}
-
-	// UpdateBackofficeNginxConfig updates the nginx config for a backoffice domain
-	rpc UpdateBackofficeNginxConfig(UpdateBackofficeNginxConfigRequest) returns (UpdateBackofficeNginxConfigResponse) {
-	}
 }
 
 // Certificate information
@@ -96,22 +88,4 @@ message ListCertificatesRequest {
 message ListCertificatesResponse {
 	repeated CertificateInfo certificates = 1;   // List of certificates
 	int32 total_count = 2;                       // Total number of certificates
-}
-
-// Request to update the nginx config for frontend byo domains
-message UpdateByoNginxConfigRequest {
-	repeated string domains = 1;  // Domain names
-}
-
-// Response for updating the nginx config for frontend byo domains
-message UpdateByoNginxConfigResponse {
-}
-
-// Request to update the nginx config for backend byo domains
-message UpdateBackofficeNginxConfigRequest {
-	repeated string domains = 1;  // Domain names
-}
-
-// Response for updating the nginx config for backend byo domains
-message UpdateBackofficeNginxConfigResponse {
 }

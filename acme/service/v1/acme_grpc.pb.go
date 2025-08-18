@@ -19,13 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Acme_IssueCertificate_FullMethodName            = "/api.acme.service.v1.acme/IssueCertificate"
-	Acme_RenewCertificate_FullMethodName            = "/api.acme.service.v1.acme/RenewCertificate"
-	Acme_RevokeCertificate_FullMethodName           = "/api.acme.service.v1.acme/RevokeCertificate"
-	Acme_GetCertificate_FullMethodName              = "/api.acme.service.v1.acme/GetCertificate"
-	Acme_ListCertificates_FullMethodName            = "/api.acme.service.v1.acme/ListCertificates"
-	Acme_UpdateByoNginxConfig_FullMethodName        = "/api.acme.service.v1.acme/UpdateByoNginxConfig"
-	Acme_UpdateBackofficeNginxConfig_FullMethodName = "/api.acme.service.v1.acme/UpdateBackofficeNginxConfig"
+	Acme_IssueCertificate_FullMethodName  = "/api.acme.service.v1.acme/IssueCertificate"
+	Acme_RenewCertificate_FullMethodName  = "/api.acme.service.v1.acme/RenewCertificate"
+	Acme_RevokeCertificate_FullMethodName = "/api.acme.service.v1.acme/RevokeCertificate"
+	Acme_GetCertificate_FullMethodName    = "/api.acme.service.v1.acme/GetCertificate"
+	Acme_ListCertificates_FullMethodName  = "/api.acme.service.v1.acme/ListCertificates"
 )
 
 // AcmeClient is the client API for Acme service.
@@ -42,10 +40,6 @@ type AcmeClient interface {
 	GetCertificate(ctx context.Context, in *GetCertificateRequest, opts ...grpc.CallOption) (*GetCertificateResponse, error)
 	// List all certificates
 	ListCertificates(ctx context.Context, in *ListCertificatesRequest, opts ...grpc.CallOption) (*ListCertificatesResponse, error)
-	// UpdateByoNginxConfig updates the nginx config for a byo domain
-	UpdateByoNginxConfig(ctx context.Context, in *UpdateByoNginxConfigRequest, opts ...grpc.CallOption) (*UpdateByoNginxConfigResponse, error)
-	// UpdateBackofficeNginxConfig updates the nginx config for a backoffice domain
-	UpdateBackofficeNginxConfig(ctx context.Context, in *UpdateBackofficeNginxConfigRequest, opts ...grpc.CallOption) (*UpdateBackofficeNginxConfigResponse, error)
 }
 
 type acmeClient struct {
@@ -106,26 +100,6 @@ func (c *acmeClient) ListCertificates(ctx context.Context, in *ListCertificatesR
 	return out, nil
 }
 
-func (c *acmeClient) UpdateByoNginxConfig(ctx context.Context, in *UpdateByoNginxConfigRequest, opts ...grpc.CallOption) (*UpdateByoNginxConfigResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateByoNginxConfigResponse)
-	err := c.cc.Invoke(ctx, Acme_UpdateByoNginxConfig_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *acmeClient) UpdateBackofficeNginxConfig(ctx context.Context, in *UpdateBackofficeNginxConfigRequest, opts ...grpc.CallOption) (*UpdateBackofficeNginxConfigResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateBackofficeNginxConfigResponse)
-	err := c.cc.Invoke(ctx, Acme_UpdateBackofficeNginxConfig_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // AcmeServer is the server API for Acme service.
 // All implementations must embed UnimplementedAcmeServer
 // for forward compatibility.
@@ -140,10 +114,6 @@ type AcmeServer interface {
 	GetCertificate(context.Context, *GetCertificateRequest) (*GetCertificateResponse, error)
 	// List all certificates
 	ListCertificates(context.Context, *ListCertificatesRequest) (*ListCertificatesResponse, error)
-	// UpdateByoNginxConfig updates the nginx config for a byo domain
-	UpdateByoNginxConfig(context.Context, *UpdateByoNginxConfigRequest) (*UpdateByoNginxConfigResponse, error)
-	// UpdateBackofficeNginxConfig updates the nginx config for a backoffice domain
-	UpdateBackofficeNginxConfig(context.Context, *UpdateBackofficeNginxConfigRequest) (*UpdateBackofficeNginxConfigResponse, error)
 	mustEmbedUnimplementedAcmeServer()
 }
 
@@ -168,12 +138,6 @@ func (UnimplementedAcmeServer) GetCertificate(context.Context, *GetCertificateRe
 }
 func (UnimplementedAcmeServer) ListCertificates(context.Context, *ListCertificatesRequest) (*ListCertificatesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCertificates not implemented")
-}
-func (UnimplementedAcmeServer) UpdateByoNginxConfig(context.Context, *UpdateByoNginxConfigRequest) (*UpdateByoNginxConfigResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateByoNginxConfig not implemented")
-}
-func (UnimplementedAcmeServer) UpdateBackofficeNginxConfig(context.Context, *UpdateBackofficeNginxConfigRequest) (*UpdateBackofficeNginxConfigResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateBackofficeNginxConfig not implemented")
 }
 func (UnimplementedAcmeServer) mustEmbedUnimplementedAcmeServer() {}
 func (UnimplementedAcmeServer) testEmbeddedByValue()              {}
@@ -286,42 +250,6 @@ func _Acme_ListCertificates_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Acme_UpdateByoNginxConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateByoNginxConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AcmeServer).UpdateByoNginxConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Acme_UpdateByoNginxConfig_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AcmeServer).UpdateByoNginxConfig(ctx, req.(*UpdateByoNginxConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Acme_UpdateBackofficeNginxConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateBackofficeNginxConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AcmeServer).UpdateBackofficeNginxConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Acme_UpdateBackofficeNginxConfig_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AcmeServer).UpdateBackofficeNginxConfig(ctx, req.(*UpdateBackofficeNginxConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // Acme_ServiceDesc is the grpc.ServiceDesc for Acme service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -348,14 +276,6 @@ var Acme_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListCertificates",
 			Handler:    _Acme_ListCertificates_Handler,
-		},
-		{
-			MethodName: "UpdateByoNginxConfig",
-			Handler:    _Acme_UpdateByoNginxConfig_Handler,
-		},
-		{
-			MethodName: "UpdateBackofficeNginxConfig",
-			Handler:    _Acme_UpdateBackofficeNginxConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

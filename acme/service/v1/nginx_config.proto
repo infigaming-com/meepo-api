@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package api.acme.service.v1;
+
+option go_package = "github.com/infigaming-com/meepo-api/acme/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.acme.service.v1";
+
+service nginx_config {
+	// UpdateByoNginxConfig updates the nginx config for a byo domain
+	rpc UpdateByoNginxConfig(UpdateByoNginxConfigRequest) returns (UpdateByoNginxConfigResponse) {
+	}
+
+	// UpdateBackofficeByoNginxConfig updates the nginx config for a backoffice byo domain
+	rpc UpdateBackofficeByoNginxConfig(UpdateBackofficeByoNginxConfigRequest) returns (UpdateBackofficeByoNginxConfigResponse) {
+	}
+}
+
+// Request to update the nginx config for frontend byo domains
+message UpdateByoNginxConfigRequest {
+	repeated string domains = 1;  // Domain names
+}
+
+// Response for updating the nginx config for frontend byo domains
+message UpdateByoNginxConfigResponse {
+}
+
+// Request to update the nginx config for backend byo domains
+message UpdateBackofficeByoNginxConfigRequest {
+	repeated string domains = 1;  // Domain names
+}
+
+// Response for updating the nginx config for backend byo domains
+message UpdateBackofficeByoNginxConfigResponse {
+}
