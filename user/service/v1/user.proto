@@ -260,22 +260,6 @@ service User {
 	// GetOperatorDetailsByUserId returns the operator details which the user belongs to
 	rpc GetOperatorDetailsByUserId(GetOperatorDetailsByUserIdRequest) returns (GetOperatorDetailsByUserIdResponse) {
 	}
-
-	// AddOperatorByoSubdomain adds a byo subdomain for the given operator
-	rpc AddOperatorByoSubdomain(AddOperatorByoSubdomainRequest) returns (AddOperatorByoSubdomainResponse) {
-	}
-
-	// DeleteOperatorByoSubdomain deletes a byo subdomain for the given operator
-	rpc DeleteOperatorByoSubdomain(DeleteOperatorByoSubdomainRequest) returns (DeleteOperatorByoSubdomainResponse) {
-	}
-
-	// AddOperatorBackofficeByoSubdomain adds a backoffice byo subdomain for the given operator
-	rpc AddOperatorBackofficeByoSubdomain(AddOperatorBackofficeByoSubdomainRequest) returns (AddOperatorBackofficeByoSubdomainResponse) {
-	}
-
-	// DeleteOperatorBackofficeByoSubdomain deletes a backoffice byo subdomain for the given operator
-	rpc DeleteOperatorBackofficeByoSubdomain(DeleteOperatorBackofficeByoSubdomainRequest) returns (DeleteOperatorBackofficeByoSubdomainResponse) {
-	}
 }
 
 // UserInfo contains basic user information.
@@ -1210,40 +1194,4 @@ message GetOperatorDetailsByUserIdRequest {
 
 message GetOperatorDetailsByUserIdResponse {
 	OperatorDetails operator_details = 1;
-}
-
-message AddOperatorByoSubdomainRequest {
-	api.common.OperatorContext operator_context = 1;
-	api.common.OperatorContext target_operator_context = 2;
-	string subdomain = 3;
-}
-
-message AddOperatorByoSubdomainResponse {
-}
-
-message DeleteOperatorByoSubdomainRequest {
-	api.common.OperatorContext operator_context = 1;
-	api.common.OperatorContext target_operator_context = 2;
-	string subdomain = 3;
-}
-
-message DeleteOperatorByoSubdomainResponse {
-}
-
-message AddOperatorBackofficeByoSubdomainRequest {
-	api.common.OperatorContext operator_context = 1;
-	api.common.OperatorContext target_operator_context = 2;
-	string subdomain = 3;
-}
-
-message AddOperatorBackofficeByoSubdomainResponse {
-}
-
-message DeleteOperatorBackofficeByoSubdomainRequest {
-	api.common.OperatorContext operator_context = 1;
-	api.common.OperatorContext target_operator_context = 2;
-	string subdomain = 3;
-}
-
-message DeleteOperatorBackofficeByoSubdomainResponse {
 }

@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package api.user.service.v1;
+
+import "google/protobuf/timestamp.proto";
+import "common/common.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/user/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.user.service.v1";
+
+// User service provides authentication and user management functionality.
+service Dns {
+	// ListOperatorByoDomains returns the list of byo domains
+	rpc ListOperatorByoDomains(ListOperatorByoDomainsRequest) returns (ListOperatorByoDomainsResponse) {
+	}
+
+	// AddOperatorByoDomain adds a binding between customer byo domain and meepo domain
+	rpc AddOperatorByoDomain(AddOperatorByoDomainRequest) returns (AddOperatorByoDomainResponse) {
+	}
+
+	// DeleteOperatorByoDomain deletes a binding between customer byo domain and meepo domain
+	rpc DeleteOperatorByoDomain(DeleteOperatorByoDomainRequest) returns (DeleteOperatorByoDomainResponse) {
+	}
+}
+
+message ByoDomainInfo {
+	api.common.OperatorContext operator_context = 1;
+	string byo_domain = 2;
+	string domain = 3;
+	google.protobuf.Timestamp created_at = 4;
+}
+
+message ListOperatorByoDomainsRequest {
+	api.common.OperatorContext operator_context = 1;
+}
+
+message ListOperatorByoDomainsResponse {
+	repeated ByoDomainInfo byo_domains = 1;
+}
+
+message AddOperatorByoDomainRequest {
+	api.common.OperatorContext operator_context = 1;
+	string byo_domain = 2;
+	string domain = 3;
+}
+
+message AddOperatorByoDomainResponse {
+}
+
+message DeleteOperatorByoDomainRequest {
+	api.common.OperatorContext operator_context = 1;
+	string byo_domain = 2;
+}
+
+message DeleteOperatorByoDomainResponse {
+}
