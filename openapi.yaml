@@ -1351,17 +1351,17 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateGameResponse'
-    /v1/backoffice/operator/backoffice-subdomains/add:
+    /v1/backoffice/operator/backoffice-byo-subdomains/add:
         post:
             tags:
                 - BackofficeOperator
-            description: AddOperatorBackofficeSubdomain adds a backoffice subdomain for the given operator
-            operationId: BackofficeOperator_AddOperatorBackofficeSubdomain
+            description: AddOperatorBackofficeByoSubdomain adds a backoffice byo subdomain for the given operator
+            operationId: BackofficeOperator_AddOperatorBackofficeByoSubdomain
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.AddOperatorBackofficeSubdomainRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AddOperatorBackofficeByoSubdomainRequest'
                 required: true
             responses:
                 "200":
@@ -1369,18 +1369,18 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.AddOperatorBackofficeSubdomainResponse'
-    /v1/backoffice/operator/backoffice-subdomains/delete:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.AddOperatorBackofficeByoSubdomainResponse'
+    /v1/backoffice/operator/backoffice-byo-subdomains/delete:
         post:
             tags:
                 - BackofficeOperator
-            description: DeleteOperatorBackofficeSubdomain deletes a backoffice subdomain for the given operator
-            operationId: BackofficeOperator_DeleteOperatorBackofficeSubdomain
+            description: DeleteOperatorBackofficeByoSubdomain deletes a backoffice byo subdomain for the given operator
+            operationId: BackofficeOperator_DeleteOperatorBackofficeByoSubdomain
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOperatorBackofficeSubdomainRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOperatorBackofficeByoSubdomainRequest'
                 required: true
             responses:
                 "200":
@@ -1388,7 +1388,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOperatorBackofficeSubdomainResponse'
+                                $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOperatorBackofficeByoSubdomainResponse'
     /v1/backoffice/operator/byo-subdomains/add:
         post:
             tags:
@@ -3800,21 +3800,21 @@ components:
             properties:
                 commentId:
                     type: string
-        api.backoffice.service.v1.AddOperatorBackofficeSubdomainRequest:
+        api.backoffice.service.v1.AddOperatorBackofficeByoSubdomainRequest:
             type: object
             properties:
-                operatorId:
-                    type: string
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 subdomain:
                     type: string
-        api.backoffice.service.v1.AddOperatorBackofficeSubdomainResponse:
+        api.backoffice.service.v1.AddOperatorBackofficeByoSubdomainResponse:
             type: object
             properties: {}
         api.backoffice.service.v1.AddOperatorByoSubdomainRequest:
             type: object
             properties:
-                operatorId:
-                    type: string
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 subdomain:
                     type: string
         api.backoffice.service.v1.AddOperatorByoSubdomainResponse:
@@ -4262,19 +4262,21 @@ components:
                     items:
                         type: integer
                         format: int32
-        api.backoffice.service.v1.DeleteOperatorBackofficeSubdomainRequest:
+        api.backoffice.service.v1.DeleteOperatorBackofficeByoSubdomainRequest:
             type: object
             properties:
-                operatorId:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                subdomain:
                     type: string
-        api.backoffice.service.v1.DeleteOperatorBackofficeSubdomainResponse:
+        api.backoffice.service.v1.DeleteOperatorBackofficeByoSubdomainResponse:
             type: object
             properties: {}
         api.backoffice.service.v1.DeleteOperatorByoSubdomainRequest:
             type: object
             properties:
-                operatorId:
-                    type: string
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 subdomain:
                     type: string
         api.backoffice.service.v1.DeleteOperatorByoSubdomainResponse:

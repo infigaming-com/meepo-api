@@ -97,18 +97,18 @@ service BackofficeOperator {
 		};
 	}
 
-	// AddOperatorBackofficeSubdomain adds a backoffice subdomain for the given operator
-	rpc AddOperatorBackofficeSubdomain(AddOperatorBackofficeSubdomainRequest) returns (AddOperatorBackofficeSubdomainResponse) {
+	// AddOperatorBackofficeByoSubdomain adds a backoffice byo subdomain for the given operator
+	rpc AddOperatorBackofficeByoSubdomain(AddOperatorBackofficeByoSubdomainRequest) returns (AddOperatorBackofficeByoSubdomainResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/operator/backoffice-subdomains/add"
+			post: "/v1/backoffice/operator/backoffice-byo-subdomains/add"
 			body: "*"
 		};
 	}
 
-	// DeleteOperatorBackofficeSubdomain deletes a backoffice subdomain for the given operator
-	rpc DeleteOperatorBackofficeSubdomain(DeleteOperatorBackofficeSubdomainRequest) returns (DeleteOperatorBackofficeSubdomainResponse) {
+	// DeleteOperatorBackofficeByoSubdomain deletes a backoffice byo subdomain for the given operator
+	rpc DeleteOperatorBackofficeByoSubdomain(DeleteOperatorBackofficeByoSubdomainRequest) returns (DeleteOperatorBackofficeByoSubdomainResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/operator/backoffice-subdomains/delete"
+			post: "/v1/backoffice/operator/backoffice-byo-subdomains/delete"
 			body: "*"
 		};
 	}
@@ -281,7 +281,7 @@ message ListOperatorsByAdminEmailRequest {
 }
 
 message AddOperatorByoSubdomainRequest {
-	int64 operator_id = 1;
+	api.common.OperatorContext target_operator_context = 1;
 	string subdomain = 2;
 }
 
@@ -289,24 +289,25 @@ message AddOperatorByoSubdomainResponse {
 }
 
 message DeleteOperatorByoSubdomainRequest {
-	int64 operator_id = 1;
+	api.common.OperatorContext target_operator_context = 1;
 	string subdomain = 2;
 }
 
 message DeleteOperatorByoSubdomainResponse {
 }
 
-message AddOperatorBackofficeSubdomainRequest {
-	int64 operator_id = 1;
+message AddOperatorBackofficeByoSubdomainRequest {
+	api.common.OperatorContext target_operator_context = 1;
 	string subdomain = 2;
 }
 
-message AddOperatorBackofficeSubdomainResponse {
+message AddOperatorBackofficeByoSubdomainResponse {
 }
 
-message DeleteOperatorBackofficeSubdomainRequest {
-	int64 operator_id = 1;
+message DeleteOperatorBackofficeByoSubdomainRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string subdomain = 2;
 }
 
-message DeleteOperatorBackofficeSubdomainResponse {
+message DeleteOperatorBackofficeByoSubdomainResponse {
 }
