@@ -250,3 +250,27 @@ func IsFailToParseCertificate(err error) bool {
 func ErrorFailToParseCertificate(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_FAIL_TO_PARSE_CERTIFICATE.String(), fmt.Sprintf(format, args...))
 }
+
+func IsFailToUpdateByoNginxConfig(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_FAIL_TO_UPDATE_BYO_NGINX_CONFIG.String() && e.Code == 500
+}
+
+func ErrorFailToUpdateByoNginxConfig(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_FAIL_TO_UPDATE_BYO_NGINX_CONFIG.String(), fmt.Sprintf(format, args...))
+}
+
+func IsFailToUpdateBackofficeNginxConfig(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_FAIL_TO_UPDATE_BACKOFFICE_NGINX_CONFIG.String() && e.Code == 500
+}
+
+func ErrorFailToUpdateBackofficeNginxConfig(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_FAIL_TO_UPDATE_BACKOFFICE_NGINX_CONFIG.String(), fmt.Sprintf(format, args...))
+}
