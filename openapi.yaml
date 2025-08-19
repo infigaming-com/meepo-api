@@ -731,6 +731,60 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetTopUsersDashboardResponse'
+    /v1/backoffice/dns/byo-domains/add:
+        post:
+            tags:
+                - BackofficeDns
+            operationId: BackofficeDns_AddOperatorByoDomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AddOperatorByoDomainRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.AddOperatorByoDomainResponse'
+    /v1/backoffice/dns/byo-domains/delete:
+        post:
+            tags:
+                - BackofficeDns
+            operationId: BackofficeDns_DeleteOperatorByoDomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOperatorByoDomainRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.DeleteOperatorByoDomainResponse'
+    /v1/backoffice/dns/byo-domains/list:
+        post:
+            tags:
+                - BackofficeDns
+            operationId: BackofficeDns_ListOperatorByoDomains
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorByoDomainsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.ListOperatorByoDomainsResponse'
     /v1/backoffice/filestore/operator-static-files/upload:
         post:
             tags:
@@ -3810,6 +3864,13 @@ components:
         api.backoffice.service.v1.AddOperatorBackofficeByoSubdomainResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.AddOperatorByoDomainRequest:
+            type: object
+            properties:
+                byoDomain:
+                    type: string
+                domain:
+                    type: string
         api.backoffice.service.v1.AddOperatorByoSubdomainRequest:
             type: object
             properties:
@@ -4272,6 +4333,11 @@ components:
         api.backoffice.service.v1.DeleteOperatorBackofficeByoSubdomainResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.DeleteOperatorByoDomainRequest:
+            type: object
+            properties:
+                byoDomain:
+                    type: string
         api.backoffice.service.v1.DeleteOperatorByoSubdomainRequest:
             type: object
             properties:
@@ -6835,6 +6901,15 @@ components:
                     type: array
                     items:
                         type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListOperatorByoDomainsRequest:
+            type: object
+            properties:
                 page:
                     type: integer
                     format: int32
@@ -10589,6 +10664,9 @@ components:
                 reviewDuration:
                     type: integer
                     format: int32
+        api.user.service.v1.AddOperatorByoDomainResponse:
+            type: object
+            properties: {}
         api.user.service.v1.AuthResponse:
             type: object
             properties:
@@ -10606,6 +10684,41 @@ components:
                         - $ref: '#/components/schemas/api.user.service.v1.UserInfo'
                     description: Basic information about the authenticated user.
             description: AuthResponse contains the authentication tokens and user information.
+        api.user.service.v1.ByoDomainInfo:
+            type: object
+            properties:
+                byoDomain:
+                    type: string
+                domain:
+                    type: string
+                type:
+                    type: string
+                targetOperatorId:
+                    type: string
+                targetOperatorName:
+                    type: string
+                targetCompanyOperatorId:
+                    type: string
+                targetCompanyOperatorName:
+                    type: string
+                targetRetailerOperatorId:
+                    type: string
+                targetRetailerOperatorName:
+                    type: string
+                targetSystemOperatorId:
+                    type: string
+                targetSystemOperatorName:
+                    type: string
+                targetRealOperatorId:
+                    type: string
+                targetOperatorType:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+        api.user.service.v1.DeleteOperatorByoDomainResponse:
+            type: object
+            properties: {}
         api.user.service.v1.GetUserRequest:
             type: object
             properties:
@@ -10634,6 +10747,22 @@ components:
                         type: string
                     description: List of active tags associated with the user.
             description: GetUserTagsResponse contains the list of active tags associated with the user.
+        api.user.service.v1.ListOperatorByoDomainsResponse:
+            type: object
+            properties:
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.ByoDomainInfo'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
         api.user.service.v1.ListOperatorsByAdminEmailResponse:
             type: object
             properties:
@@ -10711,16 +10840,8 @@ components:
                     type: string
                 subdomain:
                     type: string
-                byoSubdomains:
-                    type: array
-                    items:
-                        type: string
                 backofficeSubdomain:
                     type: string
-                backofficeByoSubdomains:
-                    type: array
-                    items:
-                        type: string
                 backofficeChildDomain:
                     type: string
                 domainPool:
@@ -12241,6 +12362,7 @@ tags:
          Provides methods for backoffice bcpay management
     - name: BackofficeCompany
     - name: BackofficeDashboard
+    - name: BackofficeDns
     - name: BackofficeFileStore
     - name: BackofficeFinance
     - name: BackofficeGame
