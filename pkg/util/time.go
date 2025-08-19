@@ -1,6 +1,8 @@
 package util
 
 import (
+	"time"
+
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -57,4 +59,14 @@ func IsValidInt64TimeRange(start, end *int64) bool {
 	}
 
 	return true
+}
+
+// IsToday checks if a timestamp is in the same UTC day as now
+func IsToday(timestamp int64) bool {
+	if timestamp == 0 {
+		return false
+	}
+	now := time.Now().UTC()
+	t := time.UnixMilli(timestamp).UTC()
+	return now.Year() == t.Year() && now.YearDay() == t.YearDay()
 }

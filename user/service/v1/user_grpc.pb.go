@@ -76,6 +76,7 @@ const (
 	User_ListAllUsers_FullMethodName                    = "/api.user.service.v1.User/ListAllUsers"
 	User_ListOperatorsByAdminEmail_FullMethodName       = "/api.user.service.v1.User/ListOperatorsByAdminEmail"
 	User_ListOperatorDetails_FullMethodName             = "/api.user.service.v1.User/ListOperatorDetails"
+	User_GetOperatorDetailsByUserId_FullMethodName      = "/api.user.service.v1.User/GetOperatorDetailsByUserId"
 )
 
 // UserClient is the client API for User service.
@@ -190,6 +191,8 @@ type UserClient interface {
 	ListOperatorsByAdminEmail(ctx context.Context, in *ListOperatorsByAdminEmailRequest, opts ...grpc.CallOption) (*ListOperatorsByAdminEmailResponse, error)
 	// ListOperatorDetails returns a list of operator details
 	ListOperatorDetails(ctx context.Context, in *ListOperatorDetailsRequest, opts ...grpc.CallOption) (*ListOperatorDetailsResponse, error)
+	// GetOperatorDetailsByUserId returns the operator details which the user belongs to
+	GetOperatorDetailsByUserId(ctx context.Context, in *GetOperatorDetailsByUserIdRequest, opts ...grpc.CallOption) (*GetOperatorDetailsByUserIdResponse, error)
 }
 
 type userClient struct {
@@ -770,6 +773,16 @@ func (c *userClient) ListOperatorDetails(ctx context.Context, in *ListOperatorDe
 	return out, nil
 }
 
+func (c *userClient) GetOperatorDetailsByUserId(ctx context.Context, in *GetOperatorDetailsByUserIdRequest, opts ...grpc.CallOption) (*GetOperatorDetailsByUserIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorDetailsByUserIdResponse)
+	err := c.cc.Invoke(ctx, User_GetOperatorDetailsByUserId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -882,6 +895,8 @@ type UserServer interface {
 	ListOperatorsByAdminEmail(context.Context, *ListOperatorsByAdminEmailRequest) (*ListOperatorsByAdminEmailResponse, error)
 	// ListOperatorDetails returns a list of operator details
 	ListOperatorDetails(context.Context, *ListOperatorDetailsRequest) (*ListOperatorDetailsResponse, error)
+	// GetOperatorDetailsByUserId returns the operator details which the user belongs to
+	GetOperatorDetailsByUserId(context.Context, *GetOperatorDetailsByUserIdRequest) (*GetOperatorDetailsByUserIdResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -1062,6 +1077,9 @@ func (UnimplementedUserServer) ListOperatorsByAdminEmail(context.Context, *ListO
 }
 func (UnimplementedUserServer) ListOperatorDetails(context.Context, *ListOperatorDetailsRequest) (*ListOperatorDetailsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperatorDetails not implemented")
+}
+func (UnimplementedUserServer) GetOperatorDetailsByUserId(context.Context, *GetOperatorDetailsByUserIdRequest) (*GetOperatorDetailsByUserIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorDetailsByUserId not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -2110,6 +2128,24 @@ func _User_ListOperatorDetails_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_GetOperatorDetailsByUserId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorDetailsByUserIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetOperatorDetailsByUserId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetOperatorDetailsByUserId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetOperatorDetailsByUserId(ctx, req.(*GetOperatorDetailsByUserIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2344,6 +2380,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOperatorDetails",
 			Handler:    _User_ListOperatorDetails_Handler,
+		},
+		{
+			MethodName: "GetOperatorDetailsByUserId",
+			Handler:    _User_GetOperatorDetailsByUserId_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -21,8 +21,10 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationBackofficeWalletAddWalletCurrency = "/api.backoffice.service.v1.BackofficeWallet/AddWalletCurrency"
+const OperationBackofficeWalletDeleteDepositRewardSequences = "/api.backoffice.service.v1.BackofficeWallet/DeleteDepositRewardSequences"
+const OperationBackofficeWalletGetDepositRewardConfig = "/api.backoffice.service.v1.BackofficeWallet/GetDepositRewardConfig"
 const OperationBackofficeWalletGetExchangeRates = "/api.backoffice.service.v1.BackofficeWallet/GetExchangeRates"
-const OperationBackofficeWalletGetOperatorBalances = "/api.backoffice.service.v1.BackofficeWallet/GetOperatorBalances"
+const OperationBackofficeWalletGetOperatorBalance = "/api.backoffice.service.v1.BackofficeWallet/GetOperatorBalance"
 const OperationBackofficeWalletGetWalletCreditTransactions = "/api.backoffice.service.v1.BackofficeWallet/GetWalletCreditTransactions"
 const OperationBackofficeWalletGetWalletCredits = "/api.backoffice.service.v1.BackofficeWallet/GetWalletCredits"
 const OperationBackofficeWalletGetWallets = "/api.backoffice.service.v1.BackofficeWallet/GetWallets"
@@ -35,22 +37,27 @@ const OperationBackofficeWalletOperatorBalanceRollback = "/api.backoffice.servic
 const OperationBackofficeWalletOperatorBalanceSettle = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceSettle"
 const OperationBackofficeWalletOperatorSwap = "/api.backoffice.service.v1.BackofficeWallet/OperatorSwap"
 const OperationBackofficeWalletOperatorTransfer = "/api.backoffice.service.v1.BackofficeWallet/OperatorTransfer"
+const OperationBackofficeWalletSetDepositRewardSequences = "/api.backoffice.service.v1.BackofficeWallet/SetDepositRewardSequences"
 const OperationBackofficeWalletUpdateOperatorBalance = "/api.backoffice.service.v1.BackofficeWallet/UpdateOperatorBalance"
 const OperationBackofficeWalletUpdateWallet = "/api.backoffice.service.v1.BackofficeWallet/UpdateWallet"
 const OperationBackofficeWalletUpdateWalletCurrency = "/api.backoffice.service.v1.BackofficeWallet/UpdateWalletCurrency"
 
 type BackofficeWalletHTTPServer interface {
 	AddWalletCurrency(context.Context, *AddWalletCurrencyRequest) (*AddWalletCurrencyResponse, error)
+	// DeleteDepositRewardSequences DeleteDepositRewardSequences deletes a deposit reward sequence of a operator currency config
+	DeleteDepositRewardSequences(context.Context, *DeleteDepositRewardSequencesRequest) (*v1.DeleteDepositRewardSequencesResponse, error)
+	// GetDepositRewardConfig GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
+	GetDepositRewardConfig(context.Context, *GetDepositRewardConfigRequest) (*v1.GetDepositRewardConfigResponse, error)
 	GetExchangeRates(context.Context, *GetExchangeRatesRequest) (*GetExchangeRatesResponse, error)
-	// GetOperatorBalances GetOperatorBalances gets the balances of an operator
-	GetOperatorBalances(context.Context, *v1.GetOperatorBalancesRequest) (*v1.GetOperatorBalancesResponse, error)
+	// GetOperatorBalance GetOperatorBalance gets the balances of an operator
+	GetOperatorBalance(context.Context, *v1.GetOperatorBalanceRequest) (*v1.GetOperatorBalanceResponse, error)
 	GetWalletCreditTransactions(context.Context, *GetWalletCreditTransactionsRequest) (*GetWalletCreditTransactionsResponse, error)
 	GetWalletCredits(context.Context, *GetWalletCreditsRequest) (*GetWalletCreditsResponse, error)
-	GetWallets(context.Context, *GetWalletsRequest) (*GetWalletsResponse, error)
+	GetWallets(context.Context, *GetWalletsRequest) (*v1.GetWalletsResponse, error)
 	// ListOperatorBalanceTransactions ListOperatorBalanceTransactions lists the balance transactions of an operator
 	ListOperatorBalanceTransactions(context.Context, *ListOperatorBalanceTransactionsRequest) (*ListOperatorBalanceTransactionsResponse, error)
 	// ListOperatorBalances ListOperatorBalances lists all operator balances which belong to the backoffice operator
-	ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*ListOperatorBalancesResponse, error)
+	ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*v1.ListBottomOperatorBalancesResponse, error)
 	// ListWalletBalanceTransactions ListWalletBalanceTransactions provides balance transactions for a specific user in User transactions page.
 	ListWalletBalanceTransactions(context.Context, *ListWalletBalanceTransactionsRequest) (*ListWalletBalanceTransactionsResponse, error)
 	ListWalletCurrencies(context.Context, *ListWalletCurrenciesRequest) (*ListWalletCurrenciesResponse, error)
@@ -64,6 +71,8 @@ type BackofficeWalletHTTPServer interface {
 	OperatorSwap(context.Context, *OperatorSwapRequest) (*OperatorSwapResponse, error)
 	// OperatorTransfer OperatorTransfer transfers cash from one operator to its company operator, only allow USD, USDT, USDC, 1:1 exchange
 	OperatorTransfer(context.Context, *OperatorTransferRequest) (*OperatorTransferResponse, error)
+	// SetDepositRewardSequences SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
+	SetDepositRewardSequences(context.Context, *SetDepositRewardSequencesRequest) (*v1.SetDepositRewardSequencesResponse, error)
 	// UpdateOperatorBalance UpdateOperatorBalance updates an operator balance， now only support update the enabled status
 	UpdateOperatorBalance(context.Context, *UpdateOperatorBalanceRequest) (*UpdateOperatorBalanceResponse, error)
 	UpdateWallet(context.Context, *UpdateWalletRequest) (*UpdateWalletResponse, error)
@@ -89,7 +98,10 @@ func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTP
 	r.POST("/v1/backoffice/wallet/operator/balance-settle", _BackofficeWallet_OperatorBalanceSettle0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/transactions/list", _BackofficeWallet_ListOperatorBalanceTransactions0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/operator/balance/update", _BackofficeWallet_UpdateOperatorBalance0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/wallet/operator/balance/get", _BackofficeWallet_GetOperatorBalances0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/operator/balance/get", _BackofficeWallet_GetOperatorBalance0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/deposit-reward/sequences/set", _BackofficeWallet_SetDepositRewardSequences0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/deposit-reward/sequences/delete", _BackofficeWallet_DeleteDepositRewardSequences0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/deposit-reward/config/get", _BackofficeWallet_GetDepositRewardConfig0_HTTP_Handler(srv))
 }
 
 func _BackofficeWallet_GetWallets0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
@@ -109,7 +121,7 @@ func _BackofficeWallet_GetWallets0_HTTP_Handler(srv BackofficeWalletHTTPServer) 
 		if err != nil {
 			return err
 		}
-		reply := out.(*GetWalletsResponse)
+		reply := out.(*v1.GetWalletsResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -285,7 +297,7 @@ func _BackofficeWallet_ListOperatorBalances0_HTTP_Handler(srv BackofficeWalletHT
 		if err != nil {
 			return err
 		}
-		reply := out.(*ListOperatorBalancesResponse)
+		reply := out.(*v1.ListBottomOperatorBalancesResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -466,37 +478,105 @@ func _BackofficeWallet_UpdateOperatorBalance0_HTTP_Handler(srv BackofficeWalletH
 	}
 }
 
-func _BackofficeWallet_GetOperatorBalances0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+func _BackofficeWallet_GetOperatorBalance0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.GetOperatorBalancesRequest
+		var in v1.GetOperatorBalanceRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeWalletGetOperatorBalances)
+		http.SetOperation(ctx, OperationBackofficeWalletGetOperatorBalance)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetOperatorBalances(ctx, req.(*v1.GetOperatorBalancesRequest))
+			return srv.GetOperatorBalance(ctx, req.(*v1.GetOperatorBalanceRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*v1.GetOperatorBalancesResponse)
+		reply := out.(*v1.GetOperatorBalanceResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeWallet_SetDepositRewardSequences0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in SetDepositRewardSequencesRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletSetDepositRewardSequences)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SetDepositRewardSequences(ctx, req.(*SetDepositRewardSequencesRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.SetDepositRewardSequencesResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeWallet_DeleteDepositRewardSequences0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DeleteDepositRewardSequencesRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletDeleteDepositRewardSequences)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteDepositRewardSequences(ctx, req.(*DeleteDepositRewardSequencesRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.DeleteDepositRewardSequencesResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeWallet_GetDepositRewardConfig0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetDepositRewardConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletGetDepositRewardConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetDepositRewardConfig(ctx, req.(*GetDepositRewardConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.GetDepositRewardConfigResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
 type BackofficeWalletHTTPClient interface {
 	AddWalletCurrency(ctx context.Context, req *AddWalletCurrencyRequest, opts ...http.CallOption) (rsp *AddWalletCurrencyResponse, err error)
+	DeleteDepositRewardSequences(ctx context.Context, req *DeleteDepositRewardSequencesRequest, opts ...http.CallOption) (rsp *v1.DeleteDepositRewardSequencesResponse, err error)
+	GetDepositRewardConfig(ctx context.Context, req *GetDepositRewardConfigRequest, opts ...http.CallOption) (rsp *v1.GetDepositRewardConfigResponse, err error)
 	GetExchangeRates(ctx context.Context, req *GetExchangeRatesRequest, opts ...http.CallOption) (rsp *GetExchangeRatesResponse, err error)
-	GetOperatorBalances(ctx context.Context, req *v1.GetOperatorBalancesRequest, opts ...http.CallOption) (rsp *v1.GetOperatorBalancesResponse, err error)
+	GetOperatorBalance(ctx context.Context, req *v1.GetOperatorBalanceRequest, opts ...http.CallOption) (rsp *v1.GetOperatorBalanceResponse, err error)
 	GetWalletCreditTransactions(ctx context.Context, req *GetWalletCreditTransactionsRequest, opts ...http.CallOption) (rsp *GetWalletCreditTransactionsResponse, err error)
 	GetWalletCredits(ctx context.Context, req *GetWalletCreditsRequest, opts ...http.CallOption) (rsp *GetWalletCreditsResponse, err error)
-	GetWallets(ctx context.Context, req *GetWalletsRequest, opts ...http.CallOption) (rsp *GetWalletsResponse, err error)
+	GetWallets(ctx context.Context, req *GetWalletsRequest, opts ...http.CallOption) (rsp *v1.GetWalletsResponse, err error)
 	ListOperatorBalanceTransactions(ctx context.Context, req *ListOperatorBalanceTransactionsRequest, opts ...http.CallOption) (rsp *ListOperatorBalanceTransactionsResponse, err error)
-	ListOperatorBalances(ctx context.Context, req *ListOperatorBalancesRequest, opts ...http.CallOption) (rsp *ListOperatorBalancesResponse, err error)
+	ListOperatorBalances(ctx context.Context, req *ListOperatorBalancesRequest, opts ...http.CallOption) (rsp *v1.ListBottomOperatorBalancesResponse, err error)
 	ListWalletBalanceTransactions(ctx context.Context, req *ListWalletBalanceTransactionsRequest, opts ...http.CallOption) (rsp *ListWalletBalanceTransactionsResponse, err error)
 	ListWalletCurrencies(ctx context.Context, req *ListWalletCurrenciesRequest, opts ...http.CallOption) (rsp *ListWalletCurrenciesResponse, err error)
 	OperatorBalanceFreeze(ctx context.Context, req *OperatorBalanceFreezeRequest, opts ...http.CallOption) (rsp *OperatorBalanceFreezeResponse, err error)
@@ -504,6 +584,7 @@ type BackofficeWalletHTTPClient interface {
 	OperatorBalanceSettle(ctx context.Context, req *OperatorBalanceSettleRequest, opts ...http.CallOption) (rsp *OperatorBalanceSettleResponse, err error)
 	OperatorSwap(ctx context.Context, req *OperatorSwapRequest, opts ...http.CallOption) (rsp *OperatorSwapResponse, err error)
 	OperatorTransfer(ctx context.Context, req *OperatorTransferRequest, opts ...http.CallOption) (rsp *OperatorTransferResponse, err error)
+	SetDepositRewardSequences(ctx context.Context, req *SetDepositRewardSequencesRequest, opts ...http.CallOption) (rsp *v1.SetDepositRewardSequencesResponse, err error)
 	UpdateOperatorBalance(ctx context.Context, req *UpdateOperatorBalanceRequest, opts ...http.CallOption) (rsp *UpdateOperatorBalanceResponse, err error)
 	UpdateWallet(ctx context.Context, req *UpdateWalletRequest, opts ...http.CallOption) (rsp *UpdateWalletResponse, err error)
 	UpdateWalletCurrency(ctx context.Context, req *UpdateWalletCurrencyRequest, opts ...http.CallOption) (rsp *UpdateWalletCurrencyResponse, err error)
@@ -530,6 +611,32 @@ func (c *BackofficeWalletHTTPClientImpl) AddWalletCurrency(ctx context.Context, 
 	return &out, nil
 }
 
+func (c *BackofficeWalletHTTPClientImpl) DeleteDepositRewardSequences(ctx context.Context, in *DeleteDepositRewardSequencesRequest, opts ...http.CallOption) (*v1.DeleteDepositRewardSequencesResponse, error) {
+	var out v1.DeleteDepositRewardSequencesResponse
+	pattern := "/v1/backoffice/wallet/deposit-reward/sequences/delete"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletDeleteDepositRewardSequences))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeWalletHTTPClientImpl) GetDepositRewardConfig(ctx context.Context, in *GetDepositRewardConfigRequest, opts ...http.CallOption) (*v1.GetDepositRewardConfigResponse, error) {
+	var out v1.GetDepositRewardConfigResponse
+	pattern := "/v1/backoffice/wallet/deposit-reward/config/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletGetDepositRewardConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *BackofficeWalletHTTPClientImpl) GetExchangeRates(ctx context.Context, in *GetExchangeRatesRequest, opts ...http.CallOption) (*GetExchangeRatesResponse, error) {
 	var out GetExchangeRatesResponse
 	pattern := "/v1/backoffice/wallet/exchange-rates/get"
@@ -543,11 +650,11 @@ func (c *BackofficeWalletHTTPClientImpl) GetExchangeRates(ctx context.Context, i
 	return &out, nil
 }
 
-func (c *BackofficeWalletHTTPClientImpl) GetOperatorBalances(ctx context.Context, in *v1.GetOperatorBalancesRequest, opts ...http.CallOption) (*v1.GetOperatorBalancesResponse, error) {
-	var out v1.GetOperatorBalancesResponse
+func (c *BackofficeWalletHTTPClientImpl) GetOperatorBalance(ctx context.Context, in *v1.GetOperatorBalanceRequest, opts ...http.CallOption) (*v1.GetOperatorBalanceResponse, error) {
+	var out v1.GetOperatorBalanceResponse
 	pattern := "/v1/backoffice/wallet/operator/balance/get"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeWalletGetOperatorBalances))
+	opts = append(opts, http.Operation(OperationBackofficeWalletGetOperatorBalance))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -582,8 +689,8 @@ func (c *BackofficeWalletHTTPClientImpl) GetWalletCredits(ctx context.Context, i
 	return &out, nil
 }
 
-func (c *BackofficeWalletHTTPClientImpl) GetWallets(ctx context.Context, in *GetWalletsRequest, opts ...http.CallOption) (*GetWalletsResponse, error) {
-	var out GetWalletsResponse
+func (c *BackofficeWalletHTTPClientImpl) GetWallets(ctx context.Context, in *GetWalletsRequest, opts ...http.CallOption) (*v1.GetWalletsResponse, error) {
+	var out v1.GetWalletsResponse
 	pattern := "/v1/backoffice/wallet/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletGetWallets))
@@ -608,8 +715,8 @@ func (c *BackofficeWalletHTTPClientImpl) ListOperatorBalanceTransactions(ctx con
 	return &out, nil
 }
 
-func (c *BackofficeWalletHTTPClientImpl) ListOperatorBalances(ctx context.Context, in *ListOperatorBalancesRequest, opts ...http.CallOption) (*ListOperatorBalancesResponse, error) {
-	var out ListOperatorBalancesResponse
+func (c *BackofficeWalletHTTPClientImpl) ListOperatorBalances(ctx context.Context, in *ListOperatorBalancesRequest, opts ...http.CallOption) (*v1.ListBottomOperatorBalancesResponse, error) {
+	var out v1.ListBottomOperatorBalancesResponse
 	pattern := "/v1/backoffice/wallet/operator/balances/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletListOperatorBalances))
@@ -704,6 +811,19 @@ func (c *BackofficeWalletHTTPClientImpl) OperatorTransfer(ctx context.Context, i
 	pattern := "/v1/backoffice/wallet/operator/transfer"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletOperatorTransfer))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeWalletHTTPClientImpl) SetDepositRewardSequences(ctx context.Context, in *SetDepositRewardSequencesRequest, opts ...http.CallOption) (*v1.SetDepositRewardSequencesResponse, error) {
+	var out v1.SetDepositRewardSequencesResponse
+	pattern := "/v1/backoffice/wallet/deposit-reward/sequences/set"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletSetDepositRewardSequences))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

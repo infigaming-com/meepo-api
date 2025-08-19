@@ -2,6 +2,7 @@ syntax = "proto3";
 
 import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
 import "common/common.proto";
 
 package api.bcpay.service.v1;
@@ -12,9 +13,9 @@ option java_package = "api.bcpay.service.v1";
 
 // User service provides authentication and user management functionality.
 service Bcpay {
-	rpc GetBankAccount(GetBankAccountRequest) returns (GetBankAccountResponse) {
+	rpc CreateDeposit(CreateDepositRequest) returns (CreateDepositResponse) {
     option (google.api.http) = {
-      post: "/v1/bcpay/bankaccount/get"
+      post: "/v1/bcpay/deposit/add"
       body: "*"
     };
 	}
@@ -38,6 +39,8 @@ service Bcpay {
 
 	rpc UpdateBankAccount(UpdateBankAccountRequest) returns (UpdateBankAccountResponse) { }
 
+	rpc DeleteBankAccount(DeleteBankAccountRequest) returns (DeleteBankAccountResponse) { }
+
 	rpc TransactionList(TransactionListRequest) returns (TransactionListResponse) { }
 
 	rpc AuditTransaction(AuditTransactionRequest) returns (AuditTransactionResponse) { }
@@ -45,35 +48,46 @@ service Bcpay {
 	rpc AddNoteToTransaction(AddNoteToTransactionRequest) returns (AddNoteToTransactionResponse) { }
 }
 
-message GetBankAccountRequest {
-	string operator_id = 1;
-	string merchant_id  = 2;
-	string payer_id = 3;
-	string notify_url = 4;
+message CreateDepositRequest {
+	string merchant_id  = 1;
+	int64 user_id  = 2;
+	string user_name  = 3;
+	string currency = 4;
+	string country = 5;
+	string notifyUrl = 6;
+	string amount = 7;
+	string bank_account = 8;
+	string bank_account_firstname = 9;
+	string bank_account_lastname = 10;
+	string bank_iban = 11;
 }
 
-message GetBankAccountResponse {
+message CreateDepositResponse {
 	// operator id allocated by operator service
-	string notify_url = 1;
-	string reference_number = 2;
-	string bank_account_name = 3;
-	string bank_account_number = 4;
+	string transactionID = 1;
+	string deposit_reference = 2;
+	string bank_account = 3;
+	string bank_account_name = 4;
+	string bank_iban = 5;
 }
 
 message CreateWithdrawRequest {
 	string operator_order_no = 1;
 	string merchant_id = 2;
 	string amount = 3;
-	string notify_url = 4;
-	string payer_id = 5;
-	string account_name = 6;
-	string iban = 7;
-	string bank_code = 8;
+	string currency = 4;
+	string country = 5;
+	string notifyUrl = 6;
+	int64 user_id  = 7;
+	string user_name  = 8;
+	string bank_account = 9;
+	string bank_account_firstname = 10;
+	string bank_account_lastname = 11;
+	string bank_iban = 12;
 }
 
 message CreateWithdrawResponse {
-	string status = 1;
-	string transaction_id = 2;
+	string transaction_id = 1;
 }
 
 
@@ -84,7 +98,7 @@ message GetMerchantRequest {
 
 message GetMerchantResponse {
 	string merchant_id = 1;
-	// string api_key_public = 2;
+	string api_key_public = 2;
 	// string api_key_secret = 3;
 }
 
@@ -95,12 +109,13 @@ message CreateMerchantRequest {
 
 message CreateMerchantResponse {
 	string merchant_id = 1;
-	// string api_key_public = 2;
+	string api_key_public = 2;
 	// string api_key_secret = 3;
 }
 
 message GetBankSchemaRequest {
 	string currency = 1;
+	string country = 2;
 }
 
 message GetBankSchemaResponse {
@@ -113,105 +128,157 @@ message DepositBankAccount {
 	string bank_account = 3;
 	string bank_first_name = 4;
 	string bank_last_name = 5;
-	string currency = 6;
-	string country = 7;
-	string max_amount = 8;
-	string min_amount = 9;
+	string iban = 6;
+	string currency = 7;
+	string country = 8;
+	string max_amount = 9;
 	string max_amount_per_trans = 10;
 	int32 max_trans_limit = 11;
-	int32 current_trans_time = 12;
+	int32 current_trans_times = 12;
 	int32 priority = 13;
 	bool enable = 14;
 }
 
 message BankAccountListRequest {
-	string currency = 1;
-	string bank_account = 2;
-	string bank_account_firstname = 3;
-	string bank_account_lastname = 4;
-	string card_id = 5;
-  api.common.OperatorContextFilters operator_context_filters = 6;
-  api.common.OperatorContext operator_context = 7;
+  // Page number to retrieve (1-based)
+  int32 page = 1;
+  // Number of items per page
+  int32 page_size = 2;
+	optional string currency = 3;
+	optional string bank_account = 4;
+	optional string bank_account_firstname = 5;
+	optional string bank_account_lastname = 6;
+	optional string card_id = 7;
+	optional bool enabled = 8;
+  api.common.OperatorContext operator_context = 9;
 }
 
 message BankAccountListResponse {
 	repeated DepositBankAccount bank_accounts = 1;
+  // Current page number
+  int32 page = 2;
+  // Number of items per page
+  int32 page_size = 3;
+  // Total number of pages available
+  int32 total_pages = 4;
+  // Total number of enabled bank account
+  int32 total_enabled = 5;
+  // Total number of disabled bank account
+  int32 total_disabled = 6;
+  int32 total_count = 7;
 }
 
 message AddBankAccountRequest {
-	DepositBankAccount bank_account = 1;
-  api.common.OperatorContext operator_context = 2;
+	string currency = 1;
+	string country = 2;
+	string max_amount = 3;
+	string max_amount_per_trans = 4;
+	int32 max_trans_limit = 5;
+	int32 priority = 6;
+  google.protobuf.Struct bank_info = 7;
+  api.common.OperatorContext operator_context = 8;
 }
 
 message AddBankAccountResponse {
-	DepositBankAccount bank_account = 1;
 }
 
 message UpdateBankAccountRequest {
-	DepositBankAccount bank_account = 1;
-  api.common.OperatorContext operator_context = 2;
+	int64 id = 1;
+	optional string currency = 2;
+	optional string country = 3;
+	optional string max_amount = 4;
+	optional string max_amount_per_trans = 5;
+	optional int32 max_trans_limit = 6;
+	optional int32 priority = 7;
+	optional bool enabled = 8;
+  google.protobuf.Struct bank_info = 9;
+  api.common.OperatorContext operator_context = 10;
 }
 
 message UpdateBankAccountResponse {
-	DepositBankAccount bank_account = 1;
 }
 
+message DeleteBankAccountRequest {
+	int64 id = 1;
+}
+
+message DeleteBankAccountResponse { }
+
+
 message TransactionListRequest {
-	string type = 1;
-	string transaction_id = 2;
-	string deposit_bank_account_firstname = 3;
-	string deposit_bank_account_lastname = 4;
-	string user_id = 5;
-	string user_name = 6;
-	string payer_bank_account_firstname = 7;
-	string payer_bank_account_lastname = 8;
-  api.common.OperatorContext operator_context = 9;
+  // Page number to retrieve (1-based)
+  int32 page = 1;
+  // Number of items per page
+  int32 page_size = 2;
+	optional string type = 3;
+	optional string status = 4;
+	optional int64 transaction_id = 5;
+	optional string deposit_bank_account_firstname = 6;
+	optional string deposit_bank_account_lastname = 7;
+	optional int64 user_id = 8;
+	optional string user_name = 9;
+	optional string user_bank_account_firstname = 10;
+	optional string user_bank_account_lastname = 11;
+  api.common.OperatorContext operator_context = 12;
 }
 
 message Transaction {
-	string id = 1;
+	int64 id = 1;
 	string merchant_id = 2;
-	string user_id = 3;
+	int64 user_id = 3;
 	string user_name = 4;
-	string bank_account = 5;
-	string bank_account_first_name = 6;
-	string bank_account_last_name = 7;
-	string type = 8;
-	string card_id = 9;
-	string amount = 10;
-	string currency = 11;
-	string country = 12;
- 	string status = 13;
-	// audit a transaction "approve" or "deline"
-	string audit = 14;
- 	string auditor = 15;
-	string audit_time = 16;
- 	string audit_note = 17;
-	string create_time = 18;
-	string update_time = 19;
+	string deposit_bank_account = 5;
+	string deposit_bank_account_first_name = 6;
+	string deposit_bank_account_last_name = 7;
+	string user_bank_account = 8;
+	string user_bank_account_first_name = 9;
+	string user_bank_account_last_name = 10;
+	string type = 11;
+	string card_id = 12;
+	string amount = 13;
+	string currency = 14;
+	string country = 15;
+ 	string status = 16;
+	// audit a transaction "approve" or "decline"
+ 	string auditor = 17;
+	google.protobuf.Timestamp audit_time = 18;
+ 	string audit_note = 19;
+	google.protobuf.Timestamp create_time = 20;
+	google.protobuf.Timestamp update_time = 21;
 }
 
 message TransactionListResponse {
 	repeated Transaction transaction = 1;
+  // Current page number
+  int32 page = 2;
+  // Number of items per page
+  int32 page_size = 3;
+  // Total number of pages available
+  int32 total_pages = 4;
+  // Total number of approved transactions
+  int32 total_approved = 5;
+  // Total number of failed transactions
+  int32 total_failed = 6;
+  // Total number of pending transactions
+  int32 total_pending = 7;
+  int32 total_count = 8;
 }
 
 message AuditTransactionRequest {
-	string transaction_id = 1;
+	int64 transaction_id = 1;
 	string audit = 2;
-  api.common.OperatorContext operator_context = 3;
+	int64 user_id = 3;
+  api.common.OperatorContext operator_context = 4;
 }
 
 message AuditTransactionResponse {
-	Transaction transaction = 1;
 }
 
 message AddNoteToTransactionRequest {
-	string transaction_id = 1;
+	int64 transaction_id = 1;
 	// note
 	string note = 2;
-	
 }
 
 message AddNoteToTransactionResponse {
-	Transaction transaction = 1;
 }

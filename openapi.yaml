@@ -478,6 +478,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.bcpay.service.v1.AddBankAccountResponse'
+    /v1/backoffice/bcpay/bankaccount/delete:
+        post:
+            tags:
+                - BackofficeBcpay
+            operationId: BackofficeBcpay_DeleteBankAccount
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.bcpay.service.v1.DeleteBankAccountRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.bcpay.service.v1.DeleteBankAccountResponse'
     /v1/backoffice/bcpay/bankaccount/list:
         post:
             tags:
@@ -604,6 +622,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.bcpay.service.v1.TransactionListResponse'
+    /v1/backoffice/bcpay/transaction/note/update:
+        post:
+            tags:
+                - BackofficeBcpay
+            operationId: BackofficeBcpay_AddNoteToTransaction
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.bcpay.service.v1.AddNoteToTransactionRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.bcpay.service.v1.AddNoteToTransactionResponse'
     /v1/backoffice/company/register:
         post:
             tags:
@@ -695,6 +731,78 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetTopUsersDashboardResponse'
+    /v1/backoffice/dns/byo-domains/add:
+        post:
+            tags:
+                - BackofficeDns
+            operationId: BackofficeDns_AddOperatorByoDomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AddOperatorByoDomainRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.AddOperatorByoDomainResponse'
+    /v1/backoffice/dns/byo-domains/delete:
+        post:
+            tags:
+                - BackofficeDns
+            operationId: BackofficeDns_DeleteOperatorByoDomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOperatorByoDomainRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.DeleteOperatorByoDomainResponse'
+    /v1/backoffice/dns/byo-domains/list:
+        post:
+            tags:
+                - BackofficeDns
+            operationId: BackofficeDns_ListOperatorByoDomains
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorByoDomainsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.ListOperatorByoDomainsResponse'
+    /v1/backoffice/dns/domains/list:
+        post:
+            tags:
+                - BackofficeDns
+            operationId: BackofficeDns_ListOperatorDomains
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorDomainsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.ListOperatorDomainsResponse'
     /v1/backoffice/filestore/operator-static-files/upload:
         post:
             tags:
@@ -1036,7 +1144,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetBetByIdResponse'
+                                $ref: '#/components/schemas/api.game.service.v1.GetBetByIdResponse'
     /v1/backoffice/game/bets/list:
         post:
             tags:
@@ -1296,7 +1404,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetGameTransactionByIdResponse'
+                                $ref: '#/components/schemas/api.game.service.v1.GetGameTransactionByIdResponse'
     /v1/backoffice/game/update:
         post:
             tags:
@@ -1315,6 +1423,82 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateGameResponse'
+    /v1/backoffice/operator/backoffice-byo-subdomains/add:
+        post:
+            tags:
+                - BackofficeOperator
+            description: AddOperatorBackofficeByoSubdomain adds a backoffice byo subdomain for the given operator
+            operationId: BackofficeOperator_AddOperatorBackofficeByoSubdomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AddOperatorBackofficeByoSubdomainRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.AddOperatorBackofficeByoSubdomainResponse'
+    /v1/backoffice/operator/backoffice-byo-subdomains/delete:
+        post:
+            tags:
+                - BackofficeOperator
+            description: DeleteOperatorBackofficeByoSubdomain deletes a backoffice byo subdomain for the given operator
+            operationId: BackofficeOperator_DeleteOperatorBackofficeByoSubdomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOperatorBackofficeByoSubdomainRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOperatorBackofficeByoSubdomainResponse'
+    /v1/backoffice/operator/byo-subdomains/add:
+        post:
+            tags:
+                - BackofficeOperator
+            description: AddOperatorByoSubdomain adds a byo subdomain for the given operator
+            operationId: BackofficeOperator_AddOperatorByoSubdomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AddOperatorByoSubdomainRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.AddOperatorByoSubdomainResponse'
+    /v1/backoffice/operator/byo-subdomains/delete:
+        post:
+            tags:
+                - BackofficeOperator
+            description: DeleteOperatorByoSubdomain deletes a byo subdomain for the given operator
+            operationId: BackofficeOperator_DeleteOperatorByoSubdomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOperatorByoSubdomainRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOperatorByoSubdomainResponse'
     /v1/backoffice/operator/create:
         post:
             tags:
@@ -1836,7 +2020,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetGameDataRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListGameDataRequest'
                 required: true
             responses:
                 "200":
@@ -1844,7 +2028,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetGameDataResponse'
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListGameDataResponse'
     /v1/backoffice/report/player-game-data/get:
         post:
             tags:
@@ -1872,7 +2056,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameDataRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListPlayerGameDataRequest'
                 required: true
             responses:
                 "200":
@@ -1880,7 +2064,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameDataResponse'
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListPlayerGameDataResponse'
     /v1/backoffice/report/register-retention/list:
         post:
             tags:
@@ -2024,7 +2208,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListTicketsResponse'
+                                $ref: '#/components/schemas/api.review.service.v1.ListTicketsResponse'
     /v1/backoffice/review/operator/withdraw:
         post:
             tags:
@@ -2097,24 +2281,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.review.service.v1.GetTicketResponse'
-    /v1/backoffice/review/tickets/get_by_id:
-        post:
-            tags:
-                - BackofficeReview
-            operationId: BackofficeReview_GetTicketById
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTicketByIdRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetTicketByIdResponse'
     /v1/backoffice/review/tickets/list:
         post:
             tags:
@@ -2132,7 +2298,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListTicketsResponse'
+                                $ref: '#/components/schemas/api.review.service.v1.ListTicketsResponse'
     /v1/backoffice/review/tickets/review:
         post:
             tags:
@@ -2556,6 +2722,63 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateWalletCurrencyResponse'
+    /v1/backoffice/wallet/deposit-reward/config/get:
+        post:
+            tags:
+                - BackofficeWallet
+            description: GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
+            operationId: BackofficeWallet_GetDepositRewardConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetDepositRewardConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetDepositRewardConfigResponse'
+    /v1/backoffice/wallet/deposit-reward/sequences/delete:
+        post:
+            tags:
+                - BackofficeWallet
+            description: DeleteDepositRewardSequences deletes a deposit reward sequence of a operator currency config
+            operationId: BackofficeWallet_DeleteDepositRewardSequences
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteDepositRewardSequencesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.DeleteDepositRewardSequencesResponse'
+    /v1/backoffice/wallet/deposit-reward/sequences/set:
+        post:
+            tags:
+                - BackofficeWallet
+            description: SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
+            operationId: BackofficeWallet_SetDepositRewardSequences
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetDepositRewardSequencesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.SetDepositRewardSequencesResponse'
     /v1/backoffice/wallet/exchange-rates/get:
         post:
             tags:
@@ -2591,7 +2814,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletsResponse'
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetWalletsResponse'
     /v1/backoffice/wallet/operator/balance-freeze:
         post:
             tags:
@@ -2653,13 +2876,13 @@ paths:
         post:
             tags:
                 - BackofficeWallet
-            description: GetOperatorBalances gets the balances of an operator
-            operationId: BackofficeWallet_GetOperatorBalances
+            description: GetOperatorBalance gets the balances of an operator
+            operationId: BackofficeWallet_GetOperatorBalance
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.wallet.service.v1.GetOperatorBalancesRequest'
+                            $ref: '#/components/schemas/api.wallet.service.v1.GetOperatorBalanceRequest'
                 required: true
             responses:
                 "200":
@@ -2667,7 +2890,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.wallet.service.v1.GetOperatorBalancesResponse'
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetOperatorBalanceResponse'
     /v1/backoffice/wallet/operator/balance/update:
         post:
             tags:
@@ -2705,7 +2928,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorBalancesResponse'
+                                $ref: '#/components/schemas/api.wallet.service.v1.ListBottomOperatorBalancesResponse'
     /v1/backoffice/wallet/operator/swap:
         post:
             tags:
@@ -2781,16 +3004,16 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateWalletResponse'
-    /v1/bcpay/bankaccount/get:
+    /v1/bcpay/deposit/add:
         post:
             tags:
                 - Bcpay
-            operationId: Bcpay_GetBankAccount
+            operationId: Bcpay_CreateDeposit
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.bcpay.service.v1.GetBankAccountRequest'
+                            $ref: '#/components/schemas/api.bcpay.service.v1.CreateDepositRequest'
                 required: true
             responses:
                 "200":
@@ -2798,7 +3021,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.bcpay.service.v1.GetBankAccountResponse'
+                                $ref: '#/components/schemas/api.bcpay.service.v1.CreateDepositResponse'
     /v1/bcpay/withdraw/add:
         post:
             tags:
@@ -2997,24 +3220,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetAddressResponse'
-    /v1/payment/bankaccount/get:
-        post:
-            tags:
-                - Payment
-            operationId: Payment_GetDepositBankAccount
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/payment.service.v1.GetBankAccountRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/payment.service.v1.GetBankAccountResponse'
     /v1/payment/bankcard/add:
         post:
             tags:
@@ -3542,6 +3747,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.GetCurrenciesResponse'
+    /v1/wallet/deposit-reward/user-sequence:
+        post:
+            tags:
+                - Wallet
+            description: GetUserDepositRewardSequence returns the current available deposit reward sequence of the user based on the user deposit stats
+            operationId: Wallet_GetUserDepositRewardSequence
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.GetUserDepositRewardSequenceRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetUserDepositRewardSequenceResponse'
 components:
     schemas:
         api.backoffice.service.v1.AccountInfoRequest:
@@ -3566,6 +3790,8 @@ components:
                     $ref: '#/components/schemas/api.backoffice.service.v1.Role'
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+                reportingCurrency:
+                    $ref: '#/components/schemas/api.wallet.service.v1.Currency'
         api.backoffice.service.v1.ActiveUsersData_Data:
             type: object
             properties:
@@ -3618,8 +3844,22 @@ components:
         api.backoffice.service.v1.AddBankAccountRequest:
             type: object
             properties:
-                bankAccount:
-                    $ref: '#/components/schemas/api.bcpay.service.v1.DepositBankAccount'
+                currency:
+                    type: string
+                country:
+                    type: string
+                maxAmount:
+                    type: string
+                maxAmountPerTrans:
+                    type: string
+                maxTransLimit:
+                    type: integer
+                    format: int32
+                priority:
+                    type: integer
+                    format: int32
+                bankInfo:
+                    type: object
         api.backoffice.service.v1.AddCommentRequest:
             type: object
             properties:
@@ -3632,6 +3872,33 @@ components:
             properties:
                 commentId:
                     type: string
+        api.backoffice.service.v1.AddOperatorBackofficeByoSubdomainRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                subdomain:
+                    type: string
+        api.backoffice.service.v1.AddOperatorBackofficeByoSubdomainResponse:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.AddOperatorByoDomainRequest:
+            type: object
+            properties:
+                byoDomain:
+                    type: string
+                domain:
+                    type: string
+        api.backoffice.service.v1.AddOperatorByoSubdomainRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                subdomain:
+                    type: string
+        api.backoffice.service.v1.AddOperatorByoSubdomainResponse:
+            type: object
+            properties: {}
         api.backoffice.service.v1.AddSystemCurrencyRequest:
             type: object
             properties:
@@ -3737,10 +4004,18 @@ components:
                     type: string
                 audit:
                     type: string
-                    description: audit a transaction "approve" or "deline"
+                    description: audit a transaction "approved" or "delined"
         api.backoffice.service.v1.BankAccountListRequest:
             type: object
             properties:
+                page:
+                    type: integer
+                    description: Page number to retrieve (1-based)
+                    format: int32
+                pageSize:
+                    type: integer
+                    description: Number of items per page
+                    format: int32
                 currency:
                     type: string
                 bankAccount:
@@ -3751,8 +4026,8 @@ components:
                     type: string
                 cardId:
                     type: string
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                enabled:
+                    type: boolean
         api.backoffice.service.v1.Bet:
             type: object
             properties:
@@ -4049,6 +4324,48 @@ components:
         api.backoffice.service.v1.DeleteAdjustmentConfigResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.DeleteDepositRewardSequencesRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                currency:
+                    type: string
+                welcomeRewardSequenceSerialNumbers:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+                dailyRewardSequenceSerialNumbers:
+                    type: array
+                    items:
+                        type: integer
+                        format: int32
+        api.backoffice.service.v1.DeleteOperatorBackofficeByoSubdomainRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                subdomain:
+                    type: string
+        api.backoffice.service.v1.DeleteOperatorBackofficeByoSubdomainResponse:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.DeleteOperatorByoDomainRequest:
+            type: object
+            properties:
+                byoDomain:
+                    type: string
+        api.backoffice.service.v1.DeleteOperatorByoSubdomainRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                subdomain:
+                    type: string
+        api.backoffice.service.v1.DeleteOperatorByoSubdomainResponse:
+            type: object
+            properties: {}
         api.backoffice.service.v1.DeleteRoleRequest:
             type: object
             properties:
@@ -4060,9 +4377,13 @@ components:
         api.backoffice.service.v1.GameData_Data:
             type: object
             properties:
-                ggr:
+                ggrUsd:
                     type: string
-                ngr:
+                ngrUsd:
+                    type: string
+                ggrReportingCurrency:
+                    type: string
+                ngrReportingCurrency:
                     type: string
         api.backoffice.service.v1.GameTransaction_Amount:
             type: object
@@ -4128,173 +4449,6 @@ components:
                     type: string
                 includeActions:
                     type: boolean
-        api.backoffice.service.v1.GetBetByIdResponse:
-            type: object
-            properties:
-                bet:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.GetBetByIdResponse_Bet'
-        api.backoffice.service.v1.GetBetByIdResponse_Action:
-            type: object
-            properties:
-                id:
-                    type: string
-                roundId:
-                    type: string
-                action:
-                    type: string
-                betId:
-                    type: string
-                providerBetId:
-                    type: string
-                providerTransactionId:
-                    type: string
-                providerExternalTransactionId:
-                    type: string
-                providerId:
-                    type: string
-                providerName:
-                    type: string
-                operatorId:
-                    type: string
-                operatorName:
-                    type: string
-                updateBalance:
-                    type: boolean
-                takeAll:
-                    type: boolean
-                isRefund:
-                    type: boolean
-                amount:
-                    type: string
-                amountUsd:
-                    type: string
-                settlementAmount:
-                    type: string
-                settlementAmountUsd:
-                    type: string
-                turnover:
-                    type: string
-                turnoverUsd:
-                    type: string
-                userId:
-                    type: string
-                currency:
-                    type: string
-                settlementCurrency:
-                    type: string
-                gameId:
-                    type: string
-                gameName:
-                    type: string
-                gameCategory:
-                    type: string
-                jackpotContribution:
-                    type: string
-                jackpotContributionUsd:
-                    type: string
-                jackpotWin:
-                    type: string
-                jackpotWinUsd:
-                    type: string
-                betTime:
-                    type: string
-                    format: date-time
-                settleTime:
-                    type: string
-                    format: date-time
-                providerTimestamp:
-                    type: string
-                    format: date-time
-                bonusAmount:
-                    type: string
-                bonusAmountUsd:
-                    type: string
-                operatorTimestamp:
-                    type: string
-                    format: date-time
-                processedAt:
-                    type: string
-                    format: date-time
-                createdAt:
-                    type: string
-                    format: date-time
-                updatedAt:
-                    type: string
-                    format: date-time
-        api.backoffice.service.v1.GetBetByIdResponse_Bet:
-            type: object
-            properties:
-                id:
-                    type: string
-                providerBetId:
-                    type: string
-                roundId:
-                    type: string
-                providerRoundId:
-                    type: string
-                providerId:
-                    type: string
-                providerName:
-                    type: string
-                operatorId:
-                    type: string
-                operatorName:
-                    type: string
-                currency:
-                    type: string
-                settlementCurrency:
-                    type: string
-                status:
-                    type: string
-                userId:
-                    type: string
-                gameId:
-                    type: string
-                gameName:
-                    type: string
-                gameCategory:
-                    type: string
-                winCount:
-                    type: integer
-                    format: int32
-                betAmount:
-                    type: string
-                betAmountUsd:
-                    type: string
-                settlementBetAmount:
-                    type: string
-                settlementBetAmountUsd:
-                    type: string
-                winAmount:
-                    type: string
-                winAmountUsd:
-                    type: string
-                settlementWinAmount:
-                    type: string
-                settlementWinAmountUsd:
-                    type: string
-                turnover:
-                    type: string
-                turnoverUsd:
-                    type: string
-                rollbackBetAmount:
-                    type: string
-                rollbackBetAmountUsd:
-                    type: string
-                rollbackWinAmount:
-                    type: string
-                rollbackWinAmountUsd:
-                    type: string
-                createdAt:
-                    type: string
-                    format: date-time
-                updatedAt:
-                    type: string
-                    format: date-time
-                actions:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.GetBetByIdResponse_Action'
         api.backoffice.service.v1.GetCurrentOperatorDetailsRequest:
             type: object
             properties: {}
@@ -4303,6 +4457,13 @@ components:
             properties:
                 operatorDetails:
                     $ref: '#/components/schemas/api.backoffice.service.v1.OperatorDetails'
+        api.backoffice.service.v1.GetDepositRewardConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                currency:
+                    type: string
         api.backoffice.service.v1.GetDepositSummariesRequest:
             type: object
             properties:
@@ -4330,7 +4491,9 @@ components:
                     type: string
                 depositSuccessRate:
                     type: string
-                depositAmount:
+                depositAmountUsd:
+                    type: string
+                depositAmountReportingCurrency:
                     type: string
         api.backoffice.service.v1.GetExchangeRatesRequest:
             type: object
@@ -4347,104 +4510,6 @@ components:
                     additionalProperties:
                         type: string
                     description: map key is source currency, value is target currency rate
-        api.backoffice.service.v1.GetGameDataRequest:
-            type: object
-            properties:
-                timeRange:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                providerIds:
-                    type: array
-                    items:
-                        type: string
-                gameCategories:
-                    type: array
-                    items:
-                        type: string
-                gameNames:
-                    type: array
-                    items:
-                        type: string
-                gameIds:
-                    type: array
-                    items:
-                        type: string
-                currencies:
-                    type: array
-                    items:
-                        type: string
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
-        api.backoffice.service.v1.GetGameDataResponse:
-            type: object
-            properties:
-                list:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.GetGameDataResponse_List'
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
-                total:
-                    type: integer
-                    format: int32
-        api.backoffice.service.v1.GetGameDataResponse_List:
-            type: object
-            properties:
-                date:
-                    type: string
-                operatorName:
-                    type: string
-                companyOperatorName:
-                    type: string
-                retailerOperatorName:
-                    type: string
-                systemOperatorName:
-                    type: string
-                provider:
-                    type: string
-                gameType:
-                    type: string
-                gameName:
-                    type: string
-                gameId:
-                    type: string
-                playerCount:
-                    type: integer
-                    format: int32
-                turnover:
-                    type: string
-                turnoverUsd:
-                    type: string
-                turnoverPercentage:
-                    type: string
-                winAmount:
-                    type: string
-                winAmountUsd:
-                    type: string
-                ggr:
-                    type: string
-                ggrUsd:
-                    type: string
-                ggrPercentage:
-                    type: string
-                betCount:
-                    type: integer
-                    format: int32
-                averageBetAmount:
-                    type: string
-                rtpPercentage:
-                    type: string
-                settlementCurrency:
-                    type: string
         api.backoffice.service.v1.GetGameSummaryRequest:
             type: object
             properties:
@@ -4475,112 +4540,32 @@ components:
         api.backoffice.service.v1.GetGameSummaryResponse:
             type: object
             properties:
-                turnover:
+                turnoverUsd:
                     type: string
-                winAmount:
+                winAmountUsd:
                     type: string
-                ggr:
+                ggrUsd:
                     type: string
                 betCount:
                     type: integer
                     format: int32
-                averageBetAmount:
+                averageBetAmountUsd:
                     type: string
                 rtpPercentage:
+                    type: string
+                turnoverReportingCurrency:
+                    type: string
+                winAmountReportingCurrency:
+                    type: string
+                ggrReportingCurrency:
+                    type: string
+                averageBetAmountReportingCurrency:
                     type: string
         api.backoffice.service.v1.GetGameTransactionByIdRequest:
             type: object
             properties:
                 transactionId:
                     type: string
-        api.backoffice.service.v1.GetGameTransactionByIdResponse:
-            type: object
-            properties:
-                id:
-                    type: string
-                roundId:
-                    type: string
-                action:
-                    type: string
-                betId:
-                    type: string
-                providerBetId:
-                    type: string
-                providerTransactionId:
-                    type: string
-                providerExternalTransactionId:
-                    type: string
-                providerId:
-                    type: string
-                providerName:
-                    type: string
-                operatorId:
-                    type: string
-                operatorName:
-                    type: string
-                updateBalance:
-                    type: boolean
-                takeAll:
-                    type: boolean
-                isRefund:
-                    type: boolean
-                amount:
-                    type: string
-                amountUsd:
-                    type: string
-                settlementAmount:
-                    type: string
-                settlementAmountUsd:
-                    type: string
-                turnover:
-                    type: string
-                turnoverUsd:
-                    type: string
-                userId:
-                    type: string
-                currency:
-                    type: string
-                settlementCurrency:
-                    type: string
-                gameId:
-                    type: string
-                gameName:
-                    type: string
-                gameCategory:
-                    type: string
-                jackpotContribution:
-                    type: string
-                jackpotContributionUsd:
-                    type: string
-                jackpotWin:
-                    type: string
-                jackpotWinUsd:
-                    type: string
-                betTime:
-                    type: string
-                    format: date-time
-                settleTime:
-                    type: string
-                    format: date-time
-                providerTimestamp:
-                    type: string
-                    format: date-time
-                bonusAmount:
-                    type: string
-                bonusAmountUsd:
-                    type: string
-                operatorTimestamp:
-                    type: string
-                    format: date-time
-                processedAt:
-                    type: string
-                    format: date-time
-                createdAt:
-                    type: string
-                    format: date-time
-                updatedAt:
-                    type: string
-                    format: date-time
         api.backoffice.service.v1.GetGameTransactionsForBetRequest:
             type: object
             properties:
@@ -4834,16 +4819,24 @@ components:
         api.backoffice.service.v1.GetOverviewDashboardResponse_DepositAmount:
             type: object
             properties:
-                today:
+                todayUsd:
                     type: string
-                yesterday:
+                yesterdayUsd:
+                    type: string
+                todayReportingCurrency:
+                    type: string
+                yesterdayReportingCurrency:
                     type: string
         api.backoffice.service.v1.GetOverviewDashboardResponse_DepositMinusWithdrawalAmount:
             type: object
             properties:
-                today:
+                todayUsd:
                     type: string
-                yesterday:
+                yesterdayUsd:
+                    type: string
+                todayReportingCurrency:
+                    type: string
+                yesterdayReportingCurrency:
                     type: string
         api.backoffice.service.v1.GetOverviewDashboardResponse_FirstDepositUsers:
             type: object
@@ -4857,16 +4850,24 @@ components:
         api.backoffice.service.v1.GetOverviewDashboardResponse_GGR:
             type: object
             properties:
-                today:
+                todayUsd:
                     type: string
-                yesterday:
+                yesterdayUsd:
+                    type: string
+                todayReportingCurrency:
+                    type: string
+                yesterdayReportingCurrency:
                     type: string
         api.backoffice.service.v1.GetOverviewDashboardResponse_NGR:
             type: object
             properties:
-                today:
+                todayUsd:
                     type: string
-                yesterday:
+                yesterdayUsd:
+                    type: string
+                todayReportingCurrency:
+                    type: string
+                yesterdayReportingCurrency:
                     type: string
         api.backoffice.service.v1.GetOverviewDashboardResponse_RegisteredUsers:
             type: object
@@ -4880,9 +4881,13 @@ components:
         api.backoffice.service.v1.GetOverviewDashboardResponse_WithdrawalAmount:
             type: object
             properties:
-                today:
+                todayUsd:
                     type: string
-                yesterday:
+                yesterdayUsd:
+                    type: string
+                todayReportingCurrency:
+                    type: string
+                yesterdayReportingCurrency:
                     type: string
         api.backoffice.service.v1.GetPaymentMethodListRequest:
             type: object
@@ -4902,107 +4907,6 @@ components:
                     format: int32
                 enabled:
                     type: boolean
-        api.backoffice.service.v1.GetPlayerGameDataRequest:
-            type: object
-            properties:
-                timeRange:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                providerIds:
-                    type: array
-                    items:
-                        type: string
-                gameCategories:
-                    type: array
-                    items:
-                        type: string
-                gameTags:
-                    type: array
-                    items:
-                        type: string
-                gameNames:
-                    type: array
-                    items:
-                        type: string
-                gameIds:
-                    type: array
-                    items:
-                        type: string
-                currencies:
-                    type: array
-                    items:
-                        type: string
-                userIds:
-                    type: array
-                    items:
-                        type: string
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
-        api.backoffice.service.v1.GetPlayerGameDataResponse:
-            type: object
-            properties:
-                list:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.GetPlayerGameDataResponse_List'
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
-                total:
-                    type: integer
-                    format: int32
-        api.backoffice.service.v1.GetPlayerGameDataResponse_List:
-            type: object
-            properties:
-                date:
-                    type: string
-                operatorName:
-                    type: string
-                companyOperatorName:
-                    type: string
-                retailerOperatorName:
-                    type: string
-                systemOperatorName:
-                    type: string
-                provider:
-                    type: string
-                gameType:
-                    type: string
-                gameId:
-                    type: string
-                gameName:
-                    type: string
-                userId:
-                    type: string
-                turnover:
-                    type: string
-                turnoverUsd:
-                    type: string
-                winAmount:
-                    type: string
-                winAmountUsd:
-                    type: string
-                ggr:
-                    type: string
-                ggrUsd:
-                    type: string
-                rtpPercentage:
-                    type: string
-                betCount:
-                    type: integer
-                    format: int32
-                averageBetAmount:
-                    type: string
-                settlementCurrency:
-                    type: string
         api.backoffice.service.v1.GetPlayerGameSummaryRequest:
             type: object
             properties:
@@ -5041,18 +4945,26 @@ components:
         api.backoffice.service.v1.GetPlayerGameSummaryResponse:
             type: object
             properties:
-                turnover:
+                turnoverUsd:
                     type: string
-                winAmount:
+                winAmountUsd:
                     type: string
-                ggr:
+                ggrUsd:
                     type: string
                 betCount:
                     type: integer
                     format: int32
-                averageBetAmount:
+                averageBetAmountUsd:
                     type: string
                 rtpPercentage:
+                    type: string
+                turnoverReportingCurrency:
+                    type: string
+                winAmountReportingCurrency:
+                    type: string
+                ggrReportingCurrency:
+                    type: string
+                averageBetAmountReportingCurrency:
                     type: string
         api.backoffice.service.v1.GetSummaryRequest:
             type: object
@@ -5082,109 +4994,53 @@ components:
                 registeredUsers:
                     type: integer
                     format: int32
-                ftd:
+                ftdUsd:
                     type: string
                 ftdConversionRate:
                     type: string
-                depositAmount:
+                depositAmountUsd:
                     type: string
-                withdrawAmount:
+                withdrawAmountUsd:
                     type: string
-                depositMinusWithdrawAmount:
+                depositMinusWithdrawAmountUsd:
                     type: string
-                averageFtdAmount:
+                averageFtdAmountUsd:
                     type: string
                 arpuToArppuPercentage:
                     type: string
-                turnover:
+                turnoverUsd:
                     type: string
-                bonus:
+                bonusUsd:
                     type: string
-                ggr:
+                ggrUsd:
                     type: string
-                ngr:
+                ngrUsd:
                     type: string
-                arpu:
+                arpuUsd:
                     type: string
-                arppu:
+                arppuUsd:
                     type: string
-        api.backoffice.service.v1.GetTicketByIdRequest:
-            type: object
-            properties:
-                ticketId:
+                ftdReportingCurrency:
                     type: string
-        api.backoffice.service.v1.GetTicketByIdResponse:
-            type: object
-            properties:
-                ticket:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.GetTicketByIdResponse_Ticket'
-                comments:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.GetTicketByIdResponse_Comment'
-        api.backoffice.service.v1.GetTicketByIdResponse_Comment:
-            type: object
-            properties:
-                id:
+                depositAmountReportingCurrency:
                     type: string
-                ticketId:
+                withdrawAmountReportingCurrency:
                     type: string
-                authorUserId:
+                depositMinusWithdrawAmountReportingCurrency:
                     type: string
-                content:
+                averageFtdAmountReportingCurrency:
                     type: string
-                createdAt:
+                turnoverReportingCurrency:
                     type: string
-        api.backoffice.service.v1.GetTicketByIdResponse_Ticket:
-            type: object
-            properties:
-                id:
+                bonusReportingCurrency:
                     type: string
-                type:
+                ggrReportingCurrency:
                     type: string
-                request:
+                ngrReportingCurrency:
                     type: string
-                response:
+                arpuReportingCurrency:
                     type: string
-                userId:
-                    type: string
-                cancellerUserId:
-                    type: string
-                operatorId:
-                    type: string
-                currency:
-                    type: string
-                ticketStatus:
-                    type: string
-                reviewerUserId:
-                    type: string
-                reviewerComment:
-                    type: string
-                paymentStatus:
-                    type: string
-                paymentTransactionId:
-                    type: string
-                paymentTransactionError:
-                    type: string
-                walletStatus:
-                    type: string
-                walletFreezeTransactionId:
-                    type: string
-                walletSettleTransactionId:
-                    type: string
-                walletSettleError:
-                    type: string
-                walletRollbackTransactionId:
-                    type: string
-                walletRollbackError:
-                    type: string
-                createdAt:
-                    type: string
-                updatedAt:
-                    type: string
-                reviewedAt:
-                    type: string
-                cancelledAt:
+                arppuReportingCurrency:
                     type: string
         api.backoffice.service.v1.GetTicketRequest:
             type: object
@@ -5513,53 +5369,85 @@ components:
         api.backoffice.service.v1.GetUserOverviewResponse:
             type: object
             properties:
-                balance:
+                balanceUsd:
                     type: string
-                depositMinusWithdraw:
+                depositMinusWithdrawUsd:
                     type: string
-                turnover:
+                turnoverUsd:
                     type: string
-                cashTurnover:
+                cashTurnoverUsd:
                     type: string
-                bonusTurnover:
+                bonusTurnoverUsd:
                     type: string
-                deposit:
+                depositUsd:
                     type: string
-                lastDeposit:
+                lastDepositUsd:
                     type: string
                 depositCount:
                     type: integer
                     format: int32
-                withdraw:
+                withdrawUsd:
                     type: string
-                lastWithdraw:
+                lastWithdrawUsd:
                     type: string
                 withdrawCount:
                     type: integer
                     format: int32
-                bonus:
+                bonusUsd:
                     type: string
-                validTurnover:
+                validTurnoverUsd:
                     type: string
-                averageBetAmount:
+                averageBetAmountUsd:
                     type: string
-                ggr:
+                ggrUsd:
                     type: string
                 ggrPercentage:
                     type: string
-                manuallyAddedBalance:
+                manuallyAddedBalanceUsd:
                     type: string
-                bonusClaimed:
+                bonusClaimedUsd:
                     type: string
-                ngr:
+                ngrUsd:
                     type: string
                 ggrToNgrPercentage:
                     type: string
                 turnoverMultiplier:
                     type: string
-                depositToWithdrawRatio:
+                withdrawToDepositRatio:
                     type: string
                 rtp:
+                    type: string
+                balanceReportingCurrency:
+                    type: string
+                depositMinusWithdrawReportingCurrency:
+                    type: string
+                turnoverReportingCurrency:
+                    type: string
+                cashTurnoverReportingCurrency:
+                    type: string
+                bonusTurnoverReportingCurrency:
+                    type: string
+                depositReportingCurrency:
+                    type: string
+                lastDepositReportingCurrency:
+                    type: string
+                withdrawReportingCurrency:
+                    type: string
+                lastWithdrawReportingCurrency:
+                    type: string
+                bonusReportingCurrency:
+                    type: string
+                validTurnoverReportingCurrency:
+                    type: string
+                averageBetAmountReportingCurrency:
+                    type: string
+                ggrReportingCurrency:
+                    type: string
+                manuallyAddedBalanceReportingCurrency:
+                    type: string
+                bonusClaimedReportingCurrency:
+                    type: string
+                ngrReportingCurrency:
                     type: string
                 gameData:
                     type: array
@@ -5570,9 +5458,13 @@ components:
             properties:
                 gameType:
                     type: string
-                ggr:
+                ggrUsd:
                     type: string
-                turnover:
+                ggrReportingCurrency:
+                    type: string
+                turnoverUsd:
+                    type: string
+                turnoverReportingCurrency:
                     type: string
                 rtp:
                     type: string
@@ -5808,81 +5700,6 @@ components:
                     type: array
                     items:
                         type: string
-        api.backoffice.service.v1.GetWalletsResponse:
-            type: object
-            properties:
-                totalAssets:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletsResponse_TotalAssets'
-                wallets:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletsResponse_Wallet'
-        api.backoffice.service.v1.GetWalletsResponse_Credit:
-            type: object
-            properties:
-                createdAt:
-                    type: string
-                    format: date-time
-                transactionId:
-                    type: string
-                cash:
-                    type: string
-                originalCash:
-                    type: string
-                bonus:
-                    type: string
-                originalBonus:
-                    type: string
-                turnoverThreshold:
-                    type: string
-                turnover:
-                    type: string
-                cashTurnover:
-                    type: string
-                bonusTurnover:
-                    type: string
-                turnoverMultiplier:
-                    type: string
-        api.backoffice.service.v1.GetWalletsResponse_TotalAssets:
-            type: object
-            properties:
-                balance:
-                    type: string
-                deposit:
-                    type: string
-                withdraw:
-                    type: string
-                depositMinusWithdraw:
-                    type: string
-                validTurnover:
-                    type: string
-        api.backoffice.service.v1.GetWalletsResponse_Wallet:
-            type: object
-            properties:
-                currency:
-                    type: string
-                cash:
-                    type: string
-                originalCash:
-                    type: string
-                bonus:
-                    type: string
-                originalBonus:
-                    type: string
-                turnoverThreshold:
-                    type: string
-                turnover:
-                    type: string
-                cashTurnover:
-                    type: string
-                bonusTurnover:
-                    type: string
-                turnoverMultiplier:
-                    type: string
-                credits:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.GetWalletsResponse_Credit'
         api.backoffice.service.v1.GetWithdrawSummariesRequest:
             type: object
             properties:
@@ -5910,7 +5727,9 @@ components:
                     type: string
                 withdrawSuccessRate:
                     type: string
-                withdrawAmount:
+                withdrawAmountUsd:
+                    type: string
+                withdrawAmountReportingCurrency:
                     type: string
         api.backoffice.service.v1.ListAccountsRequest:
             type: object
@@ -6594,12 +6413,16 @@ components:
                     type: string
                 depositAmountUsd:
                     type: string
+                depositAmountReportingCurrency:
+                    type: string
                 depositUsers:
                     type: integer
                     format: int32
                 ftdAmount:
                     type: string
                 ftdAmountUsd:
+                    type: string
+                ftdAmountReportingCurrency:
                     type: string
                 ftdUsers:
                     type: integer
@@ -6608,27 +6431,34 @@ components:
                     type: string
                 sameDayFtdAmountUsd:
                     type: string
+                sameDayFtdAmountReportingCurrency:
+                    type: string
                 sameDayFtdUsers:
+                    type: integer
+                    format: int32
+                nonSameDayFtdUsers:
                     type: integer
                     format: int32
                 repeatedDepositAmount:
                     type: string
                 repeatedDepositAmountUsd:
                     type: string
+                repeatedDepositAmountReportingCurrency:
+                    type: string
                 repeatedDepositUsers:
                     type: integer
                     format: int32
-                sameDayFtd:
-                    type: string
-                nonSameDayFtd:
-                    type: string
                 averageFtdAmountForSameDayRegistredUsers:
                     type: string
                 averageFtdAmountUsdForSameDayRegistredUsers:
                     type: string
+                averageFtdAmountReportingCurrencyForSameDayRegistredUsers:
+                    type: string
                 averageFtdAmountForNonSameDayRegistredUsers:
                     type: string
                 averageFtdAmountUsdForNonSameDayRegistredUsers:
+                    type: string
+                averageFtdAmountReportingCurrencyForNonSameDayRegistredUsers:
                     type: string
         api.backoffice.service.v1.ListFeeGroupsRequest:
             type: object
@@ -6644,6 +6474,110 @@ components:
                     type: array
                     items:
                         type: string
+        api.backoffice.service.v1.ListGameDataRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                providerIds:
+                    type: array
+                    items:
+                        type: string
+                gameCategories:
+                    type: array
+                    items:
+                        type: string
+                gameNames:
+                    type: array
+                    items:
+                        type: string
+                gameIds:
+                    type: array
+                    items:
+                        type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListGameDataResponse:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListGameDataResponse_List'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListGameDataResponse_List:
+            type: object
+            properties:
+                date:
+                    type: string
+                operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
+                provider:
+                    type: string
+                gameType:
+                    type: string
+                gameName:
+                    type: string
+                gameId:
+                    type: string
+                playerCount:
+                    type: integer
+                    format: int32
+                turnover:
+                    type: string
+                turnoverUsd:
+                    type: string
+                turnoverPercentage:
+                    type: string
+                winAmount:
+                    type: string
+                winAmountUsd:
+                    type: string
+                ggr:
+                    type: string
+                ggrUsd:
+                    type: string
+                ggrPercentage:
+                    type: string
+                betCount:
+                    type: integer
+                    format: int32
+                averageBetAmount:
+                    type: string
+                rtpPercentage:
+                    type: string
+                settlementCurrency:
+                    type: string
+                turnoverReportingCurrency:
+                    type: string
+                winAmountReportingCurrency:
+                    type: string
+                ggrReportingCurrency:
+                    type: string
         api.backoffice.service.v1.ListGamesRequest:
             type: object
             properties:
@@ -6991,18 +6925,22 @@ components:
                 pageSize:
                     type: integer
                     format: int32
-        api.backoffice.service.v1.ListOperatorBalancesResponse:
+        api.backoffice.service.v1.ListOperatorByoDomainsRequest:
             type: object
             properties:
-                operatorBalances:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.OperatorBalance'
-                totalCashUsd:
-                    type: string
-                total:
+                page:
                     type: integer
                     format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListOperatorDomainsRequest:
+            type: object
+            properties:
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                type:
+                    type: string
                 page:
                     type: integer
                     format: int32
@@ -7155,6 +7093,113 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.ListPlayerGameDataRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                providerIds:
+                    type: array
+                    items:
+                        type: string
+                gameCategories:
+                    type: array
+                    items:
+                        type: string
+                gameTags:
+                    type: array
+                    items:
+                        type: string
+                gameNames:
+                    type: array
+                    items:
+                        type: string
+                gameIds:
+                    type: array
+                    items:
+                        type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                userIds:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListPlayerGameDataResponse:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListPlayerGameDataResponse_List'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListPlayerGameDataResponse_List:
+            type: object
+            properties:
+                date:
+                    type: string
+                operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
+                provider:
+                    type: string
+                gameType:
+                    type: string
+                gameId:
+                    type: string
+                gameName:
+                    type: string
+                userId:
+                    type: string
+                turnover:
+                    type: string
+                turnoverUsd:
+                    type: string
+                winAmount:
+                    type: string
+                winAmountUsd:
+                    type: string
+                ggr:
+                    type: string
+                ggrUsd:
+                    type: string
+                rtpPercentage:
+                    type: string
+                betCount:
+                    type: integer
+                    format: int32
+                averageBetAmount:
+                    type: string
+                settlementCurrency:
+                    type: string
+                turnoverReportingCurrency:
+                    type: string
+                winAmountReportingCurrency:
+                    type: string
+                ggrReportingCurrency:
+                    type: string
         api.backoffice.service.v1.ListProviderRatesRequest:
             type: object
             properties:
@@ -7318,7 +7363,10 @@ components:
                     format: int32
                 depositConvertionRate:
                     type: string
-                arppu:
+                arppuUsd:
+                    type: integer
+                    format: int32
+                arppuReportingCurrency:
                     type: integer
                     format: int32
                 d1ActiveUsers:
@@ -7393,29 +7441,53 @@ components:
                 d120PaidUsers:
                     type: integer
                     format: int32
-                d1PaidAmt:
+                d1PaidAmtUsd:
                     type: string
-                d2PaidAmt:
+                d1PaidAmtReportingCurrency:
                     type: string
-                d3PaidAmt:
+                d2PaidAmtUsd:
                     type: string
-                d4PaidAmt:
+                d2PaidAmtReportingCurrency:
                     type: string
-                d5PaidAmt:
+                d3PaidAmtUsd:
                     type: string
-                d6PaidAmt:
+                d3PaidAmtReportingCurrency:
                     type: string
-                d7PaidAmt:
+                d4PaidAmtUsd:
                     type: string
-                d15PaidAmt:
+                d4PaidAmtReportingCurrency:
                     type: string
-                d30PaidAmt:
+                d5PaidAmtUsd:
                     type: string
-                d45PaidAmt:
+                d5PaidAmtReportingCurrency:
                     type: string
-                d60PaidAmt:
+                d6PaidAmtUsd:
                     type: string
-                d120PaidAmt:
+                d6PaidAmtReportingCurrency:
+                    type: string
+                d7PaidAmtUsd:
+                    type: string
+                d7PaidAmtReportingCurrency:
+                    type: string
+                d15PaidAmtUsd:
+                    type: string
+                d15PaidAmtReportingCurrency:
+                    type: string
+                d30PaidAmtUsd:
+                    type: string
+                d30PaidAmtReportingCurrency:
+                    type: string
+                d45PaidAmtUsd:
+                    type: string
+                d45PaidAmtReportingCurrency:
+                    type: string
+                d60PaidAmtUsd:
+                    type: string
+                d60PaidAmtReportingCurrency:
+                    type: string
+                d120PaidAmtUsd:
+                    type: string
+                d120PaidAmtReportingCurrency:
                     type: string
         api.backoffice.service.v1.ListRetailerOperatorsRequest:
             type: object
@@ -7554,15 +7626,15 @@ components:
                 depositCount:
                     type: integer
                     format: int32
-                depositAmount:
+                depositAmountUsd:
                     type: string
-                arpu:
+                arpuUsd:
                     type: string
-                arppu:
+                arppuUsd:
                     type: string
-                averageFtdAmount:
+                averageFtdAmountUsd:
                     type: string
-                withdrawAmount:
+                withdrawAmountUsd:
                     type: string
                 withdrawedUsers:
                     type: integer
@@ -7570,53 +7642,101 @@ components:
                 ftwUsers:
                     type: integer
                     format: int32
-                averageWithdrawAmount:
+                averageWithdrawAmountUsd:
                     type: string
-                ftwAmount:
+                ftwAmountUsd:
                     type: string
-                averageFtwAmount:
+                averageFtwAmountUsd:
                     type: string
                 wuToAuPercentage:
                     type: string
                 wuToDuPercentage:
                     type: string
-                depositMinusWithdrawAmount:
+                depositMinusWithdrawAmountUsd:
                     type: string
                 wToDPercentage:
                     type: string
-                turnover:
+                turnoverUsd:
                     type: string
-                depositBonus:
+                depositBonusUsd:
                     type: string
-                rebateBonus:
+                rebateBonusUsd:
                     type: string
-                lossRebate:
+                lossRebateUsd:
                     type: string
-                vipBonus:
+                vipBonusUsd:
                     type: string
-                otherBonus:
+                otherBonusUsd:
                     type: string
-                referralCommission:
+                referralCommissionUsd:
                     type: string
-                depositFeeSubsidyAmount:
+                depositFeeSubsidyAmountUsd:
                     type: string
-                playerWithdrawFee:
+                playerWithdrawFeeUsd:
                     type: string
-                operatorWithdrawFee:
+                operatorWithdrawFeeUsd:
                     type: string
-                cashBalance:
+                cashBalanceUsd:
                     type: string
-                bonusBalance:
+                bonusBalanceUsd:
                     type: string
-                lockedBalance:
+                lockedBalanceUsd:
                     type: string
-                ggr:
+                ggrUsd:
                     type: string
-                ngr:
+                ngrUsd:
                     type: string
                 ggrToNgrPercentage:
                     type: string
                 houseEdgePercentage:
+                    type: string
+                depositAmountReportingCurrency:
+                    type: string
+                arpuReportingCurrency:
+                    type: string
+                arppuReportingCurrency:
+                    type: string
+                averageFtdAmountReportingCurrency:
+                    type: string
+                withdrawAmountReportingCurrency:
+                    type: string
+                averageWithdrawAmountReportingCurrency:
+                    type: string
+                ftwAmountReportingCurrency:
+                    type: string
+                averageFtwAmountReportingCurrency:
+                    type: string
+                depositMinusWithdrawAmountReportingCurrency:
+                    type: string
+                turnoverReportingCurrency:
+                    type: string
+                depositBonusReportingCurrency:
+                    type: string
+                rebateBonusReportingCurrency:
+                    type: string
+                lossRebateReportingCurrency:
+                    type: string
+                vipBonusReportingCurrency:
+                    type: string
+                otherBonusReportingCurrency:
+                    type: string
+                referralCommissionReportingCurrency:
+                    type: string
+                depositFeeSubsidyAmountReportingCurrency:
+                    type: string
+                playerWithdrawFeeReportingCurrency:
+                    type: string
+                operatorWithdrawFeeReportingCurrency:
+                    type: string
+                cashBalanceReportingCurrency:
+                    type: string
+                bonusBalanceReportingCurrency:
+                    type: string
+                lockedBalanceReportingCurrency:
+                    type: string
+                ggrReportingCurrency:
+                    type: string
+                ngrReportingCurrency:
                     type: string
         api.backoffice.service.v1.ListSystemCurrenciesRequest:
             type: object
@@ -7743,106 +7863,6 @@ components:
                 pageSize:
                     type: integer
                     format: int32
-        api.backoffice.service.v1.ListTicketsResponse:
-            type: object
-            properties:
-                tickets:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListTicketsResponse_Ticket'
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
-                totalCount:
-                    type: integer
-                    format: int32
-                totalAmount:
-                    type: string
-                totalPendingCount:
-                    type: integer
-                    format: int32
-                totalPendingAmount:
-                    type: string
-                totalPayingCount:
-                    type: integer
-                    format: int32
-                totalPayingAmount:
-                    type: string
-                totalPaidCount:
-                    type: integer
-                    format: int32
-                totalPaidAmount:
-                    type: string
-                totalFailedCount:
-                    type: integer
-                    format: int32
-                totalFailedAmount:
-                    type: string
-                totalRejectedCount:
-                    type: integer
-                    format: int32
-                totalRejectedAmount:
-                    type: string
-                averageReviewTime:
-                    type: integer
-                    format: int32
-        api.backoffice.service.v1.ListTicketsResponse_Ticket:
-            type: object
-            properties:
-                createdAt:
-                    type: string
-                    format: date-time
-                ticketId:
-                    type: string
-                userId:
-                    type: string
-                operatorName:
-                    type: string
-                companyOperatorName:
-                    type: string
-                retailerOperatorName:
-                    type: string
-                systemOperatorName:
-                    type: string
-                realOperatorName:
-                    type: string
-                vipLevel:
-                    type: integer
-                    format: int32
-                userTags:
-                    type: array
-                    items:
-                        type: string
-                beforeBalance:
-                    type: string
-                beforeBalanceUsd:
-                    type: string
-                amount:
-                    type: string
-                amountUsd:
-                    type: string
-                afterBalance:
-                    type: string
-                afterBalanceUsd:
-                    type: string
-                currency:
-                    type: string
-                paymentChannel:
-                    type: string
-                protocol:
-                    type: string
-                fee:
-                    type: string
-                status:
-                    type: string
-                reviewerUsername:
-                    type: string
-                reviewDuration:
-                    type: integer
-                    format: int32
         api.backoffice.service.v1.ListUserCommentsRequest:
             type: object
             properties:
@@ -7963,9 +7983,13 @@ components:
                 kycLevel:
                     type: integer
                     format: int32
-                deposit:
+                depositUsd:
                     type: string
-                withdraw:
+                withdrawUsd:
+                    type: string
+                depositReportingCurrency:
+                    type: string
+                withdrawReportingCurrency:
                     type: string
                 tags:
                     type: array
@@ -8287,12 +8311,16 @@ components:
                     type: string
                 withdrawAmountUsd:
                     type: string
+                withdrawAmountReportingCurrency:
+                    type: string
                 withdrawUsers:
                     type: integer
                     format: int32
                 ftwAmount:
                     type: string
                 ftwAmountUsd:
+                    type: string
+                ftwAmountReportingCurrency:
                     type: string
                 ftwUsers:
                     type: integer
@@ -8301,33 +8329,40 @@ components:
                     type: string
                 sameDayFtwAmountUsd:
                     type: string
+                sameDayFtwAmountReportingCurrency:
+                    type: string
                 sameDayFtwUsers:
+                    type: integer
+                    format: int32
+                nonSameDayFtwUsers:
                     type: integer
                     format: int32
                 repeatedWithdrawAmount:
                     type: string
                 repeatedWithdrawAmountUsd:
                     type: string
+                repeatedWithdrawAmountReportingCurrency:
+                    type: string
                 repeatedWithdrawUsers:
-                    type: integer
-                    format: int32
-                sameDayFtw:
-                    type: integer
-                    format: int32
-                nonSameDayFtw:
                     type: integer
                     format: int32
                 averageFtwAmountForSameDayRegistredUsers:
                     type: string
                 averageFtwAmountUsdForSameDayRegistredUsers:
                     type: string
+                averageFtwAmountReportingCurrencyForSameDayRegistredUsers:
+                    type: string
                 averageFtwAmountForNonSameDayRegistredUsers:
                     type: string
                 averageFtwAmountUsdForNonSameDayRegistredUsers:
                     type: string
+                averageFtwAmountReportingCurrencyForNonSameDayRegistredUsers:
+                    type: string
                 depositMinusWithdrawAmount:
                     type: string
                 depositMinusWithdrawAmountUsd:
+                    type: string
+                depositMinusWithdrawAmountReportingCurrency:
                     type: string
         api.backoffice.service.v1.LoginRequest:
             type: object
@@ -8341,27 +8376,6 @@ components:
             properties:
                 token:
                     type: string
-        api.backoffice.service.v1.OperatorBalance:
-            type: object
-            properties:
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-                retailerOperatorName:
-                    type: string
-                companyOperatorName:
-                    type: string
-                operatorName:
-                    type: string
-                currency:
-                    type: string
-                protocol:
-                    type: string
-                cash:
-                    type: string
-                cashUsd:
-                    type: string
-                enabled:
-                    type: boolean
         api.backoffice.service.v1.OperatorBalanceFreezeRequest:
             type: object
             properties:
@@ -8480,8 +8494,16 @@ components:
                     type: string
                 subdomain:
                     type: string
+                byoSubdomains:
+                    type: array
+                    items:
+                        type: string
                 backofficeSubdomain:
                     type: string
+                backofficeByoSubdomains:
+                    type: array
+                    items:
+                        type: string
                 backofficeChildDomain:
                     type: string
                 domainPool:
@@ -8581,9 +8603,13 @@ components:
         api.backoffice.service.v1.PaymentData_Data:
             type: object
             properties:
-                deposit:
+                depositUsd:
                     type: string
-                withdrawal:
+                withdrawalUsd:
+                    type: string
+                depositReportingCurrency:
+                    type: string
+                withdrawalReportingCurrency:
                     type: string
         api.backoffice.service.v1.Permission:
             type: object
@@ -8701,6 +8727,27 @@ components:
         api.backoffice.service.v1.SendRegisterVerificationCodeResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.SetDepositRewardSequencesRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                currency:
+                    type: string
+                followParent:
+                    type: boolean
+                welcomeRewardEnabled:
+                    type: boolean
+                dailyRewardEnabled:
+                    type: boolean
+                welcomeRewardSequences:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
+                dailyRewardSequences:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
         api.backoffice.service.v1.SetOperatorTagsConfigRequest:
             type: object
             properties:
@@ -8776,8 +8823,20 @@ components:
         api.backoffice.service.v1.TransactionListRequest:
             type: object
             properties:
+                page:
+                    type: integer
+                    description: Page number to retrieve (1-based)
+                    format: int32
+                pageSize:
+                    type: integer
+                    description: Number of items per page
+                    format: int32
                 type:
                     type: string
+                    description: type "payin" "payout"
+                status:
+                    type: string
+                    description: status "pending" "approved" "declined"
                 transactionId:
                     type: string
                 depositBankAccountFirstname:
@@ -8788,9 +8847,9 @@ components:
                     type: string
                 userName:
                     type: string
-                payerBankAccountFirstname:
+                userBankAccountFirstname:
                     type: string
-                payerBankAccountLastname:
+                userBankAccountLastname:
                     type: string
         api.backoffice.service.v1.Unbind2faRequest:
             type: object
@@ -8829,8 +8888,26 @@ components:
         api.backoffice.service.v1.UpdateBankAccountRequest:
             type: object
             properties:
-                bankAccount:
-                    $ref: '#/components/schemas/api.bcpay.service.v1.DepositBankAccount'
+                id:
+                    type: string
+                currency:
+                    type: string
+                country:
+                    type: string
+                maxAmount:
+                    type: string
+                maxAmountPerTrans:
+                    type: string
+                maxTransLimit:
+                    type: integer
+                    format: int32
+                priority:
+                    type: integer
+                    format: int32
+                enabled:
+                    type: boolean
+                bankInfo:
+                    type: object
         api.backoffice.service.v1.UpdateGameRequest:
             type: object
             properties:
@@ -9024,14 +9101,21 @@ components:
                     format: int32
         api.bcpay.service.v1.AddBankAccountResponse:
             type: object
-            properties:
-                bankAccount:
-                    $ref: '#/components/schemas/api.bcpay.service.v1.DepositBankAccount'
-        api.bcpay.service.v1.AuditTransactionResponse:
+            properties: {}
+        api.bcpay.service.v1.AddNoteToTransactionRequest:
             type: object
             properties:
-                transaction:
-                    $ref: '#/components/schemas/api.bcpay.service.v1.Transaction'
+                transactionId:
+                    type: string
+                note:
+                    type: string
+                    description: note
+        api.bcpay.service.v1.AddNoteToTransactionResponse:
+            type: object
+            properties: {}
+        api.bcpay.service.v1.AuditTransactionResponse:
+            type: object
+            properties: {}
         api.bcpay.service.v1.BankAccountListResponse:
             type: object
             properties:
@@ -9039,10 +9123,74 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.bcpay.service.v1.DepositBankAccount'
+                page:
+                    type: integer
+                    description: Current page number
+                    format: int32
+                pageSize:
+                    type: integer
+                    description: Number of items per page
+                    format: int32
+                totalPages:
+                    type: integer
+                    description: Total number of pages available
+                    format: int32
+                totalEnabled:
+                    type: integer
+                    description: Total number of enabled bank account
+                    format: int32
+                totalDisabled:
+                    type: integer
+                    description: Total number of disabled bank account
+                    format: int32
+                totalCount:
+                    type: integer
+                    format: int32
+        api.bcpay.service.v1.CreateDepositRequest:
+            type: object
+            properties:
+                merchantId:
+                    type: string
+                userId:
+                    type: string
+                userName:
+                    type: string
+                currency:
+                    type: string
+                country:
+                    type: string
+                notifyUrl:
+                    type: string
+                amount:
+                    type: string
+                bankAccount:
+                    type: string
+                bankAccountFirstname:
+                    type: string
+                bankAccountLastname:
+                    type: string
+                bankIban:
+                    type: string
+        api.bcpay.service.v1.CreateDepositResponse:
+            type: object
+            properties:
+                transactionID:
+                    type: string
+                    description: operator id allocated by operator service
+                depositReference:
+                    type: string
+                bankAccount:
+                    type: string
+                bankAccountName:
+                    type: string
+                bankIban:
+                    type: string
         api.bcpay.service.v1.CreateMerchantResponse:
             type: object
             properties:
                 merchantId:
+                    type: string
+                apiKeyPublic:
                     type: string
         api.bcpay.service.v1.CreateWithdrawRequest:
             type: object
@@ -9053,23 +9201,37 @@ components:
                     type: string
                 amount:
                     type: string
+                currency:
+                    type: string
+                country:
+                    type: string
                 notifyUrl:
                     type: string
-                payerId:
+                userId:
                     type: string
-                accountName:
+                userName:
                     type: string
-                iban:
+                bankAccount:
                     type: string
-                bankCode:
+                bankAccountFirstname:
+                    type: string
+                bankAccountLastname:
+                    type: string
+                bankIban:
                     type: string
         api.bcpay.service.v1.CreateWithdrawResponse:
             type: object
             properties:
-                status:
-                    type: string
                 transactionId:
                     type: string
+        api.bcpay.service.v1.DeleteBankAccountRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+        api.bcpay.service.v1.DeleteBankAccountResponse:
+            type: object
+            properties: {}
         api.bcpay.service.v1.DepositBankAccount:
             type: object
             properties:
@@ -9083,20 +9245,20 @@ components:
                     type: string
                 bankLastName:
                     type: string
+                iban:
+                    type: string
                 currency:
                     type: string
                 country:
                     type: string
                 maxAmount:
                     type: string
-                minAmount:
-                    type: string
                 maxAmountPerTrans:
                     type: string
                 maxTransLimit:
                     type: integer
                     format: int32
-                currentTransTime:
+                currentTransTimes:
                     type: integer
                     format: int32
                 priority:
@@ -9104,33 +9266,12 @@ components:
                     format: int32
                 enable:
                     type: boolean
-        api.bcpay.service.v1.GetBankAccountRequest:
-            type: object
-            properties:
-                operatorId:
-                    type: string
-                merchantId:
-                    type: string
-                payerId:
-                    type: string
-                notifyUrl:
-                    type: string
-        api.bcpay.service.v1.GetBankAccountResponse:
-            type: object
-            properties:
-                notifyUrl:
-                    type: string
-                    description: operator id allocated by operator service
-                referenceNumber:
-                    type: string
-                bankAccountName:
-                    type: string
-                bankAccountNumber:
-                    type: string
         api.bcpay.service.v1.GetBankSchemaRequest:
             type: object
             properties:
                 currency:
+                    type: string
+                country:
                     type: string
         api.bcpay.service.v1.GetBankSchemaResponse:
             type: object
@@ -9141,6 +9282,8 @@ components:
             type: object
             properties:
                 merchantId:
+                    type: string
+                apiKeyPublic:
                     type: string
         api.bcpay.service.v1.Transaction:
             type: object
@@ -9153,11 +9296,17 @@ components:
                     type: string
                 userName:
                     type: string
-                bankAccount:
+                depositBankAccount:
                     type: string
-                bankAccountFirstName:
+                depositBankAccountFirstName:
                     type: string
-                bankAccountLastName:
+                depositBankAccountLastName:
+                    type: string
+                userBankAccount:
+                    type: string
+                userBankAccountFirstName:
+                    type: string
+                userBankAccountLastName:
                     type: string
                 type:
                     type: string
@@ -9171,19 +9320,20 @@ components:
                     type: string
                 status:
                     type: string
-                audit:
-                    type: string
-                    description: audit a transaction "approve" or "deline"
                 auditor:
                     type: string
+                    description: audit a transaction "approve" or "decline"
                 auditTime:
                     type: string
+                    format: date-time
                 auditNote:
                     type: string
                 createTime:
                     type: string
+                    format: date-time
                 updateTime:
                     type: string
+                    format: date-time
         api.bcpay.service.v1.TransactionListResponse:
             type: object
             properties:
@@ -9191,11 +9341,36 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.bcpay.service.v1.Transaction'
+                page:
+                    type: integer
+                    description: Current page number
+                    format: int32
+                pageSize:
+                    type: integer
+                    description: Number of items per page
+                    format: int32
+                totalPages:
+                    type: integer
+                    description: Total number of pages available
+                    format: int32
+                totalApproved:
+                    type: integer
+                    description: Total number of approved transactions
+                    format: int32
+                totalFailed:
+                    type: integer
+                    description: Total number of failed transactions
+                    format: int32
+                totalPending:
+                    type: integer
+                    description: Total number of pending transactions
+                    format: int32
+                totalCount:
+                    type: integer
+                    format: int32
         api.bcpay.service.v1.UpdateBankAccountResponse:
             type: object
-            properties:
-                bankAccount:
-                    $ref: '#/components/schemas/api.bcpay.service.v1.DepositBankAccount'
+            properties: {}
         api.common.OperatorContext:
             type: object
             properties:
@@ -9457,6 +9632,199 @@ components:
                         - HIGHLIGHT
                     type: string
                     format: enum
+        api.game.service.v1.GetBetByIdResponse:
+            type: object
+            properties:
+                bet:
+                    $ref: '#/components/schemas/api.game.service.v1.GetBetByIdResponse_Bet'
+        api.game.service.v1.GetBetByIdResponse_Action:
+            type: object
+            properties:
+                id:
+                    type: string
+                roundId:
+                    type: string
+                action:
+                    type: string
+                betId:
+                    type: string
+                providerBetId:
+                    type: string
+                providerTransactionId:
+                    type: string
+                providerExternalTransactionId:
+                    type: string
+                providerId:
+                    type: string
+                providerName:
+                    type: string
+                operatorId:
+                    type: string
+                operatorName:
+                    type: string
+                updateBalance:
+                    type: boolean
+                takeAll:
+                    type: boolean
+                isRefund:
+                    type: boolean
+                amount:
+                    type: string
+                amountUsd:
+                    type: string
+                amountReportingCurrency:
+                    type: string
+                settlementAmount:
+                    type: string
+                settlementAmountUsd:
+                    type: string
+                settlementAmountReportingCurrency:
+                    type: string
+                turnover:
+                    type: string
+                turnoverUsd:
+                    type: string
+                turnoverReportingCurrency:
+                    type: string
+                userId:
+                    type: string
+                currency:
+                    type: string
+                settlementCurrency:
+                    type: string
+                gameId:
+                    type: string
+                gameName:
+                    type: string
+                gameCategory:
+                    type: string
+                jackpotContribution:
+                    type: string
+                jackpotContributionUsd:
+                    type: string
+                jackpotContributionReportingCurrency:
+                    type: string
+                jackpotWin:
+                    type: string
+                jackpotWinUsd:
+                    type: string
+                jackpotWinReportingCurrency:
+                    type: string
+                betTime:
+                    type: string
+                    format: date-time
+                settleTime:
+                    type: string
+                    format: date-time
+                providerTimestamp:
+                    type: string
+                    format: date-time
+                bonusAmount:
+                    type: string
+                bonusAmountUsd:
+                    type: string
+                bonusAmountReportingCurrency:
+                    type: string
+                operatorTimestamp:
+                    type: string
+                    format: date-time
+                processedAt:
+                    type: string
+                    format: date-time
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+        api.game.service.v1.GetBetByIdResponse_Bet:
+            type: object
+            properties:
+                id:
+                    type: string
+                providerBetId:
+                    type: string
+                roundId:
+                    type: string
+                providerRoundId:
+                    type: string
+                providerId:
+                    type: string
+                providerName:
+                    type: string
+                operatorId:
+                    type: string
+                operatorName:
+                    type: string
+                currency:
+                    type: string
+                settlementCurrency:
+                    type: string
+                status:
+                    type: string
+                userId:
+                    type: string
+                gameId:
+                    type: string
+                gameName:
+                    type: string
+                gameCategory:
+                    type: string
+                winCount:
+                    type: integer
+                    format: int32
+                betAmount:
+                    type: string
+                betAmountUsd:
+                    type: string
+                betAmountReportingCurrency:
+                    type: string
+                settlementBetAmount:
+                    type: string
+                settlementBetAmountUsd:
+                    type: string
+                settlementBetAmountReportingCurrency:
+                    type: string
+                winAmount:
+                    type: string
+                winAmountUsd:
+                    type: string
+                winAmountReportingCurrency:
+                    type: string
+                settlementWinAmount:
+                    type: string
+                settlementWinAmountUsd:
+                    type: string
+                settlementWinAmountReportingCurrency:
+                    type: string
+                turnover:
+                    type: string
+                turnoverUsd:
+                    type: string
+                turnoverReportingCurrency:
+                    type: string
+                rollbackBetAmount:
+                    type: string
+                rollbackBetAmountUsd:
+                    type: string
+                rollbackBetAmountReportingCurrency:
+                    type: string
+                rollbackWinAmount:
+                    type: string
+                rollbackWinAmountUsd:
+                    type: string
+                rollbackWinAmountReportingCurrency:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+                actions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.GetBetByIdResponse_Action'
         api.game.service.v1.GetGameRequest:
             type: object
             properties:
@@ -9467,6 +9835,106 @@ components:
             properties:
                 game:
                     $ref: '#/components/schemas/api.game.service.v1.GameInfo'
+        api.game.service.v1.GetGameTransactionByIdResponse:
+            type: object
+            properties:
+                id:
+                    type: string
+                roundId:
+                    type: string
+                action:
+                    type: string
+                betId:
+                    type: string
+                providerBetId:
+                    type: string
+                providerTransactionId:
+                    type: string
+                providerExternalTransactionId:
+                    type: string
+                providerId:
+                    type: string
+                providerName:
+                    type: string
+                operatorId:
+                    type: string
+                operatorName:
+                    type: string
+                updateBalance:
+                    type: boolean
+                takeAll:
+                    type: boolean
+                isRefund:
+                    type: boolean
+                amount:
+                    type: string
+                amountUsd:
+                    type: string
+                amountReportingCurrency:
+                    type: string
+                settlementAmount:
+                    type: string
+                settlementAmountUsd:
+                    type: string
+                settlementAmountReportingCurrency:
+                    type: string
+                turnover:
+                    type: string
+                turnoverUsd:
+                    type: string
+                turnoverReportingCurrency:
+                    type: string
+                userId:
+                    type: string
+                currency:
+                    type: string
+                settlementCurrency:
+                    type: string
+                gameId:
+                    type: string
+                gameName:
+                    type: string
+                gameCategory:
+                    type: string
+                jackpotContribution:
+                    type: string
+                jackpotContributionUsd:
+                    type: string
+                jackpotContributionReportingCurrency:
+                    type: string
+                jackpotWin:
+                    type: string
+                jackpotWinUsd:
+                    type: string
+                jackpotWinReportingCurrency:
+                    type: string
+                betTime:
+                    type: string
+                    format: date-time
+                settleTime:
+                    type: string
+                    format: date-time
+                providerTimestamp:
+                    type: string
+                    format: date-time
+                bonusAmount:
+                    type: string
+                bonusAmountUsd:
+                    type: string
+                bonusAmountReportingCurrency:
+                    type: string
+                operatorTimestamp:
+                    type: string
+                    format: date-time
+                processedAt:
+                    type: string
+                    format: date-time
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
         api.game.service.v1.ListBetsRequest:
             type: object
             properties:
@@ -9850,11 +10318,23 @@ components:
                     type: string
                 amount:
                     type: string
+                amountUsd:
+                    type: string
+                amountReportingCurrency:
+                    type: string
                 amountSent:
+                    type: string
+                amountSentUsd:
+                    type: string
+                amountSentReportingCurrency:
                     type: string
                 gas:
                     type: string
                 fee:
+                    type: string
+                feeUsd:
+                    type: string
+                feeReportingCurrency:
                     type: string
                 createdAt:
                     type: string
@@ -9884,33 +10364,65 @@ components:
             properties:
                 balance:
                     type: string
+                balanceUsd:
+                    type: string
+                balanceReportingCurrency:
+                    type: string
         api.review.service.v1.GetOperatorTicketResponse_WalletTransactionInfo:
             type: object
             properties:
                 beforeBalance:
                     type: string
+                beforeBalanceUsd:
+                    type: string
+                beforeBalanceReportingCurrency:
+                    type: string
                 afterBalance:
                     type: string
+                afterBalanceUsd:
+                    type: string
+                afterBalanceReportingCurrency:
+                    type: string
                 amount:
+                    type: string
+                amountUsd:
+                    type: string
+                amountReportingCurrency:
                     type: string
         api.review.service.v1.GetOperatorTicketResponse_WalletTransactionSummary:
             type: object
             properties:
                 totalWithdrawUsd:
                     type: string
+                totalWithdrawReportingCurrency:
+                    type: string
                 totalDepositUsd:
+                    type: string
+                totalDepositReportingCurrency:
                     type: string
                 totalTransferUsd:
                     type: string
+                totalTransferReportingCurrency:
+                    type: string
                 totalSwapOutUsd:
+                    type: string
+                totalSwapOutReportingCurrency:
                     type: string
                 totalSwapInUsd:
                     type: string
+                totalSwapInReportingCurrency:
+                    type: string
                 totalFreezeUsd:
+                    type: string
+                totalFreezeReportingCurrency:
                     type: string
                 totalWriteOffUsd:
                     type: string
+                totalWriteOffReportingCurrency:
+                    type: string
                 totalPendingUsd:
+                    type: string
+                totalPendingReportingCurrency:
                     type: string
         api.review.service.v1.GetTicketResponse:
             type: object
@@ -9952,11 +10464,17 @@ components:
                     type: string
                 amountUsd:
                     type: string
+                amountReportingCurrency:
+                    type: string
                 paymentChannel:
                     type: string
                 protocol:
                     type: string
                 fee:
+                    type: string
+                feeUsd:
+                    type: string
+                feeReportingCurrency:
                     type: string
                 extra:
                     type: object
@@ -10008,9 +10526,21 @@ components:
                     type: string
                 amount:
                     type: string
+                amountUsd:
+                    type: string
+                amountReportingCurrency:
+                    type: string
                 beforeBalance:
                     type: string
+                beforeBalanceUsd:
+                    type: string
+                beforeBalanceReportingCurrency:
+                    type: string
                 afterBalance:
+                    type: string
+                afterBalanceUsd:
+                    type: string
+                afterBalanceReportingCurrency:
                     type: string
                 createdAt:
                     type: string
@@ -10020,11 +10550,19 @@ components:
             properties:
                 totalDepositUsd:
                     type: string
+                totalDepositReportingCurrency:
+                    type: string
                 totalWithdrawUsd:
+                    type: string
+                totalWithdrawReportingCurrency:
                     type: string
                 totalDepositMinusWithdrawUsd:
                     type: string
+                totalDepositMinusWithdrawReportingCurrency:
+                    type: string
                 validTurnoverUsd:
+                    type: string
+                validTurnoverReportingCurrency:
                     type: string
                 totalDepositCount:
                     type: integer
@@ -10035,6 +10573,131 @@ components:
                 todayWithdrawCount:
                     type: integer
                     format: int32
+        api.review.service.v1.ListTicketsResponse:
+            type: object
+            properties:
+                tickets:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.review.service.v1.ListTicketsResponse_Ticket'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                totalCount:
+                    type: integer
+                    format: int32
+                totalAmountUsd:
+                    type: string
+                totalAmountReportingCurrency:
+                    type: string
+                totalPendingCount:
+                    type: integer
+                    format: int32
+                totalPendingAmountUsd:
+                    type: string
+                totalPendingAmountReportingCurrency:
+                    type: string
+                totalPayingCount:
+                    type: integer
+                    format: int32
+                totalPayingAmountUsd:
+                    type: string
+                totalPayingAmountReportingCurrency:
+                    type: string
+                totalPaidCount:
+                    type: integer
+                    format: int32
+                totalPaidAmountUsd:
+                    type: string
+                totalPaidAmountReportingCurrency:
+                    type: string
+                totalFailedCount:
+                    type: integer
+                    format: int32
+                totalFailedAmountUsd:
+                    type: string
+                totalFailedAmountReportingCurrency:
+                    type: string
+                totalRejectedCount:
+                    type: integer
+                    format: int32
+                totalRejectedAmountUsd:
+                    type: string
+                totalRejectedAmountReportingCurrency:
+                    type: string
+                averageReviewTime:
+                    type: integer
+                    format: int32
+        api.review.service.v1.ListTicketsResponse_Ticket:
+            type: object
+            properties:
+                createdAt:
+                    type: string
+                    format: date-time
+                ticketId:
+                    type: string
+                userId:
+                    type: string
+                operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
+                realOperatorName:
+                    type: string
+                vipLevel:
+                    type: integer
+                    format: int32
+                userTags:
+                    type: array
+                    items:
+                        type: string
+                beforeBalance:
+                    type: string
+                beforeBalanceUsd:
+                    type: string
+                beforeBalanceReportingCurrency:
+                    type: string
+                amount:
+                    type: string
+                amountUsd:
+                    type: string
+                amountReportingCurrency:
+                    type: string
+                afterBalance:
+                    type: string
+                afterBalanceUsd:
+                    type: string
+                afterBalanceReportingCurrency:
+                    type: string
+                currency:
+                    type: string
+                paymentChannel:
+                    type: string
+                protocol:
+                    type: string
+                fee:
+                    type: string
+                feeUsd:
+                    type: string
+                feeReportingCurrency:
+                    type: string
+                status:
+                    type: string
+                reviewerUsername:
+                    type: string
+                reviewDuration:
+                    type: integer
+                    format: int32
+        api.user.service.v1.AddOperatorByoDomainResponse:
+            type: object
+            properties: {}
         api.user.service.v1.AuthResponse:
             type: object
             properties:
@@ -10052,6 +10715,68 @@ components:
                         - $ref: '#/components/schemas/api.user.service.v1.UserInfo'
                     description: Basic information about the authenticated user.
             description: AuthResponse contains the authentication tokens and user information.
+        api.user.service.v1.ByoDomainInfo:
+            type: object
+            properties:
+                byoDomain:
+                    type: string
+                domain:
+                    type: string
+                type:
+                    type: string
+                targetOperatorId:
+                    type: string
+                targetOperatorName:
+                    type: string
+                targetCompanyOperatorId:
+                    type: string
+                targetCompanyOperatorName:
+                    type: string
+                targetRetailerOperatorId:
+                    type: string
+                targetRetailerOperatorName:
+                    type: string
+                targetSystemOperatorId:
+                    type: string
+                targetSystemOperatorName:
+                    type: string
+                targetRealOperatorId:
+                    type: string
+                targetOperatorType:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+        api.user.service.v1.DeleteOperatorByoDomainResponse:
+            type: object
+            properties: {}
+        api.user.service.v1.DomainInfo:
+            type: object
+            properties:
+                domain:
+                    type: string
+                type:
+                    type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                systemOperatorId:
+                    type: string
+                realOperatorId:
+                    type: string
+                operatorType:
+                    type: string
+                operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
         api.user.service.v1.GetUserRequest:
             type: object
             properties:
@@ -10080,6 +10805,29 @@ components:
                         type: string
                     description: List of active tags associated with the user.
             description: GetUserTagsResponse contains the list of active tags associated with the user.
+        api.user.service.v1.ListOperatorByoDomainsResponse:
+            type: object
+            properties:
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.ByoDomainInfo'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+        api.user.service.v1.ListOperatorDomainsResponse:
+            type: object
+            properties:
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.DomainInfo'
         api.user.service.v1.ListOperatorsByAdminEmailResponse:
             type: object
             properties:
@@ -10377,6 +11125,31 @@ components:
                 decimalPlaces:
                     type: integer
                     format: int32
+        api.wallet.service.v1.DeleteDepositRewardSequencesResponse:
+            type: object
+            properties: {}
+        api.wallet.service.v1.DepositRewardConfig:
+            type: object
+            properties:
+                welcomeRewardEnabled:
+                    type: boolean
+                dailyRewardEnabled:
+                    type: boolean
+                welcomeRewardSequences:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
+                dailyRewardSequences:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+            description: Deposit reward config for an operator with specific currency
         api.wallet.service.v1.GetCurrenciesRequest:
             type: object
             properties:
@@ -10391,12 +11164,35 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.Currency'
-        api.wallet.service.v1.GetOperatorBalancesRequest:
+        api.wallet.service.v1.GetDepositRewardConfigResponse:
+            type: object
+            properties:
+                customOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                currency:
+                    type: string
+                inheritedOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                inheritedFromOperatorName:
+                    type: string
+                followParent:
+                    type: boolean
+                welcomeRewardSequencesMinCount:
+                    type: integer
+                    format: int32
+                dailyRewardSequencesMinCount:
+                    type: integer
+                    format: int32
+                defaultDepositRewardConfig:
+                    $ref: '#/components/schemas/api.wallet.service.v1.DepositRewardConfig'
+                customDepositRewardConfig:
+                    $ref: '#/components/schemas/api.wallet.service.v1.DepositRewardConfig'
+        api.wallet.service.v1.GetOperatorBalanceRequest:
             type: object
             properties:
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
-        api.wallet.service.v1.GetOperatorBalancesResponse:
+        api.wallet.service.v1.GetOperatorBalanceResponse:
             type: object
             properties:
                 operatorBalances:
@@ -10404,6 +11200,8 @@ components:
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.OperatorBalance'
                 totalCashUsd:
+                    type: string
+                totalCashReportingCurrency:
                     type: string
         api.wallet.service.v1.GetUserBalancesRequest:
             type: object
@@ -10428,6 +11226,129 @@ components:
                     type: string
                 providerBonus:
                     type: string
+        api.wallet.service.v1.GetUserDepositRewardSequenceRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+        api.wallet.service.v1.GetUserDepositRewardSequenceResponse:
+            type: object
+            properties:
+                currentSequenceType:
+                    type: string
+                welcomeRewardCount:
+                    type: integer
+                    format: int32
+                dailyRewardCount:
+                    type: integer
+                    format: int32
+                currentRewardSequence:
+                    $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
+        api.wallet.service.v1.GetWalletsResponse:
+            type: object
+            properties:
+                totalAssets:
+                    $ref: '#/components/schemas/api.wallet.service.v1.GetWalletsResponse_TotalAssets'
+                wallets:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.GetWalletsResponse_Wallet'
+        api.wallet.service.v1.GetWalletsResponse_Credit:
+            type: object
+            properties:
+                createdAt:
+                    type: string
+                    format: date-time
+                transactionId:
+                    type: string
+                cash:
+                    type: string
+                originalCash:
+                    type: string
+                bonus:
+                    type: string
+                originalBonus:
+                    type: string
+                turnoverThreshold:
+                    type: string
+                turnover:
+                    type: string
+                cashTurnover:
+                    type: string
+                bonusTurnover:
+                    type: string
+                turnoverMultiplier:
+                    type: string
+        api.wallet.service.v1.GetWalletsResponse_TotalAssets:
+            type: object
+            properties:
+                balanceUsd:
+                    type: string
+                depositUsd:
+                    type: string
+                withdrawUsd:
+                    type: string
+                depositMinusWithdrawUsd:
+                    type: string
+                validTurnoverUsd:
+                    type: string
+                balanceReportingCurrency:
+                    type: string
+                depositReportingCurrency:
+                    type: string
+                withdrawReportingCurrency:
+                    type: string
+                depositMinusWithdrawReportingCurrency:
+                    type: string
+                validTurnoverReportingCurrency:
+                    type: string
+        api.wallet.service.v1.GetWalletsResponse_Wallet:
+            type: object
+            properties:
+                currency:
+                    type: string
+                cash:
+                    type: string
+                originalCash:
+                    type: string
+                bonus:
+                    type: string
+                originalBonus:
+                    type: string
+                turnoverThreshold:
+                    type: string
+                turnover:
+                    type: string
+                cashTurnover:
+                    type: string
+                bonusTurnover:
+                    type: string
+                turnoverMultiplier:
+                    type: string
+                credits:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.GetWalletsResponse_Credit'
+        api.wallet.service.v1.ListBottomOperatorBalancesResponse:
+            type: object
+            properties:
+                operatorBalances:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.OperatorBalance'
+                totalCashUsd:
+                    type: string
+                totalCashReportingCurrency:
+                    type: string
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.wallet.service.v1.OperatorBalance:
             type: object
             properties:
@@ -10447,8 +11368,53 @@ components:
                     type: string
                 cashUsd:
                     type: string
+                cashReportingCurrency:
+                    type: string
                 enabled:
                     type: boolean
+        api.wallet.service.v1.RewardSequence:
+            type: object
+            properties:
+                serialNumber:
+                    type: integer
+                    format: int32
+                name:
+                    type: string
+                enabled:
+                    type: boolean
+                rewardType:
+                    type: string
+                wageringRequirement:
+                    type: integer
+                    format: int32
+                rewardValidity:
+                    type: string
+                tierConfigs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence_TierConfig'
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+        api.wallet.service.v1.RewardSequence_TierConfig:
+            type: object
+            properties:
+                minDepositAmount:
+                    type: string
+                maxDepositAmount:
+                    type: string
+                rewardPercentage:
+                    type: string
+                maxBonusAmount:
+                    type: string
+                maxWithdrawalAmount:
+                    type: string
+        api.wallet.service.v1.SetDepositRewardSequencesResponse:
+            type: object
+            properties: {}
         google.protobuf.ListValue:
             type: object
             properties:
@@ -10466,23 +11432,27 @@ components:
         payment.service.v1.AddBankCardRequest:
             type: object
             properties:
+                currency:
+                    type: string
+                country:
+                    type: string
                 bankCard:
-                    $ref: '#/components/schemas/payment.service.v1.BankCard'
+                    type: object
         payment.service.v1.AddBankCardResponse:
             type: object
-            properties:
-                bankCard:
-                    $ref: '#/components/schemas/payment.service.v1.BankCard'
+            properties: {}
         payment.service.v1.BankCard:
             type: object
             properties:
                 id:
                     type: string
-                cardNumber:
+                cardAccount:
                     type: string
                 cardAccountFirstname:
                     type: string
                 cardAccountLastname:
+                    type: string
+                cardIban:
                     type: string
                 currency:
                     type: string
@@ -10490,6 +11460,8 @@ components:
                     type: string
                 enabled:
                     type: boolean
+                cardDetail:
+                    type: object
         payment.service.v1.CreatePaymentChannelResponse:
             type: object
             properties:
@@ -10603,28 +11575,6 @@ components:
                 address:
                     type: string
                     description: Digital Currency address
-        payment.service.v1.GetBankAccountRequest:
-            type: object
-            properties:
-                channelId:
-                    type: string
-                extra:
-                    type: object
-                    description: |-
-                        Additional information needed for the deposit
-                         May include clientOrderId, productId, userInfo, etc.
-        payment.service.v1.GetBankAccountResponse:
-            type: object
-            properties:
-                notifyUrl:
-                    type: string
-                    description: operator id allocated by operator service
-                referenceNumber:
-                    type: string
-                bankAccountName:
-                    type: string
-                bankAccountNumber:
-                    type: string
         payment.service.v1.GetBankCardListRequest:
             type: object
             properties: {}
@@ -11135,6 +12085,8 @@ components:
                     type: string
                 operatorType:
                     type: string
+                pspId:
+                    type: string
             description: |-
                 Payment channel information
                  Detailed information about a specific payment channel
@@ -11218,6 +12170,8 @@ components:
                     allOf:
                         - $ref: '#/components/schemas/google.protobuf.ListValue'
                     description: JSON schema defining the required fields for this payment method
+                pspId:
+                    type: string
             description: |-
                 Details of a single payment method
                  Contains information about a specific payment method including its ID, currency, and required fields schema
@@ -11325,19 +12279,37 @@ components:
                     description: Transaction amount actually sent through
                 gas:
                     type: string
+                reportingCurrency:
+                    type: string
+                amountReportingCurrency:
+                    type: string
+                amountSentReportingCurrency:
+                    type: string
+                processingFeeReportingCurrency:
+                    type: string
+                amountSentUsd:
+                    type: string
+                processingFeeUsd:
+                    type: string
             description: |-
                 Transaction information
                  Detailed information about a specific transaction
         payment.service.v1.UpdateBankCardRequest:
             type: object
             properties:
+                id:
+                    type: string
+                currency:
+                    type: string
+                country:
+                    type: string
+                enabled:
+                    type: boolean
                 bankCard:
-                    $ref: '#/components/schemas/payment.service.v1.BankCard'
+                    type: object
         payment.service.v1.UpdateBankCardResponse:
             type: object
-            properties:
-                bankCard:
-                    $ref: '#/components/schemas/payment.service.v1.BankCard'
+            properties: {}
         payment.service.v1.UpdatePaymentChannelRequest:
             type: object
             properties:
@@ -11455,6 +12427,7 @@ tags:
          Provides methods for backoffice bcpay management
     - name: BackofficeCompany
     - name: BackofficeDashboard
+    - name: BackofficeDns
     - name: BackofficeFileStore
     - name: BackofficeFinance
     - name: BackofficeGame

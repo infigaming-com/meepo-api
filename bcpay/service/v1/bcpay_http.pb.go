@@ -19,38 +19,38 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationBcpayCreateDeposit = "/api.bcpay.service.v1.Bcpay/CreateDeposit"
 const OperationBcpayCreateWithdraw = "/api.bcpay.service.v1.Bcpay/CreateWithdraw"
-const OperationBcpayGetBankAccount = "/api.bcpay.service.v1.Bcpay/GetBankAccount"
 
 type BcpayHTTPServer interface {
+	CreateDeposit(context.Context, *CreateDepositRequest) (*CreateDepositResponse, error)
 	CreateWithdraw(context.Context, *CreateWithdrawRequest) (*CreateWithdrawResponse, error)
-	GetBankAccount(context.Context, *GetBankAccountRequest) (*GetBankAccountResponse, error)
 }
 
 func RegisterBcpayHTTPServer(s *http.Server, srv BcpayHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/bcpay/bankaccount/get", _Bcpay_GetBankAccount0_HTTP_Handler(srv))
+	r.POST("/v1/bcpay/deposit/add", _Bcpay_CreateDeposit0_HTTP_Handler(srv))
 	r.POST("/v1/bcpay/withdraw/add", _Bcpay_CreateWithdraw0_HTTP_Handler(srv))
 }
 
-func _Bcpay_GetBankAccount0_HTTP_Handler(srv BcpayHTTPServer) func(ctx http.Context) error {
+func _Bcpay_CreateDeposit0_HTTP_Handler(srv BcpayHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in GetBankAccountRequest
+		var in CreateDepositRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBcpayGetBankAccount)
+		http.SetOperation(ctx, OperationBcpayCreateDeposit)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetBankAccount(ctx, req.(*GetBankAccountRequest))
+			return srv.CreateDeposit(ctx, req.(*CreateDepositRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*GetBankAccountResponse)
+		reply := out.(*CreateDepositResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -78,8 +78,8 @@ func _Bcpay_CreateWithdraw0_HTTP_Handler(srv BcpayHTTPServer) func(ctx http.Cont
 }
 
 type BcpayHTTPClient interface {
+	CreateDeposit(ctx context.Context, req *CreateDepositRequest, opts ...http.CallOption) (rsp *CreateDepositResponse, err error)
 	CreateWithdraw(ctx context.Context, req *CreateWithdrawRequest, opts ...http.CallOption) (rsp *CreateWithdrawResponse, err error)
-	GetBankAccount(ctx context.Context, req *GetBankAccountRequest, opts ...http.CallOption) (rsp *GetBankAccountResponse, err error)
 }
 
 type BcpayHTTPClientImpl struct {
@@ -90,11 +90,11 @@ func NewBcpayHTTPClient(client *http.Client) BcpayHTTPClient {
 	return &BcpayHTTPClientImpl{client}
 }
 
-func (c *BcpayHTTPClientImpl) CreateWithdraw(ctx context.Context, in *CreateWithdrawRequest, opts ...http.CallOption) (*CreateWithdrawResponse, error) {
-	var out CreateWithdrawResponse
-	pattern := "/v1/bcpay/withdraw/add"
+func (c *BcpayHTTPClientImpl) CreateDeposit(ctx context.Context, in *CreateDepositRequest, opts ...http.CallOption) (*CreateDepositResponse, error) {
+	var out CreateDepositResponse
+	pattern := "/v1/bcpay/deposit/add"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBcpayCreateWithdraw))
+	opts = append(opts, http.Operation(OperationBcpayCreateDeposit))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -103,11 +103,11 @@ func (c *BcpayHTTPClientImpl) CreateWithdraw(ctx context.Context, in *CreateWith
 	return &out, nil
 }
 
-func (c *BcpayHTTPClientImpl) GetBankAccount(ctx context.Context, in *GetBankAccountRequest, opts ...http.CallOption) (*GetBankAccountResponse, error) {
-	var out GetBankAccountResponse
-	pattern := "/v1/bcpay/bankaccount/get"
+func (c *BcpayHTTPClientImpl) CreateWithdraw(ctx context.Context, in *CreateWithdrawRequest, opts ...http.CallOption) (*CreateWithdrawResponse, error) {
+	var out CreateWithdrawResponse
+	pattern := "/v1/bcpay/withdraw/add"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBcpayGetBankAccount))
+	opts = append(opts, http.Operation(OperationBcpayCreateWithdraw))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

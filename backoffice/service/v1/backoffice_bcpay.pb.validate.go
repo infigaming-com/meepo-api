@@ -263,43 +263,32 @@ func (m *BankAccountListRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Currency
+	// no validation rules for Page
 
-	// no validation rules for BankAccount
+	// no validation rules for PageSize
 
-	// no validation rules for BankAccountFirstname
+	if m.Currency != nil {
+		// no validation rules for Currency
+	}
 
-	// no validation rules for BankAccountLastname
+	if m.BankAccount != nil {
+		// no validation rules for BankAccount
+	}
 
-	// no validation rules for CardId
+	if m.BankAccountFirstname != nil {
+		// no validation rules for BankAccountFirstname
+	}
 
-	if all {
-		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, BankAccountListRequestValidationError{
-					field:  "OperatorContextFilters",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, BankAccountListRequestValidationError{
-					field:  "OperatorContextFilters",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return BankAccountListRequestValidationError{
-				field:  "OperatorContextFilters",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
+	if m.BankAccountLastname != nil {
+		// no validation rules for BankAccountLastname
+	}
+
+	if m.CardId != nil {
+		// no validation rules for CardId
+	}
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
 	}
 
 	if len(errors) > 0 {
@@ -404,12 +393,24 @@ func (m *AddBankAccountRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Currency
+
+	// no validation rules for Country
+
+	// no validation rules for MaxAmount
+
+	// no validation rules for MaxAmountPerTrans
+
+	// no validation rules for MaxTransLimit
+
+	// no validation rules for Priority
+
 	if all {
-		switch v := interface{}(m.GetBankAccount()).(type) {
+		switch v := interface{}(m.GetBankInfo()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, AddBankAccountRequestValidationError{
-					field:  "BankAccount",
+					field:  "BankInfo",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -417,16 +418,16 @@ func (m *AddBankAccountRequest) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, AddBankAccountRequestValidationError{
-					field:  "BankAccount",
+					field:  "BankInfo",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetBankAccount()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetBankInfo()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return AddBankAccountRequestValidationError{
-				field:  "BankAccount",
+				field:  "BankInfo",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -535,12 +536,14 @@ func (m *UpdateBankAccountRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Id
+
 	if all {
-		switch v := interface{}(m.GetBankAccount()).(type) {
+		switch v := interface{}(m.GetBankInfo()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, UpdateBankAccountRequestValidationError{
-					field:  "BankAccount",
+					field:  "BankInfo",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -548,20 +551,48 @@ func (m *UpdateBankAccountRequest) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, UpdateBankAccountRequestValidationError{
-					field:  "BankAccount",
+					field:  "BankInfo",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetBankAccount()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetBankInfo()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return UpdateBankAccountRequestValidationError{
-				field:  "BankAccount",
+				field:  "BankInfo",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
 		}
+	}
+
+	if m.Currency != nil {
+		// no validation rules for Currency
+	}
+
+	if m.Country != nil {
+		// no validation rules for Country
+	}
+
+	if m.MaxAmount != nil {
+		// no validation rules for MaxAmount
+	}
+
+	if m.MaxAmountPerTrans != nil {
+		// no validation rules for MaxAmountPerTrans
+	}
+
+	if m.MaxTransLimit != nil {
+		// no validation rules for MaxTransLimit
+	}
+
+	if m.Priority != nil {
+		// no validation rules for Priority
+	}
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
 	}
 
 	if len(errors) > 0 {
@@ -666,21 +697,45 @@ func (m *TransactionListRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Type
+	// no validation rules for Page
 
-	// no validation rules for TransactionId
+	// no validation rules for PageSize
 
-	// no validation rules for DepositBankAccountFirstname
+	if m.Type != nil {
+		// no validation rules for Type
+	}
 
-	// no validation rules for DepositBankAccountLastname
+	if m.Status != nil {
+		// no validation rules for Status
+	}
 
-	// no validation rules for UserId
+	if m.TransactionId != nil {
+		// no validation rules for TransactionId
+	}
 
-	// no validation rules for UserName
+	if m.DepositBankAccountFirstname != nil {
+		// no validation rules for DepositBankAccountFirstname
+	}
 
-	// no validation rules for PayerBankAccountFirstname
+	if m.DepositBankAccountLastname != nil {
+		// no validation rules for DepositBankAccountLastname
+	}
 
-	// no validation rules for PayerBankAccountLastname
+	if m.UserId != nil {
+		// no validation rules for UserId
+	}
+
+	if m.UserName != nil {
+		// no validation rules for UserName
+	}
+
+	if m.UserBankAccountFirstname != nil {
+		// no validation rules for UserBankAccountFirstname
+	}
+
+	if m.UserBankAccountLastname != nil {
+		// no validation rules for UserBankAccountLastname
+	}
 
 	if len(errors) > 0 {
 		return TransactionListRequestMultiError(errors)

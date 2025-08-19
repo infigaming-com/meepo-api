@@ -12,7 +12,7 @@ option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
 
 service BackofficeWallet {
-	rpc GetWallets(GetWalletsRequest) returns (GetWalletsResponse) {
+	rpc GetWallets(GetWalletsRequest) returns (wallet.service.v1.GetWalletsResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/wallet/get"
             body: "*"
@@ -64,7 +64,7 @@ service BackofficeWallet {
         };
     }
 	// ListOperatorBalances lists all operator balances which belong to the backoffice operator
-	rpc ListOperatorBalances(ListOperatorBalancesRequest) returns (ListOperatorBalancesResponse) {
+	rpc ListOperatorBalances(ListOperatorBalancesRequest) returns (wallet.service.v1.ListBottomOperatorBalancesResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/operator/balances/list"
 			body: "*"
@@ -126,10 +126,31 @@ service BackofficeWallet {
 			body: "*"
 		};
 	}
-	// GetOperatorBalances gets the balances of an operator
-	rpc GetOperatorBalances(wallet.service.v1.GetOperatorBalancesRequest) returns (wallet.service.v1.GetOperatorBalancesResponse) {
+	// GetOperatorBalance gets the balances of an operator
+	rpc GetOperatorBalance(wallet.service.v1.GetOperatorBalanceRequest) returns (wallet.service.v1.GetOperatorBalanceResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/operator/balance/get"
+			body: "*"
+		};
+	}
+	// SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
+	rpc SetDepositRewardSequences(SetDepositRewardSequencesRequest) returns (wallet.service.v1.SetDepositRewardSequencesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/deposit-reward/sequences/set"
+			body: "*"
+		};
+	}
+	// DeleteDepositRewardSequences deletes a deposit reward sequence of a operator currency config
+	rpc DeleteDepositRewardSequences(DeleteDepositRewardSequencesRequest) returns (wallet.service.v1.DeleteDepositRewardSequencesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/deposit-reward/sequences/delete"
+			body: "*"
+		};
+	}
+	// GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
+	rpc GetDepositRewardConfig(GetDepositRewardConfigRequest) returns (wallet.service.v1.GetDepositRewardConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/deposit-reward/config/get"
 			body: "*"
 		};
 	}
@@ -138,44 +159,6 @@ service BackofficeWallet {
 message GetWalletsRequest {
 	int64 user_id = 1;
 	repeated string currencies = 2;
-}
-
-message GetWalletsResponse {
-	message TotalAssets {
-		string balance = 1;
-		string deposit = 2;
-		string withdraw = 3;
-		string deposit_minus_withdraw = 4;
-		string valid_turnover = 5;
-	}
-	message Credit {
-		google.protobuf.Timestamp created_at = 1;
-		int64 transaction_id = 2;
-		string cash = 3;
-		string original_cash = 4;
-		string bonus = 5;
-		string original_bonus = 6;
-		string turnover_threshold = 7;
-		string turnover = 8;
-		string cash_turnover = 9;
-		string bonus_turnover = 10;
-		string turnover_multiplier = 11;
-	}
-	message Wallet {
-		string currency = 1;
-		string cash = 2;
-		string original_cash = 3;
-		string bonus = 4;
-		string original_bonus = 5;
-		string turnover_threshold = 6;
-		string turnover = 7;
-		string cash_turnover = 8;
-		string bonus_turnover = 9;
-		string turnover_multiplier = 10;
-		repeated Credit credits = 11;
-	}
-	TotalAssets total_assets = 1;
-	repeated Wallet wallets = 2;
 }
 
 message GetWalletCreditsRequest {
@@ -349,26 +332,6 @@ message ListOperatorBalancesRequest {
 	optional int32 page_size = 4; // default 20
 }
 
-message OperatorBalance {
-	api.common.OperatorContext operator_context = 1;
-	string retailer_operator_name = 2;
-	string company_operator_name = 3;
-	string operator_name = 4;
-	string currency = 5;
-	string protocol = 6; // placeholder for future use
-	string cash = 7;
-	string cash_usd = 8;
-	bool enabled = 9;
-}
-
-message ListOperatorBalancesResponse {
-	repeated OperatorBalance operator_balances = 1;
-	string total_cash_usd = 2;
-	int32 total = 4;
-	int32 page = 5;
-	int32 page_size = 6;
-}
-
 message GetExchangeRatesRequest {
 	repeated string currencies = 1;
 }
@@ -494,4 +457,26 @@ message UpdateOperatorBalanceRequest {
 
 message UpdateOperatorBalanceResponse {
 	bool enabled = 1;
+}
+
+message SetDepositRewardSequencesRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string currency = 2;
+	optional bool follow_parent = 3;
+	optional bool welcome_reward_enabled = 4;
+	optional bool daily_reward_enabled = 5;
+	repeated wallet.service.v1.RewardSequence welcome_reward_sequences = 6;
+	repeated wallet.service.v1.RewardSequence daily_reward_sequences = 7;
+}
+
+message DeleteDepositRewardSequencesRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string currency = 2;
+	repeated int32 welcome_reward_sequence_serial_numbers = 3;
+	repeated int32 daily_reward_sequence_serial_numbers = 4;
+}
+
+message GetDepositRewardConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string currency = 2;
 }

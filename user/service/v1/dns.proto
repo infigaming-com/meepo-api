@@ -1,0 +1,102 @@
+syntax = "proto3";
+
+package api.user.service.v1;
+
+import "google/protobuf/timestamp.proto";
+import "common/common.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/user/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.user.service.v1";
+
+// User service provides authentication and user management functionality.
+service Dns {
+	rpc ListOperatorDomains(ListOperatorDomainsRequest) returns (ListOperatorDomainsResponse) {
+	}
+
+	// ListOperatorByoDomains returns the list of byo domains
+	rpc ListOperatorByoDomains(ListOperatorByoDomainsRequest) returns (ListOperatorByoDomainsResponse) {
+	}
+
+	// AddOperatorByoDomain adds a binding between customer byo domain and meepo domain
+	rpc AddOperatorByoDomain(AddOperatorByoDomainRequest) returns (AddOperatorByoDomainResponse) {
+	}
+
+	// DeleteOperatorByoDomain deletes a binding between customer byo domain and meepo domain
+	rpc DeleteOperatorByoDomain(DeleteOperatorByoDomainRequest) returns (DeleteOperatorByoDomainResponse) {
+	}
+}
+
+message DomainInfo {
+	string domain = 1;
+	string type = 2;
+	int64 operator_id = 3;
+	int64 company_operator_id = 4;
+	int64 retailer_operator_id = 5;
+	int64 system_operator_id = 6;
+	int64 real_operator_id = 7;
+	string operator_type = 8;
+	string operator_name = 9;
+	string company_operator_name = 10;
+	string retailer_operator_name = 11;
+	string system_operator_name = 12;
+}
+
+message ListOperatorDomainsRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContextFilters operator_context_filters = 2;
+	optional string type = 3;
+	optional int32 page = 4;
+	optional int32 page_size = 5;
+}
+
+message ListOperatorDomainsResponse {
+	repeated DomainInfo data = 1;
+}
+
+message ByoDomainInfo {
+	string byo_domain = 1;
+	string domain = 2;
+	string type = 3;
+	int64 target_operator_id = 4;
+	string target_operator_name = 5;
+	int64 target_company_operator_id = 6;
+	string target_company_operator_name = 7;
+	int64 target_retailer_operator_id = 8;
+	string target_retailer_operator_name = 9;
+	int64 target_system_operator_id = 10;
+	string target_system_operator_name = 11;
+	int64 target_real_operator_id = 12;
+	string target_operator_type = 13;
+	google.protobuf.Timestamp created_at = 14;
+}
+
+message ListOperatorByoDomainsRequest {
+	api.common.OperatorContext operator_context = 1;
+	optional int32 page = 2;
+	optional int32 page_size = 3;
+}
+
+message ListOperatorByoDomainsResponse {
+	repeated ByoDomainInfo data = 1;
+	int32 page = 2;
+	int32 page_size = 3;
+	int32 total = 4;
+}
+
+message AddOperatorByoDomainRequest {
+	api.common.OperatorContext operator_context = 1;
+	string byo_domain = 2;
+	string domain = 3;
+}
+
+message AddOperatorByoDomainResponse {
+}
+
+message DeleteOperatorByoDomainRequest {
+	api.common.OperatorContext operator_context = 1;
+	string byo_domain = 2;
+}
+
+message DeleteOperatorByoDomainResponse {
+}

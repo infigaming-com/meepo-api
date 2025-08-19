@@ -696,25 +696,31 @@ func (x *ListOperatorTicketsRequest) GetPageSize() int32 {
 }
 
 type ListTicketsResponse struct {
-	state               protoimpl.MessageState        `protogen:"open.v1"`
-	Tickets             []*ListTicketsResponse_Ticket `protobuf:"bytes,1,rep,name=tickets,proto3" json:"tickets,omitempty"`
-	Page                int32                         `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize            int32                         `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	TotalCount          int32                         `protobuf:"varint,4,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
-	TotalAmount         string                        `protobuf:"bytes,5,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
-	TotalPendingCount   int32                         `protobuf:"varint,6,opt,name=total_pending_count,json=totalPendingCount,proto3" json:"total_pending_count,omitempty"`
-	TotalPendingAmount  string                        `protobuf:"bytes,7,opt,name=total_pending_amount,json=totalPendingAmount,proto3" json:"total_pending_amount,omitempty"`
-	TotalPayingCount    int32                         `protobuf:"varint,8,opt,name=total_paying_count,json=totalPayingCount,proto3" json:"total_paying_count,omitempty"`
-	TotalPayingAmount   string                        `protobuf:"bytes,9,opt,name=total_paying_amount,json=totalPayingAmount,proto3" json:"total_paying_amount,omitempty"`
-	TotalPaidCount      int32                         `protobuf:"varint,10,opt,name=total_paid_count,json=totalPaidCount,proto3" json:"total_paid_count,omitempty"`
-	TotalPaidAmount     string                        `protobuf:"bytes,11,opt,name=total_paid_amount,json=totalPaidAmount,proto3" json:"total_paid_amount,omitempty"`
-	TotalFailedCount    int32                         `protobuf:"varint,12,opt,name=total_failed_count,json=totalFailedCount,proto3" json:"total_failed_count,omitempty"`
-	TotalFailedAmount   string                        `protobuf:"bytes,13,opt,name=total_failed_amount,json=totalFailedAmount,proto3" json:"total_failed_amount,omitempty"`
-	TotalRejectedCount  int32                         `protobuf:"varint,14,opt,name=total_rejected_count,json=totalRejectedCount,proto3" json:"total_rejected_count,omitempty"`
-	TotalRejectedAmount string                        `protobuf:"bytes,15,opt,name=total_rejected_amount,json=totalRejectedAmount,proto3" json:"total_rejected_amount,omitempty"`
-	AverageReviewTime   int32                         `protobuf:"varint,16,opt,name=average_review_time,json=averageReviewTime,proto3" json:"average_review_time,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state                                protoimpl.MessageState        `protogen:"open.v1"`
+	Tickets                              []*ListTicketsResponse_Ticket `protobuf:"bytes,1,rep,name=tickets,proto3" json:"tickets,omitempty"`
+	Page                                 int32                         `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize                             int32                         `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	TotalCount                           int32                         `protobuf:"varint,4,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	TotalAmountUsd                       string                        `protobuf:"bytes,5,opt,name=total_amount_usd,json=totalAmountUsd,proto3" json:"total_amount_usd,omitempty"`
+	TotalAmountReportingCurrency         string                        `protobuf:"bytes,6,opt,name=total_amount_reporting_currency,json=totalAmountReportingCurrency,proto3" json:"total_amount_reporting_currency,omitempty"`
+	TotalPendingCount                    int32                         `protobuf:"varint,7,opt,name=total_pending_count,json=totalPendingCount,proto3" json:"total_pending_count,omitempty"`
+	TotalPendingAmountUsd                string                        `protobuf:"bytes,8,opt,name=total_pending_amount_usd,json=totalPendingAmountUsd,proto3" json:"total_pending_amount_usd,omitempty"`
+	TotalPendingAmountReportingCurrency  string                        `protobuf:"bytes,9,opt,name=total_pending_amount_reporting_currency,json=totalPendingAmountReportingCurrency,proto3" json:"total_pending_amount_reporting_currency,omitempty"`
+	TotalPayingCount                     int32                         `protobuf:"varint,10,opt,name=total_paying_count,json=totalPayingCount,proto3" json:"total_paying_count,omitempty"`
+	TotalPayingAmountUsd                 string                        `protobuf:"bytes,11,opt,name=total_paying_amount_usd,json=totalPayingAmountUsd,proto3" json:"total_paying_amount_usd,omitempty"`
+	TotalPayingAmountReportingCurrency   string                        `protobuf:"bytes,12,opt,name=total_paying_amount_reporting_currency,json=totalPayingAmountReportingCurrency,proto3" json:"total_paying_amount_reporting_currency,omitempty"`
+	TotalPaidCount                       int32                         `protobuf:"varint,13,opt,name=total_paid_count,json=totalPaidCount,proto3" json:"total_paid_count,omitempty"`
+	TotalPaidAmountUsd                   string                        `protobuf:"bytes,14,opt,name=total_paid_amount_usd,json=totalPaidAmountUsd,proto3" json:"total_paid_amount_usd,omitempty"`
+	TotalPaidAmountReportingCurrency     string                        `protobuf:"bytes,15,opt,name=total_paid_amount_reporting_currency,json=totalPaidAmountReportingCurrency,proto3" json:"total_paid_amount_reporting_currency,omitempty"`
+	TotalFailedCount                     int32                         `protobuf:"varint,16,opt,name=total_failed_count,json=totalFailedCount,proto3" json:"total_failed_count,omitempty"`
+	TotalFailedAmountUsd                 string                        `protobuf:"bytes,17,opt,name=total_failed_amount_usd,json=totalFailedAmountUsd,proto3" json:"total_failed_amount_usd,omitempty"`
+	TotalFailedAmountReportingCurrency   string                        `protobuf:"bytes,18,opt,name=total_failed_amount_reporting_currency,json=totalFailedAmountReportingCurrency,proto3" json:"total_failed_amount_reporting_currency,omitempty"`
+	TotalRejectedCount                   int32                         `protobuf:"varint,19,opt,name=total_rejected_count,json=totalRejectedCount,proto3" json:"total_rejected_count,omitempty"`
+	TotalRejectedAmountUsd               string                        `protobuf:"bytes,20,opt,name=total_rejected_amount_usd,json=totalRejectedAmountUsd,proto3" json:"total_rejected_amount_usd,omitempty"`
+	TotalRejectedAmountReportingCurrency string                        `protobuf:"bytes,21,opt,name=total_rejected_amount_reporting_currency,json=totalRejectedAmountReportingCurrency,proto3" json:"total_rejected_amount_reporting_currency,omitempty"`
+	AverageReviewTime                    int32                         `protobuf:"varint,22,opt,name=average_review_time,json=averageReviewTime,proto3" json:"average_review_time,omitempty"`
+	unknownFields                        protoimpl.UnknownFields
+	sizeCache                            protoimpl.SizeCache
 }
 
 func (x *ListTicketsResponse) Reset() {
@@ -775,9 +781,16 @@ func (x *ListTicketsResponse) GetTotalCount() int32 {
 	return 0
 }
 
-func (x *ListTicketsResponse) GetTotalAmount() string {
+func (x *ListTicketsResponse) GetTotalAmountUsd() string {
 	if x != nil {
-		return x.TotalAmount
+		return x.TotalAmountUsd
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse) GetTotalAmountReportingCurrency() string {
+	if x != nil {
+		return x.TotalAmountReportingCurrency
 	}
 	return ""
 }
@@ -789,9 +802,16 @@ func (x *ListTicketsResponse) GetTotalPendingCount() int32 {
 	return 0
 }
 
-func (x *ListTicketsResponse) GetTotalPendingAmount() string {
+func (x *ListTicketsResponse) GetTotalPendingAmountUsd() string {
 	if x != nil {
-		return x.TotalPendingAmount
+		return x.TotalPendingAmountUsd
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse) GetTotalPendingAmountReportingCurrency() string {
+	if x != nil {
+		return x.TotalPendingAmountReportingCurrency
 	}
 	return ""
 }
@@ -803,9 +823,16 @@ func (x *ListTicketsResponse) GetTotalPayingCount() int32 {
 	return 0
 }
 
-func (x *ListTicketsResponse) GetTotalPayingAmount() string {
+func (x *ListTicketsResponse) GetTotalPayingAmountUsd() string {
 	if x != nil {
-		return x.TotalPayingAmount
+		return x.TotalPayingAmountUsd
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse) GetTotalPayingAmountReportingCurrency() string {
+	if x != nil {
+		return x.TotalPayingAmountReportingCurrency
 	}
 	return ""
 }
@@ -817,9 +844,16 @@ func (x *ListTicketsResponse) GetTotalPaidCount() int32 {
 	return 0
 }
 
-func (x *ListTicketsResponse) GetTotalPaidAmount() string {
+func (x *ListTicketsResponse) GetTotalPaidAmountUsd() string {
 	if x != nil {
-		return x.TotalPaidAmount
+		return x.TotalPaidAmountUsd
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse) GetTotalPaidAmountReportingCurrency() string {
+	if x != nil {
+		return x.TotalPaidAmountReportingCurrency
 	}
 	return ""
 }
@@ -831,9 +865,16 @@ func (x *ListTicketsResponse) GetTotalFailedCount() int32 {
 	return 0
 }
 
-func (x *ListTicketsResponse) GetTotalFailedAmount() string {
+func (x *ListTicketsResponse) GetTotalFailedAmountUsd() string {
 	if x != nil {
-		return x.TotalFailedAmount
+		return x.TotalFailedAmountUsd
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse) GetTotalFailedAmountReportingCurrency() string {
+	if x != nil {
+		return x.TotalFailedAmountReportingCurrency
 	}
 	return ""
 }
@@ -845,9 +886,16 @@ func (x *ListTicketsResponse) GetTotalRejectedCount() int32 {
 	return 0
 }
 
-func (x *ListTicketsResponse) GetTotalRejectedAmount() string {
+func (x *ListTicketsResponse) GetTotalRejectedAmountUsd() string {
 	if x != nil {
-		return x.TotalRejectedAmount
+		return x.TotalRejectedAmountUsd
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse) GetTotalRejectedAmountReportingCurrency() string {
+	if x != nil {
+		return x.TotalRejectedAmountReportingCurrency
 	}
 	return ""
 }
@@ -1152,32 +1200,37 @@ func (x *GetOperatorTicketResponse) GetWalletTransactionSummary() *GetOperatorTi
 }
 
 type ListTicketsResponse_Ticket struct {
-	state                protoimpl.MessageState `protogen:"open.v1"`
-	CreatedAt            *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	TicketId             int64                  `protobuf:"varint,2,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
-	UserId               int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	OperatorName         string                 `protobuf:"bytes,4,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	CompanyOperatorName  string                 `protobuf:"bytes,5,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
-	RetailerOperatorName string                 `protobuf:"bytes,6,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
-	SystemOperatorName   string                 `protobuf:"bytes,7,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
-	RealOperatorName     string                 `protobuf:"bytes,8,opt,name=real_operator_name,json=realOperatorName,proto3" json:"real_operator_name,omitempty"`
-	VipLevel             int32                  `protobuf:"varint,9,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
-	UserTags             []string               `protobuf:"bytes,10,rep,name=user_tags,json=userTags,proto3" json:"user_tags,omitempty"`
-	BeforeBalance        string                 `protobuf:"bytes,11,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
-	BeforeBalanceUsd     string                 `protobuf:"bytes,12,opt,name=before_balance_usd,json=beforeBalanceUsd,proto3" json:"before_balance_usd,omitempty"`
-	Amount               string                 `protobuf:"bytes,13,opt,name=amount,proto3" json:"amount,omitempty"`
-	AmountUsd            string                 `protobuf:"bytes,14,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
-	AfterBalance         string                 `protobuf:"bytes,15,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
-	AfterBalanceUsd      string                 `protobuf:"bytes,16,opt,name=after_balance_usd,json=afterBalanceUsd,proto3" json:"after_balance_usd,omitempty"`
-	Currency             string                 `protobuf:"bytes,17,opt,name=currency,proto3" json:"currency,omitempty"`
-	PaymentChannel       string                 `protobuf:"bytes,18,opt,name=payment_channel,json=paymentChannel,proto3" json:"payment_channel,omitempty"`
-	Protocol             string                 `protobuf:"bytes,19,opt,name=protocol,proto3" json:"protocol,omitempty"`
-	Fee                  string                 `protobuf:"bytes,20,opt,name=fee,proto3" json:"fee,omitempty"`
-	Status               string                 `protobuf:"bytes,21,opt,name=status,proto3" json:"status,omitempty"` // pending, approved, rejected, manual_payout, paying, paid, failed
-	ReviewerUsername     string                 `protobuf:"bytes,22,opt,name=reviewer_username,json=reviewerUsername,proto3" json:"reviewer_username,omitempty"`
-	ReviewDuration       int32                  `protobuf:"varint,23,opt,name=review_duration,json=reviewDuration,proto3" json:"review_duration,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	state                          protoimpl.MessageState `protogen:"open.v1"`
+	CreatedAt                      *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	TicketId                       int64                  `protobuf:"varint,2,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	UserId                         int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OperatorName                   string                 `protobuf:"bytes,4,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	CompanyOperatorName            string                 `protobuf:"bytes,5,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	RetailerOperatorName           string                 `protobuf:"bytes,6,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	SystemOperatorName             string                 `protobuf:"bytes,7,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
+	RealOperatorName               string                 `protobuf:"bytes,8,opt,name=real_operator_name,json=realOperatorName,proto3" json:"real_operator_name,omitempty"`
+	VipLevel                       int32                  `protobuf:"varint,9,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
+	UserTags                       []string               `protobuf:"bytes,10,rep,name=user_tags,json=userTags,proto3" json:"user_tags,omitempty"`
+	BeforeBalance                  string                 `protobuf:"bytes,11,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
+	BeforeBalanceUsd               string                 `protobuf:"bytes,12,opt,name=before_balance_usd,json=beforeBalanceUsd,proto3" json:"before_balance_usd,omitempty"`
+	BeforeBalanceReportingCurrency string                 `protobuf:"bytes,13,opt,name=before_balance_reporting_currency,json=beforeBalanceReportingCurrency,proto3" json:"before_balance_reporting_currency,omitempty"`
+	Amount                         string                 `protobuf:"bytes,14,opt,name=amount,proto3" json:"amount,omitempty"`
+	AmountUsd                      string                 `protobuf:"bytes,15,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
+	AmountReportingCurrency        string                 `protobuf:"bytes,16,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
+	AfterBalance                   string                 `protobuf:"bytes,17,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
+	AfterBalanceUsd                string                 `protobuf:"bytes,18,opt,name=after_balance_usd,json=afterBalanceUsd,proto3" json:"after_balance_usd,omitempty"`
+	AfterBalanceReportingCurrency  string                 `protobuf:"bytes,19,opt,name=after_balance_reporting_currency,json=afterBalanceReportingCurrency,proto3" json:"after_balance_reporting_currency,omitempty"`
+	Currency                       string                 `protobuf:"bytes,20,opt,name=currency,proto3" json:"currency,omitempty"`
+	PaymentChannel                 string                 `protobuf:"bytes,21,opt,name=payment_channel,json=paymentChannel,proto3" json:"payment_channel,omitempty"`
+	Protocol                       string                 `protobuf:"bytes,22,opt,name=protocol,proto3" json:"protocol,omitempty"`
+	Fee                            string                 `protobuf:"bytes,23,opt,name=fee,proto3" json:"fee,omitempty"`
+	FeeUsd                         string                 `protobuf:"bytes,24,opt,name=fee_usd,json=feeUsd,proto3" json:"fee_usd,omitempty"`
+	FeeReportingCurrency           string                 `protobuf:"bytes,25,opt,name=fee_reporting_currency,json=feeReportingCurrency,proto3" json:"fee_reporting_currency,omitempty"`
+	Status                         string                 `protobuf:"bytes,26,opt,name=status,proto3" json:"status,omitempty"` // pending, approved, rejected, manual_payout, paying, paid, failed
+	ReviewerUsername               string                 `protobuf:"bytes,27,opt,name=reviewer_username,json=reviewerUsername,proto3" json:"reviewer_username,omitempty"`
+	ReviewDuration                 int32                  `protobuf:"varint,28,opt,name=review_duration,json=reviewDuration,proto3" json:"review_duration,omitempty"`
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
 func (x *ListTicketsResponse_Ticket) Reset() {
@@ -1294,6 +1347,13 @@ func (x *ListTicketsResponse_Ticket) GetBeforeBalanceUsd() string {
 	return ""
 }
 
+func (x *ListTicketsResponse_Ticket) GetBeforeBalanceReportingCurrency() string {
+	if x != nil {
+		return x.BeforeBalanceReportingCurrency
+	}
+	return ""
+}
+
 func (x *ListTicketsResponse_Ticket) GetAmount() string {
 	if x != nil {
 		return x.Amount
@@ -1308,6 +1368,13 @@ func (x *ListTicketsResponse_Ticket) GetAmountUsd() string {
 	return ""
 }
 
+func (x *ListTicketsResponse_Ticket) GetAmountReportingCurrency() string {
+	if x != nil {
+		return x.AmountReportingCurrency
+	}
+	return ""
+}
+
 func (x *ListTicketsResponse_Ticket) GetAfterBalance() string {
 	if x != nil {
 		return x.AfterBalance
@@ -1318,6 +1385,13 @@ func (x *ListTicketsResponse_Ticket) GetAfterBalance() string {
 func (x *ListTicketsResponse_Ticket) GetAfterBalanceUsd() string {
 	if x != nil {
 		return x.AfterBalanceUsd
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse_Ticket) GetAfterBalanceReportingCurrency() string {
+	if x != nil {
+		return x.AfterBalanceReportingCurrency
 	}
 	return ""
 }
@@ -1346,6 +1420,20 @@ func (x *ListTicketsResponse_Ticket) GetProtocol() string {
 func (x *ListTicketsResponse_Ticket) GetFee() string {
 	if x != nil {
 		return x.Fee
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse_Ticket) GetFeeUsd() string {
+	if x != nil {
+		return x.FeeUsd
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse_Ticket) GetFeeReportingCurrency() string {
+	if x != nil {
+		return x.FeeReportingCurrency
 	}
 	return ""
 }
@@ -1616,18 +1704,21 @@ func (x *GetTicketResponse_UserInfo) GetLinkedAccounts() []string {
 }
 
 type GetTicketResponse_PaymentTransactionInfo struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	Currency       string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	Amount         string                 `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"`
-	AmountUsd      string                 `protobuf:"bytes,3,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
-	PaymentChannel string                 `protobuf:"bytes,4,opt,name=payment_channel,json=paymentChannel,proto3" json:"payment_channel,omitempty"`
-	Protocol       string                 `protobuf:"bytes,5,opt,name=protocol,proto3" json:"protocol,omitempty"`
-	Fee            string                 `protobuf:"bytes,6,opt,name=fee,proto3" json:"fee,omitempty"`
-	Extra          *structpb.Struct       `protobuf:"bytes,7,opt,name=extra,proto3" json:"extra,omitempty"`
-	Schema         *structpb.ListValue    `protobuf:"bytes,8,opt,name=schema,proto3" json:"schema,omitempty"`
-	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"open.v1"`
+	Currency                string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	Amount                  string                 `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	AmountUsd               string                 `protobuf:"bytes,3,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
+	AmountReportingCurrency string                 `protobuf:"bytes,4,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
+	PaymentChannel          string                 `protobuf:"bytes,5,opt,name=payment_channel,json=paymentChannel,proto3" json:"payment_channel,omitempty"`
+	Protocol                string                 `protobuf:"bytes,6,opt,name=protocol,proto3" json:"protocol,omitempty"`
+	Fee                     string                 `protobuf:"bytes,7,opt,name=fee,proto3" json:"fee,omitempty"`
+	FeeUsd                  string                 `protobuf:"bytes,8,opt,name=fee_usd,json=feeUsd,proto3" json:"fee_usd,omitempty"`
+	FeeReportingCurrency    string                 `protobuf:"bytes,9,opt,name=fee_reporting_currency,json=feeReportingCurrency,proto3" json:"fee_reporting_currency,omitempty"`
+	Extra                   *structpb.Struct       `protobuf:"bytes,10,opt,name=extra,proto3" json:"extra,omitempty"`
+	Schema                  *structpb.ListValue    `protobuf:"bytes,11,opt,name=schema,proto3" json:"schema,omitempty"`
+	CreatedAt               *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *GetTicketResponse_PaymentTransactionInfo) Reset() {
@@ -1681,6 +1772,13 @@ func (x *GetTicketResponse_PaymentTransactionInfo) GetAmountUsd() string {
 	return ""
 }
 
+func (x *GetTicketResponse_PaymentTransactionInfo) GetAmountReportingCurrency() string {
+	if x != nil {
+		return x.AmountReportingCurrency
+	}
+	return ""
+}
+
 func (x *GetTicketResponse_PaymentTransactionInfo) GetPaymentChannel() string {
 	if x != nil {
 		return x.PaymentChannel
@@ -1698,6 +1796,20 @@ func (x *GetTicketResponse_PaymentTransactionInfo) GetProtocol() string {
 func (x *GetTicketResponse_PaymentTransactionInfo) GetFee() string {
 	if x != nil {
 		return x.Fee
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_PaymentTransactionInfo) GetFeeUsd() string {
+	if x != nil {
+		return x.FeeUsd
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_PaymentTransactionInfo) GetFeeReportingCurrency() string {
+	if x != nil {
+		return x.FeeReportingCurrency
 	}
 	return ""
 }
@@ -1724,14 +1836,20 @@ func (x *GetTicketResponse_PaymentTransactionInfo) GetCreatedAt() *timestamppb.T
 }
 
 type GetTicketResponse_WalletTransactionInfo struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TransactionId int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	Amount        string                 `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"`
-	BeforeBalance string                 `protobuf:"bytes,3,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
-	AfterBalance  string                 `protobuf:"bytes,4,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                          protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId                  int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	Amount                         string                 `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	AmountUsd                      string                 `protobuf:"bytes,3,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
+	AmountReportingCurrency        string                 `protobuf:"bytes,4,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
+	BeforeBalance                  string                 `protobuf:"bytes,5,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
+	BeforeBalanceUsd               string                 `protobuf:"bytes,6,opt,name=before_balance_usd,json=beforeBalanceUsd,proto3" json:"before_balance_usd,omitempty"`
+	BeforeBalanceReportingCurrency string                 `protobuf:"bytes,7,opt,name=before_balance_reporting_currency,json=beforeBalanceReportingCurrency,proto3" json:"before_balance_reporting_currency,omitempty"`
+	AfterBalance                   string                 `protobuf:"bytes,8,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
+	AfterBalanceUsd                string                 `protobuf:"bytes,9,opt,name=after_balance_usd,json=afterBalanceUsd,proto3" json:"after_balance_usd,omitempty"`
+	AfterBalanceReportingCurrency  string                 `protobuf:"bytes,10,opt,name=after_balance_reporting_currency,json=afterBalanceReportingCurrency,proto3" json:"after_balance_reporting_currency,omitempty"`
+	CreatedAt                      *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
 func (x *GetTicketResponse_WalletTransactionInfo) Reset() {
@@ -1778,6 +1896,20 @@ func (x *GetTicketResponse_WalletTransactionInfo) GetAmount() string {
 	return ""
 }
 
+func (x *GetTicketResponse_WalletTransactionInfo) GetAmountUsd() string {
+	if x != nil {
+		return x.AmountUsd
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WalletTransactionInfo) GetAmountReportingCurrency() string {
+	if x != nil {
+		return x.AmountReportingCurrency
+	}
+	return ""
+}
+
 func (x *GetTicketResponse_WalletTransactionInfo) GetBeforeBalance() string {
 	if x != nil {
 		return x.BeforeBalance
@@ -1785,9 +1917,37 @@ func (x *GetTicketResponse_WalletTransactionInfo) GetBeforeBalance() string {
 	return ""
 }
 
+func (x *GetTicketResponse_WalletTransactionInfo) GetBeforeBalanceUsd() string {
+	if x != nil {
+		return x.BeforeBalanceUsd
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WalletTransactionInfo) GetBeforeBalanceReportingCurrency() string {
+	if x != nil {
+		return x.BeforeBalanceReportingCurrency
+	}
+	return ""
+}
+
 func (x *GetTicketResponse_WalletTransactionInfo) GetAfterBalance() string {
 	if x != nil {
 		return x.AfterBalance
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WalletTransactionInfo) GetAfterBalanceUsd() string {
+	if x != nil {
+		return x.AfterBalanceUsd
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WalletTransactionInfo) GetAfterBalanceReportingCurrency() string {
+	if x != nil {
+		return x.AfterBalanceReportingCurrency
 	}
 	return ""
 }
@@ -1800,16 +1960,20 @@ func (x *GetTicketResponse_WalletTransactionInfo) GetCreatedAt() *timestamppb.Ti
 }
 
 type GetTicketResponse_WalletTransactionSummary struct {
-	state                        protoimpl.MessageState `protogen:"open.v1"`
-	TotalDepositUsd              string                 `protobuf:"bytes,1,opt,name=total_deposit_usd,json=totalDepositUsd,proto3" json:"total_deposit_usd,omitempty"`
-	TotalWithdrawUsd             string                 `protobuf:"bytes,2,opt,name=total_withdraw_usd,json=totalWithdrawUsd,proto3" json:"total_withdraw_usd,omitempty"`
-	TotalDepositMinusWithdrawUsd string                 `protobuf:"bytes,3,opt,name=total_deposit_minus_withdraw_usd,json=totalDepositMinusWithdrawUsd,proto3" json:"total_deposit_minus_withdraw_usd,omitempty"`
-	ValidTurnoverUsd             string                 `protobuf:"bytes,4,opt,name=valid_turnover_usd,json=validTurnoverUsd,proto3" json:"valid_turnover_usd,omitempty"`
-	TotalDepositCount            int32                  `protobuf:"varint,5,opt,name=total_deposit_count,json=totalDepositCount,proto3" json:"total_deposit_count,omitempty"`
-	TotalWithdrawCount           int32                  `protobuf:"varint,6,opt,name=total_withdraw_count,json=totalWithdrawCount,proto3" json:"total_withdraw_count,omitempty"`
-	TodayWithdrawCount           int32                  `protobuf:"varint,7,opt,name=today_withdraw_count,json=todayWithdrawCount,proto3" json:"today_withdraw_count,omitempty"`
-	unknownFields                protoimpl.UnknownFields
-	sizeCache                    protoimpl.SizeCache
+	state                                      protoimpl.MessageState `protogen:"open.v1"`
+	TotalDepositUsd                            string                 `protobuf:"bytes,1,opt,name=total_deposit_usd,json=totalDepositUsd,proto3" json:"total_deposit_usd,omitempty"`
+	TotalDepositReportingCurrency              string                 `protobuf:"bytes,2,opt,name=total_deposit_reporting_currency,json=totalDepositReportingCurrency,proto3" json:"total_deposit_reporting_currency,omitempty"`
+	TotalWithdrawUsd                           string                 `protobuf:"bytes,3,opt,name=total_withdraw_usd,json=totalWithdrawUsd,proto3" json:"total_withdraw_usd,omitempty"`
+	TotalWithdrawReportingCurrency             string                 `protobuf:"bytes,4,opt,name=total_withdraw_reporting_currency,json=totalWithdrawReportingCurrency,proto3" json:"total_withdraw_reporting_currency,omitempty"`
+	TotalDepositMinusWithdrawUsd               string                 `protobuf:"bytes,5,opt,name=total_deposit_minus_withdraw_usd,json=totalDepositMinusWithdrawUsd,proto3" json:"total_deposit_minus_withdraw_usd,omitempty"`
+	TotalDepositMinusWithdrawReportingCurrency string                 `protobuf:"bytes,6,opt,name=total_deposit_minus_withdraw_reporting_currency,json=totalDepositMinusWithdrawReportingCurrency,proto3" json:"total_deposit_minus_withdraw_reporting_currency,omitempty"`
+	ValidTurnoverUsd                           string                 `protobuf:"bytes,7,opt,name=valid_turnover_usd,json=validTurnoverUsd,proto3" json:"valid_turnover_usd,omitempty"`
+	ValidTurnoverReportingCurrency             string                 `protobuf:"bytes,8,opt,name=valid_turnover_reporting_currency,json=validTurnoverReportingCurrency,proto3" json:"valid_turnover_reporting_currency,omitempty"`
+	TotalDepositCount                          int32                  `protobuf:"varint,9,opt,name=total_deposit_count,json=totalDepositCount,proto3" json:"total_deposit_count,omitempty"`
+	TotalWithdrawCount                         int32                  `protobuf:"varint,10,opt,name=total_withdraw_count,json=totalWithdrawCount,proto3" json:"total_withdraw_count,omitempty"`
+	TodayWithdrawCount                         int32                  `protobuf:"varint,11,opt,name=today_withdraw_count,json=todayWithdrawCount,proto3" json:"today_withdraw_count,omitempty"`
+	unknownFields                              protoimpl.UnknownFields
+	sizeCache                                  protoimpl.SizeCache
 }
 
 func (x *GetTicketResponse_WalletTransactionSummary) Reset() {
@@ -1849,9 +2013,23 @@ func (x *GetTicketResponse_WalletTransactionSummary) GetTotalDepositUsd() string
 	return ""
 }
 
+func (x *GetTicketResponse_WalletTransactionSummary) GetTotalDepositReportingCurrency() string {
+	if x != nil {
+		return x.TotalDepositReportingCurrency
+	}
+	return ""
+}
+
 func (x *GetTicketResponse_WalletTransactionSummary) GetTotalWithdrawUsd() string {
 	if x != nil {
 		return x.TotalWithdrawUsd
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WalletTransactionSummary) GetTotalWithdrawReportingCurrency() string {
+	if x != nil {
+		return x.TotalWithdrawReportingCurrency
 	}
 	return ""
 }
@@ -1863,9 +2041,23 @@ func (x *GetTicketResponse_WalletTransactionSummary) GetTotalDepositMinusWithdra
 	return ""
 }
 
+func (x *GetTicketResponse_WalletTransactionSummary) GetTotalDepositMinusWithdrawReportingCurrency() string {
+	if x != nil {
+		return x.TotalDepositMinusWithdrawReportingCurrency
+	}
+	return ""
+}
+
 func (x *GetTicketResponse_WalletTransactionSummary) GetValidTurnoverUsd() string {
 	if x != nil {
 		return x.ValidTurnoverUsd
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WalletTransactionSummary) GetValidTurnoverReportingCurrency() string {
+	if x != nil {
+		return x.ValidTurnoverReportingCurrency
 	}
 	return ""
 }
@@ -2068,18 +2260,24 @@ func (x *GetOperatorTicketResponse_Comment) GetCreatedAt() *timestamppb.Timestam
 }
 
 type GetOperatorTicketResponse_PaymentTransactionInfo struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	Protocol      string                 `protobuf:"bytes,2,opt,name=protocol,proto3" json:"protocol,omitempty"`
-	Address       string                 `protobuf:"bytes,3,opt,name=address,proto3" json:"address,omitempty"`
-	Psp           string                 `protobuf:"bytes,4,opt,name=psp,proto3" json:"psp,omitempty"`
-	Amount        string                 `protobuf:"bytes,5,opt,name=amount,proto3" json:"amount,omitempty"`
-	AmountSent    string                 `protobuf:"bytes,6,opt,name=amount_sent,json=amountSent,proto3" json:"amount_sent,omitempty"`
-	Gas           string                 `protobuf:"bytes,7,opt,name=gas,proto3" json:"gas,omitempty"`
-	Fee           string                 `protobuf:"bytes,8,opt,name=fee,proto3" json:"fee,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                       protoimpl.MessageState `protogen:"open.v1"`
+	Currency                    string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	Protocol                    string                 `protobuf:"bytes,2,opt,name=protocol,proto3" json:"protocol,omitempty"`
+	Address                     string                 `protobuf:"bytes,3,opt,name=address,proto3" json:"address,omitempty"`
+	Psp                         string                 `protobuf:"bytes,4,opt,name=psp,proto3" json:"psp,omitempty"`
+	Amount                      string                 `protobuf:"bytes,5,opt,name=amount,proto3" json:"amount,omitempty"`
+	AmountUsd                   string                 `protobuf:"bytes,6,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
+	AmountReportingCurrency     string                 `protobuf:"bytes,7,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
+	AmountSent                  string                 `protobuf:"bytes,8,opt,name=amount_sent,json=amountSent,proto3" json:"amount_sent,omitempty"`
+	AmountSentUsd               string                 `protobuf:"bytes,9,opt,name=amount_sent_usd,json=amountSentUsd,proto3" json:"amount_sent_usd,omitempty"`
+	AmountSentReportingCurrency string                 `protobuf:"bytes,10,opt,name=amount_sent_reporting_currency,json=amountSentReportingCurrency,proto3" json:"amount_sent_reporting_currency,omitempty"`
+	Gas                         string                 `protobuf:"bytes,11,opt,name=gas,proto3" json:"gas,omitempty"`
+	Fee                         string                 `protobuf:"bytes,12,opt,name=fee,proto3" json:"fee,omitempty"`
+	FeeUsd                      string                 `protobuf:"bytes,13,opt,name=fee_usd,json=feeUsd,proto3" json:"fee_usd,omitempty"`
+	FeeReportingCurrency        string                 `protobuf:"bytes,14,opt,name=fee_reporting_currency,json=feeReportingCurrency,proto3" json:"fee_reporting_currency,omitempty"`
+	CreatedAt                   *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *GetOperatorTicketResponse_PaymentTransactionInfo) Reset() {
@@ -2147,9 +2345,37 @@ func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetAmount() string {
 	return ""
 }
 
+func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetAmountUsd() string {
+	if x != nil {
+		return x.AmountUsd
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetAmountReportingCurrency() string {
+	if x != nil {
+		return x.AmountReportingCurrency
+	}
+	return ""
+}
+
 func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetAmountSent() string {
 	if x != nil {
 		return x.AmountSent
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetAmountSentUsd() string {
+	if x != nil {
+		return x.AmountSentUsd
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetAmountSentReportingCurrency() string {
+	if x != nil {
+		return x.AmountSentReportingCurrency
 	}
 	return ""
 }
@@ -2168,6 +2394,20 @@ func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetFee() string {
 	return ""
 }
 
+func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetFeeUsd() string {
+	if x != nil {
+		return x.FeeUsd
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetFeeReportingCurrency() string {
+	if x != nil {
+		return x.FeeReportingCurrency
+	}
+	return ""
+}
+
 func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
@@ -2176,10 +2416,12 @@ func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetCreatedAt() *times
 }
 
 type GetOperatorTicketResponse_WalletBalanceInfo struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Balance       string                 `protobuf:"bytes,2,opt,name=balance,proto3" json:"balance,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"open.v1"`
+	Balance                  string                 `protobuf:"bytes,1,opt,name=balance,proto3" json:"balance,omitempty"`
+	BalanceUsd               string                 `protobuf:"bytes,2,opt,name=balance_usd,json=balanceUsd,proto3" json:"balance_usd,omitempty"`
+	BalanceReportingCurrency string                 `protobuf:"bytes,3,opt,name=balance_reporting_currency,json=balanceReportingCurrency,proto3" json:"balance_reporting_currency,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *GetOperatorTicketResponse_WalletBalanceInfo) Reset() {
@@ -2219,13 +2461,33 @@ func (x *GetOperatorTicketResponse_WalletBalanceInfo) GetBalance() string {
 	return ""
 }
 
+func (x *GetOperatorTicketResponse_WalletBalanceInfo) GetBalanceUsd() string {
+	if x != nil {
+		return x.BalanceUsd
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletBalanceInfo) GetBalanceReportingCurrency() string {
+	if x != nil {
+		return x.BalanceReportingCurrency
+	}
+	return ""
+}
+
 type GetOperatorTicketResponse_WalletTransactionInfo struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	BeforeBalance string                 `protobuf:"bytes,1,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
-	AfterBalance  string                 `protobuf:"bytes,2,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
-	Amount        string                 `protobuf:"bytes,3,opt,name=amount,proto3" json:"amount,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                          protoimpl.MessageState `protogen:"open.v1"`
+	BeforeBalance                  string                 `protobuf:"bytes,1,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
+	BeforeBalanceUsd               string                 `protobuf:"bytes,2,opt,name=before_balance_usd,json=beforeBalanceUsd,proto3" json:"before_balance_usd,omitempty"`
+	BeforeBalanceReportingCurrency string                 `protobuf:"bytes,3,opt,name=before_balance_reporting_currency,json=beforeBalanceReportingCurrency,proto3" json:"before_balance_reporting_currency,omitempty"`
+	AfterBalance                   string                 `protobuf:"bytes,4,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
+	AfterBalanceUsd                string                 `protobuf:"bytes,5,opt,name=after_balance_usd,json=afterBalanceUsd,proto3" json:"after_balance_usd,omitempty"`
+	AfterBalanceReportingCurrency  string                 `protobuf:"bytes,6,opt,name=after_balance_reporting_currency,json=afterBalanceReportingCurrency,proto3" json:"after_balance_reporting_currency,omitempty"`
+	Amount                         string                 `protobuf:"bytes,7,opt,name=amount,proto3" json:"amount,omitempty"`
+	AmountUsd                      string                 `protobuf:"bytes,8,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
+	AmountReportingCurrency        string                 `protobuf:"bytes,9,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
 func (x *GetOperatorTicketResponse_WalletTransactionInfo) Reset() {
@@ -2265,9 +2527,37 @@ func (x *GetOperatorTicketResponse_WalletTransactionInfo) GetBeforeBalance() str
 	return ""
 }
 
+func (x *GetOperatorTicketResponse_WalletTransactionInfo) GetBeforeBalanceUsd() string {
+	if x != nil {
+		return x.BeforeBalanceUsd
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionInfo) GetBeforeBalanceReportingCurrency() string {
+	if x != nil {
+		return x.BeforeBalanceReportingCurrency
+	}
+	return ""
+}
+
 func (x *GetOperatorTicketResponse_WalletTransactionInfo) GetAfterBalance() string {
 	if x != nil {
 		return x.AfterBalance
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionInfo) GetAfterBalanceUsd() string {
+	if x != nil {
+		return x.AfterBalanceUsd
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionInfo) GetAfterBalanceReportingCurrency() string {
+	if x != nil {
+		return x.AfterBalanceReportingCurrency
 	}
 	return ""
 }
@@ -2279,18 +2569,40 @@ func (x *GetOperatorTicketResponse_WalletTransactionInfo) GetAmount() string {
 	return ""
 }
 
+func (x *GetOperatorTicketResponse_WalletTransactionInfo) GetAmountUsd() string {
+	if x != nil {
+		return x.AmountUsd
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionInfo) GetAmountReportingCurrency() string {
+	if x != nil {
+		return x.AmountReportingCurrency
+	}
+	return ""
+}
+
 type GetOperatorTicketResponse_WalletTransactionSummary struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	TotalWithdrawUsd string                 `protobuf:"bytes,1,opt,name=total_withdraw_usd,json=totalWithdrawUsd,proto3" json:"total_withdraw_usd,omitempty"`
-	TotalDepositUsd  string                 `protobuf:"bytes,2,opt,name=total_deposit_usd,json=totalDepositUsd,proto3" json:"total_deposit_usd,omitempty"`
-	TotalTransferUsd string                 `protobuf:"bytes,3,opt,name=total_transfer_usd,json=totalTransferUsd,proto3" json:"total_transfer_usd,omitempty"`
-	TotalSwapOutUsd  string                 `protobuf:"bytes,4,opt,name=total_swap_out_usd,json=totalSwapOutUsd,proto3" json:"total_swap_out_usd,omitempty"`
-	TotalSwapInUsd   string                 `protobuf:"bytes,5,opt,name=total_swap_in_usd,json=totalSwapInUsd,proto3" json:"total_swap_in_usd,omitempty"`
-	TotalFreezeUsd   string                 `protobuf:"bytes,6,opt,name=total_freeze_usd,json=totalFreezeUsd,proto3" json:"total_freeze_usd,omitempty"`
-	TotalWriteOffUsd string                 `protobuf:"bytes,7,opt,name=total_write_off_usd,json=totalWriteOffUsd,proto3" json:"total_write_off_usd,omitempty"`
-	TotalPendingUsd  string                 `protobuf:"bytes,8,opt,name=total_pending_usd,json=totalPendingUsd,proto3" json:"total_pending_usd,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                          protoimpl.MessageState `protogen:"open.v1"`
+	TotalWithdrawUsd               string                 `protobuf:"bytes,1,opt,name=total_withdraw_usd,json=totalWithdrawUsd,proto3" json:"total_withdraw_usd,omitempty"`
+	TotalWithdrawReportingCurrency string                 `protobuf:"bytes,2,opt,name=total_withdraw_reporting_currency,json=totalWithdrawReportingCurrency,proto3" json:"total_withdraw_reporting_currency,omitempty"`
+	TotalDepositUsd                string                 `protobuf:"bytes,3,opt,name=total_deposit_usd,json=totalDepositUsd,proto3" json:"total_deposit_usd,omitempty"`
+	TotalDepositReportingCurrency  string                 `protobuf:"bytes,4,opt,name=total_deposit_reporting_currency,json=totalDepositReportingCurrency,proto3" json:"total_deposit_reporting_currency,omitempty"`
+	TotalTransferUsd               string                 `protobuf:"bytes,5,opt,name=total_transfer_usd,json=totalTransferUsd,proto3" json:"total_transfer_usd,omitempty"`
+	TotalTransferReportingCurrency string                 `protobuf:"bytes,6,opt,name=total_transfer_reporting_currency,json=totalTransferReportingCurrency,proto3" json:"total_transfer_reporting_currency,omitempty"`
+	TotalSwapOutUsd                string                 `protobuf:"bytes,7,opt,name=total_swap_out_usd,json=totalSwapOutUsd,proto3" json:"total_swap_out_usd,omitempty"`
+	TotalSwapOutReportingCurrency  string                 `protobuf:"bytes,8,opt,name=total_swap_out_reporting_currency,json=totalSwapOutReportingCurrency,proto3" json:"total_swap_out_reporting_currency,omitempty"`
+	TotalSwapInUsd                 string                 `protobuf:"bytes,9,opt,name=total_swap_in_usd,json=totalSwapInUsd,proto3" json:"total_swap_in_usd,omitempty"`
+	TotalSwapInReportingCurrency   string                 `protobuf:"bytes,10,opt,name=total_swap_in_reporting_currency,json=totalSwapInReportingCurrency,proto3" json:"total_swap_in_reporting_currency,omitempty"`
+	TotalFreezeUsd                 string                 `protobuf:"bytes,11,opt,name=total_freeze_usd,json=totalFreezeUsd,proto3" json:"total_freeze_usd,omitempty"`
+	TotalFreezeReportingCurrency   string                 `protobuf:"bytes,12,opt,name=total_freeze_reporting_currency,json=totalFreezeReportingCurrency,proto3" json:"total_freeze_reporting_currency,omitempty"`
+	TotalWriteOffUsd               string                 `protobuf:"bytes,13,opt,name=total_write_off_usd,json=totalWriteOffUsd,proto3" json:"total_write_off_usd,omitempty"`
+	TotalWriteOffReportingCurrency string                 `protobuf:"bytes,14,opt,name=total_write_off_reporting_currency,json=totalWriteOffReportingCurrency,proto3" json:"total_write_off_reporting_currency,omitempty"`
+	TotalPendingUsd                string                 `protobuf:"bytes,15,opt,name=total_pending_usd,json=totalPendingUsd,proto3" json:"total_pending_usd,omitempty"`
+	TotalPendingReportingCurrency  string                 `protobuf:"bytes,16,opt,name=total_pending_reporting_currency,json=totalPendingReportingCurrency,proto3" json:"total_pending_reporting_currency,omitempty"`
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
 func (x *GetOperatorTicketResponse_WalletTransactionSummary) Reset() {
@@ -2330,9 +2642,23 @@ func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalWithdrawUsd
 	return ""
 }
 
+func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalWithdrawReportingCurrency() string {
+	if x != nil {
+		return x.TotalWithdrawReportingCurrency
+	}
+	return ""
+}
+
 func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalDepositUsd() string {
 	if x != nil {
 		return x.TotalDepositUsd
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalDepositReportingCurrency() string {
+	if x != nil {
+		return x.TotalDepositReportingCurrency
 	}
 	return ""
 }
@@ -2344,9 +2670,23 @@ func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalTransferUsd
 	return ""
 }
 
+func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalTransferReportingCurrency() string {
+	if x != nil {
+		return x.TotalTransferReportingCurrency
+	}
+	return ""
+}
+
 func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalSwapOutUsd() string {
 	if x != nil {
 		return x.TotalSwapOutUsd
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalSwapOutReportingCurrency() string {
+	if x != nil {
+		return x.TotalSwapOutReportingCurrency
 	}
 	return ""
 }
@@ -2358,9 +2698,23 @@ func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalSwapInUsd()
 	return ""
 }
 
+func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalSwapInReportingCurrency() string {
+	if x != nil {
+		return x.TotalSwapInReportingCurrency
+	}
+	return ""
+}
+
 func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalFreezeUsd() string {
 	if x != nil {
 		return x.TotalFreezeUsd
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalFreezeReportingCurrency() string {
+	if x != nil {
+		return x.TotalFreezeReportingCurrency
 	}
 	return ""
 }
@@ -2372,9 +2726,23 @@ func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalWriteOffUsd
 	return ""
 }
 
+func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalWriteOffReportingCurrency() string {
+	if x != nil {
+		return x.TotalWriteOffReportingCurrency
+	}
+	return ""
+}
+
 func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalPendingUsd() string {
 	if x != nil {
 		return x.TotalPendingUsd
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalPendingReportingCurrency() string {
+	if x != nil {
+		return x.TotalPendingReportingCurrency
 	}
 	return ""
 }
@@ -2452,26 +2820,32 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xc4\f\n" +
+	"_page_size\"\xfa\x12\n" +
 	"\x13ListTicketsResponse\x12K\n" +
 	"\atickets\x18\x01 \x03(\v21.api.review.service.v1.ListTicketsResponse.TicketR\atickets\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x1f\n" +
 	"\vtotal_count\x18\x04 \x01(\x05R\n" +
-	"totalCount\x12!\n" +
-	"\ftotal_amount\x18\x05 \x01(\tR\vtotalAmount\x12.\n" +
-	"\x13total_pending_count\x18\x06 \x01(\x05R\x11totalPendingCount\x120\n" +
-	"\x14total_pending_amount\x18\a \x01(\tR\x12totalPendingAmount\x12,\n" +
-	"\x12total_paying_count\x18\b \x01(\x05R\x10totalPayingCount\x12.\n" +
-	"\x13total_paying_amount\x18\t \x01(\tR\x11totalPayingAmount\x12(\n" +
-	"\x10total_paid_count\x18\n" +
-	" \x01(\x05R\x0etotalPaidCount\x12*\n" +
-	"\x11total_paid_amount\x18\v \x01(\tR\x0ftotalPaidAmount\x12,\n" +
-	"\x12total_failed_count\x18\f \x01(\x05R\x10totalFailedCount\x12.\n" +
-	"\x13total_failed_amount\x18\r \x01(\tR\x11totalFailedAmount\x120\n" +
-	"\x14total_rejected_count\x18\x0e \x01(\x05R\x12totalRejectedCount\x122\n" +
-	"\x15total_rejected_amount\x18\x0f \x01(\tR\x13totalRejectedAmount\x12.\n" +
-	"\x13average_review_time\x18\x10 \x01(\x05R\x11averageReviewTime\x1a\xe0\x06\n" +
+	"totalCount\x12(\n" +
+	"\x10total_amount_usd\x18\x05 \x01(\tR\x0etotalAmountUsd\x12E\n" +
+	"\x1ftotal_amount_reporting_currency\x18\x06 \x01(\tR\x1ctotalAmountReportingCurrency\x12.\n" +
+	"\x13total_pending_count\x18\a \x01(\x05R\x11totalPendingCount\x127\n" +
+	"\x18total_pending_amount_usd\x18\b \x01(\tR\x15totalPendingAmountUsd\x12T\n" +
+	"'total_pending_amount_reporting_currency\x18\t \x01(\tR#totalPendingAmountReportingCurrency\x12,\n" +
+	"\x12total_paying_count\x18\n" +
+	" \x01(\x05R\x10totalPayingCount\x125\n" +
+	"\x17total_paying_amount_usd\x18\v \x01(\tR\x14totalPayingAmountUsd\x12R\n" +
+	"&total_paying_amount_reporting_currency\x18\f \x01(\tR\"totalPayingAmountReportingCurrency\x12(\n" +
+	"\x10total_paid_count\x18\r \x01(\x05R\x0etotalPaidCount\x121\n" +
+	"\x15total_paid_amount_usd\x18\x0e \x01(\tR\x12totalPaidAmountUsd\x12N\n" +
+	"$total_paid_amount_reporting_currency\x18\x0f \x01(\tR totalPaidAmountReportingCurrency\x12,\n" +
+	"\x12total_failed_count\x18\x10 \x01(\x05R\x10totalFailedCount\x125\n" +
+	"\x17total_failed_amount_usd\x18\x11 \x01(\tR\x14totalFailedAmountUsd\x12R\n" +
+	"&total_failed_amount_reporting_currency\x18\x12 \x01(\tR\"totalFailedAmountReportingCurrency\x120\n" +
+	"\x14total_rejected_count\x18\x13 \x01(\x05R\x12totalRejectedCount\x129\n" +
+	"\x19total_rejected_amount_usd\x18\x14 \x01(\tR\x16totalRejectedAmountUsd\x12V\n" +
+	"(total_rejected_amount_reporting_currency\x18\x15 \x01(\tR$totalRejectedAmountReportingCurrency\x12.\n" +
+	"\x13average_review_time\x18\x16 \x01(\x05R\x11averageReviewTime\x1a\xff\b\n" +
 	"\x06Ticket\x129\n" +
 	"\n" +
 	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1b\n" +
@@ -2486,24 +2860,29 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\tuser_tags\x18\n" +
 	" \x03(\tR\buserTags\x12%\n" +
 	"\x0ebefore_balance\x18\v \x01(\tR\rbeforeBalance\x12,\n" +
-	"\x12before_balance_usd\x18\f \x01(\tR\x10beforeBalanceUsd\x12\x16\n" +
-	"\x06amount\x18\r \x01(\tR\x06amount\x12\x1d\n" +
+	"\x12before_balance_usd\x18\f \x01(\tR\x10beforeBalanceUsd\x12I\n" +
+	"!before_balance_reporting_currency\x18\r \x01(\tR\x1ebeforeBalanceReportingCurrency\x12\x16\n" +
+	"\x06amount\x18\x0e \x01(\tR\x06amount\x12\x1d\n" +
 	"\n" +
-	"amount_usd\x18\x0e \x01(\tR\tamountUsd\x12#\n" +
-	"\rafter_balance\x18\x0f \x01(\tR\fafterBalance\x12*\n" +
-	"\x11after_balance_usd\x18\x10 \x01(\tR\x0fafterBalanceUsd\x12\x1a\n" +
-	"\bcurrency\x18\x11 \x01(\tR\bcurrency\x12'\n" +
-	"\x0fpayment_channel\x18\x12 \x01(\tR\x0epaymentChannel\x12\x1a\n" +
-	"\bprotocol\x18\x13 \x01(\tR\bprotocol\x12\x10\n" +
-	"\x03fee\x18\x14 \x01(\tR\x03fee\x12\x16\n" +
-	"\x06status\x18\x15 \x01(\tR\x06status\x12+\n" +
-	"\x11reviewer_username\x18\x16 \x01(\tR\x10reviewerUsername\x12'\n" +
-	"\x0freview_duration\x18\x17 \x01(\x05R\x0ereviewDuration\"\xbc\x01\n" +
+	"amount_usd\x18\x0f \x01(\tR\tamountUsd\x12:\n" +
+	"\x19amount_reporting_currency\x18\x10 \x01(\tR\x17amountReportingCurrency\x12#\n" +
+	"\rafter_balance\x18\x11 \x01(\tR\fafterBalance\x12*\n" +
+	"\x11after_balance_usd\x18\x12 \x01(\tR\x0fafterBalanceUsd\x12G\n" +
+	" after_balance_reporting_currency\x18\x13 \x01(\tR\x1dafterBalanceReportingCurrency\x12\x1a\n" +
+	"\bcurrency\x18\x14 \x01(\tR\bcurrency\x12'\n" +
+	"\x0fpayment_channel\x18\x15 \x01(\tR\x0epaymentChannel\x12\x1a\n" +
+	"\bprotocol\x18\x16 \x01(\tR\bprotocol\x12\x10\n" +
+	"\x03fee\x18\x17 \x01(\tR\x03fee\x12\x17\n" +
+	"\afee_usd\x18\x18 \x01(\tR\x06feeUsd\x124\n" +
+	"\x16fee_reporting_currency\x18\x19 \x01(\tR\x14feeReportingCurrency\x12\x16\n" +
+	"\x06status\x18\x1a \x01(\tR\x06status\x12+\n" +
+	"\x11reviewer_username\x18\x1b \x01(\tR\x10reviewerUsername\x12'\n" +
+	"\x0freview_duration\x18\x1c \x01(\x05R\x0ereviewDuration\"\xbc\x01\n" +
 	"\x10GetTicketRequest\x12\x1b\n" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12.\n" +
 	"\x10include_comments\x18\x02 \x01(\bH\x00R\x0fincludeComments\x88\x01\x01\x12F\n" +
 	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\x13\n" +
-	"\x11_include_comments\"\xb5\x11\n" +
+	"\x11_include_comments\"\xcd\x17\n" +
 	"\x11GetTicketResponse\x12G\n" +
 	"\x06ticket\x18\x01 \x01(\v2/.api.review.service.v1.GetTicketResponse.TicketR\x06ticket\x12L\n" +
 	"\bcomments\x18\x02 \x03(\v20.api.review.service.v1.GetTicketResponse.CommentR\bcomments\x12N\n" +
@@ -2532,39 +2911,56 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1b\n" +
 	"\tvip_level\x18\x02 \x01(\x05R\bvipLevel\x12\x1b\n" +
 	"\tuser_tags\x18\x03 \x03(\tR\buserTags\x12'\n" +
-	"\x0flinked_accounts\x18\x04 \x03(\tR\x0elinkedAccounts\x1a\xe0\x02\n" +
+	"\x0flinked_accounts\x18\x04 \x03(\tR\x0elinkedAccounts\x1a\xeb\x03\n" +
 	"\x16PaymentTransactionInfo\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x16\n" +
 	"\x06amount\x18\x02 \x01(\tR\x06amount\x12\x1d\n" +
 	"\n" +
-	"amount_usd\x18\x03 \x01(\tR\tamountUsd\x12'\n" +
-	"\x0fpayment_channel\x18\x04 \x01(\tR\x0epaymentChannel\x12\x1a\n" +
-	"\bprotocol\x18\x05 \x01(\tR\bprotocol\x12\x10\n" +
-	"\x03fee\x18\x06 \x01(\tR\x03fee\x12-\n" +
-	"\x05extra\x18\a \x01(\v2\x17.google.protobuf.StructR\x05extra\x122\n" +
-	"\x06schema\x18\b \x01(\v2\x1a.google.protobuf.ListValueR\x06schema\x129\n" +
+	"amount_usd\x18\x03 \x01(\tR\tamountUsd\x12:\n" +
+	"\x19amount_reporting_currency\x18\x04 \x01(\tR\x17amountReportingCurrency\x12'\n" +
+	"\x0fpayment_channel\x18\x05 \x01(\tR\x0epaymentChannel\x12\x1a\n" +
+	"\bprotocol\x18\x06 \x01(\tR\bprotocol\x12\x10\n" +
+	"\x03fee\x18\a \x01(\tR\x03fee\x12\x17\n" +
+	"\afee_usd\x18\b \x01(\tR\x06feeUsd\x124\n" +
+	"\x16fee_reporting_currency\x18\t \x01(\tR\x14feeReportingCurrency\x12-\n" +
+	"\x05extra\x18\n" +
+	" \x01(\v2\x17.google.protobuf.StructR\x05extra\x122\n" +
+	"\x06schema\x18\v \x01(\v2\x1a.google.protobuf.ListValueR\x06schema\x129\n" +
 	"\n" +
-	"created_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a\xdd\x01\n" +
+	"created_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a\xa6\x04\n" +
 	"\x15WalletTransactionInfo\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x16\n" +
-	"\x06amount\x18\x02 \x01(\tR\x06amount\x12%\n" +
-	"\x0ebefore_balance\x18\x03 \x01(\tR\rbeforeBalance\x12#\n" +
-	"\rafter_balance\x18\x04 \x01(\tR\fafterBalance\x129\n" +
+	"\x06amount\x18\x02 \x01(\tR\x06amount\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a\xfe\x02\n" +
+	"amount_usd\x18\x03 \x01(\tR\tamountUsd\x12:\n" +
+	"\x19amount_reporting_currency\x18\x04 \x01(\tR\x17amountReportingCurrency\x12%\n" +
+	"\x0ebefore_balance\x18\x05 \x01(\tR\rbeforeBalance\x12,\n" +
+	"\x12before_balance_usd\x18\x06 \x01(\tR\x10beforeBalanceUsd\x12I\n" +
+	"!before_balance_reporting_currency\x18\a \x01(\tR\x1ebeforeBalanceReportingCurrency\x12#\n" +
+	"\rafter_balance\x18\b \x01(\tR\fafterBalance\x12*\n" +
+	"\x11after_balance_usd\x18\t \x01(\tR\x0fafterBalanceUsd\x12G\n" +
+	" after_balance_reporting_currency\x18\n" +
+	" \x01(\tR\x1dafterBalanceReportingCurrency\x129\n" +
+	"\n" +
+	"created_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a\xc2\x05\n" +
 	"\x18WalletTransactionSummary\x12*\n" +
-	"\x11total_deposit_usd\x18\x01 \x01(\tR\x0ftotalDepositUsd\x12,\n" +
-	"\x12total_withdraw_usd\x18\x02 \x01(\tR\x10totalWithdrawUsd\x12F\n" +
-	" total_deposit_minus_withdraw_usd\x18\x03 \x01(\tR\x1ctotalDepositMinusWithdrawUsd\x12,\n" +
-	"\x12valid_turnover_usd\x18\x04 \x01(\tR\x10validTurnoverUsd\x12.\n" +
-	"\x13total_deposit_count\x18\x05 \x01(\x05R\x11totalDepositCount\x120\n" +
-	"\x14total_withdraw_count\x18\x06 \x01(\x05R\x12totalWithdrawCount\x120\n" +
-	"\x14today_withdraw_count\x18\a \x01(\x05R\x12todayWithdrawCount\"\xc4\x01\n" +
+	"\x11total_deposit_usd\x18\x01 \x01(\tR\x0ftotalDepositUsd\x12G\n" +
+	" total_deposit_reporting_currency\x18\x02 \x01(\tR\x1dtotalDepositReportingCurrency\x12,\n" +
+	"\x12total_withdraw_usd\x18\x03 \x01(\tR\x10totalWithdrawUsd\x12I\n" +
+	"!total_withdraw_reporting_currency\x18\x04 \x01(\tR\x1etotalWithdrawReportingCurrency\x12F\n" +
+	" total_deposit_minus_withdraw_usd\x18\x05 \x01(\tR\x1ctotalDepositMinusWithdrawUsd\x12c\n" +
+	"/total_deposit_minus_withdraw_reporting_currency\x18\x06 \x01(\tR*totalDepositMinusWithdrawReportingCurrency\x12,\n" +
+	"\x12valid_turnover_usd\x18\a \x01(\tR\x10validTurnoverUsd\x12I\n" +
+	"!valid_turnover_reporting_currency\x18\b \x01(\tR\x1evalidTurnoverReportingCurrency\x12.\n" +
+	"\x13total_deposit_count\x18\t \x01(\x05R\x11totalDepositCount\x120\n" +
+	"\x14total_withdraw_count\x18\n" +
+	" \x01(\x05R\x12totalWithdrawCount\x120\n" +
+	"\x14today_withdraw_count\x18\v \x01(\x05R\x12todayWithdrawCount\"\xc4\x01\n" +
 	"\x18GetOperatorTicketRequest\x12\x1b\n" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12.\n" +
 	"\x10include_comments\x18\x02 \x01(\bH\x00R\x0fincludeComments\x88\x01\x01\x12F\n" +
 	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\x13\n" +
-	"\x11_include_comments\"\x83\x10\n" +
+	"\x11_include_comments\"\x91\x1a\n" +
 	"\x19GetOperatorTicketResponse\x12O\n" +
 	"\x06ticket\x18\x01 \x01(\v27.api.review.service.v1.GetOperatorTicketResponse.TicketR\x06ticket\x12T\n" +
 	"\bcomments\x18\x02 \x03(\v28.api.review.service.v1.GetOperatorTicketResponse.CommentR\bcomments\x12\x81\x01\n" +
@@ -2588,34 +2984,61 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\x0fauthor_username\x18\x03 \x01(\tR\x0eauthorUsername\x12\x18\n" +
 	"\acontent\x18\x04 \x01(\tR\acontent\x129\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a\x94\x02\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a\xab\x04\n" +
 	"\x16PaymentTransactionInfo\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x1a\n" +
 	"\bprotocol\x18\x02 \x01(\tR\bprotocol\x12\x18\n" +
 	"\aaddress\x18\x03 \x01(\tR\aaddress\x12\x10\n" +
 	"\x03psp\x18\x04 \x01(\tR\x03psp\x12\x16\n" +
-	"\x06amount\x18\x05 \x01(\tR\x06amount\x12\x1f\n" +
-	"\vamount_sent\x18\x06 \x01(\tR\n" +
-	"amountSent\x12\x10\n" +
-	"\x03gas\x18\a \x01(\tR\x03gas\x12\x10\n" +
-	"\x03fee\x18\b \x01(\tR\x03fee\x129\n" +
+	"\x06amount\x18\x05 \x01(\tR\x06amount\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a-\n" +
+	"amount_usd\x18\x06 \x01(\tR\tamountUsd\x12:\n" +
+	"\x19amount_reporting_currency\x18\a \x01(\tR\x17amountReportingCurrency\x12\x1f\n" +
+	"\vamount_sent\x18\b \x01(\tR\n" +
+	"amountSent\x12&\n" +
+	"\x0famount_sent_usd\x18\t \x01(\tR\ramountSentUsd\x12C\n" +
+	"\x1eamount_sent_reporting_currency\x18\n" +
+	" \x01(\tR\x1bamountSentReportingCurrency\x12\x10\n" +
+	"\x03gas\x18\v \x01(\tR\x03gas\x12\x10\n" +
+	"\x03fee\x18\f \x01(\tR\x03fee\x12\x17\n" +
+	"\afee_usd\x18\r \x01(\tR\x06feeUsd\x124\n" +
+	"\x16fee_reporting_currency\x18\x0e \x01(\tR\x14feeReportingCurrency\x129\n" +
+	"\n" +
+	"created_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a\x8c\x01\n" +
 	"\x11WalletBalanceInfo\x12\x18\n" +
-	"\abalance\x18\x02 \x01(\tR\abalance\x1a{\n" +
+	"\abalance\x18\x01 \x01(\tR\abalance\x12\x1f\n" +
+	"\vbalance_usd\x18\x02 \x01(\tR\n" +
+	"balanceUsd\x12<\n" +
+	"\x1abalance_reporting_currency\x18\x03 \x01(\tR\x18balanceReportingCurrency\x1a\xc4\x03\n" +
 	"\x15WalletTransactionInfo\x12%\n" +
-	"\x0ebefore_balance\x18\x01 \x01(\tR\rbeforeBalance\x12#\n" +
-	"\rafter_balance\x18\x02 \x01(\tR\fafterBalance\x12\x16\n" +
-	"\x06amount\x18\x03 \x01(\tR\x06amount\x1a\xff\x02\n" +
+	"\x0ebefore_balance\x18\x01 \x01(\tR\rbeforeBalance\x12,\n" +
+	"\x12before_balance_usd\x18\x02 \x01(\tR\x10beforeBalanceUsd\x12I\n" +
+	"!before_balance_reporting_currency\x18\x03 \x01(\tR\x1ebeforeBalanceReportingCurrency\x12#\n" +
+	"\rafter_balance\x18\x04 \x01(\tR\fafterBalance\x12*\n" +
+	"\x11after_balance_usd\x18\x05 \x01(\tR\x0fafterBalanceUsd\x12G\n" +
+	" after_balance_reporting_currency\x18\x06 \x01(\tR\x1dafterBalanceReportingCurrency\x12\x16\n" +
+	"\x06amount\x18\a \x01(\tR\x06amount\x12\x1d\n" +
+	"\n" +
+	"amount_usd\x18\b \x01(\tR\tamountUsd\x12:\n" +
+	"\x19amount_reporting_currency\x18\t \x01(\tR\x17amountReportingCurrency\x1a\xcc\a\n" +
 	"\x18WalletTransactionSummary\x12,\n" +
-	"\x12total_withdraw_usd\x18\x01 \x01(\tR\x10totalWithdrawUsd\x12*\n" +
-	"\x11total_deposit_usd\x18\x02 \x01(\tR\x0ftotalDepositUsd\x12,\n" +
-	"\x12total_transfer_usd\x18\x03 \x01(\tR\x10totalTransferUsd\x12+\n" +
-	"\x12total_swap_out_usd\x18\x04 \x01(\tR\x0ftotalSwapOutUsd\x12)\n" +
-	"\x11total_swap_in_usd\x18\x05 \x01(\tR\x0etotalSwapInUsd\x12(\n" +
-	"\x10total_freeze_usd\x18\x06 \x01(\tR\x0etotalFreezeUsd\x12-\n" +
-	"\x13total_write_off_usd\x18\a \x01(\tR\x10totalWriteOffUsd\x12*\n" +
-	"\x11total_pending_usd\x18\b \x01(\tR\x0ftotalPendingUsd2\x90\b\n" +
+	"\x12total_withdraw_usd\x18\x01 \x01(\tR\x10totalWithdrawUsd\x12I\n" +
+	"!total_withdraw_reporting_currency\x18\x02 \x01(\tR\x1etotalWithdrawReportingCurrency\x12*\n" +
+	"\x11total_deposit_usd\x18\x03 \x01(\tR\x0ftotalDepositUsd\x12G\n" +
+	" total_deposit_reporting_currency\x18\x04 \x01(\tR\x1dtotalDepositReportingCurrency\x12,\n" +
+	"\x12total_transfer_usd\x18\x05 \x01(\tR\x10totalTransferUsd\x12I\n" +
+	"!total_transfer_reporting_currency\x18\x06 \x01(\tR\x1etotalTransferReportingCurrency\x12+\n" +
+	"\x12total_swap_out_usd\x18\a \x01(\tR\x0ftotalSwapOutUsd\x12H\n" +
+	"!total_swap_out_reporting_currency\x18\b \x01(\tR\x1dtotalSwapOutReportingCurrency\x12)\n" +
+	"\x11total_swap_in_usd\x18\t \x01(\tR\x0etotalSwapInUsd\x12F\n" +
+	" total_swap_in_reporting_currency\x18\n" +
+	" \x01(\tR\x1ctotalSwapInReportingCurrency\x12(\n" +
+	"\x10total_freeze_usd\x18\v \x01(\tR\x0etotalFreezeUsd\x12E\n" +
+	"\x1ftotal_freeze_reporting_currency\x18\f \x01(\tR\x1ctotalFreezeReportingCurrency\x12-\n" +
+	"\x13total_write_off_usd\x18\r \x01(\tR\x10totalWriteOffUsd\x12J\n" +
+	"\"total_write_off_reporting_currency\x18\x0e \x01(\tR\x1etotalWriteOffReportingCurrency\x12*\n" +
+	"\x11total_pending_usd\x18\x0f \x01(\tR\x0ftotalPendingUsd\x12G\n" +
+	" total_pending_reporting_currency\x18\x10 \x01(\tR\x1dtotalPendingReportingCurrency2\x90\b\n" +
 	"\x06Review\x12\x8d\x01\n" +
 	"\x0eCreateWithdraw\x12,.api.review.service.v1.CreateWithdrawRequest\x1a-.api.review.service.v1.CreateWithdrawResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/review/withdraw\x12\x7f\n" +
 	"\x16CreateOperatorWithdraw\x124.api.review.service.v1.CreateOperatorWithdrawRequest\x1a-.api.review.service.v1.CreateWithdrawResponse\"\x00\x12i\n" +

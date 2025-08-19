@@ -20,13 +20,13 @@ service BackofficeReview {
 		};
 	}
 
-	rpc ListTickets(ListTicketsRequest) returns (ListTicketsResponse) {
+	rpc ListTickets(ListTicketsRequest) returns (review.service.v1.ListTicketsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/review/tickets/list"
 			body: "*"
 		};
 	}
-	rpc ListOperatorTickets(ListOperatorTicketsRequest) returns (ListTicketsResponse) {
+	rpc ListOperatorTickets(ListOperatorTicketsRequest) returns (review.service.v1.ListTicketsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/review/operator/tickets/list"
 			body: "*"
@@ -62,12 +62,12 @@ service BackofficeReview {
 			body: "*"
 		};
 	}
-	rpc GetTicketById(GetTicketByIdRequest) returns (GetTicketByIdResponse) {
-		option (google.api.http) = {
-			post: "/v1/backoffice/review/tickets/get_by_id"
-			body: "*"
-		};
-	}
+	// rpc GetTicketById(GetTicketByIdRequest) returns (GetTicketByIdResponse) {
+	// 	option (google.api.http) = {
+	// 		post: "/v1/backoffice/review/tickets/get_by_id"
+	// 		body: "*"
+	// 	};
+	// }
 }
 
 message CreateOperatorWithdrawRequest {

@@ -996,3 +996,63 @@ func IsGetAdminUsersByEmailFailed(err error) bool {
 func ErrorGetAdminUsersByEmailFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_ADMIN_USERS_BY_EMAIL_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsOperatorByoDomainAlreadyExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_BYO_DOMAIN_ALREADY_EXISTS.String() && e.Code == 500
+}
+
+func ErrorOperatorByoDomainAlreadyExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_BYO_DOMAIN_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOperatorBackofficeByoDomainAlreadyExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_BACKOFFICE_BYO_DOMAIN_ALREADY_EXISTS.String() && e.Code == 500
+}
+
+func ErrorOperatorBackofficeByoDomainAlreadyExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_BACKOFFICE_BYO_DOMAIN_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetOperatorBySubdomainFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATOR_BY_SUBDOMAIN_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorBySubdomainFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_BY_SUBDOMAIN_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSubdomainNotExist(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SUBDOMAIN_NOT_EXIST.String() && e.Code == 500
+}
+
+func ErrorSubdomainNotExist(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SUBDOMAIN_NOT_EXIST.String(), fmt.Sprintf(format, args...))
+}
+
+func IsByoDomainAlreadyExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_BYO_DOMAIN_ALREADY_EXISTS.String() && e.Code == 500
+}
+
+func ErrorByoDomainAlreadyExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_BYO_DOMAIN_ALREADY_EXISTS.String(), fmt.Sprintf(format, args...))
+}

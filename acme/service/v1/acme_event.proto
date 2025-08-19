@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package api.acme.service.v1;
+
+option go_package = "github.com/infigaming-com/meepo-api/acme/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.acme.service.v1";
+
+service acmeEvent {
+	rpc Event (EventRequest) returns (EventResponse) {}
+}
+
+message EventRequest {
+	string subscription_id = 1;
+	bytes event_data = 2;
+}
+
+message EventResponse {}

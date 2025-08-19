@@ -1911,9 +1911,13 @@ func (m *GetOverviewDashboardResponse_GGR) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Today
+	// no validation rules for TodayUsd
 
-	// no validation rules for Yesterday
+	// no validation rules for YesterdayUsd
+
+	// no validation rules for TodayReportingCurrency
+
+	// no validation rules for YesterdayReportingCurrency
 
 	if len(errors) > 0 {
 		return GetOverviewDashboardResponse_GGRMultiError(errors)
@@ -2020,9 +2024,13 @@ func (m *GetOverviewDashboardResponse_NGR) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Today
+	// no validation rules for TodayUsd
 
-	// no validation rules for Yesterday
+	// no validation rules for YesterdayUsd
+
+	// no validation rules for TodayReportingCurrency
+
+	// no validation rules for YesterdayReportingCurrency
 
 	if len(errors) > 0 {
 		return GetOverviewDashboardResponse_NGRMultiError(errors)
@@ -2130,9 +2138,13 @@ func (m *GetOverviewDashboardResponse_DepositAmount) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Today
+	// no validation rules for TodayUsd
 
-	// no validation rules for Yesterday
+	// no validation rules for YesterdayUsd
+
+	// no validation rules for TodayReportingCurrency
+
+	// no validation rules for YesterdayReportingCurrency
 
 	if len(errors) > 0 {
 		return GetOverviewDashboardResponse_DepositAmountMultiError(errors)
@@ -2240,9 +2252,13 @@ func (m *GetOverviewDashboardResponse_WithdrawalAmount) validate(all bool) error
 
 	var errors []error
 
-	// no validation rules for Today
+	// no validation rules for TodayUsd
 
-	// no validation rules for Yesterday
+	// no validation rules for YesterdayUsd
+
+	// no validation rules for TodayReportingCurrency
+
+	// no validation rules for YesterdayReportingCurrency
 
 	if len(errors) > 0 {
 		return GetOverviewDashboardResponse_WithdrawalAmountMultiError(errors)
@@ -2354,9 +2370,13 @@ func (m *GetOverviewDashboardResponse_DepositMinusWithdrawalAmount) validate(all
 
 	var errors []error
 
-	// no validation rules for Today
+	// no validation rules for TodayUsd
 
-	// no validation rules for Yesterday
+	// no validation rules for YesterdayUsd
+
+	// no validation rules for TodayReportingCurrency
+
+	// no validation rules for YesterdayReportingCurrency
 
 	if len(errors) > 0 {
 		return GetOverviewDashboardResponse_DepositMinusWithdrawalAmountMultiError(errors)
@@ -2889,9 +2909,13 @@ func (m *GetTimeRangedDashboardResponse_GameData_Data) validate(all bool) error 
 
 	var errors []error
 
-	// no validation rules for Ggr
+	// no validation rules for GgrUsd
 
-	// no validation rules for Ngr
+	// no validation rules for NgrUsd
+
+	// no validation rules for GgrReportingCurrency
+
+	// no validation rules for NgrReportingCurrency
 
 	if len(errors) > 0 {
 		return GetTimeRangedDashboardResponse_GameData_DataMultiError(errors)
@@ -3000,9 +3024,13 @@ func (m *GetTimeRangedDashboardResponse_PaymentData_Data) validate(all bool) err
 
 	var errors []error
 
-	// no validation rules for Deposit
+	// no validation rules for DepositUsd
 
-	// no validation rules for Withdrawal
+	// no validation rules for WithdrawalUsd
+
+	// no validation rules for DepositReportingCurrency
+
+	// no validation rules for WithdrawalReportingCurrency
 
 	if len(errors) > 0 {
 		return GetTimeRangedDashboardResponse_PaymentData_DataMultiError(errors)

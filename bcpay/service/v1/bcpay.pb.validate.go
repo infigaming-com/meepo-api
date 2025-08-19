@@ -35,50 +35,64 @@ var (
 	_ = sort.Sort
 )
 
-// Validate checks the field values on GetBankAccountRequest with the rules
+// Validate checks the field values on CreateDepositRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetBankAccountRequest) Validate() error {
+func (m *CreateDepositRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetBankAccountRequest with the rules
+// ValidateAll checks the field values on CreateDepositRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// GetBankAccountRequestMultiError, or nil if none found.
-func (m *GetBankAccountRequest) ValidateAll() error {
+// CreateDepositRequestMultiError, or nil if none found.
+func (m *CreateDepositRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetBankAccountRequest) validate(all bool) error {
+func (m *CreateDepositRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
-
-	// no validation rules for OperatorId
 
 	// no validation rules for MerchantId
 
-	// no validation rules for PayerId
+	// no validation rules for UserId
+
+	// no validation rules for UserName
+
+	// no validation rules for Currency
+
+	// no validation rules for Country
 
 	// no validation rules for NotifyUrl
 
+	// no validation rules for Amount
+
+	// no validation rules for BankAccount
+
+	// no validation rules for BankAccountFirstname
+
+	// no validation rules for BankAccountLastname
+
+	// no validation rules for BankIban
+
 	if len(errors) > 0 {
-		return GetBankAccountRequestMultiError(errors)
+		return CreateDepositRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetBankAccountRequestMultiError is an error wrapping multiple validation
-// errors returned by GetBankAccountRequest.ValidateAll() if the designated
+// CreateDepositRequestMultiError is an error wrapping multiple validation
+// errors returned by CreateDepositRequest.ValidateAll() if the designated
 // constraints aren't met.
-type GetBankAccountRequestMultiError []error
+type CreateDepositRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetBankAccountRequestMultiError) Error() string {
+func (m CreateDepositRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -87,11 +101,11 @@ func (m GetBankAccountRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetBankAccountRequestMultiError) AllErrors() []error { return m }
+func (m CreateDepositRequestMultiError) AllErrors() []error { return m }
 
-// GetBankAccountRequestValidationError is the validation error returned by
-// GetBankAccountRequest.Validate if the designated constraints aren't met.
-type GetBankAccountRequestValidationError struct {
+// CreateDepositRequestValidationError is the validation error returned by
+// CreateDepositRequest.Validate if the designated constraints aren't met.
+type CreateDepositRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -99,24 +113,24 @@ type GetBankAccountRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetBankAccountRequestValidationError) Field() string { return e.field }
+func (e CreateDepositRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetBankAccountRequestValidationError) Reason() string { return e.reason }
+func (e CreateDepositRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetBankAccountRequestValidationError) Cause() error { return e.cause }
+func (e CreateDepositRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetBankAccountRequestValidationError) Key() bool { return e.key }
+func (e CreateDepositRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetBankAccountRequestValidationError) ErrorName() string {
-	return "GetBankAccountRequestValidationError"
+func (e CreateDepositRequestValidationError) ErrorName() string {
+	return "CreateDepositRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetBankAccountRequestValidationError) Error() string {
+func (e CreateDepositRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -128,14 +142,14 @@ func (e GetBankAccountRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetBankAccountRequest.%s: %s%s",
+		"invalid %sCreateDepositRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetBankAccountRequestValidationError{}
+var _ error = CreateDepositRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -143,52 +157,54 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetBankAccountRequestValidationError{}
+} = CreateDepositRequestValidationError{}
 
-// Validate checks the field values on GetBankAccountResponse with the rules
+// Validate checks the field values on CreateDepositResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetBankAccountResponse) Validate() error {
+func (m *CreateDepositResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetBankAccountResponse with the rules
+// ValidateAll checks the field values on CreateDepositResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// GetBankAccountResponseMultiError, or nil if none found.
-func (m *GetBankAccountResponse) ValidateAll() error {
+// CreateDepositResponseMultiError, or nil if none found.
+func (m *CreateDepositResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetBankAccountResponse) validate(all bool) error {
+func (m *CreateDepositResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	// no validation rules for NotifyUrl
+	// no validation rules for TransactionID
 
-	// no validation rules for ReferenceNumber
+	// no validation rules for DepositReference
+
+	// no validation rules for BankAccount
 
 	// no validation rules for BankAccountName
 
-	// no validation rules for BankAccountNumber
+	// no validation rules for BankIban
 
 	if len(errors) > 0 {
-		return GetBankAccountResponseMultiError(errors)
+		return CreateDepositResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetBankAccountResponseMultiError is an error wrapping multiple validation
-// errors returned by GetBankAccountResponse.ValidateAll() if the designated
+// CreateDepositResponseMultiError is an error wrapping multiple validation
+// errors returned by CreateDepositResponse.ValidateAll() if the designated
 // constraints aren't met.
-type GetBankAccountResponseMultiError []error
+type CreateDepositResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetBankAccountResponseMultiError) Error() string {
+func (m CreateDepositResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -197,11 +213,11 @@ func (m GetBankAccountResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetBankAccountResponseMultiError) AllErrors() []error { return m }
+func (m CreateDepositResponseMultiError) AllErrors() []error { return m }
 
-// GetBankAccountResponseValidationError is the validation error returned by
-// GetBankAccountResponse.Validate if the designated constraints aren't met.
-type GetBankAccountResponseValidationError struct {
+// CreateDepositResponseValidationError is the validation error returned by
+// CreateDepositResponse.Validate if the designated constraints aren't met.
+type CreateDepositResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -209,24 +225,24 @@ type GetBankAccountResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetBankAccountResponseValidationError) Field() string { return e.field }
+func (e CreateDepositResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetBankAccountResponseValidationError) Reason() string { return e.reason }
+func (e CreateDepositResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetBankAccountResponseValidationError) Cause() error { return e.cause }
+func (e CreateDepositResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetBankAccountResponseValidationError) Key() bool { return e.key }
+func (e CreateDepositResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetBankAccountResponseValidationError) ErrorName() string {
-	return "GetBankAccountResponseValidationError"
+func (e CreateDepositResponseValidationError) ErrorName() string {
+	return "CreateDepositResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetBankAccountResponseValidationError) Error() string {
+func (e CreateDepositResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -238,14 +254,14 @@ func (e GetBankAccountResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetBankAccountResponse.%s: %s%s",
+		"invalid %sCreateDepositResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetBankAccountResponseValidationError{}
+var _ error = CreateDepositResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -253,7 +269,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetBankAccountResponseValidationError{}
+} = CreateDepositResponseValidationError{}
 
 // Validate checks the field values on CreateWithdrawRequest with the rules
 // defined in the proto definition for this message. If any rules are
@@ -283,15 +299,23 @@ func (m *CreateWithdrawRequest) validate(all bool) error {
 
 	// no validation rules for Amount
 
+	// no validation rules for Currency
+
+	// no validation rules for Country
+
 	// no validation rules for NotifyUrl
 
-	// no validation rules for PayerId
+	// no validation rules for UserId
 
-	// no validation rules for AccountName
+	// no validation rules for UserName
 
-	// no validation rules for Iban
+	// no validation rules for BankAccount
 
-	// no validation rules for BankCode
+	// no validation rules for BankAccountFirstname
+
+	// no validation rules for BankAccountLastname
+
+	// no validation rules for BankIban
 
 	if len(errors) > 0 {
 		return CreateWithdrawRequestMultiError(errors)
@@ -394,8 +418,6 @@ func (m *CreateWithdrawResponse) validate(all bool) error {
 	}
 
 	var errors []error
-
-	// no validation rules for Status
 
 	// no validation rules for TransactionId
 
@@ -634,6 +656,8 @@ func (m *GetMerchantResponse) validate(all bool) error {
 
 	// no validation rules for MerchantId
 
+	// no validation rules for ApiKeyPublic
+
 	if len(errors) > 0 {
 		return GetMerchantResponseMultiError(errors)
 	}
@@ -871,6 +895,8 @@ func (m *CreateMerchantResponse) validate(all bool) error {
 
 	// no validation rules for MerchantId
 
+	// no validation rules for ApiKeyPublic
+
 	if len(errors) > 0 {
 		return CreateMerchantResponseMultiError(errors)
 	}
@@ -974,6 +1000,8 @@ func (m *GetBankSchemaRequest) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for Currency
+
+	// no validation rules for Country
 
 	if len(errors) > 0 {
 		return GetBankSchemaRequestMultiError(errors)
@@ -1218,19 +1246,19 @@ func (m *DepositBankAccount) validate(all bool) error {
 
 	// no validation rules for BankLastName
 
+	// no validation rules for Iban
+
 	// no validation rules for Currency
 
 	// no validation rules for Country
 
 	// no validation rules for MaxAmount
 
-	// no validation rules for MinAmount
-
 	// no validation rules for MaxAmountPerTrans
 
 	// no validation rules for MaxTransLimit
 
-	// no validation rules for CurrentTransTime
+	// no validation rules for CurrentTransTimes
 
 	// no validation rules for Priority
 
@@ -1338,44 +1366,9 @@ func (m *BankAccountListRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Currency
+	// no validation rules for Page
 
-	// no validation rules for BankAccount
-
-	// no validation rules for BankAccountFirstname
-
-	// no validation rules for BankAccountLastname
-
-	// no validation rules for CardId
-
-	if all {
-		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, BankAccountListRequestValidationError{
-					field:  "OperatorContextFilters",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, BankAccountListRequestValidationError{
-					field:  "OperatorContextFilters",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return BankAccountListRequestValidationError{
-				field:  "OperatorContextFilters",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for PageSize
 
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
@@ -1404,6 +1397,30 @@ func (m *BankAccountListRequest) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	if m.Currency != nil {
+		// no validation rules for Currency
+	}
+
+	if m.BankAccount != nil {
+		// no validation rules for BankAccount
+	}
+
+	if m.BankAccountFirstname != nil {
+		// no validation rules for BankAccountFirstname
+	}
+
+	if m.BankAccountLastname != nil {
+		// no validation rules for BankAccountLastname
+	}
+
+	if m.CardId != nil {
+		// no validation rules for CardId
+	}
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
 	}
 
 	if len(errors) > 0 {
@@ -1542,6 +1559,18 @@ func (m *BankAccountListResponse) validate(all bool) error {
 
 	}
 
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	// no validation rules for TotalPages
+
+	// no validation rules for TotalEnabled
+
+	// no validation rules for TotalDisabled
+
+	// no validation rules for TotalCount
+
 	if len(errors) > 0 {
 		return BankAccountListResponseMultiError(errors)
 	}
@@ -1644,12 +1673,24 @@ func (m *AddBankAccountRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Currency
+
+	// no validation rules for Country
+
+	// no validation rules for MaxAmount
+
+	// no validation rules for MaxAmountPerTrans
+
+	// no validation rules for MaxTransLimit
+
+	// no validation rules for Priority
+
 	if all {
-		switch v := interface{}(m.GetBankAccount()).(type) {
+		switch v := interface{}(m.GetBankInfo()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, AddBankAccountRequestValidationError{
-					field:  "BankAccount",
+					field:  "BankInfo",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -1657,16 +1698,16 @@ func (m *AddBankAccountRequest) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, AddBankAccountRequestValidationError{
-					field:  "BankAccount",
+					field:  "BankInfo",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetBankAccount()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetBankInfo()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return AddBankAccountRequestValidationError{
-				field:  "BankAccount",
+				field:  "BankInfo",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -1804,35 +1845,6 @@ func (m *AddBankAccountResponse) validate(all bool) error {
 
 	var errors []error
 
-	if all {
-		switch v := interface{}(m.GetBankAccount()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, AddBankAccountResponseValidationError{
-					field:  "BankAccount",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, AddBankAccountResponseValidationError{
-					field:  "BankAccount",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetBankAccount()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return AddBankAccountResponseValidationError{
-				field:  "BankAccount",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	if len(errors) > 0 {
 		return AddBankAccountResponseMultiError(errors)
 	}
@@ -1935,12 +1947,14 @@ func (m *UpdateBankAccountRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Id
+
 	if all {
-		switch v := interface{}(m.GetBankAccount()).(type) {
+		switch v := interface{}(m.GetBankInfo()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, UpdateBankAccountRequestValidationError{
-					field:  "BankAccount",
+					field:  "BankInfo",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -1948,16 +1962,16 @@ func (m *UpdateBankAccountRequest) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, UpdateBankAccountRequestValidationError{
-					field:  "BankAccount",
+					field:  "BankInfo",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetBankAccount()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetBankInfo()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return UpdateBankAccountRequestValidationError{
-				field:  "BankAccount",
+				field:  "BankInfo",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -1991,6 +2005,34 @@ func (m *UpdateBankAccountRequest) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	if m.Currency != nil {
+		// no validation rules for Currency
+	}
+
+	if m.Country != nil {
+		// no validation rules for Country
+	}
+
+	if m.MaxAmount != nil {
+		// no validation rules for MaxAmount
+	}
+
+	if m.MaxAmountPerTrans != nil {
+		// no validation rules for MaxAmountPerTrans
+	}
+
+	if m.MaxTransLimit != nil {
+		// no validation rules for MaxTransLimit
+	}
+
+	if m.Priority != nil {
+		// no validation rules for Priority
+	}
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
 	}
 
 	if len(errors) > 0 {
@@ -2095,35 +2137,6 @@ func (m *UpdateBankAccountResponse) validate(all bool) error {
 
 	var errors []error
 
-	if all {
-		switch v := interface{}(m.GetBankAccount()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UpdateBankAccountResponseValidationError{
-					field:  "BankAccount",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, UpdateBankAccountResponseValidationError{
-					field:  "BankAccount",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetBankAccount()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UpdateBankAccountResponseValidationError{
-				field:  "BankAccount",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	if len(errors) > 0 {
 		return UpdateBankAccountResponseMultiError(errors)
 	}
@@ -2204,6 +2217,212 @@ var _ interface {
 	ErrorName() string
 } = UpdateBankAccountResponseValidationError{}
 
+// Validate checks the field values on DeleteBankAccountRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteBankAccountRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteBankAccountRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteBankAccountRequestMultiError, or nil if none found.
+func (m *DeleteBankAccountRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteBankAccountRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if len(errors) > 0 {
+		return DeleteBankAccountRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteBankAccountRequestMultiError is an error wrapping multiple validation
+// errors returned by DeleteBankAccountRequest.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteBankAccountRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteBankAccountRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteBankAccountRequestMultiError) AllErrors() []error { return m }
+
+// DeleteBankAccountRequestValidationError is the validation error returned by
+// DeleteBankAccountRequest.Validate if the designated constraints aren't met.
+type DeleteBankAccountRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteBankAccountRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteBankAccountRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteBankAccountRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteBankAccountRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteBankAccountRequestValidationError) ErrorName() string {
+	return "DeleteBankAccountRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteBankAccountRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteBankAccountRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteBankAccountRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteBankAccountRequestValidationError{}
+
+// Validate checks the field values on DeleteBankAccountResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteBankAccountResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteBankAccountResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteBankAccountResponseMultiError, or nil if none found.
+func (m *DeleteBankAccountResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteBankAccountResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return DeleteBankAccountResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteBankAccountResponseMultiError is an error wrapping multiple validation
+// errors returned by DeleteBankAccountResponse.ValidateAll() if the
+// designated constraints aren't met.
+type DeleteBankAccountResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteBankAccountResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteBankAccountResponseMultiError) AllErrors() []error { return m }
+
+// DeleteBankAccountResponseValidationError is the validation error returned by
+// DeleteBankAccountResponse.Validate if the designated constraints aren't met.
+type DeleteBankAccountResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteBankAccountResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteBankAccountResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteBankAccountResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteBankAccountResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteBankAccountResponseValidationError) ErrorName() string {
+	return "DeleteBankAccountResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteBankAccountResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteBankAccountResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteBankAccountResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteBankAccountResponseValidationError{}
+
 // Validate checks the field values on TransactionListRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -2226,21 +2445,9 @@ func (m *TransactionListRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Type
+	// no validation rules for Page
 
-	// no validation rules for TransactionId
-
-	// no validation rules for DepositBankAccountFirstname
-
-	// no validation rules for DepositBankAccountLastname
-
-	// no validation rules for UserId
-
-	// no validation rules for UserName
-
-	// no validation rules for PayerBankAccountFirstname
-
-	// no validation rules for PayerBankAccountLastname
+	// no validation rules for PageSize
 
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
@@ -2269,6 +2476,42 @@ func (m *TransactionListRequest) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	if m.Type != nil {
+		// no validation rules for Type
+	}
+
+	if m.Status != nil {
+		// no validation rules for Status
+	}
+
+	if m.TransactionId != nil {
+		// no validation rules for TransactionId
+	}
+
+	if m.DepositBankAccountFirstname != nil {
+		// no validation rules for DepositBankAccountFirstname
+	}
+
+	if m.DepositBankAccountLastname != nil {
+		// no validation rules for DepositBankAccountLastname
+	}
+
+	if m.UserId != nil {
+		// no validation rules for UserId
+	}
+
+	if m.UserName != nil {
+		// no validation rules for UserName
+	}
+
+	if m.UserBankAccountFirstname != nil {
+		// no validation rules for UserBankAccountFirstname
+	}
+
+	if m.UserBankAccountLastname != nil {
+		// no validation rules for UserBankAccountLastname
 	}
 
 	if len(errors) > 0 {
@@ -2381,11 +2624,17 @@ func (m *Transaction) validate(all bool) error {
 
 	// no validation rules for UserName
 
-	// no validation rules for BankAccount
+	// no validation rules for DepositBankAccount
 
-	// no validation rules for BankAccountFirstName
+	// no validation rules for DepositBankAccountFirstName
 
-	// no validation rules for BankAccountLastName
+	// no validation rules for DepositBankAccountLastName
+
+	// no validation rules for UserBankAccount
+
+	// no validation rules for UserBankAccountFirstName
+
+	// no validation rules for UserBankAccountLastName
 
 	// no validation rules for Type
 
@@ -2399,17 +2648,96 @@ func (m *Transaction) validate(all bool) error {
 
 	// no validation rules for Status
 
-	// no validation rules for Audit
-
 	// no validation rules for Auditor
 
-	// no validation rules for AuditTime
+	if all {
+		switch v := interface{}(m.GetAuditTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, TransactionValidationError{
+					field:  "AuditTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, TransactionValidationError{
+					field:  "AuditTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAuditTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return TransactionValidationError{
+				field:  "AuditTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	// no validation rules for AuditNote
 
-	// no validation rules for CreateTime
+	if all {
+		switch v := interface{}(m.GetCreateTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, TransactionValidationError{
+					field:  "CreateTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, TransactionValidationError{
+					field:  "CreateTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreateTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return TransactionValidationError{
+				field:  "CreateTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
-	// no validation rules for UpdateTime
+	if all {
+		switch v := interface{}(m.GetUpdateTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, TransactionValidationError{
+					field:  "UpdateTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, TransactionValidationError{
+					field:  "UpdateTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetUpdateTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return TransactionValidationError{
+				field:  "UpdateTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
 		return TransactionMultiError(errors)
@@ -2544,6 +2872,20 @@ func (m *TransactionListResponse) validate(all bool) error {
 
 	}
 
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	// no validation rules for TotalPages
+
+	// no validation rules for TotalApproved
+
+	// no validation rules for TotalFailed
+
+	// no validation rules for TotalPending
+
+	// no validation rules for TotalCount
+
 	if len(errors) > 0 {
 		return TransactionListResponseMultiError(errors)
 	}
@@ -2649,6 +2991,8 @@ func (m *AuditTransactionRequest) validate(all bool) error {
 	// no validation rules for TransactionId
 
 	// no validation rules for Audit
+
+	// no validation rules for UserId
 
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
@@ -2780,35 +3124,6 @@ func (m *AuditTransactionResponse) validate(all bool) error {
 	}
 
 	var errors []error
-
-	if all {
-		switch v := interface{}(m.GetTransaction()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, AuditTransactionResponseValidationError{
-					field:  "Transaction",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, AuditTransactionResponseValidationError{
-					field:  "Transaction",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetTransaction()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return AuditTransactionResponseValidationError{
-				field:  "Transaction",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
 
 	if len(errors) > 0 {
 		return AuditTransactionResponseMultiError(errors)
@@ -3018,35 +3333,6 @@ func (m *AddNoteToTransactionResponse) validate(all bool) error {
 	}
 
 	var errors []error
-
-	if all {
-		switch v := interface{}(m.GetTransaction()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, AddNoteToTransactionResponseValidationError{
-					field:  "Transaction",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, AddNoteToTransactionResponseValidationError{
-					field:  "Transaction",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetTransaction()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return AddNoteToTransactionResponseValidationError{
-				field:  "Transaction",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
 
 	if len(errors) > 0 {
 		return AddNoteToTransactionResponseMultiError(errors)

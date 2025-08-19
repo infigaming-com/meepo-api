@@ -25,88 +25,93 @@ const (
 type ErrorReason int32
 
 const (
-	ErrorReason_UNSPECIFIED                              ErrorReason = 0
-	ErrorReason_USER_INFO_NOT_FOUND_IN_CONTEXT           ErrorReason = 10000
-	ErrorReason_REQUEST_INFO_NOT_FOUND_IN_CONTEXT        ErrorReason = 10001
-	ErrorReason_USER_NOT_FOUND                           ErrorReason = 10002
-	ErrorReason_USER_AUTH_NOT_FOUND                      ErrorReason = 10003
-	ErrorReason_USER_ALREADY_EXISTS                      ErrorReason = 10004
-	ErrorReason_REVOKE_TOKEN_FAILED                      ErrorReason = 10005
-	ErrorReason_GENERATE_REFRESH_TOKEN_ID_FAILED         ErrorReason = 10006
-	ErrorReason_GENERATE_TOKEN_ID_FAILED                 ErrorReason = 10007
-	ErrorReason_SAVE_TOKEN_FAILED                        ErrorReason = 10008
-	ErrorReason_GET_USER_AUTH_FAILED                     ErrorReason = 10009
-	ErrorReason_GET_USER_FAILED                          ErrorReason = 10010
-	ErrorReason_UPDATE_USER_FAILED                       ErrorReason = 10011
-	ErrorReason_LOCK_USER_AUTH_FAILED                    ErrorReason = 10012
-	ErrorReason_HASH_USER_PASSWORD_FAILED                ErrorReason = 10013
-	ErrorReason_GENERATE_USER_ID_FAILED                  ErrorReason = 10014
-	ErrorReason_ADD_USER_FAILED                          ErrorReason = 10015
-	ErrorReason_ADD_USER_AUTH_FAILED                     ErrorReason = 10016
-	ErrorReason_USER_DISABLED                            ErrorReason = 10017
-	ErrorReason_USER_LOGIN_BANNED                        ErrorReason = 10018
-	ErrorReason_INVALID_USER_PASSWORD                    ErrorReason = 10019
-	ErrorReason_GET_TOKEN_WITH_REFRESH_TOKEN_FAILED      ErrorReason = 10020
-	ErrorReason_GET_UNEXPIRED_TOKEN_FOR_USER_FAILED      ErrorReason = 10021
-	ErrorReason_OAUTH_PROVIDER_NOT_SUPPORTED             ErrorReason = 10022
-	ErrorReason_USERNAME_OR_PASSWORD_INVALID             ErrorReason = 10023
-	ErrorReason_ADD_USER_TO_WALLET_FAILED                ErrorReason = 10024
-	ErrorReason_GET_USERS_BY_OPERATOR_IDS_FAILED         ErrorReason = 10025
-	ErrorReason_GET_OPERATOR_ID_BY_ORIGIN_FAILED         ErrorReason = 10026
-	ErrorReason_USER_TAG_ALREADY_EXISTS                  ErrorReason = 10027
-	ErrorReason_USER_TAG_NOT_EXIST                       ErrorReason = 10030
-	ErrorReason_VERIFY_GOOGLE_TOKEN_FAILED               ErrorReason = 10031
-	ErrorReason_MARSHAL_REQUEST_INFO_FAILED              ErrorReason = 10032
-	ErrorReason_ADD_USER_EVENT_FAILED                    ErrorReason = 10033
-	ErrorReason_GENERATE_USER_EVENT_ID_FAILED            ErrorReason = 10034
-	ErrorReason_FOLLOW_PARENT_ENABLED                    ErrorReason = 10035 // Operator is in follow_parent=true mode
-	ErrorReason_OPERATOR_TAGS_ALREADY_EXISTS             ErrorReason = 10036
-	ErrorReason_OPERATOR_TAG_NOT_FOUND                   ErrorReason = 10037
-	ErrorReason_OPERATOR_PARENT_NOT_FOUND                ErrorReason = 10038
-	ErrorReason_NON_FOLLOW_PARENT_OPERATOR_NOT_FOUND     ErrorReason = 10039
-	ErrorReason_SYSTEM_OPERATOR                          ErrorReason = 10040
-	ErrorReason_LIST_USERS_FAILED                        ErrorReason = 10041
-	ErrorReason_ROLE_NOT_FOUND                           ErrorReason = 10042
-	ErrorReason_FAILED_TO_SEND_EMAIL                     ErrorReason = 10043
-	ErrorReason_VERIFICATION_CODE_SEND_TOO_FREQUENTLY    ErrorReason = 10044
-	ErrorReason_EMAIL_VERIFICATION_FAILED                ErrorReason = 10045
-	ErrorReason_EMAIL_ALREADY_REGISTERED                 ErrorReason = 10046
-	ErrorReason_GENERATE_COMMENT_ID_FAILED               ErrorReason = 10047
-	ErrorReason_ADD_COMMENT_FAILED                       ErrorReason = 10048
-	ErrorReason_GET_COMMENTS_BY_USER_ID_FAILED           ErrorReason = 10049
-	ErrorReason_USER_TAGS_NOT_MATCH_OPERATOR_TAGS        ErrorReason = 10050
-	ErrorReason_INVALID_OPERATOR_TYPE                    ErrorReason = 10051
-	ErrorReason_ADD_USER_DAILY_ACTIVITY_FAILED           ErrorReason = 10052
-	ErrorReason_OPERATOR_ID_NOT_FOUND_BY_ORIGIN          ErrorReason = 10053
-	ErrorReason_OPERATOR_ID_NOT_FOUND_IN_CONTEXT         ErrorReason = 10054
-	ErrorReason_LIST_OPERATORS_FAILED                    ErrorReason = 10055
-	ErrorReason_GET_OPERATORS_BY_IDS_FAILED              ErrorReason = 10056
-	ErrorReason_OPERATOR_HIERARCHY_TOO_DEEP              ErrorReason = 10057
-	ErrorReason_GET_PARENT_OPERATOR_IDS_FAILED           ErrorReason = 10058
-	ErrorReason_CREATE_ORIGIN_TO_OPERATOR_MAPPING_FAILED ErrorReason = 10059
-	ErrorReason_ORIGIN_ALREADY_EXISTS                    ErrorReason = 10060
-	ErrorReason_GENERATE_BUSINESS_ID_FAILED              ErrorReason = 10061
-	ErrorReason_CREATE_BUSINESS_FAILED                   ErrorReason = 10062
-	ErrorReason_OPERATOR_IDS_NOT_FOUND_BY_ORIGIN         ErrorReason = 10063
-	ErrorReason_OPERATOR_IDS_NOT_FOUND_IN_CONTEXT        ErrorReason = 10064
-	ErrorReason_ACTUAL_OPERATOR_ID_NOT_GET_IN_CONTEXT    ErrorReason = 10065
-	ErrorReason_INVALID_OPERATOR_KEY                     ErrorReason = 10066
-	ErrorReason_GET_OPERATOR_BY_KEY_FAILED               ErrorReason = 10067
-	ErrorReason_OPERATOR_KEY_ALREADY_EXISTS              ErrorReason = 10068
-	ErrorReason_EMPTY_PASSWORD                           ErrorReason = 10069
-	ErrorReason_EMAIL_ALREADY_EXISTS                     ErrorReason = 10070
-	ErrorReason_INVALID_OPERATOR_STATUS                  ErrorReason = 10071
-	ErrorReason_DOMAIN_POOL_EMPTY                        ErrorReason = 10072
-	ErrorReason_TARGET_OPERATOR_NOT_BELONG_TO_OPERATOR   ErrorReason = 10073
-	ErrorReason_OPERATOR_NOT_FOUND_BY_ID                 ErrorReason = 10074
-	ErrorReason_GET_OPERATOR_BY_ID_FAILED                ErrorReason = 10075
-	ErrorReason_INVALID_OPERATOR_TRANSITION_ACTION       ErrorReason = 10076
-	ErrorReason_UPDATE_OPERATOR_STATUS_FAILED            ErrorReason = 10077
-	ErrorReason_INVALID_OPERATOR_CONTEXT                 ErrorReason = 10078
-	ErrorReason_INVALID_OPERATOR_ID                      ErrorReason = 10079
-	ErrorReason_OPERATOR_CONTEXT_PERMISSION_DENIED       ErrorReason = 10080
-	ErrorReason_OPERATOR_CONTEXT_NOT_FOUND_IN_CONTEXT    ErrorReason = 10081
-	ErrorReason_GET_ADMIN_USERS_BY_EMAIL_FAILED          ErrorReason = 10082
+	ErrorReason_UNSPECIFIED                                   ErrorReason = 0
+	ErrorReason_USER_INFO_NOT_FOUND_IN_CONTEXT                ErrorReason = 10000
+	ErrorReason_REQUEST_INFO_NOT_FOUND_IN_CONTEXT             ErrorReason = 10001
+	ErrorReason_USER_NOT_FOUND                                ErrorReason = 10002
+	ErrorReason_USER_AUTH_NOT_FOUND                           ErrorReason = 10003
+	ErrorReason_USER_ALREADY_EXISTS                           ErrorReason = 10004
+	ErrorReason_REVOKE_TOKEN_FAILED                           ErrorReason = 10005
+	ErrorReason_GENERATE_REFRESH_TOKEN_ID_FAILED              ErrorReason = 10006
+	ErrorReason_GENERATE_TOKEN_ID_FAILED                      ErrorReason = 10007
+	ErrorReason_SAVE_TOKEN_FAILED                             ErrorReason = 10008
+	ErrorReason_GET_USER_AUTH_FAILED                          ErrorReason = 10009
+	ErrorReason_GET_USER_FAILED                               ErrorReason = 10010
+	ErrorReason_UPDATE_USER_FAILED                            ErrorReason = 10011
+	ErrorReason_LOCK_USER_AUTH_FAILED                         ErrorReason = 10012
+	ErrorReason_HASH_USER_PASSWORD_FAILED                     ErrorReason = 10013
+	ErrorReason_GENERATE_USER_ID_FAILED                       ErrorReason = 10014
+	ErrorReason_ADD_USER_FAILED                               ErrorReason = 10015
+	ErrorReason_ADD_USER_AUTH_FAILED                          ErrorReason = 10016
+	ErrorReason_USER_DISABLED                                 ErrorReason = 10017
+	ErrorReason_USER_LOGIN_BANNED                             ErrorReason = 10018
+	ErrorReason_INVALID_USER_PASSWORD                         ErrorReason = 10019
+	ErrorReason_GET_TOKEN_WITH_REFRESH_TOKEN_FAILED           ErrorReason = 10020
+	ErrorReason_GET_UNEXPIRED_TOKEN_FOR_USER_FAILED           ErrorReason = 10021
+	ErrorReason_OAUTH_PROVIDER_NOT_SUPPORTED                  ErrorReason = 10022
+	ErrorReason_USERNAME_OR_PASSWORD_INVALID                  ErrorReason = 10023
+	ErrorReason_ADD_USER_TO_WALLET_FAILED                     ErrorReason = 10024
+	ErrorReason_GET_USERS_BY_OPERATOR_IDS_FAILED              ErrorReason = 10025
+	ErrorReason_GET_OPERATOR_ID_BY_ORIGIN_FAILED              ErrorReason = 10026
+	ErrorReason_USER_TAG_ALREADY_EXISTS                       ErrorReason = 10027
+	ErrorReason_USER_TAG_NOT_EXIST                            ErrorReason = 10030
+	ErrorReason_VERIFY_GOOGLE_TOKEN_FAILED                    ErrorReason = 10031
+	ErrorReason_MARSHAL_REQUEST_INFO_FAILED                   ErrorReason = 10032
+	ErrorReason_ADD_USER_EVENT_FAILED                         ErrorReason = 10033
+	ErrorReason_GENERATE_USER_EVENT_ID_FAILED                 ErrorReason = 10034
+	ErrorReason_FOLLOW_PARENT_ENABLED                         ErrorReason = 10035 // Operator is in follow_parent=true mode
+	ErrorReason_OPERATOR_TAGS_ALREADY_EXISTS                  ErrorReason = 10036
+	ErrorReason_OPERATOR_TAG_NOT_FOUND                        ErrorReason = 10037
+	ErrorReason_OPERATOR_PARENT_NOT_FOUND                     ErrorReason = 10038
+	ErrorReason_NON_FOLLOW_PARENT_OPERATOR_NOT_FOUND          ErrorReason = 10039
+	ErrorReason_SYSTEM_OPERATOR                               ErrorReason = 10040
+	ErrorReason_LIST_USERS_FAILED                             ErrorReason = 10041
+	ErrorReason_ROLE_NOT_FOUND                                ErrorReason = 10042
+	ErrorReason_FAILED_TO_SEND_EMAIL                          ErrorReason = 10043
+	ErrorReason_VERIFICATION_CODE_SEND_TOO_FREQUENTLY         ErrorReason = 10044
+	ErrorReason_EMAIL_VERIFICATION_FAILED                     ErrorReason = 10045
+	ErrorReason_EMAIL_ALREADY_REGISTERED                      ErrorReason = 10046
+	ErrorReason_GENERATE_COMMENT_ID_FAILED                    ErrorReason = 10047
+	ErrorReason_ADD_COMMENT_FAILED                            ErrorReason = 10048
+	ErrorReason_GET_COMMENTS_BY_USER_ID_FAILED                ErrorReason = 10049
+	ErrorReason_USER_TAGS_NOT_MATCH_OPERATOR_TAGS             ErrorReason = 10050
+	ErrorReason_INVALID_OPERATOR_TYPE                         ErrorReason = 10051
+	ErrorReason_ADD_USER_DAILY_ACTIVITY_FAILED                ErrorReason = 10052
+	ErrorReason_OPERATOR_ID_NOT_FOUND_BY_ORIGIN               ErrorReason = 10053
+	ErrorReason_OPERATOR_ID_NOT_FOUND_IN_CONTEXT              ErrorReason = 10054
+	ErrorReason_LIST_OPERATORS_FAILED                         ErrorReason = 10055
+	ErrorReason_GET_OPERATORS_BY_IDS_FAILED                   ErrorReason = 10056
+	ErrorReason_OPERATOR_HIERARCHY_TOO_DEEP                   ErrorReason = 10057
+	ErrorReason_GET_PARENT_OPERATOR_IDS_FAILED                ErrorReason = 10058
+	ErrorReason_CREATE_ORIGIN_TO_OPERATOR_MAPPING_FAILED      ErrorReason = 10059
+	ErrorReason_ORIGIN_ALREADY_EXISTS                         ErrorReason = 10060
+	ErrorReason_GENERATE_BUSINESS_ID_FAILED                   ErrorReason = 10061
+	ErrorReason_CREATE_BUSINESS_FAILED                        ErrorReason = 10062
+	ErrorReason_OPERATOR_IDS_NOT_FOUND_BY_ORIGIN              ErrorReason = 10063
+	ErrorReason_OPERATOR_IDS_NOT_FOUND_IN_CONTEXT             ErrorReason = 10064
+	ErrorReason_ACTUAL_OPERATOR_ID_NOT_GET_IN_CONTEXT         ErrorReason = 10065
+	ErrorReason_INVALID_OPERATOR_KEY                          ErrorReason = 10066
+	ErrorReason_GET_OPERATOR_BY_KEY_FAILED                    ErrorReason = 10067
+	ErrorReason_OPERATOR_KEY_ALREADY_EXISTS                   ErrorReason = 10068
+	ErrorReason_EMPTY_PASSWORD                                ErrorReason = 10069
+	ErrorReason_EMAIL_ALREADY_EXISTS                          ErrorReason = 10070
+	ErrorReason_INVALID_OPERATOR_STATUS                       ErrorReason = 10071
+	ErrorReason_DOMAIN_POOL_EMPTY                             ErrorReason = 10072
+	ErrorReason_TARGET_OPERATOR_NOT_BELONG_TO_OPERATOR        ErrorReason = 10073
+	ErrorReason_OPERATOR_NOT_FOUND_BY_ID                      ErrorReason = 10074
+	ErrorReason_GET_OPERATOR_BY_ID_FAILED                     ErrorReason = 10075
+	ErrorReason_INVALID_OPERATOR_TRANSITION_ACTION            ErrorReason = 10076
+	ErrorReason_UPDATE_OPERATOR_STATUS_FAILED                 ErrorReason = 10077
+	ErrorReason_INVALID_OPERATOR_CONTEXT                      ErrorReason = 10078
+	ErrorReason_INVALID_OPERATOR_ID                           ErrorReason = 10079
+	ErrorReason_OPERATOR_CONTEXT_PERMISSION_DENIED            ErrorReason = 10080
+	ErrorReason_OPERATOR_CONTEXT_NOT_FOUND_IN_CONTEXT         ErrorReason = 10081
+	ErrorReason_GET_ADMIN_USERS_BY_EMAIL_FAILED               ErrorReason = 10082
+	ErrorReason_OPERATOR_BYO_DOMAIN_ALREADY_EXISTS            ErrorReason = 10083
+	ErrorReason_OPERATOR_BACKOFFICE_BYO_DOMAIN_ALREADY_EXISTS ErrorReason = 10084
+	ErrorReason_GET_OPERATOR_BY_SUBDOMAIN_FAILED              ErrorReason = 10085
+	ErrorReason_SUBDOMAIN_NOT_EXIST                           ErrorReason = 10086
+	ErrorReason_BYO_DOMAIN_ALREADY_EXISTS                     ErrorReason = 10087
 )
 
 // Enum value maps for ErrorReason.
@@ -194,90 +199,100 @@ var (
 		10080: "OPERATOR_CONTEXT_PERMISSION_DENIED",
 		10081: "OPERATOR_CONTEXT_NOT_FOUND_IN_CONTEXT",
 		10082: "GET_ADMIN_USERS_BY_EMAIL_FAILED",
+		10083: "OPERATOR_BYO_DOMAIN_ALREADY_EXISTS",
+		10084: "OPERATOR_BACKOFFICE_BYO_DOMAIN_ALREADY_EXISTS",
+		10085: "GET_OPERATOR_BY_SUBDOMAIN_FAILED",
+		10086: "SUBDOMAIN_NOT_EXIST",
+		10087: "BYO_DOMAIN_ALREADY_EXISTS",
 	}
 	ErrorReason_value = map[string]int32{
-		"UNSPECIFIED":                              0,
-		"USER_INFO_NOT_FOUND_IN_CONTEXT":           10000,
-		"REQUEST_INFO_NOT_FOUND_IN_CONTEXT":        10001,
-		"USER_NOT_FOUND":                           10002,
-		"USER_AUTH_NOT_FOUND":                      10003,
-		"USER_ALREADY_EXISTS":                      10004,
-		"REVOKE_TOKEN_FAILED":                      10005,
-		"GENERATE_REFRESH_TOKEN_ID_FAILED":         10006,
-		"GENERATE_TOKEN_ID_FAILED":                 10007,
-		"SAVE_TOKEN_FAILED":                        10008,
-		"GET_USER_AUTH_FAILED":                     10009,
-		"GET_USER_FAILED":                          10010,
-		"UPDATE_USER_FAILED":                       10011,
-		"LOCK_USER_AUTH_FAILED":                    10012,
-		"HASH_USER_PASSWORD_FAILED":                10013,
-		"GENERATE_USER_ID_FAILED":                  10014,
-		"ADD_USER_FAILED":                          10015,
-		"ADD_USER_AUTH_FAILED":                     10016,
-		"USER_DISABLED":                            10017,
-		"USER_LOGIN_BANNED":                        10018,
-		"INVALID_USER_PASSWORD":                    10019,
-		"GET_TOKEN_WITH_REFRESH_TOKEN_FAILED":      10020,
-		"GET_UNEXPIRED_TOKEN_FOR_USER_FAILED":      10021,
-		"OAUTH_PROVIDER_NOT_SUPPORTED":             10022,
-		"USERNAME_OR_PASSWORD_INVALID":             10023,
-		"ADD_USER_TO_WALLET_FAILED":                10024,
-		"GET_USERS_BY_OPERATOR_IDS_FAILED":         10025,
-		"GET_OPERATOR_ID_BY_ORIGIN_FAILED":         10026,
-		"USER_TAG_ALREADY_EXISTS":                  10027,
-		"USER_TAG_NOT_EXIST":                       10030,
-		"VERIFY_GOOGLE_TOKEN_FAILED":               10031,
-		"MARSHAL_REQUEST_INFO_FAILED":              10032,
-		"ADD_USER_EVENT_FAILED":                    10033,
-		"GENERATE_USER_EVENT_ID_FAILED":            10034,
-		"FOLLOW_PARENT_ENABLED":                    10035,
-		"OPERATOR_TAGS_ALREADY_EXISTS":             10036,
-		"OPERATOR_TAG_NOT_FOUND":                   10037,
-		"OPERATOR_PARENT_NOT_FOUND":                10038,
-		"NON_FOLLOW_PARENT_OPERATOR_NOT_FOUND":     10039,
-		"SYSTEM_OPERATOR":                          10040,
-		"LIST_USERS_FAILED":                        10041,
-		"ROLE_NOT_FOUND":                           10042,
-		"FAILED_TO_SEND_EMAIL":                     10043,
-		"VERIFICATION_CODE_SEND_TOO_FREQUENTLY":    10044,
-		"EMAIL_VERIFICATION_FAILED":                10045,
-		"EMAIL_ALREADY_REGISTERED":                 10046,
-		"GENERATE_COMMENT_ID_FAILED":               10047,
-		"ADD_COMMENT_FAILED":                       10048,
-		"GET_COMMENTS_BY_USER_ID_FAILED":           10049,
-		"USER_TAGS_NOT_MATCH_OPERATOR_TAGS":        10050,
-		"INVALID_OPERATOR_TYPE":                    10051,
-		"ADD_USER_DAILY_ACTIVITY_FAILED":           10052,
-		"OPERATOR_ID_NOT_FOUND_BY_ORIGIN":          10053,
-		"OPERATOR_ID_NOT_FOUND_IN_CONTEXT":         10054,
-		"LIST_OPERATORS_FAILED":                    10055,
-		"GET_OPERATORS_BY_IDS_FAILED":              10056,
-		"OPERATOR_HIERARCHY_TOO_DEEP":              10057,
-		"GET_PARENT_OPERATOR_IDS_FAILED":           10058,
-		"CREATE_ORIGIN_TO_OPERATOR_MAPPING_FAILED": 10059,
-		"ORIGIN_ALREADY_EXISTS":                    10060,
-		"GENERATE_BUSINESS_ID_FAILED":              10061,
-		"CREATE_BUSINESS_FAILED":                   10062,
-		"OPERATOR_IDS_NOT_FOUND_BY_ORIGIN":         10063,
-		"OPERATOR_IDS_NOT_FOUND_IN_CONTEXT":        10064,
-		"ACTUAL_OPERATOR_ID_NOT_GET_IN_CONTEXT":    10065,
-		"INVALID_OPERATOR_KEY":                     10066,
-		"GET_OPERATOR_BY_KEY_FAILED":               10067,
-		"OPERATOR_KEY_ALREADY_EXISTS":              10068,
-		"EMPTY_PASSWORD":                           10069,
-		"EMAIL_ALREADY_EXISTS":                     10070,
-		"INVALID_OPERATOR_STATUS":                  10071,
-		"DOMAIN_POOL_EMPTY":                        10072,
-		"TARGET_OPERATOR_NOT_BELONG_TO_OPERATOR":   10073,
-		"OPERATOR_NOT_FOUND_BY_ID":                 10074,
-		"GET_OPERATOR_BY_ID_FAILED":                10075,
-		"INVALID_OPERATOR_TRANSITION_ACTION":       10076,
-		"UPDATE_OPERATOR_STATUS_FAILED":            10077,
-		"INVALID_OPERATOR_CONTEXT":                 10078,
-		"INVALID_OPERATOR_ID":                      10079,
-		"OPERATOR_CONTEXT_PERMISSION_DENIED":       10080,
-		"OPERATOR_CONTEXT_NOT_FOUND_IN_CONTEXT":    10081,
-		"GET_ADMIN_USERS_BY_EMAIL_FAILED":          10082,
+		"UNSPECIFIED":                                   0,
+		"USER_INFO_NOT_FOUND_IN_CONTEXT":                10000,
+		"REQUEST_INFO_NOT_FOUND_IN_CONTEXT":             10001,
+		"USER_NOT_FOUND":                                10002,
+		"USER_AUTH_NOT_FOUND":                           10003,
+		"USER_ALREADY_EXISTS":                           10004,
+		"REVOKE_TOKEN_FAILED":                           10005,
+		"GENERATE_REFRESH_TOKEN_ID_FAILED":              10006,
+		"GENERATE_TOKEN_ID_FAILED":                      10007,
+		"SAVE_TOKEN_FAILED":                             10008,
+		"GET_USER_AUTH_FAILED":                          10009,
+		"GET_USER_FAILED":                               10010,
+		"UPDATE_USER_FAILED":                            10011,
+		"LOCK_USER_AUTH_FAILED":                         10012,
+		"HASH_USER_PASSWORD_FAILED":                     10013,
+		"GENERATE_USER_ID_FAILED":                       10014,
+		"ADD_USER_FAILED":                               10015,
+		"ADD_USER_AUTH_FAILED":                          10016,
+		"USER_DISABLED":                                 10017,
+		"USER_LOGIN_BANNED":                             10018,
+		"INVALID_USER_PASSWORD":                         10019,
+		"GET_TOKEN_WITH_REFRESH_TOKEN_FAILED":           10020,
+		"GET_UNEXPIRED_TOKEN_FOR_USER_FAILED":           10021,
+		"OAUTH_PROVIDER_NOT_SUPPORTED":                  10022,
+		"USERNAME_OR_PASSWORD_INVALID":                  10023,
+		"ADD_USER_TO_WALLET_FAILED":                     10024,
+		"GET_USERS_BY_OPERATOR_IDS_FAILED":              10025,
+		"GET_OPERATOR_ID_BY_ORIGIN_FAILED":              10026,
+		"USER_TAG_ALREADY_EXISTS":                       10027,
+		"USER_TAG_NOT_EXIST":                            10030,
+		"VERIFY_GOOGLE_TOKEN_FAILED":                    10031,
+		"MARSHAL_REQUEST_INFO_FAILED":                   10032,
+		"ADD_USER_EVENT_FAILED":                         10033,
+		"GENERATE_USER_EVENT_ID_FAILED":                 10034,
+		"FOLLOW_PARENT_ENABLED":                         10035,
+		"OPERATOR_TAGS_ALREADY_EXISTS":                  10036,
+		"OPERATOR_TAG_NOT_FOUND":                        10037,
+		"OPERATOR_PARENT_NOT_FOUND":                     10038,
+		"NON_FOLLOW_PARENT_OPERATOR_NOT_FOUND":          10039,
+		"SYSTEM_OPERATOR":                               10040,
+		"LIST_USERS_FAILED":                             10041,
+		"ROLE_NOT_FOUND":                                10042,
+		"FAILED_TO_SEND_EMAIL":                          10043,
+		"VERIFICATION_CODE_SEND_TOO_FREQUENTLY":         10044,
+		"EMAIL_VERIFICATION_FAILED":                     10045,
+		"EMAIL_ALREADY_REGISTERED":                      10046,
+		"GENERATE_COMMENT_ID_FAILED":                    10047,
+		"ADD_COMMENT_FAILED":                            10048,
+		"GET_COMMENTS_BY_USER_ID_FAILED":                10049,
+		"USER_TAGS_NOT_MATCH_OPERATOR_TAGS":             10050,
+		"INVALID_OPERATOR_TYPE":                         10051,
+		"ADD_USER_DAILY_ACTIVITY_FAILED":                10052,
+		"OPERATOR_ID_NOT_FOUND_BY_ORIGIN":               10053,
+		"OPERATOR_ID_NOT_FOUND_IN_CONTEXT":              10054,
+		"LIST_OPERATORS_FAILED":                         10055,
+		"GET_OPERATORS_BY_IDS_FAILED":                   10056,
+		"OPERATOR_HIERARCHY_TOO_DEEP":                   10057,
+		"GET_PARENT_OPERATOR_IDS_FAILED":                10058,
+		"CREATE_ORIGIN_TO_OPERATOR_MAPPING_FAILED":      10059,
+		"ORIGIN_ALREADY_EXISTS":                         10060,
+		"GENERATE_BUSINESS_ID_FAILED":                   10061,
+		"CREATE_BUSINESS_FAILED":                        10062,
+		"OPERATOR_IDS_NOT_FOUND_BY_ORIGIN":              10063,
+		"OPERATOR_IDS_NOT_FOUND_IN_CONTEXT":             10064,
+		"ACTUAL_OPERATOR_ID_NOT_GET_IN_CONTEXT":         10065,
+		"INVALID_OPERATOR_KEY":                          10066,
+		"GET_OPERATOR_BY_KEY_FAILED":                    10067,
+		"OPERATOR_KEY_ALREADY_EXISTS":                   10068,
+		"EMPTY_PASSWORD":                                10069,
+		"EMAIL_ALREADY_EXISTS":                          10070,
+		"INVALID_OPERATOR_STATUS":                       10071,
+		"DOMAIN_POOL_EMPTY":                             10072,
+		"TARGET_OPERATOR_NOT_BELONG_TO_OPERATOR":        10073,
+		"OPERATOR_NOT_FOUND_BY_ID":                      10074,
+		"GET_OPERATOR_BY_ID_FAILED":                     10075,
+		"INVALID_OPERATOR_TRANSITION_ACTION":            10076,
+		"UPDATE_OPERATOR_STATUS_FAILED":                 10077,
+		"INVALID_OPERATOR_CONTEXT":                      10078,
+		"INVALID_OPERATOR_ID":                           10079,
+		"OPERATOR_CONTEXT_PERMISSION_DENIED":            10080,
+		"OPERATOR_CONTEXT_NOT_FOUND_IN_CONTEXT":         10081,
+		"GET_ADMIN_USERS_BY_EMAIL_FAILED":               10082,
+		"OPERATOR_BYO_DOMAIN_ALREADY_EXISTS":            10083,
+		"OPERATOR_BACKOFFICE_BYO_DOMAIN_ALREADY_EXISTS": 10084,
+		"GET_OPERATOR_BY_SUBDOMAIN_FAILED":              10085,
+		"SUBDOMAIN_NOT_EXIST":                           10086,
+		"BYO_DOMAIN_ALREADY_EXISTS":                     10087,
 	}
 )
 
@@ -312,7 +327,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xd1\x14\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\x8f\x16\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x12&\n" +
@@ -395,7 +410,12 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\x13INVALID_OPERATOR_ID\x10\xdfN\x12'\n" +
 	"\"OPERATOR_CONTEXT_PERMISSION_DENIED\x10\xe0N\x12*\n" +
 	"%OPERATOR_CONTEXT_NOT_FOUND_IN_CONTEXT\x10\xe1N\x12$\n" +
-	"\x1fGET_ADMIN_USERS_BY_EMAIL_FAILED\x10\xe2N\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x1fGET_ADMIN_USERS_BY_EMAIL_FAILED\x10\xe2N\x12'\n" +
+	"\"OPERATOR_BYO_DOMAIN_ALREADY_EXISTS\x10\xe3N\x122\n" +
+	"-OPERATOR_BACKOFFICE_BYO_DOMAIN_ALREADY_EXISTS\x10\xe4N\x12%\n" +
+	" GET_OPERATOR_BY_SUBDOMAIN_FAILED\x10\xe5N\x12\x18\n" +
+	"\x13SUBDOMAIN_NOT_EXIST\x10\xe6N\x12\x1e\n" +
+	"\x19BYO_DOMAIN_ALREADY_EXISTS\x10\xe7N\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (

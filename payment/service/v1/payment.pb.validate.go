@@ -383,6 +383,8 @@ func (m *PaymentMethodInfo) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for PspId
+
 	if len(errors) > 0 {
 		return PaymentMethodInfoMultiError(errors)
 	}
@@ -1742,6 +1744,8 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 	// no validation rules for SystemOperatorName
 
 	// no validation rules for OperatorType
+
+	// no validation rules for PspId
 
 	if len(errors) > 0 {
 		return PaymentChannelInfoMultiError(errors)
@@ -3967,6 +3971,18 @@ func (m *TransactionInfo) validate(all bool) error {
 
 	// no validation rules for Gas
 
+	// no validation rules for ReportingCurrency
+
+	// no validation rules for AmountReportingCurrency
+
+	// no validation rules for AmountSentReportingCurrency
+
+	// no validation rules for ProcessingFeeReportingCurrency
+
+	// no validation rules for AmountSentUsd
+
+	// no validation rules for ProcessingFeeUsd
+
 	if len(errors) > 0 {
 		return TransactionInfoMultiError(errors)
 	}
@@ -5780,17 +5796,48 @@ func (m *BankCard) validate(all bool) error {
 
 	// no validation rules for Id
 
-	// no validation rules for CardNumber
+	// no validation rules for CardAccount
 
 	// no validation rules for CardAccountFirstname
 
 	// no validation rules for CardAccountLastname
+
+	// no validation rules for CardIban
 
 	// no validation rules for Currency
 
 	// no validation rules for Country
 
 	// no validation rules for Enabled
+
+	if all {
+		switch v := interface{}(m.GetCardDetail()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, BankCardValidationError{
+					field:  "CardDetail",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, BankCardValidationError{
+					field:  "CardDetail",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCardDetail()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return BankCardValidationError{
+				field:  "CardDetail",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
 		return BankCardMultiError(errors)
@@ -6129,6 +6176,10 @@ func (m *AddBankCardRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Currency
+
+	// no validation rules for Country
+
 	if all {
 		switch v := interface{}(m.GetBankCard()).(type) {
 		case interface{ ValidateAll() error }:
@@ -6260,35 +6311,6 @@ func (m *AddBankCardResponse) validate(all bool) error {
 
 	var errors []error
 
-	if all {
-		switch v := interface{}(m.GetBankCard()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, AddBankCardResponseValidationError{
-					field:  "BankCard",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, AddBankCardResponseValidationError{
-					field:  "BankCard",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetBankCard()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return AddBankCardResponseValidationError{
-				field:  "BankCard",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	if len(errors) > 0 {
 		return AddBankCardResponseMultiError(errors)
 	}
@@ -6391,6 +6413,8 @@ func (m *UpdateBankCardRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Id
+
 	if all {
 		switch v := interface{}(m.GetBankCard()).(type) {
 		case interface{ ValidateAll() error }:
@@ -6418,6 +6442,18 @@ func (m *UpdateBankCardRequest) validate(all bool) error {
 				cause:  err,
 			}
 		}
+	}
+
+	if m.Currency != nil {
+		// no validation rules for Currency
+	}
+
+	if m.Country != nil {
+		// no validation rules for Country
+	}
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
 	}
 
 	if len(errors) > 0 {
@@ -6521,35 +6557,6 @@ func (m *UpdateBankCardResponse) validate(all bool) error {
 	}
 
 	var errors []error
-
-	if all {
-		switch v := interface{}(m.GetBankCard()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UpdateBankCardResponseValidationError{
-					field:  "BankCard",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, UpdateBankCardResponseValidationError{
-					field:  "BankCard",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetBankCard()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UpdateBankCardResponseValidationError{
-				field:  "BankCard",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
 
 	if len(errors) > 0 {
 		return UpdateBankCardResponseMultiError(errors)
