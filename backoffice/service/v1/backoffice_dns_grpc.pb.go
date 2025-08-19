@@ -20,6 +20,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	BackofficeDns_ListOperatorDomains_FullMethodName     = "/api.backoffice.service.v1.BackofficeDns/ListOperatorDomains"
 	BackofficeDns_ListOperatorByoDomains_FullMethodName  = "/api.backoffice.service.v1.BackofficeDns/ListOperatorByoDomains"
 	BackofficeDns_AddOperatorByoDomain_FullMethodName    = "/api.backoffice.service.v1.BackofficeDns/AddOperatorByoDomain"
 	BackofficeDns_DeleteOperatorByoDomain_FullMethodName = "/api.backoffice.service.v1.BackofficeDns/DeleteOperatorByoDomain"
@@ -29,6 +30,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BackofficeDnsClient interface {
+	ListOperatorDomains(ctx context.Context, in *ListOperatorDomainsRequest, opts ...grpc.CallOption) (*v1.ListOperatorDomainsResponse, error)
 	ListOperatorByoDomains(ctx context.Context, in *ListOperatorByoDomainsRequest, opts ...grpc.CallOption) (*v1.ListOperatorByoDomainsResponse, error)
 	AddOperatorByoDomain(ctx context.Context, in *AddOperatorByoDomainRequest, opts ...grpc.CallOption) (*v1.AddOperatorByoDomainResponse, error)
 	DeleteOperatorByoDomain(ctx context.Context, in *DeleteOperatorByoDomainRequest, opts ...grpc.CallOption) (*v1.DeleteOperatorByoDomainResponse, error)
@@ -40,6 +42,16 @@ type backofficeDnsClient struct {
 
 func NewBackofficeDnsClient(cc grpc.ClientConnInterface) BackofficeDnsClient {
 	return &backofficeDnsClient{cc}
+}
+
+func (c *backofficeDnsClient) ListOperatorDomains(ctx context.Context, in *ListOperatorDomainsRequest, opts ...grpc.CallOption) (*v1.ListOperatorDomainsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListOperatorDomainsResponse)
+	err := c.cc.Invoke(ctx, BackofficeDns_ListOperatorDomains_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *backofficeDnsClient) ListOperatorByoDomains(ctx context.Context, in *ListOperatorByoDomainsRequest, opts ...grpc.CallOption) (*v1.ListOperatorByoDomainsResponse, error) {
@@ -76,6 +88,7 @@ func (c *backofficeDnsClient) DeleteOperatorByoDomain(ctx context.Context, in *D
 // All implementations must embed UnimplementedBackofficeDnsServer
 // for forward compatibility.
 type BackofficeDnsServer interface {
+	ListOperatorDomains(context.Context, *ListOperatorDomainsRequest) (*v1.ListOperatorDomainsResponse, error)
 	ListOperatorByoDomains(context.Context, *ListOperatorByoDomainsRequest) (*v1.ListOperatorByoDomainsResponse, error)
 	AddOperatorByoDomain(context.Context, *AddOperatorByoDomainRequest) (*v1.AddOperatorByoDomainResponse, error)
 	DeleteOperatorByoDomain(context.Context, *DeleteOperatorByoDomainRequest) (*v1.DeleteOperatorByoDomainResponse, error)
@@ -89,6 +102,9 @@ type BackofficeDnsServer interface {
 // pointer dereference when methods are called.
 type UnimplementedBackofficeDnsServer struct{}
 
+func (UnimplementedBackofficeDnsServer) ListOperatorDomains(context.Context, *ListOperatorDomainsRequest) (*v1.ListOperatorDomainsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListOperatorDomains not implemented")
+}
 func (UnimplementedBackofficeDnsServer) ListOperatorByoDomains(context.Context, *ListOperatorByoDomainsRequest) (*v1.ListOperatorByoDomainsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperatorByoDomains not implemented")
 }
@@ -117,6 +133,24 @@ func RegisterBackofficeDnsServer(s grpc.ServiceRegistrar, srv BackofficeDnsServe
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&BackofficeDns_ServiceDesc, srv)
+}
+
+func _BackofficeDns_ListOperatorDomains_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOperatorDomainsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeDnsServer).ListOperatorDomains(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeDns_ListOperatorDomains_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeDnsServer).ListOperatorDomains(ctx, req.(*ListOperatorDomainsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _BackofficeDns_ListOperatorByoDomains_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -180,6 +214,10 @@ var BackofficeDns_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "api.backoffice.service.v1.BackofficeDns",
 	HandlerType: (*BackofficeDnsServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListOperatorDomains",
+			Handler:    _BackofficeDns_ListOperatorDomains_Handler,
+		},
 		{
 			MethodName: "ListOperatorByoDomains",
 			Handler:    _BackofficeDns_ListOperatorByoDomains_Handler,

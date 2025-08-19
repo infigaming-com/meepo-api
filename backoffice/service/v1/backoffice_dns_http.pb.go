@@ -23,18 +23,43 @@ const _ = http.SupportPackageIsVersion1
 const OperationBackofficeDnsAddOperatorByoDomain = "/api.backoffice.service.v1.BackofficeDns/AddOperatorByoDomain"
 const OperationBackofficeDnsDeleteOperatorByoDomain = "/api.backoffice.service.v1.BackofficeDns/DeleteOperatorByoDomain"
 const OperationBackofficeDnsListOperatorByoDomains = "/api.backoffice.service.v1.BackofficeDns/ListOperatorByoDomains"
+const OperationBackofficeDnsListOperatorDomains = "/api.backoffice.service.v1.BackofficeDns/ListOperatorDomains"
 
 type BackofficeDnsHTTPServer interface {
 	AddOperatorByoDomain(context.Context, *AddOperatorByoDomainRequest) (*v1.AddOperatorByoDomainResponse, error)
 	DeleteOperatorByoDomain(context.Context, *DeleteOperatorByoDomainRequest) (*v1.DeleteOperatorByoDomainResponse, error)
 	ListOperatorByoDomains(context.Context, *ListOperatorByoDomainsRequest) (*v1.ListOperatorByoDomainsResponse, error)
+	ListOperatorDomains(context.Context, *ListOperatorDomainsRequest) (*v1.ListOperatorDomainsResponse, error)
 }
 
 func RegisterBackofficeDnsHTTPServer(s *http.Server, srv BackofficeDnsHTTPServer) {
 	r := s.Route("/")
+	r.POST("/v1/backoffice/dns/domains/list", _BackofficeDns_ListOperatorDomains0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/dns/byo-domains/list", _BackofficeDns_ListOperatorByoDomains0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/dns/byo-domains/add", _BackofficeDns_AddOperatorByoDomain0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/dns/byo-domains/delete", _BackofficeDns_DeleteOperatorByoDomain0_HTTP_Handler(srv))
+}
+
+func _BackofficeDns_ListOperatorDomains0_HTTP_Handler(srv BackofficeDnsHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListOperatorDomainsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeDnsListOperatorDomains)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListOperatorDomains(ctx, req.(*ListOperatorDomainsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ListOperatorDomainsResponse)
+		return ctx.Result(200, reply)
+	}
 }
 
 func _BackofficeDns_ListOperatorByoDomains0_HTTP_Handler(srv BackofficeDnsHTTPServer) func(ctx http.Context) error {
@@ -107,6 +132,7 @@ type BackofficeDnsHTTPClient interface {
 	AddOperatorByoDomain(ctx context.Context, req *AddOperatorByoDomainRequest, opts ...http.CallOption) (rsp *v1.AddOperatorByoDomainResponse, err error)
 	DeleteOperatorByoDomain(ctx context.Context, req *DeleteOperatorByoDomainRequest, opts ...http.CallOption) (rsp *v1.DeleteOperatorByoDomainResponse, err error)
 	ListOperatorByoDomains(ctx context.Context, req *ListOperatorByoDomainsRequest, opts ...http.CallOption) (rsp *v1.ListOperatorByoDomainsResponse, err error)
+	ListOperatorDomains(ctx context.Context, req *ListOperatorDomainsRequest, opts ...http.CallOption) (rsp *v1.ListOperatorDomainsResponse, err error)
 }
 
 type BackofficeDnsHTTPClientImpl struct {
@@ -148,6 +174,19 @@ func (c *BackofficeDnsHTTPClientImpl) ListOperatorByoDomains(ctx context.Context
 	pattern := "/v1/backoffice/dns/byo-domains/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeDnsListOperatorByoDomains))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeDnsHTTPClientImpl) ListOperatorDomains(ctx context.Context, in *ListOperatorDomainsRequest, opts ...http.CallOption) (*v1.ListOperatorDomainsResponse, error) {
+	var out v1.ListOperatorDomainsResponse
+	pattern := "/v1/backoffice/dns/domains/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeDnsListOperatorDomains))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
