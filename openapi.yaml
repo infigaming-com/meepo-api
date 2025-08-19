@@ -6939,6 +6939,8 @@ components:
             properties:
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                type:
+                    type: string
                 page:
                     type: integer
                     format: int32

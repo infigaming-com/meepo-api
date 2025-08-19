@@ -27,8 +27,9 @@ const (
 type ListOperatorDomainsRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	Page                   *int32                         `protobuf:"varint,2,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize               *int32                         `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Type                   *string                        `protobuf:"bytes,2,opt,name=type,proto3,oneof" json:"type,omitempty"`
+	Page                   *int32                         `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize               *int32                         `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -68,6 +69,13 @@ func (x *ListOperatorDomainsRequest) GetOperatorContextFilters() *common.Operato
 		return x.OperatorContextFilters
 	}
 	return nil
+}
+
+func (x *ListOperatorDomainsRequest) GetType() string {
+	if x != nil && x.Type != nil {
+		return *x.Type
+	}
+	return ""
 }
 
 func (x *ListOperatorDomainsRequest) GetPage() int32 {
@@ -236,11 +244,13 @@ var File_backoffice_service_v1_backoffice_dns_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_dns_proto_rawDesc = "" +
 	"\n" +
-	"*backoffice/service/v1/backoffice_dns.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x13common/common.proto\x1a\x19user/service/v1/dns.proto\"\xcc\x01\n" +
+	"*backoffice/service/v1/backoffice_dns.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x13common/common.proto\x1a\x19user/service/v1/dns.proto\"\xee\x01\n" +
 	"\x1aListOperatorDomainsRequest\x12\\\n" +
 	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x17\n" +
-	"\x04page\x18\x02 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x03 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
+	"\x04type\x18\x02 \x01(\tH\x00R\x04type\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x03 \x01(\x05H\x01R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x04 \x01(\x05H\x02R\bpageSize\x88\x01\x01B\a\n" +
+	"\x05_typeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_size\"q\n" +
