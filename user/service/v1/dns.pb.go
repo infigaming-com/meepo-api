@@ -225,7 +225,7 @@ func (x *ListOperatorByoDomainsRequest) GetPageSize() int32 {
 
 type ListOperatorByoDomainsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ByoDomains    []*ByoDomainInfo       `protobuf:"bytes,1,rep,name=byo_domains,json=byoDomains,proto3" json:"byo_domains,omitempty"`
+	Data          []*ByoDomainInfo       `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
 	Page          int32                  `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize      int32                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
@@ -263,9 +263,9 @@ func (*ListOperatorByoDomainsResponse) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *ListOperatorByoDomainsResponse) GetByoDomains() []*ByoDomainInfo {
+func (x *ListOperatorByoDomainsResponse) GetData() []*ByoDomainInfo {
 	if x != nil {
-		return x.ByoDomains
+		return x.Data
 	}
 	return nil
 }
@@ -503,10 +503,9 @@ const file_user_service_v1_dns_proto_rawDesc = "" +
 	"\tpage_size\x18\x03 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xac\x01\n" +
-	"\x1eListOperatorByoDomainsResponse\x12C\n" +
-	"\vbyo_domains\x18\x01 \x03(\v2\".api.user.service.v1.ByoDomainInfoR\n" +
-	"byoDomains\x12\x12\n" +
+	"_page_size\"\x9f\x01\n" +
+	"\x1eListOperatorByoDomainsResponse\x126\n" +
+	"\x04data\x18\x01 \x03(\v2\".api.user.service.v1.ByoDomainInfoR\x04data\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
 	"\x05total\x18\x04 \x01(\x05R\x05total\"\x9c\x01\n" +
@@ -554,7 +553,7 @@ var file_user_service_v1_dns_proto_goTypes = []any{
 var file_user_service_v1_dns_proto_depIdxs = []int32{
 	7, // 0: api.user.service.v1.ByoDomainInfo.created_at:type_name -> google.protobuf.Timestamp
 	8, // 1: api.user.service.v1.ListOperatorByoDomainsRequest.operator_context:type_name -> api.common.OperatorContext
-	0, // 2: api.user.service.v1.ListOperatorByoDomainsResponse.byo_domains:type_name -> api.user.service.v1.ByoDomainInfo
+	0, // 2: api.user.service.v1.ListOperatorByoDomainsResponse.data:type_name -> api.user.service.v1.ByoDomainInfo
 	8, // 3: api.user.service.v1.AddOperatorByoDomainRequest.operator_context:type_name -> api.common.OperatorContext
 	8, // 4: api.user.service.v1.DeleteOperatorByoDomainRequest.operator_context:type_name -> api.common.OperatorContext
 	1, // 5: api.user.service.v1.Dns.ListOperatorByoDomains:input_type -> api.user.service.v1.ListOperatorByoDomainsRequest

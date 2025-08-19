@@ -47,7 +47,7 @@ message ListOperatorByoDomainsRequest {
 }
 
 message ListOperatorByoDomainsResponse {
-	repeated ByoDomainInfo byo_domains = 1;
+	repeated ByoDomainInfo data = 1;
 	int32 page = 2;
 	int32 page_size = 3;
 	int32 total = 4;
