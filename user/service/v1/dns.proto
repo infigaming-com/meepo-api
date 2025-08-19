@@ -42,8 +42,8 @@ message ByoDomainInfo {
 
 message ListOperatorByoDomainsRequest {
 	api.common.OperatorContext operator_context = 1;
-	int32 page = 2;
-	int32 page_size = 3;
+	optional int32 page = 2;
+	optional int32 page_size = 3;
 }
 
 message ListOperatorByoDomainsResponse {

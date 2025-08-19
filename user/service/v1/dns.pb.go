@@ -166,8 +166,8 @@ func (x *ByoDomainInfo) GetCreatedAt() *timestamppb.Timestamp {
 type ListOperatorByoDomainsRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	Page            int32                   `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize        int32                   `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Page            *int32                  `protobuf:"varint,2,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize        *int32                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -210,15 +210,15 @@ func (x *ListOperatorByoDomainsRequest) GetOperatorContext() *common.OperatorCon
 }
 
 func (x *ListOperatorByoDomainsRequest) GetPage() int32 {
-	if x != nil {
-		return x.Page
+	if x != nil && x.Page != nil {
+		return *x.Page
 	}
 	return 0
 }
 
 func (x *ListOperatorByoDomainsRequest) GetPageSize() int32 {
-	if x != nil {
-		return x.PageSize
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
 	}
 	return 0
 }
@@ -496,11 +496,14 @@ const file_user_service_v1_dns_proto_rawDesc = "" +
 	"\x17target_real_operator_id\x18\v \x01(\x03R\x14targetRealOperatorId\x120\n" +
 	"\x14target_operator_type\x18\f \x01(\tR\x12targetOperatorType\x129\n" +
 	"\n" +
-	"created_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x98\x01\n" +
+	"created_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xb9\x01\n" +
 	"\x1dListOperatorByoDomainsRequest\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x12\n" +
-	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\"\xac\x01\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x17\n" +
+	"\x04page\x18\x02 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x03 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\xac\x01\n" +
 	"\x1eListOperatorByoDomainsResponse\x12C\n" +
 	"\vbyo_domains\x18\x01 \x03(\v2\".api.user.service.v1.ByoDomainInfoR\n" +
 	"byoDomains\x12\x12\n" +
@@ -572,6 +575,7 @@ func file_user_service_v1_dns_proto_init() {
 	if File_user_service_v1_dns_proto != nil {
 		return
 	}
+	file_user_service_v1_dns_proto_msgTypes[1].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
