@@ -24,13 +24,22 @@ const (
 )
 
 type ByoDomainInfo struct {
-	state           protoimpl.MessageState  `protogen:"open.v1"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	ByoDomain       string                  `protobuf:"bytes,2,opt,name=byo_domain,json=byoDomain,proto3" json:"byo_domain,omitempty"`
-	Domain          string                  `protobuf:"bytes,3,opt,name=domain,proto3" json:"domain,omitempty"`
-	CreatedAt       *timestamppb.Timestamp  `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState `protogen:"open.v1"`
+	ByoDomain                  string                 `protobuf:"bytes,1,opt,name=byo_domain,json=byoDomain,proto3" json:"byo_domain,omitempty"`
+	Domain                     string                 `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
+	TargetOperatorId           int64                  `protobuf:"varint,3,opt,name=target_operator_id,json=targetOperatorId,proto3" json:"target_operator_id,omitempty"`
+	TargetOperatorName         string                 `protobuf:"bytes,4,opt,name=target_operator_name,json=targetOperatorName,proto3" json:"target_operator_name,omitempty"`
+	TargetCompanyOperatorId    int64                  `protobuf:"varint,5,opt,name=target_company_operator_id,json=targetCompanyOperatorId,proto3" json:"target_company_operator_id,omitempty"`
+	TargetCompanyOperatorName  string                 `protobuf:"bytes,6,opt,name=target_company_operator_name,json=targetCompanyOperatorName,proto3" json:"target_company_operator_name,omitempty"`
+	TargetRetailerOperatorId   int64                  `protobuf:"varint,7,opt,name=target_retailer_operator_id,json=targetRetailerOperatorId,proto3" json:"target_retailer_operator_id,omitempty"`
+	TargetRetailerOperatorName string                 `protobuf:"bytes,8,opt,name=target_retailer_operator_name,json=targetRetailerOperatorName,proto3" json:"target_retailer_operator_name,omitempty"`
+	TargetSystemOperatorId     int64                  `protobuf:"varint,9,opt,name=target_system_operator_id,json=targetSystemOperatorId,proto3" json:"target_system_operator_id,omitempty"`
+	TargetSystemOperatorName   string                 `protobuf:"bytes,10,opt,name=target_system_operator_name,json=targetSystemOperatorName,proto3" json:"target_system_operator_name,omitempty"`
+	TargetRealOperatorId       int64                  `protobuf:"varint,11,opt,name=target_real_operator_id,json=targetRealOperatorId,proto3" json:"target_real_operator_id,omitempty"`
+	TargetOperatorType         string                 `protobuf:"bytes,12,opt,name=target_operator_type,json=targetOperatorType,proto3" json:"target_operator_type,omitempty"`
+	CreatedAt                  *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ByoDomainInfo) Reset() {
@@ -63,13 +72,6 @@ func (*ByoDomainInfo) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ByoDomainInfo) GetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.OperatorContext
-	}
-	return nil
-}
-
 func (x *ByoDomainInfo) GetByoDomain() string {
 	if x != nil {
 		return x.ByoDomain
@@ -84,6 +86,76 @@ func (x *ByoDomainInfo) GetDomain() string {
 	return ""
 }
 
+func (x *ByoDomainInfo) GetTargetOperatorId() int64 {
+	if x != nil {
+		return x.TargetOperatorId
+	}
+	return 0
+}
+
+func (x *ByoDomainInfo) GetTargetOperatorName() string {
+	if x != nil {
+		return x.TargetOperatorName
+	}
+	return ""
+}
+
+func (x *ByoDomainInfo) GetTargetCompanyOperatorId() int64 {
+	if x != nil {
+		return x.TargetCompanyOperatorId
+	}
+	return 0
+}
+
+func (x *ByoDomainInfo) GetTargetCompanyOperatorName() string {
+	if x != nil {
+		return x.TargetCompanyOperatorName
+	}
+	return ""
+}
+
+func (x *ByoDomainInfo) GetTargetRetailerOperatorId() int64 {
+	if x != nil {
+		return x.TargetRetailerOperatorId
+	}
+	return 0
+}
+
+func (x *ByoDomainInfo) GetTargetRetailerOperatorName() string {
+	if x != nil {
+		return x.TargetRetailerOperatorName
+	}
+	return ""
+}
+
+func (x *ByoDomainInfo) GetTargetSystemOperatorId() int64 {
+	if x != nil {
+		return x.TargetSystemOperatorId
+	}
+	return 0
+}
+
+func (x *ByoDomainInfo) GetTargetSystemOperatorName() string {
+	if x != nil {
+		return x.TargetSystemOperatorName
+	}
+	return ""
+}
+
+func (x *ByoDomainInfo) GetTargetRealOperatorId() int64 {
+	if x != nil {
+		return x.TargetRealOperatorId
+	}
+	return 0
+}
+
+func (x *ByoDomainInfo) GetTargetOperatorType() string {
+	if x != nil {
+		return x.TargetOperatorType
+	}
+	return ""
+}
+
 func (x *ByoDomainInfo) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
@@ -94,6 +166,8 @@ func (x *ByoDomainInfo) GetCreatedAt() *timestamppb.Timestamp {
 type ListOperatorByoDomainsRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Page            int32                   `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize        int32                   `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -135,9 +209,26 @@ func (x *ListOperatorByoDomainsRequest) GetOperatorContext() *common.OperatorCon
 	return nil
 }
 
+func (x *ListOperatorByoDomainsRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListOperatorByoDomainsRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
 type ListOperatorByoDomainsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ByoDomains    []*ByoDomainInfo       `protobuf:"bytes,1,rep,name=byo_domains,json=byoDomains,proto3" json:"byo_domains,omitempty"`
+	Page          int32                  `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -177,6 +268,27 @@ func (x *ListOperatorByoDomainsResponse) GetByoDomains() []*ByoDomainInfo {
 		return x.ByoDomains
 	}
 	return nil
+}
+
+func (x *ListOperatorByoDomainsResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListOperatorByoDomainsResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListOperatorByoDomainsResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
 }
 
 type AddOperatorByoDomainRequest struct {
@@ -367,19 +479,34 @@ var File_user_service_v1_dns_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_dns_proto_rawDesc = "" +
 	"\n" +
-	"\x19user/service/v1/dns.proto\x12\x13api.user.service.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\"\xc9\x01\n" +
-	"\rByoDomainInfo\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1d\n" +
+	"\x19user/service/v1/dns.proto\x12\x13api.user.service.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\"\xc4\x05\n" +
+	"\rByoDomainInfo\x12\x1d\n" +
 	"\n" +
-	"byo_domain\x18\x02 \x01(\tR\tbyoDomain\x12\x16\n" +
-	"\x06domain\x18\x03 \x01(\tR\x06domain\x129\n" +
+	"byo_domain\x18\x01 \x01(\tR\tbyoDomain\x12\x16\n" +
+	"\x06domain\x18\x02 \x01(\tR\x06domain\x12,\n" +
+	"\x12target_operator_id\x18\x03 \x01(\x03R\x10targetOperatorId\x120\n" +
+	"\x14target_operator_name\x18\x04 \x01(\tR\x12targetOperatorName\x12;\n" +
+	"\x1atarget_company_operator_id\x18\x05 \x01(\x03R\x17targetCompanyOperatorId\x12?\n" +
+	"\x1ctarget_company_operator_name\x18\x06 \x01(\tR\x19targetCompanyOperatorName\x12=\n" +
+	"\x1btarget_retailer_operator_id\x18\a \x01(\x03R\x18targetRetailerOperatorId\x12A\n" +
+	"\x1dtarget_retailer_operator_name\x18\b \x01(\tR\x1atargetRetailerOperatorName\x129\n" +
+	"\x19target_system_operator_id\x18\t \x01(\x03R\x16targetSystemOperatorId\x12=\n" +
+	"\x1btarget_system_operator_name\x18\n" +
+	" \x01(\tR\x18targetSystemOperatorName\x125\n" +
+	"\x17target_real_operator_id\x18\v \x01(\x03R\x14targetRealOperatorId\x120\n" +
+	"\x14target_operator_type\x18\f \x01(\tR\x12targetOperatorType\x129\n" +
 	"\n" +
-	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"g\n" +
+	"created_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x98\x01\n" +
 	"\x1dListOperatorByoDomainsRequest\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"e\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x12\n" +
+	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\"\xac\x01\n" +
 	"\x1eListOperatorByoDomainsResponse\x12C\n" +
 	"\vbyo_domains\x18\x01 \x03(\v2\".api.user.service.v1.ByoDomainInfoR\n" +
-	"byoDomains\"\x9c\x01\n" +
+	"byoDomains\x12\x12\n" +
+	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"\x9c\x01\n" +
 	"\x1bAddOperatorByoDomainRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1d\n" +
 	"\n" +
@@ -418,27 +545,26 @@ var file_user_service_v1_dns_proto_goTypes = []any{
 	(*AddOperatorByoDomainResponse)(nil),    // 4: api.user.service.v1.AddOperatorByoDomainResponse
 	(*DeleteOperatorByoDomainRequest)(nil),  // 5: api.user.service.v1.DeleteOperatorByoDomainRequest
 	(*DeleteOperatorByoDomainResponse)(nil), // 6: api.user.service.v1.DeleteOperatorByoDomainResponse
-	(*common.OperatorContext)(nil),          // 7: api.common.OperatorContext
-	(*timestamppb.Timestamp)(nil),           // 8: google.protobuf.Timestamp
+	(*timestamppb.Timestamp)(nil),           // 7: google.protobuf.Timestamp
+	(*common.OperatorContext)(nil),          // 8: api.common.OperatorContext
 }
 var file_user_service_v1_dns_proto_depIdxs = []int32{
-	7, // 0: api.user.service.v1.ByoDomainInfo.operator_context:type_name -> api.common.OperatorContext
-	8, // 1: api.user.service.v1.ByoDomainInfo.created_at:type_name -> google.protobuf.Timestamp
-	7, // 2: api.user.service.v1.ListOperatorByoDomainsRequest.operator_context:type_name -> api.common.OperatorContext
-	0, // 3: api.user.service.v1.ListOperatorByoDomainsResponse.byo_domains:type_name -> api.user.service.v1.ByoDomainInfo
-	7, // 4: api.user.service.v1.AddOperatorByoDomainRequest.operator_context:type_name -> api.common.OperatorContext
-	7, // 5: api.user.service.v1.DeleteOperatorByoDomainRequest.operator_context:type_name -> api.common.OperatorContext
-	1, // 6: api.user.service.v1.Dns.ListOperatorByoDomains:input_type -> api.user.service.v1.ListOperatorByoDomainsRequest
-	3, // 7: api.user.service.v1.Dns.AddOperatorByoDomain:input_type -> api.user.service.v1.AddOperatorByoDomainRequest
-	5, // 8: api.user.service.v1.Dns.DeleteOperatorByoDomain:input_type -> api.user.service.v1.DeleteOperatorByoDomainRequest
-	2, // 9: api.user.service.v1.Dns.ListOperatorByoDomains:output_type -> api.user.service.v1.ListOperatorByoDomainsResponse
-	4, // 10: api.user.service.v1.Dns.AddOperatorByoDomain:output_type -> api.user.service.v1.AddOperatorByoDomainResponse
-	6, // 11: api.user.service.v1.Dns.DeleteOperatorByoDomain:output_type -> api.user.service.v1.DeleteOperatorByoDomainResponse
-	9, // [9:12] is the sub-list for method output_type
-	6, // [6:9] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	7, // 0: api.user.service.v1.ByoDomainInfo.created_at:type_name -> google.protobuf.Timestamp
+	8, // 1: api.user.service.v1.ListOperatorByoDomainsRequest.operator_context:type_name -> api.common.OperatorContext
+	0, // 2: api.user.service.v1.ListOperatorByoDomainsResponse.byo_domains:type_name -> api.user.service.v1.ByoDomainInfo
+	8, // 3: api.user.service.v1.AddOperatorByoDomainRequest.operator_context:type_name -> api.common.OperatorContext
+	8, // 4: api.user.service.v1.DeleteOperatorByoDomainRequest.operator_context:type_name -> api.common.OperatorContext
+	1, // 5: api.user.service.v1.Dns.ListOperatorByoDomains:input_type -> api.user.service.v1.ListOperatorByoDomainsRequest
+	3, // 6: api.user.service.v1.Dns.AddOperatorByoDomain:input_type -> api.user.service.v1.AddOperatorByoDomainRequest
+	5, // 7: api.user.service.v1.Dns.DeleteOperatorByoDomain:input_type -> api.user.service.v1.DeleteOperatorByoDomainRequest
+	2, // 8: api.user.service.v1.Dns.ListOperatorByoDomains:output_type -> api.user.service.v1.ListOperatorByoDomainsResponse
+	4, // 9: api.user.service.v1.Dns.AddOperatorByoDomain:output_type -> api.user.service.v1.AddOperatorByoDomainResponse
+	6, // 10: api.user.service.v1.Dns.DeleteOperatorByoDomain:output_type -> api.user.service.v1.DeleteOperatorByoDomainResponse
+	8, // [8:11] is the sub-list for method output_type
+	5, // [5:8] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_user_service_v1_dns_proto_init() }

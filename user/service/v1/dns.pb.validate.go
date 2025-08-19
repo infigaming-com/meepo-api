@@ -57,38 +57,29 @@ func (m *ByoDomainInfo) validate(all bool) error {
 
 	var errors []error
 
-	if all {
-		switch v := interface{}(m.GetOperatorContext()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ByoDomainInfoValidationError{
-					field:  "OperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ByoDomainInfoValidationError{
-					field:  "OperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ByoDomainInfoValidationError{
-				field:  "OperatorContext",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	// no validation rules for ByoDomain
 
 	// no validation rules for Domain
+
+	// no validation rules for TargetOperatorId
+
+	// no validation rules for TargetOperatorName
+
+	// no validation rules for TargetCompanyOperatorId
+
+	// no validation rules for TargetCompanyOperatorName
+
+	// no validation rules for TargetRetailerOperatorId
+
+	// no validation rules for TargetRetailerOperatorName
+
+	// no validation rules for TargetSystemOperatorId
+
+	// no validation rules for TargetSystemOperatorName
+
+	// no validation rules for TargetRealOperatorId
+
+	// no validation rules for TargetOperatorType
 
 	if all {
 		switch v := interface{}(m.GetCreatedAt()).(type) {
@@ -248,6 +239,10 @@ func (m *ListOperatorByoDomainsRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
 	if len(errors) > 0 {
 		return ListOperatorByoDomainsRequestMultiError(errors)
 	}
@@ -384,6 +379,12 @@ func (m *ListOperatorByoDomainsResponse) validate(all bool) error {
 		}
 
 	}
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	// no validation rules for Total
 
 	if len(errors) > 0 {
 		return ListOperatorByoDomainsResponseMultiError(errors)
