@@ -7,6 +7,7 @@
 package v1
 
 import (
+	common "github.com/infigaming-com/meepo-api/common"
 	v1 "github.com/infigaming-com/meepo-api/user/service/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -23,6 +24,66 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type ListOperatorDomainsRequest struct {
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	Page                   *int32                         `protobuf:"varint,2,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize               *int32                         `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *ListOperatorDomainsRequest) Reset() {
+	*x = ListOperatorDomainsRequest{}
+	mi := &file_backoffice_service_v1_backoffice_dns_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListOperatorDomainsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListOperatorDomainsRequest) ProtoMessage() {}
+
+func (x *ListOperatorDomainsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_dns_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListOperatorDomainsRequest.ProtoReflect.Descriptor instead.
+func (*ListOperatorDomainsRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_dns_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *ListOperatorDomainsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
+func (x *ListOperatorDomainsRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListOperatorDomainsRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
 type ListOperatorByoDomainsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Page          *int32                 `protobuf:"varint,2,opt,name=page,proto3,oneof" json:"page,omitempty"`
@@ -33,7 +94,7 @@ type ListOperatorByoDomainsRequest struct {
 
 func (x *ListOperatorByoDomainsRequest) Reset() {
 	*x = ListOperatorByoDomainsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_dns_proto_msgTypes[0]
+	mi := &file_backoffice_service_v1_backoffice_dns_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45,7 +106,7 @@ func (x *ListOperatorByoDomainsRequest) String() string {
 func (*ListOperatorByoDomainsRequest) ProtoMessage() {}
 
 func (x *ListOperatorByoDomainsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_dns_proto_msgTypes[0]
+	mi := &file_backoffice_service_v1_backoffice_dns_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58,7 +119,7 @@ func (x *ListOperatorByoDomainsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOperatorByoDomainsRequest.ProtoReflect.Descriptor instead.
 func (*ListOperatorByoDomainsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_dns_proto_rawDescGZIP(), []int{0}
+	return file_backoffice_service_v1_backoffice_dns_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *ListOperatorByoDomainsRequest) GetPage() int32 {
@@ -85,7 +146,7 @@ type AddOperatorByoDomainRequest struct {
 
 func (x *AddOperatorByoDomainRequest) Reset() {
 	*x = AddOperatorByoDomainRequest{}
-	mi := &file_backoffice_service_v1_backoffice_dns_proto_msgTypes[1]
+	mi := &file_backoffice_service_v1_backoffice_dns_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -97,7 +158,7 @@ func (x *AddOperatorByoDomainRequest) String() string {
 func (*AddOperatorByoDomainRequest) ProtoMessage() {}
 
 func (x *AddOperatorByoDomainRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_dns_proto_msgTypes[1]
+	mi := &file_backoffice_service_v1_backoffice_dns_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -110,7 +171,7 @@ func (x *AddOperatorByoDomainRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddOperatorByoDomainRequest.ProtoReflect.Descriptor instead.
 func (*AddOperatorByoDomainRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_dns_proto_rawDescGZIP(), []int{1}
+	return file_backoffice_service_v1_backoffice_dns_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *AddOperatorByoDomainRequest) GetByoDomain() string {
@@ -136,7 +197,7 @@ type DeleteOperatorByoDomainRequest struct {
 
 func (x *DeleteOperatorByoDomainRequest) Reset() {
 	*x = DeleteOperatorByoDomainRequest{}
-	mi := &file_backoffice_service_v1_backoffice_dns_proto_msgTypes[2]
+	mi := &file_backoffice_service_v1_backoffice_dns_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -148,7 +209,7 @@ func (x *DeleteOperatorByoDomainRequest) String() string {
 func (*DeleteOperatorByoDomainRequest) ProtoMessage() {}
 
 func (x *DeleteOperatorByoDomainRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_dns_proto_msgTypes[2]
+	mi := &file_backoffice_service_v1_backoffice_dns_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -161,7 +222,7 @@ func (x *DeleteOperatorByoDomainRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteOperatorByoDomainRequest.ProtoReflect.Descriptor instead.
 func (*DeleteOperatorByoDomainRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_dns_proto_rawDescGZIP(), []int{2}
+	return file_backoffice_service_v1_backoffice_dns_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *DeleteOperatorByoDomainRequest) GetByoDomain() string {
@@ -175,7 +236,14 @@ var File_backoffice_service_v1_backoffice_dns_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_dns_proto_rawDesc = "" +
 	"\n" +
-	"*backoffice/service/v1/backoffice_dns.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x19user/service/v1/dns.proto\"q\n" +
+	"*backoffice/service/v1/backoffice_dns.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x13common/common.proto\x1a\x19user/service/v1/dns.proto\"\xcc\x01\n" +
+	"\x1aListOperatorDomainsRequest\x12\\\n" +
+	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x17\n" +
+	"\x04page\x18\x02 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x03 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"q\n" +
 	"\x1dListOperatorByoDomainsRequest\x12\x17\n" +
 	"\x04page\x18\x02 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\x03 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
@@ -188,8 +256,9 @@ const file_backoffice_service_v1_backoffice_dns_proto_rawDesc = "" +
 	"\x06domain\x18\x03 \x01(\tR\x06domain\"?\n" +
 	"\x1eDeleteOperatorByoDomainRequest\x12\x1d\n" +
 	"\n" +
-	"byo_domain\x18\x02 \x01(\tR\tbyoDomain2\xbb\x04\n" +
-	"\rBackofficeDns\x12\xb7\x01\n" +
+	"byo_domain\x18\x02 \x01(\tR\tbyoDomain2\xe8\x05\n" +
+	"\rBackofficeDns\x12\xaa\x01\n" +
+	"\x13ListOperatorDomains\x125.api.backoffice.service.v1.ListOperatorDomainsRequest\x1a0.api.user.service.v1.ListOperatorDomainsResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/dns/domains/list\x12\xb7\x01\n" +
 	"\x16ListOperatorByoDomains\x128.api.backoffice.service.v1.ListOperatorByoDomainsRequest\x1a3.api.user.service.v1.ListOperatorByoDomainsResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/dns/byo-domains/list\x12\xb0\x01\n" +
 	"\x14AddOperatorByoDomain\x126.api.backoffice.service.v1.AddOperatorByoDomainRequest\x1a1.api.user.service.v1.AddOperatorByoDomainResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/dns/byo-domains/add\x12\xbc\x01\n" +
 	"\x17DeleteOperatorByoDomain\x129.api.backoffice.service.v1.DeleteOperatorByoDomainRequest\x1a4.api.user.service.v1.DeleteOperatorByoDomainResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/dns/byo-domains/deleteB[\n" +
@@ -207,27 +276,33 @@ func file_backoffice_service_v1_backoffice_dns_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_dns_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_dns_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_backoffice_service_v1_backoffice_dns_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_backoffice_service_v1_backoffice_dns_proto_goTypes = []any{
-	(*ListOperatorByoDomainsRequest)(nil),      // 0: api.backoffice.service.v1.ListOperatorByoDomainsRequest
-	(*AddOperatorByoDomainRequest)(nil),        // 1: api.backoffice.service.v1.AddOperatorByoDomainRequest
-	(*DeleteOperatorByoDomainRequest)(nil),     // 2: api.backoffice.service.v1.DeleteOperatorByoDomainRequest
-	(*v1.ListOperatorByoDomainsResponse)(nil),  // 3: api.user.service.v1.ListOperatorByoDomainsResponse
-	(*v1.AddOperatorByoDomainResponse)(nil),    // 4: api.user.service.v1.AddOperatorByoDomainResponse
-	(*v1.DeleteOperatorByoDomainResponse)(nil), // 5: api.user.service.v1.DeleteOperatorByoDomainResponse
+	(*ListOperatorDomainsRequest)(nil),         // 0: api.backoffice.service.v1.ListOperatorDomainsRequest
+	(*ListOperatorByoDomainsRequest)(nil),      // 1: api.backoffice.service.v1.ListOperatorByoDomainsRequest
+	(*AddOperatorByoDomainRequest)(nil),        // 2: api.backoffice.service.v1.AddOperatorByoDomainRequest
+	(*DeleteOperatorByoDomainRequest)(nil),     // 3: api.backoffice.service.v1.DeleteOperatorByoDomainRequest
+	(*common.OperatorContextFilters)(nil),      // 4: api.common.OperatorContextFilters
+	(*v1.ListOperatorDomainsResponse)(nil),     // 5: api.user.service.v1.ListOperatorDomainsResponse
+	(*v1.ListOperatorByoDomainsResponse)(nil),  // 6: api.user.service.v1.ListOperatorByoDomainsResponse
+	(*v1.AddOperatorByoDomainResponse)(nil),    // 7: api.user.service.v1.AddOperatorByoDomainResponse
+	(*v1.DeleteOperatorByoDomainResponse)(nil), // 8: api.user.service.v1.DeleteOperatorByoDomainResponse
 }
 var file_backoffice_service_v1_backoffice_dns_proto_depIdxs = []int32{
-	0, // 0: api.backoffice.service.v1.BackofficeDns.ListOperatorByoDomains:input_type -> api.backoffice.service.v1.ListOperatorByoDomainsRequest
-	1, // 1: api.backoffice.service.v1.BackofficeDns.AddOperatorByoDomain:input_type -> api.backoffice.service.v1.AddOperatorByoDomainRequest
-	2, // 2: api.backoffice.service.v1.BackofficeDns.DeleteOperatorByoDomain:input_type -> api.backoffice.service.v1.DeleteOperatorByoDomainRequest
-	3, // 3: api.backoffice.service.v1.BackofficeDns.ListOperatorByoDomains:output_type -> api.user.service.v1.ListOperatorByoDomainsResponse
-	4, // 4: api.backoffice.service.v1.BackofficeDns.AddOperatorByoDomain:output_type -> api.user.service.v1.AddOperatorByoDomainResponse
-	5, // 5: api.backoffice.service.v1.BackofficeDns.DeleteOperatorByoDomain:output_type -> api.user.service.v1.DeleteOperatorByoDomainResponse
-	3, // [3:6] is the sub-list for method output_type
-	0, // [0:3] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	4, // 0: api.backoffice.service.v1.ListOperatorDomainsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	0, // 1: api.backoffice.service.v1.BackofficeDns.ListOperatorDomains:input_type -> api.backoffice.service.v1.ListOperatorDomainsRequest
+	1, // 2: api.backoffice.service.v1.BackofficeDns.ListOperatorByoDomains:input_type -> api.backoffice.service.v1.ListOperatorByoDomainsRequest
+	2, // 3: api.backoffice.service.v1.BackofficeDns.AddOperatorByoDomain:input_type -> api.backoffice.service.v1.AddOperatorByoDomainRequest
+	3, // 4: api.backoffice.service.v1.BackofficeDns.DeleteOperatorByoDomain:input_type -> api.backoffice.service.v1.DeleteOperatorByoDomainRequest
+	5, // 5: api.backoffice.service.v1.BackofficeDns.ListOperatorDomains:output_type -> api.user.service.v1.ListOperatorDomainsResponse
+	6, // 6: api.backoffice.service.v1.BackofficeDns.ListOperatorByoDomains:output_type -> api.user.service.v1.ListOperatorByoDomainsResponse
+	7, // 7: api.backoffice.service.v1.BackofficeDns.AddOperatorByoDomain:output_type -> api.user.service.v1.AddOperatorByoDomainResponse
+	8, // 8: api.backoffice.service.v1.BackofficeDns.DeleteOperatorByoDomain:output_type -> api.user.service.v1.DeleteOperatorByoDomainResponse
+	5, // [5:9] is the sub-list for method output_type
+	1, // [1:5] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_dns_proto_init() }
@@ -236,13 +311,14 @@ func file_backoffice_service_v1_backoffice_dns_proto_init() {
 		return
 	}
 	file_backoffice_service_v1_backoffice_dns_proto_msgTypes[0].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_dns_proto_msgTypes[1].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_dns_proto_rawDesc), len(file_backoffice_service_v1_backoffice_dns_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

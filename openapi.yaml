@@ -785,6 +785,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.ListOperatorByoDomainsResponse'
+    /v1/backoffice/dns/domains/list:
+        post:
+            tags:
+                - BackofficeDns
+            operationId: BackofficeDns_ListOperatorDomains
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorDomainsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.ListOperatorDomainsResponse'
     /v1/backoffice/filestore/operator-static-files/upload:
         post:
             tags:
@@ -6916,6 +6934,17 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.ListOperatorDomainsRequest:
+            type: object
+            properties:
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListOperatorRevenueShareRequest:
             type: object
             properties:
@@ -10719,6 +10748,33 @@ components:
         api.user.service.v1.DeleteOperatorByoDomainResponse:
             type: object
             properties: {}
+        api.user.service.v1.DomainInfo:
+            type: object
+            properties:
+                domain:
+                    type: string
+                type:
+                    type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                systemOperatorId:
+                    type: string
+                realOperatorId:
+                    type: string
+                operatorType:
+                    type: string
+                operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
         api.user.service.v1.GetUserRequest:
             type: object
             properties:
@@ -10763,6 +10819,13 @@ components:
                 total:
                     type: integer
                     format: int32
+        api.user.service.v1.ListOperatorDomainsResponse:
+            type: object
+            properties:
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.DomainInfo'
         api.user.service.v1.ListOperatorsByAdminEmailResponse:
             type: object
             properties:

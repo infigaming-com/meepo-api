@@ -3,6 +3,7 @@ syntax = "proto3";
 package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
+import "common/common.proto";
 import "user/service/v1/dns.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
@@ -10,6 +11,13 @@ option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
 
 service BackofficeDns {
+	rpc ListOperatorDomains(ListOperatorDomainsRequest) returns (user.service.v1.ListOperatorDomainsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/dns/domains/list"
+			body: "*"
+		};
+	}
+
 	rpc ListOperatorByoDomains(ListOperatorByoDomainsRequest) returns (user.service.v1.ListOperatorByoDomainsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/dns/byo-domains/list"
@@ -30,6 +38,12 @@ service BackofficeDns {
 			body: "*"
 		};
 	}
+}
+
+message ListOperatorDomainsRequest {
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	optional int32 page = 2;
+	optional int32 page_size = 3;
 }
 
 message ListOperatorByoDomainsRequest {
