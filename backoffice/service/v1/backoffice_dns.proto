@@ -43,8 +43,6 @@ service BackofficeDns {
 message ListOperatorDomainsRequest {
 	api.common.OperatorContextFilters operator_context_filters = 1;
 	optional string type = 2;
-	optional int32 page = 3;
-	optional int32 page_size = 4;
 }
 
 message ListOperatorByoDomainsRequest {
