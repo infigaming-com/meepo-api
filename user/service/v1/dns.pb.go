@@ -27,17 +27,18 @@ type ByoDomainInfo struct {
 	state                      protoimpl.MessageState `protogen:"open.v1"`
 	ByoDomain                  string                 `protobuf:"bytes,1,opt,name=byo_domain,json=byoDomain,proto3" json:"byo_domain,omitempty"`
 	Domain                     string                 `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
-	TargetOperatorId           int64                  `protobuf:"varint,3,opt,name=target_operator_id,json=targetOperatorId,proto3" json:"target_operator_id,omitempty"`
-	TargetOperatorName         string                 `protobuf:"bytes,4,opt,name=target_operator_name,json=targetOperatorName,proto3" json:"target_operator_name,omitempty"`
-	TargetCompanyOperatorId    int64                  `protobuf:"varint,5,opt,name=target_company_operator_id,json=targetCompanyOperatorId,proto3" json:"target_company_operator_id,omitempty"`
-	TargetCompanyOperatorName  string                 `protobuf:"bytes,6,opt,name=target_company_operator_name,json=targetCompanyOperatorName,proto3" json:"target_company_operator_name,omitempty"`
-	TargetRetailerOperatorId   int64                  `protobuf:"varint,7,opt,name=target_retailer_operator_id,json=targetRetailerOperatorId,proto3" json:"target_retailer_operator_id,omitempty"`
-	TargetRetailerOperatorName string                 `protobuf:"bytes,8,opt,name=target_retailer_operator_name,json=targetRetailerOperatorName,proto3" json:"target_retailer_operator_name,omitempty"`
-	TargetSystemOperatorId     int64                  `protobuf:"varint,9,opt,name=target_system_operator_id,json=targetSystemOperatorId,proto3" json:"target_system_operator_id,omitempty"`
-	TargetSystemOperatorName   string                 `protobuf:"bytes,10,opt,name=target_system_operator_name,json=targetSystemOperatorName,proto3" json:"target_system_operator_name,omitempty"`
-	TargetRealOperatorId       int64                  `protobuf:"varint,11,opt,name=target_real_operator_id,json=targetRealOperatorId,proto3" json:"target_real_operator_id,omitempty"`
-	TargetOperatorType         string                 `protobuf:"bytes,12,opt,name=target_operator_type,json=targetOperatorType,proto3" json:"target_operator_type,omitempty"`
-	CreatedAt                  *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Type                       string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
+	TargetOperatorId           int64                  `protobuf:"varint,4,opt,name=target_operator_id,json=targetOperatorId,proto3" json:"target_operator_id,omitempty"`
+	TargetOperatorName         string                 `protobuf:"bytes,5,opt,name=target_operator_name,json=targetOperatorName,proto3" json:"target_operator_name,omitempty"`
+	TargetCompanyOperatorId    int64                  `protobuf:"varint,6,opt,name=target_company_operator_id,json=targetCompanyOperatorId,proto3" json:"target_company_operator_id,omitempty"`
+	TargetCompanyOperatorName  string                 `protobuf:"bytes,7,opt,name=target_company_operator_name,json=targetCompanyOperatorName,proto3" json:"target_company_operator_name,omitempty"`
+	TargetRetailerOperatorId   int64                  `protobuf:"varint,8,opt,name=target_retailer_operator_id,json=targetRetailerOperatorId,proto3" json:"target_retailer_operator_id,omitempty"`
+	TargetRetailerOperatorName string                 `protobuf:"bytes,9,opt,name=target_retailer_operator_name,json=targetRetailerOperatorName,proto3" json:"target_retailer_operator_name,omitempty"`
+	TargetSystemOperatorId     int64                  `protobuf:"varint,10,opt,name=target_system_operator_id,json=targetSystemOperatorId,proto3" json:"target_system_operator_id,omitempty"`
+	TargetSystemOperatorName   string                 `protobuf:"bytes,11,opt,name=target_system_operator_name,json=targetSystemOperatorName,proto3" json:"target_system_operator_name,omitempty"`
+	TargetRealOperatorId       int64                  `protobuf:"varint,12,opt,name=target_real_operator_id,json=targetRealOperatorId,proto3" json:"target_real_operator_id,omitempty"`
+	TargetOperatorType         string                 `protobuf:"bytes,13,opt,name=target_operator_type,json=targetOperatorType,proto3" json:"target_operator_type,omitempty"`
+	CreatedAt                  *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -82,6 +83,13 @@ func (x *ByoDomainInfo) GetByoDomain() string {
 func (x *ByoDomainInfo) GetDomain() string {
 	if x != nil {
 		return x.Domain
+	}
+	return ""
+}
+
+func (x *ByoDomainInfo) GetType() string {
+	if x != nil {
+		return x.Type
 	}
 	return ""
 }
@@ -479,24 +487,25 @@ var File_user_service_v1_dns_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_dns_proto_rawDesc = "" +
 	"\n" +
-	"\x19user/service/v1/dns.proto\x12\x13api.user.service.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\"\xc4\x05\n" +
+	"\x19user/service/v1/dns.proto\x12\x13api.user.service.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\"\xd8\x05\n" +
 	"\rByoDomainInfo\x12\x1d\n" +
 	"\n" +
 	"byo_domain\x18\x01 \x01(\tR\tbyoDomain\x12\x16\n" +
-	"\x06domain\x18\x02 \x01(\tR\x06domain\x12,\n" +
-	"\x12target_operator_id\x18\x03 \x01(\x03R\x10targetOperatorId\x120\n" +
-	"\x14target_operator_name\x18\x04 \x01(\tR\x12targetOperatorName\x12;\n" +
-	"\x1atarget_company_operator_id\x18\x05 \x01(\x03R\x17targetCompanyOperatorId\x12?\n" +
-	"\x1ctarget_company_operator_name\x18\x06 \x01(\tR\x19targetCompanyOperatorName\x12=\n" +
-	"\x1btarget_retailer_operator_id\x18\a \x01(\x03R\x18targetRetailerOperatorId\x12A\n" +
-	"\x1dtarget_retailer_operator_name\x18\b \x01(\tR\x1atargetRetailerOperatorName\x129\n" +
-	"\x19target_system_operator_id\x18\t \x01(\x03R\x16targetSystemOperatorId\x12=\n" +
-	"\x1btarget_system_operator_name\x18\n" +
-	" \x01(\tR\x18targetSystemOperatorName\x125\n" +
-	"\x17target_real_operator_id\x18\v \x01(\x03R\x14targetRealOperatorId\x120\n" +
-	"\x14target_operator_type\x18\f \x01(\tR\x12targetOperatorType\x129\n" +
+	"\x06domain\x18\x02 \x01(\tR\x06domain\x12\x12\n" +
+	"\x04type\x18\x03 \x01(\tR\x04type\x12,\n" +
+	"\x12target_operator_id\x18\x04 \x01(\x03R\x10targetOperatorId\x120\n" +
+	"\x14target_operator_name\x18\x05 \x01(\tR\x12targetOperatorName\x12;\n" +
+	"\x1atarget_company_operator_id\x18\x06 \x01(\x03R\x17targetCompanyOperatorId\x12?\n" +
+	"\x1ctarget_company_operator_name\x18\a \x01(\tR\x19targetCompanyOperatorName\x12=\n" +
+	"\x1btarget_retailer_operator_id\x18\b \x01(\x03R\x18targetRetailerOperatorId\x12A\n" +
+	"\x1dtarget_retailer_operator_name\x18\t \x01(\tR\x1atargetRetailerOperatorName\x129\n" +
+	"\x19target_system_operator_id\x18\n" +
+	" \x01(\x03R\x16targetSystemOperatorId\x12=\n" +
+	"\x1btarget_system_operator_name\x18\v \x01(\tR\x18targetSystemOperatorName\x125\n" +
+	"\x17target_real_operator_id\x18\f \x01(\x03R\x14targetRealOperatorId\x120\n" +
+	"\x14target_operator_type\x18\r \x01(\tR\x12targetOperatorType\x129\n" +
 	"\n" +
-	"created_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xb9\x01\n" +
+	"created_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xb9\x01\n" +
 	"\x1dListOperatorByoDomainsRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x17\n" +
 	"\x04page\x18\x02 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +

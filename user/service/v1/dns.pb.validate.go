@@ -61,6 +61,8 @@ func (m *ByoDomainInfo) validate(all bool) error {
 
 	// no validation rules for Domain
 
+	// no validation rules for Type
+
 	// no validation rules for TargetOperatorId
 
 	// no validation rules for TargetOperatorName
