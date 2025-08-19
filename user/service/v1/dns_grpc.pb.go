@@ -19,6 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	Dns_ListOperatorDomains_FullMethodName     = "/api.user.service.v1.Dns/ListOperatorDomains"
 	Dns_ListOperatorByoDomains_FullMethodName  = "/api.user.service.v1.Dns/ListOperatorByoDomains"
 	Dns_AddOperatorByoDomain_FullMethodName    = "/api.user.service.v1.Dns/AddOperatorByoDomain"
 	Dns_DeleteOperatorByoDomain_FullMethodName = "/api.user.service.v1.Dns/DeleteOperatorByoDomain"
@@ -30,6 +31,7 @@ const (
 //
 // User service provides authentication and user management functionality.
 type DnsClient interface {
+	ListOperatorDomains(ctx context.Context, in *ListOperatorDomainsRequest, opts ...grpc.CallOption) (*ListOperatorDomainsResponse, error)
 	// ListOperatorByoDomains returns the list of byo domains
 	ListOperatorByoDomains(ctx context.Context, in *ListOperatorByoDomainsRequest, opts ...grpc.CallOption) (*ListOperatorByoDomainsResponse, error)
 	// AddOperatorByoDomain adds a binding between customer byo domain and meepo domain
@@ -44,6 +46,16 @@ type dnsClient struct {
 
 func NewDnsClient(cc grpc.ClientConnInterface) DnsClient {
 	return &dnsClient{cc}
+}
+
+func (c *dnsClient) ListOperatorDomains(ctx context.Context, in *ListOperatorDomainsRequest, opts ...grpc.CallOption) (*ListOperatorDomainsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListOperatorDomainsResponse)
+	err := c.cc.Invoke(ctx, Dns_ListOperatorDomains_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *dnsClient) ListOperatorByoDomains(ctx context.Context, in *ListOperatorByoDomainsRequest, opts ...grpc.CallOption) (*ListOperatorByoDomainsResponse, error) {
@@ -82,6 +94,7 @@ func (c *dnsClient) DeleteOperatorByoDomain(ctx context.Context, in *DeleteOpera
 //
 // User service provides authentication and user management functionality.
 type DnsServer interface {
+	ListOperatorDomains(context.Context, *ListOperatorDomainsRequest) (*ListOperatorDomainsResponse, error)
 	// ListOperatorByoDomains returns the list of byo domains
 	ListOperatorByoDomains(context.Context, *ListOperatorByoDomainsRequest) (*ListOperatorByoDomainsResponse, error)
 	// AddOperatorByoDomain adds a binding between customer byo domain and meepo domain
@@ -98,6 +111,9 @@ type DnsServer interface {
 // pointer dereference when methods are called.
 type UnimplementedDnsServer struct{}
 
+func (UnimplementedDnsServer) ListOperatorDomains(context.Context, *ListOperatorDomainsRequest) (*ListOperatorDomainsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListOperatorDomains not implemented")
+}
 func (UnimplementedDnsServer) ListOperatorByoDomains(context.Context, *ListOperatorByoDomainsRequest) (*ListOperatorByoDomainsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperatorByoDomains not implemented")
 }
@@ -126,6 +142,24 @@ func RegisterDnsServer(s grpc.ServiceRegistrar, srv DnsServer) {
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&Dns_ServiceDesc, srv)
+}
+
+func _Dns_ListOperatorDomains_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOperatorDomainsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DnsServer).ListOperatorDomains(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Dns_ListOperatorDomains_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DnsServer).ListOperatorDomains(ctx, req.(*ListOperatorDomainsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Dns_ListOperatorByoDomains_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -189,6 +223,10 @@ var Dns_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "api.user.service.v1.Dns",
 	HandlerType: (*DnsServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListOperatorDomains",
+			Handler:    _Dns_ListOperatorDomains_Handler,
+		},
 		{
 			MethodName: "ListOperatorByoDomains",
 			Handler:    _Dns_ListOperatorByoDomains_Handler,

@@ -11,6 +11,9 @@ option java_package = "api.user.service.v1";
 
 // User service provides authentication and user management functionality.
 service Dns {
+	rpc ListOperatorDomains(ListOperatorDomainsRequest) returns (ListOperatorDomainsResponse) {
+	}
+
 	// ListOperatorByoDomains returns the list of byo domains
 	rpc ListOperatorByoDomains(ListOperatorByoDomainsRequest) returns (ListOperatorByoDomainsResponse) {
 	}
@@ -22,6 +25,33 @@ service Dns {
 	// DeleteOperatorByoDomain deletes a binding between customer byo domain and meepo domain
 	rpc DeleteOperatorByoDomain(DeleteOperatorByoDomainRequest) returns (DeleteOperatorByoDomainResponse) {
 	}
+}
+
+message DomainInfo {
+	string domain = 1;
+	string type = 2;
+	int64 operator_id = 3;
+	int64 company_operator_id = 4;
+	int64 retailer_operator_id = 5;
+	int64 system_operator_id = 6;
+	int64 real_operator_id = 7;
+	string operator_type = 8;
+	string operator_name = 9;
+	string company_operator_name = 10;
+	string retailer_operator_name = 11;
+	string system_operator_name = 12;
+}
+
+message ListOperatorDomainsRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContextFilters operator_context_filters = 2;
+	optional string type = 3;
+	optional int32 page = 4;
+	optional int32 page_size = 5;
+}
+
+message ListOperatorDomainsResponse {
+
 }
 
 message ByoDomainInfo {

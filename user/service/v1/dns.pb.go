@@ -23,6 +23,250 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type DomainInfo struct {
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	Domain               string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
+	Type                 string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
+	OperatorId           int64                  `protobuf:"varint,3,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	CompanyOperatorId    int64                  `protobuf:"varint,4,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	RetailerOperatorId   int64                  `protobuf:"varint,5,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	SystemOperatorId     int64                  `protobuf:"varint,6,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
+	RealOperatorId       int64                  `protobuf:"varint,7,opt,name=real_operator_id,json=realOperatorId,proto3" json:"real_operator_id,omitempty"`
+	OperatorType         string                 `protobuf:"bytes,8,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
+	OperatorName         string                 `protobuf:"bytes,9,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	CompanyOperatorName  string                 `protobuf:"bytes,10,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	RetailerOperatorName string                 `protobuf:"bytes,11,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	SystemOperatorName   string                 `protobuf:"bytes,12,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *DomainInfo) Reset() {
+	*x = DomainInfo{}
+	mi := &file_user_service_v1_dns_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DomainInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DomainInfo) ProtoMessage() {}
+
+func (x *DomainInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_dns_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DomainInfo.ProtoReflect.Descriptor instead.
+func (*DomainInfo) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *DomainInfo) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+func (x *DomainInfo) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *DomainInfo) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *DomainInfo) GetCompanyOperatorId() int64 {
+	if x != nil {
+		return x.CompanyOperatorId
+	}
+	return 0
+}
+
+func (x *DomainInfo) GetRetailerOperatorId() int64 {
+	if x != nil {
+		return x.RetailerOperatorId
+	}
+	return 0
+}
+
+func (x *DomainInfo) GetSystemOperatorId() int64 {
+	if x != nil {
+		return x.SystemOperatorId
+	}
+	return 0
+}
+
+func (x *DomainInfo) GetRealOperatorId() int64 {
+	if x != nil {
+		return x.RealOperatorId
+	}
+	return 0
+}
+
+func (x *DomainInfo) GetOperatorType() string {
+	if x != nil {
+		return x.OperatorType
+	}
+	return ""
+}
+
+func (x *DomainInfo) GetOperatorName() string {
+	if x != nil {
+		return x.OperatorName
+	}
+	return ""
+}
+
+func (x *DomainInfo) GetCompanyOperatorName() string {
+	if x != nil {
+		return x.CompanyOperatorName
+	}
+	return ""
+}
+
+func (x *DomainInfo) GetRetailerOperatorName() string {
+	if x != nil {
+		return x.RetailerOperatorName
+	}
+	return ""
+}
+
+func (x *DomainInfo) GetSystemOperatorName() string {
+	if x != nil {
+		return x.SystemOperatorName
+	}
+	return ""
+}
+
+type ListOperatorDomainsRequest struct {
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	OperatorContext        *common.OperatorContext        `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	Type                   *string                        `protobuf:"bytes,3,opt,name=type,proto3,oneof" json:"type,omitempty"`
+	Page                   *int32                         `protobuf:"varint,4,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize               *int32                         `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *ListOperatorDomainsRequest) Reset() {
+	*x = ListOperatorDomainsRequest{}
+	mi := &file_user_service_v1_dns_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListOperatorDomainsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListOperatorDomainsRequest) ProtoMessage() {}
+
+func (x *ListOperatorDomainsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_dns_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListOperatorDomainsRequest.ProtoReflect.Descriptor instead.
+func (*ListOperatorDomainsRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ListOperatorDomainsRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *ListOperatorDomainsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
+func (x *ListOperatorDomainsRequest) GetType() string {
+	if x != nil && x.Type != nil {
+		return *x.Type
+	}
+	return ""
+}
+
+func (x *ListOperatorDomainsRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListOperatorDomainsRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+type ListOperatorDomainsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListOperatorDomainsResponse) Reset() {
+	*x = ListOperatorDomainsResponse{}
+	mi := &file_user_service_v1_dns_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListOperatorDomainsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListOperatorDomainsResponse) ProtoMessage() {}
+
+func (x *ListOperatorDomainsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_dns_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListOperatorDomainsResponse.ProtoReflect.Descriptor instead.
+func (*ListOperatorDomainsResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{2}
+}
+
 type ByoDomainInfo struct {
 	state                      protoimpl.MessageState `protogen:"open.v1"`
 	ByoDomain                  string                 `protobuf:"bytes,1,opt,name=byo_domain,json=byoDomain,proto3" json:"byo_domain,omitempty"`
@@ -45,7 +289,7 @@ type ByoDomainInfo struct {
 
 func (x *ByoDomainInfo) Reset() {
 	*x = ByoDomainInfo{}
-	mi := &file_user_service_v1_dns_proto_msgTypes[0]
+	mi := &file_user_service_v1_dns_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -57,7 +301,7 @@ func (x *ByoDomainInfo) String() string {
 func (*ByoDomainInfo) ProtoMessage() {}
 
 func (x *ByoDomainInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_dns_proto_msgTypes[0]
+	mi := &file_user_service_v1_dns_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -70,7 +314,7 @@ func (x *ByoDomainInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ByoDomainInfo.ProtoReflect.Descriptor instead.
 func (*ByoDomainInfo) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{0}
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *ByoDomainInfo) GetByoDomain() string {
@@ -182,7 +426,7 @@ type ListOperatorByoDomainsRequest struct {
 
 func (x *ListOperatorByoDomainsRequest) Reset() {
 	*x = ListOperatorByoDomainsRequest{}
-	mi := &file_user_service_v1_dns_proto_msgTypes[1]
+	mi := &file_user_service_v1_dns_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -194,7 +438,7 @@ func (x *ListOperatorByoDomainsRequest) String() string {
 func (*ListOperatorByoDomainsRequest) ProtoMessage() {}
 
 func (x *ListOperatorByoDomainsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_dns_proto_msgTypes[1]
+	mi := &file_user_service_v1_dns_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -207,7 +451,7 @@ func (x *ListOperatorByoDomainsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOperatorByoDomainsRequest.ProtoReflect.Descriptor instead.
 func (*ListOperatorByoDomainsRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{1}
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *ListOperatorByoDomainsRequest) GetOperatorContext() *common.OperatorContext {
@@ -243,7 +487,7 @@ type ListOperatorByoDomainsResponse struct {
 
 func (x *ListOperatorByoDomainsResponse) Reset() {
 	*x = ListOperatorByoDomainsResponse{}
-	mi := &file_user_service_v1_dns_proto_msgTypes[2]
+	mi := &file_user_service_v1_dns_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -255,7 +499,7 @@ func (x *ListOperatorByoDomainsResponse) String() string {
 func (*ListOperatorByoDomainsResponse) ProtoMessage() {}
 
 func (x *ListOperatorByoDomainsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_dns_proto_msgTypes[2]
+	mi := &file_user_service_v1_dns_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -268,7 +512,7 @@ func (x *ListOperatorByoDomainsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOperatorByoDomainsResponse.ProtoReflect.Descriptor instead.
 func (*ListOperatorByoDomainsResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{2}
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *ListOperatorByoDomainsResponse) GetData() []*ByoDomainInfo {
@@ -310,7 +554,7 @@ type AddOperatorByoDomainRequest struct {
 
 func (x *AddOperatorByoDomainRequest) Reset() {
 	*x = AddOperatorByoDomainRequest{}
-	mi := &file_user_service_v1_dns_proto_msgTypes[3]
+	mi := &file_user_service_v1_dns_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -322,7 +566,7 @@ func (x *AddOperatorByoDomainRequest) String() string {
 func (*AddOperatorByoDomainRequest) ProtoMessage() {}
 
 func (x *AddOperatorByoDomainRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_dns_proto_msgTypes[3]
+	mi := &file_user_service_v1_dns_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -335,7 +579,7 @@ func (x *AddOperatorByoDomainRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddOperatorByoDomainRequest.ProtoReflect.Descriptor instead.
 func (*AddOperatorByoDomainRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{3}
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *AddOperatorByoDomainRequest) GetOperatorContext() *common.OperatorContext {
@@ -367,7 +611,7 @@ type AddOperatorByoDomainResponse struct {
 
 func (x *AddOperatorByoDomainResponse) Reset() {
 	*x = AddOperatorByoDomainResponse{}
-	mi := &file_user_service_v1_dns_proto_msgTypes[4]
+	mi := &file_user_service_v1_dns_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -379,7 +623,7 @@ func (x *AddOperatorByoDomainResponse) String() string {
 func (*AddOperatorByoDomainResponse) ProtoMessage() {}
 
 func (x *AddOperatorByoDomainResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_dns_proto_msgTypes[4]
+	mi := &file_user_service_v1_dns_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -392,7 +636,7 @@ func (x *AddOperatorByoDomainResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddOperatorByoDomainResponse.ProtoReflect.Descriptor instead.
 func (*AddOperatorByoDomainResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{4}
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{7}
 }
 
 type DeleteOperatorByoDomainRequest struct {
@@ -405,7 +649,7 @@ type DeleteOperatorByoDomainRequest struct {
 
 func (x *DeleteOperatorByoDomainRequest) Reset() {
 	*x = DeleteOperatorByoDomainRequest{}
-	mi := &file_user_service_v1_dns_proto_msgTypes[5]
+	mi := &file_user_service_v1_dns_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -417,7 +661,7 @@ func (x *DeleteOperatorByoDomainRequest) String() string {
 func (*DeleteOperatorByoDomainRequest) ProtoMessage() {}
 
 func (x *DeleteOperatorByoDomainRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_dns_proto_msgTypes[5]
+	mi := &file_user_service_v1_dns_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -430,7 +674,7 @@ func (x *DeleteOperatorByoDomainRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteOperatorByoDomainRequest.ProtoReflect.Descriptor instead.
 func (*DeleteOperatorByoDomainRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{5}
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *DeleteOperatorByoDomainRequest) GetOperatorContext() *common.OperatorContext {
@@ -455,7 +699,7 @@ type DeleteOperatorByoDomainResponse struct {
 
 func (x *DeleteOperatorByoDomainResponse) Reset() {
 	*x = DeleteOperatorByoDomainResponse{}
-	mi := &file_user_service_v1_dns_proto_msgTypes[6]
+	mi := &file_user_service_v1_dns_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -467,7 +711,7 @@ func (x *DeleteOperatorByoDomainResponse) String() string {
 func (*DeleteOperatorByoDomainResponse) ProtoMessage() {}
 
 func (x *DeleteOperatorByoDomainResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_v1_dns_proto_msgTypes[6]
+	mi := &file_user_service_v1_dns_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -480,14 +724,41 @@ func (x *DeleteOperatorByoDomainResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteOperatorByoDomainResponse.ProtoReflect.Descriptor instead.
 func (*DeleteOperatorByoDomainResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{6}
+	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{9}
 }
 
 var File_user_service_v1_dns_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_dns_proto_rawDesc = "" +
 	"\n" +
-	"\x19user/service/v1/dns.proto\x12\x13api.user.service.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\"\xd8\x05\n" +
+	"\x19user/service/v1/dns.proto\x12\x13api.user.service.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\"\xf9\x03\n" +
+	"\n" +
+	"DomainInfo\x12\x16\n" +
+	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x12\n" +
+	"\x04type\x18\x02 \x01(\tR\x04type\x12\x1f\n" +
+	"\voperator_id\x18\x03 \x01(\x03R\n" +
+	"operatorId\x12.\n" +
+	"\x13company_operator_id\x18\x04 \x01(\x03R\x11companyOperatorId\x120\n" +
+	"\x14retailer_operator_id\x18\x05 \x01(\x03R\x12retailerOperatorId\x12,\n" +
+	"\x12system_operator_id\x18\x06 \x01(\x03R\x10systemOperatorId\x12(\n" +
+	"\x10real_operator_id\x18\a \x01(\x03R\x0erealOperatorId\x12#\n" +
+	"\roperator_type\x18\b \x01(\tR\foperatorType\x12#\n" +
+	"\roperator_name\x18\t \x01(\tR\foperatorName\x122\n" +
+	"\x15company_operator_name\x18\n" +
+	" \x01(\tR\x13companyOperatorName\x124\n" +
+	"\x16retailer_operator_name\x18\v \x01(\tR\x14retailerOperatorName\x120\n" +
+	"\x14system_operator_name\x18\f \x01(\tR\x12systemOperatorName\"\xb6\x02\n" +
+	"\x1aListOperatorDomainsRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x17\n" +
+	"\x04type\x18\x03 \x01(\tH\x00R\x04type\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x04 \x01(\x05H\x01R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x05 \x01(\x05H\x02R\bpageSize\x88\x01\x01B\a\n" +
+	"\x05_typeB\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\x1d\n" +
+	"\x1bListOperatorDomainsResponse\"\xd8\x05\n" +
 	"\rByoDomainInfo\x12\x1d\n" +
 	"\n" +
 	"byo_domain\x18\x01 \x01(\tR\tbyoDomain\x12\x16\n" +
@@ -528,8 +799,9 @@ const file_user_service_v1_dns_proto_rawDesc = "" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1d\n" +
 	"\n" +
 	"byo_domain\x18\x02 \x01(\tR\tbyoDomain\"!\n" +
-	"\x1fDeleteOperatorByoDomainResponse2\x93\x03\n" +
-	"\x03Dns\x12\x83\x01\n" +
+	"\x1fDeleteOperatorByoDomainResponse2\x8f\x04\n" +
+	"\x03Dns\x12z\n" +
+	"\x13ListOperatorDomains\x12/.api.user.service.v1.ListOperatorDomainsRequest\x1a0.api.user.service.v1.ListOperatorDomainsResponse\"\x00\x12\x83\x01\n" +
 	"\x16ListOperatorByoDomains\x122.api.user.service.v1.ListOperatorByoDomainsRequest\x1a3.api.user.service.v1.ListOperatorByoDomainsResponse\"\x00\x12}\n" +
 	"\x14AddOperatorByoDomain\x120.api.user.service.v1.AddOperatorByoDomainRequest\x1a1.api.user.service.v1.AddOperatorByoDomainResponse\"\x00\x12\x86\x01\n" +
 	"\x17DeleteOperatorByoDomain\x123.api.user.service.v1.DeleteOperatorByoDomainRequest\x1a4.api.user.service.v1.DeleteOperatorByoDomainResponse\"\x00BO\n" +
@@ -547,35 +819,43 @@ func file_user_service_v1_dns_proto_rawDescGZIP() []byte {
 	return file_user_service_v1_dns_proto_rawDescData
 }
 
-var file_user_service_v1_dns_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_user_service_v1_dns_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_user_service_v1_dns_proto_goTypes = []any{
-	(*ByoDomainInfo)(nil),                   // 0: api.user.service.v1.ByoDomainInfo
-	(*ListOperatorByoDomainsRequest)(nil),   // 1: api.user.service.v1.ListOperatorByoDomainsRequest
-	(*ListOperatorByoDomainsResponse)(nil),  // 2: api.user.service.v1.ListOperatorByoDomainsResponse
-	(*AddOperatorByoDomainRequest)(nil),     // 3: api.user.service.v1.AddOperatorByoDomainRequest
-	(*AddOperatorByoDomainResponse)(nil),    // 4: api.user.service.v1.AddOperatorByoDomainResponse
-	(*DeleteOperatorByoDomainRequest)(nil),  // 5: api.user.service.v1.DeleteOperatorByoDomainRequest
-	(*DeleteOperatorByoDomainResponse)(nil), // 6: api.user.service.v1.DeleteOperatorByoDomainResponse
-	(*timestamppb.Timestamp)(nil),           // 7: google.protobuf.Timestamp
-	(*common.OperatorContext)(nil),          // 8: api.common.OperatorContext
+	(*DomainInfo)(nil),                      // 0: api.user.service.v1.DomainInfo
+	(*ListOperatorDomainsRequest)(nil),      // 1: api.user.service.v1.ListOperatorDomainsRequest
+	(*ListOperatorDomainsResponse)(nil),     // 2: api.user.service.v1.ListOperatorDomainsResponse
+	(*ByoDomainInfo)(nil),                   // 3: api.user.service.v1.ByoDomainInfo
+	(*ListOperatorByoDomainsRequest)(nil),   // 4: api.user.service.v1.ListOperatorByoDomainsRequest
+	(*ListOperatorByoDomainsResponse)(nil),  // 5: api.user.service.v1.ListOperatorByoDomainsResponse
+	(*AddOperatorByoDomainRequest)(nil),     // 6: api.user.service.v1.AddOperatorByoDomainRequest
+	(*AddOperatorByoDomainResponse)(nil),    // 7: api.user.service.v1.AddOperatorByoDomainResponse
+	(*DeleteOperatorByoDomainRequest)(nil),  // 8: api.user.service.v1.DeleteOperatorByoDomainRequest
+	(*DeleteOperatorByoDomainResponse)(nil), // 9: api.user.service.v1.DeleteOperatorByoDomainResponse
+	(*common.OperatorContext)(nil),          // 10: api.common.OperatorContext
+	(*common.OperatorContextFilters)(nil),   // 11: api.common.OperatorContextFilters
+	(*timestamppb.Timestamp)(nil),           // 12: google.protobuf.Timestamp
 }
 var file_user_service_v1_dns_proto_depIdxs = []int32{
-	7, // 0: api.user.service.v1.ByoDomainInfo.created_at:type_name -> google.protobuf.Timestamp
-	8, // 1: api.user.service.v1.ListOperatorByoDomainsRequest.operator_context:type_name -> api.common.OperatorContext
-	0, // 2: api.user.service.v1.ListOperatorByoDomainsResponse.data:type_name -> api.user.service.v1.ByoDomainInfo
-	8, // 3: api.user.service.v1.AddOperatorByoDomainRequest.operator_context:type_name -> api.common.OperatorContext
-	8, // 4: api.user.service.v1.DeleteOperatorByoDomainRequest.operator_context:type_name -> api.common.OperatorContext
-	1, // 5: api.user.service.v1.Dns.ListOperatorByoDomains:input_type -> api.user.service.v1.ListOperatorByoDomainsRequest
-	3, // 6: api.user.service.v1.Dns.AddOperatorByoDomain:input_type -> api.user.service.v1.AddOperatorByoDomainRequest
-	5, // 7: api.user.service.v1.Dns.DeleteOperatorByoDomain:input_type -> api.user.service.v1.DeleteOperatorByoDomainRequest
-	2, // 8: api.user.service.v1.Dns.ListOperatorByoDomains:output_type -> api.user.service.v1.ListOperatorByoDomainsResponse
-	4, // 9: api.user.service.v1.Dns.AddOperatorByoDomain:output_type -> api.user.service.v1.AddOperatorByoDomainResponse
-	6, // 10: api.user.service.v1.Dns.DeleteOperatorByoDomain:output_type -> api.user.service.v1.DeleteOperatorByoDomainResponse
-	8, // [8:11] is the sub-list for method output_type
-	5, // [5:8] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	10, // 0: api.user.service.v1.ListOperatorDomainsRequest.operator_context:type_name -> api.common.OperatorContext
+	11, // 1: api.user.service.v1.ListOperatorDomainsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	12, // 2: api.user.service.v1.ByoDomainInfo.created_at:type_name -> google.protobuf.Timestamp
+	10, // 3: api.user.service.v1.ListOperatorByoDomainsRequest.operator_context:type_name -> api.common.OperatorContext
+	3,  // 4: api.user.service.v1.ListOperatorByoDomainsResponse.data:type_name -> api.user.service.v1.ByoDomainInfo
+	10, // 5: api.user.service.v1.AddOperatorByoDomainRequest.operator_context:type_name -> api.common.OperatorContext
+	10, // 6: api.user.service.v1.DeleteOperatorByoDomainRequest.operator_context:type_name -> api.common.OperatorContext
+	1,  // 7: api.user.service.v1.Dns.ListOperatorDomains:input_type -> api.user.service.v1.ListOperatorDomainsRequest
+	4,  // 8: api.user.service.v1.Dns.ListOperatorByoDomains:input_type -> api.user.service.v1.ListOperatorByoDomainsRequest
+	6,  // 9: api.user.service.v1.Dns.AddOperatorByoDomain:input_type -> api.user.service.v1.AddOperatorByoDomainRequest
+	8,  // 10: api.user.service.v1.Dns.DeleteOperatorByoDomain:input_type -> api.user.service.v1.DeleteOperatorByoDomainRequest
+	2,  // 11: api.user.service.v1.Dns.ListOperatorDomains:output_type -> api.user.service.v1.ListOperatorDomainsResponse
+	5,  // 12: api.user.service.v1.Dns.ListOperatorByoDomains:output_type -> api.user.service.v1.ListOperatorByoDomainsResponse
+	7,  // 13: api.user.service.v1.Dns.AddOperatorByoDomain:output_type -> api.user.service.v1.AddOperatorByoDomainResponse
+	9,  // 14: api.user.service.v1.Dns.DeleteOperatorByoDomain:output_type -> api.user.service.v1.DeleteOperatorByoDomainResponse
+	11, // [11:15] is the sub-list for method output_type
+	7,  // [7:11] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_user_service_v1_dns_proto_init() }
@@ -584,13 +864,14 @@ func file_user_service_v1_dns_proto_init() {
 		return
 	}
 	file_user_service_v1_dns_proto_msgTypes[1].OneofWrappers = []any{}
+	file_user_service_v1_dns_proto_msgTypes[4].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_service_v1_dns_proto_rawDesc), len(file_user_service_v1_dns_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
