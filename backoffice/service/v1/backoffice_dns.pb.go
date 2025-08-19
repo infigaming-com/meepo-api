@@ -86,8 +86,8 @@ func (x *ListOperatorDomainsRequest) GetPageSize() int32 {
 
 type ListOperatorByoDomainsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Page          *int32                 `protobuf:"varint,2,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize      *int32                 `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Page          *int32                 `protobuf:"varint,1,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32                 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -138,8 +138,8 @@ func (x *ListOperatorByoDomainsRequest) GetPageSize() int32 {
 
 type AddOperatorByoDomainRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ByoDomain     string                 `protobuf:"bytes,2,opt,name=byo_domain,json=byoDomain,proto3" json:"byo_domain,omitempty"`
-	Domain        string                 `protobuf:"bytes,3,opt,name=domain,proto3" json:"domain,omitempty"`
+	ByoDomain     string                 `protobuf:"bytes,1,opt,name=byo_domain,json=byoDomain,proto3" json:"byo_domain,omitempty"`
+	Domain        string                 `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -190,7 +190,7 @@ func (x *AddOperatorByoDomainRequest) GetDomain() string {
 
 type DeleteOperatorByoDomainRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ByoDomain     string                 `protobuf:"bytes,2,opt,name=byo_domain,json=byoDomain,proto3" json:"byo_domain,omitempty"`
+	ByoDomain     string                 `protobuf:"bytes,1,opt,name=byo_domain,json=byoDomain,proto3" json:"byo_domain,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -245,18 +245,18 @@ const file_backoffice_service_v1_backoffice_dns_proto_rawDesc = "" +
 	"\n" +
 	"_page_size\"q\n" +
 	"\x1dListOperatorByoDomainsRequest\x12\x17\n" +
-	"\x04page\x18\x02 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x03 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
+	"\x04page\x18\x01 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x02 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_size\"T\n" +
 	"\x1bAddOperatorByoDomainRequest\x12\x1d\n" +
 	"\n" +
-	"byo_domain\x18\x02 \x01(\tR\tbyoDomain\x12\x16\n" +
-	"\x06domain\x18\x03 \x01(\tR\x06domain\"?\n" +
+	"byo_domain\x18\x01 \x01(\tR\tbyoDomain\x12\x16\n" +
+	"\x06domain\x18\x02 \x01(\tR\x06domain\"?\n" +
 	"\x1eDeleteOperatorByoDomainRequest\x12\x1d\n" +
 	"\n" +
-	"byo_domain\x18\x02 \x01(\tR\tbyoDomain2\xe8\x05\n" +
+	"byo_domain\x18\x01 \x01(\tR\tbyoDomain2\xe8\x05\n" +
 	"\rBackofficeDns\x12\xaa\x01\n" +
 	"\x13ListOperatorDomains\x125.api.backoffice.service.v1.ListOperatorDomainsRequest\x1a0.api.user.service.v1.ListOperatorDomainsResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/dns/domains/list\x12\xb7\x01\n" +
 	"\x16ListOperatorByoDomains\x128.api.backoffice.service.v1.ListOperatorByoDomainsRequest\x1a3.api.user.service.v1.ListOperatorByoDomainsResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/dns/byo-domains/list\x12\xb0\x01\n" +
