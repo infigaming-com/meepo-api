@@ -316,8 +316,8 @@ message GetInvoiceDetailResponse {
 		string game_provider_revenue_share = 6;
 		string third_party_cost = 7;
 		string feature_subscription = 8;
-		string revenue_share_disburse = 9;
-		string revenue_share_collet = 10;
+		string revenue_share_system = 9;
+		string revenue_share_operator = 10;
 		string adjustments = 11;
 		
 		// Financial summary
@@ -463,8 +463,8 @@ message ListMonthlyRevenueShareResponse {
 		
 		// Revenue share details
 		string rs_rate = 17; // Revenue Share Rate (e.g., "80%")
-		string revenue_share_disburse = 18; // Revenue Share (Disburse)
-		string revenue_share_collect = 19; // Revenue Share (Collect)
+		string revenue_share_system = 18; // Revenue Share System
+		string revenue_share_operator = 19; // Revenue Share Operator
 		string est_costs = 20; // Est. Costs
 	}
 	
@@ -473,8 +473,8 @@ message ListMonthlyRevenueShareResponse {
 	// Summary totals
 	message Summary {
 		string subtotal = 1;
-		string revenue_share_disburse_total = 2;
-		string revenue_share_collect_total = 3;
+		string revenue_share_system_total = 2;
+		string revenue_share_operator_total = 3;
 		string est_costs_total = 4;
 	}
 	Summary summary = 2;
@@ -626,8 +626,8 @@ message GetBalancesSummaryResponse {
 	string third_party_fees = 6;
 	string adjustments = 7;
 	string est_net_profit = 8;
-	string revenue_share_disburse = 9;
-	string revenue_share_collect = 10;
+	string revenue_share_system = 9;
+	string revenue_share_operator = 10;
 	string est_net_costs = 11;
 }
 
@@ -689,8 +689,8 @@ message ListBalanceMonthlyRevenueSharesResponse {
 
 		// Revenue share details
 		string rs_rate = 17; // Revenue Share Rate (e.g., "80%")
-		string revenue_share_disburse = 18; // Revenue Share (Disburse)
-		string revenue_share_collect = 19; // Revenue Share (Collect)
+		string revenue_share_system = 18; // Revenue Share System
+		string revenue_share_operator = 19; // Revenue Share Operator
 		string est_costs = 20; // Est. Costs
 	}
 	
