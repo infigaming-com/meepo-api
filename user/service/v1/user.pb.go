@@ -5717,41 +5717,39 @@ func (x *CreateBusinessResponse) GetBusinessId() int64 {
 }
 
 type OperatorDetails struct {
-	state                   protoimpl.MessageState `protogen:"open.v1"`
-	Id                      int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"` // real operator id
-	OperatorName            string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	ParentOperatorId        int64                  `protobuf:"varint,3,opt,name=parent_operator_id,json=parentOperatorId,proto3" json:"parent_operator_id,omitempty"`
-	ParentOperatorName      string                 `protobuf:"bytes,4,opt,name=parent_operator_name,json=parentOperatorName,proto3" json:"parent_operator_name,omitempty"`
-	OperatorType            string                 `protobuf:"bytes,5,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
-	ExternalId              string                 `protobuf:"bytes,6,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
-	ApiKey                  string                 `protobuf:"bytes,7,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
-	Subdomain               string                 `protobuf:"bytes,8,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
-	ByoSubdomains           []string               `protobuf:"bytes,9,rep,name=byo_subdomains,json=byoSubdomains,proto3" json:"byo_subdomains,omitempty"`
-	BackofficeSubdomain     string                 `protobuf:"bytes,10,opt,name=backoffice_subdomain,json=backofficeSubdomain,proto3" json:"backoffice_subdomain,omitempty"`
-	BackofficeByoSubdomains []string               `protobuf:"bytes,11,rep,name=backoffice_byo_subdomains,json=backofficeByoSubdomains,proto3" json:"backoffice_byo_subdomains,omitempty"`
-	BackofficeChildDomain   string                 `protobuf:"bytes,12,opt,name=backoffice_child_domain,json=backofficeChildDomain,proto3" json:"backoffice_child_domain,omitempty"`
-	DomainPool              []string               `protobuf:"bytes,13,rep,name=domain_pool,json=domainPool,proto3" json:"domain_pool,omitempty"`
-	Enabled                 bool                   `protobuf:"varint,14,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	Mode                    string                 `protobuf:"bytes,15,opt,name=mode,proto3" json:"mode,omitempty"`
-	OperatorKey             string                 `protobuf:"bytes,16,opt,name=operator_key,json=operatorKey,proto3" json:"operator_key,omitempty"`
-	ReportingCurrency       string                 `protobuf:"bytes,17,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
-	BackofficeTimezone      string                 `protobuf:"bytes,18,opt,name=backoffice_timezone,json=backofficeTimezone,proto3" json:"backoffice_timezone,omitempty"`
-	SupportedLanguages      []string               `protobuf:"bytes,19,rep,name=supported_languages,json=supportedLanguages,proto3" json:"supported_languages,omitempty"`
-	SupportedCurrencies     []string               `protobuf:"bytes,20,rep,name=supported_currencies,json=supportedCurrencies,proto3" json:"supported_currencies,omitempty"`
-	Status                  string                 `protobuf:"bytes,21,opt,name=status,proto3" json:"status,omitempty"`
-	IsMaintenance           bool                   `protobuf:"varint,22,opt,name=is_maintenance,json=isMaintenance,proto3" json:"is_maintenance,omitempty"`
-	MaintenanceStartTime    int64                  `protobuf:"varint,23,opt,name=maintenance_start_time,json=maintenanceStartTime,proto3" json:"maintenance_start_time,omitempty"`
-	MaintenanceEndTime      int64                  `protobuf:"varint,24,opt,name=maintenance_end_time,json=maintenanceEndTime,proto3" json:"maintenance_end_time,omitempty"`
-	OperatorId              int64                  `protobuf:"varint,25,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`                                // operator id in the operator hierarchy
-	CompanyOperatorId       int64                  `protobuf:"varint,26,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`         // company operator id in the operator hierarchy
-	CompanyOperatorName     string                 `protobuf:"bytes,27,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`    // company operator name in the operator hierarchy, or empty string if not exists
-	RetailerOperatorId      int64                  `protobuf:"varint,28,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`      // retailer operator id in the operator hierarchy
-	RetailerOperatorName    string                 `protobuf:"bytes,29,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"` // retailer operator name in the operator hierarchy, or empty string if not exists
-	SystemOperatorId        int64                  `protobuf:"varint,30,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`            // system operator id in the operator hierarchy
-	SystemOperatorName      string                 `protobuf:"bytes,31,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`       // system operator name in the operator hierarchy, or empty string if not exists
-	Config                  string                 `protobuf:"bytes,32,opt,name=config,proto3" json:"config,omitempty"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	Id                    int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"` // real operator id
+	OperatorName          string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	ParentOperatorId      int64                  `protobuf:"varint,3,opt,name=parent_operator_id,json=parentOperatorId,proto3" json:"parent_operator_id,omitempty"`
+	ParentOperatorName    string                 `protobuf:"bytes,4,opt,name=parent_operator_name,json=parentOperatorName,proto3" json:"parent_operator_name,omitempty"`
+	OperatorType          string                 `protobuf:"bytes,5,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
+	ExternalId            string                 `protobuf:"bytes,6,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
+	ApiKey                string                 `protobuf:"bytes,7,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
+	Subdomain             string                 `protobuf:"bytes,8,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
+	BackofficeSubdomain   string                 `protobuf:"bytes,9,opt,name=backoffice_subdomain,json=backofficeSubdomain,proto3" json:"backoffice_subdomain,omitempty"`
+	BackofficeChildDomain string                 `protobuf:"bytes,10,opt,name=backoffice_child_domain,json=backofficeChildDomain,proto3" json:"backoffice_child_domain,omitempty"`
+	DomainPool            []string               `protobuf:"bytes,11,rep,name=domain_pool,json=domainPool,proto3" json:"domain_pool,omitempty"`
+	Enabled               bool                   `protobuf:"varint,12,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Mode                  string                 `protobuf:"bytes,13,opt,name=mode,proto3" json:"mode,omitempty"`
+	OperatorKey           string                 `protobuf:"bytes,14,opt,name=operator_key,json=operatorKey,proto3" json:"operator_key,omitempty"`
+	ReportingCurrency     string                 `protobuf:"bytes,15,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	BackofficeTimezone    string                 `protobuf:"bytes,16,opt,name=backoffice_timezone,json=backofficeTimezone,proto3" json:"backoffice_timezone,omitempty"`
+	SupportedLanguages    []string               `protobuf:"bytes,17,rep,name=supported_languages,json=supportedLanguages,proto3" json:"supported_languages,omitempty"`
+	SupportedCurrencies   []string               `protobuf:"bytes,18,rep,name=supported_currencies,json=supportedCurrencies,proto3" json:"supported_currencies,omitempty"`
+	Status                string                 `protobuf:"bytes,19,opt,name=status,proto3" json:"status,omitempty"`
+	IsMaintenance         bool                   `protobuf:"varint,20,opt,name=is_maintenance,json=isMaintenance,proto3" json:"is_maintenance,omitempty"`
+	MaintenanceStartTime  int64                  `protobuf:"varint,21,opt,name=maintenance_start_time,json=maintenanceStartTime,proto3" json:"maintenance_start_time,omitempty"`
+	MaintenanceEndTime    int64                  `protobuf:"varint,22,opt,name=maintenance_end_time,json=maintenanceEndTime,proto3" json:"maintenance_end_time,omitempty"`
+	OperatorId            int64                  `protobuf:"varint,23,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`                                // operator id in the operator hierarchy
+	CompanyOperatorId     int64                  `protobuf:"varint,24,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`         // company operator id in the operator hierarchy
+	CompanyOperatorName   string                 `protobuf:"bytes,25,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`    // company operator name in the operator hierarchy, or empty string if not exists
+	RetailerOperatorId    int64                  `protobuf:"varint,26,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`      // retailer operator id in the operator hierarchy
+	RetailerOperatorName  string                 `protobuf:"bytes,27,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"` // retailer operator name in the operator hierarchy, or empty string if not exists
+	SystemOperatorId      int64                  `protobuf:"varint,28,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`            // system operator id in the operator hierarchy
+	SystemOperatorName    string                 `protobuf:"bytes,29,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`       // system operator name in the operator hierarchy, or empty string if not exists
+	Config                string                 `protobuf:"bytes,30,opt,name=config,proto3" json:"config,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *OperatorDetails) Reset() {
@@ -5840,25 +5838,11 @@ func (x *OperatorDetails) GetSubdomain() string {
 	return ""
 }
 
-func (x *OperatorDetails) GetByoSubdomains() []string {
-	if x != nil {
-		return x.ByoSubdomains
-	}
-	return nil
-}
-
 func (x *OperatorDetails) GetBackofficeSubdomain() string {
 	if x != nil {
 		return x.BackofficeSubdomain
 	}
 	return ""
-}
-
-func (x *OperatorDetails) GetBackofficeByoSubdomains() []string {
-	if x != nil {
-		return x.BackofficeByoSubdomains
-	}
-	return nil
 }
 
 func (x *OperatorDetails) GetBackofficeChildDomain() string {
@@ -8931,8 +8915,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"_affiliate\"9\n" +
 	"\x16CreateBusinessResponse\x12\x1f\n" +
 	"\vbusiness_id\x18\x01 \x01(\x03R\n" +
-	"businessId\"\xb3\n" +
-	"\n" +
+	"businessId\"\xd0\t\n" +
 	"\x0fOperatorDetails\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12#\n" +
 	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12,\n" +
@@ -8942,34 +8925,32 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\vexternal_id\x18\x06 \x01(\tR\n" +
 	"externalId\x12\x17\n" +
 	"\aapi_key\x18\a \x01(\tR\x06apiKey\x12\x1c\n" +
-	"\tsubdomain\x18\b \x01(\tR\tsubdomain\x12%\n" +
-	"\x0ebyo_subdomains\x18\t \x03(\tR\rbyoSubdomains\x121\n" +
-	"\x14backoffice_subdomain\x18\n" +
-	" \x01(\tR\x13backofficeSubdomain\x12:\n" +
-	"\x19backoffice_byo_subdomains\x18\v \x03(\tR\x17backofficeByoSubdomains\x126\n" +
-	"\x17backoffice_child_domain\x18\f \x01(\tR\x15backofficeChildDomain\x12\x1f\n" +
-	"\vdomain_pool\x18\r \x03(\tR\n" +
+	"\tsubdomain\x18\b \x01(\tR\tsubdomain\x121\n" +
+	"\x14backoffice_subdomain\x18\t \x01(\tR\x13backofficeSubdomain\x126\n" +
+	"\x17backoffice_child_domain\x18\n" +
+	" \x01(\tR\x15backofficeChildDomain\x12\x1f\n" +
+	"\vdomain_pool\x18\v \x03(\tR\n" +
 	"domainPool\x12\x18\n" +
-	"\aenabled\x18\x0e \x01(\bR\aenabled\x12\x12\n" +
-	"\x04mode\x18\x0f \x01(\tR\x04mode\x12!\n" +
-	"\foperator_key\x18\x10 \x01(\tR\voperatorKey\x12-\n" +
-	"\x12reporting_currency\x18\x11 \x01(\tR\x11reportingCurrency\x12/\n" +
-	"\x13backoffice_timezone\x18\x12 \x01(\tR\x12backofficeTimezone\x12/\n" +
-	"\x13supported_languages\x18\x13 \x03(\tR\x12supportedLanguages\x121\n" +
-	"\x14supported_currencies\x18\x14 \x03(\tR\x13supportedCurrencies\x12\x16\n" +
-	"\x06status\x18\x15 \x01(\tR\x06status\x12%\n" +
-	"\x0eis_maintenance\x18\x16 \x01(\bR\risMaintenance\x124\n" +
-	"\x16maintenance_start_time\x18\x17 \x01(\x03R\x14maintenanceStartTime\x120\n" +
-	"\x14maintenance_end_time\x18\x18 \x01(\x03R\x12maintenanceEndTime\x12\x1f\n" +
-	"\voperator_id\x18\x19 \x01(\x03R\n" +
+	"\aenabled\x18\f \x01(\bR\aenabled\x12\x12\n" +
+	"\x04mode\x18\r \x01(\tR\x04mode\x12!\n" +
+	"\foperator_key\x18\x0e \x01(\tR\voperatorKey\x12-\n" +
+	"\x12reporting_currency\x18\x0f \x01(\tR\x11reportingCurrency\x12/\n" +
+	"\x13backoffice_timezone\x18\x10 \x01(\tR\x12backofficeTimezone\x12/\n" +
+	"\x13supported_languages\x18\x11 \x03(\tR\x12supportedLanguages\x121\n" +
+	"\x14supported_currencies\x18\x12 \x03(\tR\x13supportedCurrencies\x12\x16\n" +
+	"\x06status\x18\x13 \x01(\tR\x06status\x12%\n" +
+	"\x0eis_maintenance\x18\x14 \x01(\bR\risMaintenance\x124\n" +
+	"\x16maintenance_start_time\x18\x15 \x01(\x03R\x14maintenanceStartTime\x120\n" +
+	"\x14maintenance_end_time\x18\x16 \x01(\x03R\x12maintenanceEndTime\x12\x1f\n" +
+	"\voperator_id\x18\x17 \x01(\x03R\n" +
 	"operatorId\x12.\n" +
-	"\x13company_operator_id\x18\x1a \x01(\x03R\x11companyOperatorId\x122\n" +
-	"\x15company_operator_name\x18\x1b \x01(\tR\x13companyOperatorName\x120\n" +
-	"\x14retailer_operator_id\x18\x1c \x01(\x03R\x12retailerOperatorId\x124\n" +
-	"\x16retailer_operator_name\x18\x1d \x01(\tR\x14retailerOperatorName\x12,\n" +
-	"\x12system_operator_id\x18\x1e \x01(\x03R\x10systemOperatorId\x120\n" +
-	"\x14system_operator_name\x18\x1f \x01(\tR\x12systemOperatorName\x12\x16\n" +
-	"\x06config\x18  \x01(\tR\x06config\"<\n" +
+	"\x13company_operator_id\x18\x18 \x01(\x03R\x11companyOperatorId\x122\n" +
+	"\x15company_operator_name\x18\x19 \x01(\tR\x13companyOperatorName\x120\n" +
+	"\x14retailer_operator_id\x18\x1a \x01(\x03R\x12retailerOperatorId\x124\n" +
+	"\x16retailer_operator_name\x18\x1b \x01(\tR\x14retailerOperatorName\x12,\n" +
+	"\x12system_operator_id\x18\x1c \x01(\x03R\x10systemOperatorId\x120\n" +
+	"\x14system_operator_name\x18\x1d \x01(\tR\x12systemOperatorName\x12\x16\n" +
+	"\x06config\x18\x1e \x01(\tR\x06config\"<\n" +
 	"\x19GetOperatorDetailsRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\"m\n" +

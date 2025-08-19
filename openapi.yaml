@@ -10840,16 +10840,8 @@ components:
                     type: string
                 subdomain:
                     type: string
-                byoSubdomains:
-                    type: array
-                    items:
-                        type: string
                 backofficeSubdomain:
                     type: string
-                backofficeByoSubdomains:
-                    type: array
-                    items:
-                        type: string
                 backofficeChildDomain:
                     type: string
                 domainPool:
