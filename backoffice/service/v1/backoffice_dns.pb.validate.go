@@ -86,6 +86,10 @@ func (m *ListOperatorDomainsRequest) validate(all bool) error {
 		}
 	}
 
+	if m.Type != nil {
+		// no validation rules for Type
+	}
+
 	if m.Page != nil {
 		// no validation rules for Page
 	}
