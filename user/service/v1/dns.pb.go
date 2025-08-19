@@ -233,6 +233,7 @@ func (x *ListOperatorDomainsRequest) GetPageSize() int32 {
 
 type ListOperatorDomainsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Data          []*DomainInfo          `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -265,6 +266,13 @@ func (x *ListOperatorDomainsResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ListOperatorDomainsResponse.ProtoReflect.Descriptor instead.
 func (*ListOperatorDomainsResponse) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_dns_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ListOperatorDomainsResponse) GetData() []*DomainInfo {
+	if x != nil {
+		return x.Data
+	}
+	return nil
 }
 
 type ByoDomainInfo struct {
@@ -757,8 +765,9 @@ const file_user_service_v1_dns_proto_rawDesc = "" +
 	"\x05_typeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x1d\n" +
-	"\x1bListOperatorDomainsResponse\"\xd8\x05\n" +
+	"_page_size\"R\n" +
+	"\x1bListOperatorDomainsResponse\x123\n" +
+	"\x04data\x18\x01 \x03(\v2\x1f.api.user.service.v1.DomainInfoR\x04data\"\xd8\x05\n" +
 	"\rByoDomainInfo\x12\x1d\n" +
 	"\n" +
 	"byo_domain\x18\x01 \x01(\tR\tbyoDomain\x12\x16\n" +
@@ -838,24 +847,25 @@ var file_user_service_v1_dns_proto_goTypes = []any{
 var file_user_service_v1_dns_proto_depIdxs = []int32{
 	10, // 0: api.user.service.v1.ListOperatorDomainsRequest.operator_context:type_name -> api.common.OperatorContext
 	11, // 1: api.user.service.v1.ListOperatorDomainsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	12, // 2: api.user.service.v1.ByoDomainInfo.created_at:type_name -> google.protobuf.Timestamp
-	10, // 3: api.user.service.v1.ListOperatorByoDomainsRequest.operator_context:type_name -> api.common.OperatorContext
-	3,  // 4: api.user.service.v1.ListOperatorByoDomainsResponse.data:type_name -> api.user.service.v1.ByoDomainInfo
-	10, // 5: api.user.service.v1.AddOperatorByoDomainRequest.operator_context:type_name -> api.common.OperatorContext
-	10, // 6: api.user.service.v1.DeleteOperatorByoDomainRequest.operator_context:type_name -> api.common.OperatorContext
-	1,  // 7: api.user.service.v1.Dns.ListOperatorDomains:input_type -> api.user.service.v1.ListOperatorDomainsRequest
-	4,  // 8: api.user.service.v1.Dns.ListOperatorByoDomains:input_type -> api.user.service.v1.ListOperatorByoDomainsRequest
-	6,  // 9: api.user.service.v1.Dns.AddOperatorByoDomain:input_type -> api.user.service.v1.AddOperatorByoDomainRequest
-	8,  // 10: api.user.service.v1.Dns.DeleteOperatorByoDomain:input_type -> api.user.service.v1.DeleteOperatorByoDomainRequest
-	2,  // 11: api.user.service.v1.Dns.ListOperatorDomains:output_type -> api.user.service.v1.ListOperatorDomainsResponse
-	5,  // 12: api.user.service.v1.Dns.ListOperatorByoDomains:output_type -> api.user.service.v1.ListOperatorByoDomainsResponse
-	7,  // 13: api.user.service.v1.Dns.AddOperatorByoDomain:output_type -> api.user.service.v1.AddOperatorByoDomainResponse
-	9,  // 14: api.user.service.v1.Dns.DeleteOperatorByoDomain:output_type -> api.user.service.v1.DeleteOperatorByoDomainResponse
-	11, // [11:15] is the sub-list for method output_type
-	7,  // [7:11] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	0,  // 2: api.user.service.v1.ListOperatorDomainsResponse.data:type_name -> api.user.service.v1.DomainInfo
+	12, // 3: api.user.service.v1.ByoDomainInfo.created_at:type_name -> google.protobuf.Timestamp
+	10, // 4: api.user.service.v1.ListOperatorByoDomainsRequest.operator_context:type_name -> api.common.OperatorContext
+	3,  // 5: api.user.service.v1.ListOperatorByoDomainsResponse.data:type_name -> api.user.service.v1.ByoDomainInfo
+	10, // 6: api.user.service.v1.AddOperatorByoDomainRequest.operator_context:type_name -> api.common.OperatorContext
+	10, // 7: api.user.service.v1.DeleteOperatorByoDomainRequest.operator_context:type_name -> api.common.OperatorContext
+	1,  // 8: api.user.service.v1.Dns.ListOperatorDomains:input_type -> api.user.service.v1.ListOperatorDomainsRequest
+	4,  // 9: api.user.service.v1.Dns.ListOperatorByoDomains:input_type -> api.user.service.v1.ListOperatorByoDomainsRequest
+	6,  // 10: api.user.service.v1.Dns.AddOperatorByoDomain:input_type -> api.user.service.v1.AddOperatorByoDomainRequest
+	8,  // 11: api.user.service.v1.Dns.DeleteOperatorByoDomain:input_type -> api.user.service.v1.DeleteOperatorByoDomainRequest
+	2,  // 12: api.user.service.v1.Dns.ListOperatorDomains:output_type -> api.user.service.v1.ListOperatorDomainsResponse
+	5,  // 13: api.user.service.v1.Dns.ListOperatorByoDomains:output_type -> api.user.service.v1.ListOperatorByoDomainsResponse
+	7,  // 14: api.user.service.v1.Dns.AddOperatorByoDomain:output_type -> api.user.service.v1.AddOperatorByoDomainResponse
+	9,  // 15: api.user.service.v1.Dns.DeleteOperatorByoDomain:output_type -> api.user.service.v1.DeleteOperatorByoDomainResponse
+	12, // [12:16] is the sub-list for method output_type
+	8,  // [8:12] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_user_service_v1_dns_proto_init() }

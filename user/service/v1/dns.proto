@@ -51,7 +51,7 @@ message ListOperatorDomainsRequest {
 }
 
 message ListOperatorDomainsResponse {
-
+	repeated DomainInfo data = 1;
 }
 
 message ByoDomainInfo {
