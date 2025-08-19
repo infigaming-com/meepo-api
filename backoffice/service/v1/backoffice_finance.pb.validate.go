@@ -3700,9 +3700,9 @@ func (m *GetBalancesSummaryResponse) validate(all bool) error {
 
 	// no validation rules for EstNetProfit
 
-	// no validation rules for RevenueShareDisburse
+	// no validation rules for RevenueShareSystem
 
-	// no validation rules for RevenueShareCollect
+	// no validation rules for RevenueShareOperator
 
 	// no validation rules for EstNetCosts
 
@@ -4496,9 +4496,9 @@ func (m *GetInvoiceDetailResponse_InvoiceDetail) validate(all bool) error {
 
 	// no validation rules for FeatureSubscription
 
-	// no validation rules for RevenueShareDisburse
+	// no validation rules for RevenueShareSystem
 
-	// no validation rules for RevenueShareCollet
+	// no validation rules for RevenueShareOperator
 
 	// no validation rules for Adjustments
 
@@ -4922,9 +4922,9 @@ func (m *ListMonthlyRevenueShareResponse_RevenueShareItem) validate(all bool) er
 
 	// no validation rules for RsRate
 
-	// no validation rules for RevenueShareDisburse
+	// no validation rules for RevenueShareSystem
 
-	// no validation rules for RevenueShareCollect
+	// no validation rules for RevenueShareOperator
 
 	// no validation rules for EstCosts
 
@@ -5043,9 +5043,9 @@ func (m *ListMonthlyRevenueShareResponse_Summary) validate(all bool) error {
 
 	// no validation rules for Subtotal
 
-	// no validation rules for RevenueShareDisburseTotal
+	// no validation rules for RevenueShareSystemTotal
 
-	// no validation rules for RevenueShareCollectTotal
+	// no validation rules for RevenueShareOperatorTotal
 
 	// no validation rules for EstCostsTotal
 
@@ -5541,9 +5541,9 @@ func (m *ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem) validate(all 
 
 	// no validation rules for RsRate
 
-	// no validation rules for RevenueShareDisburse
+	// no validation rules for RevenueShareSystem
 
-	// no validation rules for RevenueShareCollect
+	// no validation rules for RevenueShareOperator
 
 	// no validation rules for EstCosts
 

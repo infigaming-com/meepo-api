@@ -4436,9 +4436,9 @@ components:
                     type: string
                 estNetProfit:
                     type: string
-                revenueShareDisburse:
+                revenueShareSystem:
                     type: string
-                revenueShareCollect:
+                revenueShareOperator:
                     type: string
                 estNetCosts:
                     type: string
@@ -4645,9 +4645,9 @@ components:
                     type: string
                 featureSubscription:
                     type: string
-                revenueShareDisburse:
+                revenueShareSystem:
                     type: string
-                revenueShareCollet:
+                revenueShareOperator:
                     type: string
                 adjustments:
                     type: string
@@ -6028,9 +6028,9 @@ components:
                 rsRate:
                     type: string
                     description: Revenue share details
-                revenueShareDisburse:
+                revenueShareSystem:
                     type: string
-                revenueShareCollect:
+                revenueShareOperator:
                     type: string
                 estCosts:
                     type: string
@@ -6847,9 +6847,9 @@ components:
                 rsRate:
                     type: string
                     description: Revenue share details
-                revenueShareDisburse:
+                revenueShareSystem:
                     type: string
-                revenueShareCollect:
+                revenueShareOperator:
                     type: string
                 estCosts:
                     type: string
@@ -6858,9 +6858,9 @@ components:
             properties:
                 subtotal:
                     type: string
-                revenueShareDisburseTotal:
+                revenueShareSystemTotal:
                     type: string
-                revenueShareCollectTotal:
+                revenueShareOperatorTotal:
                     type: string
                 estCostsTotal:
                     type: string

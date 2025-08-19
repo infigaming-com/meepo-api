@@ -1968,8 +1968,8 @@ type GetBalancesSummaryResponse struct {
 	ThirdPartyFees       string                 `protobuf:"bytes,6,opt,name=third_party_fees,json=thirdPartyFees,proto3" json:"third_party_fees,omitempty"`
 	Adjustments          string                 `protobuf:"bytes,7,opt,name=adjustments,proto3" json:"adjustments,omitempty"`
 	EstNetProfit         string                 `protobuf:"bytes,8,opt,name=est_net_profit,json=estNetProfit,proto3" json:"est_net_profit,omitempty"`
-	RevenueShareDisburse string                 `protobuf:"bytes,9,opt,name=revenue_share_disburse,json=revenueShareDisburse,proto3" json:"revenue_share_disburse,omitempty"`
-	RevenueShareCollect  string                 `protobuf:"bytes,10,opt,name=revenue_share_collect,json=revenueShareCollect,proto3" json:"revenue_share_collect,omitempty"`
+	RevenueShareSystem   string                 `protobuf:"bytes,9,opt,name=revenue_share_system,json=revenueShareSystem,proto3" json:"revenue_share_system,omitempty"`
+	RevenueShareOperator string                 `protobuf:"bytes,10,opt,name=revenue_share_operator,json=revenueShareOperator,proto3" json:"revenue_share_operator,omitempty"`
 	EstNetCosts          string                 `protobuf:"bytes,11,opt,name=est_net_costs,json=estNetCosts,proto3" json:"est_net_costs,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
@@ -2061,16 +2061,16 @@ func (x *GetBalancesSummaryResponse) GetEstNetProfit() string {
 	return ""
 }
 
-func (x *GetBalancesSummaryResponse) GetRevenueShareDisburse() string {
+func (x *GetBalancesSummaryResponse) GetRevenueShareSystem() string {
 	if x != nil {
-		return x.RevenueShareDisburse
+		return x.RevenueShareSystem
 	}
 	return ""
 }
 
-func (x *GetBalancesSummaryResponse) GetRevenueShareCollect() string {
+func (x *GetBalancesSummaryResponse) GetRevenueShareOperator() string {
 	if x != nil {
-		return x.RevenueShareCollect
+		return x.RevenueShareOperator
 	}
 	return ""
 }
@@ -2507,8 +2507,8 @@ type GetInvoiceDetailResponse_InvoiceDetail struct {
 	GameProviderRevenueShare string `protobuf:"bytes,6,opt,name=game_provider_revenue_share,json=gameProviderRevenueShare,proto3" json:"game_provider_revenue_share,omitempty"`
 	ThirdPartyCost           string `protobuf:"bytes,7,opt,name=third_party_cost,json=thirdPartyCost,proto3" json:"third_party_cost,omitempty"`
 	FeatureSubscription      string `protobuf:"bytes,8,opt,name=feature_subscription,json=featureSubscription,proto3" json:"feature_subscription,omitempty"`
-	RevenueShareDisburse     string `protobuf:"bytes,9,opt,name=revenue_share_disburse,json=revenueShareDisburse,proto3" json:"revenue_share_disburse,omitempty"`
-	RevenueShareCollet       string `protobuf:"bytes,10,opt,name=revenue_share_collet,json=revenueShareCollet,proto3" json:"revenue_share_collet,omitempty"`
+	RevenueShareSystem       string `protobuf:"bytes,9,opt,name=revenue_share_system,json=revenueShareSystem,proto3" json:"revenue_share_system,omitempty"`
+	RevenueShareOperator     string `protobuf:"bytes,10,opt,name=revenue_share_operator,json=revenueShareOperator,proto3" json:"revenue_share_operator,omitempty"`
 	Adjustments              string `protobuf:"bytes,11,opt,name=adjustments,proto3" json:"adjustments,omitempty"`
 	// Financial summary
 	TotalAmount string `protobuf:"bytes,12,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"` // Total invoice amount
@@ -2613,16 +2613,16 @@ func (x *GetInvoiceDetailResponse_InvoiceDetail) GetFeatureSubscription() string
 	return ""
 }
 
-func (x *GetInvoiceDetailResponse_InvoiceDetail) GetRevenueShareDisburse() string {
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetRevenueShareSystem() string {
 	if x != nil {
-		return x.RevenueShareDisburse
+		return x.RevenueShareSystem
 	}
 	return ""
 }
 
-func (x *GetInvoiceDetailResponse_InvoiceDetail) GetRevenueShareCollet() string {
+func (x *GetInvoiceDetailResponse_InvoiceDetail) GetRevenueShareOperator() string {
 	if x != nil {
-		return x.RevenueShareCollet
+		return x.RevenueShareOperator
 	}
 	return ""
 }
@@ -2965,8 +2965,8 @@ type ListMonthlyRevenueShareResponse_RevenueShareItem struct {
 	NetProfit      string `protobuf:"bytes,16,opt,name=net_profit,json=netProfit,proto3" json:"net_profit,omitempty"`                  // Net Profit
 	// Revenue share details
 	RsRate               string `protobuf:"bytes,17,opt,name=rs_rate,json=rsRate,proto3" json:"rs_rate,omitempty"`                                             // Revenue Share Rate (e.g., "80%")
-	RevenueShareDisburse string `protobuf:"bytes,18,opt,name=revenue_share_disburse,json=revenueShareDisburse,proto3" json:"revenue_share_disburse,omitempty"` // Revenue Share (Disburse)
-	RevenueShareCollect  string `protobuf:"bytes,19,opt,name=revenue_share_collect,json=revenueShareCollect,proto3" json:"revenue_share_collect,omitempty"`    // Revenue Share (Collect)
+	RevenueShareSystem   string `protobuf:"bytes,18,opt,name=revenue_share_system,json=revenueShareSystem,proto3" json:"revenue_share_system,omitempty"`       // Revenue Share System
+	RevenueShareOperator string `protobuf:"bytes,19,opt,name=revenue_share_operator,json=revenueShareOperator,proto3" json:"revenue_share_operator,omitempty"` // Revenue Share Operator
 	EstCosts             string `protobuf:"bytes,20,opt,name=est_costs,json=estCosts,proto3" json:"est_costs,omitempty"`                                       // Est. Costs
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
@@ -3121,16 +3121,16 @@ func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetRsRate() string {
 	return ""
 }
 
-func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetRevenueShareDisburse() string {
+func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetRevenueShareSystem() string {
 	if x != nil {
-		return x.RevenueShareDisburse
+		return x.RevenueShareSystem
 	}
 	return ""
 }
 
-func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetRevenueShareCollect() string {
+func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetRevenueShareOperator() string {
 	if x != nil {
-		return x.RevenueShareCollect
+		return x.RevenueShareOperator
 	}
 	return ""
 }
@@ -3146,8 +3146,8 @@ func (x *ListMonthlyRevenueShareResponse_RevenueShareItem) GetEstCosts() string 
 type ListMonthlyRevenueShareResponse_Summary struct {
 	state                     protoimpl.MessageState `protogen:"open.v1"`
 	Subtotal                  string                 `protobuf:"bytes,1,opt,name=subtotal,proto3" json:"subtotal,omitempty"`
-	RevenueShareDisburseTotal string                 `protobuf:"bytes,2,opt,name=revenue_share_disburse_total,json=revenueShareDisburseTotal,proto3" json:"revenue_share_disburse_total,omitempty"`
-	RevenueShareCollectTotal  string                 `protobuf:"bytes,3,opt,name=revenue_share_collect_total,json=revenueShareCollectTotal,proto3" json:"revenue_share_collect_total,omitempty"`
+	RevenueShareSystemTotal   string                 `protobuf:"bytes,2,opt,name=revenue_share_system_total,json=revenueShareSystemTotal,proto3" json:"revenue_share_system_total,omitempty"`
+	RevenueShareOperatorTotal string                 `protobuf:"bytes,3,opt,name=revenue_share_operator_total,json=revenueShareOperatorTotal,proto3" json:"revenue_share_operator_total,omitempty"`
 	EstCostsTotal             string                 `protobuf:"bytes,4,opt,name=est_costs_total,json=estCostsTotal,proto3" json:"est_costs_total,omitempty"`
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
@@ -3190,16 +3190,16 @@ func (x *ListMonthlyRevenueShareResponse_Summary) GetSubtotal() string {
 	return ""
 }
 
-func (x *ListMonthlyRevenueShareResponse_Summary) GetRevenueShareDisburseTotal() string {
+func (x *ListMonthlyRevenueShareResponse_Summary) GetRevenueShareSystemTotal() string {
 	if x != nil {
-		return x.RevenueShareDisburseTotal
+		return x.RevenueShareSystemTotal
 	}
 	return ""
 }
 
-func (x *ListMonthlyRevenueShareResponse_Summary) GetRevenueShareCollectTotal() string {
+func (x *ListMonthlyRevenueShareResponse_Summary) GetRevenueShareOperatorTotal() string {
 	if x != nil {
-		return x.RevenueShareCollectTotal
+		return x.RevenueShareOperatorTotal
 	}
 	return ""
 }
@@ -3464,8 +3464,8 @@ type ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem struct {
 	NetProfit      string `protobuf:"bytes,16,opt,name=net_profit,json=netProfit,proto3" json:"net_profit,omitempty"`                  // Net Profit
 	// Revenue share details
 	RsRate               string `protobuf:"bytes,17,opt,name=rs_rate,json=rsRate,proto3" json:"rs_rate,omitempty"`                                             // Revenue Share Rate (e.g., "80%")
-	RevenueShareDisburse string `protobuf:"bytes,18,opt,name=revenue_share_disburse,json=revenueShareDisburse,proto3" json:"revenue_share_disburse,omitempty"` // Revenue Share (Disburse)
-	RevenueShareCollect  string `protobuf:"bytes,19,opt,name=revenue_share_collect,json=revenueShareCollect,proto3" json:"revenue_share_collect,omitempty"`    // Revenue Share (Collect)
+	RevenueShareSystem   string `protobuf:"bytes,18,opt,name=revenue_share_system,json=revenueShareSystem,proto3" json:"revenue_share_system,omitempty"`       // Revenue Share System
+	RevenueShareOperator string `protobuf:"bytes,19,opt,name=revenue_share_operator,json=revenueShareOperator,proto3" json:"revenue_share_operator,omitempty"` // Revenue Share Operator
 	EstCosts             string `protobuf:"bytes,20,opt,name=est_costs,json=estCosts,proto3" json:"est_costs,omitempty"`                                       // Est. Costs
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
@@ -3620,16 +3620,16 @@ func (x *ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem) GetRsRate() s
 	return ""
 }
 
-func (x *ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem) GetRevenueShareDisburse() string {
+func (x *ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem) GetRevenueShareSystem() string {
 	if x != nil {
-		return x.RevenueShareDisburse
+		return x.RevenueShareSystem
 	}
 	return ""
 }
 
-func (x *ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem) GetRevenueShareCollect() string {
+func (x *ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem) GetRevenueShareOperator() string {
 	if x != nil {
-		return x.RevenueShareCollect
+		return x.RevenueShareOperator
 	}
 	return ""
 }
@@ -3708,10 +3708,10 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x05month\x18\x05 \x01(\tR\x05month\x12=\n" +
 	"\x1bgame_provider_revenue_share\x18\x06 \x01(\tR\x18gameProviderRevenueShare\x12(\n" +
 	"\x10third_party_cost\x18\a \x01(\tR\x0ethirdPartyCost\x121\n" +
-	"\x14feature_subscription\x18\b \x01(\tR\x13featureSubscription\x124\n" +
-	"\x16revenue_share_disburse\x18\t \x01(\tR\x14revenueShareDisburse\x120\n" +
-	"\x14revenue_share_collet\x18\n" +
-	" \x01(\tR\x12revenueShareCollet\x12 \n" +
+	"\x14feature_subscription\x18\b \x01(\tR\x13featureSubscription\x120\n" +
+	"\x14revenue_share_system\x18\t \x01(\tR\x12revenueShareSystem\x124\n" +
+	"\x16revenue_share_operator\x18\n" +
+	" \x01(\tR\x14revenueShareOperator\x12 \n" +
 	"\vadjustments\x18\v \x01(\tR\vadjustments\x12!\n" +
 	"\ftotal_amount\x18\f \x01(\tR\vtotalAmount\x12\x1f\n" +
 	"\vamount_paid\x18\r \x01(\tR\n" +
@@ -3810,15 +3810,14 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_sizeB\r\n" +
-	"\v_period_key\"\x81\n" +
-	"\n" +
+	"\v_period_key\"\xfd\t\n" +
 	"\x1fListMonthlyRevenueShareResponse\x12a\n" +
 	"\x05items\x18\x01 \x03(\v2K.api.backoffice.service.v1.ListMonthlyRevenueShareResponse.RevenueShareItemR\x05items\x12\\\n" +
 	"\asummary\x18\x02 \x01(\v2B.api.backoffice.service.v1.ListMonthlyRevenueShareResponse.SummaryR\asummary\x12\x1f\n" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
 	"totalCount\x12\x12\n" +
 	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x1a\xfa\x05\n" +
+	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x1a\xf8\x05\n" +
 	"\x10RevenueShareItem\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12#\n" +
@@ -3839,14 +3838,14 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\vadjustments\x18\x0f \x01(\tR\vadjustments\x12\x1d\n" +
 	"\n" +
 	"net_profit\x18\x10 \x01(\tR\tnetProfit\x12\x17\n" +
-	"\ars_rate\x18\x11 \x01(\tR\x06rsRate\x124\n" +
-	"\x16revenue_share_disburse\x18\x12 \x01(\tR\x14revenueShareDisburse\x122\n" +
-	"\x15revenue_share_collect\x18\x13 \x01(\tR\x13revenueShareCollect\x12\x1b\n" +
-	"\test_costs\x18\x14 \x01(\tR\bestCosts\x1a\xcd\x01\n" +
+	"\ars_rate\x18\x11 \x01(\tR\x06rsRate\x120\n" +
+	"\x14revenue_share_system\x18\x12 \x01(\tR\x12revenueShareSystem\x124\n" +
+	"\x16revenue_share_operator\x18\x13 \x01(\tR\x14revenueShareOperator\x12\x1b\n" +
+	"\test_costs\x18\x14 \x01(\tR\bestCosts\x1a\xcb\x01\n" +
 	"\aSummary\x12\x1a\n" +
-	"\bsubtotal\x18\x01 \x01(\tR\bsubtotal\x12?\n" +
-	"\x1crevenue_share_disburse_total\x18\x02 \x01(\tR\x19revenueShareDisburseTotal\x12=\n" +
-	"\x1brevenue_share_collect_total\x18\x03 \x01(\tR\x18revenueShareCollectTotal\x12&\n" +
+	"\bsubtotal\x18\x01 \x01(\tR\bsubtotal\x12;\n" +
+	"\x1arevenue_share_system_total\x18\x02 \x01(\tR\x17revenueShareSystemTotal\x12?\n" +
+	"\x1crevenue_share_operator_total\x18\x03 \x01(\tR\x19revenueShareOperatorTotal\x12&\n" +
 	"\x0fest_costs_total\x18\x04 \x01(\tR\restCostsTotal\"\xc5\x02\n" +
 	"\x14AddAdjustmentRequest\x12\x12\n" +
 	"\x04item\x18\x01 \x01(\tR\x04item\x120\n" +
@@ -3937,7 +3936,7 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\fest_net_cost\x18\x03 \x01(\tR\n" +
 	"estNetCost\"y\n" +
 	"\x19GetBalancesSummaryRequest\x12\\\n" +
-	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\xb0\x03\n" +
+	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\xae\x03\n" +
 	"\x1aGetBalancesSummaryResponse\x12\x1a\n" +
 	"\bdeposits\x18\x01 \x01(\tR\bdeposits\x12 \n" +
 	"\vwithdrawals\x18\x02 \x01(\tR\vwithdrawals\x12\x18\n" +
@@ -3946,10 +3945,10 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x10game_provider_rs\x18\x05 \x01(\tR\x0egameProviderRs\x12(\n" +
 	"\x10third_party_fees\x18\x06 \x01(\tR\x0ethirdPartyFees\x12 \n" +
 	"\vadjustments\x18\a \x01(\tR\vadjustments\x12$\n" +
-	"\x0eest_net_profit\x18\b \x01(\tR\festNetProfit\x124\n" +
-	"\x16revenue_share_disburse\x18\t \x01(\tR\x14revenueShareDisburse\x122\n" +
-	"\x15revenue_share_collect\x18\n" +
-	" \x01(\tR\x13revenueShareCollect\x12\"\n" +
+	"\x0eest_net_profit\x18\b \x01(\tR\festNetProfit\x120\n" +
+	"\x14revenue_share_system\x18\t \x01(\tR\x12revenueShareSystem\x124\n" +
+	"\x16revenue_share_operator\x18\n" +
+	" \x01(\tR\x14revenueShareOperator\x12\"\n" +
 	"\rest_net_costs\x18\v \x01(\tR\vestNetCosts\"m\n" +
 	"\x19ListBillingPeriodsRequest\x12\x17\n" +
 	"\x04page\x18\x01 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
@@ -3981,13 +3980,13 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x04type\x18\x04 \x01(\x0e2F.api.backoffice.service.v1.ListBalanceMonthlyRevenueSharesRequest.TypeR\x04type\".\n" +
 	"\x04Type\x12\x12\n" +
 	"\x0eTYPE_NET_SHARE\x10\x00\x12\x12\n" +
-	"\x0eTYPE_EST_COSTS\x10\x01\"\xe3\a\n" +
+	"\x0eTYPE_EST_COSTS\x10\x01\"\xe1\a\n" +
 	"'ListBalanceMonthlyRevenueSharesResponse\x12i\n" +
 	"\x05items\x18\x01 \x03(\v2S.api.backoffice.service.v1.ListBalanceMonthlyRevenueSharesResponse.RevenueShareItemR\x05items\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
 	"totalCount\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xfa\x05\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xf8\x05\n" +
 	"\x10RevenueShareItem\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12#\n" +
@@ -4008,9 +4007,9 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\vadjustments\x18\x0f \x01(\tR\vadjustments\x12\x1d\n" +
 	"\n" +
 	"net_profit\x18\x10 \x01(\tR\tnetProfit\x12\x17\n" +
-	"\ars_rate\x18\x11 \x01(\tR\x06rsRate\x124\n" +
-	"\x16revenue_share_disburse\x18\x12 \x01(\tR\x14revenueShareDisburse\x122\n" +
-	"\x15revenue_share_collect\x18\x13 \x01(\tR\x13revenueShareCollect\x12\x1b\n" +
+	"\ars_rate\x18\x11 \x01(\tR\x06rsRate\x120\n" +
+	"\x14revenue_share_system\x18\x12 \x01(\tR\x12revenueShareSystem\x124\n" +
+	"\x16revenue_share_operator\x18\x13 \x01(\tR\x14revenueShareOperator\x12\x1b\n" +
 	"\test_costs\x18\x14 \x01(\tR\bestCosts2\xb9\x19\n" +
 	"\x11BackofficeFinance\x12\xa0\x01\n" +
 	"\fListInvoices\x12..api.backoffice.service.v1.ListInvoicesRequest\x1a/.api.backoffice.service.v1.ListInvoicesResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/finance/invoices/list\x12\xad\x01\n" +
