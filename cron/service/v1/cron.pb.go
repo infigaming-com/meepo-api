@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        v4.25.6
-// source: cron/cron.proto
+// source: cron/service/v1/cron.proto
 
 package v1
 
@@ -31,7 +31,7 @@ type CronJobRequest struct {
 
 func (x *CronJobRequest) Reset() {
 	*x = CronJobRequest{}
-	mi := &file_cron_cron_proto_msgTypes[0]
+	mi := &file_cron_service_v1_cron_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +43,7 @@ func (x *CronJobRequest) String() string {
 func (*CronJobRequest) ProtoMessage() {}
 
 func (x *CronJobRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_cron_cron_proto_msgTypes[0]
+	mi := &file_cron_service_v1_cron_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +56,7 @@ func (x *CronJobRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CronJobRequest.ProtoReflect.Descriptor instead.
 func (*CronJobRequest) Descriptor() ([]byte, []int) {
-	return file_cron_cron_proto_rawDescGZIP(), []int{0}
+	return file_cron_service_v1_cron_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *CronJobRequest) GetName() string {
@@ -81,7 +81,7 @@ type CronJobResponse struct {
 
 func (x *CronJobResponse) Reset() {
 	*x = CronJobResponse{}
-	mi := &file_cron_cron_proto_msgTypes[1]
+	mi := &file_cron_service_v1_cron_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -93,7 +93,7 @@ func (x *CronJobResponse) String() string {
 func (*CronJobResponse) ProtoMessage() {}
 
 func (x *CronJobResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_cron_cron_proto_msgTypes[1]
+	mi := &file_cron_service_v1_cron_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -106,14 +106,14 @@ func (x *CronJobResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CronJobResponse.ProtoReflect.Descriptor instead.
 func (*CronJobResponse) Descriptor() ([]byte, []int) {
-	return file_cron_cron_proto_rawDescGZIP(), []int{1}
+	return file_cron_service_v1_cron_proto_rawDescGZIP(), []int{1}
 }
 
-var File_cron_cron_proto protoreflect.FileDescriptor
+var File_cron_service_v1_cron_proto protoreflect.FileDescriptor
 
-const file_cron_cron_proto_rawDesc = "" +
+const file_cron_service_v1_cron_proto_rawDesc = "" +
 	"\n" +
-	"\x0fcron/cron.proto\x12\x13api.cron.service.v1\":\n" +
+	"\x1acron/service/v1/cron.proto\x12\x13api.cron.service.v1\":\n" +
 	"\x0eCronJobRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
 	"\x05param\x18\x02 \x01(\tR\x05param\"\x11\n" +
@@ -123,23 +123,23 @@ const file_cron_cron_proto_rawDesc = "" +
 	"\x13api.cron.service.v1P\x01Z6github.com/infigaming-com/meepo-api/cron/service/v1;v1b\x06proto3"
 
 var (
-	file_cron_cron_proto_rawDescOnce sync.Once
-	file_cron_cron_proto_rawDescData []byte
+	file_cron_service_v1_cron_proto_rawDescOnce sync.Once
+	file_cron_service_v1_cron_proto_rawDescData []byte
 )
 
-func file_cron_cron_proto_rawDescGZIP() []byte {
-	file_cron_cron_proto_rawDescOnce.Do(func() {
-		file_cron_cron_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_cron_cron_proto_rawDesc), len(file_cron_cron_proto_rawDesc)))
+func file_cron_service_v1_cron_proto_rawDescGZIP() []byte {
+	file_cron_service_v1_cron_proto_rawDescOnce.Do(func() {
+		file_cron_service_v1_cron_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_cron_service_v1_cron_proto_rawDesc), len(file_cron_service_v1_cron_proto_rawDesc)))
 	})
-	return file_cron_cron_proto_rawDescData
+	return file_cron_service_v1_cron_proto_rawDescData
 }
 
-var file_cron_cron_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_cron_cron_proto_goTypes = []any{
+var file_cron_service_v1_cron_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_cron_service_v1_cron_proto_goTypes = []any{
 	(*CronJobRequest)(nil),  // 0: api.cron.service.v1.CronJobRequest
 	(*CronJobResponse)(nil), // 1: api.cron.service.v1.CronJobResponse
 }
-var file_cron_cron_proto_depIdxs = []int32{
+var file_cron_service_v1_cron_proto_depIdxs = []int32{
 	0, // 0: api.cron.service.v1.Cron.CronJob:input_type -> api.cron.service.v1.CronJobRequest
 	1, // 1: api.cron.service.v1.Cron.CronJob:output_type -> api.cron.service.v1.CronJobResponse
 	1, // [1:2] is the sub-list for method output_type
@@ -149,26 +149,26 @@ var file_cron_cron_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_cron_cron_proto_init() }
-func file_cron_cron_proto_init() {
-	if File_cron_cron_proto != nil {
+func init() { file_cron_service_v1_cron_proto_init() }
+func file_cron_service_v1_cron_proto_init() {
+	if File_cron_service_v1_cron_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_cron_cron_proto_rawDesc), len(file_cron_cron_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_cron_service_v1_cron_proto_rawDesc), len(file_cron_service_v1_cron_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_cron_cron_proto_goTypes,
-		DependencyIndexes: file_cron_cron_proto_depIdxs,
-		MessageInfos:      file_cron_cron_proto_msgTypes,
+		GoTypes:           file_cron_service_v1_cron_proto_goTypes,
+		DependencyIndexes: file_cron_service_v1_cron_proto_depIdxs,
+		MessageInfos:      file_cron_service_v1_cron_proto_msgTypes,
 	}.Build()
-	File_cron_cron_proto = out.File
-	file_cron_cron_proto_goTypes = nil
-	file_cron_cron_proto_depIdxs = nil
+	File_cron_service_v1_cron_proto = out.File
+	file_cron_service_v1_cron_proto_goTypes = nil
+	file_cron_service_v1_cron_proto_depIdxs = nil
 }

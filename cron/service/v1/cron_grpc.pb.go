@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v4.25.6
-// source: cron/cron.proto
+// source: cron/service/v1/cron.proto
 
 package v1
 
@@ -117,5 +117,5 @@ var Cron_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "cron/cron.proto",
+	Metadata: "cron/service/v1/cron.proto",
 }
