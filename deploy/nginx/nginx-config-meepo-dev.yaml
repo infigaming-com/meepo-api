@@ -108,7 +108,8 @@ data:
     server {
         listen 80;
         server_name
-            meepo.site www.meepo.site *.meepo.site;
+            meepo.site www.meepo.site *.meepo.site
+            meepoadmin.site www.meepoadmin.site *.meepoadmin.site;
 
         # ACME HTTP-01 challenge location
         location /.well-known/acme-challenge/ {
