@@ -2722,6 +2722,44 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateWalletCurrencyResponse'
+    /v1/backoffice/wallet/currency/config/update:
+        post:
+            tags:
+                - BackofficeWallet
+            description: UpdateOperatorCurrencyConfig updates the config of a operator and its currency
+            operationId: BackofficeWallet_UpdateOperatorCurrencyConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse'
+    /v1/backoffice/wallet/deduction-order/update:
+        post:
+            tags:
+                - BackofficeWallet
+            description: UpdateDeductionOrder updates the deduction order config based on operator context
+            operationId: BackofficeWallet_UpdateDeductionOrder
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateDeductionOrderRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.UpdateDeductionOrderResponse'
     /v1/backoffice/wallet/deposit-reward/config/get:
         post:
             tags:
@@ -2797,6 +2835,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetExchangeRatesResponse'
+    /v1/backoffice/wallet/gamification/get:
+        post:
+            tags:
+                - BackofficeWallet
+            description: GetGamificationCurrencyConfig returns the currency config and the deduction order config based on currency and operator context
+            operationId: BackofficeWallet_GetGamificationCurrencyConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetGamificationCurrencyConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetGamificationCurrencyConfigResponse'
     /v1/backoffice/wallet/get:
         post:
             tags:
@@ -4609,6 +4666,11 @@ components:
                     $ref: '#/components/schemas/api.backoffice.service.v1.GameTransaction_Amount'
                 validBetAmount:
                     type: string
+        api.backoffice.service.v1.GetGamificationCurrencyConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.GetInvoiceDetailRequest:
             type: object
             properties:
@@ -8902,6 +8964,13 @@ components:
                     type: boolean
                 bankInfo:
                     type: object
+        api.backoffice.service.v1.UpdateDeductionOrderRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                deductionOrder:
+                    $ref: '#/components/schemas/api.wallet.service.v1.DeductionOrder'
         api.backoffice.service.v1.UpdateGameRequest:
             type: object
             properties:
@@ -8926,6 +8995,13 @@ components:
             properties:
                 enabled:
                     type: boolean
+        api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                operatorCurrencyConfig:
+                    $ref: '#/components/schemas/api.wallet.service.v1.OperatorCurrencyConfig'
         api.backoffice.service.v1.UpdateOperatorStatusRequest:
             type: object
             properties:
@@ -11119,6 +11195,15 @@ components:
                 decimalPlaces:
                     type: integer
                     format: int32
+        api.wallet.service.v1.DeductionOrder:
+            type: object
+            properties:
+                deductionType:
+                    type: string
+                cashRatio:
+                    type: string
+                bonusRatio:
+                    type: string
         api.wallet.service.v1.DeleteDepositRewardSequencesResponse:
             type: object
             properties: {}
@@ -11181,6 +11266,15 @@ components:
                     $ref: '#/components/schemas/api.wallet.service.v1.DepositRewardConfig'
                 customDepositRewardConfig:
                     $ref: '#/components/schemas/api.wallet.service.v1.DepositRewardConfig'
+        api.wallet.service.v1.GetGamificationCurrencyConfigResponse:
+            type: object
+            properties:
+                deductionOrder:
+                    $ref: '#/components/schemas/api.wallet.service.v1.DeductionOrder'
+                operatorCurrencyConfigs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.OperatorCurrencyConfig'
         api.wallet.service.v1.GetOperatorBalanceRequest:
             type: object
             properties:
@@ -11366,6 +11460,20 @@ components:
                     type: string
                 enabled:
                     type: boolean
+        api.wallet.service.v1.OperatorCurrencyConfig:
+            type: object
+            properties:
+                currency:
+                    type: string
+                cashWithdrawalWageringRequirement:
+                    type: integer
+                    format: int32
+                bonusEnabled:
+                    type: boolean
+                maximumBonusBetLimit:
+                    type: string
+                wageringUnlockPriority:
+                    type: string
         api.wallet.service.v1.RewardSequence:
             type: object
             properties:
@@ -11407,6 +11515,12 @@ components:
                 maxWithdrawalAmount:
                     type: string
         api.wallet.service.v1.SetDepositRewardSequencesResponse:
+            type: object
+            properties: {}
+        api.wallet.service.v1.UpdateDeductionOrderResponse:
+            type: object
+            properties: {}
+        api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse:
             type: object
             properties: {}
         google.protobuf.ListValue:

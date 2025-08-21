@@ -134,6 +134,15 @@ service Wallet {
 			body: "*"
 		};
 	}
+
+	// GetOperatorCurrencyConfig returns the currency config and the deduction order config based on currency and operator context
+	rpc GetGamificationCurrencyConfig(GetGamificationCurrencyConfigRequest) returns (GetGamificationCurrencyConfigResponse) {}
+
+	// UpdateGamificationCurrencyConfig updates the config of a operator and its currency
+	rpc UpdateOperatorCurrencyConfig(UpdateOperatorCurrencyConfigRequest) returns (UpdateOperatorCurrencyConfigResponse) {}
+
+	// UpdateDeductionOrder updates the deduction order config based on operator context
+	rpc UpdateDeductionOrder(UpdateDeductionOrderRequest) returns (UpdateDeductionOrderResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -1065,4 +1074,47 @@ message GetUserDepositRewardSequenceResponse {
 	int32 daily_reward_count = 3;
 	RewardSequence current_reward_sequence = 4;
 }
+
+message GetGamificationCurrencyConfigRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+}
+
+message DeductionOrder {
+	string deduction_type = 1; // cash_first, bonus_first, mixed
+	optional string cash_ratio = 2;
+	optional string bonus_ratio = 3;
+}
+
+message OperatorCurrencyConfig {
+	string currency = 1;
+	optional int32 cash_withdrawal_wagering_requirement = 2;
+	optional bool bonus_enabled = 3;
+	optional string maximum_bonus_bet_limit = 4;
+	optional string wagering_unlock_priority = 5;
+}
+
+message GetGamificationCurrencyConfigResponse {
+	DeductionOrder deduction_order = 1;
+	repeated OperatorCurrencyConfig operator_currency_configs = 2;
+}
+
+message UpdateOperatorCurrencyConfigRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	OperatorCurrencyConfig operator_currency_config = 3;
+}
+
+message UpdateOperatorCurrencyConfigResponse {}
+
+message UpdateDeductionOrderRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	DeductionOrder deduction_order = 3;
+}
+
+message UpdateDeductionOrderResponse {}
+
+
+
 
