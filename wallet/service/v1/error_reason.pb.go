@@ -119,6 +119,10 @@ const (
 	ErrorReason_LIST_OPERATOR_CURRENCY_CONFIGS_FAILED                           ErrorReason = 30091
 	ErrorReason_OPERATOR_DEDUCTION_ORDER_CONFIG_NOT_FOUND                       ErrorReason = 30092
 	ErrorReason_OPERATOR_CURRENCY_CONFIG_NOT_FOUND                              ErrorReason = 30093
+	ErrorReason_OPERATOR_CURRENCY_DEPOSIT_CONFIG_NOT_FOUND                      ErrorReason = 30094
+	ErrorReason_GET_OPERATOR_CURRENCY_DEPOSIT_CONFIG_FAILED                     ErrorReason = 30095
+	ErrorReason_GET_USER_DEPOSIT_STATS_FAILED                                   ErrorReason = 30096
+	ErrorReason_USER_DEPOSIT_STATS_NOT_FOUND                                    ErrorReason = 30097
 )
 
 // Enum value maps for ErrorReason.
@@ -218,6 +222,10 @@ var (
 		30091: "LIST_OPERATOR_CURRENCY_CONFIGS_FAILED",
 		30092: "OPERATOR_DEDUCTION_ORDER_CONFIG_NOT_FOUND",
 		30093: "OPERATOR_CURRENCY_CONFIG_NOT_FOUND",
+		30094: "OPERATOR_CURRENCY_DEPOSIT_CONFIG_NOT_FOUND",
+		30095: "GET_OPERATOR_CURRENCY_DEPOSIT_CONFIG_FAILED",
+		30096: "GET_USER_DEPOSIT_STATS_FAILED",
+		30097: "USER_DEPOSIT_STATS_NOT_FOUND",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                                     0,
@@ -314,6 +322,10 @@ var (
 		"LIST_OPERATOR_CURRENCY_CONFIGS_FAILED":                           30091,
 		"OPERATOR_DEDUCTION_ORDER_CONFIG_NOT_FOUND":                       30092,
 		"OPERATOR_CURRENCY_CONFIG_NOT_FOUND":                              30093,
+		"OPERATOR_CURRENCY_DEPOSIT_CONFIG_NOT_FOUND":                      30094,
+		"GET_OPERATOR_CURRENCY_DEPOSIT_CONFIG_FAILED":                     30095,
+		"GET_USER_DEPOSIT_STATS_FAILED":                                   30096,
+		"USER_DEPOSIT_STATS_NOT_FOUND":                                    30097,
 	}
 )
 
@@ -348,7 +360,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xf0\x1c\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\x9e\x1e\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -443,7 +455,11 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"-UPDATE_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED\x10\x8a\xeb\x01\x12+\n" +
 	"%LIST_OPERATOR_CURRENCY_CONFIGS_FAILED\x10\x8b\xeb\x01\x12/\n" +
 	")OPERATOR_DEDUCTION_ORDER_CONFIG_NOT_FOUND\x10\x8c\xeb\x01\x12(\n" +
-	"\"OPERATOR_CURRENCY_CONFIG_NOT_FOUND\x10\x8d\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\"OPERATOR_CURRENCY_CONFIG_NOT_FOUND\x10\x8d\xeb\x01\x120\n" +
+	"*OPERATOR_CURRENCY_DEPOSIT_CONFIG_NOT_FOUND\x10\x8e\xeb\x01\x121\n" +
+	"+GET_OPERATOR_CURRENCY_DEPOSIT_CONFIG_FAILED\x10\x8f\xeb\x01\x12#\n" +
+	"\x1dGET_USER_DEPOSIT_STATS_FAILED\x10\x90\xeb\x01\x12\"\n" +
+	"\x1cUSER_DEPOSIT_STATS_NOT_FOUND\x10\x91\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (
