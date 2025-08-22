@@ -1138,3 +1138,51 @@ func IsOperatorCurrencyConfigNotFound(err error) bool {
 func ErrorOperatorCurrencyConfigNotFound(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_OPERATOR_CURRENCY_CONFIG_NOT_FOUND.String(), fmt.Sprintf(format, args...))
 }
+
+func IsOperatorCurrencyDepositConfigNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_CURRENCY_DEPOSIT_CONFIG_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorOperatorCurrencyDepositConfigNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_CURRENCY_DEPOSIT_CONFIG_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetOperatorCurrencyDepositConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATOR_CURRENCY_DEPOSIT_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorCurrencyDepositConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_CURRENCY_DEPOSIT_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetUserDepositStatsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_USER_DEPOSIT_STATS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetUserDepositStatsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_USER_DEPOSIT_STATS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUserDepositStatsNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_DEPOSIT_STATS_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorUserDepositStatsNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_DEPOSIT_STATS_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
