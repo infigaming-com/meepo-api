@@ -95,7 +95,7 @@ func GetActualOperatorId(operatorList []int64) int64 {
 	}
 
 	// Find the last non-zero ID from the beginning
-	for i := 0; i < len(operatorList); i++ {
+	for i := range operatorList {
 		if operatorList[i] != 0 {
 			return operatorList[i]
 		}

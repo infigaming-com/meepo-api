@@ -11025,6 +11025,12 @@ components:
                     type: string
                 config:
                     type: string
+                minLaunchBalance:
+                    type: string
+                statusLaunchWhitelist:
+                    type: array
+                    items:
+                        type: string
         api.user.service.v1.RefreshTokenRequest:
             type: object
             properties:
