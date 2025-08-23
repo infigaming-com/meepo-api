@@ -23,7 +23,7 @@ func OperatorStatusCheck() middleware.Middleware {
 				return nil, errors.New(403, "FORBIDDEN", "GetOperatorInfo failed")
 			}
 
-			if operatorInfo.Status == util.OperatorStatusPending && slices.Contains(operatorInfo.StatusLaunchWhitelist, requestInfo.ClientIP) {
+			if operatorInfo.Status == util.OperatorStatusPending && !slices.Contains(operatorInfo.StatusLaunchWhitelist, requestInfo.ClientIP) {
 				return nil, errors.New(403, "FORBIDDEN", "IP is not allow to access")
 			}
 			return handler(ctx, req)
