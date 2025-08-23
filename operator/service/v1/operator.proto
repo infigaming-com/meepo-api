@@ -692,6 +692,7 @@ message ListBalanceMonthlyRevenueSharesResponse {
 		string revenue_share_system = 18; // Revenue Share System
 		string revenue_share_operator = 19; // Revenue Share Operator
 		string est_costs = 20; // Est. Costs
+		int64 id = 21;
 	}
 	
 	repeated RevenueShareItem items = 1;
