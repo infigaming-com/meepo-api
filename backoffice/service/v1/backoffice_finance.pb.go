@@ -3467,6 +3467,7 @@ type ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem struct {
 	RevenueShareSystem   string `protobuf:"bytes,18,opt,name=revenue_share_system,json=revenueShareSystem,proto3" json:"revenue_share_system,omitempty"`       // Revenue Share System
 	RevenueShareOperator string `protobuf:"bytes,19,opt,name=revenue_share_operator,json=revenueShareOperator,proto3" json:"revenue_share_operator,omitempty"` // Revenue Share Operator
 	EstCosts             string `protobuf:"bytes,20,opt,name=est_costs,json=estCosts,proto3" json:"est_costs,omitempty"`                                       // Est. Costs
+	Id                   int64  `protobuf:"varint,21,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -3639,6 +3640,13 @@ func (x *ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem) GetEstCosts()
 		return x.EstCosts
 	}
 	return ""
+}
+
+func (x *ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
 }
 
 var File_backoffice_service_v1_backoffice_finance_proto protoreflect.FileDescriptor
@@ -3980,13 +3988,13 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\x04type\x18\x04 \x01(\x0e2F.api.backoffice.service.v1.ListBalanceMonthlyRevenueSharesRequest.TypeR\x04type\".\n" +
 	"\x04Type\x12\x12\n" +
 	"\x0eTYPE_NET_SHARE\x10\x00\x12\x12\n" +
-	"\x0eTYPE_EST_COSTS\x10\x01\"\xe1\a\n" +
+	"\x0eTYPE_EST_COSTS\x10\x01\"\xf1\a\n" +
 	"'ListBalanceMonthlyRevenueSharesResponse\x12i\n" +
 	"\x05items\x18\x01 \x03(\v2S.api.backoffice.service.v1.ListBalanceMonthlyRevenueSharesResponse.RevenueShareItemR\x05items\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
 	"totalCount\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xf8\x05\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\x88\x06\n" +
 	"\x10RevenueShareItem\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12#\n" +
@@ -4010,7 +4018,8 @@ const file_backoffice_service_v1_backoffice_finance_proto_rawDesc = "" +
 	"\ars_rate\x18\x11 \x01(\tR\x06rsRate\x120\n" +
 	"\x14revenue_share_system\x18\x12 \x01(\tR\x12revenueShareSystem\x124\n" +
 	"\x16revenue_share_operator\x18\x13 \x01(\tR\x14revenueShareOperator\x12\x1b\n" +
-	"\test_costs\x18\x14 \x01(\tR\bestCosts2\xb9\x19\n" +
+	"\test_costs\x18\x14 \x01(\tR\bestCosts\x12\x0e\n" +
+	"\x02id\x18\x15 \x01(\x03R\x02id2\xb9\x19\n" +
 	"\x11BackofficeFinance\x12\xa0\x01\n" +
 	"\fListInvoices\x12..api.backoffice.service.v1.ListInvoicesRequest\x1a/.api.backoffice.service.v1.ListInvoicesResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/finance/invoices/list\x12\xad\x01\n" +
 	"\x10GetInvoiceDetail\x122.api.backoffice.service.v1.GetInvoiceDetailRequest\x1a3.api.backoffice.service.v1.GetInvoiceDetailResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/finance/invoice/detail\x12\xca\x01\n" +

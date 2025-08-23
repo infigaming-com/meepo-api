@@ -5547,6 +5547,8 @@ func (m *ListBalanceMonthlyRevenueSharesResponse_RevenueShareItem) validate(all 
 
 	// no validation rules for EstCosts
 
+	// no validation rules for Id
+
 	if len(errors) > 0 {
 		return ListBalanceMonthlyRevenueSharesResponse_RevenueShareItemMultiError(errors)
 	}
