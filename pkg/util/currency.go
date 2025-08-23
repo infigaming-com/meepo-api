@@ -8,6 +8,11 @@ import (
 	"github.com/shopspring/decimal"
 )
 
+const (
+	CurrencyWageringUnlockPriorityCash  = "cash"  // Cash first
+	CurrencyWageringUnlockPriorityBonus = "bonus" // Bonus first
+)
+
 type currency struct {
 	Currency      string
 	Enabled       bool

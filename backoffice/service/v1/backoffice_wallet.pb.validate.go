@@ -5035,6 +5035,464 @@ var _ interface {
 	ErrorName() string
 } = GetDepositRewardConfigRequestValidationError{}
 
+// Validate checks the field values on GetGamificationCurrencyConfigRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetGamificationCurrencyConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetGamificationCurrencyConfigRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetGamificationCurrencyConfigRequestMultiError, or nil if none found.
+func (m *GetGamificationCurrencyConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetGamificationCurrencyConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetGamificationCurrencyConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetGamificationCurrencyConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetGamificationCurrencyConfigRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetGamificationCurrencyConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetGamificationCurrencyConfigRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// GetGamificationCurrencyConfigRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetGamificationCurrencyConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetGamificationCurrencyConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetGamificationCurrencyConfigRequestMultiError) AllErrors() []error { return m }
+
+// GetGamificationCurrencyConfigRequestValidationError is the validation error
+// returned by GetGamificationCurrencyConfigRequest.Validate if the designated
+// constraints aren't met.
+type GetGamificationCurrencyConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetGamificationCurrencyConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetGamificationCurrencyConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetGamificationCurrencyConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetGamificationCurrencyConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetGamificationCurrencyConfigRequestValidationError) ErrorName() string {
+	return "GetGamificationCurrencyConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetGamificationCurrencyConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetGamificationCurrencyConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetGamificationCurrencyConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetGamificationCurrencyConfigRequestValidationError{}
+
+// Validate checks the field values on UpdateOperatorCurrencyConfigRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *UpdateOperatorCurrencyConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateOperatorCurrencyConfigRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// UpdateOperatorCurrencyConfigRequestMultiError, or nil if none found.
+func (m *UpdateOperatorCurrencyConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateOperatorCurrencyConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateOperatorCurrencyConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateOperatorCurrencyConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateOperatorCurrencyConfigRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetOperatorCurrencyConfig()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateOperatorCurrencyConfigRequestValidationError{
+					field:  "OperatorCurrencyConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateOperatorCurrencyConfigRequestValidationError{
+					field:  "OperatorCurrencyConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorCurrencyConfig()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateOperatorCurrencyConfigRequestValidationError{
+				field:  "OperatorCurrencyConfig",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return UpdateOperatorCurrencyConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateOperatorCurrencyConfigRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// UpdateOperatorCurrencyConfigRequest.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateOperatorCurrencyConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateOperatorCurrencyConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateOperatorCurrencyConfigRequestMultiError) AllErrors() []error { return m }
+
+// UpdateOperatorCurrencyConfigRequestValidationError is the validation error
+// returned by UpdateOperatorCurrencyConfigRequest.Validate if the designated
+// constraints aren't met.
+type UpdateOperatorCurrencyConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateOperatorCurrencyConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateOperatorCurrencyConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateOperatorCurrencyConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateOperatorCurrencyConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateOperatorCurrencyConfigRequestValidationError) ErrorName() string {
+	return "UpdateOperatorCurrencyConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateOperatorCurrencyConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateOperatorCurrencyConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateOperatorCurrencyConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateOperatorCurrencyConfigRequestValidationError{}
+
+// Validate checks the field values on UpdateDeductionOrderRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateDeductionOrderRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateDeductionOrderRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateDeductionOrderRequestMultiError, or nil if none found.
+func (m *UpdateDeductionOrderRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateDeductionOrderRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateDeductionOrderRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateDeductionOrderRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateDeductionOrderRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetDeductionOrder()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateDeductionOrderRequestValidationError{
+					field:  "DeductionOrder",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateDeductionOrderRequestValidationError{
+					field:  "DeductionOrder",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetDeductionOrder()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateDeductionOrderRequestValidationError{
+				field:  "DeductionOrder",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return UpdateDeductionOrderRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateDeductionOrderRequestMultiError is an error wrapping multiple
+// validation errors returned by UpdateDeductionOrderRequest.ValidateAll() if
+// the designated constraints aren't met.
+type UpdateDeductionOrderRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateDeductionOrderRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateDeductionOrderRequestMultiError) AllErrors() []error { return m }
+
+// UpdateDeductionOrderRequestValidationError is the validation error returned
+// by UpdateDeductionOrderRequest.Validate if the designated constraints
+// aren't met.
+type UpdateDeductionOrderRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateDeductionOrderRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateDeductionOrderRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateDeductionOrderRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateDeductionOrderRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateDeductionOrderRequestValidationError) ErrorName() string {
+	return "UpdateDeductionOrderRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateDeductionOrderRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateDeductionOrderRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateDeductionOrderRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateDeductionOrderRequestValidationError{}
+
 // Validate checks the field values on GetWalletCreditsResponse_Credit with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

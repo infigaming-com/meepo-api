@@ -154,6 +154,30 @@ service BackofficeWallet {
 			body: "*"
 		};
 	}
+
+	// GetGamificationCurrencyConfig returns the currency config and the deduction order config based on currency and operator context
+	rpc GetGamificationCurrencyConfig(GetGamificationCurrencyConfigRequest) returns (wallet.service.v1.GetGamificationCurrencyConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/gamification/get"
+			body: "*"
+		};
+	}
+
+	// UpdateOperatorCurrencyConfig updates the config of a operator and its currency
+	rpc UpdateOperatorCurrencyConfig(UpdateOperatorCurrencyConfigRequest) returns (wallet.service.v1.UpdateOperatorCurrencyConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/currency/config/update"
+			body: "*"
+		};
+	}
+
+	// UpdateDeductionOrder updates the deduction order config based on operator context
+	rpc UpdateDeductionOrder(UpdateDeductionOrderRequest) returns (wallet.service.v1.UpdateDeductionOrderResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/deduction-order/update"
+			body: "*"
+		};
+	}
 }
 
 message GetWalletsRequest {
@@ -479,4 +503,18 @@ message DeleteDepositRewardSequencesRequest {
 message GetDepositRewardConfigRequest {
 	api.common.OperatorContext target_operator_context = 1;
 	string currency = 2;
+}
+
+message GetGamificationCurrencyConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+}
+
+message UpdateOperatorCurrencyConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	wallet.service.v1.OperatorCurrencyConfig operator_currency_config = 2;
+}
+
+message UpdateDeductionOrderRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	wallet.service.v1.DeductionOrder deduction_order = 2;
 }

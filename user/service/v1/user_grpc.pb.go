@@ -58,6 +58,7 @@ const (
 	User_GetOverviewDashboardFromUser_FullMethodName    = "/api.user.service.v1.User/GetOverviewDashboardFromUser"
 	User_GetOperatorIdByOrigin_FullMethodName           = "/api.user.service.v1.User/GetOperatorIdByOrigin"
 	User_GetOperatorIdsByOrigin_FullMethodName          = "/api.user.service.v1.User/GetOperatorIdsByOrigin"
+	User_GetOperatorInfoByOrigin_FullMethodName         = "/api.user.service.v1.User/GetOperatorInfoByOrigin"
 	User_GetOperator_FullMethodName                     = "/api.user.service.v1.User/GetOperator"
 	User_GetOperatorsByIds_FullMethodName               = "/api.user.service.v1.User/GetOperatorsByIds"
 	User_ListAllOperators_FullMethodName                = "/api.user.service.v1.User/ListAllOperators"
@@ -156,6 +157,7 @@ type UserClient interface {
 	GetOverviewDashboardFromUser(ctx context.Context, in *GetOverviewDashboardFromUserRequest, opts ...grpc.CallOption) (*GetOverviewDashboardFromUserResponse, error)
 	GetOperatorIdByOrigin(ctx context.Context, in *GetOperatorIdByOriginRequest, opts ...grpc.CallOption) (*GetOperatorIdByOriginResponse, error)
 	GetOperatorIdsByOrigin(ctx context.Context, in *GetOperatorIdsByOriginRequest, opts ...grpc.CallOption) (*GetOperatorIdsByOriginResponse, error)
+	GetOperatorInfoByOrigin(ctx context.Context, in *GetOperatorInfoByOriginRequest, opts ...grpc.CallOption) (*GetOperatorInfoByOriginResponse, error)
 	GetOperator(ctx context.Context, in *GetOperatorRequest, opts ...grpc.CallOption) (*GetOperatorResponse, error)
 	GetOperatorsByIds(ctx context.Context, in *GetOperatorsByIdsRequest, opts ...grpc.CallOption) (*GetOperatorsByIdsResponse, error)
 	// ListOperators returns a list of operators based on the enabled status or all operators if the enabled status is not provided.
@@ -593,6 +595,16 @@ func (c *userClient) GetOperatorIdsByOrigin(ctx context.Context, in *GetOperator
 	return out, nil
 }
 
+func (c *userClient) GetOperatorInfoByOrigin(ctx context.Context, in *GetOperatorInfoByOriginRequest, opts ...grpc.CallOption) (*GetOperatorInfoByOriginResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorInfoByOriginResponse)
+	err := c.cc.Invoke(ctx, User_GetOperatorInfoByOrigin_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userClient) GetOperator(ctx context.Context, in *GetOperatorRequest, opts ...grpc.CallOption) (*GetOperatorResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetOperatorResponse)
@@ -860,6 +872,7 @@ type UserServer interface {
 	GetOverviewDashboardFromUser(context.Context, *GetOverviewDashboardFromUserRequest) (*GetOverviewDashboardFromUserResponse, error)
 	GetOperatorIdByOrigin(context.Context, *GetOperatorIdByOriginRequest) (*GetOperatorIdByOriginResponse, error)
 	GetOperatorIdsByOrigin(context.Context, *GetOperatorIdsByOriginRequest) (*GetOperatorIdsByOriginResponse, error)
+	GetOperatorInfoByOrigin(context.Context, *GetOperatorInfoByOriginRequest) (*GetOperatorInfoByOriginResponse, error)
 	GetOperator(context.Context, *GetOperatorRequest) (*GetOperatorResponse, error)
 	GetOperatorsByIds(context.Context, *GetOperatorsByIdsRequest) (*GetOperatorsByIdsResponse, error)
 	// ListOperators returns a list of operators based on the enabled status or all operators if the enabled status is not provided.
@@ -1023,6 +1036,9 @@ func (UnimplementedUserServer) GetOperatorIdByOrigin(context.Context, *GetOperat
 }
 func (UnimplementedUserServer) GetOperatorIdsByOrigin(context.Context, *GetOperatorIdsByOriginRequest) (*GetOperatorIdsByOriginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorIdsByOrigin not implemented")
+}
+func (UnimplementedUserServer) GetOperatorInfoByOrigin(context.Context, *GetOperatorInfoByOriginRequest) (*GetOperatorInfoByOriginResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorInfoByOrigin not implemented")
 }
 func (UnimplementedUserServer) GetOperator(context.Context, *GetOperatorRequest) (*GetOperatorResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperator not implemented")
@@ -1804,6 +1820,24 @@ func _User_GetOperatorIdsByOrigin_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_GetOperatorInfoByOrigin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorInfoByOriginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetOperatorInfoByOrigin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetOperatorInfoByOrigin_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetOperatorInfoByOrigin(ctx, req.(*GetOperatorInfoByOriginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _User_GetOperator_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetOperatorRequest)
 	if err := dec(in); err != nil {
@@ -2308,6 +2342,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOperatorIdsByOrigin",
 			Handler:    _User_GetOperatorIdsByOrigin_Handler,
+		},
+		{
+			MethodName: "GetOperatorInfoByOrigin",
+			Handler:    _User_GetOperatorInfoByOrigin_Handler,
 		},
 		{
 			MethodName: "GetOperator",

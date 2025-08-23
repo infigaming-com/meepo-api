@@ -41,6 +41,9 @@ const (
 	BackofficeWallet_SetDepositRewardSequences_FullMethodName       = "/api.backoffice.service.v1.BackofficeWallet/SetDepositRewardSequences"
 	BackofficeWallet_DeleteDepositRewardSequences_FullMethodName    = "/api.backoffice.service.v1.BackofficeWallet/DeleteDepositRewardSequences"
 	BackofficeWallet_GetDepositRewardConfig_FullMethodName          = "/api.backoffice.service.v1.BackofficeWallet/GetDepositRewardConfig"
+	BackofficeWallet_GetGamificationCurrencyConfig_FullMethodName   = "/api.backoffice.service.v1.BackofficeWallet/GetGamificationCurrencyConfig"
+	BackofficeWallet_UpdateOperatorCurrencyConfig_FullMethodName    = "/api.backoffice.service.v1.BackofficeWallet/UpdateOperatorCurrencyConfig"
+	BackofficeWallet_UpdateDeductionOrder_FullMethodName            = "/api.backoffice.service.v1.BackofficeWallet/UpdateDeductionOrder"
 )
 
 // BackofficeWalletClient is the client API for BackofficeWallet service.
@@ -81,6 +84,12 @@ type BackofficeWalletClient interface {
 	DeleteDepositRewardSequences(ctx context.Context, in *DeleteDepositRewardSequencesRequest, opts ...grpc.CallOption) (*v1.DeleteDepositRewardSequencesResponse, error)
 	// GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
 	GetDepositRewardConfig(ctx context.Context, in *GetDepositRewardConfigRequest, opts ...grpc.CallOption) (*v1.GetDepositRewardConfigResponse, error)
+	// GetGamificationCurrencyConfig returns the currency config and the deduction order config based on currency and operator context
+	GetGamificationCurrencyConfig(ctx context.Context, in *GetGamificationCurrencyConfigRequest, opts ...grpc.CallOption) (*v1.GetGamificationCurrencyConfigResponse, error)
+	// UpdateOperatorCurrencyConfig updates the config of a operator and its currency
+	UpdateOperatorCurrencyConfig(ctx context.Context, in *UpdateOperatorCurrencyConfigRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorCurrencyConfigResponse, error)
+	// UpdateDeductionOrder updates the deduction order config based on operator context
+	UpdateDeductionOrder(ctx context.Context, in *UpdateDeductionOrderRequest, opts ...grpc.CallOption) (*v1.UpdateDeductionOrderResponse, error)
 }
 
 type backofficeWalletClient struct {
@@ -301,6 +310,36 @@ func (c *backofficeWalletClient) GetDepositRewardConfig(ctx context.Context, in 
 	return out, nil
 }
 
+func (c *backofficeWalletClient) GetGamificationCurrencyConfig(ctx context.Context, in *GetGamificationCurrencyConfigRequest, opts ...grpc.CallOption) (*v1.GetGamificationCurrencyConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetGamificationCurrencyConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_GetGamificationCurrencyConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) UpdateOperatorCurrencyConfig(ctx context.Context, in *UpdateOperatorCurrencyConfigRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorCurrencyConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.UpdateOperatorCurrencyConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_UpdateOperatorCurrencyConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) UpdateDeductionOrder(ctx context.Context, in *UpdateDeductionOrderRequest, opts ...grpc.CallOption) (*v1.UpdateDeductionOrderResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.UpdateDeductionOrderResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_UpdateDeductionOrder_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeWalletServer is the server API for BackofficeWallet service.
 // All implementations must embed UnimplementedBackofficeWalletServer
 // for forward compatibility.
@@ -339,6 +378,12 @@ type BackofficeWalletServer interface {
 	DeleteDepositRewardSequences(context.Context, *DeleteDepositRewardSequencesRequest) (*v1.DeleteDepositRewardSequencesResponse, error)
 	// GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
 	GetDepositRewardConfig(context.Context, *GetDepositRewardConfigRequest) (*v1.GetDepositRewardConfigResponse, error)
+	// GetGamificationCurrencyConfig returns the currency config and the deduction order config based on currency and operator context
+	GetGamificationCurrencyConfig(context.Context, *GetGamificationCurrencyConfigRequest) (*v1.GetGamificationCurrencyConfigResponse, error)
+	// UpdateOperatorCurrencyConfig updates the config of a operator and its currency
+	UpdateOperatorCurrencyConfig(context.Context, *UpdateOperatorCurrencyConfigRequest) (*v1.UpdateOperatorCurrencyConfigResponse, error)
+	// UpdateDeductionOrder updates the deduction order config based on operator context
+	UpdateDeductionOrder(context.Context, *UpdateDeductionOrderRequest) (*v1.UpdateDeductionOrderResponse, error)
 	mustEmbedUnimplementedBackofficeWalletServer()
 }
 
@@ -411,6 +456,15 @@ func (UnimplementedBackofficeWalletServer) DeleteDepositRewardSequences(context.
 }
 func (UnimplementedBackofficeWalletServer) GetDepositRewardConfig(context.Context, *GetDepositRewardConfigRequest) (*v1.GetDepositRewardConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDepositRewardConfig not implemented")
+}
+func (UnimplementedBackofficeWalletServer) GetGamificationCurrencyConfig(context.Context, *GetGamificationCurrencyConfigRequest) (*v1.GetGamificationCurrencyConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetGamificationCurrencyConfig not implemented")
+}
+func (UnimplementedBackofficeWalletServer) UpdateOperatorCurrencyConfig(context.Context, *UpdateOperatorCurrencyConfigRequest) (*v1.UpdateOperatorCurrencyConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOperatorCurrencyConfig not implemented")
+}
+func (UnimplementedBackofficeWalletServer) UpdateDeductionOrder(context.Context, *UpdateDeductionOrderRequest) (*v1.UpdateDeductionOrderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateDeductionOrder not implemented")
 }
 func (UnimplementedBackofficeWalletServer) mustEmbedUnimplementedBackofficeWalletServer() {}
 func (UnimplementedBackofficeWalletServer) testEmbeddedByValue()                          {}
@@ -811,6 +865,60 @@ func _BackofficeWallet_GetDepositRewardConfig_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeWallet_GetGamificationCurrencyConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGamificationCurrencyConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).GetGamificationCurrencyConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_GetGamificationCurrencyConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).GetGamificationCurrencyConfig(ctx, req.(*GetGamificationCurrencyConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_UpdateOperatorCurrencyConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOperatorCurrencyConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).UpdateOperatorCurrencyConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_UpdateOperatorCurrencyConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).UpdateOperatorCurrencyConfig(ctx, req.(*UpdateOperatorCurrencyConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_UpdateDeductionOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateDeductionOrderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).UpdateDeductionOrder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_UpdateDeductionOrder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).UpdateDeductionOrder(ctx, req.(*UpdateDeductionOrderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeWallet_ServiceDesc is the grpc.ServiceDesc for BackofficeWallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -901,6 +1009,18 @@ var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetDepositRewardConfig",
 			Handler:    _BackofficeWallet_GetDepositRewardConfig_Handler,
+		},
+		{
+			MethodName: "GetGamificationCurrencyConfig",
+			Handler:    _BackofficeWallet_GetGamificationCurrencyConfig_Handler,
+		},
+		{
+			MethodName: "UpdateOperatorCurrencyConfig",
+			Handler:    _BackofficeWallet_UpdateOperatorCurrencyConfig_Handler,
+		},
+		{
+			MethodName: "UpdateDeductionOrder",
+			Handler:    _BackofficeWallet_UpdateDeductionOrder_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

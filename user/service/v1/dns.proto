@@ -46,8 +46,6 @@ message ListOperatorDomainsRequest {
 	api.common.OperatorContext operator_context = 1;
 	api.common.OperatorContextFilters operator_context_filters = 2;
 	optional string type = 3;
-	optional int32 page = 4;
-	optional int32 page_size = 5;
 }
 
 message ListOperatorDomainsResponse {
