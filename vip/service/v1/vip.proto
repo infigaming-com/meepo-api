@@ -1,0 +1,972 @@
+syntax = "proto3";
+
+package api.vip.service.v1;
+
+import "common/common.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/vip/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.vip.service.v1";
+
+// VIP系统服务 - 实现backoffice的所有VIP接口
+service Vip {
+  // ==================== VIP配置管理 ====================
+  
+  // VIP配置开关管理
+  rpc GetVipConfig(GetVipConfigRequest) returns (GetVipConfigResponse);
+  rpc UpdateVipConfig(UpdateVipConfigRequest) returns (UpdateVipConfigResponse);
+
+  // VIP设置管理
+  rpc GetVipSetting(GetVipSettingRequest) returns (GetVipSettingResponse);
+  rpc UpdateVipSetting(UpdateVipSettingRequest) returns (UpdateVipSettingResponse);
+
+  // 奖励过期配置
+  rpc GetVipRewardExpiry(GetVipRewardExpiryRequest) returns (GetVipRewardExpiryResponse);
+  rpc UpdateVipRewardExpiry(UpdateVipRewardExpiryRequest) returns (UpdateVipRewardExpiryResponse);
+
+  // ==================== VIP等级配置模板管理 ====================
+  
+  rpc ListVipLevelConfigTemplates(ListVipLevelConfigTemplatesRequest) returns (ListVipLevelConfigTemplatesResponse);
+  rpc GetVipLevelConfigTemplate(GetVipLevelConfigTemplateRequest) returns (GetVipLevelConfigTemplateResponse);
+  rpc CreateVipLevelConfigTemplate(CreateVipLevelConfigTemplateRequest) returns (CreateVipLevelConfigTemplateResponse);
+  rpc UpdateVipLevelConfigTemplate(UpdateVipLevelConfigTemplateRequest) returns (UpdateVipLevelConfigTemplateResponse);
+  rpc DeleteVipLevelConfigTemplate(DeleteVipLevelConfigTemplateRequest) returns (DeleteVipLevelConfigTemplateResponse);
+
+  // ==================== VIP会员管理 ====================
+  
+  rpc ListVipMembers(ListVipMembersRequest) returns (ListVipMembersResponse);
+  rpc GetVipMember(GetVipMemberRequest) returns (GetVipMemberResponse);
+  rpc UpdateVipMember(UpdateVipMemberRequest) returns (UpdateVipMemberResponse);
+
+  // ==================== XP账本管理 ====================
+  
+  rpc ListVipXpLedger(ListVipXpLedgerRequest) returns (ListVipXpLedgerResponse);
+  rpc GetVipXpLedger(GetVipXpLedgerRequest) returns (GetVipXpLedgerResponse);
+  rpc AddVipXpLedger(AddVipXpLedgerRequest) returns (AddVipXpLedgerResponse);
+
+  // ==================== 奖励账本管理 ====================
+  
+  rpc ListVipRewardLedger(ListVipRewardLedgerRequest) returns (ListVipRewardLedgerResponse);
+  rpc GetVipRewardLedger(GetVipRewardLedgerRequest) returns (GetVipRewardLedgerResponse);
+  rpc IssueVipReward(IssueVipRewardRequest) returns (IssueVipRewardResponse);
+  rpc UpdateVipRewardStatus(UpdateVipRewardStatusRequest) returns (UpdateVipRewardStatusResponse);
+
+  // ==================== 结算状态管理 ====================
+  
+  rpc GetVipSettlementState(GetVipSettlementStateRequest) returns (GetVipSettlementStateResponse);
+  rpc UpdateVipSettlementState(UpdateVipSettlementStateRequest) returns (UpdateVipSettlementStateResponse);
+
+  // ==================== 统计和报表 ====================
+  
+  rpc GetVipStatistics(GetVipStatisticsRequest) returns (GetVipStatisticsResponse);
+  rpc GetVipUserProgress(GetVipUserProgressRequest) returns (GetVipUserProgressResponse);
+
+  // ==================== 批量操作 ====================
+  
+  rpc BatchUpdateVipLevels(BatchUpdateVipLevelsRequest) returns (BatchUpdateVipLevelsResponse);
+  rpc RecalculateVipLevels(RecalculateVipLevelsRequest) returns (RecalculateVipLevelsResponse);
+
+  // ==================== 用户VIP接口 ====================
+  
+  // 获取当前用户的VIP信息
+  rpc GetMyVipInfo(GetMyVipInfoRequest) returns (GetMyVipInfoResponse);
+  // 获取VIP等级列表和奖励信息
+  rpc GetVipLevels(GetVipLevelsRequest) returns (GetVipLevelsResponse);
+  // 获取XP历史记录
+  rpc GetMyXpHistory(GetMyXpHistoryRequest) returns (GetMyXpHistoryResponse);
+  // 获取升级进度
+  rpc GetUpgradeProgress(GetUpgradeProgressRequest) returns (GetUpgradeProgressResponse);
+  // 获取我的奖励列表
+  rpc GetMyRewards(GetMyRewardsRequest) returns (GetMyRewardsResponse);
+  // 领取奖励
+  rpc ClaimReward(ClaimRewardRequest) returns (ClaimRewardResponse);
+  // 获取可领取的奖励
+  rpc GetClaimableRewards(GetClaimableRewardsRequest) returns (GetClaimableRewardsResponse);
+  // 获取VIP系统设置（用户可见部分）
+  rpc GetVipSettings(GetVipSettingsRequest) returns (GetVipSettingsResponse);
+
+  // ==================== 内部接口（供其他服务调用） ====================
+  
+  // 添加XP记录（供游戏/支付服务调用）
+  rpc AddXp(AddXpRequest) returns (AddXpResponse);
+  // 触发等级检查（供游戏/支付服务调用）
+  rpc CheckLevelUp(CheckLevelUpRequest) returns (CheckLevelUpResponse);
+  // 发放奖励（供调度服务调用）
+  rpc IssueRewards(IssueRewardsRequest) returns (IssueRewardsResponse);
+}
+
+// ==================== 枚举类型定义 ====================
+
+enum VipDisplayRule {
+  VIP_DISPLAY_RULE_UNSPECIFIED = 0;
+  VIP_DISPLAY_RULE_CUMULATIVE = 1;  // cumulative
+  VIP_DISPLAY_RULE_CURRENT = 2;     // current
+}
+
+enum VipRewardKind {
+  VIP_REWARD_KIND_UNSPECIFIED = 0;
+  VIP_REWARD_KIND_UPGRADE_BASE = 1;        // upgrade_base
+  VIP_REWARD_KIND_UPGRADE_INCREMENTAL = 2; // upgrade_incremental
+  VIP_REWARD_KIND_RAKEBACK_INSTANT = 3;    // rakeback_instant
+  VIP_REWARD_KIND_RAKEBACK_DAILY = 4;      // rakeback_daily
+  VIP_REWARD_KIND_RAKEBACK_WEEKLY = 5;     // rakeback_weekly
+  VIP_REWARD_KIND_RAKEBACK_MONTHLY = 6;    // rakeback_monthly
+}
+
+enum VipPayoutType {
+  VIP_PAYOUT_TYPE_UNSPECIFIED = 0;
+  VIP_PAYOUT_TYPE_CASH = 1;   // cash
+  VIP_PAYOUT_TYPE_BONUS = 2;  // bonus
+}
+
+enum VipResetPolicy {
+  VIP_RESET_POLICY_UNSPECIFIED = 0;
+  VIP_RESET_POLICY_NONE = 1;              // none
+  VIP_RESET_POLICY_RESET_ON_UPGRADE = 2;  // reset_on_upgrade
+  VIP_RESET_POLICY_RESET_NEXT_WEEK = 3;   // reset_next_week
+  VIP_RESET_POLICY_RESET_NEXT_MONTH = 4;  // reset_next_month
+}
+
+enum VipRewardStatus {
+  VIP_REWARD_STATUS_UNSPECIFIED = 0;
+  VIP_REWARD_STATUS_PENDING = 1;   // pending
+  VIP_REWARD_STATUS_ISSUED = 2;    // issued
+  VIP_REWARD_STATUS_EXPIRED = 3;   // expired
+  VIP_REWARD_STATUS_REVOKED = 4;   // revoked
+}
+
+// ==================== VIP配置 ====================
+
+message VipConfig {
+  int64 id = 1;
+  int64 system_operator_id = 2;
+  int64 retailer_operator_id = 3;
+  int64 company_operator_id = 4;
+  int64 operator_id = 5;
+  bool enabled = 6;
+  bool follow_parent_setting = 7;
+  bool follow_parent_reward_expiry = 8;
+  bool follow_parent_level_tpl = 9;
+  int64 created_at = 10;
+  int64 updated_at = 11;
+}
+
+message GetVipConfigRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+}
+
+message GetVipConfigResponse {
+  VipConfig config = 1;
+}
+
+message UpdateVipConfigRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  VipConfig config = 3;
+}
+
+message UpdateVipConfigResponse {
+  bool success = 1;
+}
+
+// ==================== VIP设置 ====================
+
+message VipSetting {
+  int64 id = 1;
+  int64 system_operator_id = 2;
+  int64 retailer_operator_id = 3;
+  int64 company_operator_id = 4;
+  int64 operator_id = 5;
+  
+  string base_currency = 6;
+  VipDisplayRule display_rule = 7;
+  bool rewards_slider = 8;
+  
+  VipPayoutType upgrade_payout_type = 9;
+  VipPayoutType rakeback_instant_payout_type = 10;
+  VipPayoutType rakeback_daily_payout_type = 11;
+  VipPayoutType weekly_reward_payout_type = 12;
+  VipPayoutType monthly_reward_payout_type = 13;
+  
+  double deposit_xp_rate = 14;
+  double wagering_xp_rate = 15;
+  double max_house_edge_limit_percent = 16;
+  double standard_xp_multiplier = 17;
+  
+  string timezone = 18;
+  string daily_issue_at = 19;
+  int32 weekly_issue_dow = 20;
+  string weekly_issue_at = 21;
+  int32 monthly_issue_dom = 22;
+  string monthly_issue_at = 23;
+  
+  int64 created_at = 24;
+  int64 updated_at = 25;
+}
+
+message GetVipSettingRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+}
+
+message GetVipSettingResponse {
+  VipSetting setting = 1;
+}
+
+message UpdateVipSettingRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  VipSetting setting = 3;
+}
+
+message UpdateVipSettingResponse {
+  bool success = 1;
+}
+
+// ==================== 奖励过期配置 ====================
+
+message VipRewardExpiry {
+  int64 id = 1;
+  int64 system_operator_id = 2;
+  int64 retailer_operator_id = 3;
+  int64 company_operator_id = 4;
+  int64 operator_id = 5;
+  int64 vip_setting_id = 6;
+  VipRewardKind reward_kind = 7;
+  
+  int32 expiry_days = 8;
+  int32 expiry_hours = 9;
+  bool never_expire = 10;
+  VipResetPolicy reset_policy = 11;
+  
+  int64 created_at = 12;
+  int64 updated_at = 13;
+}
+
+message GetVipRewardExpiryRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  VipRewardKind reward_kind = 3;
+}
+
+message GetVipRewardExpiryResponse {
+  VipRewardExpiry expiry = 1;
+}
+
+message UpdateVipRewardExpiryRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  VipRewardExpiry expiry = 3;
+}
+
+message UpdateVipRewardExpiryResponse {
+  bool success = 1;
+}
+
+// ==================== VIP等级配置模板 ====================
+
+message VipLevelConfigTemplate {
+  int64 id = 1;
+  int64 system_operator_id = 2;
+  int64 retailer_operator_id = 3;
+  int64 company_operator_id = 4;
+  int64 operator_id = 5;
+  
+  string name = 6;
+  int64 start_level = 7;
+  int64 end_level = 8;
+  
+  // 升级设置
+  double base_level_upgrade_xp = 9;
+  double incr_level_upgrade_xp = 10;
+  double base_upgrade_reward_amt = 11;
+  double incr_upgrade_reward_amt = 12;
+  double upgrade_reward_wagering_x = 13;
+  
+  // 等级维护要求
+  double weekly_xp_loss = 14;
+  double monthly_xp_loss = 15;
+  
+  // 即时返水
+  bool rakeback_instant_enabled = 16;
+  double rakeback_instant_rate = 17;
+  double rakeback_instant_req = 18;
+  
+  // 每日返水
+  bool rakeback_daily_enabled = 19;
+  double rakeback_daily_rate = 20;
+  double rakeback_daily_req = 21;
+  
+  // 每周奖励
+  bool weekly_reward_enabled = 22;
+  double weekly_fixed_reward_amt = 23;
+  double weekly_turnover_rate = 24;
+  double weekly_net_loss_amt = 25;
+  double weekly_adjust_range_pct = 26;
+  int32 weekly_active_days_reward = 27;
+  double weekly_wagering_req = 28;
+  
+  int64 created_at = 29;
+  int64 updated_at = 30;
+}
+
+message ListVipLevelConfigTemplatesRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+  string search = 5;
+  int64 start_level = 6;
+  int64 end_level = 7;
+}
+
+message ListVipLevelConfigTemplatesResponse {
+  repeated VipLevelConfigTemplate templates = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+}
+
+message GetVipLevelConfigTemplateRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  int64 template_id = 3;
+}
+
+message GetVipLevelConfigTemplateResponse {
+  VipLevelConfigTemplate template = 1;
+}
+
+message CreateVipLevelConfigTemplateRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  VipLevelConfigTemplate template = 3;
+}
+
+message CreateVipLevelConfigTemplateResponse {
+  int64 template_id = 1;
+  bool success = 2;
+}
+
+message UpdateVipLevelConfigTemplateRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  VipLevelConfigTemplate template = 3;
+}
+
+message UpdateVipLevelConfigTemplateResponse {
+  bool success = 1;
+}
+
+message DeleteVipLevelConfigTemplateRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  int64 template_id = 3;
+}
+
+message DeleteVipLevelConfigTemplateResponse {
+  bool success = 1;
+}
+
+// ==================== VIP会员 ====================
+
+message VipMember {
+  int64 id = 1;
+  int64 system_operator_id = 2;
+  int64 retailer_operator_id = 3;
+  int64 company_operator_id = 4;
+  int64 operator_id = 5;
+  int64 user_id = 6;
+  
+  int64 current_level_id = 7;
+  double current_xp = 8;
+  double total_xp = 9;
+  int64 last_level_up_at = 10;
+  int64 last_instant_upgrade_at = 11;
+  
+  int64 created_at = 12;
+  int64 updated_at = 13;
+  
+  // 扩展字段
+  string username = 14;
+  string current_level_name = 15;
+  double next_level_xp = 16;
+  double total_deposit = 17;
+  double total_wagering = 18;
+}
+
+message ListVipMembersRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+  string search = 5;
+  int64 current_level_id = 6;
+  double min_xp = 7;
+  double max_xp = 8;
+  int64 user_id = 9;
+}
+
+message ListVipMembersResponse {
+  repeated VipMember members = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+}
+
+message GetVipMemberRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  int64 user_id = 3;
+}
+
+message GetVipMemberResponse {
+  VipMember member = 1;
+}
+
+message UpdateVipMemberRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  VipMember member = 3;
+}
+
+message UpdateVipMemberResponse {
+  bool success = 1;
+}
+
+// ==================== XP账本 ====================
+
+message VipXpLedger {
+  int64 id = 1;
+  int64 system_operator_id = 2;
+  int64 retailer_operator_id = 3;
+  int64 company_operator_id = 4;
+  int64 operator_id = 5;
+  int64 user_id = 6;
+  
+  string source_type = 7;  // deposit/wagering/adjust
+  double base_amount = 8;
+  string currency = 9;
+  double xp_earned = 10;
+  double applied_rate = 11;
+  double house_edge_used = 12;
+  double std_xp_multiplier = 13;
+  
+  int64 event_ts = 14;
+  int64 created_at = 15;
+  
+  // 扩展字段
+  string username = 16;
+  string source_type_name = 17;
+}
+
+message ListVipXpLedgerRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+  int64 user_id = 5;
+  string source_type = 6;
+  int64 start_time = 7;
+  int64 end_time = 8;
+}
+
+message ListVipXpLedgerResponse {
+  repeated VipXpLedger entries = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+}
+
+message GetVipXpLedgerRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  int64 entry_id = 3;
+}
+
+message GetVipXpLedgerResponse {
+  VipXpLedger entry = 1;
+}
+
+message AddVipXpLedgerRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  VipXpLedger entry = 3;
+}
+
+message AddVipXpLedgerResponse {
+  int64 entry_id = 1;
+  bool success = 2;
+}
+
+// ==================== 奖励账本 ====================
+
+message VipRewardLedger {
+  int64 id = 1;
+  int64 system_operator_id = 2;
+  int64 retailer_operator_id = 3;
+  int64 company_operator_id = 4;
+  int64 operator_id = 5;
+  int64 user_id = 6;
+  int64 level_id = 7;
+  
+  VipRewardKind reward_type = 8;
+  VipPayoutType payout_type = 9;
+  double amount = 10;
+  string currency = 11;
+  
+  double claim_amount = 12;
+  string claim_currency = 13;
+  
+  VipRewardStatus status = 14;
+  int64 issue_at = 15;
+  int64 expire_at = 16;
+  
+  int64 created_at = 17;
+  int64 updated_at = 18;
+  
+  // 扩展字段
+  string username = 19;
+  string level_name = 20;
+  string reward_type_name = 21;
+  string payout_type_name = 22;
+}
+
+message ListVipRewardLedgerRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+  int64 user_id = 5;
+  int64 level_id = 6;
+  VipRewardKind reward_type = 7;
+  VipRewardStatus status = 8;
+  int64 start_time = 9;
+  int64 end_time = 10;
+}
+
+message ListVipRewardLedgerResponse {
+  repeated VipRewardLedger entries = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+}
+
+message GetVipRewardLedgerRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  int64 entry_id = 3;
+}
+
+message GetVipRewardLedgerResponse {
+  VipRewardLedger entry = 1;
+}
+
+message IssueVipRewardRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  int64 user_id = 3;
+  int64 level_id = 4;
+  VipRewardKind reward_type = 5;
+  VipPayoutType payout_type = 6;
+  double amount = 7;
+  string currency = 8;
+  double claim_amount = 9;
+  string claim_currency = 10;
+  int64 expire_at = 11;
+}
+
+message IssueVipRewardResponse {
+  int64 entry_id = 1;
+  bool success = 2;
+}
+
+message UpdateVipRewardStatusRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  int64 entry_id = 3;
+  VipRewardStatus status = 4;
+  int64 issue_at = 5;
+}
+
+message UpdateVipRewardStatusResponse {
+  bool success = 1;
+}
+
+// ==================== 结算状态 ====================
+
+message VipSettlementState {
+  int64 id = 1;
+  int64 system_operator_id = 2;
+  int64 retailer_operator_id = 3;
+  int64 company_operator_id = 4;
+  int64 operator_id = 5;
+  
+  int64 daily_last_run_at = 6;
+  int64 weekly_last_run_at = 7;
+  int64 monthly_last_run_at = 8;
+  
+  int64 created_at = 9;
+  int64 updated_at = 10;
+}
+
+message GetVipSettlementStateRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+}
+
+message GetVipSettlementStateResponse {
+  VipSettlementState state = 1;
+}
+
+message UpdateVipSettlementStateRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  VipSettlementState state = 3;
+}
+
+message UpdateVipSettlementStateResponse {
+  bool success = 1;
+}
+
+// ==================== 统计和报表 ====================
+
+message VipStatistics {
+  int64 total_members = 1;
+  int64 active_members = 2;
+  double total_xp_earned = 3;
+  double total_rewards_issued = 4;
+  double total_rewards_pending = 5;
+  repeated VipLevelStatistics level_stats = 6;
+}
+
+message VipLevelStatistics {
+  int64 level_id = 1;
+  string level_name = 2;
+  int64 member_count = 3;
+  double avg_xp = 4;
+  double total_rewards = 5;
+}
+
+message GetVipStatisticsRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  int64 start_time = 3;
+  int64 end_time = 4;
+}
+
+message GetVipStatisticsResponse {
+  VipStatistics statistics = 1;
+}
+
+message VipUserProgress {
+  int64 user_id = 1;
+  string username = 2;
+  int64 current_level_id = 3;
+  string current_level_name = 4;
+  double current_xp = 5;
+  double total_xp = 6;
+  double next_level_xp = 7;
+  double progress_percentage = 8;
+  repeated VipXpLedger recent_xp_entries = 9;
+  repeated VipRewardLedger recent_rewards = 10;
+}
+
+message GetVipUserProgressRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  int64 user_id = 3;
+}
+
+message GetVipUserProgressResponse {
+  VipUserProgress progress = 1;
+}
+
+// ==================== 批量操作 ====================
+
+message BatchUpdateVipLevelsRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  repeated VipLevelConfigTemplate templates = 3;
+}
+
+message BatchUpdateVipLevelsResponse {
+  int32 updated_count = 1;
+  bool success = 2;
+}
+
+message RecalculateVipLevelsRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  repeated int64 user_ids = 3;
+  bool recalculate_all = 4;
+}
+
+message RecalculateVipLevelsResponse {
+  int32 recalculated_count = 1;
+  bool success = 2;
+}
+
+// ==================== 用户VIP接口消息 ====================
+
+message UserVipInfo {
+  int64 user_id = 1;
+  int64 current_level_id = 2;
+  string current_level_name = 3;
+  string current_level_label = 4;
+  int32 current_level_rank = 5;
+  double current_xp = 6;
+  double total_xp = 7;
+  double next_level_xp = 8;
+  double progress_percentage = 9;
+  int64 last_level_up_at = 10;
+  
+  // 当前等级的奖励信息
+  VipLevelRewards current_level_rewards = 11;
+  
+  // 下一等级的奖励信息
+  VipLevelRewards next_level_rewards = 12;
+}
+
+message VipLevelRewards {
+  double base_upgrade_reward = 1;
+  double incremental_upgrade_reward = 2;
+  double rakeback_instant_rate = 3;
+  double rakeback_daily_rate = 4;
+  double weekly_reward = 5;
+  double monthly_reward = 6;
+}
+
+message GetMyVipInfoRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  int64 user_id = 3;
+}
+
+message GetMyVipInfoResponse {
+  UserVipInfo vip_info = 1;
+}
+
+// ==================== VIP等级列表 ====================
+
+message VipLevelInfo {
+  int64 id = 1;
+  string name = 2;
+  string label = 3;
+  int32 level_rank = 4;
+  double min_xp = 5;
+  VipLevelRewards rewards = 6;
+  bool is_current = 7;  // 是否是用户当前等级
+}
+
+message GetVipLevelsRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  int64 user_id = 3;
+}
+
+message GetVipLevelsResponse {
+  repeated VipLevelInfo levels = 1;
+  int64 current_level_id = 2;
+}
+
+// ==================== XP历史记录 ====================
+
+message XpHistoryEntry {
+  int64 id = 1;
+  string source_type = 2;  // deposit/wagering/adjust
+  string source_type_name = 3;
+  double base_amount = 4;
+  string currency = 5;
+  double xp_earned = 6;
+  double applied_rate = 7;
+  int64 event_ts = 8;
+  int64 created_at = 9;
+}
+
+message GetMyXpHistoryRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  int64 user_id = 3;
+  int32 page = 4;
+  int32 page_size = 5;
+  int64 start_time = 6;
+  int64 end_time = 7;
+}
+
+message GetMyXpHistoryResponse {
+  repeated XpHistoryEntry entries = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+  double total_xp_in_period = 5;
+}
+
+// ==================== 升级进度 ====================
+
+message UpgradeProgress {
+  int64 current_level_id = 1;
+  string current_level_name = 2;
+  double current_xp = 3;
+  double next_level_xp = 4;
+  double xp_needed = 5;
+  double progress_percentage = 6;
+  
+  // 升级奖励预览
+  double upgrade_reward_preview = 7;
+  VipLevelRewards next_level_benefits = 8;
+}
+
+message GetUpgradeProgressRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  int64 user_id = 3;
+}
+
+message GetUpgradeProgressResponse {
+  UpgradeProgress progress = 1;
+}
+
+// ==================== 奖励相关 ====================
+
+message UserReward {
+  int64 id = 1;
+  VipRewardKind reward_type = 2;
+  string reward_type_name = 3;
+  VipPayoutType payout_type = 4;
+  string payout_type_name = 5;
+  double amount = 6;
+  string currency = 7;
+  double claim_amount = 8;
+  string claim_currency = 9;
+  VipRewardStatus status = 10;
+  string status_name = 11;
+  int64 issue_at = 12;
+  int64 expire_at = 13;
+  int64 created_at = 14;
+  bool is_claimable = 15;
+  bool is_expired = 16;
+}
+
+message GetMyRewardsRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  int64 user_id = 3;
+  int32 page = 4;
+  int32 page_size = 5;
+  VipRewardKind reward_type = 6;
+  VipRewardStatus status = 7;
+}
+
+message GetMyRewardsResponse {
+  repeated UserReward rewards = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+}
+
+message GetClaimableRewardsRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  int64 user_id = 3;
+}
+
+message GetClaimableRewardsResponse {
+  repeated UserReward claimable_rewards = 1;
+  double total_claimable_amount = 2;
+  string total_claimable_currency = 3;
+}
+
+message ClaimRewardRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  int64 user_id = 3;
+  int64 reward_id = 4;
+}
+
+message ClaimRewardResponse {
+  bool success = 1;
+  string message = 2;
+  double claimed_amount = 3;
+  string claimed_currency = 4;
+}
+
+// ==================== VIP设置（用户可见部分） ====================
+
+message VipSettingsInfo {
+  bool vip_enabled = 1;
+  string base_currency = 2;
+  VipDisplayRule display_rule = 3;
+  bool rewards_slider_enabled = 4;
+  
+  // XP配置（用户可见部分）
+  double deposit_xp_rate = 5;
+  double wagering_xp_rate = 6;
+  
+  // 时区信息
+  string timezone = 7;
+}
+
+message GetVipSettingsRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+}
+
+message GetVipSettingsResponse {
+  VipSettingsInfo settings = 1;
+}
+
+// ==================== 内部接口消息 ====================
+
+message AddXpRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  int64 user_id = 3;
+  string source_type = 4;  // deposit/wagering/adjust
+  double base_amount = 5;
+  string currency = 6;
+  double house_edge_used = 7;  // 仅投注时使用
+  int64 event_ts = 8;
+  string reference_id = 9;  // 参考ID，用于防重复
+}
+
+message AddXpResponse {
+  bool success = 1;
+  double xp_earned = 2;
+  double new_total_xp = 3;
+  bool level_up_triggered = 4;
+  int64 new_level_id = 5;
+  string new_level_name = 6;
+}
+
+message CheckLevelUpRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  int64 user_id = 3;
+}
+
+message CheckLevelUpResponse {
+  bool level_up_occurred = 1;
+  int64 old_level_id = 2;
+  int64 new_level_id = 3;
+  string new_level_name = 4;
+  repeated UserReward upgrade_rewards = 5;
+}
+
+message IssueRewardsRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+  VipRewardKind reward_type = 3;
+  repeated int64 user_ids = 4;  // 空表示所有用户
+  bool dry_run = 5;  // 是否仅预览不实际发放
+}
+
+message IssueRewardsResponse {
+  bool success = 1;
+  int32 rewards_issued = 2;
+  double total_amount_issued = 3;
+  string currency = 4;
+  repeated string errors = 5;
+}
+
