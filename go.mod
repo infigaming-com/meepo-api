@@ -5,6 +5,7 @@ go 1.23.8
 require (
 	github.com/go-kratos/kratos/v2 v2.8.4
 	github.com/golang-jwt/jwt/v5 v5.2.2
+	github.com/jinzhu/copier v0.4.0
 	github.com/samber/lo v1.51.0
 	go.uber.org/zap v1.27.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20250422160041-2d3770c4ea7f
