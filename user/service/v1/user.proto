@@ -931,6 +931,7 @@ message GetOperatorInfoByOriginRequest {
 message GetOperatorInfoByOriginResponse {
 	api.common.OperatorContext operator_context = 1;
 	OperatorDetails operatorDetail = 2;
+	OperatorDetails systemOperatorDetail = 3;
 }
 
 message GetOperatorRequest {

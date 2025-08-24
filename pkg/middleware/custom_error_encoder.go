@@ -27,6 +27,12 @@ func CustomErrorEncoder(errorReasonMap map[string]int32) khttp.EncodeErrorFunc {
 			"reason":  se.Reason,
 		}
 
+		if kratosErr, ok := err.(*errors.Error); ok {
+			if kratosErr.Metadata != nil {
+				resp["meta"] = kratosErr.Metadata
+			}
+		}
+
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
 
