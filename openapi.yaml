@@ -11518,7 +11518,7 @@ components:
                     type: string
                 rewardPercentage:
                     type: string
-                maxBonusAmount:
+                maxRewardAmount:
                     type: string
                 maxWithdrawalAmount:
                     type: string

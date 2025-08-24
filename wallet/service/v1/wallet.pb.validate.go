@@ -15622,7 +15622,7 @@ func (m *RewardSequence_TierConfig) validate(all bool) error {
 
 	// no validation rules for RewardPercentage
 
-	// no validation rules for MaxBonusAmount
+	// no validation rules for MaxRewardAmount
 
 	// no validation rules for MaxWithdrawalAmount
 
