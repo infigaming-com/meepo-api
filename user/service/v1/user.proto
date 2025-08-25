@@ -931,6 +931,7 @@ message GetOperatorInfoByOriginRequest {
 message GetOperatorInfoByOriginResponse {
 	api.common.OperatorContext operator_context = 1;
 	OperatorDetails operatorDetail = 2;
+	OperatorDetails systemOperatorDetail = 3;
 }
 
 message GetOperatorRequest {
@@ -1159,13 +1160,11 @@ message ListBottomOperatorsResponse {
 }
 
 message UpdateOperatorStatusRequest {
-	int64 target_operator_id = 1; // target operator id
-	string target_operator_type = 2; // target operator type
-	api.common.OperatorContext target_operator_context = 3; // target operator context
-	string action = 4; // action to update the status of target operator
-	int64 operator_id = 5; // operator id of the backoffice operator
-	string operator_type = 6; // operator type of the backoffice operator
-	api.common.OperatorContext operator_context = 7; // operator context of the backoffice operator
+	api.common.OperatorContext target_operator_context = 1; // target operator context
+	string action = 2; // action to update the status of target operator "pending", "live", "suspended", "request_to_close", "closed", "maintain",
+	google.protobuf.Timestamp actionStart = 3; // action start
+	google.protobuf.Timestamp actionEnd = 4; // action end
+	api.common.OperatorContext operator_context = 5; // operator context of the backoffice operator
 }
 
 message UpdateOperatorStatusResponse {

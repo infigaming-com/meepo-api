@@ -3,6 +3,7 @@ syntax = "proto3";
 package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
 import "common/common.proto";
 import "user/service/v1/user.proto";
 
@@ -266,10 +267,10 @@ message ListBottomOperatorsResponse {
 }
 
 message UpdateOperatorStatusRequest {
-	int64 target_operator_id = 1; // target operator id
-	string target_operator_type = 2; // target operator type
-	api.common.OperatorContext target_operator_context = 3; // target operator context
-	string action = 4; // action to update the status of target operator
+	api.common.OperatorContext target_operator_context = 1; // target operator context
+	string action = 2; // action to update the status of target operator "pending", "live", "suspended", "request_to_close", "closed", "maintain",
+	google.protobuf.Timestamp actionStart = 3; // action start
+	google.protobuf.Timestamp actionEnd = 4; // action end
 }
 
 message UpdateOperatorStatusResponse {

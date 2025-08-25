@@ -9085,14 +9085,16 @@ components:
         api.backoffice.service.v1.UpdateOperatorStatusRequest:
             type: object
             properties:
-                targetOperatorId:
-                    type: string
-                targetOperatorType:
-                    type: string
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 action:
                     type: string
+                actionStart:
+                    type: string
+                    format: date-time
+                actionEnd:
+                    type: string
+                    format: date-time
         api.backoffice.service.v1.UpdateOperatorStatusResponse:
             type: object
             properties:

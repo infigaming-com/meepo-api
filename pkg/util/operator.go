@@ -22,6 +22,7 @@ const (
 	OperatorStatusSuspended      = "suspended"
 	OperatorStatusRequestToClose = "request_to_close"
 	OperatorStatusClosed         = "closed"
+	OperatorStatusMaintain       = "maintain"
 
 	// Operator Admin Role
 	OperatorAdminRoleId         = 4
