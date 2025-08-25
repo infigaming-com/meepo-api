@@ -13368,10 +13368,6 @@ func (m *UpdateOperatorStatusRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for TargetOperatorId
-
-	// no validation rules for TargetOperatorType
-
 	if all {
 		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
@@ -13403,9 +13399,63 @@ func (m *UpdateOperatorStatusRequest) validate(all bool) error {
 
 	// no validation rules for Action
 
-	// no validation rules for OperatorId
+	if all {
+		switch v := interface{}(m.GetActionStart()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateOperatorStatusRequestValidationError{
+					field:  "ActionStart",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateOperatorStatusRequestValidationError{
+					field:  "ActionStart",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetActionStart()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateOperatorStatusRequestValidationError{
+				field:  "ActionStart",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
-	// no validation rules for OperatorType
+	if all {
+		switch v := interface{}(m.GetActionEnd()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateOperatorStatusRequestValidationError{
+					field:  "ActionEnd",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateOperatorStatusRequestValidationError{
+					field:  "ActionEnd",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetActionEnd()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateOperatorStatusRequestValidationError{
+				field:  "ActionEnd",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
