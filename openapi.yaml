@@ -3867,6 +3867,10 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 reportingCurrency:
                     $ref: '#/components/schemas/api.wallet.service.v1.Currency'
+                subdomain:
+                    type: string
+                backofficeSubdomain:
+                    type: string
         api.backoffice.service.v1.ActiveUsersData_Data:
             type: object
             properties:
