@@ -48,6 +48,7 @@ const (
 	Operator_GetBalancesSummary_FullMethodName              = "/api.operator.service.v1.Operator/GetBalancesSummary"
 	Operator_ListBillingPeriods_FullMethodName              = "/api.operator.service.v1.Operator/ListBillingPeriods"
 	Operator_ListBalanceMonthlyRevenueShares_FullMethodName = "/api.operator.service.v1.Operator/ListBalanceMonthlyRevenueShares"
+	Operator_ListBalancesSummary_FullMethodName             = "/api.operator.service.v1.Operator/ListBalancesSummary"
 )
 
 // OperatorClient is the client API for Operator service.
@@ -88,6 +89,7 @@ type OperatorClient interface {
 	GetBalancesSummary(ctx context.Context, in *GetBalancesSummaryRequest, opts ...grpc.CallOption) (*GetBalancesSummaryResponse, error)
 	ListBillingPeriods(ctx context.Context, in *ListBillingPeriodsRequest, opts ...grpc.CallOption) (*ListBillingPeriodsResponse, error)
 	ListBalanceMonthlyRevenueShares(ctx context.Context, in *ListBalanceMonthlyRevenueSharesRequest, opts ...grpc.CallOption) (*ListBalanceMonthlyRevenueSharesResponse, error)
+	ListBalancesSummary(ctx context.Context, in *ListBalancesSummaryRequest, opts ...grpc.CallOption) (*ListBalancesSummaryResponse, error)
 }
 
 type operatorClient struct {
@@ -388,6 +390,16 @@ func (c *operatorClient) ListBalanceMonthlyRevenueShares(ctx context.Context, in
 	return out, nil
 }
 
+func (c *operatorClient) ListBalancesSummary(ctx context.Context, in *ListBalancesSummaryRequest, opts ...grpc.CallOption) (*ListBalancesSummaryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListBalancesSummaryResponse)
+	err := c.cc.Invoke(ctx, Operator_ListBalancesSummary_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OperatorServer is the server API for Operator service.
 // All implementations must embed UnimplementedOperatorServer
 // for forward compatibility.
@@ -426,6 +438,7 @@ type OperatorServer interface {
 	GetBalancesSummary(context.Context, *GetBalancesSummaryRequest) (*GetBalancesSummaryResponse, error)
 	ListBillingPeriods(context.Context, *ListBillingPeriodsRequest) (*ListBillingPeriodsResponse, error)
 	ListBalanceMonthlyRevenueShares(context.Context, *ListBalanceMonthlyRevenueSharesRequest) (*ListBalanceMonthlyRevenueSharesResponse, error)
+	ListBalancesSummary(context.Context, *ListBalancesSummaryRequest) (*ListBalancesSummaryResponse, error)
 	mustEmbedUnimplementedOperatorServer()
 }
 
@@ -522,6 +535,9 @@ func (UnimplementedOperatorServer) ListBillingPeriods(context.Context, *ListBill
 }
 func (UnimplementedOperatorServer) ListBalanceMonthlyRevenueShares(context.Context, *ListBalanceMonthlyRevenueSharesRequest) (*ListBalanceMonthlyRevenueSharesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBalanceMonthlyRevenueShares not implemented")
+}
+func (UnimplementedOperatorServer) ListBalancesSummary(context.Context, *ListBalancesSummaryRequest) (*ListBalancesSummaryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBalancesSummary not implemented")
 }
 func (UnimplementedOperatorServer) mustEmbedUnimplementedOperatorServer() {}
 func (UnimplementedOperatorServer) testEmbeddedByValue()                  {}
@@ -1066,6 +1082,24 @@ func _Operator_ListBalanceMonthlyRevenueShares_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Operator_ListBalancesSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBalancesSummaryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperatorServer).ListBalancesSummary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Operator_ListBalancesSummary_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperatorServer).ListBalancesSummary(ctx, req.(*ListBalancesSummaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Operator_ServiceDesc is the grpc.ServiceDesc for Operator service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1188,6 +1222,10 @@ var Operator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListBalanceMonthlyRevenueShares",
 			Handler:    _Operator_ListBalanceMonthlyRevenueShares_Handler,
+		},
+		{
+			MethodName: "ListBalancesSummary",
+			Handler:    _Operator_ListBalancesSummary_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

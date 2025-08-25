@@ -29,6 +29,7 @@ const OperationBackofficeFinanceGetInvoiceSummary = "/api.backoffice.service.v1.
 const OperationBackofficeFinanceListAdjustmentConfigs = "/api.backoffice.service.v1.BackofficeFinance/ListAdjustmentConfigs"
 const OperationBackofficeFinanceListAdjustments = "/api.backoffice.service.v1.BackofficeFinance/ListAdjustments"
 const OperationBackofficeFinanceListBalanceMonthlyRevenueShares = "/api.backoffice.service.v1.BackofficeFinance/ListBalanceMonthlyRevenueShares"
+const OperationBackofficeFinanceListBalancesSummary = "/api.backoffice.service.v1.BackofficeFinance/ListBalancesSummary"
 const OperationBackofficeFinanceListBillingPeriods = "/api.backoffice.service.v1.BackofficeFinance/ListBillingPeriods"
 const OperationBackofficeFinanceListInvoices = "/api.backoffice.service.v1.BackofficeFinance/ListInvoices"
 const OperationBackofficeFinanceListMonthlyRevenueShare = "/api.backoffice.service.v1.BackofficeFinance/ListMonthlyRevenueShare"
@@ -48,6 +49,7 @@ type BackofficeFinanceHTTPServer interface {
 	ListAdjustmentConfigs(context.Context, *ListAdjustmentConfigsRequest) (*ListAdjustmentConfigsResponse, error)
 	ListAdjustments(context.Context, *ListAdjustmentsRequest) (*ListAdjustmentsResponse, error)
 	ListBalanceMonthlyRevenueShares(context.Context, *ListBalanceMonthlyRevenueSharesRequest) (*ListBalanceMonthlyRevenueSharesResponse, error)
+	ListBalancesSummary(context.Context, *ListBalancesSummaryRequest) (*ListBalancesSummaryResponse, error)
 	ListBillingPeriods(context.Context, *ListBillingPeriodsRequest) (*ListBillingPeriodsResponse, error)
 	ListInvoices(context.Context, *ListInvoicesRequest) (*ListInvoicesResponse, error)
 	ListMonthlyRevenueShare(context.Context, *ListMonthlyRevenueShareRequest) (*ListMonthlyRevenueShareResponse, error)
@@ -76,6 +78,7 @@ func RegisterBackofficeFinanceHTTPServer(s *http.Server, srv BackofficeFinanceHT
 	r.POST("/v1/backoffice/finance/balances/summary", _BackofficeFinance_GetBalancesSummary0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/finance/billing-periods/list", _BackofficeFinance_ListBillingPeriods0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/finance/balance/monthly-revenue-shares/list", _BackofficeFinance_ListBalanceMonthlyRevenueShares0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/finance/balances/summary/list", _BackofficeFinance_ListBalancesSummary0_HTTP_Handler(srv))
 }
 
 func _BackofficeFinance_ListInvoices0_HTTP_Handler(srv BackofficeFinanceHTTPServer) func(ctx http.Context) error {
@@ -452,6 +455,28 @@ func _BackofficeFinance_ListBalanceMonthlyRevenueShares0_HTTP_Handler(srv Backof
 	}
 }
 
+func _BackofficeFinance_ListBalancesSummary0_HTTP_Handler(srv BackofficeFinanceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListBalancesSummaryRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeFinanceListBalancesSummary)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListBalancesSummary(ctx, req.(*ListBalancesSummaryRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListBalancesSummaryResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeFinanceHTTPClient interface {
 	AddAdjustment(ctx context.Context, req *AddAdjustmentRequest, opts ...http.CallOption) (rsp *AddAdjustmentResponse, err error)
 	CreateAdjustmentConfig(ctx context.Context, req *CreateAdjustmentConfigRequest, opts ...http.CallOption) (rsp *CreateAdjustmentConfigResponse, err error)
@@ -463,6 +488,7 @@ type BackofficeFinanceHTTPClient interface {
 	ListAdjustmentConfigs(ctx context.Context, req *ListAdjustmentConfigsRequest, opts ...http.CallOption) (rsp *ListAdjustmentConfigsResponse, err error)
 	ListAdjustments(ctx context.Context, req *ListAdjustmentsRequest, opts ...http.CallOption) (rsp *ListAdjustmentsResponse, err error)
 	ListBalanceMonthlyRevenueShares(ctx context.Context, req *ListBalanceMonthlyRevenueSharesRequest, opts ...http.CallOption) (rsp *ListBalanceMonthlyRevenueSharesResponse, err error)
+	ListBalancesSummary(ctx context.Context, req *ListBalancesSummaryRequest, opts ...http.CallOption) (rsp *ListBalancesSummaryResponse, err error)
 	ListBillingPeriods(ctx context.Context, req *ListBillingPeriodsRequest, opts ...http.CallOption) (rsp *ListBillingPeriodsResponse, err error)
 	ListInvoices(ctx context.Context, req *ListInvoicesRequest, opts ...http.CallOption) (rsp *ListInvoicesResponse, err error)
 	ListMonthlyRevenueShare(ctx context.Context, req *ListMonthlyRevenueShareRequest, opts ...http.CallOption) (rsp *ListMonthlyRevenueShareResponse, err error)
@@ -602,6 +628,19 @@ func (c *BackofficeFinanceHTTPClientImpl) ListBalanceMonthlyRevenueShares(ctx co
 	pattern := "/v1/backoffice/finance/balance/monthly-revenue-shares/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeFinanceListBalanceMonthlyRevenueShares))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeFinanceHTTPClientImpl) ListBalancesSummary(ctx context.Context, in *ListBalancesSummaryRequest, opts ...http.CallOption) (*ListBalancesSummaryResponse, error) {
+	var out ListBalancesSummaryResponse
+	pattern := "/v1/backoffice/finance/balances/summary/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeFinanceListBalancesSummary))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

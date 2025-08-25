@@ -98,6 +98,9 @@ service Operator {
 
 	rpc ListBalanceMonthlyRevenueShares(ListBalanceMonthlyRevenueSharesRequest) returns (ListBalanceMonthlyRevenueSharesResponse) {
 	}
+
+	rpc ListBalancesSummary(ListBalancesSummaryRequest) returns (ListBalancesSummaryResponse) {
+	}
 }
 
 message AddOperatorRequest {
@@ -702,3 +705,35 @@ message ListBalanceMonthlyRevenueSharesResponse {
 	int32 page = 3;
 	int32 page_size = 4;
 }
+
+message ListBalancesSummaryRequest {
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	api.common.OperatorContext operator_context = 2;
+	optional int32 page = 3;
+	optional int32 page_size = 4;
+}
+
+message ListBalancesSummaryResponse {
+	message BalanceSummary {
+		int64 retailer_operator_id = 4;
+		string retailer_operator_name = 5;
+		int64 company_operator_id = 6;
+		string company_operator_name = 7;
+		string deposits = 8;
+		string withdrawals = 9;
+		string balance = 10;
+		string ngr = 11;
+		string game_provider_rs = 12;
+		string third_party_fees = 13;
+		string adjustments = 14;
+		string est_net_profit = 15;
+		string revenue_share_system = 16;
+		string revenue_share_operator = 17;
+		string est_net_costs = 18;
+	}
+
+	repeated BalanceSummary balances = 1;
+	int32 total_count = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}	
