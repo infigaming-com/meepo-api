@@ -283,6 +283,8 @@ message AccountInfoResponse {
 	Role role = 7;
     api.common.OperatorContext operator_context = 8;
     wallet.service.v1.Currency reporting_currency = 9;
+    string subdomain = 10;
+    string backoffice_subdomain = 11;
 }
 
 message Role {

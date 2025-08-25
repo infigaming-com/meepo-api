@@ -1359,18 +1359,20 @@ func (*AccountInfoRequest) Descriptor() ([]byte, []int) {
 }
 
 type AccountInfoResponse struct {
-	state             protoimpl.MessageState  `protogen:"open.v1"`
-	Username          string                  `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
-	Email             string                  `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
-	Mobile            string                  `protobuf:"bytes,3,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	EmailVerified     bool                    `protobuf:"varint,4,opt,name=email_verified,json=emailVerified,proto3" json:"email_verified,omitempty"`
-	MobileVerified    bool                    `protobuf:"varint,5,opt,name=mobile_verified,json=mobileVerified,proto3" json:"mobile_verified,omitempty"`
-	Enabled           bool                    `protobuf:"varint,6,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	Role              *Role                   `protobuf:"bytes,7,opt,name=role,proto3" json:"role,omitempty"`
-	OperatorContext   *common.OperatorContext `protobuf:"bytes,8,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	ReportingCurrency *v1.Currency            `protobuf:"bytes,9,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state               protoimpl.MessageState  `protogen:"open.v1"`
+	Username            string                  `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	Email               string                  `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
+	Mobile              string                  `protobuf:"bytes,3,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	EmailVerified       bool                    `protobuf:"varint,4,opt,name=email_verified,json=emailVerified,proto3" json:"email_verified,omitempty"`
+	MobileVerified      bool                    `protobuf:"varint,5,opt,name=mobile_verified,json=mobileVerified,proto3" json:"mobile_verified,omitempty"`
+	Enabled             bool                    `protobuf:"varint,6,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Role                *Role                   `protobuf:"bytes,7,opt,name=role,proto3" json:"role,omitempty"`
+	OperatorContext     *common.OperatorContext `protobuf:"bytes,8,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	ReportingCurrency   *v1.Currency            `protobuf:"bytes,9,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	Subdomain           string                  `protobuf:"bytes,10,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
+	BackofficeSubdomain string                  `protobuf:"bytes,11,opt,name=backoffice_subdomain,json=backofficeSubdomain,proto3" json:"backoffice_subdomain,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *AccountInfoResponse) Reset() {
@@ -1464,6 +1466,20 @@ func (x *AccountInfoResponse) GetReportingCurrency() *v1.Currency {
 		return x.ReportingCurrency
 	}
 	return nil
+}
+
+func (x *AccountInfoResponse) GetSubdomain() string {
+	if x != nil {
+		return x.Subdomain
+	}
+	return ""
+}
+
+func (x *AccountInfoResponse) GetBackofficeSubdomain() string {
+	if x != nil {
+		return x.BackofficeSubdomain
+	}
+	return ""
 }
 
 type Role struct {
@@ -2554,7 +2570,7 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"#SendRegisterVerificationCodeRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\"&\n" +
 	"$SendRegisterVerificationCodeResponse\"\x14\n" +
-	"\x12AccountInfoRequest\"\x96\x03\n" +
+	"\x12AccountInfoRequest\"\xe7\x03\n" +
 	"\x13AccountInfoResponse\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x16\n" +
@@ -2564,7 +2580,10 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\aenabled\x18\x06 \x01(\bR\aenabled\x123\n" +
 	"\x04role\x18\a \x01(\v2\x1f.api.backoffice.service.v1.RoleR\x04role\x12F\n" +
 	"\x10operator_context\x18\b \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12N\n" +
-	"\x12reporting_currency\x18\t \x01(\v2\x1f.api.wallet.service.v1.CurrencyR\x11reportingCurrency\"|\n" +
+	"\x12reporting_currency\x18\t \x01(\v2\x1f.api.wallet.service.v1.CurrencyR\x11reportingCurrency\x12\x1c\n" +
+	"\tsubdomain\x18\n" +
+	" \x01(\tR\tsubdomain\x121\n" +
+	"\x14backoffice_subdomain\x18\v \x01(\tR\x13backofficeSubdomain\"|\n" +
 	"\x04Role\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x17\n" +
 	"\arole_id\x18\x02 \x01(\x03R\x06roleId\x12G\n" +
