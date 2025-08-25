@@ -997,8 +997,8 @@ message RewardSequence {
 		string min_deposit_amount = 1;
 		string max_deposit_amount = 2;
 		string reward_percentage = 3;
-		string max_bonus_amount = 4;
-		string max_withdrawal_amount = 5;
+		string max_reward_amount = 4;
+		string max_withdrawal_amount = 5; // only available for bonus reward
 	}
 	int32 serial_number = 1;
 	string name = 2;
