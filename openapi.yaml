@@ -983,6 +983,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetBalancesSummaryResponse'
+    /v1/backoffice/finance/balances/summary/list:
+        post:
+            tags:
+                - BackofficeFinance
+            operationId: BackofficeFinance_ListBalancesSummary
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListBalancesSummaryRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListBalancesSummaryResponse'
     /v1/backoffice/finance/billing-periods/list:
         post:
             tags:
@@ -6097,6 +6115,66 @@ components:
                 estCosts:
                     type: string
                 id:
+                    type: string
+        api.backoffice.service.v1.ListBalancesSummaryRequest:
+            type: object
+            properties:
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListBalancesSummaryResponse:
+            type: object
+            properties:
+                balances:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListBalancesSummaryResponse_BalanceSummary'
+                totalCount:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListBalancesSummaryResponse_BalanceSummary:
+            type: object
+            properties:
+                retailerOperatorId:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                companyOperatorId:
+                    type: string
+                companyOperatorName:
+                    type: string
+                deposits:
+                    type: string
+                withdrawals:
+                    type: string
+                balance:
+                    type: string
+                ngr:
+                    type: string
+                gameProviderRs:
+                    type: string
+                thirdPartyFees:
+                    type: string
+                adjustments:
+                    type: string
+                estNetProfit:
+                    type: string
+                revenueShareSystem:
+                    type: string
+                revenueShareOperator:
+                    type: string
+                estNetCosts:
                     type: string
         api.backoffice.service.v1.ListBetsRequest:
             type: object
