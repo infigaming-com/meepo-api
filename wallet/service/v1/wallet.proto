@@ -143,6 +143,9 @@ service Wallet {
 
 	// UpdateDeductionOrder updates the deduction order config based on operator context
 	rpc UpdateDeductionOrder(UpdateDeductionOrderRequest) returns (UpdateDeductionOrderResponse) {}
+
+	// BonusTransfer is used to transfer from one credit's bonus to its cash
+	// rpc BonusTransfer(BonusTransferRequest) returns (BonusTransferResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -155,6 +158,8 @@ message GetUserBalancesResponse {
 		string cash = 2;
 		string operator_bonus = 3;
 		string provider_bonus = 4;
+		string withdrawable_cash = 5;
+		string transferable_bonus = 6;
 	}
 	repeated Balance balances = 1;
 }
@@ -380,11 +385,13 @@ message GetWalletsResponse {
 		string original_cash = 4;
 		string bonus = 5;
 		string original_bonus = 6;
-		string turnover_threshold = 7;
+		string turnover_threshold = 7; // cash turnover threshold + bonus turnover threshold
 		string turnover = 8;
 		string cash_turnover = 9;
 		string bonus_turnover = 10;
 		string turnover_multiplier = 11;
+		string cash_turnover_threshold = 12;
+		string bonus_turnover_threshold = 13;
 	}
 	message Wallet {
 		string currency = 1;
@@ -398,6 +405,10 @@ message GetWalletsResponse {
 		string bonus_turnover = 9;
 		string turnover_multiplier = 10;
 		repeated Credit credits = 11;
+		string cash_turnover_threshold = 12;
+		string bonus_turnover_threshold = 13;
+		string withdrawable_cash = 14;
+		string transferable_bonus = 15;
 	}
 	TotalAssets total_assets = 1;
 	repeated Wallet wallets = 2;
@@ -1115,6 +1126,21 @@ message UpdateDeductionOrderRequest {
 
 message UpdateDeductionOrderResponse {}
 
+// message BonusTransferRequest {
+// 	int64 credit_id = 1;
+// 	int64 user_id = 2;
+// 	api.common.OperatorContext operator_context = 3;
+// 	string currency = 4;
+// 	string transfer_amount = 5;
+// 	string transaction_type = 6;
+// }
+
+// message BonusTransferResponse {
+// 	int64 transaction_id = 1;
+// 	string transferred_amount = 2;
+// 	string credit_bonus = 3;
+// 	string credit_cash = 4;
+// }
 
 
 

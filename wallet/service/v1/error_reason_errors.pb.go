@@ -1186,3 +1186,39 @@ func IsUserDepositStatsNotFound(err error) bool {
 func ErrorUserDepositStatsNotFound(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_USER_DEPOSIT_STATS_NOT_FOUND.String(), fmt.Sprintf(format, args...))
 }
+
+func IsInvalidOperatorDeductionOrderConfig(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_OPERATOR_DEDUCTION_ORDER_CONFIG.String() && e.Code == 500
+}
+
+func ErrorInvalidOperatorDeductionOrderConfig(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_OPERATOR_DEDUCTION_ORDER_CONFIG.String(), fmt.Sprintf(format, args...))
+}
+
+func IsBonusTransferFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_BONUS_TRANSFER_FAILED.String() && e.Code == 500
+}
+
+func ErrorBonusTransferFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_BONUS_TRANSFER_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInsufficientBonusBalance(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INSUFFICIENT_BONUS_BALANCE.String() && e.Code == 500
+}
+
+func ErrorInsufficientBonusBalance(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INSUFFICIENT_BONUS_BALANCE.String(), fmt.Sprintf(format, args...))
+}
