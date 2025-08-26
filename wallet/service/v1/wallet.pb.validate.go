@@ -13825,6 +13825,10 @@ func (m *GetUserBalancesResponse_Balance) validate(all bool) error {
 
 	// no validation rules for ProviderBonus
 
+	// no validation rules for WithdrawableCash
+
+	// no validation rules for TransferableBonus
+
 	if len(errors) > 0 {
 		return GetUserBalancesResponse_BalanceMultiError(errors)
 	}
@@ -14206,6 +14210,10 @@ func (m *GetWalletsResponse_Credit) validate(all bool) error {
 
 	// no validation rules for TurnoverMultiplier
 
+	// no validation rules for CashTurnoverThreshold
+
+	// no validation rules for BonusTurnoverThreshold
+
 	if len(errors) > 0 {
 		return GetWalletsResponse_CreditMultiError(errors)
 	}
@@ -14361,6 +14369,14 @@ func (m *GetWalletsResponse_Wallet) validate(all bool) error {
 		}
 
 	}
+
+	// no validation rules for CashTurnoverThreshold
+
+	// no validation rules for BonusTurnoverThreshold
+
+	// no validation rules for WithdrawableCash
+
+	// no validation rules for TransferableBonus
 
 	if len(errors) > 0 {
 		return GetWalletsResponse_WalletMultiError(errors)

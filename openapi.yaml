@@ -11406,6 +11406,10 @@ components:
                     type: string
                 providerBonus:
                     type: string
+                withdrawableCash:
+                    type: string
+                transferableBonus:
+                    type: string
         api.wallet.service.v1.GetUserDepositRewardSequenceRequest:
             type: object
             properties:
@@ -11459,6 +11463,10 @@ components:
                     type: string
                 turnoverMultiplier:
                     type: string
+                cashTurnoverThreshold:
+                    type: string
+                bonusTurnoverThreshold:
+                    type: string
         api.wallet.service.v1.GetWalletsResponse_TotalAssets:
             type: object
             properties:
@@ -11509,6 +11517,14 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.GetWalletsResponse_Credit'
+                cashTurnoverThreshold:
+                    type: string
+                bonusTurnoverThreshold:
+                    type: string
+                withdrawableCash:
+                    type: string
+                transferableBonus:
+                    type: string
         api.wallet.service.v1.ListBottomOperatorBalancesResponse:
             type: object
             properties:
