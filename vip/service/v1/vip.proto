@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package api.vip.service.v1;
 
+import "google/api/annotations.proto";
 import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/vip/service/v1;v1";
@@ -13,6 +14,12 @@ service Vip {
   // ==================== VIP配置管理 ====================
   
   // VIP配置开关管理
+  rpc ListVipConfigs(ListVipConfigsRequest) returns (ListVipConfigsResponse) {
+		option (google.api.http) = {
+			post: "/v1/vip/configs/list"
+			body: "*"
+		};
+	}
   rpc GetVipConfig(GetVipConfigRequest) returns (GetVipConfigResponse);
   rpc UpdateVipConfig(UpdateVipConfigRequest) returns (UpdateVipConfigResponse);
 
@@ -970,3 +977,11 @@ message IssueRewardsResponse {
   repeated string errors = 5;
 }
 
+message ListVipConfigsRequest {
+  api.common.OperatorContext operator_context = 1;
+  api.common.OperatorContextFilters operator_context_filters = 2;
+}
+
+message ListVipConfigsResponse {
+  repeated VipConfig configs = 1;
+}
