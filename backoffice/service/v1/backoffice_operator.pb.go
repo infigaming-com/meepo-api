@@ -323,6 +323,7 @@ type OperatorDetails struct {
 	SystemOperatorId        int64                  `protobuf:"varint,30,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`            // system operator id in the operator hierarchy
 	SystemOperatorName      string                 `protobuf:"bytes,31,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`       // system operator name in the operator hierarchy, or empty string if not exists
 	Config                  string                 `protobuf:"bytes,32,opt,name=config,proto3" json:"config,omitempty"`
+	MinLaunchBalance        string                 `protobuf:"bytes,33,opt,name=min_launch_balance,json=minLaunchBalance,proto3" json:"min_launch_balance,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -577,6 +578,13 @@ func (x *OperatorDetails) GetSystemOperatorName() string {
 func (x *OperatorDetails) GetConfig() string {
 	if x != nil {
 		return x.Config
+	}
+	return ""
+}
+
+func (x *OperatorDetails) GetMinLaunchBalance() string {
+	if x != nil {
+		return x.MinLaunchBalance
 	}
 	return ""
 }
@@ -1996,7 +2004,7 @@ const file_backoffice_service_v1_backoffice_operator_proto_rawDesc = "" +
 	"\tsubdomain\x18\x01 \x01(\tR\tsubdomain\x121\n" +
 	"\x14backoffice_subdomain\x18\x02 \x01(\tR\x13backofficeSubdomain\x120\n" +
 	"\x14operator_admin_email\x18\x03 \x01(\tR\x12operatorAdminEmail\x12\x1a\n" +
-	"\bpassword\x18\x04 \x01(\tR\bpassword\"\xb3\n" +
+	"\bpassword\x18\x04 \x01(\tR\bpassword\"\xe1\n" +
 	"\n" +
 	"\x0fOperatorDetails\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12#\n" +
@@ -2034,7 +2042,8 @@ const file_backoffice_service_v1_backoffice_operator_proto_rawDesc = "" +
 	"\x16retailer_operator_name\x18\x1d \x01(\tR\x14retailerOperatorName\x12,\n" +
 	"\x12system_operator_id\x18\x1e \x01(\x03R\x10systemOperatorId\x120\n" +
 	"\x14system_operator_name\x18\x1f \x01(\tR\x12systemOperatorName\x12\x16\n" +
-	"\x06config\x18  \x01(\tR\x06config\"\"\n" +
+	"\x06config\x18  \x01(\tR\x06config\x12,\n" +
+	"\x12min_launch_balance\x18! \x01(\tR\x10minLaunchBalance\"\"\n" +
 	" GetCurrentOperatorDetailsRequest\"z\n" +
 	"!GetCurrentOperatorDetailsResponse\x12U\n" +
 	"\x10operator_details\x18\x01 \x01(\v2*.api.backoffice.service.v1.OperatorDetailsR\x0foperatorDetails\"\xa2\x01\n" +
