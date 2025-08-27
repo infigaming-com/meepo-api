@@ -1161,7 +1161,7 @@ message ListBottomOperatorsResponse {
 
 message UpdateOperatorStatusRequest {
 	api.common.OperatorContext target_operator_context = 1; // target operator context
-	string action = 2; // action to update the status of target operator "pending", "live", "suspended", "request_to_close", "closed", "maintain",
+	string action = 2; // action to update the status of target operator  "launch", "manual_suspend", "auto_suspend", "recovery", "auto_close", "manual_request", "approved", "maintain", "pending"
 	google.protobuf.Timestamp actionStart = 3; // action start
 	google.protobuf.Timestamp actionEnd = 4; // action end
 	api.common.OperatorContext operator_context = 5; // operator context of the backoffice operator

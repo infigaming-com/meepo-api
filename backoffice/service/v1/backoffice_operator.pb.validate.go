@@ -579,6 +579,8 @@ func (m *OperatorDetails) validate(all bool) error {
 
 	// no validation rules for Config
 
+	// no validation rules for MinLaunchBalance
+
 	if len(errors) > 0 {
 		return OperatorDetailsMultiError(errors)
 	}

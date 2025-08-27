@@ -6683,7 +6683,7 @@ func (x *ListBottomOperatorsResponse) GetBottomOperators() []*ListBottomOperator
 type UpdateOperatorStatusRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"` // target operator context
-	Action                string                  `protobuf:"bytes,2,opt,name=action,proto3" json:"action,omitempty"`                                                              // action to update the status of target operator "pending", "live", "suspended", "request_to_close", "closed", "maintain",
+	Action                string                  `protobuf:"bytes,2,opt,name=action,proto3" json:"action,omitempty"`                                                              // action to update the status of target operator  "launch", "manual_suspend", "auto_suspend", "recovery", "auto_close", "manual_request", "approved", "maintain", "pending"
 	ActionStart           *timestamppb.Timestamp  `protobuf:"bytes,3,opt,name=actionStart,proto3" json:"actionStart,omitempty"`                                                    // action start
 	ActionEnd             *timestamppb.Timestamp  `protobuf:"bytes,4,opt,name=actionEnd,proto3" json:"actionEnd,omitempty"`                                                        // action end
 	OperatorContext       *common.OperatorContext `protobuf:"bytes,5,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`                     // operator context of the backoffice operator
