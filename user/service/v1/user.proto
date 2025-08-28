@@ -594,7 +594,7 @@ message SendEmailVerificationCodeResponse {
 
 message SendPasswordResetCodeRequest {
 	string email = 1;  // User's email address
-	api.common.OperatorContext operator_context = 2;  // Operator context
+	optional api.common.OperatorContext operator_context = 2;  // Operator context
 }
 
 message SendPasswordResetCodeResponse {
@@ -604,7 +604,7 @@ message ResetPasswordWithCodeRequest {
 	string email = 1;           // User's email address
 	string verification_code = 2;  // Verification code received via email
 	string new_password = 3;    // New password
-	api.common.OperatorContext operator_context = 4;  // Operator context
+	optional api.common.OperatorContext operator_context = 4;  // Operator context
 }
 
 message ResetPasswordWithCodeResponse {

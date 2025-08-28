@@ -2482,8 +2482,8 @@ func (*SendEmailVerificationCodeResponse) Descriptor() ([]byte, []int) {
 
 type SendPasswordResetCodeRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
-	Email           string                  `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`                                            // User's email address
-	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"` // Operator context
+	Email           string                  `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`                                                  // User's email address
+	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3,oneof" json:"operator_context,omitempty"` // Operator context
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -2570,10 +2570,10 @@ func (*SendPasswordResetCodeResponse) Descriptor() ([]byte, []int) {
 
 type ResetPasswordWithCodeRequest struct {
 	state            protoimpl.MessageState  `protogen:"open.v1"`
-	Email            string                  `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`                                               // User's email address
-	VerificationCode string                  `protobuf:"bytes,2,opt,name=verification_code,json=verificationCode,proto3" json:"verification_code,omitempty"` // Verification code received via email
-	NewPassword      string                  `protobuf:"bytes,3,opt,name=new_password,json=newPassword,proto3" json:"new_password,omitempty"`                // New password
-	OperatorContext  *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`    // Operator context
+	Email            string                  `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`                                                  // User's email address
+	VerificationCode string                  `protobuf:"bytes,2,opt,name=verification_code,json=verificationCode,proto3" json:"verification_code,omitempty"`    // Verification code received via email
+	NewPassword      string                  `protobuf:"bytes,3,opt,name=new_password,json=newPassword,proto3" json:"new_password,omitempty"`                   // New password
+	OperatorContext  *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3,oneof" json:"operator_context,omitempty"` // Operator context
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -8640,16 +8640,18 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\auser_id\x18\x03 \x01(\x03H\x00R\x06userId\x88\x01\x01B\n" +
 	"\n" +
 	"\b_user_id\"#\n" +
-	"!SendEmailVerificationCodeResponse\"|\n" +
+	"!SendEmailVerificationCodeResponse\"\x96\x01\n" +
 	"\x1cSendPasswordResetCodeRequest\x12\x14\n" +
-	"\x05email\x18\x01 \x01(\tR\x05email\x12F\n" +
-	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x1f\n" +
-	"\x1dSendPasswordResetCodeResponse\"\xcc\x01\n" +
+	"\x05email\x18\x01 \x01(\tR\x05email\x12K\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextH\x00R\x0foperatorContext\x88\x01\x01B\x13\n" +
+	"\x11_operator_context\"\x1f\n" +
+	"\x1dSendPasswordResetCodeResponse\"\xe6\x01\n" +
 	"\x1cResetPasswordWithCodeRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12+\n" +
 	"\x11verification_code\x18\x02 \x01(\tR\x10verificationCode\x12!\n" +
-	"\fnew_password\x18\x03 \x01(\tR\vnewPassword\x12F\n" +
-	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x1f\n" +
+	"\fnew_password\x18\x03 \x01(\tR\vnewPassword\x12K\n" +
+	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextH\x00R\x0foperatorContext\x88\x01\x01B\x13\n" +
+	"\x11_operator_context\"\x1f\n" +
 	"\x1dResetPasswordWithCodeResponse\"\xb5\x03\n" +
 	"\x11UpdateUserRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
@@ -9618,6 +9620,8 @@ func file_user_service_v1_user_proto_init() {
 		return
 	}
 	file_user_service_v1_user_proto_msgTypes[38].OneofWrappers = []any{}
+	file_user_service_v1_user_proto_msgTypes[40].OneofWrappers = []any{}
+	file_user_service_v1_user_proto_msgTypes[42].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[44].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[46].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[48].OneofWrappers = []any{}
