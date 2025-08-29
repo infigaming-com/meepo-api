@@ -6,6 +6,7 @@ import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "common/common.proto";
 import "user/service/v1/user.proto";
+import "google/protobuf/struct.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -114,6 +115,20 @@ service BackofficeOperator {
 		};
 	}
 
+	rpc GetOperatorAccountSettings(GetOperatorAccountSettingsRequest) returns (user.service.v1.GetOperatorAccountSettingsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/account-settings/get"
+			body: "*"
+		};
+	}
+
+	rpc UpdateOperatorAccountSettings(UpdateOperatorAccountSettingsRequest) returns (user.service.v1.UpdateOperatorAccountSettingsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/account-settings/update"
+			body: "*"
+		};
+	}
+	
 }
 
 message ListAllOperatorsRequest {
@@ -312,4 +327,14 @@ message DeleteOperatorBackofficeByoSubdomainRequest {
 }
 
 message DeleteOperatorBackofficeByoSubdomainResponse {
+}
+
+message GetOperatorAccountSettingsRequest {
+}
+
+message UpdateOperatorAccountSettingsRequest {
+	google.protobuf.Value account_settings = 2;
+}
+
+message UpdateOperatorAccountSettingsResponse {
 }

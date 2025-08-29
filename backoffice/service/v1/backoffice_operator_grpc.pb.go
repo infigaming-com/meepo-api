@@ -33,6 +33,8 @@ const (
 	BackofficeOperator_DeleteOperatorByoSubdomain_FullMethodName           = "/api.backoffice.service.v1.BackofficeOperator/DeleteOperatorByoSubdomain"
 	BackofficeOperator_AddOperatorBackofficeByoSubdomain_FullMethodName    = "/api.backoffice.service.v1.BackofficeOperator/AddOperatorBackofficeByoSubdomain"
 	BackofficeOperator_DeleteOperatorBackofficeByoSubdomain_FullMethodName = "/api.backoffice.service.v1.BackofficeOperator/DeleteOperatorBackofficeByoSubdomain"
+	BackofficeOperator_GetOperatorAccountSettings_FullMethodName           = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorAccountSettings"
+	BackofficeOperator_UpdateOperatorAccountSettings_FullMethodName        = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorAccountSettings"
 )
 
 // BackofficeOperatorClient is the client API for BackofficeOperator service.
@@ -63,6 +65,8 @@ type BackofficeOperatorClient interface {
 	AddOperatorBackofficeByoSubdomain(ctx context.Context, in *AddOperatorBackofficeByoSubdomainRequest, opts ...grpc.CallOption) (*AddOperatorBackofficeByoSubdomainResponse, error)
 	// DeleteOperatorBackofficeByoSubdomain deletes a backoffice byo subdomain for the given operator
 	DeleteOperatorBackofficeByoSubdomain(ctx context.Context, in *DeleteOperatorBackofficeByoSubdomainRequest, opts ...grpc.CallOption) (*DeleteOperatorBackofficeByoSubdomainResponse, error)
+	GetOperatorAccountSettings(ctx context.Context, in *GetOperatorAccountSettingsRequest, opts ...grpc.CallOption) (*v1.GetOperatorAccountSettingsResponse, error)
+	UpdateOperatorAccountSettings(ctx context.Context, in *UpdateOperatorAccountSettingsRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorAccountSettingsResponse, error)
 }
 
 type backofficeOperatorClient struct {
@@ -203,6 +207,26 @@ func (c *backofficeOperatorClient) DeleteOperatorBackofficeByoSubdomain(ctx cont
 	return out, nil
 }
 
+func (c *backofficeOperatorClient) GetOperatorAccountSettings(ctx context.Context, in *GetOperatorAccountSettingsRequest, opts ...grpc.CallOption) (*v1.GetOperatorAccountSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetOperatorAccountSettingsResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_GetOperatorAccountSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeOperatorClient) UpdateOperatorAccountSettings(ctx context.Context, in *UpdateOperatorAccountSettingsRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorAccountSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.UpdateOperatorAccountSettingsResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_UpdateOperatorAccountSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeOperatorServer is the server API for BackofficeOperator service.
 // All implementations must embed UnimplementedBackofficeOperatorServer
 // for forward compatibility.
@@ -231,6 +255,8 @@ type BackofficeOperatorServer interface {
 	AddOperatorBackofficeByoSubdomain(context.Context, *AddOperatorBackofficeByoSubdomainRequest) (*AddOperatorBackofficeByoSubdomainResponse, error)
 	// DeleteOperatorBackofficeByoSubdomain deletes a backoffice byo subdomain for the given operator
 	DeleteOperatorBackofficeByoSubdomain(context.Context, *DeleteOperatorBackofficeByoSubdomainRequest) (*DeleteOperatorBackofficeByoSubdomainResponse, error)
+	GetOperatorAccountSettings(context.Context, *GetOperatorAccountSettingsRequest) (*v1.GetOperatorAccountSettingsResponse, error)
+	UpdateOperatorAccountSettings(context.Context, *UpdateOperatorAccountSettingsRequest) (*v1.UpdateOperatorAccountSettingsResponse, error)
 	mustEmbedUnimplementedBackofficeOperatorServer()
 }
 
@@ -279,6 +305,12 @@ func (UnimplementedBackofficeOperatorServer) AddOperatorBackofficeByoSubdomain(c
 }
 func (UnimplementedBackofficeOperatorServer) DeleteOperatorBackofficeByoSubdomain(context.Context, *DeleteOperatorBackofficeByoSubdomainRequest) (*DeleteOperatorBackofficeByoSubdomainResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteOperatorBackofficeByoSubdomain not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) GetOperatorAccountSettings(context.Context, *GetOperatorAccountSettingsRequest) (*v1.GetOperatorAccountSettingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorAccountSettings not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) UpdateOperatorAccountSettings(context.Context, *UpdateOperatorAccountSettingsRequest) (*v1.UpdateOperatorAccountSettingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOperatorAccountSettings not implemented")
 }
 func (UnimplementedBackofficeOperatorServer) mustEmbedUnimplementedBackofficeOperatorServer() {}
 func (UnimplementedBackofficeOperatorServer) testEmbeddedByValue()                            {}
@@ -535,6 +567,42 @@ func _BackofficeOperator_DeleteOperatorBackofficeByoSubdomain_Handler(srv interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeOperator_GetOperatorAccountSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorAccountSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).GetOperatorAccountSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_GetOperatorAccountSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).GetOperatorAccountSettings(ctx, req.(*GetOperatorAccountSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeOperator_UpdateOperatorAccountSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOperatorAccountSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).UpdateOperatorAccountSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_UpdateOperatorAccountSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).UpdateOperatorAccountSettings(ctx, req.(*UpdateOperatorAccountSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeOperator_ServiceDesc is the grpc.ServiceDesc for BackofficeOperator service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -593,6 +661,14 @@ var BackofficeOperator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteOperatorBackofficeByoSubdomain",
 			Handler:    _BackofficeOperator_DeleteOperatorBackofficeByoSubdomain_Handler,
+		},
+		{
+			MethodName: "GetOperatorAccountSettings",
+			Handler:    _BackofficeOperator_GetOperatorAccountSettings_Handler,
+		},
+		{
+			MethodName: "UpdateOperatorAccountSettings",
+			Handler:    _BackofficeOperator_UpdateOperatorAccountSettings_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
