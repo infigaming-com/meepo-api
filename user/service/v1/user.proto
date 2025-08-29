@@ -5,6 +5,7 @@ package api.user.service.v1;
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "common/common.proto";
+import "google/protobuf/struct.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/user/service/v1;v1";
 option java_multiple_files = true;
@@ -261,6 +262,12 @@ service User {
 
 	// GetOperatorDetailsByUserId returns the operator details which the user belongs to
 	rpc GetOperatorDetailsByUserId(GetOperatorDetailsByUserIdRequest) returns (GetOperatorDetailsByUserIdResponse) {
+	}
+
+	rpc GetOperatorAccountSettings(GetOperatorAccountSettingsRequest) returns (GetOperatorAccountSettingsResponse) {
+	}
+
+	rpc SetOperatorAccountSettings(SetOperatorAccountSettingsRequest) returns (SetOperatorAccountSettingsResponse) {
 	}
 }
 
@@ -1205,4 +1212,20 @@ message GetOperatorDetailsByUserIdRequest {
 
 message GetOperatorDetailsByUserIdResponse {
 	OperatorDetails operator_details = 1;
+}
+
+message GetOperatorAccountSettingsRequest {
+	api.common.OperatorContext operator_context = 1;
+}
+
+message GetOperatorAccountSettingsResponse {
+	google.protobuf.Value account_settings = 1;
+}
+
+message SetOperatorAccountSettingsRequest {
+	api.common.OperatorContext operator_context = 1;
+	google.protobuf.Value account_settings = 2;
+}
+
+message SetOperatorAccountSettingsResponse {
 }
