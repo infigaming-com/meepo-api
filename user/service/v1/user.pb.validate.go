@@ -15042,23 +15042,23 @@ var _ interface {
 	ErrorName() string
 } = GetOperatorAccountSettingsResponseValidationError{}
 
-// Validate checks the field values on SetOperatorAccountSettingsRequest with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *SetOperatorAccountSettingsRequest) Validate() error {
+// Validate checks the field values on UpdateOperatorAccountSettingsRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *UpdateOperatorAccountSettingsRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on SetOperatorAccountSettingsRequest
+// ValidateAll checks the field values on UpdateOperatorAccountSettingsRequest
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, the result is a list of violation errors wrapped in
-// SetOperatorAccountSettingsRequestMultiError, or nil if none found.
-func (m *SetOperatorAccountSettingsRequest) ValidateAll() error {
+// UpdateOperatorAccountSettingsRequestMultiError, or nil if none found.
+func (m *UpdateOperatorAccountSettingsRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *SetOperatorAccountSettingsRequest) validate(all bool) error {
+func (m *UpdateOperatorAccountSettingsRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -15069,7 +15069,7 @@ func (m *SetOperatorAccountSettingsRequest) validate(all bool) error {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, SetOperatorAccountSettingsRequestValidationError{
+				errors = append(errors, UpdateOperatorAccountSettingsRequestValidationError{
 					field:  "OperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -15077,7 +15077,7 @@ func (m *SetOperatorAccountSettingsRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, SetOperatorAccountSettingsRequestValidationError{
+				errors = append(errors, UpdateOperatorAccountSettingsRequestValidationError{
 					field:  "OperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -15086,7 +15086,7 @@ func (m *SetOperatorAccountSettingsRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return SetOperatorAccountSettingsRequestValidationError{
+			return UpdateOperatorAccountSettingsRequestValidationError{
 				field:  "OperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -15098,7 +15098,7 @@ func (m *SetOperatorAccountSettingsRequest) validate(all bool) error {
 		switch v := interface{}(m.GetAccountSettings()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, SetOperatorAccountSettingsRequestValidationError{
+				errors = append(errors, UpdateOperatorAccountSettingsRequestValidationError{
 					field:  "AccountSettings",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -15106,7 +15106,7 @@ func (m *SetOperatorAccountSettingsRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, SetOperatorAccountSettingsRequestValidationError{
+				errors = append(errors, UpdateOperatorAccountSettingsRequestValidationError{
 					field:  "AccountSettings",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -15115,7 +15115,7 @@ func (m *SetOperatorAccountSettingsRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetAccountSettings()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return SetOperatorAccountSettingsRequestValidationError{
+			return UpdateOperatorAccountSettingsRequestValidationError{
 				field:  "AccountSettings",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -15124,20 +15124,20 @@ func (m *SetOperatorAccountSettingsRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return SetOperatorAccountSettingsRequestMultiError(errors)
+		return UpdateOperatorAccountSettingsRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// SetOperatorAccountSettingsRequestMultiError is an error wrapping multiple
+// UpdateOperatorAccountSettingsRequestMultiError is an error wrapping multiple
 // validation errors returned by
-// SetOperatorAccountSettingsRequest.ValidateAll() if the designated
+// UpdateOperatorAccountSettingsRequest.ValidateAll() if the designated
 // constraints aren't met.
-type SetOperatorAccountSettingsRequestMultiError []error
+type UpdateOperatorAccountSettingsRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m SetOperatorAccountSettingsRequestMultiError) Error() string {
+func (m UpdateOperatorAccountSettingsRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -15146,12 +15146,12 @@ func (m SetOperatorAccountSettingsRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m SetOperatorAccountSettingsRequestMultiError) AllErrors() []error { return m }
+func (m UpdateOperatorAccountSettingsRequestMultiError) AllErrors() []error { return m }
 
-// SetOperatorAccountSettingsRequestValidationError is the validation error
-// returned by SetOperatorAccountSettingsRequest.Validate if the designated
+// UpdateOperatorAccountSettingsRequestValidationError is the validation error
+// returned by UpdateOperatorAccountSettingsRequest.Validate if the designated
 // constraints aren't met.
-type SetOperatorAccountSettingsRequestValidationError struct {
+type UpdateOperatorAccountSettingsRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -15159,24 +15159,24 @@ type SetOperatorAccountSettingsRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e SetOperatorAccountSettingsRequestValidationError) Field() string { return e.field }
+func (e UpdateOperatorAccountSettingsRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e SetOperatorAccountSettingsRequestValidationError) Reason() string { return e.reason }
+func (e UpdateOperatorAccountSettingsRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e SetOperatorAccountSettingsRequestValidationError) Cause() error { return e.cause }
+func (e UpdateOperatorAccountSettingsRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e SetOperatorAccountSettingsRequestValidationError) Key() bool { return e.key }
+func (e UpdateOperatorAccountSettingsRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e SetOperatorAccountSettingsRequestValidationError) ErrorName() string {
-	return "SetOperatorAccountSettingsRequestValidationError"
+func (e UpdateOperatorAccountSettingsRequestValidationError) ErrorName() string {
+	return "UpdateOperatorAccountSettingsRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e SetOperatorAccountSettingsRequestValidationError) Error() string {
+func (e UpdateOperatorAccountSettingsRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -15188,14 +15188,14 @@ func (e SetOperatorAccountSettingsRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sSetOperatorAccountSettingsRequest.%s: %s%s",
+		"invalid %sUpdateOperatorAccountSettingsRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = SetOperatorAccountSettingsRequestValidationError{}
+var _ error = UpdateOperatorAccountSettingsRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -15203,25 +15203,25 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = SetOperatorAccountSettingsRequestValidationError{}
+} = UpdateOperatorAccountSettingsRequestValidationError{}
 
-// Validate checks the field values on SetOperatorAccountSettingsResponse with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *SetOperatorAccountSettingsResponse) Validate() error {
+// Validate checks the field values on UpdateOperatorAccountSettingsResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *UpdateOperatorAccountSettingsResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on SetOperatorAccountSettingsResponse
+// ValidateAll checks the field values on UpdateOperatorAccountSettingsResponse
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, the result is a list of violation errors wrapped in
-// SetOperatorAccountSettingsResponseMultiError, or nil if none found.
-func (m *SetOperatorAccountSettingsResponse) ValidateAll() error {
+// UpdateOperatorAccountSettingsResponseMultiError, or nil if none found.
+func (m *UpdateOperatorAccountSettingsResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *SetOperatorAccountSettingsResponse) validate(all bool) error {
+func (m *UpdateOperatorAccountSettingsResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -15229,20 +15229,20 @@ func (m *SetOperatorAccountSettingsResponse) validate(all bool) error {
 	var errors []error
 
 	if len(errors) > 0 {
-		return SetOperatorAccountSettingsResponseMultiError(errors)
+		return UpdateOperatorAccountSettingsResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// SetOperatorAccountSettingsResponseMultiError is an error wrapping multiple
-// validation errors returned by
-// SetOperatorAccountSettingsResponse.ValidateAll() if the designated
+// UpdateOperatorAccountSettingsResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// UpdateOperatorAccountSettingsResponse.ValidateAll() if the designated
 // constraints aren't met.
-type SetOperatorAccountSettingsResponseMultiError []error
+type UpdateOperatorAccountSettingsResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m SetOperatorAccountSettingsResponseMultiError) Error() string {
+func (m UpdateOperatorAccountSettingsResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -15251,12 +15251,12 @@ func (m SetOperatorAccountSettingsResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m SetOperatorAccountSettingsResponseMultiError) AllErrors() []error { return m }
+func (m UpdateOperatorAccountSettingsResponseMultiError) AllErrors() []error { return m }
 
-// SetOperatorAccountSettingsResponseValidationError is the validation error
-// returned by SetOperatorAccountSettingsResponse.Validate if the designated
-// constraints aren't met.
-type SetOperatorAccountSettingsResponseValidationError struct {
+// UpdateOperatorAccountSettingsResponseValidationError is the validation error
+// returned by UpdateOperatorAccountSettingsResponse.Validate if the
+// designated constraints aren't met.
+type UpdateOperatorAccountSettingsResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -15264,24 +15264,24 @@ type SetOperatorAccountSettingsResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e SetOperatorAccountSettingsResponseValidationError) Field() string { return e.field }
+func (e UpdateOperatorAccountSettingsResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e SetOperatorAccountSettingsResponseValidationError) Reason() string { return e.reason }
+func (e UpdateOperatorAccountSettingsResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e SetOperatorAccountSettingsResponseValidationError) Cause() error { return e.cause }
+func (e UpdateOperatorAccountSettingsResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e SetOperatorAccountSettingsResponseValidationError) Key() bool { return e.key }
+func (e UpdateOperatorAccountSettingsResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e SetOperatorAccountSettingsResponseValidationError) ErrorName() string {
-	return "SetOperatorAccountSettingsResponseValidationError"
+func (e UpdateOperatorAccountSettingsResponseValidationError) ErrorName() string {
+	return "UpdateOperatorAccountSettingsResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e SetOperatorAccountSettingsResponseValidationError) Error() string {
+func (e UpdateOperatorAccountSettingsResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -15293,14 +15293,14 @@ func (e SetOperatorAccountSettingsResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sSetOperatorAccountSettingsResponse.%s: %s%s",
+		"invalid %sUpdateOperatorAccountSettingsResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = SetOperatorAccountSettingsResponseValidationError{}
+var _ error = UpdateOperatorAccountSettingsResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -15308,7 +15308,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = SetOperatorAccountSettingsResponseValidationError{}
+} = UpdateOperatorAccountSettingsResponseValidationError{}
 
 // Validate checks the field values on ListUsersResponse_User with the rules
 // defined in the proto definition for this message. If any rules are

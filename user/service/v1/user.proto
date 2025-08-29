@@ -267,7 +267,7 @@ service User {
 	rpc GetOperatorAccountSettings(GetOperatorAccountSettingsRequest) returns (GetOperatorAccountSettingsResponse) {
 	}
 
-	rpc SetOperatorAccountSettings(SetOperatorAccountSettingsRequest) returns (SetOperatorAccountSettingsResponse) {
+	rpc UpdateOperatorAccountSettings(UpdateOperatorAccountSettingsRequest) returns (UpdateOperatorAccountSettingsResponse) {
 	}
 }
 
@@ -1222,10 +1222,10 @@ message GetOperatorAccountSettingsResponse {
 	google.protobuf.Value account_settings = 1;
 }
 
-message SetOperatorAccountSettingsRequest {
+message UpdateOperatorAccountSettingsRequest {
 	api.common.OperatorContext operator_context = 1;
 	google.protobuf.Value account_settings = 2;
 }
 
-message SetOperatorAccountSettingsResponse {
+message UpdateOperatorAccountSettingsResponse {
 }

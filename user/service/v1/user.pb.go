@@ -7273,7 +7273,7 @@ func (x *GetOperatorAccountSettingsResponse) GetAccountSettings() *structpb.Valu
 	return nil
 }
 
-type SetOperatorAccountSettingsRequest struct {
+type UpdateOperatorAccountSettingsRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	AccountSettings *structpb.Value         `protobuf:"bytes,2,opt,name=account_settings,json=accountSettings,proto3" json:"account_settings,omitempty"`
@@ -7281,20 +7281,20 @@ type SetOperatorAccountSettingsRequest struct {
 	sizeCache       protoimpl.SizeCache
 }
 
-func (x *SetOperatorAccountSettingsRequest) Reset() {
-	*x = SetOperatorAccountSettingsRequest{}
+func (x *UpdateOperatorAccountSettingsRequest) Reset() {
+	*x = UpdateOperatorAccountSettingsRequest{}
 	mi := &file_user_service_v1_user_proto_msgTypes[121]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetOperatorAccountSettingsRequest) String() string {
+func (x *UpdateOperatorAccountSettingsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetOperatorAccountSettingsRequest) ProtoMessage() {}
+func (*UpdateOperatorAccountSettingsRequest) ProtoMessage() {}
 
-func (x *SetOperatorAccountSettingsRequest) ProtoReflect() protoreflect.Message {
+func (x *UpdateOperatorAccountSettingsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_user_service_v1_user_proto_msgTypes[121]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -7306,45 +7306,45 @@ func (x *SetOperatorAccountSettingsRequest) ProtoReflect() protoreflect.Message 
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetOperatorAccountSettingsRequest.ProtoReflect.Descriptor instead.
-func (*SetOperatorAccountSettingsRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdateOperatorAccountSettingsRequest.ProtoReflect.Descriptor instead.
+func (*UpdateOperatorAccountSettingsRequest) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{121}
 }
 
-func (x *SetOperatorAccountSettingsRequest) GetOperatorContext() *common.OperatorContext {
+func (x *UpdateOperatorAccountSettingsRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
 	return nil
 }
 
-func (x *SetOperatorAccountSettingsRequest) GetAccountSettings() *structpb.Value {
+func (x *UpdateOperatorAccountSettingsRequest) GetAccountSettings() *structpb.Value {
 	if x != nil {
 		return x.AccountSettings
 	}
 	return nil
 }
 
-type SetOperatorAccountSettingsResponse struct {
+type UpdateOperatorAccountSettingsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetOperatorAccountSettingsResponse) Reset() {
-	*x = SetOperatorAccountSettingsResponse{}
+func (x *UpdateOperatorAccountSettingsResponse) Reset() {
+	*x = UpdateOperatorAccountSettingsResponse{}
 	mi := &file_user_service_v1_user_proto_msgTypes[122]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetOperatorAccountSettingsResponse) String() string {
+func (x *UpdateOperatorAccountSettingsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetOperatorAccountSettingsResponse) ProtoMessage() {}
+func (*UpdateOperatorAccountSettingsResponse) ProtoMessage() {}
 
-func (x *SetOperatorAccountSettingsResponse) ProtoReflect() protoreflect.Message {
+func (x *UpdateOperatorAccountSettingsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_user_service_v1_user_proto_msgTypes[122]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -7356,8 +7356,8 @@ func (x *SetOperatorAccountSettingsResponse) ProtoReflect() protoreflect.Message
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetOperatorAccountSettingsResponse.ProtoReflect.Descriptor instead.
-func (*SetOperatorAccountSettingsResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdateOperatorAccountSettingsResponse.ProtoReflect.Descriptor instead.
+func (*UpdateOperatorAccountSettingsResponse) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{122}
 }
 
@@ -9340,11 +9340,11 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"!GetOperatorAccountSettingsRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"g\n" +
 	"\"GetOperatorAccountSettingsResponse\x12A\n" +
-	"\x10account_settings\x18\x01 \x01(\v2\x16.google.protobuf.ValueR\x0faccountSettings\"\xae\x01\n" +
-	"!SetOperatorAccountSettingsRequest\x12F\n" +
+	"\x10account_settings\x18\x01 \x01(\v2\x16.google.protobuf.ValueR\x0faccountSettings\"\xb1\x01\n" +
+	"$UpdateOperatorAccountSettingsRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12A\n" +
-	"\x10account_settings\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x0faccountSettings\"$\n" +
-	"\"SetOperatorAccountSettingsResponse*j\n" +
+	"\x10account_settings\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x0faccountSettings\"'\n" +
+	"%UpdateOperatorAccountSettingsResponse*j\n" +
 	"\bAuthType\x12\x19\n" +
 	"\x15AUTH_TYPE_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12AUTH_TYPE_PASSWORD\x10\x01\x12\x13\n" +
@@ -9364,7 +9364,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x19OPERATOR_TYPE_UNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x16OPERATOR_TYPE_RETAILER\x10\x01\x12\x17\n" +
 	"\x13OPERATOR_TYPE_GROUP\x10\x02\x12\x1a\n" +
-	"\x16OPERATOR_TYPE_OPERATOR\x10\x032\x8d:\n" +
+	"\x16OPERATOR_TYPE_OPERATOR\x10\x032\x96:\n" +
 	"\x04User\x12v\n" +
 	"\bRegister\x12$.api.user.service.v1.RegisterRequest\x1a!.api.user.service.v1.AuthResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/user/auth/register\x12m\n" +
 	"\x05Login\x12!.api.user.service.v1.LoginRequest\x1a!.api.user.service.v1.AuthResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/user/auth/login\x12_\n" +
@@ -9431,8 +9431,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x19ListOperatorsByAdminEmail\x125.api.user.service.v1.ListOperatorsByAdminEmailRequest\x1a6.api.user.service.v1.ListOperatorsByAdminEmailResponse\"\x00\x12z\n" +
 	"\x13ListOperatorDetails\x12/.api.user.service.v1.ListOperatorDetailsRequest\x1a0.api.user.service.v1.ListOperatorDetailsResponse\"\x00\x12\x8f\x01\n" +
 	"\x1aGetOperatorDetailsByUserId\x126.api.user.service.v1.GetOperatorDetailsByUserIdRequest\x1a7.api.user.service.v1.GetOperatorDetailsByUserIdResponse\"\x00\x12\x8f\x01\n" +
-	"\x1aGetOperatorAccountSettings\x126.api.user.service.v1.GetOperatorAccountSettingsRequest\x1a7.api.user.service.v1.GetOperatorAccountSettingsResponse\"\x00\x12\x8f\x01\n" +
-	"\x1aSetOperatorAccountSettings\x126.api.user.service.v1.SetOperatorAccountSettingsRequest\x1a7.api.user.service.v1.SetOperatorAccountSettingsResponse\"\x00BO\n" +
+	"\x1aGetOperatorAccountSettings\x126.api.user.service.v1.GetOperatorAccountSettingsRequest\x1a7.api.user.service.v1.GetOperatorAccountSettingsResponse\"\x00\x12\x98\x01\n" +
+	"\x1dUpdateOperatorAccountSettings\x129.api.user.service.v1.UpdateOperatorAccountSettingsRequest\x1a:.api.user.service.v1.UpdateOperatorAccountSettingsResponse\"\x00BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
@@ -9575,8 +9575,8 @@ var file_user_service_v1_user_proto_goTypes = []any{
 	(*GetOperatorDetailsByUserIdResponse)(nil),                     // 122: api.user.service.v1.GetOperatorDetailsByUserIdResponse
 	(*GetOperatorAccountSettingsRequest)(nil),                      // 123: api.user.service.v1.GetOperatorAccountSettingsRequest
 	(*GetOperatorAccountSettingsResponse)(nil),                     // 124: api.user.service.v1.GetOperatorAccountSettingsResponse
-	(*SetOperatorAccountSettingsRequest)(nil),                      // 125: api.user.service.v1.SetOperatorAccountSettingsRequest
-	(*SetOperatorAccountSettingsResponse)(nil),                     // 126: api.user.service.v1.SetOperatorAccountSettingsResponse
+	(*UpdateOperatorAccountSettingsRequest)(nil),                   // 125: api.user.service.v1.UpdateOperatorAccountSettingsRequest
+	(*UpdateOperatorAccountSettingsResponse)(nil),                  // 126: api.user.service.v1.UpdateOperatorAccountSettingsResponse
 	(*ListUsersResponse_User)(nil),                                 // 127: api.user.service.v1.ListUsersResponse.User
 	(*GetCommentsByUserIdResponse_Comment)(nil),                    // 128: api.user.service.v1.GetCommentsByUserIdResponse.Comment
 	(*GetUserProfileResponse_IpInfo)(nil),                          // 129: api.user.service.v1.GetUserProfileResponse.IpInfo
@@ -9670,8 +9670,8 @@ var file_user_service_v1_user_proto_depIdxs = []int32{
 	102, // 69: api.user.service.v1.GetOperatorDetailsByUserIdResponse.operator_details:type_name -> api.user.service.v1.OperatorDetails
 	142, // 70: api.user.service.v1.GetOperatorAccountSettingsRequest.operator_context:type_name -> api.common.OperatorContext
 	145, // 71: api.user.service.v1.GetOperatorAccountSettingsResponse.account_settings:type_name -> google.protobuf.Value
-	142, // 72: api.user.service.v1.SetOperatorAccountSettingsRequest.operator_context:type_name -> api.common.OperatorContext
-	145, // 73: api.user.service.v1.SetOperatorAccountSettingsRequest.account_settings:type_name -> google.protobuf.Value
+	142, // 72: api.user.service.v1.UpdateOperatorAccountSettingsRequest.operator_context:type_name -> api.common.OperatorContext
+	145, // 73: api.user.service.v1.UpdateOperatorAccountSettingsRequest.account_settings:type_name -> google.protobuf.Value
 	143, // 74: api.user.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
 	143, // 75: api.user.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
 	143, // 76: api.user.service.v1.ListUsersResponse.User.created_at:type_name -> google.protobuf.Timestamp
@@ -9745,7 +9745,7 @@ var file_user_service_v1_user_proto_depIdxs = []int32{
 	119, // 144: api.user.service.v1.User.ListOperatorDetails:input_type -> api.user.service.v1.ListOperatorDetailsRequest
 	121, // 145: api.user.service.v1.User.GetOperatorDetailsByUserId:input_type -> api.user.service.v1.GetOperatorDetailsByUserIdRequest
 	123, // 146: api.user.service.v1.User.GetOperatorAccountSettings:input_type -> api.user.service.v1.GetOperatorAccountSettingsRequest
-	125, // 147: api.user.service.v1.User.SetOperatorAccountSettings:input_type -> api.user.service.v1.SetOperatorAccountSettingsRequest
+	125, // 147: api.user.service.v1.User.UpdateOperatorAccountSettings:input_type -> api.user.service.v1.UpdateOperatorAccountSettingsRequest
 	12,  // 148: api.user.service.v1.User.Register:output_type -> api.user.service.v1.AuthResponse
 	12,  // 149: api.user.service.v1.User.Login:output_type -> api.user.service.v1.AuthResponse
 	12,  // 150: api.user.service.v1.User.LoginWithInfo:output_type -> api.user.service.v1.AuthResponse
@@ -9806,7 +9806,7 @@ var file_user_service_v1_user_proto_depIdxs = []int32{
 	120, // 205: api.user.service.v1.User.ListOperatorDetails:output_type -> api.user.service.v1.ListOperatorDetailsResponse
 	122, // 206: api.user.service.v1.User.GetOperatorDetailsByUserId:output_type -> api.user.service.v1.GetOperatorDetailsByUserIdResponse
 	124, // 207: api.user.service.v1.User.GetOperatorAccountSettings:output_type -> api.user.service.v1.GetOperatorAccountSettingsResponse
-	126, // 208: api.user.service.v1.User.SetOperatorAccountSettings:output_type -> api.user.service.v1.SetOperatorAccountSettingsResponse
+	126, // 208: api.user.service.v1.User.UpdateOperatorAccountSettings:output_type -> api.user.service.v1.UpdateOperatorAccountSettingsResponse
 	148, // [148:209] is the sub-list for method output_type
 	87,  // [87:148] is the sub-list for method input_type
 	87,  // [87:87] is the sub-list for extension type_name
