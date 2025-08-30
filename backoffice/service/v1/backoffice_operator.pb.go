@@ -12,7 +12,6 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	structpb "google.golang.org/protobuf/types/known/structpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
@@ -1663,8 +1662,8 @@ func (*GetOperatorAccountSettingsRequest) Descriptor() ([]byte, []int) {
 }
 
 type UpdateOperatorAccountSettingsRequest struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	AccountSettings *structpb.Value        `protobuf:"bytes,2,opt,name=account_settings,json=accountSettings,proto3" json:"account_settings,omitempty"`
+	state           protoimpl.MessageState      `protogen:"open.v1"`
+	AccountSettings *v1.OperatorAccountSettings `protobuf:"bytes,2,opt,name=account_settings,json=accountSettings,proto3" json:"account_settings,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1699,7 +1698,7 @@ func (*UpdateOperatorAccountSettingsRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_operator_proto_rawDescGZIP(), []int{27}
 }
 
-func (x *UpdateOperatorAccountSettingsRequest) GetAccountSettings() *structpb.Value {
+func (x *UpdateOperatorAccountSettingsRequest) GetAccountSettings() *v1.OperatorAccountSettings {
 	if x != nil {
 		return x.AccountSettings
 	}
@@ -2093,7 +2092,7 @@ var File_backoffice_service_v1_backoffice_operator_proto protoreflect.FileDescri
 
 const file_backoffice_service_v1_backoffice_operator_proto_rawDesc = "" +
 	"\n" +
-	"/backoffice/service/v1/backoffice_operator.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\x1a\x1auser/service/v1/user.proto\x1a\x1cgoogle/protobuf/struct.proto\"D\n" +
+	"/backoffice/service/v1/backoffice_operator.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\x1a\x1auser/service/v1/user.proto\"D\n" +
 	"\x17ListAllOperatorsRequest\x12\x1d\n" +
 	"\aenabled\x18\x01 \x01(\bH\x00R\aenabled\x88\x01\x01B\n" +
 	"\n" +
@@ -2244,9 +2243,9 @@ const file_backoffice_service_v1_backoffice_operator_proto_rawDesc = "" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1c\n" +
 	"\tsubdomain\x18\x02 \x01(\tR\tsubdomain\".\n" +
 	",DeleteOperatorBackofficeByoSubdomainResponse\"#\n" +
-	"!GetOperatorAccountSettingsRequest\"i\n" +
-	"$UpdateOperatorAccountSettingsRequest\x12A\n" +
-	"\x10account_settings\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x0faccountSettings\"'\n" +
+	"!GetOperatorAccountSettingsRequest\"\x7f\n" +
+	"$UpdateOperatorAccountSettingsRequest\x12W\n" +
+	"\x10account_settings\x18\x02 \x01(\v2,.api.user.service.v1.OperatorAccountSettingsR\x0faccountSettings\"'\n" +
 	"%UpdateOperatorAccountSettingsResponse2\xf9\x17\n" +
 	"\x12BackofficeOperator\x12\xa8\x01\n" +
 	"\x10ListAllOperators\x122.api.backoffice.service.v1.ListAllOperatorsRequest\x1a3.api.backoffice.service.v1.ListAllOperatorsResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/operator/list/all\x12\xa0\x01\n" +
@@ -2315,7 +2314,7 @@ var file_backoffice_service_v1_backoffice_operator_proto_goTypes = []any{
 	(*ListBottomOperatorsResponse_OperatorInfo)(nil),     // 32: api.backoffice.service.v1.ListBottomOperatorsResponse.OperatorInfo
 	(*common.OperatorContext)(nil),                       // 33: api.common.OperatorContext
 	(*timestamppb.Timestamp)(nil),                        // 34: google.protobuf.Timestamp
-	(*structpb.Value)(nil),                               // 35: google.protobuf.Value
+	(*v1.OperatorAccountSettings)(nil),                   // 35: api.user.service.v1.OperatorAccountSettings
 	(*v1.ListOperatorsByAdminEmailResponse)(nil),         // 36: api.user.service.v1.ListOperatorsByAdminEmailResponse
 	(*v1.GetOperatorAccountSettingsResponse)(nil),        // 37: api.user.service.v1.GetOperatorAccountSettingsResponse
 	(*v1.UpdateOperatorAccountSettingsResponse)(nil),     // 38: api.user.service.v1.UpdateOperatorAccountSettingsResponse
@@ -2334,7 +2333,7 @@ var file_backoffice_service_v1_backoffice_operator_proto_depIdxs = []int32{
 	33, // 10: api.backoffice.service.v1.DeleteOperatorByoSubdomainRequest.target_operator_context:type_name -> api.common.OperatorContext
 	33, // 11: api.backoffice.service.v1.AddOperatorBackofficeByoSubdomainRequest.target_operator_context:type_name -> api.common.OperatorContext
 	33, // 12: api.backoffice.service.v1.DeleteOperatorBackofficeByoSubdomainRequest.target_operator_context:type_name -> api.common.OperatorContext
-	35, // 13: api.backoffice.service.v1.UpdateOperatorAccountSettingsRequest.account_settings:type_name -> google.protobuf.Value
+	35, // 13: api.backoffice.service.v1.UpdateOperatorAccountSettingsRequest.account_settings:type_name -> api.user.service.v1.OperatorAccountSettings
 	33, // 14: api.backoffice.service.v1.ListAllOperatorsResponse.Operator.operator_context:type_name -> api.common.OperatorContext
 	33, // 15: api.backoffice.service.v1.ListRetailerOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
 	33, // 16: api.backoffice.service.v1.ListCompanyOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
