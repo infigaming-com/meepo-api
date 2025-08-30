@@ -126,6 +126,8 @@ const (
 	ErrorReason_INVALID_OPERATOR_DEDUCTION_ORDER_CONFIG                         ErrorReason = 30098
 	ErrorReason_BONUS_TRANSFER_FAILED                                           ErrorReason = 30099
 	ErrorReason_INSUFFICIENT_BONUS_BALANCE                                      ErrorReason = 30100
+	ErrorReason_CREDIT_OWNERSHIP_MISMATCH                                       ErrorReason = 30101
+	ErrorReason_WITHDRAWAL_LIMIT_EXCEEDED                                       ErrorReason = 30102
 )
 
 // Enum value maps for ErrorReason.
@@ -232,6 +234,8 @@ var (
 		30098: "INVALID_OPERATOR_DEDUCTION_ORDER_CONFIG",
 		30099: "BONUS_TRANSFER_FAILED",
 		30100: "INSUFFICIENT_BONUS_BALANCE",
+		30101: "CREDIT_OWNERSHIP_MISMATCH",
+		30102: "WITHDRAWAL_LIMIT_EXCEEDED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                                     0,
@@ -335,6 +339,8 @@ var (
 		"INVALID_OPERATOR_DEDUCTION_ORDER_CONFIG":                         30098,
 		"BONUS_TRANSFER_FAILED":                                           30099,
 		"INSUFFICIENT_BONUS_BALANCE":                                      30100,
+		"CREDIT_OWNERSHIP_MISMATCH":                                       30101,
+		"WITHDRAWAL_LIMIT_EXCEEDED":                                       30102,
 	}
 )
 
@@ -369,7 +375,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\x8c\x1f\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xce\x1f\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -471,7 +477,9 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1cUSER_DEPOSIT_STATS_NOT_FOUND\x10\x91\xeb\x01\x12-\n" +
 	"'INVALID_OPERATOR_DEDUCTION_ORDER_CONFIG\x10\x92\xeb\x01\x12\x1b\n" +
 	"\x15BONUS_TRANSFER_FAILED\x10\x93\xeb\x01\x12 \n" +
-	"\x1aINSUFFICIENT_BONUS_BALANCE\x10\x94\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\x1aINSUFFICIENT_BONUS_BALANCE\x10\x94\xeb\x01\x12\x1f\n" +
+	"\x19CREDIT_OWNERSHIP_MISMATCH\x10\x95\xeb\x01\x12\x1f\n" +
+	"\x19WITHDRAWAL_LIMIT_EXCEEDED\x10\x96\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (

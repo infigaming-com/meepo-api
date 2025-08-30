@@ -1222,3 +1222,27 @@ func IsInsufficientBonusBalance(err error) bool {
 func ErrorInsufficientBonusBalance(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_INSUFFICIENT_BONUS_BALANCE.String(), fmt.Sprintf(format, args...))
 }
+
+func IsCreditOwnershipMismatch(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREDIT_OWNERSHIP_MISMATCH.String() && e.Code == 500
+}
+
+func ErrorCreditOwnershipMismatch(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREDIT_OWNERSHIP_MISMATCH.String(), fmt.Sprintf(format, args...))
+}
+
+func IsWithdrawalLimitExceeded(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_WITHDRAWAL_LIMIT_EXCEEDED.String() && e.Code == 500
+}
+
+func ErrorWithdrawalLimitExceeded(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_WITHDRAWAL_LIMIT_EXCEEDED.String(), fmt.Sprintf(format, args...))
+}

@@ -63,6 +63,7 @@ const (
 	Wallet_GetGamificationCurrencyConfig_FullMethodName       = "/api.wallet.service.v1.Wallet/GetGamificationCurrencyConfig"
 	Wallet_UpdateOperatorCurrencyConfig_FullMethodName        = "/api.wallet.service.v1.Wallet/UpdateOperatorCurrencyConfig"
 	Wallet_UpdateDeductionOrder_FullMethodName                = "/api.wallet.service.v1.Wallet/UpdateDeductionOrder"
+	Wallet_BonusTransfer_FullMethodName                       = "/api.wallet.service.v1.Wallet/BonusTransfer"
 )
 
 // WalletClient is the client API for Wallet service.
@@ -142,6 +143,8 @@ type WalletClient interface {
 	UpdateOperatorCurrencyConfig(ctx context.Context, in *UpdateOperatorCurrencyConfigRequest, opts ...grpc.CallOption) (*UpdateOperatorCurrencyConfigResponse, error)
 	// UpdateDeductionOrder updates the deduction order config based on operator context
 	UpdateDeductionOrder(ctx context.Context, in *UpdateDeductionOrderRequest, opts ...grpc.CallOption) (*UpdateDeductionOrderResponse, error)
+	// BonusTransfer is used to transfer from one credit's bonus to its cash
+	BonusTransfer(ctx context.Context, in *BonusTransferRequest, opts ...grpc.CallOption) (*BonusTransferResponse, error)
 }
 
 type walletClient struct {
@@ -592,6 +595,16 @@ func (c *walletClient) UpdateDeductionOrder(ctx context.Context, in *UpdateDeduc
 	return out, nil
 }
 
+func (c *walletClient) BonusTransfer(ctx context.Context, in *BonusTransferRequest, opts ...grpc.CallOption) (*BonusTransferResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BonusTransferResponse)
+	err := c.cc.Invoke(ctx, Wallet_BonusTransfer_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServer is the server API for Wallet service.
 // All implementations must embed UnimplementedWalletServer
 // for forward compatibility.
@@ -669,6 +682,8 @@ type WalletServer interface {
 	UpdateOperatorCurrencyConfig(context.Context, *UpdateOperatorCurrencyConfigRequest) (*UpdateOperatorCurrencyConfigResponse, error)
 	// UpdateDeductionOrder updates the deduction order config based on operator context
 	UpdateDeductionOrder(context.Context, *UpdateDeductionOrderRequest) (*UpdateDeductionOrderResponse, error)
+	// BonusTransfer is used to transfer from one credit's bonus to its cash
+	BonusTransfer(context.Context, *BonusTransferRequest) (*BonusTransferResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -810,6 +825,9 @@ func (UnimplementedWalletServer) UpdateOperatorCurrencyConfig(context.Context, *
 }
 func (UnimplementedWalletServer) UpdateDeductionOrder(context.Context, *UpdateDeductionOrderRequest) (*UpdateDeductionOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateDeductionOrder not implemented")
+}
+func (UnimplementedWalletServer) BonusTransfer(context.Context, *BonusTransferRequest) (*BonusTransferResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BonusTransfer not implemented")
 }
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
@@ -1624,6 +1642,24 @@ func _Wallet_UpdateDeductionOrder_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_BonusTransfer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BonusTransferRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).BonusTransfer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_BonusTransfer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).BonusTransfer(ctx, req.(*BonusTransferRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Wallet_ServiceDesc is the grpc.ServiceDesc for Wallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1806,6 +1842,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateDeductionOrder",
 			Handler:    _Wallet_UpdateDeductionOrder_Handler,
+		},
+		{
+			MethodName: "BonusTransfer",
+			Handler:    _Wallet_BonusTransfer_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
