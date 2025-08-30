@@ -3840,6 +3840,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalancesResponse'
+    /v1/wallet/bonus-transfer:
+        post:
+            tags:
+                - Wallet
+            description: BonusTransfer is used to transfer from one credit's bonus to generate a new credit's cash
+            operationId: Wallet_BonusTransfer
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.BonusTransferRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.BonusTransferResponse'
     /v1/wallet/currencies/get:
         post:
             tags:
@@ -11323,6 +11342,32 @@ components:
                     type: string
                     description: role id
             description: UserInfo contains basic user information.
+        api.wallet.service.v1.BonusTransferRequest:
+            type: object
+            properties:
+                creditId:
+                    type: string
+                userId:
+                    type: string
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                currency:
+                    type: string
+                transferAmount:
+                    type: string
+                transactionType:
+                    type: string
+        api.wallet.service.v1.BonusTransferResponse:
+            type: object
+            properties:
+                transactionId:
+                    type: string
+                transferredAmount:
+                    type: string
+                balanceCash:
+                    type: string
+                balanceBonus:
+                    type: string
         api.wallet.service.v1.Currency:
             type: object
             properties:
