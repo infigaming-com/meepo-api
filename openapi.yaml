@@ -11347,10 +11347,6 @@ components:
             properties:
                 creditId:
                     type: string
-                userId:
-                    type: string
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
                 currency:
                     type: string
                 transferAmount:
