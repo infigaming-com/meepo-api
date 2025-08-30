@@ -9129,7 +9129,7 @@ components:
             type: object
             properties:
                 accountSettings:
-                    $ref: '#/components/schemas/google.protobuf.Value'
+                    $ref: '#/components/schemas/api.user.service.v1.OperatorAccountSettings'
         api.backoffice.service.v1.UpdateOperatorBalanceRequest:
             type: object
             properties:
