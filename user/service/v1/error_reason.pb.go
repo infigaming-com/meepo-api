@@ -114,6 +114,8 @@ const (
 	ErrorReason_BYO_DOMAIN_ALREADY_EXISTS                     ErrorReason = 10087
 	ErrorReason_INVALID_PASSWORD                              ErrorReason = 10089
 	ErrorReason_INVALID_OPERATOR_CONFIG                       ErrorReason = 10090
+	ErrorReason_GET_LATEST_PASSWORDS_FAILED                   ErrorReason = 10091
+	ErrorReason_NEW_PASSWORD_USED_IN_PREVIOUS_PASSWORDS       ErrorReason = 10092
 )
 
 // Enum value maps for ErrorReason.
@@ -208,6 +210,8 @@ var (
 		10087: "BYO_DOMAIN_ALREADY_EXISTS",
 		10089: "INVALID_PASSWORD",
 		10090: "INVALID_OPERATOR_CONFIG",
+		10091: "GET_LATEST_PASSWORDS_FAILED",
+		10092: "NEW_PASSWORD_USED_IN_PREVIOUS_PASSWORDS",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                   0,
@@ -299,6 +303,8 @@ var (
 		"BYO_DOMAIN_ALREADY_EXISTS":                     10087,
 		"INVALID_PASSWORD":                              10089,
 		"INVALID_OPERATOR_CONFIG":                       10090,
+		"GET_LATEST_PASSWORDS_FAILED":                   10091,
+		"NEW_PASSWORD_USED_IN_PREVIOUS_PASSWORDS":       10092,
 	}
 )
 
@@ -333,7 +339,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xc4\x16\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\x94\x17\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x12&\n" +
@@ -423,7 +429,9 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\x13SUBDOMAIN_NOT_EXIST\x10\xe6N\x12\x1e\n" +
 	"\x19BYO_DOMAIN_ALREADY_EXISTS\x10\xe7N\x12\x15\n" +
 	"\x10INVALID_PASSWORD\x10\xe9N\x12\x1c\n" +
-	"\x17INVALID_OPERATOR_CONFIG\x10\xeaN\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x17INVALID_OPERATOR_CONFIG\x10\xeaN\x12 \n" +
+	"\x1bGET_LATEST_PASSWORDS_FAILED\x10\xebN\x12,\n" +
+	"'NEW_PASSWORD_USED_IN_PREVIOUS_PASSWORDS\x10\xecN\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (

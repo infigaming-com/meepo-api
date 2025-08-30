@@ -1080,3 +1080,27 @@ func IsInvalidOperatorConfig(err error) bool {
 func ErrorInvalidOperatorConfig(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_INVALID_OPERATOR_CONFIG.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetLatestPasswordsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_LATEST_PASSWORDS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetLatestPasswordsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_LATEST_PASSWORDS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsNewPasswordUsedInPreviousPasswords(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_NEW_PASSWORD_USED_IN_PREVIOUS_PASSWORDS.String() && e.Code == 500
+}
+
+func ErrorNewPasswordUsedInPreviousPasswords(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_NEW_PASSWORD_USED_IN_PREVIOUS_PASSWORDS.String(), fmt.Sprintf(format, args...))
+}
