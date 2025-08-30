@@ -11002,7 +11002,7 @@ components:
             type: object
             properties:
                 accountSettings:
-                    $ref: '#/components/schemas/google.protobuf.Value'
+                    $ref: '#/components/schemas/api.user.service.v1.OperatorAccountSettings'
         api.user.service.v1.GetUserRequest:
             type: object
             properties:
@@ -11112,6 +11112,71 @@ components:
                     type: string
                     description: The OAuth token received from the provider.
             description: OAuthRequest contains the information needed for OAuth authentication.
+        api.user.service.v1.OperatorAccountGameSettings:
+            type: object
+            properties:
+                noGameWithoutDeposit:
+                    type: boolean
+                minGameKycLevel:
+                    type: integer
+                    format: int32
+        api.user.service.v1.OperatorAccountPasswordSettings:
+            type: object
+            properties:
+                minCharacters:
+                    type: integer
+                    format: int32
+                minUppercaseCharacters:
+                    type: integer
+                    format: int32
+                minLowercaseCharacters:
+                    type: integer
+                    format: int32
+                minSpecialCharacters:
+                    type: integer
+                    format: int32
+                minDigits:
+                    type: integer
+                    format: int32
+        api.user.service.v1.OperatorAccountPaymentSettings:
+            type: object
+            properties:
+                minDepositKycLevel:
+                    type: integer
+                    format: int32
+                minWithdrawKycLevel:
+                    type: integer
+                    format: int32
+        api.user.service.v1.OperatorAccountSecuritySettings:
+            type: object
+            properties:
+                maxConsecutiveFailedLogins:
+                    type: integer
+                    format: int32
+                passwordExpiryDays:
+                    type: integer
+                    format: int32
+                passwordHistoryLimits:
+                    type: integer
+                    format: int32
+        api.user.service.v1.OperatorAccountSettings:
+            type: object
+            properties:
+                passwordSettings:
+                    $ref: '#/components/schemas/api.user.service.v1.OperatorAccountPasswordSettings'
+                securitySettings:
+                    $ref: '#/components/schemas/api.user.service.v1.OperatorAccountSecuritySettings'
+                gameSettings:
+                    $ref: '#/components/schemas/api.user.service.v1.OperatorAccountGameSettings'
+                paymentSettings:
+                    $ref: '#/components/schemas/api.user.service.v1.OperatorAccountPaymentSettings'
+        api.user.service.v1.OperatorConfig:
+            type: object
+            properties:
+                swapFeePercentage:
+                    type: string
+                accountSettings:
+                    $ref: '#/components/schemas/api.user.service.v1.OperatorAccountSettings'
         api.user.service.v1.OperatorDetails:
             type: object
             properties:
@@ -11180,7 +11245,7 @@ components:
                 systemOperatorName:
                     type: string
                 config:
-                    type: string
+                    $ref: '#/components/schemas/api.user.service.v1.OperatorConfig'
                 minLaunchBalance:
                     type: string
                 statusLaunchWhitelist:
