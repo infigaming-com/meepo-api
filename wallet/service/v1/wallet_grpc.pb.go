@@ -143,7 +143,7 @@ type WalletClient interface {
 	UpdateOperatorCurrencyConfig(ctx context.Context, in *UpdateOperatorCurrencyConfigRequest, opts ...grpc.CallOption) (*UpdateOperatorCurrencyConfigResponse, error)
 	// UpdateDeductionOrder updates the deduction order config based on operator context
 	UpdateDeductionOrder(ctx context.Context, in *UpdateDeductionOrderRequest, opts ...grpc.CallOption) (*UpdateDeductionOrderResponse, error)
-	// BonusTransfer is used to transfer from one credit's bonus to its cash
+	// BonusTransfer is used to transfer from one credit's bonus to generate a new credit's cash
 	BonusTransfer(ctx context.Context, in *BonusTransferRequest, opts ...grpc.CallOption) (*BonusTransferResponse, error)
 }
 
@@ -682,7 +682,7 @@ type WalletServer interface {
 	UpdateOperatorCurrencyConfig(context.Context, *UpdateOperatorCurrencyConfigRequest) (*UpdateOperatorCurrencyConfigResponse, error)
 	// UpdateDeductionOrder updates the deduction order config based on operator context
 	UpdateDeductionOrder(context.Context, *UpdateDeductionOrderRequest) (*UpdateDeductionOrderResponse, error)
-	// BonusTransfer is used to transfer from one credit's bonus to its cash
+	// BonusTransfer is used to transfer from one credit's bonus to generate a new credit's cash
 	BonusTransfer(context.Context, *BonusTransferRequest) (*BonusTransferResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }

@@ -9809,7 +9809,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12-\n" +
 	"\x12transferred_amount\x18\x02 \x01(\tR\x11transferredAmount\x12!\n" +
 	"\fbalance_cash\x18\x03 \x01(\tR\vbalanceCash\x12#\n" +
-	"\rbalance_bonus\x18\x04 \x01(\tR\fbalanceBonus2\xbc.\n" +
+	"\rbalance_bonus\x18\x04 \x01(\tR\fbalanceBonus2\xe1.\n" +
 	"\x06Wallet\x12\x95\x01\n" +
 	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/wallet/balances/list\x12o\n" +
 	"\x0eGetUserBalance\x12,.api.wallet.service.v1.GetUserBalanceRequest\x1a-.api.wallet.service.v1.GetUserBalanceResponse\"\x00\x12W\n" +
@@ -9856,8 +9856,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1cGetUserDepositRewardSequence\x12:.api.wallet.service.v1.GetUserDepositRewardSequenceRequest\x1a;.api.wallet.service.v1.GetUserDepositRewardSequenceResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/wallet/deposit-reward/user-sequence\x12\x9c\x01\n" +
 	"\x1dGetGamificationCurrencyConfig\x12;.api.wallet.service.v1.GetGamificationCurrencyConfigRequest\x1a<.api.wallet.service.v1.GetGamificationCurrencyConfigResponse\"\x00\x12\x99\x01\n" +
 	"\x1cUpdateOperatorCurrencyConfig\x12:.api.wallet.service.v1.UpdateOperatorCurrencyConfigRequest\x1a;.api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse\"\x00\x12\x81\x01\n" +
-	"\x14UpdateDeductionOrder\x122.api.wallet.service.v1.UpdateDeductionOrderRequest\x1a3.api.wallet.service.v1.UpdateDeductionOrderResponse\"\x00\x12l\n" +
-	"\rBonusTransfer\x12+.api.wallet.service.v1.BonusTransferRequest\x1a,.api.wallet.service.v1.BonusTransferResponse\"\x00BS\n" +
+	"\x14UpdateDeductionOrder\x122.api.wallet.service.v1.UpdateDeductionOrderRequest\x1a3.api.wallet.service.v1.UpdateDeductionOrderResponse\"\x00\x12\x90\x01\n" +
+	"\rBonusTransfer\x12+.api.wallet.service.v1.BonusTransferRequest\x1a,.api.wallet.service.v1.BonusTransferResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/wallet/bonus-transferBS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (
