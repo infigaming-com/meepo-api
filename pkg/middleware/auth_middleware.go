@@ -4,6 +4,7 @@ import (
 	"context"
 	"slices"
 	"strings"
+	"time"
 
 	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/go-kratos/kratos/v2/middleware"
@@ -46,21 +47,39 @@ func AuthMiddlewareWithPathIncluder(pathIncluder func(string) bool, secret strin
 				return nil, errors.New(401, "UNAUTHORIZED", "invalid token")
 			}
 
-			operatorIds, ok := mctx.GetOperatorIds(ctx)
+			operatorContext, ok := mctx.GetOperatorContext(ctx)
 			// If the operatorId in the context does not exists, do not check the operatorId in the token
 			// If the operatorId in the context exists, check if it is the same as the operatorId in the token
 			if ok {
-				if claims.UserInfo.OperatorId != operatorIds.OperatorId {
+				if claims.UserInfo.OperatorId != operatorContext.OperatorId {
 					return nil, errors.New(401, "UNAUTHORIZED", "invalid operatorId")
 				}
-				if claims.UserInfo.CompanyOperatorId != operatorIds.CompanyOperatorId {
+				if claims.UserInfo.CompanyOperatorId != operatorContext.CompanyOperatorId {
 					return nil, errors.New(401, "UNAUTHORIZED", "invalid company operatorId")
 				}
-				if claims.UserInfo.RetailerOperatorId != operatorIds.RetailerOperatorId {
+				if claims.UserInfo.RetailerOperatorId != operatorContext.RetailerOperatorId {
 					return nil, errors.New(401, "UNAUTHORIZED", "invalid retailer operatorId")
 				}
-				if claims.UserInfo.SystemOperatorId != operatorIds.SystemOperatorId {
+				if claims.UserInfo.SystemOperatorId != operatorContext.SystemOperatorId {
 					return nil, errors.New(401, "UNAUTHORIZED", "invalid system operatorId")
+				}
+			}
+
+			if claims.UserInfo.NeedResetPassword {
+				return nil, errors.New(403, "NEED_RESET_PASSWORD", "password reset required before access")
+			}
+
+			operatorInfo, ok := mctx.GetOperatorInfo(ctx)
+			if !ok {
+				return nil, errors.New(401, "UNAUTHORIZED", "get operator info failed")
+			}
+
+			if operatorInfo.Config != nil &&
+				operatorInfo.Config.AccountSettings != nil &&
+				operatorInfo.Config.AccountSettings.SecuritySettings != nil {
+				passwordExpiredAt := claims.UserInfo.PasswordResetAt + int64(operatorInfo.Config.AccountSettings.SecuritySettings.PasswordExpiryDays*24*60*60*1000)
+				if claims.UserInfo.PasswordResetAt != 0 && time.Now().UnixMilli() > passwordExpiredAt {
+					return nil, errors.New(403, "PASSWORD_EXPIRED", "password expired")
 				}
 			}
 
@@ -71,18 +90,8 @@ func AuthMiddlewareWithPathIncluder(pathIncluder func(string) bool, secret strin
 				return nil, errors.New(401, "UNAUTHORIZED", "invalid token")
 			}
 
-			if claims.UserInfo.NeedResetPassword {
-				return nil, errors.New(403, "NEED_RESET_PASSWORD", "password reset required before access")
-			}
-
-			userOperatorIds := &mctx.OperatorIds{
-				OperatorId:         claims.UserInfo.OperatorId,
-				CompanyOperatorId:  claims.UserInfo.CompanyOperatorId,
-				RetailerOperatorId: claims.UserInfo.RetailerOperatorId,
-				SystemOperatorId:   claims.UserInfo.SystemOperatorId,
-			}
-			claims.UserInfo.RealOperatorId, claims.UserInfo.OperatorType = userOperatorIds.GetRealOperatorIdAndType()
-
+			claims.UserInfo.RealOperatorId = operatorContext.RealOperatorId
+			claims.UserInfo.OperatorType = operatorContext.OperatorType
 			ctx = mctx.WithUserInfo(ctx, claims.UserInfo)
 
 			return handler(ctx, req)

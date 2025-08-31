@@ -27,6 +27,7 @@ type UserInfo struct {
 	RealOperatorId     int64  `json:"realOperatorId,omitempty"`
 	OperatorType       string `json:"operatorType,omitempty"`
 	NeedResetPassword  bool   `json:"needResetPassword,omitempty"`
+	PasswordResetAt    int64  `json:"passwordResetAt,omitempty"`
 	RoleId             int64  `json:"roleId"`
 }
 
