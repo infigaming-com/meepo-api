@@ -7313,8 +7313,7 @@ type BonusTransferRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	CreditId        int64                  `protobuf:"varint,1,opt,name=credit_id,json=creditId,proto3" json:"credit_id,omitempty"`
 	Currency        string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	TransferAmount  string                 `protobuf:"bytes,3,opt,name=transfer_amount,json=transferAmount,proto3" json:"transfer_amount,omitempty"`
-	TransactionType string                 `protobuf:"bytes,4,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	TransactionType string                 `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -7359,13 +7358,6 @@ func (x *BonusTransferRequest) GetCreditId() int64 {
 func (x *BonusTransferRequest) GetCurrency() string {
 	if x != nil {
 		return x.Currency
-	}
-	return ""
-}
-
-func (x *BonusTransferRequest) GetTransferAmount() string {
-	if x != nil {
-		return x.TransferAmount
 	}
 	return ""
 }
@@ -9781,12 +9773,11 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1ainitiator_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12S\n" +
 	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12N\n" +
 	"\x0fdeduction_order\x18\x03 \x01(\v2%.api.wallet.service.v1.DeductionOrderR\x0edeductionOrder\"\x1e\n" +
-	"\x1cUpdateDeductionOrderResponse\"\xa3\x01\n" +
+	"\x1cUpdateDeductionOrderResponse\"z\n" +
 	"\x14BonusTransferRequest\x12\x1b\n" +
 	"\tcredit_id\x18\x01 \x01(\x03R\bcreditId\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12'\n" +
-	"\x0ftransfer_amount\x18\x03 \x01(\tR\x0etransferAmount\x12)\n" +
-	"\x10transaction_type\x18\x04 \x01(\tR\x0ftransactionType\"\xb5\x01\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12)\n" +
+	"\x10transaction_type\x18\x03 \x01(\tR\x0ftransactionType\"\xb5\x01\n" +
 	"\x15BonusTransferResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12-\n" +
 	"\x12transferred_amount\x18\x02 \x01(\tR\x11transferredAmount\x12!\n" +

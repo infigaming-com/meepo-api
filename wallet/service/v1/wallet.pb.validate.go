@@ -13821,8 +13821,6 @@ func (m *BonusTransferRequest) validate(all bool) error {
 
 	// no validation rules for Currency
 
-	// no validation rules for TransferAmount
-
 	// no validation rules for TransactionType
 
 	if len(errors) > 0 {

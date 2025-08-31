@@ -1134,8 +1134,7 @@ message UpdateDeductionOrderResponse {}
 message BonusTransferRequest {
 	int64 credit_id = 1;
 	string currency = 2;
-	string transfer_amount = 3;
-	string transaction_type = 4;
+	string transaction_type = 3;
 }
 
 message BonusTransferResponse {
