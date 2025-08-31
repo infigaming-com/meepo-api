@@ -76,9 +76,10 @@ func AuthMiddlewareWithPathIncluder(pathIncluder func(string) bool, secret strin
 
 			if operatorInfo.Config != nil &&
 				operatorInfo.Config.AccountSettings != nil &&
-				operatorInfo.Config.AccountSettings.SecuritySettings != nil {
+				operatorInfo.Config.AccountSettings.SecuritySettings != nil &&
+				claims.UserInfo.PasswordResetAt != 0 { // for user with google login, there won't be password
 				passwordExpiredAt := claims.UserInfo.PasswordResetAt + int64(operatorInfo.Config.AccountSettings.SecuritySettings.PasswordExpiryDays*24*60*60*1000)
-				if claims.UserInfo.PasswordResetAt != 0 && time.Now().UnixMilli() > passwordExpiredAt {
+				if time.Now().UnixMilli() > passwordExpiredAt {
 					return nil, errors.New(403, "PASSWORD_EXPIRED", "password expired")
 				}
 			}
