@@ -7322,6 +7322,677 @@ var _ interface {
 	ErrorName() string
 } = GetBankSchemaResponseValidationError{}
 
+// Validate checks the field values on Crypto with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *Crypto) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Crypto with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in CryptoMultiError, or nil if none found.
+func (m *Crypto) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Crypto) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Crypto
+
+	// no validation rules for Network
+
+	if len(errors) > 0 {
+		return CryptoMultiError(errors)
+	}
+
+	return nil
+}
+
+// CryptoMultiError is an error wrapping multiple validation errors returned by
+// Crypto.ValidateAll() if the designated constraints aren't met.
+type CryptoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CryptoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CryptoMultiError) AllErrors() []error { return m }
+
+// CryptoValidationError is the validation error returned by Crypto.Validate if
+// the designated constraints aren't met.
+type CryptoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CryptoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CryptoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CryptoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CryptoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CryptoValidationError) ErrorName() string { return "CryptoValidationError" }
+
+// Error satisfies the builtin error interface
+func (e CryptoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCrypto.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CryptoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CryptoValidationError{}
+
+// Validate checks the field values on Currency with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *Currency) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Currency with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in CurrencyMultiError, or nil
+// if none found.
+func (m *Currency) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Currency) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Currency
+
+	// no validation rules for Country
+
+	// no validation rules for PayWayCode
+
+	// no validation rules for PayWayName
+
+	// no validation rules for PayMin
+
+	// no validation rules for PayMax
+
+	if len(errors) > 0 {
+		return CurrencyMultiError(errors)
+	}
+
+	return nil
+}
+
+// CurrencyMultiError is an error wrapping multiple validation errors returned
+// by Currency.ValidateAll() if the designated constraints aren't met.
+type CurrencyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CurrencyMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CurrencyMultiError) AllErrors() []error { return m }
+
+// CurrencyValidationError is the validation error returned by
+// Currency.Validate if the designated constraints aren't met.
+type CurrencyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CurrencyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CurrencyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CurrencyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CurrencyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CurrencyValidationError) ErrorName() string { return "CurrencyValidationError" }
+
+// Error satisfies the builtin error interface
+func (e CurrencyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCurrency.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CurrencyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CurrencyValidationError{}
+
+// Validate checks the field values on BuyCryptoViaFiatCurrentListRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *BuyCryptoViaFiatCurrentListRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BuyCryptoViaFiatCurrentListRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// BuyCryptoViaFiatCurrentListRequestMultiError, or nil if none found.
+func (m *BuyCryptoViaFiatCurrentListRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BuyCryptoViaFiatCurrentListRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return BuyCryptoViaFiatCurrentListRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// BuyCryptoViaFiatCurrentListRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// BuyCryptoViaFiatCurrentListRequest.ValidateAll() if the designated
+// constraints aren't met.
+type BuyCryptoViaFiatCurrentListRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BuyCryptoViaFiatCurrentListRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BuyCryptoViaFiatCurrentListRequestMultiError) AllErrors() []error { return m }
+
+// BuyCryptoViaFiatCurrentListRequestValidationError is the validation error
+// returned by BuyCryptoViaFiatCurrentListRequest.Validate if the designated
+// constraints aren't met.
+type BuyCryptoViaFiatCurrentListRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BuyCryptoViaFiatCurrentListRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BuyCryptoViaFiatCurrentListRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BuyCryptoViaFiatCurrentListRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BuyCryptoViaFiatCurrentListRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BuyCryptoViaFiatCurrentListRequestValidationError) ErrorName() string {
+	return "BuyCryptoViaFiatCurrentListRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BuyCryptoViaFiatCurrentListRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBuyCryptoViaFiatCurrentListRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BuyCryptoViaFiatCurrentListRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BuyCryptoViaFiatCurrentListRequestValidationError{}
+
+// Validate checks the field values on BuyCryptoViaFiatCurrentListResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *BuyCryptoViaFiatCurrentListResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BuyCryptoViaFiatCurrentListResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// BuyCryptoViaFiatCurrentListResponseMultiError, or nil if none found.
+func (m *BuyCryptoViaFiatCurrentListResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BuyCryptoViaFiatCurrentListResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetCurrencies() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, BuyCryptoViaFiatCurrentListResponseValidationError{
+						field:  fmt.Sprintf("Currencies[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, BuyCryptoViaFiatCurrentListResponseValidationError{
+						field:  fmt.Sprintf("Currencies[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return BuyCryptoViaFiatCurrentListResponseValidationError{
+					field:  fmt.Sprintf("Currencies[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return BuyCryptoViaFiatCurrentListResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// BuyCryptoViaFiatCurrentListResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// BuyCryptoViaFiatCurrentListResponse.ValidateAll() if the designated
+// constraints aren't met.
+type BuyCryptoViaFiatCurrentListResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BuyCryptoViaFiatCurrentListResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BuyCryptoViaFiatCurrentListResponseMultiError) AllErrors() []error { return m }
+
+// BuyCryptoViaFiatCurrentListResponseValidationError is the validation error
+// returned by BuyCryptoViaFiatCurrentListResponse.Validate if the designated
+// constraints aren't met.
+type BuyCryptoViaFiatCurrentListResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BuyCryptoViaFiatCurrentListResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BuyCryptoViaFiatCurrentListResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BuyCryptoViaFiatCurrentListResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BuyCryptoViaFiatCurrentListResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BuyCryptoViaFiatCurrentListResponseValidationError) ErrorName() string {
+	return "BuyCryptoViaFiatCurrentListResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BuyCryptoViaFiatCurrentListResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBuyCryptoViaFiatCurrentListResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BuyCryptoViaFiatCurrentListResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BuyCryptoViaFiatCurrentListResponseValidationError{}
+
+// Validate checks the field values on BuyCryptoViaFiatRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *BuyCryptoViaFiatRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BuyCryptoViaFiatRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// BuyCryptoViaFiatRequestMultiError, or nil if none found.
+func (m *BuyCryptoViaFiatRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BuyCryptoViaFiatRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Amount
+
+	// no validation rules for FiatCurrency
+
+	// no validation rules for PayWayCode
+
+	// no validation rules for ChannelId
+
+	if len(errors) > 0 {
+		return BuyCryptoViaFiatRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// BuyCryptoViaFiatRequestMultiError is an error wrapping multiple validation
+// errors returned by BuyCryptoViaFiatRequest.ValidateAll() if the designated
+// constraints aren't met.
+type BuyCryptoViaFiatRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BuyCryptoViaFiatRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BuyCryptoViaFiatRequestMultiError) AllErrors() []error { return m }
+
+// BuyCryptoViaFiatRequestValidationError is the validation error returned by
+// BuyCryptoViaFiatRequest.Validate if the designated constraints aren't met.
+type BuyCryptoViaFiatRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BuyCryptoViaFiatRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BuyCryptoViaFiatRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BuyCryptoViaFiatRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BuyCryptoViaFiatRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BuyCryptoViaFiatRequestValidationError) ErrorName() string {
+	return "BuyCryptoViaFiatRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BuyCryptoViaFiatRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBuyCryptoViaFiatRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BuyCryptoViaFiatRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BuyCryptoViaFiatRequestValidationError{}
+
+// Validate checks the field values on BuyCryptoViaFiatResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *BuyCryptoViaFiatResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BuyCryptoViaFiatResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// BuyCryptoViaFiatResponseMultiError, or nil if none found.
+func (m *BuyCryptoViaFiatResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BuyCryptoViaFiatResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for PayUrl
+
+	if len(errors) > 0 {
+		return BuyCryptoViaFiatResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// BuyCryptoViaFiatResponseMultiError is an error wrapping multiple validation
+// errors returned by BuyCryptoViaFiatResponse.ValidateAll() if the designated
+// constraints aren't met.
+type BuyCryptoViaFiatResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BuyCryptoViaFiatResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BuyCryptoViaFiatResponseMultiError) AllErrors() []error { return m }
+
+// BuyCryptoViaFiatResponseValidationError is the validation error returned by
+// BuyCryptoViaFiatResponse.Validate if the designated constraints aren't met.
+type BuyCryptoViaFiatResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BuyCryptoViaFiatResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BuyCryptoViaFiatResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BuyCryptoViaFiatResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BuyCryptoViaFiatResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BuyCryptoViaFiatResponseValidationError) ErrorName() string {
+	return "BuyCryptoViaFiatResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BuyCryptoViaFiatResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBuyCryptoViaFiatResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BuyCryptoViaFiatResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BuyCryptoViaFiatResponseValidationError{}
+
 // Validate checks the field values on GetAddressResponse_Data with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

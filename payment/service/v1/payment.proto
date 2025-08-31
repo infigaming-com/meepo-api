@@ -897,6 +897,42 @@ message GetBankSchemaResponse {
   google.protobuf.ListValue schema = 1;
 }
 
+message Crypto {
+  string crypto = 1;
+	string network = 2;
+	// int32 buyEnable = 3;
+}
+
+message Currency {
+  string currency = 1;
+  string country = 2;
+  string payWayCode = 3;
+  string payWayName = 4;
+  float payMin = 5;
+  float payMax = 6;
+  // float fixedFee = 7;
+  // float feeRate = 8;
+}
+
+message BuyCryptoViaFiatCurrentListRequest {
+}
+
+message BuyCryptoViaFiatCurrentListResponse {
+  // repeated Crypto cryptos = 1;
+  repeated Currency currencies = 1;
+}
+
+message BuyCryptoViaFiatRequest {
+  string amount = 1;
+  string fiatCurrency = 2;
+  string payWayCode = 3;
+  string channel_id = 4;
+}
+
+message BuyCryptoViaFiatResponse {
+  string pay_url = 1;
+}
+
 // Payment Service
 // Provides methods for managing payment methods, channels, and transactions
 service Payment {
@@ -1086,4 +1122,18 @@ service Payment {
       body: "*"
     };
 	}
+
+  rpc BuyCryptoViaFiatCurrentList(BuyCryptoViaFiatCurrentListRequest) returns (BuyCryptoViaFiatCurrentListResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/buycrypto/currency/list"
+      body: "*"
+    };
+  }
+
+  rpc BuyCryptoViaFiat(BuyCryptoViaFiatRequest) returns (BuyCryptoViaFiatResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/buycrypto/add"
+      body: "*"
+    };
+  }
 }

@@ -3385,6 +3385,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetBankSchemaResponse'
+    /v1/payment/buycrypto/add:
+        post:
+            tags:
+                - Payment
+            operationId: Payment_BuyCryptoViaFiat
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.BuyCryptoViaFiatRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.BuyCryptoViaFiatResponse'
+    /v1/payment/buycrypto/currency/list:
+        post:
+            tags:
+                - Payment
+            operationId: Payment_BuyCryptoViaFiatCurrentList
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.BuyCryptoViaFiatCurrentListRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.BuyCryptoViaFiatCurrentListResponse'
     /v1/payment/channel/page:
         post:
             tags:
@@ -11678,6 +11714,33 @@ components:
                     type: boolean
                 cardDetail:
                     type: object
+        payment.service.v1.BuyCryptoViaFiatCurrentListRequest:
+            type: object
+            properties: {}
+        payment.service.v1.BuyCryptoViaFiatCurrentListResponse:
+            type: object
+            properties:
+                currencies:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/payment.service.v1.Currency'
+                    description: repeated Crypto cryptos = 1;
+        payment.service.v1.BuyCryptoViaFiatRequest:
+            type: object
+            properties:
+                amount:
+                    type: string
+                fiatCurrency:
+                    type: string
+                payWayCode:
+                    type: string
+                channelId:
+                    type: string
+        payment.service.v1.BuyCryptoViaFiatResponse:
+            type: object
+            properties:
+                payUrl:
+                    type: string
         payment.service.v1.CreatePaymentChannelResponse:
             type: object
             properties:
@@ -11692,6 +11755,23 @@ components:
             properties:
                 paymentMethod:
                     $ref: '#/components/schemas/payment.service.v1.PaymentMethodInfo'
+        payment.service.v1.Currency:
+            type: object
+            properties:
+                currency:
+                    type: string
+                country:
+                    type: string
+                payWayCode:
+                    type: string
+                payWayName:
+                    type: string
+                payMin:
+                    type: number
+                    format: float
+                payMax:
+                    type: number
+                    format: float
         payment.service.v1.DeleteBankCardRequest:
             type: object
             properties:
