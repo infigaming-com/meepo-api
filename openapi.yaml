@@ -11414,8 +11414,6 @@ components:
                     type: string
                 currency:
                     type: string
-                transferAmount:
-                    type: string
                 transactionType:
                     type: string
         api.wallet.service.v1.BonusTransferResponse:
