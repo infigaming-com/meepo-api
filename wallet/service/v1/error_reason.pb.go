@@ -111,6 +111,23 @@ const (
 	ErrorReason_INVALID_DEPOSIT_REWARD_CONFIG                                   ErrorReason = 30083
 	ErrorReason_INVALID_OPERATOR_CONTEXT                                        ErrorReason = 30084
 	ErrorReason_GET_OPERATOR_MIN_SEQUENCES_FAILED                               ErrorReason = 30085
+	ErrorReason_CREATE_OPERATOR_CURRENCY_CONFIG_FAILED                          ErrorReason = 30086
+	ErrorReason_UPDATE_OPERATOR_CURRENCY_CONFIG_FAILED                          ErrorReason = 30087
+	ErrorReason_GET_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED                      ErrorReason = 30088
+	ErrorReason_CREATE_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED                   ErrorReason = 30089
+	ErrorReason_UPDATE_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED                   ErrorReason = 30090
+	ErrorReason_LIST_OPERATOR_CURRENCY_CONFIGS_FAILED                           ErrorReason = 30091
+	ErrorReason_OPERATOR_DEDUCTION_ORDER_CONFIG_NOT_FOUND                       ErrorReason = 30092
+	ErrorReason_OPERATOR_CURRENCY_CONFIG_NOT_FOUND                              ErrorReason = 30093
+	ErrorReason_OPERATOR_CURRENCY_DEPOSIT_CONFIG_NOT_FOUND                      ErrorReason = 30094
+	ErrorReason_GET_OPERATOR_CURRENCY_DEPOSIT_CONFIG_FAILED                     ErrorReason = 30095
+	ErrorReason_GET_USER_DEPOSIT_STATS_FAILED                                   ErrorReason = 30096
+	ErrorReason_USER_DEPOSIT_STATS_NOT_FOUND                                    ErrorReason = 30097
+	ErrorReason_INVALID_OPERATOR_DEDUCTION_ORDER_CONFIG                         ErrorReason = 30098
+	ErrorReason_BONUS_TRANSFER_FAILED                                           ErrorReason = 30099
+	ErrorReason_INSUFFICIENT_BONUS_BALANCE                                      ErrorReason = 30100
+	ErrorReason_CREDIT_OWNERSHIP_MISMATCH                                       ErrorReason = 30101
+	ErrorReason_WITHDRAWAL_LIMIT_EXCEEDED                                       ErrorReason = 30102
 )
 
 // Enum value maps for ErrorReason.
@@ -202,6 +219,23 @@ var (
 		30083: "INVALID_DEPOSIT_REWARD_CONFIG",
 		30084: "INVALID_OPERATOR_CONTEXT",
 		30085: "GET_OPERATOR_MIN_SEQUENCES_FAILED",
+		30086: "CREATE_OPERATOR_CURRENCY_CONFIG_FAILED",
+		30087: "UPDATE_OPERATOR_CURRENCY_CONFIG_FAILED",
+		30088: "GET_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED",
+		30089: "CREATE_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED",
+		30090: "UPDATE_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED",
+		30091: "LIST_OPERATOR_CURRENCY_CONFIGS_FAILED",
+		30092: "OPERATOR_DEDUCTION_ORDER_CONFIG_NOT_FOUND",
+		30093: "OPERATOR_CURRENCY_CONFIG_NOT_FOUND",
+		30094: "OPERATOR_CURRENCY_DEPOSIT_CONFIG_NOT_FOUND",
+		30095: "GET_OPERATOR_CURRENCY_DEPOSIT_CONFIG_FAILED",
+		30096: "GET_USER_DEPOSIT_STATS_FAILED",
+		30097: "USER_DEPOSIT_STATS_NOT_FOUND",
+		30098: "INVALID_OPERATOR_DEDUCTION_ORDER_CONFIG",
+		30099: "BONUS_TRANSFER_FAILED",
+		30100: "INSUFFICIENT_BONUS_BALANCE",
+		30101: "CREDIT_OWNERSHIP_MISMATCH",
+		30102: "WITHDRAWAL_LIMIT_EXCEEDED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                                     0,
@@ -290,6 +324,23 @@ var (
 		"INVALID_DEPOSIT_REWARD_CONFIG":                                   30083,
 		"INVALID_OPERATOR_CONTEXT":                                        30084,
 		"GET_OPERATOR_MIN_SEQUENCES_FAILED":                               30085,
+		"CREATE_OPERATOR_CURRENCY_CONFIG_FAILED":                          30086,
+		"UPDATE_OPERATOR_CURRENCY_CONFIG_FAILED":                          30087,
+		"GET_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED":                      30088,
+		"CREATE_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED":                   30089,
+		"UPDATE_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED":                   30090,
+		"LIST_OPERATOR_CURRENCY_CONFIGS_FAILED":                           30091,
+		"OPERATOR_DEDUCTION_ORDER_CONFIG_NOT_FOUND":                       30092,
+		"OPERATOR_CURRENCY_CONFIG_NOT_FOUND":                              30093,
+		"OPERATOR_CURRENCY_DEPOSIT_CONFIG_NOT_FOUND":                      30094,
+		"GET_OPERATOR_CURRENCY_DEPOSIT_CONFIG_FAILED":                     30095,
+		"GET_USER_DEPOSIT_STATS_FAILED":                                   30096,
+		"USER_DEPOSIT_STATS_NOT_FOUND":                                    30097,
+		"INVALID_OPERATOR_DEDUCTION_ORDER_CONFIG":                         30098,
+		"BONUS_TRANSFER_FAILED":                                           30099,
+		"INSUFFICIENT_BONUS_BALANCE":                                      30100,
+		"CREDIT_OWNERSHIP_MISMATCH":                                       30101,
+		"WITHDRAWAL_LIMIT_EXCEEDED":                                       30102,
 	}
 )
 
@@ -324,7 +375,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xf0\x19\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xce\x1f\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -411,7 +462,24 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\x15INVALID_OPERATOR_MODE\x10\x82\xeb\x01\x12#\n" +
 	"\x1dINVALID_DEPOSIT_REWARD_CONFIG\x10\x83\xeb\x01\x12\x1e\n" +
 	"\x18INVALID_OPERATOR_CONTEXT\x10\x84\xeb\x01\x12'\n" +
-	"!GET_OPERATOR_MIN_SEQUENCES_FAILED\x10\x85\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
+	"!GET_OPERATOR_MIN_SEQUENCES_FAILED\x10\x85\xeb\x01\x12,\n" +
+	"&CREATE_OPERATOR_CURRENCY_CONFIG_FAILED\x10\x86\xeb\x01\x12,\n" +
+	"&UPDATE_OPERATOR_CURRENCY_CONFIG_FAILED\x10\x87\xeb\x01\x120\n" +
+	"*GET_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED\x10\x88\xeb\x01\x123\n" +
+	"-CREATE_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED\x10\x89\xeb\x01\x123\n" +
+	"-UPDATE_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED\x10\x8a\xeb\x01\x12+\n" +
+	"%LIST_OPERATOR_CURRENCY_CONFIGS_FAILED\x10\x8b\xeb\x01\x12/\n" +
+	")OPERATOR_DEDUCTION_ORDER_CONFIG_NOT_FOUND\x10\x8c\xeb\x01\x12(\n" +
+	"\"OPERATOR_CURRENCY_CONFIG_NOT_FOUND\x10\x8d\xeb\x01\x120\n" +
+	"*OPERATOR_CURRENCY_DEPOSIT_CONFIG_NOT_FOUND\x10\x8e\xeb\x01\x121\n" +
+	"+GET_OPERATOR_CURRENCY_DEPOSIT_CONFIG_FAILED\x10\x8f\xeb\x01\x12#\n" +
+	"\x1dGET_USER_DEPOSIT_STATS_FAILED\x10\x90\xeb\x01\x12\"\n" +
+	"\x1cUSER_DEPOSIT_STATS_NOT_FOUND\x10\x91\xeb\x01\x12-\n" +
+	"'INVALID_OPERATOR_DEDUCTION_ORDER_CONFIG\x10\x92\xeb\x01\x12\x1b\n" +
+	"\x15BONUS_TRANSFER_FAILED\x10\x93\xeb\x01\x12 \n" +
+	"\x1aINSUFFICIENT_BONUS_BALANCE\x10\x94\xeb\x01\x12\x1f\n" +
+	"\x19CREDIT_OWNERSHIP_MISMATCH\x10\x95\xeb\x01\x12\x1f\n" +
+	"\x19WITHDRAWAL_LIMIT_EXCEEDED\x10\x96\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (

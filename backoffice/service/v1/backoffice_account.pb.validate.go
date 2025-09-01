@@ -3375,6 +3375,10 @@ func (m *AccountInfoResponse) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for Subdomain
+
+	// no validation rules for BackofficeSubdomain
+
 	if len(errors) > 0 {
 		return AccountInfoResponseMultiError(errors)
 	}

@@ -9,6 +9,7 @@ import (
 	khttp "github.com/go-kratos/kratos/v2/transport/http"
 	mctx "github.com/infigaming-com/meepo-api/pkg/context"
 	user "github.com/infigaming-com/meepo-api/user/service/v1"
+	"github.com/jinzhu/copier"
 )
 
 // OperatorIdMiddlewareWithPathIncluder is a middleware that extract Origin and
@@ -26,7 +27,7 @@ func OperatorIdMiddlewareWithPathIncluder(pathIncluder func(string) bool, userCl
 					return nil, errors.New(400, "BAD_REQUEST", "missing origin header")
 				}
 				// temporary use map to store origin and operatorId
-				resp, err := userClient.GetOperatorIdsByOrigin(ctx, &user.GetOperatorIdsByOriginRequest{
+				resp, err := userClient.GetOperatorInfoByOrigin(ctx, &user.GetOperatorInfoByOriginRequest{
 					Origin: origin,
 				})
 				if err != nil {
@@ -39,6 +40,10 @@ func OperatorIdMiddlewareWithPathIncluder(pathIncluder func(string) bool, userCl
 				operatorIds := mctx.OperatorIdsFromOperatorContext(resp.OperatorContext)
 				operatorIds.RealOperatorId, operatorIds.OperatorType = operatorIds.GetRealOperatorIdAndType()
 				ctx = mctx.WithOperatorIds(ctx, operatorIds)
+
+				operatorInfo := mctx.OperatorInfo{}
+				copier.Copy(&operatorInfo, resp.OperatorDetail)
+				ctx = mctx.WithOperatorInfo(ctx, operatorInfo)
 			}
 			return handler(ctx, req)
 		}

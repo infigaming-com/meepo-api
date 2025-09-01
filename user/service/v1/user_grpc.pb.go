@@ -58,6 +58,7 @@ const (
 	User_GetOverviewDashboardFromUser_FullMethodName    = "/api.user.service.v1.User/GetOverviewDashboardFromUser"
 	User_GetOperatorIdByOrigin_FullMethodName           = "/api.user.service.v1.User/GetOperatorIdByOrigin"
 	User_GetOperatorIdsByOrigin_FullMethodName          = "/api.user.service.v1.User/GetOperatorIdsByOrigin"
+	User_GetOperatorInfoByOrigin_FullMethodName         = "/api.user.service.v1.User/GetOperatorInfoByOrigin"
 	User_GetOperator_FullMethodName                     = "/api.user.service.v1.User/GetOperator"
 	User_GetOperatorsByIds_FullMethodName               = "/api.user.service.v1.User/GetOperatorsByIds"
 	User_ListAllOperators_FullMethodName                = "/api.user.service.v1.User/ListAllOperators"
@@ -77,6 +78,8 @@ const (
 	User_ListOperatorsByAdminEmail_FullMethodName       = "/api.user.service.v1.User/ListOperatorsByAdminEmail"
 	User_ListOperatorDetails_FullMethodName             = "/api.user.service.v1.User/ListOperatorDetails"
 	User_GetOperatorDetailsByUserId_FullMethodName      = "/api.user.service.v1.User/GetOperatorDetailsByUserId"
+	User_GetOperatorAccountSettings_FullMethodName      = "/api.user.service.v1.User/GetOperatorAccountSettings"
+	User_UpdateOperatorAccountSettings_FullMethodName   = "/api.user.service.v1.User/UpdateOperatorAccountSettings"
 )
 
 // UserClient is the client API for User service.
@@ -156,6 +159,7 @@ type UserClient interface {
 	GetOverviewDashboardFromUser(ctx context.Context, in *GetOverviewDashboardFromUserRequest, opts ...grpc.CallOption) (*GetOverviewDashboardFromUserResponse, error)
 	GetOperatorIdByOrigin(ctx context.Context, in *GetOperatorIdByOriginRequest, opts ...grpc.CallOption) (*GetOperatorIdByOriginResponse, error)
 	GetOperatorIdsByOrigin(ctx context.Context, in *GetOperatorIdsByOriginRequest, opts ...grpc.CallOption) (*GetOperatorIdsByOriginResponse, error)
+	GetOperatorInfoByOrigin(ctx context.Context, in *GetOperatorInfoByOriginRequest, opts ...grpc.CallOption) (*GetOperatorInfoByOriginResponse, error)
 	GetOperator(ctx context.Context, in *GetOperatorRequest, opts ...grpc.CallOption) (*GetOperatorResponse, error)
 	GetOperatorsByIds(ctx context.Context, in *GetOperatorsByIdsRequest, opts ...grpc.CallOption) (*GetOperatorsByIdsResponse, error)
 	// ListOperators returns a list of operators based on the enabled status or all operators if the enabled status is not provided.
@@ -193,6 +197,8 @@ type UserClient interface {
 	ListOperatorDetails(ctx context.Context, in *ListOperatorDetailsRequest, opts ...grpc.CallOption) (*ListOperatorDetailsResponse, error)
 	// GetOperatorDetailsByUserId returns the operator details which the user belongs to
 	GetOperatorDetailsByUserId(ctx context.Context, in *GetOperatorDetailsByUserIdRequest, opts ...grpc.CallOption) (*GetOperatorDetailsByUserIdResponse, error)
+	GetOperatorAccountSettings(ctx context.Context, in *GetOperatorAccountSettingsRequest, opts ...grpc.CallOption) (*GetOperatorAccountSettingsResponse, error)
+	UpdateOperatorAccountSettings(ctx context.Context, in *UpdateOperatorAccountSettingsRequest, opts ...grpc.CallOption) (*UpdateOperatorAccountSettingsResponse, error)
 }
 
 type userClient struct {
@@ -593,6 +599,16 @@ func (c *userClient) GetOperatorIdsByOrigin(ctx context.Context, in *GetOperator
 	return out, nil
 }
 
+func (c *userClient) GetOperatorInfoByOrigin(ctx context.Context, in *GetOperatorInfoByOriginRequest, opts ...grpc.CallOption) (*GetOperatorInfoByOriginResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorInfoByOriginResponse)
+	err := c.cc.Invoke(ctx, User_GetOperatorInfoByOrigin_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userClient) GetOperator(ctx context.Context, in *GetOperatorRequest, opts ...grpc.CallOption) (*GetOperatorResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetOperatorResponse)
@@ -783,6 +799,26 @@ func (c *userClient) GetOperatorDetailsByUserId(ctx context.Context, in *GetOper
 	return out, nil
 }
 
+func (c *userClient) GetOperatorAccountSettings(ctx context.Context, in *GetOperatorAccountSettingsRequest, opts ...grpc.CallOption) (*GetOperatorAccountSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorAccountSettingsResponse)
+	err := c.cc.Invoke(ctx, User_GetOperatorAccountSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) UpdateOperatorAccountSettings(ctx context.Context, in *UpdateOperatorAccountSettingsRequest, opts ...grpc.CallOption) (*UpdateOperatorAccountSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateOperatorAccountSettingsResponse)
+	err := c.cc.Invoke(ctx, User_UpdateOperatorAccountSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -860,6 +896,7 @@ type UserServer interface {
 	GetOverviewDashboardFromUser(context.Context, *GetOverviewDashboardFromUserRequest) (*GetOverviewDashboardFromUserResponse, error)
 	GetOperatorIdByOrigin(context.Context, *GetOperatorIdByOriginRequest) (*GetOperatorIdByOriginResponse, error)
 	GetOperatorIdsByOrigin(context.Context, *GetOperatorIdsByOriginRequest) (*GetOperatorIdsByOriginResponse, error)
+	GetOperatorInfoByOrigin(context.Context, *GetOperatorInfoByOriginRequest) (*GetOperatorInfoByOriginResponse, error)
 	GetOperator(context.Context, *GetOperatorRequest) (*GetOperatorResponse, error)
 	GetOperatorsByIds(context.Context, *GetOperatorsByIdsRequest) (*GetOperatorsByIdsResponse, error)
 	// ListOperators returns a list of operators based on the enabled status or all operators if the enabled status is not provided.
@@ -897,6 +934,8 @@ type UserServer interface {
 	ListOperatorDetails(context.Context, *ListOperatorDetailsRequest) (*ListOperatorDetailsResponse, error)
 	// GetOperatorDetailsByUserId returns the operator details which the user belongs to
 	GetOperatorDetailsByUserId(context.Context, *GetOperatorDetailsByUserIdRequest) (*GetOperatorDetailsByUserIdResponse, error)
+	GetOperatorAccountSettings(context.Context, *GetOperatorAccountSettingsRequest) (*GetOperatorAccountSettingsResponse, error)
+	UpdateOperatorAccountSettings(context.Context, *UpdateOperatorAccountSettingsRequest) (*UpdateOperatorAccountSettingsResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -1024,6 +1063,9 @@ func (UnimplementedUserServer) GetOperatorIdByOrigin(context.Context, *GetOperat
 func (UnimplementedUserServer) GetOperatorIdsByOrigin(context.Context, *GetOperatorIdsByOriginRequest) (*GetOperatorIdsByOriginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorIdsByOrigin not implemented")
 }
+func (UnimplementedUserServer) GetOperatorInfoByOrigin(context.Context, *GetOperatorInfoByOriginRequest) (*GetOperatorInfoByOriginResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorInfoByOrigin not implemented")
+}
 func (UnimplementedUserServer) GetOperator(context.Context, *GetOperatorRequest) (*GetOperatorResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperator not implemented")
 }
@@ -1080,6 +1122,12 @@ func (UnimplementedUserServer) ListOperatorDetails(context.Context, *ListOperato
 }
 func (UnimplementedUserServer) GetOperatorDetailsByUserId(context.Context, *GetOperatorDetailsByUserIdRequest) (*GetOperatorDetailsByUserIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorDetailsByUserId not implemented")
+}
+func (UnimplementedUserServer) GetOperatorAccountSettings(context.Context, *GetOperatorAccountSettingsRequest) (*GetOperatorAccountSettingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorAccountSettings not implemented")
+}
+func (UnimplementedUserServer) UpdateOperatorAccountSettings(context.Context, *UpdateOperatorAccountSettingsRequest) (*UpdateOperatorAccountSettingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOperatorAccountSettings not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -1804,6 +1852,24 @@ func _User_GetOperatorIdsByOrigin_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_GetOperatorInfoByOrigin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorInfoByOriginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetOperatorInfoByOrigin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetOperatorInfoByOrigin_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetOperatorInfoByOrigin(ctx, req.(*GetOperatorInfoByOriginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _User_GetOperator_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetOperatorRequest)
 	if err := dec(in); err != nil {
@@ -2146,6 +2212,42 @@ func _User_GetOperatorDetailsByUserId_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_GetOperatorAccountSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorAccountSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetOperatorAccountSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetOperatorAccountSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetOperatorAccountSettings(ctx, req.(*GetOperatorAccountSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_UpdateOperatorAccountSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOperatorAccountSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).UpdateOperatorAccountSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_UpdateOperatorAccountSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).UpdateOperatorAccountSettings(ctx, req.(*UpdateOperatorAccountSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2310,6 +2412,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _User_GetOperatorIdsByOrigin_Handler,
 		},
 		{
+			MethodName: "GetOperatorInfoByOrigin",
+			Handler:    _User_GetOperatorInfoByOrigin_Handler,
+		},
+		{
 			MethodName: "GetOperator",
 			Handler:    _User_GetOperator_Handler,
 		},
@@ -2384,6 +2490,14 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOperatorDetailsByUserId",
 			Handler:    _User_GetOperatorDetailsByUserId_Handler,
+		},
+		{
+			MethodName: "GetOperatorAccountSettings",
+			Handler:    _User_GetOperatorAccountSettings_Handler,
+		},
+		{
+			MethodName: "UpdateOperatorAccountSettings",
+			Handler:    _User_UpdateOperatorAccountSettings_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

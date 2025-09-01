@@ -983,6 +983,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetBalancesSummaryResponse'
+    /v1/backoffice/finance/balances/summary/list:
+        post:
+            tags:
+                - BackofficeFinance
+            operationId: BackofficeFinance_ListBalancesSummary
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListBalancesSummaryRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListBalancesSummaryResponse'
     /v1/backoffice/finance/billing-periods/list:
         post:
             tags:
@@ -1423,6 +1441,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateGameResponse'
+    /v1/backoffice/operator/account-settings/get:
+        post:
+            tags:
+                - BackofficeOperator
+            operationId: BackofficeOperator_GetOperatorAccountSettings
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorAccountSettingsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.GetOperatorAccountSettingsResponse'
+    /v1/backoffice/operator/account-settings/update:
+        post:
+            tags:
+                - BackofficeOperator
+            operationId: BackofficeOperator_UpdateOperatorAccountSettings
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOperatorAccountSettingsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.UpdateOperatorAccountSettingsResponse'
     /v1/backoffice/operator/backoffice-byo-subdomains/add:
         post:
             tags:
@@ -2849,6 +2903,44 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateWalletCurrencyResponse'
+    /v1/backoffice/wallet/currency/config/update:
+        post:
+            tags:
+                - BackofficeWallet
+            description: UpdateOperatorCurrencyConfig updates the config of a operator and its currency
+            operationId: BackofficeWallet_UpdateOperatorCurrencyConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse'
+    /v1/backoffice/wallet/deduction-order/update:
+        post:
+            tags:
+                - BackofficeWallet
+            description: UpdateDeductionOrder updates the deduction order config based on operator context
+            operationId: BackofficeWallet_UpdateDeductionOrder
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateDeductionOrderRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.UpdateDeductionOrderResponse'
     /v1/backoffice/wallet/deposit-reward/config/get:
         post:
             tags:
@@ -2924,6 +3016,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetExchangeRatesResponse'
+    /v1/backoffice/wallet/gamification/get:
+        post:
+            tags:
+                - BackofficeWallet
+            description: GetGamificationCurrencyConfig returns the currency config and the deduction order config based on currency and operator context
+            operationId: BackofficeWallet_GetGamificationCurrencyConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetGamificationCurrencyConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetGamificationCurrencyConfigResponse'
     /v1/backoffice/wallet/get:
         post:
             tags:
@@ -3437,6 +3548,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetBankSchemaResponse'
+    /v1/payment/buycrypto/add:
+        post:
+            tags:
+                - Payment
+            operationId: Payment_BuyCryptoViaFiat
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.BuyCryptoViaFiatRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.BuyCryptoViaFiatResponse'
+    /v1/payment/buycrypto/currency/list:
+        post:
+            tags:
+                - Payment
+            operationId: Payment_BuyCryptoViaFiatCurrentList
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.BuyCryptoViaFiatCurrentListRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.BuyCryptoViaFiatCurrentListResponse'
     /v1/payment/channel/page:
         post:
             tags:
@@ -3982,6 +4129,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalancesResponse'
+    /v1/wallet/bonus-transfer:
+        post:
+            tags:
+                - Wallet
+            description: BonusTransfer is used to transfer from one credit's bonus to generate a new credit's cash
+            operationId: Wallet_BonusTransfer
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.BonusTransferRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.BonusTransferResponse'
     /v1/wallet/currencies/get:
         post:
             tags:
@@ -4045,6 +4211,10 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 reportingCurrency:
                     $ref: '#/components/schemas/api.wallet.service.v1.Currency'
+                subdomain:
+                    type: string
+                backofficeSubdomain:
+                    type: string
         api.backoffice.service.v1.ActiveUsersData_Data:
             type: object
             properties:
@@ -4882,6 +5052,11 @@ components:
                     $ref: '#/components/schemas/api.backoffice.service.v1.GameTransaction_Amount'
                 validBetAmount:
                     type: string
+        api.backoffice.service.v1.GetGamificationCurrencyConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.GetInvoiceDetailRequest:
             type: object
             properties:
@@ -4959,6 +5134,9 @@ components:
                 billingPeriod:
                     type: string
         api.backoffice.service.v1.GetMerchantRequest:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.GetOperatorAccountSettingsRequest:
             type: object
             properties: {}
         api.backoffice.service.v1.GetOperatorAddressRequest:
@@ -6328,6 +6506,68 @@ components:
                 revenueShareOperator:
                     type: string
                 estCosts:
+                    type: string
+                id:
+                    type: string
+        api.backoffice.service.v1.ListBalancesSummaryRequest:
+            type: object
+            properties:
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListBalancesSummaryResponse:
+            type: object
+            properties:
+                balances:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListBalancesSummaryResponse_BalanceSummary'
+                totalCount:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListBalancesSummaryResponse_BalanceSummary:
+            type: object
+            properties:
+                retailerOperatorId:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                companyOperatorId:
+                    type: string
+                companyOperatorName:
+                    type: string
+                deposits:
+                    type: string
+                withdrawals:
+                    type: string
+                balance:
+                    type: string
+                ngr:
+                    type: string
+                gameProviderRs:
+                    type: string
+                thirdPartyFees:
+                    type: string
+                adjustments:
+                    type: string
+                estNetProfit:
+                    type: string
+                revenueShareSystem:
+                    type: string
+                revenueShareOperator:
+                    type: string
+                estNetCosts:
                     type: string
         api.backoffice.service.v1.ListBetsRequest:
             type: object
@@ -8874,6 +9114,8 @@ components:
                     type: string
                 config:
                     type: string
+                minLaunchBalance:
+                    type: string
         api.backoffice.service.v1.OperatorSwapRequest:
             type: object
             properties:
@@ -9230,6 +9472,13 @@ components:
                     type: boolean
                 bankInfo:
                     type: object
+        api.backoffice.service.v1.UpdateDeductionOrderRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                deductionOrder:
+                    $ref: '#/components/schemas/api.wallet.service.v1.DeductionOrder'
         api.backoffice.service.v1.UpdateGameRequest:
             type: object
             properties:
@@ -9240,6 +9489,11 @@ components:
         api.backoffice.service.v1.UpdateGameResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.UpdateOperatorAccountSettingsRequest:
+            type: object
+            properties:
+                accountSettings:
+                    $ref: '#/components/schemas/api.user.service.v1.OperatorAccountSettings'
         api.backoffice.service.v1.UpdateOperatorBalanceRequest:
             type: object
             properties:
@@ -9254,17 +9508,26 @@ components:
             properties:
                 enabled:
                     type: boolean
+        api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                operatorCurrencyConfig:
+                    $ref: '#/components/schemas/api.wallet.service.v1.OperatorCurrencyConfig'
         api.backoffice.service.v1.UpdateOperatorStatusRequest:
             type: object
             properties:
-                targetOperatorId:
-                    type: string
-                targetOperatorType:
-                    type: string
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 action:
                     type: string
+                actionStart:
+                    type: string
+                    format: date-time
+                actionEnd:
+                    type: string
+                    format: date-time
         api.backoffice.service.v1.UpdateOperatorStatusResponse:
             type: object
             properties:
@@ -11293,6 +11556,11 @@ components:
                     type: string
                 systemOperatorName:
                     type: string
+        api.user.service.v1.GetOperatorAccountSettingsResponse:
+            type: object
+            properties:
+                accountSettings:
+                    $ref: '#/components/schemas/api.user.service.v1.OperatorAccountSettings'
         api.user.service.v1.GetUserRequest:
             type: object
             properties:
@@ -11402,6 +11670,71 @@ components:
                     type: string
                     description: The OAuth token received from the provider.
             description: OAuthRequest contains the information needed for OAuth authentication.
+        api.user.service.v1.OperatorAccountGameSettings:
+            type: object
+            properties:
+                noGameWithoutDeposit:
+                    type: boolean
+                minGameKycLevel:
+                    type: integer
+                    format: int32
+        api.user.service.v1.OperatorAccountPasswordSettings:
+            type: object
+            properties:
+                minCharacters:
+                    type: integer
+                    format: int32
+                minUppercaseCharacters:
+                    type: integer
+                    format: int32
+                minLowercaseCharacters:
+                    type: integer
+                    format: int32
+                minSpecialCharacters:
+                    type: integer
+                    format: int32
+                minDigits:
+                    type: integer
+                    format: int32
+        api.user.service.v1.OperatorAccountPaymentSettings:
+            type: object
+            properties:
+                minDepositKycLevel:
+                    type: integer
+                    format: int32
+                minWithdrawKycLevel:
+                    type: integer
+                    format: int32
+        api.user.service.v1.OperatorAccountSecuritySettings:
+            type: object
+            properties:
+                maxConsecutiveFailedLogins:
+                    type: integer
+                    format: int32
+                passwordExpiryDays:
+                    type: integer
+                    format: int32
+                passwordHistoryLimits:
+                    type: integer
+                    format: int32
+        api.user.service.v1.OperatorAccountSettings:
+            type: object
+            properties:
+                passwordSettings:
+                    $ref: '#/components/schemas/api.user.service.v1.OperatorAccountPasswordSettings'
+                securitySettings:
+                    $ref: '#/components/schemas/api.user.service.v1.OperatorAccountSecuritySettings'
+                gameSettings:
+                    $ref: '#/components/schemas/api.user.service.v1.OperatorAccountGameSettings'
+                paymentSettings:
+                    $ref: '#/components/schemas/api.user.service.v1.OperatorAccountPaymentSettings'
+        api.user.service.v1.OperatorConfig:
+            type: object
+            properties:
+                swapFeePercentage:
+                    type: string
+                accountSettings:
+                    $ref: '#/components/schemas/api.user.service.v1.OperatorAccountSettings'
         api.user.service.v1.OperatorDetails:
             type: object
             properties:
@@ -11470,7 +11803,13 @@ components:
                 systemOperatorName:
                     type: string
                 config:
+                    $ref: '#/components/schemas/api.user.service.v1.OperatorConfig'
+                minLaunchBalance:
                     type: string
+                statusLaunchWhitelist:
+                    type: array
+                    items:
+                        type: string
         api.user.service.v1.RefreshTokenRequest:
             type: object
             properties:
@@ -11571,6 +11910,9 @@ components:
                     type: string
                     description: Hash for verifying the authentication data.
             description: TelegramAuthRequest contains the information from Telegram's login widget.
+        api.user.service.v1.UpdateOperatorAccountSettingsResponse:
+            type: object
+            properties: {}
         api.user.service.v1.UserInfo:
             type: object
             properties:
@@ -11941,6 +12283,26 @@ components:
                     type: string
                 updatedAt:
                     type: string
+        api.wallet.service.v1.BonusTransferRequest:
+            type: object
+            properties:
+                creditId:
+                    type: string
+                currency:
+                    type: string
+                transactionType:
+                    type: string
+        api.wallet.service.v1.BonusTransferResponse:
+            type: object
+            properties:
+                transactionId:
+                    type: string
+                transferredAmount:
+                    type: string
+                balanceCash:
+                    type: string
+                balanceBonus:
+                    type: string
         api.wallet.service.v1.Currency:
             type: object
             properties:
@@ -11959,6 +12321,15 @@ components:
                 decimalPlaces:
                     type: integer
                     format: int32
+        api.wallet.service.v1.DeductionOrder:
+            type: object
+            properties:
+                deductionType:
+                    type: string
+                cashRatio:
+                    type: string
+                bonusRatio:
+                    type: string
         api.wallet.service.v1.DeleteDepositRewardSequencesResponse:
             type: object
             properties: {}
@@ -12021,6 +12392,15 @@ components:
                     $ref: '#/components/schemas/api.wallet.service.v1.DepositRewardConfig'
                 customDepositRewardConfig:
                     $ref: '#/components/schemas/api.wallet.service.v1.DepositRewardConfig'
+        api.wallet.service.v1.GetGamificationCurrencyConfigResponse:
+            type: object
+            properties:
+                deductionOrder:
+                    $ref: '#/components/schemas/api.wallet.service.v1.DeductionOrder'
+                operatorCurrencyConfigs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.OperatorCurrencyConfig'
         api.wallet.service.v1.GetOperatorBalanceRequest:
             type: object
             properties:
@@ -12059,6 +12439,10 @@ components:
                 operatorBonus:
                     type: string
                 providerBonus:
+                    type: string
+                withdrawableCash:
+                    type: string
+                transferableBonus:
                     type: string
         api.wallet.service.v1.GetUserDepositRewardSequenceRequest:
             type: object
@@ -12113,6 +12497,10 @@ components:
                     type: string
                 turnoverMultiplier:
                     type: string
+                cashTurnoverThreshold:
+                    type: string
+                bonusTurnoverThreshold:
+                    type: string
         api.wallet.service.v1.GetWalletsResponse_TotalAssets:
             type: object
             properties:
@@ -12163,6 +12551,14 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.GetWalletsResponse_Credit'
+                cashTurnoverThreshold:
+                    type: string
+                bonusTurnoverThreshold:
+                    type: string
+                withdrawableCash:
+                    type: string
+                transferableBonus:
+                    type: string
         api.wallet.service.v1.ListBottomOperatorBalancesResponse:
             type: object
             properties:
@@ -12206,6 +12602,20 @@ components:
                     type: string
                 enabled:
                     type: boolean
+        api.wallet.service.v1.OperatorCurrencyConfig:
+            type: object
+            properties:
+                currency:
+                    type: string
+                cashWithdrawalWageringRequirement:
+                    type: integer
+                    format: int32
+                bonusEnabled:
+                    type: boolean
+                maximumBonusBetLimit:
+                    type: string
+                wageringUnlockPriority:
+                    type: string
         api.wallet.service.v1.RewardSequence:
             type: object
             properties:
@@ -12242,11 +12652,17 @@ components:
                     type: string
                 rewardPercentage:
                     type: string
-                maxBonusAmount:
+                maxRewardAmount:
                     type: string
                 maxWithdrawalAmount:
                     type: string
         api.wallet.service.v1.SetDepositRewardSequencesResponse:
+            type: object
+            properties: {}
+        api.wallet.service.v1.UpdateDeductionOrderResponse:
+            type: object
+            properties: {}
+        api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse:
             type: object
             properties: {}
         google.protobuf.ListValue:
@@ -12296,6 +12712,33 @@ components:
                     type: boolean
                 cardDetail:
                     type: object
+        payment.service.v1.BuyCryptoViaFiatCurrentListRequest:
+            type: object
+            properties: {}
+        payment.service.v1.BuyCryptoViaFiatCurrentListResponse:
+            type: object
+            properties:
+                currencies:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/payment.service.v1.Currency'
+                    description: repeated Crypto cryptos = 1;
+        payment.service.v1.BuyCryptoViaFiatRequest:
+            type: object
+            properties:
+                amount:
+                    type: string
+                fiatCurrency:
+                    type: string
+                payWayCode:
+                    type: string
+                channelId:
+                    type: string
+        payment.service.v1.BuyCryptoViaFiatResponse:
+            type: object
+            properties:
+                payUrl:
+                    type: string
         payment.service.v1.CreatePaymentChannelResponse:
             type: object
             properties:
@@ -12310,6 +12753,23 @@ components:
             properties:
                 paymentMethod:
                     $ref: '#/components/schemas/payment.service.v1.PaymentMethodInfo'
+        payment.service.v1.Currency:
+            type: object
+            properties:
+                currency:
+                    type: string
+                country:
+                    type: string
+                payWayCode:
+                    type: string
+                payWayName:
+                    type: string
+                payMin:
+                    type: number
+                    format: float
+                payMax:
+                    type: number
+                    format: float
         payment.service.v1.DeleteBankCardRequest:
             type: object
             properties:

@@ -1042,3 +1042,207 @@ func IsGetOperatorMinSequencesFailed(err error) bool {
 func ErrorGetOperatorMinSequencesFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_OPERATOR_MIN_SEQUENCES_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsCreateOperatorCurrencyConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREATE_OPERATOR_CURRENCY_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorCreateOperatorCurrencyConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREATE_OPERATOR_CURRENCY_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateOperatorCurrencyConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_OPERATOR_CURRENCY_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateOperatorCurrencyConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_OPERATOR_CURRENCY_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetOperatorDeductionOrderConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorDeductionOrderConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCreateOperatorDeductionOrderConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREATE_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorCreateOperatorDeductionOrderConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREATE_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateOperatorDeductionOrderConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateOperatorDeductionOrderConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListOperatorCurrencyConfigsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_OPERATOR_CURRENCY_CONFIGS_FAILED.String() && e.Code == 500
+}
+
+func ErrorListOperatorCurrencyConfigsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_OPERATOR_CURRENCY_CONFIGS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOperatorDeductionOrderConfigNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_DEDUCTION_ORDER_CONFIG_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorOperatorDeductionOrderConfigNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_DEDUCTION_ORDER_CONFIG_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOperatorCurrencyConfigNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_CURRENCY_CONFIG_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorOperatorCurrencyConfigNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_CURRENCY_CONFIG_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOperatorCurrencyDepositConfigNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_CURRENCY_DEPOSIT_CONFIG_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorOperatorCurrencyDepositConfigNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_CURRENCY_DEPOSIT_CONFIG_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetOperatorCurrencyDepositConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATOR_CURRENCY_DEPOSIT_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorCurrencyDepositConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_CURRENCY_DEPOSIT_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetUserDepositStatsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_USER_DEPOSIT_STATS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetUserDepositStatsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_USER_DEPOSIT_STATS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUserDepositStatsNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_DEPOSIT_STATS_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorUserDepositStatsNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_DEPOSIT_STATS_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidOperatorDeductionOrderConfig(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_OPERATOR_DEDUCTION_ORDER_CONFIG.String() && e.Code == 500
+}
+
+func ErrorInvalidOperatorDeductionOrderConfig(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_OPERATOR_DEDUCTION_ORDER_CONFIG.String(), fmt.Sprintf(format, args...))
+}
+
+func IsBonusTransferFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_BONUS_TRANSFER_FAILED.String() && e.Code == 500
+}
+
+func ErrorBonusTransferFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_BONUS_TRANSFER_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInsufficientBonusBalance(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INSUFFICIENT_BONUS_BALANCE.String() && e.Code == 500
+}
+
+func ErrorInsufficientBonusBalance(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INSUFFICIENT_BONUS_BALANCE.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCreditOwnershipMismatch(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREDIT_OWNERSHIP_MISMATCH.String() && e.Code == 500
+}
+
+func ErrorCreditOwnershipMismatch(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREDIT_OWNERSHIP_MISMATCH.String(), fmt.Sprintf(format, args...))
+}
+
+func IsWithdrawalLimitExceeded(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_WITHDRAWAL_LIMIT_EXCEEDED.String() && e.Code == 500
+}
+
+func ErrorWithdrawalLimitExceeded(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_WITHDRAWAL_LIMIT_EXCEEDED.String(), fmt.Sprintf(format, args...))
+}

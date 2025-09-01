@@ -31,6 +31,76 @@ type OperatorIds struct {
 	OperatorType       string
 }
 
+type OperatorAccountPasswordSettings struct {
+	MinCharacters          int32
+	MinUppercaseCharacters int32
+	MinLowercaseCharacters int32
+	MinSpecialCharacters   int32
+	MinDigits              int32
+}
+
+type OperatorAccountSecuritySettings struct {
+	MaxConsecutiveFailedLogins int32
+	PasswordExpiryDays         int32
+	PasswordHistoryLimits      int32
+}
+
+type OperatorAccountGameSettings struct {
+	NoGameWithoutDeposit bool
+	MinGameKYCLevel      int32
+}
+
+type OperatorAccountPaymentSettings struct {
+	MinDepositKYCLevel  int32
+	MinWithdrawKYCLevel int32
+}
+
+type OperatorAccountSettings struct {
+	PasswordSettings *OperatorAccountPasswordSettings
+	SecuritySettings *OperatorAccountSecuritySettings
+	GameSettings     *OperatorAccountGameSettings
+	PaymentSettings  *OperatorAccountPaymentSettings
+}
+
+type OperatorConfig struct {
+	SwapFeePercentage *string
+	AccountSettings   *OperatorAccountSettings
+}
+
+type OperatorInfo struct {
+	Id                    int64
+	OperatorName          string
+	ParentOperatorId      int64
+	ParentOperatorName    string
+	OperatorType          string
+	ExternalId            string
+	Subdomain             string
+	BackofficeSubdomain   string
+	BackofficeChildDomain string
+	DomainPool            []string
+	Enabled               bool
+	Mode                  string
+	OperatorKey           string
+	ReportingCurrency     string
+	BackofficeTimezone    string
+	SupportedLanguages    []string
+	SupportedCurrencies   []string
+	Status                string
+	IsMaintenance         bool
+	MaintenanceStartTime  int64
+	MaintenanceEndTime    int64
+	OperatorId            int64
+	CompanyOperatorId     int64
+	CompanyOperatorName   string
+	RetailerOperatorId    int64
+	RetailerOperatorName  string
+	SystemOperatorId      int64
+	SystemOperatorName    string
+	Config                *OperatorConfig
+	MinLaunchBalance      string
+	StatusLaunchWhitelist []string
+}
+
 func WithValue[T any](ctx context.Context, key string, value T) context.Context {
 	return context.WithValue(ctx, contextKey(key), value)
 }
@@ -69,6 +139,14 @@ func WithOperatorIds(ctx context.Context, operatorIds OperatorIds) context.Conte
 
 func GetOperatorIds(ctx context.Context) (OperatorIds, bool) {
 	return Value[OperatorIds](ctx, "operatorIds")
+}
+
+func WithOperatorInfo(ctx context.Context, operatorInfo OperatorInfo) context.Context {
+	return WithValue(ctx, "operatorInfo", operatorInfo)
+}
+
+func GetOperatorInfo(ctx context.Context) (OperatorInfo, bool) {
+	return Value[OperatorInfo](ctx, "operatorInfo")
 }
 
 func GetOperatorContext(ctx context.Context) (*common.OperatorContext, bool) {

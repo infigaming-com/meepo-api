@@ -36,6 +36,7 @@ const (
 	BackofficeFinance_GetBalancesSummary_FullMethodName              = "/api.backoffice.service.v1.BackofficeFinance/GetBalancesSummary"
 	BackofficeFinance_ListBillingPeriods_FullMethodName              = "/api.backoffice.service.v1.BackofficeFinance/ListBillingPeriods"
 	BackofficeFinance_ListBalanceMonthlyRevenueShares_FullMethodName = "/api.backoffice.service.v1.BackofficeFinance/ListBalanceMonthlyRevenueShares"
+	BackofficeFinance_ListBalancesSummary_FullMethodName             = "/api.backoffice.service.v1.BackofficeFinance/ListBalancesSummary"
 )
 
 // BackofficeFinanceClient is the client API for BackofficeFinance service.
@@ -59,6 +60,7 @@ type BackofficeFinanceClient interface {
 	GetBalancesSummary(ctx context.Context, in *GetBalancesSummaryRequest, opts ...grpc.CallOption) (*GetBalancesSummaryResponse, error)
 	ListBillingPeriods(ctx context.Context, in *ListBillingPeriodsRequest, opts ...grpc.CallOption) (*ListBillingPeriodsResponse, error)
 	ListBalanceMonthlyRevenueShares(ctx context.Context, in *ListBalanceMonthlyRevenueSharesRequest, opts ...grpc.CallOption) (*ListBalanceMonthlyRevenueSharesResponse, error)
+	ListBalancesSummary(ctx context.Context, in *ListBalancesSummaryRequest, opts ...grpc.CallOption) (*ListBalancesSummaryResponse, error)
 }
 
 type backofficeFinanceClient struct {
@@ -239,6 +241,16 @@ func (c *backofficeFinanceClient) ListBalanceMonthlyRevenueShares(ctx context.Co
 	return out, nil
 }
 
+func (c *backofficeFinanceClient) ListBalancesSummary(ctx context.Context, in *ListBalancesSummaryRequest, opts ...grpc.CallOption) (*ListBalancesSummaryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListBalancesSummaryResponse)
+	err := c.cc.Invoke(ctx, BackofficeFinance_ListBalancesSummary_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeFinanceServer is the server API for BackofficeFinance service.
 // All implementations must embed UnimplementedBackofficeFinanceServer
 // for forward compatibility.
@@ -260,6 +272,7 @@ type BackofficeFinanceServer interface {
 	GetBalancesSummary(context.Context, *GetBalancesSummaryRequest) (*GetBalancesSummaryResponse, error)
 	ListBillingPeriods(context.Context, *ListBillingPeriodsRequest) (*ListBillingPeriodsResponse, error)
 	ListBalanceMonthlyRevenueShares(context.Context, *ListBalanceMonthlyRevenueSharesRequest) (*ListBalanceMonthlyRevenueSharesResponse, error)
+	ListBalancesSummary(context.Context, *ListBalancesSummaryRequest) (*ListBalancesSummaryResponse, error)
 	mustEmbedUnimplementedBackofficeFinanceServer()
 }
 
@@ -320,6 +333,9 @@ func (UnimplementedBackofficeFinanceServer) ListBillingPeriods(context.Context, 
 }
 func (UnimplementedBackofficeFinanceServer) ListBalanceMonthlyRevenueShares(context.Context, *ListBalanceMonthlyRevenueSharesRequest) (*ListBalanceMonthlyRevenueSharesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBalanceMonthlyRevenueShares not implemented")
+}
+func (UnimplementedBackofficeFinanceServer) ListBalancesSummary(context.Context, *ListBalancesSummaryRequest) (*ListBalancesSummaryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBalancesSummary not implemented")
 }
 func (UnimplementedBackofficeFinanceServer) mustEmbedUnimplementedBackofficeFinanceServer() {}
 func (UnimplementedBackofficeFinanceServer) testEmbeddedByValue()                           {}
@@ -648,6 +664,24 @@ func _BackofficeFinance_ListBalanceMonthlyRevenueShares_Handler(srv interface{},
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeFinance_ListBalancesSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBalancesSummaryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeFinanceServer).ListBalancesSummary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeFinance_ListBalancesSummary_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeFinanceServer).ListBalancesSummary(ctx, req.(*ListBalancesSummaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeFinance_ServiceDesc is the grpc.ServiceDesc for BackofficeFinance service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -722,6 +756,10 @@ var BackofficeFinance_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListBalanceMonthlyRevenueShares",
 			Handler:    _BackofficeFinance_ListBalanceMonthlyRevenueShares_Handler,
+		},
+		{
+			MethodName: "ListBalancesSummary",
+			Handler:    _BackofficeFinance_ListBalancesSummary_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

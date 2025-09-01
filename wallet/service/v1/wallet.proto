@@ -134,6 +134,23 @@ service Wallet {
 			body: "*"
 		};
 	}
+
+	// GetOperatorCurrencyConfig returns the currency config and the deduction order config based on currency and operator context
+	rpc GetGamificationCurrencyConfig(GetGamificationCurrencyConfigRequest) returns (GetGamificationCurrencyConfigResponse) {}
+
+	// UpdateGamificationCurrencyConfig updates the config of a operator and its currency
+	rpc UpdateOperatorCurrencyConfig(UpdateOperatorCurrencyConfigRequest) returns (UpdateOperatorCurrencyConfigResponse) {}
+
+	// UpdateDeductionOrder updates the deduction order config based on operator context
+	rpc UpdateDeductionOrder(UpdateDeductionOrderRequest) returns (UpdateDeductionOrderResponse) {}
+
+	// BonusTransfer is used to transfer from one credit's bonus to generate a new credit's cash
+	rpc BonusTransfer(BonusTransferRequest) returns (BonusTransferResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/bonus-transfer"
+			body: "*"
+		};
+	}
 }
 
 message GetUserBalancesRequest {
@@ -146,6 +163,8 @@ message GetUserBalancesResponse {
 		string cash = 2;
 		string operator_bonus = 3;
 		string provider_bonus = 4;
+		string withdrawable_cash = 5;
+		string transferable_bonus = 6;
 	}
 	repeated Balance balances = 1;
 }
@@ -371,11 +390,13 @@ message GetWalletsResponse {
 		string original_cash = 4;
 		string bonus = 5;
 		string original_bonus = 6;
-		string turnover_threshold = 7;
+		string turnover_threshold = 7; // cash turnover threshold + bonus turnover threshold
 		string turnover = 8;
 		string cash_turnover = 9;
 		string bonus_turnover = 10;
 		string turnover_multiplier = 11;
+		string cash_turnover_threshold = 12;
+		string bonus_turnover_threshold = 13;
 	}
 	message Wallet {
 		string currency = 1;
@@ -389,6 +410,10 @@ message GetWalletsResponse {
 		string bonus_turnover = 9;
 		string turnover_multiplier = 10;
 		repeated Credit credits = 11;
+		string cash_turnover_threshold = 12;
+		string bonus_turnover_threshold = 13;
+		string withdrawable_cash = 14;
+		string transferable_bonus = 15;
 	}
 	TotalAssets total_assets = 1;
 	repeated Wallet wallets = 2;
@@ -988,8 +1013,8 @@ message RewardSequence {
 		string min_deposit_amount = 1;
 		string max_deposit_amount = 2;
 		string reward_percentage = 3;
-		string max_bonus_amount = 4;
-		string max_withdrawal_amount = 5;
+		string max_reward_amount = 4;
+		string max_withdrawal_amount = 5; // only available for bonus reward
 	}
 	int32 serial_number = 1;
 	string name = 2;
@@ -1065,4 +1090,59 @@ message GetUserDepositRewardSequenceResponse {
 	int32 daily_reward_count = 3;
 	RewardSequence current_reward_sequence = 4;
 }
+
+message GetGamificationCurrencyConfigRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+}
+
+message DeductionOrder {
+	string deduction_type = 1; // cash_first, bonus_first, mixed
+	optional string cash_ratio = 2;
+	optional string bonus_ratio = 3;
+}
+
+message OperatorCurrencyConfig {
+	string currency = 1;
+	optional int32 cash_withdrawal_wagering_requirement = 2;
+	optional bool bonus_enabled = 3;
+	optional string maximum_bonus_bet_limit = 4;
+	optional string wagering_unlock_priority = 5;
+}
+
+message GetGamificationCurrencyConfigResponse {
+	DeductionOrder deduction_order = 1;
+	repeated OperatorCurrencyConfig operator_currency_configs = 2;
+}
+
+message UpdateOperatorCurrencyConfigRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	OperatorCurrencyConfig operator_currency_config = 3;
+}
+
+message UpdateOperatorCurrencyConfigResponse {}
+
+message UpdateDeductionOrderRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	DeductionOrder deduction_order = 3;
+}
+
+message UpdateDeductionOrderResponse {}
+
+message BonusTransferRequest {
+	int64 credit_id = 1;
+	string currency = 2;
+	string transaction_type = 3;
+}
+
+message BonusTransferResponse {
+	int64 transaction_id = 1;
+	string transferred_amount = 2;
+	string balance_cash = 3;
+	string balance_bonus = 4;
+}
+
+
 
