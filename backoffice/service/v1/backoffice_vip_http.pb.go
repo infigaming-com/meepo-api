@@ -19,136 +19,37 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationBackofficeVipAddVipXpLedger = "/api.backoffice.service.v1.BackofficeVip/AddVipXpLedger"
-const OperationBackofficeVipBatchUpdateVipLevels = "/api.backoffice.service.v1.BackofficeVip/BatchUpdateVipLevels"
 const OperationBackofficeVipCreateVipLevelConfigTemplate = "/api.backoffice.service.v1.BackofficeVip/CreateVipLevelConfigTemplate"
 const OperationBackofficeVipDeleteVipLevelConfigTemplate = "/api.backoffice.service.v1.BackofficeVip/DeleteVipLevelConfigTemplate"
-const OperationBackofficeVipGetVipConfig = "/api.backoffice.service.v1.BackofficeVip/GetVipConfig"
 const OperationBackofficeVipGetVipLevelConfigTemplate = "/api.backoffice.service.v1.BackofficeVip/GetVipLevelConfigTemplate"
-const OperationBackofficeVipGetVipMember = "/api.backoffice.service.v1.BackofficeVip/GetVipMember"
-const OperationBackofficeVipGetVipRewardLedger = "/api.backoffice.service.v1.BackofficeVip/GetVipRewardLedger"
 const OperationBackofficeVipGetVipSetting = "/api.backoffice.service.v1.BackofficeVip/GetVipSetting"
-const OperationBackofficeVipGetVipSettlementState = "/api.backoffice.service.v1.BackofficeVip/GetVipSettlementState"
-const OperationBackofficeVipGetVipStatistics = "/api.backoffice.service.v1.BackofficeVip/GetVipStatistics"
-const OperationBackofficeVipGetVipUserProgress = "/api.backoffice.service.v1.BackofficeVip/GetVipUserProgress"
-const OperationBackofficeVipGetVipXpLedger = "/api.backoffice.service.v1.BackofficeVip/GetVipXpLedger"
-const OperationBackofficeVipIssueVipReward = "/api.backoffice.service.v1.BackofficeVip/IssueVipReward"
 const OperationBackofficeVipListVipLevelConfigTemplates = "/api.backoffice.service.v1.BackofficeVip/ListVipLevelConfigTemplates"
-const OperationBackofficeVipListVipMembers = "/api.backoffice.service.v1.BackofficeVip/ListVipMembers"
-const OperationBackofficeVipListVipRewardLedger = "/api.backoffice.service.v1.BackofficeVip/ListVipRewardLedger"
-const OperationBackofficeVipListVipXpLedger = "/api.backoffice.service.v1.BackofficeVip/ListVipXpLedger"
-const OperationBackofficeVipRecalculateVipLevels = "/api.backoffice.service.v1.BackofficeVip/RecalculateVipLevels"
-const OperationBackofficeVipUpdateVipConfig = "/api.backoffice.service.v1.BackofficeVip/UpdateVipConfig"
 const OperationBackofficeVipUpdateVipLevelConfigTemplate = "/api.backoffice.service.v1.BackofficeVip/UpdateVipLevelConfigTemplate"
-const OperationBackofficeVipUpdateVipMember = "/api.backoffice.service.v1.BackofficeVip/UpdateVipMember"
-const OperationBackofficeVipUpdateVipRewardStatus = "/api.backoffice.service.v1.BackofficeVip/UpdateVipRewardStatus"
 const OperationBackofficeVipUpdateVipSetting = "/api.backoffice.service.v1.BackofficeVip/UpdateVipSetting"
-const OperationBackofficeVipUpdateVipSettlementState = "/api.backoffice.service.v1.BackofficeVip/UpdateVipSettlementState"
 
 type BackofficeVipHTTPServer interface {
-	AddVipXpLedger(context.Context, *AddVipXpLedgerRequest) (*AddVipXpLedgerResponse, error)
-	BatchUpdateVipLevels(context.Context, *BatchUpdateVipLevelsRequest) (*BatchUpdateVipLevelsResponse, error)
 	CreateVipLevelConfigTemplate(context.Context, *CreateVipLevelConfigTemplateRequest) (*CreateVipLevelConfigTemplateResponse, error)
 	DeleteVipLevelConfigTemplate(context.Context, *DeleteVipLevelConfigTemplateRequest) (*DeleteVipLevelConfigTemplateResponse, error)
-	// GetVipConfig VIP配置开关管理
-	GetVipConfig(context.Context, *GetVipConfigRequest) (*GetVipConfigResponse, error)
 	GetVipLevelConfigTemplate(context.Context, *GetVipLevelConfigTemplateRequest) (*GetVipLevelConfigTemplateResponse, error)
-	GetVipMember(context.Context, *GetVipMemberRequest) (*GetVipMemberResponse, error)
-	GetVipRewardLedger(context.Context, *GetVipRewardLedgerRequest) (*GetVipRewardLedgerResponse, error)
 	// GetVipSetting VIP设置管理
 	GetVipSetting(context.Context, *GetVipSettingRequest) (*GetVipSettingResponse, error)
-	GetVipSettlementState(context.Context, *GetVipSettlementStateRequest) (*GetVipSettlementStateResponse, error)
-	GetVipStatistics(context.Context, *GetVipStatisticsRequest) (*GetVipStatisticsResponse, error)
-	GetVipUserProgress(context.Context, *GetVipUserProgressRequest) (*GetVipUserProgressResponse, error)
-	GetVipXpLedger(context.Context, *GetVipXpLedgerRequest) (*GetVipXpLedgerResponse, error)
-	IssueVipReward(context.Context, *IssueVipRewardRequest) (*IssueVipRewardResponse, error)
 	ListVipLevelConfigTemplates(context.Context, *ListVipLevelConfigTemplatesRequest) (*ListVipLevelConfigTemplatesResponse, error)
-	ListVipMembers(context.Context, *ListVipMembersRequest) (*ListVipMembersResponse, error)
-	ListVipRewardLedger(context.Context, *ListVipRewardLedgerRequest) (*ListVipRewardLedgerResponse, error)
-	ListVipXpLedger(context.Context, *ListVipXpLedgerRequest) (*ListVipXpLedgerResponse, error)
-	RecalculateVipLevels(context.Context, *RecalculateVipLevelsRequest) (*RecalculateVipLevelsResponse, error)
-	UpdateVipConfig(context.Context, *UpdateVipConfigRequest) (*UpdateVipConfigResponse, error)
 	UpdateVipLevelConfigTemplate(context.Context, *UpdateVipLevelConfigTemplateRequest) (*UpdateVipLevelConfigTemplateResponse, error)
-	UpdateVipMember(context.Context, *UpdateVipMemberRequest) (*UpdateVipMemberResponse, error)
-	UpdateVipRewardStatus(context.Context, *UpdateVipRewardStatusRequest) (*UpdateVipRewardStatusResponse, error)
 	UpdateVipSetting(context.Context, *UpdateVipSettingRequest) (*UpdateVipSettingResponse, error)
-	UpdateVipSettlementState(context.Context, *UpdateVipSettlementStateRequest) (*UpdateVipSettlementStateResponse, error)
 }
 
 func RegisterBackofficeVipHTTPServer(s *http.Server, srv BackofficeVipHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/backoffice/vip/config/get", _BackofficeVip_GetVipConfig0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/vip/config/update", _BackofficeVip_UpdateVipConfig0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/vip/setting/get", _BackofficeVip_GetVipSetting0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/vip/setting/get", _BackofficeVip_GetVipSetting1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/vip/setting/update", _BackofficeVip_UpdateVipSetting0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/vip/level-config-templates/list", _BackofficeVip_ListVipLevelConfigTemplates0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/vip/level-config-template/get", _BackofficeVip_GetVipLevelConfigTemplate0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/vip/level-config-templates/list", _BackofficeVip_ListVipLevelConfigTemplates1_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/vip/level-config-template/get", _BackofficeVip_GetVipLevelConfigTemplate1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/vip/level-config-template/create", _BackofficeVip_CreateVipLevelConfigTemplate0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/vip/level-config-template/update", _BackofficeVip_UpdateVipLevelConfigTemplate0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/vip/level-config-template/delete", _BackofficeVip_DeleteVipLevelConfigTemplate0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/vip/members/list", _BackofficeVip_ListVipMembers0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/vip/member/get", _BackofficeVip_GetVipMember0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/vip/member/update", _BackofficeVip_UpdateVipMember0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/vip/xp-ledger/list", _BackofficeVip_ListVipXpLedger0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/vip/xp-ledger/get", _BackofficeVip_GetVipXpLedger0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/vip/xp-ledger/add", _BackofficeVip_AddVipXpLedger0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/vip/reward-ledger/list", _BackofficeVip_ListVipRewardLedger0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/vip/reward-ledger/get", _BackofficeVip_GetVipRewardLedger0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/vip/reward/issue", _BackofficeVip_IssueVipReward0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/vip/reward/update-status", _BackofficeVip_UpdateVipRewardStatus0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/vip/settlement-state/get", _BackofficeVip_GetVipSettlementState0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/vip/settlement-state/update", _BackofficeVip_UpdateVipSettlementState0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/vip/statistics/get", _BackofficeVip_GetVipStatistics0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/vip/user-progress/get", _BackofficeVip_GetVipUserProgress0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/vip/levels/batch-update", _BackofficeVip_BatchUpdateVipLevels0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/vip/levels/recalculate", _BackofficeVip_RecalculateVipLevels0_HTTP_Handler(srv))
 }
 
-func _BackofficeVip_GetVipConfig0_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetVipConfigRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeVipGetVipConfig)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetVipConfig(ctx, req.(*GetVipConfigRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*GetVipConfigResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _BackofficeVip_UpdateVipConfig0_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in UpdateVipConfigRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeVipUpdateVipConfig)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.UpdateVipConfig(ctx, req.(*UpdateVipConfigRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*UpdateVipConfigResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _BackofficeVip_GetVipSetting0_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
+func _BackofficeVip_GetVipSetting1_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetVipSettingRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -192,7 +93,7 @@ func _BackofficeVip_UpdateVipSetting0_HTTP_Handler(srv BackofficeVipHTTPServer) 
 	}
 }
 
-func _BackofficeVip_ListVipLevelConfigTemplates0_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
+func _BackofficeVip_ListVipLevelConfigTemplates1_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListVipLevelConfigTemplatesRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -214,7 +115,7 @@ func _BackofficeVip_ListVipLevelConfigTemplates0_HTTP_Handler(srv BackofficeVipH
 	}
 }
 
-func _BackofficeVip_GetVipLevelConfigTemplate0_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
+func _BackofficeVip_GetVipLevelConfigTemplate1_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetVipLevelConfigTemplateRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -302,384 +203,14 @@ func _BackofficeVip_DeleteVipLevelConfigTemplate0_HTTP_Handler(srv BackofficeVip
 	}
 }
 
-func _BackofficeVip_ListVipMembers0_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in ListVipMembersRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeVipListVipMembers)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListVipMembers(ctx, req.(*ListVipMembersRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ListVipMembersResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _BackofficeVip_GetVipMember0_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetVipMemberRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeVipGetVipMember)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetVipMember(ctx, req.(*GetVipMemberRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*GetVipMemberResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _BackofficeVip_UpdateVipMember0_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in UpdateVipMemberRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeVipUpdateVipMember)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.UpdateVipMember(ctx, req.(*UpdateVipMemberRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*UpdateVipMemberResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _BackofficeVip_ListVipXpLedger0_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in ListVipXpLedgerRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeVipListVipXpLedger)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListVipXpLedger(ctx, req.(*ListVipXpLedgerRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ListVipXpLedgerResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _BackofficeVip_GetVipXpLedger0_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetVipXpLedgerRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeVipGetVipXpLedger)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetVipXpLedger(ctx, req.(*GetVipXpLedgerRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*GetVipXpLedgerResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _BackofficeVip_AddVipXpLedger0_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in AddVipXpLedgerRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeVipAddVipXpLedger)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.AddVipXpLedger(ctx, req.(*AddVipXpLedgerRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*AddVipXpLedgerResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _BackofficeVip_ListVipRewardLedger0_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in ListVipRewardLedgerRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeVipListVipRewardLedger)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListVipRewardLedger(ctx, req.(*ListVipRewardLedgerRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ListVipRewardLedgerResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _BackofficeVip_GetVipRewardLedger0_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetVipRewardLedgerRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeVipGetVipRewardLedger)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetVipRewardLedger(ctx, req.(*GetVipRewardLedgerRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*GetVipRewardLedgerResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _BackofficeVip_IssueVipReward0_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in IssueVipRewardRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeVipIssueVipReward)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.IssueVipReward(ctx, req.(*IssueVipRewardRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*IssueVipRewardResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _BackofficeVip_UpdateVipRewardStatus0_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in UpdateVipRewardStatusRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeVipUpdateVipRewardStatus)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.UpdateVipRewardStatus(ctx, req.(*UpdateVipRewardStatusRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*UpdateVipRewardStatusResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _BackofficeVip_GetVipSettlementState0_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetVipSettlementStateRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeVipGetVipSettlementState)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetVipSettlementState(ctx, req.(*GetVipSettlementStateRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*GetVipSettlementStateResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _BackofficeVip_UpdateVipSettlementState0_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in UpdateVipSettlementStateRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeVipUpdateVipSettlementState)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.UpdateVipSettlementState(ctx, req.(*UpdateVipSettlementStateRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*UpdateVipSettlementStateResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _BackofficeVip_GetVipStatistics0_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetVipStatisticsRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeVipGetVipStatistics)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetVipStatistics(ctx, req.(*GetVipStatisticsRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*GetVipStatisticsResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _BackofficeVip_GetVipUserProgress0_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetVipUserProgressRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeVipGetVipUserProgress)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetVipUserProgress(ctx, req.(*GetVipUserProgressRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*GetVipUserProgressResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _BackofficeVip_BatchUpdateVipLevels0_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in BatchUpdateVipLevelsRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeVipBatchUpdateVipLevels)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.BatchUpdateVipLevels(ctx, req.(*BatchUpdateVipLevelsRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*BatchUpdateVipLevelsResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _BackofficeVip_RecalculateVipLevels0_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in RecalculateVipLevelsRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeVipRecalculateVipLevels)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.RecalculateVipLevels(ctx, req.(*RecalculateVipLevelsRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*RecalculateVipLevelsResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
 type BackofficeVipHTTPClient interface {
-	AddVipXpLedger(ctx context.Context, req *AddVipXpLedgerRequest, opts ...http.CallOption) (rsp *AddVipXpLedgerResponse, err error)
-	BatchUpdateVipLevels(ctx context.Context, req *BatchUpdateVipLevelsRequest, opts ...http.CallOption) (rsp *BatchUpdateVipLevelsResponse, err error)
 	CreateVipLevelConfigTemplate(ctx context.Context, req *CreateVipLevelConfigTemplateRequest, opts ...http.CallOption) (rsp *CreateVipLevelConfigTemplateResponse, err error)
 	DeleteVipLevelConfigTemplate(ctx context.Context, req *DeleteVipLevelConfigTemplateRequest, opts ...http.CallOption) (rsp *DeleteVipLevelConfigTemplateResponse, err error)
-	GetVipConfig(ctx context.Context, req *GetVipConfigRequest, opts ...http.CallOption) (rsp *GetVipConfigResponse, err error)
 	GetVipLevelConfigTemplate(ctx context.Context, req *GetVipLevelConfigTemplateRequest, opts ...http.CallOption) (rsp *GetVipLevelConfigTemplateResponse, err error)
-	GetVipMember(ctx context.Context, req *GetVipMemberRequest, opts ...http.CallOption) (rsp *GetVipMemberResponse, err error)
-	GetVipRewardLedger(ctx context.Context, req *GetVipRewardLedgerRequest, opts ...http.CallOption) (rsp *GetVipRewardLedgerResponse, err error)
 	GetVipSetting(ctx context.Context, req *GetVipSettingRequest, opts ...http.CallOption) (rsp *GetVipSettingResponse, err error)
-	GetVipSettlementState(ctx context.Context, req *GetVipSettlementStateRequest, opts ...http.CallOption) (rsp *GetVipSettlementStateResponse, err error)
-	GetVipStatistics(ctx context.Context, req *GetVipStatisticsRequest, opts ...http.CallOption) (rsp *GetVipStatisticsResponse, err error)
-	GetVipUserProgress(ctx context.Context, req *GetVipUserProgressRequest, opts ...http.CallOption) (rsp *GetVipUserProgressResponse, err error)
-	GetVipXpLedger(ctx context.Context, req *GetVipXpLedgerRequest, opts ...http.CallOption) (rsp *GetVipXpLedgerResponse, err error)
-	IssueVipReward(ctx context.Context, req *IssueVipRewardRequest, opts ...http.CallOption) (rsp *IssueVipRewardResponse, err error)
 	ListVipLevelConfigTemplates(ctx context.Context, req *ListVipLevelConfigTemplatesRequest, opts ...http.CallOption) (rsp *ListVipLevelConfigTemplatesResponse, err error)
-	ListVipMembers(ctx context.Context, req *ListVipMembersRequest, opts ...http.CallOption) (rsp *ListVipMembersResponse, err error)
-	ListVipRewardLedger(ctx context.Context, req *ListVipRewardLedgerRequest, opts ...http.CallOption) (rsp *ListVipRewardLedgerResponse, err error)
-	ListVipXpLedger(ctx context.Context, req *ListVipXpLedgerRequest, opts ...http.CallOption) (rsp *ListVipXpLedgerResponse, err error)
-	RecalculateVipLevels(ctx context.Context, req *RecalculateVipLevelsRequest, opts ...http.CallOption) (rsp *RecalculateVipLevelsResponse, err error)
-	UpdateVipConfig(ctx context.Context, req *UpdateVipConfigRequest, opts ...http.CallOption) (rsp *UpdateVipConfigResponse, err error)
 	UpdateVipLevelConfigTemplate(ctx context.Context, req *UpdateVipLevelConfigTemplateRequest, opts ...http.CallOption) (rsp *UpdateVipLevelConfigTemplateResponse, err error)
-	UpdateVipMember(ctx context.Context, req *UpdateVipMemberRequest, opts ...http.CallOption) (rsp *UpdateVipMemberResponse, err error)
-	UpdateVipRewardStatus(ctx context.Context, req *UpdateVipRewardStatusRequest, opts ...http.CallOption) (rsp *UpdateVipRewardStatusResponse, err error)
 	UpdateVipSetting(ctx context.Context, req *UpdateVipSettingRequest, opts ...http.CallOption) (rsp *UpdateVipSettingResponse, err error)
-	UpdateVipSettlementState(ctx context.Context, req *UpdateVipSettlementStateRequest, opts ...http.CallOption) (rsp *UpdateVipSettlementStateResponse, err error)
 }
 
 type BackofficeVipHTTPClientImpl struct {
@@ -688,32 +219,6 @@ type BackofficeVipHTTPClientImpl struct {
 
 func NewBackofficeVipHTTPClient(client *http.Client) BackofficeVipHTTPClient {
 	return &BackofficeVipHTTPClientImpl{client}
-}
-
-func (c *BackofficeVipHTTPClientImpl) AddVipXpLedger(ctx context.Context, in *AddVipXpLedgerRequest, opts ...http.CallOption) (*AddVipXpLedgerResponse, error) {
-	var out AddVipXpLedgerResponse
-	pattern := "/v1/backoffice/vip/xp-ledger/add"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeVipAddVipXpLedger))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficeVipHTTPClientImpl) BatchUpdateVipLevels(ctx context.Context, in *BatchUpdateVipLevelsRequest, opts ...http.CallOption) (*BatchUpdateVipLevelsResponse, error) {
-	var out BatchUpdateVipLevelsResponse
-	pattern := "/v1/backoffice/vip/levels/batch-update"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeVipBatchUpdateVipLevels))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
 }
 
 func (c *BackofficeVipHTTPClientImpl) CreateVipLevelConfigTemplate(ctx context.Context, in *CreateVipLevelConfigTemplateRequest, opts ...http.CallOption) (*CreateVipLevelConfigTemplateResponse, error) {
@@ -742,50 +247,11 @@ func (c *BackofficeVipHTTPClientImpl) DeleteVipLevelConfigTemplate(ctx context.C
 	return &out, nil
 }
 
-func (c *BackofficeVipHTTPClientImpl) GetVipConfig(ctx context.Context, in *GetVipConfigRequest, opts ...http.CallOption) (*GetVipConfigResponse, error) {
-	var out GetVipConfigResponse
-	pattern := "/v1/backoffice/vip/config/get"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeVipGetVipConfig))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
 func (c *BackofficeVipHTTPClientImpl) GetVipLevelConfigTemplate(ctx context.Context, in *GetVipLevelConfigTemplateRequest, opts ...http.CallOption) (*GetVipLevelConfigTemplateResponse, error) {
 	var out GetVipLevelConfigTemplateResponse
 	pattern := "/v1/backoffice/vip/level-config-template/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeVipGetVipLevelConfigTemplate))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficeVipHTTPClientImpl) GetVipMember(ctx context.Context, in *GetVipMemberRequest, opts ...http.CallOption) (*GetVipMemberResponse, error) {
-	var out GetVipMemberResponse
-	pattern := "/v1/backoffice/vip/member/get"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeVipGetVipMember))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficeVipHTTPClientImpl) GetVipRewardLedger(ctx context.Context, in *GetVipRewardLedgerRequest, opts ...http.CallOption) (*GetVipRewardLedgerResponse, error) {
-	var out GetVipRewardLedgerResponse
-	pattern := "/v1/backoffice/vip/reward-ledger/get"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeVipGetVipRewardLedger))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -807,141 +273,11 @@ func (c *BackofficeVipHTTPClientImpl) GetVipSetting(ctx context.Context, in *Get
 	return &out, nil
 }
 
-func (c *BackofficeVipHTTPClientImpl) GetVipSettlementState(ctx context.Context, in *GetVipSettlementStateRequest, opts ...http.CallOption) (*GetVipSettlementStateResponse, error) {
-	var out GetVipSettlementStateResponse
-	pattern := "/v1/backoffice/vip/settlement-state/get"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeVipGetVipSettlementState))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficeVipHTTPClientImpl) GetVipStatistics(ctx context.Context, in *GetVipStatisticsRequest, opts ...http.CallOption) (*GetVipStatisticsResponse, error) {
-	var out GetVipStatisticsResponse
-	pattern := "/v1/backoffice/vip/statistics/get"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeVipGetVipStatistics))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficeVipHTTPClientImpl) GetVipUserProgress(ctx context.Context, in *GetVipUserProgressRequest, opts ...http.CallOption) (*GetVipUserProgressResponse, error) {
-	var out GetVipUserProgressResponse
-	pattern := "/v1/backoffice/vip/user-progress/get"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeVipGetVipUserProgress))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficeVipHTTPClientImpl) GetVipXpLedger(ctx context.Context, in *GetVipXpLedgerRequest, opts ...http.CallOption) (*GetVipXpLedgerResponse, error) {
-	var out GetVipXpLedgerResponse
-	pattern := "/v1/backoffice/vip/xp-ledger/get"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeVipGetVipXpLedger))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficeVipHTTPClientImpl) IssueVipReward(ctx context.Context, in *IssueVipRewardRequest, opts ...http.CallOption) (*IssueVipRewardResponse, error) {
-	var out IssueVipRewardResponse
-	pattern := "/v1/backoffice/vip/reward/issue"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeVipIssueVipReward))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
 func (c *BackofficeVipHTTPClientImpl) ListVipLevelConfigTemplates(ctx context.Context, in *ListVipLevelConfigTemplatesRequest, opts ...http.CallOption) (*ListVipLevelConfigTemplatesResponse, error) {
 	var out ListVipLevelConfigTemplatesResponse
 	pattern := "/v1/backoffice/vip/level-config-templates/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeVipListVipLevelConfigTemplates))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficeVipHTTPClientImpl) ListVipMembers(ctx context.Context, in *ListVipMembersRequest, opts ...http.CallOption) (*ListVipMembersResponse, error) {
-	var out ListVipMembersResponse
-	pattern := "/v1/backoffice/vip/members/list"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeVipListVipMembers))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficeVipHTTPClientImpl) ListVipRewardLedger(ctx context.Context, in *ListVipRewardLedgerRequest, opts ...http.CallOption) (*ListVipRewardLedgerResponse, error) {
-	var out ListVipRewardLedgerResponse
-	pattern := "/v1/backoffice/vip/reward-ledger/list"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeVipListVipRewardLedger))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficeVipHTTPClientImpl) ListVipXpLedger(ctx context.Context, in *ListVipXpLedgerRequest, opts ...http.CallOption) (*ListVipXpLedgerResponse, error) {
-	var out ListVipXpLedgerResponse
-	pattern := "/v1/backoffice/vip/xp-ledger/list"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeVipListVipXpLedger))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficeVipHTTPClientImpl) RecalculateVipLevels(ctx context.Context, in *RecalculateVipLevelsRequest, opts ...http.CallOption) (*RecalculateVipLevelsResponse, error) {
-	var out RecalculateVipLevelsResponse
-	pattern := "/v1/backoffice/vip/levels/recalculate"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeVipRecalculateVipLevels))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficeVipHTTPClientImpl) UpdateVipConfig(ctx context.Context, in *UpdateVipConfigRequest, opts ...http.CallOption) (*UpdateVipConfigResponse, error) {
-	var out UpdateVipConfigResponse
-	pattern := "/v1/backoffice/vip/config/update"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeVipUpdateVipConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -963,50 +299,11 @@ func (c *BackofficeVipHTTPClientImpl) UpdateVipLevelConfigTemplate(ctx context.C
 	return &out, nil
 }
 
-func (c *BackofficeVipHTTPClientImpl) UpdateVipMember(ctx context.Context, in *UpdateVipMemberRequest, opts ...http.CallOption) (*UpdateVipMemberResponse, error) {
-	var out UpdateVipMemberResponse
-	pattern := "/v1/backoffice/vip/member/update"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeVipUpdateVipMember))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficeVipHTTPClientImpl) UpdateVipRewardStatus(ctx context.Context, in *UpdateVipRewardStatusRequest, opts ...http.CallOption) (*UpdateVipRewardStatusResponse, error) {
-	var out UpdateVipRewardStatusResponse
-	pattern := "/v1/backoffice/vip/reward/update-status"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeVipUpdateVipRewardStatus))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
 func (c *BackofficeVipHTTPClientImpl) UpdateVipSetting(ctx context.Context, in *UpdateVipSettingRequest, opts ...http.CallOption) (*UpdateVipSettingResponse, error) {
 	var out UpdateVipSettingResponse
 	pattern := "/v1/backoffice/vip/setting/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeVipUpdateVipSetting))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficeVipHTTPClientImpl) UpdateVipSettlementState(ctx context.Context, in *UpdateVipSettlementStateRequest, opts ...http.CallOption) (*UpdateVipSettlementStateResponse, error) {
-	var out UpdateVipSettlementStateResponse
-	pattern := "/v1/backoffice/vip/settlement-state/update"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeVipUpdateVipSettlementState))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

@@ -2613,43 +2613,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateUserResponse'
-    /v1/backoffice/vip/config/get:
-        post:
-            tags:
-                - BackofficeVip
-            description: VIP配置开关管理
-            operationId: BackofficeVip_GetVipConfig
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetVipConfigRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetVipConfigResponse'
-    /v1/backoffice/vip/config/update:
-        post:
-            tags:
-                - BackofficeVip
-            operationId: BackofficeVip_UpdateVipConfig
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateVipConfigRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateVipConfigResponse'
     /v1/backoffice/vip/level-config-template/create:
         post:
             tags:
@@ -2740,168 +2703,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListVipLevelConfigTemplatesResponse'
-    /v1/backoffice/vip/levels/batch-update:
-        post:
-            tags:
-                - BackofficeVip
-            operationId: BackofficeVip_BatchUpdateVipLevels
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.BatchUpdateVipLevelsRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.BatchUpdateVipLevelsResponse'
-    /v1/backoffice/vip/levels/recalculate:
-        post:
-            tags:
-                - BackofficeVip
-            operationId: BackofficeVip_RecalculateVipLevels
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.RecalculateVipLevelsRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.RecalculateVipLevelsResponse'
-    /v1/backoffice/vip/member/get:
-        post:
-            tags:
-                - BackofficeVip
-            operationId: BackofficeVip_GetVipMember
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetVipMemberRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetVipMemberResponse'
-    /v1/backoffice/vip/member/update:
-        post:
-            tags:
-                - BackofficeVip
-            operationId: BackofficeVip_UpdateVipMember
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateVipMemberRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateVipMemberResponse'
-    /v1/backoffice/vip/members/list:
-        post:
-            tags:
-                - BackofficeVip
-            operationId: BackofficeVip_ListVipMembers
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListVipMembersRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListVipMembersResponse'
-    /v1/backoffice/vip/reward-ledger/get:
-        post:
-            tags:
-                - BackofficeVip
-            operationId: BackofficeVip_GetVipRewardLedger
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetVipRewardLedgerRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetVipRewardLedgerResponse'
-    /v1/backoffice/vip/reward-ledger/list:
-        post:
-            tags:
-                - BackofficeVip
-            operationId: BackofficeVip_ListVipRewardLedger
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListVipRewardLedgerRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListVipRewardLedgerResponse'
-    /v1/backoffice/vip/reward/issue:
-        post:
-            tags:
-                - BackofficeVip
-            operationId: BackofficeVip_IssueVipReward
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.IssueVipRewardRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.IssueVipRewardResponse'
-    /v1/backoffice/vip/reward/update-status:
-        post:
-            tags:
-                - BackofficeVip
-            operationId: BackofficeVip_UpdateVipRewardStatus
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateVipRewardStatusRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateVipRewardStatusResponse'
     /v1/backoffice/vip/setting/get:
         post:
             tags:
@@ -2939,132 +2740,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateVipSettingResponse'
-    /v1/backoffice/vip/settlement-state/get:
-        post:
-            tags:
-                - BackofficeVip
-            operationId: BackofficeVip_GetVipSettlementState
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetVipSettlementStateRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetVipSettlementStateResponse'
-    /v1/backoffice/vip/settlement-state/update:
-        post:
-            tags:
-                - BackofficeVip
-            operationId: BackofficeVip_UpdateVipSettlementState
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateVipSettlementStateRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateVipSettlementStateResponse'
-    /v1/backoffice/vip/statistics/get:
-        post:
-            tags:
-                - BackofficeVip
-            operationId: BackofficeVip_GetVipStatistics
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetVipStatisticsRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetVipStatisticsResponse'
-    /v1/backoffice/vip/user-progress/get:
-        post:
-            tags:
-                - BackofficeVip
-            operationId: BackofficeVip_GetVipUserProgress
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetVipUserProgressRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetVipUserProgressResponse'
-    /v1/backoffice/vip/xp-ledger/add:
-        post:
-            tags:
-                - BackofficeVip
-            operationId: BackofficeVip_AddVipXpLedger
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.AddVipXpLedgerRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.AddVipXpLedgerResponse'
-    /v1/backoffice/vip/xp-ledger/get:
-        post:
-            tags:
-                - BackofficeVip
-            operationId: BackofficeVip_GetVipXpLedger
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetVipXpLedgerRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetVipXpLedgerResponse'
-    /v1/backoffice/vip/xp-ledger/list:
-        post:
-            tags:
-                - BackofficeVip
-            operationId: BackofficeVip_ListVipXpLedger
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListVipXpLedgerRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListVipXpLedgerResponse'
     /v1/backoffice/wallet/balance-transactions/list:
         post:
             tags:
@@ -4162,17 +3837,16 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetUserTagsResponse'
-    /v1/vip/configs/list:
+    /v1/vip/level-config-template/get:
         post:
             tags:
                 - Vip
-            description: VIP配置开关管理
-            operationId: Vip_ListVipConfigs
+            operationId: Vip_GetVipLevelConfigTemplate
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.vip.service.v1.ListVipConfigsRequest'
+                            $ref: '#/components/schemas/api.vip.service.v1.GetVipLevelConfigTemplateRequest'
                 required: true
             responses:
                 "200":
@@ -4180,7 +3854,115 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.vip.service.v1.ListVipConfigsResponse'
+                                $ref: '#/components/schemas/api.vip.service.v1.GetVipLevelConfigTemplateResponse'
+    /v1/vip/level-config-templates/list:
+        post:
+            tags:
+                - Vip
+            operationId: Vip_ListVipLevelConfigTemplates
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.vip.service.v1.ListVipLevelConfigTemplatesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.vip.service.v1.ListVipLevelConfigTemplatesResponse'
+    /v1/vip/reward-slider/update:
+        post:
+            tags:
+                - Vip
+            operationId: Vip_UpdateVipRewardSlider
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.vip.service.v1.UpdateVipRewardSliderRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.vip.service.v1.UpdateVipRewardSliderResponse'
+    /v1/vip/reward/claim:
+        post:
+            tags:
+                - Vip
+            operationId: Vip_ClaimVipReward
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.vip.service.v1.ClaimVipRewardRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.vip.service.v1.ClaimVipRewardResponse'
+    /v1/vip/reward/claimable:
+        post:
+            tags:
+                - Vip
+            operationId: Vip_GetClaimableVipRewards
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.vip.service.v1.GetClaimableVipRewardsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.vip.service.v1.GetClaimableVipRewardsResponse'
+    /v1/vip/setting/get:
+        post:
+            tags:
+                - Vip
+            operationId: Vip_GetVipSetting
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.vip.service.v1.GetVipSettingRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.vip.service.v1.GetVipSettingResponse'
+    /v1/vip/user-level/get:
+        post:
+            tags:
+                - Vip
+            operationId: Vip_GetUserVipLevel
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.vip.service.v1.GetUserVipLevelRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.vip.service.v1.GetUserVipLevelResponse'
     /v1/wallet/balances/list:
         post:
             tags:
@@ -4406,20 +4188,6 @@ components:
             properties:
                 commentId:
                     type: string
-        api.backoffice.service.v1.AddVipXpLedgerRequest:
-            type: object
-            properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                entry:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.VipXpLedger'
-        api.backoffice.service.v1.AddVipXpLedgerResponse:
-            type: object
-            properties:
-                entryId:
-                    type: string
-                success:
-                    type: boolean
         api.backoffice.service.v1.AddWalletCurrencyRequest:
             type: object
             properties:
@@ -4512,23 +4280,6 @@ components:
                 cardId:
                     type: string
                 enabled:
-                    type: boolean
-        api.backoffice.service.v1.BatchUpdateVipLevelsRequest:
-            type: object
-            properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                templates:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.VipLevelConfigTemplate'
-        api.backoffice.service.v1.BatchUpdateVipLevelsResponse:
-            type: object
-            properties:
-                updatedCount:
-                    type: integer
-                    format: int32
-                success:
                     type: boolean
         api.backoffice.service.v1.Bet:
             type: object
@@ -4822,11 +4573,7 @@ components:
                     $ref: '#/components/schemas/api.backoffice.service.v1.VipLevelConfigTemplate'
         api.backoffice.service.v1.CreateVipLevelConfigTemplateResponse:
             type: object
-            properties:
-                templateId:
-                    type: string
-                success:
-                    type: boolean
+            properties: {}
         api.backoffice.service.v1.CreateWithdrawResponse:
             type: object
             properties:
@@ -4899,9 +4646,7 @@ components:
                     type: string
         api.backoffice.service.v1.DeleteVipLevelConfigTemplateResponse:
             type: object
-            properties:
-                success:
-                    type: boolean
+            properties: {}
         api.backoffice.service.v1.GameData_Data:
             type: object
             properties:
@@ -6134,16 +5879,6 @@ components:
                         type: string
                     description: List of active tags associated with the user.
             description: GetUserTagsResponse contains the list of active tags associated with the user.
-        api.backoffice.service.v1.GetVipConfigRequest:
-            type: object
-            properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
-        api.backoffice.service.v1.GetVipConfigResponse:
-            type: object
-            properties:
-                config:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.VipConfig'
         api.backoffice.service.v1.GetVipLevelConfigTemplateRequest:
             type: object
             properties:
@@ -6156,30 +5891,6 @@ components:
             properties:
                 template:
                     $ref: '#/components/schemas/api.backoffice.service.v1.VipLevelConfigTemplate'
-        api.backoffice.service.v1.GetVipMemberRequest:
-            type: object
-            properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                userId:
-                    type: string
-        api.backoffice.service.v1.GetVipMemberResponse:
-            type: object
-            properties:
-                member:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.VipMember'
-        api.backoffice.service.v1.GetVipRewardLedgerRequest:
-            type: object
-            properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                entryId:
-                    type: string
-        api.backoffice.service.v1.GetVipRewardLedgerResponse:
-            type: object
-            properties:
-                entry:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.VipRewardLedger'
         api.backoffice.service.v1.GetVipSettingRequest:
             type: object
             properties:
@@ -6190,54 +5901,6 @@ components:
             properties:
                 setting:
                     $ref: '#/components/schemas/api.backoffice.service.v1.VipSetting'
-        api.backoffice.service.v1.GetVipSettlementStateRequest:
-            type: object
-            properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
-        api.backoffice.service.v1.GetVipSettlementStateResponse:
-            type: object
-            properties:
-                state:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.VipSettlementState'
-        api.backoffice.service.v1.GetVipStatisticsRequest:
-            type: object
-            properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                startTime:
-                    type: string
-                endTime:
-                    type: string
-        api.backoffice.service.v1.GetVipStatisticsResponse:
-            type: object
-            properties:
-                statistics:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.VipStatistics'
-        api.backoffice.service.v1.GetVipUserProgressRequest:
-            type: object
-            properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                userId:
-                    type: string
-        api.backoffice.service.v1.GetVipUserProgressResponse:
-            type: object
-            properties:
-                progress:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.VipUserProgress'
-        api.backoffice.service.v1.GetVipXpLedgerRequest:
-            type: object
-            properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                entryId:
-                    type: string
-        api.backoffice.service.v1.GetVipXpLedgerResponse:
-            type: object
-            properties:
-                entry:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.VipXpLedger'
         api.backoffice.service.v1.GetWalletCreditTransactionsRequest:
             type: object
             properties:
@@ -6363,52 +6026,6 @@ components:
                     type: string
                 withdrawAmountReportingCurrency:
                     type: string
-        api.backoffice.service.v1.IssueVipRewardRequest:
-            type: object
-            properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                userId:
-                    type: string
-                levelId:
-                    type: string
-                rewardType:
-                    enum:
-                        - VIP_REWARD_KIND_UNSPECIFIED
-                        - VIP_REWARD_KIND_UPGRADE_BASE
-                        - VIP_REWARD_KIND_UPGRADE_INCREMENTAL
-                        - VIP_REWARD_KIND_RAKEBACK_INSTANT
-                        - VIP_REWARD_KIND_RAKEBACK_DAILY
-                        - VIP_REWARD_KIND_RAKEBACK_WEEKLY
-                        - VIP_REWARD_KIND_RAKEBACK_MONTHLY
-                    type: string
-                    format: enum
-                payoutType:
-                    enum:
-                        - VIP_PAYOUT_TYPE_UNSPECIFIED
-                        - VIP_PAYOUT_TYPE_CASH
-                        - VIP_PAYOUT_TYPE_BONUS
-                    type: string
-                    format: enum
-                amount:
-                    type: number
-                    format: double
-                currency:
-                    type: string
-                claimAmount:
-                    type: number
-                    format: double
-                claimCurrency:
-                    type: string
-                expireAt:
-                    type: string
-        api.backoffice.service.v1.IssueVipRewardResponse:
-            type: object
-            properties:
-                entryId:
-                    type: string
-                success:
-                    type: boolean
         api.backoffice.service.v1.ListAccountsRequest:
             type: object
             properties:
@@ -8725,135 +8342,6 @@ components:
                 pageSize:
                     type: integer
                     format: int32
-        api.backoffice.service.v1.ListVipMembersRequest:
-            type: object
-            properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
-                search:
-                    type: string
-                currentLevelId:
-                    type: string
-                minXp:
-                    type: number
-                    format: double
-                maxXp:
-                    type: number
-                    format: double
-                userId:
-                    type: string
-        api.backoffice.service.v1.ListVipMembersResponse:
-            type: object
-            properties:
-                members:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.VipMember'
-                total:
-                    type: integer
-                    format: int32
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
-        api.backoffice.service.v1.ListVipRewardLedgerRequest:
-            type: object
-            properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
-                userId:
-                    type: string
-                levelId:
-                    type: string
-                rewardType:
-                    enum:
-                        - VIP_REWARD_KIND_UNSPECIFIED
-                        - VIP_REWARD_KIND_UPGRADE_BASE
-                        - VIP_REWARD_KIND_UPGRADE_INCREMENTAL
-                        - VIP_REWARD_KIND_RAKEBACK_INSTANT
-                        - VIP_REWARD_KIND_RAKEBACK_DAILY
-                        - VIP_REWARD_KIND_RAKEBACK_WEEKLY
-                        - VIP_REWARD_KIND_RAKEBACK_MONTHLY
-                    type: string
-                    format: enum
-                status:
-                    enum:
-                        - VIP_REWARD_STATUS_UNSPECIFIED
-                        - VIP_REWARD_STATUS_PENDING
-                        - VIP_REWARD_STATUS_ISSUED
-                        - VIP_REWARD_STATUS_EXPIRED
-                        - VIP_REWARD_STATUS_REVOKED
-                    type: string
-                    format: enum
-                startTime:
-                    type: string
-                endTime:
-                    type: string
-        api.backoffice.service.v1.ListVipRewardLedgerResponse:
-            type: object
-            properties:
-                entries:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.VipRewardLedger'
-                total:
-                    type: integer
-                    format: int32
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
-        api.backoffice.service.v1.ListVipXpLedgerRequest:
-            type: object
-            properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
-                userId:
-                    type: string
-                sourceType:
-                    type: string
-                startTime:
-                    type: string
-                endTime:
-                    type: string
-        api.backoffice.service.v1.ListVipXpLedgerResponse:
-            type: object
-            properties:
-                entries:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.VipXpLedger'
-                total:
-                    type: integer
-                    format: int32
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
         api.backoffice.service.v1.ListWalletBalanceTransactionsRequest:
             type: object
             properties:
@@ -9456,25 +8944,6 @@ components:
                     items:
                         type: string
                     description: 'action name: read, write, delete, etc.'
-        api.backoffice.service.v1.RecalculateVipLevelsRequest:
-            type: object
-            properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                userIds:
-                    type: array
-                    items:
-                        type: string
-                recalculateAll:
-                    type: boolean
-        api.backoffice.service.v1.RecalculateVipLevelsResponse:
-            type: object
-            properties:
-                recalculatedCount:
-                    type: integer
-                    format: int32
-                success:
-                    type: boolean
         api.backoffice.service.v1.RegisterRequest:
             type: object
             properties:
@@ -9865,18 +9334,6 @@ components:
         api.backoffice.service.v1.UpdateUserResponse:
             type: object
             properties: {}
-        api.backoffice.service.v1.UpdateVipConfigRequest:
-            type: object
-            properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                config:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.VipConfig'
-        api.backoffice.service.v1.UpdateVipConfigResponse:
-            type: object
-            properties:
-                success:
-                    type: boolean
         api.backoffice.service.v1.UpdateVipLevelConfigTemplateRequest:
             type: object
             properties:
@@ -9886,44 +9343,7 @@ components:
                     $ref: '#/components/schemas/api.backoffice.service.v1.VipLevelConfigTemplate'
         api.backoffice.service.v1.UpdateVipLevelConfigTemplateResponse:
             type: object
-            properties:
-                success:
-                    type: boolean
-        api.backoffice.service.v1.UpdateVipMemberRequest:
-            type: object
-            properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                member:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.VipMember'
-        api.backoffice.service.v1.UpdateVipMemberResponse:
-            type: object
-            properties:
-                success:
-                    type: boolean
-        api.backoffice.service.v1.UpdateVipRewardStatusRequest:
-            type: object
-            properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                entryId:
-                    type: string
-                status:
-                    enum:
-                        - VIP_REWARD_STATUS_UNSPECIFIED
-                        - VIP_REWARD_STATUS_PENDING
-                        - VIP_REWARD_STATUS_ISSUED
-                        - VIP_REWARD_STATUS_EXPIRED
-                        - VIP_REWARD_STATUS_REVOKED
-                    type: string
-                    format: enum
-                issueAt:
-                    type: string
-        api.backoffice.service.v1.UpdateVipRewardStatusResponse:
-            type: object
-            properties:
-                success:
-                    type: boolean
+            properties: {}
         api.backoffice.service.v1.UpdateVipSettingRequest:
             type: object
             properties:
@@ -9933,21 +9353,7 @@ components:
                     $ref: '#/components/schemas/api.backoffice.service.v1.VipSetting'
         api.backoffice.service.v1.UpdateVipSettingResponse:
             type: object
-            properties:
-                success:
-                    type: boolean
-        api.backoffice.service.v1.UpdateVipSettlementStateRequest:
-            type: object
-            properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
-                state:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.VipSettlementState'
-        api.backoffice.service.v1.UpdateVipSettlementStateResponse:
-            type: object
-            properties:
-                success:
-                    type: boolean
+            properties: {}
         api.backoffice.service.v1.UpdateWalletCurrencyRequest:
             type: object
             properties:
@@ -10017,31 +9423,6 @@ components:
         api.backoffice.service.v1.VerifyMobileResponse:
             type: object
             properties: {}
-        api.backoffice.service.v1.VipConfig:
-            type: object
-            properties:
-                id:
-                    type: string
-                systemOperatorId:
-                    type: string
-                retailerOperatorId:
-                    type: string
-                companyOperatorId:
-                    type: string
-                operatorId:
-                    type: string
-                enabled:
-                    type: boolean
-                followParentSetting:
-                    type: boolean
-                followParentRewardExpiry:
-                    type: boolean
-                followParentLevelTpl:
-                    type: boolean
-                createdAt:
-                    type: string
-                updatedAt:
-                    type: string
         api.backoffice.service.v1.VipLevelConfigTemplate:
             type: object
             properties:
@@ -10126,137 +9507,6 @@ components:
                 createdAt:
                     type: string
                 updatedAt:
-                    type: string
-        api.backoffice.service.v1.VipLevelStatistics:
-            type: object
-            properties:
-                levelId:
-                    type: string
-                levelName:
-                    type: string
-                memberCount:
-                    type: string
-                avgXp:
-                    type: number
-                    format: double
-                totalRewards:
-                    type: number
-                    format: double
-        api.backoffice.service.v1.VipMember:
-            type: object
-            properties:
-                id:
-                    type: string
-                systemOperatorId:
-                    type: string
-                retailerOperatorId:
-                    type: string
-                companyOperatorId:
-                    type: string
-                operatorId:
-                    type: string
-                userId:
-                    type: string
-                currentLevelId:
-                    type: string
-                currentXp:
-                    type: number
-                    format: double
-                totalXp:
-                    type: number
-                    format: double
-                lastLevelUpAt:
-                    type: string
-                lastInstantUpgradeAt:
-                    type: string
-                createdAt:
-                    type: string
-                updatedAt:
-                    type: string
-                username:
-                    type: string
-                    description: 扩展字段
-                currentLevelName:
-                    type: string
-                nextLevelXp:
-                    type: number
-                    format: double
-                totalDeposit:
-                    type: number
-                    format: double
-                totalWagering:
-                    type: number
-                    format: double
-        api.backoffice.service.v1.VipRewardLedger:
-            type: object
-            properties:
-                id:
-                    type: string
-                systemOperatorId:
-                    type: string
-                retailerOperatorId:
-                    type: string
-                companyOperatorId:
-                    type: string
-                operatorId:
-                    type: string
-                userId:
-                    type: string
-                levelId:
-                    type: string
-                rewardType:
-                    enum:
-                        - VIP_REWARD_KIND_UNSPECIFIED
-                        - VIP_REWARD_KIND_UPGRADE_BASE
-                        - VIP_REWARD_KIND_UPGRADE_INCREMENTAL
-                        - VIP_REWARD_KIND_RAKEBACK_INSTANT
-                        - VIP_REWARD_KIND_RAKEBACK_DAILY
-                        - VIP_REWARD_KIND_RAKEBACK_WEEKLY
-                        - VIP_REWARD_KIND_RAKEBACK_MONTHLY
-                    type: string
-                    format: enum
-                payoutType:
-                    enum:
-                        - VIP_PAYOUT_TYPE_UNSPECIFIED
-                        - VIP_PAYOUT_TYPE_CASH
-                        - VIP_PAYOUT_TYPE_BONUS
-                    type: string
-                    format: enum
-                amount:
-                    type: number
-                    format: double
-                currency:
-                    type: string
-                claimAmount:
-                    type: number
-                    format: double
-                claimCurrency:
-                    type: string
-                status:
-                    enum:
-                        - VIP_REWARD_STATUS_UNSPECIFIED
-                        - VIP_REWARD_STATUS_PENDING
-                        - VIP_REWARD_STATUS_ISSUED
-                        - VIP_REWARD_STATUS_EXPIRED
-                        - VIP_REWARD_STATUS_REVOKED
-                    type: string
-                    format: enum
-                issueAt:
-                    type: string
-                expireAt:
-                    type: string
-                createdAt:
-                    type: string
-                updatedAt:
-                    type: string
-                username:
-                    type: string
-                    description: 扩展字段
-                levelName:
-                    type: string
-                rewardTypeName:
-                    type: string
-                payoutTypeName:
                     type: string
         api.backoffice.service.v1.VipSetting:
             type: object
@@ -10346,123 +9596,6 @@ components:
                 createdAt:
                     type: string
                 updatedAt:
-                    type: string
-        api.backoffice.service.v1.VipSettlementState:
-            type: object
-            properties:
-                id:
-                    type: string
-                systemOperatorId:
-                    type: string
-                retailerOperatorId:
-                    type: string
-                companyOperatorId:
-                    type: string
-                operatorId:
-                    type: string
-                dailyLastRunAt:
-                    type: string
-                weeklyLastRunAt:
-                    type: string
-                monthlyLastRunAt:
-                    type: string
-                createdAt:
-                    type: string
-                updatedAt:
-                    type: string
-        api.backoffice.service.v1.VipStatistics:
-            type: object
-            properties:
-                totalMembers:
-                    type: string
-                activeMembers:
-                    type: string
-                totalXpEarned:
-                    type: number
-                    format: double
-                totalRewardsIssued:
-                    type: number
-                    format: double
-                totalRewardsPending:
-                    type: number
-                    format: double
-                levelStats:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.VipLevelStatistics'
-        api.backoffice.service.v1.VipUserProgress:
-            type: object
-            properties:
-                userId:
-                    type: string
-                username:
-                    type: string
-                currentLevelId:
-                    type: string
-                currentLevelName:
-                    type: string
-                currentXp:
-                    type: number
-                    format: double
-                totalXp:
-                    type: number
-                    format: double
-                nextLevelXp:
-                    type: number
-                    format: double
-                progressPercentage:
-                    type: number
-                    format: double
-                recentXpEntries:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.VipXpLedger'
-                recentRewards:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.VipRewardLedger'
-        api.backoffice.service.v1.VipXpLedger:
-            type: object
-            properties:
-                id:
-                    type: string
-                systemOperatorId:
-                    type: string
-                retailerOperatorId:
-                    type: string
-                companyOperatorId:
-                    type: string
-                operatorId:
-                    type: string
-                userId:
-                    type: string
-                sourceType:
-                    type: string
-                baseAmount:
-                    type: number
-                    format: double
-                currency:
-                    type: string
-                xpEarned:
-                    type: number
-                    format: double
-                appliedRate:
-                    type: number
-                    format: double
-                houseEdgeUsed:
-                    type: number
-                    format: double
-                stdXpMultiplier:
-                    type: number
-                    format: double
-                eventTs:
-                    type: string
-                createdAt:
-                    type: string
-                username:
-                    type: string
-                    description: 扩展字段
-                sourceTypeName:
                     type: string
         api.backoffice.service.v1.WalletCurrency:
             type: object
@@ -12490,21 +11623,126 @@ components:
                     type: string
                     description: role id
             description: UserInfo contains basic user information.
-        api.vip.service.v1.ListVipConfigsRequest:
+        api.vip.service.v1.ClaimVipRewardRequest:
+            type: object
+            properties:
+                rewardKind:
+                    enum:
+                        - VIP_REWARD_KIND_UNSPECIFIED
+                        - VIP_REWARD_KIND_UPGRADE_BASE
+                        - VIP_REWARD_KIND_UPGRADE_INCREMENTAL
+                        - VIP_REWARD_KIND_RAKEBACK_INSTANT
+                        - VIP_REWARD_KIND_RAKEBACK_DAILY
+                        - VIP_REWARD_KIND_RAKEBACK_WEEKLY
+                        - VIP_REWARD_KIND_RAKEBACK_MONTHLY
+                    type: string
+                    format: enum
+                currency:
+                    type: string
+        api.vip.service.v1.ClaimVipRewardResponse:
+            type: object
+            properties: {}
+        api.vip.service.v1.GetClaimableVipRewardsRequest:
+            type: object
+            properties:
+                rewardKind:
+                    enum:
+                        - VIP_REWARD_KIND_UNSPECIFIED
+                        - VIP_REWARD_KIND_UPGRADE_BASE
+                        - VIP_REWARD_KIND_UPGRADE_INCREMENTAL
+                        - VIP_REWARD_KIND_RAKEBACK_INSTANT
+                        - VIP_REWARD_KIND_RAKEBACK_DAILY
+                        - VIP_REWARD_KIND_RAKEBACK_WEEKLY
+                        - VIP_REWARD_KIND_RAKEBACK_MONTHLY
+                    type: string
+                    format: enum
+                currency:
+                    type: string
+        api.vip.service.v1.GetClaimableVipRewardsResponse:
+            type: object
+            properties:
+                claimableAmount:
+                    type: string
+        api.vip.service.v1.GetUserVipLevelRequest:
+            type: object
+            properties: {}
+        api.vip.service.v1.GetUserVipLevelResponse:
+            type: object
+            properties:
+                vipMember:
+                    $ref: '#/components/schemas/api.vip.service.v1.VipMember'
+        api.vip.service.v1.GetVipLevelConfigTemplateRequest:
             type: object
             properties:
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
-        api.vip.service.v1.ListVipConfigsResponse:
+                templateId:
+                    type: string
+        api.vip.service.v1.GetVipLevelConfigTemplateResponse:
             type: object
             properties:
-                configs:
+                template:
+                    $ref: '#/components/schemas/api.vip.service.v1.VipLevelConfigTemplate'
+        api.vip.service.v1.GetVipSettingRequest:
+            type: object
+            properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+        api.vip.service.v1.GetVipSettingResponse:
+            type: object
+            properties:
+                setting:
+                    $ref: '#/components/schemas/api.vip.service.v1.VipSetting'
+        api.vip.service.v1.ListVipLevelConfigTemplatesRequest:
+            type: object
+            properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                search:
+                    type: string
+                startLevel:
+                    type: string
+                endLevel:
+                    type: string
+        api.vip.service.v1.ListVipLevelConfigTemplatesResponse:
+            type: object
+            properties:
+                templates:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.vip.service.v1.VipConfig'
-        api.vip.service.v1.VipConfig:
+                        $ref: '#/components/schemas/api.vip.service.v1.VipLevelConfigTemplate'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.vip.service.v1.UpdateVipRewardSliderRequest:
+            type: object
+            properties:
+                rackback:
+                    type: string
+                lossback:
+                    type: string
+        api.vip.service.v1.UpdateVipRewardSliderResponse:
+            type: object
+            properties: {}
+        api.vip.service.v1.VipLevelConfigTemplate:
             type: object
             properties:
                 id:
@@ -12517,14 +11755,188 @@ components:
                     type: string
                 operatorId:
                     type: string
-                enabled:
+                name:
+                    type: string
+                startLevel:
+                    type: string
+                endLevel:
+                    type: string
+                baseLevelUpgradeXp:
+                    type: number
+                    description: 升级设置
+                    format: double
+                incrLevelUpgradeXp:
+                    type: number
+                    format: double
+                baseUpgradeRewardAmt:
+                    type: number
+                    format: double
+                incrUpgradeRewardAmt:
+                    type: number
+                    format: double
+                upgradeRewardWageringX:
+                    type: number
+                    format: double
+                weeklyXpLoss:
+                    type: number
+                    description: 等级维护要求
+                    format: double
+                monthlyXpLoss:
+                    type: number
+                    format: double
+                rakebackInstantEnabled:
                     type: boolean
-                followParentSetting:
+                    description: 即时返水
+                rakebackInstantRate:
+                    type: number
+                    format: double
+                rakebackInstantReq:
+                    type: number
+                    format: double
+                rakebackDailyEnabled:
                     type: boolean
-                followParentRewardExpiry:
+                    description: 每日返水
+                rakebackDailyRate:
+                    type: number
+                    format: double
+                rakebackDailyReq:
+                    type: number
+                    format: double
+                weeklyRewardEnabled:
                     type: boolean
-                followParentLevelTpl:
+                    description: 每周奖励
+                weeklyFixedRewardAmt:
+                    type: number
+                    format: double
+                weeklyTurnoverRate:
+                    type: number
+                    format: double
+                weeklyNetLossAmt:
+                    type: number
+                    format: double
+                weeklyAdjustRangePct:
+                    type: number
+                    format: double
+                weeklyActiveDaysReward:
+                    type: integer
+                    format: int32
+                weeklyWageringReq:
+                    type: number
+                    format: double
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+        api.vip.service.v1.VipMember:
+            type: object
+            properties:
+                id:
+                    type: string
+                systemOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                operatorId:
+                    type: string
+                userId:
+                    type: string
+                currentLevelId:
+                    type: string
+                currentXp:
+                    type: string
+                totalXp:
+                    type: string
+                lastLevelUpAt:
+                    type: string
+                lastInstantUpgradeAt:
+                    type: string
+        api.vip.service.v1.VipSetting:
+            type: object
+            properties:
+                id:
+                    type: string
+                systemOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                operatorId:
+                    type: string
+                baseCurrency:
+                    type: string
+                displayRule:
+                    enum:
+                        - VIP_DISPLAY_RULE_UNSPECIFIED
+                        - VIP_DISPLAY_RULE_CUMULATIVE
+                        - VIP_DISPLAY_RULE_CURRENT
+                    type: string
+                    format: enum
+                rewardsSlider:
                     type: boolean
+                upgradePayoutType:
+                    enum:
+                        - VIP_PAYOUT_TYPE_UNSPECIFIED
+                        - VIP_PAYOUT_TYPE_CASH
+                        - VIP_PAYOUT_TYPE_BONUS
+                    type: string
+                    format: enum
+                rakebackInstantPayoutType:
+                    enum:
+                        - VIP_PAYOUT_TYPE_UNSPECIFIED
+                        - VIP_PAYOUT_TYPE_CASH
+                        - VIP_PAYOUT_TYPE_BONUS
+                    type: string
+                    format: enum
+                rakebackDailyPayoutType:
+                    enum:
+                        - VIP_PAYOUT_TYPE_UNSPECIFIED
+                        - VIP_PAYOUT_TYPE_CASH
+                        - VIP_PAYOUT_TYPE_BONUS
+                    type: string
+                    format: enum
+                weeklyRewardPayoutType:
+                    enum:
+                        - VIP_PAYOUT_TYPE_UNSPECIFIED
+                        - VIP_PAYOUT_TYPE_CASH
+                        - VIP_PAYOUT_TYPE_BONUS
+                    type: string
+                    format: enum
+                monthlyRewardPayoutType:
+                    enum:
+                        - VIP_PAYOUT_TYPE_UNSPECIFIED
+                        - VIP_PAYOUT_TYPE_CASH
+                        - VIP_PAYOUT_TYPE_BONUS
+                    type: string
+                    format: enum
+                depositXpRate:
+                    type: number
+                    format: double
+                wageringXpRate:
+                    type: number
+                    format: double
+                maxHouseEdgeLimitPercent:
+                    type: number
+                    format: double
+                standardXpMultiplier:
+                    type: number
+                    format: double
+                timezone:
+                    type: string
+                dailyIssueAt:
+                    type: string
+                weeklyIssueDow:
+                    type: integer
+                    format: int32
+                weeklyIssueAt:
+                    type: string
+                monthlyIssueDom:
+                    type: integer
+                    format: int32
+                monthlyIssueAt:
+                    type: string
                 createdAt:
                     type: string
                 updatedAt:
@@ -13877,5 +13289,4 @@ tags:
     - name: User
       description: User service provides authentication and user management functionality.
     - name: Vip
-      description: VIP系统服务 - 实现backoffice的所有VIP接口
     - name: Wallet
