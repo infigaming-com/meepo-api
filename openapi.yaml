@@ -3963,6 +3963,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetUserResponse'
+    /v1/user/operator/account-settings/get:
+        post:
+            tags:
+                - User
+            operationId: User_GetOperatorAccountSettings
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.GetOperatorAccountSettingsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.GetOperatorAccountSettingsResponse'
     /v1/user/tags/get:
         post:
             tags:
@@ -11548,6 +11566,11 @@ components:
                     type: string
                 systemOperatorName:
                     type: string
+        api.user.service.v1.GetOperatorAccountSettingsRequest:
+            type: object
+            properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.user.service.v1.GetOperatorAccountSettingsResponse:
             type: object
             properties:
