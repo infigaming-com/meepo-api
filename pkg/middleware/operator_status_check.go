@@ -3,6 +3,7 @@ package middleware
 import (
 	"context"
 	"slices"
+	"strconv"
 
 	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/go-kratos/kratos/v2/middleware"
@@ -23,9 +24,14 @@ func OperatorStatusCheck() middleware.Middleware {
 				return nil, errors.New(403, "FORBIDDEN", "GetOperatorInfo failed")
 			}
 
+			if operatorInfo.Status == util.OperatorStatusClosed {
+				return nil, errors.New(403, "FORBIDDEN", "website close")
+			}
+
 			if operatorInfo.Status == util.OperatorStatusMaintain && !slices.Contains(operatorInfo.StatusLaunchWhitelist, requestInfo.ClientIP) {
 				return nil, errors.New(403, "FORBIDDEN", "IP is not allow to access").WithMetadata(map[string]string{
-					"status": operatorInfo.Status,
+					"status":  operatorInfo.Status,
+					"endtime": strconv.FormatInt(operatorInfo.ActionEndTime, 10),
 				})
 			}
 			return handler(ctx, req)

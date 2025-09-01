@@ -51,8 +51,8 @@ type OperatorInfo struct {
 	SupportedCurrencies   []string
 	Status                string
 	IsMaintenance         bool
-	MaintenanceStartTime  int64
-	MaintenanceEndTime    int64
+	StatusStartTime       int64
+	StatusEndTime         int64
 	OperatorId            int64
 	CompanyOperatorId     int64
 	CompanyOperatorName   string

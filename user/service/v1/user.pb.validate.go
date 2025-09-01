@@ -11923,11 +11923,9 @@ func (m *OperatorDetails) validate(all bool) error {
 
 	// no validation rules for Status
 
-	// no validation rules for IsMaintenance
+	// no validation rules for StatusStartTime
 
-	// no validation rules for MaintenanceStartTime
-
-	// no validation rules for MaintenanceEndTime
+	// no validation rules for StatusEndTime
 
 	// no validation rules for OperatorId
 

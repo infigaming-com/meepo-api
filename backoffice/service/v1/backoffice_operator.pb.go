@@ -312,9 +312,8 @@ type OperatorDetails struct {
 	SupportedLanguages      []string               `protobuf:"bytes,19,rep,name=supported_languages,json=supportedLanguages,proto3" json:"supported_languages,omitempty"`
 	SupportedCurrencies     []string               `protobuf:"bytes,20,rep,name=supported_currencies,json=supportedCurrencies,proto3" json:"supported_currencies,omitempty"`
 	Status                  string                 `protobuf:"bytes,21,opt,name=status,proto3" json:"status,omitempty"`
-	IsMaintenance           bool                   `protobuf:"varint,22,opt,name=is_maintenance,json=isMaintenance,proto3" json:"is_maintenance,omitempty"`
-	MaintenanceStartTime    int64                  `protobuf:"varint,23,opt,name=maintenance_start_time,json=maintenanceStartTime,proto3" json:"maintenance_start_time,omitempty"`
-	MaintenanceEndTime      int64                  `protobuf:"varint,24,opt,name=maintenance_end_time,json=maintenanceEndTime,proto3" json:"maintenance_end_time,omitempty"`
+	StatusStartTime         int64                  `protobuf:"varint,23,opt,name=status_start_time,json=statusStartTime,proto3" json:"status_start_time,omitempty"`
+	StatusEndTime           int64                  `protobuf:"varint,24,opt,name=status_end_time,json=statusEndTime,proto3" json:"status_end_time,omitempty"`
 	OperatorId              int64                  `protobuf:"varint,25,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`                                // operator id in the operator hierarchy
 	CompanyOperatorId       int64                  `protobuf:"varint,26,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`         // company operator id in the operator hierarchy
 	CompanyOperatorName     string                 `protobuf:"bytes,27,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`    // company operator name in the operator hierarchy, or empty string if not exists
@@ -504,23 +503,16 @@ func (x *OperatorDetails) GetStatus() string {
 	return ""
 }
 
-func (x *OperatorDetails) GetIsMaintenance() bool {
+func (x *OperatorDetails) GetStatusStartTime() int64 {
 	if x != nil {
-		return x.IsMaintenance
-	}
-	return false
-}
-
-func (x *OperatorDetails) GetMaintenanceStartTime() int64 {
-	if x != nil {
-		return x.MaintenanceStartTime
+		return x.StatusStartTime
 	}
 	return 0
 }
 
-func (x *OperatorDetails) GetMaintenanceEndTime() int64 {
+func (x *OperatorDetails) GetStatusEndTime() int64 {
 	if x != nil {
-		return x.MaintenanceEndTime
+		return x.StatusEndTime
 	}
 	return 0
 }
@@ -1996,8 +1988,7 @@ const file_backoffice_service_v1_backoffice_operator_proto_rawDesc = "" +
 	"\tsubdomain\x18\x01 \x01(\tR\tsubdomain\x121\n" +
 	"\x14backoffice_subdomain\x18\x02 \x01(\tR\x13backofficeSubdomain\x120\n" +
 	"\x14operator_admin_email\x18\x03 \x01(\tR\x12operatorAdminEmail\x12\x1a\n" +
-	"\bpassword\x18\x04 \x01(\tR\bpassword\"\xb3\n" +
-	"\n" +
+	"\bpassword\x18\x04 \x01(\tR\bpassword\"\xf8\t\n" +
 	"\x0fOperatorDetails\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12#\n" +
 	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12,\n" +
@@ -2022,10 +2013,9 @@ const file_backoffice_service_v1_backoffice_operator_proto_rawDesc = "" +
 	"\x13backoffice_timezone\x18\x12 \x01(\tR\x12backofficeTimezone\x12/\n" +
 	"\x13supported_languages\x18\x13 \x03(\tR\x12supportedLanguages\x121\n" +
 	"\x14supported_currencies\x18\x14 \x03(\tR\x13supportedCurrencies\x12\x16\n" +
-	"\x06status\x18\x15 \x01(\tR\x06status\x12%\n" +
-	"\x0eis_maintenance\x18\x16 \x01(\bR\risMaintenance\x124\n" +
-	"\x16maintenance_start_time\x18\x17 \x01(\x03R\x14maintenanceStartTime\x120\n" +
-	"\x14maintenance_end_time\x18\x18 \x01(\x03R\x12maintenanceEndTime\x12\x1f\n" +
+	"\x06status\x18\x15 \x01(\tR\x06status\x12*\n" +
+	"\x11status_start_time\x18\x17 \x01(\x03R\x0fstatusStartTime\x12&\n" +
+	"\x0fstatus_end_time\x18\x18 \x01(\x03R\rstatusEndTime\x12\x1f\n" +
 	"\voperator_id\x18\x19 \x01(\x03R\n" +
 	"operatorId\x12.\n" +
 	"\x13company_operator_id\x18\x1a \x01(\x03R\x11companyOperatorId\x122\n" +
