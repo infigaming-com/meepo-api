@@ -262,6 +262,12 @@ service User {
 	// GetOperatorDetailsByUserId returns the operator details which the user belongs to
 	rpc GetOperatorDetailsByUserId(GetOperatorDetailsByUserIdRequest) returns (GetOperatorDetailsByUserIdResponse) {
 	}
+
+	rpc GetOperatorAccountSettings(GetOperatorAccountSettingsRequest) returns (GetOperatorAccountSettingsResponse) {
+	}
+
+	rpc UpdateOperatorAccountSettings(UpdateOperatorAccountSettingsRequest) returns (UpdateOperatorAccountSettingsResponse) {
+	}
 }
 
 // UserInfo contains basic user information.
@@ -594,7 +600,7 @@ message SendEmailVerificationCodeResponse {
 
 message SendPasswordResetCodeRequest {
 	string email = 1;  // User's email address
-	api.common.OperatorContext operator_context = 2;  // Operator context
+	optional api.common.OperatorContext operator_context = 2;  // Operator context
 }
 
 message SendPasswordResetCodeResponse {
@@ -604,7 +610,7 @@ message ResetPasswordWithCodeRequest {
 	string email = 1;           // User's email address
 	string verification_code = 2;  // Verification code received via email
 	string new_password = 3;    // New password
-	api.common.OperatorContext operator_context = 4;  // Operator context
+	optional api.common.OperatorContext operator_context = 4;  // Operator context
 }
 
 message ResetPasswordWithCodeResponse {
@@ -1040,6 +1046,42 @@ message CreateBusinessResponse {
 	int64 business_id = 1;
 }
 
+message OperatorAccountPasswordSettings {
+	int32 min_characters = 1;
+	int32 min_uppercase_characters = 2;
+	int32 min_lowercase_characters = 3;
+	int32 min_special_characters = 4;
+	int32 min_digits = 5;
+}
+
+message OperatorAccountSecuritySettings {
+	int32 max_consecutive_failed_logins = 1;
+	int32 password_expiry_days = 2;
+	int32 password_history_limits = 3;
+}
+
+message OperatorAccountGameSettings {
+	bool no_game_without_deposit = 1;
+	int32 min_game_kyc_level = 2;
+}
+
+message OperatorAccountPaymentSettings {
+	int32 min_deposit_kyc_level = 1;
+	int32 min_withdraw_kyc_level = 2;
+}
+
+message OperatorAccountSettings {
+	OperatorAccountPasswordSettings password_settings = 1;
+	OperatorAccountSecuritySettings security_settings = 2;
+	OperatorAccountGameSettings game_settings = 3;
+	OperatorAccountPaymentSettings payment_settings = 4;
+}
+
+message OperatorConfig {
+	optional string swap_fee_percentage = 1;
+	optional OperatorAccountSettings account_settings = 2;
+}
+
 message OperatorDetails {
 	int64 id = 1; // real operator id
 	string operator_name = 2;
@@ -1076,7 +1118,7 @@ message OperatorDetails {
 	int64 system_operator_id = 28;
 	// system operator name in the operator hierarchy, or empty string if not exists
 	string system_operator_name = 29;
-	string config = 30;
+	OperatorConfig config = 30;
 	string min_launch_balance = 31;
 	repeated string status_launch_whitelist = 32;
 
@@ -1219,4 +1261,20 @@ message GetOperatorDetailsByUserIdRequest {
 
 message GetOperatorDetailsByUserIdResponse {
 	OperatorDetails operator_details = 1;
+}
+
+message GetOperatorAccountSettingsRequest {
+	api.common.OperatorContext operator_context = 1;
+}
+
+message GetOperatorAccountSettingsResponse {
+	OperatorAccountSettings account_settings = 1;
+}
+
+message UpdateOperatorAccountSettingsRequest {
+	api.common.OperatorContext operator_context = 1;
+	OperatorAccountSettings account_settings = 2;
+}
+
+message UpdateOperatorAccountSettingsResponse {
 }

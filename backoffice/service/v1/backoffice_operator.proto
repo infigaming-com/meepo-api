@@ -114,6 +114,20 @@ service BackofficeOperator {
 		};
 	}
 
+	rpc GetOperatorAccountSettings(GetOperatorAccountSettingsRequest) returns (user.service.v1.GetOperatorAccountSettingsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/account-settings/get"
+			body: "*"
+		};
+	}
+
+	rpc UpdateOperatorAccountSettings(UpdateOperatorAccountSettingsRequest) returns (user.service.v1.UpdateOperatorAccountSettingsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/account-settings/update"
+			body: "*"
+		};
+	}
+	
 }
 
 message ListAllOperatorsRequest {
@@ -183,6 +197,7 @@ message OperatorDetails {
 	int64 system_operator_id = 30; // system operator id in the operator hierarchy
 	string system_operator_name = 31; // system operator name in the operator hierarchy, or empty string if not exists
 	string config = 32;
+	string min_launch_balance = 33;
 }
 
 message GetCurrentOperatorDetailsRequest {
@@ -310,4 +325,14 @@ message DeleteOperatorBackofficeByoSubdomainRequest {
 }
 
 message DeleteOperatorBackofficeByoSubdomainResponse {
+}
+
+message GetOperatorAccountSettingsRequest {
+}
+
+message UpdateOperatorAccountSettingsRequest {
+	user.service.v1.OperatorAccountSettings account_settings = 2;
+}
+
+message UpdateOperatorAccountSettingsResponse {
 }

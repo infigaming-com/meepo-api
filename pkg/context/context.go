@@ -31,6 +31,42 @@ type OperatorIds struct {
 	OperatorType       string
 }
 
+type OperatorAccountPasswordSettings struct {
+	MinCharacters          int32
+	MinUppercaseCharacters int32
+	MinLowercaseCharacters int32
+	MinSpecialCharacters   int32
+	MinDigits              int32
+}
+
+type OperatorAccountSecuritySettings struct {
+	MaxConsecutiveFailedLogins int32
+	PasswordExpiryDays         int32
+	PasswordHistoryLimits      int32
+}
+
+type OperatorAccountGameSettings struct {
+	NoGameWithoutDeposit bool
+	MinGameKYCLevel      int32
+}
+
+type OperatorAccountPaymentSettings struct {
+	MinDepositKYCLevel  int32
+	MinWithdrawKYCLevel int32
+}
+
+type OperatorAccountSettings struct {
+	PasswordSettings *OperatorAccountPasswordSettings
+	SecuritySettings *OperatorAccountSecuritySettings
+	GameSettings     *OperatorAccountGameSettings
+	PaymentSettings  *OperatorAccountPaymentSettings
+}
+
+type OperatorConfig struct {
+	SwapFeePercentage *string
+	AccountSettings   *OperatorAccountSettings
+}
+
 type OperatorInfo struct {
 	Id                    int64
 	OperatorName          string
@@ -60,7 +96,7 @@ type OperatorInfo struct {
 	RetailerOperatorName  string
 	SystemOperatorId      int64
 	SystemOperatorName    string
-	Config                string
+	Config                *OperatorConfig
 	MinLaunchBalance      string
 	StatusLaunchWhitelist []string
 }

@@ -144,8 +144,13 @@ service Wallet {
 	// UpdateDeductionOrder updates the deduction order config based on operator context
 	rpc UpdateDeductionOrder(UpdateDeductionOrderRequest) returns (UpdateDeductionOrderResponse) {}
 
-	// BonusTransfer is used to transfer from one credit's bonus to its cash
-	// rpc BonusTransfer(BonusTransferRequest) returns (BonusTransferResponse) {}
+	// BonusTransfer is used to transfer from one credit's bonus to generate a new credit's cash
+	rpc BonusTransfer(BonusTransferRequest) returns (BonusTransferResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/bonus-transfer"
+			body: "*"
+		};
+	}
 }
 
 message GetUserBalancesRequest {
@@ -1126,21 +1131,18 @@ message UpdateDeductionOrderRequest {
 
 message UpdateDeductionOrderResponse {}
 
-// message BonusTransferRequest {
-// 	int64 credit_id = 1;
-// 	int64 user_id = 2;
-// 	api.common.OperatorContext operator_context = 3;
-// 	string currency = 4;
-// 	string transfer_amount = 5;
-// 	string transaction_type = 6;
-// }
+message BonusTransferRequest {
+	int64 credit_id = 1;
+	string currency = 2;
+	string transaction_type = 3;
+}
 
-// message BonusTransferResponse {
-// 	int64 transaction_id = 1;
-// 	string transferred_amount = 2;
-// 	string credit_bonus = 3;
-// 	string credit_cash = 4;
-// }
+message BonusTransferResponse {
+	int64 transaction_id = 1;
+	string transferred_amount = 2;
+	string balance_cash = 3;
+	string balance_bonus = 4;
+}
 
 
 

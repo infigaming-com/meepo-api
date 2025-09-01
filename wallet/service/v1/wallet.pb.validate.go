@@ -13795,6 +13795,224 @@ var _ interface {
 	ErrorName() string
 } = UpdateDeductionOrderResponseValidationError{}
 
+// Validate checks the field values on BonusTransferRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *BonusTransferRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BonusTransferRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// BonusTransferRequestMultiError, or nil if none found.
+func (m *BonusTransferRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BonusTransferRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for CreditId
+
+	// no validation rules for Currency
+
+	// no validation rules for TransactionType
+
+	if len(errors) > 0 {
+		return BonusTransferRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// BonusTransferRequestMultiError is an error wrapping multiple validation
+// errors returned by BonusTransferRequest.ValidateAll() if the designated
+// constraints aren't met.
+type BonusTransferRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BonusTransferRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BonusTransferRequestMultiError) AllErrors() []error { return m }
+
+// BonusTransferRequestValidationError is the validation error returned by
+// BonusTransferRequest.Validate if the designated constraints aren't met.
+type BonusTransferRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BonusTransferRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BonusTransferRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BonusTransferRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BonusTransferRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BonusTransferRequestValidationError) ErrorName() string {
+	return "BonusTransferRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BonusTransferRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBonusTransferRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BonusTransferRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BonusTransferRequestValidationError{}
+
+// Validate checks the field values on BonusTransferResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *BonusTransferResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BonusTransferResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// BonusTransferResponseMultiError, or nil if none found.
+func (m *BonusTransferResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BonusTransferResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TransactionId
+
+	// no validation rules for TransferredAmount
+
+	// no validation rules for BalanceCash
+
+	// no validation rules for BalanceBonus
+
+	if len(errors) > 0 {
+		return BonusTransferResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// BonusTransferResponseMultiError is an error wrapping multiple validation
+// errors returned by BonusTransferResponse.ValidateAll() if the designated
+// constraints aren't met.
+type BonusTransferResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BonusTransferResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BonusTransferResponseMultiError) AllErrors() []error { return m }
+
+// BonusTransferResponseValidationError is the validation error returned by
+// BonusTransferResponse.Validate if the designated constraints aren't met.
+type BonusTransferResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BonusTransferResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BonusTransferResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BonusTransferResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BonusTransferResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BonusTransferResponseValidationError) ErrorName() string {
+	return "BonusTransferResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e BonusTransferResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBonusTransferResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BonusTransferResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BonusTransferResponseValidationError{}
+
 // Validate checks the field values on GetUserBalancesResponse_Balance with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

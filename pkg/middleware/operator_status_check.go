@@ -31,7 +31,7 @@ func OperatorStatusCheck() middleware.Middleware {
 			if operatorInfo.Status == util.OperatorStatusMaintain && !slices.Contains(operatorInfo.StatusLaunchWhitelist, requestInfo.ClientIP) {
 				return nil, errors.New(403, "FORBIDDEN", "IP is not allow to access").WithMetadata(map[string]string{
 					"status":  operatorInfo.Status,
-					"endtime": strconv.FormatInt(operatorInfo.ActionEndTime, 10),
+					"endtime": strconv.FormatInt(operatorInfo.StatusEndTime, 10),
 				})
 			}
 			return handler(ctx, req)
