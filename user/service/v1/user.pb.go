@@ -5396,10 +5396,11 @@ func (x *GetChildOperatorIdsResponse) GetChildOperatorIds() []int64 {
 }
 
 type CheckEmailExistsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
-	OperatorId    int64                  `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	OperatorType  string                 `protobuf:"bytes,3,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"` // "operator", "company", "retailer", "system"
+	state      protoimpl.MessageState `protogen:"open.v1"`
+	Email      string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
+	OperatorId int64                  `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	// "operator", "company", "retailer", "system"
+	OperatorType  string `protobuf:"bytes,3,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -6201,19 +6202,25 @@ type OperatorDetails struct {
 	SupportedLanguages    []string               `protobuf:"bytes,17,rep,name=supported_languages,json=supportedLanguages,proto3" json:"supported_languages,omitempty"`
 	SupportedCurrencies   []string               `protobuf:"bytes,18,rep,name=supported_currencies,json=supportedCurrencies,proto3" json:"supported_currencies,omitempty"`
 	Status                string                 `protobuf:"bytes,19,opt,name=status,proto3" json:"status,omitempty"`
-	IsMaintenance         bool                   `protobuf:"varint,20,opt,name=is_maintenance,json=isMaintenance,proto3" json:"is_maintenance,omitempty"`
-	MaintenanceStartTime  int64                  `protobuf:"varint,21,opt,name=maintenance_start_time,json=maintenanceStartTime,proto3" json:"maintenance_start_time,omitempty"`
-	MaintenanceEndTime    int64                  `protobuf:"varint,22,opt,name=maintenance_end_time,json=maintenanceEndTime,proto3" json:"maintenance_end_time,omitempty"`
-	OperatorId            int64                  `protobuf:"varint,23,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`                                // operator id in the operator hierarchy
-	CompanyOperatorId     int64                  `protobuf:"varint,24,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`         // company operator id in the operator hierarchy
-	CompanyOperatorName   string                 `protobuf:"bytes,25,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`    // company operator name in the operator hierarchy, or empty string if not exists
-	RetailerOperatorId    int64                  `protobuf:"varint,26,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`      // retailer operator id in the operator hierarchy
-	RetailerOperatorName  string                 `protobuf:"bytes,27,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"` // retailer operator name in the operator hierarchy, or empty string if not exists
-	SystemOperatorId      int64                  `protobuf:"varint,28,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`            // system operator id in the operator hierarchy
-	SystemOperatorName    string                 `protobuf:"bytes,29,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`       // system operator name in the operator hierarchy, or empty string if not exists
-	Config                *OperatorConfig        `protobuf:"bytes,30,opt,name=config,proto3" json:"config,omitempty"`
-	MinLaunchBalance      string                 `protobuf:"bytes,31,opt,name=min_launch_balance,json=minLaunchBalance,proto3" json:"min_launch_balance,omitempty"`
-	StatusLaunchWhitelist []string               `protobuf:"bytes,32,rep,name=status_launch_whitelist,json=statusLaunchWhitelist,proto3" json:"status_launch_whitelist,omitempty"`
+	StatusStartTime       int64                  `protobuf:"varint,21,opt,name=status_start_time,json=statusStartTime,proto3" json:"status_start_time,omitempty"`
+	StatusEndTime         int64                  `protobuf:"varint,22,opt,name=status_end_time,json=statusEndTime,proto3" json:"status_end_time,omitempty"`
+	// operator id in the operator hierarchy
+	OperatorId int64 `protobuf:"varint,23,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	// company operator id in the operator hierarchy
+	CompanyOperatorId int64 `protobuf:"varint,24,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	// company operator name in the operator hierarchy, or empty string if not exists
+	CompanyOperatorName string `protobuf:"bytes,25,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	// retailer operator id in the operator hierarchy
+	RetailerOperatorId int64 `protobuf:"varint,26,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	// retailer operator name in the operator hierarchy, or empty string if not exists
+	RetailerOperatorName string `protobuf:"bytes,27,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	// system operator id in the operator hierarchy
+	SystemOperatorId int64 `protobuf:"varint,28,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
+	// system operator name in the operator hierarchy, or empty string if not exists
+	SystemOperatorName    string          `protobuf:"bytes,29,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
+	Config                *OperatorConfig `protobuf:"bytes,30,opt,name=config,proto3" json:"config,omitempty"`
+	MinLaunchBalance      string          `protobuf:"bytes,31,opt,name=min_launch_balance,json=minLaunchBalance,proto3" json:"min_launch_balance,omitempty"`
+	StatusLaunchWhitelist []string        `protobuf:"bytes,32,rep,name=status_launch_whitelist,json=statusLaunchWhitelist,proto3" json:"status_launch_whitelist,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -6381,23 +6388,16 @@ func (x *OperatorDetails) GetStatus() string {
 	return ""
 }
 
-func (x *OperatorDetails) GetIsMaintenance() bool {
+func (x *OperatorDetails) GetStatusStartTime() int64 {
 	if x != nil {
-		return x.IsMaintenance
-	}
-	return false
-}
-
-func (x *OperatorDetails) GetMaintenanceStartTime() int64 {
-	if x != nil {
-		return x.MaintenanceStartTime
+		return x.StatusStartTime
 	}
 	return 0
 }
 
-func (x *OperatorDetails) GetMaintenanceEndTime() int64 {
+func (x *OperatorDetails) GetStatusEndTime() int64 {
 	if x != nil {
-		return x.MaintenanceEndTime
+		return x.StatusEndTime
 	}
 	return 0
 }
@@ -7041,14 +7041,19 @@ func (x *ListBottomOperatorsResponse) GetBottomOperators() []*ListBottomOperator
 }
 
 type UpdateOperatorStatusRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"` // target operator context
-	Action                string                  `protobuf:"bytes,2,opt,name=action,proto3" json:"action,omitempty"`                                                              // action to update the status of target operator  "launch", "manual_suspend", "auto_suspend", "recovery", "auto_close", "manual_request", "approved", "maintain", "pending"
-	ActionStart           *timestamppb.Timestamp  `protobuf:"bytes,3,opt,name=actionStart,proto3" json:"actionStart,omitempty"`                                                    // action start
-	ActionEnd             *timestamppb.Timestamp  `protobuf:"bytes,4,opt,name=actionEnd,proto3" json:"actionEnd,omitempty"`                                                        // action end
-	OperatorContext       *common.OperatorContext `protobuf:"bytes,5,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`                     // operator context of the backoffice operator
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// target operator context
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	// action to update the status of target operator "pending", "live", "suspended", "request_to_close", "closed", "maintain",
+	Action string `protobuf:"bytes,2,opt,name=action,proto3" json:"action,omitempty"`
+	// action start
+	ActionStart *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=actionStart,proto3" json:"actionStart,omitempty"`
+	// action end
+	ActionEnd *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=actionEnd,proto3" json:"actionEnd,omitempty"`
+	// operator context of the backoffice operator
+	OperatorContext *common.OperatorContext `protobuf:"bytes,5,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *UpdateOperatorStatusRequest) Reset() {
@@ -7117,8 +7122,9 @@ func (x *UpdateOperatorStatusRequest) GetOperatorContext() *common.OperatorConte
 }
 
 type UpdateOperatorStatusResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Status        string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"` // status of target operator after update
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// status of target operator after update
+	Status        string `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -7369,8 +7375,9 @@ func (x *ListOperatorsByAdminEmailResponse) GetOperatorDetailsList() []*Operator
 }
 
 type ListOperatorDetailsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	OperatorIds   []int64                `protobuf:"varint,1,rep,packed,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"` // real operator ids list
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// real operator ids list
+	OperatorIds   []int64 `protobuf:"varint,1,rep,packed,name=operator_ids,json=operatorIds,proto3" json:"operator_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -9590,7 +9597,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x13swap_fee_percentage\x18\x01 \x01(\tH\x00R\x11swapFeePercentage\x88\x01\x01\x12\\\n" +
 	"\x10account_settings\x18\x02 \x01(\v2,.api.user.service.v1.OperatorAccountSettingsH\x01R\x0faccountSettings\x88\x01\x01B\x16\n" +
 	"\x14_swap_fee_percentageB\x13\n" +
-	"\x11_account_settings\"\xdb\n" +
+	"\x11_account_settings\"\xa0\n" +
 	"\n" +
 	"\x0fOperatorDetails\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12#\n" +
@@ -9614,10 +9621,9 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x13backoffice_timezone\x18\x10 \x01(\tR\x12backofficeTimezone\x12/\n" +
 	"\x13supported_languages\x18\x11 \x03(\tR\x12supportedLanguages\x121\n" +
 	"\x14supported_currencies\x18\x12 \x03(\tR\x13supportedCurrencies\x12\x16\n" +
-	"\x06status\x18\x13 \x01(\tR\x06status\x12%\n" +
-	"\x0eis_maintenance\x18\x14 \x01(\bR\risMaintenance\x124\n" +
-	"\x16maintenance_start_time\x18\x15 \x01(\x03R\x14maintenanceStartTime\x120\n" +
-	"\x14maintenance_end_time\x18\x16 \x01(\x03R\x12maintenanceEndTime\x12\x1f\n" +
+	"\x06status\x18\x13 \x01(\tR\x06status\x12*\n" +
+	"\x11status_start_time\x18\x15 \x01(\x03R\x0fstatusStartTime\x12&\n" +
+	"\x0fstatus_end_time\x18\x16 \x01(\x03R\rstatusEndTime\x12\x1f\n" +
 	"\voperator_id\x18\x17 \x01(\x03R\n" +
 	"operatorId\x12.\n" +
 	"\x13company_operator_id\x18\x18 \x01(\x03R\x11companyOperatorId\x122\n" +

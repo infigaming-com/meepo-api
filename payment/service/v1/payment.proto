@@ -900,7 +900,6 @@ message GetBankSchemaResponse {
 message Crypto {
   string crypto = 1;
 	string network = 2;
-	// int32 buyEnable = 3;
 }
 
 message Currency {
@@ -910,8 +909,6 @@ message Currency {
   string payWayName = 4;
   float payMin = 5;
   float payMax = 6;
-  // float fixedFee = 7;
-  // float feeRate = 8;
 }
 
 message BuyCryptoViaFiatCurrentListRequest {

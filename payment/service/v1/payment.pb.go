@@ -5066,7 +5066,7 @@ func (x *GetBankSchemaResponse) GetSchema() *structpb.ListValue {
 type Crypto struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Crypto        string                 `protobuf:"bytes,1,opt,name=crypto,proto3" json:"crypto,omitempty"`
-	Network       string                 `protobuf:"bytes,2,opt,name=network,proto3" json:"network,omitempty"` // int32 buyEnable = 3;
+	Network       string                 `protobuf:"bytes,2,opt,name=network,proto3" json:"network,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

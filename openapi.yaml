@@ -9086,11 +9086,9 @@ components:
                         type: string
                 status:
                     type: string
-                isMaintenance:
-                    type: boolean
-                maintenanceStartTime:
+                statusStartTime:
                     type: string
-                maintenanceEndTime:
+                statusEndTime:
                     type: string
                 operatorId:
                     type: string
@@ -11776,26 +11774,31 @@ components:
                         type: string
                 status:
                     type: string
-                isMaintenance:
-                    type: boolean
-                maintenanceStartTime:
+                statusStartTime:
                     type: string
-                maintenanceEndTime:
+                statusEndTime:
                     type: string
                 operatorId:
                     type: string
+                    description: operator id in the operator hierarchy
                 companyOperatorId:
                     type: string
+                    description: company operator id in the operator hierarchy
                 companyOperatorName:
                     type: string
+                    description: company operator name in the operator hierarchy, or empty string if not exists
                 retailerOperatorId:
                     type: string
+                    description: retailer operator id in the operator hierarchy
                 retailerOperatorName:
                     type: string
+                    description: retailer operator name in the operator hierarchy, or empty string if not exists
                 systemOperatorId:
                     type: string
+                    description: system operator id in the operator hierarchy
                 systemOperatorName:
                     type: string
+                    description: system operator name in the operator hierarchy, or empty string if not exists
                 config:
                     $ref: '#/components/schemas/api.user.service.v1.OperatorConfig'
                 minLaunchBalance:

@@ -187,9 +187,8 @@ message OperatorDetails {
 	repeated string supported_languages = 19;
 	repeated string supported_currencies = 20;
 	string status = 21;
-	bool is_maintenance = 22;
-	int64 maintenance_start_time = 23;
-	int64 maintenance_end_time = 24;
+	int64 status_start_time = 23;
+	int64 status_end_time = 24;
 	int64 operator_id = 25; // operator id in the operator hierarchy
 	int64 company_operator_id = 26; // company operator id in the operator hierarchy
 	string company_operator_name = 27; // company operator name in the operator hierarchy, or empty string if not exists

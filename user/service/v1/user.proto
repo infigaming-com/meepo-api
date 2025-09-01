@@ -1006,7 +1006,8 @@ message GetChildOperatorIdsResponse {
 message CheckEmailExistsRequest {
 	string email = 1;
 	int64 operator_id = 2;
-	string operator_type = 3; // "operator", "company", "retailer", "system"
+	// "operator", "company", "retailer", "system"
+	string operator_type = 3;
 }
 
 message CheckEmailExistsResponse {
@@ -1101,16 +1102,22 @@ message OperatorDetails {
 	repeated string supported_languages = 17;
 	repeated string supported_currencies = 18;
 	string status = 19;
-	bool is_maintenance = 20;
-	int64 maintenance_start_time = 21;
-	int64 maintenance_end_time = 22;
-	int64 operator_id = 23; // operator id in the operator hierarchy
-	int64 company_operator_id = 24; // company operator id in the operator hierarchy
-	string company_operator_name = 25; // company operator name in the operator hierarchy, or empty string if not exists
-	int64 retailer_operator_id = 26; // retailer operator id in the operator hierarchy
-	string retailer_operator_name = 27; // retailer operator name in the operator hierarchy, or empty string if not exists
-	int64 system_operator_id = 28; // system operator id in the operator hierarchy
-	string system_operator_name = 29; // system operator name in the operator hierarchy, or empty string if not exists
+	int64 status_start_time = 21;
+	int64 status_end_time = 22;
+	// operator id in the operator hierarchy
+	int64 operator_id = 23;
+	// company operator id in the operator hierarchy
+	int64 company_operator_id = 24;
+	// company operator name in the operator hierarchy, or empty string if not exists
+	string company_operator_name = 25;
+	// retailer operator id in the operator hierarchy
+	int64 retailer_operator_id = 26;
+	// retailer operator name in the operator hierarchy, or empty string if not exists
+	string retailer_operator_name = 27;
+	// system operator id in the operator hierarchy
+	int64 system_operator_id = 28;
+	// system operator name in the operator hierarchy, or empty string if not exists
+	string system_operator_name = 29;
 	OperatorConfig config = 30;
 	string min_launch_balance = 31;
 	repeated string status_launch_whitelist = 32;
@@ -1202,15 +1209,21 @@ message ListBottomOperatorsResponse {
 }
 
 message UpdateOperatorStatusRequest {
-	api.common.OperatorContext target_operator_context = 1; // target operator context
-	string action = 2; // action to update the status of target operator  "launch", "manual_suspend", "auto_suspend", "recovery", "auto_close", "manual_request", "approved", "maintain", "pending"
-	google.protobuf.Timestamp actionStart = 3; // action start
-	google.protobuf.Timestamp actionEnd = 4; // action end
-	api.common.OperatorContext operator_context = 5; // operator context of the backoffice operator
+	// target operator context
+ 	api.common.OperatorContext target_operator_context = 1; 
+	// action to update the status of target operator "pending", "live", "suspended", "request_to_close", "closed", "maintain",
+ 	string action = 2; 
+	// action start
+	google.protobuf.Timestamp actionStart = 3; 
+	// action end
+	google.protobuf.Timestamp actionEnd = 4;
+	// operator context of the backoffice operator
+	api.common.OperatorContext operator_context = 5;
 }
 
 message UpdateOperatorStatusResponse {
-	string status = 1; // status of target operator after update
+	// status of target operator after update
+	string status = 1;
 }
 
 message ListAllUsersRequest {
@@ -1234,7 +1247,8 @@ message ListOperatorsByAdminEmailResponse {
 }
 
 message ListOperatorDetailsRequest {
-	repeated int64 operator_ids = 1; // real operator ids list
+	// real operator ids list
+	repeated int64 operator_ids = 1;
 }
 
 message ListOperatorDetailsResponse {
