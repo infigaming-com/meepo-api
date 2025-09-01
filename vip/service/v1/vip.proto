@@ -205,9 +205,6 @@ message ListVipLevelConfigTemplatesRequest {
   api.common.OperatorContextFilters operator_context_filters = 2;
   int32 page = 3;
   int32 page_size = 4;
-  string search = 5;
-  int64 start_level = 6;
-  int64 end_level = 7;
 }
 
 message ListVipLevelConfigTemplatesResponse {

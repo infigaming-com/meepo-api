@@ -1007,9 +1007,6 @@ type ListVipLevelConfigTemplatesRequest struct {
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	Page                   int32                          `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize               int32                          `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Search                 string                         `protobuf:"bytes,5,opt,name=search,proto3" json:"search,omitempty"`
-	StartLevel             int64                          `protobuf:"varint,6,opt,name=start_level,json=startLevel,proto3" json:"start_level,omitempty"`
-	EndLevel               int64                          `protobuf:"varint,7,opt,name=end_level,json=endLevel,proto3" json:"end_level,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -1068,27 +1065,6 @@ func (x *ListVipLevelConfigTemplatesRequest) GetPage() int32 {
 func (x *ListVipLevelConfigTemplatesRequest) GetPageSize() int32 {
 	if x != nil {
 		return x.PageSize
-	}
-	return 0
-}
-
-func (x *ListVipLevelConfigTemplatesRequest) GetSearch() string {
-	if x != nil {
-		return x.Search
-	}
-	return ""
-}
-
-func (x *ListVipLevelConfigTemplatesRequest) GetStartLevel() int64 {
-	if x != nil {
-		return x.StartLevel
-	}
-	return 0
-}
-
-func (x *ListVipLevelConfigTemplatesRequest) GetEndLevel() int64 {
-	if x != nil {
-		return x.EndLevel
 	}
 	return 0
 }
@@ -2112,16 +2088,12 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x1d \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\x1e \x01(\x03R\tupdatedAt\"\xd1\x02\n" +
+	"updated_at\x18\x1e \x01(\x03R\tupdatedAt\"\xfb\x01\n" +
 	"\"ListVipLevelConfigTemplatesRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
 	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x12\x16\n" +
-	"\x06search\x18\x05 \x01(\tR\x06search\x12\x1f\n" +
-	"\vstart_level\x18\x06 \x01(\x03R\n" +
-	"startLevel\x12\x1b\n" +
-	"\tend_level\x18\a \x01(\x03R\bendLevel\"\xb6\x01\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\xb6\x01\n" +
 	"#ListVipLevelConfigTemplatesResponse\x12H\n" +
 	"\ttemplates\x18\x01 \x03(\v2*.api.vip.service.v1.VipLevelConfigTemplateR\ttemplates\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
