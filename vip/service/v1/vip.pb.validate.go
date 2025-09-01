@@ -1013,12 +1013,6 @@ func (m *ListVipLevelConfigTemplatesRequest) validate(all bool) error {
 
 	// no validation rules for PageSize
 
-	// no validation rules for Search
-
-	// no validation rules for StartLevel
-
-	// no validation rules for EndLevel
-
 	if len(errors) > 0 {
 		return ListVipLevelConfigTemplatesRequestMultiError(errors)
 	}
