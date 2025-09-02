@@ -919,6 +919,22 @@ message BuyCryptoViaFiatCurrentListResponse {
   repeated Currency currencies = 1;
 }
 
+message BuyCryptoViaFiatPriceQueryRequest {
+  string amount = 1;
+  string fiat = 2;
+  string payWayCode = 3;
+  string channel_id = 4;
+}
+
+message BuyCryptoViaFiatPriceQueryResponse {
+  string crypto = 1;
+  string cryptoPrice = 2;
+  string cryptoQuantity = 3;
+  string fiat = 4;
+  string rampFee = 5;
+  string networkFee = 6;
+}
+
 message BuyCryptoViaFiatRequest {
   string amount = 1;
   string fiatCurrency = 2;
@@ -1123,6 +1139,13 @@ service Payment {
   rpc BuyCryptoViaFiatCurrentList(BuyCryptoViaFiatCurrentListRequest) returns (BuyCryptoViaFiatCurrentListResponse) {
     option (google.api.http) = {
       post: "/v1/payment/buycrypto/currency/list"
+      body: "*"
+    };
+  }
+
+  rpc BuyCryptoViaFiatPriceQuery(BuyCryptoViaFiatPriceQueryRequest) returns (BuyCryptoViaFiatPriceQueryResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/buycrypto/price/get"
       body: "*"
     };
   }

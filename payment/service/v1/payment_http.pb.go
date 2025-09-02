@@ -22,6 +22,7 @@ const _ = http.SupportPackageIsVersion1
 const OperationPaymentAddUserBankCard = "/payment.service.v1.Payment/AddUserBankCard"
 const OperationPaymentBuyCryptoViaFiat = "/payment.service.v1.Payment/BuyCryptoViaFiat"
 const OperationPaymentBuyCryptoViaFiatCurrentList = "/payment.service.v1.Payment/BuyCryptoViaFiatCurrentList"
+const OperationPaymentBuyCryptoViaFiatPriceQuery = "/payment.service.v1.Payment/BuyCryptoViaFiatPriceQuery"
 const OperationPaymentDeleteUsesrBankCard = "/payment.service.v1.Payment/DeleteUsesrBankCard"
 const OperationPaymentDepositCallback = "/payment.service.v1.Payment/DepositCallback"
 const OperationPaymentGetAddress = "/payment.service.v1.Payment/GetAddress"
@@ -39,6 +40,7 @@ type PaymentHTTPServer interface {
 	AddUserBankCard(context.Context, *AddBankCardRequest) (*AddBankCardResponse, error)
 	BuyCryptoViaFiat(context.Context, *BuyCryptoViaFiatRequest) (*BuyCryptoViaFiatResponse, error)
 	BuyCryptoViaFiatCurrentList(context.Context, *BuyCryptoViaFiatCurrentListRequest) (*BuyCryptoViaFiatCurrentListResponse, error)
+	BuyCryptoViaFiatPriceQuery(context.Context, *BuyCryptoViaFiatPriceQueryRequest) (*BuyCryptoViaFiatPriceQueryResponse, error)
 	DeleteUsesrBankCard(context.Context, *DeleteBankCardRequest) (*DeleteBankCardResponse, error)
 	// DepositCallback Deposit callback
 	// Handles callbacks from payment gateways for deposit status updates
@@ -94,6 +96,7 @@ func RegisterPaymentHTTPServer(s *http.Server, srv PaymentHTTPServer) {
 	r.POST("/v1/payment/bankcard/delete", _Payment_DeleteUsesrBankCard0_HTTP_Handler(srv))
 	r.POST("/v1/payment/bankinfo/schema/get", _Payment_GetBankSchema0_HTTP_Handler(srv))
 	r.POST("/v1/payment/buycrypto/currency/list", _Payment_BuyCryptoViaFiatCurrentList0_HTTP_Handler(srv))
+	r.POST("/v1/payment/buycrypto/price/get", _Payment_BuyCryptoViaFiatPriceQuery0_HTTP_Handler(srv))
 	r.POST("/v1/payment/buycrypto/add", _Payment_BuyCryptoViaFiat0_HTTP_Handler(srv))
 }
 
@@ -405,6 +408,28 @@ func _Payment_BuyCryptoViaFiatCurrentList0_HTTP_Handler(srv PaymentHTTPServer) f
 	}
 }
 
+func _Payment_BuyCryptoViaFiatPriceQuery0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in BuyCryptoViaFiatPriceQueryRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationPaymentBuyCryptoViaFiatPriceQuery)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.BuyCryptoViaFiatPriceQuery(ctx, req.(*BuyCryptoViaFiatPriceQueryRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*BuyCryptoViaFiatPriceQueryResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _Payment_BuyCryptoViaFiat0_HTTP_Handler(srv PaymentHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in BuyCryptoViaFiatRequest
@@ -431,6 +456,7 @@ type PaymentHTTPClient interface {
 	AddUserBankCard(ctx context.Context, req *AddBankCardRequest, opts ...http.CallOption) (rsp *AddBankCardResponse, err error)
 	BuyCryptoViaFiat(ctx context.Context, req *BuyCryptoViaFiatRequest, opts ...http.CallOption) (rsp *BuyCryptoViaFiatResponse, err error)
 	BuyCryptoViaFiatCurrentList(ctx context.Context, req *BuyCryptoViaFiatCurrentListRequest, opts ...http.CallOption) (rsp *BuyCryptoViaFiatCurrentListResponse, err error)
+	BuyCryptoViaFiatPriceQuery(ctx context.Context, req *BuyCryptoViaFiatPriceQueryRequest, opts ...http.CallOption) (rsp *BuyCryptoViaFiatPriceQueryResponse, err error)
 	DeleteUsesrBankCard(ctx context.Context, req *DeleteBankCardRequest, opts ...http.CallOption) (rsp *DeleteBankCardResponse, err error)
 	DepositCallback(ctx context.Context, req *DepositCallbackRequest, opts ...http.CallOption) (rsp *DepositCallbackResponse, err error)
 	GetAddress(ctx context.Context, req *GetAddressRequest, opts ...http.CallOption) (rsp *GetAddressResponse, err error)
@@ -484,6 +510,19 @@ func (c *PaymentHTTPClientImpl) BuyCryptoViaFiatCurrentList(ctx context.Context,
 	pattern := "/v1/payment/buycrypto/currency/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationPaymentBuyCryptoViaFiatCurrentList))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *PaymentHTTPClientImpl) BuyCryptoViaFiatPriceQuery(ctx context.Context, in *BuyCryptoViaFiatPriceQueryRequest, opts ...http.CallOption) (*BuyCryptoViaFiatPriceQueryResponse, error) {
+	var out BuyCryptoViaFiatPriceQueryResponse
+	pattern := "/v1/payment/buycrypto/price/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationPaymentBuyCryptoViaFiatPriceQuery))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
