@@ -73,6 +73,10 @@ func (m *VipSetting) validate(all bool) error {
 
 	// no validation rules for RewardsSlider
 
+	// no validation rules for FollowParent
+
+	// no validation rules for Enabled
+
 	// no validation rules for UpgradePayoutType
 
 	// no validation rules for RakebackInstantPayoutType
@@ -207,11 +211,11 @@ func (m *GetVipSettingRequest) validate(all bool) error {
 	var errors []error
 
 	if all {
-		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, GetVipSettingRequestValidationError{
-					field:  "OperatorContextFilters",
+					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -219,21 +223,23 @@ func (m *GetVipSettingRequest) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, GetVipSettingRequestValidationError{
-					field:  "OperatorContextFilters",
+					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return GetVipSettingRequestValidationError{
-				field:  "OperatorContextFilters",
+				field:  "TargetOperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
 		}
 	}
+
+	// no validation rules for Currency
 
 	if len(errors) > 0 {
 		return GetVipSettingRequestMultiError(errors)
@@ -338,11 +344,11 @@ func (m *GetVipSettingResponse) validate(all bool) error {
 	var errors []error
 
 	if all {
-		switch v := interface{}(m.GetSetting()).(type) {
+		switch v := interface{}(m.GetDefaultSetting()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, GetVipSettingResponseValidationError{
-					field:  "Setting",
+					field:  "DefaultSetting",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -350,21 +356,112 @@ func (m *GetVipSettingResponse) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, GetVipSettingResponseValidationError{
-					field:  "Setting",
+					field:  "DefaultSetting",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetSetting()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetDefaultSetting()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return GetVipSettingResponseValidationError{
-				field:  "Setting",
+				field:  "DefaultSetting",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
 		}
 	}
+
+	if all {
+		switch v := interface{}(m.GetCustomSetting()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetVipSettingResponseValidationError{
+					field:  "CustomSetting",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetVipSettingResponseValidationError{
+					field:  "CustomSetting",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCustomSetting()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetVipSettingResponseValidationError{
+				field:  "CustomSetting",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for FollowParent
+
+	if all {
+		switch v := interface{}(m.GetCustomOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetVipSettingResponseValidationError{
+					field:  "CustomOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetVipSettingResponseValidationError{
+					field:  "CustomOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCustomOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetVipSettingResponseValidationError{
+				field:  "CustomOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetInheritedOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetVipSettingResponseValidationError{
+					field:  "InheritedOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetVipSettingResponseValidationError{
+					field:  "InheritedOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetInheritedOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetVipSettingResponseValidationError{
+				field:  "InheritedOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for InheritedFromOperatorName
 
 	if len(errors) > 0 {
 		return GetVipSettingResponseMultiError(errors)
@@ -469,11 +566,11 @@ func (m *UpdateVipSettingRequest) validate(all bool) error {
 	var errors []error
 
 	if all {
-		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, UpdateVipSettingRequestValidationError{
-					field:  "OperatorContextFilters",
+					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -481,16 +578,16 @@ func (m *UpdateVipSettingRequest) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, UpdateVipSettingRequestValidationError{
-					field:  "OperatorContextFilters",
+					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return UpdateVipSettingRequestValidationError{
-				field:  "OperatorContextFilters",
+				field:  "TargetOperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -756,6 +853,8 @@ func (m *VipLevelConfigTemplate) validate(all bool) error {
 
 	// no validation rules for UpgradeRewardWageringX
 
+	// no validation rules for XpLossEnabled
+
 	// no validation rules for WeeklyXpLoss
 
 	// no validation rules for MonthlyXpLoss
@@ -894,11 +993,11 @@ func (m *ListVipLevelConfigTemplatesRequest) validate(all bool) error {
 	var errors []error
 
 	if all {
-		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, ListVipLevelConfigTemplatesRequestValidationError{
-					field:  "OperatorContextFilters",
+					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -906,21 +1005,23 @@ func (m *ListVipLevelConfigTemplatesRequest) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, ListVipLevelConfigTemplatesRequestValidationError{
-					field:  "OperatorContextFilters",
+					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return ListVipLevelConfigTemplatesRequestValidationError{
-				field:  "OperatorContextFilters",
+				field:  "TargetOperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
 		}
 	}
+
+	// no validation rules for SettingId
 
 	// no validation rules for Page
 
@@ -1177,11 +1278,11 @@ func (m *GetVipLevelConfigTemplateRequest) validate(all bool) error {
 	var errors []error
 
 	if all {
-		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, GetVipLevelConfigTemplateRequestValidationError{
-					field:  "OperatorContextFilters",
+					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -1189,16 +1290,16 @@ func (m *GetVipLevelConfigTemplateRequest) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, GetVipLevelConfigTemplateRequestValidationError{
-					field:  "OperatorContextFilters",
+					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return GetVipLevelConfigTemplateRequestValidationError{
-				field:  "OperatorContextFilters",
+				field:  "TargetOperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -1447,11 +1548,11 @@ func (m *CreateVipLevelConfigTemplateRequest) validate(all bool) error {
 	var errors []error
 
 	if all {
-		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, CreateVipLevelConfigTemplateRequestValidationError{
-					field:  "OperatorContextFilters",
+					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -1459,16 +1560,16 @@ func (m *CreateVipLevelConfigTemplateRequest) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, CreateVipLevelConfigTemplateRequestValidationError{
-					field:  "OperatorContextFilters",
+					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return CreateVipLevelConfigTemplateRequestValidationError{
-				field:  "OperatorContextFilters",
+				field:  "TargetOperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -1609,6 +1710,35 @@ func (m *CreateVipLevelConfigTemplateResponse) validate(all bool) error {
 
 	var errors []error
 
+	if all {
+		switch v := interface{}(m.GetTemplate()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateVipLevelConfigTemplateResponseValidationError{
+					field:  "Template",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateVipLevelConfigTemplateResponseValidationError{
+					field:  "Template",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTemplate()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateVipLevelConfigTemplateResponseValidationError{
+				field:  "Template",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return CreateVipLevelConfigTemplateResponseMultiError(errors)
 	}
@@ -1715,11 +1845,11 @@ func (m *UpdateVipLevelConfigTemplateRequest) validate(all bool) error {
 	var errors []error
 
 	if all {
-		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, UpdateVipLevelConfigTemplateRequestValidationError{
-					field:  "OperatorContextFilters",
+					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -1727,16 +1857,16 @@ func (m *UpdateVipLevelConfigTemplateRequest) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, UpdateVipLevelConfigTemplateRequestValidationError{
-					field:  "OperatorContextFilters",
+					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return UpdateVipLevelConfigTemplateRequestValidationError{
-				field:  "OperatorContextFilters",
+				field:  "TargetOperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -1983,11 +2113,11 @@ func (m *DeleteVipLevelConfigTemplateRequest) validate(all bool) error {
 	var errors []error
 
 	if all {
-		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, DeleteVipLevelConfigTemplateRequestValidationError{
-					field:  "OperatorContextFilters",
+					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -1995,16 +2125,16 @@ func (m *DeleteVipLevelConfigTemplateRequest) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, DeleteVipLevelConfigTemplateRequestValidationError{
-					field:  "OperatorContextFilters",
+					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return DeleteVipLevelConfigTemplateRequestValidationError{
-				field:  "OperatorContextFilters",
+				field:  "TargetOperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}

@@ -302,23 +302,25 @@ type VipSetting struct {
 	BaseCurrency              string                 `protobuf:"bytes,6,opt,name=base_currency,json=baseCurrency,proto3" json:"base_currency,omitempty"`
 	DisplayRule               VipDisplayRule         `protobuf:"varint,7,opt,name=display_rule,json=displayRule,proto3,enum=api.vip.service.v1.VipDisplayRule" json:"display_rule,omitempty"`
 	RewardsSlider             bool                   `protobuf:"varint,8,opt,name=rewards_slider,json=rewardsSlider,proto3" json:"rewards_slider,omitempty"`
-	UpgradePayoutType         VipPayoutType          `protobuf:"varint,9,opt,name=upgrade_payout_type,json=upgradePayoutType,proto3,enum=api.vip.service.v1.VipPayoutType" json:"upgrade_payout_type,omitempty"`
-	RakebackInstantPayoutType VipPayoutType          `protobuf:"varint,10,opt,name=rakeback_instant_payout_type,json=rakebackInstantPayoutType,proto3,enum=api.vip.service.v1.VipPayoutType" json:"rakeback_instant_payout_type,omitempty"`
-	RakebackDailyPayoutType   VipPayoutType          `protobuf:"varint,11,opt,name=rakeback_daily_payout_type,json=rakebackDailyPayoutType,proto3,enum=api.vip.service.v1.VipPayoutType" json:"rakeback_daily_payout_type,omitempty"`
-	WeeklyRewardPayoutType    VipPayoutType          `protobuf:"varint,12,opt,name=weekly_reward_payout_type,json=weeklyRewardPayoutType,proto3,enum=api.vip.service.v1.VipPayoutType" json:"weekly_reward_payout_type,omitempty"`
-	MonthlyRewardPayoutType   VipPayoutType          `protobuf:"varint,13,opt,name=monthly_reward_payout_type,json=monthlyRewardPayoutType,proto3,enum=api.vip.service.v1.VipPayoutType" json:"monthly_reward_payout_type,omitempty"`
-	DepositXpRate             float64                `protobuf:"fixed64,14,opt,name=deposit_xp_rate,json=depositXpRate,proto3" json:"deposit_xp_rate,omitempty"`
-	WageringXpRate            float64                `protobuf:"fixed64,15,opt,name=wagering_xp_rate,json=wageringXpRate,proto3" json:"wagering_xp_rate,omitempty"`
-	MaxHouseEdgeLimitPercent  float64                `protobuf:"fixed64,16,opt,name=max_house_edge_limit_percent,json=maxHouseEdgeLimitPercent,proto3" json:"max_house_edge_limit_percent,omitempty"`
-	StandardXpMultiplier      float64                `protobuf:"fixed64,17,opt,name=standard_xp_multiplier,json=standardXpMultiplier,proto3" json:"standard_xp_multiplier,omitempty"`
-	Timezone                  string                 `protobuf:"bytes,18,opt,name=timezone,proto3" json:"timezone,omitempty"`
-	DailyIssueAt              string                 `protobuf:"bytes,19,opt,name=daily_issue_at,json=dailyIssueAt,proto3" json:"daily_issue_at,omitempty"`
-	WeeklyIssueDow            int32                  `protobuf:"varint,20,opt,name=weekly_issue_dow,json=weeklyIssueDow,proto3" json:"weekly_issue_dow,omitempty"`
-	WeeklyIssueAt             string                 `protobuf:"bytes,21,opt,name=weekly_issue_at,json=weeklyIssueAt,proto3" json:"weekly_issue_at,omitempty"`
-	MonthlyIssueDom           int32                  `protobuf:"varint,22,opt,name=monthly_issue_dom,json=monthlyIssueDom,proto3" json:"monthly_issue_dom,omitempty"`
-	MonthlyIssueAt            string                 `protobuf:"bytes,23,opt,name=monthly_issue_at,json=monthlyIssueAt,proto3" json:"monthly_issue_at,omitempty"`
-	CreatedAt                 int64                  `protobuf:"varint,24,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt                 int64                  `protobuf:"varint,25,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	FollowParent              bool                   `protobuf:"varint,9,opt,name=follow_parent,json=followParent,proto3" json:"follow_parent,omitempty"`
+	Enabled                   bool                   `protobuf:"varint,10,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	UpgradePayoutType         VipPayoutType          `protobuf:"varint,11,opt,name=upgrade_payout_type,json=upgradePayoutType,proto3,enum=api.vip.service.v1.VipPayoutType" json:"upgrade_payout_type,omitempty"`
+	RakebackInstantPayoutType VipPayoutType          `protobuf:"varint,12,opt,name=rakeback_instant_payout_type,json=rakebackInstantPayoutType,proto3,enum=api.vip.service.v1.VipPayoutType" json:"rakeback_instant_payout_type,omitempty"`
+	RakebackDailyPayoutType   VipPayoutType          `protobuf:"varint,13,opt,name=rakeback_daily_payout_type,json=rakebackDailyPayoutType,proto3,enum=api.vip.service.v1.VipPayoutType" json:"rakeback_daily_payout_type,omitempty"`
+	WeeklyRewardPayoutType    VipPayoutType          `protobuf:"varint,14,opt,name=weekly_reward_payout_type,json=weeklyRewardPayoutType,proto3,enum=api.vip.service.v1.VipPayoutType" json:"weekly_reward_payout_type,omitempty"`
+	MonthlyRewardPayoutType   VipPayoutType          `protobuf:"varint,15,opt,name=monthly_reward_payout_type,json=monthlyRewardPayoutType,proto3,enum=api.vip.service.v1.VipPayoutType" json:"monthly_reward_payout_type,omitempty"`
+	DepositXpRate             float64                `protobuf:"fixed64,16,opt,name=deposit_xp_rate,json=depositXpRate,proto3" json:"deposit_xp_rate,omitempty"`
+	WageringXpRate            float64                `protobuf:"fixed64,17,opt,name=wagering_xp_rate,json=wageringXpRate,proto3" json:"wagering_xp_rate,omitempty"`
+	MaxHouseEdgeLimitPercent  float64                `protobuf:"fixed64,18,opt,name=max_house_edge_limit_percent,json=maxHouseEdgeLimitPercent,proto3" json:"max_house_edge_limit_percent,omitempty"`
+	StandardXpMultiplier      float64                `protobuf:"fixed64,19,opt,name=standard_xp_multiplier,json=standardXpMultiplier,proto3" json:"standard_xp_multiplier,omitempty"`
+	Timezone                  string                 `protobuf:"bytes,20,opt,name=timezone,proto3" json:"timezone,omitempty"`
+	DailyIssueAt              string                 `protobuf:"bytes,21,opt,name=daily_issue_at,json=dailyIssueAt,proto3" json:"daily_issue_at,omitempty"`
+	WeeklyIssueDow            int32                  `protobuf:"varint,22,opt,name=weekly_issue_dow,json=weeklyIssueDow,proto3" json:"weekly_issue_dow,omitempty"`
+	WeeklyIssueAt             string                 `protobuf:"bytes,23,opt,name=weekly_issue_at,json=weeklyIssueAt,proto3" json:"weekly_issue_at,omitempty"`
+	MonthlyIssueDom           int32                  `protobuf:"varint,24,opt,name=monthly_issue_dom,json=monthlyIssueDom,proto3" json:"monthly_issue_dom,omitempty"`
+	MonthlyIssueAt            string                 `protobuf:"bytes,25,opt,name=monthly_issue_at,json=monthlyIssueAt,proto3" json:"monthly_issue_at,omitempty"`
+	CreatedAt                 int64                  `protobuf:"varint,26,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt                 int64                  `protobuf:"varint,27,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
 }
@@ -405,6 +407,20 @@ func (x *VipSetting) GetDisplayRule() VipDisplayRule {
 func (x *VipSetting) GetRewardsSlider() bool {
 	if x != nil {
 		return x.RewardsSlider
+	}
+	return false
+}
+
+func (x *VipSetting) GetFollowParent() bool {
+	if x != nil {
+		return x.FollowParent
+	}
+	return false
+}
+
+func (x *VipSetting) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
 	}
 	return false
 }
@@ -529,11 +545,11 @@ func (x *VipSetting) GetUpdatedAt() int64 {
 }
 
 type GetVipSettingRequest struct {
-	state                  protoimpl.MessageState         `protogen:"open.v1"`
-	OperatorContext        *common.OperatorContext        `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Currency              string                  `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *GetVipSettingRequest) Reset() {
@@ -566,25 +582,30 @@ func (*GetVipSettingRequest) Descriptor() ([]byte, []int) {
 	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *GetVipSettingRequest) GetOperatorContext() *common.OperatorContext {
+func (x *GetVipSettingRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.OperatorContext
+		return x.TargetOperatorContext
 	}
 	return nil
 }
 
-func (x *GetVipSettingRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+func (x *GetVipSettingRequest) GetCurrency() string {
 	if x != nil {
-		return x.OperatorContextFilters
+		return x.Currency
 	}
-	return nil
+	return ""
 }
 
 type GetVipSettingResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Setting       *VipSetting            `protobuf:"bytes,1,opt,name=setting,proto3" json:"setting,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                     protoimpl.MessageState  `protogen:"open.v1"`
+	DefaultSetting            *VipSetting             `protobuf:"bytes,1,opt,name=default_setting,json=defaultSetting,proto3" json:"default_setting,omitempty"`
+	CustomSetting             *VipSetting             `protobuf:"bytes,2,opt,name=custom_setting,json=customSetting,proto3" json:"custom_setting,omitempty"`
+	FollowParent              bool                    `protobuf:"varint,3,opt,name=follow_parent,json=followParent,proto3" json:"follow_parent,omitempty"`
+	CustomOperatorContext     *common.OperatorContext `protobuf:"bytes,4,opt,name=custom_operator_context,json=customOperatorContext,proto3" json:"custom_operator_context,omitempty"`
+	InheritedOperatorContext  *common.OperatorContext `protobuf:"bytes,5,opt,name=inherited_operator_context,json=inheritedOperatorContext,proto3" json:"inherited_operator_context,omitempty"`
+	InheritedFromOperatorName string                  `protobuf:"bytes,6,opt,name=inherited_from_operator_name,json=inheritedFromOperatorName,proto3" json:"inherited_from_operator_name,omitempty"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *GetVipSettingResponse) Reset() {
@@ -617,20 +638,54 @@ func (*GetVipSettingResponse) Descriptor() ([]byte, []int) {
 	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *GetVipSettingResponse) GetSetting() *VipSetting {
+func (x *GetVipSettingResponse) GetDefaultSetting() *VipSetting {
 	if x != nil {
-		return x.Setting
+		return x.DefaultSetting
 	}
 	return nil
 }
 
+func (x *GetVipSettingResponse) GetCustomSetting() *VipSetting {
+	if x != nil {
+		return x.CustomSetting
+	}
+	return nil
+}
+
+func (x *GetVipSettingResponse) GetFollowParent() bool {
+	if x != nil {
+		return x.FollowParent
+	}
+	return false
+}
+
+func (x *GetVipSettingResponse) GetCustomOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.CustomOperatorContext
+	}
+	return nil
+}
+
+func (x *GetVipSettingResponse) GetInheritedOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.InheritedOperatorContext
+	}
+	return nil
+}
+
+func (x *GetVipSettingResponse) GetInheritedFromOperatorName() string {
+	if x != nil {
+		return x.InheritedFromOperatorName
+	}
+	return ""
+}
+
 type UpdateVipSettingRequest struct {
-	state                  protoimpl.MessageState         `protogen:"open.v1"`
-	OperatorContext        *common.OperatorContext        `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	Setting                *VipSetting                    `protobuf:"bytes,3,opt,name=setting,proto3" json:"setting,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Setting               *VipSetting             `protobuf:"bytes,2,opt,name=setting,proto3" json:"setting,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *UpdateVipSettingRequest) Reset() {
@@ -663,16 +718,9 @@ func (*UpdateVipSettingRequest) Descriptor() ([]byte, []int) {
 	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *UpdateVipSettingRequest) GetOperatorContext() *common.OperatorContext {
+func (x *UpdateVipSettingRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.OperatorContext
-	}
-	return nil
-}
-
-func (x *UpdateVipSettingRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
-	if x != nil {
-		return x.OperatorContextFilters
+		return x.TargetOperatorContext
 	}
 	return nil
 }
@@ -1002,13 +1050,13 @@ func (x *VipLevelConfigTemplate) GetUpdatedAt() int64 {
 }
 
 type ListVipLevelConfigTemplatesRequest struct {
-	state                  protoimpl.MessageState         `protogen:"open.v1"`
-	OperatorContext        *common.OperatorContext        `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	Page                   int32                          `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize               int32                          `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	SettingId             int64                   `protobuf:"varint,2,opt,name=setting_id,json=settingId,proto3" json:"setting_id,omitempty"`
+	Page                  int32                   `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize              int32                   `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *ListVipLevelConfigTemplatesRequest) Reset() {
@@ -1041,18 +1089,18 @@ func (*ListVipLevelConfigTemplatesRequest) Descriptor() ([]byte, []int) {
 	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *ListVipLevelConfigTemplatesRequest) GetOperatorContext() *common.OperatorContext {
+func (x *ListVipLevelConfigTemplatesRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.OperatorContext
+		return x.TargetOperatorContext
 	}
 	return nil
 }
 
-func (x *ListVipLevelConfigTemplatesRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+func (x *ListVipLevelConfigTemplatesRequest) GetSettingId() int64 {
 	if x != nil {
-		return x.OperatorContextFilters
+		return x.SettingId
 	}
-	return nil
+	return 0
 }
 
 func (x *ListVipLevelConfigTemplatesRequest) GetPage() int32 {
@@ -1138,12 +1186,11 @@ func (x *ListVipLevelConfigTemplatesResponse) GetPageSize() int32 {
 }
 
 type GetVipLevelConfigTemplateRequest struct {
-	state                  protoimpl.MessageState         `protogen:"open.v1"`
-	OperatorContext        *common.OperatorContext        `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	TemplateId             int64                          `protobuf:"varint,3,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	TemplateId            int64                   `protobuf:"varint,2,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *GetVipLevelConfigTemplateRequest) Reset() {
@@ -1176,16 +1223,9 @@ func (*GetVipLevelConfigTemplateRequest) Descriptor() ([]byte, []int) {
 	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *GetVipLevelConfigTemplateRequest) GetOperatorContext() *common.OperatorContext {
+func (x *GetVipLevelConfigTemplateRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.OperatorContext
-	}
-	return nil
-}
-
-func (x *GetVipLevelConfigTemplateRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
-	if x != nil {
-		return x.OperatorContextFilters
+		return x.TargetOperatorContext
 	}
 	return nil
 }
@@ -1242,12 +1282,11 @@ func (x *GetVipLevelConfigTemplateResponse) GetTemplate() *VipLevelConfigTemplat
 }
 
 type CreateVipLevelConfigTemplateRequest struct {
-	state                  protoimpl.MessageState         `protogen:"open.v1"`
-	OperatorContext        *common.OperatorContext        `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	Template               *VipLevelConfigTemplate        `protobuf:"bytes,3,opt,name=template,proto3" json:"template,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Template              *VipLevelConfigTemplate `protobuf:"bytes,2,opt,name=template,proto3" json:"template,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *CreateVipLevelConfigTemplateRequest) Reset() {
@@ -1280,16 +1319,9 @@ func (*CreateVipLevelConfigTemplateRequest) Descriptor() ([]byte, []int) {
 	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *CreateVipLevelConfigTemplateRequest) GetOperatorContext() *common.OperatorContext {
+func (x *CreateVipLevelConfigTemplateRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.OperatorContext
-	}
-	return nil
-}
-
-func (x *CreateVipLevelConfigTemplateRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
-	if x != nil {
-		return x.OperatorContextFilters
+		return x.TargetOperatorContext
 	}
 	return nil
 }
@@ -1302,7 +1334,8 @@ func (x *CreateVipLevelConfigTemplateRequest) GetTemplate() *VipLevelConfigTempl
 }
 
 type CreateVipLevelConfigTemplateResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	Template      *VipLevelConfigTemplate `protobuf:"bytes,1,opt,name=template,proto3" json:"template,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1337,13 +1370,19 @@ func (*CreateVipLevelConfigTemplateResponse) Descriptor() ([]byte, []int) {
 	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{11}
 }
 
+func (x *CreateVipLevelConfigTemplateResponse) GetTemplate() *VipLevelConfigTemplate {
+	if x != nil {
+		return x.Template
+	}
+	return nil
+}
+
 type UpdateVipLevelConfigTemplateRequest struct {
-	state                  protoimpl.MessageState         `protogen:"open.v1"`
-	OperatorContext        *common.OperatorContext        `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	Template               *VipLevelConfigTemplate        `protobuf:"bytes,3,opt,name=template,proto3" json:"template,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Template              *VipLevelConfigTemplate `protobuf:"bytes,2,opt,name=template,proto3" json:"template,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *UpdateVipLevelConfigTemplateRequest) Reset() {
@@ -1376,16 +1415,9 @@ func (*UpdateVipLevelConfigTemplateRequest) Descriptor() ([]byte, []int) {
 	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{12}
 }
 
-func (x *UpdateVipLevelConfigTemplateRequest) GetOperatorContext() *common.OperatorContext {
+func (x *UpdateVipLevelConfigTemplateRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.OperatorContext
-	}
-	return nil
-}
-
-func (x *UpdateVipLevelConfigTemplateRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
-	if x != nil {
-		return x.OperatorContextFilters
+		return x.TargetOperatorContext
 	}
 	return nil
 }
@@ -1434,12 +1466,11 @@ func (*UpdateVipLevelConfigTemplateResponse) Descriptor() ([]byte, []int) {
 }
 
 type DeleteVipLevelConfigTemplateRequest struct {
-	state                  protoimpl.MessageState         `protogen:"open.v1"`
-	OperatorContext        *common.OperatorContext        `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	TemplateId             int64                          `protobuf:"varint,3,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	TemplateId            int64                   `protobuf:"varint,2,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *DeleteVipLevelConfigTemplateRequest) Reset() {
@@ -1472,16 +1503,9 @@ func (*DeleteVipLevelConfigTemplateRequest) Descriptor() ([]byte, []int) {
 	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *DeleteVipLevelConfigTemplateRequest) GetOperatorContext() *common.OperatorContext {
+func (x *DeleteVipLevelConfigTemplateRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.OperatorContext
-	}
-	return nil
-}
-
-func (x *DeleteVipLevelConfigTemplateRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
-	if x != nil {
-		return x.OperatorContextFilters
+		return x.TargetOperatorContext
 	}
 	return nil
 }
@@ -2009,7 +2033,7 @@ var File_vip_service_v1_vip_proto protoreflect.FileDescriptor
 
 const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\n" +
-	"\x18vip/service/v1/vip.proto\x12\x12api.vip.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x13common/common.proto\"\xa5\n" +
+	"\x18vip/service/v1/vip.proto\x12\x12api.vip.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x13common/common.proto\"\xe4\n" +
 	"\n" +
 	"\n" +
 	"VipSetting\x12\x0e\n" +
@@ -2021,36 +2045,42 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"operatorId\x12#\n" +
 	"\rbase_currency\x18\x06 \x01(\tR\fbaseCurrency\x12E\n" +
 	"\fdisplay_rule\x18\a \x01(\x0e2\".api.vip.service.v1.VipDisplayRuleR\vdisplayRule\x12%\n" +
-	"\x0erewards_slider\x18\b \x01(\bR\rrewardsSlider\x12Q\n" +
-	"\x13upgrade_payout_type\x18\t \x01(\x0e2!.api.vip.service.v1.VipPayoutTypeR\x11upgradePayoutType\x12b\n" +
-	"\x1crakeback_instant_payout_type\x18\n" +
-	" \x01(\x0e2!.api.vip.service.v1.VipPayoutTypeR\x19rakebackInstantPayoutType\x12^\n" +
-	"\x1arakeback_daily_payout_type\x18\v \x01(\x0e2!.api.vip.service.v1.VipPayoutTypeR\x17rakebackDailyPayoutType\x12\\\n" +
-	"\x19weekly_reward_payout_type\x18\f \x01(\x0e2!.api.vip.service.v1.VipPayoutTypeR\x16weeklyRewardPayoutType\x12^\n" +
-	"\x1amonthly_reward_payout_type\x18\r \x01(\x0e2!.api.vip.service.v1.VipPayoutTypeR\x17monthlyRewardPayoutType\x12&\n" +
-	"\x0fdeposit_xp_rate\x18\x0e \x01(\x01R\rdepositXpRate\x12(\n" +
-	"\x10wagering_xp_rate\x18\x0f \x01(\x01R\x0ewageringXpRate\x12>\n" +
-	"\x1cmax_house_edge_limit_percent\x18\x10 \x01(\x01R\x18maxHouseEdgeLimitPercent\x124\n" +
-	"\x16standard_xp_multiplier\x18\x11 \x01(\x01R\x14standardXpMultiplier\x12\x1a\n" +
-	"\btimezone\x18\x12 \x01(\tR\btimezone\x12$\n" +
-	"\x0edaily_issue_at\x18\x13 \x01(\tR\fdailyIssueAt\x12(\n" +
-	"\x10weekly_issue_dow\x18\x14 \x01(\x05R\x0eweeklyIssueDow\x12&\n" +
-	"\x0fweekly_issue_at\x18\x15 \x01(\tR\rweeklyIssueAt\x12*\n" +
-	"\x11monthly_issue_dom\x18\x16 \x01(\x05R\x0fmonthlyIssueDom\x12(\n" +
-	"\x10monthly_issue_at\x18\x17 \x01(\tR\x0emonthlyIssueAt\x12\x1d\n" +
+	"\x0erewards_slider\x18\b \x01(\bR\rrewardsSlider\x12#\n" +
+	"\rfollow_parent\x18\t \x01(\bR\ffollowParent\x12\x18\n" +
+	"\aenabled\x18\n" +
+	" \x01(\bR\aenabled\x12Q\n" +
+	"\x13upgrade_payout_type\x18\v \x01(\x0e2!.api.vip.service.v1.VipPayoutTypeR\x11upgradePayoutType\x12b\n" +
+	"\x1crakeback_instant_payout_type\x18\f \x01(\x0e2!.api.vip.service.v1.VipPayoutTypeR\x19rakebackInstantPayoutType\x12^\n" +
+	"\x1arakeback_daily_payout_type\x18\r \x01(\x0e2!.api.vip.service.v1.VipPayoutTypeR\x17rakebackDailyPayoutType\x12\\\n" +
+	"\x19weekly_reward_payout_type\x18\x0e \x01(\x0e2!.api.vip.service.v1.VipPayoutTypeR\x16weeklyRewardPayoutType\x12^\n" +
+	"\x1amonthly_reward_payout_type\x18\x0f \x01(\x0e2!.api.vip.service.v1.VipPayoutTypeR\x17monthlyRewardPayoutType\x12&\n" +
+	"\x0fdeposit_xp_rate\x18\x10 \x01(\x01R\rdepositXpRate\x12(\n" +
+	"\x10wagering_xp_rate\x18\x11 \x01(\x01R\x0ewageringXpRate\x12>\n" +
+	"\x1cmax_house_edge_limit_percent\x18\x12 \x01(\x01R\x18maxHouseEdgeLimitPercent\x124\n" +
+	"\x16standard_xp_multiplier\x18\x13 \x01(\x01R\x14standardXpMultiplier\x12\x1a\n" +
+	"\btimezone\x18\x14 \x01(\tR\btimezone\x12$\n" +
+	"\x0edaily_issue_at\x18\x15 \x01(\tR\fdailyIssueAt\x12(\n" +
+	"\x10weekly_issue_dow\x18\x16 \x01(\x05R\x0eweeklyIssueDow\x12&\n" +
+	"\x0fweekly_issue_at\x18\x17 \x01(\tR\rweeklyIssueAt\x12*\n" +
+	"\x11monthly_issue_dom\x18\x18 \x01(\x05R\x0fmonthlyIssueDom\x12(\n" +
+	"\x10monthly_issue_at\x18\x19 \x01(\tR\x0emonthlyIssueAt\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x18 \x01(\x03R\tcreatedAt\x12\x1d\n" +
+	"created_at\x18\x1a \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\x19 \x01(\x03R\tupdatedAt\"\xbc\x01\n" +
-	"\x14GetVipSettingRequest\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
-	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"Q\n" +
-	"\x15GetVipSettingResponse\x128\n" +
-	"\asetting\x18\x01 \x01(\v2\x1e.api.vip.service.v1.VipSettingR\asetting\"\xf9\x01\n" +
-	"\x17UpdateVipSettingRequest\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
-	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x128\n" +
-	"\asetting\x18\x03 \x01(\v2\x1e.api.vip.service.v1.VipSettingR\asetting\"\x1a\n" +
+	"updated_at\x18\x1b \x01(\x03R\tupdatedAt\"\x87\x01\n" +
+	"\x14GetVipSettingRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1a\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\"\xbd\x03\n" +
+	"\x15GetVipSettingResponse\x12G\n" +
+	"\x0fdefault_setting\x18\x01 \x01(\v2\x1e.api.vip.service.v1.VipSettingR\x0edefaultSetting\x12E\n" +
+	"\x0ecustom_setting\x18\x02 \x01(\v2\x1e.api.vip.service.v1.VipSettingR\rcustomSetting\x12#\n" +
+	"\rfollow_parent\x18\x03 \x01(\bR\ffollowParent\x12S\n" +
+	"\x17custom_operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x15customOperatorContext\x12Y\n" +
+	"\x1ainherited_operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x18inheritedOperatorContext\x12?\n" +
+	"\x1cinherited_from_operator_name\x18\x06 \x01(\tR\x19inheritedFromOperatorName\"\xa8\x01\n" +
+	"\x17UpdateVipSettingRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x128\n" +
+	"\asetting\x18\x02 \x01(\v2\x1e.api.vip.service.v1.VipSettingR\asetting\"\x1a\n" +
 	"\x18UpdateVipSettingResponse\"\xe8\n" +
 	"\n" +
 	"\x16VipLevelConfigTemplate\x12\x0e\n" +
@@ -2088,38 +2118,36 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x1d \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\x1e \x01(\x03R\tupdatedAt\"\xfb\x01\n" +
-	"\"ListVipLevelConfigTemplatesRequest\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
-	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x12\n" +
+	"updated_at\x18\x1e \x01(\x03R\tupdatedAt\"\xc9\x01\n" +
+	"\"ListVipLevelConfigTemplatesRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1d\n" +
+	"\n" +
+	"setting_id\x18\x02 \x01(\x03R\tsettingId\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\xb6\x01\n" +
 	"#ListVipLevelConfigTemplatesResponse\x12H\n" +
 	"\ttemplates\x18\x01 \x03(\v2*.api.vip.service.v1.VipLevelConfigTemplateR\ttemplates\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\xe9\x01\n" +
-	" GetVipLevelConfigTemplateRequest\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
-	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x1f\n" +
-	"\vtemplate_id\x18\x03 \x01(\x03R\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\x98\x01\n" +
+	" GetVipLevelConfigTemplateRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1f\n" +
+	"\vtemplate_id\x18\x02 \x01(\x03R\n" +
 	"templateId\"k\n" +
 	"!GetVipLevelConfigTemplateResponse\x12F\n" +
-	"\btemplate\x18\x01 \x01(\v2*.api.vip.service.v1.VipLevelConfigTemplateR\btemplate\"\x93\x02\n" +
-	"#CreateVipLevelConfigTemplateRequest\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
-	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
-	"\btemplate\x18\x03 \x01(\v2*.api.vip.service.v1.VipLevelConfigTemplateR\btemplate\"&\n" +
-	"$CreateVipLevelConfigTemplateResponse\"\x93\x02\n" +
-	"#UpdateVipLevelConfigTemplateRequest\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
-	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
-	"\btemplate\x18\x03 \x01(\v2*.api.vip.service.v1.VipLevelConfigTemplateR\btemplate\"&\n" +
-	"$UpdateVipLevelConfigTemplateResponse\"\xec\x01\n" +
-	"#DeleteVipLevelConfigTemplateRequest\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
-	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x1f\n" +
-	"\vtemplate_id\x18\x03 \x01(\x03R\n" +
+	"\btemplate\x18\x01 \x01(\v2*.api.vip.service.v1.VipLevelConfigTemplateR\btemplate\"\xc2\x01\n" +
+	"#CreateVipLevelConfigTemplateRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12F\n" +
+	"\btemplate\x18\x02 \x01(\v2*.api.vip.service.v1.VipLevelConfigTemplateR\btemplate\"n\n" +
+	"$CreateVipLevelConfigTemplateResponse\x12F\n" +
+	"\btemplate\x18\x01 \x01(\v2*.api.vip.service.v1.VipLevelConfigTemplateR\btemplate\"\xc2\x01\n" +
+	"#UpdateVipLevelConfigTemplateRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12F\n" +
+	"\btemplate\x18\x02 \x01(\v2*.api.vip.service.v1.VipLevelConfigTemplateR\btemplate\"&\n" +
+	"$UpdateVipLevelConfigTemplateResponse\"\x9b\x01\n" +
+	"#DeleteVipLevelConfigTemplateRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1f\n" +
+	"\vtemplate_id\x18\x02 \x01(\x03R\n" +
 	"templateId\"&\n" +
 	"$DeleteVipLevelConfigTemplateResponse\"\xa9\x03\n" +
 	"\tVipMember\x12\x0e\n" +
@@ -2244,7 +2272,6 @@ var file_vip_service_v1_vip_proto_goTypes = []any{
 	(*ClaimVipRewardRequest)(nil),                // 28: api.vip.service.v1.ClaimVipRewardRequest
 	(*ClaimVipRewardResponse)(nil),               // 29: api.vip.service.v1.ClaimVipRewardResponse
 	(*common.OperatorContext)(nil),               // 30: api.common.OperatorContext
-	(*common.OperatorContextFilters)(nil),        // 31: api.common.OperatorContextFilters
 }
 var file_vip_service_v1_vip_proto_depIdxs = []int32{
 	0,  // 0: api.vip.service.v1.VipSetting.display_rule:type_name -> api.vip.service.v1.VipDisplayRule
@@ -2253,56 +2280,53 @@ var file_vip_service_v1_vip_proto_depIdxs = []int32{
 	2,  // 3: api.vip.service.v1.VipSetting.rakeback_daily_payout_type:type_name -> api.vip.service.v1.VipPayoutType
 	2,  // 4: api.vip.service.v1.VipSetting.weekly_reward_payout_type:type_name -> api.vip.service.v1.VipPayoutType
 	2,  // 5: api.vip.service.v1.VipSetting.monthly_reward_payout_type:type_name -> api.vip.service.v1.VipPayoutType
-	30, // 6: api.vip.service.v1.GetVipSettingRequest.operator_context:type_name -> api.common.OperatorContext
-	31, // 7: api.vip.service.v1.GetVipSettingRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	5,  // 8: api.vip.service.v1.GetVipSettingResponse.setting:type_name -> api.vip.service.v1.VipSetting
-	30, // 9: api.vip.service.v1.UpdateVipSettingRequest.operator_context:type_name -> api.common.OperatorContext
-	31, // 10: api.vip.service.v1.UpdateVipSettingRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	5,  // 11: api.vip.service.v1.UpdateVipSettingRequest.setting:type_name -> api.vip.service.v1.VipSetting
-	30, // 12: api.vip.service.v1.ListVipLevelConfigTemplatesRequest.operator_context:type_name -> api.common.OperatorContext
-	31, // 13: api.vip.service.v1.ListVipLevelConfigTemplatesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	30, // 6: api.vip.service.v1.GetVipSettingRequest.target_operator_context:type_name -> api.common.OperatorContext
+	5,  // 7: api.vip.service.v1.GetVipSettingResponse.default_setting:type_name -> api.vip.service.v1.VipSetting
+	5,  // 8: api.vip.service.v1.GetVipSettingResponse.custom_setting:type_name -> api.vip.service.v1.VipSetting
+	30, // 9: api.vip.service.v1.GetVipSettingResponse.custom_operator_context:type_name -> api.common.OperatorContext
+	30, // 10: api.vip.service.v1.GetVipSettingResponse.inherited_operator_context:type_name -> api.common.OperatorContext
+	30, // 11: api.vip.service.v1.UpdateVipSettingRequest.target_operator_context:type_name -> api.common.OperatorContext
+	5,  // 12: api.vip.service.v1.UpdateVipSettingRequest.setting:type_name -> api.vip.service.v1.VipSetting
+	30, // 13: api.vip.service.v1.ListVipLevelConfigTemplatesRequest.target_operator_context:type_name -> api.common.OperatorContext
 	10, // 14: api.vip.service.v1.ListVipLevelConfigTemplatesResponse.templates:type_name -> api.vip.service.v1.VipLevelConfigTemplate
-	30, // 15: api.vip.service.v1.GetVipLevelConfigTemplateRequest.operator_context:type_name -> api.common.OperatorContext
-	31, // 16: api.vip.service.v1.GetVipLevelConfigTemplateRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	10, // 17: api.vip.service.v1.GetVipLevelConfigTemplateResponse.template:type_name -> api.vip.service.v1.VipLevelConfigTemplate
-	30, // 18: api.vip.service.v1.CreateVipLevelConfigTemplateRequest.operator_context:type_name -> api.common.OperatorContext
-	31, // 19: api.vip.service.v1.CreateVipLevelConfigTemplateRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	10, // 20: api.vip.service.v1.CreateVipLevelConfigTemplateRequest.template:type_name -> api.vip.service.v1.VipLevelConfigTemplate
-	30, // 21: api.vip.service.v1.UpdateVipLevelConfigTemplateRequest.operator_context:type_name -> api.common.OperatorContext
-	31, // 22: api.vip.service.v1.UpdateVipLevelConfigTemplateRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	10, // 23: api.vip.service.v1.UpdateVipLevelConfigTemplateRequest.template:type_name -> api.vip.service.v1.VipLevelConfigTemplate
-	30, // 24: api.vip.service.v1.DeleteVipLevelConfigTemplateRequest.operator_context:type_name -> api.common.OperatorContext
-	31, // 25: api.vip.service.v1.DeleteVipLevelConfigTemplateRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	21, // 26: api.vip.service.v1.GetUserVipLevelResponse.vip_member:type_name -> api.vip.service.v1.VipMember
-	1,  // 27: api.vip.service.v1.GetClaimableVipRewardsRequest.reward_kind:type_name -> api.vip.service.v1.VipRewardKind
-	1,  // 28: api.vip.service.v1.ClaimVipRewardRequest.reward_kind:type_name -> api.vip.service.v1.VipRewardKind
-	6,  // 29: api.vip.service.v1.Vip.GetVipSetting:input_type -> api.vip.service.v1.GetVipSettingRequest
-	8,  // 30: api.vip.service.v1.Vip.UpdateVipSetting:input_type -> api.vip.service.v1.UpdateVipSettingRequest
-	11, // 31: api.vip.service.v1.Vip.ListVipLevelConfigTemplates:input_type -> api.vip.service.v1.ListVipLevelConfigTemplatesRequest
-	13, // 32: api.vip.service.v1.Vip.GetVipLevelConfigTemplate:input_type -> api.vip.service.v1.GetVipLevelConfigTemplateRequest
-	15, // 33: api.vip.service.v1.Vip.CreateVipLevelConfigTemplate:input_type -> api.vip.service.v1.CreateVipLevelConfigTemplateRequest
-	17, // 34: api.vip.service.v1.Vip.UpdateVipLevelConfigTemplate:input_type -> api.vip.service.v1.UpdateVipLevelConfigTemplateRequest
-	19, // 35: api.vip.service.v1.Vip.DeleteVipLevelConfigTemplate:input_type -> api.vip.service.v1.DeleteVipLevelConfigTemplateRequest
-	22, // 36: api.vip.service.v1.Vip.GetUserVipLevel:input_type -> api.vip.service.v1.GetUserVipLevelRequest
-	24, // 37: api.vip.service.v1.Vip.UpdateVipRewardSlider:input_type -> api.vip.service.v1.UpdateVipRewardSliderRequest
-	26, // 38: api.vip.service.v1.Vip.GetClaimableVipRewards:input_type -> api.vip.service.v1.GetClaimableVipRewardsRequest
-	28, // 39: api.vip.service.v1.Vip.ClaimVipReward:input_type -> api.vip.service.v1.ClaimVipRewardRequest
-	7,  // 40: api.vip.service.v1.Vip.GetVipSetting:output_type -> api.vip.service.v1.GetVipSettingResponse
-	9,  // 41: api.vip.service.v1.Vip.UpdateVipSetting:output_type -> api.vip.service.v1.UpdateVipSettingResponse
-	12, // 42: api.vip.service.v1.Vip.ListVipLevelConfigTemplates:output_type -> api.vip.service.v1.ListVipLevelConfigTemplatesResponse
-	14, // 43: api.vip.service.v1.Vip.GetVipLevelConfigTemplate:output_type -> api.vip.service.v1.GetVipLevelConfigTemplateResponse
-	16, // 44: api.vip.service.v1.Vip.CreateVipLevelConfigTemplate:output_type -> api.vip.service.v1.CreateVipLevelConfigTemplateResponse
-	18, // 45: api.vip.service.v1.Vip.UpdateVipLevelConfigTemplate:output_type -> api.vip.service.v1.UpdateVipLevelConfigTemplateResponse
-	20, // 46: api.vip.service.v1.Vip.DeleteVipLevelConfigTemplate:output_type -> api.vip.service.v1.DeleteVipLevelConfigTemplateResponse
-	23, // 47: api.vip.service.v1.Vip.GetUserVipLevel:output_type -> api.vip.service.v1.GetUserVipLevelResponse
-	25, // 48: api.vip.service.v1.Vip.UpdateVipRewardSlider:output_type -> api.vip.service.v1.UpdateVipRewardSliderResponse
-	27, // 49: api.vip.service.v1.Vip.GetClaimableVipRewards:output_type -> api.vip.service.v1.GetClaimableVipRewardsResponse
-	29, // 50: api.vip.service.v1.Vip.ClaimVipReward:output_type -> api.vip.service.v1.ClaimVipRewardResponse
-	40, // [40:51] is the sub-list for method output_type
-	29, // [29:40] is the sub-list for method input_type
-	29, // [29:29] is the sub-list for extension type_name
-	29, // [29:29] is the sub-list for extension extendee
-	0,  // [0:29] is the sub-list for field type_name
+	30, // 15: api.vip.service.v1.GetVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	10, // 16: api.vip.service.v1.GetVipLevelConfigTemplateResponse.template:type_name -> api.vip.service.v1.VipLevelConfigTemplate
+	30, // 17: api.vip.service.v1.CreateVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	10, // 18: api.vip.service.v1.CreateVipLevelConfigTemplateRequest.template:type_name -> api.vip.service.v1.VipLevelConfigTemplate
+	10, // 19: api.vip.service.v1.CreateVipLevelConfigTemplateResponse.template:type_name -> api.vip.service.v1.VipLevelConfigTemplate
+	30, // 20: api.vip.service.v1.UpdateVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	10, // 21: api.vip.service.v1.UpdateVipLevelConfigTemplateRequest.template:type_name -> api.vip.service.v1.VipLevelConfigTemplate
+	30, // 22: api.vip.service.v1.DeleteVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	21, // 23: api.vip.service.v1.GetUserVipLevelResponse.vip_member:type_name -> api.vip.service.v1.VipMember
+	1,  // 24: api.vip.service.v1.GetClaimableVipRewardsRequest.reward_kind:type_name -> api.vip.service.v1.VipRewardKind
+	1,  // 25: api.vip.service.v1.ClaimVipRewardRequest.reward_kind:type_name -> api.vip.service.v1.VipRewardKind
+	6,  // 26: api.vip.service.v1.Vip.GetVipSetting:input_type -> api.vip.service.v1.GetVipSettingRequest
+	8,  // 27: api.vip.service.v1.Vip.UpdateVipSetting:input_type -> api.vip.service.v1.UpdateVipSettingRequest
+	11, // 28: api.vip.service.v1.Vip.ListVipLevelConfigTemplates:input_type -> api.vip.service.v1.ListVipLevelConfigTemplatesRequest
+	13, // 29: api.vip.service.v1.Vip.GetVipLevelConfigTemplate:input_type -> api.vip.service.v1.GetVipLevelConfigTemplateRequest
+	15, // 30: api.vip.service.v1.Vip.CreateVipLevelConfigTemplate:input_type -> api.vip.service.v1.CreateVipLevelConfigTemplateRequest
+	17, // 31: api.vip.service.v1.Vip.UpdateVipLevelConfigTemplate:input_type -> api.vip.service.v1.UpdateVipLevelConfigTemplateRequest
+	19, // 32: api.vip.service.v1.Vip.DeleteVipLevelConfigTemplate:input_type -> api.vip.service.v1.DeleteVipLevelConfigTemplateRequest
+	22, // 33: api.vip.service.v1.Vip.GetUserVipLevel:input_type -> api.vip.service.v1.GetUserVipLevelRequest
+	24, // 34: api.vip.service.v1.Vip.UpdateVipRewardSlider:input_type -> api.vip.service.v1.UpdateVipRewardSliderRequest
+	26, // 35: api.vip.service.v1.Vip.GetClaimableVipRewards:input_type -> api.vip.service.v1.GetClaimableVipRewardsRequest
+	28, // 36: api.vip.service.v1.Vip.ClaimVipReward:input_type -> api.vip.service.v1.ClaimVipRewardRequest
+	7,  // 37: api.vip.service.v1.Vip.GetVipSetting:output_type -> api.vip.service.v1.GetVipSettingResponse
+	9,  // 38: api.vip.service.v1.Vip.UpdateVipSetting:output_type -> api.vip.service.v1.UpdateVipSettingResponse
+	12, // 39: api.vip.service.v1.Vip.ListVipLevelConfigTemplates:output_type -> api.vip.service.v1.ListVipLevelConfigTemplatesResponse
+	14, // 40: api.vip.service.v1.Vip.GetVipLevelConfigTemplate:output_type -> api.vip.service.v1.GetVipLevelConfigTemplateResponse
+	16, // 41: api.vip.service.v1.Vip.CreateVipLevelConfigTemplate:output_type -> api.vip.service.v1.CreateVipLevelConfigTemplateResponse
+	18, // 42: api.vip.service.v1.Vip.UpdateVipLevelConfigTemplate:output_type -> api.vip.service.v1.UpdateVipLevelConfigTemplateResponse
+	20, // 43: api.vip.service.v1.Vip.DeleteVipLevelConfigTemplate:output_type -> api.vip.service.v1.DeleteVipLevelConfigTemplateResponse
+	23, // 44: api.vip.service.v1.Vip.GetUserVipLevel:output_type -> api.vip.service.v1.GetUserVipLevelResponse
+	25, // 45: api.vip.service.v1.Vip.UpdateVipRewardSlider:output_type -> api.vip.service.v1.UpdateVipRewardSliderResponse
+	27, // 46: api.vip.service.v1.Vip.GetClaimableVipRewards:output_type -> api.vip.service.v1.GetClaimableVipRewardsResponse
+	29, // 47: api.vip.service.v1.Vip.ClaimVipReward:output_type -> api.vip.service.v1.ClaimVipRewardResponse
+	37, // [37:48] is the sub-list for method output_type
+	26, // [26:37] is the sub-list for method input_type
+	26, // [26:26] is the sub-list for extension type_name
+	26, // [26:26] is the sub-list for extension extendee
+	0,  // [0:26] is the sub-list for field type_name
 }
 
 func init() { file_vip_service_v1_vip_proto_init() }
