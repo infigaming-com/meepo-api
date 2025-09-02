@@ -80,7 +80,7 @@ func RegisterBackofficeOperatorHTTPServer(s *http.Server, srv BackofficeOperator
 	r.POST("/v1/backoffice/operator/byo-subdomains/delete", _BackofficeOperator_DeleteOperatorByoSubdomain0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/backoffice-byo-subdomains/add", _BackofficeOperator_AddOperatorBackofficeByoSubdomain0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/backoffice-byo-subdomains/delete", _BackofficeOperator_DeleteOperatorBackofficeByoSubdomain0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/operator/account-settings/get", _BackofficeOperator_GetOperatorAccountSettings0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/account-settings/get", _BackofficeOperator_GetOperatorAccountSettings1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/account-settings/update", _BackofficeOperator_UpdateOperatorAccountSettings0_HTTP_Handler(srv))
 }
 
@@ -370,7 +370,7 @@ func _BackofficeOperator_DeleteOperatorBackofficeByoSubdomain0_HTTP_Handler(srv 
 	}
 }
 
-func _BackofficeOperator_GetOperatorAccountSettings0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
+func _BackofficeOperator_GetOperatorAccountSettings1_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetOperatorAccountSettingsRequest
 		if err := ctx.Bind(&in); err != nil {

@@ -264,6 +264,10 @@ service User {
 	}
 
 	rpc GetOperatorAccountSettings(GetOperatorAccountSettingsRequest) returns (GetOperatorAccountSettingsResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/operator/account-settings/get"
+			body: "*"
+		};
 	}
 
 	rpc UpdateOperatorAccountSettings(UpdateOperatorAccountSettingsRequest) returns (UpdateOperatorAccountSettingsResponse) {
