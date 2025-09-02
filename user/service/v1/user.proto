@@ -184,6 +184,23 @@ service User {
 	// GetChildOperatorIds returns direct child operator IDs for the given operator ID.
 	rpc GetChildOperatorIds(GetChildOperatorIdsRequest) returns (GetChildOperatorIdsResponse) {
 	}
+
+	// Send password reset verification code to email
+	rpc SendPasswordResetCode(SendPasswordResetCodeRequest) returns (SendPasswordResetCodeResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/auth/password/reset-code/send"
+			body: "*"
+		};
+	}
+	
+	// Reset password using verification code
+	rpc ResetPasswordWithCode(ResetPasswordWithCodeRequest) returns (ResetPasswordWithCodeResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/auth/password/reset"
+			body: "*"
+		};
+	}
+
 }
 
 // UserInfo contains basic user information.
@@ -836,4 +853,20 @@ message GetChildOperatorIdsRequest {
 message GetChildOperatorIdsResponse {
 	// List of child operator IDs.
 	repeated int64 child_operator_ids = 1;
+}
+
+message SendPasswordResetCodeRequest {
+	string email = 1;  // User's email address
+}
+
+message SendPasswordResetCodeResponse {
+}
+
+message ResetPasswordWithCodeRequest {
+	string email = 1;           // User's email address
+	string verification_code = 2;  // Verification code received via email
+	string new_password = 3;    // New password
+}
+
+message ResetPasswordWithCodeResponse {
 }

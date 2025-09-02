@@ -2049,6 +2049,44 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.AuthResponse'
+    /v1/user/auth/password/reset:
+        post:
+            tags:
+                - User
+            description: Reset password using verification code
+            operationId: User_ResetPasswordWithCode
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.ResetPasswordWithCodeRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.ResetPasswordWithCodeResponse'
+    /v1/user/auth/password/reset-code/send:
+        post:
+            tags:
+                - User
+            description: Send password reset verification code to email
+            operationId: User_SendPasswordResetCode
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.SendPasswordResetCodeRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.SendPasswordResetCodeResponse'
     /v1/user/auth/refresh:
         post:
             tags:
@@ -7102,6 +7140,18 @@ components:
                     type: string
                     description: The password for the new account.
             description: RegisterRequest contains the information needed to register a new user.
+        api.user.service.v1.ResetPasswordWithCodeRequest:
+            type: object
+            properties:
+                email:
+                    type: string
+                verificationCode:
+                    type: string
+                newPassword:
+                    type: string
+        api.user.service.v1.ResetPasswordWithCodeResponse:
+            type: object
+            properties: {}
         api.user.service.v1.SendEmailVerificationCodeRequest:
             type: object
             properties:
@@ -7116,6 +7166,14 @@ components:
                 userId:
                     type: string
         api.user.service.v1.SendEmailVerificationCodeResponse:
+            type: object
+            properties: {}
+        api.user.service.v1.SendPasswordResetCodeRequest:
+            type: object
+            properties:
+                email:
+                    type: string
+        api.user.service.v1.SendPasswordResetCodeResponse:
             type: object
             properties: {}
         api.user.service.v1.TelegramAuthRequest:
