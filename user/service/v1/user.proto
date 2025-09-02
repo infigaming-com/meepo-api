@@ -627,10 +627,11 @@ message UpdateUserRequest {
 	optional bool ban_login = 4;
 	optional bool ban_game = 5;
 	optional bool ban_withdraw = 6;
-	optional bool enabled = 7;
-	optional int64 role_id = 8;
+	optional bool locked = 7;
+	optional bool enabled = 8;
+	optional int64 role_id = 9;
 	// The initial operator context.
-	api.common.OperatorContext operator_context = 9;
+	api.common.OperatorContext operator_context = 10;
 }
 
 message UpdateUserResponse {
@@ -809,13 +810,14 @@ message GetUserProfileResponse {
 	bool ban_withdraw = 5;
 	bool ban_game = 6;
 	bool ban_login = 7;
-	RegistrationRecord registration_record = 8;
-	repeated LoginRecord login_records = 9;
-	repeated string tags = 10;
-	repeated Comment comments = 11;
-	int32 total_login_count = 12;
-	int32 login_page = 13;
-	int32 login_page_size = 14;
+	bool locked = 8;
+	RegistrationRecord registration_record = 9;
+	repeated LoginRecord login_records = 10;
+	repeated string tags = 11;
+	repeated Comment comments = 12;
+	int32 total_login_count = 13;
+	int32 login_page = 14;
+	int32 login_page_size = 15;
 }
 
 message CreateRoleRequest {

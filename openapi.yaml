@@ -6005,6 +6005,8 @@ components:
                     type: boolean
                 banLogin:
                     type: boolean
+                locked:
+                    type: boolean
                 registrationRecord:
                     $ref: '#/components/schemas/api.backoffice.service.v1.GetUserProfileResponse_RegistrationRecord'
                 loginRecords:
@@ -9656,6 +9658,8 @@ components:
                 banGame:
                     type: boolean
                 banWithdraw:
+                    type: boolean
+                locked:
                     type: boolean
         api.backoffice.service.v1.UpdateUserResponse:
             type: object
