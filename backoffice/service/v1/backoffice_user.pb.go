@@ -783,13 +783,14 @@ type GetUserProfileResponse struct {
 	BanWithdraw        bool                                       `protobuf:"varint,5,opt,name=ban_withdraw,json=banWithdraw,proto3" json:"ban_withdraw,omitempty"`
 	BanGame            bool                                       `protobuf:"varint,6,opt,name=ban_game,json=banGame,proto3" json:"ban_game,omitempty"`
 	BanLogin           bool                                       `protobuf:"varint,7,opt,name=ban_login,json=banLogin,proto3" json:"ban_login,omitempty"`
-	RegistrationRecord *GetUserProfileResponse_RegistrationRecord `protobuf:"bytes,8,opt,name=registration_record,json=registrationRecord,proto3" json:"registration_record,omitempty"`
-	LoginRecords       []*GetUserProfileResponse_LoginRecord      `protobuf:"bytes,9,rep,name=login_records,json=loginRecords,proto3" json:"login_records,omitempty"`
-	Tags               []string                                   `protobuf:"bytes,10,rep,name=tags,proto3" json:"tags,omitempty"`
-	Comments           []*GetUserProfileResponse_Comment          `protobuf:"bytes,11,rep,name=comments,proto3" json:"comments,omitempty"`
-	TotalLoginCount    int32                                      `protobuf:"varint,12,opt,name=total_login_count,json=totalLoginCount,proto3" json:"total_login_count,omitempty"`
-	LoginPage          int32                                      `protobuf:"varint,13,opt,name=login_page,json=loginPage,proto3" json:"login_page,omitempty"`
-	LoginPageSize      int32                                      `protobuf:"varint,14,opt,name=login_page_size,json=loginPageSize,proto3" json:"login_page_size,omitempty"`
+	Locked             bool                                       `protobuf:"varint,8,opt,name=locked,proto3" json:"locked,omitempty"`
+	RegistrationRecord *GetUserProfileResponse_RegistrationRecord `protobuf:"bytes,9,opt,name=registration_record,json=registrationRecord,proto3" json:"registration_record,omitempty"`
+	LoginRecords       []*GetUserProfileResponse_LoginRecord      `protobuf:"bytes,10,rep,name=login_records,json=loginRecords,proto3" json:"login_records,omitempty"`
+	Tags               []string                                   `protobuf:"bytes,11,rep,name=tags,proto3" json:"tags,omitempty"`
+	Comments           []*GetUserProfileResponse_Comment          `protobuf:"bytes,12,rep,name=comments,proto3" json:"comments,omitempty"`
+	TotalLoginCount    int32                                      `protobuf:"varint,13,opt,name=total_login_count,json=totalLoginCount,proto3" json:"total_login_count,omitempty"`
+	LoginPage          int32                                      `protobuf:"varint,14,opt,name=login_page,json=loginPage,proto3" json:"login_page,omitempty"`
+	LoginPageSize      int32                                      `protobuf:"varint,15,opt,name=login_page_size,json=loginPageSize,proto3" json:"login_page_size,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -869,6 +870,13 @@ func (x *GetUserProfileResponse) GetBanGame() bool {
 func (x *GetUserProfileResponse) GetBanLogin() bool {
 	if x != nil {
 		return x.BanLogin
+	}
+	return false
+}
+
+func (x *GetUserProfileResponse) GetLocked() bool {
+	if x != nil {
+		return x.Locked
 	}
 	return false
 }
@@ -1192,6 +1200,7 @@ type UpdateUserRequest struct {
 	BanLogin      *bool                  `protobuf:"varint,2,opt,name=ban_login,json=banLogin,proto3,oneof" json:"ban_login,omitempty"`
 	BanGame       *bool                  `protobuf:"varint,3,opt,name=ban_game,json=banGame,proto3,oneof" json:"ban_game,omitempty"`
 	BanWithdraw   *bool                  `protobuf:"varint,4,opt,name=ban_withdraw,json=banWithdraw,proto3,oneof" json:"ban_withdraw,omitempty"`
+	Locked        *bool                  `protobuf:"varint,5,opt,name=locked,proto3,oneof" json:"locked,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1250,6 +1259,13 @@ func (x *UpdateUserRequest) GetBanGame() bool {
 func (x *UpdateUserRequest) GetBanWithdraw() bool {
 	if x != nil && x.BanWithdraw != nil {
 		return *x.BanWithdraw
+	}
+	return false
+}
+
+func (x *UpdateUserRequest) GetLocked() bool {
+	if x != nil && x.Locked != nil {
+		return *x.Locked
 	}
 	return false
 }
@@ -2707,7 +2723,7 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"login_page\x18\x02 \x01(\x05H\x00R\tloginPage\x88\x01\x01\x12+\n" +
 	"\x0flogin_page_size\x18\x03 \x01(\x05H\x01R\rloginPageSize\x88\x01\x01B\r\n" +
 	"\v_login_pageB\x12\n" +
-	"\x10_login_page_size\"\xce\f\n" +
+	"\x10_login_page_size\"\xe6\f\n" +
 	"\x16GetUserProfileResponse\x12\x1a\n" +
 	"\bnickname\x18\x01 \x01(\tR\bnickname\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1b\n" +
@@ -2715,16 +2731,17 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x06online\x18\x04 \x01(\bR\x06online\x12!\n" +
 	"\fban_withdraw\x18\x05 \x01(\bR\vbanWithdraw\x12\x19\n" +
 	"\bban_game\x18\x06 \x01(\bR\abanGame\x12\x1b\n" +
-	"\tban_login\x18\a \x01(\bR\bbanLogin\x12u\n" +
-	"\x13registration_record\x18\b \x01(\v2D.api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecordR\x12registrationRecord\x12b\n" +
-	"\rlogin_records\x18\t \x03(\v2=.api.backoffice.service.v1.GetUserProfileResponse.LoginRecordR\floginRecords\x12\x12\n" +
-	"\x04tags\x18\n" +
-	" \x03(\tR\x04tags\x12U\n" +
-	"\bcomments\x18\v \x03(\v29.api.backoffice.service.v1.GetUserProfileResponse.CommentR\bcomments\x12*\n" +
-	"\x11total_login_count\x18\f \x01(\x05R\x0ftotalLoginCount\x12\x1d\n" +
+	"\tban_login\x18\a \x01(\bR\bbanLogin\x12\x16\n" +
+	"\x06locked\x18\b \x01(\bR\x06locked\x12u\n" +
+	"\x13registration_record\x18\t \x01(\v2D.api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecordR\x12registrationRecord\x12b\n" +
+	"\rlogin_records\x18\n" +
+	" \x03(\v2=.api.backoffice.service.v1.GetUserProfileResponse.LoginRecordR\floginRecords\x12\x12\n" +
+	"\x04tags\x18\v \x03(\tR\x04tags\x12U\n" +
+	"\bcomments\x18\f \x03(\v29.api.backoffice.service.v1.GetUserProfileResponse.CommentR\bcomments\x12*\n" +
+	"\x11total_login_count\x18\r \x01(\x05R\x0ftotalLoginCount\x12\x1d\n" +
 	"\n" +
-	"login_page\x18\r \x01(\x05R\tloginPage\x12&\n" +
-	"\x0flogin_page_size\x18\x0e \x01(\x05R\rloginPageSize\x1aH\n" +
+	"login_page\x18\x0e \x01(\x05R\tloginPage\x12&\n" +
+	"\x0flogin_page_size\x18\x0f \x01(\x05R\rloginPageSize\x1aH\n" +
 	"\x06IpInfo\x12\x0e\n" +
 	"\x02ip\x18\x01 \x01(\tR\x02ip\x12\x14\n" +
 	"\x05count\x18\x02 \x01(\x05R\x05count\x12\x18\n" +
@@ -2776,16 +2793,18 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"8\n" +
 	" SendEmailVerificationCodeRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\"#\n" +
-	"!SendEmailVerificationCodeResponse\"\xc2\x01\n" +
+	"!SendEmailVerificationCodeResponse\"\xea\x01\n" +
 	"\x11UpdateUserRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12 \n" +
 	"\tban_login\x18\x02 \x01(\bH\x00R\bbanLogin\x88\x01\x01\x12\x1e\n" +
 	"\bban_game\x18\x03 \x01(\bH\x01R\abanGame\x88\x01\x01\x12&\n" +
-	"\fban_withdraw\x18\x04 \x01(\bH\x02R\vbanWithdraw\x88\x01\x01B\f\n" +
+	"\fban_withdraw\x18\x04 \x01(\bH\x02R\vbanWithdraw\x88\x01\x01\x12\x1b\n" +
+	"\x06locked\x18\x05 \x01(\bH\x03R\x06locked\x88\x01\x01B\f\n" +
 	"\n" +
 	"_ban_loginB\v\n" +
 	"\t_ban_gameB\x0f\n" +
-	"\r_ban_withdraw\"\x14\n" +
+	"\r_ban_withdrawB\t\n" +
+	"\a_locked\"\x14\n" +
 	"\x12UpdateUserResponse\"d\n" +
 	"\x1cSetOperatorTagsConfigRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +

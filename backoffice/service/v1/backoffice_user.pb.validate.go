@@ -910,6 +910,8 @@ func (m *GetUserProfileResponse) validate(all bool) error {
 
 	// no validation rules for BanLogin
 
+	// no validation rules for Locked
+
 	if all {
 		switch v := interface{}(m.GetRegistrationRecord()).(type) {
 		case interface{ ValidateAll() error }:
@@ -1789,6 +1791,10 @@ func (m *UpdateUserRequest) validate(all bool) error {
 
 	if m.BanWithdraw != nil {
 		// no validation rules for BanWithdraw
+	}
+
+	if m.Locked != nil {
+		// no validation rules for Locked
 	}
 
 	if len(errors) > 0 {

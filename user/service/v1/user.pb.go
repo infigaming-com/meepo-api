@@ -2680,10 +2680,11 @@ type UpdateUserRequest struct {
 	BanLogin    *bool                  `protobuf:"varint,4,opt,name=ban_login,json=banLogin,proto3,oneof" json:"ban_login,omitempty"`
 	BanGame     *bool                  `protobuf:"varint,5,opt,name=ban_game,json=banGame,proto3,oneof" json:"ban_game,omitempty"`
 	BanWithdraw *bool                  `protobuf:"varint,6,opt,name=ban_withdraw,json=banWithdraw,proto3,oneof" json:"ban_withdraw,omitempty"`
-	Enabled     *bool                  `protobuf:"varint,7,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	RoleId      *int64                 `protobuf:"varint,8,opt,name=role_id,json=roleId,proto3,oneof" json:"role_id,omitempty"`
+	Locked      *bool                  `protobuf:"varint,7,opt,name=locked,proto3,oneof" json:"locked,omitempty"`
+	Enabled     *bool                  `protobuf:"varint,8,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	RoleId      *int64                 `protobuf:"varint,9,opt,name=role_id,json=roleId,proto3,oneof" json:"role_id,omitempty"`
 	// The initial operator context.
-	OperatorContext *common.OperatorContext `protobuf:"bytes,9,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,10,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -2756,6 +2757,13 @@ func (x *UpdateUserRequest) GetBanGame() bool {
 func (x *UpdateUserRequest) GetBanWithdraw() bool {
 	if x != nil && x.BanWithdraw != nil {
 		return *x.BanWithdraw
+	}
+	return false
+}
+
+func (x *UpdateUserRequest) GetLocked() bool {
+	if x != nil && x.Locked != nil {
+		return *x.Locked
 	}
 	return false
 }
@@ -3652,13 +3660,14 @@ type GetUserProfileResponse struct {
 	BanWithdraw        bool                                       `protobuf:"varint,5,opt,name=ban_withdraw,json=banWithdraw,proto3" json:"ban_withdraw,omitempty"`
 	BanGame            bool                                       `protobuf:"varint,6,opt,name=ban_game,json=banGame,proto3" json:"ban_game,omitempty"`
 	BanLogin           bool                                       `protobuf:"varint,7,opt,name=ban_login,json=banLogin,proto3" json:"ban_login,omitempty"`
-	RegistrationRecord *GetUserProfileResponse_RegistrationRecord `protobuf:"bytes,8,opt,name=registration_record,json=registrationRecord,proto3" json:"registration_record,omitempty"`
-	LoginRecords       []*GetUserProfileResponse_LoginRecord      `protobuf:"bytes,9,rep,name=login_records,json=loginRecords,proto3" json:"login_records,omitempty"`
-	Tags               []string                                   `protobuf:"bytes,10,rep,name=tags,proto3" json:"tags,omitempty"`
-	Comments           []*GetUserProfileResponse_Comment          `protobuf:"bytes,11,rep,name=comments,proto3" json:"comments,omitempty"`
-	TotalLoginCount    int32                                      `protobuf:"varint,12,opt,name=total_login_count,json=totalLoginCount,proto3" json:"total_login_count,omitempty"`
-	LoginPage          int32                                      `protobuf:"varint,13,opt,name=login_page,json=loginPage,proto3" json:"login_page,omitempty"`
-	LoginPageSize      int32                                      `protobuf:"varint,14,opt,name=login_page_size,json=loginPageSize,proto3" json:"login_page_size,omitempty"`
+	Locked             bool                                       `protobuf:"varint,8,opt,name=locked,proto3" json:"locked,omitempty"`
+	RegistrationRecord *GetUserProfileResponse_RegistrationRecord `protobuf:"bytes,9,opt,name=registration_record,json=registrationRecord,proto3" json:"registration_record,omitempty"`
+	LoginRecords       []*GetUserProfileResponse_LoginRecord      `protobuf:"bytes,10,rep,name=login_records,json=loginRecords,proto3" json:"login_records,omitempty"`
+	Tags               []string                                   `protobuf:"bytes,11,rep,name=tags,proto3" json:"tags,omitempty"`
+	Comments           []*GetUserProfileResponse_Comment          `protobuf:"bytes,12,rep,name=comments,proto3" json:"comments,omitempty"`
+	TotalLoginCount    int32                                      `protobuf:"varint,13,opt,name=total_login_count,json=totalLoginCount,proto3" json:"total_login_count,omitempty"`
+	LoginPage          int32                                      `protobuf:"varint,14,opt,name=login_page,json=loginPage,proto3" json:"login_page,omitempty"`
+	LoginPageSize      int32                                      `protobuf:"varint,15,opt,name=login_page_size,json=loginPageSize,proto3" json:"login_page_size,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -3738,6 +3747,13 @@ func (x *GetUserProfileResponse) GetBanGame() bool {
 func (x *GetUserProfileResponse) GetBanLogin() bool {
 	if x != nil {
 		return x.BanLogin
+	}
+	return false
+}
+
+func (x *GetUserProfileResponse) GetLocked() bool {
+	if x != nil {
+		return x.Locked
 	}
 	return false
 }
@@ -9195,23 +9211,26 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\fnew_password\x18\x03 \x01(\tR\vnewPassword\x12K\n" +
 	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextH\x00R\x0foperatorContext\x88\x01\x01B\x13\n" +
 	"\x11_operator_context\"\x1f\n" +
-	"\x1dResetPasswordWithCodeResponse\"\xb5\x03\n" +
+	"\x1dResetPasswordWithCodeResponse\"\xdd\x03\n" +
 	"\x11UpdateUserRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
 	"\bnickname\x18\x02 \x01(\tH\x00R\bnickname\x88\x01\x01\x12\x1b\n" +
 	"\x06avatar\x18\x03 \x01(\tH\x01R\x06avatar\x88\x01\x01\x12 \n" +
 	"\tban_login\x18\x04 \x01(\bH\x02R\bbanLogin\x88\x01\x01\x12\x1e\n" +
 	"\bban_game\x18\x05 \x01(\bH\x03R\abanGame\x88\x01\x01\x12&\n" +
-	"\fban_withdraw\x18\x06 \x01(\bH\x04R\vbanWithdraw\x88\x01\x01\x12\x1d\n" +
-	"\aenabled\x18\a \x01(\bH\x05R\aenabled\x88\x01\x01\x12\x1c\n" +
-	"\arole_id\x18\b \x01(\x03H\x06R\x06roleId\x88\x01\x01\x12F\n" +
-	"\x10operator_context\x18\t \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\v\n" +
+	"\fban_withdraw\x18\x06 \x01(\bH\x04R\vbanWithdraw\x88\x01\x01\x12\x1b\n" +
+	"\x06locked\x18\a \x01(\bH\x05R\x06locked\x88\x01\x01\x12\x1d\n" +
+	"\aenabled\x18\b \x01(\bH\x06R\aenabled\x88\x01\x01\x12\x1c\n" +
+	"\arole_id\x18\t \x01(\x03H\aR\x06roleId\x88\x01\x01\x12F\n" +
+	"\x10operator_context\x18\n" +
+	" \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\v\n" +
 	"\t_nicknameB\t\n" +
 	"\a_avatarB\f\n" +
 	"\n" +
 	"_ban_loginB\v\n" +
 	"\t_ban_gameB\x0f\n" +
-	"\r_ban_withdrawB\n" +
+	"\r_ban_withdrawB\t\n" +
+	"\a_lockedB\n" +
 	"\n" +
 	"\b_enabledB\n" +
 	"\n" +
@@ -9359,7 +9378,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x0flogin_page_size\x18\x03 \x01(\x05H\x01R\rloginPageSize\x88\x01\x01\x12F\n" +
 	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\r\n" +
 	"\v_login_pageB\x12\n" +
-	"\x10_login_page_size\"\xb0\f\n" +
+	"\x10_login_page_size\"\xc8\f\n" +
 	"\x16GetUserProfileResponse\x12\x1a\n" +
 	"\bnickname\x18\x01 \x01(\tR\bnickname\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1b\n" +
@@ -9367,16 +9386,17 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x06online\x18\x04 \x01(\bR\x06online\x12!\n" +
 	"\fban_withdraw\x18\x05 \x01(\bR\vbanWithdraw\x12\x19\n" +
 	"\bban_game\x18\x06 \x01(\bR\abanGame\x12\x1b\n" +
-	"\tban_login\x18\a \x01(\bR\bbanLogin\x12o\n" +
-	"\x13registration_record\x18\b \x01(\v2>.api.user.service.v1.GetUserProfileResponse.RegistrationRecordR\x12registrationRecord\x12\\\n" +
-	"\rlogin_records\x18\t \x03(\v27.api.user.service.v1.GetUserProfileResponse.LoginRecordR\floginRecords\x12\x12\n" +
-	"\x04tags\x18\n" +
-	" \x03(\tR\x04tags\x12O\n" +
-	"\bcomments\x18\v \x03(\v23.api.user.service.v1.GetUserProfileResponse.CommentR\bcomments\x12*\n" +
-	"\x11total_login_count\x18\f \x01(\x05R\x0ftotalLoginCount\x12\x1d\n" +
+	"\tban_login\x18\a \x01(\bR\bbanLogin\x12\x16\n" +
+	"\x06locked\x18\b \x01(\bR\x06locked\x12o\n" +
+	"\x13registration_record\x18\t \x01(\v2>.api.user.service.v1.GetUserProfileResponse.RegistrationRecordR\x12registrationRecord\x12\\\n" +
+	"\rlogin_records\x18\n" +
+	" \x03(\v27.api.user.service.v1.GetUserProfileResponse.LoginRecordR\floginRecords\x12\x12\n" +
+	"\x04tags\x18\v \x03(\tR\x04tags\x12O\n" +
+	"\bcomments\x18\f \x03(\v23.api.user.service.v1.GetUserProfileResponse.CommentR\bcomments\x12*\n" +
+	"\x11total_login_count\x18\r \x01(\x05R\x0ftotalLoginCount\x12\x1d\n" +
 	"\n" +
-	"login_page\x18\r \x01(\x05R\tloginPage\x12&\n" +
-	"\x0flogin_page_size\x18\x0e \x01(\x05R\rloginPageSize\x1aH\n" +
+	"login_page\x18\x0e \x01(\x05R\tloginPage\x12&\n" +
+	"\x0flogin_page_size\x18\x0f \x01(\x05R\rloginPageSize\x1aH\n" +
 	"\x06IpInfo\x12\x0e\n" +
 	"\x02ip\x18\x01 \x01(\tR\x02ip\x12\x14\n" +
 	"\x05count\x18\x02 \x01(\x05R\x05count\x12\x18\n" +
