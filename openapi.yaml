@@ -4110,6 +4110,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.vip.service.v1.GetUserVipLevelResponse'
+    /v1/wallet/balance/details:
+        post:
+            tags:
+                - Wallet
+            description: GetUserBalanceDetails returns the cash and credit details of every credit of the user balance(one currency only)
+            operationId: Wallet_GetUserBalanceDetails
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalanceDetailsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetUserBalanceDetailsResponse'
     /v1/wallet/balances/list:
         post:
             tags:
@@ -12422,6 +12441,16 @@ components:
                     type: string
                 totalCashReportingCurrency:
                     type: string
+        api.wallet.service.v1.GetUserBalanceDetailsRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+        api.wallet.service.v1.GetUserBalanceDetailsResponse:
+            type: object
+            properties:
+                detail:
+                    $ref: '#/components/schemas/api.wallet.service.v1.UserBalanceDetail'
         api.wallet.service.v1.GetUserBalancesRequest:
             type: object
             properties:
@@ -12670,6 +12699,48 @@ components:
         api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse:
             type: object
             properties: {}
+        api.wallet.service.v1.UserBalanceDetail:
+            type: object
+            properties:
+                currency:
+                    type: string
+                totalCash:
+                    type: string
+                totalOperatorBonus:
+                    type: string
+                totalProviderBonus:
+                    type: string
+                totalWithdrawableCash:
+                    type: string
+                totalTransferableOperatorBonus:
+                    type: string
+                credits:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.UserBalanceDetail_Credit'
+        api.wallet.service.v1.UserBalanceDetail_Credit:
+            type: object
+            properties:
+                creditId:
+                    type: string
+                cash:
+                    type: string
+                operatorBonus:
+                    type: string
+                providerBonus:
+                    type: string
+                withdrawableCash:
+                    type: string
+                transferableOperatorBonus:
+                    type: string
+                cashTurnover:
+                    type: string
+                cashTurnoverThreshold:
+                    type: string
+                operatorBonusTurnover:
+                    type: string
+                operatorBonusTurnoverThreshold:
+                    type: string
         google.protobuf.ListValue:
             type: object
             properties:

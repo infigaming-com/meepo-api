@@ -23,6 +23,14 @@ service Wallet {
 	rpc GetUserBalance (GetUserBalanceRequest) returns (GetUserBalanceResponse) {
 	}
 
+	// GetUserBalanceDetails returns the cash and credit details of every credit of the user balance(one currency only)
+	rpc GetUserBalanceDetails (GetUserBalanceDetailsRequest) returns (GetUserBalanceDetailsResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/balance/details"
+			body: "*"
+		};
+	}
+
 	rpc Credit (CreditRequest) returns (CreditResponse) {}
 
 	rpc Debit (DebitRequest) returns (DebitResponse) {}
@@ -1142,6 +1150,36 @@ message BonusTransferResponse {
 	string transferred_amount = 2;
 	string balance_cash = 3;
 	string balance_bonus = 4;
+}
+
+message GetUserBalanceDetailsRequest {
+	string currency = 1;
+}
+
+message UserBalanceDetail {
+	message Credit {
+		int64 credit_id = 1;
+		string cash = 2;
+		string operator_bonus = 3;
+		string provider_bonus = 4;
+		string withdrawable_cash = 5;
+		string transferable_operator_bonus = 6;
+		string cash_turnover = 7;
+		string cash_turnover_threshold = 8;
+		string operator_bonus_turnover = 9;
+		string operator_bonus_turnover_threshold = 10;
+	}
+	string currency = 1;
+	string total_cash = 2;
+	string total_operator_bonus = 3;
+	string total_provider_bonus = 4;
+	string total_withdrawable_cash = 5;
+	string total_transferable_operator_bonus = 6;
+	repeated Credit credits = 7;
+}
+
+message GetUserBalanceDetailsResponse {
+	UserBalanceDetail detail = 1;
 }
 
 

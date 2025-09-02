@@ -21,6 +21,7 @@ const _ = http.SupportPackageIsVersion1
 
 const OperationWalletBonusTransfer = "/api.wallet.service.v1.Wallet/BonusTransfer"
 const OperationWalletGetCurrencies = "/api.wallet.service.v1.Wallet/GetCurrencies"
+const OperationWalletGetUserBalanceDetails = "/api.wallet.service.v1.Wallet/GetUserBalanceDetails"
 const OperationWalletGetUserBalances = "/api.wallet.service.v1.Wallet/GetUserBalances"
 const OperationWalletGetUserDepositRewardSequence = "/api.wallet.service.v1.Wallet/GetUserDepositRewardSequence"
 
@@ -28,6 +29,8 @@ type WalletHTTPServer interface {
 	// BonusTransfer BonusTransfer is used to transfer from one credit's bonus to generate a new credit's cash
 	BonusTransfer(context.Context, *BonusTransferRequest) (*BonusTransferResponse, error)
 	GetCurrencies(context.Context, *GetCurrenciesRequest) (*GetCurrenciesResponse, error)
+	// GetUserBalanceDetails GetUserBalanceDetails returns the cash and credit details of every credit of the user balance(one currency only)
+	GetUserBalanceDetails(context.Context, *GetUserBalanceDetailsRequest) (*GetUserBalanceDetailsResponse, error)
 	// GetUserBalances GetUserBalances returns the balances of all currencies of the user
 	GetUserBalances(context.Context, *GetUserBalancesRequest) (*GetUserBalancesResponse, error)
 	// GetUserDepositRewardSequence GetUserDepositRewardSequence returns the current available deposit reward sequence of the user based on the user deposit stats
@@ -37,6 +40,7 @@ type WalletHTTPServer interface {
 func RegisterWalletHTTPServer(s *http.Server, srv WalletHTTPServer) {
 	r := s.Route("/")
 	r.POST("/v1/wallet/balances/list", _Wallet_GetUserBalances0_HTTP_Handler(srv))
+	r.POST("/v1/wallet/balance/details", _Wallet_GetUserBalanceDetails0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/currencies/get", _Wallet_GetCurrencies0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/deposit-reward/user-sequence", _Wallet_GetUserDepositRewardSequence0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/bonus-transfer", _Wallet_BonusTransfer0_HTTP_Handler(srv))
@@ -60,6 +64,28 @@ func _Wallet_GetUserBalances0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.C
 			return err
 		}
 		reply := out.(*GetUserBalancesResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Wallet_GetUserBalanceDetails0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetUserBalanceDetailsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationWalletGetUserBalanceDetails)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetUserBalanceDetails(ctx, req.(*GetUserBalanceDetailsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetUserBalanceDetailsResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -133,6 +159,7 @@ func _Wallet_BonusTransfer0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Con
 type WalletHTTPClient interface {
 	BonusTransfer(ctx context.Context, req *BonusTransferRequest, opts ...http.CallOption) (rsp *BonusTransferResponse, err error)
 	GetCurrencies(ctx context.Context, req *GetCurrenciesRequest, opts ...http.CallOption) (rsp *GetCurrenciesResponse, err error)
+	GetUserBalanceDetails(ctx context.Context, req *GetUserBalanceDetailsRequest, opts ...http.CallOption) (rsp *GetUserBalanceDetailsResponse, err error)
 	GetUserBalances(ctx context.Context, req *GetUserBalancesRequest, opts ...http.CallOption) (rsp *GetUserBalancesResponse, err error)
 	GetUserDepositRewardSequence(ctx context.Context, req *GetUserDepositRewardSequenceRequest, opts ...http.CallOption) (rsp *GetUserDepositRewardSequenceResponse, err error)
 }
@@ -163,6 +190,19 @@ func (c *WalletHTTPClientImpl) GetCurrencies(ctx context.Context, in *GetCurrenc
 	pattern := "/v1/wallet/currencies/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationWalletGetCurrencies))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *WalletHTTPClientImpl) GetUserBalanceDetails(ctx context.Context, in *GetUserBalanceDetailsRequest, opts ...http.CallOption) (*GetUserBalanceDetailsResponse, error) {
+	var out GetUserBalanceDetailsResponse
+	pattern := "/v1/wallet/balance/details"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationWalletGetUserBalanceDetails))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
