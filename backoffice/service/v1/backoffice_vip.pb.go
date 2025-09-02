@@ -302,23 +302,25 @@ type VipSetting struct {
 	BaseCurrency              string                 `protobuf:"bytes,6,opt,name=base_currency,json=baseCurrency,proto3" json:"base_currency,omitempty"`
 	DisplayRule               VipDisplayRule         `protobuf:"varint,7,opt,name=display_rule,json=displayRule,proto3,enum=api.backoffice.service.v1.VipDisplayRule" json:"display_rule,omitempty"`
 	RewardsSlider             bool                   `protobuf:"varint,8,opt,name=rewards_slider,json=rewardsSlider,proto3" json:"rewards_slider,omitempty"`
-	UpgradePayoutType         VipPayoutType          `protobuf:"varint,9,opt,name=upgrade_payout_type,json=upgradePayoutType,proto3,enum=api.backoffice.service.v1.VipPayoutType" json:"upgrade_payout_type,omitempty"`
-	RakebackInstantPayoutType VipPayoutType          `protobuf:"varint,10,opt,name=rakeback_instant_payout_type,json=rakebackInstantPayoutType,proto3,enum=api.backoffice.service.v1.VipPayoutType" json:"rakeback_instant_payout_type,omitempty"`
-	RakebackDailyPayoutType   VipPayoutType          `protobuf:"varint,11,opt,name=rakeback_daily_payout_type,json=rakebackDailyPayoutType,proto3,enum=api.backoffice.service.v1.VipPayoutType" json:"rakeback_daily_payout_type,omitempty"`
-	WeeklyRewardPayoutType    VipPayoutType          `protobuf:"varint,12,opt,name=weekly_reward_payout_type,json=weeklyRewardPayoutType,proto3,enum=api.backoffice.service.v1.VipPayoutType" json:"weekly_reward_payout_type,omitempty"`
-	MonthlyRewardPayoutType   VipPayoutType          `protobuf:"varint,13,opt,name=monthly_reward_payout_type,json=monthlyRewardPayoutType,proto3,enum=api.backoffice.service.v1.VipPayoutType" json:"monthly_reward_payout_type,omitempty"`
-	DepositXpRate             float64                `protobuf:"fixed64,14,opt,name=deposit_xp_rate,json=depositXpRate,proto3" json:"deposit_xp_rate,omitempty"`
-	WageringXpRate            float64                `protobuf:"fixed64,15,opt,name=wagering_xp_rate,json=wageringXpRate,proto3" json:"wagering_xp_rate,omitempty"`
-	MaxHouseEdgeLimitPercent  float64                `protobuf:"fixed64,16,opt,name=max_house_edge_limit_percent,json=maxHouseEdgeLimitPercent,proto3" json:"max_house_edge_limit_percent,omitempty"`
-	StandardXpMultiplier      float64                `protobuf:"fixed64,17,opt,name=standard_xp_multiplier,json=standardXpMultiplier,proto3" json:"standard_xp_multiplier,omitempty"`
-	Timezone                  string                 `protobuf:"bytes,18,opt,name=timezone,proto3" json:"timezone,omitempty"`
-	DailyIssueAt              string                 `protobuf:"bytes,19,opt,name=daily_issue_at,json=dailyIssueAt,proto3" json:"daily_issue_at,omitempty"`
-	WeeklyIssueDow            int32                  `protobuf:"varint,20,opt,name=weekly_issue_dow,json=weeklyIssueDow,proto3" json:"weekly_issue_dow,omitempty"`
-	WeeklyIssueAt             string                 `protobuf:"bytes,21,opt,name=weekly_issue_at,json=weeklyIssueAt,proto3" json:"weekly_issue_at,omitempty"`
-	MonthlyIssueDom           int32                  `protobuf:"varint,22,opt,name=monthly_issue_dom,json=monthlyIssueDom,proto3" json:"monthly_issue_dom,omitempty"`
-	MonthlyIssueAt            string                 `protobuf:"bytes,23,opt,name=monthly_issue_at,json=monthlyIssueAt,proto3" json:"monthly_issue_at,omitempty"`
-	CreatedAt                 int64                  `protobuf:"varint,24,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt                 int64                  `protobuf:"varint,25,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	FollowParent              bool                   `protobuf:"varint,9,opt,name=follow_parent,json=followParent,proto3" json:"follow_parent,omitempty"`
+	Enabled                   bool                   `protobuf:"varint,10,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	UpgradePayoutType         VipPayoutType          `protobuf:"varint,11,opt,name=upgrade_payout_type,json=upgradePayoutType,proto3,enum=api.backoffice.service.v1.VipPayoutType" json:"upgrade_payout_type,omitempty"`
+	RakebackInstantPayoutType VipPayoutType          `protobuf:"varint,12,opt,name=rakeback_instant_payout_type,json=rakebackInstantPayoutType,proto3,enum=api.backoffice.service.v1.VipPayoutType" json:"rakeback_instant_payout_type,omitempty"`
+	RakebackDailyPayoutType   VipPayoutType          `protobuf:"varint,13,opt,name=rakeback_daily_payout_type,json=rakebackDailyPayoutType,proto3,enum=api.backoffice.service.v1.VipPayoutType" json:"rakeback_daily_payout_type,omitempty"`
+	WeeklyRewardPayoutType    VipPayoutType          `protobuf:"varint,14,opt,name=weekly_reward_payout_type,json=weeklyRewardPayoutType,proto3,enum=api.backoffice.service.v1.VipPayoutType" json:"weekly_reward_payout_type,omitempty"`
+	MonthlyRewardPayoutType   VipPayoutType          `protobuf:"varint,15,opt,name=monthly_reward_payout_type,json=monthlyRewardPayoutType,proto3,enum=api.backoffice.service.v1.VipPayoutType" json:"monthly_reward_payout_type,omitempty"`
+	DepositXpRate             int64                  `protobuf:"varint,16,opt,name=deposit_xp_rate,json=depositXpRate,proto3" json:"deposit_xp_rate,omitempty"`
+	WageringXpRate            int64                  `protobuf:"varint,17,opt,name=wagering_xp_rate,json=wageringXpRate,proto3" json:"wagering_xp_rate,omitempty"`
+	MaxHouseEdgeLimitPercent  int64                  `protobuf:"varint,18,opt,name=max_house_edge_limit_percent,json=maxHouseEdgeLimitPercent,proto3" json:"max_house_edge_limit_percent,omitempty"`
+	StandardXpMultiplier      int64                  `protobuf:"varint,19,opt,name=standard_xp_multiplier,json=standardXpMultiplier,proto3" json:"standard_xp_multiplier,omitempty"`
+	Timezone                  string                 `protobuf:"bytes,20,opt,name=timezone,proto3" json:"timezone,omitempty"`
+	DailyIssueAt              string                 `protobuf:"bytes,21,opt,name=daily_issue_at,json=dailyIssueAt,proto3" json:"daily_issue_at,omitempty"`
+	WeeklyIssueDow            int32                  `protobuf:"varint,22,opt,name=weekly_issue_dow,json=weeklyIssueDow,proto3" json:"weekly_issue_dow,omitempty"`
+	WeeklyIssueAt             string                 `protobuf:"bytes,23,opt,name=weekly_issue_at,json=weeklyIssueAt,proto3" json:"weekly_issue_at,omitempty"`
+	MonthlyIssueDom           int32                  `protobuf:"varint,24,opt,name=monthly_issue_dom,json=monthlyIssueDom,proto3" json:"monthly_issue_dom,omitempty"`
+	MonthlyIssueAt            string                 `protobuf:"bytes,25,opt,name=monthly_issue_at,json=monthlyIssueAt,proto3" json:"monthly_issue_at,omitempty"`
+	CreatedAt                 int64                  `protobuf:"varint,26,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt                 int64                  `protobuf:"varint,27,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
 }
@@ -409,6 +411,20 @@ func (x *VipSetting) GetRewardsSlider() bool {
 	return false
 }
 
+func (x *VipSetting) GetFollowParent() bool {
+	if x != nil {
+		return x.FollowParent
+	}
+	return false
+}
+
+func (x *VipSetting) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
 func (x *VipSetting) GetUpgradePayoutType() VipPayoutType {
 	if x != nil {
 		return x.UpgradePayoutType
@@ -444,28 +460,28 @@ func (x *VipSetting) GetMonthlyRewardPayoutType() VipPayoutType {
 	return VipPayoutType_VIP_PAYOUT_TYPE_UNSPECIFIED
 }
 
-func (x *VipSetting) GetDepositXpRate() float64 {
+func (x *VipSetting) GetDepositXpRate() int64 {
 	if x != nil {
 		return x.DepositXpRate
 	}
 	return 0
 }
 
-func (x *VipSetting) GetWageringXpRate() float64 {
+func (x *VipSetting) GetWageringXpRate() int64 {
 	if x != nil {
 		return x.WageringXpRate
 	}
 	return 0
 }
 
-func (x *VipSetting) GetMaxHouseEdgeLimitPercent() float64 {
+func (x *VipSetting) GetMaxHouseEdgeLimitPercent() int64 {
 	if x != nil {
 		return x.MaxHouseEdgeLimitPercent
 	}
 	return 0
 }
 
-func (x *VipSetting) GetStandardXpMultiplier() float64 {
+func (x *VipSetting) GetStandardXpMultiplier() int64 {
 	if x != nil {
 		return x.StandardXpMultiplier
 	}
@@ -529,10 +545,11 @@ func (x *VipSetting) GetUpdatedAt() int64 {
 }
 
 type GetVipSettingRequest struct {
-	state                  protoimpl.MessageState         `protogen:"open.v1"`
-	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Currency              string                  `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *GetVipSettingRequest) Reset() {
@@ -565,18 +582,30 @@ func (*GetVipSettingRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_vip_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *GetVipSettingRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+func (x *GetVipSettingRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.OperatorContextFilters
+		return x.TargetOperatorContext
 	}
 	return nil
 }
 
+func (x *GetVipSettingRequest) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
 type GetVipSettingResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Setting       *VipSetting            `protobuf:"bytes,1,opt,name=setting,proto3" json:"setting,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                     protoimpl.MessageState  `protogen:"open.v1"`
+	DefaultSetting            *VipSetting             `protobuf:"bytes,1,opt,name=default_setting,json=defaultSetting,proto3" json:"default_setting,omitempty"`
+	CustomSetting             *VipSetting             `protobuf:"bytes,2,opt,name=custom_setting,json=customSetting,proto3" json:"custom_setting,omitempty"`
+	FollowParent              bool                    `protobuf:"varint,3,opt,name=follow_parent,json=followParent,proto3" json:"follow_parent,omitempty"`
+	CustomOperatorContext     *common.OperatorContext `protobuf:"bytes,4,opt,name=custom_operator_context,json=customOperatorContext,proto3" json:"custom_operator_context,omitempty"`
+	InheritedOperatorContext  *common.OperatorContext `protobuf:"bytes,5,opt,name=inherited_operator_context,json=inheritedOperatorContext,proto3" json:"inherited_operator_context,omitempty"`
+	InheritedFromOperatorName string                  `protobuf:"bytes,6,opt,name=inherited_from_operator_name,json=inheritedFromOperatorName,proto3" json:"inherited_from_operator_name,omitempty"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *GetVipSettingResponse) Reset() {
@@ -609,19 +638,54 @@ func (*GetVipSettingResponse) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_vip_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *GetVipSettingResponse) GetSetting() *VipSetting {
+func (x *GetVipSettingResponse) GetDefaultSetting() *VipSetting {
 	if x != nil {
-		return x.Setting
+		return x.DefaultSetting
 	}
 	return nil
 }
 
+func (x *GetVipSettingResponse) GetCustomSetting() *VipSetting {
+	if x != nil {
+		return x.CustomSetting
+	}
+	return nil
+}
+
+func (x *GetVipSettingResponse) GetFollowParent() bool {
+	if x != nil {
+		return x.FollowParent
+	}
+	return false
+}
+
+func (x *GetVipSettingResponse) GetCustomOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.CustomOperatorContext
+	}
+	return nil
+}
+
+func (x *GetVipSettingResponse) GetInheritedOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.InheritedOperatorContext
+	}
+	return nil
+}
+
+func (x *GetVipSettingResponse) GetInheritedFromOperatorName() string {
+	if x != nil {
+		return x.InheritedFromOperatorName
+	}
+	return ""
+}
+
 type UpdateVipSettingRequest struct {
-	state                  protoimpl.MessageState         `protogen:"open.v1"`
-	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	Setting                *VipSetting                    `protobuf:"bytes,2,opt,name=setting,proto3" json:"setting,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Setting               *VipSetting             `protobuf:"bytes,2,opt,name=setting,proto3" json:"setting,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *UpdateVipSettingRequest) Reset() {
@@ -654,9 +718,9 @@ func (*UpdateVipSettingRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_vip_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *UpdateVipSettingRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+func (x *UpdateVipSettingRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.OperatorContextFilters
+		return x.TargetOperatorContext
 	}
 	return nil
 }
@@ -715,32 +779,33 @@ type VipLevelConfigTemplate struct {
 	StartLevel         int64                  `protobuf:"varint,7,opt,name=start_level,json=startLevel,proto3" json:"start_level,omitempty"`
 	EndLevel           int64                  `protobuf:"varint,8,opt,name=end_level,json=endLevel,proto3" json:"end_level,omitempty"`
 	// 升级设置
-	BaseLevelUpgradeXp     float64 `protobuf:"fixed64,9,opt,name=base_level_upgrade_xp,json=baseLevelUpgradeXp,proto3" json:"base_level_upgrade_xp,omitempty"`
-	IncrLevelUpgradeXp     float64 `protobuf:"fixed64,10,opt,name=incr_level_upgrade_xp,json=incrLevelUpgradeXp,proto3" json:"incr_level_upgrade_xp,omitempty"`
-	BaseUpgradeRewardAmt   float64 `protobuf:"fixed64,11,opt,name=base_upgrade_reward_amt,json=baseUpgradeRewardAmt,proto3" json:"base_upgrade_reward_amt,omitempty"`
-	IncrUpgradeRewardAmt   float64 `protobuf:"fixed64,12,opt,name=incr_upgrade_reward_amt,json=incrUpgradeRewardAmt,proto3" json:"incr_upgrade_reward_amt,omitempty"`
-	UpgradeRewardWageringX float64 `protobuf:"fixed64,13,opt,name=upgrade_reward_wagering_x,json=upgradeRewardWageringX,proto3" json:"upgrade_reward_wagering_x,omitempty"`
+	BaseLevelUpgradeXp     int64 `protobuf:"varint,9,opt,name=base_level_upgrade_xp,json=baseLevelUpgradeXp,proto3" json:"base_level_upgrade_xp,omitempty"`
+	IncrLevelUpgradeXp     int64 `protobuf:"varint,10,opt,name=incr_level_upgrade_xp,json=incrLevelUpgradeXp,proto3" json:"incr_level_upgrade_xp,omitempty"`
+	BaseUpgradeRewardAmt   int64 `protobuf:"varint,11,opt,name=base_upgrade_reward_amt,json=baseUpgradeRewardAmt,proto3" json:"base_upgrade_reward_amt,omitempty"`
+	IncrUpgradeRewardAmt   int64 `protobuf:"varint,12,opt,name=incr_upgrade_reward_amt,json=incrUpgradeRewardAmt,proto3" json:"incr_upgrade_reward_amt,omitempty"`
+	UpgradeRewardWageringX int64 `protobuf:"varint,13,opt,name=upgrade_reward_wagering_x,json=upgradeRewardWageringX,proto3" json:"upgrade_reward_wagering_x,omitempty"`
 	// 等级维护要求
-	WeeklyXpLoss  float64 `protobuf:"fixed64,14,opt,name=weekly_xp_loss,json=weeklyXpLoss,proto3" json:"weekly_xp_loss,omitempty"`
-	MonthlyXpLoss float64 `protobuf:"fixed64,15,opt,name=monthly_xp_loss,json=monthlyXpLoss,proto3" json:"monthly_xp_loss,omitempty"`
+	XpLossEnabled bool  `protobuf:"varint,14,opt,name=xp_loss_enabled,json=xpLossEnabled,proto3" json:"xp_loss_enabled,omitempty"`
+	WeeklyXpLoss  int64 `protobuf:"varint,15,opt,name=weekly_xp_loss,json=weeklyXpLoss,proto3" json:"weekly_xp_loss,omitempty"`
+	MonthlyXpLoss int64 `protobuf:"varint,16,opt,name=monthly_xp_loss,json=monthlyXpLoss,proto3" json:"monthly_xp_loss,omitempty"`
 	// 即时返水
-	RakebackInstantEnabled bool    `protobuf:"varint,16,opt,name=rakeback_instant_enabled,json=rakebackInstantEnabled,proto3" json:"rakeback_instant_enabled,omitempty"`
-	RakebackInstantRate    float64 `protobuf:"fixed64,17,opt,name=rakeback_instant_rate,json=rakebackInstantRate,proto3" json:"rakeback_instant_rate,omitempty"`
-	RakebackInstantReq     float64 `protobuf:"fixed64,18,opt,name=rakeback_instant_req,json=rakebackInstantReq,proto3" json:"rakeback_instant_req,omitempty"`
+	RakebackInstantEnabled bool  `protobuf:"varint,17,opt,name=rakeback_instant_enabled,json=rakebackInstantEnabled,proto3" json:"rakeback_instant_enabled,omitempty"`
+	RakebackInstantRate    int64 `protobuf:"varint,18,opt,name=rakeback_instant_rate,json=rakebackInstantRate,proto3" json:"rakeback_instant_rate,omitempty"`
+	RakebackInstantReq     int64 `protobuf:"varint,19,opt,name=rakeback_instant_req,json=rakebackInstantReq,proto3" json:"rakeback_instant_req,omitempty"`
 	// 每日返水
-	RakebackDailyEnabled bool    `protobuf:"varint,19,opt,name=rakeback_daily_enabled,json=rakebackDailyEnabled,proto3" json:"rakeback_daily_enabled,omitempty"`
-	RakebackDailyRate    float64 `protobuf:"fixed64,20,opt,name=rakeback_daily_rate,json=rakebackDailyRate,proto3" json:"rakeback_daily_rate,omitempty"`
-	RakebackDailyReq     float64 `protobuf:"fixed64,21,opt,name=rakeback_daily_req,json=rakebackDailyReq,proto3" json:"rakeback_daily_req,omitempty"`
+	RakebackDailyEnabled bool  `protobuf:"varint,20,opt,name=rakeback_daily_enabled,json=rakebackDailyEnabled,proto3" json:"rakeback_daily_enabled,omitempty"`
+	RakebackDailyRate    int64 `protobuf:"varint,21,opt,name=rakeback_daily_rate,json=rakebackDailyRate,proto3" json:"rakeback_daily_rate,omitempty"`
+	RakebackDailyReq     int64 `protobuf:"varint,22,opt,name=rakeback_daily_req,json=rakebackDailyReq,proto3" json:"rakeback_daily_req,omitempty"`
 	// 每周奖励
-	WeeklyRewardEnabled    bool    `protobuf:"varint,22,opt,name=weekly_reward_enabled,json=weeklyRewardEnabled,proto3" json:"weekly_reward_enabled,omitempty"`
-	WeeklyFixedRewardAmt   float64 `protobuf:"fixed64,23,opt,name=weekly_fixed_reward_amt,json=weeklyFixedRewardAmt,proto3" json:"weekly_fixed_reward_amt,omitempty"`
-	WeeklyTurnoverRate     float64 `protobuf:"fixed64,24,opt,name=weekly_turnover_rate,json=weeklyTurnoverRate,proto3" json:"weekly_turnover_rate,omitempty"`
-	WeeklyNetLossAmt       float64 `protobuf:"fixed64,25,opt,name=weekly_net_loss_amt,json=weeklyNetLossAmt,proto3" json:"weekly_net_loss_amt,omitempty"`
-	WeeklyAdjustRangePct   float64 `protobuf:"fixed64,26,opt,name=weekly_adjust_range_pct,json=weeklyAdjustRangePct,proto3" json:"weekly_adjust_range_pct,omitempty"`
-	WeeklyActiveDaysReward int32   `protobuf:"varint,27,opt,name=weekly_active_days_reward,json=weeklyActiveDaysReward,proto3" json:"weekly_active_days_reward,omitempty"`
-	WeeklyWageringReq      float64 `protobuf:"fixed64,28,opt,name=weekly_wagering_req,json=weeklyWageringReq,proto3" json:"weekly_wagering_req,omitempty"`
-	CreatedAt              int64   `protobuf:"varint,29,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt              int64   `protobuf:"varint,30,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	WeeklyRewardEnabled    bool  `protobuf:"varint,23,opt,name=weekly_reward_enabled,json=weeklyRewardEnabled,proto3" json:"weekly_reward_enabled,omitempty"`
+	WeeklyFixedRewardAmt   int64 `protobuf:"varint,24,opt,name=weekly_fixed_reward_amt,json=weeklyFixedRewardAmt,proto3" json:"weekly_fixed_reward_amt,omitempty"`
+	WeeklyTurnoverRate     int64 `protobuf:"varint,25,opt,name=weekly_turnover_rate,json=weeklyTurnoverRate,proto3" json:"weekly_turnover_rate,omitempty"`
+	WeeklyNetLossAmt       int64 `protobuf:"varint,26,opt,name=weekly_net_loss_amt,json=weeklyNetLossAmt,proto3" json:"weekly_net_loss_amt,omitempty"`
+	WeeklyAdjustRangePct   int64 `protobuf:"varint,27,opt,name=weekly_adjust_range_pct,json=weeklyAdjustRangePct,proto3" json:"weekly_adjust_range_pct,omitempty"`
+	WeeklyActiveDaysReward int32 `protobuf:"varint,28,opt,name=weekly_active_days_reward,json=weeklyActiveDaysReward,proto3" json:"weekly_active_days_reward,omitempty"`
+	WeeklyWageringReq      int64 `protobuf:"varint,29,opt,name=weekly_wagering_req,json=weeklyWageringReq,proto3" json:"weekly_wagering_req,omitempty"`
+	CreatedAt              int64 `protobuf:"varint,30,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt              int64 `protobuf:"varint,31,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -831,49 +896,56 @@ func (x *VipLevelConfigTemplate) GetEndLevel() int64 {
 	return 0
 }
 
-func (x *VipLevelConfigTemplate) GetBaseLevelUpgradeXp() float64 {
+func (x *VipLevelConfigTemplate) GetBaseLevelUpgradeXp() int64 {
 	if x != nil {
 		return x.BaseLevelUpgradeXp
 	}
 	return 0
 }
 
-func (x *VipLevelConfigTemplate) GetIncrLevelUpgradeXp() float64 {
+func (x *VipLevelConfigTemplate) GetIncrLevelUpgradeXp() int64 {
 	if x != nil {
 		return x.IncrLevelUpgradeXp
 	}
 	return 0
 }
 
-func (x *VipLevelConfigTemplate) GetBaseUpgradeRewardAmt() float64 {
+func (x *VipLevelConfigTemplate) GetBaseUpgradeRewardAmt() int64 {
 	if x != nil {
 		return x.BaseUpgradeRewardAmt
 	}
 	return 0
 }
 
-func (x *VipLevelConfigTemplate) GetIncrUpgradeRewardAmt() float64 {
+func (x *VipLevelConfigTemplate) GetIncrUpgradeRewardAmt() int64 {
 	if x != nil {
 		return x.IncrUpgradeRewardAmt
 	}
 	return 0
 }
 
-func (x *VipLevelConfigTemplate) GetUpgradeRewardWageringX() float64 {
+func (x *VipLevelConfigTemplate) GetUpgradeRewardWageringX() int64 {
 	if x != nil {
 		return x.UpgradeRewardWageringX
 	}
 	return 0
 }
 
-func (x *VipLevelConfigTemplate) GetWeeklyXpLoss() float64 {
+func (x *VipLevelConfigTemplate) GetXpLossEnabled() bool {
+	if x != nil {
+		return x.XpLossEnabled
+	}
+	return false
+}
+
+func (x *VipLevelConfigTemplate) GetWeeklyXpLoss() int64 {
 	if x != nil {
 		return x.WeeklyXpLoss
 	}
 	return 0
 }
 
-func (x *VipLevelConfigTemplate) GetMonthlyXpLoss() float64 {
+func (x *VipLevelConfigTemplate) GetMonthlyXpLoss() int64 {
 	if x != nil {
 		return x.MonthlyXpLoss
 	}
@@ -887,14 +959,14 @@ func (x *VipLevelConfigTemplate) GetRakebackInstantEnabled() bool {
 	return false
 }
 
-func (x *VipLevelConfigTemplate) GetRakebackInstantRate() float64 {
+func (x *VipLevelConfigTemplate) GetRakebackInstantRate() int64 {
 	if x != nil {
 		return x.RakebackInstantRate
 	}
 	return 0
 }
 
-func (x *VipLevelConfigTemplate) GetRakebackInstantReq() float64 {
+func (x *VipLevelConfigTemplate) GetRakebackInstantReq() int64 {
 	if x != nil {
 		return x.RakebackInstantReq
 	}
@@ -908,14 +980,14 @@ func (x *VipLevelConfigTemplate) GetRakebackDailyEnabled() bool {
 	return false
 }
 
-func (x *VipLevelConfigTemplate) GetRakebackDailyRate() float64 {
+func (x *VipLevelConfigTemplate) GetRakebackDailyRate() int64 {
 	if x != nil {
 		return x.RakebackDailyRate
 	}
 	return 0
 }
 
-func (x *VipLevelConfigTemplate) GetRakebackDailyReq() float64 {
+func (x *VipLevelConfigTemplate) GetRakebackDailyReq() int64 {
 	if x != nil {
 		return x.RakebackDailyReq
 	}
@@ -929,28 +1001,28 @@ func (x *VipLevelConfigTemplate) GetWeeklyRewardEnabled() bool {
 	return false
 }
 
-func (x *VipLevelConfigTemplate) GetWeeklyFixedRewardAmt() float64 {
+func (x *VipLevelConfigTemplate) GetWeeklyFixedRewardAmt() int64 {
 	if x != nil {
 		return x.WeeklyFixedRewardAmt
 	}
 	return 0
 }
 
-func (x *VipLevelConfigTemplate) GetWeeklyTurnoverRate() float64 {
+func (x *VipLevelConfigTemplate) GetWeeklyTurnoverRate() int64 {
 	if x != nil {
 		return x.WeeklyTurnoverRate
 	}
 	return 0
 }
 
-func (x *VipLevelConfigTemplate) GetWeeklyNetLossAmt() float64 {
+func (x *VipLevelConfigTemplate) GetWeeklyNetLossAmt() int64 {
 	if x != nil {
 		return x.WeeklyNetLossAmt
 	}
 	return 0
 }
 
-func (x *VipLevelConfigTemplate) GetWeeklyAdjustRangePct() float64 {
+func (x *VipLevelConfigTemplate) GetWeeklyAdjustRangePct() int64 {
 	if x != nil {
 		return x.WeeklyAdjustRangePct
 	}
@@ -964,7 +1036,7 @@ func (x *VipLevelConfigTemplate) GetWeeklyActiveDaysReward() int32 {
 	return 0
 }
 
-func (x *VipLevelConfigTemplate) GetWeeklyWageringReq() float64 {
+func (x *VipLevelConfigTemplate) GetWeeklyWageringReq() int64 {
 	if x != nil {
 		return x.WeeklyWageringReq
 	}
@@ -986,12 +1058,13 @@ func (x *VipLevelConfigTemplate) GetUpdatedAt() int64 {
 }
 
 type ListVipLevelConfigTemplatesRequest struct {
-	state                  protoimpl.MessageState         `protogen:"open.v1"`
-	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	Page                   int32                          `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize               int32                          `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	SettingId             int64                   `protobuf:"varint,2,opt,name=setting_id,json=settingId,proto3" json:"setting_id,omitempty"`
+	Page                  int32                   `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize              int32                   `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *ListVipLevelConfigTemplatesRequest) Reset() {
@@ -1024,11 +1097,18 @@ func (*ListVipLevelConfigTemplatesRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_vip_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *ListVipLevelConfigTemplatesRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+func (x *ListVipLevelConfigTemplatesRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.OperatorContextFilters
+		return x.TargetOperatorContext
 	}
 	return nil
+}
+
+func (x *ListVipLevelConfigTemplatesRequest) GetSettingId() int64 {
+	if x != nil {
+		return x.SettingId
+	}
+	return 0
 }
 
 func (x *ListVipLevelConfigTemplatesRequest) GetPage() int32 {
@@ -1114,11 +1194,11 @@ func (x *ListVipLevelConfigTemplatesResponse) GetPageSize() int32 {
 }
 
 type GetVipLevelConfigTemplateRequest struct {
-	state                  protoimpl.MessageState         `protogen:"open.v1"`
-	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	TemplateId             int64                          `protobuf:"varint,2,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	TemplateId            int64                   `protobuf:"varint,2,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *GetVipLevelConfigTemplateRequest) Reset() {
@@ -1151,9 +1231,9 @@ func (*GetVipLevelConfigTemplateRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_vip_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *GetVipLevelConfigTemplateRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+func (x *GetVipLevelConfigTemplateRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.OperatorContextFilters
+		return x.TargetOperatorContext
 	}
 	return nil
 }
@@ -1210,11 +1290,11 @@ func (x *GetVipLevelConfigTemplateResponse) GetTemplate() *VipLevelConfigTemplat
 }
 
 type CreateVipLevelConfigTemplateRequest struct {
-	state                  protoimpl.MessageState         `protogen:"open.v1"`
-	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	Template               *VipLevelConfigTemplate        `protobuf:"bytes,2,opt,name=template,proto3" json:"template,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Template              *VipLevelConfigTemplate `protobuf:"bytes,2,opt,name=template,proto3" json:"template,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *CreateVipLevelConfigTemplateRequest) Reset() {
@@ -1247,9 +1327,9 @@ func (*CreateVipLevelConfigTemplateRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_vip_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *CreateVipLevelConfigTemplateRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+func (x *CreateVipLevelConfigTemplateRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.OperatorContextFilters
+		return x.TargetOperatorContext
 	}
 	return nil
 }
@@ -1262,7 +1342,8 @@ func (x *CreateVipLevelConfigTemplateRequest) GetTemplate() *VipLevelConfigTempl
 }
 
 type CreateVipLevelConfigTemplateResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	Template      *VipLevelConfigTemplate `protobuf:"bytes,1,opt,name=template,proto3" json:"template,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1297,12 +1378,19 @@ func (*CreateVipLevelConfigTemplateResponse) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_vip_proto_rawDescGZIP(), []int{11}
 }
 
+func (x *CreateVipLevelConfigTemplateResponse) GetTemplate() *VipLevelConfigTemplate {
+	if x != nil {
+		return x.Template
+	}
+	return nil
+}
+
 type UpdateVipLevelConfigTemplateRequest struct {
-	state                  protoimpl.MessageState         `protogen:"open.v1"`
-	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	Template               *VipLevelConfigTemplate        `protobuf:"bytes,2,opt,name=template,proto3" json:"template,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Template              *VipLevelConfigTemplate `protobuf:"bytes,2,opt,name=template,proto3" json:"template,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *UpdateVipLevelConfigTemplateRequest) Reset() {
@@ -1335,9 +1423,9 @@ func (*UpdateVipLevelConfigTemplateRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_vip_proto_rawDescGZIP(), []int{12}
 }
 
-func (x *UpdateVipLevelConfigTemplateRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+func (x *UpdateVipLevelConfigTemplateRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.OperatorContextFilters
+		return x.TargetOperatorContext
 	}
 	return nil
 }
@@ -1386,11 +1474,11 @@ func (*UpdateVipLevelConfigTemplateResponse) Descriptor() ([]byte, []int) {
 }
 
 type DeleteVipLevelConfigTemplateRequest struct {
-	state                  protoimpl.MessageState         `protogen:"open.v1"`
-	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	TemplateId             int64                          `protobuf:"varint,2,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	TemplateId            int64                   `protobuf:"varint,2,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *DeleteVipLevelConfigTemplateRequest) Reset() {
@@ -1423,9 +1511,9 @@ func (*DeleteVipLevelConfigTemplateRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_vip_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *DeleteVipLevelConfigTemplateRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+func (x *DeleteVipLevelConfigTemplateRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.OperatorContextFilters
+		return x.TargetOperatorContext
 	}
 	return nil
 }
@@ -1477,8 +1565,7 @@ var File_backoffice_service_v1_backoffice_vip_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_vip_proto_rawDesc = "" +
 	"\n" +
-	"*backoffice/service/v1/backoffice_vip.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x13common/common.proto\"\xcf\n" +
-	"\n" +
+	"*backoffice/service/v1/backoffice_vip.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x13common/common.proto\"\x8e\v\n" +
 	"\n" +
 	"VipSetting\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12,\n" +
@@ -1489,36 +1576,43 @@ const file_backoffice_service_v1_backoffice_vip_proto_rawDesc = "" +
 	"operatorId\x12#\n" +
 	"\rbase_currency\x18\x06 \x01(\tR\fbaseCurrency\x12L\n" +
 	"\fdisplay_rule\x18\a \x01(\x0e2).api.backoffice.service.v1.VipDisplayRuleR\vdisplayRule\x12%\n" +
-	"\x0erewards_slider\x18\b \x01(\bR\rrewardsSlider\x12X\n" +
-	"\x13upgrade_payout_type\x18\t \x01(\x0e2(.api.backoffice.service.v1.VipPayoutTypeR\x11upgradePayoutType\x12i\n" +
-	"\x1crakeback_instant_payout_type\x18\n" +
-	" \x01(\x0e2(.api.backoffice.service.v1.VipPayoutTypeR\x19rakebackInstantPayoutType\x12e\n" +
-	"\x1arakeback_daily_payout_type\x18\v \x01(\x0e2(.api.backoffice.service.v1.VipPayoutTypeR\x17rakebackDailyPayoutType\x12c\n" +
-	"\x19weekly_reward_payout_type\x18\f \x01(\x0e2(.api.backoffice.service.v1.VipPayoutTypeR\x16weeklyRewardPayoutType\x12e\n" +
-	"\x1amonthly_reward_payout_type\x18\r \x01(\x0e2(.api.backoffice.service.v1.VipPayoutTypeR\x17monthlyRewardPayoutType\x12&\n" +
-	"\x0fdeposit_xp_rate\x18\x0e \x01(\x01R\rdepositXpRate\x12(\n" +
-	"\x10wagering_xp_rate\x18\x0f \x01(\x01R\x0ewageringXpRate\x12>\n" +
-	"\x1cmax_house_edge_limit_percent\x18\x10 \x01(\x01R\x18maxHouseEdgeLimitPercent\x124\n" +
-	"\x16standard_xp_multiplier\x18\x11 \x01(\x01R\x14standardXpMultiplier\x12\x1a\n" +
-	"\btimezone\x18\x12 \x01(\tR\btimezone\x12$\n" +
-	"\x0edaily_issue_at\x18\x13 \x01(\tR\fdailyIssueAt\x12(\n" +
-	"\x10weekly_issue_dow\x18\x14 \x01(\x05R\x0eweeklyIssueDow\x12&\n" +
-	"\x0fweekly_issue_at\x18\x15 \x01(\tR\rweeklyIssueAt\x12*\n" +
-	"\x11monthly_issue_dom\x18\x16 \x01(\x05R\x0fmonthlyIssueDom\x12(\n" +
-	"\x10monthly_issue_at\x18\x17 \x01(\tR\x0emonthlyIssueAt\x12\x1d\n" +
+	"\x0erewards_slider\x18\b \x01(\bR\rrewardsSlider\x12#\n" +
+	"\rfollow_parent\x18\t \x01(\bR\ffollowParent\x12\x18\n" +
+	"\aenabled\x18\n" +
+	" \x01(\bR\aenabled\x12X\n" +
+	"\x13upgrade_payout_type\x18\v \x01(\x0e2(.api.backoffice.service.v1.VipPayoutTypeR\x11upgradePayoutType\x12i\n" +
+	"\x1crakeback_instant_payout_type\x18\f \x01(\x0e2(.api.backoffice.service.v1.VipPayoutTypeR\x19rakebackInstantPayoutType\x12e\n" +
+	"\x1arakeback_daily_payout_type\x18\r \x01(\x0e2(.api.backoffice.service.v1.VipPayoutTypeR\x17rakebackDailyPayoutType\x12c\n" +
+	"\x19weekly_reward_payout_type\x18\x0e \x01(\x0e2(.api.backoffice.service.v1.VipPayoutTypeR\x16weeklyRewardPayoutType\x12e\n" +
+	"\x1amonthly_reward_payout_type\x18\x0f \x01(\x0e2(.api.backoffice.service.v1.VipPayoutTypeR\x17monthlyRewardPayoutType\x12&\n" +
+	"\x0fdeposit_xp_rate\x18\x10 \x01(\x03R\rdepositXpRate\x12(\n" +
+	"\x10wagering_xp_rate\x18\x11 \x01(\x03R\x0ewageringXpRate\x12>\n" +
+	"\x1cmax_house_edge_limit_percent\x18\x12 \x01(\x03R\x18maxHouseEdgeLimitPercent\x124\n" +
+	"\x16standard_xp_multiplier\x18\x13 \x01(\x03R\x14standardXpMultiplier\x12\x1a\n" +
+	"\btimezone\x18\x14 \x01(\tR\btimezone\x12$\n" +
+	"\x0edaily_issue_at\x18\x15 \x01(\tR\fdailyIssueAt\x12(\n" +
+	"\x10weekly_issue_dow\x18\x16 \x01(\x05R\x0eweeklyIssueDow\x12&\n" +
+	"\x0fweekly_issue_at\x18\x17 \x01(\tR\rweeklyIssueAt\x12*\n" +
+	"\x11monthly_issue_dom\x18\x18 \x01(\x05R\x0fmonthlyIssueDom\x12(\n" +
+	"\x10monthly_issue_at\x18\x19 \x01(\tR\x0emonthlyIssueAt\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x18 \x01(\x03R\tcreatedAt\x12\x1d\n" +
+	"created_at\x18\x1a \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\x19 \x01(\x03R\tupdatedAt\"t\n" +
-	"\x14GetVipSettingRequest\x12\\\n" +
-	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"X\n" +
-	"\x15GetVipSettingResponse\x12?\n" +
-	"\asetting\x18\x01 \x01(\v2%.api.backoffice.service.v1.VipSettingR\asetting\"\xb8\x01\n" +
-	"\x17UpdateVipSettingRequest\x12\\\n" +
-	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12?\n" +
+	"updated_at\x18\x1b \x01(\x03R\tupdatedAt\"\x87\x01\n" +
+	"\x14GetVipSettingRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1a\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\"\xcb\x03\n" +
+	"\x15GetVipSettingResponse\x12N\n" +
+	"\x0fdefault_setting\x18\x01 \x01(\v2%.api.backoffice.service.v1.VipSettingR\x0edefaultSetting\x12L\n" +
+	"\x0ecustom_setting\x18\x02 \x01(\v2%.api.backoffice.service.v1.VipSettingR\rcustomSetting\x12#\n" +
+	"\rfollow_parent\x18\x03 \x01(\bR\ffollowParent\x12S\n" +
+	"\x17custom_operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x15customOperatorContext\x12Y\n" +
+	"\x1ainherited_operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x18inheritedOperatorContext\x12?\n" +
+	"\x1cinherited_from_operator_name\x18\x06 \x01(\tR\x19inheritedFromOperatorName\"\xaf\x01\n" +
+	"\x17UpdateVipSettingRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12?\n" +
 	"\asetting\x18\x02 \x01(\v2%.api.backoffice.service.v1.VipSettingR\asetting\"\x1a\n" +
-	"\x18UpdateVipSettingResponse\"\xe8\n" +
-	"\n" +
+	"\x18UpdateVipSettingResponse\"\x90\v\n" +
 	"\x16VipLevelConfigTemplate\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12,\n" +
 	"\x12system_operator_id\x18\x02 \x01(\x03R\x10systemOperatorId\x120\n" +
@@ -1530,56 +1624,60 @@ const file_backoffice_service_v1_backoffice_vip_proto_rawDesc = "" +
 	"\vstart_level\x18\a \x01(\x03R\n" +
 	"startLevel\x12\x1b\n" +
 	"\tend_level\x18\b \x01(\x03R\bendLevel\x121\n" +
-	"\x15base_level_upgrade_xp\x18\t \x01(\x01R\x12baseLevelUpgradeXp\x121\n" +
+	"\x15base_level_upgrade_xp\x18\t \x01(\x03R\x12baseLevelUpgradeXp\x121\n" +
 	"\x15incr_level_upgrade_xp\x18\n" +
-	" \x01(\x01R\x12incrLevelUpgradeXp\x125\n" +
-	"\x17base_upgrade_reward_amt\x18\v \x01(\x01R\x14baseUpgradeRewardAmt\x125\n" +
-	"\x17incr_upgrade_reward_amt\x18\f \x01(\x01R\x14incrUpgradeRewardAmt\x129\n" +
-	"\x19upgrade_reward_wagering_x\x18\r \x01(\x01R\x16upgradeRewardWageringX\x12$\n" +
-	"\x0eweekly_xp_loss\x18\x0e \x01(\x01R\fweeklyXpLoss\x12&\n" +
-	"\x0fmonthly_xp_loss\x18\x0f \x01(\x01R\rmonthlyXpLoss\x128\n" +
-	"\x18rakeback_instant_enabled\x18\x10 \x01(\bR\x16rakebackInstantEnabled\x122\n" +
-	"\x15rakeback_instant_rate\x18\x11 \x01(\x01R\x13rakebackInstantRate\x120\n" +
-	"\x14rakeback_instant_req\x18\x12 \x01(\x01R\x12rakebackInstantReq\x124\n" +
-	"\x16rakeback_daily_enabled\x18\x13 \x01(\bR\x14rakebackDailyEnabled\x12.\n" +
-	"\x13rakeback_daily_rate\x18\x14 \x01(\x01R\x11rakebackDailyRate\x12,\n" +
-	"\x12rakeback_daily_req\x18\x15 \x01(\x01R\x10rakebackDailyReq\x122\n" +
-	"\x15weekly_reward_enabled\x18\x16 \x01(\bR\x13weeklyRewardEnabled\x125\n" +
-	"\x17weekly_fixed_reward_amt\x18\x17 \x01(\x01R\x14weeklyFixedRewardAmt\x120\n" +
-	"\x14weekly_turnover_rate\x18\x18 \x01(\x01R\x12weeklyTurnoverRate\x12-\n" +
-	"\x13weekly_net_loss_amt\x18\x19 \x01(\x01R\x10weeklyNetLossAmt\x125\n" +
-	"\x17weekly_adjust_range_pct\x18\x1a \x01(\x01R\x14weeklyAdjustRangePct\x129\n" +
-	"\x19weekly_active_days_reward\x18\x1b \x01(\x05R\x16weeklyActiveDaysReward\x12.\n" +
-	"\x13weekly_wagering_req\x18\x1c \x01(\x01R\x11weeklyWageringReq\x12\x1d\n" +
+	" \x01(\x03R\x12incrLevelUpgradeXp\x125\n" +
+	"\x17base_upgrade_reward_amt\x18\v \x01(\x03R\x14baseUpgradeRewardAmt\x125\n" +
+	"\x17incr_upgrade_reward_amt\x18\f \x01(\x03R\x14incrUpgradeRewardAmt\x129\n" +
+	"\x19upgrade_reward_wagering_x\x18\r \x01(\x03R\x16upgradeRewardWageringX\x12&\n" +
+	"\x0fxp_loss_enabled\x18\x0e \x01(\bR\rxpLossEnabled\x12$\n" +
+	"\x0eweekly_xp_loss\x18\x0f \x01(\x03R\fweeklyXpLoss\x12&\n" +
+	"\x0fmonthly_xp_loss\x18\x10 \x01(\x03R\rmonthlyXpLoss\x128\n" +
+	"\x18rakeback_instant_enabled\x18\x11 \x01(\bR\x16rakebackInstantEnabled\x122\n" +
+	"\x15rakeback_instant_rate\x18\x12 \x01(\x03R\x13rakebackInstantRate\x120\n" +
+	"\x14rakeback_instant_req\x18\x13 \x01(\x03R\x12rakebackInstantReq\x124\n" +
+	"\x16rakeback_daily_enabled\x18\x14 \x01(\bR\x14rakebackDailyEnabled\x12.\n" +
+	"\x13rakeback_daily_rate\x18\x15 \x01(\x03R\x11rakebackDailyRate\x12,\n" +
+	"\x12rakeback_daily_req\x18\x16 \x01(\x03R\x10rakebackDailyReq\x122\n" +
+	"\x15weekly_reward_enabled\x18\x17 \x01(\bR\x13weeklyRewardEnabled\x125\n" +
+	"\x17weekly_fixed_reward_amt\x18\x18 \x01(\x03R\x14weeklyFixedRewardAmt\x120\n" +
+	"\x14weekly_turnover_rate\x18\x19 \x01(\x03R\x12weeklyTurnoverRate\x12-\n" +
+	"\x13weekly_net_loss_amt\x18\x1a \x01(\x03R\x10weeklyNetLossAmt\x125\n" +
+	"\x17weekly_adjust_range_pct\x18\x1b \x01(\x03R\x14weeklyAdjustRangePct\x129\n" +
+	"\x19weekly_active_days_reward\x18\x1c \x01(\x05R\x16weeklyActiveDaysReward\x12.\n" +
+	"\x13weekly_wagering_req\x18\x1d \x01(\x03R\x11weeklyWageringReq\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x1d \x01(\x03R\tcreatedAt\x12\x1d\n" +
+	"created_at\x18\x1e \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\x1e \x01(\x03R\tupdatedAt\"\xb3\x01\n" +
-	"\"ListVipLevelConfigTemplatesRequest\x12\\\n" +
-	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x12\n" +
-	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\"\xbd\x01\n" +
+	"updated_at\x18\x1f \x01(\x03R\tupdatedAt\"\xc9\x01\n" +
+	"\"ListVipLevelConfigTemplatesRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1d\n" +
+	"\n" +
+	"setting_id\x18\x02 \x01(\x03R\tsettingId\x12\x12\n" +
+	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\xbd\x01\n" +
 	"#ListVipLevelConfigTemplatesResponse\x12O\n" +
 	"\ttemplates\x18\x01 \x03(\v21.api.backoffice.service.v1.VipLevelConfigTemplateR\ttemplates\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\xa1\x01\n" +
-	" GetVipLevelConfigTemplateRequest\x12\\\n" +
-	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x1f\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\x98\x01\n" +
+	" GetVipLevelConfigTemplateRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1f\n" +
 	"\vtemplate_id\x18\x02 \x01(\x03R\n" +
 	"templateId\"r\n" +
 	"!GetVipLevelConfigTemplateResponse\x12M\n" +
-	"\btemplate\x18\x01 \x01(\v21.api.backoffice.service.v1.VipLevelConfigTemplateR\btemplate\"\xd2\x01\n" +
-	"#CreateVipLevelConfigTemplateRequest\x12\\\n" +
-	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12M\n" +
+	"\btemplate\x18\x01 \x01(\v21.api.backoffice.service.v1.VipLevelConfigTemplateR\btemplate\"\xc9\x01\n" +
+	"#CreateVipLevelConfigTemplateRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12M\n" +
+	"\btemplate\x18\x02 \x01(\v21.api.backoffice.service.v1.VipLevelConfigTemplateR\btemplate\"u\n" +
+	"$CreateVipLevelConfigTemplateResponse\x12M\n" +
+	"\btemplate\x18\x01 \x01(\v21.api.backoffice.service.v1.VipLevelConfigTemplateR\btemplate\"\xc9\x01\n" +
+	"#UpdateVipLevelConfigTemplateRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12M\n" +
 	"\btemplate\x18\x02 \x01(\v21.api.backoffice.service.v1.VipLevelConfigTemplateR\btemplate\"&\n" +
-	"$CreateVipLevelConfigTemplateResponse\"\xd2\x01\n" +
-	"#UpdateVipLevelConfigTemplateRequest\x12\\\n" +
-	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12M\n" +
-	"\btemplate\x18\x02 \x01(\v21.api.backoffice.service.v1.VipLevelConfigTemplateR\btemplate\"&\n" +
-	"$UpdateVipLevelConfigTemplateResponse\"\xa4\x01\n" +
-	"#DeleteVipLevelConfigTemplateRequest\x12\\\n" +
-	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x1f\n" +
+	"$UpdateVipLevelConfigTemplateResponse\"\x9b\x01\n" +
+	"#DeleteVipLevelConfigTemplateRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1f\n" +
 	"\vtemplate_id\x18\x02 \x01(\x03R\n" +
 	"templateId\"&\n" +
 	"$DeleteVipLevelConfigTemplateResponse*q\n" +
@@ -1657,7 +1755,7 @@ var file_backoffice_service_v1_backoffice_vip_proto_goTypes = []any{
 	(*UpdateVipLevelConfigTemplateResponse)(nil), // 18: api.backoffice.service.v1.UpdateVipLevelConfigTemplateResponse
 	(*DeleteVipLevelConfigTemplateRequest)(nil),  // 19: api.backoffice.service.v1.DeleteVipLevelConfigTemplateRequest
 	(*DeleteVipLevelConfigTemplateResponse)(nil), // 20: api.backoffice.service.v1.DeleteVipLevelConfigTemplateResponse
-	(*common.OperatorContextFilters)(nil),        // 21: api.common.OperatorContextFilters
+	(*common.OperatorContext)(nil),               // 21: api.common.OperatorContext
 }
 var file_backoffice_service_v1_backoffice_vip_proto_depIdxs = []int32{
 	0,  // 0: api.backoffice.service.v1.VipSetting.display_rule:type_name -> api.backoffice.service.v1.VipDisplayRule
@@ -1666,38 +1764,42 @@ var file_backoffice_service_v1_backoffice_vip_proto_depIdxs = []int32{
 	2,  // 3: api.backoffice.service.v1.VipSetting.rakeback_daily_payout_type:type_name -> api.backoffice.service.v1.VipPayoutType
 	2,  // 4: api.backoffice.service.v1.VipSetting.weekly_reward_payout_type:type_name -> api.backoffice.service.v1.VipPayoutType
 	2,  // 5: api.backoffice.service.v1.VipSetting.monthly_reward_payout_type:type_name -> api.backoffice.service.v1.VipPayoutType
-	21, // 6: api.backoffice.service.v1.GetVipSettingRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	5,  // 7: api.backoffice.service.v1.GetVipSettingResponse.setting:type_name -> api.backoffice.service.v1.VipSetting
-	21, // 8: api.backoffice.service.v1.UpdateVipSettingRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	5,  // 9: api.backoffice.service.v1.UpdateVipSettingRequest.setting:type_name -> api.backoffice.service.v1.VipSetting
-	21, // 10: api.backoffice.service.v1.ListVipLevelConfigTemplatesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	10, // 11: api.backoffice.service.v1.ListVipLevelConfigTemplatesResponse.templates:type_name -> api.backoffice.service.v1.VipLevelConfigTemplate
-	21, // 12: api.backoffice.service.v1.GetVipLevelConfigTemplateRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	10, // 13: api.backoffice.service.v1.GetVipLevelConfigTemplateResponse.template:type_name -> api.backoffice.service.v1.VipLevelConfigTemplate
-	21, // 14: api.backoffice.service.v1.CreateVipLevelConfigTemplateRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	10, // 15: api.backoffice.service.v1.CreateVipLevelConfigTemplateRequest.template:type_name -> api.backoffice.service.v1.VipLevelConfigTemplate
-	21, // 16: api.backoffice.service.v1.UpdateVipLevelConfigTemplateRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	10, // 17: api.backoffice.service.v1.UpdateVipLevelConfigTemplateRequest.template:type_name -> api.backoffice.service.v1.VipLevelConfigTemplate
-	21, // 18: api.backoffice.service.v1.DeleteVipLevelConfigTemplateRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	6,  // 19: api.backoffice.service.v1.BackofficeVip.GetVipSetting:input_type -> api.backoffice.service.v1.GetVipSettingRequest
-	8,  // 20: api.backoffice.service.v1.BackofficeVip.UpdateVipSetting:input_type -> api.backoffice.service.v1.UpdateVipSettingRequest
-	11, // 21: api.backoffice.service.v1.BackofficeVip.ListVipLevelConfigTemplates:input_type -> api.backoffice.service.v1.ListVipLevelConfigTemplatesRequest
-	13, // 22: api.backoffice.service.v1.BackofficeVip.GetVipLevelConfigTemplate:input_type -> api.backoffice.service.v1.GetVipLevelConfigTemplateRequest
-	15, // 23: api.backoffice.service.v1.BackofficeVip.CreateVipLevelConfigTemplate:input_type -> api.backoffice.service.v1.CreateVipLevelConfigTemplateRequest
-	17, // 24: api.backoffice.service.v1.BackofficeVip.UpdateVipLevelConfigTemplate:input_type -> api.backoffice.service.v1.UpdateVipLevelConfigTemplateRequest
-	19, // 25: api.backoffice.service.v1.BackofficeVip.DeleteVipLevelConfigTemplate:input_type -> api.backoffice.service.v1.DeleteVipLevelConfigTemplateRequest
-	7,  // 26: api.backoffice.service.v1.BackofficeVip.GetVipSetting:output_type -> api.backoffice.service.v1.GetVipSettingResponse
-	9,  // 27: api.backoffice.service.v1.BackofficeVip.UpdateVipSetting:output_type -> api.backoffice.service.v1.UpdateVipSettingResponse
-	12, // 28: api.backoffice.service.v1.BackofficeVip.ListVipLevelConfigTemplates:output_type -> api.backoffice.service.v1.ListVipLevelConfigTemplatesResponse
-	14, // 29: api.backoffice.service.v1.BackofficeVip.GetVipLevelConfigTemplate:output_type -> api.backoffice.service.v1.GetVipLevelConfigTemplateResponse
-	16, // 30: api.backoffice.service.v1.BackofficeVip.CreateVipLevelConfigTemplate:output_type -> api.backoffice.service.v1.CreateVipLevelConfigTemplateResponse
-	18, // 31: api.backoffice.service.v1.BackofficeVip.UpdateVipLevelConfigTemplate:output_type -> api.backoffice.service.v1.UpdateVipLevelConfigTemplateResponse
-	20, // 32: api.backoffice.service.v1.BackofficeVip.DeleteVipLevelConfigTemplate:output_type -> api.backoffice.service.v1.DeleteVipLevelConfigTemplateResponse
-	26, // [26:33] is the sub-list for method output_type
-	19, // [19:26] is the sub-list for method input_type
-	19, // [19:19] is the sub-list for extension type_name
-	19, // [19:19] is the sub-list for extension extendee
-	0,  // [0:19] is the sub-list for field type_name
+	21, // 6: api.backoffice.service.v1.GetVipSettingRequest.target_operator_context:type_name -> api.common.OperatorContext
+	5,  // 7: api.backoffice.service.v1.GetVipSettingResponse.default_setting:type_name -> api.backoffice.service.v1.VipSetting
+	5,  // 8: api.backoffice.service.v1.GetVipSettingResponse.custom_setting:type_name -> api.backoffice.service.v1.VipSetting
+	21, // 9: api.backoffice.service.v1.GetVipSettingResponse.custom_operator_context:type_name -> api.common.OperatorContext
+	21, // 10: api.backoffice.service.v1.GetVipSettingResponse.inherited_operator_context:type_name -> api.common.OperatorContext
+	21, // 11: api.backoffice.service.v1.UpdateVipSettingRequest.target_operator_context:type_name -> api.common.OperatorContext
+	5,  // 12: api.backoffice.service.v1.UpdateVipSettingRequest.setting:type_name -> api.backoffice.service.v1.VipSetting
+	21, // 13: api.backoffice.service.v1.ListVipLevelConfigTemplatesRequest.target_operator_context:type_name -> api.common.OperatorContext
+	10, // 14: api.backoffice.service.v1.ListVipLevelConfigTemplatesResponse.templates:type_name -> api.backoffice.service.v1.VipLevelConfigTemplate
+	21, // 15: api.backoffice.service.v1.GetVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	10, // 16: api.backoffice.service.v1.GetVipLevelConfigTemplateResponse.template:type_name -> api.backoffice.service.v1.VipLevelConfigTemplate
+	21, // 17: api.backoffice.service.v1.CreateVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	10, // 18: api.backoffice.service.v1.CreateVipLevelConfigTemplateRequest.template:type_name -> api.backoffice.service.v1.VipLevelConfigTemplate
+	10, // 19: api.backoffice.service.v1.CreateVipLevelConfigTemplateResponse.template:type_name -> api.backoffice.service.v1.VipLevelConfigTemplate
+	21, // 20: api.backoffice.service.v1.UpdateVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	10, // 21: api.backoffice.service.v1.UpdateVipLevelConfigTemplateRequest.template:type_name -> api.backoffice.service.v1.VipLevelConfigTemplate
+	21, // 22: api.backoffice.service.v1.DeleteVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	6,  // 23: api.backoffice.service.v1.BackofficeVip.GetVipSetting:input_type -> api.backoffice.service.v1.GetVipSettingRequest
+	8,  // 24: api.backoffice.service.v1.BackofficeVip.UpdateVipSetting:input_type -> api.backoffice.service.v1.UpdateVipSettingRequest
+	11, // 25: api.backoffice.service.v1.BackofficeVip.ListVipLevelConfigTemplates:input_type -> api.backoffice.service.v1.ListVipLevelConfigTemplatesRequest
+	13, // 26: api.backoffice.service.v1.BackofficeVip.GetVipLevelConfigTemplate:input_type -> api.backoffice.service.v1.GetVipLevelConfigTemplateRequest
+	15, // 27: api.backoffice.service.v1.BackofficeVip.CreateVipLevelConfigTemplate:input_type -> api.backoffice.service.v1.CreateVipLevelConfigTemplateRequest
+	17, // 28: api.backoffice.service.v1.BackofficeVip.UpdateVipLevelConfigTemplate:input_type -> api.backoffice.service.v1.UpdateVipLevelConfigTemplateRequest
+	19, // 29: api.backoffice.service.v1.BackofficeVip.DeleteVipLevelConfigTemplate:input_type -> api.backoffice.service.v1.DeleteVipLevelConfigTemplateRequest
+	7,  // 30: api.backoffice.service.v1.BackofficeVip.GetVipSetting:output_type -> api.backoffice.service.v1.GetVipSettingResponse
+	9,  // 31: api.backoffice.service.v1.BackofficeVip.UpdateVipSetting:output_type -> api.backoffice.service.v1.UpdateVipSettingResponse
+	12, // 32: api.backoffice.service.v1.BackofficeVip.ListVipLevelConfigTemplates:output_type -> api.backoffice.service.v1.ListVipLevelConfigTemplatesResponse
+	14, // 33: api.backoffice.service.v1.BackofficeVip.GetVipLevelConfigTemplate:output_type -> api.backoffice.service.v1.GetVipLevelConfigTemplateResponse
+	16, // 34: api.backoffice.service.v1.BackofficeVip.CreateVipLevelConfigTemplate:output_type -> api.backoffice.service.v1.CreateVipLevelConfigTemplateResponse
+	18, // 35: api.backoffice.service.v1.BackofficeVip.UpdateVipLevelConfigTemplate:output_type -> api.backoffice.service.v1.UpdateVipLevelConfigTemplateResponse
+	20, // 36: api.backoffice.service.v1.BackofficeVip.DeleteVipLevelConfigTemplate:output_type -> api.backoffice.service.v1.DeleteVipLevelConfigTemplateResponse
+	30, // [30:37] is the sub-list for method output_type
+	23, // [23:30] is the sub-list for method input_type
+	23, // [23:23] is the sub-list for extension type_name
+	23, // [23:23] is the sub-list for extension extendee
+	0,  // [0:23] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_vip_proto_init() }
