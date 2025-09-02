@@ -114,42 +114,48 @@ message VipSetting {
   string base_currency = 6;
   VipDisplayRule display_rule = 7;
   bool rewards_slider = 8;
+  bool follow_parent = 9;
+  bool enabled = 10;
   
-  VipPayoutType upgrade_payout_type = 9;
-  VipPayoutType rakeback_instant_payout_type = 10;
-  VipPayoutType rakeback_daily_payout_type = 11;
-  VipPayoutType weekly_reward_payout_type = 12;
-  VipPayoutType monthly_reward_payout_type = 13;
+  VipPayoutType upgrade_payout_type = 11;
+  VipPayoutType rakeback_instant_payout_type = 12;
+  VipPayoutType rakeback_daily_payout_type = 13;
+  VipPayoutType weekly_reward_payout_type = 14;
+  VipPayoutType monthly_reward_payout_type = 15;
   
-  double deposit_xp_rate = 14;
-  double wagering_xp_rate = 15;
-  double max_house_edge_limit_percent = 16;
-  double standard_xp_multiplier = 17;
+  double deposit_xp_rate = 16;
+  double wagering_xp_rate = 17;
+  double max_house_edge_limit_percent = 18;
+  double standard_xp_multiplier = 19;
   
-  string timezone = 18;
-  string daily_issue_at = 19;
-  int32 weekly_issue_dow = 20;
-  string weekly_issue_at = 21;
-  int32 monthly_issue_dom = 22;
-  string monthly_issue_at = 23;
+  string timezone = 20;
+  string daily_issue_at = 21;
+  int32 weekly_issue_dow = 22;
+  string weekly_issue_at = 23;
+  int32 monthly_issue_dom = 24;
+  string monthly_issue_at = 25;
   
-  int64 created_at = 24;
-  int64 updated_at = 25;
+  int64 created_at = 26;
+  int64 updated_at = 27;
 }
 
 message GetVipSettingRequest {
-  api.common.OperatorContext operator_context = 1;
-  api.common.OperatorContextFilters operator_context_filters = 2;
+  api.common.OperatorContext target_operator_context = 1;
+  string currency = 2;
 }
 
 message GetVipSettingResponse {
-  VipSetting setting = 1;
+  VipSetting default_setting = 1;
+  VipSetting custom_setting = 2;
+  bool follow_parent = 3;
+  api.common.OperatorContext custom_operator_context = 4;
+  api.common.OperatorContext inherited_operator_context = 5;
+  string inherited_from_operator_name = 6;
 }
 
 message UpdateVipSettingRequest {
-  api.common.OperatorContext operator_context = 1;
-  api.common.OperatorContextFilters operator_context_filters = 2;
-  VipSetting setting = 3;
+  api.common.OperatorContext target_operator_context = 1;
+  VipSetting setting = 2;
 }
 
 message UpdateVipSettingResponse {
@@ -201,8 +207,8 @@ message VipLevelConfigTemplate {
 }
 
 message ListVipLevelConfigTemplatesRequest {
-  api.common.OperatorContext operator_context = 1;
-  api.common.OperatorContextFilters operator_context_filters = 2;
+  api.common.OperatorContext target_operator_context = 1;
+  int64 setting_id = 2;
   int32 page = 3;
   int32 page_size = 4;
 }
@@ -215,9 +221,8 @@ message ListVipLevelConfigTemplatesResponse {
 }
 
 message GetVipLevelConfigTemplateRequest {
-  api.common.OperatorContext operator_context = 1;
-  api.common.OperatorContextFilters operator_context_filters = 2;
-  int64 template_id = 3;
+  api.common.OperatorContext target_operator_context = 1;
+  int64 template_id = 2;
 }
 
 message GetVipLevelConfigTemplateResponse {
@@ -225,27 +230,25 @@ message GetVipLevelConfigTemplateResponse {
 }
 
 message CreateVipLevelConfigTemplateRequest {
-  api.common.OperatorContext operator_context = 1;
-  api.common.OperatorContextFilters operator_context_filters = 2;
-  VipLevelConfigTemplate template = 3;
+  api.common.OperatorContext target_operator_context = 1;
+  VipLevelConfigTemplate template = 2;
 }
 
 message CreateVipLevelConfigTemplateResponse {
+  VipLevelConfigTemplate template = 1;
 }
 
 message UpdateVipLevelConfigTemplateRequest {
-  api.common.OperatorContext operator_context = 1;
-  api.common.OperatorContextFilters operator_context_filters = 2;
-  VipLevelConfigTemplate template = 3;
+  api.common.OperatorContext target_operator_context = 1;
+  VipLevelConfigTemplate template = 2;
 }
 
 message UpdateVipLevelConfigTemplateResponse {
 }
 
 message DeleteVipLevelConfigTemplateRequest {
-  api.common.OperatorContext operator_context = 1;
-  api.common.OperatorContextFilters operator_context_filters = 2;
-  int64 template_id = 3;
+  api.common.OperatorContext target_operator_context = 1;
+  int64 template_id = 2;
 }
 
 message DeleteVipLevelConfigTemplateResponse {

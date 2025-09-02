@@ -4737,13 +4737,15 @@ components:
         api.backoffice.service.v1.CreateVipLevelConfigTemplateRequest:
             type: object
             properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 template:
                     $ref: '#/components/schemas/api.backoffice.service.v1.VipLevelConfigTemplate'
         api.backoffice.service.v1.CreateVipLevelConfigTemplateResponse:
             type: object
-            properties: {}
+            properties:
+                template:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.VipLevelConfigTemplate'
         api.backoffice.service.v1.CreateWithdrawResponse:
             type: object
             properties:
@@ -4810,8 +4812,8 @@ components:
         api.backoffice.service.v1.DeleteVipLevelConfigTemplateRequest:
             type: object
             properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 templateId:
                     type: string
         api.backoffice.service.v1.DeleteVipLevelConfigTemplateResponse:
@@ -6060,8 +6062,8 @@ components:
         api.backoffice.service.v1.GetVipLevelConfigTemplateRequest:
             type: object
             properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 templateId:
                     type: string
         api.backoffice.service.v1.GetVipLevelConfigTemplateResponse:
@@ -6072,13 +6074,25 @@ components:
         api.backoffice.service.v1.GetVipSettingRequest:
             type: object
             properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                currency:
+                    type: string
         api.backoffice.service.v1.GetVipSettingResponse:
             type: object
             properties:
-                setting:
+                defaultSetting:
                     $ref: '#/components/schemas/api.backoffice.service.v1.VipSetting'
+                customSetting:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.VipSetting'
+                followParent:
+                    type: boolean
+                customOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                inheritedOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                inheritedFromOperatorName:
+                    type: string
         api.backoffice.service.v1.GetWalletCreditTransactionsRequest:
             type: object
             properties:
@@ -8552,8 +8566,10 @@ components:
         api.backoffice.service.v1.ListVipLevelConfigTemplatesRequest:
             type: object
             properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                settingId:
+                    type: string
                 page:
                     type: integer
                     format: int32
@@ -9594,8 +9610,8 @@ components:
         api.backoffice.service.v1.UpdateVipLevelConfigTemplateRequest:
             type: object
             properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 template:
                     $ref: '#/components/schemas/api.backoffice.service.v1.VipLevelConfigTemplate'
         api.backoffice.service.v1.UpdateVipLevelConfigTemplateResponse:
@@ -9604,8 +9620,8 @@ components:
         api.backoffice.service.v1.UpdateVipSettingRequest:
             type: object
             properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 setting:
                     $ref: '#/components/schemas/api.backoffice.service.v1.VipSetting'
         api.backoffice.service.v1.UpdateVipSettingResponse:
@@ -9700,67 +9716,53 @@ components:
                 endLevel:
                     type: string
                 baseLevelUpgradeXp:
-                    type: number
+                    type: string
                     description: 升级设置
-                    format: double
                 incrLevelUpgradeXp:
-                    type: number
-                    format: double
+                    type: string
                 baseUpgradeRewardAmt:
-                    type: number
-                    format: double
+                    type: string
                 incrUpgradeRewardAmt:
-                    type: number
-                    format: double
+                    type: string
                 upgradeRewardWageringX:
-                    type: number
-                    format: double
-                weeklyXpLoss:
-                    type: number
+                    type: string
+                xpLossEnabled:
+                    type: boolean
                     description: 等级维护要求
-                    format: double
+                weeklyXpLoss:
+                    type: string
                 monthlyXpLoss:
-                    type: number
-                    format: double
+                    type: string
                 rakebackInstantEnabled:
                     type: boolean
                     description: 即时返水
                 rakebackInstantRate:
-                    type: number
-                    format: double
+                    type: string
                 rakebackInstantReq:
-                    type: number
-                    format: double
+                    type: string
                 rakebackDailyEnabled:
                     type: boolean
                     description: 每日返水
                 rakebackDailyRate:
-                    type: number
-                    format: double
+                    type: string
                 rakebackDailyReq:
-                    type: number
-                    format: double
+                    type: string
                 weeklyRewardEnabled:
                     type: boolean
                     description: 每周奖励
                 weeklyFixedRewardAmt:
-                    type: number
-                    format: double
+                    type: string
                 weeklyTurnoverRate:
-                    type: number
-                    format: double
+                    type: string
                 weeklyNetLossAmt:
-                    type: number
-                    format: double
+                    type: string
                 weeklyAdjustRangePct:
-                    type: number
-                    format: double
+                    type: string
                 weeklyActiveDaysReward:
                     type: integer
                     format: int32
                 weeklyWageringReq:
-                    type: number
-                    format: double
+                    type: string
                 createdAt:
                     type: string
                 updatedAt:
@@ -9788,6 +9790,10 @@ components:
                     type: string
                     format: enum
                 rewardsSlider:
+                    type: boolean
+                followParent:
+                    type: boolean
+                enabled:
                     type: boolean
                 upgradePayoutType:
                     enum:
@@ -9825,17 +9831,13 @@ components:
                     type: string
                     format: enum
                 depositXpRate:
-                    type: number
-                    format: double
+                    type: string
                 wageringXpRate:
-                    type: number
-                    format: double
+                    type: string
                 maxHouseEdgeLimitPercent:
-                    type: number
-                    format: double
+                    type: string
                 standardXpMultiplier:
-                    type: number
-                    format: double
+                    type: string
                 timezone:
                     type: string
                 dailyIssueAt:
@@ -12010,10 +12012,8 @@ components:
         api.vip.service.v1.GetVipLevelConfigTemplateRequest:
             type: object
             properties:
-                operatorContext:
+                targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
                 templateId:
                     type: string
         api.vip.service.v1.GetVipLevelConfigTemplateResponse:
@@ -12024,22 +12024,32 @@ components:
         api.vip.service.v1.GetVipSettingRequest:
             type: object
             properties:
-                operatorContext:
+                targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                currency:
+                    type: string
         api.vip.service.v1.GetVipSettingResponse:
             type: object
             properties:
-                setting:
+                defaultSetting:
                     $ref: '#/components/schemas/api.vip.service.v1.VipSetting'
+                customSetting:
+                    $ref: '#/components/schemas/api.vip.service.v1.VipSetting'
+                followParent:
+                    type: boolean
+                customOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                inheritedOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                inheritedFromOperatorName:
+                    type: string
         api.vip.service.v1.ListVipLevelConfigTemplatesRequest:
             type: object
             properties:
-                operatorContext:
+                targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                settingId:
+                    type: string
                 page:
                     type: integer
                     format: int32
@@ -12205,6 +12215,10 @@ components:
                     type: string
                     format: enum
                 rewardsSlider:
+                    type: boolean
+                followParent:
+                    type: boolean
+                enabled:
                     type: boolean
                 upgradePayoutType:
                     enum:
