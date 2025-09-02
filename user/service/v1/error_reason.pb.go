@@ -116,6 +116,7 @@ const (
 	ErrorReason_INVALID_OPERATOR_CONFIG                       ErrorReason = 10090
 	ErrorReason_GET_LATEST_PASSWORDS_FAILED                   ErrorReason = 10091
 	ErrorReason_NEW_PASSWORD_USED_IN_PREVIOUS_PASSWORDS       ErrorReason = 10092
+	ErrorReason_USER_LOCKED                                   ErrorReason = 10093
 )
 
 // Enum value maps for ErrorReason.
@@ -212,6 +213,7 @@ var (
 		10090: "INVALID_OPERATOR_CONFIG",
 		10091: "GET_LATEST_PASSWORDS_FAILED",
 		10092: "NEW_PASSWORD_USED_IN_PREVIOUS_PASSWORDS",
+		10093: "USER_LOCKED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                   0,
@@ -305,6 +307,7 @@ var (
 		"INVALID_OPERATOR_CONFIG":                       10090,
 		"GET_LATEST_PASSWORDS_FAILED":                   10091,
 		"NEW_PASSWORD_USED_IN_PREVIOUS_PASSWORDS":       10092,
+		"USER_LOCKED":                                   10093,
 	}
 )
 
@@ -339,7 +342,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\x94\x17\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xa6\x17\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x12&\n" +
@@ -431,7 +434,8 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\x10INVALID_PASSWORD\x10\xe9N\x12\x1c\n" +
 	"\x17INVALID_OPERATOR_CONFIG\x10\xeaN\x12 \n" +
 	"\x1bGET_LATEST_PASSWORDS_FAILED\x10\xebN\x12,\n" +
-	"'NEW_PASSWORD_USED_IN_PREVIOUS_PASSWORDS\x10\xecN\x1a\x04\xa0E\xf4\x03BO\n" +
+	"'NEW_PASSWORD_USED_IN_PREVIOUS_PASSWORDS\x10\xecN\x12\x10\n" +
+	"\vUSER_LOCKED\x10\xedN\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
