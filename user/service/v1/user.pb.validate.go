@@ -12012,7 +12012,7 @@ func (m *OperatorAccountSecuritySettings) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for MaxConsecutiveFailedLogins
+	// no validation rules for MaxPasswordRetries
 
 	// no validation rules for PasswordExpiryDays
 
