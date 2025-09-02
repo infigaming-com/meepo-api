@@ -60,6 +60,8 @@ const (
 	User_ListOperators_FullMethodName                = "/api.user.service.v1.User/ListOperators"
 	User_GetParentOperatorIds_FullMethodName         = "/api.user.service.v1.User/GetParentOperatorIds"
 	User_GetChildOperatorIds_FullMethodName          = "/api.user.service.v1.User/GetChildOperatorIds"
+	User_SendPasswordResetCode_FullMethodName        = "/api.user.service.v1.User/SendPasswordResetCode"
+	User_ResetPasswordWithCode_FullMethodName        = "/api.user.service.v1.User/ResetPasswordWithCode"
 )
 
 // UserClient is the client API for User service.
@@ -143,6 +145,10 @@ type UserClient interface {
 	GetParentOperatorIds(ctx context.Context, in *GetParentOperatorIdsRequest, opts ...grpc.CallOption) (*GetParentOperatorIdsResponse, error)
 	// GetChildOperatorIds returns direct child operator IDs for the given operator ID.
 	GetChildOperatorIds(ctx context.Context, in *GetChildOperatorIdsRequest, opts ...grpc.CallOption) (*GetChildOperatorIdsResponse, error)
+	// Send password reset verification code to email
+	SendPasswordResetCode(ctx context.Context, in *SendPasswordResetCodeRequest, opts ...grpc.CallOption) (*SendPasswordResetCodeResponse, error)
+	// Reset password using verification code
+	ResetPasswordWithCode(ctx context.Context, in *ResetPasswordWithCodeRequest, opts ...grpc.CallOption) (*ResetPasswordWithCodeResponse, error)
 }
 
 type userClient struct {
@@ -563,6 +569,26 @@ func (c *userClient) GetChildOperatorIds(ctx context.Context, in *GetChildOperat
 	return out, nil
 }
 
+func (c *userClient) SendPasswordResetCode(ctx context.Context, in *SendPasswordResetCodeRequest, opts ...grpc.CallOption) (*SendPasswordResetCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SendPasswordResetCodeResponse)
+	err := c.cc.Invoke(ctx, User_SendPasswordResetCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) ResetPasswordWithCode(ctx context.Context, in *ResetPasswordWithCodeRequest, opts ...grpc.CallOption) (*ResetPasswordWithCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResetPasswordWithCodeResponse)
+	err := c.cc.Invoke(ctx, User_ResetPasswordWithCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -644,6 +670,10 @@ type UserServer interface {
 	GetParentOperatorIds(context.Context, *GetParentOperatorIdsRequest) (*GetParentOperatorIdsResponse, error)
 	// GetChildOperatorIds returns direct child operator IDs for the given operator ID.
 	GetChildOperatorIds(context.Context, *GetChildOperatorIdsRequest) (*GetChildOperatorIdsResponse, error)
+	// Send password reset verification code to email
+	SendPasswordResetCode(context.Context, *SendPasswordResetCodeRequest) (*SendPasswordResetCodeResponse, error)
+	// Reset password using verification code
+	ResetPasswordWithCode(context.Context, *ResetPasswordWithCodeRequest) (*ResetPasswordWithCodeResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -776,6 +806,12 @@ func (UnimplementedUserServer) GetParentOperatorIds(context.Context, *GetParentO
 }
 func (UnimplementedUserServer) GetChildOperatorIds(context.Context, *GetChildOperatorIdsRequest) (*GetChildOperatorIdsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetChildOperatorIds not implemented")
+}
+func (UnimplementedUserServer) SendPasswordResetCode(context.Context, *SendPasswordResetCodeRequest) (*SendPasswordResetCodeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendPasswordResetCode not implemented")
+}
+func (UnimplementedUserServer) ResetPasswordWithCode(context.Context, *ResetPasswordWithCodeRequest) (*ResetPasswordWithCodeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ResetPasswordWithCode not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -1536,6 +1572,42 @@ func _User_GetChildOperatorIds_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_SendPasswordResetCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendPasswordResetCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).SendPasswordResetCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_SendPasswordResetCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).SendPasswordResetCode(ctx, req.(*SendPasswordResetCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_ResetPasswordWithCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResetPasswordWithCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ResetPasswordWithCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ResetPasswordWithCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ResetPasswordWithCode(ctx, req.(*ResetPasswordWithCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1706,6 +1778,14 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetChildOperatorIds",
 			Handler:    _User_GetChildOperatorIds_Handler,
+		},
+		{
+			MethodName: "SendPasswordResetCode",
+			Handler:    _User_SendPasswordResetCode_Handler,
+		},
+		{
+			MethodName: "ResetPasswordWithCode",
+			Handler:    _User_ResetPasswordWithCode_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
