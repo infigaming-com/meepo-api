@@ -3584,6 +3584,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.BuyCryptoViaFiatCurrentListResponse'
+    /v1/payment/buycrypto/price/get:
+        post:
+            tags:
+                - Payment
+            operationId: Payment_BuyCryptoViaFiatPriceQuery
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payment.service.v1.BuyCryptoViaFiatPriceQueryRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payment.service.v1.BuyCryptoViaFiatPriceQueryResponse'
     /v1/payment/channel/page:
         post:
             tags:
@@ -12799,6 +12817,32 @@ components:
                     items:
                         $ref: '#/components/schemas/payment.service.v1.Currency'
                     description: repeated Crypto cryptos = 1;
+        payment.service.v1.BuyCryptoViaFiatPriceQueryRequest:
+            type: object
+            properties:
+                amount:
+                    type: string
+                fiat:
+                    type: string
+                payWayCode:
+                    type: string
+                channelId:
+                    type: string
+        payment.service.v1.BuyCryptoViaFiatPriceQueryResponse:
+            type: object
+            properties:
+                crypto:
+                    type: string
+                cryptoPrice:
+                    type: string
+                cryptoQuantity:
+                    type: string
+                fiat:
+                    type: string
+                rampFee:
+                    type: string
+                networkFee:
+                    type: string
         payment.service.v1.BuyCryptoViaFiatRequest:
             type: object
             properties:
