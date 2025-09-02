@@ -5898,12 +5898,12 @@ func (x *OperatorAccountPasswordSettings) GetMinDigits() int32 {
 }
 
 type OperatorAccountSecuritySettings struct {
-	state                      protoimpl.MessageState `protogen:"open.v1"`
-	MaxConsecutiveFailedLogins int32                  `protobuf:"varint,1,opt,name=max_consecutive_failed_logins,json=maxConsecutiveFailedLogins,proto3" json:"max_consecutive_failed_logins,omitempty"`
-	PasswordExpiryDays         int32                  `protobuf:"varint,2,opt,name=password_expiry_days,json=passwordExpiryDays,proto3" json:"password_expiry_days,omitempty"`
-	PasswordHistoryLimits      int32                  `protobuf:"varint,3,opt,name=password_history_limits,json=passwordHistoryLimits,proto3" json:"password_history_limits,omitempty"`
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	MaxPasswordRetries    int32                  `protobuf:"varint,1,opt,name=max_password_retries,json=maxPasswordRetries,proto3" json:"max_password_retries,omitempty"`
+	PasswordExpiryDays    int32                  `protobuf:"varint,2,opt,name=password_expiry_days,json=passwordExpiryDays,proto3" json:"password_expiry_days,omitempty"`
+	PasswordHistoryLimits int32                  `protobuf:"varint,3,opt,name=password_history_limits,json=passwordHistoryLimits,proto3" json:"password_history_limits,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *OperatorAccountSecuritySettings) Reset() {
@@ -5936,9 +5936,9 @@ func (*OperatorAccountSecuritySettings) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{99}
 }
 
-func (x *OperatorAccountSecuritySettings) GetMaxConsecutiveFailedLogins() int32 {
+func (x *OperatorAccountSecuritySettings) GetMaxPasswordRetries() int32 {
 	if x != nil {
-		return x.MaxConsecutiveFailedLogins
+		return x.MaxPasswordRetries
 	}
 	return 0
 }
@@ -9577,9 +9577,9 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x18min_lowercase_characters\x18\x03 \x01(\x05R\x16minLowercaseCharacters\x124\n" +
 	"\x16min_special_characters\x18\x04 \x01(\x05R\x14minSpecialCharacters\x12\x1d\n" +
 	"\n" +
-	"min_digits\x18\x05 \x01(\x05R\tminDigits\"\xce\x01\n" +
-	"\x1fOperatorAccountSecuritySettings\x12A\n" +
-	"\x1dmax_consecutive_failed_logins\x18\x01 \x01(\x05R\x1amaxConsecutiveFailedLogins\x120\n" +
+	"min_digits\x18\x05 \x01(\x05R\tminDigits\"\xbd\x01\n" +
+	"\x1fOperatorAccountSecuritySettings\x120\n" +
+	"\x14max_password_retries\x18\x01 \x01(\x05R\x12maxPasswordRetries\x120\n" +
 	"\x14password_expiry_days\x18\x02 \x01(\x05R\x12passwordExpiryDays\x126\n" +
 	"\x17password_history_limits\x18\x03 \x01(\x05R\x15passwordHistoryLimits\"\x81\x01\n" +
 	"\x1bOperatorAccountGameSettings\x125\n" +

@@ -1055,7 +1055,7 @@ message OperatorAccountPasswordSettings {
 }
 
 message OperatorAccountSecuritySettings {
-	int32 max_consecutive_failed_logins = 1;
+	int32 max_password_retries = 1;
 	int32 password_expiry_days = 2;
 	int32 password_history_limits = 3;
 }

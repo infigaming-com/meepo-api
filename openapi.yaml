@@ -11721,7 +11721,7 @@ components:
         api.user.service.v1.OperatorAccountSecuritySettings:
             type: object
             properties:
-                maxConsecutiveFailedLogins:
+                maxPasswordRetries:
                     type: integer
                     format: int32
                 passwordExpiryDays:

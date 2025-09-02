@@ -40,9 +40,9 @@ type OperatorAccountPasswordSettings struct {
 }
 
 type OperatorAccountSecuritySettings struct {
-	MaxConsecutiveFailedLogins int32
-	PasswordExpiryDays         int32
-	PasswordHistoryLimits      int32
+	MaxPasswordRetries    int32
+	PasswordExpiryDays    int32
+	PasswordHistoryLimits int32
 }
 
 type OperatorAccountGameSettings struct {
@@ -56,15 +56,11 @@ type OperatorAccountPaymentSettings struct {
 }
 
 type OperatorAccountSettings struct {
-	PasswordSettings *OperatorAccountPasswordSettings
-	SecuritySettings *OperatorAccountSecuritySettings
-	GameSettings     *OperatorAccountGameSettings
-	PaymentSettings  *OperatorAccountPaymentSettings
+	PasswordExpiryDays int32
 }
 
 type OperatorConfig struct {
-	SwapFeePercentage *string
-	AccountSettings   *OperatorAccountSettings
+	AccountSettings *OperatorAccountSettings
 }
 
 type OperatorInfo struct {
