@@ -4821,16 +4821,14 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 currency:
                     type: string
-                welcomeRewardSequenceSerialNumbers:
+                welcomeRewardSequences:
                     type: array
                     items:
-                        type: integer
-                        format: int32
-                dailyRewardSequenceSerialNumbers:
+                        $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
+                dailyRewardSequences:
                     type: array
                     items:
-                        type: integer
-                        format: int32
+                        $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
         api.backoffice.service.v1.DeleteOperatorBackofficeByoSubdomainRequest:
             type: object
             properties:
