@@ -496,8 +496,8 @@ message SetDepositRewardSequencesRequest {
 message DeleteDepositRewardSequencesRequest {
 	api.common.OperatorContext target_operator_context = 1;
 	string currency = 2;
-	repeated int32 welcome_reward_sequence_serial_numbers = 3;
-	repeated int32 daily_reward_sequence_serial_numbers = 4;
+	repeated wallet.service.v1.RewardSequence welcome_reward_sequences = 3; // the sequences to delete
+	repeated wallet.service.v1.RewardSequence daily_reward_sequences = 4; // the sequences to delete
 }
 
 message GetDepositRewardConfigRequest {
