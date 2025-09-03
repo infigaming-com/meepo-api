@@ -319,6 +319,60 @@ func (m *BalanceUpdateEvent) validate(all bool) error {
 
 	// no validation rules for CreatedAt
 
+	// no validation rules for BeforeCash
+
+	// no validation rules for BeforeCashUsd
+
+	// no validation rules for BeforeCashReportingCurrency
+
+	// no validation rules for BeforeOperatorBonus
+
+	// no validation rules for BeforeOperatorBonusUsd
+
+	// no validation rules for BeforeOperatorBonusReportingCurrency
+
+	// no validation rules for BeforeProviderBonus
+
+	// no validation rules for BeforeProviderBonusUsd
+
+	// no validation rules for BeforeProviderBonusReportingCurrency
+
+	// no validation rules for AfterCash
+
+	// no validation rules for AfterCashUsd
+
+	// no validation rules for AfterCashReportingCurrency
+
+	// no validation rules for AfterOperatorBonus
+
+	// no validation rules for AfterOperatorBonusUsd
+
+	// no validation rules for AfterOperatorBonusReportingCurrency
+
+	// no validation rules for AfterProviderBonus
+
+	// no validation rules for AfterProviderBonusUsd
+
+	// no validation rules for AfterProviderBonusReportingCurrency
+
+	// no validation rules for CashAmount
+
+	// no validation rules for CashAmountUsd
+
+	// no validation rules for CashAmountReportingCurrency
+
+	// no validation rules for OperatorBonusAmount
+
+	// no validation rules for OperatorBonusAmountUsd
+
+	// no validation rules for OperatorBonusAmountReportingCurrency
+
+	// no validation rules for ProviderBonusAmount
+
+	// no validation rules for ProviderBonusAmountUsd
+
+	// no validation rules for ProviderBonusAmountReportingCurrency
+
 	if len(errors) > 0 {
 		return BalanceUpdateEventMultiError(errors)
 	}

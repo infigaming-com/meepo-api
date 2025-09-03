@@ -1246,3 +1246,15 @@ func IsWithdrawalLimitExceeded(err error) bool {
 func ErrorWithdrawalLimitExceeded(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_WITHDRAWAL_LIMIT_EXCEEDED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsOperatorWithdrawRollbackExists(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_WITHDRAW_ROLLBACK_EXISTS.String() && e.Code == 500
+}
+
+func ErrorOperatorWithdrawRollbackExists(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_WITHDRAW_ROLLBACK_EXISTS.String(), fmt.Sprintf(format, args...))
+}

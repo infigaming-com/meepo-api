@@ -26,16 +26,43 @@ message BalanceUpdateEvent {
 	common.OperatorContext operator_context = 4;
 	string currency = 5; // settlement currency
 	string reporting_currency = 6;
-	string before_balance = 7;
+	string before_balance = 7; // cash + operator bonus + provider bonus
 	string before_balance_usd = 8;
 	string before_balance_reporting_currency = 9;
-	string after_balance = 10;
+	string after_balance = 10; // cash + operator bonus + provider bonus
 	string after_balance_usd = 11;
 	string after_balance_reporting_currency = 12;
-	string amount = 13;
+	string amount = 13; // cash + operator bonus + provider bonus
 	string amount_usd = 14;
 	string amount_reporting_currency = 15;
 	int64 created_at = 16;
+	string before_cash = 17;
+	string before_cash_usd = 18;
+	string before_cash_reporting_currency = 19;
+	string before_operator_bonus = 20;
+	string before_operator_bonus_usd = 21;
+	string before_operator_bonus_reporting_currency = 22;
+	string before_provider_bonus = 23;
+	string before_provider_bonus_usd = 24;
+	string before_provider_bonus_reporting_currency = 25;
+	string after_cash = 26;
+	string after_cash_usd = 27;
+	string after_cash_reporting_currency = 28;
+	string after_operator_bonus = 29;
+	string after_operator_bonus_usd = 30;
+	string after_operator_bonus_reporting_currency = 31;
+	string after_provider_bonus = 32;
+	string after_provider_bonus_usd = 33;
+	string after_provider_bonus_reporting_currency = 34;
+	string cash_amount = 35;
+	string cash_amount_usd = 36;
+	string cash_amount_reporting_currency = 37;
+	string operator_bonus_amount = 38;
+	string operator_bonus_amount_usd = 39;
+	string operator_bonus_amount_reporting_currency = 40;
+	string provider_bonus_amount = 41;
+	string provider_bonus_amount_usd = 42;
+	string provider_bonus_amount_reporting_currency = 43;
 }
 
 message OperatorBalanceUpdateEvent {
