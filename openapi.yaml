@@ -4240,6 +4240,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.GetUserDepositRewardSequenceResponse'
+    /v1/wallet/exchange-rates/base-currency:
+        post:
+            tags:
+                - Wallet
+            operationId: Wallet_GetExchangeRatesWithBaseCurrency
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyResponse'
 components:
     schemas:
         api.backoffice.service.v1.AccountInfoRequest:
@@ -12459,6 +12477,23 @@ components:
                     $ref: '#/components/schemas/api.wallet.service.v1.DepositRewardConfig'
                 customDepositRewardConfig:
                     $ref: '#/components/schemas/api.wallet.service.v1.DepositRewardConfig'
+        api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyRequest:
+            type: object
+            properties:
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                baseCurrency:
+                    type: string
+        api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyResponse:
+            type: object
+            properties:
+                exchangeRates:
+                    type: object
+                    additionalProperties:
+                        type: string
+                    description: map key is currency code, value is currency exchange rate
         api.wallet.service.v1.GetGamificationCurrencyConfigResponse:
             type: object
             properties:

@@ -60,7 +60,12 @@ service Wallet {
 
 	rpc GetExchangeRates (GetExchangeRatesRequest) returns (GetExchangeRatesResponse) {}
 
-	rpc GetExchangeRatesWithBaseCurrency (GetExchangeRatesWithBaseCurrencyRequest) returns (GetExchangeRatesWithBaseCurrencyResponse) {}
+	rpc GetExchangeRatesWithBaseCurrency (GetExchangeRatesWithBaseCurrencyRequest) returns (GetExchangeRatesWithBaseCurrencyResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/exchange-rates/base-currency"
+			body: "*"
+		};
+	}
 
 	// GetUserTransactionSummary returns the summary of user's transactions 
 	// It returns the total deposit, withdraw, deposit minus withdraw, valid bet
