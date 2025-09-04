@@ -10103,7 +10103,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"!operator_bonus_turnover_threshold\x18\n" +
 	" \x01(\tR\x1eoperatorBonusTurnoverThreshold\"a\n" +
 	"\x1dGetUserBalanceDetailsResponse\x12@\n" +
-	"\x06detail\x18\x01 \x01(\v2(.api.wallet.service.v1.UserBalanceDetailR\x06detail2\x8d0\n" +
+	"\x06detail\x18\x01 \x01(\v2(.api.wallet.service.v1.UserBalanceDetailR\x06detail2\xbf0\n" +
 	"\x06Wallet\x12\x95\x01\n" +
 	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/wallet/balances/list\x12o\n" +
 	"\x0eGetUserBalance\x12,.api.wallet.service.v1.GetUserBalanceRequest\x1a-.api.wallet.service.v1.GetUserBalanceResponse\"\x00\x12\xa9\x01\n" +
@@ -10121,8 +10121,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1dListWalletBalanceTransactions\x12;.api.wallet.service.v1.ListWalletBalanceTransactionsRequest\x1a<.api.wallet.service.v1.ListWalletBalanceTransactionsResponse\"\x00\x12\xa8\x01\n" +
 	"!GetWalletBalanceTransactionsByIds\x12?.api.wallet.service.v1.GetWalletBalanceTransactionsByIdsRequest\x1a@.api.wallet.service.v1.GetWalletBalanceTransactionsByIdsResponse\"\x00\x12\x96\x01\n" +
 	"\x1bGetWalletCreditTransactions\x129.api.wallet.service.v1.GetWalletCreditTransactionsRequest\x1a:.api.wallet.service.v1.GetWalletCreditTransactionsResponse\"\x00\x12u\n" +
-	"\x10GetExchangeRates\x12..api.wallet.service.v1.GetExchangeRatesRequest\x1a/.api.wallet.service.v1.GetExchangeRatesResponse\"\x00\x12\xa5\x01\n" +
-	" GetExchangeRatesWithBaseCurrency\x12>.api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyRequest\x1a?.api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyResponse\"\x00\x12\x90\x01\n" +
+	"\x10GetExchangeRates\x12..api.wallet.service.v1.GetExchangeRatesRequest\x1a/.api.wallet.service.v1.GetExchangeRatesResponse\"\x00\x12\xd7\x01\n" +
+	" GetExchangeRatesWithBaseCurrency\x12>.api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyRequest\x1a?.api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/wallet/exchange-rates/base-currency\x12\x90\x01\n" +
 	"\x19GetUserTransactionSummary\x127.api.wallet.service.v1.GetUserTransactionSummaryRequest\x1a8.api.wallet.service.v1.GetUserTransactionSummaryResponse\"\x00\x12\xae\x01\n" +
 	"#GetBackofficeUserOverviewFromWallet\x12A.api.wallet.service.v1.GetBackofficeUserOverviewFromWalletRequest\x1aB.api.wallet.service.v1.GetBackofficeUserOverviewFromWalletResponse\"\x00\x12\x9f\x01\n" +
 	"\x1eGetOverviewDashboardFromWallet\x12<.api.wallet.service.v1.GetOverviewDashboardFromWalletRequest\x1a=.api.wallet.service.v1.GetOverviewDashboardFromWalletResponse\"\x00\x12f\n" +
