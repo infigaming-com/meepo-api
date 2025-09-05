@@ -620,6 +620,12 @@ message ResetPasswordWithCodeRequest {
 message ResetPasswordWithCodeResponse {
 }
 
+message UserIdentity {
+	string id_type = 1;
+	string id_number = 2;
+	string image = 3;
+}
+
 message UpdateUserRequest {
 	int64 user_id = 1;
 	optional string nickname = 2;
@@ -630,8 +636,13 @@ message UpdateUserRequest {
 	optional bool locked = 7;
 	optional bool enabled = 8;
 	optional int64 role_id = 9;
+	optional string firstname = 10;
+	optional string lastname = 11;
+	optional string email = 12;
+	optional string mobile = 13;
+	optional UserIdentity user_identity = 14;
 	// The initial operator context.
-	api.common.OperatorContext operator_context = 10;
+	api.common.OperatorContext operator_context = 15;
 }
 
 message UpdateUserResponse {

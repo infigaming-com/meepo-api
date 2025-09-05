@@ -5053,6 +5053,111 @@ var _ interface {
 	ErrorName() string
 } = ResetPasswordWithCodeResponseValidationError{}
 
+// Validate checks the field values on UserIdentity with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *UserIdentity) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UserIdentity with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in UserIdentityMultiError, or
+// nil if none found.
+func (m *UserIdentity) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UserIdentity) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for IdType
+
+	// no validation rules for IdNumber
+
+	// no validation rules for Image
+
+	if len(errors) > 0 {
+		return UserIdentityMultiError(errors)
+	}
+
+	return nil
+}
+
+// UserIdentityMultiError is an error wrapping multiple validation errors
+// returned by UserIdentity.ValidateAll() if the designated constraints aren't met.
+type UserIdentityMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UserIdentityMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UserIdentityMultiError) AllErrors() []error { return m }
+
+// UserIdentityValidationError is the validation error returned by
+// UserIdentity.Validate if the designated constraints aren't met.
+type UserIdentityValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UserIdentityValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UserIdentityValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UserIdentityValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UserIdentityValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UserIdentityValidationError) ErrorName() string { return "UserIdentityValidationError" }
+
+// Error satisfies the builtin error interface
+func (e UserIdentityValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUserIdentity.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UserIdentityValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UserIdentityValidationError{}
+
 // Validate checks the field values on UpdateUserRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, the
 // first error encountered is returned, or nil if there are no violations.
@@ -5136,6 +5241,55 @@ func (m *UpdateUserRequest) validate(all bool) error {
 
 	if m.RoleId != nil {
 		// no validation rules for RoleId
+	}
+
+	if m.Firstname != nil {
+		// no validation rules for Firstname
+	}
+
+	if m.Lastname != nil {
+		// no validation rules for Lastname
+	}
+
+	if m.Email != nil {
+		// no validation rules for Email
+	}
+
+	if m.Mobile != nil {
+		// no validation rules for Mobile
+	}
+
+	if m.UserIdentity != nil {
+
+		if all {
+			switch v := interface{}(m.GetUserIdentity()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UpdateUserRequestValidationError{
+						field:  "UserIdentity",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UpdateUserRequestValidationError{
+						field:  "UserIdentity",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetUserIdentity()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UpdateUserRequestValidationError{
+					field:  "UserIdentity",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	}
 
 	if len(errors) > 0 {

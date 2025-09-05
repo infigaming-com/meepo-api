@@ -5,6 +5,7 @@ package api.backoffice.service.v1;
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "common/common.proto";
+import "user/service/v1/user.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -321,11 +322,34 @@ message SendEmailVerificationCodeRequest {
 message SendEmailVerificationCodeResponse {}
 
 message UpdateUserRequest {
+	// user id
 	int64 user_id = 1;
-	optional bool ban_login = 2;
-	optional bool ban_game = 3;
-	optional bool ban_withdraw = 4;
-	optional bool locked = 5;
+	// nickname
+	optional string nickname = 2;
+	// avatar
+	optional string avatar = 3;
+	// ban login
+	optional bool ban_login = 4;
+	// ban game
+	optional bool ban_game = 5;
+	// ban withdraw
+	optional bool ban_withdraw = 6;
+	// locked
+	optional bool locked = 7;
+	// enabled
+	optional bool enabled = 8;
+	// role id
+	optional int64 role_id = 9;
+	// first name
+	optional string firstname = 10;
+	// last name
+	optional string lastname = 11;
+	// email
+	optional string email = 12;
+	// mobile
+	optional string mobile = 13;
+	// user identity
+	optional user.service.v1.UserIdentity user_identity = 14;
 }
 
 message UpdateUserResponse {}
