@@ -186,6 +186,14 @@ service BackofficeWallet {
 			body: "*"
 		};
 	}
+
+	// ListResponsibleGamblingConfigs lists gambling configs for a user with all currencies
+	rpc ListResponsibleGamblingConfigs(ListResponsibleGamblingConfigsRequest) returns (wallet.service.v1.ListResponsibleGamblingConfigsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/responsible-gambling/configs/list"
+			body: "*"
+		};
+	}
 }
 
 message GetWalletsRequest {
@@ -528,8 +536,13 @@ message UpdateDeductionOrderRequest {
 }
 
 message DeleteResponsibleGamblingConfigRequest {
-	string currency = 1;
+	int64 user_id = 1;
+	string currency = 2;
 	// deposit_limit, withdrawal_limit, daily_play_limit, weekly_play_limit, monthly_play_limit
 	// daily_loss_limit, weekly_loss_limit, monthly_loss_limit
-	string limit_type = 2;
+	string limit_type = 3;
+}
+
+message ListResponsibleGamblingConfigsRequest {
+	int64 user_id = 1;
 }
