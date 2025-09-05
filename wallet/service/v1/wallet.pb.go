@@ -8213,7 +8213,7 @@ func (x *ListResponsibleGamblingConfigsResponse) GetResponsibleGamblingStatuses(
 
 type GetResponsibleGamblingConfigRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
-	UserId          *int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	UserId          int64                   `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	Currency        string                  `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
 	unknownFields   protoimpl.UnknownFields
@@ -8251,8 +8251,8 @@ func (*GetResponsibleGamblingConfigRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *GetResponsibleGamblingConfigRequest) GetUserId() int64 {
-	if x != nil && x.UserId != nil {
-		return *x.UserId
+	if x != nil {
+		return x.UserId
 	}
 	return 0
 }
@@ -10861,13 +10861,11 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\b_user_id\"\x92\x02\n" +
 	"&ListResponsibleGamblingConfigsResponse\x12r\n" +
 	"\x1cresponsible_gambling_configs\x18\x01 \x03(\v20.api.wallet.service.v1.ResponsibleGamblingConfigR\x1aresponsibleGamblingConfigs\x12t\n" +
-	"\x1dresponsible_gambling_statuses\x18\x02 \x03(\v20.api.wallet.service.v1.ResponsibleGamblingStatusR\x1bresponsibleGamblingStatuses\"\xb3\x01\n" +
-	"#GetResponsibleGamblingConfigRequest\x12\x1c\n" +
-	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12F\n" +
+	"\x1dresponsible_gambling_statuses\x18\x02 \x03(\v20.api.wallet.service.v1.ResponsibleGamblingStatusR\x1bresponsibleGamblingStatuses\"\xa2\x01\n" +
+	"#GetResponsibleGamblingConfigRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
-	"\bcurrency\x18\x03 \x01(\tR\bcurrencyB\n" +
-	"\n" +
-	"\b_user_id\"\x98\x01\n" +
+	"\bcurrency\x18\x03 \x01(\tR\bcurrency\"\x98\x01\n" +
 	"$GetResponsibleGamblingConfigResponse\x12p\n" +
 	"\x1bresponsible_gambling_config\x18\x01 \x01(\v20.api.wallet.service.v1.ResponsibleGamblingConfigR\x19responsibleGamblingConfig2\xe26\n" +
 	"\x06Wallet\x12\x95\x01\n" +
@@ -11324,7 +11322,6 @@ func file_wallet_service_v1_wallet_proto_init() {
 	file_wallet_service_v1_wallet_proto_msgTypes[101].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[103].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[107].OneofWrappers = []any{}
-	file_wallet_service_v1_wallet_proto_msgTypes[109].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

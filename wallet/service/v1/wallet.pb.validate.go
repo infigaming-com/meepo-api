@@ -15472,6 +15472,8 @@ func (m *GetResponsibleGamblingConfigRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for UserId
+
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
@@ -15502,10 +15504,6 @@ func (m *GetResponsibleGamblingConfigRequest) validate(all bool) error {
 	}
 
 	// no validation rules for Currency
-
-	if m.UserId != nil {
-		// no validation rules for UserId
-	}
 
 	if len(errors) > 0 {
 		return GetResponsibleGamblingConfigRequestMultiError(errors)
