@@ -3224,6 +3224,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.OperatorTransferResponse'
+    /v1/backoffice/wallet/responsible-gambling/config/delete:
+        post:
+            tags:
+                - BackofficeWallet
+            description: DeleteResponsibleGamblingConfig deletes gambling config for a user's currency
+            operationId: BackofficeWallet_DeleteResponsibleGamblingConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteResponsibleGamblingConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse'
     /v1/backoffice/wallet/update:
         post:
             tags:
@@ -4258,6 +4277,44 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyResponse'
+    /v1/wallet/responsible-gambling/config/add:
+        post:
+            tags:
+                - Wallet
+            description: AddResponsibleGamblingConfig adds gambling config for a user's currency
+            operationId: Wallet_AddResponsibleGamblingConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.AddResponsibleGamblingConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.AddResponsibleGamblingConfigResponse'
+    /v1/wallet/responsible-gambling/config/delete:
+        post:
+            tags:
+                - Wallet
+            description: DeleteResponsibleGamblingConfig deletes gambling config for a user's currency
+            operationId: Wallet_DeleteResponsibleGamblingConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.DeleteResponsibleGamblingConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse'
 components:
     schemas:
         api.backoffice.service.v1.AccountInfoRequest:
@@ -4872,6 +4929,16 @@ components:
         api.backoffice.service.v1.DeleteOperatorByoSubdomainResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.DeleteResponsibleGamblingConfigRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+                limitType:
+                    type: string
+                    description: |-
+                        deposit_limit, withdrawal_limit, daily_play_limit, weekly_play_limit, monthly_play_limit
+                         daily_loss_limit, weekly_loss_limit, monthly_loss_limit
         api.backoffice.service.v1.DeleteRoleRequest:
             type: object
             properties:
@@ -12368,6 +12435,30 @@ components:
                     type: string
                 updatedAt:
                     type: string
+        api.wallet.service.v1.AddResponsibleGamblingConfigRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+                depositLimit:
+                    type: string
+                withdrawalLimit:
+                    type: string
+                dailyPlayLimit:
+                    type: string
+                weeklyPlayLimit:
+                    type: string
+                monthlyPlayLimit:
+                    type: string
+                dailyLossLimit:
+                    type: string
+                weeklyLossLimit:
+                    type: string
+                monthlyLossLimit:
+                    type: string
+        api.wallet.service.v1.AddResponsibleGamblingConfigResponse:
+            type: object
+            properties: {}
         api.wallet.service.v1.BonusTransferRequest:
             type: object
             properties:
@@ -12416,6 +12507,23 @@ components:
                 bonusRatio:
                     type: string
         api.wallet.service.v1.DeleteDepositRewardSequencesResponse:
+            type: object
+            properties: {}
+        api.wallet.service.v1.DeleteResponsibleGamblingConfigRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                currency:
+                    type: string
+                limitType:
+                    type: string
+                    description: |-
+                        deposit_limit, withdrawal_limit, daily_play_limit, weekly_play_limit, monthly_play_limit
+                         daily_loss_limit, weekly_loss_limit, monthly_loss_limit
+        api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse:
             type: object
             properties: {}
         api.wallet.service.v1.DepositRewardConfig:
