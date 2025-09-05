@@ -2766,10 +2766,11 @@ func (x *UpdateDeductionOrderRequest) GetDeductionOrder() *v1.DeductionOrder {
 
 type DeleteResponsibleGamblingConfigRequest struct {
 	state    protoimpl.MessageState `protogen:"open.v1"`
-	Currency string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	UserId   int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Currency string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	// deposit_limit, withdrawal_limit, daily_play_limit, weekly_play_limit, monthly_play_limit
 	// daily_loss_limit, weekly_loss_limit, monthly_loss_limit
-	LimitType     string `protobuf:"bytes,2,opt,name=limit_type,json=limitType,proto3" json:"limit_type,omitempty"`
+	LimitType     string `protobuf:"bytes,3,opt,name=limit_type,json=limitType,proto3" json:"limit_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2802,6 +2803,13 @@ func (x *DeleteResponsibleGamblingConfigRequest) ProtoReflect() protoreflect.Mes
 // Deprecated: Use DeleteResponsibleGamblingConfigRequest.ProtoReflect.Descriptor instead.
 func (*DeleteResponsibleGamblingConfigRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{40}
+}
+
+func (x *DeleteResponsibleGamblingConfigRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
 }
 
 func (x *DeleteResponsibleGamblingConfigRequest) GetCurrency() string {
@@ -3381,11 +3389,12 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x18operator_currency_config\x18\x02 \x01(\v2-.api.wallet.service.v1.OperatorCurrencyConfigR\x16operatorCurrencyConfig\"\xc2\x01\n" +
 	"\x1bUpdateDeductionOrderRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12N\n" +
-	"\x0fdeduction_order\x18\x02 \x01(\v2%.api.wallet.service.v1.DeductionOrderR\x0edeductionOrder\"c\n" +
-	"&DeleteResponsibleGamblingConfigRequest\x12\x1a\n" +
-	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x1d\n" +
+	"\x0fdeduction_order\x18\x02 \x01(\v2%.api.wallet.service.v1.DeductionOrderR\x0edeductionOrder\"|\n" +
+	"&DeleteResponsibleGamblingConfigRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1d\n" +
 	"\n" +
-	"limit_type\x18\x02 \x01(\tR\tlimitType2\xaa&\n" +
+	"limit_type\x18\x03 \x01(\tR\tlimitType2\xaa&\n" +
 	"\x10BackofficeWallet\x12\x8b\x01\n" +
 	"\n" +
 	"GetWallets\x12,.api.backoffice.service.v1.GetWalletsRequest\x1a).api.wallet.service.v1.GetWalletsResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/backoffice/wallet/get\x12\xa9\x01\n" +

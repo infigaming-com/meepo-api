@@ -4932,6 +4932,8 @@ components:
         api.backoffice.service.v1.DeleteResponsibleGamblingConfigRequest:
             type: object
             properties:
+                userId:
+                    type: string
                 currency:
                     type: string
                 limitType:

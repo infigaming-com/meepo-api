@@ -5585,6 +5585,8 @@ func (m *DeleteResponsibleGamblingConfigRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for UserId
+
 	// no validation rules for Currency
 
 	// no validation rules for LimitType
