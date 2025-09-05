@@ -32,6 +32,7 @@ const OperationBackofficeWalletGetWalletCredits = "/api.backoffice.service.v1.Ba
 const OperationBackofficeWalletGetWallets = "/api.backoffice.service.v1.BackofficeWallet/GetWallets"
 const OperationBackofficeWalletListOperatorBalanceTransactions = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorBalanceTransactions"
 const OperationBackofficeWalletListOperatorBalances = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorBalances"
+const OperationBackofficeWalletListResponsibleGamblingConfigs = "/api.backoffice.service.v1.BackofficeWallet/ListResponsibleGamblingConfigs"
 const OperationBackofficeWalletListWalletBalanceTransactions = "/api.backoffice.service.v1.BackofficeWallet/ListWalletBalanceTransactions"
 const OperationBackofficeWalletListWalletCurrencies = "/api.backoffice.service.v1.BackofficeWallet/ListWalletCurrencies"
 const OperationBackofficeWalletOperatorBalanceFreeze = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceFreeze"
@@ -66,6 +67,8 @@ type BackofficeWalletHTTPServer interface {
 	ListOperatorBalanceTransactions(context.Context, *ListOperatorBalanceTransactionsRequest) (*ListOperatorBalanceTransactionsResponse, error)
 	// ListOperatorBalances ListOperatorBalances lists all operator balances which belong to the backoffice operator
 	ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*v1.ListBottomOperatorBalancesResponse, error)
+	// ListResponsibleGamblingConfigs ListResponsibleGamblingConfigs lists gambling configs for a user with all currencies
+	ListResponsibleGamblingConfigs(context.Context, *ListResponsibleGamblingConfigsRequest) (*v1.ListResponsibleGamblingConfigsResponse, error)
 	// ListWalletBalanceTransactions ListWalletBalanceTransactions provides balance transactions for a specific user in User transactions page.
 	ListWalletBalanceTransactions(context.Context, *ListWalletBalanceTransactionsRequest) (*ListWalletBalanceTransactionsResponse, error)
 	ListWalletCurrencies(context.Context, *ListWalletCurrenciesRequest) (*ListWalletCurrenciesResponse, error)
@@ -118,6 +121,7 @@ func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTP
 	r.POST("/v1/backoffice/wallet/currency/config/update", _BackofficeWallet_UpdateOperatorCurrencyConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/deduction-order/update", _BackofficeWallet_UpdateDeductionOrder0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/responsible-gambling/config/delete", _BackofficeWallet_DeleteResponsibleGamblingConfig1_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/responsible-gambling/configs/list", _BackofficeWallet_ListResponsibleGamblingConfigs1_HTTP_Handler(srv))
 }
 
 func _BackofficeWallet_GetWallets0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
@@ -670,6 +674,28 @@ func _BackofficeWallet_DeleteResponsibleGamblingConfig1_HTTP_Handler(srv Backoff
 	}
 }
 
+func _BackofficeWallet_ListResponsibleGamblingConfigs1_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListResponsibleGamblingConfigsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletListResponsibleGamblingConfigs)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListResponsibleGamblingConfigs(ctx, req.(*ListResponsibleGamblingConfigsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ListResponsibleGamblingConfigsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeWalletHTTPClient interface {
 	AddWalletCurrency(ctx context.Context, req *AddWalletCurrencyRequest, opts ...http.CallOption) (rsp *AddWalletCurrencyResponse, err error)
 	DeleteDepositRewardSequences(ctx context.Context, req *DeleteDepositRewardSequencesRequest, opts ...http.CallOption) (rsp *v1.DeleteDepositRewardSequencesResponse, err error)
@@ -683,6 +709,7 @@ type BackofficeWalletHTTPClient interface {
 	GetWallets(ctx context.Context, req *GetWalletsRequest, opts ...http.CallOption) (rsp *v1.GetWalletsResponse, err error)
 	ListOperatorBalanceTransactions(ctx context.Context, req *ListOperatorBalanceTransactionsRequest, opts ...http.CallOption) (rsp *ListOperatorBalanceTransactionsResponse, err error)
 	ListOperatorBalances(ctx context.Context, req *ListOperatorBalancesRequest, opts ...http.CallOption) (rsp *v1.ListBottomOperatorBalancesResponse, err error)
+	ListResponsibleGamblingConfigs(ctx context.Context, req *ListResponsibleGamblingConfigsRequest, opts ...http.CallOption) (rsp *v1.ListResponsibleGamblingConfigsResponse, err error)
 	ListWalletBalanceTransactions(ctx context.Context, req *ListWalletBalanceTransactionsRequest, opts ...http.CallOption) (rsp *ListWalletBalanceTransactionsResponse, err error)
 	ListWalletCurrencies(ctx context.Context, req *ListWalletCurrenciesRequest, opts ...http.CallOption) (rsp *ListWalletCurrenciesResponse, err error)
 	OperatorBalanceFreeze(ctx context.Context, req *OperatorBalanceFreezeRequest, opts ...http.CallOption) (rsp *OperatorBalanceFreezeResponse, err error)
@@ -854,6 +881,19 @@ func (c *BackofficeWalletHTTPClientImpl) ListOperatorBalances(ctx context.Contex
 	pattern := "/v1/backoffice/wallet/operator/balances/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletListOperatorBalances))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeWalletHTTPClientImpl) ListResponsibleGamblingConfigs(ctx context.Context, in *ListResponsibleGamblingConfigsRequest, opts ...http.CallOption) (*v1.ListResponsibleGamblingConfigsResponse, error) {
+	var out v1.ListResponsibleGamblingConfigsResponse
+	pattern := "/v1/backoffice/wallet/responsible-gambling/configs/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletListResponsibleGamblingConfigs))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

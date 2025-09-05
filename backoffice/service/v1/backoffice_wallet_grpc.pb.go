@@ -45,6 +45,7 @@ const (
 	BackofficeWallet_UpdateOperatorCurrencyConfig_FullMethodName    = "/api.backoffice.service.v1.BackofficeWallet/UpdateOperatorCurrencyConfig"
 	BackofficeWallet_UpdateDeductionOrder_FullMethodName            = "/api.backoffice.service.v1.BackofficeWallet/UpdateDeductionOrder"
 	BackofficeWallet_DeleteResponsibleGamblingConfig_FullMethodName = "/api.backoffice.service.v1.BackofficeWallet/DeleteResponsibleGamblingConfig"
+	BackofficeWallet_ListResponsibleGamblingConfigs_FullMethodName  = "/api.backoffice.service.v1.BackofficeWallet/ListResponsibleGamblingConfigs"
 )
 
 // BackofficeWalletClient is the client API for BackofficeWallet service.
@@ -93,6 +94,8 @@ type BackofficeWalletClient interface {
 	UpdateDeductionOrder(ctx context.Context, in *UpdateDeductionOrderRequest, opts ...grpc.CallOption) (*v1.UpdateDeductionOrderResponse, error)
 	// DeleteResponsibleGamblingConfig deletes gambling config for a user's currency
 	DeleteResponsibleGamblingConfig(ctx context.Context, in *DeleteResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*v1.DeleteResponsibleGamblingConfigResponse, error)
+	// ListResponsibleGamblingConfigs lists gambling configs for a user with all currencies
+	ListResponsibleGamblingConfigs(ctx context.Context, in *ListResponsibleGamblingConfigsRequest, opts ...grpc.CallOption) (*v1.ListResponsibleGamblingConfigsResponse, error)
 }
 
 type backofficeWalletClient struct {
@@ -353,6 +356,16 @@ func (c *backofficeWalletClient) DeleteResponsibleGamblingConfig(ctx context.Con
 	return out, nil
 }
 
+func (c *backofficeWalletClient) ListResponsibleGamblingConfigs(ctx context.Context, in *ListResponsibleGamblingConfigsRequest, opts ...grpc.CallOption) (*v1.ListResponsibleGamblingConfigsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListResponsibleGamblingConfigsResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_ListResponsibleGamblingConfigs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeWalletServer is the server API for BackofficeWallet service.
 // All implementations must embed UnimplementedBackofficeWalletServer
 // for forward compatibility.
@@ -399,6 +412,8 @@ type BackofficeWalletServer interface {
 	UpdateDeductionOrder(context.Context, *UpdateDeductionOrderRequest) (*v1.UpdateDeductionOrderResponse, error)
 	// DeleteResponsibleGamblingConfig deletes gambling config for a user's currency
 	DeleteResponsibleGamblingConfig(context.Context, *DeleteResponsibleGamblingConfigRequest) (*v1.DeleteResponsibleGamblingConfigResponse, error)
+	// ListResponsibleGamblingConfigs lists gambling configs for a user with all currencies
+	ListResponsibleGamblingConfigs(context.Context, *ListResponsibleGamblingConfigsRequest) (*v1.ListResponsibleGamblingConfigsResponse, error)
 	mustEmbedUnimplementedBackofficeWalletServer()
 }
 
@@ -483,6 +498,9 @@ func (UnimplementedBackofficeWalletServer) UpdateDeductionOrder(context.Context,
 }
 func (UnimplementedBackofficeWalletServer) DeleteResponsibleGamblingConfig(context.Context, *DeleteResponsibleGamblingConfigRequest) (*v1.DeleteResponsibleGamblingConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteResponsibleGamblingConfig not implemented")
+}
+func (UnimplementedBackofficeWalletServer) ListResponsibleGamblingConfigs(context.Context, *ListResponsibleGamblingConfigsRequest) (*v1.ListResponsibleGamblingConfigsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListResponsibleGamblingConfigs not implemented")
 }
 func (UnimplementedBackofficeWalletServer) mustEmbedUnimplementedBackofficeWalletServer() {}
 func (UnimplementedBackofficeWalletServer) testEmbeddedByValue()                          {}
@@ -955,6 +973,24 @@ func _BackofficeWallet_DeleteResponsibleGamblingConfig_Handler(srv interface{}, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeWallet_ListResponsibleGamblingConfigs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListResponsibleGamblingConfigsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).ListResponsibleGamblingConfigs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_ListResponsibleGamblingConfigs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).ListResponsibleGamblingConfigs(ctx, req.(*ListResponsibleGamblingConfigsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeWallet_ServiceDesc is the grpc.ServiceDesc for BackofficeWallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1061,6 +1097,10 @@ var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteResponsibleGamblingConfig",
 			Handler:    _BackofficeWallet_DeleteResponsibleGamblingConfig_Handler,
+		},
+		{
+			MethodName: "ListResponsibleGamblingConfigs",
+			Handler:    _BackofficeWallet_ListResponsibleGamblingConfigs_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

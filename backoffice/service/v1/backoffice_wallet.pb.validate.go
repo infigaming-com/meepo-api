@@ -5673,6 +5673,113 @@ var _ interface {
 	ErrorName() string
 } = DeleteResponsibleGamblingConfigRequestValidationError{}
 
+// Validate checks the field values on ListResponsibleGamblingConfigsRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ListResponsibleGamblingConfigsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListResponsibleGamblingConfigsRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListResponsibleGamblingConfigsRequestMultiError, or nil if none found.
+func (m *ListResponsibleGamblingConfigsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListResponsibleGamblingConfigsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	if len(errors) > 0 {
+		return ListResponsibleGamblingConfigsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListResponsibleGamblingConfigsRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// ListResponsibleGamblingConfigsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListResponsibleGamblingConfigsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListResponsibleGamblingConfigsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListResponsibleGamblingConfigsRequestMultiError) AllErrors() []error { return m }
+
+// ListResponsibleGamblingConfigsRequestValidationError is the validation error
+// returned by ListResponsibleGamblingConfigsRequest.Validate if the
+// designated constraints aren't met.
+type ListResponsibleGamblingConfigsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListResponsibleGamblingConfigsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListResponsibleGamblingConfigsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListResponsibleGamblingConfigsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListResponsibleGamblingConfigsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListResponsibleGamblingConfigsRequestValidationError) ErrorName() string {
+	return "ListResponsibleGamblingConfigsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListResponsibleGamblingConfigsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListResponsibleGamblingConfigsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListResponsibleGamblingConfigsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListResponsibleGamblingConfigsRequestValidationError{}
+
 // Validate checks the field values on GetWalletCreditsResponse_Credit with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

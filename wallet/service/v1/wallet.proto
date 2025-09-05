@@ -181,6 +181,17 @@ service Wallet {
 		};
 	}
 
+	// ListResponsibleGamblingConfigs lists gambling configs for a user with all currencies
+	rpc ListResponsibleGamblingConfigs(ListResponsibleGamblingConfigsRequest) returns (ListResponsibleGamblingConfigsResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/responsible-gambling/configs/list"
+			body: "*"
+		};
+	}
+
+	// GetResponsibleGamblingConfig gets gambling config and statusfor a user's currency
+	rpc GetResponsibleGamblingConfig(GetResponsibleGamblingConfigRequest) returns (GetResponsibleGamblingConfigResponse) {
+	}
 }
 
 message GetUserBalancesRequest {
@@ -1228,3 +1239,50 @@ message DeleteResponsibleGamblingConfigRequest {
 }
 
 message DeleteResponsibleGamblingConfigResponse {}
+
+message ResponsibleGamblingConfig {
+	string currency = 1;
+	string deposit_limit = 2;
+	string withdrawal_limit = 3;
+	string daily_play_limit = 4;
+	string weekly_play_limit = 5;
+	string monthly_play_limit = 6;
+	string daily_loss_limit = 7;
+	string weekly_loss_limit = 8;
+	string monthly_loss_limit = 9;
+}
+
+message ResponsibleGamblingStatus {
+	string currency = 1;
+	bool withdrawal_allowed = 2;
+	string withdrawal_usage = 3;
+	bool deposit_allowed = 4;
+	string deposit_usage = 5;
+	bool game_bet_allowed = 6;
+	string daily_play_usage = 7;
+	string weekly_play_usage = 8;
+	string monthly_play_usage = 9;
+	string daily_loss_usage = 10;
+	string weekly_loss_usage = 11;
+	string monthly_loss_usage = 12;
+}
+
+message ListResponsibleGamblingConfigsRequest {
+	optional int64 user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+}
+
+message ListResponsibleGamblingConfigsResponse {
+	repeated ResponsibleGamblingConfig responsible_gambling_configs = 1;
+	repeated ResponsibleGamblingStatus responsible_gambling_statuses = 2;
+}
+
+message GetResponsibleGamblingConfigRequest {
+	optional int64 user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+	string currency = 3;
+}
+
+message GetResponsibleGamblingConfigResponse {
+	ResponsibleGamblingConfig responsible_gambling_config = 1;
+}
