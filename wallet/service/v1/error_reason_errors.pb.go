@@ -1402,3 +1402,39 @@ func IsGetOperatorContextFailed(err error) bool {
 func ErrorGetOperatorContextFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_OPERATOR_CONTEXT_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsUserIdRequired(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_ID_REQUIRED.String() && e.Code == 500
+}
+
+func ErrorUserIdRequired(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_ID_REQUIRED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsLockGamblingConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LOCK_GAMBLING_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorLockGamblingConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LOCK_GAMBLING_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListGamblingConfigsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_GAMBLING_CONFIGS_FAILED.String() && e.Code == 500
+}
+
+func ErrorListGamblingConfigsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_GAMBLING_CONFIGS_FAILED.String(), fmt.Sprintf(format, args...))
+}
