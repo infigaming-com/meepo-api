@@ -178,6 +178,14 @@ service BackofficeWallet {
 			body: "*"
 		};
 	}
+
+	// DeleteResponsibleGamblingConfig deletes gambling config for a user's currency
+	rpc DeleteResponsibleGamblingConfig(DeleteResponsibleGamblingConfigRequest) returns (wallet.service.v1.DeleteResponsibleGamblingConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/responsible-gambling/config/delete"
+			body: "*"
+		};
+	}
 }
 
 message GetWalletsRequest {
@@ -517,4 +525,11 @@ message UpdateOperatorCurrencyConfigRequest {
 message UpdateDeductionOrderRequest {
 	api.common.OperatorContext target_operator_context = 1;
 	wallet.service.v1.DeductionOrder deduction_order = 2;
+}
+
+message DeleteResponsibleGamblingConfigRequest {
+	string currency = 1;
+	// deposit_limit, withdrawal_limit, daily_play_limit, weekly_play_limit, monthly_play_limit
+	// daily_loss_limit, weekly_loss_limit, monthly_loss_limit
+	string limit_type = 2;
 }

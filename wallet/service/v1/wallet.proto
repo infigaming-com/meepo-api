@@ -164,6 +164,23 @@ service Wallet {
 			body: "*"
 		};
 	}
+
+	// AddResponsibleGamblingConfig adds gambling config for a user's currency
+	rpc AddResponsibleGamblingConfig(AddResponsibleGamblingConfigRequest) returns (AddResponsibleGamblingConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/responsible-gambling/config/add"
+			body: "*"
+		};
+	}
+
+	// DeleteResponsibleGamblingConfig deletes gambling config for a user's currency
+	rpc DeleteResponsibleGamblingConfig(DeleteResponsibleGamblingConfigRequest) returns (DeleteResponsibleGamblingConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/responsible-gambling/config/delete"
+			body: "*"
+		};
+	}
+
 }
 
 message GetUserBalancesRequest {
@@ -1187,5 +1204,27 @@ message GetUserBalanceDetailsResponse {
 	UserBalanceDetail detail = 1;
 }
 
+message AddResponsibleGamblingConfigRequest {
+	string currency = 1;
+	optional string deposit_limit = 2;
+	optional string withdrawal_limit = 3;
+	optional string daily_play_limit = 4;
+	optional string weekly_play_limit = 5;
+	optional string monthly_play_limit = 6;
+	optional string daily_loss_limit = 7;
+	optional string weekly_loss_limit = 8;
+	optional string monthly_loss_limit = 9;
+}
 
+message AddResponsibleGamblingConfigResponse {}
 
+message DeleteResponsibleGamblingConfigRequest {
+	optional int64 user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+	string currency = 3;
+	// deposit_limit, withdrawal_limit, daily_play_limit, weekly_play_limit, monthly_play_limit
+	// daily_loss_limit, weekly_loss_limit, monthly_loss_limit
+	string limit_type = 4;
+}
+
+message DeleteResponsibleGamblingConfigResponse {}

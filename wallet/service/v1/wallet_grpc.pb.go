@@ -65,6 +65,8 @@ const (
 	Wallet_UpdateOperatorCurrencyConfig_FullMethodName        = "/api.wallet.service.v1.Wallet/UpdateOperatorCurrencyConfig"
 	Wallet_UpdateDeductionOrder_FullMethodName                = "/api.wallet.service.v1.Wallet/UpdateDeductionOrder"
 	Wallet_BonusTransfer_FullMethodName                       = "/api.wallet.service.v1.Wallet/BonusTransfer"
+	Wallet_AddResponsibleGamblingConfig_FullMethodName        = "/api.wallet.service.v1.Wallet/AddResponsibleGamblingConfig"
+	Wallet_DeleteResponsibleGamblingConfig_FullMethodName     = "/api.wallet.service.v1.Wallet/DeleteResponsibleGamblingConfig"
 )
 
 // WalletClient is the client API for Wallet service.
@@ -148,6 +150,10 @@ type WalletClient interface {
 	UpdateDeductionOrder(ctx context.Context, in *UpdateDeductionOrderRequest, opts ...grpc.CallOption) (*UpdateDeductionOrderResponse, error)
 	// BonusTransfer is used to transfer from one credit's bonus to generate a new credit's cash
 	BonusTransfer(ctx context.Context, in *BonusTransferRequest, opts ...grpc.CallOption) (*BonusTransferResponse, error)
+	// AddResponsibleGamblingConfig adds gambling config for a user's currency
+	AddResponsibleGamblingConfig(ctx context.Context, in *AddResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*AddResponsibleGamblingConfigResponse, error)
+	// DeleteResponsibleGamblingConfig deletes gambling config for a user's currency
+	DeleteResponsibleGamblingConfig(ctx context.Context, in *DeleteResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*DeleteResponsibleGamblingConfigResponse, error)
 }
 
 type walletClient struct {
@@ -618,6 +624,26 @@ func (c *walletClient) BonusTransfer(ctx context.Context, in *BonusTransferReque
 	return out, nil
 }
 
+func (c *walletClient) AddResponsibleGamblingConfig(ctx context.Context, in *AddResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*AddResponsibleGamblingConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddResponsibleGamblingConfigResponse)
+	err := c.cc.Invoke(ctx, Wallet_AddResponsibleGamblingConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) DeleteResponsibleGamblingConfig(ctx context.Context, in *DeleteResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*DeleteResponsibleGamblingConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteResponsibleGamblingConfigResponse)
+	err := c.cc.Invoke(ctx, Wallet_DeleteResponsibleGamblingConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServer is the server API for Wallet service.
 // All implementations must embed UnimplementedWalletServer
 // for forward compatibility.
@@ -699,6 +725,10 @@ type WalletServer interface {
 	UpdateDeductionOrder(context.Context, *UpdateDeductionOrderRequest) (*UpdateDeductionOrderResponse, error)
 	// BonusTransfer is used to transfer from one credit's bonus to generate a new credit's cash
 	BonusTransfer(context.Context, *BonusTransferRequest) (*BonusTransferResponse, error)
+	// AddResponsibleGamblingConfig adds gambling config for a user's currency
+	AddResponsibleGamblingConfig(context.Context, *AddResponsibleGamblingConfigRequest) (*AddResponsibleGamblingConfigResponse, error)
+	// DeleteResponsibleGamblingConfig deletes gambling config for a user's currency
+	DeleteResponsibleGamblingConfig(context.Context, *DeleteResponsibleGamblingConfigRequest) (*DeleteResponsibleGamblingConfigResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -846,6 +876,12 @@ func (UnimplementedWalletServer) UpdateDeductionOrder(context.Context, *UpdateDe
 }
 func (UnimplementedWalletServer) BonusTransfer(context.Context, *BonusTransferRequest) (*BonusTransferResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BonusTransfer not implemented")
+}
+func (UnimplementedWalletServer) AddResponsibleGamblingConfig(context.Context, *AddResponsibleGamblingConfigRequest) (*AddResponsibleGamblingConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddResponsibleGamblingConfig not implemented")
+}
+func (UnimplementedWalletServer) DeleteResponsibleGamblingConfig(context.Context, *DeleteResponsibleGamblingConfigRequest) (*DeleteResponsibleGamblingConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteResponsibleGamblingConfig not implemented")
 }
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
@@ -1696,6 +1732,42 @@ func _Wallet_BonusTransfer_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_AddResponsibleGamblingConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddResponsibleGamblingConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).AddResponsibleGamblingConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_AddResponsibleGamblingConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).AddResponsibleGamblingConfig(ctx, req.(*AddResponsibleGamblingConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_DeleteResponsibleGamblingConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteResponsibleGamblingConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).DeleteResponsibleGamblingConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_DeleteResponsibleGamblingConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).DeleteResponsibleGamblingConfig(ctx, req.(*DeleteResponsibleGamblingConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Wallet_ServiceDesc is the grpc.ServiceDesc for Wallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1886,6 +1958,14 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BonusTransfer",
 			Handler:    _Wallet_BonusTransfer_Handler,
+		},
+		{
+			MethodName: "AddResponsibleGamblingConfig",
+			Handler:    _Wallet_AddResponsibleGamblingConfig_Handler,
+		},
+		{
+			MethodName: "DeleteResponsibleGamblingConfig",
+			Handler:    _Wallet_DeleteResponsibleGamblingConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
