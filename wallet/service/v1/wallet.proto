@@ -1220,7 +1220,7 @@ message AddResponsibleGamblingConfigResponse {}
 
 message DeleteResponsibleGamblingConfigRequest {
 	optional int64 user_id = 1;
-	api.common.OperatorContext operator_context = 2;
+	optional api.common.OperatorContext operator_context = 2;
 	string currency = 3;
 	// deposit_limit, withdrawal_limit, daily_play_limit, weekly_play_limit, monthly_play_limit
 	// daily_loss_limit, weekly_loss_limit, monthly_loss_limit

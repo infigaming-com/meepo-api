@@ -7764,7 +7764,7 @@ func (*AddResponsibleGamblingConfigResponse) Descriptor() ([]byte, []int) {
 type DeleteResponsibleGamblingConfigRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	UserId          *int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3,oneof" json:"operator_context,omitempty"`
 	Currency        string                  `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
 	// deposit_limit, withdrawal_limit, daily_play_limit, weekly_play_limit, monthly_play_limit
 	// daily_loss_limit, weekly_loss_limit, monthly_loss_limit
@@ -10372,15 +10372,16 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x11_daily_loss_limitB\x14\n" +
 	"\x12_weekly_loss_limitB\x15\n" +
 	"\x13_monthly_loss_limit\"&\n" +
-	"$AddResponsibleGamblingConfigResponse\"\xd5\x01\n" +
+	"$AddResponsibleGamblingConfigResponse\"\xef\x01\n" +
 	"&DeleteResponsibleGamblingConfigRequest\x12\x1c\n" +
-	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12F\n" +
-	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
+	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12K\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextH\x01R\x0foperatorContext\x88\x01\x01\x12\x1a\n" +
 	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12\x1d\n" +
 	"\n" +
 	"limit_type\x18\x04 \x01(\tR\tlimitTypeB\n" +
 	"\n" +
-	"\b_user_id\")\n" +
+	"\b_user_idB\x13\n" +
+	"\x11_operator_context\")\n" +
 	"'DeleteResponsibleGamblingConfigResponse2\xed3\n" +
 	"\x06Wallet\x12\x95\x01\n" +
 	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/wallet/balances/list\x12o\n" +
