@@ -9781,14 +9781,47 @@ components:
             properties:
                 userId:
                     type: string
+                    description: user id
+                nickname:
+                    type: string
+                    description: nickname
+                avatar:
+                    type: string
+                    description: avatar
                 banLogin:
                     type: boolean
+                    description: ban login
                 banGame:
                     type: boolean
+                    description: ban game
                 banWithdraw:
                     type: boolean
+                    description: ban withdraw
                 locked:
                     type: boolean
+                    description: locked
+                enabled:
+                    type: boolean
+                    description: enabled
+                roleId:
+                    type: string
+                    description: role id
+                firstname:
+                    type: string
+                    description: first name
+                lastname:
+                    type: string
+                    description: last name
+                email:
+                    type: string
+                    description: email
+                mobile:
+                    type: string
+                    description: mobile
+                userIdentity:
+                    allOf:
+                        - $ref: '#/components/schemas/api.user.service.v1.UserIdentity'
+                    description: user identity
         api.backoffice.service.v1.UpdateUserResponse:
             type: object
             properties: {}
@@ -12104,6 +12137,15 @@ components:
         api.user.service.v1.UpdateOperatorAccountSettingsResponse:
             type: object
             properties: {}
+        api.user.service.v1.UserIdentity:
+            type: object
+            properties:
+                idType:
+                    type: string
+                idNumber:
+                    type: string
+                image:
+                    type: string
         api.user.service.v1.UserInfo:
             type: object
             properties:

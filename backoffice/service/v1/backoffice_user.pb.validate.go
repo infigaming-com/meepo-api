@@ -1781,6 +1781,14 @@ func (m *UpdateUserRequest) validate(all bool) error {
 
 	// no validation rules for UserId
 
+	if m.Nickname != nil {
+		// no validation rules for Nickname
+	}
+
+	if m.Avatar != nil {
+		// no validation rules for Avatar
+	}
+
 	if m.BanLogin != nil {
 		// no validation rules for BanLogin
 	}
@@ -1795,6 +1803,63 @@ func (m *UpdateUserRequest) validate(all bool) error {
 
 	if m.Locked != nil {
 		// no validation rules for Locked
+	}
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
+	}
+
+	if m.RoleId != nil {
+		// no validation rules for RoleId
+	}
+
+	if m.Firstname != nil {
+		// no validation rules for Firstname
+	}
+
+	if m.Lastname != nil {
+		// no validation rules for Lastname
+	}
+
+	if m.Email != nil {
+		// no validation rules for Email
+	}
+
+	if m.Mobile != nil {
+		// no validation rules for Mobile
+	}
+
+	if m.UserIdentity != nil {
+
+		if all {
+			switch v := interface{}(m.GetUserIdentity()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UpdateUserRequestValidationError{
+						field:  "UserIdentity",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UpdateUserRequestValidationError{
+						field:  "UserIdentity",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetUserIdentity()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UpdateUserRequestValidationError{
+					field:  "UserIdentity",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	}
 
 	if len(errors) > 0 {
