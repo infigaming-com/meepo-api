@@ -638,7 +638,7 @@ message UserIdentity {
 	bool verified = 5;
 }
 
-message UpdateUserRequest {
+jkmessage UpdateUserRequest {
 	int64 user_id = 1;
 	optional string nickname = 2;
 	optional string avatar = 3;
