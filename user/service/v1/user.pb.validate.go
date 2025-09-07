@@ -89,6 +89,48 @@ func (m *UserInfo) validate(all bool) error {
 
 	// no validation rules for RoleId
 
+	// no validation rules for RegisteredMobile
+
+	// no validation rules for RegisteredEmail
+
+	// no validation rules for KycLevel
+
+	// no validation rules for Address
+
+	for idx, item := range m.GetUserIdentity() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UserInfoValidationError{
+						field:  fmt.Sprintf("UserIdentity[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UserInfoValidationError{
+						field:  fmt.Sprintf("UserIdentity[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UserInfoValidationError{
+					field:  fmt.Sprintf("UserIdentity[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
 	if len(errors) > 0 {
 		return UserInfoMultiError(errors)
 	}
@@ -5075,11 +5117,15 @@ func (m *UserIdentity) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Id
+
 	// no validation rules for IdType
 
 	// no validation rules for IdNumber
 
 	// no validation rules for Image
+
+	// no validation rules for Verified
 
 	if len(errors) > 0 {
 		return UserIdentityMultiError(errors)
@@ -5290,6 +5336,10 @@ func (m *UpdateUserRequest) validate(all bool) error {
 			}
 		}
 
+	}
+
+	if m.Address != nil {
+		// no validation rules for Address
 	}
 
 	if len(errors) > 0 {
