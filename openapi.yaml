@@ -6153,6 +6153,13 @@ components:
                 loginPageSize:
                     type: integer
                     format: int32
+                mobile:
+                    type: string
+                email:
+                    type: string
+                kycLevel:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.GetUserProfileResponse_Comment:
             type: object
             properties:
@@ -9822,6 +9829,9 @@ components:
                     allOf:
                         - $ref: '#/components/schemas/api.user.service.v1.UserIdentity'
                     description: user identity
+                address:
+                    type: string
+                    description: address
         api.backoffice.service.v1.UpdateUserResponse:
             type: object
             properties: {}
@@ -12140,12 +12150,16 @@ components:
         api.user.service.v1.UserIdentity:
             type: object
             properties:
+                id:
+                    type: string
                 idType:
                     type: string
                 idNumber:
                     type: string
                 image:
                     type: string
+                verified:
+                    type: boolean
         api.user.service.v1.UserInfo:
             type: object
             properties:
@@ -12197,6 +12211,24 @@ components:
                 roleId:
                     type: string
                     description: role id
+                registeredMobile:
+                    type: string
+                    description: registered mobile
+                registeredEmail:
+                    type: string
+                    description: registered email
+                kycLevel:
+                    type: integer
+                    description: kyc_level
+                    format: int32
+                address:
+                    type: string
+                    description: address
+                userIdentity:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.UserIdentity'
+                    description: uesr identities
             description: UserInfo contains basic user information.
         api.vip.service.v1.ClaimVipRewardRequest:
             type: object
