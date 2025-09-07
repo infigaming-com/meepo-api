@@ -656,6 +656,7 @@ message UpdateUserRequest {
 	optional string address = 15;
 	// The initial operator context.
 	api.common.OperatorContext operator_context = 16;
+
 }
 
 message UpdateUserResponse {
