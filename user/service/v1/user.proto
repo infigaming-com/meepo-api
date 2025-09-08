@@ -330,6 +330,16 @@ message UserInfo {
 	bool ban_withdraw = 15;
 	// role id
 	int64 role_id = 16;
+	// registered mobile
+	string registered_mobile = 17;
+	// registered email
+	string registered_email = 18;
+	// kyc_level
+	int32 kyc_level = 19;
+	// address
+	string address = 20;
+	// uesr identities
+	repeated UserIdentity user_identity = 21;
 }
 
 // AuthType defines the type of authentication method.
@@ -643,9 +653,11 @@ message ResetPasswordWithCodeResponse {
 }
 
 message UserIdentity {
-	string id_type = 1;
-	string id_number = 2;
-	string image = 3;
+	int64 id = 1;
+	string id_type = 2;
+	string id_number = 3;
+	string image = 4;
+	bool verified = 5;
 }
 
 message UpdateUserRequest {
@@ -663,8 +675,9 @@ message UpdateUserRequest {
 	optional string email = 12;
 	optional string mobile = 13;
 	optional UserIdentity user_identity = 14;
+	optional string address = 15;
 	// The initial operator context.
-	api.common.OperatorContext operator_context = 15;
+	api.common.OperatorContext operator_context = 16;
 }
 
 message UpdateUserResponse {

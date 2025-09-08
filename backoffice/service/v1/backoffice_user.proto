@@ -306,6 +306,9 @@ message GetUserProfileResponse {
 	int32 total_login_count = 13;
 	int32 login_page = 14;
 	int32 login_page_size = 15;
+	string mobile = 16;
+	string email = 17;
+	int32 kyc_level = 18;
 }
 
 message AddUserCommentRequest {
@@ -365,6 +368,8 @@ message UpdateUserRequest {
 	optional string mobile = 13;
 	// user identity
 	optional user.service.v1.UserIdentity user_identity = 14;
+	// address
+	optional string address = 15;
 }
 
 message UpdateUserResponse {}

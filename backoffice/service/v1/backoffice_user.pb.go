@@ -792,6 +792,9 @@ type GetUserProfileResponse struct {
 	TotalLoginCount    int32                                      `protobuf:"varint,13,opt,name=total_login_count,json=totalLoginCount,proto3" json:"total_login_count,omitempty"`
 	LoginPage          int32                                      `protobuf:"varint,14,opt,name=login_page,json=loginPage,proto3" json:"login_page,omitempty"`
 	LoginPageSize      int32                                      `protobuf:"varint,15,opt,name=login_page_size,json=loginPageSize,proto3" json:"login_page_size,omitempty"`
+	Mobile             string                                     `protobuf:"bytes,16,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	Email              string                                     `protobuf:"bytes,17,opt,name=email,proto3" json:"email,omitempty"`
+	KycLevel           int32                                      `protobuf:"varint,18,opt,name=kyc_level,json=kycLevel,proto3" json:"kyc_level,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -927,6 +930,27 @@ func (x *GetUserProfileResponse) GetLoginPage() int32 {
 func (x *GetUserProfileResponse) GetLoginPageSize() int32 {
 	if x != nil {
 		return x.LoginPageSize
+	}
+	return 0
+}
+
+func (x *GetUserProfileResponse) GetMobile() string {
+	if x != nil {
+		return x.Mobile
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse) GetKycLevel() int32 {
+	if x != nil {
+		return x.KycLevel
 	}
 	return 0
 }
@@ -1224,7 +1248,9 @@ type UpdateUserRequest struct {
 	// mobile
 	Mobile *string `protobuf:"bytes,13,opt,name=mobile,proto3,oneof" json:"mobile,omitempty"`
 	// user identity
-	UserIdentity  *v1.UserIdentity `protobuf:"bytes,14,opt,name=user_identity,json=userIdentity,proto3,oneof" json:"user_identity,omitempty"`
+	UserIdentity *v1.UserIdentity `protobuf:"bytes,14,opt,name=user_identity,json=userIdentity,proto3,oneof" json:"user_identity,omitempty"`
+	// address
+	Address       *string `protobuf:"bytes,15,opt,name=address,proto3,oneof" json:"address,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1355,6 +1381,13 @@ func (x *UpdateUserRequest) GetUserIdentity() *v1.UserIdentity {
 		return x.UserIdentity
 	}
 	return nil
+}
+
+func (x *UpdateUserRequest) GetAddress() string {
+	if x != nil && x.Address != nil {
+		return *x.Address
+	}
+	return ""
 }
 
 type UpdateUserResponse struct {
@@ -2906,7 +2939,7 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"login_page\x18\x02 \x01(\x05H\x00R\tloginPage\x88\x01\x01\x12+\n" +
 	"\x0flogin_page_size\x18\x03 \x01(\x05H\x01R\rloginPageSize\x88\x01\x01B\r\n" +
 	"\v_login_pageB\x12\n" +
-	"\x10_login_page_size\"\xe6\f\n" +
+	"\x10_login_page_size\"\xb1\r\n" +
 	"\x16GetUserProfileResponse\x12\x1a\n" +
 	"\bnickname\x18\x01 \x01(\tR\bnickname\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1b\n" +
@@ -2924,7 +2957,10 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x11total_login_count\x18\r \x01(\x05R\x0ftotalLoginCount\x12\x1d\n" +
 	"\n" +
 	"login_page\x18\x0e \x01(\x05R\tloginPage\x12&\n" +
-	"\x0flogin_page_size\x18\x0f \x01(\x05R\rloginPageSize\x1aH\n" +
+	"\x0flogin_page_size\x18\x0f \x01(\x05R\rloginPageSize\x12\x16\n" +
+	"\x06mobile\x18\x10 \x01(\tR\x06mobile\x12\x14\n" +
+	"\x05email\x18\x11 \x01(\tR\x05email\x12\x1b\n" +
+	"\tkyc_level\x18\x12 \x01(\x05R\bkycLevel\x1aH\n" +
 	"\x06IpInfo\x12\x0e\n" +
 	"\x02ip\x18\x01 \x01(\tR\x02ip\x12\x14\n" +
 	"\x05count\x18\x02 \x01(\x05R\x05count\x12\x18\n" +
@@ -2976,7 +3012,7 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"8\n" +
 	" SendEmailVerificationCodeRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\"#\n" +
-	"!SendEmailVerificationCodeResponse\"\xa0\x05\n" +
+	"!SendEmailVerificationCodeResponse\"\xcb\x05\n" +
 	"\x11UpdateUserRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
 	"\bnickname\x18\x02 \x01(\tH\x00R\bnickname\x88\x01\x01\x12\x1b\n" +
@@ -2993,7 +3029,8 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x05email\x18\f \x01(\tH\n" +
 	"R\x05email\x88\x01\x01\x12\x1b\n" +
 	"\x06mobile\x18\r \x01(\tH\vR\x06mobile\x88\x01\x01\x12K\n" +
-	"\ruser_identity\x18\x0e \x01(\v2!.api.user.service.v1.UserIdentityH\fR\fuserIdentity\x88\x01\x01B\v\n" +
+	"\ruser_identity\x18\x0e \x01(\v2!.api.user.service.v1.UserIdentityH\fR\fuserIdentity\x88\x01\x01\x12\x1d\n" +
+	"\aaddress\x18\x0f \x01(\tH\rR\aaddress\x88\x01\x01B\v\n" +
 	"\t_nicknameB\t\n" +
 	"\a_avatarB\f\n" +
 	"\n" +
@@ -3010,7 +3047,9 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\t_lastnameB\b\n" +
 	"\x06_emailB\t\n" +
 	"\a_mobileB\x10\n" +
-	"\x0e_user_identity\"\x14\n" +
+	"\x0e_user_identityB\n" +
+	"\n" +
+	"\b_address\"\x14\n" +
 	"\x12UpdateUserResponse\"d\n" +
 	"\x1cSetOperatorTagsConfigRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
