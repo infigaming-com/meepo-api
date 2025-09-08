@@ -1250,6 +1250,14 @@ message ResponsibleGamblingConfig {
 	string daily_loss_limit = 7;
 	string weekly_loss_limit = 8;
 	string monthly_loss_limit = 9;
+	google.protobuf.Timestamp deposit_limit_delete_schedule_time = 10;
+	google.protobuf.Timestamp withdrawal_limit_delete_schedule_time = 11;
+	google.protobuf.Timestamp daily_play_limit_delete_schedule_time = 12;
+	google.protobuf.Timestamp weekly_play_limit_delete_schedule_time = 13;
+	google.protobuf.Timestamp monthly_play_limit_delete_schedule_time = 14;
+	google.protobuf.Timestamp daily_loss_limit_delete_schedule_time = 15;
+	google.protobuf.Timestamp weekly_loss_limit_delete_schedule_time = 16;
+	google.protobuf.Timestamp monthly_loss_limit_delete_schedule_time = 17;
 }
 
 message ResponsibleGamblingStatus {

@@ -1,6 +1,7 @@
 package util
 
 const (
+	// wallet
 	ResponsibleGamblingLimitTypeDepositLimit     = "deposit_limit"
 	ResponsibleGamblingLimitTypeWithdrawalLimit  = "withdrawal_limit"
 	ResponsibleGamblingLimitTypeDailyPlayLimit   = "daily_play_limit"
@@ -9,4 +10,9 @@ const (
 	ResponsibleGamblingLimitTypeDailyLossLimit   = "daily_loss_limit"
 	ResponsibleGamblingLimitTypeWeeklyLossLimit  = "weekly_loss_limit"
 	ResponsibleGamblingLimitTypeMonthlyLossLimit = "monthly_loss_limit"
+
+	// user
+	ResponsibleGamblingLimitTypeSelfExclusion = "self_exclusion"
+	ResponsibleGamblingLimitTypeBreakInPlay   = "break_in_play"
+	ResponsibleGamblingLimitTypeTimeLimits    = "time_limits"
 )

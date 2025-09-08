@@ -272,6 +272,28 @@ service User {
 
 	rpc UpdateOperatorAccountSettings(UpdateOperatorAccountSettingsRequest) returns (UpdateOperatorAccountSettingsResponse) {
 	}
+
+	rpc AddResponsibleGamblingConfig(AddResponsibleGamblingConfigRequest) returns (AddResponsibleGamblingConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/responsible-gambling/config/add"
+			body: "*"
+		};
+	}
+
+	rpc DeleteResponsibleGamblingConfig(DeleteResponsibleGamblingConfigRequest) returns (DeleteResponsibleGamblingConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/responsible-gambling/config/delete"
+			body: "*"
+		};
+	}
+
+	rpc GetResponsibleGamblingConfig(GetResponsibleGamblingConfigRequest) returns (GetResponsibleGamblingConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/responsible-gambling/config/get"
+			body: "*"
+		};
+	}
+	
 }
 
 // UserInfo contains basic user information.
@@ -656,7 +678,6 @@ message UpdateUserRequest {
 	optional string address = 15;
 	// The initial operator context.
 	api.common.OperatorContext operator_context = 16;
-
 }
 
 message UpdateUserResponse {
@@ -1308,4 +1329,63 @@ message UpdateOperatorAccountSettingsRequest {
 }
 
 message UpdateOperatorAccountSettingsResponse {
+}
+
+message ResponsibleGamblingConfig {
+	message SelfExclusion {
+		google.protobuf.Timestamp start_time = 1;
+		google.protobuf.Timestamp end_time = 2;
+	}
+	message BreakInPlay {
+		google.protobuf.Timestamp start_time = 1;
+		google.protobuf.Timestamp end_time = 2;
+	}
+	message TimeLimits {
+		string time_zone = 1; // "UTC+X", "UTC-X"
+		string start_time = 2; // HH:mm:ss, works out every day
+		string end_time = 3; // HH:mm:ss, works out every day
+	}
+	optional SelfExclusion self_exclusion = 1;
+	optional BreakInPlay break_in_play = 2;
+	optional TimeLimits time_limits = 3;
+}
+
+message AddResponsibleGamblingConfigRequest {
+	ResponsibleGamblingConfig responsible_gambling_config = 1;
+}
+
+message AddResponsibleGamblingConfigResponse {
+}
+
+message DeleteResponsibleGamblingConfigRequest {
+	optional int64 user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+	string limit_type = 3; // "self_exclusion", "break_in_play", "time_limits"
+}
+
+message DeleteResponsibleGamblingConfigResponse {
+}
+
+message GetResponsibleGamblingConfigRequest {
+	optional int64 user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+}
+
+message ResponsibleGamblingStatus {
+	bool login_allowed = 1;
+	bool deposit_allowed = 2;
+	bool withdrawal_allowed = 3;
+	bool game_bet_allowed = 4;
+}
+
+message ResponsibleGamblingDeleteSchedule {
+	google.protobuf.Timestamp self_exclusion_delete_schedule_time = 1;
+	google.protobuf.Timestamp break_in_play_delete_schedule_time = 2;
+	google.protobuf.Timestamp time_limits_delete_schedule_time = 3;
+}
+
+message GetResponsibleGamblingConfigResponse {
+	ResponsibleGamblingConfig responsible_gambling_config = 1;
+	ResponsibleGamblingStatus responsible_gambling_status = 2;
+	ResponsibleGamblingDeleteSchedule responsible_gambling_delete_schedule = 3;
 }

@@ -56,8 +56,8 @@ func RegisterWalletHTTPServer(s *http.Server, srv WalletHTTPServer) {
 	r.POST("/v1/wallet/currencies/get", _Wallet_GetCurrencies0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/deposit-reward/user-sequence", _Wallet_GetUserDepositRewardSequence0_HTTP_Handler(srv))
 	r.POST("/v1/wallet/bonus-transfer", _Wallet_BonusTransfer0_HTTP_Handler(srv))
-	r.POST("/v1/wallet/responsible-gambling/config/add", _Wallet_AddResponsibleGamblingConfig0_HTTP_Handler(srv))
-	r.POST("/v1/wallet/responsible-gambling/config/delete", _Wallet_DeleteResponsibleGamblingConfig0_HTTP_Handler(srv))
+	r.POST("/v1/wallet/responsible-gambling/config/add", _Wallet_AddResponsibleGamblingConfig1_HTTP_Handler(srv))
+	r.POST("/v1/wallet/responsible-gambling/config/delete", _Wallet_DeleteResponsibleGamblingConfig1_HTTP_Handler(srv))
 	r.POST("/v1/wallet/responsible-gambling/configs/list", _Wallet_ListResponsibleGamblingConfigs0_HTTP_Handler(srv))
 }
 
@@ -193,7 +193,7 @@ func _Wallet_BonusTransfer0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Con
 	}
 }
 
-func _Wallet_AddResponsibleGamblingConfig0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
+func _Wallet_AddResponsibleGamblingConfig1_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in AddResponsibleGamblingConfigRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -215,7 +215,7 @@ func _Wallet_AddResponsibleGamblingConfig0_HTTP_Handler(srv WalletHTTPServer) fu
 	}
 }
 
-func _Wallet_DeleteResponsibleGamblingConfig0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
+func _Wallet_DeleteResponsibleGamblingConfig1_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in DeleteResponsibleGamblingConfigRequest
 		if err := ctx.Bind(&in); err != nil {

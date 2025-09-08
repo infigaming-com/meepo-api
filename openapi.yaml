@@ -2594,6 +2594,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetUserProfileResponse'
+    /v1/backoffice/user/responsible-gambling/config/delete:
+        post:
+            tags:
+                - BackofficeUser
+            operationId: BackofficeUser_DeleteUserResponsibleGamblingConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteUserResponsibleGamblingConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.DeleteResponsibleGamblingConfigResponse'
+    /v1/backoffice/user/responsible-gambling/config/get:
+        post:
+            tags:
+                - BackofficeUser
+            operationId: BackofficeUser_GetUserResponsibleGamblingConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetUserResponsibleGamblingConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.GetResponsibleGamblingConfigResponse'
     /v1/backoffice/user/send-email-verification-code:
         post:
             tags:
@@ -3228,13 +3264,13 @@ paths:
         post:
             tags:
                 - BackofficeWallet
-            description: DeleteResponsibleGamblingConfig deletes gambling config for a user's currency
-            operationId: BackofficeWallet_DeleteResponsibleGamblingConfig
+            description: DeleteWalletResponsibleGamblingConfig deletes gambling config for a user's currency
+            operationId: BackofficeWallet_DeleteWalletResponsibleGamblingConfig
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteResponsibleGamblingConfigRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteWalletResponsibleGamblingConfigRequest'
                 required: true
             responses:
                 "200":
@@ -3247,13 +3283,13 @@ paths:
         post:
             tags:
                 - BackofficeWallet
-            description: ListResponsibleGamblingConfigs lists gambling configs for a user with all currencies
-            operationId: BackofficeWallet_ListResponsibleGamblingConfigs
+            description: ListWalletResponsibleGamblingConfigs lists gambling configs for a user with all currencies
+            operationId: BackofficeWallet_ListWalletResponsibleGamblingConfigs
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListResponsibleGamblingConfigsRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListWalletResponsibleGamblingConfigsRequest'
                 required: true
             responses:
                 "200":
@@ -4037,6 +4073,60 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetOperatorAccountSettingsResponse'
+    /v1/user/responsible-gambling/config/add:
+        post:
+            tags:
+                - User
+            operationId: User_AddResponsibleGamblingConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.AddResponsibleGamblingConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.AddResponsibleGamblingConfigResponse'
+    /v1/user/responsible-gambling/config/delete:
+        post:
+            tags:
+                - User
+            operationId: User_DeleteResponsibleGamblingConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.DeleteResponsibleGamblingConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.DeleteResponsibleGamblingConfigResponse'
+    /v1/user/responsible-gambling/config/get:
+        post:
+            tags:
+                - User
+            operationId: User_GetResponsibleGamblingConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.GetResponsibleGamblingConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.GetResponsibleGamblingConfigResponse'
     /v1/user/tags/get:
         post:
             tags:
@@ -4967,7 +5057,32 @@ components:
         api.backoffice.service.v1.DeleteOperatorByoSubdomainResponse:
             type: object
             properties: {}
-        api.backoffice.service.v1.DeleteResponsibleGamblingConfigRequest:
+        api.backoffice.service.v1.DeleteRoleRequest:
+            type: object
+            properties:
+                roleId:
+                    type: string
+        api.backoffice.service.v1.DeleteRoleResponse:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.DeleteUserResponsibleGamblingConfigRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                limitType:
+                    type: string
+        api.backoffice.service.v1.DeleteVipLevelConfigTemplateRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                templateId:
+                    type: string
+        api.backoffice.service.v1.DeleteVipLevelConfigTemplateResponse:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.DeleteWalletResponsibleGamblingConfigRequest:
             type: object
             properties:
                 userId:
@@ -4979,24 +5094,6 @@ components:
                     description: |-
                         deposit_limit, withdrawal_limit, daily_play_limit, weekly_play_limit, monthly_play_limit
                          daily_loss_limit, weekly_loss_limit, monthly_loss_limit
-        api.backoffice.service.v1.DeleteRoleRequest:
-            type: object
-            properties:
-                roleId:
-                    type: string
-        api.backoffice.service.v1.DeleteRoleResponse:
-            type: object
-            properties: {}
-        api.backoffice.service.v1.DeleteVipLevelConfigTemplateRequest:
-            type: object
-            properties:
-                targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-                templateId:
-                    type: string
-        api.backoffice.service.v1.DeleteVipLevelConfigTemplateResponse:
-            type: object
-            properties: {}
         api.backoffice.service.v1.GameData_Data:
             type: object
             properties:
@@ -6229,6 +6326,11 @@ components:
                 username:
                     type: string
                 source:
+                    type: string
+        api.backoffice.service.v1.GetUserResponsibleGamblingConfigRequest:
+            type: object
+            properties:
+                userId:
                     type: string
         api.backoffice.service.v1.GetUserTagsRequest:
             type: object
@@ -8219,11 +8321,6 @@ components:
                     type: string
                 d120PaidAmtReportingCurrency:
                     type: string
-        api.backoffice.service.v1.ListResponsibleGamblingConfigsRequest:
-            type: object
-            properties:
-                userId:
-                    type: string
         api.backoffice.service.v1.ListRetailerOperatorsRequest:
             type: object
             properties:
@@ -8909,6 +9006,11 @@ components:
                 totalHidden:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.ListWalletResponsibleGamblingConfigsRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
         api.backoffice.service.v1.ListWithdrawDetailsRequest:
             type: object
             properties:
@@ -11701,6 +11803,14 @@ components:
         api.user.service.v1.AddOperatorByoDomainResponse:
             type: object
             properties: {}
+        api.user.service.v1.AddResponsibleGamblingConfigRequest:
+            type: object
+            properties:
+                responsibleGamblingConfig:
+                    $ref: '#/components/schemas/api.user.service.v1.ResponsibleGamblingConfig'
+        api.user.service.v1.AddResponsibleGamblingConfigResponse:
+            type: object
+            properties: {}
         api.user.service.v1.AuthResponse:
             type: object
             properties:
@@ -11753,6 +11863,18 @@ components:
         api.user.service.v1.DeleteOperatorByoDomainResponse:
             type: object
             properties: {}
+        api.user.service.v1.DeleteResponsibleGamblingConfigRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                limitType:
+                    type: string
+        api.user.service.v1.DeleteResponsibleGamblingConfigResponse:
+            type: object
+            properties: {}
         api.user.service.v1.DomainInfo:
             type: object
             properties:
@@ -11790,6 +11912,22 @@ components:
             properties:
                 accountSettings:
                     $ref: '#/components/schemas/api.user.service.v1.OperatorAccountSettings'
+        api.user.service.v1.GetResponsibleGamblingConfigRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.user.service.v1.GetResponsibleGamblingConfigResponse:
+            type: object
+            properties:
+                responsibleGamblingConfig:
+                    $ref: '#/components/schemas/api.user.service.v1.ResponsibleGamblingConfig'
+                responsibleGamblingStatus:
+                    $ref: '#/components/schemas/api.user.service.v1.ResponsibleGamblingStatus'
+                responsibleGamblingDeleteSchedule:
+                    $ref: '#/components/schemas/api.user.service.v1.ResponsibleGamblingDeleteSchedule'
         api.user.service.v1.GetUserRequest:
             type: object
             properties:
@@ -12097,6 +12235,65 @@ components:
         api.user.service.v1.ResetPasswordWithCodeResponse:
             type: object
             properties: {}
+        api.user.service.v1.ResponsibleGamblingConfig:
+            type: object
+            properties:
+                selfExclusion:
+                    $ref: '#/components/schemas/api.user.service.v1.ResponsibleGamblingConfig_SelfExclusion'
+                breakInPlay:
+                    $ref: '#/components/schemas/api.user.service.v1.ResponsibleGamblingConfig_BreakInPlay'
+                timeLimits:
+                    $ref: '#/components/schemas/api.user.service.v1.ResponsibleGamblingConfig_TimeLimits'
+        api.user.service.v1.ResponsibleGamblingConfig_BreakInPlay:
+            type: object
+            properties:
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+        api.user.service.v1.ResponsibleGamblingConfig_SelfExclusion:
+            type: object
+            properties:
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+        api.user.service.v1.ResponsibleGamblingConfig_TimeLimits:
+            type: object
+            properties:
+                timeZone:
+                    type: string
+                startTime:
+                    type: string
+                endTime:
+                    type: string
+        api.user.service.v1.ResponsibleGamblingDeleteSchedule:
+            type: object
+            properties:
+                selfExclusionDeleteScheduleTime:
+                    type: string
+                    format: date-time
+                breakInPlayDeleteScheduleTime:
+                    type: string
+                    format: date-time
+                timeLimitsDeleteScheduleTime:
+                    type: string
+                    format: date-time
+        api.user.service.v1.ResponsibleGamblingStatus:
+            type: object
+            properties:
+                loginAllowed:
+                    type: boolean
+                depositAllowed:
+                    type: boolean
+                withdrawalAllowed:
+                    type: boolean
+                gameBetAllowed:
+                    type: boolean
         api.user.service.v1.SendEmailVerificationCodeRequest:
             type: object
             properties:
@@ -12994,6 +13191,30 @@ components:
                     type: string
                 monthlyLossLimit:
                     type: string
+                depositLimitDeleteScheduleTime:
+                    type: string
+                    format: date-time
+                withdrawalLimitDeleteScheduleTime:
+                    type: string
+                    format: date-time
+                dailyPlayLimitDeleteScheduleTime:
+                    type: string
+                    format: date-time
+                weeklyPlayLimitDeleteScheduleTime:
+                    type: string
+                    format: date-time
+                monthlyPlayLimitDeleteScheduleTime:
+                    type: string
+                    format: date-time
+                dailyLossLimitDeleteScheduleTime:
+                    type: string
+                    format: date-time
+                weeklyLossLimitDeleteScheduleTime:
+                    type: string
+                    format: date-time
+                monthlyLossLimitDeleteScheduleTime:
+                    type: string
+                    format: date-time
         api.wallet.service.v1.ResponsibleGamblingStatus:
             type: object
             properties:
