@@ -2764,7 +2764,7 @@ func (x *UpdateDeductionOrderRequest) GetDeductionOrder() *v1.DeductionOrder {
 	return nil
 }
 
-type DeleteResponsibleGamblingConfigRequest struct {
+type DeleteWalletResponsibleGamblingConfigRequest struct {
 	state    protoimpl.MessageState `protogen:"open.v1"`
 	UserId   int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Currency string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
@@ -2775,20 +2775,20 @@ type DeleteResponsibleGamblingConfigRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DeleteResponsibleGamblingConfigRequest) Reset() {
-	*x = DeleteResponsibleGamblingConfigRequest{}
+func (x *DeleteWalletResponsibleGamblingConfigRequest) Reset() {
+	*x = DeleteWalletResponsibleGamblingConfigRequest{}
 	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DeleteResponsibleGamblingConfigRequest) String() string {
+func (x *DeleteWalletResponsibleGamblingConfigRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DeleteResponsibleGamblingConfigRequest) ProtoMessage() {}
+func (*DeleteWalletResponsibleGamblingConfigRequest) ProtoMessage() {}
 
-func (x *DeleteResponsibleGamblingConfigRequest) ProtoReflect() protoreflect.Message {
+func (x *DeleteWalletResponsibleGamblingConfigRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2800,53 +2800,53 @@ func (x *DeleteResponsibleGamblingConfigRequest) ProtoReflect() protoreflect.Mes
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteResponsibleGamblingConfigRequest.ProtoReflect.Descriptor instead.
-func (*DeleteResponsibleGamblingConfigRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use DeleteWalletResponsibleGamblingConfigRequest.ProtoReflect.Descriptor instead.
+func (*DeleteWalletResponsibleGamblingConfigRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{40}
 }
 
-func (x *DeleteResponsibleGamblingConfigRequest) GetUserId() int64 {
+func (x *DeleteWalletResponsibleGamblingConfigRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
 	return 0
 }
 
-func (x *DeleteResponsibleGamblingConfigRequest) GetCurrency() string {
+func (x *DeleteWalletResponsibleGamblingConfigRequest) GetCurrency() string {
 	if x != nil {
 		return x.Currency
 	}
 	return ""
 }
 
-func (x *DeleteResponsibleGamblingConfigRequest) GetLimitType() string {
+func (x *DeleteWalletResponsibleGamblingConfigRequest) GetLimitType() string {
 	if x != nil {
 		return x.LimitType
 	}
 	return ""
 }
 
-type ListResponsibleGamblingConfigsRequest struct {
+type ListWalletResponsibleGamblingConfigsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListResponsibleGamblingConfigsRequest) Reset() {
-	*x = ListResponsibleGamblingConfigsRequest{}
+func (x *ListWalletResponsibleGamblingConfigsRequest) Reset() {
+	*x = ListWalletResponsibleGamblingConfigsRequest{}
 	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListResponsibleGamblingConfigsRequest) String() string {
+func (x *ListWalletResponsibleGamblingConfigsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListResponsibleGamblingConfigsRequest) ProtoMessage() {}
+func (*ListWalletResponsibleGamblingConfigsRequest) ProtoMessage() {}
 
-func (x *ListResponsibleGamblingConfigsRequest) ProtoReflect() protoreflect.Message {
+func (x *ListWalletResponsibleGamblingConfigsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2858,12 +2858,12 @@ func (x *ListResponsibleGamblingConfigsRequest) ProtoReflect() protoreflect.Mess
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListResponsibleGamblingConfigsRequest.ProtoReflect.Descriptor instead.
-func (*ListResponsibleGamblingConfigsRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListWalletResponsibleGamblingConfigsRequest.ProtoReflect.Descriptor instead.
+func (*ListWalletResponsibleGamblingConfigsRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{41}
 }
 
-func (x *ListResponsibleGamblingConfigsRequest) GetUserId() int64 {
+func (x *ListWalletResponsibleGamblingConfigsRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
@@ -3433,14 +3433,14 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x18operator_currency_config\x18\x02 \x01(\v2-.api.wallet.service.v1.OperatorCurrencyConfigR\x16operatorCurrencyConfig\"\xc2\x01\n" +
 	"\x1bUpdateDeductionOrderRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12N\n" +
-	"\x0fdeduction_order\x18\x02 \x01(\v2%.api.wallet.service.v1.DeductionOrderR\x0edeductionOrder\"|\n" +
-	"&DeleteResponsibleGamblingConfigRequest\x12\x17\n" +
+	"\x0fdeduction_order\x18\x02 \x01(\v2%.api.wallet.service.v1.DeductionOrderR\x0edeductionOrder\"\x82\x01\n" +
+	",DeleteWalletResponsibleGamblingConfigRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1d\n" +
 	"\n" +
-	"limit_type\x18\x03 \x01(\tR\tlimitType\"@\n" +
-	"%ListResponsibleGamblingConfigsRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId2\x92(\n" +
+	"limit_type\x18\x03 \x01(\tR\tlimitType\"F\n" +
+	"+ListWalletResponsibleGamblingConfigsRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId2\xaa(\n" +
 	"\x10BackofficeWallet\x12\x8b\x01\n" +
 	"\n" +
 	"GetWallets\x12,.api.backoffice.service.v1.GetWalletsRequest\x1a).api.wallet.service.v1.GetWalletsResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/backoffice/wallet/get\x12\xa9\x01\n" +
@@ -3466,9 +3466,9 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x16GetDepositRewardConfig\x128.api.backoffice.service.v1.GetDepositRewardConfigRequest\x1a5.api.wallet.service.v1.GetDepositRewardConfigResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/backoffice/wallet/deposit-reward/config/get\x12\xd1\x01\n" +
 	"\x1dGetGamificationCurrencyConfig\x12?.api.backoffice.service.v1.GetGamificationCurrencyConfigRequest\x1a<.api.wallet.service.v1.GetGamificationCurrencyConfigResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/v1/backoffice/wallet/gamification/get\x12\xd4\x01\n" +
 	"\x1cUpdateOperatorCurrencyConfig\x12>.api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest\x1a;.api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/wallet/currency/config/update\x12\xbc\x01\n" +
-	"\x14UpdateDeductionOrder\x126.api.backoffice.service.v1.UpdateDeductionOrderRequest\x1a3.api.wallet.service.v1.UpdateDeductionOrderResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/wallet/deduction-order/update\x12\xe9\x01\n" +
-	"\x1fDeleteResponsibleGamblingConfig\x12A.api.backoffice.service.v1.DeleteResponsibleGamblingConfigRequest\x1a>.api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse\"C\x82\xd3\xe4\x93\x02=:\x01*\"8/v1/backoffice/wallet/responsible-gambling/config/delete\x12\xe5\x01\n" +
-	"\x1eListResponsibleGamblingConfigs\x12@.api.backoffice.service.v1.ListResponsibleGamblingConfigsRequest\x1a=.api.wallet.service.v1.ListResponsibleGamblingConfigsResponse\"B\x82\xd3\xe4\x93\x02<:\x01*\"7/v1/backoffice/wallet/responsible-gambling/configs/listB[\n" +
+	"\x14UpdateDeductionOrder\x126.api.backoffice.service.v1.UpdateDeductionOrderRequest\x1a3.api.wallet.service.v1.UpdateDeductionOrderResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/wallet/deduction-order/update\x12\xf5\x01\n" +
+	"%DeleteWalletResponsibleGamblingConfig\x12G.api.backoffice.service.v1.DeleteWalletResponsibleGamblingConfigRequest\x1a>.api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse\"C\x82\xd3\xe4\x93\x02=:\x01*\"8/v1/backoffice/wallet/responsible-gambling/config/delete\x12\xf1\x01\n" +
+	"$ListWalletResponsibleGamblingConfigs\x12F.api.backoffice.service.v1.ListWalletResponsibleGamblingConfigsRequest\x1a=.api.wallet.service.v1.ListResponsibleGamblingConfigsResponse\"B\x82\xd3\xe4\x93\x02<:\x01*\"7/v1/backoffice/wallet/responsible-gambling/configs/listB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -3525,8 +3525,8 @@ var file_backoffice_service_v1_backoffice_wallet_proto_goTypes = []any{
 	(*GetGamificationCurrencyConfigRequest)(nil),                     // 37: api.backoffice.service.v1.GetGamificationCurrencyConfigRequest
 	(*UpdateOperatorCurrencyConfigRequest)(nil),                      // 38: api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest
 	(*UpdateDeductionOrderRequest)(nil),                              // 39: api.backoffice.service.v1.UpdateDeductionOrderRequest
-	(*DeleteResponsibleGamblingConfigRequest)(nil),                   // 40: api.backoffice.service.v1.DeleteResponsibleGamblingConfigRequest
-	(*ListResponsibleGamblingConfigsRequest)(nil),                    // 41: api.backoffice.service.v1.ListResponsibleGamblingConfigsRequest
+	(*DeleteWalletResponsibleGamblingConfigRequest)(nil),             // 40: api.backoffice.service.v1.DeleteWalletResponsibleGamblingConfigRequest
+	(*ListWalletResponsibleGamblingConfigsRequest)(nil),              // 41: api.backoffice.service.v1.ListWalletResponsibleGamblingConfigsRequest
 	(*GetWalletCreditsResponse_Credit)(nil),                          // 42: api.backoffice.service.v1.GetWalletCreditsResponse.Credit
 	(*ListWalletBalanceTransactionsResponse_BalanceTransaction)(nil), // 43: api.backoffice.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction
 	(*GetWalletCreditTransactionsResponse_CreditTransaction)(nil),    // 44: api.backoffice.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction
@@ -3615,8 +3615,8 @@ var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
 	37, // 61: api.backoffice.service.v1.BackofficeWallet.GetGamificationCurrencyConfig:input_type -> api.backoffice.service.v1.GetGamificationCurrencyConfigRequest
 	38, // 62: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorCurrencyConfig:input_type -> api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest
 	39, // 63: api.backoffice.service.v1.BackofficeWallet.UpdateDeductionOrder:input_type -> api.backoffice.service.v1.UpdateDeductionOrderRequest
-	40, // 64: api.backoffice.service.v1.BackofficeWallet.DeleteResponsibleGamblingConfig:input_type -> api.backoffice.service.v1.DeleteResponsibleGamblingConfigRequest
-	41, // 65: api.backoffice.service.v1.BackofficeWallet.ListResponsibleGamblingConfigs:input_type -> api.backoffice.service.v1.ListResponsibleGamblingConfigsRequest
+	40, // 64: api.backoffice.service.v1.BackofficeWallet.DeleteWalletResponsibleGamblingConfig:input_type -> api.backoffice.service.v1.DeleteWalletResponsibleGamblingConfigRequest
+	41, // 65: api.backoffice.service.v1.BackofficeWallet.ListWalletResponsibleGamblingConfigs:input_type -> api.backoffice.service.v1.ListWalletResponsibleGamblingConfigsRequest
 	53, // 66: api.backoffice.service.v1.BackofficeWallet.GetWallets:output_type -> api.wallet.service.v1.GetWalletsResponse
 	2,  // 67: api.backoffice.service.v1.BackofficeWallet.GetWalletCredits:output_type -> api.backoffice.service.v1.GetWalletCreditsResponse
 	4,  // 68: api.backoffice.service.v1.BackofficeWallet.ListWalletBalanceTransactions:output_type -> api.backoffice.service.v1.ListWalletBalanceTransactionsResponse
@@ -3641,8 +3641,8 @@ var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
 	59, // 87: api.backoffice.service.v1.BackofficeWallet.GetGamificationCurrencyConfig:output_type -> api.wallet.service.v1.GetGamificationCurrencyConfigResponse
 	60, // 88: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorCurrencyConfig:output_type -> api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse
 	61, // 89: api.backoffice.service.v1.BackofficeWallet.UpdateDeductionOrder:output_type -> api.wallet.service.v1.UpdateDeductionOrderResponse
-	62, // 90: api.backoffice.service.v1.BackofficeWallet.DeleteResponsibleGamblingConfig:output_type -> api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse
-	63, // 91: api.backoffice.service.v1.BackofficeWallet.ListResponsibleGamblingConfigs:output_type -> api.wallet.service.v1.ListResponsibleGamblingConfigsResponse
+	62, // 90: api.backoffice.service.v1.BackofficeWallet.DeleteWalletResponsibleGamblingConfig:output_type -> api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse
+	63, // 91: api.backoffice.service.v1.BackofficeWallet.ListWalletResponsibleGamblingConfigs:output_type -> api.wallet.service.v1.ListResponsibleGamblingConfigsResponse
 	66, // [66:92] is the sub-list for method output_type
 	40, // [40:66] is the sub-list for method input_type
 	40, // [40:40] is the sub-list for extension type_name

@@ -14931,6 +14931,238 @@ func (m *ResponsibleGamblingConfig) validate(all bool) error {
 
 	// no validation rules for MonthlyLossLimit
 
+	if all {
+		switch v := interface{}(m.GetDepositLimitDeleteScheduleTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ResponsibleGamblingConfigValidationError{
+					field:  "DepositLimitDeleteScheduleTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ResponsibleGamblingConfigValidationError{
+					field:  "DepositLimitDeleteScheduleTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetDepositLimitDeleteScheduleTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ResponsibleGamblingConfigValidationError{
+				field:  "DepositLimitDeleteScheduleTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetWithdrawalLimitDeleteScheduleTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ResponsibleGamblingConfigValidationError{
+					field:  "WithdrawalLimitDeleteScheduleTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ResponsibleGamblingConfigValidationError{
+					field:  "WithdrawalLimitDeleteScheduleTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetWithdrawalLimitDeleteScheduleTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ResponsibleGamblingConfigValidationError{
+				field:  "WithdrawalLimitDeleteScheduleTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetDailyPlayLimitDeleteScheduleTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ResponsibleGamblingConfigValidationError{
+					field:  "DailyPlayLimitDeleteScheduleTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ResponsibleGamblingConfigValidationError{
+					field:  "DailyPlayLimitDeleteScheduleTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetDailyPlayLimitDeleteScheduleTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ResponsibleGamblingConfigValidationError{
+				field:  "DailyPlayLimitDeleteScheduleTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetWeeklyPlayLimitDeleteScheduleTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ResponsibleGamblingConfigValidationError{
+					field:  "WeeklyPlayLimitDeleteScheduleTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ResponsibleGamblingConfigValidationError{
+					field:  "WeeklyPlayLimitDeleteScheduleTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetWeeklyPlayLimitDeleteScheduleTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ResponsibleGamblingConfigValidationError{
+				field:  "WeeklyPlayLimitDeleteScheduleTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetMonthlyPlayLimitDeleteScheduleTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ResponsibleGamblingConfigValidationError{
+					field:  "MonthlyPlayLimitDeleteScheduleTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ResponsibleGamblingConfigValidationError{
+					field:  "MonthlyPlayLimitDeleteScheduleTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetMonthlyPlayLimitDeleteScheduleTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ResponsibleGamblingConfigValidationError{
+				field:  "MonthlyPlayLimitDeleteScheduleTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetDailyLossLimitDeleteScheduleTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ResponsibleGamblingConfigValidationError{
+					field:  "DailyLossLimitDeleteScheduleTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ResponsibleGamblingConfigValidationError{
+					field:  "DailyLossLimitDeleteScheduleTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetDailyLossLimitDeleteScheduleTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ResponsibleGamblingConfigValidationError{
+				field:  "DailyLossLimitDeleteScheduleTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetWeeklyLossLimitDeleteScheduleTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ResponsibleGamblingConfigValidationError{
+					field:  "WeeklyLossLimitDeleteScheduleTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ResponsibleGamblingConfigValidationError{
+					field:  "WeeklyLossLimitDeleteScheduleTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetWeeklyLossLimitDeleteScheduleTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ResponsibleGamblingConfigValidationError{
+				field:  "WeeklyLossLimitDeleteScheduleTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetMonthlyLossLimitDeleteScheduleTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ResponsibleGamblingConfigValidationError{
+					field:  "MonthlyLossLimitDeleteScheduleTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ResponsibleGamblingConfigValidationError{
+					field:  "MonthlyLossLimitDeleteScheduleTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetMonthlyLossLimitDeleteScheduleTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ResponsibleGamblingConfigValidationError{
+				field:  "MonthlyLossLimitDeleteScheduleTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return ResponsibleGamblingConfigMultiError(errors)
 	}

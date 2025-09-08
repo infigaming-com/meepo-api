@@ -1259,52 +1259,52 @@ func ErrorOperatorWithdrawRollbackExists(format string, args ...interface{}) *er
 	return errors.New(500, ErrorReason_OPERATOR_WITHDRAW_ROLLBACK_EXISTS.String(), fmt.Sprintf(format, args...))
 }
 
-func IsResponsibleGamblingConfigNotFound(err error) bool {
+func IsWalletResponsibleGamblingConfigNotFound(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND.String() && e.Code == 500
+	return e.Reason == ErrorReason_WALLET_RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND.String() && e.Code == 500
 }
 
-func ErrorResponsibleGamblingConfigNotFound(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+func ErrorWalletResponsibleGamblingConfigNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_WALLET_RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND.String(), fmt.Sprintf(format, args...))
 }
 
-func IsGetResponsibleGamblingConfigFailed(err error) bool {
+func IsGetWalletResponsibleGamblingConfigFailed(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_GET_RESPONSIBLE_GAMBLING_CONFIG_FAILED.String() && e.Code == 500
+	return e.Reason == ErrorReason_GET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED.String() && e.Code == 500
 }
 
-func ErrorGetResponsibleGamblingConfigFailed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_GET_RESPONSIBLE_GAMBLING_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+func ErrorGetWalletResponsibleGamblingConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-func IsSetResponsibleGamblingConfigFailed(err error) bool {
+func IsSetWalletResponsibleGamblingConfigFailed(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_SET_RESPONSIBLE_GAMBLING_CONFIG_FAILED.String() && e.Code == 500
+	return e.Reason == ErrorReason_SET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED.String() && e.Code == 500
 }
 
-func ErrorSetResponsibleGamblingConfigFailed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_SET_RESPONSIBLE_GAMBLING_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+func ErrorSetWalletResponsibleGamblingConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-func IsDeleteResponsibleGamblingConfigFailed(err error) bool {
+func IsDeleteWalletResponsibleGamblingConfigFailed(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_DELETE_RESPONSIBLE_GAMBLING_CONFIG_FAILED.String() && e.Code == 500
+	return e.Reason == ErrorReason_DELETE_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED.String() && e.Code == 500
 }
 
-func ErrorDeleteResponsibleGamblingConfigFailed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_DELETE_RESPONSIBLE_GAMBLING_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+func ErrorDeleteWalletResponsibleGamblingConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DELETE_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
 func IsInvalidGamblingConfiglimitType(err error) bool {
@@ -1343,16 +1343,16 @@ func ErrorScheduleDeleteTaskFailed(format string, args ...interface{}) *errors.E
 	return errors.New(500, ErrorReason_SCHEDULE_DELETE_TASK_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-func IsAddResponsibleGamblingConfigFailed(err error) bool {
+func IsAddWalletResponsibleGamblingConfigFailed(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_ADD_RESPONSIBLE_GAMBLING_CONFIG_FAILED.String() && e.Code == 500
+	return e.Reason == ErrorReason_ADD_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED.String() && e.Code == 500
 }
 
-func ErrorAddResponsibleGamblingConfigFailed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_ADD_RESPONSIBLE_GAMBLING_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+func ErrorAddWalletResponsibleGamblingConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
 func IsGetUserCreditsFailed(err error) bool {

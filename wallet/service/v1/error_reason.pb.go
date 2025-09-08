@@ -129,14 +129,14 @@ const (
 	ErrorReason_CREDIT_OWNERSHIP_MISMATCH                                       ErrorReason = 30101
 	ErrorReason_WITHDRAWAL_LIMIT_EXCEEDED                                       ErrorReason = 30102
 	ErrorReason_OPERATOR_WITHDRAW_ROLLBACK_EXISTS                               ErrorReason = 30103
-	ErrorReason_RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND                           ErrorReason = 30104
-	ErrorReason_GET_RESPONSIBLE_GAMBLING_CONFIG_FAILED                          ErrorReason = 30105
-	ErrorReason_SET_RESPONSIBLE_GAMBLING_CONFIG_FAILED                          ErrorReason = 30106
-	ErrorReason_DELETE_RESPONSIBLE_GAMBLING_CONFIG_FAILED                       ErrorReason = 30107
+	ErrorReason_WALLET_RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND                    ErrorReason = 30104
+	ErrorReason_GET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED                   ErrorReason = 30105
+	ErrorReason_SET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED                   ErrorReason = 30106
+	ErrorReason_DELETE_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED                ErrorReason = 30107
 	ErrorReason_INVALID_GAMBLING_CONFIGLIMIT_TYPE                               ErrorReason = 30108
 	ErrorReason_CREATE_DELETE_TASK_FAILED                                       ErrorReason = 30109
 	ErrorReason_SCHEDULE_DELETE_TASK_FAILED                                     ErrorReason = 30110
-	ErrorReason_ADD_RESPONSIBLE_GAMBLING_CONFIG_FAILED                          ErrorReason = 30111
+	ErrorReason_ADD_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED                   ErrorReason = 30111
 	ErrorReason_GET_USER_CREDITS_FAILED                                         ErrorReason = 30112
 	ErrorReason_LOCK_BALANCE_FAILED                                             ErrorReason = 30113
 	ErrorReason_LOCK_CREDIT_FAILED                                              ErrorReason = 30114
@@ -253,14 +253,14 @@ var (
 		30101: "CREDIT_OWNERSHIP_MISMATCH",
 		30102: "WITHDRAWAL_LIMIT_EXCEEDED",
 		30103: "OPERATOR_WITHDRAW_ROLLBACK_EXISTS",
-		30104: "RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND",
-		30105: "GET_RESPONSIBLE_GAMBLING_CONFIG_FAILED",
-		30106: "SET_RESPONSIBLE_GAMBLING_CONFIG_FAILED",
-		30107: "DELETE_RESPONSIBLE_GAMBLING_CONFIG_FAILED",
+		30104: "WALLET_RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND",
+		30105: "GET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED",
+		30106: "SET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED",
+		30107: "DELETE_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED",
 		30108: "INVALID_GAMBLING_CONFIGLIMIT_TYPE",
 		30109: "CREATE_DELETE_TASK_FAILED",
 		30110: "SCHEDULE_DELETE_TASK_FAILED",
-		30111: "ADD_RESPONSIBLE_GAMBLING_CONFIG_FAILED",
+		30111: "ADD_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED",
 		30112: "GET_USER_CREDITS_FAILED",
 		30113: "LOCK_BALANCE_FAILED",
 		30114: "LOCK_CREDIT_FAILED",
@@ -374,14 +374,14 @@ var (
 		"CREDIT_OWNERSHIP_MISMATCH":                                       30101,
 		"WITHDRAWAL_LIMIT_EXCEEDED":                                       30102,
 		"OPERATOR_WITHDRAW_ROLLBACK_EXISTS":                               30103,
-		"RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND":                           30104,
-		"GET_RESPONSIBLE_GAMBLING_CONFIG_FAILED":                          30105,
-		"SET_RESPONSIBLE_GAMBLING_CONFIG_FAILED":                          30106,
-		"DELETE_RESPONSIBLE_GAMBLING_CONFIG_FAILED":                       30107,
+		"WALLET_RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND":                    30104,
+		"GET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED":                   30105,
+		"SET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED":                   30106,
+		"DELETE_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED":                30107,
 		"INVALID_GAMBLING_CONFIGLIMIT_TYPE":                               30108,
 		"CREATE_DELETE_TASK_FAILED":                                       30109,
 		"SCHEDULE_DELETE_TASK_FAILED":                                     30110,
-		"ADD_RESPONSIBLE_GAMBLING_CONFIG_FAILED":                          30111,
+		"ADD_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED":                   30111,
 		"GET_USER_CREDITS_FAILED":                                         30112,
 		"LOCK_BALANCE_FAILED":                                             30113,
 		"LOCK_CREDIT_FAILED":                                              30114,
@@ -423,7 +423,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xa2$\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xc5$\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -528,15 +528,15 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1aINSUFFICIENT_BONUS_BALANCE\x10\x94\xeb\x01\x12\x1f\n" +
 	"\x19CREDIT_OWNERSHIP_MISMATCH\x10\x95\xeb\x01\x12\x1f\n" +
 	"\x19WITHDRAWAL_LIMIT_EXCEEDED\x10\x96\xeb\x01\x12'\n" +
-	"!OPERATOR_WITHDRAW_ROLLBACK_EXISTS\x10\x97\xeb\x01\x12+\n" +
-	"%RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND\x10\x98\xeb\x01\x12,\n" +
-	"&GET_RESPONSIBLE_GAMBLING_CONFIG_FAILED\x10\x99\xeb\x01\x12,\n" +
-	"&SET_RESPONSIBLE_GAMBLING_CONFIG_FAILED\x10\x9a\xeb\x01\x12/\n" +
-	")DELETE_RESPONSIBLE_GAMBLING_CONFIG_FAILED\x10\x9b\xeb\x01\x12'\n" +
+	"!OPERATOR_WITHDRAW_ROLLBACK_EXISTS\x10\x97\xeb\x01\x122\n" +
+	",WALLET_RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND\x10\x98\xeb\x01\x123\n" +
+	"-GET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED\x10\x99\xeb\x01\x123\n" +
+	"-SET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED\x10\x9a\xeb\x01\x126\n" +
+	"0DELETE_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED\x10\x9b\xeb\x01\x12'\n" +
 	"!INVALID_GAMBLING_CONFIGLIMIT_TYPE\x10\x9c\xeb\x01\x12\x1f\n" +
 	"\x19CREATE_DELETE_TASK_FAILED\x10\x9d\xeb\x01\x12!\n" +
-	"\x1bSCHEDULE_DELETE_TASK_FAILED\x10\x9e\xeb\x01\x12,\n" +
-	"&ADD_RESPONSIBLE_GAMBLING_CONFIG_FAILED\x10\x9f\xeb\x01\x12\x1d\n" +
+	"\x1bSCHEDULE_DELETE_TASK_FAILED\x10\x9e\xeb\x01\x123\n" +
+	"-ADD_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED\x10\x9f\xeb\x01\x12\x1d\n" +
 	"\x17GET_USER_CREDITS_FAILED\x10\xa0\xeb\x01\x12\x19\n" +
 	"\x13LOCK_BALANCE_FAILED\x10\xa1\xeb\x01\x12\x18\n" +
 	"\x12LOCK_CREDIT_FAILED\x10\xa2\xeb\x01\x12!\n" +
