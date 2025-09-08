@@ -179,16 +179,16 @@ service BackofficeWallet {
 		};
 	}
 
-	// DeleteResponsibleGamblingConfig deletes gambling config for a user's currency
-	rpc DeleteResponsibleGamblingConfig(DeleteResponsibleGamblingConfigRequest) returns (wallet.service.v1.DeleteResponsibleGamblingConfigResponse) {
+	// DeleteWalletResponsibleGamblingConfig deletes gambling config for a user's currency
+	rpc DeleteWalletResponsibleGamblingConfig(DeleteWalletResponsibleGamblingConfigRequest) returns (wallet.service.v1.DeleteResponsibleGamblingConfigResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/responsible-gambling/config/delete"
 			body: "*"
 		};
 	}
 
-	// ListResponsibleGamblingConfigs lists gambling configs for a user with all currencies
-	rpc ListResponsibleGamblingConfigs(ListResponsibleGamblingConfigsRequest) returns (wallet.service.v1.ListResponsibleGamblingConfigsResponse) {
+	// ListWalletResponsibleGamblingConfigs lists gambling configs for a user with all currencies
+	rpc ListWalletResponsibleGamblingConfigs(ListWalletResponsibleGamblingConfigsRequest) returns (wallet.service.v1.ListResponsibleGamblingConfigsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/responsible-gambling/configs/list"
 			body: "*"
@@ -535,7 +535,7 @@ message UpdateDeductionOrderRequest {
 	wallet.service.v1.DeductionOrder deduction_order = 2;
 }
 
-message DeleteResponsibleGamblingConfigRequest {
+message DeleteWalletResponsibleGamblingConfigRequest {
 	int64 user_id = 1;
 	string currency = 2;
 	// deposit_limit, withdrawal_limit, daily_play_limit, weekly_play_limit, monthly_play_limit
@@ -543,6 +543,6 @@ message DeleteResponsibleGamblingConfigRequest {
 	string limit_type = 3;
 }
 
-message ListResponsibleGamblingConfigsRequest {
+message ListWalletResponsibleGamblingConfigsRequest {
 	int64 user_id = 1;
 }

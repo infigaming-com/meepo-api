@@ -8,6 +8,7 @@ package v1
 
 import (
 	context "context"
+	v1 "github.com/infigaming-com/meepo-api/user/service/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -19,19 +20,21 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeUser_ListUsers_FullMethodName                 = "/api.backoffice.service.v1.BackofficeUser/ListUsers"
-	BackofficeUser_GetUserOverview_FullMethodName           = "/api.backoffice.service.v1.BackofficeUser/GetUserOverview"
-	BackofficeUser_GetUserProfile_FullMethodName            = "/api.backoffice.service.v1.BackofficeUser/GetUserProfile"
-	BackofficeUser_AddUserComment_FullMethodName            = "/api.backoffice.service.v1.BackofficeUser/AddUserComment"
-	BackofficeUser_ListUserComments_FullMethodName          = "/api.backoffice.service.v1.BackofficeUser/ListUserComments"
-	BackofficeUser_SendEmailVerificationCode_FullMethodName = "/api.backoffice.service.v1.BackofficeUser/SendEmailVerificationCode"
-	BackofficeUser_UpdateUser_FullMethodName                = "/api.backoffice.service.v1.BackofficeUser/UpdateUser"
-	BackofficeUser_SetOperatorTagsConfig_FullMethodName     = "/api.backoffice.service.v1.BackofficeUser/SetOperatorTagsConfig"
-	BackofficeUser_SetOperatorTags_FullMethodName           = "/api.backoffice.service.v1.BackofficeUser/SetOperatorTags"
-	BackofficeUser_GetOperatorTagsConfig_FullMethodName     = "/api.backoffice.service.v1.BackofficeUser/GetOperatorTagsConfig"
-	BackofficeUser_GetOperatorTags_FullMethodName           = "/api.backoffice.service.v1.BackofficeUser/GetOperatorTags"
-	BackofficeUser_GetUserTags_FullMethodName               = "/api.backoffice.service.v1.BackofficeUser/GetUserTags"
-	BackofficeUser_SetUserTags_FullMethodName               = "/api.backoffice.service.v1.BackofficeUser/SetUserTags"
+	BackofficeUser_ListUsers_FullMethodName                           = "/api.backoffice.service.v1.BackofficeUser/ListUsers"
+	BackofficeUser_GetUserOverview_FullMethodName                     = "/api.backoffice.service.v1.BackofficeUser/GetUserOverview"
+	BackofficeUser_GetUserProfile_FullMethodName                      = "/api.backoffice.service.v1.BackofficeUser/GetUserProfile"
+	BackofficeUser_AddUserComment_FullMethodName                      = "/api.backoffice.service.v1.BackofficeUser/AddUserComment"
+	BackofficeUser_ListUserComments_FullMethodName                    = "/api.backoffice.service.v1.BackofficeUser/ListUserComments"
+	BackofficeUser_SendEmailVerificationCode_FullMethodName           = "/api.backoffice.service.v1.BackofficeUser/SendEmailVerificationCode"
+	BackofficeUser_UpdateUser_FullMethodName                          = "/api.backoffice.service.v1.BackofficeUser/UpdateUser"
+	BackofficeUser_SetOperatorTagsConfig_FullMethodName               = "/api.backoffice.service.v1.BackofficeUser/SetOperatorTagsConfig"
+	BackofficeUser_SetOperatorTags_FullMethodName                     = "/api.backoffice.service.v1.BackofficeUser/SetOperatorTags"
+	BackofficeUser_GetOperatorTagsConfig_FullMethodName               = "/api.backoffice.service.v1.BackofficeUser/GetOperatorTagsConfig"
+	BackofficeUser_GetOperatorTags_FullMethodName                     = "/api.backoffice.service.v1.BackofficeUser/GetOperatorTags"
+	BackofficeUser_GetUserTags_FullMethodName                         = "/api.backoffice.service.v1.BackofficeUser/GetUserTags"
+	BackofficeUser_SetUserTags_FullMethodName                         = "/api.backoffice.service.v1.BackofficeUser/SetUserTags"
+	BackofficeUser_DeleteUserResponsibleGamblingConfig_FullMethodName = "/api.backoffice.service.v1.BackofficeUser/DeleteUserResponsibleGamblingConfig"
+	BackofficeUser_GetUserResponsibleGamblingConfig_FullMethodName    = "/api.backoffice.service.v1.BackofficeUser/GetUserResponsibleGamblingConfig"
 )
 
 // BackofficeUserClient is the client API for BackofficeUser service.
@@ -58,6 +61,8 @@ type BackofficeUserClient interface {
 	// GetUserTags retrieves all active tags associated with a user and also exists in the related operator's tag list.
 	GetUserTags(ctx context.Context, in *GetUserTagsRequest, opts ...grpc.CallOption) (*GetUserTagsResponse, error)
 	SetUserTags(ctx context.Context, in *SetUserTagsRequest, opts ...grpc.CallOption) (*SetUserTagsResponse, error)
+	DeleteUserResponsibleGamblingConfig(ctx context.Context, in *DeleteUserResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*v1.DeleteResponsibleGamblingConfigResponse, error)
+	GetUserResponsibleGamblingConfig(ctx context.Context, in *GetUserResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*v1.GetResponsibleGamblingConfigResponse, error)
 }
 
 type backofficeUserClient struct {
@@ -198,6 +203,26 @@ func (c *backofficeUserClient) SetUserTags(ctx context.Context, in *SetUserTagsR
 	return out, nil
 }
 
+func (c *backofficeUserClient) DeleteUserResponsibleGamblingConfig(ctx context.Context, in *DeleteUserResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*v1.DeleteResponsibleGamblingConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.DeleteResponsibleGamblingConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeUser_DeleteUserResponsibleGamblingConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeUserClient) GetUserResponsibleGamblingConfig(ctx context.Context, in *GetUserResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*v1.GetResponsibleGamblingConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetResponsibleGamblingConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeUser_GetUserResponsibleGamblingConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeUserServer is the server API for BackofficeUser service.
 // All implementations must embed UnimplementedBackofficeUserServer
 // for forward compatibility.
@@ -222,6 +247,8 @@ type BackofficeUserServer interface {
 	// GetUserTags retrieves all active tags associated with a user and also exists in the related operator's tag list.
 	GetUserTags(context.Context, *GetUserTagsRequest) (*GetUserTagsResponse, error)
 	SetUserTags(context.Context, *SetUserTagsRequest) (*SetUserTagsResponse, error)
+	DeleteUserResponsibleGamblingConfig(context.Context, *DeleteUserResponsibleGamblingConfigRequest) (*v1.DeleteResponsibleGamblingConfigResponse, error)
+	GetUserResponsibleGamblingConfig(context.Context, *GetUserResponsibleGamblingConfigRequest) (*v1.GetResponsibleGamblingConfigResponse, error)
 	mustEmbedUnimplementedBackofficeUserServer()
 }
 
@@ -270,6 +297,12 @@ func (UnimplementedBackofficeUserServer) GetUserTags(context.Context, *GetUserTa
 }
 func (UnimplementedBackofficeUserServer) SetUserTags(context.Context, *SetUserTagsRequest) (*SetUserTagsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetUserTags not implemented")
+}
+func (UnimplementedBackofficeUserServer) DeleteUserResponsibleGamblingConfig(context.Context, *DeleteUserResponsibleGamblingConfigRequest) (*v1.DeleteResponsibleGamblingConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteUserResponsibleGamblingConfig not implemented")
+}
+func (UnimplementedBackofficeUserServer) GetUserResponsibleGamblingConfig(context.Context, *GetUserResponsibleGamblingConfigRequest) (*v1.GetResponsibleGamblingConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserResponsibleGamblingConfig not implemented")
 }
 func (UnimplementedBackofficeUserServer) mustEmbedUnimplementedBackofficeUserServer() {}
 func (UnimplementedBackofficeUserServer) testEmbeddedByValue()                        {}
@@ -526,6 +559,42 @@ func _BackofficeUser_SetUserTags_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeUser_DeleteUserResponsibleGamblingConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteUserResponsibleGamblingConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeUserServer).DeleteUserResponsibleGamblingConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeUser_DeleteUserResponsibleGamblingConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeUserServer).DeleteUserResponsibleGamblingConfig(ctx, req.(*DeleteUserResponsibleGamblingConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeUser_GetUserResponsibleGamblingConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserResponsibleGamblingConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeUserServer).GetUserResponsibleGamblingConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeUser_GetUserResponsibleGamblingConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeUserServer).GetUserResponsibleGamblingConfig(ctx, req.(*GetUserResponsibleGamblingConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeUser_ServiceDesc is the grpc.ServiceDesc for BackofficeUser service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -584,6 +653,14 @@ var BackofficeUser_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetUserTags",
 			Handler:    _BackofficeUser_SetUserTags_Handler,
+		},
+		{
+			MethodName: "DeleteUserResponsibleGamblingConfig",
+			Handler:    _BackofficeUser_DeleteUserResponsibleGamblingConfig_Handler,
+		},
+		{
+			MethodName: "GetUserResponsibleGamblingConfig",
+			Handler:    _BackofficeUser_GetUserResponsibleGamblingConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
