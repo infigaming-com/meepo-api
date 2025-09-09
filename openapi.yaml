@@ -2461,6 +2461,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListUserCommentsResponse'
+    /v1/backoffice/user/identity/set:
+        post:
+            tags:
+                - BackofficeUser
+            operationId: BackofficeUser_UserIdentityAudit
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.UserIdentityAuditRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.UserIdentityAuditResponse'
     /v1/backoffice/user/list:
         post:
             tags:
@@ -12357,6 +12375,18 @@ components:
                     type: string
                 verified:
                     type: boolean
+        api.user.service.v1.UserIdentityAuditRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: user identity id
+                audit:
+                    type: string
+                    description: audit "approved" or "declined"
+        api.user.service.v1.UserIdentityAuditResponse:
+            type: object
+            properties: {}
         api.user.service.v1.UserInfo:
             type: object
             properties:

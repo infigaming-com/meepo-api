@@ -35,6 +35,7 @@ const OperationBackofficeUserSetOperatorTags = "/api.backoffice.service.v1.Backo
 const OperationBackofficeUserSetOperatorTagsConfig = "/api.backoffice.service.v1.BackofficeUser/SetOperatorTagsConfig"
 const OperationBackofficeUserSetUserTags = "/api.backoffice.service.v1.BackofficeUser/SetUserTags"
 const OperationBackofficeUserUpdateUser = "/api.backoffice.service.v1.BackofficeUser/UpdateUser"
+const OperationBackofficeUserUserIdentityAudit = "/api.backoffice.service.v1.BackofficeUser/UserIdentityAudit"
 
 type BackofficeUserHTTPServer interface {
 	AddUserComment(context.Context, *AddUserCommentRequest) (*AddUserCommentResponse, error)
@@ -59,6 +60,7 @@ type BackofficeUserHTTPServer interface {
 	SetOperatorTagsConfig(context.Context, *SetOperatorTagsConfigRequest) (*SetOperatorTagsConfigResponse, error)
 	SetUserTags(context.Context, *SetUserTagsRequest) (*SetUserTagsResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
+	UserIdentityAudit(context.Context, *v1.UserIdentityAuditRequest) (*v1.UserIdentityAuditResponse, error)
 }
 
 func RegisterBackofficeUserHTTPServer(s *http.Server, srv BackofficeUserHTTPServer) {
@@ -78,6 +80,7 @@ func RegisterBackofficeUserHTTPServer(s *http.Server, srv BackofficeUserHTTPServ
 	r.POST("/v1/backoffice/user/tags/set", _BackofficeUser_SetUserTags0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/responsible-gambling/config/delete", _BackofficeUser_DeleteUserResponsibleGamblingConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/responsible-gambling/config/get", _BackofficeUser_GetUserResponsibleGamblingConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/user/identity/set", _BackofficeUser_UserIdentityAudit0_HTTP_Handler(srv))
 }
 
 func _BackofficeUser_ListUsers0_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
@@ -410,6 +413,28 @@ func _BackofficeUser_GetUserResponsibleGamblingConfig0_HTTP_Handler(srv Backoffi
 	}
 }
 
+func _BackofficeUser_UserIdentityAudit0_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in v1.UserIdentityAuditRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeUserUserIdentityAudit)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UserIdentityAudit(ctx, req.(*v1.UserIdentityAuditRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.UserIdentityAuditResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeUserHTTPClient interface {
 	AddUserComment(ctx context.Context, req *AddUserCommentRequest, opts ...http.CallOption) (rsp *AddUserCommentResponse, err error)
 	DeleteUserResponsibleGamblingConfig(ctx context.Context, req *DeleteUserResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *v1.DeleteResponsibleGamblingConfigResponse, err error)
@@ -426,6 +451,7 @@ type BackofficeUserHTTPClient interface {
 	SetOperatorTagsConfig(ctx context.Context, req *SetOperatorTagsConfigRequest, opts ...http.CallOption) (rsp *SetOperatorTagsConfigResponse, err error)
 	SetUserTags(ctx context.Context, req *SetUserTagsRequest, opts ...http.CallOption) (rsp *SetUserTagsResponse, err error)
 	UpdateUser(ctx context.Context, req *UpdateUserRequest, opts ...http.CallOption) (rsp *UpdateUserResponse, err error)
+	UserIdentityAudit(ctx context.Context, req *v1.UserIdentityAuditRequest, opts ...http.CallOption) (rsp *v1.UserIdentityAuditResponse, err error)
 }
 
 type BackofficeUserHTTPClientImpl struct {
@@ -623,6 +649,19 @@ func (c *BackofficeUserHTTPClientImpl) UpdateUser(ctx context.Context, in *Updat
 	pattern := "/v1/backoffice/user/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeUserUpdateUser))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeUserHTTPClientImpl) UserIdentityAudit(ctx context.Context, in *v1.UserIdentityAuditRequest, opts ...http.CallOption) (*v1.UserIdentityAuditResponse, error) {
+	var out v1.UserIdentityAuditResponse
+	pattern := "/v1/backoffice/user/identity/set"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeUserUserIdentityAudit))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

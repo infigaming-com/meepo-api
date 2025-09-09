@@ -3082,7 +3082,7 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\n" +
 	"limit_type\x18\x02 \x01(\tR\tlimitType\"B\n" +
 	"'GetUserResponsibleGamblingConfigRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId2\x84\x16\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId2\xb0\x16\n" +
 	"\x0eBackofficeUser\x12\x8b\x01\n" +
 	"\tListUsers\x12+.api.backoffice.service.v1.ListUsersRequest\x1a,.api.backoffice.service.v1.ListUsersResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/backoffice/user/list\x12\xa5\x01\n" +
 	"\x0fGetUserOverview\x121.api.backoffice.service.v1.GetUserOverviewRequest\x1a2.api.backoffice.service.v1.GetUserOverviewResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/user/overview/get\x12\xa1\x01\n" +
@@ -3099,8 +3099,8 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\vGetUserTags\x12-.api.backoffice.service.v1.GetUserTagsRequest\x1a..api.backoffice.service.v1.GetUserTagsResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/user/tags/get\x12\x95\x01\n" +
 	"\vSetUserTags\x12-.api.backoffice.service.v1.SetUserTagsRequest\x1a..api.backoffice.service.v1.SetUserTagsResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/user/tags/set\x12\xed\x01\n" +
 	"#DeleteUserResponsibleGamblingConfig\x12E.api.backoffice.service.v1.DeleteUserResponsibleGamblingConfigRequest\x1a<.api.user.service.v1.DeleteResponsibleGamblingConfigResponse\"A\x82\xd3\xe4\x93\x02;:\x01*\"6/v1/backoffice/user/responsible-gambling/config/delete\x12\xe1\x01\n" +
-	" GetUserResponsibleGamblingConfig\x12B.api.backoffice.service.v1.GetUserResponsibleGamblingConfigRequest\x1a9.api.user.service.v1.GetResponsibleGamblingConfigResponse\">\x82\xd3\xe4\x93\x028:\x01*\"3/v1/backoffice/user/responsible-gambling/config/get\x12t\n" +
-	"\x11UserIdentityAudit\x12-.api.user.service.v1.UserIdentityAuditRequest\x1a..api.user.service.v1.UserIdentityAuditResponse\"\x00B[\n" +
+	" GetUserResponsibleGamblingConfig\x12B.api.backoffice.service.v1.GetUserResponsibleGamblingConfigRequest\x1a9.api.user.service.v1.GetResponsibleGamblingConfigResponse\">\x82\xd3\xe4\x93\x028:\x01*\"3/v1/backoffice/user/responsible-gambling/config/get\x12\x9f\x01\n" +
+	"\x11UserIdentityAudit\x12-.api.user.service.v1.UserIdentityAuditRequest\x1a..api.user.service.v1.UserIdentityAuditResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/user/identity/setB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (

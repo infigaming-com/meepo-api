@@ -121,6 +121,10 @@ service BackofficeUser {
 	}
 	
 	rpc UserIdentityAudit(user.service.v1.UserIdentityAuditRequest) returns (user.service.v1.UserIdentityAuditResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/user/identity/set"
+			body: "*"
+		};
 	}
 }
 
