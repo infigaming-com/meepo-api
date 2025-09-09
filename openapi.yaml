@@ -10535,6 +10535,8 @@ components:
                     type: string
                 providerTimestamp:
                     type: string
+                finished:
+                    type: boolean
         api.game.service.v1.BalanceRequest:
             type: object
             properties:
