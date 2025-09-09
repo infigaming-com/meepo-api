@@ -80,7 +80,7 @@ func RegisterBackofficeAccountHTTPServer(s *http.Server, srv BackofficeAccountHT
 	r := s.Route("/")
 	r.POST("/v1/backoffice/accounts/add", _BackofficeAccount_AddAccount0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/email/verification/send", _BackofficeAccount_SendEmailVerification0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/accounts/email/verify", _BackofficeAccount_VerifyEmail0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/accounts/email/verify", _BackofficeAccount_VerifyEmail1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/mobile/verification/send", _BackofficeAccount_SendMobileVerification0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/mobile/verify", _BackofficeAccount_VerifyMobile0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/accounts/password/reset", _BackofficeAccount_ResetPassword0_HTTP_Handler(srv))
@@ -148,7 +148,7 @@ func _BackofficeAccount_SendEmailVerification0_HTTP_Handler(srv BackofficeAccoun
 	}
 }
 
-func _BackofficeAccount_VerifyEmail0_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
+func _BackofficeAccount_VerifyEmail1_HTTP_Handler(srv BackofficeAccountHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in VerifyEmailRequest
 		if err := ctx.Bind(&in); err != nil {

@@ -24,7 +24,7 @@ service BackofficeUser {
             body: "*"
         };
     }
-    rpc GetUserProfile(GetUserProfileRequest) returns (GetUserProfileResponse) {
+    rpc GetUserProfile(GetUserProfileRequest) returns (user.service.v1.GetUserProfileResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/user/profile/get"
             body: "*"
@@ -120,9 +120,16 @@ service BackofficeUser {
 		};
 	}
 	
-	rpc UserIdentityAudit(user.service.v1.UserIdentityAuditRequest) returns (user.service.v1.UserIdentityAuditResponse) {
+	rpc UserIdentityAudit(UserIdentityAuditRequest) returns (user.service.v1.UserIdentityAuditResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/user/identity/set"
+			body: "*"
+		};
+	}
+
+	rpc UserIdentityList(user.service.v1.UserIdentityListRequest) returns (user.service.v1.UserIdentityListResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/user/identity/list/get"
 			body: "*"
 		};
 	}
@@ -261,61 +268,61 @@ message GetUserProfileRequest {
 	optional int32 login_page_size = 3;
 }
 
-message GetUserProfileResponse {
-	message IpInfo {
-		string ip = 1;
-		int32 count = 2;
-		string country = 3;
-	}
-	message RegistrationRecord {
-		google.protobuf.Timestamp registered_at = 1;
-		IpInfo ip_info = 2;
-		string device = 3;
-		string method = 4;
-		string browser = 5;
-		string app = 6; // Not available for now
-		string mobile = 7;
-		string email = 8;
-		string username = 9;
-		string source = 10;
-	}
-	message LoginRecord {
-		google.protobuf.Timestamp login_at = 1;
-		IpInfo ip_info = 2;
-		string device = 3;
-		string method = 4;
-		string browser = 5;
-		string app = 6; // Not available for now
-		string email = 7;
-		string mobile = 8;
-		string username = 9;
-	}
-	message Comment {
-		int64 comment_id = 1;
-		string username = 2;
-		string author_username = 3;
-		string content = 4;
-		google.protobuf.Timestamp created_at = 5;
-	}
-	string nickname = 1;
-	int64 user_id = 2;
-	int32 vip_level = 3; // Not available for now, only return 1
-	bool online = 4; // Not available for now, only return true
-	bool ban_withdraw = 5;
-	bool ban_game = 6;
-	bool ban_login = 7;
-	bool locked = 8;
-	RegistrationRecord registration_record = 9;
-	repeated LoginRecord login_records = 10;
-	repeated string tags = 11;
-	repeated Comment comments = 12;
-	int32 total_login_count = 13;
-	int32 login_page = 14;
-	int32 login_page_size = 15;
-	string mobile = 16;
-	string email = 17;
-	int32 kyc_level = 18;
-}
+// message GetUserProfileResponse {
+// 	message IpInfo {
+// 		string ip = 1;
+// 		int32 count = 2;
+// 		string country = 3;
+// 	}
+// 	message RegistrationRecord {
+// 		google.protobuf.Timestamp registered_at = 1;
+// 		IpInfo ip_info = 2;
+// 		string device = 3;
+// 		string method = 4;
+// 		string browser = 5;
+// 		string app = 6; // Not available for now
+// 		string mobile = 7;
+// 		string email = 8;
+// 		string username = 9;
+// 		string source = 10;
+// 	}
+// 	message LoginRecord {
+// 		google.protobuf.Timestamp login_at = 1;
+// 		IpInfo ip_info = 2;
+// 		string device = 3;
+// 		string method = 4;
+// 		string browser = 5;
+// 		string app = 6; // Not available for now
+// 		string email = 7;
+// 		string mobile = 8;
+// 		string username = 9;
+// 	}
+// 	message Comment {
+// 		int64 comment_id = 1;
+// 		string username = 2;
+// 		string author_username = 3;
+// 		string content = 4;
+// 		google.protobuf.Timestamp created_at = 5;
+// 	}
+// 	string nickname = 1;
+// 	int64 user_id = 2;
+// 	int32 vip_level = 3; // Not available for now, only return 1
+// 	bool online = 4; // Not available for now, only return true
+// 	bool ban_withdraw = 5;
+// 	bool ban_game = 6;
+// 	bool ban_login = 7;
+// 	bool locked = 8;
+// 	RegistrationRecord registration_record = 9;
+// 	repeated LoginRecord login_records = 10;
+// 	repeated string tags = 11;
+// 	repeated Comment comments = 12;
+// 	int32 total_login_count = 13;
+// 	int32 login_page = 14;
+// 	int32 login_page_size = 15;
+// 	string registered_mobile = 16;
+// 	string registered_email = 17;
+// 	int32 kyc_level = 18;
+// }
 
 message AddUserCommentRequest {
 	int64 user_id = 1;
@@ -373,9 +380,11 @@ message UpdateUserRequest {
 	// mobile
 	optional string mobile = 13;
 	// user identity
-	optional user.service.v1.UserIdentity user_identity = 14;
+	optional user.service.v1.UserIdentityRequest user_identity = 14;
 	// address
 	optional string address = 15;
+	// date of birth
+	optional google.protobuf.Timestamp bod = 16;
 }
 
 message UpdateUserResponse {}
@@ -450,4 +459,11 @@ message DeleteUserResponsibleGamblingConfigRequest {
 
 message GetUserResponsibleGamblingConfigRequest {
 	int64 user_id = 1;
+}
+
+message UserIdentityAuditRequest {
+	// user identity id
+	int64 id = 1;
+	// audit "approved" or "declined"
+	string audit = 2;
 }
