@@ -17655,6 +17655,214 @@ var _ interface {
 	ErrorName() string
 } = GetResponsibleGamblingConfigResponseValidationError{}
 
+// Validate checks the field values on UserIdentityAuditRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UserIdentityAuditRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UserIdentityAuditRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UserIdentityAuditRequestMultiError, or nil if none found.
+func (m *UserIdentityAuditRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UserIdentityAuditRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for Audit
+
+	if len(errors) > 0 {
+		return UserIdentityAuditRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UserIdentityAuditRequestMultiError is an error wrapping multiple validation
+// errors returned by UserIdentityAuditRequest.ValidateAll() if the designated
+// constraints aren't met.
+type UserIdentityAuditRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UserIdentityAuditRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UserIdentityAuditRequestMultiError) AllErrors() []error { return m }
+
+// UserIdentityAuditRequestValidationError is the validation error returned by
+// UserIdentityAuditRequest.Validate if the designated constraints aren't met.
+type UserIdentityAuditRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UserIdentityAuditRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UserIdentityAuditRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UserIdentityAuditRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UserIdentityAuditRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UserIdentityAuditRequestValidationError) ErrorName() string {
+	return "UserIdentityAuditRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UserIdentityAuditRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUserIdentityAuditRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UserIdentityAuditRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UserIdentityAuditRequestValidationError{}
+
+// Validate checks the field values on UserIdentityAuditResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UserIdentityAuditResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UserIdentityAuditResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UserIdentityAuditResponseMultiError, or nil if none found.
+func (m *UserIdentityAuditResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UserIdentityAuditResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return UserIdentityAuditResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UserIdentityAuditResponseMultiError is an error wrapping multiple validation
+// errors returned by UserIdentityAuditResponse.ValidateAll() if the
+// designated constraints aren't met.
+type UserIdentityAuditResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UserIdentityAuditResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UserIdentityAuditResponseMultiError) AllErrors() []error { return m }
+
+// UserIdentityAuditResponseValidationError is the validation error returned by
+// UserIdentityAuditResponse.Validate if the designated constraints aren't met.
+type UserIdentityAuditResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UserIdentityAuditResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UserIdentityAuditResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UserIdentityAuditResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UserIdentityAuditResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UserIdentityAuditResponseValidationError) ErrorName() string {
+	return "UserIdentityAuditResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UserIdentityAuditResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUserIdentityAuditResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UserIdentityAuditResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UserIdentityAuditResponseValidationError{}
+
 // Validate checks the field values on ListUsersResponse_User with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

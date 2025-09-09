@@ -124,6 +124,7 @@ const (
 	ErrorReason_INVALID_LIMIT_TYPE                             ErrorReason = 10098
 	ErrorReason_CREATE_USER_RESPONSIBLE_GAMBLING_CONFIG_FAILED ErrorReason = 10099
 	ErrorReason_SET_USER_RESPONSIBLE_GAMBLING_CONFIG_FAILED    ErrorReason = 10100
+	ErrorReason_USER_IDENTITY_AUDIT_FAILED                     ErrorReason = 10101
 )
 
 // Enum value maps for ErrorReason.
@@ -228,6 +229,7 @@ var (
 		10098: "INVALID_LIMIT_TYPE",
 		10099: "CREATE_USER_RESPONSIBLE_GAMBLING_CONFIG_FAILED",
 		10100: "SET_USER_RESPONSIBLE_GAMBLING_CONFIG_FAILED",
+		10101: "USER_IDENTITY_AUDIT_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                    0,
@@ -329,6 +331,7 @@ var (
 		"INVALID_LIMIT_TYPE":                             10098,
 		"CREATE_USER_RESPONSIBLE_GAMBLING_CONFIG_FAILED": 10099,
 		"SET_USER_RESPONSIBLE_GAMBLING_CONFIG_FAILED":    10100,
+		"USER_IDENTITY_AUDIT_FAILED":                     10101,
 	}
 )
 
@@ -363,7 +366,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xe0\x19\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\x81\x1a\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x12&\n" +
@@ -463,7 +466,8 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	".DELETE_USER_RESPONSIBLE_GAMBLING_CONFIG_FAILED\x10\xf1N\x12\x17\n" +
 	"\x12INVALID_LIMIT_TYPE\x10\xf2N\x123\n" +
 	".CREATE_USER_RESPONSIBLE_GAMBLING_CONFIG_FAILED\x10\xf3N\x120\n" +
-	"+SET_USER_RESPONSIBLE_GAMBLING_CONFIG_FAILED\x10\xf4N\x1a\x04\xa0E\xf4\x03BO\n" +
+	"+SET_USER_RESPONSIBLE_GAMBLING_CONFIG_FAILED\x10\xf4N\x12\x1f\n" +
+	"\x1aUSER_IDENTITY_AUDIT_FAILED\x10\xf5N\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (

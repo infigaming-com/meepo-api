@@ -83,6 +83,7 @@ const (
 	User_AddResponsibleGamblingConfig_FullMethodName    = "/api.user.service.v1.User/AddResponsibleGamblingConfig"
 	User_DeleteResponsibleGamblingConfig_FullMethodName = "/api.user.service.v1.User/DeleteResponsibleGamblingConfig"
 	User_GetResponsibleGamblingConfig_FullMethodName    = "/api.user.service.v1.User/GetResponsibleGamblingConfig"
+	User_UserIdentityAudit_FullMethodName               = "/api.user.service.v1.User/UserIdentityAudit"
 )
 
 // UserClient is the client API for User service.
@@ -205,6 +206,7 @@ type UserClient interface {
 	AddResponsibleGamblingConfig(ctx context.Context, in *AddResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*AddResponsibleGamblingConfigResponse, error)
 	DeleteResponsibleGamblingConfig(ctx context.Context, in *DeleteResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*DeleteResponsibleGamblingConfigResponse, error)
 	GetResponsibleGamblingConfig(ctx context.Context, in *GetResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*GetResponsibleGamblingConfigResponse, error)
+	UserIdentityAudit(ctx context.Context, in *UserIdentityAuditRequest, opts ...grpc.CallOption) (*UserIdentityAuditResponse, error)
 }
 
 type userClient struct {
@@ -855,6 +857,16 @@ func (c *userClient) GetResponsibleGamblingConfig(ctx context.Context, in *GetRe
 	return out, nil
 }
 
+func (c *userClient) UserIdentityAudit(ctx context.Context, in *UserIdentityAuditRequest, opts ...grpc.CallOption) (*UserIdentityAuditResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UserIdentityAuditResponse)
+	err := c.cc.Invoke(ctx, User_UserIdentityAudit_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -975,6 +987,7 @@ type UserServer interface {
 	AddResponsibleGamblingConfig(context.Context, *AddResponsibleGamblingConfigRequest) (*AddResponsibleGamblingConfigResponse, error)
 	DeleteResponsibleGamblingConfig(context.Context, *DeleteResponsibleGamblingConfigRequest) (*DeleteResponsibleGamblingConfigResponse, error)
 	GetResponsibleGamblingConfig(context.Context, *GetResponsibleGamblingConfigRequest) (*GetResponsibleGamblingConfigResponse, error)
+	UserIdentityAudit(context.Context, *UserIdentityAuditRequest) (*UserIdentityAuditResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -1176,6 +1189,9 @@ func (UnimplementedUserServer) DeleteResponsibleGamblingConfig(context.Context, 
 }
 func (UnimplementedUserServer) GetResponsibleGamblingConfig(context.Context, *GetResponsibleGamblingConfigRequest) (*GetResponsibleGamblingConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetResponsibleGamblingConfig not implemented")
+}
+func (UnimplementedUserServer) UserIdentityAudit(context.Context, *UserIdentityAuditRequest) (*UserIdentityAuditResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserIdentityAudit not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -2350,6 +2366,24 @@ func _User_GetResponsibleGamblingConfig_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_UserIdentityAudit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserIdentityAuditRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).UserIdentityAudit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_UserIdentityAudit_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).UserIdentityAudit(ctx, req.(*UserIdentityAuditRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2612,6 +2646,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetResponsibleGamblingConfig",
 			Handler:    _User_GetResponsibleGamblingConfig_Handler,
+		},
+		{
+			MethodName: "UserIdentityAudit",
+			Handler:    _User_UserIdentityAudit_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
