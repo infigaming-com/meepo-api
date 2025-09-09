@@ -13390,7 +13390,12 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/payment.service.v1.Currency'
-                    description: repeated Crypto cryptos = 1;
+                    description: repeated currency list
+                crypto:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/payment.service.v1.PaymentChannelInfo'
+                    description: repeated crypto list
         payment.service.v1.BuyCryptoViaFiatPriceQueryRequest:
             type: object
             properties:

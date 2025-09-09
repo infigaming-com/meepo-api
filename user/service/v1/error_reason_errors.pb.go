@@ -1200,3 +1200,15 @@ func IsSetUserResponsibleGamblingConfigFailed(err error) bool {
 func ErrorSetUserResponsibleGamblingConfigFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_SET_USER_RESPONSIBLE_GAMBLING_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsUserIdentityAuditFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_IDENTITY_AUDIT_FAILED.String() && e.Code == 500
+}
+
+func ErrorUserIdentityAuditFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_IDENTITY_AUDIT_FAILED.String(), fmt.Sprintf(format, args...))
+}

@@ -294,6 +294,7 @@ service User {
 		};
 	}
 	
+	rpc UserIdentityAudit(UserIdentityAuditRequest) returns (UserIdentityAuditResponse) { }
 }
 
 // UserInfo contains basic user information.
@@ -1388,4 +1389,15 @@ message GetResponsibleGamblingConfigResponse {
 	ResponsibleGamblingConfig responsible_gambling_config = 1;
 	ResponsibleGamblingStatus responsible_gambling_status = 2;
 	ResponsibleGamblingDeleteSchedule responsible_gambling_delete_schedule = 3;
+}
+
+message UserIdentityAuditRequest {
+	// user identity id
+	int64 id = 1;
+	// audit "approved" or "declined"
+	string audit= 2;
+}
+
+message UserIdentityAuditResponse {
+	
 }

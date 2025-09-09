@@ -35,6 +35,7 @@ const (
 	BackofficeUser_SetUserTags_FullMethodName                         = "/api.backoffice.service.v1.BackofficeUser/SetUserTags"
 	BackofficeUser_DeleteUserResponsibleGamblingConfig_FullMethodName = "/api.backoffice.service.v1.BackofficeUser/DeleteUserResponsibleGamblingConfig"
 	BackofficeUser_GetUserResponsibleGamblingConfig_FullMethodName    = "/api.backoffice.service.v1.BackofficeUser/GetUserResponsibleGamblingConfig"
+	BackofficeUser_UserIdentityAudit_FullMethodName                   = "/api.backoffice.service.v1.BackofficeUser/UserIdentityAudit"
 )
 
 // BackofficeUserClient is the client API for BackofficeUser service.
@@ -63,6 +64,7 @@ type BackofficeUserClient interface {
 	SetUserTags(ctx context.Context, in *SetUserTagsRequest, opts ...grpc.CallOption) (*SetUserTagsResponse, error)
 	DeleteUserResponsibleGamblingConfig(ctx context.Context, in *DeleteUserResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*v1.DeleteResponsibleGamblingConfigResponse, error)
 	GetUserResponsibleGamblingConfig(ctx context.Context, in *GetUserResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*v1.GetResponsibleGamblingConfigResponse, error)
+	UserIdentityAudit(ctx context.Context, in *v1.UserIdentityAuditRequest, opts ...grpc.CallOption) (*v1.UserIdentityAuditResponse, error)
 }
 
 type backofficeUserClient struct {
@@ -223,6 +225,16 @@ func (c *backofficeUserClient) GetUserResponsibleGamblingConfig(ctx context.Cont
 	return out, nil
 }
 
+func (c *backofficeUserClient) UserIdentityAudit(ctx context.Context, in *v1.UserIdentityAuditRequest, opts ...grpc.CallOption) (*v1.UserIdentityAuditResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.UserIdentityAuditResponse)
+	err := c.cc.Invoke(ctx, BackofficeUser_UserIdentityAudit_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeUserServer is the server API for BackofficeUser service.
 // All implementations must embed UnimplementedBackofficeUserServer
 // for forward compatibility.
@@ -249,6 +261,7 @@ type BackofficeUserServer interface {
 	SetUserTags(context.Context, *SetUserTagsRequest) (*SetUserTagsResponse, error)
 	DeleteUserResponsibleGamblingConfig(context.Context, *DeleteUserResponsibleGamblingConfigRequest) (*v1.DeleteResponsibleGamblingConfigResponse, error)
 	GetUserResponsibleGamblingConfig(context.Context, *GetUserResponsibleGamblingConfigRequest) (*v1.GetResponsibleGamblingConfigResponse, error)
+	UserIdentityAudit(context.Context, *v1.UserIdentityAuditRequest) (*v1.UserIdentityAuditResponse, error)
 	mustEmbedUnimplementedBackofficeUserServer()
 }
 
@@ -303,6 +316,9 @@ func (UnimplementedBackofficeUserServer) DeleteUserResponsibleGamblingConfig(con
 }
 func (UnimplementedBackofficeUserServer) GetUserResponsibleGamblingConfig(context.Context, *GetUserResponsibleGamblingConfigRequest) (*v1.GetResponsibleGamblingConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserResponsibleGamblingConfig not implemented")
+}
+func (UnimplementedBackofficeUserServer) UserIdentityAudit(context.Context, *v1.UserIdentityAuditRequest) (*v1.UserIdentityAuditResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserIdentityAudit not implemented")
 }
 func (UnimplementedBackofficeUserServer) mustEmbedUnimplementedBackofficeUserServer() {}
 func (UnimplementedBackofficeUserServer) testEmbeddedByValue()                        {}
@@ -595,6 +611,24 @@ func _BackofficeUser_GetUserResponsibleGamblingConfig_Handler(srv interface{}, c
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeUser_UserIdentityAudit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.UserIdentityAuditRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeUserServer).UserIdentityAudit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeUser_UserIdentityAudit_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeUserServer).UserIdentityAudit(ctx, req.(*v1.UserIdentityAuditRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeUser_ServiceDesc is the grpc.ServiceDesc for BackofficeUser service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -661,6 +695,10 @@ var BackofficeUser_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserResponsibleGamblingConfig",
 			Handler:    _BackofficeUser_GetUserResponsibleGamblingConfig_Handler,
+		},
+		{
+			MethodName: "UserIdentityAudit",
+			Handler:    _BackofficeUser_UserIdentityAudit_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
