@@ -3840,6 +3840,8 @@ func (m *Action) validate(all bool) error {
 
 	// no validation rules for ProviderTimestamp
 
+	// no validation rules for Finished
+
 	if len(errors) > 0 {
 		return ActionMultiError(errors)
 	}
