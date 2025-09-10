@@ -1736,7 +1736,7 @@ func (*UpdateOperatorAccountSettingsResponse) Descriptor() ([]byte, []int) {
 type AddRegisterLoginBlacklistRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	IdType        string                 `protobuf:"bytes,2,opt,name=id_type,json=idType,proto3" json:"id_type,omitempty"`
-	Id            []string               `protobuf:"bytes,3,rep,name=id,proto3" json:"id,omitempty"`
+	Ids           []string               `protobuf:"bytes,3,rep,name=ids,proto3" json:"ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1778,9 +1778,9 @@ func (x *AddRegisterLoginBlacklistRequest) GetIdType() string {
 	return ""
 }
 
-func (x *AddRegisterLoginBlacklistRequest) GetId() []string {
+func (x *AddRegisterLoginBlacklistRequest) GetIds() []string {
 	if x != nil {
-		return x.Id
+		return x.Ids
 	}
 	return nil
 }
@@ -1788,7 +1788,7 @@ func (x *AddRegisterLoginBlacklistRequest) GetId() []string {
 type DeleteRegisterLoginBlacklistRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	IdType        string                 `protobuf:"bytes,2,opt,name=id_type,json=idType,proto3" json:"id_type,omitempty"`
-	Id            []string               `protobuf:"bytes,3,rep,name=id,proto3" json:"id,omitempty"`
+	Ids           []string               `protobuf:"bytes,3,rep,name=ids,proto3" json:"ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1830,9 +1830,9 @@ func (x *DeleteRegisterLoginBlacklistRequest) GetIdType() string {
 	return ""
 }
 
-func (x *DeleteRegisterLoginBlacklistRequest) GetId() []string {
+func (x *DeleteRegisterLoginBlacklistRequest) GetIds() []string {
 	if x != nil {
-		return x.Id
+		return x.Ids
 	}
 	return nil
 }
@@ -2401,13 +2401,13 @@ const file_backoffice_service_v1_backoffice_operator_proto_rawDesc = "" +
 	"!GetOperatorAccountSettingsRequest\"\x7f\n" +
 	"$UpdateOperatorAccountSettingsRequest\x12W\n" +
 	"\x10account_settings\x18\x02 \x01(\v2,.api.user.service.v1.OperatorAccountSettingsR\x0faccountSettings\"'\n" +
-	"%UpdateOperatorAccountSettingsResponse\"K\n" +
+	"%UpdateOperatorAccountSettingsResponse\"M\n" +
 	" AddRegisterLoginBlacklistRequest\x12\x17\n" +
-	"\aid_type\x18\x02 \x01(\tR\x06idType\x12\x0e\n" +
-	"\x02id\x18\x03 \x03(\tR\x02id\"N\n" +
+	"\aid_type\x18\x02 \x01(\tR\x06idType\x12\x10\n" +
+	"\x03ids\x18\x03 \x03(\tR\x03ids\"P\n" +
 	"#DeleteRegisterLoginBlacklistRequest\x12\x17\n" +
-	"\aid_type\x18\x02 \x01(\tR\x06idType\x12\x0e\n" +
-	"\x02id\x18\x03 \x03(\tR\x02id\"\x8e\x01\n" +
+	"\aid_type\x18\x02 \x01(\tR\x06idType\x12\x10\n" +
+	"\x03ids\x18\x03 \x03(\tR\x03ids\"\x8e\x01\n" +
 	"!ListRegisterLoginBlacklistRequest\x12\x17\n" +
 	"\aid_type\x18\x02 \x01(\tR\x06idType\x12\x17\n" +
 	"\x04page\x18\x03 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +

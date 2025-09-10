@@ -4711,7 +4711,7 @@ components:
             properties:
                 idType:
                     type: string
-                id:
+                ids:
                     type: array
                     items:
                         type: string
@@ -5197,7 +5197,7 @@ components:
             properties:
                 idType:
                     type: string
-                id:
+                ids:
                     type: array
                     items:
                         type: string
