@@ -154,7 +154,12 @@ service User {
 		};
 	}
 	
-	rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
+	rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
+    option (google.api.http) = {
+      post: "/v1/user/update"
+      body: "*"
+    };
+	}
 
 	rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {}
 
@@ -889,6 +894,7 @@ message GetUserProfileResponse {
 	string registered_mobile = 16;
 	string registered_email = 17;
 	int32 kyc_level = 18;
+	repeated UserIdentity user_identity = 19;
 }
 
 message CreateRoleRequest {

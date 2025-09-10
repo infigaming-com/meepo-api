@@ -13,48 +13,48 @@ option java_package = "api.backoffice.service.v1";
 
 service BackofficeUser {
 	rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/user/list"
-            body: "*"
-        };
+      option (google.api.http) = {
+        post: "/v1/backoffice/user/list"
+        body: "*"
+      };
     }
     rpc GetUserOverview(GetUserOverviewRequest) returns (GetUserOverviewResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/user/overview/get"
-            body: "*"
-        };
+      option (google.api.http) = {
+        post: "/v1/backoffice/user/overview/get"
+        body: "*"
+      };
     }
     rpc GetUserProfile(GetUserProfileRequest) returns (user.service.v1.GetUserProfileResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/user/profile/get"
-            body: "*"
-        };
+      option (google.api.http) = {
+        post: "/v1/backoffice/user/profile/get"
+        body: "*"
+      };
     }
     rpc AddUserComment(AddUserCommentRequest) returns (AddUserCommentResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/user/comments/add"
-            body: "*"
-        };
+      option (google.api.http) = {
+        post: "/v1/backoffice/user/comments/add"
+        body: "*"
+      };
     }
 	rpc ListUserComments(ListUserCommentsRequest) returns (ListUserCommentsResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/user/comments/list"
-            body: "*"
-        };
+      option (google.api.http) = {
+        post: "/v1/backoffice/user/comments/list"
+        body: "*"
+      };
     }
 
 	rpc SendEmailVerificationCode(SendEmailVerificationCodeRequest) returns (SendEmailVerificationCodeResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/user/send-email-verification-code"
+    option (google.api.http) = {
+      post: "/v1/backoffice/user/send-email-verification-code"
 			body: "*"
 		};
 	}
 
 	rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/user/update"
-            body: "*"
-        };
+      option (google.api.http) = {
+        post: "/v1/backoffice/user/update"
+        body: "*"
+      };
     }
 
 	// SetOperatorTagConfig sets or updates the follow_parent flag for an operator.
