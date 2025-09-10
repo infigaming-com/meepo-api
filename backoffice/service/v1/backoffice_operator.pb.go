@@ -1735,8 +1735,8 @@ func (*UpdateOperatorAccountSettingsResponse) Descriptor() ([]byte, []int) {
 
 type AddRegisterLoginBlacklistRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	IdType        string                 `protobuf:"bytes,2,opt,name=id_type,json=idType,proto3" json:"id_type,omitempty"`
-	Ids           []string               `protobuf:"bytes,3,rep,name=ids,proto3" json:"ids,omitempty"`
+	IdType        string                 `protobuf:"bytes,1,opt,name=id_type,json=idType,proto3" json:"id_type,omitempty"`
+	Ids           []string               `protobuf:"bytes,2,rep,name=ids,proto3" json:"ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1787,8 +1787,8 @@ func (x *AddRegisterLoginBlacklistRequest) GetIds() []string {
 
 type DeleteRegisterLoginBlacklistRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	IdType        string                 `protobuf:"bytes,2,opt,name=id_type,json=idType,proto3" json:"id_type,omitempty"`
-	Ids           []string               `protobuf:"bytes,3,rep,name=ids,proto3" json:"ids,omitempty"`
+	IdType        string                 `protobuf:"bytes,1,opt,name=id_type,json=idType,proto3" json:"id_type,omitempty"`
+	Ids           []string               `protobuf:"bytes,2,rep,name=ids,proto3" json:"ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1839,9 +1839,9 @@ func (x *DeleteRegisterLoginBlacklistRequest) GetIds() []string {
 
 type ListRegisterLoginBlacklistRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	IdType        string                 `protobuf:"bytes,2,opt,name=id_type,json=idType,proto3" json:"id_type,omitempty"`
-	Page          *int32                 `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize      *int32                 `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	IdType        string                 `protobuf:"bytes,1,opt,name=id_type,json=idType,proto3" json:"id_type,omitempty"`
+	Page          *int32                 `protobuf:"varint,2,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32                 `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2403,15 +2403,15 @@ const file_backoffice_service_v1_backoffice_operator_proto_rawDesc = "" +
 	"\x10account_settings\x18\x02 \x01(\v2,.api.user.service.v1.OperatorAccountSettingsR\x0faccountSettings\"'\n" +
 	"%UpdateOperatorAccountSettingsResponse\"M\n" +
 	" AddRegisterLoginBlacklistRequest\x12\x17\n" +
-	"\aid_type\x18\x02 \x01(\tR\x06idType\x12\x10\n" +
-	"\x03ids\x18\x03 \x03(\tR\x03ids\"P\n" +
+	"\aid_type\x18\x01 \x01(\tR\x06idType\x12\x10\n" +
+	"\x03ids\x18\x02 \x03(\tR\x03ids\"P\n" +
 	"#DeleteRegisterLoginBlacklistRequest\x12\x17\n" +
-	"\aid_type\x18\x02 \x01(\tR\x06idType\x12\x10\n" +
-	"\x03ids\x18\x03 \x03(\tR\x03ids\"\x8e\x01\n" +
+	"\aid_type\x18\x01 \x01(\tR\x06idType\x12\x10\n" +
+	"\x03ids\x18\x02 \x03(\tR\x03ids\"\x8e\x01\n" +
 	"!ListRegisterLoginBlacklistRequest\x12\x17\n" +
-	"\aid_type\x18\x02 \x01(\tR\x06idType\x12\x17\n" +
-	"\x04page\x18\x03 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x04 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
+	"\aid_type\x18\x01 \x01(\tR\x06idType\x12\x17\n" +
+	"\x04page\x18\x02 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x03 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_size2\x85\x1d\n" +
