@@ -1260,3 +1260,15 @@ func IsDeleteRegisterLoginBlacklistFailed(err error) bool {
 func ErrorDeleteRegisterLoginBlacklistFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_DELETE_REGISTER_LOGIN_BLACKLIST_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsInvalidRegisterLoginBlacklistIdType(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_REGISTER_LOGIN_BLACKLIST_ID_TYPE.String() && e.Code == 500
+}
+
+func ErrorInvalidRegisterLoginBlacklistIdType(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_REGISTER_LOGIN_BLACKLIST_ID_TYPE.String(), fmt.Sprintf(format, args...))
+}
