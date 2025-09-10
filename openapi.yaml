@@ -12542,6 +12542,7 @@ components:
             properties:
                 idType:
                     type: string
+                    description: ID Type "Passport", "South African ID"
                 idNumber:
                     type: string
                 image:
