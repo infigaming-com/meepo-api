@@ -2727,10 +2727,11 @@ func (*ResetPasswordWithCodeResponse) Descriptor() ([]byte, []int) {
 }
 
 type UserIdentityRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	IdType        string                 `protobuf:"bytes,1,opt,name=id_type,json=idType,proto3" json:"id_type,omitempty"`
-	IdNumber      string                 `protobuf:"bytes,2,opt,name=id_number,json=idNumber,proto3" json:"id_number,omitempty"`
-	Image         string                 `protobuf:"bytes,3,opt,name=image,proto3" json:"image,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID Type "Passport", "South African ID"
+	IdType        string `protobuf:"bytes,1,opt,name=id_type,json=idType,proto3" json:"id_type,omitempty"`
+	IdNumber      string `protobuf:"bytes,2,opt,name=id_number,json=idNumber,proto3" json:"id_number,omitempty"`
+	Image         string `protobuf:"bytes,3,opt,name=image,proto3" json:"image,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

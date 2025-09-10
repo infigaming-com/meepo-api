@@ -674,6 +674,7 @@ message ResetPasswordWithCodeResponse {
 }
 
 message UserIdentityRequest {
+	// ID Type "Passport", "South African ID"
 	string id_type = 1;
 	string id_number = 2;
 	string image = 3;
