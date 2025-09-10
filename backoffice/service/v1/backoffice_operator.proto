@@ -149,28 +149,28 @@ service BackofficeOperator {
 		};
 	}
 
-	rpc GetOperatorContryConfig(GetOperatorContryConfigRequest) returns (user.service.v1.GetOperatorContryConfigResponse) {
+	rpc GetOperatorCountryConfig(GetOperatorCountryConfigRequest) returns (user.service.v1.GetOperatorCountryConfigResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/operator/country-config/get"
 			body: "*"
 		};
 	}
 	
-	rpc AddOperatorContryConfig(AddOperatorContryConfigRequest) returns (user.service.v1.AddOperatorContryConfigResponse) {
+	rpc AddOperatorCountryConfig(AddOperatorCountryConfigRequest) returns (user.service.v1.AddOperatorCountryConfigResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/operator/country-config/add"
 			body: "*"
 		};
 	}
 	
-	rpc DeleteOperatorContryConfig(DeleteOperatorContryConfigRequest) returns (user.service.v1.DeleteOperatorContryConfigResponse) {
+	rpc DeleteOperatorCountryConfig(DeleteOperatorCountryConfigRequest) returns (user.service.v1.DeleteOperatorCountryConfigResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/operator/country-config/delete"
 			body: "*"
 		};
 	}
 	
-	rpc UpdateOperatorContryConfig(UpdateOperatorContryConfigRequest) returns (user.service.v1.UpdateOperatorContryConfigResponse) {
+	rpc UpdateOperatorCountryConfig(UpdateOperatorCountryConfigRequest) returns (user.service.v1.UpdateOperatorCountryConfigResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/operator/country-config/update"
 			body: "*"
@@ -402,20 +402,20 @@ message ListRegisterLoginBlacklistRequest {
 	optional int32 page_size = 3;
 }
 
-message GetOperatorContryConfigRequest {
+message GetOperatorCountryConfigRequest {
 	string country = 2;
 }
 
-message AddOperatorContryConfigRequest {
+message AddOperatorCountryConfigRequest {
 	string country = 1;
 	int32 registration_limit_per_ip = 2;
 }
 
-message DeleteOperatorContryConfigRequest {
+message DeleteOperatorCountryConfigRequest {
 	string country = 2;
 }
 
-message UpdateOperatorContryConfigRequest {
+message UpdateOperatorCountryConfigRequest {
 	string country = 1;
 	optional int32 registration_limit_per_ip = 2;
 }
