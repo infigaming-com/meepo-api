@@ -122,6 +122,9 @@ service Game {
 
 	rpc ListTaxReports(ListTaxReportsRequest) returns (ListTaxReportsResponse) {
 	}
+
+	rpc UpdateTaxReport(UpdateTaxReportRequest) returns (UpdateTaxReportResponse) {
+	}
 }
 
 message CreateOperatorRequest {
@@ -905,4 +908,14 @@ message ListTaxReportsResponse {
 	int32 total_count = 2;
 	int32 page = 3;
 	int32 page_size = 4;
+}
+
+message UpdateTaxReportRequest {
+	int64 id = 1;
+	string deposit_date = 2;
+	string deposit_slip_no = 3;
+	string ref_code = 4;
+}
+
+message UpdateTaxReportResponse {
 }

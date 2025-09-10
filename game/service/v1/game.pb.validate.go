@@ -8480,6 +8480,218 @@ var _ interface {
 	ErrorName() string
 } = ListTaxReportsResponseValidationError{}
 
+// Validate checks the field values on UpdateTaxReportRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateTaxReportRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateTaxReportRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateTaxReportRequestMultiError, or nil if none found.
+func (m *UpdateTaxReportRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateTaxReportRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for DepositDate
+
+	// no validation rules for DepositSlipNo
+
+	// no validation rules for RefCode
+
+	if len(errors) > 0 {
+		return UpdateTaxReportRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateTaxReportRequestMultiError is an error wrapping multiple validation
+// errors returned by UpdateTaxReportRequest.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateTaxReportRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateTaxReportRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateTaxReportRequestMultiError) AllErrors() []error { return m }
+
+// UpdateTaxReportRequestValidationError is the validation error returned by
+// UpdateTaxReportRequest.Validate if the designated constraints aren't met.
+type UpdateTaxReportRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateTaxReportRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateTaxReportRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateTaxReportRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateTaxReportRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateTaxReportRequestValidationError) ErrorName() string {
+	return "UpdateTaxReportRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateTaxReportRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateTaxReportRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateTaxReportRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateTaxReportRequestValidationError{}
+
+// Validate checks the field values on UpdateTaxReportResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateTaxReportResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateTaxReportResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateTaxReportResponseMultiError, or nil if none found.
+func (m *UpdateTaxReportResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateTaxReportResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return UpdateTaxReportResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateTaxReportResponseMultiError is an error wrapping multiple validation
+// errors returned by UpdateTaxReportResponse.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateTaxReportResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateTaxReportResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateTaxReportResponseMultiError) AllErrors() []error { return m }
+
+// UpdateTaxReportResponseValidationError is the validation error returned by
+// UpdateTaxReportResponse.Validate if the designated constraints aren't met.
+type UpdateTaxReportResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateTaxReportResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateTaxReportResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateTaxReportResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateTaxReportResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateTaxReportResponseValidationError) ErrorName() string {
+	return "UpdateTaxReportResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateTaxReportResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateTaxReportResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateTaxReportResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateTaxReportResponseValidationError{}
+
 // Validate checks the field values on ListProvidersResponse_Provider with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
