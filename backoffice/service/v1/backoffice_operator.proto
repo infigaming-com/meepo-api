@@ -359,12 +359,12 @@ message UpdateOperatorAccountSettingsResponse {
 
 message AddRegisterLoginBlacklistRequest {
 	string id_type = 2;
-	repeated string id = 3;
+	repeated string ids = 3;
 }
 
 message DeleteRegisterLoginBlacklistRequest {
 	string id_type = 2;
-	repeated string id = 3;
+	repeated string ids = 3;
 }
 
 message ListRegisterLoginBlacklistRequest {
