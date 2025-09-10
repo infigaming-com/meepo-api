@@ -12685,6 +12685,15 @@ components:
                     type: boolean
                 gameBetAllowed:
                     type: boolean
+                selfExclusionActive:
+                    type: boolean
+                breakInPlayActive:
+                    type: boolean
+                timeLimitsActive:
+                    type: boolean
+                timeLimitsNextInactiveTime:
+                    type: string
+                    format: date-time
         api.user.service.v1.SendEmailVerificationCodeRequest:
             type: object
             properties:
