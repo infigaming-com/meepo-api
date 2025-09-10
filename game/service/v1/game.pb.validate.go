@@ -7806,6 +7806,281 @@ var _ interface {
 	ErrorName() string
 } = ListProviderByIDsResponseValidationError{}
 
+// Validate checks the field values on GetResponsibleGamblingStatusRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetResponsibleGamblingStatusRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetResponsibleGamblingStatusRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetResponsibleGamblingStatusRequestMultiError, or nil if none found.
+func (m *GetResponsibleGamblingStatusRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetResponsibleGamblingStatusRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetResponsibleGamblingStatusRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetResponsibleGamblingStatusRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetResponsibleGamblingStatusRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetResponsibleGamblingStatusRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetResponsibleGamblingStatusRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// GetResponsibleGamblingStatusRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetResponsibleGamblingStatusRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetResponsibleGamblingStatusRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetResponsibleGamblingStatusRequestMultiError) AllErrors() []error { return m }
+
+// GetResponsibleGamblingStatusRequestValidationError is the validation error
+// returned by GetResponsibleGamblingStatusRequest.Validate if the designated
+// constraints aren't met.
+type GetResponsibleGamblingStatusRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetResponsibleGamblingStatusRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetResponsibleGamblingStatusRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetResponsibleGamblingStatusRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetResponsibleGamblingStatusRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetResponsibleGamblingStatusRequestValidationError) ErrorName() string {
+	return "GetResponsibleGamblingStatusRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetResponsibleGamblingStatusRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetResponsibleGamblingStatusRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetResponsibleGamblingStatusRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetResponsibleGamblingStatusRequestValidationError{}
+
+// Validate checks the field values on GetResponsibleGamblingStatusResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetResponsibleGamblingStatusResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetResponsibleGamblingStatusResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetResponsibleGamblingStatusResponseMultiError, or nil if none found.
+func (m *GetResponsibleGamblingStatusResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetResponsibleGamblingStatusResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetResponsibleGamblingStatuses() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetResponsibleGamblingStatusResponseValidationError{
+						field:  fmt.Sprintf("ResponsibleGamblingStatuses[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetResponsibleGamblingStatusResponseValidationError{
+						field:  fmt.Sprintf("ResponsibleGamblingStatuses[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetResponsibleGamblingStatusResponseValidationError{
+					field:  fmt.Sprintf("ResponsibleGamblingStatuses[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetResponsibleGamblingStatusResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetResponsibleGamblingStatusResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// GetResponsibleGamblingStatusResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetResponsibleGamblingStatusResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetResponsibleGamblingStatusResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetResponsibleGamblingStatusResponseMultiError) AllErrors() []error { return m }
+
+// GetResponsibleGamblingStatusResponseValidationError is the validation error
+// returned by GetResponsibleGamblingStatusResponse.Validate if the designated
+// constraints aren't met.
+type GetResponsibleGamblingStatusResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetResponsibleGamblingStatusResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetResponsibleGamblingStatusResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetResponsibleGamblingStatusResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetResponsibleGamblingStatusResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetResponsibleGamblingStatusResponseValidationError) ErrorName() string {
+	return "GetResponsibleGamblingStatusResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetResponsibleGamblingStatusResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetResponsibleGamblingStatusResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetResponsibleGamblingStatusResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetResponsibleGamblingStatusResponseValidationError{}
+
 // Validate checks the field values on ListProvidersResponse_Provider with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -9977,3 +10252,135 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListProviderByIDsResponse_ProviderValidationError{}
+
+// Validate checks the field values on
+// GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatusMultiError,
+// or nil if none found.
+func (m *GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Currency
+
+	// no validation rules for DailyPlayUsage
+
+	// no validation rules for WeeklyPlayUsage
+
+	// no validation rules for MonthlyPlayUsage
+
+	// no validation rules for DailyLossUsage
+
+	// no validation rules for WeeklyLossUsage
+
+	// no validation rules for MonthlyLossUsage
+
+	if len(errors) > 0 {
+		return GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatusMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatusMultiError is
+// an error wrapping multiple validation errors returned by
+// GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus.ValidateAll()
+// if the designated constraints aren't met.
+type GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatusMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatusMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatusMultiError) AllErrors() []error {
+	return m
+}
+
+// GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatusValidationError
+// is the validation error returned by
+// GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus.Validate if
+// the designated constraints aren't met.
+type GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatusValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatusValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatusValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatusValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatusValidationError) Key() bool {
+	return e.key
+}
+
+// ErrorName returns error name.
+func (e GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatusValidationError) ErrorName() string {
+	return "GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatusValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatusValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatusValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatusValidationError{}
