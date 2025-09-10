@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-http v2.8.4
 // - protoc             v4.25.6
-// source: backoffice/service/v1/backoffice_filestore.proto
+// source: user/service/v1/user_filestore.proto
 
 package v1
 
@@ -19,18 +19,18 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationBackofficeFileStoreUploadOperatorStaticFile = "/api.backoffice.service.v1.BackofficeFileStore/UploadOperatorStaticFile"
+const OperationUserFileStoreUploadOperatorStaticFile = "/api.user.service.v1.UserFileStore/UploadOperatorStaticFile"
 
-type BackofficeFileStoreHTTPServer interface {
+type UserFileStoreHTTPServer interface {
 	UploadOperatorStaticFile(context.Context, *UploadOperatorStaticFileRequest) (*UploadOperatorStaticFileResponse, error)
 }
 
-func RegisterBackofficeFileStoreHTTPServer(s *http.Server, srv BackofficeFileStoreHTTPServer) {
+func RegisterUserFileStoreHTTPServer(s *http.Server, srv UserFileStoreHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/backoffice/filestore/operator-static-files/upload", _BackofficeFileStore_UploadOperatorStaticFile1_HTTP_Handler(srv))
+	r.POST("/v1/user/kyc/filestore/upload", _UserFileStore_UploadOperatorStaticFile0_HTTP_Handler(srv))
 }
 
-func _BackofficeFileStore_UploadOperatorStaticFile1_HTTP_Handler(srv BackofficeFileStoreHTTPServer) func(ctx http.Context) error {
+func _UserFileStore_UploadOperatorStaticFile0_HTTP_Handler(srv UserFileStoreHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in UploadOperatorStaticFileRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -39,7 +39,7 @@ func _BackofficeFileStore_UploadOperatorStaticFile1_HTTP_Handler(srv BackofficeF
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeFileStoreUploadOperatorStaticFile)
+		http.SetOperation(ctx, OperationUserFileStoreUploadOperatorStaticFile)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
 			return srv.UploadOperatorStaticFile(ctx, req.(*UploadOperatorStaticFileRequest))
 		})
@@ -52,23 +52,23 @@ func _BackofficeFileStore_UploadOperatorStaticFile1_HTTP_Handler(srv BackofficeF
 	}
 }
 
-type BackofficeFileStoreHTTPClient interface {
+type UserFileStoreHTTPClient interface {
 	UploadOperatorStaticFile(ctx context.Context, req *UploadOperatorStaticFileRequest, opts ...http.CallOption) (rsp *UploadOperatorStaticFileResponse, err error)
 }
 
-type BackofficeFileStoreHTTPClientImpl struct {
+type UserFileStoreHTTPClientImpl struct {
 	cc *http.Client
 }
 
-func NewBackofficeFileStoreHTTPClient(client *http.Client) BackofficeFileStoreHTTPClient {
-	return &BackofficeFileStoreHTTPClientImpl{client}
+func NewUserFileStoreHTTPClient(client *http.Client) UserFileStoreHTTPClient {
+	return &UserFileStoreHTTPClientImpl{client}
 }
 
-func (c *BackofficeFileStoreHTTPClientImpl) UploadOperatorStaticFile(ctx context.Context, in *UploadOperatorStaticFileRequest, opts ...http.CallOption) (*UploadOperatorStaticFileResponse, error) {
+func (c *UserFileStoreHTTPClientImpl) UploadOperatorStaticFile(ctx context.Context, in *UploadOperatorStaticFileRequest, opts ...http.CallOption) (*UploadOperatorStaticFileResponse, error) {
 	var out UploadOperatorStaticFileResponse
-	pattern := "/v1/backoffice/filestore/operator-static-files/upload"
+	pattern := "/v1/user/kyc/filestore/upload"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeFileStoreUploadOperatorStaticFile))
+	opts = append(opts, http.Operation(OperationUserFileStoreUploadOperatorStaticFile))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

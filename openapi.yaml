@@ -4235,6 +4235,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetUserResponse'
+    /v1/user/kyc/filestore/upload:
+        post:
+            tags:
+                - UserFileStore
+            operationId: UserFileStore_UploadOperatorStaticFile
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.UploadOperatorStaticFileRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.UploadOperatorStaticFileResponse'
     /v1/user/operator/account-settings/get:
         post:
             tags:
@@ -12778,6 +12796,19 @@ components:
         api.user.service.v1.UpdateUserResponse:
             type: object
             properties: {}
+        api.user.service.v1.UploadOperatorStaticFileRequest:
+            type: object
+            properties:
+                data:
+                    type: string
+                    format: bytes
+                contentType:
+                    type: string
+                idType:
+                    type: string
+        api.user.service.v1.UploadOperatorStaticFileResponse:
+            type: object
+            properties: {}
         api.user.service.v1.UserIdentity:
             type: object
             properties:
@@ -14955,5 +14986,6 @@ tags:
       description: Review service provides review functionality.
     - name: User
       description: User service provides authentication and user management functionality.
+    - name: UserFileStore
     - name: Vip
     - name: Wallet
