@@ -23,4 +23,6 @@ message UploadKycRequest {
 	string id_type = 3;
 }
 
-message UploadKycResponse {}
+message UploadKycResponse {
+  string file_url = 1;
+}

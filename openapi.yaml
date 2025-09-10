@@ -12808,7 +12808,9 @@ components:
                     type: string
         api.user.service.v1.UploadKycResponse:
             type: object
-            properties: {}
+            properties:
+                fileUrl:
+                    type: string
         api.user.service.v1.UserIdentity:
             type: object
             properties:

@@ -84,6 +84,7 @@ func (x *UploadKycRequest) GetIdType() string {
 
 type UploadKycResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	FileUrl       string                 `protobuf:"bytes,1,opt,name=file_url,json=fileUrl,proto3" json:"file_url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -118,6 +119,13 @@ func (*UploadKycResponse) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_filestore_proto_rawDescGZIP(), []int{1}
 }
 
+func (x *UploadKycResponse) GetFileUrl() string {
+	if x != nil {
+		return x.FileUrl
+	}
+	return ""
+}
+
 var File_user_service_v1_user_filestore_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_user_filestore_proto_rawDesc = "" +
@@ -126,8 +134,9 @@ const file_user_service_v1_user_filestore_proto_rawDesc = "" +
 	"\x10UploadKycRequest\x12\x12\n" +
 	"\x04data\x18\x01 \x01(\fR\x04data\x12!\n" +
 	"\fcontent_type\x18\x02 \x01(\tR\vcontentType\x12\x17\n" +
-	"\aid_type\x18\x03 \x01(\tR\x06idType\"\x13\n" +
-	"\x11UploadKycResponse2\x9a\x01\n" +
+	"\aid_type\x18\x03 \x01(\tR\x06idType\".\n" +
+	"\x11UploadKycResponse\x12\x19\n" +
+	"\bfile_url\x18\x01 \x01(\tR\afileUrl2\x9a\x01\n" +
 	"\rUserFileStore\x12\x88\x01\n" +
 	"\rUploadKycFile\x12%.api.user.service.v1.UploadKycRequest\x1a&.api.user.service.v1.UploadKycResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v1/user/kyc/filestore/uploadBO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"

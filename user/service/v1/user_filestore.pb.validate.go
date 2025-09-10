@@ -163,6 +163,8 @@ func (m *UploadKycResponse) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for FileUrl
+
 	if len(errors) > 0 {
 		return UploadKycResponseMultiError(errors)
 	}
