@@ -1629,12 +1629,12 @@ paths:
         post:
             tags:
                 - BackofficeOperator
-            operationId: BackofficeOperator_AddOperatorContryConfig
+            operationId: BackofficeOperator_AddOperatorCountryConfig
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.AddOperatorContryConfigRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AddOperatorCountryConfigRequest'
                 required: true
             responses:
                 "200":
@@ -1642,17 +1642,17 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.user.service.v1.AddOperatorContryConfigResponse'
+                                $ref: '#/components/schemas/api.user.service.v1.AddOperatorCountryConfigResponse'
     /v1/backoffice/operator/country-config/delete:
         post:
             tags:
                 - BackofficeOperator
-            operationId: BackofficeOperator_DeleteOperatorContryConfig
+            operationId: BackofficeOperator_DeleteOperatorCountryConfig
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOperatorContryConfigRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOperatorCountryConfigRequest'
                 required: true
             responses:
                 "200":
@@ -1660,17 +1660,17 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.user.service.v1.DeleteOperatorContryConfigResponse'
+                                $ref: '#/components/schemas/api.user.service.v1.DeleteOperatorCountryConfigResponse'
     /v1/backoffice/operator/country-config/get:
         post:
             tags:
                 - BackofficeOperator
-            operationId: BackofficeOperator_GetOperatorContryConfig
+            operationId: BackofficeOperator_GetOperatorCountryConfig
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorContryConfigRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorCountryConfigRequest'
                 required: true
             responses:
                 "200":
@@ -1678,17 +1678,17 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.user.service.v1.GetOperatorContryConfigResponse'
+                                $ref: '#/components/schemas/api.user.service.v1.GetOperatorCountryConfigResponse'
     /v1/backoffice/operator/country-config/update:
         post:
             tags:
                 - BackofficeOperator
-            operationId: BackofficeOperator_UpdateOperatorContryConfig
+            operationId: BackofficeOperator_UpdateOperatorCountryConfig
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOperatorContryConfigRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOperatorCountryConfigRequest'
                 required: true
             responses:
                 "200":
@@ -1696,7 +1696,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.user.service.v1.UpdateOperatorContryConfigResponse'
+                                $ref: '#/components/schemas/api.user.service.v1.UpdateOperatorCountryConfigResponse'
     /v1/backoffice/operator/create:
         post:
             tags:
@@ -4850,7 +4850,7 @@ components:
         api.backoffice.service.v1.AddOperatorByoSubdomainResponse:
             type: object
             properties: {}
-        api.backoffice.service.v1.AddOperatorContryConfigRequest:
+        api.backoffice.service.v1.AddOperatorCountryConfigRequest:
             type: object
             properties:
                 country:
@@ -5344,7 +5344,7 @@ components:
         api.backoffice.service.v1.DeleteOperatorByoSubdomainResponse:
             type: object
             properties: {}
-        api.backoffice.service.v1.DeleteOperatorContryConfigRequest:
+        api.backoffice.service.v1.DeleteOperatorCountryConfigRequest:
             type: object
             properties:
                 country:
@@ -5733,7 +5733,7 @@ components:
             description: |-
                 Request to get address
                  Used to get DC address
-        api.backoffice.service.v1.GetOperatorContryConfigRequest:
+        api.backoffice.service.v1.GetOperatorCountryConfigRequest:
             type: object
             properties:
                 country:
@@ -10095,7 +10095,7 @@ components:
             properties:
                 enabled:
                     type: boolean
-        api.backoffice.service.v1.UpdateOperatorContryConfigRequest:
+        api.backoffice.service.v1.UpdateOperatorCountryConfigRequest:
             type: object
             properties:
                 country:
@@ -12137,7 +12137,7 @@ components:
         api.user.service.v1.AddOperatorByoDomainResponse:
             type: object
             properties: {}
-        api.user.service.v1.AddOperatorContryConfigResponse:
+        api.user.service.v1.AddOperatorCountryConfigResponse:
             type: object
             properties: {}
         api.user.service.v1.AddRegisterLoginBlacklistResponse:
@@ -12203,7 +12203,7 @@ components:
         api.user.service.v1.DeleteOperatorByoDomainResponse:
             type: object
             properties: {}
-        api.user.service.v1.DeleteOperatorContryConfigResponse:
+        api.user.service.v1.DeleteOperatorCountryConfigResponse:
             type: object
             properties: {}
         api.user.service.v1.DeleteRegisterLoginBlacklistResponse:
@@ -12259,12 +12259,12 @@ components:
             properties:
                 accountSettings:
                     $ref: '#/components/schemas/api.user.service.v1.OperatorAccountSettings'
-        api.user.service.v1.GetOperatorContryConfigResponse:
+        api.user.service.v1.GetOperatorCountryConfigResponse:
             type: object
             properties:
                 config:
-                    $ref: '#/components/schemas/api.user.service.v1.GetOperatorContryConfigResponse_Config'
-        api.user.service.v1.GetOperatorContryConfigResponse_Config:
+                    $ref: '#/components/schemas/api.user.service.v1.GetOperatorCountryConfigResponse_Config'
+        api.user.service.v1.GetOperatorCountryConfigResponse_Config:
             type: object
             properties:
                 registrationLimitPerIp:
@@ -12859,7 +12859,7 @@ components:
         api.user.service.v1.UpdateOperatorAccountSettingsResponse:
             type: object
             properties: {}
-        api.user.service.v1.UpdateOperatorContryConfigResponse:
+        api.user.service.v1.UpdateOperatorCountryConfigResponse:
             type: object
             properties: {}
         api.user.service.v1.UpdateUserRequest:

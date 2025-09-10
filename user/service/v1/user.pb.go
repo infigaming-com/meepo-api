@@ -9246,7 +9246,7 @@ func (x *ListRegisterLoginBlacklistResponse) GetTotal() int32 {
 	return 0
 }
 
-type GetOperatorContryConfigRequest struct {
+type GetOperatorCountryConfigRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	Country         string                  `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
@@ -9254,20 +9254,20 @@ type GetOperatorContryConfigRequest struct {
 	sizeCache       protoimpl.SizeCache
 }
 
-func (x *GetOperatorContryConfigRequest) Reset() {
-	*x = GetOperatorContryConfigRequest{}
+func (x *GetOperatorCountryConfigRequest) Reset() {
+	*x = GetOperatorCountryConfigRequest{}
 	mi := &file_user_service_v1_user_proto_msgTypes[152]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetOperatorContryConfigRequest) String() string {
+func (x *GetOperatorCountryConfigRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetOperatorContryConfigRequest) ProtoMessage() {}
+func (*GetOperatorCountryConfigRequest) ProtoMessage() {}
 
-func (x *GetOperatorContryConfigRequest) ProtoReflect() protoreflect.Message {
+func (x *GetOperatorCountryConfigRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_user_service_v1_user_proto_msgTypes[152]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -9279,46 +9279,46 @@ func (x *GetOperatorContryConfigRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetOperatorContryConfigRequest.ProtoReflect.Descriptor instead.
-func (*GetOperatorContryConfigRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetOperatorCountryConfigRequest.ProtoReflect.Descriptor instead.
+func (*GetOperatorCountryConfigRequest) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{152}
 }
 
-func (x *GetOperatorContryConfigRequest) GetOperatorContext() *common.OperatorContext {
+func (x *GetOperatorCountryConfigRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
 	return nil
 }
 
-func (x *GetOperatorContryConfigRequest) GetCountry() string {
+func (x *GetOperatorCountryConfigRequest) GetCountry() string {
 	if x != nil {
 		return x.Country
 	}
 	return ""
 }
 
-type GetOperatorContryConfigResponse struct {
-	state         protoimpl.MessageState                  `protogen:"open.v1"`
-	Config        *GetOperatorContryConfigResponse_Config `protobuf:"bytes,1,opt,name=config,proto3" json:"config,omitempty"`
+type GetOperatorCountryConfigResponse struct {
+	state         protoimpl.MessageState                   `protogen:"open.v1"`
+	Config        *GetOperatorCountryConfigResponse_Config `protobuf:"bytes,1,opt,name=config,proto3" json:"config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetOperatorContryConfigResponse) Reset() {
-	*x = GetOperatorContryConfigResponse{}
+func (x *GetOperatorCountryConfigResponse) Reset() {
+	*x = GetOperatorCountryConfigResponse{}
 	mi := &file_user_service_v1_user_proto_msgTypes[153]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetOperatorContryConfigResponse) String() string {
+func (x *GetOperatorCountryConfigResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetOperatorContryConfigResponse) ProtoMessage() {}
+func (*GetOperatorCountryConfigResponse) ProtoMessage() {}
 
-func (x *GetOperatorContryConfigResponse) ProtoReflect() protoreflect.Message {
+func (x *GetOperatorCountryConfigResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_user_service_v1_user_proto_msgTypes[153]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -9330,19 +9330,19 @@ func (x *GetOperatorContryConfigResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetOperatorContryConfigResponse.ProtoReflect.Descriptor instead.
-func (*GetOperatorContryConfigResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetOperatorCountryConfigResponse.ProtoReflect.Descriptor instead.
+func (*GetOperatorCountryConfigResponse) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{153}
 }
 
-func (x *GetOperatorContryConfigResponse) GetConfig() *GetOperatorContryConfigResponse_Config {
+func (x *GetOperatorCountryConfigResponse) GetConfig() *GetOperatorCountryConfigResponse_Config {
 	if x != nil {
 		return x.Config
 	}
 	return nil
 }
 
-type AddOperatorContryConfigRequest struct {
+type AddOperatorCountryConfigRequest struct {
 	state                  protoimpl.MessageState  `protogen:"open.v1"`
 	OperatorContext        *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	Country                string                  `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
@@ -9351,20 +9351,20 @@ type AddOperatorContryConfigRequest struct {
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *AddOperatorContryConfigRequest) Reset() {
-	*x = AddOperatorContryConfigRequest{}
+func (x *AddOperatorCountryConfigRequest) Reset() {
+	*x = AddOperatorCountryConfigRequest{}
 	mi := &file_user_service_v1_user_proto_msgTypes[154]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AddOperatorContryConfigRequest) String() string {
+func (x *AddOperatorCountryConfigRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AddOperatorContryConfigRequest) ProtoMessage() {}
+func (*AddOperatorCountryConfigRequest) ProtoMessage() {}
 
-func (x *AddOperatorContryConfigRequest) ProtoReflect() protoreflect.Message {
+func (x *AddOperatorCountryConfigRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_user_service_v1_user_proto_msgTypes[154]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -9376,52 +9376,52 @@ func (x *AddOperatorContryConfigRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AddOperatorContryConfigRequest.ProtoReflect.Descriptor instead.
-func (*AddOperatorContryConfigRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use AddOperatorCountryConfigRequest.ProtoReflect.Descriptor instead.
+func (*AddOperatorCountryConfigRequest) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{154}
 }
 
-func (x *AddOperatorContryConfigRequest) GetOperatorContext() *common.OperatorContext {
+func (x *AddOperatorCountryConfigRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
 	return nil
 }
 
-func (x *AddOperatorContryConfigRequest) GetCountry() string {
+func (x *AddOperatorCountryConfigRequest) GetCountry() string {
 	if x != nil {
 		return x.Country
 	}
 	return ""
 }
 
-func (x *AddOperatorContryConfigRequest) GetRegistrationLimitPerIp() int32 {
+func (x *AddOperatorCountryConfigRequest) GetRegistrationLimitPerIp() int32 {
 	if x != nil {
 		return x.RegistrationLimitPerIp
 	}
 	return 0
 }
 
-type AddOperatorContryConfigResponse struct {
+type AddOperatorCountryConfigResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AddOperatorContryConfigResponse) Reset() {
-	*x = AddOperatorContryConfigResponse{}
+func (x *AddOperatorCountryConfigResponse) Reset() {
+	*x = AddOperatorCountryConfigResponse{}
 	mi := &file_user_service_v1_user_proto_msgTypes[155]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AddOperatorContryConfigResponse) String() string {
+func (x *AddOperatorCountryConfigResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AddOperatorContryConfigResponse) ProtoMessage() {}
+func (*AddOperatorCountryConfigResponse) ProtoMessage() {}
 
-func (x *AddOperatorContryConfigResponse) ProtoReflect() protoreflect.Message {
+func (x *AddOperatorCountryConfigResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_user_service_v1_user_proto_msgTypes[155]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -9433,12 +9433,12 @@ func (x *AddOperatorContryConfigResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AddOperatorContryConfigResponse.ProtoReflect.Descriptor instead.
-func (*AddOperatorContryConfigResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use AddOperatorCountryConfigResponse.ProtoReflect.Descriptor instead.
+func (*AddOperatorCountryConfigResponse) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{155}
 }
 
-type DeleteOperatorContryConfigRequest struct {
+type DeleteOperatorCountryConfigRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	Country         string                  `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
@@ -9446,20 +9446,20 @@ type DeleteOperatorContryConfigRequest struct {
 	sizeCache       protoimpl.SizeCache
 }
 
-func (x *DeleteOperatorContryConfigRequest) Reset() {
-	*x = DeleteOperatorContryConfigRequest{}
+func (x *DeleteOperatorCountryConfigRequest) Reset() {
+	*x = DeleteOperatorCountryConfigRequest{}
 	mi := &file_user_service_v1_user_proto_msgTypes[156]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DeleteOperatorContryConfigRequest) String() string {
+func (x *DeleteOperatorCountryConfigRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DeleteOperatorContryConfigRequest) ProtoMessage() {}
+func (*DeleteOperatorCountryConfigRequest) ProtoMessage() {}
 
-func (x *DeleteOperatorContryConfigRequest) ProtoReflect() protoreflect.Message {
+func (x *DeleteOperatorCountryConfigRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_user_service_v1_user_proto_msgTypes[156]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -9471,45 +9471,45 @@ func (x *DeleteOperatorContryConfigRequest) ProtoReflect() protoreflect.Message 
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteOperatorContryConfigRequest.ProtoReflect.Descriptor instead.
-func (*DeleteOperatorContryConfigRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use DeleteOperatorCountryConfigRequest.ProtoReflect.Descriptor instead.
+func (*DeleteOperatorCountryConfigRequest) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{156}
 }
 
-func (x *DeleteOperatorContryConfigRequest) GetOperatorContext() *common.OperatorContext {
+func (x *DeleteOperatorCountryConfigRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
 	return nil
 }
 
-func (x *DeleteOperatorContryConfigRequest) GetCountry() string {
+func (x *DeleteOperatorCountryConfigRequest) GetCountry() string {
 	if x != nil {
 		return x.Country
 	}
 	return ""
 }
 
-type DeleteOperatorContryConfigResponse struct {
+type DeleteOperatorCountryConfigResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DeleteOperatorContryConfigResponse) Reset() {
-	*x = DeleteOperatorContryConfigResponse{}
+func (x *DeleteOperatorCountryConfigResponse) Reset() {
+	*x = DeleteOperatorCountryConfigResponse{}
 	mi := &file_user_service_v1_user_proto_msgTypes[157]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DeleteOperatorContryConfigResponse) String() string {
+func (x *DeleteOperatorCountryConfigResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DeleteOperatorContryConfigResponse) ProtoMessage() {}
+func (*DeleteOperatorCountryConfigResponse) ProtoMessage() {}
 
-func (x *DeleteOperatorContryConfigResponse) ProtoReflect() protoreflect.Message {
+func (x *DeleteOperatorCountryConfigResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_user_service_v1_user_proto_msgTypes[157]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -9521,12 +9521,12 @@ func (x *DeleteOperatorContryConfigResponse) ProtoReflect() protoreflect.Message
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteOperatorContryConfigResponse.ProtoReflect.Descriptor instead.
-func (*DeleteOperatorContryConfigResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use DeleteOperatorCountryConfigResponse.ProtoReflect.Descriptor instead.
+func (*DeleteOperatorCountryConfigResponse) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{157}
 }
 
-type UpdateOperatorContryConfigRequest struct {
+type UpdateOperatorCountryConfigRequest struct {
 	state                  protoimpl.MessageState  `protogen:"open.v1"`
 	OperatorContext        *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	Country                string                  `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
@@ -9535,20 +9535,20 @@ type UpdateOperatorContryConfigRequest struct {
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *UpdateOperatorContryConfigRequest) Reset() {
-	*x = UpdateOperatorContryConfigRequest{}
+func (x *UpdateOperatorCountryConfigRequest) Reset() {
+	*x = UpdateOperatorCountryConfigRequest{}
 	mi := &file_user_service_v1_user_proto_msgTypes[158]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpdateOperatorContryConfigRequest) String() string {
+func (x *UpdateOperatorCountryConfigRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdateOperatorContryConfigRequest) ProtoMessage() {}
+func (*UpdateOperatorCountryConfigRequest) ProtoMessage() {}
 
-func (x *UpdateOperatorContryConfigRequest) ProtoReflect() protoreflect.Message {
+func (x *UpdateOperatorCountryConfigRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_user_service_v1_user_proto_msgTypes[158]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -9560,52 +9560,52 @@ func (x *UpdateOperatorContryConfigRequest) ProtoReflect() protoreflect.Message 
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateOperatorContryConfigRequest.ProtoReflect.Descriptor instead.
-func (*UpdateOperatorContryConfigRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdateOperatorCountryConfigRequest.ProtoReflect.Descriptor instead.
+func (*UpdateOperatorCountryConfigRequest) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{158}
 }
 
-func (x *UpdateOperatorContryConfigRequest) GetOperatorContext() *common.OperatorContext {
+func (x *UpdateOperatorCountryConfigRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
 	return nil
 }
 
-func (x *UpdateOperatorContryConfigRequest) GetCountry() string {
+func (x *UpdateOperatorCountryConfigRequest) GetCountry() string {
 	if x != nil {
 		return x.Country
 	}
 	return ""
 }
 
-func (x *UpdateOperatorContryConfigRequest) GetRegistrationLimitPerIp() int32 {
+func (x *UpdateOperatorCountryConfigRequest) GetRegistrationLimitPerIp() int32 {
 	if x != nil && x.RegistrationLimitPerIp != nil {
 		return *x.RegistrationLimitPerIp
 	}
 	return 0
 }
 
-type UpdateOperatorContryConfigResponse struct {
+type UpdateOperatorCountryConfigResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UpdateOperatorContryConfigResponse) Reset() {
-	*x = UpdateOperatorContryConfigResponse{}
+func (x *UpdateOperatorCountryConfigResponse) Reset() {
+	*x = UpdateOperatorCountryConfigResponse{}
 	mi := &file_user_service_v1_user_proto_msgTypes[159]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpdateOperatorContryConfigResponse) String() string {
+func (x *UpdateOperatorCountryConfigResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdateOperatorContryConfigResponse) ProtoMessage() {}
+func (*UpdateOperatorCountryConfigResponse) ProtoMessage() {}
 
-func (x *UpdateOperatorContryConfigResponse) ProtoReflect() protoreflect.Message {
+func (x *UpdateOperatorCountryConfigResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_user_service_v1_user_proto_msgTypes[159]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -9617,8 +9617,8 @@ func (x *UpdateOperatorContryConfigResponse) ProtoReflect() protoreflect.Message
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateOperatorContryConfigResponse.ProtoReflect.Descriptor instead.
-func (*UpdateOperatorContryConfigResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdateOperatorCountryConfigResponse.ProtoReflect.Descriptor instead.
+func (*UpdateOperatorCountryConfigResponse) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{159}
 }
 
@@ -11146,27 +11146,27 @@ func (x *ListRegisterLoginBlacklistResponse_RegisterLoginBlacklist) GetCreatedAt
 	return nil
 }
 
-type GetOperatorContryConfigResponse_Config struct {
+type GetOperatorCountryConfigResponse_Config struct {
 	state                  protoimpl.MessageState `protogen:"open.v1"`
 	RegistrationLimitPerIp int32                  `protobuf:"varint,1,opt,name=registration_limit_per_ip,json=registrationLimitPerIp,proto3" json:"registration_limit_per_ip,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *GetOperatorContryConfigResponse_Config) Reset() {
-	*x = GetOperatorContryConfigResponse_Config{}
+func (x *GetOperatorCountryConfigResponse_Config) Reset() {
+	*x = GetOperatorCountryConfigResponse_Config{}
 	mi := &file_user_service_v1_user_proto_msgTypes[179]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetOperatorContryConfigResponse_Config) String() string {
+func (x *GetOperatorCountryConfigResponse_Config) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetOperatorContryConfigResponse_Config) ProtoMessage() {}
+func (*GetOperatorCountryConfigResponse_Config) ProtoMessage() {}
 
-func (x *GetOperatorContryConfigResponse_Config) ProtoReflect() protoreflect.Message {
+func (x *GetOperatorCountryConfigResponse_Config) ProtoReflect() protoreflect.Message {
 	mi := &file_user_service_v1_user_proto_msgTypes[179]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -11178,12 +11178,12 @@ func (x *GetOperatorContryConfigResponse_Config) ProtoReflect() protoreflect.Mes
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetOperatorContryConfigResponse_Config.ProtoReflect.Descriptor instead.
-func (*GetOperatorContryConfigResponse_Config) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetOperatorCountryConfigResponse_Config.ProtoReflect.Descriptor instead.
+func (*GetOperatorCountryConfigResponse_Config) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{153, 0}
 }
 
-func (x *GetOperatorContryConfigResponse_Config) GetRegistrationLimitPerIp() int32 {
+func (x *GetOperatorCountryConfigResponse_Config) GetRegistrationLimitPerIp() int32 {
 	if x != nil {
 		return x.RegistrationLimitPerIp
 	}
@@ -12052,29 +12052,29 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x16RegisterLoginBlacklist\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
-	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x82\x01\n" +
-	"\x1eGetOperatorContryConfigRequest\x12F\n" +
+	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x83\x01\n" +
+	"\x1fGetOperatorCountryConfigRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x18\n" +
-	"\acountry\x18\x02 \x01(\tR\acountry\"\xbb\x01\n" +
-	"\x1fGetOperatorContryConfigResponse\x12S\n" +
-	"\x06config\x18\x01 \x01(\v2;.api.user.service.v1.GetOperatorContryConfigResponse.ConfigR\x06config\x1aC\n" +
+	"\acountry\x18\x02 \x01(\tR\acountry\"\xbd\x01\n" +
+	" GetOperatorCountryConfigResponse\x12T\n" +
+	"\x06config\x18\x01 \x01(\v2<.api.user.service.v1.GetOperatorCountryConfigResponse.ConfigR\x06config\x1aC\n" +
 	"\x06Config\x129\n" +
-	"\x19registration_limit_per_ip\x18\x01 \x01(\x05R\x16registrationLimitPerIp\"\xbd\x01\n" +
-	"\x1eAddOperatorContryConfigRequest\x12F\n" +
+	"\x19registration_limit_per_ip\x18\x01 \x01(\x05R\x16registrationLimitPerIp\"\xbe\x01\n" +
+	"\x1fAddOperatorCountryConfigRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x18\n" +
 	"\acountry\x18\x02 \x01(\tR\acountry\x129\n" +
-	"\x19registration_limit_per_ip\x18\x03 \x01(\x05R\x16registrationLimitPerIp\"!\n" +
-	"\x1fAddOperatorContryConfigResponse\"\x85\x01\n" +
-	"!DeleteOperatorContryConfigRequest\x12F\n" +
+	"\x19registration_limit_per_ip\x18\x03 \x01(\x05R\x16registrationLimitPerIp\"\"\n" +
+	" AddOperatorCountryConfigResponse\"\x86\x01\n" +
+	"\"DeleteOperatorCountryConfigRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x18\n" +
-	"\acountry\x18\x02 \x01(\tR\acountry\"$\n" +
-	"\"DeleteOperatorContryConfigResponse\"\xe3\x01\n" +
-	"!UpdateOperatorContryConfigRequest\x12F\n" +
+	"\acountry\x18\x02 \x01(\tR\acountry\"%\n" +
+	"#DeleteOperatorCountryConfigResponse\"\xe4\x01\n" +
+	"\"UpdateOperatorCountryConfigRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x18\n" +
 	"\acountry\x18\x02 \x01(\tR\acountry\x12>\n" +
 	"\x19registration_limit_per_ip\x18\x03 \x01(\x05H\x00R\x16registrationLimitPerIp\x88\x01\x01B\x1c\n" +
-	"\x1a_registration_limit_per_ip\"$\n" +
-	"\"UpdateOperatorContryConfigResponse*j\n" +
+	"\x1a_registration_limit_per_ip\"%\n" +
+	"#UpdateOperatorCountryConfigResponse*j\n" +
 	"\bAuthType\x12\x19\n" +
 	"\x15AUTH_TYPE_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12AUTH_TYPE_PASSWORD\x10\x01\x12\x13\n" +
@@ -12094,7 +12094,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x19OPERATOR_TYPE_UNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x16OPERATOR_TYPE_RETAILER\x10\x01\x12\x17\n" +
 	"\x13OPERATOR_TYPE_GROUP\x10\x02\x12\x1a\n" +
-	"\x16OPERATOR_TYPE_OPERATOR\x10\x032\xdaJ\n" +
+	"\x16OPERATOR_TYPE_OPERATOR\x10\x032\xe6J\n" +
 	"\x04User\x12v\n" +
 	"\bRegister\x12$.api.user.service.v1.RegisterRequest\x1a!.api.user.service.v1.AuthResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/user/auth/register\x12m\n" +
 	"\x05Login\x12!.api.user.service.v1.LoginRequest\x1a!.api.user.service.v1.AuthResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/user/auth/login\x12_\n" +
@@ -12171,11 +12171,11 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x19AddRegisterLoginBlacklist\x125.api.user.service.v1.AddRegisterLoginBlacklistRequest\x1a6.api.user.service.v1.AddRegisterLoginBlacklistResponse\"\x00\x12\x95\x01\n" +
 	"\x1cDeleteRegisterLoginBlacklist\x128.api.user.service.v1.DeleteRegisterLoginBlacklistRequest\x1a9.api.user.service.v1.DeleteRegisterLoginBlacklistResponse\"\x00\x12\x8c\x01\n" +
 	"\x19GetRegisterLoginBlacklist\x125.api.user.service.v1.GetRegisterLoginBlacklistRequest\x1a6.api.user.service.v1.GetRegisterLoginBlacklistResponse\"\x00\x12\x8f\x01\n" +
-	"\x1aListRegisterLoginBlacklist\x126.api.user.service.v1.ListRegisterLoginBlacklistRequest\x1a7.api.user.service.v1.ListRegisterLoginBlacklistResponse\"\x00\x12\x86\x01\n" +
-	"\x17GetOperatorContryConfig\x123.api.user.service.v1.GetOperatorContryConfigRequest\x1a4.api.user.service.v1.GetOperatorContryConfigResponse\"\x00\x12\x86\x01\n" +
-	"\x17AddOperatorContryConfig\x123.api.user.service.v1.AddOperatorContryConfigRequest\x1a4.api.user.service.v1.AddOperatorContryConfigResponse\"\x00\x12\x8f\x01\n" +
-	"\x1aDeleteOperatorContryConfig\x126.api.user.service.v1.DeleteOperatorContryConfigRequest\x1a7.api.user.service.v1.DeleteOperatorContryConfigResponse\"\x00\x12\x8f\x01\n" +
-	"\x1aUpdateOperatorContryConfig\x126.api.user.service.v1.UpdateOperatorContryConfigRequest\x1a7.api.user.service.v1.UpdateOperatorContryConfigResponse\"\x00BO\n" +
+	"\x1aListRegisterLoginBlacklist\x126.api.user.service.v1.ListRegisterLoginBlacklistRequest\x1a7.api.user.service.v1.ListRegisterLoginBlacklistResponse\"\x00\x12\x89\x01\n" +
+	"\x18GetOperatorCountryConfig\x124.api.user.service.v1.GetOperatorCountryConfigRequest\x1a5.api.user.service.v1.GetOperatorCountryConfigResponse\"\x00\x12\x89\x01\n" +
+	"\x18AddOperatorCountryConfig\x124.api.user.service.v1.AddOperatorCountryConfigRequest\x1a5.api.user.service.v1.AddOperatorCountryConfigResponse\"\x00\x12\x92\x01\n" +
+	"\x1bDeleteOperatorCountryConfig\x127.api.user.service.v1.DeleteOperatorCountryConfigRequest\x1a8.api.user.service.v1.DeleteOperatorCountryConfigResponse\"\x00\x12\x92\x01\n" +
+	"\x1bUpdateOperatorCountryConfig\x127.api.user.service.v1.UpdateOperatorCountryConfigRequest\x1a8.api.user.service.v1.UpdateOperatorCountryConfigResponse\"\x00BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
@@ -12349,14 +12349,14 @@ var file_user_service_v1_user_proto_goTypes = []any{
 	(*GetRegisterLoginBlacklistResponse)(nil),                         // 153: api.user.service.v1.GetRegisterLoginBlacklistResponse
 	(*ListRegisterLoginBlacklistRequest)(nil),                         // 154: api.user.service.v1.ListRegisterLoginBlacklistRequest
 	(*ListRegisterLoginBlacklistResponse)(nil),                        // 155: api.user.service.v1.ListRegisterLoginBlacklistResponse
-	(*GetOperatorContryConfigRequest)(nil),                            // 156: api.user.service.v1.GetOperatorContryConfigRequest
-	(*GetOperatorContryConfigResponse)(nil),                           // 157: api.user.service.v1.GetOperatorContryConfigResponse
-	(*AddOperatorContryConfigRequest)(nil),                            // 158: api.user.service.v1.AddOperatorContryConfigRequest
-	(*AddOperatorContryConfigResponse)(nil),                           // 159: api.user.service.v1.AddOperatorContryConfigResponse
-	(*DeleteOperatorContryConfigRequest)(nil),                         // 160: api.user.service.v1.DeleteOperatorContryConfigRequest
-	(*DeleteOperatorContryConfigResponse)(nil),                        // 161: api.user.service.v1.DeleteOperatorContryConfigResponse
-	(*UpdateOperatorContryConfigRequest)(nil),                         // 162: api.user.service.v1.UpdateOperatorContryConfigRequest
-	(*UpdateOperatorContryConfigResponse)(nil),                        // 163: api.user.service.v1.UpdateOperatorContryConfigResponse
+	(*GetOperatorCountryConfigRequest)(nil),                           // 156: api.user.service.v1.GetOperatorCountryConfigRequest
+	(*GetOperatorCountryConfigResponse)(nil),                          // 157: api.user.service.v1.GetOperatorCountryConfigResponse
+	(*AddOperatorCountryConfigRequest)(nil),                           // 158: api.user.service.v1.AddOperatorCountryConfigRequest
+	(*AddOperatorCountryConfigResponse)(nil),                          // 159: api.user.service.v1.AddOperatorCountryConfigResponse
+	(*DeleteOperatorCountryConfigRequest)(nil),                        // 160: api.user.service.v1.DeleteOperatorCountryConfigRequest
+	(*DeleteOperatorCountryConfigResponse)(nil),                       // 161: api.user.service.v1.DeleteOperatorCountryConfigResponse
+	(*UpdateOperatorCountryConfigRequest)(nil),                        // 162: api.user.service.v1.UpdateOperatorCountryConfigRequest
+	(*UpdateOperatorCountryConfigResponse)(nil),                       // 163: api.user.service.v1.UpdateOperatorCountryConfigResponse
 	(*ListUsersResponse_User)(nil),                                    // 164: api.user.service.v1.ListUsersResponse.User
 	(*GetCommentsByUserIdResponse_Comment)(nil),                       // 165: api.user.service.v1.GetCommentsByUserIdResponse.Comment
 	(*GetUserProfileResponse_IpInfo)(nil),                             // 166: api.user.service.v1.GetUserProfileResponse.IpInfo
@@ -12376,7 +12376,7 @@ var file_user_service_v1_user_proto_goTypes = []any{
 	(*ResponsibleGamblingConfig_BreakInPlay)(nil),                     // 180: api.user.service.v1.ResponsibleGamblingConfig.BreakInPlay
 	(*ResponsibleGamblingConfig_TimeLimits)(nil),                      // 181: api.user.service.v1.ResponsibleGamblingConfig.TimeLimits
 	(*ListRegisterLoginBlacklistResponse_RegisterLoginBlacklist)(nil), // 182: api.user.service.v1.ListRegisterLoginBlacklistResponse.RegisterLoginBlacklist
-	(*GetOperatorContryConfigResponse_Config)(nil),                    // 183: api.user.service.v1.GetOperatorContryConfigResponse.Config
+	(*GetOperatorCountryConfigResponse_Config)(nil),                   // 183: api.user.service.v1.GetOperatorCountryConfigResponse.Config
 	(*timestamppb.Timestamp)(nil),                                     // 184: google.protobuf.Timestamp
 	(*common.OperatorContext)(nil),                                    // 185: api.common.OperatorContext
 	(*common.OperatorContextFilters)(nil),                             // 186: api.common.OperatorContextFilters
@@ -12491,11 +12491,11 @@ var file_user_service_v1_user_proto_depIdxs = []int32{
 	185, // 106: api.user.service.v1.GetRegisterLoginBlacklistRequest.operator_context:type_name -> api.common.OperatorContext
 	185, // 107: api.user.service.v1.ListRegisterLoginBlacklistRequest.operator_context:type_name -> api.common.OperatorContext
 	182, // 108: api.user.service.v1.ListRegisterLoginBlacklistResponse.register_login_blacklists:type_name -> api.user.service.v1.ListRegisterLoginBlacklistResponse.RegisterLoginBlacklist
-	185, // 109: api.user.service.v1.GetOperatorContryConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	183, // 110: api.user.service.v1.GetOperatorContryConfigResponse.config:type_name -> api.user.service.v1.GetOperatorContryConfigResponse.Config
-	185, // 111: api.user.service.v1.AddOperatorContryConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	185, // 112: api.user.service.v1.DeleteOperatorContryConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	185, // 113: api.user.service.v1.UpdateOperatorContryConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	185, // 109: api.user.service.v1.GetOperatorCountryConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	183, // 110: api.user.service.v1.GetOperatorCountryConfigResponse.config:type_name -> api.user.service.v1.GetOperatorCountryConfigResponse.Config
+	185, // 111: api.user.service.v1.AddOperatorCountryConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	185, // 112: api.user.service.v1.DeleteOperatorCountryConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	185, // 113: api.user.service.v1.UpdateOperatorCountryConfigRequest.operator_context:type_name -> api.common.OperatorContext
 	184, // 114: api.user.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
 	184, // 115: api.user.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
 	184, // 116: api.user.service.v1.ListUsersResponse.User.created_at:type_name -> google.protobuf.Timestamp
@@ -12584,10 +12584,10 @@ var file_user_service_v1_user_proto_depIdxs = []int32{
 	150, // 199: api.user.service.v1.User.DeleteRegisterLoginBlacklist:input_type -> api.user.service.v1.DeleteRegisterLoginBlacklistRequest
 	152, // 200: api.user.service.v1.User.GetRegisterLoginBlacklist:input_type -> api.user.service.v1.GetRegisterLoginBlacklistRequest
 	154, // 201: api.user.service.v1.User.ListRegisterLoginBlacklist:input_type -> api.user.service.v1.ListRegisterLoginBlacklistRequest
-	156, // 202: api.user.service.v1.User.GetOperatorContryConfig:input_type -> api.user.service.v1.GetOperatorContryConfigRequest
-	158, // 203: api.user.service.v1.User.AddOperatorContryConfig:input_type -> api.user.service.v1.AddOperatorContryConfigRequest
-	160, // 204: api.user.service.v1.User.DeleteOperatorContryConfig:input_type -> api.user.service.v1.DeleteOperatorContryConfigRequest
-	162, // 205: api.user.service.v1.User.UpdateOperatorContryConfig:input_type -> api.user.service.v1.UpdateOperatorContryConfigRequest
+	156, // 202: api.user.service.v1.User.GetOperatorCountryConfig:input_type -> api.user.service.v1.GetOperatorCountryConfigRequest
+	158, // 203: api.user.service.v1.User.AddOperatorCountryConfig:input_type -> api.user.service.v1.AddOperatorCountryConfigRequest
+	160, // 204: api.user.service.v1.User.DeleteOperatorCountryConfig:input_type -> api.user.service.v1.DeleteOperatorCountryConfigRequest
+	162, // 205: api.user.service.v1.User.UpdateOperatorCountryConfig:input_type -> api.user.service.v1.UpdateOperatorCountryConfigRequest
 	12,  // 206: api.user.service.v1.User.Register:output_type -> api.user.service.v1.AuthResponse
 	12,  // 207: api.user.service.v1.User.Login:output_type -> api.user.service.v1.AuthResponse
 	12,  // 208: api.user.service.v1.User.LoginWithInfo:output_type -> api.user.service.v1.AuthResponse
@@ -12658,10 +12658,10 @@ var file_user_service_v1_user_proto_depIdxs = []int32{
 	151, // 273: api.user.service.v1.User.DeleteRegisterLoginBlacklist:output_type -> api.user.service.v1.DeleteRegisterLoginBlacklistResponse
 	153, // 274: api.user.service.v1.User.GetRegisterLoginBlacklist:output_type -> api.user.service.v1.GetRegisterLoginBlacklistResponse
 	155, // 275: api.user.service.v1.User.ListRegisterLoginBlacklist:output_type -> api.user.service.v1.ListRegisterLoginBlacklistResponse
-	157, // 276: api.user.service.v1.User.GetOperatorContryConfig:output_type -> api.user.service.v1.GetOperatorContryConfigResponse
-	159, // 277: api.user.service.v1.User.AddOperatorContryConfig:output_type -> api.user.service.v1.AddOperatorContryConfigResponse
-	161, // 278: api.user.service.v1.User.DeleteOperatorContryConfig:output_type -> api.user.service.v1.DeleteOperatorContryConfigResponse
-	163, // 279: api.user.service.v1.User.UpdateOperatorContryConfig:output_type -> api.user.service.v1.UpdateOperatorContryConfigResponse
+	157, // 276: api.user.service.v1.User.GetOperatorCountryConfig:output_type -> api.user.service.v1.GetOperatorCountryConfigResponse
+	159, // 277: api.user.service.v1.User.AddOperatorCountryConfig:output_type -> api.user.service.v1.AddOperatorCountryConfigResponse
+	161, // 278: api.user.service.v1.User.DeleteOperatorCountryConfig:output_type -> api.user.service.v1.DeleteOperatorCountryConfigResponse
+	163, // 279: api.user.service.v1.User.UpdateOperatorCountryConfig:output_type -> api.user.service.v1.UpdateOperatorCountryConfigResponse
 	206, // [206:280] is the sub-list for method output_type
 	132, // [132:206] is the sub-list for method input_type
 	132, // [132:132] is the sub-list for extension type_name

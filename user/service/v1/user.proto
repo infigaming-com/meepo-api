@@ -316,13 +316,13 @@ service User {
 
 	rpc ListRegisterLoginBlacklist(ListRegisterLoginBlacklistRequest) returns (ListRegisterLoginBlacklistResponse) {}
 
-	rpc GetOperatorContryConfig(GetOperatorContryConfigRequest) returns (GetOperatorContryConfigResponse) {}
+	rpc GetOperatorCountryConfig(GetOperatorCountryConfigRequest) returns (GetOperatorCountryConfigResponse) {}
 
-	rpc AddOperatorContryConfig(AddOperatorContryConfigRequest) returns (AddOperatorContryConfigResponse) {}
+	rpc AddOperatorCountryConfig(AddOperatorCountryConfigRequest) returns (AddOperatorCountryConfigResponse) {}
 
-	rpc DeleteOperatorContryConfig(DeleteOperatorContryConfigRequest) returns (DeleteOperatorContryConfigResponse) {}
+	rpc DeleteOperatorCountryConfig(DeleteOperatorCountryConfigRequest) returns (DeleteOperatorCountryConfigResponse) {}
 
-	rpc UpdateOperatorContryConfig(UpdateOperatorContryConfigRequest) returns (UpdateOperatorContryConfigResponse) {}
+	rpc UpdateOperatorCountryConfig(UpdateOperatorCountryConfigRequest) returns (UpdateOperatorCountryConfigResponse) {}
 }
 
 // UserInfo contains basic user information.
@@ -1517,40 +1517,40 @@ message ListRegisterLoginBlacklistResponse {
 	int32 total = 4;
 }
 
-message GetOperatorContryConfigRequest {
+message GetOperatorCountryConfigRequest {
 	api.common.OperatorContext operator_context = 1;
 	string country = 2;
 }
 
-message GetOperatorContryConfigResponse {
+message GetOperatorCountryConfigResponse {
 	message Config {
 		int32 registration_limit_per_ip = 1;
 	}
 	Config config = 1;
 }
 
-message AddOperatorContryConfigRequest {
+message AddOperatorCountryConfigRequest {
 	api.common.OperatorContext operator_context = 1;
 	string country = 2;
 	int32 registration_limit_per_ip = 3;
 }
 
-message AddOperatorContryConfigResponse {
+message AddOperatorCountryConfigResponse {
 }
 
-message DeleteOperatorContryConfigRequest {
+message DeleteOperatorCountryConfigRequest {
 	api.common.OperatorContext operator_context = 1;
 	string country = 2;
 }
 
-message DeleteOperatorContryConfigResponse {
+message DeleteOperatorCountryConfigResponse {
 }
 
-message UpdateOperatorContryConfigRequest {
+message UpdateOperatorCountryConfigRequest {
 	api.common.OperatorContext operator_context = 1;
 	string country = 2;
 	optional int32 registration_limit_per_ip = 3;
 }
 
-message UpdateOperatorContryConfigResponse {
+message UpdateOperatorCountryConfigResponse {
 }
