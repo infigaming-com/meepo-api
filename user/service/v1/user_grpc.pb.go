@@ -85,6 +85,10 @@ const (
 	User_GetResponsibleGamblingConfig_FullMethodName    = "/api.user.service.v1.User/GetResponsibleGamblingConfig"
 	User_UserIdentityAudit_FullMethodName               = "/api.user.service.v1.User/UserIdentityAudit"
 	User_UserIdentityList_FullMethodName                = "/api.user.service.v1.User/UserIdentityList"
+	User_AddRegisterLoginBlacklist_FullMethodName       = "/api.user.service.v1.User/AddRegisterLoginBlacklist"
+	User_DeleteRegisterLoginBlacklist_FullMethodName    = "/api.user.service.v1.User/DeleteRegisterLoginBlacklist"
+	User_GetRegisterLoginBlacklist_FullMethodName       = "/api.user.service.v1.User/GetRegisterLoginBlacklist"
+	User_ListRegisterLoginBlacklist_FullMethodName      = "/api.user.service.v1.User/ListRegisterLoginBlacklist"
 )
 
 // UserClient is the client API for User service.
@@ -209,6 +213,10 @@ type UserClient interface {
 	GetResponsibleGamblingConfig(ctx context.Context, in *GetResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*GetResponsibleGamblingConfigResponse, error)
 	UserIdentityAudit(ctx context.Context, in *UserIdentityAuditRequest, opts ...grpc.CallOption) (*UserIdentityAuditResponse, error)
 	UserIdentityList(ctx context.Context, in *UserIdentityListRequest, opts ...grpc.CallOption) (*UserIdentityListResponse, error)
+	AddRegisterLoginBlacklist(ctx context.Context, in *AddRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*AddRegisterLoginBlacklistResponse, error)
+	DeleteRegisterLoginBlacklist(ctx context.Context, in *DeleteRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*DeleteRegisterLoginBlacklistResponse, error)
+	GetRegisterLoginBlacklist(ctx context.Context, in *GetRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*GetRegisterLoginBlacklistResponse, error)
+	ListRegisterLoginBlacklist(ctx context.Context, in *ListRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*ListRegisterLoginBlacklistResponse, error)
 }
 
 type userClient struct {
@@ -879,6 +887,46 @@ func (c *userClient) UserIdentityList(ctx context.Context, in *UserIdentityListR
 	return out, nil
 }
 
+func (c *userClient) AddRegisterLoginBlacklist(ctx context.Context, in *AddRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*AddRegisterLoginBlacklistResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddRegisterLoginBlacklistResponse)
+	err := c.cc.Invoke(ctx, User_AddRegisterLoginBlacklist_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) DeleteRegisterLoginBlacklist(ctx context.Context, in *DeleteRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*DeleteRegisterLoginBlacklistResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteRegisterLoginBlacklistResponse)
+	err := c.cc.Invoke(ctx, User_DeleteRegisterLoginBlacklist_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetRegisterLoginBlacklist(ctx context.Context, in *GetRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*GetRegisterLoginBlacklistResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetRegisterLoginBlacklistResponse)
+	err := c.cc.Invoke(ctx, User_GetRegisterLoginBlacklist_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) ListRegisterLoginBlacklist(ctx context.Context, in *ListRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*ListRegisterLoginBlacklistResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListRegisterLoginBlacklistResponse)
+	err := c.cc.Invoke(ctx, User_ListRegisterLoginBlacklist_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -1001,6 +1049,10 @@ type UserServer interface {
 	GetResponsibleGamblingConfig(context.Context, *GetResponsibleGamblingConfigRequest) (*GetResponsibleGamblingConfigResponse, error)
 	UserIdentityAudit(context.Context, *UserIdentityAuditRequest) (*UserIdentityAuditResponse, error)
 	UserIdentityList(context.Context, *UserIdentityListRequest) (*UserIdentityListResponse, error)
+	AddRegisterLoginBlacklist(context.Context, *AddRegisterLoginBlacklistRequest) (*AddRegisterLoginBlacklistResponse, error)
+	DeleteRegisterLoginBlacklist(context.Context, *DeleteRegisterLoginBlacklistRequest) (*DeleteRegisterLoginBlacklistResponse, error)
+	GetRegisterLoginBlacklist(context.Context, *GetRegisterLoginBlacklistRequest) (*GetRegisterLoginBlacklistResponse, error)
+	ListRegisterLoginBlacklist(context.Context, *ListRegisterLoginBlacklistRequest) (*ListRegisterLoginBlacklistResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -1208,6 +1260,18 @@ func (UnimplementedUserServer) UserIdentityAudit(context.Context, *UserIdentityA
 }
 func (UnimplementedUserServer) UserIdentityList(context.Context, *UserIdentityListRequest) (*UserIdentityListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserIdentityList not implemented")
+}
+func (UnimplementedUserServer) AddRegisterLoginBlacklist(context.Context, *AddRegisterLoginBlacklistRequest) (*AddRegisterLoginBlacklistResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddRegisterLoginBlacklist not implemented")
+}
+func (UnimplementedUserServer) DeleteRegisterLoginBlacklist(context.Context, *DeleteRegisterLoginBlacklistRequest) (*DeleteRegisterLoginBlacklistResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteRegisterLoginBlacklist not implemented")
+}
+func (UnimplementedUserServer) GetRegisterLoginBlacklist(context.Context, *GetRegisterLoginBlacklistRequest) (*GetRegisterLoginBlacklistResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRegisterLoginBlacklist not implemented")
+}
+func (UnimplementedUserServer) ListRegisterLoginBlacklist(context.Context, *ListRegisterLoginBlacklistRequest) (*ListRegisterLoginBlacklistResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListRegisterLoginBlacklist not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -2418,6 +2482,78 @@ func _User_UserIdentityList_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_AddRegisterLoginBlacklist_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddRegisterLoginBlacklistRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).AddRegisterLoginBlacklist(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_AddRegisterLoginBlacklist_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).AddRegisterLoginBlacklist(ctx, req.(*AddRegisterLoginBlacklistRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_DeleteRegisterLoginBlacklist_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteRegisterLoginBlacklistRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).DeleteRegisterLoginBlacklist(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_DeleteRegisterLoginBlacklist_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).DeleteRegisterLoginBlacklist(ctx, req.(*DeleteRegisterLoginBlacklistRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetRegisterLoginBlacklist_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRegisterLoginBlacklistRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetRegisterLoginBlacklist(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetRegisterLoginBlacklist_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetRegisterLoginBlacklist(ctx, req.(*GetRegisterLoginBlacklistRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_ListRegisterLoginBlacklist_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListRegisterLoginBlacklistRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ListRegisterLoginBlacklist(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ListRegisterLoginBlacklist_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ListRegisterLoginBlacklist(ctx, req.(*ListRegisterLoginBlacklistRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2688,6 +2824,22 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UserIdentityList",
 			Handler:    _User_UserIdentityList_Handler,
+		},
+		{
+			MethodName: "AddRegisterLoginBlacklist",
+			Handler:    _User_AddRegisterLoginBlacklist_Handler,
+		},
+		{
+			MethodName: "DeleteRegisterLoginBlacklist",
+			Handler:    _User_DeleteRegisterLoginBlacklist_Handler,
+		},
+		{
+			MethodName: "GetRegisterLoginBlacklist",
+			Handler:    _User_GetRegisterLoginBlacklist_Handler,
+		},
+		{
+			MethodName: "ListRegisterLoginBlacklist",
+			Handler:    _User_ListRegisterLoginBlacklist_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

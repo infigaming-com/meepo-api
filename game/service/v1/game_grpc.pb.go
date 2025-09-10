@@ -44,6 +44,9 @@ const (
 	Game_GetGameTransactionById_FullMethodName            = "/api.game.service.v1.Game/GetGameTransactionById"
 	Game_GetDailyGameTransactionData_FullMethodName       = "/api.game.service.v1.Game/GetDailyGameTransactionData"
 	Game_ListProviderByIDs_FullMethodName                 = "/api.game.service.v1.Game/ListProviderByIDs"
+	Game_GetTaxReportConfig_FullMethodName                = "/api.game.service.v1.Game/GetTaxReportConfig"
+	Game_ListTaxReports_FullMethodName                    = "/api.game.service.v1.Game/ListTaxReports"
+	Game_UpdateTaxReport_FullMethodName                   = "/api.game.service.v1.Game/UpdateTaxReport"
 	Game_GetResponsibleGamblingStatus_FullMethodName      = "/api.game.service.v1.Game/GetResponsibleGamblingStatus"
 )
 
@@ -76,6 +79,10 @@ type GameClient interface {
 	GetGameTransactionById(ctx context.Context, in *GetGameTransactionByIdRequest, opts ...grpc.CallOption) (*GetGameTransactionByIdResponse, error)
 	GetDailyGameTransactionData(ctx context.Context, in *GetDailyGameTransactionDataRequest, opts ...grpc.CallOption) (*GetDailyGameTransactionDataResponse, error)
 	ListProviderByIDs(ctx context.Context, in *ListProviderByIDsRequest, opts ...grpc.CallOption) (*ListProviderByIDsResponse, error)
+	// Tax Report related APIs
+	GetTaxReportConfig(ctx context.Context, in *GetTaxReportConfigRequest, opts ...grpc.CallOption) (*GetTaxReportConfigResponse, error)
+	ListTaxReports(ctx context.Context, in *ListTaxReportsRequest, opts ...grpc.CallOption) (*ListTaxReportsResponse, error)
+	UpdateTaxReport(ctx context.Context, in *UpdateTaxReportRequest, opts ...grpc.CallOption) (*UpdateTaxReportResponse, error)
 	GetResponsibleGamblingStatus(ctx context.Context, in *GetResponsibleGamblingStatusRequest, opts ...grpc.CallOption) (*GetResponsibleGamblingStatusResponse, error)
 }
 
@@ -337,6 +344,36 @@ func (c *gameClient) ListProviderByIDs(ctx context.Context, in *ListProviderByID
 	return out, nil
 }
 
+func (c *gameClient) GetTaxReportConfig(ctx context.Context, in *GetTaxReportConfigRequest, opts ...grpc.CallOption) (*GetTaxReportConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTaxReportConfigResponse)
+	err := c.cc.Invoke(ctx, Game_GetTaxReportConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) ListTaxReports(ctx context.Context, in *ListTaxReportsRequest, opts ...grpc.CallOption) (*ListTaxReportsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListTaxReportsResponse)
+	err := c.cc.Invoke(ctx, Game_ListTaxReports_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) UpdateTaxReport(ctx context.Context, in *UpdateTaxReportRequest, opts ...grpc.CallOption) (*UpdateTaxReportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateTaxReportResponse)
+	err := c.cc.Invoke(ctx, Game_UpdateTaxReport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *gameClient) GetResponsibleGamblingStatus(ctx context.Context, in *GetResponsibleGamblingStatusRequest, opts ...grpc.CallOption) (*GetResponsibleGamblingStatusResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetResponsibleGamblingStatusResponse)
@@ -376,6 +413,10 @@ type GameServer interface {
 	GetGameTransactionById(context.Context, *GetGameTransactionByIdRequest) (*GetGameTransactionByIdResponse, error)
 	GetDailyGameTransactionData(context.Context, *GetDailyGameTransactionDataRequest) (*GetDailyGameTransactionDataResponse, error)
 	ListProviderByIDs(context.Context, *ListProviderByIDsRequest) (*ListProviderByIDsResponse, error)
+	// Tax Report related APIs
+	GetTaxReportConfig(context.Context, *GetTaxReportConfigRequest) (*GetTaxReportConfigResponse, error)
+	ListTaxReports(context.Context, *ListTaxReportsRequest) (*ListTaxReportsResponse, error)
+	UpdateTaxReport(context.Context, *UpdateTaxReportRequest) (*UpdateTaxReportResponse, error)
 	GetResponsibleGamblingStatus(context.Context, *GetResponsibleGamblingStatusRequest) (*GetResponsibleGamblingStatusResponse, error)
 	mustEmbedUnimplementedGameServer()
 }
@@ -461,6 +502,15 @@ func (UnimplementedGameServer) GetDailyGameTransactionData(context.Context, *Get
 }
 func (UnimplementedGameServer) ListProviderByIDs(context.Context, *ListProviderByIDsRequest) (*ListProviderByIDsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListProviderByIDs not implemented")
+}
+func (UnimplementedGameServer) GetTaxReportConfig(context.Context, *GetTaxReportConfigRequest) (*GetTaxReportConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTaxReportConfig not implemented")
+}
+func (UnimplementedGameServer) ListTaxReports(context.Context, *ListTaxReportsRequest) (*ListTaxReportsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTaxReports not implemented")
+}
+func (UnimplementedGameServer) UpdateTaxReport(context.Context, *UpdateTaxReportRequest) (*UpdateTaxReportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTaxReport not implemented")
 }
 func (UnimplementedGameServer) GetResponsibleGamblingStatus(context.Context, *GetResponsibleGamblingStatusRequest) (*GetResponsibleGamblingStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetResponsibleGamblingStatus not implemented")
@@ -936,6 +986,60 @@ func _Game_ListProviderByIDs_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_GetTaxReportConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTaxReportConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).GetTaxReportConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_GetTaxReportConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).GetTaxReportConfig(ctx, req.(*GetTaxReportConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_ListTaxReports_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListTaxReportsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).ListTaxReports(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_ListTaxReports_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).ListTaxReports(ctx, req.(*ListTaxReportsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_UpdateTaxReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTaxReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).UpdateTaxReport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_UpdateTaxReport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).UpdateTaxReport(ctx, req.(*UpdateTaxReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Game_GetResponsibleGamblingStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetResponsibleGamblingStatusRequest)
 	if err := dec(in); err != nil {
@@ -1060,6 +1164,18 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListProviderByIDs",
 			Handler:    _Game_ListProviderByIDs_Handler,
+		},
+		{
+			MethodName: "GetTaxReportConfig",
+			Handler:    _Game_GetTaxReportConfig_Handler,
+		},
+		{
+			MethodName: "ListTaxReports",
+			Handler:    _Game_ListTaxReports_Handler,
+		},
+		{
+			MethodName: "UpdateTaxReport",
+			Handler:    _Game_UpdateTaxReport_Handler,
 		},
 		{
 			MethodName: "GetResponsibleGamblingStatus",
