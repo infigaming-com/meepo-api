@@ -1181,6 +1181,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListTaxReportsResponse'
+    /v1/backoffice/finance/tax-reports/update:
+        post:
+            tags:
+                - BackofficeFinance
+            operationId: BackofficeFinance_UpdateTaxReport
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateTaxReportRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateTaxReportResponse'
     /v1/backoffice/finance/third-party-fees/list:
         post:
             tags:
@@ -8782,6 +8800,8 @@ components:
                     description: Timestamps
                 updatedAt:
                     type: string
+                id:
+                    type: string
         api.backoffice.service.v1.ListThemesRequest:
             type: object
             properties: {}
@@ -10070,6 +10090,20 @@ components:
                     type: string
                     description: "config is a json string\n example:\n {\n\t\"report_type\": {\n\t\t\"horse_racing_tax_return\": true,\n\t\t\"sports_tax_return\": true,\n\t\t\"other_contingencies_tax_return\": false\n\t}\n\t\"timezone\": \"UTC+0\",\n\t\"report_generation_time\": {\n\t\t\"monthly\": \"2nd of each month\",\n\t\t\"quarterly\": \"2nd of each quarter\", \n\t\t\"yearly\": \"2nd of each year\"\n\t},\n\t\"tax_currency\": \"ZAR\",\n\t\"user_registration_countries\": [\"US\", \"ZA\", \"TR\", \"VN\"],\n\t\"user_currencies\": [\"USD\", \"EUR\", \"INR\", \"ZAR\", \"USDT\"],\n  \"vat_payable\": 6.5,\n  \"tax_for_sportsbook\": 6.5,\n  \"tax_for_other_contingencies\": 6.5,\n  \"tax_for_horse_racing\": 6.5,\n\t}"
         api.backoffice.service.v1.UpdateTaxReportConfigResponse:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.UpdateTaxReportRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                depositDate:
+                    type: string
+                depositSlipNo:
+                    type: string
+                refCode:
+                    type: string
+        api.backoffice.service.v1.UpdateTaxReportResponse:
             type: object
             properties: {}
         api.backoffice.service.v1.UpdateUserRequest:
