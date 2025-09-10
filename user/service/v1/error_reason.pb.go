@@ -130,6 +130,7 @@ const (
 	ErrorReason_ADD_REGISTER_LOGIN_BLACKLIST_FAILED            ErrorReason = 10104
 	ErrorReason_DELETE_REGISTER_LOGIN_BLACKLIST_FAILED         ErrorReason = 10105
 	ErrorReason_INVALID_REGISTER_LOGIN_BLACKLIST_ID_TYPE       ErrorReason = 10106
+	ErrorReason_BLOCKED_BY_REGISTER_LOGIN_BLACKLIST            ErrorReason = 10107
 )
 
 // Enum value maps for ErrorReason.
@@ -240,6 +241,7 @@ var (
 		10104: "ADD_REGISTER_LOGIN_BLACKLIST_FAILED",
 		10105: "DELETE_REGISTER_LOGIN_BLACKLIST_FAILED",
 		10106: "INVALID_REGISTER_LOGIN_BLACKLIST_ID_TYPE",
+		10107: "BLOCKED_BY_REGISTER_LOGIN_BLACKLIST",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                    0,
@@ -347,6 +349,7 @@ var (
 		"ADD_REGISTER_LOGIN_BLACKLIST_FAILED":            10104,
 		"DELETE_REGISTER_LOGIN_BLACKLIST_FAILED":         10105,
 		"INVALID_REGISTER_LOGIN_BLACKLIST_ID_TYPE":       10106,
+		"BLOCKED_BY_REGISTER_LOGIN_BLACKLIST":            10107,
 	}
 )
 
@@ -381,7 +384,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xdc\x1b\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\x86\x1c\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x12&\n" +
@@ -487,7 +490,8 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"$LIST_REGISTER_LOGIN_BLACKLIST_FAILED\x10\xf7N\x12(\n" +
 	"#ADD_REGISTER_LOGIN_BLACKLIST_FAILED\x10\xf8N\x12+\n" +
 	"&DELETE_REGISTER_LOGIN_BLACKLIST_FAILED\x10\xf9N\x12-\n" +
-	"(INVALID_REGISTER_LOGIN_BLACKLIST_ID_TYPE\x10\xfaN\x1a\x04\xa0E\xf4\x03BO\n" +
+	"(INVALID_REGISTER_LOGIN_BLACKLIST_ID_TYPE\x10\xfaN\x12(\n" +
+	"#BLOCKED_BY_REGISTER_LOGIN_BLACKLIST\x10\xfbN\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
