@@ -89,6 +89,10 @@ const (
 	User_DeleteRegisterLoginBlacklist_FullMethodName    = "/api.user.service.v1.User/DeleteRegisterLoginBlacklist"
 	User_GetRegisterLoginBlacklist_FullMethodName       = "/api.user.service.v1.User/GetRegisterLoginBlacklist"
 	User_ListRegisterLoginBlacklist_FullMethodName      = "/api.user.service.v1.User/ListRegisterLoginBlacklist"
+	User_GetOperatorContryConfig_FullMethodName         = "/api.user.service.v1.User/GetOperatorContryConfig"
+	User_AddOperatorContryConfig_FullMethodName         = "/api.user.service.v1.User/AddOperatorContryConfig"
+	User_DeleteOperatorContryConfig_FullMethodName      = "/api.user.service.v1.User/DeleteOperatorContryConfig"
+	User_UpdateOperatorContryConfig_FullMethodName      = "/api.user.service.v1.User/UpdateOperatorContryConfig"
 )
 
 // UserClient is the client API for User service.
@@ -217,6 +221,10 @@ type UserClient interface {
 	DeleteRegisterLoginBlacklist(ctx context.Context, in *DeleteRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*DeleteRegisterLoginBlacklistResponse, error)
 	GetRegisterLoginBlacklist(ctx context.Context, in *GetRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*GetRegisterLoginBlacklistResponse, error)
 	ListRegisterLoginBlacklist(ctx context.Context, in *ListRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*ListRegisterLoginBlacklistResponse, error)
+	GetOperatorContryConfig(ctx context.Context, in *GetOperatorContryConfigRequest, opts ...grpc.CallOption) (*GetOperatorContryConfigResponse, error)
+	AddOperatorContryConfig(ctx context.Context, in *AddOperatorContryConfigRequest, opts ...grpc.CallOption) (*AddOperatorContryConfigResponse, error)
+	DeleteOperatorContryConfig(ctx context.Context, in *DeleteOperatorContryConfigRequest, opts ...grpc.CallOption) (*DeleteOperatorContryConfigResponse, error)
+	UpdateOperatorContryConfig(ctx context.Context, in *UpdateOperatorContryConfigRequest, opts ...grpc.CallOption) (*UpdateOperatorContryConfigResponse, error)
 }
 
 type userClient struct {
@@ -927,6 +935,46 @@ func (c *userClient) ListRegisterLoginBlacklist(ctx context.Context, in *ListReg
 	return out, nil
 }
 
+func (c *userClient) GetOperatorContryConfig(ctx context.Context, in *GetOperatorContryConfigRequest, opts ...grpc.CallOption) (*GetOperatorContryConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorContryConfigResponse)
+	err := c.cc.Invoke(ctx, User_GetOperatorContryConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) AddOperatorContryConfig(ctx context.Context, in *AddOperatorContryConfigRequest, opts ...grpc.CallOption) (*AddOperatorContryConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddOperatorContryConfigResponse)
+	err := c.cc.Invoke(ctx, User_AddOperatorContryConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) DeleteOperatorContryConfig(ctx context.Context, in *DeleteOperatorContryConfigRequest, opts ...grpc.CallOption) (*DeleteOperatorContryConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteOperatorContryConfigResponse)
+	err := c.cc.Invoke(ctx, User_DeleteOperatorContryConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) UpdateOperatorContryConfig(ctx context.Context, in *UpdateOperatorContryConfigRequest, opts ...grpc.CallOption) (*UpdateOperatorContryConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateOperatorContryConfigResponse)
+	err := c.cc.Invoke(ctx, User_UpdateOperatorContryConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -1053,6 +1101,10 @@ type UserServer interface {
 	DeleteRegisterLoginBlacklist(context.Context, *DeleteRegisterLoginBlacklistRequest) (*DeleteRegisterLoginBlacklistResponse, error)
 	GetRegisterLoginBlacklist(context.Context, *GetRegisterLoginBlacklistRequest) (*GetRegisterLoginBlacklistResponse, error)
 	ListRegisterLoginBlacklist(context.Context, *ListRegisterLoginBlacklistRequest) (*ListRegisterLoginBlacklistResponse, error)
+	GetOperatorContryConfig(context.Context, *GetOperatorContryConfigRequest) (*GetOperatorContryConfigResponse, error)
+	AddOperatorContryConfig(context.Context, *AddOperatorContryConfigRequest) (*AddOperatorContryConfigResponse, error)
+	DeleteOperatorContryConfig(context.Context, *DeleteOperatorContryConfigRequest) (*DeleteOperatorContryConfigResponse, error)
+	UpdateOperatorContryConfig(context.Context, *UpdateOperatorContryConfigRequest) (*UpdateOperatorContryConfigResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -1272,6 +1324,18 @@ func (UnimplementedUserServer) GetRegisterLoginBlacklist(context.Context, *GetRe
 }
 func (UnimplementedUserServer) ListRegisterLoginBlacklist(context.Context, *ListRegisterLoginBlacklistRequest) (*ListRegisterLoginBlacklistResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListRegisterLoginBlacklist not implemented")
+}
+func (UnimplementedUserServer) GetOperatorContryConfig(context.Context, *GetOperatorContryConfigRequest) (*GetOperatorContryConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorContryConfig not implemented")
+}
+func (UnimplementedUserServer) AddOperatorContryConfig(context.Context, *AddOperatorContryConfigRequest) (*AddOperatorContryConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddOperatorContryConfig not implemented")
+}
+func (UnimplementedUserServer) DeleteOperatorContryConfig(context.Context, *DeleteOperatorContryConfigRequest) (*DeleteOperatorContryConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteOperatorContryConfig not implemented")
+}
+func (UnimplementedUserServer) UpdateOperatorContryConfig(context.Context, *UpdateOperatorContryConfigRequest) (*UpdateOperatorContryConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOperatorContryConfig not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -2554,6 +2618,78 @@ func _User_ListRegisterLoginBlacklist_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_GetOperatorContryConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorContryConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetOperatorContryConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetOperatorContryConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetOperatorContryConfig(ctx, req.(*GetOperatorContryConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_AddOperatorContryConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddOperatorContryConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).AddOperatorContryConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_AddOperatorContryConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).AddOperatorContryConfig(ctx, req.(*AddOperatorContryConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_DeleteOperatorContryConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteOperatorContryConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).DeleteOperatorContryConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_DeleteOperatorContryConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).DeleteOperatorContryConfig(ctx, req.(*DeleteOperatorContryConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_UpdateOperatorContryConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOperatorContryConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).UpdateOperatorContryConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_UpdateOperatorContryConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).UpdateOperatorContryConfig(ctx, req.(*UpdateOperatorContryConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2840,6 +2976,22 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListRegisterLoginBlacklist",
 			Handler:    _User_ListRegisterLoginBlacklist_Handler,
+		},
+		{
+			MethodName: "GetOperatorContryConfig",
+			Handler:    _User_GetOperatorContryConfig_Handler,
+		},
+		{
+			MethodName: "AddOperatorContryConfig",
+			Handler:    _User_AddOperatorContryConfig_Handler,
+		},
+		{
+			MethodName: "DeleteOperatorContryConfig",
+			Handler:    _User_DeleteOperatorContryConfig_Handler,
+		},
+		{
+			MethodName: "UpdateOperatorContryConfig",
+			Handler:    _User_UpdateOperatorContryConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

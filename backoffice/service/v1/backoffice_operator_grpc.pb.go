@@ -38,6 +38,10 @@ const (
 	BackofficeOperator_AddRegisterLoginBlacklist_FullMethodName            = "/api.backoffice.service.v1.BackofficeOperator/AddRegisterLoginBlacklist"
 	BackofficeOperator_DeleteRegisterLoginBlacklist_FullMethodName         = "/api.backoffice.service.v1.BackofficeOperator/DeleteRegisterLoginBlacklist"
 	BackofficeOperator_ListRegisterLoginBlacklist_FullMethodName           = "/api.backoffice.service.v1.BackofficeOperator/ListRegisterLoginBlacklist"
+	BackofficeOperator_GetOperatorContryConfig_FullMethodName              = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorContryConfig"
+	BackofficeOperator_AddOperatorContryConfig_FullMethodName              = "/api.backoffice.service.v1.BackofficeOperator/AddOperatorContryConfig"
+	BackofficeOperator_DeleteOperatorContryConfig_FullMethodName           = "/api.backoffice.service.v1.BackofficeOperator/DeleteOperatorContryConfig"
+	BackofficeOperator_UpdateOperatorContryConfig_FullMethodName           = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorContryConfig"
 )
 
 // BackofficeOperatorClient is the client API for BackofficeOperator service.
@@ -73,6 +77,10 @@ type BackofficeOperatorClient interface {
 	AddRegisterLoginBlacklist(ctx context.Context, in *AddRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*v1.AddRegisterLoginBlacklistResponse, error)
 	DeleteRegisterLoginBlacklist(ctx context.Context, in *DeleteRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*v1.DeleteRegisterLoginBlacklistResponse, error)
 	ListRegisterLoginBlacklist(ctx context.Context, in *ListRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*v1.ListRegisterLoginBlacklistResponse, error)
+	GetOperatorContryConfig(ctx context.Context, in *GetOperatorContryConfigRequest, opts ...grpc.CallOption) (*v1.GetOperatorContryConfigResponse, error)
+	AddOperatorContryConfig(ctx context.Context, in *AddOperatorContryConfigRequest, opts ...grpc.CallOption) (*v1.AddOperatorContryConfigResponse, error)
+	DeleteOperatorContryConfig(ctx context.Context, in *DeleteOperatorContryConfigRequest, opts ...grpc.CallOption) (*v1.DeleteOperatorContryConfigResponse, error)
+	UpdateOperatorContryConfig(ctx context.Context, in *UpdateOperatorContryConfigRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorContryConfigResponse, error)
 }
 
 type backofficeOperatorClient struct {
@@ -263,6 +271,46 @@ func (c *backofficeOperatorClient) ListRegisterLoginBlacklist(ctx context.Contex
 	return out, nil
 }
 
+func (c *backofficeOperatorClient) GetOperatorContryConfig(ctx context.Context, in *GetOperatorContryConfigRequest, opts ...grpc.CallOption) (*v1.GetOperatorContryConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetOperatorContryConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_GetOperatorContryConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeOperatorClient) AddOperatorContryConfig(ctx context.Context, in *AddOperatorContryConfigRequest, opts ...grpc.CallOption) (*v1.AddOperatorContryConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.AddOperatorContryConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_AddOperatorContryConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeOperatorClient) DeleteOperatorContryConfig(ctx context.Context, in *DeleteOperatorContryConfigRequest, opts ...grpc.CallOption) (*v1.DeleteOperatorContryConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.DeleteOperatorContryConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_DeleteOperatorContryConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeOperatorClient) UpdateOperatorContryConfig(ctx context.Context, in *UpdateOperatorContryConfigRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorContryConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.UpdateOperatorContryConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_UpdateOperatorContryConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeOperatorServer is the server API for BackofficeOperator service.
 // All implementations must embed UnimplementedBackofficeOperatorServer
 // for forward compatibility.
@@ -296,6 +344,10 @@ type BackofficeOperatorServer interface {
 	AddRegisterLoginBlacklist(context.Context, *AddRegisterLoginBlacklistRequest) (*v1.AddRegisterLoginBlacklistResponse, error)
 	DeleteRegisterLoginBlacklist(context.Context, *DeleteRegisterLoginBlacklistRequest) (*v1.DeleteRegisterLoginBlacklistResponse, error)
 	ListRegisterLoginBlacklist(context.Context, *ListRegisterLoginBlacklistRequest) (*v1.ListRegisterLoginBlacklistResponse, error)
+	GetOperatorContryConfig(context.Context, *GetOperatorContryConfigRequest) (*v1.GetOperatorContryConfigResponse, error)
+	AddOperatorContryConfig(context.Context, *AddOperatorContryConfigRequest) (*v1.AddOperatorContryConfigResponse, error)
+	DeleteOperatorContryConfig(context.Context, *DeleteOperatorContryConfigRequest) (*v1.DeleteOperatorContryConfigResponse, error)
+	UpdateOperatorContryConfig(context.Context, *UpdateOperatorContryConfigRequest) (*v1.UpdateOperatorContryConfigResponse, error)
 	mustEmbedUnimplementedBackofficeOperatorServer()
 }
 
@@ -359,6 +411,18 @@ func (UnimplementedBackofficeOperatorServer) DeleteRegisterLoginBlacklist(contex
 }
 func (UnimplementedBackofficeOperatorServer) ListRegisterLoginBlacklist(context.Context, *ListRegisterLoginBlacklistRequest) (*v1.ListRegisterLoginBlacklistResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListRegisterLoginBlacklist not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) GetOperatorContryConfig(context.Context, *GetOperatorContryConfigRequest) (*v1.GetOperatorContryConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorContryConfig not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) AddOperatorContryConfig(context.Context, *AddOperatorContryConfigRequest) (*v1.AddOperatorContryConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddOperatorContryConfig not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) DeleteOperatorContryConfig(context.Context, *DeleteOperatorContryConfigRequest) (*v1.DeleteOperatorContryConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteOperatorContryConfig not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) UpdateOperatorContryConfig(context.Context, *UpdateOperatorContryConfigRequest) (*v1.UpdateOperatorContryConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOperatorContryConfig not implemented")
 }
 func (UnimplementedBackofficeOperatorServer) mustEmbedUnimplementedBackofficeOperatorServer() {}
 func (UnimplementedBackofficeOperatorServer) testEmbeddedByValue()                            {}
@@ -705,6 +769,78 @@ func _BackofficeOperator_ListRegisterLoginBlacklist_Handler(srv interface{}, ctx
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeOperator_GetOperatorContryConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorContryConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).GetOperatorContryConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_GetOperatorContryConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).GetOperatorContryConfig(ctx, req.(*GetOperatorContryConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeOperator_AddOperatorContryConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddOperatorContryConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).AddOperatorContryConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_AddOperatorContryConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).AddOperatorContryConfig(ctx, req.(*AddOperatorContryConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeOperator_DeleteOperatorContryConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteOperatorContryConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).DeleteOperatorContryConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_DeleteOperatorContryConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).DeleteOperatorContryConfig(ctx, req.(*DeleteOperatorContryConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeOperator_UpdateOperatorContryConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOperatorContryConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).UpdateOperatorContryConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_UpdateOperatorContryConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).UpdateOperatorContryConfig(ctx, req.(*UpdateOperatorContryConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeOperator_ServiceDesc is the grpc.ServiceDesc for BackofficeOperator service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -783,6 +919,22 @@ var BackofficeOperator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListRegisterLoginBlacklist",
 			Handler:    _BackofficeOperator_ListRegisterLoginBlacklist_Handler,
+		},
+		{
+			MethodName: "GetOperatorContryConfig",
+			Handler:    _BackofficeOperator_GetOperatorContryConfig_Handler,
+		},
+		{
+			MethodName: "AddOperatorContryConfig",
+			Handler:    _BackofficeOperator_AddOperatorContryConfig_Handler,
+		},
+		{
+			MethodName: "DeleteOperatorContryConfig",
+			Handler:    _BackofficeOperator_DeleteOperatorContryConfig_Handler,
+		},
+		{
+			MethodName: "UpdateOperatorContryConfig",
+			Handler:    _BackofficeOperator_UpdateOperatorContryConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

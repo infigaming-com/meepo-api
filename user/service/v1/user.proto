@@ -315,6 +315,14 @@ service User {
 	rpc GetRegisterLoginBlacklist(GetRegisterLoginBlacklistRequest) returns (GetRegisterLoginBlacklistResponse) {}
 
 	rpc ListRegisterLoginBlacklist(ListRegisterLoginBlacklistRequest) returns (ListRegisterLoginBlacklistResponse) {}
+
+	rpc GetOperatorContryConfig(GetOperatorContryConfigRequest) returns (GetOperatorContryConfigResponse) {}
+
+	rpc AddOperatorContryConfig(AddOperatorContryConfigRequest) returns (AddOperatorContryConfigResponse) {}
+
+	rpc DeleteOperatorContryConfig(DeleteOperatorContryConfigRequest) returns (DeleteOperatorContryConfigResponse) {}
+
+	rpc UpdateOperatorContryConfig(UpdateOperatorContryConfigRequest) returns (UpdateOperatorContryConfigResponse) {}
 }
 
 // UserInfo contains basic user information.
@@ -1507,4 +1515,42 @@ message ListRegisterLoginBlacklistResponse {
 	int32 page = 2;
 	int32 page_size = 3;
 	int32 total = 4;
+}
+
+message GetOperatorContryConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	string country = 2;
+}
+
+message GetOperatorContryConfigResponse {
+	message Config {
+		int32 registration_limit_per_ip = 1;
+	}
+	Config config = 1;
+}
+
+message AddOperatorContryConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	string country = 2;
+	int32 registration_limit_per_ip = 3;
+}
+
+message AddOperatorContryConfigResponse {
+}
+
+message DeleteOperatorContryConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	string country = 2;
+}
+
+message DeleteOperatorContryConfigResponse {
+}
+
+message UpdateOperatorContryConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	string country = 2;
+	optional int32 registration_limit_per_ip = 3;
+}
+
+message UpdateOperatorContryConfigResponse {
 }

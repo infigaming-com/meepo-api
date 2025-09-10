@@ -1284,3 +1284,63 @@ func IsBlockedByRegisterLoginBlacklist(err error) bool {
 func ErrorBlockedByRegisterLoginBlacklist(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_BLOCKED_BY_REGISTER_LOGIN_BLACKLIST.String(), fmt.Sprintf(format, args...))
 }
+
+func IsAddOperatorContryConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ADD_OPERATOR_CONTRY_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorAddOperatorContryConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_OPERATOR_CONTRY_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDeleteOperatorContryConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DELETE_OPERATOR_CONTRY_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorDeleteOperatorContryConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DELETE_OPERATOR_CONTRY_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateOperatorContryConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_OPERATOR_CONTRY_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateOperatorContryConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_OPERATOR_CONTRY_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetOperatorContryConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATOR_CONTRY_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorContryConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_CONTRY_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOperatorContryConfigNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_CONTRY_CONFIG_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorOperatorContryConfigNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_CONTRY_CONFIG_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}

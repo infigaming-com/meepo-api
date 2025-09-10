@@ -22,13 +22,16 @@ const _ = http.SupportPackageIsVersion1
 
 const OperationBackofficeOperatorAddOperatorBackofficeByoSubdomain = "/api.backoffice.service.v1.BackofficeOperator/AddOperatorBackofficeByoSubdomain"
 const OperationBackofficeOperatorAddOperatorByoSubdomain = "/api.backoffice.service.v1.BackofficeOperator/AddOperatorByoSubdomain"
+const OperationBackofficeOperatorAddOperatorContryConfig = "/api.backoffice.service.v1.BackofficeOperator/AddOperatorContryConfig"
 const OperationBackofficeOperatorAddRegisterLoginBlacklist = "/api.backoffice.service.v1.BackofficeOperator/AddRegisterLoginBlacklist"
 const OperationBackofficeOperatorCreateOperator = "/api.backoffice.service.v1.BackofficeOperator/CreateOperator"
 const OperationBackofficeOperatorDeleteOperatorBackofficeByoSubdomain = "/api.backoffice.service.v1.BackofficeOperator/DeleteOperatorBackofficeByoSubdomain"
 const OperationBackofficeOperatorDeleteOperatorByoSubdomain = "/api.backoffice.service.v1.BackofficeOperator/DeleteOperatorByoSubdomain"
+const OperationBackofficeOperatorDeleteOperatorContryConfig = "/api.backoffice.service.v1.BackofficeOperator/DeleteOperatorContryConfig"
 const OperationBackofficeOperatorDeleteRegisterLoginBlacklist = "/api.backoffice.service.v1.BackofficeOperator/DeleteRegisterLoginBlacklist"
 const OperationBackofficeOperatorGetCurrentOperatorDetails = "/api.backoffice.service.v1.BackofficeOperator/GetCurrentOperatorDetails"
 const OperationBackofficeOperatorGetOperatorAccountSettings = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorAccountSettings"
+const OperationBackofficeOperatorGetOperatorContryConfig = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorContryConfig"
 const OperationBackofficeOperatorListAllOperators = "/api.backoffice.service.v1.BackofficeOperator/ListAllOperators"
 const OperationBackofficeOperatorListBottomOperators = "/api.backoffice.service.v1.BackofficeOperator/ListBottomOperators"
 const OperationBackofficeOperatorListCompanyOperators = "/api.backoffice.service.v1.BackofficeOperator/ListCompanyOperators"
@@ -37,6 +40,7 @@ const OperationBackofficeOperatorListOperatorsByParentOperatorId = "/api.backoff
 const OperationBackofficeOperatorListRegisterLoginBlacklist = "/api.backoffice.service.v1.BackofficeOperator/ListRegisterLoginBlacklist"
 const OperationBackofficeOperatorListRetailerOperators = "/api.backoffice.service.v1.BackofficeOperator/ListRetailerOperators"
 const OperationBackofficeOperatorUpdateOperatorAccountSettings = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorAccountSettings"
+const OperationBackofficeOperatorUpdateOperatorContryConfig = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorContryConfig"
 const OperationBackofficeOperatorUpdateOperatorStatus = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorStatus"
 
 type BackofficeOperatorHTTPServer interface {
@@ -44,16 +48,19 @@ type BackofficeOperatorHTTPServer interface {
 	AddOperatorBackofficeByoSubdomain(context.Context, *AddOperatorBackofficeByoSubdomainRequest) (*AddOperatorBackofficeByoSubdomainResponse, error)
 	// AddOperatorByoSubdomain AddOperatorByoSubdomain adds a byo subdomain for the given operator
 	AddOperatorByoSubdomain(context.Context, *AddOperatorByoSubdomainRequest) (*AddOperatorByoSubdomainResponse, error)
+	AddOperatorContryConfig(context.Context, *AddOperatorContryConfigRequest) (*v1.AddOperatorContryConfigResponse, error)
 	AddRegisterLoginBlacklist(context.Context, *AddRegisterLoginBlacklistRequest) (*v1.AddRegisterLoginBlacklistResponse, error)
 	CreateOperator(context.Context, *CreateOperatorRequest) (*CreateOperatorResponse, error)
 	// DeleteOperatorBackofficeByoSubdomain DeleteOperatorBackofficeByoSubdomain deletes a backoffice byo subdomain for the given operator
 	DeleteOperatorBackofficeByoSubdomain(context.Context, *DeleteOperatorBackofficeByoSubdomainRequest) (*DeleteOperatorBackofficeByoSubdomainResponse, error)
 	// DeleteOperatorByoSubdomain DeleteOperatorByoSubdomain deletes a byo subdomain for the given operator
 	DeleteOperatorByoSubdomain(context.Context, *DeleteOperatorByoSubdomainRequest) (*DeleteOperatorByoSubdomainResponse, error)
+	DeleteOperatorContryConfig(context.Context, *DeleteOperatorContryConfigRequest) (*v1.DeleteOperatorContryConfigResponse, error)
 	DeleteRegisterLoginBlacklist(context.Context, *DeleteRegisterLoginBlacklistRequest) (*v1.DeleteRegisterLoginBlacklistResponse, error)
 	// GetCurrentOperatorDetails GetCurrentOperatorDetails returns the current operator details.
 	GetCurrentOperatorDetails(context.Context, *GetCurrentOperatorDetailsRequest) (*GetCurrentOperatorDetailsResponse, error)
 	GetOperatorAccountSettings(context.Context, *GetOperatorAccountSettingsRequest) (*v1.GetOperatorAccountSettingsResponse, error)
+	GetOperatorContryConfig(context.Context, *GetOperatorContryConfigRequest) (*v1.GetOperatorContryConfigResponse, error)
 	ListAllOperators(context.Context, *ListAllOperatorsRequest) (*ListAllOperatorsResponse, error)
 	// ListBottomOperators ListBottomOperators returns a list of bottom operators by operator context in the middleware
 	ListBottomOperators(context.Context, *ListBottomOperatorsRequest) (*ListBottomOperatorsResponse, error)
@@ -67,6 +74,7 @@ type BackofficeOperatorHTTPServer interface {
 	// ListRetailerOperators ListRetailers returns a list of retailers by operator context in the middleware
 	ListRetailerOperators(context.Context, *ListRetailerOperatorsRequest) (*ListRetailerOperatorsResponse, error)
 	UpdateOperatorAccountSettings(context.Context, *UpdateOperatorAccountSettingsRequest) (*v1.UpdateOperatorAccountSettingsResponse, error)
+	UpdateOperatorContryConfig(context.Context, *UpdateOperatorContryConfigRequest) (*v1.UpdateOperatorContryConfigResponse, error)
 	// UpdateOperatorStatus UpdateOperatorStatus updates the status of an operator
 	UpdateOperatorStatus(context.Context, *UpdateOperatorStatusRequest) (*UpdateOperatorStatusResponse, error)
 }
@@ -91,6 +99,10 @@ func RegisterBackofficeOperatorHTTPServer(s *http.Server, srv BackofficeOperator
 	r.POST("/v1/backoffice/operator/register-login-blacklist/add", _BackofficeOperator_AddRegisterLoginBlacklist0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/register-login-blacklist/delete", _BackofficeOperator_DeleteRegisterLoginBlacklist0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/operator/register-login-blacklist/list", _BackofficeOperator_ListRegisterLoginBlacklist0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/country-config/get", _BackofficeOperator_GetOperatorContryConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/country-config/add", _BackofficeOperator_AddOperatorContryConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/country-config/delete", _BackofficeOperator_DeleteOperatorContryConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/country-config/update", _BackofficeOperator_UpdateOperatorContryConfig0_HTTP_Handler(srv))
 }
 
 func _BackofficeOperator_ListAllOperators0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
@@ -489,16 +501,107 @@ func _BackofficeOperator_ListRegisterLoginBlacklist0_HTTP_Handler(srv Backoffice
 	}
 }
 
+func _BackofficeOperator_GetOperatorContryConfig0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetOperatorContryConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOperatorGetOperatorContryConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetOperatorContryConfig(ctx, req.(*GetOperatorContryConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.GetOperatorContryConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeOperator_AddOperatorContryConfig0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in AddOperatorContryConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOperatorAddOperatorContryConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.AddOperatorContryConfig(ctx, req.(*AddOperatorContryConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.AddOperatorContryConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeOperator_DeleteOperatorContryConfig0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DeleteOperatorContryConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOperatorDeleteOperatorContryConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteOperatorContryConfig(ctx, req.(*DeleteOperatorContryConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.DeleteOperatorContryConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeOperator_UpdateOperatorContryConfig0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateOperatorContryConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOperatorUpdateOperatorContryConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateOperatorContryConfig(ctx, req.(*UpdateOperatorContryConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.UpdateOperatorContryConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeOperatorHTTPClient interface {
 	AddOperatorBackofficeByoSubdomain(ctx context.Context, req *AddOperatorBackofficeByoSubdomainRequest, opts ...http.CallOption) (rsp *AddOperatorBackofficeByoSubdomainResponse, err error)
 	AddOperatorByoSubdomain(ctx context.Context, req *AddOperatorByoSubdomainRequest, opts ...http.CallOption) (rsp *AddOperatorByoSubdomainResponse, err error)
+	AddOperatorContryConfig(ctx context.Context, req *AddOperatorContryConfigRequest, opts ...http.CallOption) (rsp *v1.AddOperatorContryConfigResponse, err error)
 	AddRegisterLoginBlacklist(ctx context.Context, req *AddRegisterLoginBlacklistRequest, opts ...http.CallOption) (rsp *v1.AddRegisterLoginBlacklistResponse, err error)
 	CreateOperator(ctx context.Context, req *CreateOperatorRequest, opts ...http.CallOption) (rsp *CreateOperatorResponse, err error)
 	DeleteOperatorBackofficeByoSubdomain(ctx context.Context, req *DeleteOperatorBackofficeByoSubdomainRequest, opts ...http.CallOption) (rsp *DeleteOperatorBackofficeByoSubdomainResponse, err error)
 	DeleteOperatorByoSubdomain(ctx context.Context, req *DeleteOperatorByoSubdomainRequest, opts ...http.CallOption) (rsp *DeleteOperatorByoSubdomainResponse, err error)
+	DeleteOperatorContryConfig(ctx context.Context, req *DeleteOperatorContryConfigRequest, opts ...http.CallOption) (rsp *v1.DeleteOperatorContryConfigResponse, err error)
 	DeleteRegisterLoginBlacklist(ctx context.Context, req *DeleteRegisterLoginBlacklistRequest, opts ...http.CallOption) (rsp *v1.DeleteRegisterLoginBlacklistResponse, err error)
 	GetCurrentOperatorDetails(ctx context.Context, req *GetCurrentOperatorDetailsRequest, opts ...http.CallOption) (rsp *GetCurrentOperatorDetailsResponse, err error)
 	GetOperatorAccountSettings(ctx context.Context, req *GetOperatorAccountSettingsRequest, opts ...http.CallOption) (rsp *v1.GetOperatorAccountSettingsResponse, err error)
+	GetOperatorContryConfig(ctx context.Context, req *GetOperatorContryConfigRequest, opts ...http.CallOption) (rsp *v1.GetOperatorContryConfigResponse, err error)
 	ListAllOperators(ctx context.Context, req *ListAllOperatorsRequest, opts ...http.CallOption) (rsp *ListAllOperatorsResponse, err error)
 	ListBottomOperators(ctx context.Context, req *ListBottomOperatorsRequest, opts ...http.CallOption) (rsp *ListBottomOperatorsResponse, err error)
 	ListCompanyOperators(ctx context.Context, req *ListCompanyOperatorsRequest, opts ...http.CallOption) (rsp *ListCompanyOperatorsResponse, err error)
@@ -507,6 +610,7 @@ type BackofficeOperatorHTTPClient interface {
 	ListRegisterLoginBlacklist(ctx context.Context, req *ListRegisterLoginBlacklistRequest, opts ...http.CallOption) (rsp *v1.ListRegisterLoginBlacklistResponse, err error)
 	ListRetailerOperators(ctx context.Context, req *ListRetailerOperatorsRequest, opts ...http.CallOption) (rsp *ListRetailerOperatorsResponse, err error)
 	UpdateOperatorAccountSettings(ctx context.Context, req *UpdateOperatorAccountSettingsRequest, opts ...http.CallOption) (rsp *v1.UpdateOperatorAccountSettingsResponse, err error)
+	UpdateOperatorContryConfig(ctx context.Context, req *UpdateOperatorContryConfigRequest, opts ...http.CallOption) (rsp *v1.UpdateOperatorContryConfigResponse, err error)
 	UpdateOperatorStatus(ctx context.Context, req *UpdateOperatorStatusRequest, opts ...http.CallOption) (rsp *UpdateOperatorStatusResponse, err error)
 }
 
@@ -536,6 +640,19 @@ func (c *BackofficeOperatorHTTPClientImpl) AddOperatorByoSubdomain(ctx context.C
 	pattern := "/v1/backoffice/operator/byo-subdomains/add"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeOperatorAddOperatorByoSubdomain))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeOperatorHTTPClientImpl) AddOperatorContryConfig(ctx context.Context, in *AddOperatorContryConfigRequest, opts ...http.CallOption) (*v1.AddOperatorContryConfigResponse, error) {
+	var out v1.AddOperatorContryConfigResponse
+	pattern := "/v1/backoffice/operator/country-config/add"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOperatorAddOperatorContryConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -596,6 +713,19 @@ func (c *BackofficeOperatorHTTPClientImpl) DeleteOperatorByoSubdomain(ctx contex
 	return &out, nil
 }
 
+func (c *BackofficeOperatorHTTPClientImpl) DeleteOperatorContryConfig(ctx context.Context, in *DeleteOperatorContryConfigRequest, opts ...http.CallOption) (*v1.DeleteOperatorContryConfigResponse, error) {
+	var out v1.DeleteOperatorContryConfigResponse
+	pattern := "/v1/backoffice/operator/country-config/delete"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOperatorDeleteOperatorContryConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *BackofficeOperatorHTTPClientImpl) DeleteRegisterLoginBlacklist(ctx context.Context, in *DeleteRegisterLoginBlacklistRequest, opts ...http.CallOption) (*v1.DeleteRegisterLoginBlacklistResponse, error) {
 	var out v1.DeleteRegisterLoginBlacklistResponse
 	pattern := "/v1/backoffice/operator/register-login-blacklist/delete"
@@ -627,6 +757,19 @@ func (c *BackofficeOperatorHTTPClientImpl) GetOperatorAccountSettings(ctx contex
 	pattern := "/v1/backoffice/operator/account-settings/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeOperatorGetOperatorAccountSettings))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeOperatorHTTPClientImpl) GetOperatorContryConfig(ctx context.Context, in *GetOperatorContryConfigRequest, opts ...http.CallOption) (*v1.GetOperatorContryConfigResponse, error) {
+	var out v1.GetOperatorContryConfigResponse
+	pattern := "/v1/backoffice/operator/country-config/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOperatorGetOperatorContryConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -731,6 +874,19 @@ func (c *BackofficeOperatorHTTPClientImpl) UpdateOperatorAccountSettings(ctx con
 	pattern := "/v1/backoffice/operator/account-settings/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeOperatorUpdateOperatorAccountSettings))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeOperatorHTTPClientImpl) UpdateOperatorContryConfig(ctx context.Context, in *UpdateOperatorContryConfigRequest, opts ...http.CallOption) (*v1.UpdateOperatorContryConfigResponse, error) {
+	var out v1.UpdateOperatorContryConfigResponse
+	pattern := "/v1/backoffice/operator/country-config/update"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOperatorUpdateOperatorContryConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
