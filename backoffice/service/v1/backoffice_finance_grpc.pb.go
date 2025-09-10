@@ -37,6 +37,9 @@ const (
 	BackofficeFinance_ListBillingPeriods_FullMethodName              = "/api.backoffice.service.v1.BackofficeFinance/ListBillingPeriods"
 	BackofficeFinance_ListBalanceMonthlyRevenueShares_FullMethodName = "/api.backoffice.service.v1.BackofficeFinance/ListBalanceMonthlyRevenueShares"
 	BackofficeFinance_ListBalancesSummary_FullMethodName             = "/api.backoffice.service.v1.BackofficeFinance/ListBalancesSummary"
+	BackofficeFinance_GetTaxReportConfig_FullMethodName              = "/api.backoffice.service.v1.BackofficeFinance/GetTaxReportConfig"
+	BackofficeFinance_UpdateTaxReportConfig_FullMethodName           = "/api.backoffice.service.v1.BackofficeFinance/UpdateTaxReportConfig"
+	BackofficeFinance_ListTaxReports_FullMethodName                  = "/api.backoffice.service.v1.BackofficeFinance/ListTaxReports"
 )
 
 // BackofficeFinanceClient is the client API for BackofficeFinance service.
@@ -61,6 +64,9 @@ type BackofficeFinanceClient interface {
 	ListBillingPeriods(ctx context.Context, in *ListBillingPeriodsRequest, opts ...grpc.CallOption) (*ListBillingPeriodsResponse, error)
 	ListBalanceMonthlyRevenueShares(ctx context.Context, in *ListBalanceMonthlyRevenueSharesRequest, opts ...grpc.CallOption) (*ListBalanceMonthlyRevenueSharesResponse, error)
 	ListBalancesSummary(ctx context.Context, in *ListBalancesSummaryRequest, opts ...grpc.CallOption) (*ListBalancesSummaryResponse, error)
+	GetTaxReportConfig(ctx context.Context, in *GetTaxReportConfigRequest, opts ...grpc.CallOption) (*GetTaxReportConfigResponse, error)
+	UpdateTaxReportConfig(ctx context.Context, in *UpdateTaxReportConfigRequest, opts ...grpc.CallOption) (*UpdateTaxReportConfigResponse, error)
+	ListTaxReports(ctx context.Context, in *ListTaxReportsRequest, opts ...grpc.CallOption) (*ListTaxReportsResponse, error)
 }
 
 type backofficeFinanceClient struct {
@@ -251,6 +257,36 @@ func (c *backofficeFinanceClient) ListBalancesSummary(ctx context.Context, in *L
 	return out, nil
 }
 
+func (c *backofficeFinanceClient) GetTaxReportConfig(ctx context.Context, in *GetTaxReportConfigRequest, opts ...grpc.CallOption) (*GetTaxReportConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTaxReportConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeFinance_GetTaxReportConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeFinanceClient) UpdateTaxReportConfig(ctx context.Context, in *UpdateTaxReportConfigRequest, opts ...grpc.CallOption) (*UpdateTaxReportConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateTaxReportConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeFinance_UpdateTaxReportConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeFinanceClient) ListTaxReports(ctx context.Context, in *ListTaxReportsRequest, opts ...grpc.CallOption) (*ListTaxReportsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListTaxReportsResponse)
+	err := c.cc.Invoke(ctx, BackofficeFinance_ListTaxReports_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeFinanceServer is the server API for BackofficeFinance service.
 // All implementations must embed UnimplementedBackofficeFinanceServer
 // for forward compatibility.
@@ -273,6 +309,9 @@ type BackofficeFinanceServer interface {
 	ListBillingPeriods(context.Context, *ListBillingPeriodsRequest) (*ListBillingPeriodsResponse, error)
 	ListBalanceMonthlyRevenueShares(context.Context, *ListBalanceMonthlyRevenueSharesRequest) (*ListBalanceMonthlyRevenueSharesResponse, error)
 	ListBalancesSummary(context.Context, *ListBalancesSummaryRequest) (*ListBalancesSummaryResponse, error)
+	GetTaxReportConfig(context.Context, *GetTaxReportConfigRequest) (*GetTaxReportConfigResponse, error)
+	UpdateTaxReportConfig(context.Context, *UpdateTaxReportConfigRequest) (*UpdateTaxReportConfigResponse, error)
+	ListTaxReports(context.Context, *ListTaxReportsRequest) (*ListTaxReportsResponse, error)
 	mustEmbedUnimplementedBackofficeFinanceServer()
 }
 
@@ -336,6 +375,15 @@ func (UnimplementedBackofficeFinanceServer) ListBalanceMonthlyRevenueShares(cont
 }
 func (UnimplementedBackofficeFinanceServer) ListBalancesSummary(context.Context, *ListBalancesSummaryRequest) (*ListBalancesSummaryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBalancesSummary not implemented")
+}
+func (UnimplementedBackofficeFinanceServer) GetTaxReportConfig(context.Context, *GetTaxReportConfigRequest) (*GetTaxReportConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTaxReportConfig not implemented")
+}
+func (UnimplementedBackofficeFinanceServer) UpdateTaxReportConfig(context.Context, *UpdateTaxReportConfigRequest) (*UpdateTaxReportConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTaxReportConfig not implemented")
+}
+func (UnimplementedBackofficeFinanceServer) ListTaxReports(context.Context, *ListTaxReportsRequest) (*ListTaxReportsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTaxReports not implemented")
 }
 func (UnimplementedBackofficeFinanceServer) mustEmbedUnimplementedBackofficeFinanceServer() {}
 func (UnimplementedBackofficeFinanceServer) testEmbeddedByValue()                           {}
@@ -682,6 +730,60 @@ func _BackofficeFinance_ListBalancesSummary_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeFinance_GetTaxReportConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTaxReportConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeFinanceServer).GetTaxReportConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeFinance_GetTaxReportConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeFinanceServer).GetTaxReportConfig(ctx, req.(*GetTaxReportConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeFinance_UpdateTaxReportConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTaxReportConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeFinanceServer).UpdateTaxReportConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeFinance_UpdateTaxReportConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeFinanceServer).UpdateTaxReportConfig(ctx, req.(*UpdateTaxReportConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeFinance_ListTaxReports_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListTaxReportsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeFinanceServer).ListTaxReports(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeFinance_ListTaxReports_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeFinanceServer).ListTaxReports(ctx, req.(*ListTaxReportsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeFinance_ServiceDesc is the grpc.ServiceDesc for BackofficeFinance service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -760,6 +862,18 @@ var BackofficeFinance_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListBalancesSummary",
 			Handler:    _BackofficeFinance_ListBalancesSummary_Handler,
+		},
+		{
+			MethodName: "GetTaxReportConfig",
+			Handler:    _BackofficeFinance_GetTaxReportConfig_Handler,
+		},
+		{
+			MethodName: "UpdateTaxReportConfig",
+			Handler:    _BackofficeFinance_UpdateTaxReportConfig_Handler,
+		},
+		{
+			MethodName: "ListTaxReports",
+			Handler:    _BackofficeFinance_ListTaxReports_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

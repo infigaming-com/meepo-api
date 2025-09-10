@@ -131,6 +131,8 @@ func (m *UserInfo) validate(all bool) error {
 
 	}
 
+	// no validation rules for Country
+
 	if len(errors) > 0 {
 		return UserInfoMultiError(errors)
 	}

@@ -1127,6 +1127,60 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorRevenueShareResponse'
+    /v1/backoffice/finance/tax-report-configs/get:
+        post:
+            tags:
+                - BackofficeFinance
+            operationId: BackofficeFinance_GetTaxReportConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTaxReportConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetTaxReportConfigResponse'
+    /v1/backoffice/finance/tax-report-configs/update:
+        post:
+            tags:
+                - BackofficeFinance
+            operationId: BackofficeFinance_UpdateTaxReportConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateTaxReportConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateTaxReportConfigResponse'
+    /v1/backoffice/finance/tax-reports/list:
+        post:
+            tags:
+                - BackofficeFinance
+            operationId: BackofficeFinance_ListTaxReports
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListTaxReportsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListTaxReportsResponse'
     /v1/backoffice/finance/third-party-fees/list:
         post:
             tags:
@@ -5770,6 +5824,17 @@ components:
                     type: string
                 arppuReportingCurrency:
                     type: string
+        api.backoffice.service.v1.GetTaxReportConfigRequest:
+            type: object
+            properties:
+                type:
+                    type: string
+        api.backoffice.service.v1.GetTaxReportConfigResponse:
+            type: object
+            properties:
+                config:
+                    type: string
+                    description: "config is a json string\n example:\n {\n\t\"report_type\": {\n\t\t\"horse_racing_tax_return\": true,\n\t\t\"sports_tax_return\": true,\n\t\t\"other_contingencies_tax_return\": false\n\t}\n\t\"timezone\": \"UTC+0\",\n\t\"report_generation_time\": {\n\t\t\"monthly\": \"2nd of each month\",\n\t\t\"quarterly\": \"2nd of each quarter\", \n\t\t\"yearly\": \"2nd of each year\"\n\t},\n\t\"tax_currency\": \"ZAR\",\n\t\"user_registration_countries\": [\"US\", \"ZA\", \"TR\", \"VN\"],\n\t\"user_currencies\": [\"USD\", \"EUR\", \"INR\", \"ZAR\", \"USDT\"],\n  \"vat_payable\": 6.5,\n  \"tax_for_sportsbook\": 6.5,\n  \"tax_for_other_contingencies\": 6.5,\n  \"tax_for_horse_racing\": 6.5,\n\t}"
         api.backoffice.service.v1.GetTicketRequest:
             type: object
             properties:
@@ -8607,6 +8672,81 @@ components:
                     type: array
                     items:
                         type: string
+        api.backoffice.service.v1.ListTaxReportsRequest:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                taxPeriod:
+                    type: string
+                licenseProvider:
+                    type: string
+                    description: 'license_provider: south_afirca'
+        api.backoffice.service.v1.ListTaxReportsResponse:
+            type: object
+            properties:
+                taxReports:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListTaxReportsResponse_TaxReport'
+                totalCount:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListTaxReportsResponse_TaxReport:
+            type: object
+            properties:
+                licensedProvider:
+                    type: string
+                    description: Basic information
+                licensedOperator:
+                    type: string
+                taxPeriod:
+                    type: string
+                depositDate:
+                    type: string
+                    description: Deposit information
+                depositSlipNo:
+                    type: string
+                refCode:
+                    type: string
+                holdTotalStake:
+                    type: string
+                    description: Financial data (all amounts in ZAR)
+                winningStakes:
+                    type: string
+                punterWinningsLoss:
+                    type: string
+                profitLoss:
+                    type: string
+                totalTaxLevy:
+                    type: string
+                vatPayableReceivable:
+                    type: string
+                eventCalculations:
+                    type: string
+                declarationStatus:
+                    enum:
+                        - DECLARATION_STATUS_UNSPECIFIED
+                        - DECLARATION_STATUS_PENDING
+                        - DECLARATION_STATUS_CONFIRMED
+                        - DECLARATION_STATUS_DRAFT
+                    type: string
+                    format: enum
+                createdAt:
+                    type: string
+                    description: Timestamps
+                updatedAt:
+                    type: string
         api.backoffice.service.v1.ListThemesRequest:
             type: object
             properties: {}
@@ -9885,6 +10025,18 @@ components:
             properties:
                 currency:
                     $ref: '#/components/schemas/api.backoffice.service.v1.SystemCurrency'
+        api.backoffice.service.v1.UpdateTaxReportConfigRequest:
+            type: object
+            properties:
+                type:
+                    type: string
+                    description: 'type: south_afirca'
+                config:
+                    type: string
+                    description: "config is a json string\n example:\n {\n\t\"report_type\": {\n\t\t\"horse_racing_tax_return\": true,\n\t\t\"sports_tax_return\": true,\n\t\t\"other_contingencies_tax_return\": false\n\t}\n\t\"timezone\": \"UTC+0\",\n\t\"report_generation_time\": {\n\t\t\"monthly\": \"2nd of each month\",\n\t\t\"quarterly\": \"2nd of each quarter\", \n\t\t\"yearly\": \"2nd of each year\"\n\t},\n\t\"tax_currency\": \"ZAR\",\n\t\"user_registration_countries\": [\"US\", \"ZA\", \"TR\", \"VN\"],\n\t\"user_currencies\": [\"USD\", \"EUR\", \"INR\", \"ZAR\", \"USDT\"],\n  \"vat_payable\": 6.5,\n  \"tax_for_sportsbook\": 6.5,\n  \"tax_for_other_contingencies\": 6.5,\n  \"tax_for_horse_racing\": 6.5,\n\t}"
+        api.backoffice.service.v1.UpdateTaxReportConfigResponse:
+            type: object
+            properties: {}
         api.backoffice.service.v1.UpdateUserRequest:
             type: object
             properties:
@@ -12426,6 +12578,9 @@ components:
                     items:
                         $ref: '#/components/schemas/api.user.service.v1.UserIdentity'
                     description: uesr identities
+                country:
+                    type: string
+                    description: user country
             description: UserInfo contains basic user information.
         api.vip.service.v1.ClaimVipRewardRequest:
             type: object

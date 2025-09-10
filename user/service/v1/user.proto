@@ -340,6 +340,8 @@ message UserInfo {
 	string address = 20;
 	// uesr identities
 	repeated UserIdentity user_identity = 21;
+	// user country
+	string country = 22;
 }
 
 // AuthType defines the type of authentication method.
