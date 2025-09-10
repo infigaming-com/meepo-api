@@ -1722,6 +1722,60 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListRetailerOperatorsResponse'
+    /v1/backoffice/operator/register-login-blacklist/add:
+        post:
+            tags:
+                - BackofficeOperator
+            operationId: BackofficeOperator_AddRegisterLoginBlacklist
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AddRegisterLoginBlacklistRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.AddRegisterLoginBlacklistResponse'
+    /v1/backoffice/operator/register-login-blacklist/delete:
+        post:
+            tags:
+                - BackofficeOperator
+            operationId: BackofficeOperator_DeleteRegisterLoginBlacklist
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteRegisterLoginBlacklistRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.DeleteRegisterLoginBlacklistResponse'
+    /v1/backoffice/operator/register-login-blacklist/list:
+        post:
+            tags:
+                - BackofficeOperator
+            operationId: BackofficeOperator_ListRegisterLoginBlacklist
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListRegisterLoginBlacklistRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.ListRegisterLoginBlacklistResponse'
     /v1/backoffice/operator/status/update:
         post:
             tags:
@@ -4652,6 +4706,15 @@ components:
         api.backoffice.service.v1.AddOperatorByoSubdomainResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.AddRegisterLoginBlacklistRequest:
+            type: object
+            properties:
+                idType:
+                    type: string
+                id:
+                    type: array
+                    items:
+                        type: string
         api.backoffice.service.v1.AddSystemCurrencyRequest:
             type: object
             properties:
@@ -5129,6 +5192,15 @@ components:
         api.backoffice.service.v1.DeleteOperatorByoSubdomainResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.DeleteRegisterLoginBlacklistRequest:
+            type: object
+            properties:
+                idType:
+                    type: string
+                id:
+                    type: array
+                    items:
+                        type: string
         api.backoffice.service.v1.DeleteRoleRequest:
             type: object
             properties:
@@ -8094,6 +8166,17 @@ components:
                     format: int32
                 enabled:
                     type: boolean
+        api.backoffice.service.v1.ListRegisterLoginBlacklistRequest:
+            type: object
+            properties:
+                idType:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListRegisterRetentionRequest:
             type: object
             properties:
@@ -11770,6 +11853,9 @@ components:
         api.user.service.v1.AddOperatorByoDomainResponse:
             type: object
             properties: {}
+        api.user.service.v1.AddRegisterLoginBlacklistResponse:
+            type: object
+            properties: {}
         api.user.service.v1.AddResponsibleGamblingConfigRequest:
             type: object
             properties:
@@ -11828,6 +11914,9 @@ components:
                     type: string
                     format: date-time
         api.user.service.v1.DeleteOperatorByoDomainResponse:
+            type: object
+            properties: {}
+        api.user.service.v1.DeleteRegisterLoginBlacklistResponse:
             type: object
             properties: {}
         api.user.service.v1.DeleteResponsibleGamblingConfigRequest:
@@ -12086,6 +12175,30 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.user.service.v1.OperatorDetails'
+        api.user.service.v1.ListRegisterLoginBlacklistResponse:
+            type: object
+            properties:
+                registerLoginBlacklists:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.ListRegisterLoginBlacklistResponse_RegisterLoginBlacklist'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+        api.user.service.v1.ListRegisterLoginBlacklistResponse_RegisterLoginBlacklist:
+            type: object
+            properties:
+                id:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
         api.user.service.v1.LoginRequest:
             type: object
             properties:
