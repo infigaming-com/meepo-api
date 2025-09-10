@@ -19,41 +19,41 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationUserFileStoreUploadOperatorStaticFile = "/api.user.service.v1.UserFileStore/UploadOperatorStaticFile"
+const OperationUserFileStoreUploadKycFile = "/api.user.service.v1.UserFileStore/UploadKycFile"
 
 type UserFileStoreHTTPServer interface {
-	UploadOperatorStaticFile(context.Context, *UploadOperatorStaticFileRequest) (*UploadOperatorStaticFileResponse, error)
+	UploadKycFile(context.Context, *UploadKycRequest) (*UploadKycResponse, error)
 }
 
 func RegisterUserFileStoreHTTPServer(s *http.Server, srv UserFileStoreHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/user/kyc/filestore/upload", _UserFileStore_UploadOperatorStaticFile0_HTTP_Handler(srv))
+	r.POST("/v1/user/kyc/filestore/upload", _UserFileStore_UploadKycFile0_HTTP_Handler(srv))
 }
 
-func _UserFileStore_UploadOperatorStaticFile0_HTTP_Handler(srv UserFileStoreHTTPServer) func(ctx http.Context) error {
+func _UserFileStore_UploadKycFile0_HTTP_Handler(srv UserFileStoreHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in UploadOperatorStaticFileRequest
+		var in UploadKycRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationUserFileStoreUploadOperatorStaticFile)
+		http.SetOperation(ctx, OperationUserFileStoreUploadKycFile)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.UploadOperatorStaticFile(ctx, req.(*UploadOperatorStaticFileRequest))
+			return srv.UploadKycFile(ctx, req.(*UploadKycRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*UploadOperatorStaticFileResponse)
+		reply := out.(*UploadKycResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
 type UserFileStoreHTTPClient interface {
-	UploadOperatorStaticFile(ctx context.Context, req *UploadOperatorStaticFileRequest, opts ...http.CallOption) (rsp *UploadOperatorStaticFileResponse, err error)
+	UploadKycFile(ctx context.Context, req *UploadKycRequest, opts ...http.CallOption) (rsp *UploadKycResponse, err error)
 }
 
 type UserFileStoreHTTPClientImpl struct {
@@ -64,11 +64,11 @@ func NewUserFileStoreHTTPClient(client *http.Client) UserFileStoreHTTPClient {
 	return &UserFileStoreHTTPClientImpl{client}
 }
 
-func (c *UserFileStoreHTTPClientImpl) UploadOperatorStaticFile(ctx context.Context, in *UploadOperatorStaticFileRequest, opts ...http.CallOption) (*UploadOperatorStaticFileResponse, error) {
-	var out UploadOperatorStaticFileResponse
+func (c *UserFileStoreHTTPClientImpl) UploadKycFile(ctx context.Context, in *UploadKycRequest, opts ...http.CallOption) (*UploadKycResponse, error) {
+	var out UploadKycResponse
 	pattern := "/v1/user/kyc/filestore/upload"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationUserFileStoreUploadOperatorStaticFile))
+	opts = append(opts, http.Operation(OperationUserFileStoreUploadKycFile))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

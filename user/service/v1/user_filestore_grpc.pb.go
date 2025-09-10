@@ -19,14 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	UserFileStore_UploadOperatorStaticFile_FullMethodName = "/api.user.service.v1.UserFileStore/UploadOperatorStaticFile"
+	UserFileStore_UploadKycFile_FullMethodName = "/api.user.service.v1.UserFileStore/UploadKycFile"
 )
 
 // UserFileStoreClient is the client API for UserFileStore service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserFileStoreClient interface {
-	UploadOperatorStaticFile(ctx context.Context, in *UploadOperatorStaticFileRequest, opts ...grpc.CallOption) (*UploadOperatorStaticFileResponse, error)
+	UploadKycFile(ctx context.Context, in *UploadKycRequest, opts ...grpc.CallOption) (*UploadKycResponse, error)
 }
 
 type userFileStoreClient struct {
@@ -37,10 +37,10 @@ func NewUserFileStoreClient(cc grpc.ClientConnInterface) UserFileStoreClient {
 	return &userFileStoreClient{cc}
 }
 
-func (c *userFileStoreClient) UploadOperatorStaticFile(ctx context.Context, in *UploadOperatorStaticFileRequest, opts ...grpc.CallOption) (*UploadOperatorStaticFileResponse, error) {
+func (c *userFileStoreClient) UploadKycFile(ctx context.Context, in *UploadKycRequest, opts ...grpc.CallOption) (*UploadKycResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UploadOperatorStaticFileResponse)
-	err := c.cc.Invoke(ctx, UserFileStore_UploadOperatorStaticFile_FullMethodName, in, out, cOpts...)
+	out := new(UploadKycResponse)
+	err := c.cc.Invoke(ctx, UserFileStore_UploadKycFile_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ func (c *userFileStoreClient) UploadOperatorStaticFile(ctx context.Context, in *
 // All implementations must embed UnimplementedUserFileStoreServer
 // for forward compatibility.
 type UserFileStoreServer interface {
-	UploadOperatorStaticFile(context.Context, *UploadOperatorStaticFileRequest) (*UploadOperatorStaticFileResponse, error)
+	UploadKycFile(context.Context, *UploadKycRequest) (*UploadKycResponse, error)
 	mustEmbedUnimplementedUserFileStoreServer()
 }
 
@@ -62,8 +62,8 @@ type UserFileStoreServer interface {
 // pointer dereference when methods are called.
 type UnimplementedUserFileStoreServer struct{}
 
-func (UnimplementedUserFileStoreServer) UploadOperatorStaticFile(context.Context, *UploadOperatorStaticFileRequest) (*UploadOperatorStaticFileResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UploadOperatorStaticFile not implemented")
+func (UnimplementedUserFileStoreServer) UploadKycFile(context.Context, *UploadKycRequest) (*UploadKycResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UploadKycFile not implemented")
 }
 func (UnimplementedUserFileStoreServer) mustEmbedUnimplementedUserFileStoreServer() {}
 func (UnimplementedUserFileStoreServer) testEmbeddedByValue()                       {}
@@ -86,20 +86,20 @@ func RegisterUserFileStoreServer(s grpc.ServiceRegistrar, srv UserFileStoreServe
 	s.RegisterService(&UserFileStore_ServiceDesc, srv)
 }
 
-func _UserFileStore_UploadOperatorStaticFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UploadOperatorStaticFileRequest)
+func _UserFileStore_UploadKycFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UploadKycRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserFileStoreServer).UploadOperatorStaticFile(ctx, in)
+		return srv.(UserFileStoreServer).UploadKycFile(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UserFileStore_UploadOperatorStaticFile_FullMethodName,
+		FullMethod: UserFileStore_UploadKycFile_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserFileStoreServer).UploadOperatorStaticFile(ctx, req.(*UploadOperatorStaticFileRequest))
+		return srv.(UserFileStoreServer).UploadKycFile(ctx, req.(*UploadKycRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -112,8 +112,8 @@ var UserFileStore_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*UserFileStoreServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "UploadOperatorStaticFile",
-			Handler:    _UserFileStore_UploadOperatorStaticFile_Handler,
+			MethodName: "UploadKycFile",
+			Handler:    _UserFileStore_UploadKycFile_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

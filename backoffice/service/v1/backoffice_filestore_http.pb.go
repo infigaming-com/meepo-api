@@ -27,10 +27,10 @@ type BackofficeFileStoreHTTPServer interface {
 
 func RegisterBackofficeFileStoreHTTPServer(s *http.Server, srv BackofficeFileStoreHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/backoffice/filestore/operator-static-files/upload", _BackofficeFileStore_UploadOperatorStaticFile1_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/filestore/operator-static-files/upload", _BackofficeFileStore_UploadOperatorStaticFile0_HTTP_Handler(srv))
 }
 
-func _BackofficeFileStore_UploadOperatorStaticFile1_HTTP_Handler(srv BackofficeFileStoreHTTPServer) func(ctx http.Context) error {
+func _BackofficeFileStore_UploadOperatorStaticFile0_HTTP_Handler(srv BackofficeFileStoreHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in UploadOperatorStaticFileRequest
 		if err := ctx.Bind(&in); err != nil {

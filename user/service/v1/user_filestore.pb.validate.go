@@ -35,22 +35,22 @@ var (
 	_ = sort.Sort
 )
 
-// Validate checks the field values on UploadOperatorStaticFileRequest with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *UploadOperatorStaticFileRequest) Validate() error {
+// Validate checks the field values on UploadKycRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *UploadKycRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on UploadOperatorStaticFileRequest with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the result is a list of violation errors wrapped in
-// UploadOperatorStaticFileRequestMultiError, or nil if none found.
-func (m *UploadOperatorStaticFileRequest) ValidateAll() error {
+// ValidateAll checks the field values on UploadKycRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UploadKycRequestMultiError, or nil if none found.
+func (m *UploadKycRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *UploadOperatorStaticFileRequest) validate(all bool) error {
+func (m *UploadKycRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -64,19 +64,19 @@ func (m *UploadOperatorStaticFileRequest) validate(all bool) error {
 	// no validation rules for IdType
 
 	if len(errors) > 0 {
-		return UploadOperatorStaticFileRequestMultiError(errors)
+		return UploadKycRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// UploadOperatorStaticFileRequestMultiError is an error wrapping multiple
-// validation errors returned by UploadOperatorStaticFileRequest.ValidateAll()
-// if the designated constraints aren't met.
-type UploadOperatorStaticFileRequestMultiError []error
+// UploadKycRequestMultiError is an error wrapping multiple validation errors
+// returned by UploadKycRequest.ValidateAll() if the designated constraints
+// aren't met.
+type UploadKycRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m UploadOperatorStaticFileRequestMultiError) Error() string {
+func (m UploadKycRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -85,12 +85,11 @@ func (m UploadOperatorStaticFileRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m UploadOperatorStaticFileRequestMultiError) AllErrors() []error { return m }
+func (m UploadKycRequestMultiError) AllErrors() []error { return m }
 
-// UploadOperatorStaticFileRequestValidationError is the validation error
-// returned by UploadOperatorStaticFileRequest.Validate if the designated
-// constraints aren't met.
-type UploadOperatorStaticFileRequestValidationError struct {
+// UploadKycRequestValidationError is the validation error returned by
+// UploadKycRequest.Validate if the designated constraints aren't met.
+type UploadKycRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -98,24 +97,22 @@ type UploadOperatorStaticFileRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e UploadOperatorStaticFileRequestValidationError) Field() string { return e.field }
+func (e UploadKycRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e UploadOperatorStaticFileRequestValidationError) Reason() string { return e.reason }
+func (e UploadKycRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e UploadOperatorStaticFileRequestValidationError) Cause() error { return e.cause }
+func (e UploadKycRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e UploadOperatorStaticFileRequestValidationError) Key() bool { return e.key }
+func (e UploadKycRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e UploadOperatorStaticFileRequestValidationError) ErrorName() string {
-	return "UploadOperatorStaticFileRequestValidationError"
-}
+func (e UploadKycRequestValidationError) ErrorName() string { return "UploadKycRequestValidationError" }
 
 // Error satisfies the builtin error interface
-func (e UploadOperatorStaticFileRequestValidationError) Error() string {
+func (e UploadKycRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -127,14 +124,14 @@ func (e UploadOperatorStaticFileRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sUploadOperatorStaticFileRequest.%s: %s%s",
+		"invalid %sUploadKycRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = UploadOperatorStaticFileRequestValidationError{}
+var _ error = UploadKycRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -142,25 +139,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = UploadOperatorStaticFileRequestValidationError{}
+} = UploadKycRequestValidationError{}
 
-// Validate checks the field values on UploadOperatorStaticFileResponse with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *UploadOperatorStaticFileResponse) Validate() error {
+// Validate checks the field values on UploadKycResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *UploadKycResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on UploadOperatorStaticFileResponse with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the result is a list of violation errors wrapped in
-// UploadOperatorStaticFileResponseMultiError, or nil if none found.
-func (m *UploadOperatorStaticFileResponse) ValidateAll() error {
+// ValidateAll checks the field values on UploadKycResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UploadKycResponseMultiError, or nil if none found.
+func (m *UploadKycResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *UploadOperatorStaticFileResponse) validate(all bool) error {
+func (m *UploadKycResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -168,20 +164,19 @@ func (m *UploadOperatorStaticFileResponse) validate(all bool) error {
 	var errors []error
 
 	if len(errors) > 0 {
-		return UploadOperatorStaticFileResponseMultiError(errors)
+		return UploadKycResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// UploadOperatorStaticFileResponseMultiError is an error wrapping multiple
-// validation errors returned by
-// UploadOperatorStaticFileResponse.ValidateAll() if the designated
-// constraints aren't met.
-type UploadOperatorStaticFileResponseMultiError []error
+// UploadKycResponseMultiError is an error wrapping multiple validation errors
+// returned by UploadKycResponse.ValidateAll() if the designated constraints
+// aren't met.
+type UploadKycResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m UploadOperatorStaticFileResponseMultiError) Error() string {
+func (m UploadKycResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -190,12 +185,11 @@ func (m UploadOperatorStaticFileResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m UploadOperatorStaticFileResponseMultiError) AllErrors() []error { return m }
+func (m UploadKycResponseMultiError) AllErrors() []error { return m }
 
-// UploadOperatorStaticFileResponseValidationError is the validation error
-// returned by UploadOperatorStaticFileResponse.Validate if the designated
-// constraints aren't met.
-type UploadOperatorStaticFileResponseValidationError struct {
+// UploadKycResponseValidationError is the validation error returned by
+// UploadKycResponse.Validate if the designated constraints aren't met.
+type UploadKycResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -203,24 +197,24 @@ type UploadOperatorStaticFileResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e UploadOperatorStaticFileResponseValidationError) Field() string { return e.field }
+func (e UploadKycResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e UploadOperatorStaticFileResponseValidationError) Reason() string { return e.reason }
+func (e UploadKycResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e UploadOperatorStaticFileResponseValidationError) Cause() error { return e.cause }
+func (e UploadKycResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e UploadOperatorStaticFileResponseValidationError) Key() bool { return e.key }
+func (e UploadKycResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e UploadOperatorStaticFileResponseValidationError) ErrorName() string {
-	return "UploadOperatorStaticFileResponseValidationError"
+func (e UploadKycResponseValidationError) ErrorName() string {
+	return "UploadKycResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e UploadOperatorStaticFileResponseValidationError) Error() string {
+func (e UploadKycResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -232,14 +226,14 @@ func (e UploadOperatorStaticFileResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sUploadOperatorStaticFileResponse.%s: %s%s",
+		"invalid %sUploadKycResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = UploadOperatorStaticFileResponseValidationError{}
+var _ error = UploadKycResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -247,4 +241,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = UploadOperatorStaticFileResponseValidationError{}
+} = UploadKycResponseValidationError{}

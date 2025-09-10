@@ -4239,12 +4239,12 @@ paths:
         post:
             tags:
                 - UserFileStore
-            operationId: UserFileStore_UploadOperatorStaticFile
+            operationId: UserFileStore_UploadKycFile
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.user.service.v1.UploadOperatorStaticFileRequest'
+                            $ref: '#/components/schemas/api.user.service.v1.UploadKycRequest'
                 required: true
             responses:
                 "200":
@@ -4252,7 +4252,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.user.service.v1.UploadOperatorStaticFileResponse'
+                                $ref: '#/components/schemas/api.user.service.v1.UploadKycResponse'
     /v1/user/operator/account-settings/get:
         post:
             tags:
@@ -12796,7 +12796,7 @@ components:
         api.user.service.v1.UpdateUserResponse:
             type: object
             properties: {}
-        api.user.service.v1.UploadOperatorStaticFileRequest:
+        api.user.service.v1.UploadKycRequest:
             type: object
             properties:
                 data:
@@ -12806,7 +12806,7 @@ components:
                     type: string
                 idType:
                     type: string
-        api.user.service.v1.UploadOperatorStaticFileResponse:
+        api.user.service.v1.UploadKycResponse:
             type: object
             properties: {}
         api.user.service.v1.UserIdentity:

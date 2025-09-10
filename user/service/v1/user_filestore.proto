@@ -9,7 +9,7 @@ option java_multiple_files = true;
 option java_package = "api.user.service.v1";
 
 service UserFileStore {
-    rpc UploadOperatorStaticFile(UploadOperatorStaticFileRequest) returns (UploadOperatorStaticFileResponse) {
+    rpc UploadKycFile(UploadKycRequest) returns (UploadKycResponse) {
 		option (google.api.http) = {
 			post: "/v1/user/kyc/filestore/upload"
 			body: "*"
@@ -17,10 +17,10 @@ service UserFileStore {
 	}
 }
 
-message UploadOperatorStaticFileRequest {
+message UploadKycRequest {
 	bytes data = 1;
 	string content_type = 2;
 	string id_type = 3;
 }
 
-message UploadOperatorStaticFileResponse {}
+message UploadKycResponse {}

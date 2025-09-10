@@ -22,7 +22,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type UploadOperatorStaticFileRequest struct {
+type UploadKycRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Data          []byte                 `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
 	ContentType   string                 `protobuf:"bytes,2,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"`
@@ -31,20 +31,20 @@ type UploadOperatorStaticFileRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UploadOperatorStaticFileRequest) Reset() {
-	*x = UploadOperatorStaticFileRequest{}
+func (x *UploadKycRequest) Reset() {
+	*x = UploadKycRequest{}
 	mi := &file_user_service_v1_user_filestore_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UploadOperatorStaticFileRequest) String() string {
+func (x *UploadKycRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UploadOperatorStaticFileRequest) ProtoMessage() {}
+func (*UploadKycRequest) ProtoMessage() {}
 
-func (x *UploadOperatorStaticFileRequest) ProtoReflect() protoreflect.Message {
+func (x *UploadKycRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_user_service_v1_user_filestore_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -56,52 +56,52 @@ func (x *UploadOperatorStaticFileRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UploadOperatorStaticFileRequest.ProtoReflect.Descriptor instead.
-func (*UploadOperatorStaticFileRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use UploadKycRequest.ProtoReflect.Descriptor instead.
+func (*UploadKycRequest) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_filestore_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *UploadOperatorStaticFileRequest) GetData() []byte {
+func (x *UploadKycRequest) GetData() []byte {
 	if x != nil {
 		return x.Data
 	}
 	return nil
 }
 
-func (x *UploadOperatorStaticFileRequest) GetContentType() string {
+func (x *UploadKycRequest) GetContentType() string {
 	if x != nil {
 		return x.ContentType
 	}
 	return ""
 }
 
-func (x *UploadOperatorStaticFileRequest) GetIdType() string {
+func (x *UploadKycRequest) GetIdType() string {
 	if x != nil {
 		return x.IdType
 	}
 	return ""
 }
 
-type UploadOperatorStaticFileResponse struct {
+type UploadKycResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UploadOperatorStaticFileResponse) Reset() {
-	*x = UploadOperatorStaticFileResponse{}
+func (x *UploadKycResponse) Reset() {
+	*x = UploadKycResponse{}
 	mi := &file_user_service_v1_user_filestore_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UploadOperatorStaticFileResponse) String() string {
+func (x *UploadKycResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UploadOperatorStaticFileResponse) ProtoMessage() {}
+func (*UploadKycResponse) ProtoMessage() {}
 
-func (x *UploadOperatorStaticFileResponse) ProtoReflect() protoreflect.Message {
+func (x *UploadKycResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_user_service_v1_user_filestore_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -113,8 +113,8 @@ func (x *UploadOperatorStaticFileResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UploadOperatorStaticFileResponse.ProtoReflect.Descriptor instead.
-func (*UploadOperatorStaticFileResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use UploadKycResponse.ProtoReflect.Descriptor instead.
+func (*UploadKycResponse) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_filestore_proto_rawDescGZIP(), []int{1}
 }
 
@@ -122,14 +122,14 @@ var File_user_service_v1_user_filestore_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_user_filestore_proto_rawDesc = "" +
 	"\n" +
-	"$user/service/v1/user_filestore.proto\x12\x13api.user.service.v1\x1a\x1cgoogle/api/annotations.proto\"q\n" +
-	"\x1fUploadOperatorStaticFileRequest\x12\x12\n" +
+	"$user/service/v1/user_filestore.proto\x12\x13api.user.service.v1\x1a\x1cgoogle/api/annotations.proto\"b\n" +
+	"\x10UploadKycRequest\x12\x12\n" +
 	"\x04data\x18\x01 \x01(\fR\x04data\x12!\n" +
 	"\fcontent_type\x18\x02 \x01(\tR\vcontentType\x12\x17\n" +
-	"\aid_type\x18\x03 \x01(\tR\x06idType\"\"\n" +
-	" UploadOperatorStaticFileResponse2\xc3\x01\n" +
-	"\rUserFileStore\x12\xb1\x01\n" +
-	"\x18UploadOperatorStaticFile\x124.api.user.service.v1.UploadOperatorStaticFileRequest\x1a5.api.user.service.v1.UploadOperatorStaticFileResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v1/user/kyc/filestore/uploadBO\n" +
+	"\aid_type\x18\x03 \x01(\tR\x06idType\"\x13\n" +
+	"\x11UploadKycResponse2\x9a\x01\n" +
+	"\rUserFileStore\x12\x88\x01\n" +
+	"\rUploadKycFile\x12%.api.user.service.v1.UploadKycRequest\x1a&.api.user.service.v1.UploadKycResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v1/user/kyc/filestore/uploadBO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
@@ -146,12 +146,12 @@ func file_user_service_v1_user_filestore_proto_rawDescGZIP() []byte {
 
 var file_user_service_v1_user_filestore_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_user_service_v1_user_filestore_proto_goTypes = []any{
-	(*UploadOperatorStaticFileRequest)(nil),  // 0: api.user.service.v1.UploadOperatorStaticFileRequest
-	(*UploadOperatorStaticFileResponse)(nil), // 1: api.user.service.v1.UploadOperatorStaticFileResponse
+	(*UploadKycRequest)(nil),  // 0: api.user.service.v1.UploadKycRequest
+	(*UploadKycResponse)(nil), // 1: api.user.service.v1.UploadKycResponse
 }
 var file_user_service_v1_user_filestore_proto_depIdxs = []int32{
-	0, // 0: api.user.service.v1.UserFileStore.UploadOperatorStaticFile:input_type -> api.user.service.v1.UploadOperatorStaticFileRequest
-	1, // 1: api.user.service.v1.UserFileStore.UploadOperatorStaticFile:output_type -> api.user.service.v1.UploadOperatorStaticFileResponse
+	0, // 0: api.user.service.v1.UserFileStore.UploadKycFile:input_type -> api.user.service.v1.UploadKycRequest
+	1, // 1: api.user.service.v1.UserFileStore.UploadKycFile:output_type -> api.user.service.v1.UploadKycResponse
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
