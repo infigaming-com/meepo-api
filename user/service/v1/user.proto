@@ -312,6 +312,8 @@ service User {
 
 	rpc DeleteRegisterLoginBlacklist(DeleteRegisterLoginBlacklistRequest) returns (DeleteRegisterLoginBlacklistResponse) {}
 
+	rpc GetRegisterLoginBlacklist(GetRegisterLoginBlacklistRequest) returns (GetRegisterLoginBlacklistResponse) {}
+
 	rpc ListRegisterLoginBlacklist(ListRegisterLoginBlacklistRequest) returns (ListRegisterLoginBlacklistResponse) {}
 }
 
