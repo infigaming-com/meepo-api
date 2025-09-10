@@ -156,6 +156,13 @@ service BackofficeFinance {
 			body: "*"
 		};
 	}
+
+	rpc UpdateTaxReport(UpdateTaxReportRequest) returns (UpdateTaxReportResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/tax-reports/update"
+			body: "*"
+		};
+	}
 }
 
 message ListInvoicesRequest {
@@ -755,10 +762,21 @@ message ListTaxReportsResponse {
 		// Timestamps
 		int64 created_at = 15;
 		int64 updated_at = 16;
+		int64 id = 17;
 	}
 	
 	repeated TaxReport tax_reports = 1;
 	int32 total_count = 2;
 	int32 page = 3;
 	int32 page_size = 4;
+}
+
+message UpdateTaxReportRequest {
+	int64 id = 1;
+	string deposit_date = 2;
+	string deposit_slip_no = 3;
+	string ref_code = 4;
+}
+
+message UpdateTaxReportResponse {
 }
