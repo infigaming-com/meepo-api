@@ -1419,6 +1419,10 @@ message ResponsibleGamblingStatus {
 	bool deposit_allowed = 2;
 	bool withdrawal_allowed = 3;
 	bool game_bet_allowed = 4;
+	bool self_exclusion_active = 5; // indicates if self exclusion active in current time	
+	bool break_in_play_active = 6; // indicates if break in play active in current time
+	bool time_limits_active = 7; // indicates if time limits active in current time
+	google.protobuf.Timestamp time_limits_next_inactive_time = 8; // the very next time when time limits is inactive, exists if time_limits_active is true
 }
 
 message ResponsibleGamblingDeleteSchedule {

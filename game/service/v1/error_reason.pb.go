@@ -44,6 +44,9 @@ const (
 	ErrorReason_CREATE_RESPONSIBLE_GAMBLING_STATUS_FAILED ErrorReason = 40016
 	ErrorReason_UPDATE_RESPONSIBLE_GAMBLING_STATUS_FAILED ErrorReason = 40017
 	ErrorReason_RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND     ErrorReason = 40018
+	ErrorReason_TIME_LIMITS_ENABLED                       ErrorReason = 40019
+	ErrorReason_BREAK_IN_PLAY_ENABLED                     ErrorReason = 40020
+	ErrorReason_SELF_EXCLUSION_ENABLED                    ErrorReason = 40021
 )
 
 // Enum value maps for ErrorReason.
@@ -68,6 +71,9 @@ var (
 		40016: "CREATE_RESPONSIBLE_GAMBLING_STATUS_FAILED",
 		40017: "UPDATE_RESPONSIBLE_GAMBLING_STATUS_FAILED",
 		40018: "RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND",
+		40019: "TIME_LIMITS_ENABLED",
+		40020: "BREAK_IN_PLAY_ENABLED",
+		40021: "SELF_EXCLUSION_ENABLED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                               0,
@@ -89,6 +95,9 @@ var (
 		"CREATE_RESPONSIBLE_GAMBLING_STATUS_FAILED": 40016,
 		"UPDATE_RESPONSIBLE_GAMBLING_STATUS_FAILED": 40017,
 		"RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND":     40018,
+		"TIME_LIMITS_ENABLED":                       40019,
+		"BREAK_IN_PLAY_ENABLED":                     40020,
+		"SELF_EXCLUSION_ENABLED":                    40021,
 	}
 )
 
@@ -123,7 +132,7 @@ var File_game_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_game_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"game/service/v1/error_reason.proto\x12\x13api.game.service.v1\x1a\x13errors/errors.proto*\xf1\x04\n" +
+	"\"game/service/v1/error_reason.proto\x12\x13api.game.service.v1\x1a\x13errors/errors.proto*\xc7\x05\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x12GAME_BET_NOT_FOUND\x10\xc1\xb8\x02\x12\x1b\n" +
@@ -143,7 +152,10 @@ const file_game_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1bMONTHLY_LOSS_LIMIT_EXCEEDED\x10ϸ\x02\x12/\n" +
 	")CREATE_RESPONSIBLE_GAMBLING_STATUS_FAILED\x10и\x02\x12/\n" +
 	")UPDATE_RESPONSIBLE_GAMBLING_STATUS_FAILED\x10Ѹ\x02\x12+\n" +
-	"%RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND\x10Ҹ\x02\x1a\x04\xa0E\xf4\x03BO\n" +
+	"%RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND\x10Ҹ\x02\x12\x19\n" +
+	"\x13TIME_LIMITS_ENABLED\x10Ӹ\x02\x12\x1b\n" +
+	"\x15BREAK_IN_PLAY_ENABLED\x10Ը\x02\x12\x1c\n" +
+	"\x16SELF_EXCLUSION_ENABLED\x10ո\x02\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.game.service.v1P\x01Z6github.com/infigaming-com/meepo-api/game/service/v1;v1b\x06proto3"
 
 var (
