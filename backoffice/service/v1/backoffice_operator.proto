@@ -128,6 +128,26 @@ service BackofficeOperator {
 		};
 	}
 	
+	rpc AddRegisterLoginBlacklist(AddRegisterLoginBlacklistRequest) returns (user.service.v1.AddRegisterLoginBlacklistResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/register-login-blacklist/add"
+			body: "*"
+		};
+	}
+	
+	rpc DeleteRegisterLoginBlacklist(DeleteRegisterLoginBlacklistRequest) returns (user.service.v1.DeleteRegisterLoginBlacklistResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/register-login-blacklist/delete"
+			body: "*"
+		};
+	}
+	
+	rpc ListRegisterLoginBlacklist(ListRegisterLoginBlacklistRequest) returns (user.service.v1.ListRegisterLoginBlacklistResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/register-login-blacklist/list"
+			body: "*"
+		};
+	}
 }
 
 message ListAllOperatorsRequest {
@@ -335,4 +355,20 @@ message UpdateOperatorAccountSettingsRequest {
 }
 
 message UpdateOperatorAccountSettingsResponse {
+}
+
+message AddRegisterLoginBlacklistRequest {
+	string id_type = 2;
+	repeated string id = 3;
+}
+
+message DeleteRegisterLoginBlacklistRequest {
+	string id_type = 2;
+	repeated string id = 3;
+}
+
+message ListRegisterLoginBlacklistRequest {
+	string id_type = 2;
+	optional int32 page = 3;
+	optional int32 page_size = 4;
 }

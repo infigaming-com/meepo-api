@@ -154,13 +154,23 @@ service User {
 		};
 	}
 	
-	rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
+	rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
+    option (google.api.http) = {
+      post: "/v1/user/update"
+      body: "*"
+    };
+	}
 
 	rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {}
 
 	rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
 
-	rpc VerifyEmail(VerifyEmailRequest) returns (VerifyEmailResponse) {}
+	rpc VerifyEmail(VerifyEmailRequest) returns (VerifyEmailResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/email/verify/get"
+			body: "*"
+		};
+	}
 	
 	rpc AddComment(AddCommentRequest) returns (AddCommentResponse) {}
 
@@ -294,6 +304,17 @@ service User {
 		};
 	}
 	
+	rpc UserIdentityAudit(UserIdentityAuditRequest) returns (UserIdentityAuditResponse) { }
+
+	rpc UserIdentityList(UserIdentityListRequest) returns (UserIdentityListResponse) { }
+
+	rpc AddRegisterLoginBlacklist(AddRegisterLoginBlacklistRequest) returns (AddRegisterLoginBlacklistResponse) {}
+
+	rpc DeleteRegisterLoginBlacklist(DeleteRegisterLoginBlacklistRequest) returns (DeleteRegisterLoginBlacklistResponse) {}
+
+	rpc GetRegisterLoginBlacklist(GetRegisterLoginBlacklistRequest) returns (GetRegisterLoginBlacklistResponse) {}
+
+	rpc ListRegisterLoginBlacklist(ListRegisterLoginBlacklistRequest) returns (ListRegisterLoginBlacklistResponse) {}
 }
 
 // UserInfo contains basic user information.
@@ -340,8 +361,10 @@ message UserInfo {
 	string address = 20;
 	// uesr identities
 	repeated UserIdentity user_identity = 21;
+	// user date of birth
+	google.protobuf.Timestamp bod = 22;
 	// user country
-	string country = 22;
+	string country = 23;
 }
 
 // AuthType defines the type of authentication method.
@@ -654,12 +677,24 @@ message ResetPasswordWithCodeRequest {
 message ResetPasswordWithCodeResponse {
 }
 
+message UserIdentityRequest {
+	// ID Type "Passport", "South African ID"
+	string id_type = 1;
+	string id_number = 2;
+	string image = 3;
+}
+
 message UserIdentity {
 	int64 id = 1;
-	string id_type = 2;
-	string id_number = 3;
-	string image = 4;
-	bool verified = 5;
+	int64 user_id = 2;
+	string id_type = 3;
+	string id_number = 4;
+	string image = 5;
+	bool verified = 6;
+	google.protobuf.Timestamp created_at = 7;
+	google.protobuf.Timestamp audited_at = 8;
+	string operator = 9;
+	int32 review_time = 10;
 }
 
 message UpdateUserRequest {
@@ -676,10 +711,11 @@ message UpdateUserRequest {
 	optional string lastname = 11;
 	optional string email = 12;
 	optional string mobile = 13;
-	optional UserIdentity user_identity = 14;
+	optional UserIdentityRequest user_identity = 14;
 	optional string address = 15;
+	optional google.protobuf.Timestamp bod = 16;
 	// The initial operator context.
-	api.common.OperatorContext operator_context = 16;
+	api.common.OperatorContext operator_context = 17;
 }
 
 message UpdateUserResponse {
@@ -866,6 +902,10 @@ message GetUserProfileResponse {
 	int32 total_login_count = 13;
 	int32 login_page = 14;
 	int32 login_page_size = 15;
+	string registered_mobile = 16;
+	string registered_email = 17;
+	int32 kyc_level = 18;
+	repeated UserIdentity user_identity = 19;
 }
 
 message CreateRoleRequest {
@@ -1362,7 +1402,8 @@ message AddResponsibleGamblingConfigResponse {
 message DeleteResponsibleGamblingConfigRequest {
 	optional int64 user_id = 1;
 	api.common.OperatorContext operator_context = 2;
-	string limit_type = 3; // "self_exclusion", "break_in_play", "time_limits"
+	// "self_exclusion", "break_in_play", "time_limits"
+	string limit_type = 3;
 }
 
 message DeleteResponsibleGamblingConfigResponse {
@@ -1390,4 +1431,76 @@ message GetResponsibleGamblingConfigResponse {
 	ResponsibleGamblingConfig responsible_gambling_config = 1;
 	ResponsibleGamblingStatus responsible_gambling_status = 2;
 	ResponsibleGamblingDeleteSchedule responsible_gambling_delete_schedule = 3;
+}
+
+message UserIdentityAuditRequest {
+	// user identity id
+	int64 id = 1;
+	// audit "approved" or "declined"
+	string audit= 2;
+	api.common.OperatorContext operator_context = 3;
+}
+
+message UserIdentityAuditResponse {
+	
+}
+
+message UserIdentityListRequest {
+	optional int64 id = 1;
+	optional int64 user_id = 2;
+	optional google.protobuf.Timestamp start_time = 3;
+	optional google.protobuf.Timestamp end_time = 4;
+	int32 page = 5;
+	int32 page_size = 6;
+}
+
+message UserIdentityListResponse {
+	repeated UserIdentity user_identity = 1;
+	int32 total_page = 2;
+}
+
+message AddRegisterLoginBlacklistRequest {
+	api.common.OperatorContext operator_context = 1;
+	string id_type = 2;
+	repeated string ids = 3;
+}
+
+message AddRegisterLoginBlacklistResponse {
+}
+
+message DeleteRegisterLoginBlacklistRequest {
+	api.common.OperatorContext operator_context = 1;
+	string id_type = 2;
+	repeated string ids = 3;
+}
+
+message DeleteRegisterLoginBlacklistResponse {
+}
+
+message GetRegisterLoginBlacklistRequest {
+	api.common.OperatorContext operator_context = 1;
+	string id_type = 2;
+	repeated string ids = 3;
+}
+
+message GetRegisterLoginBlacklistResponse {
+	repeated string ids = 1;
+}
+
+message ListRegisterLoginBlacklistRequest {
+	api.common.OperatorContext operator_context = 1;
+	string id_type = 2;
+	optional int32 page = 3;
+	optional int32 page_size = 4;
+}
+
+message ListRegisterLoginBlacklistResponse {
+	message RegisterLoginBlacklist {
+		string id = 1;
+		google.protobuf.Timestamp created_at = 2;
+	}
+	repeated RegisterLoginBlacklist register_login_blacklists = 1;
+	int32 page = 2;
+	int32 page_size = 3;
+	int32 total = 4;
 }

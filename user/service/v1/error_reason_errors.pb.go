@@ -1200,3 +1200,63 @@ func IsSetUserResponsibleGamblingConfigFailed(err error) bool {
 func ErrorSetUserResponsibleGamblingConfigFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_SET_USER_RESPONSIBLE_GAMBLING_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsUserIdentityAuditFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_IDENTITY_AUDIT_FAILED.String() && e.Code == 500
+}
+
+func ErrorUserIdentityAuditFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_IDENTITY_AUDIT_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetRegisterLoginBlacklistFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_REGISTER_LOGIN_BLACKLIST_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetRegisterLoginBlacklistFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_REGISTER_LOGIN_BLACKLIST_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListRegisterLoginBlacklistFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_REGISTER_LOGIN_BLACKLIST_FAILED.String() && e.Code == 500
+}
+
+func ErrorListRegisterLoginBlacklistFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_REGISTER_LOGIN_BLACKLIST_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsAddRegisterLoginBlacklistFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ADD_REGISTER_LOGIN_BLACKLIST_FAILED.String() && e.Code == 500
+}
+
+func ErrorAddRegisterLoginBlacklistFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_REGISTER_LOGIN_BLACKLIST_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDeleteRegisterLoginBlacklistFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DELETE_REGISTER_LOGIN_BLACKLIST_FAILED.String() && e.Code == 500
+}
+
+func ErrorDeleteRegisterLoginBlacklistFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DELETE_REGISTER_LOGIN_BLACKLIST_FAILED.String(), fmt.Sprintf(format, args...))
+}

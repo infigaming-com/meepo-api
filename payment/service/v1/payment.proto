@@ -915,8 +915,10 @@ message BuyCryptoViaFiatCurrentListRequest {
 }
 
 message BuyCryptoViaFiatCurrentListResponse {
-  // repeated Crypto cryptos = 1;
+  // repeated currency list
   repeated Currency currencies = 1;
+  // repeated crypto list
+  repeated PaymentChannelInfo crypto = 2;
 }
 
 message BuyCryptoViaFiatPriceQueryRequest {

@@ -1776,6 +1776,60 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListRetailerOperatorsResponse'
+    /v1/backoffice/operator/register-login-blacklist/add:
+        post:
+            tags:
+                - BackofficeOperator
+            operationId: BackofficeOperator_AddRegisterLoginBlacklist
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AddRegisterLoginBlacklistRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.AddRegisterLoginBlacklistResponse'
+    /v1/backoffice/operator/register-login-blacklist/delete:
+        post:
+            tags:
+                - BackofficeOperator
+            operationId: BackofficeOperator_DeleteRegisterLoginBlacklist
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteRegisterLoginBlacklistRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.DeleteRegisterLoginBlacklistResponse'
+    /v1/backoffice/operator/register-login-blacklist/list:
+        post:
+            tags:
+                - BackofficeOperator
+            operationId: BackofficeOperator_ListRegisterLoginBlacklist
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListRegisterLoginBlacklistRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.ListRegisterLoginBlacklistResponse'
     /v1/backoffice/operator/status/update:
         post:
             tags:
@@ -2515,6 +2569,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListUserCommentsResponse'
+    /v1/backoffice/user/identity/list/get:
+        post:
+            tags:
+                - BackofficeUser
+            operationId: BackofficeUser_UserIdentityList
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.UserIdentityListRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.UserIdentityListResponse'
+    /v1/backoffice/user/identity/set:
+        post:
+            tags:
+                - BackofficeUser
+            operationId: BackofficeUser_UserIdentityAudit
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UserIdentityAuditRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.UserIdentityAuditResponse'
     /v1/backoffice/user/list:
         post:
             tags:
@@ -2647,7 +2737,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetUserProfileResponse'
+                                $ref: '#/components/schemas/api.user.service.v1.GetUserProfileResponse'
     /v1/backoffice/user/responsible-gambling/config/delete:
         post:
             tags:
@@ -4088,6 +4178,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.SendEmailVerificationCodeResponse'
+    /v1/user/email/verify/get:
+        post:
+            tags:
+                - User
+            operationId: User_VerifyEmail
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.VerifyEmailRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.VerifyEmailResponse'
     /v1/user/get:
         post:
             tags:
@@ -4202,6 +4310,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetUserTagsResponse'
+    /v1/user/update:
+        post:
+            tags:
+                - User
+            operationId: User_UpdateUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.UpdateUserRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.UpdateUserResponse'
     /v1/vip/level-config-template/get:
         post:
             tags:
@@ -4634,6 +4760,15 @@ components:
         api.backoffice.service.v1.AddOperatorByoSubdomainResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.AddRegisterLoginBlacklistRequest:
+            type: object
+            properties:
+                idType:
+                    type: string
+                id:
+                    type: array
+                    items:
+                        type: string
         api.backoffice.service.v1.AddSystemCurrencyRequest:
             type: object
             properties:
@@ -5111,6 +5246,15 @@ components:
         api.backoffice.service.v1.DeleteOperatorByoSubdomainResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.DeleteRegisterLoginBlacklistRequest:
+            type: object
+            properties:
+                idType:
+                    type: string
+                id:
+                    type: array
+                    items:
+                        type: string
         api.backoffice.service.v1.DeleteRoleRequest:
             type: object
             properties:
@@ -6272,126 +6416,6 @@ components:
                 loginPageSize:
                     type: integer
                     format: int32
-        api.backoffice.service.v1.GetUserProfileResponse:
-            type: object
-            properties:
-                nickname:
-                    type: string
-                userId:
-                    type: string
-                vipLevel:
-                    type: integer
-                    format: int32
-                online:
-                    type: boolean
-                banWithdraw:
-                    type: boolean
-                banGame:
-                    type: boolean
-                banLogin:
-                    type: boolean
-                locked:
-                    type: boolean
-                registrationRecord:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.GetUserProfileResponse_RegistrationRecord'
-                loginRecords:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.GetUserProfileResponse_LoginRecord'
-                tags:
-                    type: array
-                    items:
-                        type: string
-                comments:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.GetUserProfileResponse_Comment'
-                totalLoginCount:
-                    type: integer
-                    format: int32
-                loginPage:
-                    type: integer
-                    format: int32
-                loginPageSize:
-                    type: integer
-                    format: int32
-                mobile:
-                    type: string
-                email:
-                    type: string
-                kycLevel:
-                    type: integer
-                    format: int32
-        api.backoffice.service.v1.GetUserProfileResponse_Comment:
-            type: object
-            properties:
-                commentId:
-                    type: string
-                username:
-                    type: string
-                authorUsername:
-                    type: string
-                content:
-                    type: string
-                createdAt:
-                    type: string
-                    format: date-time
-        api.backoffice.service.v1.GetUserProfileResponse_IpInfo:
-            type: object
-            properties:
-                ip:
-                    type: string
-                count:
-                    type: integer
-                    format: int32
-                country:
-                    type: string
-        api.backoffice.service.v1.GetUserProfileResponse_LoginRecord:
-            type: object
-            properties:
-                loginAt:
-                    type: string
-                    format: date-time
-                ipInfo:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.GetUserProfileResponse_IpInfo'
-                device:
-                    type: string
-                method:
-                    type: string
-                browser:
-                    type: string
-                app:
-                    type: string
-                email:
-                    type: string
-                mobile:
-                    type: string
-                username:
-                    type: string
-        api.backoffice.service.v1.GetUserProfileResponse_RegistrationRecord:
-            type: object
-            properties:
-                registeredAt:
-                    type: string
-                    format: date-time
-                ipInfo:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.GetUserProfileResponse_IpInfo'
-                device:
-                    type: string
-                method:
-                    type: string
-                browser:
-                    type: string
-                app:
-                    type: string
-                mobile:
-                    type: string
-                email:
-                    type: string
-                username:
-                    type: string
-                source:
-                    type: string
         api.backoffice.service.v1.GetUserResponsibleGamblingConfigRequest:
             type: object
             properties:
@@ -8207,6 +8231,17 @@ components:
                     format: int32
                 enabled:
                     type: boolean
+        api.backoffice.service.v1.ListRegisterLoginBlacklistRequest:
+            type: object
+            properties:
+                idType:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListRegisterRetentionRequest:
             type: object
             properties:
@@ -10081,11 +10116,15 @@ components:
                     description: mobile
                 userIdentity:
                     allOf:
-                        - $ref: '#/components/schemas/api.user.service.v1.UserIdentity'
+                        - $ref: '#/components/schemas/api.user.service.v1.UserIdentityRequest'
                     description: user identity
                 address:
                     type: string
                     description: address
+                bod:
+                    type: string
+                    description: date of birth
+                    format: date-time
         api.backoffice.service.v1.UpdateUserResponse:
             type: object
             properties: {}
@@ -10162,6 +10201,15 @@ components:
         api.backoffice.service.v1.UploadOperatorStaticFileResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.UserIdentityAuditRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: user identity id
+                audit:
+                    type: string
+                    description: audit "approved" or "declined"
         api.backoffice.service.v1.VerifyEmailRequest:
             type: object
             properties:
@@ -10687,6 +10735,8 @@ components:
                     type: string
                 providerTimestamp:
                     type: string
+                finished:
+                    type: boolean
         api.game.service.v1.BalanceRequest:
             type: object
             properties:
@@ -11955,6 +12005,9 @@ components:
         api.user.service.v1.AddOperatorByoDomainResponse:
             type: object
             properties: {}
+        api.user.service.v1.AddRegisterLoginBlacklistResponse:
+            type: object
+            properties: {}
         api.user.service.v1.AddResponsibleGamblingConfigRequest:
             type: object
             properties:
@@ -12015,6 +12068,9 @@ components:
         api.user.service.v1.DeleteOperatorByoDomainResponse:
             type: object
             properties: {}
+        api.user.service.v1.DeleteRegisterLoginBlacklistResponse:
+            type: object
+            properties: {}
         api.user.service.v1.DeleteResponsibleGamblingConfigRequest:
             type: object
             properties:
@@ -12024,6 +12080,7 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 limitType:
                     type: string
+                    description: '"self_exclusion", "break_in_play", "time_limits"'
         api.user.service.v1.DeleteResponsibleGamblingConfigResponse:
             type: object
             properties: {}
@@ -12080,6 +12137,130 @@ components:
                     $ref: '#/components/schemas/api.user.service.v1.ResponsibleGamblingStatus'
                 responsibleGamblingDeleteSchedule:
                     $ref: '#/components/schemas/api.user.service.v1.ResponsibleGamblingDeleteSchedule'
+        api.user.service.v1.GetUserProfileResponse:
+            type: object
+            properties:
+                nickname:
+                    type: string
+                userId:
+                    type: string
+                vipLevel:
+                    type: integer
+                    format: int32
+                online:
+                    type: boolean
+                banWithdraw:
+                    type: boolean
+                banGame:
+                    type: boolean
+                banLogin:
+                    type: boolean
+                locked:
+                    type: boolean
+                registrationRecord:
+                    $ref: '#/components/schemas/api.user.service.v1.GetUserProfileResponse_RegistrationRecord'
+                loginRecords:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.GetUserProfileResponse_LoginRecord'
+                tags:
+                    type: array
+                    items:
+                        type: string
+                comments:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.GetUserProfileResponse_Comment'
+                totalLoginCount:
+                    type: integer
+                    format: int32
+                loginPage:
+                    type: integer
+                    format: int32
+                loginPageSize:
+                    type: integer
+                    format: int32
+                registeredMobile:
+                    type: string
+                registeredEmail:
+                    type: string
+                kycLevel:
+                    type: integer
+                    format: int32
+                userIdentity:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.UserIdentity'
+        api.user.service.v1.GetUserProfileResponse_Comment:
+            type: object
+            properties:
+                commentId:
+                    type: string
+                username:
+                    type: string
+                authorUsername:
+                    type: string
+                content:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+        api.user.service.v1.GetUserProfileResponse_IpInfo:
+            type: object
+            properties:
+                ip:
+                    type: string
+                count:
+                    type: integer
+                    format: int32
+                country:
+                    type: string
+        api.user.service.v1.GetUserProfileResponse_LoginRecord:
+            type: object
+            properties:
+                loginAt:
+                    type: string
+                    format: date-time
+                ipInfo:
+                    $ref: '#/components/schemas/api.user.service.v1.GetUserProfileResponse_IpInfo'
+                device:
+                    type: string
+                method:
+                    type: string
+                browser:
+                    type: string
+                app:
+                    type: string
+                email:
+                    type: string
+                mobile:
+                    type: string
+                username:
+                    type: string
+        api.user.service.v1.GetUserProfileResponse_RegistrationRecord:
+            type: object
+            properties:
+                registeredAt:
+                    type: string
+                    format: date-time
+                ipInfo:
+                    $ref: '#/components/schemas/api.user.service.v1.GetUserProfileResponse_IpInfo'
+                device:
+                    type: string
+                method:
+                    type: string
+                browser:
+                    type: string
+                app:
+                    type: string
+                mobile:
+                    type: string
+                email:
+                    type: string
+                username:
+                    type: string
+                source:
+                    type: string
         api.user.service.v1.GetUserRequest:
             type: object
             properties:
@@ -12146,6 +12327,30 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.user.service.v1.OperatorDetails'
+        api.user.service.v1.ListRegisterLoginBlacklistResponse:
+            type: object
+            properties:
+                registerLoginBlacklists:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.ListRegisterLoginBlacklistResponse_RegisterLoginBlacklist'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+        api.user.service.v1.ListRegisterLoginBlacklistResponse_RegisterLoginBlacklist:
+            type: object
+            properties:
+                id:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
         api.user.service.v1.LoginRequest:
             type: object
             properties:
@@ -12496,10 +12701,55 @@ components:
         api.user.service.v1.UpdateOperatorAccountSettingsResponse:
             type: object
             properties: {}
+        api.user.service.v1.UpdateUserRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                nickname:
+                    type: string
+                avatar:
+                    type: string
+                banLogin:
+                    type: boolean
+                banGame:
+                    type: boolean
+                banWithdraw:
+                    type: boolean
+                locked:
+                    type: boolean
+                enabled:
+                    type: boolean
+                roleId:
+                    type: string
+                firstname:
+                    type: string
+                lastname:
+                    type: string
+                email:
+                    type: string
+                mobile:
+                    type: string
+                userIdentity:
+                    $ref: '#/components/schemas/api.user.service.v1.UserIdentityRequest'
+                address:
+                    type: string
+                bod:
+                    type: string
+                    format: date-time
+                operatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: The initial operator context.
+        api.user.service.v1.UpdateUserResponse:
+            type: object
+            properties: {}
         api.user.service.v1.UserIdentity:
             type: object
             properties:
                 id:
+                    type: string
+                userId:
                     type: string
                 idType:
                     type: string
@@ -12509,6 +12759,59 @@ components:
                     type: string
                 verified:
                     type: boolean
+                createdAt:
+                    type: string
+                    format: date-time
+                auditedAt:
+                    type: string
+                    format: date-time
+                operator:
+                    type: string
+                reviewTime:
+                    type: integer
+                    format: int32
+        api.user.service.v1.UserIdentityAuditResponse:
+            type: object
+            properties: {}
+        api.user.service.v1.UserIdentityListRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                userId:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.user.service.v1.UserIdentityListResponse:
+            type: object
+            properties:
+                userIdentity:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.UserIdentity'
+                totalPage:
+                    type: integer
+                    format: int32
+        api.user.service.v1.UserIdentityRequest:
+            type: object
+            properties:
+                idType:
+                    type: string
+                    description: ID Type "Passport", "South African ID"
+                idNumber:
+                    type: string
+                image:
+                    type: string
         api.user.service.v1.UserInfo:
             type: object
             properties:
@@ -12578,10 +12881,26 @@ components:
                     items:
                         $ref: '#/components/schemas/api.user.service.v1.UserIdentity'
                     description: uesr identities
+                bod:
+                    type: string
+                    description: user date of birth
+                    format: date-time
                 country:
                     type: string
                     description: user country
             description: UserInfo contains basic user information.
+        api.user.service.v1.VerifyEmailRequest:
+            type: object
+            properties:
+                email:
+                    type: string
+                verificationCode:
+                    type: string
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.user.service.v1.VerifyEmailResponse:
+            type: object
+            properties: {}
         api.vip.service.v1.ClaimVipRewardRequest:
             type: object
             properties:
@@ -13545,7 +13864,12 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/payment.service.v1.Currency'
-                    description: repeated Crypto cryptos = 1;
+                    description: repeated currency list
+                crypto:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/payment.service.v1.PaymentChannelInfo'
+                    description: repeated crypto list
         payment.service.v1.BuyCryptoViaFiatPriceQueryRequest:
             type: object
             properties:

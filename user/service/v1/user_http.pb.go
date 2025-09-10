@@ -34,6 +34,8 @@ const OperationUserRegisterOrLoginWithTelegram = "/api.user.service.v1.User/Regi
 const OperationUserResetPasswordWithCode = "/api.user.service.v1.User/ResetPasswordWithCode"
 const OperationUserSendEmailVerificationCode = "/api.user.service.v1.User/SendEmailVerificationCode"
 const OperationUserSendPasswordResetCode = "/api.user.service.v1.User/SendPasswordResetCode"
+const OperationUserUpdateUser = "/api.user.service.v1.User/UpdateUser"
+const OperationUserVerifyEmail = "/api.user.service.v1.User/VerifyEmail"
 
 type UserHTTPServer interface {
 	AddResponsibleGamblingConfig(context.Context, *AddResponsibleGamblingConfigRequest) (*AddResponsibleGamblingConfigResponse, error)
@@ -69,6 +71,8 @@ type UserHTTPServer interface {
 	SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error)
 	// SendPasswordResetCode Send password reset verification code to email
 	SendPasswordResetCode(context.Context, *SendPasswordResetCodeRequest) (*SendPasswordResetCodeResponse, error)
+	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
+	VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error)
 }
 
 func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
@@ -84,6 +88,8 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.POST("/v1/user/email/verification-code/send", _User_SendEmailVerificationCode0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/password/reset-code/send", _User_SendPasswordResetCode0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/password/reset", _User_ResetPasswordWithCode0_HTTP_Handler(srv))
+	r.POST("/v1/user/update", _User_UpdateUser0_HTTP_Handler(srv))
+	r.POST("/v1/user/email/verify/get", _User_VerifyEmail0_HTTP_Handler(srv))
 	r.POST("/v1/user/operator/account-settings/get", _User_GetOperatorAccountSettings0_HTTP_Handler(srv))
 	r.POST("/v1/user/responsible-gambling/config/add", _User_AddResponsibleGamblingConfig0_HTTP_Handler(srv))
 	r.POST("/v1/user/responsible-gambling/config/delete", _User_DeleteResponsibleGamblingConfig0_HTTP_Handler(srv))
@@ -332,6 +338,50 @@ func _User_ResetPasswordWithCode0_HTTP_Handler(srv UserHTTPServer) func(ctx http
 	}
 }
 
+func _User_UpdateUser0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateUserRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserUpdateUser)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateUser(ctx, req.(*UpdateUserRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UpdateUserResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_VerifyEmail0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in VerifyEmailRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserVerifyEmail)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.VerifyEmail(ctx, req.(*VerifyEmailRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*VerifyEmailResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _User_GetOperatorAccountSettings0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetOperatorAccountSettingsRequest
@@ -436,6 +486,8 @@ type UserHTTPClient interface {
 	ResetPasswordWithCode(ctx context.Context, req *ResetPasswordWithCodeRequest, opts ...http.CallOption) (rsp *ResetPasswordWithCodeResponse, err error)
 	SendEmailVerificationCode(ctx context.Context, req *SendEmailVerificationCodeRequest, opts ...http.CallOption) (rsp *SendEmailVerificationCodeResponse, err error)
 	SendPasswordResetCode(ctx context.Context, req *SendPasswordResetCodeRequest, opts ...http.CallOption) (rsp *SendPasswordResetCodeResponse, err error)
+	UpdateUser(ctx context.Context, req *UpdateUserRequest, opts ...http.CallOption) (rsp *UpdateUserResponse, err error)
+	VerifyEmail(ctx context.Context, req *VerifyEmailRequest, opts ...http.CallOption) (rsp *VerifyEmailResponse, err error)
 }
 
 type UserHTTPClientImpl struct {
@@ -633,6 +685,32 @@ func (c *UserHTTPClientImpl) SendPasswordResetCode(ctx context.Context, in *Send
 	pattern := "/v1/user/auth/password/reset-code/send"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserSendPasswordResetCode))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *UserHTTPClientImpl) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...http.CallOption) (*UpdateUserResponse, error) {
+	var out UpdateUserResponse
+	pattern := "/v1/user/update"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserUpdateUser))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *UserHTTPClientImpl) VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...http.CallOption) (*VerifyEmailResponse, error) {
+	var out VerifyEmailResponse
+	pattern := "/v1/user/email/verify/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserVerifyEmail))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

@@ -3606,6 +3606,335 @@ var _ interface {
 	ErrorName() string
 } = UpdateOperatorAccountSettingsResponseValidationError{}
 
+// Validate checks the field values on AddRegisterLoginBlacklistRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *AddRegisterLoginBlacklistRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AddRegisterLoginBlacklistRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// AddRegisterLoginBlacklistRequestMultiError, or nil if none found.
+func (m *AddRegisterLoginBlacklistRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddRegisterLoginBlacklistRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for IdType
+
+	if len(errors) > 0 {
+		return AddRegisterLoginBlacklistRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// AddRegisterLoginBlacklistRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// AddRegisterLoginBlacklistRequest.ValidateAll() if the designated
+// constraints aren't met.
+type AddRegisterLoginBlacklistRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddRegisterLoginBlacklistRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddRegisterLoginBlacklistRequestMultiError) AllErrors() []error { return m }
+
+// AddRegisterLoginBlacklistRequestValidationError is the validation error
+// returned by AddRegisterLoginBlacklistRequest.Validate if the designated
+// constraints aren't met.
+type AddRegisterLoginBlacklistRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddRegisterLoginBlacklistRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddRegisterLoginBlacklistRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddRegisterLoginBlacklistRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddRegisterLoginBlacklistRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddRegisterLoginBlacklistRequestValidationError) ErrorName() string {
+	return "AddRegisterLoginBlacklistRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AddRegisterLoginBlacklistRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddRegisterLoginBlacklistRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddRegisterLoginBlacklistRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddRegisterLoginBlacklistRequestValidationError{}
+
+// Validate checks the field values on DeleteRegisterLoginBlacklistRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *DeleteRegisterLoginBlacklistRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteRegisterLoginBlacklistRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// DeleteRegisterLoginBlacklistRequestMultiError, or nil if none found.
+func (m *DeleteRegisterLoginBlacklistRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteRegisterLoginBlacklistRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for IdType
+
+	if len(errors) > 0 {
+		return DeleteRegisterLoginBlacklistRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteRegisterLoginBlacklistRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// DeleteRegisterLoginBlacklistRequest.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteRegisterLoginBlacklistRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteRegisterLoginBlacklistRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteRegisterLoginBlacklistRequestMultiError) AllErrors() []error { return m }
+
+// DeleteRegisterLoginBlacklistRequestValidationError is the validation error
+// returned by DeleteRegisterLoginBlacklistRequest.Validate if the designated
+// constraints aren't met.
+type DeleteRegisterLoginBlacklistRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteRegisterLoginBlacklistRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteRegisterLoginBlacklistRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteRegisterLoginBlacklistRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteRegisterLoginBlacklistRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteRegisterLoginBlacklistRequestValidationError) ErrorName() string {
+	return "DeleteRegisterLoginBlacklistRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteRegisterLoginBlacklistRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteRegisterLoginBlacklistRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteRegisterLoginBlacklistRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteRegisterLoginBlacklistRequestValidationError{}
+
+// Validate checks the field values on ListRegisterLoginBlacklistRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ListRegisterLoginBlacklistRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListRegisterLoginBlacklistRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListRegisterLoginBlacklistRequestMultiError, or nil if none found.
+func (m *ListRegisterLoginBlacklistRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListRegisterLoginBlacklistRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for IdType
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return ListRegisterLoginBlacklistRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListRegisterLoginBlacklistRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// ListRegisterLoginBlacklistRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListRegisterLoginBlacklistRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListRegisterLoginBlacklistRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListRegisterLoginBlacklistRequestMultiError) AllErrors() []error { return m }
+
+// ListRegisterLoginBlacklistRequestValidationError is the validation error
+// returned by ListRegisterLoginBlacklistRequest.Validate if the designated
+// constraints aren't met.
+type ListRegisterLoginBlacklistRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListRegisterLoginBlacklistRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListRegisterLoginBlacklistRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListRegisterLoginBlacklistRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListRegisterLoginBlacklistRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListRegisterLoginBlacklistRequestValidationError) ErrorName() string {
+	return "ListRegisterLoginBlacklistRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListRegisterLoginBlacklistRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListRegisterLoginBlacklistRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListRegisterLoginBlacklistRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListRegisterLoginBlacklistRequestValidationError{}
+
 // Validate checks the field values on ListAllOperatorsResponse_Operator with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the first error encountered is returned, or nil if there are

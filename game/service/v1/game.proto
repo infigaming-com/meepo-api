@@ -378,6 +378,7 @@ message Action {
 	int64 bet_time = 11;
 	int64 settle_time = 12;
 	int64 provider_timestamp = 13;
+	bool finished = 14;
 }
 
 message Transactions {
