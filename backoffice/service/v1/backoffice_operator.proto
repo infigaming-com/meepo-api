@@ -148,6 +148,35 @@ service BackofficeOperator {
 			body: "*"
 		};
 	}
+
+	rpc GetOperatorContryConfig(GetOperatorContryConfigRequest) returns (user.service.v1.GetOperatorContryConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/country-config/get"
+			body: "*"
+		};
+	}
+	
+	rpc AddOperatorContryConfig(AddOperatorContryConfigRequest) returns (user.service.v1.AddOperatorContryConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/country-config/add"
+			body: "*"
+		};
+	}
+	
+	rpc DeleteOperatorContryConfig(DeleteOperatorContryConfigRequest) returns (user.service.v1.DeleteOperatorContryConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/country-config/delete"
+			body: "*"
+		};
+	}
+	
+	rpc UpdateOperatorContryConfig(UpdateOperatorContryConfigRequest) returns (user.service.v1.UpdateOperatorContryConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/country-config/update"
+			body: "*"
+		};
+	}
+	
 }
 
 message ListAllOperatorsRequest {
@@ -371,4 +400,22 @@ message ListRegisterLoginBlacklistRequest {
 	string id_type = 1;
 	optional int32 page = 2;
 	optional int32 page_size = 3;
+}
+
+message GetOperatorContryConfigRequest {
+	string country = 2;
+}
+
+message AddOperatorContryConfigRequest {
+	string country = 1;
+	int32 registration_limit_per_ip = 2;
+}
+
+message DeleteOperatorContryConfigRequest {
+	string country = 2;
+}
+
+message UpdateOperatorContryConfigRequest {
+	string country = 1;
+	optional int32 registration_limit_per_ip = 2;
 }
