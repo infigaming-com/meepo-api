@@ -4202,6 +4202,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetUserTagsResponse'
+    /v1/user/update:
+        post:
+            tags:
+                - User
+            operationId: User_UpdateUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.UpdateUserRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.UpdateUserResponse'
     /v1/vip/level-config-template/get:
         post:
             tags:
@@ -11928,6 +11946,10 @@ components:
                 kycLevel:
                     type: integer
                     format: int32
+                userIdentity:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.UserIdentity'
         api.user.service.v1.GetUserProfileResponse_Comment:
             type: object
             properties:
@@ -12412,6 +12434,49 @@ components:
                     description: Hash for verifying the authentication data.
             description: TelegramAuthRequest contains the information from Telegram's login widget.
         api.user.service.v1.UpdateOperatorAccountSettingsResponse:
+            type: object
+            properties: {}
+        api.user.service.v1.UpdateUserRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                nickname:
+                    type: string
+                avatar:
+                    type: string
+                banLogin:
+                    type: boolean
+                banGame:
+                    type: boolean
+                banWithdraw:
+                    type: boolean
+                locked:
+                    type: boolean
+                enabled:
+                    type: boolean
+                roleId:
+                    type: string
+                firstname:
+                    type: string
+                lastname:
+                    type: string
+                email:
+                    type: string
+                mobile:
+                    type: string
+                userIdentity:
+                    $ref: '#/components/schemas/api.user.service.v1.UserIdentityRequest'
+                address:
+                    type: string
+                bod:
+                    type: string
+                    format: date-time
+                operatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: The initial operator context.
+        api.user.service.v1.UpdateUserResponse:
             type: object
             properties: {}
         api.user.service.v1.UserIdentity:
