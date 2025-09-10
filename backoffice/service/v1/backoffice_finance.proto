@@ -135,6 +135,27 @@ service BackofficeFinance {
 			body: "*"
 		};
 	}
+
+	rpc GetTaxReportConfig(GetTaxReportConfigRequest) returns (GetTaxReportConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/tax-report-configs/get"
+			body: "*"
+		};
+	}
+
+	rpc UpdateTaxReportConfig(UpdateTaxReportConfigRequest) returns (UpdateTaxReportConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/tax-report-configs/update"
+			body: "*"
+		};
+	}
+
+	rpc ListTaxReports(ListTaxReportsRequest) returns (ListTaxReportsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/tax-reports/list"
+			body: "*"
+		};
+	}
 }
 
 message ListInvoicesRequest {
@@ -627,6 +648,116 @@ message ListBalancesSummaryResponse {
 	}
 
 	repeated BalanceSummary balances = 1;
+	int32 total_count = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}
+
+message GetTaxReportConfigRequest {
+	string type = 1;
+}
+
+message GetTaxReportConfigResponse {
+	// config is a json string
+	// example:
+	// {
+	//	"report_type": {
+	//		"horse_racing_tax_return": true,
+	//		"sports_tax_return": true,
+	//		"other_contingencies_tax_return": false
+	//	}
+	//	"timezone": "UTC+0",
+	//	"report_generation_time": {
+	//		"monthly": "2nd of each month",
+	//		"quarterly": "2nd of each quarter", 
+	//		"yearly": "2nd of each year"
+	//	},
+	//	"tax_currency": "ZAR",
+	//	"user_registration_countries": ["US", "ZA", "TR", "VN"],
+	//	"user_currencies": ["USD", "EUR", "INR", "ZAR", "USDT"],
+	//  "vat_payable": 6.5,
+	//  "tax_for_sportsbook": 6.5,
+	//  "tax_for_other_contingencies": 6.5,
+	//  "tax_for_horse_racing": 6.5,
+	//	}
+	string config = 1;
+}
+
+message UpdateTaxReportConfigRequest {
+	// type: south_afirca
+	string type = 1;
+	// config is a json string
+	// example:
+	// {
+	//	"report_type": {
+	//		"horse_racing_tax_return": true,
+	//		"sports_tax_return": true,
+	//		"other_contingencies_tax_return": false
+	//	}
+	//	"timezone": "UTC+0",
+	//	"report_generation_time": {
+	//		"monthly": "2nd of each month",
+	//		"quarterly": "2nd of each quarter", 
+	//		"yearly": "2nd of each year"
+	//	},
+	//	"tax_currency": "ZAR",
+	//	"user_registration_countries": ["US", "ZA", "TR", "VN"],
+	//	"user_currencies": ["USD", "EUR", "INR", "ZAR", "USDT"],
+	//  "vat_payable": 6.5,
+	//  "tax_for_sportsbook": 6.5,
+	//  "tax_for_other_contingencies": 6.5,
+	//  "tax_for_horse_racing": 6.5,
+	//	}
+	string config = 2;
+}
+
+message UpdateTaxReportConfigResponse {
+}
+
+message ListTaxReportsRequest {
+	optional int32 page = 1;
+	optional int32 page_size = 2;
+	string tax_period = 3;
+	// license_provider: south_afirca
+	string license_provider = 4;
+}
+
+message ListTaxReportsResponse {
+	message TaxReport {
+		// Basic information
+		string licensed_provider = 1; // e.g., "south_afirca"
+		string licensed_operator = 2; // e.g., "playing.io"
+		string tax_period = 3; // Format: YYYY-MM (e.g., "2025-08")
+		
+		// Deposit information
+		string deposit_date = 4; // Format: YYYY-MM-DD or "-" if empty
+		string deposit_slip_no = 5; // e.g., "DSL-202508-003" or "-" if empty
+		string ref_code = 6; // e.g., "DSL-HR-202508-002" or "-" if empty
+		
+		// Financial data (all amounts in ZAR)
+		int64 hold_total_stake = 7; // e.g., "1,800,000"
+		int64 winning_stakes = 8; // e.g., "1,200,000"
+		int64 punter_winnings_loss = 9; // e.g., "520,000"
+		int64 profit_loss = 10; // e.g., "108,000"
+		int64 total_tax_levy = 11; // e.g., "108,000"
+		int64 vat_payable_receivable = 12; // e.g., "16,200"
+		int64 event_calculations = 13; // e.g., "124,200"
+
+		// Declaration status
+		enum DeclarationStatus {
+			DECLARATION_STATUS_UNSPECIFIED = 0;
+			DECLARATION_STATUS_PENDING = 1;
+			DECLARATION_STATUS_CONFIRMED = 2;
+			DECLARATION_STATUS_DRAFT = 3;
+		}
+		DeclarationStatus declaration_status = 14;
+		
+		// Timestamps
+		int64 created_at = 15;
+		int64 updated_at = 16;
+	}
+	
+	repeated TaxReport tax_reports = 1;
 	int32 total_count = 2;
 	int32 page = 3;
 	int32 page_size = 4;

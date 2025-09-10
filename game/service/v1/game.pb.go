@@ -76,6 +76,59 @@ func (GameSort_Field) EnumDescriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{7, 0}
 }
 
+// Declaration status
+type ListTaxReportsResponse_TaxReport_DeclarationStatus int32
+
+const (
+	ListTaxReportsResponse_TaxReport_DECLARATION_STATUS_UNSPECIFIED ListTaxReportsResponse_TaxReport_DeclarationStatus = 0
+	ListTaxReportsResponse_TaxReport_DECLARATION_STATUS_PENDING     ListTaxReportsResponse_TaxReport_DeclarationStatus = 1
+	ListTaxReportsResponse_TaxReport_DECLARATION_STATUS_CONFIRMED   ListTaxReportsResponse_TaxReport_DeclarationStatus = 2
+	ListTaxReportsResponse_TaxReport_DECLARATION_STATUS_DRAFT       ListTaxReportsResponse_TaxReport_DeclarationStatus = 3
+)
+
+// Enum value maps for ListTaxReportsResponse_TaxReport_DeclarationStatus.
+var (
+	ListTaxReportsResponse_TaxReport_DeclarationStatus_name = map[int32]string{
+		0: "DECLARATION_STATUS_UNSPECIFIED",
+		1: "DECLARATION_STATUS_PENDING",
+		2: "DECLARATION_STATUS_CONFIRMED",
+		3: "DECLARATION_STATUS_DRAFT",
+	}
+	ListTaxReportsResponse_TaxReport_DeclarationStatus_value = map[string]int32{
+		"DECLARATION_STATUS_UNSPECIFIED": 0,
+		"DECLARATION_STATUS_PENDING":     1,
+		"DECLARATION_STATUS_CONFIRMED":   2,
+		"DECLARATION_STATUS_DRAFT":       3,
+	}
+)
+
+func (x ListTaxReportsResponse_TaxReport_DeclarationStatus) Enum() *ListTaxReportsResponse_TaxReport_DeclarationStatus {
+	p := new(ListTaxReportsResponse_TaxReport_DeclarationStatus)
+	*p = x
+	return p
+}
+
+func (x ListTaxReportsResponse_TaxReport_DeclarationStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ListTaxReportsResponse_TaxReport_DeclarationStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_game_service_v1_game_proto_enumTypes[1].Descriptor()
+}
+
+func (ListTaxReportsResponse_TaxReport_DeclarationStatus) Type() protoreflect.EnumType {
+	return &file_game_service_v1_game_proto_enumTypes[1]
+}
+
+func (x ListTaxReportsResponse_TaxReport_DeclarationStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ListTaxReportsResponse_TaxReport_DeclarationStatus.Descriptor instead.
+func (ListTaxReportsResponse_TaxReport_DeclarationStatus) EnumDescriptor() ([]byte, []int) {
+	return file_game_service_v1_game_proto_rawDescGZIP(), []int{64, 0, 0}
+}
+
 type CreateOperatorRequest struct {
 	state                protoimpl.MessageState  `protogen:"open.v1"`
 	AggregatorOperatorId string                  `protobuf:"bytes,1,opt,name=aggregator_operator_id,json=aggregatorOperatorId,proto3" json:"aggregator_operator_id,omitempty"`
@@ -4570,6 +4623,366 @@ func (x *ListProviderByIDsResponse) GetProviders() []*ListProviderByIDsResponse_
 	return nil
 }
 
+type GetTaxReportConfigRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Type          string                 `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTaxReportConfigRequest) Reset() {
+	*x = GetTaxReportConfigRequest{}
+	mi := &file_game_service_v1_game_proto_msgTypes[59]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTaxReportConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTaxReportConfigRequest) ProtoMessage() {}
+
+func (x *GetTaxReportConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_game_service_v1_game_proto_msgTypes[59]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTaxReportConfigRequest.ProtoReflect.Descriptor instead.
+func (*GetTaxReportConfigRequest) Descriptor() ([]byte, []int) {
+	return file_game_service_v1_game_proto_rawDescGZIP(), []int{59}
+}
+
+func (x *GetTaxReportConfigRequest) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+type GetTaxReportConfigResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// config is a json string
+	// example:
+	//
+	//	{
+	//		"report_type": {
+	//			"horse_racing_tax_return": true,
+	//			"sports_tax_return": true,
+	//			"other_contingencies_tax_return": false
+	//		}
+	//		"timezone": "UTC+0",
+	//		"report_generation_time": {
+	//			"monthly": "2nd of each month",
+	//			"quarterly": "2nd of each quarter",
+	//			"yearly": "2nd of each year"
+	//		},
+	//		"tax_currency": "ZAR",
+	//		"user_registration_countries": ["US", "ZA", "TR", "VN"],
+	//		"user_currencies": ["USD", "EUR", "INR", "ZAR", "USDT"],
+	//	 "vat_payable": 6.5,
+	//	 "tax_for_sportsbook": 6.5,
+	//	 "tax_for_other_contingencies": 6.5,
+	//	 "tax_for_horse_racing": 6.5,
+	//		}
+	Config        string `protobuf:"bytes,1,opt,name=config,proto3" json:"config,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTaxReportConfigResponse) Reset() {
+	*x = GetTaxReportConfigResponse{}
+	mi := &file_game_service_v1_game_proto_msgTypes[60]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTaxReportConfigResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTaxReportConfigResponse) ProtoMessage() {}
+
+func (x *GetTaxReportConfigResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_game_service_v1_game_proto_msgTypes[60]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTaxReportConfigResponse.ProtoReflect.Descriptor instead.
+func (*GetTaxReportConfigResponse) Descriptor() ([]byte, []int) {
+	return file_game_service_v1_game_proto_rawDescGZIP(), []int{60}
+}
+
+func (x *GetTaxReportConfigResponse) GetConfig() string {
+	if x != nil {
+		return x.Config
+	}
+	return ""
+}
+
+type UpdateTaxReportConfigRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// type: south_afirca
+	Type string `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
+	// config is a json string
+	// example:
+	//
+	//	{
+	//		"report_type": {
+	//			"horse_racing_tax_return": true,
+	//			"sports_tax_return": true,
+	//			"other_contingencies_tax_return": false
+	//		}
+	//		"timezone": "UTC+0",
+	//		"report_generation_time": {
+	//			"monthly": "2nd of each month",
+	//			"quarterly": "2nd of each quarter",
+	//			"yearly": "2nd of each year"
+	//		},
+	//		"tax_currency": "ZAR",
+	//		"user_registration_countries": ["US", "ZA", "TR", "VN"],
+	//		"user_currencies": ["USD", "EUR", "INR", "ZAR", "USDT"],
+	//	 "vat_payable": 6.5,
+	//	 "tax_for_sportsbook": 6.5,
+	//	 "tax_for_other_contingencies": 6.5,
+	//	 "tax_for_horse_racing": 6.5,
+	//		}
+	Config        string `protobuf:"bytes,2,opt,name=config,proto3" json:"config,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateTaxReportConfigRequest) Reset() {
+	*x = UpdateTaxReportConfigRequest{}
+	mi := &file_game_service_v1_game_proto_msgTypes[61]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateTaxReportConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateTaxReportConfigRequest) ProtoMessage() {}
+
+func (x *UpdateTaxReportConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_game_service_v1_game_proto_msgTypes[61]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateTaxReportConfigRequest.ProtoReflect.Descriptor instead.
+func (*UpdateTaxReportConfigRequest) Descriptor() ([]byte, []int) {
+	return file_game_service_v1_game_proto_rawDescGZIP(), []int{61}
+}
+
+func (x *UpdateTaxReportConfigRequest) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *UpdateTaxReportConfigRequest) GetConfig() string {
+	if x != nil {
+		return x.Config
+	}
+	return ""
+}
+
+type UpdateTaxReportConfigResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateTaxReportConfigResponse) Reset() {
+	*x = UpdateTaxReportConfigResponse{}
+	mi := &file_game_service_v1_game_proto_msgTypes[62]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateTaxReportConfigResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateTaxReportConfigResponse) ProtoMessage() {}
+
+func (x *UpdateTaxReportConfigResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_game_service_v1_game_proto_msgTypes[62]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateTaxReportConfigResponse.ProtoReflect.Descriptor instead.
+func (*UpdateTaxReportConfigResponse) Descriptor() ([]byte, []int) {
+	return file_game_service_v1_game_proto_rawDescGZIP(), []int{62}
+}
+
+type ListTaxReportsRequest struct {
+	state     protoimpl.MessageState `protogen:"open.v1"`
+	Page      *int32                 `protobuf:"varint,1,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize  *int32                 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	TaxPeriod string                 `protobuf:"bytes,3,opt,name=tax_period,json=taxPeriod,proto3" json:"tax_period,omitempty"`
+	// license_provider: south_afirca
+	LicenseProvider string `protobuf:"bytes,4,opt,name=license_provider,json=licenseProvider,proto3" json:"license_provider,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *ListTaxReportsRequest) Reset() {
+	*x = ListTaxReportsRequest{}
+	mi := &file_game_service_v1_game_proto_msgTypes[63]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListTaxReportsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTaxReportsRequest) ProtoMessage() {}
+
+func (x *ListTaxReportsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_game_service_v1_game_proto_msgTypes[63]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTaxReportsRequest.ProtoReflect.Descriptor instead.
+func (*ListTaxReportsRequest) Descriptor() ([]byte, []int) {
+	return file_game_service_v1_game_proto_rawDescGZIP(), []int{63}
+}
+
+func (x *ListTaxReportsRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListTaxReportsRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+func (x *ListTaxReportsRequest) GetTaxPeriod() string {
+	if x != nil {
+		return x.TaxPeriod
+	}
+	return ""
+}
+
+func (x *ListTaxReportsRequest) GetLicenseProvider() string {
+	if x != nil {
+		return x.LicenseProvider
+	}
+	return ""
+}
+
+type ListTaxReportsResponse struct {
+	state         protoimpl.MessageState              `protogen:"open.v1"`
+	TaxReports    []*ListTaxReportsResponse_TaxReport `protobuf:"bytes,1,rep,name=tax_reports,json=taxReports,proto3" json:"tax_reports,omitempty"`
+	TotalCount    int32                               `protobuf:"varint,2,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	Page          int32                               `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                               `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListTaxReportsResponse) Reset() {
+	*x = ListTaxReportsResponse{}
+	mi := &file_game_service_v1_game_proto_msgTypes[64]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListTaxReportsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTaxReportsResponse) ProtoMessage() {}
+
+func (x *ListTaxReportsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_game_service_v1_game_proto_msgTypes[64]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTaxReportsResponse.ProtoReflect.Descriptor instead.
+func (*ListTaxReportsResponse) Descriptor() ([]byte, []int) {
+	return file_game_service_v1_game_proto_rawDescGZIP(), []int{64}
+}
+
+func (x *ListTaxReportsResponse) GetTaxReports() []*ListTaxReportsResponse_TaxReport {
+	if x != nil {
+		return x.TaxReports
+	}
+	return nil
+}
+
+func (x *ListTaxReportsResponse) GetTotalCount() int32 {
+	if x != nil {
+		return x.TotalCount
+	}
+	return 0
+}
+
+func (x *ListTaxReportsResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListTaxReportsResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
 type ListProvidersResponse_Provider struct {
 	state        protoimpl.MessageState `protogen:"open.v1"`
 	ProviderId   string                 `protobuf:"bytes,1,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
@@ -4583,7 +4996,7 @@ type ListProvidersResponse_Provider struct {
 
 func (x *ListProvidersResponse_Provider) Reset() {
 	*x = ListProvidersResponse_Provider{}
-	mi := &file_game_service_v1_game_proto_msgTypes[59]
+	mi := &file_game_service_v1_game_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4595,7 +5008,7 @@ func (x *ListProvidersResponse_Provider) String() string {
 func (*ListProvidersResponse_Provider) ProtoMessage() {}
 
 func (x *ListProvidersResponse_Provider) ProtoReflect() protoreflect.Message {
-	mi := &file_game_service_v1_game_proto_msgTypes[59]
+	mi := &file_game_service_v1_game_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4650,7 +5063,7 @@ type BalanceResponse_Data struct {
 
 func (x *BalanceResponse_Data) Reset() {
 	*x = BalanceResponse_Data{}
-	mi := &file_game_service_v1_game_proto_msgTypes[60]
+	mi := &file_game_service_v1_game_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4662,7 +5075,7 @@ func (x *BalanceResponse_Data) String() string {
 func (*BalanceResponse_Data) ProtoMessage() {}
 
 func (x *BalanceResponse_Data) ProtoReflect() protoreflect.Message {
-	mi := &file_game_service_v1_game_proto_msgTypes[60]
+	mi := &file_game_service_v1_game_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4710,7 +5123,7 @@ type PlayResponse_Data struct {
 
 func (x *PlayResponse_Data) Reset() {
 	*x = PlayResponse_Data{}
-	mi := &file_game_service_v1_game_proto_msgTypes[61]
+	mi := &file_game_service_v1_game_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4722,7 +5135,7 @@ func (x *PlayResponse_Data) String() string {
 func (*PlayResponse_Data) ProtoMessage() {}
 
 func (x *PlayResponse_Data) ProtoReflect() protoreflect.Message {
-	mi := &file_game_service_v1_game_proto_msgTypes[61]
+	mi := &file_game_service_v1_game_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4770,7 +5183,7 @@ type RollbackResponse_Data struct {
 
 func (x *RollbackResponse_Data) Reset() {
 	*x = RollbackResponse_Data{}
-	mi := &file_game_service_v1_game_proto_msgTypes[62]
+	mi := &file_game_service_v1_game_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4782,7 +5195,7 @@ func (x *RollbackResponse_Data) String() string {
 func (*RollbackResponse_Data) ProtoMessage() {}
 
 func (x *RollbackResponse_Data) ProtoReflect() protoreflect.Message {
-	mi := &file_game_service_v1_game_proto_msgTypes[62]
+	mi := &file_game_service_v1_game_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4832,7 +5245,7 @@ type ListBetsRequest_CurrencyWithRange struct {
 
 func (x *ListBetsRequest_CurrencyWithRange) Reset() {
 	*x = ListBetsRequest_CurrencyWithRange{}
-	mi := &file_game_service_v1_game_proto_msgTypes[63]
+	mi := &file_game_service_v1_game_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4844,7 +5257,7 @@ func (x *ListBetsRequest_CurrencyWithRange) String() string {
 func (*ListBetsRequest_CurrencyWithRange) ProtoMessage() {}
 
 func (x *ListBetsRequest_CurrencyWithRange) ProtoReflect() protoreflect.Message {
-	mi := &file_game_service_v1_game_proto_msgTypes[63]
+	mi := &file_game_service_v1_game_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4904,7 +5317,7 @@ type ListBetsRequest_Currencies struct {
 
 func (x *ListBetsRequest_Currencies) Reset() {
 	*x = ListBetsRequest_Currencies{}
-	mi := &file_game_service_v1_game_proto_msgTypes[64]
+	mi := &file_game_service_v1_game_proto_msgTypes[70]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4916,7 +5329,7 @@ func (x *ListBetsRequest_Currencies) String() string {
 func (*ListBetsRequest_Currencies) ProtoMessage() {}
 
 func (x *ListBetsRequest_Currencies) ProtoReflect() protoreflect.Message {
-	mi := &file_game_service_v1_game_proto_msgTypes[64]
+	mi := &file_game_service_v1_game_proto_msgTypes[70]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4962,7 +5375,7 @@ type BackofficeListGamesResponse_Game struct {
 
 func (x *BackofficeListGamesResponse_Game) Reset() {
 	*x = BackofficeListGamesResponse_Game{}
-	mi := &file_game_service_v1_game_proto_msgTypes[65]
+	mi := &file_game_service_v1_game_proto_msgTypes[71]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4974,7 +5387,7 @@ func (x *BackofficeListGamesResponse_Game) String() string {
 func (*BackofficeListGamesResponse_Game) ProtoMessage() {}
 
 func (x *BackofficeListGamesResponse_Game) ProtoReflect() protoreflect.Message {
-	mi := &file_game_service_v1_game_proto_msgTypes[65]
+	mi := &file_game_service_v1_game_proto_msgTypes[71]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5148,7 +5561,7 @@ type GetBetByIdResponse_Action struct {
 
 func (x *GetBetByIdResponse_Action) Reset() {
 	*x = GetBetByIdResponse_Action{}
-	mi := &file_game_service_v1_game_proto_msgTypes[66]
+	mi := &file_game_service_v1_game_proto_msgTypes[72]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5160,7 +5573,7 @@ func (x *GetBetByIdResponse_Action) String() string {
 func (*GetBetByIdResponse_Action) ProtoMessage() {}
 
 func (x *GetBetByIdResponse_Action) ProtoReflect() protoreflect.Message {
-	mi := &file_game_service_v1_game_proto_msgTypes[66]
+	mi := &file_game_service_v1_game_proto_msgTypes[72]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5539,7 +5952,7 @@ type GetBetByIdResponse_Bet struct {
 
 func (x *GetBetByIdResponse_Bet) Reset() {
 	*x = GetBetByIdResponse_Bet{}
-	mi := &file_game_service_v1_game_proto_msgTypes[67]
+	mi := &file_game_service_v1_game_proto_msgTypes[73]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5551,7 +5964,7 @@ func (x *GetBetByIdResponse_Bet) String() string {
 func (*GetBetByIdResponse_Bet) ProtoMessage() {}
 
 func (x *GetBetByIdResponse_Bet) ProtoReflect() protoreflect.Message {
-	mi := &file_game_service_v1_game_proto_msgTypes[67]
+	mi := &file_game_service_v1_game_proto_msgTypes[73]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5861,7 +6274,7 @@ type GetBackofficeUserOverviewFromGameResponse_GameData struct {
 
 func (x *GetBackofficeUserOverviewFromGameResponse_GameData) Reset() {
 	*x = GetBackofficeUserOverviewFromGameResponse_GameData{}
-	mi := &file_game_service_v1_game_proto_msgTypes[68]
+	mi := &file_game_service_v1_game_proto_msgTypes[74]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5873,7 +6286,7 @@ func (x *GetBackofficeUserOverviewFromGameResponse_GameData) String() string {
 func (*GetBackofficeUserOverviewFromGameResponse_GameData) ProtoMessage() {}
 
 func (x *GetBackofficeUserOverviewFromGameResponse_GameData) ProtoReflect() protoreflect.Message {
-	mi := &file_game_service_v1_game_proto_msgTypes[68]
+	mi := &file_game_service_v1_game_proto_msgTypes[74]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5944,7 +6357,7 @@ type ListProviderRatesResponse_ProviderRate struct {
 
 func (x *ListProviderRatesResponse_ProviderRate) Reset() {
 	*x = ListProviderRatesResponse_ProviderRate{}
-	mi := &file_game_service_v1_game_proto_msgTypes[69]
+	mi := &file_game_service_v1_game_proto_msgTypes[75]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5956,7 +6369,7 @@ func (x *ListProviderRatesResponse_ProviderRate) String() string {
 func (*ListProviderRatesResponse_ProviderRate) ProtoMessage() {}
 
 func (x *ListProviderRatesResponse_ProviderRate) ProtoReflect() protoreflect.Message {
-	mi := &file_game_service_v1_game_proto_msgTypes[69]
+	mi := &file_game_service_v1_game_proto_msgTypes[75]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6017,7 +6430,7 @@ type GetDailyGameTransactionDataRequest_TimeRange struct {
 
 func (x *GetDailyGameTransactionDataRequest_TimeRange) Reset() {
 	*x = GetDailyGameTransactionDataRequest_TimeRange{}
-	mi := &file_game_service_v1_game_proto_msgTypes[70]
+	mi := &file_game_service_v1_game_proto_msgTypes[76]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6029,7 +6442,7 @@ func (x *GetDailyGameTransactionDataRequest_TimeRange) String() string {
 func (*GetDailyGameTransactionDataRequest_TimeRange) ProtoMessage() {}
 
 func (x *GetDailyGameTransactionDataRequest_TimeRange) ProtoReflect() protoreflect.Message {
-	mi := &file_game_service_v1_game_proto_msgTypes[70]
+	mi := &file_game_service_v1_game_proto_msgTypes[76]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6083,7 +6496,7 @@ type GetDailyGameTransactionDataResponse_GameTransactionData struct {
 
 func (x *GetDailyGameTransactionDataResponse_GameTransactionData) Reset() {
 	*x = GetDailyGameTransactionDataResponse_GameTransactionData{}
-	mi := &file_game_service_v1_game_proto_msgTypes[71]
+	mi := &file_game_service_v1_game_proto_msgTypes[77]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6095,7 +6508,7 @@ func (x *GetDailyGameTransactionDataResponse_GameTransactionData) String() strin
 func (*GetDailyGameTransactionDataResponse_GameTransactionData) ProtoMessage() {}
 
 func (x *GetDailyGameTransactionDataResponse_GameTransactionData) ProtoReflect() protoreflect.Message {
-	mi := &file_game_service_v1_game_proto_msgTypes[71]
+	mi := &file_game_service_v1_game_proto_msgTypes[77]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6234,7 +6647,7 @@ type ListProviderByIDsResponse_Provider struct {
 
 func (x *ListProviderByIDsResponse_Provider) Reset() {
 	*x = ListProviderByIDsResponse_Provider{}
-	mi := &file_game_service_v1_game_proto_msgTypes[72]
+	mi := &file_game_service_v1_game_proto_msgTypes[78]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6246,7 +6659,7 @@ func (x *ListProviderByIDsResponse_Provider) String() string {
 func (*ListProviderByIDsResponse_Provider) ProtoMessage() {}
 
 func (x *ListProviderByIDsResponse_Provider) ProtoReflect() protoreflect.Message {
-	mi := &file_game_service_v1_game_proto_msgTypes[72]
+	mi := &file_game_service_v1_game_proto_msgTypes[78]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6281,6 +6694,174 @@ func (x *ListProviderByIDsResponse_Provider) GetEnabled() bool {
 		return x.Enabled
 	}
 	return false
+}
+
+type ListTaxReportsResponse_TaxReport struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Basic information
+	LicensedProvider string `protobuf:"bytes,1,opt,name=licensed_provider,json=licensedProvider,proto3" json:"licensed_provider,omitempty"` // e.g., "south_afirca"
+	LicensedOperator string `protobuf:"bytes,2,opt,name=licensed_operator,json=licensedOperator,proto3" json:"licensed_operator,omitempty"` // e.g., "playing.io"
+	TaxPeriod        string `protobuf:"bytes,3,opt,name=tax_period,json=taxPeriod,proto3" json:"tax_period,omitempty"`                      // Format: YYYY-MM (e.g., "2025-08")
+	// Deposit information
+	DepositDate   string `protobuf:"bytes,4,opt,name=deposit_date,json=depositDate,proto3" json:"deposit_date,omitempty"`         // Format: YYYY-MM-DD or "-" if empty
+	DepositSlipNo string `protobuf:"bytes,5,opt,name=deposit_slip_no,json=depositSlipNo,proto3" json:"deposit_slip_no,omitempty"` // e.g., "DSL-202508-003" or "-" if empty
+	RefCode       string `protobuf:"bytes,6,opt,name=ref_code,json=refCode,proto3" json:"ref_code,omitempty"`                     // e.g., "DSL-HR-202508-002" or "-" if empty
+	// Financial data (all amounts in ZAR)
+	HoldTotalStake       int64                                              `protobuf:"varint,7,opt,name=hold_total_stake,json=holdTotalStake,proto3" json:"hold_total_stake,omitempty"`                    // e.g., "1,800,000"
+	WinningStakes        int64                                              `protobuf:"varint,8,opt,name=winning_stakes,json=winningStakes,proto3" json:"winning_stakes,omitempty"`                         // e.g., "1,200,000"
+	PunterWinningsLoss   int64                                              `protobuf:"varint,9,opt,name=punter_winnings_loss,json=punterWinningsLoss,proto3" json:"punter_winnings_loss,omitempty"`        // e.g., "520,000"
+	ProfitLoss           int64                                              `protobuf:"varint,10,opt,name=profit_loss,json=profitLoss,proto3" json:"profit_loss,omitempty"`                                 // e.g., "108,000"
+	TotalTaxLevy         int64                                              `protobuf:"varint,11,opt,name=total_tax_levy,json=totalTaxLevy,proto3" json:"total_tax_levy,omitempty"`                         // e.g., "108,000"
+	VatPayableReceivable int64                                              `protobuf:"varint,12,opt,name=vat_payable_receivable,json=vatPayableReceivable,proto3" json:"vat_payable_receivable,omitempty"` // e.g., "16,200"
+	EventCalculations    int64                                              `protobuf:"varint,13,opt,name=event_calculations,json=eventCalculations,proto3" json:"event_calculations,omitempty"`            // e.g., "124,200"
+	DeclarationStatus    ListTaxReportsResponse_TaxReport_DeclarationStatus `protobuf:"varint,14,opt,name=declaration_status,json=declarationStatus,proto3,enum=api.game.service.v1.ListTaxReportsResponse_TaxReport_DeclarationStatus" json:"declaration_status,omitempty"`
+	// Timestamps
+	CreatedAt     int64 `protobuf:"varint,15,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     int64 `protobuf:"varint,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListTaxReportsResponse_TaxReport) Reset() {
+	*x = ListTaxReportsResponse_TaxReport{}
+	mi := &file_game_service_v1_game_proto_msgTypes[79]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListTaxReportsResponse_TaxReport) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTaxReportsResponse_TaxReport) ProtoMessage() {}
+
+func (x *ListTaxReportsResponse_TaxReport) ProtoReflect() protoreflect.Message {
+	mi := &file_game_service_v1_game_proto_msgTypes[79]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTaxReportsResponse_TaxReport.ProtoReflect.Descriptor instead.
+func (*ListTaxReportsResponse_TaxReport) Descriptor() ([]byte, []int) {
+	return file_game_service_v1_game_proto_rawDescGZIP(), []int{64, 0}
+}
+
+func (x *ListTaxReportsResponse_TaxReport) GetLicensedProvider() string {
+	if x != nil {
+		return x.LicensedProvider
+	}
+	return ""
+}
+
+func (x *ListTaxReportsResponse_TaxReport) GetLicensedOperator() string {
+	if x != nil {
+		return x.LicensedOperator
+	}
+	return ""
+}
+
+func (x *ListTaxReportsResponse_TaxReport) GetTaxPeriod() string {
+	if x != nil {
+		return x.TaxPeriod
+	}
+	return ""
+}
+
+func (x *ListTaxReportsResponse_TaxReport) GetDepositDate() string {
+	if x != nil {
+		return x.DepositDate
+	}
+	return ""
+}
+
+func (x *ListTaxReportsResponse_TaxReport) GetDepositSlipNo() string {
+	if x != nil {
+		return x.DepositSlipNo
+	}
+	return ""
+}
+
+func (x *ListTaxReportsResponse_TaxReport) GetRefCode() string {
+	if x != nil {
+		return x.RefCode
+	}
+	return ""
+}
+
+func (x *ListTaxReportsResponse_TaxReport) GetHoldTotalStake() int64 {
+	if x != nil {
+		return x.HoldTotalStake
+	}
+	return 0
+}
+
+func (x *ListTaxReportsResponse_TaxReport) GetWinningStakes() int64 {
+	if x != nil {
+		return x.WinningStakes
+	}
+	return 0
+}
+
+func (x *ListTaxReportsResponse_TaxReport) GetPunterWinningsLoss() int64 {
+	if x != nil {
+		return x.PunterWinningsLoss
+	}
+	return 0
+}
+
+func (x *ListTaxReportsResponse_TaxReport) GetProfitLoss() int64 {
+	if x != nil {
+		return x.ProfitLoss
+	}
+	return 0
+}
+
+func (x *ListTaxReportsResponse_TaxReport) GetTotalTaxLevy() int64 {
+	if x != nil {
+		return x.TotalTaxLevy
+	}
+	return 0
+}
+
+func (x *ListTaxReportsResponse_TaxReport) GetVatPayableReceivable() int64 {
+	if x != nil {
+		return x.VatPayableReceivable
+	}
+	return 0
+}
+
+func (x *ListTaxReportsResponse_TaxReport) GetEventCalculations() int64 {
+	if x != nil {
+		return x.EventCalculations
+	}
+	return 0
+}
+
+func (x *ListTaxReportsResponse_TaxReport) GetDeclarationStatus() ListTaxReportsResponse_TaxReport_DeclarationStatus {
+	if x != nil {
+		return x.DeclarationStatus
+	}
+	return ListTaxReportsResponse_TaxReport_DECLARATION_STATUS_UNSPECIFIED
+}
+
+func (x *ListTaxReportsResponse_TaxReport) GetCreatedAt() int64 {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return 0
+}
+
+func (x *ListTaxReportsResponse_TaxReport) GetUpdatedAt() int64 {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return 0
 }
 
 var File_game_service_v1_game_proto protoreflect.FileDescriptor
@@ -6964,7 +7545,58 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\vprovider_id\x18\x01 \x01(\tR\n" +
 	"providerId\x12#\n" +
 	"\rprovider_name\x18\x02 \x01(\tR\fproviderName\x12\x18\n" +
-	"\aenabled\x18\x03 \x01(\bR\aenabled2\x92\x17\n" +
+	"\aenabled\x18\x03 \x01(\bR\aenabled\"/\n" +
+	"\x19GetTaxReportConfigRequest\x12\x12\n" +
+	"\x04type\x18\x01 \x01(\tR\x04type\"4\n" +
+	"\x1aGetTaxReportConfigResponse\x12\x16\n" +
+	"\x06config\x18\x01 \x01(\tR\x06config\"J\n" +
+	"\x1cUpdateTaxReportConfigRequest\x12\x12\n" +
+	"\x04type\x18\x01 \x01(\tR\x04type\x12\x16\n" +
+	"\x06config\x18\x02 \x01(\tR\x06config\"\x1f\n" +
+	"\x1dUpdateTaxReportConfigResponse\"\xb3\x01\n" +
+	"\x15ListTaxReportsRequest\x12\x17\n" +
+	"\x04page\x18\x01 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x02 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x12\x1d\n" +
+	"\n" +
+	"tax_period\x18\x03 \x01(\tR\ttaxPeriod\x12)\n" +
+	"\x10license_provider\x18\x04 \x01(\tR\x0flicenseProviderB\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\xae\b\n" +
+	"\x16ListTaxReportsResponse\x12V\n" +
+	"\vtax_reports\x18\x01 \x03(\v25.api.game.service.v1.ListTaxReportsResponse.TaxReportR\n" +
+	"taxReports\x12\x1f\n" +
+	"\vtotal_count\x18\x02 \x01(\x05R\n" +
+	"totalCount\x12\x12\n" +
+	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xe9\x06\n" +
+	"\tTaxReport\x12+\n" +
+	"\x11licensed_provider\x18\x01 \x01(\tR\x10licensedProvider\x12+\n" +
+	"\x11licensed_operator\x18\x02 \x01(\tR\x10licensedOperator\x12\x1d\n" +
+	"\n" +
+	"tax_period\x18\x03 \x01(\tR\ttaxPeriod\x12!\n" +
+	"\fdeposit_date\x18\x04 \x01(\tR\vdepositDate\x12&\n" +
+	"\x0fdeposit_slip_no\x18\x05 \x01(\tR\rdepositSlipNo\x12\x19\n" +
+	"\bref_code\x18\x06 \x01(\tR\arefCode\x12(\n" +
+	"\x10hold_total_stake\x18\a \x01(\x03R\x0eholdTotalStake\x12%\n" +
+	"\x0ewinning_stakes\x18\b \x01(\x03R\rwinningStakes\x120\n" +
+	"\x14punter_winnings_loss\x18\t \x01(\x03R\x12punterWinningsLoss\x12\x1f\n" +
+	"\vprofit_loss\x18\n" +
+	" \x01(\x03R\n" +
+	"profitLoss\x12$\n" +
+	"\x0etotal_tax_levy\x18\v \x01(\x03R\ftotalTaxLevy\x124\n" +
+	"\x16vat_payable_receivable\x18\f \x01(\x03R\x14vatPayableReceivable\x12-\n" +
+	"\x12event_calculations\x18\r \x01(\x03R\x11eventCalculations\x12v\n" +
+	"\x12declaration_status\x18\x0e \x01(\x0e2G.api.game.service.v1.ListTaxReportsResponse.TaxReport.DeclarationStatusR\x11declarationStatus\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\x0f \x01(\x03R\tcreatedAt\x12\x1d\n" +
+	"\n" +
+	"updated_at\x18\x10 \x01(\x03R\tupdatedAt\"\x97\x01\n" +
+	"\x11DeclarationStatus\x12\"\n" +
+	"\x1eDECLARATION_STATUS_UNSPECIFIED\x10\x00\x12\x1e\n" +
+	"\x1aDECLARATION_STATUS_PENDING\x10\x01\x12 \n" +
+	"\x1cDECLARATION_STATUS_CONFIRMED\x10\x02\x12\x1c\n" +
+	"\x18DECLARATION_STATUS_DRAFT\x10\x032\xf8\x18\n" +
 	"\x04Game\x12k\n" +
 	"\x0eCreateOperator\x12*.api.game.service.v1.CreateOperatorRequest\x1a+.api.game.service.v1.CreateOperatorResponse\"\x00\x12k\n" +
 	"\x0eUpdateOperator\x12*.api.game.service.v1.UpdateOperatorRequest\x1a+.api.game.service.v1.UpdateOperatorResponse\"\x00\x12k\n" +
@@ -6993,7 +7625,9 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x11ListProviderRates\x12-.api.game.service.v1.ListProviderRatesRequest\x1a..api.game.service.v1.ListProviderRatesResponse\"\x00\x12\x83\x01\n" +
 	"\x16GetGameTransactionById\x122.api.game.service.v1.GetGameTransactionByIdRequest\x1a3.api.game.service.v1.GetGameTransactionByIdResponse\"\x00\x12\x92\x01\n" +
 	"\x1bGetDailyGameTransactionData\x127.api.game.service.v1.GetDailyGameTransactionDataRequest\x1a8.api.game.service.v1.GetDailyGameTransactionDataResponse\"\x00\x12t\n" +
-	"\x11ListProviderByIDs\x12-.api.game.service.v1.ListProviderByIDsRequest\x1a..api.game.service.v1.ListProviderByIDsResponse\"\x00BO\n" +
+	"\x11ListProviderByIDs\x12-.api.game.service.v1.ListProviderByIDsRequest\x1a..api.game.service.v1.ListProviderByIDsResponse\"\x00\x12w\n" +
+	"\x12GetTaxReportConfig\x12..api.game.service.v1.GetTaxReportConfigRequest\x1a/.api.game.service.v1.GetTaxReportConfigResponse\"\x00\x12k\n" +
+	"\x0eListTaxReports\x12*.api.game.service.v1.ListTaxReportsRequest\x1a+.api.game.service.v1.ListTaxReportsResponse\"\x00BO\n" +
 	"\x13api.game.service.v1P\x01Z6github.com/infigaming-com/meepo-api/game/service/v1;v1b\x06proto3"
 
 var (
@@ -7008,198 +7642,212 @@ func file_game_service_v1_game_proto_rawDescGZIP() []byte {
 	return file_game_service_v1_game_proto_rawDescData
 }
 
-var file_game_service_v1_game_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_game_service_v1_game_proto_msgTypes = make([]protoimpl.MessageInfo, 73)
+var file_game_service_v1_game_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_game_service_v1_game_proto_msgTypes = make([]protoimpl.MessageInfo, 80)
 var file_game_service_v1_game_proto_goTypes = []any{
-	(GameSort_Field)(0),                                             // 0: api.game.service.v1.GameSort.Field
-	(*CreateOperatorRequest)(nil),                                   // 1: api.game.service.v1.CreateOperatorRequest
-	(*CreateOperatorResponse)(nil),                                  // 2: api.game.service.v1.CreateOperatorResponse
-	(*UpdateOperatorRequest)(nil),                                   // 3: api.game.service.v1.UpdateOperatorRequest
-	(*UpdateOperatorResponse)(nil),                                  // 4: api.game.service.v1.UpdateOperatorResponse
-	(*DeleteOperatorRequest)(nil),                                   // 5: api.game.service.v1.DeleteOperatorRequest
-	(*DeleteOperatorResponse)(nil),                                  // 6: api.game.service.v1.DeleteOperatorResponse
-	(*GameFilter)(nil),                                              // 7: api.game.service.v1.GameFilter
-	(*GameSort)(nil),                                                // 8: api.game.service.v1.GameSort
-	(*ListProvidersRequest)(nil),                                    // 9: api.game.service.v1.ListProvidersRequest
-	(*ListProvidersResponse)(nil),                                   // 10: api.game.service.v1.ListProvidersResponse
-	(*ListCategoriesRequest)(nil),                                   // 11: api.game.service.v1.ListCategoriesRequest
-	(*ListCategoriesResponse)(nil),                                  // 12: api.game.service.v1.ListCategoriesResponse
-	(*ListFeeGroupsRequest)(nil),                                    // 13: api.game.service.v1.ListFeeGroupsRequest
-	(*ListFeeGroupsResponse)(nil),                                   // 14: api.game.service.v1.ListFeeGroupsResponse
-	(*ListTagsRequest)(nil),                                         // 15: api.game.service.v1.ListTagsRequest
-	(*ListTagsResponse)(nil),                                        // 16: api.game.service.v1.ListTagsResponse
-	(*ListThemesRequest)(nil),                                       // 17: api.game.service.v1.ListThemesRequest
-	(*ListThemesResponse)(nil),                                      // 18: api.game.service.v1.ListThemesResponse
-	(*ListCurrenciesRequest)(nil),                                   // 19: api.game.service.v1.ListCurrenciesRequest
-	(*ListCurrenciesResponse)(nil),                                  // 20: api.game.service.v1.ListCurrenciesResponse
-	(*ListGamesRequest)(nil),                                        // 21: api.game.service.v1.ListGamesRequest
-	(*ListGamesResponse)(nil),                                       // 22: api.game.service.v1.ListGamesResponse
-	(*GetGameRequest)(nil),                                          // 23: api.game.service.v1.GetGameRequest
-	(*GetGameResponse)(nil),                                         // 24: api.game.service.v1.GetGameResponse
-	(*GameInfo)(nil),                                                // 25: api.game.service.v1.GameInfo
-	(*CreateSessionRequest)(nil),                                    // 26: api.game.service.v1.CreateSessionRequest
-	(*CreateSessionResponse)(nil),                                   // 27: api.game.service.v1.CreateSessionResponse
-	(*UrlInfo)(nil),                                                 // 28: api.game.service.v1.UrlInfo
-	(*BalanceRequest)(nil),                                          // 29: api.game.service.v1.BalanceRequest
-	(*BalanceResponse)(nil),                                         // 30: api.game.service.v1.BalanceResponse
-	(*PlayRequest)(nil),                                             // 31: api.game.service.v1.PlayRequest
-	(*PlayResponse)(nil),                                            // 32: api.game.service.v1.PlayResponse
-	(*Action)(nil),                                                  // 33: api.game.service.v1.Action
-	(*Transactions)(nil),                                            // 34: api.game.service.v1.Transactions
-	(*RollbackRequest)(nil),                                         // 35: api.game.service.v1.RollbackRequest
-	(*RollbackAction)(nil),                                          // 36: api.game.service.v1.RollbackAction
-	(*RollbackResponse)(nil),                                        // 37: api.game.service.v1.RollbackResponse
-	(*RollbackTransactions)(nil),                                    // 38: api.game.service.v1.RollbackTransactions
-	(*ListBetsRequest)(nil),                                         // 39: api.game.service.v1.ListBetsRequest
-	(*Bet)(nil),                                                     // 40: api.game.service.v1.Bet
-	(*ListBetsResponse)(nil),                                        // 41: api.game.service.v1.ListBetsResponse
-	(*BackofficeListGamesRequest)(nil),                              // 42: api.game.service.v1.BackofficeListGamesRequest
-	(*BackofficeListGamesResponse)(nil),                             // 43: api.game.service.v1.BackofficeListGamesResponse
-	(*UpdateGameRequest)(nil),                                       // 44: api.game.service.v1.UpdateGameRequest
-	(*UpdateGameResponse)(nil),                                      // 45: api.game.service.v1.UpdateGameResponse
-	(*UpdateProviderRequest)(nil),                                   // 46: api.game.service.v1.UpdateProviderRequest
-	(*UpdateProviderResponse)(nil),                                  // 47: api.game.service.v1.UpdateProviderResponse
-	(*GetBetByIdRequest)(nil),                                       // 48: api.game.service.v1.GetBetByIdRequest
-	(*GetBetByIdResponse)(nil),                                      // 49: api.game.service.v1.GetBetByIdResponse
-	(*GetBackofficeUserOverviewFromGameRequest)(nil),                // 50: api.game.service.v1.GetBackofficeUserOverviewFromGameRequest
-	(*GetBackofficeUserOverviewFromGameResponse)(nil),               // 51: api.game.service.v1.GetBackofficeUserOverviewFromGameResponse
-	(*GetGameTransactionByIdRequest)(nil),                           // 52: api.game.service.v1.GetGameTransactionByIdRequest
-	(*GetGameTransactionByIdResponse)(nil),                          // 53: api.game.service.v1.GetGameTransactionByIdResponse
-	(*ListProviderRatesRequest)(nil),                                // 54: api.game.service.v1.ListProviderRatesRequest
-	(*ListProviderRatesResponse)(nil),                               // 55: api.game.service.v1.ListProviderRatesResponse
-	(*GetDailyGameTransactionDataRequest)(nil),                      // 56: api.game.service.v1.GetDailyGameTransactionDataRequest
-	(*GetDailyGameTransactionDataResponse)(nil),                     // 57: api.game.service.v1.GetDailyGameTransactionDataResponse
-	(*ListProviderByIDsRequest)(nil),                                // 58: api.game.service.v1.ListProviderByIDsRequest
-	(*ListProviderByIDsResponse)(nil),                               // 59: api.game.service.v1.ListProviderByIDsResponse
-	(*ListProvidersResponse_Provider)(nil),                          // 60: api.game.service.v1.ListProvidersResponse.Provider
-	(*BalanceResponse_Data)(nil),                                    // 61: api.game.service.v1.BalanceResponse.Data
-	(*PlayResponse_Data)(nil),                                       // 62: api.game.service.v1.PlayResponse.Data
-	(*RollbackResponse_Data)(nil),                                   // 63: api.game.service.v1.RollbackResponse.Data
-	(*ListBetsRequest_CurrencyWithRange)(nil),                       // 64: api.game.service.v1.ListBetsRequest.CurrencyWithRange
-	(*ListBetsRequest_Currencies)(nil),                              // 65: api.game.service.v1.ListBetsRequest.Currencies
-	(*BackofficeListGamesResponse_Game)(nil),                        // 66: api.game.service.v1.BackofficeListGamesResponse.Game
-	(*GetBetByIdResponse_Action)(nil),                               // 67: api.game.service.v1.GetBetByIdResponse.Action
-	(*GetBetByIdResponse_Bet)(nil),                                  // 68: api.game.service.v1.GetBetByIdResponse.Bet
-	(*GetBackofficeUserOverviewFromGameResponse_GameData)(nil),      // 69: api.game.service.v1.GetBackofficeUserOverviewFromGameResponse.GameData
-	(*ListProviderRatesResponse_ProviderRate)(nil),                  // 70: api.game.service.v1.ListProviderRatesResponse.ProviderRate
-	(*GetDailyGameTransactionDataRequest_TimeRange)(nil),            // 71: api.game.service.v1.GetDailyGameTransactionDataRequest.TimeRange
-	(*GetDailyGameTransactionDataResponse_GameTransactionData)(nil), // 72: api.game.service.v1.GetDailyGameTransactionDataResponse.GameTransactionData
-	(*ListProviderByIDsResponse_Provider)(nil),                      // 73: api.game.service.v1.ListProviderByIDsResponse.Provider
-	(*common.OperatorContext)(nil),                                  // 74: api.common.OperatorContext
-	(*timestamppb.Timestamp)(nil),                                   // 75: google.protobuf.Timestamp
-	(*common.OperatorContextFilters)(nil),                           // 76: api.common.OperatorContextFilters
+	(GameSort_Field)(0), // 0: api.game.service.v1.GameSort.Field
+	(ListTaxReportsResponse_TaxReport_DeclarationStatus)(0),         // 1: api.game.service.v1.ListTaxReportsResponse.TaxReport.DeclarationStatus
+	(*CreateOperatorRequest)(nil),                                   // 2: api.game.service.v1.CreateOperatorRequest
+	(*CreateOperatorResponse)(nil),                                  // 3: api.game.service.v1.CreateOperatorResponse
+	(*UpdateOperatorRequest)(nil),                                   // 4: api.game.service.v1.UpdateOperatorRequest
+	(*UpdateOperatorResponse)(nil),                                  // 5: api.game.service.v1.UpdateOperatorResponse
+	(*DeleteOperatorRequest)(nil),                                   // 6: api.game.service.v1.DeleteOperatorRequest
+	(*DeleteOperatorResponse)(nil),                                  // 7: api.game.service.v1.DeleteOperatorResponse
+	(*GameFilter)(nil),                                              // 8: api.game.service.v1.GameFilter
+	(*GameSort)(nil),                                                // 9: api.game.service.v1.GameSort
+	(*ListProvidersRequest)(nil),                                    // 10: api.game.service.v1.ListProvidersRequest
+	(*ListProvidersResponse)(nil),                                   // 11: api.game.service.v1.ListProvidersResponse
+	(*ListCategoriesRequest)(nil),                                   // 12: api.game.service.v1.ListCategoriesRequest
+	(*ListCategoriesResponse)(nil),                                  // 13: api.game.service.v1.ListCategoriesResponse
+	(*ListFeeGroupsRequest)(nil),                                    // 14: api.game.service.v1.ListFeeGroupsRequest
+	(*ListFeeGroupsResponse)(nil),                                   // 15: api.game.service.v1.ListFeeGroupsResponse
+	(*ListTagsRequest)(nil),                                         // 16: api.game.service.v1.ListTagsRequest
+	(*ListTagsResponse)(nil),                                        // 17: api.game.service.v1.ListTagsResponse
+	(*ListThemesRequest)(nil),                                       // 18: api.game.service.v1.ListThemesRequest
+	(*ListThemesResponse)(nil),                                      // 19: api.game.service.v1.ListThemesResponse
+	(*ListCurrenciesRequest)(nil),                                   // 20: api.game.service.v1.ListCurrenciesRequest
+	(*ListCurrenciesResponse)(nil),                                  // 21: api.game.service.v1.ListCurrenciesResponse
+	(*ListGamesRequest)(nil),                                        // 22: api.game.service.v1.ListGamesRequest
+	(*ListGamesResponse)(nil),                                       // 23: api.game.service.v1.ListGamesResponse
+	(*GetGameRequest)(nil),                                          // 24: api.game.service.v1.GetGameRequest
+	(*GetGameResponse)(nil),                                         // 25: api.game.service.v1.GetGameResponse
+	(*GameInfo)(nil),                                                // 26: api.game.service.v1.GameInfo
+	(*CreateSessionRequest)(nil),                                    // 27: api.game.service.v1.CreateSessionRequest
+	(*CreateSessionResponse)(nil),                                   // 28: api.game.service.v1.CreateSessionResponse
+	(*UrlInfo)(nil),                                                 // 29: api.game.service.v1.UrlInfo
+	(*BalanceRequest)(nil),                                          // 30: api.game.service.v1.BalanceRequest
+	(*BalanceResponse)(nil),                                         // 31: api.game.service.v1.BalanceResponse
+	(*PlayRequest)(nil),                                             // 32: api.game.service.v1.PlayRequest
+	(*PlayResponse)(nil),                                            // 33: api.game.service.v1.PlayResponse
+	(*Action)(nil),                                                  // 34: api.game.service.v1.Action
+	(*Transactions)(nil),                                            // 35: api.game.service.v1.Transactions
+	(*RollbackRequest)(nil),                                         // 36: api.game.service.v1.RollbackRequest
+	(*RollbackAction)(nil),                                          // 37: api.game.service.v1.RollbackAction
+	(*RollbackResponse)(nil),                                        // 38: api.game.service.v1.RollbackResponse
+	(*RollbackTransactions)(nil),                                    // 39: api.game.service.v1.RollbackTransactions
+	(*ListBetsRequest)(nil),                                         // 40: api.game.service.v1.ListBetsRequest
+	(*Bet)(nil),                                                     // 41: api.game.service.v1.Bet
+	(*ListBetsResponse)(nil),                                        // 42: api.game.service.v1.ListBetsResponse
+	(*BackofficeListGamesRequest)(nil),                              // 43: api.game.service.v1.BackofficeListGamesRequest
+	(*BackofficeListGamesResponse)(nil),                             // 44: api.game.service.v1.BackofficeListGamesResponse
+	(*UpdateGameRequest)(nil),                                       // 45: api.game.service.v1.UpdateGameRequest
+	(*UpdateGameResponse)(nil),                                      // 46: api.game.service.v1.UpdateGameResponse
+	(*UpdateProviderRequest)(nil),                                   // 47: api.game.service.v1.UpdateProviderRequest
+	(*UpdateProviderResponse)(nil),                                  // 48: api.game.service.v1.UpdateProviderResponse
+	(*GetBetByIdRequest)(nil),                                       // 49: api.game.service.v1.GetBetByIdRequest
+	(*GetBetByIdResponse)(nil),                                      // 50: api.game.service.v1.GetBetByIdResponse
+	(*GetBackofficeUserOverviewFromGameRequest)(nil),                // 51: api.game.service.v1.GetBackofficeUserOverviewFromGameRequest
+	(*GetBackofficeUserOverviewFromGameResponse)(nil),               // 52: api.game.service.v1.GetBackofficeUserOverviewFromGameResponse
+	(*GetGameTransactionByIdRequest)(nil),                           // 53: api.game.service.v1.GetGameTransactionByIdRequest
+	(*GetGameTransactionByIdResponse)(nil),                          // 54: api.game.service.v1.GetGameTransactionByIdResponse
+	(*ListProviderRatesRequest)(nil),                                // 55: api.game.service.v1.ListProviderRatesRequest
+	(*ListProviderRatesResponse)(nil),                               // 56: api.game.service.v1.ListProviderRatesResponse
+	(*GetDailyGameTransactionDataRequest)(nil),                      // 57: api.game.service.v1.GetDailyGameTransactionDataRequest
+	(*GetDailyGameTransactionDataResponse)(nil),                     // 58: api.game.service.v1.GetDailyGameTransactionDataResponse
+	(*ListProviderByIDsRequest)(nil),                                // 59: api.game.service.v1.ListProviderByIDsRequest
+	(*ListProviderByIDsResponse)(nil),                               // 60: api.game.service.v1.ListProviderByIDsResponse
+	(*GetTaxReportConfigRequest)(nil),                               // 61: api.game.service.v1.GetTaxReportConfigRequest
+	(*GetTaxReportConfigResponse)(nil),                              // 62: api.game.service.v1.GetTaxReportConfigResponse
+	(*UpdateTaxReportConfigRequest)(nil),                            // 63: api.game.service.v1.UpdateTaxReportConfigRequest
+	(*UpdateTaxReportConfigResponse)(nil),                           // 64: api.game.service.v1.UpdateTaxReportConfigResponse
+	(*ListTaxReportsRequest)(nil),                                   // 65: api.game.service.v1.ListTaxReportsRequest
+	(*ListTaxReportsResponse)(nil),                                  // 66: api.game.service.v1.ListTaxReportsResponse
+	(*ListProvidersResponse_Provider)(nil),                          // 67: api.game.service.v1.ListProvidersResponse.Provider
+	(*BalanceResponse_Data)(nil),                                    // 68: api.game.service.v1.BalanceResponse.Data
+	(*PlayResponse_Data)(nil),                                       // 69: api.game.service.v1.PlayResponse.Data
+	(*RollbackResponse_Data)(nil),                                   // 70: api.game.service.v1.RollbackResponse.Data
+	(*ListBetsRequest_CurrencyWithRange)(nil),                       // 71: api.game.service.v1.ListBetsRequest.CurrencyWithRange
+	(*ListBetsRequest_Currencies)(nil),                              // 72: api.game.service.v1.ListBetsRequest.Currencies
+	(*BackofficeListGamesResponse_Game)(nil),                        // 73: api.game.service.v1.BackofficeListGamesResponse.Game
+	(*GetBetByIdResponse_Action)(nil),                               // 74: api.game.service.v1.GetBetByIdResponse.Action
+	(*GetBetByIdResponse_Bet)(nil),                                  // 75: api.game.service.v1.GetBetByIdResponse.Bet
+	(*GetBackofficeUserOverviewFromGameResponse_GameData)(nil),      // 76: api.game.service.v1.GetBackofficeUserOverviewFromGameResponse.GameData
+	(*ListProviderRatesResponse_ProviderRate)(nil),                  // 77: api.game.service.v1.ListProviderRatesResponse.ProviderRate
+	(*GetDailyGameTransactionDataRequest_TimeRange)(nil),            // 78: api.game.service.v1.GetDailyGameTransactionDataRequest.TimeRange
+	(*GetDailyGameTransactionDataResponse_GameTransactionData)(nil), // 79: api.game.service.v1.GetDailyGameTransactionDataResponse.GameTransactionData
+	(*ListProviderByIDsResponse_Provider)(nil),                      // 80: api.game.service.v1.ListProviderByIDsResponse.Provider
+	(*ListTaxReportsResponse_TaxReport)(nil),                        // 81: api.game.service.v1.ListTaxReportsResponse.TaxReport
+	(*common.OperatorContext)(nil),                                  // 82: api.common.OperatorContext
+	(*timestamppb.Timestamp)(nil),                                   // 83: google.protobuf.Timestamp
+	(*common.OperatorContextFilters)(nil),                           // 84: api.common.OperatorContextFilters
 }
 var file_game_service_v1_game_proto_depIdxs = []int32{
-	74, // 0: api.game.service.v1.CreateOperatorRequest.operator_context:type_name -> api.common.OperatorContext
-	74, // 1: api.game.service.v1.UpdateOperatorRequest.operator_context:type_name -> api.common.OperatorContext
-	74, // 2: api.game.service.v1.DeleteOperatorRequest.operator_context:type_name -> api.common.OperatorContext
+	82, // 0: api.game.service.v1.CreateOperatorRequest.operator_context:type_name -> api.common.OperatorContext
+	82, // 1: api.game.service.v1.UpdateOperatorRequest.operator_context:type_name -> api.common.OperatorContext
+	82, // 2: api.game.service.v1.DeleteOperatorRequest.operator_context:type_name -> api.common.OperatorContext
 	0,  // 3: api.game.service.v1.GameSort.field:type_name -> api.game.service.v1.GameSort.Field
-	60, // 4: api.game.service.v1.ListProvidersResponse.providers:type_name -> api.game.service.v1.ListProvidersResponse.Provider
-	7,  // 5: api.game.service.v1.ListGamesRequest.filter:type_name -> api.game.service.v1.GameFilter
-	8,  // 6: api.game.service.v1.ListGamesRequest.sort:type_name -> api.game.service.v1.GameSort
-	25, // 7: api.game.service.v1.GetGameResponse.game:type_name -> api.game.service.v1.GameInfo
-	28, // 8: api.game.service.v1.CreateSessionRequest.urls:type_name -> api.game.service.v1.UrlInfo
-	61, // 9: api.game.service.v1.BalanceResponse.data:type_name -> api.game.service.v1.BalanceResponse.Data
-	33, // 10: api.game.service.v1.PlayRequest.actions:type_name -> api.game.service.v1.Action
-	62, // 11: api.game.service.v1.PlayResponse.data:type_name -> api.game.service.v1.PlayResponse.Data
-	36, // 12: api.game.service.v1.RollbackRequest.actions:type_name -> api.game.service.v1.RollbackAction
-	63, // 13: api.game.service.v1.RollbackResponse.data:type_name -> api.game.service.v1.RollbackResponse.Data
-	75, // 14: api.game.service.v1.ListBetsRequest.start_time:type_name -> google.protobuf.Timestamp
-	75, // 15: api.game.service.v1.ListBetsRequest.end_time:type_name -> google.protobuf.Timestamp
-	64, // 16: api.game.service.v1.ListBetsRequest.currency_with_ranges:type_name -> api.game.service.v1.ListBetsRequest.CurrencyWithRange
-	64, // 17: api.game.service.v1.ListBetsRequest.settlement_currency_with_ranges:type_name -> api.game.service.v1.ListBetsRequest.CurrencyWithRange
-	65, // 18: api.game.service.v1.ListBetsRequest.settlement_currencies:type_name -> api.game.service.v1.ListBetsRequest.Currencies
-	74, // 19: api.game.service.v1.ListBetsRequest.operator_context:type_name -> api.common.OperatorContext
-	76, // 20: api.game.service.v1.ListBetsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	75, // 21: api.game.service.v1.Bet.created_at:type_name -> google.protobuf.Timestamp
-	75, // 22: api.game.service.v1.Bet.updated_at:type_name -> google.protobuf.Timestamp
-	40, // 23: api.game.service.v1.ListBetsResponse.bets:type_name -> api.game.service.v1.Bet
-	66, // 24: api.game.service.v1.BackofficeListGamesResponse.games:type_name -> api.game.service.v1.BackofficeListGamesResponse.Game
-	68, // 25: api.game.service.v1.GetBetByIdResponse.bet:type_name -> api.game.service.v1.GetBetByIdResponse.Bet
-	75, // 26: api.game.service.v1.GetBackofficeUserOverviewFromGameRequest.start_time:type_name -> google.protobuf.Timestamp
-	75, // 27: api.game.service.v1.GetBackofficeUserOverviewFromGameRequest.end_time:type_name -> google.protobuf.Timestamp
-	69, // 28: api.game.service.v1.GetBackofficeUserOverviewFromGameResponse.game_data:type_name -> api.game.service.v1.GetBackofficeUserOverviewFromGameResponse.GameData
-	75, // 29: api.game.service.v1.GetGameTransactionByIdResponse.bet_time:type_name -> google.protobuf.Timestamp
-	75, // 30: api.game.service.v1.GetGameTransactionByIdResponse.settle_time:type_name -> google.protobuf.Timestamp
-	75, // 31: api.game.service.v1.GetGameTransactionByIdResponse.provider_timestamp:type_name -> google.protobuf.Timestamp
-	75, // 32: api.game.service.v1.GetGameTransactionByIdResponse.operator_timestamp:type_name -> google.protobuf.Timestamp
-	75, // 33: api.game.service.v1.GetGameTransactionByIdResponse.processed_at:type_name -> google.protobuf.Timestamp
-	75, // 34: api.game.service.v1.GetGameTransactionByIdResponse.created_at:type_name -> google.protobuf.Timestamp
-	75, // 35: api.game.service.v1.GetGameTransactionByIdResponse.updated_at:type_name -> google.protobuf.Timestamp
-	74, // 36: api.game.service.v1.ListProviderRatesRequest.operator_context:type_name -> api.common.OperatorContext
-	70, // 37: api.game.service.v1.ListProviderRatesResponse.provider_rates:type_name -> api.game.service.v1.ListProviderRatesResponse.ProviderRate
-	71, // 38: api.game.service.v1.GetDailyGameTransactionDataRequest.time_range:type_name -> api.game.service.v1.GetDailyGameTransactionDataRequest.TimeRange
-	72, // 39: api.game.service.v1.GetDailyGameTransactionDataResponse.game_transaction_data:type_name -> api.game.service.v1.GetDailyGameTransactionDataResponse.GameTransactionData
-	73, // 40: api.game.service.v1.ListProviderByIDsResponse.providers:type_name -> api.game.service.v1.ListProviderByIDsResponse.Provider
-	34, // 41: api.game.service.v1.PlayResponse.Data.transactions:type_name -> api.game.service.v1.Transactions
-	38, // 42: api.game.service.v1.RollbackResponse.Data.transactions:type_name -> api.game.service.v1.RollbackTransactions
-	75, // 43: api.game.service.v1.GetBetByIdResponse.Action.bet_time:type_name -> google.protobuf.Timestamp
-	75, // 44: api.game.service.v1.GetBetByIdResponse.Action.settle_time:type_name -> google.protobuf.Timestamp
-	75, // 45: api.game.service.v1.GetBetByIdResponse.Action.provider_timestamp:type_name -> google.protobuf.Timestamp
-	75, // 46: api.game.service.v1.GetBetByIdResponse.Action.operator_timestamp:type_name -> google.protobuf.Timestamp
-	75, // 47: api.game.service.v1.GetBetByIdResponse.Action.processed_at:type_name -> google.protobuf.Timestamp
-	75, // 48: api.game.service.v1.GetBetByIdResponse.Action.created_at:type_name -> google.protobuf.Timestamp
-	75, // 49: api.game.service.v1.GetBetByIdResponse.Action.updated_at:type_name -> google.protobuf.Timestamp
-	75, // 50: api.game.service.v1.GetBetByIdResponse.Bet.created_at:type_name -> google.protobuf.Timestamp
-	75, // 51: api.game.service.v1.GetBetByIdResponse.Bet.updated_at:type_name -> google.protobuf.Timestamp
-	67, // 52: api.game.service.v1.GetBetByIdResponse.Bet.actions:type_name -> api.game.service.v1.GetBetByIdResponse.Action
-	75, // 53: api.game.service.v1.GetDailyGameTransactionDataRequest.TimeRange.start_time:type_name -> google.protobuf.Timestamp
-	75, // 54: api.game.service.v1.GetDailyGameTransactionDataRequest.TimeRange.end_time:type_name -> google.protobuf.Timestamp
-	1,  // 55: api.game.service.v1.Game.CreateOperator:input_type -> api.game.service.v1.CreateOperatorRequest
-	3,  // 56: api.game.service.v1.Game.UpdateOperator:input_type -> api.game.service.v1.UpdateOperatorRequest
-	5,  // 57: api.game.service.v1.Game.DeleteOperator:input_type -> api.game.service.v1.DeleteOperatorRequest
-	9,  // 58: api.game.service.v1.Game.ListProviders:input_type -> api.game.service.v1.ListProvidersRequest
-	11, // 59: api.game.service.v1.Game.ListCategories:input_type -> api.game.service.v1.ListCategoriesRequest
-	13, // 60: api.game.service.v1.Game.ListFeeGroups:input_type -> api.game.service.v1.ListFeeGroupsRequest
-	15, // 61: api.game.service.v1.Game.ListTags:input_type -> api.game.service.v1.ListTagsRequest
-	17, // 62: api.game.service.v1.Game.ListThemes:input_type -> api.game.service.v1.ListThemesRequest
-	19, // 63: api.game.service.v1.Game.ListCurrencies:input_type -> api.game.service.v1.ListCurrenciesRequest
-	21, // 64: api.game.service.v1.Game.ListGames:input_type -> api.game.service.v1.ListGamesRequest
-	23, // 65: api.game.service.v1.Game.GetGame:input_type -> api.game.service.v1.GetGameRequest
-	26, // 66: api.game.service.v1.Game.CreateSession:input_type -> api.game.service.v1.CreateSessionRequest
-	29, // 67: api.game.service.v1.Game.Balance:input_type -> api.game.service.v1.BalanceRequest
-	31, // 68: api.game.service.v1.Game.Play:input_type -> api.game.service.v1.PlayRequest
-	35, // 69: api.game.service.v1.Game.Rollback:input_type -> api.game.service.v1.RollbackRequest
-	39, // 70: api.game.service.v1.Game.ListBets:input_type -> api.game.service.v1.ListBetsRequest
-	42, // 71: api.game.service.v1.Game.BackofficeListGames:input_type -> api.game.service.v1.BackofficeListGamesRequest
-	44, // 72: api.game.service.v1.Game.UpdateGame:input_type -> api.game.service.v1.UpdateGameRequest
-	46, // 73: api.game.service.v1.Game.UpdateProvider:input_type -> api.game.service.v1.UpdateProviderRequest
-	48, // 74: api.game.service.v1.Game.GetBetById:input_type -> api.game.service.v1.GetBetByIdRequest
-	50, // 75: api.game.service.v1.Game.GetBackofficeUserOverviewFromGame:input_type -> api.game.service.v1.GetBackofficeUserOverviewFromGameRequest
-	54, // 76: api.game.service.v1.Game.ListProviderRates:input_type -> api.game.service.v1.ListProviderRatesRequest
-	52, // 77: api.game.service.v1.Game.GetGameTransactionById:input_type -> api.game.service.v1.GetGameTransactionByIdRequest
-	56, // 78: api.game.service.v1.Game.GetDailyGameTransactionData:input_type -> api.game.service.v1.GetDailyGameTransactionDataRequest
-	58, // 79: api.game.service.v1.Game.ListProviderByIDs:input_type -> api.game.service.v1.ListProviderByIDsRequest
-	2,  // 80: api.game.service.v1.Game.CreateOperator:output_type -> api.game.service.v1.CreateOperatorResponse
-	4,  // 81: api.game.service.v1.Game.UpdateOperator:output_type -> api.game.service.v1.UpdateOperatorResponse
-	6,  // 82: api.game.service.v1.Game.DeleteOperator:output_type -> api.game.service.v1.DeleteOperatorResponse
-	10, // 83: api.game.service.v1.Game.ListProviders:output_type -> api.game.service.v1.ListProvidersResponse
-	12, // 84: api.game.service.v1.Game.ListCategories:output_type -> api.game.service.v1.ListCategoriesResponse
-	14, // 85: api.game.service.v1.Game.ListFeeGroups:output_type -> api.game.service.v1.ListFeeGroupsResponse
-	16, // 86: api.game.service.v1.Game.ListTags:output_type -> api.game.service.v1.ListTagsResponse
-	18, // 87: api.game.service.v1.Game.ListThemes:output_type -> api.game.service.v1.ListThemesResponse
-	20, // 88: api.game.service.v1.Game.ListCurrencies:output_type -> api.game.service.v1.ListCurrenciesResponse
-	22, // 89: api.game.service.v1.Game.ListGames:output_type -> api.game.service.v1.ListGamesResponse
-	24, // 90: api.game.service.v1.Game.GetGame:output_type -> api.game.service.v1.GetGameResponse
-	27, // 91: api.game.service.v1.Game.CreateSession:output_type -> api.game.service.v1.CreateSessionResponse
-	30, // 92: api.game.service.v1.Game.Balance:output_type -> api.game.service.v1.BalanceResponse
-	32, // 93: api.game.service.v1.Game.Play:output_type -> api.game.service.v1.PlayResponse
-	37, // 94: api.game.service.v1.Game.Rollback:output_type -> api.game.service.v1.RollbackResponse
-	41, // 95: api.game.service.v1.Game.ListBets:output_type -> api.game.service.v1.ListBetsResponse
-	43, // 96: api.game.service.v1.Game.BackofficeListGames:output_type -> api.game.service.v1.BackofficeListGamesResponse
-	45, // 97: api.game.service.v1.Game.UpdateGame:output_type -> api.game.service.v1.UpdateGameResponse
-	47, // 98: api.game.service.v1.Game.UpdateProvider:output_type -> api.game.service.v1.UpdateProviderResponse
-	49, // 99: api.game.service.v1.Game.GetBetById:output_type -> api.game.service.v1.GetBetByIdResponse
-	51, // 100: api.game.service.v1.Game.GetBackofficeUserOverviewFromGame:output_type -> api.game.service.v1.GetBackofficeUserOverviewFromGameResponse
-	55, // 101: api.game.service.v1.Game.ListProviderRates:output_type -> api.game.service.v1.ListProviderRatesResponse
-	53, // 102: api.game.service.v1.Game.GetGameTransactionById:output_type -> api.game.service.v1.GetGameTransactionByIdResponse
-	57, // 103: api.game.service.v1.Game.GetDailyGameTransactionData:output_type -> api.game.service.v1.GetDailyGameTransactionDataResponse
-	59, // 104: api.game.service.v1.Game.ListProviderByIDs:output_type -> api.game.service.v1.ListProviderByIDsResponse
-	80, // [80:105] is the sub-list for method output_type
-	55, // [55:80] is the sub-list for method input_type
-	55, // [55:55] is the sub-list for extension type_name
-	55, // [55:55] is the sub-list for extension extendee
-	0,  // [0:55] is the sub-list for field type_name
+	67, // 4: api.game.service.v1.ListProvidersResponse.providers:type_name -> api.game.service.v1.ListProvidersResponse.Provider
+	8,  // 5: api.game.service.v1.ListGamesRequest.filter:type_name -> api.game.service.v1.GameFilter
+	9,  // 6: api.game.service.v1.ListGamesRequest.sort:type_name -> api.game.service.v1.GameSort
+	26, // 7: api.game.service.v1.GetGameResponse.game:type_name -> api.game.service.v1.GameInfo
+	29, // 8: api.game.service.v1.CreateSessionRequest.urls:type_name -> api.game.service.v1.UrlInfo
+	68, // 9: api.game.service.v1.BalanceResponse.data:type_name -> api.game.service.v1.BalanceResponse.Data
+	34, // 10: api.game.service.v1.PlayRequest.actions:type_name -> api.game.service.v1.Action
+	69, // 11: api.game.service.v1.PlayResponse.data:type_name -> api.game.service.v1.PlayResponse.Data
+	37, // 12: api.game.service.v1.RollbackRequest.actions:type_name -> api.game.service.v1.RollbackAction
+	70, // 13: api.game.service.v1.RollbackResponse.data:type_name -> api.game.service.v1.RollbackResponse.Data
+	83, // 14: api.game.service.v1.ListBetsRequest.start_time:type_name -> google.protobuf.Timestamp
+	83, // 15: api.game.service.v1.ListBetsRequest.end_time:type_name -> google.protobuf.Timestamp
+	71, // 16: api.game.service.v1.ListBetsRequest.currency_with_ranges:type_name -> api.game.service.v1.ListBetsRequest.CurrencyWithRange
+	71, // 17: api.game.service.v1.ListBetsRequest.settlement_currency_with_ranges:type_name -> api.game.service.v1.ListBetsRequest.CurrencyWithRange
+	72, // 18: api.game.service.v1.ListBetsRequest.settlement_currencies:type_name -> api.game.service.v1.ListBetsRequest.Currencies
+	82, // 19: api.game.service.v1.ListBetsRequest.operator_context:type_name -> api.common.OperatorContext
+	84, // 20: api.game.service.v1.ListBetsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	83, // 21: api.game.service.v1.Bet.created_at:type_name -> google.protobuf.Timestamp
+	83, // 22: api.game.service.v1.Bet.updated_at:type_name -> google.protobuf.Timestamp
+	41, // 23: api.game.service.v1.ListBetsResponse.bets:type_name -> api.game.service.v1.Bet
+	73, // 24: api.game.service.v1.BackofficeListGamesResponse.games:type_name -> api.game.service.v1.BackofficeListGamesResponse.Game
+	75, // 25: api.game.service.v1.GetBetByIdResponse.bet:type_name -> api.game.service.v1.GetBetByIdResponse.Bet
+	83, // 26: api.game.service.v1.GetBackofficeUserOverviewFromGameRequest.start_time:type_name -> google.protobuf.Timestamp
+	83, // 27: api.game.service.v1.GetBackofficeUserOverviewFromGameRequest.end_time:type_name -> google.protobuf.Timestamp
+	76, // 28: api.game.service.v1.GetBackofficeUserOverviewFromGameResponse.game_data:type_name -> api.game.service.v1.GetBackofficeUserOverviewFromGameResponse.GameData
+	83, // 29: api.game.service.v1.GetGameTransactionByIdResponse.bet_time:type_name -> google.protobuf.Timestamp
+	83, // 30: api.game.service.v1.GetGameTransactionByIdResponse.settle_time:type_name -> google.protobuf.Timestamp
+	83, // 31: api.game.service.v1.GetGameTransactionByIdResponse.provider_timestamp:type_name -> google.protobuf.Timestamp
+	83, // 32: api.game.service.v1.GetGameTransactionByIdResponse.operator_timestamp:type_name -> google.protobuf.Timestamp
+	83, // 33: api.game.service.v1.GetGameTransactionByIdResponse.processed_at:type_name -> google.protobuf.Timestamp
+	83, // 34: api.game.service.v1.GetGameTransactionByIdResponse.created_at:type_name -> google.protobuf.Timestamp
+	83, // 35: api.game.service.v1.GetGameTransactionByIdResponse.updated_at:type_name -> google.protobuf.Timestamp
+	82, // 36: api.game.service.v1.ListProviderRatesRequest.operator_context:type_name -> api.common.OperatorContext
+	77, // 37: api.game.service.v1.ListProviderRatesResponse.provider_rates:type_name -> api.game.service.v1.ListProviderRatesResponse.ProviderRate
+	78, // 38: api.game.service.v1.GetDailyGameTransactionDataRequest.time_range:type_name -> api.game.service.v1.GetDailyGameTransactionDataRequest.TimeRange
+	79, // 39: api.game.service.v1.GetDailyGameTransactionDataResponse.game_transaction_data:type_name -> api.game.service.v1.GetDailyGameTransactionDataResponse.GameTransactionData
+	80, // 40: api.game.service.v1.ListProviderByIDsResponse.providers:type_name -> api.game.service.v1.ListProviderByIDsResponse.Provider
+	81, // 41: api.game.service.v1.ListTaxReportsResponse.tax_reports:type_name -> api.game.service.v1.ListTaxReportsResponse.TaxReport
+	35, // 42: api.game.service.v1.PlayResponse.Data.transactions:type_name -> api.game.service.v1.Transactions
+	39, // 43: api.game.service.v1.RollbackResponse.Data.transactions:type_name -> api.game.service.v1.RollbackTransactions
+	83, // 44: api.game.service.v1.GetBetByIdResponse.Action.bet_time:type_name -> google.protobuf.Timestamp
+	83, // 45: api.game.service.v1.GetBetByIdResponse.Action.settle_time:type_name -> google.protobuf.Timestamp
+	83, // 46: api.game.service.v1.GetBetByIdResponse.Action.provider_timestamp:type_name -> google.protobuf.Timestamp
+	83, // 47: api.game.service.v1.GetBetByIdResponse.Action.operator_timestamp:type_name -> google.protobuf.Timestamp
+	83, // 48: api.game.service.v1.GetBetByIdResponse.Action.processed_at:type_name -> google.protobuf.Timestamp
+	83, // 49: api.game.service.v1.GetBetByIdResponse.Action.created_at:type_name -> google.protobuf.Timestamp
+	83, // 50: api.game.service.v1.GetBetByIdResponse.Action.updated_at:type_name -> google.protobuf.Timestamp
+	83, // 51: api.game.service.v1.GetBetByIdResponse.Bet.created_at:type_name -> google.protobuf.Timestamp
+	83, // 52: api.game.service.v1.GetBetByIdResponse.Bet.updated_at:type_name -> google.protobuf.Timestamp
+	74, // 53: api.game.service.v1.GetBetByIdResponse.Bet.actions:type_name -> api.game.service.v1.GetBetByIdResponse.Action
+	83, // 54: api.game.service.v1.GetDailyGameTransactionDataRequest.TimeRange.start_time:type_name -> google.protobuf.Timestamp
+	83, // 55: api.game.service.v1.GetDailyGameTransactionDataRequest.TimeRange.end_time:type_name -> google.protobuf.Timestamp
+	1,  // 56: api.game.service.v1.ListTaxReportsResponse.TaxReport.declaration_status:type_name -> api.game.service.v1.ListTaxReportsResponse.TaxReport.DeclarationStatus
+	2,  // 57: api.game.service.v1.Game.CreateOperator:input_type -> api.game.service.v1.CreateOperatorRequest
+	4,  // 58: api.game.service.v1.Game.UpdateOperator:input_type -> api.game.service.v1.UpdateOperatorRequest
+	6,  // 59: api.game.service.v1.Game.DeleteOperator:input_type -> api.game.service.v1.DeleteOperatorRequest
+	10, // 60: api.game.service.v1.Game.ListProviders:input_type -> api.game.service.v1.ListProvidersRequest
+	12, // 61: api.game.service.v1.Game.ListCategories:input_type -> api.game.service.v1.ListCategoriesRequest
+	14, // 62: api.game.service.v1.Game.ListFeeGroups:input_type -> api.game.service.v1.ListFeeGroupsRequest
+	16, // 63: api.game.service.v1.Game.ListTags:input_type -> api.game.service.v1.ListTagsRequest
+	18, // 64: api.game.service.v1.Game.ListThemes:input_type -> api.game.service.v1.ListThemesRequest
+	20, // 65: api.game.service.v1.Game.ListCurrencies:input_type -> api.game.service.v1.ListCurrenciesRequest
+	22, // 66: api.game.service.v1.Game.ListGames:input_type -> api.game.service.v1.ListGamesRequest
+	24, // 67: api.game.service.v1.Game.GetGame:input_type -> api.game.service.v1.GetGameRequest
+	27, // 68: api.game.service.v1.Game.CreateSession:input_type -> api.game.service.v1.CreateSessionRequest
+	30, // 69: api.game.service.v1.Game.Balance:input_type -> api.game.service.v1.BalanceRequest
+	32, // 70: api.game.service.v1.Game.Play:input_type -> api.game.service.v1.PlayRequest
+	36, // 71: api.game.service.v1.Game.Rollback:input_type -> api.game.service.v1.RollbackRequest
+	40, // 72: api.game.service.v1.Game.ListBets:input_type -> api.game.service.v1.ListBetsRequest
+	43, // 73: api.game.service.v1.Game.BackofficeListGames:input_type -> api.game.service.v1.BackofficeListGamesRequest
+	45, // 74: api.game.service.v1.Game.UpdateGame:input_type -> api.game.service.v1.UpdateGameRequest
+	47, // 75: api.game.service.v1.Game.UpdateProvider:input_type -> api.game.service.v1.UpdateProviderRequest
+	49, // 76: api.game.service.v1.Game.GetBetById:input_type -> api.game.service.v1.GetBetByIdRequest
+	51, // 77: api.game.service.v1.Game.GetBackofficeUserOverviewFromGame:input_type -> api.game.service.v1.GetBackofficeUserOverviewFromGameRequest
+	55, // 78: api.game.service.v1.Game.ListProviderRates:input_type -> api.game.service.v1.ListProviderRatesRequest
+	53, // 79: api.game.service.v1.Game.GetGameTransactionById:input_type -> api.game.service.v1.GetGameTransactionByIdRequest
+	57, // 80: api.game.service.v1.Game.GetDailyGameTransactionData:input_type -> api.game.service.v1.GetDailyGameTransactionDataRequest
+	59, // 81: api.game.service.v1.Game.ListProviderByIDs:input_type -> api.game.service.v1.ListProviderByIDsRequest
+	61, // 82: api.game.service.v1.Game.GetTaxReportConfig:input_type -> api.game.service.v1.GetTaxReportConfigRequest
+	65, // 83: api.game.service.v1.Game.ListTaxReports:input_type -> api.game.service.v1.ListTaxReportsRequest
+	3,  // 84: api.game.service.v1.Game.CreateOperator:output_type -> api.game.service.v1.CreateOperatorResponse
+	5,  // 85: api.game.service.v1.Game.UpdateOperator:output_type -> api.game.service.v1.UpdateOperatorResponse
+	7,  // 86: api.game.service.v1.Game.DeleteOperator:output_type -> api.game.service.v1.DeleteOperatorResponse
+	11, // 87: api.game.service.v1.Game.ListProviders:output_type -> api.game.service.v1.ListProvidersResponse
+	13, // 88: api.game.service.v1.Game.ListCategories:output_type -> api.game.service.v1.ListCategoriesResponse
+	15, // 89: api.game.service.v1.Game.ListFeeGroups:output_type -> api.game.service.v1.ListFeeGroupsResponse
+	17, // 90: api.game.service.v1.Game.ListTags:output_type -> api.game.service.v1.ListTagsResponse
+	19, // 91: api.game.service.v1.Game.ListThemes:output_type -> api.game.service.v1.ListThemesResponse
+	21, // 92: api.game.service.v1.Game.ListCurrencies:output_type -> api.game.service.v1.ListCurrenciesResponse
+	23, // 93: api.game.service.v1.Game.ListGames:output_type -> api.game.service.v1.ListGamesResponse
+	25, // 94: api.game.service.v1.Game.GetGame:output_type -> api.game.service.v1.GetGameResponse
+	28, // 95: api.game.service.v1.Game.CreateSession:output_type -> api.game.service.v1.CreateSessionResponse
+	31, // 96: api.game.service.v1.Game.Balance:output_type -> api.game.service.v1.BalanceResponse
+	33, // 97: api.game.service.v1.Game.Play:output_type -> api.game.service.v1.PlayResponse
+	38, // 98: api.game.service.v1.Game.Rollback:output_type -> api.game.service.v1.RollbackResponse
+	42, // 99: api.game.service.v1.Game.ListBets:output_type -> api.game.service.v1.ListBetsResponse
+	44, // 100: api.game.service.v1.Game.BackofficeListGames:output_type -> api.game.service.v1.BackofficeListGamesResponse
+	46, // 101: api.game.service.v1.Game.UpdateGame:output_type -> api.game.service.v1.UpdateGameResponse
+	48, // 102: api.game.service.v1.Game.UpdateProvider:output_type -> api.game.service.v1.UpdateProviderResponse
+	50, // 103: api.game.service.v1.Game.GetBetById:output_type -> api.game.service.v1.GetBetByIdResponse
+	52, // 104: api.game.service.v1.Game.GetBackofficeUserOverviewFromGame:output_type -> api.game.service.v1.GetBackofficeUserOverviewFromGameResponse
+	56, // 105: api.game.service.v1.Game.ListProviderRates:output_type -> api.game.service.v1.ListProviderRatesResponse
+	54, // 106: api.game.service.v1.Game.GetGameTransactionById:output_type -> api.game.service.v1.GetGameTransactionByIdResponse
+	58, // 107: api.game.service.v1.Game.GetDailyGameTransactionData:output_type -> api.game.service.v1.GetDailyGameTransactionDataResponse
+	60, // 108: api.game.service.v1.Game.ListProviderByIDs:output_type -> api.game.service.v1.ListProviderByIDsResponse
+	62, // 109: api.game.service.v1.Game.GetTaxReportConfig:output_type -> api.game.service.v1.GetTaxReportConfigResponse
+	66, // 110: api.game.service.v1.Game.ListTaxReports:output_type -> api.game.service.v1.ListTaxReportsResponse
+	84, // [84:111] is the sub-list for method output_type
+	57, // [57:84] is the sub-list for method input_type
+	57, // [57:57] is the sub-list for extension type_name
+	57, // [57:57] is the sub-list for extension extendee
+	0,  // [0:57] is the sub-list for field type_name
 }
 
 func init() { file_game_service_v1_game_proto_init() }
@@ -7222,15 +7870,16 @@ func file_game_service_v1_game_proto_init() {
 	file_game_service_v1_game_proto_msgTypes[47].OneofWrappers = []any{}
 	file_game_service_v1_game_proto_msgTypes[49].OneofWrappers = []any{}
 	file_game_service_v1_game_proto_msgTypes[53].OneofWrappers = []any{}
-	file_game_service_v1_game_proto_msgTypes[59].OneofWrappers = []any{}
 	file_game_service_v1_game_proto_msgTypes[63].OneofWrappers = []any{}
+	file_game_service_v1_game_proto_msgTypes[65].OneofWrappers = []any{}
+	file_game_service_v1_game_proto_msgTypes[69].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_game_service_v1_game_proto_rawDesc), len(file_game_service_v1_game_proto_rawDesc)),
-			NumEnums:      1,
-			NumMessages:   73,
+			NumEnums:      2,
+			NumMessages:   80,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

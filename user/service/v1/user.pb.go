@@ -293,7 +293,9 @@ type UserInfo struct {
 	// uesr identities
 	UserIdentity []*UserIdentity `protobuf:"bytes,21,rep,name=user_identity,json=userIdentity,proto3" json:"user_identity,omitempty"`
 	// user date of birth
-	Bod           *timestamppb.Timestamp `protobuf:"bytes,22,opt,name=bod,proto3" json:"bod,omitempty"`
+	Bod *timestamppb.Timestamp `protobuf:"bytes,22,opt,name=bod,proto3" json:"bod,omitempty"`
+	// user country
+	Country       string `protobuf:"bytes,23,opt,name=country,proto3" json:"country,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -480,6 +482,13 @@ func (x *UserInfo) GetBod() *timestamppb.Timestamp {
 		return x.Bod
 	}
 	return nil
+}
+
+func (x *UserInfo) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
 }
 
 // RegisterRequest contains the information needed to register a new user.
@@ -10733,7 +10742,7 @@ var File_user_service_v1_user_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"\x1auser/service/v1/user.proto\x12\x13api.user.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\"\x82\x06\n" +
+	"\x1auser/service/v1/user.proto\x12\x13api.user.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\"\x9c\x06\n" +
 	"\bUserInfo\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
@@ -10758,7 +10767,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\tkyc_level\x18\x13 \x01(\x05R\bkycLevel\x12\x18\n" +
 	"\aaddress\x18\x14 \x01(\tR\aaddress\x12F\n" +
 	"\ruser_identity\x18\x15 \x03(\v2!.api.user.service.v1.UserIdentityR\fuserIdentity\x12,\n" +
-	"\x03bod\x18\x16 \x01(\v2\x1a.google.protobuf.TimestampR\x03bod\"\x9a\x01\n" +
+	"\x03bod\x18\x16 \x01(\v2\x1a.google.protobuf.TimestampR\x03bod\x12\x18\n" +
+	"\acountry\x18\x17 \x01(\tR\acountry\"\x9a\x01\n" +
 	"\x0fRegisterRequest\x12R\n" +
 	"\x11password_provider\x18\x01 \x01(\x0e2%.api.user.service.v1.PasswordProviderR\x10passwordProvider\x12\x17\n" +
 	"\aauth_id\x18\x02 \x01(\tR\x06authId\x12\x1a\n" +

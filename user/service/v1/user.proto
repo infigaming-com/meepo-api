@@ -363,6 +363,8 @@ message UserInfo {
 	repeated UserIdentity user_identity = 21;
 	// user date of birth
 	google.protobuf.Timestamp bod = 22;
+	// user country
+	string country = 23;
 }
 
 // AuthType defines the type of authentication method.
