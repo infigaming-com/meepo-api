@@ -12804,6 +12804,8 @@ components:
                     format: bytes
                 contentType:
                     type: string
+                filePath:
+                    type: string
                 idType:
                     type: string
         api.user.service.v1.UploadKycResponse:
@@ -12866,7 +12868,7 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.user.service.v1.UserIdentity'
-                totalPage:
+                totalCount:
                     type: integer
                     format: int32
         api.user.service.v1.UserIdentityRequest:

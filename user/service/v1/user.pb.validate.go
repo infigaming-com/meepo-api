@@ -18404,7 +18404,7 @@ func (m *UserIdentityListResponse) validate(all bool) error {
 
 	}
 
-	// no validation rules for TotalPage
+	// no validation rules for TotalCount
 
 	if len(errors) > 0 {
 		return UserIdentityListResponseMultiError(errors)

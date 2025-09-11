@@ -61,6 +61,8 @@ func (m *UploadKycRequest) validate(all bool) error {
 
 	// no validation rules for ContentType
 
+	// no validation rules for FilePath
+
 	// no validation rules for IdType
 
 	if len(errors) > 0 {

@@ -26,7 +26,8 @@ type UploadKycRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Data          []byte                 `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
 	ContentType   string                 `protobuf:"bytes,2,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"`
-	IdType        string                 `protobuf:"bytes,3,opt,name=id_type,json=idType,proto3" json:"id_type,omitempty"`
+	FilePath      string                 `protobuf:"bytes,3,opt,name=file_path,json=filePath,proto3" json:"file_path,omitempty"`
+	IdType        string                 `protobuf:"bytes,4,opt,name=id_type,json=idType,proto3" json:"id_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -71,6 +72,13 @@ func (x *UploadKycRequest) GetData() []byte {
 func (x *UploadKycRequest) GetContentType() string {
 	if x != nil {
 		return x.ContentType
+	}
+	return ""
+}
+
+func (x *UploadKycRequest) GetFilePath() string {
+	if x != nil {
+		return x.FilePath
 	}
 	return ""
 }
@@ -130,11 +138,12 @@ var File_user_service_v1_user_filestore_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_user_filestore_proto_rawDesc = "" +
 	"\n" +
-	"$user/service/v1/user_filestore.proto\x12\x13api.user.service.v1\x1a\x1cgoogle/api/annotations.proto\"b\n" +
+	"$user/service/v1/user_filestore.proto\x12\x13api.user.service.v1\x1a\x1cgoogle/api/annotations.proto\"\x7f\n" +
 	"\x10UploadKycRequest\x12\x12\n" +
 	"\x04data\x18\x01 \x01(\fR\x04data\x12!\n" +
-	"\fcontent_type\x18\x02 \x01(\tR\vcontentType\x12\x17\n" +
-	"\aid_type\x18\x03 \x01(\tR\x06idType\".\n" +
+	"\fcontent_type\x18\x02 \x01(\tR\vcontentType\x12\x1b\n" +
+	"\tfile_path\x18\x03 \x01(\tR\bfilePath\x12\x17\n" +
+	"\aid_type\x18\x04 \x01(\tR\x06idType\".\n" +
 	"\x11UploadKycResponse\x12\x19\n" +
 	"\bfile_url\x18\x01 \x01(\tR\afileUrl2\x9a\x01\n" +
 	"\rUserFileStore\x12\x88\x01\n" +

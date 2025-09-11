@@ -8733,7 +8733,7 @@ func (x *UserIdentityListRequest) GetPageSize() int32 {
 type UserIdentityListResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserIdentity  []*UserIdentity        `protobuf:"bytes,1,rep,name=user_identity,json=userIdentity,proto3" json:"user_identity,omitempty"`
-	TotalPage     int32                  `protobuf:"varint,2,opt,name=total_page,json=totalPage,proto3" json:"total_page,omitempty"`
+	TotalCount    int32                  `protobuf:"varint,2,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -8775,9 +8775,9 @@ func (x *UserIdentityListResponse) GetUserIdentity() []*UserIdentity {
 	return nil
 }
 
-func (x *UserIdentityListResponse) GetTotalPage() int32 {
+func (x *UserIdentityListResponse) GetTotalCount() int32 {
 	if x != nil {
-		return x.TotalPage
+		return x.TotalCount
 	}
 	return 0
 }
@@ -11559,11 +11559,11 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\n" +
 	"\b_user_idB\r\n" +
 	"\v_start_timeB\v\n" +
-	"\t_end_time\"\x81\x01\n" +
+	"\t_end_time\"\x83\x01\n" +
 	"\x18UserIdentityListResponse\x12F\n" +
-	"\ruser_identity\x18\x01 \x03(\v2!.api.user.service.v1.UserIdentityR\fuserIdentity\x12\x1d\n" +
-	"\n" +
-	"total_page\x18\x02 \x01(\x05R\ttotalPage\"\x95\x01\n" +
+	"\ruser_identity\x18\x01 \x03(\v2!.api.user.service.v1.UserIdentityR\fuserIdentity\x12\x1f\n" +
+	"\vtotal_count\x18\x02 \x01(\x05R\n" +
+	"totalCount\"\x95\x01\n" +
 	" AddRegisterLoginBlacklistRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x17\n" +
 	"\aid_type\x18\x02 \x01(\tR\x06idType\x12\x10\n" +

@@ -1456,7 +1456,7 @@ message UserIdentityListRequest {
 
 message UserIdentityListResponse {
 	repeated UserIdentity user_identity = 1;
-	int32 total_page = 2;
+	int32 total_count = 2;
 }
 
 message AddRegisterLoginBlacklistRequest {
