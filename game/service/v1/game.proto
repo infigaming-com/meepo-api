@@ -382,6 +382,7 @@ message Action {
 	int64 settle_time = 12;
 	int64 provider_timestamp = 13;
 	bool finished = 14;
+	string extra = 15;
 }
 
 message Transactions {
