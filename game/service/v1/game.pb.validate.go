@@ -3842,6 +3842,8 @@ func (m *Action) validate(all bool) error {
 
 	// no validation rules for Finished
 
+	// no validation rules for Extra
+
 	if len(errors) > 0 {
 		return ActionMultiError(errors)
 	}

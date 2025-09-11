@@ -10887,6 +10887,8 @@ components:
                     type: string
                 finished:
                     type: boolean
+                extra:
+                    type: string
         api.game.service.v1.BalanceRequest:
             type: object
             properties:

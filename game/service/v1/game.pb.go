@@ -2141,6 +2141,7 @@ type Action struct {
 	SettleTime          int64                  `protobuf:"varint,12,opt,name=settle_time,json=settleTime,proto3" json:"settle_time,omitempty"`
 	ProviderTimestamp   int64                  `protobuf:"varint,13,opt,name=provider_timestamp,json=providerTimestamp,proto3" json:"provider_timestamp,omitempty"`
 	Finished            bool                   `protobuf:"varint,14,opt,name=finished,proto3" json:"finished,omitempty"`
+	Extra               string                 `protobuf:"bytes,15,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -2271,6 +2272,13 @@ func (x *Action) GetFinished() bool {
 		return x.Finished
 	}
 	return false
+}
+
+func (x *Action) GetExtra() string {
+	if x != nil {
+		return x.Extra
+	}
+	return ""
 }
 
 type Transactions struct {
@@ -7365,7 +7373,7 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x04Data\x12\x18\n" +
 	"\abalance\x18\x01 \x01(\tR\abalance\x12\x19\n" +
 	"\bround_id\x18\x02 \x01(\tR\aroundId\x12E\n" +
-	"\ftransactions\x18\x03 \x03(\v2!.api.game.service.v1.TransactionsR\ftransactions\"\xbe\x03\n" +
+	"\ftransactions\x18\x03 \x03(\v2!.api.game.service.v1.TransactionsR\ftransactions\"\xd4\x03\n" +
 	"\x06Action\x12\x16\n" +
 	"\x06action\x18\x01 \x01(\tR\x06action\x12\x15\n" +
 	"\x06bet_id\x18\x02 \x01(\tR\x05betId\x12\x15\n" +
@@ -7384,7 +7392,8 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\vsettle_time\x18\f \x01(\x03R\n" +
 	"settleTime\x12-\n" +
 	"\x12provider_timestamp\x18\r \x01(\x03R\x11providerTimestamp\x12\x1a\n" +
-	"\bfinished\x18\x0e \x01(\bR\bfinished\"\x98\x01\n" +
+	"\bfinished\x18\x0e \x01(\bR\bfinished\x12\x14\n" +
+	"\x05extra\x18\x0f \x01(\tR\x05extra\"\x98\x01\n" +
 	"\fTransactions\x12\x16\n" +
 	"\x06txn_id\x18\x01 \x01(\tR\x06txn_id\x12(\n" +
 	"\x0foperator_txn_id\x18\x02 \x01(\tR\x0foperator_txn_id\x12\"\n" +
