@@ -87,8 +87,11 @@ const (
 	User_UserIdentityList_FullMethodName                = "/api.user.service.v1.User/UserIdentityList"
 	User_AddRegisterLoginBlacklist_FullMethodName       = "/api.user.service.v1.User/AddRegisterLoginBlacklist"
 	User_DeleteRegisterLoginBlacklist_FullMethodName    = "/api.user.service.v1.User/DeleteRegisterLoginBlacklist"
-	User_GetRegisterLoginBlacklist_FullMethodName       = "/api.user.service.v1.User/GetRegisterLoginBlacklist"
 	User_ListRegisterLoginBlacklist_FullMethodName      = "/api.user.service.v1.User/ListRegisterLoginBlacklist"
+	User_GetOperatorCountryConfig_FullMethodName        = "/api.user.service.v1.User/GetOperatorCountryConfig"
+	User_AddOperatorCountryConfig_FullMethodName        = "/api.user.service.v1.User/AddOperatorCountryConfig"
+	User_DeleteOperatorCountryConfig_FullMethodName     = "/api.user.service.v1.User/DeleteOperatorCountryConfig"
+	User_UpdateOperatorCountryConfig_FullMethodName     = "/api.user.service.v1.User/UpdateOperatorCountryConfig"
 )
 
 // UserClient is the client API for User service.
@@ -215,8 +218,11 @@ type UserClient interface {
 	UserIdentityList(ctx context.Context, in *UserIdentityListRequest, opts ...grpc.CallOption) (*UserIdentityListResponse, error)
 	AddRegisterLoginBlacklist(ctx context.Context, in *AddRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*AddRegisterLoginBlacklistResponse, error)
 	DeleteRegisterLoginBlacklist(ctx context.Context, in *DeleteRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*DeleteRegisterLoginBlacklistResponse, error)
-	GetRegisterLoginBlacklist(ctx context.Context, in *GetRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*GetRegisterLoginBlacklistResponse, error)
 	ListRegisterLoginBlacklist(ctx context.Context, in *ListRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*ListRegisterLoginBlacklistResponse, error)
+	GetOperatorCountryConfig(ctx context.Context, in *GetOperatorCountryConfigRequest, opts ...grpc.CallOption) (*GetOperatorCountryConfigResponse, error)
+	AddOperatorCountryConfig(ctx context.Context, in *AddOperatorCountryConfigRequest, opts ...grpc.CallOption) (*AddOperatorCountryConfigResponse, error)
+	DeleteOperatorCountryConfig(ctx context.Context, in *DeleteOperatorCountryConfigRequest, opts ...grpc.CallOption) (*DeleteOperatorCountryConfigResponse, error)
+	UpdateOperatorCountryConfig(ctx context.Context, in *UpdateOperatorCountryConfigRequest, opts ...grpc.CallOption) (*UpdateOperatorCountryConfigResponse, error)
 }
 
 type userClient struct {
@@ -907,20 +913,50 @@ func (c *userClient) DeleteRegisterLoginBlacklist(ctx context.Context, in *Delet
 	return out, nil
 }
 
-func (c *userClient) GetRegisterLoginBlacklist(ctx context.Context, in *GetRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*GetRegisterLoginBlacklistResponse, error) {
+func (c *userClient) ListRegisterLoginBlacklist(ctx context.Context, in *ListRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*ListRegisterLoginBlacklistResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetRegisterLoginBlacklistResponse)
-	err := c.cc.Invoke(ctx, User_GetRegisterLoginBlacklist_FullMethodName, in, out, cOpts...)
+	out := new(ListRegisterLoginBlacklistResponse)
+	err := c.cc.Invoke(ctx, User_ListRegisterLoginBlacklist_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userClient) ListRegisterLoginBlacklist(ctx context.Context, in *ListRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*ListRegisterLoginBlacklistResponse, error) {
+func (c *userClient) GetOperatorCountryConfig(ctx context.Context, in *GetOperatorCountryConfigRequest, opts ...grpc.CallOption) (*GetOperatorCountryConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListRegisterLoginBlacklistResponse)
-	err := c.cc.Invoke(ctx, User_ListRegisterLoginBlacklist_FullMethodName, in, out, cOpts...)
+	out := new(GetOperatorCountryConfigResponse)
+	err := c.cc.Invoke(ctx, User_GetOperatorCountryConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) AddOperatorCountryConfig(ctx context.Context, in *AddOperatorCountryConfigRequest, opts ...grpc.CallOption) (*AddOperatorCountryConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddOperatorCountryConfigResponse)
+	err := c.cc.Invoke(ctx, User_AddOperatorCountryConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) DeleteOperatorCountryConfig(ctx context.Context, in *DeleteOperatorCountryConfigRequest, opts ...grpc.CallOption) (*DeleteOperatorCountryConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteOperatorCountryConfigResponse)
+	err := c.cc.Invoke(ctx, User_DeleteOperatorCountryConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) UpdateOperatorCountryConfig(ctx context.Context, in *UpdateOperatorCountryConfigRequest, opts ...grpc.CallOption) (*UpdateOperatorCountryConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateOperatorCountryConfigResponse)
+	err := c.cc.Invoke(ctx, User_UpdateOperatorCountryConfig_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1051,8 +1087,11 @@ type UserServer interface {
 	UserIdentityList(context.Context, *UserIdentityListRequest) (*UserIdentityListResponse, error)
 	AddRegisterLoginBlacklist(context.Context, *AddRegisterLoginBlacklistRequest) (*AddRegisterLoginBlacklistResponse, error)
 	DeleteRegisterLoginBlacklist(context.Context, *DeleteRegisterLoginBlacklistRequest) (*DeleteRegisterLoginBlacklistResponse, error)
-	GetRegisterLoginBlacklist(context.Context, *GetRegisterLoginBlacklistRequest) (*GetRegisterLoginBlacklistResponse, error)
 	ListRegisterLoginBlacklist(context.Context, *ListRegisterLoginBlacklistRequest) (*ListRegisterLoginBlacklistResponse, error)
+	GetOperatorCountryConfig(context.Context, *GetOperatorCountryConfigRequest) (*GetOperatorCountryConfigResponse, error)
+	AddOperatorCountryConfig(context.Context, *AddOperatorCountryConfigRequest) (*AddOperatorCountryConfigResponse, error)
+	DeleteOperatorCountryConfig(context.Context, *DeleteOperatorCountryConfigRequest) (*DeleteOperatorCountryConfigResponse, error)
+	UpdateOperatorCountryConfig(context.Context, *UpdateOperatorCountryConfigRequest) (*UpdateOperatorCountryConfigResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -1267,11 +1306,20 @@ func (UnimplementedUserServer) AddRegisterLoginBlacklist(context.Context, *AddRe
 func (UnimplementedUserServer) DeleteRegisterLoginBlacklist(context.Context, *DeleteRegisterLoginBlacklistRequest) (*DeleteRegisterLoginBlacklistResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteRegisterLoginBlacklist not implemented")
 }
-func (UnimplementedUserServer) GetRegisterLoginBlacklist(context.Context, *GetRegisterLoginBlacklistRequest) (*GetRegisterLoginBlacklistResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetRegisterLoginBlacklist not implemented")
-}
 func (UnimplementedUserServer) ListRegisterLoginBlacklist(context.Context, *ListRegisterLoginBlacklistRequest) (*ListRegisterLoginBlacklistResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListRegisterLoginBlacklist not implemented")
+}
+func (UnimplementedUserServer) GetOperatorCountryConfig(context.Context, *GetOperatorCountryConfigRequest) (*GetOperatorCountryConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorCountryConfig not implemented")
+}
+func (UnimplementedUserServer) AddOperatorCountryConfig(context.Context, *AddOperatorCountryConfigRequest) (*AddOperatorCountryConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddOperatorCountryConfig not implemented")
+}
+func (UnimplementedUserServer) DeleteOperatorCountryConfig(context.Context, *DeleteOperatorCountryConfigRequest) (*DeleteOperatorCountryConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteOperatorCountryConfig not implemented")
+}
+func (UnimplementedUserServer) UpdateOperatorCountryConfig(context.Context, *UpdateOperatorCountryConfigRequest) (*UpdateOperatorCountryConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOperatorCountryConfig not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -2518,24 +2566,6 @@ func _User_DeleteRegisterLoginBlacklist_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
-func _User_GetRegisterLoginBlacklist_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetRegisterLoginBlacklistRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserServer).GetRegisterLoginBlacklist(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: User_GetRegisterLoginBlacklist_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).GetRegisterLoginBlacklist(ctx, req.(*GetRegisterLoginBlacklistRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _User_ListRegisterLoginBlacklist_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListRegisterLoginBlacklistRequest)
 	if err := dec(in); err != nil {
@@ -2550,6 +2580,78 @@ func _User_ListRegisterLoginBlacklist_Handler(srv interface{}, ctx context.Conte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServer).ListRegisterLoginBlacklist(ctx, req.(*ListRegisterLoginBlacklistRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetOperatorCountryConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorCountryConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetOperatorCountryConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetOperatorCountryConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetOperatorCountryConfig(ctx, req.(*GetOperatorCountryConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_AddOperatorCountryConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddOperatorCountryConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).AddOperatorCountryConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_AddOperatorCountryConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).AddOperatorCountryConfig(ctx, req.(*AddOperatorCountryConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_DeleteOperatorCountryConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteOperatorCountryConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).DeleteOperatorCountryConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_DeleteOperatorCountryConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).DeleteOperatorCountryConfig(ctx, req.(*DeleteOperatorCountryConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_UpdateOperatorCountryConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOperatorCountryConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).UpdateOperatorCountryConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_UpdateOperatorCountryConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).UpdateOperatorCountryConfig(ctx, req.(*UpdateOperatorCountryConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2834,12 +2936,24 @@ var User_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _User_DeleteRegisterLoginBlacklist_Handler,
 		},
 		{
-			MethodName: "GetRegisterLoginBlacklist",
-			Handler:    _User_GetRegisterLoginBlacklist_Handler,
-		},
-		{
 			MethodName: "ListRegisterLoginBlacklist",
 			Handler:    _User_ListRegisterLoginBlacklist_Handler,
+		},
+		{
+			MethodName: "GetOperatorCountryConfig",
+			Handler:    _User_GetOperatorCountryConfig_Handler,
+		},
+		{
+			MethodName: "AddOperatorCountryConfig",
+			Handler:    _User_AddOperatorCountryConfig_Handler,
+		},
+		{
+			MethodName: "DeleteOperatorCountryConfig",
+			Handler:    _User_DeleteOperatorCountryConfig_Handler,
+		},
+		{
+			MethodName: "UpdateOperatorCountryConfig",
+			Handler:    _User_UpdateOperatorCountryConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

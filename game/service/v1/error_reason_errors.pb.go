@@ -238,3 +238,39 @@ func IsResponsibleGamblingConfigNotFound(err error) bool {
 func ErrorResponsibleGamblingConfigNotFound(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND.String(), fmt.Sprintf(format, args...))
 }
+
+func IsTimeLimitsEnabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_TIME_LIMITS_ENABLED.String() && e.Code == 500
+}
+
+func ErrorTimeLimitsEnabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_TIME_LIMITS_ENABLED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsBreakInPlayEnabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_BREAK_IN_PLAY_ENABLED.String() && e.Code == 500
+}
+
+func ErrorBreakInPlayEnabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_BREAK_IN_PLAY_ENABLED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSelfExclusionEnabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SELF_EXCLUSION_ENABLED.String() && e.Code == 500
+}
+
+func ErrorSelfExclusionEnabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SELF_EXCLUSION_ENABLED.String(), fmt.Sprintf(format, args...))
+}

@@ -312,9 +312,15 @@ service User {
 
 	rpc DeleteRegisterLoginBlacklist(DeleteRegisterLoginBlacklistRequest) returns (DeleteRegisterLoginBlacklistResponse) {}
 
-	rpc GetRegisterLoginBlacklist(GetRegisterLoginBlacklistRequest) returns (GetRegisterLoginBlacklistResponse) {}
-
 	rpc ListRegisterLoginBlacklist(ListRegisterLoginBlacklistRequest) returns (ListRegisterLoginBlacklistResponse) {}
+
+	rpc GetOperatorCountryConfig(GetOperatorCountryConfigRequest) returns (GetOperatorCountryConfigResponse) {}
+
+	rpc AddOperatorCountryConfig(AddOperatorCountryConfigRequest) returns (AddOperatorCountryConfigResponse) {}
+
+	rpc DeleteOperatorCountryConfig(DeleteOperatorCountryConfigRequest) returns (DeleteOperatorCountryConfigResponse) {}
+
+	rpc UpdateOperatorCountryConfig(UpdateOperatorCountryConfigRequest) returns (UpdateOperatorCountryConfigResponse) {}
 }
 
 // UserInfo contains basic user information.
@@ -1434,6 +1440,10 @@ message ResponsibleGamblingStatus {
 	bool deposit_allowed = 2;
 	bool withdrawal_allowed = 3;
 	bool game_bet_allowed = 4;
+	bool self_exclusion_active = 5; // indicates if self exclusion active in current time	
+	bool break_in_play_active = 6; // indicates if break in play active in current time
+	bool time_limits_active = 7; // indicates if time limits active in current time
+	google.protobuf.Timestamp time_limits_next_inactive_time = 8; // the very next time when time limits is inactive, exists if time_limits_active is true
 }
 
 message ResponsibleGamblingDeleteSchedule {
@@ -1492,16 +1502,6 @@ message DeleteRegisterLoginBlacklistRequest {
 message DeleteRegisterLoginBlacklistResponse {
 }
 
-message GetRegisterLoginBlacklistRequest {
-	api.common.OperatorContext operator_context = 1;
-	string id_type = 2;
-	repeated string ids = 3;
-}
-
-message GetRegisterLoginBlacklistResponse {
-	repeated string ids = 1;
-}
-
 message ListRegisterLoginBlacklistRequest {
 	api.common.OperatorContext operator_context = 1;
 	string id_type = 2;
@@ -1513,9 +1513,48 @@ message ListRegisterLoginBlacklistResponse {
 	message RegisterLoginBlacklist {
 		string id = 1;
 		google.protobuf.Timestamp created_at = 2;
+		string source = 3;
 	}
 	repeated RegisterLoginBlacklist register_login_blacklists = 1;
 	int32 page = 2;
 	int32 page_size = 3;
 	int32 total = 4;
+}
+
+message GetOperatorCountryConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	string country = 2;
+}
+
+message GetOperatorCountryConfigResponse {
+	message Config {
+		int32 registration_limit_per_ip = 1;
+	}
+	Config config = 1;
+}
+
+message AddOperatorCountryConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	string country = 2;
+	int32 registration_limit_per_ip = 3;
+}
+
+message AddOperatorCountryConfigResponse {
+}
+
+message DeleteOperatorCountryConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	string country = 2;
+}
+
+message DeleteOperatorCountryConfigResponse {
+}
+
+message UpdateOperatorCountryConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	string country = 2;
+	optional int32 registration_limit_per_ip = 3;
+}
+
+message UpdateOperatorCountryConfigResponse {
 }
