@@ -15,6 +15,12 @@ service BackofficeFileStore {
 			body: "*"
 		};
 	}
+	rpc UploadRegisterLoginBlacklist(UploadRegisterLoginBlacklistRequest) returns (UploadRegisterLoginBlacklistResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/filestore/register-login-blacklist/upload"
+			body: "*"
+		};
+	}
 }
 
 message UploadOperatorStaticFileRequest {
@@ -25,3 +31,10 @@ message UploadOperatorStaticFileRequest {
 }
 
 message UploadOperatorStaticFileResponse {}
+
+message UploadRegisterLoginBlacklistRequest {
+	bytes data = 1;
+	string id_type = 2;
+}
+
+message UploadRegisterLoginBlacklistResponse {}

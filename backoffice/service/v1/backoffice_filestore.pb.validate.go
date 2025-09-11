@@ -250,3 +250,217 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = UploadOperatorStaticFileResponseValidationError{}
+
+// Validate checks the field values on UploadRegisterLoginBlacklistRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *UploadRegisterLoginBlacklistRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UploadRegisterLoginBlacklistRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// UploadRegisterLoginBlacklistRequestMultiError, or nil if none found.
+func (m *UploadRegisterLoginBlacklistRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UploadRegisterLoginBlacklistRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Data
+
+	// no validation rules for IdType
+
+	if len(errors) > 0 {
+		return UploadRegisterLoginBlacklistRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UploadRegisterLoginBlacklistRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// UploadRegisterLoginBlacklistRequest.ValidateAll() if the designated
+// constraints aren't met.
+type UploadRegisterLoginBlacklistRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UploadRegisterLoginBlacklistRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UploadRegisterLoginBlacklistRequestMultiError) AllErrors() []error { return m }
+
+// UploadRegisterLoginBlacklistRequestValidationError is the validation error
+// returned by UploadRegisterLoginBlacklistRequest.Validate if the designated
+// constraints aren't met.
+type UploadRegisterLoginBlacklistRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UploadRegisterLoginBlacklistRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UploadRegisterLoginBlacklistRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UploadRegisterLoginBlacklistRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UploadRegisterLoginBlacklistRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UploadRegisterLoginBlacklistRequestValidationError) ErrorName() string {
+	return "UploadRegisterLoginBlacklistRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UploadRegisterLoginBlacklistRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUploadRegisterLoginBlacklistRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UploadRegisterLoginBlacklistRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UploadRegisterLoginBlacklistRequestValidationError{}
+
+// Validate checks the field values on UploadRegisterLoginBlacklistResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *UploadRegisterLoginBlacklistResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UploadRegisterLoginBlacklistResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// UploadRegisterLoginBlacklistResponseMultiError, or nil if none found.
+func (m *UploadRegisterLoginBlacklistResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UploadRegisterLoginBlacklistResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return UploadRegisterLoginBlacklistResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UploadRegisterLoginBlacklistResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// UploadRegisterLoginBlacklistResponse.ValidateAll() if the designated
+// constraints aren't met.
+type UploadRegisterLoginBlacklistResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UploadRegisterLoginBlacklistResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UploadRegisterLoginBlacklistResponseMultiError) AllErrors() []error { return m }
+
+// UploadRegisterLoginBlacklistResponseValidationError is the validation error
+// returned by UploadRegisterLoginBlacklistResponse.Validate if the designated
+// constraints aren't met.
+type UploadRegisterLoginBlacklistResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UploadRegisterLoginBlacklistResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UploadRegisterLoginBlacklistResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UploadRegisterLoginBlacklistResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UploadRegisterLoginBlacklistResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UploadRegisterLoginBlacklistResponseValidationError) ErrorName() string {
+	return "UploadRegisterLoginBlacklistResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UploadRegisterLoginBlacklistResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUploadRegisterLoginBlacklistResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UploadRegisterLoginBlacklistResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UploadRegisterLoginBlacklistResponseValidationError{}
