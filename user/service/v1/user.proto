@@ -312,8 +312,6 @@ service User {
 
 	rpc DeleteRegisterLoginBlacklist(DeleteRegisterLoginBlacklistRequest) returns (DeleteRegisterLoginBlacklistResponse) {}
 
-	rpc GetRegisterLoginBlacklist(GetRegisterLoginBlacklistRequest) returns (GetRegisterLoginBlacklistResponse) {}
-
 	rpc ListRegisterLoginBlacklist(ListRegisterLoginBlacklistRequest) returns (ListRegisterLoginBlacklistResponse) {}
 
 	rpc GetOperatorCountryConfig(GetOperatorCountryConfigRequest) returns (GetOperatorCountryConfigResponse) {}
@@ -1489,16 +1487,6 @@ message DeleteRegisterLoginBlacklistRequest {
 message DeleteRegisterLoginBlacklistResponse {
 }
 
-message GetRegisterLoginBlacklistRequest {
-	api.common.OperatorContext operator_context = 1;
-	string id_type = 2;
-	repeated string ids = 3;
-}
-
-message GetRegisterLoginBlacklistResponse {
-	repeated string ids = 1;
-}
-
 message ListRegisterLoginBlacklistRequest {
 	api.common.OperatorContext operator_context = 1;
 	string id_type = 2;
@@ -1510,6 +1498,7 @@ message ListRegisterLoginBlacklistResponse {
 	message RegisterLoginBlacklist {
 		string id = 1;
 		google.protobuf.Timestamp created_at = 2;
+		string source = 3;
 	}
 	repeated RegisterLoginBlacklist register_login_blacklists = 1;
 	int32 page = 2;

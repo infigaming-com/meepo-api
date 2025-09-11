@@ -12518,6 +12518,8 @@ components:
                 createdAt:
                     type: string
                     format: date-time
+                source:
+                    type: string
         api.user.service.v1.LoginRequest:
             type: object
             properties:
