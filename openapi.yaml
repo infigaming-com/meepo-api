@@ -12236,13 +12236,47 @@ components:
                     type: string
                 registeredEmail:
                     type: string
+                firstName:
+                    type: string
+                lastName:
+                    type: string
                 kycLevel:
                     type: integer
                     format: int32
+                emailVerified:
+                    type: boolean
+                phoneVerified:
+                    type: boolean
+                bod:
+                    type: string
+                address:
+                    type: string
                 userIdentity:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.user.service.v1.UserIdentity'
+                emailChangeHistory:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.GetUserProfileResponse_ChangeRecord'
+                phoneChangeHistory:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.GetUserProfileResponse_ChangeRecord'
+        api.user.service.v1.GetUserProfileResponse_ChangeRecord:
+            type: object
+            properties:
+                changedAt:
+                    type: string
+                    format: date-time
+                new:
+                    type: string
+                old:
+                    type: string
+                ip:
+                    type: string
+                reviewer:
+                    type: string
         api.user.service.v1.GetUserProfileResponse_Comment:
             type: object
             properties:

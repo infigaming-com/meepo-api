@@ -887,6 +887,13 @@ message GetUserProfileResponse {
 		string content = 4;
 		google.protobuf.Timestamp created_at = 5;
 	}
+	message ChangeRecord {
+		google.protobuf.Timestamp changed_at = 1;
+		string new = 2;
+		string old = 3;
+		string ip = 4;
+		string reviewer = 5;
+	}
 	string nickname = 1;
 	int64 user_id = 2;
 	int32 vip_level = 3; // Not available for now, only return 1
@@ -904,8 +911,16 @@ message GetUserProfileResponse {
 	int32 login_page_size = 15;
 	string registered_mobile = 16;
 	string registered_email = 17;
-	int32 kyc_level = 18;
-	repeated UserIdentity user_identity = 19;
+	string first_name = 18;
+	string last_name = 19;
+	int32 kyc_level = 20;
+	bool email_verified = 21;
+	bool phone_verified = 22;
+	string bod = 23;
+	string address = 24;
+	repeated UserIdentity user_identity = 25;
+	repeated ChangeRecord emailChangeHistory = 26;
+	repeated ChangeRecord phoneChangeHistory = 27;
 }
 
 message CreateRoleRequest {
