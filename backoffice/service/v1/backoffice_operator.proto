@@ -387,19 +387,22 @@ message UpdateOperatorAccountSettingsResponse {
 }
 
 message AddRegisterLoginBlacklistRequest {
-	string id_type = 1;
-	repeated string ids = 2;
+	api.common.OperatorContext target_operator_context = 1;
+	string id_type = 2;
+	repeated string ids = 3;
 }
 
 message DeleteRegisterLoginBlacklistRequest {
-	string id_type = 1;
-	repeated string ids = 2;
+	api.common.OperatorContext target_operator_context = 1;
+	string id_type = 2;
+	repeated string ids = 3;
 }
 
 message ListRegisterLoginBlacklistRequest {
-	string id_type = 1;
-	optional int32 page = 2;
-	optional int32 page_size = 3;
+	api.common.OperatorContext target_operator_context = 1;
+	string id_type = 2;
+	optional int32 page = 3;
+	optional int32 page_size = 4;
 }
 
 message GetOperatorCountryConfigRequest {

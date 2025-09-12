@@ -3,6 +3,7 @@ syntax = "proto3";
 package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
+import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -33,8 +34,9 @@ message UploadOperatorStaticFileRequest {
 message UploadOperatorStaticFileResponse {}
 
 message UploadRegisterLoginBlacklistRequest {
-	bytes data = 1;
-	string id_type = 2;
+	api.common.OperatorContext target_operator_context = 1;
+	bytes data = 2;
+	string id_type = 3;
 }
 
 message UploadRegisterLoginBlacklistResponse {}
