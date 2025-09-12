@@ -1356,3 +1356,15 @@ func IsRegistrationLimitPerIpExceeded(err error) bool {
 func ErrorRegistrationLimitPerIpExceeded(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_REGISTRATION_LIMIT_PER_IP_EXCEEDED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsUserInSelfExclusionPeriod(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_IN_SELF_EXCLUSION_PERIOD.String() && e.Code == 500
+}
+
+func ErrorUserInSelfExclusionPeriod(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_IN_SELF_EXCLUSION_PERIOD.String(), fmt.Sprintf(format, args...))
+}
