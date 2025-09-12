@@ -38,10 +38,8 @@ const (
 	BackofficeOperator_AddRegisterLoginBlacklist_FullMethodName            = "/api.backoffice.service.v1.BackofficeOperator/AddRegisterLoginBlacklist"
 	BackofficeOperator_DeleteRegisterLoginBlacklist_FullMethodName         = "/api.backoffice.service.v1.BackofficeOperator/DeleteRegisterLoginBlacklist"
 	BackofficeOperator_ListRegisterLoginBlacklist_FullMethodName           = "/api.backoffice.service.v1.BackofficeOperator/ListRegisterLoginBlacklist"
-	BackofficeOperator_GetOperatorCountryConfig_FullMethodName             = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorCountryConfig"
-	BackofficeOperator_AddOperatorCountryConfig_FullMethodName             = "/api.backoffice.service.v1.BackofficeOperator/AddOperatorCountryConfig"
-	BackofficeOperator_DeleteOperatorCountryConfig_FullMethodName          = "/api.backoffice.service.v1.BackofficeOperator/DeleteOperatorCountryConfig"
-	BackofficeOperator_UpdateOperatorCountryConfig_FullMethodName          = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorCountryConfig"
+	BackofficeOperator_SetOperatorRegisterLimitConfig_FullMethodName       = "/api.backoffice.service.v1.BackofficeOperator/SetOperatorRegisterLimitConfig"
+	BackofficeOperator_GetOperatorRegisterLimitConfig_FullMethodName       = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorRegisterLimitConfig"
 )
 
 // BackofficeOperatorClient is the client API for BackofficeOperator service.
@@ -77,10 +75,8 @@ type BackofficeOperatorClient interface {
 	AddRegisterLoginBlacklist(ctx context.Context, in *AddRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*v1.AddRegisterLoginBlacklistResponse, error)
 	DeleteRegisterLoginBlacklist(ctx context.Context, in *DeleteRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*v1.DeleteRegisterLoginBlacklistResponse, error)
 	ListRegisterLoginBlacklist(ctx context.Context, in *ListRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*v1.ListRegisterLoginBlacklistResponse, error)
-	GetOperatorCountryConfig(ctx context.Context, in *GetOperatorCountryConfigRequest, opts ...grpc.CallOption) (*v1.GetOperatorCountryConfigResponse, error)
-	AddOperatorCountryConfig(ctx context.Context, in *AddOperatorCountryConfigRequest, opts ...grpc.CallOption) (*v1.AddOperatorCountryConfigResponse, error)
-	DeleteOperatorCountryConfig(ctx context.Context, in *DeleteOperatorCountryConfigRequest, opts ...grpc.CallOption) (*v1.DeleteOperatorCountryConfigResponse, error)
-	UpdateOperatorCountryConfig(ctx context.Context, in *UpdateOperatorCountryConfigRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorCountryConfigResponse, error)
+	SetOperatorRegisterLimitConfig(ctx context.Context, in *SetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*v1.SetOperatorRegisterLimitConfigResponse, error)
+	GetOperatorRegisterLimitConfig(ctx context.Context, in *GetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*v1.GetOperatorRegisterLimitConfigResponse, error)
 }
 
 type backofficeOperatorClient struct {
@@ -271,40 +267,20 @@ func (c *backofficeOperatorClient) ListRegisterLoginBlacklist(ctx context.Contex
 	return out, nil
 }
 
-func (c *backofficeOperatorClient) GetOperatorCountryConfig(ctx context.Context, in *GetOperatorCountryConfigRequest, opts ...grpc.CallOption) (*v1.GetOperatorCountryConfigResponse, error) {
+func (c *backofficeOperatorClient) SetOperatorRegisterLimitConfig(ctx context.Context, in *SetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*v1.SetOperatorRegisterLimitConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.GetOperatorCountryConfigResponse)
-	err := c.cc.Invoke(ctx, BackofficeOperator_GetOperatorCountryConfig_FullMethodName, in, out, cOpts...)
+	out := new(v1.SetOperatorRegisterLimitConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_SetOperatorRegisterLimitConfig_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backofficeOperatorClient) AddOperatorCountryConfig(ctx context.Context, in *AddOperatorCountryConfigRequest, opts ...grpc.CallOption) (*v1.AddOperatorCountryConfigResponse, error) {
+func (c *backofficeOperatorClient) GetOperatorRegisterLimitConfig(ctx context.Context, in *GetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*v1.GetOperatorRegisterLimitConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.AddOperatorCountryConfigResponse)
-	err := c.cc.Invoke(ctx, BackofficeOperator_AddOperatorCountryConfig_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *backofficeOperatorClient) DeleteOperatorCountryConfig(ctx context.Context, in *DeleteOperatorCountryConfigRequest, opts ...grpc.CallOption) (*v1.DeleteOperatorCountryConfigResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.DeleteOperatorCountryConfigResponse)
-	err := c.cc.Invoke(ctx, BackofficeOperator_DeleteOperatorCountryConfig_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *backofficeOperatorClient) UpdateOperatorCountryConfig(ctx context.Context, in *UpdateOperatorCountryConfigRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorCountryConfigResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.UpdateOperatorCountryConfigResponse)
-	err := c.cc.Invoke(ctx, BackofficeOperator_UpdateOperatorCountryConfig_FullMethodName, in, out, cOpts...)
+	out := new(v1.GetOperatorRegisterLimitConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_GetOperatorRegisterLimitConfig_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -344,10 +320,8 @@ type BackofficeOperatorServer interface {
 	AddRegisterLoginBlacklist(context.Context, *AddRegisterLoginBlacklistRequest) (*v1.AddRegisterLoginBlacklistResponse, error)
 	DeleteRegisterLoginBlacklist(context.Context, *DeleteRegisterLoginBlacklistRequest) (*v1.DeleteRegisterLoginBlacklistResponse, error)
 	ListRegisterLoginBlacklist(context.Context, *ListRegisterLoginBlacklistRequest) (*v1.ListRegisterLoginBlacklistResponse, error)
-	GetOperatorCountryConfig(context.Context, *GetOperatorCountryConfigRequest) (*v1.GetOperatorCountryConfigResponse, error)
-	AddOperatorCountryConfig(context.Context, *AddOperatorCountryConfigRequest) (*v1.AddOperatorCountryConfigResponse, error)
-	DeleteOperatorCountryConfig(context.Context, *DeleteOperatorCountryConfigRequest) (*v1.DeleteOperatorCountryConfigResponse, error)
-	UpdateOperatorCountryConfig(context.Context, *UpdateOperatorCountryConfigRequest) (*v1.UpdateOperatorCountryConfigResponse, error)
+	SetOperatorRegisterLimitConfig(context.Context, *SetOperatorRegisterLimitConfigRequest) (*v1.SetOperatorRegisterLimitConfigResponse, error)
+	GetOperatorRegisterLimitConfig(context.Context, *GetOperatorRegisterLimitConfigRequest) (*v1.GetOperatorRegisterLimitConfigResponse, error)
 	mustEmbedUnimplementedBackofficeOperatorServer()
 }
 
@@ -412,17 +386,11 @@ func (UnimplementedBackofficeOperatorServer) DeleteRegisterLoginBlacklist(contex
 func (UnimplementedBackofficeOperatorServer) ListRegisterLoginBlacklist(context.Context, *ListRegisterLoginBlacklistRequest) (*v1.ListRegisterLoginBlacklistResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListRegisterLoginBlacklist not implemented")
 }
-func (UnimplementedBackofficeOperatorServer) GetOperatorCountryConfig(context.Context, *GetOperatorCountryConfigRequest) (*v1.GetOperatorCountryConfigResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorCountryConfig not implemented")
+func (UnimplementedBackofficeOperatorServer) SetOperatorRegisterLimitConfig(context.Context, *SetOperatorRegisterLimitConfigRequest) (*v1.SetOperatorRegisterLimitConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetOperatorRegisterLimitConfig not implemented")
 }
-func (UnimplementedBackofficeOperatorServer) AddOperatorCountryConfig(context.Context, *AddOperatorCountryConfigRequest) (*v1.AddOperatorCountryConfigResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddOperatorCountryConfig not implemented")
-}
-func (UnimplementedBackofficeOperatorServer) DeleteOperatorCountryConfig(context.Context, *DeleteOperatorCountryConfigRequest) (*v1.DeleteOperatorCountryConfigResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteOperatorCountryConfig not implemented")
-}
-func (UnimplementedBackofficeOperatorServer) UpdateOperatorCountryConfig(context.Context, *UpdateOperatorCountryConfigRequest) (*v1.UpdateOperatorCountryConfigResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateOperatorCountryConfig not implemented")
+func (UnimplementedBackofficeOperatorServer) GetOperatorRegisterLimitConfig(context.Context, *GetOperatorRegisterLimitConfigRequest) (*v1.GetOperatorRegisterLimitConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorRegisterLimitConfig not implemented")
 }
 func (UnimplementedBackofficeOperatorServer) mustEmbedUnimplementedBackofficeOperatorServer() {}
 func (UnimplementedBackofficeOperatorServer) testEmbeddedByValue()                            {}
@@ -769,74 +737,38 @@ func _BackofficeOperator_ListRegisterLoginBlacklist_Handler(srv interface{}, ctx
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeOperator_GetOperatorCountryConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOperatorCountryConfigRequest)
+func _BackofficeOperator_SetOperatorRegisterLimitConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetOperatorRegisterLimitConfigRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeOperatorServer).GetOperatorCountryConfig(ctx, in)
+		return srv.(BackofficeOperatorServer).SetOperatorRegisterLimitConfig(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeOperator_GetOperatorCountryConfig_FullMethodName,
+		FullMethod: BackofficeOperator_SetOperatorRegisterLimitConfig_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeOperatorServer).GetOperatorCountryConfig(ctx, req.(*GetOperatorCountryConfigRequest))
+		return srv.(BackofficeOperatorServer).SetOperatorRegisterLimitConfig(ctx, req.(*SetOperatorRegisterLimitConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeOperator_AddOperatorCountryConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddOperatorCountryConfigRequest)
+func _BackofficeOperator_GetOperatorRegisterLimitConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorRegisterLimitConfigRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeOperatorServer).AddOperatorCountryConfig(ctx, in)
+		return srv.(BackofficeOperatorServer).GetOperatorRegisterLimitConfig(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeOperator_AddOperatorCountryConfig_FullMethodName,
+		FullMethod: BackofficeOperator_GetOperatorRegisterLimitConfig_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeOperatorServer).AddOperatorCountryConfig(ctx, req.(*AddOperatorCountryConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BackofficeOperator_DeleteOperatorCountryConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteOperatorCountryConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeOperatorServer).DeleteOperatorCountryConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeOperator_DeleteOperatorCountryConfig_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeOperatorServer).DeleteOperatorCountryConfig(ctx, req.(*DeleteOperatorCountryConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BackofficeOperator_UpdateOperatorCountryConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateOperatorCountryConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeOperatorServer).UpdateOperatorCountryConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeOperator_UpdateOperatorCountryConfig_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeOperatorServer).UpdateOperatorCountryConfig(ctx, req.(*UpdateOperatorCountryConfigRequest))
+		return srv.(BackofficeOperatorServer).GetOperatorRegisterLimitConfig(ctx, req.(*GetOperatorRegisterLimitConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -921,20 +853,12 @@ var BackofficeOperator_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BackofficeOperator_ListRegisterLoginBlacklist_Handler,
 		},
 		{
-			MethodName: "GetOperatorCountryConfig",
-			Handler:    _BackofficeOperator_GetOperatorCountryConfig_Handler,
+			MethodName: "SetOperatorRegisterLimitConfig",
+			Handler:    _BackofficeOperator_SetOperatorRegisterLimitConfig_Handler,
 		},
 		{
-			MethodName: "AddOperatorCountryConfig",
-			Handler:    _BackofficeOperator_AddOperatorCountryConfig_Handler,
-		},
-		{
-			MethodName: "DeleteOperatorCountryConfig",
-			Handler:    _BackofficeOperator_DeleteOperatorCountryConfig_Handler,
-		},
-		{
-			MethodName: "UpdateOperatorCountryConfig",
-			Handler:    _BackofficeOperator_UpdateOperatorCountryConfig_Handler,
+			MethodName: "GetOperatorRegisterLimitConfig",
+			Handler:    _BackofficeOperator_GetOperatorRegisterLimitConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

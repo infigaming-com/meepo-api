@@ -1643,78 +1643,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOperatorByoSubdomainResponse'
-    /v1/backoffice/operator/country-config/add:
-        post:
-            tags:
-                - BackofficeOperator
-            operationId: BackofficeOperator_AddOperatorCountryConfig
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.AddOperatorCountryConfigRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.user.service.v1.AddOperatorCountryConfigResponse'
-    /v1/backoffice/operator/country-config/delete:
-        post:
-            tags:
-                - BackofficeOperator
-            operationId: BackofficeOperator_DeleteOperatorCountryConfig
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteOperatorCountryConfigRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.user.service.v1.DeleteOperatorCountryConfigResponse'
-    /v1/backoffice/operator/country-config/get:
-        post:
-            tags:
-                - BackofficeOperator
-            operationId: BackofficeOperator_GetOperatorCountryConfig
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorCountryConfigRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.user.service.v1.GetOperatorCountryConfigResponse'
-    /v1/backoffice/operator/country-config/update:
-        post:
-            tags:
-                - BackofficeOperator
-            operationId: BackofficeOperator_UpdateOperatorCountryConfig
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOperatorCountryConfigRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.user.service.v1.UpdateOperatorCountryConfigResponse'
     /v1/backoffice/operator/create:
         post:
             tags:
@@ -1884,6 +1812,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListRetailerOperatorsResponse'
+    /v1/backoffice/operator/register-limit-config/get:
+        post:
+            tags:
+                - BackofficeOperator
+            operationId: BackofficeOperator_GetOperatorRegisterLimitConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorRegisterLimitConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.GetOperatorRegisterLimitConfigResponse'
+    /v1/backoffice/operator/register-limit-config/set:
+        post:
+            tags:
+                - BackofficeOperator
+            operationId: BackofficeOperator_SetOperatorRegisterLimitConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.SetOperatorRegisterLimitConfigResponse'
     /v1/backoffice/operator/register-login-blacklist/add:
         post:
             tags:
@@ -4886,14 +4850,6 @@ components:
         api.backoffice.service.v1.AddOperatorByoSubdomainResponse:
             type: object
             properties: {}
-        api.backoffice.service.v1.AddOperatorCountryConfigRequest:
-            type: object
-            properties:
-                country:
-                    type: string
-                registrationLimitPerIp:
-                    type: integer
-                    format: int32
         api.backoffice.service.v1.AddRegisterLoginBlacklistRequest:
             type: object
             properties:
@@ -5382,11 +5338,6 @@ components:
         api.backoffice.service.v1.DeleteOperatorByoSubdomainResponse:
             type: object
             properties: {}
-        api.backoffice.service.v1.DeleteOperatorCountryConfigRequest:
-            type: object
-            properties:
-                country:
-                    type: string
         api.backoffice.service.v1.DeleteRegisterLoginBlacklistRequest:
             type: object
             properties:
@@ -5773,11 +5724,6 @@ components:
             description: |-
                 Request to get address
                  Used to get DC address
-        api.backoffice.service.v1.GetOperatorCountryConfigRequest:
-            type: object
-            properties:
-                country:
-                    type: string
         api.backoffice.service.v1.GetOperatorPaymentChannelPageRequest:
             type: object
             properties:
@@ -5833,6 +5779,11 @@ components:
                         - $ref: '#/components/schemas/api.common.OperatorContextFilters'
                     description: ID of the Operator connect with this channel
             description: Used to retrieve a paginated list of payment channels with optional filters
+        api.backoffice.service.v1.GetOperatorRegisterLimitConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.GetOperatorTagsConfigRequest:
             type: object
             properties:
@@ -9941,6 +9892,15 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
+        api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                configs:
+                    type: object
+                    additionalProperties:
+                        $ref: '#/components/schemas/api.user.service.v1.OperatorRegisterLimitConfig'
         api.backoffice.service.v1.SetOperatorTagsConfigRequest:
             type: object
             properties:
@@ -10137,14 +10097,6 @@ components:
             properties:
                 enabled:
                     type: boolean
-        api.backoffice.service.v1.UpdateOperatorCountryConfigRequest:
-            type: object
-            properties:
-                country:
-                    type: string
-                registrationLimitPerIp:
-                    type: integer
-                    format: int32
         api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest:
             type: object
             properties:
@@ -12194,9 +12146,6 @@ components:
         api.user.service.v1.AddOperatorByoDomainResponse:
             type: object
             properties: {}
-        api.user.service.v1.AddOperatorCountryConfigResponse:
-            type: object
-            properties: {}
         api.user.service.v1.AddRegisterLoginBlacklistResponse:
             type: object
             properties: {}
@@ -12260,9 +12209,6 @@ components:
         api.user.service.v1.DeleteOperatorByoDomainResponse:
             type: object
             properties: {}
-        api.user.service.v1.DeleteOperatorCountryConfigResponse:
-            type: object
-            properties: {}
         api.user.service.v1.DeleteRegisterLoginBlacklistResponse:
             type: object
             properties: {}
@@ -12316,17 +12262,13 @@ components:
             properties:
                 accountSettings:
                     $ref: '#/components/schemas/api.user.service.v1.OperatorAccountSettings'
-        api.user.service.v1.GetOperatorCountryConfigResponse:
+        api.user.service.v1.GetOperatorRegisterLimitConfigResponse:
             type: object
             properties:
                 config:
-                    $ref: '#/components/schemas/api.user.service.v1.GetOperatorCountryConfigResponse_Config'
-        api.user.service.v1.GetOperatorCountryConfigResponse_Config:
-            type: object
-            properties:
-                registrationLimitPerIp:
-                    type: integer
-                    format: int32
+                    type: object
+                    additionalProperties:
+                        $ref: '#/components/schemas/api.user.service.v1.OperatorRegisterLimitConfig'
         api.user.service.v1.GetResponsibleGamblingConfigRequest:
             type: object
             properties:
@@ -12781,6 +12723,12 @@ components:
                     type: array
                     items:
                         type: string
+        api.user.service.v1.OperatorRegisterLimitConfig:
+            type: object
+            properties:
+                registrationLimitPerIp:
+                    type: integer
+                    format: int32
         api.user.service.v1.RefreshTokenRequest:
             type: object
             properties:
@@ -12924,6 +12872,9 @@ components:
         api.user.service.v1.SendPasswordResetCodeResponse:
             type: object
             properties: {}
+        api.user.service.v1.SetOperatorRegisterLimitConfigResponse:
+            type: object
+            properties: {}
         api.user.service.v1.TelegramAuthRequest:
             type: object
             properties:
@@ -12950,9 +12901,6 @@ components:
                     description: Hash for verifying the authentication data.
             description: TelegramAuthRequest contains the information from Telegram's login widget.
         api.user.service.v1.UpdateOperatorAccountSettingsResponse:
-            type: object
-            properties: {}
-        api.user.service.v1.UpdateOperatorCountryConfigResponse:
             type: object
             properties: {}
         api.user.service.v1.UpdateUserRequest:

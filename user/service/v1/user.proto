@@ -314,13 +314,9 @@ service User {
 
 	rpc ListRegisterLoginBlacklist(ListRegisterLoginBlacklistRequest) returns (ListRegisterLoginBlacklistResponse) {}
 
-	rpc GetOperatorCountryConfig(GetOperatorCountryConfigRequest) returns (GetOperatorCountryConfigResponse) {}
+	rpc SetOperatorRegisterLimitConfig(SetOperatorRegisterLimitConfigRequest) returns (SetOperatorRegisterLimitConfigResponse) {}
 
-	rpc AddOperatorCountryConfig(AddOperatorCountryConfigRequest) returns (AddOperatorCountryConfigResponse) {}
-
-	rpc DeleteOperatorCountryConfig(DeleteOperatorCountryConfigRequest) returns (DeleteOperatorCountryConfigResponse) {}
-
-	rpc UpdateOperatorCountryConfig(UpdateOperatorCountryConfigRequest) returns (UpdateOperatorCountryConfigResponse) {}
+	rpc GetOperatorRegisterLimitConfig(GetOperatorRegisterLimitConfigRequest) returns (GetOperatorRegisterLimitConfigResponse) {}
 }
 
 // UserInfo contains basic user information.
@@ -1524,40 +1520,24 @@ message ListRegisterLoginBlacklistResponse {
 	int32 total = 4;
 }
 
-message GetOperatorCountryConfigRequest {
+message OperatorRegisterLimitConfig {
+	int32 registration_limit_per_ip = 1;
+}
+
+message SetOperatorRegisterLimitConfigRequest {
 	api.common.OperatorContext operator_context = 1;
-	string country = 2;
+	api.common.OperatorContext target_operator_context = 2;
+	map<string, OperatorRegisterLimitConfig> config = 3;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
 }
 
-message GetOperatorCountryConfigResponse {
-	message Config {
-		int32 registration_limit_per_ip = 1;
-	}
-	Config config = 1;
+message SetOperatorRegisterLimitConfigResponse {
 }
 
-message AddOperatorCountryConfigRequest {
+message GetOperatorRegisterLimitConfigRequest {
 	api.common.OperatorContext operator_context = 1;
-	string country = 2;
-	int32 registration_limit_per_ip = 3;
+	api.common.OperatorContext target_operator_context = 2;
 }
 
-message AddOperatorCountryConfigResponse {
-}
-
-message DeleteOperatorCountryConfigRequest {
-	api.common.OperatorContext operator_context = 1;
-	string country = 2;
-}
-
-message DeleteOperatorCountryConfigResponse {
-}
-
-message UpdateOperatorCountryConfigRequest {
-	api.common.OperatorContext operator_context = 1;
-	string country = 2;
-	optional int32 registration_limit_per_ip = 3;
-}
-
-message UpdateOperatorCountryConfigResponse {
+message GetOperatorRegisterLimitConfigResponse {
+	map<string, OperatorRegisterLimitConfig> config = 1;
 }

@@ -4022,258 +4022,119 @@ var _ interface {
 	ErrorName() string
 } = ListRegisterLoginBlacklistRequestValidationError{}
 
-// Validate checks the field values on GetOperatorCountryConfigRequest with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetOperatorCountryConfigRequest) Validate() error {
+// Validate checks the field values on SetOperatorRegisterLimitConfigRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *SetOperatorRegisterLimitConfigRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetOperatorCountryConfigRequest with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the result is a list of violation errors wrapped in
-// GetOperatorCountryConfigRequestMultiError, or nil if none found.
-func (m *GetOperatorCountryConfigRequest) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *GetOperatorCountryConfigRequest) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Country
-
-	if len(errors) > 0 {
-		return GetOperatorCountryConfigRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-// GetOperatorCountryConfigRequestMultiError is an error wrapping multiple
-// validation errors returned by GetOperatorCountryConfigRequest.ValidateAll()
-// if the designated constraints aren't met.
-type GetOperatorCountryConfigRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m GetOperatorCountryConfigRequestMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m GetOperatorCountryConfigRequestMultiError) AllErrors() []error { return m }
-
-// GetOperatorCountryConfigRequestValidationError is the validation error
-// returned by GetOperatorCountryConfigRequest.Validate if the designated
-// constraints aren't met.
-type GetOperatorCountryConfigRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e GetOperatorCountryConfigRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e GetOperatorCountryConfigRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e GetOperatorCountryConfigRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e GetOperatorCountryConfigRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e GetOperatorCountryConfigRequestValidationError) ErrorName() string {
-	return "GetOperatorCountryConfigRequestValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e GetOperatorCountryConfigRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sGetOperatorCountryConfigRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = GetOperatorCountryConfigRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = GetOperatorCountryConfigRequestValidationError{}
-
-// Validate checks the field values on AddOperatorCountryConfigRequest with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *AddOperatorCountryConfigRequest) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on AddOperatorCountryConfigRequest with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the result is a list of violation errors wrapped in
-// AddOperatorCountryConfigRequestMultiError, or nil if none found.
-func (m *AddOperatorCountryConfigRequest) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *AddOperatorCountryConfigRequest) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Country
-
-	// no validation rules for RegistrationLimitPerIp
-
-	if len(errors) > 0 {
-		return AddOperatorCountryConfigRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-// AddOperatorCountryConfigRequestMultiError is an error wrapping multiple
-// validation errors returned by AddOperatorCountryConfigRequest.ValidateAll()
-// if the designated constraints aren't met.
-type AddOperatorCountryConfigRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m AddOperatorCountryConfigRequestMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m AddOperatorCountryConfigRequestMultiError) AllErrors() []error { return m }
-
-// AddOperatorCountryConfigRequestValidationError is the validation error
-// returned by AddOperatorCountryConfigRequest.Validate if the designated
-// constraints aren't met.
-type AddOperatorCountryConfigRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e AddOperatorCountryConfigRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e AddOperatorCountryConfigRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e AddOperatorCountryConfigRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e AddOperatorCountryConfigRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e AddOperatorCountryConfigRequestValidationError) ErrorName() string {
-	return "AddOperatorCountryConfigRequestValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e AddOperatorCountryConfigRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sAddOperatorCountryConfigRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = AddOperatorCountryConfigRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = AddOperatorCountryConfigRequestValidationError{}
-
-// Validate checks the field values on DeleteOperatorCountryConfigRequest with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *DeleteOperatorCountryConfigRequest) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on DeleteOperatorCountryConfigRequest
+// ValidateAll checks the field values on SetOperatorRegisterLimitConfigRequest
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, the result is a list of violation errors wrapped in
-// DeleteOperatorCountryConfigRequestMultiError, or nil if none found.
-func (m *DeleteOperatorCountryConfigRequest) ValidateAll() error {
+// SetOperatorRegisterLimitConfigRequestMultiError, or nil if none found.
+func (m *SetOperatorRegisterLimitConfigRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *DeleteOperatorCountryConfigRequest) validate(all bool) error {
+func (m *SetOperatorRegisterLimitConfigRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	// no validation rules for Country
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SetOperatorRegisterLimitConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SetOperatorRegisterLimitConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SetOperatorRegisterLimitConfigRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	{
+		sorted_keys := make([]string, len(m.GetConfigs()))
+		i := 0
+		for key := range m.GetConfigs() {
+			sorted_keys[i] = key
+			i++
+		}
+		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
+		for _, key := range sorted_keys {
+			val := m.GetConfigs()[key]
+			_ = val
+
+			// no validation rules for Configs[key]
+
+			if all {
+				switch v := interface{}(val).(type) {
+				case interface{ ValidateAll() error }:
+					if err := v.ValidateAll(); err != nil {
+						errors = append(errors, SetOperatorRegisterLimitConfigRequestValidationError{
+							field:  fmt.Sprintf("Configs[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				case interface{ Validate() error }:
+					if err := v.Validate(); err != nil {
+						errors = append(errors, SetOperatorRegisterLimitConfigRequestValidationError{
+							field:  fmt.Sprintf("Configs[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				}
+			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
+				if err := v.Validate(); err != nil {
+					return SetOperatorRegisterLimitConfigRequestValidationError{
+						field:  fmt.Sprintf("Configs[%v]", key),
+						reason: "embedded message failed validation",
+						cause:  err,
+					}
+				}
+			}
+
+		}
+	}
 
 	if len(errors) > 0 {
-		return DeleteOperatorCountryConfigRequestMultiError(errors)
+		return SetOperatorRegisterLimitConfigRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// DeleteOperatorCountryConfigRequestMultiError is an error wrapping multiple
-// validation errors returned by
-// DeleteOperatorCountryConfigRequest.ValidateAll() if the designated
+// SetOperatorRegisterLimitConfigRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// SetOperatorRegisterLimitConfigRequest.ValidateAll() if the designated
 // constraints aren't met.
-type DeleteOperatorCountryConfigRequestMultiError []error
+type SetOperatorRegisterLimitConfigRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m DeleteOperatorCountryConfigRequestMultiError) Error() string {
+func (m SetOperatorRegisterLimitConfigRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -4282,12 +4143,12 @@ func (m DeleteOperatorCountryConfigRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m DeleteOperatorCountryConfigRequestMultiError) AllErrors() []error { return m }
+func (m SetOperatorRegisterLimitConfigRequestMultiError) AllErrors() []error { return m }
 
-// DeleteOperatorCountryConfigRequestValidationError is the validation error
-// returned by DeleteOperatorCountryConfigRequest.Validate if the designated
-// constraints aren't met.
-type DeleteOperatorCountryConfigRequestValidationError struct {
+// SetOperatorRegisterLimitConfigRequestValidationError is the validation error
+// returned by SetOperatorRegisterLimitConfigRequest.Validate if the
+// designated constraints aren't met.
+type SetOperatorRegisterLimitConfigRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -4295,24 +4156,24 @@ type DeleteOperatorCountryConfigRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e DeleteOperatorCountryConfigRequestValidationError) Field() string { return e.field }
+func (e SetOperatorRegisterLimitConfigRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e DeleteOperatorCountryConfigRequestValidationError) Reason() string { return e.reason }
+func (e SetOperatorRegisterLimitConfigRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e DeleteOperatorCountryConfigRequestValidationError) Cause() error { return e.cause }
+func (e SetOperatorRegisterLimitConfigRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e DeleteOperatorCountryConfigRequestValidationError) Key() bool { return e.key }
+func (e SetOperatorRegisterLimitConfigRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e DeleteOperatorCountryConfigRequestValidationError) ErrorName() string {
-	return "DeleteOperatorCountryConfigRequestValidationError"
+func (e SetOperatorRegisterLimitConfigRequestValidationError) ErrorName() string {
+	return "SetOperatorRegisterLimitConfigRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e DeleteOperatorCountryConfigRequestValidationError) Error() string {
+func (e SetOperatorRegisterLimitConfigRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -4324,14 +4185,14 @@ func (e DeleteOperatorCountryConfigRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sDeleteOperatorCountryConfigRequest.%s: %s%s",
+		"invalid %sSetOperatorRegisterLimitConfigRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = DeleteOperatorCountryConfigRequestValidationError{}
+var _ error = SetOperatorRegisterLimitConfigRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -4339,52 +4200,75 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = DeleteOperatorCountryConfigRequestValidationError{}
+} = SetOperatorRegisterLimitConfigRequestValidationError{}
 
-// Validate checks the field values on UpdateOperatorCountryConfigRequest with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *UpdateOperatorCountryConfigRequest) Validate() error {
+// Validate checks the field values on GetOperatorRegisterLimitConfigRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetOperatorRegisterLimitConfigRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on UpdateOperatorCountryConfigRequest
+// ValidateAll checks the field values on GetOperatorRegisterLimitConfigRequest
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, the result is a list of violation errors wrapped in
-// UpdateOperatorCountryConfigRequestMultiError, or nil if none found.
-func (m *UpdateOperatorCountryConfigRequest) ValidateAll() error {
+// GetOperatorRegisterLimitConfigRequestMultiError, or nil if none found.
+func (m *GetOperatorRegisterLimitConfigRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *UpdateOperatorCountryConfigRequest) validate(all bool) error {
+func (m *GetOperatorRegisterLimitConfigRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	// no validation rules for Country
-
-	if m.RegistrationLimitPerIp != nil {
-		// no validation rules for RegistrationLimitPerIp
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetOperatorRegisterLimitConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetOperatorRegisterLimitConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetOperatorRegisterLimitConfigRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
 	if len(errors) > 0 {
-		return UpdateOperatorCountryConfigRequestMultiError(errors)
+		return GetOperatorRegisterLimitConfigRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// UpdateOperatorCountryConfigRequestMultiError is an error wrapping multiple
-// validation errors returned by
-// UpdateOperatorCountryConfigRequest.ValidateAll() if the designated
+// GetOperatorRegisterLimitConfigRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// GetOperatorRegisterLimitConfigRequest.ValidateAll() if the designated
 // constraints aren't met.
-type UpdateOperatorCountryConfigRequestMultiError []error
+type GetOperatorRegisterLimitConfigRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m UpdateOperatorCountryConfigRequestMultiError) Error() string {
+func (m GetOperatorRegisterLimitConfigRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -4393,12 +4277,12 @@ func (m UpdateOperatorCountryConfigRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m UpdateOperatorCountryConfigRequestMultiError) AllErrors() []error { return m }
+func (m GetOperatorRegisterLimitConfigRequestMultiError) AllErrors() []error { return m }
 
-// UpdateOperatorCountryConfigRequestValidationError is the validation error
-// returned by UpdateOperatorCountryConfigRequest.Validate if the designated
-// constraints aren't met.
-type UpdateOperatorCountryConfigRequestValidationError struct {
+// GetOperatorRegisterLimitConfigRequestValidationError is the validation error
+// returned by GetOperatorRegisterLimitConfigRequest.Validate if the
+// designated constraints aren't met.
+type GetOperatorRegisterLimitConfigRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -4406,24 +4290,24 @@ type UpdateOperatorCountryConfigRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e UpdateOperatorCountryConfigRequestValidationError) Field() string { return e.field }
+func (e GetOperatorRegisterLimitConfigRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e UpdateOperatorCountryConfigRequestValidationError) Reason() string { return e.reason }
+func (e GetOperatorRegisterLimitConfigRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e UpdateOperatorCountryConfigRequestValidationError) Cause() error { return e.cause }
+func (e GetOperatorRegisterLimitConfigRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e UpdateOperatorCountryConfigRequestValidationError) Key() bool { return e.key }
+func (e GetOperatorRegisterLimitConfigRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e UpdateOperatorCountryConfigRequestValidationError) ErrorName() string {
-	return "UpdateOperatorCountryConfigRequestValidationError"
+func (e GetOperatorRegisterLimitConfigRequestValidationError) ErrorName() string {
+	return "GetOperatorRegisterLimitConfigRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e UpdateOperatorCountryConfigRequestValidationError) Error() string {
+func (e GetOperatorRegisterLimitConfigRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -4435,14 +4319,14 @@ func (e UpdateOperatorCountryConfigRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sUpdateOperatorCountryConfigRequest.%s: %s%s",
+		"invalid %sGetOperatorRegisterLimitConfigRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = UpdateOperatorCountryConfigRequestValidationError{}
+var _ error = GetOperatorRegisterLimitConfigRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -4450,7 +4334,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = UpdateOperatorCountryConfigRequestValidationError{}
+} = GetOperatorRegisterLimitConfigRequestValidationError{}
 
 // Validate checks the field values on ListAllOperatorsResponse_Operator with
 // the rules defined in the proto definition for this message. If any rules
