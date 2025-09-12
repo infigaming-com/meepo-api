@@ -393,7 +393,7 @@ message ListRegisterLoginBlacklistRequest {
 
 message SetOperatorRegisterLimitConfigRequest {
 	api.common.OperatorContext target_operator_context = 1;
-	map<string, user.service.v1.OperatorRegisterLimitConfig> configs = 2;
+	map<string, user.service.v1.OperatorRegisterLimitConfig> config = 2;
 }
 
 message GetOperatorRegisterLimitConfigRequest {

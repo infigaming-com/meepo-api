@@ -1924,7 +1924,7 @@ func (x *ListRegisterLoginBlacklistRequest) GetPageSize() int32 {
 type SetOperatorRegisterLimitConfigRequest struct {
 	state                 protoimpl.MessageState                     `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext                    `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Configs               map[string]*v1.OperatorRegisterLimitConfig `protobuf:"bytes,2,rep,name=configs,proto3" json:"configs,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Config                map[string]*v1.OperatorRegisterLimitConfig `protobuf:"bytes,2,rep,name=config,proto3" json:"config,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -1966,9 +1966,9 @@ func (x *SetOperatorRegisterLimitConfigRequest) GetTargetOperatorContext() *comm
 	return nil
 }
 
-func (x *SetOperatorRegisterLimitConfigRequest) GetConfigs() map[string]*v1.OperatorRegisterLimitConfig {
+func (x *SetOperatorRegisterLimitConfigRequest) GetConfig() map[string]*v1.OperatorRegisterLimitConfig {
 	if x != nil {
-		return x.Configs
+		return x.Config
 	}
 	return nil
 }
@@ -2537,11 +2537,11 @@ const file_backoffice_service_v1_backoffice_operator_proto_rawDesc = "" +
 	"\tpage_size\x18\x04 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xd3\x02\n" +
+	"_page_size\"\xcf\x02\n" +
 	"%SetOperatorRegisterLimitConfigRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12g\n" +
-	"\aconfigs\x18\x02 \x03(\v2M.api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigsEntryR\aconfigs\x1al\n" +
-	"\fConfigsEntry\x12\x10\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12d\n" +
+	"\x06config\x18\x02 \x03(\v2L.api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigEntryR\x06config\x1ak\n" +
+	"\vConfigEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12F\n" +
 	"\x05value\x18\x02 \x01(\v20.api.user.service.v1.OperatorRegisterLimitConfigR\x05value:\x028\x01\"|\n" +
 	"%GetOperatorRegisterLimitConfigRequest\x12S\n" +
@@ -2621,7 +2621,7 @@ var file_backoffice_service_v1_backoffice_operator_proto_goTypes = []any{
 	(*ListRetailerOperatorsResponse_OperatorInfo)(nil),   // 35: api.backoffice.service.v1.ListRetailerOperatorsResponse.OperatorInfo
 	(*ListCompanyOperatorsResponse_OperatorInfo)(nil),    // 36: api.backoffice.service.v1.ListCompanyOperatorsResponse.OperatorInfo
 	(*ListBottomOperatorsResponse_OperatorInfo)(nil),     // 37: api.backoffice.service.v1.ListBottomOperatorsResponse.OperatorInfo
-	nil,                                               // 38: api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigsEntry
+	nil,                                               // 38: api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigEntry
 	(*common.OperatorContext)(nil),                    // 39: api.common.OperatorContext
 	(*timestamppb.Timestamp)(nil),                     // 40: google.protobuf.Timestamp
 	(*v1.OperatorAccountSettings)(nil),                // 41: api.user.service.v1.OperatorAccountSettings
@@ -2654,13 +2654,13 @@ var file_backoffice_service_v1_backoffice_operator_proto_depIdxs = []int32{
 	39, // 15: api.backoffice.service.v1.DeleteRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
 	39, // 16: api.backoffice.service.v1.ListRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
 	39, // 17: api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
-	38, // 18: api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest.configs:type_name -> api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigsEntry
+	38, // 18: api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest.config:type_name -> api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigEntry
 	39, // 19: api.backoffice.service.v1.GetOperatorRegisterLimitConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
 	39, // 20: api.backoffice.service.v1.ListAllOperatorsResponse.Operator.operator_context:type_name -> api.common.OperatorContext
 	39, // 21: api.backoffice.service.v1.ListRetailerOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
 	39, // 22: api.backoffice.service.v1.ListCompanyOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
 	39, // 23: api.backoffice.service.v1.ListBottomOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
-	42, // 24: api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigsEntry.value:type_name -> api.user.service.v1.OperatorRegisterLimitConfig
+	42, // 24: api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigEntry.value:type_name -> api.user.service.v1.OperatorRegisterLimitConfig
 	0,  // 25: api.backoffice.service.v1.BackofficeOperator.ListAllOperators:input_type -> api.backoffice.service.v1.ListAllOperatorsRequest
 	2,  // 26: api.backoffice.service.v1.BackofficeOperator.CreateOperator:input_type -> api.backoffice.service.v1.CreateOperatorRequest
 	5,  // 27: api.backoffice.service.v1.BackofficeOperator.GetCurrentOperatorDetails:input_type -> api.backoffice.service.v1.GetCurrentOperatorDetailsRequest
