@@ -454,6 +454,8 @@ message LoginWithInfoRequest {
 	int64 operator_id = 4;
 	// Http request info.
 	HttpRequestInfo http_request_info = 5;
+	// The operator context to login with.
+	api.common.OperatorContext operator_context = 6;
 }
 
 // OAuthRequest contains the information needed for OAuth authentication.
