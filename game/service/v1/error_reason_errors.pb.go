@@ -274,3 +274,15 @@ func IsSelfExclusionEnabled(err error) bool {
 func ErrorSelfExclusionEnabled(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_SELF_EXCLUSION_ENABLED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsUserDisabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_DISABLED.String() && e.Code == 500
+}
+
+func ErrorUserDisabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_DISABLED.String(), fmt.Sprintf(format, args...))
+}
