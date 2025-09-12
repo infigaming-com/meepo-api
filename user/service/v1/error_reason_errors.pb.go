@@ -1285,76 +1285,40 @@ func ErrorBlockedByRegisterLoginBlacklist(format string, args ...interface{}) *e
 	return errors.New(500, ErrorReason_BLOCKED_BY_REGISTER_LOGIN_BLACKLIST.String(), fmt.Sprintf(format, args...))
 }
 
-func IsAddOperatorCountryConfigFailed(err error) bool {
+func IsInvalidOperatorRegisterLimitConfig(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_ADD_OPERATOR_COUNTRY_CONFIG_FAILED.String() && e.Code == 500
+	return e.Reason == ErrorReason_INVALID_OPERATOR_REGISTER_LIMIT_CONFIG.String() && e.Code == 500
 }
 
-func ErrorAddOperatorCountryConfigFailed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_ADD_OPERATOR_COUNTRY_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+func ErrorInvalidOperatorRegisterLimitConfig(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_OPERATOR_REGISTER_LIMIT_CONFIG.String(), fmt.Sprintf(format, args...))
 }
 
-func IsDeleteOperatorCountryConfigFailed(err error) bool {
+func IsUpdateOperatorFailed(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_DELETE_OPERATOR_COUNTRY_CONFIG_FAILED.String() && e.Code == 500
+	return e.Reason == ErrorReason_UPDATE_OPERATOR_FAILED.String() && e.Code == 500
 }
 
-func ErrorDeleteOperatorCountryConfigFailed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_DELETE_OPERATOR_COUNTRY_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+func ErrorUpdateOperatorFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_OPERATOR_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-func IsUpdateOperatorCountryConfigFailed(err error) bool {
+func IsRegistrationPerIpLimitExceeded(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_UPDATE_OPERATOR_COUNTRY_CONFIG_FAILED.String() && e.Code == 500
+	return e.Reason == ErrorReason_REGISTRATION_PER_IP_LIMIT_EXCEEDED.String() && e.Code == 500
 }
 
-func ErrorUpdateOperatorCountryConfigFailed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_UPDATE_OPERATOR_COUNTRY_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
-}
-
-func IsGetOperatorCountryConfigFailed(err error) bool {
-	if err == nil {
-		return false
-	}
-	e := errors.FromError(err)
-	return e.Reason == ErrorReason_GET_OPERATOR_COUNTRY_CONFIG_FAILED.String() && e.Code == 500
-}
-
-func ErrorGetOperatorCountryConfigFailed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_GET_OPERATOR_COUNTRY_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
-}
-
-func IsOperatorCountryConfigNotFound(err error) bool {
-	if err == nil {
-		return false
-	}
-	e := errors.FromError(err)
-	return e.Reason == ErrorReason_OPERATOR_COUNTRY_CONFIG_NOT_FOUND.String() && e.Code == 500
-}
-
-func ErrorOperatorCountryConfigNotFound(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_OPERATOR_COUNTRY_CONFIG_NOT_FOUND.String(), fmt.Sprintf(format, args...))
-}
-
-func IsRegistrationLimitPerIpExceeded(err error) bool {
-	if err == nil {
-		return false
-	}
-	e := errors.FromError(err)
-	return e.Reason == ErrorReason_REGISTRATION_LIMIT_PER_IP_EXCEEDED.String() && e.Code == 500
-}
-
-func ErrorRegistrationLimitPerIpExceeded(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_REGISTRATION_LIMIT_PER_IP_EXCEEDED.String(), fmt.Sprintf(format, args...))
+func ErrorRegistrationPerIpLimitExceeded(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_REGISTRATION_PER_IP_LIMIT_EXCEEDED.String(), fmt.Sprintf(format, args...))
 }
 
 func IsUserInSelfExclusionPeriod(err error) bool {

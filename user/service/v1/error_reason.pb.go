@@ -131,13 +131,10 @@ const (
 	ErrorReason_DELETE_REGISTER_LOGIN_BLACKLIST_FAILED         ErrorReason = 10105
 	ErrorReason_INVALID_REGISTER_LOGIN_BLACKLIST_ID_TYPE       ErrorReason = 10106
 	ErrorReason_BLOCKED_BY_REGISTER_LOGIN_BLACKLIST            ErrorReason = 10107
-	ErrorReason_ADD_OPERATOR_COUNTRY_CONFIG_FAILED             ErrorReason = 10108
-	ErrorReason_DELETE_OPERATOR_COUNTRY_CONFIG_FAILED          ErrorReason = 10109
-	ErrorReason_UPDATE_OPERATOR_COUNTRY_CONFIG_FAILED          ErrorReason = 10110
-	ErrorReason_GET_OPERATOR_COUNTRY_CONFIG_FAILED             ErrorReason = 10111
-	ErrorReason_OPERATOR_COUNTRY_CONFIG_NOT_FOUND              ErrorReason = 10112
-	ErrorReason_REGISTRATION_LIMIT_PER_IP_EXCEEDED             ErrorReason = 10113
-	ErrorReason_USER_IN_SELF_EXCLUSION_PERIOD                  ErrorReason = 10114
+	ErrorReason_INVALID_OPERATOR_REGISTER_LIMIT_CONFIG         ErrorReason = 10108
+	ErrorReason_UPDATE_OPERATOR_FAILED                         ErrorReason = 10109
+	ErrorReason_REGISTRATION_PER_IP_LIMIT_EXCEEDED             ErrorReason = 10110
+	ErrorReason_USER_IN_SELF_EXCLUSION_PERIOD                  ErrorReason = 10111
 )
 
 // Enum value maps for ErrorReason.
@@ -249,13 +246,10 @@ var (
 		10105: "DELETE_REGISTER_LOGIN_BLACKLIST_FAILED",
 		10106: "INVALID_REGISTER_LOGIN_BLACKLIST_ID_TYPE",
 		10107: "BLOCKED_BY_REGISTER_LOGIN_BLACKLIST",
-		10108: "ADD_OPERATOR_COUNTRY_CONFIG_FAILED",
-		10109: "DELETE_OPERATOR_COUNTRY_CONFIG_FAILED",
-		10110: "UPDATE_OPERATOR_COUNTRY_CONFIG_FAILED",
-		10111: "GET_OPERATOR_COUNTRY_CONFIG_FAILED",
-		10112: "OPERATOR_COUNTRY_CONFIG_NOT_FOUND",
-		10113: "REGISTRATION_LIMIT_PER_IP_EXCEEDED",
-		10114: "USER_IN_SELF_EXCLUSION_PERIOD",
+		10108: "INVALID_OPERATOR_REGISTER_LIMIT_CONFIG",
+		10109: "UPDATE_OPERATOR_FAILED",
+		10110: "REGISTRATION_PER_IP_LIMIT_EXCEEDED",
+		10111: "USER_IN_SELF_EXCLUSION_PERIOD",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                    0,
@@ -364,13 +358,10 @@ var (
 		"DELETE_REGISTER_LOGIN_BLACKLIST_FAILED":         10105,
 		"INVALID_REGISTER_LOGIN_BLACKLIST_ID_TYPE":       10106,
 		"BLOCKED_BY_REGISTER_LOGIN_BLACKLIST":            10107,
-		"ADD_OPERATOR_COUNTRY_CONFIG_FAILED":             10108,
-		"DELETE_OPERATOR_COUNTRY_CONFIG_FAILED":          10109,
-		"UPDATE_OPERATOR_COUNTRY_CONFIG_FAILED":          10110,
-		"GET_OPERATOR_COUNTRY_CONFIG_FAILED":             10111,
-		"OPERATOR_COUNTRY_CONFIG_NOT_FOUND":              10112,
-		"REGISTRATION_LIMIT_PER_IP_EXCEEDED":             10113,
-		"USER_IN_SELF_EXCLUSION_PERIOD":                  10114,
+		"INVALID_OPERATOR_REGISTER_LIMIT_CONFIG":         10108,
+		"UPDATE_OPERATOR_FAILED":                         10109,
+		"REGISTRATION_PER_IP_LIMIT_EXCEEDED":             10110,
+		"USER_IN_SELF_EXCLUSION_PERIOD":                  10111,
 	}
 )
 
@@ -405,7 +396,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xa5\x1e\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\x9d\x1d\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x12&\n" +
@@ -512,14 +503,11 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"#ADD_REGISTER_LOGIN_BLACKLIST_FAILED\x10\xf8N\x12+\n" +
 	"&DELETE_REGISTER_LOGIN_BLACKLIST_FAILED\x10\xf9N\x12-\n" +
 	"(INVALID_REGISTER_LOGIN_BLACKLIST_ID_TYPE\x10\xfaN\x12(\n" +
-	"#BLOCKED_BY_REGISTER_LOGIN_BLACKLIST\x10\xfbN\x12'\n" +
-	"\"ADD_OPERATOR_COUNTRY_CONFIG_FAILED\x10\xfcN\x12*\n" +
-	"%DELETE_OPERATOR_COUNTRY_CONFIG_FAILED\x10\xfdN\x12*\n" +
-	"%UPDATE_OPERATOR_COUNTRY_CONFIG_FAILED\x10\xfeN\x12'\n" +
-	"\"GET_OPERATOR_COUNTRY_CONFIG_FAILED\x10\xffN\x12&\n" +
-	"!OPERATOR_COUNTRY_CONFIG_NOT_FOUND\x10\x80O\x12'\n" +
-	"\"REGISTRATION_LIMIT_PER_IP_EXCEEDED\x10\x81O\x12\"\n" +
-	"\x1dUSER_IN_SELF_EXCLUSION_PERIOD\x10\x82O\x1a\x04\xa0E\xf4\x03BO\n" +
+	"#BLOCKED_BY_REGISTER_LOGIN_BLACKLIST\x10\xfbN\x12+\n" +
+	"&INVALID_OPERATOR_REGISTER_LIMIT_CONFIG\x10\xfcN\x12\x1b\n" +
+	"\x16UPDATE_OPERATOR_FAILED\x10\xfdN\x12'\n" +
+	"\"REGISTRATION_PER_IP_LIMIT_EXCEEDED\x10\xfeN\x12\"\n" +
+	"\x1dUSER_IN_SELF_EXCLUSION_PERIOD\x10\xffN\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
