@@ -137,6 +137,7 @@ const (
 	ErrorReason_GET_OPERATOR_COUNTRY_CONFIG_FAILED             ErrorReason = 10111
 	ErrorReason_OPERATOR_COUNTRY_CONFIG_NOT_FOUND              ErrorReason = 10112
 	ErrorReason_REGISTRATION_LIMIT_PER_IP_EXCEEDED             ErrorReason = 10113
+	ErrorReason_USER_IN_SELF_EXCLUSION_PERIOD                  ErrorReason = 10114
 )
 
 // Enum value maps for ErrorReason.
@@ -254,6 +255,7 @@ var (
 		10111: "GET_OPERATOR_COUNTRY_CONFIG_FAILED",
 		10112: "OPERATOR_COUNTRY_CONFIG_NOT_FOUND",
 		10113: "REGISTRATION_LIMIT_PER_IP_EXCEEDED",
+		10114: "USER_IN_SELF_EXCLUSION_PERIOD",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                    0,
@@ -368,6 +370,7 @@ var (
 		"GET_OPERATOR_COUNTRY_CONFIG_FAILED":             10111,
 		"OPERATOR_COUNTRY_CONFIG_NOT_FOUND":              10112,
 		"REGISTRATION_LIMIT_PER_IP_EXCEEDED":             10113,
+		"USER_IN_SELF_EXCLUSION_PERIOD":                  10114,
 	}
 )
 
@@ -402,7 +405,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\x81\x1e\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xa5\x1e\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x12&\n" +
@@ -515,7 +518,8 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"%UPDATE_OPERATOR_COUNTRY_CONFIG_FAILED\x10\xfeN\x12'\n" +
 	"\"GET_OPERATOR_COUNTRY_CONFIG_FAILED\x10\xffN\x12&\n" +
 	"!OPERATOR_COUNTRY_CONFIG_NOT_FOUND\x10\x80O\x12'\n" +
-	"\"REGISTRATION_LIMIT_PER_IP_EXCEEDED\x10\x81O\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\"REGISTRATION_LIMIT_PER_IP_EXCEEDED\x10\x81O\x12\"\n" +
+	"\x1dUSER_IN_SELF_EXCLUSION_PERIOD\x10\x82O\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
