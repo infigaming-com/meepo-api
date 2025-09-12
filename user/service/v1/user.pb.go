@@ -737,12 +737,10 @@ type LoginWithInfoRequest struct {
 	AuthId string `protobuf:"bytes,2,opt,name=auth_id,json=authId,proto3" json:"auth_id,omitempty"`
 	// The password for the account.
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
-	// The operator ID to login with.
-	OperatorId int64 `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	// The operator context to login with.
+	OperatorContext *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	// Http request info.
 	HttpRequestInfo *HttpRequestInfo `protobuf:"bytes,5,opt,name=http_request_info,json=httpRequestInfo,proto3" json:"http_request_info,omitempty"`
-	// The operator context to login with.
-	OperatorContext *common.OperatorContext `protobuf:"bytes,6,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -798,23 +796,16 @@ func (x *LoginWithInfoRequest) GetPassword() string {
 	return ""
 }
 
-func (x *LoginWithInfoRequest) GetOperatorId() int64 {
+func (x *LoginWithInfoRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.OperatorId
+		return x.OperatorContext
 	}
-	return 0
+	return nil
 }
 
 func (x *LoginWithInfoRequest) GetHttpRequestInfo() *HttpRequestInfo {
 	if x != nil {
 		return x.HttpRequestInfo
-	}
-	return nil
-}
-
-func (x *LoginWithInfoRequest) GetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.OperatorContext
 	}
 	return nil
 }
@@ -11293,15 +11284,13 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\areferer\x18\a \x01(\tR\areferer\x12\x1d\n" +
 	"\n" +
 	"user_agent\x18\b \x01(\tR\tuserAgent\x12\x1b\n" +
-	"\tclient_ip\x18\t \x01(\tR\bclientIp\"\xda\x02\n" +
+	"\tclient_ip\x18\t \x01(\tR\bclientIp\"\xb9\x02\n" +
 	"\x14LoginWithInfoRequest\x12R\n" +
 	"\x11password_provider\x18\x01 \x01(\x0e2%.api.user.service.v1.PasswordProviderR\x10passwordProvider\x12\x17\n" +
 	"\aauth_id\x18\x02 \x01(\tR\x06authId\x12\x1a\n" +
-	"\bpassword\x18\x03 \x01(\tR\bpassword\x12\x1f\n" +
-	"\voperator_id\x18\x04 \x01(\x03R\n" +
-	"operatorId\x12P\n" +
-	"\x11http_request_info\x18\x05 \x01(\v2$.api.user.service.v1.HttpRequestInfoR\x0fhttpRequestInfo\x12F\n" +
-	"\x10operator_context\x18\x06 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"o\n" +
+	"\bpassword\x18\x03 \x01(\tR\bpassword\x12F\n" +
+	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12P\n" +
+	"\x11http_request_info\x18\x05 \x01(\v2$.api.user.service.v1.HttpRequestInfoR\x0fhttpRequestInfo\"o\n" +
 	"\fOAuthRequest\x12I\n" +
 	"\x0eoauth_provider\x18\x01 \x01(\x0e2\".api.user.service.v1.OAuthProviderR\roauthProvider\x12\x14\n" +
 	"\x05token\x18\x02 \x01(\tR\x05token\"\xcb\x01\n" +
@@ -12450,8 +12439,8 @@ var file_user_service_v1_user_proto_depIdxs = []int32{
 	1,   // 2: api.user.service.v1.RegisterRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
 	1,   // 3: api.user.service.v1.LoginRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
 	1,   // 4: api.user.service.v1.LoginWithInfoRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
-	7,   // 5: api.user.service.v1.LoginWithInfoRequest.http_request_info:type_name -> api.user.service.v1.HttpRequestInfo
-	184, // 6: api.user.service.v1.LoginWithInfoRequest.operator_context:type_name -> api.common.OperatorContext
+	184, // 5: api.user.service.v1.LoginWithInfoRequest.operator_context:type_name -> api.common.OperatorContext
+	7,   // 6: api.user.service.v1.LoginWithInfoRequest.http_request_info:type_name -> api.user.service.v1.HttpRequestInfo
 	2,   // 7: api.user.service.v1.OAuthRequest.oauth_provider:type_name -> api.user.service.v1.OAuthProvider
 	4,   // 8: api.user.service.v1.AuthResponse.user_info:type_name -> api.user.service.v1.UserInfo
 	4,   // 9: api.user.service.v1.GetUserResponse.user_info:type_name -> api.user.service.v1.UserInfo

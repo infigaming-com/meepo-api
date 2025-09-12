@@ -450,12 +450,10 @@ message LoginWithInfoRequest {
 	string auth_id = 2;
 	// The password for the account.
 	string password = 3;
-	// The operator ID to login with.
-	int64 operator_id = 4;
+	// The operator context to login with.
+	api.common.OperatorContext operator_context = 4;
 	// Http request info.
 	HttpRequestInfo http_request_info = 5;
-	// The operator context to login with.
-	api.common.OperatorContext operator_context = 6;
 }
 
 // OAuthRequest contains the information needed for OAuth authentication.
