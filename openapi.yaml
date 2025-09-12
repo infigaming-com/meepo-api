@@ -4897,6 +4897,8 @@ components:
         api.backoffice.service.v1.AddRegisterLoginBlacklistRequest:
             type: object
             properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 idType:
                     type: string
                 ids:
@@ -5388,6 +5390,8 @@ components:
         api.backoffice.service.v1.DeleteRegisterLoginBlacklistRequest:
             type: object
             properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 idType:
                     type: string
                 ids:
@@ -8378,6 +8382,8 @@ components:
         api.backoffice.service.v1.ListRegisterLoginBlacklistRequest:
             type: object
             properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 idType:
                     type: string
                 page:
@@ -10372,6 +10378,8 @@ components:
         api.backoffice.service.v1.UploadRegisterLoginBlacklistRequest:
             type: object
             properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 data:
                     type: string
                     format: bytes

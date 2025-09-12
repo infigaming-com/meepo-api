@@ -1486,8 +1486,9 @@ message UserIdentityListResponse {
 
 message AddRegisterLoginBlacklistRequest {
 	api.common.OperatorContext operator_context = 1;
-	string id_type = 2;
-	repeated string ids = 3;
+	api.common.OperatorContext target_operator_context = 2;
+	string id_type = 3;
+	repeated string ids = 4;
 }
 
 message AddRegisterLoginBlacklistResponse {
@@ -1495,8 +1496,9 @@ message AddRegisterLoginBlacklistResponse {
 
 message DeleteRegisterLoginBlacklistRequest {
 	api.common.OperatorContext operator_context = 1;
-	string id_type = 2;
-	repeated string ids = 3;
+	api.common.OperatorContext target_operator_context = 2;
+	string id_type = 3;
+	repeated string ids = 4;
 }
 
 message DeleteRegisterLoginBlacklistResponse {
@@ -1504,9 +1506,10 @@ message DeleteRegisterLoginBlacklistResponse {
 
 message ListRegisterLoginBlacklistRequest {
 	api.common.OperatorContext operator_context = 1;
-	string id_type = 2;
-	optional int32 page = 3;
-	optional int32 page_size = 4;
+	api.common.OperatorContext target_operator_context = 2;
+	string id_type = 4;
+	optional int32 page = 5;
+	optional int32 page_size = 6;
 }
 
 message ListRegisterLoginBlacklistResponse {
