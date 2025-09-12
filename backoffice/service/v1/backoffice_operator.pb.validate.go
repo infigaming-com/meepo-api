@@ -4075,25 +4075,25 @@ func (m *SetOperatorRegisterLimitConfigRequest) validate(all bool) error {
 	}
 
 	{
-		sorted_keys := make([]string, len(m.GetConfigs()))
+		sorted_keys := make([]string, len(m.GetConfig()))
 		i := 0
-		for key := range m.GetConfigs() {
+		for key := range m.GetConfig() {
 			sorted_keys[i] = key
 			i++
 		}
 		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
 		for _, key := range sorted_keys {
-			val := m.GetConfigs()[key]
+			val := m.GetConfig()[key]
 			_ = val
 
-			// no validation rules for Configs[key]
+			// no validation rules for Config[key]
 
 			if all {
 				switch v := interface{}(val).(type) {
 				case interface{ ValidateAll() error }:
 					if err := v.ValidateAll(); err != nil {
 						errors = append(errors, SetOperatorRegisterLimitConfigRequestValidationError{
-							field:  fmt.Sprintf("Configs[%v]", key),
+							field:  fmt.Sprintf("Config[%v]", key),
 							reason: "embedded message failed validation",
 							cause:  err,
 						})
@@ -4101,7 +4101,7 @@ func (m *SetOperatorRegisterLimitConfigRequest) validate(all bool) error {
 				case interface{ Validate() error }:
 					if err := v.Validate(); err != nil {
 						errors = append(errors, SetOperatorRegisterLimitConfigRequestValidationError{
-							field:  fmt.Sprintf("Configs[%v]", key),
+							field:  fmt.Sprintf("Config[%v]", key),
 							reason: "embedded message failed validation",
 							cause:  err,
 						})
@@ -4110,7 +4110,7 @@ func (m *SetOperatorRegisterLimitConfigRequest) validate(all bool) error {
 			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
 				if err := v.Validate(); err != nil {
 					return SetOperatorRegisterLimitConfigRequestValidationError{
-						field:  fmt.Sprintf("Configs[%v]", key),
+						field:  fmt.Sprintf("Config[%v]", key),
 						reason: "embedded message failed validation",
 						cause:  err,
 					}
