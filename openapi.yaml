@@ -12363,6 +12363,12 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.user.service.v1.GetUserProfileResponse_ChangeRecord'
+                loginEmail:
+                    type: string
+                    description: Email.
+                loginMobile:
+                    type: string
+                    description: Mobile.
         api.user.service.v1.GetUserProfileResponse_ChangeRecord:
             type: object
             properties:

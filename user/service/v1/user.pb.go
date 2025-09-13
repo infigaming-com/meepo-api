@@ -3976,8 +3976,12 @@ type GetUserProfileResponse struct {
 	UserIdentity       []*UserIdentity                            `protobuf:"bytes,25,rep,name=user_identity,json=userIdentity,proto3" json:"user_identity,omitempty"`
 	EmailChangeHistory []*GetUserProfileResponse_ChangeRecord     `protobuf:"bytes,26,rep,name=emailChangeHistory,proto3" json:"emailChangeHistory,omitempty"`
 	PhoneChangeHistory []*GetUserProfileResponse_ChangeRecord     `protobuf:"bytes,27,rep,name=phoneChangeHistory,proto3" json:"phoneChangeHistory,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// Email.
+	LoginEmail string `protobuf:"bytes,28,opt,name=login_email,json=loginEmail,proto3" json:"login_email,omitempty"`
+	// Mobile.
+	LoginMobile   string `protobuf:"bytes,29,opt,name=login_mobile,json=loginMobile,proto3" json:"login_mobile,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetUserProfileResponse) Reset() {
@@ -4197,6 +4201,20 @@ func (x *GetUserProfileResponse) GetPhoneChangeHistory() []*GetUserProfileRespon
 		return x.PhoneChangeHistory
 	}
 	return nil
+}
+
+func (x *GetUserProfileResponse) GetLoginEmail() string {
+	if x != nil {
+		return x.LoginEmail
+	}
+	return ""
+}
+
+func (x *GetUserProfileResponse) GetLoginMobile() string {
+	if x != nil {
+		return x.LoginMobile
+	}
+	return ""
 }
 
 type CreateRoleRequest struct {
@@ -11443,7 +11461,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x0flogin_page_size\x18\x03 \x01(\x05H\x01R\rloginPageSize\x88\x01\x01\x12F\n" +
 	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\r\n" +
 	"\v_login_pageB\x12\n" +
-	"\x10_login_page_size\"\xab\x12\n" +
+	"\x10_login_page_size\"\xef\x12\n" +
 	"\x16GetUserProfileResponse\x12\x1a\n" +
 	"\bnickname\x18\x01 \x01(\tR\bnickname\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1b\n" +
@@ -11474,7 +11492,10 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\aaddress\x18\x18 \x01(\tR\aaddress\x12F\n" +
 	"\ruser_identity\x18\x19 \x03(\v2!.api.user.service.v1.UserIdentityR\fuserIdentity\x12h\n" +
 	"\x12emailChangeHistory\x18\x1a \x03(\v28.api.user.service.v1.GetUserProfileResponse.ChangeRecordR\x12emailChangeHistory\x12h\n" +
-	"\x12phoneChangeHistory\x18\x1b \x03(\v28.api.user.service.v1.GetUserProfileResponse.ChangeRecordR\x12phoneChangeHistory\x1aH\n" +
+	"\x12phoneChangeHistory\x18\x1b \x03(\v28.api.user.service.v1.GetUserProfileResponse.ChangeRecordR\x12phoneChangeHistory\x12\x1f\n" +
+	"\vlogin_email\x18\x1c \x01(\tR\n" +
+	"loginEmail\x12!\n" +
+	"\flogin_mobile\x18\x1d \x01(\tR\vloginMobile\x1aH\n" +
 	"\x06IpInfo\x12\x0e\n" +
 	"\x02ip\x18\x01 \x01(\tR\x02ip\x12\x14\n" +
 	"\x05count\x18\x02 \x01(\x05R\x05count\x12\x18\n" +

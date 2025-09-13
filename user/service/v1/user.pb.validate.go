@@ -7607,6 +7607,10 @@ func (m *GetUserProfileResponse) validate(all bool) error {
 
 	}
 
+	// no validation rules for LoginEmail
+
+	// no validation rules for LoginMobile
+
 	if len(errors) > 0 {
 		return GetUserProfileResponseMultiError(errors)
 	}
