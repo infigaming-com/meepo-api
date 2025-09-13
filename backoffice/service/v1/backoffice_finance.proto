@@ -750,14 +750,7 @@ message ListTaxReportsResponse {
 		int64 vat_payable_receivable = 12; // e.g., "16,200"
 		int64 event_calculations = 13; // e.g., "124,200"
 
-		// Declaration status
-		enum DeclarationStatus {
-			DECLARATION_STATUS_UNSPECIFIED = 0;
-			DECLARATION_STATUS_PENDING = 1;
-			DECLARATION_STATUS_CONFIRMED = 2;
-			DECLARATION_STATUS_DRAFT = 3;
-		}
-		DeclarationStatus declaration_status = 14;
+		TaxReportRecordStatus status = 14;
 		
 		// Timestamps
 		int64 created_at = 15;
@@ -771,11 +764,18 @@ message ListTaxReportsResponse {
 	int32 page_size = 4;
 }
 
+// Tax report record status
+enum TaxReportRecordStatus {
+	TaxReportRecordStatus_PENDING = 0;
+	TaxReportRecordStatus_CONFIRMED = 1;
+}
+
 message UpdateTaxReportRequest {
 	int64 id = 1;
 	string deposit_date = 2;
 	string deposit_slip_no = 3;
 	string ref_code = 4;
+	TaxReportRecordStatus status = 5;
 }
 
 message UpdateTaxReportResponse {

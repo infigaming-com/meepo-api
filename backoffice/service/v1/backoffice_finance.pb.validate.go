@@ -5311,6 +5311,8 @@ func (m *UpdateTaxReportRequest) validate(all bool) error {
 
 	// no validation rules for RefCode
 
+	// no validation rules for Status
+
 	if len(errors) > 0 {
 		return UpdateTaxReportRequestMultiError(errors)
 	}
@@ -6995,7 +6997,7 @@ func (m *ListTaxReportsResponse_TaxReport) validate(all bool) error {
 
 	// no validation rules for EventCalculations
 
-	// no validation rules for DeclarationStatus
+	// no validation rules for Status
 
 	// no validation rules for CreatedAt
 
