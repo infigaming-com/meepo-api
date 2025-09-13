@@ -4,6 +4,7 @@ package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
 import "common/common.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -86,6 +87,12 @@ service BackofficeReport {
   rpc ListWithdrawVtgDetails(ListWithdrawVtgDetailsRequest) returns (ListWithdrawVtgDetailsResponse) {
       option (google.api.http) = {
           post: "/v1/backoffice/report/withdraw-vtg-details/list"
+          body: "*"
+      };
+  }
+	rpc ListSportEvents(ListSportEventsRequest) returns (ListSportEventsResponse) {
+      option (google.api.http) = {
+          post: "/v1/backoffice/report/sport-events/list"
           body: "*"
       };
   }
@@ -667,4 +674,40 @@ message ListWithdrawVtgDetailsResponse {
 	int32 page = 2;
 	int32 page_size = 3;
 	int32 total = 4;
+}
+
+message ListSportEventsRequest {
+	TimeRange time_range = 1;
+	optional int32 page = 2;
+	optional int32 page_size = 3;
+	optional string event_name = 4; // Event name filter
+	optional string venue = 5; // Venue filter
+	optional string tournament = 6; // Tournament filter
+}
+
+message ListSportEventsResponse {
+	message SportEvent {
+		// Basic information
+		string event_id = 1; // e.g., "EV2025090901"
+		string event_name = 2; // e.g., "Premier League-Manchester United vs Chelsea Old Trafford | Premier League 2025/26"
+		string venue = 3; // Venue name
+		string tournament = 4; // Tournament name
+		
+		// Timing information (all in SAST timezone)
+		google.protobuf.Timestamp carded_time = 5; // Carded Time(SAST)
+		google.protobuf.Timestamp first_bet_time = 6; // First Bet Time(SAST)
+		google.protobuf.Timestamp last_bet_time = 7; // Last Bet Time(SAST)
+		google.protobuf.Timestamp no_more_bets_time = 8; // No More Bets Time(SAST)
+		google.protobuf.Timestamp result_processing_time = 9; // Result Processing Time(SAST)
+		google.protobuf.Timestamp revised_official_carded_time = 10; // Revised Official Carded Time(SAST) or null
+		string status = 11;
+	}
+	
+	repeated SportEvent events = 1;
+	
+	// Summary information
+	int32 total_count = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+	int32 total_pages = 5;
 }

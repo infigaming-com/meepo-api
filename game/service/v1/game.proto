@@ -125,6 +125,18 @@ service Game {
 
 	rpc UpdateTaxReport(UpdateTaxReportRequest) returns (UpdateTaxReportResponse) {
 	}
+
+	rpc GetResponsibleGamblingStatus(GetResponsibleGamblingStatusRequest) returns (GetResponsibleGamblingStatusResponse) {
+	}
+
+	// Sport Events related APIs
+	rpc ListSportEvents(ListSportEventsRequest) returns (ListSportEventsResponse) {
+		option (google.api.http) = {
+			post: "/v1/game/sport-events/list"
+			body: "*"
+		};
+	}
+
 }
 
 message CreateOperatorRequest {
@@ -919,4 +931,68 @@ message UpdateTaxReportRequest {
 }
 
 message UpdateTaxReportResponse {
+}
+
+message GetResponsibleGamblingStatusRequest {
+	int64 user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+}
+
+message GetResponsibleGamblingStatusResponse {
+	message ResponsibleGamblingStatus {
+		string currency = 1;
+		string daily_play_usage = 2;
+		string weekly_play_usage = 3;
+		string monthly_play_usage = 4;
+		string daily_loss_usage = 5;
+		string weekly_loss_usage = 6;
+		string monthly_loss_usage = 7;
+	}
+	repeated ResponsibleGamblingStatus responsible_gambling_statuses = 1;
+}
+
+// Sport Events related messages
+message ListSportEventsRequest {
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	optional int32 page = 2;
+	optional int32 page_size = 3;
+	optional string event_name = 4; // Event name filter
+	optional string venue = 5; // Venue filter
+	optional string tournament = 6; // Tournament filter
+	optional string status = 7; // Status filter (e.g., "Completed", "Pending", "Cancelled")
+	optional google.protobuf.Timestamp start_time = 8; // Start date filter
+	optional google.protobuf.Timestamp end_time = 9; // End date filter
+}
+
+message ListSportEventsResponse {
+	message SportEvent {
+		// Basic information
+		string event_id = 1; // e.g., "EV2025090901"
+		string event_name = 2; // e.g., "Premier League-Manchester United vs Chelsea Old Trafford | Premier League 2025/26"
+		string venue = 3; // Venue name
+		string tournament = 4; // Tournament name
+		
+		// Timing information (all in SAST timezone)
+		google.protobuf.Timestamp carded_time = 5; // Carded Time(SAST)
+		google.protobuf.Timestamp first_bet_time = 6; // First Bet Time(SAST)
+		google.protobuf.Timestamp last_bet_time = 7; // Last Bet Time(SAST)
+		google.protobuf.Timestamp no_more_bets_time = 8; // No More Bets Time(SAST)
+		google.protobuf.Timestamp result_processing_time = 9; // Result Processing Time(SAST)
+		google.protobuf.Timestamp revised_official_carded_time = 10; // Revised Official Carded Time(SAST) or null
+		
+		// Status information
+		string status = 13; // Event status (e.g., "Completed", "Pending", "Cancelled")
+		
+		// Timestamps
+		google.protobuf.Timestamp created_at = 18;
+		google.protobuf.Timestamp updated_at = 19;
+	}
+	
+	repeated SportEvent events = 1;
+	
+	// Summary information
+	int32 total_count = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+	int32 total_pages = 5;
 }

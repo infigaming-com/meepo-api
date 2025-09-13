@@ -29,6 +29,7 @@ const OperationBackofficeReportListDepositVtgDetails = "/api.backoffice.service.
 const OperationBackofficeReportListGameData = "/api.backoffice.service.v1.BackofficeReport/ListGameData"
 const OperationBackofficeReportListPlayerGameData = "/api.backoffice.service.v1.BackofficeReport/ListPlayerGameData"
 const OperationBackofficeReportListRegisterRetention = "/api.backoffice.service.v1.BackofficeReport/ListRegisterRetention"
+const OperationBackofficeReportListSportEvents = "/api.backoffice.service.v1.BackofficeReport/ListSportEvents"
 const OperationBackofficeReportListSummaries = "/api.backoffice.service.v1.BackofficeReport/ListSummaries"
 const OperationBackofficeReportListWithdrawDetails = "/api.backoffice.service.v1.BackofficeReport/ListWithdrawDetails"
 const OperationBackofficeReportListWithdrawVtgDetails = "/api.backoffice.service.v1.BackofficeReport/ListWithdrawVtgDetails"
@@ -44,6 +45,7 @@ type BackofficeReportHTTPServer interface {
 	ListGameData(context.Context, *ListGameDataRequest) (*ListGameDataResponse, error)
 	ListPlayerGameData(context.Context, *ListPlayerGameDataRequest) (*ListPlayerGameDataResponse, error)
 	ListRegisterRetention(context.Context, *ListRegisterRetentionRequest) (*ListRegisterRetentionResponse, error)
+	ListSportEvents(context.Context, *ListSportEventsRequest) (*ListSportEventsResponse, error)
 	ListSummaries(context.Context, *ListSummariesRequest) (*ListSummariesResponse, error)
 	ListWithdrawDetails(context.Context, *ListWithdrawDetailsRequest) (*ListWithdrawDetailsResponse, error)
 	ListWithdrawVtgDetails(context.Context, *ListWithdrawVtgDetailsRequest) (*ListWithdrawVtgDetailsResponse, error)
@@ -64,6 +66,7 @@ func RegisterBackofficeReportHTTPServer(s *http.Server, srv BackofficeReportHTTP
 	r.POST("/v1/backoffice/report/register-retention/list", _BackofficeReport_ListRegisterRetention0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/report/deposit-vtg-details/list", _BackofficeReport_ListDepositVtgDetails0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/report/withdraw-vtg-details/list", _BackofficeReport_ListWithdrawVtgDetails0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/report/sport-events/list", _BackofficeReport_ListSportEvents1_HTTP_Handler(srv))
 }
 
 func _BackofficeReport_GetSummary0_HTTP_Handler(srv BackofficeReportHTTPServer) func(ctx http.Context) error {
@@ -352,6 +355,28 @@ func _BackofficeReport_ListWithdrawVtgDetails0_HTTP_Handler(srv BackofficeReport
 	}
 }
 
+func _BackofficeReport_ListSportEvents1_HTTP_Handler(srv BackofficeReportHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListSportEventsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeReportListSportEvents)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListSportEvents(ctx, req.(*ListSportEventsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListSportEventsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeReportHTTPClient interface {
 	GetDepositSummaries(ctx context.Context, req *GetDepositSummariesRequest, opts ...http.CallOption) (rsp *GetDepositSummariesResponse, err error)
 	GetGameDataSummary(ctx context.Context, req *GetGameSummaryRequest, opts ...http.CallOption) (rsp *GetGameSummaryResponse, err error)
@@ -363,6 +388,7 @@ type BackofficeReportHTTPClient interface {
 	ListGameData(ctx context.Context, req *ListGameDataRequest, opts ...http.CallOption) (rsp *ListGameDataResponse, err error)
 	ListPlayerGameData(ctx context.Context, req *ListPlayerGameDataRequest, opts ...http.CallOption) (rsp *ListPlayerGameDataResponse, err error)
 	ListRegisterRetention(ctx context.Context, req *ListRegisterRetentionRequest, opts ...http.CallOption) (rsp *ListRegisterRetentionResponse, err error)
+	ListSportEvents(ctx context.Context, req *ListSportEventsRequest, opts ...http.CallOption) (rsp *ListSportEventsResponse, err error)
 	ListSummaries(ctx context.Context, req *ListSummariesRequest, opts ...http.CallOption) (rsp *ListSummariesResponse, err error)
 	ListWithdrawDetails(ctx context.Context, req *ListWithdrawDetailsRequest, opts ...http.CallOption) (rsp *ListWithdrawDetailsResponse, err error)
 	ListWithdrawVtgDetails(ctx context.Context, req *ListWithdrawVtgDetailsRequest, opts ...http.CallOption) (rsp *ListWithdrawVtgDetailsResponse, err error)
@@ -498,6 +524,19 @@ func (c *BackofficeReportHTTPClientImpl) ListRegisterRetention(ctx context.Conte
 	pattern := "/v1/backoffice/report/register-retention/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeReportListRegisterRetention))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeReportHTTPClientImpl) ListSportEvents(ctx context.Context, in *ListSportEventsRequest, opts ...http.CallOption) (*ListSportEventsResponse, error) {
+	var out ListSportEventsResponse
+	pattern := "/v1/backoffice/report/sport-events/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeReportListSportEvents))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
