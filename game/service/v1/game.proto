@@ -3,6 +3,7 @@ syntax = "proto3";
 package api.game.service.v1;
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
+import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/game/service/v1;v1";
 option java_multiple_files = true;
@@ -111,6 +112,9 @@ service Game {
 	rpc ListProviderRates(ListProviderRatesRequest) returns (ListProviderRatesResponse) {}
 
 	rpc GetGameTransactionById(GetGameTransactionByIdRequest) returns (GetGameTransactionByIdResponse) {
+	}
+
+	rpc GetResponsibleGamblingStatus(GetResponsibleGamblingStatusRequest) returns (GetResponsibleGamblingStatusResponse) {
 	}
 }
 
@@ -708,4 +712,22 @@ message ListProviderRatesResponse {
 	int32 page = 2;
 	int32 page_size = 3;
 	int32 total = 4;
+}
+
+message GetResponsibleGamblingStatusRequest {
+	int64 user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+}
+
+message GetResponsibleGamblingStatusResponse {
+	message ResponsibleGamblingStatus {
+		string currency = 1;
+		string daily_play_usage = 2;
+		string weekly_play_usage = 3;
+		string monthly_play_usage = 4;
+		string daily_loss_usage = 5;
+		string weekly_loss_usage = 6;
+		string monthly_loss_usage = 7;
+	}
+	repeated ResponsibleGamblingStatus responsible_gambling_statuses = 1;
 }

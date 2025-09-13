@@ -25,57 +25,74 @@ const (
 type ErrorReason int32
 
 const (
-	ErrorReason_UNSPECIFIED                                   ErrorReason = 0
-	ErrorReason_USER_NOT_FOUND                                ErrorReason = 30001
-	ErrorReason_USER_DISABLED                                 ErrorReason = 30002
-	ErrorReason_GET_OPERATOR_CURRENCIES_FAILED                ErrorReason = 30003
-	ErrorReason_ADD_USER_FAILED                               ErrorReason = 30004
-	ErrorReason_ADD_BALANCES_FAILED                           ErrorReason = 30005
-	ErrorReason_GET_USER_FAILED                               ErrorReason = 30006
-	ErrorReason_LOCK_USER_WITH_USER_ID_FAILED                 ErrorReason = 30007
-	ErrorReason_UPDATE_USER_FAILED                            ErrorReason = 30008
-	ErrorReason_UPDATE_BALANCES_FAILED                        ErrorReason = 30009
-	ErrorReason_UPDATE_BALANCE_FAILED                         ErrorReason = 30010
-	ErrorReason_GET_USERS_WITH_OPERATOR_IDS_FAILED            ErrorReason = 30011
-	ErrorReason_LOCK_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED ErrorReason = 30012
-	ErrorReason_GET_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED  ErrorReason = 30013
-	ErrorReason_GET_BALANCES_WITH_USER_ID_FAILED              ErrorReason = 30014
-	ErrorReason_BALANCE_DISABLED                              ErrorReason = 30015
-	ErrorReason_GENERATE_CREDIT_ID_FAILED                     ErrorReason = 30016
-	ErrorReason_LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED  ErrorReason = 30017
-	ErrorReason_ADD_CREDIT_FAILED                             ErrorReason = 30018
-	ErrorReason_INVALID_TRANSACTION_TYPE                      ErrorReason = 30019
-	ErrorReason_GENERATE_BALANCE_TRANSACTION_ID_FAILED        ErrorReason = 30020
-	ErrorReason_GENERATE_CREDIT_TRANSACTION_ID_FAILED         ErrorReason = 30021
-	ErrorReason_GET_CREDIT_TRANSACTION_FAILED                 ErrorReason = 30022
-	ErrorReason_ADD_BALANCE_TRANSACTION_FAILED                ErrorReason = 30023
-	ErrorReason_ADD_CREDIT_TRANSACTION_FAILED                 ErrorReason = 30024
-	ErrorReason_GET_CREDITS_WITH_USER_ID_AND_CURRENCY_FAILED  ErrorReason = 30025
-	ErrorReason_INSUFFICIENT_BALANCE                          ErrorReason = 30026
-	ErrorReason_GET_RATES_FAILED                              ErrorReason = 30027
-	ErrorReason_UPDATE_CREDIT_FAILED                          ErrorReason = 30028
-	ErrorReason_GET_CREDIT_TRANSACTIONS_FAILED                ErrorReason = 30029
-	ErrorReason_NO_CREDIT_TRANSACTION_FOUND_FOR_GAME_BET      ErrorReason = 30030
-	ErrorReason_GET_CURRENCIES_FAILED                         ErrorReason = 30031
-	ErrorReason_GET_BALANCE_TRANSACTION_FAILED                ErrorReason = 30032
-	ErrorReason_UPDATE_BALANCE_TRANSACTION_FAILED             ErrorReason = 30033
-	ErrorReason_UPDATE_CREDIT_TRANSACTION_FAILED              ErrorReason = 30034
-	ErrorReason_GET_CREDITS_BY_IDS_FAILED                     ErrorReason = 30035
-	ErrorReason_GET_CREDIT_BY_ID_FAILED                       ErrorReason = 30036
-	ErrorReason_GET_EXCHANGE_RATE_FAILED                      ErrorReason = 30037
-	ErrorReason_GET_BALANCE_TRANSACTION_SUMMARY_FAILED        ErrorReason = 30038
-	ErrorReason_INVALID_CURRENCY_AMOUNT                       ErrorReason = 30039
-	ErrorReason_LOCK_OPERATOR_CURRENCY_FAILED                 ErrorReason = 30040
-	ErrorReason_GET_OPERATOR_CURRENCY_FAILED                  ErrorReason = 30041
-	ErrorReason_UPDATE_OPERATOR_CURRENCY_FAILED               ErrorReason = 30042
-	ErrorReason_GET_OPERATOR_IDS_FAILED                       ErrorReason = 30043
-	ErrorReason_GET_USER_IDS_BY_OPERATOR_IDS_FAILED           ErrorReason = 30044
-	ErrorReason_ADD_OPERATOR_CURRENCY_FAILED                  ErrorReason = 30045
-	ErrorReason_GET_OPERATOR_CURRENCIES_BY_OPERATOR_ID_FAILED ErrorReason = 30046
-	ErrorReason_GET_USER_OPERATOR_IDS_FAILED                  ErrorReason = 30047
-	ErrorReason_SYSTEM_OPERATOR_CURRENCY_NOT_FOUND            ErrorReason = 30048
-	ErrorReason_SYSTEM_OPERATOR_CURRENCY_ALREADY_EXISTS       ErrorReason = 30049
-	ErrorReason_GET_PARENT_OPERATOR_IDS_FAILED                ErrorReason = 30050
+	ErrorReason_UNSPECIFIED                                      ErrorReason = 0
+	ErrorReason_USER_NOT_FOUND                                   ErrorReason = 30001
+	ErrorReason_USER_DISABLED                                    ErrorReason = 30002
+	ErrorReason_GET_OPERATOR_CURRENCIES_FAILED                   ErrorReason = 30003
+	ErrorReason_ADD_USER_FAILED                                  ErrorReason = 30004
+	ErrorReason_ADD_BALANCES_FAILED                              ErrorReason = 30005
+	ErrorReason_GET_USER_FAILED                                  ErrorReason = 30006
+	ErrorReason_LOCK_USER_WITH_USER_ID_FAILED                    ErrorReason = 30007
+	ErrorReason_UPDATE_USER_FAILED                               ErrorReason = 30008
+	ErrorReason_UPDATE_BALANCES_FAILED                           ErrorReason = 30009
+	ErrorReason_UPDATE_BALANCE_FAILED                            ErrorReason = 30010
+	ErrorReason_GET_USERS_WITH_OPERATOR_IDS_FAILED               ErrorReason = 30011
+	ErrorReason_LOCK_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED    ErrorReason = 30012
+	ErrorReason_GET_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED     ErrorReason = 30013
+	ErrorReason_GET_BALANCES_WITH_USER_ID_FAILED                 ErrorReason = 30014
+	ErrorReason_BALANCE_DISABLED                                 ErrorReason = 30015
+	ErrorReason_GENERATE_CREDIT_ID_FAILED                        ErrorReason = 30016
+	ErrorReason_LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED     ErrorReason = 30017
+	ErrorReason_ADD_CREDIT_FAILED                                ErrorReason = 30018
+	ErrorReason_INVALID_TRANSACTION_TYPE                         ErrorReason = 30019
+	ErrorReason_GENERATE_BALANCE_TRANSACTION_ID_FAILED           ErrorReason = 30020
+	ErrorReason_GENERATE_CREDIT_TRANSACTION_ID_FAILED            ErrorReason = 30021
+	ErrorReason_GET_CREDIT_TRANSACTION_FAILED                    ErrorReason = 30022
+	ErrorReason_ADD_BALANCE_TRANSACTION_FAILED                   ErrorReason = 30023
+	ErrorReason_ADD_CREDIT_TRANSACTION_FAILED                    ErrorReason = 30024
+	ErrorReason_GET_CREDITS_WITH_USER_ID_AND_CURRENCY_FAILED     ErrorReason = 30025
+	ErrorReason_INSUFFICIENT_BALANCE                             ErrorReason = 30026
+	ErrorReason_GET_RATES_FAILED                                 ErrorReason = 30027
+	ErrorReason_UPDATE_CREDIT_FAILED                             ErrorReason = 30028
+	ErrorReason_GET_CREDIT_TRANSACTIONS_FAILED                   ErrorReason = 30029
+	ErrorReason_NO_CREDIT_TRANSACTION_FOUND_FOR_GAME_BET         ErrorReason = 30030
+	ErrorReason_GET_CURRENCIES_FAILED                            ErrorReason = 30031
+	ErrorReason_GET_BALANCE_TRANSACTION_FAILED                   ErrorReason = 30032
+	ErrorReason_UPDATE_BALANCE_TRANSACTION_FAILED                ErrorReason = 30033
+	ErrorReason_UPDATE_CREDIT_TRANSACTION_FAILED                 ErrorReason = 30034
+	ErrorReason_GET_CREDITS_BY_IDS_FAILED                        ErrorReason = 30035
+	ErrorReason_GET_CREDIT_BY_ID_FAILED                          ErrorReason = 30036
+	ErrorReason_GET_EXCHANGE_RATE_FAILED                         ErrorReason = 30037
+	ErrorReason_GET_BALANCE_TRANSACTION_SUMMARY_FAILED           ErrorReason = 30038
+	ErrorReason_INVALID_CURRENCY_AMOUNT                          ErrorReason = 30039
+	ErrorReason_LOCK_OPERATOR_CURRENCY_FAILED                    ErrorReason = 30040
+	ErrorReason_GET_OPERATOR_CURRENCY_FAILED                     ErrorReason = 30041
+	ErrorReason_UPDATE_OPERATOR_CURRENCY_FAILED                  ErrorReason = 30042
+	ErrorReason_GET_OPERATOR_IDS_FAILED                          ErrorReason = 30043
+	ErrorReason_GET_USER_IDS_BY_OPERATOR_IDS_FAILED              ErrorReason = 30044
+	ErrorReason_ADD_OPERATOR_CURRENCY_FAILED                     ErrorReason = 30045
+	ErrorReason_GET_OPERATOR_CURRENCIES_BY_OPERATOR_ID_FAILED    ErrorReason = 30046
+	ErrorReason_GET_USER_OPERATOR_IDS_FAILED                     ErrorReason = 30047
+	ErrorReason_SYSTEM_OPERATOR_CURRENCY_NOT_FOUND               ErrorReason = 30048
+	ErrorReason_SYSTEM_OPERATOR_CURRENCY_ALREADY_EXISTS          ErrorReason = 30049
+	ErrorReason_GET_PARENT_OPERATOR_IDS_FAILED                   ErrorReason = 30050
+	ErrorReason_USER_INFO_NOT_FOUND_IN_CONTEXT                   ErrorReason = 30070
+	ErrorReason_OPERATOR_PERMISSION_DENIED                       ErrorReason = 30071
+	ErrorReason_WALLET_RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND     ErrorReason = 30104
+	ErrorReason_GET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED    ErrorReason = 30105
+	ErrorReason_SET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED    ErrorReason = 30106
+	ErrorReason_DELETE_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED ErrorReason = 30107
+	ErrorReason_INVALID_GAMBLING_CONFIGLIMIT_TYPE                ErrorReason = 30108
+	ErrorReason_CREATE_DELETE_TASK_FAILED                        ErrorReason = 30109
+	ErrorReason_SCHEDULE_DELETE_TASK_FAILED                      ErrorReason = 30110
+	ErrorReason_ADD_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED    ErrorReason = 30111
+	ErrorReason_GET_USER_CREDITS_FAILED                          ErrorReason = 30112
+	ErrorReason_LOCK_BALANCE_FAILED                              ErrorReason = 30113
+	ErrorReason_LOCK_CREDIT_FAILED                               ErrorReason = 30114
+	ErrorReason_GET_OPERATOR_CONTEXT_FAILED                      ErrorReason = 30115
+	ErrorReason_USER_ID_REQUIRED                                 ErrorReason = 30116
+	ErrorReason_LOCK_GAMBLING_CONFIG_FAILED                      ErrorReason = 30117
+	ErrorReason_LIST_GAMBLING_CONFIGS_FAILED                     ErrorReason = 30118
 )
 
 // Enum value maps for ErrorReason.
@@ -132,59 +149,93 @@ var (
 		30048: "SYSTEM_OPERATOR_CURRENCY_NOT_FOUND",
 		30049: "SYSTEM_OPERATOR_CURRENCY_ALREADY_EXISTS",
 		30050: "GET_PARENT_OPERATOR_IDS_FAILED",
+		30070: "USER_INFO_NOT_FOUND_IN_CONTEXT",
+		30071: "OPERATOR_PERMISSION_DENIED",
+		30104: "WALLET_RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND",
+		30105: "GET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED",
+		30106: "SET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED",
+		30107: "DELETE_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED",
+		30108: "INVALID_GAMBLING_CONFIGLIMIT_TYPE",
+		30109: "CREATE_DELETE_TASK_FAILED",
+		30110: "SCHEDULE_DELETE_TASK_FAILED",
+		30111: "ADD_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED",
+		30112: "GET_USER_CREDITS_FAILED",
+		30113: "LOCK_BALANCE_FAILED",
+		30114: "LOCK_CREDIT_FAILED",
+		30115: "GET_OPERATOR_CONTEXT_FAILED",
+		30116: "USER_ID_REQUIRED",
+		30117: "LOCK_GAMBLING_CONFIG_FAILED",
+		30118: "LIST_GAMBLING_CONFIGS_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
-		"UNSPECIFIED":                                   0,
-		"USER_NOT_FOUND":                                30001,
-		"USER_DISABLED":                                 30002,
-		"GET_OPERATOR_CURRENCIES_FAILED":                30003,
-		"ADD_USER_FAILED":                               30004,
-		"ADD_BALANCES_FAILED":                           30005,
-		"GET_USER_FAILED":                               30006,
-		"LOCK_USER_WITH_USER_ID_FAILED":                 30007,
-		"UPDATE_USER_FAILED":                            30008,
-		"UPDATE_BALANCES_FAILED":                        30009,
-		"UPDATE_BALANCE_FAILED":                         30010,
-		"GET_USERS_WITH_OPERATOR_IDS_FAILED":            30011,
-		"LOCK_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED": 30012,
-		"GET_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED":  30013,
-		"GET_BALANCES_WITH_USER_ID_FAILED":              30014,
-		"BALANCE_DISABLED":                              30015,
-		"GENERATE_CREDIT_ID_FAILED":                     30016,
-		"LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED":  30017,
-		"ADD_CREDIT_FAILED":                             30018,
-		"INVALID_TRANSACTION_TYPE":                      30019,
-		"GENERATE_BALANCE_TRANSACTION_ID_FAILED":        30020,
-		"GENERATE_CREDIT_TRANSACTION_ID_FAILED":         30021,
-		"GET_CREDIT_TRANSACTION_FAILED":                 30022,
-		"ADD_BALANCE_TRANSACTION_FAILED":                30023,
-		"ADD_CREDIT_TRANSACTION_FAILED":                 30024,
-		"GET_CREDITS_WITH_USER_ID_AND_CURRENCY_FAILED":  30025,
-		"INSUFFICIENT_BALANCE":                          30026,
-		"GET_RATES_FAILED":                              30027,
-		"UPDATE_CREDIT_FAILED":                          30028,
-		"GET_CREDIT_TRANSACTIONS_FAILED":                30029,
-		"NO_CREDIT_TRANSACTION_FOUND_FOR_GAME_BET":      30030,
-		"GET_CURRENCIES_FAILED":                         30031,
-		"GET_BALANCE_TRANSACTION_FAILED":                30032,
-		"UPDATE_BALANCE_TRANSACTION_FAILED":             30033,
-		"UPDATE_CREDIT_TRANSACTION_FAILED":              30034,
-		"GET_CREDITS_BY_IDS_FAILED":                     30035,
-		"GET_CREDIT_BY_ID_FAILED":                       30036,
-		"GET_EXCHANGE_RATE_FAILED":                      30037,
-		"GET_BALANCE_TRANSACTION_SUMMARY_FAILED":        30038,
-		"INVALID_CURRENCY_AMOUNT":                       30039,
-		"LOCK_OPERATOR_CURRENCY_FAILED":                 30040,
-		"GET_OPERATOR_CURRENCY_FAILED":                  30041,
-		"UPDATE_OPERATOR_CURRENCY_FAILED":               30042,
-		"GET_OPERATOR_IDS_FAILED":                       30043,
-		"GET_USER_IDS_BY_OPERATOR_IDS_FAILED":           30044,
-		"ADD_OPERATOR_CURRENCY_FAILED":                  30045,
-		"GET_OPERATOR_CURRENCIES_BY_OPERATOR_ID_FAILED": 30046,
-		"GET_USER_OPERATOR_IDS_FAILED":                  30047,
-		"SYSTEM_OPERATOR_CURRENCY_NOT_FOUND":            30048,
-		"SYSTEM_OPERATOR_CURRENCY_ALREADY_EXISTS":       30049,
-		"GET_PARENT_OPERATOR_IDS_FAILED":                30050,
+		"UNSPECIFIED":                                      0,
+		"USER_NOT_FOUND":                                   30001,
+		"USER_DISABLED":                                    30002,
+		"GET_OPERATOR_CURRENCIES_FAILED":                   30003,
+		"ADD_USER_FAILED":                                  30004,
+		"ADD_BALANCES_FAILED":                              30005,
+		"GET_USER_FAILED":                                  30006,
+		"LOCK_USER_WITH_USER_ID_FAILED":                    30007,
+		"UPDATE_USER_FAILED":                               30008,
+		"UPDATE_BALANCES_FAILED":                           30009,
+		"UPDATE_BALANCE_FAILED":                            30010,
+		"GET_USERS_WITH_OPERATOR_IDS_FAILED":               30011,
+		"LOCK_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED":    30012,
+		"GET_BALANCE_WITH_USER_ID_AND_CURRENCY_FAILED":     30013,
+		"GET_BALANCES_WITH_USER_ID_FAILED":                 30014,
+		"BALANCE_DISABLED":                                 30015,
+		"GENERATE_CREDIT_ID_FAILED":                        30016,
+		"LOCK_CREDIT_WITH_USER_ID_AND_CURRENCY_FAILED":     30017,
+		"ADD_CREDIT_FAILED":                                30018,
+		"INVALID_TRANSACTION_TYPE":                         30019,
+		"GENERATE_BALANCE_TRANSACTION_ID_FAILED":           30020,
+		"GENERATE_CREDIT_TRANSACTION_ID_FAILED":            30021,
+		"GET_CREDIT_TRANSACTION_FAILED":                    30022,
+		"ADD_BALANCE_TRANSACTION_FAILED":                   30023,
+		"ADD_CREDIT_TRANSACTION_FAILED":                    30024,
+		"GET_CREDITS_WITH_USER_ID_AND_CURRENCY_FAILED":     30025,
+		"INSUFFICIENT_BALANCE":                             30026,
+		"GET_RATES_FAILED":                                 30027,
+		"UPDATE_CREDIT_FAILED":                             30028,
+		"GET_CREDIT_TRANSACTIONS_FAILED":                   30029,
+		"NO_CREDIT_TRANSACTION_FOUND_FOR_GAME_BET":         30030,
+		"GET_CURRENCIES_FAILED":                            30031,
+		"GET_BALANCE_TRANSACTION_FAILED":                   30032,
+		"UPDATE_BALANCE_TRANSACTION_FAILED":                30033,
+		"UPDATE_CREDIT_TRANSACTION_FAILED":                 30034,
+		"GET_CREDITS_BY_IDS_FAILED":                        30035,
+		"GET_CREDIT_BY_ID_FAILED":                          30036,
+		"GET_EXCHANGE_RATE_FAILED":                         30037,
+		"GET_BALANCE_TRANSACTION_SUMMARY_FAILED":           30038,
+		"INVALID_CURRENCY_AMOUNT":                          30039,
+		"LOCK_OPERATOR_CURRENCY_FAILED":                    30040,
+		"GET_OPERATOR_CURRENCY_FAILED":                     30041,
+		"UPDATE_OPERATOR_CURRENCY_FAILED":                  30042,
+		"GET_OPERATOR_IDS_FAILED":                          30043,
+		"GET_USER_IDS_BY_OPERATOR_IDS_FAILED":              30044,
+		"ADD_OPERATOR_CURRENCY_FAILED":                     30045,
+		"GET_OPERATOR_CURRENCIES_BY_OPERATOR_ID_FAILED":    30046,
+		"GET_USER_OPERATOR_IDS_FAILED":                     30047,
+		"SYSTEM_OPERATOR_CURRENCY_NOT_FOUND":               30048,
+		"SYSTEM_OPERATOR_CURRENCY_ALREADY_EXISTS":          30049,
+		"GET_PARENT_OPERATOR_IDS_FAILED":                   30050,
+		"USER_INFO_NOT_FOUND_IN_CONTEXT":                   30070,
+		"OPERATOR_PERMISSION_DENIED":                       30071,
+		"WALLET_RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND":     30104,
+		"GET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED":    30105,
+		"SET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED":    30106,
+		"DELETE_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED": 30107,
+		"INVALID_GAMBLING_CONFIGLIMIT_TYPE":                30108,
+		"CREATE_DELETE_TASK_FAILED":                        30109,
+		"SCHEDULE_DELETE_TASK_FAILED":                      30110,
+		"ADD_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED":    30111,
+		"GET_USER_CREDITS_FAILED":                          30112,
+		"LOCK_BALANCE_FAILED":                              30113,
+		"LOCK_CREDIT_FAILED":                               30114,
+		"GET_OPERATOR_CONTEXT_FAILED":                      30115,
+		"USER_ID_REQUIRED":                                 30116,
+		"LOCK_GAMBLING_CONFIG_FAILED":                      30117,
+		"LIST_GAMBLING_CONFIGS_FAILED":                     30118,
 	}
 )
 
@@ -219,7 +270,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xb5\x0e\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xcb\x13\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -271,7 +322,24 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1cGET_USER_OPERATOR_IDS_FAILED\x10\xdf\xea\x01\x12(\n" +
 	"\"SYSTEM_OPERATOR_CURRENCY_NOT_FOUND\x10\xe0\xea\x01\x12-\n" +
 	"'SYSTEM_OPERATOR_CURRENCY_ALREADY_EXISTS\x10\xe1\xea\x01\x12$\n" +
-	"\x1eGET_PARENT_OPERATOR_IDS_FAILED\x10\xe2\xea\x01\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\x1eGET_PARENT_OPERATOR_IDS_FAILED\x10\xe2\xea\x01\x12$\n" +
+	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\xf6\xea\x01\x12 \n" +
+	"\x1aOPERATOR_PERMISSION_DENIED\x10\xf7\xea\x01\x122\n" +
+	",WALLET_RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND\x10\x98\xeb\x01\x123\n" +
+	"-GET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED\x10\x99\xeb\x01\x123\n" +
+	"-SET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED\x10\x9a\xeb\x01\x126\n" +
+	"0DELETE_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED\x10\x9b\xeb\x01\x12'\n" +
+	"!INVALID_GAMBLING_CONFIGLIMIT_TYPE\x10\x9c\xeb\x01\x12\x1f\n" +
+	"\x19CREATE_DELETE_TASK_FAILED\x10\x9d\xeb\x01\x12!\n" +
+	"\x1bSCHEDULE_DELETE_TASK_FAILED\x10\x9e\xeb\x01\x123\n" +
+	"-ADD_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED\x10\x9f\xeb\x01\x12\x1d\n" +
+	"\x17GET_USER_CREDITS_FAILED\x10\xa0\xeb\x01\x12\x19\n" +
+	"\x13LOCK_BALANCE_FAILED\x10\xa1\xeb\x01\x12\x18\n" +
+	"\x12LOCK_CREDIT_FAILED\x10\xa2\xeb\x01\x12!\n" +
+	"\x1bGET_OPERATOR_CONTEXT_FAILED\x10\xa3\xeb\x01\x12\x16\n" +
+	"\x10USER_ID_REQUIRED\x10\xa4\xeb\x01\x12!\n" +
+	"\x1bLOCK_GAMBLING_CONFIG_FAILED\x10\xa5\xeb\x01\x12\"\n" +
+	"\x1cLIST_GAMBLING_CONFIGS_FAILED\x10\xa6\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (

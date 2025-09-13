@@ -4,6 +4,7 @@ package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
+import "wallet/service/v1/wallet.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -61,6 +62,22 @@ service BackofficeWallet {
             body: "*"
         };
     }
+
+	// DeleteWalletResponsibleGamblingConfig deletes gambling config for a user's currency
+	rpc DeleteWalletResponsibleGamblingConfig(DeleteWalletResponsibleGamblingConfigRequest) returns (wallet.service.v1.DeleteResponsibleGamblingConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/responsible-gambling/config/delete"
+			body: "*"
+		};
+	}
+
+	// ListWalletResponsibleGamblingConfigs lists gambling configs for a user with all currencies
+	rpc ListWalletResponsibleGamblingConfigs(ListWalletResponsibleGamblingConfigsRequest) returns (wallet.service.v1.ListResponsibleGamblingConfigsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/responsible-gambling/configs/list"
+			body: "*"
+		};
+	}
 }
 
 message GetWalletsRequest {
@@ -268,4 +285,16 @@ message UpdateWalletCurrencyRequest {
 
 message UpdateWalletCurrencyResponse {
 	WalletCurrency currency = 1;
+}
+
+message DeleteWalletResponsibleGamblingConfigRequest {
+	int64 user_id = 1;
+	string currency = 2;
+	// deposit_limit, withdrawal_limit, daily_play_limit, weekly_play_limit, monthly_play_limit
+	// daily_loss_limit, weekly_loss_limit, monthly_loss_limit
+	string limit_type = 3;
+}
+
+message ListWalletResponsibleGamblingConfigsRequest {
+	int64 user_id = 1;
 }
