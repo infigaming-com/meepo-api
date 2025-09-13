@@ -148,6 +148,20 @@ service BackofficeOperator {
 			body: "*"
 		};
 	}
+
+	rpc SetOperatorRegisterLimitConfig(SetOperatorRegisterLimitConfigRequest) returns (user.service.v1.SetOperatorRegisterLimitConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/register-limit-config/set"
+			body: "*"
+		};
+	}
+	
+	rpc GetOperatorRegisterLimitConfig(GetOperatorRegisterLimitConfigRequest) returns (user.service.v1.GetOperatorRegisterLimitConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/register-limit-config/get"
+			body: "*"
+		};
+	}	
 }
 
 message ListAllOperatorsRequest {
@@ -358,17 +372,31 @@ message UpdateOperatorAccountSettingsResponse {
 }
 
 message AddRegisterLoginBlacklistRequest {
+	api.common.OperatorContext target_operator_context = 1;
 	string id_type = 2;
-	repeated string id = 3;
+	repeated string ids = 3;
 }
 
 message DeleteRegisterLoginBlacklistRequest {
+	api.common.OperatorContext target_operator_context = 1;
 	string id_type = 2;
-	repeated string id = 3;
+	repeated string ids = 3;
 }
 
 message ListRegisterLoginBlacklistRequest {
+	api.common.OperatorContext target_operator_context = 1;
 	string id_type = 2;
 	optional int32 page = 3;
 	optional int32 page_size = 4;
 }
+
+
+message SetOperatorRegisterLimitConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	map<string, user.service.v1.OperatorRegisterLimitConfig> config = 2;
+}
+
+message GetOperatorRegisterLimitConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+}
+

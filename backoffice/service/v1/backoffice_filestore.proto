@@ -3,6 +3,7 @@ syntax = "proto3";
 package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
+import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -12,6 +13,12 @@ service BackofficeFileStore {
     rpc UploadOperatorStaticFile(UploadOperatorStaticFileRequest) returns (UploadOperatorStaticFileResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/filestore/operator-static-files/upload"
+			body: "*"
+		};
+	}
+	rpc UploadRegisterLoginBlacklist(UploadRegisterLoginBlacklistRequest) returns (UploadRegisterLoginBlacklistResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/filestore/register-login-blacklist/upload"
 			body: "*"
 		};
 	}
@@ -25,3 +32,11 @@ message UploadOperatorStaticFileRequest {
 }
 
 message UploadOperatorStaticFileResponse {}
+
+message UploadRegisterLoginBlacklistRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	bytes data = 2;
+	string id_type = 3;
+}
+
+message UploadRegisterLoginBlacklistResponse {}

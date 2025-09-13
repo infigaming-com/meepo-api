@@ -821,6 +821,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UploadOperatorStaticFileResponse'
+    /v1/backoffice/filestore/register-login-blacklist/upload:
+        post:
+            tags:
+                - BackofficeFileStore
+            operationId: BackofficeFileStore_UploadRegisterLoginBlacklist
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UploadRegisterLoginBlacklistRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.UploadRegisterLoginBlacklistResponse'
     /v1/backoffice/finance/adjustment-configs/create:
         post:
             tags:
@@ -1794,6 +1812,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListRetailerOperatorsResponse'
+    /v1/backoffice/operator/register-limit-config/get:
+        post:
+            tags:
+                - BackofficeOperator
+            operationId: BackofficeOperator_GetOperatorRegisterLimitConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorRegisterLimitConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.GetOperatorRegisterLimitConfigResponse'
+    /v1/backoffice/operator/register-limit-config/set:
+        post:
+            tags:
+                - BackofficeOperator
+            operationId: BackofficeOperator_SetOperatorRegisterLimitConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.SetOperatorRegisterLimitConfigResponse'
     /v1/backoffice/operator/register-login-blacklist/add:
         post:
             tags:
@@ -4235,6 +4289,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetUserResponse'
+    /v1/user/kyc/filestore/upload:
+        post:
+            tags:
+                - UserFileStore
+            operationId: UserFileStore_UploadKycFile
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.UploadKycRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.UploadKycResponse'
     /v1/user/operator/account-settings/get:
         post:
             tags:
@@ -4781,9 +4853,11 @@ components:
         api.backoffice.service.v1.AddRegisterLoginBlacklistRequest:
             type: object
             properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 idType:
                     type: string
-                id:
+                ids:
                     type: array
                     items:
                         type: string
@@ -5267,9 +5341,11 @@ components:
         api.backoffice.service.v1.DeleteRegisterLoginBlacklistRequest:
             type: object
             properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 idType:
                     type: string
-                id:
+                ids:
                     type: array
                     items:
                         type: string
@@ -5703,6 +5779,11 @@ components:
                         - $ref: '#/components/schemas/api.common.OperatorContextFilters'
                     description: ID of the Operator connect with this channel
             description: Used to retrieve a paginated list of payment channels with optional filters
+        api.backoffice.service.v1.GetOperatorRegisterLimitConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.GetOperatorTagsConfigRequest:
             type: object
             properties:
@@ -8252,6 +8333,8 @@ components:
         api.backoffice.service.v1.ListRegisterLoginBlacklistRequest:
             type: object
             properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 idType:
                     type: string
                 page:
@@ -9807,6 +9890,15 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
+        api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                config:
+                    type: object
+                    additionalProperties:
+                        $ref: '#/components/schemas/api.user.service.v1.OperatorRegisterLimitConfig'
         api.backoffice.service.v1.SetOperatorTagsConfigRequest:
             type: object
             properties:
@@ -10237,6 +10329,19 @@ components:
                 filePath:
                     type: string
         api.backoffice.service.v1.UploadOperatorStaticFileResponse:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.UploadRegisterLoginBlacklistRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                data:
+                    type: string
+                    format: bytes
+                idType:
+                    type: string
+        api.backoffice.service.v1.UploadRegisterLoginBlacklistResponse:
             type: object
             properties: {}
         api.backoffice.service.v1.UserIdentityAuditRequest:
@@ -10775,6 +10880,8 @@ components:
                     type: string
                 finished:
                     type: boolean
+                extra:
+                    type: string
         api.game.service.v1.BalanceRequest:
             type: object
             properties:
@@ -12159,6 +12266,13 @@ components:
             properties:
                 accountSettings:
                     $ref: '#/components/schemas/api.user.service.v1.OperatorAccountSettings'
+        api.user.service.v1.GetOperatorRegisterLimitConfigResponse:
+            type: object
+            properties:
+                config:
+                    type: object
+                    additionalProperties:
+                        $ref: '#/components/schemas/api.user.service.v1.OperatorRegisterLimitConfig'
         api.user.service.v1.GetResponsibleGamblingConfigRequest:
             type: object
             properties:
@@ -12222,13 +12336,47 @@ components:
                     type: string
                 registeredEmail:
                     type: string
+                firstName:
+                    type: string
+                lastName:
+                    type: string
                 kycLevel:
                     type: integer
                     format: int32
+                emailVerified:
+                    type: boolean
+                phoneVerified:
+                    type: boolean
+                bod:
+                    type: string
+                address:
+                    type: string
                 userIdentity:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.user.service.v1.UserIdentity'
+                emailChangeHistory:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.GetUserProfileResponse_ChangeRecord'
+                phoneChangeHistory:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.GetUserProfileResponse_ChangeRecord'
+        api.user.service.v1.GetUserProfileResponse_ChangeRecord:
+            type: object
+            properties:
+                changedAt:
+                    type: string
+                    format: date-time
+                new:
+                    type: string
+                old:
+                    type: string
+                ip:
+                    type: string
+                reviewer:
+                    type: string
         api.user.service.v1.GetUserProfileResponse_Comment:
             type: object
             properties:
@@ -12389,6 +12537,8 @@ components:
                 createdAt:
                     type: string
                     format: date-time
+                source:
+                    type: string
         api.user.service.v1.LoginRequest:
             type: object
             properties:
@@ -12577,6 +12727,12 @@ components:
                     type: array
                     items:
                         type: string
+        api.user.service.v1.OperatorRegisterLimitConfig:
+            type: object
+            properties:
+                registrationLimitPerIp:
+                    type: integer
+                    format: int32
         api.user.service.v1.RefreshTokenRequest:
             type: object
             properties:
@@ -12689,6 +12845,15 @@ components:
                     type: boolean
                 gameBetAllowed:
                     type: boolean
+                selfExclusionActive:
+                    type: boolean
+                breakInPlayActive:
+                    type: boolean
+                timeLimitsActive:
+                    type: boolean
+                timeLimitsNextInactiveTime:
+                    type: string
+                    format: date-time
         api.user.service.v1.SendEmailVerificationCodeRequest:
             type: object
             properties:
@@ -12709,6 +12874,9 @@ components:
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
         api.user.service.v1.SendPasswordResetCodeResponse:
+            type: object
+            properties: {}
+        api.user.service.v1.SetOperatorRegisterLimitConfigResponse:
             type: object
             properties: {}
         api.user.service.v1.TelegramAuthRequest:
@@ -12782,6 +12950,23 @@ components:
         api.user.service.v1.UpdateUserResponse:
             type: object
             properties: {}
+        api.user.service.v1.UploadKycRequest:
+            type: object
+            properties:
+                data:
+                    type: string
+                    format: bytes
+                contentType:
+                    type: string
+                filePath:
+                    type: string
+                idType:
+                    type: string
+        api.user.service.v1.UploadKycResponse:
+            type: object
+            properties:
+                fileUrl:
+                    type: string
         api.user.service.v1.UserIdentity:
             type: object
             properties:
@@ -12837,7 +13022,7 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.user.service.v1.UserIdentity'
-                totalPage:
+                totalCount:
                     type: integer
                     format: int32
         api.user.service.v1.UserIdentityRequest:
@@ -14959,5 +15144,6 @@ tags:
       description: Review service provides review functionality.
     - name: User
       description: User service provides authentication and user management functionality.
+    - name: UserFileStore
     - name: Vip
     - name: Wallet

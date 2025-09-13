@@ -130,3 +130,159 @@ func IsTimeRangeInvalid(err error) bool {
 func ErrorTimeRangeInvalid(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_TIME_RANGE_INVALID.String(), fmt.Sprintf(format, args...))
 }
+
+func IsDailyPlayLimitExceeded(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DAILY_PLAY_LIMIT_EXCEEDED.String() && e.Code == 500
+}
+
+func ErrorDailyPlayLimitExceeded(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DAILY_PLAY_LIMIT_EXCEEDED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsWeeklyPlayLimitExceeded(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_WEEKLY_PLAY_LIMIT_EXCEEDED.String() && e.Code == 500
+}
+
+func ErrorWeeklyPlayLimitExceeded(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_WEEKLY_PLAY_LIMIT_EXCEEDED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsMonthlyPlayLimitExceeded(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_MONTHLY_PLAY_LIMIT_EXCEEDED.String() && e.Code == 500
+}
+
+func ErrorMonthlyPlayLimitExceeded(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_MONTHLY_PLAY_LIMIT_EXCEEDED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDailyLossLimitExceeded(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DAILY_LOSS_LIMIT_EXCEEDED.String() && e.Code == 500
+}
+
+func ErrorDailyLossLimitExceeded(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DAILY_LOSS_LIMIT_EXCEEDED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsWeeklyLossLimitExceeded(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_WEEKLY_LOSS_LIMIT_EXCEEDED.String() && e.Code == 500
+}
+
+func ErrorWeeklyLossLimitExceeded(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_WEEKLY_LOSS_LIMIT_EXCEEDED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsMonthlyLossLimitExceeded(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_MONTHLY_LOSS_LIMIT_EXCEEDED.String() && e.Code == 500
+}
+
+func ErrorMonthlyLossLimitExceeded(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_MONTHLY_LOSS_LIMIT_EXCEEDED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCreateResponsibleGamblingStatusFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREATE_RESPONSIBLE_GAMBLING_STATUS_FAILED.String() && e.Code == 500
+}
+
+func ErrorCreateResponsibleGamblingStatusFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREATE_RESPONSIBLE_GAMBLING_STATUS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateResponsibleGamblingStatusFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_RESPONSIBLE_GAMBLING_STATUS_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateResponsibleGamblingStatusFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_RESPONSIBLE_GAMBLING_STATUS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsResponsibleGamblingConfigNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorResponsibleGamblingConfigNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsTimeLimitsEnabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_TIME_LIMITS_ENABLED.String() && e.Code == 500
+}
+
+func ErrorTimeLimitsEnabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_TIME_LIMITS_ENABLED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsBreakInPlayEnabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_BREAK_IN_PLAY_ENABLED.String() && e.Code == 500
+}
+
+func ErrorBreakInPlayEnabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_BREAK_IN_PLAY_ENABLED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSelfExclusionEnabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SELF_EXCLUSION_ENABLED.String() && e.Code == 500
+}
+
+func ErrorSelfExclusionEnabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SELF_EXCLUSION_ENABLED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUserDisabled(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_DISABLED.String() && e.Code == 500
+}
+
+func ErrorUserDisabled(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_DISABLED.String(), fmt.Sprintf(format, args...))
+}

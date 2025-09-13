@@ -125,6 +125,9 @@ service Game {
 
 	rpc UpdateTaxReport(UpdateTaxReportRequest) returns (UpdateTaxReportResponse) {
 	}
+
+	rpc GetResponsibleGamblingStatus(GetResponsibleGamblingStatusRequest) returns (GetResponsibleGamblingStatusResponse) {
+	}
 }
 
 message CreateOperatorRequest {
@@ -382,6 +385,7 @@ message Action {
 	int64 settle_time = 12;
 	int64 provider_timestamp = 13;
 	bool finished = 14;
+	string extra = 15;
 }
 
 message Transactions {
@@ -816,7 +820,7 @@ message GetTaxReportConfigResponse {
 	//	"timezone": "UTC+0",
 	//	"report_generation_time": {
 	//		"monthly": "2nd of each month",
-	//		"quarterly": "2nd of each quarter", 
+	//		"quarterly": "2nd of each quarter",
 	//		"yearly": "2nd of each year"
 	//	},
 	//	"tax_currency": "ZAR",
@@ -844,7 +848,7 @@ message UpdateTaxReportConfigRequest {
 	//	"timezone": "UTC+0",
 	//	"report_generation_time": {
 	//		"monthly": "2nd of each month",
-	//		"quarterly": "2nd of each quarter", 
+	//		"quarterly": "2nd of each quarter",
 	//		"yearly": "2nd of each year"
 	//	},
 	//	"tax_currency": "ZAR",
@@ -875,12 +879,12 @@ message ListTaxReportsResponse {
 		string licensed_provider = 1; // e.g., "south_afirca"
 		string licensed_operator = 2; // e.g., "playing.io"
 		string tax_period = 3; // Format: YYYY-MM (e.g., "2025-08")
-		
+
 		// Deposit information
 		string deposit_date = 4; // Format: YYYY-MM-DD or "-" if empty
 		string deposit_slip_no = 5; // e.g., "DSL-202508-003" or "-" if empty
 		string ref_code = 6; // e.g., "DSL-HR-202508-002" or "-" if empty
-		
+
 		// Financial data (all amounts in ZAR)
 		int64 hold_total_stake = 7; // e.g., "1,800,000"
 		int64 winning_stakes = 8; // e.g., "1,200,000"
@@ -896,7 +900,7 @@ message ListTaxReportsResponse {
 		int64 created_at = 15;
 		int64 updated_at = 16;
 	}
-	
+
 	repeated TaxReport tax_reports = 1;
 	int32 total_count = 2;
 	int32 page = 3;
@@ -918,4 +922,22 @@ message UpdateTaxReportRequest {
 }
 
 message UpdateTaxReportResponse {
+}
+
+message GetResponsibleGamblingStatusRequest {
+	int64 user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+}
+
+message GetResponsibleGamblingStatusResponse {
+	message ResponsibleGamblingStatus {
+		string currency = 1;
+		string daily_play_usage = 2;
+		string weekly_play_usage = 3;
+		string monthly_play_usage = 4;
+		string daily_loss_usage = 5;
+		string weekly_loss_usage = 6;
+		string monthly_loss_usage = 7;
+	}
+	repeated ResponsibleGamblingStatus responsible_gambling_statuses = 1;
 }
