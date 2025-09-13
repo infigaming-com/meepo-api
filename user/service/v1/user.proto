@@ -927,6 +927,10 @@ message GetUserProfileResponse {
 	repeated UserIdentity user_identity = 25;
 	repeated ChangeRecord emailChangeHistory = 26;
 	repeated ChangeRecord phoneChangeHistory = 27;
+	// Email.
+	string login_email = 28;
+	// Mobile.
+	string login_mobile = 29;
 }
 
 message CreateRoleRequest {
