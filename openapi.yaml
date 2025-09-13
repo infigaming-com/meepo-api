@@ -8787,12 +8787,10 @@ components:
                     type: string
                 eventCalculations:
                     type: string
-                declarationStatus:
+                status:
                     enum:
-                        - DECLARATION_STATUS_UNSPECIFIED
-                        - DECLARATION_STATUS_PENDING
-                        - DECLARATION_STATUS_CONFIRMED
-                        - DECLARATION_STATUS_DRAFT
+                        - TaxReportRecordStatus_PENDING
+                        - TaxReportRecordStatus_CONFIRMED
                     type: string
                     format: enum
                 createdAt:
@@ -10103,6 +10101,12 @@ components:
                     type: string
                 refCode:
                     type: string
+                status:
+                    enum:
+                        - TaxReportRecordStatus_PENDING
+                        - TaxReportRecordStatus_CONFIRMED
+                    type: string
+                    format: enum
         api.backoffice.service.v1.UpdateTaxReportResponse:
             type: object
             properties: {}
