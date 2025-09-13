@@ -7917,7 +7917,7 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x12monthly_loss_usage\x18\a \x01(\tR\x10monthlyLossUsage*_\n" +
 	"\x15TaxReportRecordStatus\x12!\n" +
 	"\x1dTaxReportRecordStatus_PENDING\x10\x00\x12#\n" +
-	"\x1fTaxReportRecordStatus_CONFIRMED\x10\x012\x80\x1b\n" +
+	"\x1fTaxReportRecordStatus_CONFIRMED\x10\x012\x83\x1c\n" +
 	"\x04Game\x12k\n" +
 	"\x0eCreateOperator\x12*.api.game.service.v1.CreateOperatorRequest\x1a+.api.game.service.v1.CreateOperatorResponse\"\x00\x12k\n" +
 	"\x0eUpdateOperator\x12*.api.game.service.v1.UpdateOperatorRequest\x1a+.api.game.service.v1.UpdateOperatorResponse\"\x00\x12k\n" +
@@ -7947,7 +7947,8 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x16GetGameTransactionById\x122.api.game.service.v1.GetGameTransactionByIdRequest\x1a3.api.game.service.v1.GetGameTransactionByIdResponse\"\x00\x12\x92\x01\n" +
 	"\x1bGetDailyGameTransactionData\x127.api.game.service.v1.GetDailyGameTransactionDataRequest\x1a8.api.game.service.v1.GetDailyGameTransactionDataResponse\"\x00\x12t\n" +
 	"\x11ListProviderByIDs\x12-.api.game.service.v1.ListProviderByIDsRequest\x1a..api.game.service.v1.ListProviderByIDsResponse\"\x00\x12w\n" +
-	"\x12GetTaxReportConfig\x12..api.game.service.v1.GetTaxReportConfigRequest\x1a/.api.game.service.v1.GetTaxReportConfigResponse\"\x00\x12k\n" +
+	"\x12GetTaxReportConfig\x12..api.game.service.v1.GetTaxReportConfigRequest\x1a/.api.game.service.v1.GetTaxReportConfigResponse\"\x00\x12\x80\x01\n" +
+	"\x15UpdateTaxReportConfig\x121.api.game.service.v1.UpdateTaxReportConfigRequest\x1a2.api.game.service.v1.UpdateTaxReportConfigResponse\"\x00\x12k\n" +
 	"\x0eListTaxReports\x12*.api.game.service.v1.ListTaxReportsRequest\x1a+.api.game.service.v1.ListTaxReportsResponse\"\x00\x12n\n" +
 	"\x0fUpdateTaxReport\x12+.api.game.service.v1.UpdateTaxReportRequest\x1a,.api.game.service.v1.UpdateTaxReportResponse\"\x00\x12\x95\x01\n" +
 	"\x1cGetResponsibleGamblingStatus\x128.api.game.service.v1.GetResponsibleGamblingStatusRequest\x1a9.api.game.service.v1.GetResponsibleGamblingStatusResponse\"\x00BO\n" +
@@ -8146,40 +8147,42 @@ var file_game_service_v1_game_proto_depIdxs = []int32{
 	57, // 83: api.game.service.v1.Game.GetDailyGameTransactionData:input_type -> api.game.service.v1.GetDailyGameTransactionDataRequest
 	59, // 84: api.game.service.v1.Game.ListProviderByIDs:input_type -> api.game.service.v1.ListProviderByIDsRequest
 	61, // 85: api.game.service.v1.Game.GetTaxReportConfig:input_type -> api.game.service.v1.GetTaxReportConfigRequest
-	65, // 86: api.game.service.v1.Game.ListTaxReports:input_type -> api.game.service.v1.ListTaxReportsRequest
-	67, // 87: api.game.service.v1.Game.UpdateTaxReport:input_type -> api.game.service.v1.UpdateTaxReportRequest
-	69, // 88: api.game.service.v1.Game.GetResponsibleGamblingStatus:input_type -> api.game.service.v1.GetResponsibleGamblingStatusRequest
-	3,  // 89: api.game.service.v1.Game.CreateOperator:output_type -> api.game.service.v1.CreateOperatorResponse
-	5,  // 90: api.game.service.v1.Game.UpdateOperator:output_type -> api.game.service.v1.UpdateOperatorResponse
-	7,  // 91: api.game.service.v1.Game.DeleteOperator:output_type -> api.game.service.v1.DeleteOperatorResponse
-	11, // 92: api.game.service.v1.Game.ListProviders:output_type -> api.game.service.v1.ListProvidersResponse
-	13, // 93: api.game.service.v1.Game.ListCategories:output_type -> api.game.service.v1.ListCategoriesResponse
-	15, // 94: api.game.service.v1.Game.ListFeeGroups:output_type -> api.game.service.v1.ListFeeGroupsResponse
-	17, // 95: api.game.service.v1.Game.ListTags:output_type -> api.game.service.v1.ListTagsResponse
-	19, // 96: api.game.service.v1.Game.ListThemes:output_type -> api.game.service.v1.ListThemesResponse
-	21, // 97: api.game.service.v1.Game.ListCurrencies:output_type -> api.game.service.v1.ListCurrenciesResponse
-	23, // 98: api.game.service.v1.Game.ListGames:output_type -> api.game.service.v1.ListGamesResponse
-	25, // 99: api.game.service.v1.Game.GetGame:output_type -> api.game.service.v1.GetGameResponse
-	28, // 100: api.game.service.v1.Game.CreateSession:output_type -> api.game.service.v1.CreateSessionResponse
-	31, // 101: api.game.service.v1.Game.Balance:output_type -> api.game.service.v1.BalanceResponse
-	33, // 102: api.game.service.v1.Game.Play:output_type -> api.game.service.v1.PlayResponse
-	38, // 103: api.game.service.v1.Game.Rollback:output_type -> api.game.service.v1.RollbackResponse
-	42, // 104: api.game.service.v1.Game.ListBets:output_type -> api.game.service.v1.ListBetsResponse
-	44, // 105: api.game.service.v1.Game.BackofficeListGames:output_type -> api.game.service.v1.BackofficeListGamesResponse
-	46, // 106: api.game.service.v1.Game.UpdateGame:output_type -> api.game.service.v1.UpdateGameResponse
-	48, // 107: api.game.service.v1.Game.UpdateProvider:output_type -> api.game.service.v1.UpdateProviderResponse
-	50, // 108: api.game.service.v1.Game.GetBetById:output_type -> api.game.service.v1.GetBetByIdResponse
-	52, // 109: api.game.service.v1.Game.GetBackofficeUserOverviewFromGame:output_type -> api.game.service.v1.GetBackofficeUserOverviewFromGameResponse
-	56, // 110: api.game.service.v1.Game.ListProviderRates:output_type -> api.game.service.v1.ListProviderRatesResponse
-	54, // 111: api.game.service.v1.Game.GetGameTransactionById:output_type -> api.game.service.v1.GetGameTransactionByIdResponse
-	58, // 112: api.game.service.v1.Game.GetDailyGameTransactionData:output_type -> api.game.service.v1.GetDailyGameTransactionDataResponse
-	60, // 113: api.game.service.v1.Game.ListProviderByIDs:output_type -> api.game.service.v1.ListProviderByIDsResponse
-	62, // 114: api.game.service.v1.Game.GetTaxReportConfig:output_type -> api.game.service.v1.GetTaxReportConfigResponse
-	66, // 115: api.game.service.v1.Game.ListTaxReports:output_type -> api.game.service.v1.ListTaxReportsResponse
-	68, // 116: api.game.service.v1.Game.UpdateTaxReport:output_type -> api.game.service.v1.UpdateTaxReportResponse
-	70, // 117: api.game.service.v1.Game.GetResponsibleGamblingStatus:output_type -> api.game.service.v1.GetResponsibleGamblingStatusResponse
-	89, // [89:118] is the sub-list for method output_type
-	60, // [60:89] is the sub-list for method input_type
+	63, // 86: api.game.service.v1.Game.UpdateTaxReportConfig:input_type -> api.game.service.v1.UpdateTaxReportConfigRequest
+	65, // 87: api.game.service.v1.Game.ListTaxReports:input_type -> api.game.service.v1.ListTaxReportsRequest
+	67, // 88: api.game.service.v1.Game.UpdateTaxReport:input_type -> api.game.service.v1.UpdateTaxReportRequest
+	69, // 89: api.game.service.v1.Game.GetResponsibleGamblingStatus:input_type -> api.game.service.v1.GetResponsibleGamblingStatusRequest
+	3,  // 90: api.game.service.v1.Game.CreateOperator:output_type -> api.game.service.v1.CreateOperatorResponse
+	5,  // 91: api.game.service.v1.Game.UpdateOperator:output_type -> api.game.service.v1.UpdateOperatorResponse
+	7,  // 92: api.game.service.v1.Game.DeleteOperator:output_type -> api.game.service.v1.DeleteOperatorResponse
+	11, // 93: api.game.service.v1.Game.ListProviders:output_type -> api.game.service.v1.ListProvidersResponse
+	13, // 94: api.game.service.v1.Game.ListCategories:output_type -> api.game.service.v1.ListCategoriesResponse
+	15, // 95: api.game.service.v1.Game.ListFeeGroups:output_type -> api.game.service.v1.ListFeeGroupsResponse
+	17, // 96: api.game.service.v1.Game.ListTags:output_type -> api.game.service.v1.ListTagsResponse
+	19, // 97: api.game.service.v1.Game.ListThemes:output_type -> api.game.service.v1.ListThemesResponse
+	21, // 98: api.game.service.v1.Game.ListCurrencies:output_type -> api.game.service.v1.ListCurrenciesResponse
+	23, // 99: api.game.service.v1.Game.ListGames:output_type -> api.game.service.v1.ListGamesResponse
+	25, // 100: api.game.service.v1.Game.GetGame:output_type -> api.game.service.v1.GetGameResponse
+	28, // 101: api.game.service.v1.Game.CreateSession:output_type -> api.game.service.v1.CreateSessionResponse
+	31, // 102: api.game.service.v1.Game.Balance:output_type -> api.game.service.v1.BalanceResponse
+	33, // 103: api.game.service.v1.Game.Play:output_type -> api.game.service.v1.PlayResponse
+	38, // 104: api.game.service.v1.Game.Rollback:output_type -> api.game.service.v1.RollbackResponse
+	42, // 105: api.game.service.v1.Game.ListBets:output_type -> api.game.service.v1.ListBetsResponse
+	44, // 106: api.game.service.v1.Game.BackofficeListGames:output_type -> api.game.service.v1.BackofficeListGamesResponse
+	46, // 107: api.game.service.v1.Game.UpdateGame:output_type -> api.game.service.v1.UpdateGameResponse
+	48, // 108: api.game.service.v1.Game.UpdateProvider:output_type -> api.game.service.v1.UpdateProviderResponse
+	50, // 109: api.game.service.v1.Game.GetBetById:output_type -> api.game.service.v1.GetBetByIdResponse
+	52, // 110: api.game.service.v1.Game.GetBackofficeUserOverviewFromGame:output_type -> api.game.service.v1.GetBackofficeUserOverviewFromGameResponse
+	56, // 111: api.game.service.v1.Game.ListProviderRates:output_type -> api.game.service.v1.ListProviderRatesResponse
+	54, // 112: api.game.service.v1.Game.GetGameTransactionById:output_type -> api.game.service.v1.GetGameTransactionByIdResponse
+	58, // 113: api.game.service.v1.Game.GetDailyGameTransactionData:output_type -> api.game.service.v1.GetDailyGameTransactionDataResponse
+	60, // 114: api.game.service.v1.Game.ListProviderByIDs:output_type -> api.game.service.v1.ListProviderByIDsResponse
+	62, // 115: api.game.service.v1.Game.GetTaxReportConfig:output_type -> api.game.service.v1.GetTaxReportConfigResponse
+	64, // 116: api.game.service.v1.Game.UpdateTaxReportConfig:output_type -> api.game.service.v1.UpdateTaxReportConfigResponse
+	66, // 117: api.game.service.v1.Game.ListTaxReports:output_type -> api.game.service.v1.ListTaxReportsResponse
+	68, // 118: api.game.service.v1.Game.UpdateTaxReport:output_type -> api.game.service.v1.UpdateTaxReportResponse
+	70, // 119: api.game.service.v1.Game.GetResponsibleGamblingStatus:output_type -> api.game.service.v1.GetResponsibleGamblingStatusResponse
+	90, // [90:120] is the sub-list for method output_type
+	60, // [60:90] is the sub-list for method input_type
 	60, // [60:60] is the sub-list for extension type_name
 	60, // [60:60] is the sub-list for extension extendee
 	0,  // [0:60] is the sub-list for field type_name

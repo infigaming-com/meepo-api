@@ -120,6 +120,9 @@ service Game {
 	rpc GetTaxReportConfig(GetTaxReportConfigRequest) returns (GetTaxReportConfigResponse) {
 	}
 
+	rpc UpdateTaxReportConfig(UpdateTaxReportConfigRequest) returns (UpdateTaxReportConfigResponse) {
+	}
+
 	rpc ListTaxReports(ListTaxReportsRequest) returns (ListTaxReportsResponse) {
 	}
 
