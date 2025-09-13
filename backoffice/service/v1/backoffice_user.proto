@@ -385,6 +385,10 @@ message UpdateUserRequest {
 	optional string address = 15;
 	// date of birth
 	optional google.protobuf.Timestamp bod = 16;
+	// email verified
+	optional bool email_verified = 17;
+	// phone verified
+	optional bool phone_verified = 18;
 }
 
 message UpdateUserResponse {}
