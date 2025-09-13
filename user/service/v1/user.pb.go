@@ -2913,25 +2913,27 @@ func (x *UserIdentity) GetReviewTime() int32 {
 }
 
 type UpdateUserRequest struct {
-	state        protoimpl.MessageState `protogen:"open.v1"`
-	UserId       int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Nickname     *string                `protobuf:"bytes,2,opt,name=nickname,proto3,oneof" json:"nickname,omitempty"`
-	Avatar       *string                `protobuf:"bytes,3,opt,name=avatar,proto3,oneof" json:"avatar,omitempty"`
-	BanLogin     *bool                  `protobuf:"varint,4,opt,name=ban_login,json=banLogin,proto3,oneof" json:"ban_login,omitempty"`
-	BanGame      *bool                  `protobuf:"varint,5,opt,name=ban_game,json=banGame,proto3,oneof" json:"ban_game,omitempty"`
-	BanWithdraw  *bool                  `protobuf:"varint,6,opt,name=ban_withdraw,json=banWithdraw,proto3,oneof" json:"ban_withdraw,omitempty"`
-	Locked       *bool                  `protobuf:"varint,7,opt,name=locked,proto3,oneof" json:"locked,omitempty"`
-	Enabled      *bool                  `protobuf:"varint,8,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	RoleId       *int64                 `protobuf:"varint,9,opt,name=role_id,json=roleId,proto3,oneof" json:"role_id,omitempty"`
-	Firstname    *string                `protobuf:"bytes,10,opt,name=firstname,proto3,oneof" json:"firstname,omitempty"`
-	Lastname     *string                `protobuf:"bytes,11,opt,name=lastname,proto3,oneof" json:"lastname,omitempty"`
-	Email        *string                `protobuf:"bytes,12,opt,name=email,proto3,oneof" json:"email,omitempty"`
-	Mobile       *string                `protobuf:"bytes,13,opt,name=mobile,proto3,oneof" json:"mobile,omitempty"`
-	UserIdentity *UserIdentityRequest   `protobuf:"bytes,14,opt,name=user_identity,json=userIdentity,proto3,oneof" json:"user_identity,omitempty"`
-	Address      *string                `protobuf:"bytes,15,opt,name=address,proto3,oneof" json:"address,omitempty"`
-	Bod          *timestamppb.Timestamp `protobuf:"bytes,16,opt,name=bod,proto3,oneof" json:"bod,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Nickname      *string                `protobuf:"bytes,2,opt,name=nickname,proto3,oneof" json:"nickname,omitempty"`
+	Avatar        *string                `protobuf:"bytes,3,opt,name=avatar,proto3,oneof" json:"avatar,omitempty"`
+	BanLogin      *bool                  `protobuf:"varint,4,opt,name=ban_login,json=banLogin,proto3,oneof" json:"ban_login,omitempty"`
+	BanGame       *bool                  `protobuf:"varint,5,opt,name=ban_game,json=banGame,proto3,oneof" json:"ban_game,omitempty"`
+	BanWithdraw   *bool                  `protobuf:"varint,6,opt,name=ban_withdraw,json=banWithdraw,proto3,oneof" json:"ban_withdraw,omitempty"`
+	Locked        *bool                  `protobuf:"varint,7,opt,name=locked,proto3,oneof" json:"locked,omitempty"`
+	Enabled       *bool                  `protobuf:"varint,8,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	RoleId        *int64                 `protobuf:"varint,9,opt,name=role_id,json=roleId,proto3,oneof" json:"role_id,omitempty"`
+	Firstname     *string                `protobuf:"bytes,10,opt,name=firstname,proto3,oneof" json:"firstname,omitempty"`
+	Lastname      *string                `protobuf:"bytes,11,opt,name=lastname,proto3,oneof" json:"lastname,omitempty"`
+	Email         *string                `protobuf:"bytes,12,opt,name=email,proto3,oneof" json:"email,omitempty"`
+	Mobile        *string                `protobuf:"bytes,13,opt,name=mobile,proto3,oneof" json:"mobile,omitempty"`
+	UserIdentity  *UserIdentityRequest   `protobuf:"bytes,14,opt,name=user_identity,json=userIdentity,proto3,oneof" json:"user_identity,omitempty"`
+	Address       *string                `protobuf:"bytes,15,opt,name=address,proto3,oneof" json:"address,omitempty"`
+	Bod           *timestamppb.Timestamp `protobuf:"bytes,16,opt,name=bod,proto3,oneof" json:"bod,omitempty"`
+	EmailVerified *bool                  `protobuf:"varint,17,opt,name=email_verified,json=emailVerified,proto3,oneof" json:"email_verified,omitempty"`
+	PhoneVerified *bool                  `protobuf:"varint,18,opt,name=phone_verified,json=phoneVerified,proto3,oneof" json:"phone_verified,omitempty"`
 	// The initial operator context.
-	OperatorContext *common.OperatorContext `protobuf:"bytes,17,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,19,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -3076,6 +3078,20 @@ func (x *UpdateUserRequest) GetBod() *timestamppb.Timestamp {
 		return x.Bod
 	}
 	return nil
+}
+
+func (x *UpdateUserRequest) GetEmailVerified() bool {
+	if x != nil && x.EmailVerified != nil {
+		return *x.EmailVerified
+	}
+	return false
+}
+
+func (x *UpdateUserRequest) GetPhoneVerified() bool {
+	if x != nil && x.PhoneVerified != nil {
+		return *x.PhoneVerified
+	}
+	return false
 }
 
 func (x *UpdateUserRequest) GetOperatorContext() *common.OperatorContext {
@@ -11277,7 +11293,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\boperator\x18\t \x01(\tR\boperator\x12\x1f\n" +
 	"\vreview_time\x18\n" +
 	" \x01(\x05R\n" +
-	"reviewTime\"\xd5\x06\n" +
+	"reviewTime\"\xd3\a\n" +
 	"\x11UpdateUserRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
 	"\bnickname\x18\x02 \x01(\tH\x00R\bnickname\x88\x01\x01\x12\x1b\n" +
@@ -11296,8 +11312,10 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x06mobile\x18\r \x01(\tH\vR\x06mobile\x88\x01\x01\x12R\n" +
 	"\ruser_identity\x18\x0e \x01(\v2(.api.user.service.v1.UserIdentityRequestH\fR\fuserIdentity\x88\x01\x01\x12\x1d\n" +
 	"\aaddress\x18\x0f \x01(\tH\rR\aaddress\x88\x01\x01\x121\n" +
-	"\x03bod\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampH\x0eR\x03bod\x88\x01\x01\x12F\n" +
-	"\x10operator_context\x18\x11 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\v\n" +
+	"\x03bod\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampH\x0eR\x03bod\x88\x01\x01\x12*\n" +
+	"\x0eemail_verified\x18\x11 \x01(\bH\x0fR\remailVerified\x88\x01\x01\x12*\n" +
+	"\x0ephone_verified\x18\x12 \x01(\bH\x10R\rphoneVerified\x88\x01\x01\x12F\n" +
+	"\x10operator_context\x18\x13 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\v\n" +
 	"\t_nicknameB\t\n" +
 	"\a_avatarB\f\n" +
 	"\n" +
@@ -11317,7 +11335,9 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x0e_user_identityB\n" +
 	"\n" +
 	"\b_addressB\x06\n" +
-	"\x04_bod\"\x14\n" +
+	"\x04_bodB\x11\n" +
+	"\x0f_email_verifiedB\x11\n" +
+	"\x0f_phone_verified\"\x14\n" +
 	"\x12UpdateUserResponse\"\xb1\n" +
 	"\n" +
 	"\x10ListUsersRequest\x12\x1c\n" +

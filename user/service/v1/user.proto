@@ -716,8 +716,10 @@ message UpdateUserRequest {
 	optional UserIdentityRequest user_identity = 14;
 	optional string address = 15;
 	optional google.protobuf.Timestamp bod = 16;
+	optional bool email_verified = 17;
+	optional bool phone_verified = 18;
 	// The initial operator context.
-	api.common.OperatorContext operator_context = 17;
+	api.common.OperatorContext operator_context = 19;
 }
 
 message UpdateUserResponse {

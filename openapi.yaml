@@ -10255,6 +10255,12 @@ components:
                     type: string
                     description: date of birth
                     format: date-time
+                emailVerified:
+                    type: boolean
+                    description: email verified
+                phoneVerified:
+                    type: boolean
+                    description: phone verified
         api.backoffice.service.v1.UpdateUserResponse:
             type: object
             properties: {}
@@ -12949,6 +12955,10 @@ components:
                 bod:
                     type: string
                     format: date-time
+                emailVerified:
+                    type: boolean
+                phoneVerified:
+                    type: boolean
                 operatorContext:
                     allOf:
                         - $ref: '#/components/schemas/api.common.OperatorContext'
