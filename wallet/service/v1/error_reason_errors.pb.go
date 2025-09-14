@@ -1438,3 +1438,27 @@ func IsListGamblingConfigsFailed(err error) bool {
 func ErrorListGamblingConfigsFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_LIST_GAMBLING_CONFIGS_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsInvalidTimeRange(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_TIME_RANGE.String() && e.Code == 500
+}
+
+func ErrorInvalidTimeRange(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_TIME_RANGE.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListCustomerRecordsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_CUSTOMER_RECORDS_FAILED.String() && e.Code == 500
+}
+
+func ErrorListCustomerRecordsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_CUSTOMER_RECORDS_FAILED.String(), fmt.Sprintf(format, args...))
+}
