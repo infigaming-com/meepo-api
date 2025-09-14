@@ -2803,11 +2803,12 @@ type UserIdentity struct {
 	IdType        string                 `protobuf:"bytes,3,opt,name=id_type,json=idType,proto3" json:"id_type,omitempty"`
 	IdNumber      string                 `protobuf:"bytes,4,opt,name=id_number,json=idNumber,proto3" json:"id_number,omitempty"`
 	Image         string                 `protobuf:"bytes,5,opt,name=image,proto3" json:"image,omitempty"`
-	Verified      bool                   `protobuf:"varint,6,opt,name=verified,proto3" json:"verified,omitempty"`
+	Status        string                 `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"`
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	AuditedAt     *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=audited_at,json=auditedAt,proto3" json:"audited_at,omitempty"`
 	Operator      string                 `protobuf:"bytes,9,opt,name=operator,proto3" json:"operator,omitempty"`
-	ReviewTime    int32                  `protobuf:"varint,10,opt,name=review_time,json=reviewTime,proto3" json:"review_time,omitempty"`
+	Reviewer      string                 `protobuf:"bytes,10,opt,name=reviewer,proto3" json:"reviewer,omitempty"`
+	ReviewTime    int32                  `protobuf:"varint,11,opt,name=review_time,json=reviewTime,proto3" json:"review_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2877,11 +2878,11 @@ func (x *UserIdentity) GetImage() string {
 	return ""
 }
 
-func (x *UserIdentity) GetVerified() bool {
+func (x *UserIdentity) GetStatus() string {
 	if x != nil {
-		return x.Verified
+		return x.Status
 	}
-	return false
+	return ""
 }
 
 func (x *UserIdentity) GetCreatedAt() *timestamppb.Timestamp {
@@ -2901,6 +2902,13 @@ func (x *UserIdentity) GetAuditedAt() *timestamppb.Timestamp {
 func (x *UserIdentity) GetOperator() string {
 	if x != nil {
 		return x.Operator
+	}
+	return ""
+}
+
+func (x *UserIdentity) GetReviewer() string {
+	if x != nil {
+		return x.Reviewer
 	}
 	return ""
 }
@@ -8780,10 +8788,11 @@ type UserIdentityListRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            *int64                 `protobuf:"varint,1,opt,name=id,proto3,oneof" json:"id,omitempty"`
 	UserId        *int64                 `protobuf:"varint,2,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
-	StartTime     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime       *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	Page          int32                  `protobuf:"varint,5,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int32                  `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Status        *string                `protobuf:"bytes,3,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	StartTime     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime       *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	Page          int32                  `protobuf:"varint,6,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -8832,6 +8841,13 @@ func (x *UserIdentityListRequest) GetUserId() int64 {
 	return 0
 }
 
+func (x *UserIdentityListRequest) GetStatus() string {
+	if x != nil && x.Status != nil {
+		return *x.Status
+	}
+	return ""
+}
+
 func (x *UserIdentityListRequest) GetStartTime() *timestamppb.Timestamp {
 	if x != nil {
 		return x.StartTime
@@ -8864,6 +8880,9 @@ type UserIdentityListResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserIdentity  []*UserIdentity        `protobuf:"bytes,1,rep,name=user_identity,json=userIdentity,proto3" json:"user_identity,omitempty"`
 	TotalCount    int32                  `protobuf:"varint,2,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	ApprovedCount int32                  `protobuf:"varint,3,opt,name=approved_count,json=approvedCount,proto3" json:"approved_count,omitempty"`
+	DeclinedCount int32                  `protobuf:"varint,4,opt,name=declined_count,json=declinedCount,proto3" json:"declined_count,omitempty"`
+	PendingCount  int32                  `protobuf:"varint,5,opt,name=pending_count,json=pendingCount,proto3" json:"pending_count,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -8908,6 +8927,27 @@ func (x *UserIdentityListResponse) GetUserIdentity() []*UserIdentity {
 func (x *UserIdentityListResponse) GetTotalCount() int32 {
 	if x != nil {
 		return x.TotalCount
+	}
+	return 0
+}
+
+func (x *UserIdentityListResponse) GetApprovedCount() int32 {
+	if x != nil {
+		return x.ApprovedCount
+	}
+	return 0
+}
+
+func (x *UserIdentityListResponse) GetDeclinedCount() int32 {
+	if x != nil {
+		return x.DeclinedCount
+	}
+	return 0
+}
+
+func (x *UserIdentityListResponse) GetPendingCount() int32 {
+	if x != nil {
+		return x.PendingCount
 	}
 	return 0
 }
@@ -11278,21 +11318,22 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x13UserIdentityRequest\x12\x17\n" +
 	"\aid_type\x18\x01 \x01(\tR\x06idType\x12\x1b\n" +
 	"\tid_number\x18\x02 \x01(\tR\bidNumber\x12\x14\n" +
-	"\x05image\x18\x03 \x01(\tR\x05image\"\xd2\x02\n" +
+	"\x05image\x18\x03 \x01(\tR\x05image\"\xea\x02\n" +
 	"\fUserIdentity\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x17\n" +
 	"\aid_type\x18\x03 \x01(\tR\x06idType\x12\x1b\n" +
 	"\tid_number\x18\x04 \x01(\tR\bidNumber\x12\x14\n" +
-	"\x05image\x18\x05 \x01(\tR\x05image\x12\x1a\n" +
-	"\bverified\x18\x06 \x01(\bR\bverified\x129\n" +
+	"\x05image\x18\x05 \x01(\tR\x05image\x12\x16\n" +
+	"\x06status\x18\x06 \x01(\tR\x06status\x129\n" +
 	"\n" +
 	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
 	"audited_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tauditedAt\x12\x1a\n" +
-	"\boperator\x18\t \x01(\tR\boperator\x12\x1f\n" +
-	"\vreview_time\x18\n" +
-	" \x01(\x05R\n" +
+	"\boperator\x18\t \x01(\tR\boperator\x12\x1a\n" +
+	"\breviewer\x18\n" +
+	" \x01(\tR\breviewer\x12\x1f\n" +
+	"\vreview_time\x18\v \x01(\x05R\n" +
 	"reviewTime\"\xd3\a\n" +
 	"\x11UpdateUserRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
@@ -11942,24 +11983,29 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
 	"\x05audit\x18\x02 \x01(\tR\x05audit\x12F\n" +
 	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x1b\n" +
-	"\x19UserIdentityAuditResponse\"\xa8\x02\n" +
+	"\x19UserIdentityAuditResponse\"\xd0\x02\n" +
 	"\x17UserIdentityListRequest\x12\x13\n" +
 	"\x02id\x18\x01 \x01(\x03H\x00R\x02id\x88\x01\x01\x12\x1c\n" +
-	"\auser_id\x18\x02 \x01(\x03H\x01R\x06userId\x88\x01\x01\x12>\n" +
+	"\auser_id\x18\x02 \x01(\x03H\x01R\x06userId\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\x03 \x01(\tH\x02R\x06status\x88\x01\x01\x12>\n" +
 	"\n" +
-	"start_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\tstartTime\x88\x01\x01\x12:\n" +
-	"\bend_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\aendTime\x88\x01\x01\x12\x12\n" +
-	"\x04page\x18\x05 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x06 \x01(\x05R\bpageSizeB\x05\n" +
+	"start_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x04R\aendTime\x88\x01\x01\x12\x12\n" +
+	"\x04page\x18\x06 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\a \x01(\x05R\bpageSizeB\x05\n" +
 	"\x03_idB\n" +
 	"\n" +
-	"\b_user_idB\r\n" +
+	"\b_user_idB\t\n" +
+	"\a_statusB\r\n" +
 	"\v_start_timeB\v\n" +
-	"\t_end_time\"\x83\x01\n" +
+	"\t_end_time\"\xf6\x01\n" +
 	"\x18UserIdentityListResponse\x12F\n" +
 	"\ruser_identity\x18\x01 \x03(\v2!.api.user.service.v1.UserIdentityR\fuserIdentity\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
-	"totalCount\"\xea\x01\n" +
+	"totalCount\x12%\n" +
+	"\x0eapproved_count\x18\x03 \x01(\x05R\rapprovedCount\x12%\n" +
+	"\x0edeclined_count\x18\x04 \x01(\x05R\rdeclinedCount\x12#\n" +
+	"\rpending_count\x18\x05 \x01(\x05R\fpendingCount\"\xea\x01\n" +
 	" AddRegisterLoginBlacklistRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12S\n" +
 	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x17\n" +

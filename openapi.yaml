@@ -12996,8 +12996,8 @@ components:
                     type: string
                 image:
                     type: string
-                verified:
-                    type: boolean
+                status:
+                    type: string
                 createdAt:
                     type: string
                     format: date-time
@@ -13005,6 +13005,8 @@ components:
                     type: string
                     format: date-time
                 operator:
+                    type: string
+                reviewer:
                     type: string
                 reviewTime:
                     type: integer
@@ -13018,6 +13020,8 @@ components:
                 id:
                     type: string
                 userId:
+                    type: string
+                status:
                     type: string
                 startTime:
                     type: string
@@ -13039,6 +13043,15 @@ components:
                     items:
                         $ref: '#/components/schemas/api.user.service.v1.UserIdentity'
                 totalCount:
+                    type: integer
+                    format: int32
+                approvedCount:
+                    type: integer
+                    format: int32
+                declinedCount:
+                    type: integer
+                    format: int32
+                pendingCount:
                     type: integer
                     format: int32
         api.user.service.v1.UserIdentityRequest:
