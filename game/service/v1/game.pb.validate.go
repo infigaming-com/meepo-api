@@ -8252,14 +8252,16 @@ func (m *ListTaxReportsRequest) validate(all bool) error {
 
 	// no validation rules for LicenseProvider
 
-	// no validation rules for PeriodType
-
 	if m.Page != nil {
 		// no validation rules for Page
 	}
 
 	if m.PageSize != nil {
 		// no validation rules for PageSize
+	}
+
+	if m.PeriodType != nil {
+		// no validation rules for PeriodType
 	}
 
 	if len(errors) > 0 {
