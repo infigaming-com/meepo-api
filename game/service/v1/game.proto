@@ -874,6 +874,7 @@ message ListTaxReportsRequest {
 	string tax_period = 3;
 	// license_provider: south_afirca
 	string license_provider = 4;
+	string period_type = 5;
 }
 
 message ListTaxReportsResponse {

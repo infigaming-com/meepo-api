@@ -4855,6 +4855,7 @@ type ListTaxReportsRequest struct {
 	TaxPeriod string                 `protobuf:"bytes,3,opt,name=tax_period,json=taxPeriod,proto3" json:"tax_period,omitempty"`
 	// license_provider: south_afirca
 	LicenseProvider string `protobuf:"bytes,4,opt,name=license_provider,json=licenseProvider,proto3" json:"license_provider,omitempty"`
+	PeriodType      string `protobuf:"bytes,5,opt,name=period_type,json=periodType,proto3" json:"period_type,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -4913,6 +4914,13 @@ func (x *ListTaxReportsRequest) GetTaxPeriod() string {
 func (x *ListTaxReportsRequest) GetLicenseProvider() string {
 	if x != nil {
 		return x.LicenseProvider
+	}
+	return ""
+}
+
+func (x *ListTaxReportsRequest) GetPeriodType() string {
+	if x != nil {
+		return x.PeriodType
 	}
 	return ""
 }
@@ -7856,13 +7864,15 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x1cUpdateTaxReportConfigRequest\x12\x12\n" +
 	"\x04type\x18\x01 \x01(\tR\x04type\x12\x16\n" +
 	"\x06config\x18\x02 \x01(\tR\x06config\"\x1f\n" +
-	"\x1dUpdateTaxReportConfigResponse\"\xb3\x01\n" +
+	"\x1dUpdateTaxReportConfigResponse\"\xd4\x01\n" +
 	"\x15ListTaxReportsRequest\x12\x17\n" +
 	"\x04page\x18\x01 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\x02 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x12\x1d\n" +
 	"\n" +
 	"tax_period\x18\x03 \x01(\tR\ttaxPeriod\x12)\n" +
-	"\x10license_provider\x18\x04 \x01(\tR\x0flicenseProviderB\a\n" +
+	"\x10license_provider\x18\x04 \x01(\tR\x0flicenseProvider\x12\x1f\n" +
+	"\vperiod_type\x18\x05 \x01(\tR\n" +
+	"periodTypeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_size\"\xe0\x06\n" +
