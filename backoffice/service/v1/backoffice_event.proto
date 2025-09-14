@@ -6,7 +6,6 @@ option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v
 option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
 
-// Backoffice service provides system and account management functionality.
 service BackofficeEvent {
     rpc Event(EventRequest) returns (EventResponse) {}
 } 
