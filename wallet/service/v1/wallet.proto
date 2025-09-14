@@ -192,6 +192,9 @@ service Wallet {
 	// GetResponsibleGamblingConfig gets gambling config and statusfor a user's currency
 	rpc GetResponsibleGamblingConfig(GetResponsibleGamblingConfigRequest) returns (GetResponsibleGamblingConfigResponse) {
 	}
+
+	// ListCustomerRecords lists customer records for all users (with deposit, withdraw, game bet, game win and manual credit(this is not supported yet))
+	rpc ListCustomerRecords(ListCustomerRecordsRequest) returns (ListCustomerRecordsResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -1293,4 +1296,33 @@ message GetResponsibleGamblingConfigRequest {
 
 message GetResponsibleGamblingConfigResponse {
 	ResponsibleGamblingConfig responsible_gambling_config = 1;
+}
+
+message ListCustomerRecordsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional int64 transaction_id = 4;
+	optional string transaction_type = 5;
+	optional int32 page = 6;
+	optional int32 page_size = 7;
+	api.common.OperatorContext operator_context = 8;
+}
+
+message ListCustomerRecordsResponse {
+	message CustomerRecord {
+		google.protobuf.Timestamp date_time = 1;
+		string transaction_type = 2;
+		int64 user_id = 3;
+		int64 transaction_id = 4;
+		string currency = 5;
+		string amount_changed = 6;
+		string before_balance = 7;
+		string after_balance = 8;
+		int64 external_transaction_id = 9;
+	}
+	repeated CustomerRecord customer_records = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
 }

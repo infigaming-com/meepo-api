@@ -69,6 +69,7 @@ const (
 	Wallet_DeleteResponsibleGamblingConfig_FullMethodName     = "/api.wallet.service.v1.Wallet/DeleteResponsibleGamblingConfig"
 	Wallet_ListResponsibleGamblingConfigs_FullMethodName      = "/api.wallet.service.v1.Wallet/ListResponsibleGamblingConfigs"
 	Wallet_GetResponsibleGamblingConfig_FullMethodName        = "/api.wallet.service.v1.Wallet/GetResponsibleGamblingConfig"
+	Wallet_ListCustomerRecords_FullMethodName                 = "/api.wallet.service.v1.Wallet/ListCustomerRecords"
 )
 
 // WalletClient is the client API for Wallet service.
@@ -160,6 +161,8 @@ type WalletClient interface {
 	ListResponsibleGamblingConfigs(ctx context.Context, in *ListResponsibleGamblingConfigsRequest, opts ...grpc.CallOption) (*ListResponsibleGamblingConfigsResponse, error)
 	// GetResponsibleGamblingConfig gets gambling config and statusfor a user's currency
 	GetResponsibleGamblingConfig(ctx context.Context, in *GetResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*GetResponsibleGamblingConfigResponse, error)
+	// ListCustomerRecords lists customer records for all users (with deposit, withdraw, game bet, game win and manual credit(this is not supported yet))
+	ListCustomerRecords(ctx context.Context, in *ListCustomerRecordsRequest, opts ...grpc.CallOption) (*ListCustomerRecordsResponse, error)
 }
 
 type walletClient struct {
@@ -670,6 +673,16 @@ func (c *walletClient) GetResponsibleGamblingConfig(ctx context.Context, in *Get
 	return out, nil
 }
 
+func (c *walletClient) ListCustomerRecords(ctx context.Context, in *ListCustomerRecordsRequest, opts ...grpc.CallOption) (*ListCustomerRecordsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCustomerRecordsResponse)
+	err := c.cc.Invoke(ctx, Wallet_ListCustomerRecords_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServer is the server API for Wallet service.
 // All implementations must embed UnimplementedWalletServer
 // for forward compatibility.
@@ -759,6 +772,8 @@ type WalletServer interface {
 	ListResponsibleGamblingConfigs(context.Context, *ListResponsibleGamblingConfigsRequest) (*ListResponsibleGamblingConfigsResponse, error)
 	// GetResponsibleGamblingConfig gets gambling config and statusfor a user's currency
 	GetResponsibleGamblingConfig(context.Context, *GetResponsibleGamblingConfigRequest) (*GetResponsibleGamblingConfigResponse, error)
+	// ListCustomerRecords lists customer records for all users (with deposit, withdraw, game bet, game win and manual credit(this is not supported yet))
+	ListCustomerRecords(context.Context, *ListCustomerRecordsRequest) (*ListCustomerRecordsResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -918,6 +933,9 @@ func (UnimplementedWalletServer) ListResponsibleGamblingConfigs(context.Context,
 }
 func (UnimplementedWalletServer) GetResponsibleGamblingConfig(context.Context, *GetResponsibleGamblingConfigRequest) (*GetResponsibleGamblingConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetResponsibleGamblingConfig not implemented")
+}
+func (UnimplementedWalletServer) ListCustomerRecords(context.Context, *ListCustomerRecordsRequest) (*ListCustomerRecordsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCustomerRecords not implemented")
 }
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
@@ -1840,6 +1858,24 @@ func _Wallet_GetResponsibleGamblingConfig_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_ListCustomerRecords_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCustomerRecordsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).ListCustomerRecords(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_ListCustomerRecords_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).ListCustomerRecords(ctx, req.(*ListCustomerRecordsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Wallet_ServiceDesc is the grpc.ServiceDesc for Wallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2046,6 +2082,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetResponsibleGamblingConfig",
 			Handler:    _Wallet_GetResponsibleGamblingConfig_Handler,
+		},
+		{
+			MethodName: "ListCustomerRecords",
+			Handler:    _Wallet_ListCustomerRecords_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

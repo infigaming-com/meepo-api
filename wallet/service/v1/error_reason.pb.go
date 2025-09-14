@@ -144,6 +144,8 @@ const (
 	ErrorReason_USER_ID_REQUIRED                                                ErrorReason = 30116
 	ErrorReason_LOCK_GAMBLING_CONFIG_FAILED                                     ErrorReason = 30117
 	ErrorReason_LIST_GAMBLING_CONFIGS_FAILED                                    ErrorReason = 30118
+	ErrorReason_INVALID_TIME_RANGE                                              ErrorReason = 30119
+	ErrorReason_LIST_CUSTOMER_RECORDS_FAILED                                    ErrorReason = 30120
 )
 
 // Enum value maps for ErrorReason.
@@ -268,6 +270,8 @@ var (
 		30116: "USER_ID_REQUIRED",
 		30117: "LOCK_GAMBLING_CONFIG_FAILED",
 		30118: "LIST_GAMBLING_CONFIGS_FAILED",
+		30119: "INVALID_TIME_RANGE",
+		30120: "LIST_CUSTOMER_RECORDS_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                                     0,
@@ -389,6 +393,8 @@ var (
 		"USER_ID_REQUIRED":                                                30116,
 		"LOCK_GAMBLING_CONFIG_FAILED":                                     30117,
 		"LIST_GAMBLING_CONFIGS_FAILED":                                    30118,
+		"INVALID_TIME_RANGE":                                              30119,
+		"LIST_CUSTOMER_RECORDS_FAILED":                                    30120,
 	}
 )
 
@@ -423,7 +429,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xc5$\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\x83%\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -543,7 +549,9 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1bGET_OPERATOR_CONTEXT_FAILED\x10\xa3\xeb\x01\x12\x16\n" +
 	"\x10USER_ID_REQUIRED\x10\xa4\xeb\x01\x12!\n" +
 	"\x1bLOCK_GAMBLING_CONFIG_FAILED\x10\xa5\xeb\x01\x12\"\n" +
-	"\x1cLIST_GAMBLING_CONFIGS_FAILED\x10\xa6\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\x1cLIST_GAMBLING_CONFIGS_FAILED\x10\xa6\xeb\x01\x12\x18\n" +
+	"\x12INVALID_TIME_RANGE\x10\xa7\xeb\x01\x12\"\n" +
+	"\x1cLIST_CUSTOMER_RECORDS_FAILED\x10\xa8\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (
