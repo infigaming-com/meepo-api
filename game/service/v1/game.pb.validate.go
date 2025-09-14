@@ -11200,6 +11200,8 @@ func (m *ListTaxReportsResponse_TaxReport) validate(all bool) error {
 
 	// no validation rules for UpdatedAt
 
+	// no validation rules for Id
+
 	if len(errors) > 0 {
 		return ListTaxReportsResponse_TaxReportMultiError(errors)
 	}

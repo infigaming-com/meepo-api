@@ -903,6 +903,7 @@ message ListTaxReportsResponse {
 		// Timestamps
 		int64 created_at = 15;
 		int64 updated_at = 16;
+		int64 id = 17;
 	}
 
 	repeated TaxReport tax_reports = 1;
