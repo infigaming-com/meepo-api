@@ -4854,8 +4854,8 @@ type ListTaxReportsRequest struct {
 	PageSize  *int32                 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	TaxPeriod string                 `protobuf:"bytes,3,opt,name=tax_period,json=taxPeriod,proto3" json:"tax_period,omitempty"`
 	// license_provider: south_afirca
-	LicenseProvider string `protobuf:"bytes,4,opt,name=license_provider,json=licenseProvider,proto3" json:"license_provider,omitempty"`
-	PeriodType      string `protobuf:"bytes,5,opt,name=period_type,json=periodType,proto3" json:"period_type,omitempty"`
+	LicenseProvider string  `protobuf:"bytes,4,opt,name=license_provider,json=licenseProvider,proto3" json:"license_provider,omitempty"`
+	PeriodType      *string `protobuf:"bytes,5,opt,name=period_type,json=periodType,proto3,oneof" json:"period_type,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -4919,8 +4919,8 @@ func (x *ListTaxReportsRequest) GetLicenseProvider() string {
 }
 
 func (x *ListTaxReportsRequest) GetPeriodType() string {
-	if x != nil {
-		return x.PeriodType
+	if x != nil && x.PeriodType != nil {
+		return *x.PeriodType
 	}
 	return ""
 }
@@ -6936,6 +6936,7 @@ type ListTaxReportsResponse_TaxReport struct {
 	// Timestamps
 	CreatedAt     int64 `protobuf:"varint,15,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt     int64 `protobuf:"varint,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Id            int64 `protobuf:"varint,17,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -7078,6 +7079,13 @@ func (x *ListTaxReportsResponse_TaxReport) GetCreatedAt() int64 {
 func (x *ListTaxReportsResponse_TaxReport) GetUpdatedAt() int64 {
 	if x != nil {
 		return x.UpdatedAt
+	}
+	return 0
+}
+
+func (x *ListTaxReportsResponse_TaxReport) GetId() int64 {
+	if x != nil {
+		return x.Id
 	}
 	return 0
 }
@@ -7864,25 +7872,26 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x1cUpdateTaxReportConfigRequest\x12\x12\n" +
 	"\x04type\x18\x01 \x01(\tR\x04type\x12\x16\n" +
 	"\x06config\x18\x02 \x01(\tR\x06config\"\x1f\n" +
-	"\x1dUpdateTaxReportConfigResponse\"\xd4\x01\n" +
+	"\x1dUpdateTaxReportConfigResponse\"\xe9\x01\n" +
 	"\x15ListTaxReportsRequest\x12\x17\n" +
 	"\x04page\x18\x01 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\x02 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x12\x1d\n" +
 	"\n" +
 	"tax_period\x18\x03 \x01(\tR\ttaxPeriod\x12)\n" +
-	"\x10license_provider\x18\x04 \x01(\tR\x0flicenseProvider\x12\x1f\n" +
-	"\vperiod_type\x18\x05 \x01(\tR\n" +
-	"periodTypeB\a\n" +
+	"\x10license_provider\x18\x04 \x01(\tR\x0flicenseProvider\x12$\n" +
+	"\vperiod_type\x18\x05 \x01(\tH\x02R\n" +
+	"periodType\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xe0\x06\n" +
+	"_page_sizeB\x0e\n" +
+	"\f_period_type\"\xf0\x06\n" +
 	"\x16ListTaxReportsResponse\x12V\n" +
 	"\vtax_reports\x18\x01 \x03(\v25.api.game.service.v1.ListTaxReportsResponse.TaxReportR\n" +
 	"taxReports\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
 	"totalCount\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\x9b\x05\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xab\x05\n" +
 	"\tTaxReport\x12+\n" +
 	"\x11licensed_provider\x18\x01 \x01(\tR\x10licensedProvider\x12+\n" +
 	"\x11licensed_operator\x18\x02 \x01(\tR\x10licensedOperator\x12\x1d\n" +
@@ -7904,7 +7913,8 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x0f \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\x10 \x01(\x03R\tupdatedAt\"\xd2\x01\n" +
+	"updated_at\x18\x10 \x01(\x03R\tupdatedAt\x12\x0e\n" +
+	"\x02id\x18\x11 \x01(\x03R\x02id\"\xd2\x01\n" +
 	"\x16UpdateTaxReportRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12!\n" +
 	"\fdeposit_date\x18\x02 \x01(\tR\vdepositDate\x12&\n" +

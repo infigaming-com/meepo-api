@@ -8252,14 +8252,16 @@ func (m *ListTaxReportsRequest) validate(all bool) error {
 
 	// no validation rules for LicenseProvider
 
-	// no validation rules for PeriodType
-
 	if m.Page != nil {
 		// no validation rules for Page
 	}
 
 	if m.PageSize != nil {
 		// no validation rules for PageSize
+	}
+
+	if m.PeriodType != nil {
+		// no validation rules for PeriodType
 	}
 
 	if len(errors) > 0 {
@@ -11199,6 +11201,8 @@ func (m *ListTaxReportsResponse_TaxReport) validate(all bool) error {
 	// no validation rules for CreatedAt
 
 	// no validation rules for UpdatedAt
+
+	// no validation rules for Id
 
 	if len(errors) > 0 {
 		return ListTaxReportsResponse_TaxReportMultiError(errors)
