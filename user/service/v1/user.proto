@@ -692,11 +692,12 @@ message UserIdentity {
 	string id_type = 3;
 	string id_number = 4;
 	string image = 5;
-	bool verified = 6;
+	string status = 6;
 	google.protobuf.Timestamp created_at = 7;
 	google.protobuf.Timestamp audited_at = 8;
 	string operator = 9;
-	int32 review_time = 10;
+	string reviewer = 10;
+	int32 review_time = 11;
 }
 
 message UpdateUserRequest {
@@ -1475,15 +1476,19 @@ message UserIdentityAuditResponse {
 message UserIdentityListRequest {
 	optional int64 id = 1;
 	optional int64 user_id = 2;
-	optional google.protobuf.Timestamp start_time = 3;
-	optional google.protobuf.Timestamp end_time = 4;
-	int32 page = 5;
-	int32 page_size = 6;
+	optional string status = 3;
+	optional google.protobuf.Timestamp start_time = 4;
+	optional google.protobuf.Timestamp end_time = 5;
+	int32 page = 6;
+	int32 page_size = 7;
 }
 
 message UserIdentityListResponse {
 	repeated UserIdentity user_identity = 1;
 	int32 total_count = 2;
+	int32 approved_count = 3;
+	int32 declined_count = 4;
+	int32 pending_count = 5;
 }
 
 message AddRegisterLoginBlacklistRequest {
