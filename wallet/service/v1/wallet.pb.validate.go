@@ -16313,6 +16313,1048 @@ var _ interface {
 	ErrorName() string
 } = ListCustomerRecordsResponseValidationError{}
 
+// Validate checks the field values on FCIAThresholdConfig with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *FCIAThresholdConfig) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on FCIAThresholdConfig with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// FCIAThresholdConfigMultiError, or nil if none found.
+func (m *FCIAThresholdConfig) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *FCIAThresholdConfig) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetConfigs() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, FCIAThresholdConfigValidationError{
+						field:  fmt.Sprintf("Configs[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, FCIAThresholdConfigValidationError{
+						field:  fmt.Sprintf("Configs[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return FCIAThresholdConfigValidationError{
+					field:  fmt.Sprintf("Configs[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return FCIAThresholdConfigMultiError(errors)
+	}
+
+	return nil
+}
+
+// FCIAThresholdConfigMultiError is an error wrapping multiple validation
+// errors returned by FCIAThresholdConfig.ValidateAll() if the designated
+// constraints aren't met.
+type FCIAThresholdConfigMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m FCIAThresholdConfigMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m FCIAThresholdConfigMultiError) AllErrors() []error { return m }
+
+// FCIAThresholdConfigValidationError is the validation error returned by
+// FCIAThresholdConfig.Validate if the designated constraints aren't met.
+type FCIAThresholdConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e FCIAThresholdConfigValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e FCIAThresholdConfigValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e FCIAThresholdConfigValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e FCIAThresholdConfigValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e FCIAThresholdConfigValidationError) ErrorName() string {
+	return "FCIAThresholdConfigValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e FCIAThresholdConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sFCIAThresholdConfig.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = FCIAThresholdConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = FCIAThresholdConfigValidationError{}
+
+// Validate checks the field values on SetFCIAThresholdConfigRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SetFCIAThresholdConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SetFCIAThresholdConfigRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// SetFCIAThresholdConfigRequestMultiError, or nil if none found.
+func (m *SetFCIAThresholdConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetFCIAThresholdConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Currency
+
+	if all {
+		switch v := interface{}(m.GetFciaThresholdConfig()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SetFCIAThresholdConfigRequestValidationError{
+					field:  "FciaThresholdConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SetFCIAThresholdConfigRequestValidationError{
+					field:  "FciaThresholdConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetFciaThresholdConfig()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SetFCIAThresholdConfigRequestValidationError{
+				field:  "FciaThresholdConfig",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SetFCIAThresholdConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SetFCIAThresholdConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SetFCIAThresholdConfigRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return SetFCIAThresholdConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetFCIAThresholdConfigRequestMultiError is an error wrapping multiple
+// validation errors returned by SetFCIAThresholdConfigRequest.ValidateAll()
+// if the designated constraints aren't met.
+type SetFCIAThresholdConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetFCIAThresholdConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetFCIAThresholdConfigRequestMultiError) AllErrors() []error { return m }
+
+// SetFCIAThresholdConfigRequestValidationError is the validation error
+// returned by SetFCIAThresholdConfigRequest.Validate if the designated
+// constraints aren't met.
+type SetFCIAThresholdConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetFCIAThresholdConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetFCIAThresholdConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetFCIAThresholdConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetFCIAThresholdConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetFCIAThresholdConfigRequestValidationError) ErrorName() string {
+	return "SetFCIAThresholdConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetFCIAThresholdConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetFCIAThresholdConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetFCIAThresholdConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetFCIAThresholdConfigRequestValidationError{}
+
+// Validate checks the field values on SetFCIAThresholdConfigResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SetFCIAThresholdConfigResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SetFCIAThresholdConfigResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// SetFCIAThresholdConfigResponseMultiError, or nil if none found.
+func (m *SetFCIAThresholdConfigResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetFCIAThresholdConfigResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return SetFCIAThresholdConfigResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetFCIAThresholdConfigResponseMultiError is an error wrapping multiple
+// validation errors returned by SetFCIAThresholdConfigResponse.ValidateAll()
+// if the designated constraints aren't met.
+type SetFCIAThresholdConfigResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetFCIAThresholdConfigResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetFCIAThresholdConfigResponseMultiError) AllErrors() []error { return m }
+
+// SetFCIAThresholdConfigResponseValidationError is the validation error
+// returned by SetFCIAThresholdConfigResponse.Validate if the designated
+// constraints aren't met.
+type SetFCIAThresholdConfigResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetFCIAThresholdConfigResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetFCIAThresholdConfigResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetFCIAThresholdConfigResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetFCIAThresholdConfigResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetFCIAThresholdConfigResponseValidationError) ErrorName() string {
+	return "SetFCIAThresholdConfigResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetFCIAThresholdConfigResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetFCIAThresholdConfigResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetFCIAThresholdConfigResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetFCIAThresholdConfigResponseValidationError{}
+
+// Validate checks the field values on GetFCIAThresholdConfigRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetFCIAThresholdConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetFCIAThresholdConfigRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetFCIAThresholdConfigRequestMultiError, or nil if none found.
+func (m *GetFCIAThresholdConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetFCIAThresholdConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetFCIAThresholdConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetFCIAThresholdConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetFCIAThresholdConfigRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetFCIAThresholdConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetFCIAThresholdConfigRequestMultiError is an error wrapping multiple
+// validation errors returned by GetFCIAThresholdConfigRequest.ValidateAll()
+// if the designated constraints aren't met.
+type GetFCIAThresholdConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetFCIAThresholdConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetFCIAThresholdConfigRequestMultiError) AllErrors() []error { return m }
+
+// GetFCIAThresholdConfigRequestValidationError is the validation error
+// returned by GetFCIAThresholdConfigRequest.Validate if the designated
+// constraints aren't met.
+type GetFCIAThresholdConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetFCIAThresholdConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetFCIAThresholdConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetFCIAThresholdConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetFCIAThresholdConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetFCIAThresholdConfigRequestValidationError) ErrorName() string {
+	return "GetFCIAThresholdConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetFCIAThresholdConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetFCIAThresholdConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetFCIAThresholdConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetFCIAThresholdConfigRequestValidationError{}
+
+// Validate checks the field values on GetFCIAThresholdConfigResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetFCIAThresholdConfigResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetFCIAThresholdConfigResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetFCIAThresholdConfigResponseMultiError, or nil if none found.
+func (m *GetFCIAThresholdConfigResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetFCIAThresholdConfigResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	{
+		sorted_keys := make([]string, len(m.GetFciaThresholdConfigs()))
+		i := 0
+		for key := range m.GetFciaThresholdConfigs() {
+			sorted_keys[i] = key
+			i++
+		}
+		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
+		for _, key := range sorted_keys {
+			val := m.GetFciaThresholdConfigs()[key]
+			_ = val
+
+			// no validation rules for FciaThresholdConfigs[key]
+
+			if all {
+				switch v := interface{}(val).(type) {
+				case interface{ ValidateAll() error }:
+					if err := v.ValidateAll(); err != nil {
+						errors = append(errors, GetFCIAThresholdConfigResponseValidationError{
+							field:  fmt.Sprintf("FciaThresholdConfigs[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				case interface{ Validate() error }:
+					if err := v.Validate(); err != nil {
+						errors = append(errors, GetFCIAThresholdConfigResponseValidationError{
+							field:  fmt.Sprintf("FciaThresholdConfigs[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				}
+			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
+				if err := v.Validate(); err != nil {
+					return GetFCIAThresholdConfigResponseValidationError{
+						field:  fmt.Sprintf("FciaThresholdConfigs[%v]", key),
+						reason: "embedded message failed validation",
+						cause:  err,
+					}
+				}
+			}
+
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetFCIAThresholdConfigResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetFCIAThresholdConfigResponseMultiError is an error wrapping multiple
+// validation errors returned by GetFCIAThresholdConfigResponse.ValidateAll()
+// if the designated constraints aren't met.
+type GetFCIAThresholdConfigResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetFCIAThresholdConfigResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetFCIAThresholdConfigResponseMultiError) AllErrors() []error { return m }
+
+// GetFCIAThresholdConfigResponseValidationError is the validation error
+// returned by GetFCIAThresholdConfigResponse.Validate if the designated
+// constraints aren't met.
+type GetFCIAThresholdConfigResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetFCIAThresholdConfigResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetFCIAThresholdConfigResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetFCIAThresholdConfigResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetFCIAThresholdConfigResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetFCIAThresholdConfigResponseValidationError) ErrorName() string {
+	return "GetFCIAThresholdConfigResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetFCIAThresholdConfigResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetFCIAThresholdConfigResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetFCIAThresholdConfigResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetFCIAThresholdConfigResponseValidationError{}
+
+// Validate checks the field values on ListFCIAThresholdTransactionsRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ListFCIAThresholdTransactionsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListFCIAThresholdTransactionsRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListFCIAThresholdTransactionsRequestMultiError, or nil if none found.
+func (m *ListFCIAThresholdTransactionsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListFCIAThresholdTransactionsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListFCIAThresholdTransactionsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListFCIAThresholdTransactionsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListFCIAThresholdTransactionsRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.StartTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetStartTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListFCIAThresholdTransactionsRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListFCIAThresholdTransactionsRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListFCIAThresholdTransactionsRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.EndTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetEndTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListFCIAThresholdTransactionsRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListFCIAThresholdTransactionsRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListFCIAThresholdTransactionsRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.TransactionType != nil {
+		// no validation rules for TransactionType
+	}
+
+	if m.Currency != nil {
+		// no validation rules for Currency
+	}
+
+	if m.KycLevel != nil {
+		// no validation rules for KycLevel
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return ListFCIAThresholdTransactionsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListFCIAThresholdTransactionsRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// ListFCIAThresholdTransactionsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListFCIAThresholdTransactionsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListFCIAThresholdTransactionsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListFCIAThresholdTransactionsRequestMultiError) AllErrors() []error { return m }
+
+// ListFCIAThresholdTransactionsRequestValidationError is the validation error
+// returned by ListFCIAThresholdTransactionsRequest.Validate if the designated
+// constraints aren't met.
+type ListFCIAThresholdTransactionsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListFCIAThresholdTransactionsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListFCIAThresholdTransactionsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListFCIAThresholdTransactionsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListFCIAThresholdTransactionsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListFCIAThresholdTransactionsRequestValidationError) ErrorName() string {
+	return "ListFCIAThresholdTransactionsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListFCIAThresholdTransactionsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListFCIAThresholdTransactionsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListFCIAThresholdTransactionsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListFCIAThresholdTransactionsRequestValidationError{}
+
+// Validate checks the field values on ListFCIAThresholdTransactionsResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ListFCIAThresholdTransactionsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListFCIAThresholdTransactionsResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListFCIAThresholdTransactionsResponseMultiError, or nil if none found.
+func (m *ListFCIAThresholdTransactionsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListFCIAThresholdTransactionsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetThresholdTransactions() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListFCIAThresholdTransactionsResponseValidationError{
+						field:  fmt.Sprintf("ThresholdTransactions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListFCIAThresholdTransactionsResponseValidationError{
+						field:  fmt.Sprintf("ThresholdTransactions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListFCIAThresholdTransactionsResponseValidationError{
+					field:  fmt.Sprintf("ThresholdTransactions[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ListFCIAThresholdTransactionsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListFCIAThresholdTransactionsResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// ListFCIAThresholdTransactionsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListFCIAThresholdTransactionsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListFCIAThresholdTransactionsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListFCIAThresholdTransactionsResponseMultiError) AllErrors() []error { return m }
+
+// ListFCIAThresholdTransactionsResponseValidationError is the validation error
+// returned by ListFCIAThresholdTransactionsResponse.Validate if the
+// designated constraints aren't met.
+type ListFCIAThresholdTransactionsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListFCIAThresholdTransactionsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListFCIAThresholdTransactionsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListFCIAThresholdTransactionsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListFCIAThresholdTransactionsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListFCIAThresholdTransactionsResponseValidationError) ErrorName() string {
+	return "ListFCIAThresholdTransactionsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListFCIAThresholdTransactionsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListFCIAThresholdTransactionsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListFCIAThresholdTransactionsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListFCIAThresholdTransactionsResponseValidationError{}
+
 // Validate checks the field values on GetUserBalancesResponse_Balance with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -18512,3 +19554,282 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListCustomerRecordsResponse_CustomerRecordValidationError{}
+
+// Validate checks the field values on FCIAThresholdConfig_Config with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *FCIAThresholdConfig_Config) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on FCIAThresholdConfig_Config with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// FCIAThresholdConfig_ConfigMultiError, or nil if none found.
+func (m *FCIAThresholdConfig_Config) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *FCIAThresholdConfig_Config) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TransactionType
+
+	// no validation rules for ThresholdAmount
+
+	if len(errors) > 0 {
+		return FCIAThresholdConfig_ConfigMultiError(errors)
+	}
+
+	return nil
+}
+
+// FCIAThresholdConfig_ConfigMultiError is an error wrapping multiple
+// validation errors returned by FCIAThresholdConfig_Config.ValidateAll() if
+// the designated constraints aren't met.
+type FCIAThresholdConfig_ConfigMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m FCIAThresholdConfig_ConfigMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m FCIAThresholdConfig_ConfigMultiError) AllErrors() []error { return m }
+
+// FCIAThresholdConfig_ConfigValidationError is the validation error returned
+// by FCIAThresholdConfig_Config.Validate if the designated constraints aren't met.
+type FCIAThresholdConfig_ConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e FCIAThresholdConfig_ConfigValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e FCIAThresholdConfig_ConfigValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e FCIAThresholdConfig_ConfigValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e FCIAThresholdConfig_ConfigValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e FCIAThresholdConfig_ConfigValidationError) ErrorName() string {
+	return "FCIAThresholdConfig_ConfigValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e FCIAThresholdConfig_ConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sFCIAThresholdConfig_Config.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = FCIAThresholdConfig_ConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = FCIAThresholdConfig_ConfigValidationError{}
+
+// Validate checks the field values on
+// ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListFCIAThresholdTransactionsResponse_FCIAThresholdTransactionMultiError,
+// or nil if none found.
+func (m *ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Type
+
+	if all {
+		switch v := interface{}(m.GetTransactionTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListFCIAThresholdTransactionsResponse_FCIAThresholdTransactionValidationError{
+					field:  "TransactionTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListFCIAThresholdTransactionsResponse_FCIAThresholdTransactionValidationError{
+					field:  "TransactionTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTransactionTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListFCIAThresholdTransactionsResponse_FCIAThresholdTransactionValidationError{
+				field:  "TransactionTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for TransactionId
+
+	// no validation rules for Currency
+
+	// no validation rules for Amount
+
+	// no validation rules for ExcessAmount
+
+	// no validation rules for UserId
+
+	// no validation rules for FullName
+
+	// no validation rules for IdType
+
+	// no validation rules for IdNumber
+
+	// no validation rules for Mobile
+
+	// no validation rules for Email
+
+	// no validation rules for Address
+
+	// no validation rules for KycLevel
+
+	if len(errors) > 0 {
+		return ListFCIAThresholdTransactionsResponse_FCIAThresholdTransactionMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListFCIAThresholdTransactionsResponse_FCIAThresholdTransactionMultiError is
+// an error wrapping multiple validation errors returned by
+// ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction.ValidateAll()
+// if the designated constraints aren't met.
+type ListFCIAThresholdTransactionsResponse_FCIAThresholdTransactionMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListFCIAThresholdTransactionsResponse_FCIAThresholdTransactionMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListFCIAThresholdTransactionsResponse_FCIAThresholdTransactionMultiError) AllErrors() []error {
+	return m
+}
+
+// ListFCIAThresholdTransactionsResponse_FCIAThresholdTransactionValidationError
+// is the validation error returned by
+// ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction.Validate if
+// the designated constraints aren't met.
+type ListFCIAThresholdTransactionsResponse_FCIAThresholdTransactionValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListFCIAThresholdTransactionsResponse_FCIAThresholdTransactionValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e ListFCIAThresholdTransactionsResponse_FCIAThresholdTransactionValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e ListFCIAThresholdTransactionsResponse_FCIAThresholdTransactionValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e ListFCIAThresholdTransactionsResponse_FCIAThresholdTransactionValidationError) Key() bool {
+	return e.key
+}
+
+// ErrorName returns error name.
+func (e ListFCIAThresholdTransactionsResponse_FCIAThresholdTransactionValidationError) ErrorName() string {
+	return "ListFCIAThresholdTransactionsResponse_FCIAThresholdTransactionValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListFCIAThresholdTransactionsResponse_FCIAThresholdTransactionValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListFCIAThresholdTransactionsResponse_FCIAThresholdTransactionValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListFCIAThresholdTransactionsResponse_FCIAThresholdTransactionValidationError{}
