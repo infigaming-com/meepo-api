@@ -70,6 +70,9 @@ const (
 	Wallet_ListResponsibleGamblingConfigs_FullMethodName      = "/api.wallet.service.v1.Wallet/ListResponsibleGamblingConfigs"
 	Wallet_GetResponsibleGamblingConfig_FullMethodName        = "/api.wallet.service.v1.Wallet/GetResponsibleGamblingConfig"
 	Wallet_ListCustomerRecords_FullMethodName                 = "/api.wallet.service.v1.Wallet/ListCustomerRecords"
+	Wallet_SetFCIAThresholdConfig_FullMethodName              = "/api.wallet.service.v1.Wallet/SetFCIAThresholdConfig"
+	Wallet_GetFCIAThresholdConfig_FullMethodName              = "/api.wallet.service.v1.Wallet/GetFCIAThresholdConfig"
+	Wallet_ListFCIAThresholdTransactions_FullMethodName       = "/api.wallet.service.v1.Wallet/ListFCIAThresholdTransactions"
 )
 
 // WalletClient is the client API for Wallet service.
@@ -163,6 +166,12 @@ type WalletClient interface {
 	GetResponsibleGamblingConfig(ctx context.Context, in *GetResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*GetResponsibleGamblingConfigResponse, error)
 	// ListCustomerRecords lists customer records for all users (with deposit, withdraw, game bet, game win and manual credit(this is not supported yet))
 	ListCustomerRecords(ctx context.Context, in *ListCustomerRecordsRequest, opts ...grpc.CallOption) (*ListCustomerRecordsResponse, error)
+	// SetFCIAThresholdConfig sets the FCIA threshold config for an operator and its specific currency
+	SetFCIAThresholdConfig(ctx context.Context, in *SetFCIAThresholdConfigRequest, opts ...grpc.CallOption) (*SetFCIAThresholdConfigResponse, error)
+	// GetFCIAThresholdConfig gets the FCIA threshold config for an operator of all currencies
+	GetFCIAThresholdConfig(ctx context.Context, in *GetFCIAThresholdConfigRequest, opts ...grpc.CallOption) (*GetFCIAThresholdConfigResponse, error)
+	// ListFCIAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
+	ListFCIAThresholdTransactions(ctx context.Context, in *ListFCIAThresholdTransactionsRequest, opts ...grpc.CallOption) (*ListFCIAThresholdTransactionsResponse, error)
 }
 
 type walletClient struct {
@@ -683,6 +692,36 @@ func (c *walletClient) ListCustomerRecords(ctx context.Context, in *ListCustomer
 	return out, nil
 }
 
+func (c *walletClient) SetFCIAThresholdConfig(ctx context.Context, in *SetFCIAThresholdConfigRequest, opts ...grpc.CallOption) (*SetFCIAThresholdConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetFCIAThresholdConfigResponse)
+	err := c.cc.Invoke(ctx, Wallet_SetFCIAThresholdConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) GetFCIAThresholdConfig(ctx context.Context, in *GetFCIAThresholdConfigRequest, opts ...grpc.CallOption) (*GetFCIAThresholdConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetFCIAThresholdConfigResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetFCIAThresholdConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) ListFCIAThresholdTransactions(ctx context.Context, in *ListFCIAThresholdTransactionsRequest, opts ...grpc.CallOption) (*ListFCIAThresholdTransactionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListFCIAThresholdTransactionsResponse)
+	err := c.cc.Invoke(ctx, Wallet_ListFCIAThresholdTransactions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServer is the server API for Wallet service.
 // All implementations must embed UnimplementedWalletServer
 // for forward compatibility.
@@ -774,6 +813,12 @@ type WalletServer interface {
 	GetResponsibleGamblingConfig(context.Context, *GetResponsibleGamblingConfigRequest) (*GetResponsibleGamblingConfigResponse, error)
 	// ListCustomerRecords lists customer records for all users (with deposit, withdraw, game bet, game win and manual credit(this is not supported yet))
 	ListCustomerRecords(context.Context, *ListCustomerRecordsRequest) (*ListCustomerRecordsResponse, error)
+	// SetFCIAThresholdConfig sets the FCIA threshold config for an operator and its specific currency
+	SetFCIAThresholdConfig(context.Context, *SetFCIAThresholdConfigRequest) (*SetFCIAThresholdConfigResponse, error)
+	// GetFCIAThresholdConfig gets the FCIA threshold config for an operator of all currencies
+	GetFCIAThresholdConfig(context.Context, *GetFCIAThresholdConfigRequest) (*GetFCIAThresholdConfigResponse, error)
+	// ListFCIAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
+	ListFCIAThresholdTransactions(context.Context, *ListFCIAThresholdTransactionsRequest) (*ListFCIAThresholdTransactionsResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -936,6 +981,15 @@ func (UnimplementedWalletServer) GetResponsibleGamblingConfig(context.Context, *
 }
 func (UnimplementedWalletServer) ListCustomerRecords(context.Context, *ListCustomerRecordsRequest) (*ListCustomerRecordsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCustomerRecords not implemented")
+}
+func (UnimplementedWalletServer) SetFCIAThresholdConfig(context.Context, *SetFCIAThresholdConfigRequest) (*SetFCIAThresholdConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetFCIAThresholdConfig not implemented")
+}
+func (UnimplementedWalletServer) GetFCIAThresholdConfig(context.Context, *GetFCIAThresholdConfigRequest) (*GetFCIAThresholdConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFCIAThresholdConfig not implemented")
+}
+func (UnimplementedWalletServer) ListFCIAThresholdTransactions(context.Context, *ListFCIAThresholdTransactionsRequest) (*ListFCIAThresholdTransactionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListFCIAThresholdTransactions not implemented")
 }
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
@@ -1876,6 +1930,60 @@ func _Wallet_ListCustomerRecords_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_SetFCIAThresholdConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetFCIAThresholdConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).SetFCIAThresholdConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_SetFCIAThresholdConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).SetFCIAThresholdConfig(ctx, req.(*SetFCIAThresholdConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_GetFCIAThresholdConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFCIAThresholdConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetFCIAThresholdConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetFCIAThresholdConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetFCIAThresholdConfig(ctx, req.(*GetFCIAThresholdConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_ListFCIAThresholdTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListFCIAThresholdTransactionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).ListFCIAThresholdTransactions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_ListFCIAThresholdTransactions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).ListFCIAThresholdTransactions(ctx, req.(*ListFCIAThresholdTransactionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Wallet_ServiceDesc is the grpc.ServiceDesc for Wallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2086,6 +2194,18 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListCustomerRecords",
 			Handler:    _Wallet_ListCustomerRecords_Handler,
+		},
+		{
+			MethodName: "SetFCIAThresholdConfig",
+			Handler:    _Wallet_SetFCIAThresholdConfig_Handler,
+		},
+		{
+			MethodName: "GetFCIAThresholdConfig",
+			Handler:    _Wallet_GetFCIAThresholdConfig_Handler,
+		},
+		{
+			MethodName: "ListFCIAThresholdTransactions",
+			Handler:    _Wallet_ListFCIAThresholdTransactions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

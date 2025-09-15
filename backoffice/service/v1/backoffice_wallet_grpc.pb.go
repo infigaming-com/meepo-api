@@ -47,6 +47,9 @@ const (
 	BackofficeWallet_DeleteWalletResponsibleGamblingConfig_FullMethodName = "/api.backoffice.service.v1.BackofficeWallet/DeleteWalletResponsibleGamblingConfig"
 	BackofficeWallet_ListWalletResponsibleGamblingConfigs_FullMethodName  = "/api.backoffice.service.v1.BackofficeWallet/ListWalletResponsibleGamblingConfigs"
 	BackofficeWallet_ListCustomerRecords_FullMethodName                   = "/api.backoffice.service.v1.BackofficeWallet/ListCustomerRecords"
+	BackofficeWallet_SetFCIAThresholdConfig_FullMethodName                = "/api.backoffice.service.v1.BackofficeWallet/SetFCIAThresholdConfig"
+	BackofficeWallet_GetFCIAThresholdConfig_FullMethodName                = "/api.backoffice.service.v1.BackofficeWallet/GetFCIAThresholdConfig"
+	BackofficeWallet_ListFCIAThresholdTransactions_FullMethodName         = "/api.backoffice.service.v1.BackofficeWallet/ListFCIAThresholdTransactions"
 )
 
 // BackofficeWalletClient is the client API for BackofficeWallet service.
@@ -97,8 +100,14 @@ type BackofficeWalletClient interface {
 	DeleteWalletResponsibleGamblingConfig(ctx context.Context, in *DeleteWalletResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*v1.DeleteResponsibleGamblingConfigResponse, error)
 	// ListWalletResponsibleGamblingConfigs lists gambling configs for a user with all currencies
 	ListWalletResponsibleGamblingConfigs(ctx context.Context, in *ListWalletResponsibleGamblingConfigsRequest, opts ...grpc.CallOption) (*v1.ListResponsibleGamblingConfigsResponse, error)
-	// ListCustomerRecords lists customer records for all users (with deposit, withdraw, game bet, game win and manual credit(this is not supported yet))
+	// ListCustomerRecords lists customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
 	ListCustomerRecords(ctx context.Context, in *ListCustomerRecordsRequest, opts ...grpc.CallOption) (*v1.ListCustomerRecordsResponse, error)
+	// SetFCIAThresholdConfig sets the FCIA threshold config for an operator and its specific currency
+	SetFCIAThresholdConfig(ctx context.Context, in *SetFCIAThresholdConfigRequest, opts ...grpc.CallOption) (*v1.SetFCIAThresholdConfigResponse, error)
+	// GetFCIAThresholdConfig gets the FCIA threshold config for an operator of all currencies
+	GetFCIAThresholdConfig(ctx context.Context, in *GetFCIAThresholdConfigRequest, opts ...grpc.CallOption) (*v1.GetFCIAThresholdConfigResponse, error)
+	// ListFCIAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
+	ListFCIAThresholdTransactions(ctx context.Context, in *ListFCIAThresholdTransactionsRequest, opts ...grpc.CallOption) (*v1.ListFCIAThresholdTransactionsResponse, error)
 }
 
 type backofficeWalletClient struct {
@@ -379,6 +388,36 @@ func (c *backofficeWalletClient) ListCustomerRecords(ctx context.Context, in *Li
 	return out, nil
 }
 
+func (c *backofficeWalletClient) SetFCIAThresholdConfig(ctx context.Context, in *SetFCIAThresholdConfigRequest, opts ...grpc.CallOption) (*v1.SetFCIAThresholdConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.SetFCIAThresholdConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_SetFCIAThresholdConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) GetFCIAThresholdConfig(ctx context.Context, in *GetFCIAThresholdConfigRequest, opts ...grpc.CallOption) (*v1.GetFCIAThresholdConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetFCIAThresholdConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_GetFCIAThresholdConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) ListFCIAThresholdTransactions(ctx context.Context, in *ListFCIAThresholdTransactionsRequest, opts ...grpc.CallOption) (*v1.ListFCIAThresholdTransactionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListFCIAThresholdTransactionsResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_ListFCIAThresholdTransactions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeWalletServer is the server API for BackofficeWallet service.
 // All implementations must embed UnimplementedBackofficeWalletServer
 // for forward compatibility.
@@ -427,8 +466,14 @@ type BackofficeWalletServer interface {
 	DeleteWalletResponsibleGamblingConfig(context.Context, *DeleteWalletResponsibleGamblingConfigRequest) (*v1.DeleteResponsibleGamblingConfigResponse, error)
 	// ListWalletResponsibleGamblingConfigs lists gambling configs for a user with all currencies
 	ListWalletResponsibleGamblingConfigs(context.Context, *ListWalletResponsibleGamblingConfigsRequest) (*v1.ListResponsibleGamblingConfigsResponse, error)
-	// ListCustomerRecords lists customer records for all users (with deposit, withdraw, game bet, game win and manual credit(this is not supported yet))
+	// ListCustomerRecords lists customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
 	ListCustomerRecords(context.Context, *ListCustomerRecordsRequest) (*v1.ListCustomerRecordsResponse, error)
+	// SetFCIAThresholdConfig sets the FCIA threshold config for an operator and its specific currency
+	SetFCIAThresholdConfig(context.Context, *SetFCIAThresholdConfigRequest) (*v1.SetFCIAThresholdConfigResponse, error)
+	// GetFCIAThresholdConfig gets the FCIA threshold config for an operator of all currencies
+	GetFCIAThresholdConfig(context.Context, *GetFCIAThresholdConfigRequest) (*v1.GetFCIAThresholdConfigResponse, error)
+	// ListFCIAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
+	ListFCIAThresholdTransactions(context.Context, *ListFCIAThresholdTransactionsRequest) (*v1.ListFCIAThresholdTransactionsResponse, error)
 	mustEmbedUnimplementedBackofficeWalletServer()
 }
 
@@ -519,6 +564,15 @@ func (UnimplementedBackofficeWalletServer) ListWalletResponsibleGamblingConfigs(
 }
 func (UnimplementedBackofficeWalletServer) ListCustomerRecords(context.Context, *ListCustomerRecordsRequest) (*v1.ListCustomerRecordsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCustomerRecords not implemented")
+}
+func (UnimplementedBackofficeWalletServer) SetFCIAThresholdConfig(context.Context, *SetFCIAThresholdConfigRequest) (*v1.SetFCIAThresholdConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetFCIAThresholdConfig not implemented")
+}
+func (UnimplementedBackofficeWalletServer) GetFCIAThresholdConfig(context.Context, *GetFCIAThresholdConfigRequest) (*v1.GetFCIAThresholdConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFCIAThresholdConfig not implemented")
+}
+func (UnimplementedBackofficeWalletServer) ListFCIAThresholdTransactions(context.Context, *ListFCIAThresholdTransactionsRequest) (*v1.ListFCIAThresholdTransactionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListFCIAThresholdTransactions not implemented")
 }
 func (UnimplementedBackofficeWalletServer) mustEmbedUnimplementedBackofficeWalletServer() {}
 func (UnimplementedBackofficeWalletServer) testEmbeddedByValue()                          {}
@@ -1027,6 +1081,60 @@ func _BackofficeWallet_ListCustomerRecords_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeWallet_SetFCIAThresholdConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetFCIAThresholdConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).SetFCIAThresholdConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_SetFCIAThresholdConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).SetFCIAThresholdConfig(ctx, req.(*SetFCIAThresholdConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_GetFCIAThresholdConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFCIAThresholdConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).GetFCIAThresholdConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_GetFCIAThresholdConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).GetFCIAThresholdConfig(ctx, req.(*GetFCIAThresholdConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_ListFCIAThresholdTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListFCIAThresholdTransactionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).ListFCIAThresholdTransactions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_ListFCIAThresholdTransactions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).ListFCIAThresholdTransactions(ctx, req.(*ListFCIAThresholdTransactionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeWallet_ServiceDesc is the grpc.ServiceDesc for BackofficeWallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1141,6 +1249,18 @@ var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListCustomerRecords",
 			Handler:    _BackofficeWallet_ListCustomerRecords_Handler,
+		},
+		{
+			MethodName: "SetFCIAThresholdConfig",
+			Handler:    _BackofficeWallet_SetFCIAThresholdConfig_Handler,
+		},
+		{
+			MethodName: "GetFCIAThresholdConfig",
+			Handler:    _BackofficeWallet_GetFCIAThresholdConfig_Handler,
+		},
+		{
+			MethodName: "ListFCIAThresholdTransactions",
+			Handler:    _BackofficeWallet_ListFCIAThresholdTransactions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
