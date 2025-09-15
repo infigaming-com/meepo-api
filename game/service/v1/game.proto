@@ -120,6 +120,9 @@ service Game {
 	rpc GetTaxReportConfig(GetTaxReportConfigRequest) returns (GetTaxReportConfigResponse) {
 	}
 
+	rpc UpdateTaxReportConfig(UpdateTaxReportConfigRequest) returns (UpdateTaxReportConfigResponse) {
+	}
+
 	rpc ListTaxReports(ListTaxReportsRequest) returns (ListTaxReportsResponse) {
 	}
 
@@ -832,7 +835,7 @@ message GetTaxReportConfigResponse {
 	//	"timezone": "UTC+0",
 	//	"report_generation_time": {
 	//		"monthly": "2nd of each month",
-	//		"quarterly": "2nd of each quarter", 
+	//		"quarterly": "2nd of each quarter",
 	//		"yearly": "2nd of each year"
 	//	},
 	//	"tax_currency": "ZAR",
@@ -860,7 +863,7 @@ message UpdateTaxReportConfigRequest {
 	//	"timezone": "UTC+0",
 	//	"report_generation_time": {
 	//		"monthly": "2nd of each month",
-	//		"quarterly": "2nd of each quarter", 
+	//		"quarterly": "2nd of each quarter",
 	//		"yearly": "2nd of each year"
 	//	},
 	//	"tax_currency": "ZAR",
@@ -883,6 +886,7 @@ message ListTaxReportsRequest {
 	string tax_period = 3;
 	// license_provider: south_afirca
 	string license_provider = 4;
+	optional string period_type = 5;
 }
 
 message ListTaxReportsResponse {
@@ -891,12 +895,12 @@ message ListTaxReportsResponse {
 		string licensed_provider = 1; // e.g., "south_afirca"
 		string licensed_operator = 2; // e.g., "playing.io"
 		string tax_period = 3; // Format: YYYY-MM (e.g., "2025-08")
-		
+
 		// Deposit information
 		string deposit_date = 4; // Format: YYYY-MM-DD or "-" if empty
 		string deposit_slip_no = 5; // e.g., "DSL-202508-003" or "-" if empty
 		string ref_code = 6; // e.g., "DSL-HR-202508-002" or "-" if empty
-		
+
 		// Financial data (all amounts in ZAR)
 		int64 hold_total_stake = 7; // e.g., "1,800,000"
 		int64 winning_stakes = 8; // e.g., "1,200,000"
@@ -906,24 +910,24 @@ message ListTaxReportsResponse {
 		int64 vat_payable_receivable = 12; // e.g., "16,200"
 		int64 event_calculations = 13; // e.g., "124,200"
 
-		// Declaration status
-		enum DeclarationStatus {
-			DECLARATION_STATUS_UNSPECIFIED = 0;
-			DECLARATION_STATUS_PENDING = 1;
-			DECLARATION_STATUS_CONFIRMED = 2;
-			DECLARATION_STATUS_DRAFT = 3;
-		}
-		DeclarationStatus declaration_status = 14;
+		TaxReportRecordStatus status = 14;
 		
 		// Timestamps
 		int64 created_at = 15;
 		int64 updated_at = 16;
+		int64 id = 17;
 	}
-	
+
 	repeated TaxReport tax_reports = 1;
 	int32 total_count = 2;
 	int32 page = 3;
 	int32 page_size = 4;
+}
+
+// Tax report record status
+enum TaxReportRecordStatus {
+	TaxReportRecordStatus_PENDING = 0;
+	TaxReportRecordStatus_CONFIRMED = 1;
 }
 
 message UpdateTaxReportRequest {
@@ -931,6 +935,7 @@ message UpdateTaxReportRequest {
 	string deposit_date = 2;
 	string deposit_slip_no = 3;
 	string ref_code = 4;
+	TaxReportRecordStatus status = 5;
 }
 
 message UpdateTaxReportResponse {

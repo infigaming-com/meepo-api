@@ -8260,6 +8260,10 @@ func (m *ListTaxReportsRequest) validate(all bool) error {
 		// no validation rules for PageSize
 	}
 
+	if m.PeriodType != nil {
+		// no validation rules for PeriodType
+	}
+
 	if len(errors) > 0 {
 		return ListTaxReportsRequestMultiError(errors)
 	}
@@ -8511,6 +8515,8 @@ func (m *UpdateTaxReportRequest) validate(all bool) error {
 	// no validation rules for DepositSlipNo
 
 	// no validation rules for RefCode
+
+	// no validation rules for Status
 
 	if len(errors) > 0 {
 		return UpdateTaxReportRequestMultiError(errors)
@@ -11825,11 +11831,13 @@ func (m *ListTaxReportsResponse_TaxReport) validate(all bool) error {
 
 	// no validation rules for EventCalculations
 
-	// no validation rules for DeclarationStatus
+	// no validation rules for Status
 
 	// no validation rules for CreatedAt
 
 	// no validation rules for UpdatedAt
+
+	// no validation rules for Id
 
 	if len(errors) > 0 {
 		return ListTaxReportsResponse_TaxReportMultiError(errors)

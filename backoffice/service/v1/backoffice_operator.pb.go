@@ -1734,11 +1734,12 @@ func (*UpdateOperatorAccountSettingsResponse) Descriptor() ([]byte, []int) {
 }
 
 type AddRegisterLoginBlacklistRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	IdType        string                 `protobuf:"bytes,1,opt,name=id_type,json=idType,proto3" json:"id_type,omitempty"`
-	Ids           []string               `protobuf:"bytes,2,rep,name=ids,proto3" json:"ids,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	IdType                string                  `protobuf:"bytes,2,opt,name=id_type,json=idType,proto3" json:"id_type,omitempty"`
+	Ids                   []string                `protobuf:"bytes,3,rep,name=ids,proto3" json:"ids,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *AddRegisterLoginBlacklistRequest) Reset() {
@@ -1771,6 +1772,13 @@ func (*AddRegisterLoginBlacklistRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_operator_proto_rawDescGZIP(), []int{29}
 }
 
+func (x *AddRegisterLoginBlacklistRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
 func (x *AddRegisterLoginBlacklistRequest) GetIdType() string {
 	if x != nil {
 		return x.IdType
@@ -1786,11 +1794,12 @@ func (x *AddRegisterLoginBlacklistRequest) GetIds() []string {
 }
 
 type DeleteRegisterLoginBlacklistRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	IdType        string                 `protobuf:"bytes,1,opt,name=id_type,json=idType,proto3" json:"id_type,omitempty"`
-	Ids           []string               `protobuf:"bytes,2,rep,name=ids,proto3" json:"ids,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	IdType                string                  `protobuf:"bytes,2,opt,name=id_type,json=idType,proto3" json:"id_type,omitempty"`
+	Ids                   []string                `protobuf:"bytes,3,rep,name=ids,proto3" json:"ids,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *DeleteRegisterLoginBlacklistRequest) Reset() {
@@ -1823,6 +1832,13 @@ func (*DeleteRegisterLoginBlacklistRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_operator_proto_rawDescGZIP(), []int{30}
 }
 
+func (x *DeleteRegisterLoginBlacklistRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
 func (x *DeleteRegisterLoginBlacklistRequest) GetIdType() string {
 	if x != nil {
 		return x.IdType
@@ -1838,12 +1854,13 @@ func (x *DeleteRegisterLoginBlacklistRequest) GetIds() []string {
 }
 
 type ListRegisterLoginBlacklistRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	IdType        string                 `protobuf:"bytes,1,opt,name=id_type,json=idType,proto3" json:"id_type,omitempty"`
-	Page          *int32                 `protobuf:"varint,2,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize      *int32                 `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	IdType                string                  `protobuf:"bytes,2,opt,name=id_type,json=idType,proto3" json:"id_type,omitempty"`
+	Page                  *int32                  `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize              *int32                  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *ListRegisterLoginBlacklistRequest) Reset() {
@@ -1876,6 +1893,13 @@ func (*ListRegisterLoginBlacklistRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_operator_proto_rawDescGZIP(), []int{31}
 }
 
+func (x *ListRegisterLoginBlacklistRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
 func (x *ListRegisterLoginBlacklistRequest) GetIdType() string {
 	if x != nil {
 		return x.IdType
@@ -1897,6 +1921,102 @@ func (x *ListRegisterLoginBlacklistRequest) GetPageSize() int32 {
 	return 0
 }
 
+type SetOperatorRegisterLimitConfigRequest struct {
+	state                 protoimpl.MessageState                     `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext                    `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Config                map[string]*v1.OperatorRegisterLimitConfig `protobuf:"bytes,2,rep,name=config,proto3" json:"config,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *SetOperatorRegisterLimitConfigRequest) Reset() {
+	*x = SetOperatorRegisterLimitConfigRequest{}
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetOperatorRegisterLimitConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetOperatorRegisterLimitConfigRequest) ProtoMessage() {}
+
+func (x *SetOperatorRegisterLimitConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetOperatorRegisterLimitConfigRequest.ProtoReflect.Descriptor instead.
+func (*SetOperatorRegisterLimitConfigRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_operator_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *SetOperatorRegisterLimitConfigRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *SetOperatorRegisterLimitConfigRequest) GetConfig() map[string]*v1.OperatorRegisterLimitConfig {
+	if x != nil {
+		return x.Config
+	}
+	return nil
+}
+
+type GetOperatorRegisterLimitConfigRequest struct {
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *GetOperatorRegisterLimitConfigRequest) Reset() {
+	*x = GetOperatorRegisterLimitConfigRequest{}
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOperatorRegisterLimitConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOperatorRegisterLimitConfigRequest) ProtoMessage() {}
+
+func (x *GetOperatorRegisterLimitConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOperatorRegisterLimitConfigRequest.ProtoReflect.Descriptor instead.
+func (*GetOperatorRegisterLimitConfigRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_operator_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *GetOperatorRegisterLimitConfigRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
 type ListAllOperatorsResponse_Operator struct {
 	state            protoimpl.MessageState  `protogen:"open.v1"`
 	RealOperatorId   int64                   `protobuf:"varint,1,opt,name=real_operator_id,json=realOperatorId,proto3" json:"real_operator_id,omitempty"`
@@ -1911,7 +2031,7 @@ type ListAllOperatorsResponse_Operator struct {
 
 func (x *ListAllOperatorsResponse_Operator) Reset() {
 	*x = ListAllOperatorsResponse_Operator{}
-	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[32]
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1923,7 +2043,7 @@ func (x *ListAllOperatorsResponse_Operator) String() string {
 func (*ListAllOperatorsResponse_Operator) ProtoMessage() {}
 
 func (x *ListAllOperatorsResponse_Operator) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[32]
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1997,7 +2117,7 @@ type ListRetailerOperatorsResponse_OperatorInfo struct {
 
 func (x *ListRetailerOperatorsResponse_OperatorInfo) Reset() {
 	*x = ListRetailerOperatorsResponse_OperatorInfo{}
-	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[33]
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2009,7 +2129,7 @@ func (x *ListRetailerOperatorsResponse_OperatorInfo) String() string {
 func (*ListRetailerOperatorsResponse_OperatorInfo) ProtoMessage() {}
 
 func (x *ListRetailerOperatorsResponse_OperatorInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[33]
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2089,7 +2209,7 @@ type ListCompanyOperatorsResponse_OperatorInfo struct {
 
 func (x *ListCompanyOperatorsResponse_OperatorInfo) Reset() {
 	*x = ListCompanyOperatorsResponse_OperatorInfo{}
-	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[34]
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2101,7 +2221,7 @@ func (x *ListCompanyOperatorsResponse_OperatorInfo) String() string {
 func (*ListCompanyOperatorsResponse_OperatorInfo) ProtoMessage() {}
 
 func (x *ListCompanyOperatorsResponse_OperatorInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[34]
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2174,7 +2294,7 @@ type ListBottomOperatorsResponse_OperatorInfo struct {
 
 func (x *ListBottomOperatorsResponse_OperatorInfo) Reset() {
 	*x = ListBottomOperatorsResponse_OperatorInfo{}
-	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[35]
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2186,7 +2306,7 @@ func (x *ListBottomOperatorsResponse_OperatorInfo) String() string {
 func (*ListBottomOperatorsResponse_OperatorInfo) ProtoMessage() {}
 
 func (x *ListBottomOperatorsResponse_OperatorInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[35]
+	mi := &file_backoffice_service_v1_backoffice_operator_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2401,20 +2521,31 @@ const file_backoffice_service_v1_backoffice_operator_proto_rawDesc = "" +
 	"!GetOperatorAccountSettingsRequest\"\x7f\n" +
 	"$UpdateOperatorAccountSettingsRequest\x12W\n" +
 	"\x10account_settings\x18\x02 \x01(\v2,.api.user.service.v1.OperatorAccountSettingsR\x0faccountSettings\"'\n" +
-	"%UpdateOperatorAccountSettingsResponse\"M\n" +
-	" AddRegisterLoginBlacklistRequest\x12\x17\n" +
-	"\aid_type\x18\x01 \x01(\tR\x06idType\x12\x10\n" +
-	"\x03ids\x18\x02 \x03(\tR\x03ids\"P\n" +
-	"#DeleteRegisterLoginBlacklistRequest\x12\x17\n" +
-	"\aid_type\x18\x01 \x01(\tR\x06idType\x12\x10\n" +
-	"\x03ids\x18\x02 \x03(\tR\x03ids\"\x8e\x01\n" +
-	"!ListRegisterLoginBlacklistRequest\x12\x17\n" +
-	"\aid_type\x18\x01 \x01(\tR\x06idType\x12\x17\n" +
-	"\x04page\x18\x02 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x03 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
+	"%UpdateOperatorAccountSettingsResponse\"\xa2\x01\n" +
+	" AddRegisterLoginBlacklistRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x17\n" +
+	"\aid_type\x18\x02 \x01(\tR\x06idType\x12\x10\n" +
+	"\x03ids\x18\x03 \x03(\tR\x03ids\"\xa5\x01\n" +
+	"#DeleteRegisterLoginBlacklistRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x17\n" +
+	"\aid_type\x18\x02 \x01(\tR\x06idType\x12\x10\n" +
+	"\x03ids\x18\x03 \x03(\tR\x03ids\"\xe3\x01\n" +
+	"!ListRegisterLoginBlacklistRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x17\n" +
+	"\aid_type\x18\x02 \x01(\tR\x06idType\x12\x17\n" +
+	"\x04page\x18\x03 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x04 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size2\x85\x1d\n" +
+	"_page_size\"\xcf\x02\n" +
+	"%SetOperatorRegisterLimitConfigRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12d\n" +
+	"\x06config\x18\x02 \x03(\v2L.api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigEntryR\x06config\x1ak\n" +
+	"\vConfigEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12F\n" +
+	"\x05value\x18\x02 \x01(\v20.api.user.service.v1.OperatorRegisterLimitConfigR\x05value:\x028\x01\"|\n" +
+	"%GetOperatorRegisterLimitConfigRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext2\xc5 \n" +
 	"\x12BackofficeOperator\x12\xa8\x01\n" +
 	"\x10ListAllOperators\x122.api.backoffice.service.v1.ListAllOperatorsRequest\x1a3.api.backoffice.service.v1.ListAllOperatorsResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/operator/list/all\x12\xa0\x01\n" +
 	"\x0eCreateOperator\x120.api.backoffice.service.v1.CreateOperatorRequest\x1a1.api.backoffice.service.v1.CreateOperatorResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/backoffice/operator/create\x12\xc2\x01\n" +
@@ -2433,7 +2564,9 @@ const file_backoffice_service_v1_backoffice_operator_proto_rawDesc = "" +
 	"\x1dUpdateOperatorAccountSettings\x12?.api.backoffice.service.v1.UpdateOperatorAccountSettingsRequest\x1a:.api.user.service.v1.UpdateOperatorAccountSettingsResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/backoffice/operator/account-settings/update\x12\xd1\x01\n" +
 	"\x19AddRegisterLoginBlacklist\x12;.api.backoffice.service.v1.AddRegisterLoginBlacklistRequest\x1a6.api.user.service.v1.AddRegisterLoginBlacklistResponse\"?\x82\xd3\xe4\x93\x029:\x01*\"4/v1/backoffice/operator/register-login-blacklist/add\x12\xdd\x01\n" +
 	"\x1cDeleteRegisterLoginBlacklist\x12>.api.backoffice.service.v1.DeleteRegisterLoginBlacklistRequest\x1a9.api.user.service.v1.DeleteRegisterLoginBlacklistResponse\"B\x82\xd3\xe4\x93\x02<:\x01*\"7/v1/backoffice/operator/register-login-blacklist/delete\x12\xd5\x01\n" +
-	"\x1aListRegisterLoginBlacklist\x12<.api.backoffice.service.v1.ListRegisterLoginBlacklistRequest\x1a7.api.user.service.v1.ListRegisterLoginBlacklistResponse\"@\x82\xd3\xe4\x93\x02::\x01*\"5/v1/backoffice/operator/register-login-blacklist/listB[\n" +
+	"\x1aListRegisterLoginBlacklist\x12<.api.backoffice.service.v1.ListRegisterLoginBlacklistRequest\x1a7.api.user.service.v1.ListRegisterLoginBlacklistResponse\"@\x82\xd3\xe4\x93\x02::\x01*\"5/v1/backoffice/operator/register-login-blacklist/list\x12\xdd\x01\n" +
+	"\x1eSetOperatorRegisterLimitConfig\x12@.api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest\x1a;.api.user.service.v1.SetOperatorRegisterLimitConfigResponse\"<\x82\xd3\xe4\x93\x026:\x01*\"1/v1/backoffice/operator/register-limit-config/set\x12\xdd\x01\n" +
+	"\x1eGetOperatorRegisterLimitConfig\x12@.api.backoffice.service.v1.GetOperatorRegisterLimitConfigRequest\x1a;.api.user.service.v1.GetOperatorRegisterLimitConfigResponse\"<\x82\xd3\xe4\x93\x026:\x01*\"1/v1/backoffice/operator/register-limit-config/getB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -2448,7 +2581,7 @@ func file_backoffice_service_v1_backoffice_operator_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_operator_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_operator_proto_msgTypes = make([]protoimpl.MessageInfo, 36)
+var file_backoffice_service_v1_backoffice_operator_proto_msgTypes = make([]protoimpl.MessageInfo, 39)
 var file_backoffice_service_v1_backoffice_operator_proto_goTypes = []any{
 	(*ListAllOperatorsRequest)(nil),                      // 0: api.backoffice.service.v1.ListAllOperatorsRequest
 	(*ListAllOperatorsResponse)(nil),                     // 1: api.backoffice.service.v1.ListAllOperatorsResponse
@@ -2482,80 +2615,97 @@ var file_backoffice_service_v1_backoffice_operator_proto_goTypes = []any{
 	(*AddRegisterLoginBlacklistRequest)(nil),             // 29: api.backoffice.service.v1.AddRegisterLoginBlacklistRequest
 	(*DeleteRegisterLoginBlacklistRequest)(nil),          // 30: api.backoffice.service.v1.DeleteRegisterLoginBlacklistRequest
 	(*ListRegisterLoginBlacklistRequest)(nil),            // 31: api.backoffice.service.v1.ListRegisterLoginBlacklistRequest
-	(*ListAllOperatorsResponse_Operator)(nil),            // 32: api.backoffice.service.v1.ListAllOperatorsResponse.Operator
-	(*ListRetailerOperatorsResponse_OperatorInfo)(nil),   // 33: api.backoffice.service.v1.ListRetailerOperatorsResponse.OperatorInfo
-	(*ListCompanyOperatorsResponse_OperatorInfo)(nil),    // 34: api.backoffice.service.v1.ListCompanyOperatorsResponse.OperatorInfo
-	(*ListBottomOperatorsResponse_OperatorInfo)(nil),     // 35: api.backoffice.service.v1.ListBottomOperatorsResponse.OperatorInfo
-	(*common.OperatorContext)(nil),                       // 36: api.common.OperatorContext
-	(*timestamppb.Timestamp)(nil),                        // 37: google.protobuf.Timestamp
-	(*v1.OperatorAccountSettings)(nil),                   // 38: api.user.service.v1.OperatorAccountSettings
-	(*v1.ListOperatorsByAdminEmailResponse)(nil),         // 39: api.user.service.v1.ListOperatorsByAdminEmailResponse
-	(*v1.GetOperatorAccountSettingsResponse)(nil),        // 40: api.user.service.v1.GetOperatorAccountSettingsResponse
-	(*v1.UpdateOperatorAccountSettingsResponse)(nil),     // 41: api.user.service.v1.UpdateOperatorAccountSettingsResponse
-	(*v1.AddRegisterLoginBlacklistResponse)(nil),         // 42: api.user.service.v1.AddRegisterLoginBlacklistResponse
-	(*v1.DeleteRegisterLoginBlacklistResponse)(nil),      // 43: api.user.service.v1.DeleteRegisterLoginBlacklistResponse
-	(*v1.ListRegisterLoginBlacklistResponse)(nil),        // 44: api.user.service.v1.ListRegisterLoginBlacklistResponse
+	(*SetOperatorRegisterLimitConfigRequest)(nil),        // 32: api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest
+	(*GetOperatorRegisterLimitConfigRequest)(nil),        // 33: api.backoffice.service.v1.GetOperatorRegisterLimitConfigRequest
+	(*ListAllOperatorsResponse_Operator)(nil),            // 34: api.backoffice.service.v1.ListAllOperatorsResponse.Operator
+	(*ListRetailerOperatorsResponse_OperatorInfo)(nil),   // 35: api.backoffice.service.v1.ListRetailerOperatorsResponse.OperatorInfo
+	(*ListCompanyOperatorsResponse_OperatorInfo)(nil),    // 36: api.backoffice.service.v1.ListCompanyOperatorsResponse.OperatorInfo
+	(*ListBottomOperatorsResponse_OperatorInfo)(nil),     // 37: api.backoffice.service.v1.ListBottomOperatorsResponse.OperatorInfo
+	nil,                                               // 38: api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigEntry
+	(*common.OperatorContext)(nil),                    // 39: api.common.OperatorContext
+	(*timestamppb.Timestamp)(nil),                     // 40: google.protobuf.Timestamp
+	(*v1.OperatorAccountSettings)(nil),                // 41: api.user.service.v1.OperatorAccountSettings
+	(*v1.OperatorRegisterLimitConfig)(nil),            // 42: api.user.service.v1.OperatorRegisterLimitConfig
+	(*v1.ListOperatorsByAdminEmailResponse)(nil),      // 43: api.user.service.v1.ListOperatorsByAdminEmailResponse
+	(*v1.GetOperatorAccountSettingsResponse)(nil),     // 44: api.user.service.v1.GetOperatorAccountSettingsResponse
+	(*v1.UpdateOperatorAccountSettingsResponse)(nil),  // 45: api.user.service.v1.UpdateOperatorAccountSettingsResponse
+	(*v1.AddRegisterLoginBlacklistResponse)(nil),      // 46: api.user.service.v1.AddRegisterLoginBlacklistResponse
+	(*v1.DeleteRegisterLoginBlacklistResponse)(nil),   // 47: api.user.service.v1.DeleteRegisterLoginBlacklistResponse
+	(*v1.ListRegisterLoginBlacklistResponse)(nil),     // 48: api.user.service.v1.ListRegisterLoginBlacklistResponse
+	(*v1.SetOperatorRegisterLimitConfigResponse)(nil), // 49: api.user.service.v1.SetOperatorRegisterLimitConfigResponse
+	(*v1.GetOperatorRegisterLimitConfigResponse)(nil), // 50: api.user.service.v1.GetOperatorRegisterLimitConfigResponse
 }
 var file_backoffice_service_v1_backoffice_operator_proto_depIdxs = []int32{
-	32, // 0: api.backoffice.service.v1.ListAllOperatorsResponse.operators:type_name -> api.backoffice.service.v1.ListAllOperatorsResponse.Operator
+	34, // 0: api.backoffice.service.v1.ListAllOperatorsResponse.operators:type_name -> api.backoffice.service.v1.ListAllOperatorsResponse.Operator
 	4,  // 1: api.backoffice.service.v1.GetCurrentOperatorDetailsResponse.operator_details:type_name -> api.backoffice.service.v1.OperatorDetails
 	4,  // 2: api.backoffice.service.v1.ListOperatorsByParentOperatorIdResponse.operator_details_list:type_name -> api.backoffice.service.v1.OperatorDetails
-	33, // 3: api.backoffice.service.v1.ListRetailerOperatorsResponse.retailer_operators:type_name -> api.backoffice.service.v1.ListRetailerOperatorsResponse.OperatorInfo
-	34, // 4: api.backoffice.service.v1.ListCompanyOperatorsResponse.company_operators:type_name -> api.backoffice.service.v1.ListCompanyOperatorsResponse.OperatorInfo
-	35, // 5: api.backoffice.service.v1.ListBottomOperatorsResponse.operators:type_name -> api.backoffice.service.v1.ListBottomOperatorsResponse.OperatorInfo
-	36, // 6: api.backoffice.service.v1.UpdateOperatorStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
-	37, // 7: api.backoffice.service.v1.UpdateOperatorStatusRequest.actionStart:type_name -> google.protobuf.Timestamp
-	37, // 8: api.backoffice.service.v1.UpdateOperatorStatusRequest.actionEnd:type_name -> google.protobuf.Timestamp
-	36, // 9: api.backoffice.service.v1.AddOperatorByoSubdomainRequest.target_operator_context:type_name -> api.common.OperatorContext
-	36, // 10: api.backoffice.service.v1.DeleteOperatorByoSubdomainRequest.target_operator_context:type_name -> api.common.OperatorContext
-	36, // 11: api.backoffice.service.v1.AddOperatorBackofficeByoSubdomainRequest.target_operator_context:type_name -> api.common.OperatorContext
-	36, // 12: api.backoffice.service.v1.DeleteOperatorBackofficeByoSubdomainRequest.target_operator_context:type_name -> api.common.OperatorContext
-	38, // 13: api.backoffice.service.v1.UpdateOperatorAccountSettingsRequest.account_settings:type_name -> api.user.service.v1.OperatorAccountSettings
-	36, // 14: api.backoffice.service.v1.ListAllOperatorsResponse.Operator.operator_context:type_name -> api.common.OperatorContext
-	36, // 15: api.backoffice.service.v1.ListRetailerOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
-	36, // 16: api.backoffice.service.v1.ListCompanyOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
-	36, // 17: api.backoffice.service.v1.ListBottomOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
-	0,  // 18: api.backoffice.service.v1.BackofficeOperator.ListAllOperators:input_type -> api.backoffice.service.v1.ListAllOperatorsRequest
-	2,  // 19: api.backoffice.service.v1.BackofficeOperator.CreateOperator:input_type -> api.backoffice.service.v1.CreateOperatorRequest
-	5,  // 20: api.backoffice.service.v1.BackofficeOperator.GetCurrentOperatorDetails:input_type -> api.backoffice.service.v1.GetCurrentOperatorDetailsRequest
-	7,  // 21: api.backoffice.service.v1.BackofficeOperator.ListOperatorsByParentOperatorId:input_type -> api.backoffice.service.v1.ListOperatorsByParentOperatorIdRequest
-	9,  // 22: api.backoffice.service.v1.BackofficeOperator.ListRetailerOperators:input_type -> api.backoffice.service.v1.ListRetailerOperatorsRequest
-	11, // 23: api.backoffice.service.v1.BackofficeOperator.ListCompanyOperators:input_type -> api.backoffice.service.v1.ListCompanyOperatorsRequest
-	13, // 24: api.backoffice.service.v1.BackofficeOperator.ListBottomOperators:input_type -> api.backoffice.service.v1.ListBottomOperatorsRequest
-	15, // 25: api.backoffice.service.v1.BackofficeOperator.UpdateOperatorStatus:input_type -> api.backoffice.service.v1.UpdateOperatorStatusRequest
-	17, // 26: api.backoffice.service.v1.BackofficeOperator.ListOperatorsByAdminEmail:input_type -> api.backoffice.service.v1.ListOperatorsByAdminEmailRequest
-	18, // 27: api.backoffice.service.v1.BackofficeOperator.AddOperatorByoSubdomain:input_type -> api.backoffice.service.v1.AddOperatorByoSubdomainRequest
-	20, // 28: api.backoffice.service.v1.BackofficeOperator.DeleteOperatorByoSubdomain:input_type -> api.backoffice.service.v1.DeleteOperatorByoSubdomainRequest
-	22, // 29: api.backoffice.service.v1.BackofficeOperator.AddOperatorBackofficeByoSubdomain:input_type -> api.backoffice.service.v1.AddOperatorBackofficeByoSubdomainRequest
-	24, // 30: api.backoffice.service.v1.BackofficeOperator.DeleteOperatorBackofficeByoSubdomain:input_type -> api.backoffice.service.v1.DeleteOperatorBackofficeByoSubdomainRequest
-	26, // 31: api.backoffice.service.v1.BackofficeOperator.GetOperatorAccountSettings:input_type -> api.backoffice.service.v1.GetOperatorAccountSettingsRequest
-	27, // 32: api.backoffice.service.v1.BackofficeOperator.UpdateOperatorAccountSettings:input_type -> api.backoffice.service.v1.UpdateOperatorAccountSettingsRequest
-	29, // 33: api.backoffice.service.v1.BackofficeOperator.AddRegisterLoginBlacklist:input_type -> api.backoffice.service.v1.AddRegisterLoginBlacklistRequest
-	30, // 34: api.backoffice.service.v1.BackofficeOperator.DeleteRegisterLoginBlacklist:input_type -> api.backoffice.service.v1.DeleteRegisterLoginBlacklistRequest
-	31, // 35: api.backoffice.service.v1.BackofficeOperator.ListRegisterLoginBlacklist:input_type -> api.backoffice.service.v1.ListRegisterLoginBlacklistRequest
-	1,  // 36: api.backoffice.service.v1.BackofficeOperator.ListAllOperators:output_type -> api.backoffice.service.v1.ListAllOperatorsResponse
-	3,  // 37: api.backoffice.service.v1.BackofficeOperator.CreateOperator:output_type -> api.backoffice.service.v1.CreateOperatorResponse
-	6,  // 38: api.backoffice.service.v1.BackofficeOperator.GetCurrentOperatorDetails:output_type -> api.backoffice.service.v1.GetCurrentOperatorDetailsResponse
-	8,  // 39: api.backoffice.service.v1.BackofficeOperator.ListOperatorsByParentOperatorId:output_type -> api.backoffice.service.v1.ListOperatorsByParentOperatorIdResponse
-	10, // 40: api.backoffice.service.v1.BackofficeOperator.ListRetailerOperators:output_type -> api.backoffice.service.v1.ListRetailerOperatorsResponse
-	12, // 41: api.backoffice.service.v1.BackofficeOperator.ListCompanyOperators:output_type -> api.backoffice.service.v1.ListCompanyOperatorsResponse
-	14, // 42: api.backoffice.service.v1.BackofficeOperator.ListBottomOperators:output_type -> api.backoffice.service.v1.ListBottomOperatorsResponse
-	16, // 43: api.backoffice.service.v1.BackofficeOperator.UpdateOperatorStatus:output_type -> api.backoffice.service.v1.UpdateOperatorStatusResponse
-	39, // 44: api.backoffice.service.v1.BackofficeOperator.ListOperatorsByAdminEmail:output_type -> api.user.service.v1.ListOperatorsByAdminEmailResponse
-	19, // 45: api.backoffice.service.v1.BackofficeOperator.AddOperatorByoSubdomain:output_type -> api.backoffice.service.v1.AddOperatorByoSubdomainResponse
-	21, // 46: api.backoffice.service.v1.BackofficeOperator.DeleteOperatorByoSubdomain:output_type -> api.backoffice.service.v1.DeleteOperatorByoSubdomainResponse
-	23, // 47: api.backoffice.service.v1.BackofficeOperator.AddOperatorBackofficeByoSubdomain:output_type -> api.backoffice.service.v1.AddOperatorBackofficeByoSubdomainResponse
-	25, // 48: api.backoffice.service.v1.BackofficeOperator.DeleteOperatorBackofficeByoSubdomain:output_type -> api.backoffice.service.v1.DeleteOperatorBackofficeByoSubdomainResponse
-	40, // 49: api.backoffice.service.v1.BackofficeOperator.GetOperatorAccountSettings:output_type -> api.user.service.v1.GetOperatorAccountSettingsResponse
-	41, // 50: api.backoffice.service.v1.BackofficeOperator.UpdateOperatorAccountSettings:output_type -> api.user.service.v1.UpdateOperatorAccountSettingsResponse
-	42, // 51: api.backoffice.service.v1.BackofficeOperator.AddRegisterLoginBlacklist:output_type -> api.user.service.v1.AddRegisterLoginBlacklistResponse
-	43, // 52: api.backoffice.service.v1.BackofficeOperator.DeleteRegisterLoginBlacklist:output_type -> api.user.service.v1.DeleteRegisterLoginBlacklistResponse
-	44, // 53: api.backoffice.service.v1.BackofficeOperator.ListRegisterLoginBlacklist:output_type -> api.user.service.v1.ListRegisterLoginBlacklistResponse
-	36, // [36:54] is the sub-list for method output_type
-	18, // [18:36] is the sub-list for method input_type
-	18, // [18:18] is the sub-list for extension type_name
-	18, // [18:18] is the sub-list for extension extendee
-	0,  // [0:18] is the sub-list for field type_name
+	35, // 3: api.backoffice.service.v1.ListRetailerOperatorsResponse.retailer_operators:type_name -> api.backoffice.service.v1.ListRetailerOperatorsResponse.OperatorInfo
+	36, // 4: api.backoffice.service.v1.ListCompanyOperatorsResponse.company_operators:type_name -> api.backoffice.service.v1.ListCompanyOperatorsResponse.OperatorInfo
+	37, // 5: api.backoffice.service.v1.ListBottomOperatorsResponse.operators:type_name -> api.backoffice.service.v1.ListBottomOperatorsResponse.OperatorInfo
+	39, // 6: api.backoffice.service.v1.UpdateOperatorStatusRequest.target_operator_context:type_name -> api.common.OperatorContext
+	40, // 7: api.backoffice.service.v1.UpdateOperatorStatusRequest.actionStart:type_name -> google.protobuf.Timestamp
+	40, // 8: api.backoffice.service.v1.UpdateOperatorStatusRequest.actionEnd:type_name -> google.protobuf.Timestamp
+	39, // 9: api.backoffice.service.v1.AddOperatorByoSubdomainRequest.target_operator_context:type_name -> api.common.OperatorContext
+	39, // 10: api.backoffice.service.v1.DeleteOperatorByoSubdomainRequest.target_operator_context:type_name -> api.common.OperatorContext
+	39, // 11: api.backoffice.service.v1.AddOperatorBackofficeByoSubdomainRequest.target_operator_context:type_name -> api.common.OperatorContext
+	39, // 12: api.backoffice.service.v1.DeleteOperatorBackofficeByoSubdomainRequest.target_operator_context:type_name -> api.common.OperatorContext
+	41, // 13: api.backoffice.service.v1.UpdateOperatorAccountSettingsRequest.account_settings:type_name -> api.user.service.v1.OperatorAccountSettings
+	39, // 14: api.backoffice.service.v1.AddRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
+	39, // 15: api.backoffice.service.v1.DeleteRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
+	39, // 16: api.backoffice.service.v1.ListRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
+	39, // 17: api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	38, // 18: api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest.config:type_name -> api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigEntry
+	39, // 19: api.backoffice.service.v1.GetOperatorRegisterLimitConfigRequest.target_operator_context:type_name -> api.common.OperatorContext
+	39, // 20: api.backoffice.service.v1.ListAllOperatorsResponse.Operator.operator_context:type_name -> api.common.OperatorContext
+	39, // 21: api.backoffice.service.v1.ListRetailerOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
+	39, // 22: api.backoffice.service.v1.ListCompanyOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
+	39, // 23: api.backoffice.service.v1.ListBottomOperatorsResponse.OperatorInfo.operator_context:type_name -> api.common.OperatorContext
+	42, // 24: api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest.ConfigEntry.value:type_name -> api.user.service.v1.OperatorRegisterLimitConfig
+	0,  // 25: api.backoffice.service.v1.BackofficeOperator.ListAllOperators:input_type -> api.backoffice.service.v1.ListAllOperatorsRequest
+	2,  // 26: api.backoffice.service.v1.BackofficeOperator.CreateOperator:input_type -> api.backoffice.service.v1.CreateOperatorRequest
+	5,  // 27: api.backoffice.service.v1.BackofficeOperator.GetCurrentOperatorDetails:input_type -> api.backoffice.service.v1.GetCurrentOperatorDetailsRequest
+	7,  // 28: api.backoffice.service.v1.BackofficeOperator.ListOperatorsByParentOperatorId:input_type -> api.backoffice.service.v1.ListOperatorsByParentOperatorIdRequest
+	9,  // 29: api.backoffice.service.v1.BackofficeOperator.ListRetailerOperators:input_type -> api.backoffice.service.v1.ListRetailerOperatorsRequest
+	11, // 30: api.backoffice.service.v1.BackofficeOperator.ListCompanyOperators:input_type -> api.backoffice.service.v1.ListCompanyOperatorsRequest
+	13, // 31: api.backoffice.service.v1.BackofficeOperator.ListBottomOperators:input_type -> api.backoffice.service.v1.ListBottomOperatorsRequest
+	15, // 32: api.backoffice.service.v1.BackofficeOperator.UpdateOperatorStatus:input_type -> api.backoffice.service.v1.UpdateOperatorStatusRequest
+	17, // 33: api.backoffice.service.v1.BackofficeOperator.ListOperatorsByAdminEmail:input_type -> api.backoffice.service.v1.ListOperatorsByAdminEmailRequest
+	18, // 34: api.backoffice.service.v1.BackofficeOperator.AddOperatorByoSubdomain:input_type -> api.backoffice.service.v1.AddOperatorByoSubdomainRequest
+	20, // 35: api.backoffice.service.v1.BackofficeOperator.DeleteOperatorByoSubdomain:input_type -> api.backoffice.service.v1.DeleteOperatorByoSubdomainRequest
+	22, // 36: api.backoffice.service.v1.BackofficeOperator.AddOperatorBackofficeByoSubdomain:input_type -> api.backoffice.service.v1.AddOperatorBackofficeByoSubdomainRequest
+	24, // 37: api.backoffice.service.v1.BackofficeOperator.DeleteOperatorBackofficeByoSubdomain:input_type -> api.backoffice.service.v1.DeleteOperatorBackofficeByoSubdomainRequest
+	26, // 38: api.backoffice.service.v1.BackofficeOperator.GetOperatorAccountSettings:input_type -> api.backoffice.service.v1.GetOperatorAccountSettingsRequest
+	27, // 39: api.backoffice.service.v1.BackofficeOperator.UpdateOperatorAccountSettings:input_type -> api.backoffice.service.v1.UpdateOperatorAccountSettingsRequest
+	29, // 40: api.backoffice.service.v1.BackofficeOperator.AddRegisterLoginBlacklist:input_type -> api.backoffice.service.v1.AddRegisterLoginBlacklistRequest
+	30, // 41: api.backoffice.service.v1.BackofficeOperator.DeleteRegisterLoginBlacklist:input_type -> api.backoffice.service.v1.DeleteRegisterLoginBlacklistRequest
+	31, // 42: api.backoffice.service.v1.BackofficeOperator.ListRegisterLoginBlacklist:input_type -> api.backoffice.service.v1.ListRegisterLoginBlacklistRequest
+	32, // 43: api.backoffice.service.v1.BackofficeOperator.SetOperatorRegisterLimitConfig:input_type -> api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest
+	33, // 44: api.backoffice.service.v1.BackofficeOperator.GetOperatorRegisterLimitConfig:input_type -> api.backoffice.service.v1.GetOperatorRegisterLimitConfigRequest
+	1,  // 45: api.backoffice.service.v1.BackofficeOperator.ListAllOperators:output_type -> api.backoffice.service.v1.ListAllOperatorsResponse
+	3,  // 46: api.backoffice.service.v1.BackofficeOperator.CreateOperator:output_type -> api.backoffice.service.v1.CreateOperatorResponse
+	6,  // 47: api.backoffice.service.v1.BackofficeOperator.GetCurrentOperatorDetails:output_type -> api.backoffice.service.v1.GetCurrentOperatorDetailsResponse
+	8,  // 48: api.backoffice.service.v1.BackofficeOperator.ListOperatorsByParentOperatorId:output_type -> api.backoffice.service.v1.ListOperatorsByParentOperatorIdResponse
+	10, // 49: api.backoffice.service.v1.BackofficeOperator.ListRetailerOperators:output_type -> api.backoffice.service.v1.ListRetailerOperatorsResponse
+	12, // 50: api.backoffice.service.v1.BackofficeOperator.ListCompanyOperators:output_type -> api.backoffice.service.v1.ListCompanyOperatorsResponse
+	14, // 51: api.backoffice.service.v1.BackofficeOperator.ListBottomOperators:output_type -> api.backoffice.service.v1.ListBottomOperatorsResponse
+	16, // 52: api.backoffice.service.v1.BackofficeOperator.UpdateOperatorStatus:output_type -> api.backoffice.service.v1.UpdateOperatorStatusResponse
+	43, // 53: api.backoffice.service.v1.BackofficeOperator.ListOperatorsByAdminEmail:output_type -> api.user.service.v1.ListOperatorsByAdminEmailResponse
+	19, // 54: api.backoffice.service.v1.BackofficeOperator.AddOperatorByoSubdomain:output_type -> api.backoffice.service.v1.AddOperatorByoSubdomainResponse
+	21, // 55: api.backoffice.service.v1.BackofficeOperator.DeleteOperatorByoSubdomain:output_type -> api.backoffice.service.v1.DeleteOperatorByoSubdomainResponse
+	23, // 56: api.backoffice.service.v1.BackofficeOperator.AddOperatorBackofficeByoSubdomain:output_type -> api.backoffice.service.v1.AddOperatorBackofficeByoSubdomainResponse
+	25, // 57: api.backoffice.service.v1.BackofficeOperator.DeleteOperatorBackofficeByoSubdomain:output_type -> api.backoffice.service.v1.DeleteOperatorBackofficeByoSubdomainResponse
+	44, // 58: api.backoffice.service.v1.BackofficeOperator.GetOperatorAccountSettings:output_type -> api.user.service.v1.GetOperatorAccountSettingsResponse
+	45, // 59: api.backoffice.service.v1.BackofficeOperator.UpdateOperatorAccountSettings:output_type -> api.user.service.v1.UpdateOperatorAccountSettingsResponse
+	46, // 60: api.backoffice.service.v1.BackofficeOperator.AddRegisterLoginBlacklist:output_type -> api.user.service.v1.AddRegisterLoginBlacklistResponse
+	47, // 61: api.backoffice.service.v1.BackofficeOperator.DeleteRegisterLoginBlacklist:output_type -> api.user.service.v1.DeleteRegisterLoginBlacklistResponse
+	48, // 62: api.backoffice.service.v1.BackofficeOperator.ListRegisterLoginBlacklist:output_type -> api.user.service.v1.ListRegisterLoginBlacklistResponse
+	49, // 63: api.backoffice.service.v1.BackofficeOperator.SetOperatorRegisterLimitConfig:output_type -> api.user.service.v1.SetOperatorRegisterLimitConfigResponse
+	50, // 64: api.backoffice.service.v1.BackofficeOperator.GetOperatorRegisterLimitConfig:output_type -> api.user.service.v1.GetOperatorRegisterLimitConfigResponse
+	45, // [45:65] is the sub-list for method output_type
+	25, // [25:45] is the sub-list for method input_type
+	25, // [25:25] is the sub-list for extension type_name
+	25, // [25:25] is the sub-list for extension extendee
+	0,  // [0:25] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_operator_proto_init() }
@@ -2572,7 +2722,7 @@ func file_backoffice_service_v1_backoffice_operator_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_operator_proto_rawDesc), len(file_backoffice_service_v1_backoffice_operator_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   36,
+			NumMessages:   39,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

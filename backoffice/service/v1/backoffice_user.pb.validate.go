@@ -1678,6 +1678,14 @@ func (m *UpdateUserRequest) validate(all bool) error {
 
 	}
 
+	if m.EmailVerified != nil {
+		// no validation rules for EmailVerified
+	}
+
+	if m.PhoneVerified != nil {
+		// no validation rules for PhoneVerified
+	}
+
 	if len(errors) > 0 {
 		return UpdateUserRequestMultiError(errors)
 	}

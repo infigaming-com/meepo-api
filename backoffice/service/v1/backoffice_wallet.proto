@@ -194,6 +194,14 @@ service BackofficeWallet {
 			body: "*"
 		};
 	}
+
+	// ListCustomerRecords lists customer records for all users (with deposit, withdraw, game bet, game win and manual credit(this is not supported yet))
+	rpc ListCustomerRecords(ListCustomerRecordsRequest) returns (wallet.service.v1.ListCustomerRecordsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/customer-records/list"
+			body: "*"
+		};
+	}
 }
 
 message GetWalletsRequest {
@@ -545,4 +553,14 @@ message DeleteWalletResponsibleGamblingConfigRequest {
 
 message ListWalletResponsibleGamblingConfigsRequest {
 	int64 user_id = 1;
+}
+
+message ListCustomerRecordsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional int64 transaction_id = 4;
+	optional string transaction_type = 5;
+	optional int32 page = 6;
+	optional int32 page_size = 7;
 }

@@ -87,8 +87,9 @@ const (
 	User_UserIdentityList_FullMethodName                = "/api.user.service.v1.User/UserIdentityList"
 	User_AddRegisterLoginBlacklist_FullMethodName       = "/api.user.service.v1.User/AddRegisterLoginBlacklist"
 	User_DeleteRegisterLoginBlacklist_FullMethodName    = "/api.user.service.v1.User/DeleteRegisterLoginBlacklist"
-	User_GetRegisterLoginBlacklist_FullMethodName       = "/api.user.service.v1.User/GetRegisterLoginBlacklist"
 	User_ListRegisterLoginBlacklist_FullMethodName      = "/api.user.service.v1.User/ListRegisterLoginBlacklist"
+	User_SetOperatorRegisterLimitConfig_FullMethodName  = "/api.user.service.v1.User/SetOperatorRegisterLimitConfig"
+	User_GetOperatorRegisterLimitConfig_FullMethodName  = "/api.user.service.v1.User/GetOperatorRegisterLimitConfig"
 )
 
 // UserClient is the client API for User service.
@@ -215,8 +216,9 @@ type UserClient interface {
 	UserIdentityList(ctx context.Context, in *UserIdentityListRequest, opts ...grpc.CallOption) (*UserIdentityListResponse, error)
 	AddRegisterLoginBlacklist(ctx context.Context, in *AddRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*AddRegisterLoginBlacklistResponse, error)
 	DeleteRegisterLoginBlacklist(ctx context.Context, in *DeleteRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*DeleteRegisterLoginBlacklistResponse, error)
-	GetRegisterLoginBlacklist(ctx context.Context, in *GetRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*GetRegisterLoginBlacklistResponse, error)
 	ListRegisterLoginBlacklist(ctx context.Context, in *ListRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*ListRegisterLoginBlacklistResponse, error)
+	SetOperatorRegisterLimitConfig(ctx context.Context, in *SetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*SetOperatorRegisterLimitConfigResponse, error)
+	GetOperatorRegisterLimitConfig(ctx context.Context, in *GetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*GetOperatorRegisterLimitConfigResponse, error)
 }
 
 type userClient struct {
@@ -907,20 +909,30 @@ func (c *userClient) DeleteRegisterLoginBlacklist(ctx context.Context, in *Delet
 	return out, nil
 }
 
-func (c *userClient) GetRegisterLoginBlacklist(ctx context.Context, in *GetRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*GetRegisterLoginBlacklistResponse, error) {
+func (c *userClient) ListRegisterLoginBlacklist(ctx context.Context, in *ListRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*ListRegisterLoginBlacklistResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetRegisterLoginBlacklistResponse)
-	err := c.cc.Invoke(ctx, User_GetRegisterLoginBlacklist_FullMethodName, in, out, cOpts...)
+	out := new(ListRegisterLoginBlacklistResponse)
+	err := c.cc.Invoke(ctx, User_ListRegisterLoginBlacklist_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userClient) ListRegisterLoginBlacklist(ctx context.Context, in *ListRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*ListRegisterLoginBlacklistResponse, error) {
+func (c *userClient) SetOperatorRegisterLimitConfig(ctx context.Context, in *SetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*SetOperatorRegisterLimitConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListRegisterLoginBlacklistResponse)
-	err := c.cc.Invoke(ctx, User_ListRegisterLoginBlacklist_FullMethodName, in, out, cOpts...)
+	out := new(SetOperatorRegisterLimitConfigResponse)
+	err := c.cc.Invoke(ctx, User_SetOperatorRegisterLimitConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetOperatorRegisterLimitConfig(ctx context.Context, in *GetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*GetOperatorRegisterLimitConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorRegisterLimitConfigResponse)
+	err := c.cc.Invoke(ctx, User_GetOperatorRegisterLimitConfig_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1051,8 +1063,9 @@ type UserServer interface {
 	UserIdentityList(context.Context, *UserIdentityListRequest) (*UserIdentityListResponse, error)
 	AddRegisterLoginBlacklist(context.Context, *AddRegisterLoginBlacklistRequest) (*AddRegisterLoginBlacklistResponse, error)
 	DeleteRegisterLoginBlacklist(context.Context, *DeleteRegisterLoginBlacklistRequest) (*DeleteRegisterLoginBlacklistResponse, error)
-	GetRegisterLoginBlacklist(context.Context, *GetRegisterLoginBlacklistRequest) (*GetRegisterLoginBlacklistResponse, error)
 	ListRegisterLoginBlacklist(context.Context, *ListRegisterLoginBlacklistRequest) (*ListRegisterLoginBlacklistResponse, error)
+	SetOperatorRegisterLimitConfig(context.Context, *SetOperatorRegisterLimitConfigRequest) (*SetOperatorRegisterLimitConfigResponse, error)
+	GetOperatorRegisterLimitConfig(context.Context, *GetOperatorRegisterLimitConfigRequest) (*GetOperatorRegisterLimitConfigResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -1267,11 +1280,14 @@ func (UnimplementedUserServer) AddRegisterLoginBlacklist(context.Context, *AddRe
 func (UnimplementedUserServer) DeleteRegisterLoginBlacklist(context.Context, *DeleteRegisterLoginBlacklistRequest) (*DeleteRegisterLoginBlacklistResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteRegisterLoginBlacklist not implemented")
 }
-func (UnimplementedUserServer) GetRegisterLoginBlacklist(context.Context, *GetRegisterLoginBlacklistRequest) (*GetRegisterLoginBlacklistResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetRegisterLoginBlacklist not implemented")
-}
 func (UnimplementedUserServer) ListRegisterLoginBlacklist(context.Context, *ListRegisterLoginBlacklistRequest) (*ListRegisterLoginBlacklistResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListRegisterLoginBlacklist not implemented")
+}
+func (UnimplementedUserServer) SetOperatorRegisterLimitConfig(context.Context, *SetOperatorRegisterLimitConfigRequest) (*SetOperatorRegisterLimitConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetOperatorRegisterLimitConfig not implemented")
+}
+func (UnimplementedUserServer) GetOperatorRegisterLimitConfig(context.Context, *GetOperatorRegisterLimitConfigRequest) (*GetOperatorRegisterLimitConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorRegisterLimitConfig not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -2518,24 +2534,6 @@ func _User_DeleteRegisterLoginBlacklist_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
-func _User_GetRegisterLoginBlacklist_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetRegisterLoginBlacklistRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserServer).GetRegisterLoginBlacklist(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: User_GetRegisterLoginBlacklist_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).GetRegisterLoginBlacklist(ctx, req.(*GetRegisterLoginBlacklistRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _User_ListRegisterLoginBlacklist_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListRegisterLoginBlacklistRequest)
 	if err := dec(in); err != nil {
@@ -2550,6 +2548,42 @@ func _User_ListRegisterLoginBlacklist_Handler(srv interface{}, ctx context.Conte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServer).ListRegisterLoginBlacklist(ctx, req.(*ListRegisterLoginBlacklistRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_SetOperatorRegisterLimitConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetOperatorRegisterLimitConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).SetOperatorRegisterLimitConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_SetOperatorRegisterLimitConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).SetOperatorRegisterLimitConfig(ctx, req.(*SetOperatorRegisterLimitConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetOperatorRegisterLimitConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorRegisterLimitConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetOperatorRegisterLimitConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetOperatorRegisterLimitConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetOperatorRegisterLimitConfig(ctx, req.(*GetOperatorRegisterLimitConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2834,12 +2868,16 @@ var User_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _User_DeleteRegisterLoginBlacklist_Handler,
 		},
 		{
-			MethodName: "GetRegisterLoginBlacklist",
-			Handler:    _User_GetRegisterLoginBlacklist_Handler,
-		},
-		{
 			MethodName: "ListRegisterLoginBlacklist",
 			Handler:    _User_ListRegisterLoginBlacklist_Handler,
+		},
+		{
+			MethodName: "SetOperatorRegisterLimitConfig",
+			Handler:    _User_SetOperatorRegisterLimitConfig_Handler,
+		},
+		{
+			MethodName: "GetOperatorRegisterLimitConfig",
+			Handler:    _User_GetOperatorRegisterLimitConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

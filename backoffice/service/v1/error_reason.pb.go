@@ -25,12 +25,13 @@ const (
 type ErrorReason int32
 
 const (
-	ErrorReason_UNSPECIFIED                       ErrorReason = 0
-	ErrorReason_CALL_WALLET_SERVICE_FAILED        ErrorReason = 60000
-	ErrorReason_OPERATOR_IDS_NOT_FOUND_IN_CONTEXT ErrorReason = 60001
-	ErrorReason_USER_INFO_NOT_FOUND_IN_CONTEXT    ErrorReason = 60002
-	ErrorReason_REPORT_TIME_RANGE_ERROR           ErrorReason = 60003
-	ErrorReason_REPORT_GET_DATA_ERROR             ErrorReason = 60004
+	ErrorReason_UNSPECIFIED                        ErrorReason = 0
+	ErrorReason_CALL_WALLET_SERVICE_FAILED         ErrorReason = 60000
+	ErrorReason_OPERATOR_IDS_NOT_FOUND_IN_CONTEXT  ErrorReason = 60001
+	ErrorReason_USER_INFO_NOT_FOUND_IN_CONTEXT     ErrorReason = 60002
+	ErrorReason_REPORT_TIME_RANGE_ERROR            ErrorReason = 60003
+	ErrorReason_REPORT_GET_DATA_ERROR              ErrorReason = 60004
+	ErrorReason_OPERATOR_CONTEXT_PERMISSION_DENIED ErrorReason = 60005
 )
 
 // Enum value maps for ErrorReason.
@@ -42,14 +43,16 @@ var (
 		60002: "USER_INFO_NOT_FOUND_IN_CONTEXT",
 		60003: "REPORT_TIME_RANGE_ERROR",
 		60004: "REPORT_GET_DATA_ERROR",
+		60005: "OPERATOR_CONTEXT_PERMISSION_DENIED",
 	}
 	ErrorReason_value = map[string]int32{
-		"UNSPECIFIED":                       0,
-		"CALL_WALLET_SERVICE_FAILED":        60000,
-		"OPERATOR_IDS_NOT_FOUND_IN_CONTEXT": 60001,
-		"USER_INFO_NOT_FOUND_IN_CONTEXT":    60002,
-		"REPORT_TIME_RANGE_ERROR":           60003,
-		"REPORT_GET_DATA_ERROR":             60004,
+		"UNSPECIFIED":                        0,
+		"CALL_WALLET_SERVICE_FAILED":         60000,
+		"OPERATOR_IDS_NOT_FOUND_IN_CONTEXT":  60001,
+		"USER_INFO_NOT_FOUND_IN_CONTEXT":     60002,
+		"REPORT_TIME_RANGE_ERROR":            60003,
+		"REPORT_GET_DATA_ERROR":              60004,
+		"OPERATOR_CONTEXT_PERMISSION_DENIED": 60005,
 	}
 )
 
@@ -84,14 +87,15 @@ var File_backoffice_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"(backoffice/service/v1/error_reason.proto\x12\x19api.backoffice.service.v1\x1a\x13errors/errors.proto*\xd1\x01\n" +
+	"(backoffice/service/v1/error_reason.proto\x12\x19api.backoffice.service.v1\x1a\x13errors/errors.proto*\xfb\x01\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12 \n" +
 	"\x1aCALL_WALLET_SERVICE_FAILED\x10\xe0\xd4\x03\x12'\n" +
 	"!OPERATOR_IDS_NOT_FOUND_IN_CONTEXT\x10\xe1\xd4\x03\x12$\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\xe2\xd4\x03\x12\x1d\n" +
 	"\x17REPORT_TIME_RANGE_ERROR\x10\xe3\xd4\x03\x12\x1b\n" +
-	"\x15REPORT_GET_DATA_ERROR\x10\xe4\xd4\x03\x1a\x04\xa0E\xf4\x03B[\n" +
+	"\x15REPORT_GET_DATA_ERROR\x10\xe4\xd4\x03\x12(\n" +
+	"\"OPERATOR_CONTEXT_PERMISSION_DENIED\x10\xe5\xd4\x03\x1a\x04\xa0E\xf4\x03B[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (

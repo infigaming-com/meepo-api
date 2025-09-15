@@ -1284,3 +1284,51 @@ func IsBlockedByRegisterLoginBlacklist(err error) bool {
 func ErrorBlockedByRegisterLoginBlacklist(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_BLOCKED_BY_REGISTER_LOGIN_BLACKLIST.String(), fmt.Sprintf(format, args...))
 }
+
+func IsInvalidOperatorRegisterLimitConfig(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_OPERATOR_REGISTER_LIMIT_CONFIG.String() && e.Code == 500
+}
+
+func ErrorInvalidOperatorRegisterLimitConfig(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_OPERATOR_REGISTER_LIMIT_CONFIG.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateOperatorFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_OPERATOR_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateOperatorFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_OPERATOR_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsRegistrationPerIpLimitExceeded(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_REGISTRATION_PER_IP_LIMIT_EXCEEDED.String() && e.Code == 500
+}
+
+func ErrorRegistrationPerIpLimitExceeded(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_REGISTRATION_PER_IP_LIMIT_EXCEEDED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUserInSelfExclusionPeriod(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_IN_SELF_EXCLUSION_PERIOD.String() && e.Code == 500
+}
+
+func ErrorUserInSelfExclusionPeriod(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_IN_SELF_EXCLUSION_PERIOD.String(), fmt.Sprintf(format, args...))
+}

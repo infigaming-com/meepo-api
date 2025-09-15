@@ -821,6 +821,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UploadOperatorStaticFileResponse'
+    /v1/backoffice/filestore/register-login-blacklist/upload:
+        post:
+            tags:
+                - BackofficeFileStore
+            operationId: BackofficeFileStore_UploadRegisterLoginBlacklist
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UploadRegisterLoginBlacklistRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.UploadRegisterLoginBlacklistResponse'
     /v1/backoffice/finance/adjustment-configs/create:
         post:
             tags:
@@ -1794,6 +1812,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListRetailerOperatorsResponse'
+    /v1/backoffice/operator/register-limit-config/get:
+        post:
+            tags:
+                - BackofficeOperator
+            operationId: BackofficeOperator_GetOperatorRegisterLimitConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorRegisterLimitConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.GetOperatorRegisterLimitConfigResponse'
+    /v1/backoffice/operator/register-limit-config/set:
+        post:
+            tags:
+                - BackofficeOperator
+            operationId: BackofficeOperator_SetOperatorRegisterLimitConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.SetOperatorRegisterLimitConfigResponse'
     /v1/backoffice/operator/register-login-blacklist/add:
         post:
             tags:
@@ -3156,6 +3210,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse'
+    /v1/backoffice/wallet/customer-records/list:
+        post:
+            tags:
+                - BackofficeWallet
+            description: ListCustomerRecords lists customer records for all users (with deposit, withdraw, game bet, game win and manual credit(this is not supported yet))
+            operationId: BackofficeWallet_ListCustomerRecords
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListCustomerRecordsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.ListCustomerRecordsResponse'
     /v1/backoffice/wallet/deduction-order/update:
         post:
             tags:
@@ -4290,6 +4363,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetUserResponse'
+    /v1/user/kyc/filestore/upload:
+        post:
+            tags:
+                - UserFileStore
+            operationId: UserFileStore_UploadKycFile
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.UploadKycRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.UploadKycResponse'
     /v1/user/operator/account-settings/get:
         post:
             tags:
@@ -4836,6 +4927,8 @@ components:
         api.backoffice.service.v1.AddRegisterLoginBlacklistRequest:
             type: object
             properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 idType:
                     type: string
                 ids:
@@ -5322,6 +5415,8 @@ components:
         api.backoffice.service.v1.DeleteRegisterLoginBlacklistRequest:
             type: object
             properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 idType:
                     type: string
                 ids:
@@ -5758,6 +5853,11 @@ components:
                         - $ref: '#/components/schemas/api.common.OperatorContextFilters'
                     description: ID of the Operator connect with this channel
             description: Used to retrieve a paginated list of payment channels with optional filters
+        api.backoffice.service.v1.GetOperatorRegisterLimitConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.GetOperatorTagsConfigRequest:
             type: object
             properties:
@@ -7318,6 +7418,27 @@ components:
                     type: array
                     items:
                         type: string
+        api.backoffice.service.v1.ListCustomerRecordsRequest:
+            type: object
+            properties:
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                userId:
+                    type: string
+                transactionId:
+                    type: string
+                transactionType:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListDepositDetailsRequest:
             type: object
             properties:
@@ -8370,6 +8491,8 @@ components:
         api.backoffice.service.v1.ListRegisterLoginBlacklistRequest:
             type: object
             properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 idType:
                     type: string
                 page:
@@ -8927,6 +9050,8 @@ components:
                 licenseProvider:
                     type: string
                     description: 'license_provider: south_afirca'
+                periodType:
+                    type: string
         api.backoffice.service.v1.ListTaxReportsResponse:
             type: object
             properties:
@@ -8975,12 +9100,10 @@ components:
                     type: string
                 eventCalculations:
                     type: string
-                declarationStatus:
+                status:
                     enum:
-                        - DECLARATION_STATUS_UNSPECIFIED
-                        - DECLARATION_STATUS_PENDING
-                        - DECLARATION_STATUS_CONFIRMED
-                        - DECLARATION_STATUS_DRAFT
+                        - TaxReportRecordStatus_PENDING
+                        - TaxReportRecordStatus_CONFIRMED
                     type: string
                     format: enum
                 createdAt:
@@ -9997,6 +10120,15 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
+        api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                config:
+                    type: object
+                    additionalProperties:
+                        $ref: '#/components/schemas/api.user.service.v1.OperatorRegisterLimitConfig'
         api.backoffice.service.v1.SetOperatorTagsConfigRequest:
             type: object
             properties:
@@ -10291,6 +10423,12 @@ components:
                     type: string
                 refCode:
                     type: string
+                status:
+                    enum:
+                        - TaxReportRecordStatus_PENDING
+                        - TaxReportRecordStatus_CONFIRMED
+                    type: string
+                    format: enum
         api.backoffice.service.v1.UpdateTaxReportResponse:
             type: object
             properties: {}
@@ -10347,6 +10485,12 @@ components:
                     type: string
                     description: date of birth
                     format: date-time
+                emailVerified:
+                    type: boolean
+                    description: email verified
+                phoneVerified:
+                    type: boolean
+                    description: phone verified
         api.backoffice.service.v1.UpdateUserResponse:
             type: object
             properties: {}
@@ -10421,6 +10565,19 @@ components:
                 filePath:
                     type: string
         api.backoffice.service.v1.UploadOperatorStaticFileResponse:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.UploadRegisterLoginBlacklistRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                data:
+                    type: string
+                    format: bytes
+                idType:
+                    type: string
+        api.backoffice.service.v1.UploadRegisterLoginBlacklistResponse:
             type: object
             properties: {}
         api.backoffice.service.v1.UserIdentityAuditRequest:
@@ -12432,6 +12589,13 @@ components:
             properties:
                 accountSettings:
                     $ref: '#/components/schemas/api.user.service.v1.OperatorAccountSettings'
+        api.user.service.v1.GetOperatorRegisterLimitConfigResponse:
+            type: object
+            properties:
+                config:
+                    type: object
+                    additionalProperties:
+                        $ref: '#/components/schemas/api.user.service.v1.OperatorRegisterLimitConfig'
         api.user.service.v1.GetResponsibleGamblingConfigRequest:
             type: object
             properties:
@@ -12495,13 +12659,53 @@ components:
                     type: string
                 registeredEmail:
                     type: string
+                firstName:
+                    type: string
+                lastName:
+                    type: string
                 kycLevel:
                     type: integer
                     format: int32
+                emailVerified:
+                    type: boolean
+                phoneVerified:
+                    type: boolean
+                bod:
+                    type: string
+                address:
+                    type: string
                 userIdentity:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.user.service.v1.UserIdentity'
+                emailChangeHistory:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.GetUserProfileResponse_ChangeRecord'
+                phoneChangeHistory:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.GetUserProfileResponse_ChangeRecord'
+                loginEmail:
+                    type: string
+                    description: Email.
+                loginMobile:
+                    type: string
+                    description: Mobile.
+        api.user.service.v1.GetUserProfileResponse_ChangeRecord:
+            type: object
+            properties:
+                changedAt:
+                    type: string
+                    format: date-time
+                new:
+                    type: string
+                old:
+                    type: string
+                ip:
+                    type: string
+                reviewer:
+                    type: string
         api.user.service.v1.GetUserProfileResponse_Comment:
             type: object
             properties:
@@ -12662,6 +12866,8 @@ components:
                 createdAt:
                     type: string
                     format: date-time
+                source:
+                    type: string
         api.user.service.v1.LoginRequest:
             type: object
             properties:
@@ -12850,6 +13056,12 @@ components:
                     type: array
                     items:
                         type: string
+        api.user.service.v1.OperatorRegisterLimitConfig:
+            type: object
+            properties:
+                registrationLimitPerIp:
+                    type: integer
+                    format: int32
         api.user.service.v1.RefreshTokenRequest:
             type: object
             properties:
@@ -12962,6 +13174,15 @@ components:
                     type: boolean
                 gameBetAllowed:
                     type: boolean
+                selfExclusionActive:
+                    type: boolean
+                breakInPlayActive:
+                    type: boolean
+                timeLimitsActive:
+                    type: boolean
+                timeLimitsNextInactiveTime:
+                    type: string
+                    format: date-time
         api.user.service.v1.SendEmailVerificationCodeRequest:
             type: object
             properties:
@@ -12982,6 +13203,9 @@ components:
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
         api.user.service.v1.SendPasswordResetCodeResponse:
+            type: object
+            properties: {}
+        api.user.service.v1.SetOperatorRegisterLimitConfigResponse:
             type: object
             properties: {}
         api.user.service.v1.TelegramAuthRequest:
@@ -13048,6 +13272,10 @@ components:
                 bod:
                     type: string
                     format: date-time
+                emailVerified:
+                    type: boolean
+                phoneVerified:
+                    type: boolean
                 operatorContext:
                     allOf:
                         - $ref: '#/components/schemas/api.common.OperatorContext'
@@ -13055,6 +13283,23 @@ components:
         api.user.service.v1.UpdateUserResponse:
             type: object
             properties: {}
+        api.user.service.v1.UploadKycRequest:
+            type: object
+            properties:
+                data:
+                    type: string
+                    format: bytes
+                contentType:
+                    type: string
+                filePath:
+                    type: string
+                idType:
+                    type: string
+        api.user.service.v1.UploadKycResponse:
+            type: object
+            properties:
+                fileUrl:
+                    type: string
         api.user.service.v1.UserIdentity:
             type: object
             properties:
@@ -13068,8 +13313,8 @@ components:
                     type: string
                 image:
                     type: string
-                verified:
-                    type: boolean
+                status:
+                    type: string
                 createdAt:
                     type: string
                     format: date-time
@@ -13077,6 +13322,8 @@ components:
                     type: string
                     format: date-time
                 operator:
+                    type: string
+                reviewer:
                     type: string
                 reviewTime:
                     type: integer
@@ -13090,6 +13337,8 @@ components:
                 id:
                     type: string
                 userId:
+                    type: string
+                status:
                     type: string
                 startTime:
                     type: string
@@ -13110,7 +13359,16 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.user.service.v1.UserIdentity'
-                totalPage:
+                totalCount:
+                    type: integer
+                    format: int32
+                approvedCount:
+                    type: integer
+                    format: int32
+                declinedCount:
+                    type: integer
+                    format: int32
+                pendingCount:
                     type: integer
                     format: int32
         api.user.service.v1.UserIdentityRequest:
@@ -13900,6 +14158,44 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.wallet.service.v1.ListCustomerRecordsResponse:
+            type: object
+            properties:
+                customerRecords:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.ListCustomerRecordsResponse_CustomerRecord'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.wallet.service.v1.ListCustomerRecordsResponse_CustomerRecord:
+            type: object
+            properties:
+                dateTime:
+                    type: string
+                    format: date-time
+                transactionType:
+                    type: string
+                userId:
+                    type: string
+                transactionId:
+                    type: string
+                currency:
+                    type: string
+                amountChanged:
+                    type: string
+                beforeBalance:
+                    type: string
+                afterBalance:
+                    type: string
+                externalTransactionId:
+                    type: string
         api.wallet.service.v1.ListResponsibleGamblingConfigsRequest:
             type: object
             properties:
@@ -15232,5 +15528,6 @@ tags:
       description: Review service provides review functionality.
     - name: User
       description: User service provides authentication and user management functionality.
+    - name: UserFileStore
     - name: Vip
     - name: Wallet

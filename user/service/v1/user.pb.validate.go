@@ -596,7 +596,34 @@ func (m *LoginWithInfoRequest) validate(all bool) error {
 
 	// no validation rules for Password
 
-	// no validation rules for OperatorId
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, LoginWithInfoRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, LoginWithInfoRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LoginWithInfoRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if all {
 		switch v := interface{}(m.GetHttpRequestInfo()).(type) {
@@ -5266,7 +5293,7 @@ func (m *UserIdentity) validate(all bool) error {
 
 	// no validation rules for Image
 
-	// no validation rules for Verified
+	// no validation rules for Status
 
 	if all {
 		switch v := interface{}(m.GetCreatedAt()).(type) {
@@ -5327,6 +5354,8 @@ func (m *UserIdentity) validate(all bool) error {
 	}
 
 	// no validation rules for Operator
+
+	// no validation rules for Reviewer
 
 	// no validation rules for ReviewTime
 
@@ -5576,6 +5605,14 @@ func (m *UpdateUserRequest) validate(all bool) error {
 			}
 		}
 
+	}
+
+	if m.EmailVerified != nil {
+		// no validation rules for EmailVerified
+	}
+
+	if m.PhoneVerified != nil {
+		// no validation rules for PhoneVerified
 	}
 
 	if len(errors) > 0 {
@@ -7464,7 +7501,19 @@ func (m *GetUserProfileResponse) validate(all bool) error {
 
 	// no validation rules for RegisteredEmail
 
+	// no validation rules for FirstName
+
+	// no validation rules for LastName
+
 	// no validation rules for KycLevel
+
+	// no validation rules for EmailVerified
+
+	// no validation rules for PhoneVerified
+
+	// no validation rules for Bod
+
+	// no validation rules for Address
 
 	for idx, item := range m.GetUserIdentity() {
 		_, _ = idx, item
@@ -7499,6 +7548,78 @@ func (m *GetUserProfileResponse) validate(all bool) error {
 		}
 
 	}
+
+	for idx, item := range m.GetEmailChangeHistory() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetUserProfileResponseValidationError{
+						field:  fmt.Sprintf("EmailChangeHistory[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetUserProfileResponseValidationError{
+						field:  fmt.Sprintf("EmailChangeHistory[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetUserProfileResponseValidationError{
+					field:  fmt.Sprintf("EmailChangeHistory[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	for idx, item := range m.GetPhoneChangeHistory() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetUserProfileResponseValidationError{
+						field:  fmt.Sprintf("PhoneChangeHistory[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetUserProfileResponseValidationError{
+						field:  fmt.Sprintf("PhoneChangeHistory[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetUserProfileResponseValidationError{
+					field:  fmt.Sprintf("PhoneChangeHistory[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for LoginEmail
+
+	// no validation rules for LoginMobile
 
 	if len(errors) > 0 {
 		return GetUserProfileResponseMultiError(errors)
@@ -17467,6 +17588,41 @@ func (m *ResponsibleGamblingStatus) validate(all bool) error {
 
 	// no validation rules for GameBetAllowed
 
+	// no validation rules for SelfExclusionActive
+
+	// no validation rules for BreakInPlayActive
+
+	// no validation rules for TimeLimitsActive
+
+	if all {
+		switch v := interface{}(m.GetTimeLimitsNextInactiveTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ResponsibleGamblingStatusValidationError{
+					field:  "TimeLimitsNextInactiveTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ResponsibleGamblingStatusValidationError{
+					field:  "TimeLimitsNextInactiveTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTimeLimitsNextInactiveTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ResponsibleGamblingStatusValidationError{
+				field:  "TimeLimitsNextInactiveTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return ResponsibleGamblingStatusMultiError(errors)
 	}
@@ -18202,6 +18358,10 @@ func (m *UserIdentityListRequest) validate(all bool) error {
 		// no validation rules for UserId
 	}
 
+	if m.Status != nil {
+		// no validation rules for Status
+	}
+
 	if m.StartTime != nil {
 
 		if all {
@@ -18404,7 +18564,13 @@ func (m *UserIdentityListResponse) validate(all bool) error {
 
 	}
 
-	// no validation rules for TotalPage
+	// no validation rules for TotalCount
+
+	// no validation rules for ApprovedCount
+
+	// no validation rules for DeclinedCount
+
+	// no validation rules for PendingCount
 
 	if len(errors) > 0 {
 		return UserIdentityListResponseMultiError(errors)
@@ -18532,6 +18698,35 @@ func (m *AddRegisterLoginBlacklistRequest) validate(all bool) error {
 		if err := v.Validate(); err != nil {
 			return AddRegisterLoginBlacklistRequestValidationError{
 				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AddRegisterLoginBlacklistRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AddRegisterLoginBlacklistRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AddRegisterLoginBlacklistRequestValidationError{
+				field:  "TargetOperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -18779,6 +18974,35 @@ func (m *DeleteRegisterLoginBlacklistRequest) validate(all bool) error {
 		}
 	}
 
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, DeleteRegisterLoginBlacklistRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, DeleteRegisterLoginBlacklistRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return DeleteRegisterLoginBlacklistRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	// no validation rules for IdType
 
 	if len(errors) > 0 {
@@ -18968,247 +19192,6 @@ var _ interface {
 	ErrorName() string
 } = DeleteRegisterLoginBlacklistResponseValidationError{}
 
-// Validate checks the field values on GetRegisterLoginBlacklistRequest with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *GetRegisterLoginBlacklistRequest) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on GetRegisterLoginBlacklistRequest with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the result is a list of violation errors wrapped in
-// GetRegisterLoginBlacklistRequestMultiError, or nil if none found.
-func (m *GetRegisterLoginBlacklistRequest) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *GetRegisterLoginBlacklistRequest) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if all {
-		switch v := interface{}(m.GetOperatorContext()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetRegisterLoginBlacklistRequestValidationError{
-					field:  "OperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, GetRegisterLoginBlacklistRequestValidationError{
-					field:  "OperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return GetRegisterLoginBlacklistRequestValidationError{
-				field:  "OperatorContext",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	// no validation rules for IdType
-
-	if len(errors) > 0 {
-		return GetRegisterLoginBlacklistRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-// GetRegisterLoginBlacklistRequestMultiError is an error wrapping multiple
-// validation errors returned by
-// GetRegisterLoginBlacklistRequest.ValidateAll() if the designated
-// constraints aren't met.
-type GetRegisterLoginBlacklistRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m GetRegisterLoginBlacklistRequestMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m GetRegisterLoginBlacklistRequestMultiError) AllErrors() []error { return m }
-
-// GetRegisterLoginBlacklistRequestValidationError is the validation error
-// returned by GetRegisterLoginBlacklistRequest.Validate if the designated
-// constraints aren't met.
-type GetRegisterLoginBlacklistRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e GetRegisterLoginBlacklistRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e GetRegisterLoginBlacklistRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e GetRegisterLoginBlacklistRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e GetRegisterLoginBlacklistRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e GetRegisterLoginBlacklistRequestValidationError) ErrorName() string {
-	return "GetRegisterLoginBlacklistRequestValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e GetRegisterLoginBlacklistRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sGetRegisterLoginBlacklistRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = GetRegisterLoginBlacklistRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = GetRegisterLoginBlacklistRequestValidationError{}
-
-// Validate checks the field values on GetRegisterLoginBlacklistResponse with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *GetRegisterLoginBlacklistResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on GetRegisterLoginBlacklistResponse
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// GetRegisterLoginBlacklistResponseMultiError, or nil if none found.
-func (m *GetRegisterLoginBlacklistResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *GetRegisterLoginBlacklistResponse) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if len(errors) > 0 {
-		return GetRegisterLoginBlacklistResponseMultiError(errors)
-	}
-
-	return nil
-}
-
-// GetRegisterLoginBlacklistResponseMultiError is an error wrapping multiple
-// validation errors returned by
-// GetRegisterLoginBlacklistResponse.ValidateAll() if the designated
-// constraints aren't met.
-type GetRegisterLoginBlacklistResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m GetRegisterLoginBlacklistResponseMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m GetRegisterLoginBlacklistResponseMultiError) AllErrors() []error { return m }
-
-// GetRegisterLoginBlacklistResponseValidationError is the validation error
-// returned by GetRegisterLoginBlacklistResponse.Validate if the designated
-// constraints aren't met.
-type GetRegisterLoginBlacklistResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e GetRegisterLoginBlacklistResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e GetRegisterLoginBlacklistResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e GetRegisterLoginBlacklistResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e GetRegisterLoginBlacklistResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e GetRegisterLoginBlacklistResponseValidationError) ErrorName() string {
-	return "GetRegisterLoginBlacklistResponseValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e GetRegisterLoginBlacklistResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sGetRegisterLoginBlacklistResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = GetRegisterLoginBlacklistResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = GetRegisterLoginBlacklistResponseValidationError{}
-
 // Validate checks the field values on ListRegisterLoginBlacklistRequest with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the first error encountered is returned, or nil if there are
@@ -19255,6 +19238,35 @@ func (m *ListRegisterLoginBlacklistRequest) validate(all bool) error {
 		if err := v.Validate(); err != nil {
 			return ListRegisterLoginBlacklistRequestValidationError{
 				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListRegisterLoginBlacklistRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListRegisterLoginBlacklistRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListRegisterLoginBlacklistRequestValidationError{
+				field:  "TargetOperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -19497,6 +19509,741 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListRegisterLoginBlacklistResponseValidationError{}
+
+// Validate checks the field values on OperatorRegisterLimitConfig with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *OperatorRegisterLimitConfig) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on OperatorRegisterLimitConfig with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// OperatorRegisterLimitConfigMultiError, or nil if none found.
+func (m *OperatorRegisterLimitConfig) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *OperatorRegisterLimitConfig) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RegistrationLimitPerIp
+
+	if len(errors) > 0 {
+		return OperatorRegisterLimitConfigMultiError(errors)
+	}
+
+	return nil
+}
+
+// OperatorRegisterLimitConfigMultiError is an error wrapping multiple
+// validation errors returned by OperatorRegisterLimitConfig.ValidateAll() if
+// the designated constraints aren't met.
+type OperatorRegisterLimitConfigMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m OperatorRegisterLimitConfigMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m OperatorRegisterLimitConfigMultiError) AllErrors() []error { return m }
+
+// OperatorRegisterLimitConfigValidationError is the validation error returned
+// by OperatorRegisterLimitConfig.Validate if the designated constraints
+// aren't met.
+type OperatorRegisterLimitConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e OperatorRegisterLimitConfigValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e OperatorRegisterLimitConfigValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e OperatorRegisterLimitConfigValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e OperatorRegisterLimitConfigValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e OperatorRegisterLimitConfigValidationError) ErrorName() string {
+	return "OperatorRegisterLimitConfigValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e OperatorRegisterLimitConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sOperatorRegisterLimitConfig.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = OperatorRegisterLimitConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = OperatorRegisterLimitConfigValidationError{}
+
+// Validate checks the field values on SetOperatorRegisterLimitConfigRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *SetOperatorRegisterLimitConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SetOperatorRegisterLimitConfigRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// SetOperatorRegisterLimitConfigRequestMultiError, or nil if none found.
+func (m *SetOperatorRegisterLimitConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetOperatorRegisterLimitConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SetOperatorRegisterLimitConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SetOperatorRegisterLimitConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SetOperatorRegisterLimitConfigRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SetOperatorRegisterLimitConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SetOperatorRegisterLimitConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SetOperatorRegisterLimitConfigRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	{
+		sorted_keys := make([]string, len(m.GetConfig()))
+		i := 0
+		for key := range m.GetConfig() {
+			sorted_keys[i] = key
+			i++
+		}
+		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
+		for _, key := range sorted_keys {
+			val := m.GetConfig()[key]
+			_ = val
+
+			// no validation rules for Config[key]
+
+			if all {
+				switch v := interface{}(val).(type) {
+				case interface{ ValidateAll() error }:
+					if err := v.ValidateAll(); err != nil {
+						errors = append(errors, SetOperatorRegisterLimitConfigRequestValidationError{
+							field:  fmt.Sprintf("Config[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				case interface{ Validate() error }:
+					if err := v.Validate(); err != nil {
+						errors = append(errors, SetOperatorRegisterLimitConfigRequestValidationError{
+							field:  fmt.Sprintf("Config[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				}
+			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
+				if err := v.Validate(); err != nil {
+					return SetOperatorRegisterLimitConfigRequestValidationError{
+						field:  fmt.Sprintf("Config[%v]", key),
+						reason: "embedded message failed validation",
+						cause:  err,
+					}
+				}
+			}
+
+		}
+	}
+
+	if len(errors) > 0 {
+		return SetOperatorRegisterLimitConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetOperatorRegisterLimitConfigRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// SetOperatorRegisterLimitConfigRequest.ValidateAll() if the designated
+// constraints aren't met.
+type SetOperatorRegisterLimitConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetOperatorRegisterLimitConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetOperatorRegisterLimitConfigRequestMultiError) AllErrors() []error { return m }
+
+// SetOperatorRegisterLimitConfigRequestValidationError is the validation error
+// returned by SetOperatorRegisterLimitConfigRequest.Validate if the
+// designated constraints aren't met.
+type SetOperatorRegisterLimitConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetOperatorRegisterLimitConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetOperatorRegisterLimitConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetOperatorRegisterLimitConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetOperatorRegisterLimitConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetOperatorRegisterLimitConfigRequestValidationError) ErrorName() string {
+	return "SetOperatorRegisterLimitConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetOperatorRegisterLimitConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetOperatorRegisterLimitConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetOperatorRegisterLimitConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetOperatorRegisterLimitConfigRequestValidationError{}
+
+// Validate checks the field values on SetOperatorRegisterLimitConfigResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *SetOperatorRegisterLimitConfigResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// SetOperatorRegisterLimitConfigResponse with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// SetOperatorRegisterLimitConfigResponseMultiError, or nil if none found.
+func (m *SetOperatorRegisterLimitConfigResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetOperatorRegisterLimitConfigResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return SetOperatorRegisterLimitConfigResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetOperatorRegisterLimitConfigResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// SetOperatorRegisterLimitConfigResponse.ValidateAll() if the designated
+// constraints aren't met.
+type SetOperatorRegisterLimitConfigResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetOperatorRegisterLimitConfigResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetOperatorRegisterLimitConfigResponseMultiError) AllErrors() []error { return m }
+
+// SetOperatorRegisterLimitConfigResponseValidationError is the validation
+// error returned by SetOperatorRegisterLimitConfigResponse.Validate if the
+// designated constraints aren't met.
+type SetOperatorRegisterLimitConfigResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetOperatorRegisterLimitConfigResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetOperatorRegisterLimitConfigResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetOperatorRegisterLimitConfigResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetOperatorRegisterLimitConfigResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetOperatorRegisterLimitConfigResponseValidationError) ErrorName() string {
+	return "SetOperatorRegisterLimitConfigResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetOperatorRegisterLimitConfigResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetOperatorRegisterLimitConfigResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetOperatorRegisterLimitConfigResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetOperatorRegisterLimitConfigResponseValidationError{}
+
+// Validate checks the field values on GetOperatorRegisterLimitConfigRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetOperatorRegisterLimitConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetOperatorRegisterLimitConfigRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetOperatorRegisterLimitConfigRequestMultiError, or nil if none found.
+func (m *GetOperatorRegisterLimitConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOperatorRegisterLimitConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetOperatorRegisterLimitConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetOperatorRegisterLimitConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetOperatorRegisterLimitConfigRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetOperatorRegisterLimitConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetOperatorRegisterLimitConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetOperatorRegisterLimitConfigRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetOperatorRegisterLimitConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOperatorRegisterLimitConfigRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// GetOperatorRegisterLimitConfigRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetOperatorRegisterLimitConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOperatorRegisterLimitConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOperatorRegisterLimitConfigRequestMultiError) AllErrors() []error { return m }
+
+// GetOperatorRegisterLimitConfigRequestValidationError is the validation error
+// returned by GetOperatorRegisterLimitConfigRequest.Validate if the
+// designated constraints aren't met.
+type GetOperatorRegisterLimitConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOperatorRegisterLimitConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOperatorRegisterLimitConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOperatorRegisterLimitConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOperatorRegisterLimitConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOperatorRegisterLimitConfigRequestValidationError) ErrorName() string {
+	return "GetOperatorRegisterLimitConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOperatorRegisterLimitConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOperatorRegisterLimitConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOperatorRegisterLimitConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOperatorRegisterLimitConfigRequestValidationError{}
+
+// Validate checks the field values on GetOperatorRegisterLimitConfigResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetOperatorRegisterLimitConfigResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetOperatorRegisterLimitConfigResponse with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// GetOperatorRegisterLimitConfigResponseMultiError, or nil if none found.
+func (m *GetOperatorRegisterLimitConfigResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOperatorRegisterLimitConfigResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	{
+		sorted_keys := make([]string, len(m.GetConfig()))
+		i := 0
+		for key := range m.GetConfig() {
+			sorted_keys[i] = key
+			i++
+		}
+		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
+		for _, key := range sorted_keys {
+			val := m.GetConfig()[key]
+			_ = val
+
+			// no validation rules for Config[key]
+
+			if all {
+				switch v := interface{}(val).(type) {
+				case interface{ ValidateAll() error }:
+					if err := v.ValidateAll(); err != nil {
+						errors = append(errors, GetOperatorRegisterLimitConfigResponseValidationError{
+							field:  fmt.Sprintf("Config[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				case interface{ Validate() error }:
+					if err := v.Validate(); err != nil {
+						errors = append(errors, GetOperatorRegisterLimitConfigResponseValidationError{
+							field:  fmt.Sprintf("Config[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				}
+			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
+				if err := v.Validate(); err != nil {
+					return GetOperatorRegisterLimitConfigResponseValidationError{
+						field:  fmt.Sprintf("Config[%v]", key),
+						reason: "embedded message failed validation",
+						cause:  err,
+					}
+				}
+			}
+
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetOperatorRegisterLimitConfigResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOperatorRegisterLimitConfigResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// GetOperatorRegisterLimitConfigResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetOperatorRegisterLimitConfigResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOperatorRegisterLimitConfigResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOperatorRegisterLimitConfigResponseMultiError) AllErrors() []error { return m }
+
+// GetOperatorRegisterLimitConfigResponseValidationError is the validation
+// error returned by GetOperatorRegisterLimitConfigResponse.Validate if the
+// designated constraints aren't met.
+type GetOperatorRegisterLimitConfigResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOperatorRegisterLimitConfigResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOperatorRegisterLimitConfigResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOperatorRegisterLimitConfigResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOperatorRegisterLimitConfigResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOperatorRegisterLimitConfigResponseValidationError) ErrorName() string {
+	return "GetOperatorRegisterLimitConfigResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOperatorRegisterLimitConfigResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOperatorRegisterLimitConfigResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOperatorRegisterLimitConfigResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOperatorRegisterLimitConfigResponseValidationError{}
 
 // Validate checks the field values on ListUsersResponse_User with the rules
 // defined in the proto definition for this message. If any rules are
@@ -20478,6 +21225,148 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetUserProfileResponse_CommentValidationError{}
+
+// Validate checks the field values on GetUserProfileResponse_ChangeRecord with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetUserProfileResponse_ChangeRecord) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserProfileResponse_ChangeRecord
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetUserProfileResponse_ChangeRecordMultiError, or nil if none found.
+func (m *GetUserProfileResponse_ChangeRecord) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserProfileResponse_ChangeRecord) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetChangedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetUserProfileResponse_ChangeRecordValidationError{
+					field:  "ChangedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetUserProfileResponse_ChangeRecordValidationError{
+					field:  "ChangedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetChangedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetUserProfileResponse_ChangeRecordValidationError{
+				field:  "ChangedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for New
+
+	// no validation rules for Old
+
+	// no validation rules for Ip
+
+	// no validation rules for Reviewer
+
+	if len(errors) > 0 {
+		return GetUserProfileResponse_ChangeRecordMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserProfileResponse_ChangeRecordMultiError is an error wrapping multiple
+// validation errors returned by
+// GetUserProfileResponse_ChangeRecord.ValidateAll() if the designated
+// constraints aren't met.
+type GetUserProfileResponse_ChangeRecordMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserProfileResponse_ChangeRecordMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserProfileResponse_ChangeRecordMultiError) AllErrors() []error { return m }
+
+// GetUserProfileResponse_ChangeRecordValidationError is the validation error
+// returned by GetUserProfileResponse_ChangeRecord.Validate if the designated
+// constraints aren't met.
+type GetUserProfileResponse_ChangeRecordValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserProfileResponse_ChangeRecordValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserProfileResponse_ChangeRecordValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserProfileResponse_ChangeRecordValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserProfileResponse_ChangeRecordValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserProfileResponse_ChangeRecordValidationError) ErrorName() string {
+	return "GetUserProfileResponse_ChangeRecordValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserProfileResponse_ChangeRecordValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserProfileResponse_ChangeRecord.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserProfileResponse_ChangeRecordValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserProfileResponse_ChangeRecordValidationError{}
 
 // Validate checks the field values on
 // GetOverviewDashboardFromUserResponse_RegisteredUsers with the rules defined
@@ -22130,6 +23019,8 @@ func (m *ListRegisterLoginBlacklistResponse_RegisterLoginBlacklist) validate(all
 			}
 		}
 	}
+
+	// no validation rules for Source
 
 	if len(errors) > 0 {
 		return ListRegisterLoginBlacklistResponse_RegisterLoginBlacklistMultiError(errors)

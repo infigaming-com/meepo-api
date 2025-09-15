@@ -45,6 +45,7 @@ const (
 	Game_GetDailyGameTransactionData_FullMethodName       = "/api.game.service.v1.Game/GetDailyGameTransactionData"
 	Game_ListProviderByIDs_FullMethodName                 = "/api.game.service.v1.Game/ListProviderByIDs"
 	Game_GetTaxReportConfig_FullMethodName                = "/api.game.service.v1.Game/GetTaxReportConfig"
+	Game_UpdateTaxReportConfig_FullMethodName             = "/api.game.service.v1.Game/UpdateTaxReportConfig"
 	Game_ListTaxReports_FullMethodName                    = "/api.game.service.v1.Game/ListTaxReports"
 	Game_UpdateTaxReport_FullMethodName                   = "/api.game.service.v1.Game/UpdateTaxReport"
 	Game_GetResponsibleGamblingStatus_FullMethodName      = "/api.game.service.v1.Game/GetResponsibleGamblingStatus"
@@ -83,6 +84,7 @@ type GameClient interface {
 	ListProviderByIDs(ctx context.Context, in *ListProviderByIDsRequest, opts ...grpc.CallOption) (*ListProviderByIDsResponse, error)
 	// Tax Report related APIs
 	GetTaxReportConfig(ctx context.Context, in *GetTaxReportConfigRequest, opts ...grpc.CallOption) (*GetTaxReportConfigResponse, error)
+	UpdateTaxReportConfig(ctx context.Context, in *UpdateTaxReportConfigRequest, opts ...grpc.CallOption) (*UpdateTaxReportConfigResponse, error)
 	ListTaxReports(ctx context.Context, in *ListTaxReportsRequest, opts ...grpc.CallOption) (*ListTaxReportsResponse, error)
 	UpdateTaxReport(ctx context.Context, in *UpdateTaxReportRequest, opts ...grpc.CallOption) (*UpdateTaxReportResponse, error)
 	GetResponsibleGamblingStatus(ctx context.Context, in *GetResponsibleGamblingStatusRequest, opts ...grpc.CallOption) (*GetResponsibleGamblingStatusResponse, error)
@@ -359,6 +361,16 @@ func (c *gameClient) GetTaxReportConfig(ctx context.Context, in *GetTaxReportCon
 	return out, nil
 }
 
+func (c *gameClient) UpdateTaxReportConfig(ctx context.Context, in *UpdateTaxReportConfigRequest, opts ...grpc.CallOption) (*UpdateTaxReportConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateTaxReportConfigResponse)
+	err := c.cc.Invoke(ctx, Game_UpdateTaxReportConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *gameClient) ListTaxReports(ctx context.Context, in *ListTaxReportsRequest, opts ...grpc.CallOption) (*ListTaxReportsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListTaxReportsResponse)
@@ -440,6 +452,7 @@ type GameServer interface {
 	ListProviderByIDs(context.Context, *ListProviderByIDsRequest) (*ListProviderByIDsResponse, error)
 	// Tax Report related APIs
 	GetTaxReportConfig(context.Context, *GetTaxReportConfigRequest) (*GetTaxReportConfigResponse, error)
+	UpdateTaxReportConfig(context.Context, *UpdateTaxReportConfigRequest) (*UpdateTaxReportConfigResponse, error)
 	ListTaxReports(context.Context, *ListTaxReportsRequest) (*ListTaxReportsResponse, error)
 	UpdateTaxReport(context.Context, *UpdateTaxReportRequest) (*UpdateTaxReportResponse, error)
 	GetResponsibleGamblingStatus(context.Context, *GetResponsibleGamblingStatusRequest) (*GetResponsibleGamblingStatusResponse, error)
@@ -533,6 +546,9 @@ func (UnimplementedGameServer) ListProviderByIDs(context.Context, *ListProviderB
 }
 func (UnimplementedGameServer) GetTaxReportConfig(context.Context, *GetTaxReportConfigRequest) (*GetTaxReportConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTaxReportConfig not implemented")
+}
+func (UnimplementedGameServer) UpdateTaxReportConfig(context.Context, *UpdateTaxReportConfigRequest) (*UpdateTaxReportConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTaxReportConfig not implemented")
 }
 func (UnimplementedGameServer) ListTaxReports(context.Context, *ListTaxReportsRequest) (*ListTaxReportsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListTaxReports not implemented")
@@ -1038,6 +1054,24 @@ func _Game_GetTaxReportConfig_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_UpdateTaxReportConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTaxReportConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).UpdateTaxReportConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_UpdateTaxReportConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).UpdateTaxReportConfig(ctx, req.(*UpdateTaxReportConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Game_ListTaxReports_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListTaxReportsRequest)
 	if err := dec(in); err != nil {
@@ -1238,6 +1272,10 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetTaxReportConfig",
 			Handler:    _Game_GetTaxReportConfig_Handler,
+		},
+		{
+			MethodName: "UpdateTaxReportConfig",
+			Handler:    _Game_UpdateTaxReportConfig_Handler,
 		},
 		{
 			MethodName: "ListTaxReports",
