@@ -26,6 +26,7 @@ const OperationGameListBets = "/api.game.service.v1.Game/ListBets"
 const OperationGameListCategories = "/api.game.service.v1.Game/ListCategories"
 const OperationGameListGames = "/api.game.service.v1.Game/ListGames"
 const OperationGameListProviders = "/api.game.service.v1.Game/ListProviders"
+const OperationGameListSportEvents = "/api.game.service.v1.Game/ListSportEvents"
 const OperationGamePlay = "/api.game.service.v1.Game/Play"
 const OperationGameRollback = "/api.game.service.v1.Game/Rollback"
 
@@ -37,6 +38,8 @@ type GameHTTPServer interface {
 	ListCategories(context.Context, *ListCategoriesRequest) (*ListCategoriesResponse, error)
 	ListGames(context.Context, *ListGamesRequest) (*ListGamesResponse, error)
 	ListProviders(context.Context, *ListProvidersRequest) (*ListProvidersResponse, error)
+	// ListSportEvents Sport Events related APIs
+	ListSportEvents(context.Context, *ListSportEventsRequest) (*ListSportEventsResponse, error)
 	Play(context.Context, *PlayRequest) (*PlayResponse, error)
 	Rollback(context.Context, *RollbackRequest) (*RollbackResponse, error)
 }
@@ -52,6 +55,7 @@ func RegisterGameHTTPServer(s *http.Server, srv GameHTTPServer) {
 	r.POST("/v1/game/play", _Game_Play0_HTTP_Handler(srv))
 	r.POST("/v1/game/rollback", _Game_Rollback0_HTTP_Handler(srv))
 	r.POST("/v1/game/bets/list", _Game_ListBets0_HTTP_Handler(srv))
+	r.POST("/v1/game/sport-events/list", _Game_ListSportEvents0_HTTP_Handler(srv))
 }
 
 func _Game_ListProviders0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
@@ -252,6 +256,28 @@ func _Game_ListBets0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) err
 	}
 }
 
+func _Game_ListSportEvents0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListSportEventsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationGameListSportEvents)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListSportEvents(ctx, req.(*ListSportEventsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListSportEventsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type GameHTTPClient interface {
 	Balance(ctx context.Context, req *BalanceRequest, opts ...http.CallOption) (rsp *BalanceResponse, err error)
 	CreateSession(ctx context.Context, req *CreateSessionRequest, opts ...http.CallOption) (rsp *CreateSessionResponse, err error)
@@ -260,6 +286,7 @@ type GameHTTPClient interface {
 	ListCategories(ctx context.Context, req *ListCategoriesRequest, opts ...http.CallOption) (rsp *ListCategoriesResponse, err error)
 	ListGames(ctx context.Context, req *ListGamesRequest, opts ...http.CallOption) (rsp *ListGamesResponse, err error)
 	ListProviders(ctx context.Context, req *ListProvidersRequest, opts ...http.CallOption) (rsp *ListProvidersResponse, err error)
+	ListSportEvents(ctx context.Context, req *ListSportEventsRequest, opts ...http.CallOption) (rsp *ListSportEventsResponse, err error)
 	Play(ctx context.Context, req *PlayRequest, opts ...http.CallOption) (rsp *PlayResponse, err error)
 	Rollback(ctx context.Context, req *RollbackRequest, opts ...http.CallOption) (rsp *RollbackResponse, err error)
 }
@@ -355,6 +382,19 @@ func (c *GameHTTPClientImpl) ListProviders(ctx context.Context, in *ListProvider
 	pattern := "/v1/game/providers/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationGameListProviders))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *GameHTTPClientImpl) ListSportEvents(ctx context.Context, in *ListSportEventsRequest, opts ...http.CallOption) (*ListSportEventsResponse, error) {
+	var out ListSportEventsResponse
+	pattern := "/v1/game/sport-events/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationGameListSportEvents))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

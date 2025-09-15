@@ -131,6 +131,18 @@ service Game {
 
 	rpc GetResponsibleGamblingStatus(GetResponsibleGamblingStatusRequest) returns (GetResponsibleGamblingStatusResponse) {
 	}
+
+	// Sport Events related APIs
+	rpc ListSportEvents(ListSportEventsRequest) returns (ListSportEventsResponse) {
+		option (google.api.http) = {
+			post: "/v1/game/sport-events/list"
+			body: "*"
+		};
+	}
+
+	rpc GetTransactionAndEventInfo(GetTransactionAndEventInfoRequest) returns (GetTransactionAndEventInfoResponse) {
+	}
+
 }
 
 message CreateOperatorRequest {
@@ -945,4 +957,87 @@ message GetResponsibleGamblingStatusResponse {
 		string monthly_loss_usage = 7;
 	}
 	repeated ResponsibleGamblingStatus responsible_gambling_statuses = 1;
+}
+
+// Sport Events related messages
+message ListSportEventsRequest {
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	optional int32 page = 2;
+	optional int32 page_size = 3;
+	optional string event_name = 4; // Event name filter
+	optional string venue = 5; // Venue filter
+	optional string tournament = 6; // Tournament filter
+	optional string status = 7; // Status filter (e.g., "Completed", "Pending", "Cancelled")
+	optional google.protobuf.Timestamp start_time = 8; // Start date filter
+	optional google.protobuf.Timestamp end_time = 9; // End date filter
+}
+
+message ListSportEventsResponse {
+	message SportEvent {
+		// Basic information
+		string event_id = 1; // e.g., "EV2025090901"
+		string event_name = 2; // e.g., "Premier League-Manchester United vs Chelsea Old Trafford | Premier League 2025/26"
+		string venue = 3; // Venue name
+		string tournament = 4; // Tournament name
+		
+		// Timing information (all in SAST timezone)
+		google.protobuf.Timestamp carded_time = 5; // Carded Time(SAST)
+		google.protobuf.Timestamp first_bet_time = 6; // First Bet Time(SAST)
+		google.protobuf.Timestamp last_bet_time = 7; // Last Bet Time(SAST)
+		google.protobuf.Timestamp no_more_bets_time = 8; // No More Bets Time(SAST)
+		google.protobuf.Timestamp result_processing_time = 9; // Result Processing Time(SAST)
+		google.protobuf.Timestamp revised_official_carded_time = 10; // Revised Official Carded Time(SAST) or null
+		
+		// Status information
+		string status = 13; // Event status (e.g., "Completed", "Pending", "Cancelled")
+		
+		// Timestamps
+		google.protobuf.Timestamp created_at = 18;
+		google.protobuf.Timestamp updated_at = 19;
+	}
+	
+	repeated SportEvent events = 1;
+	
+	// Summary information
+	int32 total_count = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+	int32 total_pages = 5;
+}
+
+// Transaction and Settlement related messages
+message GetTransactionAndEventInfoRequest {
+	string game_bet_id= 1;
+}
+
+message GetTransactionAndEventInfoResponse {
+	message TransactionInfo {
+		string game_transaction_id = 1; // e.g., "GAME-2025090422000"
+		string provider_transaction_id = 2; // e.g., "PROV-2025090422000"
+		google.protobuf.Timestamp settlement_time = 3; // e.g., "2025-09-04 22:01:30"
+		google.protobuf.Timestamp event_start_time = 4; // e.g., "2025-09-04 21:00:00"
+		string venue_tournament = 5; // e.g., "Santiago Bernabéu - UEFA Champions League 2024/25"
+		string odds = 6; // e.g., "1.55"
+		string wager_type = 7; // e.g., "Single"
+		string bet_currency = 8; // e.g., "ZAR"
+		string bet_amount = 9; // e.g., "R 350.00"
+		string win_multiplier = 10; // e.g., "1.55x"
+		string bet_settlement_currency = 11; // e.g., "ZAR"
+		string bet_settlement_amount = 12; // e.g., "R 350.00"
+		string payout_currency = 13; // e.g., "ZAR"
+		string payout_settlement_currency = 14; // e.g., "ZAR"
+		string payout_settlement_amount = 15; // e.g., "R 350.00"
+		string payout_amount = 16; // e.g., "R 350.00"
+		string valid_bet_amount = 17; // e.g., "R 350.00"
+	}
+
+	message EventSettlementInfo {
+		string selection_bet_details = 1; // e.g., "Real Madrid Win - Real Madrid vs AC Milan"
+		string event_description = 2; // e.g., "Champions League - Real Madrid vs AC Milan - Awaiting Match Result"
+		string settlement_details = 3; // e.g., "SET-2025090422001 - Bet Placed Successfully - Match in Progress"
+		string status = 4; // e.g., "Pending"
+	}
+
+	TransactionInfo transaction_info = 1;
+	EventSettlementInfo event_settlement_info = 2;
 }
