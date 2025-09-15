@@ -5293,7 +5293,7 @@ func (m *UserIdentity) validate(all bool) error {
 
 	// no validation rules for Image
 
-	// no validation rules for Verified
+	// no validation rules for Status
 
 	if all {
 		switch v := interface{}(m.GetCreatedAt()).(type) {
@@ -5354,6 +5354,8 @@ func (m *UserIdentity) validate(all bool) error {
 	}
 
 	// no validation rules for Operator
+
+	// no validation rules for Reviewer
 
 	// no validation rules for ReviewTime
 
@@ -18356,6 +18358,10 @@ func (m *UserIdentityListRequest) validate(all bool) error {
 		// no validation rules for UserId
 	}
 
+	if m.Status != nil {
+		// no validation rules for Status
+	}
+
 	if m.StartTime != nil {
 
 		if all {
@@ -18559,6 +18565,12 @@ func (m *UserIdentityListResponse) validate(all bool) error {
 	}
 
 	// no validation rules for TotalCount
+
+	// no validation rules for ApprovedCount
+
+	// no validation rules for DeclinedCount
+
+	// no validation rules for PendingCount
 
 	if len(errors) > 0 {
 		return UserIdentityListResponseMultiError(errors)

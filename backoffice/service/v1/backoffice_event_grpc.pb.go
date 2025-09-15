@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v4.25.6
-// source: backoffice/service/v1/backoffice.proto
+// source: backoffice/service/v1/backoffice_event.proto
 
 package v1
 
@@ -25,8 +25,6 @@ const (
 // BackofficeEventClient is the client API for BackofficeEvent service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-//
-// Backoffice service provides system and account management functionality.
 type BackofficeEventClient interface {
 	Event(ctx context.Context, in *EventRequest, opts ...grpc.CallOption) (*EventResponse, error)
 }
@@ -52,8 +50,6 @@ func (c *backofficeEventClient) Event(ctx context.Context, in *EventRequest, opt
 // BackofficeEventServer is the server API for BackofficeEvent service.
 // All implementations must embed UnimplementedBackofficeEventServer
 // for forward compatibility.
-//
-// Backoffice service provides system and account management functionality.
 type BackofficeEventServer interface {
 	Event(context.Context, *EventRequest) (*EventResponse, error)
 	mustEmbedUnimplementedBackofficeEventServer()
@@ -121,5 +117,5 @@ var BackofficeEvent_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "backoffice/service/v1/backoffice.proto",
+	Metadata: "backoffice/service/v1/backoffice_event.proto",
 }
