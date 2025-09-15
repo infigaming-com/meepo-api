@@ -2335,6 +2335,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListRegisterRetentionResponse'
+    /v1/backoffice/report/sport-events/list:
+        post:
+            tags:
+                - BackofficeReport
+            operationId: BackofficeReport_ListSportEvents
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListSportEventsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.ListSportEventsResponse'
     /v1/backoffice/report/summary/get:
         post:
             tags:
@@ -2371,6 +2389,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListSummariesResponse'
+    /v1/backoffice/report/transaction-and-event-info/get:
+        post:
+            tags:
+                - BackofficeReport
+            operationId: BackofficeReport_GetTransactionAndEventInfo
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTransactionAndEventInfoRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetTransactionAndEventInfoResponse'
     /v1/backoffice/report/withdraw-details/list:
         post:
             tags:
@@ -3767,6 +3803,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.game.service.v1.RollbackResponse'
+    /v1/game/sport-events/list:
+        post:
+            tags:
+                - Game
+            description: Sport Events related APIs
+            operationId: Game_ListSportEvents
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.ListSportEventsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.ListSportEventsResponse'
     /v1/payment/address/get:
         post:
             tags:
@@ -6293,6 +6348,69 @@ components:
                     type: string
                 systemOperatorName:
                     type: string
+        api.backoffice.service.v1.GetTransactionAndEventInfoRequest:
+            type: object
+            properties:
+                gameBetId:
+                    type: string
+            description: Transaction and Settlement related messages
+        api.backoffice.service.v1.GetTransactionAndEventInfoResponse:
+            type: object
+            properties:
+                transactionInfo:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.GetTransactionAndEventInfoResponse_TransactionInfo'
+                eventSettlementInfo:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.GetTransactionAndEventInfoResponse_EventSettlementInfo'
+        api.backoffice.service.v1.GetTransactionAndEventInfoResponse_EventSettlementInfo:
+            type: object
+            properties:
+                selectionBetDetails:
+                    type: string
+                eventDescription:
+                    type: string
+                settlementDetails:
+                    type: string
+                status:
+                    type: string
+        api.backoffice.service.v1.GetTransactionAndEventInfoResponse_TransactionInfo:
+            type: object
+            properties:
+                gameTransactionId:
+                    type: string
+                providerTransactionId:
+                    type: string
+                settlementTime:
+                    type: string
+                    format: date-time
+                eventStartTime:
+                    type: string
+                    format: date-time
+                venueTournament:
+                    type: string
+                odds:
+                    type: string
+                wagerType:
+                    type: string
+                betCurrency:
+                    type: string
+                betAmount:
+                    type: string
+                winMultiplier:
+                    type: string
+                betSettlementCurrency:
+                    type: string
+                betSettlementAmount:
+                    type: string
+                payoutCurrency:
+                    type: string
+                payoutSettlementCurrency:
+                    type: string
+                payoutSettlementAmount:
+                    type: string
+                payoutAmount:
+                    type: string
+                validBetAmount:
+                    type: string
         api.backoffice.service.v1.GetTransactionPageRequest:
             type: object
             properties:
@@ -8638,6 +8756,76 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.ListSportEventsRequest:
+            type: object
+            properties:
+                timeRange:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.TimeRange'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                eventName:
+                    type: string
+                venue:
+                    type: string
+                tournament:
+                    type: string
+        api.backoffice.service.v1.ListSportEventsResponse:
+            type: object
+            properties:
+                events:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListSportEventsResponse_SportEvent'
+                totalCount:
+                    type: integer
+                    description: Summary information
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                totalPages:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListSportEventsResponse_SportEvent:
+            type: object
+            properties:
+                eventId:
+                    type: string
+                    description: Basic information
+                eventName:
+                    type: string
+                venue:
+                    type: string
+                tournament:
+                    type: string
+                cardedTime:
+                    type: string
+                    description: Timing information (all in SAST timezone)
+                    format: date-time
+                firstBetTime:
+                    type: string
+                    format: date-time
+                lastBetTime:
+                    type: string
+                    format: date-time
+                noMoreBetsTime:
+                    type: string
+                    format: date-time
+                resultProcessingTime:
+                    type: string
+                    format: date-time
+                revisedOfficialCardedTime:
+                    type: string
+                    format: date-time
+                status:
+                    type: string
         api.backoffice.service.v1.ListSummariesRequest:
             type: object
             properties:
@@ -11679,6 +11867,93 @@ components:
                     format: int32
                 enabled:
                     type: boolean
+        api.game.service.v1.ListSportEventsRequest:
+            type: object
+            properties:
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                eventName:
+                    type: string
+                venue:
+                    type: string
+                tournament:
+                    type: string
+                status:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+            description: Sport Events related messages
+        api.game.service.v1.ListSportEventsResponse:
+            type: object
+            properties:
+                events:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.ListSportEventsResponse_SportEvent'
+                totalCount:
+                    type: integer
+                    description: Summary information
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                totalPages:
+                    type: integer
+                    format: int32
+        api.game.service.v1.ListSportEventsResponse_SportEvent:
+            type: object
+            properties:
+                eventId:
+                    type: string
+                    description: Basic information
+                eventName:
+                    type: string
+                venue:
+                    type: string
+                tournament:
+                    type: string
+                cardedTime:
+                    type: string
+                    description: Timing information (all in SAST timezone)
+                    format: date-time
+                firstBetTime:
+                    type: string
+                    format: date-time
+                lastBetTime:
+                    type: string
+                    format: date-time
+                noMoreBetsTime:
+                    type: string
+                    format: date-time
+                resultProcessingTime:
+                    type: string
+                    format: date-time
+                revisedOfficialCardedTime:
+                    type: string
+                    format: date-time
+                status:
+                    type: string
+                    description: Status information
+                createdAt:
+                    type: string
+                    description: Timestamps
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
         api.game.service.v1.ListUnpaidBetsResponse:
             type: object
             properties:
