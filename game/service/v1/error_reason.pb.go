@@ -48,6 +48,7 @@ const (
 	ErrorReason_BREAK_IN_PLAY_ENABLED                     ErrorReason = 40020
 	ErrorReason_SELF_EXCLUSION_ENABLED                    ErrorReason = 40021
 	ErrorReason_USER_DISABLED                             ErrorReason = 40022
+	ErrorReason_LIST_UNPAID_BETS_FAILED                   ErrorReason = 40023
 )
 
 // Enum value maps for ErrorReason.
@@ -76,6 +77,7 @@ var (
 		40020: "BREAK_IN_PLAY_ENABLED",
 		40021: "SELF_EXCLUSION_ENABLED",
 		40022: "USER_DISABLED",
+		40023: "LIST_UNPAID_BETS_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                               0,
@@ -101,6 +103,7 @@ var (
 		"BREAK_IN_PLAY_ENABLED":                     40020,
 		"SELF_EXCLUSION_ENABLED":                    40021,
 		"USER_DISABLED":                             40022,
+		"LIST_UNPAID_BETS_FAILED":                   40023,
 	}
 )
 
@@ -135,7 +138,7 @@ var File_game_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_game_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"game/service/v1/error_reason.proto\x12\x13api.game.service.v1\x1a\x13errors/errors.proto*\xdc\x05\n" +
+	"\"game/service/v1/error_reason.proto\x12\x13api.game.service.v1\x1a\x13errors/errors.proto*\xfb\x05\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x12GAME_BET_NOT_FOUND\x10\xc1\xb8\x02\x12\x1b\n" +
@@ -159,7 +162,8 @@ const file_game_service_v1_error_reason_proto_rawDesc = "" +
 	"\x13TIME_LIMITS_ENABLED\x10Ӹ\x02\x12\x1b\n" +
 	"\x15BREAK_IN_PLAY_ENABLED\x10Ը\x02\x12\x1c\n" +
 	"\x16SELF_EXCLUSION_ENABLED\x10ո\x02\x12\x13\n" +
-	"\rUSER_DISABLED\x10ָ\x02\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\rUSER_DISABLED\x10ָ\x02\x12\x1d\n" +
+	"\x17LIST_UNPAID_BETS_FAILED\x10\u05f8\x02\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.game.service.v1P\x01Z6github.com/infigaming-com/meepo-api/game/service/v1;v1b\x06proto3"
 
 var (

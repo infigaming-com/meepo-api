@@ -49,6 +49,7 @@ const (
 	Game_ListTaxReports_FullMethodName                    = "/api.game.service.v1.Game/ListTaxReports"
 	Game_UpdateTaxReport_FullMethodName                   = "/api.game.service.v1.Game/UpdateTaxReport"
 	Game_GetResponsibleGamblingStatus_FullMethodName      = "/api.game.service.v1.Game/GetResponsibleGamblingStatus"
+	Game_ListUnpaidBets_FullMethodName                    = "/api.game.service.v1.Game/ListUnpaidBets"
 )
 
 // GameClient is the client API for Game service.
@@ -86,6 +87,7 @@ type GameClient interface {
 	ListTaxReports(ctx context.Context, in *ListTaxReportsRequest, opts ...grpc.CallOption) (*ListTaxReportsResponse, error)
 	UpdateTaxReport(ctx context.Context, in *UpdateTaxReportRequest, opts ...grpc.CallOption) (*UpdateTaxReportResponse, error)
 	GetResponsibleGamblingStatus(ctx context.Context, in *GetResponsibleGamblingStatusRequest, opts ...grpc.CallOption) (*GetResponsibleGamblingStatusResponse, error)
+	ListUnpaidBets(ctx context.Context, in *ListUnpaidBetsRequest, opts ...grpc.CallOption) (*ListUnpaidBetsResponse, error)
 }
 
 type gameClient struct {
@@ -396,6 +398,16 @@ func (c *gameClient) GetResponsibleGamblingStatus(ctx context.Context, in *GetRe
 	return out, nil
 }
 
+func (c *gameClient) ListUnpaidBets(ctx context.Context, in *ListUnpaidBetsRequest, opts ...grpc.CallOption) (*ListUnpaidBetsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListUnpaidBetsResponse)
+	err := c.cc.Invoke(ctx, Game_ListUnpaidBets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GameServer is the server API for Game service.
 // All implementations must embed UnimplementedGameServer
 // for forward compatibility.
@@ -431,6 +443,7 @@ type GameServer interface {
 	ListTaxReports(context.Context, *ListTaxReportsRequest) (*ListTaxReportsResponse, error)
 	UpdateTaxReport(context.Context, *UpdateTaxReportRequest) (*UpdateTaxReportResponse, error)
 	GetResponsibleGamblingStatus(context.Context, *GetResponsibleGamblingStatusRequest) (*GetResponsibleGamblingStatusResponse, error)
+	ListUnpaidBets(context.Context, *ListUnpaidBetsRequest) (*ListUnpaidBetsResponse, error)
 	mustEmbedUnimplementedGameServer()
 }
 
@@ -530,6 +543,9 @@ func (UnimplementedGameServer) UpdateTaxReport(context.Context, *UpdateTaxReport
 }
 func (UnimplementedGameServer) GetResponsibleGamblingStatus(context.Context, *GetResponsibleGamblingStatusRequest) (*GetResponsibleGamblingStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetResponsibleGamblingStatus not implemented")
+}
+func (UnimplementedGameServer) ListUnpaidBets(context.Context, *ListUnpaidBetsRequest) (*ListUnpaidBetsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListUnpaidBets not implemented")
 }
 func (UnimplementedGameServer) mustEmbedUnimplementedGameServer() {}
 func (UnimplementedGameServer) testEmbeddedByValue()              {}
@@ -1092,6 +1108,24 @@ func _Game_GetResponsibleGamblingStatus_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_ListUnpaidBets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListUnpaidBetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).ListUnpaidBets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_ListUnpaidBets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).ListUnpaidBets(ctx, req.(*ListUnpaidBetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Game_ServiceDesc is the grpc.ServiceDesc for Game service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1218,6 +1252,10 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetResponsibleGamblingStatus",
 			Handler:    _Game_GetResponsibleGamblingStatus_Handler,
+		},
+		{
+			MethodName: "ListUnpaidBets",
+			Handler:    _Game_ListUnpaidBets_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
