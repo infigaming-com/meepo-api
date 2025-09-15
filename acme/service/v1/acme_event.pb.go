@@ -25,6 +25,7 @@ type EventRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	SubscriptionId string                 `protobuf:"bytes,1,opt,name=subscription_id,json=subscriptionId,proto3" json:"subscription_id,omitempty"`
 	EventData      []byte                 `protobuf:"bytes,2,opt,name=event_data,json=eventData,proto3" json:"event_data,omitempty"`
+	MessageId      string                 `protobuf:"bytes,3,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -73,6 +74,13 @@ func (x *EventRequest) GetEventData() []byte {
 	return nil
 }
 
+func (x *EventRequest) GetMessageId() string {
+	if x != nil {
+		return x.MessageId
+	}
+	return ""
+}
+
 type EventResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -113,11 +121,13 @@ var File_acme_service_v1_acme_event_proto protoreflect.FileDescriptor
 
 const file_acme_service_v1_acme_event_proto_rawDesc = "" +
 	"\n" +
-	" acme/service/v1/acme_event.proto\x12\x13api.acme.service.v1\"V\n" +
+	" acme/service/v1/acme_event.proto\x12\x13api.acme.service.v1\"u\n" +
 	"\fEventRequest\x12'\n" +
 	"\x0fsubscription_id\x18\x01 \x01(\tR\x0esubscriptionId\x12\x1d\n" +
 	"\n" +
-	"event_data\x18\x02 \x01(\fR\teventData\"\x0f\n" +
+	"event_data\x18\x02 \x01(\fR\teventData\x12\x1d\n" +
+	"\n" +
+	"message_id\x18\x03 \x01(\tR\tmessageId\"\x0f\n" +
 	"\rEventResponse2]\n" +
 	"\tacmeEvent\x12P\n" +
 	"\x05Event\x12!.api.acme.service.v1.EventRequest\x1a\".api.acme.service.v1.EventResponse\"\x00BO\n" +

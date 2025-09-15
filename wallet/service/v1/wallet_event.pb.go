@@ -26,6 +26,7 @@ type EventRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	SubscriptionId string                 `protobuf:"bytes,1,opt,name=subscription_id,json=subscriptionId,proto3" json:"subscription_id,omitempty"`
 	EventData      []byte                 `protobuf:"bytes,2,opt,name=event_data,json=eventData,proto3" json:"event_data,omitempty"`
+	MessageId      string                 `protobuf:"bytes,3,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -72,6 +73,13 @@ func (x *EventRequest) GetEventData() []byte {
 		return x.EventData
 	}
 	return nil
+}
+
+func (x *EventRequest) GetMessageId() string {
+	if x != nil {
+		return x.MessageId
+	}
+	return ""
 }
 
 type EventResponse struct {
@@ -650,11 +658,13 @@ var File_wallet_service_v1_wallet_event_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_wallet_event_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/wallet_event.proto\x12\x15api.wallet.service.v1\x1a\x13common/common.proto\"V\n" +
+	"$wallet/service/v1/wallet_event.proto\x12\x15api.wallet.service.v1\x1a\x13common/common.proto\"u\n" +
 	"\fEventRequest\x12'\n" +
 	"\x0fsubscription_id\x18\x01 \x01(\tR\x0esubscriptionId\x12\x1d\n" +
 	"\n" +
-	"event_data\x18\x02 \x01(\fR\teventData\"\x0f\n" +
+	"event_data\x18\x02 \x01(\fR\teventData\x12\x1d\n" +
+	"\n" +
+	"message_id\x18\x03 \x01(\tR\tmessageId\"\x0f\n" +
 	"\rEventResponse\"\xa0\x12\n" +
 	"\x12BalanceUpdateEvent\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12)\n" +
