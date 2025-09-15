@@ -4381,6 +4381,276 @@ var _ interface {
 	ErrorName() string
 } = ListSportEventsResponseValidationError{}
 
+// Validate checks the field values on GetTransactionAndEventInfoRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetTransactionAndEventInfoRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetTransactionAndEventInfoRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetTransactionAndEventInfoRequestMultiError, or nil if none found.
+func (m *GetTransactionAndEventInfoRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetTransactionAndEventInfoRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for GameBetId
+
+	if len(errors) > 0 {
+		return GetTransactionAndEventInfoRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetTransactionAndEventInfoRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// GetTransactionAndEventInfoRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetTransactionAndEventInfoRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetTransactionAndEventInfoRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetTransactionAndEventInfoRequestMultiError) AllErrors() []error { return m }
+
+// GetTransactionAndEventInfoRequestValidationError is the validation error
+// returned by GetTransactionAndEventInfoRequest.Validate if the designated
+// constraints aren't met.
+type GetTransactionAndEventInfoRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetTransactionAndEventInfoRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetTransactionAndEventInfoRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetTransactionAndEventInfoRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetTransactionAndEventInfoRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetTransactionAndEventInfoRequestValidationError) ErrorName() string {
+	return "GetTransactionAndEventInfoRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetTransactionAndEventInfoRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetTransactionAndEventInfoRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetTransactionAndEventInfoRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetTransactionAndEventInfoRequestValidationError{}
+
+// Validate checks the field values on GetTransactionAndEventInfoResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetTransactionAndEventInfoResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetTransactionAndEventInfoResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetTransactionAndEventInfoResponseMultiError, or nil if none found.
+func (m *GetTransactionAndEventInfoResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetTransactionAndEventInfoResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTransactionInfo()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTransactionAndEventInfoResponseValidationError{
+					field:  "TransactionInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTransactionAndEventInfoResponseValidationError{
+					field:  "TransactionInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTransactionInfo()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTransactionAndEventInfoResponseValidationError{
+				field:  "TransactionInfo",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetEventSettlementInfo()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTransactionAndEventInfoResponseValidationError{
+					field:  "EventSettlementInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTransactionAndEventInfoResponseValidationError{
+					field:  "EventSettlementInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetEventSettlementInfo()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTransactionAndEventInfoResponseValidationError{
+				field:  "EventSettlementInfo",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetTransactionAndEventInfoResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetTransactionAndEventInfoResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// GetTransactionAndEventInfoResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetTransactionAndEventInfoResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetTransactionAndEventInfoResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetTransactionAndEventInfoResponseMultiError) AllErrors() []error { return m }
+
+// GetTransactionAndEventInfoResponseValidationError is the validation error
+// returned by GetTransactionAndEventInfoResponse.Validate if the designated
+// constraints aren't met.
+type GetTransactionAndEventInfoResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetTransactionAndEventInfoResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetTransactionAndEventInfoResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetTransactionAndEventInfoResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetTransactionAndEventInfoResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetTransactionAndEventInfoResponseValidationError) ErrorName() string {
+	return "GetTransactionAndEventInfoResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetTransactionAndEventInfoResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetTransactionAndEventInfoResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetTransactionAndEventInfoResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetTransactionAndEventInfoResponseValidationError{}
+
 // Validate checks the field values on ListSummariesResponse_List with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -6344,3 +6614,331 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListSportEventsResponse_SportEventValidationError{}
+
+// Validate checks the field values on
+// GetTransactionAndEventInfoResponse_TransactionInfo with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *GetTransactionAndEventInfoResponse_TransactionInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetTransactionAndEventInfoResponse_TransactionInfo with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in
+// GetTransactionAndEventInfoResponse_TransactionInfoMultiError, or nil if
+// none found.
+func (m *GetTransactionAndEventInfoResponse_TransactionInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetTransactionAndEventInfoResponse_TransactionInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for GameTransactionId
+
+	// no validation rules for ProviderTransactionId
+
+	if all {
+		switch v := interface{}(m.GetSettlementTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTransactionAndEventInfoResponse_TransactionInfoValidationError{
+					field:  "SettlementTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTransactionAndEventInfoResponse_TransactionInfoValidationError{
+					field:  "SettlementTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetSettlementTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTransactionAndEventInfoResponse_TransactionInfoValidationError{
+				field:  "SettlementTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetEventStartTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTransactionAndEventInfoResponse_TransactionInfoValidationError{
+					field:  "EventStartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTransactionAndEventInfoResponse_TransactionInfoValidationError{
+					field:  "EventStartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetEventStartTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTransactionAndEventInfoResponse_TransactionInfoValidationError{
+				field:  "EventStartTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for VenueTournament
+
+	// no validation rules for Odds
+
+	// no validation rules for WagerType
+
+	// no validation rules for BetCurrency
+
+	// no validation rules for BetAmount
+
+	// no validation rules for WinMultiplier
+
+	// no validation rules for BetSettlementCurrency
+
+	// no validation rules for BetSettlementAmount
+
+	// no validation rules for PayoutCurrency
+
+	// no validation rules for PayoutSettlementCurrency
+
+	// no validation rules for PayoutSettlementAmount
+
+	// no validation rules for PayoutAmount
+
+	// no validation rules for ValidBetAmount
+
+	if len(errors) > 0 {
+		return GetTransactionAndEventInfoResponse_TransactionInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetTransactionAndEventInfoResponse_TransactionInfoMultiError is an error
+// wrapping multiple validation errors returned by
+// GetTransactionAndEventInfoResponse_TransactionInfo.ValidateAll() if the
+// designated constraints aren't met.
+type GetTransactionAndEventInfoResponse_TransactionInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetTransactionAndEventInfoResponse_TransactionInfoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetTransactionAndEventInfoResponse_TransactionInfoMultiError) AllErrors() []error { return m }
+
+// GetTransactionAndEventInfoResponse_TransactionInfoValidationError is the
+// validation error returned by
+// GetTransactionAndEventInfoResponse_TransactionInfo.Validate if the
+// designated constraints aren't met.
+type GetTransactionAndEventInfoResponse_TransactionInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetTransactionAndEventInfoResponse_TransactionInfoValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e GetTransactionAndEventInfoResponse_TransactionInfoValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e GetTransactionAndEventInfoResponse_TransactionInfoValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e GetTransactionAndEventInfoResponse_TransactionInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetTransactionAndEventInfoResponse_TransactionInfoValidationError) ErrorName() string {
+	return "GetTransactionAndEventInfoResponse_TransactionInfoValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetTransactionAndEventInfoResponse_TransactionInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetTransactionAndEventInfoResponse_TransactionInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetTransactionAndEventInfoResponse_TransactionInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetTransactionAndEventInfoResponse_TransactionInfoValidationError{}
+
+// Validate checks the field values on
+// GetTransactionAndEventInfoResponse_EventSettlementInfo with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetTransactionAndEventInfoResponse_EventSettlementInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetTransactionAndEventInfoResponse_EventSettlementInfo with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetTransactionAndEventInfoResponse_EventSettlementInfoMultiError, or nil if
+// none found.
+func (m *GetTransactionAndEventInfoResponse_EventSettlementInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetTransactionAndEventInfoResponse_EventSettlementInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for SelectionBetDetails
+
+	// no validation rules for EventDescription
+
+	// no validation rules for SettlementDetails
+
+	// no validation rules for Status
+
+	if len(errors) > 0 {
+		return GetTransactionAndEventInfoResponse_EventSettlementInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetTransactionAndEventInfoResponse_EventSettlementInfoMultiError is an error
+// wrapping multiple validation errors returned by
+// GetTransactionAndEventInfoResponse_EventSettlementInfo.ValidateAll() if the
+// designated constraints aren't met.
+type GetTransactionAndEventInfoResponse_EventSettlementInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetTransactionAndEventInfoResponse_EventSettlementInfoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetTransactionAndEventInfoResponse_EventSettlementInfoMultiError) AllErrors() []error {
+	return m
+}
+
+// GetTransactionAndEventInfoResponse_EventSettlementInfoValidationError is the
+// validation error returned by
+// GetTransactionAndEventInfoResponse_EventSettlementInfo.Validate if the
+// designated constraints aren't met.
+type GetTransactionAndEventInfoResponse_EventSettlementInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetTransactionAndEventInfoResponse_EventSettlementInfoValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e GetTransactionAndEventInfoResponse_EventSettlementInfoValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e GetTransactionAndEventInfoResponse_EventSettlementInfoValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e GetTransactionAndEventInfoResponse_EventSettlementInfoValidationError) Key() bool {
+	return e.key
+}
+
+// ErrorName returns error name.
+func (e GetTransactionAndEventInfoResponse_EventSettlementInfoValidationError) ErrorName() string {
+	return "GetTransactionAndEventInfoResponse_EventSettlementInfoValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetTransactionAndEventInfoResponse_EventSettlementInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetTransactionAndEventInfoResponse_EventSettlementInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetTransactionAndEventInfoResponse_EventSettlementInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetTransactionAndEventInfoResponse_EventSettlementInfoValidationError{}

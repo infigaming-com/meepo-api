@@ -137,6 +137,9 @@ service Game {
 		};
 	}
 
+	rpc GetTransactionAndEventInfo(GetTransactionAndEventInfoRequest) returns (GetTransactionAndEventInfoResponse) {
+	}
+
 }
 
 message CreateOperatorRequest {
@@ -995,4 +998,41 @@ message ListSportEventsResponse {
 	int32 page = 3;
 	int32 page_size = 4;
 	int32 total_pages = 5;
+}
+
+// Transaction and Settlement related messages
+message GetTransactionAndEventInfoRequest {
+	string game_bet_id= 1;
+}
+
+message GetTransactionAndEventInfoResponse {
+	message TransactionInfo {
+		string game_transaction_id = 1; // e.g., "GAME-2025090422000"
+		string provider_transaction_id = 2; // e.g., "PROV-2025090422000"
+		google.protobuf.Timestamp settlement_time = 3; // e.g., "2025-09-04 22:01:30"
+		google.protobuf.Timestamp event_start_time = 4; // e.g., "2025-09-04 21:00:00"
+		string venue_tournament = 5; // e.g., "Santiago Bernabéu - UEFA Champions League 2024/25"
+		string odds = 6; // e.g., "1.55"
+		string wager_type = 7; // e.g., "Single"
+		string bet_currency = 8; // e.g., "ZAR"
+		string bet_amount = 9; // e.g., "R 350.00"
+		string win_multiplier = 10; // e.g., "1.55x"
+		string bet_settlement_currency = 11; // e.g., "ZAR"
+		string bet_settlement_amount = 12; // e.g., "R 350.00"
+		string payout_currency = 13; // e.g., "ZAR"
+		string payout_settlement_currency = 14; // e.g., "ZAR"
+		string payout_settlement_amount = 15; // e.g., "R 350.00"
+		string payout_amount = 16; // e.g., "R 350.00"
+		string valid_bet_amount = 17; // e.g., "R 350.00"
+	}
+
+	message EventSettlementInfo {
+		string selection_bet_details = 1; // e.g., "Real Madrid Win - Real Madrid vs AC Milan"
+		string event_description = 2; // e.g., "Champions League - Real Madrid vs AC Milan - Awaiting Match Result"
+		string settlement_details = 3; // e.g., "SET-2025090422001 - Bet Placed Successfully - Match in Progress"
+		string status = 4; // e.g., "Pending"
+	}
+
+	TransactionInfo transaction_info = 1;
+	EventSettlementInfo event_settlement_info = 2;
 }
