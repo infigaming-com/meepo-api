@@ -114,6 +114,12 @@ service BackofficeGame {
 			body: "*"
 		};
 	}
+	rpc ListUnpaidBets(ListUnpaidBetsRequest) returns (game.service.v1.ListUnpaidBetsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/bets/unpaid/list"
+			body: "*"
+		};
+	}
 }
 
 
@@ -405,4 +411,13 @@ message ListProviderRatesResponse {
 
 message GetGameTransactionByIdRequest {
 	int64 transaction_id = 1;
+}
+
+message ListUnpaidBetsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional int64 transaction_id = 4;
+	optional int32 page = 5;
+	optional int32 page_size = 6;
 }

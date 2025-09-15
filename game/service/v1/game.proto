@@ -132,6 +132,9 @@ service Game {
 	rpc GetResponsibleGamblingStatus(GetResponsibleGamblingStatusRequest) returns (GetResponsibleGamblingStatusResponse) {
 	}
 
+	rpc ListUnpaidBets(ListUnpaidBetsRequest) returns (ListUnpaidBetsResponse) {
+	}
+
 	// Sport Events related APIs
 	rpc ListSportEvents(ListSportEventsRequest) returns (ListSportEventsResponse) {
 		option (google.api.http) = {
@@ -957,6 +960,42 @@ message GetResponsibleGamblingStatusResponse {
 		string monthly_loss_usage = 7;
 	}
 	repeated ResponsibleGamblingStatus responsible_gambling_statuses = 1;
+}
+
+message ListUnpaidBetsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional int64 transaction_id = 4;
+	optional int32 page = 5;
+	optional int32 page_size = 6;
+	api.common.OperatorContext operator_context = 7;
+}
+
+message ListUnpaidBetsResponse {
+	message UnpaidBet {
+		google.protobuf.Timestamp create_date_time = 1;
+		google.protobuf.Timestamp update_date_time = 2;
+		string status = 3; // always is pending
+		int64 user_id = 4;
+		int64 bet_id = 5;
+		int64 round_id = 6;
+		string category = 7;
+		string game_or_event = 8;
+		string game_or_event_id = 9;
+		string provider_name = 10;
+		string currency = 11;
+		string bet_amount = 12;
+		string payout_amount = 13;
+		string win_amount = 14; // payout_amount - bet_amount
+	}
+	repeated UnpaidBet unpaid_bets = 1;
+	int32 unpaid_bet_count = 2;
+	string total_amount = 3;
+	int32 unpaid_user_count = 4;
+	int32 total = 5;
+	int32 page = 6;
+	int32 page_size = 7;
 }
 
 // Sport Events related messages

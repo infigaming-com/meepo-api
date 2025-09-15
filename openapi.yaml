@@ -1307,6 +1307,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetGameTransactionsForBetResponse'
+    /v1/backoffice/game/bets/unpaid/list:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ListUnpaidBets
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListUnpaidBetsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.ListUnpaidBetsResponse'
     /v1/backoffice/game/categories/list:
         post:
             tags:
@@ -9201,6 +9219,25 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.ListUnpaidBetsRequest:
+            type: object
+            properties:
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                userId:
+                    type: string
+                transactionId:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListUserCommentsRequest:
             type: object
             properties:
@@ -11917,6 +11954,63 @@ components:
                 updatedAt:
                     type: string
                     format: date-time
+        api.game.service.v1.ListUnpaidBetsResponse:
+            type: object
+            properties:
+                unpaidBets:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.ListUnpaidBetsResponse_UnpaidBet'
+                unpaidBetCount:
+                    type: integer
+                    format: int32
+                totalAmount:
+                    type: string
+                unpaidUserCount:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.game.service.v1.ListUnpaidBetsResponse_UnpaidBet:
+            type: object
+            properties:
+                createDateTime:
+                    type: string
+                    format: date-time
+                updateDateTime:
+                    type: string
+                    format: date-time
+                status:
+                    type: string
+                userId:
+                    type: string
+                betId:
+                    type: string
+                roundId:
+                    type: string
+                category:
+                    type: string
+                gameOrEvent:
+                    type: string
+                gameOrEventId:
+                    type: string
+                providerName:
+                    type: string
+                currency:
+                    type: string
+                betAmount:
+                    type: string
+                payoutAmount:
+                    type: string
+                winAmount:
+                    type: string
         api.game.service.v1.PlayRequest:
             type: object
             properties:
