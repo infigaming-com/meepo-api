@@ -2542,6 +2542,134 @@ func (x *GetTransactionAndEventInfoResponse) GetEventSettlementInfo() *GetTransa
 	return nil
 }
 
+type CustomerRecordReportDetailRequest struct {
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	UserId               *int64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	PaymentTransactionId *int64                 `protobuf:"varint,2,opt,name=payment_transaction_id,json=paymentTransactionId,proto3,oneof" json:"payment_transaction_id,omitempty"`
+	GameTransactionId    *int64                 `protobuf:"varint,3,opt,name=game_transaction_id,json=gameTransactionId,proto3,oneof" json:"game_transaction_id,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *CustomerRecordReportDetailRequest) Reset() {
+	*x = CustomerRecordReportDetailRequest{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CustomerRecordReportDetailRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CustomerRecordReportDetailRequest) ProtoMessage() {}
+
+func (x *CustomerRecordReportDetailRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CustomerRecordReportDetailRequest.ProtoReflect.Descriptor instead.
+func (*CustomerRecordReportDetailRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *CustomerRecordReportDetailRequest) GetUserId() int64 {
+	if x != nil && x.UserId != nil {
+		return *x.UserId
+	}
+	return 0
+}
+
+func (x *CustomerRecordReportDetailRequest) GetPaymentTransactionId() int64 {
+	if x != nil && x.PaymentTransactionId != nil {
+		return *x.PaymentTransactionId
+	}
+	return 0
+}
+
+func (x *CustomerRecordReportDetailRequest) GetGameTransactionId() int64 {
+	if x != nil && x.GameTransactionId != nil {
+		return *x.GameTransactionId
+	}
+	return 0
+}
+
+type CustomerRecordReportDetailResponse struct {
+	state                      protoimpl.MessageState                                         `protogen:"open.v1"`
+	UserDetail                 *CustomerRecordReportDetailResponse_UserDetail                 `protobuf:"bytes,1,opt,name=user_detail,json=userDetail,proto3,oneof" json:"user_detail,omitempty"`
+	PaymentTransaction         *CustomerRecordReportDetailResponse_PaymentTransaction         `protobuf:"bytes,2,opt,name=payment_transaction,json=paymentTransaction,proto3,oneof" json:"payment_transaction,omitempty"`
+	GameTransaction            *CustomerRecordReportDetailResponse_GameTransaction            `protobuf:"bytes,3,opt,name=game_transaction,json=gameTransaction,proto3,oneof" json:"game_transaction,omitempty"`
+	EventSettlementInformation *CustomerRecordReportDetailResponse_EventSettlementInformation `protobuf:"bytes,4,opt,name=event_settlement_information,json=eventSettlementInformation,proto3,oneof" json:"event_settlement_information,omitempty"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
+}
+
+func (x *CustomerRecordReportDetailResponse) Reset() {
+	*x = CustomerRecordReportDetailResponse{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CustomerRecordReportDetailResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CustomerRecordReportDetailResponse) ProtoMessage() {}
+
+func (x *CustomerRecordReportDetailResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CustomerRecordReportDetailResponse.ProtoReflect.Descriptor instead.
+func (*CustomerRecordReportDetailResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *CustomerRecordReportDetailResponse) GetUserDetail() *CustomerRecordReportDetailResponse_UserDetail {
+	if x != nil {
+		return x.UserDetail
+	}
+	return nil
+}
+
+func (x *CustomerRecordReportDetailResponse) GetPaymentTransaction() *CustomerRecordReportDetailResponse_PaymentTransaction {
+	if x != nil {
+		return x.PaymentTransaction
+	}
+	return nil
+}
+
+func (x *CustomerRecordReportDetailResponse) GetGameTransaction() *CustomerRecordReportDetailResponse_GameTransaction {
+	if x != nil {
+		return x.GameTransaction
+	}
+	return nil
+}
+
+func (x *CustomerRecordReportDetailResponse) GetEventSettlementInformation() *CustomerRecordReportDetailResponse_EventSettlementInformation {
+	if x != nil {
+		return x.EventSettlementInformation
+	}
+	return nil
+}
+
 type ListSummariesResponse_List struct {
 	state                                       protoimpl.MessageState `protogen:"open.v1"`
 	Date                                        string                 `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
@@ -2619,7 +2747,7 @@ type ListSummariesResponse_List struct {
 
 func (x *ListSummariesResponse_List) Reset() {
 	*x = ListSummariesResponse_List{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[31]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2631,7 +2759,7 @@ func (x *ListSummariesResponse_List) String() string {
 func (*ListSummariesResponse_List) ProtoMessage() {}
 
 func (x *ListSummariesResponse_List) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[31]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3163,7 +3291,7 @@ type ListGameDataResponse_List struct {
 
 func (x *ListGameDataResponse_List) Reset() {
 	*x = ListGameDataResponse_List{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[32]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3175,7 +3303,7 @@ func (x *ListGameDataResponse_List) String() string {
 func (*ListGameDataResponse_List) ProtoMessage() {}
 
 func (x *ListGameDataResponse_List) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[32]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3397,7 +3525,7 @@ type ListPlayerGameDataResponse_List struct {
 
 func (x *ListPlayerGameDataResponse_List) Reset() {
 	*x = ListPlayerGameDataResponse_List{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[33]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3409,7 +3537,7 @@ func (x *ListPlayerGameDataResponse_List) String() string {
 func (*ListPlayerGameDataResponse_List) ProtoMessage() {}
 
 func (x *ListPlayerGameDataResponse_List) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[33]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3599,7 +3727,7 @@ type GetDepositSummariesResponse_DepositSummary struct {
 
 func (x *GetDepositSummariesResponse_DepositSummary) Reset() {
 	*x = GetDepositSummariesResponse_DepositSummary{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[34]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3611,7 +3739,7 @@ func (x *GetDepositSummariesResponse_DepositSummary) String() string {
 func (*GetDepositSummariesResponse_DepositSummary) ProtoMessage() {}
 
 func (x *GetDepositSummariesResponse_DepositSummary) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[34]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3702,7 +3830,7 @@ type ListDepositDetailsResponse_Detail struct {
 
 func (x *ListDepositDetailsResponse_Detail) Reset() {
 	*x = ListDepositDetailsResponse_Detail{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[35]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3714,7 +3842,7 @@ func (x *ListDepositDetailsResponse_Detail) String() string {
 func (*ListDepositDetailsResponse_Detail) ProtoMessage() {}
 
 func (x *ListDepositDetailsResponse_Detail) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[35]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3967,7 +4095,7 @@ type GetWithdrawSummariesResponse_WithdrawSummary struct {
 
 func (x *GetWithdrawSummariesResponse_WithdrawSummary) Reset() {
 	*x = GetWithdrawSummariesResponse_WithdrawSummary{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[36]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3979,7 +4107,7 @@ func (x *GetWithdrawSummariesResponse_WithdrawSummary) String() string {
 func (*GetWithdrawSummariesResponse_WithdrawSummary) ProtoMessage() {}
 
 func (x *GetWithdrawSummariesResponse_WithdrawSummary) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[36]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4074,7 +4202,7 @@ type ListWithdrawDetailsResponse_Detail struct {
 
 func (x *ListWithdrawDetailsResponse_Detail) Reset() {
 	*x = ListWithdrawDetailsResponse_Detail{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[37]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4086,7 +4214,7 @@ func (x *ListWithdrawDetailsResponse_Detail) String() string {
 func (*ListWithdrawDetailsResponse_Detail) ProtoMessage() {}
 
 func (x *ListWithdrawDetailsResponse_Detail) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[37]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4421,7 +4549,7 @@ type ListRegisterRetentionResponse_List struct {
 
 func (x *ListRegisterRetentionResponse_List) Reset() {
 	*x = ListRegisterRetentionResponse_List{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[38]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4433,7 +4561,7 @@ func (x *ListRegisterRetentionResponse_List) String() string {
 func (*ListRegisterRetentionResponse_List) ProtoMessage() {}
 
 func (x *ListRegisterRetentionResponse_List) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[38]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4899,7 +5027,7 @@ type ListDepositVtgDetailsResponse_Detail struct {
 
 func (x *ListDepositVtgDetailsResponse_Detail) Reset() {
 	*x = ListDepositVtgDetailsResponse_Detail{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[39]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4911,7 +5039,7 @@ func (x *ListDepositVtgDetailsResponse_Detail) String() string {
 func (*ListDepositVtgDetailsResponse_Detail) ProtoMessage() {}
 
 func (x *ListDepositVtgDetailsResponse_Detail) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[39]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5170,7 +5298,7 @@ type ListWithdrawVtgDetailsResponse_Detail struct {
 
 func (x *ListWithdrawVtgDetailsResponse_Detail) Reset() {
 	*x = ListWithdrawVtgDetailsResponse_Detail{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[40]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5182,7 +5310,7 @@ func (x *ListWithdrawVtgDetailsResponse_Detail) String() string {
 func (*ListWithdrawVtgDetailsResponse_Detail) ProtoMessage() {}
 
 func (x *ListWithdrawVtgDetailsResponse_Detail) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[40]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5443,7 +5571,7 @@ type ListSportEventsResponse_SportEvent struct {
 
 func (x *ListSportEventsResponse_SportEvent) Reset() {
 	*x = ListSportEventsResponse_SportEvent{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[41]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5455,7 +5583,7 @@ func (x *ListSportEventsResponse_SportEvent) String() string {
 func (*ListSportEventsResponse_SportEvent) ProtoMessage() {}
 
 func (x *ListSportEventsResponse_SportEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[41]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5573,7 +5701,7 @@ type GetTransactionAndEventInfoResponse_TransactionInfo struct {
 
 func (x *GetTransactionAndEventInfoResponse_TransactionInfo) Reset() {
 	*x = GetTransactionAndEventInfoResponse_TransactionInfo{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[42]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5585,7 +5713,7 @@ func (x *GetTransactionAndEventInfoResponse_TransactionInfo) String() string {
 func (*GetTransactionAndEventInfoResponse_TransactionInfo) ProtoMessage() {}
 
 func (x *GetTransactionAndEventInfoResponse_TransactionInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[42]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5732,7 +5860,7 @@ type GetTransactionAndEventInfoResponse_EventSettlementInfo struct {
 
 func (x *GetTransactionAndEventInfoResponse_EventSettlementInfo) Reset() {
 	*x = GetTransactionAndEventInfoResponse_EventSettlementInfo{}
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[43]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5744,7 +5872,7 @@ func (x *GetTransactionAndEventInfoResponse_EventSettlementInfo) String() string
 func (*GetTransactionAndEventInfoResponse_EventSettlementInfo) ProtoMessage() {}
 
 func (x *GetTransactionAndEventInfoResponse_EventSettlementInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[43]
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5784,6 +5912,434 @@ func (x *GetTransactionAndEventInfoResponse_EventSettlementInfo) GetSettlementDe
 func (x *GetTransactionAndEventInfoResponse_EventSettlementInfo) GetStatus() string {
 	if x != nil {
 		return x.Status
+	}
+	return ""
+}
+
+type CustomerRecordReportDetailResponse_UserDetail struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Phone         string                 `protobuf:"bytes,3,opt,name=phone,proto3" json:"phone,omitempty"`
+	IdType        string                 `protobuf:"bytes,4,opt,name=id_type,json=idType,proto3" json:"id_type,omitempty"`
+	IdNumber      string                 `protobuf:"bytes,5,opt,name=id_number,json=idNumber,proto3" json:"id_number,omitempty"`
+	Address       string                 `protobuf:"bytes,6,opt,name=address,proto3" json:"address,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CustomerRecordReportDetailResponse_UserDetail) Reset() {
+	*x = CustomerRecordReportDetailResponse_UserDetail{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[46]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CustomerRecordReportDetailResponse_UserDetail) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CustomerRecordReportDetailResponse_UserDetail) ProtoMessage() {}
+
+func (x *CustomerRecordReportDetailResponse_UserDetail) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[46]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CustomerRecordReportDetailResponse_UserDetail.ProtoReflect.Descriptor instead.
+func (*CustomerRecordReportDetailResponse_UserDetail) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{32, 0}
+}
+
+func (x *CustomerRecordReportDetailResponse_UserDetail) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *CustomerRecordReportDetailResponse_UserDetail) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_UserDetail) GetPhone() string {
+	if x != nil {
+		return x.Phone
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_UserDetail) GetIdType() string {
+	if x != nil {
+		return x.IdType
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_UserDetail) GetIdNumber() string {
+	if x != nil {
+		return x.IdNumber
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_UserDetail) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+type CustomerRecordReportDetailResponse_PaymentTransaction struct {
+	state                  protoimpl.MessageState `protogen:"open.v1"`
+	PaymentTransactionId   int64                  `protobuf:"varint,1,opt,name=payment_transaction_id,json=paymentTransactionId,proto3" json:"payment_transaction_id,omitempty"`
+	PspTransactionId       string                 `protobuf:"bytes,2,opt,name=psp_transaction_id,json=pspTransactionId,proto3" json:"psp_transaction_id,omitempty"`
+	ArrivalTime            *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=arrival_time,json=arrivalTime,proto3" json:"arrival_time,omitempty"`
+	PaymentServiceProvider string                 `protobuf:"bytes,4,opt,name=payment_service_provider,json=paymentServiceProvider,proto3" json:"payment_service_provider,omitempty"`
+	MethodOfPayment        string                 `protobuf:"bytes,5,opt,name=method_of_payment,json=methodOfPayment,proto3" json:"method_of_payment,omitempty"`
+	PaymentChannel         string                 `protobuf:"bytes,6,opt,name=payment_channel,json=paymentChannel,proto3" json:"payment_channel,omitempty"`
+	Currency               string                 `protobuf:"bytes,7,opt,name=currency,proto3" json:"currency,omitempty"`
+	Amount                 string                 `protobuf:"bytes,8,opt,name=amount,proto3" json:"amount,omitempty"`
+	ProcessingFee          string                 `protobuf:"bytes,9,opt,name=processing_fee,json=processingFee,proto3" json:"processing_fee,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *CustomerRecordReportDetailResponse_PaymentTransaction) Reset() {
+	*x = CustomerRecordReportDetailResponse_PaymentTransaction{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[47]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CustomerRecordReportDetailResponse_PaymentTransaction) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CustomerRecordReportDetailResponse_PaymentTransaction) ProtoMessage() {}
+
+func (x *CustomerRecordReportDetailResponse_PaymentTransaction) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[47]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CustomerRecordReportDetailResponse_PaymentTransaction.ProtoReflect.Descriptor instead.
+func (*CustomerRecordReportDetailResponse_PaymentTransaction) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{32, 1}
+}
+
+func (x *CustomerRecordReportDetailResponse_PaymentTransaction) GetPaymentTransactionId() int64 {
+	if x != nil {
+		return x.PaymentTransactionId
+	}
+	return 0
+}
+
+func (x *CustomerRecordReportDetailResponse_PaymentTransaction) GetPspTransactionId() string {
+	if x != nil {
+		return x.PspTransactionId
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_PaymentTransaction) GetArrivalTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ArrivalTime
+	}
+	return nil
+}
+
+func (x *CustomerRecordReportDetailResponse_PaymentTransaction) GetPaymentServiceProvider() string {
+	if x != nil {
+		return x.PaymentServiceProvider
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_PaymentTransaction) GetMethodOfPayment() string {
+	if x != nil {
+		return x.MethodOfPayment
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_PaymentTransaction) GetPaymentChannel() string {
+	if x != nil {
+		return x.PaymentChannel
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_PaymentTransaction) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_PaymentTransaction) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_PaymentTransaction) GetProcessingFee() string {
+	if x != nil {
+		return x.ProcessingFee
+	}
+	return ""
+}
+
+type CustomerRecordReportDetailResponse_GameTransaction struct {
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	GameTransactionId     int64                  `protobuf:"varint,1,opt,name=game_transaction_id,json=gameTransactionId,proto3" json:"game_transaction_id,omitempty"`
+	ProviderTransactionId string                 `protobuf:"bytes,2,opt,name=provider_transaction_id,json=providerTransactionId,proto3" json:"provider_transaction_id,omitempty"`
+	SettlementTime        string                 `protobuf:"bytes,3,opt,name=settlement_time,json=settlementTime,proto3" json:"settlement_time,omitempty"`
+	Venue_Tournament      string                 `protobuf:"bytes,4,opt,name=venue_Tournament,json=venueTournament,proto3" json:"venue_Tournament,omitempty"`
+	WagerType             string                 `protobuf:"bytes,5,opt,name=wager_type,json=wagerType,proto3" json:"wager_type,omitempty"`
+	BetCurrency           string                 `protobuf:"bytes,6,opt,name=bet_currency,json=betCurrency,proto3" json:"bet_currency,omitempty"`
+	BetAmount             string                 `protobuf:"bytes,7,opt,name=bet_amount,json=betAmount,proto3" json:"bet_amount,omitempty"`
+	PayoutCurrency        string                 `protobuf:"bytes,8,opt,name=payout_currency,json=payoutCurrency,proto3" json:"payout_currency,omitempty"`
+	PayoutAmount          string                 `protobuf:"bytes,9,opt,name=payout_amount,json=payoutAmount,proto3" json:"payout_amount,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *CustomerRecordReportDetailResponse_GameTransaction) Reset() {
+	*x = CustomerRecordReportDetailResponse_GameTransaction{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[48]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CustomerRecordReportDetailResponse_GameTransaction) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CustomerRecordReportDetailResponse_GameTransaction) ProtoMessage() {}
+
+func (x *CustomerRecordReportDetailResponse_GameTransaction) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[48]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CustomerRecordReportDetailResponse_GameTransaction.ProtoReflect.Descriptor instead.
+func (*CustomerRecordReportDetailResponse_GameTransaction) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{32, 2}
+}
+
+func (x *CustomerRecordReportDetailResponse_GameTransaction) GetGameTransactionId() int64 {
+	if x != nil {
+		return x.GameTransactionId
+	}
+	return 0
+}
+
+func (x *CustomerRecordReportDetailResponse_GameTransaction) GetProviderTransactionId() string {
+	if x != nil {
+		return x.ProviderTransactionId
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_GameTransaction) GetSettlementTime() string {
+	if x != nil {
+		return x.SettlementTime
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_GameTransaction) GetVenue_Tournament() string {
+	if x != nil {
+		return x.Venue_Tournament
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_GameTransaction) GetWagerType() string {
+	if x != nil {
+		return x.WagerType
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_GameTransaction) GetBetCurrency() string {
+	if x != nil {
+		return x.BetCurrency
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_GameTransaction) GetBetAmount() string {
+	if x != nil {
+		return x.BetAmount
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_GameTransaction) GetPayoutCurrency() string {
+	if x != nil {
+		return x.PayoutCurrency
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_GameTransaction) GetPayoutAmount() string {
+	if x != nil {
+		return x.PayoutAmount
+	}
+	return ""
+}
+
+type CustomerRecordReportDetailResponse_EventSettlementInformation struct {
+	state               protoimpl.MessageState                                                        `protogen:"open.v1"`
+	SelectionBetDetails string                                                                        `protobuf:"bytes,1,opt,name=selection_bet_details,json=selectionBetDetails,proto3" json:"selection_bet_details,omitempty"`
+	EventDescription    string                                                                        `protobuf:"bytes,2,opt,name=event_description,json=eventDescription,proto3" json:"event_description,omitempty"`
+	SettlementDetails   string                                                                        `protobuf:"bytes,3,opt,name=settlement_details,json=settlementDetails,proto3" json:"settlement_details,omitempty"`
+	MatchResults        []*CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults `protobuf:"bytes,4,rep,name=match_results,json=matchResults,proto3" json:"match_results,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *CustomerRecordReportDetailResponse_EventSettlementInformation) Reset() {
+	*x = CustomerRecordReportDetailResponse_EventSettlementInformation{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[49]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CustomerRecordReportDetailResponse_EventSettlementInformation) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CustomerRecordReportDetailResponse_EventSettlementInformation) ProtoMessage() {}
+
+func (x *CustomerRecordReportDetailResponse_EventSettlementInformation) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[49]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CustomerRecordReportDetailResponse_EventSettlementInformation.ProtoReflect.Descriptor instead.
+func (*CustomerRecordReportDetailResponse_EventSettlementInformation) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{32, 3}
+}
+
+func (x *CustomerRecordReportDetailResponse_EventSettlementInformation) GetSelectionBetDetails() string {
+	if x != nil {
+		return x.SelectionBetDetails
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_EventSettlementInformation) GetEventDescription() string {
+	if x != nil {
+		return x.EventDescription
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_EventSettlementInformation) GetSettlementDetails() string {
+	if x != nil {
+		return x.SettlementDetails
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_EventSettlementInformation) GetMatchResults() []*CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults {
+	if x != nil {
+		return x.MatchResults
+	}
+	return nil
+}
+
+type CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	Selection     string                 `protobuf:"bytes,3,opt,name=selection,proto3" json:"selection,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults) Reset() {
+	*x = CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults{}
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[50]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults) ProtoMessage() {}
+
+func (x *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_report_proto_msgTypes[50]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults.ProtoReflect.Descriptor instead.
+func (*CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{32, 3, 0}
+}
+
+func (x *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults) GetSelection() string {
+	if x != nil {
+		return x.Selection
 	}
 	return ""
 }
@@ -6453,7 +7009,64 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x15selection_bet_details\x18\x01 \x01(\tR\x13selectionBetDetails\x12+\n" +
 	"\x11event_description\x18\x02 \x01(\tR\x10eventDescription\x12-\n" +
 	"\x12settlement_details\x18\x03 \x01(\tR\x11settlementDetails\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\tR\x06status2\x83\x16\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\"\xf0\x01\n" +
+	"!CustomerRecordReportDetailRequest\x12\x1c\n" +
+	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x129\n" +
+	"\x16payment_transaction_id\x18\x02 \x01(\x03H\x01R\x14paymentTransactionId\x88\x01\x01\x123\n" +
+	"\x13game_transaction_id\x18\x03 \x01(\x03H\x02R\x11gameTransactionId\x88\x01\x01B\n" +
+	"\n" +
+	"\b_user_idB\x19\n" +
+	"\x17_payment_transaction_idB\x16\n" +
+	"\x14_game_transaction_id\"\xf7\x0f\n" +
+	"\"CustomerRecordReportDetailResponse\x12n\n" +
+	"\vuser_detail\x18\x01 \x01(\v2H.api.backoffice.service.v1.CustomerRecordReportDetailResponse.UserDetailH\x00R\n" +
+	"userDetail\x88\x01\x01\x12\x86\x01\n" +
+	"\x13payment_transaction\x18\x02 \x01(\v2P.api.backoffice.service.v1.CustomerRecordReportDetailResponse.PaymentTransactionH\x01R\x12paymentTransaction\x88\x01\x01\x12}\n" +
+	"\x10game_transaction\x18\x03 \x01(\v2M.api.backoffice.service.v1.CustomerRecordReportDetailResponse.GameTransactionH\x02R\x0fgameTransaction\x88\x01\x01\x12\x9f\x01\n" +
+	"\x1cevent_settlement_information\x18\x04 \x01(\v2X.api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformationH\x03R\x1aeventSettlementInformation\x88\x01\x01\x1a\x9f\x01\n" +
+	"\n" +
+	"UserDetail\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
+	"\x05phone\x18\x03 \x01(\tR\x05phone\x12\x17\n" +
+	"\aid_type\x18\x04 \x01(\tR\x06idType\x12\x1b\n" +
+	"\tid_number\x18\x05 \x01(\tR\bidNumber\x12\x18\n" +
+	"\aaddress\x18\x06 \x01(\tR\aaddress\x1a\xa1\x03\n" +
+	"\x12PaymentTransaction\x124\n" +
+	"\x16payment_transaction_id\x18\x01 \x01(\x03R\x14paymentTransactionId\x12,\n" +
+	"\x12psp_transaction_id\x18\x02 \x01(\tR\x10pspTransactionId\x12=\n" +
+	"\farrival_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\varrivalTime\x128\n" +
+	"\x18payment_service_provider\x18\x04 \x01(\tR\x16paymentServiceProvider\x12*\n" +
+	"\x11method_of_payment\x18\x05 \x01(\tR\x0fmethodOfPayment\x12'\n" +
+	"\x0fpayment_channel\x18\x06 \x01(\tR\x0epaymentChannel\x12\x1a\n" +
+	"\bcurrency\x18\a \x01(\tR\bcurrency\x12\x16\n" +
+	"\x06amount\x18\b \x01(\tR\x06amount\x12%\n" +
+	"\x0eprocessing_fee\x18\t \x01(\tR\rprocessingFee\x1a\xfc\x02\n" +
+	"\x0fGameTransaction\x12.\n" +
+	"\x13game_transaction_id\x18\x01 \x01(\x03R\x11gameTransactionId\x126\n" +
+	"\x17provider_transaction_id\x18\x02 \x01(\tR\x15providerTransactionId\x12'\n" +
+	"\x0fsettlement_time\x18\x03 \x01(\tR\x0esettlementTime\x12)\n" +
+	"\x10venue_Tournament\x18\x04 \x01(\tR\x0fvenueTournament\x12\x1d\n" +
+	"\n" +
+	"wager_type\x18\x05 \x01(\tR\twagerType\x12!\n" +
+	"\fbet_currency\x18\x06 \x01(\tR\vbetCurrency\x12\x1d\n" +
+	"\n" +
+	"bet_amount\x18\a \x01(\tR\tbetAmount\x12'\n" +
+	"\x0fpayout_currency\x18\b \x01(\tR\x0epayoutCurrency\x12#\n" +
+	"\rpayout_amount\x18\t \x01(\tR\fpayoutAmount\x1a\x93\x03\n" +
+	"\x1aEventSettlementInformation\x122\n" +
+	"\x15selection_bet_details\x18\x01 \x01(\tR\x13selectionBetDetails\x12+\n" +
+	"\x11event_description\x18\x02 \x01(\tR\x10eventDescription\x12-\n" +
+	"\x12settlement_details\x18\x03 \x01(\tR\x11settlementDetails\x12\x8a\x01\n" +
+	"\rmatch_results\x18\x04 \x03(\v2e.api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.MatchResultsR\fmatchResults\x1aX\n" +
+	"\fMatchResults\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x16\n" +
+	"\x06status\x18\x02 \x01(\tR\x06status\x12\x1c\n" +
+	"\tselection\x18\x03 \x01(\tR\tselectionB\x0e\n" +
+	"\f_user_detailB\x16\n" +
+	"\x14_payment_transactionB\x13\n" +
+	"\x11_game_transactionB\x1f\n" +
+	"\x1d_event_settlement_information2\xd5\x17\n" +
 	"\x10BackofficeReport\x12\x97\x01\n" +
 	"\n" +
 	"GetSummary\x12,.api.backoffice.service.v1.GetSummaryRequest\x1a-.api.backoffice.service.v1.GetSummaryResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/report/summary/get\x12\xa1\x01\n" +
@@ -6470,7 +7083,8 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x15ListDepositVtgDetails\x127.api.backoffice.service.v1.ListDepositVtgDetailsRequest\x1a8.api.backoffice.service.v1.ListDepositVtgDetailsResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./v1/backoffice/report/deposit-vtg-details/list\x12\xc9\x01\n" +
 	"\x16ListWithdrawVtgDetails\x128.api.backoffice.service.v1.ListWithdrawVtgDetailsRequest\x1a9.api.backoffice.service.v1.ListWithdrawVtgDetailsResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/backoffice/report/withdraw-vtg-details/list\x12\xac\x01\n" +
 	"\x0fListSportEvents\x121.api.backoffice.service.v1.ListSportEventsRequest\x1a2.api.backoffice.service.v1.ListSportEventsResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/report/sport-events/list\x12\xda\x01\n" +
-	"\x1aGetTransactionAndEventInfo\x12<.api.backoffice.service.v1.GetTransactionAndEventInfoRequest\x1a=.api.backoffice.service.v1.GetTransactionAndEventInfoResponse\"?\x82\xd3\xe4\x93\x029:\x01*\"4/v1/backoffice/report/transaction-and-event-info/getB[\n" +
+	"\x1aGetTransactionAndEventInfo\x12<.api.backoffice.service.v1.GetTransactionAndEventInfoRequest\x1a=.api.backoffice.service.v1.GetTransactionAndEventInfoResponse\"?\x82\xd3\xe4\x93\x029:\x01*\"4/v1/backoffice/report/transaction-and-event-info/get\x12\xcf\x01\n" +
+	"\x1aCustomerRecordReportDetail\x12<.api.backoffice.service.v1.CustomerRecordReportDetailRequest\x1a=.api.backoffice.service.v1.CustomerRecordReportDetailResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/backoffice/report/customer-record/getB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -6485,139 +7099,154 @@ func file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_report_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_report_proto_msgTypes = make([]protoimpl.MessageInfo, 44)
+var file_backoffice_service_v1_backoffice_report_proto_msgTypes = make([]protoimpl.MessageInfo, 51)
 var file_backoffice_service_v1_backoffice_report_proto_goTypes = []any{
-	(*TimeRange)(nil),                                              // 0: api.backoffice.service.v1.TimeRange
-	(*GetSummaryRequest)(nil),                                      // 1: api.backoffice.service.v1.GetSummaryRequest
-	(*GetSummaryResponse)(nil),                                     // 2: api.backoffice.service.v1.GetSummaryResponse
-	(*ListSummariesRequest)(nil),                                   // 3: api.backoffice.service.v1.ListSummariesRequest
-	(*ListSummariesResponse)(nil),                                  // 4: api.backoffice.service.v1.ListSummariesResponse
-	(*GetGameSummaryRequest)(nil),                                  // 5: api.backoffice.service.v1.GetGameSummaryRequest
-	(*GetGameSummaryResponse)(nil),                                 // 6: api.backoffice.service.v1.GetGameSummaryResponse
-	(*ListGameDataRequest)(nil),                                    // 7: api.backoffice.service.v1.ListGameDataRequest
-	(*ListGameDataResponse)(nil),                                   // 8: api.backoffice.service.v1.ListGameDataResponse
-	(*GetPlayerGameSummaryRequest)(nil),                            // 9: api.backoffice.service.v1.GetPlayerGameSummaryRequest
-	(*GetPlayerGameSummaryResponse)(nil),                           // 10: api.backoffice.service.v1.GetPlayerGameSummaryResponse
-	(*ListPlayerGameDataRequest)(nil),                              // 11: api.backoffice.service.v1.ListPlayerGameDataRequest
-	(*ListPlayerGameDataResponse)(nil),                             // 12: api.backoffice.service.v1.ListPlayerGameDataResponse
-	(*GetDepositSummariesRequest)(nil),                             // 13: api.backoffice.service.v1.GetDepositSummariesRequest
-	(*GetDepositSummariesResponse)(nil),                            // 14: api.backoffice.service.v1.GetDepositSummariesResponse
-	(*ListDepositDetailsRequest)(nil),                              // 15: api.backoffice.service.v1.ListDepositDetailsRequest
-	(*ListDepositDetailsResponse)(nil),                             // 16: api.backoffice.service.v1.ListDepositDetailsResponse
-	(*GetWithdrawSummariesRequest)(nil),                            // 17: api.backoffice.service.v1.GetWithdrawSummariesRequest
-	(*GetWithdrawSummariesResponse)(nil),                           // 18: api.backoffice.service.v1.GetWithdrawSummariesResponse
-	(*ListWithdrawDetailsRequest)(nil),                             // 19: api.backoffice.service.v1.ListWithdrawDetailsRequest
-	(*ListWithdrawDetailsResponse)(nil),                            // 20: api.backoffice.service.v1.ListWithdrawDetailsResponse
-	(*ListRegisterRetentionRequest)(nil),                           // 21: api.backoffice.service.v1.ListRegisterRetentionRequest
-	(*ListRegisterRetentionResponse)(nil),                          // 22: api.backoffice.service.v1.ListRegisterRetentionResponse
-	(*ListDepositVtgDetailsRequest)(nil),                           // 23: api.backoffice.service.v1.ListDepositVtgDetailsRequest
-	(*ListDepositVtgDetailsResponse)(nil),                          // 24: api.backoffice.service.v1.ListDepositVtgDetailsResponse
-	(*ListWithdrawVtgDetailsRequest)(nil),                          // 25: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest
-	(*ListWithdrawVtgDetailsResponse)(nil),                         // 26: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
-	(*ListSportEventsRequest)(nil),                                 // 27: api.backoffice.service.v1.ListSportEventsRequest
-	(*ListSportEventsResponse)(nil),                                // 28: api.backoffice.service.v1.ListSportEventsResponse
-	(*GetTransactionAndEventInfoRequest)(nil),                      // 29: api.backoffice.service.v1.GetTransactionAndEventInfoRequest
-	(*GetTransactionAndEventInfoResponse)(nil),                     // 30: api.backoffice.service.v1.GetTransactionAndEventInfoResponse
-	(*ListSummariesResponse_List)(nil),                             // 31: api.backoffice.service.v1.ListSummariesResponse.List
-	(*ListGameDataResponse_List)(nil),                              // 32: api.backoffice.service.v1.ListGameDataResponse.List
-	(*ListPlayerGameDataResponse_List)(nil),                        // 33: api.backoffice.service.v1.ListPlayerGameDataResponse.List
-	(*GetDepositSummariesResponse_DepositSummary)(nil),             // 34: api.backoffice.service.v1.GetDepositSummariesResponse.DepositSummary
-	(*ListDepositDetailsResponse_Detail)(nil),                      // 35: api.backoffice.service.v1.ListDepositDetailsResponse.Detail
-	(*GetWithdrawSummariesResponse_WithdrawSummary)(nil),           // 36: api.backoffice.service.v1.GetWithdrawSummariesResponse.WithdrawSummary
-	(*ListWithdrawDetailsResponse_Detail)(nil),                     // 37: api.backoffice.service.v1.ListWithdrawDetailsResponse.Detail
-	(*ListRegisterRetentionResponse_List)(nil),                     // 38: api.backoffice.service.v1.ListRegisterRetentionResponse.List
-	(*ListDepositVtgDetailsResponse_Detail)(nil),                   // 39: api.backoffice.service.v1.ListDepositVtgDetailsResponse.Detail
-	(*ListWithdrawVtgDetailsResponse_Detail)(nil),                  // 40: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.Detail
-	(*ListSportEventsResponse_SportEvent)(nil),                     // 41: api.backoffice.service.v1.ListSportEventsResponse.SportEvent
-	(*GetTransactionAndEventInfoResponse_TransactionInfo)(nil),     // 42: api.backoffice.service.v1.GetTransactionAndEventInfoResponse.TransactionInfo
-	(*GetTransactionAndEventInfoResponse_EventSettlementInfo)(nil), // 43: api.backoffice.service.v1.GetTransactionAndEventInfoResponse.EventSettlementInfo
-	(*common.OperatorContextFilters)(nil),                          // 44: api.common.OperatorContextFilters
-	(*timestamppb.Timestamp)(nil),                                  // 45: google.protobuf.Timestamp
+	(*TimeRange)(nil),                                                                  // 0: api.backoffice.service.v1.TimeRange
+	(*GetSummaryRequest)(nil),                                                          // 1: api.backoffice.service.v1.GetSummaryRequest
+	(*GetSummaryResponse)(nil),                                                         // 2: api.backoffice.service.v1.GetSummaryResponse
+	(*ListSummariesRequest)(nil),                                                       // 3: api.backoffice.service.v1.ListSummariesRequest
+	(*ListSummariesResponse)(nil),                                                      // 4: api.backoffice.service.v1.ListSummariesResponse
+	(*GetGameSummaryRequest)(nil),                                                      // 5: api.backoffice.service.v1.GetGameSummaryRequest
+	(*GetGameSummaryResponse)(nil),                                                     // 6: api.backoffice.service.v1.GetGameSummaryResponse
+	(*ListGameDataRequest)(nil),                                                        // 7: api.backoffice.service.v1.ListGameDataRequest
+	(*ListGameDataResponse)(nil),                                                       // 8: api.backoffice.service.v1.ListGameDataResponse
+	(*GetPlayerGameSummaryRequest)(nil),                                                // 9: api.backoffice.service.v1.GetPlayerGameSummaryRequest
+	(*GetPlayerGameSummaryResponse)(nil),                                               // 10: api.backoffice.service.v1.GetPlayerGameSummaryResponse
+	(*ListPlayerGameDataRequest)(nil),                                                  // 11: api.backoffice.service.v1.ListPlayerGameDataRequest
+	(*ListPlayerGameDataResponse)(nil),                                                 // 12: api.backoffice.service.v1.ListPlayerGameDataResponse
+	(*GetDepositSummariesRequest)(nil),                                                 // 13: api.backoffice.service.v1.GetDepositSummariesRequest
+	(*GetDepositSummariesResponse)(nil),                                                // 14: api.backoffice.service.v1.GetDepositSummariesResponse
+	(*ListDepositDetailsRequest)(nil),                                                  // 15: api.backoffice.service.v1.ListDepositDetailsRequest
+	(*ListDepositDetailsResponse)(nil),                                                 // 16: api.backoffice.service.v1.ListDepositDetailsResponse
+	(*GetWithdrawSummariesRequest)(nil),                                                // 17: api.backoffice.service.v1.GetWithdrawSummariesRequest
+	(*GetWithdrawSummariesResponse)(nil),                                               // 18: api.backoffice.service.v1.GetWithdrawSummariesResponse
+	(*ListWithdrawDetailsRequest)(nil),                                                 // 19: api.backoffice.service.v1.ListWithdrawDetailsRequest
+	(*ListWithdrawDetailsResponse)(nil),                                                // 20: api.backoffice.service.v1.ListWithdrawDetailsResponse
+	(*ListRegisterRetentionRequest)(nil),                                               // 21: api.backoffice.service.v1.ListRegisterRetentionRequest
+	(*ListRegisterRetentionResponse)(nil),                                              // 22: api.backoffice.service.v1.ListRegisterRetentionResponse
+	(*ListDepositVtgDetailsRequest)(nil),                                               // 23: api.backoffice.service.v1.ListDepositVtgDetailsRequest
+	(*ListDepositVtgDetailsResponse)(nil),                                              // 24: api.backoffice.service.v1.ListDepositVtgDetailsResponse
+	(*ListWithdrawVtgDetailsRequest)(nil),                                              // 25: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest
+	(*ListWithdrawVtgDetailsResponse)(nil),                                             // 26: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
+	(*ListSportEventsRequest)(nil),                                                     // 27: api.backoffice.service.v1.ListSportEventsRequest
+	(*ListSportEventsResponse)(nil),                                                    // 28: api.backoffice.service.v1.ListSportEventsResponse
+	(*GetTransactionAndEventInfoRequest)(nil),                                          // 29: api.backoffice.service.v1.GetTransactionAndEventInfoRequest
+	(*GetTransactionAndEventInfoResponse)(nil),                                         // 30: api.backoffice.service.v1.GetTransactionAndEventInfoResponse
+	(*CustomerRecordReportDetailRequest)(nil),                                          // 31: api.backoffice.service.v1.CustomerRecordReportDetailRequest
+	(*CustomerRecordReportDetailResponse)(nil),                                         // 32: api.backoffice.service.v1.CustomerRecordReportDetailResponse
+	(*ListSummariesResponse_List)(nil),                                                 // 33: api.backoffice.service.v1.ListSummariesResponse.List
+	(*ListGameDataResponse_List)(nil),                                                  // 34: api.backoffice.service.v1.ListGameDataResponse.List
+	(*ListPlayerGameDataResponse_List)(nil),                                            // 35: api.backoffice.service.v1.ListPlayerGameDataResponse.List
+	(*GetDepositSummariesResponse_DepositSummary)(nil),                                 // 36: api.backoffice.service.v1.GetDepositSummariesResponse.DepositSummary
+	(*ListDepositDetailsResponse_Detail)(nil),                                          // 37: api.backoffice.service.v1.ListDepositDetailsResponse.Detail
+	(*GetWithdrawSummariesResponse_WithdrawSummary)(nil),                               // 38: api.backoffice.service.v1.GetWithdrawSummariesResponse.WithdrawSummary
+	(*ListWithdrawDetailsResponse_Detail)(nil),                                         // 39: api.backoffice.service.v1.ListWithdrawDetailsResponse.Detail
+	(*ListRegisterRetentionResponse_List)(nil),                                         // 40: api.backoffice.service.v1.ListRegisterRetentionResponse.List
+	(*ListDepositVtgDetailsResponse_Detail)(nil),                                       // 41: api.backoffice.service.v1.ListDepositVtgDetailsResponse.Detail
+	(*ListWithdrawVtgDetailsResponse_Detail)(nil),                                      // 42: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.Detail
+	(*ListSportEventsResponse_SportEvent)(nil),                                         // 43: api.backoffice.service.v1.ListSportEventsResponse.SportEvent
+	(*GetTransactionAndEventInfoResponse_TransactionInfo)(nil),                         // 44: api.backoffice.service.v1.GetTransactionAndEventInfoResponse.TransactionInfo
+	(*GetTransactionAndEventInfoResponse_EventSettlementInfo)(nil),                     // 45: api.backoffice.service.v1.GetTransactionAndEventInfoResponse.EventSettlementInfo
+	(*CustomerRecordReportDetailResponse_UserDetail)(nil),                              // 46: api.backoffice.service.v1.CustomerRecordReportDetailResponse.UserDetail
+	(*CustomerRecordReportDetailResponse_PaymentTransaction)(nil),                      // 47: api.backoffice.service.v1.CustomerRecordReportDetailResponse.PaymentTransaction
+	(*CustomerRecordReportDetailResponse_GameTransaction)(nil),                         // 48: api.backoffice.service.v1.CustomerRecordReportDetailResponse.GameTransaction
+	(*CustomerRecordReportDetailResponse_EventSettlementInformation)(nil),              // 49: api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation
+	(*CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults)(nil), // 50: api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.MatchResults
+	(*common.OperatorContextFilters)(nil),                                              // 51: api.common.OperatorContextFilters
+	(*timestamppb.Timestamp)(nil),                                                      // 52: google.protobuf.Timestamp
 }
 var file_backoffice_service_v1_backoffice_report_proto_depIdxs = []int32{
 	0,  // 0: api.backoffice.service.v1.GetSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	44, // 1: api.backoffice.service.v1.GetSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	51, // 1: api.backoffice.service.v1.GetSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
 	0,  // 2: api.backoffice.service.v1.ListSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	44, // 3: api.backoffice.service.v1.ListSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	31, // 4: api.backoffice.service.v1.ListSummariesResponse.list:type_name -> api.backoffice.service.v1.ListSummariesResponse.List
+	51, // 3: api.backoffice.service.v1.ListSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	33, // 4: api.backoffice.service.v1.ListSummariesResponse.list:type_name -> api.backoffice.service.v1.ListSummariesResponse.List
 	0,  // 5: api.backoffice.service.v1.GetGameSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	44, // 6: api.backoffice.service.v1.GetGameSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	51, // 6: api.backoffice.service.v1.GetGameSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
 	0,  // 7: api.backoffice.service.v1.ListGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	44, // 8: api.backoffice.service.v1.ListGameDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	32, // 9: api.backoffice.service.v1.ListGameDataResponse.list:type_name -> api.backoffice.service.v1.ListGameDataResponse.List
+	51, // 8: api.backoffice.service.v1.ListGameDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	34, // 9: api.backoffice.service.v1.ListGameDataResponse.list:type_name -> api.backoffice.service.v1.ListGameDataResponse.List
 	0,  // 10: api.backoffice.service.v1.GetPlayerGameSummaryRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	44, // 11: api.backoffice.service.v1.GetPlayerGameSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	51, // 11: api.backoffice.service.v1.GetPlayerGameSummaryRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
 	0,  // 12: api.backoffice.service.v1.ListPlayerGameDataRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	44, // 13: api.backoffice.service.v1.ListPlayerGameDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	33, // 14: api.backoffice.service.v1.ListPlayerGameDataResponse.list:type_name -> api.backoffice.service.v1.ListPlayerGameDataResponse.List
+	51, // 13: api.backoffice.service.v1.ListPlayerGameDataRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	35, // 14: api.backoffice.service.v1.ListPlayerGameDataResponse.list:type_name -> api.backoffice.service.v1.ListPlayerGameDataResponse.List
 	0,  // 15: api.backoffice.service.v1.GetDepositSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	44, // 16: api.backoffice.service.v1.GetDepositSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	34, // 17: api.backoffice.service.v1.GetDepositSummariesResponse.deposit_summaries:type_name -> api.backoffice.service.v1.GetDepositSummariesResponse.DepositSummary
+	51, // 16: api.backoffice.service.v1.GetDepositSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	36, // 17: api.backoffice.service.v1.GetDepositSummariesResponse.deposit_summaries:type_name -> api.backoffice.service.v1.GetDepositSummariesResponse.DepositSummary
 	0,  // 18: api.backoffice.service.v1.ListDepositDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	44, // 19: api.backoffice.service.v1.ListDepositDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	35, // 20: api.backoffice.service.v1.ListDepositDetailsResponse.details:type_name -> api.backoffice.service.v1.ListDepositDetailsResponse.Detail
+	51, // 19: api.backoffice.service.v1.ListDepositDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	37, // 20: api.backoffice.service.v1.ListDepositDetailsResponse.details:type_name -> api.backoffice.service.v1.ListDepositDetailsResponse.Detail
 	0,  // 21: api.backoffice.service.v1.GetWithdrawSummariesRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	44, // 22: api.backoffice.service.v1.GetWithdrawSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	36, // 23: api.backoffice.service.v1.GetWithdrawSummariesResponse.withdraw_summaries:type_name -> api.backoffice.service.v1.GetWithdrawSummariesResponse.WithdrawSummary
+	51, // 22: api.backoffice.service.v1.GetWithdrawSummariesRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	38, // 23: api.backoffice.service.v1.GetWithdrawSummariesResponse.withdraw_summaries:type_name -> api.backoffice.service.v1.GetWithdrawSummariesResponse.WithdrawSummary
 	0,  // 24: api.backoffice.service.v1.ListWithdrawDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	44, // 25: api.backoffice.service.v1.ListWithdrawDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	37, // 26: api.backoffice.service.v1.ListWithdrawDetailsResponse.details:type_name -> api.backoffice.service.v1.ListWithdrawDetailsResponse.Detail
+	51, // 25: api.backoffice.service.v1.ListWithdrawDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	39, // 26: api.backoffice.service.v1.ListWithdrawDetailsResponse.details:type_name -> api.backoffice.service.v1.ListWithdrawDetailsResponse.Detail
 	0,  // 27: api.backoffice.service.v1.ListRegisterRetentionRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	44, // 28: api.backoffice.service.v1.ListRegisterRetentionRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	38, // 29: api.backoffice.service.v1.ListRegisterRetentionResponse.details:type_name -> api.backoffice.service.v1.ListRegisterRetentionResponse.List
+	51, // 28: api.backoffice.service.v1.ListRegisterRetentionRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	40, // 29: api.backoffice.service.v1.ListRegisterRetentionResponse.details:type_name -> api.backoffice.service.v1.ListRegisterRetentionResponse.List
 	0,  // 30: api.backoffice.service.v1.ListDepositVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	44, // 31: api.backoffice.service.v1.ListDepositVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	39, // 32: api.backoffice.service.v1.ListDepositVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListDepositVtgDetailsResponse.Detail
+	51, // 31: api.backoffice.service.v1.ListDepositVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	41, // 32: api.backoffice.service.v1.ListDepositVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListDepositVtgDetailsResponse.Detail
 	0,  // 33: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	44, // 34: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	40, // 35: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.Detail
+	51, // 34: api.backoffice.service.v1.ListWithdrawVtgDetailsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	42, // 35: api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.daily_details:type_name -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse.Detail
 	0,  // 36: api.backoffice.service.v1.ListSportEventsRequest.time_range:type_name -> api.backoffice.service.v1.TimeRange
-	41, // 37: api.backoffice.service.v1.ListSportEventsResponse.events:type_name -> api.backoffice.service.v1.ListSportEventsResponse.SportEvent
-	42, // 38: api.backoffice.service.v1.GetTransactionAndEventInfoResponse.transaction_info:type_name -> api.backoffice.service.v1.GetTransactionAndEventInfoResponse.TransactionInfo
-	43, // 39: api.backoffice.service.v1.GetTransactionAndEventInfoResponse.event_settlement_info:type_name -> api.backoffice.service.v1.GetTransactionAndEventInfoResponse.EventSettlementInfo
-	45, // 40: api.backoffice.service.v1.ListSportEventsResponse.SportEvent.carded_time:type_name -> google.protobuf.Timestamp
-	45, // 41: api.backoffice.service.v1.ListSportEventsResponse.SportEvent.first_bet_time:type_name -> google.protobuf.Timestamp
-	45, // 42: api.backoffice.service.v1.ListSportEventsResponse.SportEvent.last_bet_time:type_name -> google.protobuf.Timestamp
-	45, // 43: api.backoffice.service.v1.ListSportEventsResponse.SportEvent.no_more_bets_time:type_name -> google.protobuf.Timestamp
-	45, // 44: api.backoffice.service.v1.ListSportEventsResponse.SportEvent.result_processing_time:type_name -> google.protobuf.Timestamp
-	45, // 45: api.backoffice.service.v1.ListSportEventsResponse.SportEvent.revised_official_carded_time:type_name -> google.protobuf.Timestamp
-	45, // 46: api.backoffice.service.v1.GetTransactionAndEventInfoResponse.TransactionInfo.settlement_time:type_name -> google.protobuf.Timestamp
-	45, // 47: api.backoffice.service.v1.GetTransactionAndEventInfoResponse.TransactionInfo.event_start_time:type_name -> google.protobuf.Timestamp
-	1,  // 48: api.backoffice.service.v1.BackofficeReport.GetSummary:input_type -> api.backoffice.service.v1.GetSummaryRequest
-	3,  // 49: api.backoffice.service.v1.BackofficeReport.ListSummaries:input_type -> api.backoffice.service.v1.ListSummariesRequest
-	5,  // 50: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:input_type -> api.backoffice.service.v1.GetGameSummaryRequest
-	7,  // 51: api.backoffice.service.v1.BackofficeReport.ListGameData:input_type -> api.backoffice.service.v1.ListGameDataRequest
-	9,  // 52: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:input_type -> api.backoffice.service.v1.GetPlayerGameSummaryRequest
-	11, // 53: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:input_type -> api.backoffice.service.v1.ListPlayerGameDataRequest
-	13, // 54: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:input_type -> api.backoffice.service.v1.GetDepositSummariesRequest
-	15, // 55: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:input_type -> api.backoffice.service.v1.ListDepositDetailsRequest
-	17, // 56: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:input_type -> api.backoffice.service.v1.GetWithdrawSummariesRequest
-	19, // 57: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:input_type -> api.backoffice.service.v1.ListWithdrawDetailsRequest
-	21, // 58: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:input_type -> api.backoffice.service.v1.ListRegisterRetentionRequest
-	23, // 59: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:input_type -> api.backoffice.service.v1.ListDepositVtgDetailsRequest
-	25, // 60: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:input_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsRequest
-	27, // 61: api.backoffice.service.v1.BackofficeReport.ListSportEvents:input_type -> api.backoffice.service.v1.ListSportEventsRequest
-	29, // 62: api.backoffice.service.v1.BackofficeReport.GetTransactionAndEventInfo:input_type -> api.backoffice.service.v1.GetTransactionAndEventInfoRequest
-	2,  // 63: api.backoffice.service.v1.BackofficeReport.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
-	4,  // 64: api.backoffice.service.v1.BackofficeReport.ListSummaries:output_type -> api.backoffice.service.v1.ListSummariesResponse
-	6,  // 65: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:output_type -> api.backoffice.service.v1.GetGameSummaryResponse
-	8,  // 66: api.backoffice.service.v1.BackofficeReport.ListGameData:output_type -> api.backoffice.service.v1.ListGameDataResponse
-	10, // 67: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:output_type -> api.backoffice.service.v1.GetPlayerGameSummaryResponse
-	12, // 68: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:output_type -> api.backoffice.service.v1.ListPlayerGameDataResponse
-	14, // 69: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:output_type -> api.backoffice.service.v1.GetDepositSummariesResponse
-	16, // 70: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:output_type -> api.backoffice.service.v1.ListDepositDetailsResponse
-	18, // 71: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:output_type -> api.backoffice.service.v1.GetWithdrawSummariesResponse
-	20, // 72: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:output_type -> api.backoffice.service.v1.ListWithdrawDetailsResponse
-	22, // 73: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:output_type -> api.backoffice.service.v1.ListRegisterRetentionResponse
-	24, // 74: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:output_type -> api.backoffice.service.v1.ListDepositVtgDetailsResponse
-	26, // 75: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:output_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
-	28, // 76: api.backoffice.service.v1.BackofficeReport.ListSportEvents:output_type -> api.backoffice.service.v1.ListSportEventsResponse
-	30, // 77: api.backoffice.service.v1.BackofficeReport.GetTransactionAndEventInfo:output_type -> api.backoffice.service.v1.GetTransactionAndEventInfoResponse
-	63, // [63:78] is the sub-list for method output_type
-	48, // [48:63] is the sub-list for method input_type
-	48, // [48:48] is the sub-list for extension type_name
-	48, // [48:48] is the sub-list for extension extendee
-	0,  // [0:48] is the sub-list for field type_name
+	43, // 37: api.backoffice.service.v1.ListSportEventsResponse.events:type_name -> api.backoffice.service.v1.ListSportEventsResponse.SportEvent
+	44, // 38: api.backoffice.service.v1.GetTransactionAndEventInfoResponse.transaction_info:type_name -> api.backoffice.service.v1.GetTransactionAndEventInfoResponse.TransactionInfo
+	45, // 39: api.backoffice.service.v1.GetTransactionAndEventInfoResponse.event_settlement_info:type_name -> api.backoffice.service.v1.GetTransactionAndEventInfoResponse.EventSettlementInfo
+	46, // 40: api.backoffice.service.v1.CustomerRecordReportDetailResponse.user_detail:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.UserDetail
+	47, // 41: api.backoffice.service.v1.CustomerRecordReportDetailResponse.payment_transaction:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.PaymentTransaction
+	48, // 42: api.backoffice.service.v1.CustomerRecordReportDetailResponse.game_transaction:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.GameTransaction
+	49, // 43: api.backoffice.service.v1.CustomerRecordReportDetailResponse.event_settlement_information:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation
+	52, // 44: api.backoffice.service.v1.ListSportEventsResponse.SportEvent.carded_time:type_name -> google.protobuf.Timestamp
+	52, // 45: api.backoffice.service.v1.ListSportEventsResponse.SportEvent.first_bet_time:type_name -> google.protobuf.Timestamp
+	52, // 46: api.backoffice.service.v1.ListSportEventsResponse.SportEvent.last_bet_time:type_name -> google.protobuf.Timestamp
+	52, // 47: api.backoffice.service.v1.ListSportEventsResponse.SportEvent.no_more_bets_time:type_name -> google.protobuf.Timestamp
+	52, // 48: api.backoffice.service.v1.ListSportEventsResponse.SportEvent.result_processing_time:type_name -> google.protobuf.Timestamp
+	52, // 49: api.backoffice.service.v1.ListSportEventsResponse.SportEvent.revised_official_carded_time:type_name -> google.protobuf.Timestamp
+	52, // 50: api.backoffice.service.v1.GetTransactionAndEventInfoResponse.TransactionInfo.settlement_time:type_name -> google.protobuf.Timestamp
+	52, // 51: api.backoffice.service.v1.GetTransactionAndEventInfoResponse.TransactionInfo.event_start_time:type_name -> google.protobuf.Timestamp
+	52, // 52: api.backoffice.service.v1.CustomerRecordReportDetailResponse.PaymentTransaction.arrival_time:type_name -> google.protobuf.Timestamp
+	50, // 53: api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.match_results:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.MatchResults
+	1,  // 54: api.backoffice.service.v1.BackofficeReport.GetSummary:input_type -> api.backoffice.service.v1.GetSummaryRequest
+	3,  // 55: api.backoffice.service.v1.BackofficeReport.ListSummaries:input_type -> api.backoffice.service.v1.ListSummariesRequest
+	5,  // 56: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:input_type -> api.backoffice.service.v1.GetGameSummaryRequest
+	7,  // 57: api.backoffice.service.v1.BackofficeReport.ListGameData:input_type -> api.backoffice.service.v1.ListGameDataRequest
+	9,  // 58: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:input_type -> api.backoffice.service.v1.GetPlayerGameSummaryRequest
+	11, // 59: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:input_type -> api.backoffice.service.v1.ListPlayerGameDataRequest
+	13, // 60: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:input_type -> api.backoffice.service.v1.GetDepositSummariesRequest
+	15, // 61: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:input_type -> api.backoffice.service.v1.ListDepositDetailsRequest
+	17, // 62: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:input_type -> api.backoffice.service.v1.GetWithdrawSummariesRequest
+	19, // 63: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:input_type -> api.backoffice.service.v1.ListWithdrawDetailsRequest
+	21, // 64: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:input_type -> api.backoffice.service.v1.ListRegisterRetentionRequest
+	23, // 65: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:input_type -> api.backoffice.service.v1.ListDepositVtgDetailsRequest
+	25, // 66: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:input_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsRequest
+	27, // 67: api.backoffice.service.v1.BackofficeReport.ListSportEvents:input_type -> api.backoffice.service.v1.ListSportEventsRequest
+	29, // 68: api.backoffice.service.v1.BackofficeReport.GetTransactionAndEventInfo:input_type -> api.backoffice.service.v1.GetTransactionAndEventInfoRequest
+	31, // 69: api.backoffice.service.v1.BackofficeReport.CustomerRecordReportDetail:input_type -> api.backoffice.service.v1.CustomerRecordReportDetailRequest
+	2,  // 70: api.backoffice.service.v1.BackofficeReport.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
+	4,  // 71: api.backoffice.service.v1.BackofficeReport.ListSummaries:output_type -> api.backoffice.service.v1.ListSummariesResponse
+	6,  // 72: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:output_type -> api.backoffice.service.v1.GetGameSummaryResponse
+	8,  // 73: api.backoffice.service.v1.BackofficeReport.ListGameData:output_type -> api.backoffice.service.v1.ListGameDataResponse
+	10, // 74: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:output_type -> api.backoffice.service.v1.GetPlayerGameSummaryResponse
+	12, // 75: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:output_type -> api.backoffice.service.v1.ListPlayerGameDataResponse
+	14, // 76: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:output_type -> api.backoffice.service.v1.GetDepositSummariesResponse
+	16, // 77: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:output_type -> api.backoffice.service.v1.ListDepositDetailsResponse
+	18, // 78: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:output_type -> api.backoffice.service.v1.GetWithdrawSummariesResponse
+	20, // 79: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:output_type -> api.backoffice.service.v1.ListWithdrawDetailsResponse
+	22, // 80: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:output_type -> api.backoffice.service.v1.ListRegisterRetentionResponse
+	24, // 81: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:output_type -> api.backoffice.service.v1.ListDepositVtgDetailsResponse
+	26, // 82: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:output_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
+	28, // 83: api.backoffice.service.v1.BackofficeReport.ListSportEvents:output_type -> api.backoffice.service.v1.ListSportEventsResponse
+	30, // 84: api.backoffice.service.v1.BackofficeReport.GetTransactionAndEventInfo:output_type -> api.backoffice.service.v1.GetTransactionAndEventInfoResponse
+	32, // 85: api.backoffice.service.v1.BackofficeReport.CustomerRecordReportDetail:output_type -> api.backoffice.service.v1.CustomerRecordReportDetailResponse
+	70, // [70:86] is the sub-list for method output_type
+	54, // [54:70] is the sub-list for method input_type
+	54, // [54:54] is the sub-list for extension type_name
+	54, // [54:54] is the sub-list for extension extendee
+	0,  // [0:54] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_report_proto_init() }
@@ -6630,13 +7259,15 @@ func file_backoffice_service_v1_backoffice_report_proto_init() {
 	file_backoffice_service_v1_backoffice_report_proto_msgTypes[15].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_report_proto_msgTypes[19].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_report_proto_msgTypes[27].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_report_proto_msgTypes[31].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_report_proto_msgTypes[32].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_report_proto_rawDesc), len(file_backoffice_service_v1_backoffice_report_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   44,
+			NumMessages:   51,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

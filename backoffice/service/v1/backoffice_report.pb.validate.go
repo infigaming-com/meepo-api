@@ -4651,6 +4651,360 @@ var _ interface {
 	ErrorName() string
 } = GetTransactionAndEventInfoResponseValidationError{}
 
+// Validate checks the field values on CustomerRecordReportDetailRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *CustomerRecordReportDetailRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CustomerRecordReportDetailRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// CustomerRecordReportDetailRequestMultiError, or nil if none found.
+func (m *CustomerRecordReportDetailRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CustomerRecordReportDetailRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.UserId != nil {
+		// no validation rules for UserId
+	}
+
+	if m.PaymentTransactionId != nil {
+		// no validation rules for PaymentTransactionId
+	}
+
+	if m.GameTransactionId != nil {
+		// no validation rules for GameTransactionId
+	}
+
+	if len(errors) > 0 {
+		return CustomerRecordReportDetailRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CustomerRecordReportDetailRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// CustomerRecordReportDetailRequest.ValidateAll() if the designated
+// constraints aren't met.
+type CustomerRecordReportDetailRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CustomerRecordReportDetailRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CustomerRecordReportDetailRequestMultiError) AllErrors() []error { return m }
+
+// CustomerRecordReportDetailRequestValidationError is the validation error
+// returned by CustomerRecordReportDetailRequest.Validate if the designated
+// constraints aren't met.
+type CustomerRecordReportDetailRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CustomerRecordReportDetailRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CustomerRecordReportDetailRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CustomerRecordReportDetailRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CustomerRecordReportDetailRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CustomerRecordReportDetailRequestValidationError) ErrorName() string {
+	return "CustomerRecordReportDetailRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CustomerRecordReportDetailRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCustomerRecordReportDetailRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CustomerRecordReportDetailRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CustomerRecordReportDetailRequestValidationError{}
+
+// Validate checks the field values on CustomerRecordReportDetailResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *CustomerRecordReportDetailResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CustomerRecordReportDetailResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// CustomerRecordReportDetailResponseMultiError, or nil if none found.
+func (m *CustomerRecordReportDetailResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CustomerRecordReportDetailResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.UserDetail != nil {
+
+		if all {
+			switch v := interface{}(m.GetUserDetail()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, CustomerRecordReportDetailResponseValidationError{
+						field:  "UserDetail",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, CustomerRecordReportDetailResponseValidationError{
+						field:  "UserDetail",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetUserDetail()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return CustomerRecordReportDetailResponseValidationError{
+					field:  "UserDetail",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.PaymentTransaction != nil {
+
+		if all {
+			switch v := interface{}(m.GetPaymentTransaction()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, CustomerRecordReportDetailResponseValidationError{
+						field:  "PaymentTransaction",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, CustomerRecordReportDetailResponseValidationError{
+						field:  "PaymentTransaction",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetPaymentTransaction()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return CustomerRecordReportDetailResponseValidationError{
+					field:  "PaymentTransaction",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.GameTransaction != nil {
+
+		if all {
+			switch v := interface{}(m.GetGameTransaction()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, CustomerRecordReportDetailResponseValidationError{
+						field:  "GameTransaction",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, CustomerRecordReportDetailResponseValidationError{
+						field:  "GameTransaction",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetGameTransaction()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return CustomerRecordReportDetailResponseValidationError{
+					field:  "GameTransaction",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.EventSettlementInformation != nil {
+
+		if all {
+			switch v := interface{}(m.GetEventSettlementInformation()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, CustomerRecordReportDetailResponseValidationError{
+						field:  "EventSettlementInformation",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, CustomerRecordReportDetailResponseValidationError{
+						field:  "EventSettlementInformation",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetEventSettlementInformation()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return CustomerRecordReportDetailResponseValidationError{
+					field:  "EventSettlementInformation",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return CustomerRecordReportDetailResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CustomerRecordReportDetailResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// CustomerRecordReportDetailResponse.ValidateAll() if the designated
+// constraints aren't met.
+type CustomerRecordReportDetailResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CustomerRecordReportDetailResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CustomerRecordReportDetailResponseMultiError) AllErrors() []error { return m }
+
+// CustomerRecordReportDetailResponseValidationError is the validation error
+// returned by CustomerRecordReportDetailResponse.Validate if the designated
+// constraints aren't met.
+type CustomerRecordReportDetailResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CustomerRecordReportDetailResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CustomerRecordReportDetailResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CustomerRecordReportDetailResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CustomerRecordReportDetailResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CustomerRecordReportDetailResponseValidationError) ErrorName() string {
+	return "CustomerRecordReportDetailResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CustomerRecordReportDetailResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCustomerRecordReportDetailResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CustomerRecordReportDetailResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CustomerRecordReportDetailResponseValidationError{}
+
 // Validate checks the field values on ListSummariesResponse_List with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -6942,3 +7296,702 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetTransactionAndEventInfoResponse_EventSettlementInfoValidationError{}
+
+// Validate checks the field values on
+// CustomerRecordReportDetailResponse_UserDetail with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *CustomerRecordReportDetailResponse_UserDetail) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// CustomerRecordReportDetailResponse_UserDetail with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// CustomerRecordReportDetailResponse_UserDetailMultiError, or nil if none found.
+func (m *CustomerRecordReportDetailResponse_UserDetail) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CustomerRecordReportDetailResponse_UserDetail) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	// no validation rules for Name
+
+	// no validation rules for Phone
+
+	// no validation rules for IdType
+
+	// no validation rules for IdNumber
+
+	// no validation rules for Address
+
+	if len(errors) > 0 {
+		return CustomerRecordReportDetailResponse_UserDetailMultiError(errors)
+	}
+
+	return nil
+}
+
+// CustomerRecordReportDetailResponse_UserDetailMultiError is an error wrapping
+// multiple validation errors returned by
+// CustomerRecordReportDetailResponse_UserDetail.ValidateAll() if the
+// designated constraints aren't met.
+type CustomerRecordReportDetailResponse_UserDetailMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CustomerRecordReportDetailResponse_UserDetailMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CustomerRecordReportDetailResponse_UserDetailMultiError) AllErrors() []error { return m }
+
+// CustomerRecordReportDetailResponse_UserDetailValidationError is the
+// validation error returned by
+// CustomerRecordReportDetailResponse_UserDetail.Validate if the designated
+// constraints aren't met.
+type CustomerRecordReportDetailResponse_UserDetailValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CustomerRecordReportDetailResponse_UserDetailValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CustomerRecordReportDetailResponse_UserDetailValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e CustomerRecordReportDetailResponse_UserDetailValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CustomerRecordReportDetailResponse_UserDetailValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CustomerRecordReportDetailResponse_UserDetailValidationError) ErrorName() string {
+	return "CustomerRecordReportDetailResponse_UserDetailValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CustomerRecordReportDetailResponse_UserDetailValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCustomerRecordReportDetailResponse_UserDetail.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CustomerRecordReportDetailResponse_UserDetailValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CustomerRecordReportDetailResponse_UserDetailValidationError{}
+
+// Validate checks the field values on
+// CustomerRecordReportDetailResponse_PaymentTransaction with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CustomerRecordReportDetailResponse_PaymentTransaction) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// CustomerRecordReportDetailResponse_PaymentTransaction with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CustomerRecordReportDetailResponse_PaymentTransactionMultiError, or nil if
+// none found.
+func (m *CustomerRecordReportDetailResponse_PaymentTransaction) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CustomerRecordReportDetailResponse_PaymentTransaction) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for PaymentTransactionId
+
+	// no validation rules for PspTransactionId
+
+	if all {
+		switch v := interface{}(m.GetArrivalTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CustomerRecordReportDetailResponse_PaymentTransactionValidationError{
+					field:  "ArrivalTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CustomerRecordReportDetailResponse_PaymentTransactionValidationError{
+					field:  "ArrivalTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetArrivalTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CustomerRecordReportDetailResponse_PaymentTransactionValidationError{
+				field:  "ArrivalTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for PaymentServiceProvider
+
+	// no validation rules for MethodOfPayment
+
+	// no validation rules for PaymentChannel
+
+	// no validation rules for Currency
+
+	// no validation rules for Amount
+
+	// no validation rules for ProcessingFee
+
+	if len(errors) > 0 {
+		return CustomerRecordReportDetailResponse_PaymentTransactionMultiError(errors)
+	}
+
+	return nil
+}
+
+// CustomerRecordReportDetailResponse_PaymentTransactionMultiError is an error
+// wrapping multiple validation errors returned by
+// CustomerRecordReportDetailResponse_PaymentTransaction.ValidateAll() if the
+// designated constraints aren't met.
+type CustomerRecordReportDetailResponse_PaymentTransactionMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CustomerRecordReportDetailResponse_PaymentTransactionMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CustomerRecordReportDetailResponse_PaymentTransactionMultiError) AllErrors() []error {
+	return m
+}
+
+// CustomerRecordReportDetailResponse_PaymentTransactionValidationError is the
+// validation error returned by
+// CustomerRecordReportDetailResponse_PaymentTransaction.Validate if the
+// designated constraints aren't met.
+type CustomerRecordReportDetailResponse_PaymentTransactionValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CustomerRecordReportDetailResponse_PaymentTransactionValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e CustomerRecordReportDetailResponse_PaymentTransactionValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e CustomerRecordReportDetailResponse_PaymentTransactionValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e CustomerRecordReportDetailResponse_PaymentTransactionValidationError) Key() bool {
+	return e.key
+}
+
+// ErrorName returns error name.
+func (e CustomerRecordReportDetailResponse_PaymentTransactionValidationError) ErrorName() string {
+	return "CustomerRecordReportDetailResponse_PaymentTransactionValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CustomerRecordReportDetailResponse_PaymentTransactionValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCustomerRecordReportDetailResponse_PaymentTransaction.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CustomerRecordReportDetailResponse_PaymentTransactionValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CustomerRecordReportDetailResponse_PaymentTransactionValidationError{}
+
+// Validate checks the field values on
+// CustomerRecordReportDetailResponse_GameTransaction with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *CustomerRecordReportDetailResponse_GameTransaction) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// CustomerRecordReportDetailResponse_GameTransaction with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in
+// CustomerRecordReportDetailResponse_GameTransactionMultiError, or nil if
+// none found.
+func (m *CustomerRecordReportDetailResponse_GameTransaction) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CustomerRecordReportDetailResponse_GameTransaction) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for GameTransactionId
+
+	// no validation rules for ProviderTransactionId
+
+	// no validation rules for SettlementTime
+
+	// no validation rules for Venue_Tournament
+
+	// no validation rules for WagerType
+
+	// no validation rules for BetCurrency
+
+	// no validation rules for BetAmount
+
+	// no validation rules for PayoutCurrency
+
+	// no validation rules for PayoutAmount
+
+	if len(errors) > 0 {
+		return CustomerRecordReportDetailResponse_GameTransactionMultiError(errors)
+	}
+
+	return nil
+}
+
+// CustomerRecordReportDetailResponse_GameTransactionMultiError is an error
+// wrapping multiple validation errors returned by
+// CustomerRecordReportDetailResponse_GameTransaction.ValidateAll() if the
+// designated constraints aren't met.
+type CustomerRecordReportDetailResponse_GameTransactionMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CustomerRecordReportDetailResponse_GameTransactionMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CustomerRecordReportDetailResponse_GameTransactionMultiError) AllErrors() []error { return m }
+
+// CustomerRecordReportDetailResponse_GameTransactionValidationError is the
+// validation error returned by
+// CustomerRecordReportDetailResponse_GameTransaction.Validate if the
+// designated constraints aren't met.
+type CustomerRecordReportDetailResponse_GameTransactionValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CustomerRecordReportDetailResponse_GameTransactionValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e CustomerRecordReportDetailResponse_GameTransactionValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e CustomerRecordReportDetailResponse_GameTransactionValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e CustomerRecordReportDetailResponse_GameTransactionValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CustomerRecordReportDetailResponse_GameTransactionValidationError) ErrorName() string {
+	return "CustomerRecordReportDetailResponse_GameTransactionValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CustomerRecordReportDetailResponse_GameTransactionValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCustomerRecordReportDetailResponse_GameTransaction.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CustomerRecordReportDetailResponse_GameTransactionValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CustomerRecordReportDetailResponse_GameTransactionValidationError{}
+
+// Validate checks the field values on
+// CustomerRecordReportDetailResponse_EventSettlementInformation with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CustomerRecordReportDetailResponse_EventSettlementInformation) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// CustomerRecordReportDetailResponse_EventSettlementInformation with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CustomerRecordReportDetailResponse_EventSettlementInformationMultiError, or
+// nil if none found.
+func (m *CustomerRecordReportDetailResponse_EventSettlementInformation) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CustomerRecordReportDetailResponse_EventSettlementInformation) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for SelectionBetDetails
+
+	// no validation rules for EventDescription
+
+	// no validation rules for SettlementDetails
+
+	for idx, item := range m.GetMatchResults() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, CustomerRecordReportDetailResponse_EventSettlementInformationValidationError{
+						field:  fmt.Sprintf("MatchResults[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, CustomerRecordReportDetailResponse_EventSettlementInformationValidationError{
+						field:  fmt.Sprintf("MatchResults[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return CustomerRecordReportDetailResponse_EventSettlementInformationValidationError{
+					field:  fmt.Sprintf("MatchResults[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return CustomerRecordReportDetailResponse_EventSettlementInformationMultiError(errors)
+	}
+
+	return nil
+}
+
+// CustomerRecordReportDetailResponse_EventSettlementInformationMultiError is
+// an error wrapping multiple validation errors returned by
+// CustomerRecordReportDetailResponse_EventSettlementInformation.ValidateAll()
+// if the designated constraints aren't met.
+type CustomerRecordReportDetailResponse_EventSettlementInformationMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CustomerRecordReportDetailResponse_EventSettlementInformationMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CustomerRecordReportDetailResponse_EventSettlementInformationMultiError) AllErrors() []error {
+	return m
+}
+
+// CustomerRecordReportDetailResponse_EventSettlementInformationValidationError
+// is the validation error returned by
+// CustomerRecordReportDetailResponse_EventSettlementInformation.Validate if
+// the designated constraints aren't met.
+type CustomerRecordReportDetailResponse_EventSettlementInformationValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CustomerRecordReportDetailResponse_EventSettlementInformationValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e CustomerRecordReportDetailResponse_EventSettlementInformationValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e CustomerRecordReportDetailResponse_EventSettlementInformationValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e CustomerRecordReportDetailResponse_EventSettlementInformationValidationError) Key() bool {
+	return e.key
+}
+
+// ErrorName returns error name.
+func (e CustomerRecordReportDetailResponse_EventSettlementInformationValidationError) ErrorName() string {
+	return "CustomerRecordReportDetailResponse_EventSettlementInformationValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CustomerRecordReportDetailResponse_EventSettlementInformationValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCustomerRecordReportDetailResponse_EventSettlementInformation.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CustomerRecordReportDetailResponse_EventSettlementInformationValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CustomerRecordReportDetailResponse_EventSettlementInformationValidationError{}
+
+// Validate checks the field values on
+// CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsMultiError,
+// or nil if none found.
+func (m *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Name
+
+	// no validation rules for Status
+
+	// no validation rules for Selection
+
+	if len(errors) > 0 {
+		return CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsMultiError(errors)
+	}
+
+	return nil
+}
+
+// CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsMultiError
+// is an error wrapping multiple validation errors returned by
+// CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults.ValidateAll()
+// if the designated constraints aren't met.
+type CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsMultiError) AllErrors() []error {
+	return m
+}
+
+// CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError
+// is the validation error returned by
+// CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults.Validate
+// if the designated constraints aren't met.
+type CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError) Key() bool {
+	return e.key
+}
+
+// ErrorName returns error name.
+func (e CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError) ErrorName() string {
+	return "CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError{}

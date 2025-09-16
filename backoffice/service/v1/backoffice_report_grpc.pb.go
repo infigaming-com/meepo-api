@@ -34,6 +34,7 @@ const (
 	BackofficeReport_ListWithdrawVtgDetails_FullMethodName     = "/api.backoffice.service.v1.BackofficeReport/ListWithdrawVtgDetails"
 	BackofficeReport_ListSportEvents_FullMethodName            = "/api.backoffice.service.v1.BackofficeReport/ListSportEvents"
 	BackofficeReport_GetTransactionAndEventInfo_FullMethodName = "/api.backoffice.service.v1.BackofficeReport/GetTransactionAndEventInfo"
+	BackofficeReport_CustomerRecordReportDetail_FullMethodName = "/api.backoffice.service.v1.BackofficeReport/CustomerRecordReportDetail"
 )
 
 // BackofficeReportClient is the client API for BackofficeReport service.
@@ -55,6 +56,7 @@ type BackofficeReportClient interface {
 	ListWithdrawVtgDetails(ctx context.Context, in *ListWithdrawVtgDetailsRequest, opts ...grpc.CallOption) (*ListWithdrawVtgDetailsResponse, error)
 	ListSportEvents(ctx context.Context, in *ListSportEventsRequest, opts ...grpc.CallOption) (*ListSportEventsResponse, error)
 	GetTransactionAndEventInfo(ctx context.Context, in *GetTransactionAndEventInfoRequest, opts ...grpc.CallOption) (*GetTransactionAndEventInfoResponse, error)
+	CustomerRecordReportDetail(ctx context.Context, in *CustomerRecordReportDetailRequest, opts ...grpc.CallOption) (*CustomerRecordReportDetailResponse, error)
 }
 
 type backofficeReportClient struct {
@@ -215,6 +217,16 @@ func (c *backofficeReportClient) GetTransactionAndEventInfo(ctx context.Context,
 	return out, nil
 }
 
+func (c *backofficeReportClient) CustomerRecordReportDetail(ctx context.Context, in *CustomerRecordReportDetailRequest, opts ...grpc.CallOption) (*CustomerRecordReportDetailResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CustomerRecordReportDetailResponse)
+	err := c.cc.Invoke(ctx, BackofficeReport_CustomerRecordReportDetail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeReportServer is the server API for BackofficeReport service.
 // All implementations must embed UnimplementedBackofficeReportServer
 // for forward compatibility.
@@ -234,6 +246,7 @@ type BackofficeReportServer interface {
 	ListWithdrawVtgDetails(context.Context, *ListWithdrawVtgDetailsRequest) (*ListWithdrawVtgDetailsResponse, error)
 	ListSportEvents(context.Context, *ListSportEventsRequest) (*ListSportEventsResponse, error)
 	GetTransactionAndEventInfo(context.Context, *GetTransactionAndEventInfoRequest) (*GetTransactionAndEventInfoResponse, error)
+	CustomerRecordReportDetail(context.Context, *CustomerRecordReportDetailRequest) (*CustomerRecordReportDetailResponse, error)
 	mustEmbedUnimplementedBackofficeReportServer()
 }
 
@@ -288,6 +301,9 @@ func (UnimplementedBackofficeReportServer) ListSportEvents(context.Context, *Lis
 }
 func (UnimplementedBackofficeReportServer) GetTransactionAndEventInfo(context.Context, *GetTransactionAndEventInfoRequest) (*GetTransactionAndEventInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTransactionAndEventInfo not implemented")
+}
+func (UnimplementedBackofficeReportServer) CustomerRecordReportDetail(context.Context, *CustomerRecordReportDetailRequest) (*CustomerRecordReportDetailResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CustomerRecordReportDetail not implemented")
 }
 func (UnimplementedBackofficeReportServer) mustEmbedUnimplementedBackofficeReportServer() {}
 func (UnimplementedBackofficeReportServer) testEmbeddedByValue()                          {}
@@ -580,6 +596,24 @@ func _BackofficeReport_GetTransactionAndEventInfo_Handler(srv interface{}, ctx c
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeReport_CustomerRecordReportDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CustomerRecordReportDetailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeReportServer).CustomerRecordReportDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeReport_CustomerRecordReportDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeReportServer).CustomerRecordReportDetail(ctx, req.(*CustomerRecordReportDetailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeReport_ServiceDesc is the grpc.ServiceDesc for BackofficeReport service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -646,6 +680,10 @@ var BackofficeReport_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetTransactionAndEventInfo",
 			Handler:    _BackofficeReport_GetTransactionAndEventInfo_Handler,
+		},
+		{
+			MethodName: "CustomerRecordReportDetail",
+			Handler:    _BackofficeReport_CustomerRecordReportDetail_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
