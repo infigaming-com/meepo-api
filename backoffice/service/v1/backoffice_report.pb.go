@@ -2555,6 +2555,7 @@ type CustomerRecordReportDetailRequest struct {
 	UserId               *int64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
 	PaymentTransactionId *int64                 `protobuf:"varint,2,opt,name=payment_transaction_id,json=paymentTransactionId,proto3,oneof" json:"payment_transaction_id,omitempty"`
 	GameTransactionId    *int64                 `protobuf:"varint,3,opt,name=game_transaction_id,json=gameTransactionId,proto3,oneof" json:"game_transaction_id,omitempty"`
+	GameBetId            *int64                 `protobuf:"varint,4,opt,name=game_bet_id,json=gameBetId,proto3,oneof" json:"game_bet_id,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -2606,6 +2607,13 @@ func (x *CustomerRecordReportDetailRequest) GetPaymentTransactionId() int64 {
 func (x *CustomerRecordReportDetailRequest) GetGameTransactionId() int64 {
 	if x != nil && x.GameTransactionId != nil {
 		return *x.GameTransactionId
+	}
+	return 0
+}
+
+func (x *CustomerRecordReportDetailRequest) GetGameBetId() int64 {
+	if x != nil && x.GameBetId != nil {
+		return *x.GameBetId
 	}
 	return 0
 }
@@ -7020,15 +7028,17 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x15selection_bet_details\x18\x01 \x01(\tR\x13selectionBetDetails\x12+\n" +
 	"\x11event_description\x18\x02 \x01(\tR\x10eventDescription\x12-\n" +
 	"\x12settlement_details\x18\x03 \x01(\tR\x11settlementDetails\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\tR\x06status\"\xf0\x01\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\"\xa5\x02\n" +
 	"!CustomerRecordReportDetailRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x129\n" +
 	"\x16payment_transaction_id\x18\x02 \x01(\x03H\x01R\x14paymentTransactionId\x88\x01\x01\x123\n" +
-	"\x13game_transaction_id\x18\x03 \x01(\x03H\x02R\x11gameTransactionId\x88\x01\x01B\n" +
+	"\x13game_transaction_id\x18\x03 \x01(\x03H\x02R\x11gameTransactionId\x88\x01\x01\x12#\n" +
+	"\vgame_bet_id\x18\x04 \x01(\x03H\x03R\tgameBetId\x88\x01\x01B\n" +
 	"\n" +
 	"\b_user_idB\x19\n" +
 	"\x17_payment_transaction_idB\x16\n" +
-	"\x14_game_transaction_id\"\xf7\x0f\n" +
+	"\x14_game_transaction_idB\x0e\n" +
+	"\f_game_bet_id\"\xf7\x0f\n" +
 	"\"CustomerRecordReportDetailResponse\x12n\n" +
 	"\vuser_detail\x18\x01 \x01(\v2H.api.backoffice.service.v1.CustomerRecordReportDetailResponse.UserDetailH\x00R\n" +
 	"userDetail\x88\x01\x01\x12\x86\x01\n" +

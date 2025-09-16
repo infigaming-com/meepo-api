@@ -4665,6 +4665,10 @@ func (m *CustomerRecordReportDetailRequest) validate(all bool) error {
 		// no validation rules for GameTransactionId
 	}
 
+	if m.GameBetId != nil {
+		// no validation rules for GameBetId
+	}
+
 	if len(errors) > 0 {
 		return CustomerRecordReportDetailRequestMultiError(errors)
 	}

@@ -769,6 +769,7 @@ message CustomerRecordReportDetailRequest {
 	optional int64 user_id = 1;
 	optional int64 payment_transaction_id = 2;
 	optional int64 game_transaction_id = 3;
+	optional int64 game_bet_id = 4;
 }
 
 message CustomerRecordReportDetailResponse{
