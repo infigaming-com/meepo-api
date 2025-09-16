@@ -14384,6 +14384,15 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.ListFICAThresholdTransactionsResponse_FICAThresholdTransaction'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.wallet.service.v1.ListFICAThresholdTransactionsResponse_FICAThresholdTransaction:
             type: object
             properties:
