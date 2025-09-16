@@ -981,8 +981,8 @@ message ListUnpaidBetsResponse {
 		int64 bet_id = 5;
 		int64 round_id = 6;
 		string category = 7;
-		string game_or_event = 8;
-		string game_or_event_id = 9;
+		string game = 8;
+		string game_id = 9;
 		string provider_name = 10;
 		string currency = 11;
 		string bet_amount = 12;

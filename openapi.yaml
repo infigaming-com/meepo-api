@@ -12086,9 +12086,9 @@ components:
                     type: string
                 category:
                     type: string
-                gameOrEvent:
+                game:
                     type: string
-                gameOrEventId:
+                gameId:
                     type: string
                 providerName:
                     type: string
