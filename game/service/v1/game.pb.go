@@ -7658,8 +7658,8 @@ type ListUnpaidBetsResponse_UnpaidBet struct {
 	BetId          int64                  `protobuf:"varint,5,opt,name=bet_id,json=betId,proto3" json:"bet_id,omitempty"`
 	RoundId        int64                  `protobuf:"varint,6,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
 	Category       string                 `protobuf:"bytes,7,opt,name=category,proto3" json:"category,omitempty"`
-	GameOrEvent    string                 `protobuf:"bytes,8,opt,name=game_or_event,json=gameOrEvent,proto3" json:"game_or_event,omitempty"`
-	GameOrEventId  string                 `protobuf:"bytes,9,opt,name=game_or_event_id,json=gameOrEventId,proto3" json:"game_or_event_id,omitempty"`
+	Game           string                 `protobuf:"bytes,8,opt,name=game,proto3" json:"game,omitempty"`
+	GameId         string                 `protobuf:"bytes,9,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
 	ProviderName   string                 `protobuf:"bytes,10,opt,name=provider_name,json=providerName,proto3" json:"provider_name,omitempty"`
 	Currency       string                 `protobuf:"bytes,11,opt,name=currency,proto3" json:"currency,omitempty"`
 	BetAmount      string                 `protobuf:"bytes,12,opt,name=bet_amount,json=betAmount,proto3" json:"bet_amount,omitempty"`
@@ -7748,16 +7748,16 @@ func (x *ListUnpaidBetsResponse_UnpaidBet) GetCategory() string {
 	return ""
 }
 
-func (x *ListUnpaidBetsResponse_UnpaidBet) GetGameOrEvent() string {
+func (x *ListUnpaidBetsResponse_UnpaidBet) GetGame() string {
 	if x != nil {
-		return x.GameOrEvent
+		return x.Game
 	}
 	return ""
 }
 
-func (x *ListUnpaidBetsResponse_UnpaidBet) GetGameOrEventId() string {
+func (x *ListUnpaidBetsResponse_UnpaidBet) GetGameId() string {
 	if x != nil {
-		return x.GameOrEventId
+		return x.GameId
 	}
 	return ""
 }
@@ -8950,7 +8950,7 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x0f_transaction_idB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xba\x06\n" +
+	"_page_size\"\x9a\x06\n" +
 	"\x16ListUnpaidBetsResponse\x12V\n" +
 	"\vunpaid_bets\x18\x01 \x03(\v25.api.game.service.v1.ListUnpaidBetsResponse.UnpaidBetR\n" +
 	"unpaidBets\x12(\n" +
@@ -8959,7 +8959,7 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x11unpaid_user_count\x18\x04 \x01(\x05R\x0funpaidUserCount\x12\x14\n" +
 	"\x05total\x18\x05 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x06 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\a \x01(\x05R\bpageSize\x1a\x87\x04\n" +
+	"\tpage_size\x18\a \x01(\x05R\bpageSize\x1a\xe7\x03\n" +
 	"\tUnpaidBet\x12D\n" +
 	"\x10create_date_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x0ecreateDateTime\x12D\n" +
 	"\x10update_date_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x0eupdateDateTime\x12\x16\n" +
@@ -8967,9 +8967,9 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\auser_id\x18\x04 \x01(\x03R\x06userId\x12\x15\n" +
 	"\x06bet_id\x18\x05 \x01(\x03R\x05betId\x12\x19\n" +
 	"\bround_id\x18\x06 \x01(\x03R\aroundId\x12\x1a\n" +
-	"\bcategory\x18\a \x01(\tR\bcategory\x12\"\n" +
-	"\rgame_or_event\x18\b \x01(\tR\vgameOrEvent\x12'\n" +
-	"\x10game_or_event_id\x18\t \x01(\tR\rgameOrEventId\x12#\n" +
+	"\bcategory\x18\a \x01(\tR\bcategory\x12\x12\n" +
+	"\x04game\x18\b \x01(\tR\x04game\x12\x17\n" +
+	"\agame_id\x18\t \x01(\tR\x06gameId\x12#\n" +
 	"\rprovider_name\x18\n" +
 	" \x01(\tR\fproviderName\x12\x1a\n" +
 	"\bcurrency\x18\v \x01(\tR\bcurrency\x12\x1d\n" +

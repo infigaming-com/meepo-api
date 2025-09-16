@@ -12505,9 +12505,9 @@ func (m *ListUnpaidBetsResponse_UnpaidBet) validate(all bool) error {
 
 	// no validation rules for Category
 
-	// no validation rules for GameOrEvent
+	// no validation rules for Game
 
-	// no validation rules for GameOrEventId
+	// no validation rules for GameId
 
 	// no validation rules for ProviderName
 
