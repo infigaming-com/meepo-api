@@ -8878,6 +8878,9 @@ func (x *ListFICAThresholdTransactionsRequest) GetOperatorContext() *common.Oper
 type ListFICAThresholdTransactionsResponse struct {
 	state                 protoimpl.MessageState                                            `protogen:"open.v1"`
 	ThresholdTransactions []*ListFICAThresholdTransactionsResponse_FICAThresholdTransaction `protobuf:"bytes,1,rep,name=threshold_transactions,json=thresholdTransactions,proto3" json:"threshold_transactions,omitempty"`
+	Total                 int32                                                             `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Page                  int32                                                             `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize              int32                                                             `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -8917,6 +8920,27 @@ func (x *ListFICAThresholdTransactionsResponse) GetThresholdTransactions() []*Li
 		return x.ThresholdTransactions
 	}
 	return nil
+}
+
+func (x *ListFICAThresholdTransactionsResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+func (x *ListFICAThresholdTransactionsResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListFICAThresholdTransactionsResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
 }
 
 type GetUserBalancesResponse_Balance struct {
@@ -11858,9 +11882,12 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"_kyc_levelB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xff\x04\n" +
+	"_page_size\"\xc6\x05\n" +
 	"%ListFICAThresholdTransactionsResponse\x12\x8c\x01\n" +
-	"\x16threshold_transactions\x18\x01 \x03(\v2U.api.wallet.service.v1.ListFICAThresholdTransactionsResponse.FICAThresholdTransactionR\x15thresholdTransactions\x1a\xc6\x03\n" +
+	"\x16threshold_transactions\x18\x01 \x03(\v2U.api.wallet.service.v1.ListFICAThresholdTransactionsResponse.FICAThresholdTransactionR\x15thresholdTransactions\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
+	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xc6\x03\n" +
 	"\x18FICAThresholdTransaction\x12\x12\n" +
 	"\x04type\x18\x01 \x01(\tR\x04type\x12E\n" +
 	"\x10transaction_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x0ftransactionTime\x12%\n" +
