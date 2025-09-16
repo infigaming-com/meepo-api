@@ -25,14 +25,14 @@ const OperationBackofficeWalletDeleteDepositRewardSequences = "/api.backoffice.s
 const OperationBackofficeWalletDeleteWalletResponsibleGamblingConfig = "/api.backoffice.service.v1.BackofficeWallet/DeleteWalletResponsibleGamblingConfig"
 const OperationBackofficeWalletGetDepositRewardConfig = "/api.backoffice.service.v1.BackofficeWallet/GetDepositRewardConfig"
 const OperationBackofficeWalletGetExchangeRates = "/api.backoffice.service.v1.BackofficeWallet/GetExchangeRates"
-const OperationBackofficeWalletGetFCIAThresholdConfig = "/api.backoffice.service.v1.BackofficeWallet/GetFCIAThresholdConfig"
+const OperationBackofficeWalletGetFICAThresholdConfig = "/api.backoffice.service.v1.BackofficeWallet/GetFICAThresholdConfig"
 const OperationBackofficeWalletGetGamificationCurrencyConfig = "/api.backoffice.service.v1.BackofficeWallet/GetGamificationCurrencyConfig"
 const OperationBackofficeWalletGetOperatorBalance = "/api.backoffice.service.v1.BackofficeWallet/GetOperatorBalance"
 const OperationBackofficeWalletGetWalletCreditTransactions = "/api.backoffice.service.v1.BackofficeWallet/GetWalletCreditTransactions"
 const OperationBackofficeWalletGetWalletCredits = "/api.backoffice.service.v1.BackofficeWallet/GetWalletCredits"
 const OperationBackofficeWalletGetWallets = "/api.backoffice.service.v1.BackofficeWallet/GetWallets"
 const OperationBackofficeWalletListCustomerRecords = "/api.backoffice.service.v1.BackofficeWallet/ListCustomerRecords"
-const OperationBackofficeWalletListFCIAThresholdTransactions = "/api.backoffice.service.v1.BackofficeWallet/ListFCIAThresholdTransactions"
+const OperationBackofficeWalletListFICAThresholdTransactions = "/api.backoffice.service.v1.BackofficeWallet/ListFICAThresholdTransactions"
 const OperationBackofficeWalletListOperatorBalanceTransactions = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorBalanceTransactions"
 const OperationBackofficeWalletListOperatorBalances = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorBalances"
 const OperationBackofficeWalletListWalletBalanceTransactions = "/api.backoffice.service.v1.BackofficeWallet/ListWalletBalanceTransactions"
@@ -44,7 +44,7 @@ const OperationBackofficeWalletOperatorBalanceSettle = "/api.backoffice.service.
 const OperationBackofficeWalletOperatorSwap = "/api.backoffice.service.v1.BackofficeWallet/OperatorSwap"
 const OperationBackofficeWalletOperatorTransfer = "/api.backoffice.service.v1.BackofficeWallet/OperatorTransfer"
 const OperationBackofficeWalletSetDepositRewardSequences = "/api.backoffice.service.v1.BackofficeWallet/SetDepositRewardSequences"
-const OperationBackofficeWalletSetFCIAThresholdConfig = "/api.backoffice.service.v1.BackofficeWallet/SetFCIAThresholdConfig"
+const OperationBackofficeWalletSetFICAThresholdConfig = "/api.backoffice.service.v1.BackofficeWallet/SetFICAThresholdConfig"
 const OperationBackofficeWalletUpdateDeductionOrder = "/api.backoffice.service.v1.BackofficeWallet/UpdateDeductionOrder"
 const OperationBackofficeWalletUpdateOperatorBalance = "/api.backoffice.service.v1.BackofficeWallet/UpdateOperatorBalance"
 const OperationBackofficeWalletUpdateOperatorCurrencyConfig = "/api.backoffice.service.v1.BackofficeWallet/UpdateOperatorCurrencyConfig"
@@ -60,8 +60,8 @@ type BackofficeWalletHTTPServer interface {
 	// GetDepositRewardConfig GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
 	GetDepositRewardConfig(context.Context, *GetDepositRewardConfigRequest) (*v1.GetDepositRewardConfigResponse, error)
 	GetExchangeRates(context.Context, *GetExchangeRatesRequest) (*GetExchangeRatesResponse, error)
-	// GetFCIAThresholdConfig GetFCIAThresholdConfig gets the FCIA threshold config for an operator of all currencies
-	GetFCIAThresholdConfig(context.Context, *GetFCIAThresholdConfigRequest) (*v1.GetFCIAThresholdConfigResponse, error)
+	// GetFICAThresholdConfig GetFICAThresholdConfig gets the FICA threshold config for an operator of all currencies
+	GetFICAThresholdConfig(context.Context, *GetFICAThresholdConfigRequest) (*v1.GetFICAThresholdConfigResponse, error)
 	// GetGamificationCurrencyConfig GetGamificationCurrencyConfig returns the currency config and the deduction order config based on currency and operator context
 	GetGamificationCurrencyConfig(context.Context, *GetGamificationCurrencyConfigRequest) (*v1.GetGamificationCurrencyConfigResponse, error)
 	// GetOperatorBalance GetOperatorBalance gets the balances of an operator
@@ -71,8 +71,8 @@ type BackofficeWalletHTTPServer interface {
 	GetWallets(context.Context, *GetWalletsRequest) (*v1.GetWalletsResponse, error)
 	// ListCustomerRecords ListCustomerRecords lists customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
 	ListCustomerRecords(context.Context, *ListCustomerRecordsRequest) (*v1.ListCustomerRecordsResponse, error)
-	// ListFCIAThresholdTransactions ListFCIAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
-	ListFCIAThresholdTransactions(context.Context, *ListFCIAThresholdTransactionsRequest) (*v1.ListFCIAThresholdTransactionsResponse, error)
+	// ListFICAThresholdTransactions ListFICAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
+	ListFICAThresholdTransactions(context.Context, *ListFICAThresholdTransactionsRequest) (*v1.ListFICAThresholdTransactionsResponse, error)
 	// ListOperatorBalanceTransactions ListOperatorBalanceTransactions lists the balance transactions of an operator
 	ListOperatorBalanceTransactions(context.Context, *ListOperatorBalanceTransactionsRequest) (*ListOperatorBalanceTransactionsResponse, error)
 	// ListOperatorBalances ListOperatorBalances lists all operator balances which belong to the backoffice operator
@@ -94,8 +94,8 @@ type BackofficeWalletHTTPServer interface {
 	OperatorTransfer(context.Context, *OperatorTransferRequest) (*OperatorTransferResponse, error)
 	// SetDepositRewardSequences SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
 	SetDepositRewardSequences(context.Context, *SetDepositRewardSequencesRequest) (*v1.SetDepositRewardSequencesResponse, error)
-	// SetFCIAThresholdConfig SetFCIAThresholdConfig sets the FCIA threshold config for an operator and its specific currency
-	SetFCIAThresholdConfig(context.Context, *SetFCIAThresholdConfigRequest) (*v1.SetFCIAThresholdConfigResponse, error)
+	// SetFICAThresholdConfig SetFICAThresholdConfig sets the FICA threshold config for an operator and its specific currency
+	SetFICAThresholdConfig(context.Context, *SetFICAThresholdConfigRequest) (*v1.SetFICAThresholdConfigResponse, error)
 	// UpdateDeductionOrder UpdateDeductionOrder updates the deduction order config based on operator context
 	UpdateDeductionOrder(context.Context, *UpdateDeductionOrderRequest) (*v1.UpdateDeductionOrderResponse, error)
 	// UpdateOperatorBalance UpdateOperatorBalance updates an operator balance， now only support update the enabled status
@@ -135,9 +135,9 @@ func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTP
 	r.POST("/v1/backoffice/wallet/responsible-gambling/config/delete", _BackofficeWallet_DeleteWalletResponsibleGamblingConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/responsible-gambling/configs/list", _BackofficeWallet_ListWalletResponsibleGamblingConfigs0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/customer-records/list", _BackofficeWallet_ListCustomerRecords0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/wallet/fcia/config/set", _BackofficeWallet_SetFCIAThresholdConfig0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/wallet/fcia/config/get", _BackofficeWallet_GetFCIAThresholdConfig0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/wallet/fcia/transactions/list", _BackofficeWallet_ListFCIAThresholdTransactions0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/fica/config/set", _BackofficeWallet_SetFICAThresholdConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/fica/config/get", _BackofficeWallet_GetFICAThresholdConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/fica/transactions/list", _BackofficeWallet_ListFICAThresholdTransactions0_HTTP_Handler(srv))
 }
 
 func _BackofficeWallet_GetWallets0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
@@ -734,68 +734,68 @@ func _BackofficeWallet_ListCustomerRecords0_HTTP_Handler(srv BackofficeWalletHTT
 	}
 }
 
-func _BackofficeWallet_SetFCIAThresholdConfig0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+func _BackofficeWallet_SetFICAThresholdConfig0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in SetFCIAThresholdConfigRequest
+		var in SetFICAThresholdConfigRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeWalletSetFCIAThresholdConfig)
+		http.SetOperation(ctx, OperationBackofficeWalletSetFICAThresholdConfig)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.SetFCIAThresholdConfig(ctx, req.(*SetFCIAThresholdConfigRequest))
+			return srv.SetFICAThresholdConfig(ctx, req.(*SetFICAThresholdConfigRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*v1.SetFCIAThresholdConfigResponse)
+		reply := out.(*v1.SetFICAThresholdConfigResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
-func _BackofficeWallet_GetFCIAThresholdConfig0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+func _BackofficeWallet_GetFICAThresholdConfig0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in GetFCIAThresholdConfigRequest
+		var in GetFICAThresholdConfigRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeWalletGetFCIAThresholdConfig)
+		http.SetOperation(ctx, OperationBackofficeWalletGetFICAThresholdConfig)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetFCIAThresholdConfig(ctx, req.(*GetFCIAThresholdConfigRequest))
+			return srv.GetFICAThresholdConfig(ctx, req.(*GetFICAThresholdConfigRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*v1.GetFCIAThresholdConfigResponse)
+		reply := out.(*v1.GetFICAThresholdConfigResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
-func _BackofficeWallet_ListFCIAThresholdTransactions0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+func _BackofficeWallet_ListFICAThresholdTransactions0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in ListFCIAThresholdTransactionsRequest
+		var in ListFICAThresholdTransactionsRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeWalletListFCIAThresholdTransactions)
+		http.SetOperation(ctx, OperationBackofficeWalletListFICAThresholdTransactions)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListFCIAThresholdTransactions(ctx, req.(*ListFCIAThresholdTransactionsRequest))
+			return srv.ListFICAThresholdTransactions(ctx, req.(*ListFICAThresholdTransactionsRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*v1.ListFCIAThresholdTransactionsResponse)
+		reply := out.(*v1.ListFICAThresholdTransactionsResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -806,14 +806,14 @@ type BackofficeWalletHTTPClient interface {
 	DeleteWalletResponsibleGamblingConfig(ctx context.Context, req *DeleteWalletResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *v1.DeleteResponsibleGamblingConfigResponse, err error)
 	GetDepositRewardConfig(ctx context.Context, req *GetDepositRewardConfigRequest, opts ...http.CallOption) (rsp *v1.GetDepositRewardConfigResponse, err error)
 	GetExchangeRates(ctx context.Context, req *GetExchangeRatesRequest, opts ...http.CallOption) (rsp *GetExchangeRatesResponse, err error)
-	GetFCIAThresholdConfig(ctx context.Context, req *GetFCIAThresholdConfigRequest, opts ...http.CallOption) (rsp *v1.GetFCIAThresholdConfigResponse, err error)
+	GetFICAThresholdConfig(ctx context.Context, req *GetFICAThresholdConfigRequest, opts ...http.CallOption) (rsp *v1.GetFICAThresholdConfigResponse, err error)
 	GetGamificationCurrencyConfig(ctx context.Context, req *GetGamificationCurrencyConfigRequest, opts ...http.CallOption) (rsp *v1.GetGamificationCurrencyConfigResponse, err error)
 	GetOperatorBalance(ctx context.Context, req *v1.GetOperatorBalanceRequest, opts ...http.CallOption) (rsp *v1.GetOperatorBalanceResponse, err error)
 	GetWalletCreditTransactions(ctx context.Context, req *GetWalletCreditTransactionsRequest, opts ...http.CallOption) (rsp *GetWalletCreditTransactionsResponse, err error)
 	GetWalletCredits(ctx context.Context, req *GetWalletCreditsRequest, opts ...http.CallOption) (rsp *GetWalletCreditsResponse, err error)
 	GetWallets(ctx context.Context, req *GetWalletsRequest, opts ...http.CallOption) (rsp *v1.GetWalletsResponse, err error)
 	ListCustomerRecords(ctx context.Context, req *ListCustomerRecordsRequest, opts ...http.CallOption) (rsp *v1.ListCustomerRecordsResponse, err error)
-	ListFCIAThresholdTransactions(ctx context.Context, req *ListFCIAThresholdTransactionsRequest, opts ...http.CallOption) (rsp *v1.ListFCIAThresholdTransactionsResponse, err error)
+	ListFICAThresholdTransactions(ctx context.Context, req *ListFICAThresholdTransactionsRequest, opts ...http.CallOption) (rsp *v1.ListFICAThresholdTransactionsResponse, err error)
 	ListOperatorBalanceTransactions(ctx context.Context, req *ListOperatorBalanceTransactionsRequest, opts ...http.CallOption) (rsp *ListOperatorBalanceTransactionsResponse, err error)
 	ListOperatorBalances(ctx context.Context, req *ListOperatorBalancesRequest, opts ...http.CallOption) (rsp *v1.ListBottomOperatorBalancesResponse, err error)
 	ListWalletBalanceTransactions(ctx context.Context, req *ListWalletBalanceTransactionsRequest, opts ...http.CallOption) (rsp *ListWalletBalanceTransactionsResponse, err error)
@@ -825,7 +825,7 @@ type BackofficeWalletHTTPClient interface {
 	OperatorSwap(ctx context.Context, req *OperatorSwapRequest, opts ...http.CallOption) (rsp *OperatorSwapResponse, err error)
 	OperatorTransfer(ctx context.Context, req *OperatorTransferRequest, opts ...http.CallOption) (rsp *OperatorTransferResponse, err error)
 	SetDepositRewardSequences(ctx context.Context, req *SetDepositRewardSequencesRequest, opts ...http.CallOption) (rsp *v1.SetDepositRewardSequencesResponse, err error)
-	SetFCIAThresholdConfig(ctx context.Context, req *SetFCIAThresholdConfigRequest, opts ...http.CallOption) (rsp *v1.SetFCIAThresholdConfigResponse, err error)
+	SetFICAThresholdConfig(ctx context.Context, req *SetFICAThresholdConfigRequest, opts ...http.CallOption) (rsp *v1.SetFICAThresholdConfigResponse, err error)
 	UpdateDeductionOrder(ctx context.Context, req *UpdateDeductionOrderRequest, opts ...http.CallOption) (rsp *v1.UpdateDeductionOrderResponse, err error)
 	UpdateOperatorBalance(ctx context.Context, req *UpdateOperatorBalanceRequest, opts ...http.CallOption) (rsp *UpdateOperatorBalanceResponse, err error)
 	UpdateOperatorCurrencyConfig(ctx context.Context, req *UpdateOperatorCurrencyConfigRequest, opts ...http.CallOption) (rsp *v1.UpdateOperatorCurrencyConfigResponse, err error)
@@ -906,11 +906,11 @@ func (c *BackofficeWalletHTTPClientImpl) GetExchangeRates(ctx context.Context, i
 	return &out, nil
 }
 
-func (c *BackofficeWalletHTTPClientImpl) GetFCIAThresholdConfig(ctx context.Context, in *GetFCIAThresholdConfigRequest, opts ...http.CallOption) (*v1.GetFCIAThresholdConfigResponse, error) {
-	var out v1.GetFCIAThresholdConfigResponse
-	pattern := "/v1/backoffice/wallet/fcia/config/get"
+func (c *BackofficeWalletHTTPClientImpl) GetFICAThresholdConfig(ctx context.Context, in *GetFICAThresholdConfigRequest, opts ...http.CallOption) (*v1.GetFICAThresholdConfigResponse, error) {
+	var out v1.GetFICAThresholdConfigResponse
+	pattern := "/v1/backoffice/wallet/fica/config/get"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeWalletGetFCIAThresholdConfig))
+	opts = append(opts, http.Operation(OperationBackofficeWalletGetFICAThresholdConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -997,11 +997,11 @@ func (c *BackofficeWalletHTTPClientImpl) ListCustomerRecords(ctx context.Context
 	return &out, nil
 }
 
-func (c *BackofficeWalletHTTPClientImpl) ListFCIAThresholdTransactions(ctx context.Context, in *ListFCIAThresholdTransactionsRequest, opts ...http.CallOption) (*v1.ListFCIAThresholdTransactionsResponse, error) {
-	var out v1.ListFCIAThresholdTransactionsResponse
-	pattern := "/v1/backoffice/wallet/fcia/transactions/list"
+func (c *BackofficeWalletHTTPClientImpl) ListFICAThresholdTransactions(ctx context.Context, in *ListFICAThresholdTransactionsRequest, opts ...http.CallOption) (*v1.ListFICAThresholdTransactionsResponse, error) {
+	var out v1.ListFICAThresholdTransactionsResponse
+	pattern := "/v1/backoffice/wallet/fica/transactions/list"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeWalletListFCIAThresholdTransactions))
+	opts = append(opts, http.Operation(OperationBackofficeWalletListFICAThresholdTransactions))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -1153,11 +1153,11 @@ func (c *BackofficeWalletHTTPClientImpl) SetDepositRewardSequences(ctx context.C
 	return &out, nil
 }
 
-func (c *BackofficeWalletHTTPClientImpl) SetFCIAThresholdConfig(ctx context.Context, in *SetFCIAThresholdConfigRequest, opts ...http.CallOption) (*v1.SetFCIAThresholdConfigResponse, error) {
-	var out v1.SetFCIAThresholdConfigResponse
-	pattern := "/v1/backoffice/wallet/fcia/config/set"
+func (c *BackofficeWalletHTTPClientImpl) SetFICAThresholdConfig(ctx context.Context, in *SetFICAThresholdConfigRequest, opts ...http.CallOption) (*v1.SetFICAThresholdConfigResponse, error) {
+	var out v1.SetFICAThresholdConfigResponse
+	pattern := "/v1/backoffice/wallet/fica/config/set"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeWalletSetFCIAThresholdConfig))
+	opts = append(opts, http.Operation(OperationBackofficeWalletSetFICAThresholdConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

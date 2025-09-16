@@ -981,8 +981,8 @@ message ListUnpaidBetsResponse {
 		int64 bet_id = 5;
 		int64 round_id = 6;
 		string category = 7;
-		string game_or_event = 8;
-		string game_or_event_id = 9;
+		string game = 8;
+		string game_id = 9;
 		string provider_name = 10;
 		string currency = 11;
 		string bet_amount = 12;
@@ -1000,15 +1000,13 @@ message ListUnpaidBetsResponse {
 
 // Sport Events related messages
 message ListSportEventsRequest {
-	api.common.OperatorContextFilters operator_context_filters = 1;
-	optional int32 page = 2;
-	optional int32 page_size = 3;
-	optional string event_name = 4; // Event name filter
-	optional string venue = 5; // Venue filter
-	optional string tournament = 6; // Tournament filter
-	optional string status = 7; // Status filter (e.g., "Completed", "Pending", "Cancelled")
-	optional google.protobuf.Timestamp start_time = 8; // Start date filter
-	optional google.protobuf.Timestamp end_time = 9; // End date filter
+	optional int32 page = 1;
+	optional int32 page_size = 2;
+	optional string event_name = 3; // Event name filter
+	optional string venue = 4; // Venue filter
+	optional string tournament = 5; // Tournament filter
+	optional string start_time = 6; // Start date filter
+	optional string end_time = 7; // End date filter
 }
 
 message ListSportEventsResponse {
@@ -1020,19 +1018,15 @@ message ListSportEventsResponse {
 		string tournament = 4; // Tournament name
 		
 		// Timing information (all in SAST timezone)
-		google.protobuf.Timestamp carded_time = 5; // Carded Time(SAST)
-		google.protobuf.Timestamp first_bet_time = 6; // First Bet Time(SAST)
-		google.protobuf.Timestamp last_bet_time = 7; // Last Bet Time(SAST)
-		google.protobuf.Timestamp no_more_bets_time = 8; // No More Bets Time(SAST)
-		google.protobuf.Timestamp result_processing_time = 9; // Result Processing Time(SAST)
-		google.protobuf.Timestamp revised_official_carded_time = 10; // Revised Official Carded Time(SAST) or null
+		int64 carded_time = 5; // Carded Time
+		int64 first_bet_time = 6; // First Bet Time
+		int64 last_bet_time = 7; // Last Bet Time
+		int64 no_more_bets_time = 8; // No More Bets Time
+		int64 result_processing_time = 9; // Result Processing Time
+		int64 revised_official_carded_time = 10; // Revised Official Carded Time or null
 		
 		// Status information
-		string status = 13; // Event status (e.g., "Completed", "Pending", "Cancelled")
-		
-		// Timestamps
-		google.protobuf.Timestamp created_at = 18;
-		google.protobuf.Timestamp updated_at = 19;
+		string status = 11; // Event status (e.g., "Completed", "Pending", "Cancelled")
 	}
 	
 	repeated SportEvent events = 1;

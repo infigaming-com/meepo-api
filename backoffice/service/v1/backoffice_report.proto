@@ -692,12 +692,13 @@ message ListWithdrawVtgDetailsResponse {
 }
 
 message ListSportEventsRequest {
-	TimeRange time_range = 1;
-	optional int32 page = 2;
-	optional int32 page_size = 3;
-	optional string event_name = 4; // Event name filter
-	optional string venue = 5; // Venue filter
-	optional string tournament = 6; // Tournament filter
+	optional string start_time = 1;
+	optional string end_time = 2;
+	optional int32 page = 3;
+	optional int32 page_size = 4;
+	optional string event_name = 5; // Event name filter
+	optional string venue = 6; // Venue filter
+	optional string tournament = 7; // Tournament filter
 }
 
 message ListSportEventsResponse {
@@ -709,12 +710,12 @@ message ListSportEventsResponse {
 		string tournament = 4; // Tournament name
 		
 		// Timing information (all in SAST timezone)
-		google.protobuf.Timestamp carded_time = 5; // Carded Time(SAST)
-		google.protobuf.Timestamp first_bet_time = 6; // First Bet Time(SAST)
-		google.protobuf.Timestamp last_bet_time = 7; // Last Bet Time(SAST)
-		google.protobuf.Timestamp no_more_bets_time = 8; // No More Bets Time(SAST)
-		google.protobuf.Timestamp result_processing_time = 9; // Result Processing Time(SAST)
-		google.protobuf.Timestamp revised_official_carded_time = 10; // Revised Official Carded Time(SAST) or null
+		int64 carded_time = 5; // Carded Time
+		int64 first_bet_time = 6; // First Bet Time
+		int64 last_bet_time = 7; // Last Bet Time
+		int64 no_more_bets_time = 8; // No More Bets Time
+		int64 result_processing_time = 9; // Result Processing Time
+		int64 revised_official_carded_time = 10; // Revised Official Carded Time or null
 		string status = 11;
 	}
 	

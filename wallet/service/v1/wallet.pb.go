@@ -8547,27 +8547,27 @@ func (x *ListCustomerRecordsResponse) GetPageSize() int32 {
 	return 0
 }
 
-type FCIAThresholdConfig struct {
+type FICAThresholdConfig struct {
 	state         protoimpl.MessageState        `protogen:"open.v1"`
-	Configs       []*FCIAThresholdConfig_Config `protobuf:"bytes,1,rep,name=configs,proto3" json:"configs,omitempty"`
+	Configs       []*FICAThresholdConfig_Config `protobuf:"bytes,1,rep,name=configs,proto3" json:"configs,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *FCIAThresholdConfig) Reset() {
-	*x = FCIAThresholdConfig{}
+func (x *FICAThresholdConfig) Reset() {
+	*x = FICAThresholdConfig{}
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[113]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *FCIAThresholdConfig) String() string {
+func (x *FICAThresholdConfig) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*FCIAThresholdConfig) ProtoMessage() {}
+func (*FICAThresholdConfig) ProtoMessage() {}
 
-func (x *FCIAThresholdConfig) ProtoReflect() protoreflect.Message {
+func (x *FICAThresholdConfig) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[113]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -8579,41 +8579,41 @@ func (x *FCIAThresholdConfig) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use FCIAThresholdConfig.ProtoReflect.Descriptor instead.
-func (*FCIAThresholdConfig) Descriptor() ([]byte, []int) {
+// Deprecated: Use FICAThresholdConfig.ProtoReflect.Descriptor instead.
+func (*FICAThresholdConfig) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{113}
 }
 
-func (x *FCIAThresholdConfig) GetConfigs() []*FCIAThresholdConfig_Config {
+func (x *FICAThresholdConfig) GetConfigs() []*FICAThresholdConfig_Config {
 	if x != nil {
 		return x.Configs
 	}
 	return nil
 }
 
-type SetFCIAThresholdConfigRequest struct {
+type SetFICAThresholdConfigRequest struct {
 	state               protoimpl.MessageState  `protogen:"open.v1"`
 	Currency            string                  `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	FciaThresholdConfig *FCIAThresholdConfig    `protobuf:"bytes,2,opt,name=fcia_threshold_config,json=fciaThresholdConfig,proto3" json:"fcia_threshold_config,omitempty"`
+	FicaThresholdConfig *FICAThresholdConfig    `protobuf:"bytes,2,opt,name=fica_threshold_config,json=ficaThresholdConfig,proto3" json:"fica_threshold_config,omitempty"`
 	OperatorContext     *common.OperatorContext `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
 
-func (x *SetFCIAThresholdConfigRequest) Reset() {
-	*x = SetFCIAThresholdConfigRequest{}
+func (x *SetFICAThresholdConfigRequest) Reset() {
+	*x = SetFICAThresholdConfigRequest{}
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[114]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetFCIAThresholdConfigRequest) String() string {
+func (x *SetFICAThresholdConfigRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetFCIAThresholdConfigRequest) ProtoMessage() {}
+func (*SetFICAThresholdConfigRequest) ProtoMessage() {}
 
-func (x *SetFCIAThresholdConfigRequest) ProtoReflect() protoreflect.Message {
+func (x *SetFICAThresholdConfigRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[114]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -8625,52 +8625,52 @@ func (x *SetFCIAThresholdConfigRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetFCIAThresholdConfigRequest.ProtoReflect.Descriptor instead.
-func (*SetFCIAThresholdConfigRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetFICAThresholdConfigRequest.ProtoReflect.Descriptor instead.
+func (*SetFICAThresholdConfigRequest) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{114}
 }
 
-func (x *SetFCIAThresholdConfigRequest) GetCurrency() string {
+func (x *SetFICAThresholdConfigRequest) GetCurrency() string {
 	if x != nil {
 		return x.Currency
 	}
 	return ""
 }
 
-func (x *SetFCIAThresholdConfigRequest) GetFciaThresholdConfig() *FCIAThresholdConfig {
+func (x *SetFICAThresholdConfigRequest) GetFicaThresholdConfig() *FICAThresholdConfig {
 	if x != nil {
-		return x.FciaThresholdConfig
+		return x.FicaThresholdConfig
 	}
 	return nil
 }
 
-func (x *SetFCIAThresholdConfigRequest) GetOperatorContext() *common.OperatorContext {
+func (x *SetFICAThresholdConfigRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
 	return nil
 }
 
-type SetFCIAThresholdConfigResponse struct {
+type SetFICAThresholdConfigResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetFCIAThresholdConfigResponse) Reset() {
-	*x = SetFCIAThresholdConfigResponse{}
+func (x *SetFICAThresholdConfigResponse) Reset() {
+	*x = SetFICAThresholdConfigResponse{}
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[115]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetFCIAThresholdConfigResponse) String() string {
+func (x *SetFICAThresholdConfigResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetFCIAThresholdConfigResponse) ProtoMessage() {}
+func (*SetFICAThresholdConfigResponse) ProtoMessage() {}
 
-func (x *SetFCIAThresholdConfigResponse) ProtoReflect() protoreflect.Message {
+func (x *SetFICAThresholdConfigResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[115]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -8682,32 +8682,32 @@ func (x *SetFCIAThresholdConfigResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetFCIAThresholdConfigResponse.ProtoReflect.Descriptor instead.
-func (*SetFCIAThresholdConfigResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetFICAThresholdConfigResponse.ProtoReflect.Descriptor instead.
+func (*SetFICAThresholdConfigResponse) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{115}
 }
 
-type GetFCIAThresholdConfigRequest struct {
+type GetFICAThresholdConfigRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
 
-func (x *GetFCIAThresholdConfigRequest) Reset() {
-	*x = GetFCIAThresholdConfigRequest{}
+func (x *GetFICAThresholdConfigRequest) Reset() {
+	*x = GetFICAThresholdConfigRequest{}
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[116]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetFCIAThresholdConfigRequest) String() string {
+func (x *GetFICAThresholdConfigRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetFCIAThresholdConfigRequest) ProtoMessage() {}
+func (*GetFICAThresholdConfigRequest) ProtoMessage() {}
 
-func (x *GetFCIAThresholdConfigRequest) ProtoReflect() protoreflect.Message {
+func (x *GetFICAThresholdConfigRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[116]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -8719,39 +8719,39 @@ func (x *GetFCIAThresholdConfigRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetFCIAThresholdConfigRequest.ProtoReflect.Descriptor instead.
-func (*GetFCIAThresholdConfigRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetFICAThresholdConfigRequest.ProtoReflect.Descriptor instead.
+func (*GetFICAThresholdConfigRequest) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{116}
 }
 
-func (x *GetFCIAThresholdConfigRequest) GetOperatorContext() *common.OperatorContext {
+func (x *GetFICAThresholdConfigRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
 	return nil
 }
 
-type GetFCIAThresholdConfigResponse struct {
+type GetFICAThresholdConfigResponse struct {
 	state                protoimpl.MessageState          `protogen:"open.v1"`
-	FciaThresholdConfigs map[string]*FCIAThresholdConfig `protobuf:"bytes,1,rep,name=fcia_threshold_configs,json=fciaThresholdConfigs,proto3" json:"fcia_threshold_configs,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	FicaThresholdConfigs map[string]*FICAThresholdConfig `protobuf:"bytes,1,rep,name=fica_threshold_configs,json=ficaThresholdConfigs,proto3" json:"fica_threshold_configs,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
 
-func (x *GetFCIAThresholdConfigResponse) Reset() {
-	*x = GetFCIAThresholdConfigResponse{}
+func (x *GetFICAThresholdConfigResponse) Reset() {
+	*x = GetFICAThresholdConfigResponse{}
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[117]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetFCIAThresholdConfigResponse) String() string {
+func (x *GetFICAThresholdConfigResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetFCIAThresholdConfigResponse) ProtoMessage() {}
+func (*GetFICAThresholdConfigResponse) ProtoMessage() {}
 
-func (x *GetFCIAThresholdConfigResponse) ProtoReflect() protoreflect.Message {
+func (x *GetFICAThresholdConfigResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[117]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -8763,19 +8763,19 @@ func (x *GetFCIAThresholdConfigResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetFCIAThresholdConfigResponse.ProtoReflect.Descriptor instead.
-func (*GetFCIAThresholdConfigResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetFICAThresholdConfigResponse.ProtoReflect.Descriptor instead.
+func (*GetFICAThresholdConfigResponse) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{117}
 }
 
-func (x *GetFCIAThresholdConfigResponse) GetFciaThresholdConfigs() map[string]*FCIAThresholdConfig {
+func (x *GetFICAThresholdConfigResponse) GetFicaThresholdConfigs() map[string]*FICAThresholdConfig {
 	if x != nil {
-		return x.FciaThresholdConfigs
+		return x.FicaThresholdConfigs
 	}
 	return nil
 }
 
-type ListFCIAThresholdTransactionsRequest struct {
+type ListFICAThresholdTransactionsRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	StartTime       *timestamppb.Timestamp  `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
 	EndTime         *timestamppb.Timestamp  `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
@@ -8789,20 +8789,20 @@ type ListFCIAThresholdTransactionsRequest struct {
 	sizeCache       protoimpl.SizeCache
 }
 
-func (x *ListFCIAThresholdTransactionsRequest) Reset() {
-	*x = ListFCIAThresholdTransactionsRequest{}
+func (x *ListFICAThresholdTransactionsRequest) Reset() {
+	*x = ListFICAThresholdTransactionsRequest{}
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[118]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListFCIAThresholdTransactionsRequest) String() string {
+func (x *ListFICAThresholdTransactionsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListFCIAThresholdTransactionsRequest) ProtoMessage() {}
+func (*ListFICAThresholdTransactionsRequest) ProtoMessage() {}
 
-func (x *ListFCIAThresholdTransactionsRequest) ProtoReflect() protoreflect.Message {
+func (x *ListFICAThresholdTransactionsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[118]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -8814,88 +8814,91 @@ func (x *ListFCIAThresholdTransactionsRequest) ProtoReflect() protoreflect.Messa
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListFCIAThresholdTransactionsRequest.ProtoReflect.Descriptor instead.
-func (*ListFCIAThresholdTransactionsRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListFICAThresholdTransactionsRequest.ProtoReflect.Descriptor instead.
+func (*ListFICAThresholdTransactionsRequest) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{118}
 }
 
-func (x *ListFCIAThresholdTransactionsRequest) GetStartTime() *timestamppb.Timestamp {
+func (x *ListFICAThresholdTransactionsRequest) GetStartTime() *timestamppb.Timestamp {
 	if x != nil {
 		return x.StartTime
 	}
 	return nil
 }
 
-func (x *ListFCIAThresholdTransactionsRequest) GetEndTime() *timestamppb.Timestamp {
+func (x *ListFICAThresholdTransactionsRequest) GetEndTime() *timestamppb.Timestamp {
 	if x != nil {
 		return x.EndTime
 	}
 	return nil
 }
 
-func (x *ListFCIAThresholdTransactionsRequest) GetTransactionType() string {
+func (x *ListFICAThresholdTransactionsRequest) GetTransactionType() string {
 	if x != nil && x.TransactionType != nil {
 		return *x.TransactionType
 	}
 	return ""
 }
 
-func (x *ListFCIAThresholdTransactionsRequest) GetCurrency() string {
+func (x *ListFICAThresholdTransactionsRequest) GetCurrency() string {
 	if x != nil && x.Currency != nil {
 		return *x.Currency
 	}
 	return ""
 }
 
-func (x *ListFCIAThresholdTransactionsRequest) GetKycLevel() int32 {
+func (x *ListFICAThresholdTransactionsRequest) GetKycLevel() int32 {
 	if x != nil && x.KycLevel != nil {
 		return *x.KycLevel
 	}
 	return 0
 }
 
-func (x *ListFCIAThresholdTransactionsRequest) GetPage() int32 {
+func (x *ListFICAThresholdTransactionsRequest) GetPage() int32 {
 	if x != nil && x.Page != nil {
 		return *x.Page
 	}
 	return 0
 }
 
-func (x *ListFCIAThresholdTransactionsRequest) GetPageSize() int32 {
+func (x *ListFICAThresholdTransactionsRequest) GetPageSize() int32 {
 	if x != nil && x.PageSize != nil {
 		return *x.PageSize
 	}
 	return 0
 }
 
-func (x *ListFCIAThresholdTransactionsRequest) GetOperatorContext() *common.OperatorContext {
+func (x *ListFICAThresholdTransactionsRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
 	return nil
 }
 
-type ListFCIAThresholdTransactionsResponse struct {
+type ListFICAThresholdTransactionsResponse struct {
 	state                 protoimpl.MessageState                                            `protogen:"open.v1"`
-	ThresholdTransactions []*ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction `protobuf:"bytes,1,rep,name=threshold_transactions,json=thresholdTransactions,proto3" json:"threshold_transactions,omitempty"`
+	ThresholdTransactions []*ListFICAThresholdTransactionsResponse_FICAThresholdTransaction `protobuf:"bytes,1,rep,name=threshold_transactions,json=thresholdTransactions,proto3" json:"threshold_transactions,omitempty"`
+	Total                 int32                                                             `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Page                  int32                                                             `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize              int32                                                             `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
 
-func (x *ListFCIAThresholdTransactionsResponse) Reset() {
-	*x = ListFCIAThresholdTransactionsResponse{}
+func (x *ListFICAThresholdTransactionsResponse) Reset() {
+	*x = ListFICAThresholdTransactionsResponse{}
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[119]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListFCIAThresholdTransactionsResponse) String() string {
+func (x *ListFICAThresholdTransactionsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListFCIAThresholdTransactionsResponse) ProtoMessage() {}
+func (*ListFICAThresholdTransactionsResponse) ProtoMessage() {}
 
-func (x *ListFCIAThresholdTransactionsResponse) ProtoReflect() protoreflect.Message {
+func (x *ListFICAThresholdTransactionsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[119]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -8907,16 +8910,37 @@ func (x *ListFCIAThresholdTransactionsResponse) ProtoReflect() protoreflect.Mess
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListFCIAThresholdTransactionsResponse.ProtoReflect.Descriptor instead.
-func (*ListFCIAThresholdTransactionsResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListFICAThresholdTransactionsResponse.ProtoReflect.Descriptor instead.
+func (*ListFICAThresholdTransactionsResponse) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{119}
 }
 
-func (x *ListFCIAThresholdTransactionsResponse) GetThresholdTransactions() []*ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction {
+func (x *ListFICAThresholdTransactionsResponse) GetThresholdTransactions() []*ListFICAThresholdTransactionsResponse_FICAThresholdTransaction {
 	if x != nil {
 		return x.ThresholdTransactions
 	}
 	return nil
+}
+
+func (x *ListFICAThresholdTransactionsResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+func (x *ListFICAThresholdTransactionsResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListFICAThresholdTransactionsResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
 }
 
 type GetUserBalancesResponse_Balance struct {
@@ -10633,7 +10657,7 @@ func (x *ListCustomerRecordsResponse_CustomerRecord) GetExternalTransactionId() 
 	return 0
 }
 
-type FCIAThresholdConfig_Config struct {
+type FICAThresholdConfig_Config struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	TransactionType string                 `protobuf:"bytes,1,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"` // payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward
 	ThresholdAmount string                 `protobuf:"bytes,2,opt,name=threshold_amount,json=thresholdAmount,proto3" json:"threshold_amount,omitempty"`
@@ -10641,20 +10665,20 @@ type FCIAThresholdConfig_Config struct {
 	sizeCache       protoimpl.SizeCache
 }
 
-func (x *FCIAThresholdConfig_Config) Reset() {
-	*x = FCIAThresholdConfig_Config{}
+func (x *FICAThresholdConfig_Config) Reset() {
+	*x = FICAThresholdConfig_Config{}
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[138]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *FCIAThresholdConfig_Config) String() string {
+func (x *FICAThresholdConfig_Config) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*FCIAThresholdConfig_Config) ProtoMessage() {}
+func (*FICAThresholdConfig_Config) ProtoMessage() {}
 
-func (x *FCIAThresholdConfig_Config) ProtoReflect() protoreflect.Message {
+func (x *FICAThresholdConfig_Config) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[138]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -10666,26 +10690,26 @@ func (x *FCIAThresholdConfig_Config) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use FCIAThresholdConfig_Config.ProtoReflect.Descriptor instead.
-func (*FCIAThresholdConfig_Config) Descriptor() ([]byte, []int) {
+// Deprecated: Use FICAThresholdConfig_Config.ProtoReflect.Descriptor instead.
+func (*FICAThresholdConfig_Config) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{113, 0}
 }
 
-func (x *FCIAThresholdConfig_Config) GetTransactionType() string {
+func (x *FICAThresholdConfig_Config) GetTransactionType() string {
 	if x != nil {
 		return x.TransactionType
 	}
 	return ""
 }
 
-func (x *FCIAThresholdConfig_Config) GetThresholdAmount() string {
+func (x *FICAThresholdConfig_Config) GetThresholdAmount() string {
 	if x != nil {
 		return x.ThresholdAmount
 	}
 	return ""
 }
 
-type ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction struct {
+type ListFICAThresholdTransactionsResponse_FICAThresholdTransaction struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	Type            string                 `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
 	TransactionTime *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=transaction_time,json=transactionTime,proto3" json:"transaction_time,omitempty"` // created_at
@@ -10705,20 +10729,20 @@ type ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction struct {
 	sizeCache       protoimpl.SizeCache
 }
 
-func (x *ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction) Reset() {
-	*x = ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction{}
+func (x *ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) Reset() {
+	*x = ListFICAThresholdTransactionsResponse_FICAThresholdTransaction{}
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[140]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction) String() string {
+func (x *ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction) ProtoMessage() {}
+func (*ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) ProtoMessage() {}
 
-func (x *ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction) ProtoReflect() protoreflect.Message {
+func (x *ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_proto_msgTypes[140]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -10730,103 +10754,103 @@ func (x *ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction) ProtoRe
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction.ProtoReflect.Descriptor instead.
-func (*ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListFICAThresholdTransactionsResponse_FICAThresholdTransaction.ProtoReflect.Descriptor instead.
+func (*ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{119, 0}
 }
 
-func (x *ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction) GetType() string {
+func (x *ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) GetType() string {
 	if x != nil {
 		return x.Type
 	}
 	return ""
 }
 
-func (x *ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction) GetTransactionTime() *timestamppb.Timestamp {
+func (x *ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) GetTransactionTime() *timestamppb.Timestamp {
 	if x != nil {
 		return x.TransactionTime
 	}
 	return nil
 }
 
-func (x *ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction) GetTransactionId() int64 {
+func (x *ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) GetTransactionId() int64 {
 	if x != nil {
 		return x.TransactionId
 	}
 	return 0
 }
 
-func (x *ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction) GetCurrency() string {
+func (x *ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) GetCurrency() string {
 	if x != nil {
 		return x.Currency
 	}
 	return ""
 }
 
-func (x *ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction) GetAmount() string {
+func (x *ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) GetAmount() string {
 	if x != nil {
 		return x.Amount
 	}
 	return ""
 }
 
-func (x *ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction) GetExcessAmount() string {
+func (x *ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) GetExcessAmount() string {
 	if x != nil {
 		return x.ExcessAmount
 	}
 	return ""
 }
 
-func (x *ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction) GetUserId() int64 {
+func (x *ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
 	return 0
 }
 
-func (x *ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction) GetFullName() string {
+func (x *ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) GetFullName() string {
 	if x != nil {
 		return x.FullName
 	}
 	return ""
 }
 
-func (x *ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction) GetIdType() string {
+func (x *ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) GetIdType() string {
 	if x != nil {
 		return x.IdType
 	}
 	return ""
 }
 
-func (x *ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction) GetIdNumber() string {
+func (x *ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) GetIdNumber() string {
 	if x != nil {
 		return x.IdNumber
 	}
 	return ""
 }
 
-func (x *ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction) GetMobile() string {
+func (x *ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) GetMobile() string {
 	if x != nil {
 		return x.Mobile
 	}
 	return ""
 }
 
-func (x *ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction) GetEmail() string {
+func (x *ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) GetEmail() string {
 	if x != nil {
 		return x.Email
 	}
 	return ""
 }
 
-func (x *ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction) GetAddress() string {
+func (x *ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) GetAddress() string {
 	if x != nil {
 		return x.Address
 	}
 	return ""
 }
 
-func (x *ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction) GetKycLevel() int32 {
+func (x *ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) GetKycLevel() int32 {
 	if x != nil {
 		return x.KycLevel
 	}
@@ -11823,24 +11847,24 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0ebefore_balance\x18\a \x01(\tR\rbeforeBalance\x12#\n" +
 	"\rafter_balance\x18\b \x01(\tR\fafterBalance\x126\n" +
 	"\x17external_transaction_id\x18\t \x01(\x03R\x15externalTransactionId\"\xc2\x01\n" +
-	"\x13FCIAThresholdConfig\x12K\n" +
-	"\aconfigs\x18\x01 \x03(\v21.api.wallet.service.v1.FCIAThresholdConfig.ConfigR\aconfigs\x1a^\n" +
+	"\x13FICAThresholdConfig\x12K\n" +
+	"\aconfigs\x18\x01 \x03(\v21.api.wallet.service.v1.FICAThresholdConfig.ConfigR\aconfigs\x1a^\n" +
 	"\x06Config\x12)\n" +
 	"\x10transaction_type\x18\x01 \x01(\tR\x0ftransactionType\x12)\n" +
 	"\x10threshold_amount\x18\x02 \x01(\tR\x0fthresholdAmount\"\xe3\x01\n" +
-	"\x1dSetFCIAThresholdConfigRequest\x12\x1a\n" +
+	"\x1dSetFICAThresholdConfigRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12^\n" +
-	"\x15fcia_threshold_config\x18\x02 \x01(\v2*.api.wallet.service.v1.FCIAThresholdConfigR\x13fciaThresholdConfig\x12F\n" +
+	"\x15fica_threshold_config\x18\x02 \x01(\v2*.api.wallet.service.v1.FICAThresholdConfigR\x13ficaThresholdConfig\x12F\n" +
 	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\" \n" +
-	"\x1eSetFCIAThresholdConfigResponse\"g\n" +
-	"\x1dGetFCIAThresholdConfigRequest\x12F\n" +
+	"\x1eSetFICAThresholdConfigResponse\"g\n" +
+	"\x1dGetFICAThresholdConfigRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x9d\x02\n" +
-	"\x1eGetFCIAThresholdConfigResponse\x12\x85\x01\n" +
-	"\x16fcia_threshold_configs\x18\x01 \x03(\v2O.api.wallet.service.v1.GetFCIAThresholdConfigResponse.FciaThresholdConfigsEntryR\x14fciaThresholdConfigs\x1as\n" +
-	"\x19FciaThresholdConfigsEntry\x12\x10\n" +
+	"\x1eGetFICAThresholdConfigResponse\x12\x85\x01\n" +
+	"\x16fica_threshold_configs\x18\x01 \x03(\v2O.api.wallet.service.v1.GetFICAThresholdConfigResponse.FicaThresholdConfigsEntryR\x14ficaThresholdConfigs\x1as\n" +
+	"\x19FicaThresholdConfigsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12@\n" +
-	"\x05value\x18\x02 \x01(\v2*.api.wallet.service.v1.FCIAThresholdConfigR\x05value:\x028\x01\"\xfb\x03\n" +
-	"$ListFCIAThresholdTransactionsRequest\x12>\n" +
+	"\x05value\x18\x02 \x01(\v2*.api.wallet.service.v1.FICAThresholdConfigR\x05value:\x028\x01\"\xfb\x03\n" +
+	"$ListFICAThresholdTransactionsRequest\x12>\n" +
 	"\n" +
 	"start_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\tstartTime\x88\x01\x01\x12:\n" +
 	"\bend_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\aendTime\x88\x01\x01\x12.\n" +
@@ -11858,10 +11882,13 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"_kyc_levelB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xff\x04\n" +
-	"%ListFCIAThresholdTransactionsResponse\x12\x8c\x01\n" +
-	"\x16threshold_transactions\x18\x01 \x03(\v2U.api.wallet.service.v1.ListFCIAThresholdTransactionsResponse.FCIAThresholdTransactionR\x15thresholdTransactions\x1a\xc6\x03\n" +
-	"\x18FCIAThresholdTransaction\x12\x12\n" +
+	"_page_size\"\xc6\x05\n" +
+	"%ListFICAThresholdTransactionsResponse\x12\x8c\x01\n" +
+	"\x16threshold_transactions\x18\x01 \x03(\v2U.api.wallet.service.v1.ListFICAThresholdTransactionsResponse.FICAThresholdTransactionR\x15thresholdTransactions\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
+	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xc6\x03\n" +
+	"\x18FICAThresholdTransaction\x12\x12\n" +
 	"\x04type\x18\x01 \x01(\tR\x04type\x12E\n" +
 	"\x10transaction_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x0ftransactionTime\x12%\n" +
 	"\x0etransaction_id\x18\x03 \x01(\x03R\rtransactionId\x12\x1a\n" +
@@ -11931,9 +11958,9 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1eListResponsibleGamblingConfigs\x12<.api.wallet.service.v1.ListResponsibleGamblingConfigsRequest\x1a=.api.wallet.service.v1.ListResponsibleGamblingConfigsResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/wallet/responsible-gambling/configs/list\x12\x99\x01\n" +
 	"\x1cGetResponsibleGamblingConfig\x12:.api.wallet.service.v1.GetResponsibleGamblingConfigRequest\x1a;.api.wallet.service.v1.GetResponsibleGamblingConfigResponse\"\x00\x12~\n" +
 	"\x13ListCustomerRecords\x121.api.wallet.service.v1.ListCustomerRecordsRequest\x1a2.api.wallet.service.v1.ListCustomerRecordsResponse\"\x00\x12\x87\x01\n" +
-	"\x16SetFCIAThresholdConfig\x124.api.wallet.service.v1.SetFCIAThresholdConfigRequest\x1a5.api.wallet.service.v1.SetFCIAThresholdConfigResponse\"\x00\x12\x87\x01\n" +
-	"\x16GetFCIAThresholdConfig\x124.api.wallet.service.v1.GetFCIAThresholdConfigRequest\x1a5.api.wallet.service.v1.GetFCIAThresholdConfigResponse\"\x00\x12\x9c\x01\n" +
-	"\x1dListFCIAThresholdTransactions\x12;.api.wallet.service.v1.ListFCIAThresholdTransactionsRequest\x1a<.api.wallet.service.v1.ListFCIAThresholdTransactionsResponse\"\x00BS\n" +
+	"\x16SetFICAThresholdConfig\x124.api.wallet.service.v1.SetFICAThresholdConfigRequest\x1a5.api.wallet.service.v1.SetFICAThresholdConfigResponse\"\x00\x12\x87\x01\n" +
+	"\x16GetFICAThresholdConfig\x124.api.wallet.service.v1.GetFICAThresholdConfigRequest\x1a5.api.wallet.service.v1.GetFICAThresholdConfigResponse\"\x00\x12\x9c\x01\n" +
+	"\x1dListFICAThresholdTransactions\x12;.api.wallet.service.v1.ListFICAThresholdTransactionsRequest\x1a<.api.wallet.service.v1.ListFICAThresholdTransactionsResponse\"\x00BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (
@@ -12063,13 +12090,13 @@ var file_wallet_service_v1_wallet_proto_goTypes = []any{
 	(*GetResponsibleGamblingConfigResponse)(nil),                         // 110: api.wallet.service.v1.GetResponsibleGamblingConfigResponse
 	(*ListCustomerRecordsRequest)(nil),                                   // 111: api.wallet.service.v1.ListCustomerRecordsRequest
 	(*ListCustomerRecordsResponse)(nil),                                  // 112: api.wallet.service.v1.ListCustomerRecordsResponse
-	(*FCIAThresholdConfig)(nil),                                          // 113: api.wallet.service.v1.FCIAThresholdConfig
-	(*SetFCIAThresholdConfigRequest)(nil),                                // 114: api.wallet.service.v1.SetFCIAThresholdConfigRequest
-	(*SetFCIAThresholdConfigResponse)(nil),                               // 115: api.wallet.service.v1.SetFCIAThresholdConfigResponse
-	(*GetFCIAThresholdConfigRequest)(nil),                                // 116: api.wallet.service.v1.GetFCIAThresholdConfigRequest
-	(*GetFCIAThresholdConfigResponse)(nil),                               // 117: api.wallet.service.v1.GetFCIAThresholdConfigResponse
-	(*ListFCIAThresholdTransactionsRequest)(nil),                         // 118: api.wallet.service.v1.ListFCIAThresholdTransactionsRequest
-	(*ListFCIAThresholdTransactionsResponse)(nil),                        // 119: api.wallet.service.v1.ListFCIAThresholdTransactionsResponse
+	(*FICAThresholdConfig)(nil),                                          // 113: api.wallet.service.v1.FICAThresholdConfig
+	(*SetFICAThresholdConfigRequest)(nil),                                // 114: api.wallet.service.v1.SetFICAThresholdConfigRequest
+	(*SetFICAThresholdConfigResponse)(nil),                               // 115: api.wallet.service.v1.SetFICAThresholdConfigResponse
+	(*GetFICAThresholdConfigRequest)(nil),                                // 116: api.wallet.service.v1.GetFICAThresholdConfigRequest
+	(*GetFICAThresholdConfigResponse)(nil),                               // 117: api.wallet.service.v1.GetFICAThresholdConfigResponse
+	(*ListFICAThresholdTransactionsRequest)(nil),                         // 118: api.wallet.service.v1.ListFICAThresholdTransactionsRequest
+	(*ListFICAThresholdTransactionsResponse)(nil),                        // 119: api.wallet.service.v1.ListFICAThresholdTransactionsResponse
 	(*GetUserBalancesResponse_Balance)(nil),                              // 120: api.wallet.service.v1.GetUserBalancesResponse.Balance
 	(*CreditRequest_Ratio)(nil),                                          // 121: api.wallet.service.v1.CreditRequest.Ratio
 	(*GetWalletsResponse_TotalAssets)(nil),                               // 122: api.wallet.service.v1.GetWalletsResponse.TotalAssets
@@ -12088,9 +12115,9 @@ var file_wallet_service_v1_wallet_proto_goTypes = []any{
 	(*RewardSequence_TierConfig)(nil),                                      // 135: api.wallet.service.v1.RewardSequence.TierConfig
 	(*UserBalanceDetail_Credit)(nil),                                       // 136: api.wallet.service.v1.UserBalanceDetail.Credit
 	(*ListCustomerRecordsResponse_CustomerRecord)(nil),                     // 137: api.wallet.service.v1.ListCustomerRecordsResponse.CustomerRecord
-	(*FCIAThresholdConfig_Config)(nil),                                     // 138: api.wallet.service.v1.FCIAThresholdConfig.Config
-	nil,                                                                    // 139: api.wallet.service.v1.GetFCIAThresholdConfigResponse.FciaThresholdConfigsEntry
-	(*ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction)(nil), // 140: api.wallet.service.v1.ListFCIAThresholdTransactionsResponse.FCIAThresholdTransaction
+	(*FICAThresholdConfig_Config)(nil),                                     // 138: api.wallet.service.v1.FICAThresholdConfig.Config
+	nil,                                                                    // 139: api.wallet.service.v1.GetFICAThresholdConfigResponse.FicaThresholdConfigsEntry
+	(*ListFICAThresholdTransactionsResponse_FICAThresholdTransaction)(nil), // 140: api.wallet.service.v1.ListFICAThresholdTransactionsResponse.FICAThresholdTransaction
 	(*common.OperatorContext)(nil),                                         // 141: api.common.OperatorContext
 	(*timestamppb.Timestamp)(nil),                                          // 142: google.protobuf.Timestamp
 	(*common.OperatorContextFilters)(nil),                                  // 143: api.common.OperatorContextFilters
@@ -12220,15 +12247,15 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	142, // 121: api.wallet.service.v1.ListCustomerRecordsRequest.end_time:type_name -> google.protobuf.Timestamp
 	141, // 122: api.wallet.service.v1.ListCustomerRecordsRequest.operator_context:type_name -> api.common.OperatorContext
 	137, // 123: api.wallet.service.v1.ListCustomerRecordsResponse.customer_records:type_name -> api.wallet.service.v1.ListCustomerRecordsResponse.CustomerRecord
-	138, // 124: api.wallet.service.v1.FCIAThresholdConfig.configs:type_name -> api.wallet.service.v1.FCIAThresholdConfig.Config
-	113, // 125: api.wallet.service.v1.SetFCIAThresholdConfigRequest.fcia_threshold_config:type_name -> api.wallet.service.v1.FCIAThresholdConfig
-	141, // 126: api.wallet.service.v1.SetFCIAThresholdConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	141, // 127: api.wallet.service.v1.GetFCIAThresholdConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	139, // 128: api.wallet.service.v1.GetFCIAThresholdConfigResponse.fcia_threshold_configs:type_name -> api.wallet.service.v1.GetFCIAThresholdConfigResponse.FciaThresholdConfigsEntry
-	142, // 129: api.wallet.service.v1.ListFCIAThresholdTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
-	142, // 130: api.wallet.service.v1.ListFCIAThresholdTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
-	141, // 131: api.wallet.service.v1.ListFCIAThresholdTransactionsRequest.operator_context:type_name -> api.common.OperatorContext
-	140, // 132: api.wallet.service.v1.ListFCIAThresholdTransactionsResponse.threshold_transactions:type_name -> api.wallet.service.v1.ListFCIAThresholdTransactionsResponse.FCIAThresholdTransaction
+	138, // 124: api.wallet.service.v1.FICAThresholdConfig.configs:type_name -> api.wallet.service.v1.FICAThresholdConfig.Config
+	113, // 125: api.wallet.service.v1.SetFICAThresholdConfigRequest.fica_threshold_config:type_name -> api.wallet.service.v1.FICAThresholdConfig
+	141, // 126: api.wallet.service.v1.SetFICAThresholdConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	141, // 127: api.wallet.service.v1.GetFICAThresholdConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	139, // 128: api.wallet.service.v1.GetFICAThresholdConfigResponse.fica_threshold_configs:type_name -> api.wallet.service.v1.GetFICAThresholdConfigResponse.FicaThresholdConfigsEntry
+	142, // 129: api.wallet.service.v1.ListFICAThresholdTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
+	142, // 130: api.wallet.service.v1.ListFICAThresholdTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
+	141, // 131: api.wallet.service.v1.ListFICAThresholdTransactionsRequest.operator_context:type_name -> api.common.OperatorContext
+	140, // 132: api.wallet.service.v1.ListFICAThresholdTransactionsResponse.threshold_transactions:type_name -> api.wallet.service.v1.ListFICAThresholdTransactionsResponse.FICAThresholdTransaction
 	142, // 133: api.wallet.service.v1.GetWalletsResponse.Credit.created_at:type_name -> google.protobuf.Timestamp
 	123, // 134: api.wallet.service.v1.GetWalletsResponse.Wallet.credits:type_name -> api.wallet.service.v1.GetWalletsResponse.Credit
 	142, // 135: api.wallet.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction.created_at:type_name -> google.protobuf.Timestamp
@@ -12236,8 +12263,8 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	142, // 137: api.wallet.service.v1.GetWalletBalanceTransactionsByIdsResponse.BalanceTransaction.updated_at:type_name -> google.protobuf.Timestamp
 	142, // 138: api.wallet.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction.created_at:type_name -> google.protobuf.Timestamp
 	142, // 139: api.wallet.service.v1.ListCustomerRecordsResponse.CustomerRecord.date_time:type_name -> google.protobuf.Timestamp
-	113, // 140: api.wallet.service.v1.GetFCIAThresholdConfigResponse.FciaThresholdConfigsEntry.value:type_name -> api.wallet.service.v1.FCIAThresholdConfig
-	142, // 141: api.wallet.service.v1.ListFCIAThresholdTransactionsResponse.FCIAThresholdTransaction.transaction_time:type_name -> google.protobuf.Timestamp
+	113, // 140: api.wallet.service.v1.GetFICAThresholdConfigResponse.FicaThresholdConfigsEntry.value:type_name -> api.wallet.service.v1.FICAThresholdConfig
+	142, // 141: api.wallet.service.v1.ListFICAThresholdTransactionsResponse.FICAThresholdTransaction.transaction_time:type_name -> google.protobuf.Timestamp
 	0,   // 142: api.wallet.service.v1.Wallet.GetUserBalances:input_type -> api.wallet.service.v1.GetUserBalancesRequest
 	2,   // 143: api.wallet.service.v1.Wallet.GetUserBalance:input_type -> api.wallet.service.v1.GetUserBalanceRequest
 	98,  // 144: api.wallet.service.v1.Wallet.GetUserBalanceDetails:input_type -> api.wallet.service.v1.GetUserBalanceDetailsRequest
@@ -12289,9 +12316,9 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	107, // 190: api.wallet.service.v1.Wallet.ListResponsibleGamblingConfigs:input_type -> api.wallet.service.v1.ListResponsibleGamblingConfigsRequest
 	109, // 191: api.wallet.service.v1.Wallet.GetResponsibleGamblingConfig:input_type -> api.wallet.service.v1.GetResponsibleGamblingConfigRequest
 	111, // 192: api.wallet.service.v1.Wallet.ListCustomerRecords:input_type -> api.wallet.service.v1.ListCustomerRecordsRequest
-	114, // 193: api.wallet.service.v1.Wallet.SetFCIAThresholdConfig:input_type -> api.wallet.service.v1.SetFCIAThresholdConfigRequest
-	116, // 194: api.wallet.service.v1.Wallet.GetFCIAThresholdConfig:input_type -> api.wallet.service.v1.GetFCIAThresholdConfigRequest
-	118, // 195: api.wallet.service.v1.Wallet.ListFCIAThresholdTransactions:input_type -> api.wallet.service.v1.ListFCIAThresholdTransactionsRequest
+	114, // 193: api.wallet.service.v1.Wallet.SetFICAThresholdConfig:input_type -> api.wallet.service.v1.SetFICAThresholdConfigRequest
+	116, // 194: api.wallet.service.v1.Wallet.GetFICAThresholdConfig:input_type -> api.wallet.service.v1.GetFICAThresholdConfigRequest
+	118, // 195: api.wallet.service.v1.Wallet.ListFICAThresholdTransactions:input_type -> api.wallet.service.v1.ListFICAThresholdTransactionsRequest
 	1,   // 196: api.wallet.service.v1.Wallet.GetUserBalances:output_type -> api.wallet.service.v1.GetUserBalancesResponse
 	3,   // 197: api.wallet.service.v1.Wallet.GetUserBalance:output_type -> api.wallet.service.v1.GetUserBalanceResponse
 	100, // 198: api.wallet.service.v1.Wallet.GetUserBalanceDetails:output_type -> api.wallet.service.v1.GetUserBalanceDetailsResponse
@@ -12343,9 +12370,9 @@ var file_wallet_service_v1_wallet_proto_depIdxs = []int32{
 	108, // 244: api.wallet.service.v1.Wallet.ListResponsibleGamblingConfigs:output_type -> api.wallet.service.v1.ListResponsibleGamblingConfigsResponse
 	110, // 245: api.wallet.service.v1.Wallet.GetResponsibleGamblingConfig:output_type -> api.wallet.service.v1.GetResponsibleGamblingConfigResponse
 	112, // 246: api.wallet.service.v1.Wallet.ListCustomerRecords:output_type -> api.wallet.service.v1.ListCustomerRecordsResponse
-	115, // 247: api.wallet.service.v1.Wallet.SetFCIAThresholdConfig:output_type -> api.wallet.service.v1.SetFCIAThresholdConfigResponse
-	117, // 248: api.wallet.service.v1.Wallet.GetFCIAThresholdConfig:output_type -> api.wallet.service.v1.GetFCIAThresholdConfigResponse
-	119, // 249: api.wallet.service.v1.Wallet.ListFCIAThresholdTransactions:output_type -> api.wallet.service.v1.ListFCIAThresholdTransactionsResponse
+	115, // 247: api.wallet.service.v1.Wallet.SetFICAThresholdConfig:output_type -> api.wallet.service.v1.SetFICAThresholdConfigResponse
+	117, // 248: api.wallet.service.v1.Wallet.GetFICAThresholdConfig:output_type -> api.wallet.service.v1.GetFICAThresholdConfigResponse
+	119, // 249: api.wallet.service.v1.Wallet.ListFICAThresholdTransactions:output_type -> api.wallet.service.v1.ListFICAThresholdTransactionsResponse
 	196, // [196:250] is the sub-list for method output_type
 	142, // [142:196] is the sub-list for method input_type
 	142, // [142:142] is the sub-list for extension type_name
