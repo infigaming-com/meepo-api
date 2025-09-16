@@ -9358,35 +9358,6 @@ func (m *ListSportEventsRequest) validate(all bool) error {
 
 	var errors []error
 
-	if all {
-		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListSportEventsRequestValidationError{
-					field:  "OperatorContextFilters",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ListSportEventsRequestValidationError{
-					field:  "OperatorContextFilters",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ListSportEventsRequestValidationError{
-				field:  "OperatorContextFilters",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	if m.Page != nil {
 		// no validation rules for Page
 	}
@@ -9407,74 +9378,12 @@ func (m *ListSportEventsRequest) validate(all bool) error {
 		// no validation rules for Tournament
 	}
 
-	if m.Status != nil {
-		// no validation rules for Status
-	}
-
 	if m.StartTime != nil {
-
-		if all {
-			switch v := interface{}(m.GetStartTime()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListSportEventsRequestValidationError{
-						field:  "StartTime",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ListSportEventsRequestValidationError{
-						field:  "StartTime",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ListSportEventsRequestValidationError{
-					field:  "StartTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
+		// no validation rules for StartTime
 	}
 
 	if m.EndTime != nil {
-
-		if all {
-			switch v := interface{}(m.GetEndTime()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListSportEventsRequestValidationError{
-						field:  "EndTime",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ListSportEventsRequestValidationError{
-						field:  "EndTime",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ListSportEventsRequestValidationError{
-					field:  "EndTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
+		// no validation rules for EndTime
 	}
 
 	if len(errors) > 0 {
@@ -12632,239 +12541,19 @@ func (m *ListSportEventsResponse_SportEvent) validate(all bool) error {
 
 	// no validation rules for Tournament
 
-	if all {
-		switch v := interface{}(m.GetCardedTime()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListSportEventsResponse_SportEventValidationError{
-					field:  "CardedTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ListSportEventsResponse_SportEventValidationError{
-					field:  "CardedTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetCardedTime()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ListSportEventsResponse_SportEventValidationError{
-				field:  "CardedTime",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for CardedTime
 
-	if all {
-		switch v := interface{}(m.GetFirstBetTime()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListSportEventsResponse_SportEventValidationError{
-					field:  "FirstBetTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ListSportEventsResponse_SportEventValidationError{
-					field:  "FirstBetTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetFirstBetTime()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ListSportEventsResponse_SportEventValidationError{
-				field:  "FirstBetTime",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for FirstBetTime
 
-	if all {
-		switch v := interface{}(m.GetLastBetTime()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListSportEventsResponse_SportEventValidationError{
-					field:  "LastBetTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ListSportEventsResponse_SportEventValidationError{
-					field:  "LastBetTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetLastBetTime()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ListSportEventsResponse_SportEventValidationError{
-				field:  "LastBetTime",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for LastBetTime
 
-	if all {
-		switch v := interface{}(m.GetNoMoreBetsTime()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListSportEventsResponse_SportEventValidationError{
-					field:  "NoMoreBetsTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ListSportEventsResponse_SportEventValidationError{
-					field:  "NoMoreBetsTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetNoMoreBetsTime()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ListSportEventsResponse_SportEventValidationError{
-				field:  "NoMoreBetsTime",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for NoMoreBetsTime
 
-	if all {
-		switch v := interface{}(m.GetResultProcessingTime()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListSportEventsResponse_SportEventValidationError{
-					field:  "ResultProcessingTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ListSportEventsResponse_SportEventValidationError{
-					field:  "ResultProcessingTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetResultProcessingTime()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ListSportEventsResponse_SportEventValidationError{
-				field:  "ResultProcessingTime",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for ResultProcessingTime
 
-	if all {
-		switch v := interface{}(m.GetRevisedOfficialCardedTime()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListSportEventsResponse_SportEventValidationError{
-					field:  "RevisedOfficialCardedTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ListSportEventsResponse_SportEventValidationError{
-					field:  "RevisedOfficialCardedTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetRevisedOfficialCardedTime()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ListSportEventsResponse_SportEventValidationError{
-				field:  "RevisedOfficialCardedTime",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for RevisedOfficialCardedTime
 
 	// no validation rules for Status
-
-	if all {
-		switch v := interface{}(m.GetCreatedAt()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListSportEventsResponse_SportEventValidationError{
-					field:  "CreatedAt",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ListSportEventsResponse_SportEventValidationError{
-					field:  "CreatedAt",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ListSportEventsResponse_SportEventValidationError{
-				field:  "CreatedAt",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if all {
-		switch v := interface{}(m.GetUpdatedAt()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListSportEventsResponse_SportEventValidationError{
-					field:  "UpdatedAt",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ListSportEventsResponse_SportEventValidationError{
-					field:  "UpdatedAt",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetUpdatedAt()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ListSportEventsResponse_SportEventValidationError{
-				field:  "UpdatedAt",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
 
 	if len(errors) > 0 {
 		return ListSportEventsResponse_SportEventMultiError(errors)
