@@ -61,6 +61,8 @@ func (m *EventRequest) validate(all bool) error {
 
 	// no validation rules for EventData
 
+	// no validation rules for MessageId
+
 	if len(errors) > 0 {
 		return EventRequestMultiError(errors)
 	}
@@ -468,3 +470,136 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = AddOperatorEventValidationError{}
+
+// Validate checks the field values on LockUserEvent with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *LockUserEvent) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on LockUserEvent with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in LockUserEventMultiError, or
+// nil if none found.
+func (m *LockUserEvent) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *LockUserEvent) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, LockUserEventValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, LockUserEventValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LockUserEventValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Reason
+
+	if len(errors) > 0 {
+		return LockUserEventMultiError(errors)
+	}
+
+	return nil
+}
+
+// LockUserEventMultiError is an error wrapping multiple validation errors
+// returned by LockUserEvent.ValidateAll() if the designated constraints
+// aren't met.
+type LockUserEventMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m LockUserEventMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m LockUserEventMultiError) AllErrors() []error { return m }
+
+// LockUserEventValidationError is the validation error returned by
+// LockUserEvent.Validate if the designated constraints aren't met.
+type LockUserEventValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e LockUserEventValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e LockUserEventValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e LockUserEventValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e LockUserEventValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e LockUserEventValidationError) ErrorName() string { return "LockUserEventValidationError" }
+
+// Error satisfies the builtin error interface
+func (e LockUserEventValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sLockUserEvent.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = LockUserEventValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = LockUserEventValidationError{}

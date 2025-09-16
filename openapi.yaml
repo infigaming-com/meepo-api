@@ -1307,6 +1307,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetGameTransactionsForBetResponse'
+    /v1/backoffice/game/bets/unpaid/list:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ListUnpaidBets
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListUnpaidBetsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.ListUnpaidBetsResponse'
     /v1/backoffice/game/categories/list:
         post:
             tags:
@@ -3214,7 +3232,7 @@ paths:
         post:
             tags:
                 - BackofficeWallet
-            description: ListCustomerRecords lists customer records for all users (with deposit, withdraw, game bet, game win and manual credit(this is not supported yet))
+            description: ListCustomerRecords lists customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
             operationId: BackofficeWallet_ListCustomerRecords
             requestBody:
                 content:
@@ -3323,6 +3341,63 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetExchangeRatesResponse'
+    /v1/backoffice/wallet/fica/config/get:
+        post:
+            tags:
+                - BackofficeWallet
+            description: GetFICAThresholdConfig gets the FICA threshold config for an operator of all currencies
+            operationId: BackofficeWallet_GetFICAThresholdConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetFICAThresholdConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetFICAThresholdConfigResponse'
+    /v1/backoffice/wallet/fica/config/set:
+        post:
+            tags:
+                - BackofficeWallet
+            description: SetFICAThresholdConfig sets the FICA threshold config for an operator and its specific currency
+            operationId: BackofficeWallet_SetFICAThresholdConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetFICAThresholdConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.SetFICAThresholdConfigResponse'
+    /v1/backoffice/wallet/fica/transactions/list:
+        post:
+            tags:
+                - BackofficeWallet
+            description: ListFICAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
+            operationId: BackofficeWallet_ListFICAThresholdTransactions
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListFICAThresholdTransactionsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.ListFICAThresholdTransactionsResponse'
     /v1/backoffice/wallet/gamification/get:
         post:
             tags:
@@ -5596,6 +5671,9 @@ components:
                     additionalProperties:
                         type: string
                     description: map key is source currency, value is target currency rate
+        api.backoffice.service.v1.GetFICAThresholdConfigRequest:
+            type: object
+            properties: {}
         api.backoffice.service.v1.GetGameSummaryRequest:
             type: object
             properties:
@@ -7644,6 +7722,28 @@ components:
                     type: string
                 averageFtdAmountReportingCurrencyForNonSameDayRegistredUsers:
                     type: string
+        api.backoffice.service.v1.ListFICAThresholdTransactionsRequest:
+            type: object
+            properties:
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                transactionType:
+                    type: string
+                currency:
+                    type: string
+                kycLevel:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListFeeGroupsRequest:
             type: object
             properties:
@@ -9197,6 +9297,25 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.ListUnpaidBetsRequest:
+            type: object
+            properties:
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                userId:
+                    type: string
+                transactionId:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListUserCommentsRequest:
             type: object
             properties:
@@ -10116,6 +10235,13 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
+        api.backoffice.service.v1.SetFICAThresholdConfigRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+                ficaThresholdConfig:
+                    $ref: '#/components/schemas/api.wallet.service.v1.FICAThresholdConfig'
         api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest:
             type: object
             properties:
@@ -11894,6 +12020,63 @@ components:
                 status:
                     type: string
                     description: Status information
+        api.game.service.v1.ListUnpaidBetsResponse:
+            type: object
+            properties:
+                unpaidBets:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.ListUnpaidBetsResponse_UnpaidBet'
+                unpaidBetCount:
+                    type: integer
+                    format: int32
+                totalAmount:
+                    type: string
+                unpaidUserCount:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.game.service.v1.ListUnpaidBetsResponse_UnpaidBet:
+            type: object
+            properties:
+                createDateTime:
+                    type: string
+                    format: date-time
+                updateDateTime:
+                    type: string
+                    format: date-time
+                status:
+                    type: string
+                userId:
+                    type: string
+                betId:
+                    type: string
+                roundId:
+                    type: string
+                category:
+                    type: string
+                game:
+                    type: string
+                gameId:
+                    type: string
+                providerName:
+                    type: string
+                currency:
+                    type: string
+                betAmount:
+                    type: string
+                payoutAmount:
+                    type: string
+                winAmount:
+                    type: string
         api.game.service.v1.PlayRequest:
             type: object
             properties:
@@ -13884,6 +14067,20 @@ components:
                     type: string
                     format: date-time
             description: Deposit reward config for an operator with specific currency
+        api.wallet.service.v1.FICAThresholdConfig:
+            type: object
+            properties:
+                configs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.FICAThresholdConfig_Config'
+        api.wallet.service.v1.FICAThresholdConfig_Config:
+            type: object
+            properties:
+                transactionType:
+                    type: string
+                thresholdAmount:
+                    type: string
         api.wallet.service.v1.GetCurrenciesRequest:
             type: object
             properties:
@@ -13938,6 +14135,13 @@ components:
                     additionalProperties:
                         type: string
                     description: map key is currency code, value is currency exchange rate
+        api.wallet.service.v1.GetFICAThresholdConfigResponse:
+            type: object
+            properties:
+                ficaThresholdConfigs:
+                    type: object
+                    additionalProperties:
+                        $ref: '#/components/schemas/api.wallet.service.v1.FICAThresholdConfig'
         api.wallet.service.v1.GetGamificationCurrencyConfigResponse:
             type: object
             properties:
@@ -14173,6 +14377,46 @@ components:
                     type: string
                 externalTransactionId:
                     type: string
+        api.wallet.service.v1.ListFICAThresholdTransactionsResponse:
+            type: object
+            properties:
+                thresholdTransactions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.ListFICAThresholdTransactionsResponse_FICAThresholdTransaction'
+        api.wallet.service.v1.ListFICAThresholdTransactionsResponse_FICAThresholdTransaction:
+            type: object
+            properties:
+                type:
+                    type: string
+                transactionTime:
+                    type: string
+                    format: date-time
+                transactionId:
+                    type: string
+                currency:
+                    type: string
+                amount:
+                    type: string
+                excessAmount:
+                    type: string
+                userId:
+                    type: string
+                fullName:
+                    type: string
+                idType:
+                    type: string
+                idNumber:
+                    type: string
+                mobile:
+                    type: string
+                email:
+                    type: string
+                address:
+                    type: string
+                kycLevel:
+                    type: integer
+                    format: int32
         api.wallet.service.v1.ListResponsibleGamblingConfigsRequest:
             type: object
             properties:
@@ -14341,6 +14585,9 @@ components:
                 maxWithdrawalAmount:
                     type: string
         api.wallet.service.v1.SetDepositRewardSequencesResponse:
+            type: object
+            properties: {}
+        api.wallet.service.v1.SetFICAThresholdConfigResponse:
             type: object
             properties: {}
         api.wallet.service.v1.UpdateDeductionOrderResponse:

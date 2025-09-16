@@ -61,6 +61,8 @@ func (m *EventRequest) validate(all bool) error {
 
 	// no validation rules for EventData
 
+	// no validation rules for MessageId
+
 	if len(errors) > 0 {
 		return EventRequestMultiError(errors)
 	}

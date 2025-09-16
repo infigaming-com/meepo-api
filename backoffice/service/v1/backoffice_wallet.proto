@@ -195,10 +195,34 @@ service BackofficeWallet {
 		};
 	}
 
-	// ListCustomerRecords lists customer records for all users (with deposit, withdraw, game bet, game win and manual credit(this is not supported yet))
+	// ListCustomerRecords lists customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
 	rpc ListCustomerRecords(ListCustomerRecordsRequest) returns (wallet.service.v1.ListCustomerRecordsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/customer-records/list"
+			body: "*"
+		};
+	}
+
+	// SetFICAThresholdConfig sets the FICA threshold config for an operator and its specific currency
+	rpc SetFICAThresholdConfig(SetFICAThresholdConfigRequest) returns (wallet.service.v1.SetFICAThresholdConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/fica/config/set"
+			body: "*"
+		};
+	}
+
+	// GetFICAThresholdConfig gets the FICA threshold config for an operator of all currencies
+	rpc GetFICAThresholdConfig(GetFICAThresholdConfigRequest) returns (wallet.service.v1.GetFICAThresholdConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/fica/config/get"
+			body: "*"
+		};
+	}
+
+	// ListFICAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
+	rpc ListFICAThresholdTransactions(ListFICAThresholdTransactionsRequest) returns (wallet.service.v1.ListFICAThresholdTransactionsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/fica/transactions/list"
 			body: "*"
 		};
 	}
@@ -564,3 +588,22 @@ message ListCustomerRecordsRequest {
 	optional int32 page = 6;
 	optional int32 page_size = 7;
 }
+
+message SetFICAThresholdConfigRequest {
+	string currency = 1;
+	wallet.service.v1.FICAThresholdConfig fica_threshold_config = 2;
+}
+
+message GetFICAThresholdConfigRequest {
+}
+
+message ListFICAThresholdTransactionsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional string transaction_type = 3;
+	optional string currency = 4;
+	optional int32 kyc_level = 5;
+	optional int32 page = 6;
+	optional int32 page_size = 7;
+}
+

@@ -195,6 +195,15 @@ service Wallet {
 
 	// ListCustomerRecords lists customer records for all users (with deposit, withdraw, game bet, game win and manual credit(this is not supported yet))
 	rpc ListCustomerRecords(ListCustomerRecordsRequest) returns (ListCustomerRecordsResponse) {}
+
+	// SetFICAThresholdConfig sets the FICA threshold config for an operator and its specific currency
+	rpc SetFICAThresholdConfig(SetFICAThresholdConfigRequest) returns (SetFICAThresholdConfigResponse) {}
+
+	// GetFICAThresholdConfig gets the FICA threshold config for an operator of all currencies
+	rpc GetFICAThresholdConfig(GetFICAThresholdConfigRequest) returns (GetFICAThresholdConfigResponse) {}
+
+	// ListFICAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
+	rpc ListFICAThresholdTransactions(ListFICAThresholdTransactionsRequest) returns (ListFICAThresholdTransactionsResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -1326,3 +1335,59 @@ message ListCustomerRecordsResponse {
 	int32 page = 3;
 	int32 page_size = 4;
 }
+
+message FICAThresholdConfig {
+	message Config {
+		string transaction_type = 1; // payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward
+		string threshold_amount = 2;
+	}
+	repeated Config configs = 1;
+}
+
+message SetFICAThresholdConfigRequest {
+	string currency = 1;
+	FICAThresholdConfig fica_threshold_config = 2;
+	api.common.OperatorContext operator_context = 3;
+}
+
+message SetFICAThresholdConfigResponse {}
+
+message GetFICAThresholdConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+}
+
+message GetFICAThresholdConfigResponse {
+	map<string, FICAThresholdConfig> fica_threshold_configs = 1;
+}
+
+message ListFICAThresholdTransactionsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional string transaction_type = 3;
+	optional string currency = 4;
+	optional int32 kyc_level = 5;
+	optional int32 page = 6;
+	optional int32 page_size = 7;
+	api.common.OperatorContext operator_context = 8;
+}
+
+message ListFICAThresholdTransactionsResponse {
+	message FICAThresholdTransaction {
+		string type = 1;
+		google.protobuf.Timestamp transaction_time = 2; // created_at
+		int64 transaction_id = 3;
+		string currency = 4;
+		string amount = 5;
+		string excess_amount = 6;
+		int64 user_id = 7;
+		string full_name = 8;
+		string id_type = 9;
+		string id_number = 10;
+		string mobile = 11;
+		string email = 12;
+		string address = 13;
+		int32 kyc_level = 14;
+	}
+	repeated FICAThresholdTransaction threshold_transactions = 1;
+}
+

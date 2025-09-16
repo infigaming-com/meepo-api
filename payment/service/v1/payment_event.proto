@@ -16,6 +16,7 @@ service PaymentEvent {
 message EventRequest {
 	string subscription_id = 1;
 	bytes event_data = 2;
+	string message_id = 3;
 }
 
 message EventResponse {}

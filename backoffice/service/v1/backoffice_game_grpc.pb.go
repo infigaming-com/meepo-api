@@ -36,6 +36,7 @@ const (
 	BackofficeGame_UpdateProvider_FullMethodName            = "/api.backoffice.service.v1.BackofficeGame/UpdateProvider"
 	BackofficeGame_ListProviderRates_FullMethodName         = "/api.backoffice.service.v1.BackofficeGame/ListProviderRates"
 	BackofficeGame_GetGameTransactionById_FullMethodName    = "/api.backoffice.service.v1.BackofficeGame/GetGameTransactionById"
+	BackofficeGame_ListUnpaidBets_FullMethodName            = "/api.backoffice.service.v1.BackofficeGame/ListUnpaidBets"
 )
 
 // BackofficeGameClient is the client API for BackofficeGame service.
@@ -64,6 +65,7 @@ type BackofficeGameClient interface {
 	UpdateProvider(ctx context.Context, in *UpdateProviderRequest, opts ...grpc.CallOption) (*UpdateProviderResponse, error)
 	ListProviderRates(ctx context.Context, in *ListProviderRatesRequest, opts ...grpc.CallOption) (*ListProviderRatesResponse, error)
 	GetGameTransactionById(ctx context.Context, in *GetGameTransactionByIdRequest, opts ...grpc.CallOption) (*v1.GetGameTransactionByIdResponse, error)
+	ListUnpaidBets(ctx context.Context, in *ListUnpaidBetsRequest, opts ...grpc.CallOption) (*v1.ListUnpaidBetsResponse, error)
 }
 
 type backofficeGameClient struct {
@@ -234,6 +236,16 @@ func (c *backofficeGameClient) GetGameTransactionById(ctx context.Context, in *G
 	return out, nil
 }
 
+func (c *backofficeGameClient) ListUnpaidBets(ctx context.Context, in *ListUnpaidBetsRequest, opts ...grpc.CallOption) (*v1.ListUnpaidBetsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListUnpaidBetsResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ListUnpaidBets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeGameServer is the server API for BackofficeGame service.
 // All implementations must embed UnimplementedBackofficeGameServer
 // for forward compatibility.
@@ -260,6 +272,7 @@ type BackofficeGameServer interface {
 	UpdateProvider(context.Context, *UpdateProviderRequest) (*UpdateProviderResponse, error)
 	ListProviderRates(context.Context, *ListProviderRatesRequest) (*ListProviderRatesResponse, error)
 	GetGameTransactionById(context.Context, *GetGameTransactionByIdRequest) (*v1.GetGameTransactionByIdResponse, error)
+	ListUnpaidBets(context.Context, *ListUnpaidBetsRequest) (*v1.ListUnpaidBetsResponse, error)
 	mustEmbedUnimplementedBackofficeGameServer()
 }
 
@@ -317,6 +330,9 @@ func (UnimplementedBackofficeGameServer) ListProviderRates(context.Context, *Lis
 }
 func (UnimplementedBackofficeGameServer) GetGameTransactionById(context.Context, *GetGameTransactionByIdRequest) (*v1.GetGameTransactionByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGameTransactionById not implemented")
+}
+func (UnimplementedBackofficeGameServer) ListUnpaidBets(context.Context, *ListUnpaidBetsRequest) (*v1.ListUnpaidBetsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListUnpaidBets not implemented")
 }
 func (UnimplementedBackofficeGameServer) mustEmbedUnimplementedBackofficeGameServer() {}
 func (UnimplementedBackofficeGameServer) testEmbeddedByValue()                        {}
@@ -627,6 +643,24 @@ func _BackofficeGame_GetGameTransactionById_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeGame_ListUnpaidBets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListUnpaidBetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ListUnpaidBets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ListUnpaidBets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ListUnpaidBets(ctx, req.(*ListUnpaidBetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeGame_ServiceDesc is the grpc.ServiceDesc for BackofficeGame service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -697,6 +731,10 @@ var BackofficeGame_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetGameTransactionById",
 			Handler:    _BackofficeGame_GetGameTransactionById_Handler,
+		},
+		{
+			MethodName: "ListUnpaidBets",
+			Handler:    _BackofficeGame_ListUnpaidBets_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
