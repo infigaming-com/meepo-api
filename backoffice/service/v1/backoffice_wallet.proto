@@ -203,26 +203,26 @@ service BackofficeWallet {
 		};
 	}
 
-	// SetFCIAThresholdConfig sets the FCIA threshold config for an operator and its specific currency
-	rpc SetFCIAThresholdConfig(SetFCIAThresholdConfigRequest) returns (wallet.service.v1.SetFCIAThresholdConfigResponse) {
+	// SetFICAThresholdConfig sets the FICA threshold config for an operator and its specific currency
+	rpc SetFICAThresholdConfig(SetFICAThresholdConfigRequest) returns (wallet.service.v1.SetFICAThresholdConfigResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/wallet/fcia/config/set"
+			post: "/v1/backoffice/wallet/fica/config/set"
 			body: "*"
 		};
 	}
 
-	// GetFCIAThresholdConfig gets the FCIA threshold config for an operator of all currencies
-	rpc GetFCIAThresholdConfig(GetFCIAThresholdConfigRequest) returns (wallet.service.v1.GetFCIAThresholdConfigResponse) {
+	// GetFICAThresholdConfig gets the FICA threshold config for an operator of all currencies
+	rpc GetFICAThresholdConfig(GetFICAThresholdConfigRequest) returns (wallet.service.v1.GetFICAThresholdConfigResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/wallet/fcia/config/get"
+			post: "/v1/backoffice/wallet/fica/config/get"
 			body: "*"
 		};
 	}
 
-	// ListFCIAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
-	rpc ListFCIAThresholdTransactions(ListFCIAThresholdTransactionsRequest) returns (wallet.service.v1.ListFCIAThresholdTransactionsResponse) {
+	// ListFICAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
+	rpc ListFICAThresholdTransactions(ListFICAThresholdTransactionsRequest) returns (wallet.service.v1.ListFICAThresholdTransactionsResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/wallet/fcia/transactions/list"
+			post: "/v1/backoffice/wallet/fica/transactions/list"
 			body: "*"
 		};
 	}
@@ -589,15 +589,15 @@ message ListCustomerRecordsRequest {
 	optional int32 page_size = 7;
 }
 
-message SetFCIAThresholdConfigRequest {
+message SetFICAThresholdConfigRequest {
 	string currency = 1;
-	wallet.service.v1.FCIAThresholdConfig fcia_threshold_config = 2;
+	wallet.service.v1.FICAThresholdConfig fica_threshold_config = 2;
 }
 
-message GetFCIAThresholdConfigRequest {
+message GetFICAThresholdConfigRequest {
 }
 
-message ListFCIAThresholdTransactionsRequest {
+message ListFICAThresholdTransactionsRequest {
 	optional google.protobuf.Timestamp start_time = 1;
 	optional google.protobuf.Timestamp end_time = 2;
 	optional string transaction_type = 3;

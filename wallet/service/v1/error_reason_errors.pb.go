@@ -1463,50 +1463,50 @@ func ErrorListCustomerRecordsFailed(format string, args ...interface{}) *errors.
 	return errors.New(500, ErrorReason_LIST_CUSTOMER_RECORDS_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-func IsGetFciaThresholdConfigFailed(err error) bool {
+func IsGetFicaThresholdConfigFailed(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_GET_FCIA_THRESHOLD_CONFIG_FAILED.String() && e.Code == 500
+	return e.Reason == ErrorReason_GET_FICA_THRESHOLD_CONFIG_FAILED.String() && e.Code == 500
 }
 
-func ErrorGetFciaThresholdConfigFailed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_GET_FCIA_THRESHOLD_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+func ErrorGetFicaThresholdConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_FICA_THRESHOLD_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-func IsSetFciaThresholdConfigFailed(err error) bool {
+func IsSetFicaThresholdConfigFailed(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_SET_FCIA_THRESHOLD_CONFIG_FAILED.String() && e.Code == 500
+	return e.Reason == ErrorReason_SET_FICA_THRESHOLD_CONFIG_FAILED.String() && e.Code == 500
 }
 
-func ErrorSetFciaThresholdConfigFailed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_SET_FCIA_THRESHOLD_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+func ErrorSetFicaThresholdConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SET_FICA_THRESHOLD_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-func IsInvalidFciaThresholdAmount(err error) bool {
+func IsInvalidFicaThresholdAmount(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_INVALID_FCIA_THRESHOLD_AMOUNT.String() && e.Code == 500
+	return e.Reason == ErrorReason_INVALID_FICA_THRESHOLD_AMOUNT.String() && e.Code == 500
 }
 
-func ErrorInvalidFciaThresholdAmount(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_INVALID_FCIA_THRESHOLD_AMOUNT.String(), fmt.Sprintf(format, args...))
+func ErrorInvalidFicaThresholdAmount(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_FICA_THRESHOLD_AMOUNT.String(), fmt.Sprintf(format, args...))
 }
 
-func IsInvalidFciaThresholdTransactionType(err error) bool {
+func IsInvalidFicaThresholdTransactionType(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_INVALID_FCIA_THRESHOLD_TRANSACTION_TYPE.String() && e.Code == 500
+	return e.Reason == ErrorReason_INVALID_FICA_THRESHOLD_TRANSACTION_TYPE.String() && e.Code == 500
 }
 
-func ErrorInvalidFciaThresholdTransactionType(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_INVALID_FCIA_THRESHOLD_TRANSACTION_TYPE.String(), fmt.Sprintf(format, args...))
+func ErrorInvalidFicaThresholdTransactionType(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_FICA_THRESHOLD_TRANSACTION_TYPE.String(), fmt.Sprintf(format, args...))
 }

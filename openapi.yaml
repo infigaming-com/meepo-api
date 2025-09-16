@@ -3341,17 +3341,17 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetExchangeRatesResponse'
-    /v1/backoffice/wallet/fcia/config/get:
+    /v1/backoffice/wallet/fica/config/get:
         post:
             tags:
                 - BackofficeWallet
-            description: GetFCIAThresholdConfig gets the FCIA threshold config for an operator of all currencies
-            operationId: BackofficeWallet_GetFCIAThresholdConfig
+            description: GetFICAThresholdConfig gets the FICA threshold config for an operator of all currencies
+            operationId: BackofficeWallet_GetFICAThresholdConfig
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetFCIAThresholdConfigRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetFICAThresholdConfigRequest'
                 required: true
             responses:
                 "200":
@@ -3359,18 +3359,18 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.wallet.service.v1.GetFCIAThresholdConfigResponse'
-    /v1/backoffice/wallet/fcia/config/set:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetFICAThresholdConfigResponse'
+    /v1/backoffice/wallet/fica/config/set:
         post:
             tags:
                 - BackofficeWallet
-            description: SetFCIAThresholdConfig sets the FCIA threshold config for an operator and its specific currency
-            operationId: BackofficeWallet_SetFCIAThresholdConfig
+            description: SetFICAThresholdConfig sets the FICA threshold config for an operator and its specific currency
+            operationId: BackofficeWallet_SetFICAThresholdConfig
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.SetFCIAThresholdConfigRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetFICAThresholdConfigRequest'
                 required: true
             responses:
                 "200":
@@ -3378,18 +3378,18 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.wallet.service.v1.SetFCIAThresholdConfigResponse'
-    /v1/backoffice/wallet/fcia/transactions/list:
+                                $ref: '#/components/schemas/api.wallet.service.v1.SetFICAThresholdConfigResponse'
+    /v1/backoffice/wallet/fica/transactions/list:
         post:
             tags:
                 - BackofficeWallet
-            description: ListFCIAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
-            operationId: BackofficeWallet_ListFCIAThresholdTransactions
+            description: ListFICAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
+            operationId: BackofficeWallet_ListFICAThresholdTransactions
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListFCIAThresholdTransactionsRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListFICAThresholdTransactionsRequest'
                 required: true
             responses:
                 "200":
@@ -3397,7 +3397,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.wallet.service.v1.ListFCIAThresholdTransactionsResponse'
+                                $ref: '#/components/schemas/api.wallet.service.v1.ListFICAThresholdTransactionsResponse'
     /v1/backoffice/wallet/gamification/get:
         post:
             tags:
@@ -5671,7 +5671,7 @@ components:
                     additionalProperties:
                         type: string
                     description: map key is source currency, value is target currency rate
-        api.backoffice.service.v1.GetFCIAThresholdConfigRequest:
+        api.backoffice.service.v1.GetFICAThresholdConfigRequest:
             type: object
             properties: {}
         api.backoffice.service.v1.GetGameSummaryRequest:
@@ -7722,7 +7722,7 @@ components:
                     type: string
                 averageFtdAmountReportingCurrencyForNonSameDayRegistredUsers:
                     type: string
-        api.backoffice.service.v1.ListFCIAThresholdTransactionsRequest:
+        api.backoffice.service.v1.ListFICAThresholdTransactionsRequest:
             type: object
             properties:
                 startTime:
@@ -10239,13 +10239,13 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.RewardSequence'
-        api.backoffice.service.v1.SetFCIAThresholdConfigRequest:
+        api.backoffice.service.v1.SetFICAThresholdConfigRequest:
             type: object
             properties:
                 currency:
                     type: string
-                fciaThresholdConfig:
-                    $ref: '#/components/schemas/api.wallet.service.v1.FCIAThresholdConfig'
+                ficaThresholdConfig:
+                    $ref: '#/components/schemas/api.wallet.service.v1.FICAThresholdConfig'
         api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest:
             type: object
             properties:
@@ -14090,14 +14090,14 @@ components:
                     type: string
                     format: date-time
             description: Deposit reward config for an operator with specific currency
-        api.wallet.service.v1.FCIAThresholdConfig:
+        api.wallet.service.v1.FICAThresholdConfig:
             type: object
             properties:
                 configs:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.wallet.service.v1.FCIAThresholdConfig_Config'
-        api.wallet.service.v1.FCIAThresholdConfig_Config:
+                        $ref: '#/components/schemas/api.wallet.service.v1.FICAThresholdConfig_Config'
+        api.wallet.service.v1.FICAThresholdConfig_Config:
             type: object
             properties:
                 transactionType:
@@ -14158,13 +14158,13 @@ components:
                     additionalProperties:
                         type: string
                     description: map key is currency code, value is currency exchange rate
-        api.wallet.service.v1.GetFCIAThresholdConfigResponse:
+        api.wallet.service.v1.GetFICAThresholdConfigResponse:
             type: object
             properties:
-                fciaThresholdConfigs:
+                ficaThresholdConfigs:
                     type: object
                     additionalProperties:
-                        $ref: '#/components/schemas/api.wallet.service.v1.FCIAThresholdConfig'
+                        $ref: '#/components/schemas/api.wallet.service.v1.FICAThresholdConfig'
         api.wallet.service.v1.GetGamificationCurrencyConfigResponse:
             type: object
             properties:
@@ -14400,14 +14400,14 @@ components:
                     type: string
                 externalTransactionId:
                     type: string
-        api.wallet.service.v1.ListFCIAThresholdTransactionsResponse:
+        api.wallet.service.v1.ListFICAThresholdTransactionsResponse:
             type: object
             properties:
                 thresholdTransactions:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.wallet.service.v1.ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction'
-        api.wallet.service.v1.ListFCIAThresholdTransactionsResponse_FCIAThresholdTransaction:
+                        $ref: '#/components/schemas/api.wallet.service.v1.ListFICAThresholdTransactionsResponse_FICAThresholdTransaction'
+        api.wallet.service.v1.ListFICAThresholdTransactionsResponse_FICAThresholdTransaction:
             type: object
             properties:
                 type:
@@ -14610,7 +14610,7 @@ components:
         api.wallet.service.v1.SetDepositRewardSequencesResponse:
             type: object
             properties: {}
-        api.wallet.service.v1.SetFCIAThresholdConfigResponse:
+        api.wallet.service.v1.SetFICAThresholdConfigResponse:
             type: object
             properties: {}
         api.wallet.service.v1.UpdateDeductionOrderResponse:
