@@ -8,17 +8,31 @@ option java_package = "system.service.v1";
 
 service System {
 	rpc AddIntegrityReport(AddIntegrityReportRequest) returns (AddIntegrityReportResponse) {}
+	rpc ListIntegrityStatus(ListIntegrityStatusRequest) returns (ListIntegrityStatusResponse) {}
+}
+
+message IntegrityFileInfo {
+	string file_path = 1;
+	string hash = 2;
 }
 
 message AddIntegrityReportRequest {
-	message IntegrityEventReportFileInfo {
-		string file_path = 1;
-		string hash = 2;
-	}
 	string label_app = 1;
 	string pod_name = 2;
 	string pod_namespace = 3;
-	repeated IntegrityEventReportFileInfo file_infos = 4;
+	repeated IntegrityFileInfo file_infos = 4;
 }
 
 message AddIntegrityReportResponse {}
+
+message ListIntegrityStatusRequest {}
+
+message ListIntegrityStatusResponse {
+	message IntegrityStatus {
+		string label_app = 1;
+		string pod_name = 2;
+		string pod_namespace = 3;
+		repeated IntegrityFileInfo file_infos = 4;
+	}
+	repeated IntegrityStatus integrity_statuses = 1;
+}

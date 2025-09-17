@@ -132,8 +132,8 @@ func (is *IntegrityService) checkAndReportIntegrity(ctx context.Context) {
 	is.lg.Debugf("Added integrity report: %+v", fileInfos)
 }
 
-func getFileInfos(filePaths []string) ([]*system.AddIntegrityReportRequest_IntegrityEventReportFileInfo, error) {
-	fileInfos := make([]*system.AddIntegrityReportRequest_IntegrityEventReportFileInfo, 0, len(filePaths))
+func getFileInfos(filePaths []string) ([]*system.IntegrityFileInfo, error) {
+	fileInfos := make([]*system.IntegrityFileInfo, 0, len(filePaths))
 	for _, filePath := range filePaths {
 		hash, err := getFileHash(filePath)
 		if err != nil {
@@ -141,7 +141,7 @@ func getFileInfos(filePaths []string) ([]*system.AddIntegrityReportRequest_Integ
 		}
 		fileInfos = append(
 			fileInfos,
-			&system.AddIntegrityReportRequest_IntegrityEventReportFileInfo{
+			&system.IntegrityFileInfo{
 				FilePath: filePath,
 				Hash:     hash,
 			},
