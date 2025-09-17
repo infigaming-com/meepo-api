@@ -86,6 +86,9 @@ func (is *IntegrityService) Start(ctx context.Context) {
 		}
 	}()
 
+	// Run immediately
+	is.checkAndReportIntegrity(ctx)
+
 	ticker := time.NewTicker(is.interval)
 	defer ticker.Stop()
 
