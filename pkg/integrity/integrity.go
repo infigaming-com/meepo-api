@@ -107,43 +107,29 @@ func (is *IntegrityService) Start(ctx context.Context) {
 }
 
 func (is *IntegrityService) checkAndReportIntegrity(ctx context.Context) {
-	for _, filePath := range is.filePaths {
-		is.checkAndReportIntegrityForFile(ctx, filePath)
-	}
-}
-
-func (is *IntegrityService) checkAndReportIntegrityForFile(ctx context.Context, filePath string) {
 	defer func() {
 		if r := recover(); r != nil {
-			is.lg.Errorf("integrity service panic processing file %s: %v", filePath, r)
+			is.lg.Errorf("integrity service panic: %v", r)
 		}
 	}()
 
-	file, err := os.Open(filePath)
+	fileInfos, err := getFileInfos(is.filePaths)
 	if err != nil {
-		is.lg.Errorf("Failed to open file %s: %v", filePath, err)
+		is.lg.Errorf("Failed to get file infos: %v", err)
 		return
 	}
-	defer file.Close()
-
-	hashResult, err := chash.HashWithReader(file, chash.SHA256)
-	if err != nil {
-		is.lg.Errorf("Failed to hash file %s: %v", filePath, err)
-		return
-	}
-	is.lg.Debugf("Hash for file %s: %s", filePath, hashResult)
+	is.lg.Debugf("FileInfos: %+v", fileInfos)
 
 	event := IntegrityEvent{
+		LabelApp:     is.labelApp,
 		PodName:      is.podName,
 		PodNamespace: is.podNamespace,
-		LabelApp:     is.labelApp,
-		File:         filePath,
-		Hash:         hashResult,
+		FileInfos:    fileInfos,
 		CreatedAt:    time.Now().UnixMilli(),
 	}
 	eventData, err := json.Marshal(event)
 	if err != nil {
-		is.lg.Errorf("Failed to marshal integrity event for file %s: %v", filePath, err)
+		is.lg.Errorf("Failed to marshal integrity event: %v", err)
 		return
 	}
 
@@ -155,8 +141,29 @@ func (is *IntegrityService) checkAndReportIntegrityForFile(ctx context.Context, 
 		Message: eventData,
 	})
 	if err != nil {
-		is.lg.Errorf("Failed to publish integrity event for file %s: %v", filePath, err)
+		is.lg.Errorf("Failed to publish integrity event: %v", err)
 		return
 	}
-	is.lg.Debugf("Published integrity event for file %s, event: %+v", filePath, event)
+	is.lg.Debugf("Published integrity event: %+v", event)
+}
+
+func getFileInfos(filePaths []string) ([]FileInfo, error) {
+	fileInfos := make([]FileInfo, 0, len(filePaths))
+	for _, filePath := range filePaths {
+		hash, err := getFileHash(filePath)
+		if err != nil {
+			return nil, err
+		}
+		fileInfos = append(fileInfos, FileInfo{FilePath: filePath, Hash: hash})
+	}
+	return fileInfos, nil
+}
+
+func getFileHash(filePath string) (string, error) {
+	file, err := os.Open(filePath)
+	if err != nil {
+		return "", err
+	}
+	defer file.Close()
+	return chash.HashWithReader(file, chash.SHA256)
 }
