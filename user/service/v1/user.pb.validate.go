@@ -20245,6 +20245,210 @@ var _ interface {
 	ErrorName() string
 } = GetOperatorRegisterLimitConfigResponseValidationError{}
 
+// Validate checks the field values on CloseAccountRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CloseAccountRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CloseAccountRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CloseAccountRequestMultiError, or nil if none found.
+func (m *CloseAccountRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CloseAccountRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return CloseAccountRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CloseAccountRequestMultiError is an error wrapping multiple validation
+// errors returned by CloseAccountRequest.ValidateAll() if the designated
+// constraints aren't met.
+type CloseAccountRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CloseAccountRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CloseAccountRequestMultiError) AllErrors() []error { return m }
+
+// CloseAccountRequestValidationError is the validation error returned by
+// CloseAccountRequest.Validate if the designated constraints aren't met.
+type CloseAccountRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CloseAccountRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CloseAccountRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CloseAccountRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CloseAccountRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CloseAccountRequestValidationError) ErrorName() string {
+	return "CloseAccountRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CloseAccountRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCloseAccountRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CloseAccountRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CloseAccountRequestValidationError{}
+
+// Validate checks the field values on CloseAccountResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CloseAccountResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CloseAccountResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CloseAccountResponseMultiError, or nil if none found.
+func (m *CloseAccountResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CloseAccountResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return CloseAccountResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CloseAccountResponseMultiError is an error wrapping multiple validation
+// errors returned by CloseAccountResponse.ValidateAll() if the designated
+// constraints aren't met.
+type CloseAccountResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CloseAccountResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CloseAccountResponseMultiError) AllErrors() []error { return m }
+
+// CloseAccountResponseValidationError is the validation error returned by
+// CloseAccountResponse.Validate if the designated constraints aren't met.
+type CloseAccountResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CloseAccountResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CloseAccountResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CloseAccountResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CloseAccountResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CloseAccountResponseValidationError) ErrorName() string {
+	return "CloseAccountResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CloseAccountResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCloseAccountResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CloseAccountResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CloseAccountResponseValidationError{}
+
 // Validate checks the field values on ListUsersResponse_User with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

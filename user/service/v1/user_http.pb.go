@@ -20,6 +20,7 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationUserAddResponsibleGamblingConfig = "/api.user.service.v1.User/AddResponsibleGamblingConfig"
+const OperationUserCloseAccount = "/api.user.service.v1.User/CloseAccount"
 const OperationUserDeleteResponsibleGamblingConfig = "/api.user.service.v1.User/DeleteResponsibleGamblingConfig"
 const OperationUserGetOperatorAccountSettings = "/api.user.service.v1.User/GetOperatorAccountSettings"
 const OperationUserGetResponsibleGamblingConfig = "/api.user.service.v1.User/GetResponsibleGamblingConfig"
@@ -39,6 +40,7 @@ const OperationUserVerifyEmail = "/api.user.service.v1.User/VerifyEmail"
 
 type UserHTTPServer interface {
 	AddResponsibleGamblingConfig(context.Context, *AddResponsibleGamblingConfigRequest) (*AddResponsibleGamblingConfigResponse, error)
+	CloseAccount(context.Context, *CloseAccountRequest) (*CloseAccountResponse, error)
 	DeleteResponsibleGamblingConfig(context.Context, *DeleteResponsibleGamblingConfigRequest) (*DeleteResponsibleGamblingConfigResponse, error)
 	GetOperatorAccountSettings(context.Context, *GetOperatorAccountSettingsRequest) (*GetOperatorAccountSettingsResponse, error)
 	GetResponsibleGamblingConfig(context.Context, *GetResponsibleGamblingConfigRequest) (*GetResponsibleGamblingConfigResponse, error)
@@ -94,6 +96,7 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.POST("/v1/user/responsible-gambling/config/add", _User_AddResponsibleGamblingConfig0_HTTP_Handler(srv))
 	r.POST("/v1/user/responsible-gambling/config/delete", _User_DeleteResponsibleGamblingConfig0_HTTP_Handler(srv))
 	r.POST("/v1/user/responsible-gambling/config/get", _User_GetResponsibleGamblingConfig0_HTTP_Handler(srv))
+	r.POST("/v1/user/account/update", _User_CloseAccount0_HTTP_Handler(srv))
 }
 
 func _User_Register0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
@@ -470,8 +473,31 @@ func _User_GetResponsibleGamblingConfig0_HTTP_Handler(srv UserHTTPServer) func(c
 	}
 }
 
+func _User_CloseAccount0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CloseAccountRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserCloseAccount)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CloseAccount(ctx, req.(*CloseAccountRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CloseAccountResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type UserHTTPClient interface {
 	AddResponsibleGamblingConfig(ctx context.Context, req *AddResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *AddResponsibleGamblingConfigResponse, err error)
+	CloseAccount(ctx context.Context, req *CloseAccountRequest, opts ...http.CallOption) (rsp *CloseAccountResponse, err error)
 	DeleteResponsibleGamblingConfig(ctx context.Context, req *DeleteResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *DeleteResponsibleGamblingConfigResponse, err error)
 	GetOperatorAccountSettings(ctx context.Context, req *GetOperatorAccountSettingsRequest, opts ...http.CallOption) (rsp *GetOperatorAccountSettingsResponse, err error)
 	GetResponsibleGamblingConfig(ctx context.Context, req *GetResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *GetResponsibleGamblingConfigResponse, err error)
@@ -503,6 +529,19 @@ func (c *UserHTTPClientImpl) AddResponsibleGamblingConfig(ctx context.Context, i
 	pattern := "/v1/user/responsible-gambling/config/add"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserAddResponsibleGamblingConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *UserHTTPClientImpl) CloseAccount(ctx context.Context, in *CloseAccountRequest, opts ...http.CallOption) (*CloseAccountResponse, error) {
+	var out CloseAccountResponse
+	pattern := "/v1/user/account/update"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserCloseAccount))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
