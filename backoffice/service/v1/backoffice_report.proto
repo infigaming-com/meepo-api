@@ -103,6 +103,14 @@ service BackofficeReport {
           body: "*"
       };
   }
+
+	rpc CustomerRecordReportDetail(CustomerRecordReportDetailRequest) returns (CustomerRecordReportDetailResponse) {
+      option (google.api.http) = {
+          post: "/v1/backoffice/report/customer-record/get"
+          body: "*"
+      };
+  }
+
 }
 
 message TimeRange{
@@ -755,4 +763,61 @@ message GetTransactionAndEventInfoResponse {
 
 	TransactionInfo transaction_info = 1;
 	EventSettlementInfo event_settlement_info = 2;
+}
+
+message CustomerRecordReportDetailRequest {
+	optional int64 user_id = 1;
+	optional int64 payment_transaction_id = 2;
+	optional int64 game_transaction_id = 3;
+	optional int64 game_bet_id = 4;
+}
+
+message CustomerRecordReportDetailResponse{
+	message UserDetail {
+		int64 user_id = 1;
+		string name = 2;
+		string phone = 3;
+		string id_type = 4;
+		string id_number = 5;
+		string address = 6;
+	}
+	message PaymentTransaction {
+		int64 payment_transaction_id = 1;
+		string psp_transaction_id = 2;
+		google.protobuf.Timestamp arrival_time = 3;
+		string payment_service_provider = 4;
+		string method_of_payment = 5;
+		string payment_channel = 6;
+		string currency = 7;
+		string amount = 8;
+		string processing_fee = 9;
+	}
+	message GameTransaction {
+		int64 game_transaction_id = 1;
+		string provider_transaction_id = 2;
+		string settlement_time = 3;
+		string venue_Tournament = 4;
+		string wager_type = 5;
+		string bet_currency = 6;
+		string bet_amount = 7;
+		string payout_currency = 8;
+		string payout_amount = 9;
+	}
+	message EventSettlementInformation {
+		message MatchResults {
+			string name = 1;
+			string status = 2;
+			string selection = 3;
+		}
+		string selection_bet_details = 1;
+		string event_description = 2;
+		string settlement_details = 3;
+		repeated MatchResults match_results = 4;
+	}
+
+	optional UserDetail user_detail = 1;
+	optional PaymentTransaction payment_transaction = 2;
+	optional GameTransaction game_transaction = 3;
+	optional EventSettlementInformation event_settlement_information = 4;
+	
 }
