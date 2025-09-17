@@ -4235,6 +4235,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.review.service.v1.CreateWithdrawResponse'
+    /v1/user/account/update:
+        post:
+            tags:
+                - User
+            operationId: User_CloseAccount
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.CloseAccountRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.CloseAccountResponse'
     /v1/user/auth/login:
         post:
             tags:
@@ -12813,6 +12831,12 @@ components:
                 createdAt:
                     type: string
                     format: date-time
+        api.user.service.v1.CloseAccountRequest:
+            type: object
+            properties: {}
+        api.user.service.v1.CloseAccountResponse:
+            type: object
+            properties: {}
         api.user.service.v1.DeleteOperatorByoDomainResponse:
             type: object
             properties: {}
