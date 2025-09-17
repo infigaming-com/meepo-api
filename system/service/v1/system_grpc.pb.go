@@ -19,20 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	System_AddCurrency_FullMethodName    = "/system.service.v1.System/AddCurrency"
-	System_UpdateCurrency_FullMethodName = "/system.service.v1.System/UpdateCurrency"
-	System_GetCurrencies_FullMethodName  = "/system.service.v1.System/GetCurrencies"
-	System_ListCurrencies_FullMethodName = "/system.service.v1.System/ListCurrencies"
+	System_AddIntegrityReport_FullMethodName = "/system.service.v1.System/AddIntegrityReport"
 )
 
 // SystemClient is the client API for System service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SystemClient interface {
-	AddCurrency(ctx context.Context, in *AddCurrencyRequest, opts ...grpc.CallOption) (*AddCurrencyResponse, error)
-	UpdateCurrency(ctx context.Context, in *UpdateCurrencyRequest, opts ...grpc.CallOption) (*UpdateCurrencyResponse, error)
-	GetCurrencies(ctx context.Context, in *GetCurrenciesRequest, opts ...grpc.CallOption) (*GetCurrenciesResponse, error)
-	ListCurrencies(ctx context.Context, in *ListCurrenciesRequest, opts ...grpc.CallOption) (*ListCurrenciesResponse, error)
+	AddIntegrityReport(ctx context.Context, in *AddIntegrityReportRequest, opts ...grpc.CallOption) (*AddIntegrityReportResponse, error)
 }
 
 type systemClient struct {
@@ -43,40 +37,10 @@ func NewSystemClient(cc grpc.ClientConnInterface) SystemClient {
 	return &systemClient{cc}
 }
 
-func (c *systemClient) AddCurrency(ctx context.Context, in *AddCurrencyRequest, opts ...grpc.CallOption) (*AddCurrencyResponse, error) {
+func (c *systemClient) AddIntegrityReport(ctx context.Context, in *AddIntegrityReportRequest, opts ...grpc.CallOption) (*AddIntegrityReportResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AddCurrencyResponse)
-	err := c.cc.Invoke(ctx, System_AddCurrency_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *systemClient) UpdateCurrency(ctx context.Context, in *UpdateCurrencyRequest, opts ...grpc.CallOption) (*UpdateCurrencyResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateCurrencyResponse)
-	err := c.cc.Invoke(ctx, System_UpdateCurrency_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *systemClient) GetCurrencies(ctx context.Context, in *GetCurrenciesRequest, opts ...grpc.CallOption) (*GetCurrenciesResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetCurrenciesResponse)
-	err := c.cc.Invoke(ctx, System_GetCurrencies_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *systemClient) ListCurrencies(ctx context.Context, in *ListCurrenciesRequest, opts ...grpc.CallOption) (*ListCurrenciesResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListCurrenciesResponse)
-	err := c.cc.Invoke(ctx, System_ListCurrencies_FullMethodName, in, out, cOpts...)
+	out := new(AddIntegrityReportResponse)
+	err := c.cc.Invoke(ctx, System_AddIntegrityReport_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -87,10 +51,7 @@ func (c *systemClient) ListCurrencies(ctx context.Context, in *ListCurrenciesReq
 // All implementations must embed UnimplementedSystemServer
 // for forward compatibility.
 type SystemServer interface {
-	AddCurrency(context.Context, *AddCurrencyRequest) (*AddCurrencyResponse, error)
-	UpdateCurrency(context.Context, *UpdateCurrencyRequest) (*UpdateCurrencyResponse, error)
-	GetCurrencies(context.Context, *GetCurrenciesRequest) (*GetCurrenciesResponse, error)
-	ListCurrencies(context.Context, *ListCurrenciesRequest) (*ListCurrenciesResponse, error)
+	AddIntegrityReport(context.Context, *AddIntegrityReportRequest) (*AddIntegrityReportResponse, error)
 	mustEmbedUnimplementedSystemServer()
 }
 
@@ -101,17 +62,8 @@ type SystemServer interface {
 // pointer dereference when methods are called.
 type UnimplementedSystemServer struct{}
 
-func (UnimplementedSystemServer) AddCurrency(context.Context, *AddCurrencyRequest) (*AddCurrencyResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddCurrency not implemented")
-}
-func (UnimplementedSystemServer) UpdateCurrency(context.Context, *UpdateCurrencyRequest) (*UpdateCurrencyResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateCurrency not implemented")
-}
-func (UnimplementedSystemServer) GetCurrencies(context.Context, *GetCurrenciesRequest) (*GetCurrenciesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetCurrencies not implemented")
-}
-func (UnimplementedSystemServer) ListCurrencies(context.Context, *ListCurrenciesRequest) (*ListCurrenciesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListCurrencies not implemented")
+func (UnimplementedSystemServer) AddIntegrityReport(context.Context, *AddIntegrityReportRequest) (*AddIntegrityReportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddIntegrityReport not implemented")
 }
 func (UnimplementedSystemServer) mustEmbedUnimplementedSystemServer() {}
 func (UnimplementedSystemServer) testEmbeddedByValue()                {}
@@ -134,74 +86,20 @@ func RegisterSystemServer(s grpc.ServiceRegistrar, srv SystemServer) {
 	s.RegisterService(&System_ServiceDesc, srv)
 }
 
-func _System_AddCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddCurrencyRequest)
+func _System_AddIntegrityReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddIntegrityReportRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SystemServer).AddCurrency(ctx, in)
+		return srv.(SystemServer).AddIntegrityReport(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: System_AddCurrency_FullMethodName,
+		FullMethod: System_AddIntegrityReport_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SystemServer).AddCurrency(ctx, req.(*AddCurrencyRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _System_UpdateCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateCurrencyRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SystemServer).UpdateCurrency(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: System_UpdateCurrency_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SystemServer).UpdateCurrency(ctx, req.(*UpdateCurrencyRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _System_GetCurrencies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetCurrenciesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SystemServer).GetCurrencies(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: System_GetCurrencies_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SystemServer).GetCurrencies(ctx, req.(*GetCurrenciesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _System_ListCurrencies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListCurrenciesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SystemServer).ListCurrencies(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: System_ListCurrencies_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SystemServer).ListCurrencies(ctx, req.(*ListCurrenciesRequest))
+		return srv.(SystemServer).AddIntegrityReport(ctx, req.(*AddIntegrityReportRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -214,20 +112,8 @@ var System_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*SystemServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "AddCurrency",
-			Handler:    _System_AddCurrency_Handler,
-		},
-		{
-			MethodName: "UpdateCurrency",
-			Handler:    _System_UpdateCurrency_Handler,
-		},
-		{
-			MethodName: "GetCurrencies",
-			Handler:    _System_GetCurrencies_Handler,
-		},
-		{
-			MethodName: "ListCurrencies",
-			Handler:    _System_ListCurrencies_Handler,
+			MethodName: "AddIntegrityReport",
+			Handler:    _System_AddIntegrityReport_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

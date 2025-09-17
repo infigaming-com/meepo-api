@@ -2,15 +2,13 @@ package integrity
 
 import (
 	"context"
-	"encoding/json"
 	"os"
 	"sync"
 	"time"
 
 	"github.com/go-kratos/kratos/v2/log"
 	chash "github.com/infigaming-com/go-common/hash"
-	"github.com/infigaming-com/meepo-api/pkg/events"
-	pubsub "github.com/infigaming-com/meepo-api/pubsub/service/v1"
+	system "github.com/infigaming-com/meepo-api/system/service/v1"
 )
 
 type IntegrityService struct {
@@ -20,12 +18,11 @@ type IntegrityService struct {
 	podNamespace string
 	labelApp     string
 	filePaths    []string
-	pubsubClient pubsub.PubsubClient
-	reportTopic  string
+	systemClient system.SystemClient
 	wg           sync.WaitGroup
 }
 
-func NewIntegrityService(lg log.Logger, interval time.Duration, filePaths []string, pubsubClient pubsub.PubsubClient, reportTopic string) (*IntegrityService, func()) {
+func NewIntegrityService(lg log.Logger, interval time.Duration, filePaths []string, systemClient system.SystemClient) (*IntegrityService, func()) {
 	log := log.NewHelper(lg)
 
 	if interval == 0 {
@@ -36,12 +33,8 @@ func NewIntegrityService(lg log.Logger, interval time.Duration, filePaths []stri
 		log.Fatal("filePaths not provided")
 	}
 
-	if pubsubClient == nil {
-		log.Fatal("pubsubClient not provided")
-	}
-
-	if reportTopic == "" {
-		log.Fatal("reportTopic not provided")
+	if systemClient == nil {
+		log.Fatal("systemClient not provided")
 	}
 
 	podName := os.Getenv("POD_NAME")
@@ -71,8 +64,7 @@ func NewIntegrityService(lg log.Logger, interval time.Duration, filePaths []stri
 		podNamespace: podNamespace,
 		labelApp:     labelApp,
 		filePaths:    filePaths,
-		pubsubClient: pubsubClient,
-		reportTopic:  reportTopic,
+		systemClient: systemClient,
 	}
 
 	is.wg.Add(1)
@@ -121,41 +113,36 @@ func (is *IntegrityService) checkAndReportIntegrity(ctx context.Context) {
 	}
 	is.lg.Debugf("FileInfos: %+v", fileInfos)
 
-	event := events.IntegrityReportEvent{
+	timeoutCtx, timeoutCancel := context.WithTimeout(ctx, min(is.interval, 30*time.Second))
+	defer timeoutCancel()
+
+	_, err = is.systemClient.AddIntegrityReport(timeoutCtx, &system.AddIntegrityReportRequest{
 		LabelApp:     is.labelApp,
 		PodName:      is.podName,
 		PodNamespace: is.podNamespace,
 		FileInfos:    fileInfos,
-		CreatedAt:    time.Now().UnixMilli(),
-	}
-	eventData, err := json.Marshal(event)
-	if err != nil {
-		is.lg.Errorf("Failed to marshal integrity event: %v", err)
-		return
-	}
-
-	timeoutCtx, timeoutCancel := context.WithTimeout(ctx, min(is.interval, 30*time.Second))
-	defer timeoutCancel()
-
-	_, err = is.pubsubClient.Pub(timeoutCtx, &pubsub.PubRequest{
-		Topic:   is.reportTopic,
-		Message: eventData,
 	})
 	if err != nil {
-		is.lg.Errorf("Failed to publish integrity event: %v", err)
+		is.lg.Errorf("Failed to call system service to add integrity report: %v", err)
 		return
 	}
-	is.lg.Debugf("Published integrity event: %+v", event)
+	is.lg.Debugf("Added integrity report: %+v", fileInfos)
 }
 
-func getFileInfos(filePaths []string) ([]events.IntegrityEventReportFileInfo, error) {
-	fileInfos := make([]events.IntegrityEventReportFileInfo, 0, len(filePaths))
+func getFileInfos(filePaths []string) ([]*system.AddIntegrityReportRequest_IntegrityEventReportFileInfo, error) {
+	fileInfos := make([]*system.AddIntegrityReportRequest_IntegrityEventReportFileInfo, 0, len(filePaths))
 	for _, filePath := range filePaths {
 		hash, err := getFileHash(filePath)
 		if err != nil {
 			return nil, err
 		}
-		fileInfos = append(fileInfos, events.IntegrityEventReportFileInfo{FilePath: filePath, Hash: hash})
+		fileInfos = append(
+			fileInfos,
+			&system.AddIntegrityReportRequest_IntegrityEventReportFileInfo{
+				FilePath: filePath,
+				Hash:     hash,
+			},
+		)
 	}
 	return fileInfos, nil
 }
