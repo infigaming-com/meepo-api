@@ -14,17 +14,22 @@ import (
 
 type IntegrityService struct {
 	lg           *log.Helper
-	wg           sync.WaitGroup
+	interval     time.Duration
 	podName      string
 	podNamespace string
 	labelApp     string
 	filePaths    []string
 	pubsubClient pubsub.PubsubClient
 	reportTopic  string
+	wg           sync.WaitGroup
 }
 
-func NewIntegrityService(lg log.Logger, filePaths []string, pubsubClient pubsub.PubsubClient, reportTopic string) (*IntegrityService, func()) {
+func NewIntegrityService(lg log.Logger, interval time.Duration, filePaths []string, pubsubClient pubsub.PubsubClient, reportTopic string) (*IntegrityService, func()) {
 	log := log.NewHelper(lg)
+
+	if interval == 0 {
+		interval = 5 * time.Minute
+	}
 
 	if len(filePaths) == 0 {
 		log.Fatal("filePaths not provided")
@@ -72,6 +77,7 @@ func NewIntegrityService(lg log.Logger, filePaths []string, pubsubClient pubsub.
 	go is.Start(cancelCtx)
 
 	return is, func() {
+		is.lg.Debugf("integrity service stopping...")
 		cancel()
 		is.wg.Wait()
 	}
@@ -86,7 +92,7 @@ func (is *IntegrityService) Start(ctx context.Context) {
 		}
 	}()
 
-	ticker := time.NewTicker(5 * time.Minute)
+	ticker := time.NewTicker(is.interval)
 	defer ticker.Stop()
 
 	for {
@@ -124,7 +130,6 @@ func (is *IntegrityService) checkAndReportIntegrityForFile(ctx context.Context, 
 		is.lg.Errorf("Failed to hash file %s: %v", filePath, err)
 		return
 	}
-
 	is.lg.Debugf("Hash for file %s: %s", filePath, hashResult)
 
 	event := IntegrityEvent{
@@ -141,7 +146,7 @@ func (is *IntegrityService) checkAndReportIntegrityForFile(ctx context.Context, 
 		return
 	}
 
-	timeoutCtx, timeoutCancel := context.WithTimeout(ctx, 30*time.Second)
+	timeoutCtx, timeoutCancel := context.WithTimeout(ctx, min(is.interval, 30*time.Second))
 	defer timeoutCancel()
 
 	_, err = is.pubsubClient.Pub(timeoutCtx, &pubsub.PubRequest{
@@ -152,4 +157,5 @@ func (is *IntegrityService) checkAndReportIntegrityForFile(ctx context.Context, 
 		is.lg.Errorf("Failed to publish integrity event for file %s: %v", filePath, err)
 		return
 	}
+	is.lg.Debugf("Published integrity event for file %s, event: %+v", filePath, event)
 }
