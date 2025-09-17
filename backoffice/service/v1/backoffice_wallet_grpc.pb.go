@@ -47,6 +47,7 @@ const (
 	BackofficeWallet_DeleteWalletResponsibleGamblingConfig_FullMethodName = "/api.backoffice.service.v1.BackofficeWallet/DeleteWalletResponsibleGamblingConfig"
 	BackofficeWallet_ListWalletResponsibleGamblingConfigs_FullMethodName  = "/api.backoffice.service.v1.BackofficeWallet/ListWalletResponsibleGamblingConfigs"
 	BackofficeWallet_ListCustomerRecords_FullMethodName                   = "/api.backoffice.service.v1.BackofficeWallet/ListCustomerRecords"
+	BackofficeWallet_ExportCustomerRecords_FullMethodName                 = "/api.backoffice.service.v1.BackofficeWallet/ExportCustomerRecords"
 	BackofficeWallet_SetFICAThresholdConfig_FullMethodName                = "/api.backoffice.service.v1.BackofficeWallet/SetFICAThresholdConfig"
 	BackofficeWallet_GetFICAThresholdConfig_FullMethodName                = "/api.backoffice.service.v1.BackofficeWallet/GetFICAThresholdConfig"
 	BackofficeWallet_ListFICAThresholdTransactions_FullMethodName         = "/api.backoffice.service.v1.BackofficeWallet/ListFICAThresholdTransactions"
@@ -102,6 +103,8 @@ type BackofficeWalletClient interface {
 	ListWalletResponsibleGamblingConfigs(ctx context.Context, in *ListWalletResponsibleGamblingConfigsRequest, opts ...grpc.CallOption) (*v1.ListResponsibleGamblingConfigsResponse, error)
 	// ListCustomerRecords lists customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
 	ListCustomerRecords(ctx context.Context, in *ListCustomerRecordsRequest, opts ...grpc.CallOption) (*v1.ListCustomerRecordsResponse, error)
+	// ExportCustomerRecords creates a task to exports customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
+	ExportCustomerRecords(ctx context.Context, in *ExportCustomerRecordsRequest, opts ...grpc.CallOption) (*v1.ExportCustomerRecordsResponse, error)
 	// SetFICAThresholdConfig sets the FICA threshold config for an operator and its specific currency
 	SetFICAThresholdConfig(ctx context.Context, in *SetFICAThresholdConfigRequest, opts ...grpc.CallOption) (*v1.SetFICAThresholdConfigResponse, error)
 	// GetFICAThresholdConfig gets the FICA threshold config for an operator of all currencies
@@ -388,6 +391,16 @@ func (c *backofficeWalletClient) ListCustomerRecords(ctx context.Context, in *Li
 	return out, nil
 }
 
+func (c *backofficeWalletClient) ExportCustomerRecords(ctx context.Context, in *ExportCustomerRecordsRequest, opts ...grpc.CallOption) (*v1.ExportCustomerRecordsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ExportCustomerRecordsResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_ExportCustomerRecords_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *backofficeWalletClient) SetFICAThresholdConfig(ctx context.Context, in *SetFICAThresholdConfigRequest, opts ...grpc.CallOption) (*v1.SetFICAThresholdConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.SetFICAThresholdConfigResponse)
@@ -468,6 +481,8 @@ type BackofficeWalletServer interface {
 	ListWalletResponsibleGamblingConfigs(context.Context, *ListWalletResponsibleGamblingConfigsRequest) (*v1.ListResponsibleGamblingConfigsResponse, error)
 	// ListCustomerRecords lists customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
 	ListCustomerRecords(context.Context, *ListCustomerRecordsRequest) (*v1.ListCustomerRecordsResponse, error)
+	// ExportCustomerRecords creates a task to exports customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
+	ExportCustomerRecords(context.Context, *ExportCustomerRecordsRequest) (*v1.ExportCustomerRecordsResponse, error)
 	// SetFICAThresholdConfig sets the FICA threshold config for an operator and its specific currency
 	SetFICAThresholdConfig(context.Context, *SetFICAThresholdConfigRequest) (*v1.SetFICAThresholdConfigResponse, error)
 	// GetFICAThresholdConfig gets the FICA threshold config for an operator of all currencies
@@ -564,6 +579,9 @@ func (UnimplementedBackofficeWalletServer) ListWalletResponsibleGamblingConfigs(
 }
 func (UnimplementedBackofficeWalletServer) ListCustomerRecords(context.Context, *ListCustomerRecordsRequest) (*v1.ListCustomerRecordsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCustomerRecords not implemented")
+}
+func (UnimplementedBackofficeWalletServer) ExportCustomerRecords(context.Context, *ExportCustomerRecordsRequest) (*v1.ExportCustomerRecordsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportCustomerRecords not implemented")
 }
 func (UnimplementedBackofficeWalletServer) SetFICAThresholdConfig(context.Context, *SetFICAThresholdConfigRequest) (*v1.SetFICAThresholdConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetFICAThresholdConfig not implemented")
@@ -1081,6 +1099,24 @@ func _BackofficeWallet_ListCustomerRecords_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeWallet_ExportCustomerRecords_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportCustomerRecordsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).ExportCustomerRecords(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_ExportCustomerRecords_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).ExportCustomerRecords(ctx, req.(*ExportCustomerRecordsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BackofficeWallet_SetFICAThresholdConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SetFICAThresholdConfigRequest)
 	if err := dec(in); err != nil {
@@ -1249,6 +1285,10 @@ var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListCustomerRecords",
 			Handler:    _BackofficeWallet_ListCustomerRecords_Handler,
+		},
+		{
+			MethodName: "ExportCustomerRecords",
+			Handler:    _BackofficeWallet_ExportCustomerRecords_Handler,
 		},
 		{
 			MethodName: "SetFICAThresholdConfig",

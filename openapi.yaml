@@ -3246,6 +3246,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse'
+    /v1/backoffice/wallet/customer-records/export:
+        post:
+            tags:
+                - BackofficeWallet
+            description: ExportCustomerRecords creates a task to exports customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
+            operationId: BackofficeWallet_ExportCustomerRecords
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ExportCustomerRecordsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.ExportCustomerRecordsResponse'
     /v1/backoffice/wallet/customer-records/list:
         post:
             tags:
@@ -5672,6 +5691,25 @@ components:
                 status:
                     type: string
                 selection:
+                    type: string
+        api.backoffice.service.v1.ExportCustomerRecordsRequest:
+            type: object
+            properties:
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                userId:
+                    type: string
+                transactionId:
+                    type: string
+                transactionType:
+                    type: string
+                format:
+                    type: string
+                timeZone:
                     type: string
         api.backoffice.service.v1.GameData_Data:
             type: object
@@ -14211,6 +14249,11 @@ components:
                     type: string
                     format: date-time
             description: Deposit reward config for an operator with specific currency
+        api.wallet.service.v1.ExportCustomerRecordsResponse:
+            type: object
+            properties:
+                taskId:
+                    type: string
         api.wallet.service.v1.FICAThresholdConfig:
             type: object
             properties:
