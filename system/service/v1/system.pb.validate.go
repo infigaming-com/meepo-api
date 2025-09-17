@@ -97,8 +97,6 @@ func (m *AddIntegrityReportRequest) validate(all bool) error {
 
 	}
 
-	// no validation rules for CreatedAt
-
 	if len(errors) > 0 {
 		return AddIntegrityReportRequestMultiError(errors)
 	}

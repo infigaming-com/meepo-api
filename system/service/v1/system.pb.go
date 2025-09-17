@@ -27,7 +27,6 @@ type AddIntegrityReportRequest struct {
 	PodName       string                                                    `protobuf:"bytes,2,opt,name=pod_name,json=podName,proto3" json:"pod_name,omitempty"`
 	PodNamespace  string                                                    `protobuf:"bytes,3,opt,name=pod_namespace,json=podNamespace,proto3" json:"pod_namespace,omitempty"`
 	FileInfos     []*AddIntegrityReportRequest_IntegrityEventReportFileInfo `protobuf:"bytes,4,rep,name=file_infos,json=fileInfos,proto3" json:"file_infos,omitempty"`
-	CreatedAt     int64                                                     `protobuf:"varint,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -88,13 +87,6 @@ func (x *AddIntegrityReportRequest) GetFileInfos() []*AddIntegrityReportRequest_
 		return x.FileInfos
 	}
 	return nil
-}
-
-func (x *AddIntegrityReportRequest) GetCreatedAt() int64 {
-	if x != nil {
-		return x.CreatedAt
-	}
-	return 0
 }
 
 type AddIntegrityReportResponse struct {
@@ -189,15 +181,13 @@ var File_system_service_v1_system_proto protoreflect.FileDescriptor
 
 const file_system_service_v1_system_proto_rawDesc = "" +
 	"\n" +
-	"\x1esystem/service/v1/system.proto\x12\x11system.service.v1\"\xd2\x02\n" +
+	"\x1esystem/service/v1/system.proto\x12\x11system.service.v1\"\xb3\x02\n" +
 	"\x19AddIntegrityReportRequest\x12\x1b\n" +
 	"\tlabel_app\x18\x01 \x01(\tR\blabelApp\x12\x19\n" +
 	"\bpod_name\x18\x02 \x01(\tR\apodName\x12#\n" +
 	"\rpod_namespace\x18\x03 \x01(\tR\fpodNamespace\x12h\n" +
 	"\n" +
-	"file_infos\x18\x04 \x03(\v2I.system.service.v1.AddIntegrityReportRequest.IntegrityEventReportFileInfoR\tfileInfos\x12\x1d\n" +
-	"\n" +
-	"created_at\x18\x05 \x01(\x03R\tcreatedAt\x1aO\n" +
+	"file_infos\x18\x04 \x03(\v2I.system.service.v1.AddIntegrityReportRequest.IntegrityEventReportFileInfoR\tfileInfos\x1aO\n" +
 	"\x1cIntegrityEventReportFileInfo\x12\x1b\n" +
 	"\tfile_path\x18\x01 \x01(\tR\bfilePath\x12\x12\n" +
 	"\x04hash\x18\x02 \x01(\tR\x04hash\"\x1c\n" +
