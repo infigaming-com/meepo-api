@@ -65,6 +65,7 @@ func NewIntegrityService(lg log.Logger, interval time.Duration, filePaths []stri
 
 	is := &IntegrityService{
 		lg:           log,
+		interval:     interval,
 		podName:      podName,
 		podNamespace: podNamespace,
 		labelApp:     labelApp,
