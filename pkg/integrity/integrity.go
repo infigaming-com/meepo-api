@@ -9,6 +9,7 @@ import (
 
 	"github.com/go-kratos/kratos/v2/log"
 	chash "github.com/infigaming-com/go-common/hash"
+	"github.com/infigaming-com/meepo-api/pkg/events"
 	pubsub "github.com/infigaming-com/meepo-api/pubsub/service/v1"
 )
 
@@ -120,7 +121,7 @@ func (is *IntegrityService) checkAndReportIntegrity(ctx context.Context) {
 	}
 	is.lg.Debugf("FileInfos: %+v", fileInfos)
 
-	event := IntegrityEvent{
+	event := events.IntegrityReportEvent{
 		LabelApp:     is.labelApp,
 		PodName:      is.podName,
 		PodNamespace: is.podNamespace,
@@ -147,14 +148,14 @@ func (is *IntegrityService) checkAndReportIntegrity(ctx context.Context) {
 	is.lg.Debugf("Published integrity event: %+v", event)
 }
 
-func getFileInfos(filePaths []string) ([]FileInfo, error) {
-	fileInfos := make([]FileInfo, 0, len(filePaths))
+func getFileInfos(filePaths []string) ([]events.IntegrityEventReportFileInfo, error) {
+	fileInfos := make([]events.IntegrityEventReportFileInfo, 0, len(filePaths))
 	for _, filePath := range filePaths {
 		hash, err := getFileHash(filePath)
 		if err != nil {
 			return nil, err
 		}
-		fileInfos = append(fileInfos, FileInfo{FilePath: filePath, Hash: hash})
+		fileInfos = append(fileInfos, events.IntegrityEventReportFileInfo{FilePath: filePath, Hash: hash})
 	}
 	return fileInfos, nil
 }
