@@ -10,6 +10,7 @@ import (
 	common "github.com/infigaming-com/meepo-api/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -266,6 +267,302 @@ func (x *ListIntegrityStatusResponse) GetIntegrityStatuses() []*ListIntegritySta
 	return nil
 }
 
+type ListAsynTaskRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TaskId        []int64                `protobuf:"varint,1,rep,packed,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
+	Type          *string                `protobuf:"bytes,2,opt,name=type,proto3,oneof" json:"type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAsynTaskRequest) Reset() {
+	*x = ListAsynTaskRequest{}
+	mi := &file_system_service_v1_system_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAsynTaskRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAsynTaskRequest) ProtoMessage() {}
+
+func (x *ListAsynTaskRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_system_service_v1_system_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAsynTaskRequest.ProtoReflect.Descriptor instead.
+func (*ListAsynTaskRequest) Descriptor() ([]byte, []int) {
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ListAsynTaskRequest) GetTaskId() []int64 {
+	if x != nil {
+		return x.TaskId
+	}
+	return nil
+}
+
+func (x *ListAsynTaskRequest) GetType() string {
+	if x != nil && x.Type != nil {
+		return *x.Type
+	}
+	return ""
+}
+
+type ListAsynTaskResponse struct {
+	state         protoimpl.MessageState           `protogen:"open.v1"`
+	Tasks         []*ListAsynTaskResponse_AsynTask `protobuf:"bytes,1,rep,name=tasks,proto3" json:"tasks,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAsynTaskResponse) Reset() {
+	*x = ListAsynTaskResponse{}
+	mi := &file_system_service_v1_system_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAsynTaskResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAsynTaskResponse) ProtoMessage() {}
+
+func (x *ListAsynTaskResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_system_service_v1_system_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAsynTaskResponse.ProtoReflect.Descriptor instead.
+func (*ListAsynTaskResponse) Descriptor() ([]byte, []int) {
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ListAsynTaskResponse) GetTasks() []*ListAsynTaskResponse_AsynTask {
+	if x != nil {
+		return x.Tasks
+	}
+	return nil
+}
+
+type CreateAsynTaskRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	TaskId          int64                   `protobuf:"varint,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
+	UserId          int64                   `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Type            string                  `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Payload         *structpb.Struct        `protobuf:"bytes,5,opt,name=payload,proto3" json:"payload,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *CreateAsynTaskRequest) Reset() {
+	*x = CreateAsynTaskRequest{}
+	mi := &file_system_service_v1_system_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateAsynTaskRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateAsynTaskRequest) ProtoMessage() {}
+
+func (x *CreateAsynTaskRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_system_service_v1_system_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateAsynTaskRequest.ProtoReflect.Descriptor instead.
+func (*CreateAsynTaskRequest) Descriptor() ([]byte, []int) {
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *CreateAsynTaskRequest) GetTaskId() int64 {
+	if x != nil {
+		return x.TaskId
+	}
+	return 0
+}
+
+func (x *CreateAsynTaskRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *CreateAsynTaskRequest) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *CreateAsynTaskRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *CreateAsynTaskRequest) GetPayload() *structpb.Struct {
+	if x != nil {
+		return x.Payload
+	}
+	return nil
+}
+
+type CreateAsynTaskResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateAsynTaskResponse) Reset() {
+	*x = CreateAsynTaskResponse{}
+	mi := &file_system_service_v1_system_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateAsynTaskResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateAsynTaskResponse) ProtoMessage() {}
+
+func (x *CreateAsynTaskResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_system_service_v1_system_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateAsynTaskResponse.ProtoReflect.Descriptor instead.
+func (*CreateAsynTaskResponse) Descriptor() ([]byte, []int) {
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{8}
+}
+
+type UpdateAsynTaskRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TaskId        int64                  `protobuf:"varint,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
+	Process       string                 `protobuf:"bytes,2,opt,name=process,proto3" json:"process,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateAsynTaskRequest) Reset() {
+	*x = UpdateAsynTaskRequest{}
+	mi := &file_system_service_v1_system_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateAsynTaskRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAsynTaskRequest) ProtoMessage() {}
+
+func (x *UpdateAsynTaskRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_system_service_v1_system_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAsynTaskRequest.ProtoReflect.Descriptor instead.
+func (*UpdateAsynTaskRequest) Descriptor() ([]byte, []int) {
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *UpdateAsynTaskRequest) GetTaskId() int64 {
+	if x != nil {
+		return x.TaskId
+	}
+	return 0
+}
+
+func (x *UpdateAsynTaskRequest) GetProcess() string {
+	if x != nil {
+		return x.Process
+	}
+	return ""
+}
+
+type UpdateAsynTaskResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateAsynTaskResponse) Reset() {
+	*x = UpdateAsynTaskResponse{}
+	mi := &file_system_service_v1_system_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateAsynTaskResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAsynTaskResponse) ProtoMessage() {}
+
+func (x *UpdateAsynTaskResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_system_service_v1_system_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAsynTaskResponse.ProtoReflect.Descriptor instead.
+func (*UpdateAsynTaskResponse) Descriptor() ([]byte, []int) {
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{10}
+}
+
 type ListIntegrityStatusResponse_IntegrityStatus struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	LabelApp      string                 `protobuf:"bytes,1,opt,name=label_app,json=labelApp,proto3" json:"label_app,omitempty"`
@@ -278,7 +575,7 @@ type ListIntegrityStatusResponse_IntegrityStatus struct {
 
 func (x *ListIntegrityStatusResponse_IntegrityStatus) Reset() {
 	*x = ListIntegrityStatusResponse_IntegrityStatus{}
-	mi := &file_system_service_v1_system_proto_msgTypes[5]
+	mi := &file_system_service_v1_system_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -290,7 +587,7 @@ func (x *ListIntegrityStatusResponse_IntegrityStatus) String() string {
 func (*ListIntegrityStatusResponse_IntegrityStatus) ProtoMessage() {}
 
 func (x *ListIntegrityStatusResponse_IntegrityStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_system_service_v1_system_proto_msgTypes[5]
+	mi := &file_system_service_v1_system_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -334,11 +631,79 @@ func (x *ListIntegrityStatusResponse_IntegrityStatus) GetFileInfos() []*Integrit
 	return nil
 }
 
+type ListAsynTaskResponse_AsynTask struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TaskId        int64                  `protobuf:"varint,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
+	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Type          string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
+	Payload       *structpb.Struct       `protobuf:"bytes,4,opt,name=payload,proto3" json:"payload,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAsynTaskResponse_AsynTask) Reset() {
+	*x = ListAsynTaskResponse_AsynTask{}
+	mi := &file_system_service_v1_system_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAsynTaskResponse_AsynTask) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAsynTaskResponse_AsynTask) ProtoMessage() {}
+
+func (x *ListAsynTaskResponse_AsynTask) ProtoReflect() protoreflect.Message {
+	mi := &file_system_service_v1_system_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAsynTaskResponse_AsynTask.ProtoReflect.Descriptor instead.
+func (*ListAsynTaskResponse_AsynTask) Descriptor() ([]byte, []int) {
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{6, 0}
+}
+
+func (x *ListAsynTaskResponse_AsynTask) GetTaskId() int64 {
+	if x != nil {
+		return x.TaskId
+	}
+	return 0
+}
+
+func (x *ListAsynTaskResponse_AsynTask) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *ListAsynTaskResponse_AsynTask) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *ListAsynTaskResponse_AsynTask) GetPayload() *structpb.Struct {
+	if x != nil {
+		return x.Payload
+	}
+	return nil
+}
+
 var File_system_service_v1_system_proto protoreflect.FileDescriptor
 
 const file_system_service_v1_system_proto_rawDesc = "" +
 	"\n" +
-	"\x1esystem/service/v1/system.proto\x12\x11system.service.v1\x1a\x13common/common.proto\"D\n" +
+	"\x1esystem/service/v1/system.proto\x12\x11system.service.v1\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13common/common.proto\"D\n" +
 	"\x11IntegrityFileInfo\x12\x1b\n" +
 	"\tfile_path\x18\x01 \x01(\tR\bfilePath\x12\x12\n" +
 	"\x04hash\x18\x02 \x01(\tR\x04hash\"\xbd\x01\n" +
@@ -358,10 +723,35 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\bpod_name\x18\x02 \x01(\tR\apodName\x12#\n" +
 	"\rpod_namespace\x18\x03 \x01(\tR\fpodNamespace\x12C\n" +
 	"\n" +
-	"file_infos\x18\x04 \x03(\v2$.system.service.v1.IntegrityFileInfoR\tfileInfos2\xf5\x01\n" +
+	"file_infos\x18\x04 \x03(\v2$.system.service.v1.IntegrityFileInfoR\tfileInfos\"P\n" +
+	"\x13ListAsynTaskRequest\x12\x17\n" +
+	"\atask_id\x18\x01 \x03(\x03R\x06taskId\x12\x17\n" +
+	"\x04type\x18\x02 \x01(\tH\x00R\x04type\x88\x01\x01B\a\n" +
+	"\x05_type\"\xe4\x01\n" +
+	"\x14ListAsynTaskResponse\x12F\n" +
+	"\x05tasks\x18\x01 \x03(\v20.system.service.v1.ListAsynTaskResponse.AsynTaskR\x05tasks\x1a\x83\x01\n" +
+	"\bAsynTask\x12\x17\n" +
+	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x12\n" +
+	"\x04type\x18\x03 \x01(\tR\x04type\x121\n" +
+	"\apayload\x18\x04 \x01(\v2\x17.google.protobuf.StructR\apayload\"\xd8\x01\n" +
+	"\x15CreateAsynTaskRequest\x12\x17\n" +
+	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x12\n" +
+	"\x04type\x18\x03 \x01(\tR\x04type\x12F\n" +
+	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x121\n" +
+	"\apayload\x18\x05 \x01(\v2\x17.google.protobuf.StructR\apayload\"\x18\n" +
+	"\x16CreateAsynTaskResponse\"J\n" +
+	"\x15UpdateAsynTaskRequest\x12\x17\n" +
+	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x18\n" +
+	"\aprocess\x18\x02 \x01(\tR\aprocess\"\x18\n" +
+	"\x16UpdateAsynTaskResponse2\xaa\x04\n" +
 	"\x06System\x12s\n" +
 	"\x12AddIntegrityReport\x12,.system.service.v1.AddIntegrityReportRequest\x1a-.system.service.v1.AddIntegrityReportResponse\"\x00\x12v\n" +
-	"\x13ListIntegrityStatus\x12-.system.service.v1.ListIntegrityStatusRequest\x1a..system.service.v1.ListIntegrityStatusResponse\"\x00BO\n" +
+	"\x13ListIntegrityStatus\x12-.system.service.v1.ListIntegrityStatusRequest\x1a..system.service.v1.ListIntegrityStatusResponse\"\x00\x12a\n" +
+	"\fListAsynTask\x12&.system.service.v1.ListAsynTaskRequest\x1a'.system.service.v1.ListAsynTaskResponse\"\x00\x12g\n" +
+	"\x0eCreateAsynTask\x12(.system.service.v1.CreateAsynTaskRequest\x1a).system.service.v1.CreateAsynTaskResponse\"\x00\x12g\n" +
+	"\x0eUpdateAsynTask\x12(.system.service.v1.UpdateAsynTaskRequest\x1a).system.service.v1.UpdateAsynTaskResponse\"\x00BO\n" +
 	"\x11system.service.v1P\x01Z8github.com/infigaming-com/meepo-api/system/service/v1;v1b\x06proto3"
 
 var (
@@ -376,30 +766,48 @@ func file_system_service_v1_system_proto_rawDescGZIP() []byte {
 	return file_system_service_v1_system_proto_rawDescData
 }
 
-var file_system_service_v1_system_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_system_service_v1_system_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_system_service_v1_system_proto_goTypes = []any{
 	(*IntegrityFileInfo)(nil),                           // 0: system.service.v1.IntegrityFileInfo
 	(*AddIntegrityReportRequest)(nil),                   // 1: system.service.v1.AddIntegrityReportRequest
 	(*AddIntegrityReportResponse)(nil),                  // 2: system.service.v1.AddIntegrityReportResponse
 	(*ListIntegrityStatusRequest)(nil),                  // 3: system.service.v1.ListIntegrityStatusRequest
 	(*ListIntegrityStatusResponse)(nil),                 // 4: system.service.v1.ListIntegrityStatusResponse
-	(*ListIntegrityStatusResponse_IntegrityStatus)(nil), // 5: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus
-	(*common.OperatorContext)(nil),                      // 6: api.common.OperatorContext
+	(*ListAsynTaskRequest)(nil),                         // 5: system.service.v1.ListAsynTaskRequest
+	(*ListAsynTaskResponse)(nil),                        // 6: system.service.v1.ListAsynTaskResponse
+	(*CreateAsynTaskRequest)(nil),                       // 7: system.service.v1.CreateAsynTaskRequest
+	(*CreateAsynTaskResponse)(nil),                      // 8: system.service.v1.CreateAsynTaskResponse
+	(*UpdateAsynTaskRequest)(nil),                       // 9: system.service.v1.UpdateAsynTaskRequest
+	(*UpdateAsynTaskResponse)(nil),                      // 10: system.service.v1.UpdateAsynTaskResponse
+	(*ListIntegrityStatusResponse_IntegrityStatus)(nil), // 11: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus
+	(*ListAsynTaskResponse_AsynTask)(nil),               // 12: system.service.v1.ListAsynTaskResponse.AsynTask
+	(*common.OperatorContext)(nil),                      // 13: api.common.OperatorContext
+	(*structpb.Struct)(nil),                             // 14: google.protobuf.Struct
 }
 var file_system_service_v1_system_proto_depIdxs = []int32{
-	0, // 0: system.service.v1.AddIntegrityReportRequest.file_infos:type_name -> system.service.v1.IntegrityFileInfo
-	6, // 1: system.service.v1.ListIntegrityStatusRequest.operator_context:type_name -> api.common.OperatorContext
-	5, // 2: system.service.v1.ListIntegrityStatusResponse.integrity_statuses:type_name -> system.service.v1.ListIntegrityStatusResponse.IntegrityStatus
-	0, // 3: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.file_infos:type_name -> system.service.v1.IntegrityFileInfo
-	1, // 4: system.service.v1.System.AddIntegrityReport:input_type -> system.service.v1.AddIntegrityReportRequest
-	3, // 5: system.service.v1.System.ListIntegrityStatus:input_type -> system.service.v1.ListIntegrityStatusRequest
-	2, // 6: system.service.v1.System.AddIntegrityReport:output_type -> system.service.v1.AddIntegrityReportResponse
-	4, // 7: system.service.v1.System.ListIntegrityStatus:output_type -> system.service.v1.ListIntegrityStatusResponse
-	6, // [6:8] is the sub-list for method output_type
-	4, // [4:6] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	0,  // 0: system.service.v1.AddIntegrityReportRequest.file_infos:type_name -> system.service.v1.IntegrityFileInfo
+	13, // 1: system.service.v1.ListIntegrityStatusRequest.operator_context:type_name -> api.common.OperatorContext
+	11, // 2: system.service.v1.ListIntegrityStatusResponse.integrity_statuses:type_name -> system.service.v1.ListIntegrityStatusResponse.IntegrityStatus
+	12, // 3: system.service.v1.ListAsynTaskResponse.tasks:type_name -> system.service.v1.ListAsynTaskResponse.AsynTask
+	13, // 4: system.service.v1.CreateAsynTaskRequest.operator_context:type_name -> api.common.OperatorContext
+	14, // 5: system.service.v1.CreateAsynTaskRequest.payload:type_name -> google.protobuf.Struct
+	0,  // 6: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.file_infos:type_name -> system.service.v1.IntegrityFileInfo
+	14, // 7: system.service.v1.ListAsynTaskResponse.AsynTask.payload:type_name -> google.protobuf.Struct
+	1,  // 8: system.service.v1.System.AddIntegrityReport:input_type -> system.service.v1.AddIntegrityReportRequest
+	3,  // 9: system.service.v1.System.ListIntegrityStatus:input_type -> system.service.v1.ListIntegrityStatusRequest
+	5,  // 10: system.service.v1.System.ListAsynTask:input_type -> system.service.v1.ListAsynTaskRequest
+	7,  // 11: system.service.v1.System.CreateAsynTask:input_type -> system.service.v1.CreateAsynTaskRequest
+	9,  // 12: system.service.v1.System.UpdateAsynTask:input_type -> system.service.v1.UpdateAsynTaskRequest
+	2,  // 13: system.service.v1.System.AddIntegrityReport:output_type -> system.service.v1.AddIntegrityReportResponse
+	4,  // 14: system.service.v1.System.ListIntegrityStatus:output_type -> system.service.v1.ListIntegrityStatusResponse
+	6,  // 15: system.service.v1.System.ListAsynTask:output_type -> system.service.v1.ListAsynTaskResponse
+	8,  // 16: system.service.v1.System.CreateAsynTask:output_type -> system.service.v1.CreateAsynTaskResponse
+	10, // 17: system.service.v1.System.UpdateAsynTask:output_type -> system.service.v1.UpdateAsynTaskResponse
+	13, // [13:18] is the sub-list for method output_type
+	8,  // [8:13] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_system_service_v1_system_proto_init() }
@@ -407,13 +815,14 @@ func file_system_service_v1_system_proto_init() {
 	if File_system_service_v1_system_proto != nil {
 		return
 	}
+	file_system_service_v1_system_proto_msgTypes[5].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_system_service_v1_system_proto_rawDesc), len(file_system_service_v1_system_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
