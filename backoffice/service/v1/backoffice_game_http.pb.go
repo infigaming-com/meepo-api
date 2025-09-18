@@ -20,6 +20,7 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationBackofficeGameExportUnpaidBets = "/api.backoffice.service.v1.BackofficeGame/ExportUnpaidBets"
 const OperationBackofficeGameGetBetById = "/api.backoffice.service.v1.BackofficeGame/GetBetById"
 const OperationBackofficeGameGetGameTransactionById = "/api.backoffice.service.v1.BackofficeGame/GetGameTransactionById"
 const OperationBackofficeGameGetGameTransactionsForBet = "/api.backoffice.service.v1.BackofficeGame/GetGameTransactionsForBet"
@@ -39,6 +40,7 @@ const OperationBackofficeGameUpdateGame = "/api.backoffice.service.v1.Backoffice
 const OperationBackofficeGameUpdateProvider = "/api.backoffice.service.v1.BackofficeGame/UpdateProvider"
 
 type BackofficeGameHTTPServer interface {
+	ExportUnpaidBets(context.Context, *ExportUnpaidBetsRequest) (*v1.ExportUnpaidBetsResponse, error)
 	GetBetById(context.Context, *GetBetByIdRequest) (*v1.GetBetByIdResponse, error)
 	GetGameTransactionById(context.Context, *GetGameTransactionByIdRequest) (*v1.GetGameTransactionByIdResponse, error)
 	GetGameTransactionsForBet(context.Context, *GetGameTransactionsForBetRequest) (*GetGameTransactionsForBetResponse, error)
@@ -83,6 +85,7 @@ func RegisterBackofficeGameHTTPServer(s *http.Server, srv BackofficeGameHTTPServ
 	r.POST("/v1/backoffice/game/provider/rates/list", _BackofficeGame_ListProviderRates0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/transaction/get", _BackofficeGame_GetGameTransactionById0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/bets/unpaid/list", _BackofficeGame_ListUnpaidBets0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/bets/unpaid/export", _BackofficeGame_ExportUnpaidBets0_HTTP_Handler(srv))
 }
 
 func _BackofficeGame_ListProviders1_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
@@ -459,7 +462,30 @@ func _BackofficeGame_ListUnpaidBets0_HTTP_Handler(srv BackofficeGameHTTPServer) 
 	}
 }
 
+func _BackofficeGame_ExportUnpaidBets0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ExportUnpaidBetsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeGameExportUnpaidBets)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ExportUnpaidBets(ctx, req.(*ExportUnpaidBetsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ExportUnpaidBetsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeGameHTTPClient interface {
+	ExportUnpaidBets(ctx context.Context, req *ExportUnpaidBetsRequest, opts ...http.CallOption) (rsp *v1.ExportUnpaidBetsResponse, err error)
 	GetBetById(ctx context.Context, req *GetBetByIdRequest, opts ...http.CallOption) (rsp *v1.GetBetByIdResponse, err error)
 	GetGameTransactionById(ctx context.Context, req *GetGameTransactionByIdRequest, opts ...http.CallOption) (rsp *v1.GetGameTransactionByIdResponse, err error)
 	GetGameTransactionsForBet(ctx context.Context, req *GetGameTransactionsForBetRequest, opts ...http.CallOption) (rsp *GetGameTransactionsForBetResponse, err error)
@@ -485,6 +511,19 @@ type BackofficeGameHTTPClientImpl struct {
 
 func NewBackofficeGameHTTPClient(client *http.Client) BackofficeGameHTTPClient {
 	return &BackofficeGameHTTPClientImpl{client}
+}
+
+func (c *BackofficeGameHTTPClientImpl) ExportUnpaidBets(ctx context.Context, in *ExportUnpaidBetsRequest, opts ...http.CallOption) (*v1.ExportUnpaidBetsResponse, error) {
+	var out v1.ExportUnpaidBetsResponse
+	pattern := "/v1/backoffice/game/bets/unpaid/export"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeGameExportUnpaidBets))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 func (c *BackofficeGameHTTPClientImpl) GetBetById(ctx context.Context, in *GetBetByIdRequest, opts ...http.CallOption) (*v1.GetBetByIdResponse, error) {
