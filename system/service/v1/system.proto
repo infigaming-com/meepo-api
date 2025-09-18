@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package system.service.v1;
 
+import "common/common.proto";
+
 option go_package = "github.com/infigaming-com/meepo-api/system/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "system.service.v1";
@@ -25,7 +27,9 @@ message AddIntegrityReportRequest {
 
 message AddIntegrityReportResponse {}
 
-message ListIntegrityStatusRequest {}
+message ListIntegrityStatusRequest {
+	api.common.OperatorContext operator_context = 1;
+}
 
 message ListIntegrityStatusResponse {
 	message IntegrityStatus {

@@ -7,6 +7,7 @@
 package v1
 
 import (
+	common "github.com/infigaming-com/meepo-api/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -178,9 +179,10 @@ func (*AddIntegrityReportResponse) Descriptor() ([]byte, []int) {
 }
 
 type ListIntegrityStatusRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *ListIntegrityStatusRequest) Reset() {
@@ -211,6 +213,13 @@ func (x *ListIntegrityStatusRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ListIntegrityStatusRequest.ProtoReflect.Descriptor instead.
 func (*ListIntegrityStatusRequest) Descriptor() ([]byte, []int) {
 	return file_system_service_v1_system_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ListIntegrityStatusRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
 }
 
 type ListIntegrityStatusResponse struct {
@@ -329,7 +338,7 @@ var File_system_service_v1_system_proto protoreflect.FileDescriptor
 
 const file_system_service_v1_system_proto_rawDesc = "" +
 	"\n" +
-	"\x1esystem/service/v1/system.proto\x12\x11system.service.v1\"D\n" +
+	"\x1esystem/service/v1/system.proto\x12\x11system.service.v1\x1a\x13common/common.proto\"D\n" +
 	"\x11IntegrityFileInfo\x12\x1b\n" +
 	"\tfile_path\x18\x01 \x01(\tR\bfilePath\x12\x12\n" +
 	"\x04hash\x18\x02 \x01(\tR\x04hash\"\xbd\x01\n" +
@@ -339,8 +348,9 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\rpod_namespace\x18\x03 \x01(\tR\fpodNamespace\x12C\n" +
 	"\n" +
 	"file_infos\x18\x04 \x03(\v2$.system.service.v1.IntegrityFileInfoR\tfileInfos\"\x1c\n" +
-	"\x1aAddIntegrityReportResponse\"\x1c\n" +
-	"\x1aListIntegrityStatusRequest\"\xc2\x02\n" +
+	"\x1aAddIntegrityReportResponse\"d\n" +
+	"\x1aListIntegrityStatusRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xc2\x02\n" +
 	"\x1bListIntegrityStatusResponse\x12m\n" +
 	"\x12integrity_statuses\x18\x01 \x03(\v2>.system.service.v1.ListIntegrityStatusResponse.IntegrityStatusR\x11integrityStatuses\x1a\xb3\x01\n" +
 	"\x0fIntegrityStatus\x12\x1b\n" +
@@ -374,20 +384,22 @@ var file_system_service_v1_system_proto_goTypes = []any{
 	(*ListIntegrityStatusRequest)(nil),                  // 3: system.service.v1.ListIntegrityStatusRequest
 	(*ListIntegrityStatusResponse)(nil),                 // 4: system.service.v1.ListIntegrityStatusResponse
 	(*ListIntegrityStatusResponse_IntegrityStatus)(nil), // 5: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus
+	(*common.OperatorContext)(nil),                      // 6: api.common.OperatorContext
 }
 var file_system_service_v1_system_proto_depIdxs = []int32{
 	0, // 0: system.service.v1.AddIntegrityReportRequest.file_infos:type_name -> system.service.v1.IntegrityFileInfo
-	5, // 1: system.service.v1.ListIntegrityStatusResponse.integrity_statuses:type_name -> system.service.v1.ListIntegrityStatusResponse.IntegrityStatus
-	0, // 2: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.file_infos:type_name -> system.service.v1.IntegrityFileInfo
-	1, // 3: system.service.v1.System.AddIntegrityReport:input_type -> system.service.v1.AddIntegrityReportRequest
-	3, // 4: system.service.v1.System.ListIntegrityStatus:input_type -> system.service.v1.ListIntegrityStatusRequest
-	2, // 5: system.service.v1.System.AddIntegrityReport:output_type -> system.service.v1.AddIntegrityReportResponse
-	4, // 6: system.service.v1.System.ListIntegrityStatus:output_type -> system.service.v1.ListIntegrityStatusResponse
-	5, // [5:7] is the sub-list for method output_type
-	3, // [3:5] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	6, // 1: system.service.v1.ListIntegrityStatusRequest.operator_context:type_name -> api.common.OperatorContext
+	5, // 2: system.service.v1.ListIntegrityStatusResponse.integrity_statuses:type_name -> system.service.v1.ListIntegrityStatusResponse.IntegrityStatus
+	0, // 3: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.file_infos:type_name -> system.service.v1.IntegrityFileInfo
+	1, // 4: system.service.v1.System.AddIntegrityReport:input_type -> system.service.v1.AddIntegrityReportRequest
+	3, // 5: system.service.v1.System.ListIntegrityStatus:input_type -> system.service.v1.ListIntegrityStatusRequest
+	2, // 6: system.service.v1.System.AddIntegrityReport:output_type -> system.service.v1.AddIntegrityReportResponse
+	4, // 7: system.service.v1.System.ListIntegrityStatus:output_type -> system.service.v1.ListIntegrityStatusResponse
+	6, // [6:8] is the sub-list for method output_type
+	4, // [4:6] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_system_service_v1_system_proto_init() }
