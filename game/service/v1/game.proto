@@ -1039,38 +1039,205 @@ message ListSportEventsResponse {
 }
 
 // Transaction and Settlement related messages
-message GetTransactionAndEventInfoRequest {
+
+message EventInfo {
+	// Basic event information
+	string event_id = 1; // VARCHAR(32)
+	string event_name = 2; // VARCHAR(255)
+	string venue = 3; // VARCHAR(255)
+	string tournament = 4; // VARCHAR(255)
+	
+	// Betting information
+	string odds_in_user_style = 5; // VARCHAR(32)
+	string bet_type_name = 6; // VARCHAR(128)
+	string win_multiplier = 7; // VARCHAR(32)
+	string bet_details = 8; // VARCHAR(255)
+	
+	// Event Description fields
+	string event_description = 9; // TEXT
+	string league_name = 10; // VARCHAR(255)
+	string home_team = 11; // VARCHAR(255)
+	string away_team = 12; // VARCHAR(255)
+	string current_result = 13; // VARCHAR(32)
+	int64 event_date_utc = 14; // BIGINT
+	
+	// Settlement Details fields
+	string settlement_status = 15; // VARCHAR(64)
+	string settlement_description = 16; // TEXT
+	int64 bet_settled_date = 17; // BIGINT
+	string triggered_result = 18; // VARCHAR(32)
+	
+	// Time fields
+	int64 carded_time = 19; // BIGINT
+	int64 first_bet_time = 20; // BIGINT
+	int64 last_bet_time = 21; // BIGINT
+	int64 no_more_bets_time = 22; // BIGINT
+	int64 result_processing_time = 23; // BIGINT
+	int64 revised_official_carded_time = 24; // BIGINT
+	string status = 25; // VARCHAR(32) - pending, completed, etc.
+}
+
+// Get bet and event info by game bet id
+// bet info
+message GetBetAndEventInfoRequest {
 	string game_bet_id= 1;
+}
+
+message GetBetAndEventInfoResponse {
+	message BetInfo {
+		// Basic bet information
+		int64 id = 1; // bet id
+		string provider_bet_id = 2; // varchar(64)
+		int64 round_id = 3; // int8
+		string provider_round_id = 4; // varchar(64)
+		string currency = 5; // varchar(16)
+		string settlement_currency = 6; // varchar(16)
+		int64 user_id = 7; // int8
+		string game_id = 8; // varchar(128)
+		string game_name = 9; // varchar(128)
+		string game_category = 10; // varchar(64)
+		
+		// Amount fields
+		string bet_amount = 11; // numeric(36,18)
+		string settlement_bet_amount = 12; // numeric(36,18)
+		string win_amount = 13; // numeric(36,18)
+		string settlement_win_amount = 14; // numeric(36,18)
+		string rollback_bet_amount = 15; // numeric(36,18)
+		string rollback_win_amount = 16; // numeric(36,18)
+		
+		// Timestamps
+		int64 created_at = 17; // int8
+		int64 updated_at = 18; // int8
+		
+		// Status and provider info
+		string status = 19; // varchar(16)
+		string provider_id = 20; // varchar(64)
+		string provider_name = 21; // varchar(128)
+		int64 operator_id = 22; // int8
+		string operator_name = 23; // text
+		
+		// Additional bet info
+		int64 win_count = 24; // int8
+		string turnover = 25; // numeric(36,18)
+		
+		// USD amounts
+		string bet_amount_usd = 26; // numeric(36,18)
+		string settlement_bet_amount_usd = 27; // numeric(36,18)
+		string win_amount_usd = 28; // numeric(36,18)
+		string settlement_win_amount_usd = 29; // numeric(36,18)
+		string turnover_usd = 30; // numeric(36,18)
+		string rollback_bet_amount_usd = 31; // numeric(36,18)
+		string rollback_win_amount_usd = 32; // numeric(36,18)
+		
+		// Operator hierarchy
+		int64 system_operator_id = 33; // int8, nullable
+		int64 retailer_operator_id = 34; // int8, nullable
+		int64 company_operator_id = 35; // int8, nullable
+		
+		// Reporting currency amounts
+		string reporting_currency = 36; // varchar(16)
+		string amount_reporting_currency = 37; // numeric(36,18)
+		string bet_amount_reporting_currency = 38; // numeric(36,18)
+		string settlement_bet_amount_reporting_currency = 39; // numeric(36,18)
+		string win_amount_reporting_currency = 40; // numeric(36,18)
+		string settlement_win_amount_reporting_currency = 41; // numeric(36,18)
+		string turnover_reporting_currency = 42; // numeric(36,18)
+		string rollback_bet_amount_reporting_currency = 43; // numeric(36,18)
+		string rollback_win_amount_reporting_currency = 44; // numeric(36,18)
+		
+		// Additional fields
+		bool finished = 45; // bool, nullable
+		string wager_type = 46; // varchar(128)
+		int64 settle_time = 47; // int8, nullable
+	}
+
+	BetInfo bet_info = 1;
+	repeated EventInfo event_infos = 2;
+}
+
+// Get bet and event info by game transaction id
+// transaction info
+
+// get event info
+
+message GetTransactionAndEventInfoRequest {
+	string game_transaction_id= 1;
 }
 
 message GetTransactionAndEventInfoResponse {
 	message TransactionInfo {
-		string game_transaction_id = 1; // e.g., "GAME-2025090422000"
-		string provider_transaction_id = 2; // e.g., "PROV-2025090422000"
-		google.protobuf.Timestamp settlement_time = 3; // e.g., "2025-09-04 22:01:30"
-		google.protobuf.Timestamp event_start_time = 4; // e.g., "2025-09-04 21:00:00"
-		string venue_tournament = 5; // e.g., "Santiago Bernabéu - UEFA Champions League 2024/25"
-		string odds = 6; // e.g., "1.55"
-		string wager_type = 7; // e.g., "Single"
-		string bet_currency = 8; // e.g., "ZAR"
-		string bet_amount = 9; // e.g., "R 350.00"
-		string win_multiplier = 10; // e.g., "1.55x"
-		string bet_settlement_currency = 11; // e.g., "ZAR"
-		string bet_settlement_amount = 12; // e.g., "R 350.00"
-		string payout_currency = 13; // e.g., "ZAR"
-		string payout_settlement_currency = 14; // e.g., "ZAR"
-		string payout_settlement_amount = 15; // e.g., "R 350.00"
-		string payout_amount = 16; // e.g., "R 350.00"
-		string valid_bet_amount = 17; // e.g., "R 350.00"
-	}
-
-	message EventSettlementInfo {
-		string selection_bet_details = 1; // e.g., "Real Madrid Win - Real Madrid vs AC Milan"
-		string event_description = 2; // e.g., "Champions League - Real Madrid vs AC Milan - Awaiting Match Result"
-		string settlement_details = 3; // e.g., "SET-2025090422001 - Bet Placed Successfully - Match in Progress"
-		string status = 4; // e.g., "Pending"
+		// Basic transaction information
+		int64 id = 1; // transaction id
+		int64 round_id = 2; // int8
+		string action = 3; // varchar(16)
+		int64 bet_id = 4; // int8
+		string provider_bet_id = 5; // varchar(64)
+		string provider_transaction_id = 6; // varchar(64)
+		string provider_external_transaction_id = 7; // varchar(64), nullable
+		
+		// Transaction flags
+		bool update_balance = 8; // bool, default true
+		bool take_all = 9; // bool, default false
+		bool is_refund = 10; // bool, default false
+		
+		// Amount fields
+		string amount = 11; // numeric(36,18)
+		string settlement_amount = 12; // numeric(36,18)
+		
+		// User and game info
+		int64 user_id = 13; // int8
+		string currency = 14; // varchar(16)
+		string settlement_currency = 15; // varchar(16)
+		string game_id = 16; // varchar(128)
+		string game_name = 17; // varchar(128)
+		string game_category = 18; // varchar(64)
+		
+		// Jackpot fields
+		string jackpot_contribution = 19; // numeric(36,18)
+		string jackpot_win = 20; // numeric(36,18)
+		
+		// Timestamps
+		int64 bet_time = 21; // int8
+		int64 settle_time = 22; // int8
+		int64 provider_timestamp = 23; // int8
+		string bonus_amount = 24; // numeric(36,18)
+		int64 operator_timestamp = 25; // int8
+		int64 processed_at = 26; // int8
+		int64 created_at = 27; // int8
+		int64 updated_at = 28; // int8
+		
+		// Provider and operator info
+		string provider_id = 29; // varchar(64)
+		string provider_name = 30; // varchar(128)
+		int64 operator_id = 31; // int8
+		string operator_name = 32; // text
+		
+		// Turnover
+		string turnover = 33; // numeric(36,18)
+		
+		// USD amounts
+		string amount_usd = 34; // numeric(36,18)
+		string settlement_amount_usd = 35; // numeric(36,18)
+		string turnover_usd = 36; // numeric(36,18)
+		string bonus_amount_usd = 37; // numeric(36,18)
+		string jackpot_contribution_usd = 38; // numeric(36,18)
+		string jackpot_win_usd = 39; // numeric(36,18)
+		
+		// Operator hierarchy (nullable)
+		int64 system_operator_id = 40; // int8, nullable
+		int64 retailer_operator_id = 41; // int8, nullable
+		int64 company_operator_id = 42; // int8, nullable
+		
+		// Reporting currency amounts
+		string reporting_currency = 43; // varchar(16)
+		string amount_reporting_currency = 44; // numeric(36,18)
+		string settlement_amount_reporting_currency = 45; // numeric(36,18)
+		string turnover_reporting_currency = 46; // numeric(36,18)
+		string bonus_amount_reporting_currency = 47; // numeric(36,18)
+		string jackpot_contribution_reporting_currency = 48; // numeric(36,18)
+		string jackpot_win_reporting_currency = 49; // numeric(36,18)
 	}
 
 	TransactionInfo transaction_info = 1;
-	EventSettlementInfo event_settlement_info = 2;
+	repeated EventInfo event_infos = 2;
 }
