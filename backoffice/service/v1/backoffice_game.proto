@@ -95,7 +95,7 @@ service BackofficeGame {
 				post: "/v1/backoffice/game/update"
 				body: "*"
 			};
-		}
+	}
 	rpc UpdateProvider(UpdateProviderRequest) returns (UpdateProviderResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/game/provider/update"
@@ -117,6 +117,12 @@ service BackofficeGame {
 	rpc ListUnpaidBets(ListUnpaidBetsRequest) returns (game.service.v1.ListUnpaidBetsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/game/bets/unpaid/list"
+			body: "*"
+		};
+	}
+	rpc ExportUnpaidBets(ExportUnpaidBetsRequest) returns (game.service.v1.ExportUnpaidBetsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/bets/unpaid/export"
 			body: "*"
 		};
 	}
@@ -420,4 +426,13 @@ message ListUnpaidBetsRequest {
 	optional int64 transaction_id = 4;
 	optional int32 page = 5;
 	optional int32 page_size = 6;
+}
+
+message ExportUnpaidBetsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional int64 transaction_id = 4;
+	string format = 5; // accepted values: csv, excel, pdf
+	string time_zone = 6; // e.g. UTC+0, UTC+8, etc.
 }

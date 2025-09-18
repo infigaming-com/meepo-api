@@ -34,3 +34,27 @@ func IsOperatorContextPermissionDenied(err error) bool {
 func ErrorOperatorContextPermissionDenied(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_OPERATOR_CONTEXT_PERMISSION_DENIED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetK8sDeploymentsAndPodsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_K8S_DEPLOYMENTS_AND_PODS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetK8sDeploymentsAndPodsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_K8S_DEPLOYMENTS_AND_PODS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetIntegrityConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_INTEGRITY_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetIntegrityConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_INTEGRITY_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}

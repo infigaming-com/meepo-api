@@ -4,6 +4,7 @@ package system.service.v1;
 
 import "google/protobuf/struct.proto";
 import "common/common.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/system/service/v1;v1";
 option java_multiple_files = true;
@@ -18,9 +19,11 @@ service System {
 	rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse) { };
 
 	rpc UpdateTask(UpdateTaskRequest) returns (UpdateTaskResponse) { };
+
+	rpc SetIntegrityConfig(SetIntegrityConfigRequest) returns (SetIntegrityConfigResponse) {}
 }
 
-message IntegrityFileInfo {
+message FileInfo {
 	string file_path = 1;
 	string hash = 2;
 }
@@ -29,7 +32,7 @@ message AddIntegrityReportRequest {
 	string label_app = 1;
 	string pod_name = 2;
 	string pod_namespace = 3;
-	repeated IntegrityFileInfo file_infos = 4;
+	repeated FileInfo file_infos = 4;
 }
 
 message AddIntegrityReportResponse {}
@@ -40,10 +43,17 @@ message ListIntegrityStatusRequest {
 
 message ListIntegrityStatusResponse {
 	message IntegrityStatus {
+		message FileInfo {
+			string file_path = 1;
+			string hash = 2;
+			string expected_hash = 3;
+			bool is_match = 4;
+		}
 		string label_app = 1;
 		string pod_name = 2;
 		string pod_namespace = 3;
-		repeated IntegrityFileInfo file_infos = 4;
+		repeated FileInfo file_infos = 4;
+		google.protobuf.Timestamp created_at = 5;
 	}
 	repeated IntegrityStatus integrity_statuses = 1;
 }
@@ -87,4 +97,14 @@ message UpdateTaskRequest {
 }
 
 message UpdateTaskResponse {
+}
+	
+message SetIntegrityConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	string label_app = 2;
+	string pod_namespace = 3;
+	repeated FileInfo file_infos = 4;
+}
+
+message SetIntegrityConfigResponse {
 }

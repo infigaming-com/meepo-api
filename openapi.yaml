@@ -1307,6 +1307,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetGameTransactionsForBetResponse'
+    /v1/backoffice/game/bets/unpaid/export:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ExportUnpaidBets
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ExportUnpaidBetsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.ExportUnpaidBetsResponse'
     /v1/backoffice/game/bets/unpaid/list:
         post:
             tags:
@@ -2605,6 +2623,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ReviewTicketResponse'
+    /v1/backoffice/system/integrity/file-info/config/set:
+        post:
+            tags:
+                - BackofficeSystem
+            operationId: BackofficeSystem_SetIntegrityConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetIntegrityConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/system.service.v1.SetIntegrityConfigResponse'
     /v1/backoffice/system/integrity/status/list:
         post:
             tags:
@@ -5628,6 +5664,23 @@ components:
                 transactionId:
                     type: string
                 transactionType:
+                    type: string
+                format:
+                    type: string
+                timeZone:
+                    type: string
+        api.backoffice.service.v1.ExportUnpaidBetsRequest:
+            type: object
+            properties:
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                userId:
+                    type: string
+                transactionId:
                     type: string
                 format:
                     type: string
@@ -10253,6 +10306,17 @@ components:
                     type: string
                 ficaThresholdConfig:
                     $ref: '#/components/schemas/api.wallet.service.v1.FICAThresholdConfig'
+        api.backoffice.service.v1.SetIntegrityConfigRequest:
+            type: object
+            properties:
+                labelApp:
+                    type: string
+                podNamespace:
+                    type: string
+                fileInfos:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/system.service.v1.FileInfo'
         api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest:
             type: object
             properties:
@@ -11323,6 +11387,11 @@ components:
             properties:
                 gameUrl:
                     type: string
+        api.game.service.v1.ExportUnpaidBetsResponse:
+            type: object
+            properties:
+                taskId:
+                    type: string
         api.game.service.v1.GameFilter:
             type: object
             properties:
@@ -11935,7 +12004,6 @@ components:
                     type: string
                 endTime:
                     type: string
-            description: Sport Events related messages
         api.game.service.v1.ListSportEventsResponse:
             type: object
             properties:
@@ -15700,13 +15768,24 @@ components:
             description: |-
                 Response for withdraw callback
                  Confirms receipt of callback notification
-        system.service.v1.IntegrityFileInfo:
+        system.service.v1.FileInfo:
             type: object
             properties:
                 filePath:
                     type: string
                 hash:
                     type: string
+        system.service.v1.IntegrityStatus_FileInfo:
+            type: object
+            properties:
+                filePath:
+                    type: string
+                hash:
+                    type: string
+                expectedHash:
+                    type: string
+                isMatch:
+                    type: boolean
         system.service.v1.ListIntegrityStatusResponse:
             type: object
             properties:
@@ -15726,7 +15805,13 @@ components:
                 fileInfos:
                     type: array
                     items:
-                        $ref: '#/components/schemas/system.service.v1.IntegrityFileInfo'
+                        $ref: '#/components/schemas/system.service.v1.IntegrityStatus_FileInfo'
+                createdAt:
+                    type: string
+                    format: date-time
+        system.service.v1.SetIntegrityConfigResponse:
+            type: object
+            properties: {}
 tags:
     - name: BackofficeAccount
     - name: BackofficeAudit

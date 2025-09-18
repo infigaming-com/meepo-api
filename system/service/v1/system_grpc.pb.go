@@ -24,6 +24,7 @@ const (
 	System_ListTask_FullMethodName            = "/system.service.v1.System/ListTask"
 	System_CreateTask_FullMethodName          = "/system.service.v1.System/CreateTask"
 	System_UpdateTask_FullMethodName          = "/system.service.v1.System/UpdateTask"
+	System_SetIntegrityConfig_FullMethodName  = "/system.service.v1.System/SetIntegrityConfig"
 )
 
 // SystemClient is the client API for System service.
@@ -35,6 +36,7 @@ type SystemClient interface {
 	ListTask(ctx context.Context, in *ListTaskRequest, opts ...grpc.CallOption) (*ListTaskResponse, error)
 	CreateTask(ctx context.Context, in *CreateTaskRequest, opts ...grpc.CallOption) (*CreateTaskResponse, error)
 	UpdateTask(ctx context.Context, in *UpdateTaskRequest, opts ...grpc.CallOption) (*UpdateTaskResponse, error)
+	SetIntegrityConfig(ctx context.Context, in *SetIntegrityConfigRequest, opts ...grpc.CallOption) (*SetIntegrityConfigResponse, error)
 }
 
 type systemClient struct {
@@ -95,6 +97,16 @@ func (c *systemClient) UpdateTask(ctx context.Context, in *UpdateTaskRequest, op
 	return out, nil
 }
 
+func (c *systemClient) SetIntegrityConfig(ctx context.Context, in *SetIntegrityConfigRequest, opts ...grpc.CallOption) (*SetIntegrityConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetIntegrityConfigResponse)
+	err := c.cc.Invoke(ctx, System_SetIntegrityConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SystemServer is the server API for System service.
 // All implementations must embed UnimplementedSystemServer
 // for forward compatibility.
@@ -104,6 +116,7 @@ type SystemServer interface {
 	ListTask(context.Context, *ListTaskRequest) (*ListTaskResponse, error)
 	CreateTask(context.Context, *CreateTaskRequest) (*CreateTaskResponse, error)
 	UpdateTask(context.Context, *UpdateTaskRequest) (*UpdateTaskResponse, error)
+	SetIntegrityConfig(context.Context, *SetIntegrityConfigRequest) (*SetIntegrityConfigResponse, error)
 	mustEmbedUnimplementedSystemServer()
 }
 
@@ -128,6 +141,9 @@ func (UnimplementedSystemServer) CreateTask(context.Context, *CreateTaskRequest)
 }
 func (UnimplementedSystemServer) UpdateTask(context.Context, *UpdateTaskRequest) (*UpdateTaskResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateTask not implemented")
+}
+func (UnimplementedSystemServer) SetIntegrityConfig(context.Context, *SetIntegrityConfigRequest) (*SetIntegrityConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetIntegrityConfig not implemented")
 }
 func (UnimplementedSystemServer) mustEmbedUnimplementedSystemServer() {}
 func (UnimplementedSystemServer) testEmbeddedByValue()                {}
@@ -240,6 +256,24 @@ func _System_UpdateTask_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _System_SetIntegrityConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetIntegrityConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServer).SetIntegrityConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: System_SetIntegrityConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServer).SetIntegrityConfig(ctx, req.(*SetIntegrityConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // System_ServiceDesc is the grpc.ServiceDesc for System service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -266,6 +300,10 @@ var System_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateTask",
 			Handler:    _System_UpdateTask_Handler,
+		},
+		{
+			MethodName: "SetIntegrityConfig",
+			Handler:    _System_SetIntegrityConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

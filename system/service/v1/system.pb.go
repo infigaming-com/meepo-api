@@ -11,6 +11,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	structpb "google.golang.org/protobuf/types/known/structpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -23,7 +24,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type IntegrityFileInfo struct {
+type FileInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	FilePath      string                 `protobuf:"bytes,1,opt,name=file_path,json=filePath,proto3" json:"file_path,omitempty"`
 	Hash          string                 `protobuf:"bytes,2,opt,name=hash,proto3" json:"hash,omitempty"`
@@ -31,20 +32,20 @@ type IntegrityFileInfo struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *IntegrityFileInfo) Reset() {
-	*x = IntegrityFileInfo{}
+func (x *FileInfo) Reset() {
+	*x = FileInfo{}
 	mi := &file_system_service_v1_system_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *IntegrityFileInfo) String() string {
+func (x *FileInfo) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*IntegrityFileInfo) ProtoMessage() {}
+func (*FileInfo) ProtoMessage() {}
 
-func (x *IntegrityFileInfo) ProtoReflect() protoreflect.Message {
+func (x *FileInfo) ProtoReflect() protoreflect.Message {
 	mi := &file_system_service_v1_system_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -56,19 +57,19 @@ func (x *IntegrityFileInfo) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use IntegrityFileInfo.ProtoReflect.Descriptor instead.
-func (*IntegrityFileInfo) Descriptor() ([]byte, []int) {
+// Deprecated: Use FileInfo.ProtoReflect.Descriptor instead.
+func (*FileInfo) Descriptor() ([]byte, []int) {
 	return file_system_service_v1_system_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *IntegrityFileInfo) GetFilePath() string {
+func (x *FileInfo) GetFilePath() string {
 	if x != nil {
 		return x.FilePath
 	}
 	return ""
 }
 
-func (x *IntegrityFileInfo) GetHash() string {
+func (x *FileInfo) GetHash() string {
 	if x != nil {
 		return x.Hash
 	}
@@ -80,7 +81,7 @@ type AddIntegrityReportRequest struct {
 	LabelApp      string                 `protobuf:"bytes,1,opt,name=label_app,json=labelApp,proto3" json:"label_app,omitempty"`
 	PodName       string                 `protobuf:"bytes,2,opt,name=pod_name,json=podName,proto3" json:"pod_name,omitempty"`
 	PodNamespace  string                 `protobuf:"bytes,3,opt,name=pod_namespace,json=podNamespace,proto3" json:"pod_namespace,omitempty"`
-	FileInfos     []*IntegrityFileInfo   `protobuf:"bytes,4,rep,name=file_infos,json=fileInfos,proto3" json:"file_infos,omitempty"`
+	FileInfos     []*FileInfo            `protobuf:"bytes,4,rep,name=file_infos,json=fileInfos,proto3" json:"file_infos,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -136,7 +137,7 @@ func (x *AddIntegrityReportRequest) GetPodNamespace() string {
 	return ""
 }
 
-func (x *AddIntegrityReportRequest) GetFileInfos() []*IntegrityFileInfo {
+func (x *AddIntegrityReportRequest) GetFileInfos() []*FileInfo {
 	if x != nil {
 		return x.FileInfos
 	}
@@ -603,19 +604,124 @@ func (*UpdateTaskResponse) Descriptor() ([]byte, []int) {
 	return file_system_service_v1_system_proto_rawDescGZIP(), []int{10}
 }
 
-type ListIntegrityStatusResponse_IntegrityStatus struct {
+type SetIntegrityConfigRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	LabelApp        string                  `protobuf:"bytes,2,opt,name=label_app,json=labelApp,proto3" json:"label_app,omitempty"`
+	PodNamespace    string                  `protobuf:"bytes,3,opt,name=pod_namespace,json=podNamespace,proto3" json:"pod_namespace,omitempty"`
+	FileInfos       []*FileInfo             `protobuf:"bytes,4,rep,name=file_infos,json=fileInfos,proto3" json:"file_infos,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *SetIntegrityConfigRequest) Reset() {
+	*x = SetIntegrityConfigRequest{}
+	mi := &file_system_service_v1_system_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetIntegrityConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetIntegrityConfigRequest) ProtoMessage() {}
+
+func (x *SetIntegrityConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_system_service_v1_system_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetIntegrityConfigRequest.ProtoReflect.Descriptor instead.
+func (*SetIntegrityConfigRequest) Descriptor() ([]byte, []int) {
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *SetIntegrityConfigRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *SetIntegrityConfigRequest) GetLabelApp() string {
+	if x != nil {
+		return x.LabelApp
+	}
+	return ""
+}
+
+func (x *SetIntegrityConfigRequest) GetPodNamespace() string {
+	if x != nil {
+		return x.PodNamespace
+	}
+	return ""
+}
+
+func (x *SetIntegrityConfigRequest) GetFileInfos() []*FileInfo {
+	if x != nil {
+		return x.FileInfos
+	}
+	return nil
+}
+
+type SetIntegrityConfigResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	LabelApp      string                 `protobuf:"bytes,1,opt,name=label_app,json=labelApp,proto3" json:"label_app,omitempty"`
-	PodName       string                 `protobuf:"bytes,2,opt,name=pod_name,json=podName,proto3" json:"pod_name,omitempty"`
-	PodNamespace  string                 `protobuf:"bytes,3,opt,name=pod_namespace,json=podNamespace,proto3" json:"pod_namespace,omitempty"`
-	FileInfos     []*IntegrityFileInfo   `protobuf:"bytes,4,rep,name=file_infos,json=fileInfos,proto3" json:"file_infos,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetIntegrityConfigResponse) Reset() {
+	*x = SetIntegrityConfigResponse{}
+	mi := &file_system_service_v1_system_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetIntegrityConfigResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetIntegrityConfigResponse) ProtoMessage() {}
+
+func (x *SetIntegrityConfigResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_system_service_v1_system_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetIntegrityConfigResponse.ProtoReflect.Descriptor instead.
+func (*SetIntegrityConfigResponse) Descriptor() ([]byte, []int) {
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{12}
+}
+
+type ListIntegrityStatusResponse_IntegrityStatus struct {
+	state         protoimpl.MessageState                                  `protogen:"open.v1"`
+	LabelApp      string                                                  `protobuf:"bytes,1,opt,name=label_app,json=labelApp,proto3" json:"label_app,omitempty"`
+	PodName       string                                                  `protobuf:"bytes,2,opt,name=pod_name,json=podName,proto3" json:"pod_name,omitempty"`
+	PodNamespace  string                                                  `protobuf:"bytes,3,opt,name=pod_namespace,json=podNamespace,proto3" json:"pod_namespace,omitempty"`
+	FileInfos     []*ListIntegrityStatusResponse_IntegrityStatus_FileInfo `protobuf:"bytes,4,rep,name=file_infos,json=fileInfos,proto3" json:"file_infos,omitempty"`
+	CreatedAt     *timestamppb.Timestamp                                  `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListIntegrityStatusResponse_IntegrityStatus) Reset() {
 	*x = ListIntegrityStatusResponse_IntegrityStatus{}
-	mi := &file_system_service_v1_system_proto_msgTypes[11]
+	mi := &file_system_service_v1_system_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -627,7 +733,7 @@ func (x *ListIntegrityStatusResponse_IntegrityStatus) String() string {
 func (*ListIntegrityStatusResponse_IntegrityStatus) ProtoMessage() {}
 
 func (x *ListIntegrityStatusResponse_IntegrityStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_system_service_v1_system_proto_msgTypes[11]
+	mi := &file_system_service_v1_system_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -664,11 +770,86 @@ func (x *ListIntegrityStatusResponse_IntegrityStatus) GetPodNamespace() string {
 	return ""
 }
 
-func (x *ListIntegrityStatusResponse_IntegrityStatus) GetFileInfos() []*IntegrityFileInfo {
+func (x *ListIntegrityStatusResponse_IntegrityStatus) GetFileInfos() []*ListIntegrityStatusResponse_IntegrityStatus_FileInfo {
 	if x != nil {
 		return x.FileInfos
 	}
 	return nil
+}
+
+func (x *ListIntegrityStatusResponse_IntegrityStatus) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+type ListIntegrityStatusResponse_IntegrityStatus_FileInfo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	FilePath      string                 `protobuf:"bytes,1,opt,name=file_path,json=filePath,proto3" json:"file_path,omitempty"`
+	Hash          string                 `protobuf:"bytes,2,opt,name=hash,proto3" json:"hash,omitempty"`
+	ExpectedHash  string                 `protobuf:"bytes,3,opt,name=expected_hash,json=expectedHash,proto3" json:"expected_hash,omitempty"`
+	IsMatch       bool                   `protobuf:"varint,4,opt,name=is_match,json=isMatch,proto3" json:"is_match,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListIntegrityStatusResponse_IntegrityStatus_FileInfo) Reset() {
+	*x = ListIntegrityStatusResponse_IntegrityStatus_FileInfo{}
+	mi := &file_system_service_v1_system_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListIntegrityStatusResponse_IntegrityStatus_FileInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListIntegrityStatusResponse_IntegrityStatus_FileInfo) ProtoMessage() {}
+
+func (x *ListIntegrityStatusResponse_IntegrityStatus_FileInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_system_service_v1_system_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListIntegrityStatusResponse_IntegrityStatus_FileInfo.ProtoReflect.Descriptor instead.
+func (*ListIntegrityStatusResponse_IntegrityStatus_FileInfo) Descriptor() ([]byte, []int) {
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{4, 0, 0}
+}
+
+func (x *ListIntegrityStatusResponse_IntegrityStatus_FileInfo) GetFilePath() string {
+	if x != nil {
+		return x.FilePath
+	}
+	return ""
+}
+
+func (x *ListIntegrityStatusResponse_IntegrityStatus_FileInfo) GetHash() string {
+	if x != nil {
+		return x.Hash
+	}
+	return ""
+}
+
+func (x *ListIntegrityStatusResponse_IntegrityStatus_FileInfo) GetExpectedHash() string {
+	if x != nil {
+		return x.ExpectedHash
+	}
+	return ""
+}
+
+func (x *ListIntegrityStatusResponse_IntegrityStatus_FileInfo) GetIsMatch() bool {
+	if x != nil {
+		return x.IsMatch
+	}
+	return false
 }
 
 type ListTaskResponse_Task struct {
@@ -685,7 +866,7 @@ type ListTaskResponse_Task struct {
 
 func (x *ListTaskResponse_Task) Reset() {
 	*x = ListTaskResponse_Task{}
-	mi := &file_system_service_v1_system_proto_msgTypes[12]
+	mi := &file_system_service_v1_system_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -697,7 +878,7 @@ func (x *ListTaskResponse_Task) String() string {
 func (*ListTaskResponse_Task) ProtoMessage() {}
 
 func (x *ListTaskResponse_Task) ProtoReflect() protoreflect.Message {
-	mi := &file_system_service_v1_system_proto_msgTypes[12]
+	mi := &file_system_service_v1_system_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -759,27 +940,34 @@ var File_system_service_v1_system_proto protoreflect.FileDescriptor
 
 const file_system_service_v1_system_proto_rawDesc = "" +
 	"\n" +
-	"\x1esystem/service/v1/system.proto\x12\x11system.service.v1\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13common/common.proto\"D\n" +
-	"\x11IntegrityFileInfo\x12\x1b\n" +
+	"\x1esystem/service/v1/system.proto\x12\x11system.service.v1\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13common/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\";\n" +
+	"\bFileInfo\x12\x1b\n" +
 	"\tfile_path\x18\x01 \x01(\tR\bfilePath\x12\x12\n" +
-	"\x04hash\x18\x02 \x01(\tR\x04hash\"\xbd\x01\n" +
+	"\x04hash\x18\x02 \x01(\tR\x04hash\"\xb4\x01\n" +
 	"\x19AddIntegrityReportRequest\x12\x1b\n" +
 	"\tlabel_app\x18\x01 \x01(\tR\blabelApp\x12\x19\n" +
 	"\bpod_name\x18\x02 \x01(\tR\apodName\x12#\n" +
-	"\rpod_namespace\x18\x03 \x01(\tR\fpodNamespace\x12C\n" +
+	"\rpod_namespace\x18\x03 \x01(\tR\fpodNamespace\x12:\n" +
 	"\n" +
-	"file_infos\x18\x04 \x03(\v2$.system.service.v1.IntegrityFileInfoR\tfileInfos\"\x1c\n" +
+	"file_infos\x18\x04 \x03(\v2\x1b.system.service.v1.FileInfoR\tfileInfos\"\x1c\n" +
 	"\x1aAddIntegrityReportResponse\"d\n" +
 	"\x1aListIntegrityStatusRequest\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xc2\x02\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x9d\x04\n" +
 	"\x1bListIntegrityStatusResponse\x12m\n" +
-	"\x12integrity_statuses\x18\x01 \x03(\v2>.system.service.v1.ListIntegrityStatusResponse.IntegrityStatusR\x11integrityStatuses\x1a\xb3\x01\n" +
+	"\x12integrity_statuses\x18\x01 \x03(\v2>.system.service.v1.ListIntegrityStatusResponse.IntegrityStatusR\x11integrityStatuses\x1a\x8e\x03\n" +
 	"\x0fIntegrityStatus\x12\x1b\n" +
 	"\tlabel_app\x18\x01 \x01(\tR\blabelApp\x12\x19\n" +
 	"\bpod_name\x18\x02 \x01(\tR\apodName\x12#\n" +
-	"\rpod_namespace\x18\x03 \x01(\tR\fpodNamespace\x12C\n" +
+	"\rpod_namespace\x18\x03 \x01(\tR\fpodNamespace\x12f\n" +
 	"\n" +
-	"file_infos\x18\x04 \x03(\v2$.system.service.v1.IntegrityFileInfoR\tfileInfos\"\xd8\x01\n" +
+	"file_infos\x18\x04 \x03(\v2G.system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.FileInfoR\tfileInfos\x129\n" +
+	"\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a{\n" +
+	"\bFileInfo\x12\x1b\n" +
+	"\tfile_path\x18\x01 \x01(\tR\bfilePath\x12\x12\n" +
+	"\x04hash\x18\x02 \x01(\tR\x04hash\x12#\n" +
+	"\rexpected_hash\x18\x03 \x01(\tR\fexpectedHash\x12\x19\n" +
+	"\bis_match\x18\x04 \x01(\bR\aisMatch\"\xd8\x01\n" +
 	"\x0fListTaskRequest\x12\x17\n" +
 	"\atask_id\x18\x01 \x03(\x03R\x06taskId\x12\x17\n" +
 	"\x04type\x18\x02 \x01(\tH\x00R\x04type\x88\x01\x01\x12\x1c\n" +
@@ -813,7 +1001,14 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"percentage\x18\x04 \x01(\tR\n" +
 	"percentage\x12/\n" +
 	"\x06result\x18\x05 \x01(\v2\x17.google.protobuf.StructR\x06result\"\x14\n" +
-	"\x12UpdateTaskResponse2\x86\x04\n" +
+	"\x12UpdateTaskResponse\"\xe1\x01\n" +
+	"\x19SetIntegrityConfigRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1b\n" +
+	"\tlabel_app\x18\x02 \x01(\tR\blabelApp\x12#\n" +
+	"\rpod_namespace\x18\x03 \x01(\tR\fpodNamespace\x12:\n" +
+	"\n" +
+	"file_infos\x18\x04 \x03(\v2\x1b.system.service.v1.FileInfoR\tfileInfos\"\x1c\n" +
+	"\x1aSetIntegrityConfigResponse2\xfb\x04\n" +
 	"\x06System\x12s\n" +
 	"\x12AddIntegrityReport\x12,.system.service.v1.AddIntegrityReportRequest\x1a-.system.service.v1.AddIntegrityReportResponse\"\x00\x12v\n" +
 	"\x13ListIntegrityStatus\x12-.system.service.v1.ListIntegrityStatusRequest\x1a..system.service.v1.ListIntegrityStatusResponse\"\x00\x12U\n" +
@@ -821,7 +1016,8 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\n" +
 	"CreateTask\x12$.system.service.v1.CreateTaskRequest\x1a%.system.service.v1.CreateTaskResponse\"\x00\x12[\n" +
 	"\n" +
-	"UpdateTask\x12$.system.service.v1.UpdateTaskRequest\x1a%.system.service.v1.UpdateTaskResponse\"\x00BO\n" +
+	"UpdateTask\x12$.system.service.v1.UpdateTaskRequest\x1a%.system.service.v1.UpdateTaskResponse\"\x00\x12s\n" +
+	"\x12SetIntegrityConfig\x12,.system.service.v1.SetIntegrityConfigRequest\x1a-.system.service.v1.SetIntegrityConfigResponse\"\x00BO\n" +
 	"\x11system.service.v1P\x01Z8github.com/infigaming-com/meepo-api/system/service/v1;v1b\x06proto3"
 
 var (
@@ -836,50 +1032,59 @@ func file_system_service_v1_system_proto_rawDescGZIP() []byte {
 	return file_system_service_v1_system_proto_rawDescData
 }
 
-var file_system_service_v1_system_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_system_service_v1_system_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_system_service_v1_system_proto_goTypes = []any{
-	(*IntegrityFileInfo)(nil),                           // 0: system.service.v1.IntegrityFileInfo
-	(*AddIntegrityReportRequest)(nil),                   // 1: system.service.v1.AddIntegrityReportRequest
-	(*AddIntegrityReportResponse)(nil),                  // 2: system.service.v1.AddIntegrityReportResponse
-	(*ListIntegrityStatusRequest)(nil),                  // 3: system.service.v1.ListIntegrityStatusRequest
-	(*ListIntegrityStatusResponse)(nil),                 // 4: system.service.v1.ListIntegrityStatusResponse
-	(*ListTaskRequest)(nil),                             // 5: system.service.v1.ListTaskRequest
-	(*ListTaskResponse)(nil),                            // 6: system.service.v1.ListTaskResponse
-	(*CreateTaskRequest)(nil),                           // 7: system.service.v1.CreateTaskRequest
-	(*CreateTaskResponse)(nil),                          // 8: system.service.v1.CreateTaskResponse
-	(*UpdateTaskRequest)(nil),                           // 9: system.service.v1.UpdateTaskRequest
-	(*UpdateTaskResponse)(nil),                          // 10: system.service.v1.UpdateTaskResponse
-	(*ListIntegrityStatusResponse_IntegrityStatus)(nil), // 11: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus
-	(*ListTaskResponse_Task)(nil),                       // 12: system.service.v1.ListTaskResponse.Task
-	(*common.OperatorContext)(nil),                      // 13: api.common.OperatorContext
-	(*structpb.Struct)(nil),                             // 14: google.protobuf.Struct
+	(*FileInfo)(nil),                                             // 0: system.service.v1.FileInfo
+	(*AddIntegrityReportRequest)(nil),                            // 1: system.service.v1.AddIntegrityReportRequest
+	(*AddIntegrityReportResponse)(nil),                           // 2: system.service.v1.AddIntegrityReportResponse
+	(*ListIntegrityStatusRequest)(nil),                           // 3: system.service.v1.ListIntegrityStatusRequest
+	(*ListIntegrityStatusResponse)(nil),                          // 4: system.service.v1.ListIntegrityStatusResponse
+	(*ListTaskRequest)(nil),                                      // 5: system.service.v1.ListTaskRequest
+	(*ListTaskResponse)(nil),                                     // 6: system.service.v1.ListTaskResponse
+	(*CreateTaskRequest)(nil),                                    // 7: system.service.v1.CreateTaskRequest
+	(*CreateTaskResponse)(nil),                                   // 8: system.service.v1.CreateTaskResponse
+	(*UpdateTaskRequest)(nil),                                    // 9: system.service.v1.UpdateTaskRequest
+	(*UpdateTaskResponse)(nil),                                   // 10: system.service.v1.UpdateTaskResponse
+	(*SetIntegrityConfigRequest)(nil),                            // 11: system.service.v1.SetIntegrityConfigRequest
+	(*SetIntegrityConfigResponse)(nil),                           // 12: system.service.v1.SetIntegrityConfigResponse
+	(*ListIntegrityStatusResponse_IntegrityStatus)(nil),          // 13: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus
+	(*ListIntegrityStatusResponse_IntegrityStatus_FileInfo)(nil), // 14: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.FileInfo
+	(*ListTaskResponse_Task)(nil),                                // 15: system.service.v1.ListTaskResponse.Task
+	(*common.OperatorContext)(nil),                               // 16: api.common.OperatorContext
+	(*structpb.Struct)(nil),                                      // 17: google.protobuf.Struct
+	(*timestamppb.Timestamp)(nil),                                // 18: google.protobuf.Timestamp
 }
 var file_system_service_v1_system_proto_depIdxs = []int32{
-	0,  // 0: system.service.v1.AddIntegrityReportRequest.file_infos:type_name -> system.service.v1.IntegrityFileInfo
-	13, // 1: system.service.v1.ListIntegrityStatusRequest.operator_context:type_name -> api.common.OperatorContext
-	11, // 2: system.service.v1.ListIntegrityStatusResponse.integrity_statuses:type_name -> system.service.v1.ListIntegrityStatusResponse.IntegrityStatus
-	13, // 3: system.service.v1.ListTaskRequest.operator_context:type_name -> api.common.OperatorContext
-	12, // 4: system.service.v1.ListTaskResponse.tasks:type_name -> system.service.v1.ListTaskResponse.Task
-	13, // 5: system.service.v1.CreateTaskRequest.operator_context:type_name -> api.common.OperatorContext
-	14, // 6: system.service.v1.CreateTaskRequest.payload:type_name -> google.protobuf.Struct
-	14, // 7: system.service.v1.UpdateTaskRequest.result:type_name -> google.protobuf.Struct
-	0,  // 8: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.file_infos:type_name -> system.service.v1.IntegrityFileInfo
-	14, // 9: system.service.v1.ListTaskResponse.Task.result:type_name -> google.protobuf.Struct
-	1,  // 10: system.service.v1.System.AddIntegrityReport:input_type -> system.service.v1.AddIntegrityReportRequest
-	3,  // 11: system.service.v1.System.ListIntegrityStatus:input_type -> system.service.v1.ListIntegrityStatusRequest
-	5,  // 12: system.service.v1.System.ListTask:input_type -> system.service.v1.ListTaskRequest
-	7,  // 13: system.service.v1.System.CreateTask:input_type -> system.service.v1.CreateTaskRequest
-	9,  // 14: system.service.v1.System.UpdateTask:input_type -> system.service.v1.UpdateTaskRequest
-	2,  // 15: system.service.v1.System.AddIntegrityReport:output_type -> system.service.v1.AddIntegrityReportResponse
-	4,  // 16: system.service.v1.System.ListIntegrityStatus:output_type -> system.service.v1.ListIntegrityStatusResponse
-	6,  // 17: system.service.v1.System.ListTask:output_type -> system.service.v1.ListTaskResponse
-	8,  // 18: system.service.v1.System.CreateTask:output_type -> system.service.v1.CreateTaskResponse
-	10, // 19: system.service.v1.System.UpdateTask:output_type -> system.service.v1.UpdateTaskResponse
-	15, // [15:20] is the sub-list for method output_type
-	10, // [10:15] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	0,  // 0: system.service.v1.AddIntegrityReportRequest.file_infos:type_name -> system.service.v1.FileInfo
+	16, // 1: system.service.v1.ListIntegrityStatusRequest.operator_context:type_name -> api.common.OperatorContext
+	13, // 2: system.service.v1.ListIntegrityStatusResponse.integrity_statuses:type_name -> system.service.v1.ListIntegrityStatusResponse.IntegrityStatus
+	16, // 3: system.service.v1.ListTaskRequest.operator_context:type_name -> api.common.OperatorContext
+	15, // 4: system.service.v1.ListTaskResponse.tasks:type_name -> system.service.v1.ListTaskResponse.Task
+	16, // 5: system.service.v1.CreateTaskRequest.operator_context:type_name -> api.common.OperatorContext
+	17, // 6: system.service.v1.CreateTaskRequest.payload:type_name -> google.protobuf.Struct
+	17, // 7: system.service.v1.UpdateTaskRequest.result:type_name -> google.protobuf.Struct
+	16, // 8: system.service.v1.SetIntegrityConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	0,  // 9: system.service.v1.SetIntegrityConfigRequest.file_infos:type_name -> system.service.v1.FileInfo
+	14, // 10: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.file_infos:type_name -> system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.FileInfo
+	18, // 11: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.created_at:type_name -> google.protobuf.Timestamp
+	17, // 12: system.service.v1.ListTaskResponse.Task.result:type_name -> google.protobuf.Struct
+	1,  // 13: system.service.v1.System.AddIntegrityReport:input_type -> system.service.v1.AddIntegrityReportRequest
+	3,  // 14: system.service.v1.System.ListIntegrityStatus:input_type -> system.service.v1.ListIntegrityStatusRequest
+	5,  // 15: system.service.v1.System.ListTask:input_type -> system.service.v1.ListTaskRequest
+	7,  // 16: system.service.v1.System.CreateTask:input_type -> system.service.v1.CreateTaskRequest
+	9,  // 17: system.service.v1.System.UpdateTask:input_type -> system.service.v1.UpdateTaskRequest
+	11, // 18: system.service.v1.System.SetIntegrityConfig:input_type -> system.service.v1.SetIntegrityConfigRequest
+	2,  // 19: system.service.v1.System.AddIntegrityReport:output_type -> system.service.v1.AddIntegrityReportResponse
+	4,  // 20: system.service.v1.System.ListIntegrityStatus:output_type -> system.service.v1.ListIntegrityStatusResponse
+	6,  // 21: system.service.v1.System.ListTask:output_type -> system.service.v1.ListTaskResponse
+	8,  // 22: system.service.v1.System.CreateTask:output_type -> system.service.v1.CreateTaskResponse
+	10, // 23: system.service.v1.System.UpdateTask:output_type -> system.service.v1.UpdateTaskResponse
+	12, // 24: system.service.v1.System.SetIntegrityConfig:output_type -> system.service.v1.SetIntegrityConfigResponse
+	19, // [19:25] is the sub-list for method output_type
+	13, // [13:19] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_system_service_v1_system_proto_init() }
@@ -894,7 +1099,7 @@ func file_system_service_v1_system_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_system_service_v1_system_proto_rawDesc), len(file_system_service_v1_system_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   13,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

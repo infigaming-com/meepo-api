@@ -21,14 +21,17 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationBackofficeSystemListIntegrityStatus = "/api.backoffice.service.v1.BackofficeSystem/ListIntegrityStatus"
+const OperationBackofficeSystemSetIntegrityConfig = "/api.backoffice.service.v1.BackofficeSystem/SetIntegrityConfig"
 
 type BackofficeSystemHTTPServer interface {
 	ListIntegrityStatus(context.Context, *ListIntegrityStatusRequest) (*v1.ListIntegrityStatusResponse, error)
+	SetIntegrityConfig(context.Context, *SetIntegrityConfigRequest) (*v1.SetIntegrityConfigResponse, error)
 }
 
 func RegisterBackofficeSystemHTTPServer(s *http.Server, srv BackofficeSystemHTTPServer) {
 	r := s.Route("/")
 	r.POST("/v1/backoffice/system/integrity/status/list", _BackofficeSystem_ListIntegrityStatus0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/system/integrity/file-info/config/set", _BackofficeSystem_SetIntegrityConfig0_HTTP_Handler(srv))
 }
 
 func _BackofficeSystem_ListIntegrityStatus0_HTTP_Handler(srv BackofficeSystemHTTPServer) func(ctx http.Context) error {
@@ -53,8 +56,31 @@ func _BackofficeSystem_ListIntegrityStatus0_HTTP_Handler(srv BackofficeSystemHTT
 	}
 }
 
+func _BackofficeSystem_SetIntegrityConfig0_HTTP_Handler(srv BackofficeSystemHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in SetIntegrityConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeSystemSetIntegrityConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SetIntegrityConfig(ctx, req.(*SetIntegrityConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.SetIntegrityConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeSystemHTTPClient interface {
 	ListIntegrityStatus(ctx context.Context, req *ListIntegrityStatusRequest, opts ...http.CallOption) (rsp *v1.ListIntegrityStatusResponse, err error)
+	SetIntegrityConfig(ctx context.Context, req *SetIntegrityConfigRequest, opts ...http.CallOption) (rsp *v1.SetIntegrityConfigResponse, err error)
 }
 
 type BackofficeSystemHTTPClientImpl struct {
@@ -70,6 +96,19 @@ func (c *BackofficeSystemHTTPClientImpl) ListIntegrityStatus(ctx context.Context
 	pattern := "/v1/backoffice/system/integrity/status/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeSystemListIntegrityStatus))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeSystemHTTPClientImpl) SetIntegrityConfig(ctx context.Context, in *SetIntegrityConfigRequest, opts ...http.CallOption) (*v1.SetIntegrityConfigResponse, error) {
+	var out v1.SetIntegrityConfigResponse
+	pattern := "/v1/backoffice/system/integrity/file-info/config/set"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeSystemSetIntegrityConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
