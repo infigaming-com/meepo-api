@@ -270,7 +270,7 @@ func (x *ListIntegrityStatusResponse) GetIntegrityStatuses() []*ListIntegritySta
 
 type ListTaskRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
-	TaskId          []int64                 `protobuf:"varint,1,rep,packed,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
+	TaskIds         []int64                 `protobuf:"varint,1,rep,packed,name=task_ids,json=taskIds,proto3" json:"task_ids,omitempty"`
 	Type            *string                 `protobuf:"bytes,2,opt,name=type,proto3,oneof" json:"type,omitempty"`
 	UserId          *int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3,oneof" json:"operator_context,omitempty"`
@@ -308,9 +308,9 @@ func (*ListTaskRequest) Descriptor() ([]byte, []int) {
 	return file_system_service_v1_system_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *ListTaskRequest) GetTaskId() []int64 {
+func (x *ListTaskRequest) GetTaskIds() []int64 {
 	if x != nil {
-		return x.TaskId
+		return x.TaskIds
 	}
 	return nil
 }
@@ -385,8 +385,9 @@ type CreateTaskRequest struct {
 	TaskId          int64                   `protobuf:"varint,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
 	UserId          int64                   `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Type            string                  `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	Params          *structpb.Struct        `protobuf:"bytes,5,opt,name=params,proto3" json:"params,omitempty"`
+	Status          string                  `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,5,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Params          *structpb.Struct        `protobuf:"bytes,6,opt,name=params,proto3" json:"params,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -438,6 +439,13 @@ func (x *CreateTaskRequest) GetUserId() int64 {
 func (x *CreateTaskRequest) GetType() string {
 	if x != nil {
 		return x.Type
+	}
+	return ""
+}
+
+func (x *CreateTaskRequest) GetStatus() string {
+	if x != nil {
+		return x.Status
 	}
 	return ""
 }
@@ -854,12 +862,13 @@ func (x *ListIntegrityStatusResponse_IntegrityStatus_FileInfo) GetIsMatch() bool
 
 type ListTaskResponse_Task struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TaskIds       int64                  `protobuf:"varint,1,opt,name=task_ids,json=taskIds,proto3" json:"task_ids,omitempty"`
+	TaskId        int64                  `protobuf:"varint,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
 	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Type          string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
 	Status        string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
 	Process       string                 `protobuf:"bytes,5,opt,name=process,proto3" json:"process,omitempty"`
-	Result        *structpb.Struct       `protobuf:"bytes,6,opt,name=result,proto3" json:"result,omitempty"`
+	Percentage    string                 `protobuf:"bytes,6,opt,name=Percentage,proto3" json:"Percentage,omitempty"`
+	Result        *structpb.Struct       `protobuf:"bytes,7,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -894,9 +903,9 @@ func (*ListTaskResponse_Task) Descriptor() ([]byte, []int) {
 	return file_system_service_v1_system_proto_rawDescGZIP(), []int{6, 0}
 }
 
-func (x *ListTaskResponse_Task) GetTaskIds() int64 {
+func (x *ListTaskResponse_Task) GetTaskId() int64 {
 	if x != nil {
-		return x.TaskIds
+		return x.TaskId
 	}
 	return 0
 }
@@ -925,6 +934,13 @@ func (x *ListTaskResponse_Task) GetStatus() string {
 func (x *ListTaskResponse_Task) GetProcess() string {
 	if x != nil {
 		return x.Process
+	}
+	return ""
+}
+
+func (x *ListTaskResponse_Task) GetPercentage() string {
+	if x != nil {
+		return x.Percentage
 	}
 	return ""
 }
@@ -967,31 +983,35 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\tfile_path\x18\x01 \x01(\tR\bfilePath\x12\x12\n" +
 	"\x04hash\x18\x02 \x01(\tR\x04hash\x12#\n" +
 	"\rexpected_hash\x18\x03 \x01(\tR\fexpectedHash\x12\x19\n" +
-	"\bis_match\x18\x04 \x01(\bR\aisMatch\"\xd8\x01\n" +
-	"\x0fListTaskRequest\x12\x17\n" +
-	"\atask_id\x18\x01 \x03(\x03R\x06taskId\x12\x17\n" +
+	"\bis_match\x18\x04 \x01(\bR\aisMatch\"\xda\x01\n" +
+	"\x0fListTaskRequest\x12\x19\n" +
+	"\btask_ids\x18\x01 \x03(\x03R\ataskIds\x12\x17\n" +
 	"\x04type\x18\x02 \x01(\tH\x00R\x04type\x88\x01\x01\x12\x1c\n" +
 	"\auser_id\x18\x03 \x01(\x03H\x01R\x06userId\x88\x01\x01\x12K\n" +
 	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextH\x02R\x0foperatorContext\x88\x01\x01B\a\n" +
 	"\x05_typeB\n" +
 	"\n" +
 	"\b_user_idB\x13\n" +
-	"\x11_operator_context\"\x86\x02\n" +
+	"\x11_operator_context\"\xa4\x02\n" +
 	"\x10ListTaskResponse\x12>\n" +
-	"\x05tasks\x18\x01 \x03(\v2(.system.service.v1.ListTaskResponse.TaskR\x05tasks\x1a\xb1\x01\n" +
-	"\x04Task\x12\x19\n" +
-	"\btask_ids\x18\x01 \x01(\x03R\ataskIds\x12\x17\n" +
+	"\x05tasks\x18\x01 \x03(\v2(.system.service.v1.ListTaskResponse.TaskR\x05tasks\x1a\xcf\x01\n" +
+	"\x04Task\x12\x17\n" +
+	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\tR\x04type\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x12\x18\n" +
-	"\aprocess\x18\x05 \x01(\tR\aprocess\x12/\n" +
-	"\x06result\x18\x06 \x01(\v2\x17.google.protobuf.StructR\x06result\"\xd2\x01\n" +
+	"\aprocess\x18\x05 \x01(\tR\aprocess\x12\x1e\n" +
+	"\n" +
+	"Percentage\x18\x06 \x01(\tR\n" +
+	"Percentage\x12/\n" +
+	"\x06result\x18\a \x01(\v2\x17.google.protobuf.StructR\x06result\"\xea\x01\n" +
 	"\x11CreateTaskRequest\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x12\n" +
-	"\x04type\x18\x03 \x01(\tR\x04type\x12F\n" +
-	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12/\n" +
-	"\x06params\x18\x05 \x01(\v2\x17.google.protobuf.StructR\x06params\"\x14\n" +
+	"\x04type\x18\x03 \x01(\tR\x04type\x12\x16\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\x12F\n" +
+	"\x10operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12/\n" +
+	"\x06params\x18\x06 \x01(\v2\x17.google.protobuf.StructR\x06params\"\x14\n" +
 	"\x12CreateTaskResponse\"\xaf\x01\n" +
 	"\x11UpdateTaskRequest\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x16\n" +

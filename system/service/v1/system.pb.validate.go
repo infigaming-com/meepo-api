@@ -953,6 +953,8 @@ func (m *CreateTaskRequest) validate(all bool) error {
 
 	// no validation rules for Type
 
+	// no validation rules for Status
+
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
@@ -2024,7 +2026,7 @@ func (m *ListTaskResponse_Task) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for TaskIds
+	// no validation rules for TaskId
 
 	// no validation rules for UserId
 
@@ -2033,6 +2035,8 @@ func (m *ListTaskResponse_Task) validate(all bool) error {
 	// no validation rules for Status
 
 	// no validation rules for Process
+
+	// no validation rules for Percentage
 
 	if all {
 		switch v := interface{}(m.GetResult()).(type) {
