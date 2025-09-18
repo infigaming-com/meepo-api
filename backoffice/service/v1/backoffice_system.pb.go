@@ -7,6 +7,7 @@
 package v1
 
 import (
+	v1 "github.com/infigaming-com/meepo-api/system/service/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -22,34 +23,26 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type SystemCurrency struct {
-	state                 protoimpl.MessageState `protogen:"open.v1"`
-	Currency              string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	Enabled               bool                   `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	Hidden                bool                   `protobuf:"varint,3,opt,name=hidden,proto3" json:"hidden,omitempty"`
-	Type                  string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
-	Symbol                string                 `protobuf:"bytes,5,opt,name=symbol,proto3" json:"symbol,omitempty"`
-	Icon                  string                 `protobuf:"bytes,6,opt,name=icon,proto3" json:"icon,omitempty"`
-	DecimalPlaces         int32                  `protobuf:"varint,7,opt,name=decimal_places,json=decimalPlaces,proto3" json:"decimal_places,omitempty"`
-	CurrencyDecimalPlaces int32                  `protobuf:"varint,8,opt,name=currency_decimal_places,json=currencyDecimalPlaces,proto3" json:"currency_decimal_places,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+type ListIntegrityStatusRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SystemCurrency) Reset() {
-	*x = SystemCurrency{}
+func (x *ListIntegrityStatusRequest) Reset() {
+	*x = ListIntegrityStatusRequest{}
 	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SystemCurrency) String() string {
+func (x *ListIntegrityStatusRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SystemCurrency) ProtoMessage() {}
+func (*ListIntegrityStatusRequest) ProtoMessage() {}
 
-func (x *SystemCurrency) ProtoReflect() protoreflect.Message {
+func (x *ListIntegrityStatusRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -61,538 +54,19 @@ func (x *SystemCurrency) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SystemCurrency.ProtoReflect.Descriptor instead.
-func (*SystemCurrency) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListIntegrityStatusRequest.ProtoReflect.Descriptor instead.
+func (*ListIntegrityStatusRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *SystemCurrency) GetCurrency() string {
-	if x != nil {
-		return x.Currency
-	}
-	return ""
-}
-
-func (x *SystemCurrency) GetEnabled() bool {
-	if x != nil {
-		return x.Enabled
-	}
-	return false
-}
-
-func (x *SystemCurrency) GetHidden() bool {
-	if x != nil {
-		return x.Hidden
-	}
-	return false
-}
-
-func (x *SystemCurrency) GetType() string {
-	if x != nil {
-		return x.Type
-	}
-	return ""
-}
-
-func (x *SystemCurrency) GetSymbol() string {
-	if x != nil {
-		return x.Symbol
-	}
-	return ""
-}
-
-func (x *SystemCurrency) GetIcon() string {
-	if x != nil {
-		return x.Icon
-	}
-	return ""
-}
-
-func (x *SystemCurrency) GetDecimalPlaces() int32 {
-	if x != nil {
-		return x.DecimalPlaces
-	}
-	return 0
-}
-
-func (x *SystemCurrency) GetCurrencyDecimalPlaces() int32 {
-	if x != nil {
-		return x.CurrencyDecimalPlaces
-	}
-	return 0
-}
-
-type AddSystemCurrencyRequest struct {
-	state                 protoimpl.MessageState `protogen:"open.v1"`
-	Currency              string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	Enabled               bool                   `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	Hidden                bool                   `protobuf:"varint,3,opt,name=hidden,proto3" json:"hidden,omitempty"`
-	Type                  string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
-	Symbol                string                 `protobuf:"bytes,5,opt,name=symbol,proto3" json:"symbol,omitempty"`
-	Icon                  string                 `protobuf:"bytes,6,opt,name=icon,proto3" json:"icon,omitempty"`
-	DecimalPlaces         int32                  `protobuf:"varint,7,opt,name=decimal_places,json=decimalPlaces,proto3" json:"decimal_places,omitempty"`
-	CurrencyDecimalPlaces int32                  `protobuf:"varint,8,opt,name=currency_decimal_places,json=currencyDecimalPlaces,proto3" json:"currency_decimal_places,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
-}
-
-func (x *AddSystemCurrencyRequest) Reset() {
-	*x = AddSystemCurrencyRequest{}
-	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AddSystemCurrencyRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AddSystemCurrencyRequest) ProtoMessage() {}
-
-func (x *AddSystemCurrencyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AddSystemCurrencyRequest.ProtoReflect.Descriptor instead.
-func (*AddSystemCurrencyRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *AddSystemCurrencyRequest) GetCurrency() string {
-	if x != nil {
-		return x.Currency
-	}
-	return ""
-}
-
-func (x *AddSystemCurrencyRequest) GetEnabled() bool {
-	if x != nil {
-		return x.Enabled
-	}
-	return false
-}
-
-func (x *AddSystemCurrencyRequest) GetHidden() bool {
-	if x != nil {
-		return x.Hidden
-	}
-	return false
-}
-
-func (x *AddSystemCurrencyRequest) GetType() string {
-	if x != nil {
-		return x.Type
-	}
-	return ""
-}
-
-func (x *AddSystemCurrencyRequest) GetSymbol() string {
-	if x != nil {
-		return x.Symbol
-	}
-	return ""
-}
-
-func (x *AddSystemCurrencyRequest) GetIcon() string {
-	if x != nil {
-		return x.Icon
-	}
-	return ""
-}
-
-func (x *AddSystemCurrencyRequest) GetDecimalPlaces() int32 {
-	if x != nil {
-		return x.DecimalPlaces
-	}
-	return 0
-}
-
-func (x *AddSystemCurrencyRequest) GetCurrencyDecimalPlaces() int32 {
-	if x != nil {
-		return x.CurrencyDecimalPlaces
-	}
-	return 0
-}
-
-type AddSystemCurrencyResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *AddSystemCurrencyResponse) Reset() {
-	*x = AddSystemCurrencyResponse{}
-	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AddSystemCurrencyResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AddSystemCurrencyResponse) ProtoMessage() {}
-
-func (x *AddSystemCurrencyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AddSystemCurrencyResponse.ProtoReflect.Descriptor instead.
-func (*AddSystemCurrencyResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP(), []int{2}
-}
-
-type ListSystemCurrenciesRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Currencies    []string               `protobuf:"bytes,1,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	Enabled       *bool                  `protobuf:"varint,2,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	Hidden        *bool                  `protobuf:"varint,3,opt,name=hidden,proto3,oneof" json:"hidden,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListSystemCurrenciesRequest) Reset() {
-	*x = ListSystemCurrenciesRequest{}
-	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListSystemCurrenciesRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListSystemCurrenciesRequest) ProtoMessage() {}
-
-func (x *ListSystemCurrenciesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListSystemCurrenciesRequest.ProtoReflect.Descriptor instead.
-func (*ListSystemCurrenciesRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *ListSystemCurrenciesRequest) GetCurrencies() []string {
-	if x != nil {
-		return x.Currencies
-	}
-	return nil
-}
-
-func (x *ListSystemCurrenciesRequest) GetEnabled() bool {
-	if x != nil && x.Enabled != nil {
-		return *x.Enabled
-	}
-	return false
-}
-
-func (x *ListSystemCurrenciesRequest) GetHidden() bool {
-	if x != nil && x.Hidden != nil {
-		return *x.Hidden
-	}
-	return false
-}
-
-type ListSystemCurrenciesResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Currencies    []*SystemCurrency      `protobuf:"bytes,1,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
-	TotalEnabled  int32                  `protobuf:"varint,3,opt,name=total_enabled,json=totalEnabled,proto3" json:"total_enabled,omitempty"`
-	TotalHidden   int32                  `protobuf:"varint,4,opt,name=total_hidden,json=totalHidden,proto3" json:"total_hidden,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListSystemCurrenciesResponse) Reset() {
-	*x = ListSystemCurrenciesResponse{}
-	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListSystemCurrenciesResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListSystemCurrenciesResponse) ProtoMessage() {}
-
-func (x *ListSystemCurrenciesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListSystemCurrenciesResponse.ProtoReflect.Descriptor instead.
-func (*ListSystemCurrenciesResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *ListSystemCurrenciesResponse) GetCurrencies() []*SystemCurrency {
-	if x != nil {
-		return x.Currencies
-	}
-	return nil
-}
-
-func (x *ListSystemCurrenciesResponse) GetTotal() int32 {
-	if x != nil {
-		return x.Total
-	}
-	return 0
-}
-
-func (x *ListSystemCurrenciesResponse) GetTotalEnabled() int32 {
-	if x != nil {
-		return x.TotalEnabled
-	}
-	return 0
-}
-
-func (x *ListSystemCurrenciesResponse) GetTotalHidden() int32 {
-	if x != nil {
-		return x.TotalHidden
-	}
-	return 0
-}
-
-type UpdateSystemCurrencyRequest struct {
-	state                 protoimpl.MessageState `protogen:"open.v1"`
-	Currency              string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	Enabled               *bool                  `protobuf:"varint,2,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	Hidden                *bool                  `protobuf:"varint,3,opt,name=hidden,proto3,oneof" json:"hidden,omitempty"`
-	Type                  *string                `protobuf:"bytes,4,opt,name=type,proto3,oneof" json:"type,omitempty"`
-	Symbol                *string                `protobuf:"bytes,5,opt,name=symbol,proto3,oneof" json:"symbol,omitempty"`
-	Icon                  *string                `protobuf:"bytes,6,opt,name=icon,proto3,oneof" json:"icon,omitempty"`
-	DecimalPlaces         *int32                 `protobuf:"varint,7,opt,name=decimal_places,json=decimalPlaces,proto3,oneof" json:"decimal_places,omitempty"`
-	CurrencyDecimalPlaces *int32                 `protobuf:"varint,8,opt,name=currency_decimal_places,json=currencyDecimalPlaces,proto3,oneof" json:"currency_decimal_places,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
-}
-
-func (x *UpdateSystemCurrencyRequest) Reset() {
-	*x = UpdateSystemCurrencyRequest{}
-	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateSystemCurrencyRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateSystemCurrencyRequest) ProtoMessage() {}
-
-func (x *UpdateSystemCurrencyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateSystemCurrencyRequest.ProtoReflect.Descriptor instead.
-func (*UpdateSystemCurrencyRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *UpdateSystemCurrencyRequest) GetCurrency() string {
-	if x != nil {
-		return x.Currency
-	}
-	return ""
-}
-
-func (x *UpdateSystemCurrencyRequest) GetEnabled() bool {
-	if x != nil && x.Enabled != nil {
-		return *x.Enabled
-	}
-	return false
-}
-
-func (x *UpdateSystemCurrencyRequest) GetHidden() bool {
-	if x != nil && x.Hidden != nil {
-		return *x.Hidden
-	}
-	return false
-}
-
-func (x *UpdateSystemCurrencyRequest) GetType() string {
-	if x != nil && x.Type != nil {
-		return *x.Type
-	}
-	return ""
-}
-
-func (x *UpdateSystemCurrencyRequest) GetSymbol() string {
-	if x != nil && x.Symbol != nil {
-		return *x.Symbol
-	}
-	return ""
-}
-
-func (x *UpdateSystemCurrencyRequest) GetIcon() string {
-	if x != nil && x.Icon != nil {
-		return *x.Icon
-	}
-	return ""
-}
-
-func (x *UpdateSystemCurrencyRequest) GetDecimalPlaces() int32 {
-	if x != nil && x.DecimalPlaces != nil {
-		return *x.DecimalPlaces
-	}
-	return 0
-}
-
-func (x *UpdateSystemCurrencyRequest) GetCurrencyDecimalPlaces() int32 {
-	if x != nil && x.CurrencyDecimalPlaces != nil {
-		return *x.CurrencyDecimalPlaces
-	}
-	return 0
-}
-
-type UpdateSystemCurrencyResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Currency      *SystemCurrency        `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateSystemCurrencyResponse) Reset() {
-	*x = UpdateSystemCurrencyResponse{}
-	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateSystemCurrencyResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateSystemCurrencyResponse) ProtoMessage() {}
-
-func (x *UpdateSystemCurrencyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateSystemCurrencyResponse.ProtoReflect.Descriptor instead.
-func (*UpdateSystemCurrencyResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *UpdateSystemCurrencyResponse) GetCurrency() *SystemCurrency {
-	if x != nil {
-		return x.Currency
-	}
-	return nil
 }
 
 var File_backoffice_service_v1_backoffice_system_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_system_proto_rawDesc = "" +
 	"\n" +
-	"-backoffice/service/v1/backoffice_system.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\"\xfd\x01\n" +
-	"\x0eSystemCurrency\x12\x1a\n" +
-	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
-	"\aenabled\x18\x02 \x01(\bR\aenabled\x12\x16\n" +
-	"\x06hidden\x18\x03 \x01(\bR\x06hidden\x12\x12\n" +
-	"\x04type\x18\x04 \x01(\tR\x04type\x12\x16\n" +
-	"\x06symbol\x18\x05 \x01(\tR\x06symbol\x12\x12\n" +
-	"\x04icon\x18\x06 \x01(\tR\x04icon\x12%\n" +
-	"\x0edecimal_places\x18\a \x01(\x05R\rdecimalPlaces\x126\n" +
-	"\x17currency_decimal_places\x18\b \x01(\x05R\x15currencyDecimalPlaces\"\x87\x02\n" +
-	"\x18AddSystemCurrencyRequest\x12\x1a\n" +
-	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
-	"\aenabled\x18\x02 \x01(\bR\aenabled\x12\x16\n" +
-	"\x06hidden\x18\x03 \x01(\bR\x06hidden\x12\x12\n" +
-	"\x04type\x18\x04 \x01(\tR\x04type\x12\x16\n" +
-	"\x06symbol\x18\x05 \x01(\tR\x06symbol\x12\x12\n" +
-	"\x04icon\x18\x06 \x01(\tR\x04icon\x12%\n" +
-	"\x0edecimal_places\x18\a \x01(\x05R\rdecimalPlaces\x126\n" +
-	"\x17currency_decimal_places\x18\b \x01(\x05R\x15currencyDecimalPlaces\"\x1b\n" +
-	"\x19AddSystemCurrencyResponse\"\x90\x01\n" +
-	"\x1bListSystemCurrenciesRequest\x12\x1e\n" +
-	"\n" +
-	"currencies\x18\x01 \x03(\tR\n" +
-	"currencies\x12\x1d\n" +
-	"\aenabled\x18\x02 \x01(\bH\x00R\aenabled\x88\x01\x01\x12\x1b\n" +
-	"\x06hidden\x18\x03 \x01(\bH\x01R\x06hidden\x88\x01\x01B\n" +
-	"\n" +
-	"\b_enabledB\t\n" +
-	"\a_hidden\"\xc7\x01\n" +
-	"\x1cListSystemCurrenciesResponse\x12I\n" +
-	"\n" +
-	"currencies\x18\x01 \x03(\v2).api.backoffice.service.v1.SystemCurrencyR\n" +
-	"currencies\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total\x12#\n" +
-	"\rtotal_enabled\x18\x03 \x01(\x05R\ftotalEnabled\x12!\n" +
-	"\ftotal_hidden\x18\x04 \x01(\x05R\vtotalHidden\"\x90\x03\n" +
-	"\x1bUpdateSystemCurrencyRequest\x12\x1a\n" +
-	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x1d\n" +
-	"\aenabled\x18\x02 \x01(\bH\x00R\aenabled\x88\x01\x01\x12\x1b\n" +
-	"\x06hidden\x18\x03 \x01(\bH\x01R\x06hidden\x88\x01\x01\x12\x17\n" +
-	"\x04type\x18\x04 \x01(\tH\x02R\x04type\x88\x01\x01\x12\x1b\n" +
-	"\x06symbol\x18\x05 \x01(\tH\x03R\x06symbol\x88\x01\x01\x12\x17\n" +
-	"\x04icon\x18\x06 \x01(\tH\x04R\x04icon\x88\x01\x01\x12*\n" +
-	"\x0edecimal_places\x18\a \x01(\x05H\x05R\rdecimalPlaces\x88\x01\x01\x12;\n" +
-	"\x17currency_decimal_places\x18\b \x01(\x05H\x06R\x15currencyDecimalPlaces\x88\x01\x01B\n" +
-	"\n" +
-	"\b_enabledB\t\n" +
-	"\a_hiddenB\a\n" +
-	"\x05_typeB\t\n" +
-	"\a_symbolB\a\n" +
-	"\x05_iconB\x11\n" +
-	"\x0f_decimal_placesB\x1a\n" +
-	"\x18_currency_decimal_places\"e\n" +
-	"\x1cUpdateSystemCurrencyResponse\x12E\n" +
-	"\bcurrency\x18\x01 \x01(\v2).api.backoffice.service.v1.SystemCurrencyR\bcurrency2\xbe\x04\n" +
-	"\x10BackofficeSystem\x12\xaf\x01\n" +
-	"\x11AddSystemCurrency\x123.api.backoffice.service.v1.AddSystemCurrencyRequest\x1a4.api.backoffice.service.v1.AddSystemCurrencyResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/system/currencies/add\x12\xb9\x01\n" +
-	"\x14ListSystemCurrencies\x126.api.backoffice.service.v1.ListSystemCurrenciesRequest\x1a7.api.backoffice.service.v1.ListSystemCurrenciesResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/system/currencies/list\x12\xbb\x01\n" +
-	"\x14UpdateSystemCurrency\x126.api.backoffice.service.v1.UpdateSystemCurrencyRequest\x1a7.api.backoffice.service.v1.UpdateSystemCurrencyResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/system/currencies/updateB[\n" +
+	"-backoffice/service/v1/backoffice_system.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1esystem/service/v1/system.proto\"\x1c\n" +
+	"\x1aListIntegrityStatusRequest2\xc9\x01\n" +
+	"\x10BackofficeSystem\x12\xb4\x01\n" +
+	"\x13ListIntegrityStatus\x125.api.backoffice.service.v1.ListIntegrityStatusRequest\x1a..system.service.v1.ListIntegrityStatusResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/system/integrity/status/listB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -607,30 +81,19 @@ func file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_system_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_system_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_backoffice_service_v1_backoffice_system_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_backoffice_service_v1_backoffice_system_proto_goTypes = []any{
-	(*SystemCurrency)(nil),               // 0: api.backoffice.service.v1.SystemCurrency
-	(*AddSystemCurrencyRequest)(nil),     // 1: api.backoffice.service.v1.AddSystemCurrencyRequest
-	(*AddSystemCurrencyResponse)(nil),    // 2: api.backoffice.service.v1.AddSystemCurrencyResponse
-	(*ListSystemCurrenciesRequest)(nil),  // 3: api.backoffice.service.v1.ListSystemCurrenciesRequest
-	(*ListSystemCurrenciesResponse)(nil), // 4: api.backoffice.service.v1.ListSystemCurrenciesResponse
-	(*UpdateSystemCurrencyRequest)(nil),  // 5: api.backoffice.service.v1.UpdateSystemCurrencyRequest
-	(*UpdateSystemCurrencyResponse)(nil), // 6: api.backoffice.service.v1.UpdateSystemCurrencyResponse
+	(*ListIntegrityStatusRequest)(nil),     // 0: api.backoffice.service.v1.ListIntegrityStatusRequest
+	(*v1.ListIntegrityStatusResponse)(nil), // 1: system.service.v1.ListIntegrityStatusResponse
 }
 var file_backoffice_service_v1_backoffice_system_proto_depIdxs = []int32{
-	0, // 0: api.backoffice.service.v1.ListSystemCurrenciesResponse.currencies:type_name -> api.backoffice.service.v1.SystemCurrency
-	0, // 1: api.backoffice.service.v1.UpdateSystemCurrencyResponse.currency:type_name -> api.backoffice.service.v1.SystemCurrency
-	1, // 2: api.backoffice.service.v1.BackofficeSystem.AddSystemCurrency:input_type -> api.backoffice.service.v1.AddSystemCurrencyRequest
-	3, // 3: api.backoffice.service.v1.BackofficeSystem.ListSystemCurrencies:input_type -> api.backoffice.service.v1.ListSystemCurrenciesRequest
-	5, // 4: api.backoffice.service.v1.BackofficeSystem.UpdateSystemCurrency:input_type -> api.backoffice.service.v1.UpdateSystemCurrencyRequest
-	2, // 5: api.backoffice.service.v1.BackofficeSystem.AddSystemCurrency:output_type -> api.backoffice.service.v1.AddSystemCurrencyResponse
-	4, // 6: api.backoffice.service.v1.BackofficeSystem.ListSystemCurrencies:output_type -> api.backoffice.service.v1.ListSystemCurrenciesResponse
-	6, // 7: api.backoffice.service.v1.BackofficeSystem.UpdateSystemCurrency:output_type -> api.backoffice.service.v1.UpdateSystemCurrencyResponse
-	5, // [5:8] is the sub-list for method output_type
-	2, // [2:5] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	0, // 0: api.backoffice.service.v1.BackofficeSystem.ListIntegrityStatus:input_type -> api.backoffice.service.v1.ListIntegrityStatusRequest
+	1, // 1: api.backoffice.service.v1.BackofficeSystem.ListIntegrityStatus:output_type -> system.service.v1.ListIntegrityStatusResponse
+	1, // [1:2] is the sub-list for method output_type
+	0, // [0:1] is the sub-list for method input_type
+	0, // [0:0] is the sub-list for extension type_name
+	0, // [0:0] is the sub-list for extension extendee
+	0, // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_system_proto_init() }
@@ -638,15 +101,13 @@ func file_backoffice_service_v1_backoffice_system_proto_init() {
 	if File_backoffice_service_v1_backoffice_system_proto != nil {
 		return
 	}
-	file_backoffice_service_v1_backoffice_system_proto_msgTypes[3].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_system_proto_msgTypes[5].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_system_proto_rawDesc), len(file_backoffice_service_v1_backoffice_system_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

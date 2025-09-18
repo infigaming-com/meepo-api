@@ -8,6 +8,7 @@ package v1
 
 import (
 	context "context"
+	v1 "github.com/infigaming-com/meepo-api/system/service/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -19,18 +20,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeSystem_AddSystemCurrency_FullMethodName    = "/api.backoffice.service.v1.BackofficeSystem/AddSystemCurrency"
-	BackofficeSystem_ListSystemCurrencies_FullMethodName = "/api.backoffice.service.v1.BackofficeSystem/ListSystemCurrencies"
-	BackofficeSystem_UpdateSystemCurrency_FullMethodName = "/api.backoffice.service.v1.BackofficeSystem/UpdateSystemCurrency"
+	BackofficeSystem_ListIntegrityStatus_FullMethodName = "/api.backoffice.service.v1.BackofficeSystem/ListIntegrityStatus"
 )
 
 // BackofficeSystemClient is the client API for BackofficeSystem service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BackofficeSystemClient interface {
-	AddSystemCurrency(ctx context.Context, in *AddSystemCurrencyRequest, opts ...grpc.CallOption) (*AddSystemCurrencyResponse, error)
-	ListSystemCurrencies(ctx context.Context, in *ListSystemCurrenciesRequest, opts ...grpc.CallOption) (*ListSystemCurrenciesResponse, error)
-	UpdateSystemCurrency(ctx context.Context, in *UpdateSystemCurrencyRequest, opts ...grpc.CallOption) (*UpdateSystemCurrencyResponse, error)
+	ListIntegrityStatus(ctx context.Context, in *ListIntegrityStatusRequest, opts ...grpc.CallOption) (*v1.ListIntegrityStatusResponse, error)
 }
 
 type backofficeSystemClient struct {
@@ -41,30 +38,10 @@ func NewBackofficeSystemClient(cc grpc.ClientConnInterface) BackofficeSystemClie
 	return &backofficeSystemClient{cc}
 }
 
-func (c *backofficeSystemClient) AddSystemCurrency(ctx context.Context, in *AddSystemCurrencyRequest, opts ...grpc.CallOption) (*AddSystemCurrencyResponse, error) {
+func (c *backofficeSystemClient) ListIntegrityStatus(ctx context.Context, in *ListIntegrityStatusRequest, opts ...grpc.CallOption) (*v1.ListIntegrityStatusResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AddSystemCurrencyResponse)
-	err := c.cc.Invoke(ctx, BackofficeSystem_AddSystemCurrency_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *backofficeSystemClient) ListSystemCurrencies(ctx context.Context, in *ListSystemCurrenciesRequest, opts ...grpc.CallOption) (*ListSystemCurrenciesResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListSystemCurrenciesResponse)
-	err := c.cc.Invoke(ctx, BackofficeSystem_ListSystemCurrencies_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *backofficeSystemClient) UpdateSystemCurrency(ctx context.Context, in *UpdateSystemCurrencyRequest, opts ...grpc.CallOption) (*UpdateSystemCurrencyResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateSystemCurrencyResponse)
-	err := c.cc.Invoke(ctx, BackofficeSystem_UpdateSystemCurrency_FullMethodName, in, out, cOpts...)
+	out := new(v1.ListIntegrityStatusResponse)
+	err := c.cc.Invoke(ctx, BackofficeSystem_ListIntegrityStatus_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -75,9 +52,7 @@ func (c *backofficeSystemClient) UpdateSystemCurrency(ctx context.Context, in *U
 // All implementations must embed UnimplementedBackofficeSystemServer
 // for forward compatibility.
 type BackofficeSystemServer interface {
-	AddSystemCurrency(context.Context, *AddSystemCurrencyRequest) (*AddSystemCurrencyResponse, error)
-	ListSystemCurrencies(context.Context, *ListSystemCurrenciesRequest) (*ListSystemCurrenciesResponse, error)
-	UpdateSystemCurrency(context.Context, *UpdateSystemCurrencyRequest) (*UpdateSystemCurrencyResponse, error)
+	ListIntegrityStatus(context.Context, *ListIntegrityStatusRequest) (*v1.ListIntegrityStatusResponse, error)
 	mustEmbedUnimplementedBackofficeSystemServer()
 }
 
@@ -88,14 +63,8 @@ type BackofficeSystemServer interface {
 // pointer dereference when methods are called.
 type UnimplementedBackofficeSystemServer struct{}
 
-func (UnimplementedBackofficeSystemServer) AddSystemCurrency(context.Context, *AddSystemCurrencyRequest) (*AddSystemCurrencyResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddSystemCurrency not implemented")
-}
-func (UnimplementedBackofficeSystemServer) ListSystemCurrencies(context.Context, *ListSystemCurrenciesRequest) (*ListSystemCurrenciesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListSystemCurrencies not implemented")
-}
-func (UnimplementedBackofficeSystemServer) UpdateSystemCurrency(context.Context, *UpdateSystemCurrencyRequest) (*UpdateSystemCurrencyResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateSystemCurrency not implemented")
+func (UnimplementedBackofficeSystemServer) ListIntegrityStatus(context.Context, *ListIntegrityStatusRequest) (*v1.ListIntegrityStatusResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListIntegrityStatus not implemented")
 }
 func (UnimplementedBackofficeSystemServer) mustEmbedUnimplementedBackofficeSystemServer() {}
 func (UnimplementedBackofficeSystemServer) testEmbeddedByValue()                          {}
@@ -118,56 +87,20 @@ func RegisterBackofficeSystemServer(s grpc.ServiceRegistrar, srv BackofficeSyste
 	s.RegisterService(&BackofficeSystem_ServiceDesc, srv)
 }
 
-func _BackofficeSystem_AddSystemCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddSystemCurrencyRequest)
+func _BackofficeSystem_ListIntegrityStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListIntegrityStatusRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeSystemServer).AddSystemCurrency(ctx, in)
+		return srv.(BackofficeSystemServer).ListIntegrityStatus(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeSystem_AddSystemCurrency_FullMethodName,
+		FullMethod: BackofficeSystem_ListIntegrityStatus_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeSystemServer).AddSystemCurrency(ctx, req.(*AddSystemCurrencyRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BackofficeSystem_ListSystemCurrencies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListSystemCurrenciesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeSystemServer).ListSystemCurrencies(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeSystem_ListSystemCurrencies_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeSystemServer).ListSystemCurrencies(ctx, req.(*ListSystemCurrenciesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BackofficeSystem_UpdateSystemCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateSystemCurrencyRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeSystemServer).UpdateSystemCurrency(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeSystem_UpdateSystemCurrency_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeSystemServer).UpdateSystemCurrency(ctx, req.(*UpdateSystemCurrencyRequest))
+		return srv.(BackofficeSystemServer).ListIntegrityStatus(ctx, req.(*ListIntegrityStatusRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -180,16 +113,8 @@ var BackofficeSystem_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*BackofficeSystemServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "AddSystemCurrency",
-			Handler:    _BackofficeSystem_AddSystemCurrency_Handler,
-		},
-		{
-			MethodName: "ListSystemCurrencies",
-			Handler:    _BackofficeSystem_ListSystemCurrencies_Handler,
-		},
-		{
-			MethodName: "UpdateSystemCurrency",
-			Handler:    _BackofficeSystem_UpdateSystemCurrency_Handler,
+			MethodName: "ListIntegrityStatus",
+			Handler:    _BackofficeSystem_ListIntegrityStatus_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

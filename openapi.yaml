@@ -2623,16 +2623,16 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ReviewTicketResponse'
-    /v1/backoffice/system/currencies/add:
+    /v1/backoffice/system/integrity/status/list:
         post:
             tags:
                 - BackofficeSystem
-            operationId: BackofficeSystem_AddSystemCurrency
+            operationId: BackofficeSystem_ListIntegrityStatus
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.AddSystemCurrencyRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListIntegrityStatusRequest'
                 required: true
             responses:
                 "200":
@@ -2640,43 +2640,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.AddSystemCurrencyResponse'
-    /v1/backoffice/system/currencies/list:
-        post:
-            tags:
-                - BackofficeSystem
-            operationId: BackofficeSystem_ListSystemCurrencies
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListSystemCurrenciesRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListSystemCurrenciesResponse'
-    /v1/backoffice/system/currencies/update:
-        post:
-            tags:
-                - BackofficeSystem
-            operationId: BackofficeSystem_UpdateSystemCurrency
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateSystemCurrencyRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateSystemCurrencyResponse'
+                                $ref: '#/components/schemas/system.service.v1.ListIntegrityStatusResponse'
     /v1/backoffice/user/comments/add:
         post:
             tags:
@@ -5065,30 +5029,6 @@ components:
                     type: array
                     items:
                         type: string
-        api.backoffice.service.v1.AddSystemCurrencyRequest:
-            type: object
-            properties:
-                currency:
-                    type: string
-                enabled:
-                    type: boolean
-                hidden:
-                    type: boolean
-                type:
-                    type: string
-                symbol:
-                    type: string
-                icon:
-                    type: string
-                decimalPlaces:
-                    type: integer
-                    format: int32
-                currencyDecimalPlaces:
-                    type: integer
-                    format: int32
-        api.backoffice.service.v1.AddSystemCurrencyResponse:
-            type: object
-            properties: {}
         api.backoffice.service.v1.AddUserCommentRequest:
             type: object
             properties:
@@ -8145,6 +8085,9 @@ components:
                         type: string
                 enabled:
                     type: boolean
+        api.backoffice.service.v1.ListIntegrityStatusRequest:
+            type: object
+            properties: {}
         api.backoffice.service.v1.ListInvoicesRequest:
             type: object
             properties:
@@ -9271,33 +9214,6 @@ components:
                     type: string
                 ngrReportingCurrency:
                     type: string
-        api.backoffice.service.v1.ListSystemCurrenciesRequest:
-            type: object
-            properties:
-                currencies:
-                    type: array
-                    items:
-                        type: string
-                enabled:
-                    type: boolean
-                hidden:
-                    type: boolean
-        api.backoffice.service.v1.ListSystemCurrenciesResponse:
-            type: object
-            properties:
-                currencies:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.SystemCurrency'
-                total:
-                    type: integer
-                    format: int32
-                totalEnabled:
-                    type: integer
-                    format: int32
-                totalHidden:
-                    type: integer
-                    format: int32
         api.backoffice.service.v1.ListTagsRequest:
             type: object
             properties: {}
@@ -10469,27 +10385,6 @@ components:
         api.backoffice.service.v1.SetUserTagsResponse:
             type: object
             properties: {}
-        api.backoffice.service.v1.SystemCurrency:
-            type: object
-            properties:
-                currency:
-                    type: string
-                enabled:
-                    type: boolean
-                hidden:
-                    type: boolean
-                type:
-                    type: string
-                symbol:
-                    type: string
-                icon:
-                    type: string
-                decimalPlaces:
-                    type: integer
-                    format: int32
-                currencyDecimalPlaces:
-                    type: integer
-                    format: int32
         api.backoffice.service.v1.TimeRange:
             type: object
             properties:
@@ -10672,32 +10567,6 @@ components:
         api.backoffice.service.v1.UpdateRoleResponse:
             type: object
             properties: {}
-        api.backoffice.service.v1.UpdateSystemCurrencyRequest:
-            type: object
-            properties:
-                currency:
-                    type: string
-                enabled:
-                    type: boolean
-                hidden:
-                    type: boolean
-                type:
-                    type: string
-                symbol:
-                    type: string
-                icon:
-                    type: string
-                decimalPlaces:
-                    type: integer
-                    format: int32
-                currencyDecimalPlaces:
-                    type: integer
-                    format: int32
-        api.backoffice.service.v1.UpdateSystemCurrencyResponse:
-            type: object
-            properties:
-                currency:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.SystemCurrency'
         api.backoffice.service.v1.UpdateTaxReportConfigRequest:
             type: object
             properties:
@@ -15912,6 +15781,33 @@ components:
             description: |-
                 Response for withdraw callback
                  Confirms receipt of callback notification
+        system.service.v1.IntegrityFileInfo:
+            type: object
+            properties:
+                filePath:
+                    type: string
+                hash:
+                    type: string
+        system.service.v1.ListIntegrityStatusResponse:
+            type: object
+            properties:
+                integrityStatuses:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/system.service.v1.ListIntegrityStatusResponse_IntegrityStatus'
+        system.service.v1.ListIntegrityStatusResponse_IntegrityStatus:
+            type: object
+            properties:
+                labelApp:
+                    type: string
+                podName:
+                    type: string
+                podNamespace:
+                    type: string
+                fileInfos:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/system.service.v1.IntegrityFileInfo'
 tags:
     - name: BackofficeAccount
     - name: BackofficeAudit
