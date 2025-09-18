@@ -16,7 +16,7 @@ service BackofficeSystem {
 			body: "*"
 		};
 	}
-	rpc SetIntegrityFileInfoConfig(SetIntegrityFileInfoConfigRequest) returns (system.service.v1.SetIntegrityFileInfoConfigResponse) {
+	rpc SetIntegrityConfig(SetIntegrityConfigRequest) returns (system.service.v1.SetIntegrityConfigResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/system/integrity/file-info/config/set"
 			body: "*"
@@ -27,12 +27,8 @@ service BackofficeSystem {
 message ListIntegrityStatusRequest {
 }
 
-message SetIntegrityFileInfoConfigRequest {
-	message FileInfo {
-		string file_path = 1;
-		string hash = 2;
-	}
+message SetIntegrityConfigRequest {
 	string label_app = 1;
 	string pod_namespace = 2;
-	repeated FileInfo file_infos = 3;
+	repeated system.service.v1.FileInfo file_infos = 3;
 }

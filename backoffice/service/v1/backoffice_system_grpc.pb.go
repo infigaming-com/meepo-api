@@ -20,8 +20,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeSystem_ListIntegrityStatus_FullMethodName        = "/api.backoffice.service.v1.BackofficeSystem/ListIntegrityStatus"
-	BackofficeSystem_SetIntegrityFileInfoConfig_FullMethodName = "/api.backoffice.service.v1.BackofficeSystem/SetIntegrityFileInfoConfig"
+	BackofficeSystem_ListIntegrityStatus_FullMethodName = "/api.backoffice.service.v1.BackofficeSystem/ListIntegrityStatus"
+	BackofficeSystem_SetIntegrityConfig_FullMethodName  = "/api.backoffice.service.v1.BackofficeSystem/SetIntegrityConfig"
 )
 
 // BackofficeSystemClient is the client API for BackofficeSystem service.
@@ -29,7 +29,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BackofficeSystemClient interface {
 	ListIntegrityStatus(ctx context.Context, in *ListIntegrityStatusRequest, opts ...grpc.CallOption) (*v1.ListIntegrityStatusResponse, error)
-	SetIntegrityFileInfoConfig(ctx context.Context, in *SetIntegrityFileInfoConfigRequest, opts ...grpc.CallOption) (*v1.SetIntegrityFileInfoConfigResponse, error)
+	SetIntegrityConfig(ctx context.Context, in *SetIntegrityConfigRequest, opts ...grpc.CallOption) (*v1.SetIntegrityConfigResponse, error)
 }
 
 type backofficeSystemClient struct {
@@ -50,10 +50,10 @@ func (c *backofficeSystemClient) ListIntegrityStatus(ctx context.Context, in *Li
 	return out, nil
 }
 
-func (c *backofficeSystemClient) SetIntegrityFileInfoConfig(ctx context.Context, in *SetIntegrityFileInfoConfigRequest, opts ...grpc.CallOption) (*v1.SetIntegrityFileInfoConfigResponse, error) {
+func (c *backofficeSystemClient) SetIntegrityConfig(ctx context.Context, in *SetIntegrityConfigRequest, opts ...grpc.CallOption) (*v1.SetIntegrityConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.SetIntegrityFileInfoConfigResponse)
-	err := c.cc.Invoke(ctx, BackofficeSystem_SetIntegrityFileInfoConfig_FullMethodName, in, out, cOpts...)
+	out := new(v1.SetIntegrityConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeSystem_SetIntegrityConfig_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ func (c *backofficeSystemClient) SetIntegrityFileInfoConfig(ctx context.Context,
 // for forward compatibility.
 type BackofficeSystemServer interface {
 	ListIntegrityStatus(context.Context, *ListIntegrityStatusRequest) (*v1.ListIntegrityStatusResponse, error)
-	SetIntegrityFileInfoConfig(context.Context, *SetIntegrityFileInfoConfigRequest) (*v1.SetIntegrityFileInfoConfigResponse, error)
+	SetIntegrityConfig(context.Context, *SetIntegrityConfigRequest) (*v1.SetIntegrityConfigResponse, error)
 	mustEmbedUnimplementedBackofficeSystemServer()
 }
 
@@ -79,8 +79,8 @@ type UnimplementedBackofficeSystemServer struct{}
 func (UnimplementedBackofficeSystemServer) ListIntegrityStatus(context.Context, *ListIntegrityStatusRequest) (*v1.ListIntegrityStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListIntegrityStatus not implemented")
 }
-func (UnimplementedBackofficeSystemServer) SetIntegrityFileInfoConfig(context.Context, *SetIntegrityFileInfoConfigRequest) (*v1.SetIntegrityFileInfoConfigResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetIntegrityFileInfoConfig not implemented")
+func (UnimplementedBackofficeSystemServer) SetIntegrityConfig(context.Context, *SetIntegrityConfigRequest) (*v1.SetIntegrityConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetIntegrityConfig not implemented")
 }
 func (UnimplementedBackofficeSystemServer) mustEmbedUnimplementedBackofficeSystemServer() {}
 func (UnimplementedBackofficeSystemServer) testEmbeddedByValue()                          {}
@@ -121,20 +121,20 @@ func _BackofficeSystem_ListIntegrityStatus_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeSystem_SetIntegrityFileInfoConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetIntegrityFileInfoConfigRequest)
+func _BackofficeSystem_SetIntegrityConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetIntegrityConfigRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeSystemServer).SetIntegrityFileInfoConfig(ctx, in)
+		return srv.(BackofficeSystemServer).SetIntegrityConfig(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeSystem_SetIntegrityFileInfoConfig_FullMethodName,
+		FullMethod: BackofficeSystem_SetIntegrityConfig_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeSystemServer).SetIntegrityFileInfoConfig(ctx, req.(*SetIntegrityFileInfoConfigRequest))
+		return srv.(BackofficeSystemServer).SetIntegrityConfig(ctx, req.(*SetIntegrityConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -151,8 +151,8 @@ var BackofficeSystem_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BackofficeSystem_ListIntegrityStatus_Handler,
 		},
 		{
-			MethodName: "SetIntegrityFileInfoConfig",
-			Handler:    _BackofficeSystem_SetIntegrityFileInfoConfig_Handler,
+			MethodName: "SetIntegrityConfig",
+			Handler:    _BackofficeSystem_SetIntegrityConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

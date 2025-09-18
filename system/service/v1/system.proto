@@ -12,6 +12,7 @@ option java_package = "system.service.v1";
 service System {
 	rpc AddIntegrityReport(AddIntegrityReportRequest) returns (AddIntegrityReportResponse) {}
 	rpc ListIntegrityStatus(ListIntegrityStatusRequest) returns (ListIntegrityStatusResponse) {}
+	rpc SetIntegrityConfig(SetIntegrityConfigRequest) returns (SetIntegrityConfigResponse) {}
 }
 
 message FileInfo {
@@ -49,12 +50,12 @@ message ListIntegrityStatusResponse {
 	repeated IntegrityStatus integrity_statuses = 1;
 }
 
-message SetIntegrityFileInfoConfigRequest {
+message SetIntegrityConfigRequest {
 	api.common.OperatorContext operator_context = 1;
 	string label_app = 2;
 	string pod_namespace = 3;
 	repeated FileInfo file_infos = 4;
 }
 
-message SetIntegrityFileInfoConfigResponse {
+message SetIntegrityConfigResponse {
 }

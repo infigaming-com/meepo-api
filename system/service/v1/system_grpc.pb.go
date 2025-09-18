@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	System_AddIntegrityReport_FullMethodName  = "/system.service.v1.System/AddIntegrityReport"
 	System_ListIntegrityStatus_FullMethodName = "/system.service.v1.System/ListIntegrityStatus"
+	System_SetIntegrityConfig_FullMethodName  = "/system.service.v1.System/SetIntegrityConfig"
 )
 
 // SystemClient is the client API for System service.
@@ -29,6 +30,7 @@ const (
 type SystemClient interface {
 	AddIntegrityReport(ctx context.Context, in *AddIntegrityReportRequest, opts ...grpc.CallOption) (*AddIntegrityReportResponse, error)
 	ListIntegrityStatus(ctx context.Context, in *ListIntegrityStatusRequest, opts ...grpc.CallOption) (*ListIntegrityStatusResponse, error)
+	SetIntegrityConfig(ctx context.Context, in *SetIntegrityConfigRequest, opts ...grpc.CallOption) (*SetIntegrityConfigResponse, error)
 }
 
 type systemClient struct {
@@ -59,12 +61,23 @@ func (c *systemClient) ListIntegrityStatus(ctx context.Context, in *ListIntegrit
 	return out, nil
 }
 
+func (c *systemClient) SetIntegrityConfig(ctx context.Context, in *SetIntegrityConfigRequest, opts ...grpc.CallOption) (*SetIntegrityConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetIntegrityConfigResponse)
+	err := c.cc.Invoke(ctx, System_SetIntegrityConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SystemServer is the server API for System service.
 // All implementations must embed UnimplementedSystemServer
 // for forward compatibility.
 type SystemServer interface {
 	AddIntegrityReport(context.Context, *AddIntegrityReportRequest) (*AddIntegrityReportResponse, error)
 	ListIntegrityStatus(context.Context, *ListIntegrityStatusRequest) (*ListIntegrityStatusResponse, error)
+	SetIntegrityConfig(context.Context, *SetIntegrityConfigRequest) (*SetIntegrityConfigResponse, error)
 	mustEmbedUnimplementedSystemServer()
 }
 
@@ -80,6 +93,9 @@ func (UnimplementedSystemServer) AddIntegrityReport(context.Context, *AddIntegri
 }
 func (UnimplementedSystemServer) ListIntegrityStatus(context.Context, *ListIntegrityStatusRequest) (*ListIntegrityStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListIntegrityStatus not implemented")
+}
+func (UnimplementedSystemServer) SetIntegrityConfig(context.Context, *SetIntegrityConfigRequest) (*SetIntegrityConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetIntegrityConfig not implemented")
 }
 func (UnimplementedSystemServer) mustEmbedUnimplementedSystemServer() {}
 func (UnimplementedSystemServer) testEmbeddedByValue()                {}
@@ -138,6 +154,24 @@ func _System_ListIntegrityStatus_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _System_SetIntegrityConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetIntegrityConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServer).SetIntegrityConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: System_SetIntegrityConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServer).SetIntegrityConfig(ctx, req.(*SetIntegrityConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // System_ServiceDesc is the grpc.ServiceDesc for System service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -152,6 +186,10 @@ var System_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListIntegrityStatus",
 			Handler:    _System_ListIntegrityStatus_Handler,
+		},
+		{
+			MethodName: "SetIntegrityConfig",
+			Handler:    _System_SetIntegrityConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
