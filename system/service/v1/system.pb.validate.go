@@ -653,6 +653,283 @@ var _ interface {
 	ErrorName() string
 } = ListIntegrityStatusResponseValidationError{}
 
+// Validate checks the field values on SetIntegrityFileInfoConfigRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *SetIntegrityFileInfoConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SetIntegrityFileInfoConfigRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// SetIntegrityFileInfoConfigRequestMultiError, or nil if none found.
+func (m *SetIntegrityFileInfoConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetIntegrityFileInfoConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SetIntegrityFileInfoConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SetIntegrityFileInfoConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SetIntegrityFileInfoConfigRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for LabelApp
+
+	// no validation rules for PodNamespace
+
+	for idx, item := range m.GetFileInfos() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, SetIntegrityFileInfoConfigRequestValidationError{
+						field:  fmt.Sprintf("FileInfos[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, SetIntegrityFileInfoConfigRequestValidationError{
+						field:  fmt.Sprintf("FileInfos[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return SetIntegrityFileInfoConfigRequestValidationError{
+					field:  fmt.Sprintf("FileInfos[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return SetIntegrityFileInfoConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetIntegrityFileInfoConfigRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// SetIntegrityFileInfoConfigRequest.ValidateAll() if the designated
+// constraints aren't met.
+type SetIntegrityFileInfoConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetIntegrityFileInfoConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetIntegrityFileInfoConfigRequestMultiError) AllErrors() []error { return m }
+
+// SetIntegrityFileInfoConfigRequestValidationError is the validation error
+// returned by SetIntegrityFileInfoConfigRequest.Validate if the designated
+// constraints aren't met.
+type SetIntegrityFileInfoConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetIntegrityFileInfoConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetIntegrityFileInfoConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetIntegrityFileInfoConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetIntegrityFileInfoConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetIntegrityFileInfoConfigRequestValidationError) ErrorName() string {
+	return "SetIntegrityFileInfoConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetIntegrityFileInfoConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetIntegrityFileInfoConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetIntegrityFileInfoConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetIntegrityFileInfoConfigRequestValidationError{}
+
+// Validate checks the field values on SetIntegrityFileInfoConfigResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *SetIntegrityFileInfoConfigResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SetIntegrityFileInfoConfigResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// SetIntegrityFileInfoConfigResponseMultiError, or nil if none found.
+func (m *SetIntegrityFileInfoConfigResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetIntegrityFileInfoConfigResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return SetIntegrityFileInfoConfigResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetIntegrityFileInfoConfigResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// SetIntegrityFileInfoConfigResponse.ValidateAll() if the designated
+// constraints aren't met.
+type SetIntegrityFileInfoConfigResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetIntegrityFileInfoConfigResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetIntegrityFileInfoConfigResponseMultiError) AllErrors() []error { return m }
+
+// SetIntegrityFileInfoConfigResponseValidationError is the validation error
+// returned by SetIntegrityFileInfoConfigResponse.Validate if the designated
+// constraints aren't met.
+type SetIntegrityFileInfoConfigResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetIntegrityFileInfoConfigResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetIntegrityFileInfoConfigResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetIntegrityFileInfoConfigResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetIntegrityFileInfoConfigResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetIntegrityFileInfoConfigResponseValidationError) ErrorName() string {
+	return "SetIntegrityFileInfoConfigResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetIntegrityFileInfoConfigResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetIntegrityFileInfoConfigResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetIntegrityFileInfoConfigResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetIntegrityFileInfoConfigResponseValidationError{}
+
 // Validate checks the field values on
 // ListIntegrityStatusResponse_IntegrityStatus with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
@@ -715,6 +992,35 @@ func (m *ListIntegrityStatusResponse_IntegrityStatus) validate(all bool) error {
 			}
 		}
 
+	}
+
+	if all {
+		switch v := interface{}(m.GetCreatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListIntegrityStatusResponse_IntegrityStatusValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListIntegrityStatusResponse_IntegrityStatusValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListIntegrityStatusResponse_IntegrityStatusValidationError{
+				field:  "CreatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
 	}
 
 	if len(errors) > 0 {

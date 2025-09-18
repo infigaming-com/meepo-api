@@ -59,14 +59,80 @@ func (*ListIntegrityStatusRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP(), []int{0}
 }
 
+type SetIntegrityFileInfoConfigRequest struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	LabelApp      string                  `protobuf:"bytes,1,opt,name=label_app,json=labelApp,proto3" json:"label_app,omitempty"`
+	PodNamespace  string                  `protobuf:"bytes,2,opt,name=pod_namespace,json=podNamespace,proto3" json:"pod_namespace,omitempty"`
+	FileInfos     []*v1.IntegrityFileInfo `protobuf:"bytes,3,rep,name=file_infos,json=fileInfos,proto3" json:"file_infos,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetIntegrityFileInfoConfigRequest) Reset() {
+	*x = SetIntegrityFileInfoConfigRequest{}
+	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetIntegrityFileInfoConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetIntegrityFileInfoConfigRequest) ProtoMessage() {}
+
+func (x *SetIntegrityFileInfoConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetIntegrityFileInfoConfigRequest.ProtoReflect.Descriptor instead.
+func (*SetIntegrityFileInfoConfigRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *SetIntegrityFileInfoConfigRequest) GetLabelApp() string {
+	if x != nil {
+		return x.LabelApp
+	}
+	return ""
+}
+
+func (x *SetIntegrityFileInfoConfigRequest) GetPodNamespace() string {
+	if x != nil {
+		return x.PodNamespace
+	}
+	return ""
+}
+
+func (x *SetIntegrityFileInfoConfigRequest) GetFileInfos() []*v1.IntegrityFileInfo {
+	if x != nil {
+		return x.FileInfos
+	}
+	return nil
+}
+
 var File_backoffice_service_v1_backoffice_system_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_system_proto_rawDesc = "" +
 	"\n" +
 	"-backoffice/service/v1/backoffice_system.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1esystem/service/v1/system.proto\"\x1c\n" +
-	"\x1aListIntegrityStatusRequest2\xc9\x01\n" +
+	"\x1aListIntegrityStatusRequest\"\xaa\x01\n" +
+	"!SetIntegrityFileInfoConfigRequest\x12\x1b\n" +
+	"\tlabel_app\x18\x01 \x01(\tR\blabelApp\x12#\n" +
+	"\rpod_namespace\x18\x02 \x01(\tR\fpodNamespace\x12C\n" +
+	"\n" +
+	"file_infos\x18\x03 \x03(\v2$.system.service.v1.IntegrityFileInfoR\tfileInfos2\x9e\x03\n" +
 	"\x10BackofficeSystem\x12\xb4\x01\n" +
-	"\x13ListIntegrityStatus\x125.api.backoffice.service.v1.ListIntegrityStatusRequest\x1a..system.service.v1.ListIntegrityStatusResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/system/integrity/status/listB[\n" +
+	"\x13ListIntegrityStatus\x125.api.backoffice.service.v1.ListIntegrityStatusRequest\x1a..system.service.v1.ListIntegrityStatusResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/system/integrity/status/list\x12\xd2\x01\n" +
+	"\x1aSetIntegrityFileInfoConfig\x12<.api.backoffice.service.v1.SetIntegrityFileInfoConfigRequest\x1a5.system.service.v1.SetIntegrityFileInfoConfigResponse\"?\x82\xd3\xe4\x93\x029:\x01*\"4/v1/backoffice/system/integrity/file-info/config/setB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -81,19 +147,25 @@ func file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_system_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_system_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_backoffice_service_v1_backoffice_system_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_backoffice_service_v1_backoffice_system_proto_goTypes = []any{
-	(*ListIntegrityStatusRequest)(nil),     // 0: api.backoffice.service.v1.ListIntegrityStatusRequest
-	(*v1.ListIntegrityStatusResponse)(nil), // 1: system.service.v1.ListIntegrityStatusResponse
+	(*ListIntegrityStatusRequest)(nil),            // 0: api.backoffice.service.v1.ListIntegrityStatusRequest
+	(*SetIntegrityFileInfoConfigRequest)(nil),     // 1: api.backoffice.service.v1.SetIntegrityFileInfoConfigRequest
+	(*v1.IntegrityFileInfo)(nil),                  // 2: system.service.v1.IntegrityFileInfo
+	(*v1.ListIntegrityStatusResponse)(nil),        // 3: system.service.v1.ListIntegrityStatusResponse
+	(*v1.SetIntegrityFileInfoConfigResponse)(nil), // 4: system.service.v1.SetIntegrityFileInfoConfigResponse
 }
 var file_backoffice_service_v1_backoffice_system_proto_depIdxs = []int32{
-	0, // 0: api.backoffice.service.v1.BackofficeSystem.ListIntegrityStatus:input_type -> api.backoffice.service.v1.ListIntegrityStatusRequest
-	1, // 1: api.backoffice.service.v1.BackofficeSystem.ListIntegrityStatus:output_type -> system.service.v1.ListIntegrityStatusResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	2, // 0: api.backoffice.service.v1.SetIntegrityFileInfoConfigRequest.file_infos:type_name -> system.service.v1.IntegrityFileInfo
+	0, // 1: api.backoffice.service.v1.BackofficeSystem.ListIntegrityStatus:input_type -> api.backoffice.service.v1.ListIntegrityStatusRequest
+	1, // 2: api.backoffice.service.v1.BackofficeSystem.SetIntegrityFileInfoConfig:input_type -> api.backoffice.service.v1.SetIntegrityFileInfoConfigRequest
+	3, // 3: api.backoffice.service.v1.BackofficeSystem.ListIntegrityStatus:output_type -> system.service.v1.ListIntegrityStatusResponse
+	4, // 4: api.backoffice.service.v1.BackofficeSystem.SetIntegrityFileInfoConfig:output_type -> system.service.v1.SetIntegrityFileInfoConfigResponse
+	3, // [3:5] is the sub-list for method output_type
+	1, // [1:3] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_system_proto_init() }
@@ -107,7 +179,7 @@ func file_backoffice_service_v1_backoffice_system_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_system_proto_rawDesc), len(file_backoffice_service_v1_backoffice_system_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
