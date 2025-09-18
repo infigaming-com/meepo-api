@@ -21,6 +21,9 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	System_AddIntegrityReport_FullMethodName  = "/system.service.v1.System/AddIntegrityReport"
 	System_ListIntegrityStatus_FullMethodName = "/system.service.v1.System/ListIntegrityStatus"
+	System_ListTask_FullMethodName            = "/system.service.v1.System/ListTask"
+	System_CreateTask_FullMethodName          = "/system.service.v1.System/CreateTask"
+	System_UpdateTask_FullMethodName          = "/system.service.v1.System/UpdateTask"
 	System_SetIntegrityConfig_FullMethodName  = "/system.service.v1.System/SetIntegrityConfig"
 )
 
@@ -30,6 +33,9 @@ const (
 type SystemClient interface {
 	AddIntegrityReport(ctx context.Context, in *AddIntegrityReportRequest, opts ...grpc.CallOption) (*AddIntegrityReportResponse, error)
 	ListIntegrityStatus(ctx context.Context, in *ListIntegrityStatusRequest, opts ...grpc.CallOption) (*ListIntegrityStatusResponse, error)
+	ListTask(ctx context.Context, in *ListTaskRequest, opts ...grpc.CallOption) (*ListTaskResponse, error)
+	CreateTask(ctx context.Context, in *CreateTaskRequest, opts ...grpc.CallOption) (*CreateTaskResponse, error)
+	UpdateTask(ctx context.Context, in *UpdateTaskRequest, opts ...grpc.CallOption) (*UpdateTaskResponse, error)
 	SetIntegrityConfig(ctx context.Context, in *SetIntegrityConfigRequest, opts ...grpc.CallOption) (*SetIntegrityConfigResponse, error)
 }
 
@@ -61,6 +67,36 @@ func (c *systemClient) ListIntegrityStatus(ctx context.Context, in *ListIntegrit
 	return out, nil
 }
 
+func (c *systemClient) ListTask(ctx context.Context, in *ListTaskRequest, opts ...grpc.CallOption) (*ListTaskResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListTaskResponse)
+	err := c.cc.Invoke(ctx, System_ListTask_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *systemClient) CreateTask(ctx context.Context, in *CreateTaskRequest, opts ...grpc.CallOption) (*CreateTaskResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateTaskResponse)
+	err := c.cc.Invoke(ctx, System_CreateTask_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *systemClient) UpdateTask(ctx context.Context, in *UpdateTaskRequest, opts ...grpc.CallOption) (*UpdateTaskResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateTaskResponse)
+	err := c.cc.Invoke(ctx, System_UpdateTask_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *systemClient) SetIntegrityConfig(ctx context.Context, in *SetIntegrityConfigRequest, opts ...grpc.CallOption) (*SetIntegrityConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SetIntegrityConfigResponse)
@@ -77,6 +113,9 @@ func (c *systemClient) SetIntegrityConfig(ctx context.Context, in *SetIntegrityC
 type SystemServer interface {
 	AddIntegrityReport(context.Context, *AddIntegrityReportRequest) (*AddIntegrityReportResponse, error)
 	ListIntegrityStatus(context.Context, *ListIntegrityStatusRequest) (*ListIntegrityStatusResponse, error)
+	ListTask(context.Context, *ListTaskRequest) (*ListTaskResponse, error)
+	CreateTask(context.Context, *CreateTaskRequest) (*CreateTaskResponse, error)
+	UpdateTask(context.Context, *UpdateTaskRequest) (*UpdateTaskResponse, error)
 	SetIntegrityConfig(context.Context, *SetIntegrityConfigRequest) (*SetIntegrityConfigResponse, error)
 	mustEmbedUnimplementedSystemServer()
 }
@@ -93,6 +132,15 @@ func (UnimplementedSystemServer) AddIntegrityReport(context.Context, *AddIntegri
 }
 func (UnimplementedSystemServer) ListIntegrityStatus(context.Context, *ListIntegrityStatusRequest) (*ListIntegrityStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListIntegrityStatus not implemented")
+}
+func (UnimplementedSystemServer) ListTask(context.Context, *ListTaskRequest) (*ListTaskResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTask not implemented")
+}
+func (UnimplementedSystemServer) CreateTask(context.Context, *CreateTaskRequest) (*CreateTaskResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTask not implemented")
+}
+func (UnimplementedSystemServer) UpdateTask(context.Context, *UpdateTaskRequest) (*UpdateTaskResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTask not implemented")
 }
 func (UnimplementedSystemServer) SetIntegrityConfig(context.Context, *SetIntegrityConfigRequest) (*SetIntegrityConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetIntegrityConfig not implemented")
@@ -154,6 +202,60 @@ func _System_ListIntegrityStatus_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _System_ListTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListTaskRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServer).ListTask(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: System_ListTask_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServer).ListTask(ctx, req.(*ListTaskRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _System_CreateTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateTaskRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServer).CreateTask(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: System_CreateTask_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServer).CreateTask(ctx, req.(*CreateTaskRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _System_UpdateTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTaskRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServer).UpdateTask(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: System_UpdateTask_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServer).UpdateTask(ctx, req.(*UpdateTaskRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _System_SetIntegrityConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SetIntegrityConfigRequest)
 	if err := dec(in); err != nil {
@@ -186,6 +288,18 @@ var System_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListIntegrityStatus",
 			Handler:    _System_ListIntegrityStatus_Handler,
+		},
+		{
+			MethodName: "ListTask",
+			Handler:    _System_ListTask_Handler,
+		},
+		{
+			MethodName: "CreateTask",
+			Handler:    _System_CreateTask_Handler,
+		},
+		{
+			MethodName: "UpdateTask",
+			Handler:    _System_UpdateTask_Handler,
 		},
 		{
 			MethodName: "SetIntegrityConfig",
