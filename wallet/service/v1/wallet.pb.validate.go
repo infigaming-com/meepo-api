@@ -16313,6 +16313,327 @@ var _ interface {
 	ErrorName() string
 } = ListCustomerRecordsResponseValidationError{}
 
+// Validate checks the field values on ExportCustomerRecordsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ExportCustomerRecordsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ExportCustomerRecordsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ExportCustomerRecordsRequestMultiError, or nil if none found.
+func (m *ExportCustomerRecordsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ExportCustomerRecordsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Format
+
+	// no validation rules for TimeZone
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ExportCustomerRecordsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ExportCustomerRecordsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ExportCustomerRecordsRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for InitiatorUserId
+
+	if m.StartTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetStartTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ExportCustomerRecordsRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ExportCustomerRecordsRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ExportCustomerRecordsRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.EndTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetEndTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ExportCustomerRecordsRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ExportCustomerRecordsRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ExportCustomerRecordsRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.UserId != nil {
+		// no validation rules for UserId
+	}
+
+	if m.TransactionId != nil {
+		// no validation rules for TransactionId
+	}
+
+	if m.TransactionType != nil {
+		// no validation rules for TransactionType
+	}
+
+	if len(errors) > 0 {
+		return ExportCustomerRecordsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ExportCustomerRecordsRequestMultiError is an error wrapping multiple
+// validation errors returned by ExportCustomerRecordsRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ExportCustomerRecordsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ExportCustomerRecordsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ExportCustomerRecordsRequestMultiError) AllErrors() []error { return m }
+
+// ExportCustomerRecordsRequestValidationError is the validation error returned
+// by ExportCustomerRecordsRequest.Validate if the designated constraints
+// aren't met.
+type ExportCustomerRecordsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ExportCustomerRecordsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ExportCustomerRecordsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ExportCustomerRecordsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ExportCustomerRecordsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ExportCustomerRecordsRequestValidationError) ErrorName() string {
+	return "ExportCustomerRecordsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ExportCustomerRecordsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sExportCustomerRecordsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ExportCustomerRecordsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ExportCustomerRecordsRequestValidationError{}
+
+// Validate checks the field values on ExportCustomerRecordsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ExportCustomerRecordsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ExportCustomerRecordsResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ExportCustomerRecordsResponseMultiError, or nil if none found.
+func (m *ExportCustomerRecordsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ExportCustomerRecordsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TaskId
+
+	if len(errors) > 0 {
+		return ExportCustomerRecordsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ExportCustomerRecordsResponseMultiError is an error wrapping multiple
+// validation errors returned by ExportCustomerRecordsResponse.ValidateAll()
+// if the designated constraints aren't met.
+type ExportCustomerRecordsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ExportCustomerRecordsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ExportCustomerRecordsResponseMultiError) AllErrors() []error { return m }
+
+// ExportCustomerRecordsResponseValidationError is the validation error
+// returned by ExportCustomerRecordsResponse.Validate if the designated
+// constraints aren't met.
+type ExportCustomerRecordsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ExportCustomerRecordsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ExportCustomerRecordsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ExportCustomerRecordsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ExportCustomerRecordsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ExportCustomerRecordsResponseValidationError) ErrorName() string {
+	return "ExportCustomerRecordsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ExportCustomerRecordsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sExportCustomerRecordsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ExportCustomerRecordsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ExportCustomerRecordsResponseValidationError{}
+
 // Validate checks the field values on FICAThresholdConfig with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -17361,22 +17682,24 @@ var _ interface {
 	ErrorName() string
 } = ListFICAThresholdTransactionsResponseValidationError{}
 
-// Validate checks the field values on ExportCustomerRecordsRequest with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ExportCustomerRecordsRequest) Validate() error {
+// Validate checks the field values on ExportFICAThresholdTransactionsRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ExportFICAThresholdTransactionsRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ExportCustomerRecordsRequest with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// ExportCustomerRecordsRequestMultiError, or nil if none found.
-func (m *ExportCustomerRecordsRequest) ValidateAll() error {
+// ValidateAll checks the field values on
+// ExportFICAThresholdTransactionsRequest with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// ExportFICAThresholdTransactionsRequestMultiError, or nil if none found.
+func (m *ExportFICAThresholdTransactionsRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ExportCustomerRecordsRequest) validate(all bool) error {
+func (m *ExportFICAThresholdTransactionsRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -17391,7 +17714,7 @@ func (m *ExportCustomerRecordsRequest) validate(all bool) error {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ExportCustomerRecordsRequestValidationError{
+				errors = append(errors, ExportFICAThresholdTransactionsRequestValidationError{
 					field:  "OperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -17399,7 +17722,7 @@ func (m *ExportCustomerRecordsRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, ExportCustomerRecordsRequestValidationError{
+				errors = append(errors, ExportFICAThresholdTransactionsRequestValidationError{
 					field:  "OperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -17408,7 +17731,7 @@ func (m *ExportCustomerRecordsRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return ExportCustomerRecordsRequestValidationError{
+			return ExportFICAThresholdTransactionsRequestValidationError{
 				field:  "OperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -17424,7 +17747,7 @@ func (m *ExportCustomerRecordsRequest) validate(all bool) error {
 			switch v := interface{}(m.GetStartTime()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ExportCustomerRecordsRequestValidationError{
+					errors = append(errors, ExportFICAThresholdTransactionsRequestValidationError{
 						field:  "StartTime",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -17432,7 +17755,7 @@ func (m *ExportCustomerRecordsRequest) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ExportCustomerRecordsRequestValidationError{
+					errors = append(errors, ExportFICAThresholdTransactionsRequestValidationError{
 						field:  "StartTime",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -17441,7 +17764,7 @@ func (m *ExportCustomerRecordsRequest) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ExportCustomerRecordsRequestValidationError{
+				return ExportFICAThresholdTransactionsRequestValidationError{
 					field:  "StartTime",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -17457,7 +17780,7 @@ func (m *ExportCustomerRecordsRequest) validate(all bool) error {
 			switch v := interface{}(m.GetEndTime()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ExportCustomerRecordsRequestValidationError{
+					errors = append(errors, ExportFICAThresholdTransactionsRequestValidationError{
 						field:  "EndTime",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -17465,7 +17788,7 @@ func (m *ExportCustomerRecordsRequest) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ExportCustomerRecordsRequestValidationError{
+					errors = append(errors, ExportFICAThresholdTransactionsRequestValidationError{
 						field:  "EndTime",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -17474,7 +17797,7 @@ func (m *ExportCustomerRecordsRequest) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ExportCustomerRecordsRequestValidationError{
+				return ExportFICAThresholdTransactionsRequestValidationError{
 					field:  "EndTime",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -17484,32 +17807,33 @@ func (m *ExportCustomerRecordsRequest) validate(all bool) error {
 
 	}
 
-	if m.UserId != nil {
-		// no validation rules for UserId
-	}
-
-	if m.TransactionId != nil {
-		// no validation rules for TransactionId
-	}
-
 	if m.TransactionType != nil {
 		// no validation rules for TransactionType
 	}
 
+	if m.Currency != nil {
+		// no validation rules for Currency
+	}
+
+	if m.KycLevel != nil {
+		// no validation rules for KycLevel
+	}
+
 	if len(errors) > 0 {
-		return ExportCustomerRecordsRequestMultiError(errors)
+		return ExportFICAThresholdTransactionsRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// ExportCustomerRecordsRequestMultiError is an error wrapping multiple
-// validation errors returned by ExportCustomerRecordsRequest.ValidateAll() if
-// the designated constraints aren't met.
-type ExportCustomerRecordsRequestMultiError []error
+// ExportFICAThresholdTransactionsRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// ExportFICAThresholdTransactionsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ExportFICAThresholdTransactionsRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ExportCustomerRecordsRequestMultiError) Error() string {
+func (m ExportFICAThresholdTransactionsRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -17518,12 +17842,12 @@ func (m ExportCustomerRecordsRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ExportCustomerRecordsRequestMultiError) AllErrors() []error { return m }
+func (m ExportFICAThresholdTransactionsRequestMultiError) AllErrors() []error { return m }
 
-// ExportCustomerRecordsRequestValidationError is the validation error returned
-// by ExportCustomerRecordsRequest.Validate if the designated constraints
-// aren't met.
-type ExportCustomerRecordsRequestValidationError struct {
+// ExportFICAThresholdTransactionsRequestValidationError is the validation
+// error returned by ExportFICAThresholdTransactionsRequest.Validate if the
+// designated constraints aren't met.
+type ExportFICAThresholdTransactionsRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -17531,24 +17855,24 @@ type ExportCustomerRecordsRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e ExportCustomerRecordsRequestValidationError) Field() string { return e.field }
+func (e ExportFICAThresholdTransactionsRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ExportCustomerRecordsRequestValidationError) Reason() string { return e.reason }
+func (e ExportFICAThresholdTransactionsRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ExportCustomerRecordsRequestValidationError) Cause() error { return e.cause }
+func (e ExportFICAThresholdTransactionsRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ExportCustomerRecordsRequestValidationError) Key() bool { return e.key }
+func (e ExportFICAThresholdTransactionsRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ExportCustomerRecordsRequestValidationError) ErrorName() string {
-	return "ExportCustomerRecordsRequestValidationError"
+func (e ExportFICAThresholdTransactionsRequestValidationError) ErrorName() string {
+	return "ExportFICAThresholdTransactionsRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ExportCustomerRecordsRequestValidationError) Error() string {
+func (e ExportFICAThresholdTransactionsRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -17560,14 +17884,14 @@ func (e ExportCustomerRecordsRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sExportCustomerRecordsRequest.%s: %s%s",
+		"invalid %sExportFICAThresholdTransactionsRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ExportCustomerRecordsRequestValidationError{}
+var _ error = ExportFICAThresholdTransactionsRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -17575,24 +17899,26 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ExportCustomerRecordsRequestValidationError{}
+} = ExportFICAThresholdTransactionsRequestValidationError{}
 
-// Validate checks the field values on ExportCustomerRecordsResponse with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ExportCustomerRecordsResponse) Validate() error {
+// Validate checks the field values on ExportFICAThresholdTransactionsResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ExportFICAThresholdTransactionsResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ExportCustomerRecordsResponse with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the result is a list of violation errors wrapped in
-// ExportCustomerRecordsResponseMultiError, or nil if none found.
-func (m *ExportCustomerRecordsResponse) ValidateAll() error {
+// ValidateAll checks the field values on
+// ExportFICAThresholdTransactionsResponse with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// ExportFICAThresholdTransactionsResponseMultiError, or nil if none found.
+func (m *ExportFICAThresholdTransactionsResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ExportCustomerRecordsResponse) validate(all bool) error {
+func (m *ExportFICAThresholdTransactionsResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -17602,19 +17928,20 @@ func (m *ExportCustomerRecordsResponse) validate(all bool) error {
 	// no validation rules for TaskId
 
 	if len(errors) > 0 {
-		return ExportCustomerRecordsResponseMultiError(errors)
+		return ExportFICAThresholdTransactionsResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// ExportCustomerRecordsResponseMultiError is an error wrapping multiple
-// validation errors returned by ExportCustomerRecordsResponse.ValidateAll()
-// if the designated constraints aren't met.
-type ExportCustomerRecordsResponseMultiError []error
+// ExportFICAThresholdTransactionsResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// ExportFICAThresholdTransactionsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ExportFICAThresholdTransactionsResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ExportCustomerRecordsResponseMultiError) Error() string {
+func (m ExportFICAThresholdTransactionsResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -17623,12 +17950,12 @@ func (m ExportCustomerRecordsResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ExportCustomerRecordsResponseMultiError) AllErrors() []error { return m }
+func (m ExportFICAThresholdTransactionsResponseMultiError) AllErrors() []error { return m }
 
-// ExportCustomerRecordsResponseValidationError is the validation error
-// returned by ExportCustomerRecordsResponse.Validate if the designated
-// constraints aren't met.
-type ExportCustomerRecordsResponseValidationError struct {
+// ExportFICAThresholdTransactionsResponseValidationError is the validation
+// error returned by ExportFICAThresholdTransactionsResponse.Validate if the
+// designated constraints aren't met.
+type ExportFICAThresholdTransactionsResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -17636,24 +17963,24 @@ type ExportCustomerRecordsResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e ExportCustomerRecordsResponseValidationError) Field() string { return e.field }
+func (e ExportFICAThresholdTransactionsResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ExportCustomerRecordsResponseValidationError) Reason() string { return e.reason }
+func (e ExportFICAThresholdTransactionsResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ExportCustomerRecordsResponseValidationError) Cause() error { return e.cause }
+func (e ExportFICAThresholdTransactionsResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ExportCustomerRecordsResponseValidationError) Key() bool { return e.key }
+func (e ExportFICAThresholdTransactionsResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ExportCustomerRecordsResponseValidationError) ErrorName() string {
-	return "ExportCustomerRecordsResponseValidationError"
+func (e ExportFICAThresholdTransactionsResponseValidationError) ErrorName() string {
+	return "ExportFICAThresholdTransactionsResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ExportCustomerRecordsResponseValidationError) Error() string {
+func (e ExportFICAThresholdTransactionsResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -17665,14 +17992,14 @@ func (e ExportCustomerRecordsResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sExportCustomerRecordsResponse.%s: %s%s",
+		"invalid %sExportFICAThresholdTransactionsResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ExportCustomerRecordsResponseValidationError{}
+var _ error = ExportFICAThresholdTransactionsResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -17680,7 +18007,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ExportCustomerRecordsResponseValidationError{}
+} = ExportFICAThresholdTransactionsResponseValidationError{}
 
 // Validate checks the field values on GetUserBalancesResponse_Balance with the
 // rules defined in the proto definition for this message. If any rules are

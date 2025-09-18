@@ -207,6 +207,9 @@ service Wallet {
 
 	// ListFICAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
 	rpc ListFICAThresholdTransactions(ListFICAThresholdTransactionsRequest) returns (ListFICAThresholdTransactionsResponse) {}
+
+	// ExportFICAThresholdTransactions create a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
+	rpc ExportFICAThresholdTransactions(ExportFICAThresholdTransactionsRequest) returns (ExportFICAThresholdTransactionsResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -1339,6 +1342,22 @@ message ListCustomerRecordsResponse {
 	int32 page_size = 4;
 }
 
+message ExportCustomerRecordsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional int64 transaction_id = 4;
+	optional string transaction_type = 5;
+	string format = 6; // accepted values: csv, excel, pdf
+	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContext operator_context = 8;
+	int64 initiator_user_id = 9;
+}
+
+message ExportCustomerRecordsResponse {
+	int64 task_id = 1;
+}
+
 message FICAThresholdConfig {
 	message Config {
 		string transaction_type = 1; // payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward
@@ -1397,19 +1416,19 @@ message ListFICAThresholdTransactionsResponse {
 	int32 page_size = 4;
 }
 
-message ExportCustomerRecordsRequest {
+message ExportFICAThresholdTransactionsRequest {
 	optional google.protobuf.Timestamp start_time = 1;
 	optional google.protobuf.Timestamp end_time = 2;
-	optional int64 user_id = 3;
-	optional int64 transaction_id = 4;
-	optional string transaction_type = 5;
+	optional string transaction_type = 3;
+	optional string currency = 4;
+	optional int32 kyc_level = 5;
 	string format = 6; // accepted values: csv, excel, pdf
 	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
 	api.common.OperatorContext operator_context = 8;
 	int64 initiator_user_id = 9;
 }
 
-message ExportCustomerRecordsResponse {
+message ExportFICAThresholdTransactionsResponse {
 	int64 task_id = 1;
 }
 

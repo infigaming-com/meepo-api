@@ -234,6 +234,14 @@ service BackofficeWallet {
 			body: "*"
 		};
 	}
+
+	// ExportFICAThresholdTransactions creates a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
+	rpc ExportFICAThresholdTransactions(ExportFICAThresholdTransactionsRequest) returns (wallet.service.v1.ExportFICAThresholdTransactionsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/fica/transactions/export"
+			body: "*"
+		};
+	}
 }
 
 message GetWalletsRequest {
@@ -625,3 +633,12 @@ message ListFICAThresholdTransactionsRequest {
 	optional int32 page_size = 7;
 }
 
+message ExportFICAThresholdTransactionsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional string transaction_type = 3;
+	optional string currency = 4;
+	optional int32 kyc_level = 5;
+	string format = 6; // accepted values: csv, excel, pdf
+	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
+}
