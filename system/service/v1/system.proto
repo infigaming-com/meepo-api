@@ -59,7 +59,7 @@ message ListIntegrityStatusResponse {
 }
 
 message ListTaskRequest {
-	repeated int64 task_id = 1;
+	repeated int64 task_ids = 1;
 	optional string type = 2;
 	optional int64 user_id = 3;
 	optional api.common.OperatorContext operator_context = 4;
@@ -67,7 +67,7 @@ message ListTaskRequest {
 
 message ListTaskResponse {
 	message Task {
-		int64 task_ids = 1;
+		int64 task_id = 1;
 		int64 user_id = 2;
 		string type = 3;
 		string status = 4;
