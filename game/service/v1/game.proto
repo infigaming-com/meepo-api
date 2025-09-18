@@ -135,6 +135,9 @@ service Game {
 	rpc ListUnpaidBets(ListUnpaidBetsRequest) returns (ListUnpaidBetsResponse) {
 	}
 
+	rpc ExportUnpaidBets(ExportUnpaidBetsRequest) returns (ExportUnpaidBetsResponse) {
+	}
+
 	// Sport Events related APIs
 	rpc ListSportEvents(ListSportEventsRequest) returns (ListSportEventsResponse) {
 		option (google.api.http) = {
@@ -999,6 +1002,21 @@ message ListUnpaidBetsResponse {
 }
 
 // Sport Events related messages
+message ExportUnpaidBetsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional int64 transaction_id = 4;
+	string format = 5; // accepted values: csv, excel, pdf
+	string time_zone = 6; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContext operator_context = 7;
+	int64 initiator_user_id = 8;
+}
+
+message ExportUnpaidBetsResponse {
+	int64 task_id = 1;
+}
+
 message ListSportEventsRequest {
 	optional int32 page = 1;
 	optional int32 page_size = 2;
