@@ -24,6 +24,7 @@ const OperationBackofficeWalletAddWalletCurrency = "/api.backoffice.service.v1.B
 const OperationBackofficeWalletDeleteDepositRewardSequences = "/api.backoffice.service.v1.BackofficeWallet/DeleteDepositRewardSequences"
 const OperationBackofficeWalletDeleteWalletResponsibleGamblingConfig = "/api.backoffice.service.v1.BackofficeWallet/DeleteWalletResponsibleGamblingConfig"
 const OperationBackofficeWalletExportCustomerRecords = "/api.backoffice.service.v1.BackofficeWallet/ExportCustomerRecords"
+const OperationBackofficeWalletExportFICAThresholdTransactions = "/api.backoffice.service.v1.BackofficeWallet/ExportFICAThresholdTransactions"
 const OperationBackofficeWalletGetDepositRewardConfig = "/api.backoffice.service.v1.BackofficeWallet/GetDepositRewardConfig"
 const OperationBackofficeWalletGetExchangeRates = "/api.backoffice.service.v1.BackofficeWallet/GetExchangeRates"
 const OperationBackofficeWalletGetFICAThresholdConfig = "/api.backoffice.service.v1.BackofficeWallet/GetFICAThresholdConfig"
@@ -60,6 +61,8 @@ type BackofficeWalletHTTPServer interface {
 	DeleteWalletResponsibleGamblingConfig(context.Context, *DeleteWalletResponsibleGamblingConfigRequest) (*v1.DeleteResponsibleGamblingConfigResponse, error)
 	// ExportCustomerRecords ExportCustomerRecords creates a task to exports customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
 	ExportCustomerRecords(context.Context, *ExportCustomerRecordsRequest) (*v1.ExportCustomerRecordsResponse, error)
+	// ExportFICAThresholdTransactions ExportFICAThresholdTransactions creates a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
+	ExportFICAThresholdTransactions(context.Context, *ExportFICAThresholdTransactionsRequest) (*v1.ExportFICAThresholdTransactionsResponse, error)
 	// GetDepositRewardConfig GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
 	GetDepositRewardConfig(context.Context, *GetDepositRewardConfigRequest) (*v1.GetDepositRewardConfigResponse, error)
 	GetExchangeRates(context.Context, *GetExchangeRatesRequest) (*GetExchangeRatesResponse, error)
@@ -142,6 +145,7 @@ func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTP
 	r.POST("/v1/backoffice/wallet/fica/config/set", _BackofficeWallet_SetFICAThresholdConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/fica/config/get", _BackofficeWallet_GetFICAThresholdConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/fica/transactions/list", _BackofficeWallet_ListFICAThresholdTransactions0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/fica/transactions/export", _BackofficeWallet_ExportFICAThresholdTransactions0_HTTP_Handler(srv))
 }
 
 func _BackofficeWallet_GetWallets0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
@@ -826,11 +830,34 @@ func _BackofficeWallet_ListFICAThresholdTransactions0_HTTP_Handler(srv Backoffic
 	}
 }
 
+func _BackofficeWallet_ExportFICAThresholdTransactions0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ExportFICAThresholdTransactionsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletExportFICAThresholdTransactions)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ExportFICAThresholdTransactions(ctx, req.(*ExportFICAThresholdTransactionsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ExportFICAThresholdTransactionsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeWalletHTTPClient interface {
 	AddWalletCurrency(ctx context.Context, req *AddWalletCurrencyRequest, opts ...http.CallOption) (rsp *AddWalletCurrencyResponse, err error)
 	DeleteDepositRewardSequences(ctx context.Context, req *DeleteDepositRewardSequencesRequest, opts ...http.CallOption) (rsp *v1.DeleteDepositRewardSequencesResponse, err error)
 	DeleteWalletResponsibleGamblingConfig(ctx context.Context, req *DeleteWalletResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *v1.DeleteResponsibleGamblingConfigResponse, err error)
 	ExportCustomerRecords(ctx context.Context, req *ExportCustomerRecordsRequest, opts ...http.CallOption) (rsp *v1.ExportCustomerRecordsResponse, err error)
+	ExportFICAThresholdTransactions(ctx context.Context, req *ExportFICAThresholdTransactionsRequest, opts ...http.CallOption) (rsp *v1.ExportFICAThresholdTransactionsResponse, err error)
 	GetDepositRewardConfig(ctx context.Context, req *GetDepositRewardConfigRequest, opts ...http.CallOption) (rsp *v1.GetDepositRewardConfigResponse, err error)
 	GetExchangeRates(ctx context.Context, req *GetExchangeRatesRequest, opts ...http.CallOption) (rsp *GetExchangeRatesResponse, err error)
 	GetFICAThresholdConfig(ctx context.Context, req *GetFICAThresholdConfigRequest, opts ...http.CallOption) (rsp *v1.GetFICAThresholdConfigResponse, err error)
@@ -912,6 +939,19 @@ func (c *BackofficeWalletHTTPClientImpl) ExportCustomerRecords(ctx context.Conte
 	pattern := "/v1/backoffice/wallet/customer-records/export"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletExportCustomerRecords))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeWalletHTTPClientImpl) ExportFICAThresholdTransactions(ctx context.Context, in *ExportFICAThresholdTransactionsRequest, opts ...http.CallOption) (*v1.ExportFICAThresholdTransactionsResponse, error) {
+	var out v1.ExportFICAThresholdTransactionsResponse
+	pattern := "/v1/backoffice/wallet/fica/transactions/export"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletExportFICAThresholdTransactions))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

@@ -51,6 +51,7 @@ const (
 	BackofficeWallet_SetFICAThresholdConfig_FullMethodName                = "/api.backoffice.service.v1.BackofficeWallet/SetFICAThresholdConfig"
 	BackofficeWallet_GetFICAThresholdConfig_FullMethodName                = "/api.backoffice.service.v1.BackofficeWallet/GetFICAThresholdConfig"
 	BackofficeWallet_ListFICAThresholdTransactions_FullMethodName         = "/api.backoffice.service.v1.BackofficeWallet/ListFICAThresholdTransactions"
+	BackofficeWallet_ExportFICAThresholdTransactions_FullMethodName       = "/api.backoffice.service.v1.BackofficeWallet/ExportFICAThresholdTransactions"
 )
 
 // BackofficeWalletClient is the client API for BackofficeWallet service.
@@ -111,6 +112,8 @@ type BackofficeWalletClient interface {
 	GetFICAThresholdConfig(ctx context.Context, in *GetFICAThresholdConfigRequest, opts ...grpc.CallOption) (*v1.GetFICAThresholdConfigResponse, error)
 	// ListFICAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
 	ListFICAThresholdTransactions(ctx context.Context, in *ListFICAThresholdTransactionsRequest, opts ...grpc.CallOption) (*v1.ListFICAThresholdTransactionsResponse, error)
+	// ExportFICAThresholdTransactions creates a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
+	ExportFICAThresholdTransactions(ctx context.Context, in *ExportFICAThresholdTransactionsRequest, opts ...grpc.CallOption) (*v1.ExportFICAThresholdTransactionsResponse, error)
 }
 
 type backofficeWalletClient struct {
@@ -431,6 +434,16 @@ func (c *backofficeWalletClient) ListFICAThresholdTransactions(ctx context.Conte
 	return out, nil
 }
 
+func (c *backofficeWalletClient) ExportFICAThresholdTransactions(ctx context.Context, in *ExportFICAThresholdTransactionsRequest, opts ...grpc.CallOption) (*v1.ExportFICAThresholdTransactionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ExportFICAThresholdTransactionsResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_ExportFICAThresholdTransactions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeWalletServer is the server API for BackofficeWallet service.
 // All implementations must embed UnimplementedBackofficeWalletServer
 // for forward compatibility.
@@ -489,6 +502,8 @@ type BackofficeWalletServer interface {
 	GetFICAThresholdConfig(context.Context, *GetFICAThresholdConfigRequest) (*v1.GetFICAThresholdConfigResponse, error)
 	// ListFICAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
 	ListFICAThresholdTransactions(context.Context, *ListFICAThresholdTransactionsRequest) (*v1.ListFICAThresholdTransactionsResponse, error)
+	// ExportFICAThresholdTransactions creates a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
+	ExportFICAThresholdTransactions(context.Context, *ExportFICAThresholdTransactionsRequest) (*v1.ExportFICAThresholdTransactionsResponse, error)
 	mustEmbedUnimplementedBackofficeWalletServer()
 }
 
@@ -591,6 +606,9 @@ func (UnimplementedBackofficeWalletServer) GetFICAThresholdConfig(context.Contex
 }
 func (UnimplementedBackofficeWalletServer) ListFICAThresholdTransactions(context.Context, *ListFICAThresholdTransactionsRequest) (*v1.ListFICAThresholdTransactionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListFICAThresholdTransactions not implemented")
+}
+func (UnimplementedBackofficeWalletServer) ExportFICAThresholdTransactions(context.Context, *ExportFICAThresholdTransactionsRequest) (*v1.ExportFICAThresholdTransactionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportFICAThresholdTransactions not implemented")
 }
 func (UnimplementedBackofficeWalletServer) mustEmbedUnimplementedBackofficeWalletServer() {}
 func (UnimplementedBackofficeWalletServer) testEmbeddedByValue()                          {}
@@ -1171,6 +1189,24 @@ func _BackofficeWallet_ListFICAThresholdTransactions_Handler(srv interface{}, ct
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeWallet_ExportFICAThresholdTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportFICAThresholdTransactionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).ExportFICAThresholdTransactions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_ExportFICAThresholdTransactions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).ExportFICAThresholdTransactions(ctx, req.(*ExportFICAThresholdTransactionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeWallet_ServiceDesc is the grpc.ServiceDesc for BackofficeWallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1301,6 +1337,10 @@ var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListFICAThresholdTransactions",
 			Handler:    _BackofficeWallet_ListFICAThresholdTransactions_Handler,
+		},
+		{
+			MethodName: "ExportFICAThresholdTransactions",
+			Handler:    _BackofficeWallet_ExportFICAThresholdTransactions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

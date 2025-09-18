@@ -74,6 +74,7 @@ const (
 	Wallet_SetFICAThresholdConfig_FullMethodName              = "/api.wallet.service.v1.Wallet/SetFICAThresholdConfig"
 	Wallet_GetFICAThresholdConfig_FullMethodName              = "/api.wallet.service.v1.Wallet/GetFICAThresholdConfig"
 	Wallet_ListFICAThresholdTransactions_FullMethodName       = "/api.wallet.service.v1.Wallet/ListFICAThresholdTransactions"
+	Wallet_ExportFICAThresholdTransactions_FullMethodName     = "/api.wallet.service.v1.Wallet/ExportFICAThresholdTransactions"
 )
 
 // WalletClient is the client API for Wallet service.
@@ -175,6 +176,8 @@ type WalletClient interface {
 	GetFICAThresholdConfig(ctx context.Context, in *GetFICAThresholdConfigRequest, opts ...grpc.CallOption) (*GetFICAThresholdConfigResponse, error)
 	// ListFICAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
 	ListFICAThresholdTransactions(ctx context.Context, in *ListFICAThresholdTransactionsRequest, opts ...grpc.CallOption) (*ListFICAThresholdTransactionsResponse, error)
+	// ExportFICAThresholdTransactions create a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
+	ExportFICAThresholdTransactions(ctx context.Context, in *ExportFICAThresholdTransactionsRequest, opts ...grpc.CallOption) (*ExportFICAThresholdTransactionsResponse, error)
 }
 
 type walletClient struct {
@@ -735,6 +738,16 @@ func (c *walletClient) ListFICAThresholdTransactions(ctx context.Context, in *Li
 	return out, nil
 }
 
+func (c *walletClient) ExportFICAThresholdTransactions(ctx context.Context, in *ExportFICAThresholdTransactionsRequest, opts ...grpc.CallOption) (*ExportFICAThresholdTransactionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExportFICAThresholdTransactionsResponse)
+	err := c.cc.Invoke(ctx, Wallet_ExportFICAThresholdTransactions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServer is the server API for Wallet service.
 // All implementations must embed UnimplementedWalletServer
 // for forward compatibility.
@@ -834,6 +847,8 @@ type WalletServer interface {
 	GetFICAThresholdConfig(context.Context, *GetFICAThresholdConfigRequest) (*GetFICAThresholdConfigResponse, error)
 	// ListFICAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
 	ListFICAThresholdTransactions(context.Context, *ListFICAThresholdTransactionsRequest) (*ListFICAThresholdTransactionsResponse, error)
+	// ExportFICAThresholdTransactions create a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
+	ExportFICAThresholdTransactions(context.Context, *ExportFICAThresholdTransactionsRequest) (*ExportFICAThresholdTransactionsResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -1008,6 +1023,9 @@ func (UnimplementedWalletServer) GetFICAThresholdConfig(context.Context, *GetFIC
 }
 func (UnimplementedWalletServer) ListFICAThresholdTransactions(context.Context, *ListFICAThresholdTransactionsRequest) (*ListFICAThresholdTransactionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListFICAThresholdTransactions not implemented")
+}
+func (UnimplementedWalletServer) ExportFICAThresholdTransactions(context.Context, *ExportFICAThresholdTransactionsRequest) (*ExportFICAThresholdTransactionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportFICAThresholdTransactions not implemented")
 }
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
@@ -2020,6 +2038,24 @@ func _Wallet_ListFICAThresholdTransactions_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_ExportFICAThresholdTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportFICAThresholdTransactionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).ExportFICAThresholdTransactions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_ExportFICAThresholdTransactions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).ExportFICAThresholdTransactions(ctx, req.(*ExportFICAThresholdTransactionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Wallet_ServiceDesc is the grpc.ServiceDesc for Wallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2246,6 +2282,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListFICAThresholdTransactions",
 			Handler:    _Wallet_ListFICAThresholdTransactions_Handler,
+		},
+		{
+			MethodName: "ExportFICAThresholdTransactions",
+			Handler:    _Wallet_ExportFICAThresholdTransactions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
