@@ -15808,6 +15808,9 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/system.service.v1.IntegrityFileInfo'
+                createdAt:
+                    type: string
+                    format: date-time
 tags:
     - name: BackofficeAccount
     - name: BackofficeAudit
