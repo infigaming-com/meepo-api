@@ -19,21 +19,20 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeReport_GetSummary_FullMethodName                 = "/api.backoffice.service.v1.BackofficeReport/GetSummary"
-	BackofficeReport_ListSummaries_FullMethodName              = "/api.backoffice.service.v1.BackofficeReport/ListSummaries"
-	BackofficeReport_GetGameDataSummary_FullMethodName         = "/api.backoffice.service.v1.BackofficeReport/GetGameDataSummary"
-	BackofficeReport_ListGameData_FullMethodName               = "/api.backoffice.service.v1.BackofficeReport/ListGameData"
-	BackofficeReport_GetPlayerGameDataSummary_FullMethodName   = "/api.backoffice.service.v1.BackofficeReport/GetPlayerGameDataSummary"
-	BackofficeReport_ListPlayerGameData_FullMethodName         = "/api.backoffice.service.v1.BackofficeReport/ListPlayerGameData"
-	BackofficeReport_GetDepositSummaries_FullMethodName        = "/api.backoffice.service.v1.BackofficeReport/GetDepositSummaries"
-	BackofficeReport_ListDepositDetails_FullMethodName         = "/api.backoffice.service.v1.BackofficeReport/ListDepositDetails"
-	BackofficeReport_GetWithdrawSummaries_FullMethodName       = "/api.backoffice.service.v1.BackofficeReport/GetWithdrawSummaries"
-	BackofficeReport_ListWithdrawDetails_FullMethodName        = "/api.backoffice.service.v1.BackofficeReport/ListWithdrawDetails"
-	BackofficeReport_ListRegisterRetention_FullMethodName      = "/api.backoffice.service.v1.BackofficeReport/ListRegisterRetention"
-	BackofficeReport_ListDepositVtgDetails_FullMethodName      = "/api.backoffice.service.v1.BackofficeReport/ListDepositVtgDetails"
-	BackofficeReport_ListWithdrawVtgDetails_FullMethodName     = "/api.backoffice.service.v1.BackofficeReport/ListWithdrawVtgDetails"
-	BackofficeReport_ListSportEvents_FullMethodName            = "/api.backoffice.service.v1.BackofficeReport/ListSportEvents"
-	BackofficeReport_GetTransactionAndEventInfo_FullMethodName = "/api.backoffice.service.v1.BackofficeReport/GetTransactionAndEventInfo"
+	BackofficeReport_GetSummary_FullMethodName               = "/api.backoffice.service.v1.BackofficeReport/GetSummary"
+	BackofficeReport_ListSummaries_FullMethodName            = "/api.backoffice.service.v1.BackofficeReport/ListSummaries"
+	BackofficeReport_GetGameDataSummary_FullMethodName       = "/api.backoffice.service.v1.BackofficeReport/GetGameDataSummary"
+	BackofficeReport_ListGameData_FullMethodName             = "/api.backoffice.service.v1.BackofficeReport/ListGameData"
+	BackofficeReport_GetPlayerGameDataSummary_FullMethodName = "/api.backoffice.service.v1.BackofficeReport/GetPlayerGameDataSummary"
+	BackofficeReport_ListPlayerGameData_FullMethodName       = "/api.backoffice.service.v1.BackofficeReport/ListPlayerGameData"
+	BackofficeReport_GetDepositSummaries_FullMethodName      = "/api.backoffice.service.v1.BackofficeReport/GetDepositSummaries"
+	BackofficeReport_ListDepositDetails_FullMethodName       = "/api.backoffice.service.v1.BackofficeReport/ListDepositDetails"
+	BackofficeReport_GetWithdrawSummaries_FullMethodName     = "/api.backoffice.service.v1.BackofficeReport/GetWithdrawSummaries"
+	BackofficeReport_ListWithdrawDetails_FullMethodName      = "/api.backoffice.service.v1.BackofficeReport/ListWithdrawDetails"
+	BackofficeReport_ListRegisterRetention_FullMethodName    = "/api.backoffice.service.v1.BackofficeReport/ListRegisterRetention"
+	BackofficeReport_ListDepositVtgDetails_FullMethodName    = "/api.backoffice.service.v1.BackofficeReport/ListDepositVtgDetails"
+	BackofficeReport_ListWithdrawVtgDetails_FullMethodName   = "/api.backoffice.service.v1.BackofficeReport/ListWithdrawVtgDetails"
+	BackofficeReport_ListSportEvents_FullMethodName          = "/api.backoffice.service.v1.BackofficeReport/ListSportEvents"
 )
 
 // BackofficeReportClient is the client API for BackofficeReport service.
@@ -54,7 +53,6 @@ type BackofficeReportClient interface {
 	ListDepositVtgDetails(ctx context.Context, in *ListDepositVtgDetailsRequest, opts ...grpc.CallOption) (*ListDepositVtgDetailsResponse, error)
 	ListWithdrawVtgDetails(ctx context.Context, in *ListWithdrawVtgDetailsRequest, opts ...grpc.CallOption) (*ListWithdrawVtgDetailsResponse, error)
 	ListSportEvents(ctx context.Context, in *ListSportEventsRequest, opts ...grpc.CallOption) (*ListSportEventsResponse, error)
-	GetTransactionAndEventInfo(ctx context.Context, in *GetTransactionAndEventInfoRequest, opts ...grpc.CallOption) (*GetTransactionAndEventInfoResponse, error)
 }
 
 type backofficeReportClient struct {
@@ -205,16 +203,6 @@ func (c *backofficeReportClient) ListSportEvents(ctx context.Context, in *ListSp
 	return out, nil
 }
 
-func (c *backofficeReportClient) GetTransactionAndEventInfo(ctx context.Context, in *GetTransactionAndEventInfoRequest, opts ...grpc.CallOption) (*GetTransactionAndEventInfoResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetTransactionAndEventInfoResponse)
-	err := c.cc.Invoke(ctx, BackofficeReport_GetTransactionAndEventInfo_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // BackofficeReportServer is the server API for BackofficeReport service.
 // All implementations must embed UnimplementedBackofficeReportServer
 // for forward compatibility.
@@ -233,7 +221,6 @@ type BackofficeReportServer interface {
 	ListDepositVtgDetails(context.Context, *ListDepositVtgDetailsRequest) (*ListDepositVtgDetailsResponse, error)
 	ListWithdrawVtgDetails(context.Context, *ListWithdrawVtgDetailsRequest) (*ListWithdrawVtgDetailsResponse, error)
 	ListSportEvents(context.Context, *ListSportEventsRequest) (*ListSportEventsResponse, error)
-	GetTransactionAndEventInfo(context.Context, *GetTransactionAndEventInfoRequest) (*GetTransactionAndEventInfoResponse, error)
 	mustEmbedUnimplementedBackofficeReportServer()
 }
 
@@ -285,9 +272,6 @@ func (UnimplementedBackofficeReportServer) ListWithdrawVtgDetails(context.Contex
 }
 func (UnimplementedBackofficeReportServer) ListSportEvents(context.Context, *ListSportEventsRequest) (*ListSportEventsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSportEvents not implemented")
-}
-func (UnimplementedBackofficeReportServer) GetTransactionAndEventInfo(context.Context, *GetTransactionAndEventInfoRequest) (*GetTransactionAndEventInfoResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetTransactionAndEventInfo not implemented")
 }
 func (UnimplementedBackofficeReportServer) mustEmbedUnimplementedBackofficeReportServer() {}
 func (UnimplementedBackofficeReportServer) testEmbeddedByValue()                          {}
@@ -562,24 +546,6 @@ func _BackofficeReport_ListSportEvents_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeReport_GetTransactionAndEventInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTransactionAndEventInfoRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeReportServer).GetTransactionAndEventInfo(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeReport_GetTransactionAndEventInfo_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeReportServer).GetTransactionAndEventInfo(ctx, req.(*GetTransactionAndEventInfoRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // BackofficeReport_ServiceDesc is the grpc.ServiceDesc for BackofficeReport service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -642,10 +608,6 @@ var BackofficeReport_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListSportEvents",
 			Handler:    _BackofficeReport_ListSportEvents_Handler,
-		},
-		{
-			MethodName: "GetTransactionAndEventInfo",
-			Handler:    _BackofficeReport_GetTransactionAndEventInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -2389,24 +2389,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListSummariesResponse'
-    /v1/backoffice/report/transaction-and-event-info/get:
-        post:
-            tags:
-                - BackofficeReport
-            operationId: BackofficeReport_GetTransactionAndEventInfo
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTransactionAndEventInfoRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetTransactionAndEventInfoResponse'
     /v1/backoffice/report/withdraw-details/list:
         post:
             tags:
@@ -6407,69 +6389,6 @@ components:
                 retailerOperatorName:
                     type: string
                 systemOperatorName:
-                    type: string
-        api.backoffice.service.v1.GetTransactionAndEventInfoRequest:
-            type: object
-            properties:
-                gameBetId:
-                    type: string
-            description: Transaction and Settlement related messages
-        api.backoffice.service.v1.GetTransactionAndEventInfoResponse:
-            type: object
-            properties:
-                transactionInfo:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.GetTransactionAndEventInfoResponse_TransactionInfo'
-                eventSettlementInfo:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.GetTransactionAndEventInfoResponse_EventSettlementInfo'
-        api.backoffice.service.v1.GetTransactionAndEventInfoResponse_EventSettlementInfo:
-            type: object
-            properties:
-                selectionBetDetails:
-                    type: string
-                eventDescription:
-                    type: string
-                settlementDetails:
-                    type: string
-                status:
-                    type: string
-        api.backoffice.service.v1.GetTransactionAndEventInfoResponse_TransactionInfo:
-            type: object
-            properties:
-                gameTransactionId:
-                    type: string
-                providerTransactionId:
-                    type: string
-                settlementTime:
-                    type: string
-                    format: date-time
-                eventStartTime:
-                    type: string
-                    format: date-time
-                venueTournament:
-                    type: string
-                odds:
-                    type: string
-                wagerType:
-                    type: string
-                betCurrency:
-                    type: string
-                betAmount:
-                    type: string
-                winMultiplier:
-                    type: string
-                betSettlementCurrency:
-                    type: string
-                betSettlementAmount:
-                    type: string
-                payoutCurrency:
-                    type: string
-                payoutSettlementCurrency:
-                    type: string
-                payoutSettlementAmount:
-                    type: string
-                payoutAmount:
-                    type: string
-                validBetAmount:
                     type: string
         api.backoffice.service.v1.GetTransactionPageRequest:
             type: object
