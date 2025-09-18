@@ -28,6 +28,7 @@ const (
 	ErrorReason_UNSPECIFIED                         ErrorReason = 0
 	ErrorReason_OPERATOR_CONTEXT_PERMISSION_DENIED  ErrorReason = 110000
 	ErrorReason_GET_K8S_DEPLOYMENTS_AND_PODS_FAILED ErrorReason = 110001
+	ErrorReason_GET_INTEGRITY_CONFIG_FAILED         ErrorReason = 110002
 )
 
 // Enum value maps for ErrorReason.
@@ -36,11 +37,13 @@ var (
 		0:      "UNSPECIFIED",
 		110000: "OPERATOR_CONTEXT_PERMISSION_DENIED",
 		110001: "GET_K8S_DEPLOYMENTS_AND_PODS_FAILED",
+		110002: "GET_INTEGRITY_CONFIG_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                         0,
 		"OPERATOR_CONTEXT_PERMISSION_DENIED":  110000,
 		"GET_K8S_DEPLOYMENTS_AND_PODS_FAILED": 110001,
+		"GET_INTEGRITY_CONFIG_FAILED":         110002,
 	}
 )
 
@@ -75,11 +78,12 @@ var File_system_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_system_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$system/service/v1/error_reason.proto\x12\x15api.system.service.v1\x1a\x13errors/errors.proto*y\n" +
+	"$system/service/v1/error_reason.proto\x12\x15api.system.service.v1\x1a\x13errors/errors.proto*\x9c\x01\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12(\n" +
 	"\"OPERATOR_CONTEXT_PERMISSION_DENIED\x10\xb0\xdb\x06\x12)\n" +
-	"#GET_K8S_DEPLOYMENTS_AND_PODS_FAILED\x10\xb1\xdb\x06\x1a\x04\xa0E\xf4\x03BS\n" +
+	"#GET_K8S_DEPLOYMENTS_AND_PODS_FAILED\x10\xb1\xdb\x06\x12!\n" +
+	"\x1bGET_INTEGRITY_CONFIG_FAILED\x10\xb2\xdb\x06\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.system.service.v1P\x01Z8github.com/infigaming-com/meepo-api/system/service/v1;v1b\x06proto3"
 
 var (

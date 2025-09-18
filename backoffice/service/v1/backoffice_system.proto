@@ -28,7 +28,11 @@ message ListIntegrityStatusRequest {
 }
 
 message SetIntegrityFileInfoConfigRequest {
+	message FileInfo {
+		string file_path = 1;
+		string hash = 2;
+	}
 	string label_app = 1;
 	string pod_namespace = 2;
-	repeated system.service.v1.IntegrityFileInfo file_infos = 3;
+	repeated FileInfo file_infos = 3;
 }
