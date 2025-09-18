@@ -13,11 +13,11 @@ service System {
 	rpc AddIntegrityReport(AddIntegrityReportRequest) returns (AddIntegrityReportResponse) {}
 	rpc ListIntegrityStatus(ListIntegrityStatusRequest) returns (ListIntegrityStatusResponse) {}
 
-	rpc ListAsynTask(ListAsynTaskRequest) returns (ListAsynTaskResponse) { };
+	rpc ListTask(ListTaskRequest) returns (ListTaskResponse) { };
 
-	rpc CreateAsynTask(CreateAsynTaskRequest) returns (CreateAsynTaskResponse) { };
+	rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse) { };
 
-	rpc UpdateAsynTask(UpdateAsynTaskRequest) returns (UpdateAsynTaskResponse) { };
+	rpc UpdateTask(UpdateTaskRequest) returns (UpdateTaskResponse) { };
 }
 
 message IntegrityFileInfo {
@@ -48,22 +48,26 @@ message ListIntegrityStatusResponse {
 	repeated IntegrityStatus integrity_statuses = 1;
 }
 
-message ListAsynTaskRequest {
+message ListTaskRequest {
 	repeated int64 task_id = 1;
 	optional string type = 2;
+	optional int64 user_id = 3;
+	optional api.common.OperatorContext operator_context = 4;
 }
 
-message ListAsynTaskResponse {
-	message AsynTask {
+message ListTaskResponse {
+	message Task {
 		int64 task_id = 1;
 		int64 user_id = 2;
 		string type = 3;
-		google.protobuf.Struct payload = 4;
+		string status = 4;
+		string process = 5;
+		google.protobuf.Struct result = 6;
 	}
-	repeated AsynTask tasks = 1;
+	repeated Task tasks = 1;
 }
 
-message CreateAsynTaskRequest {
+message CreateTaskRequest {
 	int64 task_id = 1;
 	int64 user_id = 2;
 	string type = 3;
@@ -71,13 +75,16 @@ message CreateAsynTaskRequest {
 	google.protobuf.Struct payload = 5;
 }
 
-message CreateAsynTaskResponse {
+message CreateTaskResponse {
 }
 
-message UpdateAsynTaskRequest {
+message UpdateTaskRequest {
 	int64 task_id = 1;
-	string process = 2;
+	string status = 2;
+	string process = 3;
+	string percentage = 4;
+	google.protobuf.Struct result = 5;
 }
 
-message UpdateAsynTaskResponse {
+message UpdateTaskResponse {
 }

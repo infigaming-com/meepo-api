@@ -21,9 +21,9 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	System_AddIntegrityReport_FullMethodName  = "/system.service.v1.System/AddIntegrityReport"
 	System_ListIntegrityStatus_FullMethodName = "/system.service.v1.System/ListIntegrityStatus"
-	System_ListAsynTask_FullMethodName        = "/system.service.v1.System/ListAsynTask"
-	System_CreateAsynTask_FullMethodName      = "/system.service.v1.System/CreateAsynTask"
-	System_UpdateAsynTask_FullMethodName      = "/system.service.v1.System/UpdateAsynTask"
+	System_ListTask_FullMethodName            = "/system.service.v1.System/ListTask"
+	System_CreateTask_FullMethodName          = "/system.service.v1.System/CreateTask"
+	System_UpdateTask_FullMethodName          = "/system.service.v1.System/UpdateTask"
 )
 
 // SystemClient is the client API for System service.
@@ -32,9 +32,9 @@ const (
 type SystemClient interface {
 	AddIntegrityReport(ctx context.Context, in *AddIntegrityReportRequest, opts ...grpc.CallOption) (*AddIntegrityReportResponse, error)
 	ListIntegrityStatus(ctx context.Context, in *ListIntegrityStatusRequest, opts ...grpc.CallOption) (*ListIntegrityStatusResponse, error)
-	ListAsynTask(ctx context.Context, in *ListAsynTaskRequest, opts ...grpc.CallOption) (*ListAsynTaskResponse, error)
-	CreateAsynTask(ctx context.Context, in *CreateAsynTaskRequest, opts ...grpc.CallOption) (*CreateAsynTaskResponse, error)
-	UpdateAsynTask(ctx context.Context, in *UpdateAsynTaskRequest, opts ...grpc.CallOption) (*UpdateAsynTaskResponse, error)
+	ListTask(ctx context.Context, in *ListTaskRequest, opts ...grpc.CallOption) (*ListTaskResponse, error)
+	CreateTask(ctx context.Context, in *CreateTaskRequest, opts ...grpc.CallOption) (*CreateTaskResponse, error)
+	UpdateTask(ctx context.Context, in *UpdateTaskRequest, opts ...grpc.CallOption) (*UpdateTaskResponse, error)
 }
 
 type systemClient struct {
@@ -65,30 +65,30 @@ func (c *systemClient) ListIntegrityStatus(ctx context.Context, in *ListIntegrit
 	return out, nil
 }
 
-func (c *systemClient) ListAsynTask(ctx context.Context, in *ListAsynTaskRequest, opts ...grpc.CallOption) (*ListAsynTaskResponse, error) {
+func (c *systemClient) ListTask(ctx context.Context, in *ListTaskRequest, opts ...grpc.CallOption) (*ListTaskResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListAsynTaskResponse)
-	err := c.cc.Invoke(ctx, System_ListAsynTask_FullMethodName, in, out, cOpts...)
+	out := new(ListTaskResponse)
+	err := c.cc.Invoke(ctx, System_ListTask_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *systemClient) CreateAsynTask(ctx context.Context, in *CreateAsynTaskRequest, opts ...grpc.CallOption) (*CreateAsynTaskResponse, error) {
+func (c *systemClient) CreateTask(ctx context.Context, in *CreateTaskRequest, opts ...grpc.CallOption) (*CreateTaskResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateAsynTaskResponse)
-	err := c.cc.Invoke(ctx, System_CreateAsynTask_FullMethodName, in, out, cOpts...)
+	out := new(CreateTaskResponse)
+	err := c.cc.Invoke(ctx, System_CreateTask_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *systemClient) UpdateAsynTask(ctx context.Context, in *UpdateAsynTaskRequest, opts ...grpc.CallOption) (*UpdateAsynTaskResponse, error) {
+func (c *systemClient) UpdateTask(ctx context.Context, in *UpdateTaskRequest, opts ...grpc.CallOption) (*UpdateTaskResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateAsynTaskResponse)
-	err := c.cc.Invoke(ctx, System_UpdateAsynTask_FullMethodName, in, out, cOpts...)
+	out := new(UpdateTaskResponse)
+	err := c.cc.Invoke(ctx, System_UpdateTask_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -101,9 +101,9 @@ func (c *systemClient) UpdateAsynTask(ctx context.Context, in *UpdateAsynTaskReq
 type SystemServer interface {
 	AddIntegrityReport(context.Context, *AddIntegrityReportRequest) (*AddIntegrityReportResponse, error)
 	ListIntegrityStatus(context.Context, *ListIntegrityStatusRequest) (*ListIntegrityStatusResponse, error)
-	ListAsynTask(context.Context, *ListAsynTaskRequest) (*ListAsynTaskResponse, error)
-	CreateAsynTask(context.Context, *CreateAsynTaskRequest) (*CreateAsynTaskResponse, error)
-	UpdateAsynTask(context.Context, *UpdateAsynTaskRequest) (*UpdateAsynTaskResponse, error)
+	ListTask(context.Context, *ListTaskRequest) (*ListTaskResponse, error)
+	CreateTask(context.Context, *CreateTaskRequest) (*CreateTaskResponse, error)
+	UpdateTask(context.Context, *UpdateTaskRequest) (*UpdateTaskResponse, error)
 	mustEmbedUnimplementedSystemServer()
 }
 
@@ -120,14 +120,14 @@ func (UnimplementedSystemServer) AddIntegrityReport(context.Context, *AddIntegri
 func (UnimplementedSystemServer) ListIntegrityStatus(context.Context, *ListIntegrityStatusRequest) (*ListIntegrityStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListIntegrityStatus not implemented")
 }
-func (UnimplementedSystemServer) ListAsynTask(context.Context, *ListAsynTaskRequest) (*ListAsynTaskResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListAsynTask not implemented")
+func (UnimplementedSystemServer) ListTask(context.Context, *ListTaskRequest) (*ListTaskResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTask not implemented")
 }
-func (UnimplementedSystemServer) CreateAsynTask(context.Context, *CreateAsynTaskRequest) (*CreateAsynTaskResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateAsynTask not implemented")
+func (UnimplementedSystemServer) CreateTask(context.Context, *CreateTaskRequest) (*CreateTaskResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTask not implemented")
 }
-func (UnimplementedSystemServer) UpdateAsynTask(context.Context, *UpdateAsynTaskRequest) (*UpdateAsynTaskResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateAsynTask not implemented")
+func (UnimplementedSystemServer) UpdateTask(context.Context, *UpdateTaskRequest) (*UpdateTaskResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTask not implemented")
 }
 func (UnimplementedSystemServer) mustEmbedUnimplementedSystemServer() {}
 func (UnimplementedSystemServer) testEmbeddedByValue()                {}
@@ -186,56 +186,56 @@ func _System_ListIntegrityStatus_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
-func _System_ListAsynTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListAsynTaskRequest)
+func _System_ListTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListTaskRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SystemServer).ListAsynTask(ctx, in)
+		return srv.(SystemServer).ListTask(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: System_ListAsynTask_FullMethodName,
+		FullMethod: System_ListTask_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SystemServer).ListAsynTask(ctx, req.(*ListAsynTaskRequest))
+		return srv.(SystemServer).ListTask(ctx, req.(*ListTaskRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _System_CreateAsynTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateAsynTaskRequest)
+func _System_CreateTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateTaskRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SystemServer).CreateAsynTask(ctx, in)
+		return srv.(SystemServer).CreateTask(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: System_CreateAsynTask_FullMethodName,
+		FullMethod: System_CreateTask_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SystemServer).CreateAsynTask(ctx, req.(*CreateAsynTaskRequest))
+		return srv.(SystemServer).CreateTask(ctx, req.(*CreateTaskRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _System_UpdateAsynTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateAsynTaskRequest)
+func _System_UpdateTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTaskRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SystemServer).UpdateAsynTask(ctx, in)
+		return srv.(SystemServer).UpdateTask(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: System_UpdateAsynTask_FullMethodName,
+		FullMethod: System_UpdateTask_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SystemServer).UpdateAsynTask(ctx, req.(*UpdateAsynTaskRequest))
+		return srv.(SystemServer).UpdateTask(ctx, req.(*UpdateTaskRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -256,16 +256,16 @@ var System_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _System_ListIntegrityStatus_Handler,
 		},
 		{
-			MethodName: "ListAsynTask",
-			Handler:    _System_ListAsynTask_Handler,
+			MethodName: "ListTask",
+			Handler:    _System_ListTask_Handler,
 		},
 		{
-			MethodName: "CreateAsynTask",
-			Handler:    _System_CreateAsynTask_Handler,
+			MethodName: "CreateTask",
+			Handler:    _System_CreateTask_Handler,
 		},
 		{
-			MethodName: "UpdateAsynTask",
-			Handler:    _System_UpdateAsynTask_Handler,
+			MethodName: "UpdateTask",
+			Handler:    _System_UpdateTask_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
