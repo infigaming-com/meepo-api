@@ -42,3 +42,13 @@ message ListIntegrityStatusResponse {
 	}
 	repeated IntegrityStatus integrity_statuses = 1;
 }
+
+message SetIntegrityFileInfoConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	string label_app = 2;
+	string pod_namespace = 3;
+	repeated IntegrityFileInfo file_infos = 4;
+}
+
+message SetIntegrityFileInfoConfigResponse {
+}

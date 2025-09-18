@@ -2623,6 +2623,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ReviewTicketResponse'
+    /v1/backoffice/system/integrity/file-info/config/set:
+        post:
+            tags:
+                - BackofficeSystem
+            operationId: BackofficeSystem_SetIntegrityFileInfoConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetIntegrityFileInfoConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/system.service.v1.SetIntegrityFileInfoConfigResponse'
     /v1/backoffice/system/integrity/status/list:
         post:
             tags:
@@ -10334,6 +10352,17 @@ components:
                     type: string
                 ficaThresholdConfig:
                     $ref: '#/components/schemas/api.wallet.service.v1.FICAThresholdConfig'
+        api.backoffice.service.v1.SetIntegrityFileInfoConfigRequest:
+            type: object
+            properties:
+                labelApp:
+                    type: string
+                podNamespace:
+                    type: string
+                fileInfos:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/system.service.v1.IntegrityFileInfo'
         api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest:
             type: object
             properties:
@@ -15811,6 +15840,9 @@ components:
                 createdAt:
                     type: string
                     format: date-time
+        system.service.v1.SetIntegrityFileInfoConfigResponse:
+            type: object
+            properties: {}
 tags:
     - name: BackofficeAccount
     - name: BackofficeAudit
