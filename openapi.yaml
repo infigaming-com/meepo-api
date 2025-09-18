@@ -2627,12 +2627,12 @@ paths:
         post:
             tags:
                 - BackofficeSystem
-            operationId: BackofficeSystem_SetIntegrityFileInfoConfig
+            operationId: BackofficeSystem_SetIntegrityConfig
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.SetIntegrityFileInfoConfigRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetIntegrityConfigRequest'
                 required: true
             responses:
                 "200":
@@ -2640,7 +2640,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/system.service.v1.SetIntegrityFileInfoConfigResponse'
+                                $ref: '#/components/schemas/system.service.v1.SetIntegrityConfigResponse'
     /v1/backoffice/system/integrity/status/list:
         post:
             tags:
@@ -10306,7 +10306,7 @@ components:
                     type: string
                 ficaThresholdConfig:
                     $ref: '#/components/schemas/api.wallet.service.v1.FICAThresholdConfig'
-        api.backoffice.service.v1.SetIntegrityFileInfoConfigRequest:
+        api.backoffice.service.v1.SetIntegrityConfigRequest:
             type: object
             properties:
                 labelApp:
@@ -10316,14 +10316,7 @@ components:
                 fileInfos:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.SetIntegrityFileInfoConfigRequest_FileInfo'
-        api.backoffice.service.v1.SetIntegrityFileInfoConfigRequest_FileInfo:
-            type: object
-            properties:
-                filePath:
-                    type: string
-                hash:
-                    type: string
+                        $ref: '#/components/schemas/system.service.v1.FileInfo'
         api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest:
             type: object
             properties:
@@ -15775,6 +15768,13 @@ components:
             description: |-
                 Response for withdraw callback
                  Confirms receipt of callback notification
+        system.service.v1.FileInfo:
+            type: object
+            properties:
+                filePath:
+                    type: string
+                hash:
+                    type: string
         system.service.v1.IntegrityStatus_FileInfo:
             type: object
             properties:
@@ -15809,7 +15809,7 @@ components:
                 createdAt:
                     type: string
                     format: date-time
-        system.service.v1.SetIntegrityFileInfoConfigResponse:
+        system.service.v1.SetIntegrityConfigResponse:
             type: object
             properties: {}
 tags:
