@@ -35,22 +35,22 @@ var (
 	_ = sort.Sort
 )
 
-// Validate checks the field values on IntegrityFileInfo with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *IntegrityFileInfo) Validate() error {
+// Validate checks the field values on FileInfo with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *FileInfo) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on IntegrityFileInfo with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// IntegrityFileInfoMultiError, or nil if none found.
-func (m *IntegrityFileInfo) ValidateAll() error {
+// ValidateAll checks the field values on FileInfo with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in FileInfoMultiError, or nil
+// if none found.
+func (m *FileInfo) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *IntegrityFileInfo) validate(all bool) error {
+func (m *FileInfo) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -62,19 +62,18 @@ func (m *IntegrityFileInfo) validate(all bool) error {
 	// no validation rules for Hash
 
 	if len(errors) > 0 {
-		return IntegrityFileInfoMultiError(errors)
+		return FileInfoMultiError(errors)
 	}
 
 	return nil
 }
 
-// IntegrityFileInfoMultiError is an error wrapping multiple validation errors
-// returned by IntegrityFileInfo.ValidateAll() if the designated constraints
-// aren't met.
-type IntegrityFileInfoMultiError []error
+// FileInfoMultiError is an error wrapping multiple validation errors returned
+// by FileInfo.ValidateAll() if the designated constraints aren't met.
+type FileInfoMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m IntegrityFileInfoMultiError) Error() string {
+func (m FileInfoMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -83,11 +82,11 @@ func (m IntegrityFileInfoMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m IntegrityFileInfoMultiError) AllErrors() []error { return m }
+func (m FileInfoMultiError) AllErrors() []error { return m }
 
-// IntegrityFileInfoValidationError is the validation error returned by
-// IntegrityFileInfo.Validate if the designated constraints aren't met.
-type IntegrityFileInfoValidationError struct {
+// FileInfoValidationError is the validation error returned by
+// FileInfo.Validate if the designated constraints aren't met.
+type FileInfoValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -95,24 +94,22 @@ type IntegrityFileInfoValidationError struct {
 }
 
 // Field function returns field value.
-func (e IntegrityFileInfoValidationError) Field() string { return e.field }
+func (e FileInfoValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e IntegrityFileInfoValidationError) Reason() string { return e.reason }
+func (e FileInfoValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e IntegrityFileInfoValidationError) Cause() error { return e.cause }
+func (e FileInfoValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e IntegrityFileInfoValidationError) Key() bool { return e.key }
+func (e FileInfoValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e IntegrityFileInfoValidationError) ErrorName() string {
-	return "IntegrityFileInfoValidationError"
-}
+func (e FileInfoValidationError) ErrorName() string { return "FileInfoValidationError" }
 
 // Error satisfies the builtin error interface
-func (e IntegrityFileInfoValidationError) Error() string {
+func (e FileInfoValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -124,14 +121,14 @@ func (e IntegrityFileInfoValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sIntegrityFileInfo.%s: %s%s",
+		"invalid %sFileInfo.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = IntegrityFileInfoValidationError{}
+var _ error = FileInfoValidationError{}
 
 var _ interface {
 	Field() string
@@ -139,7 +136,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = IntegrityFileInfoValidationError{}
+} = FileInfoValidationError{}
 
 // Validate checks the field values on AddIntegrityReportRequest with the rules
 // defined in the proto definition for this message. If any rules are
@@ -1104,3 +1101,125 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListIntegrityStatusResponse_IntegrityStatusValidationError{}
+
+// Validate checks the field values on
+// ListIntegrityStatusResponse_IntegrityStatus_FileInfo with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ListIntegrityStatusResponse_IntegrityStatus_FileInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ListIntegrityStatusResponse_IntegrityStatus_FileInfo with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in
+// ListIntegrityStatusResponse_IntegrityStatus_FileInfoMultiError, or nil if
+// none found.
+func (m *ListIntegrityStatusResponse_IntegrityStatus_FileInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListIntegrityStatusResponse_IntegrityStatus_FileInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for FilePath
+
+	// no validation rules for Hash
+
+	// no validation rules for ExpectedHash
+
+	// no validation rules for IsMatch
+
+	if len(errors) > 0 {
+		return ListIntegrityStatusResponse_IntegrityStatus_FileInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListIntegrityStatusResponse_IntegrityStatus_FileInfoMultiError is an error
+// wrapping multiple validation errors returned by
+// ListIntegrityStatusResponse_IntegrityStatus_FileInfo.ValidateAll() if the
+// designated constraints aren't met.
+type ListIntegrityStatusResponse_IntegrityStatus_FileInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListIntegrityStatusResponse_IntegrityStatus_FileInfoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListIntegrityStatusResponse_IntegrityStatus_FileInfoMultiError) AllErrors() []error { return m }
+
+// ListIntegrityStatusResponse_IntegrityStatus_FileInfoValidationError is the
+// validation error returned by
+// ListIntegrityStatusResponse_IntegrityStatus_FileInfo.Validate if the
+// designated constraints aren't met.
+type ListIntegrityStatusResponse_IntegrityStatus_FileInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListIntegrityStatusResponse_IntegrityStatus_FileInfoValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e ListIntegrityStatusResponse_IntegrityStatus_FileInfoValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e ListIntegrityStatusResponse_IntegrityStatus_FileInfoValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e ListIntegrityStatusResponse_IntegrityStatus_FileInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListIntegrityStatusResponse_IntegrityStatus_FileInfoValidationError) ErrorName() string {
+	return "ListIntegrityStatusResponse_IntegrityStatus_FileInfoValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListIntegrityStatusResponse_IntegrityStatus_FileInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListIntegrityStatusResponse_IntegrityStatus_FileInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListIntegrityStatusResponse_IntegrityStatus_FileInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListIntegrityStatusResponse_IntegrityStatus_FileInfoValidationError{}
