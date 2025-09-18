@@ -983,11 +983,11 @@ func (m *CreateTaskRequest) validate(all bool) error {
 	}
 
 	if all {
-		switch v := interface{}(m.GetPayload()).(type) {
+		switch v := interface{}(m.GetParams()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, CreateTaskRequestValidationError{
-					field:  "Payload",
+					field:  "Params",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -995,16 +995,16 @@ func (m *CreateTaskRequest) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, CreateTaskRequestValidationError{
-					field:  "Payload",
+					field:  "Params",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetPayload()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetParams()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return CreateTaskRequestValidationError{
-				field:  "Payload",
+				field:  "Params",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -2024,7 +2024,7 @@ func (m *ListTaskResponse_Task) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for TaskId
+	// no validation rules for TaskIds
 
 	// no validation rules for UserId
 

@@ -386,7 +386,7 @@ type CreateTaskRequest struct {
 	UserId          int64                   `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Type            string                  `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	Payload         *structpb.Struct        `protobuf:"bytes,5,opt,name=payload,proto3" json:"payload,omitempty"`
+	Params          *structpb.Struct        `protobuf:"bytes,5,opt,name=params,proto3" json:"params,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -449,9 +449,9 @@ func (x *CreateTaskRequest) GetOperatorContext() *common.OperatorContext {
 	return nil
 }
 
-func (x *CreateTaskRequest) GetPayload() *structpb.Struct {
+func (x *CreateTaskRequest) GetParams() *structpb.Struct {
 	if x != nil {
-		return x.Payload
+		return x.Params
 	}
 	return nil
 }
@@ -854,7 +854,7 @@ func (x *ListIntegrityStatusResponse_IntegrityStatus_FileInfo) GetIsMatch() bool
 
 type ListTaskResponse_Task struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TaskId        int64                  `protobuf:"varint,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
+	TaskIds       int64                  `protobuf:"varint,1,opt,name=task_ids,json=taskIds,proto3" json:"task_ids,omitempty"`
 	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Type          string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
 	Status        string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
@@ -894,9 +894,9 @@ func (*ListTaskResponse_Task) Descriptor() ([]byte, []int) {
 	return file_system_service_v1_system_proto_rawDescGZIP(), []int{6, 0}
 }
 
-func (x *ListTaskResponse_Task) GetTaskId() int64 {
+func (x *ListTaskResponse_Task) GetTaskIds() int64 {
 	if x != nil {
-		return x.TaskId
+		return x.TaskIds
 	}
 	return 0
 }
@@ -976,22 +976,22 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\x05_typeB\n" +
 	"\n" +
 	"\b_user_idB\x13\n" +
-	"\x11_operator_context\"\x84\x02\n" +
+	"\x11_operator_context\"\x86\x02\n" +
 	"\x10ListTaskResponse\x12>\n" +
-	"\x05tasks\x18\x01 \x03(\v2(.system.service.v1.ListTaskResponse.TaskR\x05tasks\x1a\xaf\x01\n" +
-	"\x04Task\x12\x17\n" +
-	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x17\n" +
+	"\x05tasks\x18\x01 \x03(\v2(.system.service.v1.ListTaskResponse.TaskR\x05tasks\x1a\xb1\x01\n" +
+	"\x04Task\x12\x19\n" +
+	"\btask_ids\x18\x01 \x01(\x03R\ataskIds\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\tR\x04type\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x12\x18\n" +
 	"\aprocess\x18\x05 \x01(\tR\aprocess\x12/\n" +
-	"\x06result\x18\x06 \x01(\v2\x17.google.protobuf.StructR\x06result\"\xd4\x01\n" +
+	"\x06result\x18\x06 \x01(\v2\x17.google.protobuf.StructR\x06result\"\xd2\x01\n" +
 	"\x11CreateTaskRequest\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\tR\x04type\x12F\n" +
-	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x121\n" +
-	"\apayload\x18\x05 \x01(\v2\x17.google.protobuf.StructR\apayload\"\x14\n" +
+	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12/\n" +
+	"\x06params\x18\x05 \x01(\v2\x17.google.protobuf.StructR\x06params\"\x14\n" +
 	"\x12CreateTaskResponse\"\xaf\x01\n" +
 	"\x11UpdateTaskRequest\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x16\n" +
@@ -1061,7 +1061,7 @@ var file_system_service_v1_system_proto_depIdxs = []int32{
 	16, // 3: system.service.v1.ListTaskRequest.operator_context:type_name -> api.common.OperatorContext
 	15, // 4: system.service.v1.ListTaskResponse.tasks:type_name -> system.service.v1.ListTaskResponse.Task
 	16, // 5: system.service.v1.CreateTaskRequest.operator_context:type_name -> api.common.OperatorContext
-	17, // 6: system.service.v1.CreateTaskRequest.payload:type_name -> google.protobuf.Struct
+	17, // 6: system.service.v1.CreateTaskRequest.params:type_name -> google.protobuf.Struct
 	17, // 7: system.service.v1.UpdateTaskRequest.result:type_name -> google.protobuf.Struct
 	16, // 8: system.service.v1.SetIntegrityConfigRequest.operator_context:type_name -> api.common.OperatorContext
 	0,  // 9: system.service.v1.SetIntegrityConfigRequest.file_infos:type_name -> system.service.v1.FileInfo
