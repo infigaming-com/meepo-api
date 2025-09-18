@@ -2191,6 +2191,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/payment.service.v1.GetTransactionPageResponse'
+    /v1/backoffice/report/customer-record/get:
+        post:
+            tags:
+                - BackofficeReport
+            operationId: BackofficeReport_CustomerRecordReportDetail
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CustomerRecordReportDetailRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.CustomerRecordReportDetailResponse'
     /v1/backoffice/report/deposit-details/list:
         post:
             tags:
@@ -3210,6 +3228,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse'
+    /v1/backoffice/wallet/customer-records/export:
+        post:
+            tags:
+                - BackofficeWallet
+            description: ExportCustomerRecords creates a task to exports customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
+            operationId: BackofficeWallet_ExportCustomerRecords
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ExportCustomerRecordsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.ExportCustomerRecordsResponse'
     /v1/backoffice/wallet/customer-records/list:
         post:
             tags:
@@ -4199,6 +4236,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.review.service.v1.CreateWithdrawResponse'
+    /v1/user/account/update:
+        post:
+            tags:
+                - User
+            operationId: User_CloseAccount
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.CloseAccountRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.CloseAccountResponse'
     /v1/user/auth/login:
         post:
             tags:
@@ -5421,6 +5476,99 @@ components:
             properties:
                 ticketId:
                     type: string
+        api.backoffice.service.v1.CustomerRecordReportDetailRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                paymentTransactionId:
+                    type: string
+                gameTransactionId:
+                    type: string
+                gameBetId:
+                    type: string
+        api.backoffice.service.v1.CustomerRecordReportDetailResponse:
+            type: object
+            properties:
+                userDetail:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.CustomerRecordReportDetailResponse_UserDetail'
+                paymentTransaction:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.CustomerRecordReportDetailResponse_PaymentTransaction'
+                gameTransaction:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.CustomerRecordReportDetailResponse_GameTransaction'
+                eventSettlementInformation:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.CustomerRecordReportDetailResponse_EventSettlementInformation'
+        api.backoffice.service.v1.CustomerRecordReportDetailResponse_EventSettlementInformation:
+            type: object
+            properties:
+                selectionBetDetails:
+                    type: string
+                eventDescription:
+                    type: string
+                settlementDetails:
+                    type: string
+                matchResults:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.EventSettlementInformation_MatchResults'
+        api.backoffice.service.v1.CustomerRecordReportDetailResponse_GameTransaction:
+            type: object
+            properties:
+                gameTransactionId:
+                    type: string
+                providerTransactionId:
+                    type: string
+                settlementTime:
+                    type: string
+                venueTournament:
+                    type: string
+                wagerType:
+                    type: string
+                betCurrency:
+                    type: string
+                betAmount:
+                    type: string
+                payoutCurrency:
+                    type: string
+                payoutAmount:
+                    type: string
+        api.backoffice.service.v1.CustomerRecordReportDetailResponse_PaymentTransaction:
+            type: object
+            properties:
+                paymentTransactionId:
+                    type: string
+                pspTransactionId:
+                    type: string
+                arrivalTime:
+                    type: string
+                    format: date-time
+                paymentServiceProvider:
+                    type: string
+                methodOfPayment:
+                    type: string
+                paymentChannel:
+                    type: string
+                currency:
+                    type: string
+                amount:
+                    type: string
+                processingFee:
+                    type: string
+        api.backoffice.service.v1.CustomerRecordReportDetailResponse_UserDetail:
+            type: object
+            properties:
+                userId:
+                    type: string
+                name:
+                    type: string
+                phone:
+                    type: string
+                idType:
+                    type: string
+                idNumber:
+                    type: string
+                address:
+                    type: string
         api.backoffice.service.v1.DeleteAdjustmentConfigRequest:
             type: object
             properties:
@@ -5517,6 +5665,34 @@ components:
                     description: |-
                         deposit_limit, withdrawal_limit, daily_play_limit, weekly_play_limit, monthly_play_limit
                          daily_loss_limit, weekly_loss_limit, monthly_loss_limit
+        api.backoffice.service.v1.EventSettlementInformation_MatchResults:
+            type: object
+            properties:
+                name:
+                    type: string
+                status:
+                    type: string
+                selection:
+                    type: string
+        api.backoffice.service.v1.ExportCustomerRecordsRequest:
+            type: object
+            properties:
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                userId:
+                    type: string
+                transactionId:
+                    type: string
+                transactionType:
+                    type: string
+                format:
+                    type: string
+                timeZone:
+                    type: string
         api.backoffice.service.v1.GameData_Data:
             type: object
             properties:
@@ -12612,6 +12788,12 @@ components:
                 createdAt:
                     type: string
                     format: date-time
+        api.user.service.v1.CloseAccountRequest:
+            type: object
+            properties: {}
+        api.user.service.v1.CloseAccountResponse:
+            type: object
+            properties: {}
         api.user.service.v1.DeleteOperatorByoDomainResponse:
             type: object
             properties: {}
@@ -13986,6 +14168,11 @@ components:
                     type: string
                     format: date-time
             description: Deposit reward config for an operator with specific currency
+        api.wallet.service.v1.ExportCustomerRecordsResponse:
+            type: object
+            properties:
+                taskId:
+                    type: string
         api.wallet.service.v1.FICAThresholdConfig:
             type: object
             properties:
@@ -14303,6 +14490,15 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.ListFICAThresholdTransactionsResponse_FICAThresholdTransaction'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.wallet.service.v1.ListFICAThresholdTransactionsResponse_FICAThresholdTransaction:
             type: object
             properties:

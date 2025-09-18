@@ -203,6 +203,14 @@ service BackofficeWallet {
 		};
 	}
 
+	// ExportCustomerRecords creates a task to exports customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
+	rpc ExportCustomerRecords(ExportCustomerRecordsRequest) returns (wallet.service.v1.ExportCustomerRecordsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/customer-records/export"
+			body: "*"
+		};
+	}
+
 	// SetFICAThresholdConfig sets the FICA threshold config for an operator and its specific currency
 	rpc SetFICAThresholdConfig(SetFICAThresholdConfigRequest) returns (wallet.service.v1.SetFICAThresholdConfigResponse) {
 		option (google.api.http) = {
@@ -577,6 +585,16 @@ message DeleteWalletResponsibleGamblingConfigRequest {
 
 message ListWalletResponsibleGamblingConfigsRequest {
 	int64 user_id = 1;
+}
+
+message ExportCustomerRecordsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional int64 transaction_id = 4;
+	optional string transaction_type = 5;
+	string format = 6; // accepted values: csv, excel, pdf
+	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
 }
 
 message ListCustomerRecordsRequest {
