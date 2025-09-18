@@ -126,6 +126,20 @@ service BackofficeGame {
 			body: "*"
 		};
 	}
+
+	rpc ListMultipleBets(ListMultipleBetsRequest) returns (game.service.v1.ListMultipleBetsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/bets/multiple/list"
+			body: "*"
+		};
+	}
+
+	rpc ListStakeVarianceBets(ListStakeVarianceBetsRequest) returns (game.service.v1.ListStakeVarianceBetsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/bets/stake-variance/list"
+			body: "*"
+		};
+	}
 }
 
 
@@ -435,4 +449,31 @@ message ExportUnpaidBetsRequest {
 	optional int64 transaction_id = 4;
 	string format = 5; // accepted values: csv, excel, pdf
 	string time_zone = 6; // e.g. UTC+0, UTC+8, etc.
+}
+
+message ListMultipleBetsRequest {
+	// Filter conditions
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional string status = 3; // All, Pending, Won, Loss, etc.
+	optional int64 user_id = 4; // User ID
+	optional int64 transaction_id = 5; // Transaction ID
+	
+	// Pagination
+	optional int32 page = 6;
+	optional int32 page_size = 7;
+}
+
+message ListStakeVarianceBetsRequest {
+	// Filter conditions
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3; // User ID
+	optional int64 transaction_id = 4; // Transaction ID
+	optional string category = 5; // All, Sports, Casino, etc.
+	optional int64 round_id = 6; // Round ID
+	
+	// Pagination
+	optional int32 page = 7;
+	optional int32 page_size = 8;
 }

@@ -138,6 +138,12 @@ service Game {
 	rpc ExportUnpaidBets(ExportUnpaidBetsRequest) returns (ExportUnpaidBetsResponse) {
 	}
 
+	rpc ListMultipleBets(ListMultipleBetsRequest) returns (ListMultipleBetsResponse) {
+	}
+
+	rpc ListStakeVarianceBets(ListStakeVarianceBetsRequest) returns (ListStakeVarianceBetsResponse) {
+	}
+
 	// Sport Events related APIs
 	rpc ListSportEvents(ListSportEventsRequest) returns (ListSportEventsResponse) {
 		option (google.api.http) = {
@@ -1015,6 +1021,103 @@ message ExportUnpaidBetsRequest {
 
 message ExportUnpaidBetsResponse {
 	int64 task_id = 1;
+}
+
+// Multiple Bets Report related messages
+message ListMultipleBetsRequest {
+	// Filter conditions
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional string status = 3; // All, Pending, Won, Loss, etc.
+	optional int64 user_id = 4; // User ID
+	optional int64 transaction_id = 5; // Transaction ID
+	
+	// Pagination
+	optional int32 page = 6;
+	optional int32 page_size = 7;
+	
+	// Operator context for filtering
+	api.common.OperatorContext operator_context = 8;
+}
+
+message ListMultipleBetsResponse {
+	message MultipleBet {
+		// Basic information
+		google.protobuf.Timestamp created_at = 1; // Date
+		string status = 2; // Pending, Won, Loss, etc.
+		int64 user_id = 3; // User ID
+		int64 transaction_id = 4; // Transaction ID (e.g., "TXN-202509042200")
+		int64 round_id = 5; // Round ID (e.g., "TXN-202509042200")
+		
+		// Game information
+		string category = 6; // Sports, Casino, etc.
+		string provider = 7; // Provider name (e.g., "Bti")
+		
+		// Financial information
+		string currency = 8; // Currency (e.g., "ZAR")
+		string bet_amount = 9; // Bet Amount (e.g., "350.00")
+		string win_amount = 10; // Win Amount (e.g., "192.50")
+		string taxable = 11; // Taxable amount (e.g., "0.00")
+		string prospective_tax = 12; // Prospective Tax (e.g., "0.00")
+	}
+	
+	repeated MultipleBet records = 1;
+	int32 total_count = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}
+
+// Stake Variance Report related messages
+message ListStakeVarianceBetsRequest {
+	// Filter conditions
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3; // User ID
+	optional int64 transaction_id = 4; // Transaction ID
+	optional string category = 5; // All, Bet, Win, etc.
+	optional int64 round_id = 6; // Round ID
+	
+	// Pagination
+	optional int32 page = 7;
+	optional int32 page_size = 8;
+	
+	// Operator context for filtering
+	api.common.OperatorContext operator_context = 9;
+}
+
+message ListStakeVarianceBetsResponse {
+	message StakeVarianceBet {
+		// Basic information
+		google.protobuf.Timestamp created_at = 1; // Date (2025-09-02 14:30:21)
+		string status = 2; // Pending, Won, Loss, Cashed Out, etc.
+		int64 user_id = 3; // User ID (User012345)
+		int64 transaction_id = 4; // Transaction ID (TXN-202509042200)
+		int64 round_id = 5; // Round ID (214215166135)
+		
+		// Game information
+		string category = 6; // Sports, Casino, etc.
+		string provider = 7; // Provider name (Bti)
+		
+		// Financial information
+		string currency = 8; // Currency (ZAR)
+		string bet_amount = 9; // Bet Amount (R 350.00)
+		string payout_amount = 10; // Payout Amount (R 700.00)
+		string win_amount = 11; // Win Amount (R 350.00)
+	}
+	
+	message SummaryStats {
+		// Summary statistics shown in cards
+		int32 total_records = 1; // Total Records (e.g., 1000)
+		string total_bet_amount = 2; // Total Bet Amount (e.g., "45,000")
+		string average_bet_amount = 3; // Average Bet Amount (e.g., "8.2k")
+		string maximum_bet_amount = 4; // Maximum Bet Amount (e.g., "1000")
+	}
+	
+	repeated StakeVarianceBet records = 1;
+	SummaryStats summary = 2;
+	int32 total_count = 3;
+	int32 page = 4;
+	int32 page_size = 5;
 }
 
 message ListSportEventsRequest {
