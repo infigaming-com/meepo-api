@@ -1,7 +1,7 @@
 package tasks
 
 const (
-	ExportTaskType = "export"
+	ExportType = "export"
 )
 
 const (
