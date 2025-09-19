@@ -152,6 +152,9 @@ service Game {
 		};
 	}
 
+	rpc GetBetAndEventInfo(GetBetAndEventInfoRequest) returns (GetBetAndEventInfoResponse) {
+	}
+
 	rpc GetTransactionAndEventInfo(GetTransactionAndEventInfoRequest) returns (GetTransactionAndEventInfoResponse) {
 	}
 
