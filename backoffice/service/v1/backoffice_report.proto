@@ -772,7 +772,7 @@ message CustomerRecordReportDetailResponse{
 			string status = 2;
 			string selection = 3;
 			string result = 4;
-			string event_start_time = 5;
+			google.protobuf.Timestamp event_start_time = 5;
 			string venue_tournament = 6;
 			string settlement_details = 7;
 		}

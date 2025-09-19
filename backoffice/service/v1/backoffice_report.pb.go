@@ -5973,7 +5973,7 @@ type CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults 
 	Status            string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
 	Selection         string                 `protobuf:"bytes,3,opt,name=selection,proto3" json:"selection,omitempty"`
 	Result            string                 `protobuf:"bytes,4,opt,name=result,proto3" json:"result,omitempty"`
-	EventStartTime    string                 `protobuf:"bytes,5,opt,name=event_start_time,json=eventStartTime,proto3" json:"event_start_time,omitempty"`
+	EventStartTime    *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=event_start_time,json=eventStartTime,proto3" json:"event_start_time,omitempty"`
 	VenueTournament   string                 `protobuf:"bytes,6,opt,name=venue_tournament,json=venueTournament,proto3" json:"venue_tournament,omitempty"`
 	SettlementDetails string                 `protobuf:"bytes,7,opt,name=settlement_details,json=settlementDetails,proto3" json:"settlement_details,omitempty"`
 	unknownFields     protoimpl.UnknownFields
@@ -6038,11 +6038,11 @@ func (x *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResu
 	return ""
 }
 
-func (x *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults) GetEventStartTime() string {
+func (x *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults) GetEventStartTime() *timestamppb.Timestamp {
 	if x != nil {
 		return x.EventStartTime
 	}
-	return ""
+	return nil
 }
 
 func (x *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults) GetVenueTournament() string {
@@ -6705,7 +6705,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\b_user_idB\x19\n" +
 	"\x17_payment_transaction_idB\x16\n" +
 	"\x14_game_transaction_idB\x0e\n" +
-	"\f_game_bet_id\"\x9d\x11\n" +
+	"\f_game_bet_id\"\xb9\x11\n" +
 	"\"CustomerRecordReportDetailResponse\x12n\n" +
 	"\vuser_detail\x18\x01 \x01(\v2H.api.backoffice.service.v1.CustomerRecordReportDetailResponse.UserDetailH\x00R\n" +
 	"userDetail\x88\x01\x01\x12\x86\x01\n" +
@@ -6745,15 +6745,15 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x10valid_bet_amount\x18\n" +
 	" \x01(\tR\x0evalidBetAmount\x12\x12\n" +
 	"\x04odds\x18\v \x01(\tR\x04odds\x12%\n" +
-	"\x0ewin_multiplier\x18\f \x01(\tR\rwinMultiplier\x1a\xa0\x03\n" +
+	"\x0ewin_multiplier\x18\f \x01(\tR\rwinMultiplier\x1a\xbc\x03\n" +
 	"\x1aEventSettlementInformation\x12\x8a\x01\n" +
-	"\rmatch_results\x18\x01 \x03(\v2e.api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.MatchResultsR\fmatchResults\x1a\xf4\x01\n" +
+	"\rmatch_results\x18\x01 \x03(\v2e.api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.MatchResultsR\fmatchResults\x1a\x90\x02\n" +
 	"\fMatchResults\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12\x1c\n" +
 	"\tselection\x18\x03 \x01(\tR\tselection\x12\x16\n" +
-	"\x06result\x18\x04 \x01(\tR\x06result\x12(\n" +
-	"\x10event_start_time\x18\x05 \x01(\tR\x0eeventStartTime\x12)\n" +
+	"\x06result\x18\x04 \x01(\tR\x06result\x12D\n" +
+	"\x10event_start_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\x0eeventStartTime\x12)\n" +
 	"\x10venue_tournament\x18\x06 \x01(\tR\x0fvenueTournament\x12-\n" +
 	"\x12settlement_details\x18\a \x01(\tR\x11settlementDetailsB\x0e\n" +
 	"\f_user_detailB\x16\n" +
@@ -6888,41 +6888,42 @@ var file_backoffice_service_v1_backoffice_report_proto_depIdxs = []int32{
 	48, // 41: api.backoffice.service.v1.CustomerRecordReportDetailResponse.PaymentTransaction.arrival_time:type_name -> google.protobuf.Timestamp
 	48, // 42: api.backoffice.service.v1.CustomerRecordReportDetailResponse.GameTransaction.settlement_time:type_name -> google.protobuf.Timestamp
 	46, // 43: api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.match_results:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.MatchResults
-	1,  // 44: api.backoffice.service.v1.BackofficeReport.GetSummary:input_type -> api.backoffice.service.v1.GetSummaryRequest
-	3,  // 45: api.backoffice.service.v1.BackofficeReport.ListSummaries:input_type -> api.backoffice.service.v1.ListSummariesRequest
-	5,  // 46: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:input_type -> api.backoffice.service.v1.GetGameSummaryRequest
-	7,  // 47: api.backoffice.service.v1.BackofficeReport.ListGameData:input_type -> api.backoffice.service.v1.ListGameDataRequest
-	9,  // 48: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:input_type -> api.backoffice.service.v1.GetPlayerGameSummaryRequest
-	11, // 49: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:input_type -> api.backoffice.service.v1.ListPlayerGameDataRequest
-	13, // 50: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:input_type -> api.backoffice.service.v1.GetDepositSummariesRequest
-	15, // 51: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:input_type -> api.backoffice.service.v1.ListDepositDetailsRequest
-	17, // 52: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:input_type -> api.backoffice.service.v1.GetWithdrawSummariesRequest
-	19, // 53: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:input_type -> api.backoffice.service.v1.ListWithdrawDetailsRequest
-	21, // 54: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:input_type -> api.backoffice.service.v1.ListRegisterRetentionRequest
-	23, // 55: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:input_type -> api.backoffice.service.v1.ListDepositVtgDetailsRequest
-	25, // 56: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:input_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsRequest
-	27, // 57: api.backoffice.service.v1.BackofficeReport.ListSportEvents:input_type -> api.backoffice.service.v1.ListSportEventsRequest
-	29, // 58: api.backoffice.service.v1.BackofficeReport.CustomerRecordReportDetail:input_type -> api.backoffice.service.v1.CustomerRecordReportDetailRequest
-	2,  // 59: api.backoffice.service.v1.BackofficeReport.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
-	4,  // 60: api.backoffice.service.v1.BackofficeReport.ListSummaries:output_type -> api.backoffice.service.v1.ListSummariesResponse
-	6,  // 61: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:output_type -> api.backoffice.service.v1.GetGameSummaryResponse
-	8,  // 62: api.backoffice.service.v1.BackofficeReport.ListGameData:output_type -> api.backoffice.service.v1.ListGameDataResponse
-	10, // 63: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:output_type -> api.backoffice.service.v1.GetPlayerGameSummaryResponse
-	12, // 64: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:output_type -> api.backoffice.service.v1.ListPlayerGameDataResponse
-	14, // 65: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:output_type -> api.backoffice.service.v1.GetDepositSummariesResponse
-	16, // 66: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:output_type -> api.backoffice.service.v1.ListDepositDetailsResponse
-	18, // 67: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:output_type -> api.backoffice.service.v1.GetWithdrawSummariesResponse
-	20, // 68: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:output_type -> api.backoffice.service.v1.ListWithdrawDetailsResponse
-	22, // 69: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:output_type -> api.backoffice.service.v1.ListRegisterRetentionResponse
-	24, // 70: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:output_type -> api.backoffice.service.v1.ListDepositVtgDetailsResponse
-	26, // 71: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:output_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
-	28, // 72: api.backoffice.service.v1.BackofficeReport.ListSportEvents:output_type -> api.backoffice.service.v1.ListSportEventsResponse
-	30, // 73: api.backoffice.service.v1.BackofficeReport.CustomerRecordReportDetail:output_type -> api.backoffice.service.v1.CustomerRecordReportDetailResponse
-	59, // [59:74] is the sub-list for method output_type
-	44, // [44:59] is the sub-list for method input_type
-	44, // [44:44] is the sub-list for extension type_name
-	44, // [44:44] is the sub-list for extension extendee
-	0,  // [0:44] is the sub-list for field type_name
+	48, // 44: api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.MatchResults.event_start_time:type_name -> google.protobuf.Timestamp
+	1,  // 45: api.backoffice.service.v1.BackofficeReport.GetSummary:input_type -> api.backoffice.service.v1.GetSummaryRequest
+	3,  // 46: api.backoffice.service.v1.BackofficeReport.ListSummaries:input_type -> api.backoffice.service.v1.ListSummariesRequest
+	5,  // 47: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:input_type -> api.backoffice.service.v1.GetGameSummaryRequest
+	7,  // 48: api.backoffice.service.v1.BackofficeReport.ListGameData:input_type -> api.backoffice.service.v1.ListGameDataRequest
+	9,  // 49: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:input_type -> api.backoffice.service.v1.GetPlayerGameSummaryRequest
+	11, // 50: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:input_type -> api.backoffice.service.v1.ListPlayerGameDataRequest
+	13, // 51: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:input_type -> api.backoffice.service.v1.GetDepositSummariesRequest
+	15, // 52: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:input_type -> api.backoffice.service.v1.ListDepositDetailsRequest
+	17, // 53: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:input_type -> api.backoffice.service.v1.GetWithdrawSummariesRequest
+	19, // 54: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:input_type -> api.backoffice.service.v1.ListWithdrawDetailsRequest
+	21, // 55: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:input_type -> api.backoffice.service.v1.ListRegisterRetentionRequest
+	23, // 56: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:input_type -> api.backoffice.service.v1.ListDepositVtgDetailsRequest
+	25, // 57: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:input_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsRequest
+	27, // 58: api.backoffice.service.v1.BackofficeReport.ListSportEvents:input_type -> api.backoffice.service.v1.ListSportEventsRequest
+	29, // 59: api.backoffice.service.v1.BackofficeReport.CustomerRecordReportDetail:input_type -> api.backoffice.service.v1.CustomerRecordReportDetailRequest
+	2,  // 60: api.backoffice.service.v1.BackofficeReport.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
+	4,  // 61: api.backoffice.service.v1.BackofficeReport.ListSummaries:output_type -> api.backoffice.service.v1.ListSummariesResponse
+	6,  // 62: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:output_type -> api.backoffice.service.v1.GetGameSummaryResponse
+	8,  // 63: api.backoffice.service.v1.BackofficeReport.ListGameData:output_type -> api.backoffice.service.v1.ListGameDataResponse
+	10, // 64: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:output_type -> api.backoffice.service.v1.GetPlayerGameSummaryResponse
+	12, // 65: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:output_type -> api.backoffice.service.v1.ListPlayerGameDataResponse
+	14, // 66: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:output_type -> api.backoffice.service.v1.GetDepositSummariesResponse
+	16, // 67: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:output_type -> api.backoffice.service.v1.ListDepositDetailsResponse
+	18, // 68: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:output_type -> api.backoffice.service.v1.GetWithdrawSummariesResponse
+	20, // 69: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:output_type -> api.backoffice.service.v1.ListWithdrawDetailsResponse
+	22, // 70: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:output_type -> api.backoffice.service.v1.ListRegisterRetentionResponse
+	24, // 71: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:output_type -> api.backoffice.service.v1.ListDepositVtgDetailsResponse
+	26, // 72: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:output_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
+	28, // 73: api.backoffice.service.v1.BackofficeReport.ListSportEvents:output_type -> api.backoffice.service.v1.ListSportEventsResponse
+	30, // 74: api.backoffice.service.v1.BackofficeReport.CustomerRecordReportDetail:output_type -> api.backoffice.service.v1.CustomerRecordReportDetailResponse
+	60, // [60:75] is the sub-list for method output_type
+	45, // [45:60] is the sub-list for method input_type
+	45, // [45:45] is the sub-list for extension type_name
+	45, // [45:45] is the sub-list for extension extendee
+	0,  // [0:45] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_report_proto_init() }

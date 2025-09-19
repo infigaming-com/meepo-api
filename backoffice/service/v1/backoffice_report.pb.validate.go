@@ -7155,7 +7155,34 @@ func (m *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResu
 
 	// no validation rules for Result
 
-	// no validation rules for EventStartTime
+	if all {
+		switch v := interface{}(m.GetEventStartTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError{
+					field:  "EventStartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError{
+					field:  "EventStartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetEventStartTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError{
+				field:  "EventStartTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	// no validation rules for VenueTournament
 
