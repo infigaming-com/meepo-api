@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package system.service.v1;
 
-import "google/protobuf/struct.proto";
 import "common/common.proto";
 import "google/protobuf/timestamp.proto";
 
@@ -16,9 +15,9 @@ service System {
 
 	rpc ListReportExport(ListReportExportRequest) returns (ListReportExportResponse) { };
 
-	rpc CreateTask(CreateReportExportRequest) returns (CreateReportExportResponse) { };
+	rpc CreateReportExport(CreateReportExportRequest) returns (CreateReportExportResponse) { };
 
-	rpc UpdateTask(UpdateReportExportRequest) returns (UpdateReportExportResponse) { };
+	rpc UpdateReportExport(UpdateReportExportRequest) returns (UpdateReportExportResponse) { };
 
 	rpc SetIntegrityConfig(SetIntegrityConfigRequest) returns (SetIntegrityConfigResponse) {}
 }
@@ -64,7 +63,9 @@ message ListReportExportRequest {
 	optional string status = 3;
 	optional google.protobuf.Timestamp start = 4;
 	optional google.protobuf.Timestamp end = 5;
-	api.common.OperatorContext operator_context = 6;
+	int32 page = 6;
+	int32 page_size = 7;
+	api.common.OperatorContext operator_context = 8;
 }
 
 message ListReportExportResponse {

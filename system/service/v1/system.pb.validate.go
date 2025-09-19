@@ -672,6 +672,10 @@ func (m *ListReportExportRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
