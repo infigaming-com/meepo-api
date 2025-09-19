@@ -14299,7 +14299,7 @@ components:
         api.wallet.service.v1.DeleteResponsibleGamblingConfigRequest:
             type: object
             properties:
-                userId:
+                targetUserId:
                     type: string
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
@@ -14310,6 +14310,8 @@ components:
                     description: |-
                         deposit_limit, withdrawal_limit, daily_play_limit, weekly_play_limit, monthly_play_limit
                          daily_loss_limit, weekly_loss_limit, monthly_loss_limit
+                initiatorUserId:
+                    type: string
         api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse:
             type: object
             properties: {}
