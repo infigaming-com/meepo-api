@@ -272,8 +272,10 @@ type ListReportExportRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	TaskIds         []int64                 `protobuf:"varint,1,rep,packed,name=task_ids,json=taskIds,proto3" json:"task_ids,omitempty"`
 	Type            *string                 `protobuf:"bytes,2,opt,name=type,proto3,oneof" json:"type,omitempty"`
-	UserId          *int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3,oneof" json:"operator_context,omitempty"`
+	Status          *string                 `protobuf:"bytes,3,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	Start           *timestamppb.Timestamp  `protobuf:"bytes,4,opt,name=start,proto3,oneof" json:"start,omitempty"`
+	End             *timestamppb.Timestamp  `protobuf:"bytes,5,opt,name=end,proto3,oneof" json:"end,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,6,opt,name=operator_context,json=operatorContext,proto3,oneof" json:"operator_context,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -322,11 +324,25 @@ func (x *ListReportExportRequest) GetType() string {
 	return ""
 }
 
-func (x *ListReportExportRequest) GetUserId() int64 {
-	if x != nil && x.UserId != nil {
-		return *x.UserId
+func (x *ListReportExportRequest) GetStatus() string {
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
-	return 0
+	return ""
+}
+
+func (x *ListReportExportRequest) GetStart() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Start
+	}
+	return nil
+}
+
+func (x *ListReportExportRequest) GetEnd() *timestamppb.Timestamp {
+	if x != nil {
+		return x.End
+	}
+	return nil
 }
 
 func (x *ListReportExportRequest) GetOperatorContext() *common.OperatorContext {
@@ -337,10 +353,16 @@ func (x *ListReportExportRequest) GetOperatorContext() *common.OperatorContext {
 }
 
 type ListReportExportResponse struct {
-	state         protoimpl.MessageState                   `protogen:"open.v1"`
-	Tasks         []*ListReportExportResponse_ReportExport `protobuf:"bytes,1,rep,name=tasks,proto3" json:"tasks,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState                   `protogen:"open.v1"`
+	Tasks           []*ListReportExportResponse_ReportExport `protobuf:"bytes,1,rep,name=tasks,proto3" json:"tasks,omitempty"`
+	TotalPage       int32                                    `protobuf:"varint,2,opt,name=total_page,json=totalPage,proto3" json:"total_page,omitempty"`
+	TotalCompleted  int32                                    `protobuf:"varint,3,opt,name=total_completed,json=totalCompleted,proto3" json:"total_completed,omitempty"`
+	TotalGenerating int32                                    `protobuf:"varint,4,opt,name=total_generating,json=totalGenerating,proto3" json:"total_generating,omitempty"`
+	TotalPending    int32                                    `protobuf:"varint,5,opt,name=total_pending,json=totalPending,proto3" json:"total_pending,omitempty"`
+	TotalFailed     int32                                    `protobuf:"varint,6,opt,name=total_failed,json=totalFailed,proto3" json:"total_failed,omitempty"`
+	PageSize        int32                                    `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *ListReportExportResponse) Reset() {
@@ -380,17 +402,59 @@ func (x *ListReportExportResponse) GetTasks() []*ListReportExportResponse_Report
 	return nil
 }
 
+func (x *ListReportExportResponse) GetTotalPage() int32 {
+	if x != nil {
+		return x.TotalPage
+	}
+	return 0
+}
+
+func (x *ListReportExportResponse) GetTotalCompleted() int32 {
+	if x != nil {
+		return x.TotalCompleted
+	}
+	return 0
+}
+
+func (x *ListReportExportResponse) GetTotalGenerating() int32 {
+	if x != nil {
+		return x.TotalGenerating
+	}
+	return 0
+}
+
+func (x *ListReportExportResponse) GetTotalPending() int32 {
+	if x != nil {
+		return x.TotalPending
+	}
+	return 0
+}
+
+func (x *ListReportExportResponse) GetTotalFailed() int32 {
+	if x != nil {
+		return x.TotalFailed
+	}
+	return 0
+}
+
+func (x *ListReportExportResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
 type CreateReportExportRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	TaskId          int64                   `protobuf:"varint,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
 	UserId          int64                   `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Type            string                  `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
 	Status          string                  `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
-	FileUrl         string                  `protobuf:"bytes,5,opt,name=file_url,json=fileUrl,proto3" json:"file_url,omitempty"`
-	FileSize        string                  `protobuf:"bytes,6,opt,name=file_size,json=fileSize,proto3" json:"file_size,omitempty"`
-	FileFormat      string                  `protobuf:"bytes,7,opt,name=file_format,json=fileFormat,proto3" json:"file_format,omitempty"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,8,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	Params          *structpb.Struct        `protobuf:"bytes,9,opt,name=params,proto3" json:"params,omitempty"`
+	TaskName        string                  `protobuf:"bytes,5,opt,name=task_name,json=taskName,proto3" json:"task_name,omitempty"`
+	FileFormat      string                  `protobuf:"bytes,6,opt,name=file_format,json=fileFormat,proto3" json:"file_format,omitempty"`
+	CreateAt        *timestamppb.Timestamp  `protobuf:"bytes,7,opt,name=create_at,json=createAt,proto3" json:"create_at,omitempty"`
+	Params          *structpb.Struct        `protobuf:"bytes,8,opt,name=params,proto3" json:"params,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,9,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -453,16 +517,9 @@ func (x *CreateReportExportRequest) GetStatus() string {
 	return ""
 }
 
-func (x *CreateReportExportRequest) GetFileUrl() string {
+func (x *CreateReportExportRequest) GetTaskName() string {
 	if x != nil {
-		return x.FileUrl
-	}
-	return ""
-}
-
-func (x *CreateReportExportRequest) GetFileSize() string {
-	if x != nil {
-		return x.FileSize
+		return x.TaskName
 	}
 	return ""
 }
@@ -474,9 +531,9 @@ func (x *CreateReportExportRequest) GetFileFormat() string {
 	return ""
 }
 
-func (x *CreateReportExportRequest) GetOperatorContext() *common.OperatorContext {
+func (x *CreateReportExportRequest) GetCreateAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.OperatorContext
+		return x.CreateAt
 	}
 	return nil
 }
@@ -484,6 +541,13 @@ func (x *CreateReportExportRequest) GetOperatorContext() *common.OperatorContext
 func (x *CreateReportExportRequest) GetParams() *structpb.Struct {
 	if x != nil {
 		return x.Params
+	}
+	return nil
+}
+
+func (x *CreateReportExportRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
 	}
 	return nil
 }
@@ -895,13 +959,14 @@ func (x *ListIntegrityStatusResponse_IntegrityStatus_FileInfo) GetIsMatch() bool
 type ListReportExportResponse_ReportExport struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TaskId        int64                  `protobuf:"varint,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
-	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Type          string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
-	Status        string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
-	FileUrl       string                 `protobuf:"bytes,5,opt,name=file_url,json=fileUrl,proto3" json:"file_url,omitempty"`
-	FileSize      string                 `protobuf:"bytes,6,opt,name=file_size,json=fileSize,proto3" json:"file_size,omitempty"`
-	FileFormat    string                 `protobuf:"bytes,7,opt,name=file_format,json=fileFormat,proto3" json:"file_format,omitempty"`
-	Result        *structpb.Struct       `protobuf:"bytes,8,opt,name=result,proto3" json:"result,omitempty"`
+	UserName      string                 `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
+	StaskName     string                 `protobuf:"bytes,3,opt,name=stask_name,json=staskName,proto3" json:"stask_name,omitempty"`
+	Type          string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
+	Status        string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
+	FileUrl       string                 `protobuf:"bytes,6,opt,name=file_url,json=fileUrl,proto3" json:"file_url,omitempty"`
+	FileSize      string                 `protobuf:"bytes,7,opt,name=file_size,json=fileSize,proto3" json:"file_size,omitempty"`
+	FileFormat    string                 `protobuf:"bytes,8,opt,name=file_format,json=fileFormat,proto3" json:"file_format,omitempty"`
+	CreateAt      *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=create_at,json=createAt,proto3" json:"create_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -943,11 +1008,18 @@ func (x *ListReportExportResponse_ReportExport) GetTaskId() int64 {
 	return 0
 }
 
-func (x *ListReportExportResponse_ReportExport) GetUserId() int64 {
+func (x *ListReportExportResponse_ReportExport) GetUserName() string {
 	if x != nil {
-		return x.UserId
+		return x.UserName
 	}
-	return 0
+	return ""
+}
+
+func (x *ListReportExportResponse_ReportExport) GetStaskName() string {
+	if x != nil {
+		return x.StaskName
+	}
+	return ""
 }
 
 func (x *ListReportExportResponse_ReportExport) GetType() string {
@@ -985,9 +1057,9 @@ func (x *ListReportExportResponse_ReportExport) GetFileFormat() string {
 	return ""
 }
 
-func (x *ListReportExportResponse_ReportExport) GetResult() *structpb.Struct {
+func (x *ListReportExportResponse_ReportExport) GetCreateAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.Result
+		return x.CreateAt
 	}
 	return nil
 }
@@ -1023,39 +1095,51 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\tfile_path\x18\x01 \x01(\tR\bfilePath\x12\x12\n" +
 	"\x04hash\x18\x02 \x01(\tR\x04hash\x12#\n" +
 	"\rexpected_hash\x18\x03 \x01(\tR\fexpectedHash\x12\x19\n" +
-	"\bis_match\x18\x04 \x01(\bR\aisMatch\"\xe2\x01\n" +
+	"\bis_match\x18\x04 \x01(\bR\aisMatch\"\xdc\x02\n" +
 	"\x17ListReportExportRequest\x12\x19\n" +
 	"\btask_ids\x18\x01 \x03(\x03R\ataskIds\x12\x17\n" +
-	"\x04type\x18\x02 \x01(\tH\x00R\x04type\x88\x01\x01\x12\x1c\n" +
-	"\auser_id\x18\x03 \x01(\x03H\x01R\x06userId\x88\x01\x01\x12K\n" +
-	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextH\x02R\x0foperatorContext\x88\x01\x01B\a\n" +
-	"\x05_typeB\n" +
-	"\n" +
-	"\b_user_idB\x13\n" +
-	"\x11_operator_context\"\xe3\x02\n" +
+	"\x04type\x18\x02 \x01(\tH\x00R\x04type\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\x03 \x01(\tH\x01R\x06status\x88\x01\x01\x125\n" +
+	"\x05start\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\x05start\x88\x01\x01\x121\n" +
+	"\x03end\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\x03end\x88\x01\x01\x12K\n" +
+	"\x10operator_context\x18\x06 \x01(\v2\x1b.api.common.OperatorContextH\x04R\x0foperatorContext\x88\x01\x01B\a\n" +
+	"\x05_typeB\t\n" +
+	"\a_statusB\b\n" +
+	"\x06_startB\x06\n" +
+	"\x04_endB\x13\n" +
+	"\x11_operator_context\"\xe6\x04\n" +
 	"\x18ListReportExportResponse\x12N\n" +
-	"\x05tasks\x18\x01 \x03(\v28.system.service.v1.ListReportExportResponse.ReportExportR\x05tasks\x1a\xf6\x01\n" +
+	"\x05tasks\x18\x01 \x03(\v28.system.service.v1.ListReportExportResponse.ReportExportR\x05tasks\x12\x1d\n" +
+	"\n" +
+	"total_page\x18\x02 \x01(\x05R\ttotalPage\x12'\n" +
+	"\x0ftotal_completed\x18\x03 \x01(\x05R\x0etotalCompleted\x12)\n" +
+	"\x10total_generating\x18\x04 \x01(\x05R\x0ftotalGenerating\x12#\n" +
+	"\rtotal_pending\x18\x05 \x01(\x05R\ftotalPending\x12!\n" +
+	"\ftotal_failed\x18\x06 \x01(\x05R\vtotalFailed\x12\x1b\n" +
+	"\tpage_size\x18\a \x01(\x05R\bpageSize\x1a\xa1\x02\n" +
 	"\fReportExport\x12\x17\n" +
-	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x17\n" +
-	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x12\n" +
-	"\x04type\x18\x03 \x01(\tR\x04type\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\tR\x06status\x12\x19\n" +
-	"\bfile_url\x18\x05 \x01(\tR\afileUrl\x12\x1b\n" +
-	"\tfile_size\x18\x06 \x01(\tR\bfileSize\x12\x1f\n" +
-	"\vfile_format\x18\a \x01(\tR\n" +
-	"fileFormat\x12/\n" +
-	"\x06result\x18\b \x01(\v2\x17.google.protobuf.StructR\x06result\"\xcb\x02\n" +
+	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x1b\n" +
+	"\tuser_name\x18\x02 \x01(\tR\buserName\x12\x1d\n" +
+	"\n" +
+	"stask_name\x18\x03 \x01(\tR\tstaskName\x12\x12\n" +
+	"\x04type\x18\x04 \x01(\tR\x04type\x12\x16\n" +
+	"\x06status\x18\x05 \x01(\tR\x06status\x12\x19\n" +
+	"\bfile_url\x18\x06 \x01(\tR\afileUrl\x12\x1b\n" +
+	"\tfile_size\x18\a \x01(\tR\bfileSize\x12\x1f\n" +
+	"\vfile_format\x18\b \x01(\tR\n" +
+	"fileFormat\x127\n" +
+	"\tcreate_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\bcreateAt\"\xe9\x02\n" +
 	"\x19CreateReportExportRequest\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\tR\x04type\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\tR\x06status\x12\x19\n" +
-	"\bfile_url\x18\x05 \x01(\tR\afileUrl\x12\x1b\n" +
-	"\tfile_size\x18\x06 \x01(\tR\bfileSize\x12\x1f\n" +
-	"\vfile_format\x18\a \x01(\tR\n" +
-	"fileFormat\x12F\n" +
-	"\x10operator_context\x18\b \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12/\n" +
-	"\x06params\x18\t \x01(\v2\x17.google.protobuf.StructR\x06params\"\x1c\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\x12\x1b\n" +
+	"\ttask_name\x18\x05 \x01(\tR\btaskName\x12\x1f\n" +
+	"\vfile_format\x18\x06 \x01(\tR\n" +
+	"fileFormat\x127\n" +
+	"\tcreate_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\bcreateAt\x12/\n" +
+	"\x06params\x18\b \x01(\v2\x17.google.protobuf.StructR\x06params\x12F\n" +
+	"\x10operator_context\x18\t \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x1c\n" +
 	"\x1aCreateReportExportResponse\"\xd6\x01\n" +
 	"\x19UpdateReportExportRequest\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x16\n" +
@@ -1115,40 +1199,43 @@ var file_system_service_v1_system_proto_goTypes = []any{
 	(*ListIntegrityStatusResponse_IntegrityStatus_FileInfo)(nil), // 14: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.FileInfo
 	(*ListReportExportResponse_ReportExport)(nil),                // 15: system.service.v1.ListReportExportResponse.ReportExport
 	(*common.OperatorContext)(nil),                               // 16: api.common.OperatorContext
-	(*structpb.Struct)(nil),                                      // 17: google.protobuf.Struct
-	(*timestamppb.Timestamp)(nil),                                // 18: google.protobuf.Timestamp
+	(*timestamppb.Timestamp)(nil),                                // 17: google.protobuf.Timestamp
+	(*structpb.Struct)(nil),                                      // 18: google.protobuf.Struct
 }
 var file_system_service_v1_system_proto_depIdxs = []int32{
 	0,  // 0: system.service.v1.AddIntegrityReportRequest.file_infos:type_name -> system.service.v1.FileInfo
 	16, // 1: system.service.v1.ListIntegrityStatusRequest.operator_context:type_name -> api.common.OperatorContext
 	13, // 2: system.service.v1.ListIntegrityStatusResponse.integrity_statuses:type_name -> system.service.v1.ListIntegrityStatusResponse.IntegrityStatus
-	16, // 3: system.service.v1.ListReportExportRequest.operator_context:type_name -> api.common.OperatorContext
-	15, // 4: system.service.v1.ListReportExportResponse.tasks:type_name -> system.service.v1.ListReportExportResponse.ReportExport
-	16, // 5: system.service.v1.CreateReportExportRequest.operator_context:type_name -> api.common.OperatorContext
-	17, // 6: system.service.v1.CreateReportExportRequest.params:type_name -> google.protobuf.Struct
-	17, // 7: system.service.v1.UpdateReportExportRequest.result:type_name -> google.protobuf.Struct
-	16, // 8: system.service.v1.SetIntegrityConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	0,  // 9: system.service.v1.SetIntegrityConfigRequest.file_infos:type_name -> system.service.v1.FileInfo
-	14, // 10: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.file_infos:type_name -> system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.FileInfo
-	18, // 11: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.created_at:type_name -> google.protobuf.Timestamp
-	17, // 12: system.service.v1.ListReportExportResponse.ReportExport.result:type_name -> google.protobuf.Struct
-	1,  // 13: system.service.v1.System.AddIntegrityReport:input_type -> system.service.v1.AddIntegrityReportRequest
-	3,  // 14: system.service.v1.System.ListIntegrityStatus:input_type -> system.service.v1.ListIntegrityStatusRequest
-	5,  // 15: system.service.v1.System.ListReportExport:input_type -> system.service.v1.ListReportExportRequest
-	7,  // 16: system.service.v1.System.CreateTask:input_type -> system.service.v1.CreateReportExportRequest
-	9,  // 17: system.service.v1.System.UpdateTask:input_type -> system.service.v1.UpdateReportExportRequest
-	11, // 18: system.service.v1.System.SetIntegrityConfig:input_type -> system.service.v1.SetIntegrityConfigRequest
-	2,  // 19: system.service.v1.System.AddIntegrityReport:output_type -> system.service.v1.AddIntegrityReportResponse
-	4,  // 20: system.service.v1.System.ListIntegrityStatus:output_type -> system.service.v1.ListIntegrityStatusResponse
-	6,  // 21: system.service.v1.System.ListReportExport:output_type -> system.service.v1.ListReportExportResponse
-	8,  // 22: system.service.v1.System.CreateTask:output_type -> system.service.v1.CreateReportExportResponse
-	10, // 23: system.service.v1.System.UpdateTask:output_type -> system.service.v1.UpdateReportExportResponse
-	12, // 24: system.service.v1.System.SetIntegrityConfig:output_type -> system.service.v1.SetIntegrityConfigResponse
-	19, // [19:25] is the sub-list for method output_type
-	13, // [13:19] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	17, // 3: system.service.v1.ListReportExportRequest.start:type_name -> google.protobuf.Timestamp
+	17, // 4: system.service.v1.ListReportExportRequest.end:type_name -> google.protobuf.Timestamp
+	16, // 5: system.service.v1.ListReportExportRequest.operator_context:type_name -> api.common.OperatorContext
+	15, // 6: system.service.v1.ListReportExportResponse.tasks:type_name -> system.service.v1.ListReportExportResponse.ReportExport
+	17, // 7: system.service.v1.CreateReportExportRequest.create_at:type_name -> google.protobuf.Timestamp
+	18, // 8: system.service.v1.CreateReportExportRequest.params:type_name -> google.protobuf.Struct
+	16, // 9: system.service.v1.CreateReportExportRequest.operator_context:type_name -> api.common.OperatorContext
+	18, // 10: system.service.v1.UpdateReportExportRequest.result:type_name -> google.protobuf.Struct
+	16, // 11: system.service.v1.SetIntegrityConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	0,  // 12: system.service.v1.SetIntegrityConfigRequest.file_infos:type_name -> system.service.v1.FileInfo
+	14, // 13: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.file_infos:type_name -> system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.FileInfo
+	17, // 14: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.created_at:type_name -> google.protobuf.Timestamp
+	17, // 15: system.service.v1.ListReportExportResponse.ReportExport.create_at:type_name -> google.protobuf.Timestamp
+	1,  // 16: system.service.v1.System.AddIntegrityReport:input_type -> system.service.v1.AddIntegrityReportRequest
+	3,  // 17: system.service.v1.System.ListIntegrityStatus:input_type -> system.service.v1.ListIntegrityStatusRequest
+	5,  // 18: system.service.v1.System.ListReportExport:input_type -> system.service.v1.ListReportExportRequest
+	7,  // 19: system.service.v1.System.CreateTask:input_type -> system.service.v1.CreateReportExportRequest
+	9,  // 20: system.service.v1.System.UpdateTask:input_type -> system.service.v1.UpdateReportExportRequest
+	11, // 21: system.service.v1.System.SetIntegrityConfig:input_type -> system.service.v1.SetIntegrityConfigRequest
+	2,  // 22: system.service.v1.System.AddIntegrityReport:output_type -> system.service.v1.AddIntegrityReportResponse
+	4,  // 23: system.service.v1.System.ListIntegrityStatus:output_type -> system.service.v1.ListIntegrityStatusResponse
+	6,  // 24: system.service.v1.System.ListReportExport:output_type -> system.service.v1.ListReportExportResponse
+	8,  // 25: system.service.v1.System.CreateTask:output_type -> system.service.v1.CreateReportExportResponse
+	10, // 26: system.service.v1.System.UpdateTask:output_type -> system.service.v1.UpdateReportExportResponse
+	12, // 27: system.service.v1.System.SetIntegrityConfig:output_type -> system.service.v1.SetIntegrityConfigResponse
+	22, // [22:28] is the sub-list for method output_type
+	16, // [16:22] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_system_service_v1_system_proto_init() }

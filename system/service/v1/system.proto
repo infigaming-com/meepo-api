@@ -61,22 +61,31 @@ message ListIntegrityStatusResponse {
 message ListReportExportRequest {
 	repeated int64 task_ids = 1;
 	optional string type = 2;
-	optional int64 user_id = 3;
-	optional api.common.OperatorContext operator_context = 4;
+	optional string status = 3;
+	optional google.protobuf.Timestamp start = 4;
+	optional google.protobuf.Timestamp end = 5;
+	optional api.common.OperatorContext operator_context = 6;
 }
 
 message ListReportExportResponse {
 	message ReportExport {
 		int64 task_id = 1;
-		int64 user_id = 2;
-		string type = 3;
-		string status = 4;
-		string file_url = 5;
-		string file_size = 6;
-		string file_format = 7;
-		google.protobuf.Struct result = 8;
+		string user_name = 2;
+		string stask_name = 3;
+		string type = 4;
+		string status = 5;
+		string file_url = 6;
+		string file_size = 7;
+		string file_format = 8;
+		google.protobuf.Timestamp create_at = 9;
 	}
 	repeated ReportExport tasks = 1;
+	int32 total_page = 2;
+	int32 total_completed = 3;
+	int32 total_generating = 4;
+	int32 total_pending = 5;
+	int32 total_failed = 6;
+	int32 page_size = 7;
 }
 
 message CreateReportExportRequest {
@@ -84,11 +93,11 @@ message CreateReportExportRequest {
 	int64 user_id = 2;
 	string type = 3;
 	string status = 4;
-	string file_url = 5;
-	string file_size = 6;
-	string file_format = 7;
-	api.common.OperatorContext operator_context = 8;
-	google.protobuf.Struct params = 9;
+	string task_name = 5;
+	string file_format = 6;
+	google.protobuf.Timestamp create_at = 7;
+	google.protobuf.Struct params = 8;
+	api.common.OperatorContext operator_context = 9;
 }
 
 message CreateReportExportResponse {

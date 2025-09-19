@@ -676,8 +676,74 @@ func (m *ListReportExportRequest) validate(all bool) error {
 		// no validation rules for Type
 	}
 
-	if m.UserId != nil {
-		// no validation rules for UserId
+	if m.Status != nil {
+		// no validation rules for Status
+	}
+
+	if m.Start != nil {
+
+		if all {
+			switch v := interface{}(m.GetStart()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListReportExportRequestValidationError{
+						field:  "Start",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListReportExportRequestValidationError{
+						field:  "Start",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetStart()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListReportExportRequestValidationError{
+					field:  "Start",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.End != nil {
+
+		if all {
+			switch v := interface{}(m.GetEnd()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListReportExportRequestValidationError{
+						field:  "End",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListReportExportRequestValidationError{
+						field:  "End",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetEnd()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListReportExportRequestValidationError{
+					field:  "End",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	}
 
 	if m.OperatorContext != nil {
@@ -849,6 +915,18 @@ func (m *ListReportExportResponse) validate(all bool) error {
 
 	}
 
+	// no validation rules for TotalPage
+
+	// no validation rules for TotalCompleted
+
+	// no validation rules for TotalGenerating
+
+	// no validation rules for TotalPending
+
+	// no validation rules for TotalFailed
+
+	// no validation rules for PageSize
+
 	if len(errors) > 0 {
 		return ListReportExportResponseMultiError(errors)
 	}
@@ -959,18 +1037,16 @@ func (m *CreateReportExportRequest) validate(all bool) error {
 
 	// no validation rules for Status
 
-	// no validation rules for FileUrl
-
-	// no validation rules for FileSize
+	// no validation rules for TaskName
 
 	// no validation rules for FileFormat
 
 	if all {
-		switch v := interface{}(m.GetOperatorContext()).(type) {
+		switch v := interface{}(m.GetCreateAt()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, CreateReportExportRequestValidationError{
-					field:  "OperatorContext",
+					field:  "CreateAt",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -978,16 +1054,16 @@ func (m *CreateReportExportRequest) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, CreateReportExportRequestValidationError{
-					field:  "OperatorContext",
+					field:  "CreateAt",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetCreateAt()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return CreateReportExportRequestValidationError{
-				field:  "OperatorContext",
+				field:  "CreateAt",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -1017,6 +1093,35 @@ func (m *CreateReportExportRequest) validate(all bool) error {
 		if err := v.Validate(); err != nil {
 			return CreateReportExportRequestValidationError{
 				field:  "Params",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateReportExportRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateReportExportRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateReportExportRequestValidationError{
+				field:  "OperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -2041,7 +2146,9 @@ func (m *ListReportExportResponse_ReportExport) validate(all bool) error {
 
 	// no validation rules for TaskId
 
-	// no validation rules for UserId
+	// no validation rules for UserName
+
+	// no validation rules for StaskName
 
 	// no validation rules for Type
 
@@ -2054,11 +2161,11 @@ func (m *ListReportExportResponse_ReportExport) validate(all bool) error {
 	// no validation rules for FileFormat
 
 	if all {
-		switch v := interface{}(m.GetResult()).(type) {
+		switch v := interface{}(m.GetCreateAt()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, ListReportExportResponse_ReportExportValidationError{
-					field:  "Result",
+					field:  "CreateAt",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -2066,16 +2173,16 @@ func (m *ListReportExportResponse_ReportExport) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, ListReportExportResponse_ReportExportValidationError{
-					field:  "Result",
+					field:  "CreateAt",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetResult()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetCreateAt()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return ListReportExportResponse_ReportExportValidationError{
-				field:  "Result",
+				field:  "CreateAt",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
