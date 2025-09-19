@@ -1271,6 +1271,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListBetsResponse'
+    /v1/backoffice/game/bets/multiple/list:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ListMultipleBets
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListMultipleBetsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.ListMultipleBetsResponse'
     /v1/backoffice/game/bets/overview/get:
         post:
             tags:
@@ -1289,6 +1307,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetUserBetsOverviewResponse'
+    /v1/backoffice/game/bets/stake-variance/list:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ListStakeVarianceBets
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListStakeVarianceBetsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.ListStakeVarianceBetsResponse'
     /v1/backoffice/game/bets/transactions/get:
         post:
             tags:
@@ -1307,6 +1343,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.GetGameTransactionsForBetResponse'
+    /v1/backoffice/game/bets/unpaid/export:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ExportUnpaidBets
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ExportUnpaidBetsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.ExportUnpaidBetsResponse'
     /v1/backoffice/game/bets/unpaid/list:
         post:
             tags:
@@ -2407,24 +2461,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListSummariesResponse'
-    /v1/backoffice/report/transaction-and-event-info/get:
-        post:
-            tags:
-                - BackofficeReport
-            operationId: BackofficeReport_GetTransactionAndEventInfo
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTransactionAndEventInfoRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetTransactionAndEventInfoResponse'
     /v1/backoffice/report/withdraw-details/list:
         post:
             tags:
@@ -2623,16 +2659,16 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ReviewTicketResponse'
-    /v1/backoffice/system/currencies/add:
+    /v1/backoffice/system/integrity/file-info/config/set:
         post:
             tags:
                 - BackofficeSystem
-            operationId: BackofficeSystem_AddSystemCurrency
+            operationId: BackofficeSystem_SetIntegrityConfig
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.AddSystemCurrencyRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetIntegrityConfigRequest'
                 required: true
             responses:
                 "200":
@@ -2640,17 +2676,17 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.AddSystemCurrencyResponse'
-    /v1/backoffice/system/currencies/list:
+                                $ref: '#/components/schemas/system.service.v1.SetIntegrityConfigResponse'
+    /v1/backoffice/system/integrity/status/list:
         post:
             tags:
                 - BackofficeSystem
-            operationId: BackofficeSystem_ListSystemCurrencies
+            operationId: BackofficeSystem_ListIntegrityStatus
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListSystemCurrenciesRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListIntegrityStatusRequest'
                 required: true
             responses:
                 "200":
@@ -2658,25 +2694,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListSystemCurrenciesResponse'
-    /v1/backoffice/system/currencies/update:
-        post:
-            tags:
-                - BackofficeSystem
-            operationId: BackofficeSystem_UpdateSystemCurrency
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateSystemCurrencyRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateSystemCurrencyResponse'
+                                $ref: '#/components/schemas/system.service.v1.ListIntegrityStatusResponse'
     /v1/backoffice/user/comments/add:
         post:
             tags:
@@ -3246,6 +3264,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse'
+    /v1/backoffice/wallet/customer-records/export:
+        post:
+            tags:
+                - BackofficeWallet
+            description: ExportCustomerRecords creates a task to exports customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
+            operationId: BackofficeWallet_ExportCustomerRecords
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ExportCustomerRecordsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.ExportCustomerRecordsResponse'
     /v1/backoffice/wallet/customer-records/list:
         post:
             tags:
@@ -3397,6 +3434,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.SetFICAThresholdConfigResponse'
+    /v1/backoffice/wallet/fica/transactions/export:
+        post:
+            tags:
+                - BackofficeWallet
+            description: ExportFICAThresholdTransactions creates a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
+            operationId: BackofficeWallet_ExportFICAThresholdTransactions
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.ExportFICAThresholdTransactionsResponse'
     /v1/backoffice/wallet/fica/transactions/list:
         post:
             tags:
@@ -4235,6 +4291,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.review.service.v1.CreateWithdrawResponse'
+    /v1/user/account/update:
+        post:
+            tags:
+                - User
+            operationId: User_CloseAccount
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.CloseAccountRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.CloseAccountResponse'
     /v1/user/auth/login:
         post:
             tags:
@@ -5028,30 +5102,6 @@ components:
                     type: array
                     items:
                         type: string
-        api.backoffice.service.v1.AddSystemCurrencyRequest:
-            type: object
-            properties:
-                currency:
-                    type: string
-                enabled:
-                    type: boolean
-                hidden:
-                    type: boolean
-                type:
-                    type: string
-                symbol:
-                    type: string
-                icon:
-                    type: string
-                decimalPlaces:
-                    type: integer
-                    format: int32
-                currencyDecimalPlaces:
-                    type: integer
-                    format: int32
-        api.backoffice.service.v1.AddSystemCurrencyResponse:
-            type: object
-            properties: {}
         api.backoffice.service.v1.AddUserCommentRequest:
             type: object
             properties:
@@ -5666,6 +5716,62 @@ components:
                 venueTournament:
                     type: string
                 settlementDetails:
+                    type: string
+        api.backoffice.service.v1.ExportCustomerRecordsRequest:
+            type: object
+            properties:
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                userId:
+                    type: string
+                transactionId:
+                    type: string
+                transactionType:
+                    type: string
+                format:
+                    type: string
+                timeZone:
+                    type: string
+        api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest:
+            type: object
+            properties:
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                transactionType:
+                    type: string
+                currency:
+                    type: string
+                kycLevel:
+                    type: integer
+                    format: int32
+                format:
+                    type: string
+                timeZone:
+                    type: string
+        api.backoffice.service.v1.ExportUnpaidBetsRequest:
+            type: object
+            properties:
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                userId:
+                    type: string
+                transactionId:
+                    type: string
+                format:
+                    type: string
+                timeZone:
                     type: string
         api.backoffice.service.v1.GameData_Data:
             type: object
@@ -6539,69 +6645,6 @@ components:
                 retailerOperatorName:
                     type: string
                 systemOperatorName:
-                    type: string
-        api.backoffice.service.v1.GetTransactionAndEventInfoRequest:
-            type: object
-            properties:
-                gameBetId:
-                    type: string
-            description: Transaction and Settlement related messages
-        api.backoffice.service.v1.GetTransactionAndEventInfoResponse:
-            type: object
-            properties:
-                transactionInfo:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.GetTransactionAndEventInfoResponse_TransactionInfo'
-                eventSettlementInfo:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.GetTransactionAndEventInfoResponse_EventSettlementInfo'
-        api.backoffice.service.v1.GetTransactionAndEventInfoResponse_EventSettlementInfo:
-            type: object
-            properties:
-                selectionBetDetails:
-                    type: string
-                eventDescription:
-                    type: string
-                settlementDetails:
-                    type: string
-                status:
-                    type: string
-        api.backoffice.service.v1.GetTransactionAndEventInfoResponse_TransactionInfo:
-            type: object
-            properties:
-                gameTransactionId:
-                    type: string
-                providerTransactionId:
-                    type: string
-                settlementTime:
-                    type: string
-                    format: date-time
-                eventStartTime:
-                    type: string
-                    format: date-time
-                venueTournament:
-                    type: string
-                odds:
-                    type: string
-                wagerType:
-                    type: string
-                betCurrency:
-                    type: string
-                betAmount:
-                    type: string
-                winMultiplier:
-                    type: string
-                betSettlementCurrency:
-                    type: string
-                betSettlementAmount:
-                    type: string
-                payoutCurrency:
-                    type: string
-                payoutSettlementCurrency:
-                    type: string
-                payoutSettlementAmount:
-                    type: string
-                payoutAmount:
-                    type: string
-                validBetAmount:
                     type: string
         api.backoffice.service.v1.GetTransactionPageRequest:
             type: object
@@ -8101,6 +8144,9 @@ components:
                         type: string
                 enabled:
                     type: boolean
+        api.backoffice.service.v1.ListIntegrityStatusRequest:
+            type: object
+            properties: {}
         api.backoffice.service.v1.ListInvoicesRequest:
             type: object
             properties:
@@ -8281,6 +8327,29 @@ components:
                 estCostsTotal:
                     type: string
             description: Summary totals
+        api.backoffice.service.v1.ListMultipleBetsRequest:
+            type: object
+            properties:
+                startTime:
+                    type: string
+                    description: Filter conditions
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                status:
+                    type: string
+                userId:
+                    type: string
+                transactionId:
+                    type: string
+                page:
+                    type: integer
+                    description: Pagination
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest:
             type: object
             properties:
@@ -9036,6 +9105,31 @@ components:
                     type: string
                 status:
                     type: string
+        api.backoffice.service.v1.ListStakeVarianceBetsRequest:
+            type: object
+            properties:
+                startTime:
+                    type: string
+                    description: Filter conditions
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                userId:
+                    type: string
+                transactionId:
+                    type: string
+                category:
+                    type: string
+                roundId:
+                    type: string
+                page:
+                    type: integer
+                    description: Pagination
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListSummariesRequest:
             type: object
             properties:
@@ -9227,33 +9321,6 @@ components:
                     type: string
                 ngrReportingCurrency:
                     type: string
-        api.backoffice.service.v1.ListSystemCurrenciesRequest:
-            type: object
-            properties:
-                currencies:
-                    type: array
-                    items:
-                        type: string
-                enabled:
-                    type: boolean
-                hidden:
-                    type: boolean
-        api.backoffice.service.v1.ListSystemCurrenciesResponse:
-            type: object
-            properties:
-                currencies:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.SystemCurrency'
-                total:
-                    type: integer
-                    format: int32
-                totalEnabled:
-                    type: integer
-                    format: int32
-                totalHidden:
-                    type: integer
-                    format: int32
         api.backoffice.service.v1.ListTagsRequest:
             type: object
             properties: {}
@@ -10374,6 +10441,17 @@ components:
                     type: string
                 ficaThresholdConfig:
                     $ref: '#/components/schemas/api.wallet.service.v1.FICAThresholdConfig'
+        api.backoffice.service.v1.SetIntegrityConfigRequest:
+            type: object
+            properties:
+                labelApp:
+                    type: string
+                podNamespace:
+                    type: string
+                fileInfos:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/system.service.v1.FileInfo'
         api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest:
             type: object
             properties:
@@ -10425,27 +10503,6 @@ components:
         api.backoffice.service.v1.SetUserTagsResponse:
             type: object
             properties: {}
-        api.backoffice.service.v1.SystemCurrency:
-            type: object
-            properties:
-                currency:
-                    type: string
-                enabled:
-                    type: boolean
-                hidden:
-                    type: boolean
-                type:
-                    type: string
-                symbol:
-                    type: string
-                icon:
-                    type: string
-                decimalPlaces:
-                    type: integer
-                    format: int32
-                currencyDecimalPlaces:
-                    type: integer
-                    format: int32
         api.backoffice.service.v1.TimeRange:
             type: object
             properties:
@@ -10628,32 +10685,6 @@ components:
         api.backoffice.service.v1.UpdateRoleResponse:
             type: object
             properties: {}
-        api.backoffice.service.v1.UpdateSystemCurrencyRequest:
-            type: object
-            properties:
-                currency:
-                    type: string
-                enabled:
-                    type: boolean
-                hidden:
-                    type: boolean
-                type:
-                    type: string
-                symbol:
-                    type: string
-                icon:
-                    type: string
-                decimalPlaces:
-                    type: integer
-                    format: int32
-                currencyDecimalPlaces:
-                    type: integer
-                    format: int32
-        api.backoffice.service.v1.UpdateSystemCurrencyResponse:
-            type: object
-            properties:
-                currency:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.SystemCurrency'
         api.backoffice.service.v1.UpdateTaxReportConfigRequest:
             type: object
             properties:
@@ -11491,6 +11522,11 @@ components:
             properties:
                 gameUrl:
                     type: string
+        api.game.service.v1.ExportUnpaidBetsResponse:
+            type: object
+            properties:
+                taskId:
+                    type: string
         api.game.service.v1.GameFilter:
             type: object
             properties:
@@ -12015,6 +12051,53 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.game.service.v1.ListMultipleBetsResponse:
+            type: object
+            properties:
+                records:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.ListMultipleBetsResponse_MultipleBet'
+                totalCount:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.game.service.v1.ListMultipleBetsResponse_MultipleBet:
+            type: object
+            properties:
+                createdAt:
+                    type: string
+                    description: Basic information
+                    format: date-time
+                status:
+                    type: string
+                userId:
+                    type: string
+                transactionId:
+                    type: string
+                roundId:
+                    type: string
+                category:
+                    type: string
+                    description: Game information
+                provider:
+                    type: string
+                currency:
+                    type: string
+                    description: Financial information
+                betAmount:
+                    type: string
+                winAmount:
+                    type: string
+                taxable:
+                    type: string
+                prospectiveTax:
+                    type: string
         api.game.service.v1.ListProvidersRequest:
             type: object
             properties:
@@ -12103,7 +12186,6 @@ components:
                     type: string
                 endTime:
                     type: string
-            description: Sport Events related messages
         api.game.service.v1.ListSportEventsResponse:
             type: object
             properties:
@@ -12152,6 +12234,66 @@ components:
                 status:
                     type: string
                     description: Status information
+        api.game.service.v1.ListStakeVarianceBetsResponse:
+            type: object
+            properties:
+                records:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.ListStakeVarianceBetsResponse_StakeVarianceBet'
+                summary:
+                    $ref: '#/components/schemas/api.game.service.v1.ListStakeVarianceBetsResponse_SummaryStats'
+                totalCount:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.game.service.v1.ListStakeVarianceBetsResponse_StakeVarianceBet:
+            type: object
+            properties:
+                createdAt:
+                    type: string
+                    description: Basic information
+                    format: date-time
+                status:
+                    type: string
+                userId:
+                    type: string
+                transactionId:
+                    type: string
+                roundId:
+                    type: string
+                category:
+                    type: string
+                    description: Game information
+                provider:
+                    type: string
+                currency:
+                    type: string
+                    description: Financial information
+                betAmount:
+                    type: string
+                payoutAmount:
+                    type: string
+                winAmount:
+                    type: string
+        api.game.service.v1.ListStakeVarianceBetsResponse_SummaryStats:
+            type: object
+            properties:
+                totalRecords:
+                    type: integer
+                    description: Summary statistics shown in cards
+                    format: int32
+                totalBetAmount:
+                    type: string
+                averageBetAmount:
+                    type: string
+                maximumBetAmount:
+                    type: string
         api.game.service.v1.ListUnpaidBetsResponse:
             type: object
             properties:
@@ -12825,6 +12967,12 @@ components:
                 createdAt:
                     type: string
                     format: date-time
+        api.user.service.v1.CloseAccountRequest:
+            type: object
+            properties: {}
+        api.user.service.v1.CloseAccountResponse:
+            type: object
+            properties: {}
         api.user.service.v1.DeleteOperatorByoDomainResponse:
             type: object
             properties: {}
@@ -14163,7 +14311,7 @@ components:
         api.wallet.service.v1.DeleteResponsibleGamblingConfigRequest:
             type: object
             properties:
-                userId:
+                targetUserId:
                     type: string
                 operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
@@ -14174,6 +14322,8 @@ components:
                     description: |-
                         deposit_limit, withdrawal_limit, daily_play_limit, weekly_play_limit, monthly_play_limit
                          daily_loss_limit, weekly_loss_limit, monthly_loss_limit
+                initiatorUserId:
+                    type: string
         api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse:
             type: object
             properties: {}
@@ -14199,6 +14349,16 @@ components:
                     type: string
                     format: date-time
             description: Deposit reward config for an operator with specific currency
+        api.wallet.service.v1.ExportCustomerRecordsResponse:
+            type: object
+            properties:
+                taskId:
+                    type: string
+        api.wallet.service.v1.ExportFICAThresholdTransactionsResponse:
+            type: object
+            properties:
+                taskId:
+                    type: string
         api.wallet.service.v1.FICAThresholdConfig:
             type: object
             properties:
@@ -15857,6 +16017,50 @@ components:
             description: |-
                 Response for withdraw callback
                  Confirms receipt of callback notification
+        system.service.v1.FileInfo:
+            type: object
+            properties:
+                filePath:
+                    type: string
+                hash:
+                    type: string
+        system.service.v1.IntegrityStatus_FileInfo:
+            type: object
+            properties:
+                filePath:
+                    type: string
+                hash:
+                    type: string
+                expectedHash:
+                    type: string
+                isMatch:
+                    type: boolean
+        system.service.v1.ListIntegrityStatusResponse:
+            type: object
+            properties:
+                integrityStatuses:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/system.service.v1.ListIntegrityStatusResponse_IntegrityStatus'
+        system.service.v1.ListIntegrityStatusResponse_IntegrityStatus:
+            type: object
+            properties:
+                labelApp:
+                    type: string
+                podName:
+                    type: string
+                podNamespace:
+                    type: string
+                fileInfos:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/system.service.v1.IntegrityStatus_FileInfo'
+                createdAt:
+                    type: string
+                    format: date-time
+        system.service.v1.SetIntegrityConfigResponse:
+            type: object
+            properties: {}
 tags:
     - name: BackofficeAccount
     - name: BackofficeAudit

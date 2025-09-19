@@ -33,7 +33,6 @@ const (
 	BackofficeReport_ListDepositVtgDetails_FullMethodName      = "/api.backoffice.service.v1.BackofficeReport/ListDepositVtgDetails"
 	BackofficeReport_ListWithdrawVtgDetails_FullMethodName     = "/api.backoffice.service.v1.BackofficeReport/ListWithdrawVtgDetails"
 	BackofficeReport_ListSportEvents_FullMethodName            = "/api.backoffice.service.v1.BackofficeReport/ListSportEvents"
-	BackofficeReport_GetTransactionAndEventInfo_FullMethodName = "/api.backoffice.service.v1.BackofficeReport/GetTransactionAndEventInfo"
 	BackofficeReport_CustomerRecordReportDetail_FullMethodName = "/api.backoffice.service.v1.BackofficeReport/CustomerRecordReportDetail"
 )
 
@@ -55,7 +54,6 @@ type BackofficeReportClient interface {
 	ListDepositVtgDetails(ctx context.Context, in *ListDepositVtgDetailsRequest, opts ...grpc.CallOption) (*ListDepositVtgDetailsResponse, error)
 	ListWithdrawVtgDetails(ctx context.Context, in *ListWithdrawVtgDetailsRequest, opts ...grpc.CallOption) (*ListWithdrawVtgDetailsResponse, error)
 	ListSportEvents(ctx context.Context, in *ListSportEventsRequest, opts ...grpc.CallOption) (*ListSportEventsResponse, error)
-	GetTransactionAndEventInfo(ctx context.Context, in *GetTransactionAndEventInfoRequest, opts ...grpc.CallOption) (*GetTransactionAndEventInfoResponse, error)
 	CustomerRecordReportDetail(ctx context.Context, in *CustomerRecordReportDetailRequest, opts ...grpc.CallOption) (*CustomerRecordReportDetailResponse, error)
 }
 
@@ -207,16 +205,6 @@ func (c *backofficeReportClient) ListSportEvents(ctx context.Context, in *ListSp
 	return out, nil
 }
 
-func (c *backofficeReportClient) GetTransactionAndEventInfo(ctx context.Context, in *GetTransactionAndEventInfoRequest, opts ...grpc.CallOption) (*GetTransactionAndEventInfoResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetTransactionAndEventInfoResponse)
-	err := c.cc.Invoke(ctx, BackofficeReport_GetTransactionAndEventInfo_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *backofficeReportClient) CustomerRecordReportDetail(ctx context.Context, in *CustomerRecordReportDetailRequest, opts ...grpc.CallOption) (*CustomerRecordReportDetailResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CustomerRecordReportDetailResponse)
@@ -245,7 +233,6 @@ type BackofficeReportServer interface {
 	ListDepositVtgDetails(context.Context, *ListDepositVtgDetailsRequest) (*ListDepositVtgDetailsResponse, error)
 	ListWithdrawVtgDetails(context.Context, *ListWithdrawVtgDetailsRequest) (*ListWithdrawVtgDetailsResponse, error)
 	ListSportEvents(context.Context, *ListSportEventsRequest) (*ListSportEventsResponse, error)
-	GetTransactionAndEventInfo(context.Context, *GetTransactionAndEventInfoRequest) (*GetTransactionAndEventInfoResponse, error)
 	CustomerRecordReportDetail(context.Context, *CustomerRecordReportDetailRequest) (*CustomerRecordReportDetailResponse, error)
 	mustEmbedUnimplementedBackofficeReportServer()
 }
@@ -298,9 +285,6 @@ func (UnimplementedBackofficeReportServer) ListWithdrawVtgDetails(context.Contex
 }
 func (UnimplementedBackofficeReportServer) ListSportEvents(context.Context, *ListSportEventsRequest) (*ListSportEventsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSportEvents not implemented")
-}
-func (UnimplementedBackofficeReportServer) GetTransactionAndEventInfo(context.Context, *GetTransactionAndEventInfoRequest) (*GetTransactionAndEventInfoResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetTransactionAndEventInfo not implemented")
 }
 func (UnimplementedBackofficeReportServer) CustomerRecordReportDetail(context.Context, *CustomerRecordReportDetailRequest) (*CustomerRecordReportDetailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CustomerRecordReportDetail not implemented")
@@ -578,24 +562,6 @@ func _BackofficeReport_ListSportEvents_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeReport_GetTransactionAndEventInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTransactionAndEventInfoRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeReportServer).GetTransactionAndEventInfo(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeReport_GetTransactionAndEventInfo_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeReportServer).GetTransactionAndEventInfo(ctx, req.(*GetTransactionAndEventInfoRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _BackofficeReport_CustomerRecordReportDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CustomerRecordReportDetailRequest)
 	if err := dec(in); err != nil {
@@ -676,10 +642,6 @@ var BackofficeReport_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListSportEvents",
 			Handler:    _BackofficeReport_ListSportEvents_Handler,
-		},
-		{
-			MethodName: "GetTransactionAndEventInfo",
-			Handler:    _BackofficeReport_GetTransactionAndEventInfo_Handler,
 		},
 		{
 			MethodName: "CustomerRecordReportDetail",

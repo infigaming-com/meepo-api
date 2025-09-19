@@ -3,81 +3,32 @@ syntax = "proto3";
 package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
+import "system/service/v1/system.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
 
 service BackofficeSystem {
-	rpc AddSystemCurrency(AddSystemCurrencyRequest) returns (AddSystemCurrencyResponse) {
+	rpc ListIntegrityStatus(ListIntegrityStatusRequest) returns (system.service.v1.ListIntegrityStatusResponse) {
 		option (google.api.http) = {
-            post: "/v1/backoffice/system/currencies/add"
-            body: "*"
-        };
-	};
-
-	rpc ListSystemCurrencies(ListSystemCurrenciesRequest) returns (ListSystemCurrenciesResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/system/currencies/list"
-            body: "*"
-        };
-    }
-	rpc UpdateSystemCurrency(UpdateSystemCurrencyRequest) returns (UpdateSystemCurrencyResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/system/currencies/update"
-            body: "*"
-        };
-    }
+			post: "/v1/backoffice/system/integrity/status/list"
+			body: "*"
+		};
+	}
+	rpc SetIntegrityConfig(SetIntegrityConfigRequest) returns (system.service.v1.SetIntegrityConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/system/integrity/file-info/config/set"
+			body: "*"
+		};
+	}
 }
 
-message SystemCurrency {
-	string currency = 1;
-	bool enabled = 2;
-	bool hidden = 3;
-	string type = 4;
-	string symbol = 5;
-	string icon = 6;
-	int32 decimal_places = 7;
-	int32 currency_decimal_places = 8;
+message ListIntegrityStatusRequest {
 }
 
-message AddSystemCurrencyRequest {
-	string currency = 1;
-	bool enabled = 2;
-	bool hidden = 3;
-	string type = 4;
-	string symbol = 5;
-	string icon = 6;
-	int32 decimal_places = 7;
-	int32 currency_decimal_places = 8;
-}
-
-message AddSystemCurrencyResponse {}
-
-message ListSystemCurrenciesRequest {
-	repeated string currencies = 1;
-	optional bool enabled = 2;
-	optional bool hidden = 3;
-}
-
-message ListSystemCurrenciesResponse {
-	repeated SystemCurrency currencies = 1;
-	int32 total = 2;
-	int32 total_enabled = 3;
-	int32 total_hidden = 4;
-}
-
-message UpdateSystemCurrencyRequest {
-	string currency = 1;
-	optional bool enabled = 2;
-	optional bool hidden = 3;
-	optional string type = 4;
-	optional string symbol = 5;
-	optional string icon = 6;
-	optional int32 decimal_places = 7;
-	optional int32 currency_decimal_places = 8;
-}
-
-message UpdateSystemCurrencyResponse {
-	SystemCurrency currency = 1;
+message SetIntegrityConfigRequest {
+	string label_app = 1;
+	string pod_namespace = 2;
+	repeated system.service.v1.FileInfo file_infos = 3;
 }

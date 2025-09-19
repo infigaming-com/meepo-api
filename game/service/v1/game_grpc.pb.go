@@ -50,7 +50,11 @@ const (
 	Game_UpdateTaxReport_FullMethodName                   = "/api.game.service.v1.Game/UpdateTaxReport"
 	Game_GetResponsibleGamblingStatus_FullMethodName      = "/api.game.service.v1.Game/GetResponsibleGamblingStatus"
 	Game_ListUnpaidBets_FullMethodName                    = "/api.game.service.v1.Game/ListUnpaidBets"
+	Game_ExportUnpaidBets_FullMethodName                  = "/api.game.service.v1.Game/ExportUnpaidBets"
+	Game_ListMultipleBets_FullMethodName                  = "/api.game.service.v1.Game/ListMultipleBets"
+	Game_ListStakeVarianceBets_FullMethodName             = "/api.game.service.v1.Game/ListStakeVarianceBets"
 	Game_ListSportEvents_FullMethodName                   = "/api.game.service.v1.Game/ListSportEvents"
+	Game_GetBetAndEventInfo_FullMethodName                = "/api.game.service.v1.Game/GetBetAndEventInfo"
 	Game_GetTransactionAndEventInfo_FullMethodName        = "/api.game.service.v1.Game/GetTransactionAndEventInfo"
 )
 
@@ -90,8 +94,12 @@ type GameClient interface {
 	UpdateTaxReport(ctx context.Context, in *UpdateTaxReportRequest, opts ...grpc.CallOption) (*UpdateTaxReportResponse, error)
 	GetResponsibleGamblingStatus(ctx context.Context, in *GetResponsibleGamblingStatusRequest, opts ...grpc.CallOption) (*GetResponsibleGamblingStatusResponse, error)
 	ListUnpaidBets(ctx context.Context, in *ListUnpaidBetsRequest, opts ...grpc.CallOption) (*ListUnpaidBetsResponse, error)
+	ExportUnpaidBets(ctx context.Context, in *ExportUnpaidBetsRequest, opts ...grpc.CallOption) (*ExportUnpaidBetsResponse, error)
+	ListMultipleBets(ctx context.Context, in *ListMultipleBetsRequest, opts ...grpc.CallOption) (*ListMultipleBetsResponse, error)
+	ListStakeVarianceBets(ctx context.Context, in *ListStakeVarianceBetsRequest, opts ...grpc.CallOption) (*ListStakeVarianceBetsResponse, error)
 	// Sport Events related APIs
 	ListSportEvents(ctx context.Context, in *ListSportEventsRequest, opts ...grpc.CallOption) (*ListSportEventsResponse, error)
+	GetBetAndEventInfo(ctx context.Context, in *GetBetAndEventInfoRequest, opts ...grpc.CallOption) (*GetBetAndEventInfoResponse, error)
 	GetTransactionAndEventInfo(ctx context.Context, in *GetTransactionAndEventInfoRequest, opts ...grpc.CallOption) (*GetTransactionAndEventInfoResponse, error)
 }
 
@@ -413,10 +421,50 @@ func (c *gameClient) ListUnpaidBets(ctx context.Context, in *ListUnpaidBetsReque
 	return out, nil
 }
 
+func (c *gameClient) ExportUnpaidBets(ctx context.Context, in *ExportUnpaidBetsRequest, opts ...grpc.CallOption) (*ExportUnpaidBetsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExportUnpaidBetsResponse)
+	err := c.cc.Invoke(ctx, Game_ExportUnpaidBets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) ListMultipleBets(ctx context.Context, in *ListMultipleBetsRequest, opts ...grpc.CallOption) (*ListMultipleBetsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListMultipleBetsResponse)
+	err := c.cc.Invoke(ctx, Game_ListMultipleBets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) ListStakeVarianceBets(ctx context.Context, in *ListStakeVarianceBetsRequest, opts ...grpc.CallOption) (*ListStakeVarianceBetsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListStakeVarianceBetsResponse)
+	err := c.cc.Invoke(ctx, Game_ListStakeVarianceBets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *gameClient) ListSportEvents(ctx context.Context, in *ListSportEventsRequest, opts ...grpc.CallOption) (*ListSportEventsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListSportEventsResponse)
 	err := c.cc.Invoke(ctx, Game_ListSportEvents_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) GetBetAndEventInfo(ctx context.Context, in *GetBetAndEventInfoRequest, opts ...grpc.CallOption) (*GetBetAndEventInfoResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBetAndEventInfoResponse)
+	err := c.cc.Invoke(ctx, Game_GetBetAndEventInfo_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -469,8 +517,12 @@ type GameServer interface {
 	UpdateTaxReport(context.Context, *UpdateTaxReportRequest) (*UpdateTaxReportResponse, error)
 	GetResponsibleGamblingStatus(context.Context, *GetResponsibleGamblingStatusRequest) (*GetResponsibleGamblingStatusResponse, error)
 	ListUnpaidBets(context.Context, *ListUnpaidBetsRequest) (*ListUnpaidBetsResponse, error)
+	ExportUnpaidBets(context.Context, *ExportUnpaidBetsRequest) (*ExportUnpaidBetsResponse, error)
+	ListMultipleBets(context.Context, *ListMultipleBetsRequest) (*ListMultipleBetsResponse, error)
+	ListStakeVarianceBets(context.Context, *ListStakeVarianceBetsRequest) (*ListStakeVarianceBetsResponse, error)
 	// Sport Events related APIs
 	ListSportEvents(context.Context, *ListSportEventsRequest) (*ListSportEventsResponse, error)
+	GetBetAndEventInfo(context.Context, *GetBetAndEventInfoRequest) (*GetBetAndEventInfoResponse, error)
 	GetTransactionAndEventInfo(context.Context, *GetTransactionAndEventInfoRequest) (*GetTransactionAndEventInfoResponse, error)
 	mustEmbedUnimplementedGameServer()
 }
@@ -575,8 +627,20 @@ func (UnimplementedGameServer) GetResponsibleGamblingStatus(context.Context, *Ge
 func (UnimplementedGameServer) ListUnpaidBets(context.Context, *ListUnpaidBetsRequest) (*ListUnpaidBetsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListUnpaidBets not implemented")
 }
+func (UnimplementedGameServer) ExportUnpaidBets(context.Context, *ExportUnpaidBetsRequest) (*ExportUnpaidBetsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportUnpaidBets not implemented")
+}
+func (UnimplementedGameServer) ListMultipleBets(context.Context, *ListMultipleBetsRequest) (*ListMultipleBetsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListMultipleBets not implemented")
+}
+func (UnimplementedGameServer) ListStakeVarianceBets(context.Context, *ListStakeVarianceBetsRequest) (*ListStakeVarianceBetsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListStakeVarianceBets not implemented")
+}
 func (UnimplementedGameServer) ListSportEvents(context.Context, *ListSportEventsRequest) (*ListSportEventsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSportEvents not implemented")
+}
+func (UnimplementedGameServer) GetBetAndEventInfo(context.Context, *GetBetAndEventInfoRequest) (*GetBetAndEventInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBetAndEventInfo not implemented")
 }
 func (UnimplementedGameServer) GetTransactionAndEventInfo(context.Context, *GetTransactionAndEventInfoRequest) (*GetTransactionAndEventInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTransactionAndEventInfo not implemented")
@@ -1160,6 +1224,60 @@ func _Game_ListUnpaidBets_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_ExportUnpaidBets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportUnpaidBetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).ExportUnpaidBets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_ExportUnpaidBets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).ExportUnpaidBets(ctx, req.(*ExportUnpaidBetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_ListMultipleBets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListMultipleBetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).ListMultipleBets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_ListMultipleBets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).ListMultipleBets(ctx, req.(*ListMultipleBetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_ListStakeVarianceBets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListStakeVarianceBetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).ListStakeVarianceBets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_ListStakeVarianceBets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).ListStakeVarianceBets(ctx, req.(*ListStakeVarianceBetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Game_ListSportEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListSportEventsRequest)
 	if err := dec(in); err != nil {
@@ -1174,6 +1292,24 @@ func _Game_ListSportEvents_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GameServer).ListSportEvents(ctx, req.(*ListSportEventsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_GetBetAndEventInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBetAndEventInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).GetBetAndEventInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_GetBetAndEventInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).GetBetAndEventInfo(ctx, req.(*GetBetAndEventInfoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1328,8 +1464,24 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Game_ListUnpaidBets_Handler,
 		},
 		{
+			MethodName: "ExportUnpaidBets",
+			Handler:    _Game_ExportUnpaidBets_Handler,
+		},
+		{
+			MethodName: "ListMultipleBets",
+			Handler:    _Game_ListMultipleBets_Handler,
+		},
+		{
+			MethodName: "ListStakeVarianceBets",
+			Handler:    _Game_ListStakeVarianceBets_Handler,
+		},
+		{
 			MethodName: "ListSportEvents",
 			Handler:    _Game_ListSportEvents_Handler,
+		},
+		{
+			MethodName: "GetBetAndEventInfo",
+			Handler:    _Game_GetBetAndEventInfo_Handler,
 		},
 		{
 			MethodName: "GetTransactionAndEventInfo",

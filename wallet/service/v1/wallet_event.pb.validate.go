@@ -613,3 +613,343 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = OperatorBalanceUpdateEventValidationError{}
+
+// Validate checks the field values on UpdateReponsibleGamblingConfigEvent with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *UpdateReponsibleGamblingConfigEvent) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateReponsibleGamblingConfigEvent
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// UpdateReponsibleGamblingConfigEventMultiError, or nil if none found.
+func (m *UpdateReponsibleGamblingConfigEvent) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateReponsibleGamblingConfigEvent) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TargetUserId
+
+	// no validation rules for InitiatorUserId
+
+	if all {
+		switch v := interface{}(m.GetInitiatorOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateReponsibleGamblingConfigEventValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateReponsibleGamblingConfigEventValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetInitiatorOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateReponsibleGamblingConfigEventValidationError{
+				field:  "InitiatorOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Action
+
+	// no validation rules for Currency
+
+	if all {
+		switch v := interface{}(m.GetBeforeConfig()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateReponsibleGamblingConfigEventValidationError{
+					field:  "BeforeConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateReponsibleGamblingConfigEventValidationError{
+					field:  "BeforeConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetBeforeConfig()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateReponsibleGamblingConfigEventValidationError{
+				field:  "BeforeConfig",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetAfterConfig()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateReponsibleGamblingConfigEventValidationError{
+					field:  "AfterConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateReponsibleGamblingConfigEventValidationError{
+					field:  "AfterConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAfterConfig()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateReponsibleGamblingConfigEventValidationError{
+				field:  "AfterConfig",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for UpdatedAt
+
+	if len(errors) > 0 {
+		return UpdateReponsibleGamblingConfigEventMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateReponsibleGamblingConfigEventMultiError is an error wrapping multiple
+// validation errors returned by
+// UpdateReponsibleGamblingConfigEvent.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateReponsibleGamblingConfigEventMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateReponsibleGamblingConfigEventMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateReponsibleGamblingConfigEventMultiError) AllErrors() []error { return m }
+
+// UpdateReponsibleGamblingConfigEventValidationError is the validation error
+// returned by UpdateReponsibleGamblingConfigEvent.Validate if the designated
+// constraints aren't met.
+type UpdateReponsibleGamblingConfigEventValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateReponsibleGamblingConfigEventValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateReponsibleGamblingConfigEventValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateReponsibleGamblingConfigEventValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateReponsibleGamblingConfigEventValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateReponsibleGamblingConfigEventValidationError) ErrorName() string {
+	return "UpdateReponsibleGamblingConfigEventValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateReponsibleGamblingConfigEventValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateReponsibleGamblingConfigEvent.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateReponsibleGamblingConfigEventValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateReponsibleGamblingConfigEventValidationError{}
+
+// Validate checks the field values on
+// UpdateReponsibleGamblingConfigEvent_Config with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *UpdateReponsibleGamblingConfigEvent_Config) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// UpdateReponsibleGamblingConfigEvent_Config with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// UpdateReponsibleGamblingConfigEvent_ConfigMultiError, or nil if none found.
+func (m *UpdateReponsibleGamblingConfigEvent_Config) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateReponsibleGamblingConfigEvent_Config) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for DepositLimit
+
+	// no validation rules for WithdrawalLimit
+
+	// no validation rules for DailyPlayLimit
+
+	// no validation rules for WeeklyPlayLimit
+
+	// no validation rules for MonthlyPlayLimit
+
+	// no validation rules for DailyLossLimit
+
+	// no validation rules for WeeklyLossLimit
+
+	// no validation rules for MonthlyLossLimit
+
+	// no validation rules for DepositLimitDeleteScheduleTime
+
+	// no validation rules for WithdrawalLimitDeleteScheduleTime
+
+	// no validation rules for DailyPlayLimitDeleteScheduleTime
+
+	// no validation rules for WeeklyPlayLimitDeleteScheduleTime
+
+	// no validation rules for MonthlyPlayLimitDeleteScheduleTime
+
+	// no validation rules for DailyLossLimitDeleteScheduleTime
+
+	// no validation rules for WeeklyLossLimitDeleteScheduleTime
+
+	// no validation rules for MonthlyLossLimitDeleteScheduleTime
+
+	if len(errors) > 0 {
+		return UpdateReponsibleGamblingConfigEvent_ConfigMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateReponsibleGamblingConfigEvent_ConfigMultiError is an error wrapping
+// multiple validation errors returned by
+// UpdateReponsibleGamblingConfigEvent_Config.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateReponsibleGamblingConfigEvent_ConfigMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateReponsibleGamblingConfigEvent_ConfigMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateReponsibleGamblingConfigEvent_ConfigMultiError) AllErrors() []error { return m }
+
+// UpdateReponsibleGamblingConfigEvent_ConfigValidationError is the validation
+// error returned by UpdateReponsibleGamblingConfigEvent_Config.Validate if
+// the designated constraints aren't met.
+type UpdateReponsibleGamblingConfigEvent_ConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateReponsibleGamblingConfigEvent_ConfigValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateReponsibleGamblingConfigEvent_ConfigValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateReponsibleGamblingConfigEvent_ConfigValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateReponsibleGamblingConfigEvent_ConfigValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateReponsibleGamblingConfigEvent_ConfigValidationError) ErrorName() string {
+	return "UpdateReponsibleGamblingConfigEvent_ConfigValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateReponsibleGamblingConfigEvent_ConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateReponsibleGamblingConfigEvent_Config.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateReponsibleGamblingConfigEvent_ConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateReponsibleGamblingConfigEvent_ConfigValidationError{}

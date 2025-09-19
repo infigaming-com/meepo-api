@@ -10,6 +10,7 @@ import (
 	context "context"
 	http "github.com/go-kratos/kratos/v2/transport/http"
 	binding "github.com/go-kratos/kratos/v2/transport/http/binding"
+	v1 "github.com/infigaming-com/meepo-api/system/service/v1"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -19,93 +20,67 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationBackofficeSystemAddSystemCurrency = "/api.backoffice.service.v1.BackofficeSystem/AddSystemCurrency"
-const OperationBackofficeSystemListSystemCurrencies = "/api.backoffice.service.v1.BackofficeSystem/ListSystemCurrencies"
-const OperationBackofficeSystemUpdateSystemCurrency = "/api.backoffice.service.v1.BackofficeSystem/UpdateSystemCurrency"
+const OperationBackofficeSystemListIntegrityStatus = "/api.backoffice.service.v1.BackofficeSystem/ListIntegrityStatus"
+const OperationBackofficeSystemSetIntegrityConfig = "/api.backoffice.service.v1.BackofficeSystem/SetIntegrityConfig"
 
 type BackofficeSystemHTTPServer interface {
-	AddSystemCurrency(context.Context, *AddSystemCurrencyRequest) (*AddSystemCurrencyResponse, error)
-	ListSystemCurrencies(context.Context, *ListSystemCurrenciesRequest) (*ListSystemCurrenciesResponse, error)
-	UpdateSystemCurrency(context.Context, *UpdateSystemCurrencyRequest) (*UpdateSystemCurrencyResponse, error)
+	ListIntegrityStatus(context.Context, *ListIntegrityStatusRequest) (*v1.ListIntegrityStatusResponse, error)
+	SetIntegrityConfig(context.Context, *SetIntegrityConfigRequest) (*v1.SetIntegrityConfigResponse, error)
 }
 
 func RegisterBackofficeSystemHTTPServer(s *http.Server, srv BackofficeSystemHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/backoffice/system/currencies/add", _BackofficeSystem_AddSystemCurrency0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/system/currencies/list", _BackofficeSystem_ListSystemCurrencies0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/system/currencies/update", _BackofficeSystem_UpdateSystemCurrency0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/system/integrity/status/list", _BackofficeSystem_ListIntegrityStatus0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/system/integrity/file-info/config/set", _BackofficeSystem_SetIntegrityConfig0_HTTP_Handler(srv))
 }
 
-func _BackofficeSystem_AddSystemCurrency0_HTTP_Handler(srv BackofficeSystemHTTPServer) func(ctx http.Context) error {
+func _BackofficeSystem_ListIntegrityStatus0_HTTP_Handler(srv BackofficeSystemHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in AddSystemCurrencyRequest
+		var in ListIntegrityStatusRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeSystemAddSystemCurrency)
+		http.SetOperation(ctx, OperationBackofficeSystemListIntegrityStatus)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.AddSystemCurrency(ctx, req.(*AddSystemCurrencyRequest))
+			return srv.ListIntegrityStatus(ctx, req.(*ListIntegrityStatusRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*AddSystemCurrencyResponse)
+		reply := out.(*v1.ListIntegrityStatusResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
-func _BackofficeSystem_ListSystemCurrencies0_HTTP_Handler(srv BackofficeSystemHTTPServer) func(ctx http.Context) error {
+func _BackofficeSystem_SetIntegrityConfig0_HTTP_Handler(srv BackofficeSystemHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in ListSystemCurrenciesRequest
+		var in SetIntegrityConfigRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationBackofficeSystemListSystemCurrencies)
+		http.SetOperation(ctx, OperationBackofficeSystemSetIntegrityConfig)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListSystemCurrencies(ctx, req.(*ListSystemCurrenciesRequest))
+			return srv.SetIntegrityConfig(ctx, req.(*SetIntegrityConfigRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*ListSystemCurrenciesResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _BackofficeSystem_UpdateSystemCurrency0_HTTP_Handler(srv BackofficeSystemHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in UpdateSystemCurrencyRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeSystemUpdateSystemCurrency)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.UpdateSystemCurrency(ctx, req.(*UpdateSystemCurrencyRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*UpdateSystemCurrencyResponse)
+		reply := out.(*v1.SetIntegrityConfigResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
 type BackofficeSystemHTTPClient interface {
-	AddSystemCurrency(ctx context.Context, req *AddSystemCurrencyRequest, opts ...http.CallOption) (rsp *AddSystemCurrencyResponse, err error)
-	ListSystemCurrencies(ctx context.Context, req *ListSystemCurrenciesRequest, opts ...http.CallOption) (rsp *ListSystemCurrenciesResponse, err error)
-	UpdateSystemCurrency(ctx context.Context, req *UpdateSystemCurrencyRequest, opts ...http.CallOption) (rsp *UpdateSystemCurrencyResponse, err error)
+	ListIntegrityStatus(ctx context.Context, req *ListIntegrityStatusRequest, opts ...http.CallOption) (rsp *v1.ListIntegrityStatusResponse, err error)
+	SetIntegrityConfig(ctx context.Context, req *SetIntegrityConfigRequest, opts ...http.CallOption) (rsp *v1.SetIntegrityConfigResponse, err error)
 }
 
 type BackofficeSystemHTTPClientImpl struct {
@@ -116,11 +91,11 @@ func NewBackofficeSystemHTTPClient(client *http.Client) BackofficeSystemHTTPClie
 	return &BackofficeSystemHTTPClientImpl{client}
 }
 
-func (c *BackofficeSystemHTTPClientImpl) AddSystemCurrency(ctx context.Context, in *AddSystemCurrencyRequest, opts ...http.CallOption) (*AddSystemCurrencyResponse, error) {
-	var out AddSystemCurrencyResponse
-	pattern := "/v1/backoffice/system/currencies/add"
+func (c *BackofficeSystemHTTPClientImpl) ListIntegrityStatus(ctx context.Context, in *ListIntegrityStatusRequest, opts ...http.CallOption) (*v1.ListIntegrityStatusResponse, error) {
+	var out v1.ListIntegrityStatusResponse
+	pattern := "/v1/backoffice/system/integrity/status/list"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeSystemAddSystemCurrency))
+	opts = append(opts, http.Operation(OperationBackofficeSystemListIntegrityStatus))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -129,24 +104,11 @@ func (c *BackofficeSystemHTTPClientImpl) AddSystemCurrency(ctx context.Context, 
 	return &out, nil
 }
 
-func (c *BackofficeSystemHTTPClientImpl) ListSystemCurrencies(ctx context.Context, in *ListSystemCurrenciesRequest, opts ...http.CallOption) (*ListSystemCurrenciesResponse, error) {
-	var out ListSystemCurrenciesResponse
-	pattern := "/v1/backoffice/system/currencies/list"
+func (c *BackofficeSystemHTTPClientImpl) SetIntegrityConfig(ctx context.Context, in *SetIntegrityConfigRequest, opts ...http.CallOption) (*v1.SetIntegrityConfigResponse, error) {
+	var out v1.SetIntegrityConfigResponse
+	pattern := "/v1/backoffice/system/integrity/file-info/config/set"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeSystemListSystemCurrencies))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficeSystemHTTPClientImpl) UpdateSystemCurrency(ctx context.Context, in *UpdateSystemCurrencyRequest, opts ...http.CallOption) (*UpdateSystemCurrencyResponse, error) {
-	var out UpdateSystemCurrencyResponse
-	pattern := "/v1/backoffice/system/currencies/update"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeSystemUpdateSystemCurrency))
+	opts = append(opts, http.Operation(OperationBackofficeSystemSetIntegrityConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
