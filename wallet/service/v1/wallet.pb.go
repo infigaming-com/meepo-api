@@ -7763,14 +7763,15 @@ func (*AddResponsibleGamblingConfigResponse) Descriptor() ([]byte, []int) {
 
 type DeleteResponsibleGamblingConfigRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
-	UserId          *int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	TargetUserId    *int64                  `protobuf:"varint,1,opt,name=target_user_id,json=targetUserId,proto3,oneof" json:"target_user_id,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	Currency        string                  `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
 	// deposit_limit, withdrawal_limit, daily_play_limit, weekly_play_limit, monthly_play_limit
 	// daily_loss_limit, weekly_loss_limit, monthly_loss_limit
-	LimitType     string `protobuf:"bytes,4,opt,name=limit_type,json=limitType,proto3" json:"limit_type,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	LimitType       string `protobuf:"bytes,4,opt,name=limit_type,json=limitType,proto3" json:"limit_type,omitempty"`
+	InitiatorUserId *int64 `protobuf:"varint,5,opt,name=initiator_user_id,json=initiatorUserId,proto3,oneof" json:"initiator_user_id,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *DeleteResponsibleGamblingConfigRequest) Reset() {
@@ -7803,9 +7804,9 @@ func (*DeleteResponsibleGamblingConfigRequest) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{103}
 }
 
-func (x *DeleteResponsibleGamblingConfigRequest) GetUserId() int64 {
-	if x != nil && x.UserId != nil {
-		return *x.UserId
+func (x *DeleteResponsibleGamblingConfigRequest) GetTargetUserId() int64 {
+	if x != nil && x.TargetUserId != nil {
+		return *x.TargetUserId
 	}
 	return 0
 }
@@ -7829,6 +7830,13 @@ func (x *DeleteResponsibleGamblingConfigRequest) GetLimitType() string {
 		return x.LimitType
 	}
 	return ""
+}
+
+func (x *DeleteResponsibleGamblingConfigRequest) GetInitiatorUserId() int64 {
+	if x != nil && x.InitiatorUserId != nil {
+		return *x.InitiatorUserId
+	}
+	return 0
 }
 
 type DeleteResponsibleGamblingConfigResponse struct {
@@ -12060,15 +12068,16 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x11_daily_loss_limitB\x14\n" +
 	"\x12_weekly_loss_limitB\x15\n" +
 	"\x13_monthly_loss_limit\"&\n" +
-	"$AddResponsibleGamblingConfigResponse\"\xd5\x01\n" +
-	"&DeleteResponsibleGamblingConfigRequest\x12\x1c\n" +
-	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12F\n" +
+	"$AddResponsibleGamblingConfigResponse\"\xb0\x02\n" +
+	"&DeleteResponsibleGamblingConfigRequest\x12)\n" +
+	"\x0etarget_user_id\x18\x01 \x01(\x03H\x00R\ftargetUserId\x88\x01\x01\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
 	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12\x1d\n" +
 	"\n" +
-	"limit_type\x18\x04 \x01(\tR\tlimitTypeB\n" +
-	"\n" +
-	"\b_user_id\")\n" +
+	"limit_type\x18\x04 \x01(\tR\tlimitType\x12/\n" +
+	"\x11initiator_user_id\x18\x05 \x01(\x03H\x01R\x0finitiatorUserId\x88\x01\x01B\x11\n" +
+	"\x0f_target_user_idB\x14\n" +
+	"\x12_initiator_user_id\")\n" +
 	"'DeleteResponsibleGamblingConfigResponse\"\xff\t\n" +
 	"\x19ResponsibleGamblingConfig\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12#\n" +
