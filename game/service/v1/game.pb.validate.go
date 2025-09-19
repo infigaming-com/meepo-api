@@ -10750,6 +10750,8 @@ func (m *EventInfo) validate(all bool) error {
 
 	// no validation rules for Status
 
+	// no validation rules for Selections
+
 	if len(errors) > 0 {
 		return EventInfoMultiError(errors)
 	}
@@ -14673,6 +14675,10 @@ func (m *GetBetAndEventInfoResponse_BetInfo) validate(all bool) error {
 
 	// no validation rules for SettleTime
 
+	// no validation rules for Odds
+
+	// no validation rules for WinMultiplier
+
 	if len(errors) > 0 {
 		return GetBetAndEventInfoResponse_BetInfoMultiError(errors)
 	}
@@ -14877,6 +14883,12 @@ func (m *GetTransactionAndEventInfoResponse_TransactionInfo) validate(all bool) 
 	// no validation rules for JackpotContributionReportingCurrency
 
 	// no validation rules for JackpotWinReportingCurrency
+
+	// no validation rules for Odds
+
+	// no validation rules for WinMultiplier
+
+	// no validation rules for WagerType
 
 	if len(errors) > 0 {
 		return GetTransactionAndEventInfoResponse_TransactionInfoMultiError(errors)

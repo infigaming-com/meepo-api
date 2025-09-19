@@ -1199,6 +1199,7 @@ message EventInfo {
 	int64 result_processing_time = 23; // BIGINT
 	int64 revised_official_carded_time = 24; // BIGINT
 	string status = 25; // VARCHAR(32) - pending, completed, etc.
+	string selections = 26; // VARCHAR(255) - selection1, selection2, etc.
 }
 
 // Get bet and event info by game bet id
@@ -1273,6 +1274,8 @@ message GetBetAndEventInfoResponse {
 		bool finished = 45; // bool, nullable
 		string wager_type = 46; // varchar(128)
 		int64 settle_time = 47; // int8, nullable
+		string odds = 48; // varchar(128)
+		string win_multiplier = 49; // varchar(128)
 	}
 
 	BetInfo bet_info = 1;
@@ -1360,6 +1363,9 @@ message GetTransactionAndEventInfoResponse {
 		string bonus_amount_reporting_currency = 47; // numeric(36,18)
 		string jackpot_contribution_reporting_currency = 48; // numeric(36,18)
 		string jackpot_win_reporting_currency = 49; // numeric(36,18)
+		string odds = 50; // varchar(128)
+		string win_multiplier = 51; // varchar(128)
+		string wager_type = 52; // varchar(128)
 	}
 
 	TransactionInfo transaction_info = 1;
