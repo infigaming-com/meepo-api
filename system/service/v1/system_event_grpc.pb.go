@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v4.25.6
-// source: system/service/v1/backoffice_event.proto
+// source: system/service/v1/system_event.proto
 
 package v1
 
@@ -117,5 +117,5 @@ var SystemEvent_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "system/service/v1/backoffice_event.proto",
+	Metadata: "system/service/v1/system_event.proto",
 }

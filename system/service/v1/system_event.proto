@@ -4,7 +4,7 @@ package api.system.service.v1;
 
 option go_package = "github.com/infigaming-com/meepo-api/system/service/v1;v1";
 option java_multiple_files = true;
-option java_package = "api.system.service.v1";
+option java_package = "api.system.image.pngservice.v1";
 
 service SystemEvent {
     rpc Event(EventRequest) returns (EventResponse) {}
