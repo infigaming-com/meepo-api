@@ -856,6 +856,22 @@ func (m *UpdateReponsibleGamblingConfigEvent_Config) validate(all bool) error {
 
 	// no validation rules for MonthlyLossLimit
 
+	// no validation rules for DepositLimitDeleteScheduleTime
+
+	// no validation rules for WithdrawalLimitDeleteScheduleTime
+
+	// no validation rules for DailyPlayLimitDeleteScheduleTime
+
+	// no validation rules for WeeklyPlayLimitDeleteScheduleTime
+
+	// no validation rules for MonthlyPlayLimitDeleteScheduleTime
+
+	// no validation rules for DailyLossLimitDeleteScheduleTime
+
+	// no validation rules for WeeklyLossLimitDeleteScheduleTime
+
+	// no validation rules for MonthlyLossLimitDeleteScheduleTime
+
 	if len(errors) > 0 {
 		return UpdateReponsibleGamblingConfigEvent_ConfigMultiError(errors)
 	}

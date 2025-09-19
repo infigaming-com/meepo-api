@@ -755,17 +755,25 @@ func (x *UpdateReponsibleGamblingConfigEvent) GetUpdatedAt() int64 {
 }
 
 type UpdateReponsibleGamblingConfigEvent_Config struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	DepositLimit     string                 `protobuf:"bytes,1,opt,name=deposit_limit,json=depositLimit,proto3" json:"deposit_limit,omitempty"`
-	WithdrawalLimit  string                 `protobuf:"bytes,2,opt,name=withdrawal_limit,json=withdrawalLimit,proto3" json:"withdrawal_limit,omitempty"`
-	DailyPlayLimit   string                 `protobuf:"bytes,3,opt,name=daily_play_limit,json=dailyPlayLimit,proto3" json:"daily_play_limit,omitempty"`
-	WeeklyPlayLimit  string                 `protobuf:"bytes,4,opt,name=weekly_play_limit,json=weeklyPlayLimit,proto3" json:"weekly_play_limit,omitempty"`
-	MonthlyPlayLimit string                 `protobuf:"bytes,5,opt,name=monthly_play_limit,json=monthlyPlayLimit,proto3" json:"monthly_play_limit,omitempty"`
-	DailyLossLimit   string                 `protobuf:"bytes,6,opt,name=daily_loss_limit,json=dailyLossLimit,proto3" json:"daily_loss_limit,omitempty"`
-	WeeklyLossLimit  string                 `protobuf:"bytes,7,opt,name=weekly_loss_limit,json=weeklyLossLimit,proto3" json:"weekly_loss_limit,omitempty"`
-	MonthlyLossLimit string                 `protobuf:"bytes,8,opt,name=monthly_loss_limit,json=monthlyLossLimit,proto3" json:"monthly_loss_limit,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                              protoimpl.MessageState `protogen:"open.v1"`
+	DepositLimit                       string                 `protobuf:"bytes,1,opt,name=deposit_limit,json=depositLimit,proto3" json:"deposit_limit,omitempty"`
+	WithdrawalLimit                    string                 `protobuf:"bytes,2,opt,name=withdrawal_limit,json=withdrawalLimit,proto3" json:"withdrawal_limit,omitempty"`
+	DailyPlayLimit                     string                 `protobuf:"bytes,3,opt,name=daily_play_limit,json=dailyPlayLimit,proto3" json:"daily_play_limit,omitempty"`
+	WeeklyPlayLimit                    string                 `protobuf:"bytes,4,opt,name=weekly_play_limit,json=weeklyPlayLimit,proto3" json:"weekly_play_limit,omitempty"`
+	MonthlyPlayLimit                   string                 `protobuf:"bytes,5,opt,name=monthly_play_limit,json=monthlyPlayLimit,proto3" json:"monthly_play_limit,omitempty"`
+	DailyLossLimit                     string                 `protobuf:"bytes,6,opt,name=daily_loss_limit,json=dailyLossLimit,proto3" json:"daily_loss_limit,omitempty"`
+	WeeklyLossLimit                    string                 `protobuf:"bytes,7,opt,name=weekly_loss_limit,json=weeklyLossLimit,proto3" json:"weekly_loss_limit,omitempty"`
+	MonthlyLossLimit                   string                 `protobuf:"bytes,8,opt,name=monthly_loss_limit,json=monthlyLossLimit,proto3" json:"monthly_loss_limit,omitempty"`
+	DepositLimitDeleteScheduleTime     int64                  `protobuf:"varint,9,opt,name=deposit_limit_delete_schedule_time,json=depositLimitDeleteScheduleTime,proto3" json:"deposit_limit_delete_schedule_time,omitempty"`
+	WithdrawalLimitDeleteScheduleTime  int64                  `protobuf:"varint,10,opt,name=withdrawal_limit_delete_schedule_time,json=withdrawalLimitDeleteScheduleTime,proto3" json:"withdrawal_limit_delete_schedule_time,omitempty"`
+	DailyPlayLimitDeleteScheduleTime   int64                  `protobuf:"varint,11,opt,name=daily_play_limit_delete_schedule_time,json=dailyPlayLimitDeleteScheduleTime,proto3" json:"daily_play_limit_delete_schedule_time,omitempty"`
+	WeeklyPlayLimitDeleteScheduleTime  int64                  `protobuf:"varint,12,opt,name=weekly_play_limit_delete_schedule_time,json=weeklyPlayLimitDeleteScheduleTime,proto3" json:"weekly_play_limit_delete_schedule_time,omitempty"`
+	MonthlyPlayLimitDeleteScheduleTime int64                  `protobuf:"varint,13,opt,name=monthly_play_limit_delete_schedule_time,json=monthlyPlayLimitDeleteScheduleTime,proto3" json:"monthly_play_limit_delete_schedule_time,omitempty"`
+	DailyLossLimitDeleteScheduleTime   int64                  `protobuf:"varint,14,opt,name=daily_loss_limit_delete_schedule_time,json=dailyLossLimitDeleteScheduleTime,proto3" json:"daily_loss_limit_delete_schedule_time,omitempty"`
+	WeeklyLossLimitDeleteScheduleTime  int64                  `protobuf:"varint,15,opt,name=weekly_loss_limit_delete_schedule_time,json=weeklyLossLimitDeleteScheduleTime,proto3" json:"weekly_loss_limit_delete_schedule_time,omitempty"`
+	MonthlyLossLimitDeleteScheduleTime int64                  `protobuf:"varint,16,opt,name=monthly_loss_limit_delete_schedule_time,json=monthlyLossLimitDeleteScheduleTime,proto3" json:"monthly_loss_limit_delete_schedule_time,omitempty"`
+	unknownFields                      protoimpl.UnknownFields
+	sizeCache                          protoimpl.SizeCache
 }
 
 func (x *UpdateReponsibleGamblingConfigEvent_Config) Reset() {
@@ -854,6 +862,62 @@ func (x *UpdateReponsibleGamblingConfigEvent_Config) GetMonthlyLossLimit() strin
 	return ""
 }
 
+func (x *UpdateReponsibleGamblingConfigEvent_Config) GetDepositLimitDeleteScheduleTime() int64 {
+	if x != nil {
+		return x.DepositLimitDeleteScheduleTime
+	}
+	return 0
+}
+
+func (x *UpdateReponsibleGamblingConfigEvent_Config) GetWithdrawalLimitDeleteScheduleTime() int64 {
+	if x != nil {
+		return x.WithdrawalLimitDeleteScheduleTime
+	}
+	return 0
+}
+
+func (x *UpdateReponsibleGamblingConfigEvent_Config) GetDailyPlayLimitDeleteScheduleTime() int64 {
+	if x != nil {
+		return x.DailyPlayLimitDeleteScheduleTime
+	}
+	return 0
+}
+
+func (x *UpdateReponsibleGamblingConfigEvent_Config) GetWeeklyPlayLimitDeleteScheduleTime() int64 {
+	if x != nil {
+		return x.WeeklyPlayLimitDeleteScheduleTime
+	}
+	return 0
+}
+
+func (x *UpdateReponsibleGamblingConfigEvent_Config) GetMonthlyPlayLimitDeleteScheduleTime() int64 {
+	if x != nil {
+		return x.MonthlyPlayLimitDeleteScheduleTime
+	}
+	return 0
+}
+
+func (x *UpdateReponsibleGamblingConfigEvent_Config) GetDailyLossLimitDeleteScheduleTime() int64 {
+	if x != nil {
+		return x.DailyLossLimitDeleteScheduleTime
+	}
+	return 0
+}
+
+func (x *UpdateReponsibleGamblingConfigEvent_Config) GetWeeklyLossLimitDeleteScheduleTime() int64 {
+	if x != nil {
+		return x.WeeklyLossLimitDeleteScheduleTime
+	}
+	return 0
+}
+
+func (x *UpdateReponsibleGamblingConfigEvent_Config) GetMonthlyLossLimitDeleteScheduleTime() int64 {
+	if x != nil {
+		return x.MonthlyLossLimitDeleteScheduleTime
+	}
+	return 0
+}
+
 var File_wallet_service_v1_wallet_event_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_wallet_event_proto_rawDesc = "" +
@@ -934,7 +998,7 @@ const file_wallet_service_v1_wallet_event_proto_rawDesc = "" +
 	"amount_usd\x18\r \x01(\tR\tamountUsd\x12:\n" +
 	"\x19amount_reporting_currency\x18\x0e \x01(\tR\x17amountReportingCurrency\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x0f \x01(\x03R\tcreatedAt\"\xd6\x06\n" +
+	"created_at\x18\x0f \x01(\x03R\tcreatedAt\"\xe6\v\n" +
 	"#UpdateReponsibleGamblingConfigEvent\x12$\n" +
 	"\x0etarget_user_id\x18\x01 \x01(\x03R\ftargetUserId\x12*\n" +
 	"\x11initiator_user_id\x18\x02 \x01(\x03R\x0finitiatorUserId\x12Y\n" +
@@ -944,7 +1008,7 @@ const file_wallet_service_v1_wallet_event_proto_rawDesc = "" +
 	"\rbefore_config\x18\x06 \x01(\v2A.api.wallet.service.v1.UpdateReponsibleGamblingConfigEvent.ConfigR\fbeforeConfig\x12d\n" +
 	"\fafter_config\x18\a \x01(\v2A.api.wallet.service.v1.UpdateReponsibleGamblingConfigEvent.ConfigR\vafterConfig\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\b \x01(\x03R\tupdatedAt\x1a\xe0\x02\n" +
+	"updated_at\x18\b \x01(\x03R\tupdatedAt\x1a\xf0\a\n" +
 	"\x06Config\x12#\n" +
 	"\rdeposit_limit\x18\x01 \x01(\tR\fdepositLimit\x12)\n" +
 	"\x10withdrawal_limit\x18\x02 \x01(\tR\x0fwithdrawalLimit\x12(\n" +
@@ -953,7 +1017,16 @@ const file_wallet_service_v1_wallet_event_proto_rawDesc = "" +
 	"\x12monthly_play_limit\x18\x05 \x01(\tR\x10monthlyPlayLimit\x12(\n" +
 	"\x10daily_loss_limit\x18\x06 \x01(\tR\x0edailyLossLimit\x12*\n" +
 	"\x11weekly_loss_limit\x18\a \x01(\tR\x0fweeklyLossLimit\x12,\n" +
-	"\x12monthly_loss_limit\x18\b \x01(\tR\x10monthlyLossLimit2c\n" +
+	"\x12monthly_loss_limit\x18\b \x01(\tR\x10monthlyLossLimit\x12J\n" +
+	"\"deposit_limit_delete_schedule_time\x18\t \x01(\x03R\x1edepositLimitDeleteScheduleTime\x12P\n" +
+	"%withdrawal_limit_delete_schedule_time\x18\n" +
+	" \x01(\x03R!withdrawalLimitDeleteScheduleTime\x12O\n" +
+	"%daily_play_limit_delete_schedule_time\x18\v \x01(\x03R dailyPlayLimitDeleteScheduleTime\x12Q\n" +
+	"&weekly_play_limit_delete_schedule_time\x18\f \x01(\x03R!weeklyPlayLimitDeleteScheduleTime\x12S\n" +
+	"'monthly_play_limit_delete_schedule_time\x18\r \x01(\x03R\"monthlyPlayLimitDeleteScheduleTime\x12O\n" +
+	"%daily_loss_limit_delete_schedule_time\x18\x0e \x01(\x03R dailyLossLimitDeleteScheduleTime\x12Q\n" +
+	"&weekly_loss_limit_delete_schedule_time\x18\x0f \x01(\x03R!weeklyLossLimitDeleteScheduleTime\x12S\n" +
+	"'monthly_loss_limit_delete_schedule_time\x18\x10 \x01(\x03R\"monthlyLossLimitDeleteScheduleTime2c\n" +
 	"\vWalletEvent\x12T\n" +
 	"\x05Event\x12#.api.wallet.service.v1.EventRequest\x1a$.api.wallet.service.v1.EventResponse\"\x00BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
