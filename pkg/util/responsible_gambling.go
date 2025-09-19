@@ -15,4 +15,8 @@ const (
 	ResponsibleGamblingLimitTypeSelfExclusion = "self_exclusion"
 	ResponsibleGamblingLimitTypeBreakInPlay   = "break_in_play"
 	ResponsibleGamblingLimitTypeTimeLimits    = "time_limits"
+
+	// action
+	ResponsibleGamblingActionSet    = "set"
+	ResponsibleGamblingActionDelete = "delete"
 )
