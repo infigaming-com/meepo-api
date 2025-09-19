@@ -5482,12 +5482,6 @@ components:
         api.backoffice.service.v1.CustomerRecordReportDetailResponse_EventSettlementInformation:
             type: object
             properties:
-                selectionBetDetails:
-                    type: string
-                eventDescription:
-                    type: string
-                settlementDetails:
-                    type: string
                 matchResults:
                     type: array
                     items:
@@ -5501,17 +5495,27 @@ components:
                     type: string
                 settlementTime:
                     type: string
-                venueTournament:
-                    type: string
+                    format: date-time
                 wagerType:
                     type: string
+                    description: string venue_Tournament = 4;
                 betCurrency:
                     type: string
                 betAmount:
                     type: string
-                payoutCurrency:
-                    type: string
                 payoutAmount:
+                    type: string
+                    description: string payout_currency = 8; //
+                betSettlementCurrency:
+                    type: string
+                    description: "string payout_settlement_currency = 9; \n string payout_settlement_amount = 10;"
+                betSettlementAmount:
+                    type: string
+                validBetAmount:
+                    type: string
+                odds:
+                    type: string
+                winMultiplier:
                     type: string
         api.backoffice.service.v1.CustomerRecordReportDetailResponse_PaymentTransaction:
             type: object
@@ -5654,6 +5658,14 @@ components:
                 status:
                     type: string
                 selection:
+                    type: string
+                result:
+                    type: string
+                eventStartTime:
+                    type: string
+                venueTournament:
+                    type: string
+                settlementDetails:
                     type: string
         api.backoffice.service.v1.GameData_Data:
             type: object

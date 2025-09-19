@@ -793,26 +793,34 @@ message CustomerRecordReportDetailResponse{
 		string processing_fee = 9;
 	}
 	message GameTransaction {
-		int64 game_transaction_id = 1;
-		string provider_transaction_id = 2;
-		string settlement_time = 3;
-		string venue_Tournament = 4;
-		string wager_type = 5;
-		string bet_currency = 6;
-		string bet_amount = 7;
-		string payout_currency = 8;
-		string payout_amount = 9;
+		int64 game_transaction_id = 1; //id
+		string provider_transaction_id = 2;//provider_bet_id 
+		google.protobuf.Timestamp settlement_time = 3;//settle_time
+		// string venue_Tournament = 4;
+		string wager_type = 4;//wager_type
+		string bet_currency = 5;//currency
+		string bet_amount = 6;//bet_amount
+		// string payout_currency = 8; //
+		string payout_amount = 7; //win_amount
+		// string payout_settlement_currency = 9; 
+		// string payout_settlement_amount = 10;
+		string bet_settlement_currency = 8; //settlement_currency
+		string bet_settlement_amount = 9;// settlement_bet_amount
+		string valid_bet_amount = 10;//settlement_win_amount
+		string odds = 11;
+		string win_multiplier = 12;
 	}
 	message EventSettlementInformation {
 		message MatchResults {
 			string name = 1;
 			string status = 2;
 			string selection = 3;
+			string result = 4;
+			string event_start_time = 5;
+			string venue_tournament = 6;
+			string settlement_details = 7;
 		}
-		string selection_bet_details = 1;
-		string event_description = 2;
-		string settlement_details = 3;
-		repeated MatchResults match_results = 4;
+		repeated MatchResults match_results = 1;
 	}
 
 	optional UserDetail user_detail = 1;
