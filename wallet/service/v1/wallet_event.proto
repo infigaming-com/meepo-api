@@ -94,6 +94,14 @@ message UpdateReponsibleGamblingConfigEvent {
 		string daily_loss_limit = 6;
 		string weekly_loss_limit = 7;
 		string monthly_loss_limit = 8;
+		int64 deposit_limit_delete_schedule_time = 9;
+		int64 withdrawal_limit_delete_schedule_time = 10;
+		int64 daily_play_limit_delete_schedule_time = 11;
+		int64 weekly_play_limit_delete_schedule_time = 12;
+		int64 monthly_play_limit_delete_schedule_time = 13;
+		int64 daily_loss_limit_delete_schedule_time = 14;
+		int64 weekly_loss_limit_delete_schedule_time = 15;
+		int64 monthly_loss_limit_delete_schedule_time = 16;
 	}
 	int64 target_user_id = 1;
 	int64 initiator_user_id = 2;
