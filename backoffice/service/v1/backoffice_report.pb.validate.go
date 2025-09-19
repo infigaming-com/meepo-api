@@ -6833,9 +6833,34 @@ func (m *CustomerRecordReportDetailResponse_GameTransaction) validate(all bool) 
 
 	// no validation rules for ProviderTransactionId
 
-	// no validation rules for SettlementTime
-
-	// no validation rules for Venue_Tournament
+	if all {
+		switch v := interface{}(m.GetSettlementTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CustomerRecordReportDetailResponse_GameTransactionValidationError{
+					field:  "SettlementTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CustomerRecordReportDetailResponse_GameTransactionValidationError{
+					field:  "SettlementTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetSettlementTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CustomerRecordReportDetailResponse_GameTransactionValidationError{
+				field:  "SettlementTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	// no validation rules for WagerType
 
@@ -6843,9 +6868,17 @@ func (m *CustomerRecordReportDetailResponse_GameTransaction) validate(all bool) 
 
 	// no validation rules for BetAmount
 
-	// no validation rules for PayoutCurrency
-
 	// no validation rules for PayoutAmount
+
+	// no validation rules for BetSettlementCurrency
+
+	// no validation rules for BetSettlementAmount
+
+	// no validation rules for ValidBetAmount
+
+	// no validation rules for Odds
+
+	// no validation rules for WinMultiplier
 
 	if len(errors) > 0 {
 		return CustomerRecordReportDetailResponse_GameTransactionMultiError(errors)
@@ -6960,12 +6993,6 @@ func (m *CustomerRecordReportDetailResponse_EventSettlementInformation) validate
 	}
 
 	var errors []error
-
-	// no validation rules for SelectionBetDetails
-
-	// no validation rules for EventDescription
-
-	// no validation rules for SettlementDetails
 
 	for idx, item := range m.GetMatchResults() {
 		_, _ = idx, item
@@ -7125,6 +7152,41 @@ func (m *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResu
 	// no validation rules for Status
 
 	// no validation rules for Selection
+
+	// no validation rules for Result
+
+	if all {
+		switch v := interface{}(m.GetEventStartTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError{
+					field:  "EventStartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError{
+					field:  "EventStartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetEventStartTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError{
+				field:  "EventStartTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for VenueTournament
+
+	// no validation rules for SettlementDetails
 
 	if len(errors) > 0 {
 		return CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsMultiError(errors)

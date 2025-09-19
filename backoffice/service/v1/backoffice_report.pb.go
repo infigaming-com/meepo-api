@@ -5789,15 +5789,22 @@ func (x *CustomerRecordReportDetailResponse_PaymentTransaction) GetProcessingFee
 
 type CustomerRecordReportDetailResponse_GameTransaction struct {
 	state                 protoimpl.MessageState `protogen:"open.v1"`
-	GameTransactionId     int64                  `protobuf:"varint,1,opt,name=game_transaction_id,json=gameTransactionId,proto3" json:"game_transaction_id,omitempty"`
-	ProviderTransactionId string                 `protobuf:"bytes,2,opt,name=provider_transaction_id,json=providerTransactionId,proto3" json:"provider_transaction_id,omitempty"`
-	SettlementTime        string                 `protobuf:"bytes,3,opt,name=settlement_time,json=settlementTime,proto3" json:"settlement_time,omitempty"`
-	Venue_Tournament      string                 `protobuf:"bytes,4,opt,name=venue_Tournament,json=venueTournament,proto3" json:"venue_Tournament,omitempty"`
-	WagerType             string                 `protobuf:"bytes,5,opt,name=wager_type,json=wagerType,proto3" json:"wager_type,omitempty"`
-	BetCurrency           string                 `protobuf:"bytes,6,opt,name=bet_currency,json=betCurrency,proto3" json:"bet_currency,omitempty"`
-	BetAmount             string                 `protobuf:"bytes,7,opt,name=bet_amount,json=betAmount,proto3" json:"bet_amount,omitempty"`
-	PayoutCurrency        string                 `protobuf:"bytes,8,opt,name=payout_currency,json=payoutCurrency,proto3" json:"payout_currency,omitempty"`
-	PayoutAmount          string                 `protobuf:"bytes,9,opt,name=payout_amount,json=payoutAmount,proto3" json:"payout_amount,omitempty"`
+	GameTransactionId     int64                  `protobuf:"varint,1,opt,name=game_transaction_id,json=gameTransactionId,proto3" json:"game_transaction_id,omitempty"`            //id
+	ProviderTransactionId string                 `protobuf:"bytes,2,opt,name=provider_transaction_id,json=providerTransactionId,proto3" json:"provider_transaction_id,omitempty"` //provider_bet_id
+	SettlementTime        *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=settlement_time,json=settlementTime,proto3" json:"settlement_time,omitempty"`                        //settle_time
+	// string venue_Tournament = 4;
+	WagerType   string `protobuf:"bytes,4,opt,name=wager_type,json=wagerType,proto3" json:"wager_type,omitempty"`       //wager_type
+	BetCurrency string `protobuf:"bytes,5,opt,name=bet_currency,json=betCurrency,proto3" json:"bet_currency,omitempty"` //currency
+	BetAmount   string `protobuf:"bytes,6,opt,name=bet_amount,json=betAmount,proto3" json:"bet_amount,omitempty"`       //bet_amount
+	// string payout_currency = 8; //
+	PayoutAmount string `protobuf:"bytes,7,opt,name=payout_amount,json=payoutAmount,proto3" json:"payout_amount,omitempty"` //win_amount
+	// string payout_settlement_currency = 9;
+	// string payout_settlement_amount = 10;
+	BetSettlementCurrency string `protobuf:"bytes,8,opt,name=bet_settlement_currency,json=betSettlementCurrency,proto3" json:"bet_settlement_currency,omitempty"` //settlement_currency
+	BetSettlementAmount   string `protobuf:"bytes,9,opt,name=bet_settlement_amount,json=betSettlementAmount,proto3" json:"bet_settlement_amount,omitempty"`       // settlement_bet_amount
+	ValidBetAmount        string `protobuf:"bytes,10,opt,name=valid_bet_amount,json=validBetAmount,proto3" json:"valid_bet_amount,omitempty"`                     //settlement_win_amount
+	Odds                  string `protobuf:"bytes,11,opt,name=odds,proto3" json:"odds,omitempty"`
+	WinMultiplier         string `protobuf:"bytes,12,opt,name=win_multiplier,json=winMultiplier,proto3" json:"win_multiplier,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -5846,18 +5853,11 @@ func (x *CustomerRecordReportDetailResponse_GameTransaction) GetProviderTransact
 	return ""
 }
 
-func (x *CustomerRecordReportDetailResponse_GameTransaction) GetSettlementTime() string {
+func (x *CustomerRecordReportDetailResponse_GameTransaction) GetSettlementTime() *timestamppb.Timestamp {
 	if x != nil {
 		return x.SettlementTime
 	}
-	return ""
-}
-
-func (x *CustomerRecordReportDetailResponse_GameTransaction) GetVenue_Tournament() string {
-	if x != nil {
-		return x.Venue_Tournament
-	}
-	return ""
+	return nil
 }
 
 func (x *CustomerRecordReportDetailResponse_GameTransaction) GetWagerType() string {
@@ -5881,13 +5881,6 @@ func (x *CustomerRecordReportDetailResponse_GameTransaction) GetBetAmount() stri
 	return ""
 }
 
-func (x *CustomerRecordReportDetailResponse_GameTransaction) GetPayoutCurrency() string {
-	if x != nil {
-		return x.PayoutCurrency
-	}
-	return ""
-}
-
 func (x *CustomerRecordReportDetailResponse_GameTransaction) GetPayoutAmount() string {
 	if x != nil {
 		return x.PayoutAmount
@@ -5895,14 +5888,46 @@ func (x *CustomerRecordReportDetailResponse_GameTransaction) GetPayoutAmount() s
 	return ""
 }
 
+func (x *CustomerRecordReportDetailResponse_GameTransaction) GetBetSettlementCurrency() string {
+	if x != nil {
+		return x.BetSettlementCurrency
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_GameTransaction) GetBetSettlementAmount() string {
+	if x != nil {
+		return x.BetSettlementAmount
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_GameTransaction) GetValidBetAmount() string {
+	if x != nil {
+		return x.ValidBetAmount
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_GameTransaction) GetOdds() string {
+	if x != nil {
+		return x.Odds
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_GameTransaction) GetWinMultiplier() string {
+	if x != nil {
+		return x.WinMultiplier
+	}
+	return ""
+}
+
 type CustomerRecordReportDetailResponse_EventSettlementInformation struct {
-	state               protoimpl.MessageState                                                        `protogen:"open.v1"`
-	SelectionBetDetails string                                                                        `protobuf:"bytes,1,opt,name=selection_bet_details,json=selectionBetDetails,proto3" json:"selection_bet_details,omitempty"`
-	EventDescription    string                                                                        `protobuf:"bytes,2,opt,name=event_description,json=eventDescription,proto3" json:"event_description,omitempty"`
-	SettlementDetails   string                                                                        `protobuf:"bytes,3,opt,name=settlement_details,json=settlementDetails,proto3" json:"settlement_details,omitempty"`
-	MatchResults        []*CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults `protobuf:"bytes,4,rep,name=match_results,json=matchResults,proto3" json:"match_results,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state         protoimpl.MessageState                                                        `protogen:"open.v1"`
+	MatchResults  []*CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults `protobuf:"bytes,1,rep,name=match_results,json=matchResults,proto3" json:"match_results,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CustomerRecordReportDetailResponse_EventSettlementInformation) Reset() {
@@ -5935,27 +5960,6 @@ func (*CustomerRecordReportDetailResponse_EventSettlementInformation) Descriptor
 	return file_backoffice_service_v1_backoffice_report_proto_rawDescGZIP(), []int{30, 3}
 }
 
-func (x *CustomerRecordReportDetailResponse_EventSettlementInformation) GetSelectionBetDetails() string {
-	if x != nil {
-		return x.SelectionBetDetails
-	}
-	return ""
-}
-
-func (x *CustomerRecordReportDetailResponse_EventSettlementInformation) GetEventDescription() string {
-	if x != nil {
-		return x.EventDescription
-	}
-	return ""
-}
-
-func (x *CustomerRecordReportDetailResponse_EventSettlementInformation) GetSettlementDetails() string {
-	if x != nil {
-		return x.SettlementDetails
-	}
-	return ""
-}
-
 func (x *CustomerRecordReportDetailResponse_EventSettlementInformation) GetMatchResults() []*CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults {
 	if x != nil {
 		return x.MatchResults
@@ -5964,12 +5968,16 @@ func (x *CustomerRecordReportDetailResponse_EventSettlementInformation) GetMatch
 }
 
 type CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
-	Selection     string                 `protobuf:"bytes,3,opt,name=selection,proto3" json:"selection,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Name              string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Status            string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	Selection         string                 `protobuf:"bytes,3,opt,name=selection,proto3" json:"selection,omitempty"`
+	Result            string                 `protobuf:"bytes,4,opt,name=result,proto3" json:"result,omitempty"`
+	EventStartTime    *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=event_start_time,json=eventStartTime,proto3" json:"event_start_time,omitempty"`
+	VenueTournament   string                 `protobuf:"bytes,6,opt,name=venue_tournament,json=venueTournament,proto3" json:"venue_tournament,omitempty"`
+	SettlementDetails string                 `protobuf:"bytes,7,opt,name=settlement_details,json=settlementDetails,proto3" json:"settlement_details,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults) Reset() {
@@ -6019,6 +6027,34 @@ func (x *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResu
 func (x *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults) GetSelection() string {
 	if x != nil {
 		return x.Selection
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults) GetResult() string {
+	if x != nil {
+		return x.Result
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults) GetEventStartTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EventStartTime
+	}
+	return nil
+}
+
+func (x *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults) GetVenueTournament() string {
+	if x != nil {
+		return x.VenueTournament
+	}
+	return ""
+}
+
+func (x *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults) GetSettlementDetails() string {
+	if x != nil {
+		return x.SettlementDetails
 	}
 	return ""
 }
@@ -6669,7 +6705,7 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\b_user_idB\x19\n" +
 	"\x17_payment_transaction_idB\x16\n" +
 	"\x14_game_transaction_idB\x0e\n" +
-	"\f_game_bet_id\"\xf7\x0f\n" +
+	"\f_game_bet_id\"\xb9\x11\n" +
 	"\"CustomerRecordReportDetailResponse\x12n\n" +
 	"\vuser_detail\x18\x01 \x01(\v2H.api.backoffice.service.v1.CustomerRecordReportDetailResponse.UserDetailH\x00R\n" +
 	"userDetail\x88\x01\x01\x12\x86\x01\n" +
@@ -6693,28 +6729,33 @@ const file_backoffice_service_v1_backoffice_report_proto_rawDesc = "" +
 	"\x0fpayment_channel\x18\x06 \x01(\tR\x0epaymentChannel\x12\x1a\n" +
 	"\bcurrency\x18\a \x01(\tR\bcurrency\x12\x16\n" +
 	"\x06amount\x18\b \x01(\tR\x06amount\x12%\n" +
-	"\x0eprocessing_fee\x18\t \x01(\tR\rprocessingFee\x1a\xfc\x02\n" +
+	"\x0eprocessing_fee\x18\t \x01(\tR\rprocessingFee\x1a\x95\x04\n" +
 	"\x0fGameTransaction\x12.\n" +
 	"\x13game_transaction_id\x18\x01 \x01(\x03R\x11gameTransactionId\x126\n" +
-	"\x17provider_transaction_id\x18\x02 \x01(\tR\x15providerTransactionId\x12'\n" +
-	"\x0fsettlement_time\x18\x03 \x01(\tR\x0esettlementTime\x12)\n" +
-	"\x10venue_Tournament\x18\x04 \x01(\tR\x0fvenueTournament\x12\x1d\n" +
+	"\x17provider_transaction_id\x18\x02 \x01(\tR\x15providerTransactionId\x12C\n" +
+	"\x0fsettlement_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x0esettlementTime\x12\x1d\n" +
 	"\n" +
-	"wager_type\x18\x05 \x01(\tR\twagerType\x12!\n" +
-	"\fbet_currency\x18\x06 \x01(\tR\vbetCurrency\x12\x1d\n" +
+	"wager_type\x18\x04 \x01(\tR\twagerType\x12!\n" +
+	"\fbet_currency\x18\x05 \x01(\tR\vbetCurrency\x12\x1d\n" +
 	"\n" +
-	"bet_amount\x18\a \x01(\tR\tbetAmount\x12'\n" +
-	"\x0fpayout_currency\x18\b \x01(\tR\x0epayoutCurrency\x12#\n" +
-	"\rpayout_amount\x18\t \x01(\tR\fpayoutAmount\x1a\x93\x03\n" +
-	"\x1aEventSettlementInformation\x122\n" +
-	"\x15selection_bet_details\x18\x01 \x01(\tR\x13selectionBetDetails\x12+\n" +
-	"\x11event_description\x18\x02 \x01(\tR\x10eventDescription\x12-\n" +
-	"\x12settlement_details\x18\x03 \x01(\tR\x11settlementDetails\x12\x8a\x01\n" +
-	"\rmatch_results\x18\x04 \x03(\v2e.api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.MatchResultsR\fmatchResults\x1aX\n" +
+	"bet_amount\x18\x06 \x01(\tR\tbetAmount\x12#\n" +
+	"\rpayout_amount\x18\a \x01(\tR\fpayoutAmount\x126\n" +
+	"\x17bet_settlement_currency\x18\b \x01(\tR\x15betSettlementCurrency\x122\n" +
+	"\x15bet_settlement_amount\x18\t \x01(\tR\x13betSettlementAmount\x12(\n" +
+	"\x10valid_bet_amount\x18\n" +
+	" \x01(\tR\x0evalidBetAmount\x12\x12\n" +
+	"\x04odds\x18\v \x01(\tR\x04odds\x12%\n" +
+	"\x0ewin_multiplier\x18\f \x01(\tR\rwinMultiplier\x1a\xbc\x03\n" +
+	"\x1aEventSettlementInformation\x12\x8a\x01\n" +
+	"\rmatch_results\x18\x01 \x03(\v2e.api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.MatchResultsR\fmatchResults\x1a\x90\x02\n" +
 	"\fMatchResults\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12\x1c\n" +
-	"\tselection\x18\x03 \x01(\tR\tselectionB\x0e\n" +
+	"\tselection\x18\x03 \x01(\tR\tselection\x12\x16\n" +
+	"\x06result\x18\x04 \x01(\tR\x06result\x12D\n" +
+	"\x10event_start_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\x0eeventStartTime\x12)\n" +
+	"\x10venue_tournament\x18\x06 \x01(\tR\x0fvenueTournament\x12-\n" +
+	"\x12settlement_details\x18\a \x01(\tR\x11settlementDetailsB\x0e\n" +
 	"\f_user_detailB\x16\n" +
 	"\x14_payment_transactionB\x13\n" +
 	"\x11_game_transactionB\x1f\n" +
@@ -6845,42 +6886,44 @@ var file_backoffice_service_v1_backoffice_report_proto_depIdxs = []int32{
 	44, // 39: api.backoffice.service.v1.CustomerRecordReportDetailResponse.game_transaction:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.GameTransaction
 	45, // 40: api.backoffice.service.v1.CustomerRecordReportDetailResponse.event_settlement_information:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation
 	48, // 41: api.backoffice.service.v1.CustomerRecordReportDetailResponse.PaymentTransaction.arrival_time:type_name -> google.protobuf.Timestamp
-	46, // 42: api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.match_results:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.MatchResults
-	1,  // 43: api.backoffice.service.v1.BackofficeReport.GetSummary:input_type -> api.backoffice.service.v1.GetSummaryRequest
-	3,  // 44: api.backoffice.service.v1.BackofficeReport.ListSummaries:input_type -> api.backoffice.service.v1.ListSummariesRequest
-	5,  // 45: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:input_type -> api.backoffice.service.v1.GetGameSummaryRequest
-	7,  // 46: api.backoffice.service.v1.BackofficeReport.ListGameData:input_type -> api.backoffice.service.v1.ListGameDataRequest
-	9,  // 47: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:input_type -> api.backoffice.service.v1.GetPlayerGameSummaryRequest
-	11, // 48: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:input_type -> api.backoffice.service.v1.ListPlayerGameDataRequest
-	13, // 49: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:input_type -> api.backoffice.service.v1.GetDepositSummariesRequest
-	15, // 50: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:input_type -> api.backoffice.service.v1.ListDepositDetailsRequest
-	17, // 51: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:input_type -> api.backoffice.service.v1.GetWithdrawSummariesRequest
-	19, // 52: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:input_type -> api.backoffice.service.v1.ListWithdrawDetailsRequest
-	21, // 53: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:input_type -> api.backoffice.service.v1.ListRegisterRetentionRequest
-	23, // 54: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:input_type -> api.backoffice.service.v1.ListDepositVtgDetailsRequest
-	25, // 55: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:input_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsRequest
-	27, // 56: api.backoffice.service.v1.BackofficeReport.ListSportEvents:input_type -> api.backoffice.service.v1.ListSportEventsRequest
-	29, // 57: api.backoffice.service.v1.BackofficeReport.CustomerRecordReportDetail:input_type -> api.backoffice.service.v1.CustomerRecordReportDetailRequest
-	2,  // 58: api.backoffice.service.v1.BackofficeReport.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
-	4,  // 59: api.backoffice.service.v1.BackofficeReport.ListSummaries:output_type -> api.backoffice.service.v1.ListSummariesResponse
-	6,  // 60: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:output_type -> api.backoffice.service.v1.GetGameSummaryResponse
-	8,  // 61: api.backoffice.service.v1.BackofficeReport.ListGameData:output_type -> api.backoffice.service.v1.ListGameDataResponse
-	10, // 62: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:output_type -> api.backoffice.service.v1.GetPlayerGameSummaryResponse
-	12, // 63: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:output_type -> api.backoffice.service.v1.ListPlayerGameDataResponse
-	14, // 64: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:output_type -> api.backoffice.service.v1.GetDepositSummariesResponse
-	16, // 65: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:output_type -> api.backoffice.service.v1.ListDepositDetailsResponse
-	18, // 66: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:output_type -> api.backoffice.service.v1.GetWithdrawSummariesResponse
-	20, // 67: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:output_type -> api.backoffice.service.v1.ListWithdrawDetailsResponse
-	22, // 68: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:output_type -> api.backoffice.service.v1.ListRegisterRetentionResponse
-	24, // 69: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:output_type -> api.backoffice.service.v1.ListDepositVtgDetailsResponse
-	26, // 70: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:output_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
-	28, // 71: api.backoffice.service.v1.BackofficeReport.ListSportEvents:output_type -> api.backoffice.service.v1.ListSportEventsResponse
-	30, // 72: api.backoffice.service.v1.BackofficeReport.CustomerRecordReportDetail:output_type -> api.backoffice.service.v1.CustomerRecordReportDetailResponse
-	58, // [58:73] is the sub-list for method output_type
-	43, // [43:58] is the sub-list for method input_type
-	43, // [43:43] is the sub-list for extension type_name
-	43, // [43:43] is the sub-list for extension extendee
-	0,  // [0:43] is the sub-list for field type_name
+	48, // 42: api.backoffice.service.v1.CustomerRecordReportDetailResponse.GameTransaction.settlement_time:type_name -> google.protobuf.Timestamp
+	46, // 43: api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.match_results:type_name -> api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.MatchResults
+	48, // 44: api.backoffice.service.v1.CustomerRecordReportDetailResponse.EventSettlementInformation.MatchResults.event_start_time:type_name -> google.protobuf.Timestamp
+	1,  // 45: api.backoffice.service.v1.BackofficeReport.GetSummary:input_type -> api.backoffice.service.v1.GetSummaryRequest
+	3,  // 46: api.backoffice.service.v1.BackofficeReport.ListSummaries:input_type -> api.backoffice.service.v1.ListSummariesRequest
+	5,  // 47: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:input_type -> api.backoffice.service.v1.GetGameSummaryRequest
+	7,  // 48: api.backoffice.service.v1.BackofficeReport.ListGameData:input_type -> api.backoffice.service.v1.ListGameDataRequest
+	9,  // 49: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:input_type -> api.backoffice.service.v1.GetPlayerGameSummaryRequest
+	11, // 50: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:input_type -> api.backoffice.service.v1.ListPlayerGameDataRequest
+	13, // 51: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:input_type -> api.backoffice.service.v1.GetDepositSummariesRequest
+	15, // 52: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:input_type -> api.backoffice.service.v1.ListDepositDetailsRequest
+	17, // 53: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:input_type -> api.backoffice.service.v1.GetWithdrawSummariesRequest
+	19, // 54: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:input_type -> api.backoffice.service.v1.ListWithdrawDetailsRequest
+	21, // 55: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:input_type -> api.backoffice.service.v1.ListRegisterRetentionRequest
+	23, // 56: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:input_type -> api.backoffice.service.v1.ListDepositVtgDetailsRequest
+	25, // 57: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:input_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsRequest
+	27, // 58: api.backoffice.service.v1.BackofficeReport.ListSportEvents:input_type -> api.backoffice.service.v1.ListSportEventsRequest
+	29, // 59: api.backoffice.service.v1.BackofficeReport.CustomerRecordReportDetail:input_type -> api.backoffice.service.v1.CustomerRecordReportDetailRequest
+	2,  // 60: api.backoffice.service.v1.BackofficeReport.GetSummary:output_type -> api.backoffice.service.v1.GetSummaryResponse
+	4,  // 61: api.backoffice.service.v1.BackofficeReport.ListSummaries:output_type -> api.backoffice.service.v1.ListSummariesResponse
+	6,  // 62: api.backoffice.service.v1.BackofficeReport.GetGameDataSummary:output_type -> api.backoffice.service.v1.GetGameSummaryResponse
+	8,  // 63: api.backoffice.service.v1.BackofficeReport.ListGameData:output_type -> api.backoffice.service.v1.ListGameDataResponse
+	10, // 64: api.backoffice.service.v1.BackofficeReport.GetPlayerGameDataSummary:output_type -> api.backoffice.service.v1.GetPlayerGameSummaryResponse
+	12, // 65: api.backoffice.service.v1.BackofficeReport.ListPlayerGameData:output_type -> api.backoffice.service.v1.ListPlayerGameDataResponse
+	14, // 66: api.backoffice.service.v1.BackofficeReport.GetDepositSummaries:output_type -> api.backoffice.service.v1.GetDepositSummariesResponse
+	16, // 67: api.backoffice.service.v1.BackofficeReport.ListDepositDetails:output_type -> api.backoffice.service.v1.ListDepositDetailsResponse
+	18, // 68: api.backoffice.service.v1.BackofficeReport.GetWithdrawSummaries:output_type -> api.backoffice.service.v1.GetWithdrawSummariesResponse
+	20, // 69: api.backoffice.service.v1.BackofficeReport.ListWithdrawDetails:output_type -> api.backoffice.service.v1.ListWithdrawDetailsResponse
+	22, // 70: api.backoffice.service.v1.BackofficeReport.ListRegisterRetention:output_type -> api.backoffice.service.v1.ListRegisterRetentionResponse
+	24, // 71: api.backoffice.service.v1.BackofficeReport.ListDepositVtgDetails:output_type -> api.backoffice.service.v1.ListDepositVtgDetailsResponse
+	26, // 72: api.backoffice.service.v1.BackofficeReport.ListWithdrawVtgDetails:output_type -> api.backoffice.service.v1.ListWithdrawVtgDetailsResponse
+	28, // 73: api.backoffice.service.v1.BackofficeReport.ListSportEvents:output_type -> api.backoffice.service.v1.ListSportEventsResponse
+	30, // 74: api.backoffice.service.v1.BackofficeReport.CustomerRecordReportDetail:output_type -> api.backoffice.service.v1.CustomerRecordReportDetailResponse
+	60, // [60:75] is the sub-list for method output_type
+	45, // [45:60] is the sub-list for method input_type
+	45, // [45:45] is the sub-list for extension type_name
+	45, // [45:45] is the sub-list for extension extendee
+	0,  // [0:45] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_report_proto_init() }
