@@ -9651,6 +9651,759 @@ var _ interface {
 	ErrorName() string
 } = ExportUnpaidBetsResponseValidationError{}
 
+// Validate checks the field values on ListMultipleBetsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListMultipleBetsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListMultipleBetsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListMultipleBetsRequestMultiError, or nil if none found.
+func (m *ListMultipleBetsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListMultipleBetsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListMultipleBetsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListMultipleBetsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListMultipleBetsRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.StartTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetStartTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListMultipleBetsRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListMultipleBetsRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListMultipleBetsRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.EndTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetEndTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListMultipleBetsRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListMultipleBetsRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListMultipleBetsRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.Status != nil {
+		// no validation rules for Status
+	}
+
+	if m.UserId != nil {
+		// no validation rules for UserId
+	}
+
+	if m.TransactionId != nil {
+		// no validation rules for TransactionId
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return ListMultipleBetsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListMultipleBetsRequestMultiError is an error wrapping multiple validation
+// errors returned by ListMultipleBetsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListMultipleBetsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListMultipleBetsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListMultipleBetsRequestMultiError) AllErrors() []error { return m }
+
+// ListMultipleBetsRequestValidationError is the validation error returned by
+// ListMultipleBetsRequest.Validate if the designated constraints aren't met.
+type ListMultipleBetsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListMultipleBetsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListMultipleBetsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListMultipleBetsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListMultipleBetsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListMultipleBetsRequestValidationError) ErrorName() string {
+	return "ListMultipleBetsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListMultipleBetsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListMultipleBetsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListMultipleBetsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListMultipleBetsRequestValidationError{}
+
+// Validate checks the field values on ListMultipleBetsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListMultipleBetsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListMultipleBetsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListMultipleBetsResponseMultiError, or nil if none found.
+func (m *ListMultipleBetsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListMultipleBetsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetRecords() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListMultipleBetsResponseValidationError{
+						field:  fmt.Sprintf("Records[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListMultipleBetsResponseValidationError{
+						field:  fmt.Sprintf("Records[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListMultipleBetsResponseValidationError{
+					field:  fmt.Sprintf("Records[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for TotalCount
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if len(errors) > 0 {
+		return ListMultipleBetsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListMultipleBetsResponseMultiError is an error wrapping multiple validation
+// errors returned by ListMultipleBetsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListMultipleBetsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListMultipleBetsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListMultipleBetsResponseMultiError) AllErrors() []error { return m }
+
+// ListMultipleBetsResponseValidationError is the validation error returned by
+// ListMultipleBetsResponse.Validate if the designated constraints aren't met.
+type ListMultipleBetsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListMultipleBetsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListMultipleBetsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListMultipleBetsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListMultipleBetsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListMultipleBetsResponseValidationError) ErrorName() string {
+	return "ListMultipleBetsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListMultipleBetsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListMultipleBetsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListMultipleBetsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListMultipleBetsResponseValidationError{}
+
+// Validate checks the field values on ListStakeVarianceBetsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListStakeVarianceBetsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListStakeVarianceBetsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListStakeVarianceBetsRequestMultiError, or nil if none found.
+func (m *ListStakeVarianceBetsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListStakeVarianceBetsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListStakeVarianceBetsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListStakeVarianceBetsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListStakeVarianceBetsRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.StartTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetStartTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListStakeVarianceBetsRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListStakeVarianceBetsRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListStakeVarianceBetsRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.EndTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetEndTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListStakeVarianceBetsRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListStakeVarianceBetsRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListStakeVarianceBetsRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.UserId != nil {
+		// no validation rules for UserId
+	}
+
+	if m.TransactionId != nil {
+		// no validation rules for TransactionId
+	}
+
+	if m.Category != nil {
+		// no validation rules for Category
+	}
+
+	if m.RoundId != nil {
+		// no validation rules for RoundId
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return ListStakeVarianceBetsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListStakeVarianceBetsRequestMultiError is an error wrapping multiple
+// validation errors returned by ListStakeVarianceBetsRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ListStakeVarianceBetsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListStakeVarianceBetsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListStakeVarianceBetsRequestMultiError) AllErrors() []error { return m }
+
+// ListStakeVarianceBetsRequestValidationError is the validation error returned
+// by ListStakeVarianceBetsRequest.Validate if the designated constraints
+// aren't met.
+type ListStakeVarianceBetsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListStakeVarianceBetsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListStakeVarianceBetsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListStakeVarianceBetsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListStakeVarianceBetsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListStakeVarianceBetsRequestValidationError) ErrorName() string {
+	return "ListStakeVarianceBetsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListStakeVarianceBetsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListStakeVarianceBetsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListStakeVarianceBetsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListStakeVarianceBetsRequestValidationError{}
+
+// Validate checks the field values on ListStakeVarianceBetsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListStakeVarianceBetsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListStakeVarianceBetsResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListStakeVarianceBetsResponseMultiError, or nil if none found.
+func (m *ListStakeVarianceBetsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListStakeVarianceBetsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetRecords() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListStakeVarianceBetsResponseValidationError{
+						field:  fmt.Sprintf("Records[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListStakeVarianceBetsResponseValidationError{
+						field:  fmt.Sprintf("Records[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListStakeVarianceBetsResponseValidationError{
+					field:  fmt.Sprintf("Records[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if all {
+		switch v := interface{}(m.GetSummary()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListStakeVarianceBetsResponseValidationError{
+					field:  "Summary",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListStakeVarianceBetsResponseValidationError{
+					field:  "Summary",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetSummary()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListStakeVarianceBetsResponseValidationError{
+				field:  "Summary",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for TotalCount
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if len(errors) > 0 {
+		return ListStakeVarianceBetsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListStakeVarianceBetsResponseMultiError is an error wrapping multiple
+// validation errors returned by ListStakeVarianceBetsResponse.ValidateAll()
+// if the designated constraints aren't met.
+type ListStakeVarianceBetsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListStakeVarianceBetsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListStakeVarianceBetsResponseMultiError) AllErrors() []error { return m }
+
+// ListStakeVarianceBetsResponseValidationError is the validation error
+// returned by ListStakeVarianceBetsResponse.Validate if the designated
+// constraints aren't met.
+type ListStakeVarianceBetsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListStakeVarianceBetsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListStakeVarianceBetsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListStakeVarianceBetsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListStakeVarianceBetsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListStakeVarianceBetsResponseValidationError) ErrorName() string {
+	return "ListStakeVarianceBetsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListStakeVarianceBetsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListStakeVarianceBetsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListStakeVarianceBetsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListStakeVarianceBetsResponseValidationError{}
+
 // Validate checks the field values on ListSportEventsRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -13247,6 +14000,434 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListUnpaidBetsResponse_UnpaidBetValidationError{}
+
+// Validate checks the field values on ListMultipleBetsResponse_MultipleBet
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ListMultipleBetsResponse_MultipleBet) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListMultipleBetsResponse_MultipleBet
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListMultipleBetsResponse_MultipleBetMultiError, or nil if none found.
+func (m *ListMultipleBetsResponse_MultipleBet) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListMultipleBetsResponse_MultipleBet) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetCreatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListMultipleBetsResponse_MultipleBetValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListMultipleBetsResponse_MultipleBetValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListMultipleBetsResponse_MultipleBetValidationError{
+				field:  "CreatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Status
+
+	// no validation rules for UserId
+
+	// no validation rules for TransactionId
+
+	// no validation rules for RoundId
+
+	// no validation rules for Category
+
+	// no validation rules for Provider
+
+	// no validation rules for Currency
+
+	// no validation rules for BetAmount
+
+	// no validation rules for WinAmount
+
+	// no validation rules for Taxable
+
+	// no validation rules for ProspectiveTax
+
+	if len(errors) > 0 {
+		return ListMultipleBetsResponse_MultipleBetMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListMultipleBetsResponse_MultipleBetMultiError is an error wrapping multiple
+// validation errors returned by
+// ListMultipleBetsResponse_MultipleBet.ValidateAll() if the designated
+// constraints aren't met.
+type ListMultipleBetsResponse_MultipleBetMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListMultipleBetsResponse_MultipleBetMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListMultipleBetsResponse_MultipleBetMultiError) AllErrors() []error { return m }
+
+// ListMultipleBetsResponse_MultipleBetValidationError is the validation error
+// returned by ListMultipleBetsResponse_MultipleBet.Validate if the designated
+// constraints aren't met.
+type ListMultipleBetsResponse_MultipleBetValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListMultipleBetsResponse_MultipleBetValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListMultipleBetsResponse_MultipleBetValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListMultipleBetsResponse_MultipleBetValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListMultipleBetsResponse_MultipleBetValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListMultipleBetsResponse_MultipleBetValidationError) ErrorName() string {
+	return "ListMultipleBetsResponse_MultipleBetValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListMultipleBetsResponse_MultipleBetValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListMultipleBetsResponse_MultipleBet.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListMultipleBetsResponse_MultipleBetValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListMultipleBetsResponse_MultipleBetValidationError{}
+
+// Validate checks the field values on
+// ListStakeVarianceBetsResponse_StakeVarianceBet with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ListStakeVarianceBetsResponse_StakeVarianceBet) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ListStakeVarianceBetsResponse_StakeVarianceBet with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in
+// ListStakeVarianceBetsResponse_StakeVarianceBetMultiError, or nil if none found.
+func (m *ListStakeVarianceBetsResponse_StakeVarianceBet) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListStakeVarianceBetsResponse_StakeVarianceBet) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetCreatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListStakeVarianceBetsResponse_StakeVarianceBetValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListStakeVarianceBetsResponse_StakeVarianceBetValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListStakeVarianceBetsResponse_StakeVarianceBetValidationError{
+				field:  "CreatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Status
+
+	// no validation rules for UserId
+
+	// no validation rules for TransactionId
+
+	// no validation rules for RoundId
+
+	// no validation rules for Category
+
+	// no validation rules for Provider
+
+	// no validation rules for Currency
+
+	// no validation rules for BetAmount
+
+	// no validation rules for PayoutAmount
+
+	// no validation rules for WinAmount
+
+	if len(errors) > 0 {
+		return ListStakeVarianceBetsResponse_StakeVarianceBetMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListStakeVarianceBetsResponse_StakeVarianceBetMultiError is an error
+// wrapping multiple validation errors returned by
+// ListStakeVarianceBetsResponse_StakeVarianceBet.ValidateAll() if the
+// designated constraints aren't met.
+type ListStakeVarianceBetsResponse_StakeVarianceBetMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListStakeVarianceBetsResponse_StakeVarianceBetMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListStakeVarianceBetsResponse_StakeVarianceBetMultiError) AllErrors() []error { return m }
+
+// ListStakeVarianceBetsResponse_StakeVarianceBetValidationError is the
+// validation error returned by
+// ListStakeVarianceBetsResponse_StakeVarianceBet.Validate if the designated
+// constraints aren't met.
+type ListStakeVarianceBetsResponse_StakeVarianceBetValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListStakeVarianceBetsResponse_StakeVarianceBetValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListStakeVarianceBetsResponse_StakeVarianceBetValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e ListStakeVarianceBetsResponse_StakeVarianceBetValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListStakeVarianceBetsResponse_StakeVarianceBetValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListStakeVarianceBetsResponse_StakeVarianceBetValidationError) ErrorName() string {
+	return "ListStakeVarianceBetsResponse_StakeVarianceBetValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListStakeVarianceBetsResponse_StakeVarianceBetValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListStakeVarianceBetsResponse_StakeVarianceBet.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListStakeVarianceBetsResponse_StakeVarianceBetValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListStakeVarianceBetsResponse_StakeVarianceBetValidationError{}
+
+// Validate checks the field values on
+// ListStakeVarianceBetsResponse_SummaryStats with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ListStakeVarianceBetsResponse_SummaryStats) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ListStakeVarianceBetsResponse_SummaryStats with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// ListStakeVarianceBetsResponse_SummaryStatsMultiError, or nil if none found.
+func (m *ListStakeVarianceBetsResponse_SummaryStats) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListStakeVarianceBetsResponse_SummaryStats) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TotalRecords
+
+	// no validation rules for TotalBetAmount
+
+	// no validation rules for AverageBetAmount
+
+	// no validation rules for MaximumBetAmount
+
+	if len(errors) > 0 {
+		return ListStakeVarianceBetsResponse_SummaryStatsMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListStakeVarianceBetsResponse_SummaryStatsMultiError is an error wrapping
+// multiple validation errors returned by
+// ListStakeVarianceBetsResponse_SummaryStats.ValidateAll() if the designated
+// constraints aren't met.
+type ListStakeVarianceBetsResponse_SummaryStatsMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListStakeVarianceBetsResponse_SummaryStatsMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListStakeVarianceBetsResponse_SummaryStatsMultiError) AllErrors() []error { return m }
+
+// ListStakeVarianceBetsResponse_SummaryStatsValidationError is the validation
+// error returned by ListStakeVarianceBetsResponse_SummaryStats.Validate if
+// the designated constraints aren't met.
+type ListStakeVarianceBetsResponse_SummaryStatsValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListStakeVarianceBetsResponse_SummaryStatsValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListStakeVarianceBetsResponse_SummaryStatsValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListStakeVarianceBetsResponse_SummaryStatsValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListStakeVarianceBetsResponse_SummaryStatsValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListStakeVarianceBetsResponse_SummaryStatsValidationError) ErrorName() string {
+	return "ListStakeVarianceBetsResponse_SummaryStatsValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListStakeVarianceBetsResponse_SummaryStatsValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListStakeVarianceBetsResponse_SummaryStats.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListStakeVarianceBetsResponse_SummaryStatsValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListStakeVarianceBetsResponse_SummaryStatsValidationError{}
 
 // Validate checks the field values on ListSportEventsResponse_SportEvent with
 // the rules defined in the proto definition for this message. If any rules
