@@ -650,61 +650,127 @@ var _ interface {
 	ErrorName() string
 } = ListIntegrityStatusResponseValidationError{}
 
-// Validate checks the field values on ListTaskRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *ListTaskRequest) Validate() error {
+// Validate checks the field values on ListReportExportRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListReportExportRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListTaskRequest with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on ListReportExportRequest with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// ListTaskRequestMultiError, or nil if none found.
-func (m *ListTaskRequest) ValidateAll() error {
+// ListReportExportRequestMultiError, or nil if none found.
+func (m *ListReportExportRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListTaskRequest) validate(all bool) error {
+func (m *ListReportExportRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListReportExportRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListReportExportRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListReportExportRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if m.Type != nil {
 		// no validation rules for Type
 	}
 
-	if m.UserId != nil {
-		// no validation rules for UserId
+	if m.Status != nil {
+		// no validation rules for Status
 	}
 
-	if m.OperatorContext != nil {
+	if m.Start != nil {
 
 		if all {
-			switch v := interface{}(m.GetOperatorContext()).(type) {
+			switch v := interface{}(m.GetStart()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListTaskRequestValidationError{
-						field:  "OperatorContext",
+					errors = append(errors, ListReportExportRequestValidationError{
+						field:  "Start",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListTaskRequestValidationError{
-						field:  "OperatorContext",
+					errors = append(errors, ListReportExportRequestValidationError{
+						field:  "Start",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
 				}
 			}
-		} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		} else if v, ok := interface{}(m.GetStart()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListTaskRequestValidationError{
-					field:  "OperatorContext",
+				return ListReportExportRequestValidationError{
+					field:  "Start",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.End != nil {
+
+		if all {
+			switch v := interface{}(m.GetEnd()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListReportExportRequestValidationError{
+						field:  "End",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListReportExportRequestValidationError{
+						field:  "End",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetEnd()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListReportExportRequestValidationError{
+					field:  "End",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -714,19 +780,19 @@ func (m *ListTaskRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return ListTaskRequestMultiError(errors)
+		return ListReportExportRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListTaskRequestMultiError is an error wrapping multiple validation errors
-// returned by ListTaskRequest.ValidateAll() if the designated constraints
-// aren't met.
-type ListTaskRequestMultiError []error
+// ListReportExportRequestMultiError is an error wrapping multiple validation
+// errors returned by ListReportExportRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListReportExportRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListTaskRequestMultiError) Error() string {
+func (m ListReportExportRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -735,11 +801,11 @@ func (m ListTaskRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListTaskRequestMultiError) AllErrors() []error { return m }
+func (m ListReportExportRequestMultiError) AllErrors() []error { return m }
 
-// ListTaskRequestValidationError is the validation error returned by
-// ListTaskRequest.Validate if the designated constraints aren't met.
-type ListTaskRequestValidationError struct {
+// ListReportExportRequestValidationError is the validation error returned by
+// ListReportExportRequest.Validate if the designated constraints aren't met.
+type ListReportExportRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -747,22 +813,24 @@ type ListTaskRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListTaskRequestValidationError) Field() string { return e.field }
+func (e ListReportExportRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListTaskRequestValidationError) Reason() string { return e.reason }
+func (e ListReportExportRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListTaskRequestValidationError) Cause() error { return e.cause }
+func (e ListReportExportRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListTaskRequestValidationError) Key() bool { return e.key }
+func (e ListReportExportRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListTaskRequestValidationError) ErrorName() string { return "ListTaskRequestValidationError" }
+func (e ListReportExportRequestValidationError) ErrorName() string {
+	return "ListReportExportRequestValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e ListTaskRequestValidationError) Error() string {
+func (e ListReportExportRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -774,14 +842,14 @@ func (e ListTaskRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListTaskRequest.%s: %s%s",
+		"invalid %sListReportExportRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListTaskRequestValidationError{}
+var _ error = ListReportExportRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -789,24 +857,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListTaskRequestValidationError{}
+} = ListReportExportRequestValidationError{}
 
-// Validate checks the field values on ListTaskResponse with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *ListTaskResponse) Validate() error {
+// Validate checks the field values on ListReportExportResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListReportExportResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListTaskResponse with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on ListReportExportResponse with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// ListTaskResponseMultiError, or nil if none found.
-func (m *ListTaskResponse) ValidateAll() error {
+// ListReportExportResponseMultiError, or nil if none found.
+func (m *ListReportExportResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListTaskResponse) validate(all bool) error {
+func (m *ListReportExportResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -820,7 +888,7 @@ func (m *ListTaskResponse) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListTaskResponseValidationError{
+					errors = append(errors, ListReportExportResponseValidationError{
 						field:  fmt.Sprintf("Tasks[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -828,7 +896,7 @@ func (m *ListTaskResponse) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListTaskResponseValidationError{
+					errors = append(errors, ListReportExportResponseValidationError{
 						field:  fmt.Sprintf("Tasks[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -837,7 +905,7 @@ func (m *ListTaskResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListTaskResponseValidationError{
+				return ListReportExportResponseValidationError{
 					field:  fmt.Sprintf("Tasks[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -847,20 +915,32 @@ func (m *ListTaskResponse) validate(all bool) error {
 
 	}
 
+	// no validation rules for TotalPage
+
+	// no validation rules for TotalCompleted
+
+	// no validation rules for TotalGenerating
+
+	// no validation rules for TotalPending
+
+	// no validation rules for TotalFailed
+
+	// no validation rules for PageSize
+
 	if len(errors) > 0 {
-		return ListTaskResponseMultiError(errors)
+		return ListReportExportResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListTaskResponseMultiError is an error wrapping multiple validation errors
-// returned by ListTaskResponse.ValidateAll() if the designated constraints
-// aren't met.
-type ListTaskResponseMultiError []error
+// ListReportExportResponseMultiError is an error wrapping multiple validation
+// errors returned by ListReportExportResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListReportExportResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListTaskResponseMultiError) Error() string {
+func (m ListReportExportResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -869,11 +949,11 @@ func (m ListTaskResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListTaskResponseMultiError) AllErrors() []error { return m }
+func (m ListReportExportResponseMultiError) AllErrors() []error { return m }
 
-// ListTaskResponseValidationError is the validation error returned by
-// ListTaskResponse.Validate if the designated constraints aren't met.
-type ListTaskResponseValidationError struct {
+// ListReportExportResponseValidationError is the validation error returned by
+// ListReportExportResponse.Validate if the designated constraints aren't met.
+type ListReportExportResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -881,22 +961,24 @@ type ListTaskResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListTaskResponseValidationError) Field() string { return e.field }
+func (e ListReportExportResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListTaskResponseValidationError) Reason() string { return e.reason }
+func (e ListReportExportResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListTaskResponseValidationError) Cause() error { return e.cause }
+func (e ListReportExportResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListTaskResponseValidationError) Key() bool { return e.key }
+func (e ListReportExportResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListTaskResponseValidationError) ErrorName() string { return "ListTaskResponseValidationError" }
+func (e ListReportExportResponseValidationError) ErrorName() string {
+	return "ListReportExportResponseValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e ListTaskResponseValidationError) Error() string {
+func (e ListReportExportResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -908,14 +990,14 @@ func (e ListTaskResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListTaskResponse.%s: %s%s",
+		"invalid %sListReportExportResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListTaskResponseValidationError{}
+var _ error = ListReportExportResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -923,24 +1005,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListTaskResponseValidationError{}
+} = ListReportExportResponseValidationError{}
 
-// Validate checks the field values on CreateTaskRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *CreateTaskRequest) Validate() error {
+// Validate checks the field values on CreateReportExportRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateReportExportRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on CreateTaskRequest with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on CreateReportExportRequest with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// CreateTaskRequestMultiError, or nil if none found.
-func (m *CreateTaskRequest) ValidateAll() error {
+// CreateReportExportRequestMultiError, or nil if none found.
+func (m *CreateReportExportRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *CreateTaskRequest) validate(all bool) error {
+func (m *CreateReportExportRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -955,11 +1037,44 @@ func (m *CreateTaskRequest) validate(all bool) error {
 
 	// no validation rules for Status
 
+	// no validation rules for TaskName
+
+	// no validation rules for FileFormat
+
+	if all {
+		switch v := interface{}(m.GetCreateAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateReportExportRequestValidationError{
+					field:  "CreateAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateReportExportRequestValidationError{
+					field:  "CreateAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreateAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateReportExportRequestValidationError{
+				field:  "CreateAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, CreateTaskRequestValidationError{
+				errors = append(errors, CreateReportExportRequestValidationError{
 					field:  "OperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -967,7 +1082,7 @@ func (m *CreateTaskRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, CreateTaskRequestValidationError{
+				errors = append(errors, CreateReportExportRequestValidationError{
 					field:  "OperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -976,7 +1091,7 @@ func (m *CreateTaskRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return CreateTaskRequestValidationError{
+			return CreateReportExportRequestValidationError{
 				field:  "OperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -984,49 +1099,20 @@ func (m *CreateTaskRequest) validate(all bool) error {
 		}
 	}
 
-	if all {
-		switch v := interface{}(m.GetParams()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, CreateTaskRequestValidationError{
-					field:  "Params",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, CreateTaskRequestValidationError{
-					field:  "Params",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetParams()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return CreateTaskRequestValidationError{
-				field:  "Params",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	if len(errors) > 0 {
-		return CreateTaskRequestMultiError(errors)
+		return CreateReportExportRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// CreateTaskRequestMultiError is an error wrapping multiple validation errors
-// returned by CreateTaskRequest.ValidateAll() if the designated constraints
-// aren't met.
-type CreateTaskRequestMultiError []error
+// CreateReportExportRequestMultiError is an error wrapping multiple validation
+// errors returned by CreateReportExportRequest.ValidateAll() if the
+// designated constraints aren't met.
+type CreateReportExportRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m CreateTaskRequestMultiError) Error() string {
+func (m CreateReportExportRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1035,11 +1121,11 @@ func (m CreateTaskRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m CreateTaskRequestMultiError) AllErrors() []error { return m }
+func (m CreateReportExportRequestMultiError) AllErrors() []error { return m }
 
-// CreateTaskRequestValidationError is the validation error returned by
-// CreateTaskRequest.Validate if the designated constraints aren't met.
-type CreateTaskRequestValidationError struct {
+// CreateReportExportRequestValidationError is the validation error returned by
+// CreateReportExportRequest.Validate if the designated constraints aren't met.
+type CreateReportExportRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1047,24 +1133,24 @@ type CreateTaskRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e CreateTaskRequestValidationError) Field() string { return e.field }
+func (e CreateReportExportRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e CreateTaskRequestValidationError) Reason() string { return e.reason }
+func (e CreateReportExportRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e CreateTaskRequestValidationError) Cause() error { return e.cause }
+func (e CreateReportExportRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e CreateTaskRequestValidationError) Key() bool { return e.key }
+func (e CreateReportExportRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e CreateTaskRequestValidationError) ErrorName() string {
-	return "CreateTaskRequestValidationError"
+func (e CreateReportExportRequestValidationError) ErrorName() string {
+	return "CreateReportExportRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e CreateTaskRequestValidationError) Error() string {
+func (e CreateReportExportRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1076,14 +1162,14 @@ func (e CreateTaskRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sCreateTaskRequest.%s: %s%s",
+		"invalid %sCreateReportExportRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = CreateTaskRequestValidationError{}
+var _ error = CreateReportExportRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -1091,24 +1177,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = CreateTaskRequestValidationError{}
+} = CreateReportExportRequestValidationError{}
 
-// Validate checks the field values on CreateTaskResponse with the rules
-// defined in the proto definition for this message. If any rules are
+// Validate checks the field values on CreateReportExportResponse with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *CreateTaskResponse) Validate() error {
+func (m *CreateReportExportResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on CreateTaskResponse with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on CreateReportExportResponse with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// CreateTaskResponseMultiError, or nil if none found.
-func (m *CreateTaskResponse) ValidateAll() error {
+// CreateReportExportResponseMultiError, or nil if none found.
+func (m *CreateReportExportResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *CreateTaskResponse) validate(all bool) error {
+func (m *CreateReportExportResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1116,19 +1202,19 @@ func (m *CreateTaskResponse) validate(all bool) error {
 	var errors []error
 
 	if len(errors) > 0 {
-		return CreateTaskResponseMultiError(errors)
+		return CreateReportExportResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// CreateTaskResponseMultiError is an error wrapping multiple validation errors
-// returned by CreateTaskResponse.ValidateAll() if the designated constraints
-// aren't met.
-type CreateTaskResponseMultiError []error
+// CreateReportExportResponseMultiError is an error wrapping multiple
+// validation errors returned by CreateReportExportResponse.ValidateAll() if
+// the designated constraints aren't met.
+type CreateReportExportResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m CreateTaskResponseMultiError) Error() string {
+func (m CreateReportExportResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1137,11 +1223,11 @@ func (m CreateTaskResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m CreateTaskResponseMultiError) AllErrors() []error { return m }
+func (m CreateReportExportResponseMultiError) AllErrors() []error { return m }
 
-// CreateTaskResponseValidationError is the validation error returned by
-// CreateTaskResponse.Validate if the designated constraints aren't met.
-type CreateTaskResponseValidationError struct {
+// CreateReportExportResponseValidationError is the validation error returned
+// by CreateReportExportResponse.Validate if the designated constraints aren't met.
+type CreateReportExportResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1149,24 +1235,24 @@ type CreateTaskResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e CreateTaskResponseValidationError) Field() string { return e.field }
+func (e CreateReportExportResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e CreateTaskResponseValidationError) Reason() string { return e.reason }
+func (e CreateReportExportResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e CreateTaskResponseValidationError) Cause() error { return e.cause }
+func (e CreateReportExportResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e CreateTaskResponseValidationError) Key() bool { return e.key }
+func (e CreateReportExportResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e CreateTaskResponseValidationError) ErrorName() string {
-	return "CreateTaskResponseValidationError"
+func (e CreateReportExportResponseValidationError) ErrorName() string {
+	return "CreateReportExportResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e CreateTaskResponseValidationError) Error() string {
+func (e CreateReportExportResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1178,14 +1264,14 @@ func (e CreateTaskResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sCreateTaskResponse.%s: %s%s",
+		"invalid %sCreateReportExportResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = CreateTaskResponseValidationError{}
+var _ error = CreateReportExportResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -1193,24 +1279,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = CreateTaskResponseValidationError{}
+} = CreateReportExportResponseValidationError{}
 
-// Validate checks the field values on UpdateTaskRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *UpdateTaskRequest) Validate() error {
+// Validate checks the field values on UpdateReportExportRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateReportExportRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on UpdateTaskRequest with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on UpdateReportExportRequest with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// UpdateTaskRequestMultiError, or nil if none found.
-func (m *UpdateTaskRequest) ValidateAll() error {
+// UpdateReportExportRequestMultiError, or nil if none found.
+func (m *UpdateReportExportRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *UpdateTaskRequest) validate(all bool) error {
+func (m *UpdateReportExportRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1221,53 +1307,24 @@ func (m *UpdateTaskRequest) validate(all bool) error {
 
 	// no validation rules for Status
 
-	// no validation rules for Process
+	// no validation rules for FileUrl
 
-	// no validation rules for Percentage
-
-	if all {
-		switch v := interface{}(m.GetResult()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UpdateTaskRequestValidationError{
-					field:  "Result",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, UpdateTaskRequestValidationError{
-					field:  "Result",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetResult()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UpdateTaskRequestValidationError{
-				field:  "Result",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for FileSize
 
 	if len(errors) > 0 {
-		return UpdateTaskRequestMultiError(errors)
+		return UpdateReportExportRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// UpdateTaskRequestMultiError is an error wrapping multiple validation errors
-// returned by UpdateTaskRequest.ValidateAll() if the designated constraints
-// aren't met.
-type UpdateTaskRequestMultiError []error
+// UpdateReportExportRequestMultiError is an error wrapping multiple validation
+// errors returned by UpdateReportExportRequest.ValidateAll() if the
+// designated constraints aren't met.
+type UpdateReportExportRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m UpdateTaskRequestMultiError) Error() string {
+func (m UpdateReportExportRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1276,11 +1333,11 @@ func (m UpdateTaskRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m UpdateTaskRequestMultiError) AllErrors() []error { return m }
+func (m UpdateReportExportRequestMultiError) AllErrors() []error { return m }
 
-// UpdateTaskRequestValidationError is the validation error returned by
-// UpdateTaskRequest.Validate if the designated constraints aren't met.
-type UpdateTaskRequestValidationError struct {
+// UpdateReportExportRequestValidationError is the validation error returned by
+// UpdateReportExportRequest.Validate if the designated constraints aren't met.
+type UpdateReportExportRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1288,24 +1345,24 @@ type UpdateTaskRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e UpdateTaskRequestValidationError) Field() string { return e.field }
+func (e UpdateReportExportRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e UpdateTaskRequestValidationError) Reason() string { return e.reason }
+func (e UpdateReportExportRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e UpdateTaskRequestValidationError) Cause() error { return e.cause }
+func (e UpdateReportExportRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e UpdateTaskRequestValidationError) Key() bool { return e.key }
+func (e UpdateReportExportRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e UpdateTaskRequestValidationError) ErrorName() string {
-	return "UpdateTaskRequestValidationError"
+func (e UpdateReportExportRequestValidationError) ErrorName() string {
+	return "UpdateReportExportRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e UpdateTaskRequestValidationError) Error() string {
+func (e UpdateReportExportRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1317,14 +1374,14 @@ func (e UpdateTaskRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sUpdateTaskRequest.%s: %s%s",
+		"invalid %sUpdateReportExportRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = UpdateTaskRequestValidationError{}
+var _ error = UpdateReportExportRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -1332,24 +1389,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = UpdateTaskRequestValidationError{}
+} = UpdateReportExportRequestValidationError{}
 
-// Validate checks the field values on UpdateTaskResponse with the rules
-// defined in the proto definition for this message. If any rules are
+// Validate checks the field values on UpdateReportExportResponse with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *UpdateTaskResponse) Validate() error {
+func (m *UpdateReportExportResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on UpdateTaskResponse with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on UpdateReportExportResponse with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// UpdateTaskResponseMultiError, or nil if none found.
-func (m *UpdateTaskResponse) ValidateAll() error {
+// UpdateReportExportResponseMultiError, or nil if none found.
+func (m *UpdateReportExportResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *UpdateTaskResponse) validate(all bool) error {
+func (m *UpdateReportExportResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1357,19 +1414,19 @@ func (m *UpdateTaskResponse) validate(all bool) error {
 	var errors []error
 
 	if len(errors) > 0 {
-		return UpdateTaskResponseMultiError(errors)
+		return UpdateReportExportResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// UpdateTaskResponseMultiError is an error wrapping multiple validation errors
-// returned by UpdateTaskResponse.ValidateAll() if the designated constraints
-// aren't met.
-type UpdateTaskResponseMultiError []error
+// UpdateReportExportResponseMultiError is an error wrapping multiple
+// validation errors returned by UpdateReportExportResponse.ValidateAll() if
+// the designated constraints aren't met.
+type UpdateReportExportResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m UpdateTaskResponseMultiError) Error() string {
+func (m UpdateReportExportResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1378,11 +1435,11 @@ func (m UpdateTaskResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m UpdateTaskResponseMultiError) AllErrors() []error { return m }
+func (m UpdateReportExportResponseMultiError) AllErrors() []error { return m }
 
-// UpdateTaskResponseValidationError is the validation error returned by
-// UpdateTaskResponse.Validate if the designated constraints aren't met.
-type UpdateTaskResponseValidationError struct {
+// UpdateReportExportResponseValidationError is the validation error returned
+// by UpdateReportExportResponse.Validate if the designated constraints aren't met.
+type UpdateReportExportResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1390,24 +1447,24 @@ type UpdateTaskResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e UpdateTaskResponseValidationError) Field() string { return e.field }
+func (e UpdateReportExportResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e UpdateTaskResponseValidationError) Reason() string { return e.reason }
+func (e UpdateReportExportResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e UpdateTaskResponseValidationError) Cause() error { return e.cause }
+func (e UpdateReportExportResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e UpdateTaskResponseValidationError) Key() bool { return e.key }
+func (e UpdateReportExportResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e UpdateTaskResponseValidationError) ErrorName() string {
-	return "UpdateTaskResponseValidationError"
+func (e UpdateReportExportResponseValidationError) ErrorName() string {
+	return "UpdateReportExportResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e UpdateTaskResponseValidationError) Error() string {
+func (e UpdateReportExportResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1419,14 +1476,14 @@ func (e UpdateTaskResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sUpdateTaskResponse.%s: %s%s",
+		"invalid %sUpdateReportExportResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = UpdateTaskResponseValidationError{}
+var _ error = UpdateReportExportResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -1434,7 +1491,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = UpdateTaskResponseValidationError{}
+} = UpdateReportExportResponseValidationError{}
 
 // Validate checks the field values on SetIntegrityConfigRequest with the rules
 // defined in the proto definition for this message. If any rules are
@@ -2004,22 +2061,23 @@ var _ interface {
 	ErrorName() string
 } = ListIntegrityStatusResponse_IntegrityStatus_FileInfoValidationError{}
 
-// Validate checks the field values on ListTaskResponse_Task with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ListTaskResponse_Task) Validate() error {
+// Validate checks the field values on ListReportExportResponse_ReportExport
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ListReportExportResponse_ReportExport) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListTaskResponse_Task with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// ListTaskResponse_TaskMultiError, or nil if none found.
-func (m *ListTaskResponse_Task) ValidateAll() error {
+// ValidateAll checks the field values on ListReportExportResponse_ReportExport
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListReportExportResponse_ReportExportMultiError, or nil if none found.
+func (m *ListReportExportResponse_ReportExport) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListTaskResponse_Task) validate(all bool) error {
+func (m *ListReportExportResponse_ReportExport) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -2028,39 +2086,43 @@ func (m *ListTaskResponse_Task) validate(all bool) error {
 
 	// no validation rules for TaskId
 
-	// no validation rules for UserId
+	// no validation rules for UserName
+
+	// no validation rules for StaskName
 
 	// no validation rules for Type
 
 	// no validation rules for Status
 
-	// no validation rules for Process
+	// no validation rules for FileUrl
 
-	// no validation rules for Percentage
+	// no validation rules for FileSize
+
+	// no validation rules for FileFormat
 
 	if all {
-		switch v := interface{}(m.GetResult()).(type) {
+		switch v := interface{}(m.GetCreateAt()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListTaskResponse_TaskValidationError{
-					field:  "Result",
+				errors = append(errors, ListReportExportResponse_ReportExportValidationError{
+					field:  "CreateAt",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, ListTaskResponse_TaskValidationError{
-					field:  "Result",
+				errors = append(errors, ListReportExportResponse_ReportExportValidationError{
+					field:  "CreateAt",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetResult()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetCreateAt()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return ListTaskResponse_TaskValidationError{
-				field:  "Result",
+			return ListReportExportResponse_ReportExportValidationError{
+				field:  "CreateAt",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -2068,19 +2130,20 @@ func (m *ListTaskResponse_Task) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return ListTaskResponse_TaskMultiError(errors)
+		return ListReportExportResponse_ReportExportMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListTaskResponse_TaskMultiError is an error wrapping multiple validation
-// errors returned by ListTaskResponse_Task.ValidateAll() if the designated
+// ListReportExportResponse_ReportExportMultiError is an error wrapping
+// multiple validation errors returned by
+// ListReportExportResponse_ReportExport.ValidateAll() if the designated
 // constraints aren't met.
-type ListTaskResponse_TaskMultiError []error
+type ListReportExportResponse_ReportExportMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListTaskResponse_TaskMultiError) Error() string {
+func (m ListReportExportResponse_ReportExportMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -2089,11 +2152,12 @@ func (m ListTaskResponse_TaskMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListTaskResponse_TaskMultiError) AllErrors() []error { return m }
+func (m ListReportExportResponse_ReportExportMultiError) AllErrors() []error { return m }
 
-// ListTaskResponse_TaskValidationError is the validation error returned by
-// ListTaskResponse_Task.Validate if the designated constraints aren't met.
-type ListTaskResponse_TaskValidationError struct {
+// ListReportExportResponse_ReportExportValidationError is the validation error
+// returned by ListReportExportResponse_ReportExport.Validate if the
+// designated constraints aren't met.
+type ListReportExportResponse_ReportExportValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -2101,24 +2165,24 @@ type ListTaskResponse_TaskValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListTaskResponse_TaskValidationError) Field() string { return e.field }
+func (e ListReportExportResponse_ReportExportValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListTaskResponse_TaskValidationError) Reason() string { return e.reason }
+func (e ListReportExportResponse_ReportExportValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListTaskResponse_TaskValidationError) Cause() error { return e.cause }
+func (e ListReportExportResponse_ReportExportValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListTaskResponse_TaskValidationError) Key() bool { return e.key }
+func (e ListReportExportResponse_ReportExportValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListTaskResponse_TaskValidationError) ErrorName() string {
-	return "ListTaskResponse_TaskValidationError"
+func (e ListReportExportResponse_ReportExportValidationError) ErrorName() string {
+	return "ListReportExportResponse_ReportExportValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListTaskResponse_TaskValidationError) Error() string {
+func (e ListReportExportResponse_ReportExportValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -2130,14 +2194,14 @@ func (e ListTaskResponse_TaskValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListTaskResponse_Task.%s: %s%s",
+		"invalid %sListReportExportResponse_ReportExport.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListTaskResponse_TaskValidationError{}
+var _ error = ListReportExportResponse_ReportExportValidationError{}
 
 var _ interface {
 	Field() string
@@ -2145,4 +2209,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListTaskResponse_TaskValidationError{}
+} = ListReportExportResponse_ReportExportValidationError{}

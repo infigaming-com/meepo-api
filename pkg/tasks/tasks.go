@@ -1,15 +1,14 @@
 package tasks
 
 const (
-	ExportType = "export"
+	REPORT_EXPORT_PENDING    = "pending"
+	REPORT_EXPORT_FAILED     = "failed"
+	REPORT_EXPORT_GENERATING = "generating"
+	REPORT_EXPORT_COMPLETED  = "completed"
 )
 
-const (
-	ExportInitiate = "initiate"
-)
-
-type ExportTaskPayload struct {
+type ReportExportPayload struct {
 }
 
-type ExportTaskResult struct {
+type ReportExportResult struct {
 }
