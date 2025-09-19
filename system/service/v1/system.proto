@@ -108,8 +108,6 @@ message UpdateReportExportRequest {
 	string status = 2;
 	string file_url = 3;
 	string file_size = 4;
-	string file_format = 5;
-	google.protobuf.Struct result = 6;
 }
 
 message UpdateReportExportResponse {
