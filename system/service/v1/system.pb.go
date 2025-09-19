@@ -268,7 +268,7 @@ func (x *ListIntegrityStatusResponse) GetIntegrityStatuses() []*ListIntegritySta
 	return nil
 }
 
-type ListTaskRequest struct {
+type ListReportExportRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	TaskIds         []int64                 `protobuf:"varint,1,rep,packed,name=task_ids,json=taskIds,proto3" json:"task_ids,omitempty"`
 	Type            *string                 `protobuf:"bytes,2,opt,name=type,proto3,oneof" json:"type,omitempty"`
@@ -278,20 +278,20 @@ type ListTaskRequest struct {
 	sizeCache       protoimpl.SizeCache
 }
 
-func (x *ListTaskRequest) Reset() {
-	*x = ListTaskRequest{}
+func (x *ListReportExportRequest) Reset() {
+	*x = ListReportExportRequest{}
 	mi := &file_system_service_v1_system_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListTaskRequest) String() string {
+func (x *ListReportExportRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListTaskRequest) ProtoMessage() {}
+func (*ListReportExportRequest) ProtoMessage() {}
 
-func (x *ListTaskRequest) ProtoReflect() protoreflect.Message {
+func (x *ListReportExportRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_system_service_v1_system_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -303,60 +303,60 @@ func (x *ListTaskRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListTaskRequest.ProtoReflect.Descriptor instead.
-func (*ListTaskRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListReportExportRequest.ProtoReflect.Descriptor instead.
+func (*ListReportExportRequest) Descriptor() ([]byte, []int) {
 	return file_system_service_v1_system_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *ListTaskRequest) GetTaskIds() []int64 {
+func (x *ListReportExportRequest) GetTaskIds() []int64 {
 	if x != nil {
 		return x.TaskIds
 	}
 	return nil
 }
 
-func (x *ListTaskRequest) GetType() string {
+func (x *ListReportExportRequest) GetType() string {
 	if x != nil && x.Type != nil {
 		return *x.Type
 	}
 	return ""
 }
 
-func (x *ListTaskRequest) GetUserId() int64 {
+func (x *ListReportExportRequest) GetUserId() int64 {
 	if x != nil && x.UserId != nil {
 		return *x.UserId
 	}
 	return 0
 }
 
-func (x *ListTaskRequest) GetOperatorContext() *common.OperatorContext {
+func (x *ListReportExportRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
 	return nil
 }
 
-type ListTaskResponse struct {
-	state         protoimpl.MessageState   `protogen:"open.v1"`
-	Tasks         []*ListTaskResponse_Task `protobuf:"bytes,1,rep,name=tasks,proto3" json:"tasks,omitempty"`
+type ListReportExportResponse struct {
+	state         protoimpl.MessageState                   `protogen:"open.v1"`
+	Tasks         []*ListReportExportResponse_ReportExport `protobuf:"bytes,1,rep,name=tasks,proto3" json:"tasks,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListTaskResponse) Reset() {
-	*x = ListTaskResponse{}
+func (x *ListReportExportResponse) Reset() {
+	*x = ListReportExportResponse{}
 	mi := &file_system_service_v1_system_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListTaskResponse) String() string {
+func (x *ListReportExportResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListTaskResponse) ProtoMessage() {}
+func (*ListReportExportResponse) ProtoMessage() {}
 
-func (x *ListTaskResponse) ProtoReflect() protoreflect.Message {
+func (x *ListReportExportResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_system_service_v1_system_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -368,44 +368,47 @@ func (x *ListTaskResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListTaskResponse.ProtoReflect.Descriptor instead.
-func (*ListTaskResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListReportExportResponse.ProtoReflect.Descriptor instead.
+func (*ListReportExportResponse) Descriptor() ([]byte, []int) {
 	return file_system_service_v1_system_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *ListTaskResponse) GetTasks() []*ListTaskResponse_Task {
+func (x *ListReportExportResponse) GetTasks() []*ListReportExportResponse_ReportExport {
 	if x != nil {
 		return x.Tasks
 	}
 	return nil
 }
 
-type CreateTaskRequest struct {
+type CreateReportExportRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	TaskId          int64                   `protobuf:"varint,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
 	UserId          int64                   `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Type            string                  `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
 	Status          string                  `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,5,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	Params          *structpb.Struct        `protobuf:"bytes,6,opt,name=params,proto3" json:"params,omitempty"`
+	FileUrl         string                  `protobuf:"bytes,5,opt,name=file_url,json=fileUrl,proto3" json:"file_url,omitempty"`
+	FileSize        string                  `protobuf:"bytes,6,opt,name=file_size,json=fileSize,proto3" json:"file_size,omitempty"`
+	FileFormat      string                  `protobuf:"bytes,7,opt,name=file_format,json=fileFormat,proto3" json:"file_format,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,8,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Params          *structpb.Struct        `protobuf:"bytes,9,opt,name=params,proto3" json:"params,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
 
-func (x *CreateTaskRequest) Reset() {
-	*x = CreateTaskRequest{}
+func (x *CreateReportExportRequest) Reset() {
+	*x = CreateReportExportRequest{}
 	mi := &file_system_service_v1_system_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreateTaskRequest) String() string {
+func (x *CreateReportExportRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateTaskRequest) ProtoMessage() {}
+func (*CreateReportExportRequest) ProtoMessage() {}
 
-func (x *CreateTaskRequest) ProtoReflect() protoreflect.Message {
+func (x *CreateReportExportRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_system_service_v1_system_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -417,73 +420,94 @@ func (x *CreateTaskRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateTaskRequest.ProtoReflect.Descriptor instead.
-func (*CreateTaskRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use CreateReportExportRequest.ProtoReflect.Descriptor instead.
+func (*CreateReportExportRequest) Descriptor() ([]byte, []int) {
 	return file_system_service_v1_system_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *CreateTaskRequest) GetTaskId() int64 {
+func (x *CreateReportExportRequest) GetTaskId() int64 {
 	if x != nil {
 		return x.TaskId
 	}
 	return 0
 }
 
-func (x *CreateTaskRequest) GetUserId() int64 {
+func (x *CreateReportExportRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
 	return 0
 }
 
-func (x *CreateTaskRequest) GetType() string {
+func (x *CreateReportExportRequest) GetType() string {
 	if x != nil {
 		return x.Type
 	}
 	return ""
 }
 
-func (x *CreateTaskRequest) GetStatus() string {
+func (x *CreateReportExportRequest) GetStatus() string {
 	if x != nil {
 		return x.Status
 	}
 	return ""
 }
 
-func (x *CreateTaskRequest) GetOperatorContext() *common.OperatorContext {
+func (x *CreateReportExportRequest) GetFileUrl() string {
+	if x != nil {
+		return x.FileUrl
+	}
+	return ""
+}
+
+func (x *CreateReportExportRequest) GetFileSize() string {
+	if x != nil {
+		return x.FileSize
+	}
+	return ""
+}
+
+func (x *CreateReportExportRequest) GetFileFormat() string {
+	if x != nil {
+		return x.FileFormat
+	}
+	return ""
+}
+
+func (x *CreateReportExportRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
 	return nil
 }
 
-func (x *CreateTaskRequest) GetParams() *structpb.Struct {
+func (x *CreateReportExportRequest) GetParams() *structpb.Struct {
 	if x != nil {
 		return x.Params
 	}
 	return nil
 }
 
-type CreateTaskResponse struct {
+type CreateReportExportResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CreateTaskResponse) Reset() {
-	*x = CreateTaskResponse{}
+func (x *CreateReportExportResponse) Reset() {
+	*x = CreateReportExportResponse{}
 	mi := &file_system_service_v1_system_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreateTaskResponse) String() string {
+func (x *CreateReportExportResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateTaskResponse) ProtoMessage() {}
+func (*CreateReportExportResponse) ProtoMessage() {}
 
-func (x *CreateTaskResponse) ProtoReflect() protoreflect.Message {
+func (x *CreateReportExportResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_system_service_v1_system_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -495,36 +519,37 @@ func (x *CreateTaskResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateTaskResponse.ProtoReflect.Descriptor instead.
-func (*CreateTaskResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use CreateReportExportResponse.ProtoReflect.Descriptor instead.
+func (*CreateReportExportResponse) Descriptor() ([]byte, []int) {
 	return file_system_service_v1_system_proto_rawDescGZIP(), []int{8}
 }
 
-type UpdateTaskRequest struct {
+type UpdateReportExportRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TaskId        int64                  `protobuf:"varint,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
 	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
-	Process       string                 `protobuf:"bytes,3,opt,name=process,proto3" json:"process,omitempty"`
-	Percentage    string                 `protobuf:"bytes,4,opt,name=percentage,proto3" json:"percentage,omitempty"`
-	Result        *structpb.Struct       `protobuf:"bytes,5,opt,name=result,proto3" json:"result,omitempty"`
+	FileUrl       string                 `protobuf:"bytes,3,opt,name=file_url,json=fileUrl,proto3" json:"file_url,omitempty"`
+	FileSize      string                 `protobuf:"bytes,4,opt,name=file_size,json=fileSize,proto3" json:"file_size,omitempty"`
+	FileFormat    string                 `protobuf:"bytes,5,opt,name=file_format,json=fileFormat,proto3" json:"file_format,omitempty"`
+	Result        *structpb.Struct       `protobuf:"bytes,6,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UpdateTaskRequest) Reset() {
-	*x = UpdateTaskRequest{}
+func (x *UpdateReportExportRequest) Reset() {
+	*x = UpdateReportExportRequest{}
 	mi := &file_system_service_v1_system_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpdateTaskRequest) String() string {
+func (x *UpdateReportExportRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdateTaskRequest) ProtoMessage() {}
+func (*UpdateReportExportRequest) ProtoMessage() {}
 
-func (x *UpdateTaskRequest) ProtoReflect() protoreflect.Message {
+func (x *UpdateReportExportRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_system_service_v1_system_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -536,66 +561,73 @@ func (x *UpdateTaskRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateTaskRequest.ProtoReflect.Descriptor instead.
-func (*UpdateTaskRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdateReportExportRequest.ProtoReflect.Descriptor instead.
+func (*UpdateReportExportRequest) Descriptor() ([]byte, []int) {
 	return file_system_service_v1_system_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *UpdateTaskRequest) GetTaskId() int64 {
+func (x *UpdateReportExportRequest) GetTaskId() int64 {
 	if x != nil {
 		return x.TaskId
 	}
 	return 0
 }
 
-func (x *UpdateTaskRequest) GetStatus() string {
+func (x *UpdateReportExportRequest) GetStatus() string {
 	if x != nil {
 		return x.Status
 	}
 	return ""
 }
 
-func (x *UpdateTaskRequest) GetProcess() string {
+func (x *UpdateReportExportRequest) GetFileUrl() string {
 	if x != nil {
-		return x.Process
+		return x.FileUrl
 	}
 	return ""
 }
 
-func (x *UpdateTaskRequest) GetPercentage() string {
+func (x *UpdateReportExportRequest) GetFileSize() string {
 	if x != nil {
-		return x.Percentage
+		return x.FileSize
 	}
 	return ""
 }
 
-func (x *UpdateTaskRequest) GetResult() *structpb.Struct {
+func (x *UpdateReportExportRequest) GetFileFormat() string {
+	if x != nil {
+		return x.FileFormat
+	}
+	return ""
+}
+
+func (x *UpdateReportExportRequest) GetResult() *structpb.Struct {
 	if x != nil {
 		return x.Result
 	}
 	return nil
 }
 
-type UpdateTaskResponse struct {
+type UpdateReportExportResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UpdateTaskResponse) Reset() {
-	*x = UpdateTaskResponse{}
+func (x *UpdateReportExportResponse) Reset() {
+	*x = UpdateReportExportResponse{}
 	mi := &file_system_service_v1_system_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpdateTaskResponse) String() string {
+func (x *UpdateReportExportResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdateTaskResponse) ProtoMessage() {}
+func (*UpdateReportExportResponse) ProtoMessage() {}
 
-func (x *UpdateTaskResponse) ProtoReflect() protoreflect.Message {
+func (x *UpdateReportExportResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_system_service_v1_system_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -607,8 +639,8 @@ func (x *UpdateTaskResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateTaskResponse.ProtoReflect.Descriptor instead.
-func (*UpdateTaskResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdateReportExportResponse.ProtoReflect.Descriptor instead.
+func (*UpdateReportExportResponse) Descriptor() ([]byte, []int) {
 	return file_system_service_v1_system_proto_rawDescGZIP(), []int{10}
 }
 
@@ -860,33 +892,34 @@ func (x *ListIntegrityStatusResponse_IntegrityStatus_FileInfo) GetIsMatch() bool
 	return false
 }
 
-type ListTaskResponse_Task struct {
+type ListReportExportResponse_ReportExport struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TaskId        int64                  `protobuf:"varint,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
 	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Type          string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
 	Status        string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
-	Process       string                 `protobuf:"bytes,5,opt,name=process,proto3" json:"process,omitempty"`
-	Percentage    string                 `protobuf:"bytes,6,opt,name=Percentage,proto3" json:"Percentage,omitempty"`
-	Result        *structpb.Struct       `protobuf:"bytes,7,opt,name=result,proto3" json:"result,omitempty"`
+	FileUrl       string                 `protobuf:"bytes,5,opt,name=file_url,json=fileUrl,proto3" json:"file_url,omitempty"`
+	FileSize      string                 `protobuf:"bytes,6,opt,name=file_size,json=fileSize,proto3" json:"file_size,omitempty"`
+	FileFormat    string                 `protobuf:"bytes,7,opt,name=file_format,json=fileFormat,proto3" json:"file_format,omitempty"`
+	Result        *structpb.Struct       `protobuf:"bytes,8,opt,name=result,proto3" json:"result,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListTaskResponse_Task) Reset() {
-	*x = ListTaskResponse_Task{}
+func (x *ListReportExportResponse_ReportExport) Reset() {
+	*x = ListReportExportResponse_ReportExport{}
 	mi := &file_system_service_v1_system_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListTaskResponse_Task) String() string {
+func (x *ListReportExportResponse_ReportExport) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListTaskResponse_Task) ProtoMessage() {}
+func (*ListReportExportResponse_ReportExport) ProtoMessage() {}
 
-func (x *ListTaskResponse_Task) ProtoReflect() protoreflect.Message {
+func (x *ListReportExportResponse_ReportExport) ProtoReflect() protoreflect.Message {
 	mi := &file_system_service_v1_system_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -898,54 +931,61 @@ func (x *ListTaskResponse_Task) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListTaskResponse_Task.ProtoReflect.Descriptor instead.
-func (*ListTaskResponse_Task) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListReportExportResponse_ReportExport.ProtoReflect.Descriptor instead.
+func (*ListReportExportResponse_ReportExport) Descriptor() ([]byte, []int) {
 	return file_system_service_v1_system_proto_rawDescGZIP(), []int{6, 0}
 }
 
-func (x *ListTaskResponse_Task) GetTaskId() int64 {
+func (x *ListReportExportResponse_ReportExport) GetTaskId() int64 {
 	if x != nil {
 		return x.TaskId
 	}
 	return 0
 }
 
-func (x *ListTaskResponse_Task) GetUserId() int64 {
+func (x *ListReportExportResponse_ReportExport) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
 	return 0
 }
 
-func (x *ListTaskResponse_Task) GetType() string {
+func (x *ListReportExportResponse_ReportExport) GetType() string {
 	if x != nil {
 		return x.Type
 	}
 	return ""
 }
 
-func (x *ListTaskResponse_Task) GetStatus() string {
+func (x *ListReportExportResponse_ReportExport) GetStatus() string {
 	if x != nil {
 		return x.Status
 	}
 	return ""
 }
 
-func (x *ListTaskResponse_Task) GetProcess() string {
+func (x *ListReportExportResponse_ReportExport) GetFileUrl() string {
 	if x != nil {
-		return x.Process
+		return x.FileUrl
 	}
 	return ""
 }
 
-func (x *ListTaskResponse_Task) GetPercentage() string {
+func (x *ListReportExportResponse_ReportExport) GetFileSize() string {
 	if x != nil {
-		return x.Percentage
+		return x.FileSize
 	}
 	return ""
 }
 
-func (x *ListTaskResponse_Task) GetResult() *structpb.Struct {
+func (x *ListReportExportResponse_ReportExport) GetFileFormat() string {
+	if x != nil {
+		return x.FileFormat
+	}
+	return ""
+}
+
+func (x *ListReportExportResponse_ReportExport) GetResult() *structpb.Struct {
 	if x != nil {
 		return x.Result
 	}
@@ -983,8 +1023,8 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\tfile_path\x18\x01 \x01(\tR\bfilePath\x12\x12\n" +
 	"\x04hash\x18\x02 \x01(\tR\x04hash\x12#\n" +
 	"\rexpected_hash\x18\x03 \x01(\tR\fexpectedHash\x12\x19\n" +
-	"\bis_match\x18\x04 \x01(\bR\aisMatch\"\xda\x01\n" +
-	"\x0fListTaskRequest\x12\x19\n" +
+	"\bis_match\x18\x04 \x01(\bR\aisMatch\"\xe2\x01\n" +
+	"\x17ListReportExportRequest\x12\x19\n" +
 	"\btask_ids\x18\x01 \x03(\x03R\ataskIds\x12\x17\n" +
 	"\x04type\x18\x02 \x01(\tH\x00R\x04type\x88\x01\x01\x12\x1c\n" +
 	"\auser_id\x18\x03 \x01(\x03H\x01R\x06userId\x88\x01\x01\x12K\n" +
@@ -992,51 +1032,55 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\x05_typeB\n" +
 	"\n" +
 	"\b_user_idB\x13\n" +
-	"\x11_operator_context\"\xa4\x02\n" +
-	"\x10ListTaskResponse\x12>\n" +
-	"\x05tasks\x18\x01 \x03(\v2(.system.service.v1.ListTaskResponse.TaskR\x05tasks\x1a\xcf\x01\n" +
-	"\x04Task\x12\x17\n" +
+	"\x11_operator_context\"\xe3\x02\n" +
+	"\x18ListReportExportResponse\x12N\n" +
+	"\x05tasks\x18\x01 \x03(\v28.system.service.v1.ListReportExportResponse.ReportExportR\x05tasks\x1a\xf6\x01\n" +
+	"\fReportExport\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\tR\x04type\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\tR\x06status\x12\x18\n" +
-	"\aprocess\x18\x05 \x01(\tR\aprocess\x12\x1e\n" +
-	"\n" +
-	"Percentage\x18\x06 \x01(\tR\n" +
-	"Percentage\x12/\n" +
-	"\x06result\x18\a \x01(\v2\x17.google.protobuf.StructR\x06result\"\xea\x01\n" +
-	"\x11CreateTaskRequest\x12\x17\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\x12\x19\n" +
+	"\bfile_url\x18\x05 \x01(\tR\afileUrl\x12\x1b\n" +
+	"\tfile_size\x18\x06 \x01(\tR\bfileSize\x12\x1f\n" +
+	"\vfile_format\x18\a \x01(\tR\n" +
+	"fileFormat\x12/\n" +
+	"\x06result\x18\b \x01(\v2\x17.google.protobuf.StructR\x06result\"\xcb\x02\n" +
+	"\x19CreateReportExportRequest\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\tR\x04type\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\tR\x06status\x12F\n" +
-	"\x10operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12/\n" +
-	"\x06params\x18\x06 \x01(\v2\x17.google.protobuf.StructR\x06params\"\x14\n" +
-	"\x12CreateTaskResponse\"\xaf\x01\n" +
-	"\x11UpdateTaskRequest\x12\x17\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\x12\x19\n" +
+	"\bfile_url\x18\x05 \x01(\tR\afileUrl\x12\x1b\n" +
+	"\tfile_size\x18\x06 \x01(\tR\bfileSize\x12\x1f\n" +
+	"\vfile_format\x18\a \x01(\tR\n" +
+	"fileFormat\x12F\n" +
+	"\x10operator_context\x18\b \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12/\n" +
+	"\x06params\x18\t \x01(\v2\x17.google.protobuf.StructR\x06params\"\x1c\n" +
+	"\x1aCreateReportExportResponse\"\xd6\x01\n" +
+	"\x19UpdateReportExportRequest\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x16\n" +
-	"\x06status\x18\x02 \x01(\tR\x06status\x12\x18\n" +
-	"\aprocess\x18\x03 \x01(\tR\aprocess\x12\x1e\n" +
-	"\n" +
-	"percentage\x18\x04 \x01(\tR\n" +
-	"percentage\x12/\n" +
-	"\x06result\x18\x05 \x01(\v2\x17.google.protobuf.StructR\x06result\"\x14\n" +
-	"\x12UpdateTaskResponse\"\xe1\x01\n" +
+	"\x06status\x18\x02 \x01(\tR\x06status\x12\x19\n" +
+	"\bfile_url\x18\x03 \x01(\tR\afileUrl\x12\x1b\n" +
+	"\tfile_size\x18\x04 \x01(\tR\bfileSize\x12\x1f\n" +
+	"\vfile_format\x18\x05 \x01(\tR\n" +
+	"fileFormat\x12/\n" +
+	"\x06result\x18\x06 \x01(\v2\x17.google.protobuf.StructR\x06result\"\x1c\n" +
+	"\x1aUpdateReportExportResponse\"\xe1\x01\n" +
 	"\x19SetIntegrityConfigRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1b\n" +
 	"\tlabel_app\x18\x02 \x01(\tR\blabelApp\x12#\n" +
 	"\rpod_namespace\x18\x03 \x01(\tR\fpodNamespace\x12:\n" +
 	"\n" +
 	"file_infos\x18\x04 \x03(\v2\x1b.system.service.v1.FileInfoR\tfileInfos\"\x1c\n" +
-	"\x1aSetIntegrityConfigResponse2\xfb\x04\n" +
+	"\x1aSetIntegrityConfigResponse2\xb3\x05\n" +
 	"\x06System\x12s\n" +
 	"\x12AddIntegrityReport\x12,.system.service.v1.AddIntegrityReportRequest\x1a-.system.service.v1.AddIntegrityReportResponse\"\x00\x12v\n" +
-	"\x13ListIntegrityStatus\x12-.system.service.v1.ListIntegrityStatusRequest\x1a..system.service.v1.ListIntegrityStatusResponse\"\x00\x12U\n" +
-	"\bListTask\x12\".system.service.v1.ListTaskRequest\x1a#.system.service.v1.ListTaskResponse\"\x00\x12[\n" +
+	"\x13ListIntegrityStatus\x12-.system.service.v1.ListIntegrityStatusRequest\x1a..system.service.v1.ListIntegrityStatusResponse\"\x00\x12m\n" +
+	"\x10ListReportExport\x12*.system.service.v1.ListReportExportRequest\x1a+.system.service.v1.ListReportExportResponse\"\x00\x12k\n" +
 	"\n" +
-	"CreateTask\x12$.system.service.v1.CreateTaskRequest\x1a%.system.service.v1.CreateTaskResponse\"\x00\x12[\n" +
+	"CreateTask\x12,.system.service.v1.CreateReportExportRequest\x1a-.system.service.v1.CreateReportExportResponse\"\x00\x12k\n" +
 	"\n" +
-	"UpdateTask\x12$.system.service.v1.UpdateTaskRequest\x1a%.system.service.v1.UpdateTaskResponse\"\x00\x12s\n" +
+	"UpdateTask\x12,.system.service.v1.UpdateReportExportRequest\x1a-.system.service.v1.UpdateReportExportResponse\"\x00\x12s\n" +
 	"\x12SetIntegrityConfig\x12,.system.service.v1.SetIntegrityConfigRequest\x1a-.system.service.v1.SetIntegrityConfigResponse\"\x00BO\n" +
 	"\x11system.service.v1P\x01Z8github.com/infigaming-com/meepo-api/system/service/v1;v1b\x06proto3"
 
@@ -1059,17 +1103,17 @@ var file_system_service_v1_system_proto_goTypes = []any{
 	(*AddIntegrityReportResponse)(nil),                           // 2: system.service.v1.AddIntegrityReportResponse
 	(*ListIntegrityStatusRequest)(nil),                           // 3: system.service.v1.ListIntegrityStatusRequest
 	(*ListIntegrityStatusResponse)(nil),                          // 4: system.service.v1.ListIntegrityStatusResponse
-	(*ListTaskRequest)(nil),                                      // 5: system.service.v1.ListTaskRequest
-	(*ListTaskResponse)(nil),                                     // 6: system.service.v1.ListTaskResponse
-	(*CreateTaskRequest)(nil),                                    // 7: system.service.v1.CreateTaskRequest
-	(*CreateTaskResponse)(nil),                                   // 8: system.service.v1.CreateTaskResponse
-	(*UpdateTaskRequest)(nil),                                    // 9: system.service.v1.UpdateTaskRequest
-	(*UpdateTaskResponse)(nil),                                   // 10: system.service.v1.UpdateTaskResponse
+	(*ListReportExportRequest)(nil),                              // 5: system.service.v1.ListReportExportRequest
+	(*ListReportExportResponse)(nil),                             // 6: system.service.v1.ListReportExportResponse
+	(*CreateReportExportRequest)(nil),                            // 7: system.service.v1.CreateReportExportRequest
+	(*CreateReportExportResponse)(nil),                           // 8: system.service.v1.CreateReportExportResponse
+	(*UpdateReportExportRequest)(nil),                            // 9: system.service.v1.UpdateReportExportRequest
+	(*UpdateReportExportResponse)(nil),                           // 10: system.service.v1.UpdateReportExportResponse
 	(*SetIntegrityConfigRequest)(nil),                            // 11: system.service.v1.SetIntegrityConfigRequest
 	(*SetIntegrityConfigResponse)(nil),                           // 12: system.service.v1.SetIntegrityConfigResponse
 	(*ListIntegrityStatusResponse_IntegrityStatus)(nil),          // 13: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus
 	(*ListIntegrityStatusResponse_IntegrityStatus_FileInfo)(nil), // 14: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.FileInfo
-	(*ListTaskResponse_Task)(nil),                                // 15: system.service.v1.ListTaskResponse.Task
+	(*ListReportExportResponse_ReportExport)(nil),                // 15: system.service.v1.ListReportExportResponse.ReportExport
 	(*common.OperatorContext)(nil),                               // 16: api.common.OperatorContext
 	(*structpb.Struct)(nil),                                      // 17: google.protobuf.Struct
 	(*timestamppb.Timestamp)(nil),                                // 18: google.protobuf.Timestamp
@@ -1078,27 +1122,27 @@ var file_system_service_v1_system_proto_depIdxs = []int32{
 	0,  // 0: system.service.v1.AddIntegrityReportRequest.file_infos:type_name -> system.service.v1.FileInfo
 	16, // 1: system.service.v1.ListIntegrityStatusRequest.operator_context:type_name -> api.common.OperatorContext
 	13, // 2: system.service.v1.ListIntegrityStatusResponse.integrity_statuses:type_name -> system.service.v1.ListIntegrityStatusResponse.IntegrityStatus
-	16, // 3: system.service.v1.ListTaskRequest.operator_context:type_name -> api.common.OperatorContext
-	15, // 4: system.service.v1.ListTaskResponse.tasks:type_name -> system.service.v1.ListTaskResponse.Task
-	16, // 5: system.service.v1.CreateTaskRequest.operator_context:type_name -> api.common.OperatorContext
-	17, // 6: system.service.v1.CreateTaskRequest.params:type_name -> google.protobuf.Struct
-	17, // 7: system.service.v1.UpdateTaskRequest.result:type_name -> google.protobuf.Struct
+	16, // 3: system.service.v1.ListReportExportRequest.operator_context:type_name -> api.common.OperatorContext
+	15, // 4: system.service.v1.ListReportExportResponse.tasks:type_name -> system.service.v1.ListReportExportResponse.ReportExport
+	16, // 5: system.service.v1.CreateReportExportRequest.operator_context:type_name -> api.common.OperatorContext
+	17, // 6: system.service.v1.CreateReportExportRequest.params:type_name -> google.protobuf.Struct
+	17, // 7: system.service.v1.UpdateReportExportRequest.result:type_name -> google.protobuf.Struct
 	16, // 8: system.service.v1.SetIntegrityConfigRequest.operator_context:type_name -> api.common.OperatorContext
 	0,  // 9: system.service.v1.SetIntegrityConfigRequest.file_infos:type_name -> system.service.v1.FileInfo
 	14, // 10: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.file_infos:type_name -> system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.FileInfo
 	18, // 11: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.created_at:type_name -> google.protobuf.Timestamp
-	17, // 12: system.service.v1.ListTaskResponse.Task.result:type_name -> google.protobuf.Struct
+	17, // 12: system.service.v1.ListReportExportResponse.ReportExport.result:type_name -> google.protobuf.Struct
 	1,  // 13: system.service.v1.System.AddIntegrityReport:input_type -> system.service.v1.AddIntegrityReportRequest
 	3,  // 14: system.service.v1.System.ListIntegrityStatus:input_type -> system.service.v1.ListIntegrityStatusRequest
-	5,  // 15: system.service.v1.System.ListTask:input_type -> system.service.v1.ListTaskRequest
-	7,  // 16: system.service.v1.System.CreateTask:input_type -> system.service.v1.CreateTaskRequest
-	9,  // 17: system.service.v1.System.UpdateTask:input_type -> system.service.v1.UpdateTaskRequest
+	5,  // 15: system.service.v1.System.ListReportExport:input_type -> system.service.v1.ListReportExportRequest
+	7,  // 16: system.service.v1.System.CreateTask:input_type -> system.service.v1.CreateReportExportRequest
+	9,  // 17: system.service.v1.System.UpdateTask:input_type -> system.service.v1.UpdateReportExportRequest
 	11, // 18: system.service.v1.System.SetIntegrityConfig:input_type -> system.service.v1.SetIntegrityConfigRequest
 	2,  // 19: system.service.v1.System.AddIntegrityReport:output_type -> system.service.v1.AddIntegrityReportResponse
 	4,  // 20: system.service.v1.System.ListIntegrityStatus:output_type -> system.service.v1.ListIntegrityStatusResponse
-	6,  // 21: system.service.v1.System.ListTask:output_type -> system.service.v1.ListTaskResponse
-	8,  // 22: system.service.v1.System.CreateTask:output_type -> system.service.v1.CreateTaskResponse
-	10, // 23: system.service.v1.System.UpdateTask:output_type -> system.service.v1.UpdateTaskResponse
+	6,  // 21: system.service.v1.System.ListReportExport:output_type -> system.service.v1.ListReportExportResponse
+	8,  // 22: system.service.v1.System.CreateTask:output_type -> system.service.v1.CreateReportExportResponse
+	10, // 23: system.service.v1.System.UpdateTask:output_type -> system.service.v1.UpdateReportExportResponse
 	12, // 24: system.service.v1.System.SetIntegrityConfig:output_type -> system.service.v1.SetIntegrityConfigResponse
 	19, // [19:25] is the sub-list for method output_type
 	13, // [13:19] is the sub-list for method input_type
