@@ -45,9 +45,3 @@ message AddOperatorEvent {
 	string reporting_currency = 8;
 	repeated string supporting_currencies = 9;
 }
-
-message LockUserEvent {
-	int64 user_id = 1;
-	api.common.OperatorContext operator_context = 2;
-	string reason = 3;
-}
