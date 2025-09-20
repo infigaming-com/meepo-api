@@ -267,6 +267,110 @@ func (x *ListIntegrityStatusResponse) GetIntegrityStatuses() []*ListIntegritySta
 	return nil
 }
 
+type SetIntegrityConfigRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	LabelApp        string                  `protobuf:"bytes,2,opt,name=label_app,json=labelApp,proto3" json:"label_app,omitempty"`
+	PodNamespace    string                  `protobuf:"bytes,3,opt,name=pod_namespace,json=podNamespace,proto3" json:"pod_namespace,omitempty"`
+	FileInfos       []*FileInfo             `protobuf:"bytes,4,rep,name=file_infos,json=fileInfos,proto3" json:"file_infos,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *SetIntegrityConfigRequest) Reset() {
+	*x = SetIntegrityConfigRequest{}
+	mi := &file_system_service_v1_system_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetIntegrityConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetIntegrityConfigRequest) ProtoMessage() {}
+
+func (x *SetIntegrityConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_system_service_v1_system_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetIntegrityConfigRequest.ProtoReflect.Descriptor instead.
+func (*SetIntegrityConfigRequest) Descriptor() ([]byte, []int) {
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *SetIntegrityConfigRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *SetIntegrityConfigRequest) GetLabelApp() string {
+	if x != nil {
+		return x.LabelApp
+	}
+	return ""
+}
+
+func (x *SetIntegrityConfigRequest) GetPodNamespace() string {
+	if x != nil {
+		return x.PodNamespace
+	}
+	return ""
+}
+
+func (x *SetIntegrityConfigRequest) GetFileInfos() []*FileInfo {
+	if x != nil {
+		return x.FileInfos
+	}
+	return nil
+}
+
+type SetIntegrityConfigResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetIntegrityConfigResponse) Reset() {
+	*x = SetIntegrityConfigResponse{}
+	mi := &file_system_service_v1_system_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetIntegrityConfigResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetIntegrityConfigResponse) ProtoMessage() {}
+
+func (x *SetIntegrityConfigResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_system_service_v1_system_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetIntegrityConfigResponse.ProtoReflect.Descriptor instead.
+func (*SetIntegrityConfigResponse) Descriptor() ([]byte, []int) {
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{6}
+}
+
 type ListReportExportRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	TaskIds         []int64                 `protobuf:"varint,1,rep,packed,name=task_ids,json=taskIds,proto3" json:"task_ids,omitempty"`
@@ -283,7 +387,7 @@ type ListReportExportRequest struct {
 
 func (x *ListReportExportRequest) Reset() {
 	*x = ListReportExportRequest{}
-	mi := &file_system_service_v1_system_proto_msgTypes[5]
+	mi := &file_system_service_v1_system_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -295,7 +399,7 @@ func (x *ListReportExportRequest) String() string {
 func (*ListReportExportRequest) ProtoMessage() {}
 
 func (x *ListReportExportRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_system_service_v1_system_proto_msgTypes[5]
+	mi := &file_system_service_v1_system_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -308,7 +412,7 @@ func (x *ListReportExportRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListReportExportRequest.ProtoReflect.Descriptor instead.
 func (*ListReportExportRequest) Descriptor() ([]byte, []int) {
-	return file_system_service_v1_system_proto_rawDescGZIP(), []int{5}
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ListReportExportRequest) GetTaskIds() []int64 {
@@ -382,7 +486,7 @@ type ListReportExportResponse struct {
 
 func (x *ListReportExportResponse) Reset() {
 	*x = ListReportExportResponse{}
-	mi := &file_system_service_v1_system_proto_msgTypes[6]
+	mi := &file_system_service_v1_system_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -394,7 +498,7 @@ func (x *ListReportExportResponse) String() string {
 func (*ListReportExportResponse) ProtoMessage() {}
 
 func (x *ListReportExportResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_system_service_v1_system_proto_msgTypes[6]
+	mi := &file_system_service_v1_system_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -407,7 +511,7 @@ func (x *ListReportExportResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListReportExportResponse.ProtoReflect.Descriptor instead.
 func (*ListReportExportResponse) Descriptor() ([]byte, []int) {
-	return file_system_service_v1_system_proto_rawDescGZIP(), []int{6}
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ListReportExportResponse) GetTasks() []*ListReportExportResponse_ReportExport {
@@ -475,7 +579,7 @@ type CreateReportExportRequest struct {
 
 func (x *CreateReportExportRequest) Reset() {
 	*x = CreateReportExportRequest{}
-	mi := &file_system_service_v1_system_proto_msgTypes[7]
+	mi := &file_system_service_v1_system_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -487,7 +591,7 @@ func (x *CreateReportExportRequest) String() string {
 func (*CreateReportExportRequest) ProtoMessage() {}
 
 func (x *CreateReportExportRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_system_service_v1_system_proto_msgTypes[7]
+	mi := &file_system_service_v1_system_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -500,7 +604,7 @@ func (x *CreateReportExportRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateReportExportRequest.ProtoReflect.Descriptor instead.
 func (*CreateReportExportRequest) Descriptor() ([]byte, []int) {
-	return file_system_service_v1_system_proto_rawDescGZIP(), []int{7}
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *CreateReportExportRequest) GetTaskId() int64 {
@@ -567,7 +671,7 @@ type CreateReportExportResponse struct {
 
 func (x *CreateReportExportResponse) Reset() {
 	*x = CreateReportExportResponse{}
-	mi := &file_system_service_v1_system_proto_msgTypes[8]
+	mi := &file_system_service_v1_system_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -579,7 +683,7 @@ func (x *CreateReportExportResponse) String() string {
 func (*CreateReportExportResponse) ProtoMessage() {}
 
 func (x *CreateReportExportResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_system_service_v1_system_proto_msgTypes[8]
+	mi := &file_system_service_v1_system_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -592,7 +696,7 @@ func (x *CreateReportExportResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateReportExportResponse.ProtoReflect.Descriptor instead.
 func (*CreateReportExportResponse) Descriptor() ([]byte, []int) {
-	return file_system_service_v1_system_proto_rawDescGZIP(), []int{8}
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{10}
 }
 
 type UpdateReportExportRequest struct {
@@ -607,7 +711,7 @@ type UpdateReportExportRequest struct {
 
 func (x *UpdateReportExportRequest) Reset() {
 	*x = UpdateReportExportRequest{}
-	mi := &file_system_service_v1_system_proto_msgTypes[9]
+	mi := &file_system_service_v1_system_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -619,7 +723,7 @@ func (x *UpdateReportExportRequest) String() string {
 func (*UpdateReportExportRequest) ProtoMessage() {}
 
 func (x *UpdateReportExportRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_system_service_v1_system_proto_msgTypes[9]
+	mi := &file_system_service_v1_system_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -632,7 +736,7 @@ func (x *UpdateReportExportRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateReportExportRequest.ProtoReflect.Descriptor instead.
 func (*UpdateReportExportRequest) Descriptor() ([]byte, []int) {
-	return file_system_service_v1_system_proto_rawDescGZIP(), []int{9}
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *UpdateReportExportRequest) GetTaskId() int64 {
@@ -671,7 +775,7 @@ type UpdateReportExportResponse struct {
 
 func (x *UpdateReportExportResponse) Reset() {
 	*x = UpdateReportExportResponse{}
-	mi := &file_system_service_v1_system_proto_msgTypes[10]
+	mi := &file_system_service_v1_system_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -683,7 +787,7 @@ func (x *UpdateReportExportResponse) String() string {
 func (*UpdateReportExportResponse) ProtoMessage() {}
 
 func (x *UpdateReportExportResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_system_service_v1_system_proto_msgTypes[10]
+	mi := &file_system_service_v1_system_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -696,34 +800,37 @@ func (x *UpdateReportExportResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateReportExportResponse.ProtoReflect.Descriptor instead.
 func (*UpdateReportExportResponse) Descriptor() ([]byte, []int) {
-	return file_system_service_v1_system_proto_rawDescGZIP(), []int{10}
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{12}
 }
 
-type SetIntegrityConfigRequest struct {
-	state           protoimpl.MessageState  `protogen:"open.v1"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	LabelApp        string                  `protobuf:"bytes,2,opt,name=label_app,json=labelApp,proto3" json:"label_app,omitempty"`
-	PodNamespace    string                  `protobuf:"bytes,3,opt,name=pod_namespace,json=podNamespace,proto3" json:"pod_namespace,omitempty"`
-	FileInfos       []*FileInfo             `protobuf:"bytes,4,rep,name=file_infos,json=fileInfos,proto3" json:"file_infos,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+type Sev struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Severity      string                 `protobuf:"bytes,2,opt,name=severity,proto3" json:"severity,omitempty"`
+	Category      string                 `protobuf:"bytes,3,opt,name=category,proto3" json:"category,omitempty"`
+	Component     string                 `protobuf:"bytes,4,opt,name=component,proto3" json:"component,omitempty"`
+	UserId        string                 `protobuf:"bytes,5,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Timestamp     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	Description   string                 `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetIntegrityConfigRequest) Reset() {
-	*x = SetIntegrityConfigRequest{}
-	mi := &file_system_service_v1_system_proto_msgTypes[11]
+func (x *Sev) Reset() {
+	*x = Sev{}
+	mi := &file_system_service_v1_system_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetIntegrityConfigRequest) String() string {
+func (x *Sev) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetIntegrityConfigRequest) ProtoMessage() {}
+func (*Sev) ProtoMessage() {}
 
-func (x *SetIntegrityConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_system_service_v1_system_proto_msgTypes[11]
+func (x *Sev) ProtoReflect() protoreflect.Message {
+	mi := &file_system_service_v1_system_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -734,60 +841,174 @@ func (x *SetIntegrityConfigRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetIntegrityConfigRequest.ProtoReflect.Descriptor instead.
-func (*SetIntegrityConfigRequest) Descriptor() ([]byte, []int) {
-	return file_system_service_v1_system_proto_rawDescGZIP(), []int{11}
+// Deprecated: Use Sev.ProtoReflect.Descriptor instead.
+func (*Sev) Descriptor() ([]byte, []int) {
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{13}
 }
 
-func (x *SetIntegrityConfigRequest) GetOperatorContext() *common.OperatorContext {
+func (x *Sev) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *Sev) GetSeverity() string {
+	if x != nil {
+		return x.Severity
+	}
+	return ""
+}
+
+func (x *Sev) GetCategory() string {
+	if x != nil {
+		return x.Category
+	}
+	return ""
+}
+
+func (x *Sev) GetComponent() string {
+	if x != nil {
+		return x.Component
+	}
+	return ""
+}
+
+func (x *Sev) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *Sev) GetTimestamp() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Timestamp
+	}
+	return nil
+}
+
+func (x *Sev) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+type ListSevRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Severity        *string                 `protobuf:"bytes,2,opt,name=severity,proto3,oneof" json:"severity,omitempty"`
+	Category        *string                 `protobuf:"bytes,3,opt,name=category,proto3,oneof" json:"category,omitempty"`
+	Component       *string                 `protobuf:"bytes,4,opt,name=component,proto3,oneof" json:"component,omitempty"`
+	UserId          *string                 `protobuf:"bytes,5,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	StartTime       *timestamppb.Timestamp  `protobuf:"bytes,6,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime         *timestamppb.Timestamp  `protobuf:"bytes,7,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *ListSevRequest) Reset() {
+	*x = ListSevRequest{}
+	mi := &file_system_service_v1_system_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListSevRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListSevRequest) ProtoMessage() {}
+
+func (x *ListSevRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_system_service_v1_system_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListSevRequest.ProtoReflect.Descriptor instead.
+func (*ListSevRequest) Descriptor() ([]byte, []int) {
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *ListSevRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
 	}
 	return nil
 }
 
-func (x *SetIntegrityConfigRequest) GetLabelApp() string {
-	if x != nil {
-		return x.LabelApp
+func (x *ListSevRequest) GetSeverity() string {
+	if x != nil && x.Severity != nil {
+		return *x.Severity
 	}
 	return ""
 }
 
-func (x *SetIntegrityConfigRequest) GetPodNamespace() string {
-	if x != nil {
-		return x.PodNamespace
+func (x *ListSevRequest) GetCategory() string {
+	if x != nil && x.Category != nil {
+		return *x.Category
 	}
 	return ""
 }
 
-func (x *SetIntegrityConfigRequest) GetFileInfos() []*FileInfo {
+func (x *ListSevRequest) GetComponent() string {
+	if x != nil && x.Component != nil {
+		return *x.Component
+	}
+	return ""
+}
+
+func (x *ListSevRequest) GetUserId() string {
+	if x != nil && x.UserId != nil {
+		return *x.UserId
+	}
+	return ""
+}
+
+func (x *ListSevRequest) GetStartTime() *timestamppb.Timestamp {
 	if x != nil {
-		return x.FileInfos
+		return x.StartTime
 	}
 	return nil
 }
 
-type SetIntegrityConfigResponse struct {
+func (x *ListSevRequest) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
+	}
+	return nil
+}
+
+type ListSevResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Sevs          []*Sev                 `protobuf:"bytes,1,rep,name=sevs,proto3" json:"sevs,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetIntegrityConfigResponse) Reset() {
-	*x = SetIntegrityConfigResponse{}
-	mi := &file_system_service_v1_system_proto_msgTypes[12]
+func (x *ListSevResponse) Reset() {
+	*x = ListSevResponse{}
+	mi := &file_system_service_v1_system_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetIntegrityConfigResponse) String() string {
+func (x *ListSevResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetIntegrityConfigResponse) ProtoMessage() {}
+func (*ListSevResponse) ProtoMessage() {}
 
-func (x *SetIntegrityConfigResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_system_service_v1_system_proto_msgTypes[12]
+func (x *ListSevResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_system_service_v1_system_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -798,9 +1019,16 @@ func (x *SetIntegrityConfigResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetIntegrityConfigResponse.ProtoReflect.Descriptor instead.
-func (*SetIntegrityConfigResponse) Descriptor() ([]byte, []int) {
-	return file_system_service_v1_system_proto_rawDescGZIP(), []int{12}
+// Deprecated: Use ListSevResponse.ProtoReflect.Descriptor instead.
+func (*ListSevResponse) Descriptor() ([]byte, []int) {
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *ListSevResponse) GetSevs() []*Sev {
+	if x != nil {
+		return x.Sevs
+	}
+	return nil
 }
 
 type ListIntegrityStatusResponse_IntegrityStatus struct {
@@ -816,7 +1044,7 @@ type ListIntegrityStatusResponse_IntegrityStatus struct {
 
 func (x *ListIntegrityStatusResponse_IntegrityStatus) Reset() {
 	*x = ListIntegrityStatusResponse_IntegrityStatus{}
-	mi := &file_system_service_v1_system_proto_msgTypes[13]
+	mi := &file_system_service_v1_system_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -828,7 +1056,7 @@ func (x *ListIntegrityStatusResponse_IntegrityStatus) String() string {
 func (*ListIntegrityStatusResponse_IntegrityStatus) ProtoMessage() {}
 
 func (x *ListIntegrityStatusResponse_IntegrityStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_system_service_v1_system_proto_msgTypes[13]
+	mi := &file_system_service_v1_system_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -891,7 +1119,7 @@ type ListIntegrityStatusResponse_IntegrityStatus_FileInfo struct {
 
 func (x *ListIntegrityStatusResponse_IntegrityStatus_FileInfo) Reset() {
 	*x = ListIntegrityStatusResponse_IntegrityStatus_FileInfo{}
-	mi := &file_system_service_v1_system_proto_msgTypes[14]
+	mi := &file_system_service_v1_system_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -903,7 +1131,7 @@ func (x *ListIntegrityStatusResponse_IntegrityStatus_FileInfo) String() string {
 func (*ListIntegrityStatusResponse_IntegrityStatus_FileInfo) ProtoMessage() {}
 
 func (x *ListIntegrityStatusResponse_IntegrityStatus_FileInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_system_service_v1_system_proto_msgTypes[14]
+	mi := &file_system_service_v1_system_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -964,7 +1192,7 @@ type ListReportExportResponse_ReportExport struct {
 
 func (x *ListReportExportResponse_ReportExport) Reset() {
 	*x = ListReportExportResponse_ReportExport{}
-	mi := &file_system_service_v1_system_proto_msgTypes[15]
+	mi := &file_system_service_v1_system_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -976,7 +1204,7 @@ func (x *ListReportExportResponse_ReportExport) String() string {
 func (*ListReportExportResponse_ReportExport) ProtoMessage() {}
 
 func (x *ListReportExportResponse_ReportExport) ProtoReflect() protoreflect.Message {
-	mi := &file_system_service_v1_system_proto_msgTypes[15]
+	mi := &file_system_service_v1_system_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -989,7 +1217,7 @@ func (x *ListReportExportResponse_ReportExport) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use ListReportExportResponse_ReportExport.ProtoReflect.Descriptor instead.
 func (*ListReportExportResponse_ReportExport) Descriptor() ([]byte, []int) {
-	return file_system_service_v1_system_proto_rawDescGZIP(), []int{6, 0}
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{8, 0}
 }
 
 func (x *ListReportExportResponse_ReportExport) GetTaskId() int64 {
@@ -1086,7 +1314,14 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\tfile_path\x18\x01 \x01(\tR\bfilePath\x12\x12\n" +
 	"\x04hash\x18\x02 \x01(\tR\x04hash\x12#\n" +
 	"\rexpected_hash\x18\x03 \x01(\tR\fexpectedHash\x12\x19\n" +
-	"\bis_match\x18\x04 \x01(\bR\aisMatch\"\xf3\x02\n" +
+	"\bis_match\x18\x04 \x01(\bR\aisMatch\"\xe1\x01\n" +
+	"\x19SetIntegrityConfigRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1b\n" +
+	"\tlabel_app\x18\x02 \x01(\tR\blabelApp\x12#\n" +
+	"\rpod_namespace\x18\x03 \x01(\tR\fpodNamespace\x12:\n" +
+	"\n" +
+	"file_infos\x18\x04 \x03(\v2\x1b.system.service.v1.FileInfoR\tfileInfos\"\x1c\n" +
+	"\x1aSetIntegrityConfigResponse\"\xf3\x02\n" +
 	"\x17ListReportExportRequest\x12\x19\n" +
 	"\btask_ids\x18\x01 \x03(\x03R\ataskIds\x12\x17\n" +
 	"\x04type\x18\x02 \x01(\tH\x00R\x04type\x88\x01\x01\x12\x1b\n" +
@@ -1137,21 +1372,42 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12\x19\n" +
 	"\bfile_url\x18\x03 \x01(\tR\afileUrl\x12\x1b\n" +
 	"\tfile_size\x18\x04 \x01(\tR\bfileSize\"\x1c\n" +
-	"\x1aUpdateReportExportResponse\"\xe1\x01\n" +
-	"\x19SetIntegrityConfigRequest\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1b\n" +
-	"\tlabel_app\x18\x02 \x01(\tR\blabelApp\x12#\n" +
-	"\rpod_namespace\x18\x03 \x01(\tR\fpodNamespace\x12:\n" +
+	"\x1aUpdateReportExportResponse\"\xe0\x01\n" +
+	"\x03Sev\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1a\n" +
+	"\bseverity\x18\x02 \x01(\tR\bseverity\x12\x1a\n" +
+	"\bcategory\x18\x03 \x01(\tR\bcategory\x12\x1c\n" +
+	"\tcomponent\x18\x04 \x01(\tR\tcomponent\x12\x17\n" +
+	"\auser_id\x18\x05 \x01(\tR\x06userId\x128\n" +
+	"\ttimestamp\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12 \n" +
+	"\vdescription\x18\a \x01(\tR\vdescription\"\xa7\x03\n" +
+	"\x0eListSevRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1f\n" +
+	"\bseverity\x18\x02 \x01(\tH\x00R\bseverity\x88\x01\x01\x12\x1f\n" +
+	"\bcategory\x18\x03 \x01(\tH\x01R\bcategory\x88\x01\x01\x12!\n" +
+	"\tcomponent\x18\x04 \x01(\tH\x02R\tcomponent\x88\x01\x01\x12\x1c\n" +
+	"\auser_id\x18\x05 \x01(\tH\x03R\x06userId\x88\x01\x01\x12>\n" +
 	"\n" +
-	"file_infos\x18\x04 \x03(\v2\x1b.system.service.v1.FileInfoR\tfileInfos\"\x1c\n" +
-	"\x1aSetIntegrityConfigResponse2\xc3\x05\n" +
+	"start_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x04R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x05R\aendTime\x88\x01\x01B\v\n" +
+	"\t_severityB\v\n" +
+	"\t_categoryB\f\n" +
+	"\n" +
+	"_componentB\n" +
+	"\n" +
+	"\b_user_idB\r\n" +
+	"\v_start_timeB\v\n" +
+	"\t_end_time\"=\n" +
+	"\x0fListSevResponse\x12*\n" +
+	"\x04sevs\x18\x01 \x03(\v2\x16.system.service.v1.SevR\x04sevs2\x97\x06\n" +
 	"\x06System\x12s\n" +
 	"\x12AddIntegrityReport\x12,.system.service.v1.AddIntegrityReportRequest\x1a-.system.service.v1.AddIntegrityReportResponse\"\x00\x12v\n" +
-	"\x13ListIntegrityStatus\x12-.system.service.v1.ListIntegrityStatusRequest\x1a..system.service.v1.ListIntegrityStatusResponse\"\x00\x12m\n" +
+	"\x13ListIntegrityStatus\x12-.system.service.v1.ListIntegrityStatusRequest\x1a..system.service.v1.ListIntegrityStatusResponse\"\x00\x12s\n" +
+	"\x12SetIntegrityConfig\x12,.system.service.v1.SetIntegrityConfigRequest\x1a-.system.service.v1.SetIntegrityConfigResponse\"\x00\x12m\n" +
 	"\x10ListReportExport\x12*.system.service.v1.ListReportExportRequest\x1a+.system.service.v1.ListReportExportResponse\"\x00\x12s\n" +
 	"\x12CreateReportExport\x12,.system.service.v1.CreateReportExportRequest\x1a-.system.service.v1.CreateReportExportResponse\"\x00\x12s\n" +
-	"\x12UpdateReportExport\x12,.system.service.v1.UpdateReportExportRequest\x1a-.system.service.v1.UpdateReportExportResponse\"\x00\x12s\n" +
-	"\x12SetIntegrityConfig\x12,.system.service.v1.SetIntegrityConfigRequest\x1a-.system.service.v1.SetIntegrityConfigResponse\"\x00BO\n" +
+	"\x12UpdateReportExport\x12,.system.service.v1.UpdateReportExportRequest\x1a-.system.service.v1.UpdateReportExportResponse\"\x00\x12R\n" +
+	"\aListSev\x12!.system.service.v1.ListSevRequest\x1a\".system.service.v1.ListSevResponse\"\x00BO\n" +
 	"\x11system.service.v1P\x01Z8github.com/infigaming-com/meepo-api/system/service/v1;v1b\x06proto3"
 
 var (
@@ -1166,59 +1422,69 @@ func file_system_service_v1_system_proto_rawDescGZIP() []byte {
 	return file_system_service_v1_system_proto_rawDescData
 }
 
-var file_system_service_v1_system_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_system_service_v1_system_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_system_service_v1_system_proto_goTypes = []any{
 	(*FileInfo)(nil),                                             // 0: system.service.v1.FileInfo
 	(*AddIntegrityReportRequest)(nil),                            // 1: system.service.v1.AddIntegrityReportRequest
 	(*AddIntegrityReportResponse)(nil),                           // 2: system.service.v1.AddIntegrityReportResponse
 	(*ListIntegrityStatusRequest)(nil),                           // 3: system.service.v1.ListIntegrityStatusRequest
 	(*ListIntegrityStatusResponse)(nil),                          // 4: system.service.v1.ListIntegrityStatusResponse
-	(*ListReportExportRequest)(nil),                              // 5: system.service.v1.ListReportExportRequest
-	(*ListReportExportResponse)(nil),                             // 6: system.service.v1.ListReportExportResponse
-	(*CreateReportExportRequest)(nil),                            // 7: system.service.v1.CreateReportExportRequest
-	(*CreateReportExportResponse)(nil),                           // 8: system.service.v1.CreateReportExportResponse
-	(*UpdateReportExportRequest)(nil),                            // 9: system.service.v1.UpdateReportExportRequest
-	(*UpdateReportExportResponse)(nil),                           // 10: system.service.v1.UpdateReportExportResponse
-	(*SetIntegrityConfigRequest)(nil),                            // 11: system.service.v1.SetIntegrityConfigRequest
-	(*SetIntegrityConfigResponse)(nil),                           // 12: system.service.v1.SetIntegrityConfigResponse
-	(*ListIntegrityStatusResponse_IntegrityStatus)(nil),          // 13: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus
-	(*ListIntegrityStatusResponse_IntegrityStatus_FileInfo)(nil), // 14: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.FileInfo
-	(*ListReportExportResponse_ReportExport)(nil),                // 15: system.service.v1.ListReportExportResponse.ReportExport
-	(*common.OperatorContext)(nil),                               // 16: api.common.OperatorContext
-	(*timestamppb.Timestamp)(nil),                                // 17: google.protobuf.Timestamp
+	(*SetIntegrityConfigRequest)(nil),                            // 5: system.service.v1.SetIntegrityConfigRequest
+	(*SetIntegrityConfigResponse)(nil),                           // 6: system.service.v1.SetIntegrityConfigResponse
+	(*ListReportExportRequest)(nil),                              // 7: system.service.v1.ListReportExportRequest
+	(*ListReportExportResponse)(nil),                             // 8: system.service.v1.ListReportExportResponse
+	(*CreateReportExportRequest)(nil),                            // 9: system.service.v1.CreateReportExportRequest
+	(*CreateReportExportResponse)(nil),                           // 10: system.service.v1.CreateReportExportResponse
+	(*UpdateReportExportRequest)(nil),                            // 11: system.service.v1.UpdateReportExportRequest
+	(*UpdateReportExportResponse)(nil),                           // 12: system.service.v1.UpdateReportExportResponse
+	(*Sev)(nil),                                                  // 13: system.service.v1.Sev
+	(*ListSevRequest)(nil),                                       // 14: system.service.v1.ListSevRequest
+	(*ListSevResponse)(nil),                                      // 15: system.service.v1.ListSevResponse
+	(*ListIntegrityStatusResponse_IntegrityStatus)(nil),          // 16: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus
+	(*ListIntegrityStatusResponse_IntegrityStatus_FileInfo)(nil), // 17: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.FileInfo
+	(*ListReportExportResponse_ReportExport)(nil),                // 18: system.service.v1.ListReportExportResponse.ReportExport
+	(*common.OperatorContext)(nil),                               // 19: api.common.OperatorContext
+	(*timestamppb.Timestamp)(nil),                                // 20: google.protobuf.Timestamp
 }
 var file_system_service_v1_system_proto_depIdxs = []int32{
 	0,  // 0: system.service.v1.AddIntegrityReportRequest.file_infos:type_name -> system.service.v1.FileInfo
-	16, // 1: system.service.v1.ListIntegrityStatusRequest.operator_context:type_name -> api.common.OperatorContext
-	13, // 2: system.service.v1.ListIntegrityStatusResponse.integrity_statuses:type_name -> system.service.v1.ListIntegrityStatusResponse.IntegrityStatus
-	17, // 3: system.service.v1.ListReportExportRequest.start:type_name -> google.protobuf.Timestamp
-	17, // 4: system.service.v1.ListReportExportRequest.end:type_name -> google.protobuf.Timestamp
-	16, // 5: system.service.v1.ListReportExportRequest.operator_context:type_name -> api.common.OperatorContext
-	15, // 6: system.service.v1.ListReportExportResponse.tasks:type_name -> system.service.v1.ListReportExportResponse.ReportExport
-	17, // 7: system.service.v1.CreateReportExportRequest.create_at:type_name -> google.protobuf.Timestamp
-	16, // 8: system.service.v1.CreateReportExportRequest.operator_context:type_name -> api.common.OperatorContext
-	16, // 9: system.service.v1.SetIntegrityConfigRequest.operator_context:type_name -> api.common.OperatorContext
-	0,  // 10: system.service.v1.SetIntegrityConfigRequest.file_infos:type_name -> system.service.v1.FileInfo
-	14, // 11: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.file_infos:type_name -> system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.FileInfo
-	17, // 12: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.created_at:type_name -> google.protobuf.Timestamp
-	17, // 13: system.service.v1.ListReportExportResponse.ReportExport.create_at:type_name -> google.protobuf.Timestamp
-	1,  // 14: system.service.v1.System.AddIntegrityReport:input_type -> system.service.v1.AddIntegrityReportRequest
-	3,  // 15: system.service.v1.System.ListIntegrityStatus:input_type -> system.service.v1.ListIntegrityStatusRequest
-	5,  // 16: system.service.v1.System.ListReportExport:input_type -> system.service.v1.ListReportExportRequest
-	7,  // 17: system.service.v1.System.CreateReportExport:input_type -> system.service.v1.CreateReportExportRequest
-	9,  // 18: system.service.v1.System.UpdateReportExport:input_type -> system.service.v1.UpdateReportExportRequest
-	11, // 19: system.service.v1.System.SetIntegrityConfig:input_type -> system.service.v1.SetIntegrityConfigRequest
-	2,  // 20: system.service.v1.System.AddIntegrityReport:output_type -> system.service.v1.AddIntegrityReportResponse
-	4,  // 21: system.service.v1.System.ListIntegrityStatus:output_type -> system.service.v1.ListIntegrityStatusResponse
-	6,  // 22: system.service.v1.System.ListReportExport:output_type -> system.service.v1.ListReportExportResponse
-	8,  // 23: system.service.v1.System.CreateReportExport:output_type -> system.service.v1.CreateReportExportResponse
-	10, // 24: system.service.v1.System.UpdateReportExport:output_type -> system.service.v1.UpdateReportExportResponse
-	12, // 25: system.service.v1.System.SetIntegrityConfig:output_type -> system.service.v1.SetIntegrityConfigResponse
-	20, // [20:26] is the sub-list for method output_type
-	14, // [14:20] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	19, // 1: system.service.v1.ListIntegrityStatusRequest.operator_context:type_name -> api.common.OperatorContext
+	16, // 2: system.service.v1.ListIntegrityStatusResponse.integrity_statuses:type_name -> system.service.v1.ListIntegrityStatusResponse.IntegrityStatus
+	19, // 3: system.service.v1.SetIntegrityConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	0,  // 4: system.service.v1.SetIntegrityConfigRequest.file_infos:type_name -> system.service.v1.FileInfo
+	20, // 5: system.service.v1.ListReportExportRequest.start:type_name -> google.protobuf.Timestamp
+	20, // 6: system.service.v1.ListReportExportRequest.end:type_name -> google.protobuf.Timestamp
+	19, // 7: system.service.v1.ListReportExportRequest.operator_context:type_name -> api.common.OperatorContext
+	18, // 8: system.service.v1.ListReportExportResponse.tasks:type_name -> system.service.v1.ListReportExportResponse.ReportExport
+	20, // 9: system.service.v1.CreateReportExportRequest.create_at:type_name -> google.protobuf.Timestamp
+	19, // 10: system.service.v1.CreateReportExportRequest.operator_context:type_name -> api.common.OperatorContext
+	20, // 11: system.service.v1.Sev.timestamp:type_name -> google.protobuf.Timestamp
+	19, // 12: system.service.v1.ListSevRequest.operator_context:type_name -> api.common.OperatorContext
+	20, // 13: system.service.v1.ListSevRequest.start_time:type_name -> google.protobuf.Timestamp
+	20, // 14: system.service.v1.ListSevRequest.end_time:type_name -> google.protobuf.Timestamp
+	13, // 15: system.service.v1.ListSevResponse.sevs:type_name -> system.service.v1.Sev
+	17, // 16: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.file_infos:type_name -> system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.FileInfo
+	20, // 17: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.created_at:type_name -> google.protobuf.Timestamp
+	20, // 18: system.service.v1.ListReportExportResponse.ReportExport.create_at:type_name -> google.protobuf.Timestamp
+	1,  // 19: system.service.v1.System.AddIntegrityReport:input_type -> system.service.v1.AddIntegrityReportRequest
+	3,  // 20: system.service.v1.System.ListIntegrityStatus:input_type -> system.service.v1.ListIntegrityStatusRequest
+	5,  // 21: system.service.v1.System.SetIntegrityConfig:input_type -> system.service.v1.SetIntegrityConfigRequest
+	7,  // 22: system.service.v1.System.ListReportExport:input_type -> system.service.v1.ListReportExportRequest
+	9,  // 23: system.service.v1.System.CreateReportExport:input_type -> system.service.v1.CreateReportExportRequest
+	11, // 24: system.service.v1.System.UpdateReportExport:input_type -> system.service.v1.UpdateReportExportRequest
+	14, // 25: system.service.v1.System.ListSev:input_type -> system.service.v1.ListSevRequest
+	2,  // 26: system.service.v1.System.AddIntegrityReport:output_type -> system.service.v1.AddIntegrityReportResponse
+	4,  // 27: system.service.v1.System.ListIntegrityStatus:output_type -> system.service.v1.ListIntegrityStatusResponse
+	6,  // 28: system.service.v1.System.SetIntegrityConfig:output_type -> system.service.v1.SetIntegrityConfigResponse
+	8,  // 29: system.service.v1.System.ListReportExport:output_type -> system.service.v1.ListReportExportResponse
+	10, // 30: system.service.v1.System.CreateReportExport:output_type -> system.service.v1.CreateReportExportResponse
+	12, // 31: system.service.v1.System.UpdateReportExport:output_type -> system.service.v1.UpdateReportExportResponse
+	15, // 32: system.service.v1.System.ListSev:output_type -> system.service.v1.ListSevResponse
+	26, // [26:33] is the sub-list for method output_type
+	19, // [19:26] is the sub-list for method input_type
+	19, // [19:19] is the sub-list for extension type_name
+	19, // [19:19] is the sub-list for extension extendee
+	0,  // [0:19] is the sub-list for field type_name
 }
 
 func init() { file_system_service_v1_system_proto_init() }
@@ -1226,14 +1492,15 @@ func file_system_service_v1_system_proto_init() {
 	if File_system_service_v1_system_proto != nil {
 		return
 	}
-	file_system_service_v1_system_proto_msgTypes[5].OneofWrappers = []any{}
+	file_system_service_v1_system_proto_msgTypes[7].OneofWrappers = []any{}
+	file_system_service_v1_system_proto_msgTypes[14].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_system_service_v1_system_proto_rawDesc), len(file_system_service_v1_system_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   16,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

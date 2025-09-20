@@ -21,10 +21,11 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	System_AddIntegrityReport_FullMethodName  = "/system.service.v1.System/AddIntegrityReport"
 	System_ListIntegrityStatus_FullMethodName = "/system.service.v1.System/ListIntegrityStatus"
+	System_SetIntegrityConfig_FullMethodName  = "/system.service.v1.System/SetIntegrityConfig"
 	System_ListReportExport_FullMethodName    = "/system.service.v1.System/ListReportExport"
 	System_CreateReportExport_FullMethodName  = "/system.service.v1.System/CreateReportExport"
 	System_UpdateReportExport_FullMethodName  = "/system.service.v1.System/UpdateReportExport"
-	System_SetIntegrityConfig_FullMethodName  = "/system.service.v1.System/SetIntegrityConfig"
+	System_ListSev_FullMethodName             = "/system.service.v1.System/ListSev"
 )
 
 // SystemClient is the client API for System service.
@@ -33,10 +34,11 @@ const (
 type SystemClient interface {
 	AddIntegrityReport(ctx context.Context, in *AddIntegrityReportRequest, opts ...grpc.CallOption) (*AddIntegrityReportResponse, error)
 	ListIntegrityStatus(ctx context.Context, in *ListIntegrityStatusRequest, opts ...grpc.CallOption) (*ListIntegrityStatusResponse, error)
+	SetIntegrityConfig(ctx context.Context, in *SetIntegrityConfigRequest, opts ...grpc.CallOption) (*SetIntegrityConfigResponse, error)
 	ListReportExport(ctx context.Context, in *ListReportExportRequest, opts ...grpc.CallOption) (*ListReportExportResponse, error)
 	CreateReportExport(ctx context.Context, in *CreateReportExportRequest, opts ...grpc.CallOption) (*CreateReportExportResponse, error)
 	UpdateReportExport(ctx context.Context, in *UpdateReportExportRequest, opts ...grpc.CallOption) (*UpdateReportExportResponse, error)
-	SetIntegrityConfig(ctx context.Context, in *SetIntegrityConfigRequest, opts ...grpc.CallOption) (*SetIntegrityConfigResponse, error)
+	ListSev(ctx context.Context, in *ListSevRequest, opts ...grpc.CallOption) (*ListSevResponse, error)
 }
 
 type systemClient struct {
@@ -61,6 +63,16 @@ func (c *systemClient) ListIntegrityStatus(ctx context.Context, in *ListIntegrit
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListIntegrityStatusResponse)
 	err := c.cc.Invoke(ctx, System_ListIntegrityStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *systemClient) SetIntegrityConfig(ctx context.Context, in *SetIntegrityConfigRequest, opts ...grpc.CallOption) (*SetIntegrityConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetIntegrityConfigResponse)
+	err := c.cc.Invoke(ctx, System_SetIntegrityConfig_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -97,10 +109,10 @@ func (c *systemClient) UpdateReportExport(ctx context.Context, in *UpdateReportE
 	return out, nil
 }
 
-func (c *systemClient) SetIntegrityConfig(ctx context.Context, in *SetIntegrityConfigRequest, opts ...grpc.CallOption) (*SetIntegrityConfigResponse, error) {
+func (c *systemClient) ListSev(ctx context.Context, in *ListSevRequest, opts ...grpc.CallOption) (*ListSevResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SetIntegrityConfigResponse)
-	err := c.cc.Invoke(ctx, System_SetIntegrityConfig_FullMethodName, in, out, cOpts...)
+	out := new(ListSevResponse)
+	err := c.cc.Invoke(ctx, System_ListSev_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -113,10 +125,11 @@ func (c *systemClient) SetIntegrityConfig(ctx context.Context, in *SetIntegrityC
 type SystemServer interface {
 	AddIntegrityReport(context.Context, *AddIntegrityReportRequest) (*AddIntegrityReportResponse, error)
 	ListIntegrityStatus(context.Context, *ListIntegrityStatusRequest) (*ListIntegrityStatusResponse, error)
+	SetIntegrityConfig(context.Context, *SetIntegrityConfigRequest) (*SetIntegrityConfigResponse, error)
 	ListReportExport(context.Context, *ListReportExportRequest) (*ListReportExportResponse, error)
 	CreateReportExport(context.Context, *CreateReportExportRequest) (*CreateReportExportResponse, error)
 	UpdateReportExport(context.Context, *UpdateReportExportRequest) (*UpdateReportExportResponse, error)
-	SetIntegrityConfig(context.Context, *SetIntegrityConfigRequest) (*SetIntegrityConfigResponse, error)
+	ListSev(context.Context, *ListSevRequest) (*ListSevResponse, error)
 	mustEmbedUnimplementedSystemServer()
 }
 
@@ -133,6 +146,9 @@ func (UnimplementedSystemServer) AddIntegrityReport(context.Context, *AddIntegri
 func (UnimplementedSystemServer) ListIntegrityStatus(context.Context, *ListIntegrityStatusRequest) (*ListIntegrityStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListIntegrityStatus not implemented")
 }
+func (UnimplementedSystemServer) SetIntegrityConfig(context.Context, *SetIntegrityConfigRequest) (*SetIntegrityConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetIntegrityConfig not implemented")
+}
 func (UnimplementedSystemServer) ListReportExport(context.Context, *ListReportExportRequest) (*ListReportExportResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListReportExport not implemented")
 }
@@ -142,8 +158,8 @@ func (UnimplementedSystemServer) CreateReportExport(context.Context, *CreateRepo
 func (UnimplementedSystemServer) UpdateReportExport(context.Context, *UpdateReportExportRequest) (*UpdateReportExportResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateReportExport not implemented")
 }
-func (UnimplementedSystemServer) SetIntegrityConfig(context.Context, *SetIntegrityConfigRequest) (*SetIntegrityConfigResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetIntegrityConfig not implemented")
+func (UnimplementedSystemServer) ListSev(context.Context, *ListSevRequest) (*ListSevResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListSev not implemented")
 }
 func (UnimplementedSystemServer) mustEmbedUnimplementedSystemServer() {}
 func (UnimplementedSystemServer) testEmbeddedByValue()                {}
@@ -202,6 +218,24 @@ func _System_ListIntegrityStatus_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _System_SetIntegrityConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetIntegrityConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServer).SetIntegrityConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: System_SetIntegrityConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServer).SetIntegrityConfig(ctx, req.(*SetIntegrityConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _System_ListReportExport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListReportExportRequest)
 	if err := dec(in); err != nil {
@@ -256,20 +290,20 @@ func _System_UpdateReportExport_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-func _System_SetIntegrityConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetIntegrityConfigRequest)
+func _System_ListSev_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListSevRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SystemServer).SetIntegrityConfig(ctx, in)
+		return srv.(SystemServer).ListSev(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: System_SetIntegrityConfig_FullMethodName,
+		FullMethod: System_ListSev_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SystemServer).SetIntegrityConfig(ctx, req.(*SetIntegrityConfigRequest))
+		return srv.(SystemServer).ListSev(ctx, req.(*ListSevRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -290,6 +324,10 @@ var System_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _System_ListIntegrityStatus_Handler,
 		},
 		{
+			MethodName: "SetIntegrityConfig",
+			Handler:    _System_SetIntegrityConfig_Handler,
+		},
+		{
 			MethodName: "ListReportExport",
 			Handler:    _System_ListReportExport_Handler,
 		},
@@ -302,8 +340,8 @@ var System_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _System_UpdateReportExport_Handler,
 		},
 		{
-			MethodName: "SetIntegrityConfig",
-			Handler:    _System_SetIntegrityConfig_Handler,
+			MethodName: "ListSev",
+			Handler:    _System_ListSev_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -12,14 +12,13 @@ option java_package = "system.service.v1";
 service System {
 	rpc AddIntegrityReport(AddIntegrityReportRequest) returns (AddIntegrityReportResponse) {}
 	rpc ListIntegrityStatus(ListIntegrityStatusRequest) returns (ListIntegrityStatusResponse) {}
-
-	rpc ListReportExport(ListReportExportRequest) returns (ListReportExportResponse) { };
-
-	rpc CreateReportExport(CreateReportExportRequest) returns (CreateReportExportResponse) { };
-
-	rpc UpdateReportExport(UpdateReportExportRequest) returns (UpdateReportExportResponse) { };
-
 	rpc SetIntegrityConfig(SetIntegrityConfigRequest) returns (SetIntegrityConfigResponse) {}
+
+	rpc ListReportExport(ListReportExportRequest) returns (ListReportExportResponse) {}
+	rpc CreateReportExport(CreateReportExportRequest) returns (CreateReportExportResponse) {}
+	rpc UpdateReportExport(UpdateReportExportRequest) returns (UpdateReportExportResponse) {}
+
+	rpc ListSev(ListSevRequest) returns (ListSevResponse) {}
 }
 
 message FileInfo {
@@ -55,6 +54,16 @@ message ListIntegrityStatusResponse {
 		google.protobuf.Timestamp created_at = 5;
 	}
 	repeated IntegrityStatus integrity_statuses = 1;
+}
+
+message SetIntegrityConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	string label_app = 2;
+	string pod_namespace = 3;
+	repeated FileInfo file_infos = 4;
+}
+
+message SetIntegrityConfigResponse {
 }
 
 message ListReportExportRequest {
@@ -112,13 +121,27 @@ message UpdateReportExportRequest {
 
 message UpdateReportExportResponse {
 }
-	
-message SetIntegrityConfigRequest {
-	api.common.OperatorContext operator_context = 1;
-	string label_app = 2;
-	string pod_namespace = 3;
-	repeated FileInfo file_infos = 4;
+
+message Sev {
+	int64 id = 1;
+	string severity = 2;
+	string category = 3;
+	string component = 4;
+	string user_id = 5;
+	google.protobuf.Timestamp timestamp = 6;
+	string description = 7;
 }
 
-message SetIntegrityConfigResponse {
+message ListSevRequest {
+	api.common.OperatorContext operator_context = 1;
+	optional string severity = 2;
+	optional string category = 3;
+	optional string component = 4;
+	optional string user_id = 5;
+	optional google.protobuf.Timestamp start_time = 6;
+	optional google.protobuf.Timestamp end_time = 7;
+}
+
+message ListSevResponse {
+	repeated Sev sevs = 1;
 }
