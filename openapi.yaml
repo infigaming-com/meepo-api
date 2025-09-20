@@ -13111,8 +13111,9 @@ components:
                     type: boolean
                 phoneVerified:
                     type: boolean
-                bod:
+                dob:
                     type: string
+                    format: date-time
                 address:
                     type: string
                 userIdentity:
@@ -13327,7 +13328,7 @@ components:
                 password:
                     type: string
                     description: The password for the account.
-                bod:
+                dob:
                     type: string
                     description: Date of birth of user
                     format: date-time
@@ -13718,7 +13719,7 @@ components:
                     $ref: '#/components/schemas/api.user.service.v1.UserIdentityRequest'
                 address:
                     type: string
-                bod:
+                dob:
                     type: string
                     format: date-time
                 emailVerified:
@@ -13899,7 +13900,7 @@ components:
                     items:
                         $ref: '#/components/schemas/api.user.service.v1.UserIdentity'
                     description: uesr identities
-                bod:
+                dob:
                     type: string
                     description: user date of birth
                     format: date-time
