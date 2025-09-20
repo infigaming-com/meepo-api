@@ -901,9 +901,11 @@ type ListSevRequest struct {
 	Severity        *string                 `protobuf:"bytes,2,opt,name=severity,proto3,oneof" json:"severity,omitempty"`
 	Category        *string                 `protobuf:"bytes,3,opt,name=category,proto3,oneof" json:"category,omitempty"`
 	Component       *string                 `protobuf:"bytes,4,opt,name=component,proto3,oneof" json:"component,omitempty"`
-	UserId          *string                 `protobuf:"bytes,5,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	UserId          *int64                  `protobuf:"varint,5,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
 	StartTime       *timestamppb.Timestamp  `protobuf:"bytes,6,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
 	EndTime         *timestamppb.Timestamp  `protobuf:"bytes,7,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	Page            *int32                  `protobuf:"varint,8,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize        *int32                  `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -966,11 +968,11 @@ func (x *ListSevRequest) GetComponent() string {
 	return ""
 }
 
-func (x *ListSevRequest) GetUserId() string {
+func (x *ListSevRequest) GetUserId() int64 {
 	if x != nil && x.UserId != nil {
 		return *x.UserId
 	}
-	return ""
+	return 0
 }
 
 func (x *ListSevRequest) GetStartTime() *timestamppb.Timestamp {
@@ -987,9 +989,26 @@ func (x *ListSevRequest) GetEndTime() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *ListSevRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListSevRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
 type ListSevResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Sevs          []*Sev                 `protobuf:"bytes,1,rep,name=sevs,proto3" json:"sevs,omitempty"`
+	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Page          int32                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1029,6 +1048,27 @@ func (x *ListSevResponse) GetSevs() []*Sev {
 		return x.Sevs
 	}
 	return nil
+}
+
+func (x *ListSevResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+func (x *ListSevResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListSevResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
 }
 
 type ListIntegrityStatusResponse_IntegrityStatus struct {
@@ -1380,16 +1420,18 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\tcomponent\x18\x04 \x01(\tR\tcomponent\x12\x17\n" +
 	"\auser_id\x18\x05 \x01(\tR\x06userId\x128\n" +
 	"\ttimestamp\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12 \n" +
-	"\vdescription\x18\a \x01(\tR\vdescription\"\xa7\x03\n" +
+	"\vdescription\x18\a \x01(\tR\vdescription\"\xf9\x03\n" +
 	"\x0eListSevRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1f\n" +
 	"\bseverity\x18\x02 \x01(\tH\x00R\bseverity\x88\x01\x01\x12\x1f\n" +
 	"\bcategory\x18\x03 \x01(\tH\x01R\bcategory\x88\x01\x01\x12!\n" +
 	"\tcomponent\x18\x04 \x01(\tH\x02R\tcomponent\x88\x01\x01\x12\x1c\n" +
-	"\auser_id\x18\x05 \x01(\tH\x03R\x06userId\x88\x01\x01\x12>\n" +
+	"\auser_id\x18\x05 \x01(\x03H\x03R\x06userId\x88\x01\x01\x12>\n" +
 	"\n" +
 	"start_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x04R\tstartTime\x88\x01\x01\x12:\n" +
-	"\bend_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x05R\aendTime\x88\x01\x01B\v\n" +
+	"\bend_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x05R\aendTime\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\b \x01(\x05H\x06R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\t \x01(\x05H\aR\bpageSize\x88\x01\x01B\v\n" +
 	"\t_severityB\v\n" +
 	"\t_categoryB\f\n" +
 	"\n" +
@@ -1397,9 +1439,15 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\n" +
 	"\b_user_idB\r\n" +
 	"\v_start_timeB\v\n" +
-	"\t_end_time\"=\n" +
+	"\t_end_timeB\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\x84\x01\n" +
 	"\x0fListSevResponse\x12*\n" +
-	"\x04sevs\x18\x01 \x03(\v2\x16.system.service.v1.SevR\x04sevs2\x97\x06\n" +
+	"\x04sevs\x18\x01 \x03(\v2\x16.system.service.v1.SevR\x04sevs\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
+	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize2\x97\x06\n" +
 	"\x06System\x12s\n" +
 	"\x12AddIntegrityReport\x12,.system.service.v1.AddIntegrityReportRequest\x1a-.system.service.v1.AddIntegrityReportResponse\"\x00\x12v\n" +
 	"\x13ListIntegrityStatus\x12-.system.service.v1.ListIntegrityStatusRequest\x1a..system.service.v1.ListIntegrityStatusResponse\"\x00\x12s\n" +
