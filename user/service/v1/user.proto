@@ -371,7 +371,7 @@ message UserInfo {
 	// uesr identities
 	repeated UserIdentity user_identity = 21;
 	// user date of birth
-	google.protobuf.Timestamp bod = 22;
+	google.protobuf.Timestamp dob = 22;
 	// user country
 	string country = 23;
 }
@@ -430,6 +430,10 @@ message LoginRequest {
 	string auth_id = 2;
 	// The password for the account.
 	string password = 3;
+	// Date of birth of user
+	optional google.protobuf.Timestamp dob = 4;
+	// User ID info
+	optional UserIdentityRequest user_identity = 5;
 }
 
 // HttpRequestInfo contains the http request info get from RequestInfoMiddleware.
@@ -723,7 +727,7 @@ message UpdateUserRequest {
 	optional string mobile = 13;
 	optional UserIdentityRequest user_identity = 14;
 	optional string address = 15;
-	optional google.protobuf.Timestamp bod = 16;
+	optional google.protobuf.Timestamp dob = 16;
 	optional bool email_verified = 17;
 	optional bool phone_verified = 18;
 	// The initial operator context.
@@ -928,7 +932,7 @@ message GetUserProfileResponse {
 	int32 kyc_level = 20;
 	bool email_verified = 21;
 	bool phone_verified = 22;
-	string bod = 23;
+	google.protobuf.Timestamp dob = 23;
 	string address = 24;
 	repeated UserIdentity user_identity = 25;
 	repeated ChangeRecord emailChangeHistory = 26;

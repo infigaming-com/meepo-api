@@ -132,11 +132,11 @@ func (m *UserInfo) validate(all bool) error {
 	}
 
 	if all {
-		switch v := interface{}(m.GetBod()).(type) {
+		switch v := interface{}(m.GetDob()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, UserInfoValidationError{
-					field:  "Bod",
+					field:  "Dob",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -144,16 +144,16 @@ func (m *UserInfo) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, UserInfoValidationError{
-					field:  "Bod",
+					field:  "Dob",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetBod()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetDob()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return UserInfoValidationError{
-				field:  "Bod",
+				field:  "Dob",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -372,6 +372,72 @@ func (m *LoginRequest) validate(all bool) error {
 	// no validation rules for AuthId
 
 	// no validation rules for Password
+
+	if m.Dob != nil {
+
+		if all {
+			switch v := interface{}(m.GetDob()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, LoginRequestValidationError{
+						field:  "Dob",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, LoginRequestValidationError{
+						field:  "Dob",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetDob()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return LoginRequestValidationError{
+					field:  "Dob",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.UserIdentity != nil {
+
+		if all {
+			switch v := interface{}(m.GetUserIdentity()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, LoginRequestValidationError{
+						field:  "UserIdentity",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, LoginRequestValidationError{
+						field:  "UserIdentity",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetUserIdentity()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return LoginRequestValidationError{
+					field:  "UserIdentity",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
 
 	if len(errors) > 0 {
 		return LoginRequestMultiError(errors)
@@ -5574,14 +5640,14 @@ func (m *UpdateUserRequest) validate(all bool) error {
 		// no validation rules for Address
 	}
 
-	if m.Bod != nil {
+	if m.Dob != nil {
 
 		if all {
-			switch v := interface{}(m.GetBod()).(type) {
+			switch v := interface{}(m.GetDob()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, UpdateUserRequestValidationError{
-						field:  "Bod",
+						field:  "Dob",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -5589,16 +5655,16 @@ func (m *UpdateUserRequest) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, UpdateUserRequestValidationError{
-						field:  "Bod",
+						field:  "Dob",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
 				}
 			}
-		} else if v, ok := interface{}(m.GetBod()).(interface{ Validate() error }); ok {
+		} else if v, ok := interface{}(m.GetDob()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return UpdateUserRequestValidationError{
-					field:  "Bod",
+					field:  "Dob",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -7511,7 +7577,34 @@ func (m *GetUserProfileResponse) validate(all bool) error {
 
 	// no validation rules for PhoneVerified
 
-	// no validation rules for Bod
+	if all {
+		switch v := interface{}(m.GetDob()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetUserProfileResponseValidationError{
+					field:  "Dob",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetUserProfileResponseValidationError{
+					field:  "Dob",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetDob()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetUserProfileResponseValidationError{
+				field:  "Dob",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	// no validation rules for Address
 
