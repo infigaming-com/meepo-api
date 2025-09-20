@@ -809,7 +809,7 @@ type Sev struct {
 	Severity      string                 `protobuf:"bytes,2,opt,name=severity,proto3" json:"severity,omitempty"`
 	Category      string                 `protobuf:"bytes,3,opt,name=category,proto3" json:"category,omitempty"`
 	Component     string                 `protobuf:"bytes,4,opt,name=component,proto3" json:"component,omitempty"`
-	UserId        string                 `protobuf:"bytes,5,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        int64                  `protobuf:"varint,5,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Timestamp     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
 	Description   string                 `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -874,11 +874,11 @@ func (x *Sev) GetComponent() string {
 	return ""
 }
 
-func (x *Sev) GetUserId() string {
+func (x *Sev) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
-	return ""
+	return 0
 }
 
 func (x *Sev) GetTimestamp() *timestamppb.Timestamp {
@@ -1418,7 +1418,7 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\bseverity\x18\x02 \x01(\tR\bseverity\x12\x1a\n" +
 	"\bcategory\x18\x03 \x01(\tR\bcategory\x12\x1c\n" +
 	"\tcomponent\x18\x04 \x01(\tR\tcomponent\x12\x17\n" +
-	"\auser_id\x18\x05 \x01(\tR\x06userId\x128\n" +
+	"\auser_id\x18\x05 \x01(\x03R\x06userId\x128\n" +
 	"\ttimestamp\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12 \n" +
 	"\vdescription\x18\a \x01(\tR\vdescription\"\xf9\x03\n" +
 	"\x0eListSevRequest\x12F\n" +
