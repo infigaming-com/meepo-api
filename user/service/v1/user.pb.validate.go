@@ -267,6 +267,43 @@ func (m *RegisterRequest) validate(all bool) error {
 
 	// no validation rules for Password
 
+	if m.Dob != nil {
+
+		if all {
+			switch v := interface{}(m.GetDob()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, RegisterRequestValidationError{
+						field:  "Dob",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, RegisterRequestValidationError{
+						field:  "Dob",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetDob()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return RegisterRequestValidationError{
+					field:  "Dob",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.IdNumber != nil {
+		// no validation rules for IdNumber
+	}
+
 	if len(errors) > 0 {
 		return RegisterRequestMultiError(errors)
 	}
@@ -372,72 +409,6 @@ func (m *LoginRequest) validate(all bool) error {
 	// no validation rules for AuthId
 
 	// no validation rules for Password
-
-	if m.Dob != nil {
-
-		if all {
-			switch v := interface{}(m.GetDob()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, LoginRequestValidationError{
-						field:  "Dob",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, LoginRequestValidationError{
-						field:  "Dob",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetDob()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return LoginRequestValidationError{
-					field:  "Dob",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	if m.UserIdentity != nil {
-
-		if all {
-			switch v := interface{}(m.GetUserIdentity()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, LoginRequestValidationError{
-						field:  "UserIdentity",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, LoginRequestValidationError{
-						field:  "UserIdentity",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetUserIdentity()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return LoginRequestValidationError{
-					field:  "UserIdentity",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
 
 	if len(errors) > 0 {
 		return LoginRequestMultiError(errors)

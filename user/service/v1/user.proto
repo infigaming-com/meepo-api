@@ -420,6 +420,10 @@ message RegisterRequest {
 	string auth_id = 2;
 	// The password for the new account.
 	string password = 3;
+		// Date of birth of user
+	optional google.protobuf.Timestamp dob = 4;
+	// User ID info
+	optional string id_number = 5;
 }
 
 // LoginRequest contains the credentials for user login.
@@ -430,10 +434,6 @@ message LoginRequest {
 	string auth_id = 2;
 	// The password for the account.
 	string password = 3;
-	// Date of birth of user
-	optional google.protobuf.Timestamp dob = 4;
-	// User ID info
-	optional UserIdentityRequest user_identity = 5;
 }
 
 // HttpRequestInfo contains the http request info get from RequestInfoMiddleware.
