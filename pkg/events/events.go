@@ -15,7 +15,7 @@ type IntegrityReportEvent struct {
 	CreatedAt    int64                          `json:"createdAt"`
 }
 
-type UserPasswordRetiresExceededEvent struct {
+type UserPasswordRetriesExceededEvent struct {
 	UserId          int64                   `json:"userId"`
 	OperatorContext *common.OperatorContext `json:"operatorContext"`
 	Retries         int32                   `json:"retries"`
