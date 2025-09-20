@@ -2036,6 +2036,14 @@ func (m *ListSevRequest) validate(all bool) error {
 
 	}
 
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
 	if len(errors) > 0 {
 		return ListSevRequestMultiError(errors)
 	}
@@ -2169,6 +2177,12 @@ func (m *ListSevResponse) validate(all bool) error {
 		}
 
 	}
+
+	// no validation rules for Total
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
 
 	if len(errors) > 0 {
 		return ListSevResponseMultiError(errors)

@@ -137,11 +137,16 @@ message ListSevRequest {
 	optional string severity = 2;
 	optional string category = 3;
 	optional string component = 4;
-	optional string user_id = 5;
+	optional int64 user_id = 5;
 	optional google.protobuf.Timestamp start_time = 6;
 	optional google.protobuf.Timestamp end_time = 7;
+	optional int32 page = 8;
+	optional int32 page_size = 9;
 }
 
 message ListSevResponse {
 	repeated Sev sevs = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
 }
