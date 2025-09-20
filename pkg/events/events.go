@@ -16,14 +16,15 @@ type IntegrityReportEvent struct {
 }
 
 type UserPasswordRetiresExceededEvent struct {
-	UserId          int64                  `json:"userId"`
-	OperatorContext common.OperatorContext `json:"operatorContext"`
-	Retries         int32                  `json:"retries"`
-	MaxRetries      int32                  `json:"maxRetries"`
-	Timestamp       int64                  `json:"timestamp"`
+	UserId          int64                   `json:"userId"`
+	OperatorContext *common.OperatorContext `json:"operatorContext"`
+	Retries         int32                   `json:"retries"`
+	MaxRetries      int32                   `json:"maxRetries"`
+	Timestamp       int64                   `json:"timestamp"`
 }
 
 type UserPasswordResetEvent struct {
-	UserId          int64                  `json:"userId"`
-	OperatorContext common.OperatorContext `json:"operatorContext"`
+	UserId          int64                   `json:"userId"`
+	OperatorContext *common.OperatorContext `json:"operatorContext"`
+	Timestamp       int64                   `json:"timestamp"`
 }
