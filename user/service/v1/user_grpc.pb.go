@@ -43,6 +43,7 @@ const (
 	User_SendPasswordResetCode_FullMethodName           = "/api.user.service.v1.User/SendPasswordResetCode"
 	User_ResetPasswordWithCode_FullMethodName           = "/api.user.service.v1.User/ResetPasswordWithCode"
 	User_UpdateUser_FullMethodName                      = "/api.user.service.v1.User/UpdateUser"
+	User_UpdateUserIdentity_FullMethodName              = "/api.user.service.v1.User/UpdateUserIdentity"
 	User_ListUsers_FullMethodName                       = "/api.user.service.v1.User/ListUsers"
 	User_CreateUser_FullMethodName                      = "/api.user.service.v1.User/CreateUser"
 	User_VerifyEmail_FullMethodName                     = "/api.user.service.v1.User/VerifyEmail"
@@ -155,6 +156,7 @@ type UserClient interface {
 	// Reset password using verification code
 	ResetPasswordWithCode(ctx context.Context, in *ResetPasswordWithCodeRequest, opts ...grpc.CallOption) (*ResetPasswordWithCodeResponse, error)
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
+	UpdateUserIdentity(ctx context.Context, in *UpdateUserIdentityRequest, opts ...grpc.CallOption) (*UpdateUserIdentityResponse, error)
 	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
 	VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...grpc.CallOption) (*VerifyEmailResponse, error)
@@ -465,6 +467,16 @@ func (c *userClient) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateUserResponse)
 	err := c.cc.Invoke(ctx, User_UpdateUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) UpdateUserIdentity(ctx context.Context, in *UpdateUserIdentityRequest, opts ...grpc.CallOption) (*UpdateUserIdentityResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateUserIdentityResponse)
+	err := c.cc.Invoke(ctx, User_UpdateUserIdentity_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1013,6 +1025,7 @@ type UserServer interface {
 	// Reset password using verification code
 	ResetPasswordWithCode(context.Context, *ResetPasswordWithCodeRequest) (*ResetPasswordWithCodeResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
+	UpdateUserIdentity(context.Context, *UpdateUserIdentityRequest) (*UpdateUserIdentityResponse, error)
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
 	VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error)
@@ -1160,6 +1173,9 @@ func (UnimplementedUserServer) ResetPasswordWithCode(context.Context, *ResetPass
 }
 func (UnimplementedUserServer) UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
+}
+func (UnimplementedUserServer) UpdateUserIdentity(context.Context, *UpdateUserIdentityRequest) (*UpdateUserIdentityResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserIdentity not implemented")
 }
 func (UnimplementedUserServer) ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListUsers not implemented")
@@ -1754,6 +1770,24 @@ func _User_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServer).UpdateUser(ctx, req.(*UpdateUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_UpdateUserIdentity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserIdentityRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).UpdateUserIdentity(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_UpdateUserIdentity_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).UpdateUserIdentity(ctx, req.(*UpdateUserIdentityRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2724,6 +2758,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateUser",
 			Handler:    _User_UpdateUser_Handler,
+		},
+		{
+			MethodName: "UpdateUserIdentity",
+			Handler:    _User_UpdateUserIdentity_Handler,
 		},
 		{
 			MethodName: "ListUsers",

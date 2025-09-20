@@ -161,6 +161,13 @@ service User {
     };
 	}
 
+	rpc UpdateUserIdentity(UpdateUserIdentityRequest) returns (UpdateUserIdentityResponse) {
+    option (google.api.http) = {
+      post: "/v1/user/identity/update"
+      body: "*"
+    };
+	}
+
 	rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {}
 
 	rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
@@ -424,6 +431,8 @@ message RegisterRequest {
 	optional google.protobuf.Timestamp dob = 4;
 	// User ID info
 	optional string id_number = 5;
+	// User ID Type
+	optional string id_type = 6;
 }
 
 // LoginRequest contains the credentials for user login.
@@ -735,6 +744,20 @@ message UpdateUserRequest {
 }
 
 message UpdateUserResponse {
+}
+
+message UpdateUserIdentityRequest {
+	// User identity id
+	int64 id = 1;
+	// User ID Type
+	string id_type = 2;
+	// User ID Number
+	string id_number = 3;
+	// Image Url
+	string image = 4;
+}
+
+message UpdateUserIdentityResponse {
 }
 
 message ListUsersRequest {
