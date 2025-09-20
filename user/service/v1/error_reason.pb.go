@@ -135,6 +135,7 @@ const (
 	ErrorReason_UPDATE_OPERATOR_FAILED                         ErrorReason = 10109
 	ErrorReason_REGISTRATION_PER_IP_LIMIT_EXCEEDED             ErrorReason = 10110
 	ErrorReason_USER_IN_SELF_EXCLUSION_PERIOD                  ErrorReason = 10111
+	ErrorReason_REGISTER_REQUEST_DISSATISFIED                  ErrorReason = 10112
 )
 
 // Enum value maps for ErrorReason.
@@ -250,6 +251,7 @@ var (
 		10109: "UPDATE_OPERATOR_FAILED",
 		10110: "REGISTRATION_PER_IP_LIMIT_EXCEEDED",
 		10111: "USER_IN_SELF_EXCLUSION_PERIOD",
+		10112: "REGISTER_REQUEST_DISSATISFIED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                    0,
@@ -362,6 +364,7 @@ var (
 		"UPDATE_OPERATOR_FAILED":                         10109,
 		"REGISTRATION_PER_IP_LIMIT_EXCEEDED":             10110,
 		"USER_IN_SELF_EXCLUSION_PERIOD":                  10111,
+		"REGISTER_REQUEST_DISSATISFIED":                  10112,
 	}
 )
 
@@ -396,7 +399,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\x9d\x1d\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xc1\x1d\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x12&\n" +
@@ -507,7 +510,8 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"&INVALID_OPERATOR_REGISTER_LIMIT_CONFIG\x10\xfcN\x12\x1b\n" +
 	"\x16UPDATE_OPERATOR_FAILED\x10\xfdN\x12'\n" +
 	"\"REGISTRATION_PER_IP_LIMIT_EXCEEDED\x10\xfeN\x12\"\n" +
-	"\x1dUSER_IN_SELF_EXCLUSION_PERIOD\x10\xffN\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x1dUSER_IN_SELF_EXCLUSION_PERIOD\x10\xffN\x12\"\n" +
+	"\x1dREGISTER_REQUEST_DISSATISFIED\x10\x80O\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
