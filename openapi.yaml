@@ -4530,6 +4530,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetUserResponse'
+    /v1/user/identity/update:
+        post:
+            tags:
+                - User
+            operationId: User_UpdateUserIdentity
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.UpdateUserIdentityRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.UpdateUserIdentityResponse'
     /v1/user/kyc/filestore/upload:
         post:
             tags:
@@ -13549,6 +13567,9 @@ components:
                 idNumber:
                     type: string
                     description: User ID info
+                idType:
+                    type: string
+                    description: User ID Type
             description: RegisterRequest contains the information needed to register a new user.
         api.user.service.v1.ResetPasswordWithCodeRequest:
             type: object
@@ -13683,6 +13704,24 @@ components:
                     description: Hash for verifying the authentication data.
             description: TelegramAuthRequest contains the information from Telegram's login widget.
         api.user.service.v1.UpdateOperatorAccountSettingsResponse:
+            type: object
+            properties: {}
+        api.user.service.v1.UpdateUserIdentityRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: User identity id
+                idType:
+                    type: string
+                    description: User ID Type
+                idNumber:
+                    type: string
+                    description: User ID Number
+                image:
+                    type: string
+                    description: Image Url
+        api.user.service.v1.UpdateUserIdentityResponse:
             type: object
             properties: {}
         api.user.service.v1.UpdateUserRequest:
