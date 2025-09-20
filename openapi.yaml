@@ -13328,14 +13328,6 @@ components:
                 password:
                     type: string
                     description: The password for the account.
-                dob:
-                    type: string
-                    description: Date of birth of user
-                    format: date-time
-                userIdentity:
-                    allOf:
-                        - $ref: '#/components/schemas/api.user.service.v1.UserIdentityRequest'
-                    description: User ID info
             description: LoginRequest contains the credentials for user login.
         api.user.service.v1.LogoutRequest:
             type: object
@@ -13550,6 +13542,14 @@ components:
                 password:
                     type: string
                     description: The password for the new account.
+                dob:
+                    type: string
+                    description: Date of birth of user
+                    format: date-time
+                userIdentity:
+                    allOf:
+                        - $ref: '#/components/schemas/api.user.service.v1.UserIdentityRequest'
+                    description: User ID info
             description: RegisterRequest contains the information needed to register a new user.
         api.user.service.v1.ResetPasswordWithCodeRequest:
             type: object

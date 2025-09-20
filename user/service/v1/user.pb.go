@@ -499,7 +499,11 @@ type RegisterRequest struct {
 	// The identity (username, email, or mobile) to register with.
 	AuthId string `protobuf:"bytes,2,opt,name=auth_id,json=authId,proto3" json:"auth_id,omitempty"`
 	// The password for the new account.
-	Password      string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
+	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
+	// Date of birth of user
+	Dob *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=dob,proto3,oneof" json:"dob,omitempty"`
+	// User ID info
+	UserIdentity  *UserIdentityRequest `protobuf:"bytes,5,opt,name=user_identity,json=userIdentity,proto3,oneof" json:"user_identity,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -555,6 +559,20 @@ func (x *RegisterRequest) GetPassword() string {
 	return ""
 }
 
+func (x *RegisterRequest) GetDob() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Dob
+	}
+	return nil
+}
+
+func (x *RegisterRequest) GetUserIdentity() *UserIdentityRequest {
+	if x != nil {
+		return x.UserIdentity
+	}
+	return nil
+}
+
 // LoginRequest contains the credentials for user login.
 type LoginRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -563,11 +581,7 @@ type LoginRequest struct {
 	// The identity (username, email, or mobile) to login with.
 	AuthId string `protobuf:"bytes,2,opt,name=auth_id,json=authId,proto3" json:"auth_id,omitempty"`
 	// The password for the account.
-	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
-	// Date of birth of user
-	Dob *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=dob,proto3,oneof" json:"dob,omitempty"`
-	// User ID info
-	UserIdentity  *UserIdentityRequest `protobuf:"bytes,5,opt,name=user_identity,json=userIdentity,proto3,oneof" json:"user_identity,omitempty"`
+	Password      string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -621,20 +635,6 @@ func (x *LoginRequest) GetPassword() string {
 		return x.Password
 	}
 	return ""
-}
-
-func (x *LoginRequest) GetDob() *timestamppb.Timestamp {
-	if x != nil {
-		return x.Dob
-	}
-	return nil
-}
-
-func (x *LoginRequest) GetUserIdentity() *UserIdentityRequest {
-	if x != nil {
-		return x.UserIdentity
-	}
-	return nil
 }
 
 // HttpRequestInfo contains the http request info get from RequestInfoMiddleware.
@@ -11268,19 +11268,19 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\aaddress\x18\x14 \x01(\tR\aaddress\x12F\n" +
 	"\ruser_identity\x18\x15 \x03(\v2!.api.user.service.v1.UserIdentityR\fuserIdentity\x12,\n" +
 	"\x03dob\x18\x16 \x01(\v2\x1a.google.protobuf.TimestampR\x03dob\x12\x18\n" +
-	"\acountry\x18\x17 \x01(\tR\acountry\"\x9a\x01\n" +
+	"\acountry\x18\x17 \x01(\tR\acountry\"\xbb\x02\n" +
 	"\x0fRegisterRequest\x12R\n" +
-	"\x11password_provider\x18\x01 \x01(\x0e2%.api.user.service.v1.PasswordProviderR\x10passwordProvider\x12\x17\n" +
-	"\aauth_id\x18\x02 \x01(\tR\x06authId\x12\x1a\n" +
-	"\bpassword\x18\x03 \x01(\tR\bpassword\"\xb8\x02\n" +
-	"\fLoginRequest\x12R\n" +
 	"\x11password_provider\x18\x01 \x01(\x0e2%.api.user.service.v1.PasswordProviderR\x10passwordProvider\x12\x17\n" +
 	"\aauth_id\x18\x02 \x01(\tR\x06authId\x12\x1a\n" +
 	"\bpassword\x18\x03 \x01(\tR\bpassword\x121\n" +
 	"\x03dob\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x03dob\x88\x01\x01\x12R\n" +
 	"\ruser_identity\x18\x05 \x01(\v2(.api.user.service.v1.UserIdentityRequestH\x01R\fuserIdentity\x88\x01\x01B\x06\n" +
 	"\x04_dobB\x10\n" +
-	"\x0e_user_identity\"\xfa\x01\n" +
+	"\x0e_user_identity\"\x97\x01\n" +
+	"\fLoginRequest\x12R\n" +
+	"\x11password_provider\x18\x01 \x01(\x0e2%.api.user.service.v1.PasswordProviderR\x10passwordProvider\x12\x17\n" +
+	"\aauth_id\x18\x02 \x01(\tR\x06authId\x12\x1a\n" +
+	"\bpassword\x18\x03 \x01(\tR\bpassword\"\xfa\x01\n" +
 	"\x0fHttpRequestInfo\x12\x16\n" +
 	"\x06method\x18\x01 \x01(\tR\x06method\x12\x12\n" +
 	"\x04path\x18\x02 \x01(\tR\x04path\x12\x12\n" +
@@ -12458,9 +12458,9 @@ var file_user_service_v1_user_proto_depIdxs = []int32{
 	49,  // 0: api.user.service.v1.UserInfo.user_identity:type_name -> api.user.service.v1.UserIdentity
 	183, // 1: api.user.service.v1.UserInfo.dob:type_name -> google.protobuf.Timestamp
 	1,   // 2: api.user.service.v1.RegisterRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
-	1,   // 3: api.user.service.v1.LoginRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
-	183, // 4: api.user.service.v1.LoginRequest.dob:type_name -> google.protobuf.Timestamp
-	48,  // 5: api.user.service.v1.LoginRequest.user_identity:type_name -> api.user.service.v1.UserIdentityRequest
+	183, // 3: api.user.service.v1.RegisterRequest.dob:type_name -> google.protobuf.Timestamp
+	48,  // 4: api.user.service.v1.RegisterRequest.user_identity:type_name -> api.user.service.v1.UserIdentityRequest
+	1,   // 5: api.user.service.v1.LoginRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
 	1,   // 6: api.user.service.v1.LoginWithInfoRequest.password_provider:type_name -> api.user.service.v1.PasswordProvider
 	184, // 7: api.user.service.v1.LoginWithInfoRequest.operator_context:type_name -> api.common.OperatorContext
 	7,   // 8: api.user.service.v1.LoginWithInfoRequest.http_request_info:type_name -> api.user.service.v1.HttpRequestInfo
@@ -12755,7 +12755,7 @@ func file_user_service_v1_user_proto_init() {
 	if File_user_service_v1_user_proto != nil {
 		return
 	}
-	file_user_service_v1_user_proto_msgTypes[2].OneofWrappers = []any{}
+	file_user_service_v1_user_proto_msgTypes[1].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[38].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[40].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[42].OneofWrappers = []any{}
