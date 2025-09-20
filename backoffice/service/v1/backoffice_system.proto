@@ -2,8 +2,9 @@ syntax = "proto3";
 
 package api.backoffice.service.v1;
 
-import "google/api/annotations.proto";
 import "system/service/v1/system.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -22,6 +23,12 @@ service BackofficeSystem {
 			body: "*"
 		};
 	}
+	rpc ListSev(ListSevRequest) returns (system.service.v1.ListSevResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/system/sev/list"
+			body: "*"
+		};
+	}
 }
 
 message ListIntegrityStatusRequest {
@@ -31,4 +38,15 @@ message SetIntegrityConfigRequest {
 	string label_app = 1;
 	string pod_namespace = 2;
 	repeated system.service.v1.FileInfo file_infos = 3;
+}
+
+message ListSevRequest {
+	optional string severity = 2;
+	optional string category = 3;
+	optional string component = 4;
+	optional int64 user_id = 5;
+	optional google.protobuf.Timestamp start_time = 6;
+	optional google.protobuf.Timestamp end_time = 7;
+	optional int32 page = 8;
+	optional int32 page_size = 9;
 }

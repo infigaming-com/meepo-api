@@ -2695,6 +2695,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/system.service.v1.ListIntegrityStatusResponse'
+    /v1/backoffice/system/sev/list:
+        post:
+            tags:
+                - BackofficeSystem
+            operationId: BackofficeSystem_ListSev
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListSevRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/system.service.v1.ListSevResponse'
     /v1/backoffice/user/comments/add:
         post:
             tags:
@@ -9052,6 +9070,29 @@ components:
                 total:
                     type: integer
                     format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListSevRequest:
+            type: object
+            properties:
+                severity:
+                    type: string
+                category:
+                    type: string
+                component:
+                    type: string
+                userId:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
                 page:
                     type: integer
                     format: int32
@@ -16106,9 +16147,43 @@ components:
                 createdAt:
                     type: string
                     format: date-time
+        system.service.v1.ListSevResponse:
+            type: object
+            properties:
+                sevs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/system.service.v1.Sev'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         system.service.v1.SetIntegrityConfigResponse:
             type: object
             properties: {}
+        system.service.v1.Sev:
+            type: object
+            properties:
+                id:
+                    type: string
+                severity:
+                    type: string
+                category:
+                    type: string
+                component:
+                    type: string
+                userId:
+                    type: string
+                timestamp:
+                    type: string
+                    format: date-time
+                description:
+                    type: string
 tags:
     - name: BackofficeAccount
     - name: BackofficeAudit
