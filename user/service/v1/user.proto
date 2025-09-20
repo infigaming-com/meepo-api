@@ -423,7 +423,7 @@ message RegisterRequest {
 		// Date of birth of user
 	optional google.protobuf.Timestamp dob = 4;
 	// User ID info
-	optional UserIdentityRequest user_identity = 5;
+	optional string id_number = 5;
 }
 
 // LoginRequest contains the credentials for user login.

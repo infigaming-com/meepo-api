@@ -13546,9 +13546,8 @@ components:
                     type: string
                     description: Date of birth of user
                     format: date-time
-                userIdentity:
-                    allOf:
-                        - $ref: '#/components/schemas/api.user.service.v1.UserIdentityRequest'
+                idNumber:
+                    type: string
                     description: User ID info
             description: RegisterRequest contains the information needed to register a new user.
         api.user.service.v1.ResetPasswordWithCodeRequest:
