@@ -19,6 +19,7 @@ service System {
 	rpc UpdateReportExport(UpdateReportExportRequest) returns (UpdateReportExportResponse) {}
 
 	rpc ListSev(ListSevRequest) returns (ListSevResponse) {}
+	rpc ExportSev(ExportSevRequest) returns (ExportSevResponse) {}
 }
 
 message FileInfo {
@@ -149,4 +150,21 @@ message ListSevResponse {
 	int32 total = 2;
 	int32 page = 3;
 	int32 page_size = 4;
+}
+
+message ExportSevRequest {
+	optional string severity = 1;
+	optional string category = 2;
+	optional string component = 3;
+	optional int64 user_id = 4;
+	optional google.protobuf.Timestamp start_time = 5;
+	optional google.protobuf.Timestamp end_time = 6;
+	string format = 7; // accepted values: csv, excel, pdf
+	string time_zone = 8; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContext operator_context = 9;
+	int64 initiator_user_id = 10;
+}
+
+message ExportSevResponse {
+	int64 task_id = 1;
 }

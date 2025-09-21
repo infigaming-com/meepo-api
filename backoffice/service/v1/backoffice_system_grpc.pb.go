@@ -23,6 +23,7 @@ const (
 	BackofficeSystem_ListIntegrityStatus_FullMethodName = "/api.backoffice.service.v1.BackofficeSystem/ListIntegrityStatus"
 	BackofficeSystem_SetIntegrityConfig_FullMethodName  = "/api.backoffice.service.v1.BackofficeSystem/SetIntegrityConfig"
 	BackofficeSystem_ListSev_FullMethodName             = "/api.backoffice.service.v1.BackofficeSystem/ListSev"
+	BackofficeSystem_ExportSev_FullMethodName           = "/api.backoffice.service.v1.BackofficeSystem/ExportSev"
 )
 
 // BackofficeSystemClient is the client API for BackofficeSystem service.
@@ -32,6 +33,7 @@ type BackofficeSystemClient interface {
 	ListIntegrityStatus(ctx context.Context, in *ListIntegrityStatusRequest, opts ...grpc.CallOption) (*v1.ListIntegrityStatusResponse, error)
 	SetIntegrityConfig(ctx context.Context, in *SetIntegrityConfigRequest, opts ...grpc.CallOption) (*v1.SetIntegrityConfigResponse, error)
 	ListSev(ctx context.Context, in *ListSevRequest, opts ...grpc.CallOption) (*v1.ListSevResponse, error)
+	ExportSev(ctx context.Context, in *ExportSevRequest, opts ...grpc.CallOption) (*v1.ExportSevResponse, error)
 }
 
 type backofficeSystemClient struct {
@@ -72,6 +74,16 @@ func (c *backofficeSystemClient) ListSev(ctx context.Context, in *ListSevRequest
 	return out, nil
 }
 
+func (c *backofficeSystemClient) ExportSev(ctx context.Context, in *ExportSevRequest, opts ...grpc.CallOption) (*v1.ExportSevResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ExportSevResponse)
+	err := c.cc.Invoke(ctx, BackofficeSystem_ExportSev_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeSystemServer is the server API for BackofficeSystem service.
 // All implementations must embed UnimplementedBackofficeSystemServer
 // for forward compatibility.
@@ -79,6 +91,7 @@ type BackofficeSystemServer interface {
 	ListIntegrityStatus(context.Context, *ListIntegrityStatusRequest) (*v1.ListIntegrityStatusResponse, error)
 	SetIntegrityConfig(context.Context, *SetIntegrityConfigRequest) (*v1.SetIntegrityConfigResponse, error)
 	ListSev(context.Context, *ListSevRequest) (*v1.ListSevResponse, error)
+	ExportSev(context.Context, *ExportSevRequest) (*v1.ExportSevResponse, error)
 	mustEmbedUnimplementedBackofficeSystemServer()
 }
 
@@ -97,6 +110,9 @@ func (UnimplementedBackofficeSystemServer) SetIntegrityConfig(context.Context, *
 }
 func (UnimplementedBackofficeSystemServer) ListSev(context.Context, *ListSevRequest) (*v1.ListSevResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSev not implemented")
+}
+func (UnimplementedBackofficeSystemServer) ExportSev(context.Context, *ExportSevRequest) (*v1.ExportSevResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportSev not implemented")
 }
 func (UnimplementedBackofficeSystemServer) mustEmbedUnimplementedBackofficeSystemServer() {}
 func (UnimplementedBackofficeSystemServer) testEmbeddedByValue()                          {}
@@ -173,6 +189,24 @@ func _BackofficeSystem_ListSev_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeSystem_ExportSev_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportSevRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeSystemServer).ExportSev(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeSystem_ExportSev_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeSystemServer).ExportSev(ctx, req.(*ExportSevRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeSystem_ServiceDesc is the grpc.ServiceDesc for BackofficeSystem service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -191,6 +225,10 @@ var BackofficeSystem_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListSev",
 			Handler:    _BackofficeSystem_ListSev_Handler,
+		},
+		{
+			MethodName: "ExportSev",
+			Handler:    _BackofficeSystem_ExportSev_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

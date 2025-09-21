@@ -2695,6 +2695,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/system.service.v1.ListIntegrityStatusResponse'
+    /v1/backoffice/system/sev/export:
+        post:
+            tags:
+                - BackofficeSystem
+            operationId: BackofficeSystem_ExportSev
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ExportSevRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/system.service.v1.ExportSevResponse'
     /v1/backoffice/system/sev/list:
         post:
             tags:
@@ -5789,6 +5807,27 @@ components:
                 kycLevel:
                     type: integer
                     format: int32
+                format:
+                    type: string
+                timeZone:
+                    type: string
+        api.backoffice.service.v1.ExportSevRequest:
+            type: object
+            properties:
+                severity:
+                    type: string
+                category:
+                    type: string
+                component:
+                    type: string
+                userId:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
                 format:
                     type: string
                 timeZone:
@@ -16106,6 +16145,11 @@ components:
             description: |-
                 Response for withdraw callback
                  Confirms receipt of callback notification
+        system.service.v1.ExportSevResponse:
+            type: object
+            properties:
+                taskId:
+                    type: string
         system.service.v1.FileInfo:
             type: object
             properties:
