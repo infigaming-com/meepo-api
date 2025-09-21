@@ -29,46 +29,88 @@ type UserPasswordResetEvent struct {
 	Timestamp       int64                   `json:"timestamp"`
 }
 
+type EventInfo struct {
+	EventId string `json:"event_id,omitempty"`
+	EventName string `json:"event_name,omitempty"`
+	Venue string `json:"venue,omitempty"`
+	Tournament string `json:"tournament,omitempty"`
+	OddsInUserStyle string `json:"odds_in_user_style,omitempty"`
+	BetTypeName string `json:"bet_type_name,omitempty"`
+	WinMultiplier string `json:"win_multiplier,omitempty"`
+	BetDetails string `json:"bet_details,omitempty"`
+	EventDescription string `json:"event_description,omitempty"`
+	LeagueName string `json:"league_name,omitempty"`
+	HomeTeam string `json:"home_team,omitempty"`
+	AwayTeam string `json:"away_team,omitempty"`
+	CurrentResult string `json:"current_result,omitempty"`
+	EventDateUtc int64 `json:"event_date_utc,omitempty"`
+	SettlementStatus string `json:"settlement_status,omitempty"`
+	SettlementDescription string `json:"settlement_description,omitempty"`
+	BetSettledDate int64 `json:"bet_settled_date,omitempty"`
+	TriggeredResult string `json:"triggered_result,omitempty"`
+	CardedTime int64 `json:"carded_time,omitempty"`
+	FirstBetTime int64 `json:"first_bet_time,omitempty"`
+	LastBetTime int64 `json:"last_bet_time,omitempty"`
+	NoMoreBetsTime int64 `json:"no_more_bets_time,omitempty"`
+	ResultProcessingTime int64 `json:"result_processing_time,omitempty"`
+	RevisedOfficialCardedTime int64 `json:"revised_official_carded_time,omitempty"`
+	Status string `json:"status,omitempty"`
+}
 
 type GameRollbackEvent struct {
-	OperatorID                   int64  `json:"operator_id"`
-	OperatorName                 string `json:"operator_name"`
-	ProviderID                   string `json:"provider_id"`
-	ProviderName                 string `json:"provider_name"`
-	UserID                       int64  `json:"user_id"`
-	GameID                       string `json:"game_id"`
-	GameName                     string `json:"game_name"`
-	RoundID                      int64  `json:"round_id"`
-	BetID                        int64  `json:"bet_id"`
-	TransactionID                int64  `json:"transaction_id"`
-	Currency                     string `json:"currency"`
-	SettlementCurrency           string `json:"settlement_currency"`
-	
-	GameAction                   string `json:"game_action"`           // "rollback"
-	OriginalTransactionID        int64  `json:"original_transaction_id"` // 被回滚的原始交易ID
-	OriginalProviderTransactionID string `json:"original_provider_transaction_id"` // 原始provider交易ID
-	RollbackType                 string `json:"rollback_type"`         // "game_bet_rollback" 或 "game_win_rollback"
-	
-	// 金额信息
-	AmountCurrency               string `json:"amount_currency"`
-	AmountSettlementCurrency     string `json:"amount_settlement_currency"`
-	AmountUSD                    string `json:"amount_usd"`
-	Turnover                     string `json:"turnover"`
-	TurnoverUSD                  string `json:"turnover_usd"`
-	
-	// 时间信息
-	OriginalBetTime              int64  `json:"original_bet_time"`     // 原始投注时间
-	OriginalSettleTime           int64  `json:"original_settle_time"`  // 原始结算时间
-	RollbackTime                 int64  `json:"rollback_time"`         // 回滚时间
-	ProcessedAt                  int64  `json:"processed_at"`          // 处理时间
-	
-	// 操作员信息
-	SystemOperatorID             int64  `json:"system_operator_id"`
-	RetailerOperatorID           int64  `json:"retailer_operator_id"`
-	CompanyOperatorID            int64  `json:"company_operator_id"`
-	
-	// 回滚原因和上下文
-	RollbackReason               string `json:"rollback_reason,omitempty"` // 回滚原因
-	SmResult                     string `json:"sm_result,omitempty"`       // SM结果
-	Finished                     bool   `json:"finished"`                  // 是否完成
+	OperatorId                   int64  `json:"operator_id,omitempty"`
+	OperatorName                 string `json:"operator_name,omitempty"`
+	ProviderId                   string `json:"provider_id,omitempty"`
+	ProviderName                 string `json:"provider_name,omitempty"`
+	UserId                       int64  `json:"user_id,omitempty"`
+	GameId                       string `json:"game_id,omitempty"`
+	GameName                     string `json:"game_name,omitempty"`
+	GameAction                   string `json:"game_action,omitempty"` // "rollback"
+	RoundId                      int64  `json:"round_id,omitempty"`
+	BetId                        int64  `json:"bet_id,omitempty"`
+	TransactionId                int64  `json:"transaction_id,omitempty"`
+	FeeGroup                     string `json:"fee_group,omitempty"`
+	Currency                     string `json:"currency,omitempty"`
+	SettlementCurrency           string `json:"settlement_currency,omitempty"`
+	AmountCurrency               string `json:"amount_currency,omitempty"`
+	AmountSettlementCurrency     string `json:"amount_settlement_currency,omitempty"`
+	AmountUsd                    string `json:"amount_usd,omitempty"`
+	AmountReportingCurrency      string `json:"amount_reporting_currency,omitempty"`
+	Turnover                     string `json:"turnover,omitempty"`
+	TurnoverUsd                  string `json:"turnover_usd,omitempty"`
+	TurnoverReportingCurrency    string `json:"turnover_reporting_currency,omitempty"`
+	CreatedAt                    int64  `json:"created_at,omitempty"`
+	SystemOperatorId             int64  `json:"system_operator_id,omitempty"`
+	RetailerOperatorId           int64  `json:"retailer_operator_id,omitempty"`
+	CompanyOperatorId            int64  `json:"company_operator_id,omitempty"`
+	EventInfo                    EventInfo `json:"event_info,omitempty"`
+}
+
+type GameAdjustmentEvent struct {
+	OperatorId                   int64  `json:"operator_id,omitempty"`
+	OperatorName                 string `json:"operator_name,omitempty"`
+	ProviderId                   string `json:"provider_id,omitempty"`
+	ProviderName                 string `json:"provider_name,omitempty"`
+	UserId                       int64  `json:"user_id,omitempty"`
+	GameId                       string `json:"game_id,omitempty"`
+	GameName                     string `json:"game_name,omitempty"`
+	GameAction                   string `json:"game_action,omitempty"` // "rollback"
+	RoundId                      int64  `json:"round_id,omitempty"`
+	BetId                        int64  `json:"bet_id,omitempty"`
+	TransactionId                int64  `json:"transaction_id,omitempty"`
+	FeeGroup                     string `json:"fee_group,omitempty"`
+	Currency                     string `json:"currency,omitempty"`
+	SettlementCurrency           string `json:"settlement_currency,omitempty"`
+	AmountCurrency               string `json:"amount_currency,omitempty"`
+	AmountSettlementCurrency     string `json:"amount_settlement_currency,omitempty"`
+	AmountUsd                    string `json:"amount_usd,omitempty"`
+	AmountReportingCurrency      string `json:"amount_reporting_currency,omitempty"`
+	Turnover                     string `json:"turnover,omitempty"`
+	TurnoverUsd                  string `json:"turnover_usd,omitempty"`
+	TurnoverReportingCurrency    string `json:"turnover_reporting_currency,omitempty"`
+	CreatedAt                    int64  `json:"created_at,omitempty"`
+	SystemOperatorId             int64  `json:"system_operator_id,omitempty"`
+	RetailerOperatorId           int64  `json:"retailer_operator_id,omitempty"`
+	CompanyOperatorId            int64  `json:"company_operator_id,omitempty"`
+	EventInfo                    EventInfo `json:"event_info,omitempty"`
 }
