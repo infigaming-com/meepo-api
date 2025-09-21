@@ -1415,6 +1415,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListCurrenciesResponse'
+    /v1/backoffice/game/customer-strike-reports/list:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ListCustomerStrikeReports
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListCustomerStrikeReportsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.ListCustomerStrikeReportsResponse'
     /v1/backoffice/game/fee-groups/list:
         post:
             tags:
@@ -7693,6 +7711,17 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.ListCustomerStrikeReportsRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListDepositDetailsRequest:
             type: object
             properties:
@@ -12017,6 +12046,46 @@ components:
                     type: array
                     items:
                         type: string
+        api.game.service.v1.ListCustomerStrikeReportsResponse:
+            type: object
+            properties:
+                reports:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.ListCustomerStrikeReportsResponse_CustomerStrikeReport'
+                totalCount:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.game.service.v1.ListCustomerStrikeReportsResponse_CustomerStrikeReport:
+            type: object
+            properties:
+                userId:
+                    type: string
+                    description: Basic user information
+                userName:
+                    type: string
+                totalBets:
+                    type: integer
+                    description: Betting statistics
+                    format: int32
+                winningBets:
+                    type: integer
+                    format: int32
+                winRate:
+                    type: string
+                totalStake:
+                    type: string
+                    description: Financial information (in settlement currency, e.g., ZAR)
+                totalWinning:
+                    type: string
+                payoutRate:
+                    type: string
         api.game.service.v1.ListGamesRequest:
             type: object
             properties:

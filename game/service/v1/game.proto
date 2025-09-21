@@ -158,6 +158,10 @@ service Game {
 	rpc GetTransactionAndEventInfo(GetTransactionAndEventInfoRequest) returns (GetTransactionAndEventInfoResponse) {
 	}
 
+	// Customer Strike Report related APIs
+	rpc ListCustomerStrikeReports(ListCustomerStrikeReportsRequest) returns (ListCustomerStrikeReportsResponse) {
+	}
+
 }
 
 message CreateOperatorRequest {
@@ -1370,4 +1374,39 @@ message GetTransactionAndEventInfoResponse {
 
 	TransactionInfo transaction_info = 1;
 	repeated EventInfo event_infos = 2;
+}
+
+// Customer Strike Report related messages
+message ListCustomerStrikeReportsRequest {
+	// Filter conditions
+	optional string user_id = 1;
+	// Pagination
+	optional int32 page = 2;
+	optional int32 page_size = 3;
+	
+	// Operator context for filtering
+	api.common.OperatorContext operator_context = 4;
+}
+
+message ListCustomerStrikeReportsResponse {
+	message CustomerStrikeReport {
+		// Basic user information
+		string user_id = 1; // User ID (e.g., "UID000042")
+		string user_name = 2; // Full name (e.g., "John Smith")
+		
+		// Betting statistics
+		int32 total_bets = 3; // Total number of bets placed (e.g., 245)
+		int32 winning_bets = 4; // Number of winning bets (e.g., 198)
+		string win_rate = 5; // Win rate percentage (e.g., "80.82%")
+		
+		// Financial information (in settlement currency, e.g., ZAR)
+		string total_stake = 6; // Total stake amount (e.g., "R 24,500.00")
+		string total_winning = 7; // Total winning amount (e.g., "R 31,850.00")
+		string payout_rate = 8; // Payout rate percentage (e.g., "120.00%")
+	}
+	
+	repeated CustomerStrikeReport reports = 1;
+	int32 total_count = 2; // Total number of records found
+	int32 page = 3;
+	int32 page_size = 4;
 }

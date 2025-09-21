@@ -11373,6 +11373,297 @@ var _ interface {
 	ErrorName() string
 } = GetTransactionAndEventInfoResponseValidationError{}
 
+// Validate checks the field values on ListCustomerStrikeReportsRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ListCustomerStrikeReportsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListCustomerStrikeReportsRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListCustomerStrikeReportsRequestMultiError, or nil if none found.
+func (m *ListCustomerStrikeReportsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListCustomerStrikeReportsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListCustomerStrikeReportsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListCustomerStrikeReportsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListCustomerStrikeReportsRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.UserId != nil {
+		// no validation rules for UserId
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return ListCustomerStrikeReportsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListCustomerStrikeReportsRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// ListCustomerStrikeReportsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListCustomerStrikeReportsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListCustomerStrikeReportsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListCustomerStrikeReportsRequestMultiError) AllErrors() []error { return m }
+
+// ListCustomerStrikeReportsRequestValidationError is the validation error
+// returned by ListCustomerStrikeReportsRequest.Validate if the designated
+// constraints aren't met.
+type ListCustomerStrikeReportsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListCustomerStrikeReportsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListCustomerStrikeReportsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListCustomerStrikeReportsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListCustomerStrikeReportsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListCustomerStrikeReportsRequestValidationError) ErrorName() string {
+	return "ListCustomerStrikeReportsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListCustomerStrikeReportsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListCustomerStrikeReportsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListCustomerStrikeReportsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListCustomerStrikeReportsRequestValidationError{}
+
+// Validate checks the field values on ListCustomerStrikeReportsResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ListCustomerStrikeReportsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListCustomerStrikeReportsResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListCustomerStrikeReportsResponseMultiError, or nil if none found.
+func (m *ListCustomerStrikeReportsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListCustomerStrikeReportsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetReports() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListCustomerStrikeReportsResponseValidationError{
+						field:  fmt.Sprintf("Reports[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListCustomerStrikeReportsResponseValidationError{
+						field:  fmt.Sprintf("Reports[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListCustomerStrikeReportsResponseValidationError{
+					field:  fmt.Sprintf("Reports[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for TotalCount
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if len(errors) > 0 {
+		return ListCustomerStrikeReportsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListCustomerStrikeReportsResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// ListCustomerStrikeReportsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListCustomerStrikeReportsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListCustomerStrikeReportsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListCustomerStrikeReportsResponseMultiError) AllErrors() []error { return m }
+
+// ListCustomerStrikeReportsResponseValidationError is the validation error
+// returned by ListCustomerStrikeReportsResponse.Validate if the designated
+// constraints aren't met.
+type ListCustomerStrikeReportsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListCustomerStrikeReportsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListCustomerStrikeReportsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListCustomerStrikeReportsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListCustomerStrikeReportsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListCustomerStrikeReportsResponseValidationError) ErrorName() string {
+	return "ListCustomerStrikeReportsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListCustomerStrikeReportsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListCustomerStrikeReportsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListCustomerStrikeReportsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListCustomerStrikeReportsResponseValidationError{}
+
 // Validate checks the field values on ListProvidersResponse_Provider with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -14978,3 +15269,137 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetTransactionAndEventInfoResponse_TransactionInfoValidationError{}
+
+// Validate checks the field values on
+// ListCustomerStrikeReportsResponse_CustomerStrikeReport with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListCustomerStrikeReportsResponse_CustomerStrikeReport) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ListCustomerStrikeReportsResponse_CustomerStrikeReport with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListCustomerStrikeReportsResponse_CustomerStrikeReportMultiError, or nil if
+// none found.
+func (m *ListCustomerStrikeReportsResponse_CustomerStrikeReport) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListCustomerStrikeReportsResponse_CustomerStrikeReport) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	// no validation rules for UserName
+
+	// no validation rules for TotalBets
+
+	// no validation rules for WinningBets
+
+	// no validation rules for WinRate
+
+	// no validation rules for TotalStake
+
+	// no validation rules for TotalWinning
+
+	// no validation rules for PayoutRate
+
+	if len(errors) > 0 {
+		return ListCustomerStrikeReportsResponse_CustomerStrikeReportMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListCustomerStrikeReportsResponse_CustomerStrikeReportMultiError is an error
+// wrapping multiple validation errors returned by
+// ListCustomerStrikeReportsResponse_CustomerStrikeReport.ValidateAll() if the
+// designated constraints aren't met.
+type ListCustomerStrikeReportsResponse_CustomerStrikeReportMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListCustomerStrikeReportsResponse_CustomerStrikeReportMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListCustomerStrikeReportsResponse_CustomerStrikeReportMultiError) AllErrors() []error {
+	return m
+}
+
+// ListCustomerStrikeReportsResponse_CustomerStrikeReportValidationError is the
+// validation error returned by
+// ListCustomerStrikeReportsResponse_CustomerStrikeReport.Validate if the
+// designated constraints aren't met.
+type ListCustomerStrikeReportsResponse_CustomerStrikeReportValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListCustomerStrikeReportsResponse_CustomerStrikeReportValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e ListCustomerStrikeReportsResponse_CustomerStrikeReportValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e ListCustomerStrikeReportsResponse_CustomerStrikeReportValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e ListCustomerStrikeReportsResponse_CustomerStrikeReportValidationError) Key() bool {
+	return e.key
+}
+
+// ErrorName returns error name.
+func (e ListCustomerStrikeReportsResponse_CustomerStrikeReportValidationError) ErrorName() string {
+	return "ListCustomerStrikeReportsResponse_CustomerStrikeReportValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListCustomerStrikeReportsResponse_CustomerStrikeReportValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListCustomerStrikeReportsResponse_CustomerStrikeReport.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListCustomerStrikeReportsResponse_CustomerStrikeReportValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListCustomerStrikeReportsResponse_CustomerStrikeReportValidationError{}
