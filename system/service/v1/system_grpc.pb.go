@@ -26,6 +26,7 @@ const (
 	System_CreateReportExport_FullMethodName  = "/system.service.v1.System/CreateReportExport"
 	System_UpdateReportExport_FullMethodName  = "/system.service.v1.System/UpdateReportExport"
 	System_ListSev_FullMethodName             = "/system.service.v1.System/ListSev"
+	System_ExportSev_FullMethodName           = "/system.service.v1.System/ExportSev"
 )
 
 // SystemClient is the client API for System service.
@@ -39,6 +40,7 @@ type SystemClient interface {
 	CreateReportExport(ctx context.Context, in *CreateReportExportRequest, opts ...grpc.CallOption) (*CreateReportExportResponse, error)
 	UpdateReportExport(ctx context.Context, in *UpdateReportExportRequest, opts ...grpc.CallOption) (*UpdateReportExportResponse, error)
 	ListSev(ctx context.Context, in *ListSevRequest, opts ...grpc.CallOption) (*ListSevResponse, error)
+	ExportSev(ctx context.Context, in *ExportSevRequest, opts ...grpc.CallOption) (*ExportSevResponse, error)
 }
 
 type systemClient struct {
@@ -119,6 +121,16 @@ func (c *systemClient) ListSev(ctx context.Context, in *ListSevRequest, opts ...
 	return out, nil
 }
 
+func (c *systemClient) ExportSev(ctx context.Context, in *ExportSevRequest, opts ...grpc.CallOption) (*ExportSevResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExportSevResponse)
+	err := c.cc.Invoke(ctx, System_ExportSev_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SystemServer is the server API for System service.
 // All implementations must embed UnimplementedSystemServer
 // for forward compatibility.
@@ -130,6 +142,7 @@ type SystemServer interface {
 	CreateReportExport(context.Context, *CreateReportExportRequest) (*CreateReportExportResponse, error)
 	UpdateReportExport(context.Context, *UpdateReportExportRequest) (*UpdateReportExportResponse, error)
 	ListSev(context.Context, *ListSevRequest) (*ListSevResponse, error)
+	ExportSev(context.Context, *ExportSevRequest) (*ExportSevResponse, error)
 	mustEmbedUnimplementedSystemServer()
 }
 
@@ -160,6 +173,9 @@ func (UnimplementedSystemServer) UpdateReportExport(context.Context, *UpdateRepo
 }
 func (UnimplementedSystemServer) ListSev(context.Context, *ListSevRequest) (*ListSevResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSev not implemented")
+}
+func (UnimplementedSystemServer) ExportSev(context.Context, *ExportSevRequest) (*ExportSevResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportSev not implemented")
 }
 func (UnimplementedSystemServer) mustEmbedUnimplementedSystemServer() {}
 func (UnimplementedSystemServer) testEmbeddedByValue()                {}
@@ -308,6 +324,24 @@ func _System_ListSev_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _System_ExportSev_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportSevRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServer).ExportSev(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: System_ExportSev_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServer).ExportSev(ctx, req.(*ExportSevRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // System_ServiceDesc is the grpc.ServiceDesc for System service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -342,6 +376,10 @@ var System_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListSev",
 			Handler:    _System_ListSev_Handler,
+		},
+		{
+			MethodName: "ExportSev",
+			Handler:    _System_ExportSev_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

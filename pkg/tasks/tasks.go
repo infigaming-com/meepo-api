@@ -13,6 +13,7 @@ const (
 	REPORT_EXPORT_TYPE_CUSTOMER_RECORDS            = "customer_records"
 	REPORT_EXPORT_TYPE_FICA_THRESHOLD_TRANSACTIONS = "fica_threshold_transactions"
 	REPORT_EXPORT_TYPE_UNPAID_BETS                 = "unpaid_bets"
+	REPORT_EXPORT_TYPE_SEV                         = "significant_events"
 )
 
 type ReportExportPayload struct {
