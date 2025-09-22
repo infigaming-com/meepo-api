@@ -7,6 +7,7 @@
 package v1
 
 import (
+	common "github.com/infigaming-com/meepo-api/common"
 	v1 "github.com/infigaming-com/meepo-api/system/service/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -320,11 +321,111 @@ func (x *ExportSevRequest) GetTimeZone() string {
 	return ""
 }
 
+type ListReportExportRequest struct {
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	TaskIds                []int64                        `protobuf:"varint,1,rep,packed,name=task_ids,json=taskIds,proto3" json:"task_ids,omitempty"`
+	Type                   *string                        `protobuf:"bytes,2,opt,name=type,proto3,oneof" json:"type,omitempty"`
+	Status                 *string                        `protobuf:"bytes,3,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	Start                  *timestamppb.Timestamp         `protobuf:"bytes,4,opt,name=start,proto3,oneof" json:"start,omitempty"`
+	End                    *timestamppb.Timestamp         `protobuf:"bytes,5,opt,name=end,proto3,oneof" json:"end,omitempty"`
+	Page                   int32                          `protobuf:"varint,6,opt,name=page,proto3" json:"page,omitempty"`
+	PageCount              int32                          `protobuf:"varint,7,opt,name=page_count,json=pageCount,proto3" json:"page_count,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,8,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *ListReportExportRequest) Reset() {
+	*x = ListReportExportRequest{}
+	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListReportExportRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListReportExportRequest) ProtoMessage() {}
+
+func (x *ListReportExportRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListReportExportRequest.ProtoReflect.Descriptor instead.
+func (*ListReportExportRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ListReportExportRequest) GetTaskIds() []int64 {
+	if x != nil {
+		return x.TaskIds
+	}
+	return nil
+}
+
+func (x *ListReportExportRequest) GetType() string {
+	if x != nil && x.Type != nil {
+		return *x.Type
+	}
+	return ""
+}
+
+func (x *ListReportExportRequest) GetStatus() string {
+	if x != nil && x.Status != nil {
+		return *x.Status
+	}
+	return ""
+}
+
+func (x *ListReportExportRequest) GetStart() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Start
+	}
+	return nil
+}
+
+func (x *ListReportExportRequest) GetEnd() *timestamppb.Timestamp {
+	if x != nil {
+		return x.End
+	}
+	return nil
+}
+
+func (x *ListReportExportRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListReportExportRequest) GetPageCount() int32 {
+	if x != nil {
+		return x.PageCount
+	}
+	return 0
+}
+
+func (x *ListReportExportRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
 var File_backoffice_service_v1_backoffice_system_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_system_proto_rawDesc = "" +
 	"\n" +
-	"-backoffice/service/v1/backoffice_system.proto\x12\x19api.backoffice.service.v1\x1a\x1esystem/service/v1/system.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x1c\n" +
+	"-backoffice/service/v1/backoffice_system.proto\x12\x19api.backoffice.service.v1\x1a\x1esystem/service/v1/system.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\"\x1c\n" +
 	"\x1aListIntegrityStatusRequest\"\x99\x01\n" +
 	"\x19SetIntegrityConfigRequest\x12\x1b\n" +
 	"\tlabel_app\x18\x01 \x01(\tR\blabelApp\x12#\n" +
@@ -369,11 +470,25 @@ const file_backoffice_service_v1_backoffice_system_proto_rawDesc = "" +
 	"\n" +
 	"\b_user_idB\r\n" +
 	"\v_start_timeB\v\n" +
-	"\t_end_time2\xbd\x06\n" +
+	"\t_end_time\"\x8b\x03\n" +
+	"\x17ListReportExportRequest\x12\x19\n" +
+	"\btask_ids\x18\x01 \x03(\x03R\ataskIds\x12\x17\n" +
+	"\x04type\x18\x02 \x01(\tH\x00R\x04type\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\x03 \x01(\tH\x01R\x06status\x88\x01\x01\x125\n" +
+	"\x05start\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\x05start\x88\x01\x01\x121\n" +
+	"\x03end\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\x03end\x88\x01\x01\x12\x12\n" +
+	"\x04page\x18\x06 \x01(\x05R\x04page\x12\x1d\n" +
+	"\n" +
+	"page_count\x18\a \x01(\x05R\tpageCount\x12\\\n" +
+	"\x18operator_context_filters\x18\b \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\a\n" +
+	"\x05_typeB\t\n" +
+	"\a_statusB\b\n" +
+	"\x06_startB\x06\n" +
+	"\x04_end2\xc5\x06\n" +
 	"\x10BackofficeSystem\x12\xb4\x01\n" +
 	"\x13ListIntegrityStatus\x125.api.backoffice.service.v1.ListIntegrityStatusRequest\x1a..system.service.v1.ListIntegrityStatusResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/system/integrity/status/list\x12\xba\x01\n" +
-	"\x12SetIntegrityConfig\x124.api.backoffice.service.v1.SetIntegrityConfigRequest\x1a-.system.service.v1.SetIntegrityConfigResponse\"?\x82\xd3\xe4\x93\x029:\x01*\"4/v1/backoffice/system/integrity/file-info/config/set\x12\xa0\x01\n" +
-	"\x10ListReportExport\x12*.system.service.v1.ListReportExportRequest\x1a+.system.service.v1.ListReportExportResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/system/report/export/list\x12\x83\x01\n" +
+	"\x12SetIntegrityConfig\x124.api.backoffice.service.v1.SetIntegrityConfigRequest\x1a-.system.service.v1.SetIntegrityConfigResponse\"?\x82\xd3\xe4\x93\x029:\x01*\"4/v1/backoffice/system/integrity/file-info/config/set\x12\xa8\x01\n" +
+	"\x10ListReportExport\x122.api.backoffice.service.v1.ListReportExportRequest\x1a+.system.service.v1.ListReportExportResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/system/report/export/list\x12\x83\x01\n" +
 	"\aListSev\x12).api.backoffice.service.v1.ListSevRequest\x1a\".system.service.v1.ListSevResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/backoffice/system/sev/list\x12\x8b\x01\n" +
 	"\tExportSev\x12+.api.backoffice.service.v1.ExportSevRequest\x1a$.system.service.v1.ExportSevResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/system/sev/exportB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
@@ -390,42 +505,46 @@ func file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_system_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_system_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_backoffice_service_v1_backoffice_system_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_backoffice_service_v1_backoffice_system_proto_goTypes = []any{
 	(*ListIntegrityStatusRequest)(nil),     // 0: api.backoffice.service.v1.ListIntegrityStatusRequest
 	(*SetIntegrityConfigRequest)(nil),      // 1: api.backoffice.service.v1.SetIntegrityConfigRequest
 	(*ListSevRequest)(nil),                 // 2: api.backoffice.service.v1.ListSevRequest
 	(*ExportSevRequest)(nil),               // 3: api.backoffice.service.v1.ExportSevRequest
-	(*v1.FileInfo)(nil),                    // 4: system.service.v1.FileInfo
-	(*timestamppb.Timestamp)(nil),          // 5: google.protobuf.Timestamp
-	(*v1.ListReportExportRequest)(nil),     // 6: system.service.v1.ListReportExportRequest
-	(*v1.ListIntegrityStatusResponse)(nil), // 7: system.service.v1.ListIntegrityStatusResponse
-	(*v1.SetIntegrityConfigResponse)(nil),  // 8: system.service.v1.SetIntegrityConfigResponse
-	(*v1.ListReportExportResponse)(nil),    // 9: system.service.v1.ListReportExportResponse
-	(*v1.ListSevResponse)(nil),             // 10: system.service.v1.ListSevResponse
-	(*v1.ExportSevResponse)(nil),           // 11: system.service.v1.ExportSevResponse
+	(*ListReportExportRequest)(nil),        // 4: api.backoffice.service.v1.ListReportExportRequest
+	(*v1.FileInfo)(nil),                    // 5: system.service.v1.FileInfo
+	(*timestamppb.Timestamp)(nil),          // 6: google.protobuf.Timestamp
+	(*common.OperatorContextFilters)(nil),  // 7: api.common.OperatorContextFilters
+	(*v1.ListIntegrityStatusResponse)(nil), // 8: system.service.v1.ListIntegrityStatusResponse
+	(*v1.SetIntegrityConfigResponse)(nil),  // 9: system.service.v1.SetIntegrityConfigResponse
+	(*v1.ListReportExportResponse)(nil),    // 10: system.service.v1.ListReportExportResponse
+	(*v1.ListSevResponse)(nil),             // 11: system.service.v1.ListSevResponse
+	(*v1.ExportSevResponse)(nil),           // 12: system.service.v1.ExportSevResponse
 }
 var file_backoffice_service_v1_backoffice_system_proto_depIdxs = []int32{
-	4,  // 0: api.backoffice.service.v1.SetIntegrityConfigRequest.file_infos:type_name -> system.service.v1.FileInfo
-	5,  // 1: api.backoffice.service.v1.ListSevRequest.start_time:type_name -> google.protobuf.Timestamp
-	5,  // 2: api.backoffice.service.v1.ListSevRequest.end_time:type_name -> google.protobuf.Timestamp
-	5,  // 3: api.backoffice.service.v1.ExportSevRequest.start_time:type_name -> google.protobuf.Timestamp
-	5,  // 4: api.backoffice.service.v1.ExportSevRequest.end_time:type_name -> google.protobuf.Timestamp
-	0,  // 5: api.backoffice.service.v1.BackofficeSystem.ListIntegrityStatus:input_type -> api.backoffice.service.v1.ListIntegrityStatusRequest
-	1,  // 6: api.backoffice.service.v1.BackofficeSystem.SetIntegrityConfig:input_type -> api.backoffice.service.v1.SetIntegrityConfigRequest
-	6,  // 7: api.backoffice.service.v1.BackofficeSystem.ListReportExport:input_type -> system.service.v1.ListReportExportRequest
-	2,  // 8: api.backoffice.service.v1.BackofficeSystem.ListSev:input_type -> api.backoffice.service.v1.ListSevRequest
-	3,  // 9: api.backoffice.service.v1.BackofficeSystem.ExportSev:input_type -> api.backoffice.service.v1.ExportSevRequest
-	7,  // 10: api.backoffice.service.v1.BackofficeSystem.ListIntegrityStatus:output_type -> system.service.v1.ListIntegrityStatusResponse
-	8,  // 11: api.backoffice.service.v1.BackofficeSystem.SetIntegrityConfig:output_type -> system.service.v1.SetIntegrityConfigResponse
-	9,  // 12: api.backoffice.service.v1.BackofficeSystem.ListReportExport:output_type -> system.service.v1.ListReportExportResponse
-	10, // 13: api.backoffice.service.v1.BackofficeSystem.ListSev:output_type -> system.service.v1.ListSevResponse
-	11, // 14: api.backoffice.service.v1.BackofficeSystem.ExportSev:output_type -> system.service.v1.ExportSevResponse
-	10, // [10:15] is the sub-list for method output_type
-	5,  // [5:10] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	5,  // 0: api.backoffice.service.v1.SetIntegrityConfigRequest.file_infos:type_name -> system.service.v1.FileInfo
+	6,  // 1: api.backoffice.service.v1.ListSevRequest.start_time:type_name -> google.protobuf.Timestamp
+	6,  // 2: api.backoffice.service.v1.ListSevRequest.end_time:type_name -> google.protobuf.Timestamp
+	6,  // 3: api.backoffice.service.v1.ExportSevRequest.start_time:type_name -> google.protobuf.Timestamp
+	6,  // 4: api.backoffice.service.v1.ExportSevRequest.end_time:type_name -> google.protobuf.Timestamp
+	6,  // 5: api.backoffice.service.v1.ListReportExportRequest.start:type_name -> google.protobuf.Timestamp
+	6,  // 6: api.backoffice.service.v1.ListReportExportRequest.end:type_name -> google.protobuf.Timestamp
+	7,  // 7: api.backoffice.service.v1.ListReportExportRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	0,  // 8: api.backoffice.service.v1.BackofficeSystem.ListIntegrityStatus:input_type -> api.backoffice.service.v1.ListIntegrityStatusRequest
+	1,  // 9: api.backoffice.service.v1.BackofficeSystem.SetIntegrityConfig:input_type -> api.backoffice.service.v1.SetIntegrityConfigRequest
+	4,  // 10: api.backoffice.service.v1.BackofficeSystem.ListReportExport:input_type -> api.backoffice.service.v1.ListReportExportRequest
+	2,  // 11: api.backoffice.service.v1.BackofficeSystem.ListSev:input_type -> api.backoffice.service.v1.ListSevRequest
+	3,  // 12: api.backoffice.service.v1.BackofficeSystem.ExportSev:input_type -> api.backoffice.service.v1.ExportSevRequest
+	8,  // 13: api.backoffice.service.v1.BackofficeSystem.ListIntegrityStatus:output_type -> system.service.v1.ListIntegrityStatusResponse
+	9,  // 14: api.backoffice.service.v1.BackofficeSystem.SetIntegrityConfig:output_type -> system.service.v1.SetIntegrityConfigResponse
+	10, // 15: api.backoffice.service.v1.BackofficeSystem.ListReportExport:output_type -> system.service.v1.ListReportExportResponse
+	11, // 16: api.backoffice.service.v1.BackofficeSystem.ListSev:output_type -> system.service.v1.ListSevResponse
+	12, // 17: api.backoffice.service.v1.BackofficeSystem.ExportSev:output_type -> system.service.v1.ExportSevResponse
+	13, // [13:18] is the sub-list for method output_type
+	8,  // [8:13] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_system_proto_init() }
@@ -435,13 +554,14 @@ func file_backoffice_service_v1_backoffice_system_proto_init() {
 	}
 	file_backoffice_service_v1_backoffice_system_proto_msgTypes[2].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_system_proto_msgTypes[3].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_system_proto_msgTypes[4].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_system_proto_rawDesc), len(file_backoffice_service_v1_backoffice_system_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
