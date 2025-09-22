@@ -4887,9 +4887,10 @@ func (*SendPasswordResetCodeResponse) Descriptor() ([]byte, []int) {
 
 type ResetPasswordWithCodeRequest struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
-	Email            string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`                                               // User's email address
-	VerificationCode string                 `protobuf:"bytes,2,opt,name=verification_code,json=verificationCode,proto3" json:"verification_code,omitempty"` // Verification code received via email
-	NewPassword      string                 `protobuf:"bytes,3,opt,name=new_password,json=newPassword,proto3" json:"new_password,omitempty"`                // New password
+	OperatorId       *int64                 `protobuf:"varint,1,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
+	Email            string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`                                               // User's email address
+	VerificationCode string                 `protobuf:"bytes,3,opt,name=verification_code,json=verificationCode,proto3" json:"verification_code,omitempty"` // Verification code received via email
+	NewPassword      string                 `protobuf:"bytes,4,opt,name=new_password,json=newPassword,proto3" json:"new_password,omitempty"`                // New password
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -4922,6 +4923,13 @@ func (x *ResetPasswordWithCodeRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ResetPasswordWithCodeRequest.ProtoReflect.Descriptor instead.
 func (*ResetPasswordWithCodeRequest) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{84}
+}
+
+func (x *ResetPasswordWithCodeRequest) GetOperatorId() int64 {
+	if x != nil && x.OperatorId != nil {
+		return *x.OperatorId
+	}
+	return 0
 }
 
 func (x *ResetPasswordWithCodeRequest) GetEmail() string {
@@ -7577,11 +7585,14 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x12child_operator_ids\x18\x01 \x03(\x03R\x10childOperatorIds\"4\n" +
 	"\x1cSendPasswordResetCodeRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\"\x1f\n" +
-	"\x1dSendPasswordResetCodeResponse\"\x84\x01\n" +
-	"\x1cResetPasswordWithCodeRequest\x12\x14\n" +
-	"\x05email\x18\x01 \x01(\tR\x05email\x12+\n" +
-	"\x11verification_code\x18\x02 \x01(\tR\x10verificationCode\x12!\n" +
-	"\fnew_password\x18\x03 \x01(\tR\vnewPassword\"\x1f\n" +
+	"\x1dSendPasswordResetCodeResponse\"\xba\x01\n" +
+	"\x1cResetPasswordWithCodeRequest\x12$\n" +
+	"\voperator_id\x18\x01 \x01(\x03H\x00R\n" +
+	"operatorId\x88\x01\x01\x12\x14\n" +
+	"\x05email\x18\x02 \x01(\tR\x05email\x12+\n" +
+	"\x11verification_code\x18\x03 \x01(\tR\x10verificationCode\x12!\n" +
+	"\fnew_password\x18\x04 \x01(\tR\vnewPasswordB\x0e\n" +
+	"\f_operator_id\"\x1f\n" +
 	"\x1dResetPasswordWithCodeResponse\"\x91\x02\n" +
 	"\x1fOperatorAccountPasswordSettings\x12%\n" +
 	"\x0emin_characters\x18\x01 \x01(\x05R\rminCharacters\x128\n" +
@@ -8060,6 +8071,7 @@ func file_user_service_v1_user_proto_init() {
 	file_user_service_v1_user_proto_msgTypes[57].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[60].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[76].OneofWrappers = []any{}
+	file_user_service_v1_user_proto_msgTypes[84].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[91].OneofWrappers = []any{}
 	file_user_service_v1_user_proto_msgTypes[100].OneofWrappers = []any{}
 	type x struct{}

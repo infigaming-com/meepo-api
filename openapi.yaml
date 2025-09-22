@@ -7447,6 +7447,8 @@ components:
         api.user.service.v1.ResetPasswordWithCodeRequest:
             type: object
             properties:
+                operatorId:
+                    type: string
                 email:
                     type: string
                 verificationCode:
