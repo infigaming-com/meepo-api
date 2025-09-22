@@ -22,6 +22,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	BackofficeSystem_ListIntegrityStatus_FullMethodName = "/api.backoffice.service.v1.BackofficeSystem/ListIntegrityStatus"
 	BackofficeSystem_SetIntegrityConfig_FullMethodName  = "/api.backoffice.service.v1.BackofficeSystem/SetIntegrityConfig"
+	BackofficeSystem_ListReportExport_FullMethodName    = "/api.backoffice.service.v1.BackofficeSystem/ListReportExport"
 )
 
 // BackofficeSystemClient is the client API for BackofficeSystem service.
@@ -30,6 +31,7 @@ const (
 type BackofficeSystemClient interface {
 	ListIntegrityStatus(ctx context.Context, in *ListIntegrityStatusRequest, opts ...grpc.CallOption) (*v1.ListIntegrityStatusResponse, error)
 	SetIntegrityConfig(ctx context.Context, in *SetIntegrityConfigRequest, opts ...grpc.CallOption) (*v1.SetIntegrityConfigResponse, error)
+	ListReportExport(ctx context.Context, in *v1.ListReportExportRequest, opts ...grpc.CallOption) (*v1.ListReportExportResponse, error)
 }
 
 type backofficeSystemClient struct {
@@ -60,12 +62,23 @@ func (c *backofficeSystemClient) SetIntegrityConfig(ctx context.Context, in *Set
 	return out, nil
 }
 
+func (c *backofficeSystemClient) ListReportExport(ctx context.Context, in *v1.ListReportExportRequest, opts ...grpc.CallOption) (*v1.ListReportExportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListReportExportResponse)
+	err := c.cc.Invoke(ctx, BackofficeSystem_ListReportExport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeSystemServer is the server API for BackofficeSystem service.
 // All implementations must embed UnimplementedBackofficeSystemServer
 // for forward compatibility.
 type BackofficeSystemServer interface {
 	ListIntegrityStatus(context.Context, *ListIntegrityStatusRequest) (*v1.ListIntegrityStatusResponse, error)
 	SetIntegrityConfig(context.Context, *SetIntegrityConfigRequest) (*v1.SetIntegrityConfigResponse, error)
+	ListReportExport(context.Context, *v1.ListReportExportRequest) (*v1.ListReportExportResponse, error)
 	mustEmbedUnimplementedBackofficeSystemServer()
 }
 
@@ -81,6 +94,9 @@ func (UnimplementedBackofficeSystemServer) ListIntegrityStatus(context.Context, 
 }
 func (UnimplementedBackofficeSystemServer) SetIntegrityConfig(context.Context, *SetIntegrityConfigRequest) (*v1.SetIntegrityConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetIntegrityConfig not implemented")
+}
+func (UnimplementedBackofficeSystemServer) ListReportExport(context.Context, *v1.ListReportExportRequest) (*v1.ListReportExportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListReportExport not implemented")
 }
 func (UnimplementedBackofficeSystemServer) mustEmbedUnimplementedBackofficeSystemServer() {}
 func (UnimplementedBackofficeSystemServer) testEmbeddedByValue()                          {}
@@ -139,6 +155,24 @@ func _BackofficeSystem_SetIntegrityConfig_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeSystem_ListReportExport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.ListReportExportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeSystemServer).ListReportExport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeSystem_ListReportExport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeSystemServer).ListReportExport(ctx, req.(*v1.ListReportExportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeSystem_ServiceDesc is the grpc.ServiceDesc for BackofficeSystem service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -153,6 +187,10 @@ var BackofficeSystem_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetIntegrityConfig",
 			Handler:    _BackofficeSystem_SetIntegrityConfig_Handler,
+		},
+		{
+			MethodName: "ListReportExport",
+			Handler:    _BackofficeSystem_ListReportExport_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

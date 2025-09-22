@@ -129,10 +129,11 @@ const file_backoffice_service_v1_backoffice_system_proto_rawDesc = "" +
 	"\tlabel_app\x18\x01 \x01(\tR\blabelApp\x12#\n" +
 	"\rpod_namespace\x18\x02 \x01(\tR\fpodNamespace\x12:\n" +
 	"\n" +
-	"file_infos\x18\x03 \x03(\v2\x1b.system.service.v1.FileInfoR\tfileInfos2\x86\x03\n" +
+	"file_infos\x18\x03 \x03(\v2\x1b.system.service.v1.FileInfoR\tfileInfos2\xa9\x04\n" +
 	"\x10BackofficeSystem\x12\xb4\x01\n" +
 	"\x13ListIntegrityStatus\x125.api.backoffice.service.v1.ListIntegrityStatusRequest\x1a..system.service.v1.ListIntegrityStatusResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/system/integrity/status/list\x12\xba\x01\n" +
-	"\x12SetIntegrityConfig\x124.api.backoffice.service.v1.SetIntegrityConfigRequest\x1a-.system.service.v1.SetIntegrityConfigResponse\"?\x82\xd3\xe4\x93\x029:\x01*\"4/v1/backoffice/system/integrity/file-info/config/setB[\n" +
+	"\x12SetIntegrityConfig\x124.api.backoffice.service.v1.SetIntegrityConfigRequest\x1a-.system.service.v1.SetIntegrityConfigResponse\"?\x82\xd3\xe4\x93\x029:\x01*\"4/v1/backoffice/system/integrity/file-info/config/set\x12\xa0\x01\n" +
+	"\x10ListReportExport\x12*.system.service.v1.ListReportExportRequest\x1a+.system.service.v1.ListReportExportResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/system/report/export/listB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -152,17 +153,21 @@ var file_backoffice_service_v1_backoffice_system_proto_goTypes = []any{
 	(*ListIntegrityStatusRequest)(nil),     // 0: api.backoffice.service.v1.ListIntegrityStatusRequest
 	(*SetIntegrityConfigRequest)(nil),      // 1: api.backoffice.service.v1.SetIntegrityConfigRequest
 	(*v1.FileInfo)(nil),                    // 2: system.service.v1.FileInfo
-	(*v1.ListIntegrityStatusResponse)(nil), // 3: system.service.v1.ListIntegrityStatusResponse
-	(*v1.SetIntegrityConfigResponse)(nil),  // 4: system.service.v1.SetIntegrityConfigResponse
+	(*v1.ListReportExportRequest)(nil),     // 3: system.service.v1.ListReportExportRequest
+	(*v1.ListIntegrityStatusResponse)(nil), // 4: system.service.v1.ListIntegrityStatusResponse
+	(*v1.SetIntegrityConfigResponse)(nil),  // 5: system.service.v1.SetIntegrityConfigResponse
+	(*v1.ListReportExportResponse)(nil),    // 6: system.service.v1.ListReportExportResponse
 }
 var file_backoffice_service_v1_backoffice_system_proto_depIdxs = []int32{
 	2, // 0: api.backoffice.service.v1.SetIntegrityConfigRequest.file_infos:type_name -> system.service.v1.FileInfo
 	0, // 1: api.backoffice.service.v1.BackofficeSystem.ListIntegrityStatus:input_type -> api.backoffice.service.v1.ListIntegrityStatusRequest
 	1, // 2: api.backoffice.service.v1.BackofficeSystem.SetIntegrityConfig:input_type -> api.backoffice.service.v1.SetIntegrityConfigRequest
-	3, // 3: api.backoffice.service.v1.BackofficeSystem.ListIntegrityStatus:output_type -> system.service.v1.ListIntegrityStatusResponse
-	4, // 4: api.backoffice.service.v1.BackofficeSystem.SetIntegrityConfig:output_type -> system.service.v1.SetIntegrityConfigResponse
-	3, // [3:5] is the sub-list for method output_type
-	1, // [1:3] is the sub-list for method input_type
+	3, // 3: api.backoffice.service.v1.BackofficeSystem.ListReportExport:input_type -> system.service.v1.ListReportExportRequest
+	4, // 4: api.backoffice.service.v1.BackofficeSystem.ListIntegrityStatus:output_type -> system.service.v1.ListIntegrityStatusResponse
+	5, // 5: api.backoffice.service.v1.BackofficeSystem.SetIntegrityConfig:output_type -> system.service.v1.SetIntegrityConfigResponse
+	6, // 6: api.backoffice.service.v1.BackofficeSystem.ListReportExport:output_type -> system.service.v1.ListReportExportResponse
+	4, // [4:7] is the sub-list for method output_type
+	1, // [1:4] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
 	1, // [1:1] is the sub-list for extension extendee
 	0, // [0:1] is the sub-list for field type_name
