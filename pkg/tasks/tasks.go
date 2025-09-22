@@ -14,6 +14,8 @@ const (
 	REPORT_EXPORT_TYPE_FICA_THRESHOLD_TRANSACTIONS = "fica_threshold_transactions"
 	REPORT_EXPORT_TYPE_UNPAID_BETS                 = "unpaid_bets"
 	REPORT_EXPORT_TYPE_SEV                         = "significant_events"
+	REPORT_EXPORT_TYPE_PLAYER_STAKE_VARIANCE       = "player_stake_variance"
+	REPORT_EXPORT_TYPE_MULTIPLE_BETS               = "multiple_bets"
 )
 
 type ReportExportPayload struct {
