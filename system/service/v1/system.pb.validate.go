@@ -1149,6 +1149,8 @@ func (m *ListReportExportRequest) validate(all bool) error {
 
 	// no validation rules for PageSize
 
+	// no validation rules for OperatorId
+
 	if m.Type != nil {
 		// no validation rules for Type
 	}
@@ -1513,6 +1515,8 @@ func (m *CreateReportExportRequest) validate(all bool) error {
 			}
 		}
 	}
+
+	// no validation rules for OperatorId
 
 	if len(errors) > 0 {
 		return CreateReportExportRequestMultiError(errors)

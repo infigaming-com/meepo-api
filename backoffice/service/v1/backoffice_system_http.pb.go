@@ -10,6 +10,7 @@ import (
 	context "context"
 	http "github.com/go-kratos/kratos/v2/transport/http"
 	binding "github.com/go-kratos/kratos/v2/transport/http/binding"
+	v1 "github.com/infigaming-com/meepo-api/system/service/v1"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -20,11 +21,13 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationBackofficeSystemAddSystemCurrency = "/api.backoffice.service.v1.BackofficeSystem/AddSystemCurrency"
+const OperationBackofficeSystemListReportExport = "/api.backoffice.service.v1.BackofficeSystem/ListReportExport"
 const OperationBackofficeSystemListSystemCurrencies = "/api.backoffice.service.v1.BackofficeSystem/ListSystemCurrencies"
 const OperationBackofficeSystemUpdateSystemCurrency = "/api.backoffice.service.v1.BackofficeSystem/UpdateSystemCurrency"
 
 type BackofficeSystemHTTPServer interface {
 	AddSystemCurrency(context.Context, *AddSystemCurrencyRequest) (*AddSystemCurrencyResponse, error)
+	ListReportExport(context.Context, *v1.ListReportExportRequest) (*v1.ListReportExportResponse, error)
 	ListSystemCurrencies(context.Context, *ListSystemCurrenciesRequest) (*ListSystemCurrenciesResponse, error)
 	UpdateSystemCurrency(context.Context, *UpdateSystemCurrencyRequest) (*UpdateSystemCurrencyResponse, error)
 }
@@ -32,6 +35,7 @@ type BackofficeSystemHTTPServer interface {
 func RegisterBackofficeSystemHTTPServer(s *http.Server, srv BackofficeSystemHTTPServer) {
 	r := s.Route("/")
 	r.POST("/v1/backoffice/system/currencies/add", _BackofficeSystem_AddSystemCurrency0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/system/report/export/list", _BackofficeSystem_ListReportExport0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/system/currencies/list", _BackofficeSystem_ListSystemCurrencies0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/system/currencies/update", _BackofficeSystem_UpdateSystemCurrency0_HTTP_Handler(srv))
 }
@@ -54,6 +58,28 @@ func _BackofficeSystem_AddSystemCurrency0_HTTP_Handler(srv BackofficeSystemHTTPS
 			return err
 		}
 		reply := out.(*AddSystemCurrencyResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeSystem_ListReportExport0_HTTP_Handler(srv BackofficeSystemHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in v1.ListReportExportRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeSystemListReportExport)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListReportExport(ctx, req.(*v1.ListReportExportRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ListReportExportResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -104,6 +130,7 @@ func _BackofficeSystem_UpdateSystemCurrency0_HTTP_Handler(srv BackofficeSystemHT
 
 type BackofficeSystemHTTPClient interface {
 	AddSystemCurrency(ctx context.Context, req *AddSystemCurrencyRequest, opts ...http.CallOption) (rsp *AddSystemCurrencyResponse, err error)
+	ListReportExport(ctx context.Context, req *v1.ListReportExportRequest, opts ...http.CallOption) (rsp *v1.ListReportExportResponse, err error)
 	ListSystemCurrencies(ctx context.Context, req *ListSystemCurrenciesRequest, opts ...http.CallOption) (rsp *ListSystemCurrenciesResponse, err error)
 	UpdateSystemCurrency(ctx context.Context, req *UpdateSystemCurrencyRequest, opts ...http.CallOption) (rsp *UpdateSystemCurrencyResponse, err error)
 }
@@ -121,6 +148,19 @@ func (c *BackofficeSystemHTTPClientImpl) AddSystemCurrency(ctx context.Context, 
 	pattern := "/v1/backoffice/system/currencies/add"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeSystemAddSystemCurrency))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeSystemHTTPClientImpl) ListReportExport(ctx context.Context, in *v1.ListReportExportRequest, opts ...http.CallOption) (*v1.ListReportExportResponse, error) {
+	var out v1.ListReportExportResponse
+	pattern := "/v1/backoffice/system/report/export/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeSystemListReportExport))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

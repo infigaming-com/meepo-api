@@ -7,6 +7,7 @@
 package v1
 
 import (
+	v1 "github.com/infigaming-com/meepo-api/system/service/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -534,7 +535,7 @@ var File_backoffice_service_v1_backoffice_system_proto protoreflect.FileDescript
 
 const file_backoffice_service_v1_backoffice_system_proto_rawDesc = "" +
 	"\n" +
-	"-backoffice/service/v1/backoffice_system.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\"\xfd\x01\n" +
+	"-backoffice/service/v1/backoffice_system.proto\x12\x19api.backoffice.service.v1\x1a\x1esystem/service/v1/system.proto\x1a\x1cgoogle/api/annotations.proto\"\xfd\x01\n" +
 	"\x0eSystemCurrency\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
 	"\aenabled\x18\x02 \x01(\bR\aenabled\x12\x16\n" +
@@ -588,9 +589,10 @@ const file_backoffice_service_v1_backoffice_system_proto_rawDesc = "" +
 	"\x0f_decimal_placesB\x1a\n" +
 	"\x18_currency_decimal_places\"e\n" +
 	"\x1cUpdateSystemCurrencyResponse\x12E\n" +
-	"\bcurrency\x18\x01 \x01(\v2).api.backoffice.service.v1.SystemCurrencyR\bcurrency2\xbe\x04\n" +
+	"\bcurrency\x18\x01 \x01(\v2).api.backoffice.service.v1.SystemCurrencyR\bcurrency2\xe1\x05\n" +
 	"\x10BackofficeSystem\x12\xaf\x01\n" +
-	"\x11AddSystemCurrency\x123.api.backoffice.service.v1.AddSystemCurrencyRequest\x1a4.api.backoffice.service.v1.AddSystemCurrencyResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/system/currencies/add\x12\xb9\x01\n" +
+	"\x11AddSystemCurrency\x123.api.backoffice.service.v1.AddSystemCurrencyRequest\x1a4.api.backoffice.service.v1.AddSystemCurrencyResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/system/currencies/add\x12\xa0\x01\n" +
+	"\x10ListReportExport\x12*.system.service.v1.ListReportExportRequest\x1a+.system.service.v1.ListReportExportResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/system/report/export/list\x12\xb9\x01\n" +
 	"\x14ListSystemCurrencies\x126.api.backoffice.service.v1.ListSystemCurrenciesRequest\x1a7.api.backoffice.service.v1.ListSystemCurrenciesResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/system/currencies/list\x12\xbb\x01\n" +
 	"\x14UpdateSystemCurrency\x126.api.backoffice.service.v1.UpdateSystemCurrencyRequest\x1a7.api.backoffice.service.v1.UpdateSystemCurrencyResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/system/currencies/updateB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
@@ -616,18 +618,22 @@ var file_backoffice_service_v1_backoffice_system_proto_goTypes = []any{
 	(*ListSystemCurrenciesResponse)(nil), // 4: api.backoffice.service.v1.ListSystemCurrenciesResponse
 	(*UpdateSystemCurrencyRequest)(nil),  // 5: api.backoffice.service.v1.UpdateSystemCurrencyRequest
 	(*UpdateSystemCurrencyResponse)(nil), // 6: api.backoffice.service.v1.UpdateSystemCurrencyResponse
+	(*v1.ListReportExportRequest)(nil),   // 7: system.service.v1.ListReportExportRequest
+	(*v1.ListReportExportResponse)(nil),  // 8: system.service.v1.ListReportExportResponse
 }
 var file_backoffice_service_v1_backoffice_system_proto_depIdxs = []int32{
 	0, // 0: api.backoffice.service.v1.ListSystemCurrenciesResponse.currencies:type_name -> api.backoffice.service.v1.SystemCurrency
 	0, // 1: api.backoffice.service.v1.UpdateSystemCurrencyResponse.currency:type_name -> api.backoffice.service.v1.SystemCurrency
 	1, // 2: api.backoffice.service.v1.BackofficeSystem.AddSystemCurrency:input_type -> api.backoffice.service.v1.AddSystemCurrencyRequest
-	3, // 3: api.backoffice.service.v1.BackofficeSystem.ListSystemCurrencies:input_type -> api.backoffice.service.v1.ListSystemCurrenciesRequest
-	5, // 4: api.backoffice.service.v1.BackofficeSystem.UpdateSystemCurrency:input_type -> api.backoffice.service.v1.UpdateSystemCurrencyRequest
-	2, // 5: api.backoffice.service.v1.BackofficeSystem.AddSystemCurrency:output_type -> api.backoffice.service.v1.AddSystemCurrencyResponse
-	4, // 6: api.backoffice.service.v1.BackofficeSystem.ListSystemCurrencies:output_type -> api.backoffice.service.v1.ListSystemCurrenciesResponse
-	6, // 7: api.backoffice.service.v1.BackofficeSystem.UpdateSystemCurrency:output_type -> api.backoffice.service.v1.UpdateSystemCurrencyResponse
-	5, // [5:8] is the sub-list for method output_type
-	2, // [2:5] is the sub-list for method input_type
+	7, // 3: api.backoffice.service.v1.BackofficeSystem.ListReportExport:input_type -> system.service.v1.ListReportExportRequest
+	3, // 4: api.backoffice.service.v1.BackofficeSystem.ListSystemCurrencies:input_type -> api.backoffice.service.v1.ListSystemCurrenciesRequest
+	5, // 5: api.backoffice.service.v1.BackofficeSystem.UpdateSystemCurrency:input_type -> api.backoffice.service.v1.UpdateSystemCurrencyRequest
+	2, // 6: api.backoffice.service.v1.BackofficeSystem.AddSystemCurrency:output_type -> api.backoffice.service.v1.AddSystemCurrencyResponse
+	8, // 7: api.backoffice.service.v1.BackofficeSystem.ListReportExport:output_type -> system.service.v1.ListReportExportResponse
+	4, // 8: api.backoffice.service.v1.BackofficeSystem.ListSystemCurrencies:output_type -> api.backoffice.service.v1.ListSystemCurrenciesResponse
+	6, // 9: api.backoffice.service.v1.BackofficeSystem.UpdateSystemCurrency:output_type -> api.backoffice.service.v1.UpdateSystemCurrencyResponse
+	6, // [6:10] is the sub-list for method output_type
+	2, // [2:6] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name
 	2, // [2:2] is the sub-list for extension extendee
 	0, // [0:2] is the sub-list for field type_name

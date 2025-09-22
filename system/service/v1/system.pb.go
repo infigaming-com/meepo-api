@@ -628,7 +628,8 @@ type ListReportExportRequest struct {
 	Start         *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=start,proto3,oneof" json:"start,omitempty"`
 	End           *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=end,proto3,oneof" json:"end,omitempty"`
 	Page          int32                  `protobuf:"varint,6,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int32                  `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"` // api.common.OperatorContext operator_context = 8;
+	PageSize      int32                  `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	OperatorId    int64                  `protobuf:"varint,8,opt,name=operatorId,proto3" json:"operatorId,omitempty"` // api.common.OperatorContext operator_context = 8;
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -708,6 +709,13 @@ func (x *ListReportExportRequest) GetPage() int32 {
 func (x *ListReportExportRequest) GetPageSize() int32 {
 	if x != nil {
 		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListReportExportRequest) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
 	}
 	return 0
 }
@@ -812,7 +820,8 @@ type CreateReportExportRequest struct {
 	Status        string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
 	TaskName      string                 `protobuf:"bytes,5,opt,name=task_name,json=taskName,proto3" json:"task_name,omitempty"`
 	FileFormat    string                 `protobuf:"bytes,6,opt,name=file_format,json=fileFormat,proto3" json:"file_format,omitempty"`
-	CreateAt      *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=create_at,json=createAt,proto3" json:"create_at,omitempty"` // api.common.OperatorContext operator_context = 8;
+	CreateAt      *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=create_at,json=createAt,proto3" json:"create_at,omitempty"`
+	OperatorId    int64                  `protobuf:"varint,8,opt,name=operatorId,proto3" json:"operatorId,omitempty"` // api.common.OperatorContext operator_context = 8;
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -894,6 +903,13 @@ func (x *CreateReportExportRequest) GetCreateAt() *timestamppb.Timestamp {
 		return x.CreateAt
 	}
 	return nil
+}
+
+func (x *CreateReportExportRequest) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
 }
 
 type CreateReportExportResponse struct {
@@ -1210,7 +1226,7 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"currencies\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12#\n" +
 	"\rtotal_enabled\x18\x03 \x01(\x05R\ftotalEnabled\x12!\n" +
-	"\ftotal_hidden\x18\x04 \x01(\x05R\vtotalHidden\"\xab\x02\n" +
+	"\ftotal_hidden\x18\x04 \x01(\x05R\vtotalHidden\"\xcb\x02\n" +
 	"\x17ListReportExportRequest\x12\x19\n" +
 	"\btask_ids\x18\x01 \x03(\x03R\ataskIds\x12\x17\n" +
 	"\x04type\x18\x02 \x01(\tH\x00R\x04type\x88\x01\x01\x12\x1b\n" +
@@ -1218,7 +1234,10 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\x05start\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\x05start\x88\x01\x01\x121\n" +
 	"\x03end\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\x03end\x88\x01\x01\x12\x12\n" +
 	"\x04page\x18\x06 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\a \x01(\x05R\bpageSizeB\a\n" +
+	"\tpage_size\x18\a \x01(\x05R\bpageSize\x12\x1e\n" +
+	"\n" +
+	"operatorId\x18\b \x01(\x03R\n" +
+	"operatorIdB\a\n" +
 	"\x05_typeB\t\n" +
 	"\a_statusB\b\n" +
 	"\x06_startB\x06\n" +
@@ -1243,7 +1262,7 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\tfile_size\x18\a \x01(\tR\bfileSize\x12\x1f\n" +
 	"\vfile_format\x18\b \x01(\tR\n" +
 	"fileFormat\x127\n" +
-	"\tcreate_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\bcreateAt\"\xf0\x01\n" +
+	"\tcreate_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\bcreateAt\"\x90\x02\n" +
 	"\x19CreateReportExportRequest\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x12\n" +
@@ -1252,7 +1271,10 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\ttask_name\x18\x05 \x01(\tR\btaskName\x12\x1f\n" +
 	"\vfile_format\x18\x06 \x01(\tR\n" +
 	"fileFormat\x127\n" +
-	"\tcreate_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\bcreateAt\"\x1c\n" +
+	"\tcreate_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\bcreateAt\x12\x1e\n" +
+	"\n" +
+	"operatorId\x18\b \x01(\x03R\n" +
+	"operatorId\"\x1c\n" +
 	"\x1aCreateReportExportResponse\"\x84\x01\n" +
 	"\x19UpdateReportExportRequest\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x16\n" +

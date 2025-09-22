@@ -97,6 +97,7 @@ message ListReportExportRequest {
 	optional google.protobuf.Timestamp end = 5;
 	int32 page = 6;
 	int32 page_size = 7;
+	int64 operatorId = 8;
 	// api.common.OperatorContext operator_context = 8;
 }
 
@@ -129,6 +130,7 @@ message CreateReportExportRequest {
 	string task_name = 5;
 	string file_format = 6;
 	google.protobuf.Timestamp create_at = 7;
+	int64 operatorId = 8;
 	// api.common.OperatorContext operator_context = 8;
 }
 
