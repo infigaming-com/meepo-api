@@ -22,6 +22,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	BackofficeSystem_ListIntegrityStatus_FullMethodName = "/api.backoffice.service.v1.BackofficeSystem/ListIntegrityStatus"
 	BackofficeSystem_SetIntegrityConfig_FullMethodName  = "/api.backoffice.service.v1.BackofficeSystem/SetIntegrityConfig"
+	BackofficeSystem_ListReportExport_FullMethodName    = "/api.backoffice.service.v1.BackofficeSystem/ListReportExport"
 	BackofficeSystem_ListSev_FullMethodName             = "/api.backoffice.service.v1.BackofficeSystem/ListSev"
 	BackofficeSystem_ExportSev_FullMethodName           = "/api.backoffice.service.v1.BackofficeSystem/ExportSev"
 )
@@ -32,6 +33,7 @@ const (
 type BackofficeSystemClient interface {
 	ListIntegrityStatus(ctx context.Context, in *ListIntegrityStatusRequest, opts ...grpc.CallOption) (*v1.ListIntegrityStatusResponse, error)
 	SetIntegrityConfig(ctx context.Context, in *SetIntegrityConfigRequest, opts ...grpc.CallOption) (*v1.SetIntegrityConfigResponse, error)
+	ListReportExport(ctx context.Context, in *v1.ListReportExportRequest, opts ...grpc.CallOption) (*v1.ListReportExportResponse, error)
 	ListSev(ctx context.Context, in *ListSevRequest, opts ...grpc.CallOption) (*v1.ListSevResponse, error)
 	ExportSev(ctx context.Context, in *ExportSevRequest, opts ...grpc.CallOption) (*v1.ExportSevResponse, error)
 }
@@ -64,6 +66,16 @@ func (c *backofficeSystemClient) SetIntegrityConfig(ctx context.Context, in *Set
 	return out, nil
 }
 
+func (c *backofficeSystemClient) ListReportExport(ctx context.Context, in *v1.ListReportExportRequest, opts ...grpc.CallOption) (*v1.ListReportExportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListReportExportResponse)
+	err := c.cc.Invoke(ctx, BackofficeSystem_ListReportExport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *backofficeSystemClient) ListSev(ctx context.Context, in *ListSevRequest, opts ...grpc.CallOption) (*v1.ListSevResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.ListSevResponse)
@@ -90,6 +102,7 @@ func (c *backofficeSystemClient) ExportSev(ctx context.Context, in *ExportSevReq
 type BackofficeSystemServer interface {
 	ListIntegrityStatus(context.Context, *ListIntegrityStatusRequest) (*v1.ListIntegrityStatusResponse, error)
 	SetIntegrityConfig(context.Context, *SetIntegrityConfigRequest) (*v1.SetIntegrityConfigResponse, error)
+	ListReportExport(context.Context, *v1.ListReportExportRequest) (*v1.ListReportExportResponse, error)
 	ListSev(context.Context, *ListSevRequest) (*v1.ListSevResponse, error)
 	ExportSev(context.Context, *ExportSevRequest) (*v1.ExportSevResponse, error)
 	mustEmbedUnimplementedBackofficeSystemServer()
@@ -107,6 +120,9 @@ func (UnimplementedBackofficeSystemServer) ListIntegrityStatus(context.Context, 
 }
 func (UnimplementedBackofficeSystemServer) SetIntegrityConfig(context.Context, *SetIntegrityConfigRequest) (*v1.SetIntegrityConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetIntegrityConfig not implemented")
+}
+func (UnimplementedBackofficeSystemServer) ListReportExport(context.Context, *v1.ListReportExportRequest) (*v1.ListReportExportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListReportExport not implemented")
 }
 func (UnimplementedBackofficeSystemServer) ListSev(context.Context, *ListSevRequest) (*v1.ListSevResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSev not implemented")
@@ -171,6 +187,24 @@ func _BackofficeSystem_SetIntegrityConfig_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeSystem_ListReportExport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.ListReportExportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeSystemServer).ListReportExport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeSystem_ListReportExport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeSystemServer).ListReportExport(ctx, req.(*v1.ListReportExportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BackofficeSystem_ListSev_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListSevRequest)
 	if err := dec(in); err != nil {
@@ -221,6 +255,10 @@ var BackofficeSystem_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetIntegrityConfig",
 			Handler:    _BackofficeSystem_SetIntegrityConfig_Handler,
+		},
+		{
+			MethodName: "ListReportExport",
+			Handler:    _BackofficeSystem_ListReportExport_Handler,
 		},
 		{
 			MethodName: "ListSev",

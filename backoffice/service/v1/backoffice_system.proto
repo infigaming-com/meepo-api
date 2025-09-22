@@ -23,6 +23,12 @@ service BackofficeSystem {
 			body: "*"
 		};
 	}
+	rpc ListReportExport(system.service.v1.ListReportExportRequest) returns (system.service.v1.ListReportExportResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/system/report/export/list"
+			body: "*"
+		};
+	};
 	rpc ListSev(ListSevRequest) returns (system.service.v1.ListSevResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/system/sev/list"

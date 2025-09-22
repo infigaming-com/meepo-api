@@ -369,10 +369,11 @@ const file_backoffice_service_v1_backoffice_system_proto_rawDesc = "" +
 	"\n" +
 	"\b_user_idB\r\n" +
 	"\v_start_timeB\v\n" +
-	"\t_end_time2\x9a\x05\n" +
+	"\t_end_time2\xbd\x06\n" +
 	"\x10BackofficeSystem\x12\xb4\x01\n" +
 	"\x13ListIntegrityStatus\x125.api.backoffice.service.v1.ListIntegrityStatusRequest\x1a..system.service.v1.ListIntegrityStatusResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/system/integrity/status/list\x12\xba\x01\n" +
-	"\x12SetIntegrityConfig\x124.api.backoffice.service.v1.SetIntegrityConfigRequest\x1a-.system.service.v1.SetIntegrityConfigResponse\"?\x82\xd3\xe4\x93\x029:\x01*\"4/v1/backoffice/system/integrity/file-info/config/set\x12\x83\x01\n" +
+	"\x12SetIntegrityConfig\x124.api.backoffice.service.v1.SetIntegrityConfigRequest\x1a-.system.service.v1.SetIntegrityConfigResponse\"?\x82\xd3\xe4\x93\x029:\x01*\"4/v1/backoffice/system/integrity/file-info/config/set\x12\xa0\x01\n" +
+	"\x10ListReportExport\x12*.system.service.v1.ListReportExportRequest\x1a+.system.service.v1.ListReportExportResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/system/report/export/list\x12\x83\x01\n" +
 	"\aListSev\x12).api.backoffice.service.v1.ListSevRequest\x1a\".system.service.v1.ListSevResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/backoffice/system/sev/list\x12\x8b\x01\n" +
 	"\tExportSev\x12+.api.backoffice.service.v1.ExportSevRequest\x1a$.system.service.v1.ExportSevResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/system/sev/exportB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
@@ -397,30 +398,34 @@ var file_backoffice_service_v1_backoffice_system_proto_goTypes = []any{
 	(*ExportSevRequest)(nil),               // 3: api.backoffice.service.v1.ExportSevRequest
 	(*v1.FileInfo)(nil),                    // 4: system.service.v1.FileInfo
 	(*timestamppb.Timestamp)(nil),          // 5: google.protobuf.Timestamp
-	(*v1.ListIntegrityStatusResponse)(nil), // 6: system.service.v1.ListIntegrityStatusResponse
-	(*v1.SetIntegrityConfigResponse)(nil),  // 7: system.service.v1.SetIntegrityConfigResponse
-	(*v1.ListSevResponse)(nil),             // 8: system.service.v1.ListSevResponse
-	(*v1.ExportSevResponse)(nil),           // 9: system.service.v1.ExportSevResponse
+	(*v1.ListReportExportRequest)(nil),     // 6: system.service.v1.ListReportExportRequest
+	(*v1.ListIntegrityStatusResponse)(nil), // 7: system.service.v1.ListIntegrityStatusResponse
+	(*v1.SetIntegrityConfigResponse)(nil),  // 8: system.service.v1.SetIntegrityConfigResponse
+	(*v1.ListReportExportResponse)(nil),    // 9: system.service.v1.ListReportExportResponse
+	(*v1.ListSevResponse)(nil),             // 10: system.service.v1.ListSevResponse
+	(*v1.ExportSevResponse)(nil),           // 11: system.service.v1.ExportSevResponse
 }
 var file_backoffice_service_v1_backoffice_system_proto_depIdxs = []int32{
-	4, // 0: api.backoffice.service.v1.SetIntegrityConfigRequest.file_infos:type_name -> system.service.v1.FileInfo
-	5, // 1: api.backoffice.service.v1.ListSevRequest.start_time:type_name -> google.protobuf.Timestamp
-	5, // 2: api.backoffice.service.v1.ListSevRequest.end_time:type_name -> google.protobuf.Timestamp
-	5, // 3: api.backoffice.service.v1.ExportSevRequest.start_time:type_name -> google.protobuf.Timestamp
-	5, // 4: api.backoffice.service.v1.ExportSevRequest.end_time:type_name -> google.protobuf.Timestamp
-	0, // 5: api.backoffice.service.v1.BackofficeSystem.ListIntegrityStatus:input_type -> api.backoffice.service.v1.ListIntegrityStatusRequest
-	1, // 6: api.backoffice.service.v1.BackofficeSystem.SetIntegrityConfig:input_type -> api.backoffice.service.v1.SetIntegrityConfigRequest
-	2, // 7: api.backoffice.service.v1.BackofficeSystem.ListSev:input_type -> api.backoffice.service.v1.ListSevRequest
-	3, // 8: api.backoffice.service.v1.BackofficeSystem.ExportSev:input_type -> api.backoffice.service.v1.ExportSevRequest
-	6, // 9: api.backoffice.service.v1.BackofficeSystem.ListIntegrityStatus:output_type -> system.service.v1.ListIntegrityStatusResponse
-	7, // 10: api.backoffice.service.v1.BackofficeSystem.SetIntegrityConfig:output_type -> system.service.v1.SetIntegrityConfigResponse
-	8, // 11: api.backoffice.service.v1.BackofficeSystem.ListSev:output_type -> system.service.v1.ListSevResponse
-	9, // 12: api.backoffice.service.v1.BackofficeSystem.ExportSev:output_type -> system.service.v1.ExportSevResponse
-	9, // [9:13] is the sub-list for method output_type
-	5, // [5:9] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	4,  // 0: api.backoffice.service.v1.SetIntegrityConfigRequest.file_infos:type_name -> system.service.v1.FileInfo
+	5,  // 1: api.backoffice.service.v1.ListSevRequest.start_time:type_name -> google.protobuf.Timestamp
+	5,  // 2: api.backoffice.service.v1.ListSevRequest.end_time:type_name -> google.protobuf.Timestamp
+	5,  // 3: api.backoffice.service.v1.ExportSevRequest.start_time:type_name -> google.protobuf.Timestamp
+	5,  // 4: api.backoffice.service.v1.ExportSevRequest.end_time:type_name -> google.protobuf.Timestamp
+	0,  // 5: api.backoffice.service.v1.BackofficeSystem.ListIntegrityStatus:input_type -> api.backoffice.service.v1.ListIntegrityStatusRequest
+	1,  // 6: api.backoffice.service.v1.BackofficeSystem.SetIntegrityConfig:input_type -> api.backoffice.service.v1.SetIntegrityConfigRequest
+	6,  // 7: api.backoffice.service.v1.BackofficeSystem.ListReportExport:input_type -> system.service.v1.ListReportExportRequest
+	2,  // 8: api.backoffice.service.v1.BackofficeSystem.ListSev:input_type -> api.backoffice.service.v1.ListSevRequest
+	3,  // 9: api.backoffice.service.v1.BackofficeSystem.ExportSev:input_type -> api.backoffice.service.v1.ExportSevRequest
+	7,  // 10: api.backoffice.service.v1.BackofficeSystem.ListIntegrityStatus:output_type -> system.service.v1.ListIntegrityStatusResponse
+	8,  // 11: api.backoffice.service.v1.BackofficeSystem.SetIntegrityConfig:output_type -> system.service.v1.SetIntegrityConfigResponse
+	9,  // 12: api.backoffice.service.v1.BackofficeSystem.ListReportExport:output_type -> system.service.v1.ListReportExportResponse
+	10, // 13: api.backoffice.service.v1.BackofficeSystem.ListSev:output_type -> system.service.v1.ListSevResponse
+	11, // 14: api.backoffice.service.v1.BackofficeSystem.ExportSev:output_type -> system.service.v1.ExportSevResponse
+	10, // [10:15] is the sub-list for method output_type
+	5,  // [5:10] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_system_proto_init() }
