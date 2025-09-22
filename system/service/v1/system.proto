@@ -100,7 +100,8 @@ message ListReportExportResponse {
 		int32 total_failed = 5;
 	}
 	repeated ReportExport tasks = 1;
-	int32 total_count = 2;
+	Statistic statistic = 2;
+	int32 total_count = 3;
 }
 
 message CreateReportExportRequest {

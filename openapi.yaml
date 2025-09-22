@@ -16310,6 +16310,8 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/system.service.v1.ListReportExportResponse_ReportExport'
+                statistic:
+                    $ref: '#/components/schemas/system.service.v1.ListReportExportResponse_Statistic'
                 totalCount:
                     type: integer
                     format: int32
@@ -16337,6 +16339,24 @@ components:
                     format: date-time
                 userId:
                     type: string
+        system.service.v1.ListReportExportResponse_Statistic:
+            type: object
+            properties:
+                totalCount:
+                    type: integer
+                    format: int32
+                totalCompleted:
+                    type: integer
+                    format: int32
+                totalGenerating:
+                    type: integer
+                    format: int32
+                totalPending:
+                    type: integer
+                    format: int32
+                totalFailed:
+                    type: integer
+                    format: int32
         system.service.v1.ListSevResponse:
             type: object
             properties:
