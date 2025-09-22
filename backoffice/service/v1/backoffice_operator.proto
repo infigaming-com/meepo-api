@@ -3,6 +3,7 @@ syntax = "proto3";
 package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
+import "user/service/v1/user.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -12,6 +13,55 @@ service BackofficeOperator {
 	rpc ListOperators(ListOperatorsRequest) returns (ListOperatorsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/operator/list"
+			body: "*"
+		};
+	}
+
+	rpc GetOperatorAccountSettings(GetOperatorAccountSettingsRequest) returns (user.service.v1.GetOperatorAccountSettingsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/account-settings/get"
+			body: "*"
+		};
+	}
+
+	rpc UpdateOperatorAccountSettings(UpdateOperatorAccountSettingsRequest) returns (user.service.v1.UpdateOperatorAccountSettingsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/account-settings/update"
+			body: "*"
+		};
+	}
+	
+	rpc AddRegisterLoginBlacklist(AddRegisterLoginBlacklistRequest) returns (user.service.v1.AddRegisterLoginBlacklistResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/register-login-blacklist/add"
+			body: "*"
+		};
+	}
+	
+	rpc DeleteRegisterLoginBlacklist(DeleteRegisterLoginBlacklistRequest) returns (user.service.v1.DeleteRegisterLoginBlacklistResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/register-login-blacklist/delete"
+			body: "*"
+		};
+	}
+	
+	rpc ListRegisterLoginBlacklist(ListRegisterLoginBlacklistRequest) returns (user.service.v1.ListRegisterLoginBlacklistResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/register-login-blacklist/list"
+			body: "*"
+		};
+	}
+
+	rpc SetOperatorRegisterLimitConfig(SetOperatorRegisterLimitConfigRequest) returns (user.service.v1.SetOperatorRegisterLimitConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/register-limit-config/set"
+			body: "*"
+		};
+	}
+	
+	rpc GetOperatorRegisterLimitConfig(GetOperatorRegisterLimitConfigRequest) returns (user.service.v1.GetOperatorRegisterLimitConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/register-limit-config/get"
 			body: "*"
 		};
 	}
@@ -27,4 +77,38 @@ message ListOperatorsResponse {
 		string operator_name = 2;
 	}
 	repeated Operator operators = 1;
+}
+
+message GetOperatorAccountSettingsRequest {
+}
+
+message UpdateOperatorAccountSettingsRequest {
+	user.service.v1.OperatorAccountSettings account_settings = 2;
+}
+
+message UpdateOperatorAccountSettingsResponse {
+}
+
+message AddRegisterLoginBlacklistRequest {
+	string id_type = 1;
+	repeated string ids = 2;
+}
+
+message DeleteRegisterLoginBlacklistRequest {
+	string id_type = 1;
+	repeated string ids = 2;
+}
+
+message ListRegisterLoginBlacklistRequest {
+	string id_type = 1;
+	optional int32 page = 2;
+	optional int32 page_size = 3;
+}
+
+
+message SetOperatorRegisterLimitConfigRequest {
+	map<string, user.service.v1.OperatorRegisterLimitConfig> config = 1;
+}
+
+message GetOperatorRegisterLimitConfigRequest {
 }

@@ -19,49 +19,56 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	User_Register_FullMethodName                     = "/api.user.service.v1.User/Register"
-	User_Login_FullMethodName                        = "/api.user.service.v1.User/Login"
-	User_LoginWithInfo_FullMethodName                = "/api.user.service.v1.User/LoginWithInfo"
-	User_RegisterOrLoginWithOAuth_FullMethodName     = "/api.user.service.v1.User/RegisterOrLoginWithOAuth"
-	User_RegisterOrLoginWithTelegram_FullMethodName  = "/api.user.service.v1.User/RegisterOrLoginWithTelegram"
-	User_RefreshToken_FullMethodName                 = "/api.user.service.v1.User/RefreshToken"
-	User_GetUser_FullMethodName                      = "/api.user.service.v1.User/GetUser"
-	User_GetUsersByIds_FullMethodName                = "/api.user.service.v1.User/GetUsersByIds"
-	User_GetUserIdsByOperatorIds_FullMethodName      = "/api.user.service.v1.User/GetUserIdsByOperatorIds"
-	User_Logout_FullMethodName                       = "/api.user.service.v1.User/Logout"
-	User_IsTokenRevoked_FullMethodName               = "/api.user.service.v1.User/IsTokenRevoked"
-	User_SetOperatorTagsConfig_FullMethodName        = "/api.user.service.v1.User/SetOperatorTagsConfig"
-	User_SetOperatorTags_FullMethodName              = "/api.user.service.v1.User/SetOperatorTags"
-	User_GetOperatorTagsConfig_FullMethodName        = "/api.user.service.v1.User/GetOperatorTagsConfig"
-	User_GetOperatorTags_FullMethodName              = "/api.user.service.v1.User/GetOperatorTags"
-	User_GetUserTags_FullMethodName                  = "/api.user.service.v1.User/GetUserTags"
-	User_GetUserTagsById_FullMethodName              = "/api.user.service.v1.User/GetUserTagsById"
-	User_SetUserTagsById_FullMethodName              = "/api.user.service.v1.User/SetUserTagsById"
-	User_CheckPermission_FullMethodName              = "/api.user.service.v1.User/CheckPermission"
-	User_AddOperator_FullMethodName                  = "/api.user.service.v1.User/AddOperator"
-	User_SendEmailVerificationCode_FullMethodName    = "/api.user.service.v1.User/SendEmailVerificationCode"
-	User_UpdateUser_FullMethodName                   = "/api.user.service.v1.User/UpdateUser"
-	User_ListUsers_FullMethodName                    = "/api.user.service.v1.User/ListUsers"
-	User_CreateUser_FullMethodName                   = "/api.user.service.v1.User/CreateUser"
-	User_VerifyEmail_FullMethodName                  = "/api.user.service.v1.User/VerifyEmail"
-	User_AddComment_FullMethodName                   = "/api.user.service.v1.User/AddComment"
-	User_GetCommentsByUserId_FullMethodName          = "/api.user.service.v1.User/GetCommentsByUserId"
-	User_GetUserProfile_FullMethodName               = "/api.user.service.v1.User/GetUserProfile"
-	User_CreateRole_FullMethodName                   = "/api.user.service.v1.User/CreateRole"
-	User_ListRoles_FullMethodName                    = "/api.user.service.v1.User/ListRoles"
-	User_CreateOperator_FullMethodName               = "/api.user.service.v1.User/CreateOperator"
-	User_UpdateRole_FullMethodName                   = "/api.user.service.v1.User/UpdateRole"
-	User_GetRole_FullMethodName                      = "/api.user.service.v1.User/GetRole"
-	User_DeleteRole_FullMethodName                   = "/api.user.service.v1.User/DeleteRole"
-	User_GetOverviewDashboardFromUser_FullMethodName = "/api.user.service.v1.User/GetOverviewDashboardFromUser"
-	User_GetOperatorIdByOrigin_FullMethodName        = "/api.user.service.v1.User/GetOperatorIdByOrigin"
-	User_GetOperator_FullMethodName                  = "/api.user.service.v1.User/GetOperator"
-	User_GetOperatorsByIds_FullMethodName            = "/api.user.service.v1.User/GetOperatorsByIds"
-	User_ListOperators_FullMethodName                = "/api.user.service.v1.User/ListOperators"
-	User_GetParentOperatorIds_FullMethodName         = "/api.user.service.v1.User/GetParentOperatorIds"
-	User_GetChildOperatorIds_FullMethodName          = "/api.user.service.v1.User/GetChildOperatorIds"
-	User_SendPasswordResetCode_FullMethodName        = "/api.user.service.v1.User/SendPasswordResetCode"
-	User_ResetPasswordWithCode_FullMethodName        = "/api.user.service.v1.User/ResetPasswordWithCode"
+	User_Register_FullMethodName                       = "/api.user.service.v1.User/Register"
+	User_Login_FullMethodName                          = "/api.user.service.v1.User/Login"
+	User_LoginWithInfo_FullMethodName                  = "/api.user.service.v1.User/LoginWithInfo"
+	User_RegisterOrLoginWithOAuth_FullMethodName       = "/api.user.service.v1.User/RegisterOrLoginWithOAuth"
+	User_RegisterOrLoginWithTelegram_FullMethodName    = "/api.user.service.v1.User/RegisterOrLoginWithTelegram"
+	User_RefreshToken_FullMethodName                   = "/api.user.service.v1.User/RefreshToken"
+	User_GetUser_FullMethodName                        = "/api.user.service.v1.User/GetUser"
+	User_GetUsersByIds_FullMethodName                  = "/api.user.service.v1.User/GetUsersByIds"
+	User_GetUserIdsByOperatorIds_FullMethodName        = "/api.user.service.v1.User/GetUserIdsByOperatorIds"
+	User_Logout_FullMethodName                         = "/api.user.service.v1.User/Logout"
+	User_IsTokenRevoked_FullMethodName                 = "/api.user.service.v1.User/IsTokenRevoked"
+	User_SetOperatorTagsConfig_FullMethodName          = "/api.user.service.v1.User/SetOperatorTagsConfig"
+	User_SetOperatorTags_FullMethodName                = "/api.user.service.v1.User/SetOperatorTags"
+	User_GetOperatorTagsConfig_FullMethodName          = "/api.user.service.v1.User/GetOperatorTagsConfig"
+	User_GetOperatorTags_FullMethodName                = "/api.user.service.v1.User/GetOperatorTags"
+	User_GetUserTags_FullMethodName                    = "/api.user.service.v1.User/GetUserTags"
+	User_GetUserTagsById_FullMethodName                = "/api.user.service.v1.User/GetUserTagsById"
+	User_SetUserTagsById_FullMethodName                = "/api.user.service.v1.User/SetUserTagsById"
+	User_CheckPermission_FullMethodName                = "/api.user.service.v1.User/CheckPermission"
+	User_AddOperator_FullMethodName                    = "/api.user.service.v1.User/AddOperator"
+	User_SendEmailVerificationCode_FullMethodName      = "/api.user.service.v1.User/SendEmailVerificationCode"
+	User_UpdateUser_FullMethodName                     = "/api.user.service.v1.User/UpdateUser"
+	User_ListUsers_FullMethodName                      = "/api.user.service.v1.User/ListUsers"
+	User_CreateUser_FullMethodName                     = "/api.user.service.v1.User/CreateUser"
+	User_VerifyEmail_FullMethodName                    = "/api.user.service.v1.User/VerifyEmail"
+	User_AddComment_FullMethodName                     = "/api.user.service.v1.User/AddComment"
+	User_GetCommentsByUserId_FullMethodName            = "/api.user.service.v1.User/GetCommentsByUserId"
+	User_GetUserProfile_FullMethodName                 = "/api.user.service.v1.User/GetUserProfile"
+	User_CreateRole_FullMethodName                     = "/api.user.service.v1.User/CreateRole"
+	User_ListRoles_FullMethodName                      = "/api.user.service.v1.User/ListRoles"
+	User_CreateOperator_FullMethodName                 = "/api.user.service.v1.User/CreateOperator"
+	User_UpdateRole_FullMethodName                     = "/api.user.service.v1.User/UpdateRole"
+	User_GetRole_FullMethodName                        = "/api.user.service.v1.User/GetRole"
+	User_DeleteRole_FullMethodName                     = "/api.user.service.v1.User/DeleteRole"
+	User_GetOverviewDashboardFromUser_FullMethodName   = "/api.user.service.v1.User/GetOverviewDashboardFromUser"
+	User_GetOperatorIdByOrigin_FullMethodName          = "/api.user.service.v1.User/GetOperatorIdByOrigin"
+	User_GetOperator_FullMethodName                    = "/api.user.service.v1.User/GetOperator"
+	User_GetOperatorsByIds_FullMethodName              = "/api.user.service.v1.User/GetOperatorsByIds"
+	User_ListOperators_FullMethodName                  = "/api.user.service.v1.User/ListOperators"
+	User_GetParentOperatorIds_FullMethodName           = "/api.user.service.v1.User/GetParentOperatorIds"
+	User_GetChildOperatorIds_FullMethodName            = "/api.user.service.v1.User/GetChildOperatorIds"
+	User_SendPasswordResetCode_FullMethodName          = "/api.user.service.v1.User/SendPasswordResetCode"
+	User_ResetPasswordWithCode_FullMethodName          = "/api.user.service.v1.User/ResetPasswordWithCode"
+	User_GetOperatorAccountSettings_FullMethodName     = "/api.user.service.v1.User/GetOperatorAccountSettings"
+	User_UpdateOperatorAccountSettings_FullMethodName  = "/api.user.service.v1.User/UpdateOperatorAccountSettings"
+	User_AddRegisterLoginBlacklist_FullMethodName      = "/api.user.service.v1.User/AddRegisterLoginBlacklist"
+	User_DeleteRegisterLoginBlacklist_FullMethodName   = "/api.user.service.v1.User/DeleteRegisterLoginBlacklist"
+	User_ListRegisterLoginBlacklist_FullMethodName     = "/api.user.service.v1.User/ListRegisterLoginBlacklist"
+	User_SetOperatorRegisterLimitConfig_FullMethodName = "/api.user.service.v1.User/SetOperatorRegisterLimitConfig"
+	User_GetOperatorRegisterLimitConfig_FullMethodName = "/api.user.service.v1.User/GetOperatorRegisterLimitConfig"
 )
 
 // UserClient is the client API for User service.
@@ -149,6 +156,13 @@ type UserClient interface {
 	SendPasswordResetCode(ctx context.Context, in *SendPasswordResetCodeRequest, opts ...grpc.CallOption) (*SendPasswordResetCodeResponse, error)
 	// Reset password using verification code
 	ResetPasswordWithCode(ctx context.Context, in *ResetPasswordWithCodeRequest, opts ...grpc.CallOption) (*ResetPasswordWithCodeResponse, error)
+	GetOperatorAccountSettings(ctx context.Context, in *GetOperatorAccountSettingsRequest, opts ...grpc.CallOption) (*GetOperatorAccountSettingsResponse, error)
+	UpdateOperatorAccountSettings(ctx context.Context, in *UpdateOperatorAccountSettingsRequest, opts ...grpc.CallOption) (*UpdateOperatorAccountSettingsResponse, error)
+	AddRegisterLoginBlacklist(ctx context.Context, in *AddRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*AddRegisterLoginBlacklistResponse, error)
+	DeleteRegisterLoginBlacklist(ctx context.Context, in *DeleteRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*DeleteRegisterLoginBlacklistResponse, error)
+	ListRegisterLoginBlacklist(ctx context.Context, in *ListRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*ListRegisterLoginBlacklistResponse, error)
+	SetOperatorRegisterLimitConfig(ctx context.Context, in *SetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*SetOperatorRegisterLimitConfigResponse, error)
+	GetOperatorRegisterLimitConfig(ctx context.Context, in *GetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*GetOperatorRegisterLimitConfigResponse, error)
 }
 
 type userClient struct {
@@ -589,6 +603,76 @@ func (c *userClient) ResetPasswordWithCode(ctx context.Context, in *ResetPasswor
 	return out, nil
 }
 
+func (c *userClient) GetOperatorAccountSettings(ctx context.Context, in *GetOperatorAccountSettingsRequest, opts ...grpc.CallOption) (*GetOperatorAccountSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorAccountSettingsResponse)
+	err := c.cc.Invoke(ctx, User_GetOperatorAccountSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) UpdateOperatorAccountSettings(ctx context.Context, in *UpdateOperatorAccountSettingsRequest, opts ...grpc.CallOption) (*UpdateOperatorAccountSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateOperatorAccountSettingsResponse)
+	err := c.cc.Invoke(ctx, User_UpdateOperatorAccountSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) AddRegisterLoginBlacklist(ctx context.Context, in *AddRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*AddRegisterLoginBlacklistResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddRegisterLoginBlacklistResponse)
+	err := c.cc.Invoke(ctx, User_AddRegisterLoginBlacklist_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) DeleteRegisterLoginBlacklist(ctx context.Context, in *DeleteRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*DeleteRegisterLoginBlacklistResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteRegisterLoginBlacklistResponse)
+	err := c.cc.Invoke(ctx, User_DeleteRegisterLoginBlacklist_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) ListRegisterLoginBlacklist(ctx context.Context, in *ListRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*ListRegisterLoginBlacklistResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListRegisterLoginBlacklistResponse)
+	err := c.cc.Invoke(ctx, User_ListRegisterLoginBlacklist_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) SetOperatorRegisterLimitConfig(ctx context.Context, in *SetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*SetOperatorRegisterLimitConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetOperatorRegisterLimitConfigResponse)
+	err := c.cc.Invoke(ctx, User_SetOperatorRegisterLimitConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetOperatorRegisterLimitConfig(ctx context.Context, in *GetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*GetOperatorRegisterLimitConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorRegisterLimitConfigResponse)
+	err := c.cc.Invoke(ctx, User_GetOperatorRegisterLimitConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -674,6 +758,13 @@ type UserServer interface {
 	SendPasswordResetCode(context.Context, *SendPasswordResetCodeRequest) (*SendPasswordResetCodeResponse, error)
 	// Reset password using verification code
 	ResetPasswordWithCode(context.Context, *ResetPasswordWithCodeRequest) (*ResetPasswordWithCodeResponse, error)
+	GetOperatorAccountSettings(context.Context, *GetOperatorAccountSettingsRequest) (*GetOperatorAccountSettingsResponse, error)
+	UpdateOperatorAccountSettings(context.Context, *UpdateOperatorAccountSettingsRequest) (*UpdateOperatorAccountSettingsResponse, error)
+	AddRegisterLoginBlacklist(context.Context, *AddRegisterLoginBlacklistRequest) (*AddRegisterLoginBlacklistResponse, error)
+	DeleteRegisterLoginBlacklist(context.Context, *DeleteRegisterLoginBlacklistRequest) (*DeleteRegisterLoginBlacklistResponse, error)
+	ListRegisterLoginBlacklist(context.Context, *ListRegisterLoginBlacklistRequest) (*ListRegisterLoginBlacklistResponse, error)
+	SetOperatorRegisterLimitConfig(context.Context, *SetOperatorRegisterLimitConfigRequest) (*SetOperatorRegisterLimitConfigResponse, error)
+	GetOperatorRegisterLimitConfig(context.Context, *GetOperatorRegisterLimitConfigRequest) (*GetOperatorRegisterLimitConfigResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -812,6 +903,27 @@ func (UnimplementedUserServer) SendPasswordResetCode(context.Context, *SendPassw
 }
 func (UnimplementedUserServer) ResetPasswordWithCode(context.Context, *ResetPasswordWithCodeRequest) (*ResetPasswordWithCodeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ResetPasswordWithCode not implemented")
+}
+func (UnimplementedUserServer) GetOperatorAccountSettings(context.Context, *GetOperatorAccountSettingsRequest) (*GetOperatorAccountSettingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorAccountSettings not implemented")
+}
+func (UnimplementedUserServer) UpdateOperatorAccountSettings(context.Context, *UpdateOperatorAccountSettingsRequest) (*UpdateOperatorAccountSettingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOperatorAccountSettings not implemented")
+}
+func (UnimplementedUserServer) AddRegisterLoginBlacklist(context.Context, *AddRegisterLoginBlacklistRequest) (*AddRegisterLoginBlacklistResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddRegisterLoginBlacklist not implemented")
+}
+func (UnimplementedUserServer) DeleteRegisterLoginBlacklist(context.Context, *DeleteRegisterLoginBlacklistRequest) (*DeleteRegisterLoginBlacklistResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteRegisterLoginBlacklist not implemented")
+}
+func (UnimplementedUserServer) ListRegisterLoginBlacklist(context.Context, *ListRegisterLoginBlacklistRequest) (*ListRegisterLoginBlacklistResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListRegisterLoginBlacklist not implemented")
+}
+func (UnimplementedUserServer) SetOperatorRegisterLimitConfig(context.Context, *SetOperatorRegisterLimitConfigRequest) (*SetOperatorRegisterLimitConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetOperatorRegisterLimitConfig not implemented")
+}
+func (UnimplementedUserServer) GetOperatorRegisterLimitConfig(context.Context, *GetOperatorRegisterLimitConfigRequest) (*GetOperatorRegisterLimitConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorRegisterLimitConfig not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -1608,6 +1720,132 @@ func _User_ResetPasswordWithCode_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_GetOperatorAccountSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorAccountSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetOperatorAccountSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetOperatorAccountSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetOperatorAccountSettings(ctx, req.(*GetOperatorAccountSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_UpdateOperatorAccountSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOperatorAccountSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).UpdateOperatorAccountSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_UpdateOperatorAccountSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).UpdateOperatorAccountSettings(ctx, req.(*UpdateOperatorAccountSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_AddRegisterLoginBlacklist_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddRegisterLoginBlacklistRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).AddRegisterLoginBlacklist(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_AddRegisterLoginBlacklist_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).AddRegisterLoginBlacklist(ctx, req.(*AddRegisterLoginBlacklistRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_DeleteRegisterLoginBlacklist_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteRegisterLoginBlacklistRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).DeleteRegisterLoginBlacklist(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_DeleteRegisterLoginBlacklist_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).DeleteRegisterLoginBlacklist(ctx, req.(*DeleteRegisterLoginBlacklistRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_ListRegisterLoginBlacklist_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListRegisterLoginBlacklistRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ListRegisterLoginBlacklist(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ListRegisterLoginBlacklist_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ListRegisterLoginBlacklist(ctx, req.(*ListRegisterLoginBlacklistRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_SetOperatorRegisterLimitConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetOperatorRegisterLimitConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).SetOperatorRegisterLimitConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_SetOperatorRegisterLimitConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).SetOperatorRegisterLimitConfig(ctx, req.(*SetOperatorRegisterLimitConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetOperatorRegisterLimitConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorRegisterLimitConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetOperatorRegisterLimitConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetOperatorRegisterLimitConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetOperatorRegisterLimitConfig(ctx, req.(*GetOperatorRegisterLimitConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1786,6 +2024,34 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ResetPasswordWithCode",
 			Handler:    _User_ResetPasswordWithCode_Handler,
+		},
+		{
+			MethodName: "GetOperatorAccountSettings",
+			Handler:    _User_GetOperatorAccountSettings_Handler,
+		},
+		{
+			MethodName: "UpdateOperatorAccountSettings",
+			Handler:    _User_UpdateOperatorAccountSettings_Handler,
+		},
+		{
+			MethodName: "AddRegisterLoginBlacklist",
+			Handler:    _User_AddRegisterLoginBlacklist_Handler,
+		},
+		{
+			MethodName: "DeleteRegisterLoginBlacklist",
+			Handler:    _User_DeleteRegisterLoginBlacklist_Handler,
+		},
+		{
+			MethodName: "ListRegisterLoginBlacklist",
+			Handler:    _User_ListRegisterLoginBlacklist_Handler,
+		},
+		{
+			MethodName: "SetOperatorRegisterLimitConfig",
+			Handler:    _User_SetOperatorRegisterLimitConfig_Handler,
+		},
+		{
+			MethodName: "GetOperatorRegisterLimitConfig",
+			Handler:    _User_GetOperatorRegisterLimitConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

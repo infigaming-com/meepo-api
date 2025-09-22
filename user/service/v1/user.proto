@@ -201,6 +201,24 @@ service User {
 		};
 	}
 
+	rpc GetOperatorAccountSettings(GetOperatorAccountSettingsRequest) returns (GetOperatorAccountSettingsResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/operator/account-settings/get"
+			body: "*"
+		};
+	}
+
+	rpc UpdateOperatorAccountSettings(UpdateOperatorAccountSettingsRequest) returns (UpdateOperatorAccountSettingsResponse) {}
+
+	rpc AddRegisterLoginBlacklist(AddRegisterLoginBlacklistRequest) returns (AddRegisterLoginBlacklistResponse) {}
+
+	rpc DeleteRegisterLoginBlacklist(DeleteRegisterLoginBlacklistRequest) returns (DeleteRegisterLoginBlacklistResponse) {}
+
+	rpc ListRegisterLoginBlacklist(ListRegisterLoginBlacklistRequest) returns (ListRegisterLoginBlacklistResponse) {}
+
+	rpc SetOperatorRegisterLimitConfig(SetOperatorRegisterLimitConfigRequest) returns (SetOperatorRegisterLimitConfigResponse) {}
+
+	rpc GetOperatorRegisterLimitConfig(GetOperatorRegisterLimitConfigRequest) returns (GetOperatorRegisterLimitConfigResponse) {}
 }
 
 // UserInfo contains basic user information.
@@ -869,4 +887,114 @@ message ResetPasswordWithCodeRequest {
 }
 
 message ResetPasswordWithCodeResponse {
+}
+
+message OperatorAccountPasswordSettings {
+	int32 min_characters = 1;
+	int32 min_uppercase_characters = 2;
+	int32 min_lowercase_characters = 3;
+	int32 min_special_characters = 4;
+	int32 min_digits = 5;
+}
+
+message OperatorAccountSecuritySettings {
+	int32 max_password_retries = 1;
+	int32 password_expiry_days = 2;
+	int32 password_history_limits = 3;
+}
+
+message OperatorAccountGameSettings {
+	bool no_game_without_deposit = 1;
+	int32 min_game_kyc_level = 2;
+}
+
+message OperatorAccountPaymentSettings {
+	int32 min_deposit_kyc_level = 1;
+	int32 min_withdraw_kyc_level = 2;
+}
+
+message OperatorAccountSettings {
+	OperatorAccountPasswordSettings password_settings = 1;
+	OperatorAccountSecuritySettings security_settings = 2;
+	OperatorAccountGameSettings game_settings = 3;
+	OperatorAccountPaymentSettings payment_settings = 4;
+}
+
+message OperatorConfig {
+	optional string swap_fee_percentage = 1;
+	optional OperatorAccountSettings account_settings = 2;
+}
+
+message GetOperatorAccountSettingsRequest {
+	int64 operator_id = 1;
+}
+
+message GetOperatorAccountSettingsResponse {
+	OperatorAccountSettings account_settings = 1;
+}
+
+message UpdateOperatorAccountSettingsRequest {
+	int64 operator_id = 1;
+	OperatorAccountSettings account_settings = 2;
+}
+
+message UpdateOperatorAccountSettingsResponse {
+}
+
+
+message AddRegisterLoginBlacklistRequest {
+	int64 operator_id = 1;
+	string id_type = 2;
+	repeated string ids = 3;
+}
+
+message AddRegisterLoginBlacklistResponse {
+}
+
+message DeleteRegisterLoginBlacklistRequest {
+	int64 operator_id = 1;
+	string id_type = 2;
+	repeated string ids = 3;
+}
+
+message DeleteRegisterLoginBlacklistResponse {
+}
+
+message ListRegisterLoginBlacklistRequest {
+	int64 operator_id = 1;
+	string id_type = 2;
+	optional int32 page = 3;
+	optional int32 page_size = 4;
+}
+
+message ListRegisterLoginBlacklistResponse {
+	message RegisterLoginBlacklist {
+		string id = 1;
+		google.protobuf.Timestamp created_at = 2;
+		string source = 3;
+	}
+	repeated RegisterLoginBlacklist register_login_blacklists = 1;
+	int32 page = 2;
+	int32 page_size = 3;
+	int32 total = 4;
+}
+
+message OperatorRegisterLimitConfig {
+	int32 registration_limit_per_ip = 1;
+}
+
+message SetOperatorRegisterLimitConfigRequest {
+	int64 operator_id = 1;
+	map<string, OperatorRegisterLimitConfig> config = 2;
+}
+
+message SetOperatorRegisterLimitConfigResponse {
+}
+
+message GetOperatorRegisterLimitConfigRequest {
+	int64 operator_id = 1;
+}
+
+message GetOperatorRegisterLimitConfigResponse {
+	map<string, OperatorRegisterLimitConfig> config = 1;
 }

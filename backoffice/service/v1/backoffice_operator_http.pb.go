@@ -10,6 +10,7 @@ import (
 	context "context"
 	http "github.com/go-kratos/kratos/v2/transport/http"
 	binding "github.com/go-kratos/kratos/v2/transport/http/binding"
+	v1 "github.com/infigaming-com/meepo-api/user/service/v1"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -19,15 +20,36 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationBackofficeOperatorAddRegisterLoginBlacklist = "/api.backoffice.service.v1.BackofficeOperator/AddRegisterLoginBlacklist"
+const OperationBackofficeOperatorDeleteRegisterLoginBlacklist = "/api.backoffice.service.v1.BackofficeOperator/DeleteRegisterLoginBlacklist"
+const OperationBackofficeOperatorGetOperatorAccountSettings = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorAccountSettings"
+const OperationBackofficeOperatorGetOperatorRegisterLimitConfig = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorRegisterLimitConfig"
 const OperationBackofficeOperatorListOperators = "/api.backoffice.service.v1.BackofficeOperator/ListOperators"
+const OperationBackofficeOperatorListRegisterLoginBlacklist = "/api.backoffice.service.v1.BackofficeOperator/ListRegisterLoginBlacklist"
+const OperationBackofficeOperatorSetOperatorRegisterLimitConfig = "/api.backoffice.service.v1.BackofficeOperator/SetOperatorRegisterLimitConfig"
+const OperationBackofficeOperatorUpdateOperatorAccountSettings = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorAccountSettings"
 
 type BackofficeOperatorHTTPServer interface {
+	AddRegisterLoginBlacklist(context.Context, *AddRegisterLoginBlacklistRequest) (*v1.AddRegisterLoginBlacklistResponse, error)
+	DeleteRegisterLoginBlacklist(context.Context, *DeleteRegisterLoginBlacklistRequest) (*v1.DeleteRegisterLoginBlacklistResponse, error)
+	GetOperatorAccountSettings(context.Context, *GetOperatorAccountSettingsRequest) (*v1.GetOperatorAccountSettingsResponse, error)
+	GetOperatorRegisterLimitConfig(context.Context, *GetOperatorRegisterLimitConfigRequest) (*v1.GetOperatorRegisterLimitConfigResponse, error)
 	ListOperators(context.Context, *ListOperatorsRequest) (*ListOperatorsResponse, error)
+	ListRegisterLoginBlacklist(context.Context, *ListRegisterLoginBlacklistRequest) (*v1.ListRegisterLoginBlacklistResponse, error)
+	SetOperatorRegisterLimitConfig(context.Context, *SetOperatorRegisterLimitConfigRequest) (*v1.SetOperatorRegisterLimitConfigResponse, error)
+	UpdateOperatorAccountSettings(context.Context, *UpdateOperatorAccountSettingsRequest) (*v1.UpdateOperatorAccountSettingsResponse, error)
 }
 
 func RegisterBackofficeOperatorHTTPServer(s *http.Server, srv BackofficeOperatorHTTPServer) {
 	r := s.Route("/")
 	r.POST("/v1/backoffice/operator/list", _BackofficeOperator_ListOperators0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/account-settings/get", _BackofficeOperator_GetOperatorAccountSettings1_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/account-settings/update", _BackofficeOperator_UpdateOperatorAccountSettings0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/register-login-blacklist/add", _BackofficeOperator_AddRegisterLoginBlacklist0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/register-login-blacklist/delete", _BackofficeOperator_DeleteRegisterLoginBlacklist0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/register-login-blacklist/list", _BackofficeOperator_ListRegisterLoginBlacklist0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/register-limit-config/set", _BackofficeOperator_SetOperatorRegisterLimitConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/operator/register-limit-config/get", _BackofficeOperator_GetOperatorRegisterLimitConfig0_HTTP_Handler(srv))
 }
 
 func _BackofficeOperator_ListOperators0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
@@ -52,8 +74,169 @@ func _BackofficeOperator_ListOperators0_HTTP_Handler(srv BackofficeOperatorHTTPS
 	}
 }
 
+func _BackofficeOperator_GetOperatorAccountSettings1_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetOperatorAccountSettingsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOperatorGetOperatorAccountSettings)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetOperatorAccountSettings(ctx, req.(*GetOperatorAccountSettingsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.GetOperatorAccountSettingsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeOperator_UpdateOperatorAccountSettings0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateOperatorAccountSettingsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOperatorUpdateOperatorAccountSettings)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateOperatorAccountSettings(ctx, req.(*UpdateOperatorAccountSettingsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.UpdateOperatorAccountSettingsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeOperator_AddRegisterLoginBlacklist0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in AddRegisterLoginBlacklistRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOperatorAddRegisterLoginBlacklist)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.AddRegisterLoginBlacklist(ctx, req.(*AddRegisterLoginBlacklistRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.AddRegisterLoginBlacklistResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeOperator_DeleteRegisterLoginBlacklist0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DeleteRegisterLoginBlacklistRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOperatorDeleteRegisterLoginBlacklist)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteRegisterLoginBlacklist(ctx, req.(*DeleteRegisterLoginBlacklistRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.DeleteRegisterLoginBlacklistResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeOperator_ListRegisterLoginBlacklist0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListRegisterLoginBlacklistRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOperatorListRegisterLoginBlacklist)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListRegisterLoginBlacklist(ctx, req.(*ListRegisterLoginBlacklistRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ListRegisterLoginBlacklistResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeOperator_SetOperatorRegisterLimitConfig0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in SetOperatorRegisterLimitConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOperatorSetOperatorRegisterLimitConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SetOperatorRegisterLimitConfig(ctx, req.(*SetOperatorRegisterLimitConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.SetOperatorRegisterLimitConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeOperator_GetOperatorRegisterLimitConfig0_HTTP_Handler(srv BackofficeOperatorHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetOperatorRegisterLimitConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeOperatorGetOperatorRegisterLimitConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetOperatorRegisterLimitConfig(ctx, req.(*GetOperatorRegisterLimitConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.GetOperatorRegisterLimitConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeOperatorHTTPClient interface {
+	AddRegisterLoginBlacklist(ctx context.Context, req *AddRegisterLoginBlacklistRequest, opts ...http.CallOption) (rsp *v1.AddRegisterLoginBlacklistResponse, err error)
+	DeleteRegisterLoginBlacklist(ctx context.Context, req *DeleteRegisterLoginBlacklistRequest, opts ...http.CallOption) (rsp *v1.DeleteRegisterLoginBlacklistResponse, err error)
+	GetOperatorAccountSettings(ctx context.Context, req *GetOperatorAccountSettingsRequest, opts ...http.CallOption) (rsp *v1.GetOperatorAccountSettingsResponse, err error)
+	GetOperatorRegisterLimitConfig(ctx context.Context, req *GetOperatorRegisterLimitConfigRequest, opts ...http.CallOption) (rsp *v1.GetOperatorRegisterLimitConfigResponse, err error)
 	ListOperators(ctx context.Context, req *ListOperatorsRequest, opts ...http.CallOption) (rsp *ListOperatorsResponse, err error)
+	ListRegisterLoginBlacklist(ctx context.Context, req *ListRegisterLoginBlacklistRequest, opts ...http.CallOption) (rsp *v1.ListRegisterLoginBlacklistResponse, err error)
+	SetOperatorRegisterLimitConfig(ctx context.Context, req *SetOperatorRegisterLimitConfigRequest, opts ...http.CallOption) (rsp *v1.SetOperatorRegisterLimitConfigResponse, err error)
+	UpdateOperatorAccountSettings(ctx context.Context, req *UpdateOperatorAccountSettingsRequest, opts ...http.CallOption) (rsp *v1.UpdateOperatorAccountSettingsResponse, err error)
 }
 
 type BackofficeOperatorHTTPClientImpl struct {
@@ -64,11 +247,102 @@ func NewBackofficeOperatorHTTPClient(client *http.Client) BackofficeOperatorHTTP
 	return &BackofficeOperatorHTTPClientImpl{client}
 }
 
+func (c *BackofficeOperatorHTTPClientImpl) AddRegisterLoginBlacklist(ctx context.Context, in *AddRegisterLoginBlacklistRequest, opts ...http.CallOption) (*v1.AddRegisterLoginBlacklistResponse, error) {
+	var out v1.AddRegisterLoginBlacklistResponse
+	pattern := "/v1/backoffice/operator/register-login-blacklist/add"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOperatorAddRegisterLoginBlacklist))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeOperatorHTTPClientImpl) DeleteRegisterLoginBlacklist(ctx context.Context, in *DeleteRegisterLoginBlacklistRequest, opts ...http.CallOption) (*v1.DeleteRegisterLoginBlacklistResponse, error) {
+	var out v1.DeleteRegisterLoginBlacklistResponse
+	pattern := "/v1/backoffice/operator/register-login-blacklist/delete"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOperatorDeleteRegisterLoginBlacklist))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeOperatorHTTPClientImpl) GetOperatorAccountSettings(ctx context.Context, in *GetOperatorAccountSettingsRequest, opts ...http.CallOption) (*v1.GetOperatorAccountSettingsResponse, error) {
+	var out v1.GetOperatorAccountSettingsResponse
+	pattern := "/v1/backoffice/operator/account-settings/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOperatorGetOperatorAccountSettings))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeOperatorHTTPClientImpl) GetOperatorRegisterLimitConfig(ctx context.Context, in *GetOperatorRegisterLimitConfigRequest, opts ...http.CallOption) (*v1.GetOperatorRegisterLimitConfigResponse, error) {
+	var out v1.GetOperatorRegisterLimitConfigResponse
+	pattern := "/v1/backoffice/operator/register-limit-config/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOperatorGetOperatorRegisterLimitConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *BackofficeOperatorHTTPClientImpl) ListOperators(ctx context.Context, in *ListOperatorsRequest, opts ...http.CallOption) (*ListOperatorsResponse, error) {
 	var out ListOperatorsResponse
 	pattern := "/v1/backoffice/operator/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeOperatorListOperators))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeOperatorHTTPClientImpl) ListRegisterLoginBlacklist(ctx context.Context, in *ListRegisterLoginBlacklistRequest, opts ...http.CallOption) (*v1.ListRegisterLoginBlacklistResponse, error) {
+	var out v1.ListRegisterLoginBlacklistResponse
+	pattern := "/v1/backoffice/operator/register-login-blacklist/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOperatorListRegisterLoginBlacklist))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeOperatorHTTPClientImpl) SetOperatorRegisterLimitConfig(ctx context.Context, in *SetOperatorRegisterLimitConfigRequest, opts ...http.CallOption) (*v1.SetOperatorRegisterLimitConfigResponse, error) {
+	var out v1.SetOperatorRegisterLimitConfigResponse
+	pattern := "/v1/backoffice/operator/register-limit-config/set"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOperatorSetOperatorRegisterLimitConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeOperatorHTTPClientImpl) UpdateOperatorAccountSettings(ctx context.Context, in *UpdateOperatorAccountSettingsRequest, opts ...http.CallOption) (*v1.UpdateOperatorAccountSettingsResponse, error) {
+	var out v1.UpdateOperatorAccountSettingsResponse
+	pattern := "/v1/backoffice/operator/account-settings/update"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeOperatorUpdateOperatorAccountSettings))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
