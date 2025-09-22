@@ -10933,6 +10933,202 @@ var _ interface {
 	ErrorName() string
 } = GetBetAndEventInfoRequestValidationError{}
 
+// Validate checks the field values on BetInfo with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *BetInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BetInfo with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in BetInfoMultiError, or nil if none found.
+func (m *BetInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BetInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for ProviderBetId
+
+	// no validation rules for RoundId
+
+	// no validation rules for ProviderRoundId
+
+	// no validation rules for Currency
+
+	// no validation rules for SettlementCurrency
+
+	// no validation rules for UserId
+
+	// no validation rules for GameId
+
+	// no validation rules for GameName
+
+	// no validation rules for GameCategory
+
+	// no validation rules for BetAmount
+
+	// no validation rules for SettlementBetAmount
+
+	// no validation rules for WinAmount
+
+	// no validation rules for SettlementWinAmount
+
+	// no validation rules for RollbackBetAmount
+
+	// no validation rules for RollbackWinAmount
+
+	// no validation rules for CreatedAt
+
+	// no validation rules for UpdatedAt
+
+	// no validation rules for Status
+
+	// no validation rules for ProviderId
+
+	// no validation rules for ProviderName
+
+	// no validation rules for OperatorId
+
+	// no validation rules for OperatorName
+
+	// no validation rules for WinCount
+
+	// no validation rules for Turnover
+
+	// no validation rules for BetAmountUsd
+
+	// no validation rules for SettlementBetAmountUsd
+
+	// no validation rules for WinAmountUsd
+
+	// no validation rules for SettlementWinAmountUsd
+
+	// no validation rules for TurnoverUsd
+
+	// no validation rules for RollbackBetAmountUsd
+
+	// no validation rules for RollbackWinAmountUsd
+
+	// no validation rules for SystemOperatorId
+
+	// no validation rules for RetailerOperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for ReportingCurrency
+
+	// no validation rules for AmountReportingCurrency
+
+	// no validation rules for BetAmountReportingCurrency
+
+	// no validation rules for SettlementBetAmountReportingCurrency
+
+	// no validation rules for WinAmountReportingCurrency
+
+	// no validation rules for SettlementWinAmountReportingCurrency
+
+	// no validation rules for TurnoverReportingCurrency
+
+	// no validation rules for RollbackBetAmountReportingCurrency
+
+	// no validation rules for RollbackWinAmountReportingCurrency
+
+	// no validation rules for Finished
+
+	// no validation rules for WagerType
+
+	// no validation rules for SettleTime
+
+	// no validation rules for Odds
+
+	// no validation rules for WinMultiplier
+
+	if len(errors) > 0 {
+		return BetInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// BetInfoMultiError is an error wrapping multiple validation errors returned
+// by BetInfo.ValidateAll() if the designated constraints aren't met.
+type BetInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BetInfoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BetInfoMultiError) AllErrors() []error { return m }
+
+// BetInfoValidationError is the validation error returned by BetInfo.Validate
+// if the designated constraints aren't met.
+type BetInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BetInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BetInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BetInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BetInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BetInfoValidationError) ErrorName() string { return "BetInfoValidationError" }
+
+// Error satisfies the builtin error interface
+func (e BetInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBetInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BetInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BetInfoValidationError{}
+
 // Validate checks the field values on GetBetAndEventInfoResponse with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -11205,6 +11401,204 @@ var _ interface {
 	ErrorName() string
 } = GetTransactionAndEventInfoRequestValidationError{}
 
+// Validate checks the field values on TransactionInfo with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *TransactionInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on TransactionInfo with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// TransactionInfoMultiError, or nil if none found.
+func (m *TransactionInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *TransactionInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for RoundId
+
+	// no validation rules for Action
+
+	// no validation rules for BetId
+
+	// no validation rules for ProviderBetId
+
+	// no validation rules for ProviderTransactionId
+
+	// no validation rules for ProviderExternalTransactionId
+
+	// no validation rules for UpdateBalance
+
+	// no validation rules for TakeAll
+
+	// no validation rules for IsRefund
+
+	// no validation rules for Amount
+
+	// no validation rules for SettlementAmount
+
+	// no validation rules for UserId
+
+	// no validation rules for Currency
+
+	// no validation rules for SettlementCurrency
+
+	// no validation rules for GameId
+
+	// no validation rules for GameName
+
+	// no validation rules for GameCategory
+
+	// no validation rules for JackpotContribution
+
+	// no validation rules for JackpotWin
+
+	// no validation rules for BetTime
+
+	// no validation rules for SettleTime
+
+	// no validation rules for ProviderTimestamp
+
+	// no validation rules for BonusAmount
+
+	// no validation rules for OperatorTimestamp
+
+	// no validation rules for ProcessedAt
+
+	// no validation rules for CreatedAt
+
+	// no validation rules for UpdatedAt
+
+	// no validation rules for ProviderId
+
+	// no validation rules for ProviderName
+
+	// no validation rules for OperatorId
+
+	// no validation rules for OperatorName
+
+	// no validation rules for Turnover
+
+	// no validation rules for AmountUsd
+
+	// no validation rules for SettlementAmountUsd
+
+	// no validation rules for TurnoverUsd
+
+	// no validation rules for BonusAmountUsd
+
+	// no validation rules for JackpotContributionUsd
+
+	// no validation rules for JackpotWinUsd
+
+	// no validation rules for SystemOperatorId
+
+	// no validation rules for RetailerOperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for ReportingCurrency
+
+	// no validation rules for AmountReportingCurrency
+
+	// no validation rules for SettlementAmountReportingCurrency
+
+	// no validation rules for TurnoverReportingCurrency
+
+	// no validation rules for BonusAmountReportingCurrency
+
+	// no validation rules for JackpotContributionReportingCurrency
+
+	// no validation rules for JackpotWinReportingCurrency
+
+	if len(errors) > 0 {
+		return TransactionInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// TransactionInfoMultiError is an error wrapping multiple validation errors
+// returned by TransactionInfo.ValidateAll() if the designated constraints
+// aren't met.
+type TransactionInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m TransactionInfoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m TransactionInfoMultiError) AllErrors() []error { return m }
+
+// TransactionInfoValidationError is the validation error returned by
+// TransactionInfo.Validate if the designated constraints aren't met.
+type TransactionInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e TransactionInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e TransactionInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e TransactionInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e TransactionInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e TransactionInfoValidationError) ErrorName() string { return "TransactionInfoValidationError" }
+
+// Error satisfies the builtin error interface
+func (e TransactionInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sTransactionInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = TransactionInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = TransactionInfoValidationError{}
+
 // Validate checks the field values on GetTransactionAndEventInfoResponse with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the first error encountered is returned, or nil if there are
@@ -11251,6 +11645,35 @@ func (m *GetTransactionAndEventInfoResponse) validate(all bool) error {
 		if err := v.Validate(); err != nil {
 			return GetTransactionAndEventInfoResponseValidationError{
 				field:  "TransactionInfo",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetBetInfo()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTransactionAndEventInfoResponseValidationError{
+					field:  "BetInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTransactionAndEventInfoResponseValidationError{
+					field:  "BetInfo",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetBetInfo()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTransactionAndEventInfoResponseValidationError{
+				field:  "BetInfo",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -14848,427 +15271,6 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListSportEventsResponse_SportEventValidationError{}
-
-// Validate checks the field values on GetBetAndEventInfoResponse_BetInfo with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *GetBetAndEventInfoResponse_BetInfo) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on GetBetAndEventInfoResponse_BetInfo
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// GetBetAndEventInfoResponse_BetInfoMultiError, or nil if none found.
-func (m *GetBetAndEventInfoResponse_BetInfo) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *GetBetAndEventInfoResponse_BetInfo) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Id
-
-	// no validation rules for ProviderBetId
-
-	// no validation rules for RoundId
-
-	// no validation rules for ProviderRoundId
-
-	// no validation rules for Currency
-
-	// no validation rules for SettlementCurrency
-
-	// no validation rules for UserId
-
-	// no validation rules for GameId
-
-	// no validation rules for GameName
-
-	// no validation rules for GameCategory
-
-	// no validation rules for BetAmount
-
-	// no validation rules for SettlementBetAmount
-
-	// no validation rules for WinAmount
-
-	// no validation rules for SettlementWinAmount
-
-	// no validation rules for RollbackBetAmount
-
-	// no validation rules for RollbackWinAmount
-
-	// no validation rules for CreatedAt
-
-	// no validation rules for UpdatedAt
-
-	// no validation rules for Status
-
-	// no validation rules for ProviderId
-
-	// no validation rules for ProviderName
-
-	// no validation rules for OperatorId
-
-	// no validation rules for OperatorName
-
-	// no validation rules for WinCount
-
-	// no validation rules for Turnover
-
-	// no validation rules for BetAmountUsd
-
-	// no validation rules for SettlementBetAmountUsd
-
-	// no validation rules for WinAmountUsd
-
-	// no validation rules for SettlementWinAmountUsd
-
-	// no validation rules for TurnoverUsd
-
-	// no validation rules for RollbackBetAmountUsd
-
-	// no validation rules for RollbackWinAmountUsd
-
-	// no validation rules for SystemOperatorId
-
-	// no validation rules for RetailerOperatorId
-
-	// no validation rules for CompanyOperatorId
-
-	// no validation rules for ReportingCurrency
-
-	// no validation rules for AmountReportingCurrency
-
-	// no validation rules for BetAmountReportingCurrency
-
-	// no validation rules for SettlementBetAmountReportingCurrency
-
-	// no validation rules for WinAmountReportingCurrency
-
-	// no validation rules for SettlementWinAmountReportingCurrency
-
-	// no validation rules for TurnoverReportingCurrency
-
-	// no validation rules for RollbackBetAmountReportingCurrency
-
-	// no validation rules for RollbackWinAmountReportingCurrency
-
-	// no validation rules for Finished
-
-	// no validation rules for WagerType
-
-	// no validation rules for SettleTime
-
-	// no validation rules for Odds
-
-	// no validation rules for WinMultiplier
-
-	if len(errors) > 0 {
-		return GetBetAndEventInfoResponse_BetInfoMultiError(errors)
-	}
-
-	return nil
-}
-
-// GetBetAndEventInfoResponse_BetInfoMultiError is an error wrapping multiple
-// validation errors returned by
-// GetBetAndEventInfoResponse_BetInfo.ValidateAll() if the designated
-// constraints aren't met.
-type GetBetAndEventInfoResponse_BetInfoMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m GetBetAndEventInfoResponse_BetInfoMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m GetBetAndEventInfoResponse_BetInfoMultiError) AllErrors() []error { return m }
-
-// GetBetAndEventInfoResponse_BetInfoValidationError is the validation error
-// returned by GetBetAndEventInfoResponse_BetInfo.Validate if the designated
-// constraints aren't met.
-type GetBetAndEventInfoResponse_BetInfoValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e GetBetAndEventInfoResponse_BetInfoValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e GetBetAndEventInfoResponse_BetInfoValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e GetBetAndEventInfoResponse_BetInfoValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e GetBetAndEventInfoResponse_BetInfoValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e GetBetAndEventInfoResponse_BetInfoValidationError) ErrorName() string {
-	return "GetBetAndEventInfoResponse_BetInfoValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e GetBetAndEventInfoResponse_BetInfoValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sGetBetAndEventInfoResponse_BetInfo.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = GetBetAndEventInfoResponse_BetInfoValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = GetBetAndEventInfoResponse_BetInfoValidationError{}
-
-// Validate checks the field values on
-// GetTransactionAndEventInfoResponse_TransactionInfo with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *GetTransactionAndEventInfoResponse_TransactionInfo) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on
-// GetTransactionAndEventInfoResponse_TransactionInfo with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in
-// GetTransactionAndEventInfoResponse_TransactionInfoMultiError, or nil if
-// none found.
-func (m *GetTransactionAndEventInfoResponse_TransactionInfo) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *GetTransactionAndEventInfoResponse_TransactionInfo) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Id
-
-	// no validation rules for RoundId
-
-	// no validation rules for Action
-
-	// no validation rules for BetId
-
-	// no validation rules for ProviderBetId
-
-	// no validation rules for ProviderTransactionId
-
-	// no validation rules for ProviderExternalTransactionId
-
-	// no validation rules for UpdateBalance
-
-	// no validation rules for TakeAll
-
-	// no validation rules for IsRefund
-
-	// no validation rules for Amount
-
-	// no validation rules for SettlementAmount
-
-	// no validation rules for UserId
-
-	// no validation rules for Currency
-
-	// no validation rules for SettlementCurrency
-
-	// no validation rules for GameId
-
-	// no validation rules for GameName
-
-	// no validation rules for GameCategory
-
-	// no validation rules for JackpotContribution
-
-	// no validation rules for JackpotWin
-
-	// no validation rules for BetTime
-
-	// no validation rules for SettleTime
-
-	// no validation rules for ProviderTimestamp
-
-	// no validation rules for BonusAmount
-
-	// no validation rules for OperatorTimestamp
-
-	// no validation rules for ProcessedAt
-
-	// no validation rules for CreatedAt
-
-	// no validation rules for UpdatedAt
-
-	// no validation rules for ProviderId
-
-	// no validation rules for ProviderName
-
-	// no validation rules for OperatorId
-
-	// no validation rules for OperatorName
-
-	// no validation rules for Turnover
-
-	// no validation rules for AmountUsd
-
-	// no validation rules for SettlementAmountUsd
-
-	// no validation rules for TurnoverUsd
-
-	// no validation rules for BonusAmountUsd
-
-	// no validation rules for JackpotContributionUsd
-
-	// no validation rules for JackpotWinUsd
-
-	// no validation rules for SystemOperatorId
-
-	// no validation rules for RetailerOperatorId
-
-	// no validation rules for CompanyOperatorId
-
-	// no validation rules for ReportingCurrency
-
-	// no validation rules for AmountReportingCurrency
-
-	// no validation rules for SettlementAmountReportingCurrency
-
-	// no validation rules for TurnoverReportingCurrency
-
-	// no validation rules for BonusAmountReportingCurrency
-
-	// no validation rules for JackpotContributionReportingCurrency
-
-	// no validation rules for JackpotWinReportingCurrency
-
-	// no validation rules for Odds
-
-	// no validation rules for WinMultiplier
-
-	// no validation rules for WagerType
-
-	if len(errors) > 0 {
-		return GetTransactionAndEventInfoResponse_TransactionInfoMultiError(errors)
-	}
-
-	return nil
-}
-
-// GetTransactionAndEventInfoResponse_TransactionInfoMultiError is an error
-// wrapping multiple validation errors returned by
-// GetTransactionAndEventInfoResponse_TransactionInfo.ValidateAll() if the
-// designated constraints aren't met.
-type GetTransactionAndEventInfoResponse_TransactionInfoMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m GetTransactionAndEventInfoResponse_TransactionInfoMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m GetTransactionAndEventInfoResponse_TransactionInfoMultiError) AllErrors() []error { return m }
-
-// GetTransactionAndEventInfoResponse_TransactionInfoValidationError is the
-// validation error returned by
-// GetTransactionAndEventInfoResponse_TransactionInfo.Validate if the
-// designated constraints aren't met.
-type GetTransactionAndEventInfoResponse_TransactionInfoValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e GetTransactionAndEventInfoResponse_TransactionInfoValidationError) Field() string {
-	return e.field
-}
-
-// Reason function returns reason value.
-func (e GetTransactionAndEventInfoResponse_TransactionInfoValidationError) Reason() string {
-	return e.reason
-}
-
-// Cause function returns cause value.
-func (e GetTransactionAndEventInfoResponse_TransactionInfoValidationError) Cause() error {
-	return e.cause
-}
-
-// Key function returns key value.
-func (e GetTransactionAndEventInfoResponse_TransactionInfoValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e GetTransactionAndEventInfoResponse_TransactionInfoValidationError) ErrorName() string {
-	return "GetTransactionAndEventInfoResponse_TransactionInfoValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e GetTransactionAndEventInfoResponse_TransactionInfoValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sGetTransactionAndEventInfoResponse_TransactionInfo.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = GetTransactionAndEventInfoResponse_TransactionInfoValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = GetTransactionAndEventInfoResponse_TransactionInfoValidationError{}
 
 // Validate checks the field values on
 // ListCustomerStrikeReportsResponse_CustomerStrikeReport with the rules
