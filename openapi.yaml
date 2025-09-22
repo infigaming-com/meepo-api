@@ -9200,7 +9200,7 @@ components:
                 page:
                     type: integer
                     format: int32
-                pageCount:
+                pageSize:
                     type: integer
                     format: int32
                 operatorContextFilters:

@@ -329,7 +329,7 @@ type ListReportExportRequest struct {
 	Start                  *timestamppb.Timestamp         `protobuf:"bytes,4,opt,name=start,proto3,oneof" json:"start,omitempty"`
 	End                    *timestamppb.Timestamp         `protobuf:"bytes,5,opt,name=end,proto3,oneof" json:"end,omitempty"`
 	Page                   int32                          `protobuf:"varint,6,opt,name=page,proto3" json:"page,omitempty"`
-	PageCount              int32                          `protobuf:"varint,7,opt,name=page_count,json=pageCount,proto3" json:"page_count,omitempty"`
+	PageSize               int32                          `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,8,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
@@ -407,9 +407,9 @@ func (x *ListReportExportRequest) GetPage() int32 {
 	return 0
 }
 
-func (x *ListReportExportRequest) GetPageCount() int32 {
+func (x *ListReportExportRequest) GetPageSize() int32 {
 	if x != nil {
-		return x.PageCount
+		return x.PageSize
 	}
 	return 0
 }
@@ -470,16 +470,15 @@ const file_backoffice_service_v1_backoffice_system_proto_rawDesc = "" +
 	"\n" +
 	"\b_user_idB\r\n" +
 	"\v_start_timeB\v\n" +
-	"\t_end_time\"\x8b\x03\n" +
+	"\t_end_time\"\x89\x03\n" +
 	"\x17ListReportExportRequest\x12\x19\n" +
 	"\btask_ids\x18\x01 \x03(\x03R\ataskIds\x12\x17\n" +
 	"\x04type\x18\x02 \x01(\tH\x00R\x04type\x88\x01\x01\x12\x1b\n" +
 	"\x06status\x18\x03 \x01(\tH\x01R\x06status\x88\x01\x01\x125\n" +
 	"\x05start\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\x05start\x88\x01\x01\x121\n" +
 	"\x03end\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\x03end\x88\x01\x01\x12\x12\n" +
-	"\x04page\x18\x06 \x01(\x05R\x04page\x12\x1d\n" +
-	"\n" +
-	"page_count\x18\a \x01(\x05R\tpageCount\x12\\\n" +
+	"\x04page\x18\x06 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\a \x01(\x05R\bpageSize\x12\\\n" +
 	"\x18operator_context_filters\x18\b \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\a\n" +
 	"\x05_typeB\t\n" +
 	"\a_statusB\b\n" +

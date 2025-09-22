@@ -677,7 +677,7 @@ func (m *ListReportExportRequest) validate(all bool) error {
 
 	// no validation rules for Page
 
-	// no validation rules for PageCount
+	// no validation rules for PageSize
 
 	if all {
 		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
