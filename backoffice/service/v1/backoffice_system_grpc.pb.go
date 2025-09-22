@@ -31,7 +31,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BackofficeSystemClient interface {
 	AddSystemCurrency(ctx context.Context, in *AddSystemCurrencyRequest, opts ...grpc.CallOption) (*AddSystemCurrencyResponse, error)
-	ListReportExport(ctx context.Context, in *v1.ListReportExportRequest, opts ...grpc.CallOption) (*v1.ListReportExportResponse, error)
+	ListReportExport(ctx context.Context, in *ListReportExportRequest, opts ...grpc.CallOption) (*v1.ListReportExportResponse, error)
 	ListSystemCurrencies(ctx context.Context, in *ListSystemCurrenciesRequest, opts ...grpc.CallOption) (*ListSystemCurrenciesResponse, error)
 	UpdateSystemCurrency(ctx context.Context, in *UpdateSystemCurrencyRequest, opts ...grpc.CallOption) (*UpdateSystemCurrencyResponse, error)
 }
@@ -54,7 +54,7 @@ func (c *backofficeSystemClient) AddSystemCurrency(ctx context.Context, in *AddS
 	return out, nil
 }
 
-func (c *backofficeSystemClient) ListReportExport(ctx context.Context, in *v1.ListReportExportRequest, opts ...grpc.CallOption) (*v1.ListReportExportResponse, error) {
+func (c *backofficeSystemClient) ListReportExport(ctx context.Context, in *ListReportExportRequest, opts ...grpc.CallOption) (*v1.ListReportExportResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.ListReportExportResponse)
 	err := c.cc.Invoke(ctx, BackofficeSystem_ListReportExport_FullMethodName, in, out, cOpts...)
@@ -89,7 +89,7 @@ func (c *backofficeSystemClient) UpdateSystemCurrency(ctx context.Context, in *U
 // for forward compatibility.
 type BackofficeSystemServer interface {
 	AddSystemCurrency(context.Context, *AddSystemCurrencyRequest) (*AddSystemCurrencyResponse, error)
-	ListReportExport(context.Context, *v1.ListReportExportRequest) (*v1.ListReportExportResponse, error)
+	ListReportExport(context.Context, *ListReportExportRequest) (*v1.ListReportExportResponse, error)
 	ListSystemCurrencies(context.Context, *ListSystemCurrenciesRequest) (*ListSystemCurrenciesResponse, error)
 	UpdateSystemCurrency(context.Context, *UpdateSystemCurrencyRequest) (*UpdateSystemCurrencyResponse, error)
 	mustEmbedUnimplementedBackofficeSystemServer()
@@ -105,7 +105,7 @@ type UnimplementedBackofficeSystemServer struct{}
 func (UnimplementedBackofficeSystemServer) AddSystemCurrency(context.Context, *AddSystemCurrencyRequest) (*AddSystemCurrencyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddSystemCurrency not implemented")
 }
-func (UnimplementedBackofficeSystemServer) ListReportExport(context.Context, *v1.ListReportExportRequest) (*v1.ListReportExportResponse, error) {
+func (UnimplementedBackofficeSystemServer) ListReportExport(context.Context, *ListReportExportRequest) (*v1.ListReportExportResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListReportExport not implemented")
 }
 func (UnimplementedBackofficeSystemServer) ListSystemCurrencies(context.Context, *ListSystemCurrenciesRequest) (*ListSystemCurrenciesResponse, error) {
@@ -154,7 +154,7 @@ func _BackofficeSystem_AddSystemCurrency_Handler(srv interface{}, ctx context.Co
 }
 
 func _BackofficeSystem_ListReportExport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.ListReportExportRequest)
+	in := new(ListReportExportRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -166,7 +166,7 @@ func _BackofficeSystem_ListReportExport_Handler(srv interface{}, ctx context.Con
 		FullMethod: BackofficeSystem_ListReportExport_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeSystemServer).ListReportExport(ctx, req.(*v1.ListReportExportRequest))
+		return srv.(BackofficeSystemServer).ListReportExport(ctx, req.(*ListReportExportRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

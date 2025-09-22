@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package system.service.v1;
 
-// import "common/common.proto";
 import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/system/service/v1;v1";
@@ -10,83 +9,61 @@ option java_multiple_files = true;
 option java_package = "system.service.v1";
 
 service System {
-	rpc AddCurrency(AddCurrencyRequest) returns (AddCurrencyResponse) {
-	};
-
-	rpc UpdateCurrency(UpdateCurrencyRequest) returns (UpdateCurrencyResponse) {
-	};
-
-	rpc GetCurrencies(GetCurrenciesRequest) returns (GetCurrenciesResponse) {
-	};
-	
-	rpc ListCurrencies(ListCurrenciesRequest) returns (ListCurrenciesResponse) {
-	};
+	rpc AddIntegrityReport(AddIntegrityReportRequest) returns (AddIntegrityReportResponse) {}
+	rpc ListIntegrityStatus(ListIntegrityStatusRequest) returns (ListIntegrityStatusResponse) {}
+	rpc SetIntegrityConfig(SetIntegrityConfigRequest) returns (SetIntegrityConfigResponse) {}
 
 	rpc ListReportExport(ListReportExportRequest) returns (ListReportExportResponse) {}
 	rpc CreateReportExport(CreateReportExportRequest) returns (CreateReportExportResponse) {}
 	rpc UpdateReportExport(UpdateReportExportRequest) returns (UpdateReportExportResponse) {}
+
+	rpc ListSev(ListSevRequest) returns (ListSevResponse) {}
+	rpc ExportSev(ExportSevRequest) returns (ExportSevResponse) {}
 }
 
-message Currency {
-	string currency = 1;
-	bool enabled = 2;
-	bool hidden = 3;
-	string type = 4;
-	string symbol = 5;
-	string icon = 6;
-	int32 decimal_places = 7;
-	int32 currency_decimal_places = 8;
+message FileInfo {
+	string file_path = 1;
+	string hash = 2;
 }
 
-message AddCurrencyRequest {
-	string currency = 1;
-	bool enabled = 2;
-	bool hidden = 3;
-	string type = 4;
-	string symbol = 5;
-	string icon = 6;
-	int32 decimal_places = 7;
-	int32 currency_decimal_places = 8;
+message AddIntegrityReportRequest {
+	string label_app = 1;
+	string pod_name = 2;
+	string pod_namespace = 3;
+	repeated FileInfo file_infos = 4;
 }
 
-message AddCurrencyResponse {}
+message AddIntegrityReportResponse {}
 
-message UpdateCurrencyRequest {
-	string currency = 1;
-	optional bool enabled = 2;
-	optional bool hidden = 3;
-	optional string type = 4;
-	optional string symbol = 5;
-	optional string icon = 6;
-	optional int32 decimal_places = 7;
-	optional int32 currency_decimal_places = 8;
+message ListIntegrityStatusRequest {
+	repeated int64 operatorIds = 1;
 }
 
-message UpdateCurrencyResponse {
-	Currency currency = 1;
+message ListIntegrityStatusResponse {
+	message IntegrityStatus {
+		message FileInfo {
+			string file_path = 1;
+			string hash = 2;
+			string expected_hash = 3;
+			bool is_match = 4;
+		}
+		string label_app = 1;
+		string pod_name = 2;
+		string pod_namespace = 3;
+		repeated FileInfo file_infos = 4;
+		google.protobuf.Timestamp created_at = 5;
+	}
+	repeated IntegrityStatus integrity_statuses = 1;
 }
 
-message GetCurrenciesRequest {
-	// Filter to return specific currencies only.
-	// If empty or not provided, all currencies will be returned
-	repeated string currencies = 1;
+message SetIntegrityConfigRequest {
+	repeated int64 operatorIds = 1;
+	string label_app = 2;
+	string pod_namespace = 3;
+	repeated FileInfo file_infos = 4;
 }
 
-message GetCurrenciesResponse {
-	repeated Currency currencies = 1;
-}
-
-message ListCurrenciesRequest {
-	repeated string currencies = 1;
-	optional bool enabled = 2;
-	optional bool hidden = 3;
-}
-
-message ListCurrenciesResponse {
-	repeated Currency currencies = 1;
-	int32 total = 2;
-	int32 total_enabled = 3;
-	int32 total_hidden = 4;
+message SetIntegrityConfigResponse {
 }
 
 message ListReportExportRequest {
@@ -97,8 +74,8 @@ message ListReportExportRequest {
 	optional google.protobuf.Timestamp end = 5;
 	int32 page = 6;
 	int32 page_size = 7;
-	int64 operatorId = 8;
-	// api.common.OperatorContext operator_context = 8;
+	// api.common.OperatorContextFilters operator_context_filters = 8;
+	repeated int64 operatorIds = 9;
 }
 
 message ListReportExportResponse {
@@ -112,9 +89,10 @@ message ListReportExportResponse {
 		string file_size = 7;
 		string file_format = 8;
 		google.protobuf.Timestamp create_at = 9;
+		int64 user_id = 10;
 	}
 	repeated ReportExport tasks = 1;
-	int32 total_page = 2;
+	int32 total_count = 2;
 	int32 total_completed = 3;
 	int32 total_generating = 4;
 	int32 total_pending = 5;
@@ -130,8 +108,7 @@ message CreateReportExportRequest {
 	string task_name = 5;
 	string file_format = 6;
 	google.protobuf.Timestamp create_at = 7;
-	int64 operatorId = 8;
-	// api.common.OperatorContext operator_context = 8;
+	repeated int64 operatorIds = 8;
 }
 
 message CreateReportExportResponse {
@@ -145,4 +122,50 @@ message UpdateReportExportRequest {
 }
 
 message UpdateReportExportResponse {
+}
+
+message Sev {
+	int64 id = 1;
+	string severity = 2;
+	string category = 3;
+	string component = 4;
+	int64 user_id = 5;
+	google.protobuf.Timestamp timestamp = 6;
+	string description = 7;
+}
+
+message ListSevRequest {
+	repeated int64 operatorIds = 1;
+	optional string severity = 2;
+	optional string category = 3;
+	optional string component = 4;
+	optional int64 user_id = 5;
+	optional google.protobuf.Timestamp start_time = 6;
+	optional google.protobuf.Timestamp end_time = 7;
+	optional int32 page = 8;
+	optional int32 page_size = 9;
+}
+
+message ListSevResponse {
+	repeated Sev sevs = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}
+
+message ExportSevRequest {
+	optional string severity = 1;
+	optional string category = 2;
+	optional string component = 3;
+	optional int64 user_id = 4;
+	optional google.protobuf.Timestamp start_time = 5;
+	optional google.protobuf.Timestamp end_time = 6;
+	string format = 7; // accepted values: csv, excel, pdf
+	string time_zone = 8; // e.g. UTC+0, UTC+8, etc.
+	repeated int64 operatorIds = 9;
+	int64 initiator_user_id = 10;
+}
+
+message ExportSevResponse {
+	int64 task_id = 1;
 }

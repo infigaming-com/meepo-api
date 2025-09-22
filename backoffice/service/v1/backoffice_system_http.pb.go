@@ -27,7 +27,7 @@ const OperationBackofficeSystemUpdateSystemCurrency = "/api.backoffice.service.v
 
 type BackofficeSystemHTTPServer interface {
 	AddSystemCurrency(context.Context, *AddSystemCurrencyRequest) (*AddSystemCurrencyResponse, error)
-	ListReportExport(context.Context, *v1.ListReportExportRequest) (*v1.ListReportExportResponse, error)
+	ListReportExport(context.Context, *ListReportExportRequest) (*v1.ListReportExportResponse, error)
 	ListSystemCurrencies(context.Context, *ListSystemCurrenciesRequest) (*ListSystemCurrenciesResponse, error)
 	UpdateSystemCurrency(context.Context, *UpdateSystemCurrencyRequest) (*UpdateSystemCurrencyResponse, error)
 }
@@ -64,7 +64,7 @@ func _BackofficeSystem_AddSystemCurrency0_HTTP_Handler(srv BackofficeSystemHTTPS
 
 func _BackofficeSystem_ListReportExport0_HTTP_Handler(srv BackofficeSystemHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.ListReportExportRequest
+		var in ListReportExportRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -73,7 +73,7 @@ func _BackofficeSystem_ListReportExport0_HTTP_Handler(srv BackofficeSystemHTTPSe
 		}
 		http.SetOperation(ctx, OperationBackofficeSystemListReportExport)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListReportExport(ctx, req.(*v1.ListReportExportRequest))
+			return srv.ListReportExport(ctx, req.(*ListReportExportRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -130,7 +130,7 @@ func _BackofficeSystem_UpdateSystemCurrency0_HTTP_Handler(srv BackofficeSystemHT
 
 type BackofficeSystemHTTPClient interface {
 	AddSystemCurrency(ctx context.Context, req *AddSystemCurrencyRequest, opts ...http.CallOption) (rsp *AddSystemCurrencyResponse, err error)
-	ListReportExport(ctx context.Context, req *v1.ListReportExportRequest, opts ...http.CallOption) (rsp *v1.ListReportExportResponse, err error)
+	ListReportExport(ctx context.Context, req *ListReportExportRequest, opts ...http.CallOption) (rsp *v1.ListReportExportResponse, err error)
 	ListSystemCurrencies(ctx context.Context, req *ListSystemCurrenciesRequest, opts ...http.CallOption) (rsp *ListSystemCurrenciesResponse, err error)
 	UpdateSystemCurrency(ctx context.Context, req *UpdateSystemCurrencyRequest, opts ...http.CallOption) (rsp *UpdateSystemCurrencyResponse, err error)
 }
@@ -156,7 +156,7 @@ func (c *BackofficeSystemHTTPClientImpl) AddSystemCurrency(ctx context.Context, 
 	return &out, nil
 }
 
-func (c *BackofficeSystemHTTPClientImpl) ListReportExport(ctx context.Context, in *v1.ListReportExportRequest, opts ...http.CallOption) (*v1.ListReportExportResponse, error) {
+func (c *BackofficeSystemHTTPClientImpl) ListReportExport(ctx context.Context, in *ListReportExportRequest, opts ...http.CallOption) (*v1.ListReportExportResponse, error) {
 	var out v1.ListReportExportResponse
 	pattern := "/v1/backoffice/system/report/export/list"
 	path := binding.EncodeURL(pattern, in, false)
