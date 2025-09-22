@@ -11,6 +11,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -119,21 +120,262 @@ func (x *SetIntegrityConfigRequest) GetFileInfos() []*v1.FileInfo {
 	return nil
 }
 
+type ListSevRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Severity      *string                `protobuf:"bytes,2,opt,name=severity,proto3,oneof" json:"severity,omitempty"`
+	Category      *string                `protobuf:"bytes,3,opt,name=category,proto3,oneof" json:"category,omitempty"`
+	Component     *string                `protobuf:"bytes,4,opt,name=component,proto3,oneof" json:"component,omitempty"`
+	UserId        *int64                 `protobuf:"varint,5,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	StartTime     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime       *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	Page          *int32                 `protobuf:"varint,8,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32                 `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListSevRequest) Reset() {
+	*x = ListSevRequest{}
+	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListSevRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListSevRequest) ProtoMessage() {}
+
+func (x *ListSevRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListSevRequest.ProtoReflect.Descriptor instead.
+func (*ListSevRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ListSevRequest) GetSeverity() string {
+	if x != nil && x.Severity != nil {
+		return *x.Severity
+	}
+	return ""
+}
+
+func (x *ListSevRequest) GetCategory() string {
+	if x != nil && x.Category != nil {
+		return *x.Category
+	}
+	return ""
+}
+
+func (x *ListSevRequest) GetComponent() string {
+	if x != nil && x.Component != nil {
+		return *x.Component
+	}
+	return ""
+}
+
+func (x *ListSevRequest) GetUserId() int64 {
+	if x != nil && x.UserId != nil {
+		return *x.UserId
+	}
+	return 0
+}
+
+func (x *ListSevRequest) GetStartTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.StartTime
+	}
+	return nil
+}
+
+func (x *ListSevRequest) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
+	}
+	return nil
+}
+
+func (x *ListSevRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListSevRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+type ExportSevRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Severity      *string                `protobuf:"bytes,1,opt,name=severity,proto3,oneof" json:"severity,omitempty"`
+	Category      *string                `protobuf:"bytes,2,opt,name=category,proto3,oneof" json:"category,omitempty"`
+	Component     *string                `protobuf:"bytes,3,opt,name=component,proto3,oneof" json:"component,omitempty"`
+	UserId        *int64                 `protobuf:"varint,4,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	StartTime     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime       *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	Format        string                 `protobuf:"bytes,7,opt,name=format,proto3" json:"format,omitempty"`                     // accepted values: csv, excel, pdf
+	TimeZone      string                 `protobuf:"bytes,8,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"` // e.g. UTC+0, UTC+8, etc.
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ExportSevRequest) Reset() {
+	*x = ExportSevRequest{}
+	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExportSevRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExportSevRequest) ProtoMessage() {}
+
+func (x *ExportSevRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ExportSevRequest.ProtoReflect.Descriptor instead.
+func (*ExportSevRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ExportSevRequest) GetSeverity() string {
+	if x != nil && x.Severity != nil {
+		return *x.Severity
+	}
+	return ""
+}
+
+func (x *ExportSevRequest) GetCategory() string {
+	if x != nil && x.Category != nil {
+		return *x.Category
+	}
+	return ""
+}
+
+func (x *ExportSevRequest) GetComponent() string {
+	if x != nil && x.Component != nil {
+		return *x.Component
+	}
+	return ""
+}
+
+func (x *ExportSevRequest) GetUserId() int64 {
+	if x != nil && x.UserId != nil {
+		return *x.UserId
+	}
+	return 0
+}
+
+func (x *ExportSevRequest) GetStartTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.StartTime
+	}
+	return nil
+}
+
+func (x *ExportSevRequest) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
+	}
+	return nil
+}
+
+func (x *ExportSevRequest) GetFormat() string {
+	if x != nil {
+		return x.Format
+	}
+	return ""
+}
+
+func (x *ExportSevRequest) GetTimeZone() string {
+	if x != nil {
+		return x.TimeZone
+	}
+	return ""
+}
+
 var File_backoffice_service_v1_backoffice_system_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_system_proto_rawDesc = "" +
 	"\n" +
-	"-backoffice/service/v1/backoffice_system.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1esystem/service/v1/system.proto\"\x1c\n" +
+	"-backoffice/service/v1/backoffice_system.proto\x12\x19api.backoffice.service.v1\x1a\x1esystem/service/v1/system.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x1c\n" +
 	"\x1aListIntegrityStatusRequest\"\x99\x01\n" +
 	"\x19SetIntegrityConfigRequest\x12\x1b\n" +
 	"\tlabel_app\x18\x01 \x01(\tR\blabelApp\x12#\n" +
 	"\rpod_namespace\x18\x02 \x01(\tR\fpodNamespace\x12:\n" +
 	"\n" +
-	"file_infos\x18\x03 \x03(\v2\x1b.system.service.v1.FileInfoR\tfileInfos2\xa9\x04\n" +
+	"file_infos\x18\x03 \x03(\v2\x1b.system.service.v1.FileInfoR\tfileInfos\"\xb1\x03\n" +
+	"\x0eListSevRequest\x12\x1f\n" +
+	"\bseverity\x18\x02 \x01(\tH\x00R\bseverity\x88\x01\x01\x12\x1f\n" +
+	"\bcategory\x18\x03 \x01(\tH\x01R\bcategory\x88\x01\x01\x12!\n" +
+	"\tcomponent\x18\x04 \x01(\tH\x02R\tcomponent\x88\x01\x01\x12\x1c\n" +
+	"\auser_id\x18\x05 \x01(\x03H\x03R\x06userId\x88\x01\x01\x12>\n" +
+	"\n" +
+	"start_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x04R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x05R\aendTime\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\b \x01(\x05H\x06R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\t \x01(\x05H\aR\bpageSize\x88\x01\x01B\v\n" +
+	"\t_severityB\v\n" +
+	"\t_categoryB\f\n" +
+	"\n" +
+	"_componentB\n" +
+	"\n" +
+	"\b_user_idB\r\n" +
+	"\v_start_timeB\v\n" +
+	"\t_end_timeB\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\x96\x03\n" +
+	"\x10ExportSevRequest\x12\x1f\n" +
+	"\bseverity\x18\x01 \x01(\tH\x00R\bseverity\x88\x01\x01\x12\x1f\n" +
+	"\bcategory\x18\x02 \x01(\tH\x01R\bcategory\x88\x01\x01\x12!\n" +
+	"\tcomponent\x18\x03 \x01(\tH\x02R\tcomponent\x88\x01\x01\x12\x1c\n" +
+	"\auser_id\x18\x04 \x01(\x03H\x03R\x06userId\x88\x01\x01\x12>\n" +
+	"\n" +
+	"start_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x04R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x05R\aendTime\x88\x01\x01\x12\x16\n" +
+	"\x06format\x18\a \x01(\tR\x06format\x12\x1b\n" +
+	"\ttime_zone\x18\b \x01(\tR\btimeZoneB\v\n" +
+	"\t_severityB\v\n" +
+	"\t_categoryB\f\n" +
+	"\n" +
+	"_componentB\n" +
+	"\n" +
+	"\b_user_idB\r\n" +
+	"\v_start_timeB\v\n" +
+	"\t_end_time2\xbd\x06\n" +
 	"\x10BackofficeSystem\x12\xb4\x01\n" +
 	"\x13ListIntegrityStatus\x125.api.backoffice.service.v1.ListIntegrityStatusRequest\x1a..system.service.v1.ListIntegrityStatusResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/system/integrity/status/list\x12\xba\x01\n" +
 	"\x12SetIntegrityConfig\x124.api.backoffice.service.v1.SetIntegrityConfigRequest\x1a-.system.service.v1.SetIntegrityConfigResponse\"?\x82\xd3\xe4\x93\x029:\x01*\"4/v1/backoffice/system/integrity/file-info/config/set\x12\xa0\x01\n" +
-	"\x10ListReportExport\x12*.system.service.v1.ListReportExportRequest\x1a+.system.service.v1.ListReportExportResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/system/report/export/listB[\n" +
+	"\x10ListReportExport\x12*.system.service.v1.ListReportExportRequest\x1a+.system.service.v1.ListReportExportResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/system/report/export/list\x12\x83\x01\n" +
+	"\aListSev\x12).api.backoffice.service.v1.ListSevRequest\x1a\".system.service.v1.ListSevResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/backoffice/system/sev/list\x12\x8b\x01\n" +
+	"\tExportSev\x12+.api.backoffice.service.v1.ExportSevRequest\x1a$.system.service.v1.ExportSevResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/system/sev/exportB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -148,29 +390,42 @@ func file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_system_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_system_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_backoffice_service_v1_backoffice_system_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_backoffice_service_v1_backoffice_system_proto_goTypes = []any{
 	(*ListIntegrityStatusRequest)(nil),     // 0: api.backoffice.service.v1.ListIntegrityStatusRequest
 	(*SetIntegrityConfigRequest)(nil),      // 1: api.backoffice.service.v1.SetIntegrityConfigRequest
-	(*v1.FileInfo)(nil),                    // 2: system.service.v1.FileInfo
-	(*v1.ListReportExportRequest)(nil),     // 3: system.service.v1.ListReportExportRequest
-	(*v1.ListIntegrityStatusResponse)(nil), // 4: system.service.v1.ListIntegrityStatusResponse
-	(*v1.SetIntegrityConfigResponse)(nil),  // 5: system.service.v1.SetIntegrityConfigResponse
-	(*v1.ListReportExportResponse)(nil),    // 6: system.service.v1.ListReportExportResponse
+	(*ListSevRequest)(nil),                 // 2: api.backoffice.service.v1.ListSevRequest
+	(*ExportSevRequest)(nil),               // 3: api.backoffice.service.v1.ExportSevRequest
+	(*v1.FileInfo)(nil),                    // 4: system.service.v1.FileInfo
+	(*timestamppb.Timestamp)(nil),          // 5: google.protobuf.Timestamp
+	(*v1.ListReportExportRequest)(nil),     // 6: system.service.v1.ListReportExportRequest
+	(*v1.ListIntegrityStatusResponse)(nil), // 7: system.service.v1.ListIntegrityStatusResponse
+	(*v1.SetIntegrityConfigResponse)(nil),  // 8: system.service.v1.SetIntegrityConfigResponse
+	(*v1.ListReportExportResponse)(nil),    // 9: system.service.v1.ListReportExportResponse
+	(*v1.ListSevResponse)(nil),             // 10: system.service.v1.ListSevResponse
+	(*v1.ExportSevResponse)(nil),           // 11: system.service.v1.ExportSevResponse
 }
 var file_backoffice_service_v1_backoffice_system_proto_depIdxs = []int32{
-	2, // 0: api.backoffice.service.v1.SetIntegrityConfigRequest.file_infos:type_name -> system.service.v1.FileInfo
-	0, // 1: api.backoffice.service.v1.BackofficeSystem.ListIntegrityStatus:input_type -> api.backoffice.service.v1.ListIntegrityStatusRequest
-	1, // 2: api.backoffice.service.v1.BackofficeSystem.SetIntegrityConfig:input_type -> api.backoffice.service.v1.SetIntegrityConfigRequest
-	3, // 3: api.backoffice.service.v1.BackofficeSystem.ListReportExport:input_type -> system.service.v1.ListReportExportRequest
-	4, // 4: api.backoffice.service.v1.BackofficeSystem.ListIntegrityStatus:output_type -> system.service.v1.ListIntegrityStatusResponse
-	5, // 5: api.backoffice.service.v1.BackofficeSystem.SetIntegrityConfig:output_type -> system.service.v1.SetIntegrityConfigResponse
-	6, // 6: api.backoffice.service.v1.BackofficeSystem.ListReportExport:output_type -> system.service.v1.ListReportExportResponse
-	4, // [4:7] is the sub-list for method output_type
-	1, // [1:4] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	4,  // 0: api.backoffice.service.v1.SetIntegrityConfigRequest.file_infos:type_name -> system.service.v1.FileInfo
+	5,  // 1: api.backoffice.service.v1.ListSevRequest.start_time:type_name -> google.protobuf.Timestamp
+	5,  // 2: api.backoffice.service.v1.ListSevRequest.end_time:type_name -> google.protobuf.Timestamp
+	5,  // 3: api.backoffice.service.v1.ExportSevRequest.start_time:type_name -> google.protobuf.Timestamp
+	5,  // 4: api.backoffice.service.v1.ExportSevRequest.end_time:type_name -> google.protobuf.Timestamp
+	0,  // 5: api.backoffice.service.v1.BackofficeSystem.ListIntegrityStatus:input_type -> api.backoffice.service.v1.ListIntegrityStatusRequest
+	1,  // 6: api.backoffice.service.v1.BackofficeSystem.SetIntegrityConfig:input_type -> api.backoffice.service.v1.SetIntegrityConfigRequest
+	6,  // 7: api.backoffice.service.v1.BackofficeSystem.ListReportExport:input_type -> system.service.v1.ListReportExportRequest
+	2,  // 8: api.backoffice.service.v1.BackofficeSystem.ListSev:input_type -> api.backoffice.service.v1.ListSevRequest
+	3,  // 9: api.backoffice.service.v1.BackofficeSystem.ExportSev:input_type -> api.backoffice.service.v1.ExportSevRequest
+	7,  // 10: api.backoffice.service.v1.BackofficeSystem.ListIntegrityStatus:output_type -> system.service.v1.ListIntegrityStatusResponse
+	8,  // 11: api.backoffice.service.v1.BackofficeSystem.SetIntegrityConfig:output_type -> system.service.v1.SetIntegrityConfigResponse
+	9,  // 12: api.backoffice.service.v1.BackofficeSystem.ListReportExport:output_type -> system.service.v1.ListReportExportResponse
+	10, // 13: api.backoffice.service.v1.BackofficeSystem.ListSev:output_type -> system.service.v1.ListSevResponse
+	11, // 14: api.backoffice.service.v1.BackofficeSystem.ExportSev:output_type -> system.service.v1.ExportSevResponse
+	10, // [10:15] is the sub-list for method output_type
+	5,  // [5:10] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_system_proto_init() }
@@ -178,13 +433,15 @@ func file_backoffice_service_v1_backoffice_system_proto_init() {
 	if File_backoffice_service_v1_backoffice_system_proto != nil {
 		return
 	}
+	file_backoffice_service_v1_backoffice_system_proto_msgTypes[2].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_system_proto_msgTypes[3].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_system_proto_rawDesc), len(file_backoffice_service_v1_backoffice_system_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

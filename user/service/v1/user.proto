@@ -161,6 +161,13 @@ service User {
     };
 	}
 
+	rpc UpdateUserIdentity(UpdateUserIdentityRequest) returns (UpdateUserIdentityResponse) {
+    option (google.api.http) = {
+      post: "/v1/user/identity/update"
+      body: "*"
+    };
+	}
+
 	rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {}
 
 	rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
@@ -371,7 +378,7 @@ message UserInfo {
 	// uesr identities
 	repeated UserIdentity user_identity = 21;
 	// user date of birth
-	google.protobuf.Timestamp bod = 22;
+	google.protobuf.Timestamp dob = 22;
 	// user country
 	string country = 23;
 }
@@ -420,6 +427,12 @@ message RegisterRequest {
 	string auth_id = 2;
 	// The password for the new account.
 	string password = 3;
+		// Date of birth of user
+	optional google.protobuf.Timestamp dob = 4;
+	// User ID info
+	optional string id_number = 5;
+	// User ID Type
+	optional string id_type = 6;
 }
 
 // LoginRequest contains the credentials for user login.
@@ -723,7 +736,7 @@ message UpdateUserRequest {
 	optional string mobile = 13;
 	optional UserIdentityRequest user_identity = 14;
 	optional string address = 15;
-	optional google.protobuf.Timestamp bod = 16;
+	optional google.protobuf.Timestamp dob = 16;
 	optional bool email_verified = 17;
 	optional bool phone_verified = 18;
 	// The initial operator context.
@@ -731,6 +744,20 @@ message UpdateUserRequest {
 }
 
 message UpdateUserResponse {
+}
+
+message UpdateUserIdentityRequest {
+	// User identity id
+	int64 id = 1;
+	// User ID Type
+	string id_type = 2;
+	// User ID Number
+	string id_number = 3;
+	// Image Url
+	string image = 4;
+}
+
+message UpdateUserIdentityResponse {
 }
 
 message ListUsersRequest {
@@ -928,7 +955,7 @@ message GetUserProfileResponse {
 	int32 kyc_level = 20;
 	bool email_verified = 21;
 	bool phone_verified = 22;
-	string bod = 23;
+	google.protobuf.Timestamp dob = 23;
 	string address = 24;
 	repeated UserIdentity user_identity = 25;
 	repeated ChangeRecord emailChangeHistory = 26;

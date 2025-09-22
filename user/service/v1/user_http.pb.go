@@ -36,6 +36,7 @@ const OperationUserResetPasswordWithCode = "/api.user.service.v1.User/ResetPassw
 const OperationUserSendEmailVerificationCode = "/api.user.service.v1.User/SendEmailVerificationCode"
 const OperationUserSendPasswordResetCode = "/api.user.service.v1.User/SendPasswordResetCode"
 const OperationUserUpdateUser = "/api.user.service.v1.User/UpdateUser"
+const OperationUserUpdateUserIdentity = "/api.user.service.v1.User/UpdateUserIdentity"
 const OperationUserVerifyEmail = "/api.user.service.v1.User/VerifyEmail"
 
 type UserHTTPServer interface {
@@ -74,6 +75,7 @@ type UserHTTPServer interface {
 	// SendPasswordResetCode Send password reset verification code to email
 	SendPasswordResetCode(context.Context, *SendPasswordResetCodeRequest) (*SendPasswordResetCodeResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
+	UpdateUserIdentity(context.Context, *UpdateUserIdentityRequest) (*UpdateUserIdentityResponse, error)
 	VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error)
 }
 
@@ -91,6 +93,7 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.POST("/v1/user/auth/password/reset-code/send", _User_SendPasswordResetCode0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/password/reset", _User_ResetPasswordWithCode0_HTTP_Handler(srv))
 	r.POST("/v1/user/update", _User_UpdateUser0_HTTP_Handler(srv))
+	r.POST("/v1/user/identity/update", _User_UpdateUserIdentity0_HTTP_Handler(srv))
 	r.POST("/v1/user/email/verify/get", _User_VerifyEmail0_HTTP_Handler(srv))
 	r.POST("/v1/user/operator/account-settings/get", _User_GetOperatorAccountSettings0_HTTP_Handler(srv))
 	r.POST("/v1/user/responsible-gambling/config/add", _User_AddResponsibleGamblingConfig0_HTTP_Handler(srv))
@@ -363,6 +366,28 @@ func _User_UpdateUser0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) e
 	}
 }
 
+func _User_UpdateUserIdentity0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateUserIdentityRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserUpdateUserIdentity)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateUserIdentity(ctx, req.(*UpdateUserIdentityRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UpdateUserIdentityResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _User_VerifyEmail0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in VerifyEmailRequest
@@ -513,6 +538,7 @@ type UserHTTPClient interface {
 	SendEmailVerificationCode(ctx context.Context, req *SendEmailVerificationCodeRequest, opts ...http.CallOption) (rsp *SendEmailVerificationCodeResponse, err error)
 	SendPasswordResetCode(ctx context.Context, req *SendPasswordResetCodeRequest, opts ...http.CallOption) (rsp *SendPasswordResetCodeResponse, err error)
 	UpdateUser(ctx context.Context, req *UpdateUserRequest, opts ...http.CallOption) (rsp *UpdateUserResponse, err error)
+	UpdateUserIdentity(ctx context.Context, req *UpdateUserIdentityRequest, opts ...http.CallOption) (rsp *UpdateUserIdentityResponse, err error)
 	VerifyEmail(ctx context.Context, req *VerifyEmailRequest, opts ...http.CallOption) (rsp *VerifyEmailResponse, err error)
 }
 
@@ -737,6 +763,19 @@ func (c *UserHTTPClientImpl) UpdateUser(ctx context.Context, in *UpdateUserReque
 	pattern := "/v1/user/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserUpdateUser))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *UserHTTPClientImpl) UpdateUserIdentity(ctx context.Context, in *UpdateUserIdentityRequest, opts ...http.CallOption) (*UpdateUserIdentityResponse, error) {
+	var out UpdateUserIdentityResponse
+	pattern := "/v1/user/identity/update"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserUpdateUserIdentity))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

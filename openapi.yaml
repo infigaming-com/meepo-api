@@ -1415,6 +1415,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListCurrenciesResponse'
+    /v1/backoffice/game/customer-strike-reports/list:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ListCustomerStrikeReports
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListCustomerStrikeReportsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.ListCustomerStrikeReportsResponse'
     /v1/backoffice/game/fee-groups/list:
         post:
             tags:
@@ -2713,6 +2731,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/system.service.v1.ListReportExportResponse'
+    /v1/backoffice/system/sev/export:
+        post:
+            tags:
+                - BackofficeSystem
+            operationId: BackofficeSystem_ExportSev
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ExportSevRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/system.service.v1.ExportSevResponse'
+    /v1/backoffice/system/sev/list:
+        post:
+            tags:
+                - BackofficeSystem
+            operationId: BackofficeSystem_ListSev
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListSevRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/system.service.v1.ListSevResponse'
     /v1/backoffice/user/comments/add:
         post:
             tags:
@@ -4548,6 +4602,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetUserResponse'
+    /v1/user/identity/update:
+        post:
+            tags:
+                - User
+            operationId: User_UpdateUserIdentity
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.UpdateUserIdentityRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.UpdateUserIdentityResponse'
     /v1/user/kyc/filestore/upload:
         post:
             tags:
@@ -5771,6 +5843,27 @@ components:
                 kycLevel:
                     type: integer
                     format: int32
+                format:
+                    type: string
+                timeZone:
+                    type: string
+        api.backoffice.service.v1.ExportSevRequest:
+            type: object
+            properties:
+                severity:
+                    type: string
+                category:
+                    type: string
+                component:
+                    type: string
+                userId:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
                 format:
                     type: string
                 timeZone:
@@ -7711,6 +7804,17 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.ListCustomerStrikeReportsRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListDepositDetailsRequest:
             type: object
             properties:
@@ -9052,6 +9156,29 @@ components:
                 total:
                     type: integer
                     format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.backoffice.service.v1.ListSevRequest:
+            type: object
+            properties:
+                severity:
+                    type: string
+                category:
+                    type: string
+                component:
+                    type: string
+                userId:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
                 page:
                     type: integer
                     format: int32
@@ -12035,6 +12162,46 @@ components:
                     type: array
                     items:
                         type: string
+        api.game.service.v1.ListCustomerStrikeReportsResponse:
+            type: object
+            properties:
+                reports:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.ListCustomerStrikeReportsResponse_CustomerStrikeReport'
+                totalCount:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.game.service.v1.ListCustomerStrikeReportsResponse_CustomerStrikeReport:
+            type: object
+            properties:
+                userId:
+                    type: string
+                    description: Basic user information
+                userName:
+                    type: string
+                totalBets:
+                    type: integer
+                    description: Betting statistics
+                    format: int32
+                winningBets:
+                    type: integer
+                    format: int32
+                winRate:
+                    type: string
+                totalStake:
+                    type: string
+                    description: Financial information (in settlement currency, e.g., ZAR)
+                totalWinning:
+                    type: string
+                payoutRate:
+                    type: string
         api.game.service.v1.ListGamesRequest:
             type: object
             properties:
@@ -13129,8 +13296,9 @@ components:
                     type: boolean
                 phoneVerified:
                     type: boolean
-                bod:
+                dob:
                     type: string
+                    format: date-time
                 address:
                     type: string
                 userIdentity:
@@ -13559,6 +13727,16 @@ components:
                 password:
                     type: string
                     description: The password for the new account.
+                dob:
+                    type: string
+                    description: Date of birth of user
+                    format: date-time
+                idNumber:
+                    type: string
+                    description: User ID info
+                idType:
+                    type: string
+                    description: User ID Type
             description: RegisterRequest contains the information needed to register a new user.
         api.user.service.v1.ResetPasswordWithCodeRequest:
             type: object
@@ -13695,6 +13873,24 @@ components:
         api.user.service.v1.UpdateOperatorAccountSettingsResponse:
             type: object
             properties: {}
+        api.user.service.v1.UpdateUserIdentityRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: User identity id
+                idType:
+                    type: string
+                    description: User ID Type
+                idNumber:
+                    type: string
+                    description: User ID Number
+                image:
+                    type: string
+                    description: Image Url
+        api.user.service.v1.UpdateUserIdentityResponse:
+            type: object
+            properties: {}
         api.user.service.v1.UpdateUserRequest:
             type: object
             properties:
@@ -13728,7 +13924,7 @@ components:
                     $ref: '#/components/schemas/api.user.service.v1.UserIdentityRequest'
                 address:
                     type: string
-                bod:
+                dob:
                     type: string
                     format: date-time
                 emailVerified:
@@ -13909,7 +14105,7 @@ components:
                     items:
                         $ref: '#/components/schemas/api.user.service.v1.UserIdentity'
                     description: uesr identities
-                bod:
+                dob:
                     type: string
                     description: user date of birth
                     format: date-time
@@ -16036,6 +16232,11 @@ components:
             description: |-
                 Response for withdraw callback
                  Confirms receipt of callback notification
+        system.service.v1.ExportSevResponse:
+            type: object
+            properties:
+                taskId:
+                    type: string
         system.service.v1.FileInfo:
             type: object
             properties:
@@ -16149,9 +16350,43 @@ components:
                 createAt:
                     type: string
                     format: date-time
+        system.service.v1.ListSevResponse:
+            type: object
+            properties:
+                sevs:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/system.service.v1.Sev'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         system.service.v1.SetIntegrityConfigResponse:
             type: object
             properties: {}
+        system.service.v1.Sev:
+            type: object
+            properties:
+                id:
+                    type: string
+                severity:
+                    type: string
+                category:
+                    type: string
+                component:
+                    type: string
+                userId:
+                    type: string
+                timestamp:
+                    type: string
+                    format: date-time
+                description:
+                    type: string
 tags:
     - name: BackofficeAccount
     - name: BackofficeAudit

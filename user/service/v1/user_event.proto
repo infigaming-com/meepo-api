@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package api.user.service.v1;
 
-import "common/common.proto";
-
 option go_package = "github.com/infigaming-com/meepo-api/user/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.user.service.v1";
@@ -44,10 +42,4 @@ message AddOperatorEvent {
 	string operator_name = 7;
 	string reporting_currency = 8;
 	repeated string supporting_currencies = 9;
-}
-
-message LockUserEvent {
-	int64 user_id = 1;
-	api.common.OperatorContext operator_context = 2;
-	string reason = 3;
 }

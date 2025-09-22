@@ -20,13 +20,17 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationBackofficeSystemExportSev = "/api.backoffice.service.v1.BackofficeSystem/ExportSev"
 const OperationBackofficeSystemListIntegrityStatus = "/api.backoffice.service.v1.BackofficeSystem/ListIntegrityStatus"
 const OperationBackofficeSystemListReportExport = "/api.backoffice.service.v1.BackofficeSystem/ListReportExport"
+const OperationBackofficeSystemListSev = "/api.backoffice.service.v1.BackofficeSystem/ListSev"
 const OperationBackofficeSystemSetIntegrityConfig = "/api.backoffice.service.v1.BackofficeSystem/SetIntegrityConfig"
 
 type BackofficeSystemHTTPServer interface {
+	ExportSev(context.Context, *ExportSevRequest) (*v1.ExportSevResponse, error)
 	ListIntegrityStatus(context.Context, *ListIntegrityStatusRequest) (*v1.ListIntegrityStatusResponse, error)
 	ListReportExport(context.Context, *v1.ListReportExportRequest) (*v1.ListReportExportResponse, error)
+	ListSev(context.Context, *ListSevRequest) (*v1.ListSevResponse, error)
 	SetIntegrityConfig(context.Context, *SetIntegrityConfigRequest) (*v1.SetIntegrityConfigResponse, error)
 }
 
@@ -35,6 +39,8 @@ func RegisterBackofficeSystemHTTPServer(s *http.Server, srv BackofficeSystemHTTP
 	r.POST("/v1/backoffice/system/integrity/status/list", _BackofficeSystem_ListIntegrityStatus0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/system/integrity/file-info/config/set", _BackofficeSystem_SetIntegrityConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/system/report/export/list", _BackofficeSystem_ListReportExport0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/system/sev/list", _BackofficeSystem_ListSev0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/system/sev/export", _BackofficeSystem_ExportSev0_HTTP_Handler(srv))
 }
 
 func _BackofficeSystem_ListIntegrityStatus0_HTTP_Handler(srv BackofficeSystemHTTPServer) func(ctx http.Context) error {
@@ -103,9 +109,55 @@ func _BackofficeSystem_ListReportExport0_HTTP_Handler(srv BackofficeSystemHTTPSe
 	}
 }
 
+func _BackofficeSystem_ListSev0_HTTP_Handler(srv BackofficeSystemHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListSevRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeSystemListSev)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListSev(ctx, req.(*ListSevRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ListSevResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeSystem_ExportSev0_HTTP_Handler(srv BackofficeSystemHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ExportSevRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeSystemExportSev)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ExportSev(ctx, req.(*ExportSevRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ExportSevResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeSystemHTTPClient interface {
+	ExportSev(ctx context.Context, req *ExportSevRequest, opts ...http.CallOption) (rsp *v1.ExportSevResponse, err error)
 	ListIntegrityStatus(ctx context.Context, req *ListIntegrityStatusRequest, opts ...http.CallOption) (rsp *v1.ListIntegrityStatusResponse, err error)
 	ListReportExport(ctx context.Context, req *v1.ListReportExportRequest, opts ...http.CallOption) (rsp *v1.ListReportExportResponse, err error)
+	ListSev(ctx context.Context, req *ListSevRequest, opts ...http.CallOption) (rsp *v1.ListSevResponse, err error)
 	SetIntegrityConfig(ctx context.Context, req *SetIntegrityConfigRequest, opts ...http.CallOption) (rsp *v1.SetIntegrityConfigResponse, err error)
 }
 
@@ -115,6 +167,19 @@ type BackofficeSystemHTTPClientImpl struct {
 
 func NewBackofficeSystemHTTPClient(client *http.Client) BackofficeSystemHTTPClient {
 	return &BackofficeSystemHTTPClientImpl{client}
+}
+
+func (c *BackofficeSystemHTTPClientImpl) ExportSev(ctx context.Context, in *ExportSevRequest, opts ...http.CallOption) (*v1.ExportSevResponse, error) {
+	var out v1.ExportSevResponse
+	pattern := "/v1/backoffice/system/sev/export"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeSystemExportSev))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 func (c *BackofficeSystemHTTPClientImpl) ListIntegrityStatus(ctx context.Context, in *ListIntegrityStatusRequest, opts ...http.CallOption) (*v1.ListIntegrityStatusResponse, error) {
@@ -135,6 +200,19 @@ func (c *BackofficeSystemHTTPClientImpl) ListReportExport(ctx context.Context, i
 	pattern := "/v1/backoffice/system/report/export/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeSystemListReportExport))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeSystemHTTPClientImpl) ListSev(ctx context.Context, in *ListSevRequest, opts ...http.CallOption) (*v1.ListSevResponse, error) {
+	var out v1.ListSevResponse
+	pattern := "/v1/backoffice/system/sev/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeSystemListSev))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

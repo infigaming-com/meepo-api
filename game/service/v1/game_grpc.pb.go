@@ -56,6 +56,7 @@ const (
 	Game_ListSportEvents_FullMethodName                   = "/api.game.service.v1.Game/ListSportEvents"
 	Game_GetBetAndEventInfo_FullMethodName                = "/api.game.service.v1.Game/GetBetAndEventInfo"
 	Game_GetTransactionAndEventInfo_FullMethodName        = "/api.game.service.v1.Game/GetTransactionAndEventInfo"
+	Game_ListCustomerStrikeReports_FullMethodName         = "/api.game.service.v1.Game/ListCustomerStrikeReports"
 )
 
 // GameClient is the client API for Game service.
@@ -101,6 +102,8 @@ type GameClient interface {
 	ListSportEvents(ctx context.Context, in *ListSportEventsRequest, opts ...grpc.CallOption) (*ListSportEventsResponse, error)
 	GetBetAndEventInfo(ctx context.Context, in *GetBetAndEventInfoRequest, opts ...grpc.CallOption) (*GetBetAndEventInfoResponse, error)
 	GetTransactionAndEventInfo(ctx context.Context, in *GetTransactionAndEventInfoRequest, opts ...grpc.CallOption) (*GetTransactionAndEventInfoResponse, error)
+	// Customer Strike Report related APIs
+	ListCustomerStrikeReports(ctx context.Context, in *ListCustomerStrikeReportsRequest, opts ...grpc.CallOption) (*ListCustomerStrikeReportsResponse, error)
 }
 
 type gameClient struct {
@@ -481,6 +484,16 @@ func (c *gameClient) GetTransactionAndEventInfo(ctx context.Context, in *GetTran
 	return out, nil
 }
 
+func (c *gameClient) ListCustomerStrikeReports(ctx context.Context, in *ListCustomerStrikeReportsRequest, opts ...grpc.CallOption) (*ListCustomerStrikeReportsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCustomerStrikeReportsResponse)
+	err := c.cc.Invoke(ctx, Game_ListCustomerStrikeReports_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GameServer is the server API for Game service.
 // All implementations must embed UnimplementedGameServer
 // for forward compatibility.
@@ -524,6 +537,8 @@ type GameServer interface {
 	ListSportEvents(context.Context, *ListSportEventsRequest) (*ListSportEventsResponse, error)
 	GetBetAndEventInfo(context.Context, *GetBetAndEventInfoRequest) (*GetBetAndEventInfoResponse, error)
 	GetTransactionAndEventInfo(context.Context, *GetTransactionAndEventInfoRequest) (*GetTransactionAndEventInfoResponse, error)
+	// Customer Strike Report related APIs
+	ListCustomerStrikeReports(context.Context, *ListCustomerStrikeReportsRequest) (*ListCustomerStrikeReportsResponse, error)
 	mustEmbedUnimplementedGameServer()
 }
 
@@ -644,6 +659,9 @@ func (UnimplementedGameServer) GetBetAndEventInfo(context.Context, *GetBetAndEve
 }
 func (UnimplementedGameServer) GetTransactionAndEventInfo(context.Context, *GetTransactionAndEventInfoRequest) (*GetTransactionAndEventInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTransactionAndEventInfo not implemented")
+}
+func (UnimplementedGameServer) ListCustomerStrikeReports(context.Context, *ListCustomerStrikeReportsRequest) (*ListCustomerStrikeReportsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCustomerStrikeReports not implemented")
 }
 func (UnimplementedGameServer) mustEmbedUnimplementedGameServer() {}
 func (UnimplementedGameServer) testEmbeddedByValue()              {}
@@ -1332,6 +1350,24 @@ func _Game_GetTransactionAndEventInfo_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_ListCustomerStrikeReports_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCustomerStrikeReportsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).ListCustomerStrikeReports(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_ListCustomerStrikeReports_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).ListCustomerStrikeReports(ctx, req.(*ListCustomerStrikeReportsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Game_ServiceDesc is the grpc.ServiceDesc for Game service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1486,6 +1522,10 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetTransactionAndEventInfo",
 			Handler:    _Game_GetTransactionAndEventInfo_Handler,
+		},
+		{
+			MethodName: "ListCustomerStrikeReports",
+			Handler:    _Game_ListCustomerStrikeReports_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

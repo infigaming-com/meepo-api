@@ -140,6 +140,13 @@ service BackofficeGame {
 			body: "*"
 		};
 	}
+
+	rpc ListCustomerStrikeReports(ListCustomerStrikeReportsRequest) returns (game.service.v1.ListCustomerStrikeReportsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/customer-strike-reports/list"
+			body: "*"
+		};
+	}
 }
 
 
@@ -476,4 +483,10 @@ message ListStakeVarianceBetsRequest {
 	// Pagination
 	optional int32 page = 7;
 	optional int32 page_size = 8;
+}
+
+message ListCustomerStrikeReportsRequest {
+	optional string user_id = 1;
+	optional int32 page = 2;
+	optional int32 page_size = 3;
 }

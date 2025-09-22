@@ -58,3 +58,15 @@ func IsGetIntegrityConfigFailed(err error) bool {
 func ErrorGetIntegrityConfigFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_INTEGRITY_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetSevFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_SEV_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetSevFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_SEV_FAILED.String(), fmt.Sprintf(format, args...))
+}
