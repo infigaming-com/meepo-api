@@ -654,34 +654,34 @@ func (x *OperatorBalanceUpdateEvent) GetCreatedAt() int64 {
 	return 0
 }
 
-type UpdateReponsibleGamblingConfigEvent struct {
-	state                    protoimpl.MessageState                      `protogen:"open.v1"`
-	TargetUserId             int64                                       `protobuf:"varint,1,opt,name=target_user_id,json=targetUserId,proto3" json:"target_user_id,omitempty"`
-	InitiatorUserId          int64                                       `protobuf:"varint,2,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
-	InitiatorOperatorContext *common.OperatorContext                     `protobuf:"bytes,3,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
-	Action                   string                                      `protobuf:"bytes,4,opt,name=action,proto3" json:"action,omitempty"` // set, delete
-	Currency                 string                                      `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
-	BeforeConfig             *UpdateReponsibleGamblingConfigEvent_Config `protobuf:"bytes,6,opt,name=before_config,json=beforeConfig,proto3" json:"before_config,omitempty"`
-	AfterConfig              *UpdateReponsibleGamblingConfigEvent_Config `protobuf:"bytes,7,opt,name=after_config,json=afterConfig,proto3" json:"after_config,omitempty"`
-	UpdatedAt                int64                                       `protobuf:"varint,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+type UpdateResponsibleGamblingConfigEvent struct {
+	state                    protoimpl.MessageState                       `protogen:"open.v1"`
+	TargetUserId             int64                                        `protobuf:"varint,1,opt,name=target_user_id,json=targetUserId,proto3" json:"target_user_id,omitempty"`
+	InitiatorUserId          int64                                        `protobuf:"varint,2,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
+	InitiatorOperatorContext *common.OperatorContext                      `protobuf:"bytes,3,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
+	Action                   string                                       `protobuf:"bytes,4,opt,name=action,proto3" json:"action,omitempty"` // set, delete
+	Currency                 string                                       `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
+	BeforeConfig             *UpdateResponsibleGamblingConfigEvent_Config `protobuf:"bytes,6,opt,name=before_config,json=beforeConfig,proto3" json:"before_config,omitempty"`
+	AfterConfig              *UpdateResponsibleGamblingConfigEvent_Config `protobuf:"bytes,7,opt,name=after_config,json=afterConfig,proto3" json:"after_config,omitempty"`
+	UpdatedAt                int64                                        `protobuf:"varint,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent) Reset() {
-	*x = UpdateReponsibleGamblingConfigEvent{}
+func (x *UpdateResponsibleGamblingConfigEvent) Reset() {
+	*x = UpdateResponsibleGamblingConfigEvent{}
 	mi := &file_wallet_service_v1_wallet_event_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent) String() string {
+func (x *UpdateResponsibleGamblingConfigEvent) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdateReponsibleGamblingConfigEvent) ProtoMessage() {}
+func (*UpdateResponsibleGamblingConfigEvent) ProtoMessage() {}
 
-func (x *UpdateReponsibleGamblingConfigEvent) ProtoReflect() protoreflect.Message {
+func (x *UpdateResponsibleGamblingConfigEvent) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_event_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -693,68 +693,68 @@ func (x *UpdateReponsibleGamblingConfigEvent) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateReponsibleGamblingConfigEvent.ProtoReflect.Descriptor instead.
-func (*UpdateReponsibleGamblingConfigEvent) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdateResponsibleGamblingConfigEvent.ProtoReflect.Descriptor instead.
+func (*UpdateResponsibleGamblingConfigEvent) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_event_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent) GetTargetUserId() int64 {
+func (x *UpdateResponsibleGamblingConfigEvent) GetTargetUserId() int64 {
 	if x != nil {
 		return x.TargetUserId
 	}
 	return 0
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent) GetInitiatorUserId() int64 {
+func (x *UpdateResponsibleGamblingConfigEvent) GetInitiatorUserId() int64 {
 	if x != nil {
 		return x.InitiatorUserId
 	}
 	return 0
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent) GetInitiatorOperatorContext() *common.OperatorContext {
+func (x *UpdateResponsibleGamblingConfigEvent) GetInitiatorOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.InitiatorOperatorContext
 	}
 	return nil
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent) GetAction() string {
+func (x *UpdateResponsibleGamblingConfigEvent) GetAction() string {
 	if x != nil {
 		return x.Action
 	}
 	return ""
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent) GetCurrency() string {
+func (x *UpdateResponsibleGamblingConfigEvent) GetCurrency() string {
 	if x != nil {
 		return x.Currency
 	}
 	return ""
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent) GetBeforeConfig() *UpdateReponsibleGamblingConfigEvent_Config {
+func (x *UpdateResponsibleGamblingConfigEvent) GetBeforeConfig() *UpdateResponsibleGamblingConfigEvent_Config {
 	if x != nil {
 		return x.BeforeConfig
 	}
 	return nil
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent) GetAfterConfig() *UpdateReponsibleGamblingConfigEvent_Config {
+func (x *UpdateResponsibleGamblingConfigEvent) GetAfterConfig() *UpdateResponsibleGamblingConfigEvent_Config {
 	if x != nil {
 		return x.AfterConfig
 	}
 	return nil
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent) GetUpdatedAt() int64 {
+func (x *UpdateResponsibleGamblingConfigEvent) GetUpdatedAt() int64 {
 	if x != nil {
 		return x.UpdatedAt
 	}
 	return 0
 }
 
-type UpdateReponsibleGamblingConfigEvent_Config struct {
+type UpdateResponsibleGamblingConfigEvent_Config struct {
 	state                              protoimpl.MessageState `protogen:"open.v1"`
 	DepositLimit                       string                 `protobuf:"bytes,1,opt,name=deposit_limit,json=depositLimit,proto3" json:"deposit_limit,omitempty"`
 	WithdrawalLimit                    string                 `protobuf:"bytes,2,opt,name=withdrawal_limit,json=withdrawalLimit,proto3" json:"withdrawal_limit,omitempty"`
@@ -776,20 +776,20 @@ type UpdateReponsibleGamblingConfigEvent_Config struct {
 	sizeCache                          protoimpl.SizeCache
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent_Config) Reset() {
-	*x = UpdateReponsibleGamblingConfigEvent_Config{}
+func (x *UpdateResponsibleGamblingConfigEvent_Config) Reset() {
+	*x = UpdateResponsibleGamblingConfigEvent_Config{}
 	mi := &file_wallet_service_v1_wallet_event_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent_Config) String() string {
+func (x *UpdateResponsibleGamblingConfigEvent_Config) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdateReponsibleGamblingConfigEvent_Config) ProtoMessage() {}
+func (*UpdateResponsibleGamblingConfigEvent_Config) ProtoMessage() {}
 
-func (x *UpdateReponsibleGamblingConfigEvent_Config) ProtoReflect() protoreflect.Message {
+func (x *UpdateResponsibleGamblingConfigEvent_Config) ProtoReflect() protoreflect.Message {
 	mi := &file_wallet_service_v1_wallet_event_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -801,117 +801,117 @@ func (x *UpdateReponsibleGamblingConfigEvent_Config) ProtoReflect() protoreflect
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateReponsibleGamblingConfigEvent_Config.ProtoReflect.Descriptor instead.
-func (*UpdateReponsibleGamblingConfigEvent_Config) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdateResponsibleGamblingConfigEvent_Config.ProtoReflect.Descriptor instead.
+func (*UpdateResponsibleGamblingConfigEvent_Config) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_event_proto_rawDescGZIP(), []int{4, 0}
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent_Config) GetDepositLimit() string {
+func (x *UpdateResponsibleGamblingConfigEvent_Config) GetDepositLimit() string {
 	if x != nil {
 		return x.DepositLimit
 	}
 	return ""
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent_Config) GetWithdrawalLimit() string {
+func (x *UpdateResponsibleGamblingConfigEvent_Config) GetWithdrawalLimit() string {
 	if x != nil {
 		return x.WithdrawalLimit
 	}
 	return ""
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent_Config) GetDailyPlayLimit() string {
+func (x *UpdateResponsibleGamblingConfigEvent_Config) GetDailyPlayLimit() string {
 	if x != nil {
 		return x.DailyPlayLimit
 	}
 	return ""
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent_Config) GetWeeklyPlayLimit() string {
+func (x *UpdateResponsibleGamblingConfigEvent_Config) GetWeeklyPlayLimit() string {
 	if x != nil {
 		return x.WeeklyPlayLimit
 	}
 	return ""
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent_Config) GetMonthlyPlayLimit() string {
+func (x *UpdateResponsibleGamblingConfigEvent_Config) GetMonthlyPlayLimit() string {
 	if x != nil {
 		return x.MonthlyPlayLimit
 	}
 	return ""
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent_Config) GetDailyLossLimit() string {
+func (x *UpdateResponsibleGamblingConfigEvent_Config) GetDailyLossLimit() string {
 	if x != nil {
 		return x.DailyLossLimit
 	}
 	return ""
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent_Config) GetWeeklyLossLimit() string {
+func (x *UpdateResponsibleGamblingConfigEvent_Config) GetWeeklyLossLimit() string {
 	if x != nil {
 		return x.WeeklyLossLimit
 	}
 	return ""
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent_Config) GetMonthlyLossLimit() string {
+func (x *UpdateResponsibleGamblingConfigEvent_Config) GetMonthlyLossLimit() string {
 	if x != nil {
 		return x.MonthlyLossLimit
 	}
 	return ""
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent_Config) GetDepositLimitDeleteScheduleTime() int64 {
+func (x *UpdateResponsibleGamblingConfigEvent_Config) GetDepositLimitDeleteScheduleTime() int64 {
 	if x != nil {
 		return x.DepositLimitDeleteScheduleTime
 	}
 	return 0
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent_Config) GetWithdrawalLimitDeleteScheduleTime() int64 {
+func (x *UpdateResponsibleGamblingConfigEvent_Config) GetWithdrawalLimitDeleteScheduleTime() int64 {
 	if x != nil {
 		return x.WithdrawalLimitDeleteScheduleTime
 	}
 	return 0
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent_Config) GetDailyPlayLimitDeleteScheduleTime() int64 {
+func (x *UpdateResponsibleGamblingConfigEvent_Config) GetDailyPlayLimitDeleteScheduleTime() int64 {
 	if x != nil {
 		return x.DailyPlayLimitDeleteScheduleTime
 	}
 	return 0
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent_Config) GetWeeklyPlayLimitDeleteScheduleTime() int64 {
+func (x *UpdateResponsibleGamblingConfigEvent_Config) GetWeeklyPlayLimitDeleteScheduleTime() int64 {
 	if x != nil {
 		return x.WeeklyPlayLimitDeleteScheduleTime
 	}
 	return 0
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent_Config) GetMonthlyPlayLimitDeleteScheduleTime() int64 {
+func (x *UpdateResponsibleGamblingConfigEvent_Config) GetMonthlyPlayLimitDeleteScheduleTime() int64 {
 	if x != nil {
 		return x.MonthlyPlayLimitDeleteScheduleTime
 	}
 	return 0
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent_Config) GetDailyLossLimitDeleteScheduleTime() int64 {
+func (x *UpdateResponsibleGamblingConfigEvent_Config) GetDailyLossLimitDeleteScheduleTime() int64 {
 	if x != nil {
 		return x.DailyLossLimitDeleteScheduleTime
 	}
 	return 0
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent_Config) GetWeeklyLossLimitDeleteScheduleTime() int64 {
+func (x *UpdateResponsibleGamblingConfigEvent_Config) GetWeeklyLossLimitDeleteScheduleTime() int64 {
 	if x != nil {
 		return x.WeeklyLossLimitDeleteScheduleTime
 	}
 	return 0
 }
 
-func (x *UpdateReponsibleGamblingConfigEvent_Config) GetMonthlyLossLimitDeleteScheduleTime() int64 {
+func (x *UpdateResponsibleGamblingConfigEvent_Config) GetMonthlyLossLimitDeleteScheduleTime() int64 {
 	if x != nil {
 		return x.MonthlyLossLimitDeleteScheduleTime
 	}
@@ -998,15 +998,15 @@ const file_wallet_service_v1_wallet_event_proto_rawDesc = "" +
 	"amount_usd\x18\r \x01(\tR\tamountUsd\x12:\n" +
 	"\x19amount_reporting_currency\x18\x0e \x01(\tR\x17amountReportingCurrency\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x0f \x01(\x03R\tcreatedAt\"\xe6\v\n" +
-	"#UpdateReponsibleGamblingConfigEvent\x12$\n" +
+	"created_at\x18\x0f \x01(\x03R\tcreatedAt\"\xe9\v\n" +
+	"$UpdateResponsibleGamblingConfigEvent\x12$\n" +
 	"\x0etarget_user_id\x18\x01 \x01(\x03R\ftargetUserId\x12*\n" +
 	"\x11initiator_user_id\x18\x02 \x01(\x03R\x0finitiatorUserId\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12\x16\n" +
 	"\x06action\x18\x04 \x01(\tR\x06action\x12\x1a\n" +
-	"\bcurrency\x18\x05 \x01(\tR\bcurrency\x12f\n" +
-	"\rbefore_config\x18\x06 \x01(\v2A.api.wallet.service.v1.UpdateReponsibleGamblingConfigEvent.ConfigR\fbeforeConfig\x12d\n" +
-	"\fafter_config\x18\a \x01(\v2A.api.wallet.service.v1.UpdateReponsibleGamblingConfigEvent.ConfigR\vafterConfig\x12\x1d\n" +
+	"\bcurrency\x18\x05 \x01(\tR\bcurrency\x12g\n" +
+	"\rbefore_config\x18\x06 \x01(\v2B.api.wallet.service.v1.UpdateResponsibleGamblingConfigEvent.ConfigR\fbeforeConfig\x12e\n" +
+	"\fafter_config\x18\a \x01(\v2B.api.wallet.service.v1.UpdateResponsibleGamblingConfigEvent.ConfigR\vafterConfig\x12\x1d\n" +
 	"\n" +
 	"updated_at\x18\b \x01(\x03R\tupdatedAt\x1a\xf0\a\n" +
 	"\x06Config\x12#\n" +
@@ -1045,20 +1045,20 @@ func file_wallet_service_v1_wallet_event_proto_rawDescGZIP() []byte {
 
 var file_wallet_service_v1_wallet_event_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_wallet_service_v1_wallet_event_proto_goTypes = []any{
-	(*EventRequest)(nil),                               // 0: api.wallet.service.v1.EventRequest
-	(*EventResponse)(nil),                              // 1: api.wallet.service.v1.EventResponse
-	(*BalanceUpdateEvent)(nil),                         // 2: api.wallet.service.v1.BalanceUpdateEvent
-	(*OperatorBalanceUpdateEvent)(nil),                 // 3: api.wallet.service.v1.OperatorBalanceUpdateEvent
-	(*UpdateReponsibleGamblingConfigEvent)(nil),        // 4: api.wallet.service.v1.UpdateReponsibleGamblingConfigEvent
-	(*UpdateReponsibleGamblingConfigEvent_Config)(nil), // 5: api.wallet.service.v1.UpdateReponsibleGamblingConfigEvent.Config
-	(*common.OperatorContext)(nil),                     // 6: api.common.OperatorContext
+	(*EventRequest)(nil),                                // 0: api.wallet.service.v1.EventRequest
+	(*EventResponse)(nil),                               // 1: api.wallet.service.v1.EventResponse
+	(*BalanceUpdateEvent)(nil),                          // 2: api.wallet.service.v1.BalanceUpdateEvent
+	(*OperatorBalanceUpdateEvent)(nil),                  // 3: api.wallet.service.v1.OperatorBalanceUpdateEvent
+	(*UpdateResponsibleGamblingConfigEvent)(nil),        // 4: api.wallet.service.v1.UpdateResponsibleGamblingConfigEvent
+	(*UpdateResponsibleGamblingConfigEvent_Config)(nil), // 5: api.wallet.service.v1.UpdateResponsibleGamblingConfigEvent.Config
+	(*common.OperatorContext)(nil),                      // 6: api.common.OperatorContext
 }
 var file_wallet_service_v1_wallet_event_proto_depIdxs = []int32{
 	6, // 0: api.wallet.service.v1.BalanceUpdateEvent.operator_context:type_name -> api.common.OperatorContext
 	6, // 1: api.wallet.service.v1.OperatorBalanceUpdateEvent.operator_context:type_name -> api.common.OperatorContext
-	6, // 2: api.wallet.service.v1.UpdateReponsibleGamblingConfigEvent.initiator_operator_context:type_name -> api.common.OperatorContext
-	5, // 3: api.wallet.service.v1.UpdateReponsibleGamblingConfigEvent.before_config:type_name -> api.wallet.service.v1.UpdateReponsibleGamblingConfigEvent.Config
-	5, // 4: api.wallet.service.v1.UpdateReponsibleGamblingConfigEvent.after_config:type_name -> api.wallet.service.v1.UpdateReponsibleGamblingConfigEvent.Config
+	6, // 2: api.wallet.service.v1.UpdateResponsibleGamblingConfigEvent.initiator_operator_context:type_name -> api.common.OperatorContext
+	5, // 3: api.wallet.service.v1.UpdateResponsibleGamblingConfigEvent.before_config:type_name -> api.wallet.service.v1.UpdateResponsibleGamblingConfigEvent.Config
+	5, // 4: api.wallet.service.v1.UpdateResponsibleGamblingConfigEvent.after_config:type_name -> api.wallet.service.v1.UpdateResponsibleGamblingConfigEvent.Config
 	0, // 5: api.wallet.service.v1.WalletEvent.Event:input_type -> api.wallet.service.v1.EventRequest
 	1, // 6: api.wallet.service.v1.WalletEvent.Event:output_type -> api.wallet.service.v1.EventResponse
 	6, // [6:7] is the sub-list for method output_type
