@@ -84,7 +84,7 @@ message OperatorBalanceUpdateEvent {
 	int64 created_at = 15;
 }
 
-message UpdateReponsibleGamblingConfigEvent {
+message UpdateResponsibleGamblingConfigEvent {
 	message Config {
 		string deposit_limit = 1;
 		string withdrawal_limit = 2;
