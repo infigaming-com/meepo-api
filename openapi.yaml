@@ -752,6 +752,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateGameResponse'
+    /v1/backoffice/operator/account-settings/get:
+        post:
+            tags:
+                - BackofficeOperator
+            operationId: BackofficeOperator_GetOperatorAccountSettings
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorAccountSettingsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.GetOperatorAccountSettingsResponse'
+    /v1/backoffice/operator/account-settings/update:
+        post:
+            tags:
+                - BackofficeOperator
+            operationId: BackofficeOperator_UpdateOperatorAccountSettings
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOperatorAccountSettingsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.UpdateOperatorAccountSettingsResponse'
     /v1/backoffice/operator/list:
         post:
             tags:
@@ -770,6 +806,96 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListOperatorsResponse'
+    /v1/backoffice/operator/register-limit-config/get:
+        post:
+            tags:
+                - BackofficeOperator
+            operationId: BackofficeOperator_GetOperatorRegisterLimitConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorRegisterLimitConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.GetOperatorRegisterLimitConfigResponse'
+    /v1/backoffice/operator/register-limit-config/set:
+        post:
+            tags:
+                - BackofficeOperator
+            operationId: BackofficeOperator_SetOperatorRegisterLimitConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.SetOperatorRegisterLimitConfigResponse'
+    /v1/backoffice/operator/register-login-blacklist/add:
+        post:
+            tags:
+                - BackofficeOperator
+            operationId: BackofficeOperator_AddRegisterLoginBlacklist
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AddRegisterLoginBlacklistRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.AddRegisterLoginBlacklistResponse'
+    /v1/backoffice/operator/register-login-blacklist/delete:
+        post:
+            tags:
+                - BackofficeOperator
+            operationId: BackofficeOperator_DeleteRegisterLoginBlacklist
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteRegisterLoginBlacklistRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.DeleteRegisterLoginBlacklistResponse'
+    /v1/backoffice/operator/register-login-blacklist/list:
+        post:
+            tags:
+                - BackofficeOperator
+            operationId: BackofficeOperator_ListRegisterLoginBlacklist
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListRegisterLoginBlacklistRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.ListRegisterLoginBlacklistResponse'
     /v1/backoffice/payment/transaction/detail:
         post:
             tags:
@@ -2189,6 +2315,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.GetUserResponse'
+    /v1/user/operator/account-settings/get:
+        post:
+            tags:
+                - User
+            operationId: User_GetOperatorAccountSettings
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.GetOperatorAccountSettingsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.GetOperatorAccountSettingsResponse'
     /v1/user/tags/get:
         post:
             tags:
@@ -2304,6 +2448,15 @@ components:
             properties:
                 commentId:
                     type: string
+        api.backoffice.service.v1.AddRegisterLoginBlacklistRequest:
+            type: object
+            properties:
+                idType:
+                    type: string
+                ids:
+                    type: array
+                    items:
+                        type: string
         api.backoffice.service.v1.AddSystemCurrencyRequest:
             type: object
             properties:
@@ -2496,6 +2649,15 @@ components:
         api.backoffice.service.v1.CreateUserResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.DeleteRegisterLoginBlacklistRequest:
+            type: object
+            properties:
+                idType:
+                    type: string
+                ids:
+                    type: array
+                    items:
+                        type: string
         api.backoffice.service.v1.DeleteRoleRequest:
             type: object
             properties:
@@ -3028,6 +3190,12 @@ components:
                     $ref: '#/components/schemas/api.backoffice.service.v1.GameTransaction_Amount'
                 validBetAmount:
                     type: string
+        api.backoffice.service.v1.GetOperatorAccountSettingsRequest:
+            type: object
+            properties: {}
+        api.backoffice.service.v1.GetOperatorRegisterLimitConfigRequest:
+            type: object
+            properties: {}
         api.backoffice.service.v1.GetOperatorTagsConfigRequest:
             type: object
             properties:
@@ -4872,6 +5040,17 @@ components:
                     format: int32
                 enabled:
                     type: boolean
+        api.backoffice.service.v1.ListRegisterLoginBlacklistRequest:
+            type: object
+            properties:
+                idType:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListRegisterRetentionRequest:
             type: object
             properties:
@@ -6018,6 +6197,13 @@ components:
         api.backoffice.service.v1.SendRegisterVerificationCodeResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.SetOperatorRegisterLimitConfigRequest:
+            type: object
+            properties:
+                config:
+                    type: object
+                    additionalProperties:
+                        $ref: '#/components/schemas/api.user.service.v1.OperatorRegisterLimitConfig'
         api.backoffice.service.v1.SetOperatorTagsConfigRequest:
             type: object
             properties:
@@ -6199,6 +6385,11 @@ components:
         api.backoffice.service.v1.UpdateGameResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.UpdateOperatorAccountSettingsRequest:
+            type: object
+            properties:
+                accountSettings:
+                    $ref: '#/components/schemas/api.user.service.v1.OperatorAccountSettings'
         api.backoffice.service.v1.UpdateProviderRequest:
             type: object
             properties:
@@ -7013,6 +7204,9 @@ components:
             properties:
                 ticketId:
                     type: string
+        api.user.service.v1.AddRegisterLoginBlacklistResponse:
+            type: object
+            properties: {}
         api.user.service.v1.AuthResponse:
             type: object
             properties:
@@ -7030,6 +7224,26 @@ components:
                         - $ref: '#/components/schemas/api.user.service.v1.UserInfo'
                     description: Basic information about the authenticated user.
             description: AuthResponse contains the authentication tokens and user information.
+        api.user.service.v1.DeleteRegisterLoginBlacklistResponse:
+            type: object
+            properties: {}
+        api.user.service.v1.GetOperatorAccountSettingsRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: string
+        api.user.service.v1.GetOperatorAccountSettingsResponse:
+            type: object
+            properties:
+                accountSettings:
+                    $ref: '#/components/schemas/api.user.service.v1.OperatorAccountSettings'
+        api.user.service.v1.GetOperatorRegisterLimitConfigResponse:
+            type: object
+            properties:
+                config:
+                    type: object
+                    additionalProperties:
+                        $ref: '#/components/schemas/api.user.service.v1.OperatorRegisterLimitConfig'
         api.user.service.v1.GetUserRequest:
             type: object
             properties:
@@ -7058,6 +7272,32 @@ components:
                         type: string
                     description: List of active tags associated with the user.
             description: GetUserTagsResponse contains the list of active tags associated with the user.
+        api.user.service.v1.ListRegisterLoginBlacklistResponse:
+            type: object
+            properties:
+                registerLoginBlacklists:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.ListRegisterLoginBlacklistResponse_RegisterLoginBlacklist'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                total:
+                    type: integer
+                    format: int32
+        api.user.service.v1.ListRegisterLoginBlacklistResponse_RegisterLoginBlacklist:
+            type: object
+            properties:
+                id:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                source:
+                    type: string
         api.user.service.v1.LoginRequest:
             type: object
             properties:
@@ -7101,6 +7341,70 @@ components:
                     type: string
                     description: The OAuth token received from the provider.
             description: OAuthRequest contains the information needed for OAuth authentication.
+        api.user.service.v1.OperatorAccountGameSettings:
+            type: object
+            properties:
+                noGameWithoutDeposit:
+                    type: boolean
+                minGameKycLevel:
+                    type: integer
+                    format: int32
+        api.user.service.v1.OperatorAccountPasswordSettings:
+            type: object
+            properties:
+                minCharacters:
+                    type: integer
+                    format: int32
+                minUppercaseCharacters:
+                    type: integer
+                    format: int32
+                minLowercaseCharacters:
+                    type: integer
+                    format: int32
+                minSpecialCharacters:
+                    type: integer
+                    format: int32
+                minDigits:
+                    type: integer
+                    format: int32
+        api.user.service.v1.OperatorAccountPaymentSettings:
+            type: object
+            properties:
+                minDepositKycLevel:
+                    type: integer
+                    format: int32
+                minWithdrawKycLevel:
+                    type: integer
+                    format: int32
+        api.user.service.v1.OperatorAccountSecuritySettings:
+            type: object
+            properties:
+                maxPasswordRetries:
+                    type: integer
+                    format: int32
+                passwordExpiryDays:
+                    type: integer
+                    format: int32
+                passwordHistoryLimits:
+                    type: integer
+                    format: int32
+        api.user.service.v1.OperatorAccountSettings:
+            type: object
+            properties:
+                passwordSettings:
+                    $ref: '#/components/schemas/api.user.service.v1.OperatorAccountPasswordSettings'
+                securitySettings:
+                    $ref: '#/components/schemas/api.user.service.v1.OperatorAccountSecuritySettings'
+                gameSettings:
+                    $ref: '#/components/schemas/api.user.service.v1.OperatorAccountGameSettings'
+                paymentSettings:
+                    $ref: '#/components/schemas/api.user.service.v1.OperatorAccountPaymentSettings'
+        api.user.service.v1.OperatorRegisterLimitConfig:
+            type: object
+            properties:
+                registrationLimitPerIp:
+                    type: integer
+                    format: int32
         api.user.service.v1.RefreshTokenRequest:
             type: object
             properties:
@@ -7176,6 +7480,9 @@ components:
         api.user.service.v1.SendPasswordResetCodeResponse:
             type: object
             properties: {}
+        api.user.service.v1.SetOperatorRegisterLimitConfigResponse:
+            type: object
+            properties: {}
         api.user.service.v1.TelegramAuthRequest:
             type: object
             properties:
@@ -7201,6 +7508,9 @@ components:
                     type: string
                     description: Hash for verifying the authentication data.
             description: TelegramAuthRequest contains the information from Telegram's login widget.
+        api.user.service.v1.UpdateOperatorAccountSettingsResponse:
+            type: object
+            properties: {}
         api.user.service.v1.UserInfo:
             type: object
             properties:

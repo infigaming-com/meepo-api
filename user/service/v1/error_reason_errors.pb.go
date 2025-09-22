@@ -684,3 +684,123 @@ func IsGetOperatorsByIdsFailed(err error) bool {
 func ErrorGetOperatorsByIdsFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_OPERATORS_BY_IDS_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetOperatorByIdFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATOR_BY_ID_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorByIdFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_BY_ID_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetRegisterLoginBlacklistFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_REGISTER_LOGIN_BLACKLIST_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetRegisterLoginBlacklistFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_REGISTER_LOGIN_BLACKLIST_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListRegisterLoginBlacklistFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_REGISTER_LOGIN_BLACKLIST_FAILED.String() && e.Code == 500
+}
+
+func ErrorListRegisterLoginBlacklistFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_REGISTER_LOGIN_BLACKLIST_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsAddRegisterLoginBlacklistFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ADD_REGISTER_LOGIN_BLACKLIST_FAILED.String() && e.Code == 500
+}
+
+func ErrorAddRegisterLoginBlacklistFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_REGISTER_LOGIN_BLACKLIST_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDeleteRegisterLoginBlacklistFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DELETE_REGISTER_LOGIN_BLACKLIST_FAILED.String() && e.Code == 500
+}
+
+func ErrorDeleteRegisterLoginBlacklistFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DELETE_REGISTER_LOGIN_BLACKLIST_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidRegisterLoginBlacklistIdType(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_REGISTER_LOGIN_BLACKLIST_ID_TYPE.String() && e.Code == 500
+}
+
+func ErrorInvalidRegisterLoginBlacklistIdType(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_REGISTER_LOGIN_BLACKLIST_ID_TYPE.String(), fmt.Sprintf(format, args...))
+}
+
+func IsBlockedByRegisterLoginBlacklist(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_BLOCKED_BY_REGISTER_LOGIN_BLACKLIST.String() && e.Code == 500
+}
+
+func ErrorBlockedByRegisterLoginBlacklist(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_BLOCKED_BY_REGISTER_LOGIN_BLACKLIST.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidOperatorRegisterLimitConfig(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_OPERATOR_REGISTER_LIMIT_CONFIG.String() && e.Code == 500
+}
+
+func ErrorInvalidOperatorRegisterLimitConfig(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_OPERATOR_REGISTER_LIMIT_CONFIG.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateOperatorFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_OPERATOR_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateOperatorFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_OPERATOR_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsRegistrationPerIpLimitExceeded(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_REGISTRATION_PER_IP_LIMIT_EXCEEDED.String() && e.Code == 500
+}
+
+func ErrorRegistrationPerIpLimitExceeded(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_REGISTRATION_PER_IP_LIMIT_EXCEEDED.String(), fmt.Sprintf(format, args...))
+}
