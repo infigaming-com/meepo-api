@@ -9695,15 +9695,13 @@ func (m *ResetPasswordWithCodeRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for OperatorId
+
 	// no validation rules for Email
 
 	// no validation rules for VerificationCode
 
 	// no validation rules for NewPassword
-
-	if m.OperatorId != nil {
-		// no validation rules for OperatorId
-	}
 
 	if len(errors) > 0 {
 		return ResetPasswordWithCodeRequestMultiError(errors)
