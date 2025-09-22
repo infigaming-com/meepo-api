@@ -40,6 +40,7 @@ const (
 	BackofficeGame_ExportUnpaidBets_FullMethodName          = "/api.backoffice.service.v1.BackofficeGame/ExportUnpaidBets"
 	BackofficeGame_ListMultipleBets_FullMethodName          = "/api.backoffice.service.v1.BackofficeGame/ListMultipleBets"
 	BackofficeGame_ListStakeVarianceBets_FullMethodName     = "/api.backoffice.service.v1.BackofficeGame/ListStakeVarianceBets"
+	BackofficeGame_ListCustomerStrikeReports_FullMethodName = "/api.backoffice.service.v1.BackofficeGame/ListCustomerStrikeReports"
 )
 
 // BackofficeGameClient is the client API for BackofficeGame service.
@@ -72,6 +73,7 @@ type BackofficeGameClient interface {
 	ExportUnpaidBets(ctx context.Context, in *ExportUnpaidBetsRequest, opts ...grpc.CallOption) (*v1.ExportUnpaidBetsResponse, error)
 	ListMultipleBets(ctx context.Context, in *ListMultipleBetsRequest, opts ...grpc.CallOption) (*v1.ListMultipleBetsResponse, error)
 	ListStakeVarianceBets(ctx context.Context, in *ListStakeVarianceBetsRequest, opts ...grpc.CallOption) (*v1.ListStakeVarianceBetsResponse, error)
+	ListCustomerStrikeReports(ctx context.Context, in *ListCustomerStrikeReportsRequest, opts ...grpc.CallOption) (*v1.ListCustomerStrikeReportsResponse, error)
 }
 
 type backofficeGameClient struct {
@@ -282,6 +284,16 @@ func (c *backofficeGameClient) ListStakeVarianceBets(ctx context.Context, in *Li
 	return out, nil
 }
 
+func (c *backofficeGameClient) ListCustomerStrikeReports(ctx context.Context, in *ListCustomerStrikeReportsRequest, opts ...grpc.CallOption) (*v1.ListCustomerStrikeReportsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListCustomerStrikeReportsResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ListCustomerStrikeReports_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeGameServer is the server API for BackofficeGame service.
 // All implementations must embed UnimplementedBackofficeGameServer
 // for forward compatibility.
@@ -312,6 +324,7 @@ type BackofficeGameServer interface {
 	ExportUnpaidBets(context.Context, *ExportUnpaidBetsRequest) (*v1.ExportUnpaidBetsResponse, error)
 	ListMultipleBets(context.Context, *ListMultipleBetsRequest) (*v1.ListMultipleBetsResponse, error)
 	ListStakeVarianceBets(context.Context, *ListStakeVarianceBetsRequest) (*v1.ListStakeVarianceBetsResponse, error)
+	ListCustomerStrikeReports(context.Context, *ListCustomerStrikeReportsRequest) (*v1.ListCustomerStrikeReportsResponse, error)
 	mustEmbedUnimplementedBackofficeGameServer()
 }
 
@@ -381,6 +394,9 @@ func (UnimplementedBackofficeGameServer) ListMultipleBets(context.Context, *List
 }
 func (UnimplementedBackofficeGameServer) ListStakeVarianceBets(context.Context, *ListStakeVarianceBetsRequest) (*v1.ListStakeVarianceBetsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListStakeVarianceBets not implemented")
+}
+func (UnimplementedBackofficeGameServer) ListCustomerStrikeReports(context.Context, *ListCustomerStrikeReportsRequest) (*v1.ListCustomerStrikeReportsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCustomerStrikeReports not implemented")
 }
 func (UnimplementedBackofficeGameServer) mustEmbedUnimplementedBackofficeGameServer() {}
 func (UnimplementedBackofficeGameServer) testEmbeddedByValue()                        {}
@@ -763,6 +779,24 @@ func _BackofficeGame_ListStakeVarianceBets_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeGame_ListCustomerStrikeReports_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCustomerStrikeReportsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ListCustomerStrikeReports(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ListCustomerStrikeReports_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ListCustomerStrikeReports(ctx, req.(*ListCustomerStrikeReportsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeGame_ServiceDesc is the grpc.ServiceDesc for BackofficeGame service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -849,6 +883,10 @@ var BackofficeGame_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListStakeVarianceBets",
 			Handler:    _BackofficeGame_ListStakeVarianceBets_Handler,
+		},
+		{
+			MethodName: "ListCustomerStrikeReports",
+			Handler:    _BackofficeGame_ListCustomerStrikeReports_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
