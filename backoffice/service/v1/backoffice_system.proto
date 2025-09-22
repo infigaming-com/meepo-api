@@ -83,5 +83,5 @@ message ListReportExportRequest {
 	optional google.protobuf.Timestamp end = 5;
 	int32 page = 6;
 	int32 page_size = 7;
-	api.common.OperatorContextFilters operator_context_filters = 8;
+	optional api.common.OperatorContextFilters operator_context_filters = 8;
 }

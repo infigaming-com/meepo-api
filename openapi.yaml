@@ -16402,21 +16402,6 @@ components:
                 totalCount:
                     type: integer
                     format: int32
-                totalCompleted:
-                    type: integer
-                    format: int32
-                totalGenerating:
-                    type: integer
-                    format: int32
-                totalPending:
-                    type: integer
-                    format: int32
-                totalFailed:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
         system.service.v1.ListReportExportResponse_ReportExport:
             type: object
             properties:

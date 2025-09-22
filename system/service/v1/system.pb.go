@@ -380,7 +380,7 @@ type ListReportExportRequest struct {
 	End                    *timestamppb.Timestamp         `protobuf:"bytes,5,opt,name=end,proto3,oneof" json:"end,omitempty"`
 	Page                   int32                          `protobuf:"varint,6,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize               int32                          `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,8,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,8,opt,name=operator_context_filters,json=operatorContextFilters,proto3,oneof" json:"operator_context_filters,omitempty"`
 	OperatorContext        *common.OperatorContext        `protobuf:"bytes,9,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
@@ -480,16 +480,11 @@ func (x *ListReportExportRequest) GetOperatorContext() *common.OperatorContext {
 }
 
 type ListReportExportResponse struct {
-	state           protoimpl.MessageState                   `protogen:"open.v1"`
-	Tasks           []*ListReportExportResponse_ReportExport `protobuf:"bytes,1,rep,name=tasks,proto3" json:"tasks,omitempty"`
-	TotalCount      int32                                    `protobuf:"varint,2,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
-	TotalCompleted  int32                                    `protobuf:"varint,3,opt,name=total_completed,json=totalCompleted,proto3" json:"total_completed,omitempty"`
-	TotalGenerating int32                                    `protobuf:"varint,4,opt,name=total_generating,json=totalGenerating,proto3" json:"total_generating,omitempty"`
-	TotalPending    int32                                    `protobuf:"varint,5,opt,name=total_pending,json=totalPending,proto3" json:"total_pending,omitempty"`
-	TotalFailed     int32                                    `protobuf:"varint,6,opt,name=total_failed,json=totalFailed,proto3" json:"total_failed,omitempty"`
-	PageSize        int32                                    `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state         protoimpl.MessageState                   `protogen:"open.v1"`
+	Tasks         []*ListReportExportResponse_ReportExport `protobuf:"bytes,1,rep,name=tasks,proto3" json:"tasks,omitempty"`
+	TotalCount    int32                                    `protobuf:"varint,2,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListReportExportResponse) Reset() {
@@ -532,41 +527,6 @@ func (x *ListReportExportResponse) GetTasks() []*ListReportExportResponse_Report
 func (x *ListReportExportResponse) GetTotalCount() int32 {
 	if x != nil {
 		return x.TotalCount
-	}
-	return 0
-}
-
-func (x *ListReportExportResponse) GetTotalCompleted() int32 {
-	if x != nil {
-		return x.TotalCompleted
-	}
-	return 0
-}
-
-func (x *ListReportExportResponse) GetTotalGenerating() int32 {
-	if x != nil {
-		return x.TotalGenerating
-	}
-	return 0
-}
-
-func (x *ListReportExportResponse) GetTotalPending() int32 {
-	if x != nil {
-		return x.TotalPending
-	}
-	return 0
-}
-
-func (x *ListReportExportResponse) GetTotalFailed() int32 {
-	if x != nil {
-		return x.TotalFailed
-	}
-	return 0
-}
-
-func (x *ListReportExportResponse) GetPageSize() int32 {
-	if x != nil {
-		return x.PageSize
 	}
 	return 0
 }
@@ -1499,6 +1459,82 @@ func (x *ListReportExportResponse_ReportExport) GetUserId() int64 {
 	return 0
 }
 
+type ListReportExportResponse_Statistic struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	TotalCount      int32                  `protobuf:"varint,1,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	TotalCompleted  int32                  `protobuf:"varint,2,opt,name=total_completed,json=totalCompleted,proto3" json:"total_completed,omitempty"`
+	TotalGenerating int32                  `protobuf:"varint,3,opt,name=total_generating,json=totalGenerating,proto3" json:"total_generating,omitempty"`
+	TotalPending    int32                  `protobuf:"varint,4,opt,name=total_pending,json=totalPending,proto3" json:"total_pending,omitempty"`
+	TotalFailed     int32                  `protobuf:"varint,5,opt,name=total_failed,json=totalFailed,proto3" json:"total_failed,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *ListReportExportResponse_Statistic) Reset() {
+	*x = ListReportExportResponse_Statistic{}
+	mi := &file_system_service_v1_system_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListReportExportResponse_Statistic) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListReportExportResponse_Statistic) ProtoMessage() {}
+
+func (x *ListReportExportResponse_Statistic) ProtoReflect() protoreflect.Message {
+	mi := &file_system_service_v1_system_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListReportExportResponse_Statistic.ProtoReflect.Descriptor instead.
+func (*ListReportExportResponse_Statistic) Descriptor() ([]byte, []int) {
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{8, 1}
+}
+
+func (x *ListReportExportResponse_Statistic) GetTotalCount() int32 {
+	if x != nil {
+		return x.TotalCount
+	}
+	return 0
+}
+
+func (x *ListReportExportResponse_Statistic) GetTotalCompleted() int32 {
+	if x != nil {
+		return x.TotalCompleted
+	}
+	return 0
+}
+
+func (x *ListReportExportResponse_Statistic) GetTotalGenerating() int32 {
+	if x != nil {
+		return x.TotalGenerating
+	}
+	return 0
+}
+
+func (x *ListReportExportResponse_Statistic) GetTotalPending() int32 {
+	if x != nil {
+		return x.TotalPending
+	}
+	return 0
+}
+
+func (x *ListReportExportResponse_Statistic) GetTotalFailed() int32 {
+	if x != nil {
+		return x.TotalFailed
+	}
+	return 0
+}
+
 var File_system_service_v1_system_proto protoreflect.FileDescriptor
 
 const file_system_service_v1_system_proto_rawDesc = "" +
@@ -1537,7 +1573,7 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\rpod_namespace\x18\x03 \x01(\tR\fpodNamespace\x12:\n" +
 	"\n" +
 	"file_infos\x18\x04 \x03(\v2\x1b.system.service.v1.FileInfoR\tfileInfos\"\x1c\n" +
-	"\x1aSetIntegrityConfigResponse\"\xd1\x03\n" +
+	"\x1aSetIntegrityConfigResponse\"\xf3\x03\n" +
 	"\x17ListReportExportRequest\x12\x19\n" +
 	"\btask_ids\x18\x01 \x03(\x03R\ataskIds\x12\x17\n" +
 	"\x04type\x18\x02 \x01(\tH\x00R\x04type\x88\x01\x01\x12\x1b\n" +
@@ -1545,22 +1581,18 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\x05start\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\x05start\x88\x01\x01\x121\n" +
 	"\x03end\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\x03end\x88\x01\x01\x12\x12\n" +
 	"\x04page\x18\x06 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\a \x01(\x05R\bpageSize\x12\\\n" +
-	"\x18operator_context_filters\x18\b \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
+	"\tpage_size\x18\a \x01(\x05R\bpageSize\x12a\n" +
+	"\x18operator_context_filters\x18\b \x01(\v2\".api.common.OperatorContextFiltersH\x04R\x16operatorContextFilters\x88\x01\x01\x12F\n" +
 	"\x10operator_context\x18\t \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\a\n" +
 	"\x05_typeB\t\n" +
 	"\a_statusB\b\n" +
 	"\x06_startB\x06\n" +
-	"\x04_end\"\x81\x05\n" +
+	"\x04_endB\x1b\n" +
+	"\x19_operator_context_filters\"\x93\x05\n" +
 	"\x18ListReportExportResponse\x12N\n" +
 	"\x05tasks\x18\x01 \x03(\v28.system.service.v1.ListReportExportResponse.ReportExportR\x05tasks\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
-	"totalCount\x12'\n" +
-	"\x0ftotal_completed\x18\x03 \x01(\x05R\x0etotalCompleted\x12)\n" +
-	"\x10total_generating\x18\x04 \x01(\x05R\x0ftotalGenerating\x12#\n" +
-	"\rtotal_pending\x18\x05 \x01(\x05R\ftotalPending\x12!\n" +
-	"\ftotal_failed\x18\x06 \x01(\x05R\vtotalFailed\x12\x1b\n" +
-	"\tpage_size\x18\a \x01(\x05R\bpageSize\x1a\xba\x02\n" +
+	"totalCount\x1a\xba\x02\n" +
 	"\fReportExport\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x1b\n" +
 	"\tuser_name\x18\x02 \x01(\tR\buserName\x12\x1d\n" +
@@ -1574,7 +1606,14 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"fileFormat\x127\n" +
 	"\tcreate_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\bcreateAt\x12\x17\n" +
 	"\auser_id\x18\n" +
-	" \x01(\x03R\x06userId\"\xb8\x02\n" +
+	" \x01(\x03R\x06userId\x1a\xc8\x01\n" +
+	"\tStatistic\x12\x1f\n" +
+	"\vtotal_count\x18\x01 \x01(\x05R\n" +
+	"totalCount\x12'\n" +
+	"\x0ftotal_completed\x18\x02 \x01(\x05R\x0etotalCompleted\x12)\n" +
+	"\x10total_generating\x18\x03 \x01(\x05R\x0ftotalGenerating\x12#\n" +
+	"\rtotal_pending\x18\x04 \x01(\x05R\ftotalPending\x12!\n" +
+	"\ftotal_failed\x18\x05 \x01(\x05R\vtotalFailed\"\xb8\x02\n" +
 	"\x19CreateReportExportRequest\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x12\n" +
@@ -1673,7 +1712,7 @@ func file_system_service_v1_system_proto_rawDescGZIP() []byte {
 	return file_system_service_v1_system_proto_rawDescData
 }
 
-var file_system_service_v1_system_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
+var file_system_service_v1_system_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
 var file_system_service_v1_system_proto_goTypes = []any{
 	(*FileInfo)(nil),                                             // 0: system.service.v1.FileInfo
 	(*AddIntegrityReportRequest)(nil),                            // 1: system.service.v1.AddIntegrityReportRequest
@@ -1696,34 +1735,35 @@ var file_system_service_v1_system_proto_goTypes = []any{
 	(*ListIntegrityStatusResponse_IntegrityStatus)(nil),          // 18: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus
 	(*ListIntegrityStatusResponse_IntegrityStatus_FileInfo)(nil), // 19: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.FileInfo
 	(*ListReportExportResponse_ReportExport)(nil),                // 20: system.service.v1.ListReportExportResponse.ReportExport
-	(*common.OperatorContext)(nil),                               // 21: api.common.OperatorContext
-	(*timestamppb.Timestamp)(nil),                                // 22: google.protobuf.Timestamp
-	(*common.OperatorContextFilters)(nil),                        // 23: api.common.OperatorContextFilters
+	(*ListReportExportResponse_Statistic)(nil),                   // 21: system.service.v1.ListReportExportResponse.Statistic
+	(*common.OperatorContext)(nil),                               // 22: api.common.OperatorContext
+	(*timestamppb.Timestamp)(nil),                                // 23: google.protobuf.Timestamp
+	(*common.OperatorContextFilters)(nil),                        // 24: api.common.OperatorContextFilters
 }
 var file_system_service_v1_system_proto_depIdxs = []int32{
 	0,  // 0: system.service.v1.AddIntegrityReportRequest.file_infos:type_name -> system.service.v1.FileInfo
-	21, // 1: system.service.v1.ListIntegrityStatusRequest.operator_context:type_name -> api.common.OperatorContext
+	22, // 1: system.service.v1.ListIntegrityStatusRequest.operator_context:type_name -> api.common.OperatorContext
 	18, // 2: system.service.v1.ListIntegrityStatusResponse.integrity_statuses:type_name -> system.service.v1.ListIntegrityStatusResponse.IntegrityStatus
-	21, // 3: system.service.v1.SetIntegrityConfigRequest.operator_context:type_name -> api.common.OperatorContext
+	22, // 3: system.service.v1.SetIntegrityConfigRequest.operator_context:type_name -> api.common.OperatorContext
 	0,  // 4: system.service.v1.SetIntegrityConfigRequest.file_infos:type_name -> system.service.v1.FileInfo
-	22, // 5: system.service.v1.ListReportExportRequest.start:type_name -> google.protobuf.Timestamp
-	22, // 6: system.service.v1.ListReportExportRequest.end:type_name -> google.protobuf.Timestamp
-	23, // 7: system.service.v1.ListReportExportRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	21, // 8: system.service.v1.ListReportExportRequest.operator_context:type_name -> api.common.OperatorContext
+	23, // 5: system.service.v1.ListReportExportRequest.start:type_name -> google.protobuf.Timestamp
+	23, // 6: system.service.v1.ListReportExportRequest.end:type_name -> google.protobuf.Timestamp
+	24, // 7: system.service.v1.ListReportExportRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	22, // 8: system.service.v1.ListReportExportRequest.operator_context:type_name -> api.common.OperatorContext
 	20, // 9: system.service.v1.ListReportExportResponse.tasks:type_name -> system.service.v1.ListReportExportResponse.ReportExport
-	22, // 10: system.service.v1.CreateReportExportRequest.create_at:type_name -> google.protobuf.Timestamp
-	21, // 11: system.service.v1.CreateReportExportRequest.operator_context:type_name -> api.common.OperatorContext
-	22, // 12: system.service.v1.Sev.timestamp:type_name -> google.protobuf.Timestamp
-	21, // 13: system.service.v1.ListSevRequest.operator_context:type_name -> api.common.OperatorContext
-	22, // 14: system.service.v1.ListSevRequest.start_time:type_name -> google.protobuf.Timestamp
-	22, // 15: system.service.v1.ListSevRequest.end_time:type_name -> google.protobuf.Timestamp
+	23, // 10: system.service.v1.CreateReportExportRequest.create_at:type_name -> google.protobuf.Timestamp
+	22, // 11: system.service.v1.CreateReportExportRequest.operator_context:type_name -> api.common.OperatorContext
+	23, // 12: system.service.v1.Sev.timestamp:type_name -> google.protobuf.Timestamp
+	22, // 13: system.service.v1.ListSevRequest.operator_context:type_name -> api.common.OperatorContext
+	23, // 14: system.service.v1.ListSevRequest.start_time:type_name -> google.protobuf.Timestamp
+	23, // 15: system.service.v1.ListSevRequest.end_time:type_name -> google.protobuf.Timestamp
 	13, // 16: system.service.v1.ListSevResponse.sevs:type_name -> system.service.v1.Sev
-	22, // 17: system.service.v1.ExportSevRequest.start_time:type_name -> google.protobuf.Timestamp
-	22, // 18: system.service.v1.ExportSevRequest.end_time:type_name -> google.protobuf.Timestamp
-	21, // 19: system.service.v1.ExportSevRequest.operator_context:type_name -> api.common.OperatorContext
+	23, // 17: system.service.v1.ExportSevRequest.start_time:type_name -> google.protobuf.Timestamp
+	23, // 18: system.service.v1.ExportSevRequest.end_time:type_name -> google.protobuf.Timestamp
+	22, // 19: system.service.v1.ExportSevRequest.operator_context:type_name -> api.common.OperatorContext
 	19, // 20: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.file_infos:type_name -> system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.FileInfo
-	22, // 21: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.created_at:type_name -> google.protobuf.Timestamp
-	22, // 22: system.service.v1.ListReportExportResponse.ReportExport.create_at:type_name -> google.protobuf.Timestamp
+	23, // 21: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.created_at:type_name -> google.protobuf.Timestamp
+	23, // 22: system.service.v1.ListReportExportResponse.ReportExport.create_at:type_name -> google.protobuf.Timestamp
 	1,  // 23: system.service.v1.System.AddIntegrityReport:input_type -> system.service.v1.AddIntegrityReportRequest
 	3,  // 24: system.service.v1.System.ListIntegrityStatus:input_type -> system.service.v1.ListIntegrityStatusRequest
 	5,  // 25: system.service.v1.System.SetIntegrityConfig:input_type -> system.service.v1.SetIntegrityConfigRequest
@@ -1761,7 +1801,7 @@ func file_system_service_v1_system_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_system_service_v1_system_proto_rawDesc), len(file_system_service_v1_system_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   21,
+			NumMessages:   22,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
