@@ -948,6 +948,35 @@ func (m *ListReportExportRequest) validate(all bool) error {
 	// no validation rules for PageSize
 
 	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListReportExportRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListReportExportRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListReportExportRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
@@ -1186,7 +1215,7 @@ func (m *ListReportExportResponse) validate(all bool) error {
 
 	}
 
-	// no validation rules for TotalPage
+	// no validation rules for TotalCount
 
 	// no validation rules for TotalCompleted
 
@@ -2947,6 +2976,8 @@ func (m *ListReportExportResponse_ReportExport) validate(all bool) error {
 			}
 		}
 	}
+
+	// no validation rules for UserId
 
 	if len(errors) > 0 {
 		return ListReportExportResponse_ReportExportMultiError(errors)

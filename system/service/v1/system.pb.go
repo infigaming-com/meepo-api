@@ -372,17 +372,18 @@ func (*SetIntegrityConfigResponse) Descriptor() ([]byte, []int) {
 }
 
 type ListReportExportRequest struct {
-	state           protoimpl.MessageState  `protogen:"open.v1"`
-	TaskIds         []int64                 `protobuf:"varint,1,rep,packed,name=task_ids,json=taskIds,proto3" json:"task_ids,omitempty"`
-	Type            *string                 `protobuf:"bytes,2,opt,name=type,proto3,oneof" json:"type,omitempty"`
-	Status          *string                 `protobuf:"bytes,3,opt,name=status,proto3,oneof" json:"status,omitempty"`
-	Start           *timestamppb.Timestamp  `protobuf:"bytes,4,opt,name=start,proto3,oneof" json:"start,omitempty"`
-	End             *timestamppb.Timestamp  `protobuf:"bytes,5,opt,name=end,proto3,oneof" json:"end,omitempty"`
-	Page            int32                   `protobuf:"varint,6,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize        int32                   `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,8,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	TaskIds                []int64                        `protobuf:"varint,1,rep,packed,name=task_ids,json=taskIds,proto3" json:"task_ids,omitempty"`
+	Type                   *string                        `protobuf:"bytes,2,opt,name=type,proto3,oneof" json:"type,omitempty"`
+	Status                 *string                        `protobuf:"bytes,3,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	Start                  *timestamppb.Timestamp         `protobuf:"bytes,4,opt,name=start,proto3,oneof" json:"start,omitempty"`
+	End                    *timestamppb.Timestamp         `protobuf:"bytes,5,opt,name=end,proto3,oneof" json:"end,omitempty"`
+	Page                   int32                          `protobuf:"varint,6,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize               int32                          `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,8,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	OperatorContext        *common.OperatorContext        `protobuf:"bytes,9,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ListReportExportRequest) Reset() {
@@ -464,6 +465,13 @@ func (x *ListReportExportRequest) GetPageSize() int32 {
 	return 0
 }
 
+func (x *ListReportExportRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
 func (x *ListReportExportRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.OperatorContext
@@ -474,7 +482,7 @@ func (x *ListReportExportRequest) GetOperatorContext() *common.OperatorContext {
 type ListReportExportResponse struct {
 	state           protoimpl.MessageState                   `protogen:"open.v1"`
 	Tasks           []*ListReportExportResponse_ReportExport `protobuf:"bytes,1,rep,name=tasks,proto3" json:"tasks,omitempty"`
-	TotalPage       int32                                    `protobuf:"varint,2,opt,name=total_page,json=totalPage,proto3" json:"total_page,omitempty"`
+	TotalCount      int32                                    `protobuf:"varint,2,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
 	TotalCompleted  int32                                    `protobuf:"varint,3,opt,name=total_completed,json=totalCompleted,proto3" json:"total_completed,omitempty"`
 	TotalGenerating int32                                    `protobuf:"varint,4,opt,name=total_generating,json=totalGenerating,proto3" json:"total_generating,omitempty"`
 	TotalPending    int32                                    `protobuf:"varint,5,opt,name=total_pending,json=totalPending,proto3" json:"total_pending,omitempty"`
@@ -521,9 +529,9 @@ func (x *ListReportExportResponse) GetTasks() []*ListReportExportResponse_Report
 	return nil
 }
 
-func (x *ListReportExportResponse) GetTotalPage() int32 {
+func (x *ListReportExportResponse) GetTotalCount() int32 {
 	if x != nil {
-		return x.TotalPage
+		return x.TotalCount
 	}
 	return 0
 }
@@ -1386,6 +1394,7 @@ type ListReportExportResponse_ReportExport struct {
 	FileSize      string                 `protobuf:"bytes,7,opt,name=file_size,json=fileSize,proto3" json:"file_size,omitempty"`
 	FileFormat    string                 `protobuf:"bytes,8,opt,name=file_format,json=fileFormat,proto3" json:"file_format,omitempty"`
 	CreateAt      *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=create_at,json=createAt,proto3" json:"create_at,omitempty"`
+	UserId        int64                  `protobuf:"varint,10,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1483,6 +1492,13 @@ func (x *ListReportExportResponse_ReportExport) GetCreateAt() *timestamppb.Times
 	return nil
 }
 
+func (x *ListReportExportResponse_ReportExport) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
 var File_system_service_v1_system_proto protoreflect.FileDescriptor
 
 const file_system_service_v1_system_proto_rawDesc = "" +
@@ -1521,7 +1537,7 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\rpod_namespace\x18\x03 \x01(\tR\fpodNamespace\x12:\n" +
 	"\n" +
 	"file_infos\x18\x04 \x03(\v2\x1b.system.service.v1.FileInfoR\tfileInfos\"\x1c\n" +
-	"\x1aSetIntegrityConfigResponse\"\xf3\x02\n" +
+	"\x1aSetIntegrityConfigResponse\"\xd1\x03\n" +
 	"\x17ListReportExportRequest\x12\x19\n" +
 	"\btask_ids\x18\x01 \x03(\x03R\ataskIds\x12\x17\n" +
 	"\x04type\x18\x02 \x01(\tH\x00R\x04type\x88\x01\x01\x12\x1b\n" +
@@ -1529,21 +1545,22 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\x05start\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\x05start\x88\x01\x01\x121\n" +
 	"\x03end\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\x03end\x88\x01\x01\x12\x12\n" +
 	"\x04page\x18\x06 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\a \x01(\x05R\bpageSize\x12F\n" +
-	"\x10operator_context\x18\b \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\a\n" +
+	"\tpage_size\x18\a \x01(\x05R\bpageSize\x12\\\n" +
+	"\x18operator_context_filters\x18\b \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
+	"\x10operator_context\x18\t \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\a\n" +
 	"\x05_typeB\t\n" +
 	"\a_statusB\b\n" +
 	"\x06_startB\x06\n" +
-	"\x04_end\"\xe6\x04\n" +
+	"\x04_end\"\x81\x05\n" +
 	"\x18ListReportExportResponse\x12N\n" +
-	"\x05tasks\x18\x01 \x03(\v28.system.service.v1.ListReportExportResponse.ReportExportR\x05tasks\x12\x1d\n" +
-	"\n" +
-	"total_page\x18\x02 \x01(\x05R\ttotalPage\x12'\n" +
+	"\x05tasks\x18\x01 \x03(\v28.system.service.v1.ListReportExportResponse.ReportExportR\x05tasks\x12\x1f\n" +
+	"\vtotal_count\x18\x02 \x01(\x05R\n" +
+	"totalCount\x12'\n" +
 	"\x0ftotal_completed\x18\x03 \x01(\x05R\x0etotalCompleted\x12)\n" +
 	"\x10total_generating\x18\x04 \x01(\x05R\x0ftotalGenerating\x12#\n" +
 	"\rtotal_pending\x18\x05 \x01(\x05R\ftotalPending\x12!\n" +
 	"\ftotal_failed\x18\x06 \x01(\x05R\vtotalFailed\x12\x1b\n" +
-	"\tpage_size\x18\a \x01(\x05R\bpageSize\x1a\xa1\x02\n" +
+	"\tpage_size\x18\a \x01(\x05R\bpageSize\x1a\xba\x02\n" +
 	"\fReportExport\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x1b\n" +
 	"\tuser_name\x18\x02 \x01(\tR\buserName\x12\x1d\n" +
@@ -1555,7 +1572,9 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\tfile_size\x18\a \x01(\tR\bfileSize\x12\x1f\n" +
 	"\vfile_format\x18\b \x01(\tR\n" +
 	"fileFormat\x127\n" +
-	"\tcreate_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\bcreateAt\"\xb8\x02\n" +
+	"\tcreate_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\bcreateAt\x12\x17\n" +
+	"\auser_id\x18\n" +
+	" \x01(\x03R\x06userId\"\xb8\x02\n" +
 	"\x19CreateReportExportRequest\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x12\n" +
@@ -1679,6 +1698,7 @@ var file_system_service_v1_system_proto_goTypes = []any{
 	(*ListReportExportResponse_ReportExport)(nil),                // 20: system.service.v1.ListReportExportResponse.ReportExport
 	(*common.OperatorContext)(nil),                               // 21: api.common.OperatorContext
 	(*timestamppb.Timestamp)(nil),                                // 22: google.protobuf.Timestamp
+	(*common.OperatorContextFilters)(nil),                        // 23: api.common.OperatorContextFilters
 }
 var file_system_service_v1_system_proto_depIdxs = []int32{
 	0,  // 0: system.service.v1.AddIntegrityReportRequest.file_infos:type_name -> system.service.v1.FileInfo
@@ -1688,42 +1708,43 @@ var file_system_service_v1_system_proto_depIdxs = []int32{
 	0,  // 4: system.service.v1.SetIntegrityConfigRequest.file_infos:type_name -> system.service.v1.FileInfo
 	22, // 5: system.service.v1.ListReportExportRequest.start:type_name -> google.protobuf.Timestamp
 	22, // 6: system.service.v1.ListReportExportRequest.end:type_name -> google.protobuf.Timestamp
-	21, // 7: system.service.v1.ListReportExportRequest.operator_context:type_name -> api.common.OperatorContext
-	20, // 8: system.service.v1.ListReportExportResponse.tasks:type_name -> system.service.v1.ListReportExportResponse.ReportExport
-	22, // 9: system.service.v1.CreateReportExportRequest.create_at:type_name -> google.protobuf.Timestamp
-	21, // 10: system.service.v1.CreateReportExportRequest.operator_context:type_name -> api.common.OperatorContext
-	22, // 11: system.service.v1.Sev.timestamp:type_name -> google.protobuf.Timestamp
-	21, // 12: system.service.v1.ListSevRequest.operator_context:type_name -> api.common.OperatorContext
-	22, // 13: system.service.v1.ListSevRequest.start_time:type_name -> google.protobuf.Timestamp
-	22, // 14: system.service.v1.ListSevRequest.end_time:type_name -> google.protobuf.Timestamp
-	13, // 15: system.service.v1.ListSevResponse.sevs:type_name -> system.service.v1.Sev
-	22, // 16: system.service.v1.ExportSevRequest.start_time:type_name -> google.protobuf.Timestamp
-	22, // 17: system.service.v1.ExportSevRequest.end_time:type_name -> google.protobuf.Timestamp
-	21, // 18: system.service.v1.ExportSevRequest.operator_context:type_name -> api.common.OperatorContext
-	19, // 19: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.file_infos:type_name -> system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.FileInfo
-	22, // 20: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.created_at:type_name -> google.protobuf.Timestamp
-	22, // 21: system.service.v1.ListReportExportResponse.ReportExport.create_at:type_name -> google.protobuf.Timestamp
-	1,  // 22: system.service.v1.System.AddIntegrityReport:input_type -> system.service.v1.AddIntegrityReportRequest
-	3,  // 23: system.service.v1.System.ListIntegrityStatus:input_type -> system.service.v1.ListIntegrityStatusRequest
-	5,  // 24: system.service.v1.System.SetIntegrityConfig:input_type -> system.service.v1.SetIntegrityConfigRequest
-	7,  // 25: system.service.v1.System.ListReportExport:input_type -> system.service.v1.ListReportExportRequest
-	9,  // 26: system.service.v1.System.CreateReportExport:input_type -> system.service.v1.CreateReportExportRequest
-	11, // 27: system.service.v1.System.UpdateReportExport:input_type -> system.service.v1.UpdateReportExportRequest
-	14, // 28: system.service.v1.System.ListSev:input_type -> system.service.v1.ListSevRequest
-	16, // 29: system.service.v1.System.ExportSev:input_type -> system.service.v1.ExportSevRequest
-	2,  // 30: system.service.v1.System.AddIntegrityReport:output_type -> system.service.v1.AddIntegrityReportResponse
-	4,  // 31: system.service.v1.System.ListIntegrityStatus:output_type -> system.service.v1.ListIntegrityStatusResponse
-	6,  // 32: system.service.v1.System.SetIntegrityConfig:output_type -> system.service.v1.SetIntegrityConfigResponse
-	8,  // 33: system.service.v1.System.ListReportExport:output_type -> system.service.v1.ListReportExportResponse
-	10, // 34: system.service.v1.System.CreateReportExport:output_type -> system.service.v1.CreateReportExportResponse
-	12, // 35: system.service.v1.System.UpdateReportExport:output_type -> system.service.v1.UpdateReportExportResponse
-	15, // 36: system.service.v1.System.ListSev:output_type -> system.service.v1.ListSevResponse
-	17, // 37: system.service.v1.System.ExportSev:output_type -> system.service.v1.ExportSevResponse
-	30, // [30:38] is the sub-list for method output_type
-	22, // [22:30] is the sub-list for method input_type
-	22, // [22:22] is the sub-list for extension type_name
-	22, // [22:22] is the sub-list for extension extendee
-	0,  // [0:22] is the sub-list for field type_name
+	23, // 7: system.service.v1.ListReportExportRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	21, // 8: system.service.v1.ListReportExportRequest.operator_context:type_name -> api.common.OperatorContext
+	20, // 9: system.service.v1.ListReportExportResponse.tasks:type_name -> system.service.v1.ListReportExportResponse.ReportExport
+	22, // 10: system.service.v1.CreateReportExportRequest.create_at:type_name -> google.protobuf.Timestamp
+	21, // 11: system.service.v1.CreateReportExportRequest.operator_context:type_name -> api.common.OperatorContext
+	22, // 12: system.service.v1.Sev.timestamp:type_name -> google.protobuf.Timestamp
+	21, // 13: system.service.v1.ListSevRequest.operator_context:type_name -> api.common.OperatorContext
+	22, // 14: system.service.v1.ListSevRequest.start_time:type_name -> google.protobuf.Timestamp
+	22, // 15: system.service.v1.ListSevRequest.end_time:type_name -> google.protobuf.Timestamp
+	13, // 16: system.service.v1.ListSevResponse.sevs:type_name -> system.service.v1.Sev
+	22, // 17: system.service.v1.ExportSevRequest.start_time:type_name -> google.protobuf.Timestamp
+	22, // 18: system.service.v1.ExportSevRequest.end_time:type_name -> google.protobuf.Timestamp
+	21, // 19: system.service.v1.ExportSevRequest.operator_context:type_name -> api.common.OperatorContext
+	19, // 20: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.file_infos:type_name -> system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.FileInfo
+	22, // 21: system.service.v1.ListIntegrityStatusResponse.IntegrityStatus.created_at:type_name -> google.protobuf.Timestamp
+	22, // 22: system.service.v1.ListReportExportResponse.ReportExport.create_at:type_name -> google.protobuf.Timestamp
+	1,  // 23: system.service.v1.System.AddIntegrityReport:input_type -> system.service.v1.AddIntegrityReportRequest
+	3,  // 24: system.service.v1.System.ListIntegrityStatus:input_type -> system.service.v1.ListIntegrityStatusRequest
+	5,  // 25: system.service.v1.System.SetIntegrityConfig:input_type -> system.service.v1.SetIntegrityConfigRequest
+	7,  // 26: system.service.v1.System.ListReportExport:input_type -> system.service.v1.ListReportExportRequest
+	9,  // 27: system.service.v1.System.CreateReportExport:input_type -> system.service.v1.CreateReportExportRequest
+	11, // 28: system.service.v1.System.UpdateReportExport:input_type -> system.service.v1.UpdateReportExportRequest
+	14, // 29: system.service.v1.System.ListSev:input_type -> system.service.v1.ListSevRequest
+	16, // 30: system.service.v1.System.ExportSev:input_type -> system.service.v1.ExportSevRequest
+	2,  // 31: system.service.v1.System.AddIntegrityReport:output_type -> system.service.v1.AddIntegrityReportResponse
+	4,  // 32: system.service.v1.System.ListIntegrityStatus:output_type -> system.service.v1.ListIntegrityStatusResponse
+	6,  // 33: system.service.v1.System.SetIntegrityConfig:output_type -> system.service.v1.SetIntegrityConfigResponse
+	8,  // 34: system.service.v1.System.ListReportExport:output_type -> system.service.v1.ListReportExportResponse
+	10, // 35: system.service.v1.System.CreateReportExport:output_type -> system.service.v1.CreateReportExportResponse
+	12, // 36: system.service.v1.System.UpdateReportExport:output_type -> system.service.v1.UpdateReportExportResponse
+	15, // 37: system.service.v1.System.ListSev:output_type -> system.service.v1.ListSevResponse
+	17, // 38: system.service.v1.System.ExportSev:output_type -> system.service.v1.ExportSevResponse
+	31, // [31:39] is the sub-list for method output_type
+	23, // [23:31] is the sub-list for method input_type
+	23, // [23:23] is the sub-list for extension type_name
+	23, // [23:23] is the sub-list for extension extendee
+	0,  // [0:23] is the sub-list for field type_name
 }
 
 func init() { file_system_service_v1_system_proto_init() }
