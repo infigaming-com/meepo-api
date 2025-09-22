@@ -9,6 +9,7 @@ package v1
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -619,11 +620,535 @@ func (x *ListCurrenciesResponse) GetTotalHidden() int32 {
 	return 0
 }
 
+type ListReportExportRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TaskIds       []int64                `protobuf:"varint,1,rep,packed,name=task_ids,json=taskIds,proto3" json:"task_ids,omitempty"`
+	Type          *string                `protobuf:"bytes,2,opt,name=type,proto3,oneof" json:"type,omitempty"`
+	Status        *string                `protobuf:"bytes,3,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	Start         *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=start,proto3,oneof" json:"start,omitempty"`
+	End           *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=end,proto3,oneof" json:"end,omitempty"`
+	Page          int32                  `protobuf:"varint,6,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"` // api.common.OperatorContext operator_context = 8;
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListReportExportRequest) Reset() {
+	*x = ListReportExportRequest{}
+	mi := &file_system_service_v1_system_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListReportExportRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListReportExportRequest) ProtoMessage() {}
+
+func (x *ListReportExportRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_system_service_v1_system_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListReportExportRequest.ProtoReflect.Descriptor instead.
+func (*ListReportExportRequest) Descriptor() ([]byte, []int) {
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ListReportExportRequest) GetTaskIds() []int64 {
+	if x != nil {
+		return x.TaskIds
+	}
+	return nil
+}
+
+func (x *ListReportExportRequest) GetType() string {
+	if x != nil && x.Type != nil {
+		return *x.Type
+	}
+	return ""
+}
+
+func (x *ListReportExportRequest) GetStatus() string {
+	if x != nil && x.Status != nil {
+		return *x.Status
+	}
+	return ""
+}
+
+func (x *ListReportExportRequest) GetStart() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Start
+	}
+	return nil
+}
+
+func (x *ListReportExportRequest) GetEnd() *timestamppb.Timestamp {
+	if x != nil {
+		return x.End
+	}
+	return nil
+}
+
+func (x *ListReportExportRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListReportExportRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+type ListReportExportResponse struct {
+	state           protoimpl.MessageState                   `protogen:"open.v1"`
+	Tasks           []*ListReportExportResponse_ReportExport `protobuf:"bytes,1,rep,name=tasks,proto3" json:"tasks,omitempty"`
+	TotalPage       int32                                    `protobuf:"varint,2,opt,name=total_page,json=totalPage,proto3" json:"total_page,omitempty"`
+	TotalCompleted  int32                                    `protobuf:"varint,3,opt,name=total_completed,json=totalCompleted,proto3" json:"total_completed,omitempty"`
+	TotalGenerating int32                                    `protobuf:"varint,4,opt,name=total_generating,json=totalGenerating,proto3" json:"total_generating,omitempty"`
+	TotalPending    int32                                    `protobuf:"varint,5,opt,name=total_pending,json=totalPending,proto3" json:"total_pending,omitempty"`
+	TotalFailed     int32                                    `protobuf:"varint,6,opt,name=total_failed,json=totalFailed,proto3" json:"total_failed,omitempty"`
+	PageSize        int32                                    `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *ListReportExportResponse) Reset() {
+	*x = ListReportExportResponse{}
+	mi := &file_system_service_v1_system_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListReportExportResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListReportExportResponse) ProtoMessage() {}
+
+func (x *ListReportExportResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_system_service_v1_system_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListReportExportResponse.ProtoReflect.Descriptor instead.
+func (*ListReportExportResponse) Descriptor() ([]byte, []int) {
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ListReportExportResponse) GetTasks() []*ListReportExportResponse_ReportExport {
+	if x != nil {
+		return x.Tasks
+	}
+	return nil
+}
+
+func (x *ListReportExportResponse) GetTotalPage() int32 {
+	if x != nil {
+		return x.TotalPage
+	}
+	return 0
+}
+
+func (x *ListReportExportResponse) GetTotalCompleted() int32 {
+	if x != nil {
+		return x.TotalCompleted
+	}
+	return 0
+}
+
+func (x *ListReportExportResponse) GetTotalGenerating() int32 {
+	if x != nil {
+		return x.TotalGenerating
+	}
+	return 0
+}
+
+func (x *ListReportExportResponse) GetTotalPending() int32 {
+	if x != nil {
+		return x.TotalPending
+	}
+	return 0
+}
+
+func (x *ListReportExportResponse) GetTotalFailed() int32 {
+	if x != nil {
+		return x.TotalFailed
+	}
+	return 0
+}
+
+func (x *ListReportExportResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+type CreateReportExportRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TaskId        int64                  `protobuf:"varint,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
+	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Type          string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
+	Status        string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	TaskName      string                 `protobuf:"bytes,5,opt,name=task_name,json=taskName,proto3" json:"task_name,omitempty"`
+	FileFormat    string                 `protobuf:"bytes,6,opt,name=file_format,json=fileFormat,proto3" json:"file_format,omitempty"`
+	CreateAt      *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=create_at,json=createAt,proto3" json:"create_at,omitempty"` // api.common.OperatorContext operator_context = 8;
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateReportExportRequest) Reset() {
+	*x = CreateReportExportRequest{}
+	mi := &file_system_service_v1_system_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateReportExportRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateReportExportRequest) ProtoMessage() {}
+
+func (x *CreateReportExportRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_system_service_v1_system_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateReportExportRequest.ProtoReflect.Descriptor instead.
+func (*CreateReportExportRequest) Descriptor() ([]byte, []int) {
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *CreateReportExportRequest) GetTaskId() int64 {
+	if x != nil {
+		return x.TaskId
+	}
+	return 0
+}
+
+func (x *CreateReportExportRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *CreateReportExportRequest) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *CreateReportExportRequest) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *CreateReportExportRequest) GetTaskName() string {
+	if x != nil {
+		return x.TaskName
+	}
+	return ""
+}
+
+func (x *CreateReportExportRequest) GetFileFormat() string {
+	if x != nil {
+		return x.FileFormat
+	}
+	return ""
+}
+
+func (x *CreateReportExportRequest) GetCreateAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreateAt
+	}
+	return nil
+}
+
+type CreateReportExportResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateReportExportResponse) Reset() {
+	*x = CreateReportExportResponse{}
+	mi := &file_system_service_v1_system_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateReportExportResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateReportExportResponse) ProtoMessage() {}
+
+func (x *CreateReportExportResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_system_service_v1_system_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateReportExportResponse.ProtoReflect.Descriptor instead.
+func (*CreateReportExportResponse) Descriptor() ([]byte, []int) {
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{12}
+}
+
+type UpdateReportExportRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TaskId        int64                  `protobuf:"varint,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
+	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	FileUrl       string                 `protobuf:"bytes,3,opt,name=file_url,json=fileUrl,proto3" json:"file_url,omitempty"`
+	FileSize      string                 `protobuf:"bytes,4,opt,name=file_size,json=fileSize,proto3" json:"file_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateReportExportRequest) Reset() {
+	*x = UpdateReportExportRequest{}
+	mi := &file_system_service_v1_system_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateReportExportRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateReportExportRequest) ProtoMessage() {}
+
+func (x *UpdateReportExportRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_system_service_v1_system_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateReportExportRequest.ProtoReflect.Descriptor instead.
+func (*UpdateReportExportRequest) Descriptor() ([]byte, []int) {
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *UpdateReportExportRequest) GetTaskId() int64 {
+	if x != nil {
+		return x.TaskId
+	}
+	return 0
+}
+
+func (x *UpdateReportExportRequest) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *UpdateReportExportRequest) GetFileUrl() string {
+	if x != nil {
+		return x.FileUrl
+	}
+	return ""
+}
+
+func (x *UpdateReportExportRequest) GetFileSize() string {
+	if x != nil {
+		return x.FileSize
+	}
+	return ""
+}
+
+type UpdateReportExportResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateReportExportResponse) Reset() {
+	*x = UpdateReportExportResponse{}
+	mi := &file_system_service_v1_system_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateReportExportResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateReportExportResponse) ProtoMessage() {}
+
+func (x *UpdateReportExportResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_system_service_v1_system_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateReportExportResponse.ProtoReflect.Descriptor instead.
+func (*UpdateReportExportResponse) Descriptor() ([]byte, []int) {
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{14}
+}
+
+type ListReportExportResponse_ReportExport struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TaskId        int64                  `protobuf:"varint,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
+	UserName      string                 `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
+	StaskName     string                 `protobuf:"bytes,3,opt,name=stask_name,json=staskName,proto3" json:"stask_name,omitempty"`
+	Type          string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
+	Status        string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
+	FileUrl       string                 `protobuf:"bytes,6,opt,name=file_url,json=fileUrl,proto3" json:"file_url,omitempty"`
+	FileSize      string                 `protobuf:"bytes,7,opt,name=file_size,json=fileSize,proto3" json:"file_size,omitempty"`
+	FileFormat    string                 `protobuf:"bytes,8,opt,name=file_format,json=fileFormat,proto3" json:"file_format,omitempty"`
+	CreateAt      *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=create_at,json=createAt,proto3" json:"create_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListReportExportResponse_ReportExport) Reset() {
+	*x = ListReportExportResponse_ReportExport{}
+	mi := &file_system_service_v1_system_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListReportExportResponse_ReportExport) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListReportExportResponse_ReportExport) ProtoMessage() {}
+
+func (x *ListReportExportResponse_ReportExport) ProtoReflect() protoreflect.Message {
+	mi := &file_system_service_v1_system_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListReportExportResponse_ReportExport.ProtoReflect.Descriptor instead.
+func (*ListReportExportResponse_ReportExport) Descriptor() ([]byte, []int) {
+	return file_system_service_v1_system_proto_rawDescGZIP(), []int{10, 0}
+}
+
+func (x *ListReportExportResponse_ReportExport) GetTaskId() int64 {
+	if x != nil {
+		return x.TaskId
+	}
+	return 0
+}
+
+func (x *ListReportExportResponse_ReportExport) GetUserName() string {
+	if x != nil {
+		return x.UserName
+	}
+	return ""
+}
+
+func (x *ListReportExportResponse_ReportExport) GetStaskName() string {
+	if x != nil {
+		return x.StaskName
+	}
+	return ""
+}
+
+func (x *ListReportExportResponse_ReportExport) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *ListReportExportResponse_ReportExport) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *ListReportExportResponse_ReportExport) GetFileUrl() string {
+	if x != nil {
+		return x.FileUrl
+	}
+	return ""
+}
+
+func (x *ListReportExportResponse_ReportExport) GetFileSize() string {
+	if x != nil {
+		return x.FileSize
+	}
+	return ""
+}
+
+func (x *ListReportExportResponse_ReportExport) GetFileFormat() string {
+	if x != nil {
+		return x.FileFormat
+	}
+	return ""
+}
+
+func (x *ListReportExportResponse_ReportExport) GetCreateAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreateAt
+	}
+	return nil
+}
+
 var File_system_service_v1_system_proto protoreflect.FileDescriptor
 
 const file_system_service_v1_system_proto_rawDesc = "" +
 	"\n" +
-	"\x1esystem/service/v1/system.proto\x12\x11system.service.v1\"\xf7\x01\n" +
+	"\x1esystem/service/v1/system.proto\x12\x11system.service.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xf7\x01\n" +
 	"\bCurrency\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
 	"\aenabled\x18\x02 \x01(\bR\aenabled\x12\x16\n" +
@@ -685,12 +1210,64 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"currencies\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12#\n" +
 	"\rtotal_enabled\x18\x03 \x01(\x05R\ftotalEnabled\x12!\n" +
-	"\ftotal_hidden\x18\x04 \x01(\x05R\vtotalHidden2\xa0\x03\n" +
+	"\ftotal_hidden\x18\x04 \x01(\x05R\vtotalHidden\"\xab\x02\n" +
+	"\x17ListReportExportRequest\x12\x19\n" +
+	"\btask_ids\x18\x01 \x03(\x03R\ataskIds\x12\x17\n" +
+	"\x04type\x18\x02 \x01(\tH\x00R\x04type\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\x03 \x01(\tH\x01R\x06status\x88\x01\x01\x125\n" +
+	"\x05start\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\x05start\x88\x01\x01\x121\n" +
+	"\x03end\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\x03end\x88\x01\x01\x12\x12\n" +
+	"\x04page\x18\x06 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\a \x01(\x05R\bpageSizeB\a\n" +
+	"\x05_typeB\t\n" +
+	"\a_statusB\b\n" +
+	"\x06_startB\x06\n" +
+	"\x04_end\"\xe6\x04\n" +
+	"\x18ListReportExportResponse\x12N\n" +
+	"\x05tasks\x18\x01 \x03(\v28.system.service.v1.ListReportExportResponse.ReportExportR\x05tasks\x12\x1d\n" +
+	"\n" +
+	"total_page\x18\x02 \x01(\x05R\ttotalPage\x12'\n" +
+	"\x0ftotal_completed\x18\x03 \x01(\x05R\x0etotalCompleted\x12)\n" +
+	"\x10total_generating\x18\x04 \x01(\x05R\x0ftotalGenerating\x12#\n" +
+	"\rtotal_pending\x18\x05 \x01(\x05R\ftotalPending\x12!\n" +
+	"\ftotal_failed\x18\x06 \x01(\x05R\vtotalFailed\x12\x1b\n" +
+	"\tpage_size\x18\a \x01(\x05R\bpageSize\x1a\xa1\x02\n" +
+	"\fReportExport\x12\x17\n" +
+	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x1b\n" +
+	"\tuser_name\x18\x02 \x01(\tR\buserName\x12\x1d\n" +
+	"\n" +
+	"stask_name\x18\x03 \x01(\tR\tstaskName\x12\x12\n" +
+	"\x04type\x18\x04 \x01(\tR\x04type\x12\x16\n" +
+	"\x06status\x18\x05 \x01(\tR\x06status\x12\x19\n" +
+	"\bfile_url\x18\x06 \x01(\tR\afileUrl\x12\x1b\n" +
+	"\tfile_size\x18\a \x01(\tR\bfileSize\x12\x1f\n" +
+	"\vfile_format\x18\b \x01(\tR\n" +
+	"fileFormat\x127\n" +
+	"\tcreate_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\bcreateAt\"\xf0\x01\n" +
+	"\x19CreateReportExportRequest\x12\x17\n" +
+	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x12\n" +
+	"\x04type\x18\x03 \x01(\tR\x04type\x12\x16\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\x12\x1b\n" +
+	"\ttask_name\x18\x05 \x01(\tR\btaskName\x12\x1f\n" +
+	"\vfile_format\x18\x06 \x01(\tR\n" +
+	"fileFormat\x127\n" +
+	"\tcreate_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\bcreateAt\"\x1c\n" +
+	"\x1aCreateReportExportResponse\"\x84\x01\n" +
+	"\x19UpdateReportExportRequest\x12\x17\n" +
+	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x16\n" +
+	"\x06status\x18\x02 \x01(\tR\x06status\x12\x19\n" +
+	"\bfile_url\x18\x03 \x01(\tR\afileUrl\x12\x1b\n" +
+	"\tfile_size\x18\x04 \x01(\tR\bfileSize\"\x1c\n" +
+	"\x1aUpdateReportExportResponse2\xf9\x05\n" +
 	"\x06System\x12^\n" +
 	"\vAddCurrency\x12%.system.service.v1.AddCurrencyRequest\x1a&.system.service.v1.AddCurrencyResponse\"\x00\x12g\n" +
 	"\x0eUpdateCurrency\x12(.system.service.v1.UpdateCurrencyRequest\x1a).system.service.v1.UpdateCurrencyResponse\"\x00\x12d\n" +
 	"\rGetCurrencies\x12'.system.service.v1.GetCurrenciesRequest\x1a(.system.service.v1.GetCurrenciesResponse\"\x00\x12g\n" +
-	"\x0eListCurrencies\x12(.system.service.v1.ListCurrenciesRequest\x1a).system.service.v1.ListCurrenciesResponse\"\x00BO\n" +
+	"\x0eListCurrencies\x12(.system.service.v1.ListCurrenciesRequest\x1a).system.service.v1.ListCurrenciesResponse\"\x00\x12m\n" +
+	"\x10ListReportExport\x12*.system.service.v1.ListReportExportRequest\x1a+.system.service.v1.ListReportExportResponse\"\x00\x12s\n" +
+	"\x12CreateReportExport\x12,.system.service.v1.CreateReportExportRequest\x1a-.system.service.v1.CreateReportExportResponse\"\x00\x12s\n" +
+	"\x12UpdateReportExport\x12,.system.service.v1.UpdateReportExportRequest\x1a-.system.service.v1.UpdateReportExportResponse\"\x00BO\n" +
 	"\x11system.service.v1P\x01Z8github.com/infigaming-com/meepo-api/system/service/v1;v1b\x06proto3"
 
 var (
@@ -705,35 +1282,54 @@ func file_system_service_v1_system_proto_rawDescGZIP() []byte {
 	return file_system_service_v1_system_proto_rawDescData
 }
 
-var file_system_service_v1_system_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_system_service_v1_system_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_system_service_v1_system_proto_goTypes = []any{
-	(*Currency)(nil),               // 0: system.service.v1.Currency
-	(*AddCurrencyRequest)(nil),     // 1: system.service.v1.AddCurrencyRequest
-	(*AddCurrencyResponse)(nil),    // 2: system.service.v1.AddCurrencyResponse
-	(*UpdateCurrencyRequest)(nil),  // 3: system.service.v1.UpdateCurrencyRequest
-	(*UpdateCurrencyResponse)(nil), // 4: system.service.v1.UpdateCurrencyResponse
-	(*GetCurrenciesRequest)(nil),   // 5: system.service.v1.GetCurrenciesRequest
-	(*GetCurrenciesResponse)(nil),  // 6: system.service.v1.GetCurrenciesResponse
-	(*ListCurrenciesRequest)(nil),  // 7: system.service.v1.ListCurrenciesRequest
-	(*ListCurrenciesResponse)(nil), // 8: system.service.v1.ListCurrenciesResponse
+	(*Currency)(nil),                              // 0: system.service.v1.Currency
+	(*AddCurrencyRequest)(nil),                    // 1: system.service.v1.AddCurrencyRequest
+	(*AddCurrencyResponse)(nil),                   // 2: system.service.v1.AddCurrencyResponse
+	(*UpdateCurrencyRequest)(nil),                 // 3: system.service.v1.UpdateCurrencyRequest
+	(*UpdateCurrencyResponse)(nil),                // 4: system.service.v1.UpdateCurrencyResponse
+	(*GetCurrenciesRequest)(nil),                  // 5: system.service.v1.GetCurrenciesRequest
+	(*GetCurrenciesResponse)(nil),                 // 6: system.service.v1.GetCurrenciesResponse
+	(*ListCurrenciesRequest)(nil),                 // 7: system.service.v1.ListCurrenciesRequest
+	(*ListCurrenciesResponse)(nil),                // 8: system.service.v1.ListCurrenciesResponse
+	(*ListReportExportRequest)(nil),               // 9: system.service.v1.ListReportExportRequest
+	(*ListReportExportResponse)(nil),              // 10: system.service.v1.ListReportExportResponse
+	(*CreateReportExportRequest)(nil),             // 11: system.service.v1.CreateReportExportRequest
+	(*CreateReportExportResponse)(nil),            // 12: system.service.v1.CreateReportExportResponse
+	(*UpdateReportExportRequest)(nil),             // 13: system.service.v1.UpdateReportExportRequest
+	(*UpdateReportExportResponse)(nil),            // 14: system.service.v1.UpdateReportExportResponse
+	(*ListReportExportResponse_ReportExport)(nil), // 15: system.service.v1.ListReportExportResponse.ReportExport
+	(*timestamppb.Timestamp)(nil),                 // 16: google.protobuf.Timestamp
 }
 var file_system_service_v1_system_proto_depIdxs = []int32{
-	0, // 0: system.service.v1.UpdateCurrencyResponse.currency:type_name -> system.service.v1.Currency
-	0, // 1: system.service.v1.GetCurrenciesResponse.currencies:type_name -> system.service.v1.Currency
-	0, // 2: system.service.v1.ListCurrenciesResponse.currencies:type_name -> system.service.v1.Currency
-	1, // 3: system.service.v1.System.AddCurrency:input_type -> system.service.v1.AddCurrencyRequest
-	3, // 4: system.service.v1.System.UpdateCurrency:input_type -> system.service.v1.UpdateCurrencyRequest
-	5, // 5: system.service.v1.System.GetCurrencies:input_type -> system.service.v1.GetCurrenciesRequest
-	7, // 6: system.service.v1.System.ListCurrencies:input_type -> system.service.v1.ListCurrenciesRequest
-	2, // 7: system.service.v1.System.AddCurrency:output_type -> system.service.v1.AddCurrencyResponse
-	4, // 8: system.service.v1.System.UpdateCurrency:output_type -> system.service.v1.UpdateCurrencyResponse
-	6, // 9: system.service.v1.System.GetCurrencies:output_type -> system.service.v1.GetCurrenciesResponse
-	8, // 10: system.service.v1.System.ListCurrencies:output_type -> system.service.v1.ListCurrenciesResponse
-	7, // [7:11] is the sub-list for method output_type
-	3, // [3:7] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	0,  // 0: system.service.v1.UpdateCurrencyResponse.currency:type_name -> system.service.v1.Currency
+	0,  // 1: system.service.v1.GetCurrenciesResponse.currencies:type_name -> system.service.v1.Currency
+	0,  // 2: system.service.v1.ListCurrenciesResponse.currencies:type_name -> system.service.v1.Currency
+	16, // 3: system.service.v1.ListReportExportRequest.start:type_name -> google.protobuf.Timestamp
+	16, // 4: system.service.v1.ListReportExportRequest.end:type_name -> google.protobuf.Timestamp
+	15, // 5: system.service.v1.ListReportExportResponse.tasks:type_name -> system.service.v1.ListReportExportResponse.ReportExport
+	16, // 6: system.service.v1.CreateReportExportRequest.create_at:type_name -> google.protobuf.Timestamp
+	16, // 7: system.service.v1.ListReportExportResponse.ReportExport.create_at:type_name -> google.protobuf.Timestamp
+	1,  // 8: system.service.v1.System.AddCurrency:input_type -> system.service.v1.AddCurrencyRequest
+	3,  // 9: system.service.v1.System.UpdateCurrency:input_type -> system.service.v1.UpdateCurrencyRequest
+	5,  // 10: system.service.v1.System.GetCurrencies:input_type -> system.service.v1.GetCurrenciesRequest
+	7,  // 11: system.service.v1.System.ListCurrencies:input_type -> system.service.v1.ListCurrenciesRequest
+	9,  // 12: system.service.v1.System.ListReportExport:input_type -> system.service.v1.ListReportExportRequest
+	11, // 13: system.service.v1.System.CreateReportExport:input_type -> system.service.v1.CreateReportExportRequest
+	13, // 14: system.service.v1.System.UpdateReportExport:input_type -> system.service.v1.UpdateReportExportRequest
+	2,  // 15: system.service.v1.System.AddCurrency:output_type -> system.service.v1.AddCurrencyResponse
+	4,  // 16: system.service.v1.System.UpdateCurrency:output_type -> system.service.v1.UpdateCurrencyResponse
+	6,  // 17: system.service.v1.System.GetCurrencies:output_type -> system.service.v1.GetCurrenciesResponse
+	8,  // 18: system.service.v1.System.ListCurrencies:output_type -> system.service.v1.ListCurrenciesResponse
+	10, // 19: system.service.v1.System.ListReportExport:output_type -> system.service.v1.ListReportExportResponse
+	12, // 20: system.service.v1.System.CreateReportExport:output_type -> system.service.v1.CreateReportExportResponse
+	14, // 21: system.service.v1.System.UpdateReportExport:output_type -> system.service.v1.UpdateReportExportResponse
+	15, // [15:22] is the sub-list for method output_type
+	8,  // [8:15] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_system_service_v1_system_proto_init() }
@@ -743,13 +1339,14 @@ func file_system_service_v1_system_proto_init() {
 	}
 	file_system_service_v1_system_proto_msgTypes[3].OneofWrappers = []any{}
 	file_system_service_v1_system_proto_msgTypes[7].OneofWrappers = []any{}
+	file_system_service_v1_system_proto_msgTypes[9].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_system_service_v1_system_proto_rawDesc), len(file_system_service_v1_system_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -1122,3 +1122,938 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListCurrenciesResponseValidationError{}
+
+// Validate checks the field values on ListReportExportRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListReportExportRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListReportExportRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListReportExportRequestMultiError, or nil if none found.
+func (m *ListReportExportRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListReportExportRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if m.Type != nil {
+		// no validation rules for Type
+	}
+
+	if m.Status != nil {
+		// no validation rules for Status
+	}
+
+	if m.Start != nil {
+
+		if all {
+			switch v := interface{}(m.GetStart()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListReportExportRequestValidationError{
+						field:  "Start",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListReportExportRequestValidationError{
+						field:  "Start",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetStart()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListReportExportRequestValidationError{
+					field:  "Start",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.End != nil {
+
+		if all {
+			switch v := interface{}(m.GetEnd()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListReportExportRequestValidationError{
+						field:  "End",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListReportExportRequestValidationError{
+						field:  "End",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetEnd()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListReportExportRequestValidationError{
+					field:  "End",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ListReportExportRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListReportExportRequestMultiError is an error wrapping multiple validation
+// errors returned by ListReportExportRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListReportExportRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListReportExportRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListReportExportRequestMultiError) AllErrors() []error { return m }
+
+// ListReportExportRequestValidationError is the validation error returned by
+// ListReportExportRequest.Validate if the designated constraints aren't met.
+type ListReportExportRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListReportExportRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListReportExportRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListReportExportRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListReportExportRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListReportExportRequestValidationError) ErrorName() string {
+	return "ListReportExportRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListReportExportRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListReportExportRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListReportExportRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListReportExportRequestValidationError{}
+
+// Validate checks the field values on ListReportExportResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListReportExportResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListReportExportResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListReportExportResponseMultiError, or nil if none found.
+func (m *ListReportExportResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListReportExportResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetTasks() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListReportExportResponseValidationError{
+						field:  fmt.Sprintf("Tasks[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListReportExportResponseValidationError{
+						field:  fmt.Sprintf("Tasks[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListReportExportResponseValidationError{
+					field:  fmt.Sprintf("Tasks[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for TotalPage
+
+	// no validation rules for TotalCompleted
+
+	// no validation rules for TotalGenerating
+
+	// no validation rules for TotalPending
+
+	// no validation rules for TotalFailed
+
+	// no validation rules for PageSize
+
+	if len(errors) > 0 {
+		return ListReportExportResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListReportExportResponseMultiError is an error wrapping multiple validation
+// errors returned by ListReportExportResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListReportExportResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListReportExportResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListReportExportResponseMultiError) AllErrors() []error { return m }
+
+// ListReportExportResponseValidationError is the validation error returned by
+// ListReportExportResponse.Validate if the designated constraints aren't met.
+type ListReportExportResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListReportExportResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListReportExportResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListReportExportResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListReportExportResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListReportExportResponseValidationError) ErrorName() string {
+	return "ListReportExportResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListReportExportResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListReportExportResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListReportExportResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListReportExportResponseValidationError{}
+
+// Validate checks the field values on CreateReportExportRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateReportExportRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateReportExportRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateReportExportRequestMultiError, or nil if none found.
+func (m *CreateReportExportRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateReportExportRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TaskId
+
+	// no validation rules for UserId
+
+	// no validation rules for Type
+
+	// no validation rules for Status
+
+	// no validation rules for TaskName
+
+	// no validation rules for FileFormat
+
+	if all {
+		switch v := interface{}(m.GetCreateAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateReportExportRequestValidationError{
+					field:  "CreateAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateReportExportRequestValidationError{
+					field:  "CreateAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreateAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateReportExportRequestValidationError{
+				field:  "CreateAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return CreateReportExportRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateReportExportRequestMultiError is an error wrapping multiple validation
+// errors returned by CreateReportExportRequest.ValidateAll() if the
+// designated constraints aren't met.
+type CreateReportExportRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateReportExportRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateReportExportRequestMultiError) AllErrors() []error { return m }
+
+// CreateReportExportRequestValidationError is the validation error returned by
+// CreateReportExportRequest.Validate if the designated constraints aren't met.
+type CreateReportExportRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateReportExportRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateReportExportRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateReportExportRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateReportExportRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateReportExportRequestValidationError) ErrorName() string {
+	return "CreateReportExportRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateReportExportRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateReportExportRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateReportExportRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateReportExportRequestValidationError{}
+
+// Validate checks the field values on CreateReportExportResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateReportExportResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateReportExportResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateReportExportResponseMultiError, or nil if none found.
+func (m *CreateReportExportResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateReportExportResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return CreateReportExportResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateReportExportResponseMultiError is an error wrapping multiple
+// validation errors returned by CreateReportExportResponse.ValidateAll() if
+// the designated constraints aren't met.
+type CreateReportExportResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateReportExportResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateReportExportResponseMultiError) AllErrors() []error { return m }
+
+// CreateReportExportResponseValidationError is the validation error returned
+// by CreateReportExportResponse.Validate if the designated constraints aren't met.
+type CreateReportExportResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateReportExportResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateReportExportResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateReportExportResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateReportExportResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateReportExportResponseValidationError) ErrorName() string {
+	return "CreateReportExportResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateReportExportResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateReportExportResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateReportExportResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateReportExportResponseValidationError{}
+
+// Validate checks the field values on UpdateReportExportRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateReportExportRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateReportExportRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateReportExportRequestMultiError, or nil if none found.
+func (m *UpdateReportExportRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateReportExportRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TaskId
+
+	// no validation rules for Status
+
+	// no validation rules for FileUrl
+
+	// no validation rules for FileSize
+
+	if len(errors) > 0 {
+		return UpdateReportExportRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateReportExportRequestMultiError is an error wrapping multiple validation
+// errors returned by UpdateReportExportRequest.ValidateAll() if the
+// designated constraints aren't met.
+type UpdateReportExportRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateReportExportRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateReportExportRequestMultiError) AllErrors() []error { return m }
+
+// UpdateReportExportRequestValidationError is the validation error returned by
+// UpdateReportExportRequest.Validate if the designated constraints aren't met.
+type UpdateReportExportRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateReportExportRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateReportExportRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateReportExportRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateReportExportRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateReportExportRequestValidationError) ErrorName() string {
+	return "UpdateReportExportRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateReportExportRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateReportExportRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateReportExportRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateReportExportRequestValidationError{}
+
+// Validate checks the field values on UpdateReportExportResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateReportExportResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateReportExportResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateReportExportResponseMultiError, or nil if none found.
+func (m *UpdateReportExportResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateReportExportResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return UpdateReportExportResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateReportExportResponseMultiError is an error wrapping multiple
+// validation errors returned by UpdateReportExportResponse.ValidateAll() if
+// the designated constraints aren't met.
+type UpdateReportExportResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateReportExportResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateReportExportResponseMultiError) AllErrors() []error { return m }
+
+// UpdateReportExportResponseValidationError is the validation error returned
+// by UpdateReportExportResponse.Validate if the designated constraints aren't met.
+type UpdateReportExportResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateReportExportResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateReportExportResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateReportExportResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateReportExportResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateReportExportResponseValidationError) ErrorName() string {
+	return "UpdateReportExportResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateReportExportResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateReportExportResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateReportExportResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateReportExportResponseValidationError{}
+
+// Validate checks the field values on ListReportExportResponse_ReportExport
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ListReportExportResponse_ReportExport) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListReportExportResponse_ReportExport
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListReportExportResponse_ReportExportMultiError, or nil if none found.
+func (m *ListReportExportResponse_ReportExport) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListReportExportResponse_ReportExport) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TaskId
+
+	// no validation rules for UserName
+
+	// no validation rules for StaskName
+
+	// no validation rules for Type
+
+	// no validation rules for Status
+
+	// no validation rules for FileUrl
+
+	// no validation rules for FileSize
+
+	// no validation rules for FileFormat
+
+	if all {
+		switch v := interface{}(m.GetCreateAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListReportExportResponse_ReportExportValidationError{
+					field:  "CreateAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListReportExportResponse_ReportExportValidationError{
+					field:  "CreateAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreateAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListReportExportResponse_ReportExportValidationError{
+				field:  "CreateAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return ListReportExportResponse_ReportExportMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListReportExportResponse_ReportExportMultiError is an error wrapping
+// multiple validation errors returned by
+// ListReportExportResponse_ReportExport.ValidateAll() if the designated
+// constraints aren't met.
+type ListReportExportResponse_ReportExportMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListReportExportResponse_ReportExportMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListReportExportResponse_ReportExportMultiError) AllErrors() []error { return m }
+
+// ListReportExportResponse_ReportExportValidationError is the validation error
+// returned by ListReportExportResponse_ReportExport.Validate if the
+// designated constraints aren't met.
+type ListReportExportResponse_ReportExportValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListReportExportResponse_ReportExportValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListReportExportResponse_ReportExportValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListReportExportResponse_ReportExportValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListReportExportResponse_ReportExportValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListReportExportResponse_ReportExportValidationError) ErrorName() string {
+	return "ListReportExportResponse_ReportExportValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListReportExportResponse_ReportExportValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListReportExportResponse_ReportExport.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListReportExportResponse_ReportExportValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListReportExportResponse_ReportExportValidationError{}

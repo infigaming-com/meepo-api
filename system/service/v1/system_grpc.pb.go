@@ -19,10 +19,13 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	System_AddCurrency_FullMethodName    = "/system.service.v1.System/AddCurrency"
-	System_UpdateCurrency_FullMethodName = "/system.service.v1.System/UpdateCurrency"
-	System_GetCurrencies_FullMethodName  = "/system.service.v1.System/GetCurrencies"
-	System_ListCurrencies_FullMethodName = "/system.service.v1.System/ListCurrencies"
+	System_AddCurrency_FullMethodName        = "/system.service.v1.System/AddCurrency"
+	System_UpdateCurrency_FullMethodName     = "/system.service.v1.System/UpdateCurrency"
+	System_GetCurrencies_FullMethodName      = "/system.service.v1.System/GetCurrencies"
+	System_ListCurrencies_FullMethodName     = "/system.service.v1.System/ListCurrencies"
+	System_ListReportExport_FullMethodName   = "/system.service.v1.System/ListReportExport"
+	System_CreateReportExport_FullMethodName = "/system.service.v1.System/CreateReportExport"
+	System_UpdateReportExport_FullMethodName = "/system.service.v1.System/UpdateReportExport"
 )
 
 // SystemClient is the client API for System service.
@@ -33,6 +36,9 @@ type SystemClient interface {
 	UpdateCurrency(ctx context.Context, in *UpdateCurrencyRequest, opts ...grpc.CallOption) (*UpdateCurrencyResponse, error)
 	GetCurrencies(ctx context.Context, in *GetCurrenciesRequest, opts ...grpc.CallOption) (*GetCurrenciesResponse, error)
 	ListCurrencies(ctx context.Context, in *ListCurrenciesRequest, opts ...grpc.CallOption) (*ListCurrenciesResponse, error)
+	ListReportExport(ctx context.Context, in *ListReportExportRequest, opts ...grpc.CallOption) (*ListReportExportResponse, error)
+	CreateReportExport(ctx context.Context, in *CreateReportExportRequest, opts ...grpc.CallOption) (*CreateReportExportResponse, error)
+	UpdateReportExport(ctx context.Context, in *UpdateReportExportRequest, opts ...grpc.CallOption) (*UpdateReportExportResponse, error)
 }
 
 type systemClient struct {
@@ -83,6 +89,36 @@ func (c *systemClient) ListCurrencies(ctx context.Context, in *ListCurrenciesReq
 	return out, nil
 }
 
+func (c *systemClient) ListReportExport(ctx context.Context, in *ListReportExportRequest, opts ...grpc.CallOption) (*ListReportExportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListReportExportResponse)
+	err := c.cc.Invoke(ctx, System_ListReportExport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *systemClient) CreateReportExport(ctx context.Context, in *CreateReportExportRequest, opts ...grpc.CallOption) (*CreateReportExportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateReportExportResponse)
+	err := c.cc.Invoke(ctx, System_CreateReportExport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *systemClient) UpdateReportExport(ctx context.Context, in *UpdateReportExportRequest, opts ...grpc.CallOption) (*UpdateReportExportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateReportExportResponse)
+	err := c.cc.Invoke(ctx, System_UpdateReportExport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SystemServer is the server API for System service.
 // All implementations must embed UnimplementedSystemServer
 // for forward compatibility.
@@ -91,6 +127,9 @@ type SystemServer interface {
 	UpdateCurrency(context.Context, *UpdateCurrencyRequest) (*UpdateCurrencyResponse, error)
 	GetCurrencies(context.Context, *GetCurrenciesRequest) (*GetCurrenciesResponse, error)
 	ListCurrencies(context.Context, *ListCurrenciesRequest) (*ListCurrenciesResponse, error)
+	ListReportExport(context.Context, *ListReportExportRequest) (*ListReportExportResponse, error)
+	CreateReportExport(context.Context, *CreateReportExportRequest) (*CreateReportExportResponse, error)
+	UpdateReportExport(context.Context, *UpdateReportExportRequest) (*UpdateReportExportResponse, error)
 	mustEmbedUnimplementedSystemServer()
 }
 
@@ -112,6 +151,15 @@ func (UnimplementedSystemServer) GetCurrencies(context.Context, *GetCurrenciesRe
 }
 func (UnimplementedSystemServer) ListCurrencies(context.Context, *ListCurrenciesRequest) (*ListCurrenciesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCurrencies not implemented")
+}
+func (UnimplementedSystemServer) ListReportExport(context.Context, *ListReportExportRequest) (*ListReportExportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListReportExport not implemented")
+}
+func (UnimplementedSystemServer) CreateReportExport(context.Context, *CreateReportExportRequest) (*CreateReportExportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateReportExport not implemented")
+}
+func (UnimplementedSystemServer) UpdateReportExport(context.Context, *UpdateReportExportRequest) (*UpdateReportExportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateReportExport not implemented")
 }
 func (UnimplementedSystemServer) mustEmbedUnimplementedSystemServer() {}
 func (UnimplementedSystemServer) testEmbeddedByValue()                {}
@@ -206,6 +254,60 @@ func _System_ListCurrencies_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _System_ListReportExport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListReportExportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServer).ListReportExport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: System_ListReportExport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServer).ListReportExport(ctx, req.(*ListReportExportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _System_CreateReportExport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateReportExportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServer).CreateReportExport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: System_CreateReportExport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServer).CreateReportExport(ctx, req.(*CreateReportExportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _System_UpdateReportExport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateReportExportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServer).UpdateReportExport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: System_UpdateReportExport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServer).UpdateReportExport(ctx, req.(*UpdateReportExportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // System_ServiceDesc is the grpc.ServiceDesc for System service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -228,6 +330,18 @@ var System_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListCurrencies",
 			Handler:    _System_ListCurrencies_Handler,
+		},
+		{
+			MethodName: "ListReportExport",
+			Handler:    _System_ListReportExport_Handler,
+		},
+		{
+			MethodName: "CreateReportExport",
+			Handler:    _System_CreateReportExport_Handler,
+		},
+		{
+			MethodName: "UpdateReportExport",
+			Handler:    _System_UpdateReportExport_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
