@@ -141,7 +141,13 @@ service Game {
 	rpc ListMultipleBets(ListMultipleBetsRequest) returns (ListMultipleBetsResponse) {
 	}
 
+	rpc ExportMultipleBets(ExportMultipleBetsRequest) returns (ExportMultipleBetsResponse) {
+	}
+
 	rpc ListStakeVarianceBets(ListStakeVarianceBetsRequest) returns (ListStakeVarianceBetsResponse) {
+	}
+
+	rpc ExportStakeVarianceBets(ExportStakeVarianceBetsRequest) returns (ExportStakeVarianceBetsResponse) {
 	}
 
 	// Sport Events related APIs
@@ -1074,6 +1080,22 @@ message ListMultipleBetsResponse {
 	int32 page_size = 4;
 }
 
+message ExportMultipleBetsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional string status = 3; // All, Pending, Won, Loss, etc.
+	optional int64 user_id = 4; // User ID
+	optional int64 transaction_id = 5; // Transaction ID
+	string format = 6; // accepted values: csv, excel, pdf
+	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContext operator_context = 8;
+	int64 initiator_user_id = 9;
+}
+
+message ExportMultipleBetsResponse {
+	int64 task_id = 1;
+}
+
 // Stake Variance Report related messages
 message ListStakeVarianceBetsRequest {
 	// Filter conditions
@@ -1096,6 +1118,7 @@ message ListStakeVarianceBetsResponse {
 	message StakeVarianceBet {
 		// Basic information
 		google.protobuf.Timestamp created_at = 1; // Date (2025-09-02 14:30:21)
+		google.protobuf.Timestamp updated_at = 12; // Date (2025-09-02 14:30:21)
 		string status = 2; // Pending, Won, Loss, Cashed Out, etc.
 		int64 user_id = 3; // User ID (User012345)
 		int64 transaction_id = 4; // Transaction ID (TXN-202509042200)
@@ -1125,6 +1148,23 @@ message ListStakeVarianceBetsResponse {
 	int32 total_count = 3;
 	int32 page = 4;
 	int32 page_size = 5;
+}
+
+message ExportStakeVarianceBetsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3; // User ID
+	optional int64 transaction_id = 4; // Transaction ID
+	optional string category = 5; // All, Bet, Win, etc.
+	optional int64 round_id = 6; // Round ID
+	string format = 7; // accepted values: csv, excel, pdf
+	string time_zone = 8; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContext operator_context = 9;
+	int64 initiator_user_id = 10;
+}
+
+message ExportStakeVarianceBetsResponse {
+	int64 task_id = 1;
 }
 
 message ListSportEventsRequest {

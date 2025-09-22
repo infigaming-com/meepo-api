@@ -134,9 +134,23 @@ service BackofficeGame {
 		};
 	}
 
+	rpc ExportMultipleBets(ExportMultipleBetsRequest) returns (game.service.v1.ExportMultipleBetsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/bets/multiple/export"
+			body: "*"
+		};
+	}
+
 	rpc ListStakeVarianceBets(ListStakeVarianceBetsRequest) returns (game.service.v1.ListStakeVarianceBetsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/game/bets/stake-variance/list"
+			body: "*"
+		};
+	}
+
+	rpc ExportStakeVarianceBets(ExportStakeVarianceBetsRequest) returns (game.service.v1.ExportStakeVarianceBetsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/bets/stake-variance/export"
 			body: "*"
 		};
 	}
@@ -471,6 +485,16 @@ message ListMultipleBetsRequest {
 	optional int32 page_size = 7;
 }
 
+message ExportMultipleBetsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional string status = 3; // All, Pending, Won, Loss, etc.
+	optional int64 user_id = 4; // User ID
+	optional int64 transaction_id = 5; // Transaction ID
+	string format = 6; // accepted values: csv, excel, pdf
+	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
+}
+
 message ListStakeVarianceBetsRequest {
 	// Filter conditions
 	optional google.protobuf.Timestamp start_time = 1;
@@ -483,6 +507,17 @@ message ListStakeVarianceBetsRequest {
 	// Pagination
 	optional int32 page = 7;
 	optional int32 page_size = 8;
+}
+
+message ExportStakeVarianceBetsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3; // User ID
+	optional int64 transaction_id = 4; // Transaction ID
+	optional string category = 5; // All, Bet, Win, etc.
+	optional int64 round_id = 6; // Round ID
+	string format = 7; // accepted values: csv, excel, pdf
+	string time_zone = 8; // e.g. UTC+0, UTC+8, etc.
 }
 
 message ListCustomerStrikeReportsRequest {
