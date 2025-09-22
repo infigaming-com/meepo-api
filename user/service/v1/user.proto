@@ -881,7 +881,7 @@ message SendPasswordResetCodeResponse {
 }
 
 message ResetPasswordWithCodeRequest {
-	optional int64 operator_id = 1;
+	int64 operator_id = 1;
 	string email = 2;           // User's email address
 	string verification_code = 3;  // Verification code received via email
 	string new_password = 4;    // New password
