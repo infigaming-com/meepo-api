@@ -20,7 +20,9 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationBackofficeGameExportCustomerStrikeReports = "/api.backoffice.service.v1.BackofficeGame/ExportCustomerStrikeReports"
 const OperationBackofficeGameExportMultipleBets = "/api.backoffice.service.v1.BackofficeGame/ExportMultipleBets"
+const OperationBackofficeGameExportSportEvents = "/api.backoffice.service.v1.BackofficeGame/ExportSportEvents"
 const OperationBackofficeGameExportStakeVarianceBets = "/api.backoffice.service.v1.BackofficeGame/ExportStakeVarianceBets"
 const OperationBackofficeGameExportUnpaidBets = "/api.backoffice.service.v1.BackofficeGame/ExportUnpaidBets"
 const OperationBackofficeGameGetBetById = "/api.backoffice.service.v1.BackofficeGame/GetBetById"
@@ -45,7 +47,9 @@ const OperationBackofficeGameUpdateGame = "/api.backoffice.service.v1.Backoffice
 const OperationBackofficeGameUpdateProvider = "/api.backoffice.service.v1.BackofficeGame/UpdateProvider"
 
 type BackofficeGameHTTPServer interface {
+	ExportCustomerStrikeReports(context.Context, *ExportCustomerStrikeReportsRequest) (*v1.ExportCustomerStrikeReportsResponse, error)
 	ExportMultipleBets(context.Context, *ExportMultipleBetsRequest) (*v1.ExportMultipleBetsResponse, error)
+	ExportSportEvents(context.Context, *ExportSportEventsRequest) (*v1.ExportSportEventsResponse, error)
 	ExportStakeVarianceBets(context.Context, *ExportStakeVarianceBetsRequest) (*v1.ExportStakeVarianceBetsResponse, error)
 	ExportUnpaidBets(context.Context, *ExportUnpaidBetsRequest) (*v1.ExportUnpaidBetsResponse, error)
 	GetBetById(context.Context, *GetBetByIdRequest) (*v1.GetBetByIdResponse, error)
@@ -101,6 +105,8 @@ func RegisterBackofficeGameHTTPServer(s *http.Server, srv BackofficeGameHTTPServ
 	r.POST("/v1/backoffice/game/bets/stake-variance/list", _BackofficeGame_ListStakeVarianceBets0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/bets/stake-variance/export", _BackofficeGame_ExportStakeVarianceBets0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/customer-strike-reports/list", _BackofficeGame_ListCustomerStrikeReports0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/customer-strike-reports/export", _BackofficeGame_ExportCustomerStrikeReports0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/sport-events/export", _BackofficeGame_ExportSportEvents0_HTTP_Handler(srv))
 }
 
 func _BackofficeGame_ListProviders1_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
@@ -609,8 +615,54 @@ func _BackofficeGame_ListCustomerStrikeReports0_HTTP_Handler(srv BackofficeGameH
 	}
 }
 
+func _BackofficeGame_ExportCustomerStrikeReports0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ExportCustomerStrikeReportsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeGameExportCustomerStrikeReports)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ExportCustomerStrikeReports(ctx, req.(*ExportCustomerStrikeReportsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ExportCustomerStrikeReportsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeGame_ExportSportEvents0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ExportSportEventsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeGameExportSportEvents)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ExportSportEvents(ctx, req.(*ExportSportEventsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ExportSportEventsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeGameHTTPClient interface {
+	ExportCustomerStrikeReports(ctx context.Context, req *ExportCustomerStrikeReportsRequest, opts ...http.CallOption) (rsp *v1.ExportCustomerStrikeReportsResponse, err error)
 	ExportMultipleBets(ctx context.Context, req *ExportMultipleBetsRequest, opts ...http.CallOption) (rsp *v1.ExportMultipleBetsResponse, err error)
+	ExportSportEvents(ctx context.Context, req *ExportSportEventsRequest, opts ...http.CallOption) (rsp *v1.ExportSportEventsResponse, err error)
 	ExportStakeVarianceBets(ctx context.Context, req *ExportStakeVarianceBetsRequest, opts ...http.CallOption) (rsp *v1.ExportStakeVarianceBetsResponse, err error)
 	ExportUnpaidBets(ctx context.Context, req *ExportUnpaidBetsRequest, opts ...http.CallOption) (rsp *v1.ExportUnpaidBetsResponse, err error)
 	GetBetById(ctx context.Context, req *GetBetByIdRequest, opts ...http.CallOption) (rsp *v1.GetBetByIdResponse, err error)
@@ -643,11 +695,37 @@ func NewBackofficeGameHTTPClient(client *http.Client) BackofficeGameHTTPClient {
 	return &BackofficeGameHTTPClientImpl{client}
 }
 
+func (c *BackofficeGameHTTPClientImpl) ExportCustomerStrikeReports(ctx context.Context, in *ExportCustomerStrikeReportsRequest, opts ...http.CallOption) (*v1.ExportCustomerStrikeReportsResponse, error) {
+	var out v1.ExportCustomerStrikeReportsResponse
+	pattern := "/v1/backoffice/game/customer-strike-reports/export"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeGameExportCustomerStrikeReports))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *BackofficeGameHTTPClientImpl) ExportMultipleBets(ctx context.Context, in *ExportMultipleBetsRequest, opts ...http.CallOption) (*v1.ExportMultipleBetsResponse, error) {
 	var out v1.ExportMultipleBetsResponse
 	pattern := "/v1/backoffice/game/bets/multiple/export"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameExportMultipleBets))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeGameHTTPClientImpl) ExportSportEvents(ctx context.Context, in *ExportSportEventsRequest, opts ...http.CallOption) (*v1.ExportSportEventsResponse, error) {
+	var out v1.ExportSportEventsResponse
+	pattern := "/v1/backoffice/game/sport-events/export"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeGameExportSportEvents))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

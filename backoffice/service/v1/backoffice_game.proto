@@ -161,6 +161,20 @@ service BackofficeGame {
 			body: "*"
 		};
 	}
+
+	rpc ExportCustomerStrikeReports(ExportCustomerStrikeReportsRequest) returns (game.service.v1.ExportCustomerStrikeReportsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/customer-strike-reports/export"
+			body: "*"
+		};
+	}
+
+	rpc ExportSportEvents(ExportSportEventsRequest) returns (game.service.v1.ExportSportEventsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/sport-events/export"
+			body: "*"
+		};
+	}
 }
 
 
@@ -524,4 +538,20 @@ message ListCustomerStrikeReportsRequest {
 	optional string user_id = 1;
 	optional int32 page = 2;
 	optional int32 page_size = 3;
+}
+
+message ExportSportEventsRequest {
+	optional string event_name = 1;
+	optional string venue = 2;
+	optional string tournament = 3;
+	optional string start_time = 4;
+	optional string end_time = 5;
+	string format = 6; // accepted values: csv, excel, pdf
+	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
+}
+
+message ExportCustomerStrikeReportsRequest {
+	optional string user_id = 1;
+	string format = 2; // accepted values: csv, excel, pdf
+	string time_zone = 3; // e.g. UTC+0, UTC+8, etc.
 }

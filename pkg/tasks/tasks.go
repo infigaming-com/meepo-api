@@ -16,6 +16,8 @@ const (
 	REPORT_EXPORT_TYPE_SEV                         = "significant_events"
 	REPORT_EXPORT_TYPE_PLAYER_STAKE_VARIANCE       = "player_stake_variance"
 	REPORT_EXPORT_TYPE_MULTIPLE_BETS               = "multiple_bets"
+	REPORT_EXPORT_TYPE_SPORT_EVENTS                = "sport_events"
+	REPORT_EXPORT_TYPE_CUSTOMER_STRIKE_REPORTS     = "customer_strike_reports"
 )
 
 type ReportExportPayload struct {

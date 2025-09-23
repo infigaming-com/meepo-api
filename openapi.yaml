@@ -1451,6 +1451,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListCurrenciesResponse'
+    /v1/backoffice/game/customer-strike-reports/export:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ExportCustomerStrikeReports
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ExportCustomerStrikeReportsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.ExportCustomerStrikeReportsResponse'
     /v1/backoffice/game/customer-strike-reports/list:
         post:
             tags:
@@ -1585,6 +1603,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListProvidersResponse'
+    /v1/backoffice/game/sport-events/export:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ExportSportEvents
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ExportSportEventsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.ExportSportEventsResponse'
     /v1/backoffice/game/tags/list:
         post:
             tags:
@@ -4042,25 +4078,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.game.service.v1.RollbackResponse'
-    /v1/game/sport-events/list:
-        post:
-            tags:
-                - Game
-            description: Sport Events related APIs
-            operationId: Game_ListSportEvents
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.game.service.v1.ListSportEventsRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.game.service.v1.ListSportEventsResponse'
     /v1/payment/address/get:
         post:
             tags:
@@ -5863,6 +5880,15 @@ components:
                     type: string
                 timeZone:
                     type: string
+        api.backoffice.service.v1.ExportCustomerStrikeReportsRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                format:
+                    type: string
+                timeZone:
+                    type: string
         api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest:
             type: object
             properties:
@@ -5919,6 +5945,23 @@ components:
                 endTime:
                     type: string
                     format: date-time
+                format:
+                    type: string
+                timeZone:
+                    type: string
+        api.backoffice.service.v1.ExportSportEventsRequest:
+            type: object
+            properties:
+                eventName:
+                    type: string
+                venue:
+                    type: string
+                tournament:
+                    type: string
+                startTime:
+                    type: string
+                endTime:
+                    type: string
                 format:
                     type: string
                 timeZone:
@@ -11769,7 +11812,17 @@ components:
             properties:
                 gameUrl:
                     type: string
+        api.game.service.v1.ExportCustomerStrikeReportsResponse:
+            type: object
+            properties:
+                taskId:
+                    type: string
         api.game.service.v1.ExportMultipleBetsResponse:
+            type: object
+            properties:
+                taskId:
+                    type: string
+        api.game.service.v1.ExportSportEventsResponse:
             type: object
             properties:
                 taskId:
@@ -12464,73 +12517,6 @@ components:
                     format: int32
                 enabled:
                     type: boolean
-        api.game.service.v1.ListSportEventsRequest:
-            type: object
-            properties:
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
-                eventName:
-                    type: string
-                venue:
-                    type: string
-                tournament:
-                    type: string
-                startTime:
-                    type: string
-                endTime:
-                    type: string
-        api.game.service.v1.ListSportEventsResponse:
-            type: object
-            properties:
-                events:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.game.service.v1.ListSportEventsResponse_SportEvent'
-                totalCount:
-                    type: integer
-                    description: Summary information
-                    format: int32
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
-                totalPages:
-                    type: integer
-                    format: int32
-        api.game.service.v1.ListSportEventsResponse_SportEvent:
-            type: object
-            properties:
-                eventId:
-                    type: string
-                    description: Basic information
-                eventName:
-                    type: string
-                venue:
-                    type: string
-                tournament:
-                    type: string
-                cardedTime:
-                    type: string
-                    description: Timing information (all in SAST timezone)
-                firstBetTime:
-                    type: string
-                lastBetTime:
-                    type: string
-                noMoreBetsTime:
-                    type: string
-                resultProcessingTime:
-                    type: string
-                revisedOfficialCardedTime:
-                    type: string
-                status:
-                    type: string
-                    description: Status information
         api.game.service.v1.ListStakeVarianceBetsResponse:
             type: object
             properties:
