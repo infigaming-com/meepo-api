@@ -6121,12 +6121,16 @@ func (m *DeleteResponsibleGamblingConfigRequest) validate(all bool) error {
 
 	// no validation rules for LimitType
 
-	if m.UserId != nil {
-		// no validation rules for UserId
+	if m.TargetUserId != nil {
+		// no validation rules for TargetUserId
 	}
 
 	if m.OperatorId != nil {
 		// no validation rules for OperatorId
+	}
+
+	if m.InitiatorUserId != nil {
+		// no validation rules for InitiatorUserId
 	}
 
 	if len(errors) > 0 {
