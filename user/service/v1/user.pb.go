@@ -6368,7 +6368,6 @@ func (*AddResponsibleGamblingConfigResponse) Descriptor() ([]byte, []int) {
 type DeleteResponsibleGamblingConfigRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        *int64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
-	OperatorId    *int64                 `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
 	LimitType     string                 `protobuf:"bytes,3,opt,name=limit_type,json=limitType,proto3" json:"limit_type,omitempty"` // "self_exclusion", "break_in_play", "time_limits"
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -6407,13 +6406,6 @@ func (*DeleteResponsibleGamblingConfigRequest) Descriptor() ([]byte, []int) {
 func (x *DeleteResponsibleGamblingConfigRequest) GetUserId() int64 {
 	if x != nil && x.UserId != nil {
 		return *x.UserId
-	}
-	return 0
-}
-
-func (x *DeleteResponsibleGamblingConfigRequest) GetOperatorId() int64 {
-	if x != nil && x.OperatorId != nil {
-		return *x.OperatorId
 	}
 	return 0
 }
@@ -6464,7 +6456,6 @@ func (*DeleteResponsibleGamblingConfigResponse) Descriptor() ([]byte, []int) {
 type GetResponsibleGamblingConfigRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        *int64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
-	OperatorId    *int64                 `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -6502,13 +6493,6 @@ func (*GetResponsibleGamblingConfigRequest) Descriptor() ([]byte, []int) {
 func (x *GetResponsibleGamblingConfigRequest) GetUserId() int64 {
 	if x != nil && x.UserId != nil {
 		return *x.UserId
-	}
-	return 0
-}
-
-func (x *GetResponsibleGamblingConfigRequest) GetOperatorId() int64 {
-	if x != nil && x.OperatorId != nil {
-		return *x.OperatorId
 	}
 	return 0
 }
@@ -9264,24 +9248,18 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\f_time_limits\"\x95\x01\n" +
 	"#AddResponsibleGamblingConfigRequest\x12n\n" +
 	"\x1bresponsible_gambling_config\x18\x01 \x01(\v2..api.user.service.v1.ResponsibleGamblingConfigR\x19responsibleGamblingConfig\"&\n" +
-	"$AddResponsibleGamblingConfigResponse\"\xa7\x01\n" +
+	"$AddResponsibleGamblingConfigResponse\"q\n" +
 	"&DeleteResponsibleGamblingConfigRequest\x12\x1c\n" +
-	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12$\n" +
-	"\voperator_id\x18\x02 \x01(\x03H\x01R\n" +
-	"operatorId\x88\x01\x01\x12\x1d\n" +
+	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x1d\n" +
 	"\n" +
 	"limit_type\x18\x03 \x01(\tR\tlimitTypeB\n" +
 	"\n" +
-	"\b_user_idB\x0e\n" +
-	"\f_operator_id\")\n" +
-	"'DeleteResponsibleGamblingConfigResponse\"\x85\x01\n" +
+	"\b_user_id\")\n" +
+	"'DeleteResponsibleGamblingConfigResponse\"O\n" +
 	"#GetResponsibleGamblingConfigRequest\x12\x1c\n" +
-	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12$\n" +
-	"\voperator_id\x18\x02 \x01(\x03H\x01R\n" +
-	"operatorId\x88\x01\x01B\n" +
+	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01B\n" +
 	"\n" +
-	"\b_user_idB\x0e\n" +
-	"\f_operator_id\"\xb5\x03\n" +
+	"\b_user_id\"\xb5\x03\n" +
 	"\x19ResponsibleGamblingStatus\x12#\n" +
 	"\rlogin_allowed\x18\x01 \x01(\bR\floginAllowed\x12'\n" +
 	"\x0fdeposit_allowed\x18\x02 \x01(\bR\x0edepositAllowed\x12-\n" +

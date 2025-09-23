@@ -2595,7 +2595,6 @@ func (x *GetChannelsByIdsResponse) GetChannels() []*GetChannelsByIdsResponse_Cha
 type GetResponsibleGamblingStatusRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	OperatorId    int64                  `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2633,13 +2632,6 @@ func (*GetResponsibleGamblingStatusRequest) Descriptor() ([]byte, []int) {
 func (x *GetResponsibleGamblingStatusRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
-	}
-	return 0
-}
-
-func (x *GetResponsibleGamblingStatusRequest) GetOperatorId() int64 {
-	if x != nil {
-		return x.OperatorId
 	}
 	return 0
 }
@@ -3071,11 +3063,9 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\aChannel\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tR\tchannelId\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\"_\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\">\n" +
 	"#GetResponsibleGamblingStatusRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
-	"\voperator_id\x18\x02 \x01(\x03R\n" +
-	"operatorId\"\xc9\x02\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\xc9\x02\n" +
 	"$GetResponsibleGamblingStatusResponse\x12\x96\x01\n" +
 	"\x1dresponsible_gambling_statuses\x18\x01 \x03(\v2R.payment.service.v1.GetResponsibleGamblingStatusResponse.ResponsibleGamblingStatusR\x1bresponsibleGamblingStatuses\x1a\x87\x01\n" +
 	"\x19ResponsibleGamblingStatus\x12\x1a\n" +

@@ -42,7 +42,23 @@ const (
 	Game_GetBackofficeUserOverviewFromGame_FullMethodName = "/api.game.service.v1.Game/GetBackofficeUserOverviewFromGame"
 	Game_ListProviderRates_FullMethodName                 = "/api.game.service.v1.Game/ListProviderRates"
 	Game_GetGameTransactionById_FullMethodName            = "/api.game.service.v1.Game/GetGameTransactionById"
+	Game_GetDailyGameTransactionData_FullMethodName       = "/api.game.service.v1.Game/GetDailyGameTransactionData"
+	Game_ListProviderByIDs_FullMethodName                 = "/api.game.service.v1.Game/ListProviderByIDs"
+	Game_GetTaxReportConfig_FullMethodName                = "/api.game.service.v1.Game/GetTaxReportConfig"
+	Game_UpdateTaxReportConfig_FullMethodName             = "/api.game.service.v1.Game/UpdateTaxReportConfig"
+	Game_ListTaxReports_FullMethodName                    = "/api.game.service.v1.Game/ListTaxReports"
+	Game_UpdateTaxReport_FullMethodName                   = "/api.game.service.v1.Game/UpdateTaxReport"
 	Game_GetResponsibleGamblingStatus_FullMethodName      = "/api.game.service.v1.Game/GetResponsibleGamblingStatus"
+	Game_ListUnpaidBets_FullMethodName                    = "/api.game.service.v1.Game/ListUnpaidBets"
+	Game_ExportUnpaidBets_FullMethodName                  = "/api.game.service.v1.Game/ExportUnpaidBets"
+	Game_ListMultipleBets_FullMethodName                  = "/api.game.service.v1.Game/ListMultipleBets"
+	Game_ExportMultipleBets_FullMethodName                = "/api.game.service.v1.Game/ExportMultipleBets"
+	Game_ListStakeVarianceBets_FullMethodName             = "/api.game.service.v1.Game/ListStakeVarianceBets"
+	Game_ExportStakeVarianceBets_FullMethodName           = "/api.game.service.v1.Game/ExportStakeVarianceBets"
+	Game_ListSportEvents_FullMethodName                   = "/api.game.service.v1.Game/ListSportEvents"
+	Game_GetBetAndEventInfo_FullMethodName                = "/api.game.service.v1.Game/GetBetAndEventInfo"
+	Game_GetTransactionAndEventInfo_FullMethodName        = "/api.game.service.v1.Game/GetTransactionAndEventInfo"
+	Game_ListCustomerStrikeReports_FullMethodName         = "/api.game.service.v1.Game/ListCustomerStrikeReports"
 )
 
 // GameClient is the client API for Game service.
@@ -72,7 +88,26 @@ type GameClient interface {
 	GetBackofficeUserOverviewFromGame(ctx context.Context, in *GetBackofficeUserOverviewFromGameRequest, opts ...grpc.CallOption) (*GetBackofficeUserOverviewFromGameResponse, error)
 	ListProviderRates(ctx context.Context, in *ListProviderRatesRequest, opts ...grpc.CallOption) (*ListProviderRatesResponse, error)
 	GetGameTransactionById(ctx context.Context, in *GetGameTransactionByIdRequest, opts ...grpc.CallOption) (*GetGameTransactionByIdResponse, error)
+	GetDailyGameTransactionData(ctx context.Context, in *GetDailyGameTransactionDataRequest, opts ...grpc.CallOption) (*GetDailyGameTransactionDataResponse, error)
+	ListProviderByIDs(ctx context.Context, in *ListProviderByIDsRequest, opts ...grpc.CallOption) (*ListProviderByIDsResponse, error)
+	// Tax Report related APIs
+	GetTaxReportConfig(ctx context.Context, in *GetTaxReportConfigRequest, opts ...grpc.CallOption) (*GetTaxReportConfigResponse, error)
+	UpdateTaxReportConfig(ctx context.Context, in *UpdateTaxReportConfigRequest, opts ...grpc.CallOption) (*UpdateTaxReportConfigResponse, error)
+	ListTaxReports(ctx context.Context, in *ListTaxReportsRequest, opts ...grpc.CallOption) (*ListTaxReportsResponse, error)
+	UpdateTaxReport(ctx context.Context, in *UpdateTaxReportRequest, opts ...grpc.CallOption) (*UpdateTaxReportResponse, error)
 	GetResponsibleGamblingStatus(ctx context.Context, in *GetResponsibleGamblingStatusRequest, opts ...grpc.CallOption) (*GetResponsibleGamblingStatusResponse, error)
+	ListUnpaidBets(ctx context.Context, in *ListUnpaidBetsRequest, opts ...grpc.CallOption) (*ListUnpaidBetsResponse, error)
+	ExportUnpaidBets(ctx context.Context, in *ExportUnpaidBetsRequest, opts ...grpc.CallOption) (*ExportUnpaidBetsResponse, error)
+	ListMultipleBets(ctx context.Context, in *ListMultipleBetsRequest, opts ...grpc.CallOption) (*ListMultipleBetsResponse, error)
+	ExportMultipleBets(ctx context.Context, in *ExportMultipleBetsRequest, opts ...grpc.CallOption) (*ExportMultipleBetsResponse, error)
+	ListStakeVarianceBets(ctx context.Context, in *ListStakeVarianceBetsRequest, opts ...grpc.CallOption) (*ListStakeVarianceBetsResponse, error)
+	ExportStakeVarianceBets(ctx context.Context, in *ExportStakeVarianceBetsRequest, opts ...grpc.CallOption) (*ExportStakeVarianceBetsResponse, error)
+	// Sport Events related APIs
+	ListSportEvents(ctx context.Context, in *ListSportEventsRequest, opts ...grpc.CallOption) (*ListSportEventsResponse, error)
+	GetBetAndEventInfo(ctx context.Context, in *GetBetAndEventInfoRequest, opts ...grpc.CallOption) (*GetBetAndEventInfoResponse, error)
+	GetTransactionAndEventInfo(ctx context.Context, in *GetTransactionAndEventInfoRequest, opts ...grpc.CallOption) (*GetTransactionAndEventInfoResponse, error)
+	// Customer Strike Report related APIs
+	ListCustomerStrikeReports(ctx context.Context, in *ListCustomerStrikeReportsRequest, opts ...grpc.CallOption) (*ListCustomerStrikeReportsResponse, error)
 }
 
 type gameClient struct {
@@ -313,10 +348,170 @@ func (c *gameClient) GetGameTransactionById(ctx context.Context, in *GetGameTran
 	return out, nil
 }
 
+func (c *gameClient) GetDailyGameTransactionData(ctx context.Context, in *GetDailyGameTransactionDataRequest, opts ...grpc.CallOption) (*GetDailyGameTransactionDataResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDailyGameTransactionDataResponse)
+	err := c.cc.Invoke(ctx, Game_GetDailyGameTransactionData_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) ListProviderByIDs(ctx context.Context, in *ListProviderByIDsRequest, opts ...grpc.CallOption) (*ListProviderByIDsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListProviderByIDsResponse)
+	err := c.cc.Invoke(ctx, Game_ListProviderByIDs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) GetTaxReportConfig(ctx context.Context, in *GetTaxReportConfigRequest, opts ...grpc.CallOption) (*GetTaxReportConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTaxReportConfigResponse)
+	err := c.cc.Invoke(ctx, Game_GetTaxReportConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) UpdateTaxReportConfig(ctx context.Context, in *UpdateTaxReportConfigRequest, opts ...grpc.CallOption) (*UpdateTaxReportConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateTaxReportConfigResponse)
+	err := c.cc.Invoke(ctx, Game_UpdateTaxReportConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) ListTaxReports(ctx context.Context, in *ListTaxReportsRequest, opts ...grpc.CallOption) (*ListTaxReportsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListTaxReportsResponse)
+	err := c.cc.Invoke(ctx, Game_ListTaxReports_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) UpdateTaxReport(ctx context.Context, in *UpdateTaxReportRequest, opts ...grpc.CallOption) (*UpdateTaxReportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateTaxReportResponse)
+	err := c.cc.Invoke(ctx, Game_UpdateTaxReport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *gameClient) GetResponsibleGamblingStatus(ctx context.Context, in *GetResponsibleGamblingStatusRequest, opts ...grpc.CallOption) (*GetResponsibleGamblingStatusResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetResponsibleGamblingStatusResponse)
 	err := c.cc.Invoke(ctx, Game_GetResponsibleGamblingStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) ListUnpaidBets(ctx context.Context, in *ListUnpaidBetsRequest, opts ...grpc.CallOption) (*ListUnpaidBetsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListUnpaidBetsResponse)
+	err := c.cc.Invoke(ctx, Game_ListUnpaidBets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) ExportUnpaidBets(ctx context.Context, in *ExportUnpaidBetsRequest, opts ...grpc.CallOption) (*ExportUnpaidBetsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExportUnpaidBetsResponse)
+	err := c.cc.Invoke(ctx, Game_ExportUnpaidBets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) ListMultipleBets(ctx context.Context, in *ListMultipleBetsRequest, opts ...grpc.CallOption) (*ListMultipleBetsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListMultipleBetsResponse)
+	err := c.cc.Invoke(ctx, Game_ListMultipleBets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) ExportMultipleBets(ctx context.Context, in *ExportMultipleBetsRequest, opts ...grpc.CallOption) (*ExportMultipleBetsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExportMultipleBetsResponse)
+	err := c.cc.Invoke(ctx, Game_ExportMultipleBets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) ListStakeVarianceBets(ctx context.Context, in *ListStakeVarianceBetsRequest, opts ...grpc.CallOption) (*ListStakeVarianceBetsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListStakeVarianceBetsResponse)
+	err := c.cc.Invoke(ctx, Game_ListStakeVarianceBets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) ExportStakeVarianceBets(ctx context.Context, in *ExportStakeVarianceBetsRequest, opts ...grpc.CallOption) (*ExportStakeVarianceBetsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExportStakeVarianceBetsResponse)
+	err := c.cc.Invoke(ctx, Game_ExportStakeVarianceBets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) ListSportEvents(ctx context.Context, in *ListSportEventsRequest, opts ...grpc.CallOption) (*ListSportEventsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListSportEventsResponse)
+	err := c.cc.Invoke(ctx, Game_ListSportEvents_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) GetBetAndEventInfo(ctx context.Context, in *GetBetAndEventInfoRequest, opts ...grpc.CallOption) (*GetBetAndEventInfoResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBetAndEventInfoResponse)
+	err := c.cc.Invoke(ctx, Game_GetBetAndEventInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) GetTransactionAndEventInfo(ctx context.Context, in *GetTransactionAndEventInfoRequest, opts ...grpc.CallOption) (*GetTransactionAndEventInfoResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTransactionAndEventInfoResponse)
+	err := c.cc.Invoke(ctx, Game_GetTransactionAndEventInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) ListCustomerStrikeReports(ctx context.Context, in *ListCustomerStrikeReportsRequest, opts ...grpc.CallOption) (*ListCustomerStrikeReportsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCustomerStrikeReportsResponse)
+	err := c.cc.Invoke(ctx, Game_ListCustomerStrikeReports_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -350,7 +545,26 @@ type GameServer interface {
 	GetBackofficeUserOverviewFromGame(context.Context, *GetBackofficeUserOverviewFromGameRequest) (*GetBackofficeUserOverviewFromGameResponse, error)
 	ListProviderRates(context.Context, *ListProviderRatesRequest) (*ListProviderRatesResponse, error)
 	GetGameTransactionById(context.Context, *GetGameTransactionByIdRequest) (*GetGameTransactionByIdResponse, error)
+	GetDailyGameTransactionData(context.Context, *GetDailyGameTransactionDataRequest) (*GetDailyGameTransactionDataResponse, error)
+	ListProviderByIDs(context.Context, *ListProviderByIDsRequest) (*ListProviderByIDsResponse, error)
+	// Tax Report related APIs
+	GetTaxReportConfig(context.Context, *GetTaxReportConfigRequest) (*GetTaxReportConfigResponse, error)
+	UpdateTaxReportConfig(context.Context, *UpdateTaxReportConfigRequest) (*UpdateTaxReportConfigResponse, error)
+	ListTaxReports(context.Context, *ListTaxReportsRequest) (*ListTaxReportsResponse, error)
+	UpdateTaxReport(context.Context, *UpdateTaxReportRequest) (*UpdateTaxReportResponse, error)
 	GetResponsibleGamblingStatus(context.Context, *GetResponsibleGamblingStatusRequest) (*GetResponsibleGamblingStatusResponse, error)
+	ListUnpaidBets(context.Context, *ListUnpaidBetsRequest) (*ListUnpaidBetsResponse, error)
+	ExportUnpaidBets(context.Context, *ExportUnpaidBetsRequest) (*ExportUnpaidBetsResponse, error)
+	ListMultipleBets(context.Context, *ListMultipleBetsRequest) (*ListMultipleBetsResponse, error)
+	ExportMultipleBets(context.Context, *ExportMultipleBetsRequest) (*ExportMultipleBetsResponse, error)
+	ListStakeVarianceBets(context.Context, *ListStakeVarianceBetsRequest) (*ListStakeVarianceBetsResponse, error)
+	ExportStakeVarianceBets(context.Context, *ExportStakeVarianceBetsRequest) (*ExportStakeVarianceBetsResponse, error)
+	// Sport Events related APIs
+	ListSportEvents(context.Context, *ListSportEventsRequest) (*ListSportEventsResponse, error)
+	GetBetAndEventInfo(context.Context, *GetBetAndEventInfoRequest) (*GetBetAndEventInfoResponse, error)
+	GetTransactionAndEventInfo(context.Context, *GetTransactionAndEventInfoRequest) (*GetTransactionAndEventInfoResponse, error)
+	// Customer Strike Report related APIs
+	ListCustomerStrikeReports(context.Context, *ListCustomerStrikeReportsRequest) (*ListCustomerStrikeReportsResponse, error)
 	mustEmbedUnimplementedGameServer()
 }
 
@@ -430,8 +644,56 @@ func (UnimplementedGameServer) ListProviderRates(context.Context, *ListProviderR
 func (UnimplementedGameServer) GetGameTransactionById(context.Context, *GetGameTransactionByIdRequest) (*GetGameTransactionByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGameTransactionById not implemented")
 }
+func (UnimplementedGameServer) GetDailyGameTransactionData(context.Context, *GetDailyGameTransactionDataRequest) (*GetDailyGameTransactionDataResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDailyGameTransactionData not implemented")
+}
+func (UnimplementedGameServer) ListProviderByIDs(context.Context, *ListProviderByIDsRequest) (*ListProviderByIDsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListProviderByIDs not implemented")
+}
+func (UnimplementedGameServer) GetTaxReportConfig(context.Context, *GetTaxReportConfigRequest) (*GetTaxReportConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTaxReportConfig not implemented")
+}
+func (UnimplementedGameServer) UpdateTaxReportConfig(context.Context, *UpdateTaxReportConfigRequest) (*UpdateTaxReportConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTaxReportConfig not implemented")
+}
+func (UnimplementedGameServer) ListTaxReports(context.Context, *ListTaxReportsRequest) (*ListTaxReportsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTaxReports not implemented")
+}
+func (UnimplementedGameServer) UpdateTaxReport(context.Context, *UpdateTaxReportRequest) (*UpdateTaxReportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTaxReport not implemented")
+}
 func (UnimplementedGameServer) GetResponsibleGamblingStatus(context.Context, *GetResponsibleGamblingStatusRequest) (*GetResponsibleGamblingStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetResponsibleGamblingStatus not implemented")
+}
+func (UnimplementedGameServer) ListUnpaidBets(context.Context, *ListUnpaidBetsRequest) (*ListUnpaidBetsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListUnpaidBets not implemented")
+}
+func (UnimplementedGameServer) ExportUnpaidBets(context.Context, *ExportUnpaidBetsRequest) (*ExportUnpaidBetsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportUnpaidBets not implemented")
+}
+func (UnimplementedGameServer) ListMultipleBets(context.Context, *ListMultipleBetsRequest) (*ListMultipleBetsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListMultipleBets not implemented")
+}
+func (UnimplementedGameServer) ExportMultipleBets(context.Context, *ExportMultipleBetsRequest) (*ExportMultipleBetsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportMultipleBets not implemented")
+}
+func (UnimplementedGameServer) ListStakeVarianceBets(context.Context, *ListStakeVarianceBetsRequest) (*ListStakeVarianceBetsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListStakeVarianceBets not implemented")
+}
+func (UnimplementedGameServer) ExportStakeVarianceBets(context.Context, *ExportStakeVarianceBetsRequest) (*ExportStakeVarianceBetsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportStakeVarianceBets not implemented")
+}
+func (UnimplementedGameServer) ListSportEvents(context.Context, *ListSportEventsRequest) (*ListSportEventsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListSportEvents not implemented")
+}
+func (UnimplementedGameServer) GetBetAndEventInfo(context.Context, *GetBetAndEventInfoRequest) (*GetBetAndEventInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBetAndEventInfo not implemented")
+}
+func (UnimplementedGameServer) GetTransactionAndEventInfo(context.Context, *GetTransactionAndEventInfoRequest) (*GetTransactionAndEventInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTransactionAndEventInfo not implemented")
+}
+func (UnimplementedGameServer) ListCustomerStrikeReports(context.Context, *ListCustomerStrikeReportsRequest) (*ListCustomerStrikeReportsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCustomerStrikeReports not implemented")
 }
 func (UnimplementedGameServer) mustEmbedUnimplementedGameServer() {}
 func (UnimplementedGameServer) testEmbeddedByValue()              {}
@@ -868,6 +1130,114 @@ func _Game_GetGameTransactionById_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_GetDailyGameTransactionData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDailyGameTransactionDataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).GetDailyGameTransactionData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_GetDailyGameTransactionData_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).GetDailyGameTransactionData(ctx, req.(*GetDailyGameTransactionDataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_ListProviderByIDs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListProviderByIDsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).ListProviderByIDs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_ListProviderByIDs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).ListProviderByIDs(ctx, req.(*ListProviderByIDsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_GetTaxReportConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTaxReportConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).GetTaxReportConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_GetTaxReportConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).GetTaxReportConfig(ctx, req.(*GetTaxReportConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_UpdateTaxReportConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTaxReportConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).UpdateTaxReportConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_UpdateTaxReportConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).UpdateTaxReportConfig(ctx, req.(*UpdateTaxReportConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_ListTaxReports_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListTaxReportsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).ListTaxReports(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_ListTaxReports_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).ListTaxReports(ctx, req.(*ListTaxReportsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_UpdateTaxReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTaxReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).UpdateTaxReport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_UpdateTaxReport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).UpdateTaxReport(ctx, req.(*UpdateTaxReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Game_GetResponsibleGamblingStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetResponsibleGamblingStatusRequest)
 	if err := dec(in); err != nil {
@@ -882,6 +1252,186 @@ func _Game_GetResponsibleGamblingStatus_Handler(srv interface{}, ctx context.Con
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GameServer).GetResponsibleGamblingStatus(ctx, req.(*GetResponsibleGamblingStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_ListUnpaidBets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListUnpaidBetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).ListUnpaidBets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_ListUnpaidBets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).ListUnpaidBets(ctx, req.(*ListUnpaidBetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_ExportUnpaidBets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportUnpaidBetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).ExportUnpaidBets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_ExportUnpaidBets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).ExportUnpaidBets(ctx, req.(*ExportUnpaidBetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_ListMultipleBets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListMultipleBetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).ListMultipleBets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_ListMultipleBets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).ListMultipleBets(ctx, req.(*ListMultipleBetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_ExportMultipleBets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportMultipleBetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).ExportMultipleBets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_ExportMultipleBets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).ExportMultipleBets(ctx, req.(*ExportMultipleBetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_ListStakeVarianceBets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListStakeVarianceBetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).ListStakeVarianceBets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_ListStakeVarianceBets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).ListStakeVarianceBets(ctx, req.(*ListStakeVarianceBetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_ExportStakeVarianceBets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportStakeVarianceBetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).ExportStakeVarianceBets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_ExportStakeVarianceBets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).ExportStakeVarianceBets(ctx, req.(*ExportStakeVarianceBetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_ListSportEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListSportEventsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).ListSportEvents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_ListSportEvents_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).ListSportEvents(ctx, req.(*ListSportEventsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_GetBetAndEventInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBetAndEventInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).GetBetAndEventInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_GetBetAndEventInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).GetBetAndEventInfo(ctx, req.(*GetBetAndEventInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_GetTransactionAndEventInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTransactionAndEventInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).GetTransactionAndEventInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_GetTransactionAndEventInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).GetTransactionAndEventInfo(ctx, req.(*GetTransactionAndEventInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_ListCustomerStrikeReports_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCustomerStrikeReportsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).ListCustomerStrikeReports(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_ListCustomerStrikeReports_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).ListCustomerStrikeReports(ctx, req.(*ListCustomerStrikeReportsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -986,8 +1536,72 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Game_GetGameTransactionById_Handler,
 		},
 		{
+			MethodName: "GetDailyGameTransactionData",
+			Handler:    _Game_GetDailyGameTransactionData_Handler,
+		},
+		{
+			MethodName: "ListProviderByIDs",
+			Handler:    _Game_ListProviderByIDs_Handler,
+		},
+		{
+			MethodName: "GetTaxReportConfig",
+			Handler:    _Game_GetTaxReportConfig_Handler,
+		},
+		{
+			MethodName: "UpdateTaxReportConfig",
+			Handler:    _Game_UpdateTaxReportConfig_Handler,
+		},
+		{
+			MethodName: "ListTaxReports",
+			Handler:    _Game_ListTaxReports_Handler,
+		},
+		{
+			MethodName: "UpdateTaxReport",
+			Handler:    _Game_UpdateTaxReport_Handler,
+		},
+		{
 			MethodName: "GetResponsibleGamblingStatus",
 			Handler:    _Game_GetResponsibleGamblingStatus_Handler,
+		},
+		{
+			MethodName: "ListUnpaidBets",
+			Handler:    _Game_ListUnpaidBets_Handler,
+		},
+		{
+			MethodName: "ExportUnpaidBets",
+			Handler:    _Game_ExportUnpaidBets_Handler,
+		},
+		{
+			MethodName: "ListMultipleBets",
+			Handler:    _Game_ListMultipleBets_Handler,
+		},
+		{
+			MethodName: "ExportMultipleBets",
+			Handler:    _Game_ExportMultipleBets_Handler,
+		},
+		{
+			MethodName: "ListStakeVarianceBets",
+			Handler:    _Game_ListStakeVarianceBets_Handler,
+		},
+		{
+			MethodName: "ExportStakeVarianceBets",
+			Handler:    _Game_ExportStakeVarianceBets_Handler,
+		},
+		{
+			MethodName: "ListSportEvents",
+			Handler:    _Game_ListSportEvents_Handler,
+		},
+		{
+			MethodName: "GetBetAndEventInfo",
+			Handler:    _Game_GetBetAndEventInfo_Handler,
+		},
+		{
+			MethodName: "GetTransactionAndEventInfo",
+			Handler:    _Game_GetTransactionAndEventInfo_Handler,
+		},
+		{
+			MethodName: "ListCustomerStrikeReports",
+			Handler:    _Game_ListCustomerStrikeReports_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

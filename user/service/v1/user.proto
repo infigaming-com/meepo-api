@@ -1090,7 +1090,6 @@ message AddResponsibleGamblingConfigResponse {
 
 message DeleteResponsibleGamblingConfigRequest {
 	optional int64 user_id = 1;
-	optional int64 operator_id = 2;
 	string limit_type = 3; // "self_exclusion", "break_in_play", "time_limits"
 }
 
@@ -1099,7 +1098,6 @@ message DeleteResponsibleGamblingConfigResponse {
 
 message GetResponsibleGamblingConfigRequest {
 	optional int64 user_id = 1;
-	optional int64 operator_id = 2;
 }
 
 message ResponsibleGamblingStatus {

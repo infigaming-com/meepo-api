@@ -494,7 +494,6 @@ message GetChannelsByIdsResponse {
 
 message GetResponsibleGamblingStatusRequest {
 	int64 user_id = 1;
-	int64 operator_id = 2;
 }
 
 message GetResponsibleGamblingStatusResponse {

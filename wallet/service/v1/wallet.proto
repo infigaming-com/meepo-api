@@ -205,6 +205,7 @@ message GameDebitRequest {
 	int64 transaction_id = 6;
 	string amount = 7;
 	string turnover = 8;
+	optional bool allow_overdraft = 9;
 }
 
 message GameDebitResponse {
@@ -280,7 +281,13 @@ message RollbackRequest {
 	string transaction_type = 1;
 	int64 transaction_id = 2;
 	int64 original_transaction_id = 3;
+	ChannelInfo channel_info = 4;
 }
+
+message ChannelInfo {
+	int64 operator_id = 1;
+}
+
 
 message RollbackResponse {
 	int64 transaction_id = 1;
@@ -635,12 +642,11 @@ message AddResponsibleGamblingConfigResponse {}
 
 message DeleteResponsibleGamblingConfigRequest {
 	optional int64 target_user_id = 1;
-	optional int64 operator_id = 2;
-	string currency = 3;
+	string currency = 2;
 	// deposit_limit, withdrawal_limit, daily_play_limit, weekly_play_limit, monthly_play_limit
 	// daily_loss_limit, weekly_loss_limit, monthly_loss_limit
-	string limit_type = 4;
-	optional int64 initiator_user_id = 5;
+	string limit_type = 3;
+	optional int64 initiator_user_id = 4;
 }
 
 message DeleteResponsibleGamblingConfigResponse {}
@@ -682,7 +688,6 @@ message ResponsibleGamblingStatus {
 
 message ListResponsibleGamblingConfigsRequest {
 	optional int64 user_id = 1;
-	optional int64 operator_id = 2;
 }
 
 message ListResponsibleGamblingConfigsResponse {
@@ -692,8 +697,7 @@ message ListResponsibleGamblingConfigsResponse {
 
 message GetResponsibleGamblingConfigRequest {
 	int64 user_id = 1;
-	optional int64 operator_id = 2;
-	string currency = 3;
+	string currency = 2;
 }
 
 message GetResponsibleGamblingConfigResponse {

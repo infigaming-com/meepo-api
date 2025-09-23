@@ -3629,8 +3629,6 @@ func (m *GetResponsibleGamblingStatusRequest) validate(all bool) error {
 
 	// no validation rules for UserId
 
-	// no validation rules for OperatorId
-
 	if len(errors) > 0 {
 		return GetResponsibleGamblingStatusRequestMultiError(errors)
 	}

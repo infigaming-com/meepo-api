@@ -1850,24 +1850,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateWalletResponse'
-    /v1/game/backoffice/games/list:
-        post:
-            tags:
-                - Game
-            operationId: Game_BackofficeListGames
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.game.service.v1.BackofficeListGamesRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.game.service.v1.BackofficeListGamesResponse'
     /v1/game/balance:
         post:
             tags:
@@ -2030,6 +2012,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.game.service.v1.RollbackResponse'
+    /v1/game/sport-events/list:
+        post:
+            tags:
+                - Game
+            description: Sport Events related APIs
+            operationId: Game_ListSportEvents
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.ListSportEventsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.ListSportEventsResponse'
     /v1/payment/address/get:
         post:
             tags:
@@ -6826,116 +6827,8 @@ components:
                     type: string
                 finished:
                     type: boolean
-        api.game.service.v1.BackofficeListGamesRequest:
-            type: object
-            properties:
-                providerIds:
-                    type: array
-                    items:
-                        type: string
-                categories:
-                    type: array
-                    items:
-                        type: string
-                feeGroups:
-                    type: array
-                    items:
-                        type: string
-                gameId:
+                extra:
                     type: string
-                gameTags:
-                    type: array
-                    items:
-                        type: string
-                themes:
-                    type: array
-                    items:
-                        type: string
-                supportBonusBuy:
-                    type: boolean
-                hasFreespins:
-                    type: boolean
-                supportCurrencies:
-                    type: array
-                    items:
-                        type: string
-                restrictedCountries:
-                    type: array
-                    items:
-                        type: string
-                rtpMin:
-                    type: string
-                rtpMax:
-                    type: string
-                enabled:
-                    type: boolean
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
-        api.game.service.v1.BackofficeListGamesResponse:
-            type: object
-            properties:
-                games:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.game.service.v1.BackofficeListGamesResponse_Game'
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
-                total:
-                    type: integer
-                    format: int32
-                totalEnabled:
-                    type: integer
-                    format: int32
-                totalDisabled:
-                    type: integer
-                    format: int32
-        api.game.service.v1.BackofficeListGamesResponse_Game:
-            type: object
-            properties:
-                name:
-                    type: string
-                provider:
-                    type: string
-                id:
-                    type: string
-                category:
-                    type: string
-                theme:
-                    type: string
-                supportBonusBuy:
-                    type: boolean
-                hasFreespins:
-                    type: boolean
-                tags:
-                    type: array
-                    items:
-                        type: string
-                feeGroup:
-                    type: string
-                rate:
-                    type: string
-                rtp:
-                    type: string
-                validBetRate:
-                    type: string
-                supportCurrencies:
-                    type: array
-                    items:
-                        type: string
-                restrictedCountries:
-                    type: array
-                    items:
-                        type: string
-                enabled:
-                    type: boolean
         api.game.service.v1.BalanceRequest:
             type: object
             properties:
@@ -6983,6 +6876,18 @@ components:
                 operatorId:
                     type: string
                 operatorName:
+                    type: string
+                companyOperatorId:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorId:
+                    type: string
+                systemOperatorName:
                     type: string
                 currency:
                     type: string
@@ -7139,10 +7044,6 @@ components:
         api.game.service.v1.ListBetsRequest:
             type: object
             properties:
-                operatorIds:
-                    type: array
-                    items:
-                        type: string
                 providerIds:
                     type: array
                     items:
@@ -7343,6 +7244,73 @@ components:
                     format: int32
                 enabled:
                     type: boolean
+        api.game.service.v1.ListSportEventsRequest:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                eventName:
+                    type: string
+                venue:
+                    type: string
+                tournament:
+                    type: string
+                startTime:
+                    type: string
+                endTime:
+                    type: string
+        api.game.service.v1.ListSportEventsResponse:
+            type: object
+            properties:
+                events:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.ListSportEventsResponse_SportEvent'
+                totalCount:
+                    type: integer
+                    description: Summary information
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                totalPages:
+                    type: integer
+                    format: int32
+        api.game.service.v1.ListSportEventsResponse_SportEvent:
+            type: object
+            properties:
+                eventId:
+                    type: string
+                    description: Basic information
+                eventName:
+                    type: string
+                venue:
+                    type: string
+                tournament:
+                    type: string
+                cardedTime:
+                    type: string
+                    description: Timing information (all in SAST timezone)
+                firstBetTime:
+                    type: string
+                lastBetTime:
+                    type: string
+                noMoreBetsTime:
+                    type: string
+                resultProcessingTime:
+                    type: string
+                revisedOfficialCardedTime:
+                    type: string
+                status:
+                    type: string
+                    description: Status information
         api.game.service.v1.PlayRequest:
             type: object
             properties:
@@ -7517,8 +7485,6 @@ components:
             properties:
                 userId:
                     type: string
-                operatorId:
-                    type: string
                 limitType:
                     type: string
         api.user.service.v1.DeleteResponsibleGamblingConfigResponse:
@@ -7545,8 +7511,6 @@ components:
             type: object
             properties:
                 userId:
-                    type: string
-                operatorId:
                     type: string
         api.user.service.v1.GetResponsibleGamblingConfigResponse:
             type: object
@@ -8037,8 +8001,6 @@ components:
             properties:
                 targetUserId:
                     type: string
-                operatorId:
-                    type: string
                 currency:
                     type: string
                 limitType:
@@ -8109,8 +8071,6 @@ components:
             type: object
             properties:
                 userId:
-                    type: string
-                operatorId:
                     type: string
         api.wallet.service.v1.ListResponsibleGamblingConfigsResponse:
             type: object

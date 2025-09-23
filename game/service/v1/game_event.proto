@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package api.game.service.v1;
+
+option go_package = "github.com/infigaming-com/meepo-api/game/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.game.service.v1";
+
+service GameEvent {
+	rpc Event (EventRequest) returns (EventResponse) {}	
+}
+
+message EventRequest {
+	string subscription_id = 1;
+	bytes event_data = 2;
+	string message_id = 3;
+}
+
+message EventResponse {}
+
+message GameTransactionEvent {
+	int64 operator_id = 1;
+	string operator_name = 2;
+	string provider_id = 3;
+	string provider_name = 4;
+	int64 user_id = 5;
+	string game_id = 6;
+	string game_name = 7;
+	string game_action = 8;
+	int64 round_id = 9;
+	int64 bet_id = 10;
+	int64 transaction_id = 11;
+	string fee_group = 12;
+	string currency = 13;
+	string settlement_currency = 14;
+	string exchange_rate = 15;
+	string amount_currency = 16;
+	string amount_settlement_currency = 17;
+	string amount_usd = 18;	
+	string amount_reporting_currency = 19;
+	string cash_amount_currency = 20;
+	string cash_amount_settlement_currency = 21;
+	string cash_amount_usd = 22;
+	string cash_amount_reporting_currency = 23;
+	string turnover = 24;
+	string turnover_usd = 25;
+	string turnover_reporting_currency = 26;
+	int64 created_at = 27;
+	int64 system_operator_id = 28;
+	int64 retailer_operator_id = 29;
+	int64 company_operator_id = 30;
+}

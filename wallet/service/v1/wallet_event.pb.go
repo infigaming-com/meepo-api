@@ -110,17 +110,16 @@ func (*EventResponse) Descriptor() ([]byte, []int) {
 }
 
 type UpdateResponsibleGamblingConfigEvent struct {
-	state               protoimpl.MessageState                       `protogen:"open.v1"`
-	TargetUserId        int64                                        `protobuf:"varint,1,opt,name=target_user_id,json=targetUserId,proto3" json:"target_user_id,omitempty"`
-	InitiatorUserId     int64                                        `protobuf:"varint,2,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
-	InitiatorOperatorId int64                                        `protobuf:"varint,3,opt,name=initiator_operator_id,json=initiatorOperatorId,proto3" json:"initiator_operator_id,omitempty"`
-	Action              string                                       `protobuf:"bytes,4,opt,name=action,proto3" json:"action,omitempty"` // set, delete
-	Currency            string                                       `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
-	BeforeConfig        *UpdateResponsibleGamblingConfigEvent_Config `protobuf:"bytes,6,opt,name=before_config,json=beforeConfig,proto3" json:"before_config,omitempty"`
-	AfterConfig         *UpdateResponsibleGamblingConfigEvent_Config `protobuf:"bytes,7,opt,name=after_config,json=afterConfig,proto3" json:"after_config,omitempty"`
-	UpdatedAt           int64                                        `protobuf:"varint,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state           protoimpl.MessageState                       `protogen:"open.v1"`
+	TargetUserId    int64                                        `protobuf:"varint,1,opt,name=target_user_id,json=targetUserId,proto3" json:"target_user_id,omitempty"`
+	InitiatorUserId int64                                        `protobuf:"varint,2,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
+	Action          string                                       `protobuf:"bytes,3,opt,name=action,proto3" json:"action,omitempty"` // set, delete
+	Currency        string                                       `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
+	BeforeConfig    *UpdateResponsibleGamblingConfigEvent_Config `protobuf:"bytes,5,opt,name=before_config,json=beforeConfig,proto3" json:"before_config,omitempty"`
+	AfterConfig     *UpdateResponsibleGamblingConfigEvent_Config `protobuf:"bytes,6,opt,name=after_config,json=afterConfig,proto3" json:"after_config,omitempty"`
+	UpdatedAt       int64                                        `protobuf:"varint,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *UpdateResponsibleGamblingConfigEvent) Reset() {
@@ -163,13 +162,6 @@ func (x *UpdateResponsibleGamblingConfigEvent) GetTargetUserId() int64 {
 func (x *UpdateResponsibleGamblingConfigEvent) GetInitiatorUserId() int64 {
 	if x != nil {
 		return x.InitiatorUserId
-	}
-	return 0
-}
-
-func (x *UpdateResponsibleGamblingConfigEvent) GetInitiatorOperatorId() int64 {
-	if x != nil {
-		return x.InitiatorOperatorId
 	}
 	return 0
 }
@@ -382,17 +374,16 @@ const file_wallet_service_v1_wallet_event_proto_rawDesc = "" +
 	"\x0fsubscription_id\x18\x01 \x01(\tR\x0esubscriptionId\x12\x1d\n" +
 	"\n" +
 	"event_data\x18\x02 \x01(\fR\teventData\"\x0f\n" +
-	"\rEventResponse\"\xc2\v\n" +
+	"\rEventResponse\"\x8e\v\n" +
 	"$UpdateResponsibleGamblingConfigEvent\x12$\n" +
 	"\x0etarget_user_id\x18\x01 \x01(\x03R\ftargetUserId\x12*\n" +
-	"\x11initiator_user_id\x18\x02 \x01(\x03R\x0finitiatorUserId\x122\n" +
-	"\x15initiator_operator_id\x18\x03 \x01(\x03R\x13initiatorOperatorId\x12\x16\n" +
-	"\x06action\x18\x04 \x01(\tR\x06action\x12\x1a\n" +
-	"\bcurrency\x18\x05 \x01(\tR\bcurrency\x12g\n" +
-	"\rbefore_config\x18\x06 \x01(\v2B.api.wallet.service.v1.UpdateResponsibleGamblingConfigEvent.ConfigR\fbeforeConfig\x12e\n" +
-	"\fafter_config\x18\a \x01(\v2B.api.wallet.service.v1.UpdateResponsibleGamblingConfigEvent.ConfigR\vafterConfig\x12\x1d\n" +
+	"\x11initiator_user_id\x18\x02 \x01(\x03R\x0finitiatorUserId\x12\x16\n" +
+	"\x06action\x18\x03 \x01(\tR\x06action\x12\x1a\n" +
+	"\bcurrency\x18\x04 \x01(\tR\bcurrency\x12g\n" +
+	"\rbefore_config\x18\x05 \x01(\v2B.api.wallet.service.v1.UpdateResponsibleGamblingConfigEvent.ConfigR\fbeforeConfig\x12e\n" +
+	"\fafter_config\x18\x06 \x01(\v2B.api.wallet.service.v1.UpdateResponsibleGamblingConfigEvent.ConfigR\vafterConfig\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\b \x01(\x03R\tupdatedAt\x1a\xf0\a\n" +
+	"updated_at\x18\a \x01(\x03R\tupdatedAt\x1a\xf0\a\n" +
 	"\x06Config\x12#\n" +
 	"\rdeposit_limit\x18\x01 \x01(\tR\fdepositLimit\x12)\n" +
 	"\x10withdrawal_limit\x18\x02 \x01(\tR\x0fwithdrawalLimit\x12(\n" +

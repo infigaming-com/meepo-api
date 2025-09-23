@@ -265,8 +265,6 @@ func (m *UpdateResponsibleGamblingConfigEvent) validate(all bool) error {
 
 	// no validation rules for InitiatorUserId
 
-	// no validation rules for InitiatorOperatorId
-
 	// no validation rules for Action
 
 	// no validation rules for Currency

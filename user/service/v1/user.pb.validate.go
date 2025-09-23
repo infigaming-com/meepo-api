@@ -13116,10 +13116,6 @@ func (m *DeleteResponsibleGamblingConfigRequest) validate(all bool) error {
 		// no validation rules for UserId
 	}
 
-	if m.OperatorId != nil {
-		// no validation rules for OperatorId
-	}
-
 	if len(errors) > 0 {
 		return DeleteResponsibleGamblingConfigRequestMultiError(errors)
 	}
@@ -13333,10 +13329,6 @@ func (m *GetResponsibleGamblingConfigRequest) validate(all bool) error {
 
 	if m.UserId != nil {
 		// no validation rules for UserId
-	}
-
-	if m.OperatorId != nil {
-		// no validation rules for OperatorId
 	}
 
 	if len(errors) > 0 {
