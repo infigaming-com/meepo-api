@@ -492,6 +492,20 @@ message GetChannelsByIdsResponse {
 	repeated Channel channels = 1;
 }
 
+message GetResponsibleGamblingStatusRequest {
+	int64 user_id = 1;
+	int64 operator_id = 2;
+}
+
+message GetResponsibleGamblingStatusResponse {
+	message ResponsibleGamblingStatus {
+    string currency = 1;
+    string withdrawal_usage = 2;
+    string deposit_usage = 3;
+	}
+	repeated ResponsibleGamblingStatus responsible_gambling_statuses = 1;
+}
+
 // Payment Service
 // Provides methods for managing payment methods, channels, and transactions
 service Payment {
@@ -589,4 +603,6 @@ service Payment {
   
 	rpc GetChannelsByIds(GetChannelsByIdsRequest) returns (GetChannelsByIdsResponse) {
 	}
+
+  rpc GetResponsibleGamblingStatus(GetResponsibleGamblingStatusRequest) returns (GetResponsibleGamblingStatusResponse) {}
 }

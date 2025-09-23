@@ -16,3 +16,33 @@ message EventRequest {
 }
 
 message EventResponse {}
+
+message UpdateResponsibleGamblingConfigEvent {
+	message Config {
+		string deposit_limit = 1;
+		string withdrawal_limit = 2;
+		string daily_play_limit = 3;
+		string weekly_play_limit = 4;
+		string monthly_play_limit = 5;
+		string daily_loss_limit = 6;
+		string weekly_loss_limit = 7;
+		string monthly_loss_limit = 8;
+		int64 deposit_limit_delete_schedule_time = 9;
+		int64 withdrawal_limit_delete_schedule_time = 10;
+		int64 daily_play_limit_delete_schedule_time = 11;
+		int64 weekly_play_limit_delete_schedule_time = 12;
+		int64 monthly_play_limit_delete_schedule_time = 13;
+		int64 daily_loss_limit_delete_schedule_time = 14;
+		int64 weekly_loss_limit_delete_schedule_time = 15;
+		int64 monthly_loss_limit_delete_schedule_time = 16;
+	}
+	int64 target_user_id = 1;
+	int64 initiator_user_id = 2;
+	int64 initiator_operator_id = 3;
+	string action = 4; // set, delete
+	string currency = 5;
+	Config before_config = 6;
+	Config after_config = 7;
+	int64 updated_at = 8;
+}
+

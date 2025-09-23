@@ -112,6 +112,9 @@ service Game {
 
 	rpc GetGameTransactionById(GetGameTransactionByIdRequest) returns (GetGameTransactionByIdResponse) {
 	}
+
+	rpc GetResponsibleGamblingStatus(GetResponsibleGamblingStatusRequest) returns (GetResponsibleGamblingStatusResponse) {
+	}
 }
 
 message CreateOperatorRequest {
@@ -365,6 +368,7 @@ message Action {
 	int64 bet_time = 11;
 	int64 settle_time = 12;
 	int64 provider_timestamp = 13;
+	bool finished = 14;
 }
 
 message Transactions {
@@ -708,4 +712,22 @@ message ListProviderRatesResponse {
 	int32 page = 2;
 	int32 page_size = 3;
 	int32 total = 4;
+}
+
+message GetResponsibleGamblingStatusRequest {
+	int64 user_id = 1;
+	optional int64 operator_id = 2;
+}
+
+message GetResponsibleGamblingStatusResponse {
+	message ResponsibleGamblingStatus {
+		string currency = 1;
+		string daily_play_usage = 2;
+		string weekly_play_usage = 3;
+		string monthly_play_usage = 4;
+		string daily_loss_usage = 5;
+		string weekly_loss_usage = 6;
+		string monthly_loss_usage = 7;
+	}
+	repeated ResponsibleGamblingStatus responsible_gambling_statuses = 1;
 }
