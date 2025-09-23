@@ -75,6 +75,7 @@ const (
 	User_UserIdentityAudit_FullMethodName               = "/api.user.service.v1.User/UserIdentityAudit"
 	User_UserIdentityList_FullMethodName                = "/api.user.service.v1.User/UserIdentityList"
 	User_CloseAccount_FullMethodName                    = "/api.user.service.v1.User/CloseAccount"
+	User_GetOperatorDetails_FullMethodName              = "/api.user.service.v1.User/GetOperatorDetails"
 )
 
 // UserClient is the client API for User service.
@@ -175,6 +176,8 @@ type UserClient interface {
 	UserIdentityAudit(ctx context.Context, in *UserIdentityAuditRequest, opts ...grpc.CallOption) (*UserIdentityAuditResponse, error)
 	UserIdentityList(ctx context.Context, in *UserIdentityListRequest, opts ...grpc.CallOption) (*UserIdentityListResponse, error)
 	CloseAccount(ctx context.Context, in *CloseAccountRequest, opts ...grpc.CallOption) (*CloseAccountResponse, error)
+	// GetOperatorDetails returns the operator details.
+	GetOperatorDetails(ctx context.Context, in *GetOperatorDetailsRequest, opts ...grpc.CallOption) (*GetOperatorDetailsResponse, error)
 }
 
 type userClient struct {
@@ -745,6 +748,16 @@ func (c *userClient) CloseAccount(ctx context.Context, in *CloseAccountRequest, 
 	return out, nil
 }
 
+func (c *userClient) GetOperatorDetails(ctx context.Context, in *GetOperatorDetailsRequest, opts ...grpc.CallOption) (*GetOperatorDetailsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorDetailsResponse)
+	err := c.cc.Invoke(ctx, User_GetOperatorDetails_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -843,6 +856,8 @@ type UserServer interface {
 	UserIdentityAudit(context.Context, *UserIdentityAuditRequest) (*UserIdentityAuditResponse, error)
 	UserIdentityList(context.Context, *UserIdentityListRequest) (*UserIdentityListResponse, error)
 	CloseAccount(context.Context, *CloseAccountRequest) (*CloseAccountResponse, error)
+	// GetOperatorDetails returns the operator details.
+	GetOperatorDetails(context.Context, *GetOperatorDetailsRequest) (*GetOperatorDetailsResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -1020,6 +1035,9 @@ func (UnimplementedUserServer) UserIdentityList(context.Context, *UserIdentityLi
 }
 func (UnimplementedUserServer) CloseAccount(context.Context, *CloseAccountRequest) (*CloseAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CloseAccount not implemented")
+}
+func (UnimplementedUserServer) GetOperatorDetails(context.Context, *GetOperatorDetailsRequest) (*GetOperatorDetailsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorDetails not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -2050,6 +2068,24 @@ func _User_CloseAccount_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_GetOperatorDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorDetailsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetOperatorDetails(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetOperatorDetails_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetOperatorDetails(ctx, req.(*GetOperatorDetailsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2280,6 +2316,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CloseAccount",
 			Handler:    _User_CloseAccount_Handler,
+		},
+		{
+			MethodName: "GetOperatorDetails",
+			Handler:    _User_GetOperatorDetails_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

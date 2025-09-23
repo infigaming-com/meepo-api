@@ -251,6 +251,10 @@ service User {
 			body: "*"
 		};
 	}
+
+	// GetOperatorDetails returns the operator details.
+	rpc GetOperatorDetails(GetOperatorDetailsRequest) returns (GetOperatorDetailsResponse) {
+	}
 }
 
 // UserInfo contains basic user information.
@@ -1176,4 +1180,22 @@ message CloseAccountRequest {
 }
 
 message CloseAccountResponse {
+}
+
+message OperatorDetails {
+	int64 id = 1; // real operator id
+	string operator_name = 2;
+	string operator_type = 3;
+	bool enabled = 4;
+	string reporting_currency = 5;
+	OperatorConfig config = 6;
+	OperatorRegisterLimitConfig register_limit_config = 7;
+}
+
+message GetOperatorDetailsRequest {
+	int64 operator_id = 1;
+}
+
+message GetOperatorDetailsResponse {
+	OperatorDetails operator_details = 1;
 }
