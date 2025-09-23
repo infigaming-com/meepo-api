@@ -404,6 +404,8 @@ func (m *ListIntegrityStatusRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for OperatorId
+
 	if len(errors) > 0 {
 		return ListIntegrityStatusRequestMultiError(errors)
 	}
@@ -642,6 +644,8 @@ func (m *SetIntegrityConfigRequest) validate(all bool) error {
 	}
 
 	var errors []error
+
+	// no validation rules for OperatorId
 
 	// no validation rules for LabelApp
 
@@ -888,6 +892,8 @@ func (m *ListReportExportRequest) validate(all bool) error {
 	// no validation rules for Page
 
 	// no validation rules for PageSize
+
+	// no validation rules for OperatorId
 
 	if m.Type != nil {
 		// no validation rules for Type
@@ -1272,6 +1278,8 @@ func (m *CreateReportExportRequest) validate(all bool) error {
 			}
 		}
 	}
+
+	// no validation rules for OperatorId
 
 	if len(errors) > 0 {
 		return CreateReportExportRequestMultiError(errors)
@@ -1828,6 +1836,8 @@ func (m *ListSevRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for OperatorId
+
 	if m.Severity != nil {
 		// no validation rules for Severity
 	}
@@ -2161,6 +2171,8 @@ func (m *ExportSevRequest) validate(all bool) error {
 	// no validation rules for Format
 
 	// no validation rules for TimeZone
+
+	// no validation rules for OperatorId
 
 	// no validation rules for InitiatorUserId
 
