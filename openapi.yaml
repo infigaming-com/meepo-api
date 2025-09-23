@@ -2222,6 +2222,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.review.service.v1.CreateWithdrawResponse'
+    /v1/user/account/update:
+        post:
+            tags:
+                - User
+            operationId: User_CloseAccount
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.CloseAccountRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.CloseAccountResponse'
     /v1/user/auth/login:
         post:
             tags:
@@ -7467,6 +7485,12 @@ components:
                         - $ref: '#/components/schemas/api.user.service.v1.UserInfo'
                     description: Basic information about the authenticated user.
             description: AuthResponse contains the authentication tokens and user information.
+        api.user.service.v1.CloseAccountRequest:
+            type: object
+            properties: {}
+        api.user.service.v1.CloseAccountResponse:
+            type: object
+            properties: {}
         api.user.service.v1.DeleteRegisterLoginBlacklistResponse:
             type: object
             properties: {}
@@ -7852,6 +7876,34 @@ components:
         api.user.service.v1.UpdateOperatorAccountSettingsResponse:
             type: object
             properties: {}
+        api.user.service.v1.UserIdentity:
+            type: object
+            properties:
+                id:
+                    type: string
+                userId:
+                    type: string
+                idType:
+                    type: string
+                idNumber:
+                    type: string
+                image:
+                    type: string
+                status:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                auditedAt:
+                    type: string
+                    format: date-time
+                operator:
+                    type: string
+                reviewer:
+                    type: string
+                reviewTime:
+                    type: integer
+                    format: int32
         api.user.service.v1.UserInfo:
             type: object
             properties:
@@ -7894,6 +7946,31 @@ components:
                 roleId:
                     type: string
                     description: role id
+                registeredMobile:
+                    type: string
+                    description: registered mobile
+                registeredEmail:
+                    type: string
+                    description: registered email
+                kycLevel:
+                    type: integer
+                    description: kyc_level
+                    format: int32
+                address:
+                    type: string
+                    description: address
+                userIdentity:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.UserIdentity'
+                    description: uesr identities
+                dob:
+                    type: string
+                    description: user date of birth
+                    format: date-time
+                country:
+                    type: string
+                    description: user country
             description: UserInfo contains basic user information.
         api.wallet.service.v1.AddResponsibleGamblingConfigRequest:
             type: object
