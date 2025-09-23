@@ -37,7 +37,7 @@ message AddIntegrityReportRequest {
 message AddIntegrityReportResponse {}
 
 message ListIntegrityStatusRequest {
-	repeated int64 operatorIds = 1;
+	int64 operatorId = 1;
 }
 
 message ListIntegrityStatusResponse {
@@ -58,7 +58,7 @@ message ListIntegrityStatusResponse {
 }
 
 message SetIntegrityConfigRequest {
-	repeated int64 operatorIds = 1;
+	int64 operatorId = 1;
 	string label_app = 2;
 	string pod_namespace = 3;
 	repeated FileInfo file_infos = 4;
@@ -76,7 +76,7 @@ message ListReportExportRequest {
 	int32 page = 6;
 	int32 page_size = 7;
 	// api.common.OperatorContextFilters operator_context_filters = 8;
-	repeated int64 operatorIds = 9;
+	int64 operatorId = 9;
 }
 
 message ListReportExportResponse {
@@ -112,7 +112,7 @@ message CreateReportExportRequest {
 	string task_name = 5;
 	string file_format = 6;
 	google.protobuf.Timestamp create_at = 7;
-	repeated int64 operatorIds = 8;
+	int64 operatorId = 8;
 }
 
 message CreateReportExportResponse {
@@ -139,7 +139,7 @@ message Sev {
 }
 
 message ListSevRequest {
-	repeated int64 operatorIds = 1;
+	int64 operatorId = 1;
 	optional string severity = 2;
 	optional string category = 3;
 	optional string component = 4;
@@ -166,7 +166,7 @@ message ExportSevRequest {
 	optional google.protobuf.Timestamp end_time = 6;
 	string format = 7; // accepted values: csv, excel, pdf
 	string time_zone = 8; // e.g. UTC+0, UTC+8, etc.
-	repeated int64 operatorIds = 9;
+	int64 operatorId = 9;
 	int64 initiator_user_id = 10;
 }
 

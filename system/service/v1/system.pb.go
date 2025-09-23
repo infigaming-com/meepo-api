@@ -180,7 +180,7 @@ func (*AddIntegrityReportResponse) Descriptor() ([]byte, []int) {
 
 type ListIntegrityStatusRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OperatorIds   []int64                `protobuf:"varint,1,rep,packed,name=operatorIds,proto3" json:"operatorIds,omitempty"`
+	OperatorId    int64                  `protobuf:"varint,1,opt,name=operatorId,proto3" json:"operatorId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -215,11 +215,11 @@ func (*ListIntegrityStatusRequest) Descriptor() ([]byte, []int) {
 	return file_system_service_v1_system_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *ListIntegrityStatusRequest) GetOperatorIds() []int64 {
+func (x *ListIntegrityStatusRequest) GetOperatorId() int64 {
 	if x != nil {
-		return x.OperatorIds
+		return x.OperatorId
 	}
-	return nil
+	return 0
 }
 
 type ListIntegrityStatusResponse struct {
@@ -268,7 +268,7 @@ func (x *ListIntegrityStatusResponse) GetIntegrityStatuses() []*ListIntegritySta
 
 type SetIntegrityConfigRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OperatorIds   []int64                `protobuf:"varint,1,rep,packed,name=operatorIds,proto3" json:"operatorIds,omitempty"`
+	OperatorId    int64                  `protobuf:"varint,1,opt,name=operatorId,proto3" json:"operatorId,omitempty"`
 	LabelApp      string                 `protobuf:"bytes,2,opt,name=label_app,json=labelApp,proto3" json:"label_app,omitempty"`
 	PodNamespace  string                 `protobuf:"bytes,3,opt,name=pod_namespace,json=podNamespace,proto3" json:"pod_namespace,omitempty"`
 	FileInfos     []*FileInfo            `protobuf:"bytes,4,rep,name=file_infos,json=fileInfos,proto3" json:"file_infos,omitempty"`
@@ -306,11 +306,11 @@ func (*SetIntegrityConfigRequest) Descriptor() ([]byte, []int) {
 	return file_system_service_v1_system_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *SetIntegrityConfigRequest) GetOperatorIds() []int64 {
+func (x *SetIntegrityConfigRequest) GetOperatorId() int64 {
 	if x != nil {
-		return x.OperatorIds
+		return x.OperatorId
 	}
-	return nil
+	return 0
 }
 
 func (x *SetIntegrityConfigRequest) GetLabelApp() string {
@@ -380,7 +380,7 @@ type ListReportExportRequest struct {
 	Page     int32                  `protobuf:"varint,6,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize int32                  `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// api.common.OperatorContextFilters operator_context_filters = 8;
-	OperatorIds   []int64 `protobuf:"varint,9,rep,packed,name=operatorIds,proto3" json:"operatorIds,omitempty"`
+	OperatorId    int64 `protobuf:"varint,9,opt,name=operatorId,proto3" json:"operatorId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -464,11 +464,11 @@ func (x *ListReportExportRequest) GetPageSize() int32 {
 	return 0
 }
 
-func (x *ListReportExportRequest) GetOperatorIds() []int64 {
+func (x *ListReportExportRequest) GetOperatorId() int64 {
 	if x != nil {
-		return x.OperatorIds
+		return x.OperatorId
 	}
-	return nil
+	return 0
 }
 
 type ListReportExportResponse struct {
@@ -540,7 +540,7 @@ type CreateReportExportRequest struct {
 	TaskName      string                 `protobuf:"bytes,5,opt,name=task_name,json=taskName,proto3" json:"task_name,omitempty"`
 	FileFormat    string                 `protobuf:"bytes,6,opt,name=file_format,json=fileFormat,proto3" json:"file_format,omitempty"`
 	CreateAt      *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=create_at,json=createAt,proto3" json:"create_at,omitempty"`
-	OperatorIds   []int64                `protobuf:"varint,8,rep,packed,name=operatorIds,proto3" json:"operatorIds,omitempty"`
+	OperatorId    int64                  `protobuf:"varint,8,opt,name=operatorId,proto3" json:"operatorId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -624,11 +624,11 @@ func (x *CreateReportExportRequest) GetCreateAt() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *CreateReportExportRequest) GetOperatorIds() []int64 {
+func (x *CreateReportExportRequest) GetOperatorId() int64 {
 	if x != nil {
-		return x.OperatorIds
+		return x.OperatorId
 	}
-	return nil
+	return 0
 }
 
 type CreateReportExportResponse struct {
@@ -865,7 +865,7 @@ func (x *Sev) GetDescription() string {
 
 type ListSevRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OperatorIds   []int64                `protobuf:"varint,1,rep,packed,name=operatorIds,proto3" json:"operatorIds,omitempty"`
+	OperatorId    int64                  `protobuf:"varint,1,opt,name=operatorId,proto3" json:"operatorId,omitempty"`
 	Severity      *string                `protobuf:"bytes,2,opt,name=severity,proto3,oneof" json:"severity,omitempty"`
 	Category      *string                `protobuf:"bytes,3,opt,name=category,proto3,oneof" json:"category,omitempty"`
 	Component     *string                `protobuf:"bytes,4,opt,name=component,proto3,oneof" json:"component,omitempty"`
@@ -908,11 +908,11 @@ func (*ListSevRequest) Descriptor() ([]byte, []int) {
 	return file_system_service_v1_system_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *ListSevRequest) GetOperatorIds() []int64 {
+func (x *ListSevRequest) GetOperatorId() int64 {
 	if x != nil {
-		return x.OperatorIds
+		return x.OperatorId
 	}
-	return nil
+	return 0
 }
 
 func (x *ListSevRequest) GetSeverity() string {
@@ -1049,7 +1049,7 @@ type ExportSevRequest struct {
 	EndTime         *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
 	Format          string                 `protobuf:"bytes,7,opt,name=format,proto3" json:"format,omitempty"`                     // accepted values: csv, excel, pdf
 	TimeZone        string                 `protobuf:"bytes,8,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"` // e.g. UTC+0, UTC+8, etc.
-	OperatorIds     []int64                `protobuf:"varint,9,rep,packed,name=operatorIds,proto3" json:"operatorIds,omitempty"`
+	OperatorId      int64                  `protobuf:"varint,9,opt,name=operatorId,proto3" json:"operatorId,omitempty"`
 	InitiatorUserId int64                  `protobuf:"varint,10,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -1141,11 +1141,11 @@ func (x *ExportSevRequest) GetTimeZone() string {
 	return ""
 }
 
-func (x *ExportSevRequest) GetOperatorIds() []int64 {
+func (x *ExportSevRequest) GetOperatorId() int64 {
 	if x != nil {
-		return x.OperatorIds
+		return x.OperatorId
 	}
-	return nil
+	return 0
 }
 
 func (x *ExportSevRequest) GetInitiatorUserId() int64 {
@@ -1549,9 +1549,11 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\rpod_namespace\x18\x03 \x01(\tR\fpodNamespace\x12:\n" +
 	"\n" +
 	"file_infos\x18\x04 \x03(\v2\x1b.system.service.v1.FileInfoR\tfileInfos\"\x1c\n" +
-	"\x1aAddIntegrityReportResponse\">\n" +
-	"\x1aListIntegrityStatusRequest\x12 \n" +
-	"\voperatorIds\x18\x01 \x03(\x03R\voperatorIds\"\x9d\x04\n" +
+	"\x1aAddIntegrityReportResponse\"<\n" +
+	"\x1aListIntegrityStatusRequest\x12\x1e\n" +
+	"\n" +
+	"operatorId\x18\x01 \x01(\x03R\n" +
+	"operatorId\"\x9d\x04\n" +
 	"\x1bListIntegrityStatusResponse\x12m\n" +
 	"\x12integrity_statuses\x18\x01 \x03(\v2>.system.service.v1.ListIntegrityStatusResponse.IntegrityStatusR\x11integrityStatuses\x1a\x8e\x03\n" +
 	"\x0fIntegrityStatus\x12\x1b\n" +
@@ -1566,14 +1568,16 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\tfile_path\x18\x01 \x01(\tR\bfilePath\x12\x12\n" +
 	"\x04hash\x18\x02 \x01(\tR\x04hash\x12#\n" +
 	"\rexpected_hash\x18\x03 \x01(\tR\fexpectedHash\x12\x19\n" +
-	"\bis_match\x18\x04 \x01(\bR\aisMatch\"\xbb\x01\n" +
-	"\x19SetIntegrityConfigRequest\x12 \n" +
-	"\voperatorIds\x18\x01 \x03(\x03R\voperatorIds\x12\x1b\n" +
+	"\bis_match\x18\x04 \x01(\bR\aisMatch\"\xb9\x01\n" +
+	"\x19SetIntegrityConfigRequest\x12\x1e\n" +
+	"\n" +
+	"operatorId\x18\x01 \x01(\x03R\n" +
+	"operatorId\x12\x1b\n" +
 	"\tlabel_app\x18\x02 \x01(\tR\blabelApp\x12#\n" +
 	"\rpod_namespace\x18\x03 \x01(\tR\fpodNamespace\x12:\n" +
 	"\n" +
 	"file_infos\x18\x04 \x03(\v2\x1b.system.service.v1.FileInfoR\tfileInfos\"\x1c\n" +
-	"\x1aSetIntegrityConfigResponse\"\xcd\x02\n" +
+	"\x1aSetIntegrityConfigResponse\"\xcb\x02\n" +
 	"\x17ListReportExportRequest\x12\x19\n" +
 	"\btask_ids\x18\x01 \x03(\x03R\ataskIds\x12\x17\n" +
 	"\x04type\x18\x02 \x01(\tH\x00R\x04type\x88\x01\x01\x12\x1b\n" +
@@ -1581,8 +1585,10 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\x05start\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\x05start\x88\x01\x01\x121\n" +
 	"\x03end\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\x03end\x88\x01\x01\x12\x12\n" +
 	"\x04page\x18\x06 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\a \x01(\x05R\bpageSize\x12 \n" +
-	"\voperatorIds\x18\t \x03(\x03R\voperatorIdsB\a\n" +
+	"\tpage_size\x18\a \x01(\x05R\bpageSize\x12\x1e\n" +
+	"\n" +
+	"operatorId\x18\t \x01(\x03R\n" +
+	"operatorIdB\a\n" +
 	"\x05_typeB\t\n" +
 	"\a_statusB\b\n" +
 	"\x06_startB\x06\n" +
@@ -1612,7 +1618,7 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\x0ftotal_completed\x18\x02 \x01(\x05R\x0etotalCompleted\x12)\n" +
 	"\x10total_generating\x18\x03 \x01(\x05R\x0ftotalGenerating\x12#\n" +
 	"\rtotal_pending\x18\x04 \x01(\x05R\ftotalPending\x12!\n" +
-	"\ftotal_failed\x18\x05 \x01(\x05R\vtotalFailed\"\x92\x02\n" +
+	"\ftotal_failed\x18\x05 \x01(\x05R\vtotalFailed\"\x90\x02\n" +
 	"\x19CreateReportExportRequest\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x12\n" +
@@ -1621,8 +1627,10 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\ttask_name\x18\x05 \x01(\tR\btaskName\x12\x1f\n" +
 	"\vfile_format\x18\x06 \x01(\tR\n" +
 	"fileFormat\x127\n" +
-	"\tcreate_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\bcreateAt\x12 \n" +
-	"\voperatorIds\x18\b \x03(\x03R\voperatorIds\"\x1c\n" +
+	"\tcreate_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\bcreateAt\x12\x1e\n" +
+	"\n" +
+	"operatorId\x18\b \x01(\x03R\n" +
+	"operatorId\"\x1c\n" +
 	"\x1aCreateReportExportResponse\"\x84\x01\n" +
 	"\x19UpdateReportExportRequest\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\x03R\x06taskId\x12\x16\n" +
@@ -1637,9 +1645,11 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\tcomponent\x18\x04 \x01(\tR\tcomponent\x12\x17\n" +
 	"\auser_id\x18\x05 \x01(\x03R\x06userId\x128\n" +
 	"\ttimestamp\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12 \n" +
-	"\vdescription\x18\a \x01(\tR\vdescription\"\xd3\x03\n" +
-	"\x0eListSevRequest\x12 \n" +
-	"\voperatorIds\x18\x01 \x03(\x03R\voperatorIds\x12\x1f\n" +
+	"\vdescription\x18\a \x01(\tR\vdescription\"\xd1\x03\n" +
+	"\x0eListSevRequest\x12\x1e\n" +
+	"\n" +
+	"operatorId\x18\x01 \x01(\x03R\n" +
+	"operatorId\x12\x1f\n" +
 	"\bseverity\x18\x02 \x01(\tH\x00R\bseverity\x88\x01\x01\x12\x1f\n" +
 	"\bcategory\x18\x03 \x01(\tH\x01R\bcategory\x88\x01\x01\x12!\n" +
 	"\tcomponent\x18\x04 \x01(\tH\x02R\tcomponent\x88\x01\x01\x12\x1c\n" +
@@ -1664,7 +1674,7 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"\x04sevs\x18\x01 \x03(\v2\x16.system.service.v1.SevR\x04sevs\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\xe4\x03\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\xe2\x03\n" +
 	"\x10ExportSevRequest\x12\x1f\n" +
 	"\bseverity\x18\x01 \x01(\tH\x00R\bseverity\x88\x01\x01\x12\x1f\n" +
 	"\bcategory\x18\x02 \x01(\tH\x01R\bcategory\x88\x01\x01\x12!\n" +
@@ -1674,8 +1684,10 @@ const file_system_service_v1_system_proto_rawDesc = "" +
 	"start_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x04R\tstartTime\x88\x01\x01\x12:\n" +
 	"\bend_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x05R\aendTime\x88\x01\x01\x12\x16\n" +
 	"\x06format\x18\a \x01(\tR\x06format\x12\x1b\n" +
-	"\ttime_zone\x18\b \x01(\tR\btimeZone\x12 \n" +
-	"\voperatorIds\x18\t \x03(\x03R\voperatorIds\x12*\n" +
+	"\ttime_zone\x18\b \x01(\tR\btimeZone\x12\x1e\n" +
+	"\n" +
+	"operatorId\x18\t \x01(\x03R\n" +
+	"operatorId\x12*\n" +
 	"\x11initiator_user_id\x18\n" +
 	" \x01(\x03R\x0finitiatorUserIdB\v\n" +
 	"\t_severityB\v\n" +
