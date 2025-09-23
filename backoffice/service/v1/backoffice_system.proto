@@ -11,12 +11,68 @@ option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
 
 service BackofficeSystem {
+	rpc ListIntegrityStatus(ListIntegrityStatusRequest) returns (system.service.v1.ListIntegrityStatusResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/system/integrity/status/list"
+			body: "*"
+		};
+	}
+	rpc SetIntegrityConfig(SetIntegrityConfigRequest) returns (system.service.v1.SetIntegrityConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/system/integrity/file-info/config/set"
+			body: "*"
+		};
+	}
+	rpc ListSev(ListSevRequest) returns (system.service.v1.ListSevResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/system/sev/list"
+			body: "*"
+		};
+	}
+	rpc ExportSev(ExportSevRequest) returns (system.service.v1.ExportSevResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/system/sev/export"
+			body: "*"
+		};
+	}
 	rpc ListReportExport(ListReportExportRequest) returns (system.service.v1.ListReportExportResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/system/report/export/list"
 			body: "*"
 		};
 	};
+}
+
+
+message ListIntegrityStatusRequest {
+}
+
+message SetIntegrityConfigRequest {
+	string label_app = 1;
+	string pod_namespace = 2;
+	repeated system.service.v1.FileInfo file_infos = 3;
+}
+
+message ListSevRequest {
+	optional string severity = 2;
+	optional string category = 3;
+	optional string component = 4;
+	optional int64 user_id = 5;
+	optional google.protobuf.Timestamp start_time = 6;
+	optional google.protobuf.Timestamp end_time = 7;
+	optional int32 page = 8;
+	optional int32 page_size = 9;
+}
+
+message ExportSevRequest {
+	optional string severity = 1;
+	optional string category = 2;
+	optional string component = 3;
+	optional int64 user_id = 4;
+	optional google.protobuf.Timestamp start_time = 5;
+	optional google.protobuf.Timestamp end_time = 6;
+	string format = 7; // accepted values: csv, excel, pdf
+	string time_zone = 8; // e.g. UTC+0, UTC+8, etc.
 }
 
 message ListReportExportRequest {

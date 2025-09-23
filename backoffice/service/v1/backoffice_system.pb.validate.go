@@ -35,6 +35,624 @@ var (
 	_ = sort.Sort
 )
 
+// Validate checks the field values on ListIntegrityStatusRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListIntegrityStatusRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListIntegrityStatusRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListIntegrityStatusRequestMultiError, or nil if none found.
+func (m *ListIntegrityStatusRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListIntegrityStatusRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ListIntegrityStatusRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListIntegrityStatusRequestMultiError is an error wrapping multiple
+// validation errors returned by ListIntegrityStatusRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ListIntegrityStatusRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListIntegrityStatusRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListIntegrityStatusRequestMultiError) AllErrors() []error { return m }
+
+// ListIntegrityStatusRequestValidationError is the validation error returned
+// by ListIntegrityStatusRequest.Validate if the designated constraints aren't met.
+type ListIntegrityStatusRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListIntegrityStatusRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListIntegrityStatusRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListIntegrityStatusRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListIntegrityStatusRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListIntegrityStatusRequestValidationError) ErrorName() string {
+	return "ListIntegrityStatusRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListIntegrityStatusRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListIntegrityStatusRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListIntegrityStatusRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListIntegrityStatusRequestValidationError{}
+
+// Validate checks the field values on SetIntegrityConfigRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SetIntegrityConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SetIntegrityConfigRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SetIntegrityConfigRequestMultiError, or nil if none found.
+func (m *SetIntegrityConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetIntegrityConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for LabelApp
+
+	// no validation rules for PodNamespace
+
+	for idx, item := range m.GetFileInfos() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, SetIntegrityConfigRequestValidationError{
+						field:  fmt.Sprintf("FileInfos[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, SetIntegrityConfigRequestValidationError{
+						field:  fmt.Sprintf("FileInfos[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return SetIntegrityConfigRequestValidationError{
+					field:  fmt.Sprintf("FileInfos[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return SetIntegrityConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetIntegrityConfigRequestMultiError is an error wrapping multiple validation
+// errors returned by SetIntegrityConfigRequest.ValidateAll() if the
+// designated constraints aren't met.
+type SetIntegrityConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetIntegrityConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetIntegrityConfigRequestMultiError) AllErrors() []error { return m }
+
+// SetIntegrityConfigRequestValidationError is the validation error returned by
+// SetIntegrityConfigRequest.Validate if the designated constraints aren't met.
+type SetIntegrityConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetIntegrityConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetIntegrityConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetIntegrityConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetIntegrityConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetIntegrityConfigRequestValidationError) ErrorName() string {
+	return "SetIntegrityConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetIntegrityConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetIntegrityConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetIntegrityConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetIntegrityConfigRequestValidationError{}
+
+// Validate checks the field values on ListSevRequest with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ListSevRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListSevRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in ListSevRequestMultiError,
+// or nil if none found.
+func (m *ListSevRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListSevRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.Severity != nil {
+		// no validation rules for Severity
+	}
+
+	if m.Category != nil {
+		// no validation rules for Category
+	}
+
+	if m.Component != nil {
+		// no validation rules for Component
+	}
+
+	if m.UserId != nil {
+		// no validation rules for UserId
+	}
+
+	if m.StartTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetStartTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListSevRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListSevRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListSevRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.EndTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetEndTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListSevRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListSevRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListSevRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return ListSevRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListSevRequestMultiError is an error wrapping multiple validation errors
+// returned by ListSevRequest.ValidateAll() if the designated constraints
+// aren't met.
+type ListSevRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListSevRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListSevRequestMultiError) AllErrors() []error { return m }
+
+// ListSevRequestValidationError is the validation error returned by
+// ListSevRequest.Validate if the designated constraints aren't met.
+type ListSevRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListSevRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListSevRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListSevRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListSevRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListSevRequestValidationError) ErrorName() string { return "ListSevRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ListSevRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListSevRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListSevRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListSevRequestValidationError{}
+
+// Validate checks the field values on ExportSevRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ExportSevRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ExportSevRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ExportSevRequestMultiError, or nil if none found.
+func (m *ExportSevRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ExportSevRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Format
+
+	// no validation rules for TimeZone
+
+	if m.Severity != nil {
+		// no validation rules for Severity
+	}
+
+	if m.Category != nil {
+		// no validation rules for Category
+	}
+
+	if m.Component != nil {
+		// no validation rules for Component
+	}
+
+	if m.UserId != nil {
+		// no validation rules for UserId
+	}
+
+	if m.StartTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetStartTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ExportSevRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ExportSevRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ExportSevRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.EndTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetEndTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ExportSevRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ExportSevRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ExportSevRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ExportSevRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ExportSevRequestMultiError is an error wrapping multiple validation errors
+// returned by ExportSevRequest.ValidateAll() if the designated constraints
+// aren't met.
+type ExportSevRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ExportSevRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ExportSevRequestMultiError) AllErrors() []error { return m }
+
+// ExportSevRequestValidationError is the validation error returned by
+// ExportSevRequest.Validate if the designated constraints aren't met.
+type ExportSevRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ExportSevRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ExportSevRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ExportSevRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ExportSevRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ExportSevRequestValidationError) ErrorName() string { return "ExportSevRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ExportSevRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sExportSevRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ExportSevRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ExportSevRequestValidationError{}
+
 // Validate checks the field values on ListReportExportRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
