@@ -25,12 +25,30 @@ const (
 type ErrorReason int32
 
 const (
-	ErrorReason_UNSPECIFIED                ErrorReason = 0
-	ErrorReason_GAME_BET_NOT_FOUND         ErrorReason = 40001
-	ErrorReason_GAME_ACTION_NOT_FOUND      ErrorReason = 40002
-	ErrorReason_GET_RATES_FAILED           ErrorReason = 40003
-	ErrorReason_GAME_TRANSACTION_NOT_FOUND ErrorReason = 40004
-	ErrorReason_GAME_BANNED_ON_USER        ErrorReason = 40005
+	ErrorReason_UNSPECIFIED                               ErrorReason = 0
+	ErrorReason_GAME_BET_NOT_FOUND                        ErrorReason = 40001
+	ErrorReason_GAME_ACTION_NOT_FOUND                     ErrorReason = 40002
+	ErrorReason_GET_RATES_FAILED                          ErrorReason = 40003
+	ErrorReason_GAME_TRANSACTION_NOT_FOUND                ErrorReason = 40004
+	ErrorReason_GAME_BANNED_ON_USER                       ErrorReason = 40005
+	ErrorReason_GAME_DISABLED                             ErrorReason = 40006
+	ErrorReason_GAME_NOT_FOUND                            ErrorReason = 40007
+	ErrorReason_GAME_INSUFFICIENT_BALANCE                 ErrorReason = 40008
+	ErrorReason_TIME_RANGE_INVALID                        ErrorReason = 40009
+	ErrorReason_DAILY_PLAY_LIMIT_EXCEEDED                 ErrorReason = 40010
+	ErrorReason_WEEKLY_PLAY_LIMIT_EXCEEDED                ErrorReason = 40011
+	ErrorReason_MONTHLY_PLAY_LIMIT_EXCEEDED               ErrorReason = 40012
+	ErrorReason_DAILY_LOSS_LIMIT_EXCEEDED                 ErrorReason = 40013
+	ErrorReason_WEEKLY_LOSS_LIMIT_EXCEEDED                ErrorReason = 40014
+	ErrorReason_MONTHLY_LOSS_LIMIT_EXCEEDED               ErrorReason = 40015
+	ErrorReason_CREATE_RESPONSIBLE_GAMBLING_STATUS_FAILED ErrorReason = 40016
+	ErrorReason_UPDATE_RESPONSIBLE_GAMBLING_STATUS_FAILED ErrorReason = 40017
+	ErrorReason_RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND     ErrorReason = 40018
+	ErrorReason_TIME_LIMITS_ENABLED                       ErrorReason = 40019
+	ErrorReason_BREAK_IN_PLAY_ENABLED                     ErrorReason = 40020
+	ErrorReason_SELF_EXCLUSION_ENABLED                    ErrorReason = 40021
+	ErrorReason_USER_DISABLED                             ErrorReason = 40022
+	ErrorReason_LIST_UNPAID_BETS_FAILED                   ErrorReason = 40023
 )
 
 // Enum value maps for ErrorReason.
@@ -42,14 +60,50 @@ var (
 		40003: "GET_RATES_FAILED",
 		40004: "GAME_TRANSACTION_NOT_FOUND",
 		40005: "GAME_BANNED_ON_USER",
+		40006: "GAME_DISABLED",
+		40007: "GAME_NOT_FOUND",
+		40008: "GAME_INSUFFICIENT_BALANCE",
+		40009: "TIME_RANGE_INVALID",
+		40010: "DAILY_PLAY_LIMIT_EXCEEDED",
+		40011: "WEEKLY_PLAY_LIMIT_EXCEEDED",
+		40012: "MONTHLY_PLAY_LIMIT_EXCEEDED",
+		40013: "DAILY_LOSS_LIMIT_EXCEEDED",
+		40014: "WEEKLY_LOSS_LIMIT_EXCEEDED",
+		40015: "MONTHLY_LOSS_LIMIT_EXCEEDED",
+		40016: "CREATE_RESPONSIBLE_GAMBLING_STATUS_FAILED",
+		40017: "UPDATE_RESPONSIBLE_GAMBLING_STATUS_FAILED",
+		40018: "RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND",
+		40019: "TIME_LIMITS_ENABLED",
+		40020: "BREAK_IN_PLAY_ENABLED",
+		40021: "SELF_EXCLUSION_ENABLED",
+		40022: "USER_DISABLED",
+		40023: "LIST_UNPAID_BETS_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
-		"UNSPECIFIED":                0,
-		"GAME_BET_NOT_FOUND":         40001,
-		"GAME_ACTION_NOT_FOUND":      40002,
-		"GET_RATES_FAILED":           40003,
-		"GAME_TRANSACTION_NOT_FOUND": 40004,
-		"GAME_BANNED_ON_USER":        40005,
+		"UNSPECIFIED":                               0,
+		"GAME_BET_NOT_FOUND":                        40001,
+		"GAME_ACTION_NOT_FOUND":                     40002,
+		"GET_RATES_FAILED":                          40003,
+		"GAME_TRANSACTION_NOT_FOUND":                40004,
+		"GAME_BANNED_ON_USER":                       40005,
+		"GAME_DISABLED":                             40006,
+		"GAME_NOT_FOUND":                            40007,
+		"GAME_INSUFFICIENT_BALANCE":                 40008,
+		"TIME_RANGE_INVALID":                        40009,
+		"DAILY_PLAY_LIMIT_EXCEEDED":                 40010,
+		"WEEKLY_PLAY_LIMIT_EXCEEDED":                40011,
+		"MONTHLY_PLAY_LIMIT_EXCEEDED":               40012,
+		"DAILY_LOSS_LIMIT_EXCEEDED":                 40013,
+		"WEEKLY_LOSS_LIMIT_EXCEEDED":                40014,
+		"MONTHLY_LOSS_LIMIT_EXCEEDED":               40015,
+		"CREATE_RESPONSIBLE_GAMBLING_STATUS_FAILED": 40016,
+		"UPDATE_RESPONSIBLE_GAMBLING_STATUS_FAILED": 40017,
+		"RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND":     40018,
+		"TIME_LIMITS_ENABLED":                       40019,
+		"BREAK_IN_PLAY_ENABLED":                     40020,
+		"SELF_EXCLUSION_ENABLED":                    40021,
+		"USER_DISABLED":                             40022,
+		"LIST_UNPAID_BETS_FAILED":                   40023,
 	}
 )
 
@@ -84,14 +138,32 @@ var File_game_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_game_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"game/service/v1/error_reason.proto\x12\x13api.game.service.v1\x1a\x13errors/errors.proto*\xb0\x01\n" +
+	"\"game/service/v1/error_reason.proto\x12\x13api.game.service.v1\x1a\x13errors/errors.proto*\xfb\x05\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x12GAME_BET_NOT_FOUND\x10\xc1\xb8\x02\x12\x1b\n" +
 	"\x15GAME_ACTION_NOT_FOUND\x10¸\x02\x12\x16\n" +
 	"\x10GET_RATES_FAILED\x10ø\x02\x12 \n" +
 	"\x1aGAME_TRANSACTION_NOT_FOUND\x10ĸ\x02\x12\x19\n" +
-	"\x13GAME_BANNED_ON_USER\x10Ÿ\x02\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x13GAME_BANNED_ON_USER\x10Ÿ\x02\x12\x13\n" +
+	"\rGAME_DISABLED\x10Ƹ\x02\x12\x14\n" +
+	"\x0eGAME_NOT_FOUND\x10Ǹ\x02\x12\x1f\n" +
+	"\x19GAME_INSUFFICIENT_BALANCE\x10ȸ\x02\x12\x18\n" +
+	"\x12TIME_RANGE_INVALID\x10ɸ\x02\x12\x1f\n" +
+	"\x19DAILY_PLAY_LIMIT_EXCEEDED\x10ʸ\x02\x12 \n" +
+	"\x1aWEEKLY_PLAY_LIMIT_EXCEEDED\x10˸\x02\x12!\n" +
+	"\x1bMONTHLY_PLAY_LIMIT_EXCEEDED\x10̸\x02\x12\x1f\n" +
+	"\x19DAILY_LOSS_LIMIT_EXCEEDED\x10\u0378\x02\x12 \n" +
+	"\x1aWEEKLY_LOSS_LIMIT_EXCEEDED\x10θ\x02\x12!\n" +
+	"\x1bMONTHLY_LOSS_LIMIT_EXCEEDED\x10ϸ\x02\x12/\n" +
+	")CREATE_RESPONSIBLE_GAMBLING_STATUS_FAILED\x10и\x02\x12/\n" +
+	")UPDATE_RESPONSIBLE_GAMBLING_STATUS_FAILED\x10Ѹ\x02\x12+\n" +
+	"%RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND\x10Ҹ\x02\x12\x19\n" +
+	"\x13TIME_LIMITS_ENABLED\x10Ӹ\x02\x12\x1b\n" +
+	"\x15BREAK_IN_PLAY_ENABLED\x10Ը\x02\x12\x1c\n" +
+	"\x16SELF_EXCLUSION_ENABLED\x10ո\x02\x12\x13\n" +
+	"\rUSER_DISABLED\x10ָ\x02\x12\x1d\n" +
+	"\x17LIST_UNPAID_BETS_FAILED\x10\u05f8\x02\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.game.service.v1P\x01Z6github.com/infigaming-com/meepo-api/game/service/v1;v1b\x06proto3"
 
 var (

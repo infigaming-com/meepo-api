@@ -19,56 +19,59 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	User_Register_FullMethodName                       = "/api.user.service.v1.User/Register"
-	User_Login_FullMethodName                          = "/api.user.service.v1.User/Login"
-	User_LoginWithInfo_FullMethodName                  = "/api.user.service.v1.User/LoginWithInfo"
-	User_RegisterOrLoginWithOAuth_FullMethodName       = "/api.user.service.v1.User/RegisterOrLoginWithOAuth"
-	User_RegisterOrLoginWithTelegram_FullMethodName    = "/api.user.service.v1.User/RegisterOrLoginWithTelegram"
-	User_RefreshToken_FullMethodName                   = "/api.user.service.v1.User/RefreshToken"
-	User_GetUser_FullMethodName                        = "/api.user.service.v1.User/GetUser"
-	User_GetUsersByIds_FullMethodName                  = "/api.user.service.v1.User/GetUsersByIds"
-	User_GetUserIdsByOperatorIds_FullMethodName        = "/api.user.service.v1.User/GetUserIdsByOperatorIds"
-	User_Logout_FullMethodName                         = "/api.user.service.v1.User/Logout"
-	User_IsTokenRevoked_FullMethodName                 = "/api.user.service.v1.User/IsTokenRevoked"
-	User_SetOperatorTagsConfig_FullMethodName          = "/api.user.service.v1.User/SetOperatorTagsConfig"
-	User_SetOperatorTags_FullMethodName                = "/api.user.service.v1.User/SetOperatorTags"
-	User_GetOperatorTagsConfig_FullMethodName          = "/api.user.service.v1.User/GetOperatorTagsConfig"
-	User_GetOperatorTags_FullMethodName                = "/api.user.service.v1.User/GetOperatorTags"
-	User_GetUserTags_FullMethodName                    = "/api.user.service.v1.User/GetUserTags"
-	User_GetUserTagsById_FullMethodName                = "/api.user.service.v1.User/GetUserTagsById"
-	User_SetUserTagsById_FullMethodName                = "/api.user.service.v1.User/SetUserTagsById"
-	User_CheckPermission_FullMethodName                = "/api.user.service.v1.User/CheckPermission"
-	User_AddOperator_FullMethodName                    = "/api.user.service.v1.User/AddOperator"
-	User_SendEmailVerificationCode_FullMethodName      = "/api.user.service.v1.User/SendEmailVerificationCode"
-	User_UpdateUser_FullMethodName                     = "/api.user.service.v1.User/UpdateUser"
-	User_ListUsers_FullMethodName                      = "/api.user.service.v1.User/ListUsers"
-	User_CreateUser_FullMethodName                     = "/api.user.service.v1.User/CreateUser"
-	User_VerifyEmail_FullMethodName                    = "/api.user.service.v1.User/VerifyEmail"
-	User_AddComment_FullMethodName                     = "/api.user.service.v1.User/AddComment"
-	User_GetCommentsByUserId_FullMethodName            = "/api.user.service.v1.User/GetCommentsByUserId"
-	User_GetUserProfile_FullMethodName                 = "/api.user.service.v1.User/GetUserProfile"
-	User_CreateRole_FullMethodName                     = "/api.user.service.v1.User/CreateRole"
-	User_ListRoles_FullMethodName                      = "/api.user.service.v1.User/ListRoles"
-	User_CreateOperator_FullMethodName                 = "/api.user.service.v1.User/CreateOperator"
-	User_UpdateRole_FullMethodName                     = "/api.user.service.v1.User/UpdateRole"
-	User_GetRole_FullMethodName                        = "/api.user.service.v1.User/GetRole"
-	User_DeleteRole_FullMethodName                     = "/api.user.service.v1.User/DeleteRole"
-	User_GetOverviewDashboardFromUser_FullMethodName   = "/api.user.service.v1.User/GetOverviewDashboardFromUser"
-	User_GetOperatorIdByOrigin_FullMethodName          = "/api.user.service.v1.User/GetOperatorIdByOrigin"
-	User_GetOperator_FullMethodName                    = "/api.user.service.v1.User/GetOperator"
-	User_GetOperatorsByIds_FullMethodName              = "/api.user.service.v1.User/GetOperatorsByIds"
-	User_ListOperators_FullMethodName                  = "/api.user.service.v1.User/ListOperators"
-	User_GetParentOperatorIds_FullMethodName           = "/api.user.service.v1.User/GetParentOperatorIds"
-	User_GetChildOperatorIds_FullMethodName            = "/api.user.service.v1.User/GetChildOperatorIds"
-	User_SendPasswordResetCode_FullMethodName          = "/api.user.service.v1.User/SendPasswordResetCode"
-	User_ResetPasswordWithCode_FullMethodName          = "/api.user.service.v1.User/ResetPasswordWithCode"
-	User_GetOperatorAccountSettings_FullMethodName     = "/api.user.service.v1.User/GetOperatorAccountSettings"
-	User_UpdateOperatorAccountSettings_FullMethodName  = "/api.user.service.v1.User/UpdateOperatorAccountSettings"
-	User_AddRegisterLoginBlacklist_FullMethodName      = "/api.user.service.v1.User/AddRegisterLoginBlacklist"
-	User_DeleteRegisterLoginBlacklist_FullMethodName   = "/api.user.service.v1.User/DeleteRegisterLoginBlacklist"
-	User_ListRegisterLoginBlacklist_FullMethodName     = "/api.user.service.v1.User/ListRegisterLoginBlacklist"
-	User_SetOperatorRegisterLimitConfig_FullMethodName = "/api.user.service.v1.User/SetOperatorRegisterLimitConfig"
-	User_GetOperatorRegisterLimitConfig_FullMethodName = "/api.user.service.v1.User/GetOperatorRegisterLimitConfig"
+	User_Register_FullMethodName                        = "/api.user.service.v1.User/Register"
+	User_Login_FullMethodName                           = "/api.user.service.v1.User/Login"
+	User_LoginWithInfo_FullMethodName                   = "/api.user.service.v1.User/LoginWithInfo"
+	User_RegisterOrLoginWithOAuth_FullMethodName        = "/api.user.service.v1.User/RegisterOrLoginWithOAuth"
+	User_RegisterOrLoginWithTelegram_FullMethodName     = "/api.user.service.v1.User/RegisterOrLoginWithTelegram"
+	User_RefreshToken_FullMethodName                    = "/api.user.service.v1.User/RefreshToken"
+	User_GetUser_FullMethodName                         = "/api.user.service.v1.User/GetUser"
+	User_GetUsersByIds_FullMethodName                   = "/api.user.service.v1.User/GetUsersByIds"
+	User_GetUserIdsByOperatorIds_FullMethodName         = "/api.user.service.v1.User/GetUserIdsByOperatorIds"
+	User_Logout_FullMethodName                          = "/api.user.service.v1.User/Logout"
+	User_IsTokenRevoked_FullMethodName                  = "/api.user.service.v1.User/IsTokenRevoked"
+	User_SetOperatorTagsConfig_FullMethodName           = "/api.user.service.v1.User/SetOperatorTagsConfig"
+	User_SetOperatorTags_FullMethodName                 = "/api.user.service.v1.User/SetOperatorTags"
+	User_GetOperatorTagsConfig_FullMethodName           = "/api.user.service.v1.User/GetOperatorTagsConfig"
+	User_GetOperatorTags_FullMethodName                 = "/api.user.service.v1.User/GetOperatorTags"
+	User_GetUserTags_FullMethodName                     = "/api.user.service.v1.User/GetUserTags"
+	User_GetUserTagsById_FullMethodName                 = "/api.user.service.v1.User/GetUserTagsById"
+	User_SetUserTagsById_FullMethodName                 = "/api.user.service.v1.User/SetUserTagsById"
+	User_CheckPermission_FullMethodName                 = "/api.user.service.v1.User/CheckPermission"
+	User_AddOperator_FullMethodName                     = "/api.user.service.v1.User/AddOperator"
+	User_SendEmailVerificationCode_FullMethodName       = "/api.user.service.v1.User/SendEmailVerificationCode"
+	User_UpdateUser_FullMethodName                      = "/api.user.service.v1.User/UpdateUser"
+	User_ListUsers_FullMethodName                       = "/api.user.service.v1.User/ListUsers"
+	User_CreateUser_FullMethodName                      = "/api.user.service.v1.User/CreateUser"
+	User_VerifyEmail_FullMethodName                     = "/api.user.service.v1.User/VerifyEmail"
+	User_AddComment_FullMethodName                      = "/api.user.service.v1.User/AddComment"
+	User_GetCommentsByUserId_FullMethodName             = "/api.user.service.v1.User/GetCommentsByUserId"
+	User_GetUserProfile_FullMethodName                  = "/api.user.service.v1.User/GetUserProfile"
+	User_CreateRole_FullMethodName                      = "/api.user.service.v1.User/CreateRole"
+	User_ListRoles_FullMethodName                       = "/api.user.service.v1.User/ListRoles"
+	User_CreateOperator_FullMethodName                  = "/api.user.service.v1.User/CreateOperator"
+	User_UpdateRole_FullMethodName                      = "/api.user.service.v1.User/UpdateRole"
+	User_GetRole_FullMethodName                         = "/api.user.service.v1.User/GetRole"
+	User_DeleteRole_FullMethodName                      = "/api.user.service.v1.User/DeleteRole"
+	User_GetOverviewDashboardFromUser_FullMethodName    = "/api.user.service.v1.User/GetOverviewDashboardFromUser"
+	User_GetOperatorIdByOrigin_FullMethodName           = "/api.user.service.v1.User/GetOperatorIdByOrigin"
+	User_GetOperator_FullMethodName                     = "/api.user.service.v1.User/GetOperator"
+	User_GetOperatorsByIds_FullMethodName               = "/api.user.service.v1.User/GetOperatorsByIds"
+	User_ListOperators_FullMethodName                   = "/api.user.service.v1.User/ListOperators"
+	User_GetParentOperatorIds_FullMethodName            = "/api.user.service.v1.User/GetParentOperatorIds"
+	User_GetChildOperatorIds_FullMethodName             = "/api.user.service.v1.User/GetChildOperatorIds"
+	User_SendPasswordResetCode_FullMethodName           = "/api.user.service.v1.User/SendPasswordResetCode"
+	User_ResetPasswordWithCode_FullMethodName           = "/api.user.service.v1.User/ResetPasswordWithCode"
+	User_GetOperatorAccountSettings_FullMethodName      = "/api.user.service.v1.User/GetOperatorAccountSettings"
+	User_UpdateOperatorAccountSettings_FullMethodName   = "/api.user.service.v1.User/UpdateOperatorAccountSettings"
+	User_AddRegisterLoginBlacklist_FullMethodName       = "/api.user.service.v1.User/AddRegisterLoginBlacklist"
+	User_DeleteRegisterLoginBlacklist_FullMethodName    = "/api.user.service.v1.User/DeleteRegisterLoginBlacklist"
+	User_ListRegisterLoginBlacklist_FullMethodName      = "/api.user.service.v1.User/ListRegisterLoginBlacklist"
+	User_SetOperatorRegisterLimitConfig_FullMethodName  = "/api.user.service.v1.User/SetOperatorRegisterLimitConfig"
+	User_AddResponsibleGamblingConfig_FullMethodName    = "/api.user.service.v1.User/AddResponsibleGamblingConfig"
+	User_GetOperatorRegisterLimitConfig_FullMethodName  = "/api.user.service.v1.User/GetOperatorRegisterLimitConfig"
+	User_DeleteResponsibleGamblingConfig_FullMethodName = "/api.user.service.v1.User/DeleteResponsibleGamblingConfig"
+	User_GetResponsibleGamblingConfig_FullMethodName    = "/api.user.service.v1.User/GetResponsibleGamblingConfig"
 )
 
 // UserClient is the client API for User service.
@@ -162,7 +165,10 @@ type UserClient interface {
 	DeleteRegisterLoginBlacklist(ctx context.Context, in *DeleteRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*DeleteRegisterLoginBlacklistResponse, error)
 	ListRegisterLoginBlacklist(ctx context.Context, in *ListRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*ListRegisterLoginBlacklistResponse, error)
 	SetOperatorRegisterLimitConfig(ctx context.Context, in *SetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*SetOperatorRegisterLimitConfigResponse, error)
+	AddResponsibleGamblingConfig(ctx context.Context, in *AddResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*AddResponsibleGamblingConfigResponse, error)
 	GetOperatorRegisterLimitConfig(ctx context.Context, in *GetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*GetOperatorRegisterLimitConfigResponse, error)
+	DeleteResponsibleGamblingConfig(ctx context.Context, in *DeleteResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*DeleteResponsibleGamblingConfigResponse, error)
+	GetResponsibleGamblingConfig(ctx context.Context, in *GetResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*GetResponsibleGamblingConfigResponse, error)
 }
 
 type userClient struct {
@@ -663,10 +669,40 @@ func (c *userClient) SetOperatorRegisterLimitConfig(ctx context.Context, in *Set
 	return out, nil
 }
 
+func (c *userClient) AddResponsibleGamblingConfig(ctx context.Context, in *AddResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*AddResponsibleGamblingConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddResponsibleGamblingConfigResponse)
+	err := c.cc.Invoke(ctx, User_AddResponsibleGamblingConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userClient) GetOperatorRegisterLimitConfig(ctx context.Context, in *GetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*GetOperatorRegisterLimitConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetOperatorRegisterLimitConfigResponse)
 	err := c.cc.Invoke(ctx, User_GetOperatorRegisterLimitConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) DeleteResponsibleGamblingConfig(ctx context.Context, in *DeleteResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*DeleteResponsibleGamblingConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteResponsibleGamblingConfigResponse)
+	err := c.cc.Invoke(ctx, User_DeleteResponsibleGamblingConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetResponsibleGamblingConfig(ctx context.Context, in *GetResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*GetResponsibleGamblingConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetResponsibleGamblingConfigResponse)
+	err := c.cc.Invoke(ctx, User_GetResponsibleGamblingConfig_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -764,7 +800,10 @@ type UserServer interface {
 	DeleteRegisterLoginBlacklist(context.Context, *DeleteRegisterLoginBlacklistRequest) (*DeleteRegisterLoginBlacklistResponse, error)
 	ListRegisterLoginBlacklist(context.Context, *ListRegisterLoginBlacklistRequest) (*ListRegisterLoginBlacklistResponse, error)
 	SetOperatorRegisterLimitConfig(context.Context, *SetOperatorRegisterLimitConfigRequest) (*SetOperatorRegisterLimitConfigResponse, error)
+	AddResponsibleGamblingConfig(context.Context, *AddResponsibleGamblingConfigRequest) (*AddResponsibleGamblingConfigResponse, error)
 	GetOperatorRegisterLimitConfig(context.Context, *GetOperatorRegisterLimitConfigRequest) (*GetOperatorRegisterLimitConfigResponse, error)
+	DeleteResponsibleGamblingConfig(context.Context, *DeleteResponsibleGamblingConfigRequest) (*DeleteResponsibleGamblingConfigResponse, error)
+	GetResponsibleGamblingConfig(context.Context, *GetResponsibleGamblingConfigRequest) (*GetResponsibleGamblingConfigResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -922,8 +961,17 @@ func (UnimplementedUserServer) ListRegisterLoginBlacklist(context.Context, *List
 func (UnimplementedUserServer) SetOperatorRegisterLimitConfig(context.Context, *SetOperatorRegisterLimitConfigRequest) (*SetOperatorRegisterLimitConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetOperatorRegisterLimitConfig not implemented")
 }
+func (UnimplementedUserServer) AddResponsibleGamblingConfig(context.Context, *AddResponsibleGamblingConfigRequest) (*AddResponsibleGamblingConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddResponsibleGamblingConfig not implemented")
+}
 func (UnimplementedUserServer) GetOperatorRegisterLimitConfig(context.Context, *GetOperatorRegisterLimitConfigRequest) (*GetOperatorRegisterLimitConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorRegisterLimitConfig not implemented")
+}
+func (UnimplementedUserServer) DeleteResponsibleGamblingConfig(context.Context, *DeleteResponsibleGamblingConfigRequest) (*DeleteResponsibleGamblingConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteResponsibleGamblingConfig not implemented")
+}
+func (UnimplementedUserServer) GetResponsibleGamblingConfig(context.Context, *GetResponsibleGamblingConfigRequest) (*GetResponsibleGamblingConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetResponsibleGamblingConfig not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -1828,6 +1876,24 @@ func _User_SetOperatorRegisterLimitConfig_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_AddResponsibleGamblingConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddResponsibleGamblingConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).AddResponsibleGamblingConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_AddResponsibleGamblingConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).AddResponsibleGamblingConfig(ctx, req.(*AddResponsibleGamblingConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _User_GetOperatorRegisterLimitConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetOperatorRegisterLimitConfigRequest)
 	if err := dec(in); err != nil {
@@ -1842,6 +1908,42 @@ func _User_GetOperatorRegisterLimitConfig_Handler(srv interface{}, ctx context.C
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServer).GetOperatorRegisterLimitConfig(ctx, req.(*GetOperatorRegisterLimitConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_DeleteResponsibleGamblingConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteResponsibleGamblingConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).DeleteResponsibleGamblingConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_DeleteResponsibleGamblingConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).DeleteResponsibleGamblingConfig(ctx, req.(*DeleteResponsibleGamblingConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetResponsibleGamblingConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetResponsibleGamblingConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetResponsibleGamblingConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetResponsibleGamblingConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetResponsibleGamblingConfig(ctx, req.(*GetResponsibleGamblingConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2050,8 +2152,20 @@ var User_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _User_SetOperatorRegisterLimitConfig_Handler,
 		},
 		{
+			MethodName: "AddResponsibleGamblingConfig",
+			Handler:    _User_AddResponsibleGamblingConfig_Handler,
+		},
+		{
 			MethodName: "GetOperatorRegisterLimitConfig",
 			Handler:    _User_GetOperatorRegisterLimitConfig_Handler,
+		},
+		{
+			MethodName: "DeleteResponsibleGamblingConfig",
+			Handler:    _User_DeleteResponsibleGamblingConfig_Handler,
+		},
+		{
+			MethodName: "GetResponsibleGamblingConfig",
+			Handler:    _User_GetResponsibleGamblingConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

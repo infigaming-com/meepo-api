@@ -2283,6 +2283,227 @@ var _ interface {
 	ErrorName() string
 } = UpdateWalletCurrencyResponseValidationError{}
 
+// Validate checks the field values on
+// DeleteWalletResponsibleGamblingConfigRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *DeleteWalletResponsibleGamblingConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// DeleteWalletResponsibleGamblingConfigRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// DeleteWalletResponsibleGamblingConfigRequestMultiError, or nil if none found.
+func (m *DeleteWalletResponsibleGamblingConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteWalletResponsibleGamblingConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	// no validation rules for Currency
+
+	// no validation rules for LimitType
+
+	if len(errors) > 0 {
+		return DeleteWalletResponsibleGamblingConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteWalletResponsibleGamblingConfigRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// DeleteWalletResponsibleGamblingConfigRequest.ValidateAll() if the
+// designated constraints aren't met.
+type DeleteWalletResponsibleGamblingConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteWalletResponsibleGamblingConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteWalletResponsibleGamblingConfigRequestMultiError) AllErrors() []error { return m }
+
+// DeleteWalletResponsibleGamblingConfigRequestValidationError is the
+// validation error returned by
+// DeleteWalletResponsibleGamblingConfigRequest.Validate if the designated
+// constraints aren't met.
+type DeleteWalletResponsibleGamblingConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteWalletResponsibleGamblingConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteWalletResponsibleGamblingConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteWalletResponsibleGamblingConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteWalletResponsibleGamblingConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteWalletResponsibleGamblingConfigRequestValidationError) ErrorName() string {
+	return "DeleteWalletResponsibleGamblingConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteWalletResponsibleGamblingConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteWalletResponsibleGamblingConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteWalletResponsibleGamblingConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteWalletResponsibleGamblingConfigRequestValidationError{}
+
+// Validate checks the field values on
+// ListWalletResponsibleGamblingConfigsRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ListWalletResponsibleGamblingConfigsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ListWalletResponsibleGamblingConfigsRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// ListWalletResponsibleGamblingConfigsRequestMultiError, or nil if none found.
+func (m *ListWalletResponsibleGamblingConfigsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListWalletResponsibleGamblingConfigsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	if len(errors) > 0 {
+		return ListWalletResponsibleGamblingConfigsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListWalletResponsibleGamblingConfigsRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// ListWalletResponsibleGamblingConfigsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListWalletResponsibleGamblingConfigsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListWalletResponsibleGamblingConfigsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListWalletResponsibleGamblingConfigsRequestMultiError) AllErrors() []error { return m }
+
+// ListWalletResponsibleGamblingConfigsRequestValidationError is the validation
+// error returned by ListWalletResponsibleGamblingConfigsRequest.Validate if
+// the designated constraints aren't met.
+type ListWalletResponsibleGamblingConfigsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListWalletResponsibleGamblingConfigsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListWalletResponsibleGamblingConfigsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListWalletResponsibleGamblingConfigsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListWalletResponsibleGamblingConfigsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListWalletResponsibleGamblingConfigsRequestValidationError) ErrorName() string {
+	return "ListWalletResponsibleGamblingConfigsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListWalletResponsibleGamblingConfigsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListWalletResponsibleGamblingConfigsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListWalletResponsibleGamblingConfigsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListWalletResponsibleGamblingConfigsRequestValidationError{}
+
 // Validate checks the field values on GetWalletsResponse_TotalAssets with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

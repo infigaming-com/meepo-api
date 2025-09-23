@@ -76,6 +76,34 @@ service Wallet {
 	rpc UpdateOperatorCurrency (UpdateOperatorCurrencyRequest) returns (UpdateOperatorCurrencyResponse) {}
 
 	rpc UpdateUserCurrency (UpdateUserCurrencyRequest) returns (UpdateUserCurrencyResponse) {}
+
+	// AddResponsibleGamblingConfig adds gambling config for a user's currency
+	rpc AddResponsibleGamblingConfig(AddResponsibleGamblingConfigRequest) returns (AddResponsibleGamblingConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/responsible-gambling/config/add"
+			body: "*"
+		};
+	}
+
+	// DeleteResponsibleGamblingConfig deletes gambling config for a user's currency
+	rpc DeleteResponsibleGamblingConfig(DeleteResponsibleGamblingConfigRequest) returns (DeleteResponsibleGamblingConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/responsible-gambling/config/delete"
+			body: "*"
+		};
+	}
+
+	// ListResponsibleGamblingConfigs lists gambling configs for a user with all currencies
+	rpc ListResponsibleGamblingConfigs(ListResponsibleGamblingConfigsRequest) returns (ListResponsibleGamblingConfigsResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/responsible-gambling/configs/list"
+			body: "*"
+		};
+	}
+
+	// GetResponsibleGamblingConfig gets gambling config and statusfor a user's currency
+	rpc GetResponsibleGamblingConfig(GetResponsibleGamblingConfigRequest) returns (GetResponsibleGamblingConfigResponse) {
+	}
 }
 
 message GetUserBalancesRequest {
@@ -583,3 +611,84 @@ message UpdateUserCurrencyRequest {
 }
 
 message UpdateUserCurrencyResponse {}
+
+message AddResponsibleGamblingConfigRequest {
+	string currency = 1;
+	optional string deposit_limit = 2;
+	optional string withdrawal_limit = 3;
+	optional string daily_play_limit = 4;
+	optional string weekly_play_limit = 5;
+	optional string monthly_play_limit = 6;
+	optional string daily_loss_limit = 7;
+	optional string weekly_loss_limit = 8;
+	optional string monthly_loss_limit = 9;
+}
+
+message AddResponsibleGamblingConfigResponse {}
+
+message DeleteResponsibleGamblingConfigRequest {
+	optional int64 user_id = 1;
+	optional int64 operator_id = 2;
+	string currency = 3;
+	// deposit_limit, withdrawal_limit, daily_play_limit, weekly_play_limit, monthly_play_limit
+	// daily_loss_limit, weekly_loss_limit, monthly_loss_limit
+	string limit_type = 4;
+}
+
+message DeleteResponsibleGamblingConfigResponse {}
+
+
+message ResponsibleGamblingConfig {
+	string currency = 1;
+	string deposit_limit = 2;
+	string withdrawal_limit = 3;
+	string daily_play_limit = 4;
+	string weekly_play_limit = 5;
+	string monthly_play_limit = 6;
+	string daily_loss_limit = 7;
+	string weekly_loss_limit = 8;
+	string monthly_loss_limit = 9;
+	google.protobuf.Timestamp deposit_limit_delete_schedule_time = 10;
+	google.protobuf.Timestamp withdrawal_limit_delete_schedule_time = 11;
+	google.protobuf.Timestamp daily_play_limit_delete_schedule_time = 12;
+	google.protobuf.Timestamp weekly_play_limit_delete_schedule_time = 13;
+	google.protobuf.Timestamp monthly_play_limit_delete_schedule_time = 14;
+	google.protobuf.Timestamp daily_loss_limit_delete_schedule_time = 15;
+	google.protobuf.Timestamp weekly_loss_limit_delete_schedule_time = 16;
+	google.protobuf.Timestamp monthly_loss_limit_delete_schedule_time = 17;
+}
+
+message ResponsibleGamblingStatus {
+	string currency = 1;
+	bool withdrawal_allowed = 2;
+	string withdrawal_usage = 3;
+	bool deposit_allowed = 4;
+	string deposit_usage = 5;
+	bool game_bet_allowed = 6;
+	string daily_play_usage = 7;
+	string weekly_play_usage = 8;
+	string monthly_play_usage = 9;
+	string daily_loss_usage = 10;
+	string weekly_loss_usage = 11;
+	string monthly_loss_usage = 12;
+}
+
+message ListResponsibleGamblingConfigsRequest {
+	optional int64 user_id = 1;
+	optional int64 operator_id = 2;
+}
+
+message ListResponsibleGamblingConfigsResponse {
+	repeated ResponsibleGamblingConfig responsible_gambling_configs = 1;
+	repeated ResponsibleGamblingStatus responsible_gambling_statuses = 2;
+}
+
+message GetResponsibleGamblingConfigRequest {
+	int64 user_id = 1;
+	optional int64 operator_id = 2;
+	string currency = 3;
+}
+
+message GetResponsibleGamblingConfigResponse {
+	ResponsibleGamblingConfig responsible_gambling_config = 1;
+}

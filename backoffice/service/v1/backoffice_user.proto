@@ -4,6 +4,7 @@ package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
+import "user/service/v1/user.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -105,6 +106,21 @@ service BackofficeUser {
 	rpc SetUserTags(SetUserTagsRequest) returns (SetUserTagsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/user/tags/set"
+			body: "*"
+		};
+	}
+
+
+	rpc DeleteUserResponsibleGamblingConfig(DeleteUserResponsibleGamblingConfigRequest) returns (user.service.v1.DeleteResponsibleGamblingConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/user/responsible-gambling/config/delete"
+			body: "*"
+		};
+	}
+
+	rpc GetUserResponsibleGamblingConfig(GetUserResponsibleGamblingConfigRequest) returns (user.service.v1.GetResponsibleGamblingConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/user/responsible-gambling/config/get"
 			body: "*"
 		};
 	}
@@ -385,3 +401,12 @@ message SetUserTagsRequest {
 }
 
 message SetUserTagsResponse {}
+
+message DeleteUserResponsibleGamblingConfigRequest {
+	int64 user_id = 1;
+	string limit_type = 2; // "self_exclusion", "break_in_play", "time_limits"
+}
+
+message GetUserResponsibleGamblingConfigRequest {
+	int64 user_id = 1;
+}
