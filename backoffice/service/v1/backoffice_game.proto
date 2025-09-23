@@ -550,16 +550,8 @@ message ExportSportEventsRequest {
 	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
 }
 
-message ExportSportEventsResponse {
-	int64 task_id = 1;
-}
-
 message ExportCustomerStrikeReportsRequest {
 	optional string user_id = 1;
 	string format = 2; // accepted values: csv, excel, pdf
 	string time_zone = 3; // e.g. UTC+0, UTC+8, etc.
-}
-
-message ExportCustomerStrikeReportsResponse {
-	int64 task_id = 1;
 }
