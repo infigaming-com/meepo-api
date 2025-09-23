@@ -57,7 +57,7 @@ type EventInfo struct {
 	Status string `json:"status,omitempty"`
 }
 
-type GameRollbackEvent struct {
+type GameTransactionEvent struct {
 	OperatorId                   int64  `json:"operator_id,omitempty"`
 	OperatorName                 string `json:"operator_name,omitempty"`
 	ProviderId                   string `json:"provider_id,omitempty"`
@@ -83,34 +83,17 @@ type GameRollbackEvent struct {
 	SystemOperatorId             int64  `json:"system_operator_id,omitempty"`
 	RetailerOperatorId           int64  `json:"retailer_operator_id,omitempty"`
 	CompanyOperatorId            int64  `json:"company_operator_id,omitempty"`
-	EventInfo                    EventInfo `json:"event_info,omitempty"`
+	EventInfos                   []EventInfo `json:"event_infos,omitempty"`
+	Type                         string `json:"type,omitempty"`
 }
 
-type GameAdjustmentEvent struct {
-	OperatorId                   int64  `json:"operator_id,omitempty"`
-	OperatorName                 string `json:"operator_name,omitempty"`
-	ProviderId                   string `json:"provider_id,omitempty"`
-	ProviderName                 string `json:"provider_name,omitempty"`
-	UserId                       int64  `json:"user_id,omitempty"`
-	GameId                       string `json:"game_id,omitempty"`
-	GameName                     string `json:"game_name,omitempty"`
-	GameAction                   string `json:"game_action,omitempty"` // "rollback"
-	RoundId                      int64  `json:"round_id,omitempty"`
-	BetId                        int64  `json:"bet_id,omitempty"`
-	TransactionId                int64  `json:"transaction_id,omitempty"`
-	FeeGroup                     string `json:"fee_group,omitempty"`
-	Currency                     string `json:"currency,omitempty"`
-	SettlementCurrency           string `json:"settlement_currency,omitempty"`
-	AmountCurrency               string `json:"amount_currency,omitempty"`
-	AmountSettlementCurrency     string `json:"amount_settlement_currency,omitempty"`
-	AmountUsd                    string `json:"amount_usd,omitempty"`
-	AmountReportingCurrency      string `json:"amount_reporting_currency,omitempty"`
-	Turnover                     string `json:"turnover,omitempty"`
-	TurnoverUsd                  string `json:"turnover_usd,omitempty"`
-	TurnoverReportingCurrency    string `json:"turnover_reporting_currency,omitempty"`
-	CreatedAt                    int64  `json:"created_at,omitempty"`
-	SystemOperatorId             int64  `json:"system_operator_id,omitempty"`
-	RetailerOperatorId           int64  `json:"retailer_operator_id,omitempty"`
-	CompanyOperatorId            int64  `json:"company_operator_id,omitempty"`
-	EventInfo                    EventInfo `json:"event_info,omitempty"`
-}
+type GameTransactionType string
+
+const (
+	GameTransactionTypeRollback GameTransactionType = "rollback"
+	GameTransactionTypeAdjust GameTransactionType = "adjust"
+	GameTransactionTypeCancelled GameTransactionType = "cancelled"
+	GameTransactionTypeNoMoreBets GameTransactionType = "no_more_bets"
+)
+
+const GameEventTopic = "game.events"
