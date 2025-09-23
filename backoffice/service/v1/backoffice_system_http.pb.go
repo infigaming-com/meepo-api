@@ -20,46 +20,15 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationBackofficeSystemAddSystemCurrency = "/api.backoffice.service.v1.BackofficeSystem/AddSystemCurrency"
 const OperationBackofficeSystemListReportExport = "/api.backoffice.service.v1.BackofficeSystem/ListReportExport"
-const OperationBackofficeSystemListSystemCurrencies = "/api.backoffice.service.v1.BackofficeSystem/ListSystemCurrencies"
-const OperationBackofficeSystemUpdateSystemCurrency = "/api.backoffice.service.v1.BackofficeSystem/UpdateSystemCurrency"
 
 type BackofficeSystemHTTPServer interface {
-	AddSystemCurrency(context.Context, *AddSystemCurrencyRequest) (*AddSystemCurrencyResponse, error)
 	ListReportExport(context.Context, *ListReportExportRequest) (*v1.ListReportExportResponse, error)
-	ListSystemCurrencies(context.Context, *ListSystemCurrenciesRequest) (*ListSystemCurrenciesResponse, error)
-	UpdateSystemCurrency(context.Context, *UpdateSystemCurrencyRequest) (*UpdateSystemCurrencyResponse, error)
 }
 
 func RegisterBackofficeSystemHTTPServer(s *http.Server, srv BackofficeSystemHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/backoffice/system/currencies/add", _BackofficeSystem_AddSystemCurrency0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/system/report/export/list", _BackofficeSystem_ListReportExport0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/system/currencies/list", _BackofficeSystem_ListSystemCurrencies0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/system/currencies/update", _BackofficeSystem_UpdateSystemCurrency0_HTTP_Handler(srv))
-}
-
-func _BackofficeSystem_AddSystemCurrency0_HTTP_Handler(srv BackofficeSystemHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in AddSystemCurrencyRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeSystemAddSystemCurrency)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.AddSystemCurrency(ctx, req.(*AddSystemCurrencyRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*AddSystemCurrencyResponse)
-		return ctx.Result(200, reply)
-	}
 }
 
 func _BackofficeSystem_ListReportExport0_HTTP_Handler(srv BackofficeSystemHTTPServer) func(ctx http.Context) error {
@@ -84,55 +53,8 @@ func _BackofficeSystem_ListReportExport0_HTTP_Handler(srv BackofficeSystemHTTPSe
 	}
 }
 
-func _BackofficeSystem_ListSystemCurrencies0_HTTP_Handler(srv BackofficeSystemHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in ListSystemCurrenciesRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeSystemListSystemCurrencies)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListSystemCurrencies(ctx, req.(*ListSystemCurrenciesRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ListSystemCurrenciesResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _BackofficeSystem_UpdateSystemCurrency0_HTTP_Handler(srv BackofficeSystemHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in UpdateSystemCurrencyRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeSystemUpdateSystemCurrency)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.UpdateSystemCurrency(ctx, req.(*UpdateSystemCurrencyRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*UpdateSystemCurrencyResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
 type BackofficeSystemHTTPClient interface {
-	AddSystemCurrency(ctx context.Context, req *AddSystemCurrencyRequest, opts ...http.CallOption) (rsp *AddSystemCurrencyResponse, err error)
 	ListReportExport(ctx context.Context, req *ListReportExportRequest, opts ...http.CallOption) (rsp *v1.ListReportExportResponse, err error)
-	ListSystemCurrencies(ctx context.Context, req *ListSystemCurrenciesRequest, opts ...http.CallOption) (rsp *ListSystemCurrenciesResponse, err error)
-	UpdateSystemCurrency(ctx context.Context, req *UpdateSystemCurrencyRequest, opts ...http.CallOption) (rsp *UpdateSystemCurrencyResponse, err error)
 }
 
 type BackofficeSystemHTTPClientImpl struct {
@@ -143,50 +65,11 @@ func NewBackofficeSystemHTTPClient(client *http.Client) BackofficeSystemHTTPClie
 	return &BackofficeSystemHTTPClientImpl{client}
 }
 
-func (c *BackofficeSystemHTTPClientImpl) AddSystemCurrency(ctx context.Context, in *AddSystemCurrencyRequest, opts ...http.CallOption) (*AddSystemCurrencyResponse, error) {
-	var out AddSystemCurrencyResponse
-	pattern := "/v1/backoffice/system/currencies/add"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeSystemAddSystemCurrency))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
 func (c *BackofficeSystemHTTPClientImpl) ListReportExport(ctx context.Context, in *ListReportExportRequest, opts ...http.CallOption) (*v1.ListReportExportResponse, error) {
 	var out v1.ListReportExportResponse
 	pattern := "/v1/backoffice/system/report/export/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeSystemListReportExport))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficeSystemHTTPClientImpl) ListSystemCurrencies(ctx context.Context, in *ListSystemCurrenciesRequest, opts ...http.CallOption) (*ListSystemCurrenciesResponse, error) {
-	var out ListSystemCurrenciesResponse
-	pattern := "/v1/backoffice/system/currencies/list"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeSystemListSystemCurrencies))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficeSystemHTTPClientImpl) UpdateSystemCurrency(ctx context.Context, in *UpdateSystemCurrencyRequest, opts ...http.CallOption) (*UpdateSystemCurrencyResponse, error) {
-	var out UpdateSystemCurrencyResponse
-	pattern := "/v1/backoffice/system/currencies/update"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeSystemUpdateSystemCurrency))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

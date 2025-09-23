@@ -1281,60 +1281,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ReviewTicketResponse'
-    /v1/backoffice/system/currencies/add:
-        post:
-            tags:
-                - BackofficeSystem
-            operationId: BackofficeSystem_AddSystemCurrency
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.AddSystemCurrencyRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.AddSystemCurrencyResponse'
-    /v1/backoffice/system/currencies/list:
-        post:
-            tags:
-                - BackofficeSystem
-            operationId: BackofficeSystem_ListSystemCurrencies
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListSystemCurrenciesRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListSystemCurrenciesResponse'
-    /v1/backoffice/system/currencies/update:
-        post:
-            tags:
-                - BackofficeSystem
-            operationId: BackofficeSystem_UpdateSystemCurrency
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateSystemCurrencyRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateSystemCurrencyResponse'
     /v1/backoffice/system/report/export/list:
         post:
             tags:
@@ -2475,30 +2421,6 @@ components:
                     type: array
                     items:
                         type: string
-        api.backoffice.service.v1.AddSystemCurrencyRequest:
-            type: object
-            properties:
-                currency:
-                    type: string
-                enabled:
-                    type: boolean
-                hidden:
-                    type: boolean
-                type:
-                    type: string
-                symbol:
-                    type: string
-                icon:
-                    type: string
-                decimalPlaces:
-                    type: integer
-                    format: int32
-                currencyDecimalPlaces:
-                    type: integer
-                    format: int32
-        api.backoffice.service.v1.AddSystemCurrencyResponse:
-            type: object
-            properties: {}
         api.backoffice.service.v1.AddUserCommentRequest:
             type: object
             properties:
@@ -5423,33 +5345,6 @@ components:
                     type: string
                 houseEdgePercentage:
                     type: string
-        api.backoffice.service.v1.ListSystemCurrenciesRequest:
-            type: object
-            properties:
-                currencies:
-                    type: array
-                    items:
-                        type: string
-                enabled:
-                    type: boolean
-                hidden:
-                    type: boolean
-        api.backoffice.service.v1.ListSystemCurrenciesResponse:
-            type: object
-            properties:
-                currencies:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.SystemCurrency'
-                total:
-                    type: integer
-                    format: int32
-                totalEnabled:
-                    type: integer
-                    format: int32
-                totalHidden:
-                    type: integer
-                    format: int32
         api.backoffice.service.v1.ListTagsRequest:
             type: object
             properties: {}
@@ -6287,27 +6182,6 @@ components:
         api.backoffice.service.v1.SetUserTagsResponse:
             type: object
             properties: {}
-        api.backoffice.service.v1.SystemCurrency:
-            type: object
-            properties:
-                currency:
-                    type: string
-                enabled:
-                    type: boolean
-                hidden:
-                    type: boolean
-                type:
-                    type: string
-                symbol:
-                    type: string
-                icon:
-                    type: string
-                decimalPlaces:
-                    type: integer
-                    format: int32
-                currencyDecimalPlaces:
-                    type: integer
-                    format: int32
         api.backoffice.service.v1.TimeRange:
             type: object
             properties:
@@ -6455,32 +6329,6 @@ components:
         api.backoffice.service.v1.UpdateRoleResponse:
             type: object
             properties: {}
-        api.backoffice.service.v1.UpdateSystemCurrencyRequest:
-            type: object
-            properties:
-                currency:
-                    type: string
-                enabled:
-                    type: boolean
-                hidden:
-                    type: boolean
-                type:
-                    type: string
-                symbol:
-                    type: string
-                icon:
-                    type: string
-                decimalPlaces:
-                    type: integer
-                    format: int32
-                currencyDecimalPlaces:
-                    type: integer
-                    format: int32
-        api.backoffice.service.v1.UpdateSystemCurrencyResponse:
-            type: object
-            properties:
-                currency:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.SystemCurrency'
         api.backoffice.service.v1.UpdateUserRequest:
             type: object
             properties:

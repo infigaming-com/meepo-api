@@ -20,20 +20,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeSystem_AddSystemCurrency_FullMethodName    = "/api.backoffice.service.v1.BackofficeSystem/AddSystemCurrency"
-	BackofficeSystem_ListReportExport_FullMethodName     = "/api.backoffice.service.v1.BackofficeSystem/ListReportExport"
-	BackofficeSystem_ListSystemCurrencies_FullMethodName = "/api.backoffice.service.v1.BackofficeSystem/ListSystemCurrencies"
-	BackofficeSystem_UpdateSystemCurrency_FullMethodName = "/api.backoffice.service.v1.BackofficeSystem/UpdateSystemCurrency"
+	BackofficeSystem_ListReportExport_FullMethodName = "/api.backoffice.service.v1.BackofficeSystem/ListReportExport"
 )
 
 // BackofficeSystemClient is the client API for BackofficeSystem service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BackofficeSystemClient interface {
-	AddSystemCurrency(ctx context.Context, in *AddSystemCurrencyRequest, opts ...grpc.CallOption) (*AddSystemCurrencyResponse, error)
 	ListReportExport(ctx context.Context, in *ListReportExportRequest, opts ...grpc.CallOption) (*v1.ListReportExportResponse, error)
-	ListSystemCurrencies(ctx context.Context, in *ListSystemCurrenciesRequest, opts ...grpc.CallOption) (*ListSystemCurrenciesResponse, error)
-	UpdateSystemCurrency(ctx context.Context, in *UpdateSystemCurrencyRequest, opts ...grpc.CallOption) (*UpdateSystemCurrencyResponse, error)
 }
 
 type backofficeSystemClient struct {
@@ -42,16 +36,6 @@ type backofficeSystemClient struct {
 
 func NewBackofficeSystemClient(cc grpc.ClientConnInterface) BackofficeSystemClient {
 	return &backofficeSystemClient{cc}
-}
-
-func (c *backofficeSystemClient) AddSystemCurrency(ctx context.Context, in *AddSystemCurrencyRequest, opts ...grpc.CallOption) (*AddSystemCurrencyResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AddSystemCurrencyResponse)
-	err := c.cc.Invoke(ctx, BackofficeSystem_AddSystemCurrency_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *backofficeSystemClient) ListReportExport(ctx context.Context, in *ListReportExportRequest, opts ...grpc.CallOption) (*v1.ListReportExportResponse, error) {
@@ -64,34 +48,11 @@ func (c *backofficeSystemClient) ListReportExport(ctx context.Context, in *ListR
 	return out, nil
 }
 
-func (c *backofficeSystemClient) ListSystemCurrencies(ctx context.Context, in *ListSystemCurrenciesRequest, opts ...grpc.CallOption) (*ListSystemCurrenciesResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListSystemCurrenciesResponse)
-	err := c.cc.Invoke(ctx, BackofficeSystem_ListSystemCurrencies_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *backofficeSystemClient) UpdateSystemCurrency(ctx context.Context, in *UpdateSystemCurrencyRequest, opts ...grpc.CallOption) (*UpdateSystemCurrencyResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateSystemCurrencyResponse)
-	err := c.cc.Invoke(ctx, BackofficeSystem_UpdateSystemCurrency_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // BackofficeSystemServer is the server API for BackofficeSystem service.
 // All implementations must embed UnimplementedBackofficeSystemServer
 // for forward compatibility.
 type BackofficeSystemServer interface {
-	AddSystemCurrency(context.Context, *AddSystemCurrencyRequest) (*AddSystemCurrencyResponse, error)
 	ListReportExport(context.Context, *ListReportExportRequest) (*v1.ListReportExportResponse, error)
-	ListSystemCurrencies(context.Context, *ListSystemCurrenciesRequest) (*ListSystemCurrenciesResponse, error)
-	UpdateSystemCurrency(context.Context, *UpdateSystemCurrencyRequest) (*UpdateSystemCurrencyResponse, error)
 	mustEmbedUnimplementedBackofficeSystemServer()
 }
 
@@ -102,17 +63,8 @@ type BackofficeSystemServer interface {
 // pointer dereference when methods are called.
 type UnimplementedBackofficeSystemServer struct{}
 
-func (UnimplementedBackofficeSystemServer) AddSystemCurrency(context.Context, *AddSystemCurrencyRequest) (*AddSystemCurrencyResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddSystemCurrency not implemented")
-}
 func (UnimplementedBackofficeSystemServer) ListReportExport(context.Context, *ListReportExportRequest) (*v1.ListReportExportResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListReportExport not implemented")
-}
-func (UnimplementedBackofficeSystemServer) ListSystemCurrencies(context.Context, *ListSystemCurrenciesRequest) (*ListSystemCurrenciesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListSystemCurrencies not implemented")
-}
-func (UnimplementedBackofficeSystemServer) UpdateSystemCurrency(context.Context, *UpdateSystemCurrencyRequest) (*UpdateSystemCurrencyResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateSystemCurrency not implemented")
 }
 func (UnimplementedBackofficeSystemServer) mustEmbedUnimplementedBackofficeSystemServer() {}
 func (UnimplementedBackofficeSystemServer) testEmbeddedByValue()                          {}
@@ -135,24 +87,6 @@ func RegisterBackofficeSystemServer(s grpc.ServiceRegistrar, srv BackofficeSyste
 	s.RegisterService(&BackofficeSystem_ServiceDesc, srv)
 }
 
-func _BackofficeSystem_AddSystemCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddSystemCurrencyRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeSystemServer).AddSystemCurrency(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeSystem_AddSystemCurrency_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeSystemServer).AddSystemCurrency(ctx, req.(*AddSystemCurrencyRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _BackofficeSystem_ListReportExport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListReportExportRequest)
 	if err := dec(in); err != nil {
@@ -171,42 +105,6 @@ func _BackofficeSystem_ListReportExport_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeSystem_ListSystemCurrencies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListSystemCurrenciesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeSystemServer).ListSystemCurrencies(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeSystem_ListSystemCurrencies_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeSystemServer).ListSystemCurrencies(ctx, req.(*ListSystemCurrenciesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BackofficeSystem_UpdateSystemCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateSystemCurrencyRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeSystemServer).UpdateSystemCurrency(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeSystem_UpdateSystemCurrency_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeSystemServer).UpdateSystemCurrency(ctx, req.(*UpdateSystemCurrencyRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // BackofficeSystem_ServiceDesc is the grpc.ServiceDesc for BackofficeSystem service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -215,20 +113,8 @@ var BackofficeSystem_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*BackofficeSystemServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "AddSystemCurrency",
-			Handler:    _BackofficeSystem_AddSystemCurrency_Handler,
-		},
-		{
 			MethodName: "ListReportExport",
 			Handler:    _BackofficeSystem_ListReportExport_Handler,
-		},
-		{
-			MethodName: "ListSystemCurrencies",
-			Handler:    _BackofficeSystem_ListSystemCurrencies_Handler,
-		},
-		{
-			MethodName: "UpdateSystemCurrency",
-			Handler:    _BackofficeSystem_UpdateSystemCurrency_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
