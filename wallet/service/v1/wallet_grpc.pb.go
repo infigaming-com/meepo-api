@@ -46,6 +46,7 @@ const (
 	Wallet_DeleteResponsibleGamblingConfig_FullMethodName     = "/api.wallet.service.v1.Wallet/DeleteResponsibleGamblingConfig"
 	Wallet_ListResponsibleGamblingConfigs_FullMethodName      = "/api.wallet.service.v1.Wallet/ListResponsibleGamblingConfigs"
 	Wallet_GetResponsibleGamblingConfig_FullMethodName        = "/api.wallet.service.v1.Wallet/GetResponsibleGamblingConfig"
+	Wallet_GetExchangeRatesWithBaseCurrency_FullMethodName    = "/api.wallet.service.v1.Wallet/GetExchangeRatesWithBaseCurrency"
 )
 
 // WalletClient is the client API for Wallet service.
@@ -93,6 +94,7 @@ type WalletClient interface {
 	ListResponsibleGamblingConfigs(ctx context.Context, in *ListResponsibleGamblingConfigsRequest, opts ...grpc.CallOption) (*ListResponsibleGamblingConfigsResponse, error)
 	// GetResponsibleGamblingConfig gets gambling config and statusfor a user's currency
 	GetResponsibleGamblingConfig(ctx context.Context, in *GetResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*GetResponsibleGamblingConfigResponse, error)
+	GetExchangeRatesWithBaseCurrency(ctx context.Context, in *GetExchangeRatesWithBaseCurrencyRequest, opts ...grpc.CallOption) (*GetExchangeRatesWithBaseCurrencyResponse, error)
 }
 
 type walletClient struct {
@@ -373,6 +375,16 @@ func (c *walletClient) GetResponsibleGamblingConfig(ctx context.Context, in *Get
 	return out, nil
 }
 
+func (c *walletClient) GetExchangeRatesWithBaseCurrency(ctx context.Context, in *GetExchangeRatesWithBaseCurrencyRequest, opts ...grpc.CallOption) (*GetExchangeRatesWithBaseCurrencyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetExchangeRatesWithBaseCurrencyResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetExchangeRatesWithBaseCurrency_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServer is the server API for Wallet service.
 // All implementations must embed UnimplementedWalletServer
 // for forward compatibility.
@@ -418,6 +430,7 @@ type WalletServer interface {
 	ListResponsibleGamblingConfigs(context.Context, *ListResponsibleGamblingConfigsRequest) (*ListResponsibleGamblingConfigsResponse, error)
 	// GetResponsibleGamblingConfig gets gambling config and statusfor a user's currency
 	GetResponsibleGamblingConfig(context.Context, *GetResponsibleGamblingConfigRequest) (*GetResponsibleGamblingConfigResponse, error)
+	GetExchangeRatesWithBaseCurrency(context.Context, *GetExchangeRatesWithBaseCurrencyRequest) (*GetExchangeRatesWithBaseCurrencyResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -508,6 +521,9 @@ func (UnimplementedWalletServer) ListResponsibleGamblingConfigs(context.Context,
 }
 func (UnimplementedWalletServer) GetResponsibleGamblingConfig(context.Context, *GetResponsibleGamblingConfigRequest) (*GetResponsibleGamblingConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetResponsibleGamblingConfig not implemented")
+}
+func (UnimplementedWalletServer) GetExchangeRatesWithBaseCurrency(context.Context, *GetExchangeRatesWithBaseCurrencyRequest) (*GetExchangeRatesWithBaseCurrencyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetExchangeRatesWithBaseCurrency not implemented")
 }
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
@@ -1016,6 +1032,24 @@ func _Wallet_GetResponsibleGamblingConfig_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_GetExchangeRatesWithBaseCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetExchangeRatesWithBaseCurrencyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetExchangeRatesWithBaseCurrency(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetExchangeRatesWithBaseCurrency_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetExchangeRatesWithBaseCurrency(ctx, req.(*GetExchangeRatesWithBaseCurrencyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Wallet_ServiceDesc is the grpc.ServiceDesc for Wallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1130,6 +1164,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetResponsibleGamblingConfig",
 			Handler:    _Wallet_GetResponsibleGamblingConfig_Handler,
+		},
+		{
+			MethodName: "GetExchangeRatesWithBaseCurrency",
+			Handler:    _Wallet_GetExchangeRatesWithBaseCurrency_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -104,6 +104,13 @@ service Wallet {
 	// GetResponsibleGamblingConfig gets gambling config and statusfor a user's currency
 	rpc GetResponsibleGamblingConfig(GetResponsibleGamblingConfigRequest) returns (GetResponsibleGamblingConfigResponse) {
 	}
+
+	rpc GetExchangeRatesWithBaseCurrency (GetExchangeRatesWithBaseCurrencyRequest) returns (GetExchangeRatesWithBaseCurrencyResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/exchange-rates/base-currency"
+			body: "*"
+		};
+	}
 }
 
 message GetUserBalancesRequest {
@@ -691,4 +698,14 @@ message GetResponsibleGamblingConfigRequest {
 
 message GetResponsibleGamblingConfigResponse {
 	ResponsibleGamblingConfig responsible_gambling_config = 1;
+}
+
+message GetExchangeRatesWithBaseCurrencyRequest {
+	repeated string currencies = 1;
+	optional string base_currency = 2; // USD if not provided
+}
+
+message GetExchangeRatesWithBaseCurrencyResponse {
+	// map key is currency code, value is currency exchange rate
+	map<string, string> exchange_rates = 1;
 }

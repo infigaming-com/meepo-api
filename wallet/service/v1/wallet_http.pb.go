@@ -22,6 +22,7 @@ const _ = http.SupportPackageIsVersion1
 const OperationWalletAddResponsibleGamblingConfig = "/api.wallet.service.v1.Wallet/AddResponsibleGamblingConfig"
 const OperationWalletDeleteResponsibleGamblingConfig = "/api.wallet.service.v1.Wallet/DeleteResponsibleGamblingConfig"
 const OperationWalletGetCurrencies = "/api.wallet.service.v1.Wallet/GetCurrencies"
+const OperationWalletGetExchangeRatesWithBaseCurrency = "/api.wallet.service.v1.Wallet/GetExchangeRatesWithBaseCurrency"
 const OperationWalletGetUserBalances = "/api.wallet.service.v1.Wallet/GetUserBalances"
 const OperationWalletListResponsibleGamblingConfigs = "/api.wallet.service.v1.Wallet/ListResponsibleGamblingConfigs"
 
@@ -31,6 +32,7 @@ type WalletHTTPServer interface {
 	// DeleteResponsibleGamblingConfig DeleteResponsibleGamblingConfig deletes gambling config for a user's currency
 	DeleteResponsibleGamblingConfig(context.Context, *DeleteResponsibleGamblingConfigRequest) (*DeleteResponsibleGamblingConfigResponse, error)
 	GetCurrencies(context.Context, *GetCurrenciesRequest) (*GetCurrenciesResponse, error)
+	GetExchangeRatesWithBaseCurrency(context.Context, *GetExchangeRatesWithBaseCurrencyRequest) (*GetExchangeRatesWithBaseCurrencyResponse, error)
 	// GetUserBalances GetUserBalances returns the balances of all currencies of the user
 	GetUserBalances(context.Context, *GetUserBalancesRequest) (*GetUserBalancesResponse, error)
 	// ListResponsibleGamblingConfigs ListResponsibleGamblingConfigs lists gambling configs for a user with all currencies
@@ -44,6 +46,7 @@ func RegisterWalletHTTPServer(s *http.Server, srv WalletHTTPServer) {
 	r.POST("/v1/wallet/responsible-gambling/config/add", _Wallet_AddResponsibleGamblingConfig1_HTTP_Handler(srv))
 	r.POST("/v1/wallet/responsible-gambling/config/delete", _Wallet_DeleteResponsibleGamblingConfig1_HTTP_Handler(srv))
 	r.POST("/v1/wallet/responsible-gambling/configs/list", _Wallet_ListResponsibleGamblingConfigs0_HTTP_Handler(srv))
+	r.POST("/v1/wallet/exchange-rates/base-currency", _Wallet_GetExchangeRatesWithBaseCurrency0_HTTP_Handler(srv))
 }
 
 func _Wallet_GetUserBalances0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
@@ -156,10 +159,33 @@ func _Wallet_ListResponsibleGamblingConfigs0_HTTP_Handler(srv WalletHTTPServer) 
 	}
 }
 
+func _Wallet_GetExchangeRatesWithBaseCurrency0_HTTP_Handler(srv WalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetExchangeRatesWithBaseCurrencyRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationWalletGetExchangeRatesWithBaseCurrency)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetExchangeRatesWithBaseCurrency(ctx, req.(*GetExchangeRatesWithBaseCurrencyRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetExchangeRatesWithBaseCurrencyResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type WalletHTTPClient interface {
 	AddResponsibleGamblingConfig(ctx context.Context, req *AddResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *AddResponsibleGamblingConfigResponse, err error)
 	DeleteResponsibleGamblingConfig(ctx context.Context, req *DeleteResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *DeleteResponsibleGamblingConfigResponse, err error)
 	GetCurrencies(ctx context.Context, req *GetCurrenciesRequest, opts ...http.CallOption) (rsp *GetCurrenciesResponse, err error)
+	GetExchangeRatesWithBaseCurrency(ctx context.Context, req *GetExchangeRatesWithBaseCurrencyRequest, opts ...http.CallOption) (rsp *GetExchangeRatesWithBaseCurrencyResponse, err error)
 	GetUserBalances(ctx context.Context, req *GetUserBalancesRequest, opts ...http.CallOption) (rsp *GetUserBalancesResponse, err error)
 	ListResponsibleGamblingConfigs(ctx context.Context, req *ListResponsibleGamblingConfigsRequest, opts ...http.CallOption) (rsp *ListResponsibleGamblingConfigsResponse, err error)
 }
@@ -203,6 +229,19 @@ func (c *WalletHTTPClientImpl) GetCurrencies(ctx context.Context, in *GetCurrenc
 	pattern := "/v1/wallet/currencies/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationWalletGetCurrencies))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *WalletHTTPClientImpl) GetExchangeRatesWithBaseCurrency(ctx context.Context, in *GetExchangeRatesWithBaseCurrencyRequest, opts ...http.CallOption) (*GetExchangeRatesWithBaseCurrencyResponse, error) {
+	var out GetExchangeRatesWithBaseCurrencyResponse
+	pattern := "/v1/wallet/exchange-rates/base-currency"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationWalletGetExchangeRatesWithBaseCurrency))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
