@@ -1099,17 +1099,36 @@ func (m *ListReportExportResponse) validate(all bool) error {
 
 	}
 
+	if all {
+		switch v := interface{}(m.GetStatistic()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListReportExportResponseValidationError{
+					field:  "Statistic",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListReportExportResponseValidationError{
+					field:  "Statistic",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetStatistic()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListReportExportResponseValidationError{
+				field:  "Statistic",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	// no validation rules for TotalCount
-
-	// no validation rules for TotalCompleted
-
-	// no validation rules for TotalGenerating
-
-	// no validation rules for TotalPending
-
-	// no validation rules for TotalFailed
-
-	// no validation rules for PageSize
 
 	if len(errors) > 0 {
 		return ListReportExportResponseMultiError(errors)
@@ -2857,3 +2876,118 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListReportExportResponse_ReportExportValidationError{}
+
+// Validate checks the field values on ListReportExportResponse_Statistic with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ListReportExportResponse_Statistic) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListReportExportResponse_Statistic
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListReportExportResponse_StatisticMultiError, or nil if none found.
+func (m *ListReportExportResponse_Statistic) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListReportExportResponse_Statistic) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TotalCount
+
+	// no validation rules for TotalCompleted
+
+	// no validation rules for TotalGenerating
+
+	// no validation rules for TotalPending
+
+	// no validation rules for TotalFailed
+
+	if len(errors) > 0 {
+		return ListReportExportResponse_StatisticMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListReportExportResponse_StatisticMultiError is an error wrapping multiple
+// validation errors returned by
+// ListReportExportResponse_Statistic.ValidateAll() if the designated
+// constraints aren't met.
+type ListReportExportResponse_StatisticMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListReportExportResponse_StatisticMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListReportExportResponse_StatisticMultiError) AllErrors() []error { return m }
+
+// ListReportExportResponse_StatisticValidationError is the validation error
+// returned by ListReportExportResponse_Statistic.Validate if the designated
+// constraints aren't met.
+type ListReportExportResponse_StatisticValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListReportExportResponse_StatisticValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListReportExportResponse_StatisticValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListReportExportResponse_StatisticValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListReportExportResponse_StatisticValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListReportExportResponse_StatisticValidationError) ErrorName() string {
+	return "ListReportExportResponse_StatisticValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListReportExportResponse_StatisticValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListReportExportResponse_Statistic.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListReportExportResponse_StatisticValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListReportExportResponse_StatisticValidationError{}

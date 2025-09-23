@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package system.service.v1;
 
+// import "common/common.proto";
 import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/system/service/v1;v1";
@@ -91,13 +92,16 @@ message ListReportExportResponse {
 		google.protobuf.Timestamp create_at = 9;
 		int64 user_id = 10;
 	}
+	message Statistic {
+		int32 total_count = 1;
+		int32 total_completed = 2;
+		int32 total_generating = 3;
+		int32 total_pending = 4;
+		int32 total_failed = 5;
+	}
 	repeated ReportExport tasks = 1;
-	int32 total_count = 2;
-	int32 total_completed = 3;
-	int32 total_generating = 4;
-	int32 total_pending = 5;
-	int32 total_failed = 6;
-	int32 page_size = 7;
+	Statistic statistic = 2;
+	int32 total_count = 3;
 }
 
 message CreateReportExportRequest {
