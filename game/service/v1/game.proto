@@ -152,10 +152,9 @@ service Game {
 
 	// Sport Events related APIs
 	rpc ListSportEvents(ListSportEventsRequest) returns (ListSportEventsResponse) {
-		option (google.api.http) = {
-			post: "/v1/game/sport-events/list"
-			body: "*"
-		};
+	}
+
+	rpc ExportSportEvents(ExportSportEventsRequest) returns (ExportSportEventsResponse) {
 	}
 
 	rpc GetBetAndEventInfo(GetBetAndEventInfoRequest) returns (GetBetAndEventInfoResponse) {
@@ -1446,4 +1445,42 @@ message ListCustomerStrikeReportsResponse {
 	int32 total_count = 2; // Total number of records found
 	int32 page = 3;
 	int32 page_size = 4;
+}
+
+message ExportSportEventsRequest {
+	optional string event_name = 1;
+	optional string venue = 2;
+	optional string tournament = 3;
+	optional string start_time = 4;
+	optional string end_time = 5;
+	string format = 6; // accepted values: csv, excel, pdf
+	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContext operator_context = 8;
+	int64 initiator_user_id = 9;
+}
+
+message ExportSportEventsResponse {
+	int64 task_id = 1;
+}
+
+message ExportCustomerStrikeReportsRequest {
+	optional string user_id = 1;
+	optional int32 page = 2;
+	optional int32 page_size = 3;
+}
+
+message ExportCustomerStrikeReportsResponse {
+	int64 task_id = 1;
+}
+
+message ExportCustomerRecordsRequest {
+	optional int64 user_id = 1;
+	string format = 2; // accepted values: csv, excel, pdf
+	string time_zone = 3; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContext operator_context = 4;
+	int64 initiator_user_id = 5;
+}
+
+message ExportCustomerRecordsResponse {
+	int64 task_id = 1;
 }

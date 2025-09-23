@@ -68,7 +68,7 @@ func RegisterBackofficeReportHTTPServer(s *http.Server, srv BackofficeReportHTTP
 	r.POST("/v1/backoffice/report/register-retention/list", _BackofficeReport_ListRegisterRetention0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/report/deposit-vtg-details/list", _BackofficeReport_ListDepositVtgDetails0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/report/withdraw-vtg-details/list", _BackofficeReport_ListWithdrawVtgDetails0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/report/sport-events/list", _BackofficeReport_ListSportEvents1_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/report/sport-events/list", _BackofficeReport_ListSportEvents0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/report/customer-record/get", _BackofficeReport_CustomerRecordReportDetail0_HTTP_Handler(srv))
 }
 
@@ -358,7 +358,7 @@ func _BackofficeReport_ListWithdrawVtgDetails0_HTTP_Handler(srv BackofficeReport
 	}
 }
 
-func _BackofficeReport_ListSportEvents1_HTTP_Handler(srv BackofficeReportHTTPServer) func(ctx http.Context) error {
+func _BackofficeReport_ListSportEvents0_HTTP_Handler(srv BackofficeReportHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListSportEventsRequest
 		if err := ctx.Bind(&in); err != nil {

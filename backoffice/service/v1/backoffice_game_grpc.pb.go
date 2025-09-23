@@ -20,29 +20,31 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeGame_ListProviders_FullMethodName             = "/api.backoffice.service.v1.BackofficeGame/ListProviders"
-	BackofficeGame_ListProvidersWithDetail_FullMethodName   = "/api.backoffice.service.v1.BackofficeGame/ListProvidersWithDetail"
-	BackofficeGame_ListCategories_FullMethodName            = "/api.backoffice.service.v1.BackofficeGame/ListCategories"
-	BackofficeGame_ListFeeGroups_FullMethodName             = "/api.backoffice.service.v1.BackofficeGame/ListFeeGroups"
-	BackofficeGame_ListTags_FullMethodName                  = "/api.backoffice.service.v1.BackofficeGame/ListTags"
-	BackofficeGame_ListThemes_FullMethodName                = "/api.backoffice.service.v1.BackofficeGame/ListThemes"
-	BackofficeGame_ListCurrencies_FullMethodName            = "/api.backoffice.service.v1.BackofficeGame/ListCurrencies"
-	BackofficeGame_ListBets_FullMethodName                  = "/api.backoffice.service.v1.BackofficeGame/ListBets"
-	BackofficeGame_GetBetById_FullMethodName                = "/api.backoffice.service.v1.BackofficeGame/GetBetById"
-	BackofficeGame_GetUserBetsOverview_FullMethodName       = "/api.backoffice.service.v1.BackofficeGame/GetUserBetsOverview"
-	BackofficeGame_GetGameTransactionsForBet_FullMethodName = "/api.backoffice.service.v1.BackofficeGame/GetGameTransactionsForBet"
-	BackofficeGame_ListGames_FullMethodName                 = "/api.backoffice.service.v1.BackofficeGame/ListGames"
-	BackofficeGame_UpdateGame_FullMethodName                = "/api.backoffice.service.v1.BackofficeGame/UpdateGame"
-	BackofficeGame_UpdateProvider_FullMethodName            = "/api.backoffice.service.v1.BackofficeGame/UpdateProvider"
-	BackofficeGame_ListProviderRates_FullMethodName         = "/api.backoffice.service.v1.BackofficeGame/ListProviderRates"
-	BackofficeGame_GetGameTransactionById_FullMethodName    = "/api.backoffice.service.v1.BackofficeGame/GetGameTransactionById"
-	BackofficeGame_ListUnpaidBets_FullMethodName            = "/api.backoffice.service.v1.BackofficeGame/ListUnpaidBets"
-	BackofficeGame_ExportUnpaidBets_FullMethodName          = "/api.backoffice.service.v1.BackofficeGame/ExportUnpaidBets"
-	BackofficeGame_ListMultipleBets_FullMethodName          = "/api.backoffice.service.v1.BackofficeGame/ListMultipleBets"
-	BackofficeGame_ExportMultipleBets_FullMethodName        = "/api.backoffice.service.v1.BackofficeGame/ExportMultipleBets"
-	BackofficeGame_ListStakeVarianceBets_FullMethodName     = "/api.backoffice.service.v1.BackofficeGame/ListStakeVarianceBets"
-	BackofficeGame_ExportStakeVarianceBets_FullMethodName   = "/api.backoffice.service.v1.BackofficeGame/ExportStakeVarianceBets"
-	BackofficeGame_ListCustomerStrikeReports_FullMethodName = "/api.backoffice.service.v1.BackofficeGame/ListCustomerStrikeReports"
+	BackofficeGame_ListProviders_FullMethodName               = "/api.backoffice.service.v1.BackofficeGame/ListProviders"
+	BackofficeGame_ListProvidersWithDetail_FullMethodName     = "/api.backoffice.service.v1.BackofficeGame/ListProvidersWithDetail"
+	BackofficeGame_ListCategories_FullMethodName              = "/api.backoffice.service.v1.BackofficeGame/ListCategories"
+	BackofficeGame_ListFeeGroups_FullMethodName               = "/api.backoffice.service.v1.BackofficeGame/ListFeeGroups"
+	BackofficeGame_ListTags_FullMethodName                    = "/api.backoffice.service.v1.BackofficeGame/ListTags"
+	BackofficeGame_ListThemes_FullMethodName                  = "/api.backoffice.service.v1.BackofficeGame/ListThemes"
+	BackofficeGame_ListCurrencies_FullMethodName              = "/api.backoffice.service.v1.BackofficeGame/ListCurrencies"
+	BackofficeGame_ListBets_FullMethodName                    = "/api.backoffice.service.v1.BackofficeGame/ListBets"
+	BackofficeGame_GetBetById_FullMethodName                  = "/api.backoffice.service.v1.BackofficeGame/GetBetById"
+	BackofficeGame_GetUserBetsOverview_FullMethodName         = "/api.backoffice.service.v1.BackofficeGame/GetUserBetsOverview"
+	BackofficeGame_GetGameTransactionsForBet_FullMethodName   = "/api.backoffice.service.v1.BackofficeGame/GetGameTransactionsForBet"
+	BackofficeGame_ListGames_FullMethodName                   = "/api.backoffice.service.v1.BackofficeGame/ListGames"
+	BackofficeGame_UpdateGame_FullMethodName                  = "/api.backoffice.service.v1.BackofficeGame/UpdateGame"
+	BackofficeGame_UpdateProvider_FullMethodName              = "/api.backoffice.service.v1.BackofficeGame/UpdateProvider"
+	BackofficeGame_ListProviderRates_FullMethodName           = "/api.backoffice.service.v1.BackofficeGame/ListProviderRates"
+	BackofficeGame_GetGameTransactionById_FullMethodName      = "/api.backoffice.service.v1.BackofficeGame/GetGameTransactionById"
+	BackofficeGame_ListUnpaidBets_FullMethodName              = "/api.backoffice.service.v1.BackofficeGame/ListUnpaidBets"
+	BackofficeGame_ExportUnpaidBets_FullMethodName            = "/api.backoffice.service.v1.BackofficeGame/ExportUnpaidBets"
+	BackofficeGame_ListMultipleBets_FullMethodName            = "/api.backoffice.service.v1.BackofficeGame/ListMultipleBets"
+	BackofficeGame_ExportMultipleBets_FullMethodName          = "/api.backoffice.service.v1.BackofficeGame/ExportMultipleBets"
+	BackofficeGame_ListStakeVarianceBets_FullMethodName       = "/api.backoffice.service.v1.BackofficeGame/ListStakeVarianceBets"
+	BackofficeGame_ExportStakeVarianceBets_FullMethodName     = "/api.backoffice.service.v1.BackofficeGame/ExportStakeVarianceBets"
+	BackofficeGame_ListCustomerStrikeReports_FullMethodName   = "/api.backoffice.service.v1.BackofficeGame/ListCustomerStrikeReports"
+	BackofficeGame_ExportCustomerStrikeReports_FullMethodName = "/api.backoffice.service.v1.BackofficeGame/ExportCustomerStrikeReports"
+	BackofficeGame_ExportSportEvents_FullMethodName           = "/api.backoffice.service.v1.BackofficeGame/ExportSportEvents"
 )
 
 // BackofficeGameClient is the client API for BackofficeGame service.
@@ -78,6 +80,8 @@ type BackofficeGameClient interface {
 	ListStakeVarianceBets(ctx context.Context, in *ListStakeVarianceBetsRequest, opts ...grpc.CallOption) (*v1.ListStakeVarianceBetsResponse, error)
 	ExportStakeVarianceBets(ctx context.Context, in *ExportStakeVarianceBetsRequest, opts ...grpc.CallOption) (*v1.ExportStakeVarianceBetsResponse, error)
 	ListCustomerStrikeReports(ctx context.Context, in *ListCustomerStrikeReportsRequest, opts ...grpc.CallOption) (*v1.ListCustomerStrikeReportsResponse, error)
+	ExportCustomerStrikeReports(ctx context.Context, in *ExportCustomerStrikeReportsRequest, opts ...grpc.CallOption) (*v1.ExportCustomerStrikeReportsResponse, error)
+	ExportSportEvents(ctx context.Context, in *ExportSportEventsRequest, opts ...grpc.CallOption) (*v1.ExportSportEventsResponse, error)
 }
 
 type backofficeGameClient struct {
@@ -318,6 +322,26 @@ func (c *backofficeGameClient) ListCustomerStrikeReports(ctx context.Context, in
 	return out, nil
 }
 
+func (c *backofficeGameClient) ExportCustomerStrikeReports(ctx context.Context, in *ExportCustomerStrikeReportsRequest, opts ...grpc.CallOption) (*v1.ExportCustomerStrikeReportsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ExportCustomerStrikeReportsResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ExportCustomerStrikeReports_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) ExportSportEvents(ctx context.Context, in *ExportSportEventsRequest, opts ...grpc.CallOption) (*v1.ExportSportEventsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ExportSportEventsResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ExportSportEvents_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeGameServer is the server API for BackofficeGame service.
 // All implementations must embed UnimplementedBackofficeGameServer
 // for forward compatibility.
@@ -351,6 +375,8 @@ type BackofficeGameServer interface {
 	ListStakeVarianceBets(context.Context, *ListStakeVarianceBetsRequest) (*v1.ListStakeVarianceBetsResponse, error)
 	ExportStakeVarianceBets(context.Context, *ExportStakeVarianceBetsRequest) (*v1.ExportStakeVarianceBetsResponse, error)
 	ListCustomerStrikeReports(context.Context, *ListCustomerStrikeReportsRequest) (*v1.ListCustomerStrikeReportsResponse, error)
+	ExportCustomerStrikeReports(context.Context, *ExportCustomerStrikeReportsRequest) (*v1.ExportCustomerStrikeReportsResponse, error)
+	ExportSportEvents(context.Context, *ExportSportEventsRequest) (*v1.ExportSportEventsResponse, error)
 	mustEmbedUnimplementedBackofficeGameServer()
 }
 
@@ -429,6 +455,12 @@ func (UnimplementedBackofficeGameServer) ExportStakeVarianceBets(context.Context
 }
 func (UnimplementedBackofficeGameServer) ListCustomerStrikeReports(context.Context, *ListCustomerStrikeReportsRequest) (*v1.ListCustomerStrikeReportsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCustomerStrikeReports not implemented")
+}
+func (UnimplementedBackofficeGameServer) ExportCustomerStrikeReports(context.Context, *ExportCustomerStrikeReportsRequest) (*v1.ExportCustomerStrikeReportsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportCustomerStrikeReports not implemented")
+}
+func (UnimplementedBackofficeGameServer) ExportSportEvents(context.Context, *ExportSportEventsRequest) (*v1.ExportSportEventsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportSportEvents not implemented")
 }
 func (UnimplementedBackofficeGameServer) mustEmbedUnimplementedBackofficeGameServer() {}
 func (UnimplementedBackofficeGameServer) testEmbeddedByValue()                        {}
@@ -865,6 +897,42 @@ func _BackofficeGame_ListCustomerStrikeReports_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeGame_ExportCustomerStrikeReports_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportCustomerStrikeReportsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ExportCustomerStrikeReports(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ExportCustomerStrikeReports_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ExportCustomerStrikeReports(ctx, req.(*ExportCustomerStrikeReportsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_ExportSportEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportSportEventsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ExportSportEvents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ExportSportEvents_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ExportSportEvents(ctx, req.(*ExportSportEventsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeGame_ServiceDesc is the grpc.ServiceDesc for BackofficeGame service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -963,6 +1031,14 @@ var BackofficeGame_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListCustomerStrikeReports",
 			Handler:    _BackofficeGame_ListCustomerStrikeReports_Handler,
+		},
+		{
+			MethodName: "ExportCustomerStrikeReports",
+			Handler:    _BackofficeGame_ExportCustomerStrikeReports_Handler,
+		},
+		{
+			MethodName: "ExportSportEvents",
+			Handler:    _BackofficeGame_ExportSportEvents_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
