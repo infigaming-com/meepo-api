@@ -1335,6 +1335,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateSystemCurrencyResponse'
+    /v1/backoffice/system/report/export/list:
+        post:
+            tags:
+                - BackofficeSystem
+            operationId: BackofficeSystem_ListReportExport
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListReportExportRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/system.service.v1.ListReportExportResponse'
     /v1/backoffice/user/comments/add:
         post:
             tags:
@@ -5207,6 +5225,29 @@ components:
                     type: string
                 d120PaidAmt:
                     type: string
+        api.backoffice.service.v1.ListReportExportRequest:
+            type: object
+            properties:
+                taskIds:
+                    type: array
+                    items:
+                        type: string
+                type:
+                    type: string
+                status:
+                    type: string
+                start:
+                    type: string
+                    format: date-time
+                end:
+                    type: string
+                    format: date-time
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListRolesRequest:
             type: object
             properties:
@@ -8196,6 +8237,60 @@ components:
             description: |-
                 Response for withdraw callback
                  Confirms receipt of callback notification
+        system.service.v1.ListReportExportResponse:
+            type: object
+            properties:
+                tasks:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/system.service.v1.ListReportExportResponse_ReportExport'
+                statistic:
+                    $ref: '#/components/schemas/system.service.v1.ListReportExportResponse_Statistic'
+                totalCount:
+                    type: integer
+                    format: int32
+        system.service.v1.ListReportExportResponse_ReportExport:
+            type: object
+            properties:
+                taskId:
+                    type: string
+                userName:
+                    type: string
+                staskName:
+                    type: string
+                type:
+                    type: string
+                status:
+                    type: string
+                fileUrl:
+                    type: string
+                fileSize:
+                    type: string
+                fileFormat:
+                    type: string
+                createAt:
+                    type: string
+                    format: date-time
+                userId:
+                    type: string
+        system.service.v1.ListReportExportResponse_Statistic:
+            type: object
+            properties:
+                totalCount:
+                    type: integer
+                    format: int32
+                totalCompleted:
+                    type: integer
+                    format: int32
+                totalGenerating:
+                    type: integer
+                    format: int32
+                totalPending:
+                    type: integer
+                    format: int32
+                totalFailed:
+                    type: integer
+                    format: int32
 tags:
     - name: BackofficeAccount
     - name: BackofficeAudit

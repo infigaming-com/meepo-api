@@ -2,7 +2,9 @@ syntax = "proto3";
 
 package api.backoffice.service.v1;
 
+import "system/service/v1/system.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -11,23 +13,30 @@ option java_package = "api.backoffice.service.v1";
 service BackofficeSystem {
 	rpc AddSystemCurrency(AddSystemCurrencyRequest) returns (AddSystemCurrencyResponse) {
 		option (google.api.http) = {
-            post: "/v1/backoffice/system/currencies/add"
-            body: "*"
-        };
+      post: "/v1/backoffice/system/currencies/add"
+      body: "*"
+    };
+	};
+
+	rpc ListReportExport(ListReportExportRequest) returns (system.service.v1.ListReportExportResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/system/report/export/list"
+			body: "*"
+		};
 	};
 
 	rpc ListSystemCurrencies(ListSystemCurrenciesRequest) returns (ListSystemCurrenciesResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/system/currencies/list"
-            body: "*"
-        };
-    }
+    option (google.api.http) = {
+      post: "/v1/backoffice/system/currencies/list"
+      body: "*"
+    };
+  }
 	rpc UpdateSystemCurrency(UpdateSystemCurrencyRequest) returns (UpdateSystemCurrencyResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/system/currencies/update"
-            body: "*"
-        };
-    }
+    option (google.api.http) = {
+      post: "/v1/backoffice/system/currencies/update"
+      body: "*"
+    };
+  }
 }
 
 message SystemCurrency {
@@ -80,4 +89,14 @@ message UpdateSystemCurrencyRequest {
 
 message UpdateSystemCurrencyResponse {
 	SystemCurrency currency = 1;
+}
+
+message ListReportExportRequest {
+	repeated int64 task_ids = 1;
+	optional string type = 2;
+	optional string status = 3;
+	optional google.protobuf.Timestamp start = 4;
+	optional google.protobuf.Timestamp end = 5;
+	int32 page = 6;
+	int32 page_size = 7;
 }

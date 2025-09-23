@@ -7,9 +7,11 @@
 package v1
 
 import (
+	v1 "github.com/infigaming-com/meepo-api/system/service/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -530,11 +532,103 @@ func (x *UpdateSystemCurrencyResponse) GetCurrency() *SystemCurrency {
 	return nil
 }
 
+type ListReportExportRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TaskIds       []int64                `protobuf:"varint,1,rep,packed,name=task_ids,json=taskIds,proto3" json:"task_ids,omitempty"`
+	Type          *string                `protobuf:"bytes,2,opt,name=type,proto3,oneof" json:"type,omitempty"`
+	Status        *string                `protobuf:"bytes,3,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	Start         *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=start,proto3,oneof" json:"start,omitempty"`
+	End           *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=end,proto3,oneof" json:"end,omitempty"`
+	Page          int32                  `protobuf:"varint,6,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListReportExportRequest) Reset() {
+	*x = ListReportExportRequest{}
+	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListReportExportRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListReportExportRequest) ProtoMessage() {}
+
+func (x *ListReportExportRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListReportExportRequest.ProtoReflect.Descriptor instead.
+func (*ListReportExportRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ListReportExportRequest) GetTaskIds() []int64 {
+	if x != nil {
+		return x.TaskIds
+	}
+	return nil
+}
+
+func (x *ListReportExportRequest) GetType() string {
+	if x != nil && x.Type != nil {
+		return *x.Type
+	}
+	return ""
+}
+
+func (x *ListReportExportRequest) GetStatus() string {
+	if x != nil && x.Status != nil {
+		return *x.Status
+	}
+	return ""
+}
+
+func (x *ListReportExportRequest) GetStart() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Start
+	}
+	return nil
+}
+
+func (x *ListReportExportRequest) GetEnd() *timestamppb.Timestamp {
+	if x != nil {
+		return x.End
+	}
+	return nil
+}
+
+func (x *ListReportExportRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListReportExportRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
 var File_backoffice_service_v1_backoffice_system_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_system_proto_rawDesc = "" +
 	"\n" +
-	"-backoffice/service/v1/backoffice_system.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\"\xfd\x01\n" +
+	"-backoffice/service/v1/backoffice_system.proto\x12\x19api.backoffice.service.v1\x1a\x1esystem/service/v1/system.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xfd\x01\n" +
 	"\x0eSystemCurrency\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
 	"\aenabled\x18\x02 \x01(\bR\aenabled\x12\x16\n" +
@@ -588,9 +682,22 @@ const file_backoffice_service_v1_backoffice_system_proto_rawDesc = "" +
 	"\x0f_decimal_placesB\x1a\n" +
 	"\x18_currency_decimal_places\"e\n" +
 	"\x1cUpdateSystemCurrencyResponse\x12E\n" +
-	"\bcurrency\x18\x01 \x01(\v2).api.backoffice.service.v1.SystemCurrencyR\bcurrency2\xbe\x04\n" +
+	"\bcurrency\x18\x01 \x01(\v2).api.backoffice.service.v1.SystemCurrencyR\bcurrency\"\xab\x02\n" +
+	"\x17ListReportExportRequest\x12\x19\n" +
+	"\btask_ids\x18\x01 \x03(\x03R\ataskIds\x12\x17\n" +
+	"\x04type\x18\x02 \x01(\tH\x00R\x04type\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\x03 \x01(\tH\x01R\x06status\x88\x01\x01\x125\n" +
+	"\x05start\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\x05start\x88\x01\x01\x121\n" +
+	"\x03end\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\x03end\x88\x01\x01\x12\x12\n" +
+	"\x04page\x18\x06 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\a \x01(\x05R\bpageSizeB\a\n" +
+	"\x05_typeB\t\n" +
+	"\a_statusB\b\n" +
+	"\x06_startB\x06\n" +
+	"\x04_end2\xe9\x05\n" +
 	"\x10BackofficeSystem\x12\xaf\x01\n" +
-	"\x11AddSystemCurrency\x123.api.backoffice.service.v1.AddSystemCurrencyRequest\x1a4.api.backoffice.service.v1.AddSystemCurrencyResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/system/currencies/add\x12\xb9\x01\n" +
+	"\x11AddSystemCurrency\x123.api.backoffice.service.v1.AddSystemCurrencyRequest\x1a4.api.backoffice.service.v1.AddSystemCurrencyResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/system/currencies/add\x12\xa8\x01\n" +
+	"\x10ListReportExport\x122.api.backoffice.service.v1.ListReportExportRequest\x1a+.system.service.v1.ListReportExportResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/system/report/export/list\x12\xb9\x01\n" +
 	"\x14ListSystemCurrencies\x126.api.backoffice.service.v1.ListSystemCurrenciesRequest\x1a7.api.backoffice.service.v1.ListSystemCurrenciesResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/system/currencies/list\x12\xbb\x01\n" +
 	"\x14UpdateSystemCurrency\x126.api.backoffice.service.v1.UpdateSystemCurrencyRequest\x1a7.api.backoffice.service.v1.UpdateSystemCurrencyResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/system/currencies/updateB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
@@ -607,7 +714,7 @@ func file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_system_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_system_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_backoffice_service_v1_backoffice_system_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_backoffice_service_v1_backoffice_system_proto_goTypes = []any{
 	(*SystemCurrency)(nil),               // 0: api.backoffice.service.v1.SystemCurrency
 	(*AddSystemCurrencyRequest)(nil),     // 1: api.backoffice.service.v1.AddSystemCurrencyRequest
@@ -616,21 +723,28 @@ var file_backoffice_service_v1_backoffice_system_proto_goTypes = []any{
 	(*ListSystemCurrenciesResponse)(nil), // 4: api.backoffice.service.v1.ListSystemCurrenciesResponse
 	(*UpdateSystemCurrencyRequest)(nil),  // 5: api.backoffice.service.v1.UpdateSystemCurrencyRequest
 	(*UpdateSystemCurrencyResponse)(nil), // 6: api.backoffice.service.v1.UpdateSystemCurrencyResponse
+	(*ListReportExportRequest)(nil),      // 7: api.backoffice.service.v1.ListReportExportRequest
+	(*timestamppb.Timestamp)(nil),        // 8: google.protobuf.Timestamp
+	(*v1.ListReportExportResponse)(nil),  // 9: system.service.v1.ListReportExportResponse
 }
 var file_backoffice_service_v1_backoffice_system_proto_depIdxs = []int32{
 	0, // 0: api.backoffice.service.v1.ListSystemCurrenciesResponse.currencies:type_name -> api.backoffice.service.v1.SystemCurrency
 	0, // 1: api.backoffice.service.v1.UpdateSystemCurrencyResponse.currency:type_name -> api.backoffice.service.v1.SystemCurrency
-	1, // 2: api.backoffice.service.v1.BackofficeSystem.AddSystemCurrency:input_type -> api.backoffice.service.v1.AddSystemCurrencyRequest
-	3, // 3: api.backoffice.service.v1.BackofficeSystem.ListSystemCurrencies:input_type -> api.backoffice.service.v1.ListSystemCurrenciesRequest
-	5, // 4: api.backoffice.service.v1.BackofficeSystem.UpdateSystemCurrency:input_type -> api.backoffice.service.v1.UpdateSystemCurrencyRequest
-	2, // 5: api.backoffice.service.v1.BackofficeSystem.AddSystemCurrency:output_type -> api.backoffice.service.v1.AddSystemCurrencyResponse
-	4, // 6: api.backoffice.service.v1.BackofficeSystem.ListSystemCurrencies:output_type -> api.backoffice.service.v1.ListSystemCurrenciesResponse
-	6, // 7: api.backoffice.service.v1.BackofficeSystem.UpdateSystemCurrency:output_type -> api.backoffice.service.v1.UpdateSystemCurrencyResponse
-	5, // [5:8] is the sub-list for method output_type
-	2, // [2:5] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	8, // 2: api.backoffice.service.v1.ListReportExportRequest.start:type_name -> google.protobuf.Timestamp
+	8, // 3: api.backoffice.service.v1.ListReportExportRequest.end:type_name -> google.protobuf.Timestamp
+	1, // 4: api.backoffice.service.v1.BackofficeSystem.AddSystemCurrency:input_type -> api.backoffice.service.v1.AddSystemCurrencyRequest
+	7, // 5: api.backoffice.service.v1.BackofficeSystem.ListReportExport:input_type -> api.backoffice.service.v1.ListReportExportRequest
+	3, // 6: api.backoffice.service.v1.BackofficeSystem.ListSystemCurrencies:input_type -> api.backoffice.service.v1.ListSystemCurrenciesRequest
+	5, // 7: api.backoffice.service.v1.BackofficeSystem.UpdateSystemCurrency:input_type -> api.backoffice.service.v1.UpdateSystemCurrencyRequest
+	2, // 8: api.backoffice.service.v1.BackofficeSystem.AddSystemCurrency:output_type -> api.backoffice.service.v1.AddSystemCurrencyResponse
+	9, // 9: api.backoffice.service.v1.BackofficeSystem.ListReportExport:output_type -> system.service.v1.ListReportExportResponse
+	4, // 10: api.backoffice.service.v1.BackofficeSystem.ListSystemCurrencies:output_type -> api.backoffice.service.v1.ListSystemCurrenciesResponse
+	6, // 11: api.backoffice.service.v1.BackofficeSystem.UpdateSystemCurrency:output_type -> api.backoffice.service.v1.UpdateSystemCurrencyResponse
+	8, // [8:12] is the sub-list for method output_type
+	4, // [4:8] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_system_proto_init() }
@@ -640,13 +754,14 @@ func file_backoffice_service_v1_backoffice_system_proto_init() {
 	}
 	file_backoffice_service_v1_backoffice_system_proto_msgTypes[3].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_system_proto_msgTypes[5].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_system_proto_msgTypes[7].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_system_proto_rawDesc), len(file_backoffice_service_v1_backoffice_system_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
