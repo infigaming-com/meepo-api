@@ -241,6 +241,16 @@ service User {
 		};
 	}
 
+	rpc UserIdentityAudit(UserIdentityAuditRequest) returns (UserIdentityAuditResponse) { }
+
+	rpc UserIdentityList(UserIdentityListRequest) returns (UserIdentityListResponse) { }
+
+	rpc CloseAccount(CloseAccountRequest) returns (CloseAccountResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/account/update"
+			body: "*"
+		};
+	}
 }
 
 // UserInfo contains basic user information.
@@ -271,6 +281,20 @@ message UserInfo {
 	bool ban_withdraw = 12;
 	// role id
 	int64 role_id = 13;
+	// registered mobile
+	string registered_mobile = 14;
+	// registered email
+	string registered_email = 15;
+	// kyc_level
+	int32 kyc_level = 16;
+	// address
+	string address = 17;
+	// uesr identities
+	repeated UserIdentity user_identity = 18;
+	// user date of birth
+	google.protobuf.Timestamp dob = 19;
+	// user country
+	string country = 20;
 }
 
 // AuthType defines the type of authentication method.
@@ -561,8 +585,20 @@ message UpdateUserRequest {
 	optional bool ban_login = 4;
 	optional bool ban_game = 5;
 	optional bool ban_withdraw = 6;
-	optional bool enabled = 7;
-	optional int64 role_id = 8;
+	optional bool locked = 7;
+	optional bool enabled = 8;
+	optional int64 role_id = 9;
+	optional string firstname = 10;
+	optional string lastname = 11;
+	optional string email = 12;
+	optional string mobile = 13;
+	optional UserIdentityRequest user_identity = 14;
+	optional string address = 15;
+	optional google.protobuf.Timestamp dob = 16;
+	optional bool email_verified = 17;
+	optional bool phone_verified = 18;
+	// The initial operator context.
+	int64 operatorId = 19;
 }
 
 message UpdateUserResponse {
@@ -1083,4 +1119,61 @@ message GetResponsibleGamblingConfigResponse {
 	ResponsibleGamblingConfig responsible_gambling_config = 1;
 	ResponsibleGamblingStatus responsible_gambling_status = 2;
 	ResponsibleGamblingDeleteSchedule responsible_gambling_delete_schedule = 3;
+}
+
+message UserIdentityAuditRequest {
+	// user identity id
+	int64 id = 1;
+	// audit "approved" or "declined"
+	string audit= 2;
+	int64 operatorId = 3;
+}
+
+message UserIdentityAuditResponse {
+	
+}
+
+message UserIdentityListRequest {
+	optional int64 id = 1;
+	optional int64 user_id = 2;
+	optional string status = 3;
+	optional google.protobuf.Timestamp start_time = 4;
+	optional google.protobuf.Timestamp end_time = 5;
+	int32 page = 6;
+	int32 page_size = 7;
+}
+
+message UserIdentityListResponse {
+	repeated UserIdentity user_identity = 1;
+	int32 total_count = 2;
+	int32 approved_count = 3;
+	int32 declined_count = 4;
+	int32 pending_count = 5;
+}
+
+message UserIdentityRequest {
+	// ID Type "Passport", "South African ID"
+	string id_type = 1;
+	string id_number = 2;
+	string image = 3;
+}
+
+message UserIdentity {
+	int64 id = 1;
+	int64 user_id = 2;
+	string id_type = 3;
+	string id_number = 4;
+	string image = 5;
+	string status = 6;
+	google.protobuf.Timestamp created_at = 7;
+	google.protobuf.Timestamp audited_at = 8;
+	string operator = 9;
+	string reviewer = 10;
+	int32 review_time = 11;
+}
+
+message CloseAccountRequest {
+}
+
+message CloseAccountResponse {
 }
