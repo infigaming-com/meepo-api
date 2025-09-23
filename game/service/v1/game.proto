@@ -167,6 +167,9 @@ service Game {
 	rpc ListCustomerStrikeReports(ListCustomerStrikeReportsRequest) returns (ListCustomerStrikeReportsResponse) {
 	}
 
+	rpc ExportCustomerStrikeReports(ExportCustomerStrikeReportsRequest) returns (ExportCustomerStrikeReportsResponse) {
+	}
+
 }
 
 message CreateOperatorRequest {
@@ -1464,16 +1467,6 @@ message ExportSportEventsResponse {
 }
 
 message ExportCustomerStrikeReportsRequest {
-	optional string user_id = 1;
-	optional int32 page = 2;
-	optional int32 page_size = 3;
-}
-
-message ExportCustomerStrikeReportsResponse {
-	int64 task_id = 1;
-}
-
-message ExportCustomerRecordsRequest {
 	optional int64 user_id = 1;
 	string format = 2; // accepted values: csv, excel, pdf
 	string time_zone = 3; // e.g. UTC+0, UTC+8, etc.
@@ -1481,6 +1474,6 @@ message ExportCustomerRecordsRequest {
 	int64 initiator_user_id = 5;
 }
 
-message ExportCustomerRecordsResponse {
+message ExportCustomerStrikeReportsResponse {
 	int64 task_id = 1;
 }
