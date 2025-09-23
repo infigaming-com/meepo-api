@@ -35,386 +35,42 @@ var (
 	_ = sort.Sort
 )
 
-// Validate checks the field values on SystemCurrency with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *SystemCurrency) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on SystemCurrency with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in SystemCurrencyMultiError,
-// or nil if none found.
-func (m *SystemCurrency) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *SystemCurrency) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Currency
-
-	// no validation rules for Enabled
-
-	// no validation rules for Hidden
-
-	// no validation rules for Type
-
-	// no validation rules for Symbol
-
-	// no validation rules for Icon
-
-	// no validation rules for DecimalPlaces
-
-	// no validation rules for CurrencyDecimalPlaces
-
-	if len(errors) > 0 {
-		return SystemCurrencyMultiError(errors)
-	}
-
-	return nil
-}
-
-// SystemCurrencyMultiError is an error wrapping multiple validation errors
-// returned by SystemCurrency.ValidateAll() if the designated constraints
-// aren't met.
-type SystemCurrencyMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m SystemCurrencyMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m SystemCurrencyMultiError) AllErrors() []error { return m }
-
-// SystemCurrencyValidationError is the validation error returned by
-// SystemCurrency.Validate if the designated constraints aren't met.
-type SystemCurrencyValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e SystemCurrencyValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e SystemCurrencyValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e SystemCurrencyValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e SystemCurrencyValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e SystemCurrencyValidationError) ErrorName() string { return "SystemCurrencyValidationError" }
-
-// Error satisfies the builtin error interface
-func (e SystemCurrencyValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sSystemCurrency.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = SystemCurrencyValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = SystemCurrencyValidationError{}
-
-// Validate checks the field values on AddSystemCurrencyRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *AddSystemCurrencyRequest) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on AddSystemCurrencyRequest with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// AddSystemCurrencyRequestMultiError, or nil if none found.
-func (m *AddSystemCurrencyRequest) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *AddSystemCurrencyRequest) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Currency
-
-	// no validation rules for Enabled
-
-	// no validation rules for Hidden
-
-	// no validation rules for Type
-
-	// no validation rules for Symbol
-
-	// no validation rules for Icon
-
-	// no validation rules for DecimalPlaces
-
-	// no validation rules for CurrencyDecimalPlaces
-
-	if len(errors) > 0 {
-		return AddSystemCurrencyRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-// AddSystemCurrencyRequestMultiError is an error wrapping multiple validation
-// errors returned by AddSystemCurrencyRequest.ValidateAll() if the designated
-// constraints aren't met.
-type AddSystemCurrencyRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m AddSystemCurrencyRequestMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m AddSystemCurrencyRequestMultiError) AllErrors() []error { return m }
-
-// AddSystemCurrencyRequestValidationError is the validation error returned by
-// AddSystemCurrencyRequest.Validate if the designated constraints aren't met.
-type AddSystemCurrencyRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e AddSystemCurrencyRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e AddSystemCurrencyRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e AddSystemCurrencyRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e AddSystemCurrencyRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e AddSystemCurrencyRequestValidationError) ErrorName() string {
-	return "AddSystemCurrencyRequestValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e AddSystemCurrencyRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sAddSystemCurrencyRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = AddSystemCurrencyRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = AddSystemCurrencyRequestValidationError{}
-
-// Validate checks the field values on AddSystemCurrencyResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *AddSystemCurrencyResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on AddSystemCurrencyResponse with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// AddSystemCurrencyResponseMultiError, or nil if none found.
-func (m *AddSystemCurrencyResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *AddSystemCurrencyResponse) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if len(errors) > 0 {
-		return AddSystemCurrencyResponseMultiError(errors)
-	}
-
-	return nil
-}
-
-// AddSystemCurrencyResponseMultiError is an error wrapping multiple validation
-// errors returned by AddSystemCurrencyResponse.ValidateAll() if the
-// designated constraints aren't met.
-type AddSystemCurrencyResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m AddSystemCurrencyResponseMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m AddSystemCurrencyResponseMultiError) AllErrors() []error { return m }
-
-// AddSystemCurrencyResponseValidationError is the validation error returned by
-// AddSystemCurrencyResponse.Validate if the designated constraints aren't met.
-type AddSystemCurrencyResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e AddSystemCurrencyResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e AddSystemCurrencyResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e AddSystemCurrencyResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e AddSystemCurrencyResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e AddSystemCurrencyResponseValidationError) ErrorName() string {
-	return "AddSystemCurrencyResponseValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e AddSystemCurrencyResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sAddSystemCurrencyResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = AddSystemCurrencyResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = AddSystemCurrencyResponseValidationError{}
-
-// Validate checks the field values on ListSystemCurrenciesRequest with the
+// Validate checks the field values on ListIntegrityStatusRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ListSystemCurrenciesRequest) Validate() error {
+func (m *ListIntegrityStatusRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListSystemCurrenciesRequest with the
+// ValidateAll checks the field values on ListIntegrityStatusRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// ListSystemCurrenciesRequestMultiError, or nil if none found.
-func (m *ListSystemCurrenciesRequest) ValidateAll() error {
+// ListIntegrityStatusRequestMultiError, or nil if none found.
+func (m *ListIntegrityStatusRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListSystemCurrenciesRequest) validate(all bool) error {
+func (m *ListIntegrityStatusRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	if m.Enabled != nil {
-		// no validation rules for Enabled
-	}
-
-	if m.Hidden != nil {
-		// no validation rules for Hidden
-	}
-
 	if len(errors) > 0 {
-		return ListSystemCurrenciesRequestMultiError(errors)
+		return ListIntegrityStatusRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListSystemCurrenciesRequestMultiError is an error wrapping multiple
-// validation errors returned by ListSystemCurrenciesRequest.ValidateAll() if
+// ListIntegrityStatusRequestMultiError is an error wrapping multiple
+// validation errors returned by ListIntegrityStatusRequest.ValidateAll() if
 // the designated constraints aren't met.
-type ListSystemCurrenciesRequestMultiError []error
+type ListIntegrityStatusRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListSystemCurrenciesRequestMultiError) Error() string {
+func (m ListIntegrityStatusRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -423,12 +79,11 @@ func (m ListSystemCurrenciesRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListSystemCurrenciesRequestMultiError) AllErrors() []error { return m }
+func (m ListIntegrityStatusRequestMultiError) AllErrors() []error { return m }
 
-// ListSystemCurrenciesRequestValidationError is the validation error returned
-// by ListSystemCurrenciesRequest.Validate if the designated constraints
-// aren't met.
-type ListSystemCurrenciesRequestValidationError struct {
+// ListIntegrityStatusRequestValidationError is the validation error returned
+// by ListIntegrityStatusRequest.Validate if the designated constraints aren't met.
+type ListIntegrityStatusRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -436,24 +91,24 @@ type ListSystemCurrenciesRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListSystemCurrenciesRequestValidationError) Field() string { return e.field }
+func (e ListIntegrityStatusRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListSystemCurrenciesRequestValidationError) Reason() string { return e.reason }
+func (e ListIntegrityStatusRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListSystemCurrenciesRequestValidationError) Cause() error { return e.cause }
+func (e ListIntegrityStatusRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListSystemCurrenciesRequestValidationError) Key() bool { return e.key }
+func (e ListIntegrityStatusRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListSystemCurrenciesRequestValidationError) ErrorName() string {
-	return "ListSystemCurrenciesRequestValidationError"
+func (e ListIntegrityStatusRequestValidationError) ErrorName() string {
+	return "ListIntegrityStatusRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListSystemCurrenciesRequestValidationError) Error() string {
+func (e ListIntegrityStatusRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -465,14 +120,14 @@ func (e ListSystemCurrenciesRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListSystemCurrenciesRequest.%s: %s%s",
+		"invalid %sListIntegrityStatusRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListSystemCurrenciesRequestValidationError{}
+var _ error = ListIntegrityStatusRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -480,47 +135,51 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListSystemCurrenciesRequestValidationError{}
+} = ListIntegrityStatusRequestValidationError{}
 
-// Validate checks the field values on ListSystemCurrenciesResponse with the
-// rules defined in the proto definition for this message. If any rules are
+// Validate checks the field values on SetIntegrityConfigRequest with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ListSystemCurrenciesResponse) Validate() error {
+func (m *SetIntegrityConfigRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListSystemCurrenciesResponse with the
+// ValidateAll checks the field values on SetIntegrityConfigRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// ListSystemCurrenciesResponseMultiError, or nil if none found.
-func (m *ListSystemCurrenciesResponse) ValidateAll() error {
+// SetIntegrityConfigRequestMultiError, or nil if none found.
+func (m *SetIntegrityConfigRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListSystemCurrenciesResponse) validate(all bool) error {
+func (m *SetIntegrityConfigRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	for idx, item := range m.GetCurrencies() {
+	// no validation rules for LabelApp
+
+	// no validation rules for PodNamespace
+
+	for idx, item := range m.GetFileInfos() {
 		_, _ = idx, item
 
 		if all {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListSystemCurrenciesResponseValidationError{
-						field:  fmt.Sprintf("Currencies[%v]", idx),
+					errors = append(errors, SetIntegrityConfigRequestValidationError{
+						field:  fmt.Sprintf("FileInfos[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListSystemCurrenciesResponseValidationError{
-						field:  fmt.Sprintf("Currencies[%v]", idx),
+					errors = append(errors, SetIntegrityConfigRequestValidationError{
+						field:  fmt.Sprintf("FileInfos[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -528,8 +187,8 @@ func (m *ListSystemCurrenciesResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListSystemCurrenciesResponseValidationError{
-					field:  fmt.Sprintf("Currencies[%v]", idx),
+				return SetIntegrityConfigRequestValidationError{
+					field:  fmt.Sprintf("FileInfos[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -538,26 +197,20 @@ func (m *ListSystemCurrenciesResponse) validate(all bool) error {
 
 	}
 
-	// no validation rules for Total
-
-	// no validation rules for TotalEnabled
-
-	// no validation rules for TotalHidden
-
 	if len(errors) > 0 {
-		return ListSystemCurrenciesResponseMultiError(errors)
+		return SetIntegrityConfigRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListSystemCurrenciesResponseMultiError is an error wrapping multiple
-// validation errors returned by ListSystemCurrenciesResponse.ValidateAll() if
-// the designated constraints aren't met.
-type ListSystemCurrenciesResponseMultiError []error
+// SetIntegrityConfigRequestMultiError is an error wrapping multiple validation
+// errors returned by SetIntegrityConfigRequest.ValidateAll() if the
+// designated constraints aren't met.
+type SetIntegrityConfigRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListSystemCurrenciesResponseMultiError) Error() string {
+func (m SetIntegrityConfigRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -566,12 +219,11 @@ func (m ListSystemCurrenciesResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListSystemCurrenciesResponseMultiError) AllErrors() []error { return m }
+func (m SetIntegrityConfigRequestMultiError) AllErrors() []error { return m }
 
-// ListSystemCurrenciesResponseValidationError is the validation error returned
-// by ListSystemCurrenciesResponse.Validate if the designated constraints
-// aren't met.
-type ListSystemCurrenciesResponseValidationError struct {
+// SetIntegrityConfigRequestValidationError is the validation error returned by
+// SetIntegrityConfigRequest.Validate if the designated constraints aren't met.
+type SetIntegrityConfigRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -579,24 +231,24 @@ type ListSystemCurrenciesResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListSystemCurrenciesResponseValidationError) Field() string { return e.field }
+func (e SetIntegrityConfigRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListSystemCurrenciesResponseValidationError) Reason() string { return e.reason }
+func (e SetIntegrityConfigRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListSystemCurrenciesResponseValidationError) Cause() error { return e.cause }
+func (e SetIntegrityConfigRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListSystemCurrenciesResponseValidationError) Key() bool { return e.key }
+func (e SetIntegrityConfigRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListSystemCurrenciesResponseValidationError) ErrorName() string {
-	return "ListSystemCurrenciesResponseValidationError"
+func (e SetIntegrityConfigRequestValidationError) ErrorName() string {
+	return "SetIntegrityConfigRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListSystemCurrenciesResponseValidationError) Error() string {
+func (e SetIntegrityConfigRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -608,14 +260,14 @@ func (e ListSystemCurrenciesResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListSystemCurrenciesResponse.%s: %s%s",
+		"invalid %sSetIntegrityConfigRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListSystemCurrenciesResponseValidationError{}
+var _ error = SetIntegrityConfigRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -623,206 +275,134 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListSystemCurrenciesResponseValidationError{}
+} = SetIntegrityConfigRequestValidationError{}
 
-// Validate checks the field values on UpdateSystemCurrencyRequest with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *UpdateSystemCurrencyRequest) Validate() error {
+// Validate checks the field values on ListSevRequest with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ListSevRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on UpdateSystemCurrencyRequest with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// UpdateSystemCurrencyRequestMultiError, or nil if none found.
-func (m *UpdateSystemCurrencyRequest) ValidateAll() error {
+// ValidateAll checks the field values on ListSevRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in ListSevRequestMultiError,
+// or nil if none found.
+func (m *ListSevRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *UpdateSystemCurrencyRequest) validate(all bool) error {
+func (m *ListSevRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	// no validation rules for Currency
-
-	if m.Enabled != nil {
-		// no validation rules for Enabled
+	if m.Severity != nil {
+		// no validation rules for Severity
 	}
 
-	if m.Hidden != nil {
-		// no validation rules for Hidden
+	if m.Category != nil {
+		// no validation rules for Category
 	}
 
-	if m.Type != nil {
-		// no validation rules for Type
+	if m.Component != nil {
+		// no validation rules for Component
 	}
 
-	if m.Symbol != nil {
-		// no validation rules for Symbol
+	if m.UserId != nil {
+		// no validation rules for UserId
 	}
 
-	if m.Icon != nil {
-		// no validation rules for Icon
-	}
+	if m.StartTime != nil {
 
-	if m.DecimalPlaces != nil {
-		// no validation rules for DecimalPlaces
-	}
-
-	if m.CurrencyDecimalPlaces != nil {
-		// no validation rules for CurrencyDecimalPlaces
-	}
-
-	if len(errors) > 0 {
-		return UpdateSystemCurrencyRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-// UpdateSystemCurrencyRequestMultiError is an error wrapping multiple
-// validation errors returned by UpdateSystemCurrencyRequest.ValidateAll() if
-// the designated constraints aren't met.
-type UpdateSystemCurrencyRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m UpdateSystemCurrencyRequestMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m UpdateSystemCurrencyRequestMultiError) AllErrors() []error { return m }
-
-// UpdateSystemCurrencyRequestValidationError is the validation error returned
-// by UpdateSystemCurrencyRequest.Validate if the designated constraints
-// aren't met.
-type UpdateSystemCurrencyRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e UpdateSystemCurrencyRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e UpdateSystemCurrencyRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e UpdateSystemCurrencyRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e UpdateSystemCurrencyRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e UpdateSystemCurrencyRequestValidationError) ErrorName() string {
-	return "UpdateSystemCurrencyRequestValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e UpdateSystemCurrencyRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sUpdateSystemCurrencyRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = UpdateSystemCurrencyRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = UpdateSystemCurrencyRequestValidationError{}
-
-// Validate checks the field values on UpdateSystemCurrencyResponse with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *UpdateSystemCurrencyResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on UpdateSystemCurrencyResponse with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// UpdateSystemCurrencyResponseMultiError, or nil if none found.
-func (m *UpdateSystemCurrencyResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *UpdateSystemCurrencyResponse) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if all {
-		switch v := interface{}(m.GetCurrency()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UpdateSystemCurrencyResponseValidationError{
-					field:  "Currency",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
+		if all {
+			switch v := interface{}(m.GetStartTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListSevRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListSevRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
 			}
-		case interface{ Validate() error }:
+		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				errors = append(errors, UpdateSystemCurrencyResponseValidationError{
-					field:  "Currency",
+				return ListSevRequestValidationError{
+					field:  "StartTime",
 					reason: "embedded message failed validation",
 					cause:  err,
-				})
+				}
 			}
 		}
-	} else if v, ok := interface{}(m.GetCurrency()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UpdateSystemCurrencyResponseValidationError{
-				field:  "Currency",
-				reason: "embedded message failed validation",
-				cause:  err,
+
+	}
+
+	if m.EndTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetEndTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListSevRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListSevRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListSevRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
 			}
 		}
+
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
 	}
 
 	if len(errors) > 0 {
-		return UpdateSystemCurrencyResponseMultiError(errors)
+		return ListSevRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// UpdateSystemCurrencyResponseMultiError is an error wrapping multiple
-// validation errors returned by UpdateSystemCurrencyResponse.ValidateAll() if
-// the designated constraints aren't met.
-type UpdateSystemCurrencyResponseMultiError []error
+// ListSevRequestMultiError is an error wrapping multiple validation errors
+// returned by ListSevRequest.ValidateAll() if the designated constraints
+// aren't met.
+type ListSevRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m UpdateSystemCurrencyResponseMultiError) Error() string {
+func (m ListSevRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -831,12 +411,11 @@ func (m UpdateSystemCurrencyResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m UpdateSystemCurrencyResponseMultiError) AllErrors() []error { return m }
+func (m ListSevRequestMultiError) AllErrors() []error { return m }
 
-// UpdateSystemCurrencyResponseValidationError is the validation error returned
-// by UpdateSystemCurrencyResponse.Validate if the designated constraints
-// aren't met.
-type UpdateSystemCurrencyResponseValidationError struct {
+// ListSevRequestValidationError is the validation error returned by
+// ListSevRequest.Validate if the designated constraints aren't met.
+type ListSevRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -844,24 +423,22 @@ type UpdateSystemCurrencyResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e UpdateSystemCurrencyResponseValidationError) Field() string { return e.field }
+func (e ListSevRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e UpdateSystemCurrencyResponseValidationError) Reason() string { return e.reason }
+func (e ListSevRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e UpdateSystemCurrencyResponseValidationError) Cause() error { return e.cause }
+func (e ListSevRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e UpdateSystemCurrencyResponseValidationError) Key() bool { return e.key }
+func (e ListSevRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e UpdateSystemCurrencyResponseValidationError) ErrorName() string {
-	return "UpdateSystemCurrencyResponseValidationError"
-}
+func (e ListSevRequestValidationError) ErrorName() string { return "ListSevRequestValidationError" }
 
 // Error satisfies the builtin error interface
-func (e UpdateSystemCurrencyResponseValidationError) Error() string {
+func (e ListSevRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -873,14 +450,14 @@ func (e UpdateSystemCurrencyResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sUpdateSystemCurrencyResponse.%s: %s%s",
+		"invalid %sListSevRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = UpdateSystemCurrencyResponseValidationError{}
+var _ error = ListSevRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -888,7 +465,193 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = UpdateSystemCurrencyResponseValidationError{}
+} = ListSevRequestValidationError{}
+
+// Validate checks the field values on ExportSevRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ExportSevRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ExportSevRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ExportSevRequestMultiError, or nil if none found.
+func (m *ExportSevRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ExportSevRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Format
+
+	// no validation rules for TimeZone
+
+	if m.Severity != nil {
+		// no validation rules for Severity
+	}
+
+	if m.Category != nil {
+		// no validation rules for Category
+	}
+
+	if m.Component != nil {
+		// no validation rules for Component
+	}
+
+	if m.UserId != nil {
+		// no validation rules for UserId
+	}
+
+	if m.StartTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetStartTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ExportSevRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ExportSevRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ExportSevRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.EndTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetEndTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ExportSevRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ExportSevRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ExportSevRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ExportSevRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ExportSevRequestMultiError is an error wrapping multiple validation errors
+// returned by ExportSevRequest.ValidateAll() if the designated constraints
+// aren't met.
+type ExportSevRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ExportSevRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ExportSevRequestMultiError) AllErrors() []error { return m }
+
+// ExportSevRequestValidationError is the validation error returned by
+// ExportSevRequest.Validate if the designated constraints aren't met.
+type ExportSevRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ExportSevRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ExportSevRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ExportSevRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ExportSevRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ExportSevRequestValidationError) ErrorName() string { return "ExportSevRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ExportSevRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sExportSevRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ExportSevRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ExportSevRequestValidationError{}
 
 // Validate checks the field values on ListReportExportRequest with the rules
 // defined in the proto definition for this message. If any rules are

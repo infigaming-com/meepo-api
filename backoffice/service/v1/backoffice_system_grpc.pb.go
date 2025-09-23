@@ -20,20 +20,22 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeSystem_AddSystemCurrency_FullMethodName    = "/api.backoffice.service.v1.BackofficeSystem/AddSystemCurrency"
-	BackofficeSystem_ListReportExport_FullMethodName     = "/api.backoffice.service.v1.BackofficeSystem/ListReportExport"
-	BackofficeSystem_ListSystemCurrencies_FullMethodName = "/api.backoffice.service.v1.BackofficeSystem/ListSystemCurrencies"
-	BackofficeSystem_UpdateSystemCurrency_FullMethodName = "/api.backoffice.service.v1.BackofficeSystem/UpdateSystemCurrency"
+	BackofficeSystem_ListIntegrityStatus_FullMethodName = "/api.backoffice.service.v1.BackofficeSystem/ListIntegrityStatus"
+	BackofficeSystem_SetIntegrityConfig_FullMethodName  = "/api.backoffice.service.v1.BackofficeSystem/SetIntegrityConfig"
+	BackofficeSystem_ListSev_FullMethodName             = "/api.backoffice.service.v1.BackofficeSystem/ListSev"
+	BackofficeSystem_ExportSev_FullMethodName           = "/api.backoffice.service.v1.BackofficeSystem/ExportSev"
+	BackofficeSystem_ListReportExport_FullMethodName    = "/api.backoffice.service.v1.BackofficeSystem/ListReportExport"
 )
 
 // BackofficeSystemClient is the client API for BackofficeSystem service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BackofficeSystemClient interface {
-	AddSystemCurrency(ctx context.Context, in *AddSystemCurrencyRequest, opts ...grpc.CallOption) (*AddSystemCurrencyResponse, error)
+	ListIntegrityStatus(ctx context.Context, in *ListIntegrityStatusRequest, opts ...grpc.CallOption) (*v1.ListIntegrityStatusResponse, error)
+	SetIntegrityConfig(ctx context.Context, in *SetIntegrityConfigRequest, opts ...grpc.CallOption) (*v1.SetIntegrityConfigResponse, error)
+	ListSev(ctx context.Context, in *ListSevRequest, opts ...grpc.CallOption) (*v1.ListSevResponse, error)
+	ExportSev(ctx context.Context, in *ExportSevRequest, opts ...grpc.CallOption) (*v1.ExportSevResponse, error)
 	ListReportExport(ctx context.Context, in *ListReportExportRequest, opts ...grpc.CallOption) (*v1.ListReportExportResponse, error)
-	ListSystemCurrencies(ctx context.Context, in *ListSystemCurrenciesRequest, opts ...grpc.CallOption) (*ListSystemCurrenciesResponse, error)
-	UpdateSystemCurrency(ctx context.Context, in *UpdateSystemCurrencyRequest, opts ...grpc.CallOption) (*UpdateSystemCurrencyResponse, error)
 }
 
 type backofficeSystemClient struct {
@@ -44,10 +46,40 @@ func NewBackofficeSystemClient(cc grpc.ClientConnInterface) BackofficeSystemClie
 	return &backofficeSystemClient{cc}
 }
 
-func (c *backofficeSystemClient) AddSystemCurrency(ctx context.Context, in *AddSystemCurrencyRequest, opts ...grpc.CallOption) (*AddSystemCurrencyResponse, error) {
+func (c *backofficeSystemClient) ListIntegrityStatus(ctx context.Context, in *ListIntegrityStatusRequest, opts ...grpc.CallOption) (*v1.ListIntegrityStatusResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AddSystemCurrencyResponse)
-	err := c.cc.Invoke(ctx, BackofficeSystem_AddSystemCurrency_FullMethodName, in, out, cOpts...)
+	out := new(v1.ListIntegrityStatusResponse)
+	err := c.cc.Invoke(ctx, BackofficeSystem_ListIntegrityStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeSystemClient) SetIntegrityConfig(ctx context.Context, in *SetIntegrityConfigRequest, opts ...grpc.CallOption) (*v1.SetIntegrityConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.SetIntegrityConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeSystem_SetIntegrityConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeSystemClient) ListSev(ctx context.Context, in *ListSevRequest, opts ...grpc.CallOption) (*v1.ListSevResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListSevResponse)
+	err := c.cc.Invoke(ctx, BackofficeSystem_ListSev_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeSystemClient) ExportSev(ctx context.Context, in *ExportSevRequest, opts ...grpc.CallOption) (*v1.ExportSevResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ExportSevResponse)
+	err := c.cc.Invoke(ctx, BackofficeSystem_ExportSev_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -64,34 +96,15 @@ func (c *backofficeSystemClient) ListReportExport(ctx context.Context, in *ListR
 	return out, nil
 }
 
-func (c *backofficeSystemClient) ListSystemCurrencies(ctx context.Context, in *ListSystemCurrenciesRequest, opts ...grpc.CallOption) (*ListSystemCurrenciesResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListSystemCurrenciesResponse)
-	err := c.cc.Invoke(ctx, BackofficeSystem_ListSystemCurrencies_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *backofficeSystemClient) UpdateSystemCurrency(ctx context.Context, in *UpdateSystemCurrencyRequest, opts ...grpc.CallOption) (*UpdateSystemCurrencyResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateSystemCurrencyResponse)
-	err := c.cc.Invoke(ctx, BackofficeSystem_UpdateSystemCurrency_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // BackofficeSystemServer is the server API for BackofficeSystem service.
 // All implementations must embed UnimplementedBackofficeSystemServer
 // for forward compatibility.
 type BackofficeSystemServer interface {
-	AddSystemCurrency(context.Context, *AddSystemCurrencyRequest) (*AddSystemCurrencyResponse, error)
+	ListIntegrityStatus(context.Context, *ListIntegrityStatusRequest) (*v1.ListIntegrityStatusResponse, error)
+	SetIntegrityConfig(context.Context, *SetIntegrityConfigRequest) (*v1.SetIntegrityConfigResponse, error)
+	ListSev(context.Context, *ListSevRequest) (*v1.ListSevResponse, error)
+	ExportSev(context.Context, *ExportSevRequest) (*v1.ExportSevResponse, error)
 	ListReportExport(context.Context, *ListReportExportRequest) (*v1.ListReportExportResponse, error)
-	ListSystemCurrencies(context.Context, *ListSystemCurrenciesRequest) (*ListSystemCurrenciesResponse, error)
-	UpdateSystemCurrency(context.Context, *UpdateSystemCurrencyRequest) (*UpdateSystemCurrencyResponse, error)
 	mustEmbedUnimplementedBackofficeSystemServer()
 }
 
@@ -102,17 +115,20 @@ type BackofficeSystemServer interface {
 // pointer dereference when methods are called.
 type UnimplementedBackofficeSystemServer struct{}
 
-func (UnimplementedBackofficeSystemServer) AddSystemCurrency(context.Context, *AddSystemCurrencyRequest) (*AddSystemCurrencyResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddSystemCurrency not implemented")
+func (UnimplementedBackofficeSystemServer) ListIntegrityStatus(context.Context, *ListIntegrityStatusRequest) (*v1.ListIntegrityStatusResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListIntegrityStatus not implemented")
+}
+func (UnimplementedBackofficeSystemServer) SetIntegrityConfig(context.Context, *SetIntegrityConfigRequest) (*v1.SetIntegrityConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetIntegrityConfig not implemented")
+}
+func (UnimplementedBackofficeSystemServer) ListSev(context.Context, *ListSevRequest) (*v1.ListSevResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListSev not implemented")
+}
+func (UnimplementedBackofficeSystemServer) ExportSev(context.Context, *ExportSevRequest) (*v1.ExportSevResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportSev not implemented")
 }
 func (UnimplementedBackofficeSystemServer) ListReportExport(context.Context, *ListReportExportRequest) (*v1.ListReportExportResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListReportExport not implemented")
-}
-func (UnimplementedBackofficeSystemServer) ListSystemCurrencies(context.Context, *ListSystemCurrenciesRequest) (*ListSystemCurrenciesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListSystemCurrencies not implemented")
-}
-func (UnimplementedBackofficeSystemServer) UpdateSystemCurrency(context.Context, *UpdateSystemCurrencyRequest) (*UpdateSystemCurrencyResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateSystemCurrency not implemented")
 }
 func (UnimplementedBackofficeSystemServer) mustEmbedUnimplementedBackofficeSystemServer() {}
 func (UnimplementedBackofficeSystemServer) testEmbeddedByValue()                          {}
@@ -135,20 +151,74 @@ func RegisterBackofficeSystemServer(s grpc.ServiceRegistrar, srv BackofficeSyste
 	s.RegisterService(&BackofficeSystem_ServiceDesc, srv)
 }
 
-func _BackofficeSystem_AddSystemCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddSystemCurrencyRequest)
+func _BackofficeSystem_ListIntegrityStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListIntegrityStatusRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeSystemServer).AddSystemCurrency(ctx, in)
+		return srv.(BackofficeSystemServer).ListIntegrityStatus(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeSystem_AddSystemCurrency_FullMethodName,
+		FullMethod: BackofficeSystem_ListIntegrityStatus_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeSystemServer).AddSystemCurrency(ctx, req.(*AddSystemCurrencyRequest))
+		return srv.(BackofficeSystemServer).ListIntegrityStatus(ctx, req.(*ListIntegrityStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeSystem_SetIntegrityConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetIntegrityConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeSystemServer).SetIntegrityConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeSystem_SetIntegrityConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeSystemServer).SetIntegrityConfig(ctx, req.(*SetIntegrityConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeSystem_ListSev_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListSevRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeSystemServer).ListSev(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeSystem_ListSev_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeSystemServer).ListSev(ctx, req.(*ListSevRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeSystem_ExportSev_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportSevRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeSystemServer).ExportSev(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeSystem_ExportSev_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeSystemServer).ExportSev(ctx, req.(*ExportSevRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -171,42 +241,6 @@ func _BackofficeSystem_ListReportExport_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeSystem_ListSystemCurrencies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListSystemCurrenciesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeSystemServer).ListSystemCurrencies(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeSystem_ListSystemCurrencies_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeSystemServer).ListSystemCurrencies(ctx, req.(*ListSystemCurrenciesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BackofficeSystem_UpdateSystemCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateSystemCurrencyRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeSystemServer).UpdateSystemCurrency(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeSystem_UpdateSystemCurrency_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeSystemServer).UpdateSystemCurrency(ctx, req.(*UpdateSystemCurrencyRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // BackofficeSystem_ServiceDesc is the grpc.ServiceDesc for BackofficeSystem service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -215,20 +249,24 @@ var BackofficeSystem_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*BackofficeSystemServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "AddSystemCurrency",
-			Handler:    _BackofficeSystem_AddSystemCurrency_Handler,
+			MethodName: "ListIntegrityStatus",
+			Handler:    _BackofficeSystem_ListIntegrityStatus_Handler,
+		},
+		{
+			MethodName: "SetIntegrityConfig",
+			Handler:    _BackofficeSystem_SetIntegrityConfig_Handler,
+		},
+		{
+			MethodName: "ListSev",
+			Handler:    _BackofficeSystem_ListSev_Handler,
+		},
+		{
+			MethodName: "ExportSev",
+			Handler:    _BackofficeSystem_ExportSev_Handler,
 		},
 		{
 			MethodName: "ListReportExport",
 			Handler:    _BackofficeSystem_ListReportExport_Handler,
-		},
-		{
-			MethodName: "ListSystemCurrencies",
-			Handler:    _BackofficeSystem_ListSystemCurrencies_Handler,
-		},
-		{
-			MethodName: "UpdateSystemCurrency",
-			Handler:    _BackofficeSystem_UpdateSystemCurrency_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
