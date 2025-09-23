@@ -2573,6 +2573,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.GetCurrenciesResponse'
+    /v1/wallet/exchange-rates/base-currency:
+        post:
+            tags:
+                - Wallet
+            operationId: Wallet_GetExchangeRatesWithBaseCurrency
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyResponse'
     /v1/wallet/responsible-gambling/config/add:
         post:
             tags:
@@ -8047,6 +8065,23 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.Currency'
+        api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyRequest:
+            type: object
+            properties:
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                baseCurrency:
+                    type: string
+        api.wallet.service.v1.GetExchangeRatesWithBaseCurrencyResponse:
+            type: object
+            properties:
+                exchangeRates:
+                    type: object
+                    additionalProperties:
+                        type: string
+                    description: map key is currency code, value is currency exchange rate
         api.wallet.service.v1.GetUserBalancesRequest:
             type: object
             properties:
