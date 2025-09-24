@@ -20399,6 +20399,8 @@ func (m *ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) validat
 
 	// no validation rules for KycLevel
 
+	// no validation rules for ExternalTransactionId
+
 	if len(errors) > 0 {
 		return ListFICAThresholdTransactionsResponse_FICAThresholdTransactionMultiError(errors)
 	}
