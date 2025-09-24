@@ -1410,6 +1410,7 @@ message ListFICAThresholdTransactionsResponse {
 		string email = 12;
 		string address = 13;
 		int32 kyc_level = 14;
+		int64 external_transaction_id = 15;
 	}
 	repeated FICAThresholdTransaction threshold_transactions = 1;
 	int32 total = 2;

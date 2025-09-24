@@ -15033,6 +15033,8 @@ components:
                 kycLevel:
                     type: integer
                     format: int32
+                externalTransactionId:
+                    type: string
         api.wallet.service.v1.ListResponsibleGamblingConfigsRequest:
             type: object
             properties:

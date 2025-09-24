@@ -11022,23 +11022,24 @@ func (x *FICAThresholdConfig_Config) GetThresholdAmount() string {
 }
 
 type ListFICAThresholdTransactionsResponse_FICAThresholdTransaction struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	Type            string                 `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
-	TransactionTime *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=transaction_time,json=transactionTime,proto3" json:"transaction_time,omitempty"` // created_at
-	TransactionId   int64                  `protobuf:"varint,3,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	Currency        string                 `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
-	Amount          string                 `protobuf:"bytes,5,opt,name=amount,proto3" json:"amount,omitempty"`
-	ExcessAmount    string                 `protobuf:"bytes,6,opt,name=excess_amount,json=excessAmount,proto3" json:"excess_amount,omitempty"`
-	UserId          int64                  `protobuf:"varint,7,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	FullName        string                 `protobuf:"bytes,8,opt,name=full_name,json=fullName,proto3" json:"full_name,omitempty"`
-	IdType          string                 `protobuf:"bytes,9,opt,name=id_type,json=idType,proto3" json:"id_type,omitempty"`
-	IdNumber        string                 `protobuf:"bytes,10,opt,name=id_number,json=idNumber,proto3" json:"id_number,omitempty"`
-	Mobile          string                 `protobuf:"bytes,11,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	Email           string                 `protobuf:"bytes,12,opt,name=email,proto3" json:"email,omitempty"`
-	Address         string                 `protobuf:"bytes,13,opt,name=address,proto3" json:"address,omitempty"`
-	KycLevel        int32                  `protobuf:"varint,14,opt,name=kyc_level,json=kycLevel,proto3" json:"kyc_level,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	Type                  string                 `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
+	TransactionTime       *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=transaction_time,json=transactionTime,proto3" json:"transaction_time,omitempty"` // created_at
+	TransactionId         int64                  `protobuf:"varint,3,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	Currency              string                 `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
+	Amount                string                 `protobuf:"bytes,5,opt,name=amount,proto3" json:"amount,omitempty"`
+	ExcessAmount          string                 `protobuf:"bytes,6,opt,name=excess_amount,json=excessAmount,proto3" json:"excess_amount,omitempty"`
+	UserId                int64                  `protobuf:"varint,7,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	FullName              string                 `protobuf:"bytes,8,opt,name=full_name,json=fullName,proto3" json:"full_name,omitempty"`
+	IdType                string                 `protobuf:"bytes,9,opt,name=id_type,json=idType,proto3" json:"id_type,omitempty"`
+	IdNumber              string                 `protobuf:"bytes,10,opt,name=id_number,json=idNumber,proto3" json:"id_number,omitempty"`
+	Mobile                string                 `protobuf:"bytes,11,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	Email                 string                 `protobuf:"bytes,12,opt,name=email,proto3" json:"email,omitempty"`
+	Address               string                 `protobuf:"bytes,13,opt,name=address,proto3" json:"address,omitempty"`
+	KycLevel              int32                  `protobuf:"varint,14,opt,name=kyc_level,json=kycLevel,proto3" json:"kyc_level,omitempty"`
+	ExternalTransactionId int64                  `protobuf:"varint,15,opt,name=external_transaction_id,json=externalTransactionId,proto3" json:"external_transaction_id,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) Reset() {
@@ -11165,6 +11166,13 @@ func (x *ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) GetAddr
 func (x *ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) GetKycLevel() int32 {
 	if x != nil {
 		return x.KycLevel
+	}
+	return 0
+}
+
+func (x *ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) GetExternalTransactionId() int64 {
+	if x != nil {
+		return x.ExternalTransactionId
 	}
 	return 0
 }
@@ -12214,12 +12222,12 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"_kyc_levelB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xc6\x05\n" +
+	"_page_size\"\xfe\x05\n" +
 	"%ListFICAThresholdTransactionsResponse\x12\x8c\x01\n" +
 	"\x16threshold_transactions\x18\x01 \x03(\v2U.api.wallet.service.v1.ListFICAThresholdTransactionsResponse.FICAThresholdTransactionR\x15thresholdTransactions\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xc6\x03\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xfe\x03\n" +
 	"\x18FICAThresholdTransaction\x12\x12\n" +
 	"\x04type\x18\x01 \x01(\tR\x04type\x12E\n" +
 	"\x10transaction_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x0ftransactionTime\x12%\n" +
@@ -12235,7 +12243,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x06mobile\x18\v \x01(\tR\x06mobile\x12\x14\n" +
 	"\x05email\x18\f \x01(\tR\x05email\x12\x18\n" +
 	"\aaddress\x18\r \x01(\tR\aaddress\x12\x1b\n" +
-	"\tkyc_level\x18\x0e \x01(\x05R\bkycLevel\"\x8c\x04\n" +
+	"\tkyc_level\x18\x0e \x01(\x05R\bkycLevel\x126\n" +
+	"\x17external_transaction_id\x18\x0f \x01(\x03R\x15externalTransactionId\"\x8c\x04\n" +
 	"&ExportFICAThresholdTransactionsRequest\x12>\n" +
 	"\n" +
 	"start_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\tstartTime\x88\x01\x01\x12:\n" +
