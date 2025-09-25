@@ -854,11 +854,6 @@ message GetTaxReportConfigResponse {
 	// config is a json string
 	// example:
 	// {
-	//	"report_type": {
-	//		"horse_racing_tax_return": true,
-	//		"sports_tax_return": true,
-	//		"other_contingencies_tax_return": false
-	//	}
 	//	"timezone": "UTC+0",
 	//	"report_generation_time": {
 	//		"monthly": "2nd of each month",
@@ -869,8 +864,7 @@ message GetTaxReportConfigResponse {
 	//	"user_registration_countries": ["US", "ZA", "TR", "VN"],
 	//	"user_currencies": ["USD", "EUR", "INR", "ZAR", "USDT"],
 	//  "vat_payable": 6.5,
-	//  "tax_for_sportsbook": 6.5,
-	//  "tax_for_other_contingencies": 6.5,
+	//  "tax_for_sportsbook_and_other_contingencies": 6.5,
 	//  "tax_for_horse_racing": 6.5,
 	//	}
 	string config = 1;
@@ -882,11 +876,6 @@ message UpdateTaxReportConfigRequest {
 	// config is a json string
 	// example:
 	// {
-	//	"report_type": {
-	//		"horse_racing_tax_return": true,
-	//		"sports_tax_return": true,
-	//		"other_contingencies_tax_return": false
-	//	}
 	//	"timezone": "UTC+0",
 	//	"report_generation_time": {
 	//		"monthly": "2nd of each month",
@@ -897,8 +886,7 @@ message UpdateTaxReportConfigRequest {
 	//	"user_registration_countries": ["US", "ZA", "TR", "VN"],
 	//	"user_currencies": ["USD", "EUR", "INR", "ZAR", "USDT"],
 	//  "vat_payable": 6.5,
-	//  "tax_for_sportsbook": 6.5,
-	//  "tax_for_other_contingencies": 6.5,
+	//  "tax_for_sportsbook_and_other_contingencies": 6.5,
 	//  "tax_for_horse_racing": 6.5,
 	//	}
 	string config = 2;
@@ -912,14 +900,14 @@ message ListTaxReportsRequest {
 	optional int32 page_size = 2;
 	string tax_period = 3;
 	// license_provider: south_afirca
-	string license_provider = 4;
+	string report_category = 4;
 	optional string period_type = 5;
 }
 
 message ListTaxReportsResponse {
 	message TaxReport {
 		// Basic information
-		string licensed_provider = 1; // e.g., "south_afirca"
+		string report_category = 1; // e.g., "horse_racing","sportsbook_and_other_contingencies"
 		string licensed_operator = 2; // e.g., "playing.io"
 		string tax_period = 3; // Format: YYYY-MM (e.g., "2025-08")
 

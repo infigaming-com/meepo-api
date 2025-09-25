@@ -8250,7 +8250,7 @@ func (m *ListTaxReportsRequest) validate(all bool) error {
 
 	// no validation rules for TaxPeriod
 
-	// no validation rules for LicenseProvider
+	// no validation rules for ReportCategory
 
 	if m.Page != nil {
 		// no validation rules for Page
@@ -15438,7 +15438,7 @@ func (m *ListTaxReportsResponse_TaxReport) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for LicensedProvider
+	// no validation rules for ReportCategory
 
 	// no validation rules for LicensedOperator
 
