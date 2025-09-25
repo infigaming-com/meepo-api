@@ -298,3 +298,15 @@ func IsListUnpaidBetsFailed(err error) bool {
 func ErrorListUnpaidBetsFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_LIST_UNPAID_BETS_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsUserKycLevelNotFull(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_KYC_LEVEL_NOT_FULL.String() && e.Code == 500
+}
+
+func ErrorUserKycLevelNotFull(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_KYC_LEVEL_NOT_FULL.String(), fmt.Sprintf(format, args...))
+}
