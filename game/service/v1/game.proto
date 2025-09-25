@@ -982,6 +982,7 @@ message ListUnpaidBetsRequest {
 	optional int32 page = 5;
 	optional int32 page_size = 6;
 	api.common.OperatorContext operator_context = 7;
+	api.common.OperatorContextFilters operator_context_filters = 8;
 }
 
 message ListUnpaidBetsResponse {
@@ -1019,7 +1020,8 @@ message ExportUnpaidBetsRequest {
 	string format = 5; // accepted values: csv, excel, pdf
 	string time_zone = 6; // e.g. UTC+0, UTC+8, etc.
 	api.common.OperatorContext operator_context = 7;
-	int64 initiator_user_id = 8;
+	api.common.OperatorContextFilters operator_context_filters = 8;
+	int64 initiator_user_id = 9;
 }
 
 message ExportUnpaidBetsResponse {
