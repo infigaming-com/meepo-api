@@ -1323,6 +1323,7 @@ message ListCustomerRecordsRequest {
 	optional int32 page = 6;
 	optional int32 page_size = 7;
 	api.common.OperatorContext operator_context = 8;
+	api.common.OperatorContextFilters operator_context_filters = 9;
 }
 
 message ListCustomerRecordsResponse {
@@ -1352,7 +1353,8 @@ message ExportCustomerRecordsRequest {
 	string format = 6; // accepted values: csv, excel, pdf
 	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
 	api.common.OperatorContext operator_context = 8;
-	int64 initiator_user_id = 9;
+	api.common.OperatorContextFilters operator_context_filters = 9;
+	int64 initiator_user_id = 10;
 }
 
 message ExportCustomerRecordsResponse {
@@ -1392,6 +1394,7 @@ message ListFICAThresholdTransactionsRequest {
 	optional int32 page = 6;
 	optional int32 page_size = 7;
 	api.common.OperatorContext operator_context = 8;
+	api.common.OperatorContextFilters operator_context_filters = 9;
 }
 
 message ListFICAThresholdTransactionsResponse {
@@ -1427,7 +1430,8 @@ message ExportFICAThresholdTransactionsRequest {
 	string format = 6; // accepted values: csv, excel, pdf
 	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
 	api.common.OperatorContext operator_context = 8;
-	int64 initiator_user_id = 9;
+	api.common.OperatorContextFilters operator_context_filters = 9;
+	int64 initiator_user_id = 10;
 }
 
 message ExportFICAThresholdTransactionsResponse {

@@ -2870,22 +2870,123 @@ func (x *ListWalletResponsibleGamblingConfigsRequest) GetUserId() int64 {
 	return 0
 }
 
+type ListCustomerRecordsRequest struct {
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	StartTime              *timestamppb.Timestamp         `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime                *timestamppb.Timestamp         `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	UserId                 *int64                         `protobuf:"varint,3,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	TransactionId          *int64                         `protobuf:"varint,4,opt,name=transaction_id,json=transactionId,proto3,oneof" json:"transaction_id,omitempty"`
+	TransactionType        *string                        `protobuf:"bytes,5,opt,name=transaction_type,json=transactionType,proto3,oneof" json:"transaction_type,omitempty"`
+	Page                   *int32                         `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize               *int32                         `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,8,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *ListCustomerRecordsRequest) Reset() {
+	*x = ListCustomerRecordsRequest{}
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[42]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListCustomerRecordsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListCustomerRecordsRequest) ProtoMessage() {}
+
+func (x *ListCustomerRecordsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[42]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListCustomerRecordsRequest.ProtoReflect.Descriptor instead.
+func (*ListCustomerRecordsRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{42}
+}
+
+func (x *ListCustomerRecordsRequest) GetStartTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.StartTime
+	}
+	return nil
+}
+
+func (x *ListCustomerRecordsRequest) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
+	}
+	return nil
+}
+
+func (x *ListCustomerRecordsRequest) GetUserId() int64 {
+	if x != nil && x.UserId != nil {
+		return *x.UserId
+	}
+	return 0
+}
+
+func (x *ListCustomerRecordsRequest) GetTransactionId() int64 {
+	if x != nil && x.TransactionId != nil {
+		return *x.TransactionId
+	}
+	return 0
+}
+
+func (x *ListCustomerRecordsRequest) GetTransactionType() string {
+	if x != nil && x.TransactionType != nil {
+		return *x.TransactionType
+	}
+	return ""
+}
+
+func (x *ListCustomerRecordsRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListCustomerRecordsRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+func (x *ListCustomerRecordsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
 type ExportCustomerRecordsRequest struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	StartTime       *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime         *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	UserId          *int64                 `protobuf:"varint,3,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
-	TransactionId   *int64                 `protobuf:"varint,4,opt,name=transaction_id,json=transactionId,proto3,oneof" json:"transaction_id,omitempty"`
-	TransactionType *string                `protobuf:"bytes,5,opt,name=transaction_type,json=transactionType,proto3,oneof" json:"transaction_type,omitempty"`
-	Format          string                 `protobuf:"bytes,6,opt,name=format,proto3" json:"format,omitempty"`                     // accepted values: csv, excel, pdf
-	TimeZone        string                 `protobuf:"bytes,7,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"` // e.g. UTC+0, UTC+8, etc.
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	StartTime              *timestamppb.Timestamp         `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime                *timestamppb.Timestamp         `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	UserId                 *int64                         `protobuf:"varint,3,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	TransactionId          *int64                         `protobuf:"varint,4,opt,name=transaction_id,json=transactionId,proto3,oneof" json:"transaction_id,omitempty"`
+	TransactionType        *string                        `protobuf:"bytes,5,opt,name=transaction_type,json=transactionType,proto3,oneof" json:"transaction_type,omitempty"`
+	Format                 string                         `protobuf:"bytes,6,opt,name=format,proto3" json:"format,omitempty"`                     // accepted values: csv, excel, pdf
+	TimeZone               string                         `protobuf:"bytes,7,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"` // e.g. UTC+0, UTC+8, etc.
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,8,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ExportCustomerRecordsRequest) Reset() {
 	*x = ExportCustomerRecordsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[42]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2897,7 +2998,7 @@ func (x *ExportCustomerRecordsRequest) String() string {
 func (*ExportCustomerRecordsRequest) ProtoMessage() {}
 
 func (x *ExportCustomerRecordsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[42]
+	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2910,7 +3011,7 @@ func (x *ExportCustomerRecordsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExportCustomerRecordsRequest.ProtoReflect.Descriptor instead.
 func (*ExportCustomerRecordsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{42}
+	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *ExportCustomerRecordsRequest) GetStartTime() *timestamppb.Timestamp {
@@ -2962,96 +3063,11 @@ func (x *ExportCustomerRecordsRequest) GetTimeZone() string {
 	return ""
 }
 
-type ListCustomerRecordsRequest struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	StartTime       *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime         *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	UserId          *int64                 `protobuf:"varint,3,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
-	TransactionId   *int64                 `protobuf:"varint,4,opt,name=transaction_id,json=transactionId,proto3,oneof" json:"transaction_id,omitempty"`
-	TransactionType *string                `protobuf:"bytes,5,opt,name=transaction_type,json=transactionType,proto3,oneof" json:"transaction_type,omitempty"`
-	Page            *int32                 `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize        *int32                 `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
-}
-
-func (x *ListCustomerRecordsRequest) Reset() {
-	*x = ListCustomerRecordsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[43]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListCustomerRecordsRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListCustomerRecordsRequest) ProtoMessage() {}
-
-func (x *ListCustomerRecordsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[43]
+func (x *ExportCustomerRecordsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
 	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListCustomerRecordsRequest.ProtoReflect.Descriptor instead.
-func (*ListCustomerRecordsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{43}
-}
-
-func (x *ListCustomerRecordsRequest) GetStartTime() *timestamppb.Timestamp {
-	if x != nil {
-		return x.StartTime
+		return x.OperatorContextFilters
 	}
 	return nil
-}
-
-func (x *ListCustomerRecordsRequest) GetEndTime() *timestamppb.Timestamp {
-	if x != nil {
-		return x.EndTime
-	}
-	return nil
-}
-
-func (x *ListCustomerRecordsRequest) GetUserId() int64 {
-	if x != nil && x.UserId != nil {
-		return *x.UserId
-	}
-	return 0
-}
-
-func (x *ListCustomerRecordsRequest) GetTransactionId() int64 {
-	if x != nil && x.TransactionId != nil {
-		return *x.TransactionId
-	}
-	return 0
-}
-
-func (x *ListCustomerRecordsRequest) GetTransactionType() string {
-	if x != nil && x.TransactionType != nil {
-		return *x.TransactionType
-	}
-	return ""
-}
-
-func (x *ListCustomerRecordsRequest) GetPage() int32 {
-	if x != nil && x.Page != nil {
-		return *x.Page
-	}
-	return 0
-}
-
-func (x *ListCustomerRecordsRequest) GetPageSize() int32 {
-	if x != nil && x.PageSize != nil {
-		return *x.PageSize
-	}
-	return 0
 }
 
 type SetFICAThresholdConfigRequest struct {
@@ -3143,16 +3159,17 @@ func (*GetFICAThresholdConfigRequest) Descriptor() ([]byte, []int) {
 }
 
 type ListFICAThresholdTransactionsRequest struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	StartTime       *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime         *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	TransactionType *string                `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3,oneof" json:"transaction_type,omitempty"`
-	Currency        *string                `protobuf:"bytes,4,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
-	KycLevel        *int32                 `protobuf:"varint,5,opt,name=kyc_level,json=kycLevel,proto3,oneof" json:"kyc_level,omitempty"`
-	Page            *int32                 `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize        *int32                 `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	StartTime              *timestamppb.Timestamp         `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime                *timestamppb.Timestamp         `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	TransactionType        *string                        `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3,oneof" json:"transaction_type,omitempty"`
+	Currency               *string                        `protobuf:"bytes,4,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
+	KycLevel               *int32                         `protobuf:"varint,5,opt,name=kyc_level,json=kycLevel,proto3,oneof" json:"kyc_level,omitempty"`
+	Page                   *int32                         `protobuf:"varint,6,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize               *int32                         `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,8,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ListFICAThresholdTransactionsRequest) Reset() {
@@ -3234,17 +3251,25 @@ func (x *ListFICAThresholdTransactionsRequest) GetPageSize() int32 {
 	return 0
 }
 
+func (x *ListFICAThresholdTransactionsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
 type ExportFICAThresholdTransactionsRequest struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	StartTime       *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime         *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	TransactionType *string                `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3,oneof" json:"transaction_type,omitempty"`
-	Currency        *string                `protobuf:"bytes,4,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
-	KycLevel        *int32                 `protobuf:"varint,5,opt,name=kyc_level,json=kycLevel,proto3,oneof" json:"kyc_level,omitempty"`
-	Format          string                 `protobuf:"bytes,6,opt,name=format,proto3" json:"format,omitempty"`                     // accepted values: csv, excel, pdf
-	TimeZone        string                 `protobuf:"bytes,7,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"` // e.g. UTC+0, UTC+8, etc.
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	StartTime              *timestamppb.Timestamp         `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime                *timestamppb.Timestamp         `protobuf:"bytes,2,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	TransactionType        *string                        `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3,oneof" json:"transaction_type,omitempty"`
+	Currency               *string                        `protobuf:"bytes,4,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
+	KycLevel               *int32                         `protobuf:"varint,5,opt,name=kyc_level,json=kycLevel,proto3,oneof" json:"kyc_level,omitempty"`
+	Format                 string                         `protobuf:"bytes,6,opt,name=format,proto3" json:"format,omitempty"`                     // accepted values: csv, excel, pdf
+	TimeZone               string                         `protobuf:"bytes,7,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"` // e.g. UTC+0, UTC+8, etc.
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,8,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ExportFICAThresholdTransactionsRequest) Reset() {
@@ -3324,6 +3349,13 @@ func (x *ExportFICAThresholdTransactionsRequest) GetTimeZone() string {
 		return x.TimeZone
 	}
 	return ""
+}
+
+func (x *ExportFICAThresholdTransactionsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
 }
 
 type GetWalletCreditsResponse_Credit struct {
@@ -3896,22 +3928,7 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\n" +
 	"limit_type\x18\x03 \x01(\tR\tlimitType\"F\n" +
 	"+ListWalletResponsibleGamblingConfigsRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\x99\x03\n" +
-	"\x1cExportCustomerRecordsRequest\x12>\n" +
-	"\n" +
-	"start_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\tstartTime\x88\x01\x01\x12:\n" +
-	"\bend_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\aendTime\x88\x01\x01\x12\x1c\n" +
-	"\auser_id\x18\x03 \x01(\x03H\x02R\x06userId\x88\x01\x01\x12*\n" +
-	"\x0etransaction_id\x18\x04 \x01(\x03H\x03R\rtransactionId\x88\x01\x01\x12.\n" +
-	"\x10transaction_type\x18\x05 \x01(\tH\x04R\x0ftransactionType\x88\x01\x01\x12\x16\n" +
-	"\x06format\x18\x06 \x01(\tR\x06format\x12\x1b\n" +
-	"\ttime_zone\x18\a \x01(\tR\btimeZoneB\r\n" +
-	"\v_start_timeB\v\n" +
-	"\t_end_timeB\n" +
-	"\n" +
-	"\b_user_idB\x11\n" +
-	"\x0f_transaction_idB\x13\n" +
-	"\x11_transaction_type\"\xb4\x03\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\x92\x04\n" +
 	"\x1aListCustomerRecordsRequest\x12>\n" +
 	"\n" +
 	"start_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\tstartTime\x88\x01\x01\x12:\n" +
@@ -3920,7 +3937,8 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x0etransaction_id\x18\x04 \x01(\x03H\x03R\rtransactionId\x88\x01\x01\x12.\n" +
 	"\x10transaction_type\x18\x05 \x01(\tH\x04R\x0ftransactionType\x88\x01\x01\x12\x17\n" +
 	"\x04page\x18\x06 \x01(\x05H\x05R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\a \x01(\x05H\x06R\bpageSize\x88\x01\x01B\r\n" +
+	"\tpage_size\x18\a \x01(\x05H\x06R\bpageSize\x88\x01\x01\x12\\\n" +
+	"\x18operator_context_filters\x18\b \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\r\n" +
 	"\v_start_timeB\v\n" +
 	"\t_end_timeB\n" +
 	"\n" +
@@ -3929,11 +3947,27 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x11_transaction_typeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x9b\x01\n" +
+	"_page_size\"\xf7\x03\n" +
+	"\x1cExportCustomerRecordsRequest\x12>\n" +
+	"\n" +
+	"start_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampH\x01R\aendTime\x88\x01\x01\x12\x1c\n" +
+	"\auser_id\x18\x03 \x01(\x03H\x02R\x06userId\x88\x01\x01\x12*\n" +
+	"\x0etransaction_id\x18\x04 \x01(\x03H\x03R\rtransactionId\x88\x01\x01\x12.\n" +
+	"\x10transaction_type\x18\x05 \x01(\tH\x04R\x0ftransactionType\x88\x01\x01\x12\x16\n" +
+	"\x06format\x18\x06 \x01(\tR\x06format\x12\x1b\n" +
+	"\ttime_zone\x18\a \x01(\tR\btimeZone\x12\\\n" +
+	"\x18operator_context_filters\x18\b \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\r\n" +
+	"\v_start_timeB\v\n" +
+	"\t_end_timeB\n" +
+	"\n" +
+	"\b_user_idB\x11\n" +
+	"\x0f_transaction_idB\x13\n" +
+	"\x11_transaction_type\"\x9b\x01\n" +
 	"\x1dSetFICAThresholdConfigRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12^\n" +
 	"\x15fica_threshold_config\x18\x02 \x01(\v2*.api.wallet.service.v1.FICAThresholdConfigR\x13ficaThresholdConfig\"\x1f\n" +
-	"\x1dGetFICAThresholdConfigRequest\"\xb3\x03\n" +
+	"\x1dGetFICAThresholdConfigRequest\"\x91\x04\n" +
 	"$ListFICAThresholdTransactionsRequest\x12>\n" +
 	"\n" +
 	"start_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\tstartTime\x88\x01\x01\x12:\n" +
@@ -3942,7 +3976,8 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\bcurrency\x18\x04 \x01(\tH\x03R\bcurrency\x88\x01\x01\x12 \n" +
 	"\tkyc_level\x18\x05 \x01(\x05H\x04R\bkycLevel\x88\x01\x01\x12\x17\n" +
 	"\x04page\x18\x06 \x01(\x05H\x05R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\a \x01(\x05H\x06R\bpageSize\x88\x01\x01B\r\n" +
+	"\tpage_size\x18\a \x01(\x05H\x06R\bpageSize\x88\x01\x01\x12\\\n" +
+	"\x18operator_context_filters\x18\b \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\r\n" +
 	"\v_start_timeB\v\n" +
 	"\t_end_timeB\x13\n" +
 	"\x11_transaction_typeB\v\n" +
@@ -3951,7 +3986,7 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"_kyc_levelB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x98\x03\n" +
+	"_page_size\"\xf6\x03\n" +
 	"&ExportFICAThresholdTransactionsRequest\x12>\n" +
 	"\n" +
 	"start_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\tstartTime\x88\x01\x01\x12:\n" +
@@ -3960,7 +3995,8 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\bcurrency\x18\x04 \x01(\tH\x03R\bcurrency\x88\x01\x01\x12 \n" +
 	"\tkyc_level\x18\x05 \x01(\x05H\x04R\bkycLevel\x88\x01\x01\x12\x16\n" +
 	"\x06format\x18\x06 \x01(\tR\x06format\x12\x1b\n" +
-	"\ttime_zone\x18\a \x01(\tR\btimeZoneB\r\n" +
+	"\ttime_zone\x18\a \x01(\tR\btimeZone\x12\\\n" +
+	"\x18operator_context_filters\x18\b \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\r\n" +
 	"\v_start_timeB\v\n" +
 	"\t_end_timeB\x13\n" +
 	"\x11_transaction_typeB\v\n" +
@@ -4059,8 +4095,8 @@ var file_backoffice_service_v1_backoffice_wallet_proto_goTypes = []any{
 	(*UpdateDeductionOrderRequest)(nil),                              // 39: api.backoffice.service.v1.UpdateDeductionOrderRequest
 	(*DeleteWalletResponsibleGamblingConfigRequest)(nil),             // 40: api.backoffice.service.v1.DeleteWalletResponsibleGamblingConfigRequest
 	(*ListWalletResponsibleGamblingConfigsRequest)(nil),              // 41: api.backoffice.service.v1.ListWalletResponsibleGamblingConfigsRequest
-	(*ExportCustomerRecordsRequest)(nil),                             // 42: api.backoffice.service.v1.ExportCustomerRecordsRequest
-	(*ListCustomerRecordsRequest)(nil),                               // 43: api.backoffice.service.v1.ListCustomerRecordsRequest
+	(*ListCustomerRecordsRequest)(nil),                               // 42: api.backoffice.service.v1.ListCustomerRecordsRequest
+	(*ExportCustomerRecordsRequest)(nil),                             // 43: api.backoffice.service.v1.ExportCustomerRecordsRequest
 	(*SetFICAThresholdConfigRequest)(nil),                            // 44: api.backoffice.service.v1.SetFICAThresholdConfigRequest
 	(*GetFICAThresholdConfigRequest)(nil),                            // 45: api.backoffice.service.v1.GetFICAThresholdConfigRequest
 	(*ListFICAThresholdTransactionsRequest)(nil),                     // 46: api.backoffice.service.v1.ListFICAThresholdTransactionsRequest
@@ -4133,87 +4169,91 @@ var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
 	56, // 34: api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest.operator_currency_config:type_name -> api.wallet.service.v1.OperatorCurrencyConfig
 	54, // 35: api.backoffice.service.v1.UpdateDeductionOrderRequest.target_operator_context:type_name -> api.common.OperatorContext
 	57, // 36: api.backoffice.service.v1.UpdateDeductionOrderRequest.deduction_order:type_name -> api.wallet.service.v1.DeductionOrder
-	52, // 37: api.backoffice.service.v1.ExportCustomerRecordsRequest.start_time:type_name -> google.protobuf.Timestamp
-	52, // 38: api.backoffice.service.v1.ExportCustomerRecordsRequest.end_time:type_name -> google.protobuf.Timestamp
-	52, // 39: api.backoffice.service.v1.ListCustomerRecordsRequest.start_time:type_name -> google.protobuf.Timestamp
-	52, // 40: api.backoffice.service.v1.ListCustomerRecordsRequest.end_time:type_name -> google.protobuf.Timestamp
-	58, // 41: api.backoffice.service.v1.SetFICAThresholdConfigRequest.fica_threshold_config:type_name -> api.wallet.service.v1.FICAThresholdConfig
-	52, // 42: api.backoffice.service.v1.ListFICAThresholdTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
-	52, // 43: api.backoffice.service.v1.ListFICAThresholdTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
-	52, // 44: api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
-	52, // 45: api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
-	52, // 46: api.backoffice.service.v1.GetWalletCreditsResponse.Credit.created_at:type_name -> google.protobuf.Timestamp
-	52, // 47: api.backoffice.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction.created_at:type_name -> google.protobuf.Timestamp
-	52, // 48: api.backoffice.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction.created_at:type_name -> google.protobuf.Timestamp
-	0,  // 49: api.backoffice.service.v1.BackofficeWallet.GetWallets:input_type -> api.backoffice.service.v1.GetWalletsRequest
-	1,  // 50: api.backoffice.service.v1.BackofficeWallet.GetWalletCredits:input_type -> api.backoffice.service.v1.GetWalletCreditsRequest
-	3,  // 51: api.backoffice.service.v1.BackofficeWallet.ListWalletBalanceTransactions:input_type -> api.backoffice.service.v1.ListWalletBalanceTransactionsRequest
-	5,  // 52: api.backoffice.service.v1.BackofficeWallet.GetWalletCreditTransactions:input_type -> api.backoffice.service.v1.GetWalletCreditTransactionsRequest
-	7,  // 53: api.backoffice.service.v1.BackofficeWallet.UpdateWallet:input_type -> api.backoffice.service.v1.UpdateWalletRequest
-	10, // 54: api.backoffice.service.v1.BackofficeWallet.AddWalletCurrency:input_type -> api.backoffice.service.v1.AddWalletCurrencyRequest
-	12, // 55: api.backoffice.service.v1.BackofficeWallet.ListWalletCurrencies:input_type -> api.backoffice.service.v1.ListWalletCurrenciesRequest
-	14, // 56: api.backoffice.service.v1.BackofficeWallet.UpdateWalletCurrency:input_type -> api.backoffice.service.v1.UpdateWalletCurrencyRequest
-	16, // 57: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalances:input_type -> api.backoffice.service.v1.ListOperatorBalancesRequest
-	17, // 58: api.backoffice.service.v1.BackofficeWallet.GetExchangeRates:input_type -> api.backoffice.service.v1.GetExchangeRatesRequest
-	19, // 59: api.backoffice.service.v1.BackofficeWallet.OperatorTransfer:input_type -> api.backoffice.service.v1.OperatorTransferRequest
-	21, // 60: api.backoffice.service.v1.BackofficeWallet.OperatorSwap:input_type -> api.backoffice.service.v1.OperatorSwapRequest
-	23, // 61: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceFreeze:input_type -> api.backoffice.service.v1.OperatorBalanceFreezeRequest
-	25, // 62: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceRollback:input_type -> api.backoffice.service.v1.OperatorBalanceRollbackRequest
-	27, // 63: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceSettle:input_type -> api.backoffice.service.v1.OperatorBalanceSettleRequest
-	29, // 64: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalanceTransactions:input_type -> api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest
-	32, // 65: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorBalance:input_type -> api.backoffice.service.v1.UpdateOperatorBalanceRequest
-	59, // 66: api.backoffice.service.v1.BackofficeWallet.GetOperatorBalance:input_type -> api.wallet.service.v1.GetOperatorBalanceRequest
-	34, // 67: api.backoffice.service.v1.BackofficeWallet.SetDepositRewardSequences:input_type -> api.backoffice.service.v1.SetDepositRewardSequencesRequest
-	35, // 68: api.backoffice.service.v1.BackofficeWallet.DeleteDepositRewardSequences:input_type -> api.backoffice.service.v1.DeleteDepositRewardSequencesRequest
-	36, // 69: api.backoffice.service.v1.BackofficeWallet.GetDepositRewardConfig:input_type -> api.backoffice.service.v1.GetDepositRewardConfigRequest
-	37, // 70: api.backoffice.service.v1.BackofficeWallet.GetGamificationCurrencyConfig:input_type -> api.backoffice.service.v1.GetGamificationCurrencyConfigRequest
-	38, // 71: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorCurrencyConfig:input_type -> api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest
-	39, // 72: api.backoffice.service.v1.BackofficeWallet.UpdateDeductionOrder:input_type -> api.backoffice.service.v1.UpdateDeductionOrderRequest
-	40, // 73: api.backoffice.service.v1.BackofficeWallet.DeleteWalletResponsibleGamblingConfig:input_type -> api.backoffice.service.v1.DeleteWalletResponsibleGamblingConfigRequest
-	41, // 74: api.backoffice.service.v1.BackofficeWallet.ListWalletResponsibleGamblingConfigs:input_type -> api.backoffice.service.v1.ListWalletResponsibleGamblingConfigsRequest
-	43, // 75: api.backoffice.service.v1.BackofficeWallet.ListCustomerRecords:input_type -> api.backoffice.service.v1.ListCustomerRecordsRequest
-	42, // 76: api.backoffice.service.v1.BackofficeWallet.ExportCustomerRecords:input_type -> api.backoffice.service.v1.ExportCustomerRecordsRequest
-	44, // 77: api.backoffice.service.v1.BackofficeWallet.SetFICAThresholdConfig:input_type -> api.backoffice.service.v1.SetFICAThresholdConfigRequest
-	45, // 78: api.backoffice.service.v1.BackofficeWallet.GetFICAThresholdConfig:input_type -> api.backoffice.service.v1.GetFICAThresholdConfigRequest
-	46, // 79: api.backoffice.service.v1.BackofficeWallet.ListFICAThresholdTransactions:input_type -> api.backoffice.service.v1.ListFICAThresholdTransactionsRequest
-	47, // 80: api.backoffice.service.v1.BackofficeWallet.ExportFICAThresholdTransactions:input_type -> api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest
-	60, // 81: api.backoffice.service.v1.BackofficeWallet.GetWallets:output_type -> api.wallet.service.v1.GetWalletsResponse
-	2,  // 82: api.backoffice.service.v1.BackofficeWallet.GetWalletCredits:output_type -> api.backoffice.service.v1.GetWalletCreditsResponse
-	4,  // 83: api.backoffice.service.v1.BackofficeWallet.ListWalletBalanceTransactions:output_type -> api.backoffice.service.v1.ListWalletBalanceTransactionsResponse
-	6,  // 84: api.backoffice.service.v1.BackofficeWallet.GetWalletCreditTransactions:output_type -> api.backoffice.service.v1.GetWalletCreditTransactionsResponse
-	8,  // 85: api.backoffice.service.v1.BackofficeWallet.UpdateWallet:output_type -> api.backoffice.service.v1.UpdateWalletResponse
-	11, // 86: api.backoffice.service.v1.BackofficeWallet.AddWalletCurrency:output_type -> api.backoffice.service.v1.AddWalletCurrencyResponse
-	13, // 87: api.backoffice.service.v1.BackofficeWallet.ListWalletCurrencies:output_type -> api.backoffice.service.v1.ListWalletCurrenciesResponse
-	15, // 88: api.backoffice.service.v1.BackofficeWallet.UpdateWalletCurrency:output_type -> api.backoffice.service.v1.UpdateWalletCurrencyResponse
-	61, // 89: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalances:output_type -> api.wallet.service.v1.ListBottomOperatorBalancesResponse
-	18, // 90: api.backoffice.service.v1.BackofficeWallet.GetExchangeRates:output_type -> api.backoffice.service.v1.GetExchangeRatesResponse
-	20, // 91: api.backoffice.service.v1.BackofficeWallet.OperatorTransfer:output_type -> api.backoffice.service.v1.OperatorTransferResponse
-	22, // 92: api.backoffice.service.v1.BackofficeWallet.OperatorSwap:output_type -> api.backoffice.service.v1.OperatorSwapResponse
-	24, // 93: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceFreeze:output_type -> api.backoffice.service.v1.OperatorBalanceFreezeResponse
-	26, // 94: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceRollback:output_type -> api.backoffice.service.v1.OperatorBalanceRollbackResponse
-	28, // 95: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceSettle:output_type -> api.backoffice.service.v1.OperatorBalanceSettleResponse
-	31, // 96: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalanceTransactions:output_type -> api.backoffice.service.v1.ListOperatorBalanceTransactionsResponse
-	33, // 97: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorBalance:output_type -> api.backoffice.service.v1.UpdateOperatorBalanceResponse
-	62, // 98: api.backoffice.service.v1.BackofficeWallet.GetOperatorBalance:output_type -> api.wallet.service.v1.GetOperatorBalanceResponse
-	63, // 99: api.backoffice.service.v1.BackofficeWallet.SetDepositRewardSequences:output_type -> api.wallet.service.v1.SetDepositRewardSequencesResponse
-	64, // 100: api.backoffice.service.v1.BackofficeWallet.DeleteDepositRewardSequences:output_type -> api.wallet.service.v1.DeleteDepositRewardSequencesResponse
-	65, // 101: api.backoffice.service.v1.BackofficeWallet.GetDepositRewardConfig:output_type -> api.wallet.service.v1.GetDepositRewardConfigResponse
-	66, // 102: api.backoffice.service.v1.BackofficeWallet.GetGamificationCurrencyConfig:output_type -> api.wallet.service.v1.GetGamificationCurrencyConfigResponse
-	67, // 103: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorCurrencyConfig:output_type -> api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse
-	68, // 104: api.backoffice.service.v1.BackofficeWallet.UpdateDeductionOrder:output_type -> api.wallet.service.v1.UpdateDeductionOrderResponse
-	69, // 105: api.backoffice.service.v1.BackofficeWallet.DeleteWalletResponsibleGamblingConfig:output_type -> api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse
-	70, // 106: api.backoffice.service.v1.BackofficeWallet.ListWalletResponsibleGamblingConfigs:output_type -> api.wallet.service.v1.ListResponsibleGamblingConfigsResponse
-	71, // 107: api.backoffice.service.v1.BackofficeWallet.ListCustomerRecords:output_type -> api.wallet.service.v1.ListCustomerRecordsResponse
-	72, // 108: api.backoffice.service.v1.BackofficeWallet.ExportCustomerRecords:output_type -> api.wallet.service.v1.ExportCustomerRecordsResponse
-	73, // 109: api.backoffice.service.v1.BackofficeWallet.SetFICAThresholdConfig:output_type -> api.wallet.service.v1.SetFICAThresholdConfigResponse
-	74, // 110: api.backoffice.service.v1.BackofficeWallet.GetFICAThresholdConfig:output_type -> api.wallet.service.v1.GetFICAThresholdConfigResponse
-	75, // 111: api.backoffice.service.v1.BackofficeWallet.ListFICAThresholdTransactions:output_type -> api.wallet.service.v1.ListFICAThresholdTransactionsResponse
-	76, // 112: api.backoffice.service.v1.BackofficeWallet.ExportFICAThresholdTransactions:output_type -> api.wallet.service.v1.ExportFICAThresholdTransactionsResponse
-	81, // [81:113] is the sub-list for method output_type
-	49, // [49:81] is the sub-list for method input_type
-	49, // [49:49] is the sub-list for extension type_name
-	49, // [49:49] is the sub-list for extension extendee
-	0,  // [0:49] is the sub-list for field type_name
+	52, // 37: api.backoffice.service.v1.ListCustomerRecordsRequest.start_time:type_name -> google.protobuf.Timestamp
+	52, // 38: api.backoffice.service.v1.ListCustomerRecordsRequest.end_time:type_name -> google.protobuf.Timestamp
+	53, // 39: api.backoffice.service.v1.ListCustomerRecordsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	52, // 40: api.backoffice.service.v1.ExportCustomerRecordsRequest.start_time:type_name -> google.protobuf.Timestamp
+	52, // 41: api.backoffice.service.v1.ExportCustomerRecordsRequest.end_time:type_name -> google.protobuf.Timestamp
+	53, // 42: api.backoffice.service.v1.ExportCustomerRecordsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	58, // 43: api.backoffice.service.v1.SetFICAThresholdConfigRequest.fica_threshold_config:type_name -> api.wallet.service.v1.FICAThresholdConfig
+	52, // 44: api.backoffice.service.v1.ListFICAThresholdTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
+	52, // 45: api.backoffice.service.v1.ListFICAThresholdTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
+	53, // 46: api.backoffice.service.v1.ListFICAThresholdTransactionsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	52, // 47: api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest.start_time:type_name -> google.protobuf.Timestamp
+	52, // 48: api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest.end_time:type_name -> google.protobuf.Timestamp
+	53, // 49: api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	52, // 50: api.backoffice.service.v1.GetWalletCreditsResponse.Credit.created_at:type_name -> google.protobuf.Timestamp
+	52, // 51: api.backoffice.service.v1.ListWalletBalanceTransactionsResponse.BalanceTransaction.created_at:type_name -> google.protobuf.Timestamp
+	52, // 52: api.backoffice.service.v1.GetWalletCreditTransactionsResponse.CreditTransaction.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 53: api.backoffice.service.v1.BackofficeWallet.GetWallets:input_type -> api.backoffice.service.v1.GetWalletsRequest
+	1,  // 54: api.backoffice.service.v1.BackofficeWallet.GetWalletCredits:input_type -> api.backoffice.service.v1.GetWalletCreditsRequest
+	3,  // 55: api.backoffice.service.v1.BackofficeWallet.ListWalletBalanceTransactions:input_type -> api.backoffice.service.v1.ListWalletBalanceTransactionsRequest
+	5,  // 56: api.backoffice.service.v1.BackofficeWallet.GetWalletCreditTransactions:input_type -> api.backoffice.service.v1.GetWalletCreditTransactionsRequest
+	7,  // 57: api.backoffice.service.v1.BackofficeWallet.UpdateWallet:input_type -> api.backoffice.service.v1.UpdateWalletRequest
+	10, // 58: api.backoffice.service.v1.BackofficeWallet.AddWalletCurrency:input_type -> api.backoffice.service.v1.AddWalletCurrencyRequest
+	12, // 59: api.backoffice.service.v1.BackofficeWallet.ListWalletCurrencies:input_type -> api.backoffice.service.v1.ListWalletCurrenciesRequest
+	14, // 60: api.backoffice.service.v1.BackofficeWallet.UpdateWalletCurrency:input_type -> api.backoffice.service.v1.UpdateWalletCurrencyRequest
+	16, // 61: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalances:input_type -> api.backoffice.service.v1.ListOperatorBalancesRequest
+	17, // 62: api.backoffice.service.v1.BackofficeWallet.GetExchangeRates:input_type -> api.backoffice.service.v1.GetExchangeRatesRequest
+	19, // 63: api.backoffice.service.v1.BackofficeWallet.OperatorTransfer:input_type -> api.backoffice.service.v1.OperatorTransferRequest
+	21, // 64: api.backoffice.service.v1.BackofficeWallet.OperatorSwap:input_type -> api.backoffice.service.v1.OperatorSwapRequest
+	23, // 65: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceFreeze:input_type -> api.backoffice.service.v1.OperatorBalanceFreezeRequest
+	25, // 66: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceRollback:input_type -> api.backoffice.service.v1.OperatorBalanceRollbackRequest
+	27, // 67: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceSettle:input_type -> api.backoffice.service.v1.OperatorBalanceSettleRequest
+	29, // 68: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalanceTransactions:input_type -> api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest
+	32, // 69: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorBalance:input_type -> api.backoffice.service.v1.UpdateOperatorBalanceRequest
+	59, // 70: api.backoffice.service.v1.BackofficeWallet.GetOperatorBalance:input_type -> api.wallet.service.v1.GetOperatorBalanceRequest
+	34, // 71: api.backoffice.service.v1.BackofficeWallet.SetDepositRewardSequences:input_type -> api.backoffice.service.v1.SetDepositRewardSequencesRequest
+	35, // 72: api.backoffice.service.v1.BackofficeWallet.DeleteDepositRewardSequences:input_type -> api.backoffice.service.v1.DeleteDepositRewardSequencesRequest
+	36, // 73: api.backoffice.service.v1.BackofficeWallet.GetDepositRewardConfig:input_type -> api.backoffice.service.v1.GetDepositRewardConfigRequest
+	37, // 74: api.backoffice.service.v1.BackofficeWallet.GetGamificationCurrencyConfig:input_type -> api.backoffice.service.v1.GetGamificationCurrencyConfigRequest
+	38, // 75: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorCurrencyConfig:input_type -> api.backoffice.service.v1.UpdateOperatorCurrencyConfigRequest
+	39, // 76: api.backoffice.service.v1.BackofficeWallet.UpdateDeductionOrder:input_type -> api.backoffice.service.v1.UpdateDeductionOrderRequest
+	40, // 77: api.backoffice.service.v1.BackofficeWallet.DeleteWalletResponsibleGamblingConfig:input_type -> api.backoffice.service.v1.DeleteWalletResponsibleGamblingConfigRequest
+	41, // 78: api.backoffice.service.v1.BackofficeWallet.ListWalletResponsibleGamblingConfigs:input_type -> api.backoffice.service.v1.ListWalletResponsibleGamblingConfigsRequest
+	42, // 79: api.backoffice.service.v1.BackofficeWallet.ListCustomerRecords:input_type -> api.backoffice.service.v1.ListCustomerRecordsRequest
+	43, // 80: api.backoffice.service.v1.BackofficeWallet.ExportCustomerRecords:input_type -> api.backoffice.service.v1.ExportCustomerRecordsRequest
+	44, // 81: api.backoffice.service.v1.BackofficeWallet.SetFICAThresholdConfig:input_type -> api.backoffice.service.v1.SetFICAThresholdConfigRequest
+	45, // 82: api.backoffice.service.v1.BackofficeWallet.GetFICAThresholdConfig:input_type -> api.backoffice.service.v1.GetFICAThresholdConfigRequest
+	46, // 83: api.backoffice.service.v1.BackofficeWallet.ListFICAThresholdTransactions:input_type -> api.backoffice.service.v1.ListFICAThresholdTransactionsRequest
+	47, // 84: api.backoffice.service.v1.BackofficeWallet.ExportFICAThresholdTransactions:input_type -> api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest
+	60, // 85: api.backoffice.service.v1.BackofficeWallet.GetWallets:output_type -> api.wallet.service.v1.GetWalletsResponse
+	2,  // 86: api.backoffice.service.v1.BackofficeWallet.GetWalletCredits:output_type -> api.backoffice.service.v1.GetWalletCreditsResponse
+	4,  // 87: api.backoffice.service.v1.BackofficeWallet.ListWalletBalanceTransactions:output_type -> api.backoffice.service.v1.ListWalletBalanceTransactionsResponse
+	6,  // 88: api.backoffice.service.v1.BackofficeWallet.GetWalletCreditTransactions:output_type -> api.backoffice.service.v1.GetWalletCreditTransactionsResponse
+	8,  // 89: api.backoffice.service.v1.BackofficeWallet.UpdateWallet:output_type -> api.backoffice.service.v1.UpdateWalletResponse
+	11, // 90: api.backoffice.service.v1.BackofficeWallet.AddWalletCurrency:output_type -> api.backoffice.service.v1.AddWalletCurrencyResponse
+	13, // 91: api.backoffice.service.v1.BackofficeWallet.ListWalletCurrencies:output_type -> api.backoffice.service.v1.ListWalletCurrenciesResponse
+	15, // 92: api.backoffice.service.v1.BackofficeWallet.UpdateWalletCurrency:output_type -> api.backoffice.service.v1.UpdateWalletCurrencyResponse
+	61, // 93: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalances:output_type -> api.wallet.service.v1.ListBottomOperatorBalancesResponse
+	18, // 94: api.backoffice.service.v1.BackofficeWallet.GetExchangeRates:output_type -> api.backoffice.service.v1.GetExchangeRatesResponse
+	20, // 95: api.backoffice.service.v1.BackofficeWallet.OperatorTransfer:output_type -> api.backoffice.service.v1.OperatorTransferResponse
+	22, // 96: api.backoffice.service.v1.BackofficeWallet.OperatorSwap:output_type -> api.backoffice.service.v1.OperatorSwapResponse
+	24, // 97: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceFreeze:output_type -> api.backoffice.service.v1.OperatorBalanceFreezeResponse
+	26, // 98: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceRollback:output_type -> api.backoffice.service.v1.OperatorBalanceRollbackResponse
+	28, // 99: api.backoffice.service.v1.BackofficeWallet.OperatorBalanceSettle:output_type -> api.backoffice.service.v1.OperatorBalanceSettleResponse
+	31, // 100: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalanceTransactions:output_type -> api.backoffice.service.v1.ListOperatorBalanceTransactionsResponse
+	33, // 101: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorBalance:output_type -> api.backoffice.service.v1.UpdateOperatorBalanceResponse
+	62, // 102: api.backoffice.service.v1.BackofficeWallet.GetOperatorBalance:output_type -> api.wallet.service.v1.GetOperatorBalanceResponse
+	63, // 103: api.backoffice.service.v1.BackofficeWallet.SetDepositRewardSequences:output_type -> api.wallet.service.v1.SetDepositRewardSequencesResponse
+	64, // 104: api.backoffice.service.v1.BackofficeWallet.DeleteDepositRewardSequences:output_type -> api.wallet.service.v1.DeleteDepositRewardSequencesResponse
+	65, // 105: api.backoffice.service.v1.BackofficeWallet.GetDepositRewardConfig:output_type -> api.wallet.service.v1.GetDepositRewardConfigResponse
+	66, // 106: api.backoffice.service.v1.BackofficeWallet.GetGamificationCurrencyConfig:output_type -> api.wallet.service.v1.GetGamificationCurrencyConfigResponse
+	67, // 107: api.backoffice.service.v1.BackofficeWallet.UpdateOperatorCurrencyConfig:output_type -> api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse
+	68, // 108: api.backoffice.service.v1.BackofficeWallet.UpdateDeductionOrder:output_type -> api.wallet.service.v1.UpdateDeductionOrderResponse
+	69, // 109: api.backoffice.service.v1.BackofficeWallet.DeleteWalletResponsibleGamblingConfig:output_type -> api.wallet.service.v1.DeleteResponsibleGamblingConfigResponse
+	70, // 110: api.backoffice.service.v1.BackofficeWallet.ListWalletResponsibleGamblingConfigs:output_type -> api.wallet.service.v1.ListResponsibleGamblingConfigsResponse
+	71, // 111: api.backoffice.service.v1.BackofficeWallet.ListCustomerRecords:output_type -> api.wallet.service.v1.ListCustomerRecordsResponse
+	72, // 112: api.backoffice.service.v1.BackofficeWallet.ExportCustomerRecords:output_type -> api.wallet.service.v1.ExportCustomerRecordsResponse
+	73, // 113: api.backoffice.service.v1.BackofficeWallet.SetFICAThresholdConfig:output_type -> api.wallet.service.v1.SetFICAThresholdConfigResponse
+	74, // 114: api.backoffice.service.v1.BackofficeWallet.GetFICAThresholdConfig:output_type -> api.wallet.service.v1.GetFICAThresholdConfigResponse
+	75, // 115: api.backoffice.service.v1.BackofficeWallet.ListFICAThresholdTransactions:output_type -> api.wallet.service.v1.ListFICAThresholdTransactionsResponse
+	76, // 116: api.backoffice.service.v1.BackofficeWallet.ExportFICAThresholdTransactions:output_type -> api.wallet.service.v1.ExportFICAThresholdTransactionsResponse
+	85, // [85:117] is the sub-list for method output_type
+	53, // [53:85] is the sub-list for method input_type
+	53, // [53:53] is the sub-list for extension type_name
+	53, // [53:53] is the sub-list for extension extendee
+	0,  // [0:53] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_wallet_proto_init() }

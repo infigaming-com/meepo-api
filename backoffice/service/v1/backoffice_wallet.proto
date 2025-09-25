@@ -595,16 +595,6 @@ message ListWalletResponsibleGamblingConfigsRequest {
 	int64 user_id = 1;
 }
 
-message ExportCustomerRecordsRequest {
-	optional google.protobuf.Timestamp start_time = 1;
-	optional google.protobuf.Timestamp end_time = 2;
-	optional int64 user_id = 3;
-	optional int64 transaction_id = 4;
-	optional string transaction_type = 5;
-	string format = 6; // accepted values: csv, excel, pdf
-	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
-}
-
 message ListCustomerRecordsRequest {
 	optional google.protobuf.Timestamp start_time = 1;
 	optional google.protobuf.Timestamp end_time = 2;
@@ -613,6 +603,18 @@ message ListCustomerRecordsRequest {
 	optional string transaction_type = 5;
 	optional int32 page = 6;
 	optional int32 page_size = 7;
+	api.common.OperatorContextFilters operator_context_filters = 8;
+}
+
+message ExportCustomerRecordsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional int64 transaction_id = 4;
+	optional string transaction_type = 5;
+	string format = 6; // accepted values: csv, excel, pdf
+	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContextFilters operator_context_filters = 8;
 }
 
 message SetFICAThresholdConfigRequest {
@@ -631,6 +633,7 @@ message ListFICAThresholdTransactionsRequest {
 	optional int32 kyc_level = 5;
 	optional int32 page = 6;
 	optional int32 page_size = 7;
+	api.common.OperatorContextFilters operator_context_filters = 8;
 }
 
 message ExportFICAThresholdTransactionsRequest {
@@ -641,4 +644,5 @@ message ExportFICAThresholdTransactionsRequest {
 	optional int32 kyc_level = 5;
 	string format = 6; // accepted values: csv, excel, pdf
 	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContextFilters operator_context_filters = 8;
 }

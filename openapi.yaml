@@ -5880,6 +5880,8 @@ components:
                     type: string
                 timeZone:
                     type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ExportCustomerStrikeReportsRequest:
             type: object
             properties:
@@ -5909,6 +5911,8 @@ components:
                     type: string
                 timeZone:
                     type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ExportMultipleBetsRequest:
             type: object
             properties:
@@ -6004,6 +6008,8 @@ components:
                     type: string
                 timeZone:
                     type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.GameData_Data:
             type: object
             properties:
@@ -7923,6 +7929,8 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ListCustomerStrikeReportsRequest:
             type: object
             properties:
@@ -8161,6 +8169,8 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ListFeeGroupsRequest:
             type: object
             properties:
@@ -9805,6 +9815,8 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ListUserCommentsRequest:
             type: object
             properties:

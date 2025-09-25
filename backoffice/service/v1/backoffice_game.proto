@@ -475,6 +475,7 @@ message ListUnpaidBetsRequest {
 	optional int64 transaction_id = 4;
 	optional int32 page = 5;
 	optional int32 page_size = 6;
+	api.common.OperatorContextFilters operator_context_filters = 7;
 }
 
 message ExportUnpaidBetsRequest {
@@ -484,6 +485,7 @@ message ExportUnpaidBetsRequest {
 	optional int64 transaction_id = 4;
 	string format = 5; // accepted values: csv, excel, pdf
 	string time_zone = 6; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContextFilters operator_context_filters = 7;
 }
 
 message ListMultipleBetsRequest {
