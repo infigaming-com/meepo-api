@@ -9632,9 +9632,9 @@ components:
                     format: int32
                 taxPeriod:
                     type: string
-                licenseProvider:
+                reportCategory:
                     type: string
-                    description: 'license_provider: south_afirca'
+                    description: 'report_category: horse_racing,sportsbook_and_other_contingencies'
                 periodType:
                     type: string
         api.backoffice.service.v1.ListTaxReportsResponse:
@@ -9656,7 +9656,7 @@ components:
         api.backoffice.service.v1.ListTaxReportsResponse_TaxReport:
             type: object
             properties:
-                licensedProvider:
+                reportCategory:
                     type: string
                     description: Basic information
                 licensedOperator:

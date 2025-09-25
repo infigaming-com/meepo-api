@@ -4675,11 +4675,6 @@ type GetTaxReportConfigResponse struct {
 	// example:
 	//
 	//	{
-	//		"report_type": {
-	//			"horse_racing_tax_return": true,
-	//			"sports_tax_return": true,
-	//			"other_contingencies_tax_return": false
-	//		}
 	//		"timezone": "UTC+0",
 	//		"report_generation_time": {
 	//			"monthly": "2nd of each month",
@@ -4690,8 +4685,7 @@ type GetTaxReportConfigResponse struct {
 	//		"user_registration_countries": ["US", "ZA", "TR", "VN"],
 	//		"user_currencies": ["USD", "EUR", "INR", "ZAR", "USDT"],
 	//	 "vat_payable": 6.5,
-	//	 "tax_for_sportsbook": 6.5,
-	//	 "tax_for_other_contingencies": 6.5,
+	//	 "tax_for_sportsbook_and_other_contingencies": 6.5,
 	//	 "tax_for_horse_racing": 6.5,
 	//		}
 	Config        string `protobuf:"bytes,1,opt,name=config,proto3" json:"config,omitempty"`
@@ -4744,11 +4738,6 @@ type UpdateTaxReportConfigRequest struct {
 	// example:
 	//
 	//	{
-	//		"report_type": {
-	//			"horse_racing_tax_return": true,
-	//			"sports_tax_return": true,
-	//			"other_contingencies_tax_return": false
-	//		}
 	//		"timezone": "UTC+0",
 	//		"report_generation_time": {
 	//			"monthly": "2nd of each month",
@@ -4759,8 +4748,7 @@ type UpdateTaxReportConfigRequest struct {
 	//		"user_registration_countries": ["US", "ZA", "TR", "VN"],
 	//		"user_currencies": ["USD", "EUR", "INR", "ZAR", "USDT"],
 	//	 "vat_payable": 6.5,
-	//	 "tax_for_sportsbook": 6.5,
-	//	 "tax_for_other_contingencies": 6.5,
+	//	 "tax_for_sportsbook_and_other_contingencies": 6.5,
 	//	 "tax_for_horse_racing": 6.5,
 	//		}
 	Config        string `protobuf:"bytes,2,opt,name=config,proto3" json:"config,omitempty"`
@@ -4854,10 +4842,10 @@ type ListTaxReportsRequest struct {
 	PageSize  *int32                 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	TaxPeriod string                 `protobuf:"bytes,3,opt,name=tax_period,json=taxPeriod,proto3" json:"tax_period,omitempty"`
 	// license_provider: south_afirca
-	LicenseProvider string  `protobuf:"bytes,4,opt,name=license_provider,json=licenseProvider,proto3" json:"license_provider,omitempty"`
-	PeriodType      *string `protobuf:"bytes,5,opt,name=period_type,json=periodType,proto3,oneof" json:"period_type,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	ReportCategory string  `protobuf:"bytes,4,opt,name=report_category,json=reportCategory,proto3" json:"report_category,omitempty"`
+	PeriodType     *string `protobuf:"bytes,5,opt,name=period_type,json=periodType,proto3,oneof" json:"period_type,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *ListTaxReportsRequest) Reset() {
@@ -4911,9 +4899,9 @@ func (x *ListTaxReportsRequest) GetTaxPeriod() string {
 	return ""
 }
 
-func (x *ListTaxReportsRequest) GetLicenseProvider() string {
+func (x *ListTaxReportsRequest) GetReportCategory() string {
 	if x != nil {
-		return x.LicenseProvider
+		return x.ReportCategory
 	}
 	return ""
 }
@@ -9825,7 +9813,7 @@ func (x *ListProviderByIDsResponse_Provider) GetEnabled() bool {
 type ListTaxReportsResponse_TaxReport struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Basic information
-	LicensedProvider string `protobuf:"bytes,1,opt,name=licensed_provider,json=licensedProvider,proto3" json:"licensed_provider,omitempty"` // e.g., "south_afirca"
+	ReportCategory   string `protobuf:"bytes,1,opt,name=report_category,json=reportCategory,proto3" json:"report_category,omitempty"`       // e.g., "horse_racing","sportsbook_and_other_contingencies"
 	LicensedOperator string `protobuf:"bytes,2,opt,name=licensed_operator,json=licensedOperator,proto3" json:"licensed_operator,omitempty"` // e.g., "playing.io"
 	TaxPeriod        string `protobuf:"bytes,3,opt,name=tax_period,json=taxPeriod,proto3" json:"tax_period,omitempty"`                      // Format: YYYY-MM (e.g., "2025-08")
 	// Deposit information
@@ -9879,9 +9867,9 @@ func (*ListTaxReportsResponse_TaxReport) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{64, 0}
 }
 
-func (x *ListTaxReportsResponse_TaxReport) GetLicensedProvider() string {
+func (x *ListTaxReportsResponse_TaxReport) GetReportCategory() string {
 	if x != nil {
-		return x.LicensedProvider
+		return x.ReportCategory
 	}
 	return ""
 }
@@ -11497,28 +11485,28 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x1cUpdateTaxReportConfigRequest\x12\x12\n" +
 	"\x04type\x18\x01 \x01(\tR\x04type\x12\x16\n" +
 	"\x06config\x18\x02 \x01(\tR\x06config\"\x1f\n" +
-	"\x1dUpdateTaxReportConfigResponse\"\xe9\x01\n" +
+	"\x1dUpdateTaxReportConfigResponse\"\xe7\x01\n" +
 	"\x15ListTaxReportsRequest\x12\x17\n" +
 	"\x04page\x18\x01 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\x02 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x12\x1d\n" +
 	"\n" +
-	"tax_period\x18\x03 \x01(\tR\ttaxPeriod\x12)\n" +
-	"\x10license_provider\x18\x04 \x01(\tR\x0flicenseProvider\x12$\n" +
+	"tax_period\x18\x03 \x01(\tR\ttaxPeriod\x12'\n" +
+	"\x0freport_category\x18\x04 \x01(\tR\x0ereportCategory\x12$\n" +
 	"\vperiod_type\x18\x05 \x01(\tH\x02R\n" +
 	"periodType\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_sizeB\x0e\n" +
-	"\f_period_type\"\xf0\x06\n" +
+	"\f_period_type\"\xec\x06\n" +
 	"\x16ListTaxReportsResponse\x12V\n" +
 	"\vtax_reports\x18\x01 \x03(\v25.api.game.service.v1.ListTaxReportsResponse.TaxReportR\n" +
 	"taxReports\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
 	"totalCount\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xab\x05\n" +
-	"\tTaxReport\x12+\n" +
-	"\x11licensed_provider\x18\x01 \x01(\tR\x10licensedProvider\x12+\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xa7\x05\n" +
+	"\tTaxReport\x12'\n" +
+	"\x0freport_category\x18\x01 \x01(\tR\x0ereportCategory\x12+\n" +
 	"\x11licensed_operator\x18\x02 \x01(\tR\x10licensedOperator\x12\x1d\n" +
 	"\n" +
 	"tax_period\x18\x03 \x01(\tR\ttaxPeriod\x12!\n" +
