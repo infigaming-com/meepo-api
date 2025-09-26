@@ -4416,6 +4416,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.review.service.v1.CreateWithdrawResponse'
+    /v1/user/account-settings/status/get:
+        post:
+            tags:
+                - User
+            operationId: User_GetUserAccountSettingsStatus
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.GetUserAccountSettingsStatusRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.GetUserAccountSettingsStatusResponse'
     /v1/user/account/update:
         post:
             tags:
@@ -13350,6 +13368,24 @@ components:
                     $ref: '#/components/schemas/api.user.service.v1.ResponsibleGamblingStatus'
                 responsibleGamblingDeleteSchedule:
                     $ref: '#/components/schemas/api.user.service.v1.ResponsibleGamblingDeleteSchedule'
+        api.user.service.v1.GetUserAccountSettingsStatusRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+        api.user.service.v1.GetUserAccountSettingsStatusResponse:
+            type: object
+            properties:
+                allowGame:
+                    type: boolean
+                allowDeposit:
+                    type: boolean
+                allowWithdraw:
+                    type: boolean
+                gameSettingsStatus:
+                    $ref: '#/components/schemas/api.user.service.v1.UserAccountGameSettingsStatus'
+                paymentSettingsStatus:
+                    $ref: '#/components/schemas/api.user.service.v1.UserAccountPaymentSettingsStatus'
         api.user.service.v1.GetUserProfileResponse:
             type: object
             properties:
@@ -14067,6 +14103,32 @@ components:
             properties:
                 fileUrl:
                     type: string
+        api.user.service.v1.UserAccountGameSettingsStatus:
+            type: object
+            properties:
+                noGameWithoutDeposit:
+                    type: boolean
+                minGameKycLevel:
+                    type: integer
+                    format: int32
+                depositCount:
+                    type: integer
+                    format: int32
+                kycLevel:
+                    type: integer
+                    format: int32
+        api.user.service.v1.UserAccountPaymentSettingsStatus:
+            type: object
+            properties:
+                minDepositKycLevel:
+                    type: integer
+                    format: int32
+                minWithdrawKycLevel:
+                    type: integer
+                    format: int32
+                kycLevel:
+                    type: integer
+                    format: int32
         api.user.service.v1.UserIdentity:
             type: object
             properties:
