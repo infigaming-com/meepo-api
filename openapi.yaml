@@ -5911,8 +5911,8 @@ components:
                     type: string
                 timeZone:
                     type: string
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.ExportMultipleBetsRequest:
             type: object
             properties:
@@ -8169,8 +8169,8 @@ components:
                 pageSize:
                     type: integer
                     format: int32
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.ListFeeGroupsRequest:
             type: object
             properties:
