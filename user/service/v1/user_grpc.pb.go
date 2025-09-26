@@ -81,6 +81,7 @@ const (
 	User_GetOperatorDetailsByUserId_FullMethodName      = "/api.user.service.v1.User/GetOperatorDetailsByUserId"
 	User_GetOperatorAccountSettings_FullMethodName      = "/api.user.service.v1.User/GetOperatorAccountSettings"
 	User_UpdateOperatorAccountSettings_FullMethodName   = "/api.user.service.v1.User/UpdateOperatorAccountSettings"
+	User_GetUserAccountSettingsStatus_FullMethodName    = "/api.user.service.v1.User/GetUserAccountSettingsStatus"
 	User_AddResponsibleGamblingConfig_FullMethodName    = "/api.user.service.v1.User/AddResponsibleGamblingConfig"
 	User_DeleteResponsibleGamblingConfig_FullMethodName = "/api.user.service.v1.User/DeleteResponsibleGamblingConfig"
 	User_GetResponsibleGamblingConfig_FullMethodName    = "/api.user.service.v1.User/GetResponsibleGamblingConfig"
@@ -212,6 +213,7 @@ type UserClient interface {
 	GetOperatorDetailsByUserId(ctx context.Context, in *GetOperatorDetailsByUserIdRequest, opts ...grpc.CallOption) (*GetOperatorDetailsByUserIdResponse, error)
 	GetOperatorAccountSettings(ctx context.Context, in *GetOperatorAccountSettingsRequest, opts ...grpc.CallOption) (*GetOperatorAccountSettingsResponse, error)
 	UpdateOperatorAccountSettings(ctx context.Context, in *UpdateOperatorAccountSettingsRequest, opts ...grpc.CallOption) (*UpdateOperatorAccountSettingsResponse, error)
+	GetUserAccountSettingsStatus(ctx context.Context, in *GetUserAccountSettingsStatusRequest, opts ...grpc.CallOption) (*GetUserAccountSettingsStatusResponse, error)
 	AddResponsibleGamblingConfig(ctx context.Context, in *AddResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*AddResponsibleGamblingConfigResponse, error)
 	DeleteResponsibleGamblingConfig(ctx context.Context, in *DeleteResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*DeleteResponsibleGamblingConfigResponse, error)
 	GetResponsibleGamblingConfig(ctx context.Context, in *GetResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*GetResponsibleGamblingConfigResponse, error)
@@ -853,6 +855,16 @@ func (c *userClient) UpdateOperatorAccountSettings(ctx context.Context, in *Upda
 	return out, nil
 }
 
+func (c *userClient) GetUserAccountSettingsStatus(ctx context.Context, in *GetUserAccountSettingsStatusRequest, opts ...grpc.CallOption) (*GetUserAccountSettingsStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserAccountSettingsStatusResponse)
+	err := c.cc.Invoke(ctx, User_GetUserAccountSettingsStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userClient) AddResponsibleGamblingConfig(ctx context.Context, in *AddResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*AddResponsibleGamblingConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AddResponsibleGamblingConfigResponse)
@@ -1081,6 +1093,7 @@ type UserServer interface {
 	GetOperatorDetailsByUserId(context.Context, *GetOperatorDetailsByUserIdRequest) (*GetOperatorDetailsByUserIdResponse, error)
 	GetOperatorAccountSettings(context.Context, *GetOperatorAccountSettingsRequest) (*GetOperatorAccountSettingsResponse, error)
 	UpdateOperatorAccountSettings(context.Context, *UpdateOperatorAccountSettingsRequest) (*UpdateOperatorAccountSettingsResponse, error)
+	GetUserAccountSettingsStatus(context.Context, *GetUserAccountSettingsStatusRequest) (*GetUserAccountSettingsStatusResponse, error)
 	AddResponsibleGamblingConfig(context.Context, *AddResponsibleGamblingConfigRequest) (*AddResponsibleGamblingConfigResponse, error)
 	DeleteResponsibleGamblingConfig(context.Context, *DeleteResponsibleGamblingConfigRequest) (*DeleteResponsibleGamblingConfigResponse, error)
 	GetResponsibleGamblingConfig(context.Context, *GetResponsibleGamblingConfigRequest) (*GetResponsibleGamblingConfigResponse, error)
@@ -1287,6 +1300,9 @@ func (UnimplementedUserServer) GetOperatorAccountSettings(context.Context, *GetO
 }
 func (UnimplementedUserServer) UpdateOperatorAccountSettings(context.Context, *UpdateOperatorAccountSettingsRequest) (*UpdateOperatorAccountSettingsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOperatorAccountSettings not implemented")
+}
+func (UnimplementedUserServer) GetUserAccountSettingsStatus(context.Context, *GetUserAccountSettingsStatusRequest) (*GetUserAccountSettingsStatusResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserAccountSettingsStatus not implemented")
 }
 func (UnimplementedUserServer) AddResponsibleGamblingConfig(context.Context, *AddResponsibleGamblingConfigRequest) (*AddResponsibleGamblingConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddResponsibleGamblingConfig not implemented")
@@ -2458,6 +2474,24 @@ func _User_UpdateOperatorAccountSettings_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_GetUserAccountSettingsStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserAccountSettingsStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetUserAccountSettingsStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetUserAccountSettingsStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetUserAccountSettingsStatus(ctx, req.(*GetUserAccountSettingsStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _User_AddResponsibleGamblingConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AddResponsibleGamblingConfigRequest)
 	if err := dec(in); err != nil {
@@ -2910,6 +2944,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateOperatorAccountSettings",
 			Handler:    _User_UpdateOperatorAccountSettings_Handler,
+		},
+		{
+			MethodName: "GetUserAccountSettingsStatus",
+			Handler:    _User_GetUserAccountSettingsStatus_Handler,
 		},
 		{
 			MethodName: "AddResponsibleGamblingConfig",

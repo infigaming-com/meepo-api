@@ -13418,6 +13418,224 @@ var _ interface {
 	ErrorName() string
 } = OperatorAccountSettingsValidationError{}
 
+// Validate checks the field values on GetUserAccountSettingsStatusRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetUserAccountSettingsStatusRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserAccountSettingsStatusRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetUserAccountSettingsStatusRequestMultiError, or nil if none found.
+func (m *GetUserAccountSettingsStatusRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserAccountSettingsStatusRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	if len(errors) > 0 {
+		return GetUserAccountSettingsStatusRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserAccountSettingsStatusRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// GetUserAccountSettingsStatusRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetUserAccountSettingsStatusRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserAccountSettingsStatusRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserAccountSettingsStatusRequestMultiError) AllErrors() []error { return m }
+
+// GetUserAccountSettingsStatusRequestValidationError is the validation error
+// returned by GetUserAccountSettingsStatusRequest.Validate if the designated
+// constraints aren't met.
+type GetUserAccountSettingsStatusRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserAccountSettingsStatusRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserAccountSettingsStatusRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserAccountSettingsStatusRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserAccountSettingsStatusRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserAccountSettingsStatusRequestValidationError) ErrorName() string {
+	return "GetUserAccountSettingsStatusRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserAccountSettingsStatusRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserAccountSettingsStatusRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserAccountSettingsStatusRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserAccountSettingsStatusRequestValidationError{}
+
+// Validate checks the field values on GetUserAccountSettingsStatusResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetUserAccountSettingsStatusResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserAccountSettingsStatusResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetUserAccountSettingsStatusResponseMultiError, or nil if none found.
+func (m *GetUserAccountSettingsStatusResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserAccountSettingsStatusResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AllowGame
+
+	// no validation rules for AllowDeposit
+
+	// no validation rules for AllowWithdraw
+
+	if len(errors) > 0 {
+		return GetUserAccountSettingsStatusResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserAccountSettingsStatusResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// GetUserAccountSettingsStatusResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetUserAccountSettingsStatusResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserAccountSettingsStatusResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserAccountSettingsStatusResponseMultiError) AllErrors() []error { return m }
+
+// GetUserAccountSettingsStatusResponseValidationError is the validation error
+// returned by GetUserAccountSettingsStatusResponse.Validate if the designated
+// constraints aren't met.
+type GetUserAccountSettingsStatusResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserAccountSettingsStatusResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserAccountSettingsStatusResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserAccountSettingsStatusResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserAccountSettingsStatusResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserAccountSettingsStatusResponseValidationError) ErrorName() string {
+	return "GetUserAccountSettingsStatusResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserAccountSettingsStatusResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserAccountSettingsStatusResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserAccountSettingsStatusResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserAccountSettingsStatusResponseValidationError{}
+
 // Validate checks the field values on OperatorConfig with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
