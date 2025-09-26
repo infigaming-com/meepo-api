@@ -291,6 +291,10 @@ service User {
 	}
 
 	rpc GetUserAccountSettingsStatus(GetUserAccountSettingsStatusRequest) returns (GetUserAccountSettingsStatusResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/account-settings/status/get"
+			body: "*"
+		};
 	}
 
 	rpc AddResponsibleGamblingConfig(AddResponsibleGamblingConfigRequest) returns (AddResponsibleGamblingConfigResponse) {
@@ -1236,10 +1240,25 @@ message GetUserAccountSettingsStatusRequest {
 	int64 user_id = 1;
 }
 
+message UserAccountGameSettingsStatus {
+	bool no_game_without_deposit = 1;
+	int32 min_game_kyc_level = 2;
+	int32 deposit_count = 3;
+	int32 kyc_level = 4;
+}
+
+message UserAccountPaymentSettingsStatus {
+	int32 min_deposit_kyc_level = 1;
+	int32 min_withdraw_kyc_level = 2;
+	int32 kyc_level = 3;
+}
+
 message GetUserAccountSettingsStatusResponse {
 	bool allow_game = 1;
 	bool allow_deposit = 2;
 	bool allow_withdraw = 3;
+	UserAccountGameSettingsStatus game_settings_status = 4;
+	UserAccountPaymentSettingsStatus payment_settings_status = 5;
 }
 
 message OperatorConfig {
