@@ -13389,6 +13389,8 @@ components:
             properties:
                 userId:
                     type: string
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.user.service.v1.GetUserAccountSettingsStatusResponse:
             type: object
             properties:
