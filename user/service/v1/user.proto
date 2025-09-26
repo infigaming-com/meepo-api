@@ -290,6 +290,9 @@ service User {
 	rpc UpdateOperatorAccountSettings(UpdateOperatorAccountSettingsRequest) returns (UpdateOperatorAccountSettingsResponse) {
 	}
 
+	rpc GetUserAccountSettingsStatus(GetUserAccountSettingsStatusRequest) returns (GetUserAccountSettingsStatusResponse) {
+	}
+
 	rpc AddResponsibleGamblingConfig(AddResponsibleGamblingConfigRequest) returns (AddResponsibleGamblingConfigResponse) {
 		option (google.api.http) = {
 			post: "/v1/user/responsible-gambling/config/add"
@@ -1227,6 +1230,16 @@ message OperatorAccountSettings {
 	OperatorAccountSecuritySettings security_settings = 2;
 	OperatorAccountGameSettings game_settings = 3;
 	OperatorAccountPaymentSettings payment_settings = 4;
+}
+
+message GetUserAccountSettingsStatusRequest {
+	int64 user_id = 1;
+}
+
+message GetUserAccountSettingsStatusResponse {
+	bool allow_game = 1;
+	bool allow_deposit = 2;
+	bool allow_withdraw = 3;
 }
 
 message OperatorConfig {
