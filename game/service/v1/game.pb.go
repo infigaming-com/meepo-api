@@ -10095,23 +10095,31 @@ func (x *GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus) GetMont
 }
 
 type ListUnpaidBetsResponse_UnpaidBet struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	CreateDateTime *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=create_date_time,json=createDateTime,proto3" json:"create_date_time,omitempty"`
-	UpdateDateTime *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=update_date_time,json=updateDateTime,proto3" json:"update_date_time,omitempty"`
-	Status         string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"` // always is pending
-	UserId         int64                  `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	BetId          int64                  `protobuf:"varint,5,opt,name=bet_id,json=betId,proto3" json:"bet_id,omitempty"`
-	RoundId        int64                  `protobuf:"varint,6,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
-	Category       string                 `protobuf:"bytes,7,opt,name=category,proto3" json:"category,omitempty"`
-	Game           string                 `protobuf:"bytes,8,opt,name=game,proto3" json:"game,omitempty"`
-	GameId         string                 `protobuf:"bytes,9,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
-	ProviderName   string                 `protobuf:"bytes,10,opt,name=provider_name,json=providerName,proto3" json:"provider_name,omitempty"`
-	Currency       string                 `protobuf:"bytes,11,opt,name=currency,proto3" json:"currency,omitempty"`
-	BetAmount      string                 `protobuf:"bytes,12,opt,name=bet_amount,json=betAmount,proto3" json:"bet_amount,omitempty"`
-	PayoutAmount   string                 `protobuf:"bytes,13,opt,name=payout_amount,json=payoutAmount,proto3" json:"payout_amount,omitempty"`
-	WinAmount      string                 `protobuf:"bytes,14,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"` // payout_amount - bet_amount
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	CreateDateTime       *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=create_date_time,json=createDateTime,proto3" json:"create_date_time,omitempty"`
+	UpdateDateTime       *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=update_date_time,json=updateDateTime,proto3" json:"update_date_time,omitempty"`
+	Status               string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"` // always is pending
+	UserId               int64                  `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	BetId                int64                  `protobuf:"varint,5,opt,name=bet_id,json=betId,proto3" json:"bet_id,omitempty"`
+	RoundId              int64                  `protobuf:"varint,6,opt,name=round_id,json=roundId,proto3" json:"round_id,omitempty"`
+	Category             string                 `protobuf:"bytes,7,opt,name=category,proto3" json:"category,omitempty"`
+	Game                 string                 `protobuf:"bytes,8,opt,name=game,proto3" json:"game,omitempty"`
+	GameId               string                 `protobuf:"bytes,9,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
+	ProviderName         string                 `protobuf:"bytes,10,opt,name=provider_name,json=providerName,proto3" json:"provider_name,omitempty"`
+	Currency             string                 `protobuf:"bytes,11,opt,name=currency,proto3" json:"currency,omitempty"`
+	BetAmount            string                 `protobuf:"bytes,12,opt,name=bet_amount,json=betAmount,proto3" json:"bet_amount,omitempty"`
+	PayoutAmount         string                 `protobuf:"bytes,13,opt,name=payout_amount,json=payoutAmount,proto3" json:"payout_amount,omitempty"`
+	WinAmount            string                 `protobuf:"bytes,14,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"` // payout_amount - bet_amount
+	OperatorId           int64                  `protobuf:"varint,15,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	CompanyOperatorId    int64                  `protobuf:"varint,16,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	RetailerOperatorId   int64                  `protobuf:"varint,17,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	SystemOperatorId     int64                  `protobuf:"varint,18,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
+	OperatorName         string                 `protobuf:"bytes,19,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	CompanyOperatorName  string                 `protobuf:"bytes,20,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	RetailerOperatorName string                 `protobuf:"bytes,21,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	SystemOperatorName   string                 `protobuf:"bytes,22,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListUnpaidBetsResponse_UnpaidBet) Reset() {
@@ -10238,6 +10246,62 @@ func (x *ListUnpaidBetsResponse_UnpaidBet) GetPayoutAmount() string {
 func (x *ListUnpaidBetsResponse_UnpaidBet) GetWinAmount() string {
 	if x != nil {
 		return x.WinAmount
+	}
+	return ""
+}
+
+func (x *ListUnpaidBetsResponse_UnpaidBet) GetOperatorId() int64 {
+	if x != nil {
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *ListUnpaidBetsResponse_UnpaidBet) GetCompanyOperatorId() int64 {
+	if x != nil {
+		return x.CompanyOperatorId
+	}
+	return 0
+}
+
+func (x *ListUnpaidBetsResponse_UnpaidBet) GetRetailerOperatorId() int64 {
+	if x != nil {
+		return x.RetailerOperatorId
+	}
+	return 0
+}
+
+func (x *ListUnpaidBetsResponse_UnpaidBet) GetSystemOperatorId() int64 {
+	if x != nil {
+		return x.SystemOperatorId
+	}
+	return 0
+}
+
+func (x *ListUnpaidBetsResponse_UnpaidBet) GetOperatorName() string {
+	if x != nil {
+		return x.OperatorName
+	}
+	return ""
+}
+
+func (x *ListUnpaidBetsResponse_UnpaidBet) GetCompanyOperatorName() string {
+	if x != nil {
+		return x.CompanyOperatorName
+	}
+	return ""
+}
+
+func (x *ListUnpaidBetsResponse_UnpaidBet) GetRetailerOperatorName() string {
+	if x != nil {
+		return x.RetailerOperatorName
+	}
+	return ""
+}
+
+func (x *ListUnpaidBetsResponse_UnpaidBet) GetSystemOperatorName() string {
+	if x != nil {
+		return x.SystemOperatorName
 	}
 	return ""
 }
@@ -11581,7 +11645,7 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x0f_transaction_idB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x9a\x06\n" +
+	"_page_size\"\x8c\t\n" +
 	"\x16ListUnpaidBetsResponse\x12V\n" +
 	"\vunpaid_bets\x18\x01 \x03(\v25.api.game.service.v1.ListUnpaidBetsResponse.UnpaidBetR\n" +
 	"unpaidBets\x12(\n" +
@@ -11590,7 +11654,7 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x11unpaid_user_count\x18\x04 \x01(\x05R\x0funpaidUserCount\x12\x14\n" +
 	"\x05total\x18\x05 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x06 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\a \x01(\x05R\bpageSize\x1a\xe7\x03\n" +
+	"\tpage_size\x18\a \x01(\x05R\bpageSize\x1a\xd9\x06\n" +
 	"\tUnpaidBet\x12D\n" +
 	"\x10create_date_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x0ecreateDateTime\x12D\n" +
 	"\x10update_date_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x0eupdateDateTime\x12\x16\n" +
@@ -11608,7 +11672,16 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"bet_amount\x18\f \x01(\tR\tbetAmount\x12#\n" +
 	"\rpayout_amount\x18\r \x01(\tR\fpayoutAmount\x12\x1d\n" +
 	"\n" +
-	"win_amount\x18\x0e \x01(\tR\twinAmount\"\xa1\x04\n" +
+	"win_amount\x18\x0e \x01(\tR\twinAmount\x12\x1f\n" +
+	"\voperator_id\x18\x0f \x01(\x03R\n" +
+	"operatorId\x12.\n" +
+	"\x13company_operator_id\x18\x10 \x01(\x03R\x11companyOperatorId\x120\n" +
+	"\x14retailer_operator_id\x18\x11 \x01(\x03R\x12retailerOperatorId\x12,\n" +
+	"\x12system_operator_id\x18\x12 \x01(\x03R\x10systemOperatorId\x12#\n" +
+	"\roperator_name\x18\x13 \x01(\tR\foperatorName\x122\n" +
+	"\x15company_operator_name\x18\x14 \x01(\tR\x13companyOperatorName\x124\n" +
+	"\x16retailer_operator_name\x18\x15 \x01(\tR\x14retailerOperatorName\x120\n" +
+	"\x14system_operator_name\x18\x16 \x01(\tR\x12systemOperatorName\"\xa1\x04\n" +
 	"\x17ExportUnpaidBetsRequest\x12>\n" +
 	"\n" +
 	"start_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\tstartTime\x88\x01\x01\x12:\n" +
