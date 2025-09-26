@@ -1337,6 +1337,14 @@ message ListCustomerRecordsResponse {
 		string before_balance = 7;
 		string after_balance = 8;
 		int64 external_transaction_id = 9;
+		int64 operator_id = 10;
+		int64 company_operator_id = 11;
+		int64 retailer_operator_id = 12;
+		int64 system_operator_id = 13;
+		string operator_name = 14;
+		string company_operator_name = 15;
+		string retailer_operator_name = 16;
+		string system_operator_name = 17;
 	}
 	repeated CustomerRecord customer_records = 1;
 	int32 total = 2;
@@ -1394,7 +1402,7 @@ message ListFICAThresholdTransactionsRequest {
 	optional int32 page = 6;
 	optional int32 page_size = 7;
 	api.common.OperatorContext operator_context = 8;
-	api.common.OperatorContextFilters operator_context_filters = 9;
+	api.common.OperatorContext target_operator_context = 9;
 }
 
 message ListFICAThresholdTransactionsResponse {
@@ -1414,6 +1422,14 @@ message ListFICAThresholdTransactionsResponse {
 		string address = 13;
 		int32 kyc_level = 14;
 		int64 external_transaction_id = 15;
+		int64 operator_id = 16;
+		int64 company_operator_id = 17;
+		int64 retailer_operator_id = 18;
+		int64 system_operator_id = 19;
+		string operator_name = 20;
+		string company_operator_name = 21;
+		string retailer_operator_name = 22;
+		string system_operator_name = 23;
 	}
 	repeated FICAThresholdTransaction threshold_transactions = 1;
 	int32 total = 2;
@@ -1430,7 +1446,7 @@ message ExportFICAThresholdTransactionsRequest {
 	string format = 6; // accepted values: csv, excel, pdf
 	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
 	api.common.OperatorContext operator_context = 8;
-	api.common.OperatorContextFilters operator_context_filters = 9;
+	api.common.OperatorContext target_operator_context = 9;
 	int64 initiator_user_id = 10;
 }
 

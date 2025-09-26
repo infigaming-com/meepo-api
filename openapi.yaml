@@ -12649,6 +12649,22 @@ components:
                     type: string
                 winAmount:
                     type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                systemOperatorId:
+                    type: string
+                operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
         api.game.service.v1.PlayRequest:
             type: object
             properties:
@@ -14996,6 +15012,22 @@ components:
                     type: string
                 externalTransactionId:
                     type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                systemOperatorId:
+                    type: string
+                operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
         api.wallet.service.v1.ListFICAThresholdTransactionsResponse:
             type: object
             properties:
@@ -15046,6 +15078,22 @@ components:
                     type: integer
                     format: int32
                 externalTransactionId:
+                    type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                systemOperatorId:
+                    type: string
+                operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
                     type: string
         api.wallet.service.v1.ListResponsibleGamblingConfigsRequest:
             type: object

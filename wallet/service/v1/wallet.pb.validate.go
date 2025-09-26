@@ -17432,11 +17432,11 @@ func (m *ListFICAThresholdTransactionsRequest) validate(all bool) error {
 	}
 
 	if all {
-		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, ListFICAThresholdTransactionsRequestValidationError{
-					field:  "OperatorContextFilters",
+					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -17444,16 +17444,16 @@ func (m *ListFICAThresholdTransactionsRequest) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, ListFICAThresholdTransactionsRequestValidationError{
-					field:  "OperatorContextFilters",
+					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return ListFICAThresholdTransactionsRequestValidationError{
-				field:  "OperatorContextFilters",
+				field:  "TargetOperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -17831,11 +17831,11 @@ func (m *ExportFICAThresholdTransactionsRequest) validate(all bool) error {
 	}
 
 	if all {
-		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, ExportFICAThresholdTransactionsRequestValidationError{
-					field:  "OperatorContextFilters",
+					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -17843,16 +17843,16 @@ func (m *ExportFICAThresholdTransactionsRequest) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, ExportFICAThresholdTransactionsRequestValidationError{
-					field:  "OperatorContextFilters",
+					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return ExportFICAThresholdTransactionsRequestValidationError{
-				field:  "OperatorContextFilters",
+				field:  "TargetOperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -20247,6 +20247,22 @@ func (m *ListCustomerRecordsResponse_CustomerRecord) validate(all bool) error {
 
 	// no validation rules for ExternalTransactionId
 
+	// no validation rules for OperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for RetailerOperatorId
+
+	// no validation rules for SystemOperatorId
+
+	// no validation rules for OperatorName
+
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorName
+
 	if len(errors) > 0 {
 		return ListCustomerRecordsResponse_CustomerRecordMultiError(errors)
 	}
@@ -20516,6 +20532,22 @@ func (m *ListFICAThresholdTransactionsResponse_FICAThresholdTransaction) validat
 	// no validation rules for KycLevel
 
 	// no validation rules for ExternalTransactionId
+
+	// no validation rules for OperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for RetailerOperatorId
+
+	// no validation rules for SystemOperatorId
+
+	// no validation rules for OperatorName
+
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorName
 
 	if len(errors) > 0 {
 		return ListFICAThresholdTransactionsResponse_FICAThresholdTransactionMultiError(errors)

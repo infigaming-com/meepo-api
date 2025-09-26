@@ -1001,6 +1001,14 @@ message ListUnpaidBetsResponse {
 		string bet_amount = 12;
 		string payout_amount = 13;
 		string win_amount = 14; // payout_amount - bet_amount
+		int64 operator_id = 15;
+		int64 company_operator_id = 16;
+		int64 retailer_operator_id = 17;
+		int64 system_operator_id = 18;
+		string operator_name = 19;
+		string company_operator_name = 20;
+		string retailer_operator_name = 21;
+		string system_operator_name = 22;
 	}
 	repeated UnpaidBet unpaid_bets = 1;
 	int32 unpaid_bet_count = 2;
