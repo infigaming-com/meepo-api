@@ -6166,7 +6166,9 @@ components:
                     description: map key is source currency, value is target currency rate
         api.backoffice.service.v1.GetFICAThresholdConfigRequest:
             type: object
-            properties: {}
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.GetGameSummaryRequest:
             type: object
             properties:
@@ -10761,6 +10763,8 @@ components:
                     type: string
                 ficaThresholdConfig:
                     $ref: '#/components/schemas/api.wallet.service.v1.FICAThresholdConfig'
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.SetIntegrityConfigRequest:
             type: object
             properties:
