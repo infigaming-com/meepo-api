@@ -620,9 +620,11 @@ message ExportCustomerRecordsRequest {
 message SetFICAThresholdConfigRequest {
 	string currency = 1;
 	wallet.service.v1.FICAThresholdConfig fica_threshold_config = 2;
+	api.common.OperatorContext target_operator_context = 3;
 }
 
 message GetFICAThresholdConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
 }
 
 message ListFICAThresholdTransactionsRequest {

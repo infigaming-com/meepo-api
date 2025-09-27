@@ -1381,12 +1381,14 @@ message SetFICAThresholdConfigRequest {
 	string currency = 1;
 	FICAThresholdConfig fica_threshold_config = 2;
 	api.common.OperatorContext operator_context = 3;
+	api.common.OperatorContext target_operator_context = 4;
 }
 
 message SetFICAThresholdConfigResponse {}
 
 message GetFICAThresholdConfigRequest {
 	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
 }
 
 message GetFICAThresholdConfigResponse {
