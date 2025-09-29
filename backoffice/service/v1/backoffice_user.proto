@@ -127,7 +127,7 @@ service BackofficeUser {
 		};
 	}
 
-	rpc UserIdentityList(user.service.v1.UserIdentityListRequest) returns (user.service.v1.UserIdentityListResponse) {
+	rpc UserIdentityList(UserIdentityListRequest) returns (user.service.v1.UserIdentityListResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/user/identity/list/get"
 			body: "*"
@@ -470,4 +470,14 @@ message UserIdentityAuditRequest {
 	int64 id = 1;
 	// audit "approved" or "declined"
 	string audit = 2;
+}
+
+message UserIdentityListRequest {
+	optional int64 id = 1;
+	optional int64 user_id = 2;
+	optional string status = 3;
+	optional google.protobuf.Timestamp start_time = 4;
+	optional google.protobuf.Timestamp end_time = 5;
+	int32 page = 6;
+	int32 page_size = 7;
 }

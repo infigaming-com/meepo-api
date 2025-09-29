@@ -62,7 +62,7 @@ type BackofficeUserHTTPServer interface {
 	SetUserTags(context.Context, *SetUserTagsRequest) (*SetUserTagsResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 	UserIdentityAudit(context.Context, *UserIdentityAuditRequest) (*v1.UserIdentityAuditResponse, error)
-	UserIdentityList(context.Context, *v1.UserIdentityListRequest) (*v1.UserIdentityListResponse, error)
+	UserIdentityList(context.Context, *UserIdentityListRequest) (*v1.UserIdentityListResponse, error)
 }
 
 func RegisterBackofficeUserHTTPServer(s *http.Server, srv BackofficeUserHTTPServer) {
@@ -440,7 +440,7 @@ func _BackofficeUser_UserIdentityAudit0_HTTP_Handler(srv BackofficeUserHTTPServe
 
 func _BackofficeUser_UserIdentityList0_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.UserIdentityListRequest
+		var in UserIdentityListRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -449,7 +449,7 @@ func _BackofficeUser_UserIdentityList0_HTTP_Handler(srv BackofficeUserHTTPServer
 		}
 		http.SetOperation(ctx, OperationBackofficeUserUserIdentityList)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.UserIdentityList(ctx, req.(*v1.UserIdentityListRequest))
+			return srv.UserIdentityList(ctx, req.(*UserIdentityListRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -477,7 +477,7 @@ type BackofficeUserHTTPClient interface {
 	SetUserTags(ctx context.Context, req *SetUserTagsRequest, opts ...http.CallOption) (rsp *SetUserTagsResponse, err error)
 	UpdateUser(ctx context.Context, req *UpdateUserRequest, opts ...http.CallOption) (rsp *UpdateUserResponse, err error)
 	UserIdentityAudit(ctx context.Context, req *UserIdentityAuditRequest, opts ...http.CallOption) (rsp *v1.UserIdentityAuditResponse, err error)
-	UserIdentityList(ctx context.Context, req *v1.UserIdentityListRequest, opts ...http.CallOption) (rsp *v1.UserIdentityListResponse, err error)
+	UserIdentityList(ctx context.Context, req *UserIdentityListRequest, opts ...http.CallOption) (rsp *v1.UserIdentityListResponse, err error)
 }
 
 type BackofficeUserHTTPClientImpl struct {
@@ -696,7 +696,7 @@ func (c *BackofficeUserHTTPClientImpl) UserIdentityAudit(ctx context.Context, in
 	return &out, nil
 }
 
-func (c *BackofficeUserHTTPClientImpl) UserIdentityList(ctx context.Context, in *v1.UserIdentityListRequest, opts ...http.CallOption) (*v1.UserIdentityListResponse, error) {
+func (c *BackofficeUserHTTPClientImpl) UserIdentityList(ctx context.Context, in *UserIdentityListRequest, opts ...http.CallOption) (*v1.UserIdentityListResponse, error) {
 	var out v1.UserIdentityListResponse
 	pattern := "/v1/backoffice/user/identity/list/get"
 	path := binding.EncodeURL(pattern, in, false)
