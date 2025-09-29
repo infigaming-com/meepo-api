@@ -57,6 +57,7 @@ const (
 	ErrorReason_GET_WALLET_TRANSACTION_FAILED               ErrorReason = 70028
 	ErrorReason_GET_RESPONSIBLE_GAMBLING_STATUS_FAILED      ErrorReason = 70029
 	ErrorReason_WITHDRAW_RESTRICTED_BY_RESPONSIBLE_GAMBLING ErrorReason = 70030
+	ErrorReason_WITHDRAW_RESTRICTED_BY_ACCOUNT_SETTINGS     ErrorReason = 70031
 )
 
 // Enum value maps for ErrorReason.
@@ -94,6 +95,7 @@ var (
 		70028: "GET_WALLET_TRANSACTION_FAILED",
 		70029: "GET_RESPONSIBLE_GAMBLING_STATUS_FAILED",
 		70030: "WITHDRAW_RESTRICTED_BY_RESPONSIBLE_GAMBLING",
+		70031: "WITHDRAW_RESTRICTED_BY_ACCOUNT_SETTINGS",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                 0,
@@ -128,6 +130,7 @@ var (
 		"GET_WALLET_TRANSACTION_FAILED":               70028,
 		"GET_RESPONSIBLE_GAMBLING_STATUS_FAILED":      70029,
 		"WITHDRAW_RESTRICTED_BY_RESPONSIBLE_GAMBLING": 70030,
+		"WITHDRAW_RESTRICTED_BY_ACCOUNT_SETTINGS":     70031,
 	}
 )
 
@@ -162,7 +165,7 @@ var File_review_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_review_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$review/service/v1/error_reason.proto\x12\x15api.review.service.v1\x1a\x13errors/errors.proto*\x97\b\n" +
+	"$review/service/v1/error_reason.proto\x12\x15api.review.service.v1\x1a\x13errors/errors.proto*\xc6\b\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1dCONVERT_STRUCT_TO_JSON_FAILED\x10\xf0\xa2\x04\x12#\n" +
@@ -195,7 +198,8 @@ const file_review_service_v1_error_reason_proto_rawDesc = "" +
 	"\x18GET_OPERATOR_NAME_FAILED\x10\x8b\xa3\x04\x12#\n" +
 	"\x1dGET_WALLET_TRANSACTION_FAILED\x10\x8c\xa3\x04\x12,\n" +
 	"&GET_RESPONSIBLE_GAMBLING_STATUS_FAILED\x10\x8d\xa3\x04\x121\n" +
-	"+WITHDRAW_RESTRICTED_BY_RESPONSIBLE_GAMBLING\x10\x8e\xa3\x04\x1a\x04\xa0E\xf4\x03BS\n" +
+	"+WITHDRAW_RESTRICTED_BY_RESPONSIBLE_GAMBLING\x10\x8e\xa3\x04\x12-\n" +
+	"'WITHDRAW_RESTRICTED_BY_ACCOUNT_SETTINGS\x10\x8f\xa3\x04\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.review.service.v1P\x01Z8github.com/infigaming-com/meepo-api/review/service/v1;v1b\x06proto3"
 
 var (
