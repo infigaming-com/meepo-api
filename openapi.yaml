@@ -7962,6 +7962,8 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ListDepositDetailsRequest:
             type: object
             properties:
@@ -8622,6 +8624,8 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ListOperatorBalanceTransactionsRequest:
             type: object
             properties:
@@ -9450,6 +9454,8 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ListSummariesRequest:
             type: object
             properties:
@@ -12421,6 +12427,22 @@ components:
                     type: string
                 payoutRate:
                     type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                systemOperatorId:
+                    type: string
+                operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
+                    type: string
         api.game.service.v1.ListGamesRequest:
             type: object
             properties:
@@ -12502,6 +12524,22 @@ components:
                 taxable:
                     type: string
                 prospectiveTax:
+                    type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                systemOperatorId:
+                    type: string
+                operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
                     type: string
         api.game.service.v1.ListProvidersRequest:
             type: object
@@ -12621,6 +12659,22 @@ components:
                 payoutAmount:
                     type: string
                 winAmount:
+                    type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                systemOperatorId:
+                    type: string
+                operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                systemOperatorName:
                     type: string
         api.game.service.v1.ListStakeVarianceBetsResponse_SummaryStats:
             type: object

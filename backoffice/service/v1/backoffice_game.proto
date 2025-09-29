@@ -499,6 +499,7 @@ message ListMultipleBetsRequest {
 	// Pagination
 	optional int32 page = 6;
 	optional int32 page_size = 7;
+	optional api.common.OperatorContextFilters operator_context_filters = 8;
 }
 
 message ExportMultipleBetsRequest {
@@ -523,6 +524,7 @@ message ListStakeVarianceBetsRequest {
 	// Pagination
 	optional int32 page = 7;
 	optional int32 page_size = 8;
+	optional api.common.OperatorContextFilters target_operator_context = 9;
 }
 
 message ExportStakeVarianceBetsRequest {
@@ -540,6 +542,7 @@ message ListCustomerStrikeReportsRequest {
 	optional string user_id = 1;
 	optional int32 page = 2;
 	optional int32 page_size = 3;
+	optional api.common.OperatorContextFilters operator_context_filters = 4;
 }
 
 message ExportSportEventsRequest {

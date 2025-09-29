@@ -1051,6 +1051,7 @@ message ListMultipleBetsRequest {
 	
 	// Operator context for filtering
 	api.common.OperatorContext operator_context = 8;
+	api.common.OperatorContextFilters operator_context_filters = 9;
 }
 
 message ListMultipleBetsResponse {
@@ -1072,6 +1073,14 @@ message ListMultipleBetsResponse {
 		string win_amount = 10; // Win Amount (e.g., "192.50")
 		string taxable = 11; // Taxable amount (e.g., "0.00")
 		string prospective_tax = 12; // Prospective Tax (e.g., "0.00")
+		int64 operator_id = 13;
+		int64 company_operator_id = 14;
+		int64 retailer_operator_id = 15;
+		int64 system_operator_id = 16;
+		string operator_name = 17;
+		string company_operator_name = 18;
+		string retailer_operator_name = 19;
+		string system_operator_name = 20;
 	}
 	
 	repeated MultipleBet records = 1;
@@ -1112,27 +1121,36 @@ message ListStakeVarianceBetsRequest {
 	
 	// Operator context for filtering
 	api.common.OperatorContext operator_context = 9;
+	api.common.OperatorContextFilters target_operator_context = 10;
 }
 
 message ListStakeVarianceBetsResponse {
 	message StakeVarianceBet {
 		// Basic information
 		google.protobuf.Timestamp created_at = 1; // Date (2025-09-02 14:30:21)
-		google.protobuf.Timestamp updated_at = 12; // Date (2025-09-02 14:30:21)
-		string status = 2; // Pending, Won, Loss, Cashed Out, etc.
-		int64 user_id = 3; // User ID (User012345)
-		int64 transaction_id = 4; // Transaction ID (TXN-202509042200)
-		int64 round_id = 5; // Round ID (214215166135)
+		google.protobuf.Timestamp updated_at = 2; // Date (2025-09-02 14:30:21)
+		string status = 3; // Pending, Won, Loss, Cashed Out, etc.
+		int64 user_id = 4; // User ID (User012345)
+		int64 transaction_id = 5; // Transaction ID (TXN-202509042200)
+		int64 round_id = 6; // Round ID (214215166135)
 		
 		// Game information
-		string category = 6; // Sports, Casino, etc.
-		string provider = 7; // Provider name (Bti)
+		string category = 7; // Sports, Casino, etc.
+		string provider = 8; // Provider name (Bti)
 		
 		// Financial information
-		string currency = 8; // Currency (ZAR)
-		string bet_amount = 9; // Bet Amount (R 350.00)
-		string payout_amount = 10; // Payout Amount (R 700.00)
-		string win_amount = 11; // Win Amount (R 350.00)
+		string currency = 9; // Currency (ZAR)
+		string bet_amount = 10; // Bet Amount (R 350.00)
+		string payout_amount = 11; // Payout Amount (R 700.00)
+		string win_amount = 12; // Win Amount (R 350.00)
+		int64 operator_id = 13;
+		int64 company_operator_id = 14;
+		int64 retailer_operator_id = 15;
+		int64 system_operator_id = 16;
+		string operator_name = 17;
+		string company_operator_name = 18;
+		string retailer_operator_name = 19;
+		string system_operator_name = 20;
 	}
 	
 	message SummaryStats {
@@ -1423,6 +1441,7 @@ message ListCustomerStrikeReportsRequest {
 	
 	// Operator context for filtering
 	api.common.OperatorContext operator_context = 4;
+	api.common.OperatorContextFilters operator_context_filters = 5;
 }
 
 message ListCustomerStrikeReportsResponse {
@@ -1440,6 +1459,14 @@ message ListCustomerStrikeReportsResponse {
 		string total_stake = 6; // Total stake amount (e.g., "R 24,500.00")
 		string total_winning = 7; // Total winning amount (e.g., "R 31,850.00")
 		string payout_rate = 8; // Payout rate percentage (e.g., "120.00%")
+		int64 operator_id = 9;
+		int64 company_operator_id = 10;
+		int64 retailer_operator_id = 11;
+		int64 system_operator_id = 12;
+		string operator_name = 13;
+		string company_operator_name = 14;
+		string retailer_operator_name = 15;
+		string system_operator_name = 16;
 	}
 	
 	repeated CustomerStrikeReport reports = 1;
