@@ -752,6 +752,12 @@ message Currency {
 	string symbol = 5;
 	string icon = 6;
 	int32 decimal_places = 7;
+	string thousands_separator = 8; // placeholder for future use
+	string decimal_separator = 9; // placeholder for future use
+	bool aggregated_enabled = 10;
+	bool aggregated_hidden = 11;
+	bool parent_enabled = 12; // placeholder for future use
+	bool parent_hidden = 13; // placeholder for future use
 }
 
 message AddCurrencyRequest {
@@ -775,6 +781,9 @@ message UpdateCurrencyResponse {}
 
 message GetCurrenciesRequest {
 	repeated string currencies = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	optional bool aggregated = 3; // include aggregated_enabled and aggregated_hidden fields
+	optional bool parent = 4; // include parent_enabled and parent_hidden fields, not implemented yet
 }
 
 message GetCurrenciesResponse {
