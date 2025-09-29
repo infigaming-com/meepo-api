@@ -66,7 +66,7 @@ type BackofficeUserClient interface {
 	DeleteUserResponsibleGamblingConfig(ctx context.Context, in *DeleteUserResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*v1.DeleteResponsibleGamblingConfigResponse, error)
 	GetUserResponsibleGamblingConfig(ctx context.Context, in *GetUserResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*v1.GetResponsibleGamblingConfigResponse, error)
 	UserIdentityAudit(ctx context.Context, in *UserIdentityAuditRequest, opts ...grpc.CallOption) (*v1.UserIdentityAuditResponse, error)
-	UserIdentityList(ctx context.Context, in *v1.UserIdentityListRequest, opts ...grpc.CallOption) (*v1.UserIdentityListResponse, error)
+	UserIdentityList(ctx context.Context, in *UserIdentityListRequest, opts ...grpc.CallOption) (*v1.UserIdentityListResponse, error)
 }
 
 type backofficeUserClient struct {
@@ -237,7 +237,7 @@ func (c *backofficeUserClient) UserIdentityAudit(ctx context.Context, in *UserId
 	return out, nil
 }
 
-func (c *backofficeUserClient) UserIdentityList(ctx context.Context, in *v1.UserIdentityListRequest, opts ...grpc.CallOption) (*v1.UserIdentityListResponse, error) {
+func (c *backofficeUserClient) UserIdentityList(ctx context.Context, in *UserIdentityListRequest, opts ...grpc.CallOption) (*v1.UserIdentityListResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.UserIdentityListResponse)
 	err := c.cc.Invoke(ctx, BackofficeUser_UserIdentityList_FullMethodName, in, out, cOpts...)
@@ -274,7 +274,7 @@ type BackofficeUserServer interface {
 	DeleteUserResponsibleGamblingConfig(context.Context, *DeleteUserResponsibleGamblingConfigRequest) (*v1.DeleteResponsibleGamblingConfigResponse, error)
 	GetUserResponsibleGamblingConfig(context.Context, *GetUserResponsibleGamblingConfigRequest) (*v1.GetResponsibleGamblingConfigResponse, error)
 	UserIdentityAudit(context.Context, *UserIdentityAuditRequest) (*v1.UserIdentityAuditResponse, error)
-	UserIdentityList(context.Context, *v1.UserIdentityListRequest) (*v1.UserIdentityListResponse, error)
+	UserIdentityList(context.Context, *UserIdentityListRequest) (*v1.UserIdentityListResponse, error)
 	mustEmbedUnimplementedBackofficeUserServer()
 }
 
@@ -333,7 +333,7 @@ func (UnimplementedBackofficeUserServer) GetUserResponsibleGamblingConfig(contex
 func (UnimplementedBackofficeUserServer) UserIdentityAudit(context.Context, *UserIdentityAuditRequest) (*v1.UserIdentityAuditResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserIdentityAudit not implemented")
 }
-func (UnimplementedBackofficeUserServer) UserIdentityList(context.Context, *v1.UserIdentityListRequest) (*v1.UserIdentityListResponse, error) {
+func (UnimplementedBackofficeUserServer) UserIdentityList(context.Context, *UserIdentityListRequest) (*v1.UserIdentityListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserIdentityList not implemented")
 }
 func (UnimplementedBackofficeUserServer) mustEmbedUnimplementedBackofficeUserServer() {}
@@ -646,7 +646,7 @@ func _BackofficeUser_UserIdentityAudit_Handler(srv interface{}, ctx context.Cont
 }
 
 func _BackofficeUser_UserIdentityList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.UserIdentityListRequest)
+	in := new(UserIdentityListRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -658,7 +658,7 @@ func _BackofficeUser_UserIdentityList_Handler(srv interface{}, ctx context.Conte
 		FullMethod: BackofficeUser_UserIdentityList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeUserServer).UserIdentityList(ctx, req.(*v1.UserIdentityListRequest))
+		return srv.(BackofficeUserServer).UserIdentityList(ctx, req.(*UserIdentityListRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

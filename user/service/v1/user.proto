@@ -1548,6 +1548,8 @@ message UserIdentityListRequest {
 	optional google.protobuf.Timestamp end_time = 5;
 	int32 page = 6;
 	int32 page_size = 7;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 8;
 }
 
 message UserIdentityListResponse {

@@ -2884,7 +2884,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.user.service.v1.UserIdentityListRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UserIdentityListRequest'
                 required: true
             responses:
                 "200":
@@ -11198,6 +11198,27 @@ components:
                 audit:
                     type: string
                     description: audit "approved" or "declined"
+        api.backoffice.service.v1.UserIdentityListRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                userId:
+                    type: string
+                status:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.VerifyEmailRequest:
             type: object
             properties:
@@ -14182,27 +14203,6 @@ components:
         api.user.service.v1.UserIdentityAuditResponse:
             type: object
             properties: {}
-        api.user.service.v1.UserIdentityListRequest:
-            type: object
-            properties:
-                id:
-                    type: string
-                userId:
-                    type: string
-                status:
-                    type: string
-                startTime:
-                    type: string
-                    format: date-time
-                endTime:
-                    type: string
-                    format: date-time
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
         api.user.service.v1.UserIdentityListResponse:
             type: object
             properties:
