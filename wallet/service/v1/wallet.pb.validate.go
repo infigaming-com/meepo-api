@@ -5255,6 +5255,18 @@ func (m *Currency) validate(all bool) error {
 
 	// no validation rules for DecimalPlaces
 
+	// no validation rules for ThousandsSeparator
+
+	// no validation rules for DecimalSeparator
+
+	// no validation rules for AggregatedEnabled
+
+	// no validation rules for AggregatedHidden
+
+	// no validation rules for ParentEnabled
+
+	// no validation rules for ParentHidden
+
 	if len(errors) > 0 {
 		return CurrencyMultiError(errors)
 	}
@@ -5845,6 +5857,43 @@ func (m *GetCurrenciesRequest) validate(all bool) error {
 	}
 
 	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetCurrenciesRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetCurrenciesRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetCurrenciesRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.Aggregated != nil {
+		// no validation rules for Aggregated
+	}
+
+	if m.Parent != nil {
+		// no validation rules for Parent
+	}
 
 	if len(errors) > 0 {
 		return GetCurrenciesRequestMultiError(errors)

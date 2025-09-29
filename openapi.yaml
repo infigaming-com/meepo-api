@@ -14707,6 +14707,18 @@ components:
                 decimalPlaces:
                     type: integer
                     format: int32
+                thousandsSeparator:
+                    type: string
+                decimalSeparator:
+                    type: string
+                aggregatedEnabled:
+                    type: boolean
+                aggregatedHidden:
+                    type: boolean
+                parentEnabled:
+                    type: boolean
+                parentHidden:
+                    type: boolean
         api.wallet.service.v1.DeductionOrder:
             type: object
             properties:
@@ -14791,6 +14803,12 @@ components:
                     type: array
                     items:
                         type: string
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                aggregated:
+                    type: boolean
+                parent:
+                    type: boolean
         api.wallet.service.v1.GetCurrenciesResponse:
             type: object
             properties:
