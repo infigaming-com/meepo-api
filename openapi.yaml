@@ -5909,6 +5909,8 @@ components:
                     type: string
                 timeZone:
                     type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest:
             type: object
             properties:
@@ -5950,6 +5952,8 @@ components:
                     type: string
                 timeZone:
                     type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ExportSevRequest:
             type: object
             properties:
@@ -6009,6 +6013,8 @@ components:
                     type: string
                 timeZone:
                     type: string
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.ExportUnpaidBetsRequest:
             type: object
             properties:

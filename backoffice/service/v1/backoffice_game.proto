@@ -513,6 +513,7 @@ message ExportMultipleBetsRequest {
 	optional int64 transaction_id = 5; // Transaction ID
 	string format = 6; // accepted values: csv, excel, pdf
 	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContextFilters operator_context_filters = 8;
 }
 
 message ListStakeVarianceBetsRequest {
@@ -539,6 +540,7 @@ message ExportStakeVarianceBetsRequest {
 	optional int64 round_id = 6; // Round ID
 	string format = 7; // accepted values: csv, excel, pdf
 	string time_zone = 8; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContext target_operator_context = 9;
 }
 
 message ListCustomerStrikeReportsRequest {
@@ -562,4 +564,5 @@ message ExportCustomerStrikeReportsRequest {
 	optional string user_id = 1;
 	string format = 2; // accepted values: csv, excel, pdf
 	string time_zone = 3; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContextFilters operator_context_filters = 4;
 }
