@@ -5880,8 +5880,8 @@ type ListStakeVarianceBetsRequest struct {
 	Page     *int32 `protobuf:"varint,7,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize *int32 `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	// Operator context for filtering
-	OperatorContext       *common.OperatorContext        `protobuf:"bytes,9,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	TargetOperatorContext *common.OperatorContextFilters `protobuf:"bytes,10,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	OperatorContext       *common.OperatorContext `protobuf:"bytes,9,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,10,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -5979,7 +5979,7 @@ func (x *ListStakeVarianceBetsRequest) GetOperatorContext() *common.OperatorCont
 	return nil
 }
 
-func (x *ListStakeVarianceBetsRequest) GetTargetOperatorContext() *common.OperatorContextFilters {
+func (x *ListStakeVarianceBetsRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
 		return x.TargetOperatorContext
 	}
@@ -11986,7 +11986,7 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\b_user_idB\x11\n" +
 	"\x0f_transaction_id\"5\n" +
 	"\x1aExportMultipleBetsResponse\x12\x17\n" +
-	"\atask_id\x18\x01 \x01(\x03R\x06taskId\"\xf0\x04\n" +
+	"\atask_id\x18\x01 \x01(\x03R\x06taskId\"\xe9\x04\n" +
 	"\x1cListStakeVarianceBetsRequest\x12>\n" +
 	"\n" +
 	"start_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\tstartTime\x88\x01\x01\x12:\n" +
@@ -11997,9 +11997,9 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\bround_id\x18\x06 \x01(\x03H\x05R\aroundId\x88\x01\x01\x12\x17\n" +
 	"\x04page\x18\a \x01(\x05H\x06R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\b \x01(\x05H\aR\bpageSize\x88\x01\x01\x12F\n" +
-	"\x10operator_context\x18\t \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12Z\n" +
+	"\x10operator_context\x18\t \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12S\n" +
 	"\x17target_operator_context\x18\n" +
-	" \x01(\v2\".api.common.OperatorContextFiltersR\x15targetOperatorContextB\r\n" +
+	" \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContextB\r\n" +
 	"\v_start_timeB\v\n" +
 	"\t_end_timeB\n" +
 	"\n" +
@@ -12610,7 +12610,7 @@ var file_game_service_v1_game_proto_depIdxs = []int32{
 	121, // 62: api.game.service.v1.ListStakeVarianceBetsRequest.start_time:type_name -> google.protobuf.Timestamp
 	121, // 63: api.game.service.v1.ListStakeVarianceBetsRequest.end_time:type_name -> google.protobuf.Timestamp
 	120, // 64: api.game.service.v1.ListStakeVarianceBetsRequest.operator_context:type_name -> api.common.OperatorContext
-	122, // 65: api.game.service.v1.ListStakeVarianceBetsRequest.target_operator_context:type_name -> api.common.OperatorContextFilters
+	120, // 65: api.game.service.v1.ListStakeVarianceBetsRequest.target_operator_context:type_name -> api.common.OperatorContext
 	116, // 66: api.game.service.v1.ListStakeVarianceBetsResponse.records:type_name -> api.game.service.v1.ListStakeVarianceBetsResponse.StakeVarianceBet
 	117, // 67: api.game.service.v1.ListStakeVarianceBetsResponse.summary:type_name -> api.game.service.v1.ListStakeVarianceBetsResponse.SummaryStats
 	121, // 68: api.game.service.v1.ExportStakeVarianceBetsRequest.start_time:type_name -> google.protobuf.Timestamp

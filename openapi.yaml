@@ -9455,7 +9455,7 @@ components:
                     type: integer
                     format: int32
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.ListSummariesRequest:
             type: object
             properties:
