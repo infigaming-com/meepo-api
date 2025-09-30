@@ -1101,7 +1101,8 @@ message ExportMultipleBetsRequest {
 	string format = 6; // accepted values: csv, excel, pdf
 	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
 	api.common.OperatorContext operator_context = 8;
-	int64 initiator_user_id = 9;
+	api.common.OperatorContextFilters operator_context_filters = 9;
+	int64 initiator_user_id = 10;
 }
 
 message ExportMultipleBetsResponse {
@@ -1181,7 +1182,8 @@ message ExportStakeVarianceBetsRequest {
 	string format = 7; // accepted values: csv, excel, pdf
 	string time_zone = 8; // e.g. UTC+0, UTC+8, etc.
 	api.common.OperatorContext operator_context = 9;
-	int64 initiator_user_id = 10;
+	api.common.OperatorContext target_operator_context = 10;
+	int64 initiator_user_id = 11;
 }
 
 message ExportStakeVarianceBetsResponse {
@@ -1499,7 +1501,8 @@ message ExportCustomerStrikeReportsRequest {
 	string format = 2; // accepted values: csv, excel, pdf
 	string time_zone = 3; // e.g. UTC+0, UTC+8, etc.
 	api.common.OperatorContext operator_context = 4;
-	int64 initiator_user_id = 5;
+	api.common.OperatorContextFilters operator_context_filters = 5;
+	int64 initiator_user_id = 6;
 }
 
 message ExportCustomerStrikeReportsResponse {
