@@ -524,7 +524,7 @@ message ListStakeVarianceBetsRequest {
 	// Pagination
 	optional int32 page = 7;
 	optional int32 page_size = 8;
-	optional api.common.OperatorContextFilters target_operator_context = 9;
+	optional api.common.OperatorContext target_operator_context = 9;
 }
 
 message ExportStakeVarianceBetsRequest {

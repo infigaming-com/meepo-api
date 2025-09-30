@@ -1121,7 +1121,7 @@ message ListStakeVarianceBetsRequest {
 	
 	// Operator context for filtering
 	api.common.OperatorContext operator_context = 9;
-	api.common.OperatorContextFilters target_operator_context = 10;
+	api.common.OperatorContext target_operator_context = 10;
 }
 
 message ListStakeVarianceBetsResponse {
