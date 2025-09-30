@@ -3693,6 +3693,39 @@ func (m *ListProviderRatesRequest) validate(all bool) error {
 		// no validation rules for ProviderId
 	}
 
+	if m.TargetOperatorContext != nil {
+
+		if all {
+			switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListProviderRatesRequestValidationError{
+						field:  "TargetOperatorContext",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListProviderRatesRequestValidationError{
+						field:  "TargetOperatorContext",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListProviderRatesRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
 	if len(errors) > 0 {
 		return ListProviderRatesRequestMultiError(errors)
 	}
@@ -6596,6 +6629,10 @@ func (m *ListProviderRatesResponse_ProviderRate) validate(all bool) error {
 	// no validation rules for Currency
 
 	// no validation rules for Rate
+
+	// no validation rules for OperatorId
+
+	// no validation rules for OperatorName
 
 	if len(errors) > 0 {
 		return ListProviderRatesResponse_ProviderRateMultiError(errors)
