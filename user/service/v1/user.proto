@@ -1549,7 +1549,8 @@ message UserIdentityListRequest {
 	int32 page = 6;
 	int32 page_size = 7;
 	// The initial operator context.
-	api.common.OperatorContext operator_context = 8;
+	api.common.OperatorContextFilters operator_context_filters = 8;
+	api.common.OperatorContext operator_context = 9;
 }
 
 message UserIdentityListResponse {
