@@ -49,7 +49,9 @@ const (
 	ErrorReason_SELF_EXCLUSION_ENABLED                    ErrorReason = 40021
 	ErrorReason_USER_DISABLED                             ErrorReason = 40022
 	ErrorReason_LIST_UNPAID_BETS_FAILED                   ErrorReason = 40023
-	ErrorReason_USER_KYC_LEVEL_NOT_FULL                   ErrorReason = 40024
+	ErrorReason_USER_KYC_LEVEL_INSUFFICIENT               ErrorReason = 40024
+	ErrorReason_USER_NO_DEPOSIT                           ErrorReason = 40025
+	ErrorReason_USER_GAME_DISABLED_BY_ACCOUNT_SETTING     ErrorReason = 40026
 )
 
 // Enum value maps for ErrorReason.
@@ -79,7 +81,9 @@ var (
 		40021: "SELF_EXCLUSION_ENABLED",
 		40022: "USER_DISABLED",
 		40023: "LIST_UNPAID_BETS_FAILED",
-		40024: "USER_KYC_LEVEL_NOT_FULL",
+		40024: "USER_KYC_LEVEL_INSUFFICIENT",
+		40025: "USER_NO_DEPOSIT",
+		40026: "USER_GAME_DISABLED_BY_ACCOUNT_SETTING",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                               0,
@@ -106,7 +110,9 @@ var (
 		"SELF_EXCLUSION_ENABLED":                    40021,
 		"USER_DISABLED":                             40022,
 		"LIST_UNPAID_BETS_FAILED":                   40023,
-		"USER_KYC_LEVEL_NOT_FULL":                   40024,
+		"USER_KYC_LEVEL_INSUFFICIENT":               40024,
+		"USER_NO_DEPOSIT":                           40025,
+		"USER_GAME_DISABLED_BY_ACCOUNT_SETTING":     40026,
 	}
 )
 
@@ -141,7 +147,7 @@ var File_game_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_game_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"game/service/v1/error_reason.proto\x12\x13api.game.service.v1\x1a\x13errors/errors.proto*\x9a\x06\n" +
+	"\"game/service/v1/error_reason.proto\x12\x13api.game.service.v1\x1a\x13errors/errors.proto*\xe2\x06\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x12GAME_BET_NOT_FOUND\x10\xc1\xb8\x02\x12\x1b\n" +
@@ -166,8 +172,10 @@ const file_game_service_v1_error_reason_proto_rawDesc = "" +
 	"\x15BREAK_IN_PLAY_ENABLED\x10Ը\x02\x12\x1c\n" +
 	"\x16SELF_EXCLUSION_ENABLED\x10ո\x02\x12\x13\n" +
 	"\rUSER_DISABLED\x10ָ\x02\x12\x1d\n" +
-	"\x17LIST_UNPAID_BETS_FAILED\x10\u05f8\x02\x12\x1d\n" +
-	"\x17USER_KYC_LEVEL_NOT_FULL\x10ظ\x02\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x17LIST_UNPAID_BETS_FAILED\x10\u05f8\x02\x12!\n" +
+	"\x1bUSER_KYC_LEVEL_INSUFFICIENT\x10ظ\x02\x12\x15\n" +
+	"\x0fUSER_NO_DEPOSIT\x10ٸ\x02\x12+\n" +
+	"%USER_GAME_DISABLED_BY_ACCOUNT_SETTING\x10ڸ\x02\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.game.service.v1P\x01Z6github.com/infigaming-com/meepo-api/game/service/v1;v1b\x06proto3"
 
 var (

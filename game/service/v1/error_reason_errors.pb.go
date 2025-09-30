@@ -299,14 +299,38 @@ func ErrorListUnpaidBetsFailed(format string, args ...interface{}) *errors.Error
 	return errors.New(500, ErrorReason_LIST_UNPAID_BETS_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-func IsUserKycLevelNotFull(err error) bool {
+func IsUserKycLevelInsufficient(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_USER_KYC_LEVEL_NOT_FULL.String() && e.Code == 500
+	return e.Reason == ErrorReason_USER_KYC_LEVEL_INSUFFICIENT.String() && e.Code == 500
 }
 
-func ErrorUserKycLevelNotFull(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_USER_KYC_LEVEL_NOT_FULL.String(), fmt.Sprintf(format, args...))
+func ErrorUserKycLevelInsufficient(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_KYC_LEVEL_INSUFFICIENT.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUserNoDeposit(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_NO_DEPOSIT.String() && e.Code == 500
+}
+
+func ErrorUserNoDeposit(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_NO_DEPOSIT.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUserGameDisabledByAccountSetting(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_GAME_DISABLED_BY_ACCOUNT_SETTING.String() && e.Code == 500
+}
+
+func ErrorUserGameDisabledByAccountSetting(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_GAME_DISABLED_BY_ACCOUNT_SETTING.String(), fmt.Sprintf(format, args...))
 }
