@@ -480,4 +480,5 @@ message UserIdentityListRequest {
 	optional google.protobuf.Timestamp end_time = 5;
 	int32 page = 6;
 	int32 page_size = 7;
+	api.common.OperatorContextFilters operator_context_filters = 8;
 }
