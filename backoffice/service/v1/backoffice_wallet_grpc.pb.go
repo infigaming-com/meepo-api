@@ -67,7 +67,7 @@ type BackofficeWalletClient interface {
 	AddWalletCurrency(ctx context.Context, in *AddWalletCurrencyRequest, opts ...grpc.CallOption) (*AddWalletCurrencyResponse, error)
 	// ListWalletCurrencies call ListCurrencies in wallet service with aggregated and parent fields
 	ListWalletCurrencies(ctx context.Context, in *ListWalletCurrenciesRequest, opts ...grpc.CallOption) (*v1.ListCurrenciesResponse, error)
-	UpdateWalletCurrency(ctx context.Context, in *UpdateWalletCurrencyRequest, opts ...grpc.CallOption) (*v1.UpdateCurrencyResponse, error)
+	UpdateWalletCurrency(ctx context.Context, in *UpdateWalletCurrencyRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorCurrencyResponse, error)
 	// ListOperatorBalances lists all operator balances which belong to the backoffice operator
 	ListOperatorBalances(ctx context.Context, in *ListOperatorBalancesRequest, opts ...grpc.CallOption) (*v1.ListBottomOperatorBalancesResponse, error)
 	GetExchangeRates(ctx context.Context, in *GetExchangeRatesRequest, opts ...grpc.CallOption) (*GetExchangeRatesResponse, error)
@@ -195,9 +195,9 @@ func (c *backofficeWalletClient) ListWalletCurrencies(ctx context.Context, in *L
 	return out, nil
 }
 
-func (c *backofficeWalletClient) UpdateWalletCurrency(ctx context.Context, in *UpdateWalletCurrencyRequest, opts ...grpc.CallOption) (*v1.UpdateCurrencyResponse, error) {
+func (c *backofficeWalletClient) UpdateWalletCurrency(ctx context.Context, in *UpdateWalletCurrencyRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorCurrencyResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.UpdateCurrencyResponse)
+	out := new(v1.UpdateOperatorCurrencyResponse)
 	err := c.cc.Invoke(ctx, BackofficeWallet_UpdateWalletCurrency_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -458,7 +458,7 @@ type BackofficeWalletServer interface {
 	AddWalletCurrency(context.Context, *AddWalletCurrencyRequest) (*AddWalletCurrencyResponse, error)
 	// ListWalletCurrencies call ListCurrencies in wallet service with aggregated and parent fields
 	ListWalletCurrencies(context.Context, *ListWalletCurrenciesRequest) (*v1.ListCurrenciesResponse, error)
-	UpdateWalletCurrency(context.Context, *UpdateWalletCurrencyRequest) (*v1.UpdateCurrencyResponse, error)
+	UpdateWalletCurrency(context.Context, *UpdateWalletCurrencyRequest) (*v1.UpdateOperatorCurrencyResponse, error)
 	// ListOperatorBalances lists all operator balances which belong to the backoffice operator
 	ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*v1.ListBottomOperatorBalancesResponse, error)
 	GetExchangeRates(context.Context, *GetExchangeRatesRequest) (*GetExchangeRatesResponse, error)
@@ -537,7 +537,7 @@ func (UnimplementedBackofficeWalletServer) AddWalletCurrency(context.Context, *A
 func (UnimplementedBackofficeWalletServer) ListWalletCurrencies(context.Context, *ListWalletCurrenciesRequest) (*v1.ListCurrenciesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListWalletCurrencies not implemented")
 }
-func (UnimplementedBackofficeWalletServer) UpdateWalletCurrency(context.Context, *UpdateWalletCurrencyRequest) (*v1.UpdateCurrencyResponse, error) {
+func (UnimplementedBackofficeWalletServer) UpdateWalletCurrency(context.Context, *UpdateWalletCurrencyRequest) (*v1.UpdateOperatorCurrencyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateWalletCurrency not implemented")
 }
 func (UnimplementedBackofficeWalletServer) ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*v1.ListBottomOperatorBalancesResponse, error) {

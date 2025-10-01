@@ -58,7 +58,7 @@ service BackofficeWallet {
             body: "*"
         };
     }
-	rpc UpdateWalletCurrency(UpdateWalletCurrencyRequest) returns (wallet.service.v1.UpdateCurrencyResponse) {
+	rpc UpdateWalletCurrency(UpdateWalletCurrencyRequest) returns (wallet.service.v1.UpdateOperatorCurrencyResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/wallet/currencies/update"
             body: "*"

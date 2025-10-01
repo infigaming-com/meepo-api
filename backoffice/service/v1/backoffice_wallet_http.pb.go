@@ -110,7 +110,7 @@ type BackofficeWalletHTTPServer interface {
 	// UpdateOperatorCurrencyConfig UpdateOperatorCurrencyConfig updates the config of a operator and its currency
 	UpdateOperatorCurrencyConfig(context.Context, *UpdateOperatorCurrencyConfigRequest) (*v1.UpdateOperatorCurrencyConfigResponse, error)
 	UpdateWallet(context.Context, *UpdateWalletRequest) (*UpdateWalletResponse, error)
-	UpdateWalletCurrency(context.Context, *UpdateWalletCurrencyRequest) (*v1.UpdateCurrencyResponse, error)
+	UpdateWalletCurrency(context.Context, *UpdateWalletCurrencyRequest) (*v1.UpdateOperatorCurrencyResponse, error)
 }
 
 func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTPServer) {
@@ -320,7 +320,7 @@ func _BackofficeWallet_UpdateWalletCurrency0_HTTP_Handler(srv BackofficeWalletHT
 		if err != nil {
 			return err
 		}
-		reply := out.(*v1.UpdateCurrencyResponse)
+		reply := out.(*v1.UpdateOperatorCurrencyResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -885,7 +885,7 @@ type BackofficeWalletHTTPClient interface {
 	UpdateOperatorBalance(ctx context.Context, req *UpdateOperatorBalanceRequest, opts ...http.CallOption) (rsp *UpdateOperatorBalanceResponse, err error)
 	UpdateOperatorCurrencyConfig(ctx context.Context, req *UpdateOperatorCurrencyConfigRequest, opts ...http.CallOption) (rsp *v1.UpdateOperatorCurrencyConfigResponse, err error)
 	UpdateWallet(ctx context.Context, req *UpdateWalletRequest, opts ...http.CallOption) (rsp *UpdateWalletResponse, err error)
-	UpdateWalletCurrency(ctx context.Context, req *UpdateWalletCurrencyRequest, opts ...http.CallOption) (rsp *v1.UpdateCurrencyResponse, err error)
+	UpdateWalletCurrency(ctx context.Context, req *UpdateWalletCurrencyRequest, opts ...http.CallOption) (rsp *v1.UpdateOperatorCurrencyResponse, err error)
 }
 
 type BackofficeWalletHTTPClientImpl struct {
@@ -1299,8 +1299,8 @@ func (c *BackofficeWalletHTTPClientImpl) UpdateWallet(ctx context.Context, in *U
 	return &out, nil
 }
 
-func (c *BackofficeWalletHTTPClientImpl) UpdateWalletCurrency(ctx context.Context, in *UpdateWalletCurrencyRequest, opts ...http.CallOption) (*v1.UpdateCurrencyResponse, error) {
-	var out v1.UpdateCurrencyResponse
+func (c *BackofficeWalletHTTPClientImpl) UpdateWalletCurrency(ctx context.Context, in *UpdateWalletCurrencyRequest, opts ...http.CallOption) (*v1.UpdateOperatorCurrencyResponse, error) {
+	var out v1.UpdateOperatorCurrencyResponse
 	pattern := "/v1/backoffice/wallet/currencies/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletUpdateWalletCurrency))

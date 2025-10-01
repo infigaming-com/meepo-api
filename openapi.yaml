@@ -3389,7 +3389,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.wallet.service.v1.UpdateCurrencyResponse'
+                                $ref: '#/components/schemas/api.wallet.service.v1.UpdateOperatorCurrencyResponse'
     /v1/backoffice/wallet/currency/config/update:
         post:
             tags:
@@ -15424,13 +15424,13 @@ components:
         api.wallet.service.v1.SetFICAThresholdConfigResponse:
             type: object
             properties: {}
-        api.wallet.service.v1.UpdateCurrencyResponse:
-            type: object
-            properties: {}
         api.wallet.service.v1.UpdateDeductionOrderResponse:
             type: object
             properties: {}
         api.wallet.service.v1.UpdateOperatorCurrencyConfigResponse:
+            type: object
+            properties: {}
+        api.wallet.service.v1.UpdateOperatorCurrencyResponse:
             type: object
             properties: {}
         api.wallet.service.v1.UserBalanceDetail:
