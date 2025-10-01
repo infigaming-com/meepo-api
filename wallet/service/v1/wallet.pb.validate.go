@@ -6402,6 +6402,35 @@ func (m *ListCurrenciesRequest) validate(all bool) error {
 
 	var errors []error
 
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListCurrenciesRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListCurrenciesRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListCurrenciesRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if m.Enabled != nil {
 		// no validation rules for Enabled
 	}
@@ -6551,6 +6580,14 @@ func (m *ListCurrenciesResponse) validate(all bool) error {
 	// no validation rules for TotalEnabled
 
 	// no validation rules for TotalHidden
+
+	// no validation rules for TotalEnabledAggregated
+
+	// no validation rules for TotalHiddenAggregated
+
+	// no validation rules for TotalEnabledParent
+
+	// no validation rules for TotalHiddenParent
 
 	if len(errors) > 0 {
 		return ListCurrenciesResponseMultiError(errors)
@@ -6709,6 +6746,14 @@ func (m *UpdateOperatorCurrencyRequest) validate(all bool) error {
 
 	if m.DecimalPlaces != nil {
 		// no validation rules for DecimalPlaces
+	}
+
+	if m.ThousandsSeparator != nil {
+		// no validation rules for ThousandsSeparator
+	}
+
+	if m.DecimalSeparator != nil {
+		// no validation rules for DecimalSeparator
 	}
 
 	if len(errors) > 0 {

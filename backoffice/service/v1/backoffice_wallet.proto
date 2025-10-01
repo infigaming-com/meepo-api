@@ -51,13 +51,14 @@ service BackofficeWallet {
         };
 	};
 
-	rpc ListWalletCurrencies(ListWalletCurrenciesRequest) returns (ListWalletCurrenciesResponse) {
+	// ListWalletCurrencies call ListCurrencies in wallet service with aggregated and parent fields
+	rpc ListWalletCurrencies(ListWalletCurrenciesRequest) returns (wallet.service.v1.ListCurrenciesResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/wallet/currencies/list"
             body: "*"
         };
     }
-	rpc UpdateWalletCurrency(UpdateWalletCurrencyRequest) returns (UpdateWalletCurrencyResponse) {
+	rpc UpdateWalletCurrency(UpdateWalletCurrencyRequest) returns (wallet.service.v1.UpdateCurrencyResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/wallet/currencies/update"
             body: "*"
@@ -389,13 +390,10 @@ message ListWalletCurrenciesRequest {
 	repeated string currencies = 1;
 	optional bool enabled = 2;
 	optional bool hidden = 3;
-}
-
-message ListWalletCurrenciesResponse {
-	repeated WalletCurrency currencies = 1;
-	int32 total = 2;
-	int32 total_enabled = 3;
-	int32 total_hidden = 4;
+	optional bool aggregated_enabled = 4;
+	optional bool aggregated_hidden = 5;
+	optional bool parent_enabled = 6;
+	optional bool parent_hidden = 7;
 }
 
 message UpdateWalletCurrencyRequest {
@@ -407,10 +405,8 @@ message UpdateWalletCurrencyRequest {
 	optional string icon = 6;
 	optional int32 decimal_places = 7;
 	optional int32 currency_decimal_places = 8;
-}
-
-message UpdateWalletCurrencyResponse {
-	WalletCurrency currency = 1;
+	optional string thousands_separator = 9; // placeholder for future use
+	optional string decimal_separator = 10; // placeholder for future use
 }
 
 message ListOperatorBalancesRequest {

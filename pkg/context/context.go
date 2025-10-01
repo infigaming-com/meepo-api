@@ -245,3 +245,17 @@ func NewOperatorContextWithIds(operatorId, companyOperatorId, retailerOperatorId
 	operatorContext := operatorIds.GetOperatorContext()
 	return &operatorContext
 }
+
+func GetParentOperatorIdsSliceFromOperatorContext(operatorContext *common.OperatorContext) []int64 {
+	switch operatorContext.OperatorType {
+	case util.OperatorTypeOperator:
+		return []int64{operatorContext.CompanyOperatorId, operatorContext.RetailerOperatorId, operatorContext.SystemOperatorId}
+	case util.OperatorTypeCompany:
+		return []int64{operatorContext.RetailerOperatorId, operatorContext.SystemOperatorId}
+	case util.OperatorTypeRetailer:
+		return []int64{operatorContext.SystemOperatorId}
+	case util.OperatorTypeSystem:
+		return []int64{}
+	}
+	return []int64{}
+}
