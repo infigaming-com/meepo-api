@@ -85,7 +85,8 @@ type BackofficeWalletHTTPServer interface {
 	ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*v1.ListBottomOperatorBalancesResponse, error)
 	// ListWalletBalanceTransactions ListWalletBalanceTransactions provides balance transactions for a specific user in User transactions page.
 	ListWalletBalanceTransactions(context.Context, *ListWalletBalanceTransactionsRequest) (*ListWalletBalanceTransactionsResponse, error)
-	ListWalletCurrencies(context.Context, *ListWalletCurrenciesRequest) (*ListWalletCurrenciesResponse, error)
+	// ListWalletCurrencies ListWalletCurrencies call ListCurrencies in wallet service with aggregated and parent fields
+	ListWalletCurrencies(context.Context, *ListWalletCurrenciesRequest) (*v1.ListCurrenciesResponse, error)
 	// ListWalletResponsibleGamblingConfigs ListWalletResponsibleGamblingConfigs lists gambling configs for a user with all currencies
 	ListWalletResponsibleGamblingConfigs(context.Context, *ListWalletResponsibleGamblingConfigsRequest) (*v1.ListResponsibleGamblingConfigsResponse, error)
 	// OperatorBalanceFreeze OperatorFreeze freezes cash of an operator
@@ -109,7 +110,7 @@ type BackofficeWalletHTTPServer interface {
 	// UpdateOperatorCurrencyConfig UpdateOperatorCurrencyConfig updates the config of a operator and its currency
 	UpdateOperatorCurrencyConfig(context.Context, *UpdateOperatorCurrencyConfigRequest) (*v1.UpdateOperatorCurrencyConfigResponse, error)
 	UpdateWallet(context.Context, *UpdateWalletRequest) (*UpdateWalletResponse, error)
-	UpdateWalletCurrency(context.Context, *UpdateWalletCurrencyRequest) (*UpdateWalletCurrencyResponse, error)
+	UpdateWalletCurrency(context.Context, *UpdateWalletCurrencyRequest) (*v1.UpdateCurrencyResponse, error)
 }
 
 func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTPServer) {
@@ -297,7 +298,7 @@ func _BackofficeWallet_ListWalletCurrencies0_HTTP_Handler(srv BackofficeWalletHT
 		if err != nil {
 			return err
 		}
-		reply := out.(*ListWalletCurrenciesResponse)
+		reply := out.(*v1.ListCurrenciesResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -319,7 +320,7 @@ func _BackofficeWallet_UpdateWalletCurrency0_HTTP_Handler(srv BackofficeWalletHT
 		if err != nil {
 			return err
 		}
-		reply := out.(*UpdateWalletCurrencyResponse)
+		reply := out.(*v1.UpdateCurrencyResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -871,7 +872,7 @@ type BackofficeWalletHTTPClient interface {
 	ListOperatorBalanceTransactions(ctx context.Context, req *ListOperatorBalanceTransactionsRequest, opts ...http.CallOption) (rsp *ListOperatorBalanceTransactionsResponse, err error)
 	ListOperatorBalances(ctx context.Context, req *ListOperatorBalancesRequest, opts ...http.CallOption) (rsp *v1.ListBottomOperatorBalancesResponse, err error)
 	ListWalletBalanceTransactions(ctx context.Context, req *ListWalletBalanceTransactionsRequest, opts ...http.CallOption) (rsp *ListWalletBalanceTransactionsResponse, err error)
-	ListWalletCurrencies(ctx context.Context, req *ListWalletCurrenciesRequest, opts ...http.CallOption) (rsp *ListWalletCurrenciesResponse, err error)
+	ListWalletCurrencies(ctx context.Context, req *ListWalletCurrenciesRequest, opts ...http.CallOption) (rsp *v1.ListCurrenciesResponse, err error)
 	ListWalletResponsibleGamblingConfigs(ctx context.Context, req *ListWalletResponsibleGamblingConfigsRequest, opts ...http.CallOption) (rsp *v1.ListResponsibleGamblingConfigsResponse, err error)
 	OperatorBalanceFreeze(ctx context.Context, req *OperatorBalanceFreezeRequest, opts ...http.CallOption) (rsp *OperatorBalanceFreezeResponse, err error)
 	OperatorBalanceRollback(ctx context.Context, req *OperatorBalanceRollbackRequest, opts ...http.CallOption) (rsp *OperatorBalanceRollbackResponse, err error)
@@ -884,7 +885,7 @@ type BackofficeWalletHTTPClient interface {
 	UpdateOperatorBalance(ctx context.Context, req *UpdateOperatorBalanceRequest, opts ...http.CallOption) (rsp *UpdateOperatorBalanceResponse, err error)
 	UpdateOperatorCurrencyConfig(ctx context.Context, req *UpdateOperatorCurrencyConfigRequest, opts ...http.CallOption) (rsp *v1.UpdateOperatorCurrencyConfigResponse, err error)
 	UpdateWallet(ctx context.Context, req *UpdateWalletRequest, opts ...http.CallOption) (rsp *UpdateWalletResponse, err error)
-	UpdateWalletCurrency(ctx context.Context, req *UpdateWalletCurrencyRequest, opts ...http.CallOption) (rsp *UpdateWalletCurrencyResponse, err error)
+	UpdateWalletCurrency(ctx context.Context, req *UpdateWalletCurrencyRequest, opts ...http.CallOption) (rsp *v1.UpdateCurrencyResponse, err error)
 }
 
 type BackofficeWalletHTTPClientImpl struct {
@@ -1129,8 +1130,8 @@ func (c *BackofficeWalletHTTPClientImpl) ListWalletBalanceTransactions(ctx conte
 	return &out, nil
 }
 
-func (c *BackofficeWalletHTTPClientImpl) ListWalletCurrencies(ctx context.Context, in *ListWalletCurrenciesRequest, opts ...http.CallOption) (*ListWalletCurrenciesResponse, error) {
-	var out ListWalletCurrenciesResponse
+func (c *BackofficeWalletHTTPClientImpl) ListWalletCurrencies(ctx context.Context, in *ListWalletCurrenciesRequest, opts ...http.CallOption) (*v1.ListCurrenciesResponse, error) {
+	var out v1.ListCurrenciesResponse
 	pattern := "/v1/backoffice/wallet/currencies/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletListWalletCurrencies))
@@ -1298,8 +1299,8 @@ func (c *BackofficeWalletHTTPClientImpl) UpdateWallet(ctx context.Context, in *U
 	return &out, nil
 }
 
-func (c *BackofficeWalletHTTPClientImpl) UpdateWalletCurrency(ctx context.Context, in *UpdateWalletCurrencyRequest, opts ...http.CallOption) (*UpdateWalletCurrencyResponse, error) {
-	var out UpdateWalletCurrencyResponse
+func (c *BackofficeWalletHTTPClientImpl) UpdateWalletCurrency(ctx context.Context, in *UpdateWalletCurrencyRequest, opts ...http.CallOption) (*v1.UpdateCurrencyResponse, error) {
+	var out v1.UpdateCurrencyResponse
 	pattern := "/v1/backoffice/wallet/currencies/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletUpdateWalletCurrency))

@@ -756,8 +756,8 @@ message Currency {
 	string decimal_separator = 9; // placeholder for future use
 	bool aggregated_enabled = 10;
 	bool aggregated_hidden = 11;
-	bool parent_enabled = 12; // placeholder for future use
-	bool parent_hidden = 13; // placeholder for future use
+	bool parent_enabled = 12;
+	bool parent_hidden = 13;
 }
 
 message AddCurrencyRequest {
@@ -803,6 +803,7 @@ message ListCurrenciesRequest {
 	repeated string currencies = 1;
 	optional bool enabled = 2;
 	optional bool hidden = 3;
+	api.common.OperatorContext operator_context = 4;
 }
 
 message ListCurrenciesResponse {
@@ -810,6 +811,10 @@ message ListCurrenciesResponse {
 	int32 total = 2;
 	int32 total_enabled = 3;
 	int32 total_hidden = 4;
+	int32 total_enabled_aggregated = 5;
+	int32 total_hidden_aggregated = 6;
+	int32 total_enabled_parent = 7;
+	int32 total_hidden_parent = 8;
 }
 
 message UpdateOperatorCurrencyRequest {
@@ -822,6 +827,8 @@ message UpdateOperatorCurrencyRequest {
 	optional string icon = 7;
 	optional int32 decimal_places = 8;
 	api.common.OperatorContext operator_context = 9;
+	optional string thousands_separator = 10; // placeholder for future use
+	optional string decimal_separator = 11; // placeholder for future use
 }
 
 message UpdateOperatorCurrencyResponse {}
