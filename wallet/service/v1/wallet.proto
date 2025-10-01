@@ -803,7 +803,12 @@ message ListCurrenciesRequest {
 	repeated string currencies = 1;
 	optional bool enabled = 2;
 	optional bool hidden = 3;
-	api.common.OperatorContext operator_context = 4;
+	api.common.OperatorContext initiator_operator_context = 4;
+	optional bool aggregated_enabled = 5;
+	optional bool aggregated_hidden = 6;
+	optional bool parent_enabled = 7;
+	optional bool parent_hidden = 8;
+	api.common.OperatorContext target_operator_context = 9;
 }
 
 message ListCurrenciesResponse {
@@ -826,9 +831,10 @@ message UpdateOperatorCurrencyRequest {
 	optional string symbol = 6;
 	optional string icon = 7;
 	optional int32 decimal_places = 8;
-	api.common.OperatorContext operator_context = 9;
+	api.common.OperatorContext initiator_operator_context = 9;
 	optional string thousands_separator = 10; // placeholder for future use
 	optional string decimal_separator = 11; // placeholder for future use
+	api.common.OperatorContext target_operator_context = 12;
 }
 
 message UpdateOperatorCurrencyResponse {}

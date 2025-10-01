@@ -10159,6 +10159,8 @@ components:
                     type: boolean
                 parentHidden:
                     type: boolean
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.ListWalletResponsibleGamblingConfigsRequest:
             type: object
             properties:
@@ -11159,6 +11161,8 @@ components:
                     type: string
                 decimalSeparator:
                     type: string
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.UpdateWalletRequest:
             type: object
             properties:
