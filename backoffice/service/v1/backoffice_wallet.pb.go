@@ -3960,7 +3960,7 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x11_transaction_typeB\v\n" +
 	"\t_currencyB\f\n" +
 	"\n" +
-	"_kyc_level2\xcc1\n" +
+	"_kyc_level2\xd41\n" +
 	"\x10BackofficeWallet\x12\x8b\x01\n" +
 	"\n" +
 	"GetWallets\x12,.api.backoffice.service.v1.GetWalletsRequest\x1a).api.wallet.service.v1.GetWalletsResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/backoffice/wallet/get\x12\xa9\x01\n" +
@@ -3969,8 +3969,8 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x1bGetWalletCreditTransactions\x12=.api.backoffice.service.v1.GetWalletCreditTransactionsRequest\x1a>.api.backoffice.service.v1.GetWalletCreditTransactionsResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/wallet/credit-transactions/get\x12\x98\x01\n" +
 	"\fUpdateWallet\x12..api.backoffice.service.v1.UpdateWalletRequest\x1a/.api.backoffice.service.v1.UpdateWalletResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/wallet/update\x12\xaf\x01\n" +
 	"\x11AddWalletCurrency\x123.api.backoffice.service.v1.AddWalletCurrencyRequest\x1a4.api.backoffice.service.v1.AddWalletCurrencyResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/wallet/currencies/add\x12\xaf\x01\n" +
-	"\x14ListWalletCurrencies\x126.api.backoffice.service.v1.ListWalletCurrenciesRequest\x1a-.api.wallet.service.v1.ListCurrenciesResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/wallet/currencies/list\x12\xb1\x01\n" +
-	"\x14UpdateWalletCurrency\x126.api.backoffice.service.v1.UpdateWalletCurrencyRequest\x1a-.api.wallet.service.v1.UpdateCurrencyResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/wallet/currencies/update\x12\xc2\x01\n" +
+	"\x14ListWalletCurrencies\x126.api.backoffice.service.v1.ListWalletCurrenciesRequest\x1a-.api.wallet.service.v1.ListCurrenciesResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/wallet/currencies/list\x12\xb9\x01\n" +
+	"\x14UpdateWalletCurrency\x126.api.backoffice.service.v1.UpdateWalletCurrencyRequest\x1a5.api.wallet.service.v1.UpdateOperatorCurrencyResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/wallet/currencies/update\x12\xc2\x01\n" +
 	"\x14ListOperatorBalances\x126.api.backoffice.service.v1.ListOperatorBalancesRequest\x1a9.api.wallet.service.v1.ListBottomOperatorBalancesResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/wallet/operator/balances/list\x12\xb0\x01\n" +
 	"\x10GetExchangeRates\x122.api.backoffice.service.v1.GetExchangeRatesRequest\x1a3.api.backoffice.service.v1.GetExchangeRatesResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/wallet/exchange-rates/get\x12\xaf\x01\n" +
 	"\x10OperatorTransfer\x122.api.backoffice.service.v1.OperatorTransferRequest\x1a3.api.backoffice.service.v1.OperatorTransferResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/wallet/operator/transfer\x12\x9f\x01\n" +
@@ -4071,7 +4071,7 @@ var file_backoffice_service_v1_backoffice_wallet_proto_goTypes = []any{
 	(*v1.GetOperatorBalanceRequest)(nil),               // 57: api.wallet.service.v1.GetOperatorBalanceRequest
 	(*v1.GetWalletsResponse)(nil),                      // 58: api.wallet.service.v1.GetWalletsResponse
 	(*v1.ListCurrenciesResponse)(nil),                  // 59: api.wallet.service.v1.ListCurrenciesResponse
-	(*v1.UpdateCurrencyResponse)(nil),                  // 60: api.wallet.service.v1.UpdateCurrencyResponse
+	(*v1.UpdateOperatorCurrencyResponse)(nil),          // 60: api.wallet.service.v1.UpdateOperatorCurrencyResponse
 	(*v1.ListBottomOperatorBalancesResponse)(nil),      // 61: api.wallet.service.v1.ListBottomOperatorBalancesResponse
 	(*v1.GetOperatorBalanceResponse)(nil),              // 62: api.wallet.service.v1.GetOperatorBalanceResponse
 	(*v1.SetDepositRewardSequencesResponse)(nil),       // 63: api.wallet.service.v1.SetDepositRewardSequencesResponse
@@ -4182,7 +4182,7 @@ var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
 	8,  // 89: api.backoffice.service.v1.BackofficeWallet.UpdateWallet:output_type -> api.backoffice.service.v1.UpdateWalletResponse
 	11, // 90: api.backoffice.service.v1.BackofficeWallet.AddWalletCurrency:output_type -> api.backoffice.service.v1.AddWalletCurrencyResponse
 	59, // 91: api.backoffice.service.v1.BackofficeWallet.ListWalletCurrencies:output_type -> api.wallet.service.v1.ListCurrenciesResponse
-	60, // 92: api.backoffice.service.v1.BackofficeWallet.UpdateWalletCurrency:output_type -> api.wallet.service.v1.UpdateCurrencyResponse
+	60, // 92: api.backoffice.service.v1.BackofficeWallet.UpdateWalletCurrency:output_type -> api.wallet.service.v1.UpdateOperatorCurrencyResponse
 	61, // 93: api.backoffice.service.v1.BackofficeWallet.ListOperatorBalances:output_type -> api.wallet.service.v1.ListBottomOperatorBalancesResponse
 	16, // 94: api.backoffice.service.v1.BackofficeWallet.GetExchangeRates:output_type -> api.backoffice.service.v1.GetExchangeRatesResponse
 	18, // 95: api.backoffice.service.v1.BackofficeWallet.OperatorTransfer:output_type -> api.backoffice.service.v1.OperatorTransferResponse
