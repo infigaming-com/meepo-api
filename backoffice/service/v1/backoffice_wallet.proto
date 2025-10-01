@@ -394,6 +394,7 @@ message ListWalletCurrenciesRequest {
 	optional bool aggregated_hidden = 5;
 	optional bool parent_enabled = 6;
 	optional bool parent_hidden = 7;
+	api.common.OperatorContext target_operator_context = 8;
 }
 
 message UpdateWalletCurrencyRequest {
@@ -407,6 +408,7 @@ message UpdateWalletCurrencyRequest {
 	optional int32 currency_decimal_places = 8;
 	optional string thousands_separator = 9; // placeholder for future use
 	optional string decimal_separator = 10; // placeholder for future use
+	api.common.OperatorContext target_operator_context = 11;
 }
 
 message ListOperatorBalancesRequest {
