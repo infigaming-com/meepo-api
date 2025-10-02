@@ -86,8 +86,6 @@ service Wallet {
 			body: "*"
 		};
 	}
-	
-	rpc GetOperatorCurrencies (GetOperatorCurrenciesRequest) returns (GetOperatorCurrenciesResponse) {}
 
 	rpc ListCurrencies (ListCurrenciesRequest) returns (ListCurrenciesResponse) {}
 
@@ -787,15 +785,6 @@ message GetCurrenciesRequest {
 }
 
 message GetCurrenciesResponse {
-	repeated Currency currencies = 1;
-}
-
-message GetOperatorCurrenciesRequest {
-	api.common.OperatorContext operator_context = 1;
-	repeated string currencies = 2;
-}
-
-message GetOperatorCurrenciesResponse {
 	repeated Currency currencies = 1;
 }
 
