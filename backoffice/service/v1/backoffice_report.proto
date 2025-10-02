@@ -759,12 +759,12 @@ message CustomerRecordReportDetailResponse{
 		// string payout_currency = 8; //
 		string payout_amount = 7; //win_amount
 		// string payout_settlement_currency = 9; 
-		// string payout_settlement_amount = 10;
 		string bet_settlement_currency = 8; //settlement_currency
 		string bet_settlement_amount = 9;// settlement_bet_amount
 		string valid_bet_amount = 10;//settlement_win_amount
 		string odds = 11;
 		string win_multiplier = 12;
+		string payout_settlement_amount = 13;
 	}
 	message EventSettlementInformation {
 		message MatchResults {

@@ -6880,6 +6880,8 @@ func (m *CustomerRecordReportDetailResponse_GameTransaction) validate(all bool) 
 
 	// no validation rules for WinMultiplier
 
+	// no validation rules for PayoutSettlementAmount
+
 	if len(errors) > 0 {
 		return CustomerRecordReportDetailResponse_GameTransactionMultiError(errors)
 	}
