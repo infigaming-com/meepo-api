@@ -5720,7 +5720,7 @@ components:
                     description: string payout_currency = 8; //
                 betSettlementCurrency:
                     type: string
-                    description: "string payout_settlement_currency = 9; \n string payout_settlement_amount = 10;"
+                    description: string payout_settlement_currency = 9;
                 betSettlementAmount:
                     type: string
                 validBetAmount:
@@ -5728,6 +5728,8 @@ components:
                 odds:
                     type: string
                 winMultiplier:
+                    type: string
+                payoutSettlementAmount:
                     type: string
         api.backoffice.service.v1.CustomerRecordReportDetailResponse_PaymentTransaction:
             type: object
