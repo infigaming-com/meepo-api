@@ -23,9 +23,6 @@ const (
 	Operator_UpdateOperator_FullMethodName                  = "/api.operator.service.v1.Operator/UpdateOperator"
 	Operator_GetOperator_FullMethodName                     = "/api.operator.service.v1.Operator/GetOperator"
 	Operator_GetOperatorsByIds_FullMethodName               = "/api.operator.service.v1.Operator/GetOperatorsByIds"
-	Operator_AddOrUpdateCurrency_FullMethodName             = "/api.operator.service.v1.Operator/AddOrUpdateCurrency"
-	Operator_UpdateOperatorCurrency_FullMethodName          = "/api.operator.service.v1.Operator/UpdateOperatorCurrency"
-	Operator_GetOperatorCurrencies_FullMethodName           = "/api.operator.service.v1.Operator/GetOperatorCurrencies"
 	Operator_AddOriginOperatorId_FullMethodName             = "/api.operator.service.v1.Operator/AddOriginOperatorId"
 	Operator_GetOperatorIdByOrigin_FullMethodName           = "/api.operator.service.v1.Operator/GetOperatorIdByOrigin"
 	Operator_DeleteOriginOperatorId_FullMethodName          = "/api.operator.service.v1.Operator/DeleteOriginOperatorId"
@@ -61,9 +58,6 @@ type OperatorClient interface {
 	UpdateOperator(ctx context.Context, in *UpdateOperatorRequest, opts ...grpc.CallOption) (*UpdateOperatorResponse, error)
 	GetOperator(ctx context.Context, in *GetOperatorRequest, opts ...grpc.CallOption) (*GetOperatorResponse, error)
 	GetOperatorsByIds(ctx context.Context, in *GetOperatorsByIdsRequest, opts ...grpc.CallOption) (*GetOperatorsByIdsResponse, error)
-	AddOrUpdateCurrency(ctx context.Context, in *AddOrUpdateCurrencyRequest, opts ...grpc.CallOption) (*AddOrUpdateCurrencyResponse, error)
-	UpdateOperatorCurrency(ctx context.Context, in *UpdateOperatorCurrencyRequest, opts ...grpc.CallOption) (*UpdateOperatorCurrencyResponse, error)
-	GetOperatorCurrencies(ctx context.Context, in *GetOperatorCurrenciesRequest, opts ...grpc.CallOption) (*GetOperatorCurrenciesResponse, error)
 	AddOriginOperatorId(ctx context.Context, in *AddOriginOperatorIdRequest, opts ...grpc.CallOption) (*AddOriginOperatorIdResponse, error)
 	GetOperatorIdByOrigin(ctx context.Context, in *GetOperatorIdByOriginRequest, opts ...grpc.CallOption) (*GetOperatorIdByOriginResponse, error)
 	DeleteOriginOperatorId(ctx context.Context, in *DeleteOriginOperatorIdRequest, opts ...grpc.CallOption) (*DeleteOriginOperatorIdResponse, error)
@@ -134,36 +128,6 @@ func (c *operatorClient) GetOperatorsByIds(ctx context.Context, in *GetOperators
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetOperatorsByIdsResponse)
 	err := c.cc.Invoke(ctx, Operator_GetOperatorsByIds_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *operatorClient) AddOrUpdateCurrency(ctx context.Context, in *AddOrUpdateCurrencyRequest, opts ...grpc.CallOption) (*AddOrUpdateCurrencyResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AddOrUpdateCurrencyResponse)
-	err := c.cc.Invoke(ctx, Operator_AddOrUpdateCurrency_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *operatorClient) UpdateOperatorCurrency(ctx context.Context, in *UpdateOperatorCurrencyRequest, opts ...grpc.CallOption) (*UpdateOperatorCurrencyResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateOperatorCurrencyResponse)
-	err := c.cc.Invoke(ctx, Operator_UpdateOperatorCurrency_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *operatorClient) GetOperatorCurrencies(ctx context.Context, in *GetOperatorCurrenciesRequest, opts ...grpc.CallOption) (*GetOperatorCurrenciesResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetOperatorCurrenciesResponse)
-	err := c.cc.Invoke(ctx, Operator_GetOperatorCurrencies_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -410,9 +374,6 @@ type OperatorServer interface {
 	UpdateOperator(context.Context, *UpdateOperatorRequest) (*UpdateOperatorResponse, error)
 	GetOperator(context.Context, *GetOperatorRequest) (*GetOperatorResponse, error)
 	GetOperatorsByIds(context.Context, *GetOperatorsByIdsRequest) (*GetOperatorsByIdsResponse, error)
-	AddOrUpdateCurrency(context.Context, *AddOrUpdateCurrencyRequest) (*AddOrUpdateCurrencyResponse, error)
-	UpdateOperatorCurrency(context.Context, *UpdateOperatorCurrencyRequest) (*UpdateOperatorCurrencyResponse, error)
-	GetOperatorCurrencies(context.Context, *GetOperatorCurrenciesRequest) (*GetOperatorCurrenciesResponse, error)
 	AddOriginOperatorId(context.Context, *AddOriginOperatorIdRequest) (*AddOriginOperatorIdResponse, error)
 	GetOperatorIdByOrigin(context.Context, *GetOperatorIdByOriginRequest) (*GetOperatorIdByOriginResponse, error)
 	DeleteOriginOperatorId(context.Context, *DeleteOriginOperatorIdRequest) (*DeleteOriginOperatorIdResponse, error)
@@ -460,15 +421,6 @@ func (UnimplementedOperatorServer) GetOperator(context.Context, *GetOperatorRequ
 }
 func (UnimplementedOperatorServer) GetOperatorsByIds(context.Context, *GetOperatorsByIdsRequest) (*GetOperatorsByIdsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorsByIds not implemented")
-}
-func (UnimplementedOperatorServer) AddOrUpdateCurrency(context.Context, *AddOrUpdateCurrencyRequest) (*AddOrUpdateCurrencyResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddOrUpdateCurrency not implemented")
-}
-func (UnimplementedOperatorServer) UpdateOperatorCurrency(context.Context, *UpdateOperatorCurrencyRequest) (*UpdateOperatorCurrencyResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateOperatorCurrency not implemented")
-}
-func (UnimplementedOperatorServer) GetOperatorCurrencies(context.Context, *GetOperatorCurrenciesRequest) (*GetOperatorCurrenciesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorCurrencies not implemented")
 }
 func (UnimplementedOperatorServer) AddOriginOperatorId(context.Context, *AddOriginOperatorIdRequest) (*AddOriginOperatorIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddOriginOperatorId not implemented")
@@ -628,60 +580,6 @@ func _Operator_GetOperatorsByIds_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(OperatorServer).GetOperatorsByIds(ctx, req.(*GetOperatorsByIdsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Operator_AddOrUpdateCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddOrUpdateCurrencyRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OperatorServer).AddOrUpdateCurrency(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Operator_AddOrUpdateCurrency_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OperatorServer).AddOrUpdateCurrency(ctx, req.(*AddOrUpdateCurrencyRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Operator_UpdateOperatorCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateOperatorCurrencyRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OperatorServer).UpdateOperatorCurrency(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Operator_UpdateOperatorCurrency_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OperatorServer).UpdateOperatorCurrency(ctx, req.(*UpdateOperatorCurrencyRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Operator_GetOperatorCurrencies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOperatorCurrenciesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OperatorServer).GetOperatorCurrencies(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Operator_GetOperatorCurrencies_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OperatorServer).GetOperatorCurrencies(ctx, req.(*GetOperatorCurrenciesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1122,18 +1020,6 @@ var Operator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOperatorsByIds",
 			Handler:    _Operator_GetOperatorsByIds_Handler,
-		},
-		{
-			MethodName: "AddOrUpdateCurrency",
-			Handler:    _Operator_AddOrUpdateCurrency_Handler,
-		},
-		{
-			MethodName: "UpdateOperatorCurrency",
-			Handler:    _Operator_UpdateOperatorCurrency_Handler,
-		},
-		{
-			MethodName: "GetOperatorCurrencies",
-			Handler:    _Operator_GetOperatorCurrencies_Handler,
 		},
 		{
 			MethodName: "AddOriginOperatorId",
