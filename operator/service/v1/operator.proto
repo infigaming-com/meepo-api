@@ -21,15 +21,6 @@ service Operator {
 	rpc GetOperatorsByIds(GetOperatorsByIdsRequest) returns (GetOperatorsByIdsResponse) {
 	}
 
-	rpc AddOrUpdateCurrency(AddOrUpdateCurrencyRequest) returns (AddOrUpdateCurrencyResponse) {
-	}
-
-	rpc UpdateOperatorCurrency(UpdateOperatorCurrencyRequest) returns (UpdateOperatorCurrencyResponse) {
-	}
-
-	rpc GetOperatorCurrencies(GetOperatorCurrenciesRequest) returns (GetOperatorCurrenciesResponse) {
-	}
-
 	rpc AddOriginOperatorId(AddOriginOperatorIdRequest) returns (AddOriginOperatorIdResponse) {
 	}
 
@@ -148,38 +139,6 @@ message GetOperatorsByIdsResponse {
 		bool enabled = 3;
 	}
 	repeated Operator operators = 1;
-}
-
-message AddOrUpdateCurrencyRequest {
-	string currency = 1;
-	bool enabled = 2;
-	bool hidden = 3;
-}
-
-message AddOrUpdateCurrencyResponse {}
-
-message UpdateOperatorCurrencyRequest {
-	int64 operator_id = 1;
-	string currency = 2;
-	bool enabled = 3;
-}
-
-message UpdateOperatorCurrencyResponse {}
-
-message GetOperatorCurrenciesRequest {
-	int64 operator_id = 1;
-	// Filter to return specific currencies only.
-	// If empty or not provided, all currencies will be returned
-	repeated string currencies = 2;
-}
-
-message GetOperatorCurrenciesResponse {
-	message Currency {
-		string currency = 1;
-		bool enabled = 2;
-		bool hidden = 3;
-	}
-	repeated Currency currencies = 1;
 }
 
 message AddOriginOperatorIdRequest {
