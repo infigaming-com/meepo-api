@@ -61,6 +61,7 @@ const (
 	Game_GetTransactionAndEventInfo_FullMethodName        = "/api.game.service.v1.Game/GetTransactionAndEventInfo"
 	Game_ListCustomerStrikeReports_FullMethodName         = "/api.game.service.v1.Game/ListCustomerStrikeReports"
 	Game_ExportCustomerStrikeReports_FullMethodName       = "/api.game.service.v1.Game/ExportCustomerStrikeReports"
+	Game_CreateTaxReport_FullMethodName                   = "/api.game.service.v1.Game/CreateTaxReport"
 )
 
 // GameClient is the client API for Game service.
@@ -112,6 +113,7 @@ type GameClient interface {
 	// Customer Strike Report related APIs
 	ListCustomerStrikeReports(ctx context.Context, in *ListCustomerStrikeReportsRequest, opts ...grpc.CallOption) (*ListCustomerStrikeReportsResponse, error)
 	ExportCustomerStrikeReports(ctx context.Context, in *ExportCustomerStrikeReportsRequest, opts ...grpc.CallOption) (*ExportCustomerStrikeReportsResponse, error)
+	CreateTaxReport(ctx context.Context, in *CreateTaxReportRequest, opts ...grpc.CallOption) (*CreateTaxReportResponse, error)
 }
 
 type gameClient struct {
@@ -542,6 +544,16 @@ func (c *gameClient) ExportCustomerStrikeReports(ctx context.Context, in *Export
 	return out, nil
 }
 
+func (c *gameClient) CreateTaxReport(ctx context.Context, in *CreateTaxReportRequest, opts ...grpc.CallOption) (*CreateTaxReportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateTaxReportResponse)
+	err := c.cc.Invoke(ctx, Game_CreateTaxReport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GameServer is the server API for Game service.
 // All implementations must embed UnimplementedGameServer
 // for forward compatibility.
@@ -591,6 +603,7 @@ type GameServer interface {
 	// Customer Strike Report related APIs
 	ListCustomerStrikeReports(context.Context, *ListCustomerStrikeReportsRequest) (*ListCustomerStrikeReportsResponse, error)
 	ExportCustomerStrikeReports(context.Context, *ExportCustomerStrikeReportsRequest) (*ExportCustomerStrikeReportsResponse, error)
+	CreateTaxReport(context.Context, *CreateTaxReportRequest) (*CreateTaxReportResponse, error)
 	mustEmbedUnimplementedGameServer()
 }
 
@@ -726,6 +739,9 @@ func (UnimplementedGameServer) ListCustomerStrikeReports(context.Context, *ListC
 }
 func (UnimplementedGameServer) ExportCustomerStrikeReports(context.Context, *ExportCustomerStrikeReportsRequest) (*ExportCustomerStrikeReportsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExportCustomerStrikeReports not implemented")
+}
+func (UnimplementedGameServer) CreateTaxReport(context.Context, *CreateTaxReportRequest) (*CreateTaxReportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTaxReport not implemented")
 }
 func (UnimplementedGameServer) mustEmbedUnimplementedGameServer() {}
 func (UnimplementedGameServer) testEmbeddedByValue()              {}
@@ -1504,6 +1520,24 @@ func _Game_ExportCustomerStrikeReports_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_CreateTaxReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateTaxReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).CreateTaxReport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_CreateTaxReport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).CreateTaxReport(ctx, req.(*CreateTaxReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Game_ServiceDesc is the grpc.ServiceDesc for Game service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1678,6 +1712,10 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ExportCustomerStrikeReports",
 			Handler:    _Game_ExportCustomerStrikeReports_Handler,
+		},
+		{
+			MethodName: "CreateTaxReport",
+			Handler:    _Game_CreateTaxReport_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

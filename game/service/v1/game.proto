@@ -170,6 +170,8 @@ service Game {
 	rpc ExportCustomerStrikeReports(ExportCustomerStrikeReportsRequest) returns (ExportCustomerStrikeReportsResponse) {
 	}
 
+	rpc CreateTaxReport(CreateTaxReportRequest) returns (CreateTaxReportResponse) {
+	}
 }
 
 message CreateOperatorRequest {
@@ -1507,4 +1509,10 @@ message ExportCustomerStrikeReportsRequest {
 
 message ExportCustomerStrikeReportsResponse {
 	int64 task_id = 1;
+}
+
+message CreateTaxReportRequest {
+}
+
+message CreateTaxReportResponse {
 }
