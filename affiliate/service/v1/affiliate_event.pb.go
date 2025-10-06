@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        v4.25.6
-// source: affiliate/affiliate_event.proto
+// source: affiliate/service/v1/affiliate_event.proto
 
 package v1
 
@@ -33,7 +33,7 @@ type EventRequest struct {
 
 func (x *EventRequest) Reset() {
 	*x = EventRequest{}
-	mi := &file_affiliate_affiliate_event_proto_msgTypes[0]
+	mi := &file_affiliate_service_v1_affiliate_event_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45,7 +45,7 @@ func (x *EventRequest) String() string {
 func (*EventRequest) ProtoMessage() {}
 
 func (x *EventRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_affiliate_event_proto_msgTypes[0]
+	mi := &file_affiliate_service_v1_affiliate_event_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58,7 +58,7 @@ func (x *EventRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EventRequest.ProtoReflect.Descriptor instead.
 func (*EventRequest) Descriptor() ([]byte, []int) {
-	return file_affiliate_affiliate_event_proto_rawDescGZIP(), []int{0}
+	return file_affiliate_service_v1_affiliate_event_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *EventRequest) GetSubscriptionId() string {
@@ -90,7 +90,7 @@ type EventResponse struct {
 
 func (x *EventResponse) Reset() {
 	*x = EventResponse{}
-	mi := &file_affiliate_affiliate_event_proto_msgTypes[1]
+	mi := &file_affiliate_service_v1_affiliate_event_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -102,7 +102,7 @@ func (x *EventResponse) String() string {
 func (*EventResponse) ProtoMessage() {}
 
 func (x *EventResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_affiliate_event_proto_msgTypes[1]
+	mi := &file_affiliate_service_v1_affiliate_event_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -115,14 +115,14 @@ func (x *EventResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EventResponse.ProtoReflect.Descriptor instead.
 func (*EventResponse) Descriptor() ([]byte, []int) {
-	return file_affiliate_affiliate_event_proto_rawDescGZIP(), []int{1}
+	return file_affiliate_service_v1_affiliate_event_proto_rawDescGZIP(), []int{1}
 }
 
-var File_affiliate_affiliate_event_proto protoreflect.FileDescriptor
+var File_affiliate_service_v1_affiliate_event_proto protoreflect.FileDescriptor
 
-const file_affiliate_affiliate_event_proto_rawDesc = "" +
+const file_affiliate_service_v1_affiliate_event_proto_rawDesc = "" +
 	"\n" +
-	"\x1faffiliate/affiliate_event.proto\x12\x18api.affiliate.service.v1\x1a\x13common/common.proto\"u\n" +
+	"*affiliate/service/v1/affiliate_event.proto\x12\x18api.affiliate.service.v1\x1a\x13common/common.proto\"u\n" +
 	"\fEventRequest\x12'\n" +
 	"\x0fsubscription_id\x18\x01 \x01(\tR\x0esubscriptionId\x12\x1d\n" +
 	"\n" +
@@ -135,23 +135,23 @@ const file_affiliate_affiliate_event_proto_rawDesc = "" +
 	"\x18api.affiliate.service.v1P\x01Z;github.com/infigaming-com/meepo-api/affiliate/service/v1;v1b\x06proto3"
 
 var (
-	file_affiliate_affiliate_event_proto_rawDescOnce sync.Once
-	file_affiliate_affiliate_event_proto_rawDescData []byte
+	file_affiliate_service_v1_affiliate_event_proto_rawDescOnce sync.Once
+	file_affiliate_service_v1_affiliate_event_proto_rawDescData []byte
 )
 
-func file_affiliate_affiliate_event_proto_rawDescGZIP() []byte {
-	file_affiliate_affiliate_event_proto_rawDescOnce.Do(func() {
-		file_affiliate_affiliate_event_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_affiliate_affiliate_event_proto_rawDesc), len(file_affiliate_affiliate_event_proto_rawDesc)))
+func file_affiliate_service_v1_affiliate_event_proto_rawDescGZIP() []byte {
+	file_affiliate_service_v1_affiliate_event_proto_rawDescOnce.Do(func() {
+		file_affiliate_service_v1_affiliate_event_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_affiliate_service_v1_affiliate_event_proto_rawDesc), len(file_affiliate_service_v1_affiliate_event_proto_rawDesc)))
 	})
-	return file_affiliate_affiliate_event_proto_rawDescData
+	return file_affiliate_service_v1_affiliate_event_proto_rawDescData
 }
 
-var file_affiliate_affiliate_event_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_affiliate_affiliate_event_proto_goTypes = []any{
+var file_affiliate_service_v1_affiliate_event_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_affiliate_service_v1_affiliate_event_proto_goTypes = []any{
 	(*EventRequest)(nil),  // 0: api.affiliate.service.v1.EventRequest
 	(*EventResponse)(nil), // 1: api.affiliate.service.v1.EventResponse
 }
-var file_affiliate_affiliate_event_proto_depIdxs = []int32{
+var file_affiliate_service_v1_affiliate_event_proto_depIdxs = []int32{
 	0, // 0: api.affiliate.service.v1.AffiliateEvent.Event:input_type -> api.affiliate.service.v1.EventRequest
 	1, // 1: api.affiliate.service.v1.AffiliateEvent.Event:output_type -> api.affiliate.service.v1.EventResponse
 	1, // [1:2] is the sub-list for method output_type
@@ -161,26 +161,26 @@ var file_affiliate_affiliate_event_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_affiliate_affiliate_event_proto_init() }
-func file_affiliate_affiliate_event_proto_init() {
-	if File_affiliate_affiliate_event_proto != nil {
+func init() { file_affiliate_service_v1_affiliate_event_proto_init() }
+func file_affiliate_service_v1_affiliate_event_proto_init() {
+	if File_affiliate_service_v1_affiliate_event_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_affiliate_affiliate_event_proto_rawDesc), len(file_affiliate_affiliate_event_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_affiliate_service_v1_affiliate_event_proto_rawDesc), len(file_affiliate_service_v1_affiliate_event_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_affiliate_affiliate_event_proto_goTypes,
-		DependencyIndexes: file_affiliate_affiliate_event_proto_depIdxs,
-		MessageInfos:      file_affiliate_affiliate_event_proto_msgTypes,
+		GoTypes:           file_affiliate_service_v1_affiliate_event_proto_goTypes,
+		DependencyIndexes: file_affiliate_service_v1_affiliate_event_proto_depIdxs,
+		MessageInfos:      file_affiliate_service_v1_affiliate_event_proto_msgTypes,
 	}.Build()
-	File_affiliate_affiliate_event_proto = out.File
-	file_affiliate_affiliate_event_proto_goTypes = nil
-	file_affiliate_affiliate_event_proto_depIdxs = nil
+	File_affiliate_service_v1_affiliate_event_proto = out.File
+	file_affiliate_service_v1_affiliate_event_proto_goTypes = nil
+	file_affiliate_service_v1_affiliate_event_proto_depIdxs = nil
 }

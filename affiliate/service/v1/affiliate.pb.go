@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        v4.25.6
-// source: affiliate/affiliate.proto
+// source: affiliate/service/v1/affiliate.proto
 
 package v1
 
@@ -23,16 +23,16 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-var File_affiliate_affiliate_proto protoreflect.FileDescriptor
+var File_affiliate_service_v1_affiliate_proto protoreflect.FileDescriptor
 
-const file_affiliate_affiliate_proto_rawDesc = "" +
+const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\n" +
-	"\x19affiliate/affiliate.proto\x12\x18api.affiliate.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto2\v\n" +
+	"$affiliate/service/v1/affiliate.proto\x12\x18api.affiliate.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto2\v\n" +
 	"\tAffiliateBY\n" +
 	"\x18api.affiliate.service.v1P\x01Z;github.com/infigaming-com/meepo-api/affiliate/service/v1;v1b\x06proto3"
 
-var file_affiliate_affiliate_proto_goTypes = []any{}
-var file_affiliate_affiliate_proto_depIdxs = []int32{
+var file_affiliate_service_v1_affiliate_proto_goTypes = []any{}
+var file_affiliate_service_v1_affiliate_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
 	0, // [0:0] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -40,25 +40,25 @@ var file_affiliate_affiliate_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_affiliate_affiliate_proto_init() }
-func file_affiliate_affiliate_proto_init() {
-	if File_affiliate_affiliate_proto != nil {
+func init() { file_affiliate_service_v1_affiliate_proto_init() }
+func file_affiliate_service_v1_affiliate_proto_init() {
+	if File_affiliate_service_v1_affiliate_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_affiliate_affiliate_proto_rawDesc), len(file_affiliate_affiliate_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_affiliate_service_v1_affiliate_proto_rawDesc), len(file_affiliate_service_v1_affiliate_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   0,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_affiliate_affiliate_proto_goTypes,
-		DependencyIndexes: file_affiliate_affiliate_proto_depIdxs,
+		GoTypes:           file_affiliate_service_v1_affiliate_proto_goTypes,
+		DependencyIndexes: file_affiliate_service_v1_affiliate_proto_depIdxs,
 	}.Build()
-	File_affiliate_affiliate_proto = out.File
-	file_affiliate_affiliate_proto_goTypes = nil
-	file_affiliate_affiliate_proto_depIdxs = nil
+	File_affiliate_service_v1_affiliate_proto = out.File
+	file_affiliate_service_v1_affiliate_proto_goTypes = nil
+	file_affiliate_service_v1_affiliate_proto_depIdxs = nil
 }
