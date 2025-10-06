@@ -5,10 +5,12 @@ package api.affiliate.service.v1;
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "common/common.proto";
+import "affiliate/service/v1/commission_plan.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/affiliate/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.affiliate.service.v1";
 
 service Affiliate {
+    rpc CreateCommissionPlan(CreateCommissionPlanRequest) returns (CreateCommissionPlanResponse) {}
 }

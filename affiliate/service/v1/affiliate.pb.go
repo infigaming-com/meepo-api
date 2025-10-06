@@ -27,14 +27,20 @@ var File_affiliate_service_v1_affiliate_proto protoreflect.FileDescriptor
 
 const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\n" +
-	"$affiliate/service/v1/affiliate.proto\x12\x18api.affiliate.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto2\v\n" +
-	"\tAffiliateBY\n" +
+	"$affiliate/service/v1/affiliate.proto\x12\x18api.affiliate.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\x1a*affiliate/service/v1/commission_plan.proto2\x95\x01\n" +
+	"\tAffiliate\x12\x87\x01\n" +
+	"\x14CreateCommissionPlan\x125.api.affiliate.service.v1.CreateCommissionPlanRequest\x1a6.api.affiliate.service.v1.CreateCommissionPlanResponse\"\x00BY\n" +
 	"\x18api.affiliate.service.v1P\x01Z;github.com/infigaming-com/meepo-api/affiliate/service/v1;v1b\x06proto3"
 
-var file_affiliate_service_v1_affiliate_proto_goTypes = []any{}
+var file_affiliate_service_v1_affiliate_proto_goTypes = []any{
+	(*CreateCommissionPlanRequest)(nil),  // 0: api.affiliate.service.v1.CreateCommissionPlanRequest
+	(*CreateCommissionPlanResponse)(nil), // 1: api.affiliate.service.v1.CreateCommissionPlanResponse
+}
 var file_affiliate_service_v1_affiliate_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
+	0, // 0: api.affiliate.service.v1.Affiliate.CreateCommissionPlan:input_type -> api.affiliate.service.v1.CreateCommissionPlanRequest
+	1, // 1: api.affiliate.service.v1.Affiliate.CreateCommissionPlan:output_type -> api.affiliate.service.v1.CreateCommissionPlanResponse
+	1, // [1:2] is the sub-list for method output_type
+	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -45,6 +51,7 @@ func file_affiliate_service_v1_affiliate_proto_init() {
 	if File_affiliate_service_v1_affiliate_proto != nil {
 		return
 	}
+	file_affiliate_service_v1_commission_plan_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
