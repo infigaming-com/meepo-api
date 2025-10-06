@@ -35,6 +35,109 @@ var (
 	_ = sort.Sort
 )
 
+// Validate checks the field values on ByoDomain with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ByoDomain) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ByoDomain with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in ByoDomainMultiError, or nil
+// if none found.
+func (m *ByoDomain) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ByoDomain) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ByoDomain
+
+	// no validation rules for Domain
+
+	if len(errors) > 0 {
+		return ByoDomainMultiError(errors)
+	}
+
+	return nil
+}
+
+// ByoDomainMultiError is an error wrapping multiple validation errors returned
+// by ByoDomain.ValidateAll() if the designated constraints aren't met.
+type ByoDomainMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ByoDomainMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ByoDomainMultiError) AllErrors() []error { return m }
+
+// ByoDomainValidationError is the validation error returned by
+// ByoDomain.Validate if the designated constraints aren't met.
+type ByoDomainValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ByoDomainValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ByoDomainValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ByoDomainValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ByoDomainValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ByoDomainValidationError) ErrorName() string { return "ByoDomainValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ByoDomainValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sByoDomain.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ByoDomainValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ByoDomainValidationError{}
+
 // Validate checks the field values on UpdateByoNginxConfigRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -56,6 +159,40 @@ func (m *UpdateByoNginxConfigRequest) validate(all bool) error {
 	}
 
 	var errors []error
+
+	for idx, item := range m.GetByoDomains() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UpdateByoNginxConfigRequestValidationError{
+						field:  fmt.Sprintf("ByoDomains[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UpdateByoNginxConfigRequestValidationError{
+						field:  fmt.Sprintf("ByoDomains[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UpdateByoNginxConfigRequestValidationError{
+					field:  fmt.Sprintf("ByoDomains[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
 
 	if len(errors) > 0 {
 		return UpdateByoNginxConfigRequestMultiError(errors)
@@ -263,6 +400,40 @@ func (m *UpdateBackofficeByoNginxConfigRequest) validate(all bool) error {
 	}
 
 	var errors []error
+
+	for idx, item := range m.GetByoDomains() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UpdateBackofficeByoNginxConfigRequestValidationError{
+						field:  fmt.Sprintf("ByoDomains[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UpdateBackofficeByoNginxConfigRequestValidationError{
+						field:  fmt.Sprintf("ByoDomains[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UpdateBackofficeByoNginxConfigRequestValidationError{
+					field:  fmt.Sprintf("ByoDomains[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
 
 	if len(errors) > 0 {
 		return UpdateBackofficeByoNginxConfigRequestMultiError(errors)
