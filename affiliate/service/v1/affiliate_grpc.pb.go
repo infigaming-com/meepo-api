@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v4.25.6
-// source: affiliate/affiliate.proto
+// source: affiliate/service/v1/affiliate.proto
 
 package v1
 
@@ -72,5 +72,5 @@ var Affiliate_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*AffiliateServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams:     []grpc.StreamDesc{},
-	Metadata:    "affiliate/affiliate.proto",
+	Metadata:    "affiliate/service/v1/affiliate.proto",
 }

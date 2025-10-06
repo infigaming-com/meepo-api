@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v4.25.6
-// source: affiliate/affiliate_event.proto
+// source: affiliate/service/v1/affiliate_event.proto
 
 package v1
 
@@ -117,5 +117,5 @@ var AffiliateEvent_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "affiliate/affiliate_event.proto",
+	Metadata: "affiliate/service/v1/affiliate_event.proto",
 }
