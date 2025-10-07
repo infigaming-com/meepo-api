@@ -21,17 +21,70 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Byo domain information
+type Domain struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ByoDomain     string                 `protobuf:"bytes,1,opt,name=byo_domain,json=byoDomain,proto3" json:"byo_domain,omitempty"` // Byo domain name
+	Domain        string                 `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`                        // Meepo domain name
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Domain) Reset() {
+	*x = Domain{}
+	mi := &file_acme_service_v1_nginx_config_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Domain) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Domain) ProtoMessage() {}
+
+func (x *Domain) ProtoReflect() protoreflect.Message {
+	mi := &file_acme_service_v1_nginx_config_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Domain.ProtoReflect.Descriptor instead.
+func (*Domain) Descriptor() ([]byte, []int) {
+	return file_acme_service_v1_nginx_config_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *Domain) GetByoDomain() string {
+	if x != nil {
+		return x.ByoDomain
+	}
+	return ""
+}
+
+func (x *Domain) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
 // Request to update the nginx config for frontend byo domains
 type UpdateByoNginxConfigRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Domains       []string               `protobuf:"bytes,1,rep,name=domains,proto3" json:"domains,omitempty"` // Domain names
+	Domains       []*Domain              `protobuf:"bytes,1,rep,name=domains,proto3" json:"domains,omitempty"` // Byo domains
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateByoNginxConfigRequest) Reset() {
 	*x = UpdateByoNginxConfigRequest{}
-	mi := &file_acme_service_v1_nginx_config_proto_msgTypes[0]
+	mi := &file_acme_service_v1_nginx_config_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +96,7 @@ func (x *UpdateByoNginxConfigRequest) String() string {
 func (*UpdateByoNginxConfigRequest) ProtoMessage() {}
 
 func (x *UpdateByoNginxConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_acme_service_v1_nginx_config_proto_msgTypes[0]
+	mi := &file_acme_service_v1_nginx_config_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,10 +109,10 @@ func (x *UpdateByoNginxConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateByoNginxConfigRequest.ProtoReflect.Descriptor instead.
 func (*UpdateByoNginxConfigRequest) Descriptor() ([]byte, []int) {
-	return file_acme_service_v1_nginx_config_proto_rawDescGZIP(), []int{0}
+	return file_acme_service_v1_nginx_config_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *UpdateByoNginxConfigRequest) GetDomains() []string {
+func (x *UpdateByoNginxConfigRequest) GetDomains() []*Domain {
 	if x != nil {
 		return x.Domains
 	}
@@ -75,7 +128,7 @@ type UpdateByoNginxConfigResponse struct {
 
 func (x *UpdateByoNginxConfigResponse) Reset() {
 	*x = UpdateByoNginxConfigResponse{}
-	mi := &file_acme_service_v1_nginx_config_proto_msgTypes[1]
+	mi := &file_acme_service_v1_nginx_config_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -87,7 +140,7 @@ func (x *UpdateByoNginxConfigResponse) String() string {
 func (*UpdateByoNginxConfigResponse) ProtoMessage() {}
 
 func (x *UpdateByoNginxConfigResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_acme_service_v1_nginx_config_proto_msgTypes[1]
+	mi := &file_acme_service_v1_nginx_config_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -100,20 +153,20 @@ func (x *UpdateByoNginxConfigResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateByoNginxConfigResponse.ProtoReflect.Descriptor instead.
 func (*UpdateByoNginxConfigResponse) Descriptor() ([]byte, []int) {
-	return file_acme_service_v1_nginx_config_proto_rawDescGZIP(), []int{1}
+	return file_acme_service_v1_nginx_config_proto_rawDescGZIP(), []int{2}
 }
 
 // Request to update the nginx config for backend byo domains
 type UpdateBackofficeByoNginxConfigRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Domains       []string               `protobuf:"bytes,1,rep,name=domains,proto3" json:"domains,omitempty"` // Domain names
+	Domains       []*Domain              `protobuf:"bytes,1,rep,name=domains,proto3" json:"domains,omitempty"` // Byo domains
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateBackofficeByoNginxConfigRequest) Reset() {
 	*x = UpdateBackofficeByoNginxConfigRequest{}
-	mi := &file_acme_service_v1_nginx_config_proto_msgTypes[2]
+	mi := &file_acme_service_v1_nginx_config_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -125,7 +178,7 @@ func (x *UpdateBackofficeByoNginxConfigRequest) String() string {
 func (*UpdateBackofficeByoNginxConfigRequest) ProtoMessage() {}
 
 func (x *UpdateBackofficeByoNginxConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_acme_service_v1_nginx_config_proto_msgTypes[2]
+	mi := &file_acme_service_v1_nginx_config_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -138,10 +191,10 @@ func (x *UpdateBackofficeByoNginxConfigRequest) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use UpdateBackofficeByoNginxConfigRequest.ProtoReflect.Descriptor instead.
 func (*UpdateBackofficeByoNginxConfigRequest) Descriptor() ([]byte, []int) {
-	return file_acme_service_v1_nginx_config_proto_rawDescGZIP(), []int{2}
+	return file_acme_service_v1_nginx_config_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *UpdateBackofficeByoNginxConfigRequest) GetDomains() []string {
+func (x *UpdateBackofficeByoNginxConfigRequest) GetDomains() []*Domain {
 	if x != nil {
 		return x.Domains
 	}
@@ -157,7 +210,7 @@ type UpdateBackofficeByoNginxConfigResponse struct {
 
 func (x *UpdateBackofficeByoNginxConfigResponse) Reset() {
 	*x = UpdateBackofficeByoNginxConfigResponse{}
-	mi := &file_acme_service_v1_nginx_config_proto_msgTypes[3]
+	mi := &file_acme_service_v1_nginx_config_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -169,7 +222,7 @@ func (x *UpdateBackofficeByoNginxConfigResponse) String() string {
 func (*UpdateBackofficeByoNginxConfigResponse) ProtoMessage() {}
 
 func (x *UpdateBackofficeByoNginxConfigResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_acme_service_v1_nginx_config_proto_msgTypes[3]
+	mi := &file_acme_service_v1_nginx_config_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -182,19 +235,23 @@ func (x *UpdateBackofficeByoNginxConfigResponse) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use UpdateBackofficeByoNginxConfigResponse.ProtoReflect.Descriptor instead.
 func (*UpdateBackofficeByoNginxConfigResponse) Descriptor() ([]byte, []int) {
-	return file_acme_service_v1_nginx_config_proto_rawDescGZIP(), []int{3}
+	return file_acme_service_v1_nginx_config_proto_rawDescGZIP(), []int{4}
 }
 
 var File_acme_service_v1_nginx_config_proto protoreflect.FileDescriptor
 
 const file_acme_service_v1_nginx_config_proto_rawDesc = "" +
 	"\n" +
-	"\"acme/service/v1/nginx_config.proto\x12\x13api.acme.service.v1\"7\n" +
-	"\x1bUpdateByoNginxConfigRequest\x12\x18\n" +
-	"\adomains\x18\x01 \x03(\tR\adomains\"\x1e\n" +
-	"\x1cUpdateByoNginxConfigResponse\"A\n" +
-	"%UpdateBackofficeByoNginxConfigRequest\x12\x18\n" +
-	"\adomains\x18\x01 \x03(\tR\adomains\"(\n" +
+	"\"acme/service/v1/nginx_config.proto\x12\x13api.acme.service.v1\"?\n" +
+	"\x06Domain\x12\x1d\n" +
+	"\n" +
+	"byo_domain\x18\x01 \x01(\tR\tbyoDomain\x12\x16\n" +
+	"\x06domain\x18\x02 \x01(\tR\x06domain\"T\n" +
+	"\x1bUpdateByoNginxConfigRequest\x125\n" +
+	"\adomains\x18\x01 \x03(\v2\x1b.api.acme.service.v1.DomainR\adomains\"\x1e\n" +
+	"\x1cUpdateByoNginxConfigResponse\"^\n" +
+	"%UpdateBackofficeByoNginxConfigRequest\x125\n" +
+	"\adomains\x18\x01 \x03(\v2\x1b.api.acme.service.v1.DomainR\adomains\"(\n" +
 	"&UpdateBackofficeByoNginxConfigResponse2\xab\x02\n" +
 	"\fnginx_config\x12}\n" +
 	"\x14UpdateByoNginxConfig\x120.api.acme.service.v1.UpdateByoNginxConfigRequest\x1a1.api.acme.service.v1.UpdateByoNginxConfigResponse\"\x00\x12\x9b\x01\n" +
@@ -213,23 +270,26 @@ func file_acme_service_v1_nginx_config_proto_rawDescGZIP() []byte {
 	return file_acme_service_v1_nginx_config_proto_rawDescData
 }
 
-var file_acme_service_v1_nginx_config_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_acme_service_v1_nginx_config_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_acme_service_v1_nginx_config_proto_goTypes = []any{
-	(*UpdateByoNginxConfigRequest)(nil),            // 0: api.acme.service.v1.UpdateByoNginxConfigRequest
-	(*UpdateByoNginxConfigResponse)(nil),           // 1: api.acme.service.v1.UpdateByoNginxConfigResponse
-	(*UpdateBackofficeByoNginxConfigRequest)(nil),  // 2: api.acme.service.v1.UpdateBackofficeByoNginxConfigRequest
-	(*UpdateBackofficeByoNginxConfigResponse)(nil), // 3: api.acme.service.v1.UpdateBackofficeByoNginxConfigResponse
+	(*Domain)(nil),                                 // 0: api.acme.service.v1.Domain
+	(*UpdateByoNginxConfigRequest)(nil),            // 1: api.acme.service.v1.UpdateByoNginxConfigRequest
+	(*UpdateByoNginxConfigResponse)(nil),           // 2: api.acme.service.v1.UpdateByoNginxConfigResponse
+	(*UpdateBackofficeByoNginxConfigRequest)(nil),  // 3: api.acme.service.v1.UpdateBackofficeByoNginxConfigRequest
+	(*UpdateBackofficeByoNginxConfigResponse)(nil), // 4: api.acme.service.v1.UpdateBackofficeByoNginxConfigResponse
 }
 var file_acme_service_v1_nginx_config_proto_depIdxs = []int32{
-	0, // 0: api.acme.service.v1.nginx_config.UpdateByoNginxConfig:input_type -> api.acme.service.v1.UpdateByoNginxConfigRequest
-	2, // 1: api.acme.service.v1.nginx_config.UpdateBackofficeByoNginxConfig:input_type -> api.acme.service.v1.UpdateBackofficeByoNginxConfigRequest
-	1, // 2: api.acme.service.v1.nginx_config.UpdateByoNginxConfig:output_type -> api.acme.service.v1.UpdateByoNginxConfigResponse
-	3, // 3: api.acme.service.v1.nginx_config.UpdateBackofficeByoNginxConfig:output_type -> api.acme.service.v1.UpdateBackofficeByoNginxConfigResponse
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0, // 0: api.acme.service.v1.UpdateByoNginxConfigRequest.domains:type_name -> api.acme.service.v1.Domain
+	0, // 1: api.acme.service.v1.UpdateBackofficeByoNginxConfigRequest.domains:type_name -> api.acme.service.v1.Domain
+	1, // 2: api.acme.service.v1.nginx_config.UpdateByoNginxConfig:input_type -> api.acme.service.v1.UpdateByoNginxConfigRequest
+	3, // 3: api.acme.service.v1.nginx_config.UpdateBackofficeByoNginxConfig:input_type -> api.acme.service.v1.UpdateBackofficeByoNginxConfigRequest
+	2, // 4: api.acme.service.v1.nginx_config.UpdateByoNginxConfig:output_type -> api.acme.service.v1.UpdateByoNginxConfigResponse
+	4, // 5: api.acme.service.v1.nginx_config.UpdateBackofficeByoNginxConfig:output_type -> api.acme.service.v1.UpdateBackofficeByoNginxConfigResponse
+	4, // [4:6] is the sub-list for method output_type
+	2, // [2:4] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_acme_service_v1_nginx_config_proto_init() }
@@ -243,7 +303,7 @@ func file_acme_service_v1_nginx_config_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_acme_service_v1_nginx_config_proto_rawDesc), len(file_acme_service_v1_nginx_config_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

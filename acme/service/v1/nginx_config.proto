@@ -16,9 +16,15 @@ service nginx_config {
 	}
 }
 
+// Byo domain information
+message Domain {
+	string byo_domain = 1;	// Byo domain name
+	string domain = 2;	// Meepo domain name
+}
+
 // Request to update the nginx config for frontend byo domains
 message UpdateByoNginxConfigRequest {
-	repeated string domains = 1;  // Domain names
+	repeated Domain domains = 1;  // Byo domains
 }
 
 // Response for updating the nginx config for frontend byo domains
@@ -27,7 +33,7 @@ message UpdateByoNginxConfigResponse {
 
 // Request to update the nginx config for backend byo domains
 message UpdateBackofficeByoNginxConfigRequest {
-	repeated string domains = 1;  // Domain names
+	repeated Domain domains = 1;  // Byo domains
 }
 
 // Response for updating the nginx config for backend byo domains
