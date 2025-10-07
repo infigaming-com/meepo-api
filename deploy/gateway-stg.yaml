@@ -2,55 +2,42 @@ kind: Gateway
 apiVersion: gateway.networking.k8s.io/v1beta1
 metadata:
   name: meepo-gateway
-  namespace: meepo-dev
+  namespace: meepo-gateway
 spec:
   gatewayClassName: gke-l7-regional-external-managed
   listeners:
-  - name: meepoapi-xyz-dev-https
+  # - name: meepoapi-xyz-dev-https
+  #   protocol: HTTPS
+  #   port: 443
+  #   hostname: "dev.meepoapi.xyz"
+  #   allowedRoutes:
+  #     namespaces:
+  #       from: All
+  #   tls:
+  #     mode: Terminate
+  #     certificateRefs:
+  #     - name: meepoapi-xyz-tls
+  #       namespace: meepo-dev
+  - name: meepoapi-xyz-stg-https
     protocol: HTTPS
     port: 443
-    hostname: "dev.meepoapi.xyz"
-    allowedRoutes:
-      namespaces:
-        from: Same
-    tls:
-      mode: Terminate
-      certificateRefs:
-      - name: meepoapi-xyz-tls
-        namespace: meepo-dev
-  - name: meepoapi-xyz-gli-https
-    protocol: HTTPS
-    port: 443
-    hostname: "gli.meepoapi.xyz"
-    allowedRoutes:
-      namespaces:
-        from: All
-    tls:
-      mode: Terminate
-      certificateRefs:
-      - name: meepoapi-xyz-tls
-        namespace: meepo-dev
-  - name: hicasino-xyz-dev-https
-    protocol: HTTPS
-    port: 443
-    hostname: "dev.hicasino.xyz"
+    hostname: "stg.meepoapi.xyz"
     allowedRoutes:
       namespaces:
         from: All
     tls:
       mode: Terminate
       certificateRefs:
-      - name: hicasino-xyz-tls
-        namespace: meepo-dev
+      - name: meepoapi-xyz-tls
   addresses:
   - type: NamedAddress
-    value: gke-meepo-dev-ingress-ip
+    value: meepo-gke-ingress-ip
 ---
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: ReferenceGrant
 metadata:
-  name: allow-stg-to-dev-gateway
-  namespace: meepo-dev
+  name: allow-meepo-stg
+  namespace: meepo-stg
 spec:
   from:
   - group: gateway.networking.k8s.io
@@ -64,13 +51,13 @@ spec:
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: ReferenceGrant
 metadata:
-  name: allow-invoker-to-dev-gateway
+  name: allow-meepo-dev
   namespace: meepo-dev
 spec:
   from:
   - group: gateway.networking.k8s.io
     kind: HTTPRoute
-    namespace: invoker-dev
+    namespace: meepo-dev
   to:
   - group: gateway.networking.k8s.io
     kind: Gateway

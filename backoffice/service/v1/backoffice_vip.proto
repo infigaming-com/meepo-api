@@ -26,15 +26,6 @@ service BackofficeVip {
     };
   }
 
-  // ==================== VIP等级配置模板管理 ====================
-  
-  rpc ListVipLevelConfigTemplates(ListVipLevelConfigTemplatesRequest) returns (ListVipLevelConfigTemplatesResponse) {
-    option (google.api.http) = {
-      post: "/v1/backoffice/vip/level-config-templates/list"
-      body: "*"
-    };
-  }
-
   rpc GetVipLevelConfigTemplate(GetVipLevelConfigTemplateRequest) returns (GetVipLevelConfigTemplateResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/vip/level-config-template/get"
@@ -59,6 +50,13 @@ service BackofficeVip {
   rpc DeleteVipLevelConfigTemplate(DeleteVipLevelConfigTemplateRequest) returns (DeleteVipLevelConfigTemplateResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/vip/level-config-template/delete"
+      body: "*"
+    };
+  }
+
+  rpc GetVipConfig(GetVipConfigRequest) returns (GetVipConfigResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/vip/config/get"
       body: "*"
     };
   }
@@ -158,6 +156,8 @@ message GetVipSettingResponse {
   api.common.OperatorContext custom_operator_context = 4;
   api.common.OperatorContext inherited_operator_context = 5;
   string inherited_from_operator_name = 6;
+  repeated VipLevelConfigTemplate default_templates = 7;
+  repeated VipLevelConfigTemplate custom_templates = 8;
 }
 
 message UpdateVipSettingRequest {
@@ -210,23 +210,18 @@ message VipLevelConfigTemplate {
   int64 weekly_adjust_range_pct = 27;
   int32 weekly_active_days_reward = 28;
   int64 weekly_wagering_req = 29;
+
+  // 每月奖励
+  bool monthly_reward_enabled = 30;
+  int64 monthly_fixed_reward_amt = 31;
+  int64 monthly_turnover_rate = 32;
+  int64 monthly_net_loss_amt = 33;
+  int64 monthly_adjust_range_pct = 34;
+  int32 monthly_active_days_reward = 35;
+  int64 monthly_wagering_req = 36;
   
-  int64 created_at = 30;
-  int64 updated_at = 31;
-}
-
-message ListVipLevelConfigTemplatesRequest {
-  api.common.OperatorContext target_operator_context = 1;
-  int64 setting_id = 2;
-  int32 page = 3;
-  int32 page_size = 4;
-}
-
-message ListVipLevelConfigTemplatesResponse {
-  repeated VipLevelConfigTemplate templates = 1;
-  int32 total = 2;
-  int32 page = 3;
-  int32 page_size = 4;
+  int64 created_at = 37;
+  int64 updated_at = 38;
 }
 
 message GetVipLevelConfigTemplateRequest {
@@ -261,4 +256,22 @@ message DeleteVipLevelConfigTemplateRequest {
 }
 
 message DeleteVipLevelConfigTemplateResponse {
+}
+
+message GetVipConfigRequest {
+  api.common.OperatorContext target_operator_context = 1;
+}
+
+message VipConfig {
+  int64 id = 1;
+  int64 system_operator_id = 2;
+  int64 retailer_operator_id = 3;
+  int64 company_operator_id = 4;
+  int64 operator_id = 5;
+  bool enabled = 6;
+}
+
+
+message GetVipConfigResponse {
+  VipConfig config = 1;
 }

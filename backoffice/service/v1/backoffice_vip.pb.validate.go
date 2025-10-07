@@ -463,6 +463,74 @@ func (m *GetVipSettingResponse) validate(all bool) error {
 
 	// no validation rules for InheritedFromOperatorName
 
+	for idx, item := range m.GetDefaultTemplates() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetVipSettingResponseValidationError{
+						field:  fmt.Sprintf("DefaultTemplates[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetVipSettingResponseValidationError{
+						field:  fmt.Sprintf("DefaultTemplates[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetVipSettingResponseValidationError{
+					field:  fmt.Sprintf("DefaultTemplates[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	for idx, item := range m.GetCustomTemplates() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetVipSettingResponseValidationError{
+						field:  fmt.Sprintf("CustomTemplates[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetVipSettingResponseValidationError{
+						field:  fmt.Sprintf("CustomTemplates[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetVipSettingResponseValidationError{
+					field:  fmt.Sprintf("CustomTemplates[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
 	if len(errors) > 0 {
 		return GetVipSettingResponseMultiError(errors)
 	}
@@ -885,6 +953,20 @@ func (m *VipLevelConfigTemplate) validate(all bool) error {
 
 	// no validation rules for WeeklyWageringReq
 
+	// no validation rules for MonthlyRewardEnabled
+
+	// no validation rules for MonthlyFixedRewardAmt
+
+	// no validation rules for MonthlyTurnoverRate
+
+	// no validation rules for MonthlyNetLossAmt
+
+	// no validation rules for MonthlyAdjustRangePct
+
+	// no validation rules for MonthlyActiveDaysReward
+
+	// no validation rules for MonthlyWageringReq
+
 	// no validation rules for CreatedAt
 
 	// no validation rules for UpdatedAt
@@ -968,291 +1050,6 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = VipLevelConfigTemplateValidationError{}
-
-// Validate checks the field values on ListVipLevelConfigTemplatesRequest with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *ListVipLevelConfigTemplatesRequest) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on ListVipLevelConfigTemplatesRequest
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// ListVipLevelConfigTemplatesRequestMultiError, or nil if none found.
-func (m *ListVipLevelConfigTemplatesRequest) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *ListVipLevelConfigTemplatesRequest) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if all {
-		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListVipLevelConfigTemplatesRequestValidationError{
-					field:  "TargetOperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ListVipLevelConfigTemplatesRequestValidationError{
-					field:  "TargetOperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ListVipLevelConfigTemplatesRequestValidationError{
-				field:  "TargetOperatorContext",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	// no validation rules for SettingId
-
-	// no validation rules for Page
-
-	// no validation rules for PageSize
-
-	if len(errors) > 0 {
-		return ListVipLevelConfigTemplatesRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-// ListVipLevelConfigTemplatesRequestMultiError is an error wrapping multiple
-// validation errors returned by
-// ListVipLevelConfigTemplatesRequest.ValidateAll() if the designated
-// constraints aren't met.
-type ListVipLevelConfigTemplatesRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m ListVipLevelConfigTemplatesRequestMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m ListVipLevelConfigTemplatesRequestMultiError) AllErrors() []error { return m }
-
-// ListVipLevelConfigTemplatesRequestValidationError is the validation error
-// returned by ListVipLevelConfigTemplatesRequest.Validate if the designated
-// constraints aren't met.
-type ListVipLevelConfigTemplatesRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e ListVipLevelConfigTemplatesRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e ListVipLevelConfigTemplatesRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e ListVipLevelConfigTemplatesRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e ListVipLevelConfigTemplatesRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e ListVipLevelConfigTemplatesRequestValidationError) ErrorName() string {
-	return "ListVipLevelConfigTemplatesRequestValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e ListVipLevelConfigTemplatesRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sListVipLevelConfigTemplatesRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = ListVipLevelConfigTemplatesRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = ListVipLevelConfigTemplatesRequestValidationError{}
-
-// Validate checks the field values on ListVipLevelConfigTemplatesResponse with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the first error encountered is returned, or nil if there are
-// no violations.
-func (m *ListVipLevelConfigTemplatesResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on ListVipLevelConfigTemplatesResponse
-// with the rules defined in the proto definition for this message. If any
-// rules are violated, the result is a list of violation errors wrapped in
-// ListVipLevelConfigTemplatesResponseMultiError, or nil if none found.
-func (m *ListVipLevelConfigTemplatesResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *ListVipLevelConfigTemplatesResponse) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	for idx, item := range m.GetTemplates() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListVipLevelConfigTemplatesResponseValidationError{
-						field:  fmt.Sprintf("Templates[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ListVipLevelConfigTemplatesResponseValidationError{
-						field:  fmt.Sprintf("Templates[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ListVipLevelConfigTemplatesResponseValidationError{
-					field:  fmt.Sprintf("Templates[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	// no validation rules for Total
-
-	// no validation rules for Page
-
-	// no validation rules for PageSize
-
-	if len(errors) > 0 {
-		return ListVipLevelConfigTemplatesResponseMultiError(errors)
-	}
-
-	return nil
-}
-
-// ListVipLevelConfigTemplatesResponseMultiError is an error wrapping multiple
-// validation errors returned by
-// ListVipLevelConfigTemplatesResponse.ValidateAll() if the designated
-// constraints aren't met.
-type ListVipLevelConfigTemplatesResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m ListVipLevelConfigTemplatesResponseMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m ListVipLevelConfigTemplatesResponseMultiError) AllErrors() []error { return m }
-
-// ListVipLevelConfigTemplatesResponseValidationError is the validation error
-// returned by ListVipLevelConfigTemplatesResponse.Validate if the designated
-// constraints aren't met.
-type ListVipLevelConfigTemplatesResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e ListVipLevelConfigTemplatesResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e ListVipLevelConfigTemplatesResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e ListVipLevelConfigTemplatesResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e ListVipLevelConfigTemplatesResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e ListVipLevelConfigTemplatesResponseValidationError) ErrorName() string {
-	return "ListVipLevelConfigTemplatesResponseValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e ListVipLevelConfigTemplatesResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sListVipLevelConfigTemplatesResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = ListVipLevelConfigTemplatesResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = ListVipLevelConfigTemplatesResponseValidationError{}
 
 // Validate checks the field values on GetVipLevelConfigTemplateRequest with
 // the rules defined in the proto definition for this message. If any rules
@@ -2329,3 +2126,376 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = DeleteVipLevelConfigTemplateResponseValidationError{}
+
+// Validate checks the field values on GetVipConfigRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetVipConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetVipConfigRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetVipConfigRequestMultiError, or nil if none found.
+func (m *GetVipConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetVipConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetVipConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetVipConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetVipConfigRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetVipConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetVipConfigRequestMultiError is an error wrapping multiple validation
+// errors returned by GetVipConfigRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetVipConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetVipConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetVipConfigRequestMultiError) AllErrors() []error { return m }
+
+// GetVipConfigRequestValidationError is the validation error returned by
+// GetVipConfigRequest.Validate if the designated constraints aren't met.
+type GetVipConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetVipConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetVipConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetVipConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetVipConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetVipConfigRequestValidationError) ErrorName() string {
+	return "GetVipConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetVipConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetVipConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetVipConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetVipConfigRequestValidationError{}
+
+// Validate checks the field values on VipConfig with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *VipConfig) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on VipConfig with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in VipConfigMultiError, or nil
+// if none found.
+func (m *VipConfig) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *VipConfig) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for SystemOperatorId
+
+	// no validation rules for RetailerOperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for OperatorId
+
+	// no validation rules for Enabled
+
+	if len(errors) > 0 {
+		return VipConfigMultiError(errors)
+	}
+
+	return nil
+}
+
+// VipConfigMultiError is an error wrapping multiple validation errors returned
+// by VipConfig.ValidateAll() if the designated constraints aren't met.
+type VipConfigMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m VipConfigMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m VipConfigMultiError) AllErrors() []error { return m }
+
+// VipConfigValidationError is the validation error returned by
+// VipConfig.Validate if the designated constraints aren't met.
+type VipConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e VipConfigValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e VipConfigValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e VipConfigValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e VipConfigValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e VipConfigValidationError) ErrorName() string { return "VipConfigValidationError" }
+
+// Error satisfies the builtin error interface
+func (e VipConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sVipConfig.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = VipConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = VipConfigValidationError{}
+
+// Validate checks the field values on GetVipConfigResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetVipConfigResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetVipConfigResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetVipConfigResponseMultiError, or nil if none found.
+func (m *GetVipConfigResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetVipConfigResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetConfig()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetVipConfigResponseValidationError{
+					field:  "Config",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetVipConfigResponseValidationError{
+					field:  "Config",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetConfig()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetVipConfigResponseValidationError{
+				field:  "Config",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetVipConfigResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetVipConfigResponseMultiError is an error wrapping multiple validation
+// errors returned by GetVipConfigResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetVipConfigResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetVipConfigResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetVipConfigResponseMultiError) AllErrors() []error { return m }
+
+// GetVipConfigResponseValidationError is the validation error returned by
+// GetVipConfigResponse.Validate if the designated constraints aren't met.
+type GetVipConfigResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetVipConfigResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetVipConfigResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetVipConfigResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetVipConfigResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetVipConfigResponseValidationError) ErrorName() string {
+	return "GetVipConfigResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetVipConfigResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetVipConfigResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetVipConfigResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetVipConfigResponseValidationError{}

@@ -21,11 +21,11 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	BackofficeVip_GetVipSetting_FullMethodName                = "/api.backoffice.service.v1.BackofficeVip/GetVipSetting"
 	BackofficeVip_UpdateVipSetting_FullMethodName             = "/api.backoffice.service.v1.BackofficeVip/UpdateVipSetting"
-	BackofficeVip_ListVipLevelConfigTemplates_FullMethodName  = "/api.backoffice.service.v1.BackofficeVip/ListVipLevelConfigTemplates"
 	BackofficeVip_GetVipLevelConfigTemplate_FullMethodName    = "/api.backoffice.service.v1.BackofficeVip/GetVipLevelConfigTemplate"
 	BackofficeVip_CreateVipLevelConfigTemplate_FullMethodName = "/api.backoffice.service.v1.BackofficeVip/CreateVipLevelConfigTemplate"
 	BackofficeVip_UpdateVipLevelConfigTemplate_FullMethodName = "/api.backoffice.service.v1.BackofficeVip/UpdateVipLevelConfigTemplate"
 	BackofficeVip_DeleteVipLevelConfigTemplate_FullMethodName = "/api.backoffice.service.v1.BackofficeVip/DeleteVipLevelConfigTemplate"
+	BackofficeVip_GetVipConfig_FullMethodName                 = "/api.backoffice.service.v1.BackofficeVip/GetVipConfig"
 )
 
 // BackofficeVipClient is the client API for BackofficeVip service.
@@ -37,11 +37,11 @@ type BackofficeVipClient interface {
 	// VIP设置管理
 	GetVipSetting(ctx context.Context, in *GetVipSettingRequest, opts ...grpc.CallOption) (*GetVipSettingResponse, error)
 	UpdateVipSetting(ctx context.Context, in *UpdateVipSettingRequest, opts ...grpc.CallOption) (*UpdateVipSettingResponse, error)
-	ListVipLevelConfigTemplates(ctx context.Context, in *ListVipLevelConfigTemplatesRequest, opts ...grpc.CallOption) (*ListVipLevelConfigTemplatesResponse, error)
 	GetVipLevelConfigTemplate(ctx context.Context, in *GetVipLevelConfigTemplateRequest, opts ...grpc.CallOption) (*GetVipLevelConfigTemplateResponse, error)
 	CreateVipLevelConfigTemplate(ctx context.Context, in *CreateVipLevelConfigTemplateRequest, opts ...grpc.CallOption) (*CreateVipLevelConfigTemplateResponse, error)
 	UpdateVipLevelConfigTemplate(ctx context.Context, in *UpdateVipLevelConfigTemplateRequest, opts ...grpc.CallOption) (*UpdateVipLevelConfigTemplateResponse, error)
 	DeleteVipLevelConfigTemplate(ctx context.Context, in *DeleteVipLevelConfigTemplateRequest, opts ...grpc.CallOption) (*DeleteVipLevelConfigTemplateResponse, error)
+	GetVipConfig(ctx context.Context, in *GetVipConfigRequest, opts ...grpc.CallOption) (*GetVipConfigResponse, error)
 }
 
 type backofficeVipClient struct {
@@ -66,16 +66,6 @@ func (c *backofficeVipClient) UpdateVipSetting(ctx context.Context, in *UpdateVi
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateVipSettingResponse)
 	err := c.cc.Invoke(ctx, BackofficeVip_UpdateVipSetting_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *backofficeVipClient) ListVipLevelConfigTemplates(ctx context.Context, in *ListVipLevelConfigTemplatesRequest, opts ...grpc.CallOption) (*ListVipLevelConfigTemplatesResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListVipLevelConfigTemplatesResponse)
-	err := c.cc.Invoke(ctx, BackofficeVip_ListVipLevelConfigTemplates_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -122,6 +112,16 @@ func (c *backofficeVipClient) DeleteVipLevelConfigTemplate(ctx context.Context, 
 	return out, nil
 }
 
+func (c *backofficeVipClient) GetVipConfig(ctx context.Context, in *GetVipConfigRequest, opts ...grpc.CallOption) (*GetVipConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetVipConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeVip_GetVipConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeVipServer is the server API for BackofficeVip service.
 // All implementations must embed UnimplementedBackofficeVipServer
 // for forward compatibility.
@@ -131,11 +131,11 @@ type BackofficeVipServer interface {
 	// VIP设置管理
 	GetVipSetting(context.Context, *GetVipSettingRequest) (*GetVipSettingResponse, error)
 	UpdateVipSetting(context.Context, *UpdateVipSettingRequest) (*UpdateVipSettingResponse, error)
-	ListVipLevelConfigTemplates(context.Context, *ListVipLevelConfigTemplatesRequest) (*ListVipLevelConfigTemplatesResponse, error)
 	GetVipLevelConfigTemplate(context.Context, *GetVipLevelConfigTemplateRequest) (*GetVipLevelConfigTemplateResponse, error)
 	CreateVipLevelConfigTemplate(context.Context, *CreateVipLevelConfigTemplateRequest) (*CreateVipLevelConfigTemplateResponse, error)
 	UpdateVipLevelConfigTemplate(context.Context, *UpdateVipLevelConfigTemplateRequest) (*UpdateVipLevelConfigTemplateResponse, error)
 	DeleteVipLevelConfigTemplate(context.Context, *DeleteVipLevelConfigTemplateRequest) (*DeleteVipLevelConfigTemplateResponse, error)
+	GetVipConfig(context.Context, *GetVipConfigRequest) (*GetVipConfigResponse, error)
 	mustEmbedUnimplementedBackofficeVipServer()
 }
 
@@ -152,9 +152,6 @@ func (UnimplementedBackofficeVipServer) GetVipSetting(context.Context, *GetVipSe
 func (UnimplementedBackofficeVipServer) UpdateVipSetting(context.Context, *UpdateVipSettingRequest) (*UpdateVipSettingResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateVipSetting not implemented")
 }
-func (UnimplementedBackofficeVipServer) ListVipLevelConfigTemplates(context.Context, *ListVipLevelConfigTemplatesRequest) (*ListVipLevelConfigTemplatesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListVipLevelConfigTemplates not implemented")
-}
 func (UnimplementedBackofficeVipServer) GetVipLevelConfigTemplate(context.Context, *GetVipLevelConfigTemplateRequest) (*GetVipLevelConfigTemplateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetVipLevelConfigTemplate not implemented")
 }
@@ -166,6 +163,9 @@ func (UnimplementedBackofficeVipServer) UpdateVipLevelConfigTemplate(context.Con
 }
 func (UnimplementedBackofficeVipServer) DeleteVipLevelConfigTemplate(context.Context, *DeleteVipLevelConfigTemplateRequest) (*DeleteVipLevelConfigTemplateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteVipLevelConfigTemplate not implemented")
+}
+func (UnimplementedBackofficeVipServer) GetVipConfig(context.Context, *GetVipConfigRequest) (*GetVipConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetVipConfig not implemented")
 }
 func (UnimplementedBackofficeVipServer) mustEmbedUnimplementedBackofficeVipServer() {}
 func (UnimplementedBackofficeVipServer) testEmbeddedByValue()                       {}
@@ -220,24 +220,6 @@ func _BackofficeVip_UpdateVipSetting_Handler(srv interface{}, ctx context.Contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BackofficeVipServer).UpdateVipSetting(ctx, req.(*UpdateVipSettingRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BackofficeVip_ListVipLevelConfigTemplates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListVipLevelConfigTemplatesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeVipServer).ListVipLevelConfigTemplates(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeVip_ListVipLevelConfigTemplates_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeVipServer).ListVipLevelConfigTemplates(ctx, req.(*ListVipLevelConfigTemplatesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -314,6 +296,24 @@ func _BackofficeVip_DeleteVipLevelConfigTemplate_Handler(srv interface{}, ctx co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeVip_GetVipConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetVipConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeVipServer).GetVipConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeVip_GetVipConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeVipServer).GetVipConfig(ctx, req.(*GetVipConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeVip_ServiceDesc is the grpc.ServiceDesc for BackofficeVip service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -330,10 +330,6 @@ var BackofficeVip_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BackofficeVip_UpdateVipSetting_Handler,
 		},
 		{
-			MethodName: "ListVipLevelConfigTemplates",
-			Handler:    _BackofficeVip_ListVipLevelConfigTemplates_Handler,
-		},
-		{
 			MethodName: "GetVipLevelConfigTemplate",
 			Handler:    _BackofficeVip_GetVipLevelConfigTemplate_Handler,
 		},
@@ -348,6 +344,10 @@ var BackofficeVip_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteVipLevelConfigTemplate",
 			Handler:    _BackofficeVip_DeleteVipLevelConfigTemplate_Handler,
+		},
+		{
+			MethodName: "GetVipConfig",
+			Handler:    _BackofficeVip_GetVipConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

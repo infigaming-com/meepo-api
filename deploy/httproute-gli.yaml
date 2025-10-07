@@ -6,9 +6,9 @@ metadata:
 spec:
   parentRefs:
   - name: meepo-gateway
-    namespace: meepo-gateway
+    namespace: meepo-dev
   hostnames:
-  - "stg.meepoapi.xyz"
+  - "gli.meepoapi.xyz"
   rules:
   - matches:
     - path:

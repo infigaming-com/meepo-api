@@ -9,6 +9,8 @@
 # kubectl create secret tls meepoapi-xyz-tls --cert='meepoapi.xyz.crt' --key='meepoapi.xyz.key'
 ```
 
+Please note: create the TLS certificate in the same namespace with the gateway is a better and cleaner solution because only gateway needs to use it to terminate the TLS traffic.
+
 ## Reserve static ip address for ingress traffic
 
 ```bash
