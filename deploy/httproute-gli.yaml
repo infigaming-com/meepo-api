@@ -1,0 +1,68 @@
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: meepoapi-xyz-routes
+  namespace: meepo-stg
+spec:
+  parentRefs:
+  - name: meepo-gateway
+    namespace: meepo-dev
+  hostnames:
+  - "gli.meepoapi.xyz"
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/v1/user"
+    backendRefs:
+    - name: user-svc
+      port: 8000
+      weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/v1/game"
+    backendRefs:
+    - name: game-svc
+      port: 8000
+      weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/v1/payment"
+    backendRefs:
+    - name: payment-svc
+      port: 8000
+      weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/v1/wallet"
+    backendRefs:
+    - name: wallet-svc
+      port: 8000
+      weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/v1/backoffice"
+    backendRefs:
+    - name: backoffice-svc
+      port: 8000
+      weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/ws"
+    backendRefs:
+    - name: websocket-svc
+      port: 8000
+      weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/v1/review"
+    backendRefs:
+    - name: review-svc
+      port: 8000
+      weight: 1
