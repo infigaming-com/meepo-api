@@ -312,3 +312,326 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = UpdateCommissionPlanRequestValidationError{}
+
+// Validate checks the field values on GetCommissionPlanRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetCommissionPlanRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetCommissionPlanRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetCommissionPlanRequestMultiError, or nil if none found.
+func (m *GetCommissionPlanRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetCommissionPlanRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for CommissionPlanId
+
+	if len(errors) > 0 {
+		return GetCommissionPlanRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetCommissionPlanRequestMultiError is an error wrapping multiple validation
+// errors returned by GetCommissionPlanRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetCommissionPlanRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetCommissionPlanRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetCommissionPlanRequestMultiError) AllErrors() []error { return m }
+
+// GetCommissionPlanRequestValidationError is the validation error returned by
+// GetCommissionPlanRequest.Validate if the designated constraints aren't met.
+type GetCommissionPlanRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetCommissionPlanRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetCommissionPlanRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetCommissionPlanRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetCommissionPlanRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetCommissionPlanRequestValidationError) ErrorName() string {
+	return "GetCommissionPlanRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetCommissionPlanRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetCommissionPlanRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetCommissionPlanRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetCommissionPlanRequestValidationError{}
+
+// Validate checks the field values on ListCommissionPlansRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListCommissionPlansRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListCommissionPlansRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListCommissionPlansRequestMultiError, or nil if none found.
+func (m *ListCommissionPlansRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListCommissionPlansRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return ListCommissionPlansRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListCommissionPlansRequestMultiError is an error wrapping multiple
+// validation errors returned by ListCommissionPlansRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ListCommissionPlansRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListCommissionPlansRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListCommissionPlansRequestMultiError) AllErrors() []error { return m }
+
+// ListCommissionPlansRequestValidationError is the validation error returned
+// by ListCommissionPlansRequest.Validate if the designated constraints aren't met.
+type ListCommissionPlansRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListCommissionPlansRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListCommissionPlansRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListCommissionPlansRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListCommissionPlansRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListCommissionPlansRequestValidationError) ErrorName() string {
+	return "ListCommissionPlansRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListCommissionPlansRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListCommissionPlansRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListCommissionPlansRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListCommissionPlansRequestValidationError{}
+
+// Validate checks the field values on DeleteCommissionPlanRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteCommissionPlanRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteCommissionPlanRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteCommissionPlanRequestMultiError, or nil if none found.
+func (m *DeleteCommissionPlanRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteCommissionPlanRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for CommissionPlanId
+
+	if m.AlternativeCommissionPlanId != nil {
+		// no validation rules for AlternativeCommissionPlanId
+	}
+
+	if len(errors) > 0 {
+		return DeleteCommissionPlanRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteCommissionPlanRequestMultiError is an error wrapping multiple
+// validation errors returned by DeleteCommissionPlanRequest.ValidateAll() if
+// the designated constraints aren't met.
+type DeleteCommissionPlanRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteCommissionPlanRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteCommissionPlanRequestMultiError) AllErrors() []error { return m }
+
+// DeleteCommissionPlanRequestValidationError is the validation error returned
+// by DeleteCommissionPlanRequest.Validate if the designated constraints
+// aren't met.
+type DeleteCommissionPlanRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteCommissionPlanRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteCommissionPlanRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteCommissionPlanRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteCommissionPlanRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteCommissionPlanRequestValidationError) ErrorName() string {
+	return "DeleteCommissionPlanRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteCommissionPlanRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteCommissionPlanRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteCommissionPlanRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteCommissionPlanRequestValidationError{}

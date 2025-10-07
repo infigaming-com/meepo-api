@@ -25,9 +25,19 @@ const (
 type ErrorReason int32
 
 const (
-	ErrorReason_UNSPECIFIED                   ErrorReason = 0
-	ErrorReason_CREATE_COMMISSION_PLAN_FAILED ErrorReason = 130001
-	ErrorReason_UPDATE_COMMISSION_PLAN_FAILED ErrorReason = 130002
+	ErrorReason_UNSPECIFIED                              ErrorReason = 0
+	ErrorReason_CREATE_COMMISSION_PLAN_FAILED            ErrorReason = 130001
+	ErrorReason_UPDATE_COMMISSION_PLAN_FAILED            ErrorReason = 130002
+	ErrorReason_DELETE_COMMISSION_PLAN_FAILED            ErrorReason = 130003
+	ErrorReason_CREATE_COMMISSION_PLAN_PERMISSION_DENIED ErrorReason = 130004
+	ErrorReason_UPDATE_COMMISSION_PLAN_PERMISSION_DENIED ErrorReason = 130005
+	ErrorReason_DELETE_COMMISSION_PLAN_PERMISSION_DENIED ErrorReason = 130006
+	ErrorReason_COMMISSION_PLAN_NOT_FOUND                ErrorReason = 130007
+	ErrorReason_GET_COMMISSION_PLAN_FAILED               ErrorReason = 130008
+	ErrorReason_GET_COMMISSION_PLAN_PERMISSION_DENIED    ErrorReason = 130009
+	ErrorReason_LIST_COMMISSION_PLANS_FAILED             ErrorReason = 130010
+	ErrorReason_USER_ROLE_INVALID                        ErrorReason = 130011
+	ErrorReason_INVALID_COMMISSION_PLAN_CONFIG           ErrorReason = 130012
 )
 
 // Enum value maps for ErrorReason.
@@ -36,11 +46,31 @@ var (
 		0:      "UNSPECIFIED",
 		130001: "CREATE_COMMISSION_PLAN_FAILED",
 		130002: "UPDATE_COMMISSION_PLAN_FAILED",
+		130003: "DELETE_COMMISSION_PLAN_FAILED",
+		130004: "CREATE_COMMISSION_PLAN_PERMISSION_DENIED",
+		130005: "UPDATE_COMMISSION_PLAN_PERMISSION_DENIED",
+		130006: "DELETE_COMMISSION_PLAN_PERMISSION_DENIED",
+		130007: "COMMISSION_PLAN_NOT_FOUND",
+		130008: "GET_COMMISSION_PLAN_FAILED",
+		130009: "GET_COMMISSION_PLAN_PERMISSION_DENIED",
+		130010: "LIST_COMMISSION_PLANS_FAILED",
+		130011: "USER_ROLE_INVALID",
+		130012: "INVALID_COMMISSION_PLAN_CONFIG",
 	}
 	ErrorReason_value = map[string]int32{
-		"UNSPECIFIED":                   0,
-		"CREATE_COMMISSION_PLAN_FAILED": 130001,
-		"UPDATE_COMMISSION_PLAN_FAILED": 130002,
+		"UNSPECIFIED":                              0,
+		"CREATE_COMMISSION_PLAN_FAILED":            130001,
+		"UPDATE_COMMISSION_PLAN_FAILED":            130002,
+		"DELETE_COMMISSION_PLAN_FAILED":            130003,
+		"CREATE_COMMISSION_PLAN_PERMISSION_DENIED": 130004,
+		"UPDATE_COMMISSION_PLAN_PERMISSION_DENIED": 130005,
+		"DELETE_COMMISSION_PLAN_PERMISSION_DENIED": 130006,
+		"COMMISSION_PLAN_NOT_FOUND":                130007,
+		"GET_COMMISSION_PLAN_FAILED":               130008,
+		"GET_COMMISSION_PLAN_PERMISSION_DENIED":    130009,
+		"LIST_COMMISSION_PLANS_FAILED":             130010,
+		"USER_ROLE_INVALID":                        130011,
+		"INVALID_COMMISSION_PLAN_CONFIG":           130012,
 	}
 )
 
@@ -75,11 +105,21 @@ var File_affiliate_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*n\n" +
+	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\xf6\x03\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1dCREATE_COMMISSION_PLAN_FAILED\x10\xd1\xf7\a\x12#\n" +
-	"\x1dUPDATE_COMMISSION_PLAN_FAILED\x10\xd2\xf7\a\x1a\x04\xa0E\xf4\x03BY\n" +
+	"\x1dUPDATE_COMMISSION_PLAN_FAILED\x10\xd2\xf7\a\x12#\n" +
+	"\x1dDELETE_COMMISSION_PLAN_FAILED\x10\xd3\xf7\a\x12.\n" +
+	"(CREATE_COMMISSION_PLAN_PERMISSION_DENIED\x10\xd4\xf7\a\x12.\n" +
+	"(UPDATE_COMMISSION_PLAN_PERMISSION_DENIED\x10\xd5\xf7\a\x12.\n" +
+	"(DELETE_COMMISSION_PLAN_PERMISSION_DENIED\x10\xd6\xf7\a\x12\x1f\n" +
+	"\x19COMMISSION_PLAN_NOT_FOUND\x10\xd7\xf7\a\x12 \n" +
+	"\x1aGET_COMMISSION_PLAN_FAILED\x10\xd8\xf7\a\x12+\n" +
+	"%GET_COMMISSION_PLAN_PERMISSION_DENIED\x10\xd9\xf7\a\x12\"\n" +
+	"\x1cLIST_COMMISSION_PLANS_FAILED\x10\xda\xf7\a\x12\x17\n" +
+	"\x11USER_ROLE_INVALID\x10\xdb\xf7\a\x12$\n" +
+	"\x1eINVALID_COMMISSION_PLAN_CONFIG\x10\xdc\xf7\a\x1a\x04\xa0E\xf4\x03BY\n" +
 	"\x18api.affiliate.service.v1P\x01Z;github.com/infigaming-com/meepo-api/affiliate/service/v1;v1b\x06proto3"
 
 var (

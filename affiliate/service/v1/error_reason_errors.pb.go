@@ -46,3 +46,123 @@ func IsUpdateCommissionPlanFailed(err error) bool {
 func ErrorUpdateCommissionPlanFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_UPDATE_COMMISSION_PLAN_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsDeleteCommissionPlanFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DELETE_COMMISSION_PLAN_FAILED.String() && e.Code == 500
+}
+
+func ErrorDeleteCommissionPlanFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DELETE_COMMISSION_PLAN_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCreateCommissionPlanPermissionDenied(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREATE_COMMISSION_PLAN_PERMISSION_DENIED.String() && e.Code == 500
+}
+
+func ErrorCreateCommissionPlanPermissionDenied(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREATE_COMMISSION_PLAN_PERMISSION_DENIED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateCommissionPlanPermissionDenied(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_COMMISSION_PLAN_PERMISSION_DENIED.String() && e.Code == 500
+}
+
+func ErrorUpdateCommissionPlanPermissionDenied(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_COMMISSION_PLAN_PERMISSION_DENIED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDeleteCommissionPlanPermissionDenied(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DELETE_COMMISSION_PLAN_PERMISSION_DENIED.String() && e.Code == 500
+}
+
+func ErrorDeleteCommissionPlanPermissionDenied(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DELETE_COMMISSION_PLAN_PERMISSION_DENIED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCommissionPlanNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_COMMISSION_PLAN_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorCommissionPlanNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_COMMISSION_PLAN_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetCommissionPlanFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_COMMISSION_PLAN_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetCommissionPlanFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_COMMISSION_PLAN_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetCommissionPlanPermissionDenied(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_COMMISSION_PLAN_PERMISSION_DENIED.String() && e.Code == 500
+}
+
+func ErrorGetCommissionPlanPermissionDenied(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_COMMISSION_PLAN_PERMISSION_DENIED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListCommissionPlansFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_COMMISSION_PLANS_FAILED.String() && e.Code == 500
+}
+
+func ErrorListCommissionPlansFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_COMMISSION_PLANS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUserRoleInvalid(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_ROLE_INVALID.String() && e.Code == 500
+}
+
+func ErrorUserRoleInvalid(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_ROLE_INVALID.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidCommissionPlanConfig(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_COMMISSION_PLAN_CONFIG.String() && e.Code == 500
+}
+
+func ErrorInvalidCommissionPlanConfig(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_COMMISSION_PLAN_CONFIG.String(), fmt.Sprintf(format, args...))
+}

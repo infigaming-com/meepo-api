@@ -14,7 +14,7 @@ message CreateCommissionPlanRequest {
     string title = 3;
     string status = 4;
     string base_currency = 5;
-    PlanConfig plan_config = 6;
+    CommissionPlanConfig plan_config = 6;
 }
 
 message CreateCommissionPlanResponse {}
@@ -25,13 +25,63 @@ message UpdateCommissionPlanRequest {
     string title = 3;
     string status = 4;
     string base_currency = 5;
-    PlanConfig plan_config = 6;
+    CommissionPlanConfig plan_config = 6;
     int64 commission_plan_id = 7;
 }
 
 message UpdateCommissionPlanResponse {}
 
-message PlanConfig {
+message GetCommissionPlanRequest {
+    api.common.OperatorContext operator_context = 1;
+    int64 commission_plan_id = 2;
+}
+
+message GetCommissionPlanResponse {
+    int64 user_id = 1;
+    api.common.OperatorContext operator_context = 2;
+    string title = 3;
+    string status = 4;
+    string base_currency = 5;
+    CommissionPlanConfig plan_config = 6;
+}
+
+message ListCommissionPlansRequest {
+    api.common.OperatorContext operator_context = 1;
+    repeated string countries = 2; // not supported yet
+    optional int32 page = 3;
+    optional int32 page_size = 4;
+}
+
+message ListCommissionPlansResponse {
+    repeated CommissionPlan commission_plans = 1;
+    int32 total_count = 2;
+    int32 active_count = 3;
+    int32 paused_count = 4;
+    int32 page = 5;
+    int32 page_size = 6;
+}
+
+message CommissionPlan {
+    int64 commission_plan_id = 1;
+    string title = 2;
+    string status = 3;
+    string source = 4; // system/retailer/company/operator
+    repeated string types = 5; // cpa/revshare/cpl/cpc/flat_fee, multiple types are allowed
+    int32 assigned_count = 6; // not supported yet
+    string base_currency = 7;
+    string source_operator_name = 8;
+}
+
+message DeleteCommissionPlanRequest {
+    int64 user_id = 1;
+    api.common.OperatorContext operator_context = 2;
+    int64 commission_plan_id = 3;
+    optional int64 alternative_commission_plan_id = 4; // not supported yet
+}
+
+message DeleteCommissionPlanResponse {}
+
+message CommissionPlanConfig {
     CPAConfig cpa = 1;
     RevShareConfig revshare = 2;
     CPLConfig cpl = 3;

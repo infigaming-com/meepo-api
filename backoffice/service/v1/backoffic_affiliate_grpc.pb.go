@@ -22,6 +22,9 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	BackofficeAffiliate_CreateCommissionPlan_FullMethodName = "/api.backoffice.service.v1.BackofficeAffiliate/CreateCommissionPlan"
 	BackofficeAffiliate_UpdateCommissionPlan_FullMethodName = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateCommissionPlan"
+	BackofficeAffiliate_GetCommissionPlan_FullMethodName    = "/api.backoffice.service.v1.BackofficeAffiliate/GetCommissionPlan"
+	BackofficeAffiliate_ListCommissionPlans_FullMethodName  = "/api.backoffice.service.v1.BackofficeAffiliate/ListCommissionPlans"
+	BackofficeAffiliate_DeleteCommissionPlan_FullMethodName = "/api.backoffice.service.v1.BackofficeAffiliate/DeleteCommissionPlan"
 )
 
 // BackofficeAffiliateClient is the client API for BackofficeAffiliate service.
@@ -30,6 +33,9 @@ const (
 type BackofficeAffiliateClient interface {
 	CreateCommissionPlan(ctx context.Context, in *CreateCommissionPlanRequest, opts ...grpc.CallOption) (*v1.CreateCommissionPlanResponse, error)
 	UpdateCommissionPlan(ctx context.Context, in *UpdateCommissionPlanRequest, opts ...grpc.CallOption) (*v1.UpdateCommissionPlanResponse, error)
+	GetCommissionPlan(ctx context.Context, in *GetCommissionPlanRequest, opts ...grpc.CallOption) (*v1.GetCommissionPlanResponse, error)
+	ListCommissionPlans(ctx context.Context, in *ListCommissionPlansRequest, opts ...grpc.CallOption) (*v1.ListCommissionPlansResponse, error)
+	DeleteCommissionPlan(ctx context.Context, in *DeleteCommissionPlanRequest, opts ...grpc.CallOption) (*v1.DeleteCommissionPlanResponse, error)
 }
 
 type backofficeAffiliateClient struct {
@@ -60,12 +66,45 @@ func (c *backofficeAffiliateClient) UpdateCommissionPlan(ctx context.Context, in
 	return out, nil
 }
 
+func (c *backofficeAffiliateClient) GetCommissionPlan(ctx context.Context, in *GetCommissionPlanRequest, opts ...grpc.CallOption) (*v1.GetCommissionPlanResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetCommissionPlanResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_GetCommissionPlan_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAffiliateClient) ListCommissionPlans(ctx context.Context, in *ListCommissionPlansRequest, opts ...grpc.CallOption) (*v1.ListCommissionPlansResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListCommissionPlansResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_ListCommissionPlans_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeAffiliateClient) DeleteCommissionPlan(ctx context.Context, in *DeleteCommissionPlanRequest, opts ...grpc.CallOption) (*v1.DeleteCommissionPlanResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.DeleteCommissionPlanResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_DeleteCommissionPlan_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeAffiliateServer is the server API for BackofficeAffiliate service.
 // All implementations must embed UnimplementedBackofficeAffiliateServer
 // for forward compatibility.
 type BackofficeAffiliateServer interface {
 	CreateCommissionPlan(context.Context, *CreateCommissionPlanRequest) (*v1.CreateCommissionPlanResponse, error)
 	UpdateCommissionPlan(context.Context, *UpdateCommissionPlanRequest) (*v1.UpdateCommissionPlanResponse, error)
+	GetCommissionPlan(context.Context, *GetCommissionPlanRequest) (*v1.GetCommissionPlanResponse, error)
+	ListCommissionPlans(context.Context, *ListCommissionPlansRequest) (*v1.ListCommissionPlansResponse, error)
+	DeleteCommissionPlan(context.Context, *DeleteCommissionPlanRequest) (*v1.DeleteCommissionPlanResponse, error)
 	mustEmbedUnimplementedBackofficeAffiliateServer()
 }
 
@@ -81,6 +120,15 @@ func (UnimplementedBackofficeAffiliateServer) CreateCommissionPlan(context.Conte
 }
 func (UnimplementedBackofficeAffiliateServer) UpdateCommissionPlan(context.Context, *UpdateCommissionPlanRequest) (*v1.UpdateCommissionPlanResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCommissionPlan not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) GetCommissionPlan(context.Context, *GetCommissionPlanRequest) (*v1.GetCommissionPlanResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCommissionPlan not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) ListCommissionPlans(context.Context, *ListCommissionPlansRequest) (*v1.ListCommissionPlansResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCommissionPlans not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) DeleteCommissionPlan(context.Context, *DeleteCommissionPlanRequest) (*v1.DeleteCommissionPlanResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCommissionPlan not implemented")
 }
 func (UnimplementedBackofficeAffiliateServer) mustEmbedUnimplementedBackofficeAffiliateServer() {}
 func (UnimplementedBackofficeAffiliateServer) testEmbeddedByValue()                             {}
@@ -139,6 +187,60 @@ func _BackofficeAffiliate_UpdateCommissionPlan_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeAffiliate_GetCommissionPlan_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCommissionPlanRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).GetCommissionPlan(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_GetCommissionPlan_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).GetCommissionPlan(ctx, req.(*GetCommissionPlanRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAffiliate_ListCommissionPlans_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCommissionPlansRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).ListCommissionPlans(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_ListCommissionPlans_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).ListCommissionPlans(ctx, req.(*ListCommissionPlansRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeAffiliate_DeleteCommissionPlan_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteCommissionPlanRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).DeleteCommissionPlan(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_DeleteCommissionPlan_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).DeleteCommissionPlan(ctx, req.(*DeleteCommissionPlanRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeAffiliate_ServiceDesc is the grpc.ServiceDesc for BackofficeAffiliate service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -153,6 +255,18 @@ var BackofficeAffiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateCommissionPlan",
 			Handler:    _BackofficeAffiliate_UpdateCommissionPlan_Handler,
+		},
+		{
+			MethodName: "GetCommissionPlan",
+			Handler:    _BackofficeAffiliate_GetCommissionPlan_Handler,
+		},
+		{
+			MethodName: "ListCommissionPlans",
+			Handler:    _BackofficeAffiliate_ListCommissionPlans_Handler,
+		},
+		{
+			MethodName: "DeleteCommissionPlan",
+			Handler:    _BackofficeAffiliate_DeleteCommissionPlan_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

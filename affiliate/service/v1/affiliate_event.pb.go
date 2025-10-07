@@ -7,7 +7,6 @@
 package v1
 
 import (
-	_ "github.com/infigaming-com/meepo-api/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -122,7 +121,7 @@ var File_affiliate_service_v1_affiliate_event_proto protoreflect.FileDescriptor
 
 const file_affiliate_service_v1_affiliate_event_proto_rawDesc = "" +
 	"\n" +
-	"*affiliate/service/v1/affiliate_event.proto\x12\x18api.affiliate.service.v1\x1a\x13common/common.proto\"u\n" +
+	"*affiliate/service/v1/affiliate_event.proto\x12\x18api.affiliate.service.v1\"u\n" +
 	"\fEventRequest\x12'\n" +
 	"\x0fsubscription_id\x18\x01 \x01(\tR\x0esubscriptionId\x12\x1d\n" +
 	"\n" +
