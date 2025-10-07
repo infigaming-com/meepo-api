@@ -11324,6 +11324,22 @@ components:
                     format: int32
                 weeklyWageringReq:
                     type: string
+                monthlyRewardEnabled:
+                    type: boolean
+                    description: 每月奖励
+                monthlyFixedRewardAmt:
+                    type: string
+                monthlyTurnoverRate:
+                    type: string
+                monthlyNetLossAmt:
+                    type: string
+                monthlyAdjustRangePct:
+                    type: string
+                monthlyActiveDaysReward:
+                    type: integer
+                    format: int32
+                monthlyWageringReq:
+                    type: string
                 createdAt:
                     type: string
                 updatedAt:
