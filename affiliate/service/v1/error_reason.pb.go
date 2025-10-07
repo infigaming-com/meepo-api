@@ -25,16 +25,22 @@ const (
 type ErrorReason int32
 
 const (
-	ErrorReason_UNSPECIFIED ErrorReason = 0
+	ErrorReason_UNSPECIFIED                   ErrorReason = 0
+	ErrorReason_CREATE_COMMISSION_PLAN_FAILED ErrorReason = 130001
+	ErrorReason_UPDATE_COMMISSION_PLAN_FAILED ErrorReason = 130002
 )
 
 // Enum value maps for ErrorReason.
 var (
 	ErrorReason_name = map[int32]string{
-		0: "UNSPECIFIED",
+		0:      "UNSPECIFIED",
+		130001: "CREATE_COMMISSION_PLAN_FAILED",
+		130002: "UPDATE_COMMISSION_PLAN_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
-		"UNSPECIFIED": 0,
+		"UNSPECIFIED":                   0,
+		"CREATE_COMMISSION_PLAN_FAILED": 130001,
+		"UPDATE_COMMISSION_PLAN_FAILED": 130002,
 	}
 )
 
@@ -69,9 +75,11 @@ var File_affiliate_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*$\n" +
+	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*n\n" +
 	"\vErrorReason\x12\x0f\n" +
-	"\vUNSPECIFIED\x10\x00\x1a\x04\xa0E\xf4\x03BY\n" +
+	"\vUNSPECIFIED\x10\x00\x12#\n" +
+	"\x1dCREATE_COMMISSION_PLAN_FAILED\x10\xd1\xf7\a\x12#\n" +
+	"\x1dUPDATE_COMMISSION_PLAN_FAILED\x10\xd2\xf7\a\x1a\x04\xa0E\xf4\x03BY\n" +
 	"\x18api.affiliate.service.v1P\x01Z;github.com/infigaming-com/meepo-api/affiliate/service/v1;v1b\x06proto3"
 
 var (

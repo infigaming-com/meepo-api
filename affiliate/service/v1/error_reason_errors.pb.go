@@ -22,3 +22,27 @@ func IsUnspecified(err error) bool {
 func ErrorUnspecified(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_UNSPECIFIED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsCreateCommissionPlanFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREATE_COMMISSION_PLAN_FAILED.String() && e.Code == 500
+}
+
+func ErrorCreateCommissionPlanFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREATE_COMMISSION_PLAN_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateCommissionPlanFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_COMMISSION_PLAN_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateCommissionPlanFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_COMMISSION_PLAN_FAILED.String(), fmt.Sprintf(format, args...))
+}

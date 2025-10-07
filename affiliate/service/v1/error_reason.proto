@@ -12,4 +12,6 @@ enum ErrorReason {
   option (errors.default_code) = 500;
 
   UNSPECIFIED = 0;
+  CREATE_COMMISSION_PLAN_FAILED = 130001;
+  UPDATE_COMMISSION_PLAN_FAILED = 130002;
 }
