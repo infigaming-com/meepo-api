@@ -953,6 +953,20 @@ func (m *VipLevelConfigTemplate) validate(all bool) error {
 
 	// no validation rules for WeeklyWageringReq
 
+	// no validation rules for MonthlyRewardEnabled
+
+	// no validation rules for MonthlyFixedRewardAmt
+
+	// no validation rules for MonthlyTurnoverRate
+
+	// no validation rules for MonthlyNetLossAmt
+
+	// no validation rules for MonthlyAdjustRangePct
+
+	// no validation rules for MonthlyActiveDaysReward
+
+	// no validation rules for MonthlyWageringReq
+
 	// no validation rules for CreatedAt
 
 	// no validation rules for UpdatedAt

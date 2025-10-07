@@ -210,9 +210,18 @@ message VipLevelConfigTemplate {
   int64 weekly_adjust_range_pct = 27;
   int32 weekly_active_days_reward = 28;
   int64 weekly_wagering_req = 29;
+
+  // 每月奖励
+  bool monthly_reward_enabled = 30;
+  int64 monthly_fixed_reward_amt = 31;
+  int64 monthly_turnover_rate = 32;
+  int64 monthly_net_loss_amt = 33;
+  int64 monthly_adjust_range_pct = 34;
+  int32 monthly_active_days_reward = 35;
+  int64 monthly_wagering_req = 36;
   
-  int64 created_at = 30;
-  int64 updated_at = 31;
+  int64 created_at = 37;
+  int64 updated_at = 38;
 }
 
 message GetVipLevelConfigTemplateRequest {
