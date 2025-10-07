@@ -123,20 +123,20 @@ message VipSetting {
   VipPayoutType weekly_reward_payout_type = 13;
   VipPayoutType monthly_reward_payout_type = 14;
   
-  int64 deposit_xp_rate = 15;
-  int64 wagering_xp_rate = 16;
-  int64 max_house_edge_limit_percent = 17;
-  int64 standard_xp_multiplier = 18;
+  string deposit_xp_rate = 16;
+  string wagering_xp_rate = 17;
+  string max_house_edge_limit_percent = 18;
+  string standard_xp_multiplier = 19;
   
-  string timezone = 19;
-  string daily_issue_at = 20;
-  int32 weekly_issue_dow = 21;
-  string weekly_issue_at = 22;
-  int32 monthly_issue_dom = 23;
-  string monthly_issue_at = 24;
+  string timezone = 20;
+  string daily_issue_at = 21;
+  int32 weekly_issue_dow = 22;
+  string weekly_issue_at = 23;
+  int32 monthly_issue_dom = 24;
+  string monthly_issue_at = 25;
   
-  int64 created_at = 25;
-  int64 updated_at = 26;
+  int64 created_at = 26;
+  int64 updated_at = 27;
 }
 
 message GetVipSettingRequest {
@@ -174,38 +174,46 @@ message VipLevelConfigTemplate {
   int64 end_level = 8;
   
   // 升级设置
-  int64 base_level_upgrade_xp = 9;
-  int64 incr_level_upgrade_xp = 10;
-  int64 base_upgrade_reward_amt = 11;
-  int64 incr_upgrade_reward_amt = 12;
-  int64 upgrade_reward_wagering_x = 13;
+  string base_level_upgrade_xp = 9;
+  string incr_level_upgrade_xp = 10;
+  string base_upgrade_reward_amt = 11;
+  string incr_upgrade_reward_amt = 12;
+  string upgrade_reward_wagering_x = 13;
   
   // 等级维护要求
-  bool xp_loss_enabled = 14;
-  int64 weekly_xp_loss = 15;
-  int64 monthly_xp_loss = 16;
+  string weekly_xp_loss = 14;
+  string monthly_xp_loss = 15;
   
   // 即时返水
-  bool rakeback_instant_enabled = 17;
-  int64 rakeback_instant_rate = 18;
-  int64 rakeback_instant_req = 19;
+  bool rakeback_instant_enabled = 16;
+  string rakeback_instant_rate = 17;
+  string rakeback_instant_req = 18;
   
   // 每日返水
-  bool rakeback_daily_enabled = 20;
-  int64 rakeback_daily_rate = 21;
-  int64 rakeback_daily_req = 22;
+  bool rakeback_daily_enabled = 19;
+  string rakeback_daily_rate = 20;
+  string rakeback_daily_req = 21;
   
   // 每周奖励
-  bool weekly_reward_enabled = 23;
-  int64 weekly_fixed_reward_amt = 24;
-  int64 weekly_turnover_rate = 25;
-  int64 weekly_net_loss_amt = 26;
-  int64 weekly_adjust_range_pct = 27;
-  int32 weekly_active_days_reward = 28;
-  int64 weekly_wagering_req = 29;
+  bool weekly_reward_enabled = 22;
+  string weekly_fixed_reward_amt = 23;
+  string weekly_turnover_rate = 24;
+  string weekly_net_loss_amt = 25;
+  string weekly_adjust_range_pct = 26;
+  int32 weekly_active_days_reward = 27;
+  string weekly_wagering_req = 28;
+
+  // 每月奖励
+  bool monthly_reward_enabled = 29;
+  string monthly_fixed_reward_amt = 30;
+  string monthly_turnover_rate = 31;
+  string monthly_net_loss_amt = 32;
+  string monthly_adjust_range_pct = 33;
+  int32 monthly_active_days_reward = 34;
+  string monthly_wagering_req = 35;
   
-  int64 created_at = 30;
-  int64 updated_at = 31;
+  int64 created_at = 36;
+  int64 updated_at = 37;
 }
 
 message ListVipLevelConfigTemplatesRequest {

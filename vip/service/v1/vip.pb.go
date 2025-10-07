@@ -308,18 +308,18 @@ type VipSetting struct {
 	RakebackDailyPayoutType   VipPayoutType          `protobuf:"varint,12,opt,name=rakeback_daily_payout_type,json=rakebackDailyPayoutType,proto3,enum=api.vip.service.v1.VipPayoutType" json:"rakeback_daily_payout_type,omitempty"`
 	WeeklyRewardPayoutType    VipPayoutType          `protobuf:"varint,13,opt,name=weekly_reward_payout_type,json=weeklyRewardPayoutType,proto3,enum=api.vip.service.v1.VipPayoutType" json:"weekly_reward_payout_type,omitempty"`
 	MonthlyRewardPayoutType   VipPayoutType          `protobuf:"varint,14,opt,name=monthly_reward_payout_type,json=monthlyRewardPayoutType,proto3,enum=api.vip.service.v1.VipPayoutType" json:"monthly_reward_payout_type,omitempty"`
-	DepositXpRate             int64                  `protobuf:"varint,15,opt,name=deposit_xp_rate,json=depositXpRate,proto3" json:"deposit_xp_rate,omitempty"`
-	WageringXpRate            int64                  `protobuf:"varint,16,opt,name=wagering_xp_rate,json=wageringXpRate,proto3" json:"wagering_xp_rate,omitempty"`
-	MaxHouseEdgeLimitPercent  int64                  `protobuf:"varint,17,opt,name=max_house_edge_limit_percent,json=maxHouseEdgeLimitPercent,proto3" json:"max_house_edge_limit_percent,omitempty"`
-	StandardXpMultiplier      int64                  `protobuf:"varint,18,opt,name=standard_xp_multiplier,json=standardXpMultiplier,proto3" json:"standard_xp_multiplier,omitempty"`
-	Timezone                  string                 `protobuf:"bytes,19,opt,name=timezone,proto3" json:"timezone,omitempty"`
-	DailyIssueAt              string                 `protobuf:"bytes,20,opt,name=daily_issue_at,json=dailyIssueAt,proto3" json:"daily_issue_at,omitempty"`
-	WeeklyIssueDow            int32                  `protobuf:"varint,21,opt,name=weekly_issue_dow,json=weeklyIssueDow,proto3" json:"weekly_issue_dow,omitempty"`
-	WeeklyIssueAt             string                 `protobuf:"bytes,22,opt,name=weekly_issue_at,json=weeklyIssueAt,proto3" json:"weekly_issue_at,omitempty"`
-	MonthlyIssueDom           int32                  `protobuf:"varint,23,opt,name=monthly_issue_dom,json=monthlyIssueDom,proto3" json:"monthly_issue_dom,omitempty"`
-	MonthlyIssueAt            string                 `protobuf:"bytes,24,opt,name=monthly_issue_at,json=monthlyIssueAt,proto3" json:"monthly_issue_at,omitempty"`
-	CreatedAt                 int64                  `protobuf:"varint,25,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt                 int64                  `protobuf:"varint,26,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	DepositXpRate             string                 `protobuf:"bytes,16,opt,name=deposit_xp_rate,json=depositXpRate,proto3" json:"deposit_xp_rate,omitempty"`
+	WageringXpRate            string                 `protobuf:"bytes,17,opt,name=wagering_xp_rate,json=wageringXpRate,proto3" json:"wagering_xp_rate,omitempty"`
+	MaxHouseEdgeLimitPercent  string                 `protobuf:"bytes,18,opt,name=max_house_edge_limit_percent,json=maxHouseEdgeLimitPercent,proto3" json:"max_house_edge_limit_percent,omitempty"`
+	StandardXpMultiplier      string                 `protobuf:"bytes,19,opt,name=standard_xp_multiplier,json=standardXpMultiplier,proto3" json:"standard_xp_multiplier,omitempty"`
+	Timezone                  string                 `protobuf:"bytes,20,opt,name=timezone,proto3" json:"timezone,omitempty"`
+	DailyIssueAt              string                 `protobuf:"bytes,21,opt,name=daily_issue_at,json=dailyIssueAt,proto3" json:"daily_issue_at,omitempty"`
+	WeeklyIssueDow            int32                  `protobuf:"varint,22,opt,name=weekly_issue_dow,json=weeklyIssueDow,proto3" json:"weekly_issue_dow,omitempty"`
+	WeeklyIssueAt             string                 `protobuf:"bytes,23,opt,name=weekly_issue_at,json=weeklyIssueAt,proto3" json:"weekly_issue_at,omitempty"`
+	MonthlyIssueDom           int32                  `protobuf:"varint,24,opt,name=monthly_issue_dom,json=monthlyIssueDom,proto3" json:"monthly_issue_dom,omitempty"`
+	MonthlyIssueAt            string                 `protobuf:"bytes,25,opt,name=monthly_issue_at,json=monthlyIssueAt,proto3" json:"monthly_issue_at,omitempty"`
+	CreatedAt                 int64                  `protobuf:"varint,26,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt                 int64                  `protobuf:"varint,27,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
 }
@@ -452,32 +452,32 @@ func (x *VipSetting) GetMonthlyRewardPayoutType() VipPayoutType {
 	return VipPayoutType_VIP_PAYOUT_TYPE_UNSPECIFIED
 }
 
-func (x *VipSetting) GetDepositXpRate() int64 {
+func (x *VipSetting) GetDepositXpRate() string {
 	if x != nil {
 		return x.DepositXpRate
 	}
-	return 0
+	return ""
 }
 
-func (x *VipSetting) GetWageringXpRate() int64 {
+func (x *VipSetting) GetWageringXpRate() string {
 	if x != nil {
 		return x.WageringXpRate
 	}
-	return 0
+	return ""
 }
 
-func (x *VipSetting) GetMaxHouseEdgeLimitPercent() int64 {
+func (x *VipSetting) GetMaxHouseEdgeLimitPercent() string {
 	if x != nil {
 		return x.MaxHouseEdgeLimitPercent
 	}
-	return 0
+	return ""
 }
 
-func (x *VipSetting) GetStandardXpMultiplier() int64 {
+func (x *VipSetting) GetStandardXpMultiplier() string {
 	if x != nil {
 		return x.StandardXpMultiplier
 	}
-	return 0
+	return ""
 }
 
 func (x *VipSetting) GetTimezone() string {
@@ -779,35 +779,42 @@ type VipLevelConfigTemplate struct {
 	StartLevel         int64                  `protobuf:"varint,7,opt,name=start_level,json=startLevel,proto3" json:"start_level,omitempty"`
 	EndLevel           int64                  `protobuf:"varint,8,opt,name=end_level,json=endLevel,proto3" json:"end_level,omitempty"`
 	// 升级设置
-	BaseLevelUpgradeXp     int64 `protobuf:"varint,9,opt,name=base_level_upgrade_xp,json=baseLevelUpgradeXp,proto3" json:"base_level_upgrade_xp,omitempty"`
-	IncrLevelUpgradeXp     int64 `protobuf:"varint,10,opt,name=incr_level_upgrade_xp,json=incrLevelUpgradeXp,proto3" json:"incr_level_upgrade_xp,omitempty"`
-	BaseUpgradeRewardAmt   int64 `protobuf:"varint,11,opt,name=base_upgrade_reward_amt,json=baseUpgradeRewardAmt,proto3" json:"base_upgrade_reward_amt,omitempty"`
-	IncrUpgradeRewardAmt   int64 `protobuf:"varint,12,opt,name=incr_upgrade_reward_amt,json=incrUpgradeRewardAmt,proto3" json:"incr_upgrade_reward_amt,omitempty"`
-	UpgradeRewardWageringX int64 `protobuf:"varint,13,opt,name=upgrade_reward_wagering_x,json=upgradeRewardWageringX,proto3" json:"upgrade_reward_wagering_x,omitempty"`
+	BaseLevelUpgradeXp     string `protobuf:"bytes,9,opt,name=base_level_upgrade_xp,json=baseLevelUpgradeXp,proto3" json:"base_level_upgrade_xp,omitempty"`
+	IncrLevelUpgradeXp     string `protobuf:"bytes,10,opt,name=incr_level_upgrade_xp,json=incrLevelUpgradeXp,proto3" json:"incr_level_upgrade_xp,omitempty"`
+	BaseUpgradeRewardAmt   string `protobuf:"bytes,11,opt,name=base_upgrade_reward_amt,json=baseUpgradeRewardAmt,proto3" json:"base_upgrade_reward_amt,omitempty"`
+	IncrUpgradeRewardAmt   string `protobuf:"bytes,12,opt,name=incr_upgrade_reward_amt,json=incrUpgradeRewardAmt,proto3" json:"incr_upgrade_reward_amt,omitempty"`
+	UpgradeRewardWageringX string `protobuf:"bytes,13,opt,name=upgrade_reward_wagering_x,json=upgradeRewardWageringX,proto3" json:"upgrade_reward_wagering_x,omitempty"`
 	// 等级维护要求
-	XpLossEnabled bool  `protobuf:"varint,14,opt,name=xp_loss_enabled,json=xpLossEnabled,proto3" json:"xp_loss_enabled,omitempty"`
-	WeeklyXpLoss  int64 `protobuf:"varint,15,opt,name=weekly_xp_loss,json=weeklyXpLoss,proto3" json:"weekly_xp_loss,omitempty"`
-	MonthlyXpLoss int64 `protobuf:"varint,16,opt,name=monthly_xp_loss,json=monthlyXpLoss,proto3" json:"monthly_xp_loss,omitempty"`
+	WeeklyXpLoss  string `protobuf:"bytes,14,opt,name=weekly_xp_loss,json=weeklyXpLoss,proto3" json:"weekly_xp_loss,omitempty"`
+	MonthlyXpLoss string `protobuf:"bytes,15,opt,name=monthly_xp_loss,json=monthlyXpLoss,proto3" json:"monthly_xp_loss,omitempty"`
 	// 即时返水
-	RakebackInstantEnabled bool  `protobuf:"varint,17,opt,name=rakeback_instant_enabled,json=rakebackInstantEnabled,proto3" json:"rakeback_instant_enabled,omitempty"`
-	RakebackInstantRate    int64 `protobuf:"varint,18,opt,name=rakeback_instant_rate,json=rakebackInstantRate,proto3" json:"rakeback_instant_rate,omitempty"`
-	RakebackInstantReq     int64 `protobuf:"varint,19,opt,name=rakeback_instant_req,json=rakebackInstantReq,proto3" json:"rakeback_instant_req,omitempty"`
+	RakebackInstantEnabled bool   `protobuf:"varint,16,opt,name=rakeback_instant_enabled,json=rakebackInstantEnabled,proto3" json:"rakeback_instant_enabled,omitempty"`
+	RakebackInstantRate    string `protobuf:"bytes,17,opt,name=rakeback_instant_rate,json=rakebackInstantRate,proto3" json:"rakeback_instant_rate,omitempty"`
+	RakebackInstantReq     string `protobuf:"bytes,18,opt,name=rakeback_instant_req,json=rakebackInstantReq,proto3" json:"rakeback_instant_req,omitempty"`
 	// 每日返水
-	RakebackDailyEnabled bool  `protobuf:"varint,20,opt,name=rakeback_daily_enabled,json=rakebackDailyEnabled,proto3" json:"rakeback_daily_enabled,omitempty"`
-	RakebackDailyRate    int64 `protobuf:"varint,21,opt,name=rakeback_daily_rate,json=rakebackDailyRate,proto3" json:"rakeback_daily_rate,omitempty"`
-	RakebackDailyReq     int64 `protobuf:"varint,22,opt,name=rakeback_daily_req,json=rakebackDailyReq,proto3" json:"rakeback_daily_req,omitempty"`
+	RakebackDailyEnabled bool   `protobuf:"varint,19,opt,name=rakeback_daily_enabled,json=rakebackDailyEnabled,proto3" json:"rakeback_daily_enabled,omitempty"`
+	RakebackDailyRate    string `protobuf:"bytes,20,opt,name=rakeback_daily_rate,json=rakebackDailyRate,proto3" json:"rakeback_daily_rate,omitempty"`
+	RakebackDailyReq     string `protobuf:"bytes,21,opt,name=rakeback_daily_req,json=rakebackDailyReq,proto3" json:"rakeback_daily_req,omitempty"`
 	// 每周奖励
-	WeeklyRewardEnabled    bool  `protobuf:"varint,23,opt,name=weekly_reward_enabled,json=weeklyRewardEnabled,proto3" json:"weekly_reward_enabled,omitempty"`
-	WeeklyFixedRewardAmt   int64 `protobuf:"varint,24,opt,name=weekly_fixed_reward_amt,json=weeklyFixedRewardAmt,proto3" json:"weekly_fixed_reward_amt,omitempty"`
-	WeeklyTurnoverRate     int64 `protobuf:"varint,25,opt,name=weekly_turnover_rate,json=weeklyTurnoverRate,proto3" json:"weekly_turnover_rate,omitempty"`
-	WeeklyNetLossAmt       int64 `protobuf:"varint,26,opt,name=weekly_net_loss_amt,json=weeklyNetLossAmt,proto3" json:"weekly_net_loss_amt,omitempty"`
-	WeeklyAdjustRangePct   int64 `protobuf:"varint,27,opt,name=weekly_adjust_range_pct,json=weeklyAdjustRangePct,proto3" json:"weekly_adjust_range_pct,omitempty"`
-	WeeklyActiveDaysReward int32 `protobuf:"varint,28,opt,name=weekly_active_days_reward,json=weeklyActiveDaysReward,proto3" json:"weekly_active_days_reward,omitempty"`
-	WeeklyWageringReq      int64 `protobuf:"varint,29,opt,name=weekly_wagering_req,json=weeklyWageringReq,proto3" json:"weekly_wagering_req,omitempty"`
-	CreatedAt              int64 `protobuf:"varint,30,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt              int64 `protobuf:"varint,31,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	WeeklyRewardEnabled    bool   `protobuf:"varint,22,opt,name=weekly_reward_enabled,json=weeklyRewardEnabled,proto3" json:"weekly_reward_enabled,omitempty"`
+	WeeklyFixedRewardAmt   string `protobuf:"bytes,23,opt,name=weekly_fixed_reward_amt,json=weeklyFixedRewardAmt,proto3" json:"weekly_fixed_reward_amt,omitempty"`
+	WeeklyTurnoverRate     string `protobuf:"bytes,24,opt,name=weekly_turnover_rate,json=weeklyTurnoverRate,proto3" json:"weekly_turnover_rate,omitempty"`
+	WeeklyNetLossAmt       string `protobuf:"bytes,25,opt,name=weekly_net_loss_amt,json=weeklyNetLossAmt,proto3" json:"weekly_net_loss_amt,omitempty"`
+	WeeklyAdjustRangePct   string `protobuf:"bytes,26,opt,name=weekly_adjust_range_pct,json=weeklyAdjustRangePct,proto3" json:"weekly_adjust_range_pct,omitempty"`
+	WeeklyActiveDaysReward int32  `protobuf:"varint,27,opt,name=weekly_active_days_reward,json=weeklyActiveDaysReward,proto3" json:"weekly_active_days_reward,omitempty"`
+	WeeklyWageringReq      string `protobuf:"bytes,28,opt,name=weekly_wagering_req,json=weeklyWageringReq,proto3" json:"weekly_wagering_req,omitempty"`
+	// 每月奖励
+	MonthlyRewardEnabled    bool   `protobuf:"varint,29,opt,name=monthly_reward_enabled,json=monthlyRewardEnabled,proto3" json:"monthly_reward_enabled,omitempty"`
+	MonthlyFixedRewardAmt   string `protobuf:"bytes,30,opt,name=monthly_fixed_reward_amt,json=monthlyFixedRewardAmt,proto3" json:"monthly_fixed_reward_amt,omitempty"`
+	MonthlyTurnoverRate     string `protobuf:"bytes,31,opt,name=monthly_turnover_rate,json=monthlyTurnoverRate,proto3" json:"monthly_turnover_rate,omitempty"`
+	MonthlyNetLossAmt       string `protobuf:"bytes,32,opt,name=monthly_net_loss_amt,json=monthlyNetLossAmt,proto3" json:"monthly_net_loss_amt,omitempty"`
+	MonthlyAdjustRangePct   string `protobuf:"bytes,33,opt,name=monthly_adjust_range_pct,json=monthlyAdjustRangePct,proto3" json:"monthly_adjust_range_pct,omitempty"`
+	MonthlyActiveDaysReward int32  `protobuf:"varint,34,opt,name=monthly_active_days_reward,json=monthlyActiveDaysReward,proto3" json:"monthly_active_days_reward,omitempty"`
+	MonthlyWageringReq      string `protobuf:"bytes,35,opt,name=monthly_wagering_req,json=monthlyWageringReq,proto3" json:"monthly_wagering_req,omitempty"`
+	CreatedAt               int64  `protobuf:"varint,36,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt               int64  `protobuf:"varint,37,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *VipLevelConfigTemplate) Reset() {
@@ -896,60 +903,53 @@ func (x *VipLevelConfigTemplate) GetEndLevel() int64 {
 	return 0
 }
 
-func (x *VipLevelConfigTemplate) GetBaseLevelUpgradeXp() int64 {
+func (x *VipLevelConfigTemplate) GetBaseLevelUpgradeXp() string {
 	if x != nil {
 		return x.BaseLevelUpgradeXp
 	}
-	return 0
+	return ""
 }
 
-func (x *VipLevelConfigTemplate) GetIncrLevelUpgradeXp() int64 {
+func (x *VipLevelConfigTemplate) GetIncrLevelUpgradeXp() string {
 	if x != nil {
 		return x.IncrLevelUpgradeXp
 	}
-	return 0
+	return ""
 }
 
-func (x *VipLevelConfigTemplate) GetBaseUpgradeRewardAmt() int64 {
+func (x *VipLevelConfigTemplate) GetBaseUpgradeRewardAmt() string {
 	if x != nil {
 		return x.BaseUpgradeRewardAmt
 	}
-	return 0
+	return ""
 }
 
-func (x *VipLevelConfigTemplate) GetIncrUpgradeRewardAmt() int64 {
+func (x *VipLevelConfigTemplate) GetIncrUpgradeRewardAmt() string {
 	if x != nil {
 		return x.IncrUpgradeRewardAmt
 	}
-	return 0
+	return ""
 }
 
-func (x *VipLevelConfigTemplate) GetUpgradeRewardWageringX() int64 {
+func (x *VipLevelConfigTemplate) GetUpgradeRewardWageringX() string {
 	if x != nil {
 		return x.UpgradeRewardWageringX
 	}
-	return 0
+	return ""
 }
 
-func (x *VipLevelConfigTemplate) GetXpLossEnabled() bool {
-	if x != nil {
-		return x.XpLossEnabled
-	}
-	return false
-}
-
-func (x *VipLevelConfigTemplate) GetWeeklyXpLoss() int64 {
+func (x *VipLevelConfigTemplate) GetWeeklyXpLoss() string {
 	if x != nil {
 		return x.WeeklyXpLoss
 	}
-	return 0
+	return ""
 }
 
-func (x *VipLevelConfigTemplate) GetMonthlyXpLoss() int64 {
+func (x *VipLevelConfigTemplate) GetMonthlyXpLoss() string {
 	if x != nil {
 		return x.MonthlyXpLoss
 	}
-	return 0
+	return ""
 }
 
 func (x *VipLevelConfigTemplate) GetRakebackInstantEnabled() bool {
@@ -959,18 +959,18 @@ func (x *VipLevelConfigTemplate) GetRakebackInstantEnabled() bool {
 	return false
 }
 
-func (x *VipLevelConfigTemplate) GetRakebackInstantRate() int64 {
+func (x *VipLevelConfigTemplate) GetRakebackInstantRate() string {
 	if x != nil {
 		return x.RakebackInstantRate
 	}
-	return 0
+	return ""
 }
 
-func (x *VipLevelConfigTemplate) GetRakebackInstantReq() int64 {
+func (x *VipLevelConfigTemplate) GetRakebackInstantReq() string {
 	if x != nil {
 		return x.RakebackInstantReq
 	}
-	return 0
+	return ""
 }
 
 func (x *VipLevelConfigTemplate) GetRakebackDailyEnabled() bool {
@@ -980,18 +980,18 @@ func (x *VipLevelConfigTemplate) GetRakebackDailyEnabled() bool {
 	return false
 }
 
-func (x *VipLevelConfigTemplate) GetRakebackDailyRate() int64 {
+func (x *VipLevelConfigTemplate) GetRakebackDailyRate() string {
 	if x != nil {
 		return x.RakebackDailyRate
 	}
-	return 0
+	return ""
 }
 
-func (x *VipLevelConfigTemplate) GetRakebackDailyReq() int64 {
+func (x *VipLevelConfigTemplate) GetRakebackDailyReq() string {
 	if x != nil {
 		return x.RakebackDailyReq
 	}
-	return 0
+	return ""
 }
 
 func (x *VipLevelConfigTemplate) GetWeeklyRewardEnabled() bool {
@@ -1001,32 +1001,32 @@ func (x *VipLevelConfigTemplate) GetWeeklyRewardEnabled() bool {
 	return false
 }
 
-func (x *VipLevelConfigTemplate) GetWeeklyFixedRewardAmt() int64 {
+func (x *VipLevelConfigTemplate) GetWeeklyFixedRewardAmt() string {
 	if x != nil {
 		return x.WeeklyFixedRewardAmt
 	}
-	return 0
+	return ""
 }
 
-func (x *VipLevelConfigTemplate) GetWeeklyTurnoverRate() int64 {
+func (x *VipLevelConfigTemplate) GetWeeklyTurnoverRate() string {
 	if x != nil {
 		return x.WeeklyTurnoverRate
 	}
-	return 0
+	return ""
 }
 
-func (x *VipLevelConfigTemplate) GetWeeklyNetLossAmt() int64 {
+func (x *VipLevelConfigTemplate) GetWeeklyNetLossAmt() string {
 	if x != nil {
 		return x.WeeklyNetLossAmt
 	}
-	return 0
+	return ""
 }
 
-func (x *VipLevelConfigTemplate) GetWeeklyAdjustRangePct() int64 {
+func (x *VipLevelConfigTemplate) GetWeeklyAdjustRangePct() string {
 	if x != nil {
 		return x.WeeklyAdjustRangePct
 	}
-	return 0
+	return ""
 }
 
 func (x *VipLevelConfigTemplate) GetWeeklyActiveDaysReward() int32 {
@@ -1036,11 +1036,60 @@ func (x *VipLevelConfigTemplate) GetWeeklyActiveDaysReward() int32 {
 	return 0
 }
 
-func (x *VipLevelConfigTemplate) GetWeeklyWageringReq() int64 {
+func (x *VipLevelConfigTemplate) GetWeeklyWageringReq() string {
 	if x != nil {
 		return x.WeeklyWageringReq
 	}
+	return ""
+}
+
+func (x *VipLevelConfigTemplate) GetMonthlyRewardEnabled() bool {
+	if x != nil {
+		return x.MonthlyRewardEnabled
+	}
+	return false
+}
+
+func (x *VipLevelConfigTemplate) GetMonthlyFixedRewardAmt() string {
+	if x != nil {
+		return x.MonthlyFixedRewardAmt
+	}
+	return ""
+}
+
+func (x *VipLevelConfigTemplate) GetMonthlyTurnoverRate() string {
+	if x != nil {
+		return x.MonthlyTurnoverRate
+	}
+	return ""
+}
+
+func (x *VipLevelConfigTemplate) GetMonthlyNetLossAmt() string {
+	if x != nil {
+		return x.MonthlyNetLossAmt
+	}
+	return ""
+}
+
+func (x *VipLevelConfigTemplate) GetMonthlyAdjustRangePct() string {
+	if x != nil {
+		return x.MonthlyAdjustRangePct
+	}
+	return ""
+}
+
+func (x *VipLevelConfigTemplate) GetMonthlyActiveDaysReward() int32 {
+	if x != nil {
+		return x.MonthlyActiveDaysReward
+	}
 	return 0
+}
+
+func (x *VipLevelConfigTemplate) GetMonthlyWageringReq() string {
+	if x != nil {
+		return x.MonthlyWageringReq
+	}
+	return ""
 }
 
 func (x *VipLevelConfigTemplate) GetCreatedAt() int64 {
@@ -2061,20 +2110,20 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\x1arakeback_daily_payout_type\x18\f \x01(\x0e2!.api.vip.service.v1.VipPayoutTypeR\x17rakebackDailyPayoutType\x12\\\n" +
 	"\x19weekly_reward_payout_type\x18\r \x01(\x0e2!.api.vip.service.v1.VipPayoutTypeR\x16weeklyRewardPayoutType\x12^\n" +
 	"\x1amonthly_reward_payout_type\x18\x0e \x01(\x0e2!.api.vip.service.v1.VipPayoutTypeR\x17monthlyRewardPayoutType\x12&\n" +
-	"\x0fdeposit_xp_rate\x18\x0f \x01(\x03R\rdepositXpRate\x12(\n" +
-	"\x10wagering_xp_rate\x18\x10 \x01(\x03R\x0ewageringXpRate\x12>\n" +
-	"\x1cmax_house_edge_limit_percent\x18\x11 \x01(\x03R\x18maxHouseEdgeLimitPercent\x124\n" +
-	"\x16standard_xp_multiplier\x18\x12 \x01(\x03R\x14standardXpMultiplier\x12\x1a\n" +
-	"\btimezone\x18\x13 \x01(\tR\btimezone\x12$\n" +
-	"\x0edaily_issue_at\x18\x14 \x01(\tR\fdailyIssueAt\x12(\n" +
-	"\x10weekly_issue_dow\x18\x15 \x01(\x05R\x0eweeklyIssueDow\x12&\n" +
-	"\x0fweekly_issue_at\x18\x16 \x01(\tR\rweeklyIssueAt\x12*\n" +
-	"\x11monthly_issue_dom\x18\x17 \x01(\x05R\x0fmonthlyIssueDom\x12(\n" +
-	"\x10monthly_issue_at\x18\x18 \x01(\tR\x0emonthlyIssueAt\x12\x1d\n" +
+	"\x0fdeposit_xp_rate\x18\x10 \x01(\tR\rdepositXpRate\x12(\n" +
+	"\x10wagering_xp_rate\x18\x11 \x01(\tR\x0ewageringXpRate\x12>\n" +
+	"\x1cmax_house_edge_limit_percent\x18\x12 \x01(\tR\x18maxHouseEdgeLimitPercent\x124\n" +
+	"\x16standard_xp_multiplier\x18\x13 \x01(\tR\x14standardXpMultiplier\x12\x1a\n" +
+	"\btimezone\x18\x14 \x01(\tR\btimezone\x12$\n" +
+	"\x0edaily_issue_at\x18\x15 \x01(\tR\fdailyIssueAt\x12(\n" +
+	"\x10weekly_issue_dow\x18\x16 \x01(\x05R\x0eweeklyIssueDow\x12&\n" +
+	"\x0fweekly_issue_at\x18\x17 \x01(\tR\rweeklyIssueAt\x12*\n" +
+	"\x11monthly_issue_dom\x18\x18 \x01(\x05R\x0fmonthlyIssueDom\x12(\n" +
+	"\x10monthly_issue_at\x18\x19 \x01(\tR\x0emonthlyIssueAt\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x19 \x01(\x03R\tcreatedAt\x12\x1d\n" +
+	"created_at\x18\x1a \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\x1a \x01(\x03R\tupdatedAt\"\x87\x01\n" +
+	"updated_at\x18\x1b \x01(\x03R\tupdatedAt\"\x87\x01\n" +
 	"\x14GetVipSettingRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\"\x87\x04\n" +
@@ -2089,7 +2138,7 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\x17UpdateVipSettingRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x128\n" +
 	"\asetting\x18\x02 \x01(\v2\x1e.api.vip.service.v1.VipSettingR\asetting\"\x1a\n" +
-	"\x18UpdateVipSettingResponse\"\x90\v\n" +
+	"\x18UpdateVipSettingResponse\"\xe4\r\n" +
 	"\x16VipLevelConfigTemplate\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12,\n" +
 	"\x12system_operator_id\x18\x02 \x01(\x03R\x10systemOperatorId\x120\n" +
@@ -2101,32 +2150,38 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\vstart_level\x18\a \x01(\x03R\n" +
 	"startLevel\x12\x1b\n" +
 	"\tend_level\x18\b \x01(\x03R\bendLevel\x121\n" +
-	"\x15base_level_upgrade_xp\x18\t \x01(\x03R\x12baseLevelUpgradeXp\x121\n" +
+	"\x15base_level_upgrade_xp\x18\t \x01(\tR\x12baseLevelUpgradeXp\x121\n" +
 	"\x15incr_level_upgrade_xp\x18\n" +
-	" \x01(\x03R\x12incrLevelUpgradeXp\x125\n" +
-	"\x17base_upgrade_reward_amt\x18\v \x01(\x03R\x14baseUpgradeRewardAmt\x125\n" +
-	"\x17incr_upgrade_reward_amt\x18\f \x01(\x03R\x14incrUpgradeRewardAmt\x129\n" +
-	"\x19upgrade_reward_wagering_x\x18\r \x01(\x03R\x16upgradeRewardWageringX\x12&\n" +
-	"\x0fxp_loss_enabled\x18\x0e \x01(\bR\rxpLossEnabled\x12$\n" +
-	"\x0eweekly_xp_loss\x18\x0f \x01(\x03R\fweeklyXpLoss\x12&\n" +
-	"\x0fmonthly_xp_loss\x18\x10 \x01(\x03R\rmonthlyXpLoss\x128\n" +
-	"\x18rakeback_instant_enabled\x18\x11 \x01(\bR\x16rakebackInstantEnabled\x122\n" +
-	"\x15rakeback_instant_rate\x18\x12 \x01(\x03R\x13rakebackInstantRate\x120\n" +
-	"\x14rakeback_instant_req\x18\x13 \x01(\x03R\x12rakebackInstantReq\x124\n" +
-	"\x16rakeback_daily_enabled\x18\x14 \x01(\bR\x14rakebackDailyEnabled\x12.\n" +
-	"\x13rakeback_daily_rate\x18\x15 \x01(\x03R\x11rakebackDailyRate\x12,\n" +
-	"\x12rakeback_daily_req\x18\x16 \x01(\x03R\x10rakebackDailyReq\x122\n" +
-	"\x15weekly_reward_enabled\x18\x17 \x01(\bR\x13weeklyRewardEnabled\x125\n" +
-	"\x17weekly_fixed_reward_amt\x18\x18 \x01(\x03R\x14weeklyFixedRewardAmt\x120\n" +
-	"\x14weekly_turnover_rate\x18\x19 \x01(\x03R\x12weeklyTurnoverRate\x12-\n" +
-	"\x13weekly_net_loss_amt\x18\x1a \x01(\x03R\x10weeklyNetLossAmt\x125\n" +
-	"\x17weekly_adjust_range_pct\x18\x1b \x01(\x03R\x14weeklyAdjustRangePct\x129\n" +
-	"\x19weekly_active_days_reward\x18\x1c \x01(\x05R\x16weeklyActiveDaysReward\x12.\n" +
-	"\x13weekly_wagering_req\x18\x1d \x01(\x03R\x11weeklyWageringReq\x12\x1d\n" +
+	" \x01(\tR\x12incrLevelUpgradeXp\x125\n" +
+	"\x17base_upgrade_reward_amt\x18\v \x01(\tR\x14baseUpgradeRewardAmt\x125\n" +
+	"\x17incr_upgrade_reward_amt\x18\f \x01(\tR\x14incrUpgradeRewardAmt\x129\n" +
+	"\x19upgrade_reward_wagering_x\x18\r \x01(\tR\x16upgradeRewardWageringX\x12$\n" +
+	"\x0eweekly_xp_loss\x18\x0e \x01(\tR\fweeklyXpLoss\x12&\n" +
+	"\x0fmonthly_xp_loss\x18\x0f \x01(\tR\rmonthlyXpLoss\x128\n" +
+	"\x18rakeback_instant_enabled\x18\x10 \x01(\bR\x16rakebackInstantEnabled\x122\n" +
+	"\x15rakeback_instant_rate\x18\x11 \x01(\tR\x13rakebackInstantRate\x120\n" +
+	"\x14rakeback_instant_req\x18\x12 \x01(\tR\x12rakebackInstantReq\x124\n" +
+	"\x16rakeback_daily_enabled\x18\x13 \x01(\bR\x14rakebackDailyEnabled\x12.\n" +
+	"\x13rakeback_daily_rate\x18\x14 \x01(\tR\x11rakebackDailyRate\x12,\n" +
+	"\x12rakeback_daily_req\x18\x15 \x01(\tR\x10rakebackDailyReq\x122\n" +
+	"\x15weekly_reward_enabled\x18\x16 \x01(\bR\x13weeklyRewardEnabled\x125\n" +
+	"\x17weekly_fixed_reward_amt\x18\x17 \x01(\tR\x14weeklyFixedRewardAmt\x120\n" +
+	"\x14weekly_turnover_rate\x18\x18 \x01(\tR\x12weeklyTurnoverRate\x12-\n" +
+	"\x13weekly_net_loss_amt\x18\x19 \x01(\tR\x10weeklyNetLossAmt\x125\n" +
+	"\x17weekly_adjust_range_pct\x18\x1a \x01(\tR\x14weeklyAdjustRangePct\x129\n" +
+	"\x19weekly_active_days_reward\x18\x1b \x01(\x05R\x16weeklyActiveDaysReward\x12.\n" +
+	"\x13weekly_wagering_req\x18\x1c \x01(\tR\x11weeklyWageringReq\x124\n" +
+	"\x16monthly_reward_enabled\x18\x1d \x01(\bR\x14monthlyRewardEnabled\x127\n" +
+	"\x18monthly_fixed_reward_amt\x18\x1e \x01(\tR\x15monthlyFixedRewardAmt\x122\n" +
+	"\x15monthly_turnover_rate\x18\x1f \x01(\tR\x13monthlyTurnoverRate\x12/\n" +
+	"\x14monthly_net_loss_amt\x18  \x01(\tR\x11monthlyNetLossAmt\x127\n" +
+	"\x18monthly_adjust_range_pct\x18! \x01(\tR\x15monthlyAdjustRangePct\x12;\n" +
+	"\x1amonthly_active_days_reward\x18\" \x01(\x05R\x17monthlyActiveDaysReward\x120\n" +
+	"\x14monthly_wagering_req\x18# \x01(\tR\x12monthlyWageringReq\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x1e \x01(\x03R\tcreatedAt\x12\x1d\n" +
+	"created_at\x18$ \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\x1f \x01(\x03R\tupdatedAt\"\xc9\x01\n" +
+	"updated_at\x18% \x01(\x03R\tupdatedAt\"\xc9\x01\n" +
 	"\"ListVipLevelConfigTemplatesRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1d\n" +
 	"\n" +

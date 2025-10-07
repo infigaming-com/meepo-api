@@ -885,8 +885,6 @@ func (m *VipLevelConfigTemplate) validate(all bool) error {
 
 	// no validation rules for UpgradeRewardWageringX
 
-	// no validation rules for XpLossEnabled
-
 	// no validation rules for WeeklyXpLoss
 
 	// no validation rules for MonthlyXpLoss
@@ -916,6 +914,20 @@ func (m *VipLevelConfigTemplate) validate(all bool) error {
 	// no validation rules for WeeklyActiveDaysReward
 
 	// no validation rules for WeeklyWageringReq
+
+	// no validation rules for MonthlyRewardEnabled
+
+	// no validation rules for MonthlyFixedRewardAmt
+
+	// no validation rules for MonthlyTurnoverRate
+
+	// no validation rules for MonthlyNetLossAmt
+
+	// no validation rules for MonthlyAdjustRangePct
+
+	// no validation rules for MonthlyActiveDaysReward
+
+	// no validation rules for MonthlyWageringReq
 
 	// no validation rules for CreatedAt
 
