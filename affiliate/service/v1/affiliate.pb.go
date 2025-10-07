@@ -27,20 +27,25 @@ var File_affiliate_service_v1_affiliate_proto protoreflect.FileDescriptor
 
 const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\n" +
-	"$affiliate/service/v1/affiliate.proto\x12\x18api.affiliate.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\x1a*affiliate/service/v1/commission_plan.proto2\x95\x01\n" +
+	"$affiliate/service/v1/affiliate.proto\x12\x18api.affiliate.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\x1a*affiliate/service/v1/commission_plan.proto2\x9f\x02\n" +
 	"\tAffiliate\x12\x87\x01\n" +
-	"\x14CreateCommissionPlan\x125.api.affiliate.service.v1.CreateCommissionPlanRequest\x1a6.api.affiliate.service.v1.CreateCommissionPlanResponse\"\x00BY\n" +
+	"\x14CreateCommissionPlan\x125.api.affiliate.service.v1.CreateCommissionPlanRequest\x1a6.api.affiliate.service.v1.CreateCommissionPlanResponse\"\x00\x12\x87\x01\n" +
+	"\x14UpdateCommissionPlan\x125.api.affiliate.service.v1.UpdateCommissionPlanRequest\x1a6.api.affiliate.service.v1.UpdateCommissionPlanResponse\"\x00BY\n" +
 	"\x18api.affiliate.service.v1P\x01Z;github.com/infigaming-com/meepo-api/affiliate/service/v1;v1b\x06proto3"
 
 var file_affiliate_service_v1_affiliate_proto_goTypes = []any{
 	(*CreateCommissionPlanRequest)(nil),  // 0: api.affiliate.service.v1.CreateCommissionPlanRequest
-	(*CreateCommissionPlanResponse)(nil), // 1: api.affiliate.service.v1.CreateCommissionPlanResponse
+	(*UpdateCommissionPlanRequest)(nil),  // 1: api.affiliate.service.v1.UpdateCommissionPlanRequest
+	(*CreateCommissionPlanResponse)(nil), // 2: api.affiliate.service.v1.CreateCommissionPlanResponse
+	(*UpdateCommissionPlanResponse)(nil), // 3: api.affiliate.service.v1.UpdateCommissionPlanResponse
 }
 var file_affiliate_service_v1_affiliate_proto_depIdxs = []int32{
 	0, // 0: api.affiliate.service.v1.Affiliate.CreateCommissionPlan:input_type -> api.affiliate.service.v1.CreateCommissionPlanRequest
-	1, // 1: api.affiliate.service.v1.Affiliate.CreateCommissionPlan:output_type -> api.affiliate.service.v1.CreateCommissionPlanResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	1, // 1: api.affiliate.service.v1.Affiliate.UpdateCommissionPlan:input_type -> api.affiliate.service.v1.UpdateCommissionPlanRequest
+	2, // 2: api.affiliate.service.v1.Affiliate.CreateCommissionPlan:output_type -> api.affiliate.service.v1.CreateCommissionPlanResponse
+	3, // 3: api.affiliate.service.v1.Affiliate.UpdateCommissionPlan:output_type -> api.affiliate.service.v1.UpdateCommissionPlanResponse
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name

@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	Affiliate_CreateCommissionPlan_FullMethodName = "/api.affiliate.service.v1.Affiliate/CreateCommissionPlan"
+	Affiliate_UpdateCommissionPlan_FullMethodName = "/api.affiliate.service.v1.Affiliate/UpdateCommissionPlan"
 )
 
 // AffiliateClient is the client API for Affiliate service.
@@ -27,6 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AffiliateClient interface {
 	CreateCommissionPlan(ctx context.Context, in *CreateCommissionPlanRequest, opts ...grpc.CallOption) (*CreateCommissionPlanResponse, error)
+	UpdateCommissionPlan(ctx context.Context, in *UpdateCommissionPlanRequest, opts ...grpc.CallOption) (*UpdateCommissionPlanResponse, error)
 }
 
 type affiliateClient struct {
@@ -47,11 +49,22 @@ func (c *affiliateClient) CreateCommissionPlan(ctx context.Context, in *CreateCo
 	return out, nil
 }
 
+func (c *affiliateClient) UpdateCommissionPlan(ctx context.Context, in *UpdateCommissionPlanRequest, opts ...grpc.CallOption) (*UpdateCommissionPlanResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateCommissionPlanResponse)
+	err := c.cc.Invoke(ctx, Affiliate_UpdateCommissionPlan_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AffiliateServer is the server API for Affiliate service.
 // All implementations must embed UnimplementedAffiliateServer
 // for forward compatibility.
 type AffiliateServer interface {
 	CreateCommissionPlan(context.Context, *CreateCommissionPlanRequest) (*CreateCommissionPlanResponse, error)
+	UpdateCommissionPlan(context.Context, *UpdateCommissionPlanRequest) (*UpdateCommissionPlanResponse, error)
 	mustEmbedUnimplementedAffiliateServer()
 }
 
@@ -64,6 +77,9 @@ type UnimplementedAffiliateServer struct{}
 
 func (UnimplementedAffiliateServer) CreateCommissionPlan(context.Context, *CreateCommissionPlanRequest) (*CreateCommissionPlanResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCommissionPlan not implemented")
+}
+func (UnimplementedAffiliateServer) UpdateCommissionPlan(context.Context, *UpdateCommissionPlanRequest) (*UpdateCommissionPlanResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCommissionPlan not implemented")
 }
 func (UnimplementedAffiliateServer) mustEmbedUnimplementedAffiliateServer() {}
 func (UnimplementedAffiliateServer) testEmbeddedByValue()                   {}
@@ -104,6 +120,24 @@ func _Affiliate_CreateCommissionPlan_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Affiliate_UpdateCommissionPlan_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCommissionPlanRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).UpdateCommissionPlan(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_UpdateCommissionPlan_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).UpdateCommissionPlan(ctx, req.(*UpdateCommissionPlanRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Affiliate_ServiceDesc is the grpc.ServiceDesc for Affiliate service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -114,6 +148,10 @@ var Affiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateCommissionPlan",
 			Handler:    _Affiliate_CreateCommissionPlan_Handler,
+		},
+		{
+			MethodName: "UpdateCommissionPlan",
+			Handler:    _Affiliate_UpdateCommissionPlan_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

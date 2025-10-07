@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package api.backoffice.service.v1;
+
+import "google/api/annotations.proto";
+import "affiliate/service/v1/commission_plan.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.backoffice.service.v1";
+
+service BackofficeAffiliate {
+	rpc CreateCommissionPlan(CreateCommissionPlanRequest) returns (api.affiliate.service.v1.CreateCommissionPlanResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/commission/plan/create"
+			body: "*"
+		};
+	}
+    rpc UpdateCommissionPlan(UpdateCommissionPlanRequest) returns (api.affiliate.service.v1.UpdateCommissionPlanResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/commission/plan/update"
+			body: "*"
+		};
+	}
+}
+
+message CreateCommissionPlanRequest {
+	string title = 1;
+    string status = 2;
+    string base_currency = 3;
+    api.affiliate.service.v1.PlanConfig plan_config = 4;
+}
+
+message UpdateCommissionPlanRequest {
+    string title = 1;
+    string status = 2;
+    string base_currency = 3;
+    api.affiliate.service.v1.PlanConfig plan_config = 4;
+	int64 commission_plan_id = 5;
+}

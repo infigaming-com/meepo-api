@@ -19,6 +19,18 @@ message CreateCommissionPlanRequest {
 
 message CreateCommissionPlanResponse {}
 
+message UpdateCommissionPlanRequest {
+    int64 user_id = 1;
+    api.common.OperatorContext operator_context = 2;
+    string title = 3;
+    string status = 4;
+    string base_currency = 5;
+    PlanConfig plan_config = 6;
+    int64 commission_plan_id = 7;
+}
+
+message UpdateCommissionPlanResponse {}
+
 message PlanConfig {
     CPAConfig cpa = 1;
     RevShareConfig revshare = 2;

@@ -307,6 +307,280 @@ var _ interface {
 	ErrorName() string
 } = CreateCommissionPlanResponseValidationError{}
 
+// Validate checks the field values on UpdateCommissionPlanRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateCommissionPlanRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateCommissionPlanRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateCommissionPlanRequestMultiError, or nil if none found.
+func (m *UpdateCommissionPlanRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateCommissionPlanRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateCommissionPlanRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateCommissionPlanRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateCommissionPlanRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Title
+
+	// no validation rules for Status
+
+	// no validation rules for BaseCurrency
+
+	if all {
+		switch v := interface{}(m.GetPlanConfig()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateCommissionPlanRequestValidationError{
+					field:  "PlanConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateCommissionPlanRequestValidationError{
+					field:  "PlanConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetPlanConfig()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateCommissionPlanRequestValidationError{
+				field:  "PlanConfig",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for CommissionPlanId
+
+	if len(errors) > 0 {
+		return UpdateCommissionPlanRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateCommissionPlanRequestMultiError is an error wrapping multiple
+// validation errors returned by UpdateCommissionPlanRequest.ValidateAll() if
+// the designated constraints aren't met.
+type UpdateCommissionPlanRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateCommissionPlanRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateCommissionPlanRequestMultiError) AllErrors() []error { return m }
+
+// UpdateCommissionPlanRequestValidationError is the validation error returned
+// by UpdateCommissionPlanRequest.Validate if the designated constraints
+// aren't met.
+type UpdateCommissionPlanRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateCommissionPlanRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateCommissionPlanRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateCommissionPlanRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateCommissionPlanRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateCommissionPlanRequestValidationError) ErrorName() string {
+	return "UpdateCommissionPlanRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateCommissionPlanRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateCommissionPlanRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateCommissionPlanRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateCommissionPlanRequestValidationError{}
+
+// Validate checks the field values on UpdateCommissionPlanResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateCommissionPlanResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateCommissionPlanResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateCommissionPlanResponseMultiError, or nil if none found.
+func (m *UpdateCommissionPlanResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateCommissionPlanResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return UpdateCommissionPlanResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateCommissionPlanResponseMultiError is an error wrapping multiple
+// validation errors returned by UpdateCommissionPlanResponse.ValidateAll() if
+// the designated constraints aren't met.
+type UpdateCommissionPlanResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateCommissionPlanResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateCommissionPlanResponseMultiError) AllErrors() []error { return m }
+
+// UpdateCommissionPlanResponseValidationError is the validation error returned
+// by UpdateCommissionPlanResponse.Validate if the designated constraints
+// aren't met.
+type UpdateCommissionPlanResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateCommissionPlanResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateCommissionPlanResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateCommissionPlanResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateCommissionPlanResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateCommissionPlanResponseValidationError) ErrorName() string {
+	return "UpdateCommissionPlanResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateCommissionPlanResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateCommissionPlanResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateCommissionPlanResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateCommissionPlanResponseValidationError{}
+
 // Validate checks the field values on PlanConfig with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.

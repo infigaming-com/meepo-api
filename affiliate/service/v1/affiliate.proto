@@ -13,4 +13,6 @@ option java_package = "api.affiliate.service.v1";
 
 service Affiliate {
     rpc CreateCommissionPlan(CreateCommissionPlanRequest) returns (CreateCommissionPlanResponse) {}
+
+    rpc UpdateCommissionPlan(UpdateCommissionPlanRequest) returns (UpdateCommissionPlanResponse) {}
 }

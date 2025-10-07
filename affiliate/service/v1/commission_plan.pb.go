@@ -142,6 +142,134 @@ func (*CreateCommissionPlanResponse) Descriptor() ([]byte, []int) {
 	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{1}
 }
 
+type UpdateCommissionPlanRequest struct {
+	state            protoimpl.MessageState  `protogen:"open.v1"`
+	UserId           int64                   `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OperatorContext  *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Title            string                  `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	Status           string                  `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	BaseCurrency     string                  `protobuf:"bytes,5,opt,name=base_currency,json=baseCurrency,proto3" json:"base_currency,omitempty"`
+	PlanConfig       *PlanConfig             `protobuf:"bytes,6,opt,name=plan_config,json=planConfig,proto3" json:"plan_config,omitempty"`
+	CommissionPlanId int64                   `protobuf:"varint,7,opt,name=commission_plan_id,json=commissionPlanId,proto3" json:"commission_plan_id,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *UpdateCommissionPlanRequest) Reset() {
+	*x = UpdateCommissionPlanRequest{}
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateCommissionPlanRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateCommissionPlanRequest) ProtoMessage() {}
+
+func (x *UpdateCommissionPlanRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateCommissionPlanRequest.ProtoReflect.Descriptor instead.
+func (*UpdateCommissionPlanRequest) Descriptor() ([]byte, []int) {
+	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *UpdateCommissionPlanRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *UpdateCommissionPlanRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *UpdateCommissionPlanRequest) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *UpdateCommissionPlanRequest) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *UpdateCommissionPlanRequest) GetBaseCurrency() string {
+	if x != nil {
+		return x.BaseCurrency
+	}
+	return ""
+}
+
+func (x *UpdateCommissionPlanRequest) GetPlanConfig() *PlanConfig {
+	if x != nil {
+		return x.PlanConfig
+	}
+	return nil
+}
+
+func (x *UpdateCommissionPlanRequest) GetCommissionPlanId() int64 {
+	if x != nil {
+		return x.CommissionPlanId
+	}
+	return 0
+}
+
+type UpdateCommissionPlanResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateCommissionPlanResponse) Reset() {
+	*x = UpdateCommissionPlanResponse{}
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateCommissionPlanResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateCommissionPlanResponse) ProtoMessage() {}
+
+func (x *UpdateCommissionPlanResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateCommissionPlanResponse.ProtoReflect.Descriptor instead.
+func (*UpdateCommissionPlanResponse) Descriptor() ([]byte, []int) {
+	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{3}
+}
+
 type PlanConfig struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Cpa           *CPAConfig             `protobuf:"bytes,1,opt,name=cpa,proto3" json:"cpa,omitempty"`
@@ -155,7 +283,7 @@ type PlanConfig struct {
 
 func (x *PlanConfig) Reset() {
 	*x = PlanConfig{}
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[2]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -167,7 +295,7 @@ func (x *PlanConfig) String() string {
 func (*PlanConfig) ProtoMessage() {}
 
 func (x *PlanConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[2]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -180,7 +308,7 @@ func (x *PlanConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlanConfig.ProtoReflect.Descriptor instead.
 func (*PlanConfig) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{2}
+	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *PlanConfig) GetCpa() *CPAConfig {
@@ -234,7 +362,7 @@ type CPAConfig struct {
 
 func (x *CPAConfig) Reset() {
 	*x = CPAConfig{}
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[3]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -246,7 +374,7 @@ func (x *CPAConfig) String() string {
 func (*CPAConfig) ProtoMessage() {}
 
 func (x *CPAConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[3]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -259,7 +387,7 @@ func (x *CPAConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CPAConfig.ProtoReflect.Descriptor instead.
 func (*CPAConfig) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{3}
+	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *CPAConfig) GetEnabled() bool {
@@ -327,7 +455,7 @@ type FlatCommission struct {
 
 func (x *FlatCommission) Reset() {
 	*x = FlatCommission{}
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[4]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -339,7 +467,7 @@ func (x *FlatCommission) String() string {
 func (*FlatCommission) ProtoMessage() {}
 
 func (x *FlatCommission) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[4]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -352,7 +480,7 @@ func (x *FlatCommission) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FlatCommission.ProtoReflect.Descriptor instead.
 func (*FlatCommission) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{4}
+	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *FlatCommission) GetCommission() string {
@@ -372,7 +500,7 @@ type FlatByCountriesCommission struct {
 
 func (x *FlatByCountriesCommission) Reset() {
 	*x = FlatByCountriesCommission{}
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[5]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -384,7 +512,7 @@ func (x *FlatByCountriesCommission) String() string {
 func (*FlatByCountriesCommission) ProtoMessage() {}
 
 func (x *FlatByCountriesCommission) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[5]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -397,7 +525,7 @@ func (x *FlatByCountriesCommission) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FlatByCountriesCommission.ProtoReflect.Descriptor instead.
 func (*FlatByCountriesCommission) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{5}
+	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *FlatByCountriesCommission) GetCountryGroups() []*CountryCommissionGroup {
@@ -424,7 +552,7 @@ type CountryCommissionGroup struct {
 
 func (x *CountryCommissionGroup) Reset() {
 	*x = CountryCommissionGroup{}
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[6]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -436,7 +564,7 @@ func (x *CountryCommissionGroup) String() string {
 func (*CountryCommissionGroup) ProtoMessage() {}
 
 func (x *CountryCommissionGroup) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[6]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -449,7 +577,7 @@ func (x *CountryCommissionGroup) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CountryCommissionGroup.ProtoReflect.Descriptor instead.
 func (*CountryCommissionGroup) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{6}
+	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *CountryCommissionGroup) GetCountries() []string {
@@ -476,7 +604,7 @@ type ProgressiveCommission struct {
 
 func (x *ProgressiveCommission) Reset() {
 	*x = ProgressiveCommission{}
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[7]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -488,7 +616,7 @@ func (x *ProgressiveCommission) String() string {
 func (*ProgressiveCommission) ProtoMessage() {}
 
 func (x *ProgressiveCommission) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[7]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -501,7 +629,7 @@ func (x *ProgressiveCommission) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProgressiveCommission.ProtoReflect.Descriptor instead.
 func (*ProgressiveCommission) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{7}
+	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ProgressiveCommission) GetMetric() string {
@@ -529,7 +657,7 @@ type ProgressiveCommissionRange struct {
 
 func (x *ProgressiveCommissionRange) Reset() {
 	*x = ProgressiveCommissionRange{}
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[8]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -541,7 +669,7 @@ func (x *ProgressiveCommissionRange) String() string {
 func (*ProgressiveCommissionRange) ProtoMessage() {}
 
 func (x *ProgressiveCommissionRange) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[8]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -554,7 +682,7 @@ func (x *ProgressiveCommissionRange) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProgressiveCommissionRange.ProtoReflect.Descriptor instead.
 func (*ProgressiveCommissionRange) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{8}
+	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ProgressiveCommissionRange) GetFrom() string {
@@ -589,7 +717,7 @@ type ProgressiveByCountriesCommission struct {
 
 func (x *ProgressiveByCountriesCommission) Reset() {
 	*x = ProgressiveByCountriesCommission{}
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[9]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -601,7 +729,7 @@ func (x *ProgressiveByCountriesCommission) String() string {
 func (*ProgressiveByCountriesCommission) ProtoMessage() {}
 
 func (x *ProgressiveByCountriesCommission) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[9]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -614,7 +742,7 @@ func (x *ProgressiveByCountriesCommission) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProgressiveByCountriesCommission.ProtoReflect.Descriptor instead.
 func (*ProgressiveByCountriesCommission) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{9}
+	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ProgressiveByCountriesCommission) GetMetric() string {
@@ -648,7 +776,7 @@ type CountryProgressiveGroup struct {
 
 func (x *CountryProgressiveGroup) Reset() {
 	*x = CountryProgressiveGroup{}
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[10]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -660,7 +788,7 @@ func (x *CountryProgressiveGroup) String() string {
 func (*CountryProgressiveGroup) ProtoMessage() {}
 
 func (x *CountryProgressiveGroup) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[10]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -673,7 +801,7 @@ func (x *CountryProgressiveGroup) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CountryProgressiveGroup.ProtoReflect.Descriptor instead.
 func (*CountryProgressiveGroup) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{10}
+	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *CountryProgressiveGroup) GetCountries() []string {
@@ -706,7 +834,7 @@ type Qualification struct {
 
 func (x *Qualification) Reset() {
 	*x = Qualification{}
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[11]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -718,7 +846,7 @@ func (x *Qualification) String() string {
 func (*Qualification) ProtoMessage() {}
 
 func (x *Qualification) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[11]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -731,7 +859,7 @@ func (x *Qualification) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Qualification.ProtoReflect.Descriptor instead.
 func (*Qualification) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{11}
+	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *Qualification) GetMinFtdAmount() string {
@@ -799,7 +927,7 @@ type AdvancedOptions struct {
 
 func (x *AdvancedOptions) Reset() {
 	*x = AdvancedOptions{}
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[12]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -811,7 +939,7 @@ func (x *AdvancedOptions) String() string {
 func (*AdvancedOptions) ProtoMessage() {}
 
 func (x *AdvancedOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[12]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -824,7 +952,7 @@ func (x *AdvancedOptions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AdvancedOptions.ProtoReflect.Descriptor instead.
 func (*AdvancedOptions) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{12}
+	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *AdvancedOptions) GetHoldPeriodDays() int32 {
@@ -851,7 +979,7 @@ type RevShareConfig struct {
 
 func (x *RevShareConfig) Reset() {
 	*x = RevShareConfig{}
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[13]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -863,7 +991,7 @@ func (x *RevShareConfig) String() string {
 func (*RevShareConfig) ProtoMessage() {}
 
 func (x *RevShareConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[13]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -876,7 +1004,7 @@ func (x *RevShareConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RevShareConfig.ProtoReflect.Descriptor instead.
 func (*RevShareConfig) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{13}
+	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *RevShareConfig) GetEnabled() bool {
@@ -951,7 +1079,7 @@ type FlatRateCommission struct {
 
 func (x *FlatRateCommission) Reset() {
 	*x = FlatRateCommission{}
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[14]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -963,7 +1091,7 @@ func (x *FlatRateCommission) String() string {
 func (*FlatRateCommission) ProtoMessage() {}
 
 func (x *FlatRateCommission) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[14]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -976,7 +1104,7 @@ func (x *FlatRateCommission) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FlatRateCommission.ProtoReflect.Descriptor instead.
 func (*FlatRateCommission) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{14}
+	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *FlatRateCommission) GetRate() string {
@@ -996,7 +1124,7 @@ type FlatByCountriesRateCommission struct {
 
 func (x *FlatByCountriesRateCommission) Reset() {
 	*x = FlatByCountriesRateCommission{}
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[15]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1008,7 +1136,7 @@ func (x *FlatByCountriesRateCommission) String() string {
 func (*FlatByCountriesRateCommission) ProtoMessage() {}
 
 func (x *FlatByCountriesRateCommission) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[15]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1021,7 +1149,7 @@ func (x *FlatByCountriesRateCommission) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FlatByCountriesRateCommission.ProtoReflect.Descriptor instead.
 func (*FlatByCountriesRateCommission) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{15}
+	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *FlatByCountriesRateCommission) GetCountryGroups() []*CountryRateGroup {
@@ -1048,7 +1176,7 @@ type CountryRateGroup struct {
 
 func (x *CountryRateGroup) Reset() {
 	*x = CountryRateGroup{}
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[16]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1060,7 +1188,7 @@ func (x *CountryRateGroup) String() string {
 func (*CountryRateGroup) ProtoMessage() {}
 
 func (x *CountryRateGroup) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[16]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1073,7 +1201,7 @@ func (x *CountryRateGroup) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CountryRateGroup.ProtoReflect.Descriptor instead.
 func (*CountryRateGroup) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{16}
+	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *CountryRateGroup) GetCountries() []string {
@@ -1100,7 +1228,7 @@ type ProgressiveRateCommission struct {
 
 func (x *ProgressiveRateCommission) Reset() {
 	*x = ProgressiveRateCommission{}
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[17]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1112,7 +1240,7 @@ func (x *ProgressiveRateCommission) String() string {
 func (*ProgressiveRateCommission) ProtoMessage() {}
 
 func (x *ProgressiveRateCommission) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[17]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1125,7 +1253,7 @@ func (x *ProgressiveRateCommission) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProgressiveRateCommission.ProtoReflect.Descriptor instead.
 func (*ProgressiveRateCommission) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{17}
+	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *ProgressiveRateCommission) GetMetric() string {
@@ -1153,7 +1281,7 @@ type RateRange struct {
 
 func (x *RateRange) Reset() {
 	*x = RateRange{}
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[18]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1165,7 +1293,7 @@ func (x *RateRange) String() string {
 func (*RateRange) ProtoMessage() {}
 
 func (x *RateRange) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[18]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1178,7 +1306,7 @@ func (x *RateRange) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RateRange.ProtoReflect.Descriptor instead.
 func (*RateRange) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{18}
+	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *RateRange) GetFrom() string {
@@ -1213,7 +1341,7 @@ type ProgressiveByCountriesRateCommission struct {
 
 func (x *ProgressiveByCountriesRateCommission) Reset() {
 	*x = ProgressiveByCountriesRateCommission{}
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[19]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1225,7 +1353,7 @@ func (x *ProgressiveByCountriesRateCommission) String() string {
 func (*ProgressiveByCountriesRateCommission) ProtoMessage() {}
 
 func (x *ProgressiveByCountriesRateCommission) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[19]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1238,7 +1366,7 @@ func (x *ProgressiveByCountriesRateCommission) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use ProgressiveByCountriesRateCommission.ProtoReflect.Descriptor instead.
 func (*ProgressiveByCountriesRateCommission) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{19}
+	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *ProgressiveByCountriesRateCommission) GetMetric() string {
@@ -1272,7 +1400,7 @@ type CountryProgressiveRateGroup struct {
 
 func (x *CountryProgressiveRateGroup) Reset() {
 	*x = CountryProgressiveRateGroup{}
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[20]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1284,7 +1412,7 @@ func (x *CountryProgressiveRateGroup) String() string {
 func (*CountryProgressiveRateGroup) ProtoMessage() {}
 
 func (x *CountryProgressiveRateGroup) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[20]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1297,7 +1425,7 @@ func (x *CountryProgressiveRateGroup) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CountryProgressiveRateGroup.ProtoReflect.Descriptor instead.
 func (*CountryProgressiveRateGroup) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{20}
+	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *CountryProgressiveRateGroup) GetCountries() []string {
@@ -1330,7 +1458,7 @@ type CPLConfig struct {
 
 func (x *CPLConfig) Reset() {
 	*x = CPLConfig{}
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[21]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1342,7 +1470,7 @@ func (x *CPLConfig) String() string {
 func (*CPLConfig) ProtoMessage() {}
 
 func (x *CPLConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[21]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1355,7 +1483,7 @@ func (x *CPLConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CPLConfig.ProtoReflect.Descriptor instead.
 func (*CPLConfig) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{21}
+	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *CPLConfig) GetEnabled() bool {
@@ -1426,7 +1554,7 @@ type CPCConfig struct {
 
 func (x *CPCConfig) Reset() {
 	*x = CPCConfig{}
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[22]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1438,7 +1566,7 @@ func (x *CPCConfig) String() string {
 func (*CPCConfig) ProtoMessage() {}
 
 func (x *CPCConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[22]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1451,7 +1579,7 @@ func (x *CPCConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CPCConfig.ProtoReflect.Descriptor instead.
 func (*CPCConfig) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{22}
+	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *CPCConfig) GetEnabled() bool {
@@ -1494,7 +1622,7 @@ type FlatFeeConfig struct {
 
 func (x *FlatFeeConfig) Reset() {
 	*x = FlatFeeConfig{}
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[23]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1506,7 +1634,7 @@ func (x *FlatFeeConfig) String() string {
 func (*FlatFeeConfig) ProtoMessage() {}
 
 func (x *FlatFeeConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[23]
+	mi := &file_affiliate_service_v1_commission_plan_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1519,7 +1647,7 @@ func (x *FlatFeeConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FlatFeeConfig.ProtoReflect.Descriptor instead.
 func (*FlatFeeConfig) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{23}
+	return file_affiliate_service_v1_commission_plan_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *FlatFeeConfig) GetEnabled() bool {
@@ -1563,7 +1691,17 @@ const file_affiliate_service_v1_commission_plan_proto_rawDesc = "" +
 	"\rbase_currency\x18\x05 \x01(\tR\fbaseCurrency\x12E\n" +
 	"\vplan_config\x18\x06 \x01(\v2$.api.affiliate.service.v1.PlanConfigR\n" +
 	"planConfig\"\x1e\n" +
-	"\x1cCreateCommissionPlanResponse\"\xbb\x02\n" +
+	"\x1cCreateCommissionPlanResponse\"\xc6\x02\n" +
+	"\x1bUpdateCommissionPlanRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12F\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x14\n" +
+	"\x05title\x18\x03 \x01(\tR\x05title\x12\x16\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\x12#\n" +
+	"\rbase_currency\x18\x05 \x01(\tR\fbaseCurrency\x12E\n" +
+	"\vplan_config\x18\x06 \x01(\v2$.api.affiliate.service.v1.PlanConfigR\n" +
+	"planConfig\x12,\n" +
+	"\x12commission_plan_id\x18\a \x01(\x03R\x10commissionPlanId\"\x1e\n" +
+	"\x1cUpdateCommissionPlanResponse\"\xbb\x02\n" +
 	"\n" +
 	"PlanConfig\x125\n" +
 	"\x03cpa\x18\x01 \x01(\v2#.api.affiliate.service.v1.CPAConfigR\x03cpa\x12D\n" +
@@ -1716,76 +1854,80 @@ func file_affiliate_service_v1_commission_plan_proto_rawDescGZIP() []byte {
 	return file_affiliate_service_v1_commission_plan_proto_rawDescData
 }
 
-var file_affiliate_service_v1_commission_plan_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_affiliate_service_v1_commission_plan_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
 var file_affiliate_service_v1_commission_plan_proto_goTypes = []any{
 	(*CreateCommissionPlanRequest)(nil),          // 0: api.affiliate.service.v1.CreateCommissionPlanRequest
 	(*CreateCommissionPlanResponse)(nil),         // 1: api.affiliate.service.v1.CreateCommissionPlanResponse
-	(*PlanConfig)(nil),                           // 2: api.affiliate.service.v1.PlanConfig
-	(*CPAConfig)(nil),                            // 3: api.affiliate.service.v1.CPAConfig
-	(*FlatCommission)(nil),                       // 4: api.affiliate.service.v1.FlatCommission
-	(*FlatByCountriesCommission)(nil),            // 5: api.affiliate.service.v1.FlatByCountriesCommission
-	(*CountryCommissionGroup)(nil),               // 6: api.affiliate.service.v1.CountryCommissionGroup
-	(*ProgressiveCommission)(nil),                // 7: api.affiliate.service.v1.ProgressiveCommission
-	(*ProgressiveCommissionRange)(nil),           // 8: api.affiliate.service.v1.ProgressiveCommissionRange
-	(*ProgressiveByCountriesCommission)(nil),     // 9: api.affiliate.service.v1.ProgressiveByCountriesCommission
-	(*CountryProgressiveGroup)(nil),              // 10: api.affiliate.service.v1.CountryProgressiveGroup
-	(*Qualification)(nil),                        // 11: api.affiliate.service.v1.Qualification
-	(*AdvancedOptions)(nil),                      // 12: api.affiliate.service.v1.AdvancedOptions
-	(*RevShareConfig)(nil),                       // 13: api.affiliate.service.v1.RevShareConfig
-	(*FlatRateCommission)(nil),                   // 14: api.affiliate.service.v1.FlatRateCommission
-	(*FlatByCountriesRateCommission)(nil),        // 15: api.affiliate.service.v1.FlatByCountriesRateCommission
-	(*CountryRateGroup)(nil),                     // 16: api.affiliate.service.v1.CountryRateGroup
-	(*ProgressiveRateCommission)(nil),            // 17: api.affiliate.service.v1.ProgressiveRateCommission
-	(*RateRange)(nil),                            // 18: api.affiliate.service.v1.RateRange
-	(*ProgressiveByCountriesRateCommission)(nil), // 19: api.affiliate.service.v1.ProgressiveByCountriesRateCommission
-	(*CountryProgressiveRateGroup)(nil),          // 20: api.affiliate.service.v1.CountryProgressiveRateGroup
-	(*CPLConfig)(nil),                            // 21: api.affiliate.service.v1.CPLConfig
-	(*CPCConfig)(nil),                            // 22: api.affiliate.service.v1.CPCConfig
-	(*FlatFeeConfig)(nil),                        // 23: api.affiliate.service.v1.FlatFeeConfig
-	(*common.OperatorContext)(nil),               // 24: api.common.OperatorContext
+	(*UpdateCommissionPlanRequest)(nil),          // 2: api.affiliate.service.v1.UpdateCommissionPlanRequest
+	(*UpdateCommissionPlanResponse)(nil),         // 3: api.affiliate.service.v1.UpdateCommissionPlanResponse
+	(*PlanConfig)(nil),                           // 4: api.affiliate.service.v1.PlanConfig
+	(*CPAConfig)(nil),                            // 5: api.affiliate.service.v1.CPAConfig
+	(*FlatCommission)(nil),                       // 6: api.affiliate.service.v1.FlatCommission
+	(*FlatByCountriesCommission)(nil),            // 7: api.affiliate.service.v1.FlatByCountriesCommission
+	(*CountryCommissionGroup)(nil),               // 8: api.affiliate.service.v1.CountryCommissionGroup
+	(*ProgressiveCommission)(nil),                // 9: api.affiliate.service.v1.ProgressiveCommission
+	(*ProgressiveCommissionRange)(nil),           // 10: api.affiliate.service.v1.ProgressiveCommissionRange
+	(*ProgressiveByCountriesCommission)(nil),     // 11: api.affiliate.service.v1.ProgressiveByCountriesCommission
+	(*CountryProgressiveGroup)(nil),              // 12: api.affiliate.service.v1.CountryProgressiveGroup
+	(*Qualification)(nil),                        // 13: api.affiliate.service.v1.Qualification
+	(*AdvancedOptions)(nil),                      // 14: api.affiliate.service.v1.AdvancedOptions
+	(*RevShareConfig)(nil),                       // 15: api.affiliate.service.v1.RevShareConfig
+	(*FlatRateCommission)(nil),                   // 16: api.affiliate.service.v1.FlatRateCommission
+	(*FlatByCountriesRateCommission)(nil),        // 17: api.affiliate.service.v1.FlatByCountriesRateCommission
+	(*CountryRateGroup)(nil),                     // 18: api.affiliate.service.v1.CountryRateGroup
+	(*ProgressiveRateCommission)(nil),            // 19: api.affiliate.service.v1.ProgressiveRateCommission
+	(*RateRange)(nil),                            // 20: api.affiliate.service.v1.RateRange
+	(*ProgressiveByCountriesRateCommission)(nil), // 21: api.affiliate.service.v1.ProgressiveByCountriesRateCommission
+	(*CountryProgressiveRateGroup)(nil),          // 22: api.affiliate.service.v1.CountryProgressiveRateGroup
+	(*CPLConfig)(nil),                            // 23: api.affiliate.service.v1.CPLConfig
+	(*CPCConfig)(nil),                            // 24: api.affiliate.service.v1.CPCConfig
+	(*FlatFeeConfig)(nil),                        // 25: api.affiliate.service.v1.FlatFeeConfig
+	(*common.OperatorContext)(nil),               // 26: api.common.OperatorContext
 }
 var file_affiliate_service_v1_commission_plan_proto_depIdxs = []int32{
-	24, // 0: api.affiliate.service.v1.CreateCommissionPlanRequest.operator_context:type_name -> api.common.OperatorContext
-	2,  // 1: api.affiliate.service.v1.CreateCommissionPlanRequest.plan_config:type_name -> api.affiliate.service.v1.PlanConfig
-	3,  // 2: api.affiliate.service.v1.PlanConfig.cpa:type_name -> api.affiliate.service.v1.CPAConfig
-	13, // 3: api.affiliate.service.v1.PlanConfig.revshare:type_name -> api.affiliate.service.v1.RevShareConfig
-	21, // 4: api.affiliate.service.v1.PlanConfig.cpl:type_name -> api.affiliate.service.v1.CPLConfig
-	22, // 5: api.affiliate.service.v1.PlanConfig.cpc:type_name -> api.affiliate.service.v1.CPCConfig
-	23, // 6: api.affiliate.service.v1.PlanConfig.flat_fee:type_name -> api.affiliate.service.v1.FlatFeeConfig
-	4,  // 7: api.affiliate.service.v1.CPAConfig.flat:type_name -> api.affiliate.service.v1.FlatCommission
-	5,  // 8: api.affiliate.service.v1.CPAConfig.flat_by_countries:type_name -> api.affiliate.service.v1.FlatByCountriesCommission
-	7,  // 9: api.affiliate.service.v1.CPAConfig.progressive:type_name -> api.affiliate.service.v1.ProgressiveCommission
-	9,  // 10: api.affiliate.service.v1.CPAConfig.progressive_by_countries:type_name -> api.affiliate.service.v1.ProgressiveByCountriesCommission
-	11, // 11: api.affiliate.service.v1.CPAConfig.qualification:type_name -> api.affiliate.service.v1.Qualification
-	12, // 12: api.affiliate.service.v1.CPAConfig.advanced_options:type_name -> api.affiliate.service.v1.AdvancedOptions
-	6,  // 13: api.affiliate.service.v1.FlatByCountriesCommission.country_groups:type_name -> api.affiliate.service.v1.CountryCommissionGroup
-	8,  // 14: api.affiliate.service.v1.ProgressiveCommission.ranges:type_name -> api.affiliate.service.v1.ProgressiveCommissionRange
-	10, // 15: api.affiliate.service.v1.ProgressiveByCountriesCommission.country_groups:type_name -> api.affiliate.service.v1.CountryProgressiveGroup
-	8,  // 16: api.affiliate.service.v1.ProgressiveByCountriesCommission.other_countries_ranges:type_name -> api.affiliate.service.v1.ProgressiveCommissionRange
-	8,  // 17: api.affiliate.service.v1.CountryProgressiveGroup.ranges:type_name -> api.affiliate.service.v1.ProgressiveCommissionRange
-	14, // 18: api.affiliate.service.v1.RevShareConfig.flat:type_name -> api.affiliate.service.v1.FlatRateCommission
-	15, // 19: api.affiliate.service.v1.RevShareConfig.flat_by_countries:type_name -> api.affiliate.service.v1.FlatByCountriesRateCommission
-	17, // 20: api.affiliate.service.v1.RevShareConfig.progressive:type_name -> api.affiliate.service.v1.ProgressiveRateCommission
-	19, // 21: api.affiliate.service.v1.RevShareConfig.progressive_by_countries:type_name -> api.affiliate.service.v1.ProgressiveByCountriesRateCommission
-	11, // 22: api.affiliate.service.v1.RevShareConfig.qualification:type_name -> api.affiliate.service.v1.Qualification
-	16, // 23: api.affiliate.service.v1.FlatByCountriesRateCommission.country_groups:type_name -> api.affiliate.service.v1.CountryRateGroup
-	18, // 24: api.affiliate.service.v1.ProgressiveRateCommission.ranges:type_name -> api.affiliate.service.v1.RateRange
-	20, // 25: api.affiliate.service.v1.ProgressiveByCountriesRateCommission.country_groups:type_name -> api.affiliate.service.v1.CountryProgressiveRateGroup
-	18, // 26: api.affiliate.service.v1.ProgressiveByCountriesRateCommission.other_countries_ranges:type_name -> api.affiliate.service.v1.RateRange
-	18, // 27: api.affiliate.service.v1.CountryProgressiveRateGroup.ranges:type_name -> api.affiliate.service.v1.RateRange
-	4,  // 28: api.affiliate.service.v1.CPLConfig.flat:type_name -> api.affiliate.service.v1.FlatCommission
-	5,  // 29: api.affiliate.service.v1.CPLConfig.flat_by_countries:type_name -> api.affiliate.service.v1.FlatByCountriesCommission
-	7,  // 30: api.affiliate.service.v1.CPLConfig.progressive:type_name -> api.affiliate.service.v1.ProgressiveCommission
-	9,  // 31: api.affiliate.service.v1.CPLConfig.progressive_by_countries:type_name -> api.affiliate.service.v1.ProgressiveByCountriesCommission
-	11, // 32: api.affiliate.service.v1.CPLConfig.qualification:type_name -> api.affiliate.service.v1.Qualification
-	12, // 33: api.affiliate.service.v1.CPLConfig.advanced_options:type_name -> api.affiliate.service.v1.AdvancedOptions
-	4,  // 34: api.affiliate.service.v1.CPCConfig.flat:type_name -> api.affiliate.service.v1.FlatCommission
-	5,  // 35: api.affiliate.service.v1.CPCConfig.flat_by_countries:type_name -> api.affiliate.service.v1.FlatByCountriesCommission
-	36, // [36:36] is the sub-list for method output_type
-	36, // [36:36] is the sub-list for method input_type
-	36, // [36:36] is the sub-list for extension type_name
-	36, // [36:36] is the sub-list for extension extendee
-	0,  // [0:36] is the sub-list for field type_name
+	26, // 0: api.affiliate.service.v1.CreateCommissionPlanRequest.operator_context:type_name -> api.common.OperatorContext
+	4,  // 1: api.affiliate.service.v1.CreateCommissionPlanRequest.plan_config:type_name -> api.affiliate.service.v1.PlanConfig
+	26, // 2: api.affiliate.service.v1.UpdateCommissionPlanRequest.operator_context:type_name -> api.common.OperatorContext
+	4,  // 3: api.affiliate.service.v1.UpdateCommissionPlanRequest.plan_config:type_name -> api.affiliate.service.v1.PlanConfig
+	5,  // 4: api.affiliate.service.v1.PlanConfig.cpa:type_name -> api.affiliate.service.v1.CPAConfig
+	15, // 5: api.affiliate.service.v1.PlanConfig.revshare:type_name -> api.affiliate.service.v1.RevShareConfig
+	23, // 6: api.affiliate.service.v1.PlanConfig.cpl:type_name -> api.affiliate.service.v1.CPLConfig
+	24, // 7: api.affiliate.service.v1.PlanConfig.cpc:type_name -> api.affiliate.service.v1.CPCConfig
+	25, // 8: api.affiliate.service.v1.PlanConfig.flat_fee:type_name -> api.affiliate.service.v1.FlatFeeConfig
+	6,  // 9: api.affiliate.service.v1.CPAConfig.flat:type_name -> api.affiliate.service.v1.FlatCommission
+	7,  // 10: api.affiliate.service.v1.CPAConfig.flat_by_countries:type_name -> api.affiliate.service.v1.FlatByCountriesCommission
+	9,  // 11: api.affiliate.service.v1.CPAConfig.progressive:type_name -> api.affiliate.service.v1.ProgressiveCommission
+	11, // 12: api.affiliate.service.v1.CPAConfig.progressive_by_countries:type_name -> api.affiliate.service.v1.ProgressiveByCountriesCommission
+	13, // 13: api.affiliate.service.v1.CPAConfig.qualification:type_name -> api.affiliate.service.v1.Qualification
+	14, // 14: api.affiliate.service.v1.CPAConfig.advanced_options:type_name -> api.affiliate.service.v1.AdvancedOptions
+	8,  // 15: api.affiliate.service.v1.FlatByCountriesCommission.country_groups:type_name -> api.affiliate.service.v1.CountryCommissionGroup
+	10, // 16: api.affiliate.service.v1.ProgressiveCommission.ranges:type_name -> api.affiliate.service.v1.ProgressiveCommissionRange
+	12, // 17: api.affiliate.service.v1.ProgressiveByCountriesCommission.country_groups:type_name -> api.affiliate.service.v1.CountryProgressiveGroup
+	10, // 18: api.affiliate.service.v1.ProgressiveByCountriesCommission.other_countries_ranges:type_name -> api.affiliate.service.v1.ProgressiveCommissionRange
+	10, // 19: api.affiliate.service.v1.CountryProgressiveGroup.ranges:type_name -> api.affiliate.service.v1.ProgressiveCommissionRange
+	16, // 20: api.affiliate.service.v1.RevShareConfig.flat:type_name -> api.affiliate.service.v1.FlatRateCommission
+	17, // 21: api.affiliate.service.v1.RevShareConfig.flat_by_countries:type_name -> api.affiliate.service.v1.FlatByCountriesRateCommission
+	19, // 22: api.affiliate.service.v1.RevShareConfig.progressive:type_name -> api.affiliate.service.v1.ProgressiveRateCommission
+	21, // 23: api.affiliate.service.v1.RevShareConfig.progressive_by_countries:type_name -> api.affiliate.service.v1.ProgressiveByCountriesRateCommission
+	13, // 24: api.affiliate.service.v1.RevShareConfig.qualification:type_name -> api.affiliate.service.v1.Qualification
+	18, // 25: api.affiliate.service.v1.FlatByCountriesRateCommission.country_groups:type_name -> api.affiliate.service.v1.CountryRateGroup
+	20, // 26: api.affiliate.service.v1.ProgressiveRateCommission.ranges:type_name -> api.affiliate.service.v1.RateRange
+	22, // 27: api.affiliate.service.v1.ProgressiveByCountriesRateCommission.country_groups:type_name -> api.affiliate.service.v1.CountryProgressiveRateGroup
+	20, // 28: api.affiliate.service.v1.ProgressiveByCountriesRateCommission.other_countries_ranges:type_name -> api.affiliate.service.v1.RateRange
+	20, // 29: api.affiliate.service.v1.CountryProgressiveRateGroup.ranges:type_name -> api.affiliate.service.v1.RateRange
+	6,  // 30: api.affiliate.service.v1.CPLConfig.flat:type_name -> api.affiliate.service.v1.FlatCommission
+	7,  // 31: api.affiliate.service.v1.CPLConfig.flat_by_countries:type_name -> api.affiliate.service.v1.FlatByCountriesCommission
+	9,  // 32: api.affiliate.service.v1.CPLConfig.progressive:type_name -> api.affiliate.service.v1.ProgressiveCommission
+	11, // 33: api.affiliate.service.v1.CPLConfig.progressive_by_countries:type_name -> api.affiliate.service.v1.ProgressiveByCountriesCommission
+	13, // 34: api.affiliate.service.v1.CPLConfig.qualification:type_name -> api.affiliate.service.v1.Qualification
+	14, // 35: api.affiliate.service.v1.CPLConfig.advanced_options:type_name -> api.affiliate.service.v1.AdvancedOptions
+	6,  // 36: api.affiliate.service.v1.CPCConfig.flat:type_name -> api.affiliate.service.v1.FlatCommission
+	7,  // 37: api.affiliate.service.v1.CPCConfig.flat_by_countries:type_name -> api.affiliate.service.v1.FlatByCountriesCommission
+	38, // [38:38] is the sub-list for method output_type
+	38, // [38:38] is the sub-list for method input_type
+	38, // [38:38] is the sub-list for extension type_name
+	38, // [38:38] is the sub-list for extension extendee
+	0,  // [0:38] is the sub-list for field type_name
 }
 
 func init() { file_affiliate_service_v1_commission_plan_proto_init() }
@@ -1793,23 +1935,23 @@ func file_affiliate_service_v1_commission_plan_proto_init() {
 	if File_affiliate_service_v1_commission_plan_proto != nil {
 		return
 	}
-	file_affiliate_service_v1_commission_plan_proto_msgTypes[3].OneofWrappers = []any{}
 	file_affiliate_service_v1_commission_plan_proto_msgTypes[5].OneofWrappers = []any{}
-	file_affiliate_service_v1_commission_plan_proto_msgTypes[8].OneofWrappers = []any{}
-	file_affiliate_service_v1_commission_plan_proto_msgTypes[11].OneofWrappers = []any{}
-	file_affiliate_service_v1_commission_plan_proto_msgTypes[12].OneofWrappers = []any{}
+	file_affiliate_service_v1_commission_plan_proto_msgTypes[7].OneofWrappers = []any{}
+	file_affiliate_service_v1_commission_plan_proto_msgTypes[10].OneofWrappers = []any{}
 	file_affiliate_service_v1_commission_plan_proto_msgTypes[13].OneofWrappers = []any{}
+	file_affiliate_service_v1_commission_plan_proto_msgTypes[14].OneofWrappers = []any{}
 	file_affiliate_service_v1_commission_plan_proto_msgTypes[15].OneofWrappers = []any{}
-	file_affiliate_service_v1_commission_plan_proto_msgTypes[18].OneofWrappers = []any{}
-	file_affiliate_service_v1_commission_plan_proto_msgTypes[21].OneofWrappers = []any{}
-	file_affiliate_service_v1_commission_plan_proto_msgTypes[22].OneofWrappers = []any{}
+	file_affiliate_service_v1_commission_plan_proto_msgTypes[17].OneofWrappers = []any{}
+	file_affiliate_service_v1_commission_plan_proto_msgTypes[20].OneofWrappers = []any{}
+	file_affiliate_service_v1_commission_plan_proto_msgTypes[23].OneofWrappers = []any{}
+	file_affiliate_service_v1_commission_plan_proto_msgTypes[24].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_affiliate_service_v1_commission_plan_proto_rawDesc), len(file_affiliate_service_v1_commission_plan_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   24,
+			NumMessages:   26,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
