@@ -6103,7 +6103,11 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 inheritedFromOperatorName:
                     type: string
-                templates:
+                defaultTemplates:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.VipLevelConfigTemplate'
+                customTemplates:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.backoffice.service.v1.VipLevelConfigTemplate'
@@ -12043,7 +12047,11 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 inheritedFromOperatorName:
                     type: string
-                templates:
+                defaultTemplates:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.vip.service.v1.VipLevelConfigTemplate'
+                customTemplates:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.vip.service.v1.VipLevelConfigTemplate'
