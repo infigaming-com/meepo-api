@@ -156,7 +156,8 @@ message GetVipSettingResponse {
   api.common.OperatorContext custom_operator_context = 4;
   api.common.OperatorContext inherited_operator_context = 5;
   string inherited_from_operator_name = 6;
-  repeated VipLevelConfigTemplate templates = 7;
+  repeated VipLevelConfigTemplate default_templates = 7;
+  repeated VipLevelConfigTemplate custom_templates = 8;
 }
 
 message UpdateVipSettingRequest {

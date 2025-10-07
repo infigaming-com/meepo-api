@@ -461,7 +461,7 @@ func (m *GetVipSettingResponse) validate(all bool) error {
 
 	// no validation rules for InheritedFromOperatorName
 
-	for idx, item := range m.GetTemplates() {
+	for idx, item := range m.GetDefaultTemplates() {
 		_, _ = idx, item
 
 		if all {
@@ -469,7 +469,7 @@ func (m *GetVipSettingResponse) validate(all bool) error {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, GetVipSettingResponseValidationError{
-						field:  fmt.Sprintf("Templates[%v]", idx),
+						field:  fmt.Sprintf("DefaultTemplates[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -477,7 +477,7 @@ func (m *GetVipSettingResponse) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, GetVipSettingResponseValidationError{
-						field:  fmt.Sprintf("Templates[%v]", idx),
+						field:  fmt.Sprintf("DefaultTemplates[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -486,7 +486,41 @@ func (m *GetVipSettingResponse) validate(all bool) error {
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return GetVipSettingResponseValidationError{
-					field:  fmt.Sprintf("Templates[%v]", idx),
+					field:  fmt.Sprintf("DefaultTemplates[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	for idx, item := range m.GetCustomTemplates() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetVipSettingResponseValidationError{
+						field:  fmt.Sprintf("CustomTemplates[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetVipSettingResponseValidationError{
+						field:  fmt.Sprintf("CustomTemplates[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetVipSettingResponseValidationError{
+					field:  fmt.Sprintf("CustomTemplates[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
