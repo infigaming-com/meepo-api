@@ -3153,6 +3153,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateUserResponse'
+    /v1/backoffice/vip/config/get:
+        post:
+            tags:
+                - BackofficeVip
+            operationId: BackofficeVip_GetVipConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetVipConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.GetVipConfigResponse'
     /v1/backoffice/vip/level-config-template/create:
         post:
             tags:
@@ -3225,24 +3243,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateVipLevelConfigTemplateResponse'
-    /v1/backoffice/vip/level-config-templates/list:
-        post:
-            tags:
-                - BackofficeVip
-            operationId: BackofficeVip_ListVipLevelConfigTemplates
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListVipLevelConfigTemplatesRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListVipLevelConfigTemplatesResponse'
     /v1/backoffice/vip/setting/get:
         post:
             tags:
@@ -7192,6 +7192,16 @@ components:
                         type: string
                     description: List of active tags associated with the user.
             description: GetUserTagsResponse contains the list of active tags associated with the user.
+        api.backoffice.service.v1.GetVipConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.backoffice.service.v1.GetVipConfigResponse:
+            type: object
+            properties:
+                config:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.VipConfig'
         api.backoffice.service.v1.GetVipLevelConfigTemplateRequest:
             type: object
             properties:
@@ -7226,6 +7236,10 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 inheritedFromOperatorName:
                     type: string
+                templates:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.VipLevelConfigTemplate'
         api.backoffice.service.v1.GetWalletCreditTransactionsRequest:
             type: object
             properties:
@@ -10015,35 +10029,6 @@ components:
                     description: |-
                         string device = 23;
                          string source = 24;
-        api.backoffice.service.v1.ListVipLevelConfigTemplatesRequest:
-            type: object
-            properties:
-                targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-                settingId:
-                    type: string
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
-        api.backoffice.service.v1.ListVipLevelConfigTemplatesResponse:
-            type: object
-            properties:
-                templates:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.VipLevelConfigTemplate'
-                total:
-                    type: integer
-                    format: int32
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
         api.backoffice.service.v1.ListWalletBalanceTransactionsRequest:
             type: object
             properties:
@@ -11253,6 +11238,21 @@ components:
         api.backoffice.service.v1.VerifyMobileResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.VipConfig:
+            type: object
+            properties:
+                id:
+                    type: string
+                systemOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                operatorId:
+                    type: string
+                enabled:
+                    type: boolean
         api.backoffice.service.v1.VipLevelConfigTemplate:
             type: object
             properties:
@@ -14451,6 +14451,10 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 inheritedFromOperatorName:
                     type: string
+                templates:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.vip.service.v1.VipLevelConfigTemplate'
         api.vip.service.v1.ListVipLevelConfigTemplatesRequest:
             type: object
             properties:
@@ -14510,67 +14514,67 @@ components:
                 endLevel:
                     type: string
                 baseLevelUpgradeXp:
-                    type: number
+                    type: string
                     description: 升级设置
-                    format: double
                 incrLevelUpgradeXp:
-                    type: number
-                    format: double
+                    type: string
                 baseUpgradeRewardAmt:
-                    type: number
-                    format: double
+                    type: string
                 incrUpgradeRewardAmt:
-                    type: number
-                    format: double
+                    type: string
                 upgradeRewardWageringX:
-                    type: number
-                    format: double
+                    type: string
                 weeklyXpLoss:
-                    type: number
+                    type: string
                     description: 等级维护要求
-                    format: double
                 monthlyXpLoss:
-                    type: number
-                    format: double
+                    type: string
                 rakebackInstantEnabled:
                     type: boolean
                     description: 即时返水
                 rakebackInstantRate:
-                    type: number
-                    format: double
+                    type: string
                 rakebackInstantReq:
-                    type: number
-                    format: double
+                    type: string
                 rakebackDailyEnabled:
                     type: boolean
                     description: 每日返水
                 rakebackDailyRate:
-                    type: number
-                    format: double
+                    type: string
                 rakebackDailyReq:
-                    type: number
-                    format: double
+                    type: string
                 weeklyRewardEnabled:
                     type: boolean
                     description: 每周奖励
                 weeklyFixedRewardAmt:
-                    type: number
-                    format: double
+                    type: string
                 weeklyTurnoverRate:
-                    type: number
-                    format: double
+                    type: string
                 weeklyNetLossAmt:
-                    type: number
-                    format: double
+                    type: string
                 weeklyAdjustRangePct:
-                    type: number
-                    format: double
+                    type: string
                 weeklyActiveDaysReward:
                     type: integer
                     format: int32
                 weeklyWageringReq:
-                    type: number
-                    format: double
+                    type: string
+                monthlyRewardEnabled:
+                    type: boolean
+                    description: 每月奖励
+                monthlyFixedRewardAmt:
+                    type: string
+                monthlyTurnoverRate:
+                    type: string
+                monthlyNetLossAmt:
+                    type: string
+                monthlyAdjustRangePct:
+                    type: string
+                monthlyActiveDaysReward:
+                    type: integer
+                    format: int32
+                monthlyWageringReq:
+                    type: string
                 createdAt:
                     type: string
                 updatedAt:
@@ -14615,13 +14619,6 @@ components:
                     type: string
                 baseCurrency:
                     type: string
-                displayRule:
-                    enum:
-                        - VIP_DISPLAY_RULE_UNSPECIFIED
-                        - VIP_DISPLAY_RULE_CUMULATIVE
-                        - VIP_DISPLAY_RULE_CURRENT
-                    type: string
-                    format: enum
                 rewardsSlider:
                     type: boolean
                 followParent:
@@ -14664,17 +14661,13 @@ components:
                     type: string
                     format: enum
                 depositXpRate:
-                    type: number
-                    format: double
+                    type: string
                 wageringXpRate:
-                    type: number
-                    format: double
+                    type: string
                 maxHouseEdgeLimitPercent:
-                    type: number
-                    format: double
+                    type: string
                 standardXpMultiplier:
-                    type: number
-                    format: double
+                    type: string
                 timezone:
                     type: string
                 dailyIssueAt:

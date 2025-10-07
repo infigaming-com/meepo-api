@@ -69,8 +69,6 @@ func (m *VipSetting) validate(all bool) error {
 
 	// no validation rules for BaseCurrency
 
-	// no validation rules for DisplayRule
-
 	// no validation rules for RewardsSlider
 
 	// no validation rules for FollowParent
@@ -462,6 +460,40 @@ func (m *GetVipSettingResponse) validate(all bool) error {
 	}
 
 	// no validation rules for InheritedFromOperatorName
+
+	for idx, item := range m.GetTemplates() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetVipSettingResponseValidationError{
+						field:  fmt.Sprintf("Templates[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetVipSettingResponseValidationError{
+						field:  fmt.Sprintf("Templates[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetVipSettingResponseValidationError{
+					field:  fmt.Sprintf("Templates[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
 
 	if len(errors) > 0 {
 		return GetVipSettingResponseMultiError(errors)
@@ -882,6 +914,20 @@ func (m *VipLevelConfigTemplate) validate(all bool) error {
 	// no validation rules for WeeklyActiveDaysReward
 
 	// no validation rules for WeeklyWageringReq
+
+	// no validation rules for MonthlyRewardEnabled
+
+	// no validation rules for MonthlyFixedRewardAmt
+
+	// no validation rules for MonthlyTurnoverRate
+
+	// no validation rules for MonthlyNetLossAmt
+
+	// no validation rules for MonthlyAdjustRangePct
+
+	// no validation rules for MonthlyActiveDaysReward
+
+	// no validation rules for MonthlyWageringReq
 
 	// no validation rules for CreatedAt
 
