@@ -37,6 +37,10 @@ const (
 	OperatorDeductionOrderCashFirst  = "cash_first"  // Cash first, then bonus
 	OperatorDeductionOrderBonusFirst = "bonus_first" // Bonus first, then cash
 	OperatorDeductionOrderMixed      = "mixed"       // Mixed, cash and bonus are used by ratio
+
+	// Operator template name
+	OperatorTemplateNameMobileOnly    = "mobile-only"
+	OperatorTemplateNameMobileDesktop = "mobile-desktop"
 )
 
 // BuildOperatorHierarchy builds a complete operator hierarchy path based on operatorId and parentIds

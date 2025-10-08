@@ -4715,6 +4715,7 @@ type CreateOperatorRequest struct {
 	BackofficeTimezone  *string                `protobuf:"bytes,7,opt,name=backoffice_timezone,json=backofficeTimezone,proto3,oneof" json:"backoffice_timezone,omitempty"`
 	SupportedLanguages  []string               `protobuf:"bytes,8,rep,name=supported_languages,json=supportedLanguages,proto3" json:"supported_languages,omitempty"`
 	SupportedCurrencies []string               `protobuf:"bytes,9,rep,name=supported_currencies,json=supportedCurrencies,proto3" json:"supported_currencies,omitempty"`
+	TemplateName        *string                `protobuf:"bytes,10,opt,name=template_name,json=templateName,proto3,oneof" json:"template_name,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -4810,6 +4811,13 @@ func (x *CreateOperatorRequest) GetSupportedCurrencies() []string {
 		return x.SupportedCurrencies
 	}
 	return nil
+}
+
+func (x *CreateOperatorRequest) GetTemplateName() string {
+	if x != nil && x.TemplateName != nil {
+		return *x.TemplateName
+	}
+	return ""
 }
 
 type CreateOperatorResponse struct {
@@ -12115,7 +12123,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x05roles\x18\x01 \x03(\v2\x19.api.user.service.v1.RoleR\x05roles\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x05R\x05total\"\xd3\x03\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"\x8f\x04\n" +
 	"\x15CreateOperatorRequest\x12#\n" +
 	"\roperator_name\x18\x01 \x01(\tR\foperatorName\x12#\n" +
 	"\roperator_type\x18\x02 \x01(\tR\foperatorType\x12.\n" +
@@ -12125,10 +12133,13 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x12reporting_currency\x18\x06 \x01(\tH\x01R\x11reportingCurrency\x88\x01\x01\x124\n" +
 	"\x13backoffice_timezone\x18\a \x01(\tH\x02R\x12backofficeTimezone\x88\x01\x01\x12/\n" +
 	"\x13supported_languages\x18\b \x03(\tR\x12supportedLanguages\x121\n" +
-	"\x14supported_currencies\x18\t \x03(\tR\x13supportedCurrenciesB\a\n" +
+	"\x14supported_currencies\x18\t \x03(\tR\x13supportedCurrencies\x12(\n" +
+	"\rtemplate_name\x18\n" +
+	" \x01(\tH\x03R\ftemplateName\x88\x01\x01B\a\n" +
 	"\x05_modeB\x15\n" +
 	"\x13_reporting_currencyB\x16\n" +
-	"\x14_backoffice_timezone\"\x8a\x01\n" +
+	"\x14_backoffice_timezoneB\x10\n" +
+	"\x0e_template_name\"\x8a\x01\n" +
 	"\x16CreateOperatorResponse\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12\x1c\n" +

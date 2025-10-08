@@ -1020,6 +1020,7 @@ message CreateOperatorRequest {
 	optional string backoffice_timezone = 7;
 	repeated string supported_languages = 8;
 	repeated string supported_currencies = 9;
+	optional string template_name = 10;
 }
 
 message CreateOperatorResponse {

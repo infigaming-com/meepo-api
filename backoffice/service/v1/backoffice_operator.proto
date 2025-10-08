@@ -190,6 +190,7 @@ message CreateOperatorRequest {
 	string verification_code = 7;
 	repeated string supported_languages = 8;
 	repeated string supported_currencies = 9; // Contains Fiat and Crypto currencies
+	string template_name = 10;
 }
 
 message CreateOperatorResponse {
