@@ -4739,6 +4739,8 @@ components:
             properties:
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+                settingId:
+                    type: string
                 template:
                     $ref: '#/components/schemas/api.backoffice.service.v1.VipLevelConfigTemplate'
         api.backoffice.service.v1.CreateVipLevelConfigTemplateResponse:

@@ -1229,7 +1229,8 @@ func (x *GetVipLevelConfigTemplateResponse) GetTemplate() *VipLevelConfigTemplat
 type CreateVipLevelConfigTemplateRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Template              *VipLevelConfigTemplate `protobuf:"bytes,2,opt,name=template,proto3" json:"template,omitempty"`
+	SettingId             int64                   `protobuf:"varint,2,opt,name=setting_id,json=settingId,proto3" json:"setting_id,omitempty"`
+	Template              *VipLevelConfigTemplate `protobuf:"bytes,3,opt,name=template,proto3" json:"template,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -1269,6 +1270,13 @@ func (x *CreateVipLevelConfigTemplateRequest) GetTargetOperatorContext() *common
 		return x.TargetOperatorContext
 	}
 	return nil
+}
+
+func (x *CreateVipLevelConfigTemplateRequest) GetSettingId() int64 {
+	if x != nil {
+		return x.SettingId
+	}
+	return 0
 }
 
 func (x *CreateVipLevelConfigTemplateRequest) GetTemplate() *VipLevelConfigTemplate {
@@ -1773,10 +1781,12 @@ const file_backoffice_service_v1_backoffice_vip_proto_rawDesc = "" +
 	"\vtemplate_id\x18\x02 \x01(\x03R\n" +
 	"templateId\"r\n" +
 	"!GetVipLevelConfigTemplateResponse\x12M\n" +
-	"\btemplate\x18\x01 \x01(\v21.api.backoffice.service.v1.VipLevelConfigTemplateR\btemplate\"\xc9\x01\n" +
+	"\btemplate\x18\x01 \x01(\v21.api.backoffice.service.v1.VipLevelConfigTemplateR\btemplate\"\xe8\x01\n" +
 	"#CreateVipLevelConfigTemplateRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12M\n" +
-	"\btemplate\x18\x02 \x01(\v21.api.backoffice.service.v1.VipLevelConfigTemplateR\btemplate\"u\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1d\n" +
+	"\n" +
+	"setting_id\x18\x02 \x01(\x03R\tsettingId\x12M\n" +
+	"\btemplate\x18\x03 \x01(\v21.api.backoffice.service.v1.VipLevelConfigTemplateR\btemplate\"u\n" +
 	"$CreateVipLevelConfigTemplateResponse\x12M\n" +
 	"\btemplate\x18\x01 \x01(\v21.api.backoffice.service.v1.VipLevelConfigTemplateR\btemplate\"\xc9\x01\n" +
 	"#UpdateVipLevelConfigTemplateRequest\x12S\n" +

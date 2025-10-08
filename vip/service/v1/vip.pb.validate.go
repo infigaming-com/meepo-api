@@ -1654,6 +1654,8 @@ func (m *CreateVipLevelConfigTemplateRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for SettingId
+
 	if all {
 		switch v := interface{}(m.GetTemplate()).(type) {
 		case interface{ ValidateAll() error }:

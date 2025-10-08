@@ -242,7 +242,8 @@ message GetVipLevelConfigTemplateResponse {
 
 message CreateVipLevelConfigTemplateRequest {
   api.common.OperatorContext target_operator_context = 1;
-  VipLevelConfigTemplate template = 2;
+  int64 setting_id = 2;
+  VipLevelConfigTemplate template = 3;
 }
 
 message CreateVipLevelConfigTemplateResponse {
