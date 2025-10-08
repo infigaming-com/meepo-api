@@ -35,6 +35,117 @@ var (
 	_ = sort.Sort
 )
 
+// Validate checks the field values on VipConfig with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *VipConfig) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on VipConfig with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in VipConfigMultiError, or nil
+// if none found.
+func (m *VipConfig) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *VipConfig) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for SystemOperatorId
+
+	// no validation rules for RetailerOperatorId
+
+	// no validation rules for CompanyOperatorId
+
+	// no validation rules for OperatorId
+
+	// no validation rules for Enabled
+
+	if len(errors) > 0 {
+		return VipConfigMultiError(errors)
+	}
+
+	return nil
+}
+
+// VipConfigMultiError is an error wrapping multiple validation errors returned
+// by VipConfig.ValidateAll() if the designated constraints aren't met.
+type VipConfigMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m VipConfigMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m VipConfigMultiError) AllErrors() []error { return m }
+
+// VipConfigValidationError is the validation error returned by
+// VipConfig.Validate if the designated constraints aren't met.
+type VipConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e VipConfigValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e VipConfigValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e VipConfigValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e VipConfigValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e VipConfigValidationError) ErrorName() string { return "VipConfigValidationError" }
+
+// Error satisfies the builtin error interface
+func (e VipConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sVipConfig.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = VipConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = VipConfigValidationError{}
+
 // Validate checks the field values on VipSetting with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -108,6 +219,42 @@ func (m *VipSetting) validate(all bool) error {
 	// no validation rules for CreatedAt
 
 	// no validation rules for UpdatedAt
+
+	// no validation rules for UpgradeBaseExpiryType
+
+	// no validation rules for UpgradeBaseExpiryDays
+
+	// no validation rules for UpgradeBaseExpiryHours
+
+	// no validation rules for UpgradeIncrementalExpiryType
+
+	// no validation rules for UpgradeIncrementalExpiryDays
+
+	// no validation rules for UpgradeIncrementalExpiryHours
+
+	// no validation rules for RakebackInstantExpiryType
+
+	// no validation rules for RakebackInstantExpiryDays
+
+	// no validation rules for RakebackInstantExpiryHours
+
+	// no validation rules for RakebackDailyExpiryType
+
+	// no validation rules for RakebackDailyExpiryDays
+
+	// no validation rules for RakebackDailyExpiryHours
+
+	// no validation rules for WeeklyRewardExpiryType
+
+	// no validation rules for WeeklyRewardExpiryDays
+
+	// no validation rules for WeeklyRewardExpiryHours
+
+	// no validation rules for MonthlyRewardExpiryType
+
+	// no validation rules for MonthlyRewardExpiryDays
+
+	// no validation rules for MonthlyRewardExpiryHours
 
 	if len(errors) > 0 {
 		return VipSettingMultiError(errors)

@@ -3,6 +3,7 @@ syntax = "proto3";
 package api.backoffice.service.v1;
 import "google/api/annotations.proto";
 import "common/common.proto";
+import "vip/service/v1/vip.proto";
 
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
@@ -12,7 +13,7 @@ option java_package = "api.backoffice.service.v1";
 // VIP系统服务
 service BackofficeVip {
   // VIP设置管理
-  rpc GetVipSetting(GetVipSettingRequest) returns (GetVipSettingResponse) {
+  rpc GetVipSetting(GetVipSettingRequest) returns (vip.service.v1.GetVipSettingResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/vip/setting/get"
       body: "*"
@@ -69,159 +70,28 @@ service BackofficeVip {
 
 }
 
-enum VipDisplayRule {
-  VIP_DISPLAY_RULE_UNSPECIFIED = 0;
-  VIP_DISPLAY_RULE_CUMULATIVE = 1;  // cumulative
-  VIP_DISPLAY_RULE_CURRENT = 2;     // current
-}
-
-enum VipRewardKind {
-  VIP_REWARD_KIND_UNSPECIFIED = 0;
-  VIP_REWARD_KIND_UPGRADE_BASE = 1;        // upgrade_base
-  VIP_REWARD_KIND_UPGRADE_INCREMENTAL = 2; // upgrade_incremental
-  VIP_REWARD_KIND_RAKEBACK_INSTANT = 3;    // rakeback_instant
-  VIP_REWARD_KIND_RAKEBACK_DAILY = 4;      // rakeback_daily
-  VIP_REWARD_KIND_RAKEBACK_WEEKLY = 5;     // rakeback_weekly
-  VIP_REWARD_KIND_RAKEBACK_MONTHLY = 6;    // rakeback_monthly
-}
-
-enum VipPayoutType {
-  VIP_PAYOUT_TYPE_UNSPECIFIED = 0;
-  VIP_PAYOUT_TYPE_CASH = 1;   // cash
-  VIP_PAYOUT_TYPE_BONUS = 2;  // bonus
-}
-
-enum VipResetPolicy {
-  VIP_RESET_POLICY_UNSPECIFIED = 0;
-  VIP_RESET_POLICY_NONE = 1;              // none
-  VIP_RESET_POLICY_RESET_ON_UPGRADE = 2;  // reset_on_upgrade
-  VIP_RESET_POLICY_RESET_NEXT_WEEK = 3;   // reset_next_week
-  VIP_RESET_POLICY_RESET_NEXT_MONTH = 4;  // reset_next_month
-}
-
-enum VipRewardStatus {
-  VIP_REWARD_STATUS_UNSPECIFIED = 0;
-  VIP_REWARD_STATUS_PENDING = 1;   // pending
-  VIP_REWARD_STATUS_ISSUED = 2;    // issued
-  VIP_REWARD_STATUS_EXPIRED = 3;   // expired
-  VIP_REWARD_STATUS_REVOKED = 4;   // revoked
-}
-
-// ==================== VIP设置 ====================
-
-message VipSetting {
-  int64 id = 1;
-  int64 system_operator_id = 2;
-  int64 retailer_operator_id = 3;
-  int64 company_operator_id = 4;
-  int64 operator_id = 5;
-  
-  string base_currency = 6;
-  VipDisplayRule display_rule = 7;
-  bool rewards_slider = 8;
-  bool follow_parent = 9;
-  bool enabled = 10;
-  
-  VipPayoutType upgrade_payout_type = 11;
-  VipPayoutType rakeback_instant_payout_type = 12;
-  VipPayoutType rakeback_daily_payout_type = 13;
-  VipPayoutType weekly_reward_payout_type = 14;
-  VipPayoutType monthly_reward_payout_type = 15;
-  
-  int64 deposit_xp_rate = 16;
-  int64 wagering_xp_rate = 17;
-  int64 max_house_edge_limit_percent = 18;
-  int64 standard_xp_multiplier = 19;
-  
-  string timezone = 20;
-  string daily_issue_at = 21;
-  int32 weekly_issue_dow = 22;
-  string weekly_issue_at = 23;
-  int32 monthly_issue_dom = 24;
-  string monthly_issue_at = 25;
-  
-  int64 created_at = 26;
-  int64 updated_at = 27;
-}
-
 message GetVipSettingRequest {
   api.common.OperatorContext target_operator_context = 1;
   string currency = 2;
 }
 
 message GetVipSettingResponse {
-  VipSetting default_setting = 1;
-  VipSetting custom_setting = 2;
+  api.vip.service.v1.VipSetting default_setting = 1;
+  api.vip.service.v1.VipSetting custom_setting = 2;
   bool follow_parent = 3;
   api.common.OperatorContext custom_operator_context = 4;
   api.common.OperatorContext inherited_operator_context = 5;
   string inherited_from_operator_name = 6;
-  repeated VipLevelConfigTemplate default_templates = 7;
-  repeated VipLevelConfigTemplate custom_templates = 8;
+  repeated api.vip.service.v1.VipLevelConfigTemplate default_templates = 7;
+  repeated api.vip.service.v1.VipLevelConfigTemplate custom_templates = 8;
 }
 
 message UpdateVipSettingRequest {
   api.common.OperatorContext target_operator_context = 1;
-  VipSetting setting = 2;
+  api.vip.service.v1.VipSetting setting = 2;
 }
 
 message UpdateVipSettingResponse {
-}
-
-
-message VipLevelConfigTemplate {
-  int64 id = 1;
-  int64 system_operator_id = 2;
-  int64 retailer_operator_id = 3;
-  int64 company_operator_id = 4;
-  int64 operator_id = 5;
-  
-  string name = 6;
-  int64 start_level = 7;
-  int64 end_level = 8;
-  
-  // 升级设置
-  int64 base_level_upgrade_xp = 9;
-  int64 incr_level_upgrade_xp = 10;
-  int64 base_upgrade_reward_amt = 11;
-  int64 incr_upgrade_reward_amt = 12;
-  int64 upgrade_reward_wagering_x = 13;
-  
-  // 等级维护要求
-  bool xp_loss_enabled = 14;
-  int64 weekly_xp_loss = 15;
-  int64 monthly_xp_loss = 16;
-  
-  // 即时返水
-  bool rakeback_instant_enabled = 17;
-  int64 rakeback_instant_rate = 18;
-  int64 rakeback_instant_req = 19;
-  
-  // 每日返水
-  bool rakeback_daily_enabled = 20;
-  int64 rakeback_daily_rate = 21;
-  int64 rakeback_daily_req = 22;
-  
-  // 每周奖励
-  bool weekly_reward_enabled = 23;
-  int64 weekly_fixed_reward_amt = 24;
-  int64 weekly_turnover_rate = 25;
-  int64 weekly_net_loss_amt = 26;
-  int64 weekly_adjust_range_pct = 27;
-  int32 weekly_active_days_reward = 28;
-  int64 weekly_wagering_req = 29;
-
-  // 每月奖励
-  bool monthly_reward_enabled = 30;
-  int64 monthly_fixed_reward_amt = 31;
-  int64 monthly_turnover_rate = 32;
-  int64 monthly_net_loss_amt = 33;
-  int64 monthly_adjust_range_pct = 34;
-  int32 monthly_active_days_reward = 35;
-  int64 monthly_wagering_req = 36;
-  
-  int64 created_at = 37;
-  int64 updated_at = 38;
 }
 
 message GetVipLevelConfigTemplateRequest {
@@ -230,22 +100,22 @@ message GetVipLevelConfigTemplateRequest {
 }
 
 message GetVipLevelConfigTemplateResponse {
-  VipLevelConfigTemplate template = 1;
+  api.vip.service.v1.VipLevelConfigTemplate template = 1;
 }
 
 message CreateVipLevelConfigTemplateRequest {
   api.common.OperatorContext target_operator_context = 1;
   int64 setting_id = 2;
-  VipLevelConfigTemplate template = 3;
+  api.vip.service.v1.VipLevelConfigTemplate template = 3;
 }
 
 message CreateVipLevelConfigTemplateResponse {
-  VipLevelConfigTemplate template = 1;
+  api.vip.service.v1.VipLevelConfigTemplate template = 1;
 }
 
 message UpdateVipLevelConfigTemplateRequest {
   api.common.OperatorContext target_operator_context = 1;
-  VipLevelConfigTemplate template = 2;
+  api.vip.service.v1.VipLevelConfigTemplate template = 2;
 }
 
 message UpdateVipLevelConfigTemplateResponse {
@@ -263,16 +133,6 @@ message GetVipConfigRequest {
   api.common.OperatorContext target_operator_context = 1;
 }
 
-message VipConfig {
-  int64 id = 1;
-  int64 system_operator_id = 2;
-  int64 retailer_operator_id = 3;
-  int64 company_operator_id = 4;
-  int64 operator_id = 5;
-  bool enabled = 6;
-}
-
-
 message GetVipConfigResponse {
-  VipConfig config = 1;
+  api.vip.service.v1.VipConfig config = 1;
 }
