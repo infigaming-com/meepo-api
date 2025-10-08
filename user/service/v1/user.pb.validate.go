@@ -8750,6 +8750,10 @@ func (m *CreateOperatorRequest) validate(all bool) error {
 		// no validation rules for BackofficeTimezone
 	}
 
+	if m.TemplateName != nil {
+		// no validation rules for TemplateName
+	}
+
 	if len(errors) > 0 {
 		return CreateOperatorRequestMultiError(errors)
 	}
