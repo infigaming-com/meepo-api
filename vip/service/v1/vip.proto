@@ -65,6 +65,13 @@ service Vip {
       body: "*"
     };
   }
+
+  //rpc GetOperatorVipSettings(GetOperatorContextRequest) returns (GetOperatorContextResponse) {
+  //  option (google.api.http) = {
+  //    post: "/v1/vip/operator-vip-settings/get"
+  //    body: "*"
+  //  };
+  //}
 }
 
 enum VipDisplayRule {
@@ -105,6 +112,23 @@ enum VipRewardStatus {
   VIP_REWARD_STATUS_REVOKED = 4;   // revoked
 }
 
+enum VipRewardExpiryType {
+  VIP_REWARD_EXPIRY_TYPE_DAYS_HOURS = 0;            // days_hours
+  VIP_REWARD_EXPIRY_TYPE_NEVER = 1;                 // never
+  VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_UPGRADING = 2; // reset_when_upgrading
+  VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_NEXT_WEEK = 3; // reset_when_next_week
+  VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_NEXT_MONTH = 4;// reset_when_next_month
+}
+
+message VipConfig {
+  int64 id = 1;
+  int64 system_operator_id = 2;
+  int64 retailer_operator_id = 3;
+  int64 company_operator_id = 4;
+  int64 operator_id = 5;
+  bool enabled = 6;
+}
+
 message VipSetting {
   int64 id = 1;
   int64 system_operator_id = 2;
@@ -137,6 +161,36 @@ message VipSetting {
   
   int64 created_at = 26;
   int64 updated_at = 27;
+  
+  // 1. Base Upgrade Reward Expiry
+  VipRewardExpiryType upgrade_base_expiry_type = 28;
+  int32 upgrade_base_expiry_days = 29;
+  int32 upgrade_base_expiry_hours = 30;
+  
+  // 2. Incremental Upgrade Reward Expiry
+  VipRewardExpiryType upgrade_incremental_expiry_type = 31;
+  int32 upgrade_incremental_expiry_days = 32;
+  int32 upgrade_incremental_expiry_hours = 33;
+  
+  // 3. Rakeback (Instant) Expiry
+  VipRewardExpiryType rakeback_instant_expiry_type = 34;
+  int32 rakeback_instant_expiry_days = 35;
+  int32 rakeback_instant_expiry_hours = 36;
+  
+  // 4. Rakeback (Daily) Expiry
+  VipRewardExpiryType rakeback_daily_expiry_type = 37;
+  int32 rakeback_daily_expiry_days = 38;
+  int32 rakeback_daily_expiry_hours = 39;
+  
+  // 5. Weekly Reward Expiry
+  VipRewardExpiryType weekly_reward_expiry_type = 40;
+  int32 weekly_reward_expiry_days = 41;
+  int32 weekly_reward_expiry_hours = 42;
+  
+  // 6. Monthly Reward Expiry
+  VipRewardExpiryType monthly_reward_expiry_type = 43;
+  int32 monthly_reward_expiry_days = 44;
+  int32 monthly_reward_expiry_hours = 45;
 }
 
 message GetVipSettingRequest {
@@ -242,7 +296,8 @@ message GetVipLevelConfigTemplateResponse {
 
 message CreateVipLevelConfigTemplateRequest {
   api.common.OperatorContext target_operator_context = 1;
-  VipLevelConfigTemplate template = 2;
+  int64 setting_id = 2;
+  VipLevelConfigTemplate template = 3;
 }
 
 message CreateVipLevelConfigTemplateResponse {

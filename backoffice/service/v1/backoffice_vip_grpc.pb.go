@@ -8,6 +8,7 @@ package v1
 
 import (
 	context "context"
+	v1 "github.com/infigaming-com/meepo-api/vip/service/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -35,7 +36,7 @@ const (
 // VIP系统服务
 type BackofficeVipClient interface {
 	// VIP设置管理
-	GetVipSetting(ctx context.Context, in *GetVipSettingRequest, opts ...grpc.CallOption) (*GetVipSettingResponse, error)
+	GetVipSetting(ctx context.Context, in *GetVipSettingRequest, opts ...grpc.CallOption) (*v1.GetVipSettingResponse, error)
 	UpdateVipSetting(ctx context.Context, in *UpdateVipSettingRequest, opts ...grpc.CallOption) (*UpdateVipSettingResponse, error)
 	GetVipLevelConfigTemplate(ctx context.Context, in *GetVipLevelConfigTemplateRequest, opts ...grpc.CallOption) (*GetVipLevelConfigTemplateResponse, error)
 	CreateVipLevelConfigTemplate(ctx context.Context, in *CreateVipLevelConfigTemplateRequest, opts ...grpc.CallOption) (*CreateVipLevelConfigTemplateResponse, error)
@@ -52,9 +53,9 @@ func NewBackofficeVipClient(cc grpc.ClientConnInterface) BackofficeVipClient {
 	return &backofficeVipClient{cc}
 }
 
-func (c *backofficeVipClient) GetVipSetting(ctx context.Context, in *GetVipSettingRequest, opts ...grpc.CallOption) (*GetVipSettingResponse, error) {
+func (c *backofficeVipClient) GetVipSetting(ctx context.Context, in *GetVipSettingRequest, opts ...grpc.CallOption) (*v1.GetVipSettingResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetVipSettingResponse)
+	out := new(v1.GetVipSettingResponse)
 	err := c.cc.Invoke(ctx, BackofficeVip_GetVipSetting_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -129,7 +130,7 @@ func (c *backofficeVipClient) GetVipConfig(ctx context.Context, in *GetVipConfig
 // VIP系统服务
 type BackofficeVipServer interface {
 	// VIP设置管理
-	GetVipSetting(context.Context, *GetVipSettingRequest) (*GetVipSettingResponse, error)
+	GetVipSetting(context.Context, *GetVipSettingRequest) (*v1.GetVipSettingResponse, error)
 	UpdateVipSetting(context.Context, *UpdateVipSettingRequest) (*UpdateVipSettingResponse, error)
 	GetVipLevelConfigTemplate(context.Context, *GetVipLevelConfigTemplateRequest) (*GetVipLevelConfigTemplateResponse, error)
 	CreateVipLevelConfigTemplate(context.Context, *CreateVipLevelConfigTemplateRequest) (*CreateVipLevelConfigTemplateResponse, error)
@@ -146,7 +147,7 @@ type BackofficeVipServer interface {
 // pointer dereference when methods are called.
 type UnimplementedBackofficeVipServer struct{}
 
-func (UnimplementedBackofficeVipServer) GetVipSetting(context.Context, *GetVipSettingRequest) (*GetVipSettingResponse, error) {
+func (UnimplementedBackofficeVipServer) GetVipSetting(context.Context, *GetVipSettingRequest) (*v1.GetVipSettingResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetVipSetting not implemented")
 }
 func (UnimplementedBackofficeVipServer) UpdateVipSetting(context.Context, *UpdateVipSettingRequest) (*UpdateVipSettingResponse, error) {

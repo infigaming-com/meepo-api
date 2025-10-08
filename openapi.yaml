@@ -3261,7 +3261,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.GetVipSettingResponse'
+                                $ref: '#/components/schemas/api.vip.service.v1.GetVipSettingResponse'
     /v1/backoffice/vip/setting/update:
         post:
             tags:
@@ -5659,13 +5659,15 @@ components:
             properties:
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+                settingId:
+                    type: string
                 template:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.VipLevelConfigTemplate'
+                    $ref: '#/components/schemas/api.vip.service.v1.VipLevelConfigTemplate'
         api.backoffice.service.v1.CreateVipLevelConfigTemplateResponse:
             type: object
             properties:
                 template:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.VipLevelConfigTemplate'
+                    $ref: '#/components/schemas/api.vip.service.v1.VipLevelConfigTemplate'
         api.backoffice.service.v1.CreateWithdrawResponse:
             type: object
             properties:
@@ -7203,7 +7205,7 @@ components:
             type: object
             properties:
                 config:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.VipConfig'
+                    $ref: '#/components/schemas/api.vip.service.v1.VipConfig'
         api.backoffice.service.v1.GetVipLevelConfigTemplateRequest:
             type: object
             properties:
@@ -7215,7 +7217,7 @@ components:
             type: object
             properties:
                 template:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.VipLevelConfigTemplate'
+                    $ref: '#/components/schemas/api.vip.service.v1.VipLevelConfigTemplate'
         api.backoffice.service.v1.GetVipSettingRequest:
             type: object
             properties:
@@ -7223,29 +7225,6 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 currency:
                     type: string
-        api.backoffice.service.v1.GetVipSettingResponse:
-            type: object
-            properties:
-                defaultSetting:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.VipSetting'
-                customSetting:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.VipSetting'
-                followParent:
-                    type: boolean
-                customOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-                inheritedOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-                inheritedFromOperatorName:
-                    type: string
-                defaultTemplates:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.VipLevelConfigTemplate'
-                customTemplates:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.VipLevelConfigTemplate'
         api.backoffice.service.v1.GetWalletCreditTransactionsRequest:
             type: object
             properties:
@@ -11115,7 +11094,7 @@ components:
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 template:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.VipLevelConfigTemplate'
+                    $ref: '#/components/schemas/api.vip.service.v1.VipLevelConfigTemplate'
         api.backoffice.service.v1.UpdateVipLevelConfigTemplateResponse:
             type: object
             properties: {}
@@ -11125,7 +11104,7 @@ components:
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 setting:
-                    $ref: '#/components/schemas/api.backoffice.service.v1.VipSetting'
+                    $ref: '#/components/schemas/api.vip.service.v1.VipSetting'
         api.backoffice.service.v1.UpdateVipSettingResponse:
             type: object
             properties: {}
@@ -11244,197 +11223,6 @@ components:
         api.backoffice.service.v1.VerifyMobileResponse:
             type: object
             properties: {}
-        api.backoffice.service.v1.VipConfig:
-            type: object
-            properties:
-                id:
-                    type: string
-                systemOperatorId:
-                    type: string
-                retailerOperatorId:
-                    type: string
-                companyOperatorId:
-                    type: string
-                operatorId:
-                    type: string
-                enabled:
-                    type: boolean
-        api.backoffice.service.v1.VipLevelConfigTemplate:
-            type: object
-            properties:
-                id:
-                    type: string
-                systemOperatorId:
-                    type: string
-                retailerOperatorId:
-                    type: string
-                companyOperatorId:
-                    type: string
-                operatorId:
-                    type: string
-                name:
-                    type: string
-                startLevel:
-                    type: string
-                endLevel:
-                    type: string
-                baseLevelUpgradeXp:
-                    type: string
-                    description: 升级设置
-                incrLevelUpgradeXp:
-                    type: string
-                baseUpgradeRewardAmt:
-                    type: string
-                incrUpgradeRewardAmt:
-                    type: string
-                upgradeRewardWageringX:
-                    type: string
-                xpLossEnabled:
-                    type: boolean
-                    description: 等级维护要求
-                weeklyXpLoss:
-                    type: string
-                monthlyXpLoss:
-                    type: string
-                rakebackInstantEnabled:
-                    type: boolean
-                    description: 即时返水
-                rakebackInstantRate:
-                    type: string
-                rakebackInstantReq:
-                    type: string
-                rakebackDailyEnabled:
-                    type: boolean
-                    description: 每日返水
-                rakebackDailyRate:
-                    type: string
-                rakebackDailyReq:
-                    type: string
-                weeklyRewardEnabled:
-                    type: boolean
-                    description: 每周奖励
-                weeklyFixedRewardAmt:
-                    type: string
-                weeklyTurnoverRate:
-                    type: string
-                weeklyNetLossAmt:
-                    type: string
-                weeklyAdjustRangePct:
-                    type: string
-                weeklyActiveDaysReward:
-                    type: integer
-                    format: int32
-                weeklyWageringReq:
-                    type: string
-                monthlyRewardEnabled:
-                    type: boolean
-                    description: 每月奖励
-                monthlyFixedRewardAmt:
-                    type: string
-                monthlyTurnoverRate:
-                    type: string
-                monthlyNetLossAmt:
-                    type: string
-                monthlyAdjustRangePct:
-                    type: string
-                monthlyActiveDaysReward:
-                    type: integer
-                    format: int32
-                monthlyWageringReq:
-                    type: string
-                createdAt:
-                    type: string
-                updatedAt:
-                    type: string
-        api.backoffice.service.v1.VipSetting:
-            type: object
-            properties:
-                id:
-                    type: string
-                systemOperatorId:
-                    type: string
-                retailerOperatorId:
-                    type: string
-                companyOperatorId:
-                    type: string
-                operatorId:
-                    type: string
-                baseCurrency:
-                    type: string
-                displayRule:
-                    enum:
-                        - VIP_DISPLAY_RULE_UNSPECIFIED
-                        - VIP_DISPLAY_RULE_CUMULATIVE
-                        - VIP_DISPLAY_RULE_CURRENT
-                    type: string
-                    format: enum
-                rewardsSlider:
-                    type: boolean
-                followParent:
-                    type: boolean
-                enabled:
-                    type: boolean
-                upgradePayoutType:
-                    enum:
-                        - VIP_PAYOUT_TYPE_UNSPECIFIED
-                        - VIP_PAYOUT_TYPE_CASH
-                        - VIP_PAYOUT_TYPE_BONUS
-                    type: string
-                    format: enum
-                rakebackInstantPayoutType:
-                    enum:
-                        - VIP_PAYOUT_TYPE_UNSPECIFIED
-                        - VIP_PAYOUT_TYPE_CASH
-                        - VIP_PAYOUT_TYPE_BONUS
-                    type: string
-                    format: enum
-                rakebackDailyPayoutType:
-                    enum:
-                        - VIP_PAYOUT_TYPE_UNSPECIFIED
-                        - VIP_PAYOUT_TYPE_CASH
-                        - VIP_PAYOUT_TYPE_BONUS
-                    type: string
-                    format: enum
-                weeklyRewardPayoutType:
-                    enum:
-                        - VIP_PAYOUT_TYPE_UNSPECIFIED
-                        - VIP_PAYOUT_TYPE_CASH
-                        - VIP_PAYOUT_TYPE_BONUS
-                    type: string
-                    format: enum
-                monthlyRewardPayoutType:
-                    enum:
-                        - VIP_PAYOUT_TYPE_UNSPECIFIED
-                        - VIP_PAYOUT_TYPE_CASH
-                        - VIP_PAYOUT_TYPE_BONUS
-                    type: string
-                    format: enum
-                depositXpRate:
-                    type: string
-                wageringXpRate:
-                    type: string
-                maxHouseEdgeLimitPercent:
-                    type: string
-                standardXpMultiplier:
-                    type: string
-                timezone:
-                    type: string
-                dailyIssueAt:
-                    type: string
-                weeklyIssueDow:
-                    type: integer
-                    format: int32
-                weeklyIssueAt:
-                    type: string
-                monthlyIssueDom:
-                    type: integer
-                    format: int32
-                monthlyIssueAt:
-                    type: string
-                createdAt:
-                    type: string
-                updatedAt:
-                    type: string
         api.bcpay.service.v1.AddBankAccountResponse:
             type: object
             properties: {}
@@ -14520,6 +14308,21 @@ components:
         api.vip.service.v1.UpdateVipRewardSliderResponse:
             type: object
             properties: {}
+        api.vip.service.v1.VipConfig:
+            type: object
+            properties:
+                id:
+                    type: string
+                systemOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                operatorId:
+                    type: string
+                enabled:
+                    type: boolean
         api.vip.service.v1.VipLevelConfigTemplate:
             type: object
             properties:
@@ -14712,6 +14515,102 @@ components:
                     type: string
                 updatedAt:
                     type: string
+                upgradeBaseExpiryType:
+                    enum:
+                        - VIP_REWARD_EXPIRY_TYPE_DAYS_HOURS
+                        - VIP_REWARD_EXPIRY_TYPE_NEVER
+                        - VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_UPGRADING
+                        - VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_NEXT_WEEK
+                        - VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_NEXT_MONTH
+                    type: string
+                    description: 1. Base Upgrade Reward Expiry
+                    format: enum
+                upgradeBaseExpiryDays:
+                    type: integer
+                    format: int32
+                upgradeBaseExpiryHours:
+                    type: integer
+                    format: int32
+                upgradeIncrementalExpiryType:
+                    enum:
+                        - VIP_REWARD_EXPIRY_TYPE_DAYS_HOURS
+                        - VIP_REWARD_EXPIRY_TYPE_NEVER
+                        - VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_UPGRADING
+                        - VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_NEXT_WEEK
+                        - VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_NEXT_MONTH
+                    type: string
+                    description: 2. Incremental Upgrade Reward Expiry
+                    format: enum
+                upgradeIncrementalExpiryDays:
+                    type: integer
+                    format: int32
+                upgradeIncrementalExpiryHours:
+                    type: integer
+                    format: int32
+                rakebackInstantExpiryType:
+                    enum:
+                        - VIP_REWARD_EXPIRY_TYPE_DAYS_HOURS
+                        - VIP_REWARD_EXPIRY_TYPE_NEVER
+                        - VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_UPGRADING
+                        - VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_NEXT_WEEK
+                        - VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_NEXT_MONTH
+                    type: string
+                    description: 3. Rakeback (Instant) Expiry
+                    format: enum
+                rakebackInstantExpiryDays:
+                    type: integer
+                    format: int32
+                rakebackInstantExpiryHours:
+                    type: integer
+                    format: int32
+                rakebackDailyExpiryType:
+                    enum:
+                        - VIP_REWARD_EXPIRY_TYPE_DAYS_HOURS
+                        - VIP_REWARD_EXPIRY_TYPE_NEVER
+                        - VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_UPGRADING
+                        - VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_NEXT_WEEK
+                        - VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_NEXT_MONTH
+                    type: string
+                    description: 4. Rakeback (Daily) Expiry
+                    format: enum
+                rakebackDailyExpiryDays:
+                    type: integer
+                    format: int32
+                rakebackDailyExpiryHours:
+                    type: integer
+                    format: int32
+                weeklyRewardExpiryType:
+                    enum:
+                        - VIP_REWARD_EXPIRY_TYPE_DAYS_HOURS
+                        - VIP_REWARD_EXPIRY_TYPE_NEVER
+                        - VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_UPGRADING
+                        - VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_NEXT_WEEK
+                        - VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_NEXT_MONTH
+                    type: string
+                    description: 5. Weekly Reward Expiry
+                    format: enum
+                weeklyRewardExpiryDays:
+                    type: integer
+                    format: int32
+                weeklyRewardExpiryHours:
+                    type: integer
+                    format: int32
+                monthlyRewardExpiryType:
+                    enum:
+                        - VIP_REWARD_EXPIRY_TYPE_DAYS_HOURS
+                        - VIP_REWARD_EXPIRY_TYPE_NEVER
+                        - VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_UPGRADING
+                        - VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_NEXT_WEEK
+                        - VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_NEXT_MONTH
+                    type: string
+                    description: 6. Monthly Reward Expiry
+                    format: enum
+                monthlyRewardExpiryDays:
+                    type: integer
+                    format: int32
+                monthlyRewardExpiryHours:
+                    type: integer
+                    format: int32
         api.wallet.service.v1.AddResponsibleGamblingConfigRequest:
             type: object
             properties:

@@ -10,6 +10,7 @@ import (
 	context "context"
 	http "github.com/go-kratos/kratos/v2/transport/http"
 	binding "github.com/go-kratos/kratos/v2/transport/http/binding"
+	v1 "github.com/infigaming-com/meepo-api/vip/service/v1"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -33,7 +34,7 @@ type BackofficeVipHTTPServer interface {
 	GetVipConfig(context.Context, *GetVipConfigRequest) (*GetVipConfigResponse, error)
 	GetVipLevelConfigTemplate(context.Context, *GetVipLevelConfigTemplateRequest) (*GetVipLevelConfigTemplateResponse, error)
 	// GetVipSetting VIP设置管理
-	GetVipSetting(context.Context, *GetVipSettingRequest) (*GetVipSettingResponse, error)
+	GetVipSetting(context.Context, *GetVipSettingRequest) (*v1.GetVipSettingResponse, error)
 	UpdateVipLevelConfigTemplate(context.Context, *UpdateVipLevelConfigTemplateRequest) (*UpdateVipLevelConfigTemplateResponse, error)
 	UpdateVipSetting(context.Context, *UpdateVipSettingRequest) (*UpdateVipSettingResponse, error)
 }
@@ -66,7 +67,7 @@ func _BackofficeVip_GetVipSetting1_HTTP_Handler(srv BackofficeVipHTTPServer) fun
 		if err != nil {
 			return err
 		}
-		reply := out.(*GetVipSettingResponse)
+		reply := out.(*v1.GetVipSettingResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -208,7 +209,7 @@ type BackofficeVipHTTPClient interface {
 	DeleteVipLevelConfigTemplate(ctx context.Context, req *DeleteVipLevelConfigTemplateRequest, opts ...http.CallOption) (rsp *DeleteVipLevelConfigTemplateResponse, err error)
 	GetVipConfig(ctx context.Context, req *GetVipConfigRequest, opts ...http.CallOption) (rsp *GetVipConfigResponse, err error)
 	GetVipLevelConfigTemplate(ctx context.Context, req *GetVipLevelConfigTemplateRequest, opts ...http.CallOption) (rsp *GetVipLevelConfigTemplateResponse, err error)
-	GetVipSetting(ctx context.Context, req *GetVipSettingRequest, opts ...http.CallOption) (rsp *GetVipSettingResponse, err error)
+	GetVipSetting(ctx context.Context, req *GetVipSettingRequest, opts ...http.CallOption) (rsp *v1.GetVipSettingResponse, err error)
 	UpdateVipLevelConfigTemplate(ctx context.Context, req *UpdateVipLevelConfigTemplateRequest, opts ...http.CallOption) (rsp *UpdateVipLevelConfigTemplateResponse, err error)
 	UpdateVipSetting(ctx context.Context, req *UpdateVipSettingRequest, opts ...http.CallOption) (rsp *UpdateVipSettingResponse, err error)
 }
@@ -273,8 +274,8 @@ func (c *BackofficeVipHTTPClientImpl) GetVipLevelConfigTemplate(ctx context.Cont
 	return &out, nil
 }
 
-func (c *BackofficeVipHTTPClientImpl) GetVipSetting(ctx context.Context, in *GetVipSettingRequest, opts ...http.CallOption) (*GetVipSettingResponse, error) {
-	var out GetVipSettingResponse
+func (c *BackofficeVipHTTPClientImpl) GetVipSetting(ctx context.Context, in *GetVipSettingRequest, opts ...http.CallOption) (*v1.GetVipSettingResponse, error) {
+	var out v1.GetVipSettingResponse
 	pattern := "/v1/backoffice/vip/setting/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeVipGetVipSetting))
