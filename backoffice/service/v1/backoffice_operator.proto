@@ -128,6 +128,40 @@ service BackofficeOperator {
 		};
 	}
 	
+	rpc AddRegisterLoginBlacklist(AddRegisterLoginBlacklistRequest) returns (user.service.v1.AddRegisterLoginBlacklistResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/register-login-blacklist/add"
+			body: "*"
+		};
+	}
+	
+	rpc DeleteRegisterLoginBlacklist(DeleteRegisterLoginBlacklistRequest) returns (user.service.v1.DeleteRegisterLoginBlacklistResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/register-login-blacklist/delete"
+			body: "*"
+		};
+	}
+	
+	rpc ListRegisterLoginBlacklist(ListRegisterLoginBlacklistRequest) returns (user.service.v1.ListRegisterLoginBlacklistResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/register-login-blacklist/list"
+			body: "*"
+		};
+	}
+
+	rpc SetOperatorRegisterLimitConfig(SetOperatorRegisterLimitConfigRequest) returns (user.service.v1.SetOperatorRegisterLimitConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/register-limit-config/set"
+			body: "*"
+		};
+	}
+	
+	rpc GetOperatorRegisterLimitConfig(GetOperatorRegisterLimitConfigRequest) returns (user.service.v1.GetOperatorRegisterLimitConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/register-limit-config/get"
+			body: "*"
+		};
+	}	
 }
 
 message ListAllOperatorsRequest {
@@ -156,6 +190,7 @@ message CreateOperatorRequest {
 	string verification_code = 7;
 	repeated string supported_languages = 8;
 	repeated string supported_currencies = 9; // Contains Fiat and Crypto currencies
+	string template_name = 10;
 }
 
 message CreateOperatorResponse {
@@ -187,9 +222,8 @@ message OperatorDetails {
 	repeated string supported_languages = 19;
 	repeated string supported_currencies = 20;
 	string status = 21;
-	bool is_maintenance = 22;
-	int64 maintenance_start_time = 23;
-	int64 maintenance_end_time = 24;
+	int64 status_start_time = 23;
+	int64 status_end_time = 24;
 	int64 operator_id = 25; // operator id in the operator hierarchy
 	int64 company_operator_id = 26; // company operator id in the operator hierarchy
 	string company_operator_name = 27; // company operator name in the operator hierarchy, or empty string if not exists
@@ -337,3 +371,33 @@ message UpdateOperatorAccountSettingsRequest {
 
 message UpdateOperatorAccountSettingsResponse {
 }
+
+message AddRegisterLoginBlacklistRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string id_type = 2;
+	repeated string ids = 3;
+}
+
+message DeleteRegisterLoginBlacklistRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string id_type = 2;
+	repeated string ids = 3;
+}
+
+message ListRegisterLoginBlacklistRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string id_type = 2;
+	optional int32 page = 3;
+	optional int32 page_size = 4;
+}
+
+
+message SetOperatorRegisterLimitConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	map<string, user.service.v1.OperatorRegisterLimitConfig> config = 2;
+}
+
+message GetOperatorRegisterLimitConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+}
+

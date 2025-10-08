@@ -51,13 +51,14 @@ service BackofficeWallet {
         };
 	};
 
-	rpc ListWalletCurrencies(ListWalletCurrenciesRequest) returns (ListWalletCurrenciesResponse) {
+	// ListWalletCurrencies call ListCurrencies in wallet service with aggregated and parent fields
+	rpc ListWalletCurrencies(ListWalletCurrenciesRequest) returns (wallet.service.v1.ListCurrenciesResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/wallet/currencies/list"
             body: "*"
         };
     }
-	rpc UpdateWalletCurrency(UpdateWalletCurrencyRequest) returns (UpdateWalletCurrencyResponse) {
+	rpc UpdateWalletCurrency(UpdateWalletCurrencyRequest) returns (wallet.service.v1.UpdateOperatorCurrencyResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/wallet/currencies/update"
             body: "*"
@@ -175,6 +176,70 @@ service BackofficeWallet {
 	rpc UpdateDeductionOrder(UpdateDeductionOrderRequest) returns (wallet.service.v1.UpdateDeductionOrderResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/deduction-order/update"
+			body: "*"
+		};
+	}
+
+	// DeleteWalletResponsibleGamblingConfig deletes gambling config for a user's currency
+	rpc DeleteWalletResponsibleGamblingConfig(DeleteWalletResponsibleGamblingConfigRequest) returns (wallet.service.v1.DeleteResponsibleGamblingConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/responsible-gambling/config/delete"
+			body: "*"
+		};
+	}
+
+	// ListWalletResponsibleGamblingConfigs lists gambling configs for a user with all currencies
+	rpc ListWalletResponsibleGamblingConfigs(ListWalletResponsibleGamblingConfigsRequest) returns (wallet.service.v1.ListResponsibleGamblingConfigsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/responsible-gambling/configs/list"
+			body: "*"
+		};
+	}
+
+	// ListCustomerRecords lists customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
+	rpc ListCustomerRecords(ListCustomerRecordsRequest) returns (wallet.service.v1.ListCustomerRecordsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/customer-records/list"
+			body: "*"
+		};
+	}
+
+	// ExportCustomerRecords creates a task to exports customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
+	rpc ExportCustomerRecords(ExportCustomerRecordsRequest) returns (wallet.service.v1.ExportCustomerRecordsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/customer-records/export"
+			body: "*"
+		};
+	}
+
+	// SetFICAThresholdConfig sets the FICA threshold config for an operator and its specific currency
+	rpc SetFICAThresholdConfig(SetFICAThresholdConfigRequest) returns (wallet.service.v1.SetFICAThresholdConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/fica/config/set"
+			body: "*"
+		};
+	}
+
+	// GetFICAThresholdConfig gets the FICA threshold config for an operator of all currencies
+	rpc GetFICAThresholdConfig(GetFICAThresholdConfigRequest) returns (wallet.service.v1.GetFICAThresholdConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/fica/config/get"
+			body: "*"
+		};
+	}
+
+	// ListFICAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
+	rpc ListFICAThresholdTransactions(ListFICAThresholdTransactionsRequest) returns (wallet.service.v1.ListFICAThresholdTransactionsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/fica/transactions/list"
+			body: "*"
+		};
+	}
+
+	// ExportFICAThresholdTransactions creates a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
+	rpc ExportFICAThresholdTransactions(ExportFICAThresholdTransactionsRequest) returns (wallet.service.v1.ExportFICAThresholdTransactionsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/fica/transactions/export"
 			body: "*"
 		};
 	}
@@ -325,13 +390,11 @@ message ListWalletCurrenciesRequest {
 	repeated string currencies = 1;
 	optional bool enabled = 2;
 	optional bool hidden = 3;
-}
-
-message ListWalletCurrenciesResponse {
-	repeated WalletCurrency currencies = 1;
-	int32 total = 2;
-	int32 total_enabled = 3;
-	int32 total_hidden = 4;
+	optional bool aggregated_enabled = 4;
+	optional bool aggregated_hidden = 5;
+	optional bool parent_enabled = 6;
+	optional bool parent_hidden = 7;
+	api.common.OperatorContext target_operator_context = 8;
 }
 
 message UpdateWalletCurrencyRequest {
@@ -343,10 +406,9 @@ message UpdateWalletCurrencyRequest {
 	optional string icon = 6;
 	optional int32 decimal_places = 7;
 	optional int32 currency_decimal_places = 8;
-}
-
-message UpdateWalletCurrencyResponse {
-	WalletCurrency currency = 1;
+	optional string thousands_separator = 9; // placeholder for future use
+	optional string decimal_separator = 10; // placeholder for future use
+	api.common.OperatorContext target_operator_context = 11;
 }
 
 message ListOperatorBalancesRequest {
@@ -496,8 +558,8 @@ message SetDepositRewardSequencesRequest {
 message DeleteDepositRewardSequencesRequest {
 	api.common.OperatorContext target_operator_context = 1;
 	string currency = 2;
-	repeated int32 welcome_reward_sequence_serial_numbers = 3;
-	repeated int32 daily_reward_sequence_serial_numbers = 4;
+	repeated wallet.service.v1.RewardSequence welcome_reward_sequences = 3; // the sequences to delete
+	repeated wallet.service.v1.RewardSequence daily_reward_sequences = 4; // the sequences to delete
 }
 
 message GetDepositRewardConfigRequest {
@@ -517,4 +579,70 @@ message UpdateOperatorCurrencyConfigRequest {
 message UpdateDeductionOrderRequest {
 	api.common.OperatorContext target_operator_context = 1;
 	wallet.service.v1.DeductionOrder deduction_order = 2;
+}
+
+message DeleteWalletResponsibleGamblingConfigRequest {
+	int64 user_id = 1;
+	string currency = 2;
+	// deposit_limit, withdrawal_limit, daily_play_limit, weekly_play_limit, monthly_play_limit
+	// daily_loss_limit, weekly_loss_limit, monthly_loss_limit
+	string limit_type = 3;
+}
+
+message ListWalletResponsibleGamblingConfigsRequest {
+	int64 user_id = 1;
+}
+
+message ListCustomerRecordsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional int64 transaction_id = 4;
+	optional string transaction_type = 5;
+	optional int32 page = 6;
+	optional int32 page_size = 7;
+	api.common.OperatorContextFilters operator_context_filters = 8;
+}
+
+message ExportCustomerRecordsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional int64 transaction_id = 4;
+	optional string transaction_type = 5;
+	string format = 6; // accepted values: csv, excel, pdf
+	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContextFilters operator_context_filters = 8;
+}
+
+message SetFICAThresholdConfigRequest {
+	string currency = 1;
+	wallet.service.v1.FICAThresholdConfig fica_threshold_config = 2;
+	api.common.OperatorContext target_operator_context = 3;
+}
+
+message GetFICAThresholdConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+}
+
+message ListFICAThresholdTransactionsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional string transaction_type = 3;
+	optional string currency = 4;
+	optional int32 kyc_level = 5;
+	optional int32 page = 6;
+	optional int32 page_size = 7;
+	api.common.OperatorContext target_operator_context = 8;
+}
+
+message ExportFICAThresholdTransactionsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional string transaction_type = 3;
+	optional string currency = 4;
+	optional int32 kyc_level = 5;
+	string format = 6; // accepted values: csv, excel, pdf
+	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContext target_operator_context = 8;
 }

@@ -82,3 +82,15 @@ func IsReportGetDataError(err error) bool {
 func ErrorReportGetDataError(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_REPORT_GET_DATA_ERROR.String(), fmt.Sprintf(format, args...))
 }
+
+func IsOperatorContextPermissionDenied(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_CONTEXT_PERMISSION_DENIED.String() && e.Code == 500
+}
+
+func ErrorOperatorContextPermissionDenied(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_CONTEXT_PERMISSION_DENIED.String(), fmt.Sprintf(format, args...))
+}

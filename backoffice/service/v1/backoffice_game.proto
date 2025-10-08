@@ -95,7 +95,7 @@ service BackofficeGame {
 				post: "/v1/backoffice/game/update"
 				body: "*"
 			};
-		}
+	}
 	rpc UpdateProvider(UpdateProviderRequest) returns (UpdateProviderResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/game/provider/update"
@@ -111,6 +111,67 @@ service BackofficeGame {
 	rpc GetGameTransactionById(GetGameTransactionByIdRequest) returns (game.service.v1.GetGameTransactionByIdResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/game/transaction/get"
+			body: "*"
+		};
+	}
+	rpc ListUnpaidBets(ListUnpaidBetsRequest) returns (game.service.v1.ListUnpaidBetsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/bets/unpaid/list"
+			body: "*"
+		};
+	}
+	rpc ExportUnpaidBets(ExportUnpaidBetsRequest) returns (game.service.v1.ExportUnpaidBetsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/bets/unpaid/export"
+			body: "*"
+		};
+	}
+
+	rpc ListMultipleBets(ListMultipleBetsRequest) returns (game.service.v1.ListMultipleBetsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/bets/multiple/list"
+			body: "*"
+		};
+	}
+
+	rpc ExportMultipleBets(ExportMultipleBetsRequest) returns (game.service.v1.ExportMultipleBetsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/bets/multiple/export"
+			body: "*"
+		};
+	}
+
+	rpc ListStakeVarianceBets(ListStakeVarianceBetsRequest) returns (game.service.v1.ListStakeVarianceBetsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/bets/stake-variance/list"
+			body: "*"
+		};
+	}
+
+	rpc ExportStakeVarianceBets(ExportStakeVarianceBetsRequest) returns (game.service.v1.ExportStakeVarianceBetsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/bets/stake-variance/export"
+			body: "*"
+		};
+	}
+
+	rpc ListCustomerStrikeReports(ListCustomerStrikeReportsRequest) returns (game.service.v1.ListCustomerStrikeReportsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/customer-strike-reports/list"
+			body: "*"
+		};
+	}
+
+	rpc ExportCustomerStrikeReports(ExportCustomerStrikeReportsRequest) returns (game.service.v1.ExportCustomerStrikeReportsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/customer-strike-reports/export"
+			body: "*"
+		};
+	}
+
+	rpc ExportSportEvents(ExportSportEventsRequest) returns (game.service.v1.ExportSportEventsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/sport-events/export"
 			body: "*"
 		};
 	}
@@ -385,8 +446,9 @@ message ListProviderRatesRequest {
 	optional string fee_group = 1;
 	optional string currency = 2;
 	optional string provider_id = 3;
-	int32 page = 4;
-	int32 page_size = 5;
+	optional api.common.OperatorContext target_operator_context = 4;
+	int32 page = 5;
+	int32 page_size = 6;
 }
 
 message ListProviderRatesResponse {
@@ -396,6 +458,8 @@ message ListProviderRatesResponse {
 		string fee_group = 3;
 		string currency = 4;
 		string rate = 5;
+		int64 operator_id = 6;
+		string operator_name = 7;
 	}
 	repeated ProviderRate provider_rates = 1;
 	int32 page = 2;
@@ -405,4 +469,100 @@ message ListProviderRatesResponse {
 
 message GetGameTransactionByIdRequest {
 	int64 transaction_id = 1;
+}
+
+message ListUnpaidBetsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional int64 transaction_id = 4;
+	optional int32 page = 5;
+	optional int32 page_size = 6;
+	api.common.OperatorContextFilters operator_context_filters = 7;
+}
+
+message ExportUnpaidBetsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional int64 transaction_id = 4;
+	string format = 5; // accepted values: csv, excel, pdf
+	string time_zone = 6; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContextFilters operator_context_filters = 7;
+}
+
+message ListMultipleBetsRequest {
+	// Filter conditions
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional string status = 3; // All, Pending, Won, Loss, etc.
+	optional int64 user_id = 4; // User ID
+	optional int64 transaction_id = 5; // Transaction ID
+	
+	// Pagination
+	optional int32 page = 6;
+	optional int32 page_size = 7;
+	optional api.common.OperatorContextFilters operator_context_filters = 8;
+}
+
+message ExportMultipleBetsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional string status = 3; // All, Pending, Won, Loss, etc.
+	optional int64 user_id = 4; // User ID
+	optional int64 transaction_id = 5; // Transaction ID
+	string format = 6; // accepted values: csv, excel, pdf
+	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContextFilters operator_context_filters = 8;
+}
+
+message ListStakeVarianceBetsRequest {
+	// Filter conditions
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3; // User ID
+	optional int64 transaction_id = 4; // Transaction ID
+	optional string category = 5; // All, Sports, Casino, etc.
+	optional int64 round_id = 6; // Round ID
+	
+	// Pagination
+	optional int32 page = 7;
+	optional int32 page_size = 8;
+	optional api.common.OperatorContext target_operator_context = 9;
+}
+
+message ExportStakeVarianceBetsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3; // User ID
+	optional int64 transaction_id = 4; // Transaction ID
+	optional string category = 5; // All, Bet, Win, etc.
+	optional int64 round_id = 6; // Round ID
+	string format = 7; // accepted values: csv, excel, pdf
+	string time_zone = 8; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContext target_operator_context = 9;
+}
+
+message ListCustomerStrikeReportsRequest {
+	optional string user_id = 1;
+	optional int32 page = 2;
+	optional int32 page_size = 3;
+	optional api.common.OperatorContextFilters operator_context_filters = 4;
+}
+
+message ExportSportEventsRequest {
+	optional string event_name = 1;
+	optional string venue = 2;
+	optional string tournament = 3;
+	optional string start_time = 4;
+	optional string end_time = 5;
+	string format = 6; // accepted values: csv, excel, pdf
+	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
+}
+
+message ExportCustomerStrikeReportsRequest {
+	optional string user_id = 1;
+	string format = 2; // accepted values: csv, excel, pdf
+	string time_zone = 3; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContextFilters operator_context_filters = 4;
 }

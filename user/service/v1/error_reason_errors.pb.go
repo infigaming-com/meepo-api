@@ -1104,3 +1104,243 @@ func IsNewPasswordUsedInPreviousPasswords(err error) bool {
 func ErrorNewPasswordUsedInPreviousPasswords(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_NEW_PASSWORD_USED_IN_PREVIOUS_PASSWORDS.String(), fmt.Sprintf(format, args...))
 }
+
+func IsUserLocked(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_LOCKED.String() && e.Code == 500
+}
+
+func ErrorUserLocked(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_LOCKED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetOperatorContextFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_OPERATOR_CONTEXT_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetOperatorContextFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_OPERATOR_CONTEXT_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetUserResponsibleGamblingConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_USER_RESPONSIBLE_GAMBLING_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetUserResponsibleGamblingConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_USER_RESPONSIBLE_GAMBLING_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUserResponsibleGamblingConfigNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorUserResponsibleGamblingConfigNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDeleteUserResponsibleGamblingConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DELETE_USER_RESPONSIBLE_GAMBLING_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorDeleteUserResponsibleGamblingConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DELETE_USER_RESPONSIBLE_GAMBLING_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidLimitType(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_LIMIT_TYPE.String() && e.Code == 500
+}
+
+func ErrorInvalidLimitType(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_LIMIT_TYPE.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCreateUserResponsibleGamblingConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREATE_USER_RESPONSIBLE_GAMBLING_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorCreateUserResponsibleGamblingConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREATE_USER_RESPONSIBLE_GAMBLING_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSetUserResponsibleGamblingConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SET_USER_RESPONSIBLE_GAMBLING_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorSetUserResponsibleGamblingConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SET_USER_RESPONSIBLE_GAMBLING_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUserIdentityAuditFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_IDENTITY_AUDIT_FAILED.String() && e.Code == 500
+}
+
+func ErrorUserIdentityAuditFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_IDENTITY_AUDIT_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetRegisterLoginBlacklistFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_REGISTER_LOGIN_BLACKLIST_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetRegisterLoginBlacklistFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_REGISTER_LOGIN_BLACKLIST_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListRegisterLoginBlacklistFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_REGISTER_LOGIN_BLACKLIST_FAILED.String() && e.Code == 500
+}
+
+func ErrorListRegisterLoginBlacklistFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_REGISTER_LOGIN_BLACKLIST_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsAddRegisterLoginBlacklistFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_ADD_REGISTER_LOGIN_BLACKLIST_FAILED.String() && e.Code == 500
+}
+
+func ErrorAddRegisterLoginBlacklistFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_ADD_REGISTER_LOGIN_BLACKLIST_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDeleteRegisterLoginBlacklistFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DELETE_REGISTER_LOGIN_BLACKLIST_FAILED.String() && e.Code == 500
+}
+
+func ErrorDeleteRegisterLoginBlacklistFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DELETE_REGISTER_LOGIN_BLACKLIST_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidRegisterLoginBlacklistIdType(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_REGISTER_LOGIN_BLACKLIST_ID_TYPE.String() && e.Code == 500
+}
+
+func ErrorInvalidRegisterLoginBlacklistIdType(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_REGISTER_LOGIN_BLACKLIST_ID_TYPE.String(), fmt.Sprintf(format, args...))
+}
+
+func IsBlockedByRegisterLoginBlacklist(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_BLOCKED_BY_REGISTER_LOGIN_BLACKLIST.String() && e.Code == 500
+}
+
+func ErrorBlockedByRegisterLoginBlacklist(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_BLOCKED_BY_REGISTER_LOGIN_BLACKLIST.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidOperatorRegisterLimitConfig(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_OPERATOR_REGISTER_LIMIT_CONFIG.String() && e.Code == 500
+}
+
+func ErrorInvalidOperatorRegisterLimitConfig(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_OPERATOR_REGISTER_LIMIT_CONFIG.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateOperatorFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_OPERATOR_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateOperatorFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_OPERATOR_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsRegistrationPerIpLimitExceeded(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_REGISTRATION_PER_IP_LIMIT_EXCEEDED.String() && e.Code == 500
+}
+
+func ErrorRegistrationPerIpLimitExceeded(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_REGISTRATION_PER_IP_LIMIT_EXCEEDED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUserInSelfExclusionPeriod(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_USER_IN_SELF_EXCLUSION_PERIOD.String() && e.Code == 500
+}
+
+func ErrorUserInSelfExclusionPeriod(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_USER_IN_SELF_EXCLUSION_PERIOD.String(), fmt.Sprintf(format, args...))
+}
+
+func IsRegisterRequestDissatisfied(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_REGISTER_REQUEST_DISSATISFIED.String() && e.Code == 500
+}
+
+func ErrorRegisterRequestDissatisfied(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_REGISTER_REQUEST_DISSATISFIED.String(), fmt.Sprintf(format, args...))
+}

@@ -40,9 +40,9 @@ type OperatorAccountPasswordSettings struct {
 }
 
 type OperatorAccountSecuritySettings struct {
-	MaxConsecutiveFailedLogins int32
-	PasswordExpiryDays         int32
-	PasswordHistoryLimits      int32
+	MaxPasswordRetries    int32
+	PasswordExpiryDays    int32
+	PasswordHistoryLimits int32
 }
 
 type OperatorAccountGameSettings struct {
@@ -56,15 +56,11 @@ type OperatorAccountPaymentSettings struct {
 }
 
 type OperatorAccountSettings struct {
-	PasswordSettings *OperatorAccountPasswordSettings
-	SecuritySettings *OperatorAccountSecuritySettings
-	GameSettings     *OperatorAccountGameSettings
-	PaymentSettings  *OperatorAccountPaymentSettings
+	PasswordExpiryDays int32
 }
 
 type OperatorConfig struct {
-	SwapFeePercentage *string
-	AccountSettings   *OperatorAccountSettings
+	AccountSettings *OperatorAccountSettings
 }
 
 type OperatorInfo struct {
@@ -87,8 +83,8 @@ type OperatorInfo struct {
 	SupportedCurrencies   []string
 	Status                string
 	IsMaintenance         bool
-	MaintenanceStartTime  int64
-	MaintenanceEndTime    int64
+	StatusStartTime       int64
+	StatusEndTime         int64
 	OperatorId            int64
 	CompanyOperatorId     int64
 	CompanyOperatorName   string
@@ -248,4 +244,18 @@ func NewOperatorContextWithIds(operatorId, companyOperatorId, retailerOperatorId
 	operatorIds := NewOperatorIds(operatorId, companyOperatorId, retailerOperatorId, systemOperatorId)
 	operatorContext := operatorIds.GetOperatorContext()
 	return &operatorContext
+}
+
+func GetParentOperatorIdsSliceFromOperatorContext(operatorContext *common.OperatorContext) []int64 {
+	switch operatorContext.OperatorType {
+	case util.OperatorTypeOperator:
+		return []int64{operatorContext.CompanyOperatorId, operatorContext.RetailerOperatorId, operatorContext.SystemOperatorId}
+	case util.OperatorTypeCompany:
+		return []int64{operatorContext.RetailerOperatorId, operatorContext.SystemOperatorId}
+	case util.OperatorTypeRetailer:
+		return []int64{operatorContext.SystemOperatorId}
+	case util.OperatorTypeSystem:
+		return []int64{}
+	}
+	return []int64{}
 }

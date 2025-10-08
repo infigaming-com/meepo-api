@@ -26,27 +26,27 @@ type ErrorReason int32
 
 const (
 	ErrorReason_UNSPECIFIED                  ErrorReason = 0
-	ErrorReason_BCPAY_NOT_FOUND              ErrorReason = 90000
-	ErrorReason_BCPAY_GET_BANK_FAILED        ErrorReason = 90001
-	ErrorReason_BCPAY_CREATE_WITHDRAW_FAILED ErrorReason = 90002
-	ErrorReason_BCPAY_GET_SCHEMA_FAILED      ErrorReason = 90003
+	ErrorReason_BCPAY_NOT_FOUND              ErrorReason = 120000
+	ErrorReason_BCPAY_GET_BANK_FAILED        ErrorReason = 120001
+	ErrorReason_BCPAY_CREATE_WITHDRAW_FAILED ErrorReason = 120002
+	ErrorReason_BCPAY_GET_SCHEMA_FAILED      ErrorReason = 120003
 )
 
 // Enum value maps for ErrorReason.
 var (
 	ErrorReason_name = map[int32]string{
-		0:     "UNSPECIFIED",
-		90000: "BCPAY_NOT_FOUND",
-		90001: "BCPAY_GET_BANK_FAILED",
-		90002: "BCPAY_CREATE_WITHDRAW_FAILED",
-		90003: "BCPAY_GET_SCHEMA_FAILED",
+		0:      "UNSPECIFIED",
+		120000: "BCPAY_NOT_FOUND",
+		120001: "BCPAY_GET_BANK_FAILED",
+		120002: "BCPAY_CREATE_WITHDRAW_FAILED",
+		120003: "BCPAY_GET_SCHEMA_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                  0,
-		"BCPAY_NOT_FOUND":              90000,
-		"BCPAY_GET_BANK_FAILED":        90001,
-		"BCPAY_CREATE_WITHDRAW_FAILED": 90002,
-		"BCPAY_GET_SCHEMA_FAILED":      90003,
+		"BCPAY_NOT_FOUND":              120000,
+		"BCPAY_GET_BANK_FAILED":        120001,
+		"BCPAY_CREATE_WITHDRAW_FAILED": 120002,
+		"BCPAY_GET_SCHEMA_FAILED":      120003,
 	}
 )
 
@@ -84,10 +84,10 @@ const file_bcpay_service_v1_error_reason_proto_rawDesc = "" +
 	"#bcpay/service/v1/error_reason.proto\x12\x14api.bcpay.service.v1\x1a\x13errors/errors.proto*\x9b\x01\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x15\n" +
-	"\x0fBCPAY_NOT_FOUND\x10\x90\xbf\x05\x12\x1b\n" +
-	"\x15BCPAY_GET_BANK_FAILED\x10\x91\xbf\x05\x12\"\n" +
-	"\x1cBCPAY_CREATE_WITHDRAW_FAILED\x10\x92\xbf\x05\x12\x1d\n" +
-	"\x17BCPAY_GET_SCHEMA_FAILED\x10\x93\xbf\x05\x1a\x04\xa0E\xf4\x03BQ\n" +
+	"\x0fBCPAY_NOT_FOUND\x10\xc0\xa9\a\x12\x1b\n" +
+	"\x15BCPAY_GET_BANK_FAILED\x10\xc1\xa9\a\x12\"\n" +
+	"\x1cBCPAY_CREATE_WITHDRAW_FAILED\x10©\a\x12\x1d\n" +
+	"\x17BCPAY_GET_SCHEMA_FAILED\x10é\a\x1a\x04\xa0E\xf4\x03BQ\n" +
 	"\x14api.bcpay.service.v1P\x01Z7github.com/infigaming-com/meepo-api/bcpay/service/v1;v1b\x06proto3"
 
 var (

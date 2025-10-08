@@ -7,9 +7,12 @@
 package v1
 
 import (
+	common "github.com/infigaming-com/meepo-api/common"
+	v1 "github.com/infigaming-com/meepo-api/system/service/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -22,34 +25,26 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type SystemCurrency struct {
-	state                 protoimpl.MessageState `protogen:"open.v1"`
-	Currency              string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	Enabled               bool                   `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	Hidden                bool                   `protobuf:"varint,3,opt,name=hidden,proto3" json:"hidden,omitempty"`
-	Type                  string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
-	Symbol                string                 `protobuf:"bytes,5,opt,name=symbol,proto3" json:"symbol,omitempty"`
-	Icon                  string                 `protobuf:"bytes,6,opt,name=icon,proto3" json:"icon,omitempty"`
-	DecimalPlaces         int32                  `protobuf:"varint,7,opt,name=decimal_places,json=decimalPlaces,proto3" json:"decimal_places,omitempty"`
-	CurrencyDecimalPlaces int32                  `protobuf:"varint,8,opt,name=currency_decimal_places,json=currencyDecimalPlaces,proto3" json:"currency_decimal_places,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+type ListIntegrityStatusRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SystemCurrency) Reset() {
-	*x = SystemCurrency{}
+func (x *ListIntegrityStatusRequest) Reset() {
+	*x = ListIntegrityStatusRequest{}
 	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SystemCurrency) String() string {
+func (x *ListIntegrityStatusRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SystemCurrency) ProtoMessage() {}
+func (*ListIntegrityStatusRequest) ProtoMessage() {}
 
-func (x *SystemCurrency) ProtoReflect() protoreflect.Message {
+func (x *ListIntegrityStatusRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -61,95 +56,34 @@ func (x *SystemCurrency) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SystemCurrency.ProtoReflect.Descriptor instead.
-func (*SystemCurrency) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListIntegrityStatusRequest.ProtoReflect.Descriptor instead.
+func (*ListIntegrityStatusRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *SystemCurrency) GetCurrency() string {
-	if x != nil {
-		return x.Currency
-	}
-	return ""
+type SetIntegrityConfigRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	LabelApp      string                 `protobuf:"bytes,1,opt,name=label_app,json=labelApp,proto3" json:"label_app,omitempty"`
+	PodNamespace  string                 `protobuf:"bytes,2,opt,name=pod_namespace,json=podNamespace,proto3" json:"pod_namespace,omitempty"`
+	FileInfos     []*v1.FileInfo         `protobuf:"bytes,3,rep,name=file_infos,json=fileInfos,proto3" json:"file_infos,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SystemCurrency) GetEnabled() bool {
-	if x != nil {
-		return x.Enabled
-	}
-	return false
-}
-
-func (x *SystemCurrency) GetHidden() bool {
-	if x != nil {
-		return x.Hidden
-	}
-	return false
-}
-
-func (x *SystemCurrency) GetType() string {
-	if x != nil {
-		return x.Type
-	}
-	return ""
-}
-
-func (x *SystemCurrency) GetSymbol() string {
-	if x != nil {
-		return x.Symbol
-	}
-	return ""
-}
-
-func (x *SystemCurrency) GetIcon() string {
-	if x != nil {
-		return x.Icon
-	}
-	return ""
-}
-
-func (x *SystemCurrency) GetDecimalPlaces() int32 {
-	if x != nil {
-		return x.DecimalPlaces
-	}
-	return 0
-}
-
-func (x *SystemCurrency) GetCurrencyDecimalPlaces() int32 {
-	if x != nil {
-		return x.CurrencyDecimalPlaces
-	}
-	return 0
-}
-
-type AddSystemCurrencyRequest struct {
-	state                 protoimpl.MessageState `protogen:"open.v1"`
-	Currency              string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	Enabled               bool                   `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	Hidden                bool                   `protobuf:"varint,3,opt,name=hidden,proto3" json:"hidden,omitempty"`
-	Type                  string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
-	Symbol                string                 `protobuf:"bytes,5,opt,name=symbol,proto3" json:"symbol,omitempty"`
-	Icon                  string                 `protobuf:"bytes,6,opt,name=icon,proto3" json:"icon,omitempty"`
-	DecimalPlaces         int32                  `protobuf:"varint,7,opt,name=decimal_places,json=decimalPlaces,proto3" json:"decimal_places,omitempty"`
-	CurrencyDecimalPlaces int32                  `protobuf:"varint,8,opt,name=currency_decimal_places,json=currencyDecimalPlaces,proto3" json:"currency_decimal_places,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
-}
-
-func (x *AddSystemCurrencyRequest) Reset() {
-	*x = AddSystemCurrencyRequest{}
+func (x *SetIntegrityConfigRequest) Reset() {
+	*x = SetIntegrityConfigRequest{}
 	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AddSystemCurrencyRequest) String() string {
+func (x *SetIntegrityConfigRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AddSystemCurrencyRequest) ProtoMessage() {}
+func (*SetIntegrityConfigRequest) ProtoMessage() {}
 
-func (x *AddSystemCurrencyRequest) ProtoReflect() protoreflect.Message {
+func (x *SetIntegrityConfigRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -161,87 +95,60 @@ func (x *AddSystemCurrencyRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AddSystemCurrencyRequest.ProtoReflect.Descriptor instead.
-func (*AddSystemCurrencyRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetIntegrityConfigRequest.ProtoReflect.Descriptor instead.
+func (*SetIntegrityConfigRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *AddSystemCurrencyRequest) GetCurrency() string {
+func (x *SetIntegrityConfigRequest) GetLabelApp() string {
 	if x != nil {
-		return x.Currency
+		return x.LabelApp
 	}
 	return ""
 }
 
-func (x *AddSystemCurrencyRequest) GetEnabled() bool {
+func (x *SetIntegrityConfigRequest) GetPodNamespace() string {
 	if x != nil {
-		return x.Enabled
-	}
-	return false
-}
-
-func (x *AddSystemCurrencyRequest) GetHidden() bool {
-	if x != nil {
-		return x.Hidden
-	}
-	return false
-}
-
-func (x *AddSystemCurrencyRequest) GetType() string {
-	if x != nil {
-		return x.Type
+		return x.PodNamespace
 	}
 	return ""
 }
 
-func (x *AddSystemCurrencyRequest) GetSymbol() string {
+func (x *SetIntegrityConfigRequest) GetFileInfos() []*v1.FileInfo {
 	if x != nil {
-		return x.Symbol
+		return x.FileInfos
 	}
-	return ""
+	return nil
 }
 
-func (x *AddSystemCurrencyRequest) GetIcon() string {
-	if x != nil {
-		return x.Icon
-	}
-	return ""
-}
-
-func (x *AddSystemCurrencyRequest) GetDecimalPlaces() int32 {
-	if x != nil {
-		return x.DecimalPlaces
-	}
-	return 0
-}
-
-func (x *AddSystemCurrencyRequest) GetCurrencyDecimalPlaces() int32 {
-	if x != nil {
-		return x.CurrencyDecimalPlaces
-	}
-	return 0
-}
-
-type AddSystemCurrencyResponse struct {
+type ListSevRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Severity      *string                `protobuf:"bytes,2,opt,name=severity,proto3,oneof" json:"severity,omitempty"`
+	Category      *string                `protobuf:"bytes,3,opt,name=category,proto3,oneof" json:"category,omitempty"`
+	Component     *string                `protobuf:"bytes,4,opt,name=component,proto3,oneof" json:"component,omitempty"`
+	UserId        *int64                 `protobuf:"varint,5,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	StartTime     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime       *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	Page          *int32                 `protobuf:"varint,8,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize      *int32                 `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AddSystemCurrencyResponse) Reset() {
-	*x = AddSystemCurrencyResponse{}
+func (x *ListSevRequest) Reset() {
+	*x = ListSevRequest{}
 	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AddSystemCurrencyResponse) String() string {
+func (x *ListSevRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AddSystemCurrencyResponse) ProtoMessage() {}
+func (*ListSevRequest) ProtoMessage() {}
 
-func (x *AddSystemCurrencyResponse) ProtoReflect() protoreflect.Message {
+func (x *ListSevRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -253,279 +160,263 @@ func (x *AddSystemCurrencyResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AddSystemCurrencyResponse.ProtoReflect.Descriptor instead.
-func (*AddSystemCurrencyResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListSevRequest.ProtoReflect.Descriptor instead.
+func (*ListSevRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP(), []int{2}
 }
 
-type ListSystemCurrenciesRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Currencies    []string               `protobuf:"bytes,1,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	Enabled       *bool                  `protobuf:"varint,2,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	Hidden        *bool                  `protobuf:"varint,3,opt,name=hidden,proto3,oneof" json:"hidden,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListSystemCurrenciesRequest) Reset() {
-	*x = ListSystemCurrenciesRequest{}
-	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListSystemCurrenciesRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListSystemCurrenciesRequest) ProtoMessage() {}
-
-func (x *ListSystemCurrenciesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListSystemCurrenciesRequest.ProtoReflect.Descriptor instead.
-func (*ListSystemCurrenciesRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *ListSystemCurrenciesRequest) GetCurrencies() []string {
-	if x != nil {
-		return x.Currencies
-	}
-	return nil
-}
-
-func (x *ListSystemCurrenciesRequest) GetEnabled() bool {
-	if x != nil && x.Enabled != nil {
-		return *x.Enabled
-	}
-	return false
-}
-
-func (x *ListSystemCurrenciesRequest) GetHidden() bool {
-	if x != nil && x.Hidden != nil {
-		return *x.Hidden
-	}
-	return false
-}
-
-type ListSystemCurrenciesResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Currencies    []*SystemCurrency      `protobuf:"bytes,1,rep,name=currencies,proto3" json:"currencies,omitempty"`
-	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
-	TotalEnabled  int32                  `protobuf:"varint,3,opt,name=total_enabled,json=totalEnabled,proto3" json:"total_enabled,omitempty"`
-	TotalHidden   int32                  `protobuf:"varint,4,opt,name=total_hidden,json=totalHidden,proto3" json:"total_hidden,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListSystemCurrenciesResponse) Reset() {
-	*x = ListSystemCurrenciesResponse{}
-	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListSystemCurrenciesResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListSystemCurrenciesResponse) ProtoMessage() {}
-
-func (x *ListSystemCurrenciesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListSystemCurrenciesResponse.ProtoReflect.Descriptor instead.
-func (*ListSystemCurrenciesResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *ListSystemCurrenciesResponse) GetCurrencies() []*SystemCurrency {
-	if x != nil {
-		return x.Currencies
-	}
-	return nil
-}
-
-func (x *ListSystemCurrenciesResponse) GetTotal() int32 {
-	if x != nil {
-		return x.Total
-	}
-	return 0
-}
-
-func (x *ListSystemCurrenciesResponse) GetTotalEnabled() int32 {
-	if x != nil {
-		return x.TotalEnabled
-	}
-	return 0
-}
-
-func (x *ListSystemCurrenciesResponse) GetTotalHidden() int32 {
-	if x != nil {
-		return x.TotalHidden
-	}
-	return 0
-}
-
-type UpdateSystemCurrencyRequest struct {
-	state                 protoimpl.MessageState `protogen:"open.v1"`
-	Currency              string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	Enabled               *bool                  `protobuf:"varint,2,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	Hidden                *bool                  `protobuf:"varint,3,opt,name=hidden,proto3,oneof" json:"hidden,omitempty"`
-	Type                  *string                `protobuf:"bytes,4,opt,name=type,proto3,oneof" json:"type,omitempty"`
-	Symbol                *string                `protobuf:"bytes,5,opt,name=symbol,proto3,oneof" json:"symbol,omitempty"`
-	Icon                  *string                `protobuf:"bytes,6,opt,name=icon,proto3,oneof" json:"icon,omitempty"`
-	DecimalPlaces         *int32                 `protobuf:"varint,7,opt,name=decimal_places,json=decimalPlaces,proto3,oneof" json:"decimal_places,omitempty"`
-	CurrencyDecimalPlaces *int32                 `protobuf:"varint,8,opt,name=currency_decimal_places,json=currencyDecimalPlaces,proto3,oneof" json:"currency_decimal_places,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
-}
-
-func (x *UpdateSystemCurrencyRequest) Reset() {
-	*x = UpdateSystemCurrencyRequest{}
-	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateSystemCurrencyRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateSystemCurrencyRequest) ProtoMessage() {}
-
-func (x *UpdateSystemCurrencyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateSystemCurrencyRequest.ProtoReflect.Descriptor instead.
-func (*UpdateSystemCurrencyRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *UpdateSystemCurrencyRequest) GetCurrency() string {
-	if x != nil {
-		return x.Currency
+func (x *ListSevRequest) GetSeverity() string {
+	if x != nil && x.Severity != nil {
+		return *x.Severity
 	}
 	return ""
 }
 
-func (x *UpdateSystemCurrencyRequest) GetEnabled() bool {
-	if x != nil && x.Enabled != nil {
-		return *x.Enabled
+func (x *ListSevRequest) GetCategory() string {
+	if x != nil && x.Category != nil {
+		return *x.Category
 	}
-	return false
+	return ""
 }
 
-func (x *UpdateSystemCurrencyRequest) GetHidden() bool {
-	if x != nil && x.Hidden != nil {
-		return *x.Hidden
+func (x *ListSevRequest) GetComponent() string {
+	if x != nil && x.Component != nil {
+		return *x.Component
 	}
-	return false
+	return ""
 }
 
-func (x *UpdateSystemCurrencyRequest) GetType() string {
+func (x *ListSevRequest) GetUserId() int64 {
+	if x != nil && x.UserId != nil {
+		return *x.UserId
+	}
+	return 0
+}
+
+func (x *ListSevRequest) GetStartTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.StartTime
+	}
+	return nil
+}
+
+func (x *ListSevRequest) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
+	}
+	return nil
+}
+
+func (x *ListSevRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListSevRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+type ExportSevRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Severity      *string                `protobuf:"bytes,1,opt,name=severity,proto3,oneof" json:"severity,omitempty"`
+	Category      *string                `protobuf:"bytes,2,opt,name=category,proto3,oneof" json:"category,omitempty"`
+	Component     *string                `protobuf:"bytes,3,opt,name=component,proto3,oneof" json:"component,omitempty"`
+	UserId        *int64                 `protobuf:"varint,4,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	StartTime     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime       *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	Format        string                 `protobuf:"bytes,7,opt,name=format,proto3" json:"format,omitempty"`                     // accepted values: csv, excel, pdf
+	TimeZone      string                 `protobuf:"bytes,8,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"` // e.g. UTC+0, UTC+8, etc.
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ExportSevRequest) Reset() {
+	*x = ExportSevRequest{}
+	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExportSevRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExportSevRequest) ProtoMessage() {}
+
+func (x *ExportSevRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ExportSevRequest.ProtoReflect.Descriptor instead.
+func (*ExportSevRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ExportSevRequest) GetSeverity() string {
+	if x != nil && x.Severity != nil {
+		return *x.Severity
+	}
+	return ""
+}
+
+func (x *ExportSevRequest) GetCategory() string {
+	if x != nil && x.Category != nil {
+		return *x.Category
+	}
+	return ""
+}
+
+func (x *ExportSevRequest) GetComponent() string {
+	if x != nil && x.Component != nil {
+		return *x.Component
+	}
+	return ""
+}
+
+func (x *ExportSevRequest) GetUserId() int64 {
+	if x != nil && x.UserId != nil {
+		return *x.UserId
+	}
+	return 0
+}
+
+func (x *ExportSevRequest) GetStartTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.StartTime
+	}
+	return nil
+}
+
+func (x *ExportSevRequest) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
+	}
+	return nil
+}
+
+func (x *ExportSevRequest) GetFormat() string {
+	if x != nil {
+		return x.Format
+	}
+	return ""
+}
+
+func (x *ExportSevRequest) GetTimeZone() string {
+	if x != nil {
+		return x.TimeZone
+	}
+	return ""
+}
+
+type ListReportExportRequest struct {
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	TaskIds                []int64                        `protobuf:"varint,1,rep,packed,name=task_ids,json=taskIds,proto3" json:"task_ids,omitempty"`
+	Type                   *string                        `protobuf:"bytes,2,opt,name=type,proto3,oneof" json:"type,omitempty"`
+	Status                 *string                        `protobuf:"bytes,3,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	Start                  *timestamppb.Timestamp         `protobuf:"bytes,4,opt,name=start,proto3,oneof" json:"start,omitempty"`
+	End                    *timestamppb.Timestamp         `protobuf:"bytes,5,opt,name=end,proto3,oneof" json:"end,omitempty"`
+	Page                   int32                          `protobuf:"varint,6,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize               int32                          `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,8,opt,name=operator_context_filters,json=operatorContextFilters,proto3,oneof" json:"operator_context_filters,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *ListReportExportRequest) Reset() {
+	*x = ListReportExportRequest{}
+	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListReportExportRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListReportExportRequest) ProtoMessage() {}
+
+func (x *ListReportExportRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListReportExportRequest.ProtoReflect.Descriptor instead.
+func (*ListReportExportRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ListReportExportRequest) GetTaskIds() []int64 {
+	if x != nil {
+		return x.TaskIds
+	}
+	return nil
+}
+
+func (x *ListReportExportRequest) GetType() string {
 	if x != nil && x.Type != nil {
 		return *x.Type
 	}
 	return ""
 }
 
-func (x *UpdateSystemCurrencyRequest) GetSymbol() string {
-	if x != nil && x.Symbol != nil {
-		return *x.Symbol
+func (x *ListReportExportRequest) GetStatus() string {
+	if x != nil && x.Status != nil {
+		return *x.Status
 	}
 	return ""
 }
 
-func (x *UpdateSystemCurrencyRequest) GetIcon() string {
-	if x != nil && x.Icon != nil {
-		return *x.Icon
+func (x *ListReportExportRequest) GetStart() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Start
 	}
-	return ""
+	return nil
 }
 
-func (x *UpdateSystemCurrencyRequest) GetDecimalPlaces() int32 {
-	if x != nil && x.DecimalPlaces != nil {
-		return *x.DecimalPlaces
+func (x *ListReportExportRequest) GetEnd() *timestamppb.Timestamp {
+	if x != nil {
+		return x.End
+	}
+	return nil
+}
+
+func (x *ListReportExportRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
 	}
 	return 0
 }
 
-func (x *UpdateSystemCurrencyRequest) GetCurrencyDecimalPlaces() int32 {
-	if x != nil && x.CurrencyDecimalPlaces != nil {
-		return *x.CurrencyDecimalPlaces
+func (x *ListReportExportRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
 	}
 	return 0
 }
 
-type UpdateSystemCurrencyResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Currency      *SystemCurrency        `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateSystemCurrencyResponse) Reset() {
-	*x = UpdateSystemCurrencyResponse{}
-	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateSystemCurrencyResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateSystemCurrencyResponse) ProtoMessage() {}
-
-func (x *UpdateSystemCurrencyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_system_proto_msgTypes[6]
+func (x *ListReportExportRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
 	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateSystemCurrencyResponse.ProtoReflect.Descriptor instead.
-func (*UpdateSystemCurrencyResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *UpdateSystemCurrencyResponse) GetCurrency() *SystemCurrency {
-	if x != nil {
-		return x.Currency
+		return x.OperatorContextFilters
 	}
 	return nil
 }
@@ -534,65 +425,72 @@ var File_backoffice_service_v1_backoffice_system_proto protoreflect.FileDescript
 
 const file_backoffice_service_v1_backoffice_system_proto_rawDesc = "" +
 	"\n" +
-	"-backoffice/service/v1/backoffice_system.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\"\xfd\x01\n" +
-	"\x0eSystemCurrency\x12\x1a\n" +
-	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
-	"\aenabled\x18\x02 \x01(\bR\aenabled\x12\x16\n" +
-	"\x06hidden\x18\x03 \x01(\bR\x06hidden\x12\x12\n" +
-	"\x04type\x18\x04 \x01(\tR\x04type\x12\x16\n" +
-	"\x06symbol\x18\x05 \x01(\tR\x06symbol\x12\x12\n" +
-	"\x04icon\x18\x06 \x01(\tR\x04icon\x12%\n" +
-	"\x0edecimal_places\x18\a \x01(\x05R\rdecimalPlaces\x126\n" +
-	"\x17currency_decimal_places\x18\b \x01(\x05R\x15currencyDecimalPlaces\"\x87\x02\n" +
-	"\x18AddSystemCurrencyRequest\x12\x1a\n" +
-	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
-	"\aenabled\x18\x02 \x01(\bR\aenabled\x12\x16\n" +
-	"\x06hidden\x18\x03 \x01(\bR\x06hidden\x12\x12\n" +
-	"\x04type\x18\x04 \x01(\tR\x04type\x12\x16\n" +
-	"\x06symbol\x18\x05 \x01(\tR\x06symbol\x12\x12\n" +
-	"\x04icon\x18\x06 \x01(\tR\x04icon\x12%\n" +
-	"\x0edecimal_places\x18\a \x01(\x05R\rdecimalPlaces\x126\n" +
-	"\x17currency_decimal_places\x18\b \x01(\x05R\x15currencyDecimalPlaces\"\x1b\n" +
-	"\x19AddSystemCurrencyResponse\"\x90\x01\n" +
-	"\x1bListSystemCurrenciesRequest\x12\x1e\n" +
+	"-backoffice/service/v1/backoffice_system.proto\x12\x19api.backoffice.service.v1\x1a\x1esystem/service/v1/system.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\"\x1c\n" +
+	"\x1aListIntegrityStatusRequest\"\x99\x01\n" +
+	"\x19SetIntegrityConfigRequest\x12\x1b\n" +
+	"\tlabel_app\x18\x01 \x01(\tR\blabelApp\x12#\n" +
+	"\rpod_namespace\x18\x02 \x01(\tR\fpodNamespace\x12:\n" +
 	"\n" +
-	"currencies\x18\x01 \x03(\tR\n" +
-	"currencies\x12\x1d\n" +
-	"\aenabled\x18\x02 \x01(\bH\x00R\aenabled\x88\x01\x01\x12\x1b\n" +
-	"\x06hidden\x18\x03 \x01(\bH\x01R\x06hidden\x88\x01\x01B\n" +
+	"file_infos\x18\x03 \x03(\v2\x1b.system.service.v1.FileInfoR\tfileInfos\"\xb1\x03\n" +
+	"\x0eListSevRequest\x12\x1f\n" +
+	"\bseverity\x18\x02 \x01(\tH\x00R\bseverity\x88\x01\x01\x12\x1f\n" +
+	"\bcategory\x18\x03 \x01(\tH\x01R\bcategory\x88\x01\x01\x12!\n" +
+	"\tcomponent\x18\x04 \x01(\tH\x02R\tcomponent\x88\x01\x01\x12\x1c\n" +
+	"\auser_id\x18\x05 \x01(\x03H\x03R\x06userId\x88\x01\x01\x12>\n" +
 	"\n" +
-	"\b_enabledB\t\n" +
-	"\a_hidden\"\xc7\x01\n" +
-	"\x1cListSystemCurrenciesResponse\x12I\n" +
+	"start_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x04R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x05R\aendTime\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\b \x01(\x05H\x06R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\t \x01(\x05H\aR\bpageSize\x88\x01\x01B\v\n" +
+	"\t_severityB\v\n" +
+	"\t_categoryB\f\n" +
 	"\n" +
-	"currencies\x18\x01 \x03(\v2).api.backoffice.service.v1.SystemCurrencyR\n" +
-	"currencies\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total\x12#\n" +
-	"\rtotal_enabled\x18\x03 \x01(\x05R\ftotalEnabled\x12!\n" +
-	"\ftotal_hidden\x18\x04 \x01(\x05R\vtotalHidden\"\x90\x03\n" +
-	"\x1bUpdateSystemCurrencyRequest\x12\x1a\n" +
-	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x1d\n" +
-	"\aenabled\x18\x02 \x01(\bH\x00R\aenabled\x88\x01\x01\x12\x1b\n" +
-	"\x06hidden\x18\x03 \x01(\bH\x01R\x06hidden\x88\x01\x01\x12\x17\n" +
-	"\x04type\x18\x04 \x01(\tH\x02R\x04type\x88\x01\x01\x12\x1b\n" +
-	"\x06symbol\x18\x05 \x01(\tH\x03R\x06symbol\x88\x01\x01\x12\x17\n" +
-	"\x04icon\x18\x06 \x01(\tH\x04R\x04icon\x88\x01\x01\x12*\n" +
-	"\x0edecimal_places\x18\a \x01(\x05H\x05R\rdecimalPlaces\x88\x01\x01\x12;\n" +
-	"\x17currency_decimal_places\x18\b \x01(\x05H\x06R\x15currencyDecimalPlaces\x88\x01\x01B\n" +
+	"_componentB\n" +
 	"\n" +
-	"\b_enabledB\t\n" +
-	"\a_hiddenB\a\n" +
+	"\b_user_idB\r\n" +
+	"\v_start_timeB\v\n" +
+	"\t_end_timeB\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\x96\x03\n" +
+	"\x10ExportSevRequest\x12\x1f\n" +
+	"\bseverity\x18\x01 \x01(\tH\x00R\bseverity\x88\x01\x01\x12\x1f\n" +
+	"\bcategory\x18\x02 \x01(\tH\x01R\bcategory\x88\x01\x01\x12!\n" +
+	"\tcomponent\x18\x03 \x01(\tH\x02R\tcomponent\x88\x01\x01\x12\x1c\n" +
+	"\auser_id\x18\x04 \x01(\x03H\x03R\x06userId\x88\x01\x01\x12>\n" +
+	"\n" +
+	"start_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x04R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x05R\aendTime\x88\x01\x01\x12\x16\n" +
+	"\x06format\x18\a \x01(\tR\x06format\x12\x1b\n" +
+	"\ttime_zone\x18\b \x01(\tR\btimeZoneB\v\n" +
+	"\t_severityB\v\n" +
+	"\t_categoryB\f\n" +
+	"\n" +
+	"_componentB\n" +
+	"\n" +
+	"\b_user_idB\r\n" +
+	"\v_start_timeB\v\n" +
+	"\t_end_time\"\xab\x03\n" +
+	"\x17ListReportExportRequest\x12\x19\n" +
+	"\btask_ids\x18\x01 \x03(\x03R\ataskIds\x12\x17\n" +
+	"\x04type\x18\x02 \x01(\tH\x00R\x04type\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\x03 \x01(\tH\x01R\x06status\x88\x01\x01\x125\n" +
+	"\x05start\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\x05start\x88\x01\x01\x121\n" +
+	"\x03end\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\x03end\x88\x01\x01\x12\x12\n" +
+	"\x04page\x18\x06 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\a \x01(\x05R\bpageSize\x12a\n" +
+	"\x18operator_context_filters\x18\b \x01(\v2\".api.common.OperatorContextFiltersH\x04R\x16operatorContextFilters\x88\x01\x01B\a\n" +
 	"\x05_typeB\t\n" +
-	"\a_symbolB\a\n" +
-	"\x05_iconB\x11\n" +
-	"\x0f_decimal_placesB\x1a\n" +
-	"\x18_currency_decimal_places\"e\n" +
-	"\x1cUpdateSystemCurrencyResponse\x12E\n" +
-	"\bcurrency\x18\x01 \x01(\v2).api.backoffice.service.v1.SystemCurrencyR\bcurrency2\xbe\x04\n" +
-	"\x10BackofficeSystem\x12\xaf\x01\n" +
-	"\x11AddSystemCurrency\x123.api.backoffice.service.v1.AddSystemCurrencyRequest\x1a4.api.backoffice.service.v1.AddSystemCurrencyResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/system/currencies/add\x12\xb9\x01\n" +
-	"\x14ListSystemCurrencies\x126.api.backoffice.service.v1.ListSystemCurrenciesRequest\x1a7.api.backoffice.service.v1.ListSystemCurrenciesResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/system/currencies/list\x12\xbb\x01\n" +
-	"\x14UpdateSystemCurrency\x126.api.backoffice.service.v1.UpdateSystemCurrencyRequest\x1a7.api.backoffice.service.v1.UpdateSystemCurrencyResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/system/currencies/updateB[\n" +
+	"\a_statusB\b\n" +
+	"\x06_startB\x06\n" +
+	"\x04_endB\x1b\n" +
+	"\x19_operator_context_filters2\xc5\x06\n" +
+	"\x10BackofficeSystem\x12\xb4\x01\n" +
+	"\x13ListIntegrityStatus\x125.api.backoffice.service.v1.ListIntegrityStatusRequest\x1a..system.service.v1.ListIntegrityStatusResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/system/integrity/status/list\x12\xba\x01\n" +
+	"\x12SetIntegrityConfig\x124.api.backoffice.service.v1.SetIntegrityConfigRequest\x1a-.system.service.v1.SetIntegrityConfigResponse\"?\x82\xd3\xe4\x93\x029:\x01*\"4/v1/backoffice/system/integrity/file-info/config/set\x12\xa8\x01\n" +
+	"\x10ListReportExport\x122.api.backoffice.service.v1.ListReportExportRequest\x1a+.system.service.v1.ListReportExportResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/backoffice/system/report/export/list\x12\x83\x01\n" +
+	"\aListSev\x12).api.backoffice.service.v1.ListSevRequest\x1a\".system.service.v1.ListSevResponse\")\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/backoffice/system/sev/list\x12\x8b\x01\n" +
+	"\tExportSev\x12+.api.backoffice.service.v1.ExportSevRequest\x1a$.system.service.v1.ExportSevResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/system/sev/exportB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -607,30 +505,46 @@ func file_backoffice_service_v1_backoffice_system_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_system_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_system_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_backoffice_service_v1_backoffice_system_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_backoffice_service_v1_backoffice_system_proto_goTypes = []any{
-	(*SystemCurrency)(nil),               // 0: api.backoffice.service.v1.SystemCurrency
-	(*AddSystemCurrencyRequest)(nil),     // 1: api.backoffice.service.v1.AddSystemCurrencyRequest
-	(*AddSystemCurrencyResponse)(nil),    // 2: api.backoffice.service.v1.AddSystemCurrencyResponse
-	(*ListSystemCurrenciesRequest)(nil),  // 3: api.backoffice.service.v1.ListSystemCurrenciesRequest
-	(*ListSystemCurrenciesResponse)(nil), // 4: api.backoffice.service.v1.ListSystemCurrenciesResponse
-	(*UpdateSystemCurrencyRequest)(nil),  // 5: api.backoffice.service.v1.UpdateSystemCurrencyRequest
-	(*UpdateSystemCurrencyResponse)(nil), // 6: api.backoffice.service.v1.UpdateSystemCurrencyResponse
+	(*ListIntegrityStatusRequest)(nil),     // 0: api.backoffice.service.v1.ListIntegrityStatusRequest
+	(*SetIntegrityConfigRequest)(nil),      // 1: api.backoffice.service.v1.SetIntegrityConfigRequest
+	(*ListSevRequest)(nil),                 // 2: api.backoffice.service.v1.ListSevRequest
+	(*ExportSevRequest)(nil),               // 3: api.backoffice.service.v1.ExportSevRequest
+	(*ListReportExportRequest)(nil),        // 4: api.backoffice.service.v1.ListReportExportRequest
+	(*v1.FileInfo)(nil),                    // 5: system.service.v1.FileInfo
+	(*timestamppb.Timestamp)(nil),          // 6: google.protobuf.Timestamp
+	(*common.OperatorContextFilters)(nil),  // 7: api.common.OperatorContextFilters
+	(*v1.ListIntegrityStatusResponse)(nil), // 8: system.service.v1.ListIntegrityStatusResponse
+	(*v1.SetIntegrityConfigResponse)(nil),  // 9: system.service.v1.SetIntegrityConfigResponse
+	(*v1.ListReportExportResponse)(nil),    // 10: system.service.v1.ListReportExportResponse
+	(*v1.ListSevResponse)(nil),             // 11: system.service.v1.ListSevResponse
+	(*v1.ExportSevResponse)(nil),           // 12: system.service.v1.ExportSevResponse
 }
 var file_backoffice_service_v1_backoffice_system_proto_depIdxs = []int32{
-	0, // 0: api.backoffice.service.v1.ListSystemCurrenciesResponse.currencies:type_name -> api.backoffice.service.v1.SystemCurrency
-	0, // 1: api.backoffice.service.v1.UpdateSystemCurrencyResponse.currency:type_name -> api.backoffice.service.v1.SystemCurrency
-	1, // 2: api.backoffice.service.v1.BackofficeSystem.AddSystemCurrency:input_type -> api.backoffice.service.v1.AddSystemCurrencyRequest
-	3, // 3: api.backoffice.service.v1.BackofficeSystem.ListSystemCurrencies:input_type -> api.backoffice.service.v1.ListSystemCurrenciesRequest
-	5, // 4: api.backoffice.service.v1.BackofficeSystem.UpdateSystemCurrency:input_type -> api.backoffice.service.v1.UpdateSystemCurrencyRequest
-	2, // 5: api.backoffice.service.v1.BackofficeSystem.AddSystemCurrency:output_type -> api.backoffice.service.v1.AddSystemCurrencyResponse
-	4, // 6: api.backoffice.service.v1.BackofficeSystem.ListSystemCurrencies:output_type -> api.backoffice.service.v1.ListSystemCurrenciesResponse
-	6, // 7: api.backoffice.service.v1.BackofficeSystem.UpdateSystemCurrency:output_type -> api.backoffice.service.v1.UpdateSystemCurrencyResponse
-	5, // [5:8] is the sub-list for method output_type
-	2, // [2:5] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	5,  // 0: api.backoffice.service.v1.SetIntegrityConfigRequest.file_infos:type_name -> system.service.v1.FileInfo
+	6,  // 1: api.backoffice.service.v1.ListSevRequest.start_time:type_name -> google.protobuf.Timestamp
+	6,  // 2: api.backoffice.service.v1.ListSevRequest.end_time:type_name -> google.protobuf.Timestamp
+	6,  // 3: api.backoffice.service.v1.ExportSevRequest.start_time:type_name -> google.protobuf.Timestamp
+	6,  // 4: api.backoffice.service.v1.ExportSevRequest.end_time:type_name -> google.protobuf.Timestamp
+	6,  // 5: api.backoffice.service.v1.ListReportExportRequest.start:type_name -> google.protobuf.Timestamp
+	6,  // 6: api.backoffice.service.v1.ListReportExportRequest.end:type_name -> google.protobuf.Timestamp
+	7,  // 7: api.backoffice.service.v1.ListReportExportRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	0,  // 8: api.backoffice.service.v1.BackofficeSystem.ListIntegrityStatus:input_type -> api.backoffice.service.v1.ListIntegrityStatusRequest
+	1,  // 9: api.backoffice.service.v1.BackofficeSystem.SetIntegrityConfig:input_type -> api.backoffice.service.v1.SetIntegrityConfigRequest
+	4,  // 10: api.backoffice.service.v1.BackofficeSystem.ListReportExport:input_type -> api.backoffice.service.v1.ListReportExportRequest
+	2,  // 11: api.backoffice.service.v1.BackofficeSystem.ListSev:input_type -> api.backoffice.service.v1.ListSevRequest
+	3,  // 12: api.backoffice.service.v1.BackofficeSystem.ExportSev:input_type -> api.backoffice.service.v1.ExportSevRequest
+	8,  // 13: api.backoffice.service.v1.BackofficeSystem.ListIntegrityStatus:output_type -> system.service.v1.ListIntegrityStatusResponse
+	9,  // 14: api.backoffice.service.v1.BackofficeSystem.SetIntegrityConfig:output_type -> system.service.v1.SetIntegrityConfigResponse
+	10, // 15: api.backoffice.service.v1.BackofficeSystem.ListReportExport:output_type -> system.service.v1.ListReportExportResponse
+	11, // 16: api.backoffice.service.v1.BackofficeSystem.ListSev:output_type -> system.service.v1.ListSevResponse
+	12, // 17: api.backoffice.service.v1.BackofficeSystem.ExportSev:output_type -> system.service.v1.ExportSevResponse
+	13, // [13:18] is the sub-list for method output_type
+	8,  // [8:13] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_system_proto_init() }
@@ -638,15 +552,16 @@ func file_backoffice_service_v1_backoffice_system_proto_init() {
 	if File_backoffice_service_v1_backoffice_system_proto != nil {
 		return
 	}
+	file_backoffice_service_v1_backoffice_system_proto_msgTypes[2].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_system_proto_msgTypes[3].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_system_proto_msgTypes[5].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_system_proto_msgTypes[4].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_system_proto_rawDesc), len(file_backoffice_service_v1_backoffice_system_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

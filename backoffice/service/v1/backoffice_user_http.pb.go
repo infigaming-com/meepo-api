@@ -10,6 +10,7 @@ import (
 	context "context"
 	http "github.com/go-kratos/kratos/v2/transport/http"
 	binding "github.com/go-kratos/kratos/v2/transport/http/binding"
+	v1 "github.com/infigaming-com/meepo-api/user/service/v1"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -20,10 +21,12 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationBackofficeUserAddUserComment = "/api.backoffice.service.v1.BackofficeUser/AddUserComment"
+const OperationBackofficeUserDeleteUserResponsibleGamblingConfig = "/api.backoffice.service.v1.BackofficeUser/DeleteUserResponsibleGamblingConfig"
 const OperationBackofficeUserGetOperatorTags = "/api.backoffice.service.v1.BackofficeUser/GetOperatorTags"
 const OperationBackofficeUserGetOperatorTagsConfig = "/api.backoffice.service.v1.BackofficeUser/GetOperatorTagsConfig"
 const OperationBackofficeUserGetUserOverview = "/api.backoffice.service.v1.BackofficeUser/GetUserOverview"
 const OperationBackofficeUserGetUserProfile = "/api.backoffice.service.v1.BackofficeUser/GetUserProfile"
+const OperationBackofficeUserGetUserResponsibleGamblingConfig = "/api.backoffice.service.v1.BackofficeUser/GetUserResponsibleGamblingConfig"
 const OperationBackofficeUserGetUserTags = "/api.backoffice.service.v1.BackofficeUser/GetUserTags"
 const OperationBackofficeUserListUserComments = "/api.backoffice.service.v1.BackofficeUser/ListUserComments"
 const OperationBackofficeUserListUsers = "/api.backoffice.service.v1.BackofficeUser/ListUsers"
@@ -32,15 +35,19 @@ const OperationBackofficeUserSetOperatorTags = "/api.backoffice.service.v1.Backo
 const OperationBackofficeUserSetOperatorTagsConfig = "/api.backoffice.service.v1.BackofficeUser/SetOperatorTagsConfig"
 const OperationBackofficeUserSetUserTags = "/api.backoffice.service.v1.BackofficeUser/SetUserTags"
 const OperationBackofficeUserUpdateUser = "/api.backoffice.service.v1.BackofficeUser/UpdateUser"
+const OperationBackofficeUserUserIdentityAudit = "/api.backoffice.service.v1.BackofficeUser/UserIdentityAudit"
+const OperationBackofficeUserUserIdentityList = "/api.backoffice.service.v1.BackofficeUser/UserIdentityList"
 
 type BackofficeUserHTTPServer interface {
 	AddUserComment(context.Context, *AddUserCommentRequest) (*AddUserCommentResponse, error)
+	DeleteUserResponsibleGamblingConfig(context.Context, *DeleteUserResponsibleGamblingConfigRequest) (*v1.DeleteResponsibleGamblingConfigResponse, error)
 	// GetOperatorTags GetOperatorTags retrieves all tags of an operator or parent operator if follow_parent is true.
 	GetOperatorTags(context.Context, *GetOperatorTagsRequest) (*GetOperatorTagsResponse, error)
 	// GetOperatorTagsConfig GetOperatorTagConfig returns follow-parent flag for the given operator ID.
 	GetOperatorTagsConfig(context.Context, *GetOperatorTagsConfigRequest) (*GetOperatorTagsConfigResponse, error)
 	GetUserOverview(context.Context, *GetUserOverviewRequest) (*GetUserOverviewResponse, error)
-	GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error)
+	GetUserProfile(context.Context, *GetUserProfileRequest) (*v1.GetUserProfileResponse, error)
+	GetUserResponsibleGamblingConfig(context.Context, *GetUserResponsibleGamblingConfigRequest) (*v1.GetResponsibleGamblingConfigResponse, error)
 	// GetUserTags GetUserTags retrieves all active tags associated with a user and also exists in the related operator's tag list.
 	GetUserTags(context.Context, *GetUserTagsRequest) (*GetUserTagsResponse, error)
 	ListUserComments(context.Context, *ListUserCommentsRequest) (*ListUserCommentsResponse, error)
@@ -54,6 +61,8 @@ type BackofficeUserHTTPServer interface {
 	SetOperatorTagsConfig(context.Context, *SetOperatorTagsConfigRequest) (*SetOperatorTagsConfigResponse, error)
 	SetUserTags(context.Context, *SetUserTagsRequest) (*SetUserTagsResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
+	UserIdentityAudit(context.Context, *UserIdentityAuditRequest) (*v1.UserIdentityAuditResponse, error)
+	UserIdentityList(context.Context, *UserIdentityListRequest) (*v1.UserIdentityListResponse, error)
 }
 
 func RegisterBackofficeUserHTTPServer(s *http.Server, srv BackofficeUserHTTPServer) {
@@ -64,13 +73,17 @@ func RegisterBackofficeUserHTTPServer(s *http.Server, srv BackofficeUserHTTPServ
 	r.POST("/v1/backoffice/user/comments/add", _BackofficeUser_AddUserComment0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/comments/list", _BackofficeUser_ListUserComments0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/send-email-verification-code", _BackofficeUser_SendEmailVerificationCode1_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/user/update", _BackofficeUser_UpdateUser0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/user/update", _BackofficeUser_UpdateUser1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/operator-tags/config/set", _BackofficeUser_SetOperatorTagsConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/operator-tags/set", _BackofficeUser_SetOperatorTags0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/operator-tags/config/get", _BackofficeUser_GetOperatorTagsConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/operator-tags/get", _BackofficeUser_GetOperatorTags0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/tags/get", _BackofficeUser_GetUserTags1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/tags/set", _BackofficeUser_SetUserTags0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/user/responsible-gambling/config/delete", _BackofficeUser_DeleteUserResponsibleGamblingConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/user/responsible-gambling/config/get", _BackofficeUser_GetUserResponsibleGamblingConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/user/identity/set", _BackofficeUser_UserIdentityAudit0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/user/identity/list/get", _BackofficeUser_UserIdentityList0_HTTP_Handler(srv))
 }
 
 func _BackofficeUser_ListUsers0_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
@@ -134,7 +147,7 @@ func _BackofficeUser_GetUserProfile0_HTTP_Handler(srv BackofficeUserHTTPServer) 
 		if err != nil {
 			return err
 		}
-		reply := out.(*GetUserProfileResponse)
+		reply := out.(*v1.GetUserProfileResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -205,7 +218,7 @@ func _BackofficeUser_SendEmailVerificationCode1_HTTP_Handler(srv BackofficeUserH
 	}
 }
 
-func _BackofficeUser_UpdateUser0_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
+func _BackofficeUser_UpdateUser1_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in UpdateUserRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -359,12 +372,102 @@ func _BackofficeUser_SetUserTags0_HTTP_Handler(srv BackofficeUserHTTPServer) fun
 	}
 }
 
+func _BackofficeUser_DeleteUserResponsibleGamblingConfig0_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DeleteUserResponsibleGamblingConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeUserDeleteUserResponsibleGamblingConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteUserResponsibleGamblingConfig(ctx, req.(*DeleteUserResponsibleGamblingConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.DeleteResponsibleGamblingConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeUser_GetUserResponsibleGamblingConfig0_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetUserResponsibleGamblingConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeUserGetUserResponsibleGamblingConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetUserResponsibleGamblingConfig(ctx, req.(*GetUserResponsibleGamblingConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.GetResponsibleGamblingConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeUser_UserIdentityAudit0_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UserIdentityAuditRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeUserUserIdentityAudit)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UserIdentityAudit(ctx, req.(*UserIdentityAuditRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.UserIdentityAuditResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeUser_UserIdentityList0_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UserIdentityListRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeUserUserIdentityList)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UserIdentityList(ctx, req.(*UserIdentityListRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.UserIdentityListResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeUserHTTPClient interface {
 	AddUserComment(ctx context.Context, req *AddUserCommentRequest, opts ...http.CallOption) (rsp *AddUserCommentResponse, err error)
+	DeleteUserResponsibleGamblingConfig(ctx context.Context, req *DeleteUserResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *v1.DeleteResponsibleGamblingConfigResponse, err error)
 	GetOperatorTags(ctx context.Context, req *GetOperatorTagsRequest, opts ...http.CallOption) (rsp *GetOperatorTagsResponse, err error)
 	GetOperatorTagsConfig(ctx context.Context, req *GetOperatorTagsConfigRequest, opts ...http.CallOption) (rsp *GetOperatorTagsConfigResponse, err error)
 	GetUserOverview(ctx context.Context, req *GetUserOverviewRequest, opts ...http.CallOption) (rsp *GetUserOverviewResponse, err error)
-	GetUserProfile(ctx context.Context, req *GetUserProfileRequest, opts ...http.CallOption) (rsp *GetUserProfileResponse, err error)
+	GetUserProfile(ctx context.Context, req *GetUserProfileRequest, opts ...http.CallOption) (rsp *v1.GetUserProfileResponse, err error)
+	GetUserResponsibleGamblingConfig(ctx context.Context, req *GetUserResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *v1.GetResponsibleGamblingConfigResponse, err error)
 	GetUserTags(ctx context.Context, req *GetUserTagsRequest, opts ...http.CallOption) (rsp *GetUserTagsResponse, err error)
 	ListUserComments(ctx context.Context, req *ListUserCommentsRequest, opts ...http.CallOption) (rsp *ListUserCommentsResponse, err error)
 	ListUsers(ctx context.Context, req *ListUsersRequest, opts ...http.CallOption) (rsp *ListUsersResponse, err error)
@@ -373,6 +476,8 @@ type BackofficeUserHTTPClient interface {
 	SetOperatorTagsConfig(ctx context.Context, req *SetOperatorTagsConfigRequest, opts ...http.CallOption) (rsp *SetOperatorTagsConfigResponse, err error)
 	SetUserTags(ctx context.Context, req *SetUserTagsRequest, opts ...http.CallOption) (rsp *SetUserTagsResponse, err error)
 	UpdateUser(ctx context.Context, req *UpdateUserRequest, opts ...http.CallOption) (rsp *UpdateUserResponse, err error)
+	UserIdentityAudit(ctx context.Context, req *UserIdentityAuditRequest, opts ...http.CallOption) (rsp *v1.UserIdentityAuditResponse, err error)
+	UserIdentityList(ctx context.Context, req *UserIdentityListRequest, opts ...http.CallOption) (rsp *v1.UserIdentityListResponse, err error)
 }
 
 type BackofficeUserHTTPClientImpl struct {
@@ -388,6 +493,19 @@ func (c *BackofficeUserHTTPClientImpl) AddUserComment(ctx context.Context, in *A
 	pattern := "/v1/backoffice/user/comments/add"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeUserAddUserComment))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeUserHTTPClientImpl) DeleteUserResponsibleGamblingConfig(ctx context.Context, in *DeleteUserResponsibleGamblingConfigRequest, opts ...http.CallOption) (*v1.DeleteResponsibleGamblingConfigResponse, error) {
+	var out v1.DeleteResponsibleGamblingConfigResponse
+	pattern := "/v1/backoffice/user/responsible-gambling/config/delete"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeUserDeleteUserResponsibleGamblingConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -435,11 +553,24 @@ func (c *BackofficeUserHTTPClientImpl) GetUserOverview(ctx context.Context, in *
 	return &out, nil
 }
 
-func (c *BackofficeUserHTTPClientImpl) GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...http.CallOption) (*GetUserProfileResponse, error) {
-	var out GetUserProfileResponse
+func (c *BackofficeUserHTTPClientImpl) GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...http.CallOption) (*v1.GetUserProfileResponse, error) {
+	var out v1.GetUserProfileResponse
 	pattern := "/v1/backoffice/user/profile/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeUserGetUserProfile))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeUserHTTPClientImpl) GetUserResponsibleGamblingConfig(ctx context.Context, in *GetUserResponsibleGamblingConfigRequest, opts ...http.CallOption) (*v1.GetResponsibleGamblingConfigResponse, error) {
+	var out v1.GetResponsibleGamblingConfigResponse
+	pattern := "/v1/backoffice/user/responsible-gambling/config/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeUserGetUserResponsibleGamblingConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -544,6 +675,32 @@ func (c *BackofficeUserHTTPClientImpl) UpdateUser(ctx context.Context, in *Updat
 	pattern := "/v1/backoffice/user/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeUserUpdateUser))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeUserHTTPClientImpl) UserIdentityAudit(ctx context.Context, in *UserIdentityAuditRequest, opts ...http.CallOption) (*v1.UserIdentityAuditResponse, error) {
+	var out v1.UserIdentityAuditResponse
+	pattern := "/v1/backoffice/user/identity/set"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeUserUserIdentityAudit))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeUserHTTPClientImpl) UserIdentityList(ctx context.Context, in *UserIdentityListRequest, opts ...http.CallOption) (*v1.UserIdentityListResponse, error) {
+	var out v1.UserIdentityListResponse
+	pattern := "/v1/backoffice/user/identity/list/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeUserUserIdentityList))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

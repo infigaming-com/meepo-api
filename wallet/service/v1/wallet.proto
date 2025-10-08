@@ -23,6 +23,14 @@ service Wallet {
 	rpc GetUserBalance (GetUserBalanceRequest) returns (GetUserBalanceResponse) {
 	}
 
+	// GetUserBalanceDetails returns the cash and credit details of every credit of the user balance(one currency only)
+	rpc GetUserBalanceDetails (GetUserBalanceDetailsRequest) returns (GetUserBalanceDetailsResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/balance/details"
+			body: "*"
+		};
+	}
+
 	rpc Credit (CreditRequest) returns (CreditResponse) {}
 
 	rpc Debit (DebitRequest) returns (DebitResponse) {}
@@ -52,7 +60,12 @@ service Wallet {
 
 	rpc GetExchangeRates (GetExchangeRatesRequest) returns (GetExchangeRatesResponse) {}
 
-	rpc GetExchangeRatesWithBaseCurrency (GetExchangeRatesWithBaseCurrencyRequest) returns (GetExchangeRatesWithBaseCurrencyResponse) {}
+	rpc GetExchangeRatesWithBaseCurrency (GetExchangeRatesWithBaseCurrencyRequest) returns (GetExchangeRatesWithBaseCurrencyResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/exchange-rates/base-currency"
+			body: "*"
+		};
+	}
 
 	// GetUserTransactionSummary returns the summary of user's transactions 
 	// It returns the total deposit, withdraw, deposit minus withdraw, valid bet
@@ -73,8 +86,6 @@ service Wallet {
 			body: "*"
 		};
 	}
-	
-	rpc GetOperatorCurrencies (GetOperatorCurrenciesRequest) returns (GetOperatorCurrenciesResponse) {}
 
 	rpc ListCurrencies (ListCurrenciesRequest) returns (ListCurrenciesResponse) {}
 
@@ -151,6 +162,52 @@ service Wallet {
 			body: "*"
 		};
 	}
+
+	// AddResponsibleGamblingConfig adds gambling config for a user's currency
+	rpc AddResponsibleGamblingConfig(AddResponsibleGamblingConfigRequest) returns (AddResponsibleGamblingConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/responsible-gambling/config/add"
+			body: "*"
+		};
+	}
+
+	// DeleteResponsibleGamblingConfig deletes gambling config for a user's currency
+	rpc DeleteResponsibleGamblingConfig(DeleteResponsibleGamblingConfigRequest) returns (DeleteResponsibleGamblingConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/responsible-gambling/config/delete"
+			body: "*"
+		};
+	}
+
+	// ListResponsibleGamblingConfigs lists gambling configs for a user with all currencies
+	rpc ListResponsibleGamblingConfigs(ListResponsibleGamblingConfigsRequest) returns (ListResponsibleGamblingConfigsResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/responsible-gambling/configs/list"
+			body: "*"
+		};
+	}
+
+	// GetResponsibleGamblingConfig gets gambling config and statusfor a user's currency
+	rpc GetResponsibleGamblingConfig(GetResponsibleGamblingConfigRequest) returns (GetResponsibleGamblingConfigResponse) {
+	}
+
+	// ListCustomerRecords lists customer records for all users (with deposit, withdraw, game bet, game win and manual credit(this is not supported yet))
+	rpc ListCustomerRecords(ListCustomerRecordsRequest) returns (ListCustomerRecordsResponse) {}
+
+	// ExportCustomerRecords create a task to exports customer records for all users (with deposit, withdraw, game bet, game win and manual credit(this is not supported yet))
+	rpc ExportCustomerRecords(ExportCustomerRecordsRequest) returns (ExportCustomerRecordsResponse) {}
+
+	// SetFICAThresholdConfig sets the FICA threshold config for an operator and its specific currency
+	rpc SetFICAThresholdConfig(SetFICAThresholdConfigRequest) returns (SetFICAThresholdConfigResponse) {}
+
+	// GetFICAThresholdConfig gets the FICA threshold config for an operator of all currencies
+	rpc GetFICAThresholdConfig(GetFICAThresholdConfigRequest) returns (GetFICAThresholdConfigResponse) {}
+
+	// ListFICAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
+	rpc ListFICAThresholdTransactions(ListFICAThresholdTransactionsRequest) returns (ListFICAThresholdTransactionsResponse) {}
+
+	// ExportFICAThresholdTransactions create a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
+	rpc ExportFICAThresholdTransactions(ExportFICAThresholdTransactionsRequest) returns (ExportFICAThresholdTransactionsResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -693,6 +750,12 @@ message Currency {
 	string symbol = 5;
 	string icon = 6;
 	int32 decimal_places = 7;
+	string thousands_separator = 8; // placeholder for future use
+	string decimal_separator = 9; // placeholder for future use
+	bool aggregated_enabled = 10;
+	bool aggregated_hidden = 11;
+	bool parent_enabled = 12;
+	bool parent_hidden = 13;
 }
 
 message AddCurrencyRequest {
@@ -716,18 +779,12 @@ message UpdateCurrencyResponse {}
 
 message GetCurrenciesRequest {
 	repeated string currencies = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	optional bool aggregated = 3; // include aggregated_enabled and aggregated_hidden fields
+	optional bool parent = 4; // include parent_enabled and parent_hidden fields, not implemented yet
 }
 
 message GetCurrenciesResponse {
-	repeated Currency currencies = 1;
-}
-
-message GetOperatorCurrenciesRequest {
-	api.common.OperatorContext operator_context = 1;
-	repeated string currencies = 2;
-}
-
-message GetOperatorCurrenciesResponse {
 	repeated Currency currencies = 1;
 }
 
@@ -735,6 +792,12 @@ message ListCurrenciesRequest {
 	repeated string currencies = 1;
 	optional bool enabled = 2;
 	optional bool hidden = 3;
+	api.common.OperatorContext initiator_operator_context = 4;
+	optional bool aggregated_enabled = 5;
+	optional bool aggregated_hidden = 6;
+	optional bool parent_enabled = 7;
+	optional bool parent_hidden = 8;
+	api.common.OperatorContext target_operator_context = 9;
 }
 
 message ListCurrenciesResponse {
@@ -742,6 +805,10 @@ message ListCurrenciesResponse {
 	int32 total = 2;
 	int32 total_enabled = 3;
 	int32 total_hidden = 4;
+	int32 total_enabled_aggregated = 5;
+	int32 total_hidden_aggregated = 6;
+	int32 total_enabled_parent = 7;
+	int32 total_hidden_parent = 8;
 }
 
 message UpdateOperatorCurrencyRequest {
@@ -753,7 +820,10 @@ message UpdateOperatorCurrencyRequest {
 	optional string symbol = 6;
 	optional string icon = 7;
 	optional int32 decimal_places = 8;
-	api.common.OperatorContext operator_context = 9;
+	api.common.OperatorContext initiator_operator_context = 9;
+	optional string thousands_separator = 10; // placeholder for future use
+	optional string decimal_separator = 11; // placeholder for future use
+	api.common.OperatorContext target_operator_context = 12;
 }
 
 message UpdateOperatorCurrencyResponse {}
@@ -1144,5 +1214,256 @@ message BonusTransferResponse {
 	string balance_bonus = 4;
 }
 
+message GetUserBalanceDetailsRequest {
+	string currency = 1;
+}
 
+message UserBalanceDetail {
+	message Credit {
+		int64 credit_id = 1;
+		string cash = 2;
+		string operator_bonus = 3;
+		string provider_bonus = 4;
+		string withdrawable_cash = 5;
+		string transferable_operator_bonus = 6;
+		string cash_turnover = 7;
+		string cash_turnover_threshold = 8;
+		string operator_bonus_turnover = 9;
+		string operator_bonus_turnover_threshold = 10;
+	}
+	string currency = 1;
+	string total_cash = 2;
+	string total_operator_bonus = 3;
+	string total_provider_bonus = 4;
+	string total_withdrawable_cash = 5;
+	string total_transferable_operator_bonus = 6;
+	repeated Credit credits = 7;
+}
+
+message GetUserBalanceDetailsResponse {
+	UserBalanceDetail detail = 1;
+}
+
+message AddResponsibleGamblingConfigRequest {
+	string currency = 1;
+	optional string deposit_limit = 2;
+	optional string withdrawal_limit = 3;
+	optional string daily_play_limit = 4;
+	optional string weekly_play_limit = 5;
+	optional string monthly_play_limit = 6;
+	optional string daily_loss_limit = 7;
+	optional string weekly_loss_limit = 8;
+	optional string monthly_loss_limit = 9;
+}
+
+message AddResponsibleGamblingConfigResponse {}
+
+message DeleteResponsibleGamblingConfigRequest {
+	optional int64 target_user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+	string currency = 3;
+	// deposit_limit, withdrawal_limit, daily_play_limit, weekly_play_limit, monthly_play_limit
+	// daily_loss_limit, weekly_loss_limit, monthly_loss_limit
+	string limit_type = 4;
+	optional int64 initiator_user_id = 5;
+}
+
+message DeleteResponsibleGamblingConfigResponse {}
+
+message ResponsibleGamblingConfig {
+	string currency = 1;
+	string deposit_limit = 2;
+	string withdrawal_limit = 3;
+	string daily_play_limit = 4;
+	string weekly_play_limit = 5;
+	string monthly_play_limit = 6;
+	string daily_loss_limit = 7;
+	string weekly_loss_limit = 8;
+	string monthly_loss_limit = 9;
+	google.protobuf.Timestamp deposit_limit_delete_schedule_time = 10;
+	google.protobuf.Timestamp withdrawal_limit_delete_schedule_time = 11;
+	google.protobuf.Timestamp daily_play_limit_delete_schedule_time = 12;
+	google.protobuf.Timestamp weekly_play_limit_delete_schedule_time = 13;
+	google.protobuf.Timestamp monthly_play_limit_delete_schedule_time = 14;
+	google.protobuf.Timestamp daily_loss_limit_delete_schedule_time = 15;
+	google.protobuf.Timestamp weekly_loss_limit_delete_schedule_time = 16;
+	google.protobuf.Timestamp monthly_loss_limit_delete_schedule_time = 17;
+}
+
+message ResponsibleGamblingStatus {
+	string currency = 1;
+	bool withdrawal_allowed = 2;
+	string withdrawal_usage = 3;
+	bool deposit_allowed = 4;
+	string deposit_usage = 5;
+	bool game_bet_allowed = 6;
+	string daily_play_usage = 7;
+	string weekly_play_usage = 8;
+	string monthly_play_usage = 9;
+	string daily_loss_usage = 10;
+	string weekly_loss_usage = 11;
+	string monthly_loss_usage = 12;
+}
+
+message ListResponsibleGamblingConfigsRequest {
+	optional int64 user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+}
+
+message ListResponsibleGamblingConfigsResponse {
+	repeated ResponsibleGamblingConfig responsible_gambling_configs = 1;
+	repeated ResponsibleGamblingStatus responsible_gambling_statuses = 2;
+}
+
+message GetResponsibleGamblingConfigRequest {
+	int64 user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+	string currency = 3;
+}
+
+message GetResponsibleGamblingConfigResponse {
+	ResponsibleGamblingConfig responsible_gambling_config = 1;
+}
+
+message ListCustomerRecordsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional int64 transaction_id = 4;
+	optional string transaction_type = 5;
+	optional int32 page = 6;
+	optional int32 page_size = 7;
+	api.common.OperatorContext operator_context = 8;
+	api.common.OperatorContextFilters operator_context_filters = 9;
+}
+
+message ListCustomerRecordsResponse {
+	message CustomerRecord {
+		google.protobuf.Timestamp date_time = 1;
+		string transaction_type = 2;
+		int64 user_id = 3;
+		int64 transaction_id = 4;
+		string currency = 5;
+		string amount_changed = 6;
+		string before_balance = 7;
+		string after_balance = 8;
+		int64 external_transaction_id = 9;
+		int64 operator_id = 10;
+		int64 company_operator_id = 11;
+		int64 retailer_operator_id = 12;
+		int64 system_operator_id = 13;
+		string operator_name = 14;
+		string company_operator_name = 15;
+		string retailer_operator_name = 16;
+		string system_operator_name = 17;
+	}
+	repeated CustomerRecord customer_records = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}
+
+message ExportCustomerRecordsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional int64 transaction_id = 4;
+	optional string transaction_type = 5;
+	string format = 6; // accepted values: csv, excel, pdf
+	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContext operator_context = 8;
+	api.common.OperatorContextFilters operator_context_filters = 9;
+	int64 initiator_user_id = 10;
+}
+
+message ExportCustomerRecordsResponse {
+	int64 task_id = 1;
+}
+
+message FICAThresholdConfig {
+	message Config {
+		string transaction_type = 1; // payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward
+		string threshold_amount = 2;
+	}
+	repeated Config configs = 1;
+}
+
+message SetFICAThresholdConfigRequest {
+	string currency = 1;
+	FICAThresholdConfig fica_threshold_config = 2;
+	api.common.OperatorContext operator_context = 3;
+	api.common.OperatorContext target_operator_context = 4;
+}
+
+message SetFICAThresholdConfigResponse {}
+
+message GetFICAThresholdConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+}
+
+message GetFICAThresholdConfigResponse {
+	map<string, FICAThresholdConfig> fica_threshold_configs = 1;
+}
+
+message ListFICAThresholdTransactionsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional string transaction_type = 3;
+	optional string currency = 4;
+	optional int32 kyc_level = 5;
+	optional int32 page = 6;
+	optional int32 page_size = 7;
+	api.common.OperatorContext operator_context = 8;
+	api.common.OperatorContext target_operator_context = 9;
+}
+
+message ListFICAThresholdTransactionsResponse {
+	message FICAThresholdTransaction {
+		string type = 1;
+		google.protobuf.Timestamp transaction_time = 2; // created_at
+		int64 transaction_id = 3;
+		string currency = 4;
+		string amount = 5;
+		string excess_amount = 6;
+		int64 user_id = 7;
+		string full_name = 8;
+		string id_type = 9;
+		string id_number = 10;
+		string mobile = 11;
+		string email = 12;
+		string address = 13;
+		int32 kyc_level = 14;
+		int64 external_transaction_id = 15;
+		int64 operator_id = 16;
+		int64 company_operator_id = 17;
+		int64 retailer_operator_id = 18;
+		int64 system_operator_id = 19;
+		string operator_name = 20;
+		string company_operator_name = 21;
+		string retailer_operator_name = 22;
+		string system_operator_name = 23;
+	}
+	repeated FICAThresholdTransaction threshold_transactions = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}
+
+message ExportFICAThresholdTransactionsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional string transaction_type = 3;
+	optional string currency = 4;
+	optional int32 kyc_level = 5;
+	string format = 6; // accepted values: csv, excel, pdf
+	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContext operator_context = 8;
+	api.common.OperatorContext target_operator_context = 9;
+	int64 initiator_user_id = 10;
+}
+
+message ExportFICAThresholdTransactionsResponse {
+	int64 task_id = 1;
+}
 

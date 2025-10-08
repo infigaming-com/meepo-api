@@ -370,3 +370,39 @@ func IsGetWalletTransactionFailed(err error) bool {
 func ErrorGetWalletTransactionFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_WALLET_TRANSACTION_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetResponsibleGamblingStatusFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_RESPONSIBLE_GAMBLING_STATUS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetResponsibleGamblingStatusFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_RESPONSIBLE_GAMBLING_STATUS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsWithdrawRestrictedByResponsibleGambling(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_WITHDRAW_RESTRICTED_BY_RESPONSIBLE_GAMBLING.String() && e.Code == 500
+}
+
+func ErrorWithdrawRestrictedByResponsibleGambling(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_WITHDRAW_RESTRICTED_BY_RESPONSIBLE_GAMBLING.String(), fmt.Sprintf(format, args...))
+}
+
+func IsWithdrawRestrictedByAccountSettings(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_WITHDRAW_RESTRICTED_BY_ACCOUNT_SETTINGS.String() && e.Code == 500
+}
+
+func ErrorWithdrawRestrictedByAccountSettings(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_WITHDRAW_RESTRICTED_BY_ACCOUNT_SETTINGS.String(), fmt.Sprintf(format, args...))
+}

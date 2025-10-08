@@ -8,6 +8,7 @@ package v1
 
 import (
 	common "github.com/infigaming-com/meepo-api/common"
+	v1 "github.com/infigaming-com/meepo-api/user/service/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -774,154 +775,6 @@ func (x *GetUserProfileRequest) GetLoginPageSize() int32 {
 	return 0
 }
 
-type GetUserProfileResponse struct {
-	state              protoimpl.MessageState                     `protogen:"open.v1"`
-	Nickname           string                                     `protobuf:"bytes,1,opt,name=nickname,proto3" json:"nickname,omitempty"`
-	UserId             int64                                      `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	VipLevel           int32                                      `protobuf:"varint,3,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"` // Not available for now, only return 1
-	Online             bool                                       `protobuf:"varint,4,opt,name=online,proto3" json:"online,omitempty"`                     // Not available for now, only return true
-	BanWithdraw        bool                                       `protobuf:"varint,5,opt,name=ban_withdraw,json=banWithdraw,proto3" json:"ban_withdraw,omitempty"`
-	BanGame            bool                                       `protobuf:"varint,6,opt,name=ban_game,json=banGame,proto3" json:"ban_game,omitempty"`
-	BanLogin           bool                                       `protobuf:"varint,7,opt,name=ban_login,json=banLogin,proto3" json:"ban_login,omitempty"`
-	RegistrationRecord *GetUserProfileResponse_RegistrationRecord `protobuf:"bytes,8,opt,name=registration_record,json=registrationRecord,proto3" json:"registration_record,omitempty"`
-	LoginRecords       []*GetUserProfileResponse_LoginRecord      `protobuf:"bytes,9,rep,name=login_records,json=loginRecords,proto3" json:"login_records,omitempty"`
-	Tags               []string                                   `protobuf:"bytes,10,rep,name=tags,proto3" json:"tags,omitempty"`
-	Comments           []*GetUserProfileResponse_Comment          `protobuf:"bytes,11,rep,name=comments,proto3" json:"comments,omitempty"`
-	TotalLoginCount    int32                                      `protobuf:"varint,12,opt,name=total_login_count,json=totalLoginCount,proto3" json:"total_login_count,omitempty"`
-	LoginPage          int32                                      `protobuf:"varint,13,opt,name=login_page,json=loginPage,proto3" json:"login_page,omitempty"`
-	LoginPageSize      int32                                      `protobuf:"varint,14,opt,name=login_page_size,json=loginPageSize,proto3" json:"login_page_size,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
-}
-
-func (x *GetUserProfileResponse) Reset() {
-	*x = GetUserProfileResponse{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetUserProfileResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetUserProfileResponse) ProtoMessage() {}
-
-func (x *GetUserProfileResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetUserProfileResponse.ProtoReflect.Descriptor instead.
-func (*GetUserProfileResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *GetUserProfileResponse) GetNickname() string {
-	if x != nil {
-		return x.Nickname
-	}
-	return ""
-}
-
-func (x *GetUserProfileResponse) GetUserId() int64 {
-	if x != nil {
-		return x.UserId
-	}
-	return 0
-}
-
-func (x *GetUserProfileResponse) GetVipLevel() int32 {
-	if x != nil {
-		return x.VipLevel
-	}
-	return 0
-}
-
-func (x *GetUserProfileResponse) GetOnline() bool {
-	if x != nil {
-		return x.Online
-	}
-	return false
-}
-
-func (x *GetUserProfileResponse) GetBanWithdraw() bool {
-	if x != nil {
-		return x.BanWithdraw
-	}
-	return false
-}
-
-func (x *GetUserProfileResponse) GetBanGame() bool {
-	if x != nil {
-		return x.BanGame
-	}
-	return false
-}
-
-func (x *GetUserProfileResponse) GetBanLogin() bool {
-	if x != nil {
-		return x.BanLogin
-	}
-	return false
-}
-
-func (x *GetUserProfileResponse) GetRegistrationRecord() *GetUserProfileResponse_RegistrationRecord {
-	if x != nil {
-		return x.RegistrationRecord
-	}
-	return nil
-}
-
-func (x *GetUserProfileResponse) GetLoginRecords() []*GetUserProfileResponse_LoginRecord {
-	if x != nil {
-		return x.LoginRecords
-	}
-	return nil
-}
-
-func (x *GetUserProfileResponse) GetTags() []string {
-	if x != nil {
-		return x.Tags
-	}
-	return nil
-}
-
-func (x *GetUserProfileResponse) GetComments() []*GetUserProfileResponse_Comment {
-	if x != nil {
-		return x.Comments
-	}
-	return nil
-}
-
-func (x *GetUserProfileResponse) GetTotalLoginCount() int32 {
-	if x != nil {
-		return x.TotalLoginCount
-	}
-	return 0
-}
-
-func (x *GetUserProfileResponse) GetLoginPage() int32 {
-	if x != nil {
-		return x.LoginPage
-	}
-	return 0
-}
-
-func (x *GetUserProfileResponse) GetLoginPageSize() int32 {
-	if x != nil {
-		return x.LoginPageSize
-	}
-	return 0
-}
-
 type AddUserCommentRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -932,7 +785,7 @@ type AddUserCommentRequest struct {
 
 func (x *AddUserCommentRequest) Reset() {
 	*x = AddUserCommentRequest{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[6]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -944,7 +797,7 @@ func (x *AddUserCommentRequest) String() string {
 func (*AddUserCommentRequest) ProtoMessage() {}
 
 func (x *AddUserCommentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[6]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -957,7 +810,7 @@ func (x *AddUserCommentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddUserCommentRequest.ProtoReflect.Descriptor instead.
 func (*AddUserCommentRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{6}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *AddUserCommentRequest) GetUserId() int64 {
@@ -983,7 +836,7 @@ type AddUserCommentResponse struct {
 
 func (x *AddUserCommentResponse) Reset() {
 	*x = AddUserCommentResponse{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[7]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -995,7 +848,7 @@ func (x *AddUserCommentResponse) String() string {
 func (*AddUserCommentResponse) ProtoMessage() {}
 
 func (x *AddUserCommentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[7]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1008,7 +861,7 @@ func (x *AddUserCommentResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddUserCommentResponse.ProtoReflect.Descriptor instead.
 func (*AddUserCommentResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{7}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *AddUserCommentResponse) GetCommentId() int64 {
@@ -1027,7 +880,7 @@ type ListUserCommentsRequest struct {
 
 func (x *ListUserCommentsRequest) Reset() {
 	*x = ListUserCommentsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[8]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1039,7 +892,7 @@ func (x *ListUserCommentsRequest) String() string {
 func (*ListUserCommentsRequest) ProtoMessage() {}
 
 func (x *ListUserCommentsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[8]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1052,7 +905,7 @@ func (x *ListUserCommentsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUserCommentsRequest.ProtoReflect.Descriptor instead.
 func (*ListUserCommentsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{8}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ListUserCommentsRequest) GetUserId() int64 {
@@ -1071,7 +924,7 @@ type ListUserCommentsResponse struct {
 
 func (x *ListUserCommentsResponse) Reset() {
 	*x = ListUserCommentsResponse{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[9]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1083,7 +936,7 @@ func (x *ListUserCommentsResponse) String() string {
 func (*ListUserCommentsResponse) ProtoMessage() {}
 
 func (x *ListUserCommentsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[9]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1096,7 +949,7 @@ func (x *ListUserCommentsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUserCommentsResponse.ProtoReflect.Descriptor instead.
 func (*ListUserCommentsResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{9}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ListUserCommentsResponse) GetComments() []*ListUserCommentsResponse_Comment {
@@ -1115,7 +968,7 @@ type SendEmailVerificationCodeRequest struct {
 
 func (x *SendEmailVerificationCodeRequest) Reset() {
 	*x = SendEmailVerificationCodeRequest{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[10]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1127,7 +980,7 @@ func (x *SendEmailVerificationCodeRequest) String() string {
 func (*SendEmailVerificationCodeRequest) ProtoMessage() {}
 
 func (x *SendEmailVerificationCodeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[10]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1140,7 +993,7 @@ func (x *SendEmailVerificationCodeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendEmailVerificationCodeRequest.ProtoReflect.Descriptor instead.
 func (*SendEmailVerificationCodeRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{10}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *SendEmailVerificationCodeRequest) GetEmail() string {
@@ -1158,7 +1011,7 @@ type SendEmailVerificationCodeResponse struct {
 
 func (x *SendEmailVerificationCodeResponse) Reset() {
 	*x = SendEmailVerificationCodeResponse{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[11]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1170,7 +1023,7 @@ func (x *SendEmailVerificationCodeResponse) String() string {
 func (*SendEmailVerificationCodeResponse) ProtoMessage() {}
 
 func (x *SendEmailVerificationCodeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[11]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1183,22 +1036,54 @@ func (x *SendEmailVerificationCodeResponse) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use SendEmailVerificationCodeResponse.ProtoReflect.Descriptor instead.
 func (*SendEmailVerificationCodeResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{11}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{10}
 }
 
 type UpdateUserRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	BanLogin      *bool                  `protobuf:"varint,2,opt,name=ban_login,json=banLogin,proto3,oneof" json:"ban_login,omitempty"`
-	BanGame       *bool                  `protobuf:"varint,3,opt,name=ban_game,json=banGame,proto3,oneof" json:"ban_game,omitempty"`
-	BanWithdraw   *bool                  `protobuf:"varint,4,opt,name=ban_withdraw,json=banWithdraw,proto3,oneof" json:"ban_withdraw,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// user id
+	UserId int64 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	// nickname
+	Nickname *string `protobuf:"bytes,2,opt,name=nickname,proto3,oneof" json:"nickname,omitempty"`
+	// avatar
+	Avatar *string `protobuf:"bytes,3,opt,name=avatar,proto3,oneof" json:"avatar,omitempty"`
+	// ban login
+	BanLogin *bool `protobuf:"varint,4,opt,name=ban_login,json=banLogin,proto3,oneof" json:"ban_login,omitempty"`
+	// ban game
+	BanGame *bool `protobuf:"varint,5,opt,name=ban_game,json=banGame,proto3,oneof" json:"ban_game,omitempty"`
+	// ban withdraw
+	BanWithdraw *bool `protobuf:"varint,6,opt,name=ban_withdraw,json=banWithdraw,proto3,oneof" json:"ban_withdraw,omitempty"`
+	// locked
+	Locked *bool `protobuf:"varint,7,opt,name=locked,proto3,oneof" json:"locked,omitempty"`
+	// enabled
+	Enabled *bool `protobuf:"varint,8,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	// role id
+	RoleId *int64 `protobuf:"varint,9,opt,name=role_id,json=roleId,proto3,oneof" json:"role_id,omitempty"`
+	// first name
+	Firstname *string `protobuf:"bytes,10,opt,name=firstname,proto3,oneof" json:"firstname,omitempty"`
+	// last name
+	Lastname *string `protobuf:"bytes,11,opt,name=lastname,proto3,oneof" json:"lastname,omitempty"`
+	// email
+	Email *string `protobuf:"bytes,12,opt,name=email,proto3,oneof" json:"email,omitempty"`
+	// mobile
+	Mobile *string `protobuf:"bytes,13,opt,name=mobile,proto3,oneof" json:"mobile,omitempty"`
+	// user identity
+	UserIdentity *v1.UserIdentityRequest `protobuf:"bytes,14,opt,name=user_identity,json=userIdentity,proto3,oneof" json:"user_identity,omitempty"`
+	// address
+	Address *string `protobuf:"bytes,15,opt,name=address,proto3,oneof" json:"address,omitempty"`
+	// date of birth
+	Bod *timestamppb.Timestamp `protobuf:"bytes,16,opt,name=bod,proto3,oneof" json:"bod,omitempty"`
+	// email verified
+	EmailVerified *bool `protobuf:"varint,17,opt,name=email_verified,json=emailVerified,proto3,oneof" json:"email_verified,omitempty"`
+	// phone verified
+	PhoneVerified *bool `protobuf:"varint,18,opt,name=phone_verified,json=phoneVerified,proto3,oneof" json:"phone_verified,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateUserRequest) Reset() {
 	*x = UpdateUserRequest{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[12]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1210,7 +1095,7 @@ func (x *UpdateUserRequest) String() string {
 func (*UpdateUserRequest) ProtoMessage() {}
 
 func (x *UpdateUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[12]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1223,7 +1108,7 @@ func (x *UpdateUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserRequest.ProtoReflect.Descriptor instead.
 func (*UpdateUserRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{12}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *UpdateUserRequest) GetUserId() int64 {
@@ -1231,6 +1116,20 @@ func (x *UpdateUserRequest) GetUserId() int64 {
 		return x.UserId
 	}
 	return 0
+}
+
+func (x *UpdateUserRequest) GetNickname() string {
+	if x != nil && x.Nickname != nil {
+		return *x.Nickname
+	}
+	return ""
+}
+
+func (x *UpdateUserRequest) GetAvatar() string {
+	if x != nil && x.Avatar != nil {
+		return *x.Avatar
+	}
+	return ""
 }
 
 func (x *UpdateUserRequest) GetBanLogin() bool {
@@ -1254,6 +1153,90 @@ func (x *UpdateUserRequest) GetBanWithdraw() bool {
 	return false
 }
 
+func (x *UpdateUserRequest) GetLocked() bool {
+	if x != nil && x.Locked != nil {
+		return *x.Locked
+	}
+	return false
+}
+
+func (x *UpdateUserRequest) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
+}
+
+func (x *UpdateUserRequest) GetRoleId() int64 {
+	if x != nil && x.RoleId != nil {
+		return *x.RoleId
+	}
+	return 0
+}
+
+func (x *UpdateUserRequest) GetFirstname() string {
+	if x != nil && x.Firstname != nil {
+		return *x.Firstname
+	}
+	return ""
+}
+
+func (x *UpdateUserRequest) GetLastname() string {
+	if x != nil && x.Lastname != nil {
+		return *x.Lastname
+	}
+	return ""
+}
+
+func (x *UpdateUserRequest) GetEmail() string {
+	if x != nil && x.Email != nil {
+		return *x.Email
+	}
+	return ""
+}
+
+func (x *UpdateUserRequest) GetMobile() string {
+	if x != nil && x.Mobile != nil {
+		return *x.Mobile
+	}
+	return ""
+}
+
+func (x *UpdateUserRequest) GetUserIdentity() *v1.UserIdentityRequest {
+	if x != nil {
+		return x.UserIdentity
+	}
+	return nil
+}
+
+func (x *UpdateUserRequest) GetAddress() string {
+	if x != nil && x.Address != nil {
+		return *x.Address
+	}
+	return ""
+}
+
+func (x *UpdateUserRequest) GetBod() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Bod
+	}
+	return nil
+}
+
+func (x *UpdateUserRequest) GetEmailVerified() bool {
+	if x != nil && x.EmailVerified != nil {
+		return *x.EmailVerified
+	}
+	return false
+}
+
+func (x *UpdateUserRequest) GetPhoneVerified() bool {
+	if x != nil && x.PhoneVerified != nil {
+		return *x.PhoneVerified
+	}
+	return false
+}
+
 type UpdateUserResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -1262,7 +1245,7 @@ type UpdateUserResponse struct {
 
 func (x *UpdateUserResponse) Reset() {
 	*x = UpdateUserResponse{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[13]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1274,7 +1257,7 @@ func (x *UpdateUserResponse) String() string {
 func (*UpdateUserResponse) ProtoMessage() {}
 
 func (x *UpdateUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[13]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1287,7 +1270,7 @@ func (x *UpdateUserResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserResponse.ProtoReflect.Descriptor instead.
 func (*UpdateUserResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{13}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{12}
 }
 
 // SetOperatorTagsConfigRequest contains the operator ID.
@@ -1303,7 +1286,7 @@ type SetOperatorTagsConfigRequest struct {
 
 func (x *SetOperatorTagsConfigRequest) Reset() {
 	*x = SetOperatorTagsConfigRequest{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[14]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1315,7 +1298,7 @@ func (x *SetOperatorTagsConfigRequest) String() string {
 func (*SetOperatorTagsConfigRequest) ProtoMessage() {}
 
 func (x *SetOperatorTagsConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[14]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1328,7 +1311,7 @@ func (x *SetOperatorTagsConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetOperatorTagsConfigRequest.ProtoReflect.Descriptor instead.
 func (*SetOperatorTagsConfigRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{14}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *SetOperatorTagsConfigRequest) GetOperatorId() int64 {
@@ -1354,7 +1337,7 @@ type SetOperatorTagsConfigResponse struct {
 
 func (x *SetOperatorTagsConfigResponse) Reset() {
 	*x = SetOperatorTagsConfigResponse{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[15]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1366,7 +1349,7 @@ func (x *SetOperatorTagsConfigResponse) String() string {
 func (*SetOperatorTagsConfigResponse) ProtoMessage() {}
 
 func (x *SetOperatorTagsConfigResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[15]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1379,7 +1362,7 @@ func (x *SetOperatorTagsConfigResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetOperatorTagsConfigResponse.ProtoReflect.Descriptor instead.
 func (*SetOperatorTagsConfigResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{15}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{14}
 }
 
 // SetOperatorTagsRequest contains the operator ID and tag to add.
@@ -1395,7 +1378,7 @@ type SetOperatorTagsRequest struct {
 
 func (x *SetOperatorTagsRequest) Reset() {
 	*x = SetOperatorTagsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[16]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1407,7 +1390,7 @@ func (x *SetOperatorTagsRequest) String() string {
 func (*SetOperatorTagsRequest) ProtoMessage() {}
 
 func (x *SetOperatorTagsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[16]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1420,7 +1403,7 @@ func (x *SetOperatorTagsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetOperatorTagsRequest.ProtoReflect.Descriptor instead.
 func (*SetOperatorTagsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{16}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *SetOperatorTagsRequest) GetOperatorId() int64 {
@@ -1446,7 +1429,7 @@ type SetOperatorTagsResponse struct {
 
 func (x *SetOperatorTagsResponse) Reset() {
 	*x = SetOperatorTagsResponse{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[17]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1458,7 +1441,7 @@ func (x *SetOperatorTagsResponse) String() string {
 func (*SetOperatorTagsResponse) ProtoMessage() {}
 
 func (x *SetOperatorTagsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[17]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1471,7 +1454,7 @@ func (x *SetOperatorTagsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetOperatorTagsResponse.ProtoReflect.Descriptor instead.
 func (*SetOperatorTagsResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{17}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{16}
 }
 
 // GetOperatorTagsConfigRequest contains the operator ID to retrieve tag configuration.
@@ -1485,7 +1468,7 @@ type GetOperatorTagsConfigRequest struct {
 
 func (x *GetOperatorTagsConfigRequest) Reset() {
 	*x = GetOperatorTagsConfigRequest{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[18]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1497,7 +1480,7 @@ func (x *GetOperatorTagsConfigRequest) String() string {
 func (*GetOperatorTagsConfigRequest) ProtoMessage() {}
 
 func (x *GetOperatorTagsConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[18]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1510,7 +1493,7 @@ func (x *GetOperatorTagsConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOperatorTagsConfigRequest.ProtoReflect.Descriptor instead.
 func (*GetOperatorTagsConfigRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{18}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *GetOperatorTagsConfigRequest) GetOperatorId() int64 {
@@ -1531,7 +1514,7 @@ type GetOperatorTagsConfigResponse struct {
 
 func (x *GetOperatorTagsConfigResponse) Reset() {
 	*x = GetOperatorTagsConfigResponse{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[19]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1543,7 +1526,7 @@ func (x *GetOperatorTagsConfigResponse) String() string {
 func (*GetOperatorTagsConfigResponse) ProtoMessage() {}
 
 func (x *GetOperatorTagsConfigResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[19]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1556,7 +1539,7 @@ func (x *GetOperatorTagsConfigResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOperatorTagsConfigResponse.ProtoReflect.Descriptor instead.
 func (*GetOperatorTagsConfigResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{19}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *GetOperatorTagsConfigResponse) GetFollowParent() bool {
@@ -1575,7 +1558,7 @@ type GetOperatorTagsRequest struct {
 
 func (x *GetOperatorTagsRequest) Reset() {
 	*x = GetOperatorTagsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[20]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1587,7 +1570,7 @@ func (x *GetOperatorTagsRequest) String() string {
 func (*GetOperatorTagsRequest) ProtoMessage() {}
 
 func (x *GetOperatorTagsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[20]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1600,7 +1583,7 @@ func (x *GetOperatorTagsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOperatorTagsRequest.ProtoReflect.Descriptor instead.
 func (*GetOperatorTagsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{20}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{19}
 }
 
 // GetOperatorTagsResponse contains the list of tags associated with the operator or parent operator if follow_parent is true.
@@ -1614,7 +1597,7 @@ type GetOperatorTagsResponse struct {
 
 func (x *GetOperatorTagsResponse) Reset() {
 	*x = GetOperatorTagsResponse{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[21]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1626,7 +1609,7 @@ func (x *GetOperatorTagsResponse) String() string {
 func (*GetOperatorTagsResponse) ProtoMessage() {}
 
 func (x *GetOperatorTagsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[21]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1639,7 +1622,7 @@ func (x *GetOperatorTagsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOperatorTagsResponse.ProtoReflect.Descriptor instead.
 func (*GetOperatorTagsResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{21}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *GetOperatorTagsResponse) GetTags() []string {
@@ -1660,7 +1643,7 @@ type GetUserTagsRequest struct {
 
 func (x *GetUserTagsRequest) Reset() {
 	*x = GetUserTagsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[22]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1672,7 +1655,7 @@ func (x *GetUserTagsRequest) String() string {
 func (*GetUserTagsRequest) ProtoMessage() {}
 
 func (x *GetUserTagsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[22]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1685,7 +1668,7 @@ func (x *GetUserTagsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserTagsRequest.ProtoReflect.Descriptor instead.
 func (*GetUserTagsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{22}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *GetUserTagsRequest) GetUserId() int64 {
@@ -1706,7 +1689,7 @@ type GetUserTagsResponse struct {
 
 func (x *GetUserTagsResponse) Reset() {
 	*x = GetUserTagsResponse{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[23]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1718,7 +1701,7 @@ func (x *GetUserTagsResponse) String() string {
 func (*GetUserTagsResponse) ProtoMessage() {}
 
 func (x *GetUserTagsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[23]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1731,7 +1714,7 @@ func (x *GetUserTagsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserTagsResponse.ProtoReflect.Descriptor instead.
 func (*GetUserTagsResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{23}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *GetUserTagsResponse) GetTags() []string {
@@ -1751,7 +1734,7 @@ type SetUserTagsRequest struct {
 
 func (x *SetUserTagsRequest) Reset() {
 	*x = SetUserTagsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[24]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1763,7 +1746,7 @@ func (x *SetUserTagsRequest) String() string {
 func (*SetUserTagsRequest) ProtoMessage() {}
 
 func (x *SetUserTagsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[24]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1776,7 +1759,7 @@ func (x *SetUserTagsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetUserTagsRequest.ProtoReflect.Descriptor instead.
 func (*SetUserTagsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{24}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *SetUserTagsRequest) GetUserId() int64 {
@@ -1801,7 +1784,7 @@ type SetUserTagsResponse struct {
 
 func (x *SetUserTagsResponse) Reset() {
 	*x = SetUserTagsResponse{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[25]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1813,7 +1796,7 @@ func (x *SetUserTagsResponse) String() string {
 func (*SetUserTagsResponse) ProtoMessage() {}
 
 func (x *SetUserTagsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[25]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1826,7 +1809,257 @@ func (x *SetUserTagsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetUserTagsResponse.ProtoReflect.Descriptor instead.
 func (*SetUserTagsResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{24}
+}
+
+type DeleteUserResponsibleGamblingConfigRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	LimitType     string                 `protobuf:"bytes,2,opt,name=limit_type,json=limitType,proto3" json:"limit_type,omitempty"` // "self_exclusion", "break_in_play", "time_limits"
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteUserResponsibleGamblingConfigRequest) Reset() {
+	*x = DeleteUserResponsibleGamblingConfigRequest{}
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteUserResponsibleGamblingConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteUserResponsibleGamblingConfigRequest) ProtoMessage() {}
+
+func (x *DeleteUserResponsibleGamblingConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteUserResponsibleGamblingConfigRequest.ProtoReflect.Descriptor instead.
+func (*DeleteUserResponsibleGamblingConfigRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *DeleteUserResponsibleGamblingConfigRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *DeleteUserResponsibleGamblingConfigRequest) GetLimitType() string {
+	if x != nil {
+		return x.LimitType
+	}
+	return ""
+}
+
+type GetUserResponsibleGamblingConfigRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserResponsibleGamblingConfigRequest) Reset() {
+	*x = GetUserResponsibleGamblingConfigRequest{}
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserResponsibleGamblingConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserResponsibleGamblingConfigRequest) ProtoMessage() {}
+
+func (x *GetUserResponsibleGamblingConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserResponsibleGamblingConfigRequest.ProtoReflect.Descriptor instead.
+func (*GetUserResponsibleGamblingConfigRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *GetUserResponsibleGamblingConfigRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+type UserIdentityAuditRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// user identity id
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	// audit "approved" or "declined"
+	Audit         string `protobuf:"bytes,2,opt,name=audit,proto3" json:"audit,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserIdentityAuditRequest) Reset() {
+	*x = UserIdentityAuditRequest{}
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserIdentityAuditRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserIdentityAuditRequest) ProtoMessage() {}
+
+func (x *UserIdentityAuditRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserIdentityAuditRequest.ProtoReflect.Descriptor instead.
+func (*UserIdentityAuditRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *UserIdentityAuditRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *UserIdentityAuditRequest) GetAudit() string {
+	if x != nil {
+		return x.Audit
+	}
+	return ""
+}
+
+type UserIdentityListRequest struct {
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	Id                     *int64                         `protobuf:"varint,1,opt,name=id,proto3,oneof" json:"id,omitempty"`
+	UserId                 *int64                         `protobuf:"varint,2,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	Status                 *string                        `protobuf:"bytes,3,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	StartTime              *timestamppb.Timestamp         `protobuf:"bytes,4,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime                *timestamppb.Timestamp         `protobuf:"bytes,5,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	Page                   int32                          `protobuf:"varint,6,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize               int32                          `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,8,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *UserIdentityListRequest) Reset() {
+	*x = UserIdentityListRequest{}
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserIdentityListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserIdentityListRequest) ProtoMessage() {}
+
+func (x *UserIdentityListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserIdentityListRequest.ProtoReflect.Descriptor instead.
+func (*UserIdentityListRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *UserIdentityListRequest) GetId() int64 {
+	if x != nil && x.Id != nil {
+		return *x.Id
+	}
+	return 0
+}
+
+func (x *UserIdentityListRequest) GetUserId() int64 {
+	if x != nil && x.UserId != nil {
+		return *x.UserId
+	}
+	return 0
+}
+
+func (x *UserIdentityListRequest) GetStatus() string {
+	if x != nil && x.Status != nil {
+		return *x.Status
+	}
+	return ""
+}
+
+func (x *UserIdentityListRequest) GetStartTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.StartTime
+	}
+	return nil
+}
+
+func (x *UserIdentityListRequest) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
+	}
+	return nil
+}
+
+func (x *UserIdentityListRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *UserIdentityListRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *UserIdentityListRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
 }
 
 type ListUsersResponse_User struct {
@@ -1865,7 +2098,7 @@ type ListUsersResponse_User struct {
 
 func (x *ListUsersResponse_User) Reset() {
 	*x = ListUsersResponse_User{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[26]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1877,7 +2110,7 @@ func (x *ListUsersResponse_User) String() string {
 func (*ListUsersResponse_User) ProtoMessage() {}
 
 func (x *ListUsersResponse_User) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[26]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2068,7 +2301,7 @@ type GetUserOverviewResponse_GameData struct {
 
 func (x *GetUserOverviewResponse_GameData) Reset() {
 	*x = GetUserOverviewResponse_GameData{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[27]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2080,7 +2313,7 @@ func (x *GetUserOverviewResponse_GameData) String() string {
 func (*GetUserOverviewResponse_GameData) ProtoMessage() {}
 
 func (x *GetUserOverviewResponse_GameData) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[27]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2138,366 +2371,6 @@ func (x *GetUserOverviewResponse_GameData) GetRtp() string {
 	return ""
 }
 
-type GetUserProfileResponse_IpInfo struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Ip            string                 `protobuf:"bytes,1,opt,name=ip,proto3" json:"ip,omitempty"`
-	Count         int32                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	Country       string                 `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetUserProfileResponse_IpInfo) Reset() {
-	*x = GetUserProfileResponse_IpInfo{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[28]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetUserProfileResponse_IpInfo) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetUserProfileResponse_IpInfo) ProtoMessage() {}
-
-func (x *GetUserProfileResponse_IpInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[28]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetUserProfileResponse_IpInfo.ProtoReflect.Descriptor instead.
-func (*GetUserProfileResponse_IpInfo) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{5, 0}
-}
-
-func (x *GetUserProfileResponse_IpInfo) GetIp() string {
-	if x != nil {
-		return x.Ip
-	}
-	return ""
-}
-
-func (x *GetUserProfileResponse_IpInfo) GetCount() int32 {
-	if x != nil {
-		return x.Count
-	}
-	return 0
-}
-
-func (x *GetUserProfileResponse_IpInfo) GetCountry() string {
-	if x != nil {
-		return x.Country
-	}
-	return ""
-}
-
-type GetUserProfileResponse_RegistrationRecord struct {
-	state         protoimpl.MessageState         `protogen:"open.v1"`
-	RegisteredAt  *timestamppb.Timestamp         `protobuf:"bytes,1,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
-	IpInfo        *GetUserProfileResponse_IpInfo `protobuf:"bytes,2,opt,name=ip_info,json=ipInfo,proto3" json:"ip_info,omitempty"`
-	Device        string                         `protobuf:"bytes,3,opt,name=device,proto3" json:"device,omitempty"`
-	Method        string                         `protobuf:"bytes,4,opt,name=method,proto3" json:"method,omitempty"`
-	Browser       string                         `protobuf:"bytes,5,opt,name=browser,proto3" json:"browser,omitempty"`
-	App           string                         `protobuf:"bytes,6,opt,name=app,proto3" json:"app,omitempty"` // Not available for now
-	Mobile        string                         `protobuf:"bytes,7,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	Email         string                         `protobuf:"bytes,8,opt,name=email,proto3" json:"email,omitempty"`
-	Username      string                         `protobuf:"bytes,9,opt,name=username,proto3" json:"username,omitempty"`
-	Source        string                         `protobuf:"bytes,10,opt,name=source,proto3" json:"source,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetUserProfileResponse_RegistrationRecord) Reset() {
-	*x = GetUserProfileResponse_RegistrationRecord{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[29]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetUserProfileResponse_RegistrationRecord) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetUserProfileResponse_RegistrationRecord) ProtoMessage() {}
-
-func (x *GetUserProfileResponse_RegistrationRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[29]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetUserProfileResponse_RegistrationRecord.ProtoReflect.Descriptor instead.
-func (*GetUserProfileResponse_RegistrationRecord) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{5, 1}
-}
-
-func (x *GetUserProfileResponse_RegistrationRecord) GetRegisteredAt() *timestamppb.Timestamp {
-	if x != nil {
-		return x.RegisteredAt
-	}
-	return nil
-}
-
-func (x *GetUserProfileResponse_RegistrationRecord) GetIpInfo() *GetUserProfileResponse_IpInfo {
-	if x != nil {
-		return x.IpInfo
-	}
-	return nil
-}
-
-func (x *GetUserProfileResponse_RegistrationRecord) GetDevice() string {
-	if x != nil {
-		return x.Device
-	}
-	return ""
-}
-
-func (x *GetUserProfileResponse_RegistrationRecord) GetMethod() string {
-	if x != nil {
-		return x.Method
-	}
-	return ""
-}
-
-func (x *GetUserProfileResponse_RegistrationRecord) GetBrowser() string {
-	if x != nil {
-		return x.Browser
-	}
-	return ""
-}
-
-func (x *GetUserProfileResponse_RegistrationRecord) GetApp() string {
-	if x != nil {
-		return x.App
-	}
-	return ""
-}
-
-func (x *GetUserProfileResponse_RegistrationRecord) GetMobile() string {
-	if x != nil {
-		return x.Mobile
-	}
-	return ""
-}
-
-func (x *GetUserProfileResponse_RegistrationRecord) GetEmail() string {
-	if x != nil {
-		return x.Email
-	}
-	return ""
-}
-
-func (x *GetUserProfileResponse_RegistrationRecord) GetUsername() string {
-	if x != nil {
-		return x.Username
-	}
-	return ""
-}
-
-func (x *GetUserProfileResponse_RegistrationRecord) GetSource() string {
-	if x != nil {
-		return x.Source
-	}
-	return ""
-}
-
-type GetUserProfileResponse_LoginRecord struct {
-	state         protoimpl.MessageState         `protogen:"open.v1"`
-	LoginAt       *timestamppb.Timestamp         `protobuf:"bytes,1,opt,name=login_at,json=loginAt,proto3" json:"login_at,omitempty"`
-	IpInfo        *GetUserProfileResponse_IpInfo `protobuf:"bytes,2,opt,name=ip_info,json=ipInfo,proto3" json:"ip_info,omitempty"`
-	Device        string                         `protobuf:"bytes,3,opt,name=device,proto3" json:"device,omitempty"`
-	Method        string                         `protobuf:"bytes,4,opt,name=method,proto3" json:"method,omitempty"`
-	Browser       string                         `protobuf:"bytes,5,opt,name=browser,proto3" json:"browser,omitempty"`
-	App           string                         `protobuf:"bytes,6,opt,name=app,proto3" json:"app,omitempty"` // Not available for now
-	Email         string                         `protobuf:"bytes,7,opt,name=email,proto3" json:"email,omitempty"`
-	Mobile        string                         `protobuf:"bytes,8,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	Username      string                         `protobuf:"bytes,9,opt,name=username,proto3" json:"username,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetUserProfileResponse_LoginRecord) Reset() {
-	*x = GetUserProfileResponse_LoginRecord{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[30]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetUserProfileResponse_LoginRecord) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetUserProfileResponse_LoginRecord) ProtoMessage() {}
-
-func (x *GetUserProfileResponse_LoginRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[30]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetUserProfileResponse_LoginRecord.ProtoReflect.Descriptor instead.
-func (*GetUserProfileResponse_LoginRecord) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{5, 2}
-}
-
-func (x *GetUserProfileResponse_LoginRecord) GetLoginAt() *timestamppb.Timestamp {
-	if x != nil {
-		return x.LoginAt
-	}
-	return nil
-}
-
-func (x *GetUserProfileResponse_LoginRecord) GetIpInfo() *GetUserProfileResponse_IpInfo {
-	if x != nil {
-		return x.IpInfo
-	}
-	return nil
-}
-
-func (x *GetUserProfileResponse_LoginRecord) GetDevice() string {
-	if x != nil {
-		return x.Device
-	}
-	return ""
-}
-
-func (x *GetUserProfileResponse_LoginRecord) GetMethod() string {
-	if x != nil {
-		return x.Method
-	}
-	return ""
-}
-
-func (x *GetUserProfileResponse_LoginRecord) GetBrowser() string {
-	if x != nil {
-		return x.Browser
-	}
-	return ""
-}
-
-func (x *GetUserProfileResponse_LoginRecord) GetApp() string {
-	if x != nil {
-		return x.App
-	}
-	return ""
-}
-
-func (x *GetUserProfileResponse_LoginRecord) GetEmail() string {
-	if x != nil {
-		return x.Email
-	}
-	return ""
-}
-
-func (x *GetUserProfileResponse_LoginRecord) GetMobile() string {
-	if x != nil {
-		return x.Mobile
-	}
-	return ""
-}
-
-func (x *GetUserProfileResponse_LoginRecord) GetUsername() string {
-	if x != nil {
-		return x.Username
-	}
-	return ""
-}
-
-type GetUserProfileResponse_Comment struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	CommentId      int64                  `protobuf:"varint,1,opt,name=comment_id,json=commentId,proto3" json:"comment_id,omitempty"`
-	Username       string                 `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
-	AuthorUsername string                 `protobuf:"bytes,3,opt,name=author_username,json=authorUsername,proto3" json:"author_username,omitempty"`
-	Content        string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
-	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
-}
-
-func (x *GetUserProfileResponse_Comment) Reset() {
-	*x = GetUserProfileResponse_Comment{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[31]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetUserProfileResponse_Comment) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetUserProfileResponse_Comment) ProtoMessage() {}
-
-func (x *GetUserProfileResponse_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[31]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetUserProfileResponse_Comment.ProtoReflect.Descriptor instead.
-func (*GetUserProfileResponse_Comment) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{5, 3}
-}
-
-func (x *GetUserProfileResponse_Comment) GetCommentId() int64 {
-	if x != nil {
-		return x.CommentId
-	}
-	return 0
-}
-
-func (x *GetUserProfileResponse_Comment) GetUsername() string {
-	if x != nil {
-		return x.Username
-	}
-	return ""
-}
-
-func (x *GetUserProfileResponse_Comment) GetAuthorUsername() string {
-	if x != nil {
-		return x.AuthorUsername
-	}
-	return ""
-}
-
-func (x *GetUserProfileResponse_Comment) GetContent() string {
-	if x != nil {
-		return x.Content
-	}
-	return ""
-}
-
-func (x *GetUserProfileResponse_Comment) GetCreatedAt() *timestamppb.Timestamp {
-	if x != nil {
-		return x.CreatedAt
-	}
-	return nil
-}
-
 type ListUserCommentsResponse_Comment struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Author        string                 `protobuf:"bytes,1,opt,name=author,proto3" json:"author,omitempty"`
@@ -2509,7 +2382,7 @@ type ListUserCommentsResponse_Comment struct {
 
 func (x *ListUserCommentsResponse_Comment) Reset() {
 	*x = ListUserCommentsResponse_Comment{}
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[32]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2521,7 +2394,7 @@ func (x *ListUserCommentsResponse_Comment) String() string {
 func (*ListUserCommentsResponse_Comment) ProtoMessage() {}
 
 func (x *ListUserCommentsResponse_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[32]
+	mi := &file_backoffice_service_v1_backoffice_user_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2534,7 +2407,7 @@ func (x *ListUserCommentsResponse_Comment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUserCommentsResponse_Comment.ProtoReflect.Descriptor instead.
 func (*ListUserCommentsResponse_Comment) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{9, 0}
+	return file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP(), []int{8, 0}
 }
 
 func (x *ListUserCommentsResponse_Comment) GetAuthor() string {
@@ -2562,7 +2435,7 @@ var File_backoffice_service_v1_backoffice_user_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\n" +
-	"+backoffice/service/v1/backoffice_user.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\"\x8f\t\n" +
+	"+backoffice/service/v1/backoffice_user.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\x1a\x1auser/service/v1/user.proto\"\x8f\t\n" +
 	"\x10ListUsersRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x12\n" +
 	"\x04tags\x18\x02 \x03(\tR\x04tags\x12W\n" +
@@ -2707,58 +2580,7 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"login_page\x18\x02 \x01(\x05H\x00R\tloginPage\x88\x01\x01\x12+\n" +
 	"\x0flogin_page_size\x18\x03 \x01(\x05H\x01R\rloginPageSize\x88\x01\x01B\r\n" +
 	"\v_login_pageB\x12\n" +
-	"\x10_login_page_size\"\xce\f\n" +
-	"\x16GetUserProfileResponse\x12\x1a\n" +
-	"\bnickname\x18\x01 \x01(\tR\bnickname\x12\x17\n" +
-	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x1b\n" +
-	"\tvip_level\x18\x03 \x01(\x05R\bvipLevel\x12\x16\n" +
-	"\x06online\x18\x04 \x01(\bR\x06online\x12!\n" +
-	"\fban_withdraw\x18\x05 \x01(\bR\vbanWithdraw\x12\x19\n" +
-	"\bban_game\x18\x06 \x01(\bR\abanGame\x12\x1b\n" +
-	"\tban_login\x18\a \x01(\bR\bbanLogin\x12u\n" +
-	"\x13registration_record\x18\b \x01(\v2D.api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecordR\x12registrationRecord\x12b\n" +
-	"\rlogin_records\x18\t \x03(\v2=.api.backoffice.service.v1.GetUserProfileResponse.LoginRecordR\floginRecords\x12\x12\n" +
-	"\x04tags\x18\n" +
-	" \x03(\tR\x04tags\x12U\n" +
-	"\bcomments\x18\v \x03(\v29.api.backoffice.service.v1.GetUserProfileResponse.CommentR\bcomments\x12*\n" +
-	"\x11total_login_count\x18\f \x01(\x05R\x0ftotalLoginCount\x12\x1d\n" +
-	"\n" +
-	"login_page\x18\r \x01(\x05R\tloginPage\x12&\n" +
-	"\x0flogin_page_size\x18\x0e \x01(\x05R\rloginPageSize\x1aH\n" +
-	"\x06IpInfo\x12\x0e\n" +
-	"\x02ip\x18\x01 \x01(\tR\x02ip\x12\x14\n" +
-	"\x05count\x18\x02 \x01(\x05R\x05count\x12\x18\n" +
-	"\acountry\x18\x03 \x01(\tR\acountry\x1a\xe6\x02\n" +
-	"\x12RegistrationRecord\x12?\n" +
-	"\rregistered_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\x12Q\n" +
-	"\aip_info\x18\x02 \x01(\v28.api.backoffice.service.v1.GetUserProfileResponse.IpInfoR\x06ipInfo\x12\x16\n" +
-	"\x06device\x18\x03 \x01(\tR\x06device\x12\x16\n" +
-	"\x06method\x18\x04 \x01(\tR\x06method\x12\x18\n" +
-	"\abrowser\x18\x05 \x01(\tR\abrowser\x12\x10\n" +
-	"\x03app\x18\x06 \x01(\tR\x03app\x12\x16\n" +
-	"\x06mobile\x18\a \x01(\tR\x06mobile\x12\x14\n" +
-	"\x05email\x18\b \x01(\tR\x05email\x12\x1a\n" +
-	"\busername\x18\t \x01(\tR\busername\x12\x16\n" +
-	"\x06source\x18\n" +
-	" \x01(\tR\x06source\x1a\xbd\x02\n" +
-	"\vLoginRecord\x125\n" +
-	"\blogin_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\aloginAt\x12Q\n" +
-	"\aip_info\x18\x02 \x01(\v28.api.backoffice.service.v1.GetUserProfileResponse.IpInfoR\x06ipInfo\x12\x16\n" +
-	"\x06device\x18\x03 \x01(\tR\x06device\x12\x16\n" +
-	"\x06method\x18\x04 \x01(\tR\x06method\x12\x18\n" +
-	"\abrowser\x18\x05 \x01(\tR\abrowser\x12\x10\n" +
-	"\x03app\x18\x06 \x01(\tR\x03app\x12\x14\n" +
-	"\x05email\x18\a \x01(\tR\x05email\x12\x16\n" +
-	"\x06mobile\x18\b \x01(\tR\x06mobile\x12\x1a\n" +
-	"\busername\x18\t \x01(\tR\busername\x1a\xc2\x01\n" +
-	"\aComment\x12\x1d\n" +
-	"\n" +
-	"comment_id\x18\x01 \x01(\x03R\tcommentId\x12\x1a\n" +
-	"\busername\x18\x02 \x01(\tR\busername\x12'\n" +
-	"\x0fauthor_username\x18\x03 \x01(\tR\x0eauthorUsername\x12\x18\n" +
-	"\acontent\x18\x04 \x01(\tR\acontent\x129\n" +
-	"\n" +
-	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"J\n" +
+	"\x10_login_page_size\"J\n" +
 	"\x15AddUserCommentRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x18\n" +
 	"\acontent\x18\x02 \x01(\tR\acontent\"7\n" +
@@ -2776,16 +2598,50 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"8\n" +
 	" SendEmailVerificationCodeRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\"#\n" +
-	"!SendEmailVerificationCodeResponse\"\xc2\x01\n" +
+	"!SendEmailVerificationCodeResponse\"\x8b\a\n" +
 	"\x11UpdateUserRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12 \n" +
-	"\tban_login\x18\x02 \x01(\bH\x00R\bbanLogin\x88\x01\x01\x12\x1e\n" +
-	"\bban_game\x18\x03 \x01(\bH\x01R\abanGame\x88\x01\x01\x12&\n" +
-	"\fban_withdraw\x18\x04 \x01(\bH\x02R\vbanWithdraw\x88\x01\x01B\f\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
+	"\bnickname\x18\x02 \x01(\tH\x00R\bnickname\x88\x01\x01\x12\x1b\n" +
+	"\x06avatar\x18\x03 \x01(\tH\x01R\x06avatar\x88\x01\x01\x12 \n" +
+	"\tban_login\x18\x04 \x01(\bH\x02R\bbanLogin\x88\x01\x01\x12\x1e\n" +
+	"\bban_game\x18\x05 \x01(\bH\x03R\abanGame\x88\x01\x01\x12&\n" +
+	"\fban_withdraw\x18\x06 \x01(\bH\x04R\vbanWithdraw\x88\x01\x01\x12\x1b\n" +
+	"\x06locked\x18\a \x01(\bH\x05R\x06locked\x88\x01\x01\x12\x1d\n" +
+	"\aenabled\x18\b \x01(\bH\x06R\aenabled\x88\x01\x01\x12\x1c\n" +
+	"\arole_id\x18\t \x01(\x03H\aR\x06roleId\x88\x01\x01\x12!\n" +
+	"\tfirstname\x18\n" +
+	" \x01(\tH\bR\tfirstname\x88\x01\x01\x12\x1f\n" +
+	"\blastname\x18\v \x01(\tH\tR\blastname\x88\x01\x01\x12\x19\n" +
+	"\x05email\x18\f \x01(\tH\n" +
+	"R\x05email\x88\x01\x01\x12\x1b\n" +
+	"\x06mobile\x18\r \x01(\tH\vR\x06mobile\x88\x01\x01\x12R\n" +
+	"\ruser_identity\x18\x0e \x01(\v2(.api.user.service.v1.UserIdentityRequestH\fR\fuserIdentity\x88\x01\x01\x12\x1d\n" +
+	"\aaddress\x18\x0f \x01(\tH\rR\aaddress\x88\x01\x01\x121\n" +
+	"\x03bod\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampH\x0eR\x03bod\x88\x01\x01\x12*\n" +
+	"\x0eemail_verified\x18\x11 \x01(\bH\x0fR\remailVerified\x88\x01\x01\x12*\n" +
+	"\x0ephone_verified\x18\x12 \x01(\bH\x10R\rphoneVerified\x88\x01\x01B\v\n" +
+	"\t_nicknameB\t\n" +
+	"\a_avatarB\f\n" +
 	"\n" +
 	"_ban_loginB\v\n" +
 	"\t_ban_gameB\x0f\n" +
-	"\r_ban_withdraw\"\x14\n" +
+	"\r_ban_withdrawB\t\n" +
+	"\a_lockedB\n" +
+	"\n" +
+	"\b_enabledB\n" +
+	"\n" +
+	"\b_role_idB\f\n" +
+	"\n" +
+	"_firstnameB\v\n" +
+	"\t_lastnameB\b\n" +
+	"\x06_emailB\t\n" +
+	"\a_mobileB\x10\n" +
+	"\x0e_user_identityB\n" +
+	"\n" +
+	"\b_addressB\x06\n" +
+	"\x04_bodB\x11\n" +
+	"\x0f_email_verifiedB\x11\n" +
+	"\x0f_phone_verified\"\x14\n" +
 	"\x12UpdateUserResponse\"d\n" +
 	"\x1cSetOperatorTagsConfigRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
@@ -2812,11 +2668,36 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x12SetUserTagsRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x12\n" +
 	"\x04tags\x18\x02 \x03(\tR\x04tags\"\x15\n" +
-	"\x13SetUserTagsResponse2\xba\x11\n" +
+	"\x13SetUserTagsResponse\"d\n" +
+	"*DeleteUserResponsibleGamblingConfigRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1d\n" +
+	"\n" +
+	"limit_type\x18\x02 \x01(\tR\tlimitType\"B\n" +
+	"'GetUserResponsibleGamblingConfigRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"@\n" +
+	"\x18UserIdentityAuditRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
+	"\x05audit\x18\x02 \x01(\tR\x05audit\"\xae\x03\n" +
+	"\x17UserIdentityListRequest\x12\x13\n" +
+	"\x02id\x18\x01 \x01(\x03H\x00R\x02id\x88\x01\x01\x12\x1c\n" +
+	"\auser_id\x18\x02 \x01(\x03H\x01R\x06userId\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\x03 \x01(\tH\x02R\x06status\x88\x01\x01\x12>\n" +
+	"\n" +
+	"start_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampH\x04R\aendTime\x88\x01\x01\x12\x12\n" +
+	"\x04page\x18\x06 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\a \x01(\x05R\bpageSize\x12\\\n" +
+	"\x18operator_context_filters\x18\b \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\x05\n" +
+	"\x03_idB\n" +
+	"\n" +
+	"\b_user_idB\t\n" +
+	"\a_statusB\r\n" +
+	"\v_start_timeB\v\n" +
+	"\t_end_time2\xda\x17\n" +
 	"\x0eBackofficeUser\x12\x8b\x01\n" +
 	"\tListUsers\x12+.api.backoffice.service.v1.ListUsersRequest\x1a,.api.backoffice.service.v1.ListUsersResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/backoffice/user/list\x12\xa5\x01\n" +
-	"\x0fGetUserOverview\x121.api.backoffice.service.v1.GetUserOverviewRequest\x1a2.api.backoffice.service.v1.GetUserOverviewResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/user/overview/get\x12\xa1\x01\n" +
-	"\x0eGetUserProfile\x120.api.backoffice.service.v1.GetUserProfileRequest\x1a1.api.backoffice.service.v1.GetUserProfileResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/user/profile/get\x12\xa2\x01\n" +
+	"\x0fGetUserOverview\x121.api.backoffice.service.v1.GetUserOverviewRequest\x1a2.api.backoffice.service.v1.GetUserOverviewResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/user/overview/get\x12\x9b\x01\n" +
+	"\x0eGetUserProfile\x120.api.backoffice.service.v1.GetUserProfileRequest\x1a+.api.user.service.v1.GetUserProfileResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/user/profile/get\x12\xa2\x01\n" +
 	"\x0eAddUserComment\x120.api.backoffice.service.v1.AddUserCommentRequest\x1a1.api.backoffice.service.v1.AddUserCommentResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/user/comments/add\x12\xa9\x01\n" +
 	"\x10ListUserComments\x122.api.backoffice.service.v1.ListUserCommentsRequest\x1a3.api.backoffice.service.v1.ListUserCommentsResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/backoffice/user/comments/list\x12\xd3\x01\n" +
 	"\x19SendEmailVerificationCode\x12;.api.backoffice.service.v1.SendEmailVerificationCodeRequest\x1a<.api.backoffice.service.v1.SendEmailVerificationCodeResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/user/send-email-verification-code\x12\x90\x01\n" +
@@ -2827,7 +2708,11 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\x15GetOperatorTagsConfig\x127.api.backoffice.service.v1.GetOperatorTagsConfigRequest\x1a8.api.backoffice.service.v1.GetOperatorTagsConfigResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/user/operator-tags/config/get\x12\xaa\x01\n" +
 	"\x0fGetOperatorTags\x121.api.backoffice.service.v1.GetOperatorTagsRequest\x1a2.api.backoffice.service.v1.GetOperatorTagsResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/user/operator-tags/get\x12\x95\x01\n" +
 	"\vGetUserTags\x12-.api.backoffice.service.v1.GetUserTagsRequest\x1a..api.backoffice.service.v1.GetUserTagsResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/user/tags/get\x12\x95\x01\n" +
-	"\vSetUserTags\x12-.api.backoffice.service.v1.SetUserTagsRequest\x1a..api.backoffice.service.v1.SetUserTagsResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/user/tags/setB[\n" +
+	"\vSetUserTags\x12-.api.backoffice.service.v1.SetUserTagsRequest\x1a..api.backoffice.service.v1.SetUserTagsResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/user/tags/set\x12\xed\x01\n" +
+	"#DeleteUserResponsibleGamblingConfig\x12E.api.backoffice.service.v1.DeleteUserResponsibleGamblingConfigRequest\x1a<.api.user.service.v1.DeleteResponsibleGamblingConfigResponse\"A\x82\xd3\xe4\x93\x02;:\x01*\"6/v1/backoffice/user/responsible-gambling/config/delete\x12\xe1\x01\n" +
+	" GetUserResponsibleGamblingConfig\x12B.api.backoffice.service.v1.GetUserResponsibleGamblingConfigRequest\x1a9.api.user.service.v1.GetResponsibleGamblingConfigResponse\">\x82\xd3\xe4\x93\x028:\x01*\"3/v1/backoffice/user/responsible-gambling/config/get\x12\xa5\x01\n" +
+	"\x11UserIdentityAudit\x123.api.backoffice.service.v1.UserIdentityAuditRequest\x1a..api.user.service.v1.UserIdentityAuditResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/user/identity/set\x12\xa7\x01\n" +
+	"\x10UserIdentityList\x122.api.backoffice.service.v1.UserIdentityListRequest\x1a-.api.user.service.v1.UserIdentityListResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/user/identity/list/getB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -2842,93 +2727,103 @@ func file_backoffice_service_v1_backoffice_user_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_user_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_user_proto_msgTypes = make([]protoimpl.MessageInfo, 33)
+var file_backoffice_service_v1_backoffice_user_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
 var file_backoffice_service_v1_backoffice_user_proto_goTypes = []any{
-	(*ListUsersRequest)(nil),                          // 0: api.backoffice.service.v1.ListUsersRequest
-	(*ListUsersResponse)(nil),                         // 1: api.backoffice.service.v1.ListUsersResponse
-	(*GetUserOverviewRequest)(nil),                    // 2: api.backoffice.service.v1.GetUserOverviewRequest
-	(*GetUserOverviewResponse)(nil),                   // 3: api.backoffice.service.v1.GetUserOverviewResponse
-	(*GetUserProfileRequest)(nil),                     // 4: api.backoffice.service.v1.GetUserProfileRequest
-	(*GetUserProfileResponse)(nil),                    // 5: api.backoffice.service.v1.GetUserProfileResponse
-	(*AddUserCommentRequest)(nil),                     // 6: api.backoffice.service.v1.AddUserCommentRequest
-	(*AddUserCommentResponse)(nil),                    // 7: api.backoffice.service.v1.AddUserCommentResponse
-	(*ListUserCommentsRequest)(nil),                   // 8: api.backoffice.service.v1.ListUserCommentsRequest
-	(*ListUserCommentsResponse)(nil),                  // 9: api.backoffice.service.v1.ListUserCommentsResponse
-	(*SendEmailVerificationCodeRequest)(nil),          // 10: api.backoffice.service.v1.SendEmailVerificationCodeRequest
-	(*SendEmailVerificationCodeResponse)(nil),         // 11: api.backoffice.service.v1.SendEmailVerificationCodeResponse
-	(*UpdateUserRequest)(nil),                         // 12: api.backoffice.service.v1.UpdateUserRequest
-	(*UpdateUserResponse)(nil),                        // 13: api.backoffice.service.v1.UpdateUserResponse
-	(*SetOperatorTagsConfigRequest)(nil),              // 14: api.backoffice.service.v1.SetOperatorTagsConfigRequest
-	(*SetOperatorTagsConfigResponse)(nil),             // 15: api.backoffice.service.v1.SetOperatorTagsConfigResponse
-	(*SetOperatorTagsRequest)(nil),                    // 16: api.backoffice.service.v1.SetOperatorTagsRequest
-	(*SetOperatorTagsResponse)(nil),                   // 17: api.backoffice.service.v1.SetOperatorTagsResponse
-	(*GetOperatorTagsConfigRequest)(nil),              // 18: api.backoffice.service.v1.GetOperatorTagsConfigRequest
-	(*GetOperatorTagsConfigResponse)(nil),             // 19: api.backoffice.service.v1.GetOperatorTagsConfigResponse
-	(*GetOperatorTagsRequest)(nil),                    // 20: api.backoffice.service.v1.GetOperatorTagsRequest
-	(*GetOperatorTagsResponse)(nil),                   // 21: api.backoffice.service.v1.GetOperatorTagsResponse
-	(*GetUserTagsRequest)(nil),                        // 22: api.backoffice.service.v1.GetUserTagsRequest
-	(*GetUserTagsResponse)(nil),                       // 23: api.backoffice.service.v1.GetUserTagsResponse
-	(*SetUserTagsRequest)(nil),                        // 24: api.backoffice.service.v1.SetUserTagsRequest
-	(*SetUserTagsResponse)(nil),                       // 25: api.backoffice.service.v1.SetUserTagsResponse
-	(*ListUsersResponse_User)(nil),                    // 26: api.backoffice.service.v1.ListUsersResponse.User
-	(*GetUserOverviewResponse_GameData)(nil),          // 27: api.backoffice.service.v1.GetUserOverviewResponse.GameData
-	(*GetUserProfileResponse_IpInfo)(nil),             // 28: api.backoffice.service.v1.GetUserProfileResponse.IpInfo
-	(*GetUserProfileResponse_RegistrationRecord)(nil), // 29: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord
-	(*GetUserProfileResponse_LoginRecord)(nil),        // 30: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord
-	(*GetUserProfileResponse_Comment)(nil),            // 31: api.backoffice.service.v1.GetUserProfileResponse.Comment
-	(*ListUserCommentsResponse_Comment)(nil),          // 32: api.backoffice.service.v1.ListUserCommentsResponse.Comment
-	(*timestamppb.Timestamp)(nil),                     // 33: google.protobuf.Timestamp
-	(*common.OperatorContextFilters)(nil),             // 34: api.common.OperatorContextFilters
+	(*ListUsersRequest)(nil),                           // 0: api.backoffice.service.v1.ListUsersRequest
+	(*ListUsersResponse)(nil),                          // 1: api.backoffice.service.v1.ListUsersResponse
+	(*GetUserOverviewRequest)(nil),                     // 2: api.backoffice.service.v1.GetUserOverviewRequest
+	(*GetUserOverviewResponse)(nil),                    // 3: api.backoffice.service.v1.GetUserOverviewResponse
+	(*GetUserProfileRequest)(nil),                      // 4: api.backoffice.service.v1.GetUserProfileRequest
+	(*AddUserCommentRequest)(nil),                      // 5: api.backoffice.service.v1.AddUserCommentRequest
+	(*AddUserCommentResponse)(nil),                     // 6: api.backoffice.service.v1.AddUserCommentResponse
+	(*ListUserCommentsRequest)(nil),                    // 7: api.backoffice.service.v1.ListUserCommentsRequest
+	(*ListUserCommentsResponse)(nil),                   // 8: api.backoffice.service.v1.ListUserCommentsResponse
+	(*SendEmailVerificationCodeRequest)(nil),           // 9: api.backoffice.service.v1.SendEmailVerificationCodeRequest
+	(*SendEmailVerificationCodeResponse)(nil),          // 10: api.backoffice.service.v1.SendEmailVerificationCodeResponse
+	(*UpdateUserRequest)(nil),                          // 11: api.backoffice.service.v1.UpdateUserRequest
+	(*UpdateUserResponse)(nil),                         // 12: api.backoffice.service.v1.UpdateUserResponse
+	(*SetOperatorTagsConfigRequest)(nil),               // 13: api.backoffice.service.v1.SetOperatorTagsConfigRequest
+	(*SetOperatorTagsConfigResponse)(nil),              // 14: api.backoffice.service.v1.SetOperatorTagsConfigResponse
+	(*SetOperatorTagsRequest)(nil),                     // 15: api.backoffice.service.v1.SetOperatorTagsRequest
+	(*SetOperatorTagsResponse)(nil),                    // 16: api.backoffice.service.v1.SetOperatorTagsResponse
+	(*GetOperatorTagsConfigRequest)(nil),               // 17: api.backoffice.service.v1.GetOperatorTagsConfigRequest
+	(*GetOperatorTagsConfigResponse)(nil),              // 18: api.backoffice.service.v1.GetOperatorTagsConfigResponse
+	(*GetOperatorTagsRequest)(nil),                     // 19: api.backoffice.service.v1.GetOperatorTagsRequest
+	(*GetOperatorTagsResponse)(nil),                    // 20: api.backoffice.service.v1.GetOperatorTagsResponse
+	(*GetUserTagsRequest)(nil),                         // 21: api.backoffice.service.v1.GetUserTagsRequest
+	(*GetUserTagsResponse)(nil),                        // 22: api.backoffice.service.v1.GetUserTagsResponse
+	(*SetUserTagsRequest)(nil),                         // 23: api.backoffice.service.v1.SetUserTagsRequest
+	(*SetUserTagsResponse)(nil),                        // 24: api.backoffice.service.v1.SetUserTagsResponse
+	(*DeleteUserResponsibleGamblingConfigRequest)(nil), // 25: api.backoffice.service.v1.DeleteUserResponsibleGamblingConfigRequest
+	(*GetUserResponsibleGamblingConfigRequest)(nil),    // 26: api.backoffice.service.v1.GetUserResponsibleGamblingConfigRequest
+	(*UserIdentityAuditRequest)(nil),                   // 27: api.backoffice.service.v1.UserIdentityAuditRequest
+	(*UserIdentityListRequest)(nil),                    // 28: api.backoffice.service.v1.UserIdentityListRequest
+	(*ListUsersResponse_User)(nil),                     // 29: api.backoffice.service.v1.ListUsersResponse.User
+	(*GetUserOverviewResponse_GameData)(nil),           // 30: api.backoffice.service.v1.GetUserOverviewResponse.GameData
+	(*ListUserCommentsResponse_Comment)(nil),           // 31: api.backoffice.service.v1.ListUserCommentsResponse.Comment
+	(*timestamppb.Timestamp)(nil),                      // 32: google.protobuf.Timestamp
+	(*common.OperatorContextFilters)(nil),              // 33: api.common.OperatorContextFilters
+	(*v1.UserIdentityRequest)(nil),                     // 34: api.user.service.v1.UserIdentityRequest
+	(*v1.GetUserProfileResponse)(nil),                  // 35: api.user.service.v1.GetUserProfileResponse
+	(*v1.DeleteResponsibleGamblingConfigResponse)(nil), // 36: api.user.service.v1.DeleteResponsibleGamblingConfigResponse
+	(*v1.GetResponsibleGamblingConfigResponse)(nil),    // 37: api.user.service.v1.GetResponsibleGamblingConfigResponse
+	(*v1.UserIdentityAuditResponse)(nil),               // 38: api.user.service.v1.UserIdentityAuditResponse
+	(*v1.UserIdentityListResponse)(nil),                // 39: api.user.service.v1.UserIdentityListResponse
 }
 var file_backoffice_service_v1_backoffice_user_proto_depIdxs = []int32{
-	33, // 0: api.backoffice.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
-	33, // 1: api.backoffice.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
-	34, // 2: api.backoffice.service.v1.ListUsersRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	26, // 3: api.backoffice.service.v1.ListUsersResponse.users:type_name -> api.backoffice.service.v1.ListUsersResponse.User
-	27, // 4: api.backoffice.service.v1.GetUserOverviewResponse.game_data:type_name -> api.backoffice.service.v1.GetUserOverviewResponse.GameData
-	29, // 5: api.backoffice.service.v1.GetUserProfileResponse.registration_record:type_name -> api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord
-	30, // 6: api.backoffice.service.v1.GetUserProfileResponse.login_records:type_name -> api.backoffice.service.v1.GetUserProfileResponse.LoginRecord
-	31, // 7: api.backoffice.service.v1.GetUserProfileResponse.comments:type_name -> api.backoffice.service.v1.GetUserProfileResponse.Comment
-	32, // 8: api.backoffice.service.v1.ListUserCommentsResponse.comments:type_name -> api.backoffice.service.v1.ListUserCommentsResponse.Comment
-	33, // 9: api.backoffice.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
-	33, // 10: api.backoffice.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
-	33, // 11: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord.registered_at:type_name -> google.protobuf.Timestamp
-	28, // 12: api.backoffice.service.v1.GetUserProfileResponse.RegistrationRecord.ip_info:type_name -> api.backoffice.service.v1.GetUserProfileResponse.IpInfo
-	33, // 13: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord.login_at:type_name -> google.protobuf.Timestamp
-	28, // 14: api.backoffice.service.v1.GetUserProfileResponse.LoginRecord.ip_info:type_name -> api.backoffice.service.v1.GetUserProfileResponse.IpInfo
-	33, // 15: api.backoffice.service.v1.GetUserProfileResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
-	33, // 16: api.backoffice.service.v1.ListUserCommentsResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
-	0,  // 17: api.backoffice.service.v1.BackofficeUser.ListUsers:input_type -> api.backoffice.service.v1.ListUsersRequest
-	2,  // 18: api.backoffice.service.v1.BackofficeUser.GetUserOverview:input_type -> api.backoffice.service.v1.GetUserOverviewRequest
-	4,  // 19: api.backoffice.service.v1.BackofficeUser.GetUserProfile:input_type -> api.backoffice.service.v1.GetUserProfileRequest
-	6,  // 20: api.backoffice.service.v1.BackofficeUser.AddUserComment:input_type -> api.backoffice.service.v1.AddUserCommentRequest
-	8,  // 21: api.backoffice.service.v1.BackofficeUser.ListUserComments:input_type -> api.backoffice.service.v1.ListUserCommentsRequest
-	10, // 22: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:input_type -> api.backoffice.service.v1.SendEmailVerificationCodeRequest
-	12, // 23: api.backoffice.service.v1.BackofficeUser.UpdateUser:input_type -> api.backoffice.service.v1.UpdateUserRequest
-	14, // 24: api.backoffice.service.v1.BackofficeUser.SetOperatorTagsConfig:input_type -> api.backoffice.service.v1.SetOperatorTagsConfigRequest
-	16, // 25: api.backoffice.service.v1.BackofficeUser.SetOperatorTags:input_type -> api.backoffice.service.v1.SetOperatorTagsRequest
-	18, // 26: api.backoffice.service.v1.BackofficeUser.GetOperatorTagsConfig:input_type -> api.backoffice.service.v1.GetOperatorTagsConfigRequest
-	20, // 27: api.backoffice.service.v1.BackofficeUser.GetOperatorTags:input_type -> api.backoffice.service.v1.GetOperatorTagsRequest
-	22, // 28: api.backoffice.service.v1.BackofficeUser.GetUserTags:input_type -> api.backoffice.service.v1.GetUserTagsRequest
-	24, // 29: api.backoffice.service.v1.BackofficeUser.SetUserTags:input_type -> api.backoffice.service.v1.SetUserTagsRequest
-	1,  // 30: api.backoffice.service.v1.BackofficeUser.ListUsers:output_type -> api.backoffice.service.v1.ListUsersResponse
-	3,  // 31: api.backoffice.service.v1.BackofficeUser.GetUserOverview:output_type -> api.backoffice.service.v1.GetUserOverviewResponse
-	5,  // 32: api.backoffice.service.v1.BackofficeUser.GetUserProfile:output_type -> api.backoffice.service.v1.GetUserProfileResponse
-	7,  // 33: api.backoffice.service.v1.BackofficeUser.AddUserComment:output_type -> api.backoffice.service.v1.AddUserCommentResponse
-	9,  // 34: api.backoffice.service.v1.BackofficeUser.ListUserComments:output_type -> api.backoffice.service.v1.ListUserCommentsResponse
-	11, // 35: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:output_type -> api.backoffice.service.v1.SendEmailVerificationCodeResponse
-	13, // 36: api.backoffice.service.v1.BackofficeUser.UpdateUser:output_type -> api.backoffice.service.v1.UpdateUserResponse
-	15, // 37: api.backoffice.service.v1.BackofficeUser.SetOperatorTagsConfig:output_type -> api.backoffice.service.v1.SetOperatorTagsConfigResponse
-	17, // 38: api.backoffice.service.v1.BackofficeUser.SetOperatorTags:output_type -> api.backoffice.service.v1.SetOperatorTagsResponse
-	19, // 39: api.backoffice.service.v1.BackofficeUser.GetOperatorTagsConfig:output_type -> api.backoffice.service.v1.GetOperatorTagsConfigResponse
-	21, // 40: api.backoffice.service.v1.BackofficeUser.GetOperatorTags:output_type -> api.backoffice.service.v1.GetOperatorTagsResponse
-	23, // 41: api.backoffice.service.v1.BackofficeUser.GetUserTags:output_type -> api.backoffice.service.v1.GetUserTagsResponse
-	25, // 42: api.backoffice.service.v1.BackofficeUser.SetUserTags:output_type -> api.backoffice.service.v1.SetUserTagsResponse
-	30, // [30:43] is the sub-list for method output_type
-	17, // [17:30] is the sub-list for method input_type
-	17, // [17:17] is the sub-list for extension type_name
-	17, // [17:17] is the sub-list for extension extendee
-	0,  // [0:17] is the sub-list for field type_name
+	32, // 0: api.backoffice.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
+	32, // 1: api.backoffice.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
+	33, // 2: api.backoffice.service.v1.ListUsersRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	29, // 3: api.backoffice.service.v1.ListUsersResponse.users:type_name -> api.backoffice.service.v1.ListUsersResponse.User
+	30, // 4: api.backoffice.service.v1.GetUserOverviewResponse.game_data:type_name -> api.backoffice.service.v1.GetUserOverviewResponse.GameData
+	31, // 5: api.backoffice.service.v1.ListUserCommentsResponse.comments:type_name -> api.backoffice.service.v1.ListUserCommentsResponse.Comment
+	34, // 6: api.backoffice.service.v1.UpdateUserRequest.user_identity:type_name -> api.user.service.v1.UserIdentityRequest
+	32, // 7: api.backoffice.service.v1.UpdateUserRequest.bod:type_name -> google.protobuf.Timestamp
+	32, // 8: api.backoffice.service.v1.UserIdentityListRequest.start_time:type_name -> google.protobuf.Timestamp
+	32, // 9: api.backoffice.service.v1.UserIdentityListRequest.end_time:type_name -> google.protobuf.Timestamp
+	33, // 10: api.backoffice.service.v1.UserIdentityListRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	32, // 11: api.backoffice.service.v1.ListUsersResponse.User.last_login_at:type_name -> google.protobuf.Timestamp
+	32, // 12: api.backoffice.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
+	32, // 13: api.backoffice.service.v1.ListUserCommentsResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 14: api.backoffice.service.v1.BackofficeUser.ListUsers:input_type -> api.backoffice.service.v1.ListUsersRequest
+	2,  // 15: api.backoffice.service.v1.BackofficeUser.GetUserOverview:input_type -> api.backoffice.service.v1.GetUserOverviewRequest
+	4,  // 16: api.backoffice.service.v1.BackofficeUser.GetUserProfile:input_type -> api.backoffice.service.v1.GetUserProfileRequest
+	5,  // 17: api.backoffice.service.v1.BackofficeUser.AddUserComment:input_type -> api.backoffice.service.v1.AddUserCommentRequest
+	7,  // 18: api.backoffice.service.v1.BackofficeUser.ListUserComments:input_type -> api.backoffice.service.v1.ListUserCommentsRequest
+	9,  // 19: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:input_type -> api.backoffice.service.v1.SendEmailVerificationCodeRequest
+	11, // 20: api.backoffice.service.v1.BackofficeUser.UpdateUser:input_type -> api.backoffice.service.v1.UpdateUserRequest
+	13, // 21: api.backoffice.service.v1.BackofficeUser.SetOperatorTagsConfig:input_type -> api.backoffice.service.v1.SetOperatorTagsConfigRequest
+	15, // 22: api.backoffice.service.v1.BackofficeUser.SetOperatorTags:input_type -> api.backoffice.service.v1.SetOperatorTagsRequest
+	17, // 23: api.backoffice.service.v1.BackofficeUser.GetOperatorTagsConfig:input_type -> api.backoffice.service.v1.GetOperatorTagsConfigRequest
+	19, // 24: api.backoffice.service.v1.BackofficeUser.GetOperatorTags:input_type -> api.backoffice.service.v1.GetOperatorTagsRequest
+	21, // 25: api.backoffice.service.v1.BackofficeUser.GetUserTags:input_type -> api.backoffice.service.v1.GetUserTagsRequest
+	23, // 26: api.backoffice.service.v1.BackofficeUser.SetUserTags:input_type -> api.backoffice.service.v1.SetUserTagsRequest
+	25, // 27: api.backoffice.service.v1.BackofficeUser.DeleteUserResponsibleGamblingConfig:input_type -> api.backoffice.service.v1.DeleteUserResponsibleGamblingConfigRequest
+	26, // 28: api.backoffice.service.v1.BackofficeUser.GetUserResponsibleGamblingConfig:input_type -> api.backoffice.service.v1.GetUserResponsibleGamblingConfigRequest
+	27, // 29: api.backoffice.service.v1.BackofficeUser.UserIdentityAudit:input_type -> api.backoffice.service.v1.UserIdentityAuditRequest
+	28, // 30: api.backoffice.service.v1.BackofficeUser.UserIdentityList:input_type -> api.backoffice.service.v1.UserIdentityListRequest
+	1,  // 31: api.backoffice.service.v1.BackofficeUser.ListUsers:output_type -> api.backoffice.service.v1.ListUsersResponse
+	3,  // 32: api.backoffice.service.v1.BackofficeUser.GetUserOverview:output_type -> api.backoffice.service.v1.GetUserOverviewResponse
+	35, // 33: api.backoffice.service.v1.BackofficeUser.GetUserProfile:output_type -> api.user.service.v1.GetUserProfileResponse
+	6,  // 34: api.backoffice.service.v1.BackofficeUser.AddUserComment:output_type -> api.backoffice.service.v1.AddUserCommentResponse
+	8,  // 35: api.backoffice.service.v1.BackofficeUser.ListUserComments:output_type -> api.backoffice.service.v1.ListUserCommentsResponse
+	10, // 36: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:output_type -> api.backoffice.service.v1.SendEmailVerificationCodeResponse
+	12, // 37: api.backoffice.service.v1.BackofficeUser.UpdateUser:output_type -> api.backoffice.service.v1.UpdateUserResponse
+	14, // 38: api.backoffice.service.v1.BackofficeUser.SetOperatorTagsConfig:output_type -> api.backoffice.service.v1.SetOperatorTagsConfigResponse
+	16, // 39: api.backoffice.service.v1.BackofficeUser.SetOperatorTags:output_type -> api.backoffice.service.v1.SetOperatorTagsResponse
+	18, // 40: api.backoffice.service.v1.BackofficeUser.GetOperatorTagsConfig:output_type -> api.backoffice.service.v1.GetOperatorTagsConfigResponse
+	20, // 41: api.backoffice.service.v1.BackofficeUser.GetOperatorTags:output_type -> api.backoffice.service.v1.GetOperatorTagsResponse
+	22, // 42: api.backoffice.service.v1.BackofficeUser.GetUserTags:output_type -> api.backoffice.service.v1.GetUserTagsResponse
+	24, // 43: api.backoffice.service.v1.BackofficeUser.SetUserTags:output_type -> api.backoffice.service.v1.SetUserTagsResponse
+	36, // 44: api.backoffice.service.v1.BackofficeUser.DeleteUserResponsibleGamblingConfig:output_type -> api.user.service.v1.DeleteResponsibleGamblingConfigResponse
+	37, // 45: api.backoffice.service.v1.BackofficeUser.GetUserResponsibleGamblingConfig:output_type -> api.user.service.v1.GetResponsibleGamblingConfigResponse
+	38, // 46: api.backoffice.service.v1.BackofficeUser.UserIdentityAudit:output_type -> api.user.service.v1.UserIdentityAuditResponse
+	39, // 47: api.backoffice.service.v1.BackofficeUser.UserIdentityList:output_type -> api.user.service.v1.UserIdentityListResponse
+	31, // [31:48] is the sub-list for method output_type
+	14, // [14:31] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_user_proto_init() }
@@ -2939,14 +2834,15 @@ func file_backoffice_service_v1_backoffice_user_proto_init() {
 	file_backoffice_service_v1_backoffice_user_proto_msgTypes[0].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_user_proto_msgTypes[2].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_user_proto_msgTypes[4].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_user_proto_msgTypes[12].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_user_proto_msgTypes[11].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_user_proto_msgTypes[28].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_user_proto_rawDesc), len(file_backoffice_service_v1_backoffice_user_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   33,
+			NumMessages:   32,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

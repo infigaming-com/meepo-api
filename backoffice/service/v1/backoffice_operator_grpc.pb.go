@@ -35,6 +35,11 @@ const (
 	BackofficeOperator_DeleteOperatorBackofficeByoSubdomain_FullMethodName = "/api.backoffice.service.v1.BackofficeOperator/DeleteOperatorBackofficeByoSubdomain"
 	BackofficeOperator_GetOperatorAccountSettings_FullMethodName           = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorAccountSettings"
 	BackofficeOperator_UpdateOperatorAccountSettings_FullMethodName        = "/api.backoffice.service.v1.BackofficeOperator/UpdateOperatorAccountSettings"
+	BackofficeOperator_AddRegisterLoginBlacklist_FullMethodName            = "/api.backoffice.service.v1.BackofficeOperator/AddRegisterLoginBlacklist"
+	BackofficeOperator_DeleteRegisterLoginBlacklist_FullMethodName         = "/api.backoffice.service.v1.BackofficeOperator/DeleteRegisterLoginBlacklist"
+	BackofficeOperator_ListRegisterLoginBlacklist_FullMethodName           = "/api.backoffice.service.v1.BackofficeOperator/ListRegisterLoginBlacklist"
+	BackofficeOperator_SetOperatorRegisterLimitConfig_FullMethodName       = "/api.backoffice.service.v1.BackofficeOperator/SetOperatorRegisterLimitConfig"
+	BackofficeOperator_GetOperatorRegisterLimitConfig_FullMethodName       = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorRegisterLimitConfig"
 )
 
 // BackofficeOperatorClient is the client API for BackofficeOperator service.
@@ -67,6 +72,11 @@ type BackofficeOperatorClient interface {
 	DeleteOperatorBackofficeByoSubdomain(ctx context.Context, in *DeleteOperatorBackofficeByoSubdomainRequest, opts ...grpc.CallOption) (*DeleteOperatorBackofficeByoSubdomainResponse, error)
 	GetOperatorAccountSettings(ctx context.Context, in *GetOperatorAccountSettingsRequest, opts ...grpc.CallOption) (*v1.GetOperatorAccountSettingsResponse, error)
 	UpdateOperatorAccountSettings(ctx context.Context, in *UpdateOperatorAccountSettingsRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorAccountSettingsResponse, error)
+	AddRegisterLoginBlacklist(ctx context.Context, in *AddRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*v1.AddRegisterLoginBlacklistResponse, error)
+	DeleteRegisterLoginBlacklist(ctx context.Context, in *DeleteRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*v1.DeleteRegisterLoginBlacklistResponse, error)
+	ListRegisterLoginBlacklist(ctx context.Context, in *ListRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*v1.ListRegisterLoginBlacklistResponse, error)
+	SetOperatorRegisterLimitConfig(ctx context.Context, in *SetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*v1.SetOperatorRegisterLimitConfigResponse, error)
+	GetOperatorRegisterLimitConfig(ctx context.Context, in *GetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*v1.GetOperatorRegisterLimitConfigResponse, error)
 }
 
 type backofficeOperatorClient struct {
@@ -227,6 +237,56 @@ func (c *backofficeOperatorClient) UpdateOperatorAccountSettings(ctx context.Con
 	return out, nil
 }
 
+func (c *backofficeOperatorClient) AddRegisterLoginBlacklist(ctx context.Context, in *AddRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*v1.AddRegisterLoginBlacklistResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.AddRegisterLoginBlacklistResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_AddRegisterLoginBlacklist_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeOperatorClient) DeleteRegisterLoginBlacklist(ctx context.Context, in *DeleteRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*v1.DeleteRegisterLoginBlacklistResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.DeleteRegisterLoginBlacklistResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_DeleteRegisterLoginBlacklist_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeOperatorClient) ListRegisterLoginBlacklist(ctx context.Context, in *ListRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*v1.ListRegisterLoginBlacklistResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListRegisterLoginBlacklistResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_ListRegisterLoginBlacklist_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeOperatorClient) SetOperatorRegisterLimitConfig(ctx context.Context, in *SetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*v1.SetOperatorRegisterLimitConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.SetOperatorRegisterLimitConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_SetOperatorRegisterLimitConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeOperatorClient) GetOperatorRegisterLimitConfig(ctx context.Context, in *GetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*v1.GetOperatorRegisterLimitConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetOperatorRegisterLimitConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_GetOperatorRegisterLimitConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeOperatorServer is the server API for BackofficeOperator service.
 // All implementations must embed UnimplementedBackofficeOperatorServer
 // for forward compatibility.
@@ -257,6 +317,11 @@ type BackofficeOperatorServer interface {
 	DeleteOperatorBackofficeByoSubdomain(context.Context, *DeleteOperatorBackofficeByoSubdomainRequest) (*DeleteOperatorBackofficeByoSubdomainResponse, error)
 	GetOperatorAccountSettings(context.Context, *GetOperatorAccountSettingsRequest) (*v1.GetOperatorAccountSettingsResponse, error)
 	UpdateOperatorAccountSettings(context.Context, *UpdateOperatorAccountSettingsRequest) (*v1.UpdateOperatorAccountSettingsResponse, error)
+	AddRegisterLoginBlacklist(context.Context, *AddRegisterLoginBlacklistRequest) (*v1.AddRegisterLoginBlacklistResponse, error)
+	DeleteRegisterLoginBlacklist(context.Context, *DeleteRegisterLoginBlacklistRequest) (*v1.DeleteRegisterLoginBlacklistResponse, error)
+	ListRegisterLoginBlacklist(context.Context, *ListRegisterLoginBlacklistRequest) (*v1.ListRegisterLoginBlacklistResponse, error)
+	SetOperatorRegisterLimitConfig(context.Context, *SetOperatorRegisterLimitConfigRequest) (*v1.SetOperatorRegisterLimitConfigResponse, error)
+	GetOperatorRegisterLimitConfig(context.Context, *GetOperatorRegisterLimitConfigRequest) (*v1.GetOperatorRegisterLimitConfigResponse, error)
 	mustEmbedUnimplementedBackofficeOperatorServer()
 }
 
@@ -311,6 +376,21 @@ func (UnimplementedBackofficeOperatorServer) GetOperatorAccountSettings(context.
 }
 func (UnimplementedBackofficeOperatorServer) UpdateOperatorAccountSettings(context.Context, *UpdateOperatorAccountSettingsRequest) (*v1.UpdateOperatorAccountSettingsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOperatorAccountSettings not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) AddRegisterLoginBlacklist(context.Context, *AddRegisterLoginBlacklistRequest) (*v1.AddRegisterLoginBlacklistResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddRegisterLoginBlacklist not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) DeleteRegisterLoginBlacklist(context.Context, *DeleteRegisterLoginBlacklistRequest) (*v1.DeleteRegisterLoginBlacklistResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteRegisterLoginBlacklist not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) ListRegisterLoginBlacklist(context.Context, *ListRegisterLoginBlacklistRequest) (*v1.ListRegisterLoginBlacklistResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListRegisterLoginBlacklist not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) SetOperatorRegisterLimitConfig(context.Context, *SetOperatorRegisterLimitConfigRequest) (*v1.SetOperatorRegisterLimitConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetOperatorRegisterLimitConfig not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) GetOperatorRegisterLimitConfig(context.Context, *GetOperatorRegisterLimitConfigRequest) (*v1.GetOperatorRegisterLimitConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorRegisterLimitConfig not implemented")
 }
 func (UnimplementedBackofficeOperatorServer) mustEmbedUnimplementedBackofficeOperatorServer() {}
 func (UnimplementedBackofficeOperatorServer) testEmbeddedByValue()                            {}
@@ -603,6 +683,96 @@ func _BackofficeOperator_UpdateOperatorAccountSettings_Handler(srv interface{}, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeOperator_AddRegisterLoginBlacklist_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddRegisterLoginBlacklistRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).AddRegisterLoginBlacklist(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_AddRegisterLoginBlacklist_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).AddRegisterLoginBlacklist(ctx, req.(*AddRegisterLoginBlacklistRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeOperator_DeleteRegisterLoginBlacklist_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteRegisterLoginBlacklistRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).DeleteRegisterLoginBlacklist(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_DeleteRegisterLoginBlacklist_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).DeleteRegisterLoginBlacklist(ctx, req.(*DeleteRegisterLoginBlacklistRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeOperator_ListRegisterLoginBlacklist_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListRegisterLoginBlacklistRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).ListRegisterLoginBlacklist(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_ListRegisterLoginBlacklist_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).ListRegisterLoginBlacklist(ctx, req.(*ListRegisterLoginBlacklistRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeOperator_SetOperatorRegisterLimitConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetOperatorRegisterLimitConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).SetOperatorRegisterLimitConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_SetOperatorRegisterLimitConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).SetOperatorRegisterLimitConfig(ctx, req.(*SetOperatorRegisterLimitConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeOperator_GetOperatorRegisterLimitConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorRegisterLimitConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).GetOperatorRegisterLimitConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_GetOperatorRegisterLimitConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).GetOperatorRegisterLimitConfig(ctx, req.(*GetOperatorRegisterLimitConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeOperator_ServiceDesc is the grpc.ServiceDesc for BackofficeOperator service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -669,6 +839,26 @@ var BackofficeOperator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateOperatorAccountSettings",
 			Handler:    _BackofficeOperator_UpdateOperatorAccountSettings_Handler,
+		},
+		{
+			MethodName: "AddRegisterLoginBlacklist",
+			Handler:    _BackofficeOperator_AddRegisterLoginBlacklist_Handler,
+		},
+		{
+			MethodName: "DeleteRegisterLoginBlacklist",
+			Handler:    _BackofficeOperator_DeleteRegisterLoginBlacklist_Handler,
+		},
+		{
+			MethodName: "ListRegisterLoginBlacklist",
+			Handler:    _BackofficeOperator_ListRegisterLoginBlacklist_Handler,
+		},
+		{
+			MethodName: "SetOperatorRegisterLimitConfig",
+			Handler:    _BackofficeOperator_SetOperatorRegisterLimitConfig_Handler,
+		},
+		{
+			MethodName: "GetOperatorRegisterLimitConfig",
+			Handler:    _BackofficeOperator_GetOperatorRegisterLimitConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

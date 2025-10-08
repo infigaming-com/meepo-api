@@ -47,7 +47,9 @@ const (
 	Payment_DeleteUsesrBankCard_FullMethodName              = "/payment.service.v1.Payment/DeleteUsesrBankCard"
 	Payment_GetBankSchema_FullMethodName                    = "/payment.service.v1.Payment/GetBankSchema"
 	Payment_BuyCryptoViaFiatCurrentList_FullMethodName      = "/payment.service.v1.Payment/BuyCryptoViaFiatCurrentList"
+	Payment_BuyCryptoViaFiatPriceQuery_FullMethodName       = "/payment.service.v1.Payment/BuyCryptoViaFiatPriceQuery"
 	Payment_BuyCryptoViaFiat_FullMethodName                 = "/payment.service.v1.Payment/BuyCryptoViaFiat"
+	Payment_GetResponsibleGamblingStatus_FullMethodName     = "/payment.service.v1.Payment/GetResponsibleGamblingStatus"
 )
 
 // PaymentClient is the client API for Payment service.
@@ -134,7 +136,9 @@ type PaymentClient interface {
 	DeleteUsesrBankCard(ctx context.Context, in *DeleteBankCardRequest, opts ...grpc.CallOption) (*DeleteBankCardResponse, error)
 	GetBankSchema(ctx context.Context, in *GetBankSchemaRequest, opts ...grpc.CallOption) (*GetBankSchemaResponse, error)
 	BuyCryptoViaFiatCurrentList(ctx context.Context, in *BuyCryptoViaFiatCurrentListRequest, opts ...grpc.CallOption) (*BuyCryptoViaFiatCurrentListResponse, error)
+	BuyCryptoViaFiatPriceQuery(ctx context.Context, in *BuyCryptoViaFiatPriceQueryRequest, opts ...grpc.CallOption) (*BuyCryptoViaFiatPriceQueryResponse, error)
 	BuyCryptoViaFiat(ctx context.Context, in *BuyCryptoViaFiatRequest, opts ...grpc.CallOption) (*BuyCryptoViaFiatResponse, error)
+	GetResponsibleGamblingStatus(ctx context.Context, in *GetResponsibleGamblingStatusRequest, opts ...grpc.CallOption) (*GetResponsibleGamblingStatusResponse, error)
 }
 
 type paymentClient struct {
@@ -425,10 +429,30 @@ func (c *paymentClient) BuyCryptoViaFiatCurrentList(ctx context.Context, in *Buy
 	return out, nil
 }
 
+func (c *paymentClient) BuyCryptoViaFiatPriceQuery(ctx context.Context, in *BuyCryptoViaFiatPriceQueryRequest, opts ...grpc.CallOption) (*BuyCryptoViaFiatPriceQueryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BuyCryptoViaFiatPriceQueryResponse)
+	err := c.cc.Invoke(ctx, Payment_BuyCryptoViaFiatPriceQuery_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *paymentClient) BuyCryptoViaFiat(ctx context.Context, in *BuyCryptoViaFiatRequest, opts ...grpc.CallOption) (*BuyCryptoViaFiatResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(BuyCryptoViaFiatResponse)
 	err := c.cc.Invoke(ctx, Payment_BuyCryptoViaFiat_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) GetResponsibleGamblingStatus(ctx context.Context, in *GetResponsibleGamblingStatusRequest, opts ...grpc.CallOption) (*GetResponsibleGamblingStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetResponsibleGamblingStatusResponse)
+	err := c.cc.Invoke(ctx, Payment_GetResponsibleGamblingStatus_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -519,7 +543,9 @@ type PaymentServer interface {
 	DeleteUsesrBankCard(context.Context, *DeleteBankCardRequest) (*DeleteBankCardResponse, error)
 	GetBankSchema(context.Context, *GetBankSchemaRequest) (*GetBankSchemaResponse, error)
 	BuyCryptoViaFiatCurrentList(context.Context, *BuyCryptoViaFiatCurrentListRequest) (*BuyCryptoViaFiatCurrentListResponse, error)
+	BuyCryptoViaFiatPriceQuery(context.Context, *BuyCryptoViaFiatPriceQueryRequest) (*BuyCryptoViaFiatPriceQueryResponse, error)
 	BuyCryptoViaFiat(context.Context, *BuyCryptoViaFiatRequest) (*BuyCryptoViaFiatResponse, error)
+	GetResponsibleGamblingStatus(context.Context, *GetResponsibleGamblingStatusRequest) (*GetResponsibleGamblingStatusResponse, error)
 	mustEmbedUnimplementedPaymentServer()
 }
 
@@ -614,8 +640,14 @@ func (UnimplementedPaymentServer) GetBankSchema(context.Context, *GetBankSchemaR
 func (UnimplementedPaymentServer) BuyCryptoViaFiatCurrentList(context.Context, *BuyCryptoViaFiatCurrentListRequest) (*BuyCryptoViaFiatCurrentListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BuyCryptoViaFiatCurrentList not implemented")
 }
+func (UnimplementedPaymentServer) BuyCryptoViaFiatPriceQuery(context.Context, *BuyCryptoViaFiatPriceQueryRequest) (*BuyCryptoViaFiatPriceQueryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BuyCryptoViaFiatPriceQuery not implemented")
+}
 func (UnimplementedPaymentServer) BuyCryptoViaFiat(context.Context, *BuyCryptoViaFiatRequest) (*BuyCryptoViaFiatResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BuyCryptoViaFiat not implemented")
+}
+func (UnimplementedPaymentServer) GetResponsibleGamblingStatus(context.Context, *GetResponsibleGamblingStatusRequest) (*GetResponsibleGamblingStatusResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetResponsibleGamblingStatus not implemented")
 }
 func (UnimplementedPaymentServer) mustEmbedUnimplementedPaymentServer() {}
 func (UnimplementedPaymentServer) testEmbeddedByValue()                 {}
@@ -1142,6 +1174,24 @@ func _Payment_BuyCryptoViaFiatCurrentList_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Payment_BuyCryptoViaFiatPriceQuery_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BuyCryptoViaFiatPriceQueryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).BuyCryptoViaFiatPriceQuery(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_BuyCryptoViaFiatPriceQuery_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).BuyCryptoViaFiatPriceQuery(ctx, req.(*BuyCryptoViaFiatPriceQueryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Payment_BuyCryptoViaFiat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(BuyCryptoViaFiatRequest)
 	if err := dec(in); err != nil {
@@ -1156,6 +1206,24 @@ func _Payment_BuyCryptoViaFiat_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PaymentServer).BuyCryptoViaFiat(ctx, req.(*BuyCryptoViaFiatRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_GetResponsibleGamblingStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetResponsibleGamblingStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).GetResponsibleGamblingStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_GetResponsibleGamblingStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).GetResponsibleGamblingStatus(ctx, req.(*GetResponsibleGamblingStatusRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1280,8 +1348,16 @@ var Payment_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Payment_BuyCryptoViaFiatCurrentList_Handler,
 		},
 		{
+			MethodName: "BuyCryptoViaFiatPriceQuery",
+			Handler:    _Payment_BuyCryptoViaFiatPriceQuery_Handler,
+		},
+		{
 			MethodName: "BuyCryptoViaFiat",
 			Handler:    _Payment_BuyCryptoViaFiat_Handler,
+		},
+		{
+			MethodName: "GetResponsibleGamblingStatus",
+			Handler:    _Payment_GetResponsibleGamblingStatus_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

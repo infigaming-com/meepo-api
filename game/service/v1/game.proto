@@ -115,6 +115,63 @@ service Game {
 
 	rpc ListProviderByIDs(ListProviderByIDsRequest) returns (ListProviderByIDsResponse) {
 	}
+
+	// Tax Report related APIs
+	rpc GetTaxReportConfig(GetTaxReportConfigRequest) returns (GetTaxReportConfigResponse) {
+	}
+
+	rpc UpdateTaxReportConfig(UpdateTaxReportConfigRequest) returns (UpdateTaxReportConfigResponse) {
+	}
+
+	rpc ListTaxReports(ListTaxReportsRequest) returns (ListTaxReportsResponse) {
+	}
+
+	rpc UpdateTaxReport(UpdateTaxReportRequest) returns (UpdateTaxReportResponse) {
+	}
+
+	rpc GetResponsibleGamblingStatus(GetResponsibleGamblingStatusRequest) returns (GetResponsibleGamblingStatusResponse) {
+	}
+
+	rpc ListUnpaidBets(ListUnpaidBetsRequest) returns (ListUnpaidBetsResponse) {
+	}
+
+	rpc ExportUnpaidBets(ExportUnpaidBetsRequest) returns (ExportUnpaidBetsResponse) {
+	}
+
+	rpc ListMultipleBets(ListMultipleBetsRequest) returns (ListMultipleBetsResponse) {
+	}
+
+	rpc ExportMultipleBets(ExportMultipleBetsRequest) returns (ExportMultipleBetsResponse) {
+	}
+
+	rpc ListStakeVarianceBets(ListStakeVarianceBetsRequest) returns (ListStakeVarianceBetsResponse) {
+	}
+
+	rpc ExportStakeVarianceBets(ExportStakeVarianceBetsRequest) returns (ExportStakeVarianceBetsResponse) {
+	}
+
+	// Sport Events related APIs
+	rpc ListSportEvents(ListSportEventsRequest) returns (ListSportEventsResponse) {
+	}
+
+	rpc ExportSportEvents(ExportSportEventsRequest) returns (ExportSportEventsResponse) {
+	}
+
+	rpc GetBetAndEventInfo(GetBetAndEventInfoRequest) returns (GetBetAndEventInfoResponse) {
+	}
+
+	rpc GetTransactionAndEventInfo(GetTransactionAndEventInfoRequest) returns (GetTransactionAndEventInfoResponse) {
+	}
+
+	// Customer Strike Report related APIs
+	rpc ListCustomerStrikeReports(ListCustomerStrikeReportsRequest) returns (ListCustomerStrikeReportsResponse) {
+	}
+
+	rpc ExportCustomerStrikeReports(ExportCustomerStrikeReportsRequest) returns (ExportCustomerStrikeReportsResponse) {
+	}
+
+	rpc CreateTaxReport(CreateTaxReportRequest) returns (CreateTaxReportResponse) {
+	}
 }
 
 message CreateOperatorRequest {
@@ -371,6 +428,8 @@ message Action {
 	int64 bet_time = 11;
 	int64 settle_time = 12;
 	int64 provider_timestamp = 13;
+	bool finished = 14;
+	string extra = 15;
 }
 
 message Transactions {
@@ -729,6 +788,7 @@ message ListProviderRatesRequest {
 	int32 page = 4;
 	int32 page_size = 5;
 	api.common.OperatorContext operator_context = 6;
+	api.common.OperatorContext target_operator_context = 7;
 }
 
 message ListProviderRatesResponse {
@@ -738,6 +798,8 @@ message ListProviderRatesResponse {
 		string fee_group = 3;
 		string currency = 4;
 		string rate = 5;
+		int64 operator_id = 6;
+		string operator_name = 7;
 	}
 	repeated ProviderRate provider_rates = 1;
 	int32 page = 2;
@@ -787,4 +849,670 @@ message ListProviderByIDsResponse {
 		bool enabled = 3;
 	}
 	repeated Provider providers = 1;
+}
+
+message GetTaxReportConfigRequest {
+	string type = 1;
+}
+
+message GetTaxReportConfigResponse {
+	// config is a json string
+	// example:
+	// {
+	//	"timezone": "UTC+0",
+	//	"report_generation_time": {
+	//		"monthly": "2nd of each month",
+	//		"quarterly": "2nd of each quarter",
+	//		"yearly": "2nd of each year"
+	//	},
+	//	"tax_currency": "ZAR",
+	//	"user_registration_countries": ["US", "ZA", "TR", "VN"],
+	//	"user_currencies": ["USD", "EUR", "INR", "ZAR", "USDT"],
+	//  "vat_payable": 6.5,
+	//  "tax_for_sportsbook_and_other_contingencies": 6.5,
+	//  "tax_for_horse_racing": 6.5,
+	//	}
+	string config = 1;
+}
+
+message UpdateTaxReportConfigRequest {
+	// type: south_afirca
+	string type = 1;
+	// config is a json string
+	// example:
+	// {
+	//	"timezone": "UTC+0",
+	//	"report_generation_time": {
+	//		"monthly": "2nd of each month",
+	//		"quarterly": "2nd of each quarter",
+	//		"yearly": "2nd of each year"
+	//	},
+	//	"tax_currency": "ZAR",
+	//	"user_registration_countries": ["US", "ZA", "TR", "VN"],
+	//	"user_currencies": ["USD", "EUR", "INR", "ZAR", "USDT"],
+	//  "vat_payable": 6.5,
+	//  "tax_for_sportsbook_and_other_contingencies": 6.5,
+	//  "tax_for_horse_racing": 6.5,
+	//	}
+	string config = 2;
+}
+
+message UpdateTaxReportConfigResponse {
+}
+
+message ListTaxReportsRequest {
+	optional int32 page = 1;
+	optional int32 page_size = 2;
+	string tax_period = 3;
+	// license_provider: south_afirca
+	string report_category = 4;
+	optional string period_type = 5;
+}
+
+message ListTaxReportsResponse {
+	message TaxReport {
+		// Basic information
+		string report_category = 1; // e.g., "horse_racing","sportsbook_and_other_contingencies"
+		string licensed_operator = 2; // e.g., "playing.io"
+		string tax_period = 3; // Format: YYYY-MM (e.g., "2025-08")
+
+		// Deposit information
+		string deposit_date = 4; // Format: YYYY-MM-DD or "-" if empty
+		string deposit_slip_no = 5; // e.g., "DSL-202508-003" or "-" if empty
+		string ref_code = 6; // e.g., "DSL-HR-202508-002" or "-" if empty
+
+		// Financial data (all amounts in ZAR)
+		int64 hold_total_stake = 7; // e.g., "1,800,000"
+		int64 winning_stakes = 8; // e.g., "1,200,000"
+		int64 punter_winnings_loss = 9; // e.g., "520,000"
+		int64 profit_loss = 10; // e.g., "108,000"
+		int64 total_tax_levy = 11; // e.g., "108,000"
+		int64 vat_payable_receivable = 12; // e.g., "16,200"
+		int64 event_calculations = 13; // e.g., "124,200"
+
+		TaxReportRecordStatus status = 14;
+		
+		// Timestamps
+		int64 created_at = 15;
+		int64 updated_at = 16;
+		int64 id = 17;
+	}
+
+	repeated TaxReport tax_reports = 1;
+	int32 total_count = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}
+
+// Tax report record status
+enum TaxReportRecordStatus {
+	TaxReportRecordStatus_PENDING = 0;
+	TaxReportRecordStatus_CONFIRMED = 1;
+}
+
+message UpdateTaxReportRequest {
+	int64 id = 1;
+	string deposit_date = 2;
+	string deposit_slip_no = 3;
+	string ref_code = 4;
+	TaxReportRecordStatus status = 5;
+}
+
+message UpdateTaxReportResponse {
+}
+
+message GetResponsibleGamblingStatusRequest {
+	int64 user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+}
+
+message GetResponsibleGamblingStatusResponse {
+	message ResponsibleGamblingStatus {
+		string currency = 1;
+		string daily_play_usage = 2;
+		string weekly_play_usage = 3;
+		string monthly_play_usage = 4;
+		string daily_loss_usage = 5;
+		string weekly_loss_usage = 6;
+		string monthly_loss_usage = 7;
+	}
+	repeated ResponsibleGamblingStatus responsible_gambling_statuses = 1;
+}
+
+message ListUnpaidBetsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional int64 transaction_id = 4;
+	optional int32 page = 5;
+	optional int32 page_size = 6;
+	api.common.OperatorContext operator_context = 7;
+	api.common.OperatorContextFilters operator_context_filters = 8;
+}
+
+message ListUnpaidBetsResponse {
+	message UnpaidBet {
+		google.protobuf.Timestamp create_date_time = 1;
+		google.protobuf.Timestamp update_date_time = 2;
+		string status = 3; // always is pending
+		int64 user_id = 4;
+		int64 bet_id = 5;
+		int64 round_id = 6;
+		string category = 7;
+		string game = 8;
+		string game_id = 9;
+		string provider_name = 10;
+		string currency = 11;
+		string bet_amount = 12;
+		string payout_amount = 13;
+		string win_amount = 14; // payout_amount - bet_amount
+		int64 operator_id = 15;
+		int64 company_operator_id = 16;
+		int64 retailer_operator_id = 17;
+		int64 system_operator_id = 18;
+		string operator_name = 19;
+		string company_operator_name = 20;
+		string retailer_operator_name = 21;
+		string system_operator_name = 22;
+	}
+	repeated UnpaidBet unpaid_bets = 1;
+	int32 unpaid_bet_count = 2;
+	string total_amount = 3;
+	int32 unpaid_user_count = 4;
+	int32 total = 5;
+	int32 page = 6;
+	int32 page_size = 7;
+}
+
+// Sport Events related messages
+message ExportUnpaidBetsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional int64 transaction_id = 4;
+	string format = 5; // accepted values: csv, excel, pdf
+	string time_zone = 6; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContext operator_context = 7;
+	api.common.OperatorContextFilters operator_context_filters = 8;
+	int64 initiator_user_id = 9;
+}
+
+message ExportUnpaidBetsResponse {
+	int64 task_id = 1;
+}
+
+// Multiple Bets Report related messages
+message ListMultipleBetsRequest {
+	// Filter conditions
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional string status = 3; // All, Pending, Won, Loss, etc.
+	optional int64 user_id = 4; // User ID
+	optional int64 transaction_id = 5; // Transaction ID
+	
+	// Pagination
+	optional int32 page = 6;
+	optional int32 page_size = 7;
+	
+	// Operator context for filtering
+	api.common.OperatorContext operator_context = 8;
+	api.common.OperatorContextFilters operator_context_filters = 9;
+}
+
+message ListMultipleBetsResponse {
+	message MultipleBet {
+		// Basic information
+		google.protobuf.Timestamp created_at = 1; // Date
+		string status = 2; // Pending, Won, Loss, etc.
+		int64 user_id = 3; // User ID
+		int64 transaction_id = 4; // Transaction ID (e.g., "TXN-202509042200")
+		int64 round_id = 5; // Round ID (e.g., "TXN-202509042200")
+		
+		// Game information
+		string category = 6; // Sports, Casino, etc.
+		string provider = 7; // Provider name (e.g., "Bti")
+		
+		// Financial information
+		string currency = 8; // Currency (e.g., "ZAR")
+		string bet_amount = 9; // Bet Amount (e.g., "350.00")
+		string win_amount = 10; // Win Amount (e.g., "192.50")
+		string taxable = 11; // Taxable amount (e.g., "0.00")
+		string prospective_tax = 12; // Prospective Tax (e.g., "0.00")
+		int64 operator_id = 13;
+		int64 company_operator_id = 14;
+		int64 retailer_operator_id = 15;
+		int64 system_operator_id = 16;
+		string operator_name = 17;
+		string company_operator_name = 18;
+		string retailer_operator_name = 19;
+		string system_operator_name = 20;
+	}
+	
+	repeated MultipleBet records = 1;
+	int32 total_count = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}
+
+message ExportMultipleBetsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional string status = 3; // All, Pending, Won, Loss, etc.
+	optional int64 user_id = 4; // User ID
+	optional int64 transaction_id = 5; // Transaction ID
+	string format = 6; // accepted values: csv, excel, pdf
+	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContext operator_context = 8;
+	api.common.OperatorContextFilters operator_context_filters = 9;
+	int64 initiator_user_id = 10;
+}
+
+message ExportMultipleBetsResponse {
+	int64 task_id = 1;
+}
+
+// Stake Variance Report related messages
+message ListStakeVarianceBetsRequest {
+	// Filter conditions
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3; // User ID
+	optional int64 transaction_id = 4; // Transaction ID
+	optional string category = 5; // All, Bet, Win, etc.
+	optional int64 round_id = 6; // Round ID
+	
+	// Pagination
+	optional int32 page = 7;
+	optional int32 page_size = 8;
+	
+	// Operator context for filtering
+	api.common.OperatorContext operator_context = 9;
+	api.common.OperatorContext target_operator_context = 10;
+}
+
+message ListStakeVarianceBetsResponse {
+	message StakeVarianceBet {
+		// Basic information
+		google.protobuf.Timestamp created_at = 1; // Date (2025-09-02 14:30:21)
+		google.protobuf.Timestamp updated_at = 2; // Date (2025-09-02 14:30:21)
+		string status = 3; // Pending, Won, Loss, Cashed Out, etc.
+		int64 user_id = 4; // User ID (User012345)
+		int64 transaction_id = 5; // Transaction ID (TXN-202509042200)
+		int64 round_id = 6; // Round ID (214215166135)
+		
+		// Game information
+		string category = 7; // Sports, Casino, etc.
+		string provider = 8; // Provider name (Bti)
+		
+		// Financial information
+		string currency = 9; // Currency (ZAR)
+		string bet_amount = 10; // Bet Amount (R 350.00)
+		string payout_amount = 11; // Payout Amount (R 700.00)
+		string win_amount = 12; // Win Amount (R 350.00)
+		int64 operator_id = 13;
+		int64 company_operator_id = 14;
+		int64 retailer_operator_id = 15;
+		int64 system_operator_id = 16;
+		string operator_name = 17;
+		string company_operator_name = 18;
+		string retailer_operator_name = 19;
+		string system_operator_name = 20;
+	}
+	
+	message SummaryStats {
+		// Summary statistics shown in cards
+		int32 total_records = 1; // Total Records (e.g., 1000)
+		string total_bet_amount = 2; // Total Bet Amount (e.g., "45,000")
+		string average_bet_amount = 3; // Average Bet Amount (e.g., "8.2k")
+		string maximum_bet_amount = 4; // Maximum Bet Amount (e.g., "1000")
+	}
+	
+	repeated StakeVarianceBet records = 1;
+	SummaryStats summary = 2;
+	int32 total_count = 3;
+	int32 page = 4;
+	int32 page_size = 5;
+}
+
+message ExportStakeVarianceBetsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3; // User ID
+	optional int64 transaction_id = 4; // Transaction ID
+	optional string category = 5; // All, Bet, Win, etc.
+	optional int64 round_id = 6; // Round ID
+	string format = 7; // accepted values: csv, excel, pdf
+	string time_zone = 8; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContext operator_context = 9;
+	api.common.OperatorContext target_operator_context = 10;
+	int64 initiator_user_id = 11;
+}
+
+message ExportStakeVarianceBetsResponse {
+	int64 task_id = 1;
+}
+
+message ListSportEventsRequest {
+	optional int32 page = 1;
+	optional int32 page_size = 2;
+	optional string event_name = 3; // Event name filter
+	optional string venue = 4; // Venue filter
+	optional string tournament = 5; // Tournament filter
+	optional string start_time = 6; // Start date filter
+	optional string end_time = 7; // End date filter
+}
+
+message ListSportEventsResponse {
+	message SportEvent {
+		// Basic information
+		string event_id = 1; // e.g., "EV2025090901"
+		string event_name = 2; // e.g., "Premier League-Manchester United vs Chelsea Old Trafford | Premier League 2025/26"
+		string venue = 3; // Venue name
+		string tournament = 4; // Tournament name
+		
+		// Timing information (all in SAST timezone)
+		int64 carded_time = 5; // Carded Time
+		int64 first_bet_time = 6; // First Bet Time
+		int64 last_bet_time = 7; // Last Bet Time
+		int64 no_more_bets_time = 8; // No More Bets Time
+		int64 result_processing_time = 9; // Result Processing Time
+		int64 revised_official_carded_time = 10; // Revised Official Carded Time or null
+		
+		// Status information
+		string status = 11; // Event status (e.g., "Completed", "Pending", "Cancelled")
+	}
+	
+	repeated SportEvent events = 1;
+	
+	// Summary information
+	int32 total_count = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+	int32 total_pages = 5;
+}
+
+// Transaction and Settlement related messages
+
+message EventInfo {
+	// Basic event information
+	string event_id = 1; // VARCHAR(32)
+	string event_name = 2; // VARCHAR(255)
+	string venue = 3; // VARCHAR(255)
+	string tournament = 4; // VARCHAR(255)
+	
+	// Betting information
+	string odds_in_user_style = 5; // VARCHAR(32)
+	string bet_type_name = 6; // VARCHAR(128)
+	string win_multiplier = 7; // VARCHAR(32)
+	string bet_details = 8; // VARCHAR(255)
+	
+	// Event Description fields
+	string event_description = 9; // TEXT
+	string league_name = 10; // VARCHAR(255)
+	string home_team = 11; // VARCHAR(255)
+	string away_team = 12; // VARCHAR(255)
+	string current_result = 13; // VARCHAR(32)
+	int64 event_date_utc = 14; // BIGINT
+	
+	// Settlement Details fields
+	string settlement_status = 15; // VARCHAR(64)
+	string settlement_description = 16; // TEXT
+	int64 bet_settled_date = 17; // BIGINT
+	string triggered_result = 18; // VARCHAR(32)
+	
+	// Time fields
+	int64 carded_time = 19; // BIGINT
+	int64 first_bet_time = 20; // BIGINT
+	int64 last_bet_time = 21; // BIGINT
+	int64 no_more_bets_time = 22; // BIGINT
+	int64 result_processing_time = 23; // BIGINT
+	int64 revised_official_carded_time = 24; // BIGINT
+	string status = 25; // VARCHAR(32) - pending, completed, etc.
+	string selections = 26; // VARCHAR(255) - selection1, selection2, etc.
+}
+
+// Get bet and event info by game bet id
+message GetBetAndEventInfoRequest {
+	string game_bet_id= 1;
+}
+
+message BetInfo {
+	// Basic bet information
+	int64 id = 1; // bet id
+	string provider_bet_id = 2; // varchar(64)
+	int64 round_id = 3; // int8
+	string provider_round_id = 4; // varchar(64)
+	string currency = 5; // varchar(16)
+	string settlement_currency = 6; // varchar(16)
+	int64 user_id = 7; // int8
+	string game_id = 8; // varchar(128)
+	string game_name = 9; // varchar(128)
+	string game_category = 10; // varchar(64)
+
+	// Amount fields
+	string bet_amount = 11; // numeric(36,18)
+	string settlement_bet_amount = 12; // numeric(36,18)
+	string win_amount = 13; // numeric(36,18)
+	string settlement_win_amount = 14; // numeric(36,18)
+	string rollback_bet_amount = 15; // numeric(36,18)
+	string rollback_win_amount = 16; // numeric(36,18)
+
+	// Timestamps
+	int64 created_at = 17; // int8
+	int64 updated_at = 18; // int8
+
+	// Status and provider info
+	string status = 19; // varchar(16)
+	string provider_id = 20; // varchar(64)
+	string provider_name = 21; // varchar(128)
+	int64 operator_id = 22; // int8
+	string operator_name = 23; // text
+
+	// Additional bet info
+	int64 win_count = 24; // int8
+	string turnover = 25; // numeric(36,18)
+
+	// USD amounts
+	string bet_amount_usd = 26; // numeric(36,18)
+	string settlement_bet_amount_usd = 27; // numeric(36,18)
+	string win_amount_usd = 28; // numeric(36,18)
+	string settlement_win_amount_usd = 29; // numeric(36,18)
+	string turnover_usd = 30; // numeric(36,18)
+	string rollback_bet_amount_usd = 31; // numeric(36,18)
+	string rollback_win_amount_usd = 32; // numeric(36,18)
+
+	// Operator hierarchy
+	int64 system_operator_id = 33; // int8, nullable
+	int64 retailer_operator_id = 34; // int8, nullable
+	int64 company_operator_id = 35; // int8, nullable
+
+	// Reporting currency amounts
+	string reporting_currency = 36; // varchar(16)
+	string amount_reporting_currency = 37; // numeric(36,18)
+	string bet_amount_reporting_currency = 38; // numeric(36,18)
+	string settlement_bet_amount_reporting_currency = 39; // numeric(36,18)
+	string win_amount_reporting_currency = 40; // numeric(36,18)
+	string settlement_win_amount_reporting_currency = 41; // numeric(36,18)
+	string turnover_reporting_currency = 42; // numeric(36,18)
+	string rollback_bet_amount_reporting_currency = 43; // numeric(36,18)
+	string rollback_win_amount_reporting_currency = 44; // numeric(36,18)
+
+	// Additional fields
+	bool finished = 45; // bool, nullable
+	string wager_type = 46; // varchar(128)
+	int64 settle_time = 47; // int8, nullable
+	string odds = 48; // varchar(128)
+	string win_multiplier = 49; // varchar(128)
+}
+
+message GetBetAndEventInfoResponse {
+	BetInfo bet_info = 1;
+	repeated EventInfo event_infos = 2;
+}
+
+// Get bet and event info by game transaction id
+// transaction info
+
+// get event info
+
+message GetTransactionAndEventInfoRequest {
+	string game_transaction_id= 1;
+}
+
+message TransactionInfo {
+	// Basic transaction information
+	int64 id = 1; // transaction id
+	int64 round_id = 2; // int8
+	string action = 3; // varchar(16)
+	int64 bet_id = 4; // int8
+	string provider_bet_id = 5; // varchar(64)
+	string provider_transaction_id = 6; // varchar(64)
+	string provider_external_transaction_id = 7; // varchar(64), nullable
+	
+	// Transaction flags
+	bool update_balance = 8; // bool, default true
+	bool take_all = 9; // bool, default false
+	bool is_refund = 10; // bool, default false
+	
+	// Amount fields
+	string amount = 11; // numeric(36,18)
+	string settlement_amount = 12; // numeric(36,18)
+	
+	// User and game info
+	int64 user_id = 13; // int8
+	string currency = 14; // varchar(16)
+	string settlement_currency = 15; // varchar(16)
+	string game_id = 16; // varchar(128)
+	string game_name = 17; // varchar(128)
+	string game_category = 18; // varchar(64)
+	
+	// Jackpot fields
+	string jackpot_contribution = 19; // numeric(36,18)
+	string jackpot_win = 20; // numeric(36,18)
+	
+	// Timestamps
+	int64 bet_time = 21; // int8
+	int64 settle_time = 22; // int8
+	int64 provider_timestamp = 23; // int8
+	string bonus_amount = 24; // numeric(36,18)
+	int64 operator_timestamp = 25; // int8
+	int64 processed_at = 26; // int8
+	int64 created_at = 27; // int8
+	int64 updated_at = 28; // int8
+	
+	// Provider and operator info
+	string provider_id = 29; // varchar(64)
+	string provider_name = 30; // varchar(128)
+	int64 operator_id = 31; // int8
+	string operator_name = 32; // text
+	
+	// Turnover
+	string turnover = 33; // numeric(36,18)
+	
+	// USD amounts
+	string amount_usd = 34; // numeric(36,18)
+	string settlement_amount_usd = 35; // numeric(36,18)
+	string turnover_usd = 36; // numeric(36,18)
+	string bonus_amount_usd = 37; // numeric(36,18)
+	string jackpot_contribution_usd = 38; // numeric(36,18)
+	string jackpot_win_usd = 39; // numeric(36,18)
+	
+	// Operator hierarchy (nullable)
+	int64 system_operator_id = 40; // int8, nullable
+	int64 retailer_operator_id = 41; // int8, nullable
+	int64 company_operator_id = 42; // int8, nullable
+	
+	// Reporting currency amounts
+	string reporting_currency = 43; // varchar(16)
+	string amount_reporting_currency = 44; // numeric(36,18)
+	string settlement_amount_reporting_currency = 45; // numeric(36,18)
+	string turnover_reporting_currency = 46; // numeric(36,18)
+	string bonus_amount_reporting_currency = 47; // numeric(36,18)
+	string jackpot_contribution_reporting_currency = 48; // numeric(36,18)
+	string jackpot_win_reporting_currency = 49; // numeric(36,18)
+}
+
+message GetTransactionAndEventInfoResponse {
+	TransactionInfo transaction_info = 1;
+	BetInfo bet_info = 2;
+	repeated EventInfo event_infos = 3;
+}
+
+// Customer Strike Report related messages
+message ListCustomerStrikeReportsRequest {
+	// Filter conditions
+	optional string user_id = 1;
+	// Pagination
+	optional int32 page = 2;
+	optional int32 page_size = 3;
+	
+	// Operator context for filtering
+	api.common.OperatorContext operator_context = 4;
+	api.common.OperatorContextFilters operator_context_filters = 5;
+}
+
+message ListCustomerStrikeReportsResponse {
+	message CustomerStrikeReport {
+		// Basic user information
+		string user_id = 1; // User ID (e.g., "UID000042")
+		string user_name = 2; // Full name (e.g., "John Smith")
+		
+		// Betting statistics
+		int32 total_bets = 3; // Total number of bets placed (e.g., 245)
+		int32 winning_bets = 4; // Number of winning bets (e.g., 198)
+		string win_rate = 5; // Win rate percentage (e.g., "80.82%")
+		
+		// Financial information (in settlement currency, e.g., ZAR)
+		string total_stake = 6; // Total stake amount (e.g., "R 24,500.00")
+		string total_winning = 7; // Total winning amount (e.g., "R 31,850.00")
+		string payout_rate = 8; // Payout rate percentage (e.g., "120.00%")
+		int64 operator_id = 9;
+		int64 company_operator_id = 10;
+		int64 retailer_operator_id = 11;
+		int64 system_operator_id = 12;
+		string operator_name = 13;
+		string company_operator_name = 14;
+		string retailer_operator_name = 15;
+		string system_operator_name = 16;
+	}
+	
+	repeated CustomerStrikeReport reports = 1;
+	int32 total_count = 2; // Total number of records found
+	int32 page = 3;
+	int32 page_size = 4;
+}
+
+message ExportSportEventsRequest {
+	optional string event_name = 1;
+	optional string venue = 2;
+	optional string tournament = 3;
+	optional string start_time = 4;
+	optional string end_time = 5;
+	string format = 6; // accepted values: csv, excel, pdf
+	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContext operator_context = 8;
+	int64 initiator_user_id = 9;
+}
+
+message ExportSportEventsResponse {
+	int64 task_id = 1;
+}
+
+message ExportCustomerStrikeReportsRequest {
+	optional int64 user_id = 1;
+	string format = 2; // accepted values: csv, excel, pdf
+	string time_zone = 3; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContext operator_context = 4;
+	api.common.OperatorContextFilters operator_context_filters = 5;
+	int64 initiator_user_id = 6;
+}
+
+message ExportCustomerStrikeReportsResponse {
+	int64 task_id = 1;
+}
+
+message CreateTaxReportRequest {
+}
+
+message CreateTaxReportResponse {
 }

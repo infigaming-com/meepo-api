@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	Wallet_GetUserBalances_FullMethodName                     = "/api.wallet.service.v1.Wallet/GetUserBalances"
 	Wallet_GetUserBalance_FullMethodName                      = "/api.wallet.service.v1.Wallet/GetUserBalance"
+	Wallet_GetUserBalanceDetails_FullMethodName               = "/api.wallet.service.v1.Wallet/GetUserBalanceDetails"
 	Wallet_Credit_FullMethodName                              = "/api.wallet.service.v1.Wallet/Credit"
 	Wallet_Debit_FullMethodName                               = "/api.wallet.service.v1.Wallet/Debit"
 	Wallet_GameDebit_FullMethodName                           = "/api.wallet.service.v1.Wallet/GameDebit"
@@ -40,7 +41,6 @@ const (
 	Wallet_AddCurrency_FullMethodName                         = "/api.wallet.service.v1.Wallet/AddCurrency"
 	Wallet_UpdateCurrency_FullMethodName                      = "/api.wallet.service.v1.Wallet/UpdateCurrency"
 	Wallet_GetCurrencies_FullMethodName                       = "/api.wallet.service.v1.Wallet/GetCurrencies"
-	Wallet_GetOperatorCurrencies_FullMethodName               = "/api.wallet.service.v1.Wallet/GetOperatorCurrencies"
 	Wallet_ListCurrencies_FullMethodName                      = "/api.wallet.service.v1.Wallet/ListCurrencies"
 	Wallet_UpdateOperatorCurrency_FullMethodName              = "/api.wallet.service.v1.Wallet/UpdateOperatorCurrency"
 	Wallet_UpdateUserCurrency_FullMethodName                  = "/api.wallet.service.v1.Wallet/UpdateUserCurrency"
@@ -64,6 +64,16 @@ const (
 	Wallet_UpdateOperatorCurrencyConfig_FullMethodName        = "/api.wallet.service.v1.Wallet/UpdateOperatorCurrencyConfig"
 	Wallet_UpdateDeductionOrder_FullMethodName                = "/api.wallet.service.v1.Wallet/UpdateDeductionOrder"
 	Wallet_BonusTransfer_FullMethodName                       = "/api.wallet.service.v1.Wallet/BonusTransfer"
+	Wallet_AddResponsibleGamblingConfig_FullMethodName        = "/api.wallet.service.v1.Wallet/AddResponsibleGamblingConfig"
+	Wallet_DeleteResponsibleGamblingConfig_FullMethodName     = "/api.wallet.service.v1.Wallet/DeleteResponsibleGamblingConfig"
+	Wallet_ListResponsibleGamblingConfigs_FullMethodName      = "/api.wallet.service.v1.Wallet/ListResponsibleGamblingConfigs"
+	Wallet_GetResponsibleGamblingConfig_FullMethodName        = "/api.wallet.service.v1.Wallet/GetResponsibleGamblingConfig"
+	Wallet_ListCustomerRecords_FullMethodName                 = "/api.wallet.service.v1.Wallet/ListCustomerRecords"
+	Wallet_ExportCustomerRecords_FullMethodName               = "/api.wallet.service.v1.Wallet/ExportCustomerRecords"
+	Wallet_SetFICAThresholdConfig_FullMethodName              = "/api.wallet.service.v1.Wallet/SetFICAThresholdConfig"
+	Wallet_GetFICAThresholdConfig_FullMethodName              = "/api.wallet.service.v1.Wallet/GetFICAThresholdConfig"
+	Wallet_ListFICAThresholdTransactions_FullMethodName       = "/api.wallet.service.v1.Wallet/ListFICAThresholdTransactions"
+	Wallet_ExportFICAThresholdTransactions_FullMethodName     = "/api.wallet.service.v1.Wallet/ExportFICAThresholdTransactions"
 )
 
 // WalletClient is the client API for Wallet service.
@@ -74,6 +84,8 @@ type WalletClient interface {
 	GetUserBalances(ctx context.Context, in *GetUserBalancesRequest, opts ...grpc.CallOption) (*GetUserBalancesResponse, error)
 	// GetUserBalance returns the balance of specific currency of the user
 	GetUserBalance(ctx context.Context, in *GetUserBalanceRequest, opts ...grpc.CallOption) (*GetUserBalanceResponse, error)
+	// GetUserBalanceDetails returns the cash and credit details of every credit of the user balance(one currency only)
+	GetUserBalanceDetails(ctx context.Context, in *GetUserBalanceDetailsRequest, opts ...grpc.CallOption) (*GetUserBalanceDetailsResponse, error)
 	Credit(ctx context.Context, in *CreditRequest, opts ...grpc.CallOption) (*CreditResponse, error)
 	Debit(ctx context.Context, in *DebitRequest, opts ...grpc.CallOption) (*DebitResponse, error)
 	GameDebit(ctx context.Context, in *GameDebitRequest, opts ...grpc.CallOption) (*GameDebitResponse, error)
@@ -101,7 +113,6 @@ type WalletClient interface {
 	AddCurrency(ctx context.Context, in *AddCurrencyRequest, opts ...grpc.CallOption) (*AddCurrencyResponse, error)
 	UpdateCurrency(ctx context.Context, in *UpdateCurrencyRequest, opts ...grpc.CallOption) (*UpdateCurrencyResponse, error)
 	GetCurrencies(ctx context.Context, in *GetCurrenciesRequest, opts ...grpc.CallOption) (*GetCurrenciesResponse, error)
-	GetOperatorCurrencies(ctx context.Context, in *GetOperatorCurrenciesRequest, opts ...grpc.CallOption) (*GetOperatorCurrenciesResponse, error)
 	ListCurrencies(ctx context.Context, in *ListCurrenciesRequest, opts ...grpc.CallOption) (*ListCurrenciesResponse, error)
 	UpdateOperatorCurrency(ctx context.Context, in *UpdateOperatorCurrencyRequest, opts ...grpc.CallOption) (*UpdateOperatorCurrencyResponse, error)
 	UpdateUserCurrency(ctx context.Context, in *UpdateUserCurrencyRequest, opts ...grpc.CallOption) (*UpdateUserCurrencyResponse, error)
@@ -145,6 +156,26 @@ type WalletClient interface {
 	UpdateDeductionOrder(ctx context.Context, in *UpdateDeductionOrderRequest, opts ...grpc.CallOption) (*UpdateDeductionOrderResponse, error)
 	// BonusTransfer is used to transfer from one credit's bonus to generate a new credit's cash
 	BonusTransfer(ctx context.Context, in *BonusTransferRequest, opts ...grpc.CallOption) (*BonusTransferResponse, error)
+	// AddResponsibleGamblingConfig adds gambling config for a user's currency
+	AddResponsibleGamblingConfig(ctx context.Context, in *AddResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*AddResponsibleGamblingConfigResponse, error)
+	// DeleteResponsibleGamblingConfig deletes gambling config for a user's currency
+	DeleteResponsibleGamblingConfig(ctx context.Context, in *DeleteResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*DeleteResponsibleGamblingConfigResponse, error)
+	// ListResponsibleGamblingConfigs lists gambling configs for a user with all currencies
+	ListResponsibleGamblingConfigs(ctx context.Context, in *ListResponsibleGamblingConfigsRequest, opts ...grpc.CallOption) (*ListResponsibleGamblingConfigsResponse, error)
+	// GetResponsibleGamblingConfig gets gambling config and statusfor a user's currency
+	GetResponsibleGamblingConfig(ctx context.Context, in *GetResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*GetResponsibleGamblingConfigResponse, error)
+	// ListCustomerRecords lists customer records for all users (with deposit, withdraw, game bet, game win and manual credit(this is not supported yet))
+	ListCustomerRecords(ctx context.Context, in *ListCustomerRecordsRequest, opts ...grpc.CallOption) (*ListCustomerRecordsResponse, error)
+	// ExportCustomerRecords create a task to exports customer records for all users (with deposit, withdraw, game bet, game win and manual credit(this is not supported yet))
+	ExportCustomerRecords(ctx context.Context, in *ExportCustomerRecordsRequest, opts ...grpc.CallOption) (*ExportCustomerRecordsResponse, error)
+	// SetFICAThresholdConfig sets the FICA threshold config for an operator and its specific currency
+	SetFICAThresholdConfig(ctx context.Context, in *SetFICAThresholdConfigRequest, opts ...grpc.CallOption) (*SetFICAThresholdConfigResponse, error)
+	// GetFICAThresholdConfig gets the FICA threshold config for an operator of all currencies
+	GetFICAThresholdConfig(ctx context.Context, in *GetFICAThresholdConfigRequest, opts ...grpc.CallOption) (*GetFICAThresholdConfigResponse, error)
+	// ListFICAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
+	ListFICAThresholdTransactions(ctx context.Context, in *ListFICAThresholdTransactionsRequest, opts ...grpc.CallOption) (*ListFICAThresholdTransactionsResponse, error)
+	// ExportFICAThresholdTransactions create a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
+	ExportFICAThresholdTransactions(ctx context.Context, in *ExportFICAThresholdTransactionsRequest, opts ...grpc.CallOption) (*ExportFICAThresholdTransactionsResponse, error)
 }
 
 type walletClient struct {
@@ -169,6 +200,16 @@ func (c *walletClient) GetUserBalance(ctx context.Context, in *GetUserBalanceReq
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetUserBalanceResponse)
 	err := c.cc.Invoke(ctx, Wallet_GetUserBalance_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) GetUserBalanceDetails(ctx context.Context, in *GetUserBalanceDetailsRequest, opts ...grpc.CallOption) (*GetUserBalanceDetailsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserBalanceDetailsResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetUserBalanceDetails_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -359,16 +400,6 @@ func (c *walletClient) GetCurrencies(ctx context.Context, in *GetCurrenciesReque
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetCurrenciesResponse)
 	err := c.cc.Invoke(ctx, Wallet_GetCurrencies_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *walletClient) GetOperatorCurrencies(ctx context.Context, in *GetOperatorCurrenciesRequest, opts ...grpc.CallOption) (*GetOperatorCurrenciesResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetOperatorCurrenciesResponse)
-	err := c.cc.Invoke(ctx, Wallet_GetOperatorCurrencies_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -605,6 +636,106 @@ func (c *walletClient) BonusTransfer(ctx context.Context, in *BonusTransferReque
 	return out, nil
 }
 
+func (c *walletClient) AddResponsibleGamblingConfig(ctx context.Context, in *AddResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*AddResponsibleGamblingConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddResponsibleGamblingConfigResponse)
+	err := c.cc.Invoke(ctx, Wallet_AddResponsibleGamblingConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) DeleteResponsibleGamblingConfig(ctx context.Context, in *DeleteResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*DeleteResponsibleGamblingConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteResponsibleGamblingConfigResponse)
+	err := c.cc.Invoke(ctx, Wallet_DeleteResponsibleGamblingConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) ListResponsibleGamblingConfigs(ctx context.Context, in *ListResponsibleGamblingConfigsRequest, opts ...grpc.CallOption) (*ListResponsibleGamblingConfigsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListResponsibleGamblingConfigsResponse)
+	err := c.cc.Invoke(ctx, Wallet_ListResponsibleGamblingConfigs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) GetResponsibleGamblingConfig(ctx context.Context, in *GetResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*GetResponsibleGamblingConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetResponsibleGamblingConfigResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetResponsibleGamblingConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) ListCustomerRecords(ctx context.Context, in *ListCustomerRecordsRequest, opts ...grpc.CallOption) (*ListCustomerRecordsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCustomerRecordsResponse)
+	err := c.cc.Invoke(ctx, Wallet_ListCustomerRecords_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) ExportCustomerRecords(ctx context.Context, in *ExportCustomerRecordsRequest, opts ...grpc.CallOption) (*ExportCustomerRecordsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExportCustomerRecordsResponse)
+	err := c.cc.Invoke(ctx, Wallet_ExportCustomerRecords_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) SetFICAThresholdConfig(ctx context.Context, in *SetFICAThresholdConfigRequest, opts ...grpc.CallOption) (*SetFICAThresholdConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetFICAThresholdConfigResponse)
+	err := c.cc.Invoke(ctx, Wallet_SetFICAThresholdConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) GetFICAThresholdConfig(ctx context.Context, in *GetFICAThresholdConfigRequest, opts ...grpc.CallOption) (*GetFICAThresholdConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetFICAThresholdConfigResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetFICAThresholdConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) ListFICAThresholdTransactions(ctx context.Context, in *ListFICAThresholdTransactionsRequest, opts ...grpc.CallOption) (*ListFICAThresholdTransactionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListFICAThresholdTransactionsResponse)
+	err := c.cc.Invoke(ctx, Wallet_ListFICAThresholdTransactions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) ExportFICAThresholdTransactions(ctx context.Context, in *ExportFICAThresholdTransactionsRequest, opts ...grpc.CallOption) (*ExportFICAThresholdTransactionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExportFICAThresholdTransactionsResponse)
+	err := c.cc.Invoke(ctx, Wallet_ExportFICAThresholdTransactions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServer is the server API for Wallet service.
 // All implementations must embed UnimplementedWalletServer
 // for forward compatibility.
@@ -613,6 +744,8 @@ type WalletServer interface {
 	GetUserBalances(context.Context, *GetUserBalancesRequest) (*GetUserBalancesResponse, error)
 	// GetUserBalance returns the balance of specific currency of the user
 	GetUserBalance(context.Context, *GetUserBalanceRequest) (*GetUserBalanceResponse, error)
+	// GetUserBalanceDetails returns the cash and credit details of every credit of the user balance(one currency only)
+	GetUserBalanceDetails(context.Context, *GetUserBalanceDetailsRequest) (*GetUserBalanceDetailsResponse, error)
 	Credit(context.Context, *CreditRequest) (*CreditResponse, error)
 	Debit(context.Context, *DebitRequest) (*DebitResponse, error)
 	GameDebit(context.Context, *GameDebitRequest) (*GameDebitResponse, error)
@@ -640,7 +773,6 @@ type WalletServer interface {
 	AddCurrency(context.Context, *AddCurrencyRequest) (*AddCurrencyResponse, error)
 	UpdateCurrency(context.Context, *UpdateCurrencyRequest) (*UpdateCurrencyResponse, error)
 	GetCurrencies(context.Context, *GetCurrenciesRequest) (*GetCurrenciesResponse, error)
-	GetOperatorCurrencies(context.Context, *GetOperatorCurrenciesRequest) (*GetOperatorCurrenciesResponse, error)
 	ListCurrencies(context.Context, *ListCurrenciesRequest) (*ListCurrenciesResponse, error)
 	UpdateOperatorCurrency(context.Context, *UpdateOperatorCurrencyRequest) (*UpdateOperatorCurrencyResponse, error)
 	UpdateUserCurrency(context.Context, *UpdateUserCurrencyRequest) (*UpdateUserCurrencyResponse, error)
@@ -684,6 +816,26 @@ type WalletServer interface {
 	UpdateDeductionOrder(context.Context, *UpdateDeductionOrderRequest) (*UpdateDeductionOrderResponse, error)
 	// BonusTransfer is used to transfer from one credit's bonus to generate a new credit's cash
 	BonusTransfer(context.Context, *BonusTransferRequest) (*BonusTransferResponse, error)
+	// AddResponsibleGamblingConfig adds gambling config for a user's currency
+	AddResponsibleGamblingConfig(context.Context, *AddResponsibleGamblingConfigRequest) (*AddResponsibleGamblingConfigResponse, error)
+	// DeleteResponsibleGamblingConfig deletes gambling config for a user's currency
+	DeleteResponsibleGamblingConfig(context.Context, *DeleteResponsibleGamblingConfigRequest) (*DeleteResponsibleGamblingConfigResponse, error)
+	// ListResponsibleGamblingConfigs lists gambling configs for a user with all currencies
+	ListResponsibleGamblingConfigs(context.Context, *ListResponsibleGamblingConfigsRequest) (*ListResponsibleGamblingConfigsResponse, error)
+	// GetResponsibleGamblingConfig gets gambling config and statusfor a user's currency
+	GetResponsibleGamblingConfig(context.Context, *GetResponsibleGamblingConfigRequest) (*GetResponsibleGamblingConfigResponse, error)
+	// ListCustomerRecords lists customer records for all users (with deposit, withdraw, game bet, game win and manual credit(this is not supported yet))
+	ListCustomerRecords(context.Context, *ListCustomerRecordsRequest) (*ListCustomerRecordsResponse, error)
+	// ExportCustomerRecords create a task to exports customer records for all users (with deposit, withdraw, game bet, game win and manual credit(this is not supported yet))
+	ExportCustomerRecords(context.Context, *ExportCustomerRecordsRequest) (*ExportCustomerRecordsResponse, error)
+	// SetFICAThresholdConfig sets the FICA threshold config for an operator and its specific currency
+	SetFICAThresholdConfig(context.Context, *SetFICAThresholdConfigRequest) (*SetFICAThresholdConfigResponse, error)
+	// GetFICAThresholdConfig gets the FICA threshold config for an operator of all currencies
+	GetFICAThresholdConfig(context.Context, *GetFICAThresholdConfigRequest) (*GetFICAThresholdConfigResponse, error)
+	// ListFICAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
+	ListFICAThresholdTransactions(context.Context, *ListFICAThresholdTransactionsRequest) (*ListFICAThresholdTransactionsResponse, error)
+	// ExportFICAThresholdTransactions create a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
+	ExportFICAThresholdTransactions(context.Context, *ExportFICAThresholdTransactionsRequest) (*ExportFICAThresholdTransactionsResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -699,6 +851,9 @@ func (UnimplementedWalletServer) GetUserBalances(context.Context, *GetUserBalanc
 }
 func (UnimplementedWalletServer) GetUserBalance(context.Context, *GetUserBalanceRequest) (*GetUserBalanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserBalance not implemented")
+}
+func (UnimplementedWalletServer) GetUserBalanceDetails(context.Context, *GetUserBalanceDetailsRequest) (*GetUserBalanceDetailsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserBalanceDetails not implemented")
 }
 func (UnimplementedWalletServer) Credit(context.Context, *CreditRequest) (*CreditResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Credit not implemented")
@@ -756,9 +911,6 @@ func (UnimplementedWalletServer) UpdateCurrency(context.Context, *UpdateCurrency
 }
 func (UnimplementedWalletServer) GetCurrencies(context.Context, *GetCurrenciesRequest) (*GetCurrenciesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCurrencies not implemented")
-}
-func (UnimplementedWalletServer) GetOperatorCurrencies(context.Context, *GetOperatorCurrenciesRequest) (*GetOperatorCurrenciesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorCurrencies not implemented")
 }
 func (UnimplementedWalletServer) ListCurrencies(context.Context, *ListCurrenciesRequest) (*ListCurrenciesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCurrencies not implemented")
@@ -829,6 +981,36 @@ func (UnimplementedWalletServer) UpdateDeductionOrder(context.Context, *UpdateDe
 func (UnimplementedWalletServer) BonusTransfer(context.Context, *BonusTransferRequest) (*BonusTransferResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BonusTransfer not implemented")
 }
+func (UnimplementedWalletServer) AddResponsibleGamblingConfig(context.Context, *AddResponsibleGamblingConfigRequest) (*AddResponsibleGamblingConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddResponsibleGamblingConfig not implemented")
+}
+func (UnimplementedWalletServer) DeleteResponsibleGamblingConfig(context.Context, *DeleteResponsibleGamblingConfigRequest) (*DeleteResponsibleGamblingConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteResponsibleGamblingConfig not implemented")
+}
+func (UnimplementedWalletServer) ListResponsibleGamblingConfigs(context.Context, *ListResponsibleGamblingConfigsRequest) (*ListResponsibleGamblingConfigsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListResponsibleGamblingConfigs not implemented")
+}
+func (UnimplementedWalletServer) GetResponsibleGamblingConfig(context.Context, *GetResponsibleGamblingConfigRequest) (*GetResponsibleGamblingConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetResponsibleGamblingConfig not implemented")
+}
+func (UnimplementedWalletServer) ListCustomerRecords(context.Context, *ListCustomerRecordsRequest) (*ListCustomerRecordsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCustomerRecords not implemented")
+}
+func (UnimplementedWalletServer) ExportCustomerRecords(context.Context, *ExportCustomerRecordsRequest) (*ExportCustomerRecordsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportCustomerRecords not implemented")
+}
+func (UnimplementedWalletServer) SetFICAThresholdConfig(context.Context, *SetFICAThresholdConfigRequest) (*SetFICAThresholdConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetFICAThresholdConfig not implemented")
+}
+func (UnimplementedWalletServer) GetFICAThresholdConfig(context.Context, *GetFICAThresholdConfigRequest) (*GetFICAThresholdConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFICAThresholdConfig not implemented")
+}
+func (UnimplementedWalletServer) ListFICAThresholdTransactions(context.Context, *ListFICAThresholdTransactionsRequest) (*ListFICAThresholdTransactionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListFICAThresholdTransactions not implemented")
+}
+func (UnimplementedWalletServer) ExportFICAThresholdTransactions(context.Context, *ExportFICAThresholdTransactionsRequest) (*ExportFICAThresholdTransactionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportFICAThresholdTransactions not implemented")
+}
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
 
@@ -882,6 +1064,24 @@ func _Wallet_GetUserBalance_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(WalletServer).GetUserBalance(ctx, req.(*GetUserBalanceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_GetUserBalanceDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserBalanceDetailsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetUserBalanceDetails(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetUserBalanceDetails_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetUserBalanceDetails(ctx, req.(*GetUserBalanceDetailsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1224,24 +1424,6 @@ func _Wallet_GetCurrencies_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(WalletServer).GetCurrencies(ctx, req.(*GetCurrenciesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Wallet_GetOperatorCurrencies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOperatorCurrenciesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(WalletServer).GetOperatorCurrencies(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Wallet_GetOperatorCurrencies_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WalletServer).GetOperatorCurrencies(ctx, req.(*GetOperatorCurrenciesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1660,6 +1842,186 @@ func _Wallet_BonusTransfer_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_AddResponsibleGamblingConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddResponsibleGamblingConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).AddResponsibleGamblingConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_AddResponsibleGamblingConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).AddResponsibleGamblingConfig(ctx, req.(*AddResponsibleGamblingConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_DeleteResponsibleGamblingConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteResponsibleGamblingConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).DeleteResponsibleGamblingConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_DeleteResponsibleGamblingConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).DeleteResponsibleGamblingConfig(ctx, req.(*DeleteResponsibleGamblingConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_ListResponsibleGamblingConfigs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListResponsibleGamblingConfigsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).ListResponsibleGamblingConfigs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_ListResponsibleGamblingConfigs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).ListResponsibleGamblingConfigs(ctx, req.(*ListResponsibleGamblingConfigsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_GetResponsibleGamblingConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetResponsibleGamblingConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetResponsibleGamblingConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetResponsibleGamblingConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetResponsibleGamblingConfig(ctx, req.(*GetResponsibleGamblingConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_ListCustomerRecords_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCustomerRecordsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).ListCustomerRecords(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_ListCustomerRecords_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).ListCustomerRecords(ctx, req.(*ListCustomerRecordsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_ExportCustomerRecords_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportCustomerRecordsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).ExportCustomerRecords(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_ExportCustomerRecords_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).ExportCustomerRecords(ctx, req.(*ExportCustomerRecordsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_SetFICAThresholdConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetFICAThresholdConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).SetFICAThresholdConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_SetFICAThresholdConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).SetFICAThresholdConfig(ctx, req.(*SetFICAThresholdConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_GetFICAThresholdConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFICAThresholdConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetFICAThresholdConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetFICAThresholdConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetFICAThresholdConfig(ctx, req.(*GetFICAThresholdConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_ListFICAThresholdTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListFICAThresholdTransactionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).ListFICAThresholdTransactions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_ListFICAThresholdTransactions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).ListFICAThresholdTransactions(ctx, req.(*ListFICAThresholdTransactionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_ExportFICAThresholdTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportFICAThresholdTransactionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).ExportFICAThresholdTransactions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_ExportFICAThresholdTransactions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).ExportFICAThresholdTransactions(ctx, req.(*ExportFICAThresholdTransactionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Wallet_ServiceDesc is the grpc.ServiceDesc for Wallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1674,6 +2036,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserBalance",
 			Handler:    _Wallet_GetUserBalance_Handler,
+		},
+		{
+			MethodName: "GetUserBalanceDetails",
+			Handler:    _Wallet_GetUserBalanceDetails_Handler,
 		},
 		{
 			MethodName: "Credit",
@@ -1750,10 +2116,6 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCurrencies",
 			Handler:    _Wallet_GetCurrencies_Handler,
-		},
-		{
-			MethodName: "GetOperatorCurrencies",
-			Handler:    _Wallet_GetOperatorCurrencies_Handler,
 		},
 		{
 			MethodName: "ListCurrencies",
@@ -1846,6 +2208,46 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BonusTransfer",
 			Handler:    _Wallet_BonusTransfer_Handler,
+		},
+		{
+			MethodName: "AddResponsibleGamblingConfig",
+			Handler:    _Wallet_AddResponsibleGamblingConfig_Handler,
+		},
+		{
+			MethodName: "DeleteResponsibleGamblingConfig",
+			Handler:    _Wallet_DeleteResponsibleGamblingConfig_Handler,
+		},
+		{
+			MethodName: "ListResponsibleGamblingConfigs",
+			Handler:    _Wallet_ListResponsibleGamblingConfigs_Handler,
+		},
+		{
+			MethodName: "GetResponsibleGamblingConfig",
+			Handler:    _Wallet_GetResponsibleGamblingConfig_Handler,
+		},
+		{
+			MethodName: "ListCustomerRecords",
+			Handler:    _Wallet_ListCustomerRecords_Handler,
+		},
+		{
+			MethodName: "ExportCustomerRecords",
+			Handler:    _Wallet_ExportCustomerRecords_Handler,
+		},
+		{
+			MethodName: "SetFICAThresholdConfig",
+			Handler:    _Wallet_SetFICAThresholdConfig_Handler,
+		},
+		{
+			MethodName: "GetFICAThresholdConfig",
+			Handler:    _Wallet_GetFICAThresholdConfig_Handler,
+		},
+		{
+			MethodName: "ListFICAThresholdTransactions",
+			Handler:    _Wallet_ListFICAThresholdTransactions_Handler,
+		},
+		{
+			MethodName: "ExportFICAThresholdTransactions",
+			Handler:    _Wallet_ExportFICAThresholdTransactions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

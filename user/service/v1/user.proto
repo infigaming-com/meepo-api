@@ -154,13 +154,30 @@ service User {
 		};
 	}
 	
-	rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
+	rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
+    option (google.api.http) = {
+      post: "/v1/user/update"
+      body: "*"
+    };
+	}
+
+	rpc UpdateUserIdentity(UpdateUserIdentityRequest) returns (UpdateUserIdentityResponse) {
+    option (google.api.http) = {
+      post: "/v1/user/identity/update"
+      body: "*"
+    };
+	}
 
 	rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {}
 
 	rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
 
-	rpc VerifyEmail(VerifyEmailRequest) returns (VerifyEmailResponse) {}
+	rpc VerifyEmail(VerifyEmailRequest) returns (VerifyEmailResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/email/verify/get"
+			body: "*"
+		};
+	}
 	
 	rpc AddComment(AddCommentRequest) returns (AddCommentResponse) {}
 
@@ -264,9 +281,62 @@ service User {
 	}
 
 	rpc GetOperatorAccountSettings(GetOperatorAccountSettingsRequest) returns (GetOperatorAccountSettingsResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/operator/account-settings/get"
+			body: "*"
+		};
 	}
 
 	rpc UpdateOperatorAccountSettings(UpdateOperatorAccountSettingsRequest) returns (UpdateOperatorAccountSettingsResponse) {
+	}
+
+	rpc GetUserAccountSettingsStatus(GetUserAccountSettingsStatusRequest) returns (GetUserAccountSettingsStatusResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/account-settings/status/get"
+			body: "*"
+		};
+	}
+
+	rpc AddResponsibleGamblingConfig(AddResponsibleGamblingConfigRequest) returns (AddResponsibleGamblingConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/responsible-gambling/config/add"
+			body: "*"
+		};
+	}
+
+	rpc DeleteResponsibleGamblingConfig(DeleteResponsibleGamblingConfigRequest) returns (DeleteResponsibleGamblingConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/responsible-gambling/config/delete"
+			body: "*"
+		};
+	}
+
+	rpc GetResponsibleGamblingConfig(GetResponsibleGamblingConfigRequest) returns (GetResponsibleGamblingConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/responsible-gambling/config/get"
+			body: "*"
+		};
+	}
+	
+	rpc UserIdentityAudit(UserIdentityAuditRequest) returns (UserIdentityAuditResponse) { }
+
+	rpc UserIdentityList(UserIdentityListRequest) returns (UserIdentityListResponse) { }
+
+	rpc AddRegisterLoginBlacklist(AddRegisterLoginBlacklistRequest) returns (AddRegisterLoginBlacklistResponse) {}
+
+	rpc DeleteRegisterLoginBlacklist(DeleteRegisterLoginBlacklistRequest) returns (DeleteRegisterLoginBlacklistResponse) {}
+
+	rpc ListRegisterLoginBlacklist(ListRegisterLoginBlacklistRequest) returns (ListRegisterLoginBlacklistResponse) {}
+
+	rpc SetOperatorRegisterLimitConfig(SetOperatorRegisterLimitConfigRequest) returns (SetOperatorRegisterLimitConfigResponse) {}
+
+	rpc GetOperatorRegisterLimitConfig(GetOperatorRegisterLimitConfigRequest) returns (GetOperatorRegisterLimitConfigResponse) {}
+
+	rpc CloseAccount(CloseAccountRequest) returns (CloseAccountResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/account/update"
+			body: "*"
+		};
 	}
 }
 
@@ -304,6 +374,20 @@ message UserInfo {
 	bool ban_withdraw = 15;
 	// role id
 	int64 role_id = 16;
+	// registered mobile
+	string registered_mobile = 17;
+	// registered email
+	string registered_email = 18;
+	// kyc_level
+	int32 kyc_level = 19;
+	// address
+	string address = 20;
+	// uesr identities
+	repeated UserIdentity user_identity = 21;
+	// user date of birth
+	google.protobuf.Timestamp dob = 22;
+	// user country
+	string country = 23;
 }
 
 // AuthType defines the type of authentication method.
@@ -350,6 +434,12 @@ message RegisterRequest {
 	string auth_id = 2;
 	// The password for the new account.
 	string password = 3;
+		// Date of birth of user
+	optional google.protobuf.Timestamp dob = 4;
+	// User ID info
+	optional string id_number = 5;
+	// User ID Type
+	optional string id_type = 6;
 }
 
 // LoginRequest contains the credentials for user login.
@@ -383,8 +473,8 @@ message LoginWithInfoRequest {
 	string auth_id = 2;
 	// The password for the account.
 	string password = 3;
-	// The operator ID to login with.
-	int64 operator_id = 4;
+	// The operator context to login with.
+	api.common.OperatorContext operator_context = 4;
 	// Http request info.
 	HttpRequestInfo http_request_info = 5;
 }
@@ -616,6 +706,27 @@ message ResetPasswordWithCodeRequest {
 message ResetPasswordWithCodeResponse {
 }
 
+message UserIdentityRequest {
+	// ID Type "Passport", "South African ID"
+	string id_type = 1;
+	string id_number = 2;
+	string image = 3;
+}
+
+message UserIdentity {
+	int64 id = 1;
+	int64 user_id = 2;
+	string id_type = 3;
+	string id_number = 4;
+	string image = 5;
+	string status = 6;
+	google.protobuf.Timestamp created_at = 7;
+	google.protobuf.Timestamp audited_at = 8;
+	string operator = 9;
+	string reviewer = 10;
+	int32 review_time = 11;
+}
+
 message UpdateUserRequest {
 	int64 user_id = 1;
 	optional string nickname = 2;
@@ -623,13 +734,37 @@ message UpdateUserRequest {
 	optional bool ban_login = 4;
 	optional bool ban_game = 5;
 	optional bool ban_withdraw = 6;
-	optional bool enabled = 7;
-	optional int64 role_id = 8;
+	optional bool locked = 7;
+	optional bool enabled = 8;
+	optional int64 role_id = 9;
+	optional string firstname = 10;
+	optional string lastname = 11;
+	optional string email = 12;
+	optional string mobile = 13;
+	optional UserIdentityRequest user_identity = 14;
+	optional string address = 15;
+	optional google.protobuf.Timestamp dob = 16;
+	optional bool email_verified = 17;
+	optional bool phone_verified = 18;
 	// The initial operator context.
-	api.common.OperatorContext operator_context = 9;
+	api.common.OperatorContext operator_context = 19;
 }
 
 message UpdateUserResponse {
+}
+
+message UpdateUserIdentityRequest {
+	// User identity id
+	int64 id = 1;
+	// User ID Type
+	string id_type = 2;
+	// User ID Number
+	string id_number = 3;
+	// Image Url
+	string image = 4;
+}
+
+message UpdateUserIdentityResponse {
 }
 
 message ListUsersRequest {
@@ -798,6 +933,13 @@ message GetUserProfileResponse {
 		string content = 4;
 		google.protobuf.Timestamp created_at = 5;
 	}
+	message ChangeRecord {
+		google.protobuf.Timestamp changed_at = 1;
+		string new = 2;
+		string old = 3;
+		string ip = 4;
+		string reviewer = 5;
+	}
 	string nickname = 1;
 	int64 user_id = 2;
 	int32 vip_level = 3; // Not available for now, only return 1
@@ -805,13 +947,30 @@ message GetUserProfileResponse {
 	bool ban_withdraw = 5;
 	bool ban_game = 6;
 	bool ban_login = 7;
-	RegistrationRecord registration_record = 8;
-	repeated LoginRecord login_records = 9;
-	repeated string tags = 10;
-	repeated Comment comments = 11;
-	int32 total_login_count = 12;
-	int32 login_page = 13;
-	int32 login_page_size = 14;
+	bool locked = 8;
+	RegistrationRecord registration_record = 9;
+	repeated LoginRecord login_records = 10;
+	repeated string tags = 11;
+	repeated Comment comments = 12;
+	int32 total_login_count = 13;
+	int32 login_page = 14;
+	int32 login_page_size = 15;
+	string registered_mobile = 16;
+	string registered_email = 17;
+	string first_name = 18;
+	string last_name = 19;
+	int32 kyc_level = 20;
+	bool email_verified = 21;
+	bool phone_verified = 22;
+	google.protobuf.Timestamp dob = 23;
+	string address = 24;
+	repeated UserIdentity user_identity = 25;
+	repeated ChangeRecord emailChangeHistory = 26;
+	repeated ChangeRecord phoneChangeHistory = 27;
+	// Email.
+	string login_email = 28;
+	// Mobile.
+	string login_mobile = 29;
 }
 
 message CreateRoleRequest {
@@ -861,6 +1020,7 @@ message CreateOperatorRequest {
 	optional string backoffice_timezone = 7;
 	repeated string supported_languages = 8;
 	repeated string supported_currencies = 9;
+	optional string template_name = 10;
 }
 
 message CreateOperatorResponse {
@@ -1006,7 +1166,8 @@ message GetChildOperatorIdsResponse {
 message CheckEmailExistsRequest {
 	string email = 1;
 	int64 operator_id = 2;
-	string operator_type = 3; // "operator", "company", "retailer", "system"
+	// "operator", "company", "retailer", "system"
+	string operator_type = 3;
 }
 
 message CheckEmailExistsResponse {
@@ -1054,7 +1215,7 @@ message OperatorAccountPasswordSettings {
 }
 
 message OperatorAccountSecuritySettings {
-	int32 max_consecutive_failed_logins = 1;
+	int32 max_password_retries = 1;
 	int32 password_expiry_days = 2;
 	int32 password_history_limits = 3;
 }
@@ -1074,6 +1235,32 @@ message OperatorAccountSettings {
 	OperatorAccountSecuritySettings security_settings = 2;
 	OperatorAccountGameSettings game_settings = 3;
 	OperatorAccountPaymentSettings payment_settings = 4;
+}
+
+message GetUserAccountSettingsStatusRequest {
+	int64 user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+}
+
+message UserAccountGameSettingsStatus {
+	bool no_game_without_deposit = 1;
+	int32 min_game_kyc_level = 2;
+	int32 deposit_count = 3;
+	int32 kyc_level = 4;
+}
+
+message UserAccountPaymentSettingsStatus {
+	int32 min_deposit_kyc_level = 1;
+	int32 min_withdraw_kyc_level = 2;
+	int32 kyc_level = 3;
+}
+
+message GetUserAccountSettingsStatusResponse {
+	bool allow_game = 1;
+	bool allow_deposit = 2;
+	bool allow_withdraw = 3;
+	UserAccountGameSettingsStatus game_settings_status = 4;
+	UserAccountPaymentSettingsStatus payment_settings_status = 5;
 }
 
 message OperatorConfig {
@@ -1101,16 +1288,22 @@ message OperatorDetails {
 	repeated string supported_languages = 17;
 	repeated string supported_currencies = 18;
 	string status = 19;
-	bool is_maintenance = 20;
-	int64 maintenance_start_time = 21;
-	int64 maintenance_end_time = 22;
-	int64 operator_id = 23; // operator id in the operator hierarchy
-	int64 company_operator_id = 24; // company operator id in the operator hierarchy
-	string company_operator_name = 25; // company operator name in the operator hierarchy, or empty string if not exists
-	int64 retailer_operator_id = 26; // retailer operator id in the operator hierarchy
-	string retailer_operator_name = 27; // retailer operator name in the operator hierarchy, or empty string if not exists
-	int64 system_operator_id = 28; // system operator id in the operator hierarchy
-	string system_operator_name = 29; // system operator name in the operator hierarchy, or empty string if not exists
+	int64 status_start_time = 21;
+	int64 status_end_time = 22;
+	// operator id in the operator hierarchy
+	int64 operator_id = 23;
+	// company operator id in the operator hierarchy
+	int64 company_operator_id = 24;
+	// company operator name in the operator hierarchy, or empty string if not exists
+	string company_operator_name = 25;
+	// retailer operator id in the operator hierarchy
+	int64 retailer_operator_id = 26;
+	// retailer operator name in the operator hierarchy, or empty string if not exists
+	string retailer_operator_name = 27;
+	// system operator id in the operator hierarchy
+	int64 system_operator_id = 28;
+	// system operator name in the operator hierarchy, or empty string if not exists
+	string system_operator_name = 29;
 	OperatorConfig config = 30;
 	string min_launch_balance = 31;
 	repeated string status_launch_whitelist = 32;
@@ -1202,15 +1395,21 @@ message ListBottomOperatorsResponse {
 }
 
 message UpdateOperatorStatusRequest {
-	api.common.OperatorContext target_operator_context = 1; // target operator context
-	string action = 2; // action to update the status of target operator  "launch", "manual_suspend", "auto_suspend", "recovery", "auto_close", "manual_request", "approved", "maintain", "pending"
-	google.protobuf.Timestamp actionStart = 3; // action start
-	google.protobuf.Timestamp actionEnd = 4; // action end
-	api.common.OperatorContext operator_context = 5; // operator context of the backoffice operator
+	// target operator context
+ 	api.common.OperatorContext target_operator_context = 1; 
+	// action to update the status of target operator "pending", "live", "suspended", "request_to_close", "closed", "maintain",
+ 	string action = 2; 
+	// action start
+	google.protobuf.Timestamp actionStart = 3; 
+	// action end
+	google.protobuf.Timestamp actionEnd = 4;
+	// operator context of the backoffice operator
+	api.common.OperatorContext operator_context = 5;
 }
 
 message UpdateOperatorStatusResponse {
-	string status = 1; // status of target operator after update
+	// status of target operator after update
+	string status = 1;
 }
 
 message ListAllUsersRequest {
@@ -1234,7 +1433,8 @@ message ListOperatorsByAdminEmailResponse {
 }
 
 message ListOperatorDetailsRequest {
-	repeated int64 operator_ids = 1; // real operator ids list
+	// real operator ids list
+	repeated int64 operator_ids = 1;
 }
 
 message ListOperatorDetailsResponse {
@@ -1263,4 +1463,171 @@ message UpdateOperatorAccountSettingsRequest {
 }
 
 message UpdateOperatorAccountSettingsResponse {
+}
+
+message ResponsibleGamblingConfig {
+	message SelfExclusion {
+		google.protobuf.Timestamp start_time = 1;
+		google.protobuf.Timestamp end_time = 2;
+	}
+	message BreakInPlay {
+		google.protobuf.Timestamp start_time = 1;
+		google.protobuf.Timestamp end_time = 2;
+	}
+	message TimeLimits {
+		string time_zone = 1; // "UTC+X", "UTC-X"
+		string start_time = 2; // HH:mm:ss, works out every day
+		string end_time = 3; // HH:mm:ss, works out every day
+	}
+	optional SelfExclusion self_exclusion = 1;
+	optional BreakInPlay break_in_play = 2;
+	optional TimeLimits time_limits = 3;
+}
+
+message AddResponsibleGamblingConfigRequest {
+	ResponsibleGamblingConfig responsible_gambling_config = 1;
+}
+
+message AddResponsibleGamblingConfigResponse {
+}
+
+message DeleteResponsibleGamblingConfigRequest {
+	optional int64 user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+	// "self_exclusion", "break_in_play", "time_limits"
+	string limit_type = 3;
+}
+
+message DeleteResponsibleGamblingConfigResponse {
+}
+
+message GetResponsibleGamblingConfigRequest {
+	optional int64 user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+}
+
+message ResponsibleGamblingStatus {
+	bool login_allowed = 1;
+	bool deposit_allowed = 2;
+	bool withdrawal_allowed = 3;
+	bool game_bet_allowed = 4;
+	bool self_exclusion_active = 5; // indicates if self exclusion active in current time	
+	bool break_in_play_active = 6; // indicates if break in play active in current time
+	bool time_limits_active = 7; // indicates if time limits active in current time
+	google.protobuf.Timestamp time_limits_next_inactive_time = 8; // the very next time when time limits is inactive, exists if time_limits_active is true
+}
+
+message ResponsibleGamblingDeleteSchedule {
+	google.protobuf.Timestamp self_exclusion_delete_schedule_time = 1;
+	google.protobuf.Timestamp break_in_play_delete_schedule_time = 2;
+	google.protobuf.Timestamp time_limits_delete_schedule_time = 3;
+}
+
+message GetResponsibleGamblingConfigResponse {
+	ResponsibleGamblingConfig responsible_gambling_config = 1;
+	ResponsibleGamblingStatus responsible_gambling_status = 2;
+	ResponsibleGamblingDeleteSchedule responsible_gambling_delete_schedule = 3;
+}
+
+message UserIdentityAuditRequest {
+	// user identity id
+	int64 id = 1;
+	// audit "approved" or "declined"
+	string audit= 2;
+	api.common.OperatorContext operator_context = 3;
+}
+
+message UserIdentityAuditResponse {
+	
+}
+
+message UserIdentityListRequest {
+	optional int64 id = 1;
+	optional int64 user_id = 2;
+	optional string status = 3;
+	optional google.protobuf.Timestamp start_time = 4;
+	optional google.protobuf.Timestamp end_time = 5;
+	int32 page = 6;
+	int32 page_size = 7;
+	// The initial operator context.
+	api.common.OperatorContextFilters operator_context_filters = 8;
+	api.common.OperatorContext operator_context = 9;
+}
+
+message UserIdentityListResponse {
+	repeated UserIdentity user_identity = 1;
+	int32 total_count = 2;
+	int32 approved_count = 3;
+	int32 declined_count = 4;
+	int32 pending_count = 5;
+}
+
+message AddRegisterLoginBlacklistRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	string id_type = 3;
+	repeated string ids = 4;
+}
+
+message AddRegisterLoginBlacklistResponse {
+}
+
+message DeleteRegisterLoginBlacklistRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	string id_type = 3;
+	repeated string ids = 4;
+}
+
+message DeleteRegisterLoginBlacklistResponse {
+}
+
+message ListRegisterLoginBlacklistRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	string id_type = 4;
+	optional int32 page = 5;
+	optional int32 page_size = 6;
+}
+
+message ListRegisterLoginBlacklistResponse {
+	message RegisterLoginBlacklist {
+		string id = 1;
+		google.protobuf.Timestamp created_at = 2;
+		string source = 3;
+	}
+	repeated RegisterLoginBlacklist register_login_blacklists = 1;
+	int32 page = 2;
+	int32 page_size = 3;
+	int32 total = 4;
+}
+
+message OperatorRegisterLimitConfig {
+	int32 registration_limit_per_ip = 1;
+}
+
+message SetOperatorRegisterLimitConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	map<string, OperatorRegisterLimitConfig> config = 3;
+}
+
+message SetOperatorRegisterLimitConfigResponse {
+}
+
+message GetOperatorRegisterLimitConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+}
+
+message GetOperatorRegisterLimitConfigResponse {
+	map<string, OperatorRegisterLimitConfig> config = 1;
+}
+
+message CloseAccountRequest {
+	
+}
+
+message CloseAccountResponse {
+	
 }

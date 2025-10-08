@@ -20,30 +20,38 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeWallet_GetWallets_FullMethodName                      = "/api.backoffice.service.v1.BackofficeWallet/GetWallets"
-	BackofficeWallet_GetWalletCredits_FullMethodName                = "/api.backoffice.service.v1.BackofficeWallet/GetWalletCredits"
-	BackofficeWallet_ListWalletBalanceTransactions_FullMethodName   = "/api.backoffice.service.v1.BackofficeWallet/ListWalletBalanceTransactions"
-	BackofficeWallet_GetWalletCreditTransactions_FullMethodName     = "/api.backoffice.service.v1.BackofficeWallet/GetWalletCreditTransactions"
-	BackofficeWallet_UpdateWallet_FullMethodName                    = "/api.backoffice.service.v1.BackofficeWallet/UpdateWallet"
-	BackofficeWallet_AddWalletCurrency_FullMethodName               = "/api.backoffice.service.v1.BackofficeWallet/AddWalletCurrency"
-	BackofficeWallet_ListWalletCurrencies_FullMethodName            = "/api.backoffice.service.v1.BackofficeWallet/ListWalletCurrencies"
-	BackofficeWallet_UpdateWalletCurrency_FullMethodName            = "/api.backoffice.service.v1.BackofficeWallet/UpdateWalletCurrency"
-	BackofficeWallet_ListOperatorBalances_FullMethodName            = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorBalances"
-	BackofficeWallet_GetExchangeRates_FullMethodName                = "/api.backoffice.service.v1.BackofficeWallet/GetExchangeRates"
-	BackofficeWallet_OperatorTransfer_FullMethodName                = "/api.backoffice.service.v1.BackofficeWallet/OperatorTransfer"
-	BackofficeWallet_OperatorSwap_FullMethodName                    = "/api.backoffice.service.v1.BackofficeWallet/OperatorSwap"
-	BackofficeWallet_OperatorBalanceFreeze_FullMethodName           = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceFreeze"
-	BackofficeWallet_OperatorBalanceRollback_FullMethodName         = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceRollback"
-	BackofficeWallet_OperatorBalanceSettle_FullMethodName           = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceSettle"
-	BackofficeWallet_ListOperatorBalanceTransactions_FullMethodName = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorBalanceTransactions"
-	BackofficeWallet_UpdateOperatorBalance_FullMethodName           = "/api.backoffice.service.v1.BackofficeWallet/UpdateOperatorBalance"
-	BackofficeWallet_GetOperatorBalance_FullMethodName              = "/api.backoffice.service.v1.BackofficeWallet/GetOperatorBalance"
-	BackofficeWallet_SetDepositRewardSequences_FullMethodName       = "/api.backoffice.service.v1.BackofficeWallet/SetDepositRewardSequences"
-	BackofficeWallet_DeleteDepositRewardSequences_FullMethodName    = "/api.backoffice.service.v1.BackofficeWallet/DeleteDepositRewardSequences"
-	BackofficeWallet_GetDepositRewardConfig_FullMethodName          = "/api.backoffice.service.v1.BackofficeWallet/GetDepositRewardConfig"
-	BackofficeWallet_GetGamificationCurrencyConfig_FullMethodName   = "/api.backoffice.service.v1.BackofficeWallet/GetGamificationCurrencyConfig"
-	BackofficeWallet_UpdateOperatorCurrencyConfig_FullMethodName    = "/api.backoffice.service.v1.BackofficeWallet/UpdateOperatorCurrencyConfig"
-	BackofficeWallet_UpdateDeductionOrder_FullMethodName            = "/api.backoffice.service.v1.BackofficeWallet/UpdateDeductionOrder"
+	BackofficeWallet_GetWallets_FullMethodName                            = "/api.backoffice.service.v1.BackofficeWallet/GetWallets"
+	BackofficeWallet_GetWalletCredits_FullMethodName                      = "/api.backoffice.service.v1.BackofficeWallet/GetWalletCredits"
+	BackofficeWallet_ListWalletBalanceTransactions_FullMethodName         = "/api.backoffice.service.v1.BackofficeWallet/ListWalletBalanceTransactions"
+	BackofficeWallet_GetWalletCreditTransactions_FullMethodName           = "/api.backoffice.service.v1.BackofficeWallet/GetWalletCreditTransactions"
+	BackofficeWallet_UpdateWallet_FullMethodName                          = "/api.backoffice.service.v1.BackofficeWallet/UpdateWallet"
+	BackofficeWallet_AddWalletCurrency_FullMethodName                     = "/api.backoffice.service.v1.BackofficeWallet/AddWalletCurrency"
+	BackofficeWallet_ListWalletCurrencies_FullMethodName                  = "/api.backoffice.service.v1.BackofficeWallet/ListWalletCurrencies"
+	BackofficeWallet_UpdateWalletCurrency_FullMethodName                  = "/api.backoffice.service.v1.BackofficeWallet/UpdateWalletCurrency"
+	BackofficeWallet_ListOperatorBalances_FullMethodName                  = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorBalances"
+	BackofficeWallet_GetExchangeRates_FullMethodName                      = "/api.backoffice.service.v1.BackofficeWallet/GetExchangeRates"
+	BackofficeWallet_OperatorTransfer_FullMethodName                      = "/api.backoffice.service.v1.BackofficeWallet/OperatorTransfer"
+	BackofficeWallet_OperatorSwap_FullMethodName                          = "/api.backoffice.service.v1.BackofficeWallet/OperatorSwap"
+	BackofficeWallet_OperatorBalanceFreeze_FullMethodName                 = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceFreeze"
+	BackofficeWallet_OperatorBalanceRollback_FullMethodName               = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceRollback"
+	BackofficeWallet_OperatorBalanceSettle_FullMethodName                 = "/api.backoffice.service.v1.BackofficeWallet/OperatorBalanceSettle"
+	BackofficeWallet_ListOperatorBalanceTransactions_FullMethodName       = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorBalanceTransactions"
+	BackofficeWallet_UpdateOperatorBalance_FullMethodName                 = "/api.backoffice.service.v1.BackofficeWallet/UpdateOperatorBalance"
+	BackofficeWallet_GetOperatorBalance_FullMethodName                    = "/api.backoffice.service.v1.BackofficeWallet/GetOperatorBalance"
+	BackofficeWallet_SetDepositRewardSequences_FullMethodName             = "/api.backoffice.service.v1.BackofficeWallet/SetDepositRewardSequences"
+	BackofficeWallet_DeleteDepositRewardSequences_FullMethodName          = "/api.backoffice.service.v1.BackofficeWallet/DeleteDepositRewardSequences"
+	BackofficeWallet_GetDepositRewardConfig_FullMethodName                = "/api.backoffice.service.v1.BackofficeWallet/GetDepositRewardConfig"
+	BackofficeWallet_GetGamificationCurrencyConfig_FullMethodName         = "/api.backoffice.service.v1.BackofficeWallet/GetGamificationCurrencyConfig"
+	BackofficeWallet_UpdateOperatorCurrencyConfig_FullMethodName          = "/api.backoffice.service.v1.BackofficeWallet/UpdateOperatorCurrencyConfig"
+	BackofficeWallet_UpdateDeductionOrder_FullMethodName                  = "/api.backoffice.service.v1.BackofficeWallet/UpdateDeductionOrder"
+	BackofficeWallet_DeleteWalletResponsibleGamblingConfig_FullMethodName = "/api.backoffice.service.v1.BackofficeWallet/DeleteWalletResponsibleGamblingConfig"
+	BackofficeWallet_ListWalletResponsibleGamblingConfigs_FullMethodName  = "/api.backoffice.service.v1.BackofficeWallet/ListWalletResponsibleGamblingConfigs"
+	BackofficeWallet_ListCustomerRecords_FullMethodName                   = "/api.backoffice.service.v1.BackofficeWallet/ListCustomerRecords"
+	BackofficeWallet_ExportCustomerRecords_FullMethodName                 = "/api.backoffice.service.v1.BackofficeWallet/ExportCustomerRecords"
+	BackofficeWallet_SetFICAThresholdConfig_FullMethodName                = "/api.backoffice.service.v1.BackofficeWallet/SetFICAThresholdConfig"
+	BackofficeWallet_GetFICAThresholdConfig_FullMethodName                = "/api.backoffice.service.v1.BackofficeWallet/GetFICAThresholdConfig"
+	BackofficeWallet_ListFICAThresholdTransactions_FullMethodName         = "/api.backoffice.service.v1.BackofficeWallet/ListFICAThresholdTransactions"
+	BackofficeWallet_ExportFICAThresholdTransactions_FullMethodName       = "/api.backoffice.service.v1.BackofficeWallet/ExportFICAThresholdTransactions"
 )
 
 // BackofficeWalletClient is the client API for BackofficeWallet service.
@@ -57,8 +65,9 @@ type BackofficeWalletClient interface {
 	GetWalletCreditTransactions(ctx context.Context, in *GetWalletCreditTransactionsRequest, opts ...grpc.CallOption) (*GetWalletCreditTransactionsResponse, error)
 	UpdateWallet(ctx context.Context, in *UpdateWalletRequest, opts ...grpc.CallOption) (*UpdateWalletResponse, error)
 	AddWalletCurrency(ctx context.Context, in *AddWalletCurrencyRequest, opts ...grpc.CallOption) (*AddWalletCurrencyResponse, error)
-	ListWalletCurrencies(ctx context.Context, in *ListWalletCurrenciesRequest, opts ...grpc.CallOption) (*ListWalletCurrenciesResponse, error)
-	UpdateWalletCurrency(ctx context.Context, in *UpdateWalletCurrencyRequest, opts ...grpc.CallOption) (*UpdateWalletCurrencyResponse, error)
+	// ListWalletCurrencies call ListCurrencies in wallet service with aggregated and parent fields
+	ListWalletCurrencies(ctx context.Context, in *ListWalletCurrenciesRequest, opts ...grpc.CallOption) (*v1.ListCurrenciesResponse, error)
+	UpdateWalletCurrency(ctx context.Context, in *UpdateWalletCurrencyRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorCurrencyResponse, error)
 	// ListOperatorBalances lists all operator balances which belong to the backoffice operator
 	ListOperatorBalances(ctx context.Context, in *ListOperatorBalancesRequest, opts ...grpc.CallOption) (*v1.ListBottomOperatorBalancesResponse, error)
 	GetExchangeRates(ctx context.Context, in *GetExchangeRatesRequest, opts ...grpc.CallOption) (*GetExchangeRatesResponse, error)
@@ -90,6 +99,22 @@ type BackofficeWalletClient interface {
 	UpdateOperatorCurrencyConfig(ctx context.Context, in *UpdateOperatorCurrencyConfigRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorCurrencyConfigResponse, error)
 	// UpdateDeductionOrder updates the deduction order config based on operator context
 	UpdateDeductionOrder(ctx context.Context, in *UpdateDeductionOrderRequest, opts ...grpc.CallOption) (*v1.UpdateDeductionOrderResponse, error)
+	// DeleteWalletResponsibleGamblingConfig deletes gambling config for a user's currency
+	DeleteWalletResponsibleGamblingConfig(ctx context.Context, in *DeleteWalletResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*v1.DeleteResponsibleGamblingConfigResponse, error)
+	// ListWalletResponsibleGamblingConfigs lists gambling configs for a user with all currencies
+	ListWalletResponsibleGamblingConfigs(ctx context.Context, in *ListWalletResponsibleGamblingConfigsRequest, opts ...grpc.CallOption) (*v1.ListResponsibleGamblingConfigsResponse, error)
+	// ListCustomerRecords lists customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
+	ListCustomerRecords(ctx context.Context, in *ListCustomerRecordsRequest, opts ...grpc.CallOption) (*v1.ListCustomerRecordsResponse, error)
+	// ExportCustomerRecords creates a task to exports customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
+	ExportCustomerRecords(ctx context.Context, in *ExportCustomerRecordsRequest, opts ...grpc.CallOption) (*v1.ExportCustomerRecordsResponse, error)
+	// SetFICAThresholdConfig sets the FICA threshold config for an operator and its specific currency
+	SetFICAThresholdConfig(ctx context.Context, in *SetFICAThresholdConfigRequest, opts ...grpc.CallOption) (*v1.SetFICAThresholdConfigResponse, error)
+	// GetFICAThresholdConfig gets the FICA threshold config for an operator of all currencies
+	GetFICAThresholdConfig(ctx context.Context, in *GetFICAThresholdConfigRequest, opts ...grpc.CallOption) (*v1.GetFICAThresholdConfigResponse, error)
+	// ListFICAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
+	ListFICAThresholdTransactions(ctx context.Context, in *ListFICAThresholdTransactionsRequest, opts ...grpc.CallOption) (*v1.ListFICAThresholdTransactionsResponse, error)
+	// ExportFICAThresholdTransactions creates a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
+	ExportFICAThresholdTransactions(ctx context.Context, in *ExportFICAThresholdTransactionsRequest, opts ...grpc.CallOption) (*v1.ExportFICAThresholdTransactionsResponse, error)
 }
 
 type backofficeWalletClient struct {
@@ -160,9 +185,9 @@ func (c *backofficeWalletClient) AddWalletCurrency(ctx context.Context, in *AddW
 	return out, nil
 }
 
-func (c *backofficeWalletClient) ListWalletCurrencies(ctx context.Context, in *ListWalletCurrenciesRequest, opts ...grpc.CallOption) (*ListWalletCurrenciesResponse, error) {
+func (c *backofficeWalletClient) ListWalletCurrencies(ctx context.Context, in *ListWalletCurrenciesRequest, opts ...grpc.CallOption) (*v1.ListCurrenciesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListWalletCurrenciesResponse)
+	out := new(v1.ListCurrenciesResponse)
 	err := c.cc.Invoke(ctx, BackofficeWallet_ListWalletCurrencies_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -170,9 +195,9 @@ func (c *backofficeWalletClient) ListWalletCurrencies(ctx context.Context, in *L
 	return out, nil
 }
 
-func (c *backofficeWalletClient) UpdateWalletCurrency(ctx context.Context, in *UpdateWalletCurrencyRequest, opts ...grpc.CallOption) (*UpdateWalletCurrencyResponse, error) {
+func (c *backofficeWalletClient) UpdateWalletCurrency(ctx context.Context, in *UpdateWalletCurrencyRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorCurrencyResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateWalletCurrencyResponse)
+	out := new(v1.UpdateOperatorCurrencyResponse)
 	err := c.cc.Invoke(ctx, BackofficeWallet_UpdateWalletCurrency_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -340,6 +365,86 @@ func (c *backofficeWalletClient) UpdateDeductionOrder(ctx context.Context, in *U
 	return out, nil
 }
 
+func (c *backofficeWalletClient) DeleteWalletResponsibleGamblingConfig(ctx context.Context, in *DeleteWalletResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*v1.DeleteResponsibleGamblingConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.DeleteResponsibleGamblingConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_DeleteWalletResponsibleGamblingConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) ListWalletResponsibleGamblingConfigs(ctx context.Context, in *ListWalletResponsibleGamblingConfigsRequest, opts ...grpc.CallOption) (*v1.ListResponsibleGamblingConfigsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListResponsibleGamblingConfigsResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_ListWalletResponsibleGamblingConfigs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) ListCustomerRecords(ctx context.Context, in *ListCustomerRecordsRequest, opts ...grpc.CallOption) (*v1.ListCustomerRecordsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListCustomerRecordsResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_ListCustomerRecords_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) ExportCustomerRecords(ctx context.Context, in *ExportCustomerRecordsRequest, opts ...grpc.CallOption) (*v1.ExportCustomerRecordsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ExportCustomerRecordsResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_ExportCustomerRecords_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) SetFICAThresholdConfig(ctx context.Context, in *SetFICAThresholdConfigRequest, opts ...grpc.CallOption) (*v1.SetFICAThresholdConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.SetFICAThresholdConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_SetFICAThresholdConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) GetFICAThresholdConfig(ctx context.Context, in *GetFICAThresholdConfigRequest, opts ...grpc.CallOption) (*v1.GetFICAThresholdConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetFICAThresholdConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_GetFICAThresholdConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) ListFICAThresholdTransactions(ctx context.Context, in *ListFICAThresholdTransactionsRequest, opts ...grpc.CallOption) (*v1.ListFICAThresholdTransactionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListFICAThresholdTransactionsResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_ListFICAThresholdTransactions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) ExportFICAThresholdTransactions(ctx context.Context, in *ExportFICAThresholdTransactionsRequest, opts ...grpc.CallOption) (*v1.ExportFICAThresholdTransactionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ExportFICAThresholdTransactionsResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_ExportFICAThresholdTransactions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeWalletServer is the server API for BackofficeWallet service.
 // All implementations must embed UnimplementedBackofficeWalletServer
 // for forward compatibility.
@@ -351,8 +456,9 @@ type BackofficeWalletServer interface {
 	GetWalletCreditTransactions(context.Context, *GetWalletCreditTransactionsRequest) (*GetWalletCreditTransactionsResponse, error)
 	UpdateWallet(context.Context, *UpdateWalletRequest) (*UpdateWalletResponse, error)
 	AddWalletCurrency(context.Context, *AddWalletCurrencyRequest) (*AddWalletCurrencyResponse, error)
-	ListWalletCurrencies(context.Context, *ListWalletCurrenciesRequest) (*ListWalletCurrenciesResponse, error)
-	UpdateWalletCurrency(context.Context, *UpdateWalletCurrencyRequest) (*UpdateWalletCurrencyResponse, error)
+	// ListWalletCurrencies call ListCurrencies in wallet service with aggregated and parent fields
+	ListWalletCurrencies(context.Context, *ListWalletCurrenciesRequest) (*v1.ListCurrenciesResponse, error)
+	UpdateWalletCurrency(context.Context, *UpdateWalletCurrencyRequest) (*v1.UpdateOperatorCurrencyResponse, error)
 	// ListOperatorBalances lists all operator balances which belong to the backoffice operator
 	ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*v1.ListBottomOperatorBalancesResponse, error)
 	GetExchangeRates(context.Context, *GetExchangeRatesRequest) (*GetExchangeRatesResponse, error)
@@ -384,6 +490,22 @@ type BackofficeWalletServer interface {
 	UpdateOperatorCurrencyConfig(context.Context, *UpdateOperatorCurrencyConfigRequest) (*v1.UpdateOperatorCurrencyConfigResponse, error)
 	// UpdateDeductionOrder updates the deduction order config based on operator context
 	UpdateDeductionOrder(context.Context, *UpdateDeductionOrderRequest) (*v1.UpdateDeductionOrderResponse, error)
+	// DeleteWalletResponsibleGamblingConfig deletes gambling config for a user's currency
+	DeleteWalletResponsibleGamblingConfig(context.Context, *DeleteWalletResponsibleGamblingConfigRequest) (*v1.DeleteResponsibleGamblingConfigResponse, error)
+	// ListWalletResponsibleGamblingConfigs lists gambling configs for a user with all currencies
+	ListWalletResponsibleGamblingConfigs(context.Context, *ListWalletResponsibleGamblingConfigsRequest) (*v1.ListResponsibleGamblingConfigsResponse, error)
+	// ListCustomerRecords lists customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
+	ListCustomerRecords(context.Context, *ListCustomerRecordsRequest) (*v1.ListCustomerRecordsResponse, error)
+	// ExportCustomerRecords creates a task to exports customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
+	ExportCustomerRecords(context.Context, *ExportCustomerRecordsRequest) (*v1.ExportCustomerRecordsResponse, error)
+	// SetFICAThresholdConfig sets the FICA threshold config for an operator and its specific currency
+	SetFICAThresholdConfig(context.Context, *SetFICAThresholdConfigRequest) (*v1.SetFICAThresholdConfigResponse, error)
+	// GetFICAThresholdConfig gets the FICA threshold config for an operator of all currencies
+	GetFICAThresholdConfig(context.Context, *GetFICAThresholdConfigRequest) (*v1.GetFICAThresholdConfigResponse, error)
+	// ListFICAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
+	ListFICAThresholdTransactions(context.Context, *ListFICAThresholdTransactionsRequest) (*v1.ListFICAThresholdTransactionsResponse, error)
+	// ExportFICAThresholdTransactions creates a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
+	ExportFICAThresholdTransactions(context.Context, *ExportFICAThresholdTransactionsRequest) (*v1.ExportFICAThresholdTransactionsResponse, error)
 	mustEmbedUnimplementedBackofficeWalletServer()
 }
 
@@ -412,10 +534,10 @@ func (UnimplementedBackofficeWalletServer) UpdateWallet(context.Context, *Update
 func (UnimplementedBackofficeWalletServer) AddWalletCurrency(context.Context, *AddWalletCurrencyRequest) (*AddWalletCurrencyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddWalletCurrency not implemented")
 }
-func (UnimplementedBackofficeWalletServer) ListWalletCurrencies(context.Context, *ListWalletCurrenciesRequest) (*ListWalletCurrenciesResponse, error) {
+func (UnimplementedBackofficeWalletServer) ListWalletCurrencies(context.Context, *ListWalletCurrenciesRequest) (*v1.ListCurrenciesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListWalletCurrencies not implemented")
 }
-func (UnimplementedBackofficeWalletServer) UpdateWalletCurrency(context.Context, *UpdateWalletCurrencyRequest) (*UpdateWalletCurrencyResponse, error) {
+func (UnimplementedBackofficeWalletServer) UpdateWalletCurrency(context.Context, *UpdateWalletCurrencyRequest) (*v1.UpdateOperatorCurrencyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateWalletCurrency not implemented")
 }
 func (UnimplementedBackofficeWalletServer) ListOperatorBalances(context.Context, *ListOperatorBalancesRequest) (*v1.ListBottomOperatorBalancesResponse, error) {
@@ -465,6 +587,30 @@ func (UnimplementedBackofficeWalletServer) UpdateOperatorCurrencyConfig(context.
 }
 func (UnimplementedBackofficeWalletServer) UpdateDeductionOrder(context.Context, *UpdateDeductionOrderRequest) (*v1.UpdateDeductionOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateDeductionOrder not implemented")
+}
+func (UnimplementedBackofficeWalletServer) DeleteWalletResponsibleGamblingConfig(context.Context, *DeleteWalletResponsibleGamblingConfigRequest) (*v1.DeleteResponsibleGamblingConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteWalletResponsibleGamblingConfig not implemented")
+}
+func (UnimplementedBackofficeWalletServer) ListWalletResponsibleGamblingConfigs(context.Context, *ListWalletResponsibleGamblingConfigsRequest) (*v1.ListResponsibleGamblingConfigsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListWalletResponsibleGamblingConfigs not implemented")
+}
+func (UnimplementedBackofficeWalletServer) ListCustomerRecords(context.Context, *ListCustomerRecordsRequest) (*v1.ListCustomerRecordsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCustomerRecords not implemented")
+}
+func (UnimplementedBackofficeWalletServer) ExportCustomerRecords(context.Context, *ExportCustomerRecordsRequest) (*v1.ExportCustomerRecordsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportCustomerRecords not implemented")
+}
+func (UnimplementedBackofficeWalletServer) SetFICAThresholdConfig(context.Context, *SetFICAThresholdConfigRequest) (*v1.SetFICAThresholdConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetFICAThresholdConfig not implemented")
+}
+func (UnimplementedBackofficeWalletServer) GetFICAThresholdConfig(context.Context, *GetFICAThresholdConfigRequest) (*v1.GetFICAThresholdConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFICAThresholdConfig not implemented")
+}
+func (UnimplementedBackofficeWalletServer) ListFICAThresholdTransactions(context.Context, *ListFICAThresholdTransactionsRequest) (*v1.ListFICAThresholdTransactionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListFICAThresholdTransactions not implemented")
+}
+func (UnimplementedBackofficeWalletServer) ExportFICAThresholdTransactions(context.Context, *ExportFICAThresholdTransactionsRequest) (*v1.ExportFICAThresholdTransactionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportFICAThresholdTransactions not implemented")
 }
 func (UnimplementedBackofficeWalletServer) mustEmbedUnimplementedBackofficeWalletServer() {}
 func (UnimplementedBackofficeWalletServer) testEmbeddedByValue()                          {}
@@ -919,6 +1065,150 @@ func _BackofficeWallet_UpdateDeductionOrder_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeWallet_DeleteWalletResponsibleGamblingConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteWalletResponsibleGamblingConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).DeleteWalletResponsibleGamblingConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_DeleteWalletResponsibleGamblingConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).DeleteWalletResponsibleGamblingConfig(ctx, req.(*DeleteWalletResponsibleGamblingConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_ListWalletResponsibleGamblingConfigs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListWalletResponsibleGamblingConfigsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).ListWalletResponsibleGamblingConfigs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_ListWalletResponsibleGamblingConfigs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).ListWalletResponsibleGamblingConfigs(ctx, req.(*ListWalletResponsibleGamblingConfigsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_ListCustomerRecords_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCustomerRecordsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).ListCustomerRecords(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_ListCustomerRecords_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).ListCustomerRecords(ctx, req.(*ListCustomerRecordsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_ExportCustomerRecords_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportCustomerRecordsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).ExportCustomerRecords(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_ExportCustomerRecords_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).ExportCustomerRecords(ctx, req.(*ExportCustomerRecordsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_SetFICAThresholdConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetFICAThresholdConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).SetFICAThresholdConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_SetFICAThresholdConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).SetFICAThresholdConfig(ctx, req.(*SetFICAThresholdConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_GetFICAThresholdConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFICAThresholdConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).GetFICAThresholdConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_GetFICAThresholdConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).GetFICAThresholdConfig(ctx, req.(*GetFICAThresholdConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_ListFICAThresholdTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListFICAThresholdTransactionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).ListFICAThresholdTransactions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_ListFICAThresholdTransactions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).ListFICAThresholdTransactions(ctx, req.(*ListFICAThresholdTransactionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_ExportFICAThresholdTransactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportFICAThresholdTransactionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).ExportFICAThresholdTransactions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_ExportFICAThresholdTransactions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).ExportFICAThresholdTransactions(ctx, req.(*ExportFICAThresholdTransactionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeWallet_ServiceDesc is the grpc.ServiceDesc for BackofficeWallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1021,6 +1311,38 @@ var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateDeductionOrder",
 			Handler:    _BackofficeWallet_UpdateDeductionOrder_Handler,
+		},
+		{
+			MethodName: "DeleteWalletResponsibleGamblingConfig",
+			Handler:    _BackofficeWallet_DeleteWalletResponsibleGamblingConfig_Handler,
+		},
+		{
+			MethodName: "ListWalletResponsibleGamblingConfigs",
+			Handler:    _BackofficeWallet_ListWalletResponsibleGamblingConfigs_Handler,
+		},
+		{
+			MethodName: "ListCustomerRecords",
+			Handler:    _BackofficeWallet_ListCustomerRecords_Handler,
+		},
+		{
+			MethodName: "ExportCustomerRecords",
+			Handler:    _BackofficeWallet_ExportCustomerRecords_Handler,
+		},
+		{
+			MethodName: "SetFICAThresholdConfig",
+			Handler:    _BackofficeWallet_SetFICAThresholdConfig_Handler,
+		},
+		{
+			MethodName: "GetFICAThresholdConfig",
+			Handler:    _BackofficeWallet_GetFICAThresholdConfig_Handler,
+		},
+		{
+			MethodName: "ListFICAThresholdTransactions",
+			Handler:    _BackofficeWallet_ListFICAThresholdTransactions_Handler,
+		},
+		{
+			MethodName: "ExportFICAThresholdTransactions",
+			Handler:    _BackofficeWallet_ExportFICAThresholdTransactions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

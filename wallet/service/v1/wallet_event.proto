@@ -15,6 +15,7 @@ service WalletEvent {
 message EventRequest {
 	string subscription_id = 1;
 	bytes event_data = 2;
+	string message_id = 3;
 }
 
 message EventResponse {}
@@ -26,16 +27,43 @@ message BalanceUpdateEvent {
 	common.OperatorContext operator_context = 4;
 	string currency = 5; // settlement currency
 	string reporting_currency = 6;
-	string before_balance = 7;
+	string before_balance = 7; // cash + operator bonus + provider bonus
 	string before_balance_usd = 8;
 	string before_balance_reporting_currency = 9;
-	string after_balance = 10;
+	string after_balance = 10; // cash + operator bonus + provider bonus
 	string after_balance_usd = 11;
 	string after_balance_reporting_currency = 12;
-	string amount = 13;
+	string amount = 13; // cash + operator bonus + provider bonus
 	string amount_usd = 14;
 	string amount_reporting_currency = 15;
 	int64 created_at = 16;
+	string before_cash = 17;
+	string before_cash_usd = 18;
+	string before_cash_reporting_currency = 19;
+	string before_operator_bonus = 20;
+	string before_operator_bonus_usd = 21;
+	string before_operator_bonus_reporting_currency = 22;
+	string before_provider_bonus = 23;
+	string before_provider_bonus_usd = 24;
+	string before_provider_bonus_reporting_currency = 25;
+	string after_cash = 26;
+	string after_cash_usd = 27;
+	string after_cash_reporting_currency = 28;
+	string after_operator_bonus = 29;
+	string after_operator_bonus_usd = 30;
+	string after_operator_bonus_reporting_currency = 31;
+	string after_provider_bonus = 32;
+	string after_provider_bonus_usd = 33;
+	string after_provider_bonus_reporting_currency = 34;
+	string cash_amount = 35;
+	string cash_amount_usd = 36;
+	string cash_amount_reporting_currency = 37;
+	string operator_bonus_amount = 38;
+	string operator_bonus_amount_usd = 39;
+	string operator_bonus_amount_reporting_currency = 40;
+	string provider_bonus_amount = 41;
+	string provider_bonus_amount_usd = 42;
+	string provider_bonus_amount_reporting_currency = 43;
 }
 
 message OperatorBalanceUpdateEvent {
@@ -54,4 +82,33 @@ message OperatorBalanceUpdateEvent {
 	string amount_usd = 13;
 	string amount_reporting_currency = 14;
 	int64 created_at = 15;
+}
+
+message UpdateResponsibleGamblingConfigEvent {
+	message Config {
+		string deposit_limit = 1;
+		string withdrawal_limit = 2;
+		string daily_play_limit = 3;
+		string weekly_play_limit = 4;
+		string monthly_play_limit = 5;
+		string daily_loss_limit = 6;
+		string weekly_loss_limit = 7;
+		string monthly_loss_limit = 8;
+		int64 deposit_limit_delete_schedule_time = 9;
+		int64 withdrawal_limit_delete_schedule_time = 10;
+		int64 daily_play_limit_delete_schedule_time = 11;
+		int64 weekly_play_limit_delete_schedule_time = 12;
+		int64 monthly_play_limit_delete_schedule_time = 13;
+		int64 daily_loss_limit_delete_schedule_time = 14;
+		int64 weekly_loss_limit_delete_schedule_time = 15;
+		int64 monthly_loss_limit_delete_schedule_time = 16;
+	}
+	int64 target_user_id = 1;
+	int64 initiator_user_id = 2;
+	api.common.OperatorContext initiator_operator_context = 3;
+	string action = 4; // set, delete
+	string currency = 5;
+	Config before_config = 6;
+	Config after_config = 7;
+	int64 updated_at = 8;
 }

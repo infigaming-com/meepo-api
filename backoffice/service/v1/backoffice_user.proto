@@ -5,6 +5,7 @@ package api.backoffice.service.v1;
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "common/common.proto";
+import "user/service/v1/user.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -12,48 +13,48 @@ option java_package = "api.backoffice.service.v1";
 
 service BackofficeUser {
 	rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/user/list"
-            body: "*"
-        };
+      option (google.api.http) = {
+        post: "/v1/backoffice/user/list"
+        body: "*"
+      };
     }
     rpc GetUserOverview(GetUserOverviewRequest) returns (GetUserOverviewResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/user/overview/get"
-            body: "*"
-        };
+      option (google.api.http) = {
+        post: "/v1/backoffice/user/overview/get"
+        body: "*"
+      };
     }
-    rpc GetUserProfile(GetUserProfileRequest) returns (GetUserProfileResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/user/profile/get"
-            body: "*"
-        };
+    rpc GetUserProfile(GetUserProfileRequest) returns (user.service.v1.GetUserProfileResponse) {
+      option (google.api.http) = {
+        post: "/v1/backoffice/user/profile/get"
+        body: "*"
+      };
     }
     rpc AddUserComment(AddUserCommentRequest) returns (AddUserCommentResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/user/comments/add"
-            body: "*"
-        };
+      option (google.api.http) = {
+        post: "/v1/backoffice/user/comments/add"
+        body: "*"
+      };
     }
 	rpc ListUserComments(ListUserCommentsRequest) returns (ListUserCommentsResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/user/comments/list"
-            body: "*"
-        };
+      option (google.api.http) = {
+        post: "/v1/backoffice/user/comments/list"
+        body: "*"
+      };
     }
 
 	rpc SendEmailVerificationCode(SendEmailVerificationCodeRequest) returns (SendEmailVerificationCodeResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/user/send-email-verification-code"
+    option (google.api.http) = {
+      post: "/v1/backoffice/user/send-email-verification-code"
 			body: "*"
 		};
 	}
 
 	rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
-        option (google.api.http) = {
-            post: "/v1/backoffice/user/update"
-            body: "*"
-        };
+      option (google.api.http) = {
+        post: "/v1/backoffice/user/update"
+        body: "*"
+      };
     }
 
 	// SetOperatorTagConfig sets or updates the follow_parent flag for an operator.
@@ -101,6 +102,34 @@ service BackofficeUser {
 	rpc SetUserTags(SetUserTagsRequest) returns (SetUserTagsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/user/tags/set"
+			body: "*"
+		};
+	}
+
+	rpc DeleteUserResponsibleGamblingConfig(DeleteUserResponsibleGamblingConfigRequest) returns (user.service.v1.DeleteResponsibleGamblingConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/user/responsible-gambling/config/delete"
+			body: "*"
+		};
+	}
+
+	rpc GetUserResponsibleGamblingConfig(GetUserResponsibleGamblingConfigRequest) returns (user.service.v1.GetResponsibleGamblingConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/user/responsible-gambling/config/get"
+			body: "*"
+		};
+	}
+	
+	rpc UserIdentityAudit(UserIdentityAuditRequest) returns (user.service.v1.UserIdentityAuditResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/user/identity/set"
+			body: "*"
+		};
+	}
+
+	rpc UserIdentityList(UserIdentityListRequest) returns (user.service.v1.UserIdentityListResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/user/identity/list/get"
 			body: "*"
 		};
 	}
@@ -239,57 +268,61 @@ message GetUserProfileRequest {
 	optional int32 login_page_size = 3;
 }
 
-message GetUserProfileResponse {
-	message IpInfo {
-		string ip = 1;
-		int32 count = 2;
-		string country = 3;
-	}
-	message RegistrationRecord {
-		google.protobuf.Timestamp registered_at = 1;
-		IpInfo ip_info = 2;
-		string device = 3;
-		string method = 4;
-		string browser = 5;
-		string app = 6; // Not available for now
-		string mobile = 7;
-		string email = 8;
-		string username = 9;
-		string source = 10;
-	}
-	message LoginRecord {
-		google.protobuf.Timestamp login_at = 1;
-		IpInfo ip_info = 2;
-		string device = 3;
-		string method = 4;
-		string browser = 5;
-		string app = 6; // Not available for now
-		string email = 7;
-		string mobile = 8;
-		string username = 9;
-	}
-	message Comment {
-		int64 comment_id = 1;
-		string username = 2;
-		string author_username = 3;
-		string content = 4;
-		google.protobuf.Timestamp created_at = 5;
-	}
-	string nickname = 1;
-	int64 user_id = 2;
-	int32 vip_level = 3; // Not available for now, only return 1
-	bool online = 4; // Not available for now, only return true
-	bool ban_withdraw = 5;
-	bool ban_game = 6;
-	bool ban_login = 7;
-	RegistrationRecord registration_record = 8;
-	repeated LoginRecord login_records = 9;
-	repeated string tags = 10;
-	repeated Comment comments = 11;
-	int32 total_login_count = 12;
-	int32 login_page = 13;
-	int32 login_page_size = 14;
-}
+// message GetUserProfileResponse {
+// 	message IpInfo {
+// 		string ip = 1;
+// 		int32 count = 2;
+// 		string country = 3;
+// 	}
+// 	message RegistrationRecord {
+// 		google.protobuf.Timestamp registered_at = 1;
+// 		IpInfo ip_info = 2;
+// 		string device = 3;
+// 		string method = 4;
+// 		string browser = 5;
+// 		string app = 6; // Not available for now
+// 		string mobile = 7;
+// 		string email = 8;
+// 		string username = 9;
+// 		string source = 10;
+// 	}
+// 	message LoginRecord {
+// 		google.protobuf.Timestamp login_at = 1;
+// 		IpInfo ip_info = 2;
+// 		string device = 3;
+// 		string method = 4;
+// 		string browser = 5;
+// 		string app = 6; // Not available for now
+// 		string email = 7;
+// 		string mobile = 8;
+// 		string username = 9;
+// 	}
+// 	message Comment {
+// 		int64 comment_id = 1;
+// 		string username = 2;
+// 		string author_username = 3;
+// 		string content = 4;
+// 		google.protobuf.Timestamp created_at = 5;
+// 	}
+// 	string nickname = 1;
+// 	int64 user_id = 2;
+// 	int32 vip_level = 3; // Not available for now, only return 1
+// 	bool online = 4; // Not available for now, only return true
+// 	bool ban_withdraw = 5;
+// 	bool ban_game = 6;
+// 	bool ban_login = 7;
+// 	bool locked = 8;
+// 	RegistrationRecord registration_record = 9;
+// 	repeated LoginRecord login_records = 10;
+// 	repeated string tags = 11;
+// 	repeated Comment comments = 12;
+// 	int32 total_login_count = 13;
+// 	int32 login_page = 14;
+// 	int32 login_page_size = 15;
+// 	string registered_mobile = 16;
+// 	string registered_email = 17;
+// 	int32 kyc_level = 18;
+// }
 
 message AddUserCommentRequest {
 	int64 user_id = 1;
@@ -320,10 +353,42 @@ message SendEmailVerificationCodeRequest {
 message SendEmailVerificationCodeResponse {}
 
 message UpdateUserRequest {
+	// user id
 	int64 user_id = 1;
-	optional bool ban_login = 2;
-	optional bool ban_game = 3;
-	optional bool ban_withdraw = 4;
+	// nickname
+	optional string nickname = 2;
+	// avatar
+	optional string avatar = 3;
+	// ban login
+	optional bool ban_login = 4;
+	// ban game
+	optional bool ban_game = 5;
+	// ban withdraw
+	optional bool ban_withdraw = 6;
+	// locked
+	optional bool locked = 7;
+	// enabled
+	optional bool enabled = 8;
+	// role id
+	optional int64 role_id = 9;
+	// first name
+	optional string firstname = 10;
+	// last name
+	optional string lastname = 11;
+	// email
+	optional string email = 12;
+	// mobile
+	optional string mobile = 13;
+	// user identity
+	optional user.service.v1.UserIdentityRequest user_identity = 14;
+	// address
+	optional string address = 15;
+	// date of birth
+	optional google.protobuf.Timestamp bod = 16;
+	// email verified
+	optional bool email_verified = 17;
+	// phone verified
+	optional bool phone_verified = 18;
 }
 
 message UpdateUserResponse {}
@@ -390,3 +455,30 @@ message SetUserTagsRequest {
 }
 
 message SetUserTagsResponse {}
+
+message DeleteUserResponsibleGamblingConfigRequest {
+	int64 user_id = 1;
+	string limit_type = 2; // "self_exclusion", "break_in_play", "time_limits"
+}
+
+message GetUserResponsibleGamblingConfigRequest {
+	int64 user_id = 1;
+}
+
+message UserIdentityAuditRequest {
+	// user identity id
+	int64 id = 1;
+	// audit "approved" or "declined"
+	string audit = 2;
+}
+
+message UserIdentityListRequest {
+	optional int64 id = 1;
+	optional int64 user_id = 2;
+	optional string status = 3;
+	optional google.protobuf.Timestamp start_time = 4;
+	optional google.protobuf.Timestamp end_time = 5;
+	int32 page = 6;
+	int32 page_size = 7;
+	api.common.OperatorContextFilters operator_context_filters = 8;
+}

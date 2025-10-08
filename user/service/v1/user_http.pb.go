@@ -19,7 +19,13 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationUserAddResponsibleGamblingConfig = "/api.user.service.v1.User/AddResponsibleGamblingConfig"
+const OperationUserCloseAccount = "/api.user.service.v1.User/CloseAccount"
+const OperationUserDeleteResponsibleGamblingConfig = "/api.user.service.v1.User/DeleteResponsibleGamblingConfig"
+const OperationUserGetOperatorAccountSettings = "/api.user.service.v1.User/GetOperatorAccountSettings"
+const OperationUserGetResponsibleGamblingConfig = "/api.user.service.v1.User/GetResponsibleGamblingConfig"
 const OperationUserGetUser = "/api.user.service.v1.User/GetUser"
+const OperationUserGetUserAccountSettingsStatus = "/api.user.service.v1.User/GetUserAccountSettingsStatus"
 const OperationUserGetUserTags = "/api.user.service.v1.User/GetUserTags"
 const OperationUserLogin = "/api.user.service.v1.User/Login"
 const OperationUserLogout = "/api.user.service.v1.User/Logout"
@@ -30,11 +36,20 @@ const OperationUserRegisterOrLoginWithTelegram = "/api.user.service.v1.User/Regi
 const OperationUserResetPasswordWithCode = "/api.user.service.v1.User/ResetPasswordWithCode"
 const OperationUserSendEmailVerificationCode = "/api.user.service.v1.User/SendEmailVerificationCode"
 const OperationUserSendPasswordResetCode = "/api.user.service.v1.User/SendPasswordResetCode"
+const OperationUserUpdateUser = "/api.user.service.v1.User/UpdateUser"
+const OperationUserUpdateUserIdentity = "/api.user.service.v1.User/UpdateUserIdentity"
+const OperationUserVerifyEmail = "/api.user.service.v1.User/VerifyEmail"
 
 type UserHTTPServer interface {
+	AddResponsibleGamblingConfig(context.Context, *AddResponsibleGamblingConfigRequest) (*AddResponsibleGamblingConfigResponse, error)
+	CloseAccount(context.Context, *CloseAccountRequest) (*CloseAccountResponse, error)
+	DeleteResponsibleGamblingConfig(context.Context, *DeleteResponsibleGamblingConfigRequest) (*DeleteResponsibleGamblingConfigResponse, error)
+	GetOperatorAccountSettings(context.Context, *GetOperatorAccountSettingsRequest) (*GetOperatorAccountSettingsResponse, error)
+	GetResponsibleGamblingConfig(context.Context, *GetResponsibleGamblingConfigRequest) (*GetResponsibleGamblingConfigResponse, error)
 	// GetUser Get user information by userId.
 	// Returns basic user information for the specified user.
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
+	GetUserAccountSettingsStatus(context.Context, *GetUserAccountSettingsStatusRequest) (*GetUserAccountSettingsStatusResponse, error)
 	// GetUserTags GetUserTags retrieves all active tags associated for the current user
 	// and also exists in the related operator's tag list.
 	GetUserTags(context.Context, *GetUserTagsRequest) (*GetUserTagsResponse, error)
@@ -61,6 +76,9 @@ type UserHTTPServer interface {
 	SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error)
 	// SendPasswordResetCode Send password reset verification code to email
 	SendPasswordResetCode(context.Context, *SendPasswordResetCodeRequest) (*SendPasswordResetCodeResponse, error)
+	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
+	UpdateUserIdentity(context.Context, *UpdateUserIdentityRequest) (*UpdateUserIdentityResponse, error)
+	VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error)
 }
 
 func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
@@ -76,6 +94,15 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.POST("/v1/user/email/verification-code/send", _User_SendEmailVerificationCode0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/password/reset-code/send", _User_SendPasswordResetCode0_HTTP_Handler(srv))
 	r.POST("/v1/user/auth/password/reset", _User_ResetPasswordWithCode0_HTTP_Handler(srv))
+	r.POST("/v1/user/update", _User_UpdateUser0_HTTP_Handler(srv))
+	r.POST("/v1/user/identity/update", _User_UpdateUserIdentity0_HTTP_Handler(srv))
+	r.POST("/v1/user/email/verify/get", _User_VerifyEmail0_HTTP_Handler(srv))
+	r.POST("/v1/user/operator/account-settings/get", _User_GetOperatorAccountSettings0_HTTP_Handler(srv))
+	r.POST("/v1/user/account-settings/status/get", _User_GetUserAccountSettingsStatus0_HTTP_Handler(srv))
+	r.POST("/v1/user/responsible-gambling/config/add", _User_AddResponsibleGamblingConfig0_HTTP_Handler(srv))
+	r.POST("/v1/user/responsible-gambling/config/delete", _User_DeleteResponsibleGamblingConfig0_HTTP_Handler(srv))
+	r.POST("/v1/user/responsible-gambling/config/get", _User_GetResponsibleGamblingConfig0_HTTP_Handler(srv))
+	r.POST("/v1/user/account/update", _User_CloseAccount0_HTTP_Handler(srv))
 }
 
 func _User_Register0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
@@ -320,8 +347,212 @@ func _User_ResetPasswordWithCode0_HTTP_Handler(srv UserHTTPServer) func(ctx http
 	}
 }
 
+func _User_UpdateUser0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateUserRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserUpdateUser)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateUser(ctx, req.(*UpdateUserRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UpdateUserResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_UpdateUserIdentity0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateUserIdentityRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserUpdateUserIdentity)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateUserIdentity(ctx, req.(*UpdateUserIdentityRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UpdateUserIdentityResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_VerifyEmail0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in VerifyEmailRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserVerifyEmail)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.VerifyEmail(ctx, req.(*VerifyEmailRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*VerifyEmailResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_GetOperatorAccountSettings0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetOperatorAccountSettingsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserGetOperatorAccountSettings)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetOperatorAccountSettings(ctx, req.(*GetOperatorAccountSettingsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetOperatorAccountSettingsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_GetUserAccountSettingsStatus0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetUserAccountSettingsStatusRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserGetUserAccountSettingsStatus)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetUserAccountSettingsStatus(ctx, req.(*GetUserAccountSettingsStatusRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetUserAccountSettingsStatusResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_AddResponsibleGamblingConfig0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in AddResponsibleGamblingConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserAddResponsibleGamblingConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.AddResponsibleGamblingConfig(ctx, req.(*AddResponsibleGamblingConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*AddResponsibleGamblingConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_DeleteResponsibleGamblingConfig0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DeleteResponsibleGamblingConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserDeleteResponsibleGamblingConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteResponsibleGamblingConfig(ctx, req.(*DeleteResponsibleGamblingConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*DeleteResponsibleGamblingConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_GetResponsibleGamblingConfig0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetResponsibleGamblingConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserGetResponsibleGamblingConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetResponsibleGamblingConfig(ctx, req.(*GetResponsibleGamblingConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetResponsibleGamblingConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_CloseAccount0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CloseAccountRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserCloseAccount)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CloseAccount(ctx, req.(*CloseAccountRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CloseAccountResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type UserHTTPClient interface {
+	AddResponsibleGamblingConfig(ctx context.Context, req *AddResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *AddResponsibleGamblingConfigResponse, err error)
+	CloseAccount(ctx context.Context, req *CloseAccountRequest, opts ...http.CallOption) (rsp *CloseAccountResponse, err error)
+	DeleteResponsibleGamblingConfig(ctx context.Context, req *DeleteResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *DeleteResponsibleGamblingConfigResponse, err error)
+	GetOperatorAccountSettings(ctx context.Context, req *GetOperatorAccountSettingsRequest, opts ...http.CallOption) (rsp *GetOperatorAccountSettingsResponse, err error)
+	GetResponsibleGamblingConfig(ctx context.Context, req *GetResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *GetResponsibleGamblingConfigResponse, err error)
 	GetUser(ctx context.Context, req *GetUserRequest, opts ...http.CallOption) (rsp *GetUserResponse, err error)
+	GetUserAccountSettingsStatus(ctx context.Context, req *GetUserAccountSettingsStatusRequest, opts ...http.CallOption) (rsp *GetUserAccountSettingsStatusResponse, err error)
 	GetUserTags(ctx context.Context, req *GetUserTagsRequest, opts ...http.CallOption) (rsp *GetUserTagsResponse, err error)
 	Login(ctx context.Context, req *LoginRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
 	Logout(ctx context.Context, req *LogoutRequest, opts ...http.CallOption) (rsp *LogoutResponse, err error)
@@ -332,6 +563,9 @@ type UserHTTPClient interface {
 	ResetPasswordWithCode(ctx context.Context, req *ResetPasswordWithCodeRequest, opts ...http.CallOption) (rsp *ResetPasswordWithCodeResponse, err error)
 	SendEmailVerificationCode(ctx context.Context, req *SendEmailVerificationCodeRequest, opts ...http.CallOption) (rsp *SendEmailVerificationCodeResponse, err error)
 	SendPasswordResetCode(ctx context.Context, req *SendPasswordResetCodeRequest, opts ...http.CallOption) (rsp *SendPasswordResetCodeResponse, err error)
+	UpdateUser(ctx context.Context, req *UpdateUserRequest, opts ...http.CallOption) (rsp *UpdateUserResponse, err error)
+	UpdateUserIdentity(ctx context.Context, req *UpdateUserIdentityRequest, opts ...http.CallOption) (rsp *UpdateUserIdentityResponse, err error)
+	VerifyEmail(ctx context.Context, req *VerifyEmailRequest, opts ...http.CallOption) (rsp *VerifyEmailResponse, err error)
 }
 
 type UserHTTPClientImpl struct {
@@ -342,11 +576,89 @@ func NewUserHTTPClient(client *http.Client) UserHTTPClient {
 	return &UserHTTPClientImpl{client}
 }
 
+func (c *UserHTTPClientImpl) AddResponsibleGamblingConfig(ctx context.Context, in *AddResponsibleGamblingConfigRequest, opts ...http.CallOption) (*AddResponsibleGamblingConfigResponse, error) {
+	var out AddResponsibleGamblingConfigResponse
+	pattern := "/v1/user/responsible-gambling/config/add"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserAddResponsibleGamblingConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *UserHTTPClientImpl) CloseAccount(ctx context.Context, in *CloseAccountRequest, opts ...http.CallOption) (*CloseAccountResponse, error) {
+	var out CloseAccountResponse
+	pattern := "/v1/user/account/update"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserCloseAccount))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *UserHTTPClientImpl) DeleteResponsibleGamblingConfig(ctx context.Context, in *DeleteResponsibleGamblingConfigRequest, opts ...http.CallOption) (*DeleteResponsibleGamblingConfigResponse, error) {
+	var out DeleteResponsibleGamblingConfigResponse
+	pattern := "/v1/user/responsible-gambling/config/delete"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserDeleteResponsibleGamblingConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *UserHTTPClientImpl) GetOperatorAccountSettings(ctx context.Context, in *GetOperatorAccountSettingsRequest, opts ...http.CallOption) (*GetOperatorAccountSettingsResponse, error) {
+	var out GetOperatorAccountSettingsResponse
+	pattern := "/v1/user/operator/account-settings/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserGetOperatorAccountSettings))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *UserHTTPClientImpl) GetResponsibleGamblingConfig(ctx context.Context, in *GetResponsibleGamblingConfigRequest, opts ...http.CallOption) (*GetResponsibleGamblingConfigResponse, error) {
+	var out GetResponsibleGamblingConfigResponse
+	pattern := "/v1/user/responsible-gambling/config/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserGetResponsibleGamblingConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *UserHTTPClientImpl) GetUser(ctx context.Context, in *GetUserRequest, opts ...http.CallOption) (*GetUserResponse, error) {
 	var out GetUserResponse
 	pattern := "/v1/user/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserGetUser))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *UserHTTPClientImpl) GetUserAccountSettingsStatus(ctx context.Context, in *GetUserAccountSettingsStatusRequest, opts ...http.CallOption) (*GetUserAccountSettingsStatusResponse, error) {
+	var out GetUserAccountSettingsStatusResponse
+	pattern := "/v1/user/account-settings/status/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserGetUserAccountSettingsStatus))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -477,6 +789,45 @@ func (c *UserHTTPClientImpl) SendPasswordResetCode(ctx context.Context, in *Send
 	pattern := "/v1/user/auth/password/reset-code/send"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserSendPasswordResetCode))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *UserHTTPClientImpl) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...http.CallOption) (*UpdateUserResponse, error) {
+	var out UpdateUserResponse
+	pattern := "/v1/user/update"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserUpdateUser))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *UserHTTPClientImpl) UpdateUserIdentity(ctx context.Context, in *UpdateUserIdentityRequest, opts ...http.CallOption) (*UpdateUserIdentityResponse, error) {
+	var out UpdateUserIdentityResponse
+	pattern := "/v1/user/identity/update"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserUpdateUserIdentity))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *UserHTTPClientImpl) VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...http.CallOption) (*VerifyEmailResponse, error) {
+	var out VerifyEmailResponse
+	pattern := "/v1/user/email/verify/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserVerifyEmail))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
