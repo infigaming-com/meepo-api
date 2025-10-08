@@ -313,6 +313,8 @@ func (m *CreateOperatorRequest) validate(all bool) error {
 
 	// no validation rules for VerificationCode
 
+	// no validation rules for TemplateName
+
 	if len(errors) > 0 {
 		return CreateOperatorRequestMultiError(errors)
 	}
