@@ -20,6 +20,7 @@ service nginx_config {
 message Domain {
 	string byo_domain = 1;	// Byo domain name
 	string domain = 2;	// Meepo domain name
+	string template = 3;	// Template name
 }
 
 // Request to update the nginx config for frontend byo domains
