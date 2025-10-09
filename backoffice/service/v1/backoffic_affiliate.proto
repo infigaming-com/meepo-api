@@ -65,6 +65,7 @@ message ListCommissionPlansRequest {
 	repeated string countries = 1; // not supported yet
 	optional int32 page = 2;
 	optional int32 page_size = 3;
+	optional string status = 4;
 }
 
 message DeleteCommissionPlanRequest {
