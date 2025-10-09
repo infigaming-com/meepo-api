@@ -242,3 +242,212 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = PushMessageResponseValidationError{}
+
+// Validate checks the field values on PushOperatorMessageRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *PushOperatorMessageRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PushOperatorMessageRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// PushOperatorMessageRequestMultiError, or nil if none found.
+func (m *PushOperatorMessageRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PushOperatorMessageRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for OperatorId
+
+	// no validation rules for Message
+
+	if len(errors) > 0 {
+		return PushOperatorMessageRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// PushOperatorMessageRequestMultiError is an error wrapping multiple
+// validation errors returned by PushOperatorMessageRequest.ValidateAll() if
+// the designated constraints aren't met.
+type PushOperatorMessageRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PushOperatorMessageRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PushOperatorMessageRequestMultiError) AllErrors() []error { return m }
+
+// PushOperatorMessageRequestValidationError is the validation error returned
+// by PushOperatorMessageRequest.Validate if the designated constraints aren't met.
+type PushOperatorMessageRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PushOperatorMessageRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PushOperatorMessageRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PushOperatorMessageRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PushOperatorMessageRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PushOperatorMessageRequestValidationError) ErrorName() string {
+	return "PushOperatorMessageRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PushOperatorMessageRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPushOperatorMessageRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PushOperatorMessageRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PushOperatorMessageRequestValidationError{}
+
+// Validate checks the field values on PushOperatorMessageResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *PushOperatorMessageResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PushOperatorMessageResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// PushOperatorMessageResponseMultiError, or nil if none found.
+func (m *PushOperatorMessageResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PushOperatorMessageResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return PushOperatorMessageResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// PushOperatorMessageResponseMultiError is an error wrapping multiple
+// validation errors returned by PushOperatorMessageResponse.ValidateAll() if
+// the designated constraints aren't met.
+type PushOperatorMessageResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PushOperatorMessageResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PushOperatorMessageResponseMultiError) AllErrors() []error { return m }
+
+// PushOperatorMessageResponseValidationError is the validation error returned
+// by PushOperatorMessageResponse.Validate if the designated constraints
+// aren't met.
+type PushOperatorMessageResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PushOperatorMessageResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PushOperatorMessageResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PushOperatorMessageResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PushOperatorMessageResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PushOperatorMessageResponseValidationError) ErrorName() string {
+	return "PushOperatorMessageResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PushOperatorMessageResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPushOperatorMessageResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PushOperatorMessageResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PushOperatorMessageResponseValidationError{}
