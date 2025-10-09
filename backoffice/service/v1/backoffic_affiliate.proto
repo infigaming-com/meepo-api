@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package api.backoffice.service.v1;
+
+import "google/api/annotations.proto";
+import "affiliate/service/v1/commission_plan.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.backoffice.service.v1";
+
+service BackofficeAffiliate {
+	rpc CreateCommissionPlan(CreateCommissionPlanRequest) returns (api.affiliate.service.v1.CreateCommissionPlanResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/commission/plan/create"
+			body: "*"
+		};
+	}
+    rpc UpdateCommissionPlan(UpdateCommissionPlanRequest) returns (api.affiliate.service.v1.UpdateCommissionPlanResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/commission/plan/update"
+			body: "*"
+		};
+	}
+	rpc GetCommissionPlan(GetCommissionPlanRequest) returns (api.affiliate.service.v1.GetCommissionPlanResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/commission/plan/get"
+			body: "*"
+		};
+	}
+	rpc ListCommissionPlans(ListCommissionPlansRequest) returns (api.affiliate.service.v1.ListCommissionPlansResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/commission/plan/list"
+			body: "*"
+		};
+	}
+	rpc DeleteCommissionPlan(DeleteCommissionPlanRequest) returns (api.affiliate.service.v1.DeleteCommissionPlanResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/commission/plan/delete"
+			body: "*"
+		};
+	}
+}
+
+message CreateCommissionPlanRequest {
+	string title = 1;
+    string status = 2;
+    string base_currency = 3;
+    api.affiliate.service.v1.CommissionPlanConfig plan_config = 4;
+}
+
+message UpdateCommissionPlanRequest {
+    string title = 1;
+    string status = 2;
+    string base_currency = 3;
+    api.affiliate.service.v1.CommissionPlanConfig plan_config = 4;
+	int64 commission_plan_id = 5;
+}
+
+message GetCommissionPlanRequest {
+	int64 commission_plan_id = 1;
+}
+
+message ListCommissionPlansRequest {
+	repeated string countries = 1; // not supported yet
+	optional int32 page = 2;
+	optional int32 page_size = 3;
+}
+
+message DeleteCommissionPlanRequest {
+	int64 commission_plan_id = 1;
+	optional int64 alternative_commission_plan_id = 2; // not supported yet
+}
