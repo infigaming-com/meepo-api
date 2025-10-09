@@ -10,6 +10,7 @@ import (
 	common "github.com/infigaming-com/meepo-api/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -412,6 +413,7 @@ type ListCommissionPlansRequest struct {
 	Countries       []string                `protobuf:"bytes,2,rep,name=countries,proto3" json:"countries,omitempty"` // not supported yet
 	Page            *int32                  `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize        *int32                  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Status          *string                 `protobuf:"bytes,5,opt,name=status,proto3,oneof" json:"status,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -472,6 +474,13 @@ func (x *ListCommissionPlansRequest) GetPageSize() int32 {
 		return *x.PageSize
 	}
 	return 0
+}
+
+func (x *ListCommissionPlansRequest) GetStatus() string {
+	if x != nil && x.Status != nil {
+		return *x.Status
+	}
+	return ""
 }
 
 type ListCommissionPlansResponse struct {
@@ -2107,7 +2116,7 @@ type FlatFeeConfig struct {
 	Enabled       bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	Period        string                 `protobuf:"bytes,2,opt,name=period,proto3" json:"period,omitempty"` // one_time/monthly/yearly
 	Amount        string                 `protobuf:"bytes,3,opt,name=amount,proto3" json:"amount,omitempty"`
-	StartTime     int64                  `protobuf:"varint,4,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"` // unix milliseconds timestamp
+	StartTime     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2163,18 +2172,18 @@ func (x *FlatFeeConfig) GetAmount() string {
 	return ""
 }
 
-func (x *FlatFeeConfig) GetStartTime() int64 {
+func (x *FlatFeeConfig) GetStartTime() *timestamppb.Timestamp {
 	if x != nil {
 		return x.StartTime
 	}
-	return 0
+	return nil
 }
 
 var File_affiliate_service_v1_commission_plan_proto protoreflect.FileDescriptor
 
 const file_affiliate_service_v1_commission_plan_proto_rawDesc = "" +
 	"\n" +
-	"*affiliate/service/v1/commission_plan.proto\x12\x18api.affiliate.service.v1\x1a\x13common/common.proto\"\xa2\x02\n" +
+	"*affiliate/service/v1/commission_plan.proto\x12\x18api.affiliate.service.v1\x1a\x13common/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa2\x02\n" +
 	"\x1bCreateCommissionPlanRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x14\n" +
@@ -2204,15 +2213,17 @@ const file_affiliate_service_v1_commission_plan_proto_rawDesc = "" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x12#\n" +
 	"\rbase_currency\x18\x05 \x01(\tR\fbaseCurrency\x12O\n" +
 	"\vplan_config\x18\x06 \x01(\v2..api.affiliate.service.v1.CommissionPlanConfigR\n" +
-	"planConfig\"\xd4\x01\n" +
+	"planConfig\"\xfc\x01\n" +
 	"\x1aListCommissionPlansRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1c\n" +
 	"\tcountries\x18\x02 \x03(\tR\tcountries\x12\x17\n" +
 	"\x04page\x18\x03 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x04 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
+	"\tpage_size\x18\x04 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\x05 \x01(\tH\x02R\x06status\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x8a\x02\n" +
+	"_page_sizeB\t\n" +
+	"\a_status\"\x8a\x02\n" +
 	"\x1bListCommissionPlansResponse\x12S\n" +
 	"\x10commission_plans\x18\x01 \x03(\v2(.api.affiliate.service.v1.CommissionPlanR\x0fcommissionPlans\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
@@ -2367,13 +2378,13 @@ const file_affiliate_service_v1_commission_plan_proto_rawDesc = "" +
 	"\x04flat\x18\x03 \x01(\v2(.api.affiliate.service.v1.FlatCommissionH\x00R\x04flat\x88\x01\x01\x12d\n" +
 	"\x11flat_by_countries\x18\x04 \x01(\v23.api.affiliate.service.v1.FlatByCountriesCommissionH\x01R\x0fflatByCountries\x88\x01\x01B\a\n" +
 	"\x05_flatB\x14\n" +
-	"\x12_flat_by_countries\"x\n" +
+	"\x12_flat_by_countries\"\x94\x01\n" +
 	"\rFlatFeeConfig\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x16\n" +
 	"\x06period\x18\x02 \x01(\tR\x06period\x12\x16\n" +
-	"\x06amount\x18\x03 \x01(\tR\x06amount\x12\x1d\n" +
+	"\x06amount\x18\x03 \x01(\tR\x06amount\x129\n" +
 	"\n" +
-	"start_time\x18\x04 \x01(\x03R\tstartTimeBY\n" +
+	"start_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTimeBY\n" +
 	"\x18api.affiliate.service.v1P\x01Z;github.com/infigaming-com/meepo-api/affiliate/service/v1;v1b\x06proto3"
 
 var (
@@ -2424,6 +2435,7 @@ var file_affiliate_service_v1_commission_plan_proto_goTypes = []any{
 	(*CPCConfig)(nil),                            // 31: api.affiliate.service.v1.CPCConfig
 	(*FlatFeeConfig)(nil),                        // 32: api.affiliate.service.v1.FlatFeeConfig
 	(*common.OperatorContext)(nil),               // 33: api.common.OperatorContext
+	(*timestamppb.Timestamp)(nil),                // 34: google.protobuf.Timestamp
 }
 var file_affiliate_service_v1_commission_plan_proto_depIdxs = []int32{
 	33, // 0: api.affiliate.service.v1.CreateCommissionPlanRequest.operator_context:type_name -> api.common.OperatorContext
@@ -2470,11 +2482,12 @@ var file_affiliate_service_v1_commission_plan_proto_depIdxs = []int32{
 	21, // 41: api.affiliate.service.v1.CPLConfig.advanced_options:type_name -> api.affiliate.service.v1.AdvancedOptions
 	13, // 42: api.affiliate.service.v1.CPCConfig.flat:type_name -> api.affiliate.service.v1.FlatCommission
 	14, // 43: api.affiliate.service.v1.CPCConfig.flat_by_countries:type_name -> api.affiliate.service.v1.FlatByCountriesCommission
-	44, // [44:44] is the sub-list for method output_type
-	44, // [44:44] is the sub-list for method input_type
-	44, // [44:44] is the sub-list for extension type_name
-	44, // [44:44] is the sub-list for extension extendee
-	0,  // [0:44] is the sub-list for field type_name
+	34, // 44: api.affiliate.service.v1.FlatFeeConfig.start_time:type_name -> google.protobuf.Timestamp
+	45, // [45:45] is the sub-list for method output_type
+	45, // [45:45] is the sub-list for method input_type
+	45, // [45:45] is the sub-list for extension type_name
+	45, // [45:45] is the sub-list for extension extendee
+	0,  // [0:45] is the sub-list for field type_name
 }
 
 func init() { file_affiliate_service_v1_commission_plan_proto_init() }

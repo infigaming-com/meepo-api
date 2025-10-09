@@ -3,6 +3,7 @@ syntax = "proto3";
 package api.affiliate.service.v1;
 
 import "common/common.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/affiliate/service/v1;v1";
 option java_multiple_files = true;
@@ -50,6 +51,7 @@ message ListCommissionPlansRequest {
     repeated string countries = 2; // not supported yet
     optional int32 page = 3;
     optional int32 page_size = 4;
+    optional string status = 5;
 }
 
 message ListCommissionPlansResponse {
@@ -221,5 +223,5 @@ message FlatFeeConfig {
     bool enabled = 1;
     string period = 2; // one_time/monthly/yearly
     string amount = 3;
-    int64 start_time = 4; // unix milliseconds timestamp
+    google.protobuf.Timestamp start_time = 4;
 }

@@ -216,6 +216,7 @@ type ListCommissionPlansRequest struct {
 	Countries     []string               `protobuf:"bytes,1,rep,name=countries,proto3" json:"countries,omitempty"` // not supported yet
 	Page          *int32                 `protobuf:"varint,2,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize      *int32                 `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Status        *string                `protobuf:"bytes,4,opt,name=status,proto3,oneof" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -269,6 +270,13 @@ func (x *ListCommissionPlansRequest) GetPageSize() int32 {
 		return *x.PageSize
 	}
 	return 0
+}
+
+func (x *ListCommissionPlansRequest) GetStatus() string {
+	if x != nil && x.Status != nil {
+		return *x.Status
+	}
+	return ""
 }
 
 type DeleteCommissionPlanRequest struct {
@@ -342,14 +350,16 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"planConfig\x12,\n" +
 	"\x12commission_plan_id\x18\x05 \x01(\x03R\x10commissionPlanId\"H\n" +
 	"\x18GetCommissionPlanRequest\x12,\n" +
-	"\x12commission_plan_id\x18\x01 \x01(\x03R\x10commissionPlanId\"\x8c\x01\n" +
+	"\x12commission_plan_id\x18\x01 \x01(\x03R\x10commissionPlanId\"\xb4\x01\n" +
 	"\x1aListCommissionPlansRequest\x12\x1c\n" +
 	"\tcountries\x18\x01 \x03(\tR\tcountries\x12\x17\n" +
 	"\x04page\x18\x02 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x03 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
+	"\tpage_size\x18\x03 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\x04 \x01(\tH\x02R\x06status\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xb8\x01\n" +
+	"_page_sizeB\t\n" +
+	"\a_status\"\xb8\x01\n" +
 	"\x1bDeleteCommissionPlanRequest\x12,\n" +
 	"\x12commission_plan_id\x18\x01 \x01(\x03R\x10commissionPlanId\x12H\n" +
 	"\x1ealternative_commission_plan_id\x18\x02 \x01(\x03H\x00R\x1balternativeCommissionPlanId\x88\x01\x01B!\n" +
