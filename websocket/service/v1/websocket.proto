@@ -9,8 +9,9 @@ option java_package = "api.websocket.service.v1";
 
 // User service provides authentication and user management functionality.
 service Websocket {
-	rpc PushMessage(PushMessageRequest) returns (PushMessageResponse) {
-	}
+	rpc PushMessage(PushMessageRequest) returns (PushMessageResponse) { }
+
+	rpc PushOperatorMessage(PushOperatorMessageRequest) returns (PushOperatorMessageResponse) { }
 }
 
 message PushMessageRequest {
@@ -21,3 +22,12 @@ message PushMessageRequest {
 }
 
 message PushMessageResponse { }
+
+message PushOperatorMessageRequest {
+	// The operator ID who receive the message
+	int64 operator_id = 1;
+	// The message content
+	bytes message = 2;
+}
+
+message PushOperatorMessageResponse { }
