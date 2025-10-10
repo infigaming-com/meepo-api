@@ -1451,6 +1451,7 @@ message GetOperatorDetailsByUserIdResponse {
 
 message GetOperatorAccountSettingsRequest {
 	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
 }
 
 message GetOperatorAccountSettingsResponse {
@@ -1459,7 +1460,8 @@ message GetOperatorAccountSettingsResponse {
 
 message UpdateOperatorAccountSettingsRequest {
 	api.common.OperatorContext operator_context = 1;
-	OperatorAccountSettings account_settings = 2;
+	api.common.OperatorContext target_operator_context = 2;
+	OperatorAccountSettings account_settings = 3;
 }
 
 message UpdateOperatorAccountSettingsResponse {

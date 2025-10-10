@@ -6840,7 +6840,9 @@ components:
             properties: {}
         api.backoffice.service.v1.GetOperatorAccountSettingsRequest:
             type: object
-            properties: {}
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.GetOperatorAddressRequest:
             type: object
             properties:
@@ -11430,6 +11432,8 @@ components:
         api.backoffice.service.v1.UpdateOperatorAccountSettingsRequest:
             type: object
             properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 accountSettings:
                     $ref: '#/components/schemas/api.user.service.v1.OperatorAccountSettings'
         api.backoffice.service.v1.UpdateOperatorBalanceRequest:
@@ -13758,6 +13762,8 @@ components:
             type: object
             properties:
                 operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
         api.user.service.v1.GetOperatorAccountSettingsResponse:
             type: object
