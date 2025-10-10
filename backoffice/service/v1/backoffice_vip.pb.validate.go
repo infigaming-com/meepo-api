@@ -1071,6 +1071,8 @@ func (m *CreateVipLevelConfigTemplateRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for SettingId
+
 	if len(errors) > 0 {
 		return CreateVipLevelConfigTemplateRequestMultiError(errors)
 	}

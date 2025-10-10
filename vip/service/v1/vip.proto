@@ -38,6 +38,13 @@ service Vip {
   rpc UpdateVipLevelConfigTemplate(UpdateVipLevelConfigTemplateRequest) returns (UpdateVipLevelConfigTemplateResponse);
   rpc DeleteVipLevelConfigTemplate(DeleteVipLevelConfigTemplateRequest) returns (DeleteVipLevelConfigTemplateResponse);
 
+  rpc GetOperatorVipSettings(GetOperatorVipSettingsRequest) returns (GetOperatorVipSettingsResponse) {
+    option (google.api.http) = {
+      post: "/v1/vip/operator-vip-settings/get"
+      body: "*"
+    };
+  }
+
   rpc GetUserVipLevel(GetUserVipLevelRequest) returns (GetUserVipLevelResponse) {
     option (google.api.http) = {
       post: "/v1/vip/user-level/get"
@@ -66,12 +73,6 @@ service Vip {
     };
   }
 
-  //rpc GetOperatorVipSettings(GetOperatorContextRequest) returns (GetOperatorContextResponse) {
-  //  option (google.api.http) = {
-  //    post: "/v1/vip/operator-vip-settings/get"
-  //    body: "*"
-  //  };
-  //}
 }
 
 enum VipDisplayRule {
@@ -300,6 +301,7 @@ message GetVipLevelConfigTemplateResponse {
 message CreateVipLevelConfigTemplateRequest {
   api.common.OperatorContext target_operator_context = 1;
   VipLevelConfigTemplate template = 2;
+  int64 setting_id = 3;
 }
 
 message CreateVipLevelConfigTemplateResponse {
@@ -366,4 +368,11 @@ message ClaimVipRewardRequest {
 }
 
 message ClaimVipRewardResponse {
+}
+
+message GetOperatorVipSettingsRequest {
+}
+
+message GetOperatorVipSettingsResponse {
+  VipSetting setting = 1;
 }
