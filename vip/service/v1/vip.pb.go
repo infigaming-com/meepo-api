@@ -1110,6 +1110,7 @@ type VipLevelConfigTemplate struct {
 	MonthlyWageringReq      string `protobuf:"bytes,35,opt,name=monthly_wagering_req,json=monthlyWageringReq,proto3" json:"monthly_wagering_req,omitempty"`
 	CreatedAt               int64  `protobuf:"varint,36,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt               int64  `protobuf:"varint,37,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	ImageUrl                string `protobuf:"bytes,38,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -1403,6 +1404,13 @@ func (x *VipLevelConfigTemplate) GetUpdatedAt() int64 {
 	return 0
 }
 
+func (x *VipLevelConfigTemplate) GetImageUrl() string {
+	if x != nil {
+		return x.ImageUrl
+	}
+	return ""
+}
+
 type ListVipLevelConfigTemplatesRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
@@ -1638,8 +1646,7 @@ func (x *GetVipLevelConfigTemplateResponse) GetTemplate() *VipLevelConfigTemplat
 type CreateVipLevelConfigTemplateRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	SettingId             int64                   `protobuf:"varint,2,opt,name=setting_id,json=settingId,proto3" json:"setting_id,omitempty"`
-	Template              *VipLevelConfigTemplate `protobuf:"bytes,3,opt,name=template,proto3" json:"template,omitempty"`
+	Template              *VipLevelConfigTemplate `protobuf:"bytes,2,opt,name=template,proto3" json:"template,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -1679,13 +1686,6 @@ func (x *CreateVipLevelConfigTemplateRequest) GetTargetOperatorContext() *common
 		return x.TargetOperatorContext
 	}
 	return nil
-}
-
-func (x *CreateVipLevelConfigTemplateRequest) GetSettingId() int64 {
-	if x != nil {
-		return x.SettingId
-	}
-	return 0
 }
 
 func (x *CreateVipLevelConfigTemplateRequest) GetTemplate() *VipLevelConfigTemplate {
@@ -2469,7 +2469,7 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\x17UpdateVipSettingRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x128\n" +
 	"\asetting\x18\x02 \x01(\v2\x1e.api.vip.service.v1.VipSettingR\asetting\"\x1a\n" +
-	"\x18UpdateVipSettingResponse\"\xe4\r\n" +
+	"\x18UpdateVipSettingResponse\"\x81\x0e\n" +
 	"\x16VipLevelConfigTemplate\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12,\n" +
 	"\x12system_operator_id\x18\x02 \x01(\x03R\x10systemOperatorId\x120\n" +
@@ -2512,7 +2512,8 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18$ \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18% \x01(\x03R\tupdatedAt\"\xc9\x01\n" +
+	"updated_at\x18% \x01(\x03R\tupdatedAt\x12\x1b\n" +
+	"\timage_url\x18& \x01(\tR\bimageUrl\"\xc9\x01\n" +
 	"\"ListVipLevelConfigTemplatesRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1d\n" +
 	"\n" +
@@ -2529,12 +2530,10 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\vtemplate_id\x18\x02 \x01(\x03R\n" +
 	"templateId\"k\n" +
 	"!GetVipLevelConfigTemplateResponse\x12F\n" +
-	"\btemplate\x18\x01 \x01(\v2*.api.vip.service.v1.VipLevelConfigTemplateR\btemplate\"\xe1\x01\n" +
+	"\btemplate\x18\x01 \x01(\v2*.api.vip.service.v1.VipLevelConfigTemplateR\btemplate\"\xc2\x01\n" +
 	"#CreateVipLevelConfigTemplateRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1d\n" +
-	"\n" +
-	"setting_id\x18\x02 \x01(\x03R\tsettingId\x12F\n" +
-	"\btemplate\x18\x03 \x01(\v2*.api.vip.service.v1.VipLevelConfigTemplateR\btemplate\"n\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12F\n" +
+	"\btemplate\x18\x02 \x01(\v2*.api.vip.service.v1.VipLevelConfigTemplateR\btemplate\"n\n" +
 	"$CreateVipLevelConfigTemplateResponse\x12F\n" +
 	"\btemplate\x18\x01 \x01(\v2*.api.vip.service.v1.VipLevelConfigTemplateR\btemplate\"\xc2\x01\n" +
 	"#UpdateVipLevelConfigTemplateRequest\x12S\n" +

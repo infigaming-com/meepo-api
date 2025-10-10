@@ -493,3 +493,245 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = UploadRegisterLoginBlacklistResponseValidationError{}
+
+// Validate checks the field values on UploadVipLevelImageRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UploadVipLevelImageRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UploadVipLevelImageRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UploadVipLevelImageRequestMultiError, or nil if none found.
+func (m *UploadVipLevelImageRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UploadVipLevelImageRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UploadVipLevelImageRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UploadVipLevelImageRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UploadVipLevelImageRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Data
+
+	// no validation rules for ContentType
+
+	// no validation rules for FilePath
+
+	if len(errors) > 0 {
+		return UploadVipLevelImageRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UploadVipLevelImageRequestMultiError is an error wrapping multiple
+// validation errors returned by UploadVipLevelImageRequest.ValidateAll() if
+// the designated constraints aren't met.
+type UploadVipLevelImageRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UploadVipLevelImageRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UploadVipLevelImageRequestMultiError) AllErrors() []error { return m }
+
+// UploadVipLevelImageRequestValidationError is the validation error returned
+// by UploadVipLevelImageRequest.Validate if the designated constraints aren't met.
+type UploadVipLevelImageRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UploadVipLevelImageRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UploadVipLevelImageRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UploadVipLevelImageRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UploadVipLevelImageRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UploadVipLevelImageRequestValidationError) ErrorName() string {
+	return "UploadVipLevelImageRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UploadVipLevelImageRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUploadVipLevelImageRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UploadVipLevelImageRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UploadVipLevelImageRequestValidationError{}
+
+// Validate checks the field values on UploadVipLevelImageResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UploadVipLevelImageResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UploadVipLevelImageResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UploadVipLevelImageResponseMultiError, or nil if none found.
+func (m *UploadVipLevelImageResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UploadVipLevelImageResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for FileUrl
+
+	if len(errors) > 0 {
+		return UploadVipLevelImageResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UploadVipLevelImageResponseMultiError is an error wrapping multiple
+// validation errors returned by UploadVipLevelImageResponse.ValidateAll() if
+// the designated constraints aren't met.
+type UploadVipLevelImageResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UploadVipLevelImageResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UploadVipLevelImageResponseMultiError) AllErrors() []error { return m }
+
+// UploadVipLevelImageResponseValidationError is the validation error returned
+// by UploadVipLevelImageResponse.Validate if the designated constraints
+// aren't met.
+type UploadVipLevelImageResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UploadVipLevelImageResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UploadVipLevelImageResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UploadVipLevelImageResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UploadVipLevelImageResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UploadVipLevelImageResponseValidationError) ErrorName() string {
+	return "UploadVipLevelImageResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UploadVipLevelImageResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUploadVipLevelImageResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UploadVipLevelImageResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UploadVipLevelImageResponseValidationError{}

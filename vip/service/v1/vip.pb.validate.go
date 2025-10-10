@@ -1114,6 +1114,8 @@ func (m *VipLevelConfigTemplate) validate(all bool) error {
 
 	// no validation rules for UpdatedAt
 
+	// no validation rules for ImageUrl
+
 	if len(errors) > 0 {
 		return VipLevelConfigTemplateMultiError(errors)
 	}
@@ -1800,8 +1802,6 @@ func (m *CreateVipLevelConfigTemplateRequest) validate(all bool) error {
 			}
 		}
 	}
-
-	// no validation rules for SettingId
 
 	if all {
 		switch v := interface{}(m.GetTemplate()).(type) {
