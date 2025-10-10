@@ -14910,6 +14910,8 @@ components:
                     type: string
                 imageUrl:
                     type: string
+                xpLossEnabled:
+                    type: boolean
         api.vip.service.v1.VipMember:
             type: object
             properties:

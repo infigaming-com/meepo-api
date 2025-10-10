@@ -271,6 +271,7 @@ message VipLevelConfigTemplate {
   int64 updated_at = 37;
 
   string image_url = 38;
+  bool xp_loss_enabled = 39;
 }
 
 message ListVipLevelConfigTemplatesRequest {
