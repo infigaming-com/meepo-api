@@ -269,6 +269,8 @@ message VipLevelConfigTemplate {
   
   int64 created_at = 36;
   int64 updated_at = 37;
+
+  string image_url = 38;
 }
 
 message ListVipLevelConfigTemplatesRequest {
@@ -296,8 +298,7 @@ message GetVipLevelConfigTemplateResponse {
 
 message CreateVipLevelConfigTemplateRequest {
   api.common.OperatorContext target_operator_context = 1;
-  int64 setting_id = 2;
-  VipLevelConfigTemplate template = 3;
+  VipLevelConfigTemplate template = 2;
 }
 
 message CreateVipLevelConfigTemplateResponse {

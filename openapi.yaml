@@ -929,6 +929,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UploadRegisterLoginBlacklistResponse'
+    /v1/backoffice/filestore/vip-level-images/upload:
+        post:
+            tags:
+                - BackofficeFileStore
+            operationId: BackofficeFileStore_UploadVipLevelImage
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UploadVipLevelImageRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.UploadVipLevelImageResponse'
     /v1/backoffice/finance/adjustment-configs/create:
         post:
             tags:
@@ -6084,8 +6102,6 @@ components:
             properties:
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
-                settingId:
-                    type: string
                 template:
                     $ref: '#/components/schemas/api.vip.service.v1.VipLevelConfigTemplate'
         api.backoffice.service.v1.CreateVipLevelConfigTemplateResponse:
@@ -11640,6 +11656,23 @@ components:
         api.backoffice.service.v1.UploadRegisterLoginBlacklistResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.UploadVipLevelImageRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                data:
+                    type: string
+                    format: bytes
+                contentType:
+                    type: string
+                filePath:
+                    type: string
+        api.backoffice.service.v1.UploadVipLevelImageResponse:
+            type: object
+            properties:
+                fileUrl:
+                    type: string
         api.backoffice.service.v1.UserIdentityAuditRequest:
             type: object
             properties:
@@ -14872,6 +14905,8 @@ components:
                 createdAt:
                     type: string
                 updatedAt:
+                    type: string
+                imageUrl:
                     type: string
         api.vip.service.v1.VipMember:
             type: object

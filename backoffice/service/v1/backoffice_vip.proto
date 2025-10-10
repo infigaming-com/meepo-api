@@ -105,8 +105,7 @@ message GetVipLevelConfigTemplateResponse {
 
 message CreateVipLevelConfigTemplateRequest {
   api.common.OperatorContext target_operator_context = 1;
-  int64 setting_id = 2;
-  api.vip.service.v1.VipLevelConfigTemplate template = 3;
+  api.vip.service.v1.VipLevelConfigTemplate template = 2;
 }
 
 message CreateVipLevelConfigTemplateResponse {

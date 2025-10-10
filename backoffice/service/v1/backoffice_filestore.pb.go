@@ -223,6 +223,118 @@ func (*UploadRegisterLoginBlacklistResponse) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_filestore_proto_rawDescGZIP(), []int{3}
 }
 
+type UploadVipLevelImageRequest struct {
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Data                  []byte                  `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+	ContentType           string                  `protobuf:"bytes,3,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"`
+	FilePath              string                  `protobuf:"bytes,4,opt,name=file_path,json=filePath,proto3" json:"file_path,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *UploadVipLevelImageRequest) Reset() {
+	*x = UploadVipLevelImageRequest{}
+	mi := &file_backoffice_service_v1_backoffice_filestore_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UploadVipLevelImageRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UploadVipLevelImageRequest) ProtoMessage() {}
+
+func (x *UploadVipLevelImageRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_filestore_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UploadVipLevelImageRequest.ProtoReflect.Descriptor instead.
+func (*UploadVipLevelImageRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_filestore_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *UploadVipLevelImageRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *UploadVipLevelImageRequest) GetData() []byte {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *UploadVipLevelImageRequest) GetContentType() string {
+	if x != nil {
+		return x.ContentType
+	}
+	return ""
+}
+
+func (x *UploadVipLevelImageRequest) GetFilePath() string {
+	if x != nil {
+		return x.FilePath
+	}
+	return ""
+}
+
+type UploadVipLevelImageResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	FileUrl       string                 `protobuf:"bytes,1,opt,name=file_url,json=fileUrl,proto3" json:"file_url,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UploadVipLevelImageResponse) Reset() {
+	*x = UploadVipLevelImageResponse{}
+	mi := &file_backoffice_service_v1_backoffice_filestore_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UploadVipLevelImageResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UploadVipLevelImageResponse) ProtoMessage() {}
+
+func (x *UploadVipLevelImageResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_filestore_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UploadVipLevelImageResponse.ProtoReflect.Descriptor instead.
+func (*UploadVipLevelImageResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_filestore_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *UploadVipLevelImageResponse) GetFileUrl() string {
+	if x != nil {
+		return x.FileUrl
+	}
+	return ""
+}
+
 var File_backoffice_service_v1_backoffice_filestore_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_filestore_proto_rawDesc = "" +
@@ -238,10 +350,18 @@ const file_backoffice_service_v1_backoffice_filestore_proto_rawDesc = "" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x12\n" +
 	"\x04data\x18\x02 \x01(\fR\x04data\x12\x17\n" +
 	"\aid_type\x18\x03 \x01(\tR\x06idType\"&\n" +
-	"$UploadRegisterLoginBlacklistResponse2\xd4\x03\n" +
+	"$UploadRegisterLoginBlacklistResponse\"\xc5\x01\n" +
+	"\x1aUploadVipLevelImageRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x12\n" +
+	"\x04data\x18\x02 \x01(\fR\x04data\x12!\n" +
+	"\fcontent_type\x18\x03 \x01(\tR\vcontentType\x12\x1b\n" +
+	"\tfile_path\x18\x04 \x01(\tR\bfilePath\"8\n" +
+	"\x1bUploadVipLevelImageResponse\x12\x19\n" +
+	"\bfile_url\x18\x01 \x01(\tR\afileUrl2\x98\x05\n" +
 	"\x13BackofficeFileStore\x12\xd5\x01\n" +
 	"\x18UploadOperatorStaticFile\x12:.api.backoffice.service.v1.UploadOperatorStaticFileRequest\x1a;.api.backoffice.service.v1.UploadOperatorStaticFileResponse\"@\x82\xd3\xe4\x93\x02::\x01*\"5/v1/backoffice/filestore/operator-static-files/upload\x12\xe4\x01\n" +
-	"\x1cUploadRegisterLoginBlacklist\x12>.api.backoffice.service.v1.UploadRegisterLoginBlacklistRequest\x1a?.api.backoffice.service.v1.UploadRegisterLoginBlacklistResponse\"C\x82\xd3\xe4\x93\x02=:\x01*\"8/v1/backoffice/filestore/register-login-blacklist/uploadB[\n" +
+	"\x1cUploadRegisterLoginBlacklist\x12>.api.backoffice.service.v1.UploadRegisterLoginBlacklistRequest\x1a?.api.backoffice.service.v1.UploadRegisterLoginBlacklistResponse\"C\x82\xd3\xe4\x93\x02=:\x01*\"8/v1/backoffice/filestore/register-login-blacklist/upload\x12\xc1\x01\n" +
+	"\x13UploadVipLevelImage\x125.api.backoffice.service.v1.UploadVipLevelImageRequest\x1a6.api.backoffice.service.v1.UploadVipLevelImageResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/filestore/vip-level-images/uploadB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -256,25 +376,30 @@ func file_backoffice_service_v1_backoffice_filestore_proto_rawDescGZIP() []byte 
 	return file_backoffice_service_v1_backoffice_filestore_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_filestore_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_backoffice_service_v1_backoffice_filestore_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_backoffice_service_v1_backoffice_filestore_proto_goTypes = []any{
 	(*UploadOperatorStaticFileRequest)(nil),      // 0: api.backoffice.service.v1.UploadOperatorStaticFileRequest
 	(*UploadOperatorStaticFileResponse)(nil),     // 1: api.backoffice.service.v1.UploadOperatorStaticFileResponse
 	(*UploadRegisterLoginBlacklistRequest)(nil),  // 2: api.backoffice.service.v1.UploadRegisterLoginBlacklistRequest
 	(*UploadRegisterLoginBlacklistResponse)(nil), // 3: api.backoffice.service.v1.UploadRegisterLoginBlacklistResponse
-	(*common.OperatorContext)(nil),               // 4: api.common.OperatorContext
+	(*UploadVipLevelImageRequest)(nil),           // 4: api.backoffice.service.v1.UploadVipLevelImageRequest
+	(*UploadVipLevelImageResponse)(nil),          // 5: api.backoffice.service.v1.UploadVipLevelImageResponse
+	(*common.OperatorContext)(nil),               // 6: api.common.OperatorContext
 }
 var file_backoffice_service_v1_backoffice_filestore_proto_depIdxs = []int32{
-	4, // 0: api.backoffice.service.v1.UploadRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
-	0, // 1: api.backoffice.service.v1.BackofficeFileStore.UploadOperatorStaticFile:input_type -> api.backoffice.service.v1.UploadOperatorStaticFileRequest
-	2, // 2: api.backoffice.service.v1.BackofficeFileStore.UploadRegisterLoginBlacklist:input_type -> api.backoffice.service.v1.UploadRegisterLoginBlacklistRequest
-	1, // 3: api.backoffice.service.v1.BackofficeFileStore.UploadOperatorStaticFile:output_type -> api.backoffice.service.v1.UploadOperatorStaticFileResponse
-	3, // 4: api.backoffice.service.v1.BackofficeFileStore.UploadRegisterLoginBlacklist:output_type -> api.backoffice.service.v1.UploadRegisterLoginBlacklistResponse
-	3, // [3:5] is the sub-list for method output_type
-	1, // [1:3] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	6, // 0: api.backoffice.service.v1.UploadRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
+	6, // 1: api.backoffice.service.v1.UploadVipLevelImageRequest.target_operator_context:type_name -> api.common.OperatorContext
+	0, // 2: api.backoffice.service.v1.BackofficeFileStore.UploadOperatorStaticFile:input_type -> api.backoffice.service.v1.UploadOperatorStaticFileRequest
+	2, // 3: api.backoffice.service.v1.BackofficeFileStore.UploadRegisterLoginBlacklist:input_type -> api.backoffice.service.v1.UploadRegisterLoginBlacklistRequest
+	4, // 4: api.backoffice.service.v1.BackofficeFileStore.UploadVipLevelImage:input_type -> api.backoffice.service.v1.UploadVipLevelImageRequest
+	1, // 5: api.backoffice.service.v1.BackofficeFileStore.UploadOperatorStaticFile:output_type -> api.backoffice.service.v1.UploadOperatorStaticFileResponse
+	3, // 6: api.backoffice.service.v1.BackofficeFileStore.UploadRegisterLoginBlacklist:output_type -> api.backoffice.service.v1.UploadRegisterLoginBlacklistResponse
+	5, // 7: api.backoffice.service.v1.BackofficeFileStore.UploadVipLevelImage:output_type -> api.backoffice.service.v1.UploadVipLevelImageResponse
+	5, // [5:8] is the sub-list for method output_type
+	2, // [2:5] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_filestore_proto_init() }
@@ -288,7 +413,7 @@ func file_backoffice_service_v1_backoffice_filestore_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_filestore_proto_rawDesc), len(file_backoffice_service_v1_backoffice_filestore_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

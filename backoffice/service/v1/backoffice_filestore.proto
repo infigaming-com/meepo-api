@@ -22,6 +22,13 @@ service BackofficeFileStore {
 			body: "*"
 		};
 	}
+
+	rpc UploadVipLevelImage(UploadVipLevelImageRequest) returns (UploadVipLevelImageResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/filestore/vip-level-images/upload"
+			body: "*"
+		};
+	}
 }
 
 message UploadOperatorStaticFileRequest {
@@ -40,3 +47,14 @@ message UploadRegisterLoginBlacklistRequest {
 }
 
 message UploadRegisterLoginBlacklistResponse {}
+
+message UploadVipLevelImageRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  bytes data = 2;
+  string content_type = 3;
+  string file_path = 4;
+}
+
+message UploadVipLevelImageResponse {
+	string file_url = 1;
+}
