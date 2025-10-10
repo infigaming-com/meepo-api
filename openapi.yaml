@@ -11659,14 +11659,16 @@ components:
         api.backoffice.service.v1.UploadVipLevelImageRequest:
             type: object
             properties:
-                targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
                 data:
                     type: string
                     format: bytes
                 contentType:
                     type: string
                 filePath:
+                    type: string
+                operatorType:
+                    type: string
+                realOperatorId:
                     type: string
         api.backoffice.service.v1.UploadVipLevelImageResponse:
             type: object

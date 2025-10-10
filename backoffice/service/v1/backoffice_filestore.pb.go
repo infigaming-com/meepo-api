@@ -224,13 +224,14 @@ func (*UploadRegisterLoginBlacklistResponse) Descriptor() ([]byte, []int) {
 }
 
 type UploadVipLevelImageRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	Data                  []byte                  `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	ContentType           string                  `protobuf:"bytes,3,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"`
-	FilePath              string                  `protobuf:"bytes,4,opt,name=file_path,json=filePath,proto3" json:"file_path,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Data           []byte                 `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	ContentType    string                 `protobuf:"bytes,2,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"`
+	FilePath       string                 `protobuf:"bytes,3,opt,name=file_path,json=filePath,proto3" json:"file_path,omitempty"`
+	OperatorType   string                 `protobuf:"bytes,4,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
+	RealOperatorId string                 `protobuf:"bytes,5,opt,name=real_operator_id,json=realOperatorId,proto3" json:"real_operator_id,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *UploadVipLevelImageRequest) Reset() {
@@ -263,13 +264,6 @@ func (*UploadVipLevelImageRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_filestore_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *UploadVipLevelImageRequest) GetTargetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.TargetOperatorContext
-	}
-	return nil
-}
-
 func (x *UploadVipLevelImageRequest) GetData() []byte {
 	if x != nil {
 		return x.Data
@@ -287,6 +281,20 @@ func (x *UploadVipLevelImageRequest) GetContentType() string {
 func (x *UploadVipLevelImageRequest) GetFilePath() string {
 	if x != nil {
 		return x.FilePath
+	}
+	return ""
+}
+
+func (x *UploadVipLevelImageRequest) GetOperatorType() string {
+	if x != nil {
+		return x.OperatorType
+	}
+	return ""
+}
+
+func (x *UploadVipLevelImageRequest) GetRealOperatorId() string {
+	if x != nil {
+		return x.RealOperatorId
 	}
 	return ""
 }
@@ -350,12 +358,13 @@ const file_backoffice_service_v1_backoffice_filestore_proto_rawDesc = "" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x12\n" +
 	"\x04data\x18\x02 \x01(\fR\x04data\x12\x17\n" +
 	"\aid_type\x18\x03 \x01(\tR\x06idType\"&\n" +
-	"$UploadRegisterLoginBlacklistResponse\"\xc5\x01\n" +
-	"\x1aUploadVipLevelImageRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x12\n" +
-	"\x04data\x18\x02 \x01(\fR\x04data\x12!\n" +
-	"\fcontent_type\x18\x03 \x01(\tR\vcontentType\x12\x1b\n" +
-	"\tfile_path\x18\x04 \x01(\tR\bfilePath\"8\n" +
+	"$UploadRegisterLoginBlacklistResponse\"\xbf\x01\n" +
+	"\x1aUploadVipLevelImageRequest\x12\x12\n" +
+	"\x04data\x18\x01 \x01(\fR\x04data\x12!\n" +
+	"\fcontent_type\x18\x02 \x01(\tR\vcontentType\x12\x1b\n" +
+	"\tfile_path\x18\x03 \x01(\tR\bfilePath\x12#\n" +
+	"\roperator_type\x18\x04 \x01(\tR\foperatorType\x12(\n" +
+	"\x10real_operator_id\x18\x05 \x01(\tR\x0erealOperatorId\"8\n" +
 	"\x1bUploadVipLevelImageResponse\x12\x19\n" +
 	"\bfile_url\x18\x01 \x01(\tR\afileUrl2\x98\x05\n" +
 	"\x13BackofficeFileStore\x12\xd5\x01\n" +
@@ -388,18 +397,17 @@ var file_backoffice_service_v1_backoffice_filestore_proto_goTypes = []any{
 }
 var file_backoffice_service_v1_backoffice_filestore_proto_depIdxs = []int32{
 	6, // 0: api.backoffice.service.v1.UploadRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
-	6, // 1: api.backoffice.service.v1.UploadVipLevelImageRequest.target_operator_context:type_name -> api.common.OperatorContext
-	0, // 2: api.backoffice.service.v1.BackofficeFileStore.UploadOperatorStaticFile:input_type -> api.backoffice.service.v1.UploadOperatorStaticFileRequest
-	2, // 3: api.backoffice.service.v1.BackofficeFileStore.UploadRegisterLoginBlacklist:input_type -> api.backoffice.service.v1.UploadRegisterLoginBlacklistRequest
-	4, // 4: api.backoffice.service.v1.BackofficeFileStore.UploadVipLevelImage:input_type -> api.backoffice.service.v1.UploadVipLevelImageRequest
-	1, // 5: api.backoffice.service.v1.BackofficeFileStore.UploadOperatorStaticFile:output_type -> api.backoffice.service.v1.UploadOperatorStaticFileResponse
-	3, // 6: api.backoffice.service.v1.BackofficeFileStore.UploadRegisterLoginBlacklist:output_type -> api.backoffice.service.v1.UploadRegisterLoginBlacklistResponse
-	5, // 7: api.backoffice.service.v1.BackofficeFileStore.UploadVipLevelImage:output_type -> api.backoffice.service.v1.UploadVipLevelImageResponse
-	5, // [5:8] is the sub-list for method output_type
-	2, // [2:5] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	0, // 1: api.backoffice.service.v1.BackofficeFileStore.UploadOperatorStaticFile:input_type -> api.backoffice.service.v1.UploadOperatorStaticFileRequest
+	2, // 2: api.backoffice.service.v1.BackofficeFileStore.UploadRegisterLoginBlacklist:input_type -> api.backoffice.service.v1.UploadRegisterLoginBlacklistRequest
+	4, // 3: api.backoffice.service.v1.BackofficeFileStore.UploadVipLevelImage:input_type -> api.backoffice.service.v1.UploadVipLevelImageRequest
+	1, // 4: api.backoffice.service.v1.BackofficeFileStore.UploadOperatorStaticFile:output_type -> api.backoffice.service.v1.UploadOperatorStaticFileResponse
+	3, // 5: api.backoffice.service.v1.BackofficeFileStore.UploadRegisterLoginBlacklist:output_type -> api.backoffice.service.v1.UploadRegisterLoginBlacklistResponse
+	5, // 6: api.backoffice.service.v1.BackofficeFileStore.UploadVipLevelImage:output_type -> api.backoffice.service.v1.UploadVipLevelImageResponse
+	4, // [4:7] is the sub-list for method output_type
+	1, // [1:4] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_filestore_proto_init() }
