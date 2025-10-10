@@ -1116,6 +1116,8 @@ func (m *VipLevelConfigTemplate) validate(all bool) error {
 
 	// no validation rules for ImageUrl
 
+	// no validation rules for XpLossEnabled
+
 	if len(errors) > 0 {
 		return VipLevelConfigTemplateMultiError(errors)
 	}

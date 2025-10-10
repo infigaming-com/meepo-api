@@ -1111,6 +1111,7 @@ type VipLevelConfigTemplate struct {
 	CreatedAt               int64  `protobuf:"varint,36,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt               int64  `protobuf:"varint,37,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	ImageUrl                string `protobuf:"bytes,38,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
+	XpLossEnabled           bool   `protobuf:"varint,39,opt,name=xp_loss_enabled,json=xpLossEnabled,proto3" json:"xp_loss_enabled,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -1409,6 +1410,13 @@ func (x *VipLevelConfigTemplate) GetImageUrl() string {
 		return x.ImageUrl
 	}
 	return ""
+}
+
+func (x *VipLevelConfigTemplate) GetXpLossEnabled() bool {
+	if x != nil {
+		return x.XpLossEnabled
+	}
+	return false
 }
 
 type ListVipLevelConfigTemplatesRequest struct {
@@ -2469,7 +2477,7 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\x17UpdateVipSettingRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x128\n" +
 	"\asetting\x18\x02 \x01(\v2\x1e.api.vip.service.v1.VipSettingR\asetting\"\x1a\n" +
-	"\x18UpdateVipSettingResponse\"\x81\x0e\n" +
+	"\x18UpdateVipSettingResponse\"\xa9\x0e\n" +
 	"\x16VipLevelConfigTemplate\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12,\n" +
 	"\x12system_operator_id\x18\x02 \x01(\x03R\x10systemOperatorId\x120\n" +
@@ -2513,7 +2521,8 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"created_at\x18$ \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
 	"updated_at\x18% \x01(\x03R\tupdatedAt\x12\x1b\n" +
-	"\timage_url\x18& \x01(\tR\bimageUrl\"\xc9\x01\n" +
+	"\timage_url\x18& \x01(\tR\bimageUrl\x12&\n" +
+	"\x0fxp_loss_enabled\x18' \x01(\bR\rxpLossEnabled\"\xc9\x01\n" +
 	"\"ListVipLevelConfigTemplatesRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1d\n" +
 	"\n" +
