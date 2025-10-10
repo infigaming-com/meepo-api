@@ -21,6 +21,7 @@ const _ = http.SupportPackageIsVersion1
 
 const OperationVipClaimVipReward = "/api.vip.service.v1.Vip/ClaimVipReward"
 const OperationVipGetClaimableVipRewards = "/api.vip.service.v1.Vip/GetClaimableVipRewards"
+const OperationVipGetOperatorVipSettings = "/api.vip.service.v1.Vip/GetOperatorVipSettings"
 const OperationVipGetUserVipLevel = "/api.vip.service.v1.Vip/GetUserVipLevel"
 const OperationVipGetVipLevelConfigTemplate = "/api.vip.service.v1.Vip/GetVipLevelConfigTemplate"
 const OperationVipGetVipSetting = "/api.vip.service.v1.Vip/GetVipSetting"
@@ -30,6 +31,7 @@ const OperationVipUpdateVipRewardSlider = "/api.vip.service.v1.Vip/UpdateVipRewa
 type VipHTTPServer interface {
 	ClaimVipReward(context.Context, *ClaimVipRewardRequest) (*ClaimVipRewardResponse, error)
 	GetClaimableVipRewards(context.Context, *GetClaimableVipRewardsRequest) (*GetClaimableVipRewardsResponse, error)
+	GetOperatorVipSettings(context.Context, *GetOperatorVipSettingsRequest) (*GetOperatorVipSettingsResponse, error)
 	GetUserVipLevel(context.Context, *GetUserVipLevelRequest) (*GetUserVipLevelResponse, error)
 	GetVipLevelConfigTemplate(context.Context, *GetVipLevelConfigTemplateRequest) (*GetVipLevelConfigTemplateResponse, error)
 	GetVipSetting(context.Context, *GetVipSettingRequest) (*GetVipSettingResponse, error)
@@ -42,6 +44,7 @@ func RegisterVipHTTPServer(s *http.Server, srv VipHTTPServer) {
 	r.POST("/v1/vip/setting/get", _Vip_GetVipSetting0_HTTP_Handler(srv))
 	r.POST("/v1/vip/level-config-templates/list", _Vip_ListVipLevelConfigTemplates0_HTTP_Handler(srv))
 	r.POST("/v1/vip/level-config-template/get", _Vip_GetVipLevelConfigTemplate0_HTTP_Handler(srv))
+	r.POST("/v1/vip/operator-vip-settings/get", _Vip_GetOperatorVipSettings0_HTTP_Handler(srv))
 	r.POST("/v1/vip/user-level/get", _Vip_GetUserVipLevel0_HTTP_Handler(srv))
 	r.POST("/v1/vip/reward-slider/update", _Vip_UpdateVipRewardSlider0_HTTP_Handler(srv))
 	r.POST("/v1/vip/reward/claimable", _Vip_GetClaimableVipRewards0_HTTP_Handler(srv))
@@ -110,6 +113,28 @@ func _Vip_GetVipLevelConfigTemplate0_HTTP_Handler(srv VipHTTPServer) func(ctx ht
 			return err
 		}
 		reply := out.(*GetVipLevelConfigTemplateResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Vip_GetOperatorVipSettings0_HTTP_Handler(srv VipHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetOperatorVipSettingsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationVipGetOperatorVipSettings)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetOperatorVipSettings(ctx, req.(*GetOperatorVipSettingsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetOperatorVipSettingsResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -205,6 +230,7 @@ func _Vip_ClaimVipReward0_HTTP_Handler(srv VipHTTPServer) func(ctx http.Context)
 type VipHTTPClient interface {
 	ClaimVipReward(ctx context.Context, req *ClaimVipRewardRequest, opts ...http.CallOption) (rsp *ClaimVipRewardResponse, err error)
 	GetClaimableVipRewards(ctx context.Context, req *GetClaimableVipRewardsRequest, opts ...http.CallOption) (rsp *GetClaimableVipRewardsResponse, err error)
+	GetOperatorVipSettings(ctx context.Context, req *GetOperatorVipSettingsRequest, opts ...http.CallOption) (rsp *GetOperatorVipSettingsResponse, err error)
 	GetUserVipLevel(ctx context.Context, req *GetUserVipLevelRequest, opts ...http.CallOption) (rsp *GetUserVipLevelResponse, err error)
 	GetVipLevelConfigTemplate(ctx context.Context, req *GetVipLevelConfigTemplateRequest, opts ...http.CallOption) (rsp *GetVipLevelConfigTemplateResponse, err error)
 	GetVipSetting(ctx context.Context, req *GetVipSettingRequest, opts ...http.CallOption) (rsp *GetVipSettingResponse, err error)
@@ -238,6 +264,19 @@ func (c *VipHTTPClientImpl) GetClaimableVipRewards(ctx context.Context, in *GetC
 	pattern := "/v1/vip/reward/claimable"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationVipGetClaimableVipRewards))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *VipHTTPClientImpl) GetOperatorVipSettings(ctx context.Context, in *GetOperatorVipSettingsRequest, opts ...http.CallOption) (*GetOperatorVipSettingsResponse, error) {
+	var out GetOperatorVipSettingsResponse
+	pattern := "/v1/vip/operator-vip-settings/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationVipGetOperatorVipSettings))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

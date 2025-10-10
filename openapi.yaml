@@ -4965,6 +4965,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.vip.service.v1.ListVipLevelConfigTemplatesResponse'
+    /v1/vip/operator-vip-settings/get:
+        post:
+            tags:
+                - Vip
+            operationId: Vip_GetOperatorVipSettings
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.vip.service.v1.GetOperatorVipSettingsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.vip.service.v1.GetOperatorVipSettingsResponse'
     /v1/vip/reward-slider/update:
         post:
             tags:
@@ -6104,6 +6122,8 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 template:
                     $ref: '#/components/schemas/api.vip.service.v1.VipLevelConfigTemplate'
+                settingId:
+                    type: string
         api.backoffice.service.v1.CreateVipLevelConfigTemplateResponse:
             type: object
             properties:
@@ -14719,6 +14739,14 @@ components:
             properties:
                 claimableAmount:
                     type: string
+        api.vip.service.v1.GetOperatorVipSettingsRequest:
+            type: object
+            properties: {}
+        api.vip.service.v1.GetOperatorVipSettingsResponse:
+            type: object
+            properties:
+                setting:
+                    $ref: '#/components/schemas/api.vip.service.v1.VipSetting'
         api.vip.service.v1.GetUserVipLevelRequest:
             type: object
             properties: {}

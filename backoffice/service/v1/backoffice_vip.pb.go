@@ -364,6 +364,7 @@ type CreateVipLevelConfigTemplateRequest struct {
 	state                 protoimpl.MessageState     `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext    `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	Template              *v1.VipLevelConfigTemplate `protobuf:"bytes,2,opt,name=template,proto3" json:"template,omitempty"`
+	SettingId             int64                      `protobuf:"varint,3,opt,name=setting_id,json=settingId,proto3" json:"setting_id,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -410,6 +411,13 @@ func (x *CreateVipLevelConfigTemplateRequest) GetTemplate() *v1.VipLevelConfigTe
 		return x.Template
 	}
 	return nil
+}
+
+func (x *CreateVipLevelConfigTemplateRequest) GetSettingId() int64 {
+	if x != nil {
+		return x.SettingId
+	}
+	return 0
 }
 
 type CreateVipLevelConfigTemplateResponse struct {
@@ -746,10 +754,12 @@ const file_backoffice_service_v1_backoffice_vip_proto_rawDesc = "" +
 	"\vtemplate_id\x18\x02 \x01(\x03R\n" +
 	"templateId\"k\n" +
 	"!GetVipLevelConfigTemplateResponse\x12F\n" +
-	"\btemplate\x18\x01 \x01(\v2*.api.vip.service.v1.VipLevelConfigTemplateR\btemplate\"\xc2\x01\n" +
+	"\btemplate\x18\x01 \x01(\v2*.api.vip.service.v1.VipLevelConfigTemplateR\btemplate\"\xe1\x01\n" +
 	"#CreateVipLevelConfigTemplateRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12F\n" +
-	"\btemplate\x18\x02 \x01(\v2*.api.vip.service.v1.VipLevelConfigTemplateR\btemplate\"n\n" +
+	"\btemplate\x18\x02 \x01(\v2*.api.vip.service.v1.VipLevelConfigTemplateR\btemplate\x12\x1d\n" +
+	"\n" +
+	"setting_id\x18\x03 \x01(\x03R\tsettingId\"n\n" +
 	"$CreateVipLevelConfigTemplateResponse\x12F\n" +
 	"\btemplate\x18\x01 \x01(\v2*.api.vip.service.v1.VipLevelConfigTemplateR\btemplate\"\xc2\x01\n" +
 	"#UpdateVipLevelConfigTemplateRequest\x12S\n" +

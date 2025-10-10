@@ -26,6 +26,7 @@ const (
 	Vip_CreateVipLevelConfigTemplate_FullMethodName = "/api.vip.service.v1.Vip/CreateVipLevelConfigTemplate"
 	Vip_UpdateVipLevelConfigTemplate_FullMethodName = "/api.vip.service.v1.Vip/UpdateVipLevelConfigTemplate"
 	Vip_DeleteVipLevelConfigTemplate_FullMethodName = "/api.vip.service.v1.Vip/DeleteVipLevelConfigTemplate"
+	Vip_GetOperatorVipSettings_FullMethodName       = "/api.vip.service.v1.Vip/GetOperatorVipSettings"
 	Vip_GetUserVipLevel_FullMethodName              = "/api.vip.service.v1.Vip/GetUserVipLevel"
 	Vip_UpdateVipRewardSlider_FullMethodName        = "/api.vip.service.v1.Vip/UpdateVipRewardSlider"
 	Vip_GetClaimableVipRewards_FullMethodName       = "/api.vip.service.v1.Vip/GetClaimableVipRewards"
@@ -43,6 +44,7 @@ type VipClient interface {
 	CreateVipLevelConfigTemplate(ctx context.Context, in *CreateVipLevelConfigTemplateRequest, opts ...grpc.CallOption) (*CreateVipLevelConfigTemplateResponse, error)
 	UpdateVipLevelConfigTemplate(ctx context.Context, in *UpdateVipLevelConfigTemplateRequest, opts ...grpc.CallOption) (*UpdateVipLevelConfigTemplateResponse, error)
 	DeleteVipLevelConfigTemplate(ctx context.Context, in *DeleteVipLevelConfigTemplateRequest, opts ...grpc.CallOption) (*DeleteVipLevelConfigTemplateResponse, error)
+	GetOperatorVipSettings(ctx context.Context, in *GetOperatorVipSettingsRequest, opts ...grpc.CallOption) (*GetOperatorVipSettingsResponse, error)
 	GetUserVipLevel(ctx context.Context, in *GetUserVipLevelRequest, opts ...grpc.CallOption) (*GetUserVipLevelResponse, error)
 	UpdateVipRewardSlider(ctx context.Context, in *UpdateVipRewardSliderRequest, opts ...grpc.CallOption) (*UpdateVipRewardSliderResponse, error)
 	GetClaimableVipRewards(ctx context.Context, in *GetClaimableVipRewardsRequest, opts ...grpc.CallOption) (*GetClaimableVipRewardsResponse, error)
@@ -127,6 +129,16 @@ func (c *vipClient) DeleteVipLevelConfigTemplate(ctx context.Context, in *Delete
 	return out, nil
 }
 
+func (c *vipClient) GetOperatorVipSettings(ctx context.Context, in *GetOperatorVipSettingsRequest, opts ...grpc.CallOption) (*GetOperatorVipSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorVipSettingsResponse)
+	err := c.cc.Invoke(ctx, Vip_GetOperatorVipSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *vipClient) GetUserVipLevel(ctx context.Context, in *GetUserVipLevelRequest, opts ...grpc.CallOption) (*GetUserVipLevelResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetUserVipLevelResponse)
@@ -178,6 +190,7 @@ type VipServer interface {
 	CreateVipLevelConfigTemplate(context.Context, *CreateVipLevelConfigTemplateRequest) (*CreateVipLevelConfigTemplateResponse, error)
 	UpdateVipLevelConfigTemplate(context.Context, *UpdateVipLevelConfigTemplateRequest) (*UpdateVipLevelConfigTemplateResponse, error)
 	DeleteVipLevelConfigTemplate(context.Context, *DeleteVipLevelConfigTemplateRequest) (*DeleteVipLevelConfigTemplateResponse, error)
+	GetOperatorVipSettings(context.Context, *GetOperatorVipSettingsRequest) (*GetOperatorVipSettingsResponse, error)
 	GetUserVipLevel(context.Context, *GetUserVipLevelRequest) (*GetUserVipLevelResponse, error)
 	UpdateVipRewardSlider(context.Context, *UpdateVipRewardSliderRequest) (*UpdateVipRewardSliderResponse, error)
 	GetClaimableVipRewards(context.Context, *GetClaimableVipRewardsRequest) (*GetClaimableVipRewardsResponse, error)
@@ -212,6 +225,9 @@ func (UnimplementedVipServer) UpdateVipLevelConfigTemplate(context.Context, *Upd
 }
 func (UnimplementedVipServer) DeleteVipLevelConfigTemplate(context.Context, *DeleteVipLevelConfigTemplateRequest) (*DeleteVipLevelConfigTemplateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteVipLevelConfigTemplate not implemented")
+}
+func (UnimplementedVipServer) GetOperatorVipSettings(context.Context, *GetOperatorVipSettingsRequest) (*GetOperatorVipSettingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorVipSettings not implemented")
 }
 func (UnimplementedVipServer) GetUserVipLevel(context.Context, *GetUserVipLevelRequest) (*GetUserVipLevelResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserVipLevel not implemented")
@@ -372,6 +388,24 @@ func _Vip_DeleteVipLevelConfigTemplate_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Vip_GetOperatorVipSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorVipSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VipServer).GetOperatorVipSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Vip_GetOperatorVipSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VipServer).GetOperatorVipSettings(ctx, req.(*GetOperatorVipSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Vip_GetUserVipLevel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetUserVipLevelRequest)
 	if err := dec(in); err != nil {
@@ -478,6 +512,10 @@ var Vip_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteVipLevelConfigTemplate",
 			Handler:    _Vip_DeleteVipLevelConfigTemplate_Handler,
+		},
+		{
+			MethodName: "GetOperatorVipSettings",
+			Handler:    _Vip_GetOperatorVipSettings_Handler,
 		},
 		{
 			MethodName: "GetUserVipLevel",
