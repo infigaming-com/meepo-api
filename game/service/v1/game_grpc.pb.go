@@ -62,6 +62,9 @@ const (
 	Game_ListCustomerStrikeReports_FullMethodName         = "/api.game.service.v1.Game/ListCustomerStrikeReports"
 	Game_ExportCustomerStrikeReports_FullMethodName       = "/api.game.service.v1.Game/ExportCustomerStrikeReports"
 	Game_CreateTaxReport_FullMethodName                   = "/api.game.service.v1.Game/CreateTaxReport"
+	Game_AddGameBetDisplayConfig_FullMethodName           = "/api.game.service.v1.Game/AddGameBetDisplayConfig"
+	Game_UpdateGameBetDisplayConfig_FullMethodName        = "/api.game.service.v1.Game/UpdateGameBetDisplayConfig"
+	Game_ListGameBetDisplayConfig_FullMethodName          = "/api.game.service.v1.Game/ListGameBetDisplayConfig"
 )
 
 // GameClient is the client API for Game service.
@@ -114,6 +117,9 @@ type GameClient interface {
 	ListCustomerStrikeReports(ctx context.Context, in *ListCustomerStrikeReportsRequest, opts ...grpc.CallOption) (*ListCustomerStrikeReportsResponse, error)
 	ExportCustomerStrikeReports(ctx context.Context, in *ExportCustomerStrikeReportsRequest, opts ...grpc.CallOption) (*ExportCustomerStrikeReportsResponse, error)
 	CreateTaxReport(ctx context.Context, in *CreateTaxReportRequest, opts ...grpc.CallOption) (*CreateTaxReportResponse, error)
+	AddGameBetDisplayConfig(ctx context.Context, in *AddGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*AddGameBetDisplayConfigResponse, error)
+	UpdateGameBetDisplayConfig(ctx context.Context, in *UpdateGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*UpdateGameBetDisplayConfigResponse, error)
+	ListGameBetDisplayConfig(ctx context.Context, in *ListGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*ListGameBetDisplayConfigResponse, error)
 }
 
 type gameClient struct {
@@ -554,6 +560,36 @@ func (c *gameClient) CreateTaxReport(ctx context.Context, in *CreateTaxReportReq
 	return out, nil
 }
 
+func (c *gameClient) AddGameBetDisplayConfig(ctx context.Context, in *AddGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*AddGameBetDisplayConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddGameBetDisplayConfigResponse)
+	err := c.cc.Invoke(ctx, Game_AddGameBetDisplayConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) UpdateGameBetDisplayConfig(ctx context.Context, in *UpdateGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*UpdateGameBetDisplayConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateGameBetDisplayConfigResponse)
+	err := c.cc.Invoke(ctx, Game_UpdateGameBetDisplayConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) ListGameBetDisplayConfig(ctx context.Context, in *ListGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*ListGameBetDisplayConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListGameBetDisplayConfigResponse)
+	err := c.cc.Invoke(ctx, Game_ListGameBetDisplayConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GameServer is the server API for Game service.
 // All implementations must embed UnimplementedGameServer
 // for forward compatibility.
@@ -604,6 +640,9 @@ type GameServer interface {
 	ListCustomerStrikeReports(context.Context, *ListCustomerStrikeReportsRequest) (*ListCustomerStrikeReportsResponse, error)
 	ExportCustomerStrikeReports(context.Context, *ExportCustomerStrikeReportsRequest) (*ExportCustomerStrikeReportsResponse, error)
 	CreateTaxReport(context.Context, *CreateTaxReportRequest) (*CreateTaxReportResponse, error)
+	AddGameBetDisplayConfig(context.Context, *AddGameBetDisplayConfigRequest) (*AddGameBetDisplayConfigResponse, error)
+	UpdateGameBetDisplayConfig(context.Context, *UpdateGameBetDisplayConfigRequest) (*UpdateGameBetDisplayConfigResponse, error)
+	ListGameBetDisplayConfig(context.Context, *ListGameBetDisplayConfigRequest) (*ListGameBetDisplayConfigResponse, error)
 	mustEmbedUnimplementedGameServer()
 }
 
@@ -742,6 +781,15 @@ func (UnimplementedGameServer) ExportCustomerStrikeReports(context.Context, *Exp
 }
 func (UnimplementedGameServer) CreateTaxReport(context.Context, *CreateTaxReportRequest) (*CreateTaxReportResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateTaxReport not implemented")
+}
+func (UnimplementedGameServer) AddGameBetDisplayConfig(context.Context, *AddGameBetDisplayConfigRequest) (*AddGameBetDisplayConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddGameBetDisplayConfig not implemented")
+}
+func (UnimplementedGameServer) UpdateGameBetDisplayConfig(context.Context, *UpdateGameBetDisplayConfigRequest) (*UpdateGameBetDisplayConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateGameBetDisplayConfig not implemented")
+}
+func (UnimplementedGameServer) ListGameBetDisplayConfig(context.Context, *ListGameBetDisplayConfigRequest) (*ListGameBetDisplayConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListGameBetDisplayConfig not implemented")
 }
 func (UnimplementedGameServer) mustEmbedUnimplementedGameServer() {}
 func (UnimplementedGameServer) testEmbeddedByValue()              {}
@@ -1538,6 +1586,60 @@ func _Game_CreateTaxReport_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_AddGameBetDisplayConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddGameBetDisplayConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).AddGameBetDisplayConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_AddGameBetDisplayConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).AddGameBetDisplayConfig(ctx, req.(*AddGameBetDisplayConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_UpdateGameBetDisplayConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateGameBetDisplayConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).UpdateGameBetDisplayConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_UpdateGameBetDisplayConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).UpdateGameBetDisplayConfig(ctx, req.(*UpdateGameBetDisplayConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_ListGameBetDisplayConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListGameBetDisplayConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).ListGameBetDisplayConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_ListGameBetDisplayConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).ListGameBetDisplayConfig(ctx, req.(*ListGameBetDisplayConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Game_ServiceDesc is the grpc.ServiceDesc for Game service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1716,6 +1818,18 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateTaxReport",
 			Handler:    _Game_CreateTaxReport_Handler,
+		},
+		{
+			MethodName: "AddGameBetDisplayConfig",
+			Handler:    _Game_AddGameBetDisplayConfig_Handler,
+		},
+		{
+			MethodName: "UpdateGameBetDisplayConfig",
+			Handler:    _Game_UpdateGameBetDisplayConfig_Handler,
+		},
+		{
+			MethodName: "ListGameBetDisplayConfig",
+			Handler:    _Game_ListGameBetDisplayConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
