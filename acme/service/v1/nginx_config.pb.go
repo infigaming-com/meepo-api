@@ -26,6 +26,7 @@ type Domain struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ByoDomain     string                 `protobuf:"bytes,1,opt,name=byo_domain,json=byoDomain,proto3" json:"byo_domain,omitempty"` // Byo domain name
 	Domain        string                 `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`                        // Meepo domain name
+	Template      string                 `protobuf:"bytes,3,opt,name=template,proto3" json:"template,omitempty"`                    // Template name
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -70,6 +71,13 @@ func (x *Domain) GetByoDomain() string {
 func (x *Domain) GetDomain() string {
 	if x != nil {
 		return x.Domain
+	}
+	return ""
+}
+
+func (x *Domain) GetTemplate() string {
+	if x != nil {
+		return x.Template
 	}
 	return ""
 }
@@ -242,11 +250,12 @@ var File_acme_service_v1_nginx_config_proto protoreflect.FileDescriptor
 
 const file_acme_service_v1_nginx_config_proto_rawDesc = "" +
 	"\n" +
-	"\"acme/service/v1/nginx_config.proto\x12\x13api.acme.service.v1\"?\n" +
+	"\"acme/service/v1/nginx_config.proto\x12\x13api.acme.service.v1\"[\n" +
 	"\x06Domain\x12\x1d\n" +
 	"\n" +
 	"byo_domain\x18\x01 \x01(\tR\tbyoDomain\x12\x16\n" +
-	"\x06domain\x18\x02 \x01(\tR\x06domain\"T\n" +
+	"\x06domain\x18\x02 \x01(\tR\x06domain\x12\x1a\n" +
+	"\btemplate\x18\x03 \x01(\tR\btemplate\"T\n" +
 	"\x1bUpdateByoNginxConfigRequest\x125\n" +
 	"\adomains\x18\x01 \x03(\v2\x1b.api.acme.service.v1.DomainR\adomains\"\x1e\n" +
 	"\x1cUpdateByoNginxConfigResponse\"^\n" +

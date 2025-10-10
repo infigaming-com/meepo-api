@@ -424,6 +424,96 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateAccountResponse'
+    /v1/backoffice/affiliate/commission/plan/create:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_CreateCommissionPlan
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateCommissionPlanRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.CreateCommissionPlanResponse'
+    /v1/backoffice/affiliate/commission/plan/delete:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_DeleteCommissionPlan
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteCommissionPlanRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.DeleteCommissionPlanResponse'
+    /v1/backoffice/affiliate/commission/plan/get:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_GetCommissionPlan
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetCommissionPlanRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.GetCommissionPlanResponse'
+    /v1/backoffice/affiliate/commission/plan/list:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_ListCommissionPlans
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListCommissionPlansRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListCommissionPlansResponse'
+    /v1/backoffice/affiliate/commission/plan/update:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_UpdateCommissionPlan
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateCommissionPlanRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.UpdateCommissionPlanResponse'
     /v1/backoffice/audit/actions/list:
         post:
             tags:
@@ -5118,6 +5208,330 @@ paths:
                                 $ref: '#/components/schemas/api.wallet.service.v1.ListResponsibleGamblingConfigsResponse'
 components:
     schemas:
+        api.affiliate.service.v1.AdvancedOptions:
+            type: object
+            properties:
+                holdPeriodDays:
+                    type: integer
+                    format: int32
+        api.affiliate.service.v1.CPAConfig:
+            type: object
+            properties:
+                enabled:
+                    type: boolean
+                commissionType:
+                    type: string
+                flat:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.FlatCommission'
+                flatByCountries:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.FlatByCountriesCommission'
+                progressive:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.ProgressiveCommission'
+                progressiveByCountries:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.ProgressiveByCountriesCommission'
+                qualification:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.Qualification'
+                advancedOptions:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.AdvancedOptions'
+        api.affiliate.service.v1.CPCConfig:
+            type: object
+            properties:
+                enabled:
+                    type: boolean
+                commissionType:
+                    type: string
+                flat:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.FlatCommission'
+                flatByCountries:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.FlatByCountriesCommission'
+        api.affiliate.service.v1.CPLConfig:
+            type: object
+            properties:
+                enabled:
+                    type: boolean
+                commissionType:
+                    type: string
+                flat:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.FlatCommission'
+                flatByCountries:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.FlatByCountriesCommission'
+                progressive:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.ProgressiveCommission'
+                progressiveByCountries:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.ProgressiveByCountriesCommission'
+                qualification:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.Qualification'
+                advancedOptions:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.AdvancedOptions'
+        api.affiliate.service.v1.CommissionPlan:
+            type: object
+            properties:
+                commissionPlanId:
+                    type: string
+                title:
+                    type: string
+                status:
+                    type: string
+                source:
+                    type: string
+                types:
+                    type: array
+                    items:
+                        type: string
+                assignedCount:
+                    type: integer
+                    format: int32
+                baseCurrency:
+                    type: string
+                sourceOperatorName:
+                    type: string
+        api.affiliate.service.v1.CommissionPlanConfig:
+            type: object
+            properties:
+                cpa:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.CPAConfig'
+                revshare:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.RevShareConfig'
+                cpl:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.CPLConfig'
+                cpc:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.CPCConfig'
+                flatFee:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.FlatFeeConfig'
+        api.affiliate.service.v1.CountryCommissionGroup:
+            type: object
+            properties:
+                countries:
+                    type: array
+                    items:
+                        type: string
+                commission:
+                    type: string
+        api.affiliate.service.v1.CountryProgressiveGroup:
+            type: object
+            properties:
+                countries:
+                    type: array
+                    items:
+                        type: string
+                ranges:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.ProgressiveCommissionRange'
+        api.affiliate.service.v1.CountryProgressiveRateGroup:
+            type: object
+            properties:
+                countries:
+                    type: array
+                    items:
+                        type: string
+                ranges:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.RateRange'
+        api.affiliate.service.v1.CountryRateGroup:
+            type: object
+            properties:
+                countries:
+                    type: array
+                    items:
+                        type: string
+                rate:
+                    type: string
+        api.affiliate.service.v1.CreateCommissionPlanResponse:
+            type: object
+            properties: {}
+        api.affiliate.service.v1.DeleteCommissionPlanResponse:
+            type: object
+            properties: {}
+        api.affiliate.service.v1.FlatByCountriesCommission:
+            type: object
+            properties:
+                countryGroups:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.CountryCommissionGroup'
+                otherCountriesCommission:
+                    type: string
+        api.affiliate.service.v1.FlatByCountriesRateCommission:
+            type: object
+            properties:
+                countryGroups:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.CountryRateGroup'
+                otherCountriesRate:
+                    type: string
+        api.affiliate.service.v1.FlatCommission:
+            type: object
+            properties:
+                commission:
+                    type: string
+        api.affiliate.service.v1.FlatFeeConfig:
+            type: object
+            properties:
+                enabled:
+                    type: boolean
+                period:
+                    type: string
+                amount:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+        api.affiliate.service.v1.FlatRateCommission:
+            type: object
+            properties:
+                rate:
+                    type: string
+        api.affiliate.service.v1.GetCommissionPlanResponse:
+            type: object
+            properties:
+                userId:
+                    type: string
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                title:
+                    type: string
+                status:
+                    type: string
+                baseCurrency:
+                    type: string
+                planConfig:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.CommissionPlanConfig'
+        api.affiliate.service.v1.ListCommissionPlansResponse:
+            type: object
+            properties:
+                commissionPlans:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.CommissionPlan'
+                totalCount:
+                    type: integer
+                    format: int32
+                activeCount:
+                    type: integer
+                    format: int32
+                pausedCount:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.affiliate.service.v1.ProgressiveByCountriesCommission:
+            type: object
+            properties:
+                metric:
+                    type: string
+                countryGroups:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.CountryProgressiveGroup'
+                otherCountriesRanges:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.ProgressiveCommissionRange'
+        api.affiliate.service.v1.ProgressiveByCountriesRateCommission:
+            type: object
+            properties:
+                metric:
+                    type: string
+                countryGroups:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.CountryProgressiveRateGroup'
+                otherCountriesRanges:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.RateRange'
+        api.affiliate.service.v1.ProgressiveCommission:
+            type: object
+            properties:
+                metric:
+                    type: string
+                ranges:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.ProgressiveCommissionRange'
+        api.affiliate.service.v1.ProgressiveCommissionRange:
+            type: object
+            properties:
+                from:
+                    type: string
+                to:
+                    type: string
+                commission:
+                    type: string
+        api.affiliate.service.v1.ProgressiveRateCommission:
+            type: object
+            properties:
+                metric:
+                    type: string
+                ranges:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.RateRange'
+        api.affiliate.service.v1.Qualification:
+            type: object
+            properties:
+                minFtdAmount:
+                    type: string
+                minDepositsCount:
+                    type: integer
+                    format: int32
+                minDepositsAmount:
+                    type: string
+                minBetsCount:
+                    type: integer
+                    format: int32
+                minBetsAmount:
+                    type: string
+                timeLimitAfterRegistrationDays:
+                    type: integer
+                    format: int32
+                timeLimitAfterFtdDays:
+                    type: integer
+                    format: int32
+                allowedPlayerStatuses:
+                    type: array
+                    items:
+                        type: string
+        api.affiliate.service.v1.RateRange:
+            type: object
+            properties:
+                from:
+                    type: string
+                to:
+                    type: string
+                rate:
+                    type: string
+        api.affiliate.service.v1.RevShareConfig:
+            type: object
+            properties:
+                enabled:
+                    type: boolean
+                basedOn:
+                    type: string
+                negativeCarryover:
+                    type: string
+                commissionType:
+                    type: string
+                flat:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.FlatRateCommission'
+                flatByCountries:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.FlatByCountriesRateCommission'
+                progressive:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.ProgressiveRateCommission'
+                progressiveByCountries:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.ProgressiveByCountriesRateCommission'
+                qualification:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.Qualification'
+        api.affiliate.service.v1.UpdateCommissionPlanResponse:
+            type: object
+            properties: {}
         api.backoffice.service.v1.AccountInfoRequest:
             type: object
             properties: {}
@@ -5497,6 +5911,17 @@ components:
         api.backoffice.service.v1.CreateAdjustmentConfigResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.CreateCommissionPlanRequest:
+            type: object
+            properties:
+                title:
+                    type: string
+                status:
+                    type: string
+                baseCurrency:
+                    type: string
+                planConfig:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.CommissionPlanConfig'
         api.backoffice.service.v1.CreateCompanyRequest:
             type: object
             properties:
@@ -5780,6 +6205,13 @@ components:
         api.backoffice.service.v1.DeleteAdjustmentConfigResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.DeleteCommissionPlanRequest:
+            type: object
+            properties:
+                commissionPlanId:
+                    type: string
+                alternativeCommissionPlanId:
+                    type: string
         api.backoffice.service.v1.DeleteDepositRewardSequencesRequest:
             type: object
             properties:
@@ -6116,6 +6548,11 @@ components:
                     type: string
                 includeActions:
                     type: boolean
+        api.backoffice.service.v1.GetCommissionPlanRequest:
+            type: object
+            properties:
+                commissionPlanId:
+                    type: string
         api.backoffice.service.v1.GetCurrentOperatorDetailsRequest:
             type: object
             properties: {}
@@ -7890,6 +8327,21 @@ components:
                     type: array
                     items:
                         type: string
+        api.backoffice.service.v1.ListCommissionPlansRequest:
+            type: object
+            properties:
+                countries:
+                    type: array
+                    items:
+                        type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                status:
+                    type: string
         api.backoffice.service.v1.ListCompanyOperatorsRequest:
             type: object
             properties:
@@ -10909,6 +11361,19 @@ components:
                     type: boolean
                 bankInfo:
                     type: object
+        api.backoffice.service.v1.UpdateCommissionPlanRequest:
+            type: object
+            properties:
+                title:
+                    type: string
+                status:
+                    type: string
+                baseCurrency:
+                    type: string
+                planConfig:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.CommissionPlanConfig'
+                commissionPlanId:
+                    type: string
         api.backoffice.service.v1.UpdateDeductionOrderRequest:
             type: object
             properties:
@@ -16616,6 +17081,7 @@ components:
                     type: string
 tags:
     - name: BackofficeAccount
+    - name: BackofficeAffiliate
     - name: BackofficeAudit
     - name: BackofficeBcpay
       description: |-

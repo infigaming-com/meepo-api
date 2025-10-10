@@ -1,0 +1,227 @@
+syntax = "proto3";
+
+package api.affiliate.service.v1;
+
+import "common/common.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/affiliate/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.affiliate.service.v1";
+
+message CreateCommissionPlanRequest {
+    int64 user_id = 1;
+    api.common.OperatorContext operator_context = 2;
+    string title = 3;
+    string status = 4;
+    string base_currency = 5;
+    CommissionPlanConfig plan_config = 6;
+}
+
+message CreateCommissionPlanResponse {}
+
+message UpdateCommissionPlanRequest {
+    int64 user_id = 1;
+    api.common.OperatorContext operator_context = 2;
+    string title = 3;
+    string status = 4;
+    string base_currency = 5;
+    CommissionPlanConfig plan_config = 6;
+    int64 commission_plan_id = 7;
+}
+
+message UpdateCommissionPlanResponse {}
+
+message GetCommissionPlanRequest {
+    api.common.OperatorContext operator_context = 1;
+    int64 commission_plan_id = 2;
+}
+
+message GetCommissionPlanResponse {
+    int64 user_id = 1;
+    api.common.OperatorContext operator_context = 2;
+    string title = 3;
+    string status = 4;
+    string base_currency = 5;
+    CommissionPlanConfig plan_config = 6;
+}
+
+message ListCommissionPlansRequest {
+    api.common.OperatorContext operator_context = 1;
+    repeated string countries = 2; // not supported yet
+    optional int32 page = 3;
+    optional int32 page_size = 4;
+    optional string status = 5;
+}
+
+message ListCommissionPlansResponse {
+    repeated CommissionPlan commission_plans = 1;
+    int32 total_count = 2;
+    int32 active_count = 3;
+    int32 paused_count = 4;
+    int32 page = 5;
+    int32 page_size = 6;
+}
+
+message CommissionPlan {
+    int64 commission_plan_id = 1;
+    string title = 2;
+    string status = 3;
+    string source = 4; // system/retailer/company/operator
+    repeated string types = 5; // cpa/revshare/cpl/cpc/flat_fee, multiple types are allowed
+    int32 assigned_count = 6; // not supported yet
+    string base_currency = 7;
+    string source_operator_name = 8;
+}
+
+message DeleteCommissionPlanRequest {
+    int64 user_id = 1;
+    api.common.OperatorContext operator_context = 2;
+    int64 commission_plan_id = 3;
+    optional int64 alternative_commission_plan_id = 4; // not supported yet
+}
+
+message DeleteCommissionPlanResponse {}
+
+message CommissionPlanConfig {
+    CPAConfig cpa = 1;
+    RevShareConfig revshare = 2;
+    CPLConfig cpl = 3;
+    CPCConfig cpc = 4;
+    FlatFeeConfig flat_fee = 5;
+}
+
+message CPAConfig {
+    bool enabled = 1;
+    string commission_type = 2; // flat/flat_by_countries/progressive/progressive_by_countries
+    optional FlatCommission flat = 3;
+    optional FlatByCountriesCommission flat_by_countries = 4;
+    optional ProgressiveCommission progressive = 5;
+    optional ProgressiveByCountriesCommission progressive_by_countries = 6;
+    optional Qualification qualification = 7;
+    optional AdvancedOptions advanced_options = 8;
+}
+
+message FlatCommission {
+    string commission = 1;
+}
+
+message FlatByCountriesCommission {
+    repeated CountryCommissionGroup country_groups = 1;
+    optional string other_countries_commission = 2;
+}
+
+message CountryCommissionGroup {
+    repeated string countries = 1;
+    string commission = 2;
+}
+
+message ProgressiveCommission {
+    string metric = 1; // ftd_amount/monthly_ftd_count/total_deposits/deposits_amount
+    repeated ProgressiveCommissionRange ranges = 2;
+}
+
+message ProgressiveCommissionRange {
+    string from = 1;
+    optional string to = 2;
+    string commission = 3;
+}
+
+message ProgressiveByCountriesCommission {
+    string metric = 1; // ftd_amount/monthly_ftd_count/total_deposits/deposits_amount
+    repeated CountryProgressiveGroup country_groups = 2;
+    repeated ProgressiveCommissionRange other_countries_ranges = 3;
+}
+
+message CountryProgressiveGroup {
+    repeated string countries = 1;
+    repeated ProgressiveCommissionRange ranges = 2;
+}
+
+message Qualification {
+    optional string min_ftd_amount = 1;
+    optional int32 min_deposits_count = 2;
+    optional string min_deposits_amount = 3;
+    optional int32 min_bets_count = 4;
+    optional string min_bets_amount = 5;
+    optional int32 time_limit_after_registration_days = 6;
+    optional int32 time_limit_after_ftd_days = 7;
+    repeated string allowed_player_statuses = 8; // not available yet
+}
+
+message AdvancedOptions {
+    optional int32 hold_period_days = 1;
+}
+
+message RevShareConfig {
+    bool enabled = 1;
+    string based_on = 2; // ggr/ngr
+    string negative_carryover = 3; // discard/carry_to_next_period
+    string commission_type = 4;
+    optional FlatRateCommission flat = 5;
+    optional FlatByCountriesRateCommission flat_by_countries = 6;
+    optional ProgressiveRateCommission progressive = 7;
+    optional ProgressiveByCountriesRateCommission progressive_by_countries = 8;
+    optional Qualification qualification = 9;
+}
+
+message FlatRateCommission {
+    string rate = 1;
+}
+
+message FlatByCountriesRateCommission {
+    repeated CountryRateGroup country_groups = 1;
+    optional string other_countries_rate = 2;
+}
+
+message CountryRateGroup {
+    repeated string countries = 1;
+    string rate = 2;
+}
+
+message ProgressiveRateCommission {
+    string metric = 1;
+    repeated RateRange ranges = 2;
+}
+
+message RateRange {
+    string from = 1;
+    optional string to = 2; // nil indicates no upper limit
+    string rate = 3;
+}
+
+message ProgressiveByCountriesRateCommission {
+    string metric = 1;
+    repeated CountryProgressiveRateGroup country_groups = 2;
+    repeated RateRange other_countries_ranges = 3;
+}
+
+message CountryProgressiveRateGroup {
+    repeated string countries = 1;
+    repeated RateRange ranges = 2;
+}
+
+message CPLConfig {
+    bool enabled = 1;
+    string commission_type = 2;
+    optional FlatCommission flat = 3;
+    optional FlatByCountriesCommission flat_by_countries = 4;
+    optional ProgressiveCommission progressive = 5;
+    optional ProgressiveByCountriesCommission progressive_by_countries = 6;
+    optional Qualification qualification = 7;
+    optional AdvancedOptions advanced_options = 8;
+}
+
+message CPCConfig {
+    bool enabled = 1;
+    string commission_type = 2; // flat/flat_by_countries
+    optional FlatCommission flat = 3;
+    optional FlatByCountriesCommission flat_by_countries = 4;
+}
+
+message FlatFeeConfig {
+    bool enabled = 1;
+    string period = 2; // one_time/monthly/yearly
+    string amount = 3;
+    google.protobuf.Timestamp start_time = 4;
+}

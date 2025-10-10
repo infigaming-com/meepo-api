@@ -60,6 +60,8 @@ func (m *Domain) validate(all bool) error {
 
 	// no validation rules for Domain
 
+	// no validation rules for Template
+
 	if len(errors) > 0 {
 		return DomainMultiError(errors)
 	}
