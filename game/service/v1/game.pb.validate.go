@@ -35,6 +35,981 @@ var (
 	_ = sort.Sort
 )
 
+// Validate checks the field values on BettingConfig with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *BettingConfig) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BettingConfig with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in BettingConfigMultiError, or
+// nil if none found.
+func (m *BettingConfig) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BettingConfig) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for MiniRate
+
+	if len(errors) > 0 {
+		return BettingConfigMultiError(errors)
+	}
+
+	return nil
+}
+
+// BettingConfigMultiError is an error wrapping multiple validation errors
+// returned by BettingConfig.ValidateAll() if the designated constraints
+// aren't met.
+type BettingConfigMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BettingConfigMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BettingConfigMultiError) AllErrors() []error { return m }
+
+// BettingConfigValidationError is the validation error returned by
+// BettingConfig.Validate if the designated constraints aren't met.
+type BettingConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BettingConfigValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BettingConfigValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BettingConfigValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BettingConfigValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BettingConfigValidationError) ErrorName() string { return "BettingConfigValidationError" }
+
+// Error satisfies the builtin error interface
+func (e BettingConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBettingConfig.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BettingConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BettingConfigValidationError{}
+
+// Validate checks the field values on AddGameBetDisplayConfigRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AddGameBetDisplayConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AddGameBetDisplayConfigRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// AddGameBetDisplayConfigRequestMultiError, or nil if none found.
+func (m *AddGameBetDisplayConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddGameBetDisplayConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Country
+
+	if all {
+		switch v := interface{}(m.GetAllBet()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AddGameBetDisplayConfigRequestValidationError{
+					field:  "AllBet",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AddGameBetDisplayConfigRequestValidationError{
+					field:  "AllBet",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAllBet()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AddGameBetDisplayConfigRequestValidationError{
+				field:  "AllBet",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetHighWins()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AddGameBetDisplayConfigRequestValidationError{
+					field:  "HighWins",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AddGameBetDisplayConfigRequestValidationError{
+					field:  "HighWins",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetHighWins()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AddGameBetDisplayConfigRequestValidationError{
+				field:  "HighWins",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AddGameBetDisplayConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AddGameBetDisplayConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AddGameBetDisplayConfigRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return AddGameBetDisplayConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// AddGameBetDisplayConfigRequestMultiError is an error wrapping multiple
+// validation errors returned by AddGameBetDisplayConfigRequest.ValidateAll()
+// if the designated constraints aren't met.
+type AddGameBetDisplayConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddGameBetDisplayConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddGameBetDisplayConfigRequestMultiError) AllErrors() []error { return m }
+
+// AddGameBetDisplayConfigRequestValidationError is the validation error
+// returned by AddGameBetDisplayConfigRequest.Validate if the designated
+// constraints aren't met.
+type AddGameBetDisplayConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddGameBetDisplayConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddGameBetDisplayConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddGameBetDisplayConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddGameBetDisplayConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddGameBetDisplayConfigRequestValidationError) ErrorName() string {
+	return "AddGameBetDisplayConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AddGameBetDisplayConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddGameBetDisplayConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddGameBetDisplayConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddGameBetDisplayConfigRequestValidationError{}
+
+// Validate checks the field values on AddGameBetDisplayConfigResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AddGameBetDisplayConfigResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AddGameBetDisplayConfigResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// AddGameBetDisplayConfigResponseMultiError, or nil if none found.
+func (m *AddGameBetDisplayConfigResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AddGameBetDisplayConfigResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return AddGameBetDisplayConfigResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// AddGameBetDisplayConfigResponseMultiError is an error wrapping multiple
+// validation errors returned by AddGameBetDisplayConfigResponse.ValidateAll()
+// if the designated constraints aren't met.
+type AddGameBetDisplayConfigResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AddGameBetDisplayConfigResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AddGameBetDisplayConfigResponseMultiError) AllErrors() []error { return m }
+
+// AddGameBetDisplayConfigResponseValidationError is the validation error
+// returned by AddGameBetDisplayConfigResponse.Validate if the designated
+// constraints aren't met.
+type AddGameBetDisplayConfigResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AddGameBetDisplayConfigResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AddGameBetDisplayConfigResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AddGameBetDisplayConfigResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AddGameBetDisplayConfigResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AddGameBetDisplayConfigResponseValidationError) ErrorName() string {
+	return "AddGameBetDisplayConfigResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AddGameBetDisplayConfigResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAddGameBetDisplayConfigResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AddGameBetDisplayConfigResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AddGameBetDisplayConfigResponseValidationError{}
+
+// Validate checks the field values on UpdateGameBetDisplayConfigRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *UpdateGameBetDisplayConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateGameBetDisplayConfigRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// UpdateGameBetDisplayConfigRequestMultiError, or nil if none found.
+func (m *UpdateGameBetDisplayConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateGameBetDisplayConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Country
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateGameBetDisplayConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateGameBetDisplayConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateGameBetDisplayConfigRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.AllBet != nil {
+
+		if all {
+			switch v := interface{}(m.GetAllBet()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UpdateGameBetDisplayConfigRequestValidationError{
+						field:  "AllBet",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UpdateGameBetDisplayConfigRequestValidationError{
+						field:  "AllBet",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetAllBet()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UpdateGameBetDisplayConfigRequestValidationError{
+					field:  "AllBet",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.HighWins != nil {
+
+		if all {
+			switch v := interface{}(m.GetHighWins()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UpdateGameBetDisplayConfigRequestValidationError{
+						field:  "HighWins",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UpdateGameBetDisplayConfigRequestValidationError{
+						field:  "HighWins",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetHighWins()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UpdateGameBetDisplayConfigRequestValidationError{
+					field:  "HighWins",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return UpdateGameBetDisplayConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateGameBetDisplayConfigRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// UpdateGameBetDisplayConfigRequest.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateGameBetDisplayConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateGameBetDisplayConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateGameBetDisplayConfigRequestMultiError) AllErrors() []error { return m }
+
+// UpdateGameBetDisplayConfigRequestValidationError is the validation error
+// returned by UpdateGameBetDisplayConfigRequest.Validate if the designated
+// constraints aren't met.
+type UpdateGameBetDisplayConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateGameBetDisplayConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateGameBetDisplayConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateGameBetDisplayConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateGameBetDisplayConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateGameBetDisplayConfigRequestValidationError) ErrorName() string {
+	return "UpdateGameBetDisplayConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateGameBetDisplayConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateGameBetDisplayConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateGameBetDisplayConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateGameBetDisplayConfigRequestValidationError{}
+
+// Validate checks the field values on UpdateGameBetDisplayConfigResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *UpdateGameBetDisplayConfigResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateGameBetDisplayConfigResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// UpdateGameBetDisplayConfigResponseMultiError, or nil if none found.
+func (m *UpdateGameBetDisplayConfigResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateGameBetDisplayConfigResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return UpdateGameBetDisplayConfigResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateGameBetDisplayConfigResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// UpdateGameBetDisplayConfigResponse.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateGameBetDisplayConfigResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateGameBetDisplayConfigResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateGameBetDisplayConfigResponseMultiError) AllErrors() []error { return m }
+
+// UpdateGameBetDisplayConfigResponseValidationError is the validation error
+// returned by UpdateGameBetDisplayConfigResponse.Validate if the designated
+// constraints aren't met.
+type UpdateGameBetDisplayConfigResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateGameBetDisplayConfigResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateGameBetDisplayConfigResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateGameBetDisplayConfigResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateGameBetDisplayConfigResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateGameBetDisplayConfigResponseValidationError) ErrorName() string {
+	return "UpdateGameBetDisplayConfigResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateGameBetDisplayConfigResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateGameBetDisplayConfigResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateGameBetDisplayConfigResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateGameBetDisplayConfigResponseValidationError{}
+
+// Validate checks the field values on ListGameBetDisplayConfigRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListGameBetDisplayConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListGameBetDisplayConfigRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListGameBetDisplayConfigRequestMultiError, or nil if none found.
+func (m *ListGameBetDisplayConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListGameBetDisplayConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetList() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListGameBetDisplayConfigRequestValidationError{
+						field:  fmt.Sprintf("List[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListGameBetDisplayConfigRequestValidationError{
+						field:  fmt.Sprintf("List[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListGameBetDisplayConfigRequestValidationError{
+					field:  fmt.Sprintf("List[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListGameBetDisplayConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListGameBetDisplayConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListGameBetDisplayConfigRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return ListGameBetDisplayConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListGameBetDisplayConfigRequestMultiError is an error wrapping multiple
+// validation errors returned by ListGameBetDisplayConfigRequest.ValidateAll()
+// if the designated constraints aren't met.
+type ListGameBetDisplayConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListGameBetDisplayConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListGameBetDisplayConfigRequestMultiError) AllErrors() []error { return m }
+
+// ListGameBetDisplayConfigRequestValidationError is the validation error
+// returned by ListGameBetDisplayConfigRequest.Validate if the designated
+// constraints aren't met.
+type ListGameBetDisplayConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListGameBetDisplayConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListGameBetDisplayConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListGameBetDisplayConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListGameBetDisplayConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListGameBetDisplayConfigRequestValidationError) ErrorName() string {
+	return "ListGameBetDisplayConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListGameBetDisplayConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListGameBetDisplayConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListGameBetDisplayConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListGameBetDisplayConfigRequestValidationError{}
+
+// Validate checks the field values on ListGameBetDisplayConfigResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ListGameBetDisplayConfigResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListGameBetDisplayConfigResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListGameBetDisplayConfigResponseMultiError, or nil if none found.
+func (m *ListGameBetDisplayConfigResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListGameBetDisplayConfigResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ListGameBetDisplayConfigResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListGameBetDisplayConfigResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// ListGameBetDisplayConfigResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListGameBetDisplayConfigResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListGameBetDisplayConfigResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListGameBetDisplayConfigResponseMultiError) AllErrors() []error { return m }
+
+// ListGameBetDisplayConfigResponseValidationError is the validation error
+// returned by ListGameBetDisplayConfigResponse.Validate if the designated
+// constraints aren't met.
+type ListGameBetDisplayConfigResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListGameBetDisplayConfigResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListGameBetDisplayConfigResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListGameBetDisplayConfigResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListGameBetDisplayConfigResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListGameBetDisplayConfigResponseValidationError) ErrorName() string {
+	return "ListGameBetDisplayConfigResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListGameBetDisplayConfigResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListGameBetDisplayConfigResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListGameBetDisplayConfigResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListGameBetDisplayConfigResponseValidationError{}
+
 // Validate checks the field values on CreateOperatorRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -13707,6 +14682,171 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = CreateTaxReportResponseValidationError{}
+
+// Validate checks the field values on ListGameBetDisplayConfigRequest_Item
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ListGameBetDisplayConfigRequest_Item) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListGameBetDisplayConfigRequest_Item
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListGameBetDisplayConfigRequest_ItemMultiError, or nil if none found.
+func (m *ListGameBetDisplayConfigRequest_Item) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListGameBetDisplayConfigRequest_Item) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Country
+
+	if all {
+		switch v := interface{}(m.GetAllBet()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListGameBetDisplayConfigRequest_ItemValidationError{
+					field:  "AllBet",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListGameBetDisplayConfigRequest_ItemValidationError{
+					field:  "AllBet",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAllBet()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListGameBetDisplayConfigRequest_ItemValidationError{
+				field:  "AllBet",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetHighWins()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListGameBetDisplayConfigRequest_ItemValidationError{
+					field:  "HighWins",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListGameBetDisplayConfigRequest_ItemValidationError{
+					field:  "HighWins",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetHighWins()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListGameBetDisplayConfigRequest_ItemValidationError{
+				field:  "HighWins",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return ListGameBetDisplayConfigRequest_ItemMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListGameBetDisplayConfigRequest_ItemMultiError is an error wrapping multiple
+// validation errors returned by
+// ListGameBetDisplayConfigRequest_Item.ValidateAll() if the designated
+// constraints aren't met.
+type ListGameBetDisplayConfigRequest_ItemMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListGameBetDisplayConfigRequest_ItemMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListGameBetDisplayConfigRequest_ItemMultiError) AllErrors() []error { return m }
+
+// ListGameBetDisplayConfigRequest_ItemValidationError is the validation error
+// returned by ListGameBetDisplayConfigRequest_Item.Validate if the designated
+// constraints aren't met.
+type ListGameBetDisplayConfigRequest_ItemValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListGameBetDisplayConfigRequest_ItemValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListGameBetDisplayConfigRequest_ItemValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListGameBetDisplayConfigRequest_ItemValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListGameBetDisplayConfigRequest_ItemValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListGameBetDisplayConfigRequest_ItemValidationError) ErrorName() string {
+	return "ListGameBetDisplayConfigRequest_ItemValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListGameBetDisplayConfigRequest_ItemValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListGameBetDisplayConfigRequest_Item.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListGameBetDisplayConfigRequest_ItemValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListGameBetDisplayConfigRequest_ItemValidationError{}
 
 // Validate checks the field values on ListProvidersResponse_Provider with the
 // rules defined in the proto definition for this message. If any rules are
