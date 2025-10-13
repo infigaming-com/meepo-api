@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v4.25.6
-// source: infra/byo_domain.proto
+// source: infra/service/v1/byo_domain.proto
 
 package v1
 
@@ -19,7 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ByoDomain_AddByoDomain_FullMethodName = "/api.infra.service.v1.ByoDomain/AddByoDomain"
+	ByoDomain_AddByoDomain_FullMethodName    = "/api.infra.service.v1.ByoDomain/AddByoDomain"
+	ByoDomain_DeleteByoDomain_FullMethodName = "/api.infra.service.v1.ByoDomain/DeleteByoDomain"
+	ByoDomain_GetByoDomains_FullMethodName   = "/api.infra.service.v1.ByoDomain/GetByoDomains"
 )
 
 // ByoDomainClient is the client API for ByoDomain service.
@@ -27,6 +29,8 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ByoDomainClient interface {
 	AddByoDomain(ctx context.Context, in *AddByoDomainRequest, opts ...grpc.CallOption) (*AddByoDomainResponse, error)
+	DeleteByoDomain(ctx context.Context, in *DeleteByoDomainRequest, opts ...grpc.CallOption) (*DeleteByoDomainResponse, error)
+	GetByoDomains(ctx context.Context, in *GetByoDomainsRequest, opts ...grpc.CallOption) (*GetByoDomainsResponse, error)
 }
 
 type byoDomainClient struct {
@@ -47,11 +51,33 @@ func (c *byoDomainClient) AddByoDomain(ctx context.Context, in *AddByoDomainRequ
 	return out, nil
 }
 
+func (c *byoDomainClient) DeleteByoDomain(ctx context.Context, in *DeleteByoDomainRequest, opts ...grpc.CallOption) (*DeleteByoDomainResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteByoDomainResponse)
+	err := c.cc.Invoke(ctx, ByoDomain_DeleteByoDomain_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *byoDomainClient) GetByoDomains(ctx context.Context, in *GetByoDomainsRequest, opts ...grpc.CallOption) (*GetByoDomainsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetByoDomainsResponse)
+	err := c.cc.Invoke(ctx, ByoDomain_GetByoDomains_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ByoDomainServer is the server API for ByoDomain service.
 // All implementations must embed UnimplementedByoDomainServer
 // for forward compatibility.
 type ByoDomainServer interface {
 	AddByoDomain(context.Context, *AddByoDomainRequest) (*AddByoDomainResponse, error)
+	DeleteByoDomain(context.Context, *DeleteByoDomainRequest) (*DeleteByoDomainResponse, error)
+	GetByoDomains(context.Context, *GetByoDomainsRequest) (*GetByoDomainsResponse, error)
 	mustEmbedUnimplementedByoDomainServer()
 }
 
@@ -64,6 +90,12 @@ type UnimplementedByoDomainServer struct{}
 
 func (UnimplementedByoDomainServer) AddByoDomain(context.Context, *AddByoDomainRequest) (*AddByoDomainResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddByoDomain not implemented")
+}
+func (UnimplementedByoDomainServer) DeleteByoDomain(context.Context, *DeleteByoDomainRequest) (*DeleteByoDomainResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteByoDomain not implemented")
+}
+func (UnimplementedByoDomainServer) GetByoDomains(context.Context, *GetByoDomainsRequest) (*GetByoDomainsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetByoDomains not implemented")
 }
 func (UnimplementedByoDomainServer) mustEmbedUnimplementedByoDomainServer() {}
 func (UnimplementedByoDomainServer) testEmbeddedByValue()                   {}
@@ -104,6 +136,42 @@ func _ByoDomain_AddByoDomain_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ByoDomain_DeleteByoDomain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteByoDomainRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ByoDomainServer).DeleteByoDomain(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ByoDomain_DeleteByoDomain_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ByoDomainServer).DeleteByoDomain(ctx, req.(*DeleteByoDomainRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ByoDomain_GetByoDomains_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetByoDomainsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ByoDomainServer).GetByoDomains(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ByoDomain_GetByoDomains_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ByoDomainServer).GetByoDomains(ctx, req.(*GetByoDomainsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ByoDomain_ServiceDesc is the grpc.ServiceDesc for ByoDomain service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -115,7 +183,15 @@ var ByoDomain_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "AddByoDomain",
 			Handler:    _ByoDomain_AddByoDomain_Handler,
 		},
+		{
+			MethodName: "DeleteByoDomain",
+			Handler:    _ByoDomain_DeleteByoDomain_Handler,
+		},
+		{
+			MethodName: "GetByoDomains",
+			Handler:    _ByoDomain_GetByoDomains_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "infra/byo_domain.proto",
+	Metadata: "infra/service/v1/byo_domain.proto",
 }

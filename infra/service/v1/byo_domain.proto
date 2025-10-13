@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package api.infra.service.v1;
+
+option go_package = "github.com/infigaming-com/meepo-api/infra/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.infra.service.v1";
+
+service ByoDomain {
+    rpc AddByoDomain(AddByoDomainRequest) returns (AddByoDomainResponse) {}
+    rpc DeleteByoDomain(DeleteByoDomainRequest) returns (DeleteByoDomainResponse) {}
+    rpc GetByoDomains(GetByoDomainsRequest) returns (GetByoDomainsResponse) {}
+}
+
+message ValidationRecord {
+    string type = 1;
+    string name = 2;
+    string value = 3;
+    string description = 4;
+}
+
+message ByoDomainInfo {
+    string id = 1;
+    string byo_domain = 2;
+    string domain = 3;
+    string acme_challenge_type = 4;
+    string status = 5;
+    string validation_status = 6;
+    repeated ValidationRecord validation_records = 7;
+}
+
+message AddByoDomainRequest {
+    string byo_domain = 1;
+    string domain = 2;
+    string acme_challenge_type = 3;
+}
+
+message AddByoDomainResponse {
+    ByoDomainInfo byo_domain = 1;
+}
+
+message DeleteByoDomainRequest {
+    string domain = 1;
+    string id = 2;
+}
+
+message DeleteByoDomainResponse {
+}
+
+message GetByoDomainsRequest {
+    message Domain {
+        string domain = 1;
+        string id = 2;
+    }
+    repeated Domain domains = 1;
+}
+
+message GetByoDomainsResponse {
+    repeated ByoDomainInfo byo_domains = 1;
+}

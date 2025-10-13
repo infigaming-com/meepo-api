@@ -307,6 +307,8 @@ func (m *AddOperatorByoDomainRequest) validate(all bool) error {
 
 	// no validation rules for Domain
 
+	// no validation rules for AcmeChallengeType
+
 	if len(errors) > 0 {
 		return AddOperatorByoDomainRequestMultiError(errors)
 	}

@@ -2,18 +2,17 @@ syntax = "proto3";
 
 package api.infra.service.v1;
 
+import "errors/errors.proto";
+
 option go_package = "github.com/infigaming-com/meepo-api/infra/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.infra.service.v1";
 
-service ByoDomain {
-    rpc AddByoDomain(AddByoDomainRequest) returns (AddByoDomainResponse) {}
-}
+enum ErrorReason {
+  option (errors.default_code) = 500;
 
-message AddByoDomainRequest {
-    string byo_domain = 1;
-    string domain = 2;
-}
-
-message AddByoDomainResponse {
+  UNSPECIFIED = 0;
+  ADD_BYO_DOMAIN_FAILED = 140001;
+  GET_BYO_DOMAINS_FAILED = 140002;
+  DELETE_BYO_DOMAIN_FAILED = 140003;
 }
