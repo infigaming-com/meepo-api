@@ -21051,6 +21051,12 @@ func (m *ListBalancesByUserIdsResponse_UserBalanceDetail) validate(all bool) err
 
 	}
 
+	// no validation rules for TotalBalance
+
+	// no validation rules for TotalBalanceUsd
+
+	// no validation rules for TotalBalanceReportingCurrency
+
 	// no validation rules for TotalCash
 
 	// no validation rules for TotalCashUsd

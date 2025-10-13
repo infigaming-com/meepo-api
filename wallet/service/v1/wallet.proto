@@ -1483,15 +1483,18 @@ message ListBalancesByUserIdsResponse {
 	}
 	message UserBalanceDetail {
 		repeated Balance balances = 1;
-		string total_cash = 2;
-		string total_cash_usd = 3;
-		string total_cash_reporting_currency = 4;
-		string total_operator_bonus = 5;
-		string total_operator_bonus_usd = 6;
-		string total_operator_bonus_reporting_currency = 7;
-		string total_provider_bonus = 8;
-		string total_provider_bonus_usd = 9;
-		string total_provider_bonus_reporting_currency = 10;
+		string total_balance = 2;
+		string total_balance_usd = 3;
+		string total_balance_reporting_currency = 4;
+		string total_cash = 5;
+		string total_cash_usd = 6;
+		string total_cash_reporting_currency = 7;
+		string total_operator_bonus = 8;
+		string total_operator_bonus_usd = 9;
+		string total_operator_bonus_reporting_currency = 10;
+		string total_provider_bonus = 11;
+		string total_provider_bonus_usd = 12;
+		string total_provider_bonus_reporting_currency = 13;
 	}
 	map<int64, UserBalanceDetail> user_balance_details = 1;
 }

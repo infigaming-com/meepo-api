@@ -11600,15 +11600,18 @@ func (x *ListBalancesByUserIdsResponse_Balance) GetProviderBonus() string {
 type ListBalancesByUserIdsResponse_UserBalanceDetail struct {
 	state                               protoimpl.MessageState                   `protogen:"open.v1"`
 	Balances                            []*ListBalancesByUserIdsResponse_Balance `protobuf:"bytes,1,rep,name=balances,proto3" json:"balances,omitempty"`
-	TotalCash                           string                                   `protobuf:"bytes,2,opt,name=total_cash,json=totalCash,proto3" json:"total_cash,omitempty"`
-	TotalCashUsd                        string                                   `protobuf:"bytes,3,opt,name=total_cash_usd,json=totalCashUsd,proto3" json:"total_cash_usd,omitempty"`
-	TotalCashReportingCurrency          string                                   `protobuf:"bytes,4,opt,name=total_cash_reporting_currency,json=totalCashReportingCurrency,proto3" json:"total_cash_reporting_currency,omitempty"`
-	TotalOperatorBonus                  string                                   `protobuf:"bytes,5,opt,name=total_operator_bonus,json=totalOperatorBonus,proto3" json:"total_operator_bonus,omitempty"`
-	TotalOperatorBonusUsd               string                                   `protobuf:"bytes,6,opt,name=total_operator_bonus_usd,json=totalOperatorBonusUsd,proto3" json:"total_operator_bonus_usd,omitempty"`
-	TotalOperatorBonusReportingCurrency string                                   `protobuf:"bytes,7,opt,name=total_operator_bonus_reporting_currency,json=totalOperatorBonusReportingCurrency,proto3" json:"total_operator_bonus_reporting_currency,omitempty"`
-	TotalProviderBonus                  string                                   `protobuf:"bytes,8,opt,name=total_provider_bonus,json=totalProviderBonus,proto3" json:"total_provider_bonus,omitempty"`
-	TotalProviderBonusUsd               string                                   `protobuf:"bytes,9,opt,name=total_provider_bonus_usd,json=totalProviderBonusUsd,proto3" json:"total_provider_bonus_usd,omitempty"`
-	TotalProviderBonusReportingCurrency string                                   `protobuf:"bytes,10,opt,name=total_provider_bonus_reporting_currency,json=totalProviderBonusReportingCurrency,proto3" json:"total_provider_bonus_reporting_currency,omitempty"`
+	TotalBalance                        string                                   `protobuf:"bytes,2,opt,name=total_balance,json=totalBalance,proto3" json:"total_balance,omitempty"`
+	TotalBalanceUsd                     string                                   `protobuf:"bytes,3,opt,name=total_balance_usd,json=totalBalanceUsd,proto3" json:"total_balance_usd,omitempty"`
+	TotalBalanceReportingCurrency       string                                   `protobuf:"bytes,4,opt,name=total_balance_reporting_currency,json=totalBalanceReportingCurrency,proto3" json:"total_balance_reporting_currency,omitempty"`
+	TotalCash                           string                                   `protobuf:"bytes,5,opt,name=total_cash,json=totalCash,proto3" json:"total_cash,omitempty"`
+	TotalCashUsd                        string                                   `protobuf:"bytes,6,opt,name=total_cash_usd,json=totalCashUsd,proto3" json:"total_cash_usd,omitempty"`
+	TotalCashReportingCurrency          string                                   `protobuf:"bytes,7,opt,name=total_cash_reporting_currency,json=totalCashReportingCurrency,proto3" json:"total_cash_reporting_currency,omitempty"`
+	TotalOperatorBonus                  string                                   `protobuf:"bytes,8,opt,name=total_operator_bonus,json=totalOperatorBonus,proto3" json:"total_operator_bonus,omitempty"`
+	TotalOperatorBonusUsd               string                                   `protobuf:"bytes,9,opt,name=total_operator_bonus_usd,json=totalOperatorBonusUsd,proto3" json:"total_operator_bonus_usd,omitempty"`
+	TotalOperatorBonusReportingCurrency string                                   `protobuf:"bytes,10,opt,name=total_operator_bonus_reporting_currency,json=totalOperatorBonusReportingCurrency,proto3" json:"total_operator_bonus_reporting_currency,omitempty"`
+	TotalProviderBonus                  string                                   `protobuf:"bytes,11,opt,name=total_provider_bonus,json=totalProviderBonus,proto3" json:"total_provider_bonus,omitempty"`
+	TotalProviderBonusUsd               string                                   `protobuf:"bytes,12,opt,name=total_provider_bonus_usd,json=totalProviderBonusUsd,proto3" json:"total_provider_bonus_usd,omitempty"`
+	TotalProviderBonusReportingCurrency string                                   `protobuf:"bytes,13,opt,name=total_provider_bonus_reporting_currency,json=totalProviderBonusReportingCurrency,proto3" json:"total_provider_bonus_reporting_currency,omitempty"`
 	unknownFields                       protoimpl.UnknownFields
 	sizeCache                           protoimpl.SizeCache
 }
@@ -11648,6 +11651,27 @@ func (x *ListBalancesByUserIdsResponse_UserBalanceDetail) GetBalances() []*ListB
 		return x.Balances
 	}
 	return nil
+}
+
+func (x *ListBalancesByUserIdsResponse_UserBalanceDetail) GetTotalBalance() string {
+	if x != nil {
+		return x.TotalBalance
+	}
+	return ""
+}
+
+func (x *ListBalancesByUserIdsResponse_UserBalanceDetail) GetTotalBalanceUsd() string {
+	if x != nil {
+		return x.TotalBalanceUsd
+	}
+	return ""
+}
+
+func (x *ListBalancesByUserIdsResponse_UserBalanceDetail) GetTotalBalanceReportingCurrency() string {
+	if x != nil {
+		return x.TotalBalanceReportingCurrency
+	}
+	return ""
 }
 
 func (x *ListBalancesByUserIdsResponse_UserBalanceDetail) GetTotalCash() string {
@@ -12854,27 +12878,30 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\atask_id\x18\x01 \x01(\x03R\x06taskId\"\x81\x01\n" +
 	"\x1cListBalancesByUserIdsRequest\x12\x19\n" +
 	"\buser_ids\x18\x01 \x03(\x03R\auserIds\x12F\n" +
-	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xb3\b\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xcd\t\n" +
 	"\x1dListBalancesByUserIdsResponse\x12~\n" +
 	"\x14user_balance_details\x18\x01 \x03(\v2L.api.wallet.service.v1.ListBalancesByUserIdsResponse.UserBalanceDetailsEntryR\x12userBalanceDetails\x1a\x87\x01\n" +
 	"\aBalance\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x12\n" +
 	"\x04cash\x18\x02 \x01(\tR\x04cash\x12%\n" +
 	"\x0eoperator_bonus\x18\x03 \x01(\tR\roperatorBonus\x12%\n" +
-	"\x0eprovider_bonus\x18\x04 \x01(\tR\rproviderBonus\x1a\xf7\x04\n" +
+	"\x0eprovider_bonus\x18\x04 \x01(\tR\rproviderBonus\x1a\x91\x06\n" +
 	"\x11UserBalanceDetail\x12X\n" +
-	"\bbalances\x18\x01 \x03(\v2<.api.wallet.service.v1.ListBalancesByUserIdsResponse.BalanceR\bbalances\x12\x1d\n" +
+	"\bbalances\x18\x01 \x03(\v2<.api.wallet.service.v1.ListBalancesByUserIdsResponse.BalanceR\bbalances\x12#\n" +
+	"\rtotal_balance\x18\x02 \x01(\tR\ftotalBalance\x12*\n" +
+	"\x11total_balance_usd\x18\x03 \x01(\tR\x0ftotalBalanceUsd\x12G\n" +
+	" total_balance_reporting_currency\x18\x04 \x01(\tR\x1dtotalBalanceReportingCurrency\x12\x1d\n" +
 	"\n" +
-	"total_cash\x18\x02 \x01(\tR\ttotalCash\x12$\n" +
-	"\x0etotal_cash_usd\x18\x03 \x01(\tR\ftotalCashUsd\x12A\n" +
-	"\x1dtotal_cash_reporting_currency\x18\x04 \x01(\tR\x1atotalCashReportingCurrency\x120\n" +
-	"\x14total_operator_bonus\x18\x05 \x01(\tR\x12totalOperatorBonus\x127\n" +
-	"\x18total_operator_bonus_usd\x18\x06 \x01(\tR\x15totalOperatorBonusUsd\x12T\n" +
-	"'total_operator_bonus_reporting_currency\x18\a \x01(\tR#totalOperatorBonusReportingCurrency\x120\n" +
-	"\x14total_provider_bonus\x18\b \x01(\tR\x12totalProviderBonus\x127\n" +
-	"\x18total_provider_bonus_usd\x18\t \x01(\tR\x15totalProviderBonusUsd\x12T\n" +
-	"'total_provider_bonus_reporting_currency\x18\n" +
-	" \x01(\tR#totalProviderBonusReportingCurrency\x1a\x8d\x01\n" +
+	"total_cash\x18\x05 \x01(\tR\ttotalCash\x12$\n" +
+	"\x0etotal_cash_usd\x18\x06 \x01(\tR\ftotalCashUsd\x12A\n" +
+	"\x1dtotal_cash_reporting_currency\x18\a \x01(\tR\x1atotalCashReportingCurrency\x120\n" +
+	"\x14total_operator_bonus\x18\b \x01(\tR\x12totalOperatorBonus\x127\n" +
+	"\x18total_operator_bonus_usd\x18\t \x01(\tR\x15totalOperatorBonusUsd\x12T\n" +
+	"'total_operator_bonus_reporting_currency\x18\n" +
+	" \x01(\tR#totalOperatorBonusReportingCurrency\x120\n" +
+	"\x14total_provider_bonus\x18\v \x01(\tR\x12totalProviderBonus\x127\n" +
+	"\x18total_provider_bonus_usd\x18\f \x01(\tR\x15totalProviderBonusUsd\x12T\n" +
+	"'total_provider_bonus_reporting_currency\x18\r \x01(\tR#totalProviderBonusReportingCurrency\x1a\x8d\x01\n" +
 	"\x17UserBalanceDetailsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x03R\x03key\x12\\\n" +
 	"\x05value\x18\x02 \x01(\v2F.api.wallet.service.v1.ListBalancesByUserIdsResponse.UserBalanceDetailR\x05value:\x028\x012\xc1=\n" +
