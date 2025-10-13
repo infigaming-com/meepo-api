@@ -8352,6 +8352,8 @@ components:
                     type: string
                 status:
                     type: string
+                subdomain:
+                    type: string
             description: OperatorInfo is the simplified information of a bottom operator, used for list bottom operators
         api.backoffice.service.v1.ListCategoriesRequest:
             type: object
