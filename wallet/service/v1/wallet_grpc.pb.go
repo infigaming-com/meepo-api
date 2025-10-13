@@ -74,6 +74,7 @@ const (
 	Wallet_GetFICAThresholdConfig_FullMethodName              = "/api.wallet.service.v1.Wallet/GetFICAThresholdConfig"
 	Wallet_ListFICAThresholdTransactions_FullMethodName       = "/api.wallet.service.v1.Wallet/ListFICAThresholdTransactions"
 	Wallet_ExportFICAThresholdTransactions_FullMethodName     = "/api.wallet.service.v1.Wallet/ExportFICAThresholdTransactions"
+	Wallet_ListBalancesByUserIds_FullMethodName               = "/api.wallet.service.v1.Wallet/ListBalancesByUserIds"
 )
 
 // WalletClient is the client API for Wallet service.
@@ -176,6 +177,7 @@ type WalletClient interface {
 	ListFICAThresholdTransactions(ctx context.Context, in *ListFICAThresholdTransactionsRequest, opts ...grpc.CallOption) (*ListFICAThresholdTransactionsResponse, error)
 	// ExportFICAThresholdTransactions create a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
 	ExportFICAThresholdTransactions(ctx context.Context, in *ExportFICAThresholdTransactionsRequest, opts ...grpc.CallOption) (*ExportFICAThresholdTransactionsResponse, error)
+	ListBalancesByUserIds(ctx context.Context, in *ListBalancesByUserIdsRequest, opts ...grpc.CallOption) (*ListBalancesByUserIdsResponse, error)
 }
 
 type walletClient struct {
@@ -736,6 +738,16 @@ func (c *walletClient) ExportFICAThresholdTransactions(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *walletClient) ListBalancesByUserIds(ctx context.Context, in *ListBalancesByUserIdsRequest, opts ...grpc.CallOption) (*ListBalancesByUserIdsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListBalancesByUserIdsResponse)
+	err := c.cc.Invoke(ctx, Wallet_ListBalancesByUserIds_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServer is the server API for Wallet service.
 // All implementations must embed UnimplementedWalletServer
 // for forward compatibility.
@@ -836,6 +848,7 @@ type WalletServer interface {
 	ListFICAThresholdTransactions(context.Context, *ListFICAThresholdTransactionsRequest) (*ListFICAThresholdTransactionsResponse, error)
 	// ExportFICAThresholdTransactions create a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
 	ExportFICAThresholdTransactions(context.Context, *ExportFICAThresholdTransactionsRequest) (*ExportFICAThresholdTransactionsResponse, error)
+	ListBalancesByUserIds(context.Context, *ListBalancesByUserIdsRequest) (*ListBalancesByUserIdsResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -1010,6 +1023,9 @@ func (UnimplementedWalletServer) ListFICAThresholdTransactions(context.Context, 
 }
 func (UnimplementedWalletServer) ExportFICAThresholdTransactions(context.Context, *ExportFICAThresholdTransactionsRequest) (*ExportFICAThresholdTransactionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExportFICAThresholdTransactions not implemented")
+}
+func (UnimplementedWalletServer) ListBalancesByUserIds(context.Context, *ListBalancesByUserIdsRequest) (*ListBalancesByUserIdsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBalancesByUserIds not implemented")
 }
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
@@ -2022,6 +2038,24 @@ func _Wallet_ExportFICAThresholdTransactions_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_ListBalancesByUserIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBalancesByUserIdsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).ListBalancesByUserIds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_ListBalancesByUserIds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).ListBalancesByUserIds(ctx, req.(*ListBalancesByUserIdsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Wallet_ServiceDesc is the grpc.ServiceDesc for Wallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2248,6 +2282,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ExportFICAThresholdTransactions",
 			Handler:    _Wallet_ExportFICAThresholdTransactions_Handler,
+		},
+		{
+			MethodName: "ListBalancesByUserIds",
+			Handler:    _Wallet_ListBalancesByUserIds_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

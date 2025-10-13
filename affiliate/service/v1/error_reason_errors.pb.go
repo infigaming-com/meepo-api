@@ -166,3 +166,75 @@ func IsInvalidCommissionPlanConfig(err error) bool {
 func ErrorInvalidCommissionPlanConfig(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_INVALID_COMMISSION_PLAN_CONFIG.String(), fmt.Sprintf(format, args...))
 }
+
+func IsCreateAffiliateFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREATE_AFFILIATE_FAILED.String() && e.Code == 500
+}
+
+func ErrorCreateAffiliateFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREATE_AFFILIATE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetAffiliateFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_AFFILIATE_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetAffiliateFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_AFFILIATE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsAffiliateNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_AFFILIATE_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorAffiliateNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_AFFILIATE_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDeleteAffiliateFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DELETE_AFFILIATE_FAILED.String() && e.Code == 500
+}
+
+func ErrorDeleteAffiliateFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DELETE_AFFILIATE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListAffiliatesFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_AFFILIATES_FAILED.String() && e.Code == 500
+}
+
+func ErrorListAffiliatesFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_AFFILIATES_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateAffiliateFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_AFFILIATE_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateAffiliateFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_AFFILIATE_FAILED.String(), fmt.Sprintf(format, args...))
+}

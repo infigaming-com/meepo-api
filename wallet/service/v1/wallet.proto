@@ -208,6 +208,8 @@ service Wallet {
 
 	// ExportFICAThresholdTransactions create a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
 	rpc ExportFICAThresholdTransactions(ExportFICAThresholdTransactionsRequest) returns (ExportFICAThresholdTransactionsResponse) {}
+
+	rpc ListBalancesByUserIds(ListBalancesByUserIdsRequest) returns (ListBalancesByUserIdsResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -1467,3 +1469,29 @@ message ExportFICAThresholdTransactionsResponse {
 	int64 task_id = 1;
 }
 
+message ListBalancesByUserIdsRequest {
+	repeated int64 user_ids = 1;
+	api.common.OperatorContext operator_context = 2;
+}
+
+message ListBalancesByUserIdsResponse {
+	message Balance {
+		string currency = 1;
+		string cash = 2;
+		string operator_bonus = 3;
+		string provider_bonus = 4;
+	}
+	message UserBalanceDetail {
+		repeated Balance balances = 1;
+		string total_cash = 2;
+		string total_cash_usd = 3;
+		string total_cash_reporting_currency = 4;
+		string total_operator_bonus = 5;
+		string total_operator_bonus_usd = 6;
+		string total_operator_bonus_reporting_currency = 7;
+		string total_provider_bonus = 8;
+		string total_provider_bonus_usd = 9;
+		string total_provider_bonus_reporting_currency = 10;
+	}
+	map<int64, UserBalanceDetail> user_balance_details = 1;
+}
