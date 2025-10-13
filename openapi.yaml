@@ -5780,9 +5780,7 @@ components:
                     type: integer
                     format: int32
                 allowedPlayerStatuses:
-                    type: array
-                    items:
-                        type: string
+                    type: string
         api.affiliate.service.v1.RateRange:
             type: object
             properties:

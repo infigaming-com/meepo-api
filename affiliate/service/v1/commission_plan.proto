@@ -146,7 +146,7 @@ message Qualification {
     optional string min_bets_amount = 5;
     optional int32 time_limit_after_registration_days = 6;
     optional int32 time_limit_after_ftd_days = 7;
-    repeated string allowed_player_statuses = 8; // not available yet
+    optional string allowed_player_statuses = 8; // not available yet
 }
 
 message AdvancedOptions {
