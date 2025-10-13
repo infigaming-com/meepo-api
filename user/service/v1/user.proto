@@ -1390,6 +1390,7 @@ message ListBottomOperatorsResponse {
 		string company_operator_name = 4;
 		string mode = 5;
 		string status = 6;
+		string subdomain = 7;
 	}
 	repeated OperatorInfo bottom_operators = 1;
 }

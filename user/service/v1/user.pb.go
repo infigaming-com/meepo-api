@@ -11352,6 +11352,7 @@ type ListBottomOperatorsResponse_OperatorInfo struct {
 	CompanyOperatorName  string                  `protobuf:"bytes,4,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
 	Mode                 string                  `protobuf:"bytes,5,opt,name=mode,proto3" json:"mode,omitempty"`
 	Status               string                  `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"`
+	Subdomain            string                  `protobuf:"bytes,7,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -11424,6 +11425,13 @@ func (x *ListBottomOperatorsResponse_OperatorInfo) GetMode() string {
 func (x *ListBottomOperatorsResponse_OperatorInfo) GetStatus() string {
 	if x != nil {
 		return x.Status
+	}
+	return ""
+}
+
+func (x *ListBottomOperatorsResponse_OperatorInfo) GetSubdomain() string {
+	if x != nil {
+		return x.Subdomain
 	}
 	return ""
 }
@@ -12416,16 +12424,17 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x1aListBottomOperatorsRequest\x122\n" +
 	"\x15retailer_operator_ids\x18\x01 \x03(\x03R\x13retailerOperatorIds\x120\n" +
 	"\x14company_operator_ids\x18\x02 \x03(\x03R\x12companyOperatorIds\x12F\n" +
-	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xa8\x03\n" +
+	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xc6\x03\n" +
 	"\x1bListBottomOperatorsResponse\x12h\n" +
-	"\x10bottom_operators\x18\x01 \x03(\v2=.api.user.service.v1.ListBottomOperatorsResponse.OperatorInfoR\x0fbottomOperators\x1a\x9e\x02\n" +
+	"\x10bottom_operators\x18\x01 \x03(\v2=.api.user.service.v1.ListBottomOperatorsResponse.OperatorInfoR\x0fbottomOperators\x1a\xbc\x02\n" +
 	"\fOperatorInfo\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x120\n" +
 	"\x14bottom_operator_name\x18\x02 \x01(\tR\x12bottomOperatorName\x124\n" +
 	"\x16retailer_operator_name\x18\x03 \x01(\tR\x14retailerOperatorName\x122\n" +
 	"\x15company_operator_name\x18\x04 \x01(\tR\x13companyOperatorName\x12\x12\n" +
 	"\x04mode\x18\x05 \x01(\tR\x04mode\x12\x16\n" +
-	"\x06status\x18\x06 \x01(\tR\x06status\"\xca\x02\n" +
+	"\x06status\x18\x06 \x01(\tR\x06status\x12\x1c\n" +
+	"\tsubdomain\x18\a \x01(\tR\tsubdomain\"\xca\x02\n" +
 	"\x1bUpdateOperatorStatusRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x16\n" +
 	"\x06action\x18\x02 \x01(\tR\x06action\x12<\n" +

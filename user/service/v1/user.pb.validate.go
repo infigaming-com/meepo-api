@@ -23575,6 +23575,8 @@ func (m *ListBottomOperatorsResponse_OperatorInfo) validate(all bool) error {
 
 	// no validation rules for Status
 
+	// no validation rules for Subdomain
+
 	if len(errors) > 0 {
 		return ListBottomOperatorsResponse_OperatorInfoMultiError(errors)
 	}
