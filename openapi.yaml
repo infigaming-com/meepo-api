@@ -5933,6 +5933,8 @@ components:
                     type: string
                 domain:
                     type: string
+                acmeChallengeType:
+                    type: string
         api.backoffice.service.v1.AddOperatorByoSubdomainRequest:
             type: object
             properties:
@@ -13962,7 +13964,15 @@ components:
                     format: int32
         api.user.service.v1.AddOperatorByoDomainResponse:
             type: object
-            properties: {}
+            properties:
+                status:
+                    type: string
+                validationStatus:
+                    type: string
+                validationRecords:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.ValidationRecord'
         api.user.service.v1.AddRegisterLoginBlacklistResponse:
             type: object
             properties: {}
@@ -13998,8 +14008,18 @@ components:
                     type: string
                 domain:
                     type: string
-                type:
+                domainType:
                     type: string
+                acmeChallengeType:
+                    type: string
+                status:
+                    type: string
+                validationStatus:
+                    type: string
+                validationRecords:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.ValidationRecord'
                 targetOperatorId:
                     type: string
                 targetOperatorName:
@@ -15049,6 +15069,17 @@ components:
                     type: string
                     description: user country
             description: UserInfo contains basic user information.
+        api.user.service.v1.ValidationRecord:
+            type: object
+            properties:
+                type:
+                    type: string
+                name:
+                    type: string
+                value:
+                    type: string
+                description:
+                    type: string
         api.user.service.v1.VerifyEmailRequest:
             type: object
             properties:
