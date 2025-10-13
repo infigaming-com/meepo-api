@@ -3032,6 +3032,10 @@ func (m *Qualification) validate(all bool) error {
 		// no validation rules for TimeLimitAfterFtdDays
 	}
 
+	if m.AllowedPlayerStatuses != nil {
+		// no validation rules for AllowedPlayerStatuses
+	}
+
 	if len(errors) > 0 {
 		return QualificationMultiError(errors)
 	}

@@ -343,6 +343,110 @@ func (x *UploadVipLevelImageResponse) GetFileUrl() string {
 	return ""
 }
 
+type UploadAffiliateRegistrationPhotoRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Data          []byte                 `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+	ContentType   string                 `protobuf:"bytes,2,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"`
+	FilePath      string                 `protobuf:"bytes,3,opt,name=file_path,json=filePath,proto3" json:"file_path,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UploadAffiliateRegistrationPhotoRequest) Reset() {
+	*x = UploadAffiliateRegistrationPhotoRequest{}
+	mi := &file_backoffice_service_v1_backoffice_filestore_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UploadAffiliateRegistrationPhotoRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UploadAffiliateRegistrationPhotoRequest) ProtoMessage() {}
+
+func (x *UploadAffiliateRegistrationPhotoRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_filestore_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UploadAffiliateRegistrationPhotoRequest.ProtoReflect.Descriptor instead.
+func (*UploadAffiliateRegistrationPhotoRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_filestore_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *UploadAffiliateRegistrationPhotoRequest) GetData() []byte {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *UploadAffiliateRegistrationPhotoRequest) GetContentType() string {
+	if x != nil {
+		return x.ContentType
+	}
+	return ""
+}
+
+func (x *UploadAffiliateRegistrationPhotoRequest) GetFilePath() string {
+	if x != nil {
+		return x.FilePath
+	}
+	return ""
+}
+
+type UploadAffiliateRegistrationPhotoResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	FileUrl       string                 `protobuf:"bytes,1,opt,name=file_url,json=fileUrl,proto3" json:"file_url,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UploadAffiliateRegistrationPhotoResponse) Reset() {
+	*x = UploadAffiliateRegistrationPhotoResponse{}
+	mi := &file_backoffice_service_v1_backoffice_filestore_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UploadAffiliateRegistrationPhotoResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UploadAffiliateRegistrationPhotoResponse) ProtoMessage() {}
+
+func (x *UploadAffiliateRegistrationPhotoResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_filestore_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UploadAffiliateRegistrationPhotoResponse.ProtoReflect.Descriptor instead.
+func (*UploadAffiliateRegistrationPhotoResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_filestore_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *UploadAffiliateRegistrationPhotoResponse) GetFileUrl() string {
+	if x != nil {
+		return x.FileUrl
+	}
+	return ""
+}
+
 var File_backoffice_service_v1_backoffice_filestore_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_filestore_proto_rawDesc = "" +
@@ -366,11 +470,18 @@ const file_backoffice_service_v1_backoffice_filestore_proto_rawDesc = "" +
 	"\roperator_type\x18\x04 \x01(\tR\foperatorType\x12(\n" +
 	"\x10real_operator_id\x18\x05 \x01(\tR\x0erealOperatorId\"8\n" +
 	"\x1bUploadVipLevelImageResponse\x12\x19\n" +
-	"\bfile_url\x18\x01 \x01(\tR\afileUrl2\x98\x05\n" +
+	"\bfile_url\x18\x01 \x01(\tR\afileUrl\"}\n" +
+	"'UploadAffiliateRegistrationPhotoRequest\x12\x12\n" +
+	"\x04data\x18\x01 \x01(\fR\x04data\x12!\n" +
+	"\fcontent_type\x18\x02 \x01(\tR\vcontentType\x12\x1b\n" +
+	"\tfile_path\x18\x03 \x01(\tR\bfilePath\"E\n" +
+	"(UploadAffiliateRegistrationPhotoResponse\x12\x19\n" +
+	"\bfile_url\x18\x01 \x01(\tR\afileUrl2\x8f\a\n" +
 	"\x13BackofficeFileStore\x12\xd5\x01\n" +
 	"\x18UploadOperatorStaticFile\x12:.api.backoffice.service.v1.UploadOperatorStaticFileRequest\x1a;.api.backoffice.service.v1.UploadOperatorStaticFileResponse\"@\x82\xd3\xe4\x93\x02::\x01*\"5/v1/backoffice/filestore/operator-static-files/upload\x12\xe4\x01\n" +
 	"\x1cUploadRegisterLoginBlacklist\x12>.api.backoffice.service.v1.UploadRegisterLoginBlacklistRequest\x1a?.api.backoffice.service.v1.UploadRegisterLoginBlacklistResponse\"C\x82\xd3\xe4\x93\x02=:\x01*\"8/v1/backoffice/filestore/register-login-blacklist/upload\x12\xc1\x01\n" +
-	"\x13UploadVipLevelImage\x125.api.backoffice.service.v1.UploadVipLevelImageRequest\x1a6.api.backoffice.service.v1.UploadVipLevelImageResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/filestore/vip-level-images/uploadB[\n" +
+	"\x13UploadVipLevelImage\x125.api.backoffice.service.v1.UploadVipLevelImageRequest\x1a6.api.backoffice.service.v1.UploadVipLevelImageResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/filestore/vip-level-images/upload\x12\xf4\x01\n" +
+	" UploadAffiliateRegistrationPhoto\x12B.api.backoffice.service.v1.UploadAffiliateRegistrationPhotoRequest\x1aC.api.backoffice.service.v1.UploadAffiliateRegistrationPhotoResponse\"G\x82\xd3\xe4\x93\x02A:\x01*\"</v1/backoffice/filestore/affiliate/registration-photo/uploadB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -385,26 +496,30 @@ func file_backoffice_service_v1_backoffice_filestore_proto_rawDescGZIP() []byte 
 	return file_backoffice_service_v1_backoffice_filestore_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_filestore_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_backoffice_service_v1_backoffice_filestore_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_backoffice_service_v1_backoffice_filestore_proto_goTypes = []any{
-	(*UploadOperatorStaticFileRequest)(nil),      // 0: api.backoffice.service.v1.UploadOperatorStaticFileRequest
-	(*UploadOperatorStaticFileResponse)(nil),     // 1: api.backoffice.service.v1.UploadOperatorStaticFileResponse
-	(*UploadRegisterLoginBlacklistRequest)(nil),  // 2: api.backoffice.service.v1.UploadRegisterLoginBlacklistRequest
-	(*UploadRegisterLoginBlacklistResponse)(nil), // 3: api.backoffice.service.v1.UploadRegisterLoginBlacklistResponse
-	(*UploadVipLevelImageRequest)(nil),           // 4: api.backoffice.service.v1.UploadVipLevelImageRequest
-	(*UploadVipLevelImageResponse)(nil),          // 5: api.backoffice.service.v1.UploadVipLevelImageResponse
-	(*common.OperatorContext)(nil),               // 6: api.common.OperatorContext
+	(*UploadOperatorStaticFileRequest)(nil),          // 0: api.backoffice.service.v1.UploadOperatorStaticFileRequest
+	(*UploadOperatorStaticFileResponse)(nil),         // 1: api.backoffice.service.v1.UploadOperatorStaticFileResponse
+	(*UploadRegisterLoginBlacklistRequest)(nil),      // 2: api.backoffice.service.v1.UploadRegisterLoginBlacklistRequest
+	(*UploadRegisterLoginBlacklistResponse)(nil),     // 3: api.backoffice.service.v1.UploadRegisterLoginBlacklistResponse
+	(*UploadVipLevelImageRequest)(nil),               // 4: api.backoffice.service.v1.UploadVipLevelImageRequest
+	(*UploadVipLevelImageResponse)(nil),              // 5: api.backoffice.service.v1.UploadVipLevelImageResponse
+	(*UploadAffiliateRegistrationPhotoRequest)(nil),  // 6: api.backoffice.service.v1.UploadAffiliateRegistrationPhotoRequest
+	(*UploadAffiliateRegistrationPhotoResponse)(nil), // 7: api.backoffice.service.v1.UploadAffiliateRegistrationPhotoResponse
+	(*common.OperatorContext)(nil),                   // 8: api.common.OperatorContext
 }
 var file_backoffice_service_v1_backoffice_filestore_proto_depIdxs = []int32{
-	6, // 0: api.backoffice.service.v1.UploadRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
+	8, // 0: api.backoffice.service.v1.UploadRegisterLoginBlacklistRequest.target_operator_context:type_name -> api.common.OperatorContext
 	0, // 1: api.backoffice.service.v1.BackofficeFileStore.UploadOperatorStaticFile:input_type -> api.backoffice.service.v1.UploadOperatorStaticFileRequest
 	2, // 2: api.backoffice.service.v1.BackofficeFileStore.UploadRegisterLoginBlacklist:input_type -> api.backoffice.service.v1.UploadRegisterLoginBlacklistRequest
 	4, // 3: api.backoffice.service.v1.BackofficeFileStore.UploadVipLevelImage:input_type -> api.backoffice.service.v1.UploadVipLevelImageRequest
-	1, // 4: api.backoffice.service.v1.BackofficeFileStore.UploadOperatorStaticFile:output_type -> api.backoffice.service.v1.UploadOperatorStaticFileResponse
-	3, // 5: api.backoffice.service.v1.BackofficeFileStore.UploadRegisterLoginBlacklist:output_type -> api.backoffice.service.v1.UploadRegisterLoginBlacklistResponse
-	5, // 6: api.backoffice.service.v1.BackofficeFileStore.UploadVipLevelImage:output_type -> api.backoffice.service.v1.UploadVipLevelImageResponse
-	4, // [4:7] is the sub-list for method output_type
-	1, // [1:4] is the sub-list for method input_type
+	6, // 4: api.backoffice.service.v1.BackofficeFileStore.UploadAffiliateRegistrationPhoto:input_type -> api.backoffice.service.v1.UploadAffiliateRegistrationPhotoRequest
+	1, // 5: api.backoffice.service.v1.BackofficeFileStore.UploadOperatorStaticFile:output_type -> api.backoffice.service.v1.UploadOperatorStaticFileResponse
+	3, // 6: api.backoffice.service.v1.BackofficeFileStore.UploadRegisterLoginBlacklist:output_type -> api.backoffice.service.v1.UploadRegisterLoginBlacklistResponse
+	5, // 7: api.backoffice.service.v1.BackofficeFileStore.UploadVipLevelImage:output_type -> api.backoffice.service.v1.UploadVipLevelImageResponse
+	7, // 8: api.backoffice.service.v1.BackofficeFileStore.UploadAffiliateRegistrationPhoto:output_type -> api.backoffice.service.v1.UploadAffiliateRegistrationPhotoResponse
+	5, // [5:9] is the sub-list for method output_type
+	1, // [1:5] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
 	1, // [1:1] is the sub-list for extension extendee
 	0, // [0:1] is the sub-list for field type_name
@@ -421,7 +536,7 @@ func file_backoffice_service_v1_backoffice_filestore_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_filestore_proto_rawDesc), len(file_backoffice_service_v1_backoffice_filestore_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -1328,7 +1328,7 @@ type Qualification struct {
 	MinBetsAmount                  *string                `protobuf:"bytes,5,opt,name=min_bets_amount,json=minBetsAmount,proto3,oneof" json:"min_bets_amount,omitempty"`
 	TimeLimitAfterRegistrationDays *int32                 `protobuf:"varint,6,opt,name=time_limit_after_registration_days,json=timeLimitAfterRegistrationDays,proto3,oneof" json:"time_limit_after_registration_days,omitempty"`
 	TimeLimitAfterFtdDays          *int32                 `protobuf:"varint,7,opt,name=time_limit_after_ftd_days,json=timeLimitAfterFtdDays,proto3,oneof" json:"time_limit_after_ftd_days,omitempty"`
-	AllowedPlayerStatuses          []string               `protobuf:"bytes,8,rep,name=allowed_player_statuses,json=allowedPlayerStatuses,proto3" json:"allowed_player_statuses,omitempty"` // not available yet
+	AllowedPlayerStatuses          *string                `protobuf:"bytes,8,opt,name=allowed_player_statuses,json=allowedPlayerStatuses,proto3,oneof" json:"allowed_player_statuses,omitempty"` // not available yet
 	unknownFields                  protoimpl.UnknownFields
 	sizeCache                      protoimpl.SizeCache
 }
@@ -1412,11 +1412,11 @@ func (x *Qualification) GetTimeLimitAfterFtdDays() int32 {
 	return 0
 }
 
-func (x *Qualification) GetAllowedPlayerStatuses() []string {
-	if x != nil {
-		return x.AllowedPlayerStatuses
+func (x *Qualification) GetAllowedPlayerStatuses() string {
+	if x != nil && x.AllowedPlayerStatuses != nil {
+		return *x.AllowedPlayerStatuses
 	}
-	return nil
+	return ""
 }
 
 type AdvancedOptions struct {
@@ -2298,7 +2298,7 @@ const file_affiliate_service_v1_commission_plan_proto_rawDesc = "" +
 	"\x16other_countries_ranges\x18\x03 \x03(\v24.api.affiliate.service.v1.ProgressiveCommissionRangeR\x14otherCountriesRanges\"\x85\x01\n" +
 	"\x17CountryProgressiveGroup\x12\x1c\n" +
 	"\tcountries\x18\x01 \x03(\tR\tcountries\x12L\n" +
-	"\x06ranges\x18\x02 \x03(\v24.api.affiliate.service.v1.ProgressiveCommissionRangeR\x06ranges\"\xf0\x04\n" +
+	"\x06ranges\x18\x02 \x03(\v24.api.affiliate.service.v1.ProgressiveCommissionRangeR\x06ranges\"\x91\x05\n" +
 	"\rQualification\x12)\n" +
 	"\x0emin_ftd_amount\x18\x01 \x01(\tH\x00R\fminFtdAmount\x88\x01\x01\x121\n" +
 	"\x12min_deposits_count\x18\x02 \x01(\x05H\x01R\x10minDepositsCount\x88\x01\x01\x123\n" +
@@ -2306,15 +2306,16 @@ const file_affiliate_service_v1_commission_plan_proto_rawDesc = "" +
 	"\x0emin_bets_count\x18\x04 \x01(\x05H\x03R\fminBetsCount\x88\x01\x01\x12+\n" +
 	"\x0fmin_bets_amount\x18\x05 \x01(\tH\x04R\rminBetsAmount\x88\x01\x01\x12O\n" +
 	"\"time_limit_after_registration_days\x18\x06 \x01(\x05H\x05R\x1etimeLimitAfterRegistrationDays\x88\x01\x01\x12=\n" +
-	"\x19time_limit_after_ftd_days\x18\a \x01(\x05H\x06R\x15timeLimitAfterFtdDays\x88\x01\x01\x126\n" +
-	"\x17allowed_player_statuses\x18\b \x03(\tR\x15allowedPlayerStatusesB\x11\n" +
+	"\x19time_limit_after_ftd_days\x18\a \x01(\x05H\x06R\x15timeLimitAfterFtdDays\x88\x01\x01\x12;\n" +
+	"\x17allowed_player_statuses\x18\b \x01(\tH\aR\x15allowedPlayerStatuses\x88\x01\x01B\x11\n" +
 	"\x0f_min_ftd_amountB\x15\n" +
 	"\x13_min_deposits_countB\x16\n" +
 	"\x14_min_deposits_amountB\x11\n" +
 	"\x0f_min_bets_countB\x12\n" +
 	"\x10_min_bets_amountB%\n" +
 	"#_time_limit_after_registration_daysB\x1c\n" +
-	"\x1a_time_limit_after_ftd_days\"U\n" +
+	"\x1a_time_limit_after_ftd_daysB\x1a\n" +
+	"\x18_allowed_player_statuses\"U\n" +
 	"\x0fAdvancedOptions\x12-\n" +
 	"\x10hold_period_days\x18\x01 \x01(\x05H\x00R\x0eholdPeriodDays\x88\x01\x01B\x13\n" +
 	"\x11_hold_period_days\"\xdb\x05\n" +

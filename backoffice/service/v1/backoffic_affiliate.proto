@@ -4,6 +4,8 @@ package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
 import "affiliate/service/v1/commission_plan.proto";
+import "affiliate/service/v1/affiliate.proto";
+import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -40,6 +42,36 @@ service BackofficeAffiliate {
 			body: "*"
 		};
 	}
+	rpc CreateAffiliate(CreateAffiliateRequest) returns (api.affiliate.service.v1.CreateAffiliateResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/create"
+			body: "*"
+		};
+	}
+	rpc UpdateAffiliate(UpdateAffiliateRequest) returns (api.affiliate.service.v1.UpdateAffiliateResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/update"
+			body: "*"
+		};
+	}
+	rpc GetAffiliate(GetAffiliateRequest) returns (api.affiliate.service.v1.GetAffiliateResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/get"
+			body: "*"
+		};
+	}
+	rpc ListAffiliates(ListAffiliatesRequest) returns (api.affiliate.service.v1.ListAffiliatesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/list"
+			body: "*"
+		};
+	}
+	rpc DeleteAffiliate(DeleteAffiliateRequest) returns (api.affiliate.service.v1.DeleteAffiliateResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/delete"
+			body: "*"
+		};
+	}
 }
 
 message CreateCommissionPlanRequest {
@@ -72,3 +104,32 @@ message DeleteCommissionPlanRequest {
 	int64 commission_plan_id = 1;
 	optional int64 alternative_commission_plan_id = 2; // not supported yet
 }
+
+message CreateAffiliateRequest {
+	api.affiliate.service.v1.AffiliateInfo affiliate = 1;
+	api.common.OperatorContext initiator_operator_context = 2;
+}
+
+message UpdateAffiliateRequest {
+	api.affiliate.service.v1.AffiliateInfo affiliate = 1;
+	int64 affiliate_id = 2;
+}
+
+message GetAffiliateRequest {
+	int64 affiliate_id = 1;
+}
+
+message ListAffiliatesRequest {
+	repeated string countries = 1;
+    repeated string traffic_source_ids = 2; // not implemented
+    repeated string teammate_ids = 3; // not implemented
+    string status = 4; // pending, active, inactive
+    optional int32 page = 5;
+    optional int32 page_size = 6;
+	api.common.OperatorContext target_operator_context = 7;
+}
+
+message DeleteAffiliateRequest {
+	int64 affiliate_id = 1;
+}
+	

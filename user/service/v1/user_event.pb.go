@@ -128,6 +128,7 @@ type AddUserEvent struct {
 	Username           string                 `protobuf:"bytes,6,opt,name=username,proto3" json:"username,omitempty"`
 	Email              string                 `protobuf:"bytes,7,opt,name=email,proto3" json:"email,omitempty"`
 	Mobile             string                 `protobuf:"bytes,8,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	RoleId             int32                  `protobuf:"varint,9,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -216,6 +217,13 @@ func (x *AddUserEvent) GetMobile() string {
 		return x.Mobile
 	}
 	return ""
+}
+
+func (x *AddUserEvent) GetRoleId() int32 {
+	if x != nil {
+		return x.RoleId
+	}
+	return 0
 }
 
 // AddOperatorEvent is emitted when a operator is created.
@@ -338,7 +346,7 @@ const file_user_service_v1_user_event_proto_rawDesc = "" +
 	"event_data\x18\x02 \x01(\fR\teventData\x12\x1d\n" +
 	"\n" +
 	"message_id\x18\x03 \x01(\tR\tmessageId\"\x0f\n" +
-	"\rEventResponse\"\xa2\x02\n" +
+	"\rEventResponse\"\xbb\x02\n" +
 	"\fAddUserEvent\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
@@ -348,7 +356,8 @@ const file_user_service_v1_user_event_proto_rawDesc = "" +
 	"\x12system_operator_id\x18\x05 \x01(\x03R\x10systemOperatorId\x12\x1a\n" +
 	"\busername\x18\x06 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\a \x01(\tR\x05email\x12\x16\n" +
-	"\x06mobile\x18\b \x01(\tR\x06mobile\"\x9b\x03\n" +
+	"\x06mobile\x18\b \x01(\tR\x06mobile\x12\x17\n" +
+	"\arole_id\x18\t \x01(\x05R\x06roleId\"\x9b\x03\n" +
 	"\x10AddOperatorEvent\x12(\n" +
 	"\x10real_operator_id\x18\x01 \x01(\x03R\x0erealOperatorId\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +

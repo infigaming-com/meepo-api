@@ -29,6 +29,14 @@ service BackofficeFileStore {
 			body: "*"
 		};
 	}
+
+	// Affiliate File Store
+	rpc UploadAffiliateRegistrationPhoto(UploadAffiliateRegistrationPhotoRequest) returns (UploadAffiliateRegistrationPhotoResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/filestore/affiliate/registration-photo/upload"
+            body: "*"
+        };
+	}
 }
 
 message UploadOperatorStaticFileRequest {
@@ -58,4 +66,14 @@ message UploadVipLevelImageRequest {
 
 message UploadVipLevelImageResponse {
 	string file_url = 1;
+}
+
+message UploadAffiliateRegistrationPhotoRequest {
+    bytes data = 1;
+    string content_type = 2;
+	string file_path = 3;
+}
+
+message UploadAffiliateRegistrationPhotoResponse {
+    string file_url = 1;
 }
