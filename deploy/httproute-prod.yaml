@@ -90,3 +90,24 @@ spec:
     - name: review-svc
       port: 8000
       weight: 1
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: paapi-xyz-routes
+  namespace: alchemist
+spec:
+  parentRefs:
+  - name: meepo-gateway
+    namespace: meepo-gateway
+  hostnames:
+  - "paapi.xyz"
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/"
+    backendRefs:
+    - name: alchemist-service
+      port: 8080
+      weight: 1
