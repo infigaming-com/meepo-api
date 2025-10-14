@@ -263,35 +263,13 @@ message GetUserBalanceResponse {
 //   - "payment_withdraw_rollback" - Payment withdraw transaction rollback
 
 message CreditRequest {
-	message Ratio {
-		string cash = 1;
-		string operator_bonus = 2;
-	}
-
 	int64 user_id = 1;
 	string currency = 2;
 	string transaction_type = 3;
-	int64 external_transaction_id = 4;        // optional
+	int64 external_transaction_id = 4;
 	string cash_amount = 5;
-	string operator_bonus = 6;                // optional
-	string provider_bonus = 7;                // optional
-	string cash_turnover_threshold = 8;       // optional
-	string operator_bonus_turnover_threshold = 9; // optional
-	string provider_bonus_turnover_threshold = 10; // optional
-	string cash_withdraw_limit = 11;          // optional
-	string operator_bonus_withdraw_limit = 12; // optional
-	string provider_bonus_withdraw_limit = 13; // optional
-	Ratio cash_to_operator_bonus_ratio = 14;  // optional
-	int64 created_at = 15;                    // optional
-
-	// Operator credit request fields
-	api.common.OperatorContext operator_context = 16;
-	string operator_reporting_currency = 17;  // optional
-	string operator_transaction_type = 18;    // optional
-
-	// Channel info
-	bool operator_credit_flag = 19;           // optional
-	api.common.OperatorContext channel_operator_context = 20; // optional
+	api.common.OperatorContext operator_context = 6;
+	api.common.OperatorContext channel_operator_context = 7;
 }
 
 message CreditResponse {

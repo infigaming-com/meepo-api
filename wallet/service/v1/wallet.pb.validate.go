@@ -525,53 +525,6 @@ func (m *CreditRequest) validate(all bool) error {
 
 	// no validation rules for CashAmount
 
-	// no validation rules for OperatorBonus
-
-	// no validation rules for ProviderBonus
-
-	// no validation rules for CashTurnoverThreshold
-
-	// no validation rules for OperatorBonusTurnoverThreshold
-
-	// no validation rules for ProviderBonusTurnoverThreshold
-
-	// no validation rules for CashWithdrawLimit
-
-	// no validation rules for OperatorBonusWithdrawLimit
-
-	// no validation rules for ProviderBonusWithdrawLimit
-
-	if all {
-		switch v := interface{}(m.GetCashToOperatorBonusRatio()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, CreditRequestValidationError{
-					field:  "CashToOperatorBonusRatio",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, CreditRequestValidationError{
-					field:  "CashToOperatorBonusRatio",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetCashToOperatorBonusRatio()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return CreditRequestValidationError{
-				field:  "CashToOperatorBonusRatio",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	// no validation rules for CreatedAt
-
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
@@ -600,12 +553,6 @@ func (m *CreditRequest) validate(all bool) error {
 			}
 		}
 	}
-
-	// no validation rules for OperatorReportingCurrency
-
-	// no validation rules for OperatorTransactionType
-
-	// no validation rules for OperatorCreditFlag
 
 	if all {
 		switch v := interface{}(m.GetChannelOperatorContext()).(type) {
@@ -18563,112 +18510,6 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetUserBalancesResponse_BalanceValidationError{}
-
-// Validate checks the field values on CreditRequest_Ratio with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *CreditRequest_Ratio) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on CreditRequest_Ratio with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// CreditRequest_RatioMultiError, or nil if none found.
-func (m *CreditRequest_Ratio) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *CreditRequest_Ratio) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Cash
-
-	// no validation rules for OperatorBonus
-
-	if len(errors) > 0 {
-		return CreditRequest_RatioMultiError(errors)
-	}
-
-	return nil
-}
-
-// CreditRequest_RatioMultiError is an error wrapping multiple validation
-// errors returned by CreditRequest_Ratio.ValidateAll() if the designated
-// constraints aren't met.
-type CreditRequest_RatioMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m CreditRequest_RatioMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m CreditRequest_RatioMultiError) AllErrors() []error { return m }
-
-// CreditRequest_RatioValidationError is the validation error returned by
-// CreditRequest_Ratio.Validate if the designated constraints aren't met.
-type CreditRequest_RatioValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e CreditRequest_RatioValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e CreditRequest_RatioValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e CreditRequest_RatioValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e CreditRequest_RatioValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e CreditRequest_RatioValidationError) ErrorName() string {
-	return "CreditRequest_RatioValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e CreditRequest_RatioValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sCreditRequest_Ratio.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = CreditRequest_RatioValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = CreditRequest_RatioValidationError{}
 
 // Validate checks the field values on GetWalletsResponse_TotalAssets with the
 // rules defined in the proto definition for this message. If any rules are
