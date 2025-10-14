@@ -521,67 +521,19 @@ func (m *CreditRequest) validate(all bool) error {
 
 	// no validation rules for TransactionType
 
-	// no validation rules for ExternalTransactionId
-
 	// no validation rules for CashAmount
 
-	if all {
-		switch v := interface{}(m.GetOperatorContext()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, CreditRequestValidationError{
-					field:  "OperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, CreditRequestValidationError{
-					field:  "OperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return CreditRequestValidationError{
-				field:  "OperatorContext",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for CashTurnoverThreshold
 
-	if all {
-		switch v := interface{}(m.GetChannelOperatorContext()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, CreditRequestValidationError{
-					field:  "ChannelOperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, CreditRequestValidationError{
-					field:  "ChannelOperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetChannelOperatorContext()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return CreditRequestValidationError{
-				field:  "ChannelOperatorContext",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
+	// no validation rules for OperatorBonusAmount
+
+	// no validation rules for OperatorBonusTurnoverThreshold
+
+	// no validation rules for OperatorBonusWithdrawLimit
+
+	// no validation rules for Comment
+
+	// no validation rules for ExternalTransactionId
 
 	if len(errors) > 0 {
 		return CreditRequestMultiError(errors)
