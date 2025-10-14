@@ -34,7 +34,7 @@ const (
 	PlayerRoleId = 0
 
 	// Affiliate Role
-	AffiliateRoleId = 5
+	AffiliateRoleId = -1
 
 	// Operator Deduction Order
 	OperatorDeductionOrderCashFirst  = "cash_first"  // Cash first, then bonus
