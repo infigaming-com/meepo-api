@@ -31,6 +31,7 @@ const (
 	Vip_UpdateVipRewardSlider_FullMethodName        = "/api.vip.service.v1.Vip/UpdateVipRewardSlider"
 	Vip_GetClaimableVipRewards_FullMethodName       = "/api.vip.service.v1.Vip/GetClaimableVipRewards"
 	Vip_ClaimVipReward_FullMethodName               = "/api.vip.service.v1.Vip/ClaimVipReward"
+	Vip_ConfirmClaimVipReward_FullMethodName        = "/api.vip.service.v1.Vip/ConfirmClaimVipReward"
 )
 
 // VipClient is the client API for Vip service.
@@ -49,6 +50,7 @@ type VipClient interface {
 	UpdateVipRewardSlider(ctx context.Context, in *UpdateVipRewardSliderRequest, opts ...grpc.CallOption) (*UpdateVipRewardSliderResponse, error)
 	GetClaimableVipRewards(ctx context.Context, in *GetClaimableVipRewardsRequest, opts ...grpc.CallOption) (*GetClaimableVipRewardsResponse, error)
 	ClaimVipReward(ctx context.Context, in *ClaimVipRewardRequest, opts ...grpc.CallOption) (*ClaimVipRewardResponse, error)
+	ConfirmClaimVipReward(ctx context.Context, in *ConfirmClaimVipRewardRequest, opts ...grpc.CallOption) (*ConfirmClaimVipRewardResponse, error)
 }
 
 type vipClient struct {
@@ -179,6 +181,16 @@ func (c *vipClient) ClaimVipReward(ctx context.Context, in *ClaimVipRewardReques
 	return out, nil
 }
 
+func (c *vipClient) ConfirmClaimVipReward(ctx context.Context, in *ConfirmClaimVipRewardRequest, opts ...grpc.CallOption) (*ConfirmClaimVipRewardResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConfirmClaimVipRewardResponse)
+	err := c.cc.Invoke(ctx, Vip_ConfirmClaimVipReward_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // VipServer is the server API for Vip service.
 // All implementations must embed UnimplementedVipServer
 // for forward compatibility.
@@ -195,6 +207,7 @@ type VipServer interface {
 	UpdateVipRewardSlider(context.Context, *UpdateVipRewardSliderRequest) (*UpdateVipRewardSliderResponse, error)
 	GetClaimableVipRewards(context.Context, *GetClaimableVipRewardsRequest) (*GetClaimableVipRewardsResponse, error)
 	ClaimVipReward(context.Context, *ClaimVipRewardRequest) (*ClaimVipRewardResponse, error)
+	ConfirmClaimVipReward(context.Context, *ConfirmClaimVipRewardRequest) (*ConfirmClaimVipRewardResponse, error)
 	mustEmbedUnimplementedVipServer()
 }
 
@@ -240,6 +253,9 @@ func (UnimplementedVipServer) GetClaimableVipRewards(context.Context, *GetClaima
 }
 func (UnimplementedVipServer) ClaimVipReward(context.Context, *ClaimVipRewardRequest) (*ClaimVipRewardResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ClaimVipReward not implemented")
+}
+func (UnimplementedVipServer) ConfirmClaimVipReward(context.Context, *ConfirmClaimVipRewardRequest) (*ConfirmClaimVipRewardResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConfirmClaimVipReward not implemented")
 }
 func (UnimplementedVipServer) mustEmbedUnimplementedVipServer() {}
 func (UnimplementedVipServer) testEmbeddedByValue()             {}
@@ -478,6 +494,24 @@ func _Vip_ClaimVipReward_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Vip_ConfirmClaimVipReward_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfirmClaimVipRewardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VipServer).ConfirmClaimVipReward(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Vip_ConfirmClaimVipReward_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VipServer).ConfirmClaimVipReward(ctx, req.(*ConfirmClaimVipRewardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Vip_ServiceDesc is the grpc.ServiceDesc for Vip service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -532,6 +566,10 @@ var Vip_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ClaimVipReward",
 			Handler:    _Vip_ClaimVipReward_Handler,
+		},
+		{
+			MethodName: "ConfirmClaimVipReward",
+			Handler:    _Vip_ConfirmClaimVipReward_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

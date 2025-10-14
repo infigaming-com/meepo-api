@@ -41,16 +41,16 @@ type BackofficeVipHTTPServer interface {
 
 func RegisterBackofficeVipHTTPServer(s *http.Server, srv BackofficeVipHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/backoffice/vip/setting/get", _BackofficeVip_GetVipSetting1_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/vip/setting/get", _BackofficeVip_GetVipSetting0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/vip/setting/update", _BackofficeVip_UpdateVipSetting0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/vip/level-config-template/get", _BackofficeVip_GetVipLevelConfigTemplate1_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/vip/level-config-template/get", _BackofficeVip_GetVipLevelConfigTemplate0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/vip/level-config-template/create", _BackofficeVip_CreateVipLevelConfigTemplate0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/vip/level-config-template/update", _BackofficeVip_UpdateVipLevelConfigTemplate0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/vip/level-config-template/delete", _BackofficeVip_DeleteVipLevelConfigTemplate0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/vip/config/get", _BackofficeVip_GetVipConfig0_HTTP_Handler(srv))
 }
 
-func _BackofficeVip_GetVipSetting1_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
+func _BackofficeVip_GetVipSetting0_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetVipSettingRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -94,7 +94,7 @@ func _BackofficeVip_UpdateVipSetting0_HTTP_Handler(srv BackofficeVipHTTPServer) 
 	}
 }
 
-func _BackofficeVip_GetVipLevelConfigTemplate1_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
+func _BackofficeVip_GetVipLevelConfigTemplate0_HTTP_Handler(srv BackofficeVipHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetVipLevelConfigTemplateRequest
 		if err := ctx.Bind(&in); err != nil {

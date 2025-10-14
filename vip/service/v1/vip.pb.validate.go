@@ -2704,6 +2704,37 @@ func (m *GetUserVipLevelRequest) validate(all bool) error {
 
 	var errors []error
 
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetUserVipLevelRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetUserVipLevelRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetUserVipLevelRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for UserId
+
 	if len(errors) > 0 {
 		return GetUserVipLevelRequestMultiError(errors)
 	}
@@ -2941,6 +2972,41 @@ func (m *UpdateVipRewardSliderRequest) validate(all bool) error {
 
 	// no validation rules for Lossback
 
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateVipRewardSliderRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateVipRewardSliderRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateVipRewardSliderRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for UserId
+
+	// no validation rules for Type
+
+	// no validation rules for Currency
+
 	if len(errors) > 0 {
 		return UpdateVipRewardSliderRequestMultiError(errors)
 	}
@@ -3147,7 +3213,36 @@ func (m *GetClaimableVipRewardsRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for RewardKind
+	// no validation rules for UserId
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetClaimableVipRewardsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetClaimableVipRewardsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetClaimableVipRewardsRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	// no validation rules for Currency
 
@@ -3254,7 +3349,39 @@ func (m *GetClaimableVipRewardsResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for ClaimableAmount
+	for idx, item := range m.GetClaimableRewards() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetClaimableVipRewardsResponseValidationError{
+						field:  fmt.Sprintf("ClaimableRewards[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetClaimableVipRewardsResponseValidationError{
+						field:  fmt.Sprintf("ClaimableRewards[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetClaimableVipRewardsResponseValidationError{
+					field:  fmt.Sprintf("ClaimableRewards[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
 
 	if len(errors) > 0 {
 		return GetClaimableVipRewardsResponseMultiError(errors)
@@ -3363,6 +3490,37 @@ func (m *ClaimVipRewardRequest) validate(all bool) error {
 
 	// no validation rules for Currency
 
+	// no validation rules for UserId
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ClaimVipRewardRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ClaimVipRewardRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ClaimVipRewardRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return ClaimVipRewardRequestMultiError(errors)
 	}
@@ -3465,6 +3623,12 @@ func (m *ClaimVipRewardResponse) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for ClaimableAmount
+
+	// no validation rules for ClaimableAmountCurrency
+
+	// no validation rules for ClaimTransactionId
+
 	if len(errors) > 0 {
 		return ClaimVipRewardResponseMultiError(errors)
 	}
@@ -3566,6 +3730,37 @@ func (m *GetOperatorVipSettingsRequest) validate(all bool) error {
 	}
 
 	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetOperatorVipSettingsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetOperatorVipSettingsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetOperatorVipSettingsRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Currency
 
 	if len(errors) > 0 {
 		return GetOperatorVipSettingsRequestMultiError(errors)
@@ -3699,6 +3894,40 @@ func (m *GetOperatorVipSettingsResponse) validate(all bool) error {
 		}
 	}
 
+	for idx, item := range m.GetVipLevelConfigTemplates() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetOperatorVipSettingsResponseValidationError{
+						field:  fmt.Sprintf("VipLevelConfigTemplates[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetOperatorVipSettingsResponseValidationError{
+						field:  fmt.Sprintf("VipLevelConfigTemplates[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetOperatorVipSettingsResponseValidationError{
+					field:  fmt.Sprintf("VipLevelConfigTemplates[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
 	if len(errors) > 0 {
 		return GetOperatorVipSettingsResponseMultiError(errors)
 	}
@@ -3779,3 +4008,361 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetOperatorVipSettingsResponseValidationError{}
+
+// Validate checks the field values on ConfirmClaimVipRewardRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ConfirmClaimVipRewardRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ConfirmClaimVipRewardRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ConfirmClaimVipRewardRequestMultiError, or nil if none found.
+func (m *ConfirmClaimVipRewardRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ConfirmClaimVipRewardRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ConfirmClaimVipRewardRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ConfirmClaimVipRewardRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ConfirmClaimVipRewardRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for ClaimTransactionId
+
+	if len(errors) > 0 {
+		return ConfirmClaimVipRewardRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ConfirmClaimVipRewardRequestMultiError is an error wrapping multiple
+// validation errors returned by ConfirmClaimVipRewardRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ConfirmClaimVipRewardRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ConfirmClaimVipRewardRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ConfirmClaimVipRewardRequestMultiError) AllErrors() []error { return m }
+
+// ConfirmClaimVipRewardRequestValidationError is the validation error returned
+// by ConfirmClaimVipRewardRequest.Validate if the designated constraints
+// aren't met.
+type ConfirmClaimVipRewardRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ConfirmClaimVipRewardRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ConfirmClaimVipRewardRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ConfirmClaimVipRewardRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ConfirmClaimVipRewardRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ConfirmClaimVipRewardRequestValidationError) ErrorName() string {
+	return "ConfirmClaimVipRewardRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ConfirmClaimVipRewardRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sConfirmClaimVipRewardRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ConfirmClaimVipRewardRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ConfirmClaimVipRewardRequestValidationError{}
+
+// Validate checks the field values on ConfirmClaimVipRewardResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ConfirmClaimVipRewardResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ConfirmClaimVipRewardResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ConfirmClaimVipRewardResponseMultiError, or nil if none found.
+func (m *ConfirmClaimVipRewardResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ConfirmClaimVipRewardResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ConfirmClaimVipRewardResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ConfirmClaimVipRewardResponseMultiError is an error wrapping multiple
+// validation errors returned by ConfirmClaimVipRewardResponse.ValidateAll()
+// if the designated constraints aren't met.
+type ConfirmClaimVipRewardResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ConfirmClaimVipRewardResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ConfirmClaimVipRewardResponseMultiError) AllErrors() []error { return m }
+
+// ConfirmClaimVipRewardResponseValidationError is the validation error
+// returned by ConfirmClaimVipRewardResponse.Validate if the designated
+// constraints aren't met.
+type ConfirmClaimVipRewardResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ConfirmClaimVipRewardResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ConfirmClaimVipRewardResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ConfirmClaimVipRewardResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ConfirmClaimVipRewardResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ConfirmClaimVipRewardResponseValidationError) ErrorName() string {
+	return "ConfirmClaimVipRewardResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ConfirmClaimVipRewardResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sConfirmClaimVipRewardResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ConfirmClaimVipRewardResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ConfirmClaimVipRewardResponseValidationError{}
+
+// Validate checks the field values on
+// GetClaimableVipRewardsResponse_ClaimableVipReward with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *GetClaimableVipRewardsResponse_ClaimableVipReward) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetClaimableVipRewardsResponse_ClaimableVipReward with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in
+// GetClaimableVipRewardsResponse_ClaimableVipRewardMultiError, or nil if none found.
+func (m *GetClaimableVipRewardsResponse_ClaimableVipReward) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetClaimableVipRewardsResponse_ClaimableVipReward) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RewardKind
+
+	// no validation rules for Claimable
+
+	// no validation rules for ClaimableAt
+
+	if len(errors) > 0 {
+		return GetClaimableVipRewardsResponse_ClaimableVipRewardMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetClaimableVipRewardsResponse_ClaimableVipRewardMultiError is an error
+// wrapping multiple validation errors returned by
+// GetClaimableVipRewardsResponse_ClaimableVipReward.ValidateAll() if the
+// designated constraints aren't met.
+type GetClaimableVipRewardsResponse_ClaimableVipRewardMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetClaimableVipRewardsResponse_ClaimableVipRewardMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetClaimableVipRewardsResponse_ClaimableVipRewardMultiError) AllErrors() []error { return m }
+
+// GetClaimableVipRewardsResponse_ClaimableVipRewardValidationError is the
+// validation error returned by
+// GetClaimableVipRewardsResponse_ClaimableVipReward.Validate if the
+// designated constraints aren't met.
+type GetClaimableVipRewardsResponse_ClaimableVipRewardValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetClaimableVipRewardsResponse_ClaimableVipRewardValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e GetClaimableVipRewardsResponse_ClaimableVipRewardValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e GetClaimableVipRewardsResponse_ClaimableVipRewardValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e GetClaimableVipRewardsResponse_ClaimableVipRewardValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetClaimableVipRewardsResponse_ClaimableVipRewardValidationError) ErrorName() string {
+	return "GetClaimableVipRewardsResponse_ClaimableVipRewardValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetClaimableVipRewardsResponse_ClaimableVipRewardValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetClaimableVipRewardsResponse_ClaimableVipReward.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetClaimableVipRewardsResponse_ClaimableVipRewardValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetClaimableVipRewardsResponse_ClaimableVipRewardValidationError{}

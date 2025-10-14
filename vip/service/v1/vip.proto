@@ -12,26 +12,14 @@ option java_package = "api.vip.service.v1";
 service Vip {
 
   rpc GetVipSetting(GetVipSettingRequest) returns (GetVipSettingResponse) {
-    option (google.api.http) = {
-      post: "/v1/vip/setting/get"
-      body: "*"
-    };
   }
 
   rpc UpdateVipSetting(UpdateVipSettingRequest) returns (UpdateVipSettingResponse);
 
   rpc ListVipLevelConfigTemplates(ListVipLevelConfigTemplatesRequest) returns (ListVipLevelConfigTemplatesResponse) {
-    option (google.api.http) = {
-      post: "/v1/vip/level-config-templates/list"
-      body: "*"
-    };
   }
 
   rpc GetVipLevelConfigTemplate(GetVipLevelConfigTemplateRequest) returns (GetVipLevelConfigTemplateResponse) {
-    option (google.api.http) = {
-      post: "/v1/vip/level-config-template/get"
-      body: "*"
-    };
   }
 
   rpc CreateVipLevelConfigTemplate(CreateVipLevelConfigTemplateRequest) returns (CreateVipLevelConfigTemplateResponse);
@@ -39,38 +27,21 @@ service Vip {
   rpc DeleteVipLevelConfigTemplate(DeleteVipLevelConfigTemplateRequest) returns (DeleteVipLevelConfigTemplateResponse);
 
   rpc GetOperatorVipSettings(GetOperatorVipSettingsRequest) returns (GetOperatorVipSettingsResponse) {
-    option (google.api.http) = {
-      post: "/v1/vip/operator-vip-settings/get"
-      body: "*"
-    };
   }
 
   rpc GetUserVipLevel(GetUserVipLevelRequest) returns (GetUserVipLevelResponse) {
-    option (google.api.http) = {
-      post: "/v1/vip/user-level/get"
-      body: "*"
-    };
   }
 
   rpc UpdateVipRewardSlider(UpdateVipRewardSliderRequest) returns (UpdateVipRewardSliderResponse) {
-    option (google.api.http) = {
-      post: "/v1/vip/reward-slider/update"
-      body: "*"
-    };
   }
 
   rpc GetClaimableVipRewards(GetClaimableVipRewardsRequest) returns (GetClaimableVipRewardsResponse) {
-    option (google.api.http) = {
-      post: "/v1/vip/reward/claimable"
-      body: "*"
-    };
   }
 
   rpc ClaimVipReward(ClaimVipRewardRequest) returns (ClaimVipRewardResponse) {
-    option (google.api.http) = {
-      post: "/v1/vip/reward/claim"
-      body: "*"
-    };
+  }
+
+  rpc ConfirmClaimVipReward(ConfirmClaimVipRewardRequest) returns (ConfirmClaimVipRewardResponse) {
   }
 
 }
@@ -339,6 +310,8 @@ message VipMember {
 }
 
 message GetUserVipLevelRequest {
+  api.common.OperatorContext operator_context = 1;
+  int64 user_id = 2;
 }
 
 message GetUserVipLevelResponse {
@@ -348,31 +321,59 @@ message GetUserVipLevelResponse {
 message UpdateVipRewardSliderRequest {
   int64 rackback = 1;
   int64 lossback = 2;
+  api.common.OperatorContext operator_context = 3;
+  int64 user_id = 4;
+  string type = 5; // weekly, monthly
+  string currency = 6;
 }
 
 message UpdateVipRewardSliderResponse {
 }
 
 message GetClaimableVipRewardsRequest {
-  VipRewardKind reward_kind = 1;
-  string currency = 2;
+  int64 user_id = 1;
+  api.common.OperatorContext operator_context = 2;
+  string currency = 3;
 }
 
 message GetClaimableVipRewardsResponse {
-  int64 claimable_amount = 1;
+  repeated ClaimableVipReward claimable_rewards = 1;
+  message ClaimableVipReward {
+    VipRewardKind reward_kind = 1;
+    bool claimable = 2;
+    int64 claimable_at = 3;
+  }
 }
 
 message ClaimVipRewardRequest {
   VipRewardKind reward_kind = 1;
   string currency = 2;
+  int64 user_id = 3;
+  api.common.OperatorContext operator_context = 4;
 }
 
 message ClaimVipRewardResponse {
+  int64 claimable_amount = 1;
+  string claimable_amount_currency = 2;
+  int64 claim_transaction_id = 3;
 }
 
 message GetOperatorVipSettingsRequest {
+  api.common.OperatorContext operator_context = 1;
+  string currency = 2;
 }
 
 message GetOperatorVipSettingsResponse {
   VipSetting setting = 1;
+  repeated VipLevelConfigTemplate vip_level_config_templates = 2;
+}
+
+message ConfirmClaimVipRewardRequest {
+  int64 user_id = 1;
+  api.common.OperatorContext operator_context = 2;
+  int64 claim_transaction_id = 3;
+  string claim_currency = 4;
+}
+
+message ConfirmClaimVipRewardResponse {
 }
