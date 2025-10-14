@@ -3379,6 +3379,8 @@ func (m *AccountInfoResponse) validate(all bool) error {
 
 	// no validation rules for BackofficeSubdomain
 
+	// no validation rules for OperatorMode
+
 	if len(errors) > 0 {
 		return AccountInfoResponseMultiError(errors)
 	}

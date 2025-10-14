@@ -285,6 +285,7 @@ message AccountInfoResponse {
     wallet.service.v1.Currency reporting_currency = 9;
     string subdomain = 10;
     string backoffice_subdomain = 11;
+    string operator_mode = 12;
 }
 
 message Role {

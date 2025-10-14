@@ -42,6 +42,12 @@ service BackofficeAffiliate {
 			body: "*"
 		};
 	}
+	rpc ListAllCommissionPlans(ListAllCommissionPlansRequest) returns (api.affiliate.service.v1.ListAllCommissionPlansResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/commission/plan/list/all"
+			body: "*"
+		};
+	}
 	rpc CreateAffiliate(CreateAffiliateRequest) returns (api.affiliate.service.v1.CreateAffiliateResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/create"
@@ -107,7 +113,7 @@ message DeleteCommissionPlanRequest {
 
 message CreateAffiliateRequest {
 	api.affiliate.service.v1.AffiliateInfo affiliate = 1;
-	api.common.OperatorContext initiator_operator_context = 2;
+	api.common.OperatorContext target_operator_context = 2;
 }
 
 message UpdateAffiliateRequest {
@@ -131,5 +137,11 @@ message ListAffiliatesRequest {
 
 message DeleteAffiliateRequest {
 	int64 affiliate_id = 1;
+}
+
+message ListAllCommissionPlansRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	repeated string countries = 2; // not supported yet
+	optional string status = 3;
 }
 	

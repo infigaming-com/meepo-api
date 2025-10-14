@@ -496,6 +496,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.ListCommissionPlansResponse'
+    /v1/backoffice/affiliate/commission/plan/list/all:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_ListAllCommissionPlans
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAllCommissionPlansRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListAllCommissionPlansResponse'
     /v1/backoffice/affiliate/commission/plan/update:
         post:
             tags:
@@ -5683,6 +5701,13 @@ components:
                     type: string
                 commisionsReportingCurrency:
                     type: string
+        api.affiliate.service.v1.ListAllCommissionPlansResponse:
+            type: object
+            properties:
+                commissionPlans:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.CommissionPlan'
         api.affiliate.service.v1.ListCommissionPlansResponse:
             type: object
             properties:
@@ -5844,6 +5869,8 @@ components:
                 subdomain:
                     type: string
                 backofficeSubdomain:
+                    type: string
+                operatorMode:
                     type: string
         api.backoffice.service.v1.ActiveUsersData_Data:
             type: object
@@ -6201,7 +6228,7 @@ components:
             properties:
                 affiliate:
                     $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateInfo'
-                initiatorOperatorContext:
+                targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.CreateCommissionPlanRequest:
             type: object
@@ -8262,6 +8289,17 @@ components:
                     format: int32
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+        api.backoffice.service.v1.ListAllCommissionPlansRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                countries:
+                    type: array
+                    items:
+                        type: string
+                status:
+                    type: string
         api.backoffice.service.v1.ListAllOperatorsRequest:
             type: object
             properties:
