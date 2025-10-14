@@ -253,7 +253,7 @@ type CreditRequest struct {
 	OperatorBonusTurnoverThreshold string                 `protobuf:"bytes,7,opt,name=operator_bonus_turnover_threshold,json=operatorBonusTurnoverThreshold,proto3" json:"operator_bonus_turnover_threshold,omitempty"` // 紅利流水要求 (倍數)
 	OperatorBonusWithdrawLimit     string                 `protobuf:"bytes,8,opt,name=operator_bonus_withdraw_limit,json=operatorBonusWithdrawLimit,proto3" json:"operator_bonus_withdraw_limit,omitempty"`             // 紅利提現限制金額
 	Comment                        string                 `protobuf:"bytes,9,opt,name=comment,proto3" json:"comment,omitempty"`                                                                                         // 操作備註
-	ExternalTransactionId          int64                  `protobuf:"varint,10,opt,name=external_transaction_id,json=externalTransactionId,proto3" json:"external_transaction_id,omitempty"`                            // 對應外部交易ID
+	ExternalTransactionId          *int64                 `protobuf:"varint,10,opt,name=external_transaction_id,json=externalTransactionId,proto3,oneof" json:"external_transaction_id,omitempty"`                      // 對應外部交易ID
 	unknownFields                  protoimpl.UnknownFields
 	sizeCache                      protoimpl.SizeCache
 }
@@ -352,8 +352,8 @@ func (x *CreditRequest) GetComment() string {
 }
 
 func (x *CreditRequest) GetExternalTransactionId() int64 {
-	if x != nil {
-		return x.ExternalTransactionId
+	if x != nil && x.ExternalTransactionId != nil {
+		return *x.ExternalTransactionId
 	}
 	return 0
 }
@@ -11731,7 +11731,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\rexchange_rate\x18\x01 \x01(\tR\fexchangeRate\x12\x12\n" +
 	"\x04cash\x18\x02 \x01(\tR\x04cash\x12%\n" +
 	"\x0eoperator_bonus\x18\x03 \x01(\tR\roperatorBonus\x12%\n" +
-	"\x0eprovider_bonus\x18\x04 \x01(\tR\rproviderBonus\"\xdc\x03\n" +
+	"\x0eprovider_bonus\x18\x04 \x01(\tR\rproviderBonus\"\xfd\x03\n" +
 	"\rCreditRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12)\n" +
@@ -11742,9 +11742,10 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x15operator_bonus_amount\x18\x06 \x01(\tR\x13operatorBonusAmount\x12I\n" +
 	"!operator_bonus_turnover_threshold\x18\a \x01(\tR\x1eoperatorBonusTurnoverThreshold\x12A\n" +
 	"\x1doperator_bonus_withdraw_limit\x18\b \x01(\tR\x1aoperatorBonusWithdrawLimit\x12\x18\n" +
-	"\acomment\x18\t \x01(\tR\acomment\x126\n" +
+	"\acomment\x18\t \x01(\tR\acomment\x12;\n" +
 	"\x17external_transaction_id\x18\n" +
-	" \x01(\x03R\x15externalTransactionId\"7\n" +
+	" \x01(\x03H\x00R\x15externalTransactionId\x88\x01\x01B\x1a\n" +
+	"\x18_external_transaction_id\"7\n" +
 	"\x0eCreditResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\xa0\x02\n" +
 	"\fDebitRequest\x12\x17\n" +
@@ -13387,6 +13388,7 @@ func file_wallet_service_v1_wallet_proto_init() {
 	if File_wallet_service_v1_wallet_proto != nil {
 		return
 	}
+	file_wallet_service_v1_wallet_proto_msgTypes[4].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[8].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[21].OneofWrappers = []any{}
 	file_wallet_service_v1_wallet_proto_msgTypes[25].OneofWrappers = []any{}

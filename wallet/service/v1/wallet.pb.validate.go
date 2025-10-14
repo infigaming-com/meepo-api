@@ -533,7 +533,9 @@ func (m *CreditRequest) validate(all bool) error {
 
 	// no validation rules for Comment
 
-	// no validation rules for ExternalTransactionId
+	if m.ExternalTransactionId != nil {
+		// no validation rules for ExternalTransactionId
+	}
 
 	if len(errors) > 0 {
 		return CreditRequestMultiError(errors)

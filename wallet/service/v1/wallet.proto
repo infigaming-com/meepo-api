@@ -272,7 +272,7 @@ message CreditRequest {
 	string operator_bonus_turnover_threshold = 7;  // 紅利流水要求 (倍數)
 	string operator_bonus_withdraw_limit = 8;      // 紅利提現限制金額
 	string comment = 9;                            // 操作備註
-	int64 external_transaction_id = 10;            // 對應外部交易ID
+	optional int64 external_transaction_id = 10;            // 對應外部交易ID
 }
 
 message CreditResponse {
