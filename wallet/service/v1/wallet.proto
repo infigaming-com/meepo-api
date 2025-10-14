@@ -276,7 +276,7 @@ message CreditRequest {
 }
 
 message CreditResponse {
-	int64 user_transaction_id = 1;
+	int64 transaction_id = 1;
 }
 
 message DebitRequest {

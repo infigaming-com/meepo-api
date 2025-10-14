@@ -359,10 +359,10 @@ func (x *CreditRequest) GetExternalTransactionId() int64 {
 }
 
 type CreditResponse struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	UserTransactionId int64                  `protobuf:"varint,1,opt,name=user_transaction_id,json=userTransactionId,proto3" json:"user_transaction_id,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreditResponse) Reset() {
@@ -395,9 +395,9 @@ func (*CreditResponse) Descriptor() ([]byte, []int) {
 	return file_wallet_service_v1_wallet_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *CreditResponse) GetUserTransactionId() int64 {
+func (x *CreditResponse) GetTransactionId() int64 {
 	if x != nil {
-		return x.UserTransactionId
+		return x.TransactionId
 	}
 	return 0
 }
@@ -11744,9 +11744,9 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1doperator_bonus_withdraw_limit\x18\b \x01(\tR\x1aoperatorBonusWithdrawLimit\x12\x18\n" +
 	"\acomment\x18\t \x01(\tR\acomment\x126\n" +
 	"\x17external_transaction_id\x18\n" +
-	" \x01(\x03R\x15externalTransactionId\"@\n" +
-	"\x0eCreditResponse\x12.\n" +
-	"\x13user_transaction_id\x18\x01 \x01(\x03R\x11userTransactionId\"\xa0\x02\n" +
+	" \x01(\x03R\x15externalTransactionId\"7\n" +
+	"\x0eCreditResponse\x12%\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\xa0\x02\n" +
 	"\fDebitRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12-\n" +
