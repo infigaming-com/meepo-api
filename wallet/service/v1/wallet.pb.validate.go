@@ -519,13 +519,58 @@ func (m *CreditRequest) validate(all bool) error {
 
 	// no validation rules for Currency
 
-	// no validation rules for ReportingCurrency
-
 	// no validation rules for TransactionType
 
-	// no validation rules for TransactionId
+	// no validation rules for ExternalTransactionId
 
-	// no validation rules for Cash
+	// no validation rules for CashAmount
+
+	// no validation rules for OperatorBonus
+
+	// no validation rules for ProviderBonus
+
+	// no validation rules for CashTurnoverThreshold
+
+	// no validation rules for OperatorBonusTurnoverThreshold
+
+	// no validation rules for ProviderBonusTurnoverThreshold
+
+	// no validation rules for CashWithdrawLimit
+
+	// no validation rules for OperatorBonusWithdrawLimit
+
+	// no validation rules for ProviderBonusWithdrawLimit
+
+	if all {
+		switch v := interface{}(m.GetCashToOperatorBonusRatio()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreditRequestValidationError{
+					field:  "CashToOperatorBonusRatio",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreditRequestValidationError{
+					field:  "CashToOperatorBonusRatio",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCashToOperatorBonusRatio()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreditRequestValidationError{
+				field:  "CashToOperatorBonusRatio",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for CreatedAt
 
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
@@ -550,6 +595,41 @@ func (m *CreditRequest) validate(all bool) error {
 		if err := v.Validate(); err != nil {
 			return CreditRequestValidationError{
 				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for OperatorReportingCurrency
+
+	// no validation rules for OperatorTransactionType
+
+	// no validation rules for OperatorCreditFlag
+
+	if all {
+		switch v := interface{}(m.GetChannelOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreditRequestValidationError{
+					field:  "ChannelOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreditRequestValidationError{
+					field:  "ChannelOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetChannelOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreditRequestValidationError{
+				field:  "ChannelOperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -656,7 +736,9 @@ func (m *CreditResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for TransactionId
+	// no validation rules for UserTransactionId
+
+	// no validation rules for OperatorTransactionId
 
 	if len(errors) > 0 {
 		return CreditResponseMultiError(errors)
