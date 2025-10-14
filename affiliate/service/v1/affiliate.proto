@@ -3,6 +3,7 @@ syntax = "proto3";
 package api.affiliate.service.v1;
 
 import "affiliate/service/v1/commission_plan.proto";
+import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/affiliate/service/v1;v1";
 option java_multiple_files = true;
@@ -18,4 +19,123 @@ service Affiliate {
     rpc ListCommissionPlans(ListCommissionPlansRequest) returns (ListCommissionPlansResponse) {}
 
     rpc DeleteCommissionPlan(DeleteCommissionPlanRequest) returns (DeleteCommissionPlanResponse) {}
+
+    rpc ListAllCommissionPlans(ListAllCommissionPlansRequest) returns (ListAllCommissionPlansResponse) {}
+
+    rpc CreateAffiliate(CreateAffiliateRequest) returns (CreateAffiliateResponse) {}
+
+    rpc UpdateAffiliate(UpdateAffiliateRequest) returns (UpdateAffiliateResponse) {}
+
+    rpc GetAffiliate(GetAffiliateRequest) returns (GetAffiliateResponse) {}
+
+    rpc ListAffiliates(ListAffiliatesRequest) returns (ListAffiliatesResponse) {}
+    
+    rpc DeleteAffiliate(DeleteAffiliateRequest) returns (DeleteAffiliateResponse) {}
+}
+
+message ContactType {
+    string label = 1;
+    string contact_value = 2;
+}
+
+message AffiliateInfo {
+    string company_name = 1;
+    string status = 2;
+    repeated int64 commission_plan_ids = 3;
+    string invoice_period = 4;
+    string photo_url = 5;
+    string email = 6;
+    string password = 7;
+    bool two_fa_enabled = 8;
+    string firstname = 9;
+    string lastname = 10;
+    string phone = 11;
+    repeated ContactType contact_types = 12;
+    string country = 13; // country code
+    string region = 14;
+    string city = 15;
+    string post_code = 16;
+    string street = 17;
+    repeated int64 traffic_source_ids = 18; // not implemented
+    repeated int64 teammate_ids = 19; // not implemented
+    string internal_info = 20;
+}
+
+message CreateAffiliateRequest {
+    AffiliateInfo affiliate = 1;
+    api.common.OperatorContext target_operator_context = 2;
+    api.common.OperatorContext initiator_operator_context = 3;
+    int64 initiator_user_id = 4;
+}
+
+message CreateAffiliateResponse {
+}
+
+message UpdateAffiliateRequest {
+    AffiliateInfo affiliate = 1;
+    int64 affiliate_id = 2;
+    api.common.OperatorContext initiator_operator_context = 3;
+    int64 initiator_user_id = 4;
+}
+
+message UpdateAffiliateResponse {
+}
+
+message GetAffiliateRequest {
+    int64 affiliate_id = 1;
+    api.common.OperatorContext initiator_operator_context = 2;
+}
+
+message GetAffiliateResponse {
+    AffiliateInfo affiliate = 1;
+    int64 affiliate_id = 2;
+}
+
+message ListAffiliatesRequest {
+    repeated string countries = 1;
+    repeated string traffic_source_ids = 2; // not implemented
+    repeated string teammate_ids = 3; // not implemented
+    string status = 4; // pending, active, inactive
+    optional int32 page = 5;
+    optional int32 page_size = 6;
+    api.common.OperatorContext target_operator_context = 7;
+    api.common.OperatorContext initiator_operator_context = 8;
+}
+
+message ListAffiliatesResponse {
+    message Affiliate {
+        int64 affiliate_id = 1;
+        string photo_url = 2;
+        string company_name = 3;
+        string first_name = 4;
+        string last_name = 5;
+        string retailer_operator_name = 6;
+        string company_operator_name = 7;
+        string operator_name = 8;
+        repeated string traffic_source_names = 9; // not implemented
+        string status = 10;
+        repeated string commission_plan_names = 11;
+        repeated string teammate_names = 12; // not implemented
+        string last_login_ip = 13;
+        string balance_usd = 14;
+        string balance_reporting_currency = 15;
+        string commisions_usd = 16;
+        string commisions_reporting_currency = 17;
+    }
+    repeated Affiliate affiliates = 1;
+    int32 total = 2;
+    int32 active_count = 3;
+    int32 inactive_count = 4;
+    int32 pending_count = 5;
+    int32 page = 6;
+    int32 page_size = 7;
+}
+
+message DeleteAffiliateRequest {
+    int64 affiliate_id = 1;
+    api.common.OperatorContext initiator_operator_context = 2;
+    int64 initiator_user_id = 3;
+}
+
+message DeleteAffiliateResponse {
 }

@@ -311,6 +311,7 @@ message ListBottomOperatorsResponse {
 		string company_operator_name = 4;
 		string mode = 5;
 		string status = 6;
+		string subdomain = 7;
 	}
 	repeated OperatorInfo operators = 1;
 }
@@ -363,13 +364,12 @@ message DeleteOperatorBackofficeByoSubdomainResponse {
 }
 
 message GetOperatorAccountSettingsRequest {
+	api.common.OperatorContext target_operator_context = 1;
 }
 
 message UpdateOperatorAccountSettingsRequest {
+	api.common.OperatorContext target_operator_context = 1;
 	user.service.v1.OperatorAccountSettings account_settings = 2;
-}
-
-message UpdateOperatorAccountSettingsResponse {
 }
 
 message AddRegisterLoginBlacklistRequest {

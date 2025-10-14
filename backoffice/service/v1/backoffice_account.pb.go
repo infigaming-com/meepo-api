@@ -1371,6 +1371,7 @@ type AccountInfoResponse struct {
 	ReportingCurrency   *v1.Currency            `protobuf:"bytes,9,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
 	Subdomain           string                  `protobuf:"bytes,10,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
 	BackofficeSubdomain string                  `protobuf:"bytes,11,opt,name=backoffice_subdomain,json=backofficeSubdomain,proto3" json:"backoffice_subdomain,omitempty"`
+	OperatorMode        string                  `protobuf:"bytes,12,opt,name=operator_mode,json=operatorMode,proto3" json:"operator_mode,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -1478,6 +1479,13 @@ func (x *AccountInfoResponse) GetSubdomain() string {
 func (x *AccountInfoResponse) GetBackofficeSubdomain() string {
 	if x != nil {
 		return x.BackofficeSubdomain
+	}
+	return ""
+}
+
+func (x *AccountInfoResponse) GetOperatorMode() string {
+	if x != nil {
+		return x.OperatorMode
 	}
 	return ""
 }
@@ -2570,7 +2578,7 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"#SendRegisterVerificationCodeRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\"&\n" +
 	"$SendRegisterVerificationCodeResponse\"\x14\n" +
-	"\x12AccountInfoRequest\"\xe7\x03\n" +
+	"\x12AccountInfoRequest\"\x8c\x04\n" +
 	"\x13AccountInfoResponse\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x16\n" +
@@ -2583,7 +2591,8 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\x12reporting_currency\x18\t \x01(\v2\x1f.api.wallet.service.v1.CurrencyR\x11reportingCurrency\x12\x1c\n" +
 	"\tsubdomain\x18\n" +
 	" \x01(\tR\tsubdomain\x121\n" +
-	"\x14backoffice_subdomain\x18\v \x01(\tR\x13backofficeSubdomain\"|\n" +
+	"\x14backoffice_subdomain\x18\v \x01(\tR\x13backofficeSubdomain\x12#\n" +
+	"\roperator_mode\x18\f \x01(\tR\foperatorMode\"|\n" +
 	"\x04Role\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x17\n" +
 	"\arole_id\x18\x02 \x01(\x03R\x06roleId\x12G\n" +

@@ -6,7 +6,7 @@ metadata:
 spec:
   parentRefs:
   - name: meepo-gateway
-    namespace: meepo
+    namespace: meepo-gateway
   hostnames:
   - "apiport.xyz"
   rules:
@@ -16,6 +16,22 @@ spec:
         value: "/v1/user"
     backendRefs:
     - name: user-svc
+      port: 8000
+      weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/v1/operator"
+    backendRefs:
+    - name: operator-svc
+      port: 8000
+      weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/v1/system"
+    backendRefs:
+    - name: system-svc
       port: 8000
       weight: 1
   - matches:
@@ -61,8 +77,37 @@ spec:
   - matches:
     - path:
         type: PathPrefix
+        value: "/v1/bcpay"
+    backendRefs:
+    - name: bcpay-svc
+      port: 8000
+      weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
         value: "/v1/review"
     backendRefs:
     - name: review-svc
       port: 8000
+      weight: 1
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: paapi-xyz-routes
+  namespace: alchemist
+spec:
+  parentRefs:
+  - name: meepo-gateway
+    namespace: meepo-gateway
+  hostnames:
+  - "paapi.xyz"
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/"
+    backendRefs:
+    - name: alchemist-service
+      port: 8080
       weight: 1

@@ -21,6 +21,22 @@ spec:
   - matches:
     - path:
         type: PathPrefix
+        value: "/v1/operator"
+    backendRefs:
+    - name: operator-svc
+      port: 8000
+      weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/v1/system"
+    backendRefs:
+    - name: system-svc
+      port: 8000
+      weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
         value: "/v1/game"
     backendRefs:
     - name: game-svc
@@ -56,6 +72,14 @@ spec:
         value: "/ws"
     backendRefs:
     - name: websocket-svc
+      port: 8000
+      weight: 1
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "/v1/bcpay"
+    backendRefs:
+    - name: bcpay-svc
       port: 8000
       weight: 1
   - matches:

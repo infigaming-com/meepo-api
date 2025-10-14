@@ -83,6 +83,17 @@ message DeleteCommissionPlanRequest {
 
 message DeleteCommissionPlanResponse {}
 
+message ListAllCommissionPlansRequest {
+    api.common.OperatorContext target_operator_context = 1;
+    repeated string countries = 2; // not supported yet
+    optional string status = 3;
+    api.common.OperatorContext initiator_operator_context = 4;
+}
+
+message ListAllCommissionPlansResponse {
+    repeated CommissionPlan commission_plans = 1;
+}
+
 message CommissionPlanConfig {
     CPAConfig cpa = 1;
     RevShareConfig revshare = 2;
@@ -146,7 +157,7 @@ message Qualification {
     optional string min_bets_amount = 5;
     optional int32 time_limit_after_registration_days = 6;
     optional int32 time_limit_after_ftd_days = 7;
-    repeated string allowed_player_statuses = 8; // not available yet
+    optional string allowed_player_statuses = 8; // not available yet
 }
 
 message AdvancedOptions {

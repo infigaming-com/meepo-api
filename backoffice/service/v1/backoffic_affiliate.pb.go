@@ -8,6 +8,7 @@ package v1
 
 import (
 	v1 "github.com/infigaming-com/meepo-api/affiliate/service/v1"
+	common "github.com/infigaming-com/meepo-api/common"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -331,11 +332,355 @@ func (x *DeleteCommissionPlanRequest) GetAlternativeCommissionPlanId() int64 {
 	return 0
 }
 
+type CreateAffiliateRequest struct {
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	Affiliate             *v1.AffiliateInfo       `protobuf:"bytes,1,opt,name=affiliate,proto3" json:"affiliate,omitempty"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *CreateAffiliateRequest) Reset() {
+	*x = CreateAffiliateRequest{}
+	mi := &file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateAffiliateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateAffiliateRequest) ProtoMessage() {}
+
+func (x *CreateAffiliateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateAffiliateRequest.ProtoReflect.Descriptor instead.
+func (*CreateAffiliateRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffic_affiliate_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *CreateAffiliateRequest) GetAffiliate() *v1.AffiliateInfo {
+	if x != nil {
+		return x.Affiliate
+	}
+	return nil
+}
+
+func (x *CreateAffiliateRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+type UpdateAffiliateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Affiliate     *v1.AffiliateInfo      `protobuf:"bytes,1,opt,name=affiliate,proto3" json:"affiliate,omitempty"`
+	AffiliateId   int64                  `protobuf:"varint,2,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateAffiliateRequest) Reset() {
+	*x = UpdateAffiliateRequest{}
+	mi := &file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateAffiliateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAffiliateRequest) ProtoMessage() {}
+
+func (x *UpdateAffiliateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAffiliateRequest.ProtoReflect.Descriptor instead.
+func (*UpdateAffiliateRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffic_affiliate_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *UpdateAffiliateRequest) GetAffiliate() *v1.AffiliateInfo {
+	if x != nil {
+		return x.Affiliate
+	}
+	return nil
+}
+
+func (x *UpdateAffiliateRequest) GetAffiliateId() int64 {
+	if x != nil {
+		return x.AffiliateId
+	}
+	return 0
+}
+
+type GetAffiliateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AffiliateId   int64                  `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAffiliateRequest) Reset() {
+	*x = GetAffiliateRequest{}
+	mi := &file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAffiliateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAffiliateRequest) ProtoMessage() {}
+
+func (x *GetAffiliateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAffiliateRequest.ProtoReflect.Descriptor instead.
+func (*GetAffiliateRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffic_affiliate_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GetAffiliateRequest) GetAffiliateId() int64 {
+	if x != nil {
+		return x.AffiliateId
+	}
+	return 0
+}
+
+type ListAffiliatesRequest struct {
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	Countries             []string                `protobuf:"bytes,1,rep,name=countries,proto3" json:"countries,omitempty"`
+	TrafficSourceIds      []string                `protobuf:"bytes,2,rep,name=traffic_source_ids,json=trafficSourceIds,proto3" json:"traffic_source_ids,omitempty"` // not implemented
+	TeammateIds           []string                `protobuf:"bytes,3,rep,name=teammate_ids,json=teammateIds,proto3" json:"teammate_ids,omitempty"`                  // not implemented
+	Status                string                  `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`                                               // pending, active, inactive
+	Page                  *int32                  `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize              *int32                  `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,7,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *ListAffiliatesRequest) Reset() {
+	*x = ListAffiliatesRequest{}
+	mi := &file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAffiliatesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAffiliatesRequest) ProtoMessage() {}
+
+func (x *ListAffiliatesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAffiliatesRequest.ProtoReflect.Descriptor instead.
+func (*ListAffiliatesRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffic_affiliate_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ListAffiliatesRequest) GetCountries() []string {
+	if x != nil {
+		return x.Countries
+	}
+	return nil
+}
+
+func (x *ListAffiliatesRequest) GetTrafficSourceIds() []string {
+	if x != nil {
+		return x.TrafficSourceIds
+	}
+	return nil
+}
+
+func (x *ListAffiliatesRequest) GetTeammateIds() []string {
+	if x != nil {
+		return x.TeammateIds
+	}
+	return nil
+}
+
+func (x *ListAffiliatesRequest) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *ListAffiliatesRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListAffiliatesRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+func (x *ListAffiliatesRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+type DeleteAffiliateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AffiliateId   int64                  `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteAffiliateRequest) Reset() {
+	*x = DeleteAffiliateRequest{}
+	mi := &file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteAffiliateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteAffiliateRequest) ProtoMessage() {}
+
+func (x *DeleteAffiliateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteAffiliateRequest.ProtoReflect.Descriptor instead.
+func (*DeleteAffiliateRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffic_affiliate_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *DeleteAffiliateRequest) GetAffiliateId() int64 {
+	if x != nil {
+		return x.AffiliateId
+	}
+	return 0
+}
+
+type ListAllCommissionPlansRequest struct {
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Countries             []string                `protobuf:"bytes,2,rep,name=countries,proto3" json:"countries,omitempty"` // not supported yet
+	Status                *string                 `protobuf:"bytes,3,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *ListAllCommissionPlansRequest) Reset() {
+	*x = ListAllCommissionPlansRequest{}
+	mi := &file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAllCommissionPlansRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAllCommissionPlansRequest) ProtoMessage() {}
+
+func (x *ListAllCommissionPlansRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAllCommissionPlansRequest.ProtoReflect.Descriptor instead.
+func (*ListAllCommissionPlansRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffic_affiliate_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ListAllCommissionPlansRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
+}
+
+func (x *ListAllCommissionPlansRequest) GetCountries() []string {
+	if x != nil {
+		return x.Countries
+	}
+	return nil
+}
+
+func (x *ListAllCommissionPlansRequest) GetStatus() string {
+	if x != nil && x.Status != nil {
+		return *x.Status
+	}
+	return ""
+}
+
 var File_backoffice_service_v1_backoffic_affiliate_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"\n" +
-	"/backoffice/service/v1/backoffic_affiliate.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a*affiliate/service/v1/commission_plan.proto\"\xc1\x01\n" +
+	"/backoffice/service/v1/backoffic_affiliate.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a*affiliate/service/v1/commission_plan.proto\x1a$affiliate/service/v1/affiliate.proto\x1a\x13common/common.proto\"\xc1\x01\n" +
 	"\x1bCreateCommissionPlanRequest\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12#\n" +
@@ -363,13 +708,45 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"\x1bDeleteCommissionPlanRequest\x12,\n" +
 	"\x12commission_plan_id\x18\x01 \x01(\x03R\x10commissionPlanId\x12H\n" +
 	"\x1ealternative_commission_plan_id\x18\x02 \x01(\x03H\x00R\x1balternativeCommissionPlanId\x88\x01\x01B!\n" +
-	"\x1f_alternative_commission_plan_id2\xdd\a\n" +
+	"\x1f_alternative_commission_plan_id\"\xb4\x01\n" +
+	"\x16CreateAffiliateRequest\x12E\n" +
+	"\taffiliate\x18\x01 \x01(\v2'.api.affiliate.service.v1.AffiliateInfoR\taffiliate\x12S\n" +
+	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\x82\x01\n" +
+	"\x16UpdateAffiliateRequest\x12E\n" +
+	"\taffiliate\x18\x01 \x01(\v2'.api.affiliate.service.v1.AffiliateInfoR\taffiliate\x12!\n" +
+	"\faffiliate_id\x18\x02 \x01(\x03R\vaffiliateId\"8\n" +
+	"\x13GetAffiliateRequest\x12!\n" +
+	"\faffiliate_id\x18\x01 \x01(\x03R\vaffiliateId\"\xc5\x02\n" +
+	"\x15ListAffiliatesRequest\x12\x1c\n" +
+	"\tcountries\x18\x01 \x03(\tR\tcountries\x12,\n" +
+	"\x12traffic_source_ids\x18\x02 \x03(\tR\x10trafficSourceIds\x12!\n" +
+	"\fteammate_ids\x18\x03 \x03(\tR\vteammateIds\x12\x16\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\x12\x17\n" +
+	"\x04page\x18\x05 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x06 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x12S\n" +
+	"\x17target_operator_context\x18\a \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContextB\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\";\n" +
+	"\x16DeleteAffiliateRequest\x12!\n" +
+	"\faffiliate_id\x18\x01 \x01(\x03R\vaffiliateId\"\xba\x01\n" +
+	"\x1dListAllCommissionPlansRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1c\n" +
+	"\tcountries\x18\x02 \x03(\tR\tcountries\x12\x1b\n" +
+	"\x06status\x18\x03 \x01(\tH\x00R\x06status\x88\x01\x01B\t\n" +
+	"\a_status2\xd7\x0f\n" +
 	"\x13BackofficeAffiliate\x12\xc2\x01\n" +
 	"\x14CreateCommissionPlan\x126.api.backoffice.service.v1.CreateCommissionPlanRequest\x1a6.api.affiliate.service.v1.CreateCommissionPlanResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/backoffice/affiliate/commission/plan/create\x12\xc2\x01\n" +
 	"\x14UpdateCommissionPlan\x126.api.backoffice.service.v1.UpdateCommissionPlanRequest\x1a6.api.affiliate.service.v1.UpdateCommissionPlanResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/backoffice/affiliate/commission/plan/update\x12\xb6\x01\n" +
 	"\x11GetCommissionPlan\x123.api.backoffice.service.v1.GetCommissionPlanRequest\x1a3.api.affiliate.service.v1.GetCommissionPlanResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/affiliate/commission/plan/get\x12\xbd\x01\n" +
 	"\x13ListCommissionPlans\x125.api.backoffice.service.v1.ListCommissionPlansRequest\x1a5.api.affiliate.service.v1.ListCommissionPlansResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/affiliate/commission/plan/list\x12\xc2\x01\n" +
-	"\x14DeleteCommissionPlan\x126.api.backoffice.service.v1.DeleteCommissionPlanRequest\x1a6.api.affiliate.service.v1.DeleteCommissionPlanResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/backoffice/affiliate/commission/plan/deleteB[\n" +
+	"\x14DeleteCommissionPlan\x126.api.backoffice.service.v1.DeleteCommissionPlanRequest\x1a6.api.affiliate.service.v1.DeleteCommissionPlanResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//v1/backoffice/affiliate/commission/plan/delete\x12\xca\x01\n" +
+	"\x16ListAllCommissionPlans\x128.api.backoffice.service.v1.ListAllCommissionPlansRequest\x1a8.api.affiliate.service.v1.ListAllCommissionPlansResponse\"<\x82\xd3\xe4\x93\x026:\x01*\"1/v1/backoffice/affiliate/commission/plan/list/all\x12\xa3\x01\n" +
+	"\x0fCreateAffiliate\x121.api.backoffice.service.v1.CreateAffiliateRequest\x1a1.api.affiliate.service.v1.CreateAffiliateResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/affiliate/create\x12\xa3\x01\n" +
+	"\x0fUpdateAffiliate\x121.api.backoffice.service.v1.UpdateAffiliateRequest\x1a1.api.affiliate.service.v1.UpdateAffiliateResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/affiliate/update\x12\x97\x01\n" +
+	"\fGetAffiliate\x12..api.backoffice.service.v1.GetAffiliateRequest\x1a..api.affiliate.service.v1.GetAffiliateResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/affiliate/get\x12\x9e\x01\n" +
+	"\x0eListAffiliates\x120.api.backoffice.service.v1.ListAffiliatesRequest\x1a0.api.affiliate.service.v1.ListAffiliatesResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v1/backoffice/affiliate/list\x12\xa3\x01\n" +
+	"\x0fDeleteAffiliate\x121.api.backoffice.service.v1.DeleteAffiliateRequest\x1a1.api.affiliate.service.v1.DeleteAffiliateResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/backoffice/affiliate/deleteB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -384,38 +761,69 @@ func file_backoffice_service_v1_backoffic_affiliate_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffic_affiliate_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_backoffice_service_v1_backoffic_affiliate_proto_goTypes = []any{
-	(*CreateCommissionPlanRequest)(nil),     // 0: api.backoffice.service.v1.CreateCommissionPlanRequest
-	(*UpdateCommissionPlanRequest)(nil),     // 1: api.backoffice.service.v1.UpdateCommissionPlanRequest
-	(*GetCommissionPlanRequest)(nil),        // 2: api.backoffice.service.v1.GetCommissionPlanRequest
-	(*ListCommissionPlansRequest)(nil),      // 3: api.backoffice.service.v1.ListCommissionPlansRequest
-	(*DeleteCommissionPlanRequest)(nil),     // 4: api.backoffice.service.v1.DeleteCommissionPlanRequest
-	(*v1.CommissionPlanConfig)(nil),         // 5: api.affiliate.service.v1.CommissionPlanConfig
-	(*v1.CreateCommissionPlanResponse)(nil), // 6: api.affiliate.service.v1.CreateCommissionPlanResponse
-	(*v1.UpdateCommissionPlanResponse)(nil), // 7: api.affiliate.service.v1.UpdateCommissionPlanResponse
-	(*v1.GetCommissionPlanResponse)(nil),    // 8: api.affiliate.service.v1.GetCommissionPlanResponse
-	(*v1.ListCommissionPlansResponse)(nil),  // 9: api.affiliate.service.v1.ListCommissionPlansResponse
-	(*v1.DeleteCommissionPlanResponse)(nil), // 10: api.affiliate.service.v1.DeleteCommissionPlanResponse
+	(*CreateCommissionPlanRequest)(nil),       // 0: api.backoffice.service.v1.CreateCommissionPlanRequest
+	(*UpdateCommissionPlanRequest)(nil),       // 1: api.backoffice.service.v1.UpdateCommissionPlanRequest
+	(*GetCommissionPlanRequest)(nil),          // 2: api.backoffice.service.v1.GetCommissionPlanRequest
+	(*ListCommissionPlansRequest)(nil),        // 3: api.backoffice.service.v1.ListCommissionPlansRequest
+	(*DeleteCommissionPlanRequest)(nil),       // 4: api.backoffice.service.v1.DeleteCommissionPlanRequest
+	(*CreateAffiliateRequest)(nil),            // 5: api.backoffice.service.v1.CreateAffiliateRequest
+	(*UpdateAffiliateRequest)(nil),            // 6: api.backoffice.service.v1.UpdateAffiliateRequest
+	(*GetAffiliateRequest)(nil),               // 7: api.backoffice.service.v1.GetAffiliateRequest
+	(*ListAffiliatesRequest)(nil),             // 8: api.backoffice.service.v1.ListAffiliatesRequest
+	(*DeleteAffiliateRequest)(nil),            // 9: api.backoffice.service.v1.DeleteAffiliateRequest
+	(*ListAllCommissionPlansRequest)(nil),     // 10: api.backoffice.service.v1.ListAllCommissionPlansRequest
+	(*v1.CommissionPlanConfig)(nil),           // 11: api.affiliate.service.v1.CommissionPlanConfig
+	(*v1.AffiliateInfo)(nil),                  // 12: api.affiliate.service.v1.AffiliateInfo
+	(*common.OperatorContext)(nil),            // 13: api.common.OperatorContext
+	(*v1.CreateCommissionPlanResponse)(nil),   // 14: api.affiliate.service.v1.CreateCommissionPlanResponse
+	(*v1.UpdateCommissionPlanResponse)(nil),   // 15: api.affiliate.service.v1.UpdateCommissionPlanResponse
+	(*v1.GetCommissionPlanResponse)(nil),      // 16: api.affiliate.service.v1.GetCommissionPlanResponse
+	(*v1.ListCommissionPlansResponse)(nil),    // 17: api.affiliate.service.v1.ListCommissionPlansResponse
+	(*v1.DeleteCommissionPlanResponse)(nil),   // 18: api.affiliate.service.v1.DeleteCommissionPlanResponse
+	(*v1.ListAllCommissionPlansResponse)(nil), // 19: api.affiliate.service.v1.ListAllCommissionPlansResponse
+	(*v1.CreateAffiliateResponse)(nil),        // 20: api.affiliate.service.v1.CreateAffiliateResponse
+	(*v1.UpdateAffiliateResponse)(nil),        // 21: api.affiliate.service.v1.UpdateAffiliateResponse
+	(*v1.GetAffiliateResponse)(nil),           // 22: api.affiliate.service.v1.GetAffiliateResponse
+	(*v1.ListAffiliatesResponse)(nil),         // 23: api.affiliate.service.v1.ListAffiliatesResponse
+	(*v1.DeleteAffiliateResponse)(nil),        // 24: api.affiliate.service.v1.DeleteAffiliateResponse
 }
 var file_backoffice_service_v1_backoffic_affiliate_proto_depIdxs = []int32{
-	5,  // 0: api.backoffice.service.v1.CreateCommissionPlanRequest.plan_config:type_name -> api.affiliate.service.v1.CommissionPlanConfig
-	5,  // 1: api.backoffice.service.v1.UpdateCommissionPlanRequest.plan_config:type_name -> api.affiliate.service.v1.CommissionPlanConfig
-	0,  // 2: api.backoffice.service.v1.BackofficeAffiliate.CreateCommissionPlan:input_type -> api.backoffice.service.v1.CreateCommissionPlanRequest
-	1,  // 3: api.backoffice.service.v1.BackofficeAffiliate.UpdateCommissionPlan:input_type -> api.backoffice.service.v1.UpdateCommissionPlanRequest
-	2,  // 4: api.backoffice.service.v1.BackofficeAffiliate.GetCommissionPlan:input_type -> api.backoffice.service.v1.GetCommissionPlanRequest
-	3,  // 5: api.backoffice.service.v1.BackofficeAffiliate.ListCommissionPlans:input_type -> api.backoffice.service.v1.ListCommissionPlansRequest
-	4,  // 6: api.backoffice.service.v1.BackofficeAffiliate.DeleteCommissionPlan:input_type -> api.backoffice.service.v1.DeleteCommissionPlanRequest
-	6,  // 7: api.backoffice.service.v1.BackofficeAffiliate.CreateCommissionPlan:output_type -> api.affiliate.service.v1.CreateCommissionPlanResponse
-	7,  // 8: api.backoffice.service.v1.BackofficeAffiliate.UpdateCommissionPlan:output_type -> api.affiliate.service.v1.UpdateCommissionPlanResponse
-	8,  // 9: api.backoffice.service.v1.BackofficeAffiliate.GetCommissionPlan:output_type -> api.affiliate.service.v1.GetCommissionPlanResponse
-	9,  // 10: api.backoffice.service.v1.BackofficeAffiliate.ListCommissionPlans:output_type -> api.affiliate.service.v1.ListCommissionPlansResponse
-	10, // 11: api.backoffice.service.v1.BackofficeAffiliate.DeleteCommissionPlan:output_type -> api.affiliate.service.v1.DeleteCommissionPlanResponse
-	7,  // [7:12] is the sub-list for method output_type
-	2,  // [2:7] is the sub-list for method input_type
-	2,  // [2:2] is the sub-list for extension type_name
-	2,  // [2:2] is the sub-list for extension extendee
-	0,  // [0:2] is the sub-list for field type_name
+	11, // 0: api.backoffice.service.v1.CreateCommissionPlanRequest.plan_config:type_name -> api.affiliate.service.v1.CommissionPlanConfig
+	11, // 1: api.backoffice.service.v1.UpdateCommissionPlanRequest.plan_config:type_name -> api.affiliate.service.v1.CommissionPlanConfig
+	12, // 2: api.backoffice.service.v1.CreateAffiliateRequest.affiliate:type_name -> api.affiliate.service.v1.AffiliateInfo
+	13, // 3: api.backoffice.service.v1.CreateAffiliateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	12, // 4: api.backoffice.service.v1.UpdateAffiliateRequest.affiliate:type_name -> api.affiliate.service.v1.AffiliateInfo
+	13, // 5: api.backoffice.service.v1.ListAffiliatesRequest.target_operator_context:type_name -> api.common.OperatorContext
+	13, // 6: api.backoffice.service.v1.ListAllCommissionPlansRequest.target_operator_context:type_name -> api.common.OperatorContext
+	0,  // 7: api.backoffice.service.v1.BackofficeAffiliate.CreateCommissionPlan:input_type -> api.backoffice.service.v1.CreateCommissionPlanRequest
+	1,  // 8: api.backoffice.service.v1.BackofficeAffiliate.UpdateCommissionPlan:input_type -> api.backoffice.service.v1.UpdateCommissionPlanRequest
+	2,  // 9: api.backoffice.service.v1.BackofficeAffiliate.GetCommissionPlan:input_type -> api.backoffice.service.v1.GetCommissionPlanRequest
+	3,  // 10: api.backoffice.service.v1.BackofficeAffiliate.ListCommissionPlans:input_type -> api.backoffice.service.v1.ListCommissionPlansRequest
+	4,  // 11: api.backoffice.service.v1.BackofficeAffiliate.DeleteCommissionPlan:input_type -> api.backoffice.service.v1.DeleteCommissionPlanRequest
+	10, // 12: api.backoffice.service.v1.BackofficeAffiliate.ListAllCommissionPlans:input_type -> api.backoffice.service.v1.ListAllCommissionPlansRequest
+	5,  // 13: api.backoffice.service.v1.BackofficeAffiliate.CreateAffiliate:input_type -> api.backoffice.service.v1.CreateAffiliateRequest
+	6,  // 14: api.backoffice.service.v1.BackofficeAffiliate.UpdateAffiliate:input_type -> api.backoffice.service.v1.UpdateAffiliateRequest
+	7,  // 15: api.backoffice.service.v1.BackofficeAffiliate.GetAffiliate:input_type -> api.backoffice.service.v1.GetAffiliateRequest
+	8,  // 16: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliates:input_type -> api.backoffice.service.v1.ListAffiliatesRequest
+	9,  // 17: api.backoffice.service.v1.BackofficeAffiliate.DeleteAffiliate:input_type -> api.backoffice.service.v1.DeleteAffiliateRequest
+	14, // 18: api.backoffice.service.v1.BackofficeAffiliate.CreateCommissionPlan:output_type -> api.affiliate.service.v1.CreateCommissionPlanResponse
+	15, // 19: api.backoffice.service.v1.BackofficeAffiliate.UpdateCommissionPlan:output_type -> api.affiliate.service.v1.UpdateCommissionPlanResponse
+	16, // 20: api.backoffice.service.v1.BackofficeAffiliate.GetCommissionPlan:output_type -> api.affiliate.service.v1.GetCommissionPlanResponse
+	17, // 21: api.backoffice.service.v1.BackofficeAffiliate.ListCommissionPlans:output_type -> api.affiliate.service.v1.ListCommissionPlansResponse
+	18, // 22: api.backoffice.service.v1.BackofficeAffiliate.DeleteCommissionPlan:output_type -> api.affiliate.service.v1.DeleteCommissionPlanResponse
+	19, // 23: api.backoffice.service.v1.BackofficeAffiliate.ListAllCommissionPlans:output_type -> api.affiliate.service.v1.ListAllCommissionPlansResponse
+	20, // 24: api.backoffice.service.v1.BackofficeAffiliate.CreateAffiliate:output_type -> api.affiliate.service.v1.CreateAffiliateResponse
+	21, // 25: api.backoffice.service.v1.BackofficeAffiliate.UpdateAffiliate:output_type -> api.affiliate.service.v1.UpdateAffiliateResponse
+	22, // 26: api.backoffice.service.v1.BackofficeAffiliate.GetAffiliate:output_type -> api.affiliate.service.v1.GetAffiliateResponse
+	23, // 27: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliates:output_type -> api.affiliate.service.v1.ListAffiliatesResponse
+	24, // 28: api.backoffice.service.v1.BackofficeAffiliate.DeleteAffiliate:output_type -> api.affiliate.service.v1.DeleteAffiliateResponse
+	18, // [18:29] is the sub-list for method output_type
+	7,  // [7:18] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffic_affiliate_proto_init() }
@@ -425,13 +833,15 @@ func file_backoffice_service_v1_backoffic_affiliate_proto_init() {
 	}
 	file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[3].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[4].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[8].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffic_affiliate_proto_msgTypes[10].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc), len(file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

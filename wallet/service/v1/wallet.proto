@@ -208,6 +208,8 @@ service Wallet {
 
 	// ExportFICAThresholdTransactions create a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
 	rpc ExportFICAThresholdTransactions(ExportFICAThresholdTransactionsRequest) returns (ExportFICAThresholdTransactionsResponse) {}
+
+	rpc ListBalancesByUserIds(ListBalancesByUserIdsRequest) returns (ListBalancesByUserIdsResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -261,20 +263,16 @@ message GetUserBalanceResponse {
 //   - "payment_withdraw_rollback" - Payment withdraw transaction rollback
 
 message CreditRequest {
-	message Ratio {
-		string cash = 1;
-		string operator_bonus = 2;
-	}
-
-	int64 user_id = 1;
-	string currency = 2;
-	string reporting_currency = 3;
-	// Valid credit transaction types:
-	//   - "payment_deposit"    - Payment deposit transaction
-	string transaction_type = 4;
-	int64 transaction_id = 5;
-	string cash = 6;
-	api.common.OperatorContext operator_context = 7;
+	int64 user_id = 1;                             // 玩家ID
+	string currency = 2;                           // 幣別
+	string transaction_type = 3;                   // 交易類型
+	string cash_amount = 4;                        // 現金金額
+	string cash_turnover_threshold = 5;            // 現金流水要求 (倍數)
+	string operator_bonus_amount = 6;              // 紅利金額
+	string operator_bonus_turnover_threshold = 7;  // 紅利流水要求 (倍數)
+	string operator_bonus_withdraw_limit = 8;      // 紅利提現限制金額
+	string comment = 9;                            // 操作備註
+	optional int64 external_transaction_id = 10;            // 對應外部交易ID
 }
 
 message CreditResponse {
@@ -1467,3 +1465,32 @@ message ExportFICAThresholdTransactionsResponse {
 	int64 task_id = 1;
 }
 
+message ListBalancesByUserIdsRequest {
+	repeated int64 user_ids = 1;
+	api.common.OperatorContext operator_context = 2;
+}
+
+message ListBalancesByUserIdsResponse {
+	message Balance {
+		string currency = 1;
+		string cash = 2;
+		string operator_bonus = 3;
+		string provider_bonus = 4;
+	}
+	message UserBalanceDetail {
+		repeated Balance balances = 1;
+		string total_balance = 2;
+		string total_balance_usd = 3;
+		string total_balance_reporting_currency = 4;
+		string total_cash = 5;
+		string total_cash_usd = 6;
+		string total_cash_reporting_currency = 7;
+		string total_operator_bonus = 8;
+		string total_operator_bonus_usd = 9;
+		string total_operator_bonus_reporting_currency = 10;
+		string total_provider_bonus = 11;
+		string total_provider_bonus_usd = 12;
+		string total_provider_bonus_reporting_currency = 13;
+	}
+	map<int64, UserBalanceDetail> user_balance_details = 1;
+}

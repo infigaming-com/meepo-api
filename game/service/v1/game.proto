@@ -172,6 +172,13 @@ service Game {
 
 	rpc CreateTaxReport(CreateTaxReportRequest) returns (CreateTaxReportResponse) {
 	}
+
+	rpc AddGameBetDisplayConfig(AddGameBetDisplayConfigRequest) returns (AddGameBetDisplayConfigResponse) { }
+
+	rpc UpdateGameBetDisplayConfig(UpdateGameBetDisplayConfigRequest) returns (UpdateGameBetDisplayConfigResponse) { }
+
+	rpc ListGameBetDisplayConfig(ListGameBetDisplayConfigRequest) returns (ListGameBetDisplayConfigResponse) { }
+
 }
 
 message CreateOperatorRequest {
@@ -1516,3 +1523,43 @@ message CreateTaxReportRequest {
 
 message CreateTaxReportResponse {
 }
+
+message BettingConfig {
+	repeated string bet_type = 1;
+	float mini_rate = 2;
+	repeated string currencies = 3;
+}
+
+message AddGameBetDisplayConfigRequest {
+	string country = 1;
+	BettingConfig all_bet = 2;
+	BettingConfig high_wins = 3;
+	api.common.OperatorContext operator_context = 4;
+}
+
+message AddGameBetDisplayConfigResponse {
+}
+
+message UpdateGameBetDisplayConfigRequest {
+	string country = 1;
+	optional BettingConfig all_bet = 2;
+	optional BettingConfig high_wins = 3;
+	api.common.OperatorContext operator_context = 4;
+}
+
+message UpdateGameBetDisplayConfigResponse {
+}
+
+message ListGameBetDisplayConfigRequest {
+	message Item {
+		string country = 1;
+		BettingConfig all_bet = 2;
+		BettingConfig high_wins = 3;
+	}
+	repeated Item list = 1;
+	api.common.OperatorContext operator_context = 2;
+}
+
+message ListGameBetDisplayConfigResponse {
+}
+

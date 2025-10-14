@@ -496,6 +496,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.ListCommissionPlansResponse'
+    /v1/backoffice/affiliate/commission/plan/list/all:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_ListAllCommissionPlans
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAllCommissionPlansRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListAllCommissionPlansResponse'
     /v1/backoffice/affiliate/commission/plan/update:
         post:
             tags:
@@ -514,6 +532,96 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.UpdateCommissionPlanResponse'
+    /v1/backoffice/affiliate/create:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_CreateAffiliate
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateAffiliateRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.CreateAffiliateResponse'
+    /v1/backoffice/affiliate/delete:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_DeleteAffiliate
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteAffiliateRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.DeleteAffiliateResponse'
+    /v1/backoffice/affiliate/get:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_GetAffiliate
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetAffiliateRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.GetAffiliateResponse'
+    /v1/backoffice/affiliate/list:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_ListAffiliates
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAffiliatesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListAffiliatesResponse'
+    /v1/backoffice/affiliate/update:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_UpdateAffiliate
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateAffiliateRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.UpdateAffiliateResponse'
     /v1/backoffice/audit/actions/list:
         post:
             tags:
@@ -893,6 +1001,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.ListOperatorDomainsResponse'
+    /v1/backoffice/filestore/affiliate/registration-photo/upload:
+        post:
+            tags:
+                - BackofficeFileStore
+            description: Affiliate File Store
+            operationId: BackofficeFileStore_UploadAffiliateRegistrationPhoto
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UploadAffiliateRegistrationPhotoRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.backoffice.service.v1.UploadAffiliateRegistrationPhotoResponse'
     /v1/backoffice/filestore/operator-static-files/upload:
         post:
             tags:
@@ -5106,6 +5233,57 @@ components:
                 holdPeriodDays:
                     type: integer
                     format: int32
+        api.affiliate.service.v1.AffiliateInfo:
+            type: object
+            properties:
+                companyName:
+                    type: string
+                status:
+                    type: string
+                commissionPlanIds:
+                    type: array
+                    items:
+                        type: string
+                invoicePeriod:
+                    type: string
+                photoUrl:
+                    type: string
+                email:
+                    type: string
+                password:
+                    type: string
+                twoFaEnabled:
+                    type: boolean
+                firstname:
+                    type: string
+                lastname:
+                    type: string
+                phone:
+                    type: string
+                contactTypes:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.ContactType'
+                country:
+                    type: string
+                region:
+                    type: string
+                city:
+                    type: string
+                postCode:
+                    type: string
+                street:
+                    type: string
+                trafficSourceIds:
+                    type: array
+                    items:
+                        type: string
+                teammateIds:
+                    type: array
+                    items:
+                        type: string
+                internalInfo:
+                    type: string
         api.affiliate.service.v1.CPAConfig:
             type: object
             properties:
@@ -5190,6 +5368,13 @@ components:
                     $ref: '#/components/schemas/api.affiliate.service.v1.CPCConfig'
                 flatFee:
                     $ref: '#/components/schemas/api.affiliate.service.v1.FlatFeeConfig'
+        api.affiliate.service.v1.ContactType:
+            type: object
+            properties:
+                label:
+                    type: string
+                contactValue:
+                    type: string
         api.affiliate.service.v1.CountryCommissionGroup:
             type: object
             properties:
@@ -5230,7 +5415,13 @@ components:
                         type: string
                 rate:
                     type: string
+        api.affiliate.service.v1.CreateAffiliateResponse:
+            type: object
+            properties: {}
         api.affiliate.service.v1.CreateCommissionPlanResponse:
+            type: object
+            properties: {}
+        api.affiliate.service.v1.DeleteAffiliateResponse:
             type: object
             properties: {}
         api.affiliate.service.v1.DeleteCommissionPlanResponse:
@@ -5276,6 +5467,13 @@ components:
             properties:
                 rate:
                     type: string
+        api.affiliate.service.v1.GetAffiliateResponse:
+            type: object
+            properties:
+                affiliate:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateInfo'
+                affiliateId:
+                    type: string
         api.affiliate.service.v1.GetCommissionPlanResponse:
             type: object
             properties:
@@ -5291,6 +5489,81 @@ components:
                     type: string
                 planConfig:
                     $ref: '#/components/schemas/api.affiliate.service.v1.CommissionPlanConfig'
+        api.affiliate.service.v1.ListAffiliatesResponse:
+            type: object
+            properties:
+                affiliates:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.ListAffiliatesResponse_Affiliate'
+                total:
+                    type: integer
+                    format: int32
+                activeCount:
+                    type: integer
+                    format: int32
+                inactiveCount:
+                    type: integer
+                    format: int32
+                pendingCount:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.affiliate.service.v1.ListAffiliatesResponse_Affiliate:
+            type: object
+            properties:
+                affiliateId:
+                    type: string
+                photoUrl:
+                    type: string
+                companyName:
+                    type: string
+                firstName:
+                    type: string
+                lastName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                operatorName:
+                    type: string
+                trafficSourceNames:
+                    type: array
+                    items:
+                        type: string
+                status:
+                    type: string
+                commissionPlanNames:
+                    type: array
+                    items:
+                        type: string
+                teammateNames:
+                    type: array
+                    items:
+                        type: string
+                lastLoginIp:
+                    type: string
+                balanceUsd:
+                    type: string
+                balanceReportingCurrency:
+                    type: string
+                commisionsUsd:
+                    type: string
+                commisionsReportingCurrency:
+                    type: string
+        api.affiliate.service.v1.ListAllCommissionPlansResponse:
+            type: object
+            properties:
+                commissionPlans:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.CommissionPlan'
         api.affiliate.service.v1.ListCommissionPlansResponse:
             type: object
             properties:
@@ -5388,9 +5661,7 @@ components:
                     type: integer
                     format: int32
                 allowedPlayerStatuses:
-                    type: array
-                    items:
-                        type: string
+                    type: string
         api.affiliate.service.v1.RateRange:
             type: object
             properties:
@@ -5421,6 +5692,9 @@ components:
                     $ref: '#/components/schemas/api.affiliate.service.v1.ProgressiveByCountriesRateCommission'
                 qualification:
                     $ref: '#/components/schemas/api.affiliate.service.v1.Qualification'
+        api.affiliate.service.v1.UpdateAffiliateResponse:
+            type: object
+            properties: {}
         api.affiliate.service.v1.UpdateCommissionPlanResponse:
             type: object
             properties: {}
@@ -5451,6 +5725,8 @@ components:
                 subdomain:
                     type: string
                 backofficeSubdomain:
+                    type: string
+                operatorMode:
                     type: string
         api.backoffice.service.v1.ActiveUsersData_Data:
             type: object
@@ -5803,6 +6079,13 @@ components:
         api.backoffice.service.v1.CreateAdjustmentConfigResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.CreateAffiliateRequest:
+            type: object
+            properties:
+                affiliate:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateInfo'
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.CreateCommissionPlanRequest:
             type: object
             properties:
@@ -6097,6 +6380,11 @@ components:
         api.backoffice.service.v1.DeleteAdjustmentConfigResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.DeleteAffiliateRequest:
+            type: object
+            properties:
+                affiliateId:
+                    type: string
         api.backoffice.service.v1.DeleteCommissionPlanRequest:
             type: object
             properties:
@@ -6389,6 +6677,11 @@ components:
         api.backoffice.service.v1.Generate2faResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.GetAffiliateRequest:
+            type: object
+            properties:
+                affiliateId:
+                    type: string
         api.backoffice.service.v1.GetBalanceSummaryRequest:
             type: object
             properties:
@@ -6696,7 +6989,9 @@ components:
             properties: {}
         api.backoffice.service.v1.GetOperatorAccountSettingsRequest:
             type: object
-            properties: {}
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.GetOperatorAddressRequest:
             type: object
             properties:
@@ -7825,6 +8120,42 @@ components:
                     description: Amount information
                 description:
                     type: string
+        api.backoffice.service.v1.ListAffiliatesRequest:
+            type: object
+            properties:
+                countries:
+                    type: array
+                    items:
+                        type: string
+                trafficSourceIds:
+                    type: array
+                    items:
+                        type: string
+                teammateIds:
+                    type: array
+                    items:
+                        type: string
+                status:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.backoffice.service.v1.ListAllCommissionPlansRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                countries:
+                    type: array
+                    items:
+                        type: string
+                status:
+                    type: string
         api.backoffice.service.v1.ListAllOperatorsRequest:
             type: object
             properties:
@@ -8205,6 +8536,8 @@ components:
                 mode:
                     type: string
                 status:
+                    type: string
+                subdomain:
                     type: string
             description: OperatorInfo is the simplified information of a bottom operator, used for list bottom operators
         api.backoffice.service.v1.ListCategoriesRequest:
@@ -11230,6 +11563,13 @@ components:
         api.backoffice.service.v1.UpdateAdjustmentConfigResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.UpdateAffiliateRequest:
+            type: object
+            properties:
+                affiliate:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateInfo'
+                affiliateId:
+                    type: string
         api.backoffice.service.v1.UpdateBankAccountRequest:
             type: object
             properties:
@@ -11286,6 +11626,8 @@ components:
         api.backoffice.service.v1.UpdateOperatorAccountSettingsRequest:
             type: object
             properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 accountSettings:
                     $ref: '#/components/schemas/api.user.service.v1.OperatorAccountSettings'
         api.backoffice.service.v1.UpdateOperatorBalanceRequest:
@@ -11504,6 +11846,21 @@ components:
         api.backoffice.service.v1.UpdateWalletResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.UploadAffiliateRegistrationPhotoRequest:
+            type: object
+            properties:
+                data:
+                    type: string
+                    format: bytes
+                contentType:
+                    type: string
+                filePath:
+                    type: string
+        api.backoffice.service.v1.UploadAffiliateRegistrationPhotoResponse:
+            type: object
+            properties:
+                fileUrl:
+                    type: string
         api.backoffice.service.v1.UploadOperatorStaticFileRequest:
             type: object
             properties:
@@ -13614,6 +13971,8 @@ components:
             type: object
             properties:
                 operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
         api.user.service.v1.GetOperatorAccountSettingsResponse:
             type: object
