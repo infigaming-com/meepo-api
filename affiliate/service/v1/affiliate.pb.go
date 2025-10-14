@@ -273,8 +273,9 @@ func (x *AffiliateInfo) GetInternalInfo() string {
 type CreateAffiliateRequest struct {
 	state                    protoimpl.MessageState  `protogen:"open.v1"`
 	Affiliate                *AffiliateInfo          `protobuf:"bytes,1,opt,name=affiliate,proto3" json:"affiliate,omitempty"`
-	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
-	InitiatorUserId          int64                   `protobuf:"varint,3,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
+	TargetOperatorContext    *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,3,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
+	InitiatorUserId          int64                   `protobuf:"varint,4,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -312,6 +313,13 @@ func (*CreateAffiliateRequest) Descriptor() ([]byte, []int) {
 func (x *CreateAffiliateRequest) GetAffiliate() *AffiliateInfo {
 	if x != nil {
 		return x.Affiliate
+	}
+	return nil
+}
+
+func (x *CreateAffiliateRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
 	}
 	return nil
 }
@@ -1063,11 +1071,12 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x06street\x18\x11 \x01(\tR\x06street\x12,\n" +
 	"\x12traffic_source_ids\x18\x12 \x03(\x03R\x10trafficSourceIds\x12!\n" +
 	"\fteammate_ids\x18\x13 \x03(\x03R\vteammateIds\x12#\n" +
-	"\rinternal_info\x18\x14 \x01(\tR\finternalInfo\"\xe6\x01\n" +
+	"\rinternal_info\x18\x14 \x01(\tR\finternalInfo\"\xbb\x02\n" +
 	"\x16CreateAffiliateRequest\x12E\n" +
-	"\taffiliate\x18\x01 \x01(\v2'.api.affiliate.service.v1.AffiliateInfoR\taffiliate\x12Y\n" +
-	"\x1ainitiator_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12*\n" +
-	"\x11initiator_user_id\x18\x03 \x01(\x03R\x0finitiatorUserId\"\x19\n" +
+	"\taffiliate\x18\x01 \x01(\v2'.api.affiliate.service.v1.AffiliateInfoR\taffiliate\x12S\n" +
+	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12Y\n" +
+	"\x1ainitiator_operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12*\n" +
+	"\x11initiator_user_id\x18\x04 \x01(\x03R\x0finitiatorUserId\"\x19\n" +
 	"\x17CreateAffiliateResponse\"\x89\x02\n" +
 	"\x16UpdateAffiliateRequest\x12E\n" +
 	"\taffiliate\x18\x01 \x01(\v2'.api.affiliate.service.v1.AffiliateInfoR\taffiliate\x12!\n" +
@@ -1128,14 +1137,14 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\faffiliate_id\x18\x01 \x01(\x03R\vaffiliateId\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12*\n" +
 	"\x11initiator_user_id\x18\x03 \x01(\x03R\x0finitiatorUserId\"\x19\n" +
-	"\x17DeleteAffiliateResponse2\x86\n" +
-	"\n" +
+	"\x17DeleteAffiliateResponse2\x96\v\n" +
 	"\tAffiliate\x12\x87\x01\n" +
 	"\x14CreateCommissionPlan\x125.api.affiliate.service.v1.CreateCommissionPlanRequest\x1a6.api.affiliate.service.v1.CreateCommissionPlanResponse\"\x00\x12\x87\x01\n" +
 	"\x14UpdateCommissionPlan\x125.api.affiliate.service.v1.UpdateCommissionPlanRequest\x1a6.api.affiliate.service.v1.UpdateCommissionPlanResponse\"\x00\x12~\n" +
 	"\x11GetCommissionPlan\x122.api.affiliate.service.v1.GetCommissionPlanRequest\x1a3.api.affiliate.service.v1.GetCommissionPlanResponse\"\x00\x12\x84\x01\n" +
 	"\x13ListCommissionPlans\x124.api.affiliate.service.v1.ListCommissionPlansRequest\x1a5.api.affiliate.service.v1.ListCommissionPlansResponse\"\x00\x12\x87\x01\n" +
-	"\x14DeleteCommissionPlan\x125.api.affiliate.service.v1.DeleteCommissionPlanRequest\x1a6.api.affiliate.service.v1.DeleteCommissionPlanResponse\"\x00\x12x\n" +
+	"\x14DeleteCommissionPlan\x125.api.affiliate.service.v1.DeleteCommissionPlanRequest\x1a6.api.affiliate.service.v1.DeleteCommissionPlanResponse\"\x00\x12\x8d\x01\n" +
+	"\x16ListAllCommissionPlans\x127.api.affiliate.service.v1.ListAllCommissionPlansRequest\x1a8.api.affiliate.service.v1.ListAllCommissionPlansResponse\"\x00\x12x\n" +
 	"\x0fCreateAffiliate\x120.api.affiliate.service.v1.CreateAffiliateRequest\x1a1.api.affiliate.service.v1.CreateAffiliateResponse\"\x00\x12x\n" +
 	"\x0fUpdateAffiliate\x120.api.affiliate.service.v1.UpdateAffiliateRequest\x1a1.api.affiliate.service.v1.UpdateAffiliateResponse\"\x00\x12o\n" +
 	"\fGetAffiliate\x12-.api.affiliate.service.v1.GetAffiliateRequest\x1a..api.affiliate.service.v1.GetAffiliateResponse\"\x00\x12u\n" +
@@ -1176,49 +1185,54 @@ var file_affiliate_service_v1_affiliate_proto_goTypes = []any{
 	(*GetCommissionPlanRequest)(nil),         // 16: api.affiliate.service.v1.GetCommissionPlanRequest
 	(*ListCommissionPlansRequest)(nil),       // 17: api.affiliate.service.v1.ListCommissionPlansRequest
 	(*DeleteCommissionPlanRequest)(nil),      // 18: api.affiliate.service.v1.DeleteCommissionPlanRequest
-	(*CreateCommissionPlanResponse)(nil),     // 19: api.affiliate.service.v1.CreateCommissionPlanResponse
-	(*UpdateCommissionPlanResponse)(nil),     // 20: api.affiliate.service.v1.UpdateCommissionPlanResponse
-	(*GetCommissionPlanResponse)(nil),        // 21: api.affiliate.service.v1.GetCommissionPlanResponse
-	(*ListCommissionPlansResponse)(nil),      // 22: api.affiliate.service.v1.ListCommissionPlansResponse
-	(*DeleteCommissionPlanResponse)(nil),     // 23: api.affiliate.service.v1.DeleteCommissionPlanResponse
+	(*ListAllCommissionPlansRequest)(nil),    // 19: api.affiliate.service.v1.ListAllCommissionPlansRequest
+	(*CreateCommissionPlanResponse)(nil),     // 20: api.affiliate.service.v1.CreateCommissionPlanResponse
+	(*UpdateCommissionPlanResponse)(nil),     // 21: api.affiliate.service.v1.UpdateCommissionPlanResponse
+	(*GetCommissionPlanResponse)(nil),        // 22: api.affiliate.service.v1.GetCommissionPlanResponse
+	(*ListCommissionPlansResponse)(nil),      // 23: api.affiliate.service.v1.ListCommissionPlansResponse
+	(*DeleteCommissionPlanResponse)(nil),     // 24: api.affiliate.service.v1.DeleteCommissionPlanResponse
+	(*ListAllCommissionPlansResponse)(nil),   // 25: api.affiliate.service.v1.ListAllCommissionPlansResponse
 }
 var file_affiliate_service_v1_affiliate_proto_depIdxs = []int32{
 	0,  // 0: api.affiliate.service.v1.AffiliateInfo.contact_types:type_name -> api.affiliate.service.v1.ContactType
 	1,  // 1: api.affiliate.service.v1.CreateAffiliateRequest.affiliate:type_name -> api.affiliate.service.v1.AffiliateInfo
-	13, // 2: api.affiliate.service.v1.CreateAffiliateRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	1,  // 3: api.affiliate.service.v1.UpdateAffiliateRequest.affiliate:type_name -> api.affiliate.service.v1.AffiliateInfo
-	13, // 4: api.affiliate.service.v1.UpdateAffiliateRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	13, // 5: api.affiliate.service.v1.GetAffiliateRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	1,  // 6: api.affiliate.service.v1.GetAffiliateResponse.affiliate:type_name -> api.affiliate.service.v1.AffiliateInfo
-	13, // 7: api.affiliate.service.v1.ListAffiliatesRequest.target_operator_context:type_name -> api.common.OperatorContext
-	13, // 8: api.affiliate.service.v1.ListAffiliatesRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	12, // 9: api.affiliate.service.v1.ListAffiliatesResponse.affiliates:type_name -> api.affiliate.service.v1.ListAffiliatesResponse.Affiliate
-	13, // 10: api.affiliate.service.v1.DeleteAffiliateRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	14, // 11: api.affiliate.service.v1.Affiliate.CreateCommissionPlan:input_type -> api.affiliate.service.v1.CreateCommissionPlanRequest
-	15, // 12: api.affiliate.service.v1.Affiliate.UpdateCommissionPlan:input_type -> api.affiliate.service.v1.UpdateCommissionPlanRequest
-	16, // 13: api.affiliate.service.v1.Affiliate.GetCommissionPlan:input_type -> api.affiliate.service.v1.GetCommissionPlanRequest
-	17, // 14: api.affiliate.service.v1.Affiliate.ListCommissionPlans:input_type -> api.affiliate.service.v1.ListCommissionPlansRequest
-	18, // 15: api.affiliate.service.v1.Affiliate.DeleteCommissionPlan:input_type -> api.affiliate.service.v1.DeleteCommissionPlanRequest
-	2,  // 16: api.affiliate.service.v1.Affiliate.CreateAffiliate:input_type -> api.affiliate.service.v1.CreateAffiliateRequest
-	4,  // 17: api.affiliate.service.v1.Affiliate.UpdateAffiliate:input_type -> api.affiliate.service.v1.UpdateAffiliateRequest
-	6,  // 18: api.affiliate.service.v1.Affiliate.GetAffiliate:input_type -> api.affiliate.service.v1.GetAffiliateRequest
-	8,  // 19: api.affiliate.service.v1.Affiliate.ListAffiliates:input_type -> api.affiliate.service.v1.ListAffiliatesRequest
-	10, // 20: api.affiliate.service.v1.Affiliate.DeleteAffiliate:input_type -> api.affiliate.service.v1.DeleteAffiliateRequest
-	19, // 21: api.affiliate.service.v1.Affiliate.CreateCommissionPlan:output_type -> api.affiliate.service.v1.CreateCommissionPlanResponse
-	20, // 22: api.affiliate.service.v1.Affiliate.UpdateCommissionPlan:output_type -> api.affiliate.service.v1.UpdateCommissionPlanResponse
-	21, // 23: api.affiliate.service.v1.Affiliate.GetCommissionPlan:output_type -> api.affiliate.service.v1.GetCommissionPlanResponse
-	22, // 24: api.affiliate.service.v1.Affiliate.ListCommissionPlans:output_type -> api.affiliate.service.v1.ListCommissionPlansResponse
-	23, // 25: api.affiliate.service.v1.Affiliate.DeleteCommissionPlan:output_type -> api.affiliate.service.v1.DeleteCommissionPlanResponse
-	3,  // 26: api.affiliate.service.v1.Affiliate.CreateAffiliate:output_type -> api.affiliate.service.v1.CreateAffiliateResponse
-	5,  // 27: api.affiliate.service.v1.Affiliate.UpdateAffiliate:output_type -> api.affiliate.service.v1.UpdateAffiliateResponse
-	7,  // 28: api.affiliate.service.v1.Affiliate.GetAffiliate:output_type -> api.affiliate.service.v1.GetAffiliateResponse
-	9,  // 29: api.affiliate.service.v1.Affiliate.ListAffiliates:output_type -> api.affiliate.service.v1.ListAffiliatesResponse
-	11, // 30: api.affiliate.service.v1.Affiliate.DeleteAffiliate:output_type -> api.affiliate.service.v1.DeleteAffiliateResponse
-	21, // [21:31] is the sub-list for method output_type
-	11, // [11:21] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	13, // 2: api.affiliate.service.v1.CreateAffiliateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	13, // 3: api.affiliate.service.v1.CreateAffiliateRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	1,  // 4: api.affiliate.service.v1.UpdateAffiliateRequest.affiliate:type_name -> api.affiliate.service.v1.AffiliateInfo
+	13, // 5: api.affiliate.service.v1.UpdateAffiliateRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	13, // 6: api.affiliate.service.v1.GetAffiliateRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	1,  // 7: api.affiliate.service.v1.GetAffiliateResponse.affiliate:type_name -> api.affiliate.service.v1.AffiliateInfo
+	13, // 8: api.affiliate.service.v1.ListAffiliatesRequest.target_operator_context:type_name -> api.common.OperatorContext
+	13, // 9: api.affiliate.service.v1.ListAffiliatesRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	12, // 10: api.affiliate.service.v1.ListAffiliatesResponse.affiliates:type_name -> api.affiliate.service.v1.ListAffiliatesResponse.Affiliate
+	13, // 11: api.affiliate.service.v1.DeleteAffiliateRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	14, // 12: api.affiliate.service.v1.Affiliate.CreateCommissionPlan:input_type -> api.affiliate.service.v1.CreateCommissionPlanRequest
+	15, // 13: api.affiliate.service.v1.Affiliate.UpdateCommissionPlan:input_type -> api.affiliate.service.v1.UpdateCommissionPlanRequest
+	16, // 14: api.affiliate.service.v1.Affiliate.GetCommissionPlan:input_type -> api.affiliate.service.v1.GetCommissionPlanRequest
+	17, // 15: api.affiliate.service.v1.Affiliate.ListCommissionPlans:input_type -> api.affiliate.service.v1.ListCommissionPlansRequest
+	18, // 16: api.affiliate.service.v1.Affiliate.DeleteCommissionPlan:input_type -> api.affiliate.service.v1.DeleteCommissionPlanRequest
+	19, // 17: api.affiliate.service.v1.Affiliate.ListAllCommissionPlans:input_type -> api.affiliate.service.v1.ListAllCommissionPlansRequest
+	2,  // 18: api.affiliate.service.v1.Affiliate.CreateAffiliate:input_type -> api.affiliate.service.v1.CreateAffiliateRequest
+	4,  // 19: api.affiliate.service.v1.Affiliate.UpdateAffiliate:input_type -> api.affiliate.service.v1.UpdateAffiliateRequest
+	6,  // 20: api.affiliate.service.v1.Affiliate.GetAffiliate:input_type -> api.affiliate.service.v1.GetAffiliateRequest
+	8,  // 21: api.affiliate.service.v1.Affiliate.ListAffiliates:input_type -> api.affiliate.service.v1.ListAffiliatesRequest
+	10, // 22: api.affiliate.service.v1.Affiliate.DeleteAffiliate:input_type -> api.affiliate.service.v1.DeleteAffiliateRequest
+	20, // 23: api.affiliate.service.v1.Affiliate.CreateCommissionPlan:output_type -> api.affiliate.service.v1.CreateCommissionPlanResponse
+	21, // 24: api.affiliate.service.v1.Affiliate.UpdateCommissionPlan:output_type -> api.affiliate.service.v1.UpdateCommissionPlanResponse
+	22, // 25: api.affiliate.service.v1.Affiliate.GetCommissionPlan:output_type -> api.affiliate.service.v1.GetCommissionPlanResponse
+	23, // 26: api.affiliate.service.v1.Affiliate.ListCommissionPlans:output_type -> api.affiliate.service.v1.ListCommissionPlansResponse
+	24, // 27: api.affiliate.service.v1.Affiliate.DeleteCommissionPlan:output_type -> api.affiliate.service.v1.DeleteCommissionPlanResponse
+	25, // 28: api.affiliate.service.v1.Affiliate.ListAllCommissionPlans:output_type -> api.affiliate.service.v1.ListAllCommissionPlansResponse
+	3,  // 29: api.affiliate.service.v1.Affiliate.CreateAffiliate:output_type -> api.affiliate.service.v1.CreateAffiliateResponse
+	5,  // 30: api.affiliate.service.v1.Affiliate.UpdateAffiliate:output_type -> api.affiliate.service.v1.UpdateAffiliateResponse
+	7,  // 31: api.affiliate.service.v1.Affiliate.GetAffiliate:output_type -> api.affiliate.service.v1.GetAffiliateResponse
+	9,  // 32: api.affiliate.service.v1.Affiliate.ListAffiliates:output_type -> api.affiliate.service.v1.ListAffiliatesResponse
+	11, // 33: api.affiliate.service.v1.Affiliate.DeleteAffiliate:output_type -> api.affiliate.service.v1.DeleteAffiliateResponse
+	23, // [23:34] is the sub-list for method output_type
+	12, // [12:23] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_affiliate_service_v1_affiliate_proto_init() }

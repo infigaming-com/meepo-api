@@ -20,6 +20,8 @@ service Affiliate {
 
     rpc DeleteCommissionPlan(DeleteCommissionPlanRequest) returns (DeleteCommissionPlanResponse) {}
 
+    rpc ListAllCommissionPlans(ListAllCommissionPlansRequest) returns (ListAllCommissionPlansResponse) {}
+
     rpc CreateAffiliate(CreateAffiliateRequest) returns (CreateAffiliateResponse) {}
 
     rpc UpdateAffiliate(UpdateAffiliateRequest) returns (UpdateAffiliateResponse) {}
@@ -61,8 +63,9 @@ message AffiliateInfo {
 
 message CreateAffiliateRequest {
     AffiliateInfo affiliate = 1;
-    api.common.OperatorContext initiator_operator_context = 2;
-    int64 initiator_user_id = 3;
+    api.common.OperatorContext target_operator_context = 2;
+    api.common.OperatorContext initiator_operator_context = 3;
+    int64 initiator_user_id = 4;
 }
 
 message CreateAffiliateResponse {

@@ -19,16 +19,17 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Affiliate_CreateCommissionPlan_FullMethodName = "/api.affiliate.service.v1.Affiliate/CreateCommissionPlan"
-	Affiliate_UpdateCommissionPlan_FullMethodName = "/api.affiliate.service.v1.Affiliate/UpdateCommissionPlan"
-	Affiliate_GetCommissionPlan_FullMethodName    = "/api.affiliate.service.v1.Affiliate/GetCommissionPlan"
-	Affiliate_ListCommissionPlans_FullMethodName  = "/api.affiliate.service.v1.Affiliate/ListCommissionPlans"
-	Affiliate_DeleteCommissionPlan_FullMethodName = "/api.affiliate.service.v1.Affiliate/DeleteCommissionPlan"
-	Affiliate_CreateAffiliate_FullMethodName      = "/api.affiliate.service.v1.Affiliate/CreateAffiliate"
-	Affiliate_UpdateAffiliate_FullMethodName      = "/api.affiliate.service.v1.Affiliate/UpdateAffiliate"
-	Affiliate_GetAffiliate_FullMethodName         = "/api.affiliate.service.v1.Affiliate/GetAffiliate"
-	Affiliate_ListAffiliates_FullMethodName       = "/api.affiliate.service.v1.Affiliate/ListAffiliates"
-	Affiliate_DeleteAffiliate_FullMethodName      = "/api.affiliate.service.v1.Affiliate/DeleteAffiliate"
+	Affiliate_CreateCommissionPlan_FullMethodName   = "/api.affiliate.service.v1.Affiliate/CreateCommissionPlan"
+	Affiliate_UpdateCommissionPlan_FullMethodName   = "/api.affiliate.service.v1.Affiliate/UpdateCommissionPlan"
+	Affiliate_GetCommissionPlan_FullMethodName      = "/api.affiliate.service.v1.Affiliate/GetCommissionPlan"
+	Affiliate_ListCommissionPlans_FullMethodName    = "/api.affiliate.service.v1.Affiliate/ListCommissionPlans"
+	Affiliate_DeleteCommissionPlan_FullMethodName   = "/api.affiliate.service.v1.Affiliate/DeleteCommissionPlan"
+	Affiliate_ListAllCommissionPlans_FullMethodName = "/api.affiliate.service.v1.Affiliate/ListAllCommissionPlans"
+	Affiliate_CreateAffiliate_FullMethodName        = "/api.affiliate.service.v1.Affiliate/CreateAffiliate"
+	Affiliate_UpdateAffiliate_FullMethodName        = "/api.affiliate.service.v1.Affiliate/UpdateAffiliate"
+	Affiliate_GetAffiliate_FullMethodName           = "/api.affiliate.service.v1.Affiliate/GetAffiliate"
+	Affiliate_ListAffiliates_FullMethodName         = "/api.affiliate.service.v1.Affiliate/ListAffiliates"
+	Affiliate_DeleteAffiliate_FullMethodName        = "/api.affiliate.service.v1.Affiliate/DeleteAffiliate"
 )
 
 // AffiliateClient is the client API for Affiliate service.
@@ -40,6 +41,7 @@ type AffiliateClient interface {
 	GetCommissionPlan(ctx context.Context, in *GetCommissionPlanRequest, opts ...grpc.CallOption) (*GetCommissionPlanResponse, error)
 	ListCommissionPlans(ctx context.Context, in *ListCommissionPlansRequest, opts ...grpc.CallOption) (*ListCommissionPlansResponse, error)
 	DeleteCommissionPlan(ctx context.Context, in *DeleteCommissionPlanRequest, opts ...grpc.CallOption) (*DeleteCommissionPlanResponse, error)
+	ListAllCommissionPlans(ctx context.Context, in *ListAllCommissionPlansRequest, opts ...grpc.CallOption) (*ListAllCommissionPlansResponse, error)
 	CreateAffiliate(ctx context.Context, in *CreateAffiliateRequest, opts ...grpc.CallOption) (*CreateAffiliateResponse, error)
 	UpdateAffiliate(ctx context.Context, in *UpdateAffiliateRequest, opts ...grpc.CallOption) (*UpdateAffiliateResponse, error)
 	GetAffiliate(ctx context.Context, in *GetAffiliateRequest, opts ...grpc.CallOption) (*GetAffiliateResponse, error)
@@ -105,6 +107,16 @@ func (c *affiliateClient) DeleteCommissionPlan(ctx context.Context, in *DeleteCo
 	return out, nil
 }
 
+func (c *affiliateClient) ListAllCommissionPlans(ctx context.Context, in *ListAllCommissionPlansRequest, opts ...grpc.CallOption) (*ListAllCommissionPlansResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAllCommissionPlansResponse)
+	err := c.cc.Invoke(ctx, Affiliate_ListAllCommissionPlans_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *affiliateClient) CreateAffiliate(ctx context.Context, in *CreateAffiliateRequest, opts ...grpc.CallOption) (*CreateAffiliateResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateAffiliateResponse)
@@ -164,6 +176,7 @@ type AffiliateServer interface {
 	GetCommissionPlan(context.Context, *GetCommissionPlanRequest) (*GetCommissionPlanResponse, error)
 	ListCommissionPlans(context.Context, *ListCommissionPlansRequest) (*ListCommissionPlansResponse, error)
 	DeleteCommissionPlan(context.Context, *DeleteCommissionPlanRequest) (*DeleteCommissionPlanResponse, error)
+	ListAllCommissionPlans(context.Context, *ListAllCommissionPlansRequest) (*ListAllCommissionPlansResponse, error)
 	CreateAffiliate(context.Context, *CreateAffiliateRequest) (*CreateAffiliateResponse, error)
 	UpdateAffiliate(context.Context, *UpdateAffiliateRequest) (*UpdateAffiliateResponse, error)
 	GetAffiliate(context.Context, *GetAffiliateRequest) (*GetAffiliateResponse, error)
@@ -193,6 +206,9 @@ func (UnimplementedAffiliateServer) ListCommissionPlans(context.Context, *ListCo
 }
 func (UnimplementedAffiliateServer) DeleteCommissionPlan(context.Context, *DeleteCommissionPlanRequest) (*DeleteCommissionPlanResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteCommissionPlan not implemented")
+}
+func (UnimplementedAffiliateServer) ListAllCommissionPlans(context.Context, *ListAllCommissionPlansRequest) (*ListAllCommissionPlansResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAllCommissionPlans not implemented")
 }
 func (UnimplementedAffiliateServer) CreateAffiliate(context.Context, *CreateAffiliateRequest) (*CreateAffiliateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAffiliate not implemented")
@@ -320,6 +336,24 @@ func _Affiliate_DeleteCommissionPlan_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Affiliate_ListAllCommissionPlans_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAllCommissionPlansRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).ListAllCommissionPlans(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_ListAllCommissionPlans_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).ListAllCommissionPlans(ctx, req.(*ListAllCommissionPlansRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Affiliate_CreateAffiliate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateAffiliateRequest)
 	if err := dec(in); err != nil {
@@ -436,6 +470,10 @@ var Affiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteCommissionPlan",
 			Handler:    _Affiliate_DeleteCommissionPlan_Handler,
+		},
+		{
+			MethodName: "ListAllCommissionPlans",
+			Handler:    _Affiliate_ListAllCommissionPlans_Handler,
 		},
 		{
 			MethodName: "CreateAffiliate",
