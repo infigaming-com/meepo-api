@@ -637,8 +637,6 @@ func (m *CreditResponse) validate(all bool) error {
 
 	// no validation rules for UserTransactionId
 
-	// no validation rules for OperatorTransactionId
-
 	if len(errors) > 0 {
 		return CreditResponseMultiError(errors)
 	}

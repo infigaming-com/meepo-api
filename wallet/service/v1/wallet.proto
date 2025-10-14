@@ -265,19 +265,18 @@ message GetUserBalanceResponse {
 message CreditRequest {
 	int64 user_id = 1;                             // 玩家ID
 	string currency = 2;                           // 幣別
-	string transaction_type = 3;                   // 交易類型，例如 "payment_deposit", "admin_credit"
+	string transaction_type = 3;                   // 交易類型
 	string cash_amount = 4;                        // 現金金額
 	string cash_turnover_threshold = 5;            // 現金流水要求 (倍數)
 	string operator_bonus_amount = 6;              // 紅利金額
 	string operator_bonus_turnover_threshold = 7;  // 紅利流水要求 (倍數)
 	string operator_bonus_withdraw_limit = 8;      // 紅利提現限制金額
-	string comment = 9;                            // 操作備註（需要加字段到DB）
-	int64 external_transaction_id = 10;            // 對應外部交易ID（Davy的需求）
+	string comment = 9;                            // 操作備註
+	int64 external_transaction_id = 10;            // 對應外部交易ID
 }
 
 message CreditResponse {
 	int64 user_transaction_id = 1;
-	int64 operator_transaction_id = 2;
 }
 
 message DebitRequest {

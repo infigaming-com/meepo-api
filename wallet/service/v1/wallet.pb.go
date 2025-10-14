@@ -246,14 +246,14 @@ type CreditRequest struct {
 	state                          protoimpl.MessageState `protogen:"open.v1"`
 	UserId                         int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`                                                                            // 玩家ID
 	Currency                       string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`                                                                                       // 幣別
-	TransactionType                string                 `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`                                                  // 交易類型，例如 "payment_deposit", "admin_credit"
+	TransactionType                string                 `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`                                                  // 交易類型
 	CashAmount                     string                 `protobuf:"bytes,4,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`                                                                 // 現金金額
 	CashTurnoverThreshold          string                 `protobuf:"bytes,5,opt,name=cash_turnover_threshold,json=cashTurnoverThreshold,proto3" json:"cash_turnover_threshold,omitempty"`                              // 現金流水要求 (倍數)
 	OperatorBonusAmount            string                 `protobuf:"bytes,6,opt,name=operator_bonus_amount,json=operatorBonusAmount,proto3" json:"operator_bonus_amount,omitempty"`                                    // 紅利金額
 	OperatorBonusTurnoverThreshold string                 `protobuf:"bytes,7,opt,name=operator_bonus_turnover_threshold,json=operatorBonusTurnoverThreshold,proto3" json:"operator_bonus_turnover_threshold,omitempty"` // 紅利流水要求 (倍數)
 	OperatorBonusWithdrawLimit     string                 `protobuf:"bytes,8,opt,name=operator_bonus_withdraw_limit,json=operatorBonusWithdrawLimit,proto3" json:"operator_bonus_withdraw_limit,omitempty"`             // 紅利提現限制金額
-	Comment                        string                 `protobuf:"bytes,9,opt,name=comment,proto3" json:"comment,omitempty"`                                                                                         // 操作備註（需要加字段到DB）
-	ExternalTransactionId          int64                  `protobuf:"varint,10,opt,name=external_transaction_id,json=externalTransactionId,proto3" json:"external_transaction_id,omitempty"`                            // 對應外部交易ID（Davy的需求）
+	Comment                        string                 `protobuf:"bytes,9,opt,name=comment,proto3" json:"comment,omitempty"`                                                                                         // 操作備註
+	ExternalTransactionId          int64                  `protobuf:"varint,10,opt,name=external_transaction_id,json=externalTransactionId,proto3" json:"external_transaction_id,omitempty"`                            // 對應外部交易ID
 	unknownFields                  protoimpl.UnknownFields
 	sizeCache                      protoimpl.SizeCache
 }
@@ -359,11 +359,10 @@ func (x *CreditRequest) GetExternalTransactionId() int64 {
 }
 
 type CreditResponse struct {
-	state                 protoimpl.MessageState `protogen:"open.v1"`
-	UserTransactionId     int64                  `protobuf:"varint,1,opt,name=user_transaction_id,json=userTransactionId,proto3" json:"user_transaction_id,omitempty"`
-	OperatorTransactionId int64                  `protobuf:"varint,2,opt,name=operator_transaction_id,json=operatorTransactionId,proto3" json:"operator_transaction_id,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	UserTransactionId int64                  `protobuf:"varint,1,opt,name=user_transaction_id,json=userTransactionId,proto3" json:"user_transaction_id,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *CreditResponse) Reset() {
@@ -399,13 +398,6 @@ func (*CreditResponse) Descriptor() ([]byte, []int) {
 func (x *CreditResponse) GetUserTransactionId() int64 {
 	if x != nil {
 		return x.UserTransactionId
-	}
-	return 0
-}
-
-func (x *CreditResponse) GetOperatorTransactionId() int64 {
-	if x != nil {
-		return x.OperatorTransactionId
 	}
 	return 0
 }
@@ -11752,10 +11744,9 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1doperator_bonus_withdraw_limit\x18\b \x01(\tR\x1aoperatorBonusWithdrawLimit\x12\x18\n" +
 	"\acomment\x18\t \x01(\tR\acomment\x126\n" +
 	"\x17external_transaction_id\x18\n" +
-	" \x01(\x03R\x15externalTransactionId\"x\n" +
+	" \x01(\x03R\x15externalTransactionId\"@\n" +
 	"\x0eCreditResponse\x12.\n" +
-	"\x13user_transaction_id\x18\x01 \x01(\x03R\x11userTransactionId\x126\n" +
-	"\x17operator_transaction_id\x18\x02 \x01(\x03R\x15operatorTransactionId\"\xa0\x02\n" +
+	"\x13user_transaction_id\x18\x01 \x01(\x03R\x11userTransactionId\"\xa0\x02\n" +
 	"\fDebitRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12-\n" +
