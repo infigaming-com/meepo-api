@@ -15267,6 +15267,12 @@ components:
                     type: string
                 lastInstantUpgradeAt:
                     type: string
+                weeklySlider:
+                    type: integer
+                    format: int32
+                monthlySlider:
+                    type: integer
+                    format: int32
         api.vip.service.v1.VipSetting:
             type: object
             properties:

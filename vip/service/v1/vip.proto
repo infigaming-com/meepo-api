@@ -307,6 +307,8 @@ message VipMember {
   int64 total_xp = 9;
   int64 last_level_up_at = 10;
   int64 last_instant_upgrade_at = 11;
+  int32 weekly_slider = 12;
+  int32 monthly_slider = 13;
 }
 
 message GetUserVipLevelRequest {
