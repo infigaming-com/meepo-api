@@ -8,6 +8,7 @@ package v1
 
 import (
 	context "context"
+	v1 "github.com/infigaming-com/meepo-api/vip/service/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -93,6 +94,12 @@ const (
 	User_SetOperatorRegisterLimitConfig_FullMethodName  = "/api.user.service.v1.User/SetOperatorRegisterLimitConfig"
 	User_GetOperatorRegisterLimitConfig_FullMethodName  = "/api.user.service.v1.User/GetOperatorRegisterLimitConfig"
 	User_CloseAccount_FullMethodName                    = "/api.user.service.v1.User/CloseAccount"
+	User_GetOperatorVipSettings_FullMethodName          = "/api.user.service.v1.User/GetOperatorVipSettings"
+	User_GetUserVipLevel_FullMethodName                 = "/api.user.service.v1.User/GetUserVipLevel"
+	User_UpdateVipRewardSlider_FullMethodName           = "/api.user.service.v1.User/UpdateVipRewardSlider"
+	User_GetClaimableVipRewards_FullMethodName          = "/api.user.service.v1.User/GetClaimableVipRewards"
+	User_ClaimVipReward_FullMethodName                  = "/api.user.service.v1.User/ClaimVipReward"
+	User_ConfirmClaimVipReward_FullMethodName           = "/api.user.service.v1.User/ConfirmClaimVipReward"
 )
 
 // UserClient is the client API for User service.
@@ -225,6 +232,12 @@ type UserClient interface {
 	SetOperatorRegisterLimitConfig(ctx context.Context, in *SetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*SetOperatorRegisterLimitConfigResponse, error)
 	GetOperatorRegisterLimitConfig(ctx context.Context, in *GetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*GetOperatorRegisterLimitConfigResponse, error)
 	CloseAccount(ctx context.Context, in *CloseAccountRequest, opts ...grpc.CallOption) (*CloseAccountResponse, error)
+	GetOperatorVipSettings(ctx context.Context, in *GetOperatorVipSettingsRequest, opts ...grpc.CallOption) (*v1.GetOperatorVipSettingsResponse, error)
+	GetUserVipLevel(ctx context.Context, in *GetUserVipLevelRequest, opts ...grpc.CallOption) (*v1.GetUserVipLevelResponse, error)
+	UpdateVipRewardSlider(ctx context.Context, in *UpdateVipRewardSliderRequest, opts ...grpc.CallOption) (*v1.UpdateVipRewardSliderResponse, error)
+	GetClaimableVipRewards(ctx context.Context, in *GetClaimableVipRewardsRequest, opts ...grpc.CallOption) (*v1.GetClaimableVipRewardsResponse, error)
+	ClaimVipReward(ctx context.Context, in *ClaimVipRewardRequest, opts ...grpc.CallOption) (*v1.ClaimVipRewardResponse, error)
+	ConfirmClaimVipReward(ctx context.Context, in *ConfirmClaimVipRewardRequest, opts ...grpc.CallOption) (*v1.ConfirmClaimVipRewardResponse, error)
 }
 
 type userClient struct {
@@ -975,6 +988,66 @@ func (c *userClient) CloseAccount(ctx context.Context, in *CloseAccountRequest, 
 	return out, nil
 }
 
+func (c *userClient) GetOperatorVipSettings(ctx context.Context, in *GetOperatorVipSettingsRequest, opts ...grpc.CallOption) (*v1.GetOperatorVipSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetOperatorVipSettingsResponse)
+	err := c.cc.Invoke(ctx, User_GetOperatorVipSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetUserVipLevel(ctx context.Context, in *GetUserVipLevelRequest, opts ...grpc.CallOption) (*v1.GetUserVipLevelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetUserVipLevelResponse)
+	err := c.cc.Invoke(ctx, User_GetUserVipLevel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) UpdateVipRewardSlider(ctx context.Context, in *UpdateVipRewardSliderRequest, opts ...grpc.CallOption) (*v1.UpdateVipRewardSliderResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.UpdateVipRewardSliderResponse)
+	err := c.cc.Invoke(ctx, User_UpdateVipRewardSlider_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetClaimableVipRewards(ctx context.Context, in *GetClaimableVipRewardsRequest, opts ...grpc.CallOption) (*v1.GetClaimableVipRewardsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetClaimableVipRewardsResponse)
+	err := c.cc.Invoke(ctx, User_GetClaimableVipRewards_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) ClaimVipReward(ctx context.Context, in *ClaimVipRewardRequest, opts ...grpc.CallOption) (*v1.ClaimVipRewardResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ClaimVipRewardResponse)
+	err := c.cc.Invoke(ctx, User_ClaimVipReward_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) ConfirmClaimVipReward(ctx context.Context, in *ConfirmClaimVipRewardRequest, opts ...grpc.CallOption) (*v1.ConfirmClaimVipRewardResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ConfirmClaimVipRewardResponse)
+	err := c.cc.Invoke(ctx, User_ConfirmClaimVipReward_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -1105,6 +1178,12 @@ type UserServer interface {
 	SetOperatorRegisterLimitConfig(context.Context, *SetOperatorRegisterLimitConfigRequest) (*SetOperatorRegisterLimitConfigResponse, error)
 	GetOperatorRegisterLimitConfig(context.Context, *GetOperatorRegisterLimitConfigRequest) (*GetOperatorRegisterLimitConfigResponse, error)
 	CloseAccount(context.Context, *CloseAccountRequest) (*CloseAccountResponse, error)
+	GetOperatorVipSettings(context.Context, *GetOperatorVipSettingsRequest) (*v1.GetOperatorVipSettingsResponse, error)
+	GetUserVipLevel(context.Context, *GetUserVipLevelRequest) (*v1.GetUserVipLevelResponse, error)
+	UpdateVipRewardSlider(context.Context, *UpdateVipRewardSliderRequest) (*v1.UpdateVipRewardSliderResponse, error)
+	GetClaimableVipRewards(context.Context, *GetClaimableVipRewardsRequest) (*v1.GetClaimableVipRewardsResponse, error)
+	ClaimVipReward(context.Context, *ClaimVipRewardRequest) (*v1.ClaimVipRewardResponse, error)
+	ConfirmClaimVipReward(context.Context, *ConfirmClaimVipRewardRequest) (*v1.ConfirmClaimVipRewardResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -1336,6 +1415,24 @@ func (UnimplementedUserServer) GetOperatorRegisterLimitConfig(context.Context, *
 }
 func (UnimplementedUserServer) CloseAccount(context.Context, *CloseAccountRequest) (*CloseAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CloseAccount not implemented")
+}
+func (UnimplementedUserServer) GetOperatorVipSettings(context.Context, *GetOperatorVipSettingsRequest) (*v1.GetOperatorVipSettingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorVipSettings not implemented")
+}
+func (UnimplementedUserServer) GetUserVipLevel(context.Context, *GetUserVipLevelRequest) (*v1.GetUserVipLevelResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserVipLevel not implemented")
+}
+func (UnimplementedUserServer) UpdateVipRewardSlider(context.Context, *UpdateVipRewardSliderRequest) (*v1.UpdateVipRewardSliderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateVipRewardSlider not implemented")
+}
+func (UnimplementedUserServer) GetClaimableVipRewards(context.Context, *GetClaimableVipRewardsRequest) (*v1.GetClaimableVipRewardsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetClaimableVipRewards not implemented")
+}
+func (UnimplementedUserServer) ClaimVipReward(context.Context, *ClaimVipRewardRequest) (*v1.ClaimVipRewardResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ClaimVipReward not implemented")
+}
+func (UnimplementedUserServer) ConfirmClaimVipReward(context.Context, *ConfirmClaimVipRewardRequest) (*v1.ConfirmClaimVipRewardResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConfirmClaimVipReward not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -2690,6 +2787,114 @@ func _User_CloseAccount_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_GetOperatorVipSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorVipSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetOperatorVipSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetOperatorVipSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetOperatorVipSettings(ctx, req.(*GetOperatorVipSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetUserVipLevel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserVipLevelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetUserVipLevel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetUserVipLevel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetUserVipLevel(ctx, req.(*GetUserVipLevelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_UpdateVipRewardSlider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateVipRewardSliderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).UpdateVipRewardSlider(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_UpdateVipRewardSlider_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).UpdateVipRewardSlider(ctx, req.(*UpdateVipRewardSliderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetClaimableVipRewards_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetClaimableVipRewardsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetClaimableVipRewards(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetClaimableVipRewards_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetClaimableVipRewards(ctx, req.(*GetClaimableVipRewardsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_ClaimVipReward_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClaimVipRewardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ClaimVipReward(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ClaimVipReward_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ClaimVipReward(ctx, req.(*ClaimVipRewardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_ConfirmClaimVipReward_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfirmClaimVipRewardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ConfirmClaimVipReward(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ConfirmClaimVipReward_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ConfirmClaimVipReward(ctx, req.(*ConfirmClaimVipRewardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2992,6 +3197,30 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CloseAccount",
 			Handler:    _User_CloseAccount_Handler,
+		},
+		{
+			MethodName: "GetOperatorVipSettings",
+			Handler:    _User_GetOperatorVipSettings_Handler,
+		},
+		{
+			MethodName: "GetUserVipLevel",
+			Handler:    _User_GetUserVipLevel_Handler,
+		},
+		{
+			MethodName: "UpdateVipRewardSlider",
+			Handler:    _User_UpdateVipRewardSlider_Handler,
+		},
+		{
+			MethodName: "GetClaimableVipRewards",
+			Handler:    _User_GetClaimableVipRewards_Handler,
+		},
+		{
+			MethodName: "ClaimVipReward",
+			Handler:    _User_ClaimVipReward_Handler,
+		},
+		{
+			MethodName: "ConfirmClaimVipReward",
+			Handler:    _User_ConfirmClaimVipReward_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
