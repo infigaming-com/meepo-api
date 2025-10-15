@@ -1944,6 +1944,8 @@ type VipMember struct {
 	TotalXp              int64                  `protobuf:"varint,9,opt,name=total_xp,json=totalXp,proto3" json:"total_xp,omitempty"`
 	LastLevelUpAt        int64                  `protobuf:"varint,10,opt,name=last_level_up_at,json=lastLevelUpAt,proto3" json:"last_level_up_at,omitempty"`
 	LastInstantUpgradeAt int64                  `protobuf:"varint,11,opt,name=last_instant_upgrade_at,json=lastInstantUpgradeAt,proto3" json:"last_instant_upgrade_at,omitempty"`
+	WeeklySlider         int32                  `protobuf:"varint,12,opt,name=weekly_slider,json=weeklySlider,proto3" json:"weekly_slider,omitempty"`
+	MonthlySlider        int32                  `protobuf:"varint,13,opt,name=monthly_slider,json=monthlySlider,proto3" json:"monthly_slider,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -2051,6 +2053,20 @@ func (x *VipMember) GetLastLevelUpAt() int64 {
 func (x *VipMember) GetLastInstantUpgradeAt() int64 {
 	if x != nil {
 		return x.LastInstantUpgradeAt
+	}
+	return 0
+}
+
+func (x *VipMember) GetWeeklySlider() int32 {
+	if x != nil {
+		return x.WeeklySlider
+	}
+	return 0
+}
+
+func (x *VipMember) GetMonthlySlider() int32 {
+	if x != nil {
+		return x.MonthlySlider
 	}
 	return 0
 }
@@ -2927,7 +2943,7 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1f\n" +
 	"\vtemplate_id\x18\x02 \x01(\x03R\n" +
 	"templateId\"&\n" +
-	"$DeleteVipLevelConfigTemplateResponse\"\xa9\x03\n" +
+	"$DeleteVipLevelConfigTemplateResponse\"\xf5\x03\n" +
 	"\tVipMember\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12,\n" +
 	"\x12system_operator_id\x18\x02 \x01(\x03R\x10systemOperatorId\x120\n" +
@@ -2942,7 +2958,9 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\btotal_xp\x18\t \x01(\x03R\atotalXp\x12'\n" +
 	"\x10last_level_up_at\x18\n" +
 	" \x01(\x03R\rlastLevelUpAt\x125\n" +
-	"\x17last_instant_upgrade_at\x18\v \x01(\x03R\x14lastInstantUpgradeAt\"y\n" +
+	"\x17last_instant_upgrade_at\x18\v \x01(\x03R\x14lastInstantUpgradeAt\x12#\n" +
+	"\rweekly_slider\x18\f \x01(\x05R\fweeklySlider\x12%\n" +
+	"\x0emonthly_slider\x18\r \x01(\x05R\rmonthlySlider\"y\n" +
 	"\x16GetUserVipLevelRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\"W\n" +

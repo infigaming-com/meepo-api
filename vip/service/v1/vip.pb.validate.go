@@ -2605,6 +2605,10 @@ func (m *VipMember) validate(all bool) error {
 
 	// no validation rules for LastInstantUpgradeAt
 
+	// no validation rules for WeeklySlider
+
+	// no validation rules for MonthlySlider
+
 	if len(errors) > 0 {
 		return VipMemberMultiError(errors)
 	}
