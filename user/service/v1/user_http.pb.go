@@ -10,6 +10,7 @@ import (
 	context "context"
 	http "github.com/go-kratos/kratos/v2/transport/http"
 	binding "github.com/go-kratos/kratos/v2/transport/http/binding"
+	v1 "github.com/infigaming-com/meepo-api/vip/service/v1"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -20,13 +21,18 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 const OperationUserAddResponsibleGamblingConfig = "/api.user.service.v1.User/AddResponsibleGamblingConfig"
+const OperationUserClaimVipReward = "/api.user.service.v1.User/ClaimVipReward"
 const OperationUserCloseAccount = "/api.user.service.v1.User/CloseAccount"
+const OperationUserConfirmClaimVipReward = "/api.user.service.v1.User/ConfirmClaimVipReward"
 const OperationUserDeleteResponsibleGamblingConfig = "/api.user.service.v1.User/DeleteResponsibleGamblingConfig"
+const OperationUserGetClaimableVipRewards = "/api.user.service.v1.User/GetClaimableVipRewards"
 const OperationUserGetOperatorAccountSettings = "/api.user.service.v1.User/GetOperatorAccountSettings"
+const OperationUserGetOperatorVipSettings = "/api.user.service.v1.User/GetOperatorVipSettings"
 const OperationUserGetResponsibleGamblingConfig = "/api.user.service.v1.User/GetResponsibleGamblingConfig"
 const OperationUserGetUser = "/api.user.service.v1.User/GetUser"
 const OperationUserGetUserAccountSettingsStatus = "/api.user.service.v1.User/GetUserAccountSettingsStatus"
 const OperationUserGetUserTags = "/api.user.service.v1.User/GetUserTags"
+const OperationUserGetUserVipLevel = "/api.user.service.v1.User/GetUserVipLevel"
 const OperationUserLogin = "/api.user.service.v1.User/Login"
 const OperationUserLogout = "/api.user.service.v1.User/Logout"
 const OperationUserRefreshToken = "/api.user.service.v1.User/RefreshToken"
@@ -38,13 +44,18 @@ const OperationUserSendEmailVerificationCode = "/api.user.service.v1.User/SendEm
 const OperationUserSendPasswordResetCode = "/api.user.service.v1.User/SendPasswordResetCode"
 const OperationUserUpdateUser = "/api.user.service.v1.User/UpdateUser"
 const OperationUserUpdateUserIdentity = "/api.user.service.v1.User/UpdateUserIdentity"
+const OperationUserUpdateVipRewardSlider = "/api.user.service.v1.User/UpdateVipRewardSlider"
 const OperationUserVerifyEmail = "/api.user.service.v1.User/VerifyEmail"
 
 type UserHTTPServer interface {
 	AddResponsibleGamblingConfig(context.Context, *AddResponsibleGamblingConfigRequest) (*AddResponsibleGamblingConfigResponse, error)
+	ClaimVipReward(context.Context, *ClaimVipRewardRequest) (*v1.ClaimVipRewardResponse, error)
 	CloseAccount(context.Context, *CloseAccountRequest) (*CloseAccountResponse, error)
+	ConfirmClaimVipReward(context.Context, *ConfirmClaimVipRewardRequest) (*v1.ConfirmClaimVipRewardResponse, error)
 	DeleteResponsibleGamblingConfig(context.Context, *DeleteResponsibleGamblingConfigRequest) (*DeleteResponsibleGamblingConfigResponse, error)
+	GetClaimableVipRewards(context.Context, *GetClaimableVipRewardsRequest) (*v1.GetClaimableVipRewardsResponse, error)
 	GetOperatorAccountSettings(context.Context, *GetOperatorAccountSettingsRequest) (*GetOperatorAccountSettingsResponse, error)
+	GetOperatorVipSettings(context.Context, *GetOperatorVipSettingsRequest) (*v1.GetOperatorVipSettingsResponse, error)
 	GetResponsibleGamblingConfig(context.Context, *GetResponsibleGamblingConfigRequest) (*GetResponsibleGamblingConfigResponse, error)
 	// GetUser Get user information by userId.
 	// Returns basic user information for the specified user.
@@ -53,6 +64,7 @@ type UserHTTPServer interface {
 	// GetUserTags GetUserTags retrieves all active tags associated for the current user
 	// and also exists in the related operator's tag list.
 	GetUserTags(context.Context, *GetUserTagsRequest) (*GetUserTagsResponse, error)
+	GetUserVipLevel(context.Context, *GetUserVipLevelRequest) (*v1.GetUserVipLevelResponse, error)
 	// Login Login an existing user with password-based authentication.
 	// Users can login using their registered credentials.
 	Login(context.Context, *LoginRequest) (*AuthResponse, error)
@@ -78,6 +90,7 @@ type UserHTTPServer interface {
 	SendPasswordResetCode(context.Context, *SendPasswordResetCodeRequest) (*SendPasswordResetCodeResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 	UpdateUserIdentity(context.Context, *UpdateUserIdentityRequest) (*UpdateUserIdentityResponse, error)
+	UpdateVipRewardSlider(context.Context, *UpdateVipRewardSliderRequest) (*v1.UpdateVipRewardSliderResponse, error)
 	VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error)
 }
 
@@ -103,6 +116,12 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.POST("/v1/user/responsible-gambling/config/delete", _User_DeleteResponsibleGamblingConfig0_HTTP_Handler(srv))
 	r.POST("/v1/user/responsible-gambling/config/get", _User_GetResponsibleGamblingConfig0_HTTP_Handler(srv))
 	r.POST("/v1/user/account/update", _User_CloseAccount0_HTTP_Handler(srv))
+	r.POST("/v1/user/vip/operator/settings/get", _User_GetOperatorVipSettings0_HTTP_Handler(srv))
+	r.POST("/v1/user/vip/level/get", _User_GetUserVipLevel0_HTTP_Handler(srv))
+	r.POST("/v1/user/vip/reward/slider/update", _User_UpdateVipRewardSlider0_HTTP_Handler(srv))
+	r.POST("/v1/user/vip/reward/claimable/get", _User_GetClaimableVipRewards0_HTTP_Handler(srv))
+	r.POST("/v1/user/vip/reward/claim", _User_ClaimVipReward0_HTTP_Handler(srv))
+	r.POST("/v1/user/vip/reward/claim/confirm", _User_ConfirmClaimVipReward0_HTTP_Handler(srv))
 }
 
 func _User_Register0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
@@ -545,15 +564,152 @@ func _User_CloseAccount0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context)
 	}
 }
 
+func _User_GetOperatorVipSettings0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetOperatorVipSettingsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserGetOperatorVipSettings)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetOperatorVipSettings(ctx, req.(*GetOperatorVipSettingsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.GetOperatorVipSettingsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_GetUserVipLevel0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetUserVipLevelRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserGetUserVipLevel)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetUserVipLevel(ctx, req.(*GetUserVipLevelRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.GetUserVipLevelResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_UpdateVipRewardSlider0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateVipRewardSliderRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserUpdateVipRewardSlider)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateVipRewardSlider(ctx, req.(*UpdateVipRewardSliderRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.UpdateVipRewardSliderResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_GetClaimableVipRewards0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetClaimableVipRewardsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserGetClaimableVipRewards)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetClaimableVipRewards(ctx, req.(*GetClaimableVipRewardsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.GetClaimableVipRewardsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_ClaimVipReward0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ClaimVipRewardRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserClaimVipReward)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ClaimVipReward(ctx, req.(*ClaimVipRewardRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ClaimVipRewardResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_ConfirmClaimVipReward0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ConfirmClaimVipRewardRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserConfirmClaimVipReward)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ConfirmClaimVipReward(ctx, req.(*ConfirmClaimVipRewardRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ConfirmClaimVipRewardResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type UserHTTPClient interface {
 	AddResponsibleGamblingConfig(ctx context.Context, req *AddResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *AddResponsibleGamblingConfigResponse, err error)
+	ClaimVipReward(ctx context.Context, req *ClaimVipRewardRequest, opts ...http.CallOption) (rsp *v1.ClaimVipRewardResponse, err error)
 	CloseAccount(ctx context.Context, req *CloseAccountRequest, opts ...http.CallOption) (rsp *CloseAccountResponse, err error)
+	ConfirmClaimVipReward(ctx context.Context, req *ConfirmClaimVipRewardRequest, opts ...http.CallOption) (rsp *v1.ConfirmClaimVipRewardResponse, err error)
 	DeleteResponsibleGamblingConfig(ctx context.Context, req *DeleteResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *DeleteResponsibleGamblingConfigResponse, err error)
+	GetClaimableVipRewards(ctx context.Context, req *GetClaimableVipRewardsRequest, opts ...http.CallOption) (rsp *v1.GetClaimableVipRewardsResponse, err error)
 	GetOperatorAccountSettings(ctx context.Context, req *GetOperatorAccountSettingsRequest, opts ...http.CallOption) (rsp *GetOperatorAccountSettingsResponse, err error)
+	GetOperatorVipSettings(ctx context.Context, req *GetOperatorVipSettingsRequest, opts ...http.CallOption) (rsp *v1.GetOperatorVipSettingsResponse, err error)
 	GetResponsibleGamblingConfig(ctx context.Context, req *GetResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *GetResponsibleGamblingConfigResponse, err error)
 	GetUser(ctx context.Context, req *GetUserRequest, opts ...http.CallOption) (rsp *GetUserResponse, err error)
 	GetUserAccountSettingsStatus(ctx context.Context, req *GetUserAccountSettingsStatusRequest, opts ...http.CallOption) (rsp *GetUserAccountSettingsStatusResponse, err error)
 	GetUserTags(ctx context.Context, req *GetUserTagsRequest, opts ...http.CallOption) (rsp *GetUserTagsResponse, err error)
+	GetUserVipLevel(ctx context.Context, req *GetUserVipLevelRequest, opts ...http.CallOption) (rsp *v1.GetUserVipLevelResponse, err error)
 	Login(ctx context.Context, req *LoginRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
 	Logout(ctx context.Context, req *LogoutRequest, opts ...http.CallOption) (rsp *LogoutResponse, err error)
 	RefreshToken(ctx context.Context, req *RefreshTokenRequest, opts ...http.CallOption) (rsp *RefreshTokenResponse, err error)
@@ -565,6 +721,7 @@ type UserHTTPClient interface {
 	SendPasswordResetCode(ctx context.Context, req *SendPasswordResetCodeRequest, opts ...http.CallOption) (rsp *SendPasswordResetCodeResponse, err error)
 	UpdateUser(ctx context.Context, req *UpdateUserRequest, opts ...http.CallOption) (rsp *UpdateUserResponse, err error)
 	UpdateUserIdentity(ctx context.Context, req *UpdateUserIdentityRequest, opts ...http.CallOption) (rsp *UpdateUserIdentityResponse, err error)
+	UpdateVipRewardSlider(ctx context.Context, req *UpdateVipRewardSliderRequest, opts ...http.CallOption) (rsp *v1.UpdateVipRewardSliderResponse, err error)
 	VerifyEmail(ctx context.Context, req *VerifyEmailRequest, opts ...http.CallOption) (rsp *VerifyEmailResponse, err error)
 }
 
@@ -589,11 +746,37 @@ func (c *UserHTTPClientImpl) AddResponsibleGamblingConfig(ctx context.Context, i
 	return &out, nil
 }
 
+func (c *UserHTTPClientImpl) ClaimVipReward(ctx context.Context, in *ClaimVipRewardRequest, opts ...http.CallOption) (*v1.ClaimVipRewardResponse, error) {
+	var out v1.ClaimVipRewardResponse
+	pattern := "/v1/user/vip/reward/claim"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserClaimVipReward))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *UserHTTPClientImpl) CloseAccount(ctx context.Context, in *CloseAccountRequest, opts ...http.CallOption) (*CloseAccountResponse, error) {
 	var out CloseAccountResponse
 	pattern := "/v1/user/account/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserCloseAccount))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *UserHTTPClientImpl) ConfirmClaimVipReward(ctx context.Context, in *ConfirmClaimVipRewardRequest, opts ...http.CallOption) (*v1.ConfirmClaimVipRewardResponse, error) {
+	var out v1.ConfirmClaimVipRewardResponse
+	pattern := "/v1/user/vip/reward/claim/confirm"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserConfirmClaimVipReward))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -615,11 +798,37 @@ func (c *UserHTTPClientImpl) DeleteResponsibleGamblingConfig(ctx context.Context
 	return &out, nil
 }
 
+func (c *UserHTTPClientImpl) GetClaimableVipRewards(ctx context.Context, in *GetClaimableVipRewardsRequest, opts ...http.CallOption) (*v1.GetClaimableVipRewardsResponse, error) {
+	var out v1.GetClaimableVipRewardsResponse
+	pattern := "/v1/user/vip/reward/claimable/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserGetClaimableVipRewards))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *UserHTTPClientImpl) GetOperatorAccountSettings(ctx context.Context, in *GetOperatorAccountSettingsRequest, opts ...http.CallOption) (*GetOperatorAccountSettingsResponse, error) {
 	var out GetOperatorAccountSettingsResponse
 	pattern := "/v1/user/operator/account-settings/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserGetOperatorAccountSettings))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *UserHTTPClientImpl) GetOperatorVipSettings(ctx context.Context, in *GetOperatorVipSettingsRequest, opts ...http.CallOption) (*v1.GetOperatorVipSettingsResponse, error) {
+	var out v1.GetOperatorVipSettingsResponse
+	pattern := "/v1/user/vip/operator/settings/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserGetOperatorVipSettings))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -672,6 +881,19 @@ func (c *UserHTTPClientImpl) GetUserTags(ctx context.Context, in *GetUserTagsReq
 	pattern := "/v1/user/tags/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserGetUserTags))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *UserHTTPClientImpl) GetUserVipLevel(ctx context.Context, in *GetUserVipLevelRequest, opts ...http.CallOption) (*v1.GetUserVipLevelResponse, error) {
+	var out v1.GetUserVipLevelResponse
+	pattern := "/v1/user/vip/level/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserGetUserVipLevel))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -815,6 +1037,19 @@ func (c *UserHTTPClientImpl) UpdateUserIdentity(ctx context.Context, in *UpdateU
 	pattern := "/v1/user/identity/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserUpdateUserIdentity))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *UserHTTPClientImpl) UpdateVipRewardSlider(ctx context.Context, in *UpdateVipRewardSliderRequest, opts ...http.CallOption) (*v1.UpdateVipRewardSliderResponse, error) {
+	var out v1.UpdateVipRewardSliderResponse
+	pattern := "/v1/user/vip/reward/slider/update"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserUpdateVipRewardSlider))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

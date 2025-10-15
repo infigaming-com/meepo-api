@@ -5056,6 +5056,114 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.UpdateUserResponse'
+    /v1/user/vip/level/get:
+        post:
+            tags:
+                - User
+            operationId: User_GetUserVipLevel
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.GetUserVipLevelRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.vip.service.v1.GetUserVipLevelResponse'
+    /v1/user/vip/operator/settings/get:
+        post:
+            tags:
+                - User
+            operationId: User_GetOperatorVipSettings
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.GetOperatorVipSettingsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.vip.service.v1.GetOperatorVipSettingsResponse'
+    /v1/user/vip/reward/claim:
+        post:
+            tags:
+                - User
+            operationId: User_ClaimVipReward
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.ClaimVipRewardRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.vip.service.v1.ClaimVipRewardResponse'
+    /v1/user/vip/reward/claim/confirm:
+        post:
+            tags:
+                - User
+            operationId: User_ConfirmClaimVipReward
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.ConfirmClaimVipRewardRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.vip.service.v1.ConfirmClaimVipRewardResponse'
+    /v1/user/vip/reward/claimable/get:
+        post:
+            tags:
+                - User
+            operationId: User_GetClaimableVipRewards
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.GetClaimableVipRewardsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.vip.service.v1.GetClaimableVipRewardsResponse'
+    /v1/user/vip/reward/slider/update:
+        post:
+            tags:
+                - User
+            operationId: User_UpdateVipRewardSlider
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.UpdateVipRewardSliderRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.vip.service.v1.UpdateVipRewardSliderResponse'
     /v1/wallet/balance/details:
         post:
             tags:
@@ -13915,12 +14023,33 @@ components:
                 createdAt:
                     type: string
                     format: date-time
+        api.user.service.v1.ClaimVipRewardRequest:
+            type: object
+            properties:
+                rewardKind:
+                    enum:
+                        - VIP_REWARD_KIND_UNSPECIFIED
+                        - VIP_REWARD_KIND_UPGRADE_BASE
+                        - VIP_REWARD_KIND_UPGRADE_INCREMENTAL
+                        - VIP_REWARD_KIND_RAKEBACK_INSTANT
+                        - VIP_REWARD_KIND_RAKEBACK_DAILY
+                        - VIP_REWARD_KIND_RAKEBACK_WEEKLY
+                        - VIP_REWARD_KIND_RAKEBACK_MONTHLY
+                    type: string
+                    format: enum
         api.user.service.v1.CloseAccountRequest:
             type: object
             properties: {}
         api.user.service.v1.CloseAccountResponse:
             type: object
             properties: {}
+        api.user.service.v1.ConfirmClaimVipRewardRequest:
+            type: object
+            properties:
+                claimTransactionId:
+                    type: string
+                claimCurrency:
+                    type: string
         api.user.service.v1.DeleteOperatorByoDomainResponse:
             type: object
             properties: {}
@@ -13967,6 +14096,9 @@ components:
                     type: string
                 systemOperatorName:
                     type: string
+        api.user.service.v1.GetClaimableVipRewardsRequest:
+            type: object
+            properties: {}
         api.user.service.v1.GetOperatorAccountSettingsRequest:
             type: object
             properties:
@@ -13986,6 +14118,9 @@ components:
                     type: object
                     additionalProperties:
                         $ref: '#/components/schemas/api.user.service.v1.OperatorRegisterLimitConfig'
+        api.user.service.v1.GetOperatorVipSettingsRequest:
+            type: object
+            properties: {}
         api.user.service.v1.GetResponsibleGamblingConfigRequest:
             type: object
             properties:
@@ -14215,6 +14350,9 @@ components:
                         type: string
                     description: List of active tags associated with the user.
             description: GetUserTagsResponse contains the list of active tags associated with the user.
+        api.user.service.v1.GetUserVipLevelRequest:
+            type: object
+            properties: {}
         api.user.service.v1.ListOperatorByoDomainsResponse:
             type: object
             properties:
@@ -14722,6 +14860,15 @@ components:
         api.user.service.v1.UpdateUserResponse:
             type: object
             properties: {}
+        api.user.service.v1.UpdateVipRewardSliderRequest:
+            type: object
+            properties:
+                rackback:
+                    type: string
+                lossback:
+                    type: string
+                type:
+                    type: string
         api.user.service.v1.UploadKycRequest:
             type: object
             properties:
@@ -14914,6 +15061,57 @@ components:
         api.user.service.v1.VerifyEmailResponse:
             type: object
             properties: {}
+        api.vip.service.v1.ClaimVipRewardResponse:
+            type: object
+            properties:
+                claimableAmount:
+                    type: string
+                claimableAmountCurrency:
+                    type: string
+                claimTransactionId:
+                    type: string
+        api.vip.service.v1.ConfirmClaimVipRewardResponse:
+            type: object
+            properties: {}
+        api.vip.service.v1.GetClaimableVipRewardsResponse:
+            type: object
+            properties:
+                claimableRewards:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.vip.service.v1.GetClaimableVipRewardsResponse_ClaimableVipReward'
+        api.vip.service.v1.GetClaimableVipRewardsResponse_ClaimableVipReward:
+            type: object
+            properties:
+                rewardKind:
+                    enum:
+                        - VIP_REWARD_KIND_UNSPECIFIED
+                        - VIP_REWARD_KIND_UPGRADE_BASE
+                        - VIP_REWARD_KIND_UPGRADE_INCREMENTAL
+                        - VIP_REWARD_KIND_RAKEBACK_INSTANT
+                        - VIP_REWARD_KIND_RAKEBACK_DAILY
+                        - VIP_REWARD_KIND_RAKEBACK_WEEKLY
+                        - VIP_REWARD_KIND_RAKEBACK_MONTHLY
+                    type: string
+                    format: enum
+                claimable:
+                    type: boolean
+                claimableAt:
+                    type: string
+        api.vip.service.v1.GetOperatorVipSettingsResponse:
+            type: object
+            properties:
+                setting:
+                    $ref: '#/components/schemas/api.vip.service.v1.VipSetting'
+                vipLevelConfigTemplates:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.vip.service.v1.VipLevelConfigTemplate'
+        api.vip.service.v1.GetUserVipLevelResponse:
+            type: object
+            properties:
+                vipMember:
+                    $ref: '#/components/schemas/api.vip.service.v1.VipMember'
         api.vip.service.v1.GetVipSettingResponse:
             type: object
             properties:
@@ -14937,6 +15135,9 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.vip.service.v1.VipLevelConfigTemplate'
+        api.vip.service.v1.UpdateVipRewardSliderResponse:
+            type: object
+            properties: {}
         api.vip.service.v1.VipConfig:
             type: object
             properties:
@@ -15041,6 +15242,31 @@ components:
                     type: string
                 xpLossEnabled:
                     type: boolean
+        api.vip.service.v1.VipMember:
+            type: object
+            properties:
+                id:
+                    type: string
+                systemOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                operatorId:
+                    type: string
+                userId:
+                    type: string
+                currentLevelId:
+                    type: string
+                currentXp:
+                    type: string
+                totalXp:
+                    type: string
+                lastLevelUpAt:
+                    type: string
+                lastInstantUpgradeAt:
+                    type: string
         api.vip.service.v1.VipSetting:
             type: object
             properties:

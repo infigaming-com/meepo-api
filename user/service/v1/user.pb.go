@@ -12907,7 +12907,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x19OPERATOR_TYPE_UNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x16OPERATOR_TYPE_RETAILER\x10\x01\x12\x17\n" +
 	"\x13OPERATOR_TYPE_GROUP\x10\x02\x12\x1a\n" +
-	"\x16OPERATOR_TYPE_OPERATOR\x10\x032\xa6Q\n" +
+	"\x16OPERATOR_TYPE_OPERATOR\x10\x032\xa0S\n" +
 	"\x04User\x12v\n" +
 	"\bRegister\x12$.api.user.service.v1.RegisterRequest\x1a!.api.user.service.v1.AuthResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/user/auth/register\x12m\n" +
 	"\x05Login\x12!.api.user.service.v1.LoginRequest\x1a!.api.user.service.v1.AuthResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/user/auth/login\x12_\n" +
@@ -12988,13 +12988,13 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x1aListRegisterLoginBlacklist\x126.api.user.service.v1.ListRegisterLoginBlacklistRequest\x1a7.api.user.service.v1.ListRegisterLoginBlacklistResponse\"\x00\x12\x9b\x01\n" +
 	"\x1eSetOperatorRegisterLimitConfig\x12:.api.user.service.v1.SetOperatorRegisterLimitConfigRequest\x1a;.api.user.service.v1.SetOperatorRegisterLimitConfigResponse\"\x00\x12\x9b\x01\n" +
 	"\x1eGetOperatorRegisterLimitConfig\x12:.api.user.service.v1.GetOperatorRegisterLimitConfigRequest\x1a;.api.user.service.v1.GetOperatorRegisterLimitConfigResponse\"\x00\x12\x87\x01\n" +
-	"\fCloseAccount\x12(.api.user.service.v1.CloseAccountRequest\x1a).api.user.service.v1.CloseAccountResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v1/user/account/update\x12\x82\x01\n" +
-	"\x16GetOperatorVipSettings\x122.api.user.service.v1.GetOperatorVipSettingsRequest\x1a2.api.vip.service.v1.GetOperatorVipSettingsResponse\"\x00\x12m\n" +
-	"\x0fGetUserVipLevel\x12+.api.user.service.v1.GetUserVipLevelRequest\x1a+.api.vip.service.v1.GetUserVipLevelResponse\"\x00\x12\x7f\n" +
-	"\x15UpdateVipRewardSlider\x121.api.user.service.v1.UpdateVipRewardSliderRequest\x1a1.api.vip.service.v1.UpdateVipRewardSliderResponse\"\x00\x12\x82\x01\n" +
-	"\x16GetClaimableVipRewards\x122.api.user.service.v1.GetClaimableVipRewardsRequest\x1a2.api.vip.service.v1.GetClaimableVipRewardsResponse\"\x00\x12j\n" +
-	"\x0eClaimVipReward\x12*.api.user.service.v1.ClaimVipRewardRequest\x1a*.api.vip.service.v1.ClaimVipRewardResponse\"\x00\x12\x7f\n" +
-	"\x15ConfirmClaimVipReward\x121.api.user.service.v1.ConfirmClaimVipRewardRequest\x1a1.api.vip.service.v1.ConfirmClaimVipRewardResponse\"\x00BO\n" +
+	"\fCloseAccount\x12(.api.user.service.v1.CloseAccountRequest\x1a).api.user.service.v1.CloseAccountResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v1/user/account/update\x12\xaf\x01\n" +
+	"\x16GetOperatorVipSettings\x122.api.user.service.v1.GetOperatorVipSettingsRequest\x1a2.api.vip.service.v1.GetOperatorVipSettingsResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/user/vip/operator/settings/get\x12\x8e\x01\n" +
+	"\x0fGetUserVipLevel\x12+.api.user.service.v1.GetUserVipLevelRequest\x1a+.api.vip.service.v1.GetUserVipLevelResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/user/vip/level/get\x12\xab\x01\n" +
+	"\x15UpdateVipRewardSlider\x121.api.user.service.v1.UpdateVipRewardSliderRequest\x1a1.api.vip.service.v1.UpdateVipRewardSliderResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/user/vip/reward/slider/update\x12\xae\x01\n" +
+	"\x16GetClaimableVipRewards\x122.api.user.service.v1.GetClaimableVipRewardsRequest\x1a2.api.vip.service.v1.GetClaimableVipRewardsResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/user/vip/reward/claimable/get\x12\x8e\x01\n" +
+	"\x0eClaimVipReward\x12*.api.user.service.v1.ClaimVipRewardRequest\x1a*.api.vip.service.v1.ClaimVipRewardResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/user/vip/reward/claim\x12\xab\x01\n" +
+	"\x15ConfirmClaimVipReward\x121.api.user.service.v1.ConfirmClaimVipRewardRequest\x1a1.api.vip.service.v1.ConfirmClaimVipRewardResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/user/vip/reward/claim/confirmBO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
