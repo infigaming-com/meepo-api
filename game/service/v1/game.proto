@@ -1561,5 +1561,11 @@ message ListGameBetDisplayConfigRequest {
 }
 
 message ListGameBetDisplayConfigResponse {
+	message Item {
+		string country = 1;
+		BettingConfig all_bet = 2;
+		BettingConfig high_wins = 3;
+	}
+	repeated Item list = 1;
 }
 
