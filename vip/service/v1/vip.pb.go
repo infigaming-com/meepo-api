@@ -2612,6 +2612,7 @@ type ConfirmClaimVipRewardRequest struct {
 	UserId             int64                   `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	OperatorContext    *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	ClaimTransactionId int64                   `protobuf:"varint,3,opt,name=claim_transaction_id,json=claimTransactionId,proto3" json:"claim_transaction_id,omitempty"`
+	ClaimCurrency      string                  `protobuf:"bytes,4,opt,name=claim_currency,json=claimCurrency,proto3" json:"claim_currency,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -2665,6 +2666,13 @@ func (x *ConfirmClaimVipRewardRequest) GetClaimTransactionId() int64 {
 		return x.ClaimTransactionId
 	}
 	return 0
+}
+
+func (x *ConfirmClaimVipRewardRequest) GetClaimCurrency() string {
+	if x != nil {
+		return x.ClaimCurrency
+	}
+	return ""
 }
 
 type ConfirmClaimVipRewardResponse struct {
@@ -2975,11 +2983,12 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\"\xc3\x01\n" +
 	"\x1eGetOperatorVipSettingsResponse\x128\n" +
 	"\asetting\x18\x01 \x01(\v2\x1e.api.vip.service.v1.VipSettingR\asetting\x12g\n" +
-	"\x1avip_level_config_templates\x18\x02 \x03(\v2*.api.vip.service.v1.VipLevelConfigTemplateR\x17vipLevelConfigTemplates\"\xb1\x01\n" +
+	"\x1avip_level_config_templates\x18\x02 \x03(\v2*.api.vip.service.v1.VipLevelConfigTemplateR\x17vipLevelConfigTemplates\"\xd8\x01\n" +
 	"\x1cConfirmClaimVipRewardRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x120\n" +
-	"\x14claim_transaction_id\x18\x03 \x01(\x03R\x12claimTransactionId\"\x1f\n" +
+	"\x14claim_transaction_id\x18\x03 \x01(\x03R\x12claimTransactionId\x12%\n" +
+	"\x0eclaim_currency\x18\x04 \x01(\tR\rclaimCurrency\"\x1f\n" +
 	"\x1dConfirmClaimVipRewardResponse*q\n" +
 	"\x0eVipDisplayRule\x12 \n" +
 	"\x1cVIP_DISPLAY_RULE_UNSPECIFIED\x10\x00\x12\x1f\n" +

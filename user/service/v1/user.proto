@@ -5,6 +5,7 @@ package api.user.service.v1;
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "common/common.proto";
+import "vip/service/v1/vip.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/user/service/v1;v1";
 option java_multiple_files = true;
@@ -338,6 +339,18 @@ service User {
 			body: "*"
 		};
 	}
+
+	rpc GetOperatorVipSettings(GetOperatorVipSettingsRequest) returns (api.vip.service.v1.GetOperatorVipSettingsResponse) {}
+
+	rpc GetUserVipLevel(GetUserVipLevelRequest) returns (api.vip.service.v1.GetUserVipLevelResponse) {}
+
+	rpc UpdateVipRewardSlider(UpdateVipRewardSliderRequest) returns (api.vip.service.v1.UpdateVipRewardSliderResponse) {}
+
+	rpc GetClaimableVipRewards(GetClaimableVipRewardsRequest) returns (api.vip.service.v1.GetClaimableVipRewardsResponse) {}
+
+	rpc ClaimVipReward(ClaimVipRewardRequest) returns (api.vip.service.v1.ClaimVipRewardResponse) {}
+
+	rpc ConfirmClaimVipReward(ConfirmClaimVipRewardRequest) returns (api.vip.service.v1.ConfirmClaimVipRewardResponse) {}
 }
 
 // UserInfo contains basic user information.
@@ -1633,4 +1646,28 @@ message CloseAccountRequest {
 
 message CloseAccountResponse {
 	
+}
+
+message GetOperatorVipSettingsRequest {
+}
+
+message GetUserVipLevelRequest {
+}
+
+message UpdateVipRewardSliderRequest {
+	int64 rackback = 1;
+	int64 lossback = 2;
+	string type = 3; // weekly, monthly
+}
+
+message GetClaimableVipRewardsRequest {
+}
+
+message ClaimVipRewardRequest {
+	api.vip.service.v1.VipRewardKind reward_kind = 1;
+}
+
+message ConfirmClaimVipRewardRequest {
+	int64 claim_transaction_id = 1;
+	string claim_currency = 2;
 }

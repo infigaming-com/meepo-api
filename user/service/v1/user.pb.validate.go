@@ -17,6 +17,8 @@ import (
 	"unicode/utf8"
 
 	"google.golang.org/protobuf/types/known/anypb"
+
+	v1 "github.com/infigaming-com/meepo-api/vip/service/v1"
 )
 
 // ensure the imports are used
@@ -33,6 +35,8 @@ var (
 	_ = (*mail.Address)(nil)
 	_ = anypb.Any{}
 	_ = sort.Sort
+
+	_ = v1.VipRewardKind(0)
 )
 
 // Validate checks the field values on UserInfo with the rules defined in the
@@ -21375,6 +21379,634 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = CloseAccountResponseValidationError{}
+
+// Validate checks the field values on GetOperatorVipSettingsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetOperatorVipSettingsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetOperatorVipSettingsRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetOperatorVipSettingsRequestMultiError, or nil if none found.
+func (m *GetOperatorVipSettingsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOperatorVipSettingsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetOperatorVipSettingsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOperatorVipSettingsRequestMultiError is an error wrapping multiple
+// validation errors returned by GetOperatorVipSettingsRequest.ValidateAll()
+// if the designated constraints aren't met.
+type GetOperatorVipSettingsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOperatorVipSettingsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOperatorVipSettingsRequestMultiError) AllErrors() []error { return m }
+
+// GetOperatorVipSettingsRequestValidationError is the validation error
+// returned by GetOperatorVipSettingsRequest.Validate if the designated
+// constraints aren't met.
+type GetOperatorVipSettingsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOperatorVipSettingsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOperatorVipSettingsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOperatorVipSettingsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOperatorVipSettingsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOperatorVipSettingsRequestValidationError) ErrorName() string {
+	return "GetOperatorVipSettingsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOperatorVipSettingsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOperatorVipSettingsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOperatorVipSettingsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOperatorVipSettingsRequestValidationError{}
+
+// Validate checks the field values on GetUserVipLevelRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetUserVipLevelRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserVipLevelRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetUserVipLevelRequestMultiError, or nil if none found.
+func (m *GetUserVipLevelRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserVipLevelRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetUserVipLevelRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserVipLevelRequestMultiError is an error wrapping multiple validation
+// errors returned by GetUserVipLevelRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetUserVipLevelRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserVipLevelRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserVipLevelRequestMultiError) AllErrors() []error { return m }
+
+// GetUserVipLevelRequestValidationError is the validation error returned by
+// GetUserVipLevelRequest.Validate if the designated constraints aren't met.
+type GetUserVipLevelRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserVipLevelRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserVipLevelRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserVipLevelRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserVipLevelRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserVipLevelRequestValidationError) ErrorName() string {
+	return "GetUserVipLevelRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserVipLevelRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserVipLevelRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserVipLevelRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserVipLevelRequestValidationError{}
+
+// Validate checks the field values on UpdateVipRewardSliderRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateVipRewardSliderRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateVipRewardSliderRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateVipRewardSliderRequestMultiError, or nil if none found.
+func (m *UpdateVipRewardSliderRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateVipRewardSliderRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Rackback
+
+	// no validation rules for Lossback
+
+	// no validation rules for Type
+
+	if len(errors) > 0 {
+		return UpdateVipRewardSliderRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateVipRewardSliderRequestMultiError is an error wrapping multiple
+// validation errors returned by UpdateVipRewardSliderRequest.ValidateAll() if
+// the designated constraints aren't met.
+type UpdateVipRewardSliderRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateVipRewardSliderRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateVipRewardSliderRequestMultiError) AllErrors() []error { return m }
+
+// UpdateVipRewardSliderRequestValidationError is the validation error returned
+// by UpdateVipRewardSliderRequest.Validate if the designated constraints
+// aren't met.
+type UpdateVipRewardSliderRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateVipRewardSliderRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateVipRewardSliderRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateVipRewardSliderRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateVipRewardSliderRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateVipRewardSliderRequestValidationError) ErrorName() string {
+	return "UpdateVipRewardSliderRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateVipRewardSliderRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateVipRewardSliderRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateVipRewardSliderRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateVipRewardSliderRequestValidationError{}
+
+// Validate checks the field values on GetClaimableVipRewardsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetClaimableVipRewardsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetClaimableVipRewardsRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetClaimableVipRewardsRequestMultiError, or nil if none found.
+func (m *GetClaimableVipRewardsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetClaimableVipRewardsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetClaimableVipRewardsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetClaimableVipRewardsRequestMultiError is an error wrapping multiple
+// validation errors returned by GetClaimableVipRewardsRequest.ValidateAll()
+// if the designated constraints aren't met.
+type GetClaimableVipRewardsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetClaimableVipRewardsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetClaimableVipRewardsRequestMultiError) AllErrors() []error { return m }
+
+// GetClaimableVipRewardsRequestValidationError is the validation error
+// returned by GetClaimableVipRewardsRequest.Validate if the designated
+// constraints aren't met.
+type GetClaimableVipRewardsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetClaimableVipRewardsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetClaimableVipRewardsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetClaimableVipRewardsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetClaimableVipRewardsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetClaimableVipRewardsRequestValidationError) ErrorName() string {
+	return "GetClaimableVipRewardsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetClaimableVipRewardsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetClaimableVipRewardsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetClaimableVipRewardsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetClaimableVipRewardsRequestValidationError{}
+
+// Validate checks the field values on ClaimVipRewardRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ClaimVipRewardRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ClaimVipRewardRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ClaimVipRewardRequestMultiError, or nil if none found.
+func (m *ClaimVipRewardRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ClaimVipRewardRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for RewardKind
+
+	if len(errors) > 0 {
+		return ClaimVipRewardRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ClaimVipRewardRequestMultiError is an error wrapping multiple validation
+// errors returned by ClaimVipRewardRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ClaimVipRewardRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ClaimVipRewardRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ClaimVipRewardRequestMultiError) AllErrors() []error { return m }
+
+// ClaimVipRewardRequestValidationError is the validation error returned by
+// ClaimVipRewardRequest.Validate if the designated constraints aren't met.
+type ClaimVipRewardRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ClaimVipRewardRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ClaimVipRewardRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ClaimVipRewardRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ClaimVipRewardRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ClaimVipRewardRequestValidationError) ErrorName() string {
+	return "ClaimVipRewardRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ClaimVipRewardRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sClaimVipRewardRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ClaimVipRewardRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ClaimVipRewardRequestValidationError{}
+
+// Validate checks the field values on ConfirmClaimVipRewardRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ConfirmClaimVipRewardRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ConfirmClaimVipRewardRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ConfirmClaimVipRewardRequestMultiError, or nil if none found.
+func (m *ConfirmClaimVipRewardRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ConfirmClaimVipRewardRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ClaimTransactionId
+
+	// no validation rules for ClaimCurrency
+
+	if len(errors) > 0 {
+		return ConfirmClaimVipRewardRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ConfirmClaimVipRewardRequestMultiError is an error wrapping multiple
+// validation errors returned by ConfirmClaimVipRewardRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ConfirmClaimVipRewardRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ConfirmClaimVipRewardRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ConfirmClaimVipRewardRequestMultiError) AllErrors() []error { return m }
+
+// ConfirmClaimVipRewardRequestValidationError is the validation error returned
+// by ConfirmClaimVipRewardRequest.Validate if the designated constraints
+// aren't met.
+type ConfirmClaimVipRewardRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ConfirmClaimVipRewardRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ConfirmClaimVipRewardRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ConfirmClaimVipRewardRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ConfirmClaimVipRewardRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ConfirmClaimVipRewardRequestValidationError) ErrorName() string {
+	return "ConfirmClaimVipRewardRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ConfirmClaimVipRewardRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sConfirmClaimVipRewardRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ConfirmClaimVipRewardRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ConfirmClaimVipRewardRequestValidationError{}
 
 // Validate checks the field values on ListUsersResponse_User with the rules
 // defined in the proto definition for this message. If any rules are

@@ -4064,6 +4064,8 @@ func (m *ConfirmClaimVipRewardRequest) validate(all bool) error {
 
 	// no validation rules for ClaimTransactionId
 
+	// no validation rules for ClaimCurrency
+
 	if len(errors) > 0 {
 		return ConfirmClaimVipRewardRequestMultiError(errors)
 	}
