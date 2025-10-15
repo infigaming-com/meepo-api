@@ -263,16 +263,17 @@ message GetUserBalanceResponse {
 //   - "payment_withdraw_rollback" - Payment withdraw transaction rollback
 
 message CreditRequest {
-	int64 user_id = 1;                             // 玩家ID
-	string currency = 2;                           // 幣別
-	string transaction_type = 3;                   // 交易類型
-	string cash_amount = 4;                        // 現金金額
-	string cash_turnover_threshold = 5;            // 現金流水要求 (倍數)
-	string operator_bonus_amount = 6;              // 紅利金額
-	string operator_bonus_turnover_threshold = 7;  // 紅利流水要求 (倍數)
-	string operator_bonus_withdraw_limit = 8;      // 紅利提現限制金額
-	string comment = 9;                            // 操作備註
-	optional int64 external_transaction_id = 10;            // 對應外部交易ID
+	int64 user_id = 1;
+	string currency = 2;
+	string transaction_type = 3;
+	string cash_amount = 4;
+	string cash_turnover_threshold = 5;
+	string operator_bonus_amount = 6;
+	string operator_bonus_turnover_threshold = 7;
+	string operator_bonus_withdraw_limit = 8;
+	string comment = 9;
+	optional int64 external_transaction_id = 10;
+	api.common.OperatorContext operator_context = 11;
 }
 
 message CreditResponse {
