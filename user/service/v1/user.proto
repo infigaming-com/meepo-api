@@ -340,17 +340,47 @@ service User {
 		};
 	}
 
-	rpc GetOperatorVipSettings(GetOperatorVipSettingsRequest) returns (api.vip.service.v1.GetOperatorVipSettingsResponse) {}
+	rpc GetOperatorVipSettings(GetOperatorVipSettingsRequest) returns (api.vip.service.v1.GetOperatorVipSettingsResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/vip/operator/settings/get"
+			body: "*"
+		};
+	}
 
-	rpc GetUserVipLevel(GetUserVipLevelRequest) returns (api.vip.service.v1.GetUserVipLevelResponse) {}
+	rpc GetUserVipLevel(GetUserVipLevelRequest) returns (api.vip.service.v1.GetUserVipLevelResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/vip/level/get"
+			body: "*"
+		};
+	}
 
-	rpc UpdateVipRewardSlider(UpdateVipRewardSliderRequest) returns (api.vip.service.v1.UpdateVipRewardSliderResponse) {}
+	rpc UpdateVipRewardSlider(UpdateVipRewardSliderRequest) returns (api.vip.service.v1.UpdateVipRewardSliderResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/vip/reward/slider/update"
+			body: "*"
+		};
+	}
 
-	rpc GetClaimableVipRewards(GetClaimableVipRewardsRequest) returns (api.vip.service.v1.GetClaimableVipRewardsResponse) {}
+	rpc GetClaimableVipRewards(GetClaimableVipRewardsRequest) returns (api.vip.service.v1.GetClaimableVipRewardsResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/vip/reward/claimable/get"
+			body: "*"
+		};
+	}
 
-	rpc ClaimVipReward(ClaimVipRewardRequest) returns (api.vip.service.v1.ClaimVipRewardResponse) {}
+	rpc ClaimVipReward(ClaimVipRewardRequest) returns (api.vip.service.v1.ClaimVipRewardResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/vip/reward/claim"
+			body: "*"
+		};
+	}
 
-	rpc ConfirmClaimVipReward(ConfirmClaimVipRewardRequest) returns (api.vip.service.v1.ConfirmClaimVipRewardResponse) {}
+	rpc ConfirmClaimVipReward(ConfirmClaimVipRewardRequest) returns (api.vip.service.v1.ConfirmClaimVipRewardResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/vip/reward/claim/confirm"
+			body: "*"
+		};
+	}
 }
 
 // UserInfo contains basic user information.
