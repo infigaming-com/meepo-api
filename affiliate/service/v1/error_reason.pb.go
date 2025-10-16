@@ -44,6 +44,13 @@ const (
 	ErrorReason_DELETE_AFFILIATE_FAILED                  ErrorReason = 130016
 	ErrorReason_LIST_AFFILIATES_FAILED                   ErrorReason = 130017
 	ErrorReason_UPDATE_AFFILIATE_FAILED                  ErrorReason = 130018
+	ErrorReason_CONVERT_CHANNEL_CONFIG_FAILED            ErrorReason = 130019
+	ErrorReason_CREATE_CAMPAIGN_FAILED                   ErrorReason = 130020
+	ErrorReason_CAMPAIGN_NOT_FOUND                       ErrorReason = 130021
+	ErrorReason_GET_CAMPAIGN_FAILED                      ErrorReason = 130022
+	ErrorReason_DELETE_CAMPAIGN_FAILED                   ErrorReason = 130023
+	ErrorReason_LIST_CAMPAIGNS_FAILED                    ErrorReason = 130024
+	ErrorReason_UPDATE_CAMPAIGN_FAILED                   ErrorReason = 130025
 )
 
 // Enum value maps for ErrorReason.
@@ -68,6 +75,13 @@ var (
 		130016: "DELETE_AFFILIATE_FAILED",
 		130017: "LIST_AFFILIATES_FAILED",
 		130018: "UPDATE_AFFILIATE_FAILED",
+		130019: "CONVERT_CHANNEL_CONFIG_FAILED",
+		130020: "CREATE_CAMPAIGN_FAILED",
+		130021: "CAMPAIGN_NOT_FOUND",
+		130022: "GET_CAMPAIGN_FAILED",
+		130023: "DELETE_CAMPAIGN_FAILED",
+		130024: "LIST_CAMPAIGNS_FAILED",
+		130025: "UPDATE_CAMPAIGN_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                              0,
@@ -89,6 +103,13 @@ var (
 		"DELETE_AFFILIATE_FAILED":                  130016,
 		"LIST_AFFILIATES_FAILED":                   130017,
 		"UPDATE_AFFILIATE_FAILED":                  130018,
+		"CONVERT_CHANNEL_CONFIG_FAILED":            130019,
+		"CREATE_CAMPAIGN_FAILED":                   130020,
+		"CAMPAIGN_NOT_FOUND":                       130021,
+		"GET_CAMPAIGN_FAILED":                      130022,
+		"DELETE_CAMPAIGN_FAILED":                   130023,
+		"LIST_CAMPAIGNS_FAILED":                    130024,
+		"UPDATE_CAMPAIGN_FAILED":                   130025,
 	}
 )
 
@@ -123,7 +144,7 @@ var File_affiliate_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\xa8\x05\n" +
+	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\xf9\x06\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1dCREATE_COMMISSION_PLAN_FAILED\x10\xd1\xf7\a\x12#\n" +
@@ -143,7 +164,14 @@ const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\x13AFFILIATE_NOT_FOUND\x10\xdf\xf7\a\x12\x1d\n" +
 	"\x17DELETE_AFFILIATE_FAILED\x10\xe0\xf7\a\x12\x1c\n" +
 	"\x16LIST_AFFILIATES_FAILED\x10\xe1\xf7\a\x12\x1d\n" +
-	"\x17UPDATE_AFFILIATE_FAILED\x10\xe2\xf7\a\x1a\x04\xa0E\xf4\x03BY\n" +
+	"\x17UPDATE_AFFILIATE_FAILED\x10\xe2\xf7\a\x12#\n" +
+	"\x1dCONVERT_CHANNEL_CONFIG_FAILED\x10\xe3\xf7\a\x12\x1c\n" +
+	"\x16CREATE_CAMPAIGN_FAILED\x10\xe4\xf7\a\x12\x18\n" +
+	"\x12CAMPAIGN_NOT_FOUND\x10\xe5\xf7\a\x12\x19\n" +
+	"\x13GET_CAMPAIGN_FAILED\x10\xe6\xf7\a\x12\x1c\n" +
+	"\x16DELETE_CAMPAIGN_FAILED\x10\xe7\xf7\a\x12\x1b\n" +
+	"\x15LIST_CAMPAIGNS_FAILED\x10\xe8\xf7\a\x12\x1c\n" +
+	"\x16UPDATE_CAMPAIGN_FAILED\x10\xe9\xf7\a\x1a\x04\xa0E\xf4\x03BY\n" +
 	"\x18api.affiliate.service.v1P\x01Z;github.com/infigaming-com/meepo-api/affiliate/service/v1;v1b\x06proto3"
 
 var (

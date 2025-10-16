@@ -12,6 +12,9 @@ option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
 
 service BackofficeAffiliate {
+	
+	// -------------- Commission Plan --------------
+
 	rpc CreateCommissionPlan(CreateCommissionPlanRequest) returns (api.affiliate.service.v1.CreateCommissionPlanResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/commission/plan/create"
@@ -48,6 +51,9 @@ service BackofficeAffiliate {
 			body: "*"
 		};
 	}
+
+	// -------------- Affiliate --------------
+
 	rpc CreateAffiliate(CreateAffiliateRequest) returns (api.affiliate.service.v1.CreateAffiliateResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/create"
@@ -78,7 +84,42 @@ service BackofficeAffiliate {
 			body: "*"
 		};
 	}
+
+	// -------------- Campaign --------------
+
+	rpc CreateCampaign(CreateCampaignRequest) returns (api.affiliate.service.v1.CreateCampaignResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/campaign/create"
+			body: "*"
+		};
+	}
+	rpc UpdateCampaign(UpdateCampaignRequest) returns (api.affiliate.service.v1.UpdateCampaignResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/campaign/update"
+			body: "*"
+		};
+	}
+	rpc ListCampaigns(ListCampaignsRequest) returns (api.affiliate.service.v1.ListCampaignsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/campaign/list"
+			body: "*"
+		};
+	}
+	rpc ListAffiliateCampaigns(ListAffiliateCampaignsRequest) returns (api.affiliate.service.v1.ListCampaignsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/campaign/list/by_affiliate"
+			body: "*"
+		};
+	}
+	rpc DeleteCampaign(DeleteCampaignRequest) returns (api.affiliate.service.v1.DeleteCampaignResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/campaign/delete"
+			body: "*"
+		};
+	}
 }
+
+// -------------- Commission Plan --------------
 
 message CreateCommissionPlanRequest {
 	string title = 1;
@@ -110,6 +151,8 @@ message DeleteCommissionPlanRequest {
 	int64 commission_plan_id = 1;
 	optional int64 alternative_commission_plan_id = 2; // not supported yet
 }
+
+// -------------- Affiliate --------------
 
 message CreateAffiliateRequest {
 	api.affiliate.service.v1.AffiliateInfo affiliate = 1;
@@ -143,5 +186,38 @@ message ListAllCommissionPlansRequest {
 	api.common.OperatorContext target_operator_context = 1;
 	repeated string countries = 2; // not supported yet
 	optional string status = 3;
+}
+
+// -------------- Campaign --------------
+
+message CreateCampaignRequest {
+	api.affiliate.service.v1.Campaign campaign = 1;
+}
+
+message UpdateCampaignRequest {
+	int64 campaign_id = 1;
+	optional api.affiliate.service.v1.Campaign campaign = 2;
+	optional bool enabled = 3;
+}
+
+message ListCampaignsRequest {
+    optional string campaign_name = 1;
+    optional int64 campaign_id = 2;
+    optional bool enabled = 3;
+    optional int32 page = 4;
+    optional int32 page_size = 5;
+	api.common.OperatorContextFilters operator_context_filters = 6;
+}
+
+message ListAffiliateCampaignsRequest {
+    optional string campaign_name = 1;
+    optional int64 campaign_id = 2;
+    optional bool enabled = 3;
+    optional int32 page = 4;
+    optional int32 page_size = 5;
+}
+
+message DeleteCampaignRequest {
+	int64 campaign_id = 1;
 }
 	
