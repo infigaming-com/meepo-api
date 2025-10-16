@@ -238,3 +238,87 @@ func IsUpdateAffiliateFailed(err error) bool {
 func ErrorUpdateAffiliateFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_UPDATE_AFFILIATE_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsConvertChannelConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CONVERT_CHANNEL_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorConvertChannelConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CONVERT_CHANNEL_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCreateCampaignFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREATE_CAMPAIGN_FAILED.String() && e.Code == 500
+}
+
+func ErrorCreateCampaignFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREATE_CAMPAIGN_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCampaignNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CAMPAIGN_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorCampaignNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CAMPAIGN_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetCampaignFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_CAMPAIGN_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetCampaignFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_CAMPAIGN_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDeleteCampaignFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DELETE_CAMPAIGN_FAILED.String() && e.Code == 500
+}
+
+func ErrorDeleteCampaignFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DELETE_CAMPAIGN_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListCampaignsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_CAMPAIGNS_FAILED.String() && e.Code == 500
+}
+
+func ErrorListCampaignsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_CAMPAIGNS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateCampaignFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_CAMPAIGN_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateCampaignFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_CAMPAIGN_FAILED.String(), fmt.Sprintf(format, args...))
+}

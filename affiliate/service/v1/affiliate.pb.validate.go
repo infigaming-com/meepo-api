@@ -1684,6 +1684,2024 @@ var _ interface {
 	ErrorName() string
 } = DeleteAffiliateResponseValidationError{}
 
+// Validate checks the field values on Campaign with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *Campaign) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Campaign with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in CampaignMultiError, or nil
+// if none found.
+func (m *Campaign) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Campaign) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Domain
+
+	// no validation rules for CampaignName
+
+	// no validation rules for ChannelType
+
+	if all {
+		switch v := interface{}(m.GetChannelConfig()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CampaignValidationError{
+					field:  "ChannelConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CampaignValidationError{
+					field:  "ChannelConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetChannelConfig()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CampaignValidationError{
+				field:  "ChannelConfig",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for UtmSource
+
+	// no validation rules for UtmMedium
+
+	// no validation rules for UtmCampaign
+
+	// no validation rules for UtmContent
+
+	// no validation rules for UtmTerm
+
+	if all {
+		switch v := interface{}(m.GetCustomParams()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CampaignValidationError{
+					field:  "CustomParams",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CampaignValidationError{
+					field:  "CustomParams",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCustomParams()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CampaignValidationError{
+				field:  "CustomParams",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetEventMappings()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CampaignValidationError{
+					field:  "EventMappings",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CampaignValidationError{
+					field:  "EventMappings",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetEventMappings()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CampaignValidationError{
+				field:  "EventMappings",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return CampaignMultiError(errors)
+	}
+
+	return nil
+}
+
+// CampaignMultiError is an error wrapping multiple validation errors returned
+// by Campaign.ValidateAll() if the designated constraints aren't met.
+type CampaignMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CampaignMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CampaignMultiError) AllErrors() []error { return m }
+
+// CampaignValidationError is the validation error returned by
+// Campaign.Validate if the designated constraints aren't met.
+type CampaignValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CampaignValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CampaignValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CampaignValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CampaignValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CampaignValidationError) ErrorName() string { return "CampaignValidationError" }
+
+// Error satisfies the builtin error interface
+func (e CampaignValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCampaign.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CampaignValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CampaignValidationError{}
+
+// Validate checks the field values on ChannelConfig with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ChannelConfig) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ChannelConfig with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in ChannelConfigMultiError, or
+// nil if none found.
+func (m *ChannelConfig) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ChannelConfig) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.FacebookChannelConfig != nil {
+
+		if all {
+			switch v := interface{}(m.GetFacebookChannelConfig()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ChannelConfigValidationError{
+						field:  "FacebookChannelConfig",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ChannelConfigValidationError{
+						field:  "FacebookChannelConfig",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetFacebookChannelConfig()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ChannelConfigValidationError{
+					field:  "FacebookChannelConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.TiktokChannelConfig != nil {
+
+		if all {
+			switch v := interface{}(m.GetTiktokChannelConfig()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ChannelConfigValidationError{
+						field:  "TiktokChannelConfig",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ChannelConfigValidationError{
+						field:  "TiktokChannelConfig",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetTiktokChannelConfig()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ChannelConfigValidationError{
+					field:  "TiktokChannelConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.KwaiChannelConfig != nil {
+
+		if all {
+			switch v := interface{}(m.GetKwaiChannelConfig()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ChannelConfigValidationError{
+						field:  "KwaiChannelConfig",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ChannelConfigValidationError{
+						field:  "KwaiChannelConfig",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetKwaiChannelConfig()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ChannelConfigValidationError{
+					field:  "KwaiChannelConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.AppsflyerChannelConfig != nil {
+
+		if all {
+			switch v := interface{}(m.GetAppsflyerChannelConfig()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ChannelConfigValidationError{
+						field:  "AppsflyerChannelConfig",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ChannelConfigValidationError{
+						field:  "AppsflyerChannelConfig",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetAppsflyerChannelConfig()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ChannelConfigValidationError{
+					field:  "AppsflyerChannelConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.AdjustChannelConfig != nil {
+
+		if all {
+			switch v := interface{}(m.GetAdjustChannelConfig()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ChannelConfigValidationError{
+						field:  "AdjustChannelConfig",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ChannelConfigValidationError{
+						field:  "AdjustChannelConfig",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetAdjustChannelConfig()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ChannelConfigValidationError{
+					field:  "AdjustChannelConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.AgencyChannelConfig != nil {
+
+		if all {
+			switch v := interface{}(m.GetAgencyChannelConfig()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ChannelConfigValidationError{
+						field:  "AgencyChannelConfig",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ChannelConfigValidationError{
+						field:  "AgencyChannelConfig",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetAgencyChannelConfig()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ChannelConfigValidationError{
+					field:  "AgencyChannelConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.GoogleAdsChannelConfig != nil {
+
+		if all {
+			switch v := interface{}(m.GetGoogleAdsChannelConfig()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ChannelConfigValidationError{
+						field:  "GoogleAdsChannelConfig",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ChannelConfigValidationError{
+						field:  "GoogleAdsChannelConfig",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetGoogleAdsChannelConfig()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ChannelConfigValidationError{
+					field:  "GoogleAdsChannelConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ChannelConfigMultiError(errors)
+	}
+
+	return nil
+}
+
+// ChannelConfigMultiError is an error wrapping multiple validation errors
+// returned by ChannelConfig.ValidateAll() if the designated constraints
+// aren't met.
+type ChannelConfigMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ChannelConfigMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ChannelConfigMultiError) AllErrors() []error { return m }
+
+// ChannelConfigValidationError is the validation error returned by
+// ChannelConfig.Validate if the designated constraints aren't met.
+type ChannelConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ChannelConfigValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ChannelConfigValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ChannelConfigValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ChannelConfigValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ChannelConfigValidationError) ErrorName() string { return "ChannelConfigValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ChannelConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sChannelConfig.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ChannelConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ChannelConfigValidationError{}
+
+// Validate checks the field values on CustomParams with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *CustomParams) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CustomParams with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in CustomParamsMultiError, or
+// nil if none found.
+func (m *CustomParams) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CustomParams) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetCustomParams() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, CustomParamsValidationError{
+						field:  fmt.Sprintf("CustomParams[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, CustomParamsValidationError{
+						field:  fmt.Sprintf("CustomParams[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return CustomParamsValidationError{
+					field:  fmt.Sprintf("CustomParams[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return CustomParamsMultiError(errors)
+	}
+
+	return nil
+}
+
+// CustomParamsMultiError is an error wrapping multiple validation errors
+// returned by CustomParams.ValidateAll() if the designated constraints aren't met.
+type CustomParamsMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CustomParamsMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CustomParamsMultiError) AllErrors() []error { return m }
+
+// CustomParamsValidationError is the validation error returned by
+// CustomParams.Validate if the designated constraints aren't met.
+type CustomParamsValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CustomParamsValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CustomParamsValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CustomParamsValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CustomParamsValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CustomParamsValidationError) ErrorName() string { return "CustomParamsValidationError" }
+
+// Error satisfies the builtin error interface
+func (e CustomParamsValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCustomParams.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CustomParamsValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CustomParamsValidationError{}
+
+// Validate checks the field values on EventMappings with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *EventMappings) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on EventMappings with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in EventMappingsMultiError, or
+// nil if none found.
+func (m *EventMappings) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *EventMappings) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetRegister()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, EventMappingsValidationError{
+					field:  "Register",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, EventMappingsValidationError{
+					field:  "Register",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRegister()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return EventMappingsValidationError{
+				field:  "Register",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetFirstDeposit()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, EventMappingsValidationError{
+					field:  "FirstDeposit",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, EventMappingsValidationError{
+					field:  "FirstDeposit",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetFirstDeposit()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return EventMappingsValidationError{
+				field:  "FirstDeposit",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetSecondDeposit()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, EventMappingsValidationError{
+					field:  "SecondDeposit",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, EventMappingsValidationError{
+					field:  "SecondDeposit",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetSecondDeposit()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return EventMappingsValidationError{
+				field:  "SecondDeposit",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetThirdDeposit()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, EventMappingsValidationError{
+					field:  "ThirdDeposit",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, EventMappingsValidationError{
+					field:  "ThirdDeposit",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetThirdDeposit()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return EventMappingsValidationError{
+				field:  "ThirdDeposit",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetWithdrawal()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, EventMappingsValidationError{
+					field:  "Withdrawal",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, EventMappingsValidationError{
+					field:  "Withdrawal",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetWithdrawal()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return EventMappingsValidationError{
+				field:  "Withdrawal",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetGameStart()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, EventMappingsValidationError{
+					field:  "GameStart",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, EventMappingsValidationError{
+					field:  "GameStart",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetGameStart()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return EventMappingsValidationError{
+				field:  "GameStart",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetGameBet()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, EventMappingsValidationError{
+					field:  "GameBet",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, EventMappingsValidationError{
+					field:  "GameBet",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetGameBet()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return EventMappingsValidationError{
+				field:  "GameBet",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return EventMappingsMultiError(errors)
+	}
+
+	return nil
+}
+
+// EventMappingsMultiError is an error wrapping multiple validation errors
+// returned by EventMappings.ValidateAll() if the designated constraints
+// aren't met.
+type EventMappingsMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m EventMappingsMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m EventMappingsMultiError) AllErrors() []error { return m }
+
+// EventMappingsValidationError is the validation error returned by
+// EventMappings.Validate if the designated constraints aren't met.
+type EventMappingsValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e EventMappingsValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e EventMappingsValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e EventMappingsValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e EventMappingsValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e EventMappingsValidationError) ErrorName() string { return "EventMappingsValidationError" }
+
+// Error satisfies the builtin error interface
+func (e EventMappingsValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sEventMappings.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = EventMappingsValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = EventMappingsValidationError{}
+
+// Validate checks the field values on CreateCampaignRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateCampaignRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateCampaignRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateCampaignRequestMultiError, or nil if none found.
+func (m *CreateCampaignRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateCampaignRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetCampaign()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateCampaignRequestValidationError{
+					field:  "Campaign",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateCampaignRequestValidationError{
+					field:  "Campaign",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCampaign()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateCampaignRequestValidationError{
+				field:  "Campaign",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetInitiatorOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateCampaignRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateCampaignRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetInitiatorOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateCampaignRequestValidationError{
+				field:  "InitiatorOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for InitiatorUserId
+
+	if len(errors) > 0 {
+		return CreateCampaignRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateCampaignRequestMultiError is an error wrapping multiple validation
+// errors returned by CreateCampaignRequest.ValidateAll() if the designated
+// constraints aren't met.
+type CreateCampaignRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateCampaignRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateCampaignRequestMultiError) AllErrors() []error { return m }
+
+// CreateCampaignRequestValidationError is the validation error returned by
+// CreateCampaignRequest.Validate if the designated constraints aren't met.
+type CreateCampaignRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateCampaignRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateCampaignRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateCampaignRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateCampaignRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateCampaignRequestValidationError) ErrorName() string {
+	return "CreateCampaignRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateCampaignRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateCampaignRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateCampaignRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateCampaignRequestValidationError{}
+
+// Validate checks the field values on CreateCampaignResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateCampaignResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateCampaignResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateCampaignResponseMultiError, or nil if none found.
+func (m *CreateCampaignResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateCampaignResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for CampaignId
+
+	if len(errors) > 0 {
+		return CreateCampaignResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateCampaignResponseMultiError is an error wrapping multiple validation
+// errors returned by CreateCampaignResponse.ValidateAll() if the designated
+// constraints aren't met.
+type CreateCampaignResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateCampaignResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateCampaignResponseMultiError) AllErrors() []error { return m }
+
+// CreateCampaignResponseValidationError is the validation error returned by
+// CreateCampaignResponse.Validate if the designated constraints aren't met.
+type CreateCampaignResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateCampaignResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateCampaignResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateCampaignResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateCampaignResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateCampaignResponseValidationError) ErrorName() string {
+	return "CreateCampaignResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateCampaignResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateCampaignResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateCampaignResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateCampaignResponseValidationError{}
+
+// Validate checks the field values on UpdateCampaignRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateCampaignRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateCampaignRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateCampaignRequestMultiError, or nil if none found.
+func (m *UpdateCampaignRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateCampaignRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for CampaignId
+
+	// no validation rules for InitiatorUserId
+
+	if m.Campaign != nil {
+
+		if all {
+			switch v := interface{}(m.GetCampaign()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UpdateCampaignRequestValidationError{
+						field:  "Campaign",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UpdateCampaignRequestValidationError{
+						field:  "Campaign",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetCampaign()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UpdateCampaignRequestValidationError{
+					field:  "Campaign",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
+	}
+
+	if len(errors) > 0 {
+		return UpdateCampaignRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateCampaignRequestMultiError is an error wrapping multiple validation
+// errors returned by UpdateCampaignRequest.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateCampaignRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateCampaignRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateCampaignRequestMultiError) AllErrors() []error { return m }
+
+// UpdateCampaignRequestValidationError is the validation error returned by
+// UpdateCampaignRequest.Validate if the designated constraints aren't met.
+type UpdateCampaignRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateCampaignRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateCampaignRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateCampaignRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateCampaignRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateCampaignRequestValidationError) ErrorName() string {
+	return "UpdateCampaignRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateCampaignRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateCampaignRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateCampaignRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateCampaignRequestValidationError{}
+
+// Validate checks the field values on UpdateCampaignResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateCampaignResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateCampaignResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateCampaignResponseMultiError, or nil if none found.
+func (m *UpdateCampaignResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateCampaignResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return UpdateCampaignResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateCampaignResponseMultiError is an error wrapping multiple validation
+// errors returned by UpdateCampaignResponse.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateCampaignResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateCampaignResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateCampaignResponseMultiError) AllErrors() []error { return m }
+
+// UpdateCampaignResponseValidationError is the validation error returned by
+// UpdateCampaignResponse.Validate if the designated constraints aren't met.
+type UpdateCampaignResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateCampaignResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateCampaignResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateCampaignResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateCampaignResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateCampaignResponseValidationError) ErrorName() string {
+	return "UpdateCampaignResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateCampaignResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateCampaignResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateCampaignResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateCampaignResponseValidationError{}
+
+// Validate checks the field values on ListCampaignsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListCampaignsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListCampaignsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListCampaignsRequestMultiError, or nil if none found.
+func (m *ListCampaignsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListCampaignsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetInitiatorOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListCampaignsRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListCampaignsRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetInitiatorOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListCampaignsRequestValidationError{
+				field:  "InitiatorOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListCampaignsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListCampaignsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListCampaignsRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.CampaignName != nil {
+		// no validation rules for CampaignName
+	}
+
+	if m.CampaignId != nil {
+		// no validation rules for CampaignId
+	}
+
+	if m.Enabled != nil {
+		// no validation rules for Enabled
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if m.InitiatorUserId != nil {
+		// no validation rules for InitiatorUserId
+	}
+
+	if len(errors) > 0 {
+		return ListCampaignsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListCampaignsRequestMultiError is an error wrapping multiple validation
+// errors returned by ListCampaignsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListCampaignsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListCampaignsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListCampaignsRequestMultiError) AllErrors() []error { return m }
+
+// ListCampaignsRequestValidationError is the validation error returned by
+// ListCampaignsRequest.Validate if the designated constraints aren't met.
+type ListCampaignsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListCampaignsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListCampaignsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListCampaignsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListCampaignsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListCampaignsRequestValidationError) ErrorName() string {
+	return "ListCampaignsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListCampaignsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListCampaignsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListCampaignsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListCampaignsRequestValidationError{}
+
+// Validate checks the field values on ListCampaignsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListCampaignsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListCampaignsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListCampaignsResponseMultiError, or nil if none found.
+func (m *ListCampaignsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListCampaignsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetCampaigns() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListCampaignsResponseValidationError{
+						field:  fmt.Sprintf("Campaigns[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListCampaignsResponseValidationError{
+						field:  fmt.Sprintf("Campaigns[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListCampaignsResponseValidationError{
+					field:  fmt.Sprintf("Campaigns[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Total
+
+	// no validation rules for TotalEnabled
+
+	// no validation rules for TotalDisabled
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if len(errors) > 0 {
+		return ListCampaignsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListCampaignsResponseMultiError is an error wrapping multiple validation
+// errors returned by ListCampaignsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListCampaignsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListCampaignsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListCampaignsResponseMultiError) AllErrors() []error { return m }
+
+// ListCampaignsResponseValidationError is the validation error returned by
+// ListCampaignsResponse.Validate if the designated constraints aren't met.
+type ListCampaignsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListCampaignsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListCampaignsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListCampaignsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListCampaignsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListCampaignsResponseValidationError) ErrorName() string {
+	return "ListCampaignsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListCampaignsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListCampaignsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListCampaignsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListCampaignsResponseValidationError{}
+
+// Validate checks the field values on DeleteCampaignRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteCampaignRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteCampaignRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteCampaignRequestMultiError, or nil if none found.
+func (m *DeleteCampaignRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteCampaignRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for CampaignId
+
+	// no validation rules for InitiatorUserId
+
+	if len(errors) > 0 {
+		return DeleteCampaignRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteCampaignRequestMultiError is an error wrapping multiple validation
+// errors returned by DeleteCampaignRequest.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteCampaignRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteCampaignRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteCampaignRequestMultiError) AllErrors() []error { return m }
+
+// DeleteCampaignRequestValidationError is the validation error returned by
+// DeleteCampaignRequest.Validate if the designated constraints aren't met.
+type DeleteCampaignRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteCampaignRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteCampaignRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteCampaignRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteCampaignRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteCampaignRequestValidationError) ErrorName() string {
+	return "DeleteCampaignRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteCampaignRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteCampaignRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteCampaignRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteCampaignRequestValidationError{}
+
+// Validate checks the field values on DeleteCampaignResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteCampaignResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteCampaignResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteCampaignResponseMultiError, or nil if none found.
+func (m *DeleteCampaignResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteCampaignResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return DeleteCampaignResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteCampaignResponseMultiError is an error wrapping multiple validation
+// errors returned by DeleteCampaignResponse.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteCampaignResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteCampaignResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteCampaignResponseMultiError) AllErrors() []error { return m }
+
+// DeleteCampaignResponseValidationError is the validation error returned by
+// DeleteCampaignResponse.Validate if the designated constraints aren't met.
+type DeleteCampaignResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteCampaignResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteCampaignResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteCampaignResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteCampaignResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteCampaignResponseValidationError) ErrorName() string {
+	return "DeleteCampaignResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteCampaignResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteCampaignResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteCampaignResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteCampaignResponseValidationError{}
+
 // Validate checks the field values on ListAffiliatesResponse_Affiliate with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the first error encountered is returned, or nil if there are
@@ -1816,3 +3834,1276 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListAffiliatesResponse_AffiliateValidationError{}
+
+// Validate checks the field values on ChannelConfig_FacebookChannelConfig with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ChannelConfig_FacebookChannelConfig) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ChannelConfig_FacebookChannelConfig
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ChannelConfig_FacebookChannelConfigMultiError, or nil if none found.
+func (m *ChannelConfig_FacebookChannelConfig) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ChannelConfig_FacebookChannelConfig) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for PixelId
+
+	// no validation rules for AccessToken
+
+	if len(errors) > 0 {
+		return ChannelConfig_FacebookChannelConfigMultiError(errors)
+	}
+
+	return nil
+}
+
+// ChannelConfig_FacebookChannelConfigMultiError is an error wrapping multiple
+// validation errors returned by
+// ChannelConfig_FacebookChannelConfig.ValidateAll() if the designated
+// constraints aren't met.
+type ChannelConfig_FacebookChannelConfigMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ChannelConfig_FacebookChannelConfigMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ChannelConfig_FacebookChannelConfigMultiError) AllErrors() []error { return m }
+
+// ChannelConfig_FacebookChannelConfigValidationError is the validation error
+// returned by ChannelConfig_FacebookChannelConfig.Validate if the designated
+// constraints aren't met.
+type ChannelConfig_FacebookChannelConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ChannelConfig_FacebookChannelConfigValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ChannelConfig_FacebookChannelConfigValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ChannelConfig_FacebookChannelConfigValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ChannelConfig_FacebookChannelConfigValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ChannelConfig_FacebookChannelConfigValidationError) ErrorName() string {
+	return "ChannelConfig_FacebookChannelConfigValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ChannelConfig_FacebookChannelConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sChannelConfig_FacebookChannelConfig.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ChannelConfig_FacebookChannelConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ChannelConfig_FacebookChannelConfigValidationError{}
+
+// Validate checks the field values on ChannelConfig_TiktokChannelConfig with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ChannelConfig_TiktokChannelConfig) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ChannelConfig_TiktokChannelConfig
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ChannelConfig_TiktokChannelConfigMultiError, or nil if none found.
+func (m *ChannelConfig_TiktokChannelConfig) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ChannelConfig_TiktokChannelConfig) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for PixelId
+
+	// no validation rules for AccessToken
+
+	if len(errors) > 0 {
+		return ChannelConfig_TiktokChannelConfigMultiError(errors)
+	}
+
+	return nil
+}
+
+// ChannelConfig_TiktokChannelConfigMultiError is an error wrapping multiple
+// validation errors returned by
+// ChannelConfig_TiktokChannelConfig.ValidateAll() if the designated
+// constraints aren't met.
+type ChannelConfig_TiktokChannelConfigMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ChannelConfig_TiktokChannelConfigMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ChannelConfig_TiktokChannelConfigMultiError) AllErrors() []error { return m }
+
+// ChannelConfig_TiktokChannelConfigValidationError is the validation error
+// returned by ChannelConfig_TiktokChannelConfig.Validate if the designated
+// constraints aren't met.
+type ChannelConfig_TiktokChannelConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ChannelConfig_TiktokChannelConfigValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ChannelConfig_TiktokChannelConfigValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ChannelConfig_TiktokChannelConfigValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ChannelConfig_TiktokChannelConfigValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ChannelConfig_TiktokChannelConfigValidationError) ErrorName() string {
+	return "ChannelConfig_TiktokChannelConfigValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ChannelConfig_TiktokChannelConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sChannelConfig_TiktokChannelConfig.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ChannelConfig_TiktokChannelConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ChannelConfig_TiktokChannelConfigValidationError{}
+
+// Validate checks the field values on ChannelConfig_KwaiChannelConfig with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ChannelConfig_KwaiChannelConfig) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ChannelConfig_KwaiChannelConfig with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ChannelConfig_KwaiChannelConfigMultiError, or nil if none found.
+func (m *ChannelConfig_KwaiChannelConfig) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ChannelConfig_KwaiChannelConfig) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for PixelId
+
+	// no validation rules for AccessToken
+
+	// no validation rules for TrackFlag
+
+	if len(errors) > 0 {
+		return ChannelConfig_KwaiChannelConfigMultiError(errors)
+	}
+
+	return nil
+}
+
+// ChannelConfig_KwaiChannelConfigMultiError is an error wrapping multiple
+// validation errors returned by ChannelConfig_KwaiChannelConfig.ValidateAll()
+// if the designated constraints aren't met.
+type ChannelConfig_KwaiChannelConfigMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ChannelConfig_KwaiChannelConfigMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ChannelConfig_KwaiChannelConfigMultiError) AllErrors() []error { return m }
+
+// ChannelConfig_KwaiChannelConfigValidationError is the validation error
+// returned by ChannelConfig_KwaiChannelConfig.Validate if the designated
+// constraints aren't met.
+type ChannelConfig_KwaiChannelConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ChannelConfig_KwaiChannelConfigValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ChannelConfig_KwaiChannelConfigValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ChannelConfig_KwaiChannelConfigValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ChannelConfig_KwaiChannelConfigValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ChannelConfig_KwaiChannelConfigValidationError) ErrorName() string {
+	return "ChannelConfig_KwaiChannelConfigValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ChannelConfig_KwaiChannelConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sChannelConfig_KwaiChannelConfig.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ChannelConfig_KwaiChannelConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ChannelConfig_KwaiChannelConfigValidationError{}
+
+// Validate checks the field values on ChannelConfig_AppsflyerChannelConfig
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ChannelConfig_AppsflyerChannelConfig) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ChannelConfig_AppsflyerChannelConfig
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ChannelConfig_AppsflyerChannelConfigMultiError, or nil if none found.
+func (m *ChannelConfig_AppsflyerChannelConfig) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ChannelConfig_AppsflyerChannelConfig) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AppPlatform
+
+	// no validation rules for BundleId
+
+	// no validation rules for DevKey
+
+	if len(errors) > 0 {
+		return ChannelConfig_AppsflyerChannelConfigMultiError(errors)
+	}
+
+	return nil
+}
+
+// ChannelConfig_AppsflyerChannelConfigMultiError is an error wrapping multiple
+// validation errors returned by
+// ChannelConfig_AppsflyerChannelConfig.ValidateAll() if the designated
+// constraints aren't met.
+type ChannelConfig_AppsflyerChannelConfigMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ChannelConfig_AppsflyerChannelConfigMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ChannelConfig_AppsflyerChannelConfigMultiError) AllErrors() []error { return m }
+
+// ChannelConfig_AppsflyerChannelConfigValidationError is the validation error
+// returned by ChannelConfig_AppsflyerChannelConfig.Validate if the designated
+// constraints aren't met.
+type ChannelConfig_AppsflyerChannelConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ChannelConfig_AppsflyerChannelConfigValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ChannelConfig_AppsflyerChannelConfigValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ChannelConfig_AppsflyerChannelConfigValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ChannelConfig_AppsflyerChannelConfigValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ChannelConfig_AppsflyerChannelConfigValidationError) ErrorName() string {
+	return "ChannelConfig_AppsflyerChannelConfigValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ChannelConfig_AppsflyerChannelConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sChannelConfig_AppsflyerChannelConfig.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ChannelConfig_AppsflyerChannelConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ChannelConfig_AppsflyerChannelConfigValidationError{}
+
+// Validate checks the field values on ChannelConfig_AdjustChannelConfig with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ChannelConfig_AdjustChannelConfig) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ChannelConfig_AdjustChannelConfig
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ChannelConfig_AdjustChannelConfigMultiError, or nil if none found.
+func (m *ChannelConfig_AdjustChannelConfig) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ChannelConfig_AdjustChannelConfig) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AppPlatform
+
+	// no validation rules for AppToken
+
+	// no validation rules for BundleId
+
+	if len(errors) > 0 {
+		return ChannelConfig_AdjustChannelConfigMultiError(errors)
+	}
+
+	return nil
+}
+
+// ChannelConfig_AdjustChannelConfigMultiError is an error wrapping multiple
+// validation errors returned by
+// ChannelConfig_AdjustChannelConfig.ValidateAll() if the designated
+// constraints aren't met.
+type ChannelConfig_AdjustChannelConfigMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ChannelConfig_AdjustChannelConfigMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ChannelConfig_AdjustChannelConfigMultiError) AllErrors() []error { return m }
+
+// ChannelConfig_AdjustChannelConfigValidationError is the validation error
+// returned by ChannelConfig_AdjustChannelConfig.Validate if the designated
+// constraints aren't met.
+type ChannelConfig_AdjustChannelConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ChannelConfig_AdjustChannelConfigValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ChannelConfig_AdjustChannelConfigValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ChannelConfig_AdjustChannelConfigValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ChannelConfig_AdjustChannelConfigValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ChannelConfig_AdjustChannelConfigValidationError) ErrorName() string {
+	return "ChannelConfig_AdjustChannelConfigValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ChannelConfig_AdjustChannelConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sChannelConfig_AdjustChannelConfig.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ChannelConfig_AdjustChannelConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ChannelConfig_AdjustChannelConfigValidationError{}
+
+// Validate checks the field values on ChannelConfig_AgencyChannelConfig with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ChannelConfig_AgencyChannelConfig) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ChannelConfig_AgencyChannelConfig
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ChannelConfig_AgencyChannelConfigMultiError, or nil if none found.
+func (m *ChannelConfig_AgencyChannelConfig) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ChannelConfig_AgencyChannelConfig) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for CampaignId
+
+	if len(errors) > 0 {
+		return ChannelConfig_AgencyChannelConfigMultiError(errors)
+	}
+
+	return nil
+}
+
+// ChannelConfig_AgencyChannelConfigMultiError is an error wrapping multiple
+// validation errors returned by
+// ChannelConfig_AgencyChannelConfig.ValidateAll() if the designated
+// constraints aren't met.
+type ChannelConfig_AgencyChannelConfigMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ChannelConfig_AgencyChannelConfigMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ChannelConfig_AgencyChannelConfigMultiError) AllErrors() []error { return m }
+
+// ChannelConfig_AgencyChannelConfigValidationError is the validation error
+// returned by ChannelConfig_AgencyChannelConfig.Validate if the designated
+// constraints aren't met.
+type ChannelConfig_AgencyChannelConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ChannelConfig_AgencyChannelConfigValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ChannelConfig_AgencyChannelConfigValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ChannelConfig_AgencyChannelConfigValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ChannelConfig_AgencyChannelConfigValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ChannelConfig_AgencyChannelConfigValidationError) ErrorName() string {
+	return "ChannelConfig_AgencyChannelConfigValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ChannelConfig_AgencyChannelConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sChannelConfig_AgencyChannelConfig.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ChannelConfig_AgencyChannelConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ChannelConfig_AgencyChannelConfigValidationError{}
+
+// Validate checks the field values on ChannelConfig_GoogleAdsChannelConfig
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ChannelConfig_GoogleAdsChannelConfig) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ChannelConfig_GoogleAdsChannelConfig
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ChannelConfig_GoogleAdsChannelConfigMultiError, or nil if none found.
+func (m *ChannelConfig_GoogleAdsChannelConfig) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ChannelConfig_GoogleAdsChannelConfig) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for CustomerId
+
+	// no validation rules for ConversionAction
+
+	if len(errors) > 0 {
+		return ChannelConfig_GoogleAdsChannelConfigMultiError(errors)
+	}
+
+	return nil
+}
+
+// ChannelConfig_GoogleAdsChannelConfigMultiError is an error wrapping multiple
+// validation errors returned by
+// ChannelConfig_GoogleAdsChannelConfig.ValidateAll() if the designated
+// constraints aren't met.
+type ChannelConfig_GoogleAdsChannelConfigMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ChannelConfig_GoogleAdsChannelConfigMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ChannelConfig_GoogleAdsChannelConfigMultiError) AllErrors() []error { return m }
+
+// ChannelConfig_GoogleAdsChannelConfigValidationError is the validation error
+// returned by ChannelConfig_GoogleAdsChannelConfig.Validate if the designated
+// constraints aren't met.
+type ChannelConfig_GoogleAdsChannelConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ChannelConfig_GoogleAdsChannelConfigValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ChannelConfig_GoogleAdsChannelConfigValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ChannelConfig_GoogleAdsChannelConfigValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ChannelConfig_GoogleAdsChannelConfigValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ChannelConfig_GoogleAdsChannelConfigValidationError) ErrorName() string {
+	return "ChannelConfig_GoogleAdsChannelConfigValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ChannelConfig_GoogleAdsChannelConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sChannelConfig_GoogleAdsChannelConfig.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ChannelConfig_GoogleAdsChannelConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ChannelConfig_GoogleAdsChannelConfigValidationError{}
+
+// Validate checks the field values on CustomParams_CustomParam with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CustomParams_CustomParam) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CustomParams_CustomParam with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CustomParams_CustomParamMultiError, or nil if none found.
+func (m *CustomParams_CustomParam) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CustomParams_CustomParam) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Name
+
+	// no validation rules for Value
+
+	if len(errors) > 0 {
+		return CustomParams_CustomParamMultiError(errors)
+	}
+
+	return nil
+}
+
+// CustomParams_CustomParamMultiError is an error wrapping multiple validation
+// errors returned by CustomParams_CustomParam.ValidateAll() if the designated
+// constraints aren't met.
+type CustomParams_CustomParamMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CustomParams_CustomParamMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CustomParams_CustomParamMultiError) AllErrors() []error { return m }
+
+// CustomParams_CustomParamValidationError is the validation error returned by
+// CustomParams_CustomParam.Validate if the designated constraints aren't met.
+type CustomParams_CustomParamValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CustomParams_CustomParamValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CustomParams_CustomParamValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CustomParams_CustomParamValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CustomParams_CustomParamValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CustomParams_CustomParamValidationError) ErrorName() string {
+	return "CustomParams_CustomParamValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CustomParams_CustomParamValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCustomParams_CustomParam.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CustomParams_CustomParamValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CustomParams_CustomParamValidationError{}
+
+// Validate checks the field values on EventMappings_EventMapping with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *EventMappings_EventMapping) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on EventMappings_EventMapping with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// EventMappings_EventMappingMultiError, or nil if none found.
+func (m *EventMappings_EventMapping) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *EventMappings_EventMapping) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.ChannelEvent != nil {
+		// no validation rules for ChannelEvent
+	}
+
+	if m.CustomName != nil {
+		// no validation rules for CustomName
+	}
+
+	if len(errors) > 0 {
+		return EventMappings_EventMappingMultiError(errors)
+	}
+
+	return nil
+}
+
+// EventMappings_EventMappingMultiError is an error wrapping multiple
+// validation errors returned by EventMappings_EventMapping.ValidateAll() if
+// the designated constraints aren't met.
+type EventMappings_EventMappingMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m EventMappings_EventMappingMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m EventMappings_EventMappingMultiError) AllErrors() []error { return m }
+
+// EventMappings_EventMappingValidationError is the validation error returned
+// by EventMappings_EventMapping.Validate if the designated constraints aren't met.
+type EventMappings_EventMappingValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e EventMappings_EventMappingValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e EventMappings_EventMappingValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e EventMappings_EventMappingValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e EventMappings_EventMappingValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e EventMappings_EventMappingValidationError) ErrorName() string {
+	return "EventMappings_EventMappingValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e EventMappings_EventMappingValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sEventMappings_EventMapping.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = EventMappings_EventMappingValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = EventMappings_EventMappingValidationError{}
+
+// Validate checks the field values on CreateCampaignRequest_Campaign with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateCampaignRequest_Campaign) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateCampaignRequest_Campaign with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// CreateCampaignRequest_CampaignMultiError, or nil if none found.
+func (m *CreateCampaignRequest_Campaign) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateCampaignRequest_Campaign) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Domain
+
+	// no validation rules for CampaignName
+
+	// no validation rules for ChannelType
+
+	if all {
+		switch v := interface{}(m.GetChannelConfig()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateCampaignRequest_CampaignValidationError{
+					field:  "ChannelConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateCampaignRequest_CampaignValidationError{
+					field:  "ChannelConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetChannelConfig()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateCampaignRequest_CampaignValidationError{
+				field:  "ChannelConfig",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return CreateCampaignRequest_CampaignMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateCampaignRequest_CampaignMultiError is an error wrapping multiple
+// validation errors returned by CreateCampaignRequest_Campaign.ValidateAll()
+// if the designated constraints aren't met.
+type CreateCampaignRequest_CampaignMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateCampaignRequest_CampaignMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateCampaignRequest_CampaignMultiError) AllErrors() []error { return m }
+
+// CreateCampaignRequest_CampaignValidationError is the validation error
+// returned by CreateCampaignRequest_Campaign.Validate if the designated
+// constraints aren't met.
+type CreateCampaignRequest_CampaignValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateCampaignRequest_CampaignValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateCampaignRequest_CampaignValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateCampaignRequest_CampaignValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateCampaignRequest_CampaignValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateCampaignRequest_CampaignValidationError) ErrorName() string {
+	return "CreateCampaignRequest_CampaignValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateCampaignRequest_CampaignValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateCampaignRequest_Campaign.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateCampaignRequest_CampaignValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateCampaignRequest_CampaignValidationError{}
+
+// Validate checks the field values on ListCampaignsResponse_Campaign with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListCampaignsResponse_Campaign) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListCampaignsResponse_Campaign with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListCampaignsResponse_CampaignMultiError, or nil if none found.
+func (m *ListCampaignsResponse_Campaign) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListCampaignsResponse_Campaign) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for CampaignId
+
+	// no validation rules for AffiliateCompanyName
+
+	// no validation rules for AffiliateId
+
+	// no validation rules for SystemOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for OperatorName
+
+	// no validation rules for CampaignName
+
+	// no validation rules for EventMappingsStatus
+
+	// no validation rules for EventMappingsCount
+
+	// no validation rules for Status
+
+	if all {
+		switch v := interface{}(m.GetCampaign()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListCampaignsResponse_CampaignValidationError{
+					field:  "Campaign",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListCampaignsResponse_CampaignValidationError{
+					field:  "Campaign",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCampaign()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListCampaignsResponse_CampaignValidationError{
+				field:  "Campaign",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return ListCampaignsResponse_CampaignMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListCampaignsResponse_CampaignMultiError is an error wrapping multiple
+// validation errors returned by ListCampaignsResponse_Campaign.ValidateAll()
+// if the designated constraints aren't met.
+type ListCampaignsResponse_CampaignMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListCampaignsResponse_CampaignMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListCampaignsResponse_CampaignMultiError) AllErrors() []error { return m }
+
+// ListCampaignsResponse_CampaignValidationError is the validation error
+// returned by ListCampaignsResponse_Campaign.Validate if the designated
+// constraints aren't met.
+type ListCampaignsResponse_CampaignValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListCampaignsResponse_CampaignValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListCampaignsResponse_CampaignValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListCampaignsResponse_CampaignValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListCampaignsResponse_CampaignValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListCampaignsResponse_CampaignValidationError) ErrorName() string {
+	return "ListCampaignsResponse_CampaignValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListCampaignsResponse_CampaignValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListCampaignsResponse_Campaign.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListCampaignsResponse_CampaignValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListCampaignsResponse_CampaignValidationError{}
