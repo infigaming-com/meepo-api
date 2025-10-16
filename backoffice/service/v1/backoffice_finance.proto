@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package api.backoffice.service.v1;
 import "common/common.proto";
-
+import "game/service/v1/game.proto";
 import "google/api/annotations.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
@@ -153,6 +153,13 @@ service BackofficeFinance {
 	rpc ListTaxReports(ListTaxReportsRequest) returns (ListTaxReportsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/finance/tax-reports/list"
+			body: "*"
+		};
+	}
+
+	rpc ExportTaxReports(ExportTaxReportsRequest) returns (game.service.v1.ExportTaxReportsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/finance/tax-reports/export"
 			body: "*"
 		};
 	}
@@ -763,6 +770,15 @@ message ListTaxReportsResponse {
 	int32 total_count = 2;
 	int32 page = 3;
 	int32 page_size = 4;
+}
+
+message ExportTaxReportsRequest {
+	string tax_period = 1;
+	// license_provider: south_afirca
+	string report_category = 2;
+	optional string period_type = 3;
+	string format = 4; // accepted values: csv, excel, pdf
+	string time_zone = 5; // e.g. UTC+0, UTC+8, etc.
 }
 
 // Tax report record status
