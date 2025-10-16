@@ -244,18 +244,18 @@ service BackofficeWallet {
 		};
 	}
 
-	// Credit
+	// ManualCredit
 	rpc ManualCredit(CreditRequest) returns (wallet.service.v1.CreditResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/wallet/credit"
+			post: "/v1/backoffice/wallet/manual/credit"
 			body: "*"
 		};
 	}
 
-	// Debit
+	// ManualDebit
 	rpc ManualDebit(DebitRequest) returns (wallet.service.v1.DebitResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/wallet/debit"
+			post: "/v1/backoffice/wallet/manual/debit"
 			body: "*"
 		};
 	}
