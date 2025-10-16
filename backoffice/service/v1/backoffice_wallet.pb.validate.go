@@ -6752,6 +6752,239 @@ var _ interface {
 	ErrorName() string
 } = ExportFICAThresholdTransactionsRequestValidationError{}
 
+// Validate checks the field values on CreditRequest with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *CreditRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreditRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in CreditRequestMultiError, or
+// nil if none found.
+func (m *CreditRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreditRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	// no validation rules for Currency
+
+	// no validation rules for TransactionType
+
+	// no validation rules for CashAmount
+
+	// no validation rules for CashTurnoverThreshold
+
+	// no validation rules for OperatorBonusAmount
+
+	// no validation rules for OperatorBonusTurnoverThreshold
+
+	// no validation rules for OperatorBonusWithdrawLimit
+
+	// no validation rules for Comment
+
+	if m.ExternalTransactionId != nil {
+		// no validation rules for ExternalTransactionId
+	}
+
+	if len(errors) > 0 {
+		return CreditRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreditRequestMultiError is an error wrapping multiple validation errors
+// returned by CreditRequest.ValidateAll() if the designated constraints
+// aren't met.
+type CreditRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreditRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreditRequestMultiError) AllErrors() []error { return m }
+
+// CreditRequestValidationError is the validation error returned by
+// CreditRequest.Validate if the designated constraints aren't met.
+type CreditRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreditRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreditRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreditRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreditRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreditRequestValidationError) ErrorName() string { return "CreditRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e CreditRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreditRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreditRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreditRequestValidationError{}
+
+// Validate checks the field values on DebitRequest with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *DebitRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DebitRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in DebitRequestMultiError, or
+// nil if none found.
+func (m *DebitRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DebitRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	// no validation rules for Currency
+
+	// no validation rules for ReportingCurrency
+
+	// no validation rules for TransactionType
+
+	// no validation rules for TransactionId
+
+	// no validation rules for Cash
+
+	if len(errors) > 0 {
+		return DebitRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DebitRequestMultiError is an error wrapping multiple validation errors
+// returned by DebitRequest.ValidateAll() if the designated constraints aren't met.
+type DebitRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DebitRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DebitRequestMultiError) AllErrors() []error { return m }
+
+// DebitRequestValidationError is the validation error returned by
+// DebitRequest.Validate if the designated constraints aren't met.
+type DebitRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DebitRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DebitRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DebitRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DebitRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DebitRequestValidationError) ErrorName() string { return "DebitRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e DebitRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDebitRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DebitRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DebitRequestValidationError{}
+
 // Validate checks the field values on GetWalletCreditsResponse_Credit with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

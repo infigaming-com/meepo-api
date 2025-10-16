@@ -243,6 +243,22 @@ service BackofficeWallet {
 			body: "*"
 		};
 	}
+
+	// Credit - 讓後台可以對使用者錢包進行加值
+	rpc Credit(CreditRequest) returns (wallet.service.v1.CreditResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/credit"
+			body: "*"
+		};
+	}
+
+	// Debit - 讓後台可以對使用者錢包進行扣款
+	rpc Debit(DebitRequest) returns (wallet.service.v1.DebitResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/debit"
+			body: "*"
+		};
+	}
 }
 
 message GetWalletsRequest {
@@ -645,4 +661,26 @@ message ExportFICAThresholdTransactionsRequest {
 	string format = 6; // accepted values: csv, excel, pdf
 	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
 	api.common.OperatorContext target_operator_context = 8;
+}
+
+message CreditRequest {
+	int64 user_id = 1;
+	string currency = 2;
+	string transaction_type = 3;
+	string cash_amount = 4;
+	string cash_turnover_threshold = 5;
+	string operator_bonus_amount = 6;
+	string operator_bonus_turnover_threshold = 7;
+	string operator_bonus_withdraw_limit = 8;
+	string comment = 9;
+	optional int64 external_transaction_id = 10;
+}
+
+message DebitRequest {
+	int64 user_id = 1;
+	string currency = 2;
+	string reporting_currency = 3;
+	string transaction_type = 4;
+	int64 transaction_id = 5;
+	string cash = 6;
 }

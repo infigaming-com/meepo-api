@@ -3642,6 +3642,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListWalletBalanceTransactionsResponse'
+    /v1/backoffice/wallet/credit:
+        post:
+            tags:
+                - BackofficeWallet
+            description: Credit - 讓後台可以對使用者錢包進行加值
+            operationId: BackofficeWallet_Credit
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreditRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.CreditResponse'
     /v1/backoffice/wallet/credit-transactions/get:
         post:
             tags:
@@ -3790,6 +3809,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.ListCustomerRecordsResponse'
+    /v1/backoffice/wallet/debit:
+        post:
+            tags:
+                - BackofficeWallet
+            description: Debit - 讓後台可以對使用者錢包進行扣款
+            operationId: BackofficeWallet_Debit
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DebitRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.DebitResponse'
     /v1/backoffice/wallet/deduction-order/update:
         post:
             tags:
@@ -6690,6 +6728,29 @@ components:
             properties:
                 ticketId:
                     type: string
+        api.backoffice.service.v1.CreditRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                currency:
+                    type: string
+                transactionType:
+                    type: string
+                cashAmount:
+                    type: string
+                cashTurnoverThreshold:
+                    type: string
+                operatorBonusAmount:
+                    type: string
+                operatorBonusTurnoverThreshold:
+                    type: string
+                operatorBonusWithdrawLimit:
+                    type: string
+                comment:
+                    type: string
+                externalTransactionId:
+                    type: string
         api.backoffice.service.v1.CustomerRecordReportDetailRequest:
             type: object
             properties:
@@ -6788,6 +6849,21 @@ components:
                 idNumber:
                     type: string
                 address:
+                    type: string
+        api.backoffice.service.v1.DebitRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                currency:
+                    type: string
+                reportingCurrency:
+                    type: string
+                transactionType:
+                    type: string
+                transactionId:
+                    type: string
+                cash:
                     type: string
         api.backoffice.service.v1.DeleteAdjustmentConfigRequest:
             type: object
@@ -15898,6 +15974,11 @@ components:
                     type: string
                 balanceBonus:
                     type: string
+        api.wallet.service.v1.CreditResponse:
+            type: object
+            properties:
+                transactionId:
+                    type: string
         api.wallet.service.v1.Currency:
             type: object
             properties:
@@ -15928,6 +16009,11 @@ components:
                     type: boolean
                 parentHidden:
                     type: boolean
+        api.wallet.service.v1.DebitResponse:
+            type: object
+            properties:
+                transactionId:
+                    type: string
         api.wallet.service.v1.DeductionOrder:
             type: object
             properties:
