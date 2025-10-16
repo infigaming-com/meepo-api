@@ -5285,6 +5285,120 @@ var _ interface {
 	ErrorName() string
 } = ListTaxReportsResponseValidationError{}
 
+// Validate checks the field values on ExportTaxReportsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ExportTaxReportsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ExportTaxReportsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ExportTaxReportsRequestMultiError, or nil if none found.
+func (m *ExportTaxReportsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ExportTaxReportsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TaxPeriod
+
+	// no validation rules for ReportCategory
+
+	// no validation rules for Format
+
+	// no validation rules for TimeZone
+
+	if m.PeriodType != nil {
+		// no validation rules for PeriodType
+	}
+
+	if len(errors) > 0 {
+		return ExportTaxReportsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ExportTaxReportsRequestMultiError is an error wrapping multiple validation
+// errors returned by ExportTaxReportsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ExportTaxReportsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ExportTaxReportsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ExportTaxReportsRequestMultiError) AllErrors() []error { return m }
+
+// ExportTaxReportsRequestValidationError is the validation error returned by
+// ExportTaxReportsRequest.Validate if the designated constraints aren't met.
+type ExportTaxReportsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ExportTaxReportsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ExportTaxReportsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ExportTaxReportsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ExportTaxReportsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ExportTaxReportsRequestValidationError) ErrorName() string {
+	return "ExportTaxReportsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ExportTaxReportsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sExportTaxReportsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ExportTaxReportsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ExportTaxReportsRequestValidationError{}
+
 // Validate checks the field values on UpdateTaxReportRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

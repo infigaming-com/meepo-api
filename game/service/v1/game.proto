@@ -126,6 +126,9 @@ service Game {
 	rpc ListTaxReports(ListTaxReportsRequest) returns (ListTaxReportsResponse) {
 	}
 
+	rpc ExportTaxReports(ExportTaxReportsRequest) returns (ExportTaxReportsResponse) {
+	}
+
 	rpc UpdateTaxReport(UpdateTaxReportRequest) returns (UpdateTaxReportResponse) {
 	}
 
@@ -949,6 +952,21 @@ message ListTaxReportsResponse {
 	int32 total_count = 2;
 	int32 page = 3;
 	int32 page_size = 4;
+}
+
+message ExportTaxReportsRequest {
+	string tax_period = 1;
+	// license_provider: south_afirca
+	string report_category = 2;
+	optional string period_type = 3;
+	string format = 4; // accepted values: csv, excel, pdf
+	string time_zone = 5; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContext operator_context = 6;
+	int64 initiator_user_id = 7;
+}
+
+message ExportTaxReportsResponse {
+	int64 task_id = 1;
 }
 
 // Tax report record status
