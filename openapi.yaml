@@ -3646,8 +3646,8 @@ paths:
         post:
             tags:
                 - BackofficeWallet
-            description: Credit - 讓後台可以對使用者錢包進行加值
-            operationId: BackofficeWallet_Credit
+            description: Credit
+            operationId: BackofficeWallet_ManualCredit
             requestBody:
                 content:
                     application/json:
@@ -3813,8 +3813,8 @@ paths:
         post:
             tags:
                 - BackofficeWallet
-            description: Debit - 讓後台可以對使用者錢包進行扣款
-            operationId: BackofficeWallet_Debit
+            description: Debit
+            operationId: BackofficeWallet_ManualDebit
             requestBody:
                 content:
                     application/json:

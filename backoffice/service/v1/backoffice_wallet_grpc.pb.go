@@ -52,8 +52,8 @@ const (
 	BackofficeWallet_GetFICAThresholdConfig_FullMethodName                = "/api.backoffice.service.v1.BackofficeWallet/GetFICAThresholdConfig"
 	BackofficeWallet_ListFICAThresholdTransactions_FullMethodName         = "/api.backoffice.service.v1.BackofficeWallet/ListFICAThresholdTransactions"
 	BackofficeWallet_ExportFICAThresholdTransactions_FullMethodName       = "/api.backoffice.service.v1.BackofficeWallet/ExportFICAThresholdTransactions"
-	BackofficeWallet_Credit_FullMethodName                                = "/api.backoffice.service.v1.BackofficeWallet/Credit"
-	BackofficeWallet_Debit_FullMethodName                                 = "/api.backoffice.service.v1.BackofficeWallet/Debit"
+	BackofficeWallet_ManualCredit_FullMethodName                          = "/api.backoffice.service.v1.BackofficeWallet/ManualCredit"
+	BackofficeWallet_ManualDebit_FullMethodName                           = "/api.backoffice.service.v1.BackofficeWallet/ManualDebit"
 )
 
 // BackofficeWalletClient is the client API for BackofficeWallet service.
@@ -117,10 +117,10 @@ type BackofficeWalletClient interface {
 	ListFICAThresholdTransactions(ctx context.Context, in *ListFICAThresholdTransactionsRequest, opts ...grpc.CallOption) (*v1.ListFICAThresholdTransactionsResponse, error)
 	// ExportFICAThresholdTransactions creates a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
 	ExportFICAThresholdTransactions(ctx context.Context, in *ExportFICAThresholdTransactionsRequest, opts ...grpc.CallOption) (*v1.ExportFICAThresholdTransactionsResponse, error)
-	// Credit - 讓後台可以對使用者錢包進行加值
-	Credit(ctx context.Context, in *CreditRequest, opts ...grpc.CallOption) (*v1.CreditResponse, error)
-	// Debit - 讓後台可以對使用者錢包進行扣款
-	Debit(ctx context.Context, in *DebitRequest, opts ...grpc.CallOption) (*v1.DebitResponse, error)
+	// Credit
+	ManualCredit(ctx context.Context, in *CreditRequest, opts ...grpc.CallOption) (*v1.CreditResponse, error)
+	// Debit
+	ManualDebit(ctx context.Context, in *DebitRequest, opts ...grpc.CallOption) (*v1.DebitResponse, error)
 }
 
 type backofficeWalletClient struct {
@@ -451,20 +451,20 @@ func (c *backofficeWalletClient) ExportFICAThresholdTransactions(ctx context.Con
 	return out, nil
 }
 
-func (c *backofficeWalletClient) Credit(ctx context.Context, in *CreditRequest, opts ...grpc.CallOption) (*v1.CreditResponse, error) {
+func (c *backofficeWalletClient) ManualCredit(ctx context.Context, in *CreditRequest, opts ...grpc.CallOption) (*v1.CreditResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.CreditResponse)
-	err := c.cc.Invoke(ctx, BackofficeWallet_Credit_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeWallet_ManualCredit_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backofficeWalletClient) Debit(ctx context.Context, in *DebitRequest, opts ...grpc.CallOption) (*v1.DebitResponse, error) {
+func (c *backofficeWalletClient) ManualDebit(ctx context.Context, in *DebitRequest, opts ...grpc.CallOption) (*v1.DebitResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.DebitResponse)
-	err := c.cc.Invoke(ctx, BackofficeWallet_Debit_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, BackofficeWallet_ManualDebit_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -532,10 +532,10 @@ type BackofficeWalletServer interface {
 	ListFICAThresholdTransactions(context.Context, *ListFICAThresholdTransactionsRequest) (*v1.ListFICAThresholdTransactionsResponse, error)
 	// ExportFICAThresholdTransactions creates a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
 	ExportFICAThresholdTransactions(context.Context, *ExportFICAThresholdTransactionsRequest) (*v1.ExportFICAThresholdTransactionsResponse, error)
-	// Credit - 讓後台可以對使用者錢包進行加值
-	Credit(context.Context, *CreditRequest) (*v1.CreditResponse, error)
-	// Debit - 讓後台可以對使用者錢包進行扣款
-	Debit(context.Context, *DebitRequest) (*v1.DebitResponse, error)
+	// Credit
+	ManualCredit(context.Context, *CreditRequest) (*v1.CreditResponse, error)
+	// Debit
+	ManualDebit(context.Context, *DebitRequest) (*v1.DebitResponse, error)
 	mustEmbedUnimplementedBackofficeWalletServer()
 }
 
@@ -642,11 +642,11 @@ func (UnimplementedBackofficeWalletServer) ListFICAThresholdTransactions(context
 func (UnimplementedBackofficeWalletServer) ExportFICAThresholdTransactions(context.Context, *ExportFICAThresholdTransactionsRequest) (*v1.ExportFICAThresholdTransactionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExportFICAThresholdTransactions not implemented")
 }
-func (UnimplementedBackofficeWalletServer) Credit(context.Context, *CreditRequest) (*v1.CreditResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Credit not implemented")
+func (UnimplementedBackofficeWalletServer) ManualCredit(context.Context, *CreditRequest) (*v1.CreditResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ManualCredit not implemented")
 }
-func (UnimplementedBackofficeWalletServer) Debit(context.Context, *DebitRequest) (*v1.DebitResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Debit not implemented")
+func (UnimplementedBackofficeWalletServer) ManualDebit(context.Context, *DebitRequest) (*v1.DebitResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ManualDebit not implemented")
 }
 func (UnimplementedBackofficeWalletServer) mustEmbedUnimplementedBackofficeWalletServer() {}
 func (UnimplementedBackofficeWalletServer) testEmbeddedByValue()                          {}
@@ -1245,38 +1245,38 @@ func _BackofficeWallet_ExportFICAThresholdTransactions_Handler(srv interface{}, 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeWallet_Credit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeWallet_ManualCredit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreditRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeWalletServer).Credit(ctx, in)
+		return srv.(BackofficeWalletServer).ManualCredit(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeWallet_Credit_FullMethodName,
+		FullMethod: BackofficeWallet_ManualCredit_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeWalletServer).Credit(ctx, req.(*CreditRequest))
+		return srv.(BackofficeWalletServer).ManualCredit(ctx, req.(*CreditRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeWallet_Debit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BackofficeWallet_ManualDebit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DebitRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeWalletServer).Debit(ctx, in)
+		return srv.(BackofficeWalletServer).ManualDebit(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeWallet_Debit_FullMethodName,
+		FullMethod: BackofficeWallet_ManualDebit_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeWalletServer).Debit(ctx, req.(*DebitRequest))
+		return srv.(BackofficeWalletServer).ManualDebit(ctx, req.(*DebitRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1417,12 +1417,12 @@ var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BackofficeWallet_ExportFICAThresholdTransactions_Handler,
 		},
 		{
-			MethodName: "Credit",
-			Handler:    _BackofficeWallet_Credit_Handler,
+			MethodName: "ManualCredit",
+			Handler:    _BackofficeWallet_ManualCredit_Handler,
 		},
 		{
-			MethodName: "Debit",
-			Handler:    _BackofficeWallet_Debit_Handler,
+			MethodName: "ManualDebit",
+			Handler:    _BackofficeWallet_ManualDebit_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

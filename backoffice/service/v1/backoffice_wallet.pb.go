@@ -4199,7 +4199,7 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x12reporting_currency\x18\x03 \x01(\tR\x11reportingCurrency\x12)\n" +
 	"\x10transaction_type\x18\x04 \x01(\tR\x0ftransactionType\x12%\n" +
 	"\x0etransaction_id\x18\x05 \x01(\x03R\rtransactionId\x12\x12\n" +
-	"\x04cash\x18\x06 \x01(\tR\x04cash2\xd93\n" +
+	"\x04cash\x18\x06 \x01(\tR\x04cash2\xe63\n" +
 	"\x10BackofficeWallet\x12\x8b\x01\n" +
 	"\n" +
 	"GetWallets\x12,.api.backoffice.service.v1.GetWalletsRequest\x1a).api.wallet.service.v1.GetWalletsResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/backoffice/wallet/get\x12\xa9\x01\n" +
@@ -4233,9 +4233,9 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x16SetFICAThresholdConfig\x128.api.backoffice.service.v1.SetFICAThresholdConfigRequest\x1a5.api.wallet.service.v1.SetFICAThresholdConfigResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/wallet/fica/config/set\x12\xbb\x01\n" +
 	"\x16GetFICAThresholdConfig\x128.api.backoffice.service.v1.GetFICAThresholdConfigRequest\x1a5.api.wallet.service.v1.GetFICAThresholdConfigResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/wallet/fica/config/get\x12\xd7\x01\n" +
 	"\x1dListFICAThresholdTransactions\x12?.api.backoffice.service.v1.ListFICAThresholdTransactionsRequest\x1a<.api.wallet.service.v1.ListFICAThresholdTransactionsResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/wallet/fica/transactions/list\x12\xdf\x01\n" +
-	"\x1fExportFICAThresholdTransactions\x12A.api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest\x1a>.api.wallet.service.v1.ExportFICAThresholdTransactionsResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./v1/backoffice/wallet/fica/transactions/export\x12\x82\x01\n" +
-	"\x06Credit\x12(.api.backoffice.service.v1.CreditRequest\x1a%.api.wallet.service.v1.CreditResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/wallet/credit\x12~\n" +
-	"\x05Debit\x12'.api.backoffice.service.v1.DebitRequest\x1a$.api.wallet.service.v1.DebitResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/backoffice/wallet/debitB[\n" +
+	"\x1fExportFICAThresholdTransactions\x12A.api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest\x1a>.api.wallet.service.v1.ExportFICAThresholdTransactionsResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./v1/backoffice/wallet/fica/transactions/export\x12\x88\x01\n" +
+	"\fManualCredit\x12(.api.backoffice.service.v1.CreditRequest\x1a%.api.wallet.service.v1.CreditResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/wallet/credit\x12\x84\x01\n" +
+	"\vManualDebit\x12'.api.backoffice.service.v1.DebitRequest\x1a$.api.wallet.service.v1.DebitResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/backoffice/wallet/debitB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -4422,8 +4422,8 @@ var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
 	43, // 84: api.backoffice.service.v1.BackofficeWallet.GetFICAThresholdConfig:input_type -> api.backoffice.service.v1.GetFICAThresholdConfigRequest
 	44, // 85: api.backoffice.service.v1.BackofficeWallet.ListFICAThresholdTransactions:input_type -> api.backoffice.service.v1.ListFICAThresholdTransactionsRequest
 	45, // 86: api.backoffice.service.v1.BackofficeWallet.ExportFICAThresholdTransactions:input_type -> api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest
-	46, // 87: api.backoffice.service.v1.BackofficeWallet.Credit:input_type -> api.backoffice.service.v1.CreditRequest
-	47, // 88: api.backoffice.service.v1.BackofficeWallet.Debit:input_type -> api.backoffice.service.v1.DebitRequest
+	46, // 87: api.backoffice.service.v1.BackofficeWallet.ManualCredit:input_type -> api.backoffice.service.v1.CreditRequest
+	47, // 88: api.backoffice.service.v1.BackofficeWallet.ManualDebit:input_type -> api.backoffice.service.v1.DebitRequest
 	60, // 89: api.backoffice.service.v1.BackofficeWallet.GetWallets:output_type -> api.wallet.service.v1.GetWalletsResponse
 	2,  // 90: api.backoffice.service.v1.BackofficeWallet.GetWalletCredits:output_type -> api.backoffice.service.v1.GetWalletCreditsResponse
 	4,  // 91: api.backoffice.service.v1.BackofficeWallet.ListWalletBalanceTransactions:output_type -> api.backoffice.service.v1.ListWalletBalanceTransactionsResponse
@@ -4456,8 +4456,8 @@ var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
 	76, // 118: api.backoffice.service.v1.BackofficeWallet.GetFICAThresholdConfig:output_type -> api.wallet.service.v1.GetFICAThresholdConfigResponse
 	77, // 119: api.backoffice.service.v1.BackofficeWallet.ListFICAThresholdTransactions:output_type -> api.wallet.service.v1.ListFICAThresholdTransactionsResponse
 	78, // 120: api.backoffice.service.v1.BackofficeWallet.ExportFICAThresholdTransactions:output_type -> api.wallet.service.v1.ExportFICAThresholdTransactionsResponse
-	79, // 121: api.backoffice.service.v1.BackofficeWallet.Credit:output_type -> api.wallet.service.v1.CreditResponse
-	80, // 122: api.backoffice.service.v1.BackofficeWallet.Debit:output_type -> api.wallet.service.v1.DebitResponse
+	79, // 121: api.backoffice.service.v1.BackofficeWallet.ManualCredit:output_type -> api.wallet.service.v1.CreditResponse
+	80, // 122: api.backoffice.service.v1.BackofficeWallet.ManualDebit:output_type -> api.wallet.service.v1.DebitResponse
 	89, // [89:123] is the sub-list for method output_type
 	55, // [55:89] is the sub-list for method input_type
 	55, // [55:55] is the sub-list for extension type_name

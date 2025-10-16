@@ -245,7 +245,7 @@ service BackofficeWallet {
 	}
 
 	// Credit
-	rpc Credit(CreditRequest) returns (wallet.service.v1.CreditResponse) {
+	rpc ManualCredit(CreditRequest) returns (wallet.service.v1.CreditResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/credit"
 			body: "*"
@@ -253,7 +253,7 @@ service BackofficeWallet {
 	}
 
 	// Debit
-	rpc Debit(DebitRequest) returns (wallet.service.v1.DebitResponse) {
+	rpc ManualDebit(DebitRequest) returns (wallet.service.v1.DebitResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/debit"
 			body: "*"
