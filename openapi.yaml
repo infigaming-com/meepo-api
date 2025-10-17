@@ -13117,11 +13117,11 @@ components:
         api.game.service.v1.BettingConfig:
             type: object
             properties:
-                betType:
+                betCategory:
                     type: array
                     items:
                         type: string
-                miniRate:
+                miniOdds:
                     type: number
                     format: float
                 currencies:

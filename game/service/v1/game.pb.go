@@ -8380,8 +8380,8 @@ func (*CreateTaxReportResponse) Descriptor() ([]byte, []int) {
 
 type BettingConfig struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	BetType       []string               `protobuf:"bytes,1,rep,name=bet_type,json=betType,proto3" json:"bet_type,omitempty"`
-	MiniRate      float32                `protobuf:"fixed32,2,opt,name=mini_rate,json=miniRate,proto3" json:"mini_rate,omitempty"`
+	BetCategory   []string               `protobuf:"bytes,1,rep,name=bet_category,json=betCategory,proto3" json:"bet_category,omitempty"`
+	MiniOdds      float32                `protobuf:"fixed32,2,opt,name=mini_odds,json=miniOdds,proto3" json:"mini_odds,omitempty"`
 	Currencies    []string               `protobuf:"bytes,3,rep,name=currencies,proto3" json:"currencies,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -8417,16 +8417,16 @@ func (*BettingConfig) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{100}
 }
 
-func (x *BettingConfig) GetBetType() []string {
+func (x *BettingConfig) GetBetCategory() []string {
 	if x != nil {
-		return x.BetType
+		return x.BetCategory
 	}
 	return nil
 }
 
-func (x *BettingConfig) GetMiniRate() float32 {
+func (x *BettingConfig) GetMiniOdds() float32 {
 	if x != nil {
-		return x.MiniRate
+		return x.MiniOdds
 	}
 	return 0
 }
@@ -13117,10 +13117,10 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"#ExportCustomerStrikeReportsResponse\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\x03R\x06taskId\"\x18\n" +
 	"\x16CreateTaxReportRequest\"\x19\n" +
-	"\x17CreateTaxReportResponse\"g\n" +
-	"\rBettingConfig\x12\x19\n" +
-	"\bbet_type\x18\x01 \x03(\tR\abetType\x12\x1b\n" +
-	"\tmini_rate\x18\x02 \x01(\x02R\bminiRate\x12\x1e\n" +
+	"\x17CreateTaxReportResponse\"o\n" +
+	"\rBettingConfig\x12!\n" +
+	"\fbet_category\x18\x01 \x03(\tR\vbetCategory\x12\x1b\n" +
+	"\tmini_odds\x18\x02 \x01(\x02R\bminiOdds\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x03 \x03(\tR\n" +
 	"currencies\"\x80\x02\n" +
