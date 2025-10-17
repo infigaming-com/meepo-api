@@ -54,6 +54,8 @@ const (
 	BackofficeWallet_ExportFICAThresholdTransactions_FullMethodName       = "/api.backoffice.service.v1.BackofficeWallet/ExportFICAThresholdTransactions"
 	BackofficeWallet_ManualCredit_FullMethodName                          = "/api.backoffice.service.v1.BackofficeWallet/ManualCredit"
 	BackofficeWallet_ManualDebit_FullMethodName                           = "/api.backoffice.service.v1.BackofficeWallet/ManualDebit"
+	BackofficeWallet_ListManualJournalEntries_FullMethodName              = "/api.backoffice.service.v1.BackofficeWallet/ListManualJournalEntries"
+	BackofficeWallet_ExportManualJournalEntries_FullMethodName            = "/api.backoffice.service.v1.BackofficeWallet/ExportManualJournalEntries"
 )
 
 // BackofficeWalletClient is the client API for BackofficeWallet service.
@@ -117,10 +119,14 @@ type BackofficeWalletClient interface {
 	ListFICAThresholdTransactions(ctx context.Context, in *ListFICAThresholdTransactionsRequest, opts ...grpc.CallOption) (*v1.ListFICAThresholdTransactionsResponse, error)
 	// ExportFICAThresholdTransactions creates a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
 	ExportFICAThresholdTransactions(ctx context.Context, in *ExportFICAThresholdTransactionsRequest, opts ...grpc.CallOption) (*v1.ExportFICAThresholdTransactionsResponse, error)
-	// Credit
+	// ManualCredit
 	ManualCredit(ctx context.Context, in *CreditRequest, opts ...grpc.CallOption) (*v1.CreditResponse, error)
-	// Debit
+	// ManualDebit
 	ManualDebit(ctx context.Context, in *DebitRequest, opts ...grpc.CallOption) (*v1.DebitResponse, error)
+	// ListManualJournalEntries lists manual journal entries for all users
+	ListManualJournalEntries(ctx context.Context, in *ListManualJournalEntriesRequest, opts ...grpc.CallOption) (*v1.ListManualJournalEntriesResponse, error)
+	// ExportManualJournalEntries creates a task to exports manual journal entries for all users
+	ExportManualJournalEntries(ctx context.Context, in *ExportManualJournalEntriesRequest, opts ...grpc.CallOption) (*v1.ExportManualJournalEntriesResponse, error)
 }
 
 type backofficeWalletClient struct {
@@ -471,6 +477,26 @@ func (c *backofficeWalletClient) ManualDebit(ctx context.Context, in *DebitReque
 	return out, nil
 }
 
+func (c *backofficeWalletClient) ListManualJournalEntries(ctx context.Context, in *ListManualJournalEntriesRequest, opts ...grpc.CallOption) (*v1.ListManualJournalEntriesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListManualJournalEntriesResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_ListManualJournalEntries_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeWalletClient) ExportManualJournalEntries(ctx context.Context, in *ExportManualJournalEntriesRequest, opts ...grpc.CallOption) (*v1.ExportManualJournalEntriesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ExportManualJournalEntriesResponse)
+	err := c.cc.Invoke(ctx, BackofficeWallet_ExportManualJournalEntries_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeWalletServer is the server API for BackofficeWallet service.
 // All implementations must embed UnimplementedBackofficeWalletServer
 // for forward compatibility.
@@ -532,10 +558,14 @@ type BackofficeWalletServer interface {
 	ListFICAThresholdTransactions(context.Context, *ListFICAThresholdTransactionsRequest) (*v1.ListFICAThresholdTransactionsResponse, error)
 	// ExportFICAThresholdTransactions creates a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
 	ExportFICAThresholdTransactions(context.Context, *ExportFICAThresholdTransactionsRequest) (*v1.ExportFICAThresholdTransactionsResponse, error)
-	// Credit
+	// ManualCredit
 	ManualCredit(context.Context, *CreditRequest) (*v1.CreditResponse, error)
-	// Debit
+	// ManualDebit
 	ManualDebit(context.Context, *DebitRequest) (*v1.DebitResponse, error)
+	// ListManualJournalEntries lists manual journal entries for all users
+	ListManualJournalEntries(context.Context, *ListManualJournalEntriesRequest) (*v1.ListManualJournalEntriesResponse, error)
+	// ExportManualJournalEntries creates a task to exports manual journal entries for all users
+	ExportManualJournalEntries(context.Context, *ExportManualJournalEntriesRequest) (*v1.ExportManualJournalEntriesResponse, error)
 	mustEmbedUnimplementedBackofficeWalletServer()
 }
 
@@ -647,6 +677,12 @@ func (UnimplementedBackofficeWalletServer) ManualCredit(context.Context, *Credit
 }
 func (UnimplementedBackofficeWalletServer) ManualDebit(context.Context, *DebitRequest) (*v1.DebitResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ManualDebit not implemented")
+}
+func (UnimplementedBackofficeWalletServer) ListManualJournalEntries(context.Context, *ListManualJournalEntriesRequest) (*v1.ListManualJournalEntriesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListManualJournalEntries not implemented")
+}
+func (UnimplementedBackofficeWalletServer) ExportManualJournalEntries(context.Context, *ExportManualJournalEntriesRequest) (*v1.ExportManualJournalEntriesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportManualJournalEntries not implemented")
 }
 func (UnimplementedBackofficeWalletServer) mustEmbedUnimplementedBackofficeWalletServer() {}
 func (UnimplementedBackofficeWalletServer) testEmbeddedByValue()                          {}
@@ -1281,6 +1317,42 @@ func _BackofficeWallet_ManualDebit_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeWallet_ListManualJournalEntries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListManualJournalEntriesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).ListManualJournalEntries(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_ListManualJournalEntries_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).ListManualJournalEntries(ctx, req.(*ListManualJournalEntriesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeWallet_ExportManualJournalEntries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportManualJournalEntriesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeWalletServer).ExportManualJournalEntries(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeWallet_ExportManualJournalEntries_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeWalletServer).ExportManualJournalEntries(ctx, req.(*ExportManualJournalEntriesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeWallet_ServiceDesc is the grpc.ServiceDesc for BackofficeWallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1423,6 +1495,14 @@ var BackofficeWallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ManualDebit",
 			Handler:    _BackofficeWallet_ManualDebit_Handler,
+		},
+		{
+			MethodName: "ListManualJournalEntries",
+			Handler:    _BackofficeWallet_ListManualJournalEntries_Handler,
+		},
+		{
+			MethodName: "ExportManualJournalEntries",
+			Handler:    _BackofficeWallet_ExportManualJournalEntries_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
