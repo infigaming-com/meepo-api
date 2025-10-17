@@ -25,6 +25,7 @@ const OperationBackofficeWalletDeleteDepositRewardSequences = "/api.backoffice.s
 const OperationBackofficeWalletDeleteWalletResponsibleGamblingConfig = "/api.backoffice.service.v1.BackofficeWallet/DeleteWalletResponsibleGamblingConfig"
 const OperationBackofficeWalletExportCustomerRecords = "/api.backoffice.service.v1.BackofficeWallet/ExportCustomerRecords"
 const OperationBackofficeWalletExportFICAThresholdTransactions = "/api.backoffice.service.v1.BackofficeWallet/ExportFICAThresholdTransactions"
+const OperationBackofficeWalletExportManualJournalEntries = "/api.backoffice.service.v1.BackofficeWallet/ExportManualJournalEntries"
 const OperationBackofficeWalletGetDepositRewardConfig = "/api.backoffice.service.v1.BackofficeWallet/GetDepositRewardConfig"
 const OperationBackofficeWalletGetExchangeRates = "/api.backoffice.service.v1.BackofficeWallet/GetExchangeRates"
 const OperationBackofficeWalletGetFICAThresholdConfig = "/api.backoffice.service.v1.BackofficeWallet/GetFICAThresholdConfig"
@@ -35,6 +36,7 @@ const OperationBackofficeWalletGetWalletCredits = "/api.backoffice.service.v1.Ba
 const OperationBackofficeWalletGetWallets = "/api.backoffice.service.v1.BackofficeWallet/GetWallets"
 const OperationBackofficeWalletListCustomerRecords = "/api.backoffice.service.v1.BackofficeWallet/ListCustomerRecords"
 const OperationBackofficeWalletListFICAThresholdTransactions = "/api.backoffice.service.v1.BackofficeWallet/ListFICAThresholdTransactions"
+const OperationBackofficeWalletListManualJournalEntries = "/api.backoffice.service.v1.BackofficeWallet/ListManualJournalEntries"
 const OperationBackofficeWalletListOperatorBalanceTransactions = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorBalanceTransactions"
 const OperationBackofficeWalletListOperatorBalances = "/api.backoffice.service.v1.BackofficeWallet/ListOperatorBalances"
 const OperationBackofficeWalletListWalletBalanceTransactions = "/api.backoffice.service.v1.BackofficeWallet/ListWalletBalanceTransactions"
@@ -65,6 +67,8 @@ type BackofficeWalletHTTPServer interface {
 	ExportCustomerRecords(context.Context, *ExportCustomerRecordsRequest) (*v1.ExportCustomerRecordsResponse, error)
 	// ExportFICAThresholdTransactions ExportFICAThresholdTransactions creates a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
 	ExportFICAThresholdTransactions(context.Context, *ExportFICAThresholdTransactionsRequest) (*v1.ExportFICAThresholdTransactionsResponse, error)
+	// ExportManualJournalEntries ExportManualJournalEntries creates a task to exports manual journal entries for all users
+	ExportManualJournalEntries(context.Context, *ExportManualJournalEntriesRequest) (*v1.ExportManualJournalEntriesResponse, error)
 	// GetDepositRewardConfig GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
 	GetDepositRewardConfig(context.Context, *GetDepositRewardConfigRequest) (*v1.GetDepositRewardConfigResponse, error)
 	GetExchangeRates(context.Context, *GetExchangeRatesRequest) (*GetExchangeRatesResponse, error)
@@ -81,6 +85,8 @@ type BackofficeWalletHTTPServer interface {
 	ListCustomerRecords(context.Context, *ListCustomerRecordsRequest) (*v1.ListCustomerRecordsResponse, error)
 	// ListFICAThresholdTransactions ListFICAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
 	ListFICAThresholdTransactions(context.Context, *ListFICAThresholdTransactionsRequest) (*v1.ListFICAThresholdTransactionsResponse, error)
+	// ListManualJournalEntries ListManualJournalEntries lists manual journal entries for all users
+	ListManualJournalEntries(context.Context, *ListManualJournalEntriesRequest) (*v1.ListManualJournalEntriesResponse, error)
 	// ListOperatorBalanceTransactions ListOperatorBalanceTransactions lists the balance transactions of an operator
 	ListOperatorBalanceTransactions(context.Context, *ListOperatorBalanceTransactionsRequest) (*ListOperatorBalanceTransactionsResponse, error)
 	// ListOperatorBalances ListOperatorBalances lists all operator balances which belong to the backoffice operator
@@ -91,9 +97,9 @@ type BackofficeWalletHTTPServer interface {
 	ListWalletCurrencies(context.Context, *ListWalletCurrenciesRequest) (*v1.ListCurrenciesResponse, error)
 	// ListWalletResponsibleGamblingConfigs ListWalletResponsibleGamblingConfigs lists gambling configs for a user with all currencies
 	ListWalletResponsibleGamblingConfigs(context.Context, *ListWalletResponsibleGamblingConfigsRequest) (*v1.ListResponsibleGamblingConfigsResponse, error)
-	// ManualCredit Credit
+	// ManualCredit ManualCredit
 	ManualCredit(context.Context, *CreditRequest) (*v1.CreditResponse, error)
-	// ManualDebit Debit
+	// ManualDebit ManualDebit
 	ManualDebit(context.Context, *DebitRequest) (*v1.DebitResponse, error)
 	// OperatorBalanceFreeze OperatorFreeze freezes cash of an operator
 	OperatorBalanceFreeze(context.Context, *OperatorBalanceFreezeRequest) (*OperatorBalanceFreezeResponse, error)
@@ -153,8 +159,10 @@ func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTP
 	r.POST("/v1/backoffice/wallet/fica/config/get", _BackofficeWallet_GetFICAThresholdConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/fica/transactions/list", _BackofficeWallet_ListFICAThresholdTransactions0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/fica/transactions/export", _BackofficeWallet_ExportFICAThresholdTransactions0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/wallet/credit", _BackofficeWallet_ManualCredit0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/wallet/debit", _BackofficeWallet_ManualDebit0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/manual/credit", _BackofficeWallet_ManualCredit0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/manual/debit", _BackofficeWallet_ManualDebit0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/manual/journal-entries/list", _BackofficeWallet_ListManualJournalEntries0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/manual/journal-entries/export", _BackofficeWallet_ExportManualJournalEntries0_HTTP_Handler(srv))
 }
 
 func _BackofficeWallet_GetWallets0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
@@ -905,12 +913,57 @@ func _BackofficeWallet_ManualDebit0_HTTP_Handler(srv BackofficeWalletHTTPServer)
 	}
 }
 
+func _BackofficeWallet_ListManualJournalEntries0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListManualJournalEntriesRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletListManualJournalEntries)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListManualJournalEntries(ctx, req.(*ListManualJournalEntriesRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ListManualJournalEntriesResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeWallet_ExportManualJournalEntries0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ExportManualJournalEntriesRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeWalletExportManualJournalEntries)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ExportManualJournalEntries(ctx, req.(*ExportManualJournalEntriesRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ExportManualJournalEntriesResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeWalletHTTPClient interface {
 	AddWalletCurrency(ctx context.Context, req *AddWalletCurrencyRequest, opts ...http.CallOption) (rsp *AddWalletCurrencyResponse, err error)
 	DeleteDepositRewardSequences(ctx context.Context, req *DeleteDepositRewardSequencesRequest, opts ...http.CallOption) (rsp *v1.DeleteDepositRewardSequencesResponse, err error)
 	DeleteWalletResponsibleGamblingConfig(ctx context.Context, req *DeleteWalletResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *v1.DeleteResponsibleGamblingConfigResponse, err error)
 	ExportCustomerRecords(ctx context.Context, req *ExportCustomerRecordsRequest, opts ...http.CallOption) (rsp *v1.ExportCustomerRecordsResponse, err error)
 	ExportFICAThresholdTransactions(ctx context.Context, req *ExportFICAThresholdTransactionsRequest, opts ...http.CallOption) (rsp *v1.ExportFICAThresholdTransactionsResponse, err error)
+	ExportManualJournalEntries(ctx context.Context, req *ExportManualJournalEntriesRequest, opts ...http.CallOption) (rsp *v1.ExportManualJournalEntriesResponse, err error)
 	GetDepositRewardConfig(ctx context.Context, req *GetDepositRewardConfigRequest, opts ...http.CallOption) (rsp *v1.GetDepositRewardConfigResponse, err error)
 	GetExchangeRates(ctx context.Context, req *GetExchangeRatesRequest, opts ...http.CallOption) (rsp *GetExchangeRatesResponse, err error)
 	GetFICAThresholdConfig(ctx context.Context, req *GetFICAThresholdConfigRequest, opts ...http.CallOption) (rsp *v1.GetFICAThresholdConfigResponse, err error)
@@ -921,6 +974,7 @@ type BackofficeWalletHTTPClient interface {
 	GetWallets(ctx context.Context, req *GetWalletsRequest, opts ...http.CallOption) (rsp *v1.GetWalletsResponse, err error)
 	ListCustomerRecords(ctx context.Context, req *ListCustomerRecordsRequest, opts ...http.CallOption) (rsp *v1.ListCustomerRecordsResponse, err error)
 	ListFICAThresholdTransactions(ctx context.Context, req *ListFICAThresholdTransactionsRequest, opts ...http.CallOption) (rsp *v1.ListFICAThresholdTransactionsResponse, err error)
+	ListManualJournalEntries(ctx context.Context, req *ListManualJournalEntriesRequest, opts ...http.CallOption) (rsp *v1.ListManualJournalEntriesResponse, err error)
 	ListOperatorBalanceTransactions(ctx context.Context, req *ListOperatorBalanceTransactionsRequest, opts ...http.CallOption) (rsp *ListOperatorBalanceTransactionsResponse, err error)
 	ListOperatorBalances(ctx context.Context, req *ListOperatorBalancesRequest, opts ...http.CallOption) (rsp *v1.ListBottomOperatorBalancesResponse, err error)
 	ListWalletBalanceTransactions(ctx context.Context, req *ListWalletBalanceTransactionsRequest, opts ...http.CallOption) (rsp *ListWalletBalanceTransactionsResponse, err error)
@@ -1007,6 +1061,19 @@ func (c *BackofficeWalletHTTPClientImpl) ExportFICAThresholdTransactions(ctx con
 	pattern := "/v1/backoffice/wallet/fica/transactions/export"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletExportFICAThresholdTransactions))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeWalletHTTPClientImpl) ExportManualJournalEntries(ctx context.Context, in *ExportManualJournalEntriesRequest, opts ...http.CallOption) (*v1.ExportManualJournalEntriesResponse, error) {
+	var out v1.ExportManualJournalEntriesResponse
+	pattern := "/v1/backoffice/wallet/manual/journal-entries/export"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletExportManualJournalEntries))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -1145,6 +1212,19 @@ func (c *BackofficeWalletHTTPClientImpl) ListFICAThresholdTransactions(ctx conte
 	return &out, nil
 }
 
+func (c *BackofficeWalletHTTPClientImpl) ListManualJournalEntries(ctx context.Context, in *ListManualJournalEntriesRequest, opts ...http.CallOption) (*v1.ListManualJournalEntriesResponse, error) {
+	var out v1.ListManualJournalEntriesResponse
+	pattern := "/v1/backoffice/wallet/manual/journal-entries/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeWalletListManualJournalEntries))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *BackofficeWalletHTTPClientImpl) ListOperatorBalanceTransactions(ctx context.Context, in *ListOperatorBalanceTransactionsRequest, opts ...http.CallOption) (*ListOperatorBalanceTransactionsResponse, error) {
 	var out ListOperatorBalanceTransactionsResponse
 	pattern := "/v1/backoffice/wallet/operator/transactions/list"
@@ -1212,7 +1292,7 @@ func (c *BackofficeWalletHTTPClientImpl) ListWalletResponsibleGamblingConfigs(ct
 
 func (c *BackofficeWalletHTTPClientImpl) ManualCredit(ctx context.Context, in *CreditRequest, opts ...http.CallOption) (*v1.CreditResponse, error) {
 	var out v1.CreditResponse
-	pattern := "/v1/backoffice/wallet/credit"
+	pattern := "/v1/backoffice/wallet/manual/credit"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletManualCredit))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1225,7 +1305,7 @@ func (c *BackofficeWalletHTTPClientImpl) ManualCredit(ctx context.Context, in *C
 
 func (c *BackofficeWalletHTTPClientImpl) ManualDebit(ctx context.Context, in *DebitRequest, opts ...http.CallOption) (*v1.DebitResponse, error) {
 	var out v1.DebitResponse
-	pattern := "/v1/backoffice/wallet/debit"
+	pattern := "/v1/backoffice/wallet/manual/debit"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletManualDebit))
 	opts = append(opts, http.PathTemplate(pattern))

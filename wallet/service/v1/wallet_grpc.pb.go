@@ -75,6 +75,8 @@ const (
 	Wallet_ListFICAThresholdTransactions_FullMethodName       = "/api.wallet.service.v1.Wallet/ListFICAThresholdTransactions"
 	Wallet_ExportFICAThresholdTransactions_FullMethodName     = "/api.wallet.service.v1.Wallet/ExportFICAThresholdTransactions"
 	Wallet_ListBalancesByUserIds_FullMethodName               = "/api.wallet.service.v1.Wallet/ListBalancesByUserIds"
+	Wallet_ListManualJournalEntries_FullMethodName            = "/api.wallet.service.v1.Wallet/ListManualJournalEntries"
+	Wallet_ExportManualJournalEntries_FullMethodName          = "/api.wallet.service.v1.Wallet/ExportManualJournalEntries"
 )
 
 // WalletClient is the client API for Wallet service.
@@ -178,6 +180,8 @@ type WalletClient interface {
 	// ExportFICAThresholdTransactions create a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
 	ExportFICAThresholdTransactions(ctx context.Context, in *ExportFICAThresholdTransactionsRequest, opts ...grpc.CallOption) (*ExportFICAThresholdTransactionsResponse, error)
 	ListBalancesByUserIds(ctx context.Context, in *ListBalancesByUserIdsRequest, opts ...grpc.CallOption) (*ListBalancesByUserIdsResponse, error)
+	ListManualJournalEntries(ctx context.Context, in *ListManualJournalEntriesRequest, opts ...grpc.CallOption) (*ListManualJournalEntriesResponse, error)
+	ExportManualJournalEntries(ctx context.Context, in *ExportManualJournalEntriesRequest, opts ...grpc.CallOption) (*ExportManualJournalEntriesResponse, error)
 }
 
 type walletClient struct {
@@ -748,6 +752,26 @@ func (c *walletClient) ListBalancesByUserIds(ctx context.Context, in *ListBalanc
 	return out, nil
 }
 
+func (c *walletClient) ListManualJournalEntries(ctx context.Context, in *ListManualJournalEntriesRequest, opts ...grpc.CallOption) (*ListManualJournalEntriesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListManualJournalEntriesResponse)
+	err := c.cc.Invoke(ctx, Wallet_ListManualJournalEntries_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) ExportManualJournalEntries(ctx context.Context, in *ExportManualJournalEntriesRequest, opts ...grpc.CallOption) (*ExportManualJournalEntriesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExportManualJournalEntriesResponse)
+	err := c.cc.Invoke(ctx, Wallet_ExportManualJournalEntries_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServer is the server API for Wallet service.
 // All implementations must embed UnimplementedWalletServer
 // for forward compatibility.
@@ -849,6 +873,8 @@ type WalletServer interface {
 	// ExportFICAThresholdTransactions create a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
 	ExportFICAThresholdTransactions(context.Context, *ExportFICAThresholdTransactionsRequest) (*ExportFICAThresholdTransactionsResponse, error)
 	ListBalancesByUserIds(context.Context, *ListBalancesByUserIdsRequest) (*ListBalancesByUserIdsResponse, error)
+	ListManualJournalEntries(context.Context, *ListManualJournalEntriesRequest) (*ListManualJournalEntriesResponse, error)
+	ExportManualJournalEntries(context.Context, *ExportManualJournalEntriesRequest) (*ExportManualJournalEntriesResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -1026,6 +1052,12 @@ func (UnimplementedWalletServer) ExportFICAThresholdTransactions(context.Context
 }
 func (UnimplementedWalletServer) ListBalancesByUserIds(context.Context, *ListBalancesByUserIdsRequest) (*ListBalancesByUserIdsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBalancesByUserIds not implemented")
+}
+func (UnimplementedWalletServer) ListManualJournalEntries(context.Context, *ListManualJournalEntriesRequest) (*ListManualJournalEntriesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListManualJournalEntries not implemented")
+}
+func (UnimplementedWalletServer) ExportManualJournalEntries(context.Context, *ExportManualJournalEntriesRequest) (*ExportManualJournalEntriesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportManualJournalEntries not implemented")
 }
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
@@ -2056,6 +2088,42 @@ func _Wallet_ListBalancesByUserIds_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_ListManualJournalEntries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListManualJournalEntriesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).ListManualJournalEntries(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_ListManualJournalEntries_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).ListManualJournalEntries(ctx, req.(*ListManualJournalEntriesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_ExportManualJournalEntries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportManualJournalEntriesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).ExportManualJournalEntries(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_ExportManualJournalEntries_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).ExportManualJournalEntries(ctx, req.(*ExportManualJournalEntriesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Wallet_ServiceDesc is the grpc.ServiceDesc for Wallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2286,6 +2354,14 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListBalancesByUserIds",
 			Handler:    _Wallet_ListBalancesByUserIds_Handler,
+		},
+		{
+			MethodName: "ListManualJournalEntries",
+			Handler:    _Wallet_ListManualJournalEntries_Handler,
+		},
+		{
+			MethodName: "ExportManualJournalEntries",
+			Handler:    _Wallet_ExportManualJournalEntries_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
