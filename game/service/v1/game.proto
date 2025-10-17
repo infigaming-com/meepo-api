@@ -1543,8 +1543,8 @@ message CreateTaxReportResponse {
 }
 
 message BettingConfig {
-	repeated string bet_type = 1;
-	float mini_rate = 2;
+	repeated string bet_category = 1;
+	float mini_odds = 2;
 	repeated string currencies = 3;
 }
 

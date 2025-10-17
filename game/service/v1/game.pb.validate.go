@@ -13979,7 +13979,7 @@ func (m *BettingConfig) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for MiniRate
+	// no validation rules for MiniOdds
 
 	if len(errors) > 0 {
 		return BettingConfigMultiError(errors)
