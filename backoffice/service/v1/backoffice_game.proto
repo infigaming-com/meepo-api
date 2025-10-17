@@ -66,6 +66,12 @@ service BackofficeGame {
             body: "*"
         };
     }
+	rpc ExportBets(ExportBetsRequest) returns (game.service.v1.ExportBetsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/bets/export"
+			body: "*"
+		};
+	}
 	rpc GetBetById(GetBetByIdRequest) returns (game.service.v1.GetBetByIdResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/game/bets/get"
@@ -348,6 +354,37 @@ message ListBetsResponse {
 	int32 page = 6;
 	int32 page_size = 7;
 	int32 total = 8;
+}
+
+message ExportBetsRequest {
+	message CurrencyWithRange {
+		string currency = 1;
+		optional string min_bet_amount = 2;
+		optional string max_bet_amount = 3;
+		optional string min_win_amount = 4;
+		optional string max_win_amount = 5;
+	}
+	message Currencies {
+		repeated string currencies = 1;
+	}
+	repeated string provider_ids = 1;
+	optional string game_name = 2;
+	optional string game_id = 3;
+	optional int64 user_id = 4;
+	optional int64 operator_bet_id = 5;
+	optional string provider_bet_id = 6;
+	optional google.protobuf.Timestamp start_time = 7;
+	optional google.protobuf.Timestamp end_time = 8;
+	optional CurrencyWithRange currency_with_ranges = 9;
+	oneof settlement_currency_option {
+		CurrencyWithRange settlement_currency_with_ranges = 10;
+		Currencies settlement_currencies = 11;
+	}
+	repeated string categories = 12;
+	optional string status = 13;
+	string format = 14; // accepted values: csv, excel, pdf
+	string time_zone = 15; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContextFilters operator_context_filters = 16;
 }
 
 message GetBetByIdRequest {
