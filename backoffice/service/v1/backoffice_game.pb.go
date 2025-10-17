@@ -3107,6 +3107,170 @@ func (x *ExportCustomerStrikeReportsRequest) GetOperatorContextFilters() *common
 	return nil
 }
 
+type AddGameBetDisplayConfigRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Country       string                 `protobuf:"bytes,1,opt,name=country,proto3" json:"country,omitempty"`
+	AllBet        *v1.BettingConfig      `protobuf:"bytes,2,opt,name=all_bet,json=allBet,proto3" json:"all_bet,omitempty"`
+	HighWins      *v1.BettingConfig      `protobuf:"bytes,3,opt,name=high_wins,json=highWins,proto3" json:"high_wins,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddGameBetDisplayConfigRequest) Reset() {
+	*x = AddGameBetDisplayConfigRequest{}
+	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[40]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddGameBetDisplayConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddGameBetDisplayConfigRequest) ProtoMessage() {}
+
+func (x *AddGameBetDisplayConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[40]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddGameBetDisplayConfigRequest.ProtoReflect.Descriptor instead.
+func (*AddGameBetDisplayConfigRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_game_proto_rawDescGZIP(), []int{40}
+}
+
+func (x *AddGameBetDisplayConfigRequest) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *AddGameBetDisplayConfigRequest) GetAllBet() *v1.BettingConfig {
+	if x != nil {
+		return x.AllBet
+	}
+	return nil
+}
+
+func (x *AddGameBetDisplayConfigRequest) GetHighWins() *v1.BettingConfig {
+	if x != nil {
+		return x.HighWins
+	}
+	return nil
+}
+
+type UpdateGameBetDisplayConfigRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Country       string                 `protobuf:"bytes,1,opt,name=country,proto3" json:"country,omitempty"`
+	AllBet        *v1.BettingConfig      `protobuf:"bytes,2,opt,name=all_bet,json=allBet,proto3,oneof" json:"all_bet,omitempty"`
+	HighWins      *v1.BettingConfig      `protobuf:"bytes,3,opt,name=high_wins,json=highWins,proto3,oneof" json:"high_wins,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateGameBetDisplayConfigRequest) Reset() {
+	*x = UpdateGameBetDisplayConfigRequest{}
+	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[41]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateGameBetDisplayConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateGameBetDisplayConfigRequest) ProtoMessage() {}
+
+func (x *UpdateGameBetDisplayConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[41]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateGameBetDisplayConfigRequest.ProtoReflect.Descriptor instead.
+func (*UpdateGameBetDisplayConfigRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_game_proto_rawDescGZIP(), []int{41}
+}
+
+func (x *UpdateGameBetDisplayConfigRequest) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *UpdateGameBetDisplayConfigRequest) GetAllBet() *v1.BettingConfig {
+	if x != nil {
+		return x.AllBet
+	}
+	return nil
+}
+
+func (x *UpdateGameBetDisplayConfigRequest) GetHighWins() *v1.BettingConfig {
+	if x != nil {
+		return x.HighWins
+	}
+	return nil
+}
+
+type ListGameBetDisplayConfigRequest struct {
+	state         protoimpl.MessageState                  `protogen:"open.v1"`
+	List          []*ListGameBetDisplayConfigRequest_Item `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListGameBetDisplayConfigRequest) Reset() {
+	*x = ListGameBetDisplayConfigRequest{}
+	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[42]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListGameBetDisplayConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListGameBetDisplayConfigRequest) ProtoMessage() {}
+
+func (x *ListGameBetDisplayConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[42]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListGameBetDisplayConfigRequest.ProtoReflect.Descriptor instead.
+func (*ListGameBetDisplayConfigRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_game_proto_rawDescGZIP(), []int{42}
+}
+
+func (x *ListGameBetDisplayConfigRequest) GetList() []*ListGameBetDisplayConfigRequest_Item {
+	if x != nil {
+		return x.List
+	}
+	return nil
+}
+
 type ListProvidersResponse_Provider struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ProviderId    string                 `protobuf:"bytes,1,opt,name=provider_id,json=providerId,proto3" json:"provider_id,omitempty"`
@@ -3117,7 +3281,7 @@ type ListProvidersResponse_Provider struct {
 
 func (x *ListProvidersResponse_Provider) Reset() {
 	*x = ListProvidersResponse_Provider{}
-	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[40]
+	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3129,7 +3293,7 @@ func (x *ListProvidersResponse_Provider) String() string {
 func (*ListProvidersResponse_Provider) ProtoMessage() {}
 
 func (x *ListProvidersResponse_Provider) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[40]
+	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3171,7 +3335,7 @@ type ListProvidersWithDetailResponse_Provider struct {
 
 func (x *ListProvidersWithDetailResponse_Provider) Reset() {
 	*x = ListProvidersWithDetailResponse_Provider{}
-	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[41]
+	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3183,7 +3347,7 @@ func (x *ListProvidersWithDetailResponse_Provider) String() string {
 func (*ListProvidersWithDetailResponse_Provider) ProtoMessage() {}
 
 func (x *ListProvidersWithDetailResponse_Provider) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[41]
+	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3240,7 +3404,7 @@ type ListBetsRequest_CurrencyWithRange struct {
 
 func (x *ListBetsRequest_CurrencyWithRange) Reset() {
 	*x = ListBetsRequest_CurrencyWithRange{}
-	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[42]
+	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3252,7 +3416,7 @@ func (x *ListBetsRequest_CurrencyWithRange) String() string {
 func (*ListBetsRequest_CurrencyWithRange) ProtoMessage() {}
 
 func (x *ListBetsRequest_CurrencyWithRange) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[42]
+	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3312,7 +3476,7 @@ type ListBetsRequest_Currencies struct {
 
 func (x *ListBetsRequest_Currencies) Reset() {
 	*x = ListBetsRequest_Currencies{}
-	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[43]
+	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3324,7 +3488,7 @@ func (x *ListBetsRequest_Currencies) String() string {
 func (*ListBetsRequest_Currencies) ProtoMessage() {}
 
 func (x *ListBetsRequest_Currencies) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[43]
+	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3367,7 +3531,7 @@ type GetGameTransactionsForBetResponse_GameTransaction struct {
 
 func (x *GetGameTransactionsForBetResponse_GameTransaction) Reset() {
 	*x = GetGameTransactionsForBetResponse_GameTransaction{}
-	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[44]
+	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3379,7 +3543,7 @@ func (x *GetGameTransactionsForBetResponse_GameTransaction) String() string {
 func (*GetGameTransactionsForBetResponse_GameTransaction) ProtoMessage() {}
 
 func (x *GetGameTransactionsForBetResponse_GameTransaction) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[44]
+	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3489,7 +3653,7 @@ type GetGameTransactionsForBetResponse_GameTransaction_Amount struct {
 
 func (x *GetGameTransactionsForBetResponse_GameTransaction_Amount) Reset() {
 	*x = GetGameTransactionsForBetResponse_GameTransaction_Amount{}
-	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[45]
+	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3501,7 +3665,7 @@ func (x *GetGameTransactionsForBetResponse_GameTransaction_Amount) String() stri
 func (*GetGameTransactionsForBetResponse_GameTransaction_Amount) ProtoMessage() {}
 
 func (x *GetGameTransactionsForBetResponse_GameTransaction_Amount) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[45]
+	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3554,7 +3718,7 @@ type ListGamesResponse_Game struct {
 
 func (x *ListGamesResponse_Game) Reset() {
 	*x = ListGamesResponse_Game{}
-	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[46]
+	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3566,7 +3730,7 @@ func (x *ListGamesResponse_Game) String() string {
 func (*ListGamesResponse_Game) ProtoMessage() {}
 
 func (x *ListGamesResponse_Game) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[46]
+	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3702,7 +3866,7 @@ type ListProviderRatesResponse_ProviderRate struct {
 
 func (x *ListProviderRatesResponse_ProviderRate) Reset() {
 	*x = ListProviderRatesResponse_ProviderRate{}
-	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[47]
+	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3714,7 +3878,7 @@ func (x *ListProviderRatesResponse_ProviderRate) String() string {
 func (*ListProviderRatesResponse_ProviderRate) ProtoMessage() {}
 
 func (x *ListProviderRatesResponse_ProviderRate) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[47]
+	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3777,6 +3941,66 @@ func (x *ListProviderRatesResponse_ProviderRate) GetOperatorName() string {
 		return x.OperatorName
 	}
 	return ""
+}
+
+type ListGameBetDisplayConfigRequest_Item struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Country       string                 `protobuf:"bytes,1,opt,name=country,proto3" json:"country,omitempty"`
+	AllBet        *v1.BettingConfig      `protobuf:"bytes,2,opt,name=all_bet,json=allBet,proto3" json:"all_bet,omitempty"`
+	HighWins      *v1.BettingConfig      `protobuf:"bytes,3,opt,name=high_wins,json=highWins,proto3" json:"high_wins,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListGameBetDisplayConfigRequest_Item) Reset() {
+	*x = ListGameBetDisplayConfigRequest_Item{}
+	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[51]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListGameBetDisplayConfigRequest_Item) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListGameBetDisplayConfigRequest_Item) ProtoMessage() {}
+
+func (x *ListGameBetDisplayConfigRequest_Item) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_game_proto_msgTypes[51]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListGameBetDisplayConfigRequest_Item.ProtoReflect.Descriptor instead.
+func (*ListGameBetDisplayConfigRequest_Item) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_game_proto_rawDescGZIP(), []int{42, 0}
+}
+
+func (x *ListGameBetDisplayConfigRequest_Item) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *ListGameBetDisplayConfigRequest_Item) GetAllBet() *v1.BettingConfig {
+	if x != nil {
+		return x.AllBet
+	}
+	return nil
+}
+
+func (x *ListGameBetDisplayConfigRequest_Item) GetHighWins() *v1.BettingConfig {
+	if x != nil {
+		return x.HighWins
+	}
+	return nil
 }
 
 var File_backoffice_service_v1_backoffice_game_proto protoreflect.FileDescriptor
@@ -4264,7 +4488,25 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\ttime_zone\x18\x03 \x01(\tR\btimeZone\x12\\\n" +
 	"\x18operator_context_filters\x18\x04 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\n" +
 	"\n" +
-	"\b_user_id2\x89\"\n" +
+	"\b_user_id\"\xb8\x01\n" +
+	"\x1eAddGameBetDisplayConfigRequest\x12\x18\n" +
+	"\acountry\x18\x01 \x01(\tR\acountry\x12;\n" +
+	"\aall_bet\x18\x02 \x01(\v2\".api.game.service.v1.BettingConfigR\x06allBet\x12?\n" +
+	"\thigh_wins\x18\x03 \x01(\v2\".api.game.service.v1.BettingConfigR\bhighWins\"\xdf\x01\n" +
+	"!UpdateGameBetDisplayConfigRequest\x12\x18\n" +
+	"\acountry\x18\x01 \x01(\tR\acountry\x12@\n" +
+	"\aall_bet\x18\x02 \x01(\v2\".api.game.service.v1.BettingConfigH\x00R\x06allBet\x88\x01\x01\x12D\n" +
+	"\thigh_wins\x18\x03 \x01(\v2\".api.game.service.v1.BettingConfigH\x01R\bhighWins\x88\x01\x01B\n" +
+	"\n" +
+	"\b_all_betB\f\n" +
+	"\n" +
+	"_high_wins\"\x97\x02\n" +
+	"\x1fListGameBetDisplayConfigRequest\x12S\n" +
+	"\x04list\x18\x01 \x03(\v2?.api.backoffice.service.v1.ListGameBetDisplayConfigRequest.ItemR\x04list\x1a\x9e\x01\n" +
+	"\x04Item\x12\x18\n" +
+	"\acountry\x18\x01 \x01(\tR\acountry\x12;\n" +
+	"\aall_bet\x18\x02 \x01(\v2\".api.game.service.v1.BettingConfigR\x06allBet\x12?\n" +
+	"\thigh_wins\x18\x03 \x01(\v2\".api.game.service.v1.BettingConfigR\bhighWins2\xe5&\n" +
 	"\x0eBackofficeGame\x12\xa1\x01\n" +
 	"\rListProviders\x12/.api.backoffice.service.v1.ListProvidersRequest\x1a0.api.backoffice.service.v1.ListProvidersResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/game/providers/list\x12\xcb\x01\n" +
 	"\x17ListProvidersWithDetail\x129.api.backoffice.service.v1.ListProvidersWithDetailRequest\x1a:.api.backoffice.service.v1.ListProvidersWithDetailResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./v1/backoffice/game/providers-with-detail/list\x12\xa5\x01\n" +
@@ -4293,7 +4535,10 @@ const file_backoffice_service_v1_backoffice_game_proto_rawDesc = "" +
 	"\x17ExportStakeVarianceBets\x129.api.backoffice.service.v1.ExportStakeVarianceBetsRequest\x1a4.api.game.service.v1.ExportStakeVarianceBetsResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./v1/backoffice/game/bets/stake-variance/export\x12\xcd\x01\n" +
 	"\x19ListCustomerStrikeReports\x12;.api.backoffice.service.v1.ListCustomerStrikeReportsRequest\x1a6.api.game.service.v1.ListCustomerStrikeReportsResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/game/customer-strike-reports/list\x12\xd5\x01\n" +
 	"\x1bExportCustomerStrikeReports\x12=.api.backoffice.service.v1.ExportCustomerStrikeReportsRequest\x1a8.api.game.service.v1.ExportCustomerStrikeReportsResponse\"=\x82\xd3\xe4\x93\x027:\x01*\"2/v1/backoffice/game/customer-strike-reports/export\x12\xac\x01\n" +
-	"\x11ExportSportEvents\x123.api.backoffice.service.v1.ExportSportEventsRequest\x1a..api.game.service.v1.ExportSportEventsResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/game/sport-events/exportB[\n" +
+	"\x11ExportSportEvents\x123.api.backoffice.service.v1.ExportSportEventsRequest\x1a..api.game.service.v1.ExportSportEventsResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/game/sport-events/export\x12\xc1\x01\n" +
+	"\x17AddGameBetDisplayConfig\x129.api.backoffice.service.v1.AddGameBetDisplayConfigRequest\x1a4.api.game.service.v1.AddGameBetDisplayConfigResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v1/backoffice/game/bet/dispaly/config/add\x12\xcd\x01\n" +
+	"\x1aUpdateGameBetDisplayConfig\x12<.api.backoffice.service.v1.UpdateGameBetDisplayConfigRequest\x1a7.api.game.service.v1.UpdateGameBetDisplayConfigResponse\"8\x82\xd3\xe4\x93\x022:\x01*\"-/v1/backoffice/game/bet/dispaly/config/update\x12\xc5\x01\n" +
+	"\x18ListGameBetDisplayConfig\x12:.api.backoffice.service.v1.ListGameBetDisplayConfigRequest\x1a5.api.game.service.v1.ListGameBetDisplayConfigResponse\"6\x82\xd3\xe4\x93\x020:\x01*\"+/v1/backoffice/game/bet/dispaly/config/listB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -4308,7 +4553,7 @@ func file_backoffice_service_v1_backoffice_game_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_game_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_game_proto_msgTypes = make([]protoimpl.MessageInfo, 48)
+var file_backoffice_service_v1_backoffice_game_proto_msgTypes = make([]protoimpl.MessageInfo, 52)
 var file_backoffice_service_v1_backoffice_game_proto_goTypes = []any{
 	(*ListProvidersRequest)(nil),                                     // 0: api.backoffice.service.v1.ListProvidersRequest
 	(*ListProvidersResponse)(nil),                                    // 1: api.backoffice.service.v1.ListProvidersResponse
@@ -4350,125 +4595,146 @@ var file_backoffice_service_v1_backoffice_game_proto_goTypes = []any{
 	(*ListCustomerStrikeReportsRequest)(nil),                         // 37: api.backoffice.service.v1.ListCustomerStrikeReportsRequest
 	(*ExportSportEventsRequest)(nil),                                 // 38: api.backoffice.service.v1.ExportSportEventsRequest
 	(*ExportCustomerStrikeReportsRequest)(nil),                       // 39: api.backoffice.service.v1.ExportCustomerStrikeReportsRequest
-	(*ListProvidersResponse_Provider)(nil),                           // 40: api.backoffice.service.v1.ListProvidersResponse.Provider
-	(*ListProvidersWithDetailResponse_Provider)(nil),                 // 41: api.backoffice.service.v1.ListProvidersWithDetailResponse.Provider
-	(*ListBetsRequest_CurrencyWithRange)(nil),                        // 42: api.backoffice.service.v1.ListBetsRequest.CurrencyWithRange
-	(*ListBetsRequest_Currencies)(nil),                               // 43: api.backoffice.service.v1.ListBetsRequest.Currencies
-	(*GetGameTransactionsForBetResponse_GameTransaction)(nil),        // 44: api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction
-	(*GetGameTransactionsForBetResponse_GameTransaction_Amount)(nil), // 45: api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.Amount
-	(*ListGamesResponse_Game)(nil),                                   // 46: api.backoffice.service.v1.ListGamesResponse.Game
-	(*ListProviderRatesResponse_ProviderRate)(nil),                   // 47: api.backoffice.service.v1.ListProviderRatesResponse.ProviderRate
-	(*timestamppb.Timestamp)(nil),                                    // 48: google.protobuf.Timestamp
-	(*common.OperatorContextFilters)(nil),                            // 49: api.common.OperatorContextFilters
-	(*common.OperatorContext)(nil),                                   // 50: api.common.OperatorContext
-	(*v1.GetBetByIdResponse)(nil),                                    // 51: api.game.service.v1.GetBetByIdResponse
-	(*v1.GetGameTransactionByIdResponse)(nil),                        // 52: api.game.service.v1.GetGameTransactionByIdResponse
-	(*v1.ListUnpaidBetsResponse)(nil),                                // 53: api.game.service.v1.ListUnpaidBetsResponse
-	(*v1.ExportUnpaidBetsResponse)(nil),                              // 54: api.game.service.v1.ExportUnpaidBetsResponse
-	(*v1.ListMultipleBetsResponse)(nil),                              // 55: api.game.service.v1.ListMultipleBetsResponse
-	(*v1.ExportMultipleBetsResponse)(nil),                            // 56: api.game.service.v1.ExportMultipleBetsResponse
-	(*v1.ListStakeVarianceBetsResponse)(nil),                         // 57: api.game.service.v1.ListStakeVarianceBetsResponse
-	(*v1.ExportStakeVarianceBetsResponse)(nil),                       // 58: api.game.service.v1.ExportStakeVarianceBetsResponse
-	(*v1.ListCustomerStrikeReportsResponse)(nil),                     // 59: api.game.service.v1.ListCustomerStrikeReportsResponse
-	(*v1.ExportCustomerStrikeReportsResponse)(nil),                   // 60: api.game.service.v1.ExportCustomerStrikeReportsResponse
-	(*v1.ExportSportEventsResponse)(nil),                             // 61: api.game.service.v1.ExportSportEventsResponse
+	(*AddGameBetDisplayConfigRequest)(nil),                           // 40: api.backoffice.service.v1.AddGameBetDisplayConfigRequest
+	(*UpdateGameBetDisplayConfigRequest)(nil),                        // 41: api.backoffice.service.v1.UpdateGameBetDisplayConfigRequest
+	(*ListGameBetDisplayConfigRequest)(nil),                          // 42: api.backoffice.service.v1.ListGameBetDisplayConfigRequest
+	(*ListProvidersResponse_Provider)(nil),                           // 43: api.backoffice.service.v1.ListProvidersResponse.Provider
+	(*ListProvidersWithDetailResponse_Provider)(nil),                 // 44: api.backoffice.service.v1.ListProvidersWithDetailResponse.Provider
+	(*ListBetsRequest_CurrencyWithRange)(nil),                        // 45: api.backoffice.service.v1.ListBetsRequest.CurrencyWithRange
+	(*ListBetsRequest_Currencies)(nil),                               // 46: api.backoffice.service.v1.ListBetsRequest.Currencies
+	(*GetGameTransactionsForBetResponse_GameTransaction)(nil),        // 47: api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction
+	(*GetGameTransactionsForBetResponse_GameTransaction_Amount)(nil), // 48: api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.Amount
+	(*ListGamesResponse_Game)(nil),                                   // 49: api.backoffice.service.v1.ListGamesResponse.Game
+	(*ListProviderRatesResponse_ProviderRate)(nil),                   // 50: api.backoffice.service.v1.ListProviderRatesResponse.ProviderRate
+	(*ListGameBetDisplayConfigRequest_Item)(nil),                     // 51: api.backoffice.service.v1.ListGameBetDisplayConfigRequest.Item
+	(*timestamppb.Timestamp)(nil),                                    // 52: google.protobuf.Timestamp
+	(*common.OperatorContextFilters)(nil),                            // 53: api.common.OperatorContextFilters
+	(*common.OperatorContext)(nil),                                   // 54: api.common.OperatorContext
+	(*v1.BettingConfig)(nil),                                         // 55: api.game.service.v1.BettingConfig
+	(*v1.GetBetByIdResponse)(nil),                                    // 56: api.game.service.v1.GetBetByIdResponse
+	(*v1.GetGameTransactionByIdResponse)(nil),                        // 57: api.game.service.v1.GetGameTransactionByIdResponse
+	(*v1.ListUnpaidBetsResponse)(nil),                                // 58: api.game.service.v1.ListUnpaidBetsResponse
+	(*v1.ExportUnpaidBetsResponse)(nil),                              // 59: api.game.service.v1.ExportUnpaidBetsResponse
+	(*v1.ListMultipleBetsResponse)(nil),                              // 60: api.game.service.v1.ListMultipleBetsResponse
+	(*v1.ExportMultipleBetsResponse)(nil),                            // 61: api.game.service.v1.ExportMultipleBetsResponse
+	(*v1.ListStakeVarianceBetsResponse)(nil),                         // 62: api.game.service.v1.ListStakeVarianceBetsResponse
+	(*v1.ExportStakeVarianceBetsResponse)(nil),                       // 63: api.game.service.v1.ExportStakeVarianceBetsResponse
+	(*v1.ListCustomerStrikeReportsResponse)(nil),                     // 64: api.game.service.v1.ListCustomerStrikeReportsResponse
+	(*v1.ExportCustomerStrikeReportsResponse)(nil),                   // 65: api.game.service.v1.ExportCustomerStrikeReportsResponse
+	(*v1.ExportSportEventsResponse)(nil),                             // 66: api.game.service.v1.ExportSportEventsResponse
+	(*v1.AddGameBetDisplayConfigResponse)(nil),                       // 67: api.game.service.v1.AddGameBetDisplayConfigResponse
+	(*v1.UpdateGameBetDisplayConfigResponse)(nil),                    // 68: api.game.service.v1.UpdateGameBetDisplayConfigResponse
+	(*v1.ListGameBetDisplayConfigResponse)(nil),                      // 69: api.game.service.v1.ListGameBetDisplayConfigResponse
 }
 var file_backoffice_service_v1_backoffice_game_proto_depIdxs = []int32{
-	40, // 0: api.backoffice.service.v1.ListProvidersResponse.providers:type_name -> api.backoffice.service.v1.ListProvidersResponse.Provider
-	41, // 1: api.backoffice.service.v1.ListProvidersWithDetailResponse.providers:type_name -> api.backoffice.service.v1.ListProvidersWithDetailResponse.Provider
-	48, // 2: api.backoffice.service.v1.ListBetsRequest.start_time:type_name -> google.protobuf.Timestamp
-	48, // 3: api.backoffice.service.v1.ListBetsRequest.end_time:type_name -> google.protobuf.Timestamp
-	42, // 4: api.backoffice.service.v1.ListBetsRequest.currency_with_ranges:type_name -> api.backoffice.service.v1.ListBetsRequest.CurrencyWithRange
-	42, // 5: api.backoffice.service.v1.ListBetsRequest.settlement_currency_with_ranges:type_name -> api.backoffice.service.v1.ListBetsRequest.CurrencyWithRange
-	43, // 6: api.backoffice.service.v1.ListBetsRequest.settlement_currencies:type_name -> api.backoffice.service.v1.ListBetsRequest.Currencies
-	49, // 7: api.backoffice.service.v1.ListBetsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	48, // 8: api.backoffice.service.v1.Bet.created_at:type_name -> google.protobuf.Timestamp
-	48, // 9: api.backoffice.service.v1.Bet.updated_at:type_name -> google.protobuf.Timestamp
+	43, // 0: api.backoffice.service.v1.ListProvidersResponse.providers:type_name -> api.backoffice.service.v1.ListProvidersResponse.Provider
+	44, // 1: api.backoffice.service.v1.ListProvidersWithDetailResponse.providers:type_name -> api.backoffice.service.v1.ListProvidersWithDetailResponse.Provider
+	52, // 2: api.backoffice.service.v1.ListBetsRequest.start_time:type_name -> google.protobuf.Timestamp
+	52, // 3: api.backoffice.service.v1.ListBetsRequest.end_time:type_name -> google.protobuf.Timestamp
+	45, // 4: api.backoffice.service.v1.ListBetsRequest.currency_with_ranges:type_name -> api.backoffice.service.v1.ListBetsRequest.CurrencyWithRange
+	45, // 5: api.backoffice.service.v1.ListBetsRequest.settlement_currency_with_ranges:type_name -> api.backoffice.service.v1.ListBetsRequest.CurrencyWithRange
+	46, // 6: api.backoffice.service.v1.ListBetsRequest.settlement_currencies:type_name -> api.backoffice.service.v1.ListBetsRequest.Currencies
+	53, // 7: api.backoffice.service.v1.ListBetsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	52, // 8: api.backoffice.service.v1.Bet.created_at:type_name -> google.protobuf.Timestamp
+	52, // 9: api.backoffice.service.v1.Bet.updated_at:type_name -> google.protobuf.Timestamp
 	15, // 10: api.backoffice.service.v1.ListBetsResponse.bets:type_name -> api.backoffice.service.v1.Bet
-	48, // 11: api.backoffice.service.v1.GetUserBetsOverviewRequest.start_time:type_name -> google.protobuf.Timestamp
-	48, // 12: api.backoffice.service.v1.GetUserBetsOverviewRequest.end_time:type_name -> google.protobuf.Timestamp
-	44, // 13: api.backoffice.service.v1.GetGameTransactionsForBetResponse.game_transactions:type_name -> api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction
-	46, // 14: api.backoffice.service.v1.ListGamesResponse.games:type_name -> api.backoffice.service.v1.ListGamesResponse.Game
-	50, // 15: api.backoffice.service.v1.ListProviderRatesRequest.target_operator_context:type_name -> api.common.OperatorContext
-	47, // 16: api.backoffice.service.v1.ListProviderRatesResponse.provider_rates:type_name -> api.backoffice.service.v1.ListProviderRatesResponse.ProviderRate
-	48, // 17: api.backoffice.service.v1.ListUnpaidBetsRequest.start_time:type_name -> google.protobuf.Timestamp
-	48, // 18: api.backoffice.service.v1.ListUnpaidBetsRequest.end_time:type_name -> google.protobuf.Timestamp
-	49, // 19: api.backoffice.service.v1.ListUnpaidBetsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	48, // 20: api.backoffice.service.v1.ExportUnpaidBetsRequest.start_time:type_name -> google.protobuf.Timestamp
-	48, // 21: api.backoffice.service.v1.ExportUnpaidBetsRequest.end_time:type_name -> google.protobuf.Timestamp
-	49, // 22: api.backoffice.service.v1.ExportUnpaidBetsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	48, // 23: api.backoffice.service.v1.ListMultipleBetsRequest.start_time:type_name -> google.protobuf.Timestamp
-	48, // 24: api.backoffice.service.v1.ListMultipleBetsRequest.end_time:type_name -> google.protobuf.Timestamp
-	49, // 25: api.backoffice.service.v1.ListMultipleBetsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	48, // 26: api.backoffice.service.v1.ExportMultipleBetsRequest.start_time:type_name -> google.protobuf.Timestamp
-	48, // 27: api.backoffice.service.v1.ExportMultipleBetsRequest.end_time:type_name -> google.protobuf.Timestamp
-	49, // 28: api.backoffice.service.v1.ExportMultipleBetsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	48, // 29: api.backoffice.service.v1.ListStakeVarianceBetsRequest.start_time:type_name -> google.protobuf.Timestamp
-	48, // 30: api.backoffice.service.v1.ListStakeVarianceBetsRequest.end_time:type_name -> google.protobuf.Timestamp
-	50, // 31: api.backoffice.service.v1.ListStakeVarianceBetsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	48, // 32: api.backoffice.service.v1.ExportStakeVarianceBetsRequest.start_time:type_name -> google.protobuf.Timestamp
-	48, // 33: api.backoffice.service.v1.ExportStakeVarianceBetsRequest.end_time:type_name -> google.protobuf.Timestamp
-	50, // 34: api.backoffice.service.v1.ExportStakeVarianceBetsRequest.target_operator_context:type_name -> api.common.OperatorContext
-	49, // 35: api.backoffice.service.v1.ListCustomerStrikeReportsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	49, // 36: api.backoffice.service.v1.ExportCustomerStrikeReportsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	48, // 37: api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.created_at:type_name -> google.protobuf.Timestamp
-	48, // 38: api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.updated_at:type_name -> google.protobuf.Timestamp
-	45, // 39: api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.amount:type_name -> api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.Amount
-	0,  // 40: api.backoffice.service.v1.BackofficeGame.ListProviders:input_type -> api.backoffice.service.v1.ListProvidersRequest
-	2,  // 41: api.backoffice.service.v1.BackofficeGame.ListProvidersWithDetail:input_type -> api.backoffice.service.v1.ListProvidersWithDetailRequest
-	4,  // 42: api.backoffice.service.v1.BackofficeGame.ListCategories:input_type -> api.backoffice.service.v1.ListCategoriesRequest
-	6,  // 43: api.backoffice.service.v1.BackofficeGame.ListFeeGroups:input_type -> api.backoffice.service.v1.ListFeeGroupsRequest
-	8,  // 44: api.backoffice.service.v1.BackofficeGame.ListTags:input_type -> api.backoffice.service.v1.ListTagsRequest
-	10, // 45: api.backoffice.service.v1.BackofficeGame.ListThemes:input_type -> api.backoffice.service.v1.ListThemesRequest
-	12, // 46: api.backoffice.service.v1.BackofficeGame.ListCurrencies:input_type -> api.backoffice.service.v1.ListCurrenciesRequest
-	14, // 47: api.backoffice.service.v1.BackofficeGame.ListBets:input_type -> api.backoffice.service.v1.ListBetsRequest
-	17, // 48: api.backoffice.service.v1.BackofficeGame.GetBetById:input_type -> api.backoffice.service.v1.GetBetByIdRequest
-	18, // 49: api.backoffice.service.v1.BackofficeGame.GetUserBetsOverview:input_type -> api.backoffice.service.v1.GetUserBetsOverviewRequest
-	20, // 50: api.backoffice.service.v1.BackofficeGame.GetGameTransactionsForBet:input_type -> api.backoffice.service.v1.GetGameTransactionsForBetRequest
-	22, // 51: api.backoffice.service.v1.BackofficeGame.ListGames:input_type -> api.backoffice.service.v1.ListGamesRequest
-	24, // 52: api.backoffice.service.v1.BackofficeGame.UpdateGame:input_type -> api.backoffice.service.v1.UpdateGameRequest
-	26, // 53: api.backoffice.service.v1.BackofficeGame.UpdateProvider:input_type -> api.backoffice.service.v1.UpdateProviderRequest
-	28, // 54: api.backoffice.service.v1.BackofficeGame.ListProviderRates:input_type -> api.backoffice.service.v1.ListProviderRatesRequest
-	30, // 55: api.backoffice.service.v1.BackofficeGame.GetGameTransactionById:input_type -> api.backoffice.service.v1.GetGameTransactionByIdRequest
-	31, // 56: api.backoffice.service.v1.BackofficeGame.ListUnpaidBets:input_type -> api.backoffice.service.v1.ListUnpaidBetsRequest
-	32, // 57: api.backoffice.service.v1.BackofficeGame.ExportUnpaidBets:input_type -> api.backoffice.service.v1.ExportUnpaidBetsRequest
-	33, // 58: api.backoffice.service.v1.BackofficeGame.ListMultipleBets:input_type -> api.backoffice.service.v1.ListMultipleBetsRequest
-	34, // 59: api.backoffice.service.v1.BackofficeGame.ExportMultipleBets:input_type -> api.backoffice.service.v1.ExportMultipleBetsRequest
-	35, // 60: api.backoffice.service.v1.BackofficeGame.ListStakeVarianceBets:input_type -> api.backoffice.service.v1.ListStakeVarianceBetsRequest
-	36, // 61: api.backoffice.service.v1.BackofficeGame.ExportStakeVarianceBets:input_type -> api.backoffice.service.v1.ExportStakeVarianceBetsRequest
-	37, // 62: api.backoffice.service.v1.BackofficeGame.ListCustomerStrikeReports:input_type -> api.backoffice.service.v1.ListCustomerStrikeReportsRequest
-	39, // 63: api.backoffice.service.v1.BackofficeGame.ExportCustomerStrikeReports:input_type -> api.backoffice.service.v1.ExportCustomerStrikeReportsRequest
-	38, // 64: api.backoffice.service.v1.BackofficeGame.ExportSportEvents:input_type -> api.backoffice.service.v1.ExportSportEventsRequest
-	1,  // 65: api.backoffice.service.v1.BackofficeGame.ListProviders:output_type -> api.backoffice.service.v1.ListProvidersResponse
-	3,  // 66: api.backoffice.service.v1.BackofficeGame.ListProvidersWithDetail:output_type -> api.backoffice.service.v1.ListProvidersWithDetailResponse
-	5,  // 67: api.backoffice.service.v1.BackofficeGame.ListCategories:output_type -> api.backoffice.service.v1.ListCategoriesResponse
-	7,  // 68: api.backoffice.service.v1.BackofficeGame.ListFeeGroups:output_type -> api.backoffice.service.v1.ListFeeGroupsResponse
-	9,  // 69: api.backoffice.service.v1.BackofficeGame.ListTags:output_type -> api.backoffice.service.v1.ListTagsResponse
-	11, // 70: api.backoffice.service.v1.BackofficeGame.ListThemes:output_type -> api.backoffice.service.v1.ListThemesResponse
-	13, // 71: api.backoffice.service.v1.BackofficeGame.ListCurrencies:output_type -> api.backoffice.service.v1.ListCurrenciesResponse
-	16, // 72: api.backoffice.service.v1.BackofficeGame.ListBets:output_type -> api.backoffice.service.v1.ListBetsResponse
-	51, // 73: api.backoffice.service.v1.BackofficeGame.GetBetById:output_type -> api.game.service.v1.GetBetByIdResponse
-	19, // 74: api.backoffice.service.v1.BackofficeGame.GetUserBetsOverview:output_type -> api.backoffice.service.v1.GetUserBetsOverviewResponse
-	21, // 75: api.backoffice.service.v1.BackofficeGame.GetGameTransactionsForBet:output_type -> api.backoffice.service.v1.GetGameTransactionsForBetResponse
-	23, // 76: api.backoffice.service.v1.BackofficeGame.ListGames:output_type -> api.backoffice.service.v1.ListGamesResponse
-	25, // 77: api.backoffice.service.v1.BackofficeGame.UpdateGame:output_type -> api.backoffice.service.v1.UpdateGameResponse
-	27, // 78: api.backoffice.service.v1.BackofficeGame.UpdateProvider:output_type -> api.backoffice.service.v1.UpdateProviderResponse
-	29, // 79: api.backoffice.service.v1.BackofficeGame.ListProviderRates:output_type -> api.backoffice.service.v1.ListProviderRatesResponse
-	52, // 80: api.backoffice.service.v1.BackofficeGame.GetGameTransactionById:output_type -> api.game.service.v1.GetGameTransactionByIdResponse
-	53, // 81: api.backoffice.service.v1.BackofficeGame.ListUnpaidBets:output_type -> api.game.service.v1.ListUnpaidBetsResponse
-	54, // 82: api.backoffice.service.v1.BackofficeGame.ExportUnpaidBets:output_type -> api.game.service.v1.ExportUnpaidBetsResponse
-	55, // 83: api.backoffice.service.v1.BackofficeGame.ListMultipleBets:output_type -> api.game.service.v1.ListMultipleBetsResponse
-	56, // 84: api.backoffice.service.v1.BackofficeGame.ExportMultipleBets:output_type -> api.game.service.v1.ExportMultipleBetsResponse
-	57, // 85: api.backoffice.service.v1.BackofficeGame.ListStakeVarianceBets:output_type -> api.game.service.v1.ListStakeVarianceBetsResponse
-	58, // 86: api.backoffice.service.v1.BackofficeGame.ExportStakeVarianceBets:output_type -> api.game.service.v1.ExportStakeVarianceBetsResponse
-	59, // 87: api.backoffice.service.v1.BackofficeGame.ListCustomerStrikeReports:output_type -> api.game.service.v1.ListCustomerStrikeReportsResponse
-	60, // 88: api.backoffice.service.v1.BackofficeGame.ExportCustomerStrikeReports:output_type -> api.game.service.v1.ExportCustomerStrikeReportsResponse
-	61, // 89: api.backoffice.service.v1.BackofficeGame.ExportSportEvents:output_type -> api.game.service.v1.ExportSportEventsResponse
-	65, // [65:90] is the sub-list for method output_type
-	40, // [40:65] is the sub-list for method input_type
-	40, // [40:40] is the sub-list for extension type_name
-	40, // [40:40] is the sub-list for extension extendee
-	0,  // [0:40] is the sub-list for field type_name
+	52, // 11: api.backoffice.service.v1.GetUserBetsOverviewRequest.start_time:type_name -> google.protobuf.Timestamp
+	52, // 12: api.backoffice.service.v1.GetUserBetsOverviewRequest.end_time:type_name -> google.protobuf.Timestamp
+	47, // 13: api.backoffice.service.v1.GetGameTransactionsForBetResponse.game_transactions:type_name -> api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction
+	49, // 14: api.backoffice.service.v1.ListGamesResponse.games:type_name -> api.backoffice.service.v1.ListGamesResponse.Game
+	54, // 15: api.backoffice.service.v1.ListProviderRatesRequest.target_operator_context:type_name -> api.common.OperatorContext
+	50, // 16: api.backoffice.service.v1.ListProviderRatesResponse.provider_rates:type_name -> api.backoffice.service.v1.ListProviderRatesResponse.ProviderRate
+	52, // 17: api.backoffice.service.v1.ListUnpaidBetsRequest.start_time:type_name -> google.protobuf.Timestamp
+	52, // 18: api.backoffice.service.v1.ListUnpaidBetsRequest.end_time:type_name -> google.protobuf.Timestamp
+	53, // 19: api.backoffice.service.v1.ListUnpaidBetsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	52, // 20: api.backoffice.service.v1.ExportUnpaidBetsRequest.start_time:type_name -> google.protobuf.Timestamp
+	52, // 21: api.backoffice.service.v1.ExportUnpaidBetsRequest.end_time:type_name -> google.protobuf.Timestamp
+	53, // 22: api.backoffice.service.v1.ExportUnpaidBetsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	52, // 23: api.backoffice.service.v1.ListMultipleBetsRequest.start_time:type_name -> google.protobuf.Timestamp
+	52, // 24: api.backoffice.service.v1.ListMultipleBetsRequest.end_time:type_name -> google.protobuf.Timestamp
+	53, // 25: api.backoffice.service.v1.ListMultipleBetsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	52, // 26: api.backoffice.service.v1.ExportMultipleBetsRequest.start_time:type_name -> google.protobuf.Timestamp
+	52, // 27: api.backoffice.service.v1.ExportMultipleBetsRequest.end_time:type_name -> google.protobuf.Timestamp
+	53, // 28: api.backoffice.service.v1.ExportMultipleBetsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	52, // 29: api.backoffice.service.v1.ListStakeVarianceBetsRequest.start_time:type_name -> google.protobuf.Timestamp
+	52, // 30: api.backoffice.service.v1.ListStakeVarianceBetsRequest.end_time:type_name -> google.protobuf.Timestamp
+	54, // 31: api.backoffice.service.v1.ListStakeVarianceBetsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	52, // 32: api.backoffice.service.v1.ExportStakeVarianceBetsRequest.start_time:type_name -> google.protobuf.Timestamp
+	52, // 33: api.backoffice.service.v1.ExportStakeVarianceBetsRequest.end_time:type_name -> google.protobuf.Timestamp
+	54, // 34: api.backoffice.service.v1.ExportStakeVarianceBetsRequest.target_operator_context:type_name -> api.common.OperatorContext
+	53, // 35: api.backoffice.service.v1.ListCustomerStrikeReportsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	53, // 36: api.backoffice.service.v1.ExportCustomerStrikeReportsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	55, // 37: api.backoffice.service.v1.AddGameBetDisplayConfigRequest.all_bet:type_name -> api.game.service.v1.BettingConfig
+	55, // 38: api.backoffice.service.v1.AddGameBetDisplayConfigRequest.high_wins:type_name -> api.game.service.v1.BettingConfig
+	55, // 39: api.backoffice.service.v1.UpdateGameBetDisplayConfigRequest.all_bet:type_name -> api.game.service.v1.BettingConfig
+	55, // 40: api.backoffice.service.v1.UpdateGameBetDisplayConfigRequest.high_wins:type_name -> api.game.service.v1.BettingConfig
+	51, // 41: api.backoffice.service.v1.ListGameBetDisplayConfigRequest.list:type_name -> api.backoffice.service.v1.ListGameBetDisplayConfigRequest.Item
+	52, // 42: api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.created_at:type_name -> google.protobuf.Timestamp
+	52, // 43: api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.updated_at:type_name -> google.protobuf.Timestamp
+	48, // 44: api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.amount:type_name -> api.backoffice.service.v1.GetGameTransactionsForBetResponse.GameTransaction.Amount
+	55, // 45: api.backoffice.service.v1.ListGameBetDisplayConfigRequest.Item.all_bet:type_name -> api.game.service.v1.BettingConfig
+	55, // 46: api.backoffice.service.v1.ListGameBetDisplayConfigRequest.Item.high_wins:type_name -> api.game.service.v1.BettingConfig
+	0,  // 47: api.backoffice.service.v1.BackofficeGame.ListProviders:input_type -> api.backoffice.service.v1.ListProvidersRequest
+	2,  // 48: api.backoffice.service.v1.BackofficeGame.ListProvidersWithDetail:input_type -> api.backoffice.service.v1.ListProvidersWithDetailRequest
+	4,  // 49: api.backoffice.service.v1.BackofficeGame.ListCategories:input_type -> api.backoffice.service.v1.ListCategoriesRequest
+	6,  // 50: api.backoffice.service.v1.BackofficeGame.ListFeeGroups:input_type -> api.backoffice.service.v1.ListFeeGroupsRequest
+	8,  // 51: api.backoffice.service.v1.BackofficeGame.ListTags:input_type -> api.backoffice.service.v1.ListTagsRequest
+	10, // 52: api.backoffice.service.v1.BackofficeGame.ListThemes:input_type -> api.backoffice.service.v1.ListThemesRequest
+	12, // 53: api.backoffice.service.v1.BackofficeGame.ListCurrencies:input_type -> api.backoffice.service.v1.ListCurrenciesRequest
+	14, // 54: api.backoffice.service.v1.BackofficeGame.ListBets:input_type -> api.backoffice.service.v1.ListBetsRequest
+	17, // 55: api.backoffice.service.v1.BackofficeGame.GetBetById:input_type -> api.backoffice.service.v1.GetBetByIdRequest
+	18, // 56: api.backoffice.service.v1.BackofficeGame.GetUserBetsOverview:input_type -> api.backoffice.service.v1.GetUserBetsOverviewRequest
+	20, // 57: api.backoffice.service.v1.BackofficeGame.GetGameTransactionsForBet:input_type -> api.backoffice.service.v1.GetGameTransactionsForBetRequest
+	22, // 58: api.backoffice.service.v1.BackofficeGame.ListGames:input_type -> api.backoffice.service.v1.ListGamesRequest
+	24, // 59: api.backoffice.service.v1.BackofficeGame.UpdateGame:input_type -> api.backoffice.service.v1.UpdateGameRequest
+	26, // 60: api.backoffice.service.v1.BackofficeGame.UpdateProvider:input_type -> api.backoffice.service.v1.UpdateProviderRequest
+	28, // 61: api.backoffice.service.v1.BackofficeGame.ListProviderRates:input_type -> api.backoffice.service.v1.ListProviderRatesRequest
+	30, // 62: api.backoffice.service.v1.BackofficeGame.GetGameTransactionById:input_type -> api.backoffice.service.v1.GetGameTransactionByIdRequest
+	31, // 63: api.backoffice.service.v1.BackofficeGame.ListUnpaidBets:input_type -> api.backoffice.service.v1.ListUnpaidBetsRequest
+	32, // 64: api.backoffice.service.v1.BackofficeGame.ExportUnpaidBets:input_type -> api.backoffice.service.v1.ExportUnpaidBetsRequest
+	33, // 65: api.backoffice.service.v1.BackofficeGame.ListMultipleBets:input_type -> api.backoffice.service.v1.ListMultipleBetsRequest
+	34, // 66: api.backoffice.service.v1.BackofficeGame.ExportMultipleBets:input_type -> api.backoffice.service.v1.ExportMultipleBetsRequest
+	35, // 67: api.backoffice.service.v1.BackofficeGame.ListStakeVarianceBets:input_type -> api.backoffice.service.v1.ListStakeVarianceBetsRequest
+	36, // 68: api.backoffice.service.v1.BackofficeGame.ExportStakeVarianceBets:input_type -> api.backoffice.service.v1.ExportStakeVarianceBetsRequest
+	37, // 69: api.backoffice.service.v1.BackofficeGame.ListCustomerStrikeReports:input_type -> api.backoffice.service.v1.ListCustomerStrikeReportsRequest
+	39, // 70: api.backoffice.service.v1.BackofficeGame.ExportCustomerStrikeReports:input_type -> api.backoffice.service.v1.ExportCustomerStrikeReportsRequest
+	38, // 71: api.backoffice.service.v1.BackofficeGame.ExportSportEvents:input_type -> api.backoffice.service.v1.ExportSportEventsRequest
+	40, // 72: api.backoffice.service.v1.BackofficeGame.AddGameBetDisplayConfig:input_type -> api.backoffice.service.v1.AddGameBetDisplayConfigRequest
+	41, // 73: api.backoffice.service.v1.BackofficeGame.UpdateGameBetDisplayConfig:input_type -> api.backoffice.service.v1.UpdateGameBetDisplayConfigRequest
+	42, // 74: api.backoffice.service.v1.BackofficeGame.ListGameBetDisplayConfig:input_type -> api.backoffice.service.v1.ListGameBetDisplayConfigRequest
+	1,  // 75: api.backoffice.service.v1.BackofficeGame.ListProviders:output_type -> api.backoffice.service.v1.ListProvidersResponse
+	3,  // 76: api.backoffice.service.v1.BackofficeGame.ListProvidersWithDetail:output_type -> api.backoffice.service.v1.ListProvidersWithDetailResponse
+	5,  // 77: api.backoffice.service.v1.BackofficeGame.ListCategories:output_type -> api.backoffice.service.v1.ListCategoriesResponse
+	7,  // 78: api.backoffice.service.v1.BackofficeGame.ListFeeGroups:output_type -> api.backoffice.service.v1.ListFeeGroupsResponse
+	9,  // 79: api.backoffice.service.v1.BackofficeGame.ListTags:output_type -> api.backoffice.service.v1.ListTagsResponse
+	11, // 80: api.backoffice.service.v1.BackofficeGame.ListThemes:output_type -> api.backoffice.service.v1.ListThemesResponse
+	13, // 81: api.backoffice.service.v1.BackofficeGame.ListCurrencies:output_type -> api.backoffice.service.v1.ListCurrenciesResponse
+	16, // 82: api.backoffice.service.v1.BackofficeGame.ListBets:output_type -> api.backoffice.service.v1.ListBetsResponse
+	56, // 83: api.backoffice.service.v1.BackofficeGame.GetBetById:output_type -> api.game.service.v1.GetBetByIdResponse
+	19, // 84: api.backoffice.service.v1.BackofficeGame.GetUserBetsOverview:output_type -> api.backoffice.service.v1.GetUserBetsOverviewResponse
+	21, // 85: api.backoffice.service.v1.BackofficeGame.GetGameTransactionsForBet:output_type -> api.backoffice.service.v1.GetGameTransactionsForBetResponse
+	23, // 86: api.backoffice.service.v1.BackofficeGame.ListGames:output_type -> api.backoffice.service.v1.ListGamesResponse
+	25, // 87: api.backoffice.service.v1.BackofficeGame.UpdateGame:output_type -> api.backoffice.service.v1.UpdateGameResponse
+	27, // 88: api.backoffice.service.v1.BackofficeGame.UpdateProvider:output_type -> api.backoffice.service.v1.UpdateProviderResponse
+	29, // 89: api.backoffice.service.v1.BackofficeGame.ListProviderRates:output_type -> api.backoffice.service.v1.ListProviderRatesResponse
+	57, // 90: api.backoffice.service.v1.BackofficeGame.GetGameTransactionById:output_type -> api.game.service.v1.GetGameTransactionByIdResponse
+	58, // 91: api.backoffice.service.v1.BackofficeGame.ListUnpaidBets:output_type -> api.game.service.v1.ListUnpaidBetsResponse
+	59, // 92: api.backoffice.service.v1.BackofficeGame.ExportUnpaidBets:output_type -> api.game.service.v1.ExportUnpaidBetsResponse
+	60, // 93: api.backoffice.service.v1.BackofficeGame.ListMultipleBets:output_type -> api.game.service.v1.ListMultipleBetsResponse
+	61, // 94: api.backoffice.service.v1.BackofficeGame.ExportMultipleBets:output_type -> api.game.service.v1.ExportMultipleBetsResponse
+	62, // 95: api.backoffice.service.v1.BackofficeGame.ListStakeVarianceBets:output_type -> api.game.service.v1.ListStakeVarianceBetsResponse
+	63, // 96: api.backoffice.service.v1.BackofficeGame.ExportStakeVarianceBets:output_type -> api.game.service.v1.ExportStakeVarianceBetsResponse
+	64, // 97: api.backoffice.service.v1.BackofficeGame.ListCustomerStrikeReports:output_type -> api.game.service.v1.ListCustomerStrikeReportsResponse
+	65, // 98: api.backoffice.service.v1.BackofficeGame.ExportCustomerStrikeReports:output_type -> api.game.service.v1.ExportCustomerStrikeReportsResponse
+	66, // 99: api.backoffice.service.v1.BackofficeGame.ExportSportEvents:output_type -> api.game.service.v1.ExportSportEventsResponse
+	67, // 100: api.backoffice.service.v1.BackofficeGame.AddGameBetDisplayConfig:output_type -> api.game.service.v1.AddGameBetDisplayConfigResponse
+	68, // 101: api.backoffice.service.v1.BackofficeGame.UpdateGameBetDisplayConfig:output_type -> api.game.service.v1.UpdateGameBetDisplayConfigResponse
+	69, // 102: api.backoffice.service.v1.BackofficeGame.ListGameBetDisplayConfig:output_type -> api.game.service.v1.ListGameBetDisplayConfigResponse
+	75, // [75:103] is the sub-list for method output_type
+	47, // [47:75] is the sub-list for method input_type
+	47, // [47:47] is the sub-list for extension type_name
+	47, // [47:47] is the sub-list for extension extendee
+	0,  // [0:47] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_game_proto_init() }
@@ -4500,14 +4766,15 @@ func file_backoffice_service_v1_backoffice_game_proto_init() {
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[37].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[38].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_game_proto_msgTypes[39].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_game_proto_msgTypes[42].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_game_proto_msgTypes[41].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_game_proto_msgTypes[45].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_game_proto_rawDesc), len(file_backoffice_service_v1_backoffice_game_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   48,
+			NumMessages:   52,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
