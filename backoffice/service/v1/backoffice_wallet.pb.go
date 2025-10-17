@@ -4199,7 +4199,7 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x12reporting_currency\x18\x03 \x01(\tR\x11reportingCurrency\x12)\n" +
 	"\x10transaction_type\x18\x04 \x01(\tR\x0ftransactionType\x12%\n" +
 	"\x0etransaction_id\x18\x05 \x01(\x03R\rtransactionId\x12\x12\n" +
-	"\x04cash\x18\x06 \x01(\tR\x04cash2\xe63\n" +
+	"\x04cash\x18\x06 \x01(\tR\x04cash2\xf43\n" +
 	"\x10BackofficeWallet\x12\x8b\x01\n" +
 	"\n" +
 	"GetWallets\x12,.api.backoffice.service.v1.GetWalletsRequest\x1a).api.wallet.service.v1.GetWalletsResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/backoffice/wallet/get\x12\xa9\x01\n" +
@@ -4233,9 +4233,9 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x16SetFICAThresholdConfig\x128.api.backoffice.service.v1.SetFICAThresholdConfigRequest\x1a5.api.wallet.service.v1.SetFICAThresholdConfigResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/wallet/fica/config/set\x12\xbb\x01\n" +
 	"\x16GetFICAThresholdConfig\x128.api.backoffice.service.v1.GetFICAThresholdConfigRequest\x1a5.api.wallet.service.v1.GetFICAThresholdConfigResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/wallet/fica/config/get\x12\xd7\x01\n" +
 	"\x1dListFICAThresholdTransactions\x12?.api.backoffice.service.v1.ListFICAThresholdTransactionsRequest\x1a<.api.wallet.service.v1.ListFICAThresholdTransactionsResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/wallet/fica/transactions/list\x12\xdf\x01\n" +
-	"\x1fExportFICAThresholdTransactions\x12A.api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest\x1a>.api.wallet.service.v1.ExportFICAThresholdTransactionsResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./v1/backoffice/wallet/fica/transactions/export\x12\x88\x01\n" +
-	"\fManualCredit\x12(.api.backoffice.service.v1.CreditRequest\x1a%.api.wallet.service.v1.CreditResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/backoffice/wallet/credit\x12\x84\x01\n" +
-	"\vManualDebit\x12'.api.backoffice.service.v1.DebitRequest\x1a$.api.wallet.service.v1.DebitResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/backoffice/wallet/debitB[\n" +
+	"\x1fExportFICAThresholdTransactions\x12A.api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest\x1a>.api.wallet.service.v1.ExportFICAThresholdTransactionsResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./v1/backoffice/wallet/fica/transactions/export\x12\x8f\x01\n" +
+	"\fManualCredit\x12(.api.backoffice.service.v1.CreditRequest\x1a%.api.wallet.service.v1.CreditResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/wallet/manual/credit\x12\x8b\x01\n" +
+	"\vManualDebit\x12'.api.backoffice.service.v1.DebitRequest\x1a$.api.wallet.service.v1.DebitResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/wallet/manual/debitB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (

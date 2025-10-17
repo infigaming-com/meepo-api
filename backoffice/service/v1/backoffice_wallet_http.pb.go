@@ -91,9 +91,9 @@ type BackofficeWalletHTTPServer interface {
 	ListWalletCurrencies(context.Context, *ListWalletCurrenciesRequest) (*v1.ListCurrenciesResponse, error)
 	// ListWalletResponsibleGamblingConfigs ListWalletResponsibleGamblingConfigs lists gambling configs for a user with all currencies
 	ListWalletResponsibleGamblingConfigs(context.Context, *ListWalletResponsibleGamblingConfigsRequest) (*v1.ListResponsibleGamblingConfigsResponse, error)
-	// ManualCredit Credit
+	// ManualCredit ManualCredit
 	ManualCredit(context.Context, *CreditRequest) (*v1.CreditResponse, error)
-	// ManualDebit Debit
+	// ManualDebit ManualDebit
 	ManualDebit(context.Context, *DebitRequest) (*v1.DebitResponse, error)
 	// OperatorBalanceFreeze OperatorFreeze freezes cash of an operator
 	OperatorBalanceFreeze(context.Context, *OperatorBalanceFreezeRequest) (*OperatorBalanceFreezeResponse, error)
@@ -153,8 +153,8 @@ func RegisterBackofficeWalletHTTPServer(s *http.Server, srv BackofficeWalletHTTP
 	r.POST("/v1/backoffice/wallet/fica/config/get", _BackofficeWallet_GetFICAThresholdConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/fica/transactions/list", _BackofficeWallet_ListFICAThresholdTransactions0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/wallet/fica/transactions/export", _BackofficeWallet_ExportFICAThresholdTransactions0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/wallet/credit", _BackofficeWallet_ManualCredit0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/wallet/debit", _BackofficeWallet_ManualDebit0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/manual/credit", _BackofficeWallet_ManualCredit0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/wallet/manual/debit", _BackofficeWallet_ManualDebit0_HTTP_Handler(srv))
 }
 
 func _BackofficeWallet_GetWallets0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
@@ -1212,7 +1212,7 @@ func (c *BackofficeWalletHTTPClientImpl) ListWalletResponsibleGamblingConfigs(ct
 
 func (c *BackofficeWalletHTTPClientImpl) ManualCredit(ctx context.Context, in *CreditRequest, opts ...http.CallOption) (*v1.CreditResponse, error) {
 	var out v1.CreditResponse
-	pattern := "/v1/backoffice/wallet/credit"
+	pattern := "/v1/backoffice/wallet/manual/credit"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletManualCredit))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -1225,7 +1225,7 @@ func (c *BackofficeWalletHTTPClientImpl) ManualCredit(ctx context.Context, in *C
 
 func (c *BackofficeWalletHTTPClientImpl) ManualDebit(ctx context.Context, in *DebitRequest, opts ...http.CallOption) (*v1.DebitResponse, error) {
 	var out v1.DebitResponse
-	pattern := "/v1/backoffice/wallet/debit"
+	pattern := "/v1/backoffice/wallet/manual/debit"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeWalletManualDebit))
 	opts = append(opts, http.PathTemplate(pattern))

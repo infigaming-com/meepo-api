@@ -3642,25 +3642,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListWalletBalanceTransactionsResponse'
-    /v1/backoffice/wallet/credit:
-        post:
-            tags:
-                - BackofficeWallet
-            description: Credit
-            operationId: BackofficeWallet_ManualCredit
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.CreditRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.wallet.service.v1.CreditResponse'
     /v1/backoffice/wallet/credit-transactions/get:
         post:
             tags:
@@ -3809,25 +3790,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.ListCustomerRecordsResponse'
-    /v1/backoffice/wallet/debit:
-        post:
-            tags:
-                - BackofficeWallet
-            description: Debit
-            operationId: BackofficeWallet_ManualDebit
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.DebitRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.wallet.service.v1.DebitResponse'
     /v1/backoffice/wallet/deduction-order/update:
         post:
             tags:
@@ -4035,6 +3997,44 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.GetWalletsResponse'
+    /v1/backoffice/wallet/manual/credit:
+        post:
+            tags:
+                - BackofficeWallet
+            description: ManualCredit
+            operationId: BackofficeWallet_ManualCredit
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreditRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.CreditResponse'
+    /v1/backoffice/wallet/manual/debit:
+        post:
+            tags:
+                - BackofficeWallet
+            description: ManualDebit
+            operationId: BackofficeWallet_ManualDebit
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DebitRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.DebitResponse'
     /v1/backoffice/wallet/operator/balance-freeze:
         post:
             tags:

@@ -117,9 +117,9 @@ type BackofficeWalletClient interface {
 	ListFICAThresholdTransactions(ctx context.Context, in *ListFICAThresholdTransactionsRequest, opts ...grpc.CallOption) (*v1.ListFICAThresholdTransactionsResponse, error)
 	// ExportFICAThresholdTransactions creates a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
 	ExportFICAThresholdTransactions(ctx context.Context, in *ExportFICAThresholdTransactionsRequest, opts ...grpc.CallOption) (*v1.ExportFICAThresholdTransactionsResponse, error)
-	// Credit
+	// ManualCredit
 	ManualCredit(ctx context.Context, in *CreditRequest, opts ...grpc.CallOption) (*v1.CreditResponse, error)
-	// Debit
+	// ManualDebit
 	ManualDebit(ctx context.Context, in *DebitRequest, opts ...grpc.CallOption) (*v1.DebitResponse, error)
 }
 
@@ -532,9 +532,9 @@ type BackofficeWalletServer interface {
 	ListFICAThresholdTransactions(context.Context, *ListFICAThresholdTransactionsRequest) (*v1.ListFICAThresholdTransactionsResponse, error)
 	// ExportFICAThresholdTransactions creates a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
 	ExportFICAThresholdTransactions(context.Context, *ExportFICAThresholdTransactionsRequest) (*v1.ExportFICAThresholdTransactionsResponse, error)
-	// Credit
+	// ManualCredit
 	ManualCredit(context.Context, *CreditRequest) (*v1.CreditResponse, error)
-	// Debit
+	// ManualDebit
 	ManualDebit(context.Context, *DebitRequest) (*v1.DebitResponse, error)
 	mustEmbedUnimplementedBackofficeWalletServer()
 }
