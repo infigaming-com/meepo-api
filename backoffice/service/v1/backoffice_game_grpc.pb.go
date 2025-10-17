@@ -28,6 +28,7 @@ const (
 	BackofficeGame_ListThemes_FullMethodName                  = "/api.backoffice.service.v1.BackofficeGame/ListThemes"
 	BackofficeGame_ListCurrencies_FullMethodName              = "/api.backoffice.service.v1.BackofficeGame/ListCurrencies"
 	BackofficeGame_ListBets_FullMethodName                    = "/api.backoffice.service.v1.BackofficeGame/ListBets"
+	BackofficeGame_ExportBets_FullMethodName                  = "/api.backoffice.service.v1.BackofficeGame/ExportBets"
 	BackofficeGame_GetBetById_FullMethodName                  = "/api.backoffice.service.v1.BackofficeGame/GetBetById"
 	BackofficeGame_GetUserBetsOverview_FullMethodName         = "/api.backoffice.service.v1.BackofficeGame/GetUserBetsOverview"
 	BackofficeGame_GetGameTransactionsForBet_FullMethodName   = "/api.backoffice.service.v1.BackofficeGame/GetGameTransactionsForBet"
@@ -68,6 +69,7 @@ type BackofficeGameClient interface {
 	ListThemes(ctx context.Context, in *ListThemesRequest, opts ...grpc.CallOption) (*ListThemesResponse, error)
 	ListCurrencies(ctx context.Context, in *ListCurrenciesRequest, opts ...grpc.CallOption) (*ListCurrenciesResponse, error)
 	ListBets(ctx context.Context, in *ListBetsRequest, opts ...grpc.CallOption) (*ListBetsResponse, error)
+	ExportBets(ctx context.Context, in *ExportBetsRequest, opts ...grpc.CallOption) (*v1.ExportBetsResponse, error)
 	GetBetById(ctx context.Context, in *GetBetByIdRequest, opts ...grpc.CallOption) (*v1.GetBetByIdResponse, error)
 	GetUserBetsOverview(ctx context.Context, in *GetUserBetsOverviewRequest, opts ...grpc.CallOption) (*GetUserBetsOverviewResponse, error)
 	GetGameTransactionsForBet(ctx context.Context, in *GetGameTransactionsForBetRequest, opts ...grpc.CallOption) (*GetGameTransactionsForBetResponse, error)
@@ -172,6 +174,16 @@ func (c *backofficeGameClient) ListBets(ctx context.Context, in *ListBetsRequest
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListBetsResponse)
 	err := c.cc.Invoke(ctx, BackofficeGame_ListBets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) ExportBets(ctx context.Context, in *ExportBetsRequest, opts ...grpc.CallOption) (*v1.ExportBetsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ExportBetsResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ExportBets_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -396,6 +408,7 @@ type BackofficeGameServer interface {
 	ListThemes(context.Context, *ListThemesRequest) (*ListThemesResponse, error)
 	ListCurrencies(context.Context, *ListCurrenciesRequest) (*ListCurrenciesResponse, error)
 	ListBets(context.Context, *ListBetsRequest) (*ListBetsResponse, error)
+	ExportBets(context.Context, *ExportBetsRequest) (*v1.ExportBetsResponse, error)
 	GetBetById(context.Context, *GetBetByIdRequest) (*v1.GetBetByIdResponse, error)
 	GetUserBetsOverview(context.Context, *GetUserBetsOverviewRequest) (*GetUserBetsOverviewResponse, error)
 	GetGameTransactionsForBet(context.Context, *GetGameTransactionsForBetRequest) (*GetGameTransactionsForBetResponse, error)
@@ -449,6 +462,9 @@ func (UnimplementedBackofficeGameServer) ListCurrencies(context.Context, *ListCu
 }
 func (UnimplementedBackofficeGameServer) ListBets(context.Context, *ListBetsRequest) (*ListBetsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBets not implemented")
+}
+func (UnimplementedBackofficeGameServer) ExportBets(context.Context, *ExportBetsRequest) (*v1.ExportBetsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportBets not implemented")
 }
 func (UnimplementedBackofficeGameServer) GetBetById(context.Context, *GetBetByIdRequest) (*v1.GetBetByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBetById not implemented")
@@ -671,6 +687,24 @@ func _BackofficeGame_ListBets_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BackofficeGameServer).ListBets(ctx, req.(*ListBetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_ExportBets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportBetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ExportBets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ExportBets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ExportBets(ctx, req.(*ExportBetsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1073,6 +1107,10 @@ var BackofficeGame_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListBets",
 			Handler:    _BackofficeGame_ListBets_Handler,
+		},
+		{
+			MethodName: "ExportBets",
+			Handler:    _BackofficeGame_ExportBets_Handler,
 		},
 		{
 			MethodName: "GetBetById",
