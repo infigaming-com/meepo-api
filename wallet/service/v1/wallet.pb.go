@@ -255,6 +255,7 @@ type CreditRequest struct {
 	Comment                        string                  `protobuf:"bytes,9,opt,name=comment,proto3" json:"comment,omitempty"`
 	ExternalTransactionId          *int64                  `protobuf:"varint,10,opt,name=external_transaction_id,json=externalTransactionId,proto3,oneof" json:"external_transaction_id,omitempty"`
 	OperatorContext                *common.OperatorContext `protobuf:"bytes,11,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	InitiatorUserId                int64                   `protobuf:"varint,12,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
 	unknownFields                  protoimpl.UnknownFields
 	sizeCache                      protoimpl.SizeCache
 }
@@ -366,6 +367,13 @@ func (x *CreditRequest) GetOperatorContext() *common.OperatorContext {
 	return nil
 }
 
+func (x *CreditRequest) GetInitiatorUserId() int64 {
+	if x != nil {
+		return x.InitiatorUserId
+	}
+	return 0
+}
+
 type CreditResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TransactionId int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
@@ -421,6 +429,8 @@ type DebitRequest struct {
 	TransactionId   int64                   `protobuf:"varint,5,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	Cash            string                  `protobuf:"bytes,6,opt,name=cash,proto3" json:"cash,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,7,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	InitiatorUserId int64                   `protobuf:"varint,8,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
+	Comment         string                  `protobuf:"bytes,9,opt,name=comment,proto3" json:"comment,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -502,6 +512,20 @@ func (x *DebitRequest) GetOperatorContext() *common.OperatorContext {
 		return x.OperatorContext
 	}
 	return nil
+}
+
+func (x *DebitRequest) GetInitiatorUserId() int64 {
+	if x != nil {
+		return x.InitiatorUserId
+	}
+	return 0
+}
+
+func (x *DebitRequest) GetComment() string {
+	if x != nil {
+		return x.Comment
+	}
+	return ""
 }
 
 type DebitResponse struct {
@@ -12231,7 +12255,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\rexchange_rate\x18\x01 \x01(\tR\fexchangeRate\x12\x12\n" +
 	"\x04cash\x18\x02 \x01(\tR\x04cash\x12%\n" +
 	"\x0eoperator_bonus\x18\x03 \x01(\tR\roperatorBonus\x12%\n" +
-	"\x0eprovider_bonus\x18\x04 \x01(\tR\rproviderBonus\"\xc5\x04\n" +
+	"\x0eprovider_bonus\x18\x04 \x01(\tR\rproviderBonus\"\xf1\x04\n" +
 	"\rCreditRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12)\n" +
@@ -12245,10 +12269,11 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\acomment\x18\t \x01(\tR\acomment\x12;\n" +
 	"\x17external_transaction_id\x18\n" +
 	" \x01(\x03H\x00R\x15externalTransactionId\x88\x01\x01\x12F\n" +
-	"\x10operator_context\x18\v \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\x1a\n" +
+	"\x10operator_context\x18\v \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12*\n" +
+	"\x11initiator_user_id\x18\f \x01(\x03R\x0finitiatorUserIdB\x1a\n" +
 	"\x18_external_transaction_id\"7\n" +
 	"\x0eCreditResponse\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\xa0\x02\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\xe6\x02\n" +
 	"\fDebitRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12-\n" +
@@ -12256,7 +12281,9 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x10transaction_type\x18\x04 \x01(\tR\x0ftransactionType\x12%\n" +
 	"\x0etransaction_id\x18\x05 \x01(\x03R\rtransactionId\x12\x12\n" +
 	"\x04cash\x18\x06 \x01(\tR\x04cash\x12F\n" +
-	"\x10operator_context\x18\a \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"6\n" +
+	"\x10operator_context\x18\a \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12*\n" +
+	"\x11initiator_user_id\x18\b \x01(\x03R\x0finitiatorUserId\x12\x18\n" +
+	"\acomment\x18\t \x01(\tR\acomment\"6\n" +
 	"\rDebitResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\xdc\x03\n" +
 	"\x10GameDebitRequest\x12\x17\n" +

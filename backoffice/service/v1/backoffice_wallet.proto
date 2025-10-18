@@ -699,6 +699,7 @@ message DebitRequest {
 	string transaction_type = 4;
 	int64 transaction_id = 5;
 	string cash = 6;
+	string comment = 7;
 }
 
 message ListManualJournalEntriesRequest {

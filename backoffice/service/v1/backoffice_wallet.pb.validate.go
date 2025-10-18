@@ -6908,6 +6908,8 @@ func (m *DebitRequest) validate(all bool) error {
 
 	// no validation rules for Cash
 
+	// no validation rules for Comment
+
 	if len(errors) > 0 {
 		return DebitRequestMultiError(errors)
 	}
