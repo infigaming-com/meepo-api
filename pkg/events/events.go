@@ -151,8 +151,9 @@ type GameBetEventBoardcastItem struct {
 }
 
 type GameBetEventBoardcast struct {
-	OperatorID int64                       `json:"operator_id"`
-	Events     []GameBetEventBoardcastItem `json:"events"`
+	OperatorID    int64                       `json:"operator_id"`
+	AllBetEvents  []GameBetEventBoardcastItem `json:"all_bet_events"`
+	HighWinEvents []GameBetEventBoardcastItem `json:"high_win_events"`
 }
 
 type GameTransactionType string
