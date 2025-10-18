@@ -137,6 +137,7 @@ message DepositBankAccount {
 	int32 current_trans_times = 12;
 	int32 priority = 13;
 	bool enable = 14;
+	string current_amount = 15;
 }
 
 message BankAccountListRequest {

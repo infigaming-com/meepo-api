@@ -1264,6 +1264,8 @@ func (m *DepositBankAccount) validate(all bool) error {
 
 	// no validation rules for Enable
 
+	// no validation rules for CurrentAmount
+
 	if len(errors) > 0 {
 		return DepositBankAccountMultiError(errors)
 	}

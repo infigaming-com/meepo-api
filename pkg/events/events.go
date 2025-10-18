@@ -146,7 +146,8 @@ type GameBetEventBoardcastItem struct {
 	SettleTime   int64   `json:"settle_time"`
 	CreatedAt    int64   `json:"created_at"`
 	UpdatedAt    int64   `json:"updated_at"`
-	BetMutiple   float32 `json:"bet_mutiple"`
+	BetOdds      float32 `json:"bet_odds"`
+	UserID       int64   `json:"user_id"`
 	UserName     string  `json:"user_name"`
 }
 
