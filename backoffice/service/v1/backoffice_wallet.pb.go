@@ -3450,6 +3450,7 @@ type DebitRequest struct {
 	TransactionType   string                 `protobuf:"bytes,4,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
 	TransactionId     int64                  `protobuf:"varint,5,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	Cash              string                 `protobuf:"bytes,6,opt,name=cash,proto3" json:"cash,omitempty"`
+	Comment           string                 `protobuf:"bytes,7,opt,name=comment,proto3" json:"comment,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -3522,6 +3523,13 @@ func (x *DebitRequest) GetTransactionId() int64 {
 func (x *DebitRequest) GetCash() string {
 	if x != nil {
 		return x.Cash
+	}
+	return ""
+}
+
+func (x *DebitRequest) GetComment() string {
+	if x != nil {
+		return x.Comment
 	}
 	return ""
 }
@@ -4376,14 +4384,15 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\acomment\x18\t \x01(\tR\acomment\x12;\n" +
 	"\x17external_transaction_id\x18\n" +
 	" \x01(\x03H\x00R\x15externalTransactionId\x88\x01\x01B\x1a\n" +
-	"\x18_external_transaction_id\"\xd8\x01\n" +
+	"\x18_external_transaction_id\"\xf2\x01\n" +
 	"\fDebitRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12-\n" +
 	"\x12reporting_currency\x18\x03 \x01(\tR\x11reportingCurrency\x12)\n" +
 	"\x10transaction_type\x18\x04 \x01(\tR\x0ftransactionType\x12%\n" +
 	"\x0etransaction_id\x18\x05 \x01(\x03R\rtransactionId\x12\x12\n" +
-	"\x04cash\x18\x06 \x01(\tR\x04cash\"\xc1\x03\n" +
+	"\x04cash\x18\x06 \x01(\tR\x04cash\x12\x18\n" +
+	"\acomment\x18\a \x01(\tR\acomment\"\xc1\x03\n" +
 	"\x1fListManualJournalEntriesRequest\x12>\n" +
 	"\n" +
 	"start_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\tstartTime\x88\x01\x01\x12:\n" +
