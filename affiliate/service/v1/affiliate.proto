@@ -10,6 +10,9 @@ option java_multiple_files = true;
 option java_package = "api.affiliate.service.v1";
 
 service Affiliate {
+
+    // -------------- Commission Plan --------------
+
     rpc CreateCommissionPlan(CreateCommissionPlanRequest) returns (CreateCommissionPlanResponse) {}
 
     rpc UpdateCommissionPlan(UpdateCommissionPlanRequest) returns (UpdateCommissionPlanResponse) {}
@@ -22,6 +25,8 @@ service Affiliate {
 
     rpc ListAllCommissionPlans(ListAllCommissionPlansRequest) returns (ListAllCommissionPlansResponse) {}
 
+    // -------------- Affiliate --------------
+
     rpc CreateAffiliate(CreateAffiliateRequest) returns (CreateAffiliateResponse) {}
 
     rpc UpdateAffiliate(UpdateAffiliateRequest) returns (UpdateAffiliateResponse) {}
@@ -31,6 +36,16 @@ service Affiliate {
     rpc ListAffiliates(ListAffiliatesRequest) returns (ListAffiliatesResponse) {}
     
     rpc DeleteAffiliate(DeleteAffiliateRequest) returns (DeleteAffiliateResponse) {}
+
+    // -------------- Campaign --------------
+
+    rpc CreateCampaign(CreateCampaignRequest) returns (CreateCampaignResponse) {}
+
+    rpc UpdateCampaign(UpdateCampaignRequest) returns (UpdateCampaignResponse) {}
+
+    rpc ListCampaigns(ListCampaignsRequest) returns (ListCampaignsResponse) {}
+
+    rpc DeleteCampaign(DeleteCampaignRequest) returns (DeleteCampaignResponse) {}
 }
 
 message ContactType {
@@ -138,4 +153,150 @@ message DeleteAffiliateRequest {
 }
 
 message DeleteAffiliateResponse {
+}
+
+// -------------- Campaign --------------
+
+message Campaign {
+    string domain = 1;
+    string campaign_name = 2;
+    string channel_type = 3; // facebook/tiktok/kwai/appsflyer/adjust/agency/google_ads
+    ChannelConfig channel_config = 4;
+    string utm_source = 5;
+    string utm_medium = 6;
+    string utm_campaign = 7;
+    string utm_content = 8;
+    string utm_term = 9;
+    CustomParams custom_params = 10;
+    EventMappings event_mappings = 11;    
+}
+
+message ChannelConfig {
+    message FacebookChannelConfig {
+        string pixel_id = 1;
+        string access_token = 2;
+    }
+    message TiktokChannelConfig {
+        string pixel_id = 1;
+        string access_token = 2;
+    }
+    message KwaiChannelConfig {
+        string pixel_id = 1;
+        string access_token = 2;
+        bool track_flag = 3;
+    }
+    message AppsflyerChannelConfig {
+        string app_platform = 1;
+        string bundle_id = 2;
+        string dev_key = 3;
+    }
+    message AdjustChannelConfig {
+        string app_platform = 1;
+        string app_token = 2;
+        string bundle_id = 3;
+    }
+    message AgencyChannelConfig {
+        string campaign_id = 1;
+    }
+    message GoogleAdsChannelConfig {
+        string customer_id = 1;
+        string conversion_action = 2;
+    }
+    optional FacebookChannelConfig facebook_channel_config = 1;
+    optional TiktokChannelConfig tiktok_channel_config = 2;
+    optional KwaiChannelConfig kwai_channel_config = 3;
+    optional AppsflyerChannelConfig appsflyer_channel_config = 4;
+    optional AdjustChannelConfig adjust_channel_config = 5;
+    optional AgencyChannelConfig agency_channel_config = 6;
+    optional GoogleAdsChannelConfig google_ads_channel_config = 7;
+}
+
+message CustomParams {
+    message CustomParam {
+        string name = 1;
+        string value = 2;
+    }
+    repeated CustomParam custom_params = 1;
+}
+
+message EventMappings {
+    message EventMapping {
+        optional string channel_event = 1;
+        optional string custom_name = 2;
+    }
+    EventMapping register = 1;
+    EventMapping first_deposit = 2;
+    EventMapping second_deposit = 3;
+    EventMapping third_deposit = 4;
+    EventMapping withdrawal = 5;
+    EventMapping game_start = 6;
+    EventMapping game_bet = 7;
+}
+
+message CreateCampaignRequest {
+    message Campaign {
+        string domain = 1;
+        string campaign_name = 2;
+        string channel_type = 3; // facebook/tiktok/kwai/appsflyer/adjust/agency/google_ads
+        ChannelConfig channel_config = 4;
+    }
+    Campaign campaign = 1;
+    api.common.OperatorContext initiator_operator_context = 2;
+    int64 initiator_user_id = 3;
+}
+
+message CreateCampaignResponse {
+    int64 campaign_id = 1;
+}
+
+message UpdateCampaignRequest {
+    int64 campaign_id = 1;
+    optional Campaign campaign = 2;
+    optional bool enabled = 3;
+    int64 initiator_user_id = 4;
+}
+
+message UpdateCampaignResponse {
+}
+
+message ListCampaignsRequest {
+    optional string campaign_name = 1;
+    optional int64 campaign_id = 2;
+    optional bool enabled = 3;
+    optional int32 page = 4;
+    optional int32 page_size = 5;
+    optional int64 initiator_user_id = 6;
+    api.common.OperatorContext initiator_operator_context = 7;
+    api.common.OperatorContextFilters operator_context_filters = 8;
+}
+
+message ListCampaignsResponse {
+    message Campaign {
+        int64 campaign_id = 1;
+        string affiliate_company_name = 2;
+        int64 affiliate_id = 3;
+        string system_operator_name = 4;
+        string retailer_operator_name = 5;
+        string company_operator_name = 6;
+        string operator_name = 7;
+        string campaign_name = 8;
+        string event_mappings_status = 9; // configured/not_configured/not_required
+        int32 event_mappings_count = 10;
+        bool status = 11;
+        Campaign campaign = 12;
+    }
+    repeated Campaign campaigns = 1;
+    int32 total = 2;
+    int32 total_enabled = 3;
+    int32 total_disabled = 4;
+    int32 page = 5;
+    int32 page_size = 6;
+}
+
+message DeleteCampaignRequest {
+    int64 campaign_id = 1;
+    int64 initiator_user_id = 2;
+}
+
+message DeleteCampaignResponse {
 }

@@ -424,6 +424,96 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateAccountResponse'
+    /v1/backoffice/affiliate/campaign/create:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_CreateCampaign
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateCampaignRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.CreateCampaignResponse'
+    /v1/backoffice/affiliate/campaign/delete:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_DeleteCampaign
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteCampaignRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.DeleteCampaignResponse'
+    /v1/backoffice/affiliate/campaign/list:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_ListCampaigns
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListCampaignsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListCampaignsResponse'
+    /v1/backoffice/affiliate/campaign/list/by_affiliate:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_ListAffiliateCampaigns
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAffiliateCampaignsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListCampaignsResponse'
+    /v1/backoffice/affiliate/campaign/update:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_UpdateCampaign
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateCampaignRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.UpdateCampaignResponse'
     /v1/backoffice/affiliate/commission/plan/create:
         post:
             tags:
@@ -1416,6 +1506,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateTaxReportConfigResponse'
+    /v1/backoffice/finance/tax-reports/export:
+        post:
+            tags:
+                - BackofficeFinance
+            operationId: BackofficeFinance_ExportTaxReports
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ExportTaxReportsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.ExportTaxReportsResponse'
     /v1/backoffice/finance/tax-reports/list:
         post:
             tags:
@@ -1470,6 +1578,78 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListThirdPartyFeesResponse'
+    /v1/backoffice/game/bet/dispaly/config/add:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_AddGameBetDisplayConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.AddGameBetDisplayConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.AddGameBetDisplayConfigResponse'
+    /v1/backoffice/game/bet/dispaly/config/list:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ListGameBetDisplayConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListGameBetDisplayConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.ListGameBetDisplayConfigResponse'
+    /v1/backoffice/game/bet/dispaly/config/update:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_UpdateGameBetDisplayConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateGameBetDisplayConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.UpdateGameBetDisplayConfigResponse'
+    /v1/backoffice/game/bets/export:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_ExportBets
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ExportBetsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.ExportBetsResponse'
     /v1/backoffice/game/bets/get:
         post:
             tags:
@@ -3889,6 +4069,82 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.wallet.service.v1.GetWalletsResponse'
+    /v1/backoffice/wallet/manual/credit:
+        post:
+            tags:
+                - BackofficeWallet
+            description: ManualCredit
+            operationId: BackofficeWallet_ManualCredit
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreditRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.CreditResponse'
+    /v1/backoffice/wallet/manual/debit:
+        post:
+            tags:
+                - BackofficeWallet
+            description: ManualDebit
+            operationId: BackofficeWallet_ManualDebit
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DebitRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.DebitResponse'
+    /v1/backoffice/wallet/manual/journal-entries/export:
+        post:
+            tags:
+                - BackofficeWallet
+            description: ExportManualJournalEntries creates a task to exports manual journal entries for all users
+            operationId: BackofficeWallet_ExportManualJournalEntries
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ExportManualJournalEntriesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.ExportManualJournalEntriesResponse'
+    /v1/backoffice/wallet/manual/journal-entries/list:
+        post:
+            tags:
+                - BackofficeWallet
+            description: ListManualJournalEntries lists manual journal entries for all users
+            operationId: BackofficeWallet_ListManualJournalEntries
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListManualJournalEntriesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.wallet.service.v1.ListManualJournalEntriesResponse'
     /v1/backoffice/wallet/operator/balance-freeze:
         post:
             tags:
@@ -5441,6 +5697,101 @@ components:
                     $ref: '#/components/schemas/api.affiliate.service.v1.Qualification'
                 advancedOptions:
                     $ref: '#/components/schemas/api.affiliate.service.v1.AdvancedOptions'
+        api.affiliate.service.v1.Campaign:
+            type: object
+            properties:
+                domain:
+                    type: string
+                campaignName:
+                    type: string
+                channelType:
+                    type: string
+                channelConfig:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.ChannelConfig'
+                utmSource:
+                    type: string
+                utmMedium:
+                    type: string
+                utmCampaign:
+                    type: string
+                utmContent:
+                    type: string
+                utmTerm:
+                    type: string
+                customParams:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.CustomParams'
+                eventMappings:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.EventMappings'
+        api.affiliate.service.v1.ChannelConfig:
+            type: object
+            properties:
+                facebookChannelConfig:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.ChannelConfig_FacebookChannelConfig'
+                tiktokChannelConfig:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.ChannelConfig_TiktokChannelConfig'
+                kwaiChannelConfig:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.ChannelConfig_KwaiChannelConfig'
+                appsflyerChannelConfig:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.ChannelConfig_AppsflyerChannelConfig'
+                adjustChannelConfig:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.ChannelConfig_AdjustChannelConfig'
+                agencyChannelConfig:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.ChannelConfig_AgencyChannelConfig'
+                googleAdsChannelConfig:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.ChannelConfig_GoogleAdsChannelConfig'
+        api.affiliate.service.v1.ChannelConfig_AdjustChannelConfig:
+            type: object
+            properties:
+                appPlatform:
+                    type: string
+                appToken:
+                    type: string
+                bundleId:
+                    type: string
+        api.affiliate.service.v1.ChannelConfig_AgencyChannelConfig:
+            type: object
+            properties:
+                campaignId:
+                    type: string
+        api.affiliate.service.v1.ChannelConfig_AppsflyerChannelConfig:
+            type: object
+            properties:
+                appPlatform:
+                    type: string
+                bundleId:
+                    type: string
+                devKey:
+                    type: string
+        api.affiliate.service.v1.ChannelConfig_FacebookChannelConfig:
+            type: object
+            properties:
+                pixelId:
+                    type: string
+                accessToken:
+                    type: string
+        api.affiliate.service.v1.ChannelConfig_GoogleAdsChannelConfig:
+            type: object
+            properties:
+                customerId:
+                    type: string
+                conversionAction:
+                    type: string
+        api.affiliate.service.v1.ChannelConfig_KwaiChannelConfig:
+            type: object
+            properties:
+                pixelId:
+                    type: string
+                accessToken:
+                    type: string
+                trackFlag:
+                    type: boolean
+        api.affiliate.service.v1.ChannelConfig_TiktokChannelConfig:
+            type: object
+            properties:
+                pixelId:
+                    type: string
+                accessToken:
+                    type: string
         api.affiliate.service.v1.CommissionPlan:
             type: object
             properties:
@@ -5526,15 +5877,61 @@ components:
         api.affiliate.service.v1.CreateAffiliateResponse:
             type: object
             properties: {}
+        api.affiliate.service.v1.CreateCampaignResponse:
+            type: object
+            properties:
+                campaignId:
+                    type: string
         api.affiliate.service.v1.CreateCommissionPlanResponse:
             type: object
             properties: {}
+        api.affiliate.service.v1.CustomParams:
+            type: object
+            properties:
+                customParams:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.CustomParams_CustomParam'
+        api.affiliate.service.v1.CustomParams_CustomParam:
+            type: object
+            properties:
+                name:
+                    type: string
+                value:
+                    type: string
         api.affiliate.service.v1.DeleteAffiliateResponse:
+            type: object
+            properties: {}
+        api.affiliate.service.v1.DeleteCampaignResponse:
             type: object
             properties: {}
         api.affiliate.service.v1.DeleteCommissionPlanResponse:
             type: object
             properties: {}
+        api.affiliate.service.v1.EventMappings:
+            type: object
+            properties:
+                register:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.EventMappings_EventMapping'
+                firstDeposit:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.EventMappings_EventMapping'
+                secondDeposit:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.EventMappings_EventMapping'
+                thirdDeposit:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.EventMappings_EventMapping'
+                withdrawal:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.EventMappings_EventMapping'
+                gameStart:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.EventMappings_EventMapping'
+                gameBet:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.EventMappings_EventMapping'
+        api.affiliate.service.v1.EventMappings_EventMapping:
+            type: object
+            properties:
+                channelEvent:
+                    type: string
+                customName:
+                    type: string
         api.affiliate.service.v1.FlatByCountriesCommission:
             type: object
             properties:
@@ -5672,6 +6069,56 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.affiliate.service.v1.CommissionPlan'
+        api.affiliate.service.v1.ListCampaignsResponse:
+            type: object
+            properties:
+                campaigns:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.ListCampaignsResponse_Campaign'
+                total:
+                    type: integer
+                    format: int32
+                totalEnabled:
+                    type: integer
+                    format: int32
+                totalDisabled:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.affiliate.service.v1.ListCampaignsResponse_Campaign:
+            type: object
+            properties:
+                campaignId:
+                    type: string
+                affiliateCompanyName:
+                    type: string
+                affiliateId:
+                    type: string
+                systemOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                operatorName:
+                    type: string
+                campaignName:
+                    type: string
+                eventMappingsStatus:
+                    type: string
+                eventMappingsCount:
+                    type: integer
+                    format: int32
+                status:
+                    type: boolean
+                campaign:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.ListCampaignsResponse_Campaign'
         api.affiliate.service.v1.ListCommissionPlansResponse:
             type: object
             properties:
@@ -5803,6 +6250,9 @@ components:
         api.affiliate.service.v1.UpdateAffiliateResponse:
             type: object
             properties: {}
+        api.affiliate.service.v1.UpdateCampaignResponse:
+            type: object
+            properties: {}
         api.affiliate.service.v1.UpdateCommissionPlanResponse:
             type: object
             properties: {}
@@ -5916,6 +6366,15 @@ components:
             properties:
                 commentId:
                     type: string
+        api.backoffice.service.v1.AddGameBetDisplayConfigRequest:
+            type: object
+            properties:
+                country:
+                    type: string
+                allBet:
+                    $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
+                highWins:
+                    $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
         api.backoffice.service.v1.AddOperatorBackofficeByoSubdomainRequest:
             type: object
             properties:
@@ -5932,6 +6391,8 @@ components:
                 byoDomain:
                     type: string
                 domain:
+                    type: string
+                acmeChallengeType:
                     type: string
         api.backoffice.service.v1.AddOperatorByoSubdomainRequest:
             type: object
@@ -6194,6 +6655,11 @@ components:
                     $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateInfo'
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+        api.backoffice.service.v1.CreateCampaignRequest:
+            type: object
+            properties:
+                campaign:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.Campaign'
         api.backoffice.service.v1.CreateCommissionPlanRequest:
             type: object
             properties:
@@ -6381,6 +6847,29 @@ components:
             properties:
                 ticketId:
                     type: string
+        api.backoffice.service.v1.CreditRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                currency:
+                    type: string
+                transactionType:
+                    type: string
+                cashAmount:
+                    type: string
+                cashTurnoverThreshold:
+                    type: string
+                operatorBonusAmount:
+                    type: string
+                operatorBonusTurnoverThreshold:
+                    type: string
+                operatorBonusWithdrawLimit:
+                    type: string
+                comment:
+                    type: string
+                externalTransactionId:
+                    type: string
         api.backoffice.service.v1.CustomerRecordReportDetailRequest:
             type: object
             properties:
@@ -6480,6 +6969,21 @@ components:
                     type: string
                 address:
                     type: string
+        api.backoffice.service.v1.DebitRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                currency:
+                    type: string
+                reportingCurrency:
+                    type: string
+                transactionType:
+                    type: string
+                transactionId:
+                    type: string
+                cash:
+                    type: string
         api.backoffice.service.v1.DeleteAdjustmentConfigRequest:
             type: object
             properties:
@@ -6492,6 +6996,11 @@ components:
             type: object
             properties:
                 affiliateId:
+                    type: string
+        api.backoffice.service.v1.DeleteCampaignRequest:
+            type: object
+            properties:
+                campaignId:
                     type: string
         api.backoffice.service.v1.DeleteCommissionPlanRequest:
             type: object
@@ -6606,6 +7115,67 @@ components:
                     type: string
                 settlementDetails:
                     type: string
+        api.backoffice.service.v1.ExportBetsRequest:
+            type: object
+            properties:
+                providerIds:
+                    type: array
+                    items:
+                        type: string
+                gameName:
+                    type: string
+                gameId:
+                    type: string
+                userId:
+                    type: string
+                operatorBetId:
+                    type: string
+                providerBetId:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                currencyWithRanges:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.ExportBetsRequest_CurrencyWithRange'
+                settlementCurrencyWithRanges:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.ExportBetsRequest_CurrencyWithRange'
+                settlementCurrencies:
+                    $ref: '#/components/schemas/api.backoffice.service.v1.ExportBetsRequest_Currencies'
+                categories:
+                    type: array
+                    items:
+                        type: string
+                status:
+                    type: string
+                format:
+                    type: string
+                timeZone:
+                    type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+        api.backoffice.service.v1.ExportBetsRequest_Currencies:
+            type: object
+            properties:
+                currencies:
+                    type: array
+                    items:
+                        type: string
+        api.backoffice.service.v1.ExportBetsRequest_CurrencyWithRange:
+            type: object
+            properties:
+                currency:
+                    type: string
+                minBetAmount:
+                    type: string
+                maxBetAmount:
+                    type: string
+                minWinAmount:
+                    type: string
+                maxWinAmount:
+                    type: string
         api.backoffice.service.v1.ExportCustomerRecordsRequest:
             type: object
             properties:
@@ -6660,6 +7230,25 @@ components:
                     type: string
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+        api.backoffice.service.v1.ExportManualJournalEntriesRequest:
+            type: object
+            properties:
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                userId:
+                    type: string
+                currency:
+                    type: string
+                format:
+                    type: string
+                timeZone:
+                    type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ExportMultipleBetsRequest:
             type: object
             properties:
@@ -6742,6 +7331,20 @@ components:
                     type: string
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
+        api.backoffice.service.v1.ExportTaxReportsRequest:
+            type: object
+            properties:
+                taxPeriod:
+                    type: string
+                reportCategory:
+                    type: string
+                    description: 'license_provider: south_afirca'
+                periodType:
+                    type: string
+                format:
+                    type: string
+                timeZone:
+                    type: string
         api.backoffice.service.v1.ExportUnpaidBetsRequest:
             type: object
             properties:
@@ -8228,6 +8831,21 @@ components:
                     description: Amount information
                 description:
                     type: string
+        api.backoffice.service.v1.ListAffiliateCampaignsRequest:
+            type: object
+            properties:
+                campaignName:
+                    type: string
+                campaignId:
+                    type: string
+                enabled:
+                    type: boolean
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListAffiliatesRequest:
             type: object
             properties:
@@ -8648,6 +9266,23 @@ components:
                 subdomain:
                     type: string
             description: OperatorInfo is the simplified information of a bottom operator, used for list bottom operators
+        api.backoffice.service.v1.ListCampaignsRequest:
+            type: object
+            properties:
+                campaignName:
+                    type: string
+                campaignId:
+                    type: string
+                enabled:
+                    type: boolean
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ListCategoriesRequest:
             type: object
             properties:
@@ -9000,6 +9635,22 @@ components:
                     type: array
                     items:
                         type: string
+        api.backoffice.service.v1.ListGameBetDisplayConfigRequest:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.backoffice.service.v1.ListGameBetDisplayConfigRequest_Item'
+        api.backoffice.service.v1.ListGameBetDisplayConfigRequest_Item:
+            type: object
+            properties:
+                country:
+                    type: string
+                allBet:
+                    $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
+                highWins:
+                    $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
         api.backoffice.service.v1.ListGameDataRequest:
             type: object
             properties:
@@ -9300,6 +9951,27 @@ components:
                     description: Dates
                 dueDate:
                     type: string
+        api.backoffice.service.v1.ListManualJournalEntriesRequest:
+            type: object
+            properties:
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                userId:
+                    type: string
+                currency:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ListMonthlyRevenueShareRequest:
             type: object
             properties:
@@ -11701,6 +12373,15 @@ components:
                     type: boolean
                 bankInfo:
                     type: object
+        api.backoffice.service.v1.UpdateCampaignRequest:
+            type: object
+            properties:
+                campaignId:
+                    type: string
+                campaign:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.Campaign'
+                enabled:
+                    type: boolean
         api.backoffice.service.v1.UpdateCommissionPlanRequest:
             type: object
             properties:
@@ -11721,6 +12402,15 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 deductionOrder:
                     $ref: '#/components/schemas/api.wallet.service.v1.DeductionOrder'
+        api.backoffice.service.v1.UpdateGameBetDisplayConfigRequest:
+            type: object
+            properties:
+                country:
+                    type: string
+                allBet:
+                    $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
+                highWins:
+                    $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
         api.backoffice.service.v1.UpdateGameRequest:
             type: object
             properties:
@@ -12399,6 +13089,9 @@ components:
                     type: boolean
                 extra:
                     type: string
+        api.game.service.v1.AddGameBetDisplayConfigResponse:
+            type: object
+            properties: {}
         api.game.service.v1.BalanceRequest:
             type: object
             properties:
@@ -12500,6 +13193,20 @@ components:
                 updatedAt:
                     type: string
                     format: date-time
+        api.game.service.v1.BettingConfig:
+            type: object
+            properties:
+                betCategory:
+                    type: array
+                    items:
+                        type: string
+                miniOdds:
+                    type: number
+                    format: float
+                currencies:
+                    type: array
+                    items:
+                        type: string
         api.game.service.v1.CreateSessionRequest:
             type: object
             properties:
@@ -12518,6 +13225,11 @@ components:
             properties:
                 gameUrl:
                     type: string
+        api.game.service.v1.ExportBetsResponse:
+            type: object
+            properties:
+                taskId:
+                    type: string
         api.game.service.v1.ExportCustomerStrikeReportsResponse:
             type: object
             properties:
@@ -12534,6 +13246,11 @@ components:
                 taskId:
                     type: string
         api.game.service.v1.ExportStakeVarianceBetsResponse:
+            type: object
+            properties:
+                taskId:
+                    type: string
+        api.game.service.v1.ExportTaxReportsResponse:
             type: object
             properties:
                 taskId:
@@ -13088,6 +13805,22 @@ components:
                     type: string
                 systemOperatorName:
                     type: string
+        api.game.service.v1.ListGameBetDisplayConfigResponse:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.ListGameBetDisplayConfigResponse_Item'
+        api.game.service.v1.ListGameBetDisplayConfigResponse_Item:
+            type: object
+            properties:
+                country:
+                    type: string
+                allBet:
+                    $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
+                highWins:
+                    $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
         api.game.service.v1.ListGamesRequest:
             type: object
             properties:
@@ -13517,6 +14250,9 @@ components:
                     format: double
                 bonus_amount:
                     type: string
+        api.game.service.v1.UpdateGameBetDisplayConfigResponse:
+            type: object
+            properties: {}
         api.game.service.v1.UrlInfo:
             type: object
             properties:
@@ -13962,7 +14698,15 @@ components:
                     format: int32
         api.user.service.v1.AddOperatorByoDomainResponse:
             type: object
-            properties: {}
+            properties:
+                status:
+                    type: string
+                validationStatus:
+                    type: string
+                validationRecords:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.ValidationRecord'
         api.user.service.v1.AddRegisterLoginBlacklistResponse:
             type: object
             properties: {}
@@ -13998,8 +14742,18 @@ components:
                     type: string
                 domain:
                     type: string
-                type:
+                domainType:
                     type: string
+                acmeChallengeType:
+                    type: string
+                status:
+                    type: string
+                validationStatus:
+                    type: string
+                validationRecords:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.ValidationRecord'
                 targetOperatorId:
                     type: string
                 targetOperatorName:
@@ -15049,6 +15803,17 @@ components:
                     type: string
                     description: user country
             description: UserInfo contains basic user information.
+        api.user.service.v1.ValidationRecord:
+            type: object
+            properties:
+                type:
+                    type: string
+                name:
+                    type: string
+                value:
+                    type: string
+                description:
+                    type: string
         api.user.service.v1.VerifyEmailRequest:
             type: object
             properties:
@@ -15495,6 +16260,11 @@ components:
                     type: string
                 balanceBonus:
                     type: string
+        api.wallet.service.v1.CreditResponse:
+            type: object
+            properties:
+                transactionId:
+                    type: string
         api.wallet.service.v1.Currency:
             type: object
             properties:
@@ -15525,6 +16295,11 @@ components:
                     type: boolean
                 parentHidden:
                     type: boolean
+        api.wallet.service.v1.DebitResponse:
+            type: object
+            properties:
+                transactionId:
+                    type: string
         api.wallet.service.v1.DeductionOrder:
             type: object
             properties:
@@ -15584,6 +16359,11 @@ components:
                 taskId:
                     type: string
         api.wallet.service.v1.ExportFICAThresholdTransactionsResponse:
+            type: object
+            properties:
+                taskId:
+                    type: string
+        api.wallet.service.v1.ExportManualJournalEntriesResponse:
             type: object
             properties:
                 taskId:
@@ -16014,6 +16794,60 @@ components:
                 retailerOperatorName:
                     type: string
                 systemOperatorName:
+                    type: string
+        api.wallet.service.v1.ListManualJournalEntriesResponse:
+            type: object
+            properties:
+                manualJournalEntries:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.wallet.service.v1.ListManualJournalEntriesResponse_ManualJournalEntry'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.wallet.service.v1.ListManualJournalEntriesResponse_ManualJournalEntry:
+            type: object
+            properties:
+                id:
+                    type: string
+                userId:
+                    type: string
+                transactionTime:
+                    type: string
+                    format: date-time
+                initiatorUserId:
+                    type: string
+                initiatorUserName:
+                    type: string
+                transactionType:
+                    type: string
+                description:
+                    type: string
+                currency:
+                    type: string
+                amount:
+                    type: string
+                amountUsd:
+                    type: string
+                amountReportingCurrency:
+                    type: string
+                beforeBalance:
+                    type: string
+                beforeBalanceUsd:
+                    type: string
+                beforeBalanceReportingCurrency:
+                    type: string
+                afterBalance:
+                    type: string
+                afterBalanceUsd:
+                    type: string
+                afterBalanceReportingCurrency:
                     type: string
         api.wallet.service.v1.ListResponsibleGamblingConfigsRequest:
             type: object

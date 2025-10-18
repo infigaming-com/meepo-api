@@ -18,6 +18,9 @@ const (
 	REPORT_EXPORT_TYPE_MULTIPLE_BETS               = "multiple_bets"
 	REPORT_EXPORT_TYPE_SPORT_EVENTS                = "sport_events"
 	REPORT_EXPORT_TYPE_CUSTOMER_STRIKE_REPORTS     = "customer_strike_reports"
+	REPORT_EXPORT_TYPE_TAX_REPORTS                 = "tax_reports"
+	REPORT_EXPORT_TYPE_MANUAL_JOURNAL_ENTRIES      = "manual_journal_entries"
+	REPORT_EXPORT_TYPE_GAME_BETS                   = "game_bets"
 )
 
 type ReportExportPayload struct {

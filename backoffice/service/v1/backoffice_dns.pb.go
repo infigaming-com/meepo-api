@@ -129,11 +129,12 @@ func (x *ListOperatorByoDomainsRequest) GetPageSize() int32 {
 }
 
 type AddOperatorByoDomainRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ByoDomain     string                 `protobuf:"bytes,1,opt,name=byo_domain,json=byoDomain,proto3" json:"byo_domain,omitempty"`
-	Domain        string                 `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	ByoDomain         string                 `protobuf:"bytes,1,opt,name=byo_domain,json=byoDomain,proto3" json:"byo_domain,omitempty"`
+	Domain            string                 `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
+	AcmeChallengeType string                 `protobuf:"bytes,3,opt,name=acme_challenge_type,json=acmeChallengeType,proto3" json:"acme_challenge_type,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *AddOperatorByoDomainRequest) Reset() {
@@ -176,6 +177,13 @@ func (x *AddOperatorByoDomainRequest) GetByoDomain() string {
 func (x *AddOperatorByoDomainRequest) GetDomain() string {
 	if x != nil {
 		return x.Domain
+	}
+	return ""
+}
+
+func (x *AddOperatorByoDomainRequest) GetAcmeChallengeType() string {
+	if x != nil {
+		return x.AcmeChallengeType
 	}
 	return ""
 }
@@ -238,11 +246,12 @@ const file_backoffice_service_v1_backoffice_dns_proto_rawDesc = "" +
 	"\tpage_size\x18\x02 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"T\n" +
+	"_page_size\"\x84\x01\n" +
 	"\x1bAddOperatorByoDomainRequest\x12\x1d\n" +
 	"\n" +
 	"byo_domain\x18\x01 \x01(\tR\tbyoDomain\x12\x16\n" +
-	"\x06domain\x18\x02 \x01(\tR\x06domain\"?\n" +
+	"\x06domain\x18\x02 \x01(\tR\x06domain\x12.\n" +
+	"\x13acme_challenge_type\x18\x03 \x01(\tR\x11acmeChallengeType\"?\n" +
 	"\x1eDeleteOperatorByoDomainRequest\x12\x1d\n" +
 	"\n" +
 	"byo_domain\x18\x01 \x01(\tR\tbyoDomain2\xe8\x05\n" +

@@ -243,6 +243,38 @@ service BackofficeWallet {
 			body: "*"
 		};
 	}
+
+	// ManualCredit
+	rpc ManualCredit(CreditRequest) returns (wallet.service.v1.CreditResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/manual/credit"
+			body: "*"
+		};
+	}
+
+	// ManualDebit
+	rpc ManualDebit(DebitRequest) returns (wallet.service.v1.DebitResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/manual/debit"
+			body: "*"
+		};
+	}
+
+	// ListManualJournalEntries lists manual journal entries for all users
+	rpc ListManualJournalEntries(ListManualJournalEntriesRequest) returns (wallet.service.v1.ListManualJournalEntriesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/manual/journal-entries/list"
+			body: "*"
+		};
+	}
+
+	// ExportManualJournalEntries creates a task to exports manual journal entries for all users
+	rpc ExportManualJournalEntries(ExportManualJournalEntriesRequest) returns (wallet.service.v1.ExportManualJournalEntriesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/manual/journal-entries/export"
+			body: "*"
+		};
+	}
 }
 
 message GetWalletsRequest {
@@ -645,4 +677,46 @@ message ExportFICAThresholdTransactionsRequest {
 	string format = 6; // accepted values: csv, excel, pdf
 	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
 	api.common.OperatorContext target_operator_context = 8;
+}
+
+message CreditRequest {
+	int64 user_id = 1;
+	string currency = 2;
+	string transaction_type = 3;
+	string cash_amount = 4;
+	string cash_turnover_threshold = 5;
+	string operator_bonus_amount = 6;
+	string operator_bonus_turnover_threshold = 7;
+	string operator_bonus_withdraw_limit = 8;
+	string comment = 9;
+	optional int64 external_transaction_id = 10;
+}
+
+message DebitRequest {
+	int64 user_id = 1;
+	string currency = 2;
+	string reporting_currency = 3;
+	string transaction_type = 4;
+	int64 transaction_id = 5;
+	string cash = 6;
+}
+
+message ListManualJournalEntriesRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional string currency = 4;
+	optional int32 page = 5;
+	optional int32 page_size = 6;
+	api.common.OperatorContextFilters operator_context_filters = 7;
+}
+
+message ExportManualJournalEntriesRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional string currency = 4;
+	string format = 5; // accepted values: csv, excel, pdf
+	string time_zone = 6; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContextFilters operator_context_filters = 7;
 }

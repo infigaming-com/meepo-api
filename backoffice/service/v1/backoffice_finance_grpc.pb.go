@@ -8,6 +8,7 @@ package v1
 
 import (
 	context "context"
+	v1 "github.com/infigaming-com/meepo-api/game/service/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -40,6 +41,7 @@ const (
 	BackofficeFinance_GetTaxReportConfig_FullMethodName              = "/api.backoffice.service.v1.BackofficeFinance/GetTaxReportConfig"
 	BackofficeFinance_UpdateTaxReportConfig_FullMethodName           = "/api.backoffice.service.v1.BackofficeFinance/UpdateTaxReportConfig"
 	BackofficeFinance_ListTaxReports_FullMethodName                  = "/api.backoffice.service.v1.BackofficeFinance/ListTaxReports"
+	BackofficeFinance_ExportTaxReports_FullMethodName                = "/api.backoffice.service.v1.BackofficeFinance/ExportTaxReports"
 	BackofficeFinance_UpdateTaxReport_FullMethodName                 = "/api.backoffice.service.v1.BackofficeFinance/UpdateTaxReport"
 )
 
@@ -68,6 +70,7 @@ type BackofficeFinanceClient interface {
 	GetTaxReportConfig(ctx context.Context, in *GetTaxReportConfigRequest, opts ...grpc.CallOption) (*GetTaxReportConfigResponse, error)
 	UpdateTaxReportConfig(ctx context.Context, in *UpdateTaxReportConfigRequest, opts ...grpc.CallOption) (*UpdateTaxReportConfigResponse, error)
 	ListTaxReports(ctx context.Context, in *ListTaxReportsRequest, opts ...grpc.CallOption) (*ListTaxReportsResponse, error)
+	ExportTaxReports(ctx context.Context, in *ExportTaxReportsRequest, opts ...grpc.CallOption) (*v1.ExportTaxReportsResponse, error)
 	UpdateTaxReport(ctx context.Context, in *UpdateTaxReportRequest, opts ...grpc.CallOption) (*UpdateTaxReportResponse, error)
 }
 
@@ -289,6 +292,16 @@ func (c *backofficeFinanceClient) ListTaxReports(ctx context.Context, in *ListTa
 	return out, nil
 }
 
+func (c *backofficeFinanceClient) ExportTaxReports(ctx context.Context, in *ExportTaxReportsRequest, opts ...grpc.CallOption) (*v1.ExportTaxReportsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ExportTaxReportsResponse)
+	err := c.cc.Invoke(ctx, BackofficeFinance_ExportTaxReports_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *backofficeFinanceClient) UpdateTaxReport(ctx context.Context, in *UpdateTaxReportRequest, opts ...grpc.CallOption) (*UpdateTaxReportResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateTaxReportResponse)
@@ -324,6 +337,7 @@ type BackofficeFinanceServer interface {
 	GetTaxReportConfig(context.Context, *GetTaxReportConfigRequest) (*GetTaxReportConfigResponse, error)
 	UpdateTaxReportConfig(context.Context, *UpdateTaxReportConfigRequest) (*UpdateTaxReportConfigResponse, error)
 	ListTaxReports(context.Context, *ListTaxReportsRequest) (*ListTaxReportsResponse, error)
+	ExportTaxReports(context.Context, *ExportTaxReportsRequest) (*v1.ExportTaxReportsResponse, error)
 	UpdateTaxReport(context.Context, *UpdateTaxReportRequest) (*UpdateTaxReportResponse, error)
 	mustEmbedUnimplementedBackofficeFinanceServer()
 }
@@ -397,6 +411,9 @@ func (UnimplementedBackofficeFinanceServer) UpdateTaxReportConfig(context.Contex
 }
 func (UnimplementedBackofficeFinanceServer) ListTaxReports(context.Context, *ListTaxReportsRequest) (*ListTaxReportsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListTaxReports not implemented")
+}
+func (UnimplementedBackofficeFinanceServer) ExportTaxReports(context.Context, *ExportTaxReportsRequest) (*v1.ExportTaxReportsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportTaxReports not implemented")
 }
 func (UnimplementedBackofficeFinanceServer) UpdateTaxReport(context.Context, *UpdateTaxReportRequest) (*UpdateTaxReportResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateTaxReport not implemented")
@@ -800,6 +817,24 @@ func _BackofficeFinance_ListTaxReports_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeFinance_ExportTaxReports_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportTaxReportsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeFinanceServer).ExportTaxReports(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeFinance_ExportTaxReports_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeFinanceServer).ExportTaxReports(ctx, req.(*ExportTaxReportsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BackofficeFinance_UpdateTaxReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateTaxReportRequest)
 	if err := dec(in); err != nil {
@@ -908,6 +943,10 @@ var BackofficeFinance_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListTaxReports",
 			Handler:    _BackofficeFinance_ListTaxReports_Handler,
+		},
+		{
+			MethodName: "ExportTaxReports",
+			Handler:    _BackofficeFinance_ExportTaxReports_Handler,
 		},
 		{
 			MethodName: "UpdateTaxReport",

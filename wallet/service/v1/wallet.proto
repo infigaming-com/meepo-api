@@ -210,6 +210,10 @@ service Wallet {
 	rpc ExportFICAThresholdTransactions(ExportFICAThresholdTransactionsRequest) returns (ExportFICAThresholdTransactionsResponse) {}
 
 	rpc ListBalancesByUserIds(ListBalancesByUserIdsRequest) returns (ListBalancesByUserIdsResponse) {}
+
+	rpc ListManualJournalEntries(ListManualJournalEntriesRequest) returns (ListManualJournalEntriesResponse) {}
+
+	rpc ExportManualJournalEntries(ExportManualJournalEntriesRequest) returns (ExportManualJournalEntriesResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -1494,4 +1498,57 @@ message ListBalancesByUserIdsResponse {
 		string total_provider_bonus_reporting_currency = 13;
 	}
 	map<int64, UserBalanceDetail> user_balance_details = 1;
+}
+
+message ListManualJournalEntriesRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional string currency = 4;
+	optional int32 page = 5;
+	optional int32 page_size = 6;
+	api.common.OperatorContextFilters operator_context_filters = 7;
+	api.common.OperatorContext operator_context = 8;
+}
+
+message ListManualJournalEntriesResponse {
+	message ManualJournalEntry {
+		int64 id = 1;
+		int64 user_id = 2;
+		google.protobuf.Timestamp transaction_time = 3; // updated_at
+		int64 initiator_user_id = 4;
+		string initiator_user_name = 5;
+		string transaction_type = 6;
+		string description = 7;
+		string currency = 8;
+		string amount = 9;
+		string amount_usd = 10;
+		string amount_reporting_currency = 11;
+		string before_balance = 12; // for this currency
+		string before_balance_usd = 13;
+		string before_balance_reporting_currency = 14;
+		string after_balance = 15; // for this currency
+		string after_balance_usd = 16;
+		string after_balance_reporting_currency = 17;
+	}
+	repeated ManualJournalEntry manual_journal_entries = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}
+
+message ExportManualJournalEntriesRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional string currency = 4;
+	string format = 5; // accepted values: csv, excel, pdf
+	string time_zone = 6; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContextFilters operator_context_filters = 7;
+	api.common.OperatorContext operator_context = 8;
+	int64 initiator_user_id = 9;
+}
+
+message ExportManualJournalEntriesResponse {
+	int64 task_id = 1;
 }

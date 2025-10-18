@@ -6752,6 +6752,665 @@ var _ interface {
 	ErrorName() string
 } = ExportFICAThresholdTransactionsRequestValidationError{}
 
+// Validate checks the field values on CreditRequest with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *CreditRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreditRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in CreditRequestMultiError, or
+// nil if none found.
+func (m *CreditRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreditRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	// no validation rules for Currency
+
+	// no validation rules for TransactionType
+
+	// no validation rules for CashAmount
+
+	// no validation rules for CashTurnoverThreshold
+
+	// no validation rules for OperatorBonusAmount
+
+	// no validation rules for OperatorBonusTurnoverThreshold
+
+	// no validation rules for OperatorBonusWithdrawLimit
+
+	// no validation rules for Comment
+
+	if m.ExternalTransactionId != nil {
+		// no validation rules for ExternalTransactionId
+	}
+
+	if len(errors) > 0 {
+		return CreditRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreditRequestMultiError is an error wrapping multiple validation errors
+// returned by CreditRequest.ValidateAll() if the designated constraints
+// aren't met.
+type CreditRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreditRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreditRequestMultiError) AllErrors() []error { return m }
+
+// CreditRequestValidationError is the validation error returned by
+// CreditRequest.Validate if the designated constraints aren't met.
+type CreditRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreditRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreditRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreditRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreditRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreditRequestValidationError) ErrorName() string { return "CreditRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e CreditRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreditRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreditRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreditRequestValidationError{}
+
+// Validate checks the field values on DebitRequest with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *DebitRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DebitRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in DebitRequestMultiError, or
+// nil if none found.
+func (m *DebitRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DebitRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	// no validation rules for Currency
+
+	// no validation rules for ReportingCurrency
+
+	// no validation rules for TransactionType
+
+	// no validation rules for TransactionId
+
+	// no validation rules for Cash
+
+	if len(errors) > 0 {
+		return DebitRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DebitRequestMultiError is an error wrapping multiple validation errors
+// returned by DebitRequest.ValidateAll() if the designated constraints aren't met.
+type DebitRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DebitRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DebitRequestMultiError) AllErrors() []error { return m }
+
+// DebitRequestValidationError is the validation error returned by
+// DebitRequest.Validate if the designated constraints aren't met.
+type DebitRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DebitRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DebitRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DebitRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DebitRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DebitRequestValidationError) ErrorName() string { return "DebitRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e DebitRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDebitRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DebitRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DebitRequestValidationError{}
+
+// Validate checks the field values on ListManualJournalEntriesRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListManualJournalEntriesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListManualJournalEntriesRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListManualJournalEntriesRequestMultiError, or nil if none found.
+func (m *ListManualJournalEntriesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListManualJournalEntriesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListManualJournalEntriesRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListManualJournalEntriesRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListManualJournalEntriesRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.StartTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetStartTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListManualJournalEntriesRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListManualJournalEntriesRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListManualJournalEntriesRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.EndTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetEndTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListManualJournalEntriesRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListManualJournalEntriesRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListManualJournalEntriesRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.UserId != nil {
+		// no validation rules for UserId
+	}
+
+	if m.Currency != nil {
+		// no validation rules for Currency
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return ListManualJournalEntriesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListManualJournalEntriesRequestMultiError is an error wrapping multiple
+// validation errors returned by ListManualJournalEntriesRequest.ValidateAll()
+// if the designated constraints aren't met.
+type ListManualJournalEntriesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListManualJournalEntriesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListManualJournalEntriesRequestMultiError) AllErrors() []error { return m }
+
+// ListManualJournalEntriesRequestValidationError is the validation error
+// returned by ListManualJournalEntriesRequest.Validate if the designated
+// constraints aren't met.
+type ListManualJournalEntriesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListManualJournalEntriesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListManualJournalEntriesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListManualJournalEntriesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListManualJournalEntriesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListManualJournalEntriesRequestValidationError) ErrorName() string {
+	return "ListManualJournalEntriesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListManualJournalEntriesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListManualJournalEntriesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListManualJournalEntriesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListManualJournalEntriesRequestValidationError{}
+
+// Validate checks the field values on ExportManualJournalEntriesRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ExportManualJournalEntriesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ExportManualJournalEntriesRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ExportManualJournalEntriesRequestMultiError, or nil if none found.
+func (m *ExportManualJournalEntriesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ExportManualJournalEntriesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Format
+
+	// no validation rules for TimeZone
+
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ExportManualJournalEntriesRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ExportManualJournalEntriesRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ExportManualJournalEntriesRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.StartTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetStartTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ExportManualJournalEntriesRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ExportManualJournalEntriesRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ExportManualJournalEntriesRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.EndTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetEndTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ExportManualJournalEntriesRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ExportManualJournalEntriesRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ExportManualJournalEntriesRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.UserId != nil {
+		// no validation rules for UserId
+	}
+
+	if m.Currency != nil {
+		// no validation rules for Currency
+	}
+
+	if len(errors) > 0 {
+		return ExportManualJournalEntriesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ExportManualJournalEntriesRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// ExportManualJournalEntriesRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ExportManualJournalEntriesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ExportManualJournalEntriesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ExportManualJournalEntriesRequestMultiError) AllErrors() []error { return m }
+
+// ExportManualJournalEntriesRequestValidationError is the validation error
+// returned by ExportManualJournalEntriesRequest.Validate if the designated
+// constraints aren't met.
+type ExportManualJournalEntriesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ExportManualJournalEntriesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ExportManualJournalEntriesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ExportManualJournalEntriesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ExportManualJournalEntriesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ExportManualJournalEntriesRequestValidationError) ErrorName() string {
+	return "ExportManualJournalEntriesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ExportManualJournalEntriesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sExportManualJournalEntriesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ExportManualJournalEntriesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ExportManualJournalEntriesRequestValidationError{}
+
 // Validate checks the field values on GetWalletCreditsResponse_Credit with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

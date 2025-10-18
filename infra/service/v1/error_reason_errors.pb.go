@@ -34,3 +34,27 @@ func IsAddByoDomainFailed(err error) bool {
 func ErrorAddByoDomainFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_ADD_BYO_DOMAIN_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetByoDomainsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_BYO_DOMAINS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetByoDomainsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_BYO_DOMAINS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDeleteByoDomainFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DELETE_BYO_DOMAIN_FAILED.String() && e.Code == 500
+}
+
+func ErrorDeleteByoDomainFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DELETE_BYO_DOMAIN_FAILED.String(), fmt.Sprintf(format, args...))
+}

@@ -35,6 +35,7 @@ const (
 	Game_Play_FullMethodName                              = "/api.game.service.v1.Game/Play"
 	Game_Rollback_FullMethodName                          = "/api.game.service.v1.Game/Rollback"
 	Game_ListBets_FullMethodName                          = "/api.game.service.v1.Game/ListBets"
+	Game_ExportBets_FullMethodName                        = "/api.game.service.v1.Game/ExportBets"
 	Game_BackofficeListGames_FullMethodName               = "/api.game.service.v1.Game/BackofficeListGames"
 	Game_UpdateGame_FullMethodName                        = "/api.game.service.v1.Game/UpdateGame"
 	Game_UpdateProvider_FullMethodName                    = "/api.game.service.v1.Game/UpdateProvider"
@@ -47,6 +48,7 @@ const (
 	Game_GetTaxReportConfig_FullMethodName                = "/api.game.service.v1.Game/GetTaxReportConfig"
 	Game_UpdateTaxReportConfig_FullMethodName             = "/api.game.service.v1.Game/UpdateTaxReportConfig"
 	Game_ListTaxReports_FullMethodName                    = "/api.game.service.v1.Game/ListTaxReports"
+	Game_ExportTaxReports_FullMethodName                  = "/api.game.service.v1.Game/ExportTaxReports"
 	Game_UpdateTaxReport_FullMethodName                   = "/api.game.service.v1.Game/UpdateTaxReport"
 	Game_GetResponsibleGamblingStatus_FullMethodName      = "/api.game.service.v1.Game/GetResponsibleGamblingStatus"
 	Game_ListUnpaidBets_FullMethodName                    = "/api.game.service.v1.Game/ListUnpaidBets"
@@ -87,6 +89,7 @@ type GameClient interface {
 	Play(ctx context.Context, in *PlayRequest, opts ...grpc.CallOption) (*PlayResponse, error)
 	Rollback(ctx context.Context, in *RollbackRequest, opts ...grpc.CallOption) (*RollbackResponse, error)
 	ListBets(ctx context.Context, in *ListBetsRequest, opts ...grpc.CallOption) (*ListBetsResponse, error)
+	ExportBets(ctx context.Context, in *ExportBetsRequest, opts ...grpc.CallOption) (*ExportBetsResponse, error)
 	BackofficeListGames(ctx context.Context, in *BackofficeListGamesRequest, opts ...grpc.CallOption) (*BackofficeListGamesResponse, error)
 	UpdateGame(ctx context.Context, in *UpdateGameRequest, opts ...grpc.CallOption) (*UpdateGameResponse, error)
 	UpdateProvider(ctx context.Context, in *UpdateProviderRequest, opts ...grpc.CallOption) (*UpdateProviderResponse, error)
@@ -100,6 +103,7 @@ type GameClient interface {
 	GetTaxReportConfig(ctx context.Context, in *GetTaxReportConfigRequest, opts ...grpc.CallOption) (*GetTaxReportConfigResponse, error)
 	UpdateTaxReportConfig(ctx context.Context, in *UpdateTaxReportConfigRequest, opts ...grpc.CallOption) (*UpdateTaxReportConfigResponse, error)
 	ListTaxReports(ctx context.Context, in *ListTaxReportsRequest, opts ...grpc.CallOption) (*ListTaxReportsResponse, error)
+	ExportTaxReports(ctx context.Context, in *ExportTaxReportsRequest, opts ...grpc.CallOption) (*ExportTaxReportsResponse, error)
 	UpdateTaxReport(ctx context.Context, in *UpdateTaxReportRequest, opts ...grpc.CallOption) (*UpdateTaxReportResponse, error)
 	GetResponsibleGamblingStatus(ctx context.Context, in *GetResponsibleGamblingStatusRequest, opts ...grpc.CallOption) (*GetResponsibleGamblingStatusResponse, error)
 	ListUnpaidBets(ctx context.Context, in *ListUnpaidBetsRequest, opts ...grpc.CallOption) (*ListUnpaidBetsResponse, error)
@@ -290,6 +294,16 @@ func (c *gameClient) ListBets(ctx context.Context, in *ListBetsRequest, opts ...
 	return out, nil
 }
 
+func (c *gameClient) ExportBets(ctx context.Context, in *ExportBetsRequest, opts ...grpc.CallOption) (*ExportBetsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExportBetsResponse)
+	err := c.cc.Invoke(ctx, Game_ExportBets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *gameClient) BackofficeListGames(ctx context.Context, in *BackofficeListGamesRequest, opts ...grpc.CallOption) (*BackofficeListGamesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(BackofficeListGamesResponse)
@@ -404,6 +418,16 @@ func (c *gameClient) ListTaxReports(ctx context.Context, in *ListTaxReportsReque
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListTaxReportsResponse)
 	err := c.cc.Invoke(ctx, Game_ListTaxReports_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) ExportTaxReports(ctx context.Context, in *ExportTaxReportsRequest, opts ...grpc.CallOption) (*ExportTaxReportsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExportTaxReportsResponse)
+	err := c.cc.Invoke(ctx, Game_ExportTaxReports_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -610,6 +634,7 @@ type GameServer interface {
 	Play(context.Context, *PlayRequest) (*PlayResponse, error)
 	Rollback(context.Context, *RollbackRequest) (*RollbackResponse, error)
 	ListBets(context.Context, *ListBetsRequest) (*ListBetsResponse, error)
+	ExportBets(context.Context, *ExportBetsRequest) (*ExportBetsResponse, error)
 	BackofficeListGames(context.Context, *BackofficeListGamesRequest) (*BackofficeListGamesResponse, error)
 	UpdateGame(context.Context, *UpdateGameRequest) (*UpdateGameResponse, error)
 	UpdateProvider(context.Context, *UpdateProviderRequest) (*UpdateProviderResponse, error)
@@ -623,6 +648,7 @@ type GameServer interface {
 	GetTaxReportConfig(context.Context, *GetTaxReportConfigRequest) (*GetTaxReportConfigResponse, error)
 	UpdateTaxReportConfig(context.Context, *UpdateTaxReportConfigRequest) (*UpdateTaxReportConfigResponse, error)
 	ListTaxReports(context.Context, *ListTaxReportsRequest) (*ListTaxReportsResponse, error)
+	ExportTaxReports(context.Context, *ExportTaxReportsRequest) (*ExportTaxReportsResponse, error)
 	UpdateTaxReport(context.Context, *UpdateTaxReportRequest) (*UpdateTaxReportResponse, error)
 	GetResponsibleGamblingStatus(context.Context, *GetResponsibleGamblingStatusRequest) (*GetResponsibleGamblingStatusResponse, error)
 	ListUnpaidBets(context.Context, *ListUnpaidBetsRequest) (*ListUnpaidBetsResponse, error)
@@ -701,6 +727,9 @@ func (UnimplementedGameServer) Rollback(context.Context, *RollbackRequest) (*Rol
 func (UnimplementedGameServer) ListBets(context.Context, *ListBetsRequest) (*ListBetsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBets not implemented")
 }
+func (UnimplementedGameServer) ExportBets(context.Context, *ExportBetsRequest) (*ExportBetsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportBets not implemented")
+}
 func (UnimplementedGameServer) BackofficeListGames(context.Context, *BackofficeListGamesRequest) (*BackofficeListGamesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BackofficeListGames not implemented")
 }
@@ -736,6 +765,9 @@ func (UnimplementedGameServer) UpdateTaxReportConfig(context.Context, *UpdateTax
 }
 func (UnimplementedGameServer) ListTaxReports(context.Context, *ListTaxReportsRequest) (*ListTaxReportsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListTaxReports not implemented")
+}
+func (UnimplementedGameServer) ExportTaxReports(context.Context, *ExportTaxReportsRequest) (*ExportTaxReportsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportTaxReports not implemented")
 }
 func (UnimplementedGameServer) UpdateTaxReport(context.Context, *UpdateTaxReportRequest) (*UpdateTaxReportResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateTaxReport not implemented")
@@ -1100,6 +1132,24 @@ func _Game_ListBets_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_ExportBets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportBetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).ExportBets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_ExportBets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).ExportBets(ctx, req.(*ExportBetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Game_BackofficeListGames_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(BackofficeListGamesRequest)
 	if err := dec(in); err != nil {
@@ -1312,6 +1362,24 @@ func _Game_ListTaxReports_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GameServer).ListTaxReports(ctx, req.(*ListTaxReportsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_ExportTaxReports_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportTaxReportsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).ExportTaxReports(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_ExportTaxReports_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).ExportTaxReports(ctx, req.(*ExportTaxReportsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1712,6 +1780,10 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Game_ListBets_Handler,
 		},
 		{
+			MethodName: "ExportBets",
+			Handler:    _Game_ExportBets_Handler,
+		},
+		{
 			MethodName: "BackofficeListGames",
 			Handler:    _Game_BackofficeListGames_Handler,
 		},
@@ -1758,6 +1830,10 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListTaxReports",
 			Handler:    _Game_ListTaxReports_Handler,
+		},
+		{
+			MethodName: "ExportTaxReports",
+			Handler:    _Game_ExportTaxReports_Handler,
 		},
 		{
 			MethodName: "UpdateTaxReport",
