@@ -150,10 +150,10 @@ type GameBetEventBoardcastItem struct {
 	UserName     string  `json:"user_name"`
 }
 
-type GameBetEventBoardcast struct {
-	OperatorID    int64                       `json:"operator_id"`
-	AllBetEvents  []GameBetEventBoardcastItem `json:"all_bet_events"`
-	HighWinEvents []GameBetEventBoardcastItem `json:"high_win_events"`
+type WebsocketOperatorBoardcastEvent struct {
+	OperatorID int64  `json:"operator_id"`
+	Command    string `json:"command"`
+	Data       any    `json:"data"`
 }
 
 type GameTransactionType string
