@@ -12921,6 +12921,8 @@ components:
                     format: int32
                 enable:
                     type: boolean
+                currentAmount:
+                    type: string
         api.bcpay.service.v1.GetBankSchemaRequest:
             type: object
             properties:
