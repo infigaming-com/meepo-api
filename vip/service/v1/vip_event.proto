@@ -7,7 +7,7 @@ option java_multiple_files = true;
 option java_package = "api.vip.service.v1";
 
 // VIP service provides VIP management functionality.
-service VIPEvent {
+service VipEvent {
 	rpc Event (EventRequest) returns (EventResponse) {}	
 }
 

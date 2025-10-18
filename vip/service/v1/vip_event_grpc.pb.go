@@ -19,105 +19,105 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	VIPEvent_Event_FullMethodName = "/api.vip.service.v1.VIPEvent/Event"
+	VipEvent_Event_FullMethodName = "/api.vip.service.v1.VipEvent/Event"
 )
 
-// VIPEventClient is the client API for VIPEvent service.
+// VipEventClient is the client API for VipEvent service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
 // VIP service provides VIP management functionality.
-type VIPEventClient interface {
+type VipEventClient interface {
 	Event(ctx context.Context, in *EventRequest, opts ...grpc.CallOption) (*EventResponse, error)
 }
 
-type vIPEventClient struct {
+type vipEventClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewVIPEventClient(cc grpc.ClientConnInterface) VIPEventClient {
-	return &vIPEventClient{cc}
+func NewVipEventClient(cc grpc.ClientConnInterface) VipEventClient {
+	return &vipEventClient{cc}
 }
 
-func (c *vIPEventClient) Event(ctx context.Context, in *EventRequest, opts ...grpc.CallOption) (*EventResponse, error) {
+func (c *vipEventClient) Event(ctx context.Context, in *EventRequest, opts ...grpc.CallOption) (*EventResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(EventResponse)
-	err := c.cc.Invoke(ctx, VIPEvent_Event_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, VipEvent_Event_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// VIPEventServer is the server API for VIPEvent service.
-// All implementations must embed UnimplementedVIPEventServer
+// VipEventServer is the server API for VipEvent service.
+// All implementations must embed UnimplementedVipEventServer
 // for forward compatibility.
 //
 // VIP service provides VIP management functionality.
-type VIPEventServer interface {
+type VipEventServer interface {
 	Event(context.Context, *EventRequest) (*EventResponse, error)
-	mustEmbedUnimplementedVIPEventServer()
+	mustEmbedUnimplementedVipEventServer()
 }
 
-// UnimplementedVIPEventServer must be embedded to have
+// UnimplementedVipEventServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedVIPEventServer struct{}
+type UnimplementedVipEventServer struct{}
 
-func (UnimplementedVIPEventServer) Event(context.Context, *EventRequest) (*EventResponse, error) {
+func (UnimplementedVipEventServer) Event(context.Context, *EventRequest) (*EventResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Event not implemented")
 }
-func (UnimplementedVIPEventServer) mustEmbedUnimplementedVIPEventServer() {}
-func (UnimplementedVIPEventServer) testEmbeddedByValue()                  {}
+func (UnimplementedVipEventServer) mustEmbedUnimplementedVipEventServer() {}
+func (UnimplementedVipEventServer) testEmbeddedByValue()                  {}
 
-// UnsafeVIPEventServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to VIPEventServer will
+// UnsafeVipEventServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to VipEventServer will
 // result in compilation errors.
-type UnsafeVIPEventServer interface {
-	mustEmbedUnimplementedVIPEventServer()
+type UnsafeVipEventServer interface {
+	mustEmbedUnimplementedVipEventServer()
 }
 
-func RegisterVIPEventServer(s grpc.ServiceRegistrar, srv VIPEventServer) {
-	// If the following call pancis, it indicates UnimplementedVIPEventServer was
+func RegisterVipEventServer(s grpc.ServiceRegistrar, srv VipEventServer) {
+	// If the following call pancis, it indicates UnimplementedVipEventServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&VIPEvent_ServiceDesc, srv)
+	s.RegisterService(&VipEvent_ServiceDesc, srv)
 }
 
-func _VIPEvent_Event_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _VipEvent_Event_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(EventRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(VIPEventServer).Event(ctx, in)
+		return srv.(VipEventServer).Event(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: VIPEvent_Event_FullMethodName,
+		FullMethod: VipEvent_Event_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VIPEventServer).Event(ctx, req.(*EventRequest))
+		return srv.(VipEventServer).Event(ctx, req.(*EventRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// VIPEvent_ServiceDesc is the grpc.ServiceDesc for VIPEvent service.
+// VipEvent_ServiceDesc is the grpc.ServiceDesc for VipEvent service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var VIPEvent_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "api.vip.service.v1.VIPEvent",
-	HandlerType: (*VIPEventServer)(nil),
+var VipEvent_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "api.vip.service.v1.VipEvent",
+	HandlerType: (*VipEventServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "Event",
-			Handler:    _VIPEvent_Event_Handler,
+			Handler:    _VipEvent_Event_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

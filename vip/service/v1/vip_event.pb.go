@@ -129,7 +129,7 @@ const file_vip_service_v1_vip_event_proto_rawDesc = "" +
 	"\n" +
 	"message_id\x18\x03 \x01(\tR\tmessageId\"\x0f\n" +
 	"\rEventResponse2Z\n" +
-	"\bVIPEvent\x12N\n" +
+	"\bVipEvent\x12N\n" +
 	"\x05Event\x12 .api.vip.service.v1.EventRequest\x1a!.api.vip.service.v1.EventResponse\"\x00BM\n" +
 	"\x12api.vip.service.v1P\x01Z5github.com/infigaming-com/meepo-api/vip/service/v1;v1b\x06proto3"
 
@@ -151,8 +151,8 @@ var file_vip_service_v1_vip_event_proto_goTypes = []any{
 	(*EventResponse)(nil), // 1: api.vip.service.v1.EventResponse
 }
 var file_vip_service_v1_vip_event_proto_depIdxs = []int32{
-	0, // 0: api.vip.service.v1.VIPEvent.Event:input_type -> api.vip.service.v1.EventRequest
-	1, // 1: api.vip.service.v1.VIPEvent.Event:output_type -> api.vip.service.v1.EventResponse
+	0, // 0: api.vip.service.v1.VipEvent.Event:input_type -> api.vip.service.v1.EventRequest
+	1, // 1: api.vip.service.v1.VipEvent.Event:output_type -> api.vip.service.v1.EventResponse
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
