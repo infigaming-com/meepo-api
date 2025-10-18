@@ -562,6 +562,8 @@ func (m *CreditRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for InitiatorUserId
+
 	if m.ExternalTransactionId != nil {
 		// no validation rules for ExternalTransactionId
 	}
@@ -808,6 +810,10 @@ func (m *DebitRequest) validate(all bool) error {
 			}
 		}
 	}
+
+	// no validation rules for InitiatorUserId
+
+	// no validation rules for Comment
 
 	if len(errors) > 0 {
 		return DebitRequestMultiError(errors)
