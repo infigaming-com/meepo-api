@@ -67,6 +67,7 @@ const (
 	Game_AddGameBetDisplayConfig_FullMethodName           = "/api.game.service.v1.Game/AddGameBetDisplayConfig"
 	Game_UpdateGameBetDisplayConfig_FullMethodName        = "/api.game.service.v1.Game/UpdateGameBetDisplayConfig"
 	Game_ListGameBetDisplayConfig_FullMethodName          = "/api.game.service.v1.Game/ListGameBetDisplayConfig"
+	Game_GetGameInfo_FullMethodName                       = "/api.game.service.v1.Game/GetGameInfo"
 )
 
 // GameClient is the client API for Game service.
@@ -124,6 +125,7 @@ type GameClient interface {
 	AddGameBetDisplayConfig(ctx context.Context, in *AddGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*AddGameBetDisplayConfigResponse, error)
 	UpdateGameBetDisplayConfig(ctx context.Context, in *UpdateGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*UpdateGameBetDisplayConfigResponse, error)
 	ListGameBetDisplayConfig(ctx context.Context, in *ListGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*ListGameBetDisplayConfigResponse, error)
+	GetGameInfo(ctx context.Context, in *GetGameInfoRequest, opts ...grpc.CallOption) (*GetGameInfoResponse, error)
 }
 
 type gameClient struct {
@@ -614,6 +616,16 @@ func (c *gameClient) ListGameBetDisplayConfig(ctx context.Context, in *ListGameB
 	return out, nil
 }
 
+func (c *gameClient) GetGameInfo(ctx context.Context, in *GetGameInfoRequest, opts ...grpc.CallOption) (*GetGameInfoResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetGameInfoResponse)
+	err := c.cc.Invoke(ctx, Game_GetGameInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GameServer is the server API for Game service.
 // All implementations must embed UnimplementedGameServer
 // for forward compatibility.
@@ -669,6 +681,7 @@ type GameServer interface {
 	AddGameBetDisplayConfig(context.Context, *AddGameBetDisplayConfigRequest) (*AddGameBetDisplayConfigResponse, error)
 	UpdateGameBetDisplayConfig(context.Context, *UpdateGameBetDisplayConfigRequest) (*UpdateGameBetDisplayConfigResponse, error)
 	ListGameBetDisplayConfig(context.Context, *ListGameBetDisplayConfigRequest) (*ListGameBetDisplayConfigResponse, error)
+	GetGameInfo(context.Context, *GetGameInfoRequest) (*GetGameInfoResponse, error)
 	mustEmbedUnimplementedGameServer()
 }
 
@@ -822,6 +835,9 @@ func (UnimplementedGameServer) UpdateGameBetDisplayConfig(context.Context, *Upda
 }
 func (UnimplementedGameServer) ListGameBetDisplayConfig(context.Context, *ListGameBetDisplayConfigRequest) (*ListGameBetDisplayConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListGameBetDisplayConfig not implemented")
+}
+func (UnimplementedGameServer) GetGameInfo(context.Context, *GetGameInfoRequest) (*GetGameInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetGameInfo not implemented")
 }
 func (UnimplementedGameServer) mustEmbedUnimplementedGameServer() {}
 func (UnimplementedGameServer) testEmbeddedByValue()              {}
@@ -1708,6 +1724,24 @@ func _Game_ListGameBetDisplayConfig_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_GetGameInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGameInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).GetGameInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_GetGameInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).GetGameInfo(ctx, req.(*GetGameInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Game_ServiceDesc is the grpc.ServiceDesc for Game service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1906,6 +1940,10 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListGameBetDisplayConfig",
 			Handler:    _Game_ListGameBetDisplayConfig_Handler,
+		},
+		{
+			MethodName: "GetGameInfo",
+			Handler:    _Game_GetGameInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
