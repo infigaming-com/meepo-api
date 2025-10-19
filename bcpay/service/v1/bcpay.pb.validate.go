@@ -2996,6 +2996,8 @@ func (m *AuditTransactionRequest) validate(all bool) error {
 
 	// no validation rules for UserId
 
+	// no validation rules for OperatorName
+
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
