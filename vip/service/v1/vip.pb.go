@@ -1940,8 +1940,8 @@ type VipMember struct {
 	OperatorId           int64                  `protobuf:"varint,5,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	UserId               int64                  `protobuf:"varint,6,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	CurrentLevelId       int64                  `protobuf:"varint,7,opt,name=current_level_id,json=currentLevelId,proto3" json:"current_level_id,omitempty"`
-	CurrentXp            int64                  `protobuf:"varint,8,opt,name=current_xp,json=currentXp,proto3" json:"current_xp,omitempty"`
-	TotalXp              int64                  `protobuf:"varint,9,opt,name=total_xp,json=totalXp,proto3" json:"total_xp,omitempty"`
+	CurrentXp            string                 `protobuf:"bytes,8,opt,name=current_xp,json=currentXp,proto3" json:"current_xp,omitempty"`
+	TotalXp              string                 `protobuf:"bytes,9,opt,name=total_xp,json=totalXp,proto3" json:"total_xp,omitempty"`
 	LastLevelUpAt        int64                  `protobuf:"varint,10,opt,name=last_level_up_at,json=lastLevelUpAt,proto3" json:"last_level_up_at,omitempty"`
 	LastInstantUpgradeAt int64                  `protobuf:"varint,11,opt,name=last_instant_upgrade_at,json=lastInstantUpgradeAt,proto3" json:"last_instant_upgrade_at,omitempty"`
 	WeeklySlider         int32                  `protobuf:"varint,12,opt,name=weekly_slider,json=weeklySlider,proto3" json:"weekly_slider,omitempty"`
@@ -2029,18 +2029,18 @@ func (x *VipMember) GetCurrentLevelId() int64 {
 	return 0
 }
 
-func (x *VipMember) GetCurrentXp() int64 {
+func (x *VipMember) GetCurrentXp() string {
 	if x != nil {
 		return x.CurrentXp
 	}
-	return 0
+	return ""
 }
 
-func (x *VipMember) GetTotalXp() int64 {
+func (x *VipMember) GetTotalXp() string {
 	if x != nil {
 		return x.TotalXp
 	}
-	return 0
+	return ""
 }
 
 func (x *VipMember) GetLastLevelUpAt() int64 {
@@ -2954,8 +2954,8 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\auser_id\x18\x06 \x01(\x03R\x06userId\x12(\n" +
 	"\x10current_level_id\x18\a \x01(\x03R\x0ecurrentLevelId\x12\x1d\n" +
 	"\n" +
-	"current_xp\x18\b \x01(\x03R\tcurrentXp\x12\x19\n" +
-	"\btotal_xp\x18\t \x01(\x03R\atotalXp\x12'\n" +
+	"current_xp\x18\b \x01(\tR\tcurrentXp\x12\x19\n" +
+	"\btotal_xp\x18\t \x01(\tR\atotalXp\x12'\n" +
 	"\x10last_level_up_at\x18\n" +
 	" \x01(\x03R\rlastLevelUpAt\x125\n" +
 	"\x17last_instant_upgrade_at\x18\v \x01(\x03R\x14lastInstantUpgradeAt\x12#\n" +
