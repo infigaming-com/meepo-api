@@ -6659,7 +6659,18 @@ components:
             type: object
             properties:
                 campaign:
-                    $ref: '#/components/schemas/api.affiliate.service.v1.Campaign'
+                    $ref: '#/components/schemas/api.backoffice.service.v1.CreateCampaignRequest_Campaign'
+        api.backoffice.service.v1.CreateCampaignRequest_Campaign:
+            type: object
+            properties:
+                domain:
+                    type: string
+                campaignName:
+                    type: string
+                channelType:
+                    type: string
+                channelConfig:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.ChannelConfig'
         api.backoffice.service.v1.CreateCommissionPlanRequest:
             type: object
             properties:

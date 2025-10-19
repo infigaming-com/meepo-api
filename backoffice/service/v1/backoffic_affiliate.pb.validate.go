@@ -2067,3 +2067,141 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = DeleteCampaignRequestValidationError{}
+
+// Validate checks the field values on CreateCampaignRequest_Campaign with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateCampaignRequest_Campaign) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateCampaignRequest_Campaign with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// CreateCampaignRequest_CampaignMultiError, or nil if none found.
+func (m *CreateCampaignRequest_Campaign) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateCampaignRequest_Campaign) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Domain
+
+	// no validation rules for CampaignName
+
+	// no validation rules for ChannelType
+
+	if all {
+		switch v := interface{}(m.GetChannelConfig()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateCampaignRequest_CampaignValidationError{
+					field:  "ChannelConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateCampaignRequest_CampaignValidationError{
+					field:  "ChannelConfig",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetChannelConfig()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateCampaignRequest_CampaignValidationError{
+				field:  "ChannelConfig",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return CreateCampaignRequest_CampaignMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateCampaignRequest_CampaignMultiError is an error wrapping multiple
+// validation errors returned by CreateCampaignRequest_Campaign.ValidateAll()
+// if the designated constraints aren't met.
+type CreateCampaignRequest_CampaignMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateCampaignRequest_CampaignMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateCampaignRequest_CampaignMultiError) AllErrors() []error { return m }
+
+// CreateCampaignRequest_CampaignValidationError is the validation error
+// returned by CreateCampaignRequest_Campaign.Validate if the designated
+// constraints aren't met.
+type CreateCampaignRequest_CampaignValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateCampaignRequest_CampaignValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateCampaignRequest_CampaignValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateCampaignRequest_CampaignValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateCampaignRequest_CampaignValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateCampaignRequest_CampaignValidationError) ErrorName() string {
+	return "CreateCampaignRequest_CampaignValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateCampaignRequest_CampaignValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateCampaignRequest_Campaign.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateCampaignRequest_CampaignValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateCampaignRequest_CampaignValidationError{}
