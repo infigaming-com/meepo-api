@@ -1531,13 +1531,13 @@ func (x *ListCampaignsRequest) GetOperatorContextFilters() *common.OperatorConte
 }
 
 type ListCampaignsResponse struct {
-	state         protoimpl.MessageState            `protogen:"open.v1"`
-	Campaigns     []*ListCampaignsResponse_Campaign `protobuf:"bytes,1,rep,name=campaigns,proto3" json:"campaigns,omitempty"`
-	Total         int32                             `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
-	TotalEnabled  int32                             `protobuf:"varint,3,opt,name=total_enabled,json=totalEnabled,proto3" json:"total_enabled,omitempty"`
-	TotalDisabled int32                             `protobuf:"varint,4,opt,name=total_disabled,json=totalDisabled,proto3" json:"total_disabled,omitempty"`
-	Page          int32                             `protobuf:"varint,5,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize      int32                             `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	state         protoimpl.MessageState                `protogen:"open.v1"`
+	Campaigns     []*ListCampaignsResponse_CampaignInfo `protobuf:"bytes,1,rep,name=campaigns,proto3" json:"campaigns,omitempty"`
+	Total         int32                                 `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	TotalEnabled  int32                                 `protobuf:"varint,3,opt,name=total_enabled,json=totalEnabled,proto3" json:"total_enabled,omitempty"`
+	TotalDisabled int32                                 `protobuf:"varint,4,opt,name=total_disabled,json=totalDisabled,proto3" json:"total_disabled,omitempty"`
+	Page          int32                                 `protobuf:"varint,5,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                                 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1572,7 +1572,7 @@ func (*ListCampaignsResponse) Descriptor() ([]byte, []int) {
 	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{21}
 }
 
-func (x *ListCampaignsResponse) GetCampaigns() []*ListCampaignsResponse_Campaign {
+func (x *ListCampaignsResponse) GetCampaigns() []*ListCampaignsResponse_CampaignInfo {
 	if x != nil {
 		return x.Campaigns
 	}
@@ -2426,38 +2426,38 @@ func (x *CreateCampaignRequest_Campaign) GetChannelConfig() *ChannelConfig {
 	return nil
 }
 
-type ListCampaignsResponse_Campaign struct {
-	state                protoimpl.MessageState          `protogen:"open.v1"`
-	CampaignId           int64                           `protobuf:"varint,1,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
-	AffiliateCompanyName string                          `protobuf:"bytes,2,opt,name=affiliate_company_name,json=affiliateCompanyName,proto3" json:"affiliate_company_name,omitempty"`
-	AffiliateId          int64                           `protobuf:"varint,3,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
-	SystemOperatorName   string                          `protobuf:"bytes,4,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
-	RetailerOperatorName string                          `protobuf:"bytes,5,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
-	CompanyOperatorName  string                          `protobuf:"bytes,6,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
-	OperatorName         string                          `protobuf:"bytes,7,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	CampaignName         string                          `protobuf:"bytes,8,opt,name=campaign_name,json=campaignName,proto3" json:"campaign_name,omitempty"`
-	EventMappingsStatus  string                          `protobuf:"bytes,9,opt,name=event_mappings_status,json=eventMappingsStatus,proto3" json:"event_mappings_status,omitempty"` // configured/not_configured/not_required
-	EventMappingsCount   int32                           `protobuf:"varint,10,opt,name=event_mappings_count,json=eventMappingsCount,proto3" json:"event_mappings_count,omitempty"`
-	Status               bool                            `protobuf:"varint,11,opt,name=status,proto3" json:"status,omitempty"`
-	Campaign             *ListCampaignsResponse_Campaign `protobuf:"bytes,12,opt,name=campaign,proto3" json:"campaign,omitempty"`
+type ListCampaignsResponse_CampaignInfo struct {
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	CampaignId           int64                  `protobuf:"varint,1,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
+	AffiliateCompanyName string                 `protobuf:"bytes,2,opt,name=affiliate_company_name,json=affiliateCompanyName,proto3" json:"affiliate_company_name,omitempty"`
+	AffiliateId          int64                  `protobuf:"varint,3,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
+	SystemOperatorName   string                 `protobuf:"bytes,4,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
+	RetailerOperatorName string                 `protobuf:"bytes,5,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	CompanyOperatorName  string                 `protobuf:"bytes,6,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	OperatorName         string                 `protobuf:"bytes,7,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	CampaignName         string                 `protobuf:"bytes,8,opt,name=campaign_name,json=campaignName,proto3" json:"campaign_name,omitempty"`
+	EventMappingsStatus  string                 `protobuf:"bytes,9,opt,name=event_mappings_status,json=eventMappingsStatus,proto3" json:"event_mappings_status,omitempty"` // configured/not_configured/not_required
+	EventMappingsCount   int32                  `protobuf:"varint,10,opt,name=event_mappings_count,json=eventMappingsCount,proto3" json:"event_mappings_count,omitempty"`
+	Enabled              bool                   `protobuf:"varint,11,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Campaign             *Campaign              `protobuf:"bytes,12,opt,name=campaign,proto3" json:"campaign,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
 
-func (x *ListCampaignsResponse_Campaign) Reset() {
-	*x = ListCampaignsResponse_Campaign{}
+func (x *ListCampaignsResponse_CampaignInfo) Reset() {
+	*x = ListCampaignsResponse_CampaignInfo{}
 	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListCampaignsResponse_Campaign) String() string {
+func (x *ListCampaignsResponse_CampaignInfo) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListCampaignsResponse_Campaign) ProtoMessage() {}
+func (*ListCampaignsResponse_CampaignInfo) ProtoMessage() {}
 
-func (x *ListCampaignsResponse_Campaign) ProtoReflect() protoreflect.Message {
+func (x *ListCampaignsResponse_CampaignInfo) ProtoReflect() protoreflect.Message {
 	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2469,89 +2469,89 @@ func (x *ListCampaignsResponse_Campaign) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListCampaignsResponse_Campaign.ProtoReflect.Descriptor instead.
-func (*ListCampaignsResponse_Campaign) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListCampaignsResponse_CampaignInfo.ProtoReflect.Descriptor instead.
+func (*ListCampaignsResponse_CampaignInfo) Descriptor() ([]byte, []int) {
 	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{21, 0}
 }
 
-func (x *ListCampaignsResponse_Campaign) GetCampaignId() int64 {
+func (x *ListCampaignsResponse_CampaignInfo) GetCampaignId() int64 {
 	if x != nil {
 		return x.CampaignId
 	}
 	return 0
 }
 
-func (x *ListCampaignsResponse_Campaign) GetAffiliateCompanyName() string {
+func (x *ListCampaignsResponse_CampaignInfo) GetAffiliateCompanyName() string {
 	if x != nil {
 		return x.AffiliateCompanyName
 	}
 	return ""
 }
 
-func (x *ListCampaignsResponse_Campaign) GetAffiliateId() int64 {
+func (x *ListCampaignsResponse_CampaignInfo) GetAffiliateId() int64 {
 	if x != nil {
 		return x.AffiliateId
 	}
 	return 0
 }
 
-func (x *ListCampaignsResponse_Campaign) GetSystemOperatorName() string {
+func (x *ListCampaignsResponse_CampaignInfo) GetSystemOperatorName() string {
 	if x != nil {
 		return x.SystemOperatorName
 	}
 	return ""
 }
 
-func (x *ListCampaignsResponse_Campaign) GetRetailerOperatorName() string {
+func (x *ListCampaignsResponse_CampaignInfo) GetRetailerOperatorName() string {
 	if x != nil {
 		return x.RetailerOperatorName
 	}
 	return ""
 }
 
-func (x *ListCampaignsResponse_Campaign) GetCompanyOperatorName() string {
+func (x *ListCampaignsResponse_CampaignInfo) GetCompanyOperatorName() string {
 	if x != nil {
 		return x.CompanyOperatorName
 	}
 	return ""
 }
 
-func (x *ListCampaignsResponse_Campaign) GetOperatorName() string {
+func (x *ListCampaignsResponse_CampaignInfo) GetOperatorName() string {
 	if x != nil {
 		return x.OperatorName
 	}
 	return ""
 }
 
-func (x *ListCampaignsResponse_Campaign) GetCampaignName() string {
+func (x *ListCampaignsResponse_CampaignInfo) GetCampaignName() string {
 	if x != nil {
 		return x.CampaignName
 	}
 	return ""
 }
 
-func (x *ListCampaignsResponse_Campaign) GetEventMappingsStatus() string {
+func (x *ListCampaignsResponse_CampaignInfo) GetEventMappingsStatus() string {
 	if x != nil {
 		return x.EventMappingsStatus
 	}
 	return ""
 }
 
-func (x *ListCampaignsResponse_Campaign) GetEventMappingsCount() int32 {
+func (x *ListCampaignsResponse_CampaignInfo) GetEventMappingsCount() int32 {
 	if x != nil {
 		return x.EventMappingsCount
 	}
 	return 0
 }
 
-func (x *ListCampaignsResponse_Campaign) GetStatus() bool {
+func (x *ListCampaignsResponse_CampaignInfo) GetEnabled() bool {
 	if x != nil {
-		return x.Status
+		return x.Enabled
 	}
 	return false
 }
 
-func (x *ListCampaignsResponse_Campaign) GetCampaign() *ListCampaignsResponse_Campaign {
+func (x *ListCampaignsResponse_CampaignInfo) GetCampaign() *Campaign {
 	if x != nil {
 		return x.Campaign
 	}
@@ -2772,15 +2772,15 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_sizeB\x14\n" +
-	"\x12_initiator_user_id\"\xc3\x06\n" +
-	"\x15ListCampaignsResponse\x12V\n" +
-	"\tcampaigns\x18\x01 \x03(\v28.api.affiliate.service.v1.ListCampaignsResponse.CampaignR\tcampaigns\x12\x14\n" +
+	"\x12_initiator_user_id\"\xb7\x06\n" +
+	"\x15ListCampaignsResponse\x12Z\n" +
+	"\tcampaigns\x18\x01 \x03(\v2<.api.affiliate.service.v1.ListCampaignsResponse.CampaignInfoR\tcampaigns\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12#\n" +
 	"\rtotal_enabled\x18\x03 \x01(\x05R\ftotalEnabled\x12%\n" +
 	"\x0etotal_disabled\x18\x04 \x01(\x05R\rtotalDisabled\x12\x12\n" +
 	"\x04page\x18\x05 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x06 \x01(\x05R\bpageSize\x1a\xbe\x04\n" +
-	"\bCampaign\x12\x1f\n" +
+	"\tpage_size\x18\x06 \x01(\x05R\bpageSize\x1a\xae\x04\n" +
+	"\fCampaignInfo\x12\x1f\n" +
 	"\vcampaign_id\x18\x01 \x01(\x03R\n" +
 	"campaignId\x124\n" +
 	"\x16affiliate_company_name\x18\x02 \x01(\tR\x14affiliateCompanyName\x12!\n" +
@@ -2792,9 +2792,9 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\rcampaign_name\x18\b \x01(\tR\fcampaignName\x122\n" +
 	"\x15event_mappings_status\x18\t \x01(\tR\x13eventMappingsStatus\x120\n" +
 	"\x14event_mappings_count\x18\n" +
-	" \x01(\x05R\x12eventMappingsCount\x12\x16\n" +
-	"\x06status\x18\v \x01(\bR\x06status\x12T\n" +
-	"\bcampaign\x18\f \x01(\v28.api.affiliate.service.v1.ListCampaignsResponse.CampaignR\bcampaign\"d\n" +
+	" \x01(\x05R\x12eventMappingsCount\x12\x18\n" +
+	"\aenabled\x18\v \x01(\bR\aenabled\x12>\n" +
+	"\bcampaign\x18\f \x01(\v2\".api.affiliate.service.v1.CampaignR\bcampaign\"d\n" +
 	"\x15DeleteCampaignRequest\x12\x1f\n" +
 	"\vcampaign_id\x18\x01 \x01(\x03R\n" +
 	"campaignId\x12*\n" +
@@ -2867,7 +2867,7 @@ var file_affiliate_service_v1_affiliate_proto_goTypes = []any{
 	(*CustomParams_CustomParam)(nil),             // 32: api.affiliate.service.v1.CustomParams.CustomParam
 	(*EventMappings_EventMapping)(nil),           // 33: api.affiliate.service.v1.EventMappings.EventMapping
 	(*CreateCampaignRequest_Campaign)(nil),       // 34: api.affiliate.service.v1.CreateCampaignRequest.Campaign
-	(*ListCampaignsResponse_Campaign)(nil),       // 35: api.affiliate.service.v1.ListCampaignsResponse.Campaign
+	(*ListCampaignsResponse_CampaignInfo)(nil),   // 35: api.affiliate.service.v1.ListCampaignsResponse.CampaignInfo
 	(*common.OperatorContext)(nil),               // 36: api.common.OperatorContext
 	(*common.OperatorContextFilters)(nil),        // 37: api.common.OperatorContextFilters
 	(*CreateCommissionPlanRequest)(nil),          // 38: api.affiliate.service.v1.CreateCommissionPlanRequest
@@ -2919,9 +2919,9 @@ var file_affiliate_service_v1_affiliate_proto_depIdxs = []int32{
 	12, // 32: api.affiliate.service.v1.UpdateCampaignRequest.campaign:type_name -> api.affiliate.service.v1.Campaign
 	36, // 33: api.affiliate.service.v1.ListCampaignsRequest.initiator_operator_context:type_name -> api.common.OperatorContext
 	37, // 34: api.affiliate.service.v1.ListCampaignsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	35, // 35: api.affiliate.service.v1.ListCampaignsResponse.campaigns:type_name -> api.affiliate.service.v1.ListCampaignsResponse.Campaign
+	35, // 35: api.affiliate.service.v1.ListCampaignsResponse.campaigns:type_name -> api.affiliate.service.v1.ListCampaignsResponse.CampaignInfo
 	13, // 36: api.affiliate.service.v1.CreateCampaignRequest.Campaign.channel_config:type_name -> api.affiliate.service.v1.ChannelConfig
-	35, // 37: api.affiliate.service.v1.ListCampaignsResponse.Campaign.campaign:type_name -> api.affiliate.service.v1.ListCampaignsResponse.Campaign
+	12, // 37: api.affiliate.service.v1.ListCampaignsResponse.CampaignInfo.campaign:type_name -> api.affiliate.service.v1.Campaign
 	38, // 38: api.affiliate.service.v1.Affiliate.CreateCommissionPlan:input_type -> api.affiliate.service.v1.CreateCommissionPlanRequest
 	39, // 39: api.affiliate.service.v1.Affiliate.UpdateCommissionPlan:input_type -> api.affiliate.service.v1.UpdateCommissionPlanRequest
 	40, // 40: api.affiliate.service.v1.Affiliate.GetCommissionPlan:input_type -> api.affiliate.service.v1.GetCommissionPlanRequest

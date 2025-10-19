@@ -191,7 +191,13 @@ message ListAllCommissionPlansRequest {
 // -------------- Campaign --------------
 
 message CreateCampaignRequest {
-	api.affiliate.service.v1.Campaign campaign = 1;
+    message Campaign {
+        string domain = 1;
+        string campaign_name = 2;
+        string channel_type = 3; // facebook/tiktok/kwai/appsflyer/adjust/agency/google_ads
+        api.affiliate.service.v1.ChannelConfig channel_config = 4;
+    }
+    Campaign campaign = 1;
 }
 
 message UpdateCampaignRequest {

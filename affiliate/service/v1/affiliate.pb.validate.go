@@ -4954,22 +4954,23 @@ var _ interface {
 	ErrorName() string
 } = CreateCampaignRequest_CampaignValidationError{}
 
-// Validate checks the field values on ListCampaignsResponse_Campaign with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ListCampaignsResponse_Campaign) Validate() error {
+// Validate checks the field values on ListCampaignsResponse_CampaignInfo with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ListCampaignsResponse_CampaignInfo) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListCampaignsResponse_Campaign with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the result is a list of violation errors wrapped in
-// ListCampaignsResponse_CampaignMultiError, or nil if none found.
-func (m *ListCampaignsResponse_Campaign) ValidateAll() error {
+// ValidateAll checks the field values on ListCampaignsResponse_CampaignInfo
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListCampaignsResponse_CampaignInfoMultiError, or nil if none found.
+func (m *ListCampaignsResponse_CampaignInfo) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListCampaignsResponse_Campaign) validate(all bool) error {
+func (m *ListCampaignsResponse_CampaignInfo) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -4996,13 +4997,13 @@ func (m *ListCampaignsResponse_Campaign) validate(all bool) error {
 
 	// no validation rules for EventMappingsCount
 
-	// no validation rules for Status
+	// no validation rules for Enabled
 
 	if all {
 		switch v := interface{}(m.GetCampaign()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListCampaignsResponse_CampaignValidationError{
+				errors = append(errors, ListCampaignsResponse_CampaignInfoValidationError{
 					field:  "Campaign",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -5010,7 +5011,7 @@ func (m *ListCampaignsResponse_Campaign) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, ListCampaignsResponse_CampaignValidationError{
+				errors = append(errors, ListCampaignsResponse_CampaignInfoValidationError{
 					field:  "Campaign",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -5019,7 +5020,7 @@ func (m *ListCampaignsResponse_Campaign) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetCampaign()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return ListCampaignsResponse_CampaignValidationError{
+			return ListCampaignsResponse_CampaignInfoValidationError{
 				field:  "Campaign",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -5028,19 +5029,20 @@ func (m *ListCampaignsResponse_Campaign) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return ListCampaignsResponse_CampaignMultiError(errors)
+		return ListCampaignsResponse_CampaignInfoMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListCampaignsResponse_CampaignMultiError is an error wrapping multiple
-// validation errors returned by ListCampaignsResponse_Campaign.ValidateAll()
-// if the designated constraints aren't met.
-type ListCampaignsResponse_CampaignMultiError []error
+// ListCampaignsResponse_CampaignInfoMultiError is an error wrapping multiple
+// validation errors returned by
+// ListCampaignsResponse_CampaignInfo.ValidateAll() if the designated
+// constraints aren't met.
+type ListCampaignsResponse_CampaignInfoMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListCampaignsResponse_CampaignMultiError) Error() string {
+func (m ListCampaignsResponse_CampaignInfoMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -5049,12 +5051,12 @@ func (m ListCampaignsResponse_CampaignMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListCampaignsResponse_CampaignMultiError) AllErrors() []error { return m }
+func (m ListCampaignsResponse_CampaignInfoMultiError) AllErrors() []error { return m }
 
-// ListCampaignsResponse_CampaignValidationError is the validation error
-// returned by ListCampaignsResponse_Campaign.Validate if the designated
+// ListCampaignsResponse_CampaignInfoValidationError is the validation error
+// returned by ListCampaignsResponse_CampaignInfo.Validate if the designated
 // constraints aren't met.
-type ListCampaignsResponse_CampaignValidationError struct {
+type ListCampaignsResponse_CampaignInfoValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -5062,24 +5064,24 @@ type ListCampaignsResponse_CampaignValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListCampaignsResponse_CampaignValidationError) Field() string { return e.field }
+func (e ListCampaignsResponse_CampaignInfoValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListCampaignsResponse_CampaignValidationError) Reason() string { return e.reason }
+func (e ListCampaignsResponse_CampaignInfoValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListCampaignsResponse_CampaignValidationError) Cause() error { return e.cause }
+func (e ListCampaignsResponse_CampaignInfoValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListCampaignsResponse_CampaignValidationError) Key() bool { return e.key }
+func (e ListCampaignsResponse_CampaignInfoValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListCampaignsResponse_CampaignValidationError) ErrorName() string {
-	return "ListCampaignsResponse_CampaignValidationError"
+func (e ListCampaignsResponse_CampaignInfoValidationError) ErrorName() string {
+	return "ListCampaignsResponse_CampaignInfoValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListCampaignsResponse_CampaignValidationError) Error() string {
+func (e ListCampaignsResponse_CampaignInfoValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -5091,14 +5093,14 @@ func (e ListCampaignsResponse_CampaignValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListCampaignsResponse_Campaign.%s: %s%s",
+		"invalid %sListCampaignsResponse_CampaignInfo.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListCampaignsResponse_CampaignValidationError{}
+var _ error = ListCampaignsResponse_CampaignInfoValidationError{}
 
 var _ interface {
 	Field() string
@@ -5106,4 +5108,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListCampaignsResponse_CampaignValidationError{}
+} = ListCampaignsResponse_CampaignInfoValidationError{}

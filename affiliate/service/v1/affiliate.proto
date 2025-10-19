@@ -271,7 +271,7 @@ message ListCampaignsRequest {
 }
 
 message ListCampaignsResponse {
-    message Campaign {
+    message CampaignInfo {
         int64 campaign_id = 1;
         string affiliate_company_name = 2;
         int64 affiliate_id = 3;
@@ -282,10 +282,10 @@ message ListCampaignsResponse {
         string campaign_name = 8;
         string event_mappings_status = 9; // configured/not_configured/not_required
         int32 event_mappings_count = 10;
-        bool status = 11;
+        bool enabled = 11;
         Campaign campaign = 12;
     }
-    repeated Campaign campaigns = 1;
+    repeated CampaignInfo campaigns = 1;
     int32 total = 2;
     int32 total_enabled = 3;
     int32 total_disabled = 4;

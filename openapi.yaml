@@ -6075,7 +6075,7 @@ components:
                 campaigns:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.affiliate.service.v1.ListCampaignsResponse_Campaign'
+                        $ref: '#/components/schemas/api.affiliate.service.v1.ListCampaignsResponse_CampaignInfo'
                 total:
                     type: integer
                     format: int32
@@ -6091,7 +6091,7 @@ components:
                 pageSize:
                     type: integer
                     format: int32
-        api.affiliate.service.v1.ListCampaignsResponse_Campaign:
+        api.affiliate.service.v1.ListCampaignsResponse_CampaignInfo:
             type: object
             properties:
                 campaignId:
@@ -6115,10 +6115,10 @@ components:
                 eventMappingsCount:
                     type: integer
                     format: int32
-                status:
+                enabled:
                     type: boolean
                 campaign:
-                    $ref: '#/components/schemas/api.affiliate.service.v1.ListCampaignsResponse_Campaign'
+                    $ref: '#/components/schemas/api.affiliate.service.v1.Campaign'
         api.affiliate.service.v1.ListCommissionPlansResponse:
             type: object
             properties:
@@ -6659,7 +6659,18 @@ components:
             type: object
             properties:
                 campaign:
-                    $ref: '#/components/schemas/api.affiliate.service.v1.Campaign'
+                    $ref: '#/components/schemas/api.backoffice.service.v1.CreateCampaignRequest_Campaign'
+        api.backoffice.service.v1.CreateCampaignRequest_Campaign:
+            type: object
+            properties:
+                domain:
+                    type: string
+                campaignName:
+                    type: string
+                channelType:
+                    type: string
+                channelConfig:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.ChannelConfig'
         api.backoffice.service.v1.CreateCommissionPlanRequest:
             type: object
             properties:
