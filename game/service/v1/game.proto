@@ -184,6 +184,7 @@ service Game {
 	rpc UpdateGameBetDisplayConfig(UpdateGameBetDisplayConfigRequest) returns (UpdateGameBetDisplayConfigResponse) { }
 
 	rpc ListGameBetDisplayConfig(ListGameBetDisplayConfigRequest) returns (ListGameBetDisplayConfigResponse) { }
+	rpc GetGameInfo(GetGameInfoRequest) returns (GetGameInfoResponse) { }
 
 }
 
@@ -1627,3 +1628,10 @@ message ListGameBetDisplayConfigResponse {
 	repeated Item list = 1;
 }
 
+message GetGameInfoRequest {
+	string game_id = 1;
+}
+
+message GetGameInfoResponse {
+	GameInfo game_info = 1;
+}
