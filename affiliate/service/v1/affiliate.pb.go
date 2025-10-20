@@ -876,13 +876,8 @@ type Campaign struct {
 	CampaignName  string                 `protobuf:"bytes,2,opt,name=campaign_name,json=campaignName,proto3" json:"campaign_name,omitempty"`
 	ChannelType   string                 `protobuf:"bytes,3,opt,name=channel_type,json=channelType,proto3" json:"channel_type,omitempty"` // facebook/tiktok/kwai/appsflyer/adjust/agency/google_ads
 	ChannelConfig *ChannelConfig         `protobuf:"bytes,4,opt,name=channel_config,json=channelConfig,proto3" json:"channel_config,omitempty"`
-	UtmSource     string                 `protobuf:"bytes,5,opt,name=utm_source,json=utmSource,proto3" json:"utm_source,omitempty"`
-	UtmMedium     string                 `protobuf:"bytes,6,opt,name=utm_medium,json=utmMedium,proto3" json:"utm_medium,omitempty"`
-	UtmCampaign   string                 `protobuf:"bytes,7,opt,name=utm_campaign,json=utmCampaign,proto3" json:"utm_campaign,omitempty"`
-	UtmContent    string                 `protobuf:"bytes,8,opt,name=utm_content,json=utmContent,proto3" json:"utm_content,omitempty"`
-	UtmTerm       string                 `protobuf:"bytes,9,opt,name=utm_term,json=utmTerm,proto3" json:"utm_term,omitempty"`
-	CustomParams  *CustomParams          `protobuf:"bytes,10,opt,name=custom_params,json=customParams,proto3" json:"custom_params,omitempty"`
-	EventMappings *EventMappings         `protobuf:"bytes,11,opt,name=event_mappings,json=eventMappings,proto3" json:"event_mappings,omitempty"`
+	Params        *Params                `protobuf:"bytes,5,opt,name=params,proto3" json:"params,omitempty"`
+	EventMappings *EventMappings         `protobuf:"bytes,6,opt,name=event_mappings,json=eventMappings,proto3" json:"event_mappings,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -945,44 +940,9 @@ func (x *Campaign) GetChannelConfig() *ChannelConfig {
 	return nil
 }
 
-func (x *Campaign) GetUtmSource() string {
+func (x *Campaign) GetParams() *Params {
 	if x != nil {
-		return x.UtmSource
-	}
-	return ""
-}
-
-func (x *Campaign) GetUtmMedium() string {
-	if x != nil {
-		return x.UtmMedium
-	}
-	return ""
-}
-
-func (x *Campaign) GetUtmCampaign() string {
-	if x != nil {
-		return x.UtmCampaign
-	}
-	return ""
-}
-
-func (x *Campaign) GetUtmContent() string {
-	if x != nil {
-		return x.UtmContent
-	}
-	return ""
-}
-
-func (x *Campaign) GetUtmTerm() string {
-	if x != nil {
-		return x.UtmTerm
-	}
-	return ""
-}
-
-func (x *Campaign) GetCustomParams() *CustomParams {
-	if x != nil {
-		return x.CustomParams
+		return x.Params
 	}
 	return nil
 }
@@ -990,6 +950,58 @@ func (x *Campaign) GetCustomParams() *CustomParams {
 func (x *Campaign) GetEventMappings() *EventMappings {
 	if x != nil {
 		return x.EventMappings
+	}
+	return nil
+}
+
+type Params struct {
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	PredefinedParameters []*Params_Parameter    `protobuf:"bytes,1,rep,name=predefined_parameters,json=predefinedParameters,proto3" json:"predefined_parameters,omitempty"`
+	CustomParameters     []*Params_Parameter    `protobuf:"bytes,2,rep,name=custom_parameters,json=customParameters,proto3" json:"custom_parameters,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *Params) Reset() {
+	*x = Params{}
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Params) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Params) ProtoMessage() {}
+
+func (x *Params) ProtoReflect() protoreflect.Message {
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Params.ProtoReflect.Descriptor instead.
+func (*Params) Descriptor() ([]byte, []int) {
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *Params) GetPredefinedParameters() []*Params_Parameter {
+	if x != nil {
+		return x.PredefinedParameters
+	}
+	return nil
+}
+
+func (x *Params) GetCustomParameters() []*Params_Parameter {
+	if x != nil {
+		return x.CustomParameters
 	}
 	return nil
 }
@@ -1009,7 +1021,7 @@ type ChannelConfig struct {
 
 func (x *ChannelConfig) Reset() {
 	*x = ChannelConfig{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[13]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1021,7 +1033,7 @@ func (x *ChannelConfig) String() string {
 func (*ChannelConfig) ProtoMessage() {}
 
 func (x *ChannelConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[13]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1034,7 +1046,7 @@ func (x *ChannelConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelConfig.ProtoReflect.Descriptor instead.
 func (*ChannelConfig) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{13}
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ChannelConfig) GetFacebookChannelConfig() *ChannelConfig_FacebookChannelConfig {
@@ -1095,7 +1107,7 @@ type CustomParams struct {
 
 func (x *CustomParams) Reset() {
 	*x = CustomParams{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[14]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1107,7 +1119,7 @@ func (x *CustomParams) String() string {
 func (*CustomParams) ProtoMessage() {}
 
 func (x *CustomParams) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[14]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1120,7 +1132,7 @@ func (x *CustomParams) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CustomParams.ProtoReflect.Descriptor instead.
 func (*CustomParams) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{14}
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *CustomParams) GetCustomParams() []*CustomParams_CustomParam {
@@ -1145,7 +1157,7 @@ type EventMappings struct {
 
 func (x *EventMappings) Reset() {
 	*x = EventMappings{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[15]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1157,7 +1169,7 @@ func (x *EventMappings) String() string {
 func (*EventMappings) ProtoMessage() {}
 
 func (x *EventMappings) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[15]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1170,7 +1182,7 @@ func (x *EventMappings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EventMappings.ProtoReflect.Descriptor instead.
 func (*EventMappings) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{15}
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *EventMappings) GetRegister() *EventMappings_EventMapping {
@@ -1233,7 +1245,7 @@ type CreateCampaignRequest struct {
 
 func (x *CreateCampaignRequest) Reset() {
 	*x = CreateCampaignRequest{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[16]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1245,7 +1257,7 @@ func (x *CreateCampaignRequest) String() string {
 func (*CreateCampaignRequest) ProtoMessage() {}
 
 func (x *CreateCampaignRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[16]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1258,7 +1270,7 @@ func (x *CreateCampaignRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateCampaignRequest.ProtoReflect.Descriptor instead.
 func (*CreateCampaignRequest) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{16}
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *CreateCampaignRequest) GetCampaign() *CreateCampaignRequest_Campaign {
@@ -1291,7 +1303,7 @@ type CreateCampaignResponse struct {
 
 func (x *CreateCampaignResponse) Reset() {
 	*x = CreateCampaignResponse{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[17]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1303,7 +1315,7 @@ func (x *CreateCampaignResponse) String() string {
 func (*CreateCampaignResponse) ProtoMessage() {}
 
 func (x *CreateCampaignResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[17]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1316,7 +1328,7 @@ func (x *CreateCampaignResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateCampaignResponse.ProtoReflect.Descriptor instead.
 func (*CreateCampaignResponse) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{17}
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *CreateCampaignResponse) GetCampaignId() int64 {
@@ -1338,7 +1350,7 @@ type UpdateCampaignRequest struct {
 
 func (x *UpdateCampaignRequest) Reset() {
 	*x = UpdateCampaignRequest{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[18]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1350,7 +1362,7 @@ func (x *UpdateCampaignRequest) String() string {
 func (*UpdateCampaignRequest) ProtoMessage() {}
 
 func (x *UpdateCampaignRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[18]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1363,7 +1375,7 @@ func (x *UpdateCampaignRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateCampaignRequest.ProtoReflect.Descriptor instead.
 func (*UpdateCampaignRequest) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{18}
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *UpdateCampaignRequest) GetCampaignId() int64 {
@@ -1402,7 +1414,7 @@ type UpdateCampaignResponse struct {
 
 func (x *UpdateCampaignResponse) Reset() {
 	*x = UpdateCampaignResponse{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[19]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1414,7 +1426,7 @@ func (x *UpdateCampaignResponse) String() string {
 func (*UpdateCampaignResponse) ProtoMessage() {}
 
 func (x *UpdateCampaignResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[19]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1427,7 +1439,7 @@ func (x *UpdateCampaignResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateCampaignResponse.ProtoReflect.Descriptor instead.
 func (*UpdateCampaignResponse) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{19}
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{20}
 }
 
 type ListCampaignsRequest struct {
@@ -1446,7 +1458,7 @@ type ListCampaignsRequest struct {
 
 func (x *ListCampaignsRequest) Reset() {
 	*x = ListCampaignsRequest{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[20]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1458,7 +1470,7 @@ func (x *ListCampaignsRequest) String() string {
 func (*ListCampaignsRequest) ProtoMessage() {}
 
 func (x *ListCampaignsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[20]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1471,7 +1483,7 @@ func (x *ListCampaignsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListCampaignsRequest.ProtoReflect.Descriptor instead.
 func (*ListCampaignsRequest) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{20}
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *ListCampaignsRequest) GetCampaignName() string {
@@ -1544,7 +1556,7 @@ type ListCampaignsResponse struct {
 
 func (x *ListCampaignsResponse) Reset() {
 	*x = ListCampaignsResponse{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[21]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1556,7 +1568,7 @@ func (x *ListCampaignsResponse) String() string {
 func (*ListCampaignsResponse) ProtoMessage() {}
 
 func (x *ListCampaignsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[21]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1569,7 +1581,7 @@ func (x *ListCampaignsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListCampaignsResponse.ProtoReflect.Descriptor instead.
 func (*ListCampaignsResponse) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{21}
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ListCampaignsResponse) GetCampaigns() []*ListCampaignsResponse_CampaignInfo {
@@ -1624,7 +1636,7 @@ type DeleteCampaignRequest struct {
 
 func (x *DeleteCampaignRequest) Reset() {
 	*x = DeleteCampaignRequest{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[22]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1636,7 +1648,7 @@ func (x *DeleteCampaignRequest) String() string {
 func (*DeleteCampaignRequest) ProtoMessage() {}
 
 func (x *DeleteCampaignRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[22]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1649,7 +1661,7 @@ func (x *DeleteCampaignRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteCampaignRequest.ProtoReflect.Descriptor instead.
 func (*DeleteCampaignRequest) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{22}
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *DeleteCampaignRequest) GetCampaignId() int64 {
@@ -1674,7 +1686,7 @@ type DeleteCampaignResponse struct {
 
 func (x *DeleteCampaignResponse) Reset() {
 	*x = DeleteCampaignResponse{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[23]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1686,7 +1698,7 @@ func (x *DeleteCampaignResponse) String() string {
 func (*DeleteCampaignResponse) ProtoMessage() {}
 
 func (x *DeleteCampaignResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[23]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1699,7 +1711,7 @@ func (x *DeleteCampaignResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteCampaignResponse.ProtoReflect.Descriptor instead.
 func (*DeleteCampaignResponse) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{23}
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{24}
 }
 
 type ListAffiliatesResponse_Affiliate struct {
@@ -1727,7 +1739,7 @@ type ListAffiliatesResponse_Affiliate struct {
 
 func (x *ListAffiliatesResponse_Affiliate) Reset() {
 	*x = ListAffiliatesResponse_Affiliate{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[24]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1739,7 +1751,7 @@ func (x *ListAffiliatesResponse_Affiliate) String() string {
 func (*ListAffiliatesResponse_Affiliate) ProtoMessage() {}
 
 func (x *ListAffiliatesResponse_Affiliate) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[24]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1874,6 +1886,58 @@ func (x *ListAffiliatesResponse_Affiliate) GetCommisionsReportingCurrency() stri
 	return ""
 }
 
+type Params_Parameter struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Value         string                 `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Params_Parameter) Reset() {
+	*x = Params_Parameter{}
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Params_Parameter) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Params_Parameter) ProtoMessage() {}
+
+func (x *Params_Parameter) ProtoReflect() protoreflect.Message {
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Params_Parameter.ProtoReflect.Descriptor instead.
+func (*Params_Parameter) Descriptor() ([]byte, []int) {
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{13, 0}
+}
+
+func (x *Params_Parameter) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *Params_Parameter) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
 type ChannelConfig_FacebookChannelConfig struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	PixelId       string                 `protobuf:"bytes,1,opt,name=pixel_id,json=pixelId,proto3" json:"pixel_id,omitempty"`
@@ -1884,7 +1948,7 @@ type ChannelConfig_FacebookChannelConfig struct {
 
 func (x *ChannelConfig_FacebookChannelConfig) Reset() {
 	*x = ChannelConfig_FacebookChannelConfig{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[25]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1896,7 +1960,7 @@ func (x *ChannelConfig_FacebookChannelConfig) String() string {
 func (*ChannelConfig_FacebookChannelConfig) ProtoMessage() {}
 
 func (x *ChannelConfig_FacebookChannelConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[25]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1909,7 +1973,7 @@ func (x *ChannelConfig_FacebookChannelConfig) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use ChannelConfig_FacebookChannelConfig.ProtoReflect.Descriptor instead.
 func (*ChannelConfig_FacebookChannelConfig) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{13, 0}
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{14, 0}
 }
 
 func (x *ChannelConfig_FacebookChannelConfig) GetPixelId() string {
@@ -1936,7 +2000,7 @@ type ChannelConfig_TiktokChannelConfig struct {
 
 func (x *ChannelConfig_TiktokChannelConfig) Reset() {
 	*x = ChannelConfig_TiktokChannelConfig{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[26]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1948,7 +2012,7 @@ func (x *ChannelConfig_TiktokChannelConfig) String() string {
 func (*ChannelConfig_TiktokChannelConfig) ProtoMessage() {}
 
 func (x *ChannelConfig_TiktokChannelConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[26]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1961,7 +2025,7 @@ func (x *ChannelConfig_TiktokChannelConfig) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use ChannelConfig_TiktokChannelConfig.ProtoReflect.Descriptor instead.
 func (*ChannelConfig_TiktokChannelConfig) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{13, 1}
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{14, 1}
 }
 
 func (x *ChannelConfig_TiktokChannelConfig) GetPixelId() string {
@@ -1989,7 +2053,7 @@ type ChannelConfig_KwaiChannelConfig struct {
 
 func (x *ChannelConfig_KwaiChannelConfig) Reset() {
 	*x = ChannelConfig_KwaiChannelConfig{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[27]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2001,7 +2065,7 @@ func (x *ChannelConfig_KwaiChannelConfig) String() string {
 func (*ChannelConfig_KwaiChannelConfig) ProtoMessage() {}
 
 func (x *ChannelConfig_KwaiChannelConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[27]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2014,7 +2078,7 @@ func (x *ChannelConfig_KwaiChannelConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChannelConfig_KwaiChannelConfig.ProtoReflect.Descriptor instead.
 func (*ChannelConfig_KwaiChannelConfig) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{13, 2}
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{14, 2}
 }
 
 func (x *ChannelConfig_KwaiChannelConfig) GetPixelId() string {
@@ -2049,7 +2113,7 @@ type ChannelConfig_AppsflyerChannelConfig struct {
 
 func (x *ChannelConfig_AppsflyerChannelConfig) Reset() {
 	*x = ChannelConfig_AppsflyerChannelConfig{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[28]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2061,7 +2125,7 @@ func (x *ChannelConfig_AppsflyerChannelConfig) String() string {
 func (*ChannelConfig_AppsflyerChannelConfig) ProtoMessage() {}
 
 func (x *ChannelConfig_AppsflyerChannelConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[28]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2074,7 +2138,7 @@ func (x *ChannelConfig_AppsflyerChannelConfig) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use ChannelConfig_AppsflyerChannelConfig.ProtoReflect.Descriptor instead.
 func (*ChannelConfig_AppsflyerChannelConfig) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{13, 3}
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{14, 3}
 }
 
 func (x *ChannelConfig_AppsflyerChannelConfig) GetAppPlatform() string {
@@ -2109,7 +2173,7 @@ type ChannelConfig_AdjustChannelConfig struct {
 
 func (x *ChannelConfig_AdjustChannelConfig) Reset() {
 	*x = ChannelConfig_AdjustChannelConfig{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[29]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2121,7 +2185,7 @@ func (x *ChannelConfig_AdjustChannelConfig) String() string {
 func (*ChannelConfig_AdjustChannelConfig) ProtoMessage() {}
 
 func (x *ChannelConfig_AdjustChannelConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[29]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2134,7 +2198,7 @@ func (x *ChannelConfig_AdjustChannelConfig) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use ChannelConfig_AdjustChannelConfig.ProtoReflect.Descriptor instead.
 func (*ChannelConfig_AdjustChannelConfig) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{13, 4}
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{14, 4}
 }
 
 func (x *ChannelConfig_AdjustChannelConfig) GetAppPlatform() string {
@@ -2167,7 +2231,7 @@ type ChannelConfig_AgencyChannelConfig struct {
 
 func (x *ChannelConfig_AgencyChannelConfig) Reset() {
 	*x = ChannelConfig_AgencyChannelConfig{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[30]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2179,7 +2243,7 @@ func (x *ChannelConfig_AgencyChannelConfig) String() string {
 func (*ChannelConfig_AgencyChannelConfig) ProtoMessage() {}
 
 func (x *ChannelConfig_AgencyChannelConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[30]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2192,7 +2256,7 @@ func (x *ChannelConfig_AgencyChannelConfig) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use ChannelConfig_AgencyChannelConfig.ProtoReflect.Descriptor instead.
 func (*ChannelConfig_AgencyChannelConfig) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{13, 5}
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{14, 5}
 }
 
 func (x *ChannelConfig_AgencyChannelConfig) GetCampaignId() string {
@@ -2212,7 +2276,7 @@ type ChannelConfig_GoogleAdsChannelConfig struct {
 
 func (x *ChannelConfig_GoogleAdsChannelConfig) Reset() {
 	*x = ChannelConfig_GoogleAdsChannelConfig{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[31]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2224,7 +2288,7 @@ func (x *ChannelConfig_GoogleAdsChannelConfig) String() string {
 func (*ChannelConfig_GoogleAdsChannelConfig) ProtoMessage() {}
 
 func (x *ChannelConfig_GoogleAdsChannelConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[31]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2237,7 +2301,7 @@ func (x *ChannelConfig_GoogleAdsChannelConfig) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use ChannelConfig_GoogleAdsChannelConfig.ProtoReflect.Descriptor instead.
 func (*ChannelConfig_GoogleAdsChannelConfig) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{13, 6}
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{14, 6}
 }
 
 func (x *ChannelConfig_GoogleAdsChannelConfig) GetCustomerId() string {
@@ -2264,7 +2328,7 @@ type CustomParams_CustomParam struct {
 
 func (x *CustomParams_CustomParam) Reset() {
 	*x = CustomParams_CustomParam{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[32]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2276,7 +2340,7 @@ func (x *CustomParams_CustomParam) String() string {
 func (*CustomParams_CustomParam) ProtoMessage() {}
 
 func (x *CustomParams_CustomParam) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[32]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2289,7 +2353,7 @@ func (x *CustomParams_CustomParam) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CustomParams_CustomParam.ProtoReflect.Descriptor instead.
 func (*CustomParams_CustomParam) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{14, 0}
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{15, 0}
 }
 
 func (x *CustomParams_CustomParam) GetName() string {
@@ -2316,7 +2380,7 @@ type EventMappings_EventMapping struct {
 
 func (x *EventMappings_EventMapping) Reset() {
 	*x = EventMappings_EventMapping{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[33]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2328,7 +2392,7 @@ func (x *EventMappings_EventMapping) String() string {
 func (*EventMappings_EventMapping) ProtoMessage() {}
 
 func (x *EventMappings_EventMapping) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[33]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2341,7 +2405,7 @@ func (x *EventMappings_EventMapping) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EventMappings_EventMapping.ProtoReflect.Descriptor instead.
 func (*EventMappings_EventMapping) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{15, 0}
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{16, 0}
 }
 
 func (x *EventMappings_EventMapping) GetChannelEvent() string {
@@ -2370,7 +2434,7 @@ type CreateCampaignRequest_Campaign struct {
 
 func (x *CreateCampaignRequest_Campaign) Reset() {
 	*x = CreateCampaignRequest_Campaign{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[34]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2382,7 +2446,7 @@ func (x *CreateCampaignRequest_Campaign) String() string {
 func (*CreateCampaignRequest_Campaign) ProtoMessage() {}
 
 func (x *CreateCampaignRequest_Campaign) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[34]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2395,7 +2459,7 @@ func (x *CreateCampaignRequest_Campaign) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateCampaignRequest_Campaign.ProtoReflect.Descriptor instead.
 func (*CreateCampaignRequest_Campaign) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{16, 0}
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{17, 0}
 }
 
 func (x *CreateCampaignRequest_Campaign) GetDomain() string {
@@ -2446,7 +2510,7 @@ type ListCampaignsResponse_CampaignInfo struct {
 
 func (x *ListCampaignsResponse_CampaignInfo) Reset() {
 	*x = ListCampaignsResponse_CampaignInfo{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[35]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2458,7 +2522,7 @@ func (x *ListCampaignsResponse_CampaignInfo) String() string {
 func (*ListCampaignsResponse_CampaignInfo) ProtoMessage() {}
 
 func (x *ListCampaignsResponse_CampaignInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[35]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2471,7 +2535,7 @@ func (x *ListCampaignsResponse_CampaignInfo) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use ListCampaignsResponse_CampaignInfo.ProtoReflect.Descriptor instead.
 func (*ListCampaignsResponse_CampaignInfo) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{21, 0}
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{22, 0}
 }
 
 func (x *ListCampaignsResponse_CampaignInfo) GetCampaignId() int64 {
@@ -2653,23 +2717,20 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\faffiliate_id\x18\x01 \x01(\x03R\vaffiliateId\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12*\n" +
 	"\x11initiator_user_id\x18\x03 \x01(\x03R\x0finitiatorUserId\"\x19\n" +
-	"\x17DeleteAffiliateResponse\"\xf4\x03\n" +
+	"\x17DeleteAffiliateResponse\"\xc4\x02\n" +
 	"\bCampaign\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12#\n" +
 	"\rcampaign_name\x18\x02 \x01(\tR\fcampaignName\x12!\n" +
 	"\fchannel_type\x18\x03 \x01(\tR\vchannelType\x12N\n" +
-	"\x0echannel_config\x18\x04 \x01(\v2'.api.affiliate.service.v1.ChannelConfigR\rchannelConfig\x12\x1d\n" +
-	"\n" +
-	"utm_source\x18\x05 \x01(\tR\tutmSource\x12\x1d\n" +
-	"\n" +
-	"utm_medium\x18\x06 \x01(\tR\tutmMedium\x12!\n" +
-	"\futm_campaign\x18\a \x01(\tR\vutmCampaign\x12\x1f\n" +
-	"\vutm_content\x18\b \x01(\tR\n" +
-	"utmContent\x12\x19\n" +
-	"\butm_term\x18\t \x01(\tR\autmTerm\x12K\n" +
-	"\rcustom_params\x18\n" +
-	" \x01(\v2&.api.affiliate.service.v1.CustomParamsR\fcustomParams\x12N\n" +
-	"\x0eevent_mappings\x18\v \x01(\v2'.api.affiliate.service.v1.EventMappingsR\reventMappings\"\xbe\r\n" +
+	"\x0echannel_config\x18\x04 \x01(\v2'.api.affiliate.service.v1.ChannelConfigR\rchannelConfig\x128\n" +
+	"\x06params\x18\x05 \x01(\v2 .api.affiliate.service.v1.ParamsR\x06params\x12N\n" +
+	"\x0eevent_mappings\x18\x06 \x01(\v2'.api.affiliate.service.v1.EventMappingsR\reventMappings\"\xf9\x01\n" +
+	"\x06Params\x12_\n" +
+	"\x15predefined_parameters\x18\x01 \x03(\v2*.api.affiliate.service.v1.Params.ParameterR\x14predefinedParameters\x12W\n" +
+	"\x11custom_parameters\x18\x02 \x03(\v2*.api.affiliate.service.v1.Params.ParameterR\x10customParameters\x1a5\n" +
+	"\tParameter\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value\"\xbe\r\n" +
 	"\rChannelConfig\x12z\n" +
 	"\x17facebook_channel_config\x18\x01 \x01(\v2=.api.affiliate.service.v1.ChannelConfig.FacebookChannelConfigH\x00R\x15facebookChannelConfig\x88\x01\x01\x12t\n" +
 	"\x15tiktok_channel_config\x18\x02 \x01(\v2;.api.affiliate.service.v1.ChannelConfig.TiktokChannelConfigH\x01R\x13tiktokChannelConfig\x88\x01\x01\x12n\n" +
@@ -2830,7 +2891,7 @@ func file_affiliate_service_v1_affiliate_proto_rawDescGZIP() []byte {
 	return file_affiliate_service_v1_affiliate_proto_rawDescData
 }
 
-var file_affiliate_service_v1_affiliate_proto_msgTypes = make([]protoimpl.MessageInfo, 36)
+var file_affiliate_service_v1_affiliate_proto_msgTypes = make([]protoimpl.MessageInfo, 38)
 var file_affiliate_service_v1_affiliate_proto_goTypes = []any{
 	(*ContactType)(nil),                          // 0: api.affiliate.service.v1.ContactType
 	(*AffiliateInfo)(nil),                        // 1: api.affiliate.service.v1.AffiliateInfo
@@ -2845,118 +2906,122 @@ var file_affiliate_service_v1_affiliate_proto_goTypes = []any{
 	(*DeleteAffiliateRequest)(nil),               // 10: api.affiliate.service.v1.DeleteAffiliateRequest
 	(*DeleteAffiliateResponse)(nil),              // 11: api.affiliate.service.v1.DeleteAffiliateResponse
 	(*Campaign)(nil),                             // 12: api.affiliate.service.v1.Campaign
-	(*ChannelConfig)(nil),                        // 13: api.affiliate.service.v1.ChannelConfig
-	(*CustomParams)(nil),                         // 14: api.affiliate.service.v1.CustomParams
-	(*EventMappings)(nil),                        // 15: api.affiliate.service.v1.EventMappings
-	(*CreateCampaignRequest)(nil),                // 16: api.affiliate.service.v1.CreateCampaignRequest
-	(*CreateCampaignResponse)(nil),               // 17: api.affiliate.service.v1.CreateCampaignResponse
-	(*UpdateCampaignRequest)(nil),                // 18: api.affiliate.service.v1.UpdateCampaignRequest
-	(*UpdateCampaignResponse)(nil),               // 19: api.affiliate.service.v1.UpdateCampaignResponse
-	(*ListCampaignsRequest)(nil),                 // 20: api.affiliate.service.v1.ListCampaignsRequest
-	(*ListCampaignsResponse)(nil),                // 21: api.affiliate.service.v1.ListCampaignsResponse
-	(*DeleteCampaignRequest)(nil),                // 22: api.affiliate.service.v1.DeleteCampaignRequest
-	(*DeleteCampaignResponse)(nil),               // 23: api.affiliate.service.v1.DeleteCampaignResponse
-	(*ListAffiliatesResponse_Affiliate)(nil),     // 24: api.affiliate.service.v1.ListAffiliatesResponse.Affiliate
-	(*ChannelConfig_FacebookChannelConfig)(nil),  // 25: api.affiliate.service.v1.ChannelConfig.FacebookChannelConfig
-	(*ChannelConfig_TiktokChannelConfig)(nil),    // 26: api.affiliate.service.v1.ChannelConfig.TiktokChannelConfig
-	(*ChannelConfig_KwaiChannelConfig)(nil),      // 27: api.affiliate.service.v1.ChannelConfig.KwaiChannelConfig
-	(*ChannelConfig_AppsflyerChannelConfig)(nil), // 28: api.affiliate.service.v1.ChannelConfig.AppsflyerChannelConfig
-	(*ChannelConfig_AdjustChannelConfig)(nil),    // 29: api.affiliate.service.v1.ChannelConfig.AdjustChannelConfig
-	(*ChannelConfig_AgencyChannelConfig)(nil),    // 30: api.affiliate.service.v1.ChannelConfig.AgencyChannelConfig
-	(*ChannelConfig_GoogleAdsChannelConfig)(nil), // 31: api.affiliate.service.v1.ChannelConfig.GoogleAdsChannelConfig
-	(*CustomParams_CustomParam)(nil),             // 32: api.affiliate.service.v1.CustomParams.CustomParam
-	(*EventMappings_EventMapping)(nil),           // 33: api.affiliate.service.v1.EventMappings.EventMapping
-	(*CreateCampaignRequest_Campaign)(nil),       // 34: api.affiliate.service.v1.CreateCampaignRequest.Campaign
-	(*ListCampaignsResponse_CampaignInfo)(nil),   // 35: api.affiliate.service.v1.ListCampaignsResponse.CampaignInfo
-	(*common.OperatorContext)(nil),               // 36: api.common.OperatorContext
-	(*common.OperatorContextFilters)(nil),        // 37: api.common.OperatorContextFilters
-	(*CreateCommissionPlanRequest)(nil),          // 38: api.affiliate.service.v1.CreateCommissionPlanRequest
-	(*UpdateCommissionPlanRequest)(nil),          // 39: api.affiliate.service.v1.UpdateCommissionPlanRequest
-	(*GetCommissionPlanRequest)(nil),             // 40: api.affiliate.service.v1.GetCommissionPlanRequest
-	(*ListCommissionPlansRequest)(nil),           // 41: api.affiliate.service.v1.ListCommissionPlansRequest
-	(*DeleteCommissionPlanRequest)(nil),          // 42: api.affiliate.service.v1.DeleteCommissionPlanRequest
-	(*ListAllCommissionPlansRequest)(nil),        // 43: api.affiliate.service.v1.ListAllCommissionPlansRequest
-	(*CreateCommissionPlanResponse)(nil),         // 44: api.affiliate.service.v1.CreateCommissionPlanResponse
-	(*UpdateCommissionPlanResponse)(nil),         // 45: api.affiliate.service.v1.UpdateCommissionPlanResponse
-	(*GetCommissionPlanResponse)(nil),            // 46: api.affiliate.service.v1.GetCommissionPlanResponse
-	(*ListCommissionPlansResponse)(nil),          // 47: api.affiliate.service.v1.ListCommissionPlansResponse
-	(*DeleteCommissionPlanResponse)(nil),         // 48: api.affiliate.service.v1.DeleteCommissionPlanResponse
-	(*ListAllCommissionPlansResponse)(nil),       // 49: api.affiliate.service.v1.ListAllCommissionPlansResponse
+	(*Params)(nil),                               // 13: api.affiliate.service.v1.Params
+	(*ChannelConfig)(nil),                        // 14: api.affiliate.service.v1.ChannelConfig
+	(*CustomParams)(nil),                         // 15: api.affiliate.service.v1.CustomParams
+	(*EventMappings)(nil),                        // 16: api.affiliate.service.v1.EventMappings
+	(*CreateCampaignRequest)(nil),                // 17: api.affiliate.service.v1.CreateCampaignRequest
+	(*CreateCampaignResponse)(nil),               // 18: api.affiliate.service.v1.CreateCampaignResponse
+	(*UpdateCampaignRequest)(nil),                // 19: api.affiliate.service.v1.UpdateCampaignRequest
+	(*UpdateCampaignResponse)(nil),               // 20: api.affiliate.service.v1.UpdateCampaignResponse
+	(*ListCampaignsRequest)(nil),                 // 21: api.affiliate.service.v1.ListCampaignsRequest
+	(*ListCampaignsResponse)(nil),                // 22: api.affiliate.service.v1.ListCampaignsResponse
+	(*DeleteCampaignRequest)(nil),                // 23: api.affiliate.service.v1.DeleteCampaignRequest
+	(*DeleteCampaignResponse)(nil),               // 24: api.affiliate.service.v1.DeleteCampaignResponse
+	(*ListAffiliatesResponse_Affiliate)(nil),     // 25: api.affiliate.service.v1.ListAffiliatesResponse.Affiliate
+	(*Params_Parameter)(nil),                     // 26: api.affiliate.service.v1.Params.Parameter
+	(*ChannelConfig_FacebookChannelConfig)(nil),  // 27: api.affiliate.service.v1.ChannelConfig.FacebookChannelConfig
+	(*ChannelConfig_TiktokChannelConfig)(nil),    // 28: api.affiliate.service.v1.ChannelConfig.TiktokChannelConfig
+	(*ChannelConfig_KwaiChannelConfig)(nil),      // 29: api.affiliate.service.v1.ChannelConfig.KwaiChannelConfig
+	(*ChannelConfig_AppsflyerChannelConfig)(nil), // 30: api.affiliate.service.v1.ChannelConfig.AppsflyerChannelConfig
+	(*ChannelConfig_AdjustChannelConfig)(nil),    // 31: api.affiliate.service.v1.ChannelConfig.AdjustChannelConfig
+	(*ChannelConfig_AgencyChannelConfig)(nil),    // 32: api.affiliate.service.v1.ChannelConfig.AgencyChannelConfig
+	(*ChannelConfig_GoogleAdsChannelConfig)(nil), // 33: api.affiliate.service.v1.ChannelConfig.GoogleAdsChannelConfig
+	(*CustomParams_CustomParam)(nil),             // 34: api.affiliate.service.v1.CustomParams.CustomParam
+	(*EventMappings_EventMapping)(nil),           // 35: api.affiliate.service.v1.EventMappings.EventMapping
+	(*CreateCampaignRequest_Campaign)(nil),       // 36: api.affiliate.service.v1.CreateCampaignRequest.Campaign
+	(*ListCampaignsResponse_CampaignInfo)(nil),   // 37: api.affiliate.service.v1.ListCampaignsResponse.CampaignInfo
+	(*common.OperatorContext)(nil),               // 38: api.common.OperatorContext
+	(*common.OperatorContextFilters)(nil),        // 39: api.common.OperatorContextFilters
+	(*CreateCommissionPlanRequest)(nil),          // 40: api.affiliate.service.v1.CreateCommissionPlanRequest
+	(*UpdateCommissionPlanRequest)(nil),          // 41: api.affiliate.service.v1.UpdateCommissionPlanRequest
+	(*GetCommissionPlanRequest)(nil),             // 42: api.affiliate.service.v1.GetCommissionPlanRequest
+	(*ListCommissionPlansRequest)(nil),           // 43: api.affiliate.service.v1.ListCommissionPlansRequest
+	(*DeleteCommissionPlanRequest)(nil),          // 44: api.affiliate.service.v1.DeleteCommissionPlanRequest
+	(*ListAllCommissionPlansRequest)(nil),        // 45: api.affiliate.service.v1.ListAllCommissionPlansRequest
+	(*CreateCommissionPlanResponse)(nil),         // 46: api.affiliate.service.v1.CreateCommissionPlanResponse
+	(*UpdateCommissionPlanResponse)(nil),         // 47: api.affiliate.service.v1.UpdateCommissionPlanResponse
+	(*GetCommissionPlanResponse)(nil),            // 48: api.affiliate.service.v1.GetCommissionPlanResponse
+	(*ListCommissionPlansResponse)(nil),          // 49: api.affiliate.service.v1.ListCommissionPlansResponse
+	(*DeleteCommissionPlanResponse)(nil),         // 50: api.affiliate.service.v1.DeleteCommissionPlanResponse
+	(*ListAllCommissionPlansResponse)(nil),       // 51: api.affiliate.service.v1.ListAllCommissionPlansResponse
 }
 var file_affiliate_service_v1_affiliate_proto_depIdxs = []int32{
 	0,  // 0: api.affiliate.service.v1.AffiliateInfo.contact_types:type_name -> api.affiliate.service.v1.ContactType
 	1,  // 1: api.affiliate.service.v1.CreateAffiliateRequest.affiliate:type_name -> api.affiliate.service.v1.AffiliateInfo
-	36, // 2: api.affiliate.service.v1.CreateAffiliateRequest.target_operator_context:type_name -> api.common.OperatorContext
-	36, // 3: api.affiliate.service.v1.CreateAffiliateRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	38, // 2: api.affiliate.service.v1.CreateAffiliateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	38, // 3: api.affiliate.service.v1.CreateAffiliateRequest.initiator_operator_context:type_name -> api.common.OperatorContext
 	1,  // 4: api.affiliate.service.v1.UpdateAffiliateRequest.affiliate:type_name -> api.affiliate.service.v1.AffiliateInfo
-	36, // 5: api.affiliate.service.v1.UpdateAffiliateRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	36, // 6: api.affiliate.service.v1.GetAffiliateRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	38, // 5: api.affiliate.service.v1.UpdateAffiliateRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	38, // 6: api.affiliate.service.v1.GetAffiliateRequest.initiator_operator_context:type_name -> api.common.OperatorContext
 	1,  // 7: api.affiliate.service.v1.GetAffiliateResponse.affiliate:type_name -> api.affiliate.service.v1.AffiliateInfo
-	36, // 8: api.affiliate.service.v1.ListAffiliatesRequest.target_operator_context:type_name -> api.common.OperatorContext
-	36, // 9: api.affiliate.service.v1.ListAffiliatesRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	24, // 10: api.affiliate.service.v1.ListAffiliatesResponse.affiliates:type_name -> api.affiliate.service.v1.ListAffiliatesResponse.Affiliate
-	36, // 11: api.affiliate.service.v1.DeleteAffiliateRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	13, // 12: api.affiliate.service.v1.Campaign.channel_config:type_name -> api.affiliate.service.v1.ChannelConfig
-	14, // 13: api.affiliate.service.v1.Campaign.custom_params:type_name -> api.affiliate.service.v1.CustomParams
-	15, // 14: api.affiliate.service.v1.Campaign.event_mappings:type_name -> api.affiliate.service.v1.EventMappings
-	25, // 15: api.affiliate.service.v1.ChannelConfig.facebook_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.FacebookChannelConfig
-	26, // 16: api.affiliate.service.v1.ChannelConfig.tiktok_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.TiktokChannelConfig
-	27, // 17: api.affiliate.service.v1.ChannelConfig.kwai_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.KwaiChannelConfig
-	28, // 18: api.affiliate.service.v1.ChannelConfig.appsflyer_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.AppsflyerChannelConfig
-	29, // 19: api.affiliate.service.v1.ChannelConfig.adjust_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.AdjustChannelConfig
-	30, // 20: api.affiliate.service.v1.ChannelConfig.agency_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.AgencyChannelConfig
-	31, // 21: api.affiliate.service.v1.ChannelConfig.google_ads_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.GoogleAdsChannelConfig
-	32, // 22: api.affiliate.service.v1.CustomParams.custom_params:type_name -> api.affiliate.service.v1.CustomParams.CustomParam
-	33, // 23: api.affiliate.service.v1.EventMappings.register:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
-	33, // 24: api.affiliate.service.v1.EventMappings.first_deposit:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
-	33, // 25: api.affiliate.service.v1.EventMappings.second_deposit:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
-	33, // 26: api.affiliate.service.v1.EventMappings.third_deposit:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
-	33, // 27: api.affiliate.service.v1.EventMappings.withdrawal:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
-	33, // 28: api.affiliate.service.v1.EventMappings.game_start:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
-	33, // 29: api.affiliate.service.v1.EventMappings.game_bet:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
-	34, // 30: api.affiliate.service.v1.CreateCampaignRequest.campaign:type_name -> api.affiliate.service.v1.CreateCampaignRequest.Campaign
-	36, // 31: api.affiliate.service.v1.CreateCampaignRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	12, // 32: api.affiliate.service.v1.UpdateCampaignRequest.campaign:type_name -> api.affiliate.service.v1.Campaign
-	36, // 33: api.affiliate.service.v1.ListCampaignsRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	37, // 34: api.affiliate.service.v1.ListCampaignsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	35, // 35: api.affiliate.service.v1.ListCampaignsResponse.campaigns:type_name -> api.affiliate.service.v1.ListCampaignsResponse.CampaignInfo
-	13, // 36: api.affiliate.service.v1.CreateCampaignRequest.Campaign.channel_config:type_name -> api.affiliate.service.v1.ChannelConfig
-	12, // 37: api.affiliate.service.v1.ListCampaignsResponse.CampaignInfo.campaign:type_name -> api.affiliate.service.v1.Campaign
-	38, // 38: api.affiliate.service.v1.Affiliate.CreateCommissionPlan:input_type -> api.affiliate.service.v1.CreateCommissionPlanRequest
-	39, // 39: api.affiliate.service.v1.Affiliate.UpdateCommissionPlan:input_type -> api.affiliate.service.v1.UpdateCommissionPlanRequest
-	40, // 40: api.affiliate.service.v1.Affiliate.GetCommissionPlan:input_type -> api.affiliate.service.v1.GetCommissionPlanRequest
-	41, // 41: api.affiliate.service.v1.Affiliate.ListCommissionPlans:input_type -> api.affiliate.service.v1.ListCommissionPlansRequest
-	42, // 42: api.affiliate.service.v1.Affiliate.DeleteCommissionPlan:input_type -> api.affiliate.service.v1.DeleteCommissionPlanRequest
-	43, // 43: api.affiliate.service.v1.Affiliate.ListAllCommissionPlans:input_type -> api.affiliate.service.v1.ListAllCommissionPlansRequest
-	2,  // 44: api.affiliate.service.v1.Affiliate.CreateAffiliate:input_type -> api.affiliate.service.v1.CreateAffiliateRequest
-	4,  // 45: api.affiliate.service.v1.Affiliate.UpdateAffiliate:input_type -> api.affiliate.service.v1.UpdateAffiliateRequest
-	6,  // 46: api.affiliate.service.v1.Affiliate.GetAffiliate:input_type -> api.affiliate.service.v1.GetAffiliateRequest
-	8,  // 47: api.affiliate.service.v1.Affiliate.ListAffiliates:input_type -> api.affiliate.service.v1.ListAffiliatesRequest
-	10, // 48: api.affiliate.service.v1.Affiliate.DeleteAffiliate:input_type -> api.affiliate.service.v1.DeleteAffiliateRequest
-	16, // 49: api.affiliate.service.v1.Affiliate.CreateCampaign:input_type -> api.affiliate.service.v1.CreateCampaignRequest
-	18, // 50: api.affiliate.service.v1.Affiliate.UpdateCampaign:input_type -> api.affiliate.service.v1.UpdateCampaignRequest
-	20, // 51: api.affiliate.service.v1.Affiliate.ListCampaigns:input_type -> api.affiliate.service.v1.ListCampaignsRequest
-	22, // 52: api.affiliate.service.v1.Affiliate.DeleteCampaign:input_type -> api.affiliate.service.v1.DeleteCampaignRequest
-	44, // 53: api.affiliate.service.v1.Affiliate.CreateCommissionPlan:output_type -> api.affiliate.service.v1.CreateCommissionPlanResponse
-	45, // 54: api.affiliate.service.v1.Affiliate.UpdateCommissionPlan:output_type -> api.affiliate.service.v1.UpdateCommissionPlanResponse
-	46, // 55: api.affiliate.service.v1.Affiliate.GetCommissionPlan:output_type -> api.affiliate.service.v1.GetCommissionPlanResponse
-	47, // 56: api.affiliate.service.v1.Affiliate.ListCommissionPlans:output_type -> api.affiliate.service.v1.ListCommissionPlansResponse
-	48, // 57: api.affiliate.service.v1.Affiliate.DeleteCommissionPlan:output_type -> api.affiliate.service.v1.DeleteCommissionPlanResponse
-	49, // 58: api.affiliate.service.v1.Affiliate.ListAllCommissionPlans:output_type -> api.affiliate.service.v1.ListAllCommissionPlansResponse
-	3,  // 59: api.affiliate.service.v1.Affiliate.CreateAffiliate:output_type -> api.affiliate.service.v1.CreateAffiliateResponse
-	5,  // 60: api.affiliate.service.v1.Affiliate.UpdateAffiliate:output_type -> api.affiliate.service.v1.UpdateAffiliateResponse
-	7,  // 61: api.affiliate.service.v1.Affiliate.GetAffiliate:output_type -> api.affiliate.service.v1.GetAffiliateResponse
-	9,  // 62: api.affiliate.service.v1.Affiliate.ListAffiliates:output_type -> api.affiliate.service.v1.ListAffiliatesResponse
-	11, // 63: api.affiliate.service.v1.Affiliate.DeleteAffiliate:output_type -> api.affiliate.service.v1.DeleteAffiliateResponse
-	17, // 64: api.affiliate.service.v1.Affiliate.CreateCampaign:output_type -> api.affiliate.service.v1.CreateCampaignResponse
-	19, // 65: api.affiliate.service.v1.Affiliate.UpdateCampaign:output_type -> api.affiliate.service.v1.UpdateCampaignResponse
-	21, // 66: api.affiliate.service.v1.Affiliate.ListCampaigns:output_type -> api.affiliate.service.v1.ListCampaignsResponse
-	23, // 67: api.affiliate.service.v1.Affiliate.DeleteCampaign:output_type -> api.affiliate.service.v1.DeleteCampaignResponse
-	53, // [53:68] is the sub-list for method output_type
-	38, // [38:53] is the sub-list for method input_type
-	38, // [38:38] is the sub-list for extension type_name
-	38, // [38:38] is the sub-list for extension extendee
-	0,  // [0:38] is the sub-list for field type_name
+	38, // 8: api.affiliate.service.v1.ListAffiliatesRequest.target_operator_context:type_name -> api.common.OperatorContext
+	38, // 9: api.affiliate.service.v1.ListAffiliatesRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	25, // 10: api.affiliate.service.v1.ListAffiliatesResponse.affiliates:type_name -> api.affiliate.service.v1.ListAffiliatesResponse.Affiliate
+	38, // 11: api.affiliate.service.v1.DeleteAffiliateRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	14, // 12: api.affiliate.service.v1.Campaign.channel_config:type_name -> api.affiliate.service.v1.ChannelConfig
+	13, // 13: api.affiliate.service.v1.Campaign.params:type_name -> api.affiliate.service.v1.Params
+	16, // 14: api.affiliate.service.v1.Campaign.event_mappings:type_name -> api.affiliate.service.v1.EventMappings
+	26, // 15: api.affiliate.service.v1.Params.predefined_parameters:type_name -> api.affiliate.service.v1.Params.Parameter
+	26, // 16: api.affiliate.service.v1.Params.custom_parameters:type_name -> api.affiliate.service.v1.Params.Parameter
+	27, // 17: api.affiliate.service.v1.ChannelConfig.facebook_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.FacebookChannelConfig
+	28, // 18: api.affiliate.service.v1.ChannelConfig.tiktok_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.TiktokChannelConfig
+	29, // 19: api.affiliate.service.v1.ChannelConfig.kwai_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.KwaiChannelConfig
+	30, // 20: api.affiliate.service.v1.ChannelConfig.appsflyer_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.AppsflyerChannelConfig
+	31, // 21: api.affiliate.service.v1.ChannelConfig.adjust_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.AdjustChannelConfig
+	32, // 22: api.affiliate.service.v1.ChannelConfig.agency_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.AgencyChannelConfig
+	33, // 23: api.affiliate.service.v1.ChannelConfig.google_ads_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.GoogleAdsChannelConfig
+	34, // 24: api.affiliate.service.v1.CustomParams.custom_params:type_name -> api.affiliate.service.v1.CustomParams.CustomParam
+	35, // 25: api.affiliate.service.v1.EventMappings.register:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
+	35, // 26: api.affiliate.service.v1.EventMappings.first_deposit:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
+	35, // 27: api.affiliate.service.v1.EventMappings.second_deposit:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
+	35, // 28: api.affiliate.service.v1.EventMappings.third_deposit:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
+	35, // 29: api.affiliate.service.v1.EventMappings.withdrawal:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
+	35, // 30: api.affiliate.service.v1.EventMappings.game_start:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
+	35, // 31: api.affiliate.service.v1.EventMappings.game_bet:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
+	36, // 32: api.affiliate.service.v1.CreateCampaignRequest.campaign:type_name -> api.affiliate.service.v1.CreateCampaignRequest.Campaign
+	38, // 33: api.affiliate.service.v1.CreateCampaignRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	12, // 34: api.affiliate.service.v1.UpdateCampaignRequest.campaign:type_name -> api.affiliate.service.v1.Campaign
+	38, // 35: api.affiliate.service.v1.ListCampaignsRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	39, // 36: api.affiliate.service.v1.ListCampaignsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	37, // 37: api.affiliate.service.v1.ListCampaignsResponse.campaigns:type_name -> api.affiliate.service.v1.ListCampaignsResponse.CampaignInfo
+	14, // 38: api.affiliate.service.v1.CreateCampaignRequest.Campaign.channel_config:type_name -> api.affiliate.service.v1.ChannelConfig
+	12, // 39: api.affiliate.service.v1.ListCampaignsResponse.CampaignInfo.campaign:type_name -> api.affiliate.service.v1.Campaign
+	40, // 40: api.affiliate.service.v1.Affiliate.CreateCommissionPlan:input_type -> api.affiliate.service.v1.CreateCommissionPlanRequest
+	41, // 41: api.affiliate.service.v1.Affiliate.UpdateCommissionPlan:input_type -> api.affiliate.service.v1.UpdateCommissionPlanRequest
+	42, // 42: api.affiliate.service.v1.Affiliate.GetCommissionPlan:input_type -> api.affiliate.service.v1.GetCommissionPlanRequest
+	43, // 43: api.affiliate.service.v1.Affiliate.ListCommissionPlans:input_type -> api.affiliate.service.v1.ListCommissionPlansRequest
+	44, // 44: api.affiliate.service.v1.Affiliate.DeleteCommissionPlan:input_type -> api.affiliate.service.v1.DeleteCommissionPlanRequest
+	45, // 45: api.affiliate.service.v1.Affiliate.ListAllCommissionPlans:input_type -> api.affiliate.service.v1.ListAllCommissionPlansRequest
+	2,  // 46: api.affiliate.service.v1.Affiliate.CreateAffiliate:input_type -> api.affiliate.service.v1.CreateAffiliateRequest
+	4,  // 47: api.affiliate.service.v1.Affiliate.UpdateAffiliate:input_type -> api.affiliate.service.v1.UpdateAffiliateRequest
+	6,  // 48: api.affiliate.service.v1.Affiliate.GetAffiliate:input_type -> api.affiliate.service.v1.GetAffiliateRequest
+	8,  // 49: api.affiliate.service.v1.Affiliate.ListAffiliates:input_type -> api.affiliate.service.v1.ListAffiliatesRequest
+	10, // 50: api.affiliate.service.v1.Affiliate.DeleteAffiliate:input_type -> api.affiliate.service.v1.DeleteAffiliateRequest
+	17, // 51: api.affiliate.service.v1.Affiliate.CreateCampaign:input_type -> api.affiliate.service.v1.CreateCampaignRequest
+	19, // 52: api.affiliate.service.v1.Affiliate.UpdateCampaign:input_type -> api.affiliate.service.v1.UpdateCampaignRequest
+	21, // 53: api.affiliate.service.v1.Affiliate.ListCampaigns:input_type -> api.affiliate.service.v1.ListCampaignsRequest
+	23, // 54: api.affiliate.service.v1.Affiliate.DeleteCampaign:input_type -> api.affiliate.service.v1.DeleteCampaignRequest
+	46, // 55: api.affiliate.service.v1.Affiliate.CreateCommissionPlan:output_type -> api.affiliate.service.v1.CreateCommissionPlanResponse
+	47, // 56: api.affiliate.service.v1.Affiliate.UpdateCommissionPlan:output_type -> api.affiliate.service.v1.UpdateCommissionPlanResponse
+	48, // 57: api.affiliate.service.v1.Affiliate.GetCommissionPlan:output_type -> api.affiliate.service.v1.GetCommissionPlanResponse
+	49, // 58: api.affiliate.service.v1.Affiliate.ListCommissionPlans:output_type -> api.affiliate.service.v1.ListCommissionPlansResponse
+	50, // 59: api.affiliate.service.v1.Affiliate.DeleteCommissionPlan:output_type -> api.affiliate.service.v1.DeleteCommissionPlanResponse
+	51, // 60: api.affiliate.service.v1.Affiliate.ListAllCommissionPlans:output_type -> api.affiliate.service.v1.ListAllCommissionPlansResponse
+	3,  // 61: api.affiliate.service.v1.Affiliate.CreateAffiliate:output_type -> api.affiliate.service.v1.CreateAffiliateResponse
+	5,  // 62: api.affiliate.service.v1.Affiliate.UpdateAffiliate:output_type -> api.affiliate.service.v1.UpdateAffiliateResponse
+	7,  // 63: api.affiliate.service.v1.Affiliate.GetAffiliate:output_type -> api.affiliate.service.v1.GetAffiliateResponse
+	9,  // 64: api.affiliate.service.v1.Affiliate.ListAffiliates:output_type -> api.affiliate.service.v1.ListAffiliatesResponse
+	11, // 65: api.affiliate.service.v1.Affiliate.DeleteAffiliate:output_type -> api.affiliate.service.v1.DeleteAffiliateResponse
+	18, // 66: api.affiliate.service.v1.Affiliate.CreateCampaign:output_type -> api.affiliate.service.v1.CreateCampaignResponse
+	20, // 67: api.affiliate.service.v1.Affiliate.UpdateCampaign:output_type -> api.affiliate.service.v1.UpdateCampaignResponse
+	22, // 68: api.affiliate.service.v1.Affiliate.ListCampaigns:output_type -> api.affiliate.service.v1.ListCampaignsResponse
+	24, // 69: api.affiliate.service.v1.Affiliate.DeleteCampaign:output_type -> api.affiliate.service.v1.DeleteCampaignResponse
+	55, // [55:70] is the sub-list for method output_type
+	40, // [40:55] is the sub-list for method input_type
+	40, // [40:40] is the sub-list for extension type_name
+	40, // [40:40] is the sub-list for extension extendee
+	0,  // [0:40] is the sub-list for field type_name
 }
 
 func init() { file_affiliate_service_v1_affiliate_proto_init() }
@@ -2966,17 +3031,17 @@ func file_affiliate_service_v1_affiliate_proto_init() {
 	}
 	file_affiliate_service_v1_commission_plan_proto_init()
 	file_affiliate_service_v1_affiliate_proto_msgTypes[8].OneofWrappers = []any{}
-	file_affiliate_service_v1_affiliate_proto_msgTypes[13].OneofWrappers = []any{}
-	file_affiliate_service_v1_affiliate_proto_msgTypes[18].OneofWrappers = []any{}
-	file_affiliate_service_v1_affiliate_proto_msgTypes[20].OneofWrappers = []any{}
-	file_affiliate_service_v1_affiliate_proto_msgTypes[33].OneofWrappers = []any{}
+	file_affiliate_service_v1_affiliate_proto_msgTypes[14].OneofWrappers = []any{}
+	file_affiliate_service_v1_affiliate_proto_msgTypes[19].OneofWrappers = []any{}
+	file_affiliate_service_v1_affiliate_proto_msgTypes[21].OneofWrappers = []any{}
+	file_affiliate_service_v1_affiliate_proto_msgTypes[35].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_affiliate_service_v1_affiliate_proto_rawDesc), len(file_affiliate_service_v1_affiliate_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   36,
+			NumMessages:   38,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
