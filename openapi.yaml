@@ -5708,18 +5708,8 @@ components:
                     type: string
                 channelConfig:
                     $ref: '#/components/schemas/api.affiliate.service.v1.ChannelConfig'
-                utmSource:
-                    type: string
-                utmMedium:
-                    type: string
-                utmCampaign:
-                    type: string
-                utmContent:
-                    type: string
-                utmTerm:
-                    type: string
-                customParams:
-                    $ref: '#/components/schemas/api.affiliate.service.v1.CustomParams'
+                params:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.Params'
                 eventMappings:
                     $ref: '#/components/schemas/api.affiliate.service.v1.EventMappings'
         api.affiliate.service.v1.ChannelConfig:
@@ -5885,20 +5875,6 @@ components:
         api.affiliate.service.v1.CreateCommissionPlanResponse:
             type: object
             properties: {}
-        api.affiliate.service.v1.CustomParams:
-            type: object
-            properties:
-                customParams:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.affiliate.service.v1.CustomParams_CustomParam'
-        api.affiliate.service.v1.CustomParams_CustomParam:
-            type: object
-            properties:
-                name:
-                    type: string
-                value:
-                    type: string
         api.affiliate.service.v1.DeleteAffiliateResponse:
             type: object
             properties: {}
@@ -6141,6 +6117,24 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.affiliate.service.v1.Params:
+            type: object
+            properties:
+                predefinedParameters:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.Params_Parameter'
+                customParameters:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.Params_Parameter'
+        api.affiliate.service.v1.Params_Parameter:
+            type: object
+            properties:
+                name:
+                    type: string
+                value:
+                    type: string
         api.affiliate.service.v1.ProgressiveByCountriesCommission:
             type: object
             properties:
