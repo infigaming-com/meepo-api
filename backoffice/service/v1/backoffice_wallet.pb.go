@@ -3337,7 +3337,6 @@ type CreditRequest struct {
 	OperatorBonusTurnoverThreshold string                 `protobuf:"bytes,7,opt,name=operator_bonus_turnover_threshold,json=operatorBonusTurnoverThreshold,proto3" json:"operator_bonus_turnover_threshold,omitempty"`
 	OperatorBonusWithdrawLimit     string                 `protobuf:"bytes,8,opt,name=operator_bonus_withdraw_limit,json=operatorBonusWithdrawLimit,proto3" json:"operator_bonus_withdraw_limit,omitempty"`
 	Comment                        string                 `protobuf:"bytes,9,opt,name=comment,proto3" json:"comment,omitempty"`
-	ExternalTransactionId          *int64                 `protobuf:"varint,10,opt,name=external_transaction_id,json=externalTransactionId,proto3,oneof" json:"external_transaction_id,omitempty"`
 	unknownFields                  protoimpl.UnknownFields
 	sizeCache                      protoimpl.SizeCache
 }
@@ -3433,13 +3432,6 @@ func (x *CreditRequest) GetComment() string {
 		return x.Comment
 	}
 	return ""
-}
-
-func (x *CreditRequest) GetExternalTransactionId() int64 {
-	if x != nil && x.ExternalTransactionId != nil {
-		return *x.ExternalTransactionId
-	}
-	return 0
 }
 
 type DebitRequest struct {
@@ -4370,7 +4362,7 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x11_transaction_typeB\v\n" +
 	"\t_currencyB\f\n" +
 	"\n" +
-	"_kyc_level\"\xfd\x03\n" +
+	"_kyc_level\"\xa4\x03\n" +
 	"\rCreditRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12)\n" +
@@ -4381,10 +4373,7 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x15operator_bonus_amount\x18\x06 \x01(\tR\x13operatorBonusAmount\x12I\n" +
 	"!operator_bonus_turnover_threshold\x18\a \x01(\tR\x1eoperatorBonusTurnoverThreshold\x12A\n" +
 	"\x1doperator_bonus_withdraw_limit\x18\b \x01(\tR\x1aoperatorBonusWithdrawLimit\x12\x18\n" +
-	"\acomment\x18\t \x01(\tR\acomment\x12;\n" +
-	"\x17external_transaction_id\x18\n" +
-	" \x01(\x03H\x00R\x15externalTransactionId\x88\x01\x01B\x1a\n" +
-	"\x18_external_transaction_id\"\xf2\x01\n" +
+	"\acomment\x18\t \x01(\tR\acomment\"\xf2\x01\n" +
 	"\fDebitRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12-\n" +
@@ -4722,7 +4711,6 @@ func file_backoffice_service_v1_backoffice_wallet_proto_init() {
 	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[41].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[44].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[45].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[46].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[48].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[49].OneofWrappers = []any{}
 	type x struct{}
