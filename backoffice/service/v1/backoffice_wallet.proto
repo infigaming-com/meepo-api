@@ -689,7 +689,6 @@ message CreditRequest {
 	string operator_bonus_turnover_threshold = 7;
 	string operator_bonus_withdraw_limit = 8;
 	string comment = 9;
-	optional int64 external_transaction_id = 10;
 }
 
 message DebitRequest {
