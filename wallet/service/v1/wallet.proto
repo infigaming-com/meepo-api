@@ -280,6 +280,7 @@ message CreditRequest {
 	api.common.OperatorContext operator_context = 11;
 	int64 initiator_user_id = 12;
 	string operator_reporting_currency =13;
+	api.common.OperatorContext initiator_operator_context = 14;
 }
 
 message CreditResponse {
