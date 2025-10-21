@@ -322,3 +322,15 @@ func IsUpdateCampaignFailed(err error) bool {
 func ErrorUpdateCampaignFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_UPDATE_CAMPAIGN_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsProcessUserRegistrationFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROCESS_USER_REGISTRATION_FAILED.String() && e.Code == 500
+}
+
+func ErrorProcessUserRegistrationFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROCESS_USER_REGISTRATION_FAILED.String(), fmt.Sprintf(format, args...))
+}
