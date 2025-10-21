@@ -162,13 +162,17 @@ message Campaign {
     string campaign_name = 2;
     string channel_type = 3; // facebook/tiktok/kwai/appsflyer/adjust/agency/google_ads
     ChannelConfig channel_config = 4;
-    string utm_source = 5;
-    string utm_medium = 6;
-    string utm_campaign = 7;
-    string utm_content = 8;
-    string utm_term = 9;
-    CustomParams custom_params = 10;
-    EventMappings event_mappings = 11;    
+    Params params = 5;
+    EventMappings event_mappings = 6;    
+}
+
+message Params {
+    message Parameter {
+        string name = 1;
+        string value = 2;
+    }
+    repeated Parameter predefined_parameters = 1;
+    repeated Parameter custom_parameters = 2;
 }
 
 message ChannelConfig {

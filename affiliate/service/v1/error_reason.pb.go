@@ -51,6 +51,7 @@ const (
 	ErrorReason_DELETE_CAMPAIGN_FAILED                   ErrorReason = 130023
 	ErrorReason_LIST_CAMPAIGNS_FAILED                    ErrorReason = 130024
 	ErrorReason_UPDATE_CAMPAIGN_FAILED                   ErrorReason = 130025
+	ErrorReason_PROCESS_USER_REGISTRATION_FAILED         ErrorReason = 130026
 )
 
 // Enum value maps for ErrorReason.
@@ -82,6 +83,7 @@ var (
 		130023: "DELETE_CAMPAIGN_FAILED",
 		130024: "LIST_CAMPAIGNS_FAILED",
 		130025: "UPDATE_CAMPAIGN_FAILED",
+		130026: "PROCESS_USER_REGISTRATION_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                              0,
@@ -110,6 +112,7 @@ var (
 		"DELETE_CAMPAIGN_FAILED":                   130023,
 		"LIST_CAMPAIGNS_FAILED":                    130024,
 		"UPDATE_CAMPAIGN_FAILED":                   130025,
+		"PROCESS_USER_REGISTRATION_FAILED":         130026,
 	}
 )
 
@@ -144,7 +147,7 @@ var File_affiliate_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\xf9\x06\n" +
+	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\xa1\a\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1dCREATE_COMMISSION_PLAN_FAILED\x10\xd1\xf7\a\x12#\n" +
@@ -171,7 +174,8 @@ const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\x13GET_CAMPAIGN_FAILED\x10\xe6\xf7\a\x12\x1c\n" +
 	"\x16DELETE_CAMPAIGN_FAILED\x10\xe7\xf7\a\x12\x1b\n" +
 	"\x15LIST_CAMPAIGNS_FAILED\x10\xe8\xf7\a\x12\x1c\n" +
-	"\x16UPDATE_CAMPAIGN_FAILED\x10\xe9\xf7\a\x1a\x04\xa0E\xf4\x03BY\n" +
+	"\x16UPDATE_CAMPAIGN_FAILED\x10\xe9\xf7\a\x12&\n" +
+	" PROCESS_USER_REGISTRATION_FAILED\x10\xea\xf7\a\x1a\x04\xa0E\xf4\x03BY\n" +
 	"\x18api.affiliate.service.v1P\x01Z;github.com/infigaming-com/meepo-api/affiliate/service/v1;v1b\x06proto3"
 
 var (

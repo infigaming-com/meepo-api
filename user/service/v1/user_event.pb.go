@@ -129,6 +129,7 @@ type AddUserEvent struct {
 	Email              string                 `protobuf:"bytes,7,opt,name=email,proto3" json:"email,omitempty"`
 	Mobile             string                 `protobuf:"bytes,8,opt,name=mobile,proto3" json:"mobile,omitempty"`
 	RoleId             int32                  `protobuf:"varint,9,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
+	CampaignUrl        *string                `protobuf:"bytes,10,opt,name=campaign_url,json=campaignUrl,proto3,oneof" json:"campaign_url,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -224,6 +225,13 @@ func (x *AddUserEvent) GetRoleId() int32 {
 		return x.RoleId
 	}
 	return 0
+}
+
+func (x *AddUserEvent) GetCampaignUrl() string {
+	if x != nil && x.CampaignUrl != nil {
+		return *x.CampaignUrl
+	}
+	return ""
 }
 
 // AddOperatorEvent is emitted when a operator is created.
@@ -346,7 +354,7 @@ const file_user_service_v1_user_event_proto_rawDesc = "" +
 	"event_data\x18\x02 \x01(\fR\teventData\x12\x1d\n" +
 	"\n" +
 	"message_id\x18\x03 \x01(\tR\tmessageId\"\x0f\n" +
-	"\rEventResponse\"\xbb\x02\n" +
+	"\rEventResponse\"\xf4\x02\n" +
 	"\fAddUserEvent\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
@@ -357,7 +365,10 @@ const file_user_service_v1_user_event_proto_rawDesc = "" +
 	"\busername\x18\x06 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\a \x01(\tR\x05email\x12\x16\n" +
 	"\x06mobile\x18\b \x01(\tR\x06mobile\x12\x17\n" +
-	"\arole_id\x18\t \x01(\x05R\x06roleId\"\x9b\x03\n" +
+	"\arole_id\x18\t \x01(\x05R\x06roleId\x12&\n" +
+	"\fcampaign_url\x18\n" +
+	" \x01(\tH\x00R\vcampaignUrl\x88\x01\x01B\x0f\n" +
+	"\r_campaign_url\"\x9b\x03\n" +
 	"\x10AddOperatorEvent\x12(\n" +
 	"\x10real_operator_id\x18\x01 \x01(\x03R\x0erealOperatorId\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
@@ -407,6 +418,7 @@ func file_user_service_v1_user_event_proto_init() {
 	if File_user_service_v1_user_event_proto != nil {
 		return
 	}
+	file_user_service_v1_user_event_proto_msgTypes[2].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

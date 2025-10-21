@@ -1741,22 +1741,12 @@ func (m *Campaign) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for UtmSource
-
-	// no validation rules for UtmMedium
-
-	// no validation rules for UtmCampaign
-
-	// no validation rules for UtmContent
-
-	// no validation rules for UtmTerm
-
 	if all {
-		switch v := interface{}(m.GetCustomParams()).(type) {
+		switch v := interface{}(m.GetParams()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, CampaignValidationError{
-					field:  "CustomParams",
+					field:  "Params",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -1764,16 +1754,16 @@ func (m *Campaign) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, CampaignValidationError{
-					field:  "CustomParams",
+					field:  "Params",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetCustomParams()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetParams()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return CampaignValidationError{
-				field:  "CustomParams",
+				field:  "Params",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -1885,6 +1875,172 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = CampaignValidationError{}
+
+// Validate checks the field values on Params with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *Params) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Params with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in ParamsMultiError, or nil if none found.
+func (m *Params) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Params) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetPredefinedParameters() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ParamsValidationError{
+						field:  fmt.Sprintf("PredefinedParameters[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ParamsValidationError{
+						field:  fmt.Sprintf("PredefinedParameters[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ParamsValidationError{
+					field:  fmt.Sprintf("PredefinedParameters[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	for idx, item := range m.GetCustomParameters() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ParamsValidationError{
+						field:  fmt.Sprintf("CustomParameters[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ParamsValidationError{
+						field:  fmt.Sprintf("CustomParameters[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ParamsValidationError{
+					field:  fmt.Sprintf("CustomParameters[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ParamsMultiError(errors)
+	}
+
+	return nil
+}
+
+// ParamsMultiError is an error wrapping multiple validation errors returned by
+// Params.ValidateAll() if the designated constraints aren't met.
+type ParamsMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ParamsMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ParamsMultiError) AllErrors() []error { return m }
+
+// ParamsValidationError is the validation error returned by Params.Validate if
+// the designated constraints aren't met.
+type ParamsValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ParamsValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ParamsValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ParamsValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ParamsValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ParamsValidationError) ErrorName() string { return "ParamsValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ParamsValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sParams.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ParamsValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ParamsValidationError{}
 
 // Validate checks the field values on ChannelConfig with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
@@ -3834,6 +3990,110 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListAffiliatesResponse_AffiliateValidationError{}
+
+// Validate checks the field values on Params_Parameter with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *Params_Parameter) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Params_Parameter with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// Params_ParameterMultiError, or nil if none found.
+func (m *Params_Parameter) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Params_Parameter) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Name
+
+	// no validation rules for Value
+
+	if len(errors) > 0 {
+		return Params_ParameterMultiError(errors)
+	}
+
+	return nil
+}
+
+// Params_ParameterMultiError is an error wrapping multiple validation errors
+// returned by Params_Parameter.ValidateAll() if the designated constraints
+// aren't met.
+type Params_ParameterMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m Params_ParameterMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m Params_ParameterMultiError) AllErrors() []error { return m }
+
+// Params_ParameterValidationError is the validation error returned by
+// Params_Parameter.Validate if the designated constraints aren't met.
+type Params_ParameterValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e Params_ParameterValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e Params_ParameterValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e Params_ParameterValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e Params_ParameterValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e Params_ParameterValidationError) ErrorName() string { return "Params_ParameterValidationError" }
+
+// Error satisfies the builtin error interface
+func (e Params_ParameterValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sParams_Parameter.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = Params_ParameterValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = Params_ParameterValidationError{}
 
 // Validate checks the field values on ChannelConfig_FacebookChannelConfig with
 // the rules defined in the proto definition for this message. If any rules

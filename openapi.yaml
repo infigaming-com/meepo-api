@@ -5872,18 +5872,8 @@ components:
                     type: string
                 channelConfig:
                     $ref: '#/components/schemas/api.affiliate.service.v1.ChannelConfig'
-                utmSource:
-                    type: string
-                utmMedium:
-                    type: string
-                utmCampaign:
-                    type: string
-                utmContent:
-                    type: string
-                utmTerm:
-                    type: string
-                customParams:
-                    $ref: '#/components/schemas/api.affiliate.service.v1.CustomParams'
+                params:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.Params'
                 eventMappings:
                     $ref: '#/components/schemas/api.affiliate.service.v1.EventMappings'
         api.affiliate.service.v1.ChannelConfig:
@@ -6049,20 +6039,6 @@ components:
         api.affiliate.service.v1.CreateCommissionPlanResponse:
             type: object
             properties: {}
-        api.affiliate.service.v1.CustomParams:
-            type: object
-            properties:
-                customParams:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.affiliate.service.v1.CustomParams_CustomParam'
-        api.affiliate.service.v1.CustomParams_CustomParam:
-            type: object
-            properties:
-                name:
-                    type: string
-                value:
-                    type: string
         api.affiliate.service.v1.DeleteAffiliateResponse:
             type: object
             properties: {}
@@ -6305,6 +6281,24 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.affiliate.service.v1.Params:
+            type: object
+            properties:
+                predefinedParameters:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.Params_Parameter'
+                customParameters:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.Params_Parameter'
+        api.affiliate.service.v1.Params_Parameter:
+            type: object
+            properties:
+                name:
+                    type: string
+                value:
+                    type: string
         api.affiliate.service.v1.ProgressiveByCountriesCommission:
             type: object
             properties:
@@ -15828,6 +15822,9 @@ components:
                 idType:
                     type: string
                     description: User ID Type
+                campaignUrl:
+                    type: string
+                    description: campaign url
             description: RegisterRequest contains the information needed to register a new user.
         api.user.service.v1.ResetPasswordWithCodeRequest:
             type: object
@@ -16026,6 +16023,12 @@ components:
                     allOf:
                         - $ref: '#/components/schemas/api.common.OperatorContext'
                     description: The initial operator context.
+                campaignUrl:
+                    type: string
+                campaignId:
+                    type: string
+                affiliateId:
+                    type: string
         api.user.service.v1.UpdateUserResponse:
             type: object
             properties: {}
@@ -17263,6 +17266,10 @@ components:
                 afterBalanceUsd:
                     type: string
                 afterBalanceReportingCurrency:
+                    type: string
+                initiatorRealOperatorName:
+                    type: string
+                turnoverThreshold:
                     type: string
         api.wallet.service.v1.ListResponsibleGamblingConfigsRequest:
             type: object
