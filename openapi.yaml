@@ -14393,10 +14393,10 @@ components:
         api.game.service.v1.ListTagResponse:
             type: object
             properties:
-                tags:
+                tagInfos:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.game.service.v1.Tag'
+                        $ref: '#/components/schemas/api.game.service.v1.ListTagResponse_TagInfo'
                 total:
                     type: integer
                     format: int32
@@ -14406,6 +14406,27 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.game.service.v1.ListTagResponse_TagInfo:
+            type: object
+            properties:
+                tagId:
+                    type: string
+                tagName:
+                    type: string
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                systemOperatorId:
+                    type: string
+                creator:
+                    type: string
+                configuredProviderCount:
+                    type: string
+                configuredGameCount:
+                    type: string
         api.game.service.v1.ListUnpaidBetsResponse:
             type: object
             properties:

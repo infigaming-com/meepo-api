@@ -1668,10 +1668,8 @@ message ListTagResponse {
 		string creator = 7;
 		int64 configured_provider_count = 8;
 		int64 configured_game_count = 9;
-		optional TagConfig inherited_config = 10; // Config from parent operator
-		optional TagConfig custom_config = 11; // Custom config for current operator
 	}
-	repeated Tag tags = 1;
+	repeated TagInfo tag_infos = 1;
 	int32 total = 2;
 	int32 page = 3;
 	int32 page_size = 4;
