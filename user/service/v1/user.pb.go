@@ -506,7 +506,9 @@ type RegisterRequest struct {
 	// User ID info
 	IdNumber *string `protobuf:"bytes,5,opt,name=id_number,json=idNumber,proto3,oneof" json:"id_number,omitempty"`
 	// User ID Type
-	IdType        *string `protobuf:"bytes,6,opt,name=id_type,json=idType,proto3,oneof" json:"id_type,omitempty"`
+	IdType *string `protobuf:"bytes,6,opt,name=id_type,json=idType,proto3,oneof" json:"id_type,omitempty"`
+	// campaign url
+	CampaignUrl   *string `protobuf:"bytes,7,opt,name=campaign_url,json=campaignUrl,proto3,oneof" json:"campaign_url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -579,6 +581,13 @@ func (x *RegisterRequest) GetIdNumber() string {
 func (x *RegisterRequest) GetIdType() string {
 	if x != nil && x.IdType != nil {
 		return *x.IdType
+	}
+	return ""
+}
+
+func (x *RegisterRequest) GetCampaignUrl() string {
+	if x != nil && x.CampaignUrl != nil {
+		return *x.CampaignUrl
 	}
 	return ""
 }
@@ -2970,6 +2979,9 @@ type UpdateUserRequest struct {
 	PhoneVerified *bool                  `protobuf:"varint,18,opt,name=phone_verified,json=phoneVerified,proto3,oneof" json:"phone_verified,omitempty"`
 	// The initial operator context.
 	OperatorContext *common.OperatorContext `protobuf:"bytes,19,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	CampaignUrl     *string                 `protobuf:"bytes,20,opt,name=campaign_url,json=campaignUrl,proto3,oneof" json:"campaign_url,omitempty"`
+	CampaignId      *int64                  `protobuf:"varint,21,opt,name=campaign_id,json=campaignId,proto3,oneof" json:"campaign_id,omitempty"`
+	AffiliateId     *int64                  `protobuf:"varint,22,opt,name=affiliate_id,json=affiliateId,proto3,oneof" json:"affiliate_id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -3135,6 +3147,27 @@ func (x *UpdateUserRequest) GetOperatorContext() *common.OperatorContext {
 		return x.OperatorContext
 	}
 	return nil
+}
+
+func (x *UpdateUserRequest) GetCampaignUrl() string {
+	if x != nil && x.CampaignUrl != nil {
+		return *x.CampaignUrl
+	}
+	return ""
+}
+
+func (x *UpdateUserRequest) GetCampaignId() int64 {
+	if x != nil && x.CampaignId != nil {
+		return *x.CampaignId
+	}
+	return 0
+}
+
+func (x *UpdateUserRequest) GetAffiliateId() int64 {
+	if x != nil && x.AffiliateId != nil {
+		return *x.AffiliateId
+	}
+	return 0
 }
 
 type UpdateUserResponse struct {
@@ -11955,19 +11988,21 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\aaddress\x18\x14 \x01(\tR\aaddress\x12F\n" +
 	"\ruser_identity\x18\x15 \x03(\v2!.api.user.service.v1.UserIdentityR\fuserIdentity\x12,\n" +
 	"\x03dob\x18\x16 \x01(\v2\x1a.google.protobuf.TimestampR\x03dob\x12\x18\n" +
-	"\acountry\x18\x17 \x01(\tR\acountry\"\xaf\x02\n" +
+	"\acountry\x18\x17 \x01(\tR\acountry\"\xe8\x02\n" +
 	"\x0fRegisterRequest\x12R\n" +
 	"\x11password_provider\x18\x01 \x01(\x0e2%.api.user.service.v1.PasswordProviderR\x10passwordProvider\x12\x17\n" +
 	"\aauth_id\x18\x02 \x01(\tR\x06authId\x12\x1a\n" +
 	"\bpassword\x18\x03 \x01(\tR\bpassword\x121\n" +
 	"\x03dob\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x03dob\x88\x01\x01\x12 \n" +
 	"\tid_number\x18\x05 \x01(\tH\x01R\bidNumber\x88\x01\x01\x12\x1c\n" +
-	"\aid_type\x18\x06 \x01(\tH\x02R\x06idType\x88\x01\x01B\x06\n" +
+	"\aid_type\x18\x06 \x01(\tH\x02R\x06idType\x88\x01\x01\x12&\n" +
+	"\fcampaign_url\x18\a \x01(\tH\x03R\vcampaignUrl\x88\x01\x01B\x06\n" +
 	"\x04_dobB\f\n" +
 	"\n" +
 	"_id_numberB\n" +
 	"\n" +
-	"\b_id_type\"\x97\x01\n" +
+	"\b_id_typeB\x0f\n" +
+	"\r_campaign_url\"\x97\x01\n" +
 	"\fLoginRequest\x12R\n" +
 	"\x11password_provider\x18\x01 \x01(\x0e2%.api.user.service.v1.PasswordProviderR\x10passwordProvider\x12\x17\n" +
 	"\aauth_id\x18\x02 \x01(\tR\x06authId\x12\x1a\n" +
@@ -12119,7 +12154,7 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\breviewer\x18\n" +
 	" \x01(\tR\breviewer\x12\x1f\n" +
 	"\vreview_time\x18\v \x01(\x05R\n" +
-	"reviewTime\"\xd3\a\n" +
+	"reviewTime\"\xfb\b\n" +
 	"\x11UpdateUserRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
 	"\bnickname\x18\x02 \x01(\tH\x00R\bnickname\x88\x01\x01\x12\x1b\n" +
@@ -12141,7 +12176,11 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x03dob\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampH\x0eR\x03dob\x88\x01\x01\x12*\n" +
 	"\x0eemail_verified\x18\x11 \x01(\bH\x0fR\remailVerified\x88\x01\x01\x12*\n" +
 	"\x0ephone_verified\x18\x12 \x01(\bH\x10R\rphoneVerified\x88\x01\x01\x12F\n" +
-	"\x10operator_context\x18\x13 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\v\n" +
+	"\x10operator_context\x18\x13 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12&\n" +
+	"\fcampaign_url\x18\x14 \x01(\tH\x11R\vcampaignUrl\x88\x01\x01\x12$\n" +
+	"\vcampaign_id\x18\x15 \x01(\x03H\x12R\n" +
+	"campaignId\x88\x01\x01\x12&\n" +
+	"\faffiliate_id\x18\x16 \x01(\x03H\x13R\vaffiliateId\x88\x01\x01B\v\n" +
 	"\t_nicknameB\t\n" +
 	"\a_avatarB\f\n" +
 	"\n" +
@@ -12163,7 +12202,10 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\b_addressB\x06\n" +
 	"\x04_dobB\x11\n" +
 	"\x0f_email_verifiedB\x11\n" +
-	"\x0f_phone_verified\"\x14\n" +
+	"\x0f_phone_verifiedB\x0f\n" +
+	"\r_campaign_urlB\x0e\n" +
+	"\f_campaign_idB\x0f\n" +
+	"\r_affiliate_id\"\x14\n" +
 	"\x12UpdateUserResponse\"w\n" +
 	"\x19UpdateUserIdentityRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x17\n" +
