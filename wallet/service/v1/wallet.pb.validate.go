@@ -564,6 +564,8 @@ func (m *CreditRequest) validate(all bool) error {
 
 	// no validation rules for InitiatorUserId
 
+	// no validation rules for OperatorReportingCurrency
+
 	if m.ExternalTransactionId != nil {
 		// no validation rules for ExternalTransactionId
 	}

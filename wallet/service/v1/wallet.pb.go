@@ -256,6 +256,7 @@ type CreditRequest struct {
 	ExternalTransactionId          *int64                  `protobuf:"varint,10,opt,name=external_transaction_id,json=externalTransactionId,proto3,oneof" json:"external_transaction_id,omitempty"`
 	OperatorContext                *common.OperatorContext `protobuf:"bytes,11,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	InitiatorUserId                int64                   `protobuf:"varint,12,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
+	OperatorReportingCurrency      string                  `protobuf:"bytes,13,opt,name=operator_reporting_currency,json=operatorReportingCurrency,proto3" json:"operator_reporting_currency,omitempty"`
 	unknownFields                  protoimpl.UnknownFields
 	sizeCache                      protoimpl.SizeCache
 }
@@ -372,6 +373,13 @@ func (x *CreditRequest) GetInitiatorUserId() int64 {
 		return x.InitiatorUserId
 	}
 	return 0
+}
+
+func (x *CreditRequest) GetOperatorReportingCurrency() string {
+	if x != nil {
+		return x.OperatorReportingCurrency
+	}
+	return ""
 }
 
 type CreditResponse struct {
@@ -12271,7 +12279,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\rexchange_rate\x18\x01 \x01(\tR\fexchangeRate\x12\x12\n" +
 	"\x04cash\x18\x02 \x01(\tR\x04cash\x12%\n" +
 	"\x0eoperator_bonus\x18\x03 \x01(\tR\roperatorBonus\x12%\n" +
-	"\x0eprovider_bonus\x18\x04 \x01(\tR\rproviderBonus\"\xf1\x04\n" +
+	"\x0eprovider_bonus\x18\x04 \x01(\tR\rproviderBonus\"\xb1\x05\n" +
 	"\rCreditRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12)\n" +
@@ -12286,7 +12294,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x17external_transaction_id\x18\n" +
 	" \x01(\x03H\x00R\x15externalTransactionId\x88\x01\x01\x12F\n" +
 	"\x10operator_context\x18\v \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12*\n" +
-	"\x11initiator_user_id\x18\f \x01(\x03R\x0finitiatorUserIdB\x1a\n" +
+	"\x11initiator_user_id\x18\f \x01(\x03R\x0finitiatorUserId\x12>\n" +
+	"\x1boperator_reporting_currency\x18\r \x01(\tR\x19operatorReportingCurrencyB\x1a\n" +
 	"\x18_external_transaction_id\"7\n" +
 	"\x0eCreditResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\xe6\x02\n" +

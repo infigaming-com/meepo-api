@@ -279,6 +279,7 @@ message CreditRequest {
 	optional int64 external_transaction_id = 10;
 	api.common.OperatorContext operator_context = 11;
 	int64 initiator_user_id = 12;
+	string operator_reporting_currency =13;
 }
 
 message CreditResponse {
