@@ -16856,6 +16856,10 @@ components:
                     type: string
                 afterBalanceReportingCurrency:
                     type: string
+                initiatorRealOperatorName:
+                    type: string
+                turnoverThreshold:
+                    type: string
         api.wallet.service.v1.ListResponsibleGamblingConfigsRequest:
             type: object
             properties:

@@ -21896,6 +21896,10 @@ func (m *ListManualJournalEntriesResponse_ManualJournalEntry) validate(all bool)
 
 	// no validation rules for AfterBalanceReportingCurrency
 
+	// no validation rules for InitiatorRealOperatorName
+
+	// no validation rules for TurnoverThreshold
+
 	if len(errors) > 0 {
 		return ListManualJournalEntriesResponse_ManualJournalEntryMultiError(errors)
 	}

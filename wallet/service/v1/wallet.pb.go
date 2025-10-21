@@ -12078,6 +12078,8 @@ type ListManualJournalEntriesResponse_ManualJournalEntry struct {
 	AfterBalance                   string                 `protobuf:"bytes,15,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"` // for this currency
 	AfterBalanceUsd                string                 `protobuf:"bytes,16,opt,name=after_balance_usd,json=afterBalanceUsd,proto3" json:"after_balance_usd,omitempty"`
 	AfterBalanceReportingCurrency  string                 `protobuf:"bytes,17,opt,name=after_balance_reporting_currency,json=afterBalanceReportingCurrency,proto3" json:"after_balance_reporting_currency,omitempty"`
+	InitiatorRealOperatorName      string                 `protobuf:"bytes,18,opt,name=initiator_real_operator_name,json=initiatorRealOperatorName,proto3" json:"initiator_real_operator_name,omitempty"`
+	TurnoverThreshold              string                 `protobuf:"bytes,19,opt,name=turnover_threshold,json=turnoverThreshold,proto3" json:"turnover_threshold,omitempty"`
 	unknownFields                  protoimpl.UnknownFields
 	sizeCache                      protoimpl.SizeCache
 }
@@ -12227,6 +12229,20 @@ func (x *ListManualJournalEntriesResponse_ManualJournalEntry) GetAfterBalanceUsd
 func (x *ListManualJournalEntriesResponse_ManualJournalEntry) GetAfterBalanceReportingCurrency() string {
 	if x != nil {
 		return x.AfterBalanceReportingCurrency
+	}
+	return ""
+}
+
+func (x *ListManualJournalEntriesResponse_ManualJournalEntry) GetInitiatorRealOperatorName() string {
+	if x != nil {
+		return x.InitiatorRealOperatorName
+	}
+	return ""
+}
+
+func (x *ListManualJournalEntriesResponse_ManualJournalEntry) GetTurnoverThreshold() string {
+	if x != nil {
+		return x.TurnoverThreshold
 	}
 	return ""
 }
@@ -13423,12 +13439,12 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\t_currencyB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xe5\a\n" +
+	"_page_size\"\xd5\b\n" +
 	" ListManualJournalEntriesResponse\x12\x80\x01\n" +
 	"\x16manual_journal_entries\x18\x01 \x03(\v2J.api.wallet.service.v1.ListManualJournalEntriesResponse.ManualJournalEntryR\x14manualJournalEntries\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xf6\x05\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xe6\x06\n" +
 	"\x12ManualJournalEntry\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12E\n" +
@@ -13448,7 +13464,9 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"!before_balance_reporting_currency\x18\x0e \x01(\tR\x1ebeforeBalanceReportingCurrency\x12#\n" +
 	"\rafter_balance\x18\x0f \x01(\tR\fafterBalance\x12*\n" +
 	"\x11after_balance_usd\x18\x10 \x01(\tR\x0fafterBalanceUsd\x12G\n" +
-	" after_balance_reporting_currency\x18\x11 \x01(\tR\x1dafterBalanceReportingCurrency\"\x9a\x04\n" +
+	" after_balance_reporting_currency\x18\x11 \x01(\tR\x1dafterBalanceReportingCurrency\x12?\n" +
+	"\x1cinitiator_real_operator_name\x18\x12 \x01(\tR\x19initiatorRealOperatorName\x12-\n" +
+	"\x12turnover_threshold\x18\x13 \x01(\tR\x11turnoverThreshold\"\x9a\x04\n" +
 	"!ExportManualJournalEntriesRequest\x12>\n" +
 	"\n" +
 	"start_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\tstartTime\x88\x01\x01\x12:\n" +

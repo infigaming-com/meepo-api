@@ -1533,6 +1533,8 @@ message ListManualJournalEntriesResponse {
 		string after_balance = 15; // for this currency
 		string after_balance_usd = 16;
 		string after_balance_reporting_currency = 17;
+		string initiator_real_operator_name = 18;
+		string turnover_threshold = 19;
 	}
 	repeated ManualJournalEntry manual_journal_entries = 1;
 	int32 total = 2;
