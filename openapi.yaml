@@ -14409,7 +14409,7 @@ components:
         api.game.service.v1.ListTagResponse_TagInfo:
             type: object
             properties:
-                tagId:
+                id:
                     type: string
                 tagName:
                     type: string

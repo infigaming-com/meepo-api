@@ -1659,7 +1659,7 @@ message ListTagRequest {
 
 message ListTagResponse {
 	message TagInfo {
-		int64 tag_id = 1;
+		int64 id = 1;
 		string tag_name = 2;
 		int64 operator_id = 3;
 		int64 company_operator_id = 4;

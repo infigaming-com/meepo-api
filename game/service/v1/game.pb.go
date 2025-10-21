@@ -13805,7 +13805,7 @@ func (x *ListGameBetDisplayConfigResponse_Item) GetHighWins() *BettingConfig {
 
 type ListTagResponse_TagInfo struct {
 	state                   protoimpl.MessageState `protogen:"open.v1"`
-	TagId                   int64                  `protobuf:"varint,1,opt,name=tag_id,json=tagId,proto3" json:"tag_id,omitempty"`
+	Id                      int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	TagName                 string                 `protobuf:"bytes,2,opt,name=tag_name,json=tagName,proto3" json:"tag_name,omitempty"`
 	OperatorId              int64                  `protobuf:"varint,3,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	CompanyOperatorId       int64                  `protobuf:"varint,4,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
@@ -13848,9 +13848,9 @@ func (*ListTagResponse_TagInfo) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{112, 0}
 }
 
-func (x *ListTagResponse_TagInfo) GetTagId() int64 {
+func (x *ListTagResponse_TagInfo) GetId() int64 {
 	if x != nil {
-		return x.TagId
+		return x.Id
 	}
 	return 0
 }
@@ -15295,14 +15295,14 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\tpage_size\x18\x03 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x9c\x04\n" +
+	"_page_size\"\x95\x04\n" +
 	"\x0fListTagResponse\x12I\n" +
 	"\ttag_infos\x18\x01 \x03(\v2,.api.game.service.v1.ListTagResponse.TagInfoR\btagInfos\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xf6\x02\n" +
-	"\aTagInfo\x12\x15\n" +
-	"\x06tag_id\x18\x01 \x01(\x03R\x05tagId\x12\x19\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xef\x02\n" +
+	"\aTagInfo\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x19\n" +
 	"\btag_name\x18\x02 \x01(\tR\atagName\x12\x1f\n" +
 	"\voperator_id\x18\x03 \x01(\x03R\n" +
 	"operatorId\x12.\n" +
