@@ -184,7 +184,22 @@ service Game {
 	rpc UpdateGameBetDisplayConfig(UpdateGameBetDisplayConfigRequest) returns (UpdateGameBetDisplayConfigResponse) { }
 
 	rpc ListGameBetDisplayConfig(ListGameBetDisplayConfigRequest) returns (ListGameBetDisplayConfigResponse) { }
+
 	rpc GetGameInfo(GetGameInfoRequest) returns (GetGameInfoResponse) { }
+
+	rpc TagList(TagListRequest) returns (TagListResponse) { }
+
+	rpc CreateTag(CreateTagRequest) returns (CreateTagResponse) {}
+	rpc UpdateTag(UpdateTagRequest) returns (UpdateTagResponse) {}
+	rpc DeleteTag(DeleteTagRequest) returns (DeleteTagResponse) {}
+	rpc GetTag(GetTagRequest) returns (GetTagResponse) {}
+
+	rpc CreateTagConfig(CreateTagConfigRequest) returns (CreateTagConfigResponse) {}
+	rpc UpdateTagConfig(UpdateTagConfigRequest) returns (UpdateTagConfigResponse) {}
+	rpc GetTagConfig(GetTagConfigRequest) returns (GetTagConfigResponse) {}
+	rpc UpdateTagConfigGames(UpdateTagConfigGamesRequest) returns (UpdateTagConfigGamesResponse) {}
+
+	rpc ListGameTags(ListGameTagsRequest) returns (ListGameTagsResponse) {}
 
 }
 
@@ -1634,4 +1649,171 @@ message GetGameInfoRequest {
 
 message GetGameInfoResponse {
 	GameInfo game_info = 1;
+}
+
+message TagListRequest {
+	api.common.OperatorContext operator_context = 1;
+	optional int32 page = 2;
+	optional int32 page_size = 3;
+}
+
+message TagListResponse {
+	message TagInfo {
+		int64 tag_id = 1;
+		string tag_name = 2;
+		int64 operator_id = 3;
+		int64 company_operator_id = 4;
+		int64 retailer_operator_id = 5;
+		int64 system_operator_id = 6;
+		string creator = 7;
+		int64 configured_provider_count = 8;
+		int64 configured_game_count = 9;
+		optional TagConfig inherited_config = 10; // Config from parent operator
+		optional TagConfig custom_config = 11; // Custom config for current operator
+	}
+	repeated Tag tags = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}
+
+message Tag {
+	int64 id = 1;
+	int64 system_operator_id = 2;
+	int64 retailer_operator_id = 3;
+	int64 company_operator_id = 4;
+	int64 operator_id = 5;
+	string tag_name = 6;
+	bool enabled = 7;
+	int64 created_at = 8;
+	int64 updated_at = 9;
+}
+
+message CreateTagRequest {
+	api.common.OperatorContext operator_context = 1;
+	string tag_name = 2;
+	optional bool enabled = 3; // default true
+}
+
+message CreateTagResponse {
+	Tag tag = 1;
+}
+
+message UpdateTagRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 tag_id = 2;
+	optional string tag_name = 3;
+	optional bool enabled = 4;
+}
+
+message UpdateTagResponse {
+	Tag tag = 1;
+}
+
+message DeleteTagRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 tag_id = 2;
+}
+
+message DeleteTagResponse {
+}
+
+message GetTagRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 tag_id = 2;
+}
+
+message GetTagResponse {
+	Tag tag = 1;
+}
+
+message TagConfig {
+	int64 id = 1;
+	int64 tag_id = 2;
+	string display_name = 3; // JSON string: {"en":"Hot Game","zh":"热门游戏"}
+	bool follow_parent = 4;
+	int64 system_operator_id = 5;
+	int64 retailer_operator_id = 6;
+	int64 company_operator_id = 7;
+	int64 operator_id = 8;
+	int64 created_at = 9;
+	int64 updated_at = 10;
+}
+
+message CreateTagConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 tag_id = 2;
+	string display_name = 3; // JSON string: {"en":"Hot Game","zh":"热门游戏"}
+	optional bool follow_parent = 4; // default true
+}
+
+message CreateTagConfigResponse {
+	TagConfig tag_config = 1;
+}
+
+message UpdateTagConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 tag_config_id = 2;
+	optional string display_name = 3;
+	optional bool follow_parent = 4;
+}
+
+message UpdateTagConfigResponse {
+	TagConfig tag_config = 1;
+}
+
+message GetTagConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 tag_id = 2; // Get config by tag_id instead of tag_config_id
+}
+
+message GetTagConfigResponse {
+	optional TagConfig inherited_config = 1; // Config from parent operator
+	optional TagConfig custom_config = 2; // Custom config for current operator
+}
+
+message UpdateTagConfigGamesRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 tag_config_id = 2;
+	repeated string game_ids = 3; // Set the complete list of games for this tag config
+	optional bool enabled = 4; // default true for new game tags
+}
+
+message UpdateTagConfigGamesResponse {
+	repeated GameTag game_tags = 1; // All game tags after update
+	int32 added_count = 2; // Number of games added
+	int32 removed_count = 3; // Number of games removed
+	int32 unchanged_count = 4; // Number of games unchanged
+}
+
+message GameTag {
+	int64 id = 1;
+	int64 tag_id = 2;
+	string tag_name = 3;
+	string game_id = 4;
+	string game_name = 5;
+	int64 tag_config_id = 6; // The specific config this game tag uses
+	bool enabled = 7;
+	int64 system_operator_id = 8;
+	int64 retailer_operator_id = 9;
+	int64 company_operator_id = 10;
+	int64 operator_id = 11;
+	int64 created_at = 12;
+	int64 updated_at = 13;
+}
+
+message ListGameTagsRequest {
+	api.common.OperatorContext operator_context = 1;
+	int64 tag_config_id = 2;
+	optional string game_id = 3; // Filter by game_id
+	optional string game_name = 4; // Filter by game_name
+	optional int32 page = 5;
+	optional int32 page_size = 6;
+}
+
+message ListGameTagsResponse {
+	repeated GameTag game_tags = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
 }

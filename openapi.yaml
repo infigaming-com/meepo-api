@@ -1920,6 +1920,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.ListFeeGroupsResponse'
+    /v1/backoffice/game/game-tags/list:
+        post:
+            tags:
+                - BackofficeGame
+            description: Game Tag Management HTTP APIs
+            operationId: BackofficeGame_ListGameTags
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListGameTagsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.ListGameTagsResponse'
     /v1/backoffice/game/list:
         post:
             tags:
@@ -2036,16 +2055,17 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.game.service.v1.ExportSportEventsResponse'
-    /v1/backoffice/game/tags/list:
+    /v1/backoffice/game/tag-configs/create:
         post:
             tags:
                 - BackofficeGame
-            operationId: BackofficeGame_ListTags
+            description: Tag Config Management HTTP APIs
+            operationId: BackofficeGame_CreateTagConfig
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListTagsRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateTagConfigRequest'
                 required: true
             responses:
                 "200":
@@ -2053,7 +2073,151 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListTagsResponse'
+                                $ref: '#/components/schemas/api.game.service.v1.CreateTagConfigResponse'
+    /v1/backoffice/game/tag-configs/games/update:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_UpdateTagConfigGames
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateTagConfigGamesRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.UpdateTagConfigGamesResponse'
+    /v1/backoffice/game/tag-configs/get:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_GetTagConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTagConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.GetTagConfigResponse'
+    /v1/backoffice/game/tag-configs/update:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_UpdateTagConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateTagConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.UpdateTagConfigResponse'
+    /v1/backoffice/game/tags/create:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_CreateTag
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.CreateTagRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.CreateTagResponse'
+    /v1/backoffice/game/tags/delete:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_DeleteTag
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.DeleteTagRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.DeleteTagResponse'
+    /v1/backoffice/game/tags/get:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_GetTag
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetTagRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.GetTagResponse'
+    /v1/backoffice/game/tags/list:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_TagList
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.TagListRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.TagListResponse'
+    /v1/backoffice/game/tags/update:
+        post:
+            tags:
+                - BackofficeGame
+            operationId: BackofficeGame_UpdateTag
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateTagRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.UpdateTagResponse'
     /v1/backoffice/game/themes/list:
         post:
             tags:
@@ -6839,6 +7003,20 @@ components:
         api.backoffice.service.v1.CreateRoleResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.CreateTagConfigRequest:
+            type: object
+            properties:
+                tagId:
+                    type: string
+                displayName:
+                    type: string
+                followParent:
+                    type: boolean
+        api.backoffice.service.v1.CreateTagRequest:
+            type: object
+            properties:
+                tagName:
+                    type: string
         api.backoffice.service.v1.CreateVipLevelConfigTemplateRequest:
             type: object
             properties:
@@ -7079,6 +7257,11 @@ components:
         api.backoffice.service.v1.DeleteRoleResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.DeleteTagRequest:
+            type: object
+            properties:
+                tagId:
+                    type: string
         api.backoffice.service.v1.DeleteUserResponsibleGamblingConfigRequest:
             type: object
             properties:
@@ -8072,6 +8255,16 @@ components:
                 arpuReportingCurrency:
                     type: string
                 arppuReportingCurrency:
+                    type: string
+        api.backoffice.service.v1.GetTagConfigRequest:
+            type: object
+            properties:
+                tagId:
+                    type: string
+        api.backoffice.service.v1.GetTagRequest:
+            type: object
+            properties:
+                tagId:
                     type: string
         api.backoffice.service.v1.GetTaxReportConfigRequest:
             type: object
@@ -9766,6 +9959,21 @@ components:
                     type: string
                 ggrReportingCurrency:
                     type: string
+        api.backoffice.service.v1.ListGameTagsRequest:
+            type: object
+            properties:
+                tagConfigId:
+                    type: string
+                gameId:
+                    type: string
+                gameName:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListGamesRequest:
             type: object
             properties:
@@ -12280,6 +12488,15 @@ components:
         api.backoffice.service.v1.SetUserTagsResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.TagListRequest:
+            type: object
+            properties:
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.TimeRange:
             type: object
             properties:
@@ -12502,6 +12719,33 @@ components:
         api.backoffice.service.v1.UpdateRoleResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.UpdateTagConfigGamesRequest:
+            type: object
+            properties:
+                tagConfigId:
+                    type: string
+                gameIds:
+                    type: array
+                    items:
+                        type: string
+                enabled:
+                    type: boolean
+        api.backoffice.service.v1.UpdateTagConfigRequest:
+            type: object
+            properties:
+                tagConfigId:
+                    type: string
+                displayName:
+                    type: string
+                followParent:
+                    type: boolean
+        api.backoffice.service.v1.UpdateTagRequest:
+            type: object
+            properties:
+                tagId:
+                    type: string
+                tagName:
+                    type: string
         api.backoffice.service.v1.UpdateTaxReportConfigRequest:
             type: object
             properties:
@@ -13238,6 +13482,19 @@ components:
             properties:
                 gameUrl:
                     type: string
+        api.game.service.v1.CreateTagConfigResponse:
+            type: object
+            properties:
+                tagConfig:
+                    $ref: '#/components/schemas/api.game.service.v1.TagConfig'
+        api.game.service.v1.CreateTagResponse:
+            type: object
+            properties:
+                tag:
+                    $ref: '#/components/schemas/api.game.service.v1.Tag'
+        api.game.service.v1.DeleteTagResponse:
+            type: object
+            properties: {}
         api.game.service.v1.ExportBetsResponse:
             type: object
             properties:
@@ -13356,6 +13613,35 @@ components:
                         - HIGHLIGHT
                     type: string
                     format: enum
+        api.game.service.v1.GameTag:
+            type: object
+            properties:
+                id:
+                    type: string
+                tagId:
+                    type: string
+                tagName:
+                    type: string
+                gameId:
+                    type: string
+                gameName:
+                    type: string
+                tagConfigId:
+                    type: string
+                enabled:
+                    type: boolean
+                systemOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                operatorId:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
         api.game.service.v1.GetBetByIdResponse:
             type: object
             properties:
@@ -13659,6 +13945,18 @@ components:
                 updatedAt:
                     type: string
                     format: date-time
+        api.game.service.v1.GetTagConfigResponse:
+            type: object
+            properties:
+                inheritedConfig:
+                    $ref: '#/components/schemas/api.game.service.v1.TagConfig'
+                customConfig:
+                    $ref: '#/components/schemas/api.game.service.v1.TagConfig'
+        api.game.service.v1.GetTagResponse:
+            type: object
+            properties:
+                tag:
+                    $ref: '#/components/schemas/api.game.service.v1.Tag'
         api.game.service.v1.ListBetsRequest:
             type: object
             properties:
@@ -13834,6 +14132,22 @@ components:
                     $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
                 highWins:
                     $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
+        api.game.service.v1.ListGameTagsResponse:
+            type: object
+            properties:
+                gameTags:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.GameTag'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.game.service.v1.ListGamesRequest:
             type: object
             properties:
@@ -14251,6 +14565,66 @@ components:
                     type: string
                 processedAt:
                     type: string
+        api.game.service.v1.Tag:
+            type: object
+            properties:
+                id:
+                    type: string
+                systemOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                operatorId:
+                    type: string
+                tagName:
+                    type: string
+                enabled:
+                    type: boolean
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+        api.game.service.v1.TagConfig:
+            type: object
+            properties:
+                id:
+                    type: string
+                tagId:
+                    type: string
+                displayName:
+                    type: string
+                followParent:
+                    type: boolean
+                systemOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                operatorId:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+        api.game.service.v1.TagListResponse:
+            type: object
+            properties:
+                tags:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.Tag'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.game.service.v1.Transactions:
             type: object
             properties:
@@ -14266,6 +14640,32 @@ components:
         api.game.service.v1.UpdateGameBetDisplayConfigResponse:
             type: object
             properties: {}
+        api.game.service.v1.UpdateTagConfigGamesResponse:
+            type: object
+            properties:
+                gameTags:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.GameTag'
+                addedCount:
+                    type: integer
+                    format: int32
+                removedCount:
+                    type: integer
+                    format: int32
+                unchangedCount:
+                    type: integer
+                    format: int32
+        api.game.service.v1.UpdateTagConfigResponse:
+            type: object
+            properties:
+                tagConfig:
+                    $ref: '#/components/schemas/api.game.service.v1.TagConfig'
+        api.game.service.v1.UpdateTagResponse:
+            type: object
+            properties:
+                tag:
+                    $ref: '#/components/schemas/api.game.service.v1.Tag'
         api.game.service.v1.UrlInfo:
             type: object
             properties:

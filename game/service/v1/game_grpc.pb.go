@@ -68,6 +68,16 @@ const (
 	Game_UpdateGameBetDisplayConfig_FullMethodName        = "/api.game.service.v1.Game/UpdateGameBetDisplayConfig"
 	Game_ListGameBetDisplayConfig_FullMethodName          = "/api.game.service.v1.Game/ListGameBetDisplayConfig"
 	Game_GetGameInfo_FullMethodName                       = "/api.game.service.v1.Game/GetGameInfo"
+	Game_TagList_FullMethodName                           = "/api.game.service.v1.Game/TagList"
+	Game_CreateTag_FullMethodName                         = "/api.game.service.v1.Game/CreateTag"
+	Game_UpdateTag_FullMethodName                         = "/api.game.service.v1.Game/UpdateTag"
+	Game_DeleteTag_FullMethodName                         = "/api.game.service.v1.Game/DeleteTag"
+	Game_GetTag_FullMethodName                            = "/api.game.service.v1.Game/GetTag"
+	Game_CreateTagConfig_FullMethodName                   = "/api.game.service.v1.Game/CreateTagConfig"
+	Game_UpdateTagConfig_FullMethodName                   = "/api.game.service.v1.Game/UpdateTagConfig"
+	Game_GetTagConfig_FullMethodName                      = "/api.game.service.v1.Game/GetTagConfig"
+	Game_UpdateTagConfigGames_FullMethodName              = "/api.game.service.v1.Game/UpdateTagConfigGames"
+	Game_ListGameTags_FullMethodName                      = "/api.game.service.v1.Game/ListGameTags"
 )
 
 // GameClient is the client API for Game service.
@@ -126,6 +136,16 @@ type GameClient interface {
 	UpdateGameBetDisplayConfig(ctx context.Context, in *UpdateGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*UpdateGameBetDisplayConfigResponse, error)
 	ListGameBetDisplayConfig(ctx context.Context, in *ListGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*ListGameBetDisplayConfigResponse, error)
 	GetGameInfo(ctx context.Context, in *GetGameInfoRequest, opts ...grpc.CallOption) (*GetGameInfoResponse, error)
+	TagList(ctx context.Context, in *TagListRequest, opts ...grpc.CallOption) (*TagListResponse, error)
+	CreateTag(ctx context.Context, in *CreateTagRequest, opts ...grpc.CallOption) (*CreateTagResponse, error)
+	UpdateTag(ctx context.Context, in *UpdateTagRequest, opts ...grpc.CallOption) (*UpdateTagResponse, error)
+	DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*DeleteTagResponse, error)
+	GetTag(ctx context.Context, in *GetTagRequest, opts ...grpc.CallOption) (*GetTagResponse, error)
+	CreateTagConfig(ctx context.Context, in *CreateTagConfigRequest, opts ...grpc.CallOption) (*CreateTagConfigResponse, error)
+	UpdateTagConfig(ctx context.Context, in *UpdateTagConfigRequest, opts ...grpc.CallOption) (*UpdateTagConfigResponse, error)
+	GetTagConfig(ctx context.Context, in *GetTagConfigRequest, opts ...grpc.CallOption) (*GetTagConfigResponse, error)
+	UpdateTagConfigGames(ctx context.Context, in *UpdateTagConfigGamesRequest, opts ...grpc.CallOption) (*UpdateTagConfigGamesResponse, error)
+	ListGameTags(ctx context.Context, in *ListGameTagsRequest, opts ...grpc.CallOption) (*ListGameTagsResponse, error)
 }
 
 type gameClient struct {
@@ -626,6 +646,106 @@ func (c *gameClient) GetGameInfo(ctx context.Context, in *GetGameInfoRequest, op
 	return out, nil
 }
 
+func (c *gameClient) TagList(ctx context.Context, in *TagListRequest, opts ...grpc.CallOption) (*TagListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(TagListResponse)
+	err := c.cc.Invoke(ctx, Game_TagList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) CreateTag(ctx context.Context, in *CreateTagRequest, opts ...grpc.CallOption) (*CreateTagResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateTagResponse)
+	err := c.cc.Invoke(ctx, Game_CreateTag_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) UpdateTag(ctx context.Context, in *UpdateTagRequest, opts ...grpc.CallOption) (*UpdateTagResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateTagResponse)
+	err := c.cc.Invoke(ctx, Game_UpdateTag_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*DeleteTagResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteTagResponse)
+	err := c.cc.Invoke(ctx, Game_DeleteTag_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) GetTag(ctx context.Context, in *GetTagRequest, opts ...grpc.CallOption) (*GetTagResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTagResponse)
+	err := c.cc.Invoke(ctx, Game_GetTag_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) CreateTagConfig(ctx context.Context, in *CreateTagConfigRequest, opts ...grpc.CallOption) (*CreateTagConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateTagConfigResponse)
+	err := c.cc.Invoke(ctx, Game_CreateTagConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) UpdateTagConfig(ctx context.Context, in *UpdateTagConfigRequest, opts ...grpc.CallOption) (*UpdateTagConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateTagConfigResponse)
+	err := c.cc.Invoke(ctx, Game_UpdateTagConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) GetTagConfig(ctx context.Context, in *GetTagConfigRequest, opts ...grpc.CallOption) (*GetTagConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTagConfigResponse)
+	err := c.cc.Invoke(ctx, Game_GetTagConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) UpdateTagConfigGames(ctx context.Context, in *UpdateTagConfigGamesRequest, opts ...grpc.CallOption) (*UpdateTagConfigGamesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateTagConfigGamesResponse)
+	err := c.cc.Invoke(ctx, Game_UpdateTagConfigGames_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) ListGameTags(ctx context.Context, in *ListGameTagsRequest, opts ...grpc.CallOption) (*ListGameTagsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListGameTagsResponse)
+	err := c.cc.Invoke(ctx, Game_ListGameTags_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GameServer is the server API for Game service.
 // All implementations must embed UnimplementedGameServer
 // for forward compatibility.
@@ -682,6 +802,16 @@ type GameServer interface {
 	UpdateGameBetDisplayConfig(context.Context, *UpdateGameBetDisplayConfigRequest) (*UpdateGameBetDisplayConfigResponse, error)
 	ListGameBetDisplayConfig(context.Context, *ListGameBetDisplayConfigRequest) (*ListGameBetDisplayConfigResponse, error)
 	GetGameInfo(context.Context, *GetGameInfoRequest) (*GetGameInfoResponse, error)
+	TagList(context.Context, *TagListRequest) (*TagListResponse, error)
+	CreateTag(context.Context, *CreateTagRequest) (*CreateTagResponse, error)
+	UpdateTag(context.Context, *UpdateTagRequest) (*UpdateTagResponse, error)
+	DeleteTag(context.Context, *DeleteTagRequest) (*DeleteTagResponse, error)
+	GetTag(context.Context, *GetTagRequest) (*GetTagResponse, error)
+	CreateTagConfig(context.Context, *CreateTagConfigRequest) (*CreateTagConfigResponse, error)
+	UpdateTagConfig(context.Context, *UpdateTagConfigRequest) (*UpdateTagConfigResponse, error)
+	GetTagConfig(context.Context, *GetTagConfigRequest) (*GetTagConfigResponse, error)
+	UpdateTagConfigGames(context.Context, *UpdateTagConfigGamesRequest) (*UpdateTagConfigGamesResponse, error)
+	ListGameTags(context.Context, *ListGameTagsRequest) (*ListGameTagsResponse, error)
 	mustEmbedUnimplementedGameServer()
 }
 
@@ -838,6 +968,36 @@ func (UnimplementedGameServer) ListGameBetDisplayConfig(context.Context, *ListGa
 }
 func (UnimplementedGameServer) GetGameInfo(context.Context, *GetGameInfoRequest) (*GetGameInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGameInfo not implemented")
+}
+func (UnimplementedGameServer) TagList(context.Context, *TagListRequest) (*TagListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TagList not implemented")
+}
+func (UnimplementedGameServer) CreateTag(context.Context, *CreateTagRequest) (*CreateTagResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTag not implemented")
+}
+func (UnimplementedGameServer) UpdateTag(context.Context, *UpdateTagRequest) (*UpdateTagResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTag not implemented")
+}
+func (UnimplementedGameServer) DeleteTag(context.Context, *DeleteTagRequest) (*DeleteTagResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTag not implemented")
+}
+func (UnimplementedGameServer) GetTag(context.Context, *GetTagRequest) (*GetTagResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTag not implemented")
+}
+func (UnimplementedGameServer) CreateTagConfig(context.Context, *CreateTagConfigRequest) (*CreateTagConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTagConfig not implemented")
+}
+func (UnimplementedGameServer) UpdateTagConfig(context.Context, *UpdateTagConfigRequest) (*UpdateTagConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTagConfig not implemented")
+}
+func (UnimplementedGameServer) GetTagConfig(context.Context, *GetTagConfigRequest) (*GetTagConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTagConfig not implemented")
+}
+func (UnimplementedGameServer) UpdateTagConfigGames(context.Context, *UpdateTagConfigGamesRequest) (*UpdateTagConfigGamesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTagConfigGames not implemented")
+}
+func (UnimplementedGameServer) ListGameTags(context.Context, *ListGameTagsRequest) (*ListGameTagsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListGameTags not implemented")
 }
 func (UnimplementedGameServer) mustEmbedUnimplementedGameServer() {}
 func (UnimplementedGameServer) testEmbeddedByValue()              {}
@@ -1742,6 +1902,186 @@ func _Game_GetGameInfo_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_TagList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TagListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).TagList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_TagList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).TagList(ctx, req.(*TagListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_CreateTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).CreateTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_CreateTag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).CreateTag(ctx, req.(*CreateTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_UpdateTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).UpdateTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_UpdateTag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).UpdateTag(ctx, req.(*UpdateTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_DeleteTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).DeleteTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_DeleteTag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).DeleteTag(ctx, req.(*DeleteTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_GetTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).GetTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_GetTag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).GetTag(ctx, req.(*GetTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_CreateTagConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateTagConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).CreateTagConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_CreateTagConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).CreateTagConfig(ctx, req.(*CreateTagConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_UpdateTagConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTagConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).UpdateTagConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_UpdateTagConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).UpdateTagConfig(ctx, req.(*UpdateTagConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_GetTagConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTagConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).GetTagConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_GetTagConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).GetTagConfig(ctx, req.(*GetTagConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_UpdateTagConfigGames_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTagConfigGamesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).UpdateTagConfigGames(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_UpdateTagConfigGames_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).UpdateTagConfigGames(ctx, req.(*UpdateTagConfigGamesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_ListGameTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListGameTagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).ListGameTags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_ListGameTags_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).ListGameTags(ctx, req.(*ListGameTagsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Game_ServiceDesc is the grpc.ServiceDesc for Game service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1944,6 +2284,46 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetGameInfo",
 			Handler:    _Game_GetGameInfo_Handler,
+		},
+		{
+			MethodName: "TagList",
+			Handler:    _Game_TagList_Handler,
+		},
+		{
+			MethodName: "CreateTag",
+			Handler:    _Game_CreateTag_Handler,
+		},
+		{
+			MethodName: "UpdateTag",
+			Handler:    _Game_UpdateTag_Handler,
+		},
+		{
+			MethodName: "DeleteTag",
+			Handler:    _Game_DeleteTag_Handler,
+		},
+		{
+			MethodName: "GetTag",
+			Handler:    _Game_GetTag_Handler,
+		},
+		{
+			MethodName: "CreateTagConfig",
+			Handler:    _Game_CreateTagConfig_Handler,
+		},
+		{
+			MethodName: "UpdateTagConfig",
+			Handler:    _Game_UpdateTagConfig_Handler,
+		},
+		{
+			MethodName: "GetTagConfig",
+			Handler:    _Game_GetTagConfig_Handler,
+		},
+		{
+			MethodName: "UpdateTagConfigGames",
+			Handler:    _Game_UpdateTagConfigGames_Handler,
+		},
+		{
+			MethodName: "ListGameTags",
+			Handler:    _Game_ListGameTags_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

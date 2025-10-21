@@ -204,6 +204,77 @@ service BackofficeGame {
 		
 	}
 
+	rpc TagList(TagListRequest) returns (game.service.v1.TagListResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/tags/list"
+			body: "*"
+		};
+	}
+
+	rpc CreateTag(CreateTagRequest) returns (game.service.v1.CreateTagResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/tags/create"
+			body: "*"
+		};
+	}
+
+	rpc UpdateTag(UpdateTagRequest) returns (game.service.v1.UpdateTagResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/tags/update"
+			body: "*"
+		};
+	}
+
+	rpc DeleteTag(DeleteTagRequest) returns (game.service.v1.DeleteTagResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/tags/delete"
+			body: "*"
+		};
+	}
+
+	rpc GetTag(GetTagRequest) returns (game.service.v1.GetTagResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/tags/get"
+			body: "*"
+		};
+	}
+
+	// Tag Config Management HTTP APIs
+	rpc CreateTagConfig(CreateTagConfigRequest) returns (game.service.v1.CreateTagConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/tag-configs/create"
+			body: "*"
+		};
+	}
+
+	rpc UpdateTagConfig(UpdateTagConfigRequest) returns (game.service.v1.UpdateTagConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/tag-configs/update"
+			body: "*"
+		};
+	}
+
+	rpc GetTagConfig(GetTagConfigRequest) returns (game.service.v1.GetTagConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/tag-configs/get"
+			body: "*"
+		};
+	}
+
+	rpc UpdateTagConfigGames(UpdateTagConfigGamesRequest) returns (game.service.v1.UpdateTagConfigGamesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/tag-configs/games/update"
+			body: "*"
+		};
+	}
+
+	// Game Tag Management HTTP APIs
+	rpc ListGameTags(ListGameTagsRequest) returns (game.service.v1.ListGameTagsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/game-tags/list"
+			body: "*"
+		};
+	}
 }
 
 
@@ -646,4 +717,56 @@ message ListGameBetDisplayConfigRequest {
 		game.service.v1.BettingConfig high_wins = 3;
 	}
 	repeated Item list = 1;
+}
+
+message TagListRequest {
+	optional int32 page = 1;
+	optional int32 page_size = 2;
+}
+
+message CreateTagRequest {
+	string tag_name = 1;
+}
+
+message UpdateTagRequest {
+	int64 tag_id = 1;
+	string tag_name = 2;
+}
+
+message DeleteTagRequest {
+	int64 tag_id = 1;
+}
+
+message GetTagRequest {
+	int64 tag_id = 1;
+}
+
+message CreateTagConfigRequest {
+	int64 tag_id = 1;
+	string display_name = 2;
+	optional bool follow_parent = 3;
+}
+
+message UpdateTagConfigRequest {
+	int64 tag_config_id = 1;
+	string display_name = 2;
+	optional bool follow_parent = 3;
+}
+
+message GetTagConfigRequest {
+	int64 tag_id = 1;
+}
+
+message UpdateTagConfigGamesRequest {
+	int64 tag_config_id = 1;
+	repeated string game_ids = 2;
+	optional bool enabled = 3;
+}
+
+message ListGameTagsRequest {
+	int64 tag_config_id = 1;
+	optional string game_id = 2;
+	optional string game_name = 3;
+	optional int32 page = 4;
+	optional int32 page_size = 5;
 }
