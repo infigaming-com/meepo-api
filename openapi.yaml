@@ -15420,6 +15420,9 @@ components:
                 idType:
                     type: string
                     description: User ID Type
+                campaignUrl:
+                    type: string
+                    description: campaign url
             description: RegisterRequest contains the information needed to register a new user.
         api.user.service.v1.ResetPasswordWithCodeRequest:
             type: object
@@ -15618,6 +15621,12 @@ components:
                     allOf:
                         - $ref: '#/components/schemas/api.common.OperatorContext'
                     description: The initial operator context.
+                campaignUrl:
+                    type: string
+                campaignId:
+                    type: string
+                affiliateId:
+                    type: string
         api.user.service.v1.UpdateUserResponse:
             type: object
             properties: {}

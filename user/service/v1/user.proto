@@ -483,6 +483,8 @@ message RegisterRequest {
 	optional string id_number = 5;
 	// User ID Type
 	optional string id_type = 6;
+	// campaign url
+	optional string campaign_url = 7;
 }
 
 // LoginRequest contains the credentials for user login.
@@ -791,6 +793,9 @@ message UpdateUserRequest {
 	optional bool phone_verified = 18;
 	// The initial operator context.
 	api.common.OperatorContext operator_context = 19;
+	optional string campaign_url = 20;
+	optional int64 campaign_id = 21;
+	optional int64 affiliate_id = 22;
 }
 
 message UpdateUserResponse {

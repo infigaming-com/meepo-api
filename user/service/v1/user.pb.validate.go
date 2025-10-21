@@ -312,6 +312,10 @@ func (m *RegisterRequest) validate(all bool) error {
 		// no validation rules for IdType
 	}
 
+	if m.CampaignUrl != nil {
+		// no validation rules for CampaignUrl
+	}
+
 	if len(errors) > 0 {
 		return RegisterRequestMultiError(errors)
 	}
@@ -5658,6 +5662,18 @@ func (m *UpdateUserRequest) validate(all bool) error {
 
 	if m.PhoneVerified != nil {
 		// no validation rules for PhoneVerified
+	}
+
+	if m.CampaignUrl != nil {
+		// no validation rules for CampaignUrl
+	}
+
+	if m.CampaignId != nil {
+		// no validation rules for CampaignId
+	}
+
+	if m.AffiliateId != nil {
+		// no validation rules for AffiliateId
 	}
 
 	if len(errors) > 0 {
