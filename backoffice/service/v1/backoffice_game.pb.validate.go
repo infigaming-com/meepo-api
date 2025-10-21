@@ -6589,27 +6589,56 @@ var _ interface {
 	ErrorName() string
 } = ListGameBetDisplayConfigRequestValidationError{}
 
-// Validate checks the field values on TagListRequest with the rules defined in
+// Validate checks the field values on ListTagRequest with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
-func (m *TagListRequest) Validate() error {
+func (m *ListTagRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on TagListRequest with the rules defined
+// ValidateAll checks the field values on ListTagRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in TagListRequestMultiError,
+// result is a list of violation errors wrapped in ListTagRequestMultiError,
 // or nil if none found.
-func (m *TagListRequest) ValidateAll() error {
+func (m *ListTagRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *TagListRequest) validate(all bool) error {
+func (m *ListTagRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListTagRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListTagRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListTagRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if m.Page != nil {
 		// no validation rules for Page
@@ -6620,19 +6649,19 @@ func (m *TagListRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return TagListRequestMultiError(errors)
+		return ListTagRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// TagListRequestMultiError is an error wrapping multiple validation errors
-// returned by TagListRequest.ValidateAll() if the designated constraints
+// ListTagRequestMultiError is an error wrapping multiple validation errors
+// returned by ListTagRequest.ValidateAll() if the designated constraints
 // aren't met.
-type TagListRequestMultiError []error
+type ListTagRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m TagListRequestMultiError) Error() string {
+func (m ListTagRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -6641,11 +6670,11 @@ func (m TagListRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m TagListRequestMultiError) AllErrors() []error { return m }
+func (m ListTagRequestMultiError) AllErrors() []error { return m }
 
-// TagListRequestValidationError is the validation error returned by
-// TagListRequest.Validate if the designated constraints aren't met.
-type TagListRequestValidationError struct {
+// ListTagRequestValidationError is the validation error returned by
+// ListTagRequest.Validate if the designated constraints aren't met.
+type ListTagRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -6653,22 +6682,22 @@ type TagListRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e TagListRequestValidationError) Field() string { return e.field }
+func (e ListTagRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e TagListRequestValidationError) Reason() string { return e.reason }
+func (e ListTagRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e TagListRequestValidationError) Cause() error { return e.cause }
+func (e ListTagRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e TagListRequestValidationError) Key() bool { return e.key }
+func (e ListTagRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e TagListRequestValidationError) ErrorName() string { return "TagListRequestValidationError" }
+func (e ListTagRequestValidationError) ErrorName() string { return "ListTagRequestValidationError" }
 
 // Error satisfies the builtin error interface
-func (e TagListRequestValidationError) Error() string {
+func (e ListTagRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -6680,14 +6709,14 @@ func (e TagListRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sTagListRequest.%s: %s%s",
+		"invalid %sListTagRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = TagListRequestValidationError{}
+var _ error = ListTagRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -6695,7 +6724,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = TagListRequestValidationError{}
+} = ListTagRequestValidationError{}
 
 // Validate checks the field values on CreateTagRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, the

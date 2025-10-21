@@ -187,7 +187,7 @@ service Game {
 
 	rpc GetGameInfo(GetGameInfoRequest) returns (GetGameInfoResponse) { }
 
-	rpc TagList(TagListRequest) returns (TagListResponse) { }
+	rpc ListTag(ListTagRequest) returns (ListTagResponse) { }
 
 	rpc CreateTag(CreateTagRequest) returns (CreateTagResponse) {}
 	rpc UpdateTag(UpdateTagRequest) returns (UpdateTagResponse) {}
@@ -1651,13 +1651,13 @@ message GetGameInfoResponse {
 	GameInfo game_info = 1;
 }
 
-message TagListRequest {
-	api.common.OperatorContext operator_context = 1;
+message ListTagRequest {
+	api.common.OperatorContext target_operator_context = 1;
 	optional int32 page = 2;
 	optional int32 page_size = 3;
 }
 
-message TagListResponse {
+message ListTagResponse {
 	message TagInfo {
 		int64 tag_id = 1;
 		string tag_name = 2;

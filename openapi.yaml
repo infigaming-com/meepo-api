@@ -2186,12 +2186,12 @@ paths:
         post:
             tags:
                 - BackofficeGame
-            operationId: BackofficeGame_TagList
+            operationId: BackofficeGame_ListTag
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.TagListRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListTagRequest'
                 required: true
             responses:
                 "200":
@@ -2199,7 +2199,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.game.service.v1.TagListResponse'
+                                $ref: '#/components/schemas/api.game.service.v1.ListTagResponse'
     /v1/backoffice/game/tags/update:
         post:
             tags:
@@ -11337,6 +11337,17 @@ components:
                     type: string
                 ngrReportingCurrency:
                     type: string
+        api.backoffice.service.v1.ListTagRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListTagsRequest:
             type: object
             properties: {}
@@ -12488,15 +12499,6 @@ components:
         api.backoffice.service.v1.SetUserTagsResponse:
             type: object
             properties: {}
-        api.backoffice.service.v1.TagListRequest:
-            type: object
-            properties:
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
         api.backoffice.service.v1.TimeRange:
             type: object
             properties:
@@ -14394,6 +14396,22 @@ components:
                     type: string
                 maximumBetAmount:
                     type: string
+        api.game.service.v1.ListTagResponse:
+            type: object
+            properties:
+                tags:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.Tag'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.game.service.v1.ListUnpaidBetsResponse:
             type: object
             properties:
@@ -14609,22 +14627,6 @@ components:
                     type: string
                 updatedAt:
                     type: string
-        api.game.service.v1.TagListResponse:
-            type: object
-            properties:
-                tags:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.game.service.v1.Tag'
-                total:
-                    type: integer
-                    format: int32
-                page:
-                    type: integer
-                    format: int32
-                pageSize:
-                    type: integer
-                    format: int32
         api.game.service.v1.Transactions:
             type: object
             properties:

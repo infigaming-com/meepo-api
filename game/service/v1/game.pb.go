@@ -9085,29 +9085,29 @@ func (x *GetGameInfoResponse) GetGameInfo() *GameInfo {
 	return nil
 }
 
-type TagListRequest struct {
-	state           protoimpl.MessageState  `protogen:"open.v1"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	Page            *int32                  `protobuf:"varint,2,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize        *int32                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+type ListTagRequest struct {
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Page                  *int32                  `protobuf:"varint,2,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize              *int32                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
-func (x *TagListRequest) Reset() {
-	*x = TagListRequest{}
+func (x *ListTagRequest) Reset() {
+	*x = ListTagRequest{}
 	mi := &file_game_service_v1_game_proto_msgTypes[111]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *TagListRequest) String() string {
+func (x *ListTagRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*TagListRequest) ProtoMessage() {}
+func (*ListTagRequest) ProtoMessage() {}
 
-func (x *TagListRequest) ProtoReflect() protoreflect.Message {
+func (x *ListTagRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_game_service_v1_game_proto_msgTypes[111]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -9119,33 +9119,33 @@ func (x *TagListRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TagListRequest.ProtoReflect.Descriptor instead.
-func (*TagListRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListTagRequest.ProtoReflect.Descriptor instead.
+func (*ListTagRequest) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{111}
 }
 
-func (x *TagListRequest) GetOperatorContext() *common.OperatorContext {
+func (x *ListTagRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.OperatorContext
+		return x.TargetOperatorContext
 	}
 	return nil
 }
 
-func (x *TagListRequest) GetPage() int32 {
+func (x *ListTagRequest) GetPage() int32 {
 	if x != nil && x.Page != nil {
 		return *x.Page
 	}
 	return 0
 }
 
-func (x *TagListRequest) GetPageSize() int32 {
+func (x *ListTagRequest) GetPageSize() int32 {
 	if x != nil && x.PageSize != nil {
 		return *x.PageSize
 	}
 	return 0
 }
 
-type TagListResponse struct {
+type ListTagResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Tags          []*Tag                 `protobuf:"bytes,1,rep,name=tags,proto3" json:"tags,omitempty"`
 	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
@@ -9155,20 +9155,20 @@ type TagListResponse struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *TagListResponse) Reset() {
-	*x = TagListResponse{}
+func (x *ListTagResponse) Reset() {
+	*x = ListTagResponse{}
 	mi := &file_game_service_v1_game_proto_msgTypes[112]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *TagListResponse) String() string {
+func (x *ListTagResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*TagListResponse) ProtoMessage() {}
+func (*ListTagResponse) ProtoMessage() {}
 
-func (x *TagListResponse) ProtoReflect() protoreflect.Message {
+func (x *ListTagResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_game_service_v1_game_proto_msgTypes[112]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -9180,33 +9180,33 @@ func (x *TagListResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TagListResponse.ProtoReflect.Descriptor instead.
-func (*TagListResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListTagResponse.ProtoReflect.Descriptor instead.
+func (*ListTagResponse) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{112}
 }
 
-func (x *TagListResponse) GetTags() []*Tag {
+func (x *ListTagResponse) GetTags() []*Tag {
 	if x != nil {
 		return x.Tags
 	}
 	return nil
 }
 
-func (x *TagListResponse) GetTotal() int32 {
+func (x *ListTagResponse) GetTotal() int32 {
 	if x != nil {
 		return x.Total
 	}
 	return 0
 }
 
-func (x *TagListResponse) GetPage() int32 {
+func (x *ListTagResponse) GetPage() int32 {
 	if x != nil {
 		return x.Page
 	}
 	return 0
 }
 
-func (x *TagListResponse) GetPageSize() int32 {
+func (x *ListTagResponse) GetPageSize() int32 {
 	if x != nil {
 		return x.PageSize
 	}
@@ -13803,7 +13803,7 @@ func (x *ListGameBetDisplayConfigResponse_Item) GetHighWins() *BettingConfig {
 	return nil
 }
 
-type TagListResponse_TagInfo struct {
+type ListTagResponse_TagInfo struct {
 	state                   protoimpl.MessageState `protogen:"open.v1"`
 	TagId                   int64                  `protobuf:"varint,1,opt,name=tag_id,json=tagId,proto3" json:"tag_id,omitempty"`
 	TagName                 string                 `protobuf:"bytes,2,opt,name=tag_name,json=tagName,proto3" json:"tag_name,omitempty"`
@@ -13820,20 +13820,20 @@ type TagListResponse_TagInfo struct {
 	sizeCache               protoimpl.SizeCache
 }
 
-func (x *TagListResponse_TagInfo) Reset() {
-	*x = TagListResponse_TagInfo{}
+func (x *ListTagResponse_TagInfo) Reset() {
+	*x = ListTagResponse_TagInfo{}
 	mi := &file_game_service_v1_game_proto_msgTypes[160]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *TagListResponse_TagInfo) String() string {
+func (x *ListTagResponse_TagInfo) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*TagListResponse_TagInfo) ProtoMessage() {}
+func (*ListTagResponse_TagInfo) ProtoMessage() {}
 
-func (x *TagListResponse_TagInfo) ProtoReflect() protoreflect.Message {
+func (x *ListTagResponse_TagInfo) ProtoReflect() protoreflect.Message {
 	mi := &file_game_service_v1_game_proto_msgTypes[160]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -13845,82 +13845,82 @@ func (x *TagListResponse_TagInfo) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TagListResponse_TagInfo.ProtoReflect.Descriptor instead.
-func (*TagListResponse_TagInfo) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListTagResponse_TagInfo.ProtoReflect.Descriptor instead.
+func (*ListTagResponse_TagInfo) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{112, 0}
 }
 
-func (x *TagListResponse_TagInfo) GetTagId() int64 {
+func (x *ListTagResponse_TagInfo) GetTagId() int64 {
 	if x != nil {
 		return x.TagId
 	}
 	return 0
 }
 
-func (x *TagListResponse_TagInfo) GetTagName() string {
+func (x *ListTagResponse_TagInfo) GetTagName() string {
 	if x != nil {
 		return x.TagName
 	}
 	return ""
 }
 
-func (x *TagListResponse_TagInfo) GetOperatorId() int64 {
+func (x *ListTagResponse_TagInfo) GetOperatorId() int64 {
 	if x != nil {
 		return x.OperatorId
 	}
 	return 0
 }
 
-func (x *TagListResponse_TagInfo) GetCompanyOperatorId() int64 {
+func (x *ListTagResponse_TagInfo) GetCompanyOperatorId() int64 {
 	if x != nil {
 		return x.CompanyOperatorId
 	}
 	return 0
 }
 
-func (x *TagListResponse_TagInfo) GetRetailerOperatorId() int64 {
+func (x *ListTagResponse_TagInfo) GetRetailerOperatorId() int64 {
 	if x != nil {
 		return x.RetailerOperatorId
 	}
 	return 0
 }
 
-func (x *TagListResponse_TagInfo) GetSystemOperatorId() int64 {
+func (x *ListTagResponse_TagInfo) GetSystemOperatorId() int64 {
 	if x != nil {
 		return x.SystemOperatorId
 	}
 	return 0
 }
 
-func (x *TagListResponse_TagInfo) GetCreator() string {
+func (x *ListTagResponse_TagInfo) GetCreator() string {
 	if x != nil {
 		return x.Creator
 	}
 	return ""
 }
 
-func (x *TagListResponse_TagInfo) GetConfiguredProviderCount() int64 {
+func (x *ListTagResponse_TagInfo) GetConfiguredProviderCount() int64 {
 	if x != nil {
 		return x.ConfiguredProviderCount
 	}
 	return 0
 }
 
-func (x *TagListResponse_TagInfo) GetConfiguredGameCount() int64 {
+func (x *ListTagResponse_TagInfo) GetConfiguredGameCount() int64 {
 	if x != nil {
 		return x.ConfiguredGameCount
 	}
 	return 0
 }
 
-func (x *TagListResponse_TagInfo) GetInheritedConfig() *TagConfig {
+func (x *ListTagResponse_TagInfo) GetInheritedConfig() *TagConfig {
 	if x != nil {
 		return x.InheritedConfig
 	}
 	return nil
 }
 
-func (x *TagListResponse_TagInfo) GetCustomConfig() *TagConfig {
+func (x *ListTagResponse_TagInfo) GetCustomConfig() *TagConfig {
 	if x != nil {
 		return x.CustomConfig
 	}
@@ -15304,15 +15304,15 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x12GetGameInfoRequest\x12\x17\n" +
 	"\agame_id\x18\x01 \x01(\tR\x06gameId\"Q\n" +
 	"\x13GetGameInfoResponse\x12:\n" +
-	"\tgame_info\x18\x01 \x01(\v2\x1d.api.game.service.v1.GameInfoR\bgameInfo\"\xaa\x01\n" +
-	"\x0eTagListRequest\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x17\n" +
+	"\tgame_info\x18\x01 \x01(\v2\x1d.api.game.service.v1.GameInfoR\bgameInfo\"\xb7\x01\n" +
+	"\x0eListTagRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x17\n" +
 	"\x04page\x18\x02 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\x03 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_size\"\xc0\x05\n" +
-	"\x0fTagListResponse\x12,\n" +
+	"\x0fListTagResponse\x12,\n" +
 	"\x04tags\x18\x01 \x03(\v2\x18.api.game.service.v1.TagR\x04tags\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
@@ -15522,7 +15522,7 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x1aUpdateGameBetDisplayConfig\x126.api.game.service.v1.UpdateGameBetDisplayConfigRequest\x1a7.api.game.service.v1.UpdateGameBetDisplayConfigResponse\"\x00\x12\x89\x01\n" +
 	"\x18ListGameBetDisplayConfig\x124.api.game.service.v1.ListGameBetDisplayConfigRequest\x1a5.api.game.service.v1.ListGameBetDisplayConfigResponse\"\x00\x12b\n" +
 	"\vGetGameInfo\x12'.api.game.service.v1.GetGameInfoRequest\x1a(.api.game.service.v1.GetGameInfoResponse\"\x00\x12V\n" +
-	"\aTagList\x12#.api.game.service.v1.TagListRequest\x1a$.api.game.service.v1.TagListResponse\"\x00\x12\\\n" +
+	"\aListTag\x12#.api.game.service.v1.ListTagRequest\x1a$.api.game.service.v1.ListTagResponse\"\x00\x12\\\n" +
 	"\tCreateTag\x12%.api.game.service.v1.CreateTagRequest\x1a&.api.game.service.v1.CreateTagResponse\"\x00\x12\\\n" +
 	"\tUpdateTag\x12%.api.game.service.v1.UpdateTagRequest\x1a&.api.game.service.v1.UpdateTagResponse\"\x00\x12\\\n" +
 	"\tDeleteTag\x12%.api.game.service.v1.DeleteTagRequest\x1a&.api.game.service.v1.DeleteTagResponse\"\x00\x12S\n" +
@@ -15662,8 +15662,8 @@ var file_game_service_v1_game_proto_goTypes = []any{
 	(*ListGameBetDisplayConfigResponse)(nil),                               // 110: api.game.service.v1.ListGameBetDisplayConfigResponse
 	(*GetGameInfoRequest)(nil),                                             // 111: api.game.service.v1.GetGameInfoRequest
 	(*GetGameInfoResponse)(nil),                                            // 112: api.game.service.v1.GetGameInfoResponse
-	(*TagListRequest)(nil),                                                 // 113: api.game.service.v1.TagListRequest
-	(*TagListResponse)(nil),                                                // 114: api.game.service.v1.TagListResponse
+	(*ListTagRequest)(nil),                                                 // 113: api.game.service.v1.ListTagRequest
+	(*ListTagResponse)(nil),                                                // 114: api.game.service.v1.ListTagResponse
 	(*Tag)(nil),                                                            // 115: api.game.service.v1.Tag
 	(*CreateTagRequest)(nil),                                               // 116: api.game.service.v1.CreateTagRequest
 	(*CreateTagResponse)(nil),                                              // 117: api.game.service.v1.CreateTagResponse
@@ -15711,7 +15711,7 @@ var file_game_service_v1_game_proto_goTypes = []any{
 	(*ListCustomerStrikeReportsResponse_CustomerStrikeReport)(nil),         // 159: api.game.service.v1.ListCustomerStrikeReportsResponse.CustomerStrikeReport
 	(*ListGameBetDisplayConfigRequest_Item)(nil),                           // 160: api.game.service.v1.ListGameBetDisplayConfigRequest.Item
 	(*ListGameBetDisplayConfigResponse_Item)(nil),                          // 161: api.game.service.v1.ListGameBetDisplayConfigResponse.Item
-	(*TagListResponse_TagInfo)(nil),                                        // 162: api.game.service.v1.TagListResponse.TagInfo
+	(*ListTagResponse_TagInfo)(nil),                                        // 162: api.game.service.v1.ListTagResponse.TagInfo
 	(*common.OperatorContext)(nil),                                         // 163: api.common.OperatorContext
 	(*timestamppb.Timestamp)(nil),                                          // 164: google.protobuf.Timestamp
 	(*common.OperatorContextFilters)(nil),                                  // 165: api.common.OperatorContextFilters
@@ -15821,8 +15821,8 @@ var file_game_service_v1_game_proto_depIdxs = []int32{
 	163, // 101: api.game.service.v1.ListGameBetDisplayConfigRequest.operator_context:type_name -> api.common.OperatorContext
 	161, // 102: api.game.service.v1.ListGameBetDisplayConfigResponse.list:type_name -> api.game.service.v1.ListGameBetDisplayConfigResponse.Item
 	26,  // 103: api.game.service.v1.GetGameInfoResponse.game_info:type_name -> api.game.service.v1.GameInfo
-	163, // 104: api.game.service.v1.TagListRequest.operator_context:type_name -> api.common.OperatorContext
-	115, // 105: api.game.service.v1.TagListResponse.tags:type_name -> api.game.service.v1.Tag
+	163, // 104: api.game.service.v1.ListTagRequest.target_operator_context:type_name -> api.common.OperatorContext
+	115, // 105: api.game.service.v1.ListTagResponse.tags:type_name -> api.game.service.v1.Tag
 	163, // 106: api.game.service.v1.CreateTagRequest.operator_context:type_name -> api.common.OperatorContext
 	115, // 107: api.game.service.v1.CreateTagResponse.tag:type_name -> api.game.service.v1.Tag
 	163, // 108: api.game.service.v1.UpdateTagRequest.operator_context:type_name -> api.common.OperatorContext
@@ -15865,8 +15865,8 @@ var file_game_service_v1_game_proto_depIdxs = []int32{
 	104, // 145: api.game.service.v1.ListGameBetDisplayConfigRequest.Item.high_wins:type_name -> api.game.service.v1.BettingConfig
 	104, // 146: api.game.service.v1.ListGameBetDisplayConfigResponse.Item.all_bet:type_name -> api.game.service.v1.BettingConfig
 	104, // 147: api.game.service.v1.ListGameBetDisplayConfigResponse.Item.high_wins:type_name -> api.game.service.v1.BettingConfig
-	124, // 148: api.game.service.v1.TagListResponse.TagInfo.inherited_config:type_name -> api.game.service.v1.TagConfig
-	124, // 149: api.game.service.v1.TagListResponse.TagInfo.custom_config:type_name -> api.game.service.v1.TagConfig
+	124, // 148: api.game.service.v1.ListTagResponse.TagInfo.inherited_config:type_name -> api.game.service.v1.TagConfig
+	124, // 149: api.game.service.v1.ListTagResponse.TagInfo.custom_config:type_name -> api.game.service.v1.TagConfig
 	2,   // 150: api.game.service.v1.Game.CreateOperator:input_type -> api.game.service.v1.CreateOperatorRequest
 	4,   // 151: api.game.service.v1.Game.UpdateOperator:input_type -> api.game.service.v1.UpdateOperatorRequest
 	6,   // 152: api.game.service.v1.Game.DeleteOperator:input_type -> api.game.service.v1.DeleteOperatorRequest
@@ -15916,7 +15916,7 @@ var file_game_service_v1_game_proto_depIdxs = []int32{
 	107, // 196: api.game.service.v1.Game.UpdateGameBetDisplayConfig:input_type -> api.game.service.v1.UpdateGameBetDisplayConfigRequest
 	109, // 197: api.game.service.v1.Game.ListGameBetDisplayConfig:input_type -> api.game.service.v1.ListGameBetDisplayConfigRequest
 	111, // 198: api.game.service.v1.Game.GetGameInfo:input_type -> api.game.service.v1.GetGameInfoRequest
-	113, // 199: api.game.service.v1.Game.TagList:input_type -> api.game.service.v1.TagListRequest
+	113, // 199: api.game.service.v1.Game.ListTag:input_type -> api.game.service.v1.ListTagRequest
 	116, // 200: api.game.service.v1.Game.CreateTag:input_type -> api.game.service.v1.CreateTagRequest
 	118, // 201: api.game.service.v1.Game.UpdateTag:input_type -> api.game.service.v1.UpdateTagRequest
 	120, // 202: api.game.service.v1.Game.DeleteTag:input_type -> api.game.service.v1.DeleteTagRequest
@@ -15975,7 +15975,7 @@ var file_game_service_v1_game_proto_depIdxs = []int32{
 	108, // 255: api.game.service.v1.Game.UpdateGameBetDisplayConfig:output_type -> api.game.service.v1.UpdateGameBetDisplayConfigResponse
 	110, // 256: api.game.service.v1.Game.ListGameBetDisplayConfig:output_type -> api.game.service.v1.ListGameBetDisplayConfigResponse
 	112, // 257: api.game.service.v1.Game.GetGameInfo:output_type -> api.game.service.v1.GetGameInfoResponse
-	114, // 258: api.game.service.v1.Game.TagList:output_type -> api.game.service.v1.TagListResponse
+	114, // 258: api.game.service.v1.Game.ListTag:output_type -> api.game.service.v1.ListTagResponse
 	117, // 259: api.game.service.v1.Game.CreateTag:output_type -> api.game.service.v1.CreateTagResponse
 	119, // 260: api.game.service.v1.Game.UpdateTag:output_type -> api.game.service.v1.UpdateTagResponse
 	121, // 261: api.game.service.v1.Game.DeleteTag:output_type -> api.game.service.v1.DeleteTagResponse

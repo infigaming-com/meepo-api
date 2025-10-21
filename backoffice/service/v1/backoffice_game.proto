@@ -204,7 +204,7 @@ service BackofficeGame {
 		
 	}
 
-	rpc TagList(TagListRequest) returns (game.service.v1.TagListResponse) {
+	rpc ListTag(ListTagRequest) returns (game.service.v1.ListTagResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/game/tags/list"
 			body: "*"
@@ -719,9 +719,10 @@ message ListGameBetDisplayConfigRequest {
 	repeated Item list = 1;
 }
 
-message TagListRequest {
-	optional int32 page = 1;
-	optional int32 page_size = 2;
+message ListTagRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	optional int32 page = 2;
+	optional int32 page_size = 3;
 }
 
 message CreateTagRequest {

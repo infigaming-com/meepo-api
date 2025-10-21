@@ -49,7 +49,7 @@ const (
 	BackofficeGame_AddGameBetDisplayConfig_FullMethodName     = "/api.backoffice.service.v1.BackofficeGame/AddGameBetDisplayConfig"
 	BackofficeGame_UpdateGameBetDisplayConfig_FullMethodName  = "/api.backoffice.service.v1.BackofficeGame/UpdateGameBetDisplayConfig"
 	BackofficeGame_ListGameBetDisplayConfig_FullMethodName    = "/api.backoffice.service.v1.BackofficeGame/ListGameBetDisplayConfig"
-	BackofficeGame_TagList_FullMethodName                     = "/api.backoffice.service.v1.BackofficeGame/TagList"
+	BackofficeGame_ListTag_FullMethodName                     = "/api.backoffice.service.v1.BackofficeGame/ListTag"
 	BackofficeGame_CreateTag_FullMethodName                   = "/api.backoffice.service.v1.BackofficeGame/CreateTag"
 	BackofficeGame_UpdateTag_FullMethodName                   = "/api.backoffice.service.v1.BackofficeGame/UpdateTag"
 	BackofficeGame_DeleteTag_FullMethodName                   = "/api.backoffice.service.v1.BackofficeGame/DeleteTag"
@@ -100,7 +100,7 @@ type BackofficeGameClient interface {
 	AddGameBetDisplayConfig(ctx context.Context, in *AddGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.AddGameBetDisplayConfigResponse, error)
 	UpdateGameBetDisplayConfig(ctx context.Context, in *UpdateGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.UpdateGameBetDisplayConfigResponse, error)
 	ListGameBetDisplayConfig(ctx context.Context, in *ListGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.ListGameBetDisplayConfigResponse, error)
-	TagList(ctx context.Context, in *TagListRequest, opts ...grpc.CallOption) (*v1.TagListResponse, error)
+	ListTag(ctx context.Context, in *ListTagRequest, opts ...grpc.CallOption) (*v1.ListTagResponse, error)
 	CreateTag(ctx context.Context, in *CreateTagRequest, opts ...grpc.CallOption) (*v1.CreateTagResponse, error)
 	UpdateTag(ctx context.Context, in *UpdateTagRequest, opts ...grpc.CallOption) (*v1.UpdateTagResponse, error)
 	DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*v1.DeleteTagResponse, error)
@@ -412,10 +412,10 @@ func (c *backofficeGameClient) ListGameBetDisplayConfig(ctx context.Context, in 
 	return out, nil
 }
 
-func (c *backofficeGameClient) TagList(ctx context.Context, in *TagListRequest, opts ...grpc.CallOption) (*v1.TagListResponse, error) {
+func (c *backofficeGameClient) ListTag(ctx context.Context, in *ListTagRequest, opts ...grpc.CallOption) (*v1.ListTagResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.TagListResponse)
-	err := c.cc.Invoke(ctx, BackofficeGame_TagList_FullMethodName, in, out, cOpts...)
+	out := new(v1.ListTagResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ListTag_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -551,7 +551,7 @@ type BackofficeGameServer interface {
 	AddGameBetDisplayConfig(context.Context, *AddGameBetDisplayConfigRequest) (*v1.AddGameBetDisplayConfigResponse, error)
 	UpdateGameBetDisplayConfig(context.Context, *UpdateGameBetDisplayConfigRequest) (*v1.UpdateGameBetDisplayConfigResponse, error)
 	ListGameBetDisplayConfig(context.Context, *ListGameBetDisplayConfigRequest) (*v1.ListGameBetDisplayConfigResponse, error)
-	TagList(context.Context, *TagListRequest) (*v1.TagListResponse, error)
+	ListTag(context.Context, *ListTagRequest) (*v1.ListTagResponse, error)
 	CreateTag(context.Context, *CreateTagRequest) (*v1.CreateTagResponse, error)
 	UpdateTag(context.Context, *UpdateTagRequest) (*v1.UpdateTagResponse, error)
 	DeleteTag(context.Context, *DeleteTagRequest) (*v1.DeleteTagResponse, error)
@@ -660,8 +660,8 @@ func (UnimplementedBackofficeGameServer) UpdateGameBetDisplayConfig(context.Cont
 func (UnimplementedBackofficeGameServer) ListGameBetDisplayConfig(context.Context, *ListGameBetDisplayConfigRequest) (*v1.ListGameBetDisplayConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListGameBetDisplayConfig not implemented")
 }
-func (UnimplementedBackofficeGameServer) TagList(context.Context, *TagListRequest) (*v1.TagListResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method TagList not implemented")
+func (UnimplementedBackofficeGameServer) ListTag(context.Context, *ListTagRequest) (*v1.ListTagResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTag not implemented")
 }
 func (UnimplementedBackofficeGameServer) CreateTag(context.Context, *CreateTagRequest) (*v1.CreateTagResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateTag not implemented")
@@ -1233,20 +1233,20 @@ func _BackofficeGame_ListGameBetDisplayConfig_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeGame_TagList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(TagListRequest)
+func _BackofficeGame_ListTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListTagRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackofficeGameServer).TagList(ctx, in)
+		return srv.(BackofficeGameServer).ListTag(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: BackofficeGame_TagList_FullMethodName,
+		FullMethod: BackofficeGame_ListTag_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeGameServer).TagList(ctx, req.(*TagListRequest))
+		return srv.(BackofficeGameServer).ListTag(ctx, req.(*ListTagRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1537,8 +1537,8 @@ var BackofficeGame_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BackofficeGame_ListGameBetDisplayConfig_Handler,
 		},
 		{
-			MethodName: "TagList",
-			Handler:    _BackofficeGame_TagList_Handler,
+			MethodName: "ListTag",
+			Handler:    _BackofficeGame_ListTag_Handler,
 		},
 		{
 			MethodName: "CreateTag",
