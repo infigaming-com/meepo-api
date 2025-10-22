@@ -375,6 +375,8 @@ func (m *BalanceUpdateEvent) validate(all bool) error {
 
 	// no validation rules for ProviderBonusAmountReportingCurrency
 
+	// no validation rules for CountOfTransactions
+
 	if len(errors) > 0 {
 		return BalanceUpdateEventMultiError(errors)
 	}

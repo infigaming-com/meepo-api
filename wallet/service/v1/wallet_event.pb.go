@@ -163,6 +163,7 @@ type BalanceUpdateEvent struct {
 	ProviderBonusAmount                  string                  `protobuf:"bytes,41,opt,name=provider_bonus_amount,json=providerBonusAmount,proto3" json:"provider_bonus_amount,omitempty"`
 	ProviderBonusAmountUsd               string                  `protobuf:"bytes,42,opt,name=provider_bonus_amount_usd,json=providerBonusAmountUsd,proto3" json:"provider_bonus_amount_usd,omitempty"`
 	ProviderBonusAmountReportingCurrency string                  `protobuf:"bytes,43,opt,name=provider_bonus_amount_reporting_currency,json=providerBonusAmountReportingCurrency,proto3" json:"provider_bonus_amount_reporting_currency,omitempty"`
+	CountOfTransactions                  int32                   `protobuf:"varint,44,opt,name=count_of_transactions,json=countOfTransactions,proto3" json:"count_of_transactions,omitempty"` // valid if transaction_type is "payment_deposit" or "payment_withdraw_settle" or "payment_withdraw_manual_payout"
 	unknownFields                        protoimpl.UnknownFields
 	sizeCache                            protoimpl.SizeCache
 }
@@ -496,6 +497,13 @@ func (x *BalanceUpdateEvent) GetProviderBonusAmountReportingCurrency() string {
 		return x.ProviderBonusAmountReportingCurrency
 	}
 	return ""
+}
+
+func (x *BalanceUpdateEvent) GetCountOfTransactions() int32 {
+	if x != nil {
+		return x.CountOfTransactions
+	}
+	return 0
 }
 
 type OperatorBalanceUpdateEvent struct {
@@ -929,7 +937,7 @@ const file_wallet_service_v1_wallet_event_proto_rawDesc = "" +
 	"event_data\x18\x02 \x01(\fR\teventData\x12\x1d\n" +
 	"\n" +
 	"message_id\x18\x03 \x01(\tR\tmessageId\"\x0f\n" +
-	"\rEventResponse\"\xa0\x12\n" +
+	"\rEventResponse\"\xd4\x12\n" +
 	"\x12BalanceUpdateEvent\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12)\n" +
 	"\x10transaction_type\x18\x02 \x01(\tR\x0ftransactionType\x12\x17\n" +
@@ -979,7 +987,8 @@ const file_wallet_service_v1_wallet_event_proto_rawDesc = "" +
 	"(operator_bonus_amount_reporting_currency\x18( \x01(\tR$operatorBonusAmountReportingCurrency\x122\n" +
 	"\x15provider_bonus_amount\x18) \x01(\tR\x13providerBonusAmount\x129\n" +
 	"\x19provider_bonus_amount_usd\x18* \x01(\tR\x16providerBonusAmountUsd\x12V\n" +
-	"(provider_bonus_amount_reporting_currency\x18+ \x01(\tR$providerBonusAmountReportingCurrency\"\xe2\x05\n" +
+	"(provider_bonus_amount_reporting_currency\x18+ \x01(\tR$providerBonusAmountReportingCurrency\x122\n" +
+	"\x15count_of_transactions\x18, \x01(\x05R\x13countOfTransactions\"\xe2\x05\n" +
 	"\x1aOperatorBalanceUpdateEvent\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12)\n" +
 	"\x10transaction_type\x18\x02 \x01(\tR\x0ftransactionType\x12F\n" +

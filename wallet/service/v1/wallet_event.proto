@@ -64,6 +64,7 @@ message BalanceUpdateEvent {
 	string provider_bonus_amount = 41;
 	string provider_bonus_amount_usd = 42;
 	string provider_bonus_amount_reporting_currency = 43;
+	int32 count_of_transactions = 44; // valid if transaction_type is "payment_deposit" or "payment_withdraw_settle" or "payment_withdraw_manual_payout"
 }
 
 message OperatorBalanceUpdateEvent {
