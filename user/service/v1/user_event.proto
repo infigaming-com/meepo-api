@@ -31,6 +31,7 @@ message AddUserEvent {
 	string mobile = 8;
 	int32 role_id = 9;
 	optional string campaign_url = 10;
+	string country = 11;
 }
 
 // AddOperatorEvent is emitted when a operator is created.

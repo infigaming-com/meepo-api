@@ -280,6 +280,8 @@ func (m *AddUserEvent) validate(all bool) error {
 
 	// no validation rules for RoleId
 
+	// no validation rules for Country
+
 	if m.CampaignUrl != nil {
 		// no validation rules for CampaignUrl
 	}

@@ -130,6 +130,7 @@ type AddUserEvent struct {
 	Mobile             string                 `protobuf:"bytes,8,opt,name=mobile,proto3" json:"mobile,omitempty"`
 	RoleId             int32                  `protobuf:"varint,9,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
 	CampaignUrl        *string                `protobuf:"bytes,10,opt,name=campaign_url,json=campaignUrl,proto3,oneof" json:"campaign_url,omitempty"`
+	Country            string                 `protobuf:"bytes,11,opt,name=country,proto3" json:"country,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -230,6 +231,13 @@ func (x *AddUserEvent) GetRoleId() int32 {
 func (x *AddUserEvent) GetCampaignUrl() string {
 	if x != nil && x.CampaignUrl != nil {
 		return *x.CampaignUrl
+	}
+	return ""
+}
+
+func (x *AddUserEvent) GetCountry() string {
+	if x != nil {
+		return x.Country
 	}
 	return ""
 }
@@ -354,7 +362,7 @@ const file_user_service_v1_user_event_proto_rawDesc = "" +
 	"event_data\x18\x02 \x01(\fR\teventData\x12\x1d\n" +
 	"\n" +
 	"message_id\x18\x03 \x01(\tR\tmessageId\"\x0f\n" +
-	"\rEventResponse\"\xf4\x02\n" +
+	"\rEventResponse\"\x8e\x03\n" +
 	"\fAddUserEvent\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
@@ -367,7 +375,8 @@ const file_user_service_v1_user_event_proto_rawDesc = "" +
 	"\x06mobile\x18\b \x01(\tR\x06mobile\x12\x17\n" +
 	"\arole_id\x18\t \x01(\x05R\x06roleId\x12&\n" +
 	"\fcampaign_url\x18\n" +
-	" \x01(\tH\x00R\vcampaignUrl\x88\x01\x01B\x0f\n" +
+	" \x01(\tH\x00R\vcampaignUrl\x88\x01\x01\x12\x18\n" +
+	"\acountry\x18\v \x01(\tR\acountryB\x0f\n" +
 	"\r_campaign_url\"\x9b\x03\n" +
 	"\x10AddOperatorEvent\x12(\n" +
 	"\x10real_operator_id\x18\x01 \x01(\x03R\x0erealOperatorId\x12\x1f\n" +
