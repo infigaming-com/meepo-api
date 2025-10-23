@@ -334,3 +334,27 @@ func IsProcessUserRegistrationFailed(err error) bool {
 func ErrorProcessUserRegistrationFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_PROCESS_USER_REGISTRATION_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsProcessUserDepositFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROCESS_USER_DEPOSIT_FAILED.String() && e.Code == 500
+}
+
+func ErrorProcessUserDepositFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROCESS_USER_DEPOSIT_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsProcessUserWithdrawalFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROCESS_USER_WITHDRAWAL_FAILED.String() && e.Code == 500
+}
+
+func ErrorProcessUserWithdrawalFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROCESS_USER_WITHDRAWAL_FAILED.String(), fmt.Sprintf(format, args...))
+}
