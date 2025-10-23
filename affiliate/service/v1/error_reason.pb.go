@@ -52,6 +52,8 @@ const (
 	ErrorReason_LIST_CAMPAIGNS_FAILED                    ErrorReason = 130024
 	ErrorReason_UPDATE_CAMPAIGN_FAILED                   ErrorReason = 130025
 	ErrorReason_PROCESS_USER_REGISTRATION_FAILED         ErrorReason = 130026
+	ErrorReason_PROCESS_USER_DEPOSIT_FAILED              ErrorReason = 130027
+	ErrorReason_PROCESS_USER_WITHDRAWAL_FAILED           ErrorReason = 130028
 )
 
 // Enum value maps for ErrorReason.
@@ -84,6 +86,8 @@ var (
 		130024: "LIST_CAMPAIGNS_FAILED",
 		130025: "UPDATE_CAMPAIGN_FAILED",
 		130026: "PROCESS_USER_REGISTRATION_FAILED",
+		130027: "PROCESS_USER_DEPOSIT_FAILED",
+		130028: "PROCESS_USER_WITHDRAWAL_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                              0,
@@ -113,6 +117,8 @@ var (
 		"LIST_CAMPAIGNS_FAILED":                    130024,
 		"UPDATE_CAMPAIGN_FAILED":                   130025,
 		"PROCESS_USER_REGISTRATION_FAILED":         130026,
+		"PROCESS_USER_DEPOSIT_FAILED":              130027,
+		"PROCESS_USER_WITHDRAWAL_FAILED":           130028,
 	}
 )
 
@@ -147,7 +153,7 @@ var File_affiliate_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\xa1\a\n" +
+	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\xea\a\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1dCREATE_COMMISSION_PLAN_FAILED\x10\xd1\xf7\a\x12#\n" +
@@ -175,7 +181,9 @@ const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\x16DELETE_CAMPAIGN_FAILED\x10\xe7\xf7\a\x12\x1b\n" +
 	"\x15LIST_CAMPAIGNS_FAILED\x10\xe8\xf7\a\x12\x1c\n" +
 	"\x16UPDATE_CAMPAIGN_FAILED\x10\xe9\xf7\a\x12&\n" +
-	" PROCESS_USER_REGISTRATION_FAILED\x10\xea\xf7\a\x1a\x04\xa0E\xf4\x03BY\n" +
+	" PROCESS_USER_REGISTRATION_FAILED\x10\xea\xf7\a\x12!\n" +
+	"\x1bPROCESS_USER_DEPOSIT_FAILED\x10\xeb\xf7\a\x12$\n" +
+	"\x1ePROCESS_USER_WITHDRAWAL_FAILED\x10\xec\xf7\a\x1a\x04\xa0E\xf4\x03BY\n" +
 	"\x18api.affiliate.service.v1P\x01Z;github.com/infigaming-com/meepo-api/affiliate/service/v1;v1b\x06proto3"
 
 var (

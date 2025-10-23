@@ -150,6 +150,7 @@ const (
 	ErrorReason_SET_FICA_THRESHOLD_CONFIG_FAILED                                ErrorReason = 30122
 	ErrorReason_INVALID_FICA_THRESHOLD_AMOUNT                                   ErrorReason = 30123
 	ErrorReason_INVALID_FICA_THRESHOLD_TRANSACTION_TYPE                         ErrorReason = 30124
+	ErrorReason_UPDATE_USER_DEPOSIT_STATS_FAILED                                ErrorReason = 30125
 )
 
 // Enum value maps for ErrorReason.
@@ -280,6 +281,7 @@ var (
 		30122: "SET_FICA_THRESHOLD_CONFIG_FAILED",
 		30123: "INVALID_FICA_THRESHOLD_AMOUNT",
 		30124: "INVALID_FICA_THRESHOLD_TRANSACTION_TYPE",
+		30125: "UPDATE_USER_DEPOSIT_STATS_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                                     0,
@@ -407,6 +409,7 @@ var (
 		"SET_FICA_THRESHOLD_CONFIG_FAILED":                                30122,
 		"INVALID_FICA_THRESHOLD_AMOUNT":                                   30123,
 		"INVALID_FICA_THRESHOLD_TRANSACTION_TYPE":                         30124,
+		"UPDATE_USER_DEPOSIT_STATS_FAILED":                                30125,
 	}
 )
 
@@ -441,7 +444,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xa7&\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xcf&\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -567,7 +570,8 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	" GET_FICA_THRESHOLD_CONFIG_FAILED\x10\xa9\xeb\x01\x12&\n" +
 	" SET_FICA_THRESHOLD_CONFIG_FAILED\x10\xaa\xeb\x01\x12#\n" +
 	"\x1dINVALID_FICA_THRESHOLD_AMOUNT\x10\xab\xeb\x01\x12-\n" +
-	"'INVALID_FICA_THRESHOLD_TRANSACTION_TYPE\x10\xac\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
+	"'INVALID_FICA_THRESHOLD_TRANSACTION_TYPE\x10\xac\xeb\x01\x12&\n" +
+	" UPDATE_USER_DEPOSIT_STATS_FAILED\x10\xad\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (
