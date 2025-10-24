@@ -2063,10 +2063,10 @@ type CPLConfig struct {
 	FlatByCountries        *FlatByCountriesCommission        `protobuf:"bytes,4,opt,name=flat_by_countries,json=flatByCountries,proto3,oneof" json:"flat_by_countries,omitempty"`
 	Progressive            *ProgressiveCommission            `protobuf:"bytes,5,opt,name=progressive,proto3,oneof" json:"progressive,omitempty"`
 	ProgressiveByCountries *ProgressiveByCountriesCommission `protobuf:"bytes,6,opt,name=progressive_by_countries,json=progressiveByCountries,proto3,oneof" json:"progressive_by_countries,omitempty"`
-	Qualification          *Qualification                    `protobuf:"bytes,7,opt,name=qualification,proto3,oneof" json:"qualification,omitempty"`
-	AdvancedOptions        *AdvancedOptions                  `protobuf:"bytes,8,opt,name=advanced_options,json=advancedOptions,proto3,oneof" json:"advanced_options,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// optional Qualification qualification = 7;
+	AdvancedOptions *AdvancedOptions `protobuf:"bytes,8,opt,name=advanced_options,json=advancedOptions,proto3,oneof" json:"advanced_options,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *CPLConfig) Reset() {
@@ -2137,13 +2137,6 @@ func (x *CPLConfig) GetProgressive() *ProgressiveCommission {
 func (x *CPLConfig) GetProgressiveByCountries() *ProgressiveByCountriesCommission {
 	if x != nil {
 		return x.ProgressiveByCountries
-	}
-	return nil
-}
-
-func (x *CPLConfig) GetQualification() *Qualification {
-	if x != nil {
-		return x.Qualification
 	}
 	return nil
 }
@@ -2477,21 +2470,19 @@ const file_affiliate_service_v1_commission_plan_proto_rawDesc = "" +
 	"\x16other_countries_ranges\x18\x03 \x03(\v2#.api.affiliate.service.v1.RateRangeR\x14otherCountriesRanges\"x\n" +
 	"\x1bCountryProgressiveRateGroup\x12\x1c\n" +
 	"\tcountries\x18\x01 \x03(\tR\tcountries\x12;\n" +
-	"\x06ranges\x18\x02 \x03(\v2#.api.affiliate.service.v1.RateRangeR\x06ranges\"\xec\x05\n" +
+	"\x06ranges\x18\x02 \x03(\v2#.api.affiliate.service.v1.RateRangeR\x06ranges\"\x86\x05\n" +
 	"\tCPLConfig\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12'\n" +
 	"\x0fcommission_type\x18\x02 \x01(\tR\x0ecommissionType\x12A\n" +
 	"\x04flat\x18\x03 \x01(\v2(.api.affiliate.service.v1.FlatCommissionH\x00R\x04flat\x88\x01\x01\x12d\n" +
 	"\x11flat_by_countries\x18\x04 \x01(\v23.api.affiliate.service.v1.FlatByCountriesCommissionH\x01R\x0fflatByCountries\x88\x01\x01\x12V\n" +
 	"\vprogressive\x18\x05 \x01(\v2/.api.affiliate.service.v1.ProgressiveCommissionH\x02R\vprogressive\x88\x01\x01\x12y\n" +
-	"\x18progressive_by_countries\x18\x06 \x01(\v2:.api.affiliate.service.v1.ProgressiveByCountriesCommissionH\x03R\x16progressiveByCountries\x88\x01\x01\x12R\n" +
-	"\rqualification\x18\a \x01(\v2'.api.affiliate.service.v1.QualificationH\x04R\rqualification\x88\x01\x01\x12Y\n" +
-	"\x10advanced_options\x18\b \x01(\v2).api.affiliate.service.v1.AdvancedOptionsH\x05R\x0fadvancedOptions\x88\x01\x01B\a\n" +
+	"\x18progressive_by_countries\x18\x06 \x01(\v2:.api.affiliate.service.v1.ProgressiveByCountriesCommissionH\x03R\x16progressiveByCountries\x88\x01\x01\x12Y\n" +
+	"\x10advanced_options\x18\b \x01(\v2).api.affiliate.service.v1.AdvancedOptionsH\x04R\x0fadvancedOptions\x88\x01\x01B\a\n" +
 	"\x05_flatB\x14\n" +
 	"\x12_flat_by_countriesB\x0e\n" +
 	"\f_progressiveB\x1b\n" +
-	"\x19_progressive_by_countriesB\x10\n" +
-	"\x0e_qualificationB\x13\n" +
+	"\x19_progressive_by_countriesB\x13\n" +
 	"\x11_advanced_options\"\x96\x02\n" +
 	"\tCPCConfig\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12'\n" +
@@ -2604,16 +2595,15 @@ var file_affiliate_service_v1_commission_plan_proto_depIdxs = []int32{
 	16, // 40: api.affiliate.service.v1.CPLConfig.flat_by_countries:type_name -> api.affiliate.service.v1.FlatByCountriesCommission
 	18, // 41: api.affiliate.service.v1.CPLConfig.progressive:type_name -> api.affiliate.service.v1.ProgressiveCommission
 	20, // 42: api.affiliate.service.v1.CPLConfig.progressive_by_countries:type_name -> api.affiliate.service.v1.ProgressiveByCountriesCommission
-	22, // 43: api.affiliate.service.v1.CPLConfig.qualification:type_name -> api.affiliate.service.v1.Qualification
-	23, // 44: api.affiliate.service.v1.CPLConfig.advanced_options:type_name -> api.affiliate.service.v1.AdvancedOptions
-	15, // 45: api.affiliate.service.v1.CPCConfig.flat:type_name -> api.affiliate.service.v1.FlatCommission
-	16, // 46: api.affiliate.service.v1.CPCConfig.flat_by_countries:type_name -> api.affiliate.service.v1.FlatByCountriesCommission
-	36, // 47: api.affiliate.service.v1.FlatFeeConfig.start_time:type_name -> google.protobuf.Timestamp
-	48, // [48:48] is the sub-list for method output_type
-	48, // [48:48] is the sub-list for method input_type
-	48, // [48:48] is the sub-list for extension type_name
-	48, // [48:48] is the sub-list for extension extendee
-	0,  // [0:48] is the sub-list for field type_name
+	23, // 43: api.affiliate.service.v1.CPLConfig.advanced_options:type_name -> api.affiliate.service.v1.AdvancedOptions
+	15, // 44: api.affiliate.service.v1.CPCConfig.flat:type_name -> api.affiliate.service.v1.FlatCommission
+	16, // 45: api.affiliate.service.v1.CPCConfig.flat_by_countries:type_name -> api.affiliate.service.v1.FlatByCountriesCommission
+	36, // 46: api.affiliate.service.v1.FlatFeeConfig.start_time:type_name -> google.protobuf.Timestamp
+	47, // [47:47] is the sub-list for method output_type
+	47, // [47:47] is the sub-list for method input_type
+	47, // [47:47] is the sub-list for extension type_name
+	47, // [47:47] is the sub-list for extension extendee
+	0,  // [0:47] is the sub-list for field type_name
 }
 
 func init() { file_affiliate_service_v1_commission_plan_proto_init() }

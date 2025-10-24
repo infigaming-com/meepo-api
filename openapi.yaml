@@ -5711,10 +5711,10 @@ components:
                     $ref: '#/components/schemas/api.affiliate.service.v1.ProgressiveCommission'
                 progressiveByCountries:
                     $ref: '#/components/schemas/api.affiliate.service.v1.ProgressiveByCountriesCommission'
-                qualification:
-                    $ref: '#/components/schemas/api.affiliate.service.v1.Qualification'
                 advancedOptions:
-                    $ref: '#/components/schemas/api.affiliate.service.v1.AdvancedOptions'
+                    allOf:
+                        - $ref: '#/components/schemas/api.affiliate.service.v1.AdvancedOptions'
+                    description: optional Qualification qualification = 7;
         api.affiliate.service.v1.Campaign:
             type: object
             properties:

@@ -219,7 +219,7 @@ message CPLConfig {
     optional FlatByCountriesCommission flat_by_countries = 4;
     optional ProgressiveCommission progressive = 5;
     optional ProgressiveByCountriesCommission progressive_by_countries = 6;
-    optional Qualification qualification = 7;
+    // optional Qualification qualification = 7;
     optional AdvancedOptions advanced_options = 8;
 }
 
