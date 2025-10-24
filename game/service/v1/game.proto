@@ -35,7 +35,12 @@ service Game {
 
 	rpc ListFeeGroups(ListFeeGroupsRequest) returns (ListFeeGroupsResponse) {}
 
-	rpc ListTags(ListTagsRequest) returns (ListTagsResponse) {}
+	rpc ListTags(ListTagsRequest) returns (ListTagsResponse) {
+		option (google.api.http) = {
+			post: "/v1/game/tags/list"
+			body: "*"
+		};
+	}
 
 	rpc ListThemes(ListThemesRequest) returns (ListThemesResponse) {}
 
@@ -190,7 +195,6 @@ service Game {
 	rpc ListTag(ListTagRequest) returns (ListTagResponse) { }
 
 	rpc CreateTag(CreateTagRequest) returns (CreateTagResponse) {}
-	rpc UpdateTag(UpdateTagRequest) returns (UpdateTagResponse) {}
 	rpc DeleteTag(DeleteTagRequest) returns (DeleteTagResponse) {}
 	rpc GetTag(GetTagRequest) returns (GetTagResponse) {}
 
@@ -312,10 +316,16 @@ message ListFeeGroupsResponse {
 	repeated string fee_groups = 1;
 }
 
-message ListTagsRequest {}
+message ListTagsRequest {
+}
 
 message ListTagsResponse {
-	repeated string tags = 1;
+	message TagInfo {
+		int64 id = 1;
+		string tag_name = 2;
+		string display_name = 3; // JSON string: {"en":"Hot Game","zh":"热门游戏"}
+	}
+	repeated TagInfo tag_infos = 1;
 }
 
 message ListThemesRequest {}
@@ -1651,6 +1661,7 @@ message GetGameInfoResponse {
 	GameInfo game_info = 1;
 }
 
+// 能看到上级及自己创建的tag，和下级创建的tag
 message ListTagRequest {
 	api.common.OperatorContext target_operator_context = 1;
 	optional int32 page = 2;
@@ -1658,7 +1669,7 @@ message ListTagRequest {
 }
 
 message ListTagResponse {
-	message TagInfo {
+	message BoTagInfo {
 		int64 id = 1;
 		string tag_name = 2;
 		int64 operator_id = 3;
@@ -1668,8 +1679,9 @@ message ListTagResponse {
 		string creator = 7;
 		int64 configured_provider_count = 8;
 		int64 configured_game_count = 9;
+		bool follow_parent = 10;
 	}
-	repeated TagInfo tag_infos = 1;
+	repeated BoTagInfo tag_infos = 1;
 	int32 total = 2;
 	int32 page = 3;
 	int32 page_size = 4;
@@ -1682,7 +1694,7 @@ message Tag {
 	int64 company_operator_id = 4;
 	int64 operator_id = 5;
 	string tag_name = 6;
-	bool enabled = 7;
+	string creator = 7;
 	int64 created_at = 8;
 	int64 updated_at = 9;
 }
@@ -1690,22 +1702,11 @@ message Tag {
 message CreateTagRequest {
 	api.common.OperatorContext operator_context = 1;
 	string tag_name = 2;
-	optional bool enabled = 3; // default true
+	string display_name = 3; // JSON string: {"en":"Hot Game","zh":"热门游戏"}
+	repeated string game_ids = 4;
 }
 
 message CreateTagResponse {
-	Tag tag = 1;
-}
-
-message UpdateTagRequest {
-	api.common.OperatorContext operator_context = 1;
-	int64 tag_id = 2;
-	optional string tag_name = 3;
-	optional bool enabled = 4;
-}
-
-message UpdateTagResponse {
-	Tag tag = 1;
 }
 
 message DeleteTagRequest {
@@ -1774,33 +1775,40 @@ message UpdateTagConfigGamesRequest {
 	api.common.OperatorContext operator_context = 1;
 	int64 tag_config_id = 2;
 	repeated string game_ids = 3; // Set the complete list of games for this tag config
-	optional bool enabled = 4; // default true for new game tags
+	optional bool follow_parent = 4; // default true
 }
 
 message UpdateTagConfigGamesResponse {
-	repeated GameTag game_tags = 1; // All game tags after update
-	int32 added_count = 2; // Number of games added
-	int32 removed_count = 3; // Number of games removed
-	int32 unchanged_count = 4; // Number of games unchanged
 }
 
-message GameTag {
+// 需要provider list (包含provider_id, provider_name, game_count, total_game_count)
+// 返回可以筛选的 game list (包含game_id, game_name, category, theme, provider_id, provider_name, selected)
+message BackofficeTagGameList {
 	int64 id = 1;
 	int64 tag_id = 2;
 	string tag_name = 3;
 	string game_id = 4;
 	string game_name = 5;
 	int64 tag_config_id = 6; // The specific config this game tag uses
-	bool enabled = 7;
-	int64 system_operator_id = 8;
-	int64 retailer_operator_id = 9;
-	int64 company_operator_id = 10;
-	int64 operator_id = 11;
-	int64 created_at = 12;
-	int64 updated_at = 13;
+	int64 system_operator_id = 7;
+	int64 retailer_operator_id = 8;
+	int64 company_operator_id = 9;
+	int64 operator_id = 10;
+	int64 created_at = 11;
+	int64 updated_at = 12;
+	string category = 13;
+	string theme = 14;
+	bool selected = 15;
+	message ProviderInfo {
+		string provider_id = 1;
+		string provider_name = 2;
+		int32 game_count = 3;
+		int32 total_game_count = 4;
+	}
+	repeated ProviderInfo provider_infos = 16;
 }
 
-message ListGameTagsRequest {
+message ListTagGamesRequest {
 	api.common.OperatorContext operator_context = 1;
 	int64 tag_config_id = 2;
 	optional string game_id = 3; // Filter by game_id
@@ -1809,8 +1817,25 @@ message ListGameTagsRequest {
 	optional int32 page_size = 6;
 }
 
-message ListGameTagsResponse {
-	repeated GameTag game_tags = 1;
+message ListTagGamesResponse {
+	message TagGame {
+		int64 id = 1;
+		int64 tag_id = 2;
+		string tag_name = 3;
+		string game_id = 4;
+		string game_name = 5;
+		int64 tag_config_id = 6;
+		int64 system_operator_id = 7;
+		int64 retailer_operator_id = 8;
+		int64 company_operator_id = 9;
+		int64 operator_id = 10;
+		int64 created_at = 11;
+		int64 updated_at = 12;
+		string category = 13;
+		string theme = 14;
+		bool selected = 15;
+	}
+	repeated TagGame tag_games = 1;
 	int32 total = 2;
 	int32 page = 3;
 	int32 page_size = 4;

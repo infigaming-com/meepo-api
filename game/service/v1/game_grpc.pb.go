@@ -70,7 +70,6 @@ const (
 	Game_GetGameInfo_FullMethodName                       = "/api.game.service.v1.Game/GetGameInfo"
 	Game_ListTag_FullMethodName                           = "/api.game.service.v1.Game/ListTag"
 	Game_CreateTag_FullMethodName                         = "/api.game.service.v1.Game/CreateTag"
-	Game_UpdateTag_FullMethodName                         = "/api.game.service.v1.Game/UpdateTag"
 	Game_DeleteTag_FullMethodName                         = "/api.game.service.v1.Game/DeleteTag"
 	Game_GetTag_FullMethodName                            = "/api.game.service.v1.Game/GetTag"
 	Game_CreateTagConfig_FullMethodName                   = "/api.game.service.v1.Game/CreateTagConfig"
@@ -138,7 +137,6 @@ type GameClient interface {
 	GetGameInfo(ctx context.Context, in *GetGameInfoRequest, opts ...grpc.CallOption) (*GetGameInfoResponse, error)
 	ListTag(ctx context.Context, in *ListTagRequest, opts ...grpc.CallOption) (*ListTagResponse, error)
 	CreateTag(ctx context.Context, in *CreateTagRequest, opts ...grpc.CallOption) (*CreateTagResponse, error)
-	UpdateTag(ctx context.Context, in *UpdateTagRequest, opts ...grpc.CallOption) (*UpdateTagResponse, error)
 	DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*DeleteTagResponse, error)
 	GetTag(ctx context.Context, in *GetTagRequest, opts ...grpc.CallOption) (*GetTagResponse, error)
 	CreateTagConfig(ctx context.Context, in *CreateTagConfigRequest, opts ...grpc.CallOption) (*CreateTagConfigResponse, error)
@@ -666,16 +664,6 @@ func (c *gameClient) CreateTag(ctx context.Context, in *CreateTagRequest, opts .
 	return out, nil
 }
 
-func (c *gameClient) UpdateTag(ctx context.Context, in *UpdateTagRequest, opts ...grpc.CallOption) (*UpdateTagResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateTagResponse)
-	err := c.cc.Invoke(ctx, Game_UpdateTag_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *gameClient) DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*DeleteTagResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteTagResponse)
@@ -804,7 +792,6 @@ type GameServer interface {
 	GetGameInfo(context.Context, *GetGameInfoRequest) (*GetGameInfoResponse, error)
 	ListTag(context.Context, *ListTagRequest) (*ListTagResponse, error)
 	CreateTag(context.Context, *CreateTagRequest) (*CreateTagResponse, error)
-	UpdateTag(context.Context, *UpdateTagRequest) (*UpdateTagResponse, error)
 	DeleteTag(context.Context, *DeleteTagRequest) (*DeleteTagResponse, error)
 	GetTag(context.Context, *GetTagRequest) (*GetTagResponse, error)
 	CreateTagConfig(context.Context, *CreateTagConfigRequest) (*CreateTagConfigResponse, error)
@@ -974,9 +961,6 @@ func (UnimplementedGameServer) ListTag(context.Context, *ListTagRequest) (*ListT
 }
 func (UnimplementedGameServer) CreateTag(context.Context, *CreateTagRequest) (*CreateTagResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateTag not implemented")
-}
-func (UnimplementedGameServer) UpdateTag(context.Context, *UpdateTagRequest) (*UpdateTagResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateTag not implemented")
 }
 func (UnimplementedGameServer) DeleteTag(context.Context, *DeleteTagRequest) (*DeleteTagResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteTag not implemented")
@@ -1938,24 +1922,6 @@ func _Game_CreateTag_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Game_UpdateTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateTagRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GameServer).UpdateTag(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Game_UpdateTag_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GameServer).UpdateTag(ctx, req.(*UpdateTagRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Game_DeleteTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteTagRequest)
 	if err := dec(in); err != nil {
@@ -2292,10 +2258,6 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateTag",
 			Handler:    _Game_CreateTag_Handler,
-		},
-		{
-			MethodName: "UpdateTag",
-			Handler:    _Game_UpdateTag_Handler,
 		},
 		{
 			MethodName: "DeleteTag",

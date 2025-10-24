@@ -2200,24 +2200,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.game.service.v1.ListTagResponse'
-    /v1/backoffice/game/tags/update:
-        post:
-            tags:
-                - BackofficeGame
-            operationId: BackofficeGame_UpdateTag
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateTagRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.game.service.v1.UpdateTagResponse'
     /v1/backoffice/game/themes/list:
         post:
             tags:
@@ -4734,6 +4716,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.game.service.v1.RollbackResponse'
+    /v1/game/tags/list:
+        post:
+            tags:
+                - Game
+            operationId: Game_ListTags
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.ListTagsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.ListTagsResponse'
     /v1/payment/address/get:
         post:
             tags:
@@ -12735,13 +12735,6 @@ components:
                     type: string
                 followParent:
                     type: boolean
-        api.backoffice.service.v1.UpdateTagRequest:
-            type: object
-            properties:
-                tagId:
-                    type: string
-                tagName:
-                    type: string
         api.backoffice.service.v1.UpdateTaxReportConfigRequest:
             type: object
             properties:
@@ -13485,9 +13478,7 @@ components:
                     $ref: '#/components/schemas/api.game.service.v1.TagConfig'
         api.game.service.v1.CreateTagResponse:
             type: object
-            properties:
-                tag:
-                    $ref: '#/components/schemas/api.game.service.v1.Tag'
+            properties: {}
         api.game.service.v1.DeleteTagResponse:
             type: object
             properties: {}
@@ -13624,8 +13615,6 @@ components:
                     type: string
                 tagConfigId:
                     type: string
-                enabled:
-                    type: boolean
                 systemOperatorId:
                     type: string
                 retailerOperatorId:
@@ -14396,7 +14385,7 @@ components:
                 tagInfos:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.game.service.v1.ListTagResponse_TagInfo'
+                        $ref: '#/components/schemas/api.game.service.v1.ListTagResponse_BoTagInfo'
                 total:
                     type: integer
                     format: int32
@@ -14406,7 +14395,7 @@ components:
                 pageSize:
                     type: integer
                     format: int32
-        api.game.service.v1.ListTagResponse_TagInfo:
+        api.game.service.v1.ListTagResponse_BoTagInfo:
             type: object
             properties:
                 id:
@@ -14426,6 +14415,25 @@ components:
                 configuredProviderCount:
                     type: string
                 configuredGameCount:
+                    type: string
+        api.game.service.v1.ListTagsRequest:
+            type: object
+            properties: {}
+        api.game.service.v1.ListTagsResponse:
+            type: object
+            properties:
+                tagInfos:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.ListTagsResponse_TagInfo'
+        api.game.service.v1.ListTagsResponse_TagInfo:
+            type: object
+            properties:
+                id:
+                    type: string
+                tagName:
+                    type: string
+                displayName:
                     type: string
         api.game.service.v1.ListUnpaidBetsResponse:
             type: object
@@ -14613,8 +14621,8 @@ components:
                     type: string
                 tagName:
                     type: string
-                enabled:
-                    type: boolean
+                creator:
+                    type: string
                 createdAt:
                     type: string
                 updatedAt:
@@ -14659,30 +14667,12 @@ components:
             properties: {}
         api.game.service.v1.UpdateTagConfigGamesResponse:
             type: object
-            properties:
-                gameTags:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.game.service.v1.GameTag'
-                addedCount:
-                    type: integer
-                    format: int32
-                removedCount:
-                    type: integer
-                    format: int32
-                unchangedCount:
-                    type: integer
-                    format: int32
+            properties: {}
         api.game.service.v1.UpdateTagConfigResponse:
             type: object
             properties:
                 tagConfig:
                     $ref: '#/components/schemas/api.game.service.v1.TagConfig'
-        api.game.service.v1.UpdateTagResponse:
-            type: object
-            properties:
-                tag:
-                    $ref: '#/components/schemas/api.game.service.v1.Tag'
         api.game.service.v1.UrlInfo:
             type: object
             properties:

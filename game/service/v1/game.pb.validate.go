@@ -1798,6 +1798,40 @@ func (m *ListTagsResponse) validate(all bool) error {
 
 	var errors []error
 
+	for idx, item := range m.GetTagInfos() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListTagsResponseValidationError{
+						field:  fmt.Sprintf("TagInfos[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListTagsResponseValidationError{
+						field:  fmt.Sprintf("TagInfos[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListTagsResponseValidationError{
+					field:  fmt.Sprintf("TagInfos[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
 	if len(errors) > 0 {
 		return ListTagsResponseMultiError(errors)
 	}
@@ -15991,7 +16025,7 @@ func (m *Tag) validate(all bool) error {
 
 	// no validation rules for TagName
 
-	// no validation rules for Enabled
+	// no validation rules for Creator
 
 	// no validation rules for CreatedAt
 
@@ -16127,9 +16161,7 @@ func (m *CreateTagRequest) validate(all bool) error {
 
 	// no validation rules for TagName
 
-	if m.Enabled != nil {
-		// no validation rules for Enabled
-	}
+	// no validation rules for DisplayName
 
 	if len(errors) > 0 {
 		return CreateTagRequestMultiError(errors)
@@ -16231,35 +16263,6 @@ func (m *CreateTagResponse) validate(all bool) error {
 
 	var errors []error
 
-	if all {
-		switch v := interface{}(m.GetTag()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, CreateTagResponseValidationError{
-					field:  "Tag",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, CreateTagResponseValidationError{
-					field:  "Tag",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetTag()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return CreateTagResponseValidationError{
-				field:  "Tag",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	if len(errors) > 0 {
 		return CreateTagResponseMultiError(errors)
 	}
@@ -16339,276 +16342,6 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = CreateTagResponseValidationError{}
-
-// Validate checks the field values on UpdateTagRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *UpdateTagRequest) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on UpdateTagRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// UpdateTagRequestMultiError, or nil if none found.
-func (m *UpdateTagRequest) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *UpdateTagRequest) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if all {
-		switch v := interface{}(m.GetOperatorContext()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UpdateTagRequestValidationError{
-					field:  "OperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, UpdateTagRequestValidationError{
-					field:  "OperatorContext",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UpdateTagRequestValidationError{
-				field:  "OperatorContext",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	// no validation rules for TagId
-
-	if m.TagName != nil {
-		// no validation rules for TagName
-	}
-
-	if m.Enabled != nil {
-		// no validation rules for Enabled
-	}
-
-	if len(errors) > 0 {
-		return UpdateTagRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-// UpdateTagRequestMultiError is an error wrapping multiple validation errors
-// returned by UpdateTagRequest.ValidateAll() if the designated constraints
-// aren't met.
-type UpdateTagRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m UpdateTagRequestMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m UpdateTagRequestMultiError) AllErrors() []error { return m }
-
-// UpdateTagRequestValidationError is the validation error returned by
-// UpdateTagRequest.Validate if the designated constraints aren't met.
-type UpdateTagRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e UpdateTagRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e UpdateTagRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e UpdateTagRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e UpdateTagRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e UpdateTagRequestValidationError) ErrorName() string { return "UpdateTagRequestValidationError" }
-
-// Error satisfies the builtin error interface
-func (e UpdateTagRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sUpdateTagRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = UpdateTagRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = UpdateTagRequestValidationError{}
-
-// Validate checks the field values on UpdateTagResponse with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *UpdateTagResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on UpdateTagResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// UpdateTagResponseMultiError, or nil if none found.
-func (m *UpdateTagResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *UpdateTagResponse) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if all {
-		switch v := interface{}(m.GetTag()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UpdateTagResponseValidationError{
-					field:  "Tag",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, UpdateTagResponseValidationError{
-					field:  "Tag",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetTag()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UpdateTagResponseValidationError{
-				field:  "Tag",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if len(errors) > 0 {
-		return UpdateTagResponseMultiError(errors)
-	}
-
-	return nil
-}
-
-// UpdateTagResponseMultiError is an error wrapping multiple validation errors
-// returned by UpdateTagResponse.ValidateAll() if the designated constraints
-// aren't met.
-type UpdateTagResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m UpdateTagResponseMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m UpdateTagResponseMultiError) AllErrors() []error { return m }
-
-// UpdateTagResponseValidationError is the validation error returned by
-// UpdateTagResponse.Validate if the designated constraints aren't met.
-type UpdateTagResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e UpdateTagResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e UpdateTagResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e UpdateTagResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e UpdateTagResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e UpdateTagResponseValidationError) ErrorName() string {
-	return "UpdateTagResponseValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e UpdateTagResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sUpdateTagResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = UpdateTagResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = UpdateTagResponseValidationError{}
 
 // Validate checks the field values on DeleteTagRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, the
@@ -18118,8 +17851,8 @@ func (m *UpdateTagConfigGamesRequest) validate(all bool) error {
 
 	// no validation rules for TagConfigId
 
-	if m.Enabled != nil {
-		// no validation rules for Enabled
+	if m.FollowParent != nil {
+		// no validation rules for FollowParent
 	}
 
 	if len(errors) > 0 {
@@ -18224,46 +17957,6 @@ func (m *UpdateTagConfigGamesResponse) validate(all bool) error {
 	}
 
 	var errors []error
-
-	for idx, item := range m.GetGameTags() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, UpdateTagConfigGamesResponseValidationError{
-						field:  fmt.Sprintf("GameTags[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, UpdateTagConfigGamesResponseValidationError{
-						field:  fmt.Sprintf("GameTags[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return UpdateTagConfigGamesResponseValidationError{
-					field:  fmt.Sprintf("GameTags[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	// no validation rules for AddedCount
-
-	// no validation rules for RemovedCount
-
-	// no validation rules for UnchangedCount
 
 	if len(errors) > 0 {
 		return UpdateTagConfigGamesResponseMultiError(errors)
@@ -18378,8 +18071,6 @@ func (m *GameTag) validate(all bool) error {
 	// no validation rules for GameName
 
 	// no validation rules for TagConfigId
-
-	// no validation rules for Enabled
 
 	// no validation rules for SystemOperatorId
 
@@ -18873,6 +18564,114 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListProvidersResponse_ProviderValidationError{}
+
+// Validate checks the field values on ListTagsResponse_TagInfo with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListTagsResponse_TagInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListTagsResponse_TagInfo with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListTagsResponse_TagInfoMultiError, or nil if none found.
+func (m *ListTagsResponse_TagInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListTagsResponse_TagInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for TagName
+
+	// no validation rules for DisplayName
+
+	if len(errors) > 0 {
+		return ListTagsResponse_TagInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListTagsResponse_TagInfoMultiError is an error wrapping multiple validation
+// errors returned by ListTagsResponse_TagInfo.ValidateAll() if the designated
+// constraints aren't met.
+type ListTagsResponse_TagInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListTagsResponse_TagInfoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListTagsResponse_TagInfoMultiError) AllErrors() []error { return m }
+
+// ListTagsResponse_TagInfoValidationError is the validation error returned by
+// ListTagsResponse_TagInfo.Validate if the designated constraints aren't met.
+type ListTagsResponse_TagInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListTagsResponse_TagInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListTagsResponse_TagInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListTagsResponse_TagInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListTagsResponse_TagInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListTagsResponse_TagInfoValidationError) ErrorName() string {
+	return "ListTagsResponse_TagInfoValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListTagsResponse_TagInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListTagsResponse_TagInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListTagsResponse_TagInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListTagsResponse_TagInfoValidationError{}
 
 // Validate checks the field values on BalanceResponse_Data with the rules
 // defined in the proto definition for this message. If any rules are
@@ -22733,22 +22532,22 @@ var _ interface {
 	ErrorName() string
 } = ListGameBetDisplayConfigResponse_ItemValidationError{}
 
-// Validate checks the field values on ListTagResponse_TagInfo with the rules
+// Validate checks the field values on ListTagResponse_BoTagInfo with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ListTagResponse_TagInfo) Validate() error {
+func (m *ListTagResponse_BoTagInfo) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListTagResponse_TagInfo with the
+// ValidateAll checks the field values on ListTagResponse_BoTagInfo with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// ListTagResponse_TagInfoMultiError, or nil if none found.
-func (m *ListTagResponse_TagInfo) ValidateAll() error {
+// ListTagResponse_BoTagInfoMultiError, or nil if none found.
+func (m *ListTagResponse_BoTagInfo) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListTagResponse_TagInfo) validate(all bool) error {
+func (m *ListTagResponse_BoTagInfo) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -22774,19 +22573,19 @@ func (m *ListTagResponse_TagInfo) validate(all bool) error {
 	// no validation rules for ConfiguredGameCount
 
 	if len(errors) > 0 {
-		return ListTagResponse_TagInfoMultiError(errors)
+		return ListTagResponse_BoTagInfoMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListTagResponse_TagInfoMultiError is an error wrapping multiple validation
-// errors returned by ListTagResponse_TagInfo.ValidateAll() if the designated
-// constraints aren't met.
-type ListTagResponse_TagInfoMultiError []error
+// ListTagResponse_BoTagInfoMultiError is an error wrapping multiple validation
+// errors returned by ListTagResponse_BoTagInfo.ValidateAll() if the
+// designated constraints aren't met.
+type ListTagResponse_BoTagInfoMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListTagResponse_TagInfoMultiError) Error() string {
+func (m ListTagResponse_BoTagInfoMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -22795,11 +22594,11 @@ func (m ListTagResponse_TagInfoMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListTagResponse_TagInfoMultiError) AllErrors() []error { return m }
+func (m ListTagResponse_BoTagInfoMultiError) AllErrors() []error { return m }
 
-// ListTagResponse_TagInfoValidationError is the validation error returned by
-// ListTagResponse_TagInfo.Validate if the designated constraints aren't met.
-type ListTagResponse_TagInfoValidationError struct {
+// ListTagResponse_BoTagInfoValidationError is the validation error returned by
+// ListTagResponse_BoTagInfo.Validate if the designated constraints aren't met.
+type ListTagResponse_BoTagInfoValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -22807,24 +22606,24 @@ type ListTagResponse_TagInfoValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListTagResponse_TagInfoValidationError) Field() string { return e.field }
+func (e ListTagResponse_BoTagInfoValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListTagResponse_TagInfoValidationError) Reason() string { return e.reason }
+func (e ListTagResponse_BoTagInfoValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListTagResponse_TagInfoValidationError) Cause() error { return e.cause }
+func (e ListTagResponse_BoTagInfoValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListTagResponse_TagInfoValidationError) Key() bool { return e.key }
+func (e ListTagResponse_BoTagInfoValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListTagResponse_TagInfoValidationError) ErrorName() string {
-	return "ListTagResponse_TagInfoValidationError"
+func (e ListTagResponse_BoTagInfoValidationError) ErrorName() string {
+	return "ListTagResponse_BoTagInfoValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListTagResponse_TagInfoValidationError) Error() string {
+func (e ListTagResponse_BoTagInfoValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -22836,14 +22635,14 @@ func (e ListTagResponse_TagInfoValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListTagResponse_TagInfo.%s: %s%s",
+		"invalid %sListTagResponse_BoTagInfo.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListTagResponse_TagInfoValidationError{}
+var _ error = ListTagResponse_BoTagInfoValidationError{}
 
 var _ interface {
 	Field() string
@@ -22851,4 +22650,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListTagResponse_TagInfoValidationError{}
+} = ListTagResponse_BoTagInfoValidationError{}

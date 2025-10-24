@@ -51,7 +51,6 @@ const (
 	BackofficeGame_ListGameBetDisplayConfig_FullMethodName    = "/api.backoffice.service.v1.BackofficeGame/ListGameBetDisplayConfig"
 	BackofficeGame_ListTag_FullMethodName                     = "/api.backoffice.service.v1.BackofficeGame/ListTag"
 	BackofficeGame_CreateTag_FullMethodName                   = "/api.backoffice.service.v1.BackofficeGame/CreateTag"
-	BackofficeGame_UpdateTag_FullMethodName                   = "/api.backoffice.service.v1.BackofficeGame/UpdateTag"
 	BackofficeGame_DeleteTag_FullMethodName                   = "/api.backoffice.service.v1.BackofficeGame/DeleteTag"
 	BackofficeGame_GetTag_FullMethodName                      = "/api.backoffice.service.v1.BackofficeGame/GetTag"
 	BackofficeGame_CreateTagConfig_FullMethodName             = "/api.backoffice.service.v1.BackofficeGame/CreateTagConfig"
@@ -102,7 +101,6 @@ type BackofficeGameClient interface {
 	ListGameBetDisplayConfig(ctx context.Context, in *ListGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.ListGameBetDisplayConfigResponse, error)
 	ListTag(ctx context.Context, in *ListTagRequest, opts ...grpc.CallOption) (*v1.ListTagResponse, error)
 	CreateTag(ctx context.Context, in *CreateTagRequest, opts ...grpc.CallOption) (*v1.CreateTagResponse, error)
-	UpdateTag(ctx context.Context, in *UpdateTagRequest, opts ...grpc.CallOption) (*v1.UpdateTagResponse, error)
 	DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*v1.DeleteTagResponse, error)
 	GetTag(ctx context.Context, in *GetTagRequest, opts ...grpc.CallOption) (*v1.GetTagResponse, error)
 	// Tag Config Management HTTP APIs
@@ -432,16 +430,6 @@ func (c *backofficeGameClient) CreateTag(ctx context.Context, in *CreateTagReque
 	return out, nil
 }
 
-func (c *backofficeGameClient) UpdateTag(ctx context.Context, in *UpdateTagRequest, opts ...grpc.CallOption) (*v1.UpdateTagResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(v1.UpdateTagResponse)
-	err := c.cc.Invoke(ctx, BackofficeGame_UpdateTag_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *backofficeGameClient) DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*v1.DeleteTagResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.DeleteTagResponse)
@@ -553,7 +541,6 @@ type BackofficeGameServer interface {
 	ListGameBetDisplayConfig(context.Context, *ListGameBetDisplayConfigRequest) (*v1.ListGameBetDisplayConfigResponse, error)
 	ListTag(context.Context, *ListTagRequest) (*v1.ListTagResponse, error)
 	CreateTag(context.Context, *CreateTagRequest) (*v1.CreateTagResponse, error)
-	UpdateTag(context.Context, *UpdateTagRequest) (*v1.UpdateTagResponse, error)
 	DeleteTag(context.Context, *DeleteTagRequest) (*v1.DeleteTagResponse, error)
 	GetTag(context.Context, *GetTagRequest) (*v1.GetTagResponse, error)
 	// Tag Config Management HTTP APIs
@@ -665,9 +652,6 @@ func (UnimplementedBackofficeGameServer) ListTag(context.Context, *ListTagReques
 }
 func (UnimplementedBackofficeGameServer) CreateTag(context.Context, *CreateTagRequest) (*v1.CreateTagResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateTag not implemented")
-}
-func (UnimplementedBackofficeGameServer) UpdateTag(context.Context, *UpdateTagRequest) (*v1.UpdateTagResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateTag not implemented")
 }
 func (UnimplementedBackofficeGameServer) DeleteTag(context.Context, *DeleteTagRequest) (*v1.DeleteTagResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteTag not implemented")
@@ -1269,24 +1253,6 @@ func _BackofficeGame_CreateTag_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BackofficeGame_UpdateTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateTagRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BackofficeGameServer).UpdateTag(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BackofficeGame_UpdateTag_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeGameServer).UpdateTag(ctx, req.(*UpdateTagRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _BackofficeGame_DeleteTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteTagRequest)
 	if err := dec(in); err != nil {
@@ -1543,10 +1509,6 @@ var BackofficeGame_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateTag",
 			Handler:    _BackofficeGame_CreateTag_Handler,
-		},
-		{
-			MethodName: "UpdateTag",
-			Handler:    _BackofficeGame_UpdateTag_Handler,
 		},
 		{
 			MethodName: "DeleteTag",

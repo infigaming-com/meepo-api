@@ -56,7 +56,6 @@ const OperationBackofficeGameListUnpaidBets = "/api.backoffice.service.v1.Backof
 const OperationBackofficeGameUpdateGame = "/api.backoffice.service.v1.BackofficeGame/UpdateGame"
 const OperationBackofficeGameUpdateGameBetDisplayConfig = "/api.backoffice.service.v1.BackofficeGame/UpdateGameBetDisplayConfig"
 const OperationBackofficeGameUpdateProvider = "/api.backoffice.service.v1.BackofficeGame/UpdateProvider"
-const OperationBackofficeGameUpdateTag = "/api.backoffice.service.v1.BackofficeGame/UpdateTag"
 const OperationBackofficeGameUpdateTagConfig = "/api.backoffice.service.v1.BackofficeGame/UpdateTagConfig"
 const OperationBackofficeGameUpdateTagConfigGames = "/api.backoffice.service.v1.BackofficeGame/UpdateTagConfigGames"
 
@@ -105,7 +104,6 @@ type BackofficeGameHTTPServer interface {
 	UpdateGame(context.Context, *UpdateGameRequest) (*UpdateGameResponse, error)
 	UpdateGameBetDisplayConfig(context.Context, *UpdateGameBetDisplayConfigRequest) (*v1.UpdateGameBetDisplayConfigResponse, error)
 	UpdateProvider(context.Context, *UpdateProviderRequest) (*UpdateProviderResponse, error)
-	UpdateTag(context.Context, *UpdateTagRequest) (*v1.UpdateTagResponse, error)
 	UpdateTagConfig(context.Context, *UpdateTagConfigRequest) (*v1.UpdateTagConfigResponse, error)
 	UpdateTagConfigGames(context.Context, *UpdateTagConfigGamesRequest) (*v1.UpdateTagConfigGamesResponse, error)
 }
@@ -116,7 +114,7 @@ func RegisterBackofficeGameHTTPServer(s *http.Server, srv BackofficeGameHTTPServ
 	r.POST("/v1/backoffice/game/providers-with-detail/list", _BackofficeGame_ListProvidersWithDetail0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/categories/list", _BackofficeGame_ListCategories1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/fee-groups/list", _BackofficeGame_ListFeeGroups0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/game/tags/list", _BackofficeGame_ListTags0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/game/tags/list", _BackofficeGame_ListTags1_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/themes/list", _BackofficeGame_ListThemes0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/currencies/list", _BackofficeGame_ListCurrencies0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/bets/list", _BackofficeGame_ListBets1_HTTP_Handler(srv))
@@ -143,7 +141,6 @@ func RegisterBackofficeGameHTTPServer(s *http.Server, srv BackofficeGameHTTPServ
 	r.POST("/v1/backoffice/game/bet/dispaly/config/list", _BackofficeGame_ListGameBetDisplayConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/tags/list", _BackofficeGame_ListTag0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/tags/create", _BackofficeGame_CreateTag0_HTTP_Handler(srv))
-	r.POST("/v1/backoffice/game/tags/update", _BackofficeGame_UpdateTag0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/tags/delete", _BackofficeGame_DeleteTag0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/tags/get", _BackofficeGame_GetTag0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/game/tag-configs/create", _BackofficeGame_CreateTagConfig0_HTTP_Handler(srv))
@@ -241,7 +238,7 @@ func _BackofficeGame_ListFeeGroups0_HTTP_Handler(srv BackofficeGameHTTPServer) f
 	}
 }
 
-func _BackofficeGame_ListTags0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
+func _BackofficeGame_ListTags1_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListTagsRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -835,28 +832,6 @@ func _BackofficeGame_CreateTag0_HTTP_Handler(srv BackofficeGameHTTPServer) func(
 	}
 }
 
-func _BackofficeGame_UpdateTag0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in UpdateTagRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationBackofficeGameUpdateTag)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.UpdateTag(ctx, req.(*UpdateTagRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*v1.UpdateTagResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
 func _BackofficeGame_DeleteTag0_HTTP_Handler(srv BackofficeGameHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in DeleteTagRequest
@@ -1048,7 +1023,6 @@ type BackofficeGameHTTPClient interface {
 	UpdateGame(ctx context.Context, req *UpdateGameRequest, opts ...http.CallOption) (rsp *UpdateGameResponse, err error)
 	UpdateGameBetDisplayConfig(ctx context.Context, req *UpdateGameBetDisplayConfigRequest, opts ...http.CallOption) (rsp *v1.UpdateGameBetDisplayConfigResponse, err error)
 	UpdateProvider(ctx context.Context, req *UpdateProviderRequest, opts ...http.CallOption) (rsp *UpdateProviderResponse, err error)
-	UpdateTag(ctx context.Context, req *UpdateTagRequest, opts ...http.CallOption) (rsp *v1.UpdateTagResponse, err error)
 	UpdateTagConfig(ctx context.Context, req *UpdateTagConfigRequest, opts ...http.CallOption) (rsp *v1.UpdateTagConfigResponse, err error)
 	UpdateTagConfigGames(ctx context.Context, req *UpdateTagConfigGamesRequest, opts ...http.CallOption) (rsp *v1.UpdateTagConfigGamesResponse, err error)
 }
@@ -1521,19 +1495,6 @@ func (c *BackofficeGameHTTPClientImpl) UpdateProvider(ctx context.Context, in *U
 	pattern := "/v1/backoffice/game/provider/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeGameUpdateProvider))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *BackofficeGameHTTPClientImpl) UpdateTag(ctx context.Context, in *UpdateTagRequest, opts ...http.CallOption) (*v1.UpdateTagResponse, error) {
-	var out v1.UpdateTagResponse
-	pattern := "/v1/backoffice/game/tags/update"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationBackofficeGameUpdateTag))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

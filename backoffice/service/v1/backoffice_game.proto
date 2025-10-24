@@ -218,13 +218,6 @@ service BackofficeGame {
 		};
 	}
 
-	rpc UpdateTag(UpdateTagRequest) returns (game.service.v1.UpdateTagResponse) {
-		option (google.api.http) = {
-			post: "/v1/backoffice/game/tags/update"
-			body: "*"
-		};
-	}
-
 	rpc DeleteTag(DeleteTagRequest) returns (game.service.v1.DeleteTagResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/game/tags/delete"
@@ -727,11 +720,6 @@ message ListTagRequest {
 
 message CreateTagRequest {
 	string tag_name = 1;
-}
-
-message UpdateTagRequest {
-	int64 tag_id = 1;
-	string tag_name = 2;
 }
 
 message DeleteTagRequest {
