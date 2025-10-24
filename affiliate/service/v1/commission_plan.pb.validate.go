@@ -4855,39 +4855,6 @@ func (m *CPLConfig) validate(all bool) error {
 
 	}
 
-	if m.Qualification != nil {
-
-		if all {
-			switch v := interface{}(m.GetQualification()).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, CPLConfigValidationError{
-						field:  "Qualification",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, CPLConfigValidationError{
-						field:  "Qualification",
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(m.GetQualification()).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return CPLConfigValidationError{
-					field:  "Qualification",
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
 	if m.AdvancedOptions != nil {
 
 		if all {
