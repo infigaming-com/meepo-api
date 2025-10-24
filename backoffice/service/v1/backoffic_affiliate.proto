@@ -11,6 +11,8 @@ option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v
 option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
 
+import "google/protobuf/timestamp.proto";
+
 service BackofficeAffiliate {
 	
 	// -------------- Commission Plan --------------
@@ -114,6 +116,15 @@ service BackofficeAffiliate {
 	rpc DeleteCampaign(DeleteCampaignRequest) returns (api.affiliate.service.v1.DeleteCampaignResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/campaign/delete"
+			body: "*"
+		};
+	}
+
+	// -------------- Event --------------
+
+	rpc ListEvents(ListEventsRequest) returns (api.affiliate.service.v1.ListEventsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/event/list"
 			body: "*"
 		};
 	}
@@ -226,4 +237,15 @@ message ListAffiliateCampaignsRequest {
 message DeleteCampaignRequest {
 	int64 campaign_id = 1;
 }
-	
+
+message ListEventsRequest {
+	optional int64 affiliate_id = 1;
+	repeated string event_types = 2;
+	repeated string countries = 3;
+	repeated string currencies = 4;
+	google.protobuf.Timestamp start_time = 5;
+	google.protobuf.Timestamp end_time = 6;
+	optional int32 page = 7;
+	optional int32 page_size = 8;
+	bool is_affiliate = 9;
+}

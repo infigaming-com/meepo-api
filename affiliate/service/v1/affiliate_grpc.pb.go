@@ -34,6 +34,7 @@ const (
 	Affiliate_UpdateCampaign_FullMethodName         = "/api.affiliate.service.v1.Affiliate/UpdateCampaign"
 	Affiliate_ListCampaigns_FullMethodName          = "/api.affiliate.service.v1.Affiliate/ListCampaigns"
 	Affiliate_DeleteCampaign_FullMethodName         = "/api.affiliate.service.v1.Affiliate/DeleteCampaign"
+	Affiliate_ListEvents_FullMethodName             = "/api.affiliate.service.v1.Affiliate/ListEvents"
 )
 
 // AffiliateClient is the client API for Affiliate service.
@@ -55,6 +56,7 @@ type AffiliateClient interface {
 	UpdateCampaign(ctx context.Context, in *UpdateCampaignRequest, opts ...grpc.CallOption) (*UpdateCampaignResponse, error)
 	ListCampaigns(ctx context.Context, in *ListCampaignsRequest, opts ...grpc.CallOption) (*ListCampaignsResponse, error)
 	DeleteCampaign(ctx context.Context, in *DeleteCampaignRequest, opts ...grpc.CallOption) (*DeleteCampaignResponse, error)
+	ListEvents(ctx context.Context, in *ListEventsRequest, opts ...grpc.CallOption) (*ListEventsResponse, error)
 }
 
 type affiliateClient struct {
@@ -215,6 +217,16 @@ func (c *affiliateClient) DeleteCampaign(ctx context.Context, in *DeleteCampaign
 	return out, nil
 }
 
+func (c *affiliateClient) ListEvents(ctx context.Context, in *ListEventsRequest, opts ...grpc.CallOption) (*ListEventsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListEventsResponse)
+	err := c.cc.Invoke(ctx, Affiliate_ListEvents_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AffiliateServer is the server API for Affiliate service.
 // All implementations must embed UnimplementedAffiliateServer
 // for forward compatibility.
@@ -234,6 +246,7 @@ type AffiliateServer interface {
 	UpdateCampaign(context.Context, *UpdateCampaignRequest) (*UpdateCampaignResponse, error)
 	ListCampaigns(context.Context, *ListCampaignsRequest) (*ListCampaignsResponse, error)
 	DeleteCampaign(context.Context, *DeleteCampaignRequest) (*DeleteCampaignResponse, error)
+	ListEvents(context.Context, *ListEventsRequest) (*ListEventsResponse, error)
 	mustEmbedUnimplementedAffiliateServer()
 }
 
@@ -288,6 +301,9 @@ func (UnimplementedAffiliateServer) ListCampaigns(context.Context, *ListCampaign
 }
 func (UnimplementedAffiliateServer) DeleteCampaign(context.Context, *DeleteCampaignRequest) (*DeleteCampaignResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteCampaign not implemented")
+}
+func (UnimplementedAffiliateServer) ListEvents(context.Context, *ListEventsRequest) (*ListEventsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListEvents not implemented")
 }
 func (UnimplementedAffiliateServer) mustEmbedUnimplementedAffiliateServer() {}
 func (UnimplementedAffiliateServer) testEmbeddedByValue()                   {}
@@ -580,6 +596,24 @@ func _Affiliate_DeleteCampaign_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Affiliate_ListEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListEventsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).ListEvents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_ListEvents_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).ListEvents(ctx, req.(*ListEventsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Affiliate_ServiceDesc is the grpc.ServiceDesc for Affiliate service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -646,6 +680,10 @@ var Affiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteCampaign",
 			Handler:    _Affiliate_DeleteCampaign_Handler,
+		},
+		{
+			MethodName: "ListEvents",
+			Handler:    _Affiliate_ListEvents_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

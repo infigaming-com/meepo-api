@@ -658,6 +658,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.DeleteAffiliateResponse'
+    /v1/backoffice/affiliate/event/list:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_ListEvents
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListEventsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListEventsResponse'
     /v1/backoffice/affiliate/get:
         post:
             tags:
@@ -5908,6 +5926,13 @@ components:
                     type: string
                 customName:
                     type: string
+        api.affiliate.service.v1.Event_CommissionPlan:
+            type: object
+            properties:
+                commissionPlanId:
+                    type: string
+                commissionPlanName:
+                    type: string
         api.affiliate.service.v1.FlatByCountriesCommission:
             type: object
             properties:
@@ -6117,6 +6142,62 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.affiliate.service.v1.ListEventsResponse:
+            type: object
+            properties:
+                events:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.ListEventsResponse_Event'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.affiliate.service.v1.ListEventsResponse_Event:
+            type: object
+            properties:
+                country:
+                    type: string
+                campaignName:
+                    type: string
+                campaignId:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                eventType:
+                    type: string
+                commissionPlans:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.Event_CommissionPlan'
+                currency:
+                    type: string
+                amount:
+                    type: string
+                amountUsd:
+                    type: string
+                amountReportingCurrency:
+                    type: string
+                userId:
+                    type: string
+                eventId:
+                    type: string
+                affiliateId:
+                    type: string
+                affiliateName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                operatorName:
+                    type: string
         api.affiliate.service.v1.Params:
             type: object
             properties:
@@ -9602,6 +9683,37 @@ components:
                     type: string
                 averageFtdAmountReportingCurrencyForNonSameDayRegistredUsers:
                     type: string
+        api.backoffice.service.v1.ListEventsRequest:
+            type: object
+            properties:
+                affiliateId:
+                    type: string
+                eventTypes:
+                    type: array
+                    items:
+                        type: string
+                countries:
+                    type: array
+                    items:
+                        type: string
+                currencies:
+                    type: array
+                    items:
+                        type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                isAffiliate:
+                    type: boolean
         api.backoffice.service.v1.ListFICAThresholdTransactionsRequest:
             type: object
             properties:

@@ -36,6 +36,7 @@ const (
 	BackofficeAffiliate_ListCampaigns_FullMethodName          = "/api.backoffice.service.v1.BackofficeAffiliate/ListCampaigns"
 	BackofficeAffiliate_ListAffiliateCampaigns_FullMethodName = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateCampaigns"
 	BackofficeAffiliate_DeleteCampaign_FullMethodName         = "/api.backoffice.service.v1.BackofficeAffiliate/DeleteCampaign"
+	BackofficeAffiliate_ListEvents_FullMethodName             = "/api.backoffice.service.v1.BackofficeAffiliate/ListEvents"
 )
 
 // BackofficeAffiliateClient is the client API for BackofficeAffiliate service.
@@ -58,6 +59,7 @@ type BackofficeAffiliateClient interface {
 	ListCampaigns(ctx context.Context, in *ListCampaignsRequest, opts ...grpc.CallOption) (*v1.ListCampaignsResponse, error)
 	ListAffiliateCampaigns(ctx context.Context, in *ListAffiliateCampaignsRequest, opts ...grpc.CallOption) (*v1.ListCampaignsResponse, error)
 	DeleteCampaign(ctx context.Context, in *DeleteCampaignRequest, opts ...grpc.CallOption) (*v1.DeleteCampaignResponse, error)
+	ListEvents(ctx context.Context, in *ListEventsRequest, opts ...grpc.CallOption) (*v1.ListEventsResponse, error)
 }
 
 type backofficeAffiliateClient struct {
@@ -228,6 +230,16 @@ func (c *backofficeAffiliateClient) DeleteCampaign(ctx context.Context, in *Dele
 	return out, nil
 }
 
+func (c *backofficeAffiliateClient) ListEvents(ctx context.Context, in *ListEventsRequest, opts ...grpc.CallOption) (*v1.ListEventsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListEventsResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_ListEvents_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeAffiliateServer is the server API for BackofficeAffiliate service.
 // All implementations must embed UnimplementedBackofficeAffiliateServer
 // for forward compatibility.
@@ -248,6 +260,7 @@ type BackofficeAffiliateServer interface {
 	ListCampaigns(context.Context, *ListCampaignsRequest) (*v1.ListCampaignsResponse, error)
 	ListAffiliateCampaigns(context.Context, *ListAffiliateCampaignsRequest) (*v1.ListCampaignsResponse, error)
 	DeleteCampaign(context.Context, *DeleteCampaignRequest) (*v1.DeleteCampaignResponse, error)
+	ListEvents(context.Context, *ListEventsRequest) (*v1.ListEventsResponse, error)
 	mustEmbedUnimplementedBackofficeAffiliateServer()
 }
 
@@ -305,6 +318,9 @@ func (UnimplementedBackofficeAffiliateServer) ListAffiliateCampaigns(context.Con
 }
 func (UnimplementedBackofficeAffiliateServer) DeleteCampaign(context.Context, *DeleteCampaignRequest) (*v1.DeleteCampaignResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteCampaign not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) ListEvents(context.Context, *ListEventsRequest) (*v1.ListEventsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListEvents not implemented")
 }
 func (UnimplementedBackofficeAffiliateServer) mustEmbedUnimplementedBackofficeAffiliateServer() {}
 func (UnimplementedBackofficeAffiliateServer) testEmbeddedByValue()                             {}
@@ -615,6 +631,24 @@ func _BackofficeAffiliate_DeleteCampaign_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeAffiliate_ListEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListEventsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).ListEvents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_ListEvents_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).ListEvents(ctx, req.(*ListEventsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeAffiliate_ServiceDesc is the grpc.ServiceDesc for BackofficeAffiliate service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -685,6 +719,10 @@ var BackofficeAffiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteCampaign",
 			Handler:    _BackofficeAffiliate_DeleteCampaign_Handler,
+		},
+		{
+			MethodName: "ListEvents",
+			Handler:    _BackofficeAffiliate_ListEvents_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
