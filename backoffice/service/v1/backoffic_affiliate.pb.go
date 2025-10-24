@@ -995,7 +995,7 @@ type ListEventsRequest struct {
 	EndTime       *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
 	Page          *int32                 `protobuf:"varint,7,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize      *int32                 `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	IsAffiliate   bool                   `protobuf:"varint,9,opt,name=is_affiliate,json=isAffiliate,proto3" json:"is_affiliate,omitempty"`
+	RoleId        int64                  `protobuf:"varint,9,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1086,11 +1086,11 @@ func (x *ListEventsRequest) GetPageSize() int32 {
 	return 0
 }
 
-func (x *ListEventsRequest) GetIsAffiliate() bool {
+func (x *ListEventsRequest) GetRoleId() int64 {
 	if x != nil {
-		return x.IsAffiliate
+		return x.RoleId
 	}
-	return false
+	return 0
 }
 
 type CreateCampaignRequest_Campaign struct {
@@ -1266,7 +1266,7 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"_page_size\"8\n" +
 	"\x15DeleteCampaignRequest\x12\x1f\n" +
 	"\vcampaign_id\x18\x01 \x01(\x03R\n" +
-	"campaignId\"\x92\x03\n" +
+	"campaignId\"\x88\x03\n" +
 	"\x11ListEventsRequest\x12&\n" +
 	"\faffiliate_id\x18\x01 \x01(\x03H\x00R\vaffiliateId\x88\x01\x01\x12\x1f\n" +
 	"\vevent_types\x18\x02 \x03(\tR\n" +
@@ -1279,8 +1279,8 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"start_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
 	"\bend_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12\x17\n" +
 	"\x04page\x18\a \x01(\x05H\x01R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\b \x01(\x05H\x02R\bpageSize\x88\x01\x01\x12!\n" +
-	"\fis_affiliate\x18\t \x01(\bR\visAffiliateB\x0f\n" +
+	"\tpage_size\x18\b \x01(\x05H\x02R\bpageSize\x88\x01\x01\x12\x17\n" +
+	"\arole_id\x18\t \x01(\x03R\x06roleIdB\x0f\n" +
 	"\r_affiliate_idB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
