@@ -238,6 +238,8 @@ message DeleteCampaignRequest {
 	int64 campaign_id = 1;
 }
 
+// -------------- Event --------------
+
 message ListEventsRequest {
 	optional int64 affiliate_id = 1;
 	repeated string event_types = 2;
@@ -247,5 +249,5 @@ message ListEventsRequest {
 	google.protobuf.Timestamp end_time = 6;
 	optional int32 page = 7;
 	optional int32 page_size = 8;
-	bool is_affiliate = 9;
+	int64 role_id = 9;
 }

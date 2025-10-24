@@ -2148,7 +2148,7 @@ func (m *ListEventsRequest) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for IsAffiliate
+	// no validation rules for RoleId
 
 	if m.AffiliateId != nil {
 		// no validation rules for AffiliateId

@@ -128,7 +128,7 @@ message CountryCommissionGroup {
 }
 
 message ProgressiveCommission {
-    string metric = 1; // ftd_amount/monthly_ftd_count/total_deposits/deposits_amount
+    string metric = 1; // ftd_amount/ftd_count_in_period/total_deposits/deposits_amount
     repeated ProgressiveCommissionRange ranges = 2;
 }
 
@@ -139,7 +139,7 @@ message ProgressiveCommissionRange {
 }
 
 message ProgressiveByCountriesCommission {
-    string metric = 1; // ftd_amount/monthly_ftd_count/total_deposits/deposits_amount
+    string metric = 1; // ftd_amount/ftd_count_in_period/total_deposits/deposits_amount
     repeated CountryProgressiveGroup country_groups = 2;
     repeated ProgressiveCommissionRange other_countries_ranges = 3;
 }

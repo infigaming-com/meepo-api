@@ -1209,7 +1209,7 @@ func (x *CountryCommissionGroup) GetCommission() string {
 
 type ProgressiveCommission struct {
 	state         protoimpl.MessageState        `protogen:"open.v1"`
-	Metric        string                        `protobuf:"bytes,1,opt,name=metric,proto3" json:"metric,omitempty"` // ftd_amount/monthly_ftd_count/total_deposits/deposits_amount
+	Metric        string                        `protobuf:"bytes,1,opt,name=metric,proto3" json:"metric,omitempty"` // ftd_amount/ftd_count_in_period/total_deposits/deposits_amount
 	Ranges        []*ProgressiveCommissionRange `protobuf:"bytes,2,rep,name=ranges,proto3" json:"ranges,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1321,7 +1321,7 @@ func (x *ProgressiveCommissionRange) GetCommission() string {
 
 type ProgressiveByCountriesCommission struct {
 	state                protoimpl.MessageState        `protogen:"open.v1"`
-	Metric               string                        `protobuf:"bytes,1,opt,name=metric,proto3" json:"metric,omitempty"` // ftd_amount/monthly_ftd_count/total_deposits/deposits_amount
+	Metric               string                        `protobuf:"bytes,1,opt,name=metric,proto3" json:"metric,omitempty"` // ftd_amount/ftd_count_in_period/total_deposits/deposits_amount
 	CountryGroups        []*CountryProgressiveGroup    `protobuf:"bytes,2,rep,name=country_groups,json=countryGroups,proto3" json:"country_groups,omitempty"`
 	OtherCountriesRanges []*ProgressiveCommissionRange `protobuf:"bytes,3,rep,name=other_countries_ranges,json=otherCountriesRanges,proto3" json:"other_countries_ranges,omitempty"`
 	unknownFields        protoimpl.UnknownFields
