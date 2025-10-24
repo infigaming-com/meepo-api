@@ -9,6 +9,8 @@ option go_package = "github.com/infigaming-com/meepo-api/affiliate/service/v1;v1
 option java_multiple_files = true;
 option java_package = "api.affiliate.service.v1";
 
+import "google/protobuf/timestamp.proto";
+
 service Affiliate {
 
     // -------------- Commission Plan --------------
@@ -46,6 +48,10 @@ service Affiliate {
     rpc ListCampaigns(ListCampaignsRequest) returns (ListCampaignsResponse) {}
 
     rpc DeleteCampaign(DeleteCampaignRequest) returns (DeleteCampaignResponse) {}
+
+    // -------------- Event --------------
+
+    rpc ListEvents(ListEventsRequest) returns (ListEventsResponse) {}
 }
 
 message ContactType {
@@ -303,4 +309,48 @@ message DeleteCampaignRequest {
 }
 
 message DeleteCampaignResponse {
+}
+
+message ListEventsRequest {
+    optional int64 affiliate_id = 1;
+    repeated string event_types = 2;
+    repeated string countries = 3;
+    repeated string currencies = 4;
+    google.protobuf.Timestamp start_time = 5;
+    google.protobuf.Timestamp end_time = 6;
+    optional int32 page = 7;
+    optional int32 page_size = 8;
+    optional int64 initiator_user_id = 9;
+    api.common.OperatorContext initiator_operator_context = 10;
+    api.common.OperatorContextFilters operator_context_filters = 11;
+}
+
+message ListEventsResponse {
+    message Event {
+        message CommissionPlan {
+            int64 commission_plan_id = 1;
+            string commission_plan_name = 2;
+        }
+        string country = 1;
+        string campaign_name = 2;
+        int64 campaign_id = 3;
+        google.protobuf.Timestamp created_at = 4;
+        string event_type = 5;	// "register", "first_deposit", "first_qualification_deposit", "deposit", "withdrawal", "game_start", "game_bet", "game_win", "click_deposit"
+        repeated CommissionPlan commission_plans = 6;
+        string currency = 7;
+        string amount = 8;
+        string amount_usd = 9;
+        string amount_reporting_currency = 10;
+        int64 user_id = 11;
+        int64 event_id = 12;
+        int64 affiliate_id = 13;
+        string affiliate_name = 14;
+        string retailer_operator_name = 15;
+        string company_operator_name = 16;
+        string operator_name = 17;
+    }
+    repeated Event events = 1; 
+    int32 total = 2;
+    int32 page = 3;
+    int32 page_size = 4;
 }
