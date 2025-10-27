@@ -443,7 +443,7 @@ type DebitRequest struct {
 	//   - "payment_withdraw"   - Payment withdraw transaction
 	TransactionType string                  `protobuf:"bytes,4,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
 	TransactionId   int64                   `protobuf:"varint,5,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	Cash            string                  `protobuf:"bytes,6,opt,name=cash,proto3" json:"cash,omitempty"`
+	Amount          string                  `protobuf:"bytes,6,opt,name=amount,proto3" json:"amount,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,7,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	InitiatorUserId int64                   `protobuf:"varint,8,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
 	Comment         string                  `protobuf:"bytes,9,opt,name=comment,proto3" json:"comment,omitempty"`
@@ -516,9 +516,9 @@ func (x *DebitRequest) GetTransactionId() int64 {
 	return 0
 }
 
-func (x *DebitRequest) GetCash() string {
+func (x *DebitRequest) GetAmount() string {
 	if x != nil {
-		return x.Cash
+		return x.Amount
 	}
 	return ""
 }
@@ -12307,14 +12307,14 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1ainitiator_operator_context\x18\x0e \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContextB\x1a\n" +
 	"\x18_external_transaction_id\"7\n" +
 	"\x0eCreditResponse\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\xe6\x02\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"\xea\x02\n" +
 	"\fDebitRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12-\n" +
 	"\x12reporting_currency\x18\x03 \x01(\tR\x11reportingCurrency\x12)\n" +
 	"\x10transaction_type\x18\x04 \x01(\tR\x0ftransactionType\x12%\n" +
-	"\x0etransaction_id\x18\x05 \x01(\x03R\rtransactionId\x12\x12\n" +
-	"\x04cash\x18\x06 \x01(\tR\x04cash\x12F\n" +
+	"\x0etransaction_id\x18\x05 \x01(\x03R\rtransactionId\x12\x16\n" +
+	"\x06amount\x18\x06 \x01(\tR\x06amount\x12F\n" +
 	"\x10operator_context\x18\a \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12*\n" +
 	"\x11initiator_user_id\x18\b \x01(\x03R\x0finitiatorUserId\x12\x18\n" +
 	"\acomment\x18\t \x01(\tR\acomment\"6\n" +

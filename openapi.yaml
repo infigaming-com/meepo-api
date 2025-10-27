@@ -11937,7 +11937,7 @@ components:
                     type: string
                 transactionId:
                     type: string
-                cash:
+                amount:
                     type: string
                 comment:
                     type: string
