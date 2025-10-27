@@ -3326,11 +3326,11 @@ func (x *ExportFICAThresholdTransactionsRequest) GetTargetOperatorContext() *com
 	return nil
 }
 
-type CreditRequest struct {
+type ManualCreditRequest struct {
 	state                          protoimpl.MessageState `protogen:"open.v1"`
 	UserId                         int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Currency                       string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	TransactionType                string                 `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	TransactionType                string                 `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"` // manual_credit_cash, manual_credit_bonus
 	CashAmount                     string                 `protobuf:"bytes,4,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
 	CashTurnoverThreshold          string                 `protobuf:"bytes,5,opt,name=cash_turnover_threshold,json=cashTurnoverThreshold,proto3" json:"cash_turnover_threshold,omitempty"`
 	OperatorBonusAmount            string                 `protobuf:"bytes,6,opt,name=operator_bonus_amount,json=operatorBonusAmount,proto3" json:"operator_bonus_amount,omitempty"`
@@ -3341,20 +3341,20 @@ type CreditRequest struct {
 	sizeCache                      protoimpl.SizeCache
 }
 
-func (x *CreditRequest) Reset() {
-	*x = CreditRequest{}
+func (x *ManualCreditRequest) Reset() {
+	*x = ManualCreditRequest{}
 	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreditRequest) String() string {
+func (x *ManualCreditRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreditRequest) ProtoMessage() {}
+func (*ManualCreditRequest) ProtoMessage() {}
 
-func (x *CreditRequest) ProtoReflect() protoreflect.Message {
+func (x *ManualCreditRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -3366,101 +3366,100 @@ func (x *CreditRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreditRequest.ProtoReflect.Descriptor instead.
-func (*CreditRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ManualCreditRequest.ProtoReflect.Descriptor instead.
+func (*ManualCreditRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{46}
 }
 
-func (x *CreditRequest) GetUserId() int64 {
+func (x *ManualCreditRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
 	return 0
 }
 
-func (x *CreditRequest) GetCurrency() string {
+func (x *ManualCreditRequest) GetCurrency() string {
 	if x != nil {
 		return x.Currency
 	}
 	return ""
 }
 
-func (x *CreditRequest) GetTransactionType() string {
+func (x *ManualCreditRequest) GetTransactionType() string {
 	if x != nil {
 		return x.TransactionType
 	}
 	return ""
 }
 
-func (x *CreditRequest) GetCashAmount() string {
+func (x *ManualCreditRequest) GetCashAmount() string {
 	if x != nil {
 		return x.CashAmount
 	}
 	return ""
 }
 
-func (x *CreditRequest) GetCashTurnoverThreshold() string {
+func (x *ManualCreditRequest) GetCashTurnoverThreshold() string {
 	if x != nil {
 		return x.CashTurnoverThreshold
 	}
 	return ""
 }
 
-func (x *CreditRequest) GetOperatorBonusAmount() string {
+func (x *ManualCreditRequest) GetOperatorBonusAmount() string {
 	if x != nil {
 		return x.OperatorBonusAmount
 	}
 	return ""
 }
 
-func (x *CreditRequest) GetOperatorBonusTurnoverThreshold() string {
+func (x *ManualCreditRequest) GetOperatorBonusTurnoverThreshold() string {
 	if x != nil {
 		return x.OperatorBonusTurnoverThreshold
 	}
 	return ""
 }
 
-func (x *CreditRequest) GetOperatorBonusWithdrawLimit() string {
+func (x *ManualCreditRequest) GetOperatorBonusWithdrawLimit() string {
 	if x != nil {
 		return x.OperatorBonusWithdrawLimit
 	}
 	return ""
 }
 
-func (x *CreditRequest) GetComment() string {
+func (x *ManualCreditRequest) GetComment() string {
 	if x != nil {
 		return x.Comment
 	}
 	return ""
 }
 
-type DebitRequest struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	UserId            int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Currency          string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	ReportingCurrency string                 `protobuf:"bytes,3,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
-	TransactionType   string                 `protobuf:"bytes,4,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	TransactionId     int64                  `protobuf:"varint,5,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	Cash              string                 `protobuf:"bytes,6,opt,name=cash,proto3" json:"cash,omitempty"`
-	Comment           string                 `protobuf:"bytes,7,opt,name=comment,proto3" json:"comment,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+type ManualDebitRequest struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	UserId          int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Currency        string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	TransactionType string                 `protobuf:"bytes,3,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"` // manual_debit_cash, manual_debit_bonus
+	TransactionId   int64                  `protobuf:"varint,4,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	Cash            string                 `protobuf:"bytes,5,opt,name=cash,proto3" json:"cash,omitempty"`
+	Comment         string                 `protobuf:"bytes,6,opt,name=comment,proto3" json:"comment,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
-func (x *DebitRequest) Reset() {
-	*x = DebitRequest{}
+func (x *ManualDebitRequest) Reset() {
+	*x = ManualDebitRequest{}
 	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DebitRequest) String() string {
+func (x *ManualDebitRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DebitRequest) ProtoMessage() {}
+func (*ManualDebitRequest) ProtoMessage() {}
 
-func (x *DebitRequest) ProtoReflect() protoreflect.Message {
+func (x *ManualDebitRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_backoffice_service_v1_backoffice_wallet_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -3472,54 +3471,47 @@ func (x *DebitRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DebitRequest.ProtoReflect.Descriptor instead.
-func (*DebitRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ManualDebitRequest.ProtoReflect.Descriptor instead.
+func (*ManualDebitRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{47}
 }
 
-func (x *DebitRequest) GetUserId() int64 {
+func (x *ManualDebitRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
 	return 0
 }
 
-func (x *DebitRequest) GetCurrency() string {
+func (x *ManualDebitRequest) GetCurrency() string {
 	if x != nil {
 		return x.Currency
 	}
 	return ""
 }
 
-func (x *DebitRequest) GetReportingCurrency() string {
-	if x != nil {
-		return x.ReportingCurrency
-	}
-	return ""
-}
-
-func (x *DebitRequest) GetTransactionType() string {
+func (x *ManualDebitRequest) GetTransactionType() string {
 	if x != nil {
 		return x.TransactionType
 	}
 	return ""
 }
 
-func (x *DebitRequest) GetTransactionId() int64 {
+func (x *ManualDebitRequest) GetTransactionId() int64 {
 	if x != nil {
 		return x.TransactionId
 	}
 	return 0
 }
 
-func (x *DebitRequest) GetCash() string {
+func (x *ManualDebitRequest) GetCash() string {
 	if x != nil {
 		return x.Cash
 	}
 	return ""
 }
 
-func (x *DebitRequest) GetComment() string {
+func (x *ManualDebitRequest) GetComment() string {
 	if x != nil {
 		return x.Comment
 	}
@@ -4362,8 +4354,8 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x11_transaction_typeB\v\n" +
 	"\t_currencyB\f\n" +
 	"\n" +
-	"_kyc_level\"\xa4\x03\n" +
-	"\rCreditRequest\x12\x17\n" +
+	"_kyc_level\"\xaa\x03\n" +
+	"\x13ManualCreditRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12)\n" +
 	"\x10transaction_type\x18\x03 \x01(\tR\x0ftransactionType\x12\x1f\n" +
@@ -4373,15 +4365,14 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x15operator_bonus_amount\x18\x06 \x01(\tR\x13operatorBonusAmount\x12I\n" +
 	"!operator_bonus_turnover_threshold\x18\a \x01(\tR\x1eoperatorBonusTurnoverThreshold\x12A\n" +
 	"\x1doperator_bonus_withdraw_limit\x18\b \x01(\tR\x1aoperatorBonusWithdrawLimit\x12\x18\n" +
-	"\acomment\x18\t \x01(\tR\acomment\"\xf2\x01\n" +
-	"\fDebitRequest\x12\x17\n" +
+	"\acomment\x18\t \x01(\tR\acomment\"\xc9\x01\n" +
+	"\x12ManualDebitRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12-\n" +
-	"\x12reporting_currency\x18\x03 \x01(\tR\x11reportingCurrency\x12)\n" +
-	"\x10transaction_type\x18\x04 \x01(\tR\x0ftransactionType\x12%\n" +
-	"\x0etransaction_id\x18\x05 \x01(\x03R\rtransactionId\x12\x12\n" +
-	"\x04cash\x18\x06 \x01(\tR\x04cash\x12\x18\n" +
-	"\acomment\x18\a \x01(\tR\acomment\"\xc1\x03\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12)\n" +
+	"\x10transaction_type\x18\x03 \x01(\tR\x0ftransactionType\x12%\n" +
+	"\x0etransaction_id\x18\x04 \x01(\x03R\rtransactionId\x12\x12\n" +
+	"\x04cash\x18\x05 \x01(\tR\x04cash\x12\x18\n" +
+	"\acomment\x18\x06 \x01(\tR\acomment\"\xc1\x03\n" +
 	"\x1fListManualJournalEntriesRequest\x12>\n" +
 	"\n" +
 	"start_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\tstartTime\x88\x01\x01\x12:\n" +
@@ -4412,7 +4403,7 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\t_end_timeB\n" +
 	"\n" +
 	"\b_user_idB\v\n" +
-	"\t_currency2\x9c7\n" +
+	"\t_currency2\xa87\n" +
 	"\x10BackofficeWallet\x12\x8b\x01\n" +
 	"\n" +
 	"GetWallets\x12,.api.backoffice.service.v1.GetWalletsRequest\x1a).api.wallet.service.v1.GetWalletsResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/backoffice/wallet/get\x12\xa9\x01\n" +
@@ -4446,9 +4437,9 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\x16SetFICAThresholdConfig\x128.api.backoffice.service.v1.SetFICAThresholdConfigRequest\x1a5.api.wallet.service.v1.SetFICAThresholdConfigResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/wallet/fica/config/set\x12\xbb\x01\n" +
 	"\x16GetFICAThresholdConfig\x128.api.backoffice.service.v1.GetFICAThresholdConfigRequest\x1a5.api.wallet.service.v1.GetFICAThresholdConfigResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/wallet/fica/config/get\x12\xd7\x01\n" +
 	"\x1dListFICAThresholdTransactions\x12?.api.backoffice.service.v1.ListFICAThresholdTransactionsRequest\x1a<.api.wallet.service.v1.ListFICAThresholdTransactionsResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/wallet/fica/transactions/list\x12\xdf\x01\n" +
-	"\x1fExportFICAThresholdTransactions\x12A.api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest\x1a>.api.wallet.service.v1.ExportFICAThresholdTransactionsResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./v1/backoffice/wallet/fica/transactions/export\x12\x8f\x01\n" +
-	"\fManualCredit\x12(.api.backoffice.service.v1.CreditRequest\x1a%.api.wallet.service.v1.CreditResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/wallet/manual/credit\x12\x8b\x01\n" +
-	"\vManualDebit\x12'.api.backoffice.service.v1.DebitRequest\x1a$.api.wallet.service.v1.DebitResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/wallet/manual/debit\x12\xcd\x01\n" +
+	"\x1fExportFICAThresholdTransactions\x12A.api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest\x1a>.api.wallet.service.v1.ExportFICAThresholdTransactionsResponse\"9\x82\xd3\xe4\x93\x023:\x01*\"./v1/backoffice/wallet/fica/transactions/export\x12\x95\x01\n" +
+	"\fManualCredit\x12..api.backoffice.service.v1.ManualCreditRequest\x1a%.api.wallet.service.v1.CreditResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/backoffice/wallet/manual/credit\x12\x91\x01\n" +
+	"\vManualDebit\x12-.api.backoffice.service.v1.ManualDebitRequest\x1a$.api.wallet.service.v1.DebitResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/wallet/manual/debit\x12\xcd\x01\n" +
 	"\x18ListManualJournalEntries\x12:.api.backoffice.service.v1.ListManualJournalEntriesRequest\x1a7.api.wallet.service.v1.ListManualJournalEntriesResponse\"<\x82\xd3\xe4\x93\x026:\x01*\"1/v1/backoffice/wallet/manual/journal-entries/list\x12\xd5\x01\n" +
 	"\x1aExportManualJournalEntries\x12<.api.backoffice.service.v1.ExportManualJournalEntriesRequest\x1a9.api.wallet.service.v1.ExportManualJournalEntriesResponse\">\x82\xd3\xe4\x93\x028:\x01*\"3/v1/backoffice/wallet/manual/journal-entries/exportB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
@@ -4513,8 +4504,8 @@ var file_backoffice_service_v1_backoffice_wallet_proto_goTypes = []any{
 	(*GetFICAThresholdConfigRequest)(nil),                            // 43: api.backoffice.service.v1.GetFICAThresholdConfigRequest
 	(*ListFICAThresholdTransactionsRequest)(nil),                     // 44: api.backoffice.service.v1.ListFICAThresholdTransactionsRequest
 	(*ExportFICAThresholdTransactionsRequest)(nil),                   // 45: api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest
-	(*CreditRequest)(nil),                                            // 46: api.backoffice.service.v1.CreditRequest
-	(*DebitRequest)(nil),                                             // 47: api.backoffice.service.v1.DebitRequest
+	(*ManualCreditRequest)(nil),                                      // 46: api.backoffice.service.v1.ManualCreditRequest
+	(*ManualDebitRequest)(nil),                                       // 47: api.backoffice.service.v1.ManualDebitRequest
 	(*ListManualJournalEntriesRequest)(nil),                          // 48: api.backoffice.service.v1.ListManualJournalEntriesRequest
 	(*ExportManualJournalEntriesRequest)(nil),                        // 49: api.backoffice.service.v1.ExportManualJournalEntriesRequest
 	(*GetWalletCreditsResponse_Credit)(nil),                          // 50: api.backoffice.service.v1.GetWalletCreditsResponse.Credit
@@ -4647,8 +4638,8 @@ var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
 	43, // 90: api.backoffice.service.v1.BackofficeWallet.GetFICAThresholdConfig:input_type -> api.backoffice.service.v1.GetFICAThresholdConfigRequest
 	44, // 91: api.backoffice.service.v1.BackofficeWallet.ListFICAThresholdTransactions:input_type -> api.backoffice.service.v1.ListFICAThresholdTransactionsRequest
 	45, // 92: api.backoffice.service.v1.BackofficeWallet.ExportFICAThresholdTransactions:input_type -> api.backoffice.service.v1.ExportFICAThresholdTransactionsRequest
-	46, // 93: api.backoffice.service.v1.BackofficeWallet.ManualCredit:input_type -> api.backoffice.service.v1.CreditRequest
-	47, // 94: api.backoffice.service.v1.BackofficeWallet.ManualDebit:input_type -> api.backoffice.service.v1.DebitRequest
+	46, // 93: api.backoffice.service.v1.BackofficeWallet.ManualCredit:input_type -> api.backoffice.service.v1.ManualCreditRequest
+	47, // 94: api.backoffice.service.v1.BackofficeWallet.ManualDebit:input_type -> api.backoffice.service.v1.ManualDebitRequest
 	48, // 95: api.backoffice.service.v1.BackofficeWallet.ListManualJournalEntries:input_type -> api.backoffice.service.v1.ListManualJournalEntriesRequest
 	49, // 96: api.backoffice.service.v1.BackofficeWallet.ExportManualJournalEntries:input_type -> api.backoffice.service.v1.ExportManualJournalEntriesRequest
 	62, // 97: api.backoffice.service.v1.BackofficeWallet.GetWallets:output_type -> api.wallet.service.v1.GetWalletsResponse

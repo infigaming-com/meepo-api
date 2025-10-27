@@ -4097,7 +4097,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.CreditRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ManualCreditRequest'
                 required: true
             responses:
                 "200":
@@ -4116,7 +4116,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.DebitRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ManualDebitRequest'
                 required: true
             responses:
                 "200":
@@ -6933,27 +6933,6 @@ components:
             properties:
                 ticketId:
                     type: string
-        api.backoffice.service.v1.CreditRequest:
-            type: object
-            properties:
-                userId:
-                    type: string
-                currency:
-                    type: string
-                transactionType:
-                    type: string
-                cashAmount:
-                    type: string
-                cashTurnoverThreshold:
-                    type: string
-                operatorBonusAmount:
-                    type: string
-                operatorBonusTurnoverThreshold:
-                    type: string
-                operatorBonusWithdrawLimit:
-                    type: string
-                comment:
-                    type: string
         api.backoffice.service.v1.CustomerRecordReportDetailRequest:
             type: object
             properties:
@@ -7052,23 +7031,6 @@ components:
                 idNumber:
                     type: string
                 address:
-                    type: string
-        api.backoffice.service.v1.DebitRequest:
-            type: object
-            properties:
-                userId:
-                    type: string
-                currency:
-                    type: string
-                reportingCurrency:
-                    type: string
-                transactionType:
-                    type: string
-                transactionId:
-                    type: string
-                cash:
-                    type: string
-                comment:
                     type: string
         api.backoffice.service.v1.DeleteAdjustmentConfigRequest:
             type: object
@@ -11942,6 +11904,42 @@ components:
             type: object
             properties:
                 token:
+                    type: string
+        api.backoffice.service.v1.ManualCreditRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                currency:
+                    type: string
+                transactionType:
+                    type: string
+                cashAmount:
+                    type: string
+                cashTurnoverThreshold:
+                    type: string
+                operatorBonusAmount:
+                    type: string
+                operatorBonusTurnoverThreshold:
+                    type: string
+                operatorBonusWithdrawLimit:
+                    type: string
+                comment:
+                    type: string
+        api.backoffice.service.v1.ManualDebitRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                currency:
+                    type: string
+                transactionType:
+                    type: string
+                transactionId:
+                    type: string
+                cash:
+                    type: string
+                comment:
                     type: string
         api.backoffice.service.v1.OperatorBalanceFreezeRequest:
             type: object
