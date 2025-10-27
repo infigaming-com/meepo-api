@@ -295,7 +295,7 @@ message DebitRequest {
 	//   - "payment_withdraw"   - Payment withdraw transaction
 	string transaction_type = 4;
 	int64 transaction_id = 5;
-	string cash = 6;
+	string amount = 6;
 	api.common.OperatorContext operator_context = 7;
 	int64 initiator_user_id = 8;
 	string comment = 9;

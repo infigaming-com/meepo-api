@@ -245,7 +245,7 @@ service BackofficeWallet {
 	}
 
 	// ManualCredit
-	rpc ManualCredit(CreditRequest) returns (wallet.service.v1.CreditResponse) {
+	rpc ManualCredit(ManualCreditRequest) returns (wallet.service.v1.CreditResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/manual/credit"
 			body: "*"
@@ -253,7 +253,7 @@ service BackofficeWallet {
 	}
 
 	// ManualDebit
-	rpc ManualDebit(DebitRequest) returns (wallet.service.v1.DebitResponse) {
+	rpc ManualDebit(ManualDebitRequest) returns (wallet.service.v1.DebitResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/manual/debit"
 			body: "*"
@@ -679,10 +679,10 @@ message ExportFICAThresholdTransactionsRequest {
 	api.common.OperatorContext target_operator_context = 8;
 }
 
-message CreditRequest {
+message ManualCreditRequest {
 	int64 user_id = 1;
 	string currency = 2;
-	string transaction_type = 3;
+	string transaction_type = 3; // manual_credit_cash, manual_credit_bonus
 	string cash_amount = 4;
 	string cash_turnover_threshold = 5;
 	string operator_bonus_amount = 6;
@@ -691,14 +691,13 @@ message CreditRequest {
 	string comment = 9;
 }
 
-message DebitRequest {
+message ManualDebitRequest {
 	int64 user_id = 1;
 	string currency = 2;
-	string reporting_currency = 3;
-	string transaction_type = 4;
-	int64 transaction_id = 5;
-	string cash = 6;
-	string comment = 7;
+	string transaction_type = 3; // manual_debit_cash, manual_debit_bonus
+	int64 transaction_id = 4;
+	string amount = 5;
+	string comment = 6;
 }
 
 message ListManualJournalEntriesRequest {

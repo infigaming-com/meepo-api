@@ -811,7 +811,7 @@ func (m *DebitRequest) validate(all bool) error {
 
 	// no validation rules for TransactionId
 
-	// no validation rules for Cash
+	// no validation rules for Amount
 
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
