@@ -14982,6 +14982,10 @@ components:
             properties:
                 accountSettings:
                     $ref: '#/components/schemas/api.user.service.v1.OperatorAccountSettings'
+                country:
+                    type: string
+                clientIp:
+                    type: string
         api.user.service.v1.GetOperatorRegisterLimitConfigResponse:
             type: object
             properties:
