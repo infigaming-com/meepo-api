@@ -1505,6 +1505,8 @@ message GetOperatorAccountSettingsRequest {
 
 message GetOperatorAccountSettingsResponse {
 	OperatorAccountSettings account_settings = 1;
+	string country = 2;
+	string client_ip = 3;
 }
 
 message UpdateOperatorAccountSettingsRequest {

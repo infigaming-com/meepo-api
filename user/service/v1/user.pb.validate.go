@@ -17243,6 +17243,10 @@ func (m *GetOperatorAccountSettingsResponse) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for Country
+
+	// no validation rules for ClientIp
+
 	if len(errors) > 0 {
 		return GetOperatorAccountSettingsResponseMultiError(errors)
 	}

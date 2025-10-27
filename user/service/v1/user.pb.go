@@ -8489,6 +8489,8 @@ func (x *GetOperatorAccountSettingsRequest) GetTargetOperatorContext() *common.O
 type GetOperatorAccountSettingsResponse struct {
 	state           protoimpl.MessageState   `protogen:"open.v1"`
 	AccountSettings *OperatorAccountSettings `protobuf:"bytes,1,opt,name=account_settings,json=accountSettings,proto3" json:"account_settings,omitempty"`
+	Country         string                   `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
+	ClientIp        string                   `protobuf:"bytes,3,opt,name=client_ip,json=clientIp,proto3" json:"client_ip,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -8528,6 +8530,20 @@ func (x *GetOperatorAccountSettingsResponse) GetAccountSettings() *OperatorAccou
 		return x.AccountSettings
 	}
 	return nil
+}
+
+func (x *GetOperatorAccountSettingsResponse) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *GetOperatorAccountSettingsResponse) GetClientIp() string {
+	if x != nil {
+		return x.ClientIp
+	}
+	return ""
 }
 
 type UpdateOperatorAccountSettingsRequest struct {
@@ -12774,9 +12790,11 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x10operator_details\x18\x01 \x01(\v2$.api.user.service.v1.OperatorDetailsR\x0foperatorDetails\"\xc0\x01\n" +
 	"!GetOperatorAccountSettingsRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12S\n" +
-	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"}\n" +
+	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\xb4\x01\n" +
 	"\"GetOperatorAccountSettingsResponse\x12W\n" +
-	"\x10account_settings\x18\x01 \x01(\v2,.api.user.service.v1.OperatorAccountSettingsR\x0faccountSettings\"\x9c\x02\n" +
+	"\x10account_settings\x18\x01 \x01(\v2,.api.user.service.v1.OperatorAccountSettingsR\x0faccountSettings\x12\x18\n" +
+	"\acountry\x18\x02 \x01(\tR\acountry\x12\x1b\n" +
+	"\tclient_ip\x18\x03 \x01(\tR\bclientIp\"\x9c\x02\n" +
 	"$UpdateOperatorAccountSettingsRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12S\n" +
 	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12W\n" +
