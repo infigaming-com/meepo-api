@@ -2636,7 +2636,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/payment.service.v1.UpdatePaymentMethodRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdatePaymentMethodRequest'
                 required: true
             responses:
                 "200":
@@ -3441,6 +3441,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.SetOperatorTagsResponse'
+    /v1/backoffice/user/operator/prelaunch/check:
+        post:
+            tags:
+                - BackofficeUser
+            operationId: BackofficeUser_PreLaunchCheck
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.PreLaunchCheckRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.PreLaunchCheckResponse'
     /v1/backoffice/user/overview/get:
         post:
             tags:
@@ -12187,6 +12205,9 @@ components:
                     items:
                         type: string
                     description: 'action name: read, write, delete, etc.'
+        api.backoffice.service.v1.PreLaunchCheckRequest:
+            type: object
+            properties: {}
         api.backoffice.service.v1.RegisterRequest:
             type: object
             properties:
@@ -12582,6 +12603,33 @@ components:
             properties:
                 status:
                     type: string
+        api.backoffice.service.v1.UpdatePaymentMethodRequest:
+            type: object
+            properties:
+                paymentMethodId:
+                    type: string
+                    description: ID
+                contact:
+                    type: string
+                    description: Currency Type
+                sysFixedFee:
+                    type: string
+                    description: Fixed Fee on the Amount
+                sysFeeRate:
+                    type: string
+                    description: Rate Fee
+                sysMinAmount:
+                    type: string
+                    description: Min Amount
+                sysMaxAmount:
+                    type: string
+                    description: Max Amount
+                sysMinFee:
+                    type: string
+                    description: Minmum Fee
+                status:
+                    type: boolean
+                    description: status
         api.backoffice.service.v1.UpdateProviderRequest:
             type: object
             properties:
@@ -15486,6 +15534,13 @@ components:
                 registrationLimitPerIp:
                     type: integer
                     format: int32
+        api.user.service.v1.PreLaunchCheckResponse:
+            type: object
+            properties:
+                balance:
+                    type: string
+                threshhold:
+                    type: string
         api.user.service.v1.RefreshTokenRequest:
             type: object
             properties:
@@ -17928,11 +17983,11 @@ components:
                 enable:
                     type: boolean
                     description: Status bool
-                contact:
-                    type: string
-                    description: Contact
                 eat:
                     type: integer
+                    description: |-
+                        Contact
+                         string contact = 36;
                     format: int32
                 operatorId:
                     type: string
@@ -18183,12 +18238,12 @@ components:
                 paymentChannelId:
                     type: string
                     description: ID of the payment channel to be used
-                contact:
-                    type: string
-                    description: Contact Info email
                 fixedFee:
                     type: string
-                    description: PSP Fixed Fee on the Amount
+                    description: |-
+                        Contact Info email
+                         string contact = 2;
+                         PSP Fixed Fee on the Amount
                 feeRate:
                     type: string
                     description: PSP Rate Fee
@@ -18224,13 +18279,6 @@ components:
             properties:
                 paymentMethods:
                     $ref: '#/components/schemas/payment.service.v1.PaymentChannelInfo'
-        payment.service.v1.UpdatePaymentMethodRequest:
-            type: object
-            properties:
-                paymentMethodId:
-                    type: string
-                status:
-                    type: boolean
         payment.service.v1.WithdrawCallbackRequest:
             type: object
             properties:

@@ -6,6 +6,7 @@ import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "common/common.proto";
 import "user/service/v1/user.proto";
+import "user/service/v1/operator.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -130,6 +131,13 @@ service BackofficeUser {
 	rpc UserIdentityList(UserIdentityListRequest) returns (user.service.v1.UserIdentityListResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/user/identity/list/get"
+			body: "*"
+		};
+	}
+
+	rpc PreLaunchCheck(PreLaunchCheckRequest) returns (user.service.v1.PreLaunchCheckResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/user/operator/prelaunch/check"
 			body: "*"
 		};
 	}
@@ -481,4 +489,7 @@ message UserIdentityListRequest {
 	int32 page = 6;
 	int32 page_size = 7;
 	api.common.OperatorContextFilters operator_context_filters = 8;
+}
+
+message PreLaunchCheckRequest {
 }

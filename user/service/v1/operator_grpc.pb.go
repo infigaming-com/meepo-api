@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	Operator_AddWhiteLabelOperator_FullMethodName = "/api.user.service.v1.Operator/AddWhiteLabelOperator"
+	Operator_PreLaunchCheck_FullMethodName        = "/api.user.service.v1.Operator/PreLaunchCheck"
 )
 
 // OperatorClient is the client API for Operator service.
@@ -29,6 +30,7 @@ const (
 // User service provides authentication and user management functionality.
 type OperatorClient interface {
 	AddWhiteLabelOperator(ctx context.Context, in *AddWhiteLabelOperatorRequest, opts ...grpc.CallOption) (*AddWhiteLabelOperatorResponse, error)
+	PreLaunchCheck(ctx context.Context, in *PreLaunchCheckRequest, opts ...grpc.CallOption) (*PreLaunchCheckResponse, error)
 }
 
 type operatorClient struct {
@@ -49,6 +51,16 @@ func (c *operatorClient) AddWhiteLabelOperator(ctx context.Context, in *AddWhite
 	return out, nil
 }
 
+func (c *operatorClient) PreLaunchCheck(ctx context.Context, in *PreLaunchCheckRequest, opts ...grpc.CallOption) (*PreLaunchCheckResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PreLaunchCheckResponse)
+	err := c.cc.Invoke(ctx, Operator_PreLaunchCheck_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OperatorServer is the server API for Operator service.
 // All implementations must embed UnimplementedOperatorServer
 // for forward compatibility.
@@ -56,6 +68,7 @@ func (c *operatorClient) AddWhiteLabelOperator(ctx context.Context, in *AddWhite
 // User service provides authentication and user management functionality.
 type OperatorServer interface {
 	AddWhiteLabelOperator(context.Context, *AddWhiteLabelOperatorRequest) (*AddWhiteLabelOperatorResponse, error)
+	PreLaunchCheck(context.Context, *PreLaunchCheckRequest) (*PreLaunchCheckResponse, error)
 	mustEmbedUnimplementedOperatorServer()
 }
 
@@ -68,6 +81,9 @@ type UnimplementedOperatorServer struct{}
 
 func (UnimplementedOperatorServer) AddWhiteLabelOperator(context.Context, *AddWhiteLabelOperatorRequest) (*AddWhiteLabelOperatorResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddWhiteLabelOperator not implemented")
+}
+func (UnimplementedOperatorServer) PreLaunchCheck(context.Context, *PreLaunchCheckRequest) (*PreLaunchCheckResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PreLaunchCheck not implemented")
 }
 func (UnimplementedOperatorServer) mustEmbedUnimplementedOperatorServer() {}
 func (UnimplementedOperatorServer) testEmbeddedByValue()                  {}
@@ -108,6 +124,24 @@ func _Operator_AddWhiteLabelOperator_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Operator_PreLaunchCheck_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PreLaunchCheckRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperatorServer).PreLaunchCheck(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Operator_PreLaunchCheck_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperatorServer).PreLaunchCheck(ctx, req.(*PreLaunchCheckRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Operator_ServiceDesc is the grpc.ServiceDesc for Operator service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -118,6 +152,10 @@ var Operator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddWhiteLabelOperator",
 			Handler:    _Operator_AddWhiteLabelOperator_Handler,
+		},
+		{
+			MethodName: "PreLaunchCheck",
+			Handler:    _Operator_PreLaunchCheck_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
