@@ -128,6 +128,15 @@ service BackofficeAffiliate {
 			body: "*"
 		};
 	}
+
+	// -------------- Commission --------------
+
+	rpc ListCommissions(ListCommissionsRequest) returns (api.affiliate.service.v1.ListCommissionsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/commission/list"
+			body: "*"
+		};
+	}
 }
 
 // -------------- Commission Plan --------------
@@ -249,5 +258,21 @@ message ListEventsRequest {
 	google.protobuf.Timestamp end_time = 6;
 	optional int32 page = 7;
 	optional int32 page_size = 8;
-	int64 role_id = 9;
+	api.common.OperatorContextFilters operator_context_filters = 9;
+}
+
+// -------------- Commission --------------
+
+message ListCommissionsRequest {
+	repeated int64 commission_plan_ids = 1; // OR logic: filter by commission plan IDs, match if ID is any of these values
+	optional int64 user_id = 2;
+	optional int64 affiliate_id = 3;
+	repeated string commission_subtypes = 4; // cpa/revshare/cpl/cpc/flat_fee, multiple subtypes are allowed
+	repeated string countries = 5;
+	optional int64 commission_id = 6;
+	google.protobuf.Timestamp start_time = 7;
+	google.protobuf.Timestamp end_time = 8;
+	optional string status = 9; // pending/approved/rejected
+	optional int32 page = 10;
+	optional int32 page_size = 11;
 }

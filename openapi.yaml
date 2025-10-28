@@ -514,6 +514,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.UpdateCampaignResponse'
+    /v1/backoffice/affiliate/commission/list:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_ListCommissions
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListCommissionsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListCommissionsResponse'
     /v1/backoffice/affiliate/commission/plan/create:
         post:
             tags:
@@ -6142,6 +6160,75 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.affiliate.service.v1.ListCommissionsResponse:
+            type: object
+            properties:
+                commissions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.ListCommissionsResponse_Commission'
+                total:
+                    type: integer
+                    format: int32
+                totalPending:
+                    type: integer
+                    format: int32
+                totalApproved:
+                    type: integer
+                    format: int32
+                totalRejected:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.affiliate.service.v1.ListCommissionsResponse_Commission:
+            type: object
+            properties:
+                commissionId:
+                    type: string
+                country:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                status:
+                    type: string
+                paid:
+                    type: boolean
+                commissionPlanId:
+                    type: string
+                commissionPlanName:
+                    type: string
+                commissionSubtype:
+                    type: string
+                reportingCurrency:
+                    type: string
+                revenue:
+                    type: string
+                commissionUsd:
+                    type: string
+                commissionReportingCurrency:
+                    type: string
+                amountUsd:
+                    type: string
+                amountReportingCurrency:
+                    type: string
+                affiliateId:
+                    type: string
+                affiliateName:
+                    type: string
+                userId:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                operatorName:
+                    type: string
         api.affiliate.service.v1.ListEventsResponse:
             type: object
             properties:
@@ -9358,6 +9445,41 @@ components:
                     format: int32
                 status:
                     type: string
+        api.backoffice.service.v1.ListCommissionsRequest:
+            type: object
+            properties:
+                commissionPlanIds:
+                    type: array
+                    items:
+                        type: string
+                userId:
+                    type: string
+                affiliateId:
+                    type: string
+                commissionSubtypes:
+                    type: array
+                    items:
+                        type: string
+                countries:
+                    type: array
+                    items:
+                        type: string
+                commissionId:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                status:
+                    type: string
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListCompanyOperatorsRequest:
             type: object
             properties:
@@ -9674,8 +9796,8 @@ components:
                 pageSize:
                     type: integer
                     format: int32
-                roleId:
-                    type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ListFICAThresholdTransactionsRequest:
             type: object
             properties:
