@@ -772,17 +772,17 @@ type UpdatePaymentMethodRequest struct {
 	// ID
 	PaymentMethodId string `protobuf:"bytes,1,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
 	// Currency Type
-	Contact string `protobuf:"bytes,2,opt,name=contact,proto3" json:"contact,omitempty"`
+	Contact *string `protobuf:"bytes,2,opt,name=contact,proto3,oneof" json:"contact,omitempty"`
 	// Fixed Fee on the Amount
-	SysFixedFee string `protobuf:"bytes,3,opt,name=sys_fixed_fee,json=sysFixedFee,proto3" json:"sys_fixed_fee,omitempty"`
+	SysFixedFee *string `protobuf:"bytes,3,opt,name=sys_fixed_fee,json=sysFixedFee,proto3,oneof" json:"sys_fixed_fee,omitempty"`
 	// Rate Fee
-	SysFeeRate string `protobuf:"bytes,4,opt,name=sys_fee_rate,json=sysFeeRate,proto3" json:"sys_fee_rate,omitempty"`
+	SysFeeRate *string `protobuf:"bytes,4,opt,name=sys_fee_rate,json=sysFeeRate,proto3,oneof" json:"sys_fee_rate,omitempty"`
 	// Min Amount
-	SysMinAmount string `protobuf:"bytes,5,opt,name=sys_min_amount,json=sysMinAmount,proto3" json:"sys_min_amount,omitempty"`
+	SysMinAmount *string `protobuf:"bytes,5,opt,name=sys_min_amount,json=sysMinAmount,proto3,oneof" json:"sys_min_amount,omitempty"`
 	// Max Amount
-	SysMaxAmount string `protobuf:"bytes,6,opt,name=sys_max_amount,json=sysMaxAmount,proto3" json:"sys_max_amount,omitempty"`
+	SysMaxAmount *string `protobuf:"bytes,6,opt,name=sys_max_amount,json=sysMaxAmount,proto3,oneof" json:"sys_max_amount,omitempty"`
 	// Minmum Fee
-	SysMinFee string `protobuf:"bytes,7,opt,name=sys_min_fee,json=sysMinFee,proto3" json:"sys_min_fee,omitempty"`
+	SysMinFee *string `protobuf:"bytes,7,opt,name=sys_min_fee,json=sysMinFee,proto3,oneof" json:"sys_min_fee,omitempty"`
 	// status
 	Status        bool `protobuf:"varint,8,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -827,43 +827,43 @@ func (x *UpdatePaymentMethodRequest) GetPaymentMethodId() string {
 }
 
 func (x *UpdatePaymentMethodRequest) GetContact() string {
-	if x != nil {
-		return x.Contact
+	if x != nil && x.Contact != nil {
+		return *x.Contact
 	}
 	return ""
 }
 
 func (x *UpdatePaymentMethodRequest) GetSysFixedFee() string {
-	if x != nil {
-		return x.SysFixedFee
+	if x != nil && x.SysFixedFee != nil {
+		return *x.SysFixedFee
 	}
 	return ""
 }
 
 func (x *UpdatePaymentMethodRequest) GetSysFeeRate() string {
-	if x != nil {
-		return x.SysFeeRate
+	if x != nil && x.SysFeeRate != nil {
+		return *x.SysFeeRate
 	}
 	return ""
 }
 
 func (x *UpdatePaymentMethodRequest) GetSysMinAmount() string {
-	if x != nil {
-		return x.SysMinAmount
+	if x != nil && x.SysMinAmount != nil {
+		return *x.SysMinAmount
 	}
 	return ""
 }
 
 func (x *UpdatePaymentMethodRequest) GetSysMaxAmount() string {
-	if x != nil {
-		return x.SysMaxAmount
+	if x != nil && x.SysMaxAmount != nil {
+		return *x.SysMaxAmount
 	}
 	return ""
 }
 
 func (x *UpdatePaymentMethodRequest) GetSysMinFee() string {
-	if x != nil {
-		return x.SysMinFee
+	if x != nil && x.SysMinFee != nil {
+		return *x.SysMinFee
 	}
 	return ""
 }
@@ -959,17 +959,24 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\aenabled\x18\f \x01(\bH\x00R\aenabled\x88\x01\x01\x12\\\n" +
 	"\x18operator_context_filters\x18\r \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\n" +
 	"\n" +
-	"\b_enabled\"\xac\x02\n" +
+	"\b_enabled\"\xaf\x03\n" +
 	"\x1aUpdatePaymentMethodRequest\x12*\n" +
-	"\x11payment_method_id\x18\x01 \x01(\tR\x0fpaymentMethodId\x12\x18\n" +
-	"\acontact\x18\x02 \x01(\tR\acontact\x12\"\n" +
-	"\rsys_fixed_fee\x18\x03 \x01(\tR\vsysFixedFee\x12 \n" +
-	"\fsys_fee_rate\x18\x04 \x01(\tR\n" +
-	"sysFeeRate\x12$\n" +
-	"\x0esys_min_amount\x18\x05 \x01(\tR\fsysMinAmount\x12$\n" +
-	"\x0esys_max_amount\x18\x06 \x01(\tR\fsysMaxAmount\x12\x1e\n" +
-	"\vsys_min_fee\x18\a \x01(\tR\tsysMinFee\x12\x16\n" +
-	"\x06status\x18\b \x01(\bR\x06status2\xe4\x11\n" +
+	"\x11payment_method_id\x18\x01 \x01(\tR\x0fpaymentMethodId\x12\x1d\n" +
+	"\acontact\x18\x02 \x01(\tH\x00R\acontact\x88\x01\x01\x12'\n" +
+	"\rsys_fixed_fee\x18\x03 \x01(\tH\x01R\vsysFixedFee\x88\x01\x01\x12%\n" +
+	"\fsys_fee_rate\x18\x04 \x01(\tH\x02R\n" +
+	"sysFeeRate\x88\x01\x01\x12)\n" +
+	"\x0esys_min_amount\x18\x05 \x01(\tH\x03R\fsysMinAmount\x88\x01\x01\x12)\n" +
+	"\x0esys_max_amount\x18\x06 \x01(\tH\x04R\fsysMaxAmount\x88\x01\x01\x12#\n" +
+	"\vsys_min_fee\x18\a \x01(\tH\x05R\tsysMinFee\x88\x01\x01\x12\x16\n" +
+	"\x06status\x18\b \x01(\bR\x06statusB\n" +
+	"\n" +
+	"\b_contactB\x10\n" +
+	"\x0e_sys_fixed_feeB\x0f\n" +
+	"\r_sys_fee_rateB\x11\n" +
+	"\x0f_sys_min_amountB\x11\n" +
+	"\x0f_sys_max_amountB\x0e\n" +
+	"\f_sys_min_fee2\xe4\x11\n" +
 	"\x11BackofficePayment\x12\xb5\x01\n" +
 	"\x19GetPaymentTransactionPage\x124.api.backoffice.service.v1.GetTransactionPageRequest\x1a..payment.service.v1.GetTransactionPageResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/backoffice/payment/transaction/page\x12\xbc\x01\n" +
 	"\x19GetPaymentTransactionById\x123.payment.service.v1.GetTransactionDetailByIdRequest\x1a4.payment.service.v1.GetTransactionDetailByIdResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/backoffice/payment/transaction/detail\x12\xc6\x01\n" +
@@ -1078,6 +1085,7 @@ func file_backoffice_service_v1_backoffice_payment_proto_init() {
 	}
 	file_backoffice_service_v1_backoffice_payment_proto_msgTypes[3].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_payment_proto_msgTypes[5].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_payment_proto_msgTypes[6].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

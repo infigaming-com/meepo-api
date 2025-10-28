@@ -989,19 +989,31 @@ func (m *UpdatePaymentMethodRequest) validate(all bool) error {
 
 	// no validation rules for PaymentMethodId
 
-	// no validation rules for Contact
-
-	// no validation rules for SysFixedFee
-
-	// no validation rules for SysFeeRate
-
-	// no validation rules for SysMinAmount
-
-	// no validation rules for SysMaxAmount
-
-	// no validation rules for SysMinFee
-
 	// no validation rules for Status
+
+	if m.Contact != nil {
+		// no validation rules for Contact
+	}
+
+	if m.SysFixedFee != nil {
+		// no validation rules for SysFixedFee
+	}
+
+	if m.SysFeeRate != nil {
+		// no validation rules for SysFeeRate
+	}
+
+	if m.SysMinAmount != nil {
+		// no validation rules for SysMinAmount
+	}
+
+	if m.SysMaxAmount != nil {
+		// no validation rules for SysMaxAmount
+	}
+
+	if m.SysMinFee != nil {
+		// no validation rules for SysMinFee
+	}
 
 	if len(errors) > 0 {
 		return UpdatePaymentMethodRequestMultiError(errors)

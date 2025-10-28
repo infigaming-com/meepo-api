@@ -269,17 +269,17 @@ message UpdatePaymentMethodRequest {
   // ID
 	string payment_method_id = 1;
   // Currency Type
-  string contact = 2;
+  optional string contact = 2;
   // Fixed Fee on the Amount
-  string sys_fixed_fee = 3;
+  optional string sys_fixed_fee = 3;
   // Rate Fee 
-  string sys_fee_rate = 4;
+  optional string sys_fee_rate = 4;
   // Min Amount
-  string sys_min_amount = 5;
+  optional string sys_min_amount = 5;
   // Max Amount
-  string sys_max_amount = 6;
+  optional string sys_max_amount = 6;
   // Minmum Fee
-  string sys_min_fee = 7;
+  optional string sys_min_fee = 7;
 	// status
 	bool status = 8;
 }
