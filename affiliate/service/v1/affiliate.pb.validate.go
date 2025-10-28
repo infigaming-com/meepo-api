@@ -7007,15 +7007,17 @@ func (m *ListCommissionsResponse_Commission) validate(all bool) error {
 
 	// no validation rules for ReportingCurrency
 
-	// no validation rules for Revenue
+	// no validation rules for RevenueUsd
+
+	// no validation rules for RevenueReportingCurrency
 
 	// no validation rules for CommissionUsd
 
 	// no validation rules for CommissionReportingCurrency
 
-	// no validation rules for AmountUsd
+	// no validation rules for AdjustAmountUsd
 
-	// no validation rules for AmountReportingCurrency
+	// no validation rules for AdjustAmountReportingCurrency
 
 	// no validation rules for AffiliateId
 

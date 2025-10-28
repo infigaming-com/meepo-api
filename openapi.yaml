@@ -6207,15 +6207,17 @@ components:
                     type: string
                 reportingCurrency:
                     type: string
-                revenue:
+                revenueUsd:
+                    type: string
+                revenueReportingCurrency:
                     type: string
                 commissionUsd:
                     type: string
                 commissionReportingCurrency:
                     type: string
-                amountUsd:
+                adjustAmountUsd:
                     type: string
-                amountReportingCurrency:
+                adjustAmountReportingCurrency:
                     type: string
                 affiliateId:
                     type: string

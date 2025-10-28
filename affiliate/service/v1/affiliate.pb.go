@@ -3536,29 +3536,30 @@ func (x *ListEventsResponse_Event_CommissionPlan) GetCommissionPlanName() string
 }
 
 type ListCommissionsResponse_Commission struct {
-	state                       protoimpl.MessageState `protogen:"open.v1"`
-	CommissionId                int64                  `protobuf:"varint,1,opt,name=commission_id,json=commissionId,proto3" json:"commission_id,omitempty"`
-	Country                     string                 `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
-	CreatedAt                   *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	Status                      string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"` // pending/approved/rejected
-	Paid                        bool                   `protobuf:"varint,5,opt,name=paid,proto3" json:"paid,omitempty"`
-	CommissionPlanId            int64                  `protobuf:"varint,6,opt,name=commission_plan_id,json=commissionPlanId,proto3" json:"commission_plan_id,omitempty"`
-	CommissionPlanName          string                 `protobuf:"bytes,7,opt,name=commission_plan_name,json=commissionPlanName,proto3" json:"commission_plan_name,omitempty"`
-	CommissionSubtype           string                 `protobuf:"bytes,8,opt,name=commission_subtype,json=commissionSubtype,proto3" json:"commission_subtype,omitempty"` // cpa/revshare/cpl/cpc/flat_fee
-	ReportingCurrency           string                 `protobuf:"bytes,9,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
-	Revenue                     string                 `protobuf:"bytes,10,opt,name=revenue,proto3" json:"revenue,omitempty"`
-	CommissionUsd               string                 `protobuf:"bytes,11,opt,name=commission_usd,json=commissionUsd,proto3" json:"commission_usd,omitempty"`
-	CommissionReportingCurrency string                 `protobuf:"bytes,12,opt,name=commission_reporting_currency,json=commissionReportingCurrency,proto3" json:"commission_reporting_currency,omitempty"`
-	AmountUsd                   string                 `protobuf:"bytes,13,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
-	AmountReportingCurrency     string                 `protobuf:"bytes,14,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
-	AffiliateId                 int64                  `protobuf:"varint,15,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
-	AffiliateName               string                 `protobuf:"bytes,16,opt,name=affiliate_name,json=affiliateName,proto3" json:"affiliate_name,omitempty"`
-	UserId                      int64                  `protobuf:"varint,17,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	RetailerOperatorName        string                 `protobuf:"bytes,18,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
-	CompanyOperatorName         string                 `protobuf:"bytes,19,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
-	OperatorName                string                 `protobuf:"bytes,20,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	unknownFields               protoimpl.UnknownFields
-	sizeCache                   protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"open.v1"`
+	CommissionId                  int64                  `protobuf:"varint,1,opt,name=commission_id,json=commissionId,proto3" json:"commission_id,omitempty"`
+	Country                       string                 `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
+	CreatedAt                     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Status                        string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"` // pending/approved/rejected
+	Paid                          bool                   `protobuf:"varint,5,opt,name=paid,proto3" json:"paid,omitempty"`
+	CommissionPlanId              int64                  `protobuf:"varint,6,opt,name=commission_plan_id,json=commissionPlanId,proto3" json:"commission_plan_id,omitempty"`
+	CommissionPlanName            string                 `protobuf:"bytes,7,opt,name=commission_plan_name,json=commissionPlanName,proto3" json:"commission_plan_name,omitempty"`
+	CommissionSubtype             string                 `protobuf:"bytes,8,opt,name=commission_subtype,json=commissionSubtype,proto3" json:"commission_subtype,omitempty"` // cpa/revshare/cpl/cpc/flat_fee
+	ReportingCurrency             string                 `protobuf:"bytes,9,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	RevenueUsd                    string                 `protobuf:"bytes,10,opt,name=revenue_usd,json=revenueUsd,proto3" json:"revenue_usd,omitempty"`
+	RevenueReportingCurrency      string                 `protobuf:"bytes,11,opt,name=revenue_reporting_currency,json=revenueReportingCurrency,proto3" json:"revenue_reporting_currency,omitempty"`
+	CommissionUsd                 string                 `protobuf:"bytes,12,opt,name=commission_usd,json=commissionUsd,proto3" json:"commission_usd,omitempty"`
+	CommissionReportingCurrency   string                 `protobuf:"bytes,13,opt,name=commission_reporting_currency,json=commissionReportingCurrency,proto3" json:"commission_reporting_currency,omitempty"`
+	AdjustAmountUsd               string                 `protobuf:"bytes,14,opt,name=adjust_amount_usd,json=adjustAmountUsd,proto3" json:"adjust_amount_usd,omitempty"`
+	AdjustAmountReportingCurrency string                 `protobuf:"bytes,15,opt,name=adjust_amount_reporting_currency,json=adjustAmountReportingCurrency,proto3" json:"adjust_amount_reporting_currency,omitempty"`
+	AffiliateId                   int64                  `protobuf:"varint,16,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
+	AffiliateName                 string                 `protobuf:"bytes,17,opt,name=affiliate_name,json=affiliateName,proto3" json:"affiliate_name,omitempty"`
+	UserId                        int64                  `protobuf:"varint,18,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	RetailerOperatorName          string                 `protobuf:"bytes,19,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	CompanyOperatorName           string                 `protobuf:"bytes,20,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	OperatorName                  string                 `protobuf:"bytes,21,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *ListCommissionsResponse_Commission) Reset() {
@@ -3654,9 +3655,16 @@ func (x *ListCommissionsResponse_Commission) GetReportingCurrency() string {
 	return ""
 }
 
-func (x *ListCommissionsResponse_Commission) GetRevenue() string {
+func (x *ListCommissionsResponse_Commission) GetRevenueUsd() string {
 	if x != nil {
-		return x.Revenue
+		return x.RevenueUsd
+	}
+	return ""
+}
+
+func (x *ListCommissionsResponse_Commission) GetRevenueReportingCurrency() string {
+	if x != nil {
+		return x.RevenueReportingCurrency
 	}
 	return ""
 }
@@ -3675,16 +3683,16 @@ func (x *ListCommissionsResponse_Commission) GetCommissionReportingCurrency() st
 	return ""
 }
 
-func (x *ListCommissionsResponse_Commission) GetAmountUsd() string {
+func (x *ListCommissionsResponse_Commission) GetAdjustAmountUsd() string {
 	if x != nil {
-		return x.AmountUsd
+		return x.AdjustAmountUsd
 	}
 	return ""
 }
 
-func (x *ListCommissionsResponse_Commission) GetAmountReportingCurrency() string {
+func (x *ListCommissionsResponse_Commission) GetAdjustAmountReportingCurrency() string {
 	if x != nil {
-		return x.AmountReportingCurrency
+		return x.AdjustAmountReportingCurrency
 	}
 	return ""
 }
@@ -4392,7 +4400,7 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\a_statusB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xf8\b\n" +
+	"_page_size\"\xd7\t\n" +
 	"\x17ListCommissionsResponse\x12^\n" +
 	"\vcommissions\x18\x01 \x03(\v2<.api.affiliate.service.v1.ListCommissionsResponse.CommissionR\vcommissions\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12#\n" +
@@ -4400,7 +4408,7 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x0etotal_approved\x18\x04 \x01(\x05R\rtotalApproved\x12%\n" +
 	"\x0etotal_rejected\x18\x05 \x01(\x05R\rtotalRejected\x12\x12\n" +
 	"\x04page\x18\x06 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\a \x01(\x05R\bpageSize\x1a\xc2\x06\n" +
+	"\tpage_size\x18\a \x01(\x05R\bpageSize\x1a\xa1\a\n" +
 	"\n" +
 	"Commission\x12#\n" +
 	"\rcommission_id\x18\x01 \x01(\x03R\fcommissionId\x12\x18\n" +
@@ -4412,20 +4420,21 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x12commission_plan_id\x18\x06 \x01(\x03R\x10commissionPlanId\x120\n" +
 	"\x14commission_plan_name\x18\a \x01(\tR\x12commissionPlanName\x12-\n" +
 	"\x12commission_subtype\x18\b \x01(\tR\x11commissionSubtype\x12-\n" +
-	"\x12reporting_currency\x18\t \x01(\tR\x11reportingCurrency\x12\x18\n" +
-	"\arevenue\x18\n" +
-	" \x01(\tR\arevenue\x12%\n" +
-	"\x0ecommission_usd\x18\v \x01(\tR\rcommissionUsd\x12B\n" +
-	"\x1dcommission_reporting_currency\x18\f \x01(\tR\x1bcommissionReportingCurrency\x12\x1d\n" +
-	"\n" +
-	"amount_usd\x18\r \x01(\tR\tamountUsd\x12:\n" +
-	"\x19amount_reporting_currency\x18\x0e \x01(\tR\x17amountReportingCurrency\x12!\n" +
-	"\faffiliate_id\x18\x0f \x01(\x03R\vaffiliateId\x12%\n" +
-	"\x0eaffiliate_name\x18\x10 \x01(\tR\raffiliateName\x12\x17\n" +
-	"\auser_id\x18\x11 \x01(\x03R\x06userId\x124\n" +
-	"\x16retailer_operator_name\x18\x12 \x01(\tR\x14retailerOperatorName\x122\n" +
-	"\x15company_operator_name\x18\x13 \x01(\tR\x13companyOperatorName\x12#\n" +
-	"\roperator_name\x18\x14 \x01(\tR\foperatorName\"\x98\b\n" +
+	"\x12reporting_currency\x18\t \x01(\tR\x11reportingCurrency\x12\x1f\n" +
+	"\vrevenue_usd\x18\n" +
+	" \x01(\tR\n" +
+	"revenueUsd\x12<\n" +
+	"\x1arevenue_reporting_currency\x18\v \x01(\tR\x18revenueReportingCurrency\x12%\n" +
+	"\x0ecommission_usd\x18\f \x01(\tR\rcommissionUsd\x12B\n" +
+	"\x1dcommission_reporting_currency\x18\r \x01(\tR\x1bcommissionReportingCurrency\x12*\n" +
+	"\x11adjust_amount_usd\x18\x0e \x01(\tR\x0fadjustAmountUsd\x12G\n" +
+	" adjust_amount_reporting_currency\x18\x0f \x01(\tR\x1dadjustAmountReportingCurrency\x12!\n" +
+	"\faffiliate_id\x18\x10 \x01(\x03R\vaffiliateId\x12%\n" +
+	"\x0eaffiliate_name\x18\x11 \x01(\tR\raffiliateName\x12\x17\n" +
+	"\auser_id\x18\x12 \x01(\x03R\x06userId\x124\n" +
+	"\x16retailer_operator_name\x18\x13 \x01(\tR\x14retailerOperatorName\x122\n" +
+	"\x15company_operator_name\x18\x14 \x01(\tR\x13companyOperatorName\x12#\n" +
+	"\roperator_name\x18\x15 \x01(\tR\foperatorName\"\x98\b\n" +
 	"\x10ListUsersRequest\x12.\n" +
 	"\x13commission_plan_ids\x18\x01 \x03(\x03R\x11commissionPlanIds\x12\x1c\n" +
 	"\tcountries\x18\x02 \x03(\tR\tcountries\x12*\n" +
