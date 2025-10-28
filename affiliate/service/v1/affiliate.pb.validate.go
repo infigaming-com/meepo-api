@@ -3938,6 +3938,10 @@ func (m *ListEventsRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for InitiatorUserId
+
+	// no validation rules for InitiatorRoleId
+
 	if all {
 		switch v := interface{}(m.GetInitiatorOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
@@ -4006,10 +4010,6 @@ func (m *ListEventsRequest) validate(all bool) error {
 
 	if m.PageSize != nil {
 		// no validation rules for PageSize
-	}
-
-	if m.InitiatorUserId != nil {
-		// no validation rules for InitiatorUserId
 	}
 
 	if len(errors) > 0 {
@@ -4233,6 +4233,832 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListEventsResponseValidationError{}
+
+// Validate checks the field values on ListCommissionsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListCommissionsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListCommissionsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListCommissionsRequestMultiError, or nil if none found.
+func (m *ListCommissionsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListCommissionsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetStartTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListCommissionsRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListCommissionsRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListCommissionsRequestValidationError{
+				field:  "StartTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetEndTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListCommissionsRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListCommissionsRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListCommissionsRequestValidationError{
+				field:  "EndTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for InitiatorUserId
+
+	// no validation rules for InitiatorRoleId
+
+	if all {
+		switch v := interface{}(m.GetInitiatorOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListCommissionsRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListCommissionsRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetInitiatorOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListCommissionsRequestValidationError{
+				field:  "InitiatorOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListCommissionsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListCommissionsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListCommissionsRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.UserId != nil {
+		// no validation rules for UserId
+	}
+
+	if m.AffiliateId != nil {
+		// no validation rules for AffiliateId
+	}
+
+	if m.CommissionId != nil {
+		// no validation rules for CommissionId
+	}
+
+	if m.Status != nil {
+		// no validation rules for Status
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return ListCommissionsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListCommissionsRequestMultiError is an error wrapping multiple validation
+// errors returned by ListCommissionsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListCommissionsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListCommissionsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListCommissionsRequestMultiError) AllErrors() []error { return m }
+
+// ListCommissionsRequestValidationError is the validation error returned by
+// ListCommissionsRequest.Validate if the designated constraints aren't met.
+type ListCommissionsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListCommissionsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListCommissionsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListCommissionsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListCommissionsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListCommissionsRequestValidationError) ErrorName() string {
+	return "ListCommissionsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListCommissionsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListCommissionsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListCommissionsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListCommissionsRequestValidationError{}
+
+// Validate checks the field values on ListCommissionsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListCommissionsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListCommissionsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListCommissionsResponseMultiError, or nil if none found.
+func (m *ListCommissionsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListCommissionsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetCommissions() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListCommissionsResponseValidationError{
+						field:  fmt.Sprintf("Commissions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListCommissionsResponseValidationError{
+						field:  fmt.Sprintf("Commissions[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListCommissionsResponseValidationError{
+					field:  fmt.Sprintf("Commissions[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Total
+
+	// no validation rules for TotalPending
+
+	// no validation rules for TotalApproved
+
+	// no validation rules for TotalRejected
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if len(errors) > 0 {
+		return ListCommissionsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListCommissionsResponseMultiError is an error wrapping multiple validation
+// errors returned by ListCommissionsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListCommissionsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListCommissionsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListCommissionsResponseMultiError) AllErrors() []error { return m }
+
+// ListCommissionsResponseValidationError is the validation error returned by
+// ListCommissionsResponse.Validate if the designated constraints aren't met.
+type ListCommissionsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListCommissionsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListCommissionsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListCommissionsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListCommissionsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListCommissionsResponseValidationError) ErrorName() string {
+	return "ListCommissionsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListCommissionsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListCommissionsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListCommissionsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListCommissionsResponseValidationError{}
+
+// Validate checks the field values on ListUsersRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ListUsersRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListUsersRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListUsersRequestMultiError, or nil if none found.
+func (m *ListUsersRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListUsersRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetFtdStartTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListUsersRequestValidationError{
+					field:  "FtdStartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListUsersRequestValidationError{
+					field:  "FtdStartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetFtdStartTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListUsersRequestValidationError{
+				field:  "FtdStartTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetFtdEndTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListUsersRequestValidationError{
+					field:  "FtdEndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListUsersRequestValidationError{
+					field:  "FtdEndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetFtdEndTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListUsersRequestValidationError{
+				field:  "FtdEndTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetRegistrationStartTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListUsersRequestValidationError{
+					field:  "RegistrationStartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListUsersRequestValidationError{
+					field:  "RegistrationStartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRegistrationStartTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListUsersRequestValidationError{
+				field:  "RegistrationStartTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetRegistrationEndTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListUsersRequestValidationError{
+					field:  "RegistrationEndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListUsersRequestValidationError{
+					field:  "RegistrationEndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRegistrationEndTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListUsersRequestValidationError{
+				field:  "RegistrationEndTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for InitiatorUserId
+
+	// no validation rules for InitiatorRoleId
+
+	if all {
+		switch v := interface{}(m.GetInitiatorOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListUsersRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListUsersRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetInitiatorOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListUsersRequestValidationError{
+				field:  "InitiatorOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListUsersRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListUsersRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListUsersRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.AffiliateId != nil {
+		// no validation rules for AffiliateId
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return ListUsersRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListUsersRequestMultiError is an error wrapping multiple validation errors
+// returned by ListUsersRequest.ValidateAll() if the designated constraints
+// aren't met.
+type ListUsersRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListUsersRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListUsersRequestMultiError) AllErrors() []error { return m }
+
+// ListUsersRequestValidationError is the validation error returned by
+// ListUsersRequest.Validate if the designated constraints aren't met.
+type ListUsersRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListUsersRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListUsersRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListUsersRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListUsersRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListUsersRequestValidationError) ErrorName() string { return "ListUsersRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ListUsersRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListUsersRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListUsersRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListUsersRequestValidationError{}
+
+// Validate checks the field values on ListUsersResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ListUsersResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListUsersResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListUsersResponseMultiError, or nil if none found.
+func (m *ListUsersResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListUsersResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetUsers() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListUsersResponseValidationError{
+						field:  fmt.Sprintf("Users[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListUsersResponseValidationError{
+						field:  fmt.Sprintf("Users[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListUsersResponseValidationError{
+					field:  fmt.Sprintf("Users[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Total
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if len(errors) > 0 {
+		return ListUsersResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListUsersResponseMultiError is an error wrapping multiple validation errors
+// returned by ListUsersResponse.ValidateAll() if the designated constraints
+// aren't met.
+type ListUsersResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListUsersResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListUsersResponseMultiError) AllErrors() []error { return m }
+
+// ListUsersResponseValidationError is the validation error returned by
+// ListUsersResponse.Validate if the designated constraints aren't met.
+type ListUsersResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListUsersResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListUsersResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListUsersResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListUsersResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListUsersResponseValidationError) ErrorName() string {
+	return "ListUsersResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListUsersResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListUsersResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListUsersResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListUsersResponseValidationError{}
 
 // Validate checks the field values on ListAffiliatesResponse_Affiliate with
 // the rules defined in the proto definition for this message. If any rules
@@ -6050,3 +6876,395 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListEventsResponse_Event_CommissionPlanValidationError{}
+
+// Validate checks the field values on ListCommissionsResponse_Commission with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ListCommissionsResponse_Commission) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListCommissionsResponse_Commission
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListCommissionsResponse_CommissionMultiError, or nil if none found.
+func (m *ListCommissionsResponse_Commission) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListCommissionsResponse_Commission) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for CommissionId
+
+	// no validation rules for Country
+
+	if all {
+		switch v := interface{}(m.GetCreatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListCommissionsResponse_CommissionValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListCommissionsResponse_CommissionValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListCommissionsResponse_CommissionValidationError{
+				field:  "CreatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Status
+
+	// no validation rules for Paid
+
+	// no validation rules for CommissionPlanId
+
+	// no validation rules for CommissionPlanName
+
+	// no validation rules for CommissionSubtype
+
+	// no validation rules for ReportingCurrency
+
+	// no validation rules for RevenueUsd
+
+	// no validation rules for RevenueReportingCurrency
+
+	// no validation rules for CommissionUsd
+
+	// no validation rules for CommissionReportingCurrency
+
+	// no validation rules for AdjustAmountUsd
+
+	// no validation rules for AdjustAmountReportingCurrency
+
+	// no validation rules for AffiliateId
+
+	// no validation rules for AffiliateName
+
+	// no validation rules for UserId
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for OperatorName
+
+	if len(errors) > 0 {
+		return ListCommissionsResponse_CommissionMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListCommissionsResponse_CommissionMultiError is an error wrapping multiple
+// validation errors returned by
+// ListCommissionsResponse_Commission.ValidateAll() if the designated
+// constraints aren't met.
+type ListCommissionsResponse_CommissionMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListCommissionsResponse_CommissionMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListCommissionsResponse_CommissionMultiError) AllErrors() []error { return m }
+
+// ListCommissionsResponse_CommissionValidationError is the validation error
+// returned by ListCommissionsResponse_Commission.Validate if the designated
+// constraints aren't met.
+type ListCommissionsResponse_CommissionValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListCommissionsResponse_CommissionValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListCommissionsResponse_CommissionValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListCommissionsResponse_CommissionValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListCommissionsResponse_CommissionValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListCommissionsResponse_CommissionValidationError) ErrorName() string {
+	return "ListCommissionsResponse_CommissionValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListCommissionsResponse_CommissionValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListCommissionsResponse_Commission.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListCommissionsResponse_CommissionValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListCommissionsResponse_CommissionValidationError{}
+
+// Validate checks the field values on ListUsersResponse_User with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListUsersResponse_User) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListUsersResponse_User with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListUsersResponse_UserMultiError, or nil if none found.
+func (m *ListUsersResponse_User) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListUsersResponse_User) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	// no validation rules for Country
+
+	// no validation rules for AffiliateId
+
+	// no validation rules for AffiliateName
+
+	// no validation rules for AffiliateCompanyName
+
+	// no validation rules for ReportingCurrency
+
+	// no validation rules for CampaignUrl
+
+	if all {
+		switch v := interface{}(m.GetRegisteredAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListUsersResponse_UserValidationError{
+					field:  "RegisteredAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListUsersResponse_UserValidationError{
+					field:  "RegisteredAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRegisteredAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListUsersResponse_UserValidationError{
+				field:  "RegisteredAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetFtdAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListUsersResponse_UserValidationError{
+					field:  "FtdAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListUsersResponse_UserValidationError{
+					field:  "FtdAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetFtdAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListUsersResponse_UserValidationError{
+				field:  "FtdAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for FtdAmountUsd
+
+	// no validation rules for FtdAmountReportingCurrency
+
+	// no validation rules for DepositCount
+
+	// no validation rules for DepositAmountUsd
+
+	// no validation rules for DepositAmountReportingCurrency
+
+	// no validation rules for WithdrawalCount
+
+	// no validation rules for WithdrawalAmountUsd
+
+	// no validation rules for WithdrawalAmountReportingCurrency
+
+	// no validation rules for NetDepositAmountUsd
+
+	// no validation rules for NetDepositAmountReportingCurrency
+
+	// no validation rules for BetCount
+
+	// no validation rules for BetAmountUsd
+
+	// no validation rules for BetAmountReportingCurrency
+
+	// no validation rules for WinAmountUsd
+
+	// no validation rules for WinAmountReportingCurrency
+
+	// no validation rules for GgrUsd
+
+	// no validation rules for GgrReportingCurrency
+
+	// no validation rules for NgrUsd
+
+	// no validation rules for NgrReportingCurrency
+
+	// no validation rules for CommissionUsd
+
+	// no validation rules for CommissionReportingCurrency
+
+	// no validation rules for Roi
+
+	if len(errors) > 0 {
+		return ListUsersResponse_UserMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListUsersResponse_UserMultiError is an error wrapping multiple validation
+// errors returned by ListUsersResponse_User.ValidateAll() if the designated
+// constraints aren't met.
+type ListUsersResponse_UserMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListUsersResponse_UserMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListUsersResponse_UserMultiError) AllErrors() []error { return m }
+
+// ListUsersResponse_UserValidationError is the validation error returned by
+// ListUsersResponse_User.Validate if the designated constraints aren't met.
+type ListUsersResponse_UserValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListUsersResponse_UserValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListUsersResponse_UserValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListUsersResponse_UserValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListUsersResponse_UserValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListUsersResponse_UserValidationError) ErrorName() string {
+	return "ListUsersResponse_UserValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListUsersResponse_UserValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListUsersResponse_User.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListUsersResponse_UserValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListUsersResponse_UserValidationError{}

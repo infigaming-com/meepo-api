@@ -35,6 +35,8 @@ const (
 	Affiliate_ListCampaigns_FullMethodName          = "/api.affiliate.service.v1.Affiliate/ListCampaigns"
 	Affiliate_DeleteCampaign_FullMethodName         = "/api.affiliate.service.v1.Affiliate/DeleteCampaign"
 	Affiliate_ListEvents_FullMethodName             = "/api.affiliate.service.v1.Affiliate/ListEvents"
+	Affiliate_ListCommissions_FullMethodName        = "/api.affiliate.service.v1.Affiliate/ListCommissions"
+	Affiliate_ListUsers_FullMethodName              = "/api.affiliate.service.v1.Affiliate/ListUsers"
 )
 
 // AffiliateClient is the client API for Affiliate service.
@@ -57,6 +59,8 @@ type AffiliateClient interface {
 	ListCampaigns(ctx context.Context, in *ListCampaignsRequest, opts ...grpc.CallOption) (*ListCampaignsResponse, error)
 	DeleteCampaign(ctx context.Context, in *DeleteCampaignRequest, opts ...grpc.CallOption) (*DeleteCampaignResponse, error)
 	ListEvents(ctx context.Context, in *ListEventsRequest, opts ...grpc.CallOption) (*ListEventsResponse, error)
+	ListCommissions(ctx context.Context, in *ListCommissionsRequest, opts ...grpc.CallOption) (*ListCommissionsResponse, error)
+	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
 }
 
 type affiliateClient struct {
@@ -227,6 +231,26 @@ func (c *affiliateClient) ListEvents(ctx context.Context, in *ListEventsRequest,
 	return out, nil
 }
 
+func (c *affiliateClient) ListCommissions(ctx context.Context, in *ListCommissionsRequest, opts ...grpc.CallOption) (*ListCommissionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCommissionsResponse)
+	err := c.cc.Invoke(ctx, Affiliate_ListCommissions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListUsersResponse)
+	err := c.cc.Invoke(ctx, Affiliate_ListUsers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AffiliateServer is the server API for Affiliate service.
 // All implementations must embed UnimplementedAffiliateServer
 // for forward compatibility.
@@ -247,6 +271,8 @@ type AffiliateServer interface {
 	ListCampaigns(context.Context, *ListCampaignsRequest) (*ListCampaignsResponse, error)
 	DeleteCampaign(context.Context, *DeleteCampaignRequest) (*DeleteCampaignResponse, error)
 	ListEvents(context.Context, *ListEventsRequest) (*ListEventsResponse, error)
+	ListCommissions(context.Context, *ListCommissionsRequest) (*ListCommissionsResponse, error)
+	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
 	mustEmbedUnimplementedAffiliateServer()
 }
 
@@ -304,6 +330,12 @@ func (UnimplementedAffiliateServer) DeleteCampaign(context.Context, *DeleteCampa
 }
 func (UnimplementedAffiliateServer) ListEvents(context.Context, *ListEventsRequest) (*ListEventsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListEvents not implemented")
+}
+func (UnimplementedAffiliateServer) ListCommissions(context.Context, *ListCommissionsRequest) (*ListCommissionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCommissions not implemented")
+}
+func (UnimplementedAffiliateServer) ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListUsers not implemented")
 }
 func (UnimplementedAffiliateServer) mustEmbedUnimplementedAffiliateServer() {}
 func (UnimplementedAffiliateServer) testEmbeddedByValue()                   {}
@@ -614,6 +646,42 @@ func _Affiliate_ListEvents_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Affiliate_ListCommissions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCommissionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).ListCommissions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_ListCommissions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).ListCommissions(ctx, req.(*ListCommissionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_ListUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListUsersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).ListUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_ListUsers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).ListUsers(ctx, req.(*ListUsersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Affiliate_ServiceDesc is the grpc.ServiceDesc for Affiliate service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -684,6 +752,14 @@ var Affiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListEvents",
 			Handler:    _Affiliate_ListEvents_Handler,
+		},
+		{
+			MethodName: "ListCommissions",
+			Handler:    _Affiliate_ListCommissions_Handler,
+		},
+		{
+			MethodName: "ListUsers",
+			Handler:    _Affiliate_ListUsers_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

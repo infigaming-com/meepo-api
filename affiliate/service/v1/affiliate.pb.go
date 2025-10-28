@@ -1725,9 +1725,10 @@ type ListEventsRequest struct {
 	EndTime                  *timestamppb.Timestamp         `protobuf:"bytes,6,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
 	Page                     *int32                         `protobuf:"varint,7,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize                 *int32                         `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	InitiatorUserId          *int64                         `protobuf:"varint,9,opt,name=initiator_user_id,json=initiatorUserId,proto3,oneof" json:"initiator_user_id,omitempty"`
-	InitiatorOperatorContext *common.OperatorContext        `protobuf:"bytes,10,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
-	OperatorContextFilters   *common.OperatorContextFilters `protobuf:"bytes,11,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	InitiatorUserId          int64                          `protobuf:"varint,9,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
+	InitiatorRoleId          int64                          `protobuf:"varint,10,opt,name=initiator_role_id,json=initiatorRoleId,proto3" json:"initiator_role_id,omitempty"`
+	InitiatorOperatorContext *common.OperatorContext        `protobuf:"bytes,11,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
+	OperatorContextFilters   *common.OperatorContextFilters `protobuf:"bytes,12,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -1819,8 +1820,15 @@ func (x *ListEventsRequest) GetPageSize() int32 {
 }
 
 func (x *ListEventsRequest) GetInitiatorUserId() int64 {
-	if x != nil && x.InitiatorUserId != nil {
-		return *x.InitiatorUserId
+	if x != nil {
+		return x.InitiatorUserId
+	}
+	return 0
+}
+
+func (x *ListEventsRequest) GetInitiatorRoleId() int64 {
+	if x != nil {
+		return x.InitiatorRoleId
 	}
 	return 0
 }
@@ -1907,6 +1915,454 @@ func (x *ListEventsResponse) GetPageSize() int32 {
 	return 0
 }
 
+type ListCommissionsRequest struct {
+	state                    protoimpl.MessageState         `protogen:"open.v1"`
+	CommissionPlanIds        []int64                        `protobuf:"varint,1,rep,packed,name=commission_plan_ids,json=commissionPlanIds,proto3" json:"commission_plan_ids,omitempty"` // OR logic: filter by commission plan IDs, match if ID is any of these values
+	UserId                   *int64                         `protobuf:"varint,2,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	AffiliateId              *int64                         `protobuf:"varint,3,opt,name=affiliate_id,json=affiliateId,proto3,oneof" json:"affiliate_id,omitempty"`
+	CommissionSubtypes       []string                       `protobuf:"bytes,4,rep,name=commission_subtypes,json=commissionSubtypes,proto3" json:"commission_subtypes,omitempty"` // cpa/revshare/cpl/cpc/flat_fee, multiple subtypes are allowed
+	Countries                []string                       `protobuf:"bytes,5,rep,name=countries,proto3" json:"countries,omitempty"`
+	CommissionId             *int64                         `protobuf:"varint,6,opt,name=commission_id,json=commissionId,proto3,oneof" json:"commission_id,omitempty"`
+	StartTime                *timestamppb.Timestamp         `protobuf:"bytes,7,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime                  *timestamppb.Timestamp         `protobuf:"bytes,8,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	Status                   *string                        `protobuf:"bytes,9,opt,name=status,proto3,oneof" json:"status,omitempty"` // pending/approved/rejected
+	Page                     *int32                         `protobuf:"varint,10,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize                 *int32                         `protobuf:"varint,11,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	InitiatorUserId          int64                          `protobuf:"varint,12,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
+	InitiatorRoleId          int64                          `protobuf:"varint,13,opt,name=initiator_role_id,json=initiatorRoleId,proto3" json:"initiator_role_id,omitempty"`
+	InitiatorOperatorContext *common.OperatorContext        `protobuf:"bytes,14,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
+	OperatorContextFilters   *common.OperatorContextFilters `protobuf:"bytes,15,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
+}
+
+func (x *ListCommissionsRequest) Reset() {
+	*x = ListCommissionsRequest{}
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListCommissionsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListCommissionsRequest) ProtoMessage() {}
+
+func (x *ListCommissionsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListCommissionsRequest.ProtoReflect.Descriptor instead.
+func (*ListCommissionsRequest) Descriptor() ([]byte, []int) {
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *ListCommissionsRequest) GetCommissionPlanIds() []int64 {
+	if x != nil {
+		return x.CommissionPlanIds
+	}
+	return nil
+}
+
+func (x *ListCommissionsRequest) GetUserId() int64 {
+	if x != nil && x.UserId != nil {
+		return *x.UserId
+	}
+	return 0
+}
+
+func (x *ListCommissionsRequest) GetAffiliateId() int64 {
+	if x != nil && x.AffiliateId != nil {
+		return *x.AffiliateId
+	}
+	return 0
+}
+
+func (x *ListCommissionsRequest) GetCommissionSubtypes() []string {
+	if x != nil {
+		return x.CommissionSubtypes
+	}
+	return nil
+}
+
+func (x *ListCommissionsRequest) GetCountries() []string {
+	if x != nil {
+		return x.Countries
+	}
+	return nil
+}
+
+func (x *ListCommissionsRequest) GetCommissionId() int64 {
+	if x != nil && x.CommissionId != nil {
+		return *x.CommissionId
+	}
+	return 0
+}
+
+func (x *ListCommissionsRequest) GetStartTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.StartTime
+	}
+	return nil
+}
+
+func (x *ListCommissionsRequest) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
+	}
+	return nil
+}
+
+func (x *ListCommissionsRequest) GetStatus() string {
+	if x != nil && x.Status != nil {
+		return *x.Status
+	}
+	return ""
+}
+
+func (x *ListCommissionsRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListCommissionsRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+func (x *ListCommissionsRequest) GetInitiatorUserId() int64 {
+	if x != nil {
+		return x.InitiatorUserId
+	}
+	return 0
+}
+
+func (x *ListCommissionsRequest) GetInitiatorRoleId() int64 {
+	if x != nil {
+		return x.InitiatorRoleId
+	}
+	return 0
+}
+
+func (x *ListCommissionsRequest) GetInitiatorOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.InitiatorOperatorContext
+	}
+	return nil
+}
+
+func (x *ListCommissionsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
+type ListCommissionsResponse struct {
+	state         protoimpl.MessageState                `protogen:"open.v1"`
+	Commissions   []*ListCommissionsResponse_Commission `protobuf:"bytes,1,rep,name=commissions,proto3" json:"commissions,omitempty"`
+	Total         int32                                 `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	TotalPending  int32                                 `protobuf:"varint,3,opt,name=total_pending,json=totalPending,proto3" json:"total_pending,omitempty"`
+	TotalApproved int32                                 `protobuf:"varint,4,opt,name=total_approved,json=totalApproved,proto3" json:"total_approved,omitempty"`
+	TotalRejected int32                                 `protobuf:"varint,5,opt,name=total_rejected,json=totalRejected,proto3" json:"total_rejected,omitempty"`
+	Page          int32                                 `protobuf:"varint,6,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                                 `protobuf:"varint,7,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListCommissionsResponse) Reset() {
+	*x = ListCommissionsResponse{}
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListCommissionsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListCommissionsResponse) ProtoMessage() {}
+
+func (x *ListCommissionsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListCommissionsResponse.ProtoReflect.Descriptor instead.
+func (*ListCommissionsResponse) Descriptor() ([]byte, []int) {
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *ListCommissionsResponse) GetCommissions() []*ListCommissionsResponse_Commission {
+	if x != nil {
+		return x.Commissions
+	}
+	return nil
+}
+
+func (x *ListCommissionsResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+func (x *ListCommissionsResponse) GetTotalPending() int32 {
+	if x != nil {
+		return x.TotalPending
+	}
+	return 0
+}
+
+func (x *ListCommissionsResponse) GetTotalApproved() int32 {
+	if x != nil {
+		return x.TotalApproved
+	}
+	return 0
+}
+
+func (x *ListCommissionsResponse) GetTotalRejected() int32 {
+	if x != nil {
+		return x.TotalRejected
+	}
+	return 0
+}
+
+func (x *ListCommissionsResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListCommissionsResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+type ListUsersRequest struct {
+	state                    protoimpl.MessageState         `protogen:"open.v1"`
+	Countries                []string                       `protobuf:"bytes,1,rep,name=countries,proto3" json:"countries,omitempty"`
+	FtdStartTime             *timestamppb.Timestamp         `protobuf:"bytes,2,opt,name=ftd_start_time,json=ftdStartTime,proto3" json:"ftd_start_time,omitempty"`
+	FtdEndTime               *timestamppb.Timestamp         `protobuf:"bytes,3,opt,name=ftd_end_time,json=ftdEndTime,proto3" json:"ftd_end_time,omitempty"`
+	AffiliateId              *int64                         `protobuf:"varint,4,opt,name=affiliate_id,json=affiliateId,proto3,oneof" json:"affiliate_id,omitempty"`
+	RegistrationStartTime    *timestamppb.Timestamp         `protobuf:"bytes,5,opt,name=registration_start_time,json=registrationStartTime,proto3" json:"registration_start_time,omitempty"`
+	RegistrationEndTime      *timestamppb.Timestamp         `protobuf:"bytes,6,opt,name=registration_end_time,json=registrationEndTime,proto3" json:"registration_end_time,omitempty"`
+	Page                     *int32                         `protobuf:"varint,7,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize                 *int32                         `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	InitiatorUserId          int64                          `protobuf:"varint,9,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
+	InitiatorRoleId          int64                          `protobuf:"varint,10,opt,name=initiator_role_id,json=initiatorRoleId,proto3" json:"initiator_role_id,omitempty"`
+	InitiatorOperatorContext *common.OperatorContext        `protobuf:"bytes,11,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
+	OperatorContextFilters   *common.OperatorContextFilters `protobuf:"bytes,12,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
+}
+
+func (x *ListUsersRequest) Reset() {
+	*x = ListUsersRequest{}
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListUsersRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListUsersRequest) ProtoMessage() {}
+
+func (x *ListUsersRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListUsersRequest.ProtoReflect.Descriptor instead.
+func (*ListUsersRequest) Descriptor() ([]byte, []int) {
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *ListUsersRequest) GetCountries() []string {
+	if x != nil {
+		return x.Countries
+	}
+	return nil
+}
+
+func (x *ListUsersRequest) GetFtdStartTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.FtdStartTime
+	}
+	return nil
+}
+
+func (x *ListUsersRequest) GetFtdEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.FtdEndTime
+	}
+	return nil
+}
+
+func (x *ListUsersRequest) GetAffiliateId() int64 {
+	if x != nil && x.AffiliateId != nil {
+		return *x.AffiliateId
+	}
+	return 0
+}
+
+func (x *ListUsersRequest) GetRegistrationStartTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.RegistrationStartTime
+	}
+	return nil
+}
+
+func (x *ListUsersRequest) GetRegistrationEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.RegistrationEndTime
+	}
+	return nil
+}
+
+func (x *ListUsersRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListUsersRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
+func (x *ListUsersRequest) GetInitiatorUserId() int64 {
+	if x != nil {
+		return x.InitiatorUserId
+	}
+	return 0
+}
+
+func (x *ListUsersRequest) GetInitiatorRoleId() int64 {
+	if x != nil {
+		return x.InitiatorRoleId
+	}
+	return 0
+}
+
+func (x *ListUsersRequest) GetInitiatorOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.InitiatorOperatorContext
+	}
+	return nil
+}
+
+func (x *ListUsersRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
+type ListUsersResponse struct {
+	state         protoimpl.MessageState    `protogen:"open.v1"`
+	Users         []*ListUsersResponse_User `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
+	Total         int32                     `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Page          int32                     `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                     `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListUsersResponse) Reset() {
+	*x = ListUsersResponse{}
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListUsersResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListUsersResponse) ProtoMessage() {}
+
+func (x *ListUsersResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListUsersResponse.ProtoReflect.Descriptor instead.
+func (*ListUsersResponse) Descriptor() ([]byte, []int) {
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *ListUsersResponse) GetUsers() []*ListUsersResponse_User {
+	if x != nil {
+		return x.Users
+	}
+	return nil
+}
+
+func (x *ListUsersResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+func (x *ListUsersResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListUsersResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
 type ListAffiliatesResponse_Affiliate struct {
 	state                       protoimpl.MessageState `protogen:"open.v1"`
 	AffiliateId                 int64                  `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
@@ -1932,7 +2388,7 @@ type ListAffiliatesResponse_Affiliate struct {
 
 func (x *ListAffiliatesResponse_Affiliate) Reset() {
 	*x = ListAffiliatesResponse_Affiliate{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[27]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1944,7 +2400,7 @@ func (x *ListAffiliatesResponse_Affiliate) String() string {
 func (*ListAffiliatesResponse_Affiliate) ProtoMessage() {}
 
 func (x *ListAffiliatesResponse_Affiliate) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[27]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2089,7 +2545,7 @@ type Params_Parameter struct {
 
 func (x *Params_Parameter) Reset() {
 	*x = Params_Parameter{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[28]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2101,7 +2557,7 @@ func (x *Params_Parameter) String() string {
 func (*Params_Parameter) ProtoMessage() {}
 
 func (x *Params_Parameter) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[28]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2141,7 +2597,7 @@ type ChannelConfig_FacebookChannelConfig struct {
 
 func (x *ChannelConfig_FacebookChannelConfig) Reset() {
 	*x = ChannelConfig_FacebookChannelConfig{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[29]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2153,7 +2609,7 @@ func (x *ChannelConfig_FacebookChannelConfig) String() string {
 func (*ChannelConfig_FacebookChannelConfig) ProtoMessage() {}
 
 func (x *ChannelConfig_FacebookChannelConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[29]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2193,7 +2649,7 @@ type ChannelConfig_TiktokChannelConfig struct {
 
 func (x *ChannelConfig_TiktokChannelConfig) Reset() {
 	*x = ChannelConfig_TiktokChannelConfig{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[30]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2205,7 +2661,7 @@ func (x *ChannelConfig_TiktokChannelConfig) String() string {
 func (*ChannelConfig_TiktokChannelConfig) ProtoMessage() {}
 
 func (x *ChannelConfig_TiktokChannelConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[30]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2246,7 +2702,7 @@ type ChannelConfig_KwaiChannelConfig struct {
 
 func (x *ChannelConfig_KwaiChannelConfig) Reset() {
 	*x = ChannelConfig_KwaiChannelConfig{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[31]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2258,7 +2714,7 @@ func (x *ChannelConfig_KwaiChannelConfig) String() string {
 func (*ChannelConfig_KwaiChannelConfig) ProtoMessage() {}
 
 func (x *ChannelConfig_KwaiChannelConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[31]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2306,7 +2762,7 @@ type ChannelConfig_AppsflyerChannelConfig struct {
 
 func (x *ChannelConfig_AppsflyerChannelConfig) Reset() {
 	*x = ChannelConfig_AppsflyerChannelConfig{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[32]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2318,7 +2774,7 @@ func (x *ChannelConfig_AppsflyerChannelConfig) String() string {
 func (*ChannelConfig_AppsflyerChannelConfig) ProtoMessage() {}
 
 func (x *ChannelConfig_AppsflyerChannelConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[32]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2366,7 +2822,7 @@ type ChannelConfig_AdjustChannelConfig struct {
 
 func (x *ChannelConfig_AdjustChannelConfig) Reset() {
 	*x = ChannelConfig_AdjustChannelConfig{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[33]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2378,7 +2834,7 @@ func (x *ChannelConfig_AdjustChannelConfig) String() string {
 func (*ChannelConfig_AdjustChannelConfig) ProtoMessage() {}
 
 func (x *ChannelConfig_AdjustChannelConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[33]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2424,7 +2880,7 @@ type ChannelConfig_AgencyChannelConfig struct {
 
 func (x *ChannelConfig_AgencyChannelConfig) Reset() {
 	*x = ChannelConfig_AgencyChannelConfig{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[34]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2436,7 +2892,7 @@ func (x *ChannelConfig_AgencyChannelConfig) String() string {
 func (*ChannelConfig_AgencyChannelConfig) ProtoMessage() {}
 
 func (x *ChannelConfig_AgencyChannelConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[34]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2469,7 +2925,7 @@ type ChannelConfig_GoogleAdsChannelConfig struct {
 
 func (x *ChannelConfig_GoogleAdsChannelConfig) Reset() {
 	*x = ChannelConfig_GoogleAdsChannelConfig{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[35]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2481,7 +2937,7 @@ func (x *ChannelConfig_GoogleAdsChannelConfig) String() string {
 func (*ChannelConfig_GoogleAdsChannelConfig) ProtoMessage() {}
 
 func (x *ChannelConfig_GoogleAdsChannelConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[35]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2521,7 +2977,7 @@ type CustomParams_CustomParam struct {
 
 func (x *CustomParams_CustomParam) Reset() {
 	*x = CustomParams_CustomParam{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[36]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2533,7 +2989,7 @@ func (x *CustomParams_CustomParam) String() string {
 func (*CustomParams_CustomParam) ProtoMessage() {}
 
 func (x *CustomParams_CustomParam) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[36]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2573,7 +3029,7 @@ type EventMappings_EventMapping struct {
 
 func (x *EventMappings_EventMapping) Reset() {
 	*x = EventMappings_EventMapping{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[37]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2585,7 +3041,7 @@ func (x *EventMappings_EventMapping) String() string {
 func (*EventMappings_EventMapping) ProtoMessage() {}
 
 func (x *EventMappings_EventMapping) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[37]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2627,7 +3083,7 @@ type CreateCampaignRequest_Campaign struct {
 
 func (x *CreateCampaignRequest_Campaign) Reset() {
 	*x = CreateCampaignRequest_Campaign{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[38]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2639,7 +3095,7 @@ func (x *CreateCampaignRequest_Campaign) String() string {
 func (*CreateCampaignRequest_Campaign) ProtoMessage() {}
 
 func (x *CreateCampaignRequest_Campaign) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[38]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2703,7 +3159,7 @@ type ListCampaignsResponse_CampaignInfo struct {
 
 func (x *ListCampaignsResponse_CampaignInfo) Reset() {
 	*x = ListCampaignsResponse_CampaignInfo{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[39]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2715,7 +3171,7 @@ func (x *ListCampaignsResponse_CampaignInfo) String() string {
 func (*ListCampaignsResponse_CampaignInfo) ProtoMessage() {}
 
 func (x *ListCampaignsResponse_CampaignInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[39]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2840,7 +3296,7 @@ type ListEventsResponse_Event struct {
 
 func (x *ListEventsResponse_Event) Reset() {
 	*x = ListEventsResponse_Event{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[40]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2852,7 +3308,7 @@ func (x *ListEventsResponse_Event) String() string {
 func (*ListEventsResponse_Event) ProtoMessage() {}
 
 func (x *ListEventsResponse_Event) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[40]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2997,7 +3453,7 @@ type ListEventsResponse_Event_CommissionPlan struct {
 
 func (x *ListEventsResponse_Event_CommissionPlan) Reset() {
 	*x = ListEventsResponse_Event_CommissionPlan{}
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[41]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3009,7 +3465,7 @@ func (x *ListEventsResponse_Event_CommissionPlan) String() string {
 func (*ListEventsResponse_Event_CommissionPlan) ProtoMessage() {}
 
 func (x *ListEventsResponse_Event_CommissionPlan) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[41]
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3035,6 +3491,494 @@ func (x *ListEventsResponse_Event_CommissionPlan) GetCommissionPlanId() int64 {
 func (x *ListEventsResponse_Event_CommissionPlan) GetCommissionPlanName() string {
 	if x != nil {
 		return x.CommissionPlanName
+	}
+	return ""
+}
+
+type ListCommissionsResponse_Commission struct {
+	state                         protoimpl.MessageState `protogen:"open.v1"`
+	CommissionId                  int64                  `protobuf:"varint,1,opt,name=commission_id,json=commissionId,proto3" json:"commission_id,omitempty"`
+	Country                       string                 `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
+	CreatedAt                     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Status                        string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"` // pending/approved/rejected
+	Paid                          bool                   `protobuf:"varint,5,opt,name=paid,proto3" json:"paid,omitempty"`
+	CommissionPlanId              int64                  `protobuf:"varint,6,opt,name=commission_plan_id,json=commissionPlanId,proto3" json:"commission_plan_id,omitempty"`
+	CommissionPlanName            string                 `protobuf:"bytes,7,opt,name=commission_plan_name,json=commissionPlanName,proto3" json:"commission_plan_name,omitempty"`
+	CommissionSubtype             string                 `protobuf:"bytes,8,opt,name=commission_subtype,json=commissionSubtype,proto3" json:"commission_subtype,omitempty"` // cpa/revshare/cpl/cpc/flat_fee
+	ReportingCurrency             string                 `protobuf:"bytes,9,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	RevenueUsd                    string                 `protobuf:"bytes,10,opt,name=revenue_usd,json=revenueUsd,proto3" json:"revenue_usd,omitempty"`
+	RevenueReportingCurrency      string                 `protobuf:"bytes,11,opt,name=revenue_reporting_currency,json=revenueReportingCurrency,proto3" json:"revenue_reporting_currency,omitempty"`
+	CommissionUsd                 string                 `protobuf:"bytes,12,opt,name=commission_usd,json=commissionUsd,proto3" json:"commission_usd,omitempty"`
+	CommissionReportingCurrency   string                 `protobuf:"bytes,13,opt,name=commission_reporting_currency,json=commissionReportingCurrency,proto3" json:"commission_reporting_currency,omitempty"`
+	AdjustAmountUsd               string                 `protobuf:"bytes,14,opt,name=adjust_amount_usd,json=adjustAmountUsd,proto3" json:"adjust_amount_usd,omitempty"`
+	AdjustAmountReportingCurrency string                 `protobuf:"bytes,15,opt,name=adjust_amount_reporting_currency,json=adjustAmountReportingCurrency,proto3" json:"adjust_amount_reporting_currency,omitempty"`
+	AffiliateId                   int64                  `protobuf:"varint,16,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
+	AffiliateName                 string                 `protobuf:"bytes,17,opt,name=affiliate_name,json=affiliateName,proto3" json:"affiliate_name,omitempty"`
+	UserId                        int64                  `protobuf:"varint,18,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	RetailerOperatorName          string                 `protobuf:"bytes,19,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	CompanyOperatorName           string                 `protobuf:"bytes,20,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	OperatorName                  string                 `protobuf:"bytes,21,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
+}
+
+func (x *ListCommissionsResponse_Commission) Reset() {
+	*x = ListCommissionsResponse_Commission{}
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[46]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListCommissionsResponse_Commission) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListCommissionsResponse_Commission) ProtoMessage() {}
+
+func (x *ListCommissionsResponse_Commission) ProtoReflect() protoreflect.Message {
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[46]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListCommissionsResponse_Commission.ProtoReflect.Descriptor instead.
+func (*ListCommissionsResponse_Commission) Descriptor() ([]byte, []int) {
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{28, 0}
+}
+
+func (x *ListCommissionsResponse_Commission) GetCommissionId() int64 {
+	if x != nil {
+		return x.CommissionId
+	}
+	return 0
+}
+
+func (x *ListCommissionsResponse_Commission) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *ListCommissionsResponse_Commission) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *ListCommissionsResponse_Commission) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *ListCommissionsResponse_Commission) GetPaid() bool {
+	if x != nil {
+		return x.Paid
+	}
+	return false
+}
+
+func (x *ListCommissionsResponse_Commission) GetCommissionPlanId() int64 {
+	if x != nil {
+		return x.CommissionPlanId
+	}
+	return 0
+}
+
+func (x *ListCommissionsResponse_Commission) GetCommissionPlanName() string {
+	if x != nil {
+		return x.CommissionPlanName
+	}
+	return ""
+}
+
+func (x *ListCommissionsResponse_Commission) GetCommissionSubtype() string {
+	if x != nil {
+		return x.CommissionSubtype
+	}
+	return ""
+}
+
+func (x *ListCommissionsResponse_Commission) GetReportingCurrency() string {
+	if x != nil {
+		return x.ReportingCurrency
+	}
+	return ""
+}
+
+func (x *ListCommissionsResponse_Commission) GetRevenueUsd() string {
+	if x != nil {
+		return x.RevenueUsd
+	}
+	return ""
+}
+
+func (x *ListCommissionsResponse_Commission) GetRevenueReportingCurrency() string {
+	if x != nil {
+		return x.RevenueReportingCurrency
+	}
+	return ""
+}
+
+func (x *ListCommissionsResponse_Commission) GetCommissionUsd() string {
+	if x != nil {
+		return x.CommissionUsd
+	}
+	return ""
+}
+
+func (x *ListCommissionsResponse_Commission) GetCommissionReportingCurrency() string {
+	if x != nil {
+		return x.CommissionReportingCurrency
+	}
+	return ""
+}
+
+func (x *ListCommissionsResponse_Commission) GetAdjustAmountUsd() string {
+	if x != nil {
+		return x.AdjustAmountUsd
+	}
+	return ""
+}
+
+func (x *ListCommissionsResponse_Commission) GetAdjustAmountReportingCurrency() string {
+	if x != nil {
+		return x.AdjustAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *ListCommissionsResponse_Commission) GetAffiliateId() int64 {
+	if x != nil {
+		return x.AffiliateId
+	}
+	return 0
+}
+
+func (x *ListCommissionsResponse_Commission) GetAffiliateName() string {
+	if x != nil {
+		return x.AffiliateName
+	}
+	return ""
+}
+
+func (x *ListCommissionsResponse_Commission) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *ListCommissionsResponse_Commission) GetRetailerOperatorName() string {
+	if x != nil {
+		return x.RetailerOperatorName
+	}
+	return ""
+}
+
+func (x *ListCommissionsResponse_Commission) GetCompanyOperatorName() string {
+	if x != nil {
+		return x.CompanyOperatorName
+	}
+	return ""
+}
+
+func (x *ListCommissionsResponse_Commission) GetOperatorName() string {
+	if x != nil {
+		return x.OperatorName
+	}
+	return ""
+}
+
+type ListUsersResponse_User struct {
+	state                             protoimpl.MessageState `protogen:"open.v1"`
+	UserId                            int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Country                           string                 `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
+	AffiliateId                       int64                  `protobuf:"varint,3,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
+	AffiliateName                     string                 `protobuf:"bytes,4,opt,name=affiliate_name,json=affiliateName,proto3" json:"affiliate_name,omitempty"`
+	AffiliateCompanyName              string                 `protobuf:"bytes,5,opt,name=affiliate_company_name,json=affiliateCompanyName,proto3" json:"affiliate_company_name,omitempty"`
+	ReportingCurrency                 string                 `protobuf:"bytes,6,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	CampaignUrl                       string                 `protobuf:"bytes,7,opt,name=campaign_url,json=campaignUrl,proto3" json:"campaign_url,omitempty"`
+	RegisteredAt                      *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
+	FtdAt                             *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=ftd_at,json=ftdAt,proto3" json:"ftd_at,omitempty"`
+	FtdAmountUsd                      string                 `protobuf:"bytes,10,opt,name=ftd_amount_usd,json=ftdAmountUsd,proto3" json:"ftd_amount_usd,omitempty"`
+	FtdAmountReportingCurrency        string                 `protobuf:"bytes,11,opt,name=ftd_amount_reporting_currency,json=ftdAmountReportingCurrency,proto3" json:"ftd_amount_reporting_currency,omitempty"`
+	DepositCount                      int32                  `protobuf:"varint,12,opt,name=deposit_count,json=depositCount,proto3" json:"deposit_count,omitempty"`
+	DepositAmountUsd                  string                 `protobuf:"bytes,13,opt,name=deposit_amount_usd,json=depositAmountUsd,proto3" json:"deposit_amount_usd,omitempty"`
+	DepositAmountReportingCurrency    string                 `protobuf:"bytes,14,opt,name=deposit_amount_reporting_currency,json=depositAmountReportingCurrency,proto3" json:"deposit_amount_reporting_currency,omitempty"`
+	WithdrawalCount                   int32                  `protobuf:"varint,15,opt,name=withdrawal_count,json=withdrawalCount,proto3" json:"withdrawal_count,omitempty"`
+	WithdrawalAmountUsd               string                 `protobuf:"bytes,16,opt,name=withdrawal_amount_usd,json=withdrawalAmountUsd,proto3" json:"withdrawal_amount_usd,omitempty"`
+	WithdrawalAmountReportingCurrency string                 `protobuf:"bytes,17,opt,name=withdrawal_amount_reporting_currency,json=withdrawalAmountReportingCurrency,proto3" json:"withdrawal_amount_reporting_currency,omitempty"`
+	NetDepositAmountUsd               string                 `protobuf:"bytes,18,opt,name=net_deposit_amount_usd,json=netDepositAmountUsd,proto3" json:"net_deposit_amount_usd,omitempty"`                                             // deposit_amount - withdrawal_amount
+	NetDepositAmountReportingCurrency string                 `protobuf:"bytes,19,opt,name=net_deposit_amount_reporting_currency,json=netDepositAmountReportingCurrency,proto3" json:"net_deposit_amount_reporting_currency,omitempty"` // deposit_amount - withdrawal_amount
+	BetCount                          int32                  `protobuf:"varint,20,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	BetAmountUsd                      string                 `protobuf:"bytes,21,opt,name=bet_amount_usd,json=betAmountUsd,proto3" json:"bet_amount_usd,omitempty"`
+	BetAmountReportingCurrency        string                 `protobuf:"bytes,22,opt,name=bet_amount_reporting_currency,json=betAmountReportingCurrency,proto3" json:"bet_amount_reporting_currency,omitempty"`
+	WinAmountUsd                      string                 `protobuf:"bytes,23,opt,name=win_amount_usd,json=winAmountUsd,proto3" json:"win_amount_usd,omitempty"`
+	WinAmountReportingCurrency        string                 `protobuf:"bytes,24,opt,name=win_amount_reporting_currency,json=winAmountReportingCurrency,proto3" json:"win_amount_reporting_currency,omitempty"`
+	GgrUsd                            string                 `protobuf:"bytes,25,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
+	GgrReportingCurrency              string                 `protobuf:"bytes,26,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
+	NgrUsd                            string                 `protobuf:"bytes,27,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
+	NgrReportingCurrency              string                 `protobuf:"bytes,28,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
+	CommissionUsd                     string                 `protobuf:"bytes,29,opt,name=commission_usd,json=commissionUsd,proto3" json:"commission_usd,omitempty"`
+	CommissionReportingCurrency       string                 `protobuf:"bytes,30,opt,name=commission_reporting_currency,json=commissionReportingCurrency,proto3" json:"commission_reporting_currency,omitempty"`
+	Roi                               string                 `protobuf:"bytes,31,opt,name=roi,proto3" json:"roi,omitempty"` // percentage, ngr / commission
+	unknownFields                     protoimpl.UnknownFields
+	sizeCache                         protoimpl.SizeCache
+}
+
+func (x *ListUsersResponse_User) Reset() {
+	*x = ListUsersResponse_User{}
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[47]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListUsersResponse_User) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListUsersResponse_User) ProtoMessage() {}
+
+func (x *ListUsersResponse_User) ProtoReflect() protoreflect.Message {
+	mi := &file_affiliate_service_v1_affiliate_proto_msgTypes[47]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListUsersResponse_User.ProtoReflect.Descriptor instead.
+func (*ListUsersResponse_User) Descriptor() ([]byte, []int) {
+	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{30, 0}
+}
+
+func (x *ListUsersResponse_User) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *ListUsersResponse_User) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetAffiliateId() int64 {
+	if x != nil {
+		return x.AffiliateId
+	}
+	return 0
+}
+
+func (x *ListUsersResponse_User) GetAffiliateName() string {
+	if x != nil {
+		return x.AffiliateName
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetAffiliateCompanyName() string {
+	if x != nil {
+		return x.AffiliateCompanyName
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetReportingCurrency() string {
+	if x != nil {
+		return x.ReportingCurrency
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetCampaignUrl() string {
+	if x != nil {
+		return x.CampaignUrl
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetRegisteredAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.RegisteredAt
+	}
+	return nil
+}
+
+func (x *ListUsersResponse_User) GetFtdAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.FtdAt
+	}
+	return nil
+}
+
+func (x *ListUsersResponse_User) GetFtdAmountUsd() string {
+	if x != nil {
+		return x.FtdAmountUsd
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetFtdAmountReportingCurrency() string {
+	if x != nil {
+		return x.FtdAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetDepositCount() int32 {
+	if x != nil {
+		return x.DepositCount
+	}
+	return 0
+}
+
+func (x *ListUsersResponse_User) GetDepositAmountUsd() string {
+	if x != nil {
+		return x.DepositAmountUsd
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetDepositAmountReportingCurrency() string {
+	if x != nil {
+		return x.DepositAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetWithdrawalCount() int32 {
+	if x != nil {
+		return x.WithdrawalCount
+	}
+	return 0
+}
+
+func (x *ListUsersResponse_User) GetWithdrawalAmountUsd() string {
+	if x != nil {
+		return x.WithdrawalAmountUsd
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetWithdrawalAmountReportingCurrency() string {
+	if x != nil {
+		return x.WithdrawalAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetNetDepositAmountUsd() string {
+	if x != nil {
+		return x.NetDepositAmountUsd
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetNetDepositAmountReportingCurrency() string {
+	if x != nil {
+		return x.NetDepositAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetBetCount() int32 {
+	if x != nil {
+		return x.BetCount
+	}
+	return 0
+}
+
+func (x *ListUsersResponse_User) GetBetAmountUsd() string {
+	if x != nil {
+		return x.BetAmountUsd
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetBetAmountReportingCurrency() string {
+	if x != nil {
+		return x.BetAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetWinAmountUsd() string {
+	if x != nil {
+		return x.WinAmountUsd
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetWinAmountReportingCurrency() string {
+	if x != nil {
+		return x.WinAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetGgrUsd() string {
+	if x != nil {
+		return x.GgrUsd
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetGgrReportingCurrency() string {
+	if x != nil {
+		return x.GgrReportingCurrency
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetNgrUsd() string {
+	if x != nil {
+		return x.NgrUsd
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetNgrReportingCurrency() string {
+	if x != nil {
+		return x.NgrReportingCurrency
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetCommissionUsd() string {
+	if x != nil {
+		return x.CommissionUsd
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetCommissionReportingCurrency() string {
+	if x != nil {
+		return x.CommissionReportingCurrency
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetRoi() string {
+	if x != nil {
+		return x.Roi
 	}
 	return ""
 }
@@ -3277,7 +4221,7 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\vcampaign_id\x18\x01 \x01(\x03R\n" +
 	"campaignId\x12*\n" +
 	"\x11initiator_user_id\x18\x02 \x01(\x03R\x0finitiatorUserId\"\x18\n" +
-	"\x16DeleteCampaignResponse\"\xef\x04\n" +
+	"\x16DeleteCampaignResponse\"\x80\x05\n" +
 	"\x11ListEventsRequest\x12&\n" +
 	"\faffiliate_id\x18\x01 \x01(\x03H\x00R\vaffiliateId\x88\x01\x01\x12\x1f\n" +
 	"\vevent_types\x18\x02 \x03(\tR\n" +
@@ -3290,16 +4234,16 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"start_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
 	"\bend_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12\x17\n" +
 	"\x04page\x18\a \x01(\x05H\x01R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\b \x01(\x05H\x02R\bpageSize\x88\x01\x01\x12/\n" +
-	"\x11initiator_user_id\x18\t \x01(\x03H\x03R\x0finitiatorUserId\x88\x01\x01\x12Y\n" +
-	"\x1ainitiator_operator_context\x18\n" +
-	" \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12\\\n" +
-	"\x18operator_context_filters\x18\v \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\x0f\n" +
+	"\tpage_size\x18\b \x01(\x05H\x02R\bpageSize\x88\x01\x01\x12*\n" +
+	"\x11initiator_user_id\x18\t \x01(\x03R\x0finitiatorUserId\x12*\n" +
+	"\x11initiator_role_id\x18\n" +
+	" \x01(\x03R\x0finitiatorRoleId\x12Y\n" +
+	"\x1ainitiator_operator_context\x18\v \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12\\\n" +
+	"\x18operator_context_filters\x18\f \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\x0f\n" +
 	"\r_affiliate_idB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_sizeB\x14\n" +
-	"\x12_initiator_user_id\"\xe7\a\n" +
+	"_page_size\"\xe7\a\n" +
 	"\x12ListEventsResponse\x12J\n" +
 	"\x06events\x18\x01 \x03(\v22.api.affiliate.service.v1.ListEventsResponse.EventR\x06events\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
@@ -3330,7 +4274,124 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\roperator_name\x18\x11 \x01(\tR\foperatorName\x1ap\n" +
 	"\x0eCommissionPlan\x12,\n" +
 	"\x12commission_plan_id\x18\x01 \x01(\x03R\x10commissionPlanId\x120\n" +
-	"\x14commission_plan_name\x18\x02 \x01(\tR\x12commissionPlanName2\xda\x0f\n" +
+	"\x14commission_plan_name\x18\x02 \x01(\tR\x12commissionPlanName\"\xb3\x06\n" +
+	"\x16ListCommissionsRequest\x12.\n" +
+	"\x13commission_plan_ids\x18\x01 \x03(\x03R\x11commissionPlanIds\x12\x1c\n" +
+	"\auser_id\x18\x02 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12&\n" +
+	"\faffiliate_id\x18\x03 \x01(\x03H\x01R\vaffiliateId\x88\x01\x01\x12/\n" +
+	"\x13commission_subtypes\x18\x04 \x03(\tR\x12commissionSubtypes\x12\x1c\n" +
+	"\tcountries\x18\x05 \x03(\tR\tcountries\x12(\n" +
+	"\rcommission_id\x18\x06 \x01(\x03H\x02R\fcommissionId\x88\x01\x01\x129\n" +
+	"\n" +
+	"start_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
+	"\bend_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12\x1b\n" +
+	"\x06status\x18\t \x01(\tH\x03R\x06status\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\n" +
+	" \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\v \x01(\x05H\x05R\bpageSize\x88\x01\x01\x12*\n" +
+	"\x11initiator_user_id\x18\f \x01(\x03R\x0finitiatorUserId\x12*\n" +
+	"\x11initiator_role_id\x18\r \x01(\x03R\x0finitiatorRoleId\x12Y\n" +
+	"\x1ainitiator_operator_context\x18\x0e \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12\\\n" +
+	"\x18operator_context_filters\x18\x0f \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\n" +
+	"\n" +
+	"\b_user_idB\x0f\n" +
+	"\r_affiliate_idB\x10\n" +
+	"\x0e_commission_idB\t\n" +
+	"\a_statusB\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\xd7\t\n" +
+	"\x17ListCommissionsResponse\x12^\n" +
+	"\vcommissions\x18\x01 \x03(\v2<.api.affiliate.service.v1.ListCommissionsResponse.CommissionR\vcommissions\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x05R\x05total\x12#\n" +
+	"\rtotal_pending\x18\x03 \x01(\x05R\ftotalPending\x12%\n" +
+	"\x0etotal_approved\x18\x04 \x01(\x05R\rtotalApproved\x12%\n" +
+	"\x0etotal_rejected\x18\x05 \x01(\x05R\rtotalRejected\x12\x12\n" +
+	"\x04page\x18\x06 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\a \x01(\x05R\bpageSize\x1a\xa1\a\n" +
+	"\n" +
+	"Commission\x12#\n" +
+	"\rcommission_id\x18\x01 \x01(\x03R\fcommissionId\x12\x18\n" +
+	"\acountry\x18\x02 \x01(\tR\acountry\x129\n" +
+	"\n" +
+	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x16\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\x12\x12\n" +
+	"\x04paid\x18\x05 \x01(\bR\x04paid\x12,\n" +
+	"\x12commission_plan_id\x18\x06 \x01(\x03R\x10commissionPlanId\x120\n" +
+	"\x14commission_plan_name\x18\a \x01(\tR\x12commissionPlanName\x12-\n" +
+	"\x12commission_subtype\x18\b \x01(\tR\x11commissionSubtype\x12-\n" +
+	"\x12reporting_currency\x18\t \x01(\tR\x11reportingCurrency\x12\x1f\n" +
+	"\vrevenue_usd\x18\n" +
+	" \x01(\tR\n" +
+	"revenueUsd\x12<\n" +
+	"\x1arevenue_reporting_currency\x18\v \x01(\tR\x18revenueReportingCurrency\x12%\n" +
+	"\x0ecommission_usd\x18\f \x01(\tR\rcommissionUsd\x12B\n" +
+	"\x1dcommission_reporting_currency\x18\r \x01(\tR\x1bcommissionReportingCurrency\x12*\n" +
+	"\x11adjust_amount_usd\x18\x0e \x01(\tR\x0fadjustAmountUsd\x12G\n" +
+	" adjust_amount_reporting_currency\x18\x0f \x01(\tR\x1dadjustAmountReportingCurrency\x12!\n" +
+	"\faffiliate_id\x18\x10 \x01(\x03R\vaffiliateId\x12%\n" +
+	"\x0eaffiliate_name\x18\x11 \x01(\tR\raffiliateName\x12\x17\n" +
+	"\auser_id\x18\x12 \x01(\x03R\x06userId\x124\n" +
+	"\x16retailer_operator_name\x18\x13 \x01(\tR\x14retailerOperatorName\x122\n" +
+	"\x15company_operator_name\x18\x14 \x01(\tR\x13companyOperatorName\x12#\n" +
+	"\roperator_name\x18\x15 \x01(\tR\foperatorName\"\xf0\x05\n" +
+	"\x10ListUsersRequest\x12\x1c\n" +
+	"\tcountries\x18\x01 \x03(\tR\tcountries\x12@\n" +
+	"\x0eftd_start_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\fftdStartTime\x12<\n" +
+	"\fftd_end_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
+	"ftdEndTime\x12&\n" +
+	"\faffiliate_id\x18\x04 \x01(\x03H\x00R\vaffiliateId\x88\x01\x01\x12R\n" +
+	"\x17registration_start_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\x15registrationStartTime\x12N\n" +
+	"\x15registration_end_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x13registrationEndTime\x12\x17\n" +
+	"\x04page\x18\a \x01(\x05H\x01R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\b \x01(\x05H\x02R\bpageSize\x88\x01\x01\x12*\n" +
+	"\x11initiator_user_id\x18\t \x01(\x03R\x0finitiatorUserId\x12*\n" +
+	"\x11initiator_role_id\x18\n" +
+	" \x01(\x03R\x0finitiatorRoleId\x12Y\n" +
+	"\x1ainitiator_operator_context\x18\v \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12\\\n" +
+	"\x18operator_context_filters\x18\f \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\x0f\n" +
+	"\r_affiliate_idB\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\xec\f\n" +
+	"\x11ListUsersResponse\x12F\n" +
+	"\x05users\x18\x01 \x03(\v20.api.affiliate.service.v1.ListUsersResponse.UserR\x05users\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
+	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xc7\v\n" +
+	"\x04User\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x18\n" +
+	"\acountry\x18\x02 \x01(\tR\acountry\x12!\n" +
+	"\faffiliate_id\x18\x03 \x01(\x03R\vaffiliateId\x12%\n" +
+	"\x0eaffiliate_name\x18\x04 \x01(\tR\raffiliateName\x124\n" +
+	"\x16affiliate_company_name\x18\x05 \x01(\tR\x14affiliateCompanyName\x12-\n" +
+	"\x12reporting_currency\x18\x06 \x01(\tR\x11reportingCurrency\x12!\n" +
+	"\fcampaign_url\x18\a \x01(\tR\vcampaignUrl\x12?\n" +
+	"\rregistered_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\x121\n" +
+	"\x06ftd_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x05ftdAt\x12$\n" +
+	"\x0eftd_amount_usd\x18\n" +
+	" \x01(\tR\fftdAmountUsd\x12A\n" +
+	"\x1dftd_amount_reporting_currency\x18\v \x01(\tR\x1aftdAmountReportingCurrency\x12#\n" +
+	"\rdeposit_count\x18\f \x01(\x05R\fdepositCount\x12,\n" +
+	"\x12deposit_amount_usd\x18\r \x01(\tR\x10depositAmountUsd\x12I\n" +
+	"!deposit_amount_reporting_currency\x18\x0e \x01(\tR\x1edepositAmountReportingCurrency\x12)\n" +
+	"\x10withdrawal_count\x18\x0f \x01(\x05R\x0fwithdrawalCount\x122\n" +
+	"\x15withdrawal_amount_usd\x18\x10 \x01(\tR\x13withdrawalAmountUsd\x12O\n" +
+	"$withdrawal_amount_reporting_currency\x18\x11 \x01(\tR!withdrawalAmountReportingCurrency\x123\n" +
+	"\x16net_deposit_amount_usd\x18\x12 \x01(\tR\x13netDepositAmountUsd\x12P\n" +
+	"%net_deposit_amount_reporting_currency\x18\x13 \x01(\tR!netDepositAmountReportingCurrency\x12\x1b\n" +
+	"\tbet_count\x18\x14 \x01(\x05R\bbetCount\x12$\n" +
+	"\x0ebet_amount_usd\x18\x15 \x01(\tR\fbetAmountUsd\x12A\n" +
+	"\x1dbet_amount_reporting_currency\x18\x16 \x01(\tR\x1abetAmountReportingCurrency\x12$\n" +
+	"\x0ewin_amount_usd\x18\x17 \x01(\tR\fwinAmountUsd\x12A\n" +
+	"\x1dwin_amount_reporting_currency\x18\x18 \x01(\tR\x1awinAmountReportingCurrency\x12\x17\n" +
+	"\aggr_usd\x18\x19 \x01(\tR\x06ggrUsd\x124\n" +
+	"\x16ggr_reporting_currency\x18\x1a \x01(\tR\x14ggrReportingCurrency\x12\x17\n" +
+	"\angr_usd\x18\x1b \x01(\tR\x06ngrUsd\x124\n" +
+	"\x16ngr_reporting_currency\x18\x1c \x01(\tR\x14ngrReportingCurrency\x12%\n" +
+	"\x0ecommission_usd\x18\x1d \x01(\tR\rcommissionUsd\x12B\n" +
+	"\x1dcommission_reporting_currency\x18\x1e \x01(\tR\x1bcommissionReportingCurrency\x12\x10\n" +
+	"\x03roi\x18\x1f \x01(\tR\x03roi2\xbc\x11\n" +
 	"\tAffiliate\x12\x87\x01\n" +
 	"\x14CreateCommissionPlan\x125.api.affiliate.service.v1.CreateCommissionPlanRequest\x1a6.api.affiliate.service.v1.CreateCommissionPlanResponse\"\x00\x12\x87\x01\n" +
 	"\x14UpdateCommissionPlan\x125.api.affiliate.service.v1.UpdateCommissionPlanRequest\x1a6.api.affiliate.service.v1.UpdateCommissionPlanResponse\"\x00\x12~\n" +
@@ -3348,7 +4409,9 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\rListCampaigns\x12..api.affiliate.service.v1.ListCampaignsRequest\x1a/.api.affiliate.service.v1.ListCampaignsResponse\"\x00\x12u\n" +
 	"\x0eDeleteCampaign\x12/.api.affiliate.service.v1.DeleteCampaignRequest\x1a0.api.affiliate.service.v1.DeleteCampaignResponse\"\x00\x12i\n" +
 	"\n" +
-	"ListEvents\x12+.api.affiliate.service.v1.ListEventsRequest\x1a,.api.affiliate.service.v1.ListEventsResponse\"\x00BY\n" +
+	"ListEvents\x12+.api.affiliate.service.v1.ListEventsRequest\x1a,.api.affiliate.service.v1.ListEventsResponse\"\x00\x12x\n" +
+	"\x0fListCommissions\x120.api.affiliate.service.v1.ListCommissionsRequest\x1a1.api.affiliate.service.v1.ListCommissionsResponse\"\x00\x12f\n" +
+	"\tListUsers\x12*.api.affiliate.service.v1.ListUsersRequest\x1a+.api.affiliate.service.v1.ListUsersResponse\"\x00BY\n" +
 	"\x18api.affiliate.service.v1P\x01Z;github.com/infigaming-com/meepo-api/affiliate/service/v1;v1b\x06proto3"
 
 var (
@@ -3363,7 +4426,7 @@ func file_affiliate_service_v1_affiliate_proto_rawDescGZIP() []byte {
 	return file_affiliate_service_v1_affiliate_proto_rawDescData
 }
 
-var file_affiliate_service_v1_affiliate_proto_msgTypes = make([]protoimpl.MessageInfo, 42)
+var file_affiliate_service_v1_affiliate_proto_msgTypes = make([]protoimpl.MessageInfo, 48)
 var file_affiliate_service_v1_affiliate_proto_goTypes = []any{
 	(*ContactType)(nil),                             // 0: api.affiliate.service.v1.ContactType
 	(*AffiliateInfo)(nil),                           // 1: api.affiliate.service.v1.AffiliateInfo
@@ -3392,122 +4455,147 @@ var file_affiliate_service_v1_affiliate_proto_goTypes = []any{
 	(*DeleteCampaignResponse)(nil),                  // 24: api.affiliate.service.v1.DeleteCampaignResponse
 	(*ListEventsRequest)(nil),                       // 25: api.affiliate.service.v1.ListEventsRequest
 	(*ListEventsResponse)(nil),                      // 26: api.affiliate.service.v1.ListEventsResponse
-	(*ListAffiliatesResponse_Affiliate)(nil),        // 27: api.affiliate.service.v1.ListAffiliatesResponse.Affiliate
-	(*Params_Parameter)(nil),                        // 28: api.affiliate.service.v1.Params.Parameter
-	(*ChannelConfig_FacebookChannelConfig)(nil),     // 29: api.affiliate.service.v1.ChannelConfig.FacebookChannelConfig
-	(*ChannelConfig_TiktokChannelConfig)(nil),       // 30: api.affiliate.service.v1.ChannelConfig.TiktokChannelConfig
-	(*ChannelConfig_KwaiChannelConfig)(nil),         // 31: api.affiliate.service.v1.ChannelConfig.KwaiChannelConfig
-	(*ChannelConfig_AppsflyerChannelConfig)(nil),    // 32: api.affiliate.service.v1.ChannelConfig.AppsflyerChannelConfig
-	(*ChannelConfig_AdjustChannelConfig)(nil),       // 33: api.affiliate.service.v1.ChannelConfig.AdjustChannelConfig
-	(*ChannelConfig_AgencyChannelConfig)(nil),       // 34: api.affiliate.service.v1.ChannelConfig.AgencyChannelConfig
-	(*ChannelConfig_GoogleAdsChannelConfig)(nil),    // 35: api.affiliate.service.v1.ChannelConfig.GoogleAdsChannelConfig
-	(*CustomParams_CustomParam)(nil),                // 36: api.affiliate.service.v1.CustomParams.CustomParam
-	(*EventMappings_EventMapping)(nil),              // 37: api.affiliate.service.v1.EventMappings.EventMapping
-	(*CreateCampaignRequest_Campaign)(nil),          // 38: api.affiliate.service.v1.CreateCampaignRequest.Campaign
-	(*ListCampaignsResponse_CampaignInfo)(nil),      // 39: api.affiliate.service.v1.ListCampaignsResponse.CampaignInfo
-	(*ListEventsResponse_Event)(nil),                // 40: api.affiliate.service.v1.ListEventsResponse.Event
-	(*ListEventsResponse_Event_CommissionPlan)(nil), // 41: api.affiliate.service.v1.ListEventsResponse.Event.CommissionPlan
-	(*common.OperatorContext)(nil),                  // 42: api.common.OperatorContext
-	(*common.OperatorContextFilters)(nil),           // 43: api.common.OperatorContextFilters
-	(*timestamppb.Timestamp)(nil),                   // 44: google.protobuf.Timestamp
-	(*CreateCommissionPlanRequest)(nil),             // 45: api.affiliate.service.v1.CreateCommissionPlanRequest
-	(*UpdateCommissionPlanRequest)(nil),             // 46: api.affiliate.service.v1.UpdateCommissionPlanRequest
-	(*GetCommissionPlanRequest)(nil),                // 47: api.affiliate.service.v1.GetCommissionPlanRequest
-	(*ListCommissionPlansRequest)(nil),              // 48: api.affiliate.service.v1.ListCommissionPlansRequest
-	(*DeleteCommissionPlanRequest)(nil),             // 49: api.affiliate.service.v1.DeleteCommissionPlanRequest
-	(*ListAllCommissionPlansRequest)(nil),           // 50: api.affiliate.service.v1.ListAllCommissionPlansRequest
-	(*CreateCommissionPlanResponse)(nil),            // 51: api.affiliate.service.v1.CreateCommissionPlanResponse
-	(*UpdateCommissionPlanResponse)(nil),            // 52: api.affiliate.service.v1.UpdateCommissionPlanResponse
-	(*GetCommissionPlanResponse)(nil),               // 53: api.affiliate.service.v1.GetCommissionPlanResponse
-	(*ListCommissionPlansResponse)(nil),             // 54: api.affiliate.service.v1.ListCommissionPlansResponse
-	(*DeleteCommissionPlanResponse)(nil),            // 55: api.affiliate.service.v1.DeleteCommissionPlanResponse
-	(*ListAllCommissionPlansResponse)(nil),          // 56: api.affiliate.service.v1.ListAllCommissionPlansResponse
+	(*ListCommissionsRequest)(nil),                  // 27: api.affiliate.service.v1.ListCommissionsRequest
+	(*ListCommissionsResponse)(nil),                 // 28: api.affiliate.service.v1.ListCommissionsResponse
+	(*ListUsersRequest)(nil),                        // 29: api.affiliate.service.v1.ListUsersRequest
+	(*ListUsersResponse)(nil),                       // 30: api.affiliate.service.v1.ListUsersResponse
+	(*ListAffiliatesResponse_Affiliate)(nil),        // 31: api.affiliate.service.v1.ListAffiliatesResponse.Affiliate
+	(*Params_Parameter)(nil),                        // 32: api.affiliate.service.v1.Params.Parameter
+	(*ChannelConfig_FacebookChannelConfig)(nil),     // 33: api.affiliate.service.v1.ChannelConfig.FacebookChannelConfig
+	(*ChannelConfig_TiktokChannelConfig)(nil),       // 34: api.affiliate.service.v1.ChannelConfig.TiktokChannelConfig
+	(*ChannelConfig_KwaiChannelConfig)(nil),         // 35: api.affiliate.service.v1.ChannelConfig.KwaiChannelConfig
+	(*ChannelConfig_AppsflyerChannelConfig)(nil),    // 36: api.affiliate.service.v1.ChannelConfig.AppsflyerChannelConfig
+	(*ChannelConfig_AdjustChannelConfig)(nil),       // 37: api.affiliate.service.v1.ChannelConfig.AdjustChannelConfig
+	(*ChannelConfig_AgencyChannelConfig)(nil),       // 38: api.affiliate.service.v1.ChannelConfig.AgencyChannelConfig
+	(*ChannelConfig_GoogleAdsChannelConfig)(nil),    // 39: api.affiliate.service.v1.ChannelConfig.GoogleAdsChannelConfig
+	(*CustomParams_CustomParam)(nil),                // 40: api.affiliate.service.v1.CustomParams.CustomParam
+	(*EventMappings_EventMapping)(nil),              // 41: api.affiliate.service.v1.EventMappings.EventMapping
+	(*CreateCampaignRequest_Campaign)(nil),          // 42: api.affiliate.service.v1.CreateCampaignRequest.Campaign
+	(*ListCampaignsResponse_CampaignInfo)(nil),      // 43: api.affiliate.service.v1.ListCampaignsResponse.CampaignInfo
+	(*ListEventsResponse_Event)(nil),                // 44: api.affiliate.service.v1.ListEventsResponse.Event
+	(*ListEventsResponse_Event_CommissionPlan)(nil), // 45: api.affiliate.service.v1.ListEventsResponse.Event.CommissionPlan
+	(*ListCommissionsResponse_Commission)(nil),      // 46: api.affiliate.service.v1.ListCommissionsResponse.Commission
+	(*ListUsersResponse_User)(nil),                  // 47: api.affiliate.service.v1.ListUsersResponse.User
+	(*common.OperatorContext)(nil),                  // 48: api.common.OperatorContext
+	(*common.OperatorContextFilters)(nil),           // 49: api.common.OperatorContextFilters
+	(*timestamppb.Timestamp)(nil),                   // 50: google.protobuf.Timestamp
+	(*CreateCommissionPlanRequest)(nil),             // 51: api.affiliate.service.v1.CreateCommissionPlanRequest
+	(*UpdateCommissionPlanRequest)(nil),             // 52: api.affiliate.service.v1.UpdateCommissionPlanRequest
+	(*GetCommissionPlanRequest)(nil),                // 53: api.affiliate.service.v1.GetCommissionPlanRequest
+	(*ListCommissionPlansRequest)(nil),              // 54: api.affiliate.service.v1.ListCommissionPlansRequest
+	(*DeleteCommissionPlanRequest)(nil),             // 55: api.affiliate.service.v1.DeleteCommissionPlanRequest
+	(*ListAllCommissionPlansRequest)(nil),           // 56: api.affiliate.service.v1.ListAllCommissionPlansRequest
+	(*CreateCommissionPlanResponse)(nil),            // 57: api.affiliate.service.v1.CreateCommissionPlanResponse
+	(*UpdateCommissionPlanResponse)(nil),            // 58: api.affiliate.service.v1.UpdateCommissionPlanResponse
+	(*GetCommissionPlanResponse)(nil),               // 59: api.affiliate.service.v1.GetCommissionPlanResponse
+	(*ListCommissionPlansResponse)(nil),             // 60: api.affiliate.service.v1.ListCommissionPlansResponse
+	(*DeleteCommissionPlanResponse)(nil),            // 61: api.affiliate.service.v1.DeleteCommissionPlanResponse
+	(*ListAllCommissionPlansResponse)(nil),          // 62: api.affiliate.service.v1.ListAllCommissionPlansResponse
 }
 var file_affiliate_service_v1_affiliate_proto_depIdxs = []int32{
 	0,  // 0: api.affiliate.service.v1.AffiliateInfo.contact_types:type_name -> api.affiliate.service.v1.ContactType
 	1,  // 1: api.affiliate.service.v1.CreateAffiliateRequest.affiliate:type_name -> api.affiliate.service.v1.AffiliateInfo
-	42, // 2: api.affiliate.service.v1.CreateAffiliateRequest.target_operator_context:type_name -> api.common.OperatorContext
-	42, // 3: api.affiliate.service.v1.CreateAffiliateRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	48, // 2: api.affiliate.service.v1.CreateAffiliateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	48, // 3: api.affiliate.service.v1.CreateAffiliateRequest.initiator_operator_context:type_name -> api.common.OperatorContext
 	1,  // 4: api.affiliate.service.v1.UpdateAffiliateRequest.affiliate:type_name -> api.affiliate.service.v1.AffiliateInfo
-	42, // 5: api.affiliate.service.v1.UpdateAffiliateRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	42, // 6: api.affiliate.service.v1.GetAffiliateRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	48, // 5: api.affiliate.service.v1.UpdateAffiliateRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	48, // 6: api.affiliate.service.v1.GetAffiliateRequest.initiator_operator_context:type_name -> api.common.OperatorContext
 	1,  // 7: api.affiliate.service.v1.GetAffiliateResponse.affiliate:type_name -> api.affiliate.service.v1.AffiliateInfo
-	42, // 8: api.affiliate.service.v1.ListAffiliatesRequest.target_operator_context:type_name -> api.common.OperatorContext
-	42, // 9: api.affiliate.service.v1.ListAffiliatesRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	27, // 10: api.affiliate.service.v1.ListAffiliatesResponse.affiliates:type_name -> api.affiliate.service.v1.ListAffiliatesResponse.Affiliate
-	42, // 11: api.affiliate.service.v1.DeleteAffiliateRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	48, // 8: api.affiliate.service.v1.ListAffiliatesRequest.target_operator_context:type_name -> api.common.OperatorContext
+	48, // 9: api.affiliate.service.v1.ListAffiliatesRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	31, // 10: api.affiliate.service.v1.ListAffiliatesResponse.affiliates:type_name -> api.affiliate.service.v1.ListAffiliatesResponse.Affiliate
+	48, // 11: api.affiliate.service.v1.DeleteAffiliateRequest.initiator_operator_context:type_name -> api.common.OperatorContext
 	14, // 12: api.affiliate.service.v1.Campaign.channel_config:type_name -> api.affiliate.service.v1.ChannelConfig
 	13, // 13: api.affiliate.service.v1.Campaign.params:type_name -> api.affiliate.service.v1.Params
 	16, // 14: api.affiliate.service.v1.Campaign.event_mappings:type_name -> api.affiliate.service.v1.EventMappings
-	28, // 15: api.affiliate.service.v1.Params.predefined_parameters:type_name -> api.affiliate.service.v1.Params.Parameter
-	28, // 16: api.affiliate.service.v1.Params.custom_parameters:type_name -> api.affiliate.service.v1.Params.Parameter
-	29, // 17: api.affiliate.service.v1.ChannelConfig.facebook_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.FacebookChannelConfig
-	30, // 18: api.affiliate.service.v1.ChannelConfig.tiktok_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.TiktokChannelConfig
-	31, // 19: api.affiliate.service.v1.ChannelConfig.kwai_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.KwaiChannelConfig
-	32, // 20: api.affiliate.service.v1.ChannelConfig.appsflyer_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.AppsflyerChannelConfig
-	33, // 21: api.affiliate.service.v1.ChannelConfig.adjust_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.AdjustChannelConfig
-	34, // 22: api.affiliate.service.v1.ChannelConfig.agency_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.AgencyChannelConfig
-	35, // 23: api.affiliate.service.v1.ChannelConfig.google_ads_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.GoogleAdsChannelConfig
-	36, // 24: api.affiliate.service.v1.CustomParams.custom_params:type_name -> api.affiliate.service.v1.CustomParams.CustomParam
-	37, // 25: api.affiliate.service.v1.EventMappings.register:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
-	37, // 26: api.affiliate.service.v1.EventMappings.first_deposit:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
-	37, // 27: api.affiliate.service.v1.EventMappings.second_deposit:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
-	37, // 28: api.affiliate.service.v1.EventMappings.third_deposit:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
-	37, // 29: api.affiliate.service.v1.EventMappings.withdrawal:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
-	37, // 30: api.affiliate.service.v1.EventMappings.game_start:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
-	37, // 31: api.affiliate.service.v1.EventMappings.game_bet:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
-	38, // 32: api.affiliate.service.v1.CreateCampaignRequest.campaign:type_name -> api.affiliate.service.v1.CreateCampaignRequest.Campaign
-	42, // 33: api.affiliate.service.v1.CreateCampaignRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	32, // 15: api.affiliate.service.v1.Params.predefined_parameters:type_name -> api.affiliate.service.v1.Params.Parameter
+	32, // 16: api.affiliate.service.v1.Params.custom_parameters:type_name -> api.affiliate.service.v1.Params.Parameter
+	33, // 17: api.affiliate.service.v1.ChannelConfig.facebook_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.FacebookChannelConfig
+	34, // 18: api.affiliate.service.v1.ChannelConfig.tiktok_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.TiktokChannelConfig
+	35, // 19: api.affiliate.service.v1.ChannelConfig.kwai_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.KwaiChannelConfig
+	36, // 20: api.affiliate.service.v1.ChannelConfig.appsflyer_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.AppsflyerChannelConfig
+	37, // 21: api.affiliate.service.v1.ChannelConfig.adjust_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.AdjustChannelConfig
+	38, // 22: api.affiliate.service.v1.ChannelConfig.agency_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.AgencyChannelConfig
+	39, // 23: api.affiliate.service.v1.ChannelConfig.google_ads_channel_config:type_name -> api.affiliate.service.v1.ChannelConfig.GoogleAdsChannelConfig
+	40, // 24: api.affiliate.service.v1.CustomParams.custom_params:type_name -> api.affiliate.service.v1.CustomParams.CustomParam
+	41, // 25: api.affiliate.service.v1.EventMappings.register:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
+	41, // 26: api.affiliate.service.v1.EventMappings.first_deposit:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
+	41, // 27: api.affiliate.service.v1.EventMappings.second_deposit:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
+	41, // 28: api.affiliate.service.v1.EventMappings.third_deposit:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
+	41, // 29: api.affiliate.service.v1.EventMappings.withdrawal:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
+	41, // 30: api.affiliate.service.v1.EventMappings.game_start:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
+	41, // 31: api.affiliate.service.v1.EventMappings.game_bet:type_name -> api.affiliate.service.v1.EventMappings.EventMapping
+	42, // 32: api.affiliate.service.v1.CreateCampaignRequest.campaign:type_name -> api.affiliate.service.v1.CreateCampaignRequest.Campaign
+	48, // 33: api.affiliate.service.v1.CreateCampaignRequest.initiator_operator_context:type_name -> api.common.OperatorContext
 	12, // 34: api.affiliate.service.v1.UpdateCampaignRequest.campaign:type_name -> api.affiliate.service.v1.Campaign
-	42, // 35: api.affiliate.service.v1.ListCampaignsRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	43, // 36: api.affiliate.service.v1.ListCampaignsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	39, // 37: api.affiliate.service.v1.ListCampaignsResponse.campaigns:type_name -> api.affiliate.service.v1.ListCampaignsResponse.CampaignInfo
-	44, // 38: api.affiliate.service.v1.ListEventsRequest.start_time:type_name -> google.protobuf.Timestamp
-	44, // 39: api.affiliate.service.v1.ListEventsRequest.end_time:type_name -> google.protobuf.Timestamp
-	42, // 40: api.affiliate.service.v1.ListEventsRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	43, // 41: api.affiliate.service.v1.ListEventsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	40, // 42: api.affiliate.service.v1.ListEventsResponse.events:type_name -> api.affiliate.service.v1.ListEventsResponse.Event
-	14, // 43: api.affiliate.service.v1.CreateCampaignRequest.Campaign.channel_config:type_name -> api.affiliate.service.v1.ChannelConfig
-	12, // 44: api.affiliate.service.v1.ListCampaignsResponse.CampaignInfo.campaign:type_name -> api.affiliate.service.v1.Campaign
-	44, // 45: api.affiliate.service.v1.ListEventsResponse.Event.created_at:type_name -> google.protobuf.Timestamp
-	41, // 46: api.affiliate.service.v1.ListEventsResponse.Event.commission_plans:type_name -> api.affiliate.service.v1.ListEventsResponse.Event.CommissionPlan
-	45, // 47: api.affiliate.service.v1.Affiliate.CreateCommissionPlan:input_type -> api.affiliate.service.v1.CreateCommissionPlanRequest
-	46, // 48: api.affiliate.service.v1.Affiliate.UpdateCommissionPlan:input_type -> api.affiliate.service.v1.UpdateCommissionPlanRequest
-	47, // 49: api.affiliate.service.v1.Affiliate.GetCommissionPlan:input_type -> api.affiliate.service.v1.GetCommissionPlanRequest
-	48, // 50: api.affiliate.service.v1.Affiliate.ListCommissionPlans:input_type -> api.affiliate.service.v1.ListCommissionPlansRequest
-	49, // 51: api.affiliate.service.v1.Affiliate.DeleteCommissionPlan:input_type -> api.affiliate.service.v1.DeleteCommissionPlanRequest
-	50, // 52: api.affiliate.service.v1.Affiliate.ListAllCommissionPlans:input_type -> api.affiliate.service.v1.ListAllCommissionPlansRequest
-	2,  // 53: api.affiliate.service.v1.Affiliate.CreateAffiliate:input_type -> api.affiliate.service.v1.CreateAffiliateRequest
-	4,  // 54: api.affiliate.service.v1.Affiliate.UpdateAffiliate:input_type -> api.affiliate.service.v1.UpdateAffiliateRequest
-	6,  // 55: api.affiliate.service.v1.Affiliate.GetAffiliate:input_type -> api.affiliate.service.v1.GetAffiliateRequest
-	8,  // 56: api.affiliate.service.v1.Affiliate.ListAffiliates:input_type -> api.affiliate.service.v1.ListAffiliatesRequest
-	10, // 57: api.affiliate.service.v1.Affiliate.DeleteAffiliate:input_type -> api.affiliate.service.v1.DeleteAffiliateRequest
-	17, // 58: api.affiliate.service.v1.Affiliate.CreateCampaign:input_type -> api.affiliate.service.v1.CreateCampaignRequest
-	19, // 59: api.affiliate.service.v1.Affiliate.UpdateCampaign:input_type -> api.affiliate.service.v1.UpdateCampaignRequest
-	21, // 60: api.affiliate.service.v1.Affiliate.ListCampaigns:input_type -> api.affiliate.service.v1.ListCampaignsRequest
-	23, // 61: api.affiliate.service.v1.Affiliate.DeleteCampaign:input_type -> api.affiliate.service.v1.DeleteCampaignRequest
-	25, // 62: api.affiliate.service.v1.Affiliate.ListEvents:input_type -> api.affiliate.service.v1.ListEventsRequest
-	51, // 63: api.affiliate.service.v1.Affiliate.CreateCommissionPlan:output_type -> api.affiliate.service.v1.CreateCommissionPlanResponse
-	52, // 64: api.affiliate.service.v1.Affiliate.UpdateCommissionPlan:output_type -> api.affiliate.service.v1.UpdateCommissionPlanResponse
-	53, // 65: api.affiliate.service.v1.Affiliate.GetCommissionPlan:output_type -> api.affiliate.service.v1.GetCommissionPlanResponse
-	54, // 66: api.affiliate.service.v1.Affiliate.ListCommissionPlans:output_type -> api.affiliate.service.v1.ListCommissionPlansResponse
-	55, // 67: api.affiliate.service.v1.Affiliate.DeleteCommissionPlan:output_type -> api.affiliate.service.v1.DeleteCommissionPlanResponse
-	56, // 68: api.affiliate.service.v1.Affiliate.ListAllCommissionPlans:output_type -> api.affiliate.service.v1.ListAllCommissionPlansResponse
-	3,  // 69: api.affiliate.service.v1.Affiliate.CreateAffiliate:output_type -> api.affiliate.service.v1.CreateAffiliateResponse
-	5,  // 70: api.affiliate.service.v1.Affiliate.UpdateAffiliate:output_type -> api.affiliate.service.v1.UpdateAffiliateResponse
-	7,  // 71: api.affiliate.service.v1.Affiliate.GetAffiliate:output_type -> api.affiliate.service.v1.GetAffiliateResponse
-	9,  // 72: api.affiliate.service.v1.Affiliate.ListAffiliates:output_type -> api.affiliate.service.v1.ListAffiliatesResponse
-	11, // 73: api.affiliate.service.v1.Affiliate.DeleteAffiliate:output_type -> api.affiliate.service.v1.DeleteAffiliateResponse
-	18, // 74: api.affiliate.service.v1.Affiliate.CreateCampaign:output_type -> api.affiliate.service.v1.CreateCampaignResponse
-	20, // 75: api.affiliate.service.v1.Affiliate.UpdateCampaign:output_type -> api.affiliate.service.v1.UpdateCampaignResponse
-	22, // 76: api.affiliate.service.v1.Affiliate.ListCampaigns:output_type -> api.affiliate.service.v1.ListCampaignsResponse
-	24, // 77: api.affiliate.service.v1.Affiliate.DeleteCampaign:output_type -> api.affiliate.service.v1.DeleteCampaignResponse
-	26, // 78: api.affiliate.service.v1.Affiliate.ListEvents:output_type -> api.affiliate.service.v1.ListEventsResponse
-	63, // [63:79] is the sub-list for method output_type
-	47, // [47:63] is the sub-list for method input_type
-	47, // [47:47] is the sub-list for extension type_name
-	47, // [47:47] is the sub-list for extension extendee
-	0,  // [0:47] is the sub-list for field type_name
+	48, // 35: api.affiliate.service.v1.ListCampaignsRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	49, // 36: api.affiliate.service.v1.ListCampaignsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	43, // 37: api.affiliate.service.v1.ListCampaignsResponse.campaigns:type_name -> api.affiliate.service.v1.ListCampaignsResponse.CampaignInfo
+	50, // 38: api.affiliate.service.v1.ListEventsRequest.start_time:type_name -> google.protobuf.Timestamp
+	50, // 39: api.affiliate.service.v1.ListEventsRequest.end_time:type_name -> google.protobuf.Timestamp
+	48, // 40: api.affiliate.service.v1.ListEventsRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	49, // 41: api.affiliate.service.v1.ListEventsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	44, // 42: api.affiliate.service.v1.ListEventsResponse.events:type_name -> api.affiliate.service.v1.ListEventsResponse.Event
+	50, // 43: api.affiliate.service.v1.ListCommissionsRequest.start_time:type_name -> google.protobuf.Timestamp
+	50, // 44: api.affiliate.service.v1.ListCommissionsRequest.end_time:type_name -> google.protobuf.Timestamp
+	48, // 45: api.affiliate.service.v1.ListCommissionsRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	49, // 46: api.affiliate.service.v1.ListCommissionsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	46, // 47: api.affiliate.service.v1.ListCommissionsResponse.commissions:type_name -> api.affiliate.service.v1.ListCommissionsResponse.Commission
+	50, // 48: api.affiliate.service.v1.ListUsersRequest.ftd_start_time:type_name -> google.protobuf.Timestamp
+	50, // 49: api.affiliate.service.v1.ListUsersRequest.ftd_end_time:type_name -> google.protobuf.Timestamp
+	50, // 50: api.affiliate.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
+	50, // 51: api.affiliate.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
+	48, // 52: api.affiliate.service.v1.ListUsersRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	49, // 53: api.affiliate.service.v1.ListUsersRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	47, // 54: api.affiliate.service.v1.ListUsersResponse.users:type_name -> api.affiliate.service.v1.ListUsersResponse.User
+	14, // 55: api.affiliate.service.v1.CreateCampaignRequest.Campaign.channel_config:type_name -> api.affiliate.service.v1.ChannelConfig
+	12, // 56: api.affiliate.service.v1.ListCampaignsResponse.CampaignInfo.campaign:type_name -> api.affiliate.service.v1.Campaign
+	50, // 57: api.affiliate.service.v1.ListEventsResponse.Event.created_at:type_name -> google.protobuf.Timestamp
+	45, // 58: api.affiliate.service.v1.ListEventsResponse.Event.commission_plans:type_name -> api.affiliate.service.v1.ListEventsResponse.Event.CommissionPlan
+	50, // 59: api.affiliate.service.v1.ListCommissionsResponse.Commission.created_at:type_name -> google.protobuf.Timestamp
+	50, // 60: api.affiliate.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
+	50, // 61: api.affiliate.service.v1.ListUsersResponse.User.ftd_at:type_name -> google.protobuf.Timestamp
+	51, // 62: api.affiliate.service.v1.Affiliate.CreateCommissionPlan:input_type -> api.affiliate.service.v1.CreateCommissionPlanRequest
+	52, // 63: api.affiliate.service.v1.Affiliate.UpdateCommissionPlan:input_type -> api.affiliate.service.v1.UpdateCommissionPlanRequest
+	53, // 64: api.affiliate.service.v1.Affiliate.GetCommissionPlan:input_type -> api.affiliate.service.v1.GetCommissionPlanRequest
+	54, // 65: api.affiliate.service.v1.Affiliate.ListCommissionPlans:input_type -> api.affiliate.service.v1.ListCommissionPlansRequest
+	55, // 66: api.affiliate.service.v1.Affiliate.DeleteCommissionPlan:input_type -> api.affiliate.service.v1.DeleteCommissionPlanRequest
+	56, // 67: api.affiliate.service.v1.Affiliate.ListAllCommissionPlans:input_type -> api.affiliate.service.v1.ListAllCommissionPlansRequest
+	2,  // 68: api.affiliate.service.v1.Affiliate.CreateAffiliate:input_type -> api.affiliate.service.v1.CreateAffiliateRequest
+	4,  // 69: api.affiliate.service.v1.Affiliate.UpdateAffiliate:input_type -> api.affiliate.service.v1.UpdateAffiliateRequest
+	6,  // 70: api.affiliate.service.v1.Affiliate.GetAffiliate:input_type -> api.affiliate.service.v1.GetAffiliateRequest
+	8,  // 71: api.affiliate.service.v1.Affiliate.ListAffiliates:input_type -> api.affiliate.service.v1.ListAffiliatesRequest
+	10, // 72: api.affiliate.service.v1.Affiliate.DeleteAffiliate:input_type -> api.affiliate.service.v1.DeleteAffiliateRequest
+	17, // 73: api.affiliate.service.v1.Affiliate.CreateCampaign:input_type -> api.affiliate.service.v1.CreateCampaignRequest
+	19, // 74: api.affiliate.service.v1.Affiliate.UpdateCampaign:input_type -> api.affiliate.service.v1.UpdateCampaignRequest
+	21, // 75: api.affiliate.service.v1.Affiliate.ListCampaigns:input_type -> api.affiliate.service.v1.ListCampaignsRequest
+	23, // 76: api.affiliate.service.v1.Affiliate.DeleteCampaign:input_type -> api.affiliate.service.v1.DeleteCampaignRequest
+	25, // 77: api.affiliate.service.v1.Affiliate.ListEvents:input_type -> api.affiliate.service.v1.ListEventsRequest
+	27, // 78: api.affiliate.service.v1.Affiliate.ListCommissions:input_type -> api.affiliate.service.v1.ListCommissionsRequest
+	29, // 79: api.affiliate.service.v1.Affiliate.ListUsers:input_type -> api.affiliate.service.v1.ListUsersRequest
+	57, // 80: api.affiliate.service.v1.Affiliate.CreateCommissionPlan:output_type -> api.affiliate.service.v1.CreateCommissionPlanResponse
+	58, // 81: api.affiliate.service.v1.Affiliate.UpdateCommissionPlan:output_type -> api.affiliate.service.v1.UpdateCommissionPlanResponse
+	59, // 82: api.affiliate.service.v1.Affiliate.GetCommissionPlan:output_type -> api.affiliate.service.v1.GetCommissionPlanResponse
+	60, // 83: api.affiliate.service.v1.Affiliate.ListCommissionPlans:output_type -> api.affiliate.service.v1.ListCommissionPlansResponse
+	61, // 84: api.affiliate.service.v1.Affiliate.DeleteCommissionPlan:output_type -> api.affiliate.service.v1.DeleteCommissionPlanResponse
+	62, // 85: api.affiliate.service.v1.Affiliate.ListAllCommissionPlans:output_type -> api.affiliate.service.v1.ListAllCommissionPlansResponse
+	3,  // 86: api.affiliate.service.v1.Affiliate.CreateAffiliate:output_type -> api.affiliate.service.v1.CreateAffiliateResponse
+	5,  // 87: api.affiliate.service.v1.Affiliate.UpdateAffiliate:output_type -> api.affiliate.service.v1.UpdateAffiliateResponse
+	7,  // 88: api.affiliate.service.v1.Affiliate.GetAffiliate:output_type -> api.affiliate.service.v1.GetAffiliateResponse
+	9,  // 89: api.affiliate.service.v1.Affiliate.ListAffiliates:output_type -> api.affiliate.service.v1.ListAffiliatesResponse
+	11, // 90: api.affiliate.service.v1.Affiliate.DeleteAffiliate:output_type -> api.affiliate.service.v1.DeleteAffiliateResponse
+	18, // 91: api.affiliate.service.v1.Affiliate.CreateCampaign:output_type -> api.affiliate.service.v1.CreateCampaignResponse
+	20, // 92: api.affiliate.service.v1.Affiliate.UpdateCampaign:output_type -> api.affiliate.service.v1.UpdateCampaignResponse
+	22, // 93: api.affiliate.service.v1.Affiliate.ListCampaigns:output_type -> api.affiliate.service.v1.ListCampaignsResponse
+	24, // 94: api.affiliate.service.v1.Affiliate.DeleteCampaign:output_type -> api.affiliate.service.v1.DeleteCampaignResponse
+	26, // 95: api.affiliate.service.v1.Affiliate.ListEvents:output_type -> api.affiliate.service.v1.ListEventsResponse
+	28, // 96: api.affiliate.service.v1.Affiliate.ListCommissions:output_type -> api.affiliate.service.v1.ListCommissionsResponse
+	30, // 97: api.affiliate.service.v1.Affiliate.ListUsers:output_type -> api.affiliate.service.v1.ListUsersResponse
+	80, // [80:98] is the sub-list for method output_type
+	62, // [62:80] is the sub-list for method input_type
+	62, // [62:62] is the sub-list for extension type_name
+	62, // [62:62] is the sub-list for extension extendee
+	0,  // [0:62] is the sub-list for field type_name
 }
 
 func init() { file_affiliate_service_v1_affiliate_proto_init() }
@@ -3521,14 +4609,16 @@ func file_affiliate_service_v1_affiliate_proto_init() {
 	file_affiliate_service_v1_affiliate_proto_msgTypes[19].OneofWrappers = []any{}
 	file_affiliate_service_v1_affiliate_proto_msgTypes[21].OneofWrappers = []any{}
 	file_affiliate_service_v1_affiliate_proto_msgTypes[25].OneofWrappers = []any{}
-	file_affiliate_service_v1_affiliate_proto_msgTypes[37].OneofWrappers = []any{}
+	file_affiliate_service_v1_affiliate_proto_msgTypes[27].OneofWrappers = []any{}
+	file_affiliate_service_v1_affiliate_proto_msgTypes[29].OneofWrappers = []any{}
+	file_affiliate_service_v1_affiliate_proto_msgTypes[41].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_affiliate_service_v1_affiliate_proto_rawDesc), len(file_affiliate_service_v1_affiliate_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   42,
+			NumMessages:   48,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
