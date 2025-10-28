@@ -7,6 +7,7 @@
 package v1
 
 import (
+	common "github.com/infigaming-com/meepo-api/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -101,16 +102,120 @@ func (*AddWhiteLabelOperatorResponse) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_operator_proto_rawDescGZIP(), []int{1}
 }
 
+type PreLaunchCheckRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *PreLaunchCheckRequest) Reset() {
+	*x = PreLaunchCheckRequest{}
+	mi := &file_user_service_v1_operator_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PreLaunchCheckRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PreLaunchCheckRequest) ProtoMessage() {}
+
+func (x *PreLaunchCheckRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_operator_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PreLaunchCheckRequest.ProtoReflect.Descriptor instead.
+func (*PreLaunchCheckRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_operator_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *PreLaunchCheckRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+type PreLaunchCheckResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Balance       string                 `protobuf:"bytes,1,opt,name=balance,proto3" json:"balance,omitempty"`
+	Threshhold    string                 `protobuf:"bytes,2,opt,name=threshhold,proto3" json:"threshhold,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PreLaunchCheckResponse) Reset() {
+	*x = PreLaunchCheckResponse{}
+	mi := &file_user_service_v1_operator_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PreLaunchCheckResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PreLaunchCheckResponse) ProtoMessage() {}
+
+func (x *PreLaunchCheckResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_v1_operator_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PreLaunchCheckResponse.ProtoReflect.Descriptor instead.
+func (*PreLaunchCheckResponse) Descriptor() ([]byte, []int) {
+	return file_user_service_v1_operator_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *PreLaunchCheckResponse) GetBalance() string {
+	if x != nil {
+		return x.Balance
+	}
+	return ""
+}
+
+func (x *PreLaunchCheckResponse) GetThreshhold() string {
+	if x != nil {
+		return x.Threshhold
+	}
+	return ""
+}
+
 var File_user_service_v1_operator_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_operator_proto_rawDesc = "" +
 	"\n" +
-	"\x1euser/service/v1/operator.proto\x12\x13api.user.service.v1\"2\n" +
+	"\x1euser/service/v1/operator.proto\x12\x13api.user.service.v1\x1a\x13common/common.proto\"2\n" +
 	"\x1cAddWhiteLabelOperatorRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\"\x1f\n" +
-	"\x1dAddWhiteLabelOperatorResponse2\x8d\x01\n" +
+	"\x1dAddWhiteLabelOperatorResponse\"_\n" +
+	"\x15PreLaunchCheckRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"R\n" +
+	"\x16PreLaunchCheckResponse\x12\x18\n" +
+	"\abalance\x18\x01 \x01(\tR\abalance\x12\x1e\n" +
+	"\n" +
+	"threshhold\x18\x02 \x01(\tR\n" +
+	"threshhold2\xfa\x01\n" +
 	"\bOperator\x12\x80\x01\n" +
-	"\x15AddWhiteLabelOperator\x121.api.user.service.v1.AddWhiteLabelOperatorRequest\x1a2.api.user.service.v1.AddWhiteLabelOperatorResponse\"\x00BO\n" +
+	"\x15AddWhiteLabelOperator\x121.api.user.service.v1.AddWhiteLabelOperatorRequest\x1a2.api.user.service.v1.AddWhiteLabelOperatorResponse\"\x00\x12k\n" +
+	"\x0ePreLaunchCheck\x12*.api.user.service.v1.PreLaunchCheckRequest\x1a+.api.user.service.v1.PreLaunchCheckResponse\"\x00BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
@@ -125,19 +230,25 @@ func file_user_service_v1_operator_proto_rawDescGZIP() []byte {
 	return file_user_service_v1_operator_proto_rawDescData
 }
 
-var file_user_service_v1_operator_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_user_service_v1_operator_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_user_service_v1_operator_proto_goTypes = []any{
 	(*AddWhiteLabelOperatorRequest)(nil),  // 0: api.user.service.v1.AddWhiteLabelOperatorRequest
 	(*AddWhiteLabelOperatorResponse)(nil), // 1: api.user.service.v1.AddWhiteLabelOperatorResponse
+	(*PreLaunchCheckRequest)(nil),         // 2: api.user.service.v1.PreLaunchCheckRequest
+	(*PreLaunchCheckResponse)(nil),        // 3: api.user.service.v1.PreLaunchCheckResponse
+	(*common.OperatorContext)(nil),        // 4: api.common.OperatorContext
 }
 var file_user_service_v1_operator_proto_depIdxs = []int32{
-	0, // 0: api.user.service.v1.Operator.AddWhiteLabelOperator:input_type -> api.user.service.v1.AddWhiteLabelOperatorRequest
-	1, // 1: api.user.service.v1.Operator.AddWhiteLabelOperator:output_type -> api.user.service.v1.AddWhiteLabelOperatorResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	4, // 0: api.user.service.v1.PreLaunchCheckRequest.operator_context:type_name -> api.common.OperatorContext
+	0, // 1: api.user.service.v1.Operator.AddWhiteLabelOperator:input_type -> api.user.service.v1.AddWhiteLabelOperatorRequest
+	2, // 2: api.user.service.v1.Operator.PreLaunchCheck:input_type -> api.user.service.v1.PreLaunchCheckRequest
+	1, // 3: api.user.service.v1.Operator.AddWhiteLabelOperator:output_type -> api.user.service.v1.AddWhiteLabelOperatorResponse
+	3, // 4: api.user.service.v1.Operator.PreLaunchCheck:output_type -> api.user.service.v1.PreLaunchCheckResponse
+	3, // [3:5] is the sub-list for method output_type
+	1, // [1:3] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_user_service_v1_operator_proto_init() }
@@ -151,7 +262,7 @@ func file_user_service_v1_operator_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_service_v1_operator_proto_rawDesc), len(file_user_service_v1_operator_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

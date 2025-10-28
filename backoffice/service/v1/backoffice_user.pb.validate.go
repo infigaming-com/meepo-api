@@ -3647,6 +3647,108 @@ var _ interface {
 	ErrorName() string
 } = UserIdentityListRequestValidationError{}
 
+// Validate checks the field values on PreLaunchCheckRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *PreLaunchCheckRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PreLaunchCheckRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// PreLaunchCheckRequestMultiError, or nil if none found.
+func (m *PreLaunchCheckRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PreLaunchCheckRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return PreLaunchCheckRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// PreLaunchCheckRequestMultiError is an error wrapping multiple validation
+// errors returned by PreLaunchCheckRequest.ValidateAll() if the designated
+// constraints aren't met.
+type PreLaunchCheckRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PreLaunchCheckRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PreLaunchCheckRequestMultiError) AllErrors() []error { return m }
+
+// PreLaunchCheckRequestValidationError is the validation error returned by
+// PreLaunchCheckRequest.Validate if the designated constraints aren't met.
+type PreLaunchCheckRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PreLaunchCheckRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PreLaunchCheckRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PreLaunchCheckRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PreLaunchCheckRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PreLaunchCheckRequestValidationError) ErrorName() string {
+	return "PreLaunchCheckRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PreLaunchCheckRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPreLaunchCheckRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PreLaunchCheckRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PreLaunchCheckRequestValidationError{}
+
 // Validate checks the field values on ListUsersResponse_User with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

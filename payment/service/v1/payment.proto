@@ -149,25 +149,25 @@ message CreatePaymentChannelRequest {
   // ID of the payment method to be used
   string payment_method_id = 3;
   // Contact Info email
-  string contact = 4;
+  // string contact = 4;
   // PSP Fixed Fee on the Amount
-  string fixed_fee = 5;
+  string fixed_fee = 4;
   // PSP Rate Fee 
-  string fee_rate = 6;
+  string fee_rate = 5;
   // Minimum Fee 
-  string min_fee = 7;
+  string min_fee = 6;
   // User Fixed Fee on the Amount
-  string user_fixed_fee = 8;
+  string user_fixed_fee = 7;
   // User Rate Fee 
-  string user_fee_rate = 9;
+  string user_fee_rate = 8;
   // Minimum Fee 
-  string user_min_fee = 10;
+  string user_min_fee = 9;
   // Min Amount
-  string min_amount = 11;
+  string min_amount = 10;
   // Max Amount
-  string max_amount = 12;
+  string max_amount = 11;
   // Configuration fields for the payment channel in JSON format
-  google.protobuf.Struct key = 13;
+  google.protobuf.Struct key = 12;
 }
 
 // Request to create a payment channel
@@ -176,27 +176,27 @@ message UpdatePaymentChannelRequest {
   // ID of the payment channel to be used
   string payment_channel_id = 1;
   // Contact Info email
-  string contact = 2;
+  // string contact = 2;
   // PSP Fixed Fee on the Amount
-  string fixed_fee = 3;
+  string fixed_fee = 2;
   // PSP Rate Fee 
-  string fee_rate = 4;
+  string fee_rate = 3;
   // PSP Min Fee 
-  string min_fee = 5;
+  string min_fee = 4;
   // User Fixed Fee on the Amount
-  string user_fixed_fee = 6;
+  string user_fixed_fee = 5;
   // User Rate Fee 
-  string user_fee_rate = 7;
+  string user_fee_rate = 6;
   // User Min Fee 
-  string user_min_fee = 8;
+  string user_min_fee = 7;
   // Min Amount
-  string min_amount = 9;
+  string min_amount = 8;
   // Max Amount
-  string max_amount = 10;
+  string max_amount = 9;
   // enable status
-  optional bool enable = 11;
+  optional bool enable = 10;
   // Configuration fields for the payment channel in JSON format
-  google.protobuf.Struct key = 12;
+  google.protobuf.Struct key = 11;
 }
 
 // Response for channel creation
@@ -280,18 +280,18 @@ message PaymentChannelInfo {
   // Status bool
   bool enable = 35;
   // Contact
-  string contact = 36;
-  int32 eat = 37;
-  int64 operator_id = 38;
-  int64 company_operator_id = 39;
-  int64 retailer_operator_id = 40;
-  int64 system_operator_id = 41;
-  string operator_name = 42;
-  string company_operator_name = 43;
-  string retailer_operator_name = 44;
-  string system_operator_name = 46;
-  string operator_type = 47;
-  string psp_id = 48;
+  // string contact = 36;
+  int32 eat = 36;
+  int64 operator_id = 37;
+  int64 company_operator_id = 38;
+  int64 retailer_operator_id = 39;
+  int64 system_operator_id = 40;
+  string operator_name = 41;
+  string company_operator_name = 42;
+  string retailer_operator_name = 43;
+  string system_operator_name = 44;
+  string operator_type = 45;
+  string psp_id = 46;
 }
 
 // Request to initiate a deposit
@@ -819,8 +819,24 @@ message GetChannelsByIdsResponse {
 }
 
 message UpdatePaymentMethodRequest {
+  // ID
 	string payment_method_id = 1;
-	bool status = 2;
+  // Currency Type
+  optional string contact = 2;
+  // Fixed Fee on the Amount
+  optional string sys_fixed_fee = 3;
+  // Rate Fee 
+  optional string sys_fee_rate = 4;
+  // Min Amount
+  optional string sys_min_amount = 5;
+  // Max Amount
+  optional string sys_max_amount = 6;
+  // Minmum Fee
+  optional string sys_min_fee = 7;
+	// status
+	bool status = 8;
+  // ID of the Operator connect with this channel
+	api.common.OperatorContext operator_context = 9;
 }
 
 message UpdatePaymentMethodResponse {
@@ -968,32 +984,27 @@ service Payment {
   // Get list of payment methods
   // Retrieves all available payment methods supported by the system
   // Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
-  rpc GetSupportedPaymentMethodList(GetSupportedPaymentMethodListRequest) returns (GetSupportedPaymentMethodListResponse) {
-  }
+  rpc GetSupportedPaymentMethodList(GetSupportedPaymentMethodListRequest) returns (GetSupportedPaymentMethodListResponse) { }
 
   // Create payment channel
   // Creates a new payment channel with specified configuration
   // Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-  rpc CreatePaymentMethod(CreatePaymentMethodRequest) returns (CreatePaymentMethodResponse) {
-  }
+  rpc CreatePaymentMethod(CreatePaymentMethodRequest) returns (CreatePaymentMethodResponse) { }
 
   // Get list of payment methods
   // Retrieves all available payment methods supported by the system
   // Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
-  rpc GetPaymentMethodList(GetPaymentMethodListRequest) returns (GetPaymentMethodListResponse) {
-  }
+  rpc GetPaymentMethodList(GetPaymentMethodListRequest) returns (GetPaymentMethodListResponse) { }
 
   // Create payment channel
   // Creates a new payment channel with specified configuration
   // Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-  rpc UpdatePaymentChannel(UpdatePaymentChannelRequest) returns (UpdatePaymentChannelResponse) {
-  }
+  rpc UpdatePaymentChannel(UpdatePaymentChannelRequest) returns (UpdatePaymentChannelResponse) { }
 
   // Create payment channel
   // Creates a new payment channel with specified configuration
   // Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-  rpc CreatePaymentChannel(CreatePaymentChannelRequest) returns (CreatePaymentChannelResponse) {
-  }
+  rpc CreatePaymentChannel(CreatePaymentChannelRequest) returns (CreatePaymentChannelResponse) { }
 
   rpc GetAddress(GetAddressRequest) returns (GetAddressResponse) {
     option (google.api.http) = {
@@ -1092,23 +1103,17 @@ service Payment {
   // Get transaction detail
   // Retrieves detailed information about a specific transaction
   // Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
-  rpc GetTransactionDetailById(GetTransactionDetailByIdRequest) returns (GetTransactionDetailByIdResponse) {
-  }
+  rpc GetTransactionDetailById(GetTransactionDetailByIdRequest) returns (GetTransactionDetailByIdResponse) { }
 
-  rpc GetOperatorTransactionPage(GetTransactionPageRequest) returns (GetTransactionPageResponse) {
-  }
+  rpc GetOperatorTransactionPage(GetTransactionPageRequest) returns (GetTransactionPageResponse) { }
 
-  rpc GetOperatorTransactionDetailById(GetTransactionDetailByIdRequest) returns (GetTransactionDetailByIdResponse) {
-  }
+  rpc GetOperatorTransactionDetailById(GetTransactionDetailByIdRequest) returns (GetTransactionDetailByIdResponse) { }
   
-	rpc GetChannelsByIds(GetChannelsByIdsRequest) returns (GetChannelsByIdsResponse) {
-	}
+	rpc GetChannelsByIds(GetChannelsByIdsRequest) returns (GetChannelsByIdsResponse) { }
 
-	rpc UpdatePaymentMethod(UpdatePaymentMethodRequest) returns (CreatePaymentMethodResponse) {
-	}
+	rpc UpdatePaymentMethod(UpdatePaymentMethodRequest) returns (CreatePaymentMethodResponse) { }
 
-  rpc GetOperatorPaymentChannelPage(GetOperatorPaymentChannelPageRequest) returns (GetPaymentChannelPageResponse) {
-  }
+  rpc GetOperatorPaymentChannelPage(GetOperatorPaymentChannelPageRequest) returns (GetPaymentChannelPageResponse) { }
 
   rpc GetUserBankCardList(GetBankCardListRequest) returns (GetBankCardListResponse) {
     option (google.api.http) = {
