@@ -68,7 +68,7 @@ type BackofficeUserClient interface {
 	GetUserResponsibleGamblingConfig(ctx context.Context, in *GetUserResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*v1.GetResponsibleGamblingConfigResponse, error)
 	UserIdentityAudit(ctx context.Context, in *UserIdentityAuditRequest, opts ...grpc.CallOption) (*v1.UserIdentityAuditResponse, error)
 	UserIdentityList(ctx context.Context, in *UserIdentityListRequest, opts ...grpc.CallOption) (*v1.UserIdentityListResponse, error)
-	PreLaunchCheck(ctx context.Context, in *PreLaunchCheckRequest, opts ...grpc.CallOption) (*v1.PreLaunchCheckResponse, error)
+	PreLaunchCheck(ctx context.Context, in *v1.PreLaunchCheckRequest, opts ...grpc.CallOption) (*v1.PreLaunchCheckResponse, error)
 }
 
 type backofficeUserClient struct {
@@ -249,7 +249,7 @@ func (c *backofficeUserClient) UserIdentityList(ctx context.Context, in *UserIde
 	return out, nil
 }
 
-func (c *backofficeUserClient) PreLaunchCheck(ctx context.Context, in *PreLaunchCheckRequest, opts ...grpc.CallOption) (*v1.PreLaunchCheckResponse, error) {
+func (c *backofficeUserClient) PreLaunchCheck(ctx context.Context, in *v1.PreLaunchCheckRequest, opts ...grpc.CallOption) (*v1.PreLaunchCheckResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.PreLaunchCheckResponse)
 	err := c.cc.Invoke(ctx, BackofficeUser_PreLaunchCheck_FullMethodName, in, out, cOpts...)
@@ -287,7 +287,7 @@ type BackofficeUserServer interface {
 	GetUserResponsibleGamblingConfig(context.Context, *GetUserResponsibleGamblingConfigRequest) (*v1.GetResponsibleGamblingConfigResponse, error)
 	UserIdentityAudit(context.Context, *UserIdentityAuditRequest) (*v1.UserIdentityAuditResponse, error)
 	UserIdentityList(context.Context, *UserIdentityListRequest) (*v1.UserIdentityListResponse, error)
-	PreLaunchCheck(context.Context, *PreLaunchCheckRequest) (*v1.PreLaunchCheckResponse, error)
+	PreLaunchCheck(context.Context, *v1.PreLaunchCheckRequest) (*v1.PreLaunchCheckResponse, error)
 	mustEmbedUnimplementedBackofficeUserServer()
 }
 
@@ -349,7 +349,7 @@ func (UnimplementedBackofficeUserServer) UserIdentityAudit(context.Context, *Use
 func (UnimplementedBackofficeUserServer) UserIdentityList(context.Context, *UserIdentityListRequest) (*v1.UserIdentityListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserIdentityList not implemented")
 }
-func (UnimplementedBackofficeUserServer) PreLaunchCheck(context.Context, *PreLaunchCheckRequest) (*v1.PreLaunchCheckResponse, error) {
+func (UnimplementedBackofficeUserServer) PreLaunchCheck(context.Context, *v1.PreLaunchCheckRequest) (*v1.PreLaunchCheckResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PreLaunchCheck not implemented")
 }
 func (UnimplementedBackofficeUserServer) mustEmbedUnimplementedBackofficeUserServer() {}
@@ -680,7 +680,7 @@ func _BackofficeUser_UserIdentityList_Handler(srv interface{}, ctx context.Conte
 }
 
 func _BackofficeUser_PreLaunchCheck_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PreLaunchCheckRequest)
+	in := new(v1.PreLaunchCheckRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -692,7 +692,7 @@ func _BackofficeUser_PreLaunchCheck_Handler(srv interface{}, ctx context.Context
 		FullMethod: BackofficeUser_PreLaunchCheck_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeUserServer).PreLaunchCheck(ctx, req.(*PreLaunchCheckRequest))
+		return srv.(BackofficeUserServer).PreLaunchCheck(ctx, req.(*v1.PreLaunchCheckRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

@@ -3450,7 +3450,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.PreLaunchCheckRequest'
+                            $ref: '#/components/schemas/api.user.service.v1.PreLaunchCheckRequest'
                 required: true
             responses:
                 "200":
@@ -12205,9 +12205,6 @@ components:
                     items:
                         type: string
                     description: 'action name: read, write, delete, etc.'
-        api.backoffice.service.v1.PreLaunchCheckRequest:
-            type: object
-            properties: {}
         api.backoffice.service.v1.RegisterRequest:
             type: object
             properties:
@@ -15534,6 +15531,11 @@ components:
                 registrationLimitPerIp:
                     type: integer
                     format: int32
+        api.user.service.v1.PreLaunchCheckRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.user.service.v1.PreLaunchCheckResponse:
             type: object
             properties:

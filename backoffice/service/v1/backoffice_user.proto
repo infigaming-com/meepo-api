@@ -135,7 +135,7 @@ service BackofficeUser {
 		};
 	}
 
-	rpc PreLaunchCheck(PreLaunchCheckRequest) returns (user.service.v1.PreLaunchCheckResponse) {
+	rpc PreLaunchCheck(user.service.v1.PreLaunchCheckRequest) returns (user.service.v1.PreLaunchCheckResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/user/operator/prelaunch/check"
 			body: "*"
@@ -489,7 +489,4 @@ message UserIdentityListRequest {
 	int32 page = 6;
 	int32 page_size = 7;
 	api.common.OperatorContextFilters operator_context_filters = 8;
-}
-
-message PreLaunchCheckRequest {
 }
