@@ -137,6 +137,15 @@ service BackofficeAffiliate {
 			body: "*"
 		};
 	}
+
+	// -------------- User --------------
+
+	rpc ListAffiliateUsers(ListAffiliateUsersRequest) returns (api.affiliate.service.v1.ListUsersResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/user/list"
+			body: "*"
+		};
+	}
 }
 
 // -------------- Commission Plan --------------
@@ -275,4 +284,19 @@ message ListCommissionsRequest {
 	optional string status = 9; // pending/approved/rejected
 	optional int32 page = 10;
 	optional int32 page_size = 11;
+	api.common.OperatorContextFilters operator_context_filters = 12;
+}
+
+// -------------- User --------------
+
+message ListAffiliateUsersRequest {
+	repeated string countries = 1;
+	google.protobuf.Timestamp ftd_start_time = 2;
+	google.protobuf.Timestamp ftd_end_time = 3;
+	optional int64 affiliate_id = 4;
+	google.protobuf.Timestamp registration_start_time = 5;
+	google.protobuf.Timestamp registration_end_time = 6;
+	optional int32 page = 7;
+	optional int32 page_size = 8;
+	api.common.OperatorContextFilters operator_context_filters = 9;
 }

@@ -748,6 +748,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.UpdateAffiliateResponse'
+    /v1/backoffice/affiliate/user/list:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_ListAffiliateUsers
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAffiliateUsersRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListUsersResponse'
     /v1/backoffice/audit/actions/list:
         post:
             tags:
@@ -6287,6 +6305,92 @@ components:
                     type: string
                 operatorName:
                     type: string
+        api.affiliate.service.v1.ListUsersResponse:
+            type: object
+            properties:
+                users:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.ListUsersResponse_User'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.affiliate.service.v1.ListUsersResponse_User:
+            type: object
+            properties:
+                userId:
+                    type: string
+                country:
+                    type: string
+                affiliateId:
+                    type: string
+                affiliateName:
+                    type: string
+                affiliateCompanyName:
+                    type: string
+                reportingCurrency:
+                    type: string
+                campaignUrl:
+                    type: string
+                registeredAt:
+                    type: string
+                    format: date-time
+                ftdAt:
+                    type: string
+                    format: date-time
+                ftdAmountUsd:
+                    type: string
+                ftdAmountReportingCurrency:
+                    type: string
+                depositCount:
+                    type: integer
+                    format: int32
+                depositAmountUsd:
+                    type: string
+                depositAmountReportingCurrency:
+                    type: string
+                withdrawalCount:
+                    type: integer
+                    format: int32
+                withdrawalAmountUsd:
+                    type: string
+                withdrawalAmountReportingCurrency:
+                    type: string
+                netDepositAmountUsd:
+                    type: string
+                netDepositAmountReportingCurrency:
+                    type: string
+                betCount:
+                    type: integer
+                    format: int32
+                betAmountUsd:
+                    type: string
+                betAmountReportingCurrency:
+                    type: string
+                winAmountUsd:
+                    type: string
+                winAmountReportingCurrency:
+                    type: string
+                ggrUsd:
+                    type: string
+                ggrReportingCurrency:
+                    type: string
+                ngrUsd:
+                    type: string
+                ngrReportingCurrency:
+                    type: string
+                commissionUsd:
+                    type: string
+                commissionReportingCurrency:
+                    type: string
+                roi:
+                    type: string
         api.affiliate.service.v1.Params:
             type: object
             properties:
@@ -8983,6 +9087,35 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.ListAffiliateUsersRequest:
+            type: object
+            properties:
+                countries:
+                    type: array
+                    items:
+                        type: string
+                ftdStartTime:
+                    type: string
+                    format: date-time
+                ftdEndTime:
+                    type: string
+                    format: date-time
+                affiliateId:
+                    type: string
+                registrationStartTime:
+                    type: string
+                    format: date-time
+                registrationEndTime:
+                    type: string
+                    format: date-time
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ListAffiliatesRequest:
             type: object
             properties:
@@ -9482,6 +9615,8 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ListCompanyOperatorsRequest:
             type: object
             properties:

@@ -2165,23 +2165,18 @@ func (x *ListCommissionsResponse) GetPageSize() int32 {
 
 type ListUsersRequest struct {
 	state                    protoimpl.MessageState         `protogen:"open.v1"`
-	CommissionPlanIds        []int64                        `protobuf:"varint,1,rep,packed,name=commission_plan_ids,json=commissionPlanIds,proto3" json:"commission_plan_ids,omitempty"` // OR logic: filter by commission plan IDs, match if ID is any of these values
-	Countries                []string                       `protobuf:"bytes,2,rep,name=countries,proto3" json:"countries,omitempty"`
-	StatusDetails            *string                        `protobuf:"bytes,3,opt,name=status_details,json=statusDetails,proto3,oneof" json:"status_details,omitempty"` // placeholder, not implemented
-	Brand                    *string                        `protobuf:"bytes,4,opt,name=brand,proto3,oneof" json:"brand,omitempty"`                                      // placeholder, not implemented
-	FtdStartTime             *timestamppb.Timestamp         `protobuf:"bytes,5,opt,name=ftd_start_time,json=ftdStartTime,proto3" json:"ftd_start_time,omitempty"`
-	FtdEndTime               *timestamppb.Timestamp         `protobuf:"bytes,6,opt,name=ftd_end_time,json=ftdEndTime,proto3" json:"ftd_end_time,omitempty"`
-	AffiliateIds             []int64                        `protobuf:"varint,7,rep,packed,name=affiliate_ids,json=affiliateIds,proto3" json:"affiliate_ids,omitempty"`
-	RegistrationStartTime    *timestamppb.Timestamp         `protobuf:"bytes,8,opt,name=registration_start_time,json=registrationStartTime,proto3" json:"registration_start_time,omitempty"`
-	RegistrationEndTime      *timestamppb.Timestamp         `protobuf:"bytes,9,opt,name=registration_end_time,json=registrationEndTime,proto3" json:"registration_end_time,omitempty"`
-	QualificationStartTime   *timestamppb.Timestamp         `protobuf:"bytes,10,opt,name=qualification_start_time,json=qualificationStartTime,proto3" json:"qualification_start_time,omitempty"` // placeholder, not implemented
-	QualificationEndTime     *timestamppb.Timestamp         `protobuf:"bytes,11,opt,name=qualification_end_time,json=qualificationEndTime,proto3" json:"qualification_end_time,omitempty"`       // placeholder, not implemented
-	Page                     *int32                         `protobuf:"varint,12,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize                 *int32                         `protobuf:"varint,13,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	InitiatorUserId          int64                          `protobuf:"varint,14,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
-	InitiatorRoleId          int64                          `protobuf:"varint,15,opt,name=initiator_role_id,json=initiatorRoleId,proto3" json:"initiator_role_id,omitempty"`
-	InitiatorOperatorContext *common.OperatorContext        `protobuf:"bytes,16,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
-	OperatorContextFilters   *common.OperatorContextFilters `protobuf:"bytes,17,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	Countries                []string                       `protobuf:"bytes,1,rep,name=countries,proto3" json:"countries,omitempty"`
+	FtdStartTime             *timestamppb.Timestamp         `protobuf:"bytes,2,opt,name=ftd_start_time,json=ftdStartTime,proto3" json:"ftd_start_time,omitempty"`
+	FtdEndTime               *timestamppb.Timestamp         `protobuf:"bytes,3,opt,name=ftd_end_time,json=ftdEndTime,proto3" json:"ftd_end_time,omitempty"`
+	AffiliateId              *int64                         `protobuf:"varint,4,opt,name=affiliate_id,json=affiliateId,proto3,oneof" json:"affiliate_id,omitempty"`
+	RegistrationStartTime    *timestamppb.Timestamp         `protobuf:"bytes,5,opt,name=registration_start_time,json=registrationStartTime,proto3" json:"registration_start_time,omitempty"`
+	RegistrationEndTime      *timestamppb.Timestamp         `protobuf:"bytes,6,opt,name=registration_end_time,json=registrationEndTime,proto3" json:"registration_end_time,omitempty"`
+	Page                     *int32                         `protobuf:"varint,7,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize                 *int32                         `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	InitiatorUserId          int64                          `protobuf:"varint,9,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
+	InitiatorRoleId          int64                          `protobuf:"varint,10,opt,name=initiator_role_id,json=initiatorRoleId,proto3" json:"initiator_role_id,omitempty"`
+	InitiatorOperatorContext *common.OperatorContext        `protobuf:"bytes,11,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
+	OperatorContextFilters   *common.OperatorContextFilters `protobuf:"bytes,12,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -2216,32 +2211,11 @@ func (*ListUsersRequest) Descriptor() ([]byte, []int) {
 	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{29}
 }
 
-func (x *ListUsersRequest) GetCommissionPlanIds() []int64 {
-	if x != nil {
-		return x.CommissionPlanIds
-	}
-	return nil
-}
-
 func (x *ListUsersRequest) GetCountries() []string {
 	if x != nil {
 		return x.Countries
 	}
 	return nil
-}
-
-func (x *ListUsersRequest) GetStatusDetails() string {
-	if x != nil && x.StatusDetails != nil {
-		return *x.StatusDetails
-	}
-	return ""
-}
-
-func (x *ListUsersRequest) GetBrand() string {
-	if x != nil && x.Brand != nil {
-		return *x.Brand
-	}
-	return ""
 }
 
 func (x *ListUsersRequest) GetFtdStartTime() *timestamppb.Timestamp {
@@ -2258,11 +2232,11 @@ func (x *ListUsersRequest) GetFtdEndTime() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *ListUsersRequest) GetAffiliateIds() []int64 {
-	if x != nil {
-		return x.AffiliateIds
+func (x *ListUsersRequest) GetAffiliateId() int64 {
+	if x != nil && x.AffiliateId != nil {
+		return *x.AffiliateId
 	}
-	return nil
+	return 0
 }
 
 func (x *ListUsersRequest) GetRegistrationStartTime() *timestamppb.Timestamp {
@@ -2275,20 +2249,6 @@ func (x *ListUsersRequest) GetRegistrationStartTime() *timestamppb.Timestamp {
 func (x *ListUsersRequest) GetRegistrationEndTime() *timestamppb.Timestamp {
 	if x != nil {
 		return x.RegistrationEndTime
-	}
-	return nil
-}
-
-func (x *ListUsersRequest) GetQualificationStartTime() *timestamppb.Timestamp {
-	if x != nil {
-		return x.QualificationStartTime
-	}
-	return nil
-}
-
-func (x *ListUsersRequest) GetQualificationEndTime() *timestamppb.Timestamp {
-	if x != nil {
-		return x.QualificationEndTime
 	}
 	return nil
 }
@@ -3792,39 +3752,38 @@ func (x *ListUsersResponse_CommissionPlan) GetCommissionPlanName() string {
 }
 
 type ListUsersResponse_User struct {
-	state                             protoimpl.MessageState              `protogen:"open.v1"`
-	UserId                            int64                               `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Country                           string                              `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
-	AffiliateId                       int64                               `protobuf:"varint,3,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
-	AffiliateName                     string                              `protobuf:"bytes,4,opt,name=affiliate_name,json=affiliateName,proto3" json:"affiliate_name,omitempty"`
-	AffiliateCompanyName              string                              `protobuf:"bytes,5,opt,name=affiliate_company_name,json=affiliateCompanyName,proto3" json:"affiliate_company_name,omitempty"`
-	Status                            string                              `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"`                                    // placeholder, not implemented
-	StatusDetails                     string                              `protobuf:"bytes,7,opt,name=status_details,json=statusDetails,proto3" json:"status_details,omitempty"` // placeholder, not implemented
-	ReportingCurrency                 string                              `protobuf:"bytes,8,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
-	CampaignUrl                       string                              `protobuf:"bytes,9,opt,name=campaign_url,json=campaignUrl,proto3" json:"campaign_url,omitempty"`
-	RegisteredAt                      *timestamppb.Timestamp              `protobuf:"bytes,10,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
-	FtdAt                             *timestamppb.Timestamp              `protobuf:"bytes,11,opt,name=ftd_at,json=ftdAt,proto3" json:"ftd_at,omitempty"`
-	FtdAmountUsd                      string                              `protobuf:"bytes,12,opt,name=ftd_amount_usd,json=ftdAmountUsd,proto3" json:"ftd_amount_usd,omitempty"`
-	FtdAmountReportingCurrency        string                              `protobuf:"bytes,13,opt,name=ftd_amount_reporting_currency,json=ftdAmountReportingCurrency,proto3" json:"ftd_amount_reporting_currency,omitempty"`
-	DepositCount                      int32                               `protobuf:"varint,14,opt,name=deposit_count,json=depositCount,proto3" json:"deposit_count,omitempty"`
-	DepositAmountUsd                  string                              `protobuf:"bytes,15,opt,name=deposit_amount_usd,json=depositAmountUsd,proto3" json:"deposit_amount_usd,omitempty"`
-	DepositAmountReportingCurrency    string                              `protobuf:"bytes,16,opt,name=deposit_amount_reporting_currency,json=depositAmountReportingCurrency,proto3" json:"deposit_amount_reporting_currency,omitempty"`
-	WithdrawalCount                   int32                               `protobuf:"varint,17,opt,name=withdrawal_count,json=withdrawalCount,proto3" json:"withdrawal_count,omitempty"`
-	NetDepositAmountUsd               string                              `protobuf:"bytes,18,opt,name=net_deposit_amount_usd,json=netDepositAmountUsd,proto3" json:"net_deposit_amount_usd,omitempty"`                                             // placeholder, not implemented
-	NetDepositAmountReportingCurrency string                              `protobuf:"bytes,19,opt,name=net_deposit_amount_reporting_currency,json=netDepositAmountReportingCurrency,proto3" json:"net_deposit_amount_reporting_currency,omitempty"` // placeholder, not implemented
-	BetCount                          int32                               `protobuf:"varint,20,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
-	BetAmountUsd                      string                              `protobuf:"bytes,21,opt,name=bet_amount_usd,json=betAmountUsd,proto3" json:"bet_amount_usd,omitempty"`
-	BetAmountReportingCurrency        string                              `protobuf:"bytes,22,opt,name=bet_amount_reporting_currency,json=betAmountReportingCurrency,proto3" json:"bet_amount_reporting_currency,omitempty"`
-	WinAmountUsd                      string                              `protobuf:"bytes,23,opt,name=win_amount_usd,json=winAmountUsd,proto3" json:"win_amount_usd,omitempty"`
-	WinAmountReportingCurrency        string                              `protobuf:"bytes,24,opt,name=win_amount_reporting_currency,json=winAmountReportingCurrency,proto3" json:"win_amount_reporting_currency,omitempty"`
-	CommissionPlans                   []*ListUsersResponse_CommissionPlan `protobuf:"bytes,25,rep,name=commission_plans,json=commissionPlans,proto3" json:"commission_plans,omitempty"`
-	GgrUsd                            string                              `protobuf:"bytes,26,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
-	GgrReportingCurrency              string                              `protobuf:"bytes,27,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
-	NgrUsd                            string                              `protobuf:"bytes,28,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
-	NgrReportingCurrency              string                              `protobuf:"bytes,29,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
-	CommissionUsd                     string                              `protobuf:"bytes,30,opt,name=commission_usd,json=commissionUsd,proto3" json:"commission_usd,omitempty"`
-	CommissionReportingCurrency       string                              `protobuf:"bytes,31,opt,name=commission_reporting_currency,json=commissionReportingCurrency,proto3" json:"commission_reporting_currency,omitempty"`
-	Roi                               string                              `protobuf:"bytes,32,opt,name=roi,proto3" json:"roi,omitempty"` // percentage
+	state                             protoimpl.MessageState `protogen:"open.v1"`
+	UserId                            int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Country                           string                 `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
+	AffiliateId                       int64                  `protobuf:"varint,3,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
+	AffiliateName                     string                 `protobuf:"bytes,4,opt,name=affiliate_name,json=affiliateName,proto3" json:"affiliate_name,omitempty"`
+	AffiliateCompanyName              string                 `protobuf:"bytes,5,opt,name=affiliate_company_name,json=affiliateCompanyName,proto3" json:"affiliate_company_name,omitempty"`
+	ReportingCurrency                 string                 `protobuf:"bytes,6,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	CampaignUrl                       string                 `protobuf:"bytes,7,opt,name=campaign_url,json=campaignUrl,proto3" json:"campaign_url,omitempty"`
+	RegisteredAt                      *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
+	FtdAt                             *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=ftd_at,json=ftdAt,proto3" json:"ftd_at,omitempty"`
+	FtdAmountUsd                      string                 `protobuf:"bytes,10,opt,name=ftd_amount_usd,json=ftdAmountUsd,proto3" json:"ftd_amount_usd,omitempty"`
+	FtdAmountReportingCurrency        string                 `protobuf:"bytes,11,opt,name=ftd_amount_reporting_currency,json=ftdAmountReportingCurrency,proto3" json:"ftd_amount_reporting_currency,omitempty"`
+	DepositCount                      int32                  `protobuf:"varint,12,opt,name=deposit_count,json=depositCount,proto3" json:"deposit_count,omitempty"`
+	DepositAmountUsd                  string                 `protobuf:"bytes,13,opt,name=deposit_amount_usd,json=depositAmountUsd,proto3" json:"deposit_amount_usd,omitempty"`
+	DepositAmountReportingCurrency    string                 `protobuf:"bytes,14,opt,name=deposit_amount_reporting_currency,json=depositAmountReportingCurrency,proto3" json:"deposit_amount_reporting_currency,omitempty"`
+	WithdrawalCount                   int32                  `protobuf:"varint,15,opt,name=withdrawal_count,json=withdrawalCount,proto3" json:"withdrawal_count,omitempty"`
+	WithdrawalAmountUsd               string                 `protobuf:"bytes,16,opt,name=withdrawal_amount_usd,json=withdrawalAmountUsd,proto3" json:"withdrawal_amount_usd,omitempty"`
+	WithdrawalAmountReportingCurrency string                 `protobuf:"bytes,17,opt,name=withdrawal_amount_reporting_currency,json=withdrawalAmountReportingCurrency,proto3" json:"withdrawal_amount_reporting_currency,omitempty"`
+	NetDepositAmountUsd               string                 `protobuf:"bytes,18,opt,name=net_deposit_amount_usd,json=netDepositAmountUsd,proto3" json:"net_deposit_amount_usd,omitempty"`                                             // deposit_amount - withdrawal_amount
+	NetDepositAmountReportingCurrency string                 `protobuf:"bytes,19,opt,name=net_deposit_amount_reporting_currency,json=netDepositAmountReportingCurrency,proto3" json:"net_deposit_amount_reporting_currency,omitempty"` // deposit_amount - withdrawal_amount
+	BetCount                          int32                  `protobuf:"varint,20,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	BetAmountUsd                      string                 `protobuf:"bytes,21,opt,name=bet_amount_usd,json=betAmountUsd,proto3" json:"bet_amount_usd,omitempty"`
+	BetAmountReportingCurrency        string                 `protobuf:"bytes,22,opt,name=bet_amount_reporting_currency,json=betAmountReportingCurrency,proto3" json:"bet_amount_reporting_currency,omitempty"`
+	WinAmountUsd                      string                 `protobuf:"bytes,23,opt,name=win_amount_usd,json=winAmountUsd,proto3" json:"win_amount_usd,omitempty"`
+	WinAmountReportingCurrency        string                 `protobuf:"bytes,24,opt,name=win_amount_reporting_currency,json=winAmountReportingCurrency,proto3" json:"win_amount_reporting_currency,omitempty"`
+	GgrUsd                            string                 `protobuf:"bytes,25,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
+	GgrReportingCurrency              string                 `protobuf:"bytes,26,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
+	NgrUsd                            string                 `protobuf:"bytes,27,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
+	NgrReportingCurrency              string                 `protobuf:"bytes,28,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
+	CommissionUsd                     string                 `protobuf:"bytes,29,opt,name=commission_usd,json=commissionUsd,proto3" json:"commission_usd,omitempty"`
+	CommissionReportingCurrency       string                 `protobuf:"bytes,30,opt,name=commission_reporting_currency,json=commissionReportingCurrency,proto3" json:"commission_reporting_currency,omitempty"`
+	Roi                               string                 `protobuf:"bytes,31,opt,name=roi,proto3" json:"roi,omitempty"` // percentage, ngr / commission
 	unknownFields                     protoimpl.UnknownFields
 	sizeCache                         protoimpl.SizeCache
 }
@@ -3890,20 +3849,6 @@ func (x *ListUsersResponse_User) GetAffiliateName() string {
 func (x *ListUsersResponse_User) GetAffiliateCompanyName() string {
 	if x != nil {
 		return x.AffiliateCompanyName
-	}
-	return ""
-}
-
-func (x *ListUsersResponse_User) GetStatus() string {
-	if x != nil {
-		return x.Status
-	}
-	return ""
-}
-
-func (x *ListUsersResponse_User) GetStatusDetails() string {
-	if x != nil {
-		return x.StatusDetails
 	}
 	return ""
 }
@@ -3978,6 +3923,20 @@ func (x *ListUsersResponse_User) GetWithdrawalCount() int32 {
 	return 0
 }
 
+func (x *ListUsersResponse_User) GetWithdrawalAmountUsd() string {
+	if x != nil {
+		return x.WithdrawalAmountUsd
+	}
+	return ""
+}
+
+func (x *ListUsersResponse_User) GetWithdrawalAmountReportingCurrency() string {
+	if x != nil {
+		return x.WithdrawalAmountReportingCurrency
+	}
+	return ""
+}
+
 func (x *ListUsersResponse_User) GetNetDepositAmountUsd() string {
 	if x != nil {
 		return x.NetDepositAmountUsd
@@ -4025,13 +3984,6 @@ func (x *ListUsersResponse_User) GetWinAmountReportingCurrency() string {
 		return x.WinAmountReportingCurrency
 	}
 	return ""
-}
-
-func (x *ListUsersResponse_User) GetCommissionPlans() []*ListUsersResponse_CommissionPlan {
-	if x != nil {
-		return x.CommissionPlans
-	}
-	return nil
 }
 
 func (x *ListUsersResponse_User) GetGgrUsd() string {
@@ -4434,32 +4386,26 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\auser_id\x18\x12 \x01(\x03R\x06userId\x124\n" +
 	"\x16retailer_operator_name\x18\x13 \x01(\tR\x14retailerOperatorName\x122\n" +
 	"\x15company_operator_name\x18\x14 \x01(\tR\x13companyOperatorName\x12#\n" +
-	"\roperator_name\x18\x15 \x01(\tR\foperatorName\"\x98\b\n" +
-	"\x10ListUsersRequest\x12.\n" +
-	"\x13commission_plan_ids\x18\x01 \x03(\x03R\x11commissionPlanIds\x12\x1c\n" +
-	"\tcountries\x18\x02 \x03(\tR\tcountries\x12*\n" +
-	"\x0estatus_details\x18\x03 \x01(\tH\x00R\rstatusDetails\x88\x01\x01\x12\x19\n" +
-	"\x05brand\x18\x04 \x01(\tH\x01R\x05brand\x88\x01\x01\x12@\n" +
-	"\x0eftd_start_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\fftdStartTime\x12<\n" +
-	"\fftd_end_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
-	"ftdEndTime\x12#\n" +
-	"\raffiliate_ids\x18\a \x03(\x03R\faffiliateIds\x12R\n" +
-	"\x17registration_start_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\x15registrationStartTime\x12N\n" +
-	"\x15registration_end_time\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x13registrationEndTime\x12T\n" +
-	"\x18qualification_start_time\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.TimestampR\x16qualificationStartTime\x12P\n" +
-	"\x16qualification_end_time\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\x14qualificationEndTime\x12\x17\n" +
-	"\x04page\x18\f \x01(\x05H\x02R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\r \x01(\x05H\x03R\bpageSize\x88\x01\x01\x12*\n" +
-	"\x11initiator_user_id\x18\x0e \x01(\x03R\x0finitiatorUserId\x12*\n" +
-	"\x11initiator_role_id\x18\x0f \x01(\x03R\x0finitiatorRoleId\x12Y\n" +
-	"\x1ainitiator_operator_context\x18\x10 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12\\\n" +
-	"\x18operator_context_filters\x18\x11 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\x11\n" +
-	"\x0f_status_detailsB\b\n" +
-	"\x06_brandB\a\n" +
+	"\roperator_name\x18\x15 \x01(\tR\foperatorName\"\xf0\x05\n" +
+	"\x10ListUsersRequest\x12\x1c\n" +
+	"\tcountries\x18\x01 \x03(\tR\tcountries\x12@\n" +
+	"\x0eftd_start_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\fftdStartTime\x12<\n" +
+	"\fftd_end_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
+	"ftdEndTime\x12&\n" +
+	"\faffiliate_id\x18\x04 \x01(\x03H\x00R\vaffiliateId\x88\x01\x01\x12R\n" +
+	"\x17registration_start_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\x15registrationStartTime\x12N\n" +
+	"\x15registration_end_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x13registrationEndTime\x12\x17\n" +
+	"\x04page\x18\a \x01(\x05H\x01R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\b \x01(\x05H\x02R\bpageSize\x88\x01\x01\x12*\n" +
+	"\x11initiator_user_id\x18\t \x01(\x03R\x0finitiatorUserId\x12*\n" +
+	"\x11initiator_role_id\x18\n" +
+	" \x01(\x03R\x0finitiatorRoleId\x12Y\n" +
+	"\x1ainitiator_operator_context\x18\v \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12\\\n" +
+	"\x18operator_context_filters\x18\f \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\x0f\n" +
+	"\r_affiliate_idB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xff\r\n" +
+	"_page_size\"\xde\r\n" +
 	"\x11ListUsersResponse\x12F\n" +
 	"\x05users\x18\x01 \x03(\v20.api.affiliate.service.v1.ListUsersResponse.UserR\x05users\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
@@ -4467,41 +4413,40 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1ap\n" +
 	"\x0eCommissionPlan\x12,\n" +
 	"\x12commission_plan_id\x18\x01 \x01(\x03R\x10commissionPlanId\x120\n" +
-	"\x14commission_plan_name\x18\x02 \x01(\tR\x12commissionPlanName\x1a\xe8\v\n" +
+	"\x14commission_plan_name\x18\x02 \x01(\tR\x12commissionPlanName\x1a\xc7\v\n" +
 	"\x04User\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x18\n" +
 	"\acountry\x18\x02 \x01(\tR\acountry\x12!\n" +
 	"\faffiliate_id\x18\x03 \x01(\x03R\vaffiliateId\x12%\n" +
 	"\x0eaffiliate_name\x18\x04 \x01(\tR\raffiliateName\x124\n" +
-	"\x16affiliate_company_name\x18\x05 \x01(\tR\x14affiliateCompanyName\x12\x16\n" +
-	"\x06status\x18\x06 \x01(\tR\x06status\x12%\n" +
-	"\x0estatus_details\x18\a \x01(\tR\rstatusDetails\x12-\n" +
-	"\x12reporting_currency\x18\b \x01(\tR\x11reportingCurrency\x12!\n" +
-	"\fcampaign_url\x18\t \x01(\tR\vcampaignUrl\x12?\n" +
-	"\rregistered_at\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\x121\n" +
-	"\x06ftd_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\x05ftdAt\x12$\n" +
-	"\x0eftd_amount_usd\x18\f \x01(\tR\fftdAmountUsd\x12A\n" +
-	"\x1dftd_amount_reporting_currency\x18\r \x01(\tR\x1aftdAmountReportingCurrency\x12#\n" +
-	"\rdeposit_count\x18\x0e \x01(\x05R\fdepositCount\x12,\n" +
-	"\x12deposit_amount_usd\x18\x0f \x01(\tR\x10depositAmountUsd\x12I\n" +
-	"!deposit_amount_reporting_currency\x18\x10 \x01(\tR\x1edepositAmountReportingCurrency\x12)\n" +
-	"\x10withdrawal_count\x18\x11 \x01(\x05R\x0fwithdrawalCount\x123\n" +
+	"\x16affiliate_company_name\x18\x05 \x01(\tR\x14affiliateCompanyName\x12-\n" +
+	"\x12reporting_currency\x18\x06 \x01(\tR\x11reportingCurrency\x12!\n" +
+	"\fcampaign_url\x18\a \x01(\tR\vcampaignUrl\x12?\n" +
+	"\rregistered_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\fregisteredAt\x121\n" +
+	"\x06ftd_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x05ftdAt\x12$\n" +
+	"\x0eftd_amount_usd\x18\n" +
+	" \x01(\tR\fftdAmountUsd\x12A\n" +
+	"\x1dftd_amount_reporting_currency\x18\v \x01(\tR\x1aftdAmountReportingCurrency\x12#\n" +
+	"\rdeposit_count\x18\f \x01(\x05R\fdepositCount\x12,\n" +
+	"\x12deposit_amount_usd\x18\r \x01(\tR\x10depositAmountUsd\x12I\n" +
+	"!deposit_amount_reporting_currency\x18\x0e \x01(\tR\x1edepositAmountReportingCurrency\x12)\n" +
+	"\x10withdrawal_count\x18\x0f \x01(\x05R\x0fwithdrawalCount\x122\n" +
+	"\x15withdrawal_amount_usd\x18\x10 \x01(\tR\x13withdrawalAmountUsd\x12O\n" +
+	"$withdrawal_amount_reporting_currency\x18\x11 \x01(\tR!withdrawalAmountReportingCurrency\x123\n" +
 	"\x16net_deposit_amount_usd\x18\x12 \x01(\tR\x13netDepositAmountUsd\x12P\n" +
 	"%net_deposit_amount_reporting_currency\x18\x13 \x01(\tR!netDepositAmountReportingCurrency\x12\x1b\n" +
 	"\tbet_count\x18\x14 \x01(\x05R\bbetCount\x12$\n" +
 	"\x0ebet_amount_usd\x18\x15 \x01(\tR\fbetAmountUsd\x12A\n" +
 	"\x1dbet_amount_reporting_currency\x18\x16 \x01(\tR\x1abetAmountReportingCurrency\x12$\n" +
 	"\x0ewin_amount_usd\x18\x17 \x01(\tR\fwinAmountUsd\x12A\n" +
-	"\x1dwin_amount_reporting_currency\x18\x18 \x01(\tR\x1awinAmountReportingCurrency\x12e\n" +
-	"\x10commission_plans\x18\x19 \x03(\v2:.api.affiliate.service.v1.ListUsersResponse.CommissionPlanR\x0fcommissionPlans\x12\x17\n" +
-	"\aggr_usd\x18\x1a \x01(\tR\x06ggrUsd\x124\n" +
-	"\x16ggr_reporting_currency\x18\x1b \x01(\tR\x14ggrReportingCurrency\x12\x17\n" +
-	"\angr_usd\x18\x1c \x01(\tR\x06ngrUsd\x124\n" +
-	"\x16ngr_reporting_currency\x18\x1d \x01(\tR\x14ngrReportingCurrency\x12%\n" +
-	"\x0ecommission_usd\x18\x1e \x01(\tR\rcommissionUsd\x12B\n" +
-	"\x1dcommission_reporting_currency\x18\x1f \x01(\tR\x1bcommissionReportingCurrency\x12\x10\n" +
-	"\x03roi\x18  \x01(\tR\x03roi2\xbc\x11\n" +
+	"\x1dwin_amount_reporting_currency\x18\x18 \x01(\tR\x1awinAmountReportingCurrency\x12\x17\n" +
+	"\aggr_usd\x18\x19 \x01(\tR\x06ggrUsd\x124\n" +
+	"\x16ggr_reporting_currency\x18\x1a \x01(\tR\x14ggrReportingCurrency\x12\x17\n" +
+	"\angr_usd\x18\x1b \x01(\tR\x06ngrUsd\x124\n" +
+	"\x16ngr_reporting_currency\x18\x1c \x01(\tR\x14ngrReportingCurrency\x12%\n" +
+	"\x0ecommission_usd\x18\x1d \x01(\tR\rcommissionUsd\x12B\n" +
+	"\x1dcommission_reporting_currency\x18\x1e \x01(\tR\x1bcommissionReportingCurrency\x12\x10\n" +
+	"\x03roi\x18\x1f \x01(\tR\x03roi2\xbc\x11\n" +
 	"\tAffiliate\x12\x87\x01\n" +
 	"\x14CreateCommissionPlan\x125.api.affiliate.service.v1.CreateCommissionPlanRequest\x1a6.api.affiliate.service.v1.CreateCommissionPlanResponse\"\x00\x12\x87\x01\n" +
 	"\x14UpdateCommissionPlan\x125.api.affiliate.service.v1.UpdateCommissionPlanRequest\x1a6.api.affiliate.service.v1.UpdateCommissionPlanResponse\"\x00\x12~\n" +
@@ -4656,60 +4601,57 @@ var file_affiliate_service_v1_affiliate_proto_depIdxs = []int32{
 	51, // 49: api.affiliate.service.v1.ListUsersRequest.ftd_end_time:type_name -> google.protobuf.Timestamp
 	51, // 50: api.affiliate.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
 	51, // 51: api.affiliate.service.v1.ListUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
-	51, // 52: api.affiliate.service.v1.ListUsersRequest.qualification_start_time:type_name -> google.protobuf.Timestamp
-	51, // 53: api.affiliate.service.v1.ListUsersRequest.qualification_end_time:type_name -> google.protobuf.Timestamp
-	49, // 54: api.affiliate.service.v1.ListUsersRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	50, // 55: api.affiliate.service.v1.ListUsersRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	48, // 56: api.affiliate.service.v1.ListUsersResponse.users:type_name -> api.affiliate.service.v1.ListUsersResponse.User
-	14, // 57: api.affiliate.service.v1.CreateCampaignRequest.Campaign.channel_config:type_name -> api.affiliate.service.v1.ChannelConfig
-	12, // 58: api.affiliate.service.v1.ListCampaignsResponse.CampaignInfo.campaign:type_name -> api.affiliate.service.v1.Campaign
-	51, // 59: api.affiliate.service.v1.ListEventsResponse.Event.created_at:type_name -> google.protobuf.Timestamp
-	45, // 60: api.affiliate.service.v1.ListEventsResponse.Event.commission_plans:type_name -> api.affiliate.service.v1.ListEventsResponse.Event.CommissionPlan
-	51, // 61: api.affiliate.service.v1.ListCommissionsResponse.Commission.created_at:type_name -> google.protobuf.Timestamp
-	51, // 62: api.affiliate.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
-	51, // 63: api.affiliate.service.v1.ListUsersResponse.User.ftd_at:type_name -> google.protobuf.Timestamp
-	47, // 64: api.affiliate.service.v1.ListUsersResponse.User.commission_plans:type_name -> api.affiliate.service.v1.ListUsersResponse.CommissionPlan
-	52, // 65: api.affiliate.service.v1.Affiliate.CreateCommissionPlan:input_type -> api.affiliate.service.v1.CreateCommissionPlanRequest
-	53, // 66: api.affiliate.service.v1.Affiliate.UpdateCommissionPlan:input_type -> api.affiliate.service.v1.UpdateCommissionPlanRequest
-	54, // 67: api.affiliate.service.v1.Affiliate.GetCommissionPlan:input_type -> api.affiliate.service.v1.GetCommissionPlanRequest
-	55, // 68: api.affiliate.service.v1.Affiliate.ListCommissionPlans:input_type -> api.affiliate.service.v1.ListCommissionPlansRequest
-	56, // 69: api.affiliate.service.v1.Affiliate.DeleteCommissionPlan:input_type -> api.affiliate.service.v1.DeleteCommissionPlanRequest
-	57, // 70: api.affiliate.service.v1.Affiliate.ListAllCommissionPlans:input_type -> api.affiliate.service.v1.ListAllCommissionPlansRequest
-	2,  // 71: api.affiliate.service.v1.Affiliate.CreateAffiliate:input_type -> api.affiliate.service.v1.CreateAffiliateRequest
-	4,  // 72: api.affiliate.service.v1.Affiliate.UpdateAffiliate:input_type -> api.affiliate.service.v1.UpdateAffiliateRequest
-	6,  // 73: api.affiliate.service.v1.Affiliate.GetAffiliate:input_type -> api.affiliate.service.v1.GetAffiliateRequest
-	8,  // 74: api.affiliate.service.v1.Affiliate.ListAffiliates:input_type -> api.affiliate.service.v1.ListAffiliatesRequest
-	10, // 75: api.affiliate.service.v1.Affiliate.DeleteAffiliate:input_type -> api.affiliate.service.v1.DeleteAffiliateRequest
-	17, // 76: api.affiliate.service.v1.Affiliate.CreateCampaign:input_type -> api.affiliate.service.v1.CreateCampaignRequest
-	19, // 77: api.affiliate.service.v1.Affiliate.UpdateCampaign:input_type -> api.affiliate.service.v1.UpdateCampaignRequest
-	21, // 78: api.affiliate.service.v1.Affiliate.ListCampaigns:input_type -> api.affiliate.service.v1.ListCampaignsRequest
-	23, // 79: api.affiliate.service.v1.Affiliate.DeleteCampaign:input_type -> api.affiliate.service.v1.DeleteCampaignRequest
-	25, // 80: api.affiliate.service.v1.Affiliate.ListEvents:input_type -> api.affiliate.service.v1.ListEventsRequest
-	27, // 81: api.affiliate.service.v1.Affiliate.ListCommissions:input_type -> api.affiliate.service.v1.ListCommissionsRequest
-	29, // 82: api.affiliate.service.v1.Affiliate.ListUsers:input_type -> api.affiliate.service.v1.ListUsersRequest
-	58, // 83: api.affiliate.service.v1.Affiliate.CreateCommissionPlan:output_type -> api.affiliate.service.v1.CreateCommissionPlanResponse
-	59, // 84: api.affiliate.service.v1.Affiliate.UpdateCommissionPlan:output_type -> api.affiliate.service.v1.UpdateCommissionPlanResponse
-	60, // 85: api.affiliate.service.v1.Affiliate.GetCommissionPlan:output_type -> api.affiliate.service.v1.GetCommissionPlanResponse
-	61, // 86: api.affiliate.service.v1.Affiliate.ListCommissionPlans:output_type -> api.affiliate.service.v1.ListCommissionPlansResponse
-	62, // 87: api.affiliate.service.v1.Affiliate.DeleteCommissionPlan:output_type -> api.affiliate.service.v1.DeleteCommissionPlanResponse
-	63, // 88: api.affiliate.service.v1.Affiliate.ListAllCommissionPlans:output_type -> api.affiliate.service.v1.ListAllCommissionPlansResponse
-	3,  // 89: api.affiliate.service.v1.Affiliate.CreateAffiliate:output_type -> api.affiliate.service.v1.CreateAffiliateResponse
-	5,  // 90: api.affiliate.service.v1.Affiliate.UpdateAffiliate:output_type -> api.affiliate.service.v1.UpdateAffiliateResponse
-	7,  // 91: api.affiliate.service.v1.Affiliate.GetAffiliate:output_type -> api.affiliate.service.v1.GetAffiliateResponse
-	9,  // 92: api.affiliate.service.v1.Affiliate.ListAffiliates:output_type -> api.affiliate.service.v1.ListAffiliatesResponse
-	11, // 93: api.affiliate.service.v1.Affiliate.DeleteAffiliate:output_type -> api.affiliate.service.v1.DeleteAffiliateResponse
-	18, // 94: api.affiliate.service.v1.Affiliate.CreateCampaign:output_type -> api.affiliate.service.v1.CreateCampaignResponse
-	20, // 95: api.affiliate.service.v1.Affiliate.UpdateCampaign:output_type -> api.affiliate.service.v1.UpdateCampaignResponse
-	22, // 96: api.affiliate.service.v1.Affiliate.ListCampaigns:output_type -> api.affiliate.service.v1.ListCampaignsResponse
-	24, // 97: api.affiliate.service.v1.Affiliate.DeleteCampaign:output_type -> api.affiliate.service.v1.DeleteCampaignResponse
-	26, // 98: api.affiliate.service.v1.Affiliate.ListEvents:output_type -> api.affiliate.service.v1.ListEventsResponse
-	28, // 99: api.affiliate.service.v1.Affiliate.ListCommissions:output_type -> api.affiliate.service.v1.ListCommissionsResponse
-	30, // 100: api.affiliate.service.v1.Affiliate.ListUsers:output_type -> api.affiliate.service.v1.ListUsersResponse
-	83, // [83:101] is the sub-list for method output_type
-	65, // [65:83] is the sub-list for method input_type
-	65, // [65:65] is the sub-list for extension type_name
-	65, // [65:65] is the sub-list for extension extendee
-	0,  // [0:65] is the sub-list for field type_name
+	49, // 52: api.affiliate.service.v1.ListUsersRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	50, // 53: api.affiliate.service.v1.ListUsersRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	48, // 54: api.affiliate.service.v1.ListUsersResponse.users:type_name -> api.affiliate.service.v1.ListUsersResponse.User
+	14, // 55: api.affiliate.service.v1.CreateCampaignRequest.Campaign.channel_config:type_name -> api.affiliate.service.v1.ChannelConfig
+	12, // 56: api.affiliate.service.v1.ListCampaignsResponse.CampaignInfo.campaign:type_name -> api.affiliate.service.v1.Campaign
+	51, // 57: api.affiliate.service.v1.ListEventsResponse.Event.created_at:type_name -> google.protobuf.Timestamp
+	45, // 58: api.affiliate.service.v1.ListEventsResponse.Event.commission_plans:type_name -> api.affiliate.service.v1.ListEventsResponse.Event.CommissionPlan
+	51, // 59: api.affiliate.service.v1.ListCommissionsResponse.Commission.created_at:type_name -> google.protobuf.Timestamp
+	51, // 60: api.affiliate.service.v1.ListUsersResponse.User.registered_at:type_name -> google.protobuf.Timestamp
+	51, // 61: api.affiliate.service.v1.ListUsersResponse.User.ftd_at:type_name -> google.protobuf.Timestamp
+	52, // 62: api.affiliate.service.v1.Affiliate.CreateCommissionPlan:input_type -> api.affiliate.service.v1.CreateCommissionPlanRequest
+	53, // 63: api.affiliate.service.v1.Affiliate.UpdateCommissionPlan:input_type -> api.affiliate.service.v1.UpdateCommissionPlanRequest
+	54, // 64: api.affiliate.service.v1.Affiliate.GetCommissionPlan:input_type -> api.affiliate.service.v1.GetCommissionPlanRequest
+	55, // 65: api.affiliate.service.v1.Affiliate.ListCommissionPlans:input_type -> api.affiliate.service.v1.ListCommissionPlansRequest
+	56, // 66: api.affiliate.service.v1.Affiliate.DeleteCommissionPlan:input_type -> api.affiliate.service.v1.DeleteCommissionPlanRequest
+	57, // 67: api.affiliate.service.v1.Affiliate.ListAllCommissionPlans:input_type -> api.affiliate.service.v1.ListAllCommissionPlansRequest
+	2,  // 68: api.affiliate.service.v1.Affiliate.CreateAffiliate:input_type -> api.affiliate.service.v1.CreateAffiliateRequest
+	4,  // 69: api.affiliate.service.v1.Affiliate.UpdateAffiliate:input_type -> api.affiliate.service.v1.UpdateAffiliateRequest
+	6,  // 70: api.affiliate.service.v1.Affiliate.GetAffiliate:input_type -> api.affiliate.service.v1.GetAffiliateRequest
+	8,  // 71: api.affiliate.service.v1.Affiliate.ListAffiliates:input_type -> api.affiliate.service.v1.ListAffiliatesRequest
+	10, // 72: api.affiliate.service.v1.Affiliate.DeleteAffiliate:input_type -> api.affiliate.service.v1.DeleteAffiliateRequest
+	17, // 73: api.affiliate.service.v1.Affiliate.CreateCampaign:input_type -> api.affiliate.service.v1.CreateCampaignRequest
+	19, // 74: api.affiliate.service.v1.Affiliate.UpdateCampaign:input_type -> api.affiliate.service.v1.UpdateCampaignRequest
+	21, // 75: api.affiliate.service.v1.Affiliate.ListCampaigns:input_type -> api.affiliate.service.v1.ListCampaignsRequest
+	23, // 76: api.affiliate.service.v1.Affiliate.DeleteCampaign:input_type -> api.affiliate.service.v1.DeleteCampaignRequest
+	25, // 77: api.affiliate.service.v1.Affiliate.ListEvents:input_type -> api.affiliate.service.v1.ListEventsRequest
+	27, // 78: api.affiliate.service.v1.Affiliate.ListCommissions:input_type -> api.affiliate.service.v1.ListCommissionsRequest
+	29, // 79: api.affiliate.service.v1.Affiliate.ListUsers:input_type -> api.affiliate.service.v1.ListUsersRequest
+	58, // 80: api.affiliate.service.v1.Affiliate.CreateCommissionPlan:output_type -> api.affiliate.service.v1.CreateCommissionPlanResponse
+	59, // 81: api.affiliate.service.v1.Affiliate.UpdateCommissionPlan:output_type -> api.affiliate.service.v1.UpdateCommissionPlanResponse
+	60, // 82: api.affiliate.service.v1.Affiliate.GetCommissionPlan:output_type -> api.affiliate.service.v1.GetCommissionPlanResponse
+	61, // 83: api.affiliate.service.v1.Affiliate.ListCommissionPlans:output_type -> api.affiliate.service.v1.ListCommissionPlansResponse
+	62, // 84: api.affiliate.service.v1.Affiliate.DeleteCommissionPlan:output_type -> api.affiliate.service.v1.DeleteCommissionPlanResponse
+	63, // 85: api.affiliate.service.v1.Affiliate.ListAllCommissionPlans:output_type -> api.affiliate.service.v1.ListAllCommissionPlansResponse
+	3,  // 86: api.affiliate.service.v1.Affiliate.CreateAffiliate:output_type -> api.affiliate.service.v1.CreateAffiliateResponse
+	5,  // 87: api.affiliate.service.v1.Affiliate.UpdateAffiliate:output_type -> api.affiliate.service.v1.UpdateAffiliateResponse
+	7,  // 88: api.affiliate.service.v1.Affiliate.GetAffiliate:output_type -> api.affiliate.service.v1.GetAffiliateResponse
+	9,  // 89: api.affiliate.service.v1.Affiliate.ListAffiliates:output_type -> api.affiliate.service.v1.ListAffiliatesResponse
+	11, // 90: api.affiliate.service.v1.Affiliate.DeleteAffiliate:output_type -> api.affiliate.service.v1.DeleteAffiliateResponse
+	18, // 91: api.affiliate.service.v1.Affiliate.CreateCampaign:output_type -> api.affiliate.service.v1.CreateCampaignResponse
+	20, // 92: api.affiliate.service.v1.Affiliate.UpdateCampaign:output_type -> api.affiliate.service.v1.UpdateCampaignResponse
+	22, // 93: api.affiliate.service.v1.Affiliate.ListCampaigns:output_type -> api.affiliate.service.v1.ListCampaignsResponse
+	24, // 94: api.affiliate.service.v1.Affiliate.DeleteCampaign:output_type -> api.affiliate.service.v1.DeleteCampaignResponse
+	26, // 95: api.affiliate.service.v1.Affiliate.ListEvents:output_type -> api.affiliate.service.v1.ListEventsResponse
+	28, // 96: api.affiliate.service.v1.Affiliate.ListCommissions:output_type -> api.affiliate.service.v1.ListCommissionsResponse
+	30, // 97: api.affiliate.service.v1.Affiliate.ListUsers:output_type -> api.affiliate.service.v1.ListUsersResponse
+	80, // [80:98] is the sub-list for method output_type
+	62, // [62:80] is the sub-list for method input_type
+	62, // [62:62] is the sub-list for extension type_name
+	62, // [62:62] is the sub-list for extension extendee
+	0,  // [0:62] is the sub-list for field type_name
 }
 
 func init() { file_affiliate_service_v1_affiliate_proto_init() }

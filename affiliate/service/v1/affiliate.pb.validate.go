@@ -4766,64 +4766,6 @@ func (m *ListUsersRequest) validate(all bool) error {
 		}
 	}
 
-	if all {
-		switch v := interface{}(m.GetQualificationStartTime()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListUsersRequestValidationError{
-					field:  "QualificationStartTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ListUsersRequestValidationError{
-					field:  "QualificationStartTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetQualificationStartTime()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ListUsersRequestValidationError{
-				field:  "QualificationStartTime",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if all {
-		switch v := interface{}(m.GetQualificationEndTime()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ListUsersRequestValidationError{
-					field:  "QualificationEndTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ListUsersRequestValidationError{
-					field:  "QualificationEndTime",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetQualificationEndTime()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ListUsersRequestValidationError{
-				field:  "QualificationEndTime",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	// no validation rules for InitiatorUserId
 
 	// no validation rules for InitiatorRoleId
@@ -4886,12 +4828,8 @@ func (m *ListUsersRequest) validate(all bool) error {
 		}
 	}
 
-	if m.StatusDetails != nil {
-		// no validation rules for StatusDetails
-	}
-
-	if m.Brand != nil {
-		// no validation rules for Brand
+	if m.AffiliateId != nil {
+		// no validation rules for AffiliateId
 	}
 
 	if m.Page != nil {
@@ -7254,10 +7192,6 @@ func (m *ListUsersResponse_User) validate(all bool) error {
 
 	// no validation rules for AffiliateCompanyName
 
-	// no validation rules for Status
-
-	// no validation rules for StatusDetails
-
 	// no validation rules for ReportingCurrency
 
 	// no validation rules for CampaignUrl
@@ -7332,6 +7266,10 @@ func (m *ListUsersResponse_User) validate(all bool) error {
 
 	// no validation rules for WithdrawalCount
 
+	// no validation rules for WithdrawalAmountUsd
+
+	// no validation rules for WithdrawalAmountReportingCurrency
+
 	// no validation rules for NetDepositAmountUsd
 
 	// no validation rules for NetDepositAmountReportingCurrency
@@ -7345,40 +7283,6 @@ func (m *ListUsersResponse_User) validate(all bool) error {
 	// no validation rules for WinAmountUsd
 
 	// no validation rules for WinAmountReportingCurrency
-
-	for idx, item := range m.GetCommissionPlans() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListUsersResponse_UserValidationError{
-						field:  fmt.Sprintf("CommissionPlans[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ListUsersResponse_UserValidationError{
-						field:  fmt.Sprintf("CommissionPlans[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ListUsersResponse_UserValidationError{
-					field:  fmt.Sprintf("CommissionPlans[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
 
 	// no validation rules for GgrUsd
 
