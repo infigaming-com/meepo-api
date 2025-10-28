@@ -53,7 +53,7 @@ type BackofficeUserHTTPServer interface {
 	GetUserTags(context.Context, *GetUserTagsRequest) (*GetUserTagsResponse, error)
 	ListUserComments(context.Context, *ListUserCommentsRequest) (*ListUserCommentsResponse, error)
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
-	PreLaunchCheck(context.Context, *PreLaunchCheckRequest) (*v1.PreLaunchCheckResponse, error)
+	PreLaunchCheck(context.Context, *v1.PreLaunchCheckRequest) (*v1.PreLaunchCheckResponse, error)
 	SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error)
 	// SetOperatorTags SetOperatorTags sets or updates the tags for an operator.
 	SetOperatorTags(context.Context, *SetOperatorTagsRequest) (*SetOperatorTagsResponse, error)
@@ -465,7 +465,7 @@ func _BackofficeUser_UserIdentityList0_HTTP_Handler(srv BackofficeUserHTTPServer
 
 func _BackofficeUser_PreLaunchCheck0_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in PreLaunchCheckRequest
+		var in v1.PreLaunchCheckRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -474,7 +474,7 @@ func _BackofficeUser_PreLaunchCheck0_HTTP_Handler(srv BackofficeUserHTTPServer) 
 		}
 		http.SetOperation(ctx, OperationBackofficeUserPreLaunchCheck)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.PreLaunchCheck(ctx, req.(*PreLaunchCheckRequest))
+			return srv.PreLaunchCheck(ctx, req.(*v1.PreLaunchCheckRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -496,7 +496,7 @@ type BackofficeUserHTTPClient interface {
 	GetUserTags(ctx context.Context, req *GetUserTagsRequest, opts ...http.CallOption) (rsp *GetUserTagsResponse, err error)
 	ListUserComments(ctx context.Context, req *ListUserCommentsRequest, opts ...http.CallOption) (rsp *ListUserCommentsResponse, err error)
 	ListUsers(ctx context.Context, req *ListUsersRequest, opts ...http.CallOption) (rsp *ListUsersResponse, err error)
-	PreLaunchCheck(ctx context.Context, req *PreLaunchCheckRequest, opts ...http.CallOption) (rsp *v1.PreLaunchCheckResponse, err error)
+	PreLaunchCheck(ctx context.Context, req *v1.PreLaunchCheckRequest, opts ...http.CallOption) (rsp *v1.PreLaunchCheckResponse, err error)
 	SendEmailVerificationCode(ctx context.Context, req *SendEmailVerificationCodeRequest, opts ...http.CallOption) (rsp *SendEmailVerificationCodeResponse, err error)
 	SetOperatorTags(ctx context.Context, req *SetOperatorTagsRequest, opts ...http.CallOption) (rsp *SetOperatorTagsResponse, err error)
 	SetOperatorTagsConfig(ctx context.Context, req *SetOperatorTagsConfigRequest, opts ...http.CallOption) (rsp *SetOperatorTagsConfigResponse, err error)
@@ -644,7 +644,7 @@ func (c *BackofficeUserHTTPClientImpl) ListUsers(ctx context.Context, in *ListUs
 	return &out, nil
 }
 
-func (c *BackofficeUserHTTPClientImpl) PreLaunchCheck(ctx context.Context, in *PreLaunchCheckRequest, opts ...http.CallOption) (*v1.PreLaunchCheckResponse, error) {
+func (c *BackofficeUserHTTPClientImpl) PreLaunchCheck(ctx context.Context, in *v1.PreLaunchCheckRequest, opts ...http.CallOption) (*v1.PreLaunchCheckResponse, error) {
 	var out v1.PreLaunchCheckResponse
 	pattern := "/v1/backoffice/user/operator/prelaunch/check"
 	path := binding.EncodeURL(pattern, in, false)

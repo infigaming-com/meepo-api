@@ -103,10 +103,10 @@ func (*AddWhiteLabelOperatorResponse) Descriptor() ([]byte, []int) {
 }
 
 type PreLaunchCheckRequest struct {
-	state           protoimpl.MessageState  `protogen:"open.v1"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *PreLaunchCheckRequest) Reset() {
@@ -139,9 +139,9 @@ func (*PreLaunchCheckRequest) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_operator_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *PreLaunchCheckRequest) GetOperatorContext() *common.OperatorContext {
+func (x *PreLaunchCheckRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.OperatorContext
+		return x.TargetOperatorContext
 	}
 	return nil
 }
@@ -205,9 +205,9 @@ const file_user_service_v1_operator_proto_rawDesc = "" +
 	"\x1euser/service/v1/operator.proto\x12\x13api.user.service.v1\x1a\x13common/common.proto\"2\n" +
 	"\x1cAddWhiteLabelOperatorRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\"\x1f\n" +
-	"\x1dAddWhiteLabelOperatorResponse\"_\n" +
-	"\x15PreLaunchCheckRequest\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"R\n" +
+	"\x1dAddWhiteLabelOperatorResponse\"l\n" +
+	"\x15PreLaunchCheckRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"R\n" +
 	"\x16PreLaunchCheckResponse\x12\x18\n" +
 	"\abalance\x18\x01 \x01(\tR\abalance\x12\x1e\n" +
 	"\n" +
@@ -239,7 +239,7 @@ var file_user_service_v1_operator_proto_goTypes = []any{
 	(*common.OperatorContext)(nil),        // 4: api.common.OperatorContext
 }
 var file_user_service_v1_operator_proto_depIdxs = []int32{
-	4, // 0: api.user.service.v1.PreLaunchCheckRequest.operator_context:type_name -> api.common.OperatorContext
+	4, // 0: api.user.service.v1.PreLaunchCheckRequest.target_operator_context:type_name -> api.common.OperatorContext
 	0, // 1: api.user.service.v1.Operator.AddWhiteLabelOperator:input_type -> api.user.service.v1.AddWhiteLabelOperatorRequest
 	2, // 2: api.user.service.v1.Operator.PreLaunchCheck:input_type -> api.user.service.v1.PreLaunchCheckRequest
 	1, // 3: api.user.service.v1.Operator.AddWhiteLabelOperator:output_type -> api.user.service.v1.AddWhiteLabelOperatorResponse

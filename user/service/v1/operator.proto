@@ -22,7 +22,7 @@ message AddWhiteLabelOperatorRequest {
 message AddWhiteLabelOperatorResponse {}
 
 message PreLaunchCheckRequest {
-	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 1;
 }
 
 message PreLaunchCheckResponse {
