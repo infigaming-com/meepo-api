@@ -382,3 +382,75 @@ func IsListCommissionsFailed(err error) bool {
 func ErrorListCommissionsFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_LIST_COMMISSIONS_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsUpdateCommissionFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_COMMISSION_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateCommissionFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_COMMISSION_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetCommissionFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_COMMISSION_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetCommissionFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_COMMISSION_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCommissionNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_COMMISSION_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorCommissionNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_COMMISSION_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListAffiliateUsersFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_AFFILIATE_USERS_FAILED.String() && e.Code == 500
+}
+
+func ErrorListAffiliateUsersFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_AFFILIATE_USERS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsProcessGameTransactionFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROCESS_GAME_TRANSACTION_FAILED.String() && e.Code == 500
+}
+
+func ErrorProcessGameTransactionFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROCESS_GAME_TRANSACTION_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsProcessGameStartFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROCESS_GAME_START_FAILED.String() && e.Code == 500
+}
+
+func ErrorProcessGameStartFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROCESS_GAME_START_FAILED.String(), fmt.Sprintf(format, args...))
+}

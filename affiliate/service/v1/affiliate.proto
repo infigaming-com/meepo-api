@@ -453,8 +453,8 @@ message ListUsersResponse {
         int32 withdrawal_count = 15;
         string withdrawal_amount_usd = 16;
         string withdrawal_amount_reporting_currency = 17;
-        string net_deposit_amount_usd = 18; // deposit_amount - withdrawal_amount
-        string net_deposit_amount_reporting_currency = 19; // deposit_amount - withdrawal_amount
+        string deposit_minus_withdrawal_amount_usd = 18; // deposit_amount - withdrawal_amount
+        string deposit_minus_withdrawal_amount_reporting_currency = 19; // deposit_amount - withdrawal_amount
         int32 bet_count = 20;
         string bet_amount_usd = 21;
         string bet_amount_reporting_currency = 22;

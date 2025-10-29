@@ -7161,9 +7161,9 @@ func (m *ListUsersResponse_User) validate(all bool) error {
 
 	// no validation rules for WithdrawalAmountReportingCurrency
 
-	// no validation rules for NetDepositAmountUsd
+	// no validation rules for DepositMinusWithdrawalAmountUsd
 
-	// no validation rules for NetDepositAmountReportingCurrency
+	// no validation rules for DepositMinusWithdrawalAmountReportingCurrency
 
 	// no validation rules for BetCount
 

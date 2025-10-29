@@ -6380,9 +6380,9 @@ components:
                     type: string
                 withdrawalAmountReportingCurrency:
                     type: string
-                netDepositAmountUsd:
+                depositMinusWithdrawalAmountUsd:
                     type: string
-                netDepositAmountReportingCurrency:
+                depositMinusWithdrawalAmountReportingCurrency:
                     type: string
                 betCount:
                     type: integer

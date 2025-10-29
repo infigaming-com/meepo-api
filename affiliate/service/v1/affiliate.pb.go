@@ -3700,40 +3700,40 @@ func (x *ListCommissionsResponse_Commission) GetOperatorName() string {
 }
 
 type ListUsersResponse_User struct {
-	state                             protoimpl.MessageState `protogen:"open.v1"`
-	UserId                            int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Country                           string                 `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
-	AffiliateId                       int64                  `protobuf:"varint,3,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
-	AffiliateName                     string                 `protobuf:"bytes,4,opt,name=affiliate_name,json=affiliateName,proto3" json:"affiliate_name,omitempty"`
-	AffiliateCompanyName              string                 `protobuf:"bytes,5,opt,name=affiliate_company_name,json=affiliateCompanyName,proto3" json:"affiliate_company_name,omitempty"`
-	ReportingCurrency                 string                 `protobuf:"bytes,6,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
-	CampaignUrl                       string                 `protobuf:"bytes,7,opt,name=campaign_url,json=campaignUrl,proto3" json:"campaign_url,omitempty"`
-	RegisteredAt                      *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
-	FtdAt                             *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=ftd_at,json=ftdAt,proto3" json:"ftd_at,omitempty"`
-	FtdAmountUsd                      string                 `protobuf:"bytes,10,opt,name=ftd_amount_usd,json=ftdAmountUsd,proto3" json:"ftd_amount_usd,omitempty"`
-	FtdAmountReportingCurrency        string                 `protobuf:"bytes,11,opt,name=ftd_amount_reporting_currency,json=ftdAmountReportingCurrency,proto3" json:"ftd_amount_reporting_currency,omitempty"`
-	DepositCount                      int32                  `protobuf:"varint,12,opt,name=deposit_count,json=depositCount,proto3" json:"deposit_count,omitempty"`
-	DepositAmountUsd                  string                 `protobuf:"bytes,13,opt,name=deposit_amount_usd,json=depositAmountUsd,proto3" json:"deposit_amount_usd,omitempty"`
-	DepositAmountReportingCurrency    string                 `protobuf:"bytes,14,opt,name=deposit_amount_reporting_currency,json=depositAmountReportingCurrency,proto3" json:"deposit_amount_reporting_currency,omitempty"`
-	WithdrawalCount                   int32                  `protobuf:"varint,15,opt,name=withdrawal_count,json=withdrawalCount,proto3" json:"withdrawal_count,omitempty"`
-	WithdrawalAmountUsd               string                 `protobuf:"bytes,16,opt,name=withdrawal_amount_usd,json=withdrawalAmountUsd,proto3" json:"withdrawal_amount_usd,omitempty"`
-	WithdrawalAmountReportingCurrency string                 `protobuf:"bytes,17,opt,name=withdrawal_amount_reporting_currency,json=withdrawalAmountReportingCurrency,proto3" json:"withdrawal_amount_reporting_currency,omitempty"`
-	NetDepositAmountUsd               string                 `protobuf:"bytes,18,opt,name=net_deposit_amount_usd,json=netDepositAmountUsd,proto3" json:"net_deposit_amount_usd,omitempty"`                                             // deposit_amount - withdrawal_amount
-	NetDepositAmountReportingCurrency string                 `protobuf:"bytes,19,opt,name=net_deposit_amount_reporting_currency,json=netDepositAmountReportingCurrency,proto3" json:"net_deposit_amount_reporting_currency,omitempty"` // deposit_amount - withdrawal_amount
-	BetCount                          int32                  `protobuf:"varint,20,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
-	BetAmountUsd                      string                 `protobuf:"bytes,21,opt,name=bet_amount_usd,json=betAmountUsd,proto3" json:"bet_amount_usd,omitempty"`
-	BetAmountReportingCurrency        string                 `protobuf:"bytes,22,opt,name=bet_amount_reporting_currency,json=betAmountReportingCurrency,proto3" json:"bet_amount_reporting_currency,omitempty"`
-	WinAmountUsd                      string                 `protobuf:"bytes,23,opt,name=win_amount_usd,json=winAmountUsd,proto3" json:"win_amount_usd,omitempty"`
-	WinAmountReportingCurrency        string                 `protobuf:"bytes,24,opt,name=win_amount_reporting_currency,json=winAmountReportingCurrency,proto3" json:"win_amount_reporting_currency,omitempty"`
-	GgrUsd                            string                 `protobuf:"bytes,25,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
-	GgrReportingCurrency              string                 `protobuf:"bytes,26,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
-	NgrUsd                            string                 `protobuf:"bytes,27,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
-	NgrReportingCurrency              string                 `protobuf:"bytes,28,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
-	CommissionUsd                     string                 `protobuf:"bytes,29,opt,name=commission_usd,json=commissionUsd,proto3" json:"commission_usd,omitempty"`
-	CommissionReportingCurrency       string                 `protobuf:"bytes,30,opt,name=commission_reporting_currency,json=commissionReportingCurrency,proto3" json:"commission_reporting_currency,omitempty"`
-	Roi                               string                 `protobuf:"bytes,31,opt,name=roi,proto3" json:"roi,omitempty"` // percentage, ngr / commission
-	unknownFields                     protoimpl.UnknownFields
-	sizeCache                         protoimpl.SizeCache
+	state                                         protoimpl.MessageState `protogen:"open.v1"`
+	UserId                                        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Country                                       string                 `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
+	AffiliateId                                   int64                  `protobuf:"varint,3,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
+	AffiliateName                                 string                 `protobuf:"bytes,4,opt,name=affiliate_name,json=affiliateName,proto3" json:"affiliate_name,omitempty"`
+	AffiliateCompanyName                          string                 `protobuf:"bytes,5,opt,name=affiliate_company_name,json=affiliateCompanyName,proto3" json:"affiliate_company_name,omitempty"`
+	ReportingCurrency                             string                 `protobuf:"bytes,6,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	CampaignUrl                                   string                 `protobuf:"bytes,7,opt,name=campaign_url,json=campaignUrl,proto3" json:"campaign_url,omitempty"`
+	RegisteredAt                                  *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
+	FtdAt                                         *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=ftd_at,json=ftdAt,proto3" json:"ftd_at,omitempty"`
+	FtdAmountUsd                                  string                 `protobuf:"bytes,10,opt,name=ftd_amount_usd,json=ftdAmountUsd,proto3" json:"ftd_amount_usd,omitempty"`
+	FtdAmountReportingCurrency                    string                 `protobuf:"bytes,11,opt,name=ftd_amount_reporting_currency,json=ftdAmountReportingCurrency,proto3" json:"ftd_amount_reporting_currency,omitempty"`
+	DepositCount                                  int32                  `protobuf:"varint,12,opt,name=deposit_count,json=depositCount,proto3" json:"deposit_count,omitempty"`
+	DepositAmountUsd                              string                 `protobuf:"bytes,13,opt,name=deposit_amount_usd,json=depositAmountUsd,proto3" json:"deposit_amount_usd,omitempty"`
+	DepositAmountReportingCurrency                string                 `protobuf:"bytes,14,opt,name=deposit_amount_reporting_currency,json=depositAmountReportingCurrency,proto3" json:"deposit_amount_reporting_currency,omitempty"`
+	WithdrawalCount                               int32                  `protobuf:"varint,15,opt,name=withdrawal_count,json=withdrawalCount,proto3" json:"withdrawal_count,omitempty"`
+	WithdrawalAmountUsd                           string                 `protobuf:"bytes,16,opt,name=withdrawal_amount_usd,json=withdrawalAmountUsd,proto3" json:"withdrawal_amount_usd,omitempty"`
+	WithdrawalAmountReportingCurrency             string                 `protobuf:"bytes,17,opt,name=withdrawal_amount_reporting_currency,json=withdrawalAmountReportingCurrency,proto3" json:"withdrawal_amount_reporting_currency,omitempty"`
+	DepositMinusWithdrawalAmountUsd               string                 `protobuf:"bytes,18,opt,name=deposit_minus_withdrawal_amount_usd,json=depositMinusWithdrawalAmountUsd,proto3" json:"deposit_minus_withdrawal_amount_usd,omitempty"`                                             // deposit_amount - withdrawal_amount
+	DepositMinusWithdrawalAmountReportingCurrency string                 `protobuf:"bytes,19,opt,name=deposit_minus_withdrawal_amount_reporting_currency,json=depositMinusWithdrawalAmountReportingCurrency,proto3" json:"deposit_minus_withdrawal_amount_reporting_currency,omitempty"` // deposit_amount - withdrawal_amount
+	BetCount                                      int32                  `protobuf:"varint,20,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"`
+	BetAmountUsd                                  string                 `protobuf:"bytes,21,opt,name=bet_amount_usd,json=betAmountUsd,proto3" json:"bet_amount_usd,omitempty"`
+	BetAmountReportingCurrency                    string                 `protobuf:"bytes,22,opt,name=bet_amount_reporting_currency,json=betAmountReportingCurrency,proto3" json:"bet_amount_reporting_currency,omitempty"`
+	WinAmountUsd                                  string                 `protobuf:"bytes,23,opt,name=win_amount_usd,json=winAmountUsd,proto3" json:"win_amount_usd,omitempty"`
+	WinAmountReportingCurrency                    string                 `protobuf:"bytes,24,opt,name=win_amount_reporting_currency,json=winAmountReportingCurrency,proto3" json:"win_amount_reporting_currency,omitempty"`
+	GgrUsd                                        string                 `protobuf:"bytes,25,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
+	GgrReportingCurrency                          string                 `protobuf:"bytes,26,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
+	NgrUsd                                        string                 `protobuf:"bytes,27,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
+	NgrReportingCurrency                          string                 `protobuf:"bytes,28,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
+	CommissionUsd                                 string                 `protobuf:"bytes,29,opt,name=commission_usd,json=commissionUsd,proto3" json:"commission_usd,omitempty"`
+	CommissionReportingCurrency                   string                 `protobuf:"bytes,30,opt,name=commission_reporting_currency,json=commissionReportingCurrency,proto3" json:"commission_reporting_currency,omitempty"`
+	Roi                                           string                 `protobuf:"bytes,31,opt,name=roi,proto3" json:"roi,omitempty"` // percentage, ngr / commission
+	unknownFields                                 protoimpl.UnknownFields
+	sizeCache                                     protoimpl.SizeCache
 }
 
 func (x *ListUsersResponse_User) Reset() {
@@ -3885,16 +3885,16 @@ func (x *ListUsersResponse_User) GetWithdrawalAmountReportingCurrency() string {
 	return ""
 }
 
-func (x *ListUsersResponse_User) GetNetDepositAmountUsd() string {
+func (x *ListUsersResponse_User) GetDepositMinusWithdrawalAmountUsd() string {
 	if x != nil {
-		return x.NetDepositAmountUsd
+		return x.DepositMinusWithdrawalAmountUsd
 	}
 	return ""
 }
 
-func (x *ListUsersResponse_User) GetNetDepositAmountReportingCurrency() string {
+func (x *ListUsersResponse_User) GetDepositMinusWithdrawalAmountReportingCurrency() string {
 	if x != nil {
-		return x.NetDepositAmountReportingCurrency
+		return x.DepositMinusWithdrawalAmountReportingCurrency
 	}
 	return ""
 }
@@ -4353,12 +4353,12 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\r_affiliate_idB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xec\f\n" +
+	"_page_size\"\x9e\r\n" +
 	"\x11ListUsersResponse\x12F\n" +
 	"\x05users\x18\x01 \x03(\v20.api.affiliate.service.v1.ListUsersResponse.UserR\x05users\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xc7\v\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xf9\v\n" +
 	"\x04User\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x18\n" +
 	"\acountry\x18\x02 \x01(\tR\acountry\x12!\n" +
@@ -4377,9 +4377,9 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"!deposit_amount_reporting_currency\x18\x0e \x01(\tR\x1edepositAmountReportingCurrency\x12)\n" +
 	"\x10withdrawal_count\x18\x0f \x01(\x05R\x0fwithdrawalCount\x122\n" +
 	"\x15withdrawal_amount_usd\x18\x10 \x01(\tR\x13withdrawalAmountUsd\x12O\n" +
-	"$withdrawal_amount_reporting_currency\x18\x11 \x01(\tR!withdrawalAmountReportingCurrency\x123\n" +
-	"\x16net_deposit_amount_usd\x18\x12 \x01(\tR\x13netDepositAmountUsd\x12P\n" +
-	"%net_deposit_amount_reporting_currency\x18\x13 \x01(\tR!netDepositAmountReportingCurrency\x12\x1b\n" +
+	"$withdrawal_amount_reporting_currency\x18\x11 \x01(\tR!withdrawalAmountReportingCurrency\x12L\n" +
+	"#deposit_minus_withdrawal_amount_usd\x18\x12 \x01(\tR\x1fdepositMinusWithdrawalAmountUsd\x12i\n" +
+	"2deposit_minus_withdrawal_amount_reporting_currency\x18\x13 \x01(\tR-depositMinusWithdrawalAmountReportingCurrency\x12\x1b\n" +
 	"\tbet_count\x18\x14 \x01(\x05R\bbetCount\x12$\n" +
 	"\x0ebet_amount_usd\x18\x15 \x01(\tR\fbetAmountUsd\x12A\n" +
 	"\x1dbet_amount_reporting_currency\x18\x16 \x01(\tR\x1abetAmountReportingCurrency\x12$\n" +
