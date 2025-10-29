@@ -56,6 +56,12 @@ const (
 	ErrorReason_PROCESS_USER_WITHDRAWAL_FAILED           ErrorReason = 130028
 	ErrorReason_LIST_EVENTS_FAILED                       ErrorReason = 130029
 	ErrorReason_LIST_COMMISSIONS_FAILED                  ErrorReason = 130030
+	ErrorReason_UPDATE_COMMISSION_FAILED                 ErrorReason = 130031
+	ErrorReason_GET_COMMISSION_FAILED                    ErrorReason = 130032
+	ErrorReason_COMMISSION_NOT_FOUND                     ErrorReason = 130033
+	ErrorReason_LIST_AFFILIATE_USERS_FAILED              ErrorReason = 130034
+	ErrorReason_PROCESS_GAME_TRANSACTION_FAILED          ErrorReason = 130035
+	ErrorReason_PROCESS_GAME_START_FAILED                ErrorReason = 130036
 )
 
 // Enum value maps for ErrorReason.
@@ -92,6 +98,12 @@ var (
 		130028: "PROCESS_USER_WITHDRAWAL_FAILED",
 		130029: "LIST_EVENTS_FAILED",
 		130030: "LIST_COMMISSIONS_FAILED",
+		130031: "UPDATE_COMMISSION_FAILED",
+		130032: "GET_COMMISSION_FAILED",
+		130033: "COMMISSION_NOT_FOUND",
+		130034: "LIST_AFFILIATE_USERS_FAILED",
+		130035: "PROCESS_GAME_TRANSACTION_FAILED",
+		130036: "PROCESS_GAME_START_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                              0,
@@ -125,6 +137,12 @@ var (
 		"PROCESS_USER_WITHDRAWAL_FAILED":           130028,
 		"LIST_EVENTS_FAILED":                       130029,
 		"LIST_COMMISSIONS_FAILED":                  130030,
+		"UPDATE_COMMISSION_FAILED":                 130031,
+		"GET_COMMISSION_FAILED":                    130032,
+		"COMMISSION_NOT_FOUND":                     130033,
+		"LIST_AFFILIATE_USERS_FAILED":              130034,
+		"PROCESS_GAME_TRANSACTION_FAILED":          130035,
+		"PROCESS_GAME_START_FAILED":                130036,
 	}
 )
 
@@ -159,7 +177,7 @@ var File_affiliate_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\xa3\b\n" +
+	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\xe7\t\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1dCREATE_COMMISSION_PLAN_FAILED\x10\xd1\xf7\a\x12#\n" +
@@ -191,7 +209,13 @@ const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1bPROCESS_USER_DEPOSIT_FAILED\x10\xeb\xf7\a\x12$\n" +
 	"\x1ePROCESS_USER_WITHDRAWAL_FAILED\x10\xec\xf7\a\x12\x18\n" +
 	"\x12LIST_EVENTS_FAILED\x10\xed\xf7\a\x12\x1d\n" +
-	"\x17LIST_COMMISSIONS_FAILED\x10\xee\xf7\a\x1a\x04\xa0E\xf4\x03BY\n" +
+	"\x17LIST_COMMISSIONS_FAILED\x10\xee\xf7\a\x12\x1e\n" +
+	"\x18UPDATE_COMMISSION_FAILED\x10\xef\xf7\a\x12\x1b\n" +
+	"\x15GET_COMMISSION_FAILED\x10\xf0\xf7\a\x12\x1a\n" +
+	"\x14COMMISSION_NOT_FOUND\x10\xf1\xf7\a\x12!\n" +
+	"\x1bLIST_AFFILIATE_USERS_FAILED\x10\xf2\xf7\a\x12%\n" +
+	"\x1fPROCESS_GAME_TRANSACTION_FAILED\x10\xf3\xf7\a\x12\x1f\n" +
+	"\x19PROCESS_GAME_START_FAILED\x10\xf4\xf7\a\x1a\x04\xa0E\xf4\x03BY\n" +
 	"\x18api.affiliate.service.v1P\x01Z;github.com/infigaming-com/meepo-api/affiliate/service/v1;v1b\x06proto3"
 
 var (
