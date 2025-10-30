@@ -454,3 +454,51 @@ func IsProcessGameStartFailed(err error) bool {
 func ErrorProcessGameStartFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_PROCESS_GAME_START_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsProcessBillingFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROCESS_BILLING_FAILED.String() && e.Code == 500
+}
+
+func ErrorProcessBillingFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROCESS_BILLING_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCreateBillingFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREATE_BILLING_FAILED.String() && e.Code == 500
+}
+
+func ErrorCreateBillingFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREATE_BILLING_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetBillingFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_BILLING_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetBillingFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_BILLING_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateBillingFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_BILLING_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateBillingFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_BILLING_FAILED.String(), fmt.Sprintf(format, args...))
+}
