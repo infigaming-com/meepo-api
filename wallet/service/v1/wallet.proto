@@ -214,6 +214,8 @@ service Wallet {
 	rpc ListManualJournalEntries(ListManualJournalEntriesRequest) returns (ListManualJournalEntriesResponse) {}
 
 	rpc ExportManualJournalEntries(ExportManualJournalEntriesRequest) returns (ExportManualJournalEntriesResponse) {}
+
+	rpc ListTimeRangeDepositCredits(ListTimeRangeDepositCreditsRequest) returns (ListTimeRangeDepositCreditsResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -322,6 +324,18 @@ message GameDebitRequest {
 }
 
 message GameDebitResponse {
+	message Credit {
+		int64 credit_id = 1;
+		string cash_amount = 2; // the cash amount affected by the transaction
+		string operator_bonus_amount = 3; // the operator bonus amount affected by the transaction
+		string provider_bonus_amount = 4; // the provider bonus amount affected by the transaction
+		string cash_amount_usd = 5;
+		string operator_bonus_amount_usd = 6;
+		string provider_bonus_amount_usd = 7;
+		string cash_amount_reporting_currency = 8;
+		string operator_bonus_amount_reporting_currency = 9;
+		string provider_bonus_amount_reporting_currency = 10;
+	}
 	int64 transaction_id = 1;
 	string exchange_rate = 2;
 	string cash = 3;
@@ -336,6 +350,7 @@ message GameDebitResponse {
 	string cash_amount_reporting_currency = 12;
 	string operator_bonus_amount_reporting_currency = 13;
 	string provider_bonus_amount_reporting_currency = 14;
+	repeated Credit credits = 15;
 }
 
 message GameCreditRequest {
@@ -352,6 +367,18 @@ message GameCreditRequest {
 }
 
 message GameCreditResponse {
+	message Credit {
+		int64 credit_id = 1;
+		string cash_amount = 2; // the cash amount affected by the transaction
+		string operator_bonus_amount = 3; // the operator bonus amount affected by the transaction
+		string provider_bonus_amount = 4; // the provider bonus amount affected by the transaction
+		string cash_amount_usd = 5;
+		string operator_bonus_amount_usd = 6;
+		string provider_bonus_amount_usd = 7;
+		string cash_amount_reporting_currency = 8;
+		string operator_bonus_amount_reporting_currency = 9;
+		string provider_bonus_amount_reporting_currency = 10;
+	}
 	int64 transaction_id = 1;
 	string exchange_rate = 2;
 	string cash = 3;
@@ -366,6 +393,7 @@ message GameCreditResponse {
 	string cash_amount_reporting_currency = 12;
 	string operator_bonus_amount_reporting_currency = 13;
 	string provider_bonus_amount_reporting_currency = 14;
+	repeated Credit credits = 15;
 }
 
 message ChannelInfo {
@@ -414,6 +442,18 @@ message RollbackRequest {
 }
 
 message RollbackResponse {
+	message Credit {
+		int64 credit_id = 1;
+		string cash_amount = 2; // the cash amount affected by the transaction
+		string operator_bonus_amount = 3; // the operator bonus amount affected by the transaction
+		string provider_bonus_amount = 4; // the provider bonus amount affected by the transaction
+		string cash_amount_usd = 5;
+		string operator_bonus_amount_usd = 6;
+		string provider_bonus_amount_usd = 7;
+		string cash_amount_reporting_currency = 8;
+		string operator_bonus_amount_reporting_currency = 9;
+		string provider_bonus_amount_reporting_currency = 10;
+	}
 	int64 transaction_id = 1;
 	string cash = 2;
 	string operator_bonus = 3;
@@ -427,6 +467,7 @@ message RollbackResponse {
 	string cash_amount_reporting_currency = 11;
 	string operator_bonus_amount_reporting_currency = 12;
 	string provider_bonus_amount_reporting_currency = 13;
+	repeated Credit credits = 14;
 }
 
 message GetWalletsRequest {
@@ -1558,4 +1599,20 @@ message ExportManualJournalEntriesRequest {
 
 message ExportManualJournalEntriesResponse {
 	int64 task_id = 1;
+}
+
+message ListTimeRangeDepositCreditsRequest {
+	google.protobuf.Timestamp start_time = 1;
+	google.protobuf.Timestamp end_time = 2;
+	optional string currency = 3;
+	int64 user_id = 4;
+	api.common.OperatorContext operator_context = 5;
+}
+
+message ListTimeRangeDepositCreditsResponse {
+	message Credit {
+		int64 credit_id = 1;
+		string currency = 2;
+	}
+	repeated Credit credits = 1;
 }
