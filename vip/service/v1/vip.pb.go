@@ -8,7 +8,6 @@ package v1
 
 import (
 	common "github.com/infigaming-com/meepo-api/common"
-	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -2791,7 +2790,7 @@ var File_vip_service_v1_vip_proto protoreflect.FileDescriptor
 
 const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\n" +
-	"\x18vip/service/v1/vip.proto\x12\x12api.vip.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x13common/common.proto\"\xe6\x01\n" +
+	"\x18vip/service/v1/vip.proto\x12\x12api.vip.service.v1\x1a\x13common/common.proto\"\xe6\x01\n" +
 	"\tVipConfig\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12,\n" +
 	"\x12system_operator_id\x18\x02 \x01(\x03R\x10systemOperatorId\x120\n" +
