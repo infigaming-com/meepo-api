@@ -1176,6 +1176,142 @@ var _ interface {
 	ErrorName() string
 } = GameDebitRequestValidationError{}
 
+// Validate checks the field values on AffectedCredit with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *AffectedCredit) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AffectedCredit with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in AffectedCreditMultiError,
+// or nil if none found.
+func (m *AffectedCredit) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AffectedCredit) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for CreditId
+
+	// no validation rules for SettlementCurrency
+
+	// no validation rules for Amount
+
+	// no validation rules for AmountSettlementCurrency
+
+	// no validation rules for AmountUsd
+
+	// no validation rules for AmountReportingCurrency
+
+	// no validation rules for CashAmount
+
+	// no validation rules for CashAmountSettlementCurrency
+
+	// no validation rules for CashAmountUsd
+
+	// no validation rules for CashAmountReportingCurrency
+
+	// no validation rules for OperatorBonusAmount
+
+	// no validation rules for OperatorBonusAmountSettlementCurrency
+
+	// no validation rules for OperatorBonusAmountUsd
+
+	// no validation rules for OperatorBonusAmountReportingCurrency
+
+	// no validation rules for ProviderBonusAmount
+
+	// no validation rules for ProviderBonusAmountSettlementCurrency
+
+	// no validation rules for ProviderBonusAmountUsd
+
+	// no validation rules for ProviderBonusAmountReportingCurrency
+
+	if len(errors) > 0 {
+		return AffectedCreditMultiError(errors)
+	}
+
+	return nil
+}
+
+// AffectedCreditMultiError is an error wrapping multiple validation errors
+// returned by AffectedCredit.ValidateAll() if the designated constraints
+// aren't met.
+type AffectedCreditMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AffectedCreditMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AffectedCreditMultiError) AllErrors() []error { return m }
+
+// AffectedCreditValidationError is the validation error returned by
+// AffectedCredit.Validate if the designated constraints aren't met.
+type AffectedCreditValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AffectedCreditValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AffectedCreditValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AffectedCreditValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AffectedCreditValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AffectedCreditValidationError) ErrorName() string { return "AffectedCreditValidationError" }
+
+// Error satisfies the builtin error interface
+func (e AffectedCreditValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAffectedCredit.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AffectedCreditValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AffectedCreditValidationError{}
+
 // Validate checks the field values on GameDebitResponse with the rules defined
 // in the proto definition for this message. If any rules are violated, the
 // first error encountered is returned, or nil if there are no violations.
@@ -1226,7 +1362,7 @@ func (m *GameDebitResponse) validate(all bool) error {
 
 	// no validation rules for ProviderBonusAmountReportingCurrency
 
-	for idx, item := range m.GetCredits() {
+	for idx, item := range m.GetAffectedCredits() {
 		_, _ = idx, item
 
 		if all {
@@ -1234,7 +1370,7 @@ func (m *GameDebitResponse) validate(all bool) error {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, GameDebitResponseValidationError{
-						field:  fmt.Sprintf("Credits[%v]", idx),
+						field:  fmt.Sprintf("AffectedCredits[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1242,7 +1378,7 @@ func (m *GameDebitResponse) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, GameDebitResponseValidationError{
-						field:  fmt.Sprintf("Credits[%v]", idx),
+						field:  fmt.Sprintf("AffectedCredits[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1251,7 +1387,7 @@ func (m *GameDebitResponse) validate(all bool) error {
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return GameDebitResponseValidationError{
-					field:  fmt.Sprintf("Credits[%v]", idx),
+					field:  fmt.Sprintf("AffectedCredits[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -1539,7 +1675,7 @@ func (m *GameCreditResponse) validate(all bool) error {
 
 	// no validation rules for ProviderBonusAmountReportingCurrency
 
-	for idx, item := range m.GetCredits() {
+	for idx, item := range m.GetAffectedCredits() {
 		_, _ = idx, item
 
 		if all {
@@ -1547,7 +1683,7 @@ func (m *GameCreditResponse) validate(all bool) error {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, GameCreditResponseValidationError{
-						field:  fmt.Sprintf("Credits[%v]", idx),
+						field:  fmt.Sprintf("AffectedCredits[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1555,7 +1691,7 @@ func (m *GameCreditResponse) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, GameCreditResponseValidationError{
-						field:  fmt.Sprintf("Credits[%v]", idx),
+						field:  fmt.Sprintf("AffectedCredits[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1564,7 +1700,7 @@ func (m *GameCreditResponse) validate(all bool) error {
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return GameCreditResponseValidationError{
-					field:  fmt.Sprintf("Credits[%v]", idx),
+					field:  fmt.Sprintf("AffectedCredits[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -2473,7 +2609,7 @@ func (m *RollbackResponse) validate(all bool) error {
 
 	// no validation rules for ProviderBonusAmountReportingCurrency
 
-	for idx, item := range m.GetCredits() {
+	for idx, item := range m.GetAffectedCredits() {
 		_, _ = idx, item
 
 		if all {
@@ -2481,7 +2617,7 @@ func (m *RollbackResponse) validate(all bool) error {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, RollbackResponseValidationError{
-						field:  fmt.Sprintf("Credits[%v]", idx),
+						field:  fmt.Sprintf("AffectedCredits[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -2489,7 +2625,7 @@ func (m *RollbackResponse) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, RollbackResponseValidationError{
-						field:  fmt.Sprintf("Credits[%v]", idx),
+						field:  fmt.Sprintf("AffectedCredits[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -2498,7 +2634,7 @@ func (m *RollbackResponse) validate(all bool) error {
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return RollbackResponseValidationError{
-					field:  fmt.Sprintf("Credits[%v]", idx),
+					field:  fmt.Sprintf("AffectedCredits[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -19705,372 +19841,6 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetUserBalancesResponse_BalanceValidationError{}
-
-// Validate checks the field values on GameDebitResponse_Credit with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GameDebitResponse_Credit) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on GameDebitResponse_Credit with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// GameDebitResponse_CreditMultiError, or nil if none found.
-func (m *GameDebitResponse_Credit) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *GameDebitResponse_Credit) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for CreditId
-
-	// no validation rules for CashAmount
-
-	// no validation rules for OperatorBonusAmount
-
-	// no validation rules for ProviderBonusAmount
-
-	// no validation rules for CashAmountUsd
-
-	// no validation rules for OperatorBonusAmountUsd
-
-	// no validation rules for ProviderBonusAmountUsd
-
-	// no validation rules for CashAmountReportingCurrency
-
-	// no validation rules for OperatorBonusAmountReportingCurrency
-
-	// no validation rules for ProviderBonusAmountReportingCurrency
-
-	if len(errors) > 0 {
-		return GameDebitResponse_CreditMultiError(errors)
-	}
-
-	return nil
-}
-
-// GameDebitResponse_CreditMultiError is an error wrapping multiple validation
-// errors returned by GameDebitResponse_Credit.ValidateAll() if the designated
-// constraints aren't met.
-type GameDebitResponse_CreditMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m GameDebitResponse_CreditMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m GameDebitResponse_CreditMultiError) AllErrors() []error { return m }
-
-// GameDebitResponse_CreditValidationError is the validation error returned by
-// GameDebitResponse_Credit.Validate if the designated constraints aren't met.
-type GameDebitResponse_CreditValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e GameDebitResponse_CreditValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e GameDebitResponse_CreditValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e GameDebitResponse_CreditValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e GameDebitResponse_CreditValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e GameDebitResponse_CreditValidationError) ErrorName() string {
-	return "GameDebitResponse_CreditValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e GameDebitResponse_CreditValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sGameDebitResponse_Credit.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = GameDebitResponse_CreditValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = GameDebitResponse_CreditValidationError{}
-
-// Validate checks the field values on GameCreditResponse_Credit with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GameCreditResponse_Credit) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on GameCreditResponse_Credit with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// GameCreditResponse_CreditMultiError, or nil if none found.
-func (m *GameCreditResponse_Credit) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *GameCreditResponse_Credit) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for CreditId
-
-	// no validation rules for CashAmount
-
-	// no validation rules for OperatorBonusAmount
-
-	// no validation rules for ProviderBonusAmount
-
-	// no validation rules for CashAmountUsd
-
-	// no validation rules for OperatorBonusAmountUsd
-
-	// no validation rules for ProviderBonusAmountUsd
-
-	// no validation rules for CashAmountReportingCurrency
-
-	// no validation rules for OperatorBonusAmountReportingCurrency
-
-	// no validation rules for ProviderBonusAmountReportingCurrency
-
-	if len(errors) > 0 {
-		return GameCreditResponse_CreditMultiError(errors)
-	}
-
-	return nil
-}
-
-// GameCreditResponse_CreditMultiError is an error wrapping multiple validation
-// errors returned by GameCreditResponse_Credit.ValidateAll() if the
-// designated constraints aren't met.
-type GameCreditResponse_CreditMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m GameCreditResponse_CreditMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m GameCreditResponse_CreditMultiError) AllErrors() []error { return m }
-
-// GameCreditResponse_CreditValidationError is the validation error returned by
-// GameCreditResponse_Credit.Validate if the designated constraints aren't met.
-type GameCreditResponse_CreditValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e GameCreditResponse_CreditValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e GameCreditResponse_CreditValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e GameCreditResponse_CreditValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e GameCreditResponse_CreditValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e GameCreditResponse_CreditValidationError) ErrorName() string {
-	return "GameCreditResponse_CreditValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e GameCreditResponse_CreditValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sGameCreditResponse_Credit.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = GameCreditResponse_CreditValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = GameCreditResponse_CreditValidationError{}
-
-// Validate checks the field values on RollbackResponse_Credit with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *RollbackResponse_Credit) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on RollbackResponse_Credit with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// RollbackResponse_CreditMultiError, or nil if none found.
-func (m *RollbackResponse_Credit) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *RollbackResponse_Credit) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for CreditId
-
-	// no validation rules for CashAmount
-
-	// no validation rules for OperatorBonusAmount
-
-	// no validation rules for ProviderBonusAmount
-
-	// no validation rules for CashAmountUsd
-
-	// no validation rules for OperatorBonusAmountUsd
-
-	// no validation rules for ProviderBonusAmountUsd
-
-	// no validation rules for CashAmountReportingCurrency
-
-	// no validation rules for OperatorBonusAmountReportingCurrency
-
-	// no validation rules for ProviderBonusAmountReportingCurrency
-
-	if len(errors) > 0 {
-		return RollbackResponse_CreditMultiError(errors)
-	}
-
-	return nil
-}
-
-// RollbackResponse_CreditMultiError is an error wrapping multiple validation
-// errors returned by RollbackResponse_Credit.ValidateAll() if the designated
-// constraints aren't met.
-type RollbackResponse_CreditMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m RollbackResponse_CreditMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m RollbackResponse_CreditMultiError) AllErrors() []error { return m }
-
-// RollbackResponse_CreditValidationError is the validation error returned by
-// RollbackResponse_Credit.Validate if the designated constraints aren't met.
-type RollbackResponse_CreditValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e RollbackResponse_CreditValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e RollbackResponse_CreditValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e RollbackResponse_CreditValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e RollbackResponse_CreditValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e RollbackResponse_CreditValidationError) ErrorName() string {
-	return "RollbackResponse_CreditValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e RollbackResponse_CreditValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sRollbackResponse_Credit.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = RollbackResponse_CreditValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = RollbackResponse_CreditValidationError{}
 
 // Validate checks the field values on GetWalletsResponse_TotalAssets with the
 // rules defined in the proto definition for this message. If any rules are
