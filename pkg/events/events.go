@@ -206,4 +206,6 @@ const GameBetTopic = "game.bet"
 
 const GameBetBoardcastTopic = "game.bet.boardcast"
 
+const GameBetUserTopic = "game.bet.user"
+
 const CreateSessionTopic = "game.create.session"
