@@ -170,6 +170,12 @@ type WebsocketOperatorBoardcastEvent struct {
 	Data       any    `json:"data"`
 }
 
+type WebsocketOperatorUserEvent struct {
+	UserID  int64  `json:"user_id"`
+	Command string `json:"command"`
+	Data    any    `json:"data"`
+}
+
 type SessionCreatedEvent struct {
 	SessionID          int64  `json:"session_id"`
 	UserID             string `json:"user_id"`
