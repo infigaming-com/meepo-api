@@ -106,46 +106,46 @@ type GameTransactionEvent struct {
 }
 
 type GameBetEvent struct {
-	BetID                                int64                  `json:"bet_id"`
-	ProviderBetID                        string                 `json:"provider_bet_id"`
-	RoundID                              int64                  `json:"round_id"`
-	ProviderRoundID                      string                 `json:"provider_round_id"`
-	OperatorID                           int64                  `json:"operator_id"`
-	OperatorName                         string                 `json:"operator_name"`
-	ProviderID                           string                 `json:"provider_id"`
-	ProviderName                         string                 `json:"provider_name"`
-	UserID                               int64                  `json:"user_id"`
-	GameID                               string                 `json:"game_id"`
-	GameName                             string                 `json:"game_name"`
-	GameCategory                         string                 `json:"game_category"`
-	Currency                             string                 `json:"currency"`
-	SettlementCurrency                   string                 `json:"settlement_currency"`
-	ReportingCurrency                    string                 `json:"reporting_currency"`
-	Status                               string                 `json:"status"`
-	BetAmount                            string                 `json:"bet_amount"`
-	BetAmountUSD                         string                 `json:"bet_amount_usd"`
-	BetAmountReportingCurrency           string                 `json:"bet_amount_reporting_currency"`
-	SettlementBetAmount                  string                 `json:"settlement_bet_amount"`
-	SettlementBetAmountUSD               string                 `json:"settlement_bet_amount_usd"`
-	SettlementBetAmountReportingCurrency string                 `json:"settlement_bet_amount_reporting_currency"`
-	WinAmount                            string                 `json:"win_amount"`
-	WinAmountUSD                         string                 `json:"win_amount_usd"`
-	WinAmountReportingCurrency           string                 `json:"win_amount_reporting_currency"`
-	SettlementWinAmount                  string                 `json:"settlement_win_amount"`
-	SettlementWinAmountUSD               string                 `json:"settlement_win_amount_usd"`
-	SettlementWinAmountReportingCurrency string                 `json:"settlement_win_amount_reporting_currency"`
-	Turnover                             string                 `json:"turnover"`
-	TurnoverUSD                          string                 `json:"turnover_usd"`
-	TurnoverReportingCurrency            string                 `json:"turnover_reporting_currency"`
-	WinCount                             int32                  `json:"win_count"`
-	WagerType                            string                 `json:"wager_type"`
-	Selections                           map[string]interface{} `json:"selections"`
-	SettleTime                           int64                  `json:"settle_time"`
-	CreatedAt                            int64                  `json:"created_at"`
-	UpdatedAt                            int64                  `json:"updated_at"`
-	SystemOperatorID                     int64                  `json:"system_operator_id"`
-	RetailerOperatorID                   int64                  `json:"retailer_operator_id"`
-	CompanyOperatorID                    int64                  `json:"company_operator_id"`
+	BetID                                int64          `json:"bet_id"`
+	ProviderBetID                        string         `json:"provider_bet_id"`
+	RoundID                              int64          `json:"round_id"`
+	ProviderRoundID                      string         `json:"provider_round_id"`
+	OperatorID                           int64          `json:"operator_id"`
+	OperatorName                         string         `json:"operator_name"`
+	ProviderID                           string         `json:"provider_id"`
+	ProviderName                         string         `json:"provider_name"`
+	UserID                               int64          `json:"user_id"`
+	GameID                               string         `json:"game_id"`
+	GameName                             string         `json:"game_name"`
+	GameCategory                         string         `json:"game_category"`
+	Currency                             string         `json:"currency"`
+	SettlementCurrency                   string         `json:"settlement_currency"`
+	ReportingCurrency                    string         `json:"reporting_currency"`
+	Status                               string         `json:"status"`
+	BetAmount                            string         `json:"bet_amount"`
+	BetAmountUSD                         string         `json:"bet_amount_usd"`
+	BetAmountReportingCurrency           string         `json:"bet_amount_reporting_currency"`
+	SettlementBetAmount                  string         `json:"settlement_bet_amount"`
+	SettlementBetAmountUSD               string         `json:"settlement_bet_amount_usd"`
+	SettlementBetAmountReportingCurrency string         `json:"settlement_bet_amount_reporting_currency"`
+	WinAmount                            string         `json:"win_amount"`
+	WinAmountUSD                         string         `json:"win_amount_usd"`
+	WinAmountReportingCurrency           string         `json:"win_amount_reporting_currency"`
+	SettlementWinAmount                  string         `json:"settlement_win_amount"`
+	SettlementWinAmountUSD               string         `json:"settlement_win_amount_usd"`
+	SettlementWinAmountReportingCurrency string         `json:"settlement_win_amount_reporting_currency"`
+	Turnover                             string         `json:"turnover"`
+	TurnoverUSD                          string         `json:"turnover_usd"`
+	TurnoverReportingCurrency            string         `json:"turnover_reporting_currency"`
+	WinCount                             int32          `json:"win_count"`
+	WagerType                            string         `json:"wager_type"`
+	Selections                           map[string]any `json:"selections"`
+	SettleTime                           int64          `json:"settle_time"`
+	CreatedAt                            int64          `json:"created_at"`
+	UpdatedAt                            int64          `json:"updated_at"`
+	SystemOperatorID                     int64          `json:"system_operator_id"`
+	RetailerOperatorID                   int64          `json:"retailer_operator_id"`
+	CompanyOperatorID                    int64          `json:"company_operator_id"`
 }
 
 type GameBetEventBoardcastItem struct {
@@ -181,6 +181,12 @@ type WebsocketOperatorUserEvent struct {
 	Data    any    `json:"data"`
 }
 
+type WebsocketOperatorClientEvent struct {
+	ClientID int64  `json:"client_id"`
+	Command  string `json:"command"`
+	Data     any    `json:"data"`
+}
+
 type SessionCreatedEvent struct {
 	SessionID          int64  `json:"session_id"`
 	UserID             string `json:"user_id"`
@@ -212,5 +218,7 @@ const GameBetTopic = "game.bet"
 const GameBetBoardcastTopic = "game.bet.boardcast"
 
 const GameBetUserTopic = "game.bet.user"
+
+const GameBetClientTopic = "game.bet.client"
 
 const CreateSessionTopic = "game.create.session"
