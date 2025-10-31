@@ -182,28 +182,26 @@ service BackofficeGame {
 		};
 	}
 
-	rpc AddGameBetDisplayConfig(AddGameBetDisplayConfigRequest) returns (game.service.v1.AddGameBetDisplayConfigResponse) {
+	rpc AddGameBetDisplayConfig(game.service.v1.AddGameBetDisplayConfigRequest) returns (game.service.v1.AddGameBetDisplayConfigResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/game/bet/dispaly/config/add"
 			body: "*"
 		};
 	}
 
-	rpc UpdateGameBetDisplayConfig(UpdateGameBetDisplayConfigRequest) returns (game.service.v1.UpdateGameBetDisplayConfigResponse) {
+	rpc UpdateGameBetDisplayConfig(game.service.v1.UpdateGameBetDisplayConfigRequest) returns (game.service.v1.UpdateGameBetDisplayConfigResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/game/bet/dispaly/config/update"
 			body: "*"
 		};
 	}
 
-	rpc ListGameBetDisplayConfig(ListGameBetDisplayConfigRequest) returns (game.service.v1.ListGameBetDisplayConfigResponse) {
+	rpc ListGameBetDisplayConfig(game.service.v1.ListGameBetDisplayConfigRequest) returns (game.service.v1.ListGameBetDisplayConfigResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/game/bet/dispaly/config/list"
 			body: "*"
 		};
-		
 	}
-
 }
 
 
@@ -625,25 +623,4 @@ message ExportCustomerStrikeReportsRequest {
 	string format = 2; // accepted values: csv, excel, pdf
 	string time_zone = 3; // e.g. UTC+0, UTC+8, etc.
 	api.common.OperatorContextFilters operator_context_filters = 4;
-}
-
-message AddGameBetDisplayConfigRequest {
-	string country = 1;
-	game.service.v1.BettingConfig all_bet = 2;
-	game.service.v1.BettingConfig high_wins = 3;
-}
-
-message UpdateGameBetDisplayConfigRequest {
-	string country = 1;
-	optional game.service.v1.BettingConfig all_bet = 2;
-	optional game.service.v1.BettingConfig high_wins = 3;
-}
-
-message ListGameBetDisplayConfigRequest {
-	message Item {
-		string country = 1;
-		game.service.v1.BettingConfig all_bet = 2;
-		game.service.v1.BettingConfig high_wins = 3;
-	}
-	repeated Item list = 1;
 }

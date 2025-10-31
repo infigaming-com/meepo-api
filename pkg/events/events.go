@@ -15,6 +15,11 @@ type IntegrityReportEvent struct {
 	CreatedAt    int64                          `json:"createdAt"`
 }
 
+type ClientOnlineStatusEvent struct {
+	ClientId   int64 `json:"userId"`
+	OperatorId int64 `json:"operatorId"`
+}
+
 type UserOnlineStatusEvent struct {
 	UserId     int64 `json:"userId"`
 	OperatorId int64 `json:"operatorId"`
