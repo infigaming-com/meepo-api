@@ -214,6 +214,8 @@ service Wallet {
 	rpc ListManualJournalEntries(ListManualJournalEntriesRequest) returns (ListManualJournalEntriesResponse) {}
 
 	rpc ExportManualJournalEntries(ExportManualJournalEntriesRequest) returns (ExportManualJournalEntriesResponse) {}
+
+	rpc ListTimeRangeDepositCredits(ListTimeRangeDepositCreditsRequest) returns (ListTimeRangeDepositCreditsResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -321,6 +323,27 @@ message GameDebitRequest {
 	optional bool allow_overdraft = 11;
 }
 
+message AffectedCredit {
+	int64 credit_id = 1;
+	string settlement_currency = 2; // currency of the credit
+	string amount = 3; // currency amount of the game transaction
+	string amount_settlement_currency = 4; // settlement currency amount of the wallet transaction
+	string amount_usd = 5;
+	string amount_reporting_currency = 6;
+	string cash_amount = 7; 
+	string cash_amount_settlement_currency = 8;
+	string cash_amount_usd = 9;
+	string cash_amount_reporting_currency = 10;
+	string operator_bonus_amount = 11;
+	string operator_bonus_amount_settlement_currency = 12;
+	string operator_bonus_amount_usd = 13;
+	string operator_bonus_amount_reporting_currency = 14;
+	string provider_bonus_amount = 15;
+	string provider_bonus_amount_settlement_currency = 16;
+	string provider_bonus_amount_usd = 17;
+	string provider_bonus_amount_reporting_currency = 18;
+}
+
 message GameDebitResponse {
 	int64 transaction_id = 1;
 	string exchange_rate = 2;
@@ -336,6 +359,7 @@ message GameDebitResponse {
 	string cash_amount_reporting_currency = 12;
 	string operator_bonus_amount_reporting_currency = 13;
 	string provider_bonus_amount_reporting_currency = 14;
+	repeated AffectedCredit affected_credits = 15;
 }
 
 message GameCreditRequest {
@@ -366,6 +390,7 @@ message GameCreditResponse {
 	string cash_amount_reporting_currency = 12;
 	string operator_bonus_amount_reporting_currency = 13;
 	string provider_bonus_amount_reporting_currency = 14;
+	repeated AffectedCredit affected_credits = 15;
 }
 
 message ChannelInfo {
@@ -427,6 +452,7 @@ message RollbackResponse {
 	string cash_amount_reporting_currency = 11;
 	string operator_bonus_amount_reporting_currency = 12;
 	string provider_bonus_amount_reporting_currency = 13;
+	repeated AffectedCredit affected_credits = 14;
 }
 
 message GetWalletsRequest {
@@ -1558,4 +1584,20 @@ message ExportManualJournalEntriesRequest {
 
 message ExportManualJournalEntriesResponse {
 	int64 task_id = 1;
+}
+
+message ListTimeRangeDepositCreditsRequest {
+	google.protobuf.Timestamp start_time = 1;
+	google.protobuf.Timestamp end_time = 2;
+	optional string currency = 3;
+	int64 user_id = 4;
+	api.common.OperatorContext operator_context = 5;
+}
+
+message ListTimeRangeDepositCreditsResponse {
+	message Credit {
+		int64 credit_id = 1;
+		string currency = 2;
+	}
+	repeated Credit credits = 1;
 }
