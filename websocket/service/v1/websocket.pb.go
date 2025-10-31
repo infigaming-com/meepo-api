@@ -21,7 +21,97 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type PushMessageRequest struct {
+type PushClientMessageRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The client ID who receive the message
+	ClientId int64 `protobuf:"varint,1,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
+	// The message content
+	Message       []byte `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PushClientMessageRequest) Reset() {
+	*x = PushClientMessageRequest{}
+	mi := &file_websocket_service_v1_websocket_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PushClientMessageRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PushClientMessageRequest) ProtoMessage() {}
+
+func (x *PushClientMessageRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_websocket_service_v1_websocket_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PushClientMessageRequest.ProtoReflect.Descriptor instead.
+func (*PushClientMessageRequest) Descriptor() ([]byte, []int) {
+	return file_websocket_service_v1_websocket_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *PushClientMessageRequest) GetClientId() int64 {
+	if x != nil {
+		return x.ClientId
+	}
+	return 0
+}
+
+func (x *PushClientMessageRequest) GetMessage() []byte {
+	if x != nil {
+		return x.Message
+	}
+	return nil
+}
+
+type PushClientMessageResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PushClientMessageResponse) Reset() {
+	*x = PushClientMessageResponse{}
+	mi := &file_websocket_service_v1_websocket_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PushClientMessageResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PushClientMessageResponse) ProtoMessage() {}
+
+func (x *PushClientMessageResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_websocket_service_v1_websocket_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PushClientMessageResponse.ProtoReflect.Descriptor instead.
+func (*PushClientMessageResponse) Descriptor() ([]byte, []int) {
+	return file_websocket_service_v1_websocket_proto_rawDescGZIP(), []int{1}
+}
+
+type PushUserMessageRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The user ID who receive the message
 	UserId int64 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -31,21 +121,21 @@ type PushMessageRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *PushMessageRequest) Reset() {
-	*x = PushMessageRequest{}
-	mi := &file_websocket_service_v1_websocket_proto_msgTypes[0]
+func (x *PushUserMessageRequest) Reset() {
+	*x = PushUserMessageRequest{}
+	mi := &file_websocket_service_v1_websocket_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *PushMessageRequest) String() string {
+func (x *PushUserMessageRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PushMessageRequest) ProtoMessage() {}
+func (*PushUserMessageRequest) ProtoMessage() {}
 
-func (x *PushMessageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_websocket_service_v1_websocket_proto_msgTypes[0]
+func (x *PushUserMessageRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_websocket_service_v1_websocket_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,46 +146,46 @@ func (x *PushMessageRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PushMessageRequest.ProtoReflect.Descriptor instead.
-func (*PushMessageRequest) Descriptor() ([]byte, []int) {
-	return file_websocket_service_v1_websocket_proto_rawDescGZIP(), []int{0}
+// Deprecated: Use PushUserMessageRequest.ProtoReflect.Descriptor instead.
+func (*PushUserMessageRequest) Descriptor() ([]byte, []int) {
+	return file_websocket_service_v1_websocket_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *PushMessageRequest) GetUserId() int64 {
+func (x *PushUserMessageRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
 	return 0
 }
 
-func (x *PushMessageRequest) GetMessage() []byte {
+func (x *PushUserMessageRequest) GetMessage() []byte {
 	if x != nil {
 		return x.Message
 	}
 	return nil
 }
 
-type PushMessageResponse struct {
+type PushUserMessageResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *PushMessageResponse) Reset() {
-	*x = PushMessageResponse{}
-	mi := &file_websocket_service_v1_websocket_proto_msgTypes[1]
+func (x *PushUserMessageResponse) Reset() {
+	*x = PushUserMessageResponse{}
+	mi := &file_websocket_service_v1_websocket_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *PushMessageResponse) String() string {
+func (x *PushUserMessageResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PushMessageResponse) ProtoMessage() {}
+func (*PushUserMessageResponse) ProtoMessage() {}
 
-func (x *PushMessageResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_websocket_service_v1_websocket_proto_msgTypes[1]
+func (x *PushUserMessageResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_websocket_service_v1_websocket_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -106,9 +196,9 @@ func (x *PushMessageResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PushMessageResponse.ProtoReflect.Descriptor instead.
-func (*PushMessageResponse) Descriptor() ([]byte, []int) {
-	return file_websocket_service_v1_websocket_proto_rawDescGZIP(), []int{1}
+// Deprecated: Use PushUserMessageResponse.ProtoReflect.Descriptor instead.
+func (*PushUserMessageResponse) Descriptor() ([]byte, []int) {
+	return file_websocket_service_v1_websocket_proto_rawDescGZIP(), []int{3}
 }
 
 type PushOperatorMessageRequest struct {
@@ -123,7 +213,7 @@ type PushOperatorMessageRequest struct {
 
 func (x *PushOperatorMessageRequest) Reset() {
 	*x = PushOperatorMessageRequest{}
-	mi := &file_websocket_service_v1_websocket_proto_msgTypes[2]
+	mi := &file_websocket_service_v1_websocket_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -135,7 +225,7 @@ func (x *PushOperatorMessageRequest) String() string {
 func (*PushOperatorMessageRequest) ProtoMessage() {}
 
 func (x *PushOperatorMessageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_websocket_service_v1_websocket_proto_msgTypes[2]
+	mi := &file_websocket_service_v1_websocket_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -148,7 +238,7 @@ func (x *PushOperatorMessageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PushOperatorMessageRequest.ProtoReflect.Descriptor instead.
 func (*PushOperatorMessageRequest) Descriptor() ([]byte, []int) {
-	return file_websocket_service_v1_websocket_proto_rawDescGZIP(), []int{2}
+	return file_websocket_service_v1_websocket_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *PushOperatorMessageRequest) GetOperatorId() int64 {
@@ -173,7 +263,7 @@ type PushOperatorMessageResponse struct {
 
 func (x *PushOperatorMessageResponse) Reset() {
 	*x = PushOperatorMessageResponse{}
-	mi := &file_websocket_service_v1_websocket_proto_msgTypes[3]
+	mi := &file_websocket_service_v1_websocket_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -185,7 +275,7 @@ func (x *PushOperatorMessageResponse) String() string {
 func (*PushOperatorMessageResponse) ProtoMessage() {}
 
 func (x *PushOperatorMessageResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_websocket_service_v1_websocket_proto_msgTypes[3]
+	mi := &file_websocket_service_v1_websocket_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -198,25 +288,30 @@ func (x *PushOperatorMessageResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PushOperatorMessageResponse.ProtoReflect.Descriptor instead.
 func (*PushOperatorMessageResponse) Descriptor() ([]byte, []int) {
-	return file_websocket_service_v1_websocket_proto_rawDescGZIP(), []int{3}
+	return file_websocket_service_v1_websocket_proto_rawDescGZIP(), []int{5}
 }
 
 var File_websocket_service_v1_websocket_proto protoreflect.FileDescriptor
 
 const file_websocket_service_v1_websocket_proto_rawDesc = "" +
 	"\n" +
-	"$websocket/service/v1/websocket.proto\x12\x18api.websocket.service.v1\"G\n" +
-	"\x12PushMessageRequest\x12\x17\n" +
+	"$websocket/service/v1/websocket.proto\x12\x18api.websocket.service.v1\"Q\n" +
+	"\x18PushClientMessageRequest\x12\x1b\n" +
+	"\tclient_id\x18\x01 \x01(\x03R\bclientId\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\fR\amessage\"\x1b\n" +
+	"\x19PushClientMessageResponse\"K\n" +
+	"\x16PushUserMessageRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\fR\amessage\"\x15\n" +
-	"\x13PushMessageResponse\"W\n" +
+	"\amessage\x18\x02 \x01(\fR\amessage\"\x19\n" +
+	"\x17PushUserMessageResponse\"W\n" +
 	"\x1aPushOperatorMessageRequest\x12\x1f\n" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\fR\amessage\"\x1d\n" +
-	"\x1bPushOperatorMessageResponse2\x80\x02\n" +
-	"\tWebsocket\x12l\n" +
-	"\vPushMessage\x12,.api.websocket.service.v1.PushMessageRequest\x1a-.api.websocket.service.v1.PushMessageResponse\"\x00\x12\x84\x01\n" +
+	"\x1bPushOperatorMessageResponse2\x8c\x03\n" +
+	"\tWebsocket\x12~\n" +
+	"\x11PushClientMessage\x122.api.websocket.service.v1.PushClientMessageRequest\x1a3.api.websocket.service.v1.PushClientMessageResponse\"\x00\x12x\n" +
+	"\x0fPushUserMessage\x120.api.websocket.service.v1.PushUserMessageRequest\x1a1.api.websocket.service.v1.PushUserMessageResponse\"\x00\x12\x84\x01\n" +
 	"\x13PushOperatorMessage\x124.api.websocket.service.v1.PushOperatorMessageRequest\x1a5.api.websocket.service.v1.PushOperatorMessageResponse\"\x00BY\n" +
 	"\x18api.websocket.service.v1P\x01Z;github.com/infigaming-com/meepo-api/websocket/service/v1;v1b\x06proto3"
 
@@ -232,20 +327,24 @@ func file_websocket_service_v1_websocket_proto_rawDescGZIP() []byte {
 	return file_websocket_service_v1_websocket_proto_rawDescData
 }
 
-var file_websocket_service_v1_websocket_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_websocket_service_v1_websocket_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_websocket_service_v1_websocket_proto_goTypes = []any{
-	(*PushMessageRequest)(nil),          // 0: api.websocket.service.v1.PushMessageRequest
-	(*PushMessageResponse)(nil),         // 1: api.websocket.service.v1.PushMessageResponse
-	(*PushOperatorMessageRequest)(nil),  // 2: api.websocket.service.v1.PushOperatorMessageRequest
-	(*PushOperatorMessageResponse)(nil), // 3: api.websocket.service.v1.PushOperatorMessageResponse
+	(*PushClientMessageRequest)(nil),    // 0: api.websocket.service.v1.PushClientMessageRequest
+	(*PushClientMessageResponse)(nil),   // 1: api.websocket.service.v1.PushClientMessageResponse
+	(*PushUserMessageRequest)(nil),      // 2: api.websocket.service.v1.PushUserMessageRequest
+	(*PushUserMessageResponse)(nil),     // 3: api.websocket.service.v1.PushUserMessageResponse
+	(*PushOperatorMessageRequest)(nil),  // 4: api.websocket.service.v1.PushOperatorMessageRequest
+	(*PushOperatorMessageResponse)(nil), // 5: api.websocket.service.v1.PushOperatorMessageResponse
 }
 var file_websocket_service_v1_websocket_proto_depIdxs = []int32{
-	0, // 0: api.websocket.service.v1.Websocket.PushMessage:input_type -> api.websocket.service.v1.PushMessageRequest
-	2, // 1: api.websocket.service.v1.Websocket.PushOperatorMessage:input_type -> api.websocket.service.v1.PushOperatorMessageRequest
-	1, // 2: api.websocket.service.v1.Websocket.PushMessage:output_type -> api.websocket.service.v1.PushMessageResponse
-	3, // 3: api.websocket.service.v1.Websocket.PushOperatorMessage:output_type -> api.websocket.service.v1.PushOperatorMessageResponse
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	0, // 0: api.websocket.service.v1.Websocket.PushClientMessage:input_type -> api.websocket.service.v1.PushClientMessageRequest
+	2, // 1: api.websocket.service.v1.Websocket.PushUserMessage:input_type -> api.websocket.service.v1.PushUserMessageRequest
+	4, // 2: api.websocket.service.v1.Websocket.PushOperatorMessage:input_type -> api.websocket.service.v1.PushOperatorMessageRequest
+	1, // 3: api.websocket.service.v1.Websocket.PushClientMessage:output_type -> api.websocket.service.v1.PushClientMessageResponse
+	3, // 4: api.websocket.service.v1.Websocket.PushUserMessage:output_type -> api.websocket.service.v1.PushUserMessageResponse
+	5, // 5: api.websocket.service.v1.Websocket.PushOperatorMessage:output_type -> api.websocket.service.v1.PushOperatorMessageResponse
+	3, // [3:6] is the sub-list for method output_type
+	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -262,7 +361,7 @@ func file_websocket_service_v1_websocket_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_websocket_service_v1_websocket_proto_rawDesc), len(file_websocket_service_v1_websocket_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
