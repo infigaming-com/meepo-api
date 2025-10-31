@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package api.vip.service.v1;
 
-import "google/api/annotations.proto";
+// import "google/api/annotations.proto";
 import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/vip/service/v1;v1";
