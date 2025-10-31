@@ -1641,7 +1641,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.AddGameBetDisplayConfigRequest'
+                            $ref: '#/components/schemas/api.game.service.v1.AddGameBetDisplayConfigRequest'
                 required: true
             responses:
                 "200":
@@ -1659,7 +1659,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.ListGameBetDisplayConfigRequest'
+                            $ref: '#/components/schemas/api.game.service.v1.ListGameBetDisplayConfigRequest'
                 required: true
             responses:
                 "200":
@@ -1677,7 +1677,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.UpdateGameBetDisplayConfigRequest'
+                            $ref: '#/components/schemas/api.game.service.v1.UpdateGameBetDisplayConfigRequest'
                 required: true
             responses:
                 "200":
@@ -6652,15 +6652,6 @@ components:
             properties:
                 commentId:
                     type: string
-        api.backoffice.service.v1.AddGameBetDisplayConfigRequest:
-            type: object
-            properties:
-                country:
-                    type: string
-                allBet:
-                    $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
-                highWins:
-                    $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
         api.backoffice.service.v1.AddOperatorBackofficeByoSubdomainRequest:
             type: object
             properties:
@@ -9991,22 +9982,6 @@ components:
                     type: array
                     items:
                         type: string
-        api.backoffice.service.v1.ListGameBetDisplayConfigRequest:
-            type: object
-            properties:
-                list:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListGameBetDisplayConfigRequest_Item'
-        api.backoffice.service.v1.ListGameBetDisplayConfigRequest_Item:
-            type: object
-            properties:
-                country:
-                    type: string
-                allBet:
-                    $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
-                highWins:
-                    $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
         api.backoffice.service.v1.ListGameDataRequest:
             type: object
             properties:
@@ -12794,15 +12769,6 @@ components:
                     $ref: '#/components/schemas/api.common.OperatorContext'
                 deductionOrder:
                     $ref: '#/components/schemas/api.wallet.service.v1.DeductionOrder'
-        api.backoffice.service.v1.UpdateGameBetDisplayConfigRequest:
-            type: object
-            properties:
-                country:
-                    type: string
-                allBet:
-                    $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
-                highWins:
-                    $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
         api.backoffice.service.v1.UpdateGameRequest:
             type: object
             properties:
@@ -13510,6 +13476,17 @@ components:
                     type: boolean
                 extra:
                     type: string
+        api.game.service.v1.AddGameBetDisplayConfigRequest:
+            type: object
+            properties:
+                country:
+                    type: string
+                allBet:
+                    $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
+                highWins:
+                    $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.game.service.v1.AddGameBetDisplayConfigResponse:
             type: object
             properties: {}
@@ -14226,6 +14203,11 @@ components:
                     type: string
                 systemOperatorName:
                     type: string
+        api.game.service.v1.ListGameBetDisplayConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.game.service.v1.ListGameBetDisplayConfigResponse:
             type: object
             properties:
@@ -14242,6 +14224,8 @@ components:
                     $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
                 highWins:
                     $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
+                enable:
+                    type: boolean
         api.game.service.v1.ListGamesRequest:
             type: object
             properties:
@@ -14671,6 +14655,26 @@ components:
                     format: double
                 bonus_amount:
                     type: string
+        api.game.service.v1.UpdateGameBetDisplayConfigRequest:
+            type: object
+            properties:
+                list:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.game.service.v1.UpdateGameBetDisplayConfigRequest_Item'
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.game.service.v1.UpdateGameBetDisplayConfigRequest_Item:
+            type: object
+            properties:
+                country:
+                    type: string
+                allBet:
+                    $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
+                highWins:
+                    $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
+                enable:
+                    type: boolean
         api.game.service.v1.UpdateGameBetDisplayConfigResponse:
             type: object
             properties: {}

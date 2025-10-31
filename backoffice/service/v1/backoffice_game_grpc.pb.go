@@ -87,9 +87,9 @@ type BackofficeGameClient interface {
 	ListCustomerStrikeReports(ctx context.Context, in *ListCustomerStrikeReportsRequest, opts ...grpc.CallOption) (*v1.ListCustomerStrikeReportsResponse, error)
 	ExportCustomerStrikeReports(ctx context.Context, in *ExportCustomerStrikeReportsRequest, opts ...grpc.CallOption) (*v1.ExportCustomerStrikeReportsResponse, error)
 	ExportSportEvents(ctx context.Context, in *ExportSportEventsRequest, opts ...grpc.CallOption) (*v1.ExportSportEventsResponse, error)
-	AddGameBetDisplayConfig(ctx context.Context, in *AddGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.AddGameBetDisplayConfigResponse, error)
-	UpdateGameBetDisplayConfig(ctx context.Context, in *UpdateGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.UpdateGameBetDisplayConfigResponse, error)
-	ListGameBetDisplayConfig(ctx context.Context, in *ListGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.ListGameBetDisplayConfigResponse, error)
+	AddGameBetDisplayConfig(ctx context.Context, in *v1.AddGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.AddGameBetDisplayConfigResponse, error)
+	UpdateGameBetDisplayConfig(ctx context.Context, in *v1.UpdateGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.UpdateGameBetDisplayConfigResponse, error)
+	ListGameBetDisplayConfig(ctx context.Context, in *v1.ListGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.ListGameBetDisplayConfigResponse, error)
 }
 
 type backofficeGameClient struct {
@@ -360,7 +360,7 @@ func (c *backofficeGameClient) ExportSportEvents(ctx context.Context, in *Export
 	return out, nil
 }
 
-func (c *backofficeGameClient) AddGameBetDisplayConfig(ctx context.Context, in *AddGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.AddGameBetDisplayConfigResponse, error) {
+func (c *backofficeGameClient) AddGameBetDisplayConfig(ctx context.Context, in *v1.AddGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.AddGameBetDisplayConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.AddGameBetDisplayConfigResponse)
 	err := c.cc.Invoke(ctx, BackofficeGame_AddGameBetDisplayConfig_FullMethodName, in, out, cOpts...)
@@ -370,7 +370,7 @@ func (c *backofficeGameClient) AddGameBetDisplayConfig(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *backofficeGameClient) UpdateGameBetDisplayConfig(ctx context.Context, in *UpdateGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.UpdateGameBetDisplayConfigResponse, error) {
+func (c *backofficeGameClient) UpdateGameBetDisplayConfig(ctx context.Context, in *v1.UpdateGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.UpdateGameBetDisplayConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.UpdateGameBetDisplayConfigResponse)
 	err := c.cc.Invoke(ctx, BackofficeGame_UpdateGameBetDisplayConfig_FullMethodName, in, out, cOpts...)
@@ -380,7 +380,7 @@ func (c *backofficeGameClient) UpdateGameBetDisplayConfig(ctx context.Context, i
 	return out, nil
 }
 
-func (c *backofficeGameClient) ListGameBetDisplayConfig(ctx context.Context, in *ListGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.ListGameBetDisplayConfigResponse, error) {
+func (c *backofficeGameClient) ListGameBetDisplayConfig(ctx context.Context, in *v1.ListGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.ListGameBetDisplayConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.ListGameBetDisplayConfigResponse)
 	err := c.cc.Invoke(ctx, BackofficeGame_ListGameBetDisplayConfig_FullMethodName, in, out, cOpts...)
@@ -426,9 +426,9 @@ type BackofficeGameServer interface {
 	ListCustomerStrikeReports(context.Context, *ListCustomerStrikeReportsRequest) (*v1.ListCustomerStrikeReportsResponse, error)
 	ExportCustomerStrikeReports(context.Context, *ExportCustomerStrikeReportsRequest) (*v1.ExportCustomerStrikeReportsResponse, error)
 	ExportSportEvents(context.Context, *ExportSportEventsRequest) (*v1.ExportSportEventsResponse, error)
-	AddGameBetDisplayConfig(context.Context, *AddGameBetDisplayConfigRequest) (*v1.AddGameBetDisplayConfigResponse, error)
-	UpdateGameBetDisplayConfig(context.Context, *UpdateGameBetDisplayConfigRequest) (*v1.UpdateGameBetDisplayConfigResponse, error)
-	ListGameBetDisplayConfig(context.Context, *ListGameBetDisplayConfigRequest) (*v1.ListGameBetDisplayConfigResponse, error)
+	AddGameBetDisplayConfig(context.Context, *v1.AddGameBetDisplayConfigRequest) (*v1.AddGameBetDisplayConfigResponse, error)
+	UpdateGameBetDisplayConfig(context.Context, *v1.UpdateGameBetDisplayConfigRequest) (*v1.UpdateGameBetDisplayConfigResponse, error)
+	ListGameBetDisplayConfig(context.Context, *v1.ListGameBetDisplayConfigRequest) (*v1.ListGameBetDisplayConfigResponse, error)
 	mustEmbedUnimplementedBackofficeGameServer()
 }
 
@@ -517,13 +517,13 @@ func (UnimplementedBackofficeGameServer) ExportCustomerStrikeReports(context.Con
 func (UnimplementedBackofficeGameServer) ExportSportEvents(context.Context, *ExportSportEventsRequest) (*v1.ExportSportEventsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExportSportEvents not implemented")
 }
-func (UnimplementedBackofficeGameServer) AddGameBetDisplayConfig(context.Context, *AddGameBetDisplayConfigRequest) (*v1.AddGameBetDisplayConfigResponse, error) {
+func (UnimplementedBackofficeGameServer) AddGameBetDisplayConfig(context.Context, *v1.AddGameBetDisplayConfigRequest) (*v1.AddGameBetDisplayConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddGameBetDisplayConfig not implemented")
 }
-func (UnimplementedBackofficeGameServer) UpdateGameBetDisplayConfig(context.Context, *UpdateGameBetDisplayConfigRequest) (*v1.UpdateGameBetDisplayConfigResponse, error) {
+func (UnimplementedBackofficeGameServer) UpdateGameBetDisplayConfig(context.Context, *v1.UpdateGameBetDisplayConfigRequest) (*v1.UpdateGameBetDisplayConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateGameBetDisplayConfig not implemented")
 }
-func (UnimplementedBackofficeGameServer) ListGameBetDisplayConfig(context.Context, *ListGameBetDisplayConfigRequest) (*v1.ListGameBetDisplayConfigResponse, error) {
+func (UnimplementedBackofficeGameServer) ListGameBetDisplayConfig(context.Context, *v1.ListGameBetDisplayConfigRequest) (*v1.ListGameBetDisplayConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListGameBetDisplayConfig not implemented")
 }
 func (UnimplementedBackofficeGameServer) mustEmbedUnimplementedBackofficeGameServer() {}
@@ -1016,7 +1016,7 @@ func _BackofficeGame_ExportSportEvents_Handler(srv interface{}, ctx context.Cont
 }
 
 func _BackofficeGame_AddGameBetDisplayConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddGameBetDisplayConfigRequest)
+	in := new(v1.AddGameBetDisplayConfigRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1028,13 +1028,13 @@ func _BackofficeGame_AddGameBetDisplayConfig_Handler(srv interface{}, ctx contex
 		FullMethod: BackofficeGame_AddGameBetDisplayConfig_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeGameServer).AddGameBetDisplayConfig(ctx, req.(*AddGameBetDisplayConfigRequest))
+		return srv.(BackofficeGameServer).AddGameBetDisplayConfig(ctx, req.(*v1.AddGameBetDisplayConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BackofficeGame_UpdateGameBetDisplayConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateGameBetDisplayConfigRequest)
+	in := new(v1.UpdateGameBetDisplayConfigRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1046,13 +1046,13 @@ func _BackofficeGame_UpdateGameBetDisplayConfig_Handler(srv interface{}, ctx con
 		FullMethod: BackofficeGame_UpdateGameBetDisplayConfig_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeGameServer).UpdateGameBetDisplayConfig(ctx, req.(*UpdateGameBetDisplayConfigRequest))
+		return srv.(BackofficeGameServer).UpdateGameBetDisplayConfig(ctx, req.(*v1.UpdateGameBetDisplayConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BackofficeGame_ListGameBetDisplayConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListGameBetDisplayConfigRequest)
+	in := new(v1.ListGameBetDisplayConfigRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1064,7 +1064,7 @@ func _BackofficeGame_ListGameBetDisplayConfig_Handler(srv interface{}, ctx conte
 		FullMethod: BackofficeGame_ListGameBetDisplayConfig_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeGameServer).ListGameBetDisplayConfig(ctx, req.(*ListGameBetDisplayConfigRequest))
+		return srv.(BackofficeGameServer).ListGameBetDisplayConfig(ctx, req.(*v1.ListGameBetDisplayConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
