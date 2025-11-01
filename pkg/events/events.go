@@ -16,7 +16,7 @@ type IntegrityReportEvent struct {
 }
 
 type ClientOnlineStatusEvent struct {
-	ClientId   int64 `json:"userId"`
+	ClientId   int64 `json:"clientId"`
 	OperatorId int64 `json:"operatorId"`
 }
 
