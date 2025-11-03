@@ -222,3 +222,19 @@ const GameBetUserTopic = "game.bet.user"
 const GameBetClientTopic = "game.bet.client"
 
 const CreateSessionTopic = "game.create.session"
+
+// ------------------------------------------------------------
+// Affiliate events
+// ------------------------------------------------------------
+
+const AffiliateBillSettlementTopic = "affiliate.bill.settlement"
+
+type AffiliateBillSettlementEvent struct {
+	UserID                  int64                   `json:"user_id"`
+	ReportingCurrency       string                  `json:"reporting_currency"`
+	AmountReportingCurrency string                  `json:"amount_reporting_currency"`
+	AmountUSD               string                  `json:"amount_usd"`
+	BillID                  int64                   `json:"bill_id"`
+	OperatorContext         *common.OperatorContext `json:"operator_context,omitempty"`
+	CreatedAt               int64                   `json:"created_at"`
+}

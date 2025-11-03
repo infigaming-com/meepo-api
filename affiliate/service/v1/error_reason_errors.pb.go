@@ -455,50 +455,74 @@ func ErrorProcessGameStartFailed(format string, args ...interface{}) *errors.Err
 	return errors.New(500, ErrorReason_PROCESS_GAME_START_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-func IsProcessBillingFailed(err error) bool {
+func IsProcessBillFailed(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_PROCESS_BILLING_FAILED.String() && e.Code == 500
+	return e.Reason == ErrorReason_PROCESS_BILL_FAILED.String() && e.Code == 500
 }
 
-func ErrorProcessBillingFailed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_PROCESS_BILLING_FAILED.String(), fmt.Sprintf(format, args...))
+func ErrorProcessBillFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROCESS_BILL_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-func IsCreateBillingFailed(err error) bool {
+func IsCreateBillFailed(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_CREATE_BILLING_FAILED.String() && e.Code == 500
+	return e.Reason == ErrorReason_CREATE_BILL_FAILED.String() && e.Code == 500
 }
 
-func ErrorCreateBillingFailed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_CREATE_BILLING_FAILED.String(), fmt.Sprintf(format, args...))
+func ErrorCreateBillFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREATE_BILL_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-func IsGetBillingFailed(err error) bool {
+func IsGetBillFailed(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_GET_BILLING_FAILED.String() && e.Code == 500
+	return e.Reason == ErrorReason_GET_BILL_FAILED.String() && e.Code == 500
 }
 
-func ErrorGetBillingFailed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_GET_BILLING_FAILED.String(), fmt.Sprintf(format, args...))
+func ErrorGetBillFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_BILL_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-func IsUpdateBillingFailed(err error) bool {
+func IsUpdateBillFailed(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_UPDATE_BILLING_FAILED.String() && e.Code == 500
+	return e.Reason == ErrorReason_UPDATE_BILL_FAILED.String() && e.Code == 500
 }
 
-func ErrorUpdateBillingFailed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_UPDATE_BILLING_FAILED.String(), fmt.Sprintf(format, args...))
+func ErrorUpdateBillFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_BILL_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsProcessBillSettlementFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROCESS_BILL_SETTLEMENT_FAILED.String() && e.Code == 500
+}
+
+func ErrorProcessBillSettlementFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROCESS_BILL_SETTLEMENT_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListBillsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_BILLS_FAILED.String() && e.Code == 500
+}
+
+func ErrorListBillsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_BILLS_FAILED.String(), fmt.Sprintf(format, args...))
 }
