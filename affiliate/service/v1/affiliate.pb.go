@@ -4183,7 +4183,7 @@ type ListAffiliateBillsResponse_AffiliateBill struct {
 	RetailerOperatorName    string                                               `protobuf:"bytes,4,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
 	CompanyOperatorName     string                                               `protobuf:"bytes,5,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
 	OperatorName            string                                               `protobuf:"bytes,6,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	BillId                  string                                               `protobuf:"bytes,7,opt,name=bill_id,json=billId,proto3" json:"bill_id,omitempty"`
+	BillId                  int64                                                `protobuf:"varint,7,opt,name=bill_id,json=billId,proto3" json:"bill_id,omitempty"`
 	UpdatedAt               *timestamppb.Timestamp                               `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	Status                  string                                               `protobuf:"bytes,9,opt,name=status,proto3" json:"status,omitempty"` // paid/unpaid
 	AmountUsd               string                                               `protobuf:"bytes,10,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
@@ -4267,11 +4267,11 @@ func (x *ListAffiliateBillsResponse_AffiliateBill) GetOperatorName() string {
 	return ""
 }
 
-func (x *ListAffiliateBillsResponse_AffiliateBill) GetBillId() string {
+func (x *ListAffiliateBillsResponse_AffiliateBill) GetBillId() int64 {
 	if x != nil {
 		return x.BillId
 	}
-	return ""
+	return 0
 }
 
 func (x *ListAffiliateBillsResponse_AffiliateBill) GetUpdatedAt() *timestamppb.Timestamp {
@@ -4939,7 +4939,7 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x16retailer_operator_name\x18\x04 \x01(\tR\x14retailerOperatorName\x122\n" +
 	"\x15company_operator_name\x18\x05 \x01(\tR\x13companyOperatorName\x12#\n" +
 	"\roperator_name\x18\x06 \x01(\tR\foperatorName\x12\x17\n" +
-	"\abill_id\x18\a \x01(\tR\x06billId\x129\n" +
+	"\abill_id\x18\a \x01(\x03R\x06billId\x129\n" +
 	"\n" +
 	"updated_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12\x16\n" +
 	"\x06status\x18\t \x01(\tR\x06status\x12\x1d\n" +

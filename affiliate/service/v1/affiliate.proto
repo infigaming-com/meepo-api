@@ -519,7 +519,7 @@ message ListAffiliateBillsResponse {
         string retailer_operator_name = 4;
         string company_operator_name = 5;
         string operator_name = 6;
-        string bill_id = 7;
+        int64 bill_id = 7;
         google.protobuf.Timestamp updated_at = 8;
         string status = 9; // paid/unpaid
         string amount_usd = 10;
