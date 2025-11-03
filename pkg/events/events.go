@@ -236,4 +236,5 @@ type AffiliateBillSettlementEvent struct {
 	AmountUSD               string                  `json:"amount_usd"`
 	BillID                  int64                   `json:"bill_id"`
 	OperatorContext         *common.OperatorContext `json:"operator_context,omitempty"`
+	CreatedAt               int64                   `json:"created_at"`
 }
