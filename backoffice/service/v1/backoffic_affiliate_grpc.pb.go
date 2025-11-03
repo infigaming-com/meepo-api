@@ -39,6 +39,7 @@ const (
 	BackofficeAffiliate_ListEvents_FullMethodName             = "/api.backoffice.service.v1.BackofficeAffiliate/ListEvents"
 	BackofficeAffiliate_ListCommissions_FullMethodName        = "/api.backoffice.service.v1.BackofficeAffiliate/ListCommissions"
 	BackofficeAffiliate_ListAffiliateUsers_FullMethodName     = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateUsers"
+	BackofficeAffiliate_ListAffiliateBills_FullMethodName     = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliateBills"
 )
 
 // BackofficeAffiliateClient is the client API for BackofficeAffiliate service.
@@ -64,6 +65,7 @@ type BackofficeAffiliateClient interface {
 	ListEvents(ctx context.Context, in *ListEventsRequest, opts ...grpc.CallOption) (*v1.ListEventsResponse, error)
 	ListCommissions(ctx context.Context, in *ListCommissionsRequest, opts ...grpc.CallOption) (*v1.ListCommissionsResponse, error)
 	ListAffiliateUsers(ctx context.Context, in *ListAffiliateUsersRequest, opts ...grpc.CallOption) (*v1.ListUsersResponse, error)
+	ListAffiliateBills(ctx context.Context, in *ListAffiliateBillsRequest, opts ...grpc.CallOption) (*v1.ListAffiliateBillsResponse, error)
 }
 
 type backofficeAffiliateClient struct {
@@ -264,6 +266,16 @@ func (c *backofficeAffiliateClient) ListAffiliateUsers(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *backofficeAffiliateClient) ListAffiliateBills(ctx context.Context, in *ListAffiliateBillsRequest, opts ...grpc.CallOption) (*v1.ListAffiliateBillsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListAffiliateBillsResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_ListAffiliateBills_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeAffiliateServer is the server API for BackofficeAffiliate service.
 // All implementations must embed UnimplementedBackofficeAffiliateServer
 // for forward compatibility.
@@ -287,6 +299,7 @@ type BackofficeAffiliateServer interface {
 	ListEvents(context.Context, *ListEventsRequest) (*v1.ListEventsResponse, error)
 	ListCommissions(context.Context, *ListCommissionsRequest) (*v1.ListCommissionsResponse, error)
 	ListAffiliateUsers(context.Context, *ListAffiliateUsersRequest) (*v1.ListUsersResponse, error)
+	ListAffiliateBills(context.Context, *ListAffiliateBillsRequest) (*v1.ListAffiliateBillsResponse, error)
 	mustEmbedUnimplementedBackofficeAffiliateServer()
 }
 
@@ -353,6 +366,9 @@ func (UnimplementedBackofficeAffiliateServer) ListCommissions(context.Context, *
 }
 func (UnimplementedBackofficeAffiliateServer) ListAffiliateUsers(context.Context, *ListAffiliateUsersRequest) (*v1.ListUsersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAffiliateUsers not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) ListAffiliateBills(context.Context, *ListAffiliateBillsRequest) (*v1.ListAffiliateBillsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAffiliateBills not implemented")
 }
 func (UnimplementedBackofficeAffiliateServer) mustEmbedUnimplementedBackofficeAffiliateServer() {}
 func (UnimplementedBackofficeAffiliateServer) testEmbeddedByValue()                             {}
@@ -717,6 +733,24 @@ func _BackofficeAffiliate_ListAffiliateUsers_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeAffiliate_ListAffiliateBills_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAffiliateBillsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).ListAffiliateBills(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_ListAffiliateBills_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).ListAffiliateBills(ctx, req.(*ListAffiliateBillsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeAffiliate_ServiceDesc is the grpc.ServiceDesc for BackofficeAffiliate service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -799,6 +833,10 @@ var BackofficeAffiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAffiliateUsers",
 			Handler:    _BackofficeAffiliate_ListAffiliateUsers_Handler,
+		},
+		{
+			MethodName: "ListAffiliateBills",
+			Handler:    _BackofficeAffiliate_ListAffiliateBills_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

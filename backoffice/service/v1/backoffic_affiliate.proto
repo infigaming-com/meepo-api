@@ -146,6 +146,15 @@ service BackofficeAffiliate {
 			body: "*"
 		};
 	}
+
+	// -------------- Affiliate Bill --------------
+
+	rpc ListAffiliateBills(ListAffiliateBillsRequest) returns (api.affiliate.service.v1.ListAffiliateBillsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/bill/list"
+			body: "*"
+		};
+	}
 }
 
 // -------------- Commission Plan --------------
@@ -299,4 +308,16 @@ message ListAffiliateUsersRequest {
 	optional int32 page = 7;
 	optional int32 page_size = 8;
 	api.common.OperatorContextFilters operator_context_filters = 9;
+}
+
+// -------------- Affiliate Bill --------------
+
+message ListAffiliateBillsRequest {
+    optional int64 affiliate_id = 1;
+    optional int64 bill_id = 2;
+    google.protobuf.Timestamp updated_at_start_time = 3;
+    google.protobuf.Timestamp updated_at_end_time = 4;
+    optional int32 page = 5;
+    optional int32 page_size = 6;
+    api.common.OperatorContextFilters operator_context_filters = 7;
 }

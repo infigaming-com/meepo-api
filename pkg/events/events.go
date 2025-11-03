@@ -222,3 +222,30 @@ const GameBetUserTopic = "game.bet.user"
 const GameBetClientTopic = "game.bet.client"
 
 const CreateSessionTopic = "game.create.session"
+
+// ------------------------------------------------------------
+// Wallet events
+// ------------------------------------------------------------
+
+const ManualCreditTopic = "wallet.credit.manual"
+
+const (
+	ManualCreditEventTypeAffiliateBillSettlement string = "affiliate_bill_settlement"
+)
+
+type ManualCreditEvent struct {
+	UserID                         int64                   `json:"user_id"`
+	Currency                       string                  `json:"currency"`
+	TransactionType                string                  `json:"transaction_type"`
+	CashAmount                     string                  `json:"cash_amount"`
+	CashTurnoverThreshold          string                  `json:"cash_turnover_threshold"`
+	OperatorBonusAmount            string                  `json:"operator_bonus_amount"`
+	OperatorBonusTurnoverThreshold string                  `json:"operator_bonus_turnover_threshold"`
+	OperatorBonusWithdrawLimit     string                  `json:"operator_bonus_withdraw_limit"`
+	Comment                        string                  `json:"comment"`
+	ExternalTransactionID          *int64                  `json:"external_transaction_id,omitempty"`
+	OperatorContext                *common.OperatorContext `json:"operator_context,omitempty"`
+	InitiatorUserID                *int64                  `json:"initiator_user_id,omitempty"`
+	OperatorReportingCurrency      string                  `json:"operator_reporting_currency"`
+	InitiatorOperatorContext       *common.OperatorContext `json:"initiator_operator_context,omitempty"`
+}

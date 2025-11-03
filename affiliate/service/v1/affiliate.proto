@@ -60,6 +60,10 @@ service Affiliate {
     // -------------- User --------------
 
     rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {}
+
+    // -------------- Affiliate Bill --------------
+
+    rpc ListAffiliateBills(ListAffiliateBillsRequest) returns (ListAffiliateBillsResponse) {}
 }
 
 message ContactType {
@@ -407,6 +411,7 @@ message ListCommissionsResponse {
         string retailer_operator_name = 19;
         string company_operator_name = 20;
         string operator_name = 21;
+        int64 bill_id = 22;
     }
     repeated Commission commissions = 1;
     int32 total = 2;
@@ -469,6 +474,62 @@ message ListUsersResponse {
         string roi = 31; // percentage, ngr / commission
     }
     repeated User users = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 page_size = 4;
+}
+
+// -------------- Affiliate Bill --------------
+
+message ListAffiliateBillsRequest {
+    optional int64 affiliate_id = 1;
+    optional int64 bill_id = 2;
+    google.protobuf.Timestamp updated_at_start_time = 3;
+    google.protobuf.Timestamp updated_at_end_time = 4;
+    optional int32 page = 5;
+    optional int32 page_size = 6;
+    int64 initiator_user_id = 7;
+    int64 initiator_role_id = 8;
+    api.common.OperatorContext initiator_operator_context = 9;
+    api.common.OperatorContextFilters operator_context_filters = 10;
+}
+
+message ListAffiliateBillsResponse {
+    message AffiliateBill {
+        message BillDetail {
+            message BillItem {
+                string commission_plan_name = 1;
+                int64 commission_plan_id = 2;
+                string commission_subtype = 3; // cpa/revshare/cpl/cpc/flat_fee
+                int32 quantity = 4;
+                string price_usd = 5; // amount / quantity
+                string price_reporting_currency = 6; // amount / quantity
+                string amount_usd = 7; // amount
+                string amount_reporting_currency = 8; // amount
+            }
+            repeated BillItem bill_items = 1;
+            string total_amount_usd = 2;
+            string total_amount_reporting_currency = 3;
+            string vat_amount_usd = 4; // placeholder
+            string vat_amount_reporting_currency = 5; // placeholder
+        }
+        int64 affiliate_id = 1;
+        string affiliate_name = 2;
+        string affiliate_company_name = 3;
+        string retailer_operator_name = 4;
+        string company_operator_name = 5;
+        string operator_name = 6;
+        string bill_id = 7;
+        google.protobuf.Timestamp updated_at = 8;
+        string status = 9; // paid/unpaid
+        string amount_usd = 10;
+        string amount_reporting_currency = 11;
+        google.protobuf.Timestamp period_start_time = 12;
+        google.protobuf.Timestamp period_end_time = 13;
+        BillDetail bill_detail = 14;
+
+    }
+    repeated AffiliateBill affiliate_bills = 1;
     int32 total = 2;
     int32 page = 3;
     int32 page_size = 4;
