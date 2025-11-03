@@ -1923,15 +1923,16 @@ type ListCommissionsRequest struct {
 	CommissionSubtypes       []string                       `protobuf:"bytes,4,rep,name=commission_subtypes,json=commissionSubtypes,proto3" json:"commission_subtypes,omitempty"` // cpa/revshare/cpl/cpc/flat_fee, multiple subtypes are allowed
 	Countries                []string                       `protobuf:"bytes,5,rep,name=countries,proto3" json:"countries,omitempty"`
 	CommissionId             *int64                         `protobuf:"varint,6,opt,name=commission_id,json=commissionId,proto3,oneof" json:"commission_id,omitempty"`
-	StartTime                *timestamppb.Timestamp         `protobuf:"bytes,7,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	EndTime                  *timestamppb.Timestamp         `protobuf:"bytes,8,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	Status                   *string                        `protobuf:"bytes,9,opt,name=status,proto3,oneof" json:"status,omitempty"` // pending/approved/rejected
-	Page                     *int32                         `protobuf:"varint,10,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize                 *int32                         `protobuf:"varint,11,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	InitiatorUserId          int64                          `protobuf:"varint,12,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
-	InitiatorRoleId          int64                          `protobuf:"varint,13,opt,name=initiator_role_id,json=initiatorRoleId,proto3" json:"initiator_role_id,omitempty"`
-	InitiatorOperatorContext *common.OperatorContext        `protobuf:"bytes,14,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
-	OperatorContextFilters   *common.OperatorContextFilters `protobuf:"bytes,15,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	BillId                   *int64                         `protobuf:"varint,7,opt,name=bill_id,json=billId,proto3,oneof" json:"bill_id,omitempty"`
+	StartTime                *timestamppb.Timestamp         `protobuf:"bytes,8,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	EndTime                  *timestamppb.Timestamp         `protobuf:"bytes,9,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	Status                   *string                        `protobuf:"bytes,10,opt,name=status,proto3,oneof" json:"status,omitempty"` // pending/approved/rejected
+	Page                     *int32                         `protobuf:"varint,11,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize                 *int32                         `protobuf:"varint,12,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	InitiatorUserId          int64                          `protobuf:"varint,13,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
+	InitiatorRoleId          int64                          `protobuf:"varint,14,opt,name=initiator_role_id,json=initiatorRoleId,proto3" json:"initiator_role_id,omitempty"`
+	InitiatorOperatorContext *common.OperatorContext        `protobuf:"bytes,15,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
+	OperatorContextFilters   *common.OperatorContextFilters `protobuf:"bytes,16,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -2004,6 +2005,13 @@ func (x *ListCommissionsRequest) GetCountries() []string {
 func (x *ListCommissionsRequest) GetCommissionId() int64 {
 	if x != nil && x.CommissionId != nil {
 		return *x.CommissionId
+	}
+	return 0
+}
+
+func (x *ListCommissionsRequest) GetBillId() int64 {
+	if x != nil && x.BillId != nil {
+		return *x.BillId
 	}
 	return 0
 }
@@ -4790,29 +4798,32 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\roperator_name\x18\x11 \x01(\tR\foperatorName\x1ap\n" +
 	"\x0eCommissionPlan\x12,\n" +
 	"\x12commission_plan_id\x18\x01 \x01(\x03R\x10commissionPlanId\x120\n" +
-	"\x14commission_plan_name\x18\x02 \x01(\tR\x12commissionPlanName\"\xb3\x06\n" +
+	"\x14commission_plan_name\x18\x02 \x01(\tR\x12commissionPlanName\"\xdd\x06\n" +
 	"\x16ListCommissionsRequest\x12.\n" +
 	"\x13commission_plan_ids\x18\x01 \x03(\x03R\x11commissionPlanIds\x12\x1c\n" +
 	"\auser_id\x18\x02 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12&\n" +
 	"\faffiliate_id\x18\x03 \x01(\x03H\x01R\vaffiliateId\x88\x01\x01\x12/\n" +
 	"\x13commission_subtypes\x18\x04 \x03(\tR\x12commissionSubtypes\x12\x1c\n" +
 	"\tcountries\x18\x05 \x03(\tR\tcountries\x12(\n" +
-	"\rcommission_id\x18\x06 \x01(\x03H\x02R\fcommissionId\x88\x01\x01\x129\n" +
+	"\rcommission_id\x18\x06 \x01(\x03H\x02R\fcommissionId\x88\x01\x01\x12\x1c\n" +
+	"\abill_id\x18\a \x01(\x03H\x03R\x06billId\x88\x01\x01\x129\n" +
 	"\n" +
-	"start_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
-	"\bend_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12\x1b\n" +
-	"\x06status\x18\t \x01(\tH\x03R\x06status\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\n" +
-	" \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\v \x01(\x05H\x05R\bpageSize\x88\x01\x01\x12*\n" +
-	"\x11initiator_user_id\x18\f \x01(\x03R\x0finitiatorUserId\x12*\n" +
-	"\x11initiator_role_id\x18\r \x01(\x03R\x0finitiatorRoleId\x12Y\n" +
-	"\x1ainitiator_operator_context\x18\x0e \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12\\\n" +
-	"\x18operator_context_filters\x18\x0f \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\n" +
+	"start_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
+	"\bend_time\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12\x1b\n" +
+	"\x06status\x18\n" +
+	" \x01(\tH\x04R\x06status\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\v \x01(\x05H\x05R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\f \x01(\x05H\x06R\bpageSize\x88\x01\x01\x12*\n" +
+	"\x11initiator_user_id\x18\r \x01(\x03R\x0finitiatorUserId\x12*\n" +
+	"\x11initiator_role_id\x18\x0e \x01(\x03R\x0finitiatorRoleId\x12Y\n" +
+	"\x1ainitiator_operator_context\x18\x0f \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12\\\n" +
+	"\x18operator_context_filters\x18\x10 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\n" +
 	"\n" +
 	"\b_user_idB\x0f\n" +
 	"\r_affiliate_idB\x10\n" +
-	"\x0e_commission_idB\t\n" +
+	"\x0e_commission_idB\n" +
+	"\n" +
+	"\b_bill_idB\t\n" +
 	"\a_statusB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
