@@ -1111,8 +1111,16 @@ type VipLevelConfigTemplate struct {
 	UpdatedAt               int64  `protobuf:"varint,37,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	ImageUrl                string `protobuf:"bytes,38,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
 	XpLossEnabled           bool   `protobuf:"varint,39,opt,name=xp_loss_enabled,json=xpLossEnabled,proto3" json:"xp_loss_enabled,omitempty"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	// Daily Lossback
+	DailyLossbackEnabled             bool                 `protobuf:"varint,40,opt,name=daily_lossback_enabled,json=dailyLossbackEnabled,proto3" json:"daily_lossback_enabled,omitempty"`
+	DailyLossbackApplicationLimit    int32                `protobuf:"varint,41,opt,name=daily_lossback_application_limit,json=dailyLossbackApplicationLimit,proto3" json:"daily_lossback_application_limit,omitempty"`
+	DailyLossbackBalanceThreshold    string               `protobuf:"bytes,42,opt,name=daily_lossback_balance_threshold,json=dailyLossbackBalanceThreshold,proto3" json:"daily_lossback_balance_threshold,omitempty"`
+	DailyLossbackMinDepositThreshold string               `protobuf:"bytes,43,opt,name=daily_lossback_min_deposit_threshold,json=dailyLossbackMinDepositThreshold,proto3" json:"daily_lossback_min_deposit_threshold,omitempty"`
+	DailyLossbackWageringReq         string               `protobuf:"bytes,44,opt,name=daily_lossback_wagering_req,json=dailyLossbackWageringReq,proto3" json:"daily_lossback_wagering_req,omitempty"`
+	DailyLossbackMaxWithdrawMultiple string               `protobuf:"bytes,45,opt,name=daily_lossback_max_withdraw_multiple,json=dailyLossbackMaxWithdrawMultiple,proto3" json:"daily_lossback_max_withdraw_multiple,omitempty"`
+	DailyLossbackRates               []*DailyLossbackRate `protobuf:"bytes,46,rep,name=daily_lossback_rates,json=dailyLossbackRates,proto3" json:"daily_lossback_rates,omitempty"`
+	unknownFields                    protoimpl.UnknownFields
+	sizeCache                        protoimpl.SizeCache
 }
 
 func (x *VipLevelConfigTemplate) Reset() {
@@ -1418,6 +1426,107 @@ func (x *VipLevelConfigTemplate) GetXpLossEnabled() bool {
 	return false
 }
 
+func (x *VipLevelConfigTemplate) GetDailyLossbackEnabled() bool {
+	if x != nil {
+		return x.DailyLossbackEnabled
+	}
+	return false
+}
+
+func (x *VipLevelConfigTemplate) GetDailyLossbackApplicationLimit() int32 {
+	if x != nil {
+		return x.DailyLossbackApplicationLimit
+	}
+	return 0
+}
+
+func (x *VipLevelConfigTemplate) GetDailyLossbackBalanceThreshold() string {
+	if x != nil {
+		return x.DailyLossbackBalanceThreshold
+	}
+	return ""
+}
+
+func (x *VipLevelConfigTemplate) GetDailyLossbackMinDepositThreshold() string {
+	if x != nil {
+		return x.DailyLossbackMinDepositThreshold
+	}
+	return ""
+}
+
+func (x *VipLevelConfigTemplate) GetDailyLossbackWageringReq() string {
+	if x != nil {
+		return x.DailyLossbackWageringReq
+	}
+	return ""
+}
+
+func (x *VipLevelConfigTemplate) GetDailyLossbackMaxWithdrawMultiple() string {
+	if x != nil {
+		return x.DailyLossbackMaxWithdrawMultiple
+	}
+	return ""
+}
+
+func (x *VipLevelConfigTemplate) GetDailyLossbackRates() []*DailyLossbackRate {
+	if x != nil {
+		return x.DailyLossbackRates
+	}
+	return nil
+}
+
+type DailyLossbackRate struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	GameType      string                 `protobuf:"bytes,1,opt,name=game_type,json=gameType,proto3" json:"game_type,omitempty"`
+	RatePct       string                 `protobuf:"bytes,2,opt,name=rate_pct,json=ratePct,proto3" json:"rate_pct,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DailyLossbackRate) Reset() {
+	*x = DailyLossbackRate{}
+	mi := &file_vip_service_v1_vip_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DailyLossbackRate) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DailyLossbackRate) ProtoMessage() {}
+
+func (x *DailyLossbackRate) ProtoReflect() protoreflect.Message {
+	mi := &file_vip_service_v1_vip_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DailyLossbackRate.ProtoReflect.Descriptor instead.
+func (*DailyLossbackRate) Descriptor() ([]byte, []int) {
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *DailyLossbackRate) GetGameType() string {
+	if x != nil {
+		return x.GameType
+	}
+	return ""
+}
+
+func (x *DailyLossbackRate) GetRatePct() string {
+	if x != nil {
+		return x.RatePct
+	}
+	return ""
+}
+
 type ListVipLevelConfigTemplatesRequest struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
@@ -1430,7 +1539,7 @@ type ListVipLevelConfigTemplatesRequest struct {
 
 func (x *ListVipLevelConfigTemplatesRequest) Reset() {
 	*x = ListVipLevelConfigTemplatesRequest{}
-	mi := &file_vip_service_v1_vip_proto_msgTypes[7]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1442,7 +1551,7 @@ func (x *ListVipLevelConfigTemplatesRequest) String() string {
 func (*ListVipLevelConfigTemplatesRequest) ProtoMessage() {}
 
 func (x *ListVipLevelConfigTemplatesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_vip_service_v1_vip_proto_msgTypes[7]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1455,7 +1564,7 @@ func (x *ListVipLevelConfigTemplatesRequest) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use ListVipLevelConfigTemplatesRequest.ProtoReflect.Descriptor instead.
 func (*ListVipLevelConfigTemplatesRequest) Descriptor() ([]byte, []int) {
-	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{7}
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ListVipLevelConfigTemplatesRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -1498,7 +1607,7 @@ type ListVipLevelConfigTemplatesResponse struct {
 
 func (x *ListVipLevelConfigTemplatesResponse) Reset() {
 	*x = ListVipLevelConfigTemplatesResponse{}
-	mi := &file_vip_service_v1_vip_proto_msgTypes[8]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1510,7 +1619,7 @@ func (x *ListVipLevelConfigTemplatesResponse) String() string {
 func (*ListVipLevelConfigTemplatesResponse) ProtoMessage() {}
 
 func (x *ListVipLevelConfigTemplatesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_vip_service_v1_vip_proto_msgTypes[8]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1523,7 +1632,7 @@ func (x *ListVipLevelConfigTemplatesResponse) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use ListVipLevelConfigTemplatesResponse.ProtoReflect.Descriptor instead.
 func (*ListVipLevelConfigTemplatesResponse) Descriptor() ([]byte, []int) {
-	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{8}
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ListVipLevelConfigTemplatesResponse) GetTemplates() []*VipLevelConfigTemplate {
@@ -1564,7 +1673,7 @@ type GetVipLevelConfigTemplateRequest struct {
 
 func (x *GetVipLevelConfigTemplateRequest) Reset() {
 	*x = GetVipLevelConfigTemplateRequest{}
-	mi := &file_vip_service_v1_vip_proto_msgTypes[9]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1576,7 +1685,7 @@ func (x *GetVipLevelConfigTemplateRequest) String() string {
 func (*GetVipLevelConfigTemplateRequest) ProtoMessage() {}
 
 func (x *GetVipLevelConfigTemplateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_vip_service_v1_vip_proto_msgTypes[9]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1589,7 +1698,7 @@ func (x *GetVipLevelConfigTemplateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetVipLevelConfigTemplateRequest.ProtoReflect.Descriptor instead.
 func (*GetVipLevelConfigTemplateRequest) Descriptor() ([]byte, []int) {
-	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{9}
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *GetVipLevelConfigTemplateRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -1615,7 +1724,7 @@ type GetVipLevelConfigTemplateResponse struct {
 
 func (x *GetVipLevelConfigTemplateResponse) Reset() {
 	*x = GetVipLevelConfigTemplateResponse{}
-	mi := &file_vip_service_v1_vip_proto_msgTypes[10]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1627,7 +1736,7 @@ func (x *GetVipLevelConfigTemplateResponse) String() string {
 func (*GetVipLevelConfigTemplateResponse) ProtoMessage() {}
 
 func (x *GetVipLevelConfigTemplateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_vip_service_v1_vip_proto_msgTypes[10]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1640,7 +1749,7 @@ func (x *GetVipLevelConfigTemplateResponse) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use GetVipLevelConfigTemplateResponse.ProtoReflect.Descriptor instead.
 func (*GetVipLevelConfigTemplateResponse) Descriptor() ([]byte, []int) {
-	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{10}
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *GetVipLevelConfigTemplateResponse) GetTemplate() *VipLevelConfigTemplate {
@@ -1661,7 +1770,7 @@ type CreateVipLevelConfigTemplateRequest struct {
 
 func (x *CreateVipLevelConfigTemplateRequest) Reset() {
 	*x = CreateVipLevelConfigTemplateRequest{}
-	mi := &file_vip_service_v1_vip_proto_msgTypes[11]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1673,7 +1782,7 @@ func (x *CreateVipLevelConfigTemplateRequest) String() string {
 func (*CreateVipLevelConfigTemplateRequest) ProtoMessage() {}
 
 func (x *CreateVipLevelConfigTemplateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_vip_service_v1_vip_proto_msgTypes[11]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1686,7 +1795,7 @@ func (x *CreateVipLevelConfigTemplateRequest) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use CreateVipLevelConfigTemplateRequest.ProtoReflect.Descriptor instead.
 func (*CreateVipLevelConfigTemplateRequest) Descriptor() ([]byte, []int) {
-	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{11}
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *CreateVipLevelConfigTemplateRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -1719,7 +1828,7 @@ type CreateVipLevelConfigTemplateResponse struct {
 
 func (x *CreateVipLevelConfigTemplateResponse) Reset() {
 	*x = CreateVipLevelConfigTemplateResponse{}
-	mi := &file_vip_service_v1_vip_proto_msgTypes[12]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1731,7 +1840,7 @@ func (x *CreateVipLevelConfigTemplateResponse) String() string {
 func (*CreateVipLevelConfigTemplateResponse) ProtoMessage() {}
 
 func (x *CreateVipLevelConfigTemplateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_vip_service_v1_vip_proto_msgTypes[12]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1744,7 +1853,7 @@ func (x *CreateVipLevelConfigTemplateResponse) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use CreateVipLevelConfigTemplateResponse.ProtoReflect.Descriptor instead.
 func (*CreateVipLevelConfigTemplateResponse) Descriptor() ([]byte, []int) {
-	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{12}
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *CreateVipLevelConfigTemplateResponse) GetTemplate() *VipLevelConfigTemplate {
@@ -1764,7 +1873,7 @@ type UpdateVipLevelConfigTemplateRequest struct {
 
 func (x *UpdateVipLevelConfigTemplateRequest) Reset() {
 	*x = UpdateVipLevelConfigTemplateRequest{}
-	mi := &file_vip_service_v1_vip_proto_msgTypes[13]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1776,7 +1885,7 @@ func (x *UpdateVipLevelConfigTemplateRequest) String() string {
 func (*UpdateVipLevelConfigTemplateRequest) ProtoMessage() {}
 
 func (x *UpdateVipLevelConfigTemplateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_vip_service_v1_vip_proto_msgTypes[13]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1789,7 +1898,7 @@ func (x *UpdateVipLevelConfigTemplateRequest) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use UpdateVipLevelConfigTemplateRequest.ProtoReflect.Descriptor instead.
 func (*UpdateVipLevelConfigTemplateRequest) Descriptor() ([]byte, []int) {
-	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{13}
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *UpdateVipLevelConfigTemplateRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -1814,7 +1923,7 @@ type UpdateVipLevelConfigTemplateResponse struct {
 
 func (x *UpdateVipLevelConfigTemplateResponse) Reset() {
 	*x = UpdateVipLevelConfigTemplateResponse{}
-	mi := &file_vip_service_v1_vip_proto_msgTypes[14]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1826,7 +1935,7 @@ func (x *UpdateVipLevelConfigTemplateResponse) String() string {
 func (*UpdateVipLevelConfigTemplateResponse) ProtoMessage() {}
 
 func (x *UpdateVipLevelConfigTemplateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_vip_service_v1_vip_proto_msgTypes[14]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1839,7 +1948,7 @@ func (x *UpdateVipLevelConfigTemplateResponse) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use UpdateVipLevelConfigTemplateResponse.ProtoReflect.Descriptor instead.
 func (*UpdateVipLevelConfigTemplateResponse) Descriptor() ([]byte, []int) {
-	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{14}
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{15}
 }
 
 type DeleteVipLevelConfigTemplateRequest struct {
@@ -1852,7 +1961,7 @@ type DeleteVipLevelConfigTemplateRequest struct {
 
 func (x *DeleteVipLevelConfigTemplateRequest) Reset() {
 	*x = DeleteVipLevelConfigTemplateRequest{}
-	mi := &file_vip_service_v1_vip_proto_msgTypes[15]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1864,7 +1973,7 @@ func (x *DeleteVipLevelConfigTemplateRequest) String() string {
 func (*DeleteVipLevelConfigTemplateRequest) ProtoMessage() {}
 
 func (x *DeleteVipLevelConfigTemplateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_vip_service_v1_vip_proto_msgTypes[15]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1877,7 +1986,7 @@ func (x *DeleteVipLevelConfigTemplateRequest) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use DeleteVipLevelConfigTemplateRequest.ProtoReflect.Descriptor instead.
 func (*DeleteVipLevelConfigTemplateRequest) Descriptor() ([]byte, []int) {
-	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{15}
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *DeleteVipLevelConfigTemplateRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -1902,7 +2011,7 @@ type DeleteVipLevelConfigTemplateResponse struct {
 
 func (x *DeleteVipLevelConfigTemplateResponse) Reset() {
 	*x = DeleteVipLevelConfigTemplateResponse{}
-	mi := &file_vip_service_v1_vip_proto_msgTypes[16]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1914,7 +2023,7 @@ func (x *DeleteVipLevelConfigTemplateResponse) String() string {
 func (*DeleteVipLevelConfigTemplateResponse) ProtoMessage() {}
 
 func (x *DeleteVipLevelConfigTemplateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_vip_service_v1_vip_proto_msgTypes[16]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1927,7 +2036,7 @@ func (x *DeleteVipLevelConfigTemplateResponse) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use DeleteVipLevelConfigTemplateResponse.ProtoReflect.Descriptor instead.
 func (*DeleteVipLevelConfigTemplateResponse) Descriptor() ([]byte, []int) {
-	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{16}
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{17}
 }
 
 type VipMember struct {
@@ -1951,7 +2060,7 @@ type VipMember struct {
 
 func (x *VipMember) Reset() {
 	*x = VipMember{}
-	mi := &file_vip_service_v1_vip_proto_msgTypes[17]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1963,7 +2072,7 @@ func (x *VipMember) String() string {
 func (*VipMember) ProtoMessage() {}
 
 func (x *VipMember) ProtoReflect() protoreflect.Message {
-	mi := &file_vip_service_v1_vip_proto_msgTypes[17]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1976,7 +2085,7 @@ func (x *VipMember) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VipMember.ProtoReflect.Descriptor instead.
 func (*VipMember) Descriptor() ([]byte, []int) {
-	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{17}
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *VipMember) GetId() int64 {
@@ -2080,7 +2189,7 @@ type GetUserVipLevelRequest struct {
 
 func (x *GetUserVipLevelRequest) Reset() {
 	*x = GetUserVipLevelRequest{}
-	mi := &file_vip_service_v1_vip_proto_msgTypes[18]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2092,7 +2201,7 @@ func (x *GetUserVipLevelRequest) String() string {
 func (*GetUserVipLevelRequest) ProtoMessage() {}
 
 func (x *GetUserVipLevelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_vip_service_v1_vip_proto_msgTypes[18]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2105,7 +2214,7 @@ func (x *GetUserVipLevelRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserVipLevelRequest.ProtoReflect.Descriptor instead.
 func (*GetUserVipLevelRequest) Descriptor() ([]byte, []int) {
-	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{18}
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *GetUserVipLevelRequest) GetOperatorContext() *common.OperatorContext {
@@ -2131,7 +2240,7 @@ type GetUserVipLevelResponse struct {
 
 func (x *GetUserVipLevelResponse) Reset() {
 	*x = GetUserVipLevelResponse{}
-	mi := &file_vip_service_v1_vip_proto_msgTypes[19]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2143,7 +2252,7 @@ func (x *GetUserVipLevelResponse) String() string {
 func (*GetUserVipLevelResponse) ProtoMessage() {}
 
 func (x *GetUserVipLevelResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_vip_service_v1_vip_proto_msgTypes[19]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2156,7 +2265,7 @@ func (x *GetUserVipLevelResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserVipLevelResponse.ProtoReflect.Descriptor instead.
 func (*GetUserVipLevelResponse) Descriptor() ([]byte, []int) {
-	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{19}
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *GetUserVipLevelResponse) GetVipMember() *VipMember {
@@ -2180,7 +2289,7 @@ type UpdateVipRewardSliderRequest struct {
 
 func (x *UpdateVipRewardSliderRequest) Reset() {
 	*x = UpdateVipRewardSliderRequest{}
-	mi := &file_vip_service_v1_vip_proto_msgTypes[20]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2192,7 +2301,7 @@ func (x *UpdateVipRewardSliderRequest) String() string {
 func (*UpdateVipRewardSliderRequest) ProtoMessage() {}
 
 func (x *UpdateVipRewardSliderRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_vip_service_v1_vip_proto_msgTypes[20]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2205,7 +2314,7 @@ func (x *UpdateVipRewardSliderRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateVipRewardSliderRequest.ProtoReflect.Descriptor instead.
 func (*UpdateVipRewardSliderRequest) Descriptor() ([]byte, []int) {
-	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{20}
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *UpdateVipRewardSliderRequest) GetRackback() int64 {
@@ -2258,7 +2367,7 @@ type UpdateVipRewardSliderResponse struct {
 
 func (x *UpdateVipRewardSliderResponse) Reset() {
 	*x = UpdateVipRewardSliderResponse{}
-	mi := &file_vip_service_v1_vip_proto_msgTypes[21]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2270,7 +2379,7 @@ func (x *UpdateVipRewardSliderResponse) String() string {
 func (*UpdateVipRewardSliderResponse) ProtoMessage() {}
 
 func (x *UpdateVipRewardSliderResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_vip_service_v1_vip_proto_msgTypes[21]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2283,7 +2392,7 @@ func (x *UpdateVipRewardSliderResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateVipRewardSliderResponse.ProtoReflect.Descriptor instead.
 func (*UpdateVipRewardSliderResponse) Descriptor() ([]byte, []int) {
-	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{21}
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{22}
 }
 
 type GetClaimableVipRewardsRequest struct {
@@ -2297,7 +2406,7 @@ type GetClaimableVipRewardsRequest struct {
 
 func (x *GetClaimableVipRewardsRequest) Reset() {
 	*x = GetClaimableVipRewardsRequest{}
-	mi := &file_vip_service_v1_vip_proto_msgTypes[22]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2309,7 +2418,7 @@ func (x *GetClaimableVipRewardsRequest) String() string {
 func (*GetClaimableVipRewardsRequest) ProtoMessage() {}
 
 func (x *GetClaimableVipRewardsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_vip_service_v1_vip_proto_msgTypes[22]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2322,7 +2431,7 @@ func (x *GetClaimableVipRewardsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetClaimableVipRewardsRequest.ProtoReflect.Descriptor instead.
 func (*GetClaimableVipRewardsRequest) Descriptor() ([]byte, []int) {
-	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{22}
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *GetClaimableVipRewardsRequest) GetUserId() int64 {
@@ -2355,7 +2464,7 @@ type GetClaimableVipRewardsResponse struct {
 
 func (x *GetClaimableVipRewardsResponse) Reset() {
 	*x = GetClaimableVipRewardsResponse{}
-	mi := &file_vip_service_v1_vip_proto_msgTypes[23]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2367,7 +2476,7 @@ func (x *GetClaimableVipRewardsResponse) String() string {
 func (*GetClaimableVipRewardsResponse) ProtoMessage() {}
 
 func (x *GetClaimableVipRewardsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_vip_service_v1_vip_proto_msgTypes[23]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2380,7 +2489,7 @@ func (x *GetClaimableVipRewardsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetClaimableVipRewardsResponse.ProtoReflect.Descriptor instead.
 func (*GetClaimableVipRewardsResponse) Descriptor() ([]byte, []int) {
-	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{23}
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *GetClaimableVipRewardsResponse) GetClaimableRewards() []*GetClaimableVipRewardsResponse_ClaimableVipReward {
@@ -2402,7 +2511,7 @@ type ClaimVipRewardRequest struct {
 
 func (x *ClaimVipRewardRequest) Reset() {
 	*x = ClaimVipRewardRequest{}
-	mi := &file_vip_service_v1_vip_proto_msgTypes[24]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2414,7 +2523,7 @@ func (x *ClaimVipRewardRequest) String() string {
 func (*ClaimVipRewardRequest) ProtoMessage() {}
 
 func (x *ClaimVipRewardRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_vip_service_v1_vip_proto_msgTypes[24]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2427,7 +2536,7 @@ func (x *ClaimVipRewardRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClaimVipRewardRequest.ProtoReflect.Descriptor instead.
 func (*ClaimVipRewardRequest) Descriptor() ([]byte, []int) {
-	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{24}
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *ClaimVipRewardRequest) GetRewardKind() VipRewardKind {
@@ -2469,7 +2578,7 @@ type ClaimVipRewardResponse struct {
 
 func (x *ClaimVipRewardResponse) Reset() {
 	*x = ClaimVipRewardResponse{}
-	mi := &file_vip_service_v1_vip_proto_msgTypes[25]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2481,7 +2590,7 @@ func (x *ClaimVipRewardResponse) String() string {
 func (*ClaimVipRewardResponse) ProtoMessage() {}
 
 func (x *ClaimVipRewardResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_vip_service_v1_vip_proto_msgTypes[25]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2494,7 +2603,7 @@ func (x *ClaimVipRewardResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClaimVipRewardResponse.ProtoReflect.Descriptor instead.
 func (*ClaimVipRewardResponse) Descriptor() ([]byte, []int) {
-	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{25}
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *ClaimVipRewardResponse) GetClaimableAmount() int64 {
@@ -2528,7 +2637,7 @@ type GetOperatorVipSettingsRequest struct {
 
 func (x *GetOperatorVipSettingsRequest) Reset() {
 	*x = GetOperatorVipSettingsRequest{}
-	mi := &file_vip_service_v1_vip_proto_msgTypes[26]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2540,7 +2649,7 @@ func (x *GetOperatorVipSettingsRequest) String() string {
 func (*GetOperatorVipSettingsRequest) ProtoMessage() {}
 
 func (x *GetOperatorVipSettingsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_vip_service_v1_vip_proto_msgTypes[26]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2553,7 +2662,7 @@ func (x *GetOperatorVipSettingsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOperatorVipSettingsRequest.ProtoReflect.Descriptor instead.
 func (*GetOperatorVipSettingsRequest) Descriptor() ([]byte, []int) {
-	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{26}
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *GetOperatorVipSettingsRequest) GetOperatorContext() *common.OperatorContext {
@@ -2580,7 +2689,7 @@ type GetOperatorVipSettingsResponse struct {
 
 func (x *GetOperatorVipSettingsResponse) Reset() {
 	*x = GetOperatorVipSettingsResponse{}
-	mi := &file_vip_service_v1_vip_proto_msgTypes[27]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2592,7 +2701,7 @@ func (x *GetOperatorVipSettingsResponse) String() string {
 func (*GetOperatorVipSettingsResponse) ProtoMessage() {}
 
 func (x *GetOperatorVipSettingsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_vip_service_v1_vip_proto_msgTypes[27]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2605,7 +2714,7 @@ func (x *GetOperatorVipSettingsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOperatorVipSettingsResponse.ProtoReflect.Descriptor instead.
 func (*GetOperatorVipSettingsResponse) Descriptor() ([]byte, []int) {
-	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{27}
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *GetOperatorVipSettingsResponse) GetSetting() *VipSetting {
@@ -2634,7 +2743,7 @@ type ConfirmClaimVipRewardRequest struct {
 
 func (x *ConfirmClaimVipRewardRequest) Reset() {
 	*x = ConfirmClaimVipRewardRequest{}
-	mi := &file_vip_service_v1_vip_proto_msgTypes[28]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2646,7 +2755,7 @@ func (x *ConfirmClaimVipRewardRequest) String() string {
 func (*ConfirmClaimVipRewardRequest) ProtoMessage() {}
 
 func (x *ConfirmClaimVipRewardRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_vip_service_v1_vip_proto_msgTypes[28]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2659,7 +2768,7 @@ func (x *ConfirmClaimVipRewardRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConfirmClaimVipRewardRequest.ProtoReflect.Descriptor instead.
 func (*ConfirmClaimVipRewardRequest) Descriptor() ([]byte, []int) {
-	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{28}
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *ConfirmClaimVipRewardRequest) GetUserId() int64 {
@@ -2698,7 +2807,7 @@ type ConfirmClaimVipRewardResponse struct {
 
 func (x *ConfirmClaimVipRewardResponse) Reset() {
 	*x = ConfirmClaimVipRewardResponse{}
-	mi := &file_vip_service_v1_vip_proto_msgTypes[29]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2710,7 +2819,7 @@ func (x *ConfirmClaimVipRewardResponse) String() string {
 func (*ConfirmClaimVipRewardResponse) ProtoMessage() {}
 
 func (x *ConfirmClaimVipRewardResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_vip_service_v1_vip_proto_msgTypes[29]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2723,7 +2832,7 @@ func (x *ConfirmClaimVipRewardResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConfirmClaimVipRewardResponse.ProtoReflect.Descriptor instead.
 func (*ConfirmClaimVipRewardResponse) Descriptor() ([]byte, []int) {
-	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{29}
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{30}
 }
 
 type GetClaimableVipRewardsResponse_ClaimableVipReward struct {
@@ -2737,7 +2846,7 @@ type GetClaimableVipRewardsResponse_ClaimableVipReward struct {
 
 func (x *GetClaimableVipRewardsResponse_ClaimableVipReward) Reset() {
 	*x = GetClaimableVipRewardsResponse_ClaimableVipReward{}
-	mi := &file_vip_service_v1_vip_proto_msgTypes[30]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2749,7 +2858,7 @@ func (x *GetClaimableVipRewardsResponse_ClaimableVipReward) String() string {
 func (*GetClaimableVipRewardsResponse_ClaimableVipReward) ProtoMessage() {}
 
 func (x *GetClaimableVipRewardsResponse_ClaimableVipReward) ProtoReflect() protoreflect.Message {
-	mi := &file_vip_service_v1_vip_proto_msgTypes[30]
+	mi := &file_vip_service_v1_vip_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2762,7 +2871,7 @@ func (x *GetClaimableVipRewardsResponse_ClaimableVipReward) ProtoReflect() proto
 
 // Deprecated: Use GetClaimableVipRewardsResponse_ClaimableVipReward.ProtoReflect.Descriptor instead.
 func (*GetClaimableVipRewardsResponse_ClaimableVipReward) Descriptor() ([]byte, []int) {
-	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{23, 0}
+	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{24, 0}
 }
 
 func (x *GetClaimableVipRewardsResponse_ClaimableVipReward) GetRewardKind() VipRewardKind {
@@ -2864,7 +2973,7 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\x17UpdateVipSettingRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x128\n" +
 	"\asetting\x18\x02 \x01(\v2\x1e.api.vip.service.v1.VipSettingR\asetting\"\x1a\n" +
-	"\x18UpdateVipSettingResponse\"\xa9\x0e\n" +
+	"\x18UpdateVipSettingResponse\"\xa9\x12\n" +
 	"\x16VipLevelConfigTemplate\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12,\n" +
 	"\x12system_operator_id\x18\x02 \x01(\x03R\x10systemOperatorId\x120\n" +
@@ -2909,7 +3018,17 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\n" +
 	"updated_at\x18% \x01(\x03R\tupdatedAt\x12\x1b\n" +
 	"\timage_url\x18& \x01(\tR\bimageUrl\x12&\n" +
-	"\x0fxp_loss_enabled\x18' \x01(\bR\rxpLossEnabled\"\xc9\x01\n" +
+	"\x0fxp_loss_enabled\x18' \x01(\bR\rxpLossEnabled\x124\n" +
+	"\x16daily_lossback_enabled\x18( \x01(\bR\x14dailyLossbackEnabled\x12G\n" +
+	" daily_lossback_application_limit\x18) \x01(\x05R\x1ddailyLossbackApplicationLimit\x12G\n" +
+	" daily_lossback_balance_threshold\x18* \x01(\tR\x1ddailyLossbackBalanceThreshold\x12N\n" +
+	"$daily_lossback_min_deposit_threshold\x18+ \x01(\tR dailyLossbackMinDepositThreshold\x12=\n" +
+	"\x1bdaily_lossback_wagering_req\x18, \x01(\tR\x18dailyLossbackWageringReq\x12N\n" +
+	"$daily_lossback_max_withdraw_multiple\x18- \x01(\tR dailyLossbackMaxWithdrawMultiple\x12W\n" +
+	"\x14daily_lossback_rates\x18. \x03(\v2%.api.vip.service.v1.DailyLossbackRateR\x12dailyLossbackRates\"K\n" +
+	"\x11DailyLossbackRate\x12\x1b\n" +
+	"\tgame_type\x18\x01 \x01(\tR\bgameType\x12\x19\n" +
+	"\brate_pct\x18\x02 \x01(\tR\aratePct\"\xc9\x01\n" +
 	"\"ListVipLevelConfigTemplatesRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1d\n" +
 	"\n" +
@@ -3070,7 +3189,7 @@ func file_vip_service_v1_vip_proto_rawDescGZIP() []byte {
 }
 
 var file_vip_service_v1_vip_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
-var file_vip_service_v1_vip_proto_msgTypes = make([]protoimpl.MessageInfo, 31)
+var file_vip_service_v1_vip_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
 var file_vip_service_v1_vip_proto_goTypes = []any{
 	(VipDisplayRule)(0),                                       // 0: api.vip.service.v1.VipDisplayRule
 	(VipRewardKind)(0),                                        // 1: api.vip.service.v1.VipRewardKind
@@ -3085,31 +3204,32 @@ var file_vip_service_v1_vip_proto_goTypes = []any{
 	(*UpdateVipSettingRequest)(nil),                           // 10: api.vip.service.v1.UpdateVipSettingRequest
 	(*UpdateVipSettingResponse)(nil),                          // 11: api.vip.service.v1.UpdateVipSettingResponse
 	(*VipLevelConfigTemplate)(nil),                            // 12: api.vip.service.v1.VipLevelConfigTemplate
-	(*ListVipLevelConfigTemplatesRequest)(nil),                // 13: api.vip.service.v1.ListVipLevelConfigTemplatesRequest
-	(*ListVipLevelConfigTemplatesResponse)(nil),               // 14: api.vip.service.v1.ListVipLevelConfigTemplatesResponse
-	(*GetVipLevelConfigTemplateRequest)(nil),                  // 15: api.vip.service.v1.GetVipLevelConfigTemplateRequest
-	(*GetVipLevelConfigTemplateResponse)(nil),                 // 16: api.vip.service.v1.GetVipLevelConfigTemplateResponse
-	(*CreateVipLevelConfigTemplateRequest)(nil),               // 17: api.vip.service.v1.CreateVipLevelConfigTemplateRequest
-	(*CreateVipLevelConfigTemplateResponse)(nil),              // 18: api.vip.service.v1.CreateVipLevelConfigTemplateResponse
-	(*UpdateVipLevelConfigTemplateRequest)(nil),               // 19: api.vip.service.v1.UpdateVipLevelConfigTemplateRequest
-	(*UpdateVipLevelConfigTemplateResponse)(nil),              // 20: api.vip.service.v1.UpdateVipLevelConfigTemplateResponse
-	(*DeleteVipLevelConfigTemplateRequest)(nil),               // 21: api.vip.service.v1.DeleteVipLevelConfigTemplateRequest
-	(*DeleteVipLevelConfigTemplateResponse)(nil),              // 22: api.vip.service.v1.DeleteVipLevelConfigTemplateResponse
-	(*VipMember)(nil),                                         // 23: api.vip.service.v1.VipMember
-	(*GetUserVipLevelRequest)(nil),                            // 24: api.vip.service.v1.GetUserVipLevelRequest
-	(*GetUserVipLevelResponse)(nil),                           // 25: api.vip.service.v1.GetUserVipLevelResponse
-	(*UpdateVipRewardSliderRequest)(nil),                      // 26: api.vip.service.v1.UpdateVipRewardSliderRequest
-	(*UpdateVipRewardSliderResponse)(nil),                     // 27: api.vip.service.v1.UpdateVipRewardSliderResponse
-	(*GetClaimableVipRewardsRequest)(nil),                     // 28: api.vip.service.v1.GetClaimableVipRewardsRequest
-	(*GetClaimableVipRewardsResponse)(nil),                    // 29: api.vip.service.v1.GetClaimableVipRewardsResponse
-	(*ClaimVipRewardRequest)(nil),                             // 30: api.vip.service.v1.ClaimVipRewardRequest
-	(*ClaimVipRewardResponse)(nil),                            // 31: api.vip.service.v1.ClaimVipRewardResponse
-	(*GetOperatorVipSettingsRequest)(nil),                     // 32: api.vip.service.v1.GetOperatorVipSettingsRequest
-	(*GetOperatorVipSettingsResponse)(nil),                    // 33: api.vip.service.v1.GetOperatorVipSettingsResponse
-	(*ConfirmClaimVipRewardRequest)(nil),                      // 34: api.vip.service.v1.ConfirmClaimVipRewardRequest
-	(*ConfirmClaimVipRewardResponse)(nil),                     // 35: api.vip.service.v1.ConfirmClaimVipRewardResponse
-	(*GetClaimableVipRewardsResponse_ClaimableVipReward)(nil), // 36: api.vip.service.v1.GetClaimableVipRewardsResponse.ClaimableVipReward
-	(*common.OperatorContext)(nil),                            // 37: api.common.OperatorContext
+	(*DailyLossbackRate)(nil),                                 // 13: api.vip.service.v1.DailyLossbackRate
+	(*ListVipLevelConfigTemplatesRequest)(nil),                // 14: api.vip.service.v1.ListVipLevelConfigTemplatesRequest
+	(*ListVipLevelConfigTemplatesResponse)(nil),               // 15: api.vip.service.v1.ListVipLevelConfigTemplatesResponse
+	(*GetVipLevelConfigTemplateRequest)(nil),                  // 16: api.vip.service.v1.GetVipLevelConfigTemplateRequest
+	(*GetVipLevelConfigTemplateResponse)(nil),                 // 17: api.vip.service.v1.GetVipLevelConfigTemplateResponse
+	(*CreateVipLevelConfigTemplateRequest)(nil),               // 18: api.vip.service.v1.CreateVipLevelConfigTemplateRequest
+	(*CreateVipLevelConfigTemplateResponse)(nil),              // 19: api.vip.service.v1.CreateVipLevelConfigTemplateResponse
+	(*UpdateVipLevelConfigTemplateRequest)(nil),               // 20: api.vip.service.v1.UpdateVipLevelConfigTemplateRequest
+	(*UpdateVipLevelConfigTemplateResponse)(nil),              // 21: api.vip.service.v1.UpdateVipLevelConfigTemplateResponse
+	(*DeleteVipLevelConfigTemplateRequest)(nil),               // 22: api.vip.service.v1.DeleteVipLevelConfigTemplateRequest
+	(*DeleteVipLevelConfigTemplateResponse)(nil),              // 23: api.vip.service.v1.DeleteVipLevelConfigTemplateResponse
+	(*VipMember)(nil),                                         // 24: api.vip.service.v1.VipMember
+	(*GetUserVipLevelRequest)(nil),                            // 25: api.vip.service.v1.GetUserVipLevelRequest
+	(*GetUserVipLevelResponse)(nil),                           // 26: api.vip.service.v1.GetUserVipLevelResponse
+	(*UpdateVipRewardSliderRequest)(nil),                      // 27: api.vip.service.v1.UpdateVipRewardSliderRequest
+	(*UpdateVipRewardSliderResponse)(nil),                     // 28: api.vip.service.v1.UpdateVipRewardSliderResponse
+	(*GetClaimableVipRewardsRequest)(nil),                     // 29: api.vip.service.v1.GetClaimableVipRewardsRequest
+	(*GetClaimableVipRewardsResponse)(nil),                    // 30: api.vip.service.v1.GetClaimableVipRewardsResponse
+	(*ClaimVipRewardRequest)(nil),                             // 31: api.vip.service.v1.ClaimVipRewardRequest
+	(*ClaimVipRewardResponse)(nil),                            // 32: api.vip.service.v1.ClaimVipRewardResponse
+	(*GetOperatorVipSettingsRequest)(nil),                     // 33: api.vip.service.v1.GetOperatorVipSettingsRequest
+	(*GetOperatorVipSettingsResponse)(nil),                    // 34: api.vip.service.v1.GetOperatorVipSettingsResponse
+	(*ConfirmClaimVipRewardRequest)(nil),                      // 35: api.vip.service.v1.ConfirmClaimVipRewardRequest
+	(*ConfirmClaimVipRewardResponse)(nil),                     // 36: api.vip.service.v1.ConfirmClaimVipRewardResponse
+	(*GetClaimableVipRewardsResponse_ClaimableVipReward)(nil), // 37: api.vip.service.v1.GetClaimableVipRewardsResponse.ClaimableVipReward
+	(*common.OperatorContext)(nil),                            // 38: api.common.OperatorContext
 }
 var file_vip_service_v1_vip_proto_depIdxs = []int32{
 	2,  // 0: api.vip.service.v1.VipSetting.upgrade_payout_type:type_name -> api.vip.service.v1.VipPayoutType
@@ -3123,68 +3243,69 @@ var file_vip_service_v1_vip_proto_depIdxs = []int32{
 	5,  // 8: api.vip.service.v1.VipSetting.rakeback_daily_expiry_type:type_name -> api.vip.service.v1.VipRewardExpiryType
 	5,  // 9: api.vip.service.v1.VipSetting.weekly_reward_expiry_type:type_name -> api.vip.service.v1.VipRewardExpiryType
 	5,  // 10: api.vip.service.v1.VipSetting.monthly_reward_expiry_type:type_name -> api.vip.service.v1.VipRewardExpiryType
-	37, // 11: api.vip.service.v1.GetVipSettingRequest.target_operator_context:type_name -> api.common.OperatorContext
+	38, // 11: api.vip.service.v1.GetVipSettingRequest.target_operator_context:type_name -> api.common.OperatorContext
 	7,  // 12: api.vip.service.v1.GetVipSettingResponse.default_setting:type_name -> api.vip.service.v1.VipSetting
 	7,  // 13: api.vip.service.v1.GetVipSettingResponse.custom_setting:type_name -> api.vip.service.v1.VipSetting
-	37, // 14: api.vip.service.v1.GetVipSettingResponse.custom_operator_context:type_name -> api.common.OperatorContext
-	37, // 15: api.vip.service.v1.GetVipSettingResponse.inherited_operator_context:type_name -> api.common.OperatorContext
+	38, // 14: api.vip.service.v1.GetVipSettingResponse.custom_operator_context:type_name -> api.common.OperatorContext
+	38, // 15: api.vip.service.v1.GetVipSettingResponse.inherited_operator_context:type_name -> api.common.OperatorContext
 	12, // 16: api.vip.service.v1.GetVipSettingResponse.default_templates:type_name -> api.vip.service.v1.VipLevelConfigTemplate
 	12, // 17: api.vip.service.v1.GetVipSettingResponse.custom_templates:type_name -> api.vip.service.v1.VipLevelConfigTemplate
-	37, // 18: api.vip.service.v1.UpdateVipSettingRequest.target_operator_context:type_name -> api.common.OperatorContext
+	38, // 18: api.vip.service.v1.UpdateVipSettingRequest.target_operator_context:type_name -> api.common.OperatorContext
 	7,  // 19: api.vip.service.v1.UpdateVipSettingRequest.setting:type_name -> api.vip.service.v1.VipSetting
-	37, // 20: api.vip.service.v1.ListVipLevelConfigTemplatesRequest.target_operator_context:type_name -> api.common.OperatorContext
-	12, // 21: api.vip.service.v1.ListVipLevelConfigTemplatesResponse.templates:type_name -> api.vip.service.v1.VipLevelConfigTemplate
-	37, // 22: api.vip.service.v1.GetVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
-	12, // 23: api.vip.service.v1.GetVipLevelConfigTemplateResponse.template:type_name -> api.vip.service.v1.VipLevelConfigTemplate
-	37, // 24: api.vip.service.v1.CreateVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
-	12, // 25: api.vip.service.v1.CreateVipLevelConfigTemplateRequest.template:type_name -> api.vip.service.v1.VipLevelConfigTemplate
-	12, // 26: api.vip.service.v1.CreateVipLevelConfigTemplateResponse.template:type_name -> api.vip.service.v1.VipLevelConfigTemplate
-	37, // 27: api.vip.service.v1.UpdateVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
-	12, // 28: api.vip.service.v1.UpdateVipLevelConfigTemplateRequest.template:type_name -> api.vip.service.v1.VipLevelConfigTemplate
-	37, // 29: api.vip.service.v1.DeleteVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
-	37, // 30: api.vip.service.v1.GetUserVipLevelRequest.operator_context:type_name -> api.common.OperatorContext
-	23, // 31: api.vip.service.v1.GetUserVipLevelResponse.vip_member:type_name -> api.vip.service.v1.VipMember
-	37, // 32: api.vip.service.v1.UpdateVipRewardSliderRequest.operator_context:type_name -> api.common.OperatorContext
-	37, // 33: api.vip.service.v1.GetClaimableVipRewardsRequest.operator_context:type_name -> api.common.OperatorContext
-	36, // 34: api.vip.service.v1.GetClaimableVipRewardsResponse.claimable_rewards:type_name -> api.vip.service.v1.GetClaimableVipRewardsResponse.ClaimableVipReward
-	1,  // 35: api.vip.service.v1.ClaimVipRewardRequest.reward_kind:type_name -> api.vip.service.v1.VipRewardKind
-	37, // 36: api.vip.service.v1.ClaimVipRewardRequest.operator_context:type_name -> api.common.OperatorContext
-	37, // 37: api.vip.service.v1.GetOperatorVipSettingsRequest.operator_context:type_name -> api.common.OperatorContext
-	7,  // 38: api.vip.service.v1.GetOperatorVipSettingsResponse.setting:type_name -> api.vip.service.v1.VipSetting
-	12, // 39: api.vip.service.v1.GetOperatorVipSettingsResponse.vip_level_config_templates:type_name -> api.vip.service.v1.VipLevelConfigTemplate
-	37, // 40: api.vip.service.v1.ConfirmClaimVipRewardRequest.operator_context:type_name -> api.common.OperatorContext
-	1,  // 41: api.vip.service.v1.GetClaimableVipRewardsResponse.ClaimableVipReward.reward_kind:type_name -> api.vip.service.v1.VipRewardKind
-	8,  // 42: api.vip.service.v1.Vip.GetVipSetting:input_type -> api.vip.service.v1.GetVipSettingRequest
-	10, // 43: api.vip.service.v1.Vip.UpdateVipSetting:input_type -> api.vip.service.v1.UpdateVipSettingRequest
-	13, // 44: api.vip.service.v1.Vip.ListVipLevelConfigTemplates:input_type -> api.vip.service.v1.ListVipLevelConfigTemplatesRequest
-	15, // 45: api.vip.service.v1.Vip.GetVipLevelConfigTemplate:input_type -> api.vip.service.v1.GetVipLevelConfigTemplateRequest
-	17, // 46: api.vip.service.v1.Vip.CreateVipLevelConfigTemplate:input_type -> api.vip.service.v1.CreateVipLevelConfigTemplateRequest
-	19, // 47: api.vip.service.v1.Vip.UpdateVipLevelConfigTemplate:input_type -> api.vip.service.v1.UpdateVipLevelConfigTemplateRequest
-	21, // 48: api.vip.service.v1.Vip.DeleteVipLevelConfigTemplate:input_type -> api.vip.service.v1.DeleteVipLevelConfigTemplateRequest
-	32, // 49: api.vip.service.v1.Vip.GetOperatorVipSettings:input_type -> api.vip.service.v1.GetOperatorVipSettingsRequest
-	24, // 50: api.vip.service.v1.Vip.GetUserVipLevel:input_type -> api.vip.service.v1.GetUserVipLevelRequest
-	26, // 51: api.vip.service.v1.Vip.UpdateVipRewardSlider:input_type -> api.vip.service.v1.UpdateVipRewardSliderRequest
-	28, // 52: api.vip.service.v1.Vip.GetClaimableVipRewards:input_type -> api.vip.service.v1.GetClaimableVipRewardsRequest
-	30, // 53: api.vip.service.v1.Vip.ClaimVipReward:input_type -> api.vip.service.v1.ClaimVipRewardRequest
-	34, // 54: api.vip.service.v1.Vip.ConfirmClaimVipReward:input_type -> api.vip.service.v1.ConfirmClaimVipRewardRequest
-	9,  // 55: api.vip.service.v1.Vip.GetVipSetting:output_type -> api.vip.service.v1.GetVipSettingResponse
-	11, // 56: api.vip.service.v1.Vip.UpdateVipSetting:output_type -> api.vip.service.v1.UpdateVipSettingResponse
-	14, // 57: api.vip.service.v1.Vip.ListVipLevelConfigTemplates:output_type -> api.vip.service.v1.ListVipLevelConfigTemplatesResponse
-	16, // 58: api.vip.service.v1.Vip.GetVipLevelConfigTemplate:output_type -> api.vip.service.v1.GetVipLevelConfigTemplateResponse
-	18, // 59: api.vip.service.v1.Vip.CreateVipLevelConfigTemplate:output_type -> api.vip.service.v1.CreateVipLevelConfigTemplateResponse
-	20, // 60: api.vip.service.v1.Vip.UpdateVipLevelConfigTemplate:output_type -> api.vip.service.v1.UpdateVipLevelConfigTemplateResponse
-	22, // 61: api.vip.service.v1.Vip.DeleteVipLevelConfigTemplate:output_type -> api.vip.service.v1.DeleteVipLevelConfigTemplateResponse
-	33, // 62: api.vip.service.v1.Vip.GetOperatorVipSettings:output_type -> api.vip.service.v1.GetOperatorVipSettingsResponse
-	25, // 63: api.vip.service.v1.Vip.GetUserVipLevel:output_type -> api.vip.service.v1.GetUserVipLevelResponse
-	27, // 64: api.vip.service.v1.Vip.UpdateVipRewardSlider:output_type -> api.vip.service.v1.UpdateVipRewardSliderResponse
-	29, // 65: api.vip.service.v1.Vip.GetClaimableVipRewards:output_type -> api.vip.service.v1.GetClaimableVipRewardsResponse
-	31, // 66: api.vip.service.v1.Vip.ClaimVipReward:output_type -> api.vip.service.v1.ClaimVipRewardResponse
-	35, // 67: api.vip.service.v1.Vip.ConfirmClaimVipReward:output_type -> api.vip.service.v1.ConfirmClaimVipRewardResponse
-	55, // [55:68] is the sub-list for method output_type
-	42, // [42:55] is the sub-list for method input_type
-	42, // [42:42] is the sub-list for extension type_name
-	42, // [42:42] is the sub-list for extension extendee
-	0,  // [0:42] is the sub-list for field type_name
+	13, // 20: api.vip.service.v1.VipLevelConfigTemplate.daily_lossback_rates:type_name -> api.vip.service.v1.DailyLossbackRate
+	38, // 21: api.vip.service.v1.ListVipLevelConfigTemplatesRequest.target_operator_context:type_name -> api.common.OperatorContext
+	12, // 22: api.vip.service.v1.ListVipLevelConfigTemplatesResponse.templates:type_name -> api.vip.service.v1.VipLevelConfigTemplate
+	38, // 23: api.vip.service.v1.GetVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	12, // 24: api.vip.service.v1.GetVipLevelConfigTemplateResponse.template:type_name -> api.vip.service.v1.VipLevelConfigTemplate
+	38, // 25: api.vip.service.v1.CreateVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	12, // 26: api.vip.service.v1.CreateVipLevelConfigTemplateRequest.template:type_name -> api.vip.service.v1.VipLevelConfigTemplate
+	12, // 27: api.vip.service.v1.CreateVipLevelConfigTemplateResponse.template:type_name -> api.vip.service.v1.VipLevelConfigTemplate
+	38, // 28: api.vip.service.v1.UpdateVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	12, // 29: api.vip.service.v1.UpdateVipLevelConfigTemplateRequest.template:type_name -> api.vip.service.v1.VipLevelConfigTemplate
+	38, // 30: api.vip.service.v1.DeleteVipLevelConfigTemplateRequest.target_operator_context:type_name -> api.common.OperatorContext
+	38, // 31: api.vip.service.v1.GetUserVipLevelRequest.operator_context:type_name -> api.common.OperatorContext
+	24, // 32: api.vip.service.v1.GetUserVipLevelResponse.vip_member:type_name -> api.vip.service.v1.VipMember
+	38, // 33: api.vip.service.v1.UpdateVipRewardSliderRequest.operator_context:type_name -> api.common.OperatorContext
+	38, // 34: api.vip.service.v1.GetClaimableVipRewardsRequest.operator_context:type_name -> api.common.OperatorContext
+	37, // 35: api.vip.service.v1.GetClaimableVipRewardsResponse.claimable_rewards:type_name -> api.vip.service.v1.GetClaimableVipRewardsResponse.ClaimableVipReward
+	1,  // 36: api.vip.service.v1.ClaimVipRewardRequest.reward_kind:type_name -> api.vip.service.v1.VipRewardKind
+	38, // 37: api.vip.service.v1.ClaimVipRewardRequest.operator_context:type_name -> api.common.OperatorContext
+	38, // 38: api.vip.service.v1.GetOperatorVipSettingsRequest.operator_context:type_name -> api.common.OperatorContext
+	7,  // 39: api.vip.service.v1.GetOperatorVipSettingsResponse.setting:type_name -> api.vip.service.v1.VipSetting
+	12, // 40: api.vip.service.v1.GetOperatorVipSettingsResponse.vip_level_config_templates:type_name -> api.vip.service.v1.VipLevelConfigTemplate
+	38, // 41: api.vip.service.v1.ConfirmClaimVipRewardRequest.operator_context:type_name -> api.common.OperatorContext
+	1,  // 42: api.vip.service.v1.GetClaimableVipRewardsResponse.ClaimableVipReward.reward_kind:type_name -> api.vip.service.v1.VipRewardKind
+	8,  // 43: api.vip.service.v1.Vip.GetVipSetting:input_type -> api.vip.service.v1.GetVipSettingRequest
+	10, // 44: api.vip.service.v1.Vip.UpdateVipSetting:input_type -> api.vip.service.v1.UpdateVipSettingRequest
+	14, // 45: api.vip.service.v1.Vip.ListVipLevelConfigTemplates:input_type -> api.vip.service.v1.ListVipLevelConfigTemplatesRequest
+	16, // 46: api.vip.service.v1.Vip.GetVipLevelConfigTemplate:input_type -> api.vip.service.v1.GetVipLevelConfigTemplateRequest
+	18, // 47: api.vip.service.v1.Vip.CreateVipLevelConfigTemplate:input_type -> api.vip.service.v1.CreateVipLevelConfigTemplateRequest
+	20, // 48: api.vip.service.v1.Vip.UpdateVipLevelConfigTemplate:input_type -> api.vip.service.v1.UpdateVipLevelConfigTemplateRequest
+	22, // 49: api.vip.service.v1.Vip.DeleteVipLevelConfigTemplate:input_type -> api.vip.service.v1.DeleteVipLevelConfigTemplateRequest
+	33, // 50: api.vip.service.v1.Vip.GetOperatorVipSettings:input_type -> api.vip.service.v1.GetOperatorVipSettingsRequest
+	25, // 51: api.vip.service.v1.Vip.GetUserVipLevel:input_type -> api.vip.service.v1.GetUserVipLevelRequest
+	27, // 52: api.vip.service.v1.Vip.UpdateVipRewardSlider:input_type -> api.vip.service.v1.UpdateVipRewardSliderRequest
+	29, // 53: api.vip.service.v1.Vip.GetClaimableVipRewards:input_type -> api.vip.service.v1.GetClaimableVipRewardsRequest
+	31, // 54: api.vip.service.v1.Vip.ClaimVipReward:input_type -> api.vip.service.v1.ClaimVipRewardRequest
+	35, // 55: api.vip.service.v1.Vip.ConfirmClaimVipReward:input_type -> api.vip.service.v1.ConfirmClaimVipRewardRequest
+	9,  // 56: api.vip.service.v1.Vip.GetVipSetting:output_type -> api.vip.service.v1.GetVipSettingResponse
+	11, // 57: api.vip.service.v1.Vip.UpdateVipSetting:output_type -> api.vip.service.v1.UpdateVipSettingResponse
+	15, // 58: api.vip.service.v1.Vip.ListVipLevelConfigTemplates:output_type -> api.vip.service.v1.ListVipLevelConfigTemplatesResponse
+	17, // 59: api.vip.service.v1.Vip.GetVipLevelConfigTemplate:output_type -> api.vip.service.v1.GetVipLevelConfigTemplateResponse
+	19, // 60: api.vip.service.v1.Vip.CreateVipLevelConfigTemplate:output_type -> api.vip.service.v1.CreateVipLevelConfigTemplateResponse
+	21, // 61: api.vip.service.v1.Vip.UpdateVipLevelConfigTemplate:output_type -> api.vip.service.v1.UpdateVipLevelConfigTemplateResponse
+	23, // 62: api.vip.service.v1.Vip.DeleteVipLevelConfigTemplate:output_type -> api.vip.service.v1.DeleteVipLevelConfigTemplateResponse
+	34, // 63: api.vip.service.v1.Vip.GetOperatorVipSettings:output_type -> api.vip.service.v1.GetOperatorVipSettingsResponse
+	26, // 64: api.vip.service.v1.Vip.GetUserVipLevel:output_type -> api.vip.service.v1.GetUserVipLevelResponse
+	28, // 65: api.vip.service.v1.Vip.UpdateVipRewardSlider:output_type -> api.vip.service.v1.UpdateVipRewardSliderResponse
+	30, // 66: api.vip.service.v1.Vip.GetClaimableVipRewards:output_type -> api.vip.service.v1.GetClaimableVipRewardsResponse
+	32, // 67: api.vip.service.v1.Vip.ClaimVipReward:output_type -> api.vip.service.v1.ClaimVipRewardResponse
+	36, // 68: api.vip.service.v1.Vip.ConfirmClaimVipReward:output_type -> api.vip.service.v1.ConfirmClaimVipRewardResponse
+	56, // [56:69] is the sub-list for method output_type
+	43, // [43:56] is the sub-list for method input_type
+	43, // [43:43] is the sub-list for extension type_name
+	43, // [43:43] is the sub-list for extension extendee
+	0,  // [0:43] is the sub-list for field type_name
 }
 
 func init() { file_vip_service_v1_vip_proto_init() }
@@ -3198,7 +3319,7 @@ func file_vip_service_v1_vip_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_vip_service_v1_vip_proto_rawDesc), len(file_vip_service_v1_vip_proto_rawDesc)),
 			NumEnums:      6,
-			NumMessages:   31,
+			NumMessages:   32,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

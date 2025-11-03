@@ -244,6 +244,20 @@ message VipLevelConfigTemplate {
 
   string image_url = 38;
   bool xp_loss_enabled = 39;
+
+  // Daily Lossback
+  bool daily_lossback_enabled = 40;
+  int32 daily_lossback_application_limit = 41;
+  string daily_lossback_balance_threshold = 42;
+  string daily_lossback_min_deposit_threshold = 43;
+  string daily_lossback_wagering_req = 44;
+  string daily_lossback_max_withdraw_multiple = 45;
+  repeated DailyLossbackRate daily_lossback_rates = 46;
+}
+
+message DailyLossbackRate {
+  string game_type = 1;
+  string rate_pct = 2;
 }
 
 message ListVipLevelConfigTemplatesRequest {

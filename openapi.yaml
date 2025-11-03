@@ -16288,6 +16288,13 @@ components:
         api.vip.service.v1.ConfirmClaimVipRewardResponse:
             type: object
             properties: {}
+        api.vip.service.v1.DailyLossbackRate:
+            type: object
+            properties:
+                gameType:
+                    type: string
+                ratePct:
+                    type: string
         api.vip.service.v1.GetClaimableVipRewardsResponse:
             type: object
             properties:
@@ -16457,6 +16464,24 @@ components:
                     type: string
                 xpLossEnabled:
                     type: boolean
+                dailyLossbackEnabled:
+                    type: boolean
+                    description: Daily Lossback
+                dailyLossbackApplicationLimit:
+                    type: integer
+                    format: int32
+                dailyLossbackBalanceThreshold:
+                    type: string
+                dailyLossbackMinDepositThreshold:
+                    type: string
+                dailyLossbackWageringReq:
+                    type: string
+                dailyLossbackMaxWithdrawMultiple:
+                    type: string
+                dailyLossbackRates:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.vip.service.v1.DailyLossbackRate'
         api.vip.service.v1.VipMember:
             type: object
             properties:
