@@ -44,6 +44,12 @@ service Vip {
   rpc ConfirmClaimVipReward(ConfirmClaimVipRewardRequest) returns (ConfirmClaimVipRewardResponse) {
   }
 
+  rpc RequestDailyLossback(RequestDailyLossbackRequest) returns (RequestDailyLossbackResponse) {
+  }
+
+  rpc GetDailyLossbackStatus(GetDailyLossbackStatusRequest) returns (GetDailyLossbackStatusResponse) {
+  }
+
 }
 
 enum VipDisplayRule {
@@ -392,4 +398,32 @@ message ConfirmClaimVipRewardRequest {
 }
 
 message ConfirmClaimVipRewardResponse {
+}
+
+message RequestDailyLossbackRequest {
+  int64 user_id = 1;
+  api.common.OperatorContext operator_context = 2;
+}
+
+message RequestDailyLossbackResponse {
+}
+
+message DailyLossbackStatus {
+  bool eligible = 1;
+  string requested_times = 2;
+  string total_allowed_times = 3;
+  bool deposit_met = 4;
+  bool single_deposit_met = 5;
+  bool wallet_balance_met = 6;
+  bool time_window_met = 7;
+  bool no_unsettled_bets = 8;
+}
+
+message GetDailyLossbackStatusRequest {
+  int64 user_id = 1;
+  api.common.OperatorContext operator_context = 2;
+}
+
+message GetDailyLossbackStatusResponse {
+  DailyLossbackStatus status = 1;
 }
