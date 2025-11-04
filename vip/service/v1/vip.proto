@@ -124,6 +124,7 @@ message VipSetting {
   VipPayoutType rakeback_daily_payout_type = 12;
   VipPayoutType weekly_reward_payout_type = 13;
   VipPayoutType monthly_reward_payout_type = 14;
+  VipPayoutType daily_lossback_payout_type = 15;
   
   string deposit_xp_rate = 16;
   string wagering_xp_rate = 17;

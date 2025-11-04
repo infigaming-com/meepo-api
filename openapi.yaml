@@ -16695,6 +16695,13 @@ components:
                         - VIP_PAYOUT_TYPE_BONUS
                     type: string
                     format: enum
+                dailyLossbackPayoutType:
+                    enum:
+                        - VIP_PAYOUT_TYPE_UNSPECIFIED
+                        - VIP_PAYOUT_TYPE_CASH
+                        - VIP_PAYOUT_TYPE_BONUS
+                    type: string
+                    format: enum
                 depositXpRate:
                     type: string
                 wageringXpRate:

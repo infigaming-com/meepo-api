@@ -196,6 +196,8 @@ func (m *VipSetting) validate(all bool) error {
 
 	// no validation rules for MonthlyRewardPayoutType
 
+	// no validation rules for DailyLossbackPayoutType
+
 	// no validation rules for DepositXpRate
 
 	// no validation rules for WageringXpRate
