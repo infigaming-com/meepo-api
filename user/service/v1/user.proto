@@ -1724,6 +1724,7 @@ message ConfirmClaimVipRewardRequest {
 }
 
 message RequestDailyLossbackRequest {
+	string currency = 1;
 }
 
 message GetDailyLossbackStatusRequest {

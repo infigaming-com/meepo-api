@@ -423,6 +423,7 @@ message DailyLossbackStatus {
 message GetDailyLossbackStatusRequest {
   int64 user_id = 1;
   api.common.OperatorContext operator_context = 2;
+  string currency = 3;
 }
 
 message GetDailyLossbackStatusResponse {

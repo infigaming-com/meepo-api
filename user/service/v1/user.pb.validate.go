@@ -22050,6 +22050,8 @@ func (m *RequestDailyLossbackRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for Currency
+
 	if len(errors) > 0 {
 		return RequestDailyLossbackRequestMultiError(errors)
 	}

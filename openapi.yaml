@@ -16027,7 +16027,9 @@ components:
             description: RegisterRequest contains the information needed to register a new user.
         api.user.service.v1.RequestDailyLossbackRequest:
             type: object
-            properties: {}
+            properties:
+                currency:
+                    type: string
         api.user.service.v1.ResetPasswordWithCodeRequest:
             type: object
             properties:

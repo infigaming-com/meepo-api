@@ -10360,6 +10360,7 @@ func (x *ConfirmClaimVipRewardRequest) GetClaimCurrency() string {
 
 type RequestDailyLossbackRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -10392,6 +10393,13 @@ func (x *RequestDailyLossbackRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use RequestDailyLossbackRequest.ProtoReflect.Descriptor instead.
 func (*RequestDailyLossbackRequest) Descriptor() ([]byte, []int) {
 	return file_user_service_v1_user_proto_rawDescGZIP(), []int{169}
+}
+
+func (x *RequestDailyLossbackRequest) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
 }
 
 type GetDailyLossbackStatusRequest struct {
@@ -13019,8 +13027,9 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"rewardKind\"w\n" +
 	"\x1cConfirmClaimVipRewardRequest\x120\n" +
 	"\x14claim_transaction_id\x18\x01 \x01(\x03R\x12claimTransactionId\x12%\n" +
-	"\x0eclaim_currency\x18\x02 \x01(\tR\rclaimCurrency\"\x1d\n" +
-	"\x1bRequestDailyLossbackRequest\"\x1f\n" +
+	"\x0eclaim_currency\x18\x02 \x01(\tR\rclaimCurrency\"9\n" +
+	"\x1bRequestDailyLossbackRequest\x12\x1a\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\"\x1f\n" +
 	"\x1dGetDailyLossbackStatusRequest*j\n" +
 	"\bAuthType\x12\x19\n" +
 	"\x15AUTH_TYPE_UNSPECIFIED\x10\x00\x12\x16\n" +
