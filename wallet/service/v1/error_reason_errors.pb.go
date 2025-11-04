@@ -1522,3 +1522,15 @@ func IsUpdateUserDepositStatsFailed(err error) bool {
 func ErrorUpdateUserDepositStatsFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_UPDATE_USER_DEPOSIT_STATS_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsListTimeRangeDepositCreditsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_TIME_RANGE_DEPOSIT_CREDITS_FAILED.String() && e.Code == 500
+}
+
+func ErrorListTimeRangeDepositCreditsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_TIME_RANGE_DEPOSIT_CREDITS_FAILED.String(), fmt.Sprintf(format, args...))
+}
