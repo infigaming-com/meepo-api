@@ -1598,6 +1598,15 @@ message ListTimeRangeDepositCreditsResponse {
 	message Credit {
 		int64 credit_id = 1;
 		string currency = 2;
+		string cash = 3;
+		string cash_usd = 4;
+		string cash_reporting_currency = 5;
+		string operator_bonus = 6;
+		string operator_bonus_usd = 7;
+		string operator_bonus_reporting_currency = 8;
+		string provider_bonus = 9;
+		string provider_bonus_usd = 10;
+		string provider_bonus_reporting_currency = 11;
 	}
 	repeated Credit credits = 1;
 }

@@ -12588,11 +12588,20 @@ func (x *ListManualJournalEntriesResponse_ManualJournalEntry) GetTurnoverThresho
 }
 
 type ListTimeRangeDepositCreditsResponse_Credit struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	CreditId      int64                  `protobuf:"varint,1,opt,name=credit_id,json=creditId,proto3" json:"credit_id,omitempty"`
-	Currency      string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                          protoimpl.MessageState `protogen:"open.v1"`
+	CreditId                       int64                  `protobuf:"varint,1,opt,name=credit_id,json=creditId,proto3" json:"credit_id,omitempty"`
+	Currency                       string                 `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	Cash                           string                 `protobuf:"bytes,3,opt,name=cash,proto3" json:"cash,omitempty"`
+	CashUsd                        string                 `protobuf:"bytes,4,opt,name=cash_usd,json=cashUsd,proto3" json:"cash_usd,omitempty"`
+	CashReportingCurrency          string                 `protobuf:"bytes,5,opt,name=cash_reporting_currency,json=cashReportingCurrency,proto3" json:"cash_reporting_currency,omitempty"`
+	OperatorBonus                  string                 `protobuf:"bytes,6,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
+	OperatorBonusUsd               string                 `protobuf:"bytes,7,opt,name=operator_bonus_usd,json=operatorBonusUsd,proto3" json:"operator_bonus_usd,omitempty"`
+	OperatorBonusReportingCurrency string                 `protobuf:"bytes,8,opt,name=operator_bonus_reporting_currency,json=operatorBonusReportingCurrency,proto3" json:"operator_bonus_reporting_currency,omitempty"`
+	ProviderBonus                  string                 `protobuf:"bytes,9,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
+	ProviderBonusUsd               string                 `protobuf:"bytes,10,opt,name=provider_bonus_usd,json=providerBonusUsd,proto3" json:"provider_bonus_usd,omitempty"`
+	ProviderBonusReportingCurrency string                 `protobuf:"bytes,11,opt,name=provider_bonus_reporting_currency,json=providerBonusReportingCurrency,proto3" json:"provider_bonus_reporting_currency,omitempty"`
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
 func (x *ListTimeRangeDepositCreditsResponse_Credit) Reset() {
@@ -12635,6 +12644,69 @@ func (x *ListTimeRangeDepositCreditsResponse_Credit) GetCreditId() int64 {
 func (x *ListTimeRangeDepositCreditsResponse_Credit) GetCurrency() string {
 	if x != nil {
 		return x.Currency
+	}
+	return ""
+}
+
+func (x *ListTimeRangeDepositCreditsResponse_Credit) GetCash() string {
+	if x != nil {
+		return x.Cash
+	}
+	return ""
+}
+
+func (x *ListTimeRangeDepositCreditsResponse_Credit) GetCashUsd() string {
+	if x != nil {
+		return x.CashUsd
+	}
+	return ""
+}
+
+func (x *ListTimeRangeDepositCreditsResponse_Credit) GetCashReportingCurrency() string {
+	if x != nil {
+		return x.CashReportingCurrency
+	}
+	return ""
+}
+
+func (x *ListTimeRangeDepositCreditsResponse_Credit) GetOperatorBonus() string {
+	if x != nil {
+		return x.OperatorBonus
+	}
+	return ""
+}
+
+func (x *ListTimeRangeDepositCreditsResponse_Credit) GetOperatorBonusUsd() string {
+	if x != nil {
+		return x.OperatorBonusUsd
+	}
+	return ""
+}
+
+func (x *ListTimeRangeDepositCreditsResponse_Credit) GetOperatorBonusReportingCurrency() string {
+	if x != nil {
+		return x.OperatorBonusReportingCurrency
+	}
+	return ""
+}
+
+func (x *ListTimeRangeDepositCreditsResponse_Credit) GetProviderBonus() string {
+	if x != nil {
+		return x.ProviderBonus
+	}
+	return ""
+}
+
+func (x *ListTimeRangeDepositCreditsResponse_Credit) GetProviderBonusUsd() string {
+	if x != nil {
+		return x.ProviderBonusUsd
+	}
+	return ""
+}
+
+func (x *ListTimeRangeDepositCreditsResponse_Credit) GetProviderBonusReportingCurrency() string {
+	if x != nil {
+		return x.ProviderBonusReportingCurrency
 	}
 	return ""
 }
@@ -13911,12 +13983,22 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\bcurrency\x18\x03 \x01(\tH\x00R\bcurrency\x88\x01\x01\x12\x17\n" +
 	"\auser_id\x18\x04 \x01(\x03R\x06userId\x12F\n" +
 	"\x10operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\v\n" +
-	"\t_currency\"\xc5\x01\n" +
+	"\t_currency\"\xed\x04\n" +
 	"#ListTimeRangeDepositCreditsResponse\x12[\n" +
-	"\acredits\x18\x01 \x03(\v2A.api.wallet.service.v1.ListTimeRangeDepositCreditsResponse.CreditR\acredits\x1aA\n" +
+	"\acredits\x18\x01 \x03(\v2A.api.wallet.service.v1.ListTimeRangeDepositCreditsResponse.CreditR\acredits\x1a\xe8\x03\n" +
 	"\x06Credit\x12\x1b\n" +
 	"\tcredit_id\x18\x01 \x01(\x03R\bcreditId\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency2\x80A\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x12\n" +
+	"\x04cash\x18\x03 \x01(\tR\x04cash\x12\x19\n" +
+	"\bcash_usd\x18\x04 \x01(\tR\acashUsd\x126\n" +
+	"\x17cash_reporting_currency\x18\x05 \x01(\tR\x15cashReportingCurrency\x12%\n" +
+	"\x0eoperator_bonus\x18\x06 \x01(\tR\roperatorBonus\x12,\n" +
+	"\x12operator_bonus_usd\x18\a \x01(\tR\x10operatorBonusUsd\x12I\n" +
+	"!operator_bonus_reporting_currency\x18\b \x01(\tR\x1eoperatorBonusReportingCurrency\x12%\n" +
+	"\x0eprovider_bonus\x18\t \x01(\tR\rproviderBonus\x12,\n" +
+	"\x12provider_bonus_usd\x18\n" +
+	" \x01(\tR\x10providerBonusUsd\x12I\n" +
+	"!provider_bonus_reporting_currency\x18\v \x01(\tR\x1eproviderBonusReportingCurrency2\x80A\n" +
 	"\x06Wallet\x12\x95\x01\n" +
 	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/wallet/balances/list\x12o\n" +
 	"\x0eGetUserBalance\x12,.api.wallet.service.v1.GetUserBalanceRequest\x1a-.api.wallet.service.v1.GetUserBalanceResponse\"\x00\x12\xa9\x01\n" +

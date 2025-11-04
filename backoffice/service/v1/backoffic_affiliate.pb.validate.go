@@ -2390,6 +2390,10 @@ func (m *ListCommissionsRequest) validate(all bool) error {
 		// no validation rules for CommissionId
 	}
 
+	if m.BillId != nil {
+		// no validation rules for BillId
+	}
+
 	if m.Status != nil {
 		// no validation rules for Status
 	}
