@@ -5402,6 +5402,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.UpdateUserResponse'
+    /v1/user/vip/daily-lossback/request:
+        post:
+            tags:
+                - User
+            operationId: User_RequestDailyLossback
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.RequestDailyLossbackRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.vip.service.v1.RequestDailyLossbackResponse'
+    /v1/user/vip/daily-lossback/status/get:
+        post:
+            tags:
+                - User
+            operationId: User_GetDailyLossbackStatus
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.GetDailyLossbackStatusRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.vip.service.v1.GetDailyLossbackStatusResponse'
     /v1/user/vip/level/get:
         post:
             tags:
@@ -15404,6 +15440,9 @@ components:
         api.user.service.v1.GetClaimableVipRewardsRequest:
             type: object
             properties: {}
+        api.user.service.v1.GetDailyLossbackStatusRequest:
+            type: object
+            properties: {}
         api.user.service.v1.GetOperatorAccountSettingsRequest:
             type: object
             properties:
@@ -15984,6 +16023,9 @@ components:
                     type: string
                     description: campaign url
             description: RegisterRequest contains the information needed to register a new user.
+        api.user.service.v1.RequestDailyLossbackRequest:
+            type: object
+            properties: {}
         api.user.service.v1.ResetPasswordWithCodeRequest:
             type: object
             properties:
@@ -16421,6 +16463,25 @@ components:
                     type: string
                 ratePct:
                     type: string
+        api.vip.service.v1.DailyLossbackStatus:
+            type: object
+            properties:
+                eligible:
+                    type: boolean
+                requestedTimes:
+                    type: string
+                totalAllowedTimes:
+                    type: string
+                depositMet:
+                    type: boolean
+                singleDepositMet:
+                    type: boolean
+                walletBalanceMet:
+                    type: boolean
+                timeWindowMet:
+                    type: boolean
+                noUnsettledBets:
+                    type: boolean
         api.vip.service.v1.GetClaimableVipRewardsResponse:
             type: object
             properties:
@@ -16446,6 +16507,11 @@ components:
                     type: boolean
                 claimableAt:
                     type: string
+        api.vip.service.v1.GetDailyLossbackStatusResponse:
+            type: object
+            properties:
+                status:
+                    $ref: '#/components/schemas/api.vip.service.v1.DailyLossbackStatus'
         api.vip.service.v1.GetOperatorVipSettingsResponse:
             type: object
             properties:
@@ -16483,6 +16549,9 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.vip.service.v1.VipLevelConfigTemplate'
+        api.vip.service.v1.RequestDailyLossbackResponse:
+            type: object
+            properties: {}
         api.vip.service.v1.UpdateVipRewardSliderResponse:
             type: object
             properties: {}

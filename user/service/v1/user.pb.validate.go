@@ -22028,6 +22028,212 @@ var _ interface {
 	ErrorName() string
 } = ConfirmClaimVipRewardRequestValidationError{}
 
+// Validate checks the field values on RequestDailyLossbackRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RequestDailyLossbackRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RequestDailyLossbackRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RequestDailyLossbackRequestMultiError, or nil if none found.
+func (m *RequestDailyLossbackRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RequestDailyLossbackRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return RequestDailyLossbackRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// RequestDailyLossbackRequestMultiError is an error wrapping multiple
+// validation errors returned by RequestDailyLossbackRequest.ValidateAll() if
+// the designated constraints aren't met.
+type RequestDailyLossbackRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RequestDailyLossbackRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RequestDailyLossbackRequestMultiError) AllErrors() []error { return m }
+
+// RequestDailyLossbackRequestValidationError is the validation error returned
+// by RequestDailyLossbackRequest.Validate if the designated constraints
+// aren't met.
+type RequestDailyLossbackRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RequestDailyLossbackRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RequestDailyLossbackRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RequestDailyLossbackRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RequestDailyLossbackRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RequestDailyLossbackRequestValidationError) ErrorName() string {
+	return "RequestDailyLossbackRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RequestDailyLossbackRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRequestDailyLossbackRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RequestDailyLossbackRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RequestDailyLossbackRequestValidationError{}
+
+// Validate checks the field values on GetDailyLossbackStatusRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetDailyLossbackStatusRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetDailyLossbackStatusRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetDailyLossbackStatusRequestMultiError, or nil if none found.
+func (m *GetDailyLossbackStatusRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetDailyLossbackStatusRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetDailyLossbackStatusRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetDailyLossbackStatusRequestMultiError is an error wrapping multiple
+// validation errors returned by GetDailyLossbackStatusRequest.ValidateAll()
+// if the designated constraints aren't met.
+type GetDailyLossbackStatusRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetDailyLossbackStatusRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetDailyLossbackStatusRequestMultiError) AllErrors() []error { return m }
+
+// GetDailyLossbackStatusRequestValidationError is the validation error
+// returned by GetDailyLossbackStatusRequest.Validate if the designated
+// constraints aren't met.
+type GetDailyLossbackStatusRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetDailyLossbackStatusRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetDailyLossbackStatusRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetDailyLossbackStatusRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetDailyLossbackStatusRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetDailyLossbackStatusRequestValidationError) ErrorName() string {
+	return "GetDailyLossbackStatusRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetDailyLossbackStatusRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetDailyLossbackStatusRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetDailyLossbackStatusRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetDailyLossbackStatusRequestValidationError{}
+
 // Validate checks the field values on ListUsersResponse_User with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
