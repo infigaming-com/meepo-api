@@ -2847,6 +2847,7 @@ type RequestDailyLossbackRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	UserId          int64                   `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Currency        string                  `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -2893,6 +2894,13 @@ func (x *RequestDailyLossbackRequest) GetOperatorContext() *common.OperatorConte
 		return x.OperatorContext
 	}
 	return nil
+}
+
+func (x *RequestDailyLossbackRequest) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
 }
 
 type RequestDailyLossbackResponse struct {
@@ -3035,7 +3043,6 @@ type GetDailyLossbackStatusRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	UserId          int64                   `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	Currency        string                  `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -3082,13 +3089,6 @@ func (x *GetDailyLossbackStatusRequest) GetOperatorContext() *common.OperatorCon
 		return x.OperatorContext
 	}
 	return nil
-}
-
-func (x *GetDailyLossbackStatusRequest) GetCurrency() string {
-	if x != nil {
-		return x.Currency
-	}
-	return ""
 }
 
 type GetDailyLossbackStatusResponse struct {
@@ -3426,10 +3426,11 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x120\n" +
 	"\x14claim_transaction_id\x18\x03 \x01(\x03R\x12claimTransactionId\x12%\n" +
 	"\x0eclaim_currency\x18\x04 \x01(\tR\rclaimCurrency\"\x1f\n" +
-	"\x1dConfirmClaimVipRewardResponse\"~\n" +
+	"\x1dConfirmClaimVipRewardResponse\"\x9a\x01\n" +
 	"\x1bRequestDailyLossbackRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12F\n" +
-	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x1e\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
+	"\bcurrency\x18\x03 \x01(\tR\bcurrency\"\x1e\n" +
 	"\x1cRequestDailyLossbackResponse\"\xdb\x02\n" +
 	"\x13DailyLossbackStatus\x12\x1a\n" +
 	"\beligible\x18\x01 \x01(\bR\beligible\x12'\n" +
@@ -3440,11 +3441,10 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\x12single_deposit_met\x18\x05 \x01(\bR\x10singleDepositMet\x12,\n" +
 	"\x12wallet_balance_met\x18\x06 \x01(\bR\x10walletBalanceMet\x12&\n" +
 	"\x0ftime_window_met\x18\a \x01(\bR\rtimeWindowMet\x12*\n" +
-	"\x11no_unsettled_bets\x18\b \x01(\bR\x0fnoUnsettledBets\"\x9c\x01\n" +
+	"\x11no_unsettled_bets\x18\b \x01(\bR\x0fnoUnsettledBets\"\x80\x01\n" +
 	"\x1dGetDailyLossbackStatusRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12F\n" +
-	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
-	"\bcurrency\x18\x03 \x01(\tR\bcurrency\"a\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"a\n" +
 	"\x1eGetDailyLossbackStatusResponse\x12?\n" +
 	"\x06status\x18\x01 \x01(\v2'.api.vip.service.v1.DailyLossbackStatusR\x06status*q\n" +
 	"\x0eVipDisplayRule\x12 \n" +
