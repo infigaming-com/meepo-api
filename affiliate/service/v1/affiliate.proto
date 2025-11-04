@@ -39,6 +39,8 @@ service Affiliate {
     
     rpc DeleteAffiliate(DeleteAffiliateRequest) returns (DeleteAffiliateResponse) {}
 
+    rpc GetAffiliateDetails(GetAffiliateDetailsRequest) returns (GetAffiliateDetailsResponse) {}
+
     // -------------- Campaign --------------
 
     rpc CreateCampaign(CreateCampaignRequest) returns (CreateCampaignResponse) {}
@@ -173,6 +175,52 @@ message DeleteAffiliateRequest {
 message DeleteAffiliateResponse {
 }
 
+message GetAffiliateDetailsRequest {
+    int64 affiliate_id = 1;
+    api.common.OperatorContext initiator_operator_context = 2;
+}
+
+message GetAffiliateDetailsResponse {
+    message AffiliateDetails {
+        message Referrer {
+            int64 affiliate_id = 1;
+            string affiliate_firstname = 2;
+            string affiliate_lastname = 3;
+            string affiliate_company_name = 4;
+            string sub_affiliate_commission_rate = 5; // percentage
+        }
+        message CommissionPlan {
+            int64 commission_plan_id = 1;
+            string commission_plan_name = 2;
+        }
+        int64 affiliate_id = 1;
+        string company_name = 2;
+        string status = 3;
+        repeated CommissionPlan commission_plans = 4;
+        string invoice_period = 5;
+        string photo_url = 6;
+        bool active = 7; // online status, not implemented
+        string last_login_ip = 8;
+        google.protobuf.Timestamp last_login_at = 9;
+        string firstname = 10;
+        string lastname = 11;
+        string phone = 12;
+        repeated ContactType contact_types = 13;
+        string country = 14; // country code
+        string region = 15;
+        string city = 16;
+        string post_code = 17;
+        string street = 18;
+        repeated int64 traffic_source_ids = 19; // not implemented
+        repeated int64 teammate_ids = 20; // not implemented
+        string internal_info = 21;
+        optional Referrer referrer = 22; // referred by who, not implemented
+        string pending_balance_usd = 23;
+        string pending_balance_reporting_currency = 24; // pending bill amount
+    }
+    AffiliateDetails affiliate_details = 1;
+}
+
 // -------------- Campaign --------------
 
 message Campaign {
@@ -284,12 +332,13 @@ message UpdateCampaignResponse {
 message ListCampaignsRequest {
     optional string campaign_name = 1;
     optional int64 campaign_id = 2;
-    optional bool enabled = 3;
-    optional int32 page = 4;
-    optional int32 page_size = 5;
-    optional int64 initiator_user_id = 6;
-    api.common.OperatorContext initiator_operator_context = 7;
-    api.common.OperatorContextFilters operator_context_filters = 8;
+    optional int64 affiliate_id = 3;
+    optional bool enabled = 4;
+    optional int32 page = 5;
+    optional int32 page_size = 6;
+    optional int64 initiator_user_id = 7;
+    api.common.OperatorContext initiator_operator_context = 8;
+    api.common.OperatorContextFilters operator_context_filters = 9;
 }
 
 message ListCampaignsResponse {

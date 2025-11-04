@@ -410,10 +410,11 @@ func (x *GetCommissionPlanResponse) GetPlanConfig() *CommissionPlanConfig {
 type ListCommissionPlansRequest struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	Countries       []string                `protobuf:"bytes,2,rep,name=countries,proto3" json:"countries,omitempty"` // not supported yet
-	Page            *int32                  `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize        *int32                  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	Status          *string                 `protobuf:"bytes,5,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	Countries       []string                `protobuf:"bytes,2,rep,name=countries,proto3" json:"countries,omitempty"`
+	AffiliateId     *int64                  `protobuf:"varint,3,opt,name=affiliate_id,json=affiliateId,proto3,oneof" json:"affiliate_id,omitempty"`
+	Page            *int32                  `protobuf:"varint,4,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize        *int32                  `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Status          *string                 `protobuf:"bytes,6,opt,name=status,proto3,oneof" json:"status,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -460,6 +461,13 @@ func (x *ListCommissionPlansRequest) GetCountries() []string {
 		return x.Countries
 	}
 	return nil
+}
+
+func (x *ListCommissionPlansRequest) GetAffiliateId() int64 {
+	if x != nil && x.AffiliateId != nil {
+		return *x.AffiliateId
+	}
+	return 0
 }
 
 func (x *ListCommissionPlansRequest) GetPage() int32 {
@@ -2318,13 +2326,15 @@ const file_affiliate_service_v1_commission_plan_proto_rawDesc = "" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x12#\n" +
 	"\rbase_currency\x18\x05 \x01(\tR\fbaseCurrency\x12O\n" +
 	"\vplan_config\x18\x06 \x01(\v2..api.affiliate.service.v1.CommissionPlanConfigR\n" +
-	"planConfig\"\xfc\x01\n" +
+	"planConfig\"\xb5\x02\n" +
 	"\x1aListCommissionPlansRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1c\n" +
-	"\tcountries\x18\x02 \x03(\tR\tcountries\x12\x17\n" +
-	"\x04page\x18\x03 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x04 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x12\x1b\n" +
-	"\x06status\x18\x05 \x01(\tH\x02R\x06status\x88\x01\x01B\a\n" +
+	"\tcountries\x18\x02 \x03(\tR\tcountries\x12&\n" +
+	"\faffiliate_id\x18\x03 \x01(\x03H\x00R\vaffiliateId\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x04 \x01(\x05H\x01R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x05 \x01(\x05H\x02R\bpageSize\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\x06 \x01(\tH\x03R\x06status\x88\x01\x01B\x0f\n" +
+	"\r_affiliate_idB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_sizeB\t\n" +

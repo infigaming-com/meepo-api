@@ -30,6 +30,7 @@ const (
 	Affiliate_GetAffiliate_FullMethodName           = "/api.affiliate.service.v1.Affiliate/GetAffiliate"
 	Affiliate_ListAffiliates_FullMethodName         = "/api.affiliate.service.v1.Affiliate/ListAffiliates"
 	Affiliate_DeleteAffiliate_FullMethodName        = "/api.affiliate.service.v1.Affiliate/DeleteAffiliate"
+	Affiliate_GetAffiliateDetails_FullMethodName    = "/api.affiliate.service.v1.Affiliate/GetAffiliateDetails"
 	Affiliate_CreateCampaign_FullMethodName         = "/api.affiliate.service.v1.Affiliate/CreateCampaign"
 	Affiliate_UpdateCampaign_FullMethodName         = "/api.affiliate.service.v1.Affiliate/UpdateCampaign"
 	Affiliate_ListCampaigns_FullMethodName          = "/api.affiliate.service.v1.Affiliate/ListCampaigns"
@@ -55,6 +56,7 @@ type AffiliateClient interface {
 	GetAffiliate(ctx context.Context, in *GetAffiliateRequest, opts ...grpc.CallOption) (*GetAffiliateResponse, error)
 	ListAffiliates(ctx context.Context, in *ListAffiliatesRequest, opts ...grpc.CallOption) (*ListAffiliatesResponse, error)
 	DeleteAffiliate(ctx context.Context, in *DeleteAffiliateRequest, opts ...grpc.CallOption) (*DeleteAffiliateResponse, error)
+	GetAffiliateDetails(ctx context.Context, in *GetAffiliateDetailsRequest, opts ...grpc.CallOption) (*GetAffiliateDetailsResponse, error)
 	CreateCampaign(ctx context.Context, in *CreateCampaignRequest, opts ...grpc.CallOption) (*CreateCampaignResponse, error)
 	UpdateCampaign(ctx context.Context, in *UpdateCampaignRequest, opts ...grpc.CallOption) (*UpdateCampaignResponse, error)
 	ListCampaigns(ctx context.Context, in *ListCampaignsRequest, opts ...grpc.CallOption) (*ListCampaignsResponse, error)
@@ -183,6 +185,16 @@ func (c *affiliateClient) DeleteAffiliate(ctx context.Context, in *DeleteAffilia
 	return out, nil
 }
 
+func (c *affiliateClient) GetAffiliateDetails(ctx context.Context, in *GetAffiliateDetailsRequest, opts ...grpc.CallOption) (*GetAffiliateDetailsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAffiliateDetailsResponse)
+	err := c.cc.Invoke(ctx, Affiliate_GetAffiliateDetails_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *affiliateClient) CreateCampaign(ctx context.Context, in *CreateCampaignRequest, opts ...grpc.CallOption) (*CreateCampaignResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateCampaignResponse)
@@ -278,6 +290,7 @@ type AffiliateServer interface {
 	GetAffiliate(context.Context, *GetAffiliateRequest) (*GetAffiliateResponse, error)
 	ListAffiliates(context.Context, *ListAffiliatesRequest) (*ListAffiliatesResponse, error)
 	DeleteAffiliate(context.Context, *DeleteAffiliateRequest) (*DeleteAffiliateResponse, error)
+	GetAffiliateDetails(context.Context, *GetAffiliateDetailsRequest) (*GetAffiliateDetailsResponse, error)
 	CreateCampaign(context.Context, *CreateCampaignRequest) (*CreateCampaignResponse, error)
 	UpdateCampaign(context.Context, *UpdateCampaignRequest) (*UpdateCampaignResponse, error)
 	ListCampaigns(context.Context, *ListCampaignsRequest) (*ListCampaignsResponse, error)
@@ -328,6 +341,9 @@ func (UnimplementedAffiliateServer) ListAffiliates(context.Context, *ListAffilia
 }
 func (UnimplementedAffiliateServer) DeleteAffiliate(context.Context, *DeleteAffiliateRequest) (*DeleteAffiliateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAffiliate not implemented")
+}
+func (UnimplementedAffiliateServer) GetAffiliateDetails(context.Context, *GetAffiliateDetailsRequest) (*GetAffiliateDetailsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAffiliateDetails not implemented")
 }
 func (UnimplementedAffiliateServer) CreateCampaign(context.Context, *CreateCampaignRequest) (*CreateCampaignResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCampaign not implemented")
@@ -572,6 +588,24 @@ func _Affiliate_DeleteAffiliate_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Affiliate_GetAffiliateDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAffiliateDetailsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).GetAffiliateDetails(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_GetAffiliateDetails_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).GetAffiliateDetails(ctx, req.(*GetAffiliateDetailsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Affiliate_CreateCampaign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateCampaignRequest)
 	if err := dec(in); err != nil {
@@ -766,6 +800,10 @@ var Affiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAffiliate",
 			Handler:    _Affiliate_DeleteAffiliate_Handler,
+		},
+		{
+			MethodName: "GetAffiliateDetails",
+			Handler:    _Affiliate_GetAffiliateDetails_Handler,
 		},
 		{
 			MethodName: "CreateCampaign",

@@ -31,6 +31,7 @@ const (
 	BackofficeAffiliate_GetAffiliate_FullMethodName           = "/api.backoffice.service.v1.BackofficeAffiliate/GetAffiliate"
 	BackofficeAffiliate_ListAffiliates_FullMethodName         = "/api.backoffice.service.v1.BackofficeAffiliate/ListAffiliates"
 	BackofficeAffiliate_DeleteAffiliate_FullMethodName        = "/api.backoffice.service.v1.BackofficeAffiliate/DeleteAffiliate"
+	BackofficeAffiliate_GetAffiliateDetails_FullMethodName    = "/api.backoffice.service.v1.BackofficeAffiliate/GetAffiliateDetails"
 	BackofficeAffiliate_CreateCampaign_FullMethodName         = "/api.backoffice.service.v1.BackofficeAffiliate/CreateCampaign"
 	BackofficeAffiliate_UpdateCampaign_FullMethodName         = "/api.backoffice.service.v1.BackofficeAffiliate/UpdateCampaign"
 	BackofficeAffiliate_ListCampaigns_FullMethodName          = "/api.backoffice.service.v1.BackofficeAffiliate/ListCampaigns"
@@ -57,6 +58,7 @@ type BackofficeAffiliateClient interface {
 	GetAffiliate(ctx context.Context, in *GetAffiliateRequest, opts ...grpc.CallOption) (*v1.GetAffiliateResponse, error)
 	ListAffiliates(ctx context.Context, in *ListAffiliatesRequest, opts ...grpc.CallOption) (*v1.ListAffiliatesResponse, error)
 	DeleteAffiliate(ctx context.Context, in *DeleteAffiliateRequest, opts ...grpc.CallOption) (*v1.DeleteAffiliateResponse, error)
+	GetAffiliateDetails(ctx context.Context, in *GetAffiliateDetailsRequest, opts ...grpc.CallOption) (*v1.GetAffiliateDetailsResponse, error)
 	CreateCampaign(ctx context.Context, in *CreateCampaignRequest, opts ...grpc.CallOption) (*v1.CreateCampaignResponse, error)
 	UpdateCampaign(ctx context.Context, in *UpdateCampaignRequest, opts ...grpc.CallOption) (*v1.UpdateCampaignResponse, error)
 	ListCampaigns(ctx context.Context, in *ListCampaignsRequest, opts ...grpc.CallOption) (*v1.ListCampaignsResponse, error)
@@ -186,6 +188,16 @@ func (c *backofficeAffiliateClient) DeleteAffiliate(ctx context.Context, in *Del
 	return out, nil
 }
 
+func (c *backofficeAffiliateClient) GetAffiliateDetails(ctx context.Context, in *GetAffiliateDetailsRequest, opts ...grpc.CallOption) (*v1.GetAffiliateDetailsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetAffiliateDetailsResponse)
+	err := c.cc.Invoke(ctx, BackofficeAffiliate_GetAffiliateDetails_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *backofficeAffiliateClient) CreateCampaign(ctx context.Context, in *CreateCampaignRequest, opts ...grpc.CallOption) (*v1.CreateCampaignResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.CreateCampaignResponse)
@@ -291,6 +303,7 @@ type BackofficeAffiliateServer interface {
 	GetAffiliate(context.Context, *GetAffiliateRequest) (*v1.GetAffiliateResponse, error)
 	ListAffiliates(context.Context, *ListAffiliatesRequest) (*v1.ListAffiliatesResponse, error)
 	DeleteAffiliate(context.Context, *DeleteAffiliateRequest) (*v1.DeleteAffiliateResponse, error)
+	GetAffiliateDetails(context.Context, *GetAffiliateDetailsRequest) (*v1.GetAffiliateDetailsResponse, error)
 	CreateCampaign(context.Context, *CreateCampaignRequest) (*v1.CreateCampaignResponse, error)
 	UpdateCampaign(context.Context, *UpdateCampaignRequest) (*v1.UpdateCampaignResponse, error)
 	ListCampaigns(context.Context, *ListCampaignsRequest) (*v1.ListCampaignsResponse, error)
@@ -342,6 +355,9 @@ func (UnimplementedBackofficeAffiliateServer) ListAffiliates(context.Context, *L
 }
 func (UnimplementedBackofficeAffiliateServer) DeleteAffiliate(context.Context, *DeleteAffiliateRequest) (*v1.DeleteAffiliateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAffiliate not implemented")
+}
+func (UnimplementedBackofficeAffiliateServer) GetAffiliateDetails(context.Context, *GetAffiliateDetailsRequest) (*v1.GetAffiliateDetailsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAffiliateDetails not implemented")
 }
 func (UnimplementedBackofficeAffiliateServer) CreateCampaign(context.Context, *CreateCampaignRequest) (*v1.CreateCampaignResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCampaign not implemented")
@@ -589,6 +605,24 @@ func _BackofficeAffiliate_DeleteAffiliate_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeAffiliate_GetAffiliateDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAffiliateDetailsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeAffiliateServer).GetAffiliateDetails(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeAffiliate_GetAffiliateDetails_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeAffiliateServer).GetAffiliateDetails(ctx, req.(*GetAffiliateDetailsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BackofficeAffiliate_CreateCampaign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateCampaignRequest)
 	if err := dec(in); err != nil {
@@ -801,6 +835,10 @@ var BackofficeAffiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAffiliate",
 			Handler:    _BackofficeAffiliate_DeleteAffiliate_Handler,
+		},
+		{
+			MethodName: "GetAffiliateDetails",
+			Handler:    _BackofficeAffiliate_GetAffiliateDetails_Handler,
 		},
 		{
 			MethodName: "CreateCampaign",

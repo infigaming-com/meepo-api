@@ -526,3 +526,15 @@ func IsListBillsFailed(err error) bool {
 func ErrorListBillsFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_LIST_BILLS_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetAffiliateDetailsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_AFFILIATE_DETAILS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetAffiliateDetailsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_AFFILIATE_DETAILS_FAILED.String(), fmt.Sprintf(format, args...))
+}
