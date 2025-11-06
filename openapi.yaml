@@ -6316,6 +6316,10 @@ components:
                     type: string
                 pendingBalanceReportingCurrency:
                     type: string
+                email:
+                    type: string
+                twoFaEnabled:
+                    type: boolean
         api.affiliate.service.v1.GetAffiliateResponse:
             type: object
             properties:

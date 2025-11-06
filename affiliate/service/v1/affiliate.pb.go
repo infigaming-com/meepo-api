@@ -2857,6 +2857,8 @@ type GetAffiliateDetailsResponse_AffiliateDetails struct {
 	Referrer                        *GetAffiliateDetailsResponse_AffiliateDetails_Referrer         `protobuf:"bytes,22,opt,name=referrer,proto3,oneof" json:"referrer,omitempty"` // referred by who, not implemented
 	PendingBalanceUsd               string                                                         `protobuf:"bytes,23,opt,name=pending_balance_usd,json=pendingBalanceUsd,proto3" json:"pending_balance_usd,omitempty"`
 	PendingBalanceReportingCurrency string                                                         `protobuf:"bytes,24,opt,name=pending_balance_reporting_currency,json=pendingBalanceReportingCurrency,proto3" json:"pending_balance_reporting_currency,omitempty"` // pending bill amount
+	Email                           string                                                         `protobuf:"bytes,25,opt,name=email,proto3" json:"email,omitempty"`
+	TwoFaEnabled                    bool                                                           `protobuf:"varint,26,opt,name=two_fa_enabled,json=twoFaEnabled,proto3" json:"two_fa_enabled,omitempty"`
 	unknownFields                   protoimpl.UnknownFields
 	sizeCache                       protoimpl.SizeCache
 }
@@ -3057,6 +3059,20 @@ func (x *GetAffiliateDetailsResponse_AffiliateDetails) GetPendingBalanceReportin
 		return x.PendingBalanceReportingCurrency
 	}
 	return ""
+}
+
+func (x *GetAffiliateDetailsResponse_AffiliateDetails) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *GetAffiliateDetailsResponse_AffiliateDetails) GetTwoFaEnabled() bool {
+	if x != nil {
+		return x.TwoFaEnabled
+	}
+	return false
 }
 
 type GetAffiliateDetailsResponse_AffiliateDetails_Referrer struct {
@@ -5065,9 +5081,9 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x17DeleteAffiliateResponse\"\x9a\x01\n" +
 	"\x1aGetAffiliateDetailsRequest\x12!\n" +
 	"\faffiliate_id\x18\x01 \x01(\x03R\vaffiliateId\x12Y\n" +
-	"\x1ainitiator_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\"\xcc\f\n" +
+	"\x1ainitiator_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\"\x88\r\n" +
 	"\x1bGetAffiliateDetailsResponse\x12s\n" +
-	"\x11affiliate_details\x18\x01 \x01(\v2F.api.affiliate.service.v1.GetAffiliateDetailsResponse.AffiliateDetailsR\x10affiliateDetails\x1a\xb7\v\n" +
+	"\x11affiliate_details\x18\x01 \x01(\v2F.api.affiliate.service.v1.GetAffiliateDetailsResponse.AffiliateDetailsR\x10affiliateDetails\x1a\xf3\v\n" +
 	"\x10AffiliateDetails\x12!\n" +
 	"\faffiliate_id\x18\x01 \x01(\x03R\vaffiliateId\x12!\n" +
 	"\fcompany_name\x18\x02 \x01(\tR\vcompanyName\x12\x16\n" +
@@ -5093,7 +5109,9 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\rinternal_info\x18\x15 \x01(\tR\finternalInfo\x12p\n" +
 	"\breferrer\x18\x16 \x01(\v2O.api.affiliate.service.v1.GetAffiliateDetailsResponse.AffiliateDetails.ReferrerH\x00R\breferrer\x88\x01\x01\x12.\n" +
 	"\x13pending_balance_usd\x18\x17 \x01(\tR\x11pendingBalanceUsd\x12K\n" +
-	"\"pending_balance_reporting_currency\x18\x18 \x01(\tR\x1fpendingBalanceReportingCurrency\x1a\x86\x02\n" +
+	"\"pending_balance_reporting_currency\x18\x18 \x01(\tR\x1fpendingBalanceReportingCurrency\x12\x14\n" +
+	"\x05email\x18\x19 \x01(\tR\x05email\x12$\n" +
+	"\x0etwo_fa_enabled\x18\x1a \x01(\bR\ftwoFaEnabled\x1a\x86\x02\n" +
 	"\bReferrer\x12!\n" +
 	"\faffiliate_id\x18\x01 \x01(\x03R\vaffiliateId\x12/\n" +
 	"\x13affiliate_firstname\x18\x02 \x01(\tR\x12affiliateFirstname\x12-\n" +
