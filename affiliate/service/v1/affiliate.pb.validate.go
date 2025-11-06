@@ -6003,6 +6003,10 @@ func (m *GetAffiliateDetailsResponse_AffiliateDetails) validate(all bool) error 
 
 	// no validation rules for PendingBalanceReportingCurrency
 
+	// no validation rules for Email
+
+	// no validation rules for TwoFaEnabled
+
 	if m.Referrer != nil {
 
 		if all {

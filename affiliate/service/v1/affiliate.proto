@@ -217,6 +217,8 @@ message GetAffiliateDetailsResponse {
         optional Referrer referrer = 22; // referred by who, not implemented
         string pending_balance_usd = 23;
         string pending_balance_reporting_currency = 24; // pending bill amount
+        string email = 25;
+        bool two_fa_enabled = 26;
     }
     AffiliateDetails affiliate_details = 1;
 }
