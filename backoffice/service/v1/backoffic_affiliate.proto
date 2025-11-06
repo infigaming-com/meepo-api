@@ -5,6 +5,7 @@ package api.backoffice.service.v1;
 import "google/api/annotations.proto";
 import "affiliate/service/v1/commission_plan.proto";
 import "affiliate/service/v1/affiliate.proto";
+import "affiliate/service/v1/referral_plan.proto";
 import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
@@ -158,6 +159,22 @@ service BackofficeAffiliate {
 	rpc ListAffiliateBills(ListAffiliateBillsRequest) returns (api.affiliate.service.v1.ListAffiliateBillsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/bill/list"
+			body: "*"
+		};
+	}
+
+	// -------------- Referral Plan --------------
+
+	rpc SetReferralPlan(SetReferralPlanRequest) returns (api.affiliate.service.v1.SetReferralPlanResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/referral/plan/set"
+			body: "*"
+		};
+	}
+
+	rpc GetReferralPlan(GetReferralPlanRequest) returns (api.affiliate.service.v1.GetReferralPlanResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/referral/plan/get"
 			body: "*"
 		};
 	}
@@ -334,4 +351,20 @@ message ListAffiliateBillsRequest {
     optional int32 page = 5;
     optional int32 page_size = 6;
     api.common.OperatorContextFilters operator_context_filters = 7;
+}
+
+// -------------- Referral Plan --------------
+
+message SetReferralPlanRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string currency = 2;
+	optional bool follow_parent = 3;
+	optional bool enabled = 4;
+	optional int32 max_tier = 5;
+	optional api.affiliate.service.v1.ReferralPlanConfig plan_config = 6;
+}
+
+message GetReferralPlanRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string currency = 2;
 }
