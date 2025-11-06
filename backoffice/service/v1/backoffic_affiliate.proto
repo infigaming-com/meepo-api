@@ -69,12 +69,6 @@ service BackofficeAffiliate {
 			body: "*"
 		};
 	}
-	rpc GetAffiliate(GetAffiliateRequest) returns (api.affiliate.service.v1.GetAffiliateResponse) {
-		option (google.api.http) = {
-			post: "/v1/backoffice/affiliate/get"
-			body: "*"
-		};
-	}
 	rpc ListAffiliates(ListAffiliatesRequest) returns (api.affiliate.service.v1.ListAffiliatesResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/list"
@@ -230,10 +224,6 @@ message CreateAffiliateRequest {
 message UpdateAffiliateRequest {
 	api.affiliate.service.v1.AffiliateInfo affiliate = 1;
 	int64 affiliate_id = 2;
-}
-
-message GetAffiliateRequest {
-	int64 affiliate_id = 1;
 }
 
 message ListAffiliatesRequest {

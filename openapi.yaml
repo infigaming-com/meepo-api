@@ -712,24 +712,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.ListEventsResponse'
-    /v1/backoffice/affiliate/get:
-        post:
-            tags:
-                - BackofficeAffiliate
-            operationId: BackofficeAffiliate_GetAffiliate
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.backoffice.service.v1.GetAffiliateRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.affiliate.service.v1.GetAffiliateResponse'
     /v1/backoffice/affiliate/get/details:
         post:
             tags:
@@ -6320,13 +6302,6 @@ components:
                     type: string
                 twoFaEnabled:
                     type: boolean
-        api.affiliate.service.v1.GetAffiliateResponse:
-            type: object
-            properties:
-                affiliate:
-                    $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateInfo'
-                affiliateId:
-                    type: string
         api.affiliate.service.v1.GetCommissionPlanResponse:
             type: object
             properties:
@@ -8106,11 +8081,6 @@ components:
             type: object
             properties: {}
         api.backoffice.service.v1.GetAffiliateDetailsRequest:
-            type: object
-            properties:
-                affiliateId:
-                    type: string
-        api.backoffice.service.v1.GetAffiliateRequest:
             type: object
             properties:
                 affiliateId:
