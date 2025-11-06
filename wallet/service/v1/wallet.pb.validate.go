@@ -1545,6 +1545,10 @@ func (m *GameCreditRequest) validate(all bool) error {
 		}
 	}
 
+	if m.OriginalTransactionType != nil {
+		// no validation rules for OriginalTransactionType
+	}
+
 	if len(errors) > 0 {
 		return GameCreditRequestMultiError(errors)
 	}
