@@ -62,10 +62,13 @@ const (
 	ErrorReason_LIST_AFFILIATE_USERS_FAILED              ErrorReason = 130034
 	ErrorReason_PROCESS_GAME_TRANSACTION_FAILED          ErrorReason = 130035
 	ErrorReason_PROCESS_GAME_START_FAILED                ErrorReason = 130036
-	ErrorReason_PROCESS_BILLING_FAILED                   ErrorReason = 130037
-	ErrorReason_CREATE_BILLING_FAILED                    ErrorReason = 130038
-	ErrorReason_GET_BILLING_FAILED                       ErrorReason = 130039
-	ErrorReason_UPDATE_BILLING_FAILED                    ErrorReason = 130040
+	ErrorReason_PROCESS_BILL_FAILED                      ErrorReason = 130037
+	ErrorReason_CREATE_BILL_FAILED                       ErrorReason = 130038
+	ErrorReason_GET_BILL_FAILED                          ErrorReason = 130039
+	ErrorReason_UPDATE_BILL_FAILED                       ErrorReason = 130040
+	ErrorReason_PROCESS_BILL_SETTLEMENT_FAILED           ErrorReason = 130041
+	ErrorReason_LIST_BILLS_FAILED                        ErrorReason = 130042
+	ErrorReason_GET_AFFILIATE_DETAILS_FAILED             ErrorReason = 130043
 )
 
 // Enum value maps for ErrorReason.
@@ -108,10 +111,13 @@ var (
 		130034: "LIST_AFFILIATE_USERS_FAILED",
 		130035: "PROCESS_GAME_TRANSACTION_FAILED",
 		130036: "PROCESS_GAME_START_FAILED",
-		130037: "PROCESS_BILLING_FAILED",
-		130038: "CREATE_BILLING_FAILED",
-		130039: "GET_BILLING_FAILED",
-		130040: "UPDATE_BILLING_FAILED",
+		130037: "PROCESS_BILL_FAILED",
+		130038: "CREATE_BILL_FAILED",
+		130039: "GET_BILL_FAILED",
+		130040: "UPDATE_BILL_FAILED",
+		130041: "PROCESS_BILL_SETTLEMENT_FAILED",
+		130042: "LIST_BILLS_FAILED",
+		130043: "GET_AFFILIATE_DETAILS_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                              0,
@@ -151,10 +157,13 @@ var (
 		"LIST_AFFILIATE_USERS_FAILED":              130034,
 		"PROCESS_GAME_TRANSACTION_FAILED":          130035,
 		"PROCESS_GAME_START_FAILED":                130036,
-		"PROCESS_BILLING_FAILED":                   130037,
-		"CREATE_BILLING_FAILED":                    130038,
-		"GET_BILLING_FAILED":                       130039,
-		"UPDATE_BILLING_FAILED":                    130040,
+		"PROCESS_BILL_FAILED":                      130037,
+		"CREATE_BILL_FAILED":                       130038,
+		"GET_BILL_FAILED":                          130039,
+		"UPDATE_BILL_FAILED":                       130040,
+		"PROCESS_BILL_SETTLEMENT_FAILED":           130041,
+		"LIST_BILLS_FAILED":                        130042,
+		"GET_AFFILIATE_DETAILS_FAILED":             130043,
 	}
 )
 
@@ -189,8 +198,7 @@ var File_affiliate_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\xd9\n" +
-	"\n" +
+	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\xb0\v\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1dCREATE_COMMISSION_PLAN_FAILED\x10\xd1\xf7\a\x12#\n" +
@@ -228,11 +236,14 @@ const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\x14COMMISSION_NOT_FOUND\x10\xf1\xf7\a\x12!\n" +
 	"\x1bLIST_AFFILIATE_USERS_FAILED\x10\xf2\xf7\a\x12%\n" +
 	"\x1fPROCESS_GAME_TRANSACTION_FAILED\x10\xf3\xf7\a\x12\x1f\n" +
-	"\x19PROCESS_GAME_START_FAILED\x10\xf4\xf7\a\x12\x1c\n" +
-	"\x16PROCESS_BILLING_FAILED\x10\xf5\xf7\a\x12\x1b\n" +
-	"\x15CREATE_BILLING_FAILED\x10\xf6\xf7\a\x12\x18\n" +
-	"\x12GET_BILLING_FAILED\x10\xf7\xf7\a\x12\x1b\n" +
-	"\x15UPDATE_BILLING_FAILED\x10\xf8\xf7\a\x1a\x04\xa0E\xf4\x03BY\n" +
+	"\x19PROCESS_GAME_START_FAILED\x10\xf4\xf7\a\x12\x19\n" +
+	"\x13PROCESS_BILL_FAILED\x10\xf5\xf7\a\x12\x18\n" +
+	"\x12CREATE_BILL_FAILED\x10\xf6\xf7\a\x12\x15\n" +
+	"\x0fGET_BILL_FAILED\x10\xf7\xf7\a\x12\x18\n" +
+	"\x12UPDATE_BILL_FAILED\x10\xf8\xf7\a\x12$\n" +
+	"\x1ePROCESS_BILL_SETTLEMENT_FAILED\x10\xf9\xf7\a\x12\x17\n" +
+	"\x11LIST_BILLS_FAILED\x10\xfa\xf7\a\x12\"\n" +
+	"\x1cGET_AFFILIATE_DETAILS_FAILED\x10\xfb\xf7\a\x1a\x04\xa0E\xf4\x03BY\n" +
 	"\x18api.affiliate.service.v1P\x01Z;github.com/infigaming-com/meepo-api/affiliate/service/v1;v1b\x06proto3"
 
 var (

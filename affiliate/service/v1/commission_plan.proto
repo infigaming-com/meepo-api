@@ -48,10 +48,11 @@ message GetCommissionPlanResponse {
 
 message ListCommissionPlansRequest {
     api.common.OperatorContext operator_context = 1;
-    repeated string countries = 2; // not supported yet
-    optional int32 page = 3;
-    optional int32 page_size = 4;
-    optional string status = 5;
+    repeated string countries = 2;
+    optional int64 affiliate_id = 3;
+    optional int32 page = 4;
+    optional int32 page_size = 5;
+    optional string status = 6;
 }
 
 message ListCommissionPlansResponse {

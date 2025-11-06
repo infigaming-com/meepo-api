@@ -933,6 +933,10 @@ func (m *ListCommissionPlansRequest) validate(all bool) error {
 		}
 	}
 
+	if m.AffiliateId != nil {
+		// no validation rules for AffiliateId
+	}
+
 	if m.Page != nil {
 		// no validation rules for Page
 	}

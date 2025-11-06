@@ -86,6 +86,12 @@ service BackofficeAffiliate {
 			body: "*"
 		};
 	}
+	rpc GetAffiliateDetails(GetAffiliateDetailsRequest) returns (api.affiliate.service.v1.GetAffiliateDetailsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/get/details"
+			body: "*"
+		};
+	}
 
 	// -------------- Campaign --------------
 
@@ -146,6 +152,15 @@ service BackofficeAffiliate {
 			body: "*"
 		};
 	}
+
+	// -------------- Affiliate Bill --------------
+
+	rpc ListAffiliateBills(ListAffiliateBillsRequest) returns (api.affiliate.service.v1.ListAffiliateBillsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/bill/list"
+			body: "*"
+		};
+	}
 }
 
 // -------------- Commission Plan --------------
@@ -170,15 +185,22 @@ message GetCommissionPlanRequest {
 }
 
 message ListCommissionPlansRequest {
-	repeated string countries = 1; // not supported yet
-	optional int32 page = 2;
-	optional int32 page_size = 3;
-	optional string status = 4;
+	repeated string countries = 1;
+	optional int64 affiliate_id = 2;
+	optional int32 page = 3;
+	optional int32 page_size = 4;
+	optional string status = 5;
 }
 
 message DeleteCommissionPlanRequest {
 	int64 commission_plan_id = 1;
 	optional int64 alternative_commission_plan_id = 2; // not supported yet
+}
+
+message ListAllCommissionPlansRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	repeated string countries = 2; // not supported yet
+	optional string status = 3;
 }
 
 // -------------- Affiliate --------------
@@ -211,10 +233,8 @@ message DeleteAffiliateRequest {
 	int64 affiliate_id = 1;
 }
 
-message ListAllCommissionPlansRequest {
-	api.common.OperatorContext target_operator_context = 1;
-	repeated string countries = 2; // not supported yet
-	optional string status = 3;
+message GetAffiliateDetailsRequest {
+	int64 affiliate_id = 1;
 }
 
 // -------------- Campaign --------------
@@ -238,18 +258,20 @@ message UpdateCampaignRequest {
 message ListCampaignsRequest {
     optional string campaign_name = 1;
     optional int64 campaign_id = 2;
-    optional bool enabled = 3;
-    optional int32 page = 4;
-    optional int32 page_size = 5;
-	api.common.OperatorContextFilters operator_context_filters = 6;
+	optional int64 affiliate_id = 3;
+    optional bool enabled = 4;
+    optional int32 page = 5;
+    optional int32 page_size = 6;
+	api.common.OperatorContextFilters operator_context_filters = 7;
 }
 
 message ListAffiliateCampaignsRequest {
     optional string campaign_name = 1;
     optional int64 campaign_id = 2;
-    optional bool enabled = 3;
-    optional int32 page = 4;
-    optional int32 page_size = 5;
+	optional int64 affiliate_id = 3;
+    optional bool enabled = 4;
+    optional int32 page = 5;
+    optional int32 page_size = 6;
 }
 
 message DeleteCampaignRequest {
@@ -279,12 +301,13 @@ message ListCommissionsRequest {
 	repeated string commission_subtypes = 4; // cpa/revshare/cpl/cpc/flat_fee, multiple subtypes are allowed
 	repeated string countries = 5;
 	optional int64 commission_id = 6;
-	google.protobuf.Timestamp start_time = 7;
-	google.protobuf.Timestamp end_time = 8;
-	optional string status = 9; // pending/approved/rejected
-	optional int32 page = 10;
-	optional int32 page_size = 11;
-	api.common.OperatorContextFilters operator_context_filters = 12;
+	optional int64 bill_id = 7;
+	google.protobuf.Timestamp start_time = 8;
+	google.protobuf.Timestamp end_time = 9;
+	optional string status = 10; // pending/approved/rejected
+	optional int32 page = 11;
+	optional int32 page_size = 12;
+	api.common.OperatorContextFilters operator_context_filters = 13;
 }
 
 // -------------- User --------------
@@ -299,4 +322,16 @@ message ListAffiliateUsersRequest {
 	optional int32 page = 7;
 	optional int32 page_size = 8;
 	api.common.OperatorContextFilters operator_context_filters = 9;
+}
+
+// -------------- Affiliate Bill --------------
+
+message ListAffiliateBillsRequest {
+    optional int64 affiliate_id = 1;
+    optional int64 bill_id = 2;
+    google.protobuf.Timestamp updated_at_start_time = 3;
+    google.protobuf.Timestamp updated_at_end_time = 4;
+    optional int32 page = 5;
+    optional int32 page_size = 6;
+    api.common.OperatorContextFilters operator_context_filters = 7;
 }

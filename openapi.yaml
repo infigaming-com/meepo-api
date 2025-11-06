@@ -424,6 +424,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.backoffice.service.v1.UpdateAccountResponse'
+    /v1/backoffice/affiliate/bill/list:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_ListAffiliateBills
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAffiliateBillsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListAffiliateBillsResponse'
     /v1/backoffice/affiliate/campaign/create:
         post:
             tags:
@@ -712,6 +730,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.GetAffiliateResponse'
+    /v1/backoffice/affiliate/get/details:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_GetAffiliateDetails
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetAffiliateDetailsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.GetAffiliateDetailsResponse'
     /v1/backoffice/affiliate/list:
         post:
             tags:
@@ -5687,6 +5723,41 @@ components:
                 holdPeriodDays:
                     type: integer
                     format: int32
+        api.affiliate.service.v1.AffiliateBill_BillDetail:
+            type: object
+            properties:
+                billItems:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.BillDetail_BillItem'
+                totalAmountUsd:
+                    type: string
+                totalAmountReportingCurrency:
+                    type: string
+                vatAmountUsd:
+                    type: string
+                vatAmountReportingCurrency:
+                    type: string
+        api.affiliate.service.v1.AffiliateDetails_CommissionPlan:
+            type: object
+            properties:
+                commissionPlanId:
+                    type: string
+                commissionPlanName:
+                    type: string
+        api.affiliate.service.v1.AffiliateDetails_Referrer:
+            type: object
+            properties:
+                affiliateId:
+                    type: string
+                affiliateFirstname:
+                    type: string
+                affiliateLastname:
+                    type: string
+                affiliateCompanyName:
+                    type: string
+                subAffiliateCommissionRate:
+                    type: string
         api.affiliate.service.v1.AffiliateInfo:
             type: object
             properties:
@@ -5737,6 +5808,26 @@ components:
                     items:
                         type: string
                 internalInfo:
+                    type: string
+        api.affiliate.service.v1.BillDetail_BillItem:
+            type: object
+            properties:
+                commissionPlanName:
+                    type: string
+                commissionPlanId:
+                    type: string
+                commissionSubtype:
+                    type: string
+                quantity:
+                    type: integer
+                    format: int32
+                priceUsd:
+                    type: string
+                priceReportingCurrency:
+                    type: string
+                amountUsd:
+                    type: string
+                amountReportingCurrency:
                     type: string
         api.affiliate.service.v1.CPAConfig:
             type: object
@@ -6045,6 +6136,71 @@ components:
             properties:
                 rate:
                     type: string
+        api.affiliate.service.v1.GetAffiliateDetailsResponse:
+            type: object
+            properties:
+                affiliateDetails:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.GetAffiliateDetailsResponse_AffiliateDetails'
+        api.affiliate.service.v1.GetAffiliateDetailsResponse_AffiliateDetails:
+            type: object
+            properties:
+                affiliateId:
+                    type: string
+                companyName:
+                    type: string
+                status:
+                    type: string
+                commissionPlans:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateDetails_CommissionPlan'
+                invoicePeriod:
+                    type: string
+                photoUrl:
+                    type: string
+                active:
+                    type: boolean
+                lastLoginIp:
+                    type: string
+                lastLoginAt:
+                    type: string
+                    format: date-time
+                firstname:
+                    type: string
+                lastname:
+                    type: string
+                phone:
+                    type: string
+                contactTypes:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.ContactType'
+                country:
+                    type: string
+                region:
+                    type: string
+                city:
+                    type: string
+                postCode:
+                    type: string
+                street:
+                    type: string
+                trafficSourceIds:
+                    type: array
+                    items:
+                        type: string
+                teammateIds:
+                    type: array
+                    items:
+                        type: string
+                internalInfo:
+                    type: string
+                referrer:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateDetails_Referrer'
+                pendingBalanceUsd:
+                    type: string
+                pendingBalanceReportingCurrency:
+                    type: string
         api.affiliate.service.v1.GetAffiliateResponse:
             type: object
             properties:
@@ -6067,6 +6223,56 @@ components:
                     type: string
                 planConfig:
                     $ref: '#/components/schemas/api.affiliate.service.v1.CommissionPlanConfig'
+        api.affiliate.service.v1.ListAffiliateBillsResponse:
+            type: object
+            properties:
+                affiliateBills:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.ListAffiliateBillsResponse_AffiliateBill'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.affiliate.service.v1.ListAffiliateBillsResponse_AffiliateBill:
+            type: object
+            properties:
+                affiliateId:
+                    type: string
+                affiliateName:
+                    type: string
+                affiliateCompanyName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                operatorName:
+                    type: string
+                billId:
+                    type: string
+                updatedAt:
+                    type: string
+                    format: date-time
+                status:
+                    type: string
+                amountUsd:
+                    type: string
+                amountReportingCurrency:
+                    type: string
+                periodStartTime:
+                    type: string
+                    format: date-time
+                periodEndTime:
+                    type: string
+                    format: date-time
+                billDetail:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateBill_BillDetail'
         api.affiliate.service.v1.ListAffiliatesResponse:
             type: object
             properties:
@@ -6284,6 +6490,8 @@ components:
                 companyOperatorName:
                     type: string
                 operatorName:
+                    type: string
+                billId:
                     type: string
         api.affiliate.service.v1.ListEventsResponse:
             type: object
@@ -7656,6 +7864,11 @@ components:
         api.backoffice.service.v1.Generate2faResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.GetAffiliateDetailsRequest:
+            type: object
+            properties:
+                affiliateId:
+                    type: string
         api.backoffice.service.v1.GetAffiliateRequest:
             type: object
             properties:
@@ -9099,12 +9312,35 @@ components:
                     description: Amount information
                 description:
                     type: string
+        api.backoffice.service.v1.ListAffiliateBillsRequest:
+            type: object
+            properties:
+                affiliateId:
+                    type: string
+                billId:
+                    type: string
+                updatedAtStartTime:
+                    type: string
+                    format: date-time
+                updatedAtEndTime:
+                    type: string
+                    format: date-time
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ListAffiliateCampaignsRequest:
             type: object
             properties:
                 campaignName:
                     type: string
                 campaignId:
+                    type: string
+                affiliateId:
                     type: string
                 enabled:
                     type: boolean
@@ -9570,6 +9806,8 @@ components:
                     type: string
                 campaignId:
                     type: string
+                affiliateId:
+                    type: string
                 enabled:
                     type: boolean
                 page:
@@ -9599,6 +9837,8 @@ components:
                     type: array
                     items:
                         type: string
+                affiliateId:
+                    type: string
                 page:
                     type: integer
                     format: int32
@@ -9627,6 +9867,8 @@ components:
                     items:
                         type: string
                 commissionId:
+                    type: string
+                billId:
                     type: string
                 startTime:
                     type: string

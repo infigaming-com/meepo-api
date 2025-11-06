@@ -1545,6 +1545,10 @@ func (m *GameCreditRequest) validate(all bool) error {
 		}
 	}
 
+	if m.OriginalTransactionType != nil {
+		// no validation rules for OriginalTransactionType
+	}
+
 	if len(errors) > 0 {
 		return GameCreditRequestMultiError(errors)
 	}
@@ -22622,6 +22626,24 @@ func (m *ListTimeRangeDepositCreditsResponse_Credit) validate(all bool) error {
 	// no validation rules for CreditId
 
 	// no validation rules for Currency
+
+	// no validation rules for Cash
+
+	// no validation rules for CashUsd
+
+	// no validation rules for CashReportingCurrency
+
+	// no validation rules for OperatorBonus
+
+	// no validation rules for OperatorBonusUsd
+
+	// no validation rules for OperatorBonusReportingCurrency
+
+	// no validation rules for ProviderBonus
+
+	// no validation rules for ProviderBonusUsd
+
+	// no validation rules for ProviderBonusReportingCurrency
 
 	if len(errors) > 0 {
 		return ListTimeRangeDepositCreditsResponse_CreditMultiError(errors)
