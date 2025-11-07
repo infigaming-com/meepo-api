@@ -19518,8 +19518,6 @@ func (m *ListGameBetDisplayConfigResponse_Item) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for Enable
-
 	if len(errors) > 0 {
 		return ListGameBetDisplayConfigResponse_ItemMultiError(errors)
 	}

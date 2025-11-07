@@ -12240,7 +12240,6 @@ type ListGameBetDisplayConfigResponse_Item struct {
 	Country       string                 `protobuf:"bytes,1,opt,name=country,proto3" json:"country,omitempty"`
 	AllBet        *BettingConfig         `protobuf:"bytes,2,opt,name=all_bet,json=allBet,proto3" json:"all_bet,omitempty"`
 	HighWins      *BettingConfig         `protobuf:"bytes,3,opt,name=high_wins,json=highWins,proto3" json:"high_wins,omitempty"`
-	Enable        bool                   `protobuf:"varint,4,opt,name=enable,proto3" json:"enable,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -12294,13 +12293,6 @@ func (x *ListGameBetDisplayConfigResponse_Item) GetHighWins() *BettingConfig {
 		return x.HighWins
 	}
 	return nil
-}
-
-func (x *ListGameBetDisplayConfigResponse_Item) GetEnable() bool {
-	if x != nil {
-		return x.Enable
-	}
-	return false
 }
 
 var File_game_service_v1_game_proto protoreflect.FileDescriptor
@@ -13669,15 +13661,14 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"_high_wins\"$\n" +
 	"\"UpdateGameBetDisplayConfigResponse\"v\n" +
 	"\x1fListGameBetDisplayConfigRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\xc3\x02\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\xab\x02\n" +
 	" ListGameBetDisplayConfigResponse\x12N\n" +
 	"\x04list\x18\x01 \x03(\v2:.api.game.service.v1.ListGameBetDisplayConfigResponse.ItemR\x04list\x12\x16\n" +
-	"\x06enable\x18\x02 \x01(\bR\x06enable\x1a\xb6\x01\n" +
+	"\x06enable\x18\x02 \x01(\bR\x06enable\x1a\x9e\x01\n" +
 	"\x04Item\x12\x18\n" +
 	"\acountry\x18\x01 \x01(\tR\acountry\x12;\n" +
 	"\aall_bet\x18\x02 \x01(\v2\".api.game.service.v1.BettingConfigR\x06allBet\x12?\n" +
-	"\thigh_wins\x18\x03 \x01(\v2\".api.game.service.v1.BettingConfigR\bhighWins\x12\x16\n" +
-	"\x06enable\x18\x04 \x01(\bR\x06enable\"-\n" +
+	"\thigh_wins\x18\x03 \x01(\v2\".api.game.service.v1.BettingConfigR\bhighWins\"-\n" +
 	"\x12GetGameInfoRequest\x12\x17\n" +
 	"\agame_id\x18\x01 \x01(\tR\x06gameId\"Q\n" +
 	"\x13GetGameInfoResponse\x12:\n" +

@@ -14510,8 +14510,6 @@ components:
                     $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
                 highWins:
                     $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
-                enable:
-                    type: boolean
         api.game.service.v1.ListGamesRequest:
             type: object
             properties:

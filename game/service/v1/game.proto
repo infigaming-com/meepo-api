@@ -1624,7 +1624,6 @@ message ListGameBetDisplayConfigResponse {
 		string country = 1;
 		BettingConfig all_bet = 2;
 		BettingConfig high_wins = 3;
-		bool enable = 4;
 	}
 	repeated Item list = 1;
 	bool enable = 2;
