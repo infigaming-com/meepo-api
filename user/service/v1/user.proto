@@ -381,6 +381,20 @@ service User {
 			body: "*"
 		};
 	}
+
+	rpc RequestDailyLossback(RequestDailyLossbackRequest) returns (api.vip.service.v1.RequestDailyLossbackResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/vip/daily-lossback/request"
+			body: "*"
+		};
+	}
+
+	rpc GetDailyLossbackStatus(GetDailyLossbackStatusRequest) returns (api.vip.service.v1.GetDailyLossbackStatusResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/vip/daily-lossback/status/get"
+			body: "*"
+		};
+	}
 }
 
 // UserInfo contains basic user information.
@@ -1707,4 +1721,11 @@ message ClaimVipRewardRequest {
 message ConfirmClaimVipRewardRequest {
 	int64 claim_transaction_id = 1;
 	string claim_currency = 2;
+}
+
+message RequestDailyLossbackRequest {
+	string currency = 1;
+}
+
+message GetDailyLossbackStatusRequest {
 }
