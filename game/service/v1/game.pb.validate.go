@@ -14461,6 +14461,8 @@ func (m *BettingConfig) validate(all bool) error {
 
 	// no validation rules for MiniOdds
 
+	// no validation rules for Enable
+
 	if len(errors) > 0 {
 		return BettingConfigMultiError(errors)
 	}
@@ -14891,6 +14893,8 @@ func (m *UpdateGameBetDisplayConfigRequest) validate(all bool) error {
 
 	}
 
+	// no validation rules for Enable
+
 	if all {
 		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
@@ -15295,6 +15299,8 @@ func (m *ListGameBetDisplayConfigResponse) validate(all bool) error {
 		}
 
 	}
+
+	// no validation rules for Enable
 
 	if len(errors) > 0 {
 		return ListGameBetDisplayConfigResponseMultiError(errors)
@@ -19345,10 +19351,6 @@ func (m *UpdateGameBetDisplayConfigRequest_Item) validate(all bool) error {
 			}
 		}
 
-	}
-
-	if m.Enable != nil {
-		// no validation rules for Enable
 	}
 
 	if len(errors) > 0 {
