@@ -69,6 +69,10 @@ const (
 	ErrorReason_PROCESS_BILL_SETTLEMENT_FAILED           ErrorReason = 130041
 	ErrorReason_LIST_BILLS_FAILED                        ErrorReason = 130042
 	ErrorReason_GET_AFFILIATE_DETAILS_FAILED             ErrorReason = 130043
+	ErrorReason_GET_REFERRAL_PLAN_FAILED                 ErrorReason = 130044
+	ErrorReason_GET_REFERRAL_PLAN_PERMISSION_DENIED      ErrorReason = 130045
+	ErrorReason_SET_REFERRAL_PLAN_FAILED                 ErrorReason = 130046
+	ErrorReason_SET_REFERRAL_PLAN_PERMISSION_DENIED      ErrorReason = 130047
 )
 
 // Enum value maps for ErrorReason.
@@ -118,6 +122,10 @@ var (
 		130041: "PROCESS_BILL_SETTLEMENT_FAILED",
 		130042: "LIST_BILLS_FAILED",
 		130043: "GET_AFFILIATE_DETAILS_FAILED",
+		130044: "GET_REFERRAL_PLAN_FAILED",
+		130045: "GET_REFERRAL_PLAN_PERMISSION_DENIED",
+		130046: "SET_REFERRAL_PLAN_FAILED",
+		130047: "SET_REFERRAL_PLAN_PERMISSION_DENIED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                              0,
@@ -164,6 +172,10 @@ var (
 		"PROCESS_BILL_SETTLEMENT_FAILED":           130041,
 		"LIST_BILLS_FAILED":                        130042,
 		"GET_AFFILIATE_DETAILS_FAILED":             130043,
+		"GET_REFERRAL_PLAN_FAILED":                 130044,
+		"GET_REFERRAL_PLAN_PERMISSION_DENIED":      130045,
+		"SET_REFERRAL_PLAN_FAILED":                 130046,
+		"SET_REFERRAL_PLAN_PERMISSION_DENIED":      130047,
 	}
 )
 
@@ -198,7 +210,7 @@ var File_affiliate_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\xb0\v\n" +
+	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\xc6\f\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1dCREATE_COMMISSION_PLAN_FAILED\x10\xd1\xf7\a\x12#\n" +
@@ -243,7 +255,11 @@ const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\x12UPDATE_BILL_FAILED\x10\xf8\xf7\a\x12$\n" +
 	"\x1ePROCESS_BILL_SETTLEMENT_FAILED\x10\xf9\xf7\a\x12\x17\n" +
 	"\x11LIST_BILLS_FAILED\x10\xfa\xf7\a\x12\"\n" +
-	"\x1cGET_AFFILIATE_DETAILS_FAILED\x10\xfb\xf7\a\x1a\x04\xa0E\xf4\x03BY\n" +
+	"\x1cGET_AFFILIATE_DETAILS_FAILED\x10\xfb\xf7\a\x12\x1e\n" +
+	"\x18GET_REFERRAL_PLAN_FAILED\x10\xfc\xf7\a\x12)\n" +
+	"#GET_REFERRAL_PLAN_PERMISSION_DENIED\x10\xfd\xf7\a\x12\x1e\n" +
+	"\x18SET_REFERRAL_PLAN_FAILED\x10\xfe\xf7\a\x12)\n" +
+	"#SET_REFERRAL_PLAN_PERMISSION_DENIED\x10\xff\xf7\a\x1a\x04\xa0E\xf4\x03BY\n" +
 	"\x18api.affiliate.service.v1P\x01Z;github.com/infigaming-com/meepo-api/affiliate/service/v1;v1b\x06proto3"
 
 var (

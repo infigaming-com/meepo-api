@@ -538,3 +538,51 @@ func IsGetAffiliateDetailsFailed(err error) bool {
 func ErrorGetAffiliateDetailsFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_AFFILIATE_DETAILS_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetReferralPlanFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_REFERRAL_PLAN_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetReferralPlanFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_REFERRAL_PLAN_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetReferralPlanPermissionDenied(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_REFERRAL_PLAN_PERMISSION_DENIED.String() && e.Code == 500
+}
+
+func ErrorGetReferralPlanPermissionDenied(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_REFERRAL_PLAN_PERMISSION_DENIED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSetReferralPlanFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SET_REFERRAL_PLAN_FAILED.String() && e.Code == 500
+}
+
+func ErrorSetReferralPlanFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SET_REFERRAL_PLAN_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSetReferralPlanPermissionDenied(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SET_REFERRAL_PLAN_PERMISSION_DENIED.String() && e.Code == 500
+}
+
+func ErrorSetReferralPlanPermissionDenied(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SET_REFERRAL_PLAN_PERMISSION_DENIED.String(), fmt.Sprintf(format, args...))
+}
