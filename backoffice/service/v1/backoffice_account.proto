@@ -286,6 +286,7 @@ message AccountInfoResponse {
     string subdomain = 10;
     string backoffice_subdomain = 11;
     string operator_mode = 12;
+    int64 user_id = 13;
 }
 
 message Role {
