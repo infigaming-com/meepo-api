@@ -238,3 +238,27 @@ type AffiliateBillSettlementEvent struct {
 	OperatorContext         *common.OperatorContext `json:"operator_context,omitempty"`
 	CreatedAt               int64                   `json:"created_at"`
 }
+
+const AffiliateUserActionEventTopic = "affiliate.user.action"
+
+const (
+	EVENT_TYPE_REGISTER                    = "register"
+	EVENT_TYPE_FIRST_DEPOSIT               = "first_deposit"
+	EVENT_TYPE_FIRST_QUALIFICATION_DEPOSIT = "first_qualification_deposit"
+	EVENT_TYPE_DEPOSIT                     = "deposit"
+	EVENT_TYPE_WITHDRAWAL                  = "withdrawal"
+	EVENT_TYPE_GAME_START                  = "game_start"
+	EVENT_TYPE_GAME_BET                    = "game_bet"
+	EVENT_TYPE_GAME_WIN                    = "game_win"
+	EVENT_TYPE_GAME_ADJUST                 = "game_adjust"
+	EVENT_TYPE_GAME_ROLLBACK_BET           = "game_rollback_bet"
+	EVENT_TYPE_GAME_ROLLBACK_WIN           = "game_rollback_win"
+	EVENT_TYPE_CLICK_DEPOSIT               = "click_deposit" // not available now
+)
+
+type AffiliateUserActionEvent struct {
+	UserID          int64                   `json:"user_id"`
+	Action          string                  `json:"action"`
+	OperatorContext *common.OperatorContext `json:"operator_context,omitempty"`
+	CreatedAt       int64                   `json:"created_at"`
+}
