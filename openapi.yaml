@@ -6330,6 +6330,10 @@ components:
                     allOf:
                         - $ref: '#/components/schemas/api.common.OperatorContext'
                     description: Inherited operator context - the operator from whom config is inherited
+                inheritedFromOperatorName:
+                    type: string
+                followParent:
+                    type: boolean
                 defaultReferralPlan:
                     allOf:
                         - $ref: '#/components/schemas/api.affiliate.service.v1.ReferralPlan'
@@ -6895,8 +6899,6 @@ components:
         api.affiliate.service.v1.ReferralPlan:
             type: object
             properties:
-                followParent:
-                    type: boolean
                 enabled:
                     type: boolean
                 maxTier:

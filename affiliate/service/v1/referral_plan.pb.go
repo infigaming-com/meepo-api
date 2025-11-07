@@ -227,11 +227,13 @@ type GetReferralPlanResponse struct {
 	CustomOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=custom_operator_context,json=customOperatorContext,proto3" json:"custom_operator_context,omitempty"`
 	Currency              string                  `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	// Inherited operator context - the operator from whom config is inherited
-	InheritedOperatorContext *common.OperatorContext `protobuf:"bytes,3,opt,name=inherited_operator_context,json=inheritedOperatorContext,proto3" json:"inherited_operator_context,omitempty"`
+	InheritedOperatorContext  *common.OperatorContext `protobuf:"bytes,3,opt,name=inherited_operator_context,json=inheritedOperatorContext,proto3" json:"inherited_operator_context,omitempty"`
+	InheritedFromOperatorName string                  `protobuf:"bytes,4,opt,name=inherited_from_operator_name,json=inheritedFromOperatorName,proto3" json:"inherited_from_operator_name,omitempty"`
+	FollowParent              bool                    `protobuf:"varint,5,opt,name=follow_parent,json=followParent,proto3" json:"follow_parent,omitempty"`
 	// Default referral plan (inherited from parent/system)
-	DefaultReferralPlan *ReferralPlan `protobuf:"bytes,4,opt,name=default_referral_plan,json=defaultReferralPlan,proto3,oneof" json:"default_referral_plan,omitempty"`
+	DefaultReferralPlan *ReferralPlan `protobuf:"bytes,6,opt,name=default_referral_plan,json=defaultReferralPlan,proto3,oneof" json:"default_referral_plan,omitempty"`
 	// Custom referral plan (current operator's own config)
-	CustomReferralPlan *ReferralPlan `protobuf:"bytes,5,opt,name=custom_referral_plan,json=customReferralPlan,proto3,oneof" json:"custom_referral_plan,omitempty"`
+	CustomReferralPlan *ReferralPlan `protobuf:"bytes,7,opt,name=custom_referral_plan,json=customReferralPlan,proto3,oneof" json:"custom_referral_plan,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -287,6 +289,20 @@ func (x *GetReferralPlanResponse) GetInheritedOperatorContext() *common.Operator
 	return nil
 }
 
+func (x *GetReferralPlanResponse) GetInheritedFromOperatorName() string {
+	if x != nil {
+		return x.InheritedFromOperatorName
+	}
+	return ""
+}
+
+func (x *GetReferralPlanResponse) GetFollowParent() bool {
+	if x != nil {
+		return x.FollowParent
+	}
+	return false
+}
+
 func (x *GetReferralPlanResponse) GetDefaultReferralPlan() *ReferralPlan {
 	if x != nil {
 		return x.DefaultReferralPlan
@@ -304,10 +320,9 @@ func (x *GetReferralPlanResponse) GetCustomReferralPlan() *ReferralPlan {
 // Complete referral plan configuration
 type ReferralPlan struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	FollowParent  bool                   `protobuf:"varint,1,opt,name=follow_parent,json=followParent,proto3" json:"follow_parent,omitempty"`
-	Enabled       bool                   `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	MaxTier       int32                  `protobuf:"varint,3,opt,name=max_tier,json=maxTier,proto3" json:"max_tier,omitempty"`
-	PlanConfig    *ReferralPlanConfig    `protobuf:"bytes,4,opt,name=plan_config,json=planConfig,proto3" json:"plan_config,omitempty"`
+	Enabled       bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	MaxTier       int32                  `protobuf:"varint,2,opt,name=max_tier,json=maxTier,proto3" json:"max_tier,omitempty"`
+	PlanConfig    *ReferralPlanConfig    `protobuf:"bytes,3,opt,name=plan_config,json=planConfig,proto3" json:"plan_config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -340,13 +355,6 @@ func (x *ReferralPlan) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ReferralPlan.ProtoReflect.Descriptor instead.
 func (*ReferralPlan) Descriptor() ([]byte, []int) {
 	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *ReferralPlan) GetFollowParent() bool {
-	if x != nil {
-		return x.FollowParent
-	}
-	return false
 }
 
 func (x *ReferralPlan) GetEnabled() bool {
@@ -1315,20 +1323,21 @@ const file_affiliate_service_v1_referral_plan_proto_rawDesc = "" +
 	"\x16GetReferralPlanRequest\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12S\n" +
 	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1a\n" +
-	"\bcurrency\x18\x03 \x01(\tR\bcurrency\"\xd8\x03\n" +
+	"\bcurrency\x18\x03 \x01(\tR\bcurrency\"\xbe\x04\n" +
 	"\x17GetReferralPlanResponse\x12S\n" +
 	"\x17custom_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15customOperatorContext\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12Y\n" +
-	"\x1ainherited_operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x18inheritedOperatorContext\x12_\n" +
-	"\x15default_referral_plan\x18\x04 \x01(\v2&.api.affiliate.service.v1.ReferralPlanH\x00R\x13defaultReferralPlan\x88\x01\x01\x12]\n" +
-	"\x14custom_referral_plan\x18\x05 \x01(\v2&.api.affiliate.service.v1.ReferralPlanH\x01R\x12customReferralPlan\x88\x01\x01B\x18\n" +
+	"\x1ainherited_operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x18inheritedOperatorContext\x12?\n" +
+	"\x1cinherited_from_operator_name\x18\x04 \x01(\tR\x19inheritedFromOperatorName\x12#\n" +
+	"\rfollow_parent\x18\x05 \x01(\bR\ffollowParent\x12_\n" +
+	"\x15default_referral_plan\x18\x06 \x01(\v2&.api.affiliate.service.v1.ReferralPlanH\x00R\x13defaultReferralPlan\x88\x01\x01\x12]\n" +
+	"\x14custom_referral_plan\x18\a \x01(\v2&.api.affiliate.service.v1.ReferralPlanH\x01R\x12customReferralPlan\x88\x01\x01B\x18\n" +
 	"\x16_default_referral_planB\x17\n" +
-	"\x15_custom_referral_plan\"\xb7\x01\n" +
-	"\fReferralPlan\x12#\n" +
-	"\rfollow_parent\x18\x01 \x01(\bR\ffollowParent\x12\x18\n" +
-	"\aenabled\x18\x02 \x01(\bR\aenabled\x12\x19\n" +
-	"\bmax_tier\x18\x03 \x01(\x05R\amaxTier\x12M\n" +
-	"\vplan_config\x18\x04 \x01(\v2,.api.affiliate.service.v1.ReferralPlanConfigR\n" +
+	"\x15_custom_referral_plan\"\x92\x01\n" +
+	"\fReferralPlan\x12\x18\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x19\n" +
+	"\bmax_tier\x18\x02 \x01(\x05R\amaxTier\x12M\n" +
+	"\vplan_config\x18\x03 \x01(\v2,.api.affiliate.service.v1.ReferralPlanConfigR\n" +
 	"planConfig\"\xd6\x05\n" +
 	"\x12ReferralPlanConfig\x12h\n" +
 	"\x15conversion_conditions\x18\x01 \x01(\v2..api.affiliate.service.v1.ConversionConditionsH\x00R\x14conversionConditions\x88\x01\x01\x12\\\n" +

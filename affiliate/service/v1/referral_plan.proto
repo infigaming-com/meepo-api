@@ -36,18 +36,19 @@ message GetReferralPlanResponse {
     string currency = 2;
     // Inherited operator context - the operator from whom config is inherited
     api.common.OperatorContext inherited_operator_context = 3;
+    string inherited_from_operator_name = 4;
+	bool follow_parent = 5;
     // Default referral plan (inherited from parent/system)
-    optional ReferralPlan default_referral_plan = 4;
+    optional ReferralPlan default_referral_plan = 6;
     // Custom referral plan (current operator's own config)
-    optional ReferralPlan custom_referral_plan = 5;
+    optional ReferralPlan custom_referral_plan = 7;
 }
 
 // Complete referral plan configuration
 message ReferralPlan {
-    bool follow_parent = 1;
-    bool enabled = 2;
-    int32 max_tier = 3;
-    ReferralPlanConfig plan_config = 4;
+    bool enabled = 1;
+    int32 max_tier = 2;
+    ReferralPlanConfig plan_config = 3;
 }
 
 // Referral plan configuration

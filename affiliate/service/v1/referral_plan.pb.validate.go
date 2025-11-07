@@ -590,6 +590,10 @@ func (m *GetReferralPlanResponse) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for InheritedFromOperatorName
+
+	// no validation rules for FollowParent
+
 	if m.DefaultReferralPlan != nil {
 
 		if all {
@@ -757,8 +761,6 @@ func (m *ReferralPlan) validate(all bool) error {
 	}
 
 	var errors []error
-
-	// no validation rules for FollowParent
 
 	// no validation rules for Enabled
 
