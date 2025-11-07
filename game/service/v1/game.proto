@@ -1588,6 +1588,7 @@ message BettingConfig {
 	repeated string bet_category = 1;
 	float mini_odds = 2;
 	repeated string currencies = 3;
+	bool enable = 4;
 }
 
 message AddGameBetDisplayConfigRequest {
@@ -1605,10 +1606,10 @@ message UpdateGameBetDisplayConfigRequest {
 		string country = 1;
 		optional BettingConfig all_bet = 2;
 		optional BettingConfig high_wins = 3;
-		optional bool enable = 4;
 	}
 	repeated Item list = 1;
-	api.common.OperatorContext target_operator_context = 2;
+	bool enable = 2;
+	api.common.OperatorContext target_operator_context = 3;
 }
 
 message UpdateGameBetDisplayConfigResponse {
@@ -1626,6 +1627,7 @@ message ListGameBetDisplayConfigResponse {
 		bool enable = 4;
 	}
 	repeated Item list = 1;
+	bool enable = 2;
 }
 
 message GetGameInfoRequest {

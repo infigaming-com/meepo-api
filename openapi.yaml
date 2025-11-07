@@ -13925,6 +13925,8 @@ components:
                     type: array
                     items:
                         type: string
+                enable:
+                    type: boolean
         api.game.service.v1.CreateSessionRequest:
             type: object
             properties:
@@ -14535,6 +14537,8 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.game.service.v1.ListGameBetDisplayConfigResponse_Item'
+                enable:
+                    type: boolean
         api.game.service.v1.ListGameBetDisplayConfigResponse_Item:
             type: object
             properties:
@@ -14982,6 +14986,8 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.game.service.v1.UpdateGameBetDisplayConfigRequest_Item'
+                enable:
+                    type: boolean
                 targetOperatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
         api.game.service.v1.UpdateGameBetDisplayConfigRequest_Item:
@@ -14993,8 +14999,6 @@ components:
                     $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
                 highWins:
                     $ref: '#/components/schemas/api.game.service.v1.BettingConfig'
-                enable:
-                    type: boolean
         api.game.service.v1.UpdateGameBetDisplayConfigResponse:
             type: object
             properties: {}
