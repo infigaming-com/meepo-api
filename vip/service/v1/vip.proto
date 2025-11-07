@@ -44,6 +44,12 @@ service Vip {
   rpc ConfirmClaimVipReward(ConfirmClaimVipRewardRequest) returns (ConfirmClaimVipRewardResponse) {
   }
 
+  rpc RequestDailyLossback(RequestDailyLossbackRequest) returns (RequestDailyLossbackResponse) {
+  }
+
+  rpc GetDailyLossbackStatus(GetDailyLossbackStatusRequest) returns (GetDailyLossbackStatusResponse) {
+  }
+
 }
 
 enum VipDisplayRule {
@@ -118,6 +124,7 @@ message VipSetting {
   VipPayoutType rakeback_daily_payout_type = 12;
   VipPayoutType weekly_reward_payout_type = 13;
   VipPayoutType monthly_reward_payout_type = 14;
+  VipPayoutType daily_lossback_payout_type = 15;
   
   string deposit_xp_rate = 16;
   string wagering_xp_rate = 17;
@@ -244,6 +251,20 @@ message VipLevelConfigTemplate {
 
   string image_url = 38;
   bool xp_loss_enabled = 39;
+
+  // Daily Lossback
+  bool daily_lossback_enabled = 40;
+  int32 daily_lossback_application_limit = 41;
+  string daily_lossback_balance_threshold = 42;
+  string daily_lossback_min_deposit_threshold = 43;
+  string daily_lossback_wagering_req = 44;
+  string daily_lossback_max_withdraw_multiple = 45;
+  repeated DailyLossbackRate daily_lossback_rates = 46;
+}
+
+message DailyLossbackRate {
+  string game_type = 1;
+  string rate_pct = 2;
 }
 
 message ListVipLevelConfigTemplatesRequest {
@@ -378,4 +399,34 @@ message ConfirmClaimVipRewardRequest {
 }
 
 message ConfirmClaimVipRewardResponse {
+}
+
+message RequestDailyLossbackRequest {
+  int64 user_id = 1;
+  api.common.OperatorContext operator_context = 2;
+  string currency = 3;
+}
+
+message RequestDailyLossbackResponse {
+}
+
+message DailyLossbackStatus {
+  bool eligible = 1;
+  string requested_times = 2;
+  string total_allowed_times = 3;
+  bool deposit_met = 4;
+  bool single_deposit_met = 5;
+  bool wallet_balance_met = 6;
+  bool time_window_met = 7;
+  bool no_unsettled_bets = 8;
+}
+
+message GetDailyLossbackStatusRequest {
+  int64 user_id = 1;
+  api.common.OperatorContext operator_context = 2;
+  string currency = 3;
+}
+
+message GetDailyLossbackStatusResponse {
+  DailyLossbackStatus status = 1;
 }

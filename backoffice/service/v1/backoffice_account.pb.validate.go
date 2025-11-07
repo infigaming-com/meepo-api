@@ -3381,6 +3381,8 @@ func (m *AccountInfoResponse) validate(all bool) error {
 
 	// no validation rules for OperatorMode
 
+	// no validation rules for UserId
+
 	if len(errors) > 0 {
 		return AccountInfoResponseMultiError(errors)
 	}

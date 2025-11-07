@@ -26,6 +26,7 @@ const OperationUserCloseAccount = "/api.user.service.v1.User/CloseAccount"
 const OperationUserConfirmClaimVipReward = "/api.user.service.v1.User/ConfirmClaimVipReward"
 const OperationUserDeleteResponsibleGamblingConfig = "/api.user.service.v1.User/DeleteResponsibleGamblingConfig"
 const OperationUserGetClaimableVipRewards = "/api.user.service.v1.User/GetClaimableVipRewards"
+const OperationUserGetDailyLossbackStatus = "/api.user.service.v1.User/GetDailyLossbackStatus"
 const OperationUserGetOperatorAccountSettings = "/api.user.service.v1.User/GetOperatorAccountSettings"
 const OperationUserGetOperatorVipSettings = "/api.user.service.v1.User/GetOperatorVipSettings"
 const OperationUserGetResponsibleGamblingConfig = "/api.user.service.v1.User/GetResponsibleGamblingConfig"
@@ -39,6 +40,7 @@ const OperationUserRefreshToken = "/api.user.service.v1.User/RefreshToken"
 const OperationUserRegister = "/api.user.service.v1.User/Register"
 const OperationUserRegisterOrLoginWithOAuth = "/api.user.service.v1.User/RegisterOrLoginWithOAuth"
 const OperationUserRegisterOrLoginWithTelegram = "/api.user.service.v1.User/RegisterOrLoginWithTelegram"
+const OperationUserRequestDailyLossback = "/api.user.service.v1.User/RequestDailyLossback"
 const OperationUserResetPasswordWithCode = "/api.user.service.v1.User/ResetPasswordWithCode"
 const OperationUserSendEmailVerificationCode = "/api.user.service.v1.User/SendEmailVerificationCode"
 const OperationUserSendPasswordResetCode = "/api.user.service.v1.User/SendPasswordResetCode"
@@ -54,6 +56,7 @@ type UserHTTPServer interface {
 	ConfirmClaimVipReward(context.Context, *ConfirmClaimVipRewardRequest) (*v1.ConfirmClaimVipRewardResponse, error)
 	DeleteResponsibleGamblingConfig(context.Context, *DeleteResponsibleGamblingConfigRequest) (*DeleteResponsibleGamblingConfigResponse, error)
 	GetClaimableVipRewards(context.Context, *GetClaimableVipRewardsRequest) (*v1.GetClaimableVipRewardsResponse, error)
+	GetDailyLossbackStatus(context.Context, *GetDailyLossbackStatusRequest) (*v1.GetDailyLossbackStatusResponse, error)
 	GetOperatorAccountSettings(context.Context, *GetOperatorAccountSettingsRequest) (*GetOperatorAccountSettingsResponse, error)
 	GetOperatorVipSettings(context.Context, *GetOperatorVipSettingsRequest) (*v1.GetOperatorVipSettingsResponse, error)
 	GetResponsibleGamblingConfig(context.Context, *GetResponsibleGamblingConfigRequest) (*GetResponsibleGamblingConfigResponse, error)
@@ -83,6 +86,7 @@ type UserHTTPServer interface {
 	// RegisterOrLoginWithTelegram Register or login using Telegram authentication.
 	// Uses Telegram's login widget for authentication.
 	RegisterOrLoginWithTelegram(context.Context, *TelegramAuthRequest) (*AuthResponse, error)
+	RequestDailyLossback(context.Context, *RequestDailyLossbackRequest) (*v1.RequestDailyLossbackResponse, error)
 	// ResetPasswordWithCode Reset password using verification code
 	ResetPasswordWithCode(context.Context, *ResetPasswordWithCodeRequest) (*ResetPasswordWithCodeResponse, error)
 	SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error)
@@ -122,6 +126,8 @@ func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r.POST("/v1/user/vip/reward/claimable/get", _User_GetClaimableVipRewards0_HTTP_Handler(srv))
 	r.POST("/v1/user/vip/reward/claim", _User_ClaimVipReward0_HTTP_Handler(srv))
 	r.POST("/v1/user/vip/reward/claim/confirm", _User_ConfirmClaimVipReward0_HTTP_Handler(srv))
+	r.POST("/v1/user/vip/daily-lossback/request", _User_RequestDailyLossback0_HTTP_Handler(srv))
+	r.POST("/v1/user/vip/daily-lossback/status/get", _User_GetDailyLossbackStatus0_HTTP_Handler(srv))
 }
 
 func _User_Register0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
@@ -696,6 +702,50 @@ func _User_ConfirmClaimVipReward0_HTTP_Handler(srv UserHTTPServer) func(ctx http
 	}
 }
 
+func _User_RequestDailyLossback0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in RequestDailyLossbackRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserRequestDailyLossback)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.RequestDailyLossback(ctx, req.(*RequestDailyLossbackRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.RequestDailyLossbackResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _User_GetDailyLossbackStatus0_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetDailyLossbackStatusRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserGetDailyLossbackStatus)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetDailyLossbackStatus(ctx, req.(*GetDailyLossbackStatusRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.GetDailyLossbackStatusResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type UserHTTPClient interface {
 	AddResponsibleGamblingConfig(ctx context.Context, req *AddResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *AddResponsibleGamblingConfigResponse, err error)
 	ClaimVipReward(ctx context.Context, req *ClaimVipRewardRequest, opts ...http.CallOption) (rsp *v1.ClaimVipRewardResponse, err error)
@@ -703,6 +753,7 @@ type UserHTTPClient interface {
 	ConfirmClaimVipReward(ctx context.Context, req *ConfirmClaimVipRewardRequest, opts ...http.CallOption) (rsp *v1.ConfirmClaimVipRewardResponse, err error)
 	DeleteResponsibleGamblingConfig(ctx context.Context, req *DeleteResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *DeleteResponsibleGamblingConfigResponse, err error)
 	GetClaimableVipRewards(ctx context.Context, req *GetClaimableVipRewardsRequest, opts ...http.CallOption) (rsp *v1.GetClaimableVipRewardsResponse, err error)
+	GetDailyLossbackStatus(ctx context.Context, req *GetDailyLossbackStatusRequest, opts ...http.CallOption) (rsp *v1.GetDailyLossbackStatusResponse, err error)
 	GetOperatorAccountSettings(ctx context.Context, req *GetOperatorAccountSettingsRequest, opts ...http.CallOption) (rsp *GetOperatorAccountSettingsResponse, err error)
 	GetOperatorVipSettings(ctx context.Context, req *GetOperatorVipSettingsRequest, opts ...http.CallOption) (rsp *v1.GetOperatorVipSettingsResponse, err error)
 	GetResponsibleGamblingConfig(ctx context.Context, req *GetResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *GetResponsibleGamblingConfigResponse, err error)
@@ -716,6 +767,7 @@ type UserHTTPClient interface {
 	Register(ctx context.Context, req *RegisterRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
 	RegisterOrLoginWithOAuth(ctx context.Context, req *OAuthRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
 	RegisterOrLoginWithTelegram(ctx context.Context, req *TelegramAuthRequest, opts ...http.CallOption) (rsp *AuthResponse, err error)
+	RequestDailyLossback(ctx context.Context, req *RequestDailyLossbackRequest, opts ...http.CallOption) (rsp *v1.RequestDailyLossbackResponse, err error)
 	ResetPasswordWithCode(ctx context.Context, req *ResetPasswordWithCodeRequest, opts ...http.CallOption) (rsp *ResetPasswordWithCodeResponse, err error)
 	SendEmailVerificationCode(ctx context.Context, req *SendEmailVerificationCodeRequest, opts ...http.CallOption) (rsp *SendEmailVerificationCodeResponse, err error)
 	SendPasswordResetCode(ctx context.Context, req *SendPasswordResetCodeRequest, opts ...http.CallOption) (rsp *SendPasswordResetCodeResponse, err error)
@@ -803,6 +855,19 @@ func (c *UserHTTPClientImpl) GetClaimableVipRewards(ctx context.Context, in *Get
 	pattern := "/v1/user/vip/reward/claimable/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserGetClaimableVipRewards))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *UserHTTPClientImpl) GetDailyLossbackStatus(ctx context.Context, in *GetDailyLossbackStatusRequest, opts ...http.CallOption) (*v1.GetDailyLossbackStatusResponse, error) {
+	var out v1.GetDailyLossbackStatusResponse
+	pattern := "/v1/user/vip/daily-lossback/status/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserGetDailyLossbackStatus))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -972,6 +1037,19 @@ func (c *UserHTTPClientImpl) RegisterOrLoginWithTelegram(ctx context.Context, in
 	pattern := "/v1/user/auth/telegram"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserRegisterOrLoginWithTelegram))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *UserHTTPClientImpl) RequestDailyLossback(ctx context.Context, in *RequestDailyLossbackRequest, opts ...http.CallOption) (*v1.RequestDailyLossbackResponse, error) {
+	var out v1.RequestDailyLossbackResponse
+	pattern := "/v1/user/vip/daily-lossback/request"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserRequestDailyLossback))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

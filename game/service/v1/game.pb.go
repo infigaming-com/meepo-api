@@ -8638,6 +8638,7 @@ type BettingConfig struct {
 	BetCategory   []string               `protobuf:"bytes,1,rep,name=bet_category,json=betCategory,proto3" json:"bet_category,omitempty"`
 	MiniOdds      float32                `protobuf:"fixed32,2,opt,name=mini_odds,json=miniOdds,proto3" json:"mini_odds,omitempty"`
 	Currencies    []string               `protobuf:"bytes,3,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	Enable        bool                   `protobuf:"varint,4,opt,name=enable,proto3" json:"enable,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -8691,6 +8692,13 @@ func (x *BettingConfig) GetCurrencies() []string {
 		return x.Currencies
 	}
 	return nil
+}
+
+func (x *BettingConfig) GetEnable() bool {
+	if x != nil {
+		return x.Enable
+	}
+	return false
 }
 
 type AddGameBetDisplayConfigRequest struct {
@@ -8800,7 +8808,8 @@ func (*AddGameBetDisplayConfigResponse) Descriptor() ([]byte, []int) {
 type UpdateGameBetDisplayConfigRequest struct {
 	state                 protoimpl.MessageState                    `protogen:"open.v1"`
 	List                  []*UpdateGameBetDisplayConfigRequest_Item `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
-	TargetOperatorContext *common.OperatorContext                   `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Enable                bool                                      `protobuf:"varint,2,opt,name=enable,proto3" json:"enable,omitempty"`
+	TargetOperatorContext *common.OperatorContext                   `protobuf:"bytes,3,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -8840,6 +8849,13 @@ func (x *UpdateGameBetDisplayConfigRequest) GetList() []*UpdateGameBetDisplayCon
 		return x.List
 	}
 	return nil
+}
+
+func (x *UpdateGameBetDisplayConfigRequest) GetEnable() bool {
+	if x != nil {
+		return x.Enable
+	}
+	return false
 }
 
 func (x *UpdateGameBetDisplayConfigRequest) GetTargetOperatorContext() *common.OperatorContext {
@@ -8932,6 +8948,7 @@ func (x *ListGameBetDisplayConfigRequest) GetTargetOperatorContext() *common.Ope
 type ListGameBetDisplayConfigResponse struct {
 	state         protoimpl.MessageState                   `protogen:"open.v1"`
 	List          []*ListGameBetDisplayConfigResponse_Item `protobuf:"bytes,1,rep,name=list,proto3" json:"list,omitempty"`
+	Enable        bool                                     `protobuf:"varint,2,opt,name=enable,proto3" json:"enable,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -8971,6 +8988,13 @@ func (x *ListGameBetDisplayConfigResponse) GetList() []*ListGameBetDisplayConfig
 		return x.List
 	}
 	return nil
+}
+
+func (x *ListGameBetDisplayConfigResponse) GetEnable() bool {
+	if x != nil {
+		return x.Enable
+	}
+	return false
 }
 
 type GetGameInfoRequest struct {
@@ -12156,7 +12180,6 @@ type UpdateGameBetDisplayConfigRequest_Item struct {
 	Country       string                 `protobuf:"bytes,1,opt,name=country,proto3" json:"country,omitempty"`
 	AllBet        *BettingConfig         `protobuf:"bytes,2,opt,name=all_bet,json=allBet,proto3,oneof" json:"all_bet,omitempty"`
 	HighWins      *BettingConfig         `protobuf:"bytes,3,opt,name=high_wins,json=highWins,proto3,oneof" json:"high_wins,omitempty"`
-	Enable        *bool                  `protobuf:"varint,4,opt,name=enable,proto3,oneof" json:"enable,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -12210,13 +12233,6 @@ func (x *UpdateGameBetDisplayConfigRequest_Item) GetHighWins() *BettingConfig {
 		return x.HighWins
 	}
 	return nil
-}
-
-func (x *UpdateGameBetDisplayConfigRequest_Item) GetEnable() bool {
-	if x != nil && x.Enable != nil {
-		return *x.Enable
-	}
-	return false
 }
 
 type ListGameBetDisplayConfigResponse_Item struct {
@@ -13625,37 +13641,38 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"#ExportCustomerStrikeReportsResponse\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\x03R\x06taskId\"\x18\n" +
 	"\x16CreateTaxReportRequest\"\x19\n" +
-	"\x17CreateTaxReportResponse\"o\n" +
+	"\x17CreateTaxReportResponse\"\x87\x01\n" +
 	"\rBettingConfig\x12!\n" +
 	"\fbet_category\x18\x01 \x03(\tR\vbetCategory\x12\x1b\n" +
 	"\tmini_odds\x18\x02 \x01(\x02R\bminiOdds\x12\x1e\n" +
 	"\n" +
 	"currencies\x18\x03 \x03(\tR\n" +
-	"currencies\"\x8d\x02\n" +
+	"currencies\x12\x16\n" +
+	"\x06enable\x18\x04 \x01(\bR\x06enable\"\x8d\x02\n" +
 	"\x1eAddGameBetDisplayConfigRequest\x12\x18\n" +
 	"\acountry\x18\x01 \x01(\tR\acountry\x12;\n" +
 	"\aall_bet\x18\x02 \x01(\v2\".api.game.service.v1.BettingConfigR\x06allBet\x12?\n" +
 	"\thigh_wins\x18\x03 \x01(\v2\".api.game.service.v1.BettingConfigR\bhighWins\x12S\n" +
 	"\x17target_operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"!\n" +
-	"\x1fAddGameBetDisplayConfigResponse\"\xb6\x03\n" +
+	"\x1fAddGameBetDisplayConfigResponse\"\xa6\x03\n" +
 	"!UpdateGameBetDisplayConfigRequest\x12O\n" +
-	"\x04list\x18\x01 \x03(\v2;.api.game.service.v1.UpdateGameBetDisplayConfigRequest.ItemR\x04list\x12S\n" +
-	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x1a\xea\x01\n" +
+	"\x04list\x18\x01 \x03(\v2;.api.game.service.v1.UpdateGameBetDisplayConfigRequest.ItemR\x04list\x12\x16\n" +
+	"\x06enable\x18\x02 \x01(\bR\x06enable\x12S\n" +
+	"\x17target_operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x1a\xc2\x01\n" +
 	"\x04Item\x12\x18\n" +
 	"\acountry\x18\x01 \x01(\tR\acountry\x12@\n" +
 	"\aall_bet\x18\x02 \x01(\v2\".api.game.service.v1.BettingConfigH\x00R\x06allBet\x88\x01\x01\x12D\n" +
-	"\thigh_wins\x18\x03 \x01(\v2\".api.game.service.v1.BettingConfigH\x01R\bhighWins\x88\x01\x01\x12\x1b\n" +
-	"\x06enable\x18\x04 \x01(\bH\x02R\x06enable\x88\x01\x01B\n" +
+	"\thigh_wins\x18\x03 \x01(\v2\".api.game.service.v1.BettingConfigH\x01R\bhighWins\x88\x01\x01B\n" +
 	"\n" +
 	"\b_all_betB\f\n" +
 	"\n" +
-	"_high_winsB\t\n" +
-	"\a_enable\"$\n" +
+	"_high_wins\"$\n" +
 	"\"UpdateGameBetDisplayConfigResponse\"v\n" +
 	"\x1fListGameBetDisplayConfigRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\xab\x02\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\xc3\x02\n" +
 	" ListGameBetDisplayConfigResponse\x12N\n" +
-	"\x04list\x18\x01 \x03(\v2:.api.game.service.v1.ListGameBetDisplayConfigResponse.ItemR\x04list\x1a\xb6\x01\n" +
+	"\x04list\x18\x01 \x03(\v2:.api.game.service.v1.ListGameBetDisplayConfigResponse.ItemR\x04list\x12\x16\n" +
+	"\x06enable\x18\x02 \x01(\bR\x06enable\x1a\xb6\x01\n" +
 	"\x04Item\x12\x18\n" +
 	"\acountry\x18\x01 \x01(\tR\acountry\x12;\n" +
 	"\aall_bet\x18\x02 \x01(\v2\".api.game.service.v1.BettingConfigR\x06allBet\x12?\n" +
