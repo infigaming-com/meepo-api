@@ -15643,7 +15643,34 @@ func (m *ListLiveEventsRequest) validate(all bool) error {
 
 	// no validation rules for GameId
 
-	// no validation rules for RequestPayload
+	if all {
+		switch v := interface{}(m.GetRequestPayload()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListLiveEventsRequestValidationError{
+					field:  "RequestPayload",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListLiveEventsRequestValidationError{
+					field:  "RequestPayload",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRequestPayload()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListLiveEventsRequestValidationError{
+				field:  "RequestPayload",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
 		return ListLiveEventsRequestMultiError(errors)

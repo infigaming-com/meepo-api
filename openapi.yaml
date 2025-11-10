@@ -14839,7 +14839,7 @@ components:
                 gameId:
                     type: string
                 requestPayload:
-                    type: string
+                    type: object
         api.game.service.v1.ListLiveEventsResponse:
             type: object
             properties:
