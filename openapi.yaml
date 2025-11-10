@@ -4696,6 +4696,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.game.service.v1.ListGamesResponse'
+    /v1/game/live-events/list:
+        post:
+            tags:
+                - Game
+            operationId: Game_ListLiveEvents
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.ListLiveEventsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.ListLiveEventsResponse'
     /v1/game/play:
         post:
             tags:
@@ -14901,6 +14919,20 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.game.service.v1.ListLiveEventsRequest:
+            type: object
+            properties:
+                gameId:
+                    type: string
+                requestPayload:
+                    type: object
+        api.game.service.v1.ListLiveEventsResponse:
+            type: object
+            properties:
+                events:
+                    type: array
+                    items:
+                        type: object
         api.game.service.v1.ListMultipleBetsResponse:
             type: object
             properties:

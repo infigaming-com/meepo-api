@@ -35,6 +35,7 @@ const (
 	Game_Play_FullMethodName                              = "/api.game.service.v1.Game/Play"
 	Game_Rollback_FullMethodName                          = "/api.game.service.v1.Game/Rollback"
 	Game_ListBets_FullMethodName                          = "/api.game.service.v1.Game/ListBets"
+	Game_ListLiveEvents_FullMethodName                    = "/api.game.service.v1.Game/ListLiveEvents"
 	Game_ExportBets_FullMethodName                        = "/api.game.service.v1.Game/ExportBets"
 	Game_BackofficeListGames_FullMethodName               = "/api.game.service.v1.Game/BackofficeListGames"
 	Game_UpdateGame_FullMethodName                        = "/api.game.service.v1.Game/UpdateGame"
@@ -90,6 +91,7 @@ type GameClient interface {
 	Play(ctx context.Context, in *PlayRequest, opts ...grpc.CallOption) (*PlayResponse, error)
 	Rollback(ctx context.Context, in *RollbackRequest, opts ...grpc.CallOption) (*RollbackResponse, error)
 	ListBets(ctx context.Context, in *ListBetsRequest, opts ...grpc.CallOption) (*ListBetsResponse, error)
+	ListLiveEvents(ctx context.Context, in *ListLiveEventsRequest, opts ...grpc.CallOption) (*ListLiveEventsResponse, error)
 	ExportBets(ctx context.Context, in *ExportBetsRequest, opts ...grpc.CallOption) (*ExportBetsResponse, error)
 	BackofficeListGames(ctx context.Context, in *BackofficeListGamesRequest, opts ...grpc.CallOption) (*BackofficeListGamesResponse, error)
 	UpdateGame(ctx context.Context, in *UpdateGameRequest, opts ...grpc.CallOption) (*UpdateGameResponse, error)
@@ -290,6 +292,16 @@ func (c *gameClient) ListBets(ctx context.Context, in *ListBetsRequest, opts ...
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListBetsResponse)
 	err := c.cc.Invoke(ctx, Game_ListBets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gameClient) ListLiveEvents(ctx context.Context, in *ListLiveEventsRequest, opts ...grpc.CallOption) (*ListLiveEventsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListLiveEventsResponse)
+	err := c.cc.Invoke(ctx, Game_ListLiveEvents_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -646,6 +658,7 @@ type GameServer interface {
 	Play(context.Context, *PlayRequest) (*PlayResponse, error)
 	Rollback(context.Context, *RollbackRequest) (*RollbackResponse, error)
 	ListBets(context.Context, *ListBetsRequest) (*ListBetsResponse, error)
+	ListLiveEvents(context.Context, *ListLiveEventsRequest) (*ListLiveEventsResponse, error)
 	ExportBets(context.Context, *ExportBetsRequest) (*ExportBetsResponse, error)
 	BackofficeListGames(context.Context, *BackofficeListGamesRequest) (*BackofficeListGamesResponse, error)
 	UpdateGame(context.Context, *UpdateGameRequest) (*UpdateGameResponse, error)
@@ -739,6 +752,9 @@ func (UnimplementedGameServer) Rollback(context.Context, *RollbackRequest) (*Rol
 }
 func (UnimplementedGameServer) ListBets(context.Context, *ListBetsRequest) (*ListBetsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBets not implemented")
+}
+func (UnimplementedGameServer) ListLiveEvents(context.Context, *ListLiveEventsRequest) (*ListLiveEventsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListLiveEvents not implemented")
 }
 func (UnimplementedGameServer) ExportBets(context.Context, *ExportBetsRequest) (*ExportBetsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExportBets not implemented")
@@ -1144,6 +1160,24 @@ func _Game_ListBets_Handler(srv interface{}, ctx context.Context, dec func(inter
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GameServer).ListBets(ctx, req.(*ListBetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Game_ListLiveEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListLiveEventsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).ListLiveEvents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_ListLiveEvents_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).ListLiveEvents(ctx, req.(*ListLiveEventsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1812,6 +1846,10 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListBets",
 			Handler:    _Game_ListBets_Handler,
+		},
+		{
+			MethodName: "ListLiveEvents",
+			Handler:    _Game_ListLiveEvents_Handler,
 		},
 		{
 			MethodName: "ExportBets",

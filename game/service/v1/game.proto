@@ -3,6 +3,7 @@ syntax = "proto3";
 package api.game.service.v1;
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
 import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/game/service/v1;v1";
@@ -86,6 +87,13 @@ service Game {
 	rpc ListBets(ListBetsRequest) returns (ListBetsResponse) {
 		option (google.api.http) = {
 			post: "/v1/game/bets/list"
+			body: "*"
+		};
+	};
+
+	rpc ListLiveEvents(ListLiveEventsRequest) returns (ListLiveEventsResponse) {
+		option (google.api.http) = {
+			post: "/v1/game/live-events/list"
 			body: "*"
 		};
 	};
@@ -1635,4 +1643,13 @@ message GetGameInfoRequest {
 
 message GetGameInfoResponse {
 	GameInfo game_info = 1;
+}
+
+message ListLiveEventsRequest {
+	string game_id = 1;
+	google.protobuf.Struct request_payload = 2;
+}
+
+message ListLiveEventsResponse {
+	repeated google.protobuf.Struct events = 1;
 }
