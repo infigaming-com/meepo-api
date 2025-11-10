@@ -14835,7 +14835,11 @@ components:
                     format: int32
         api.game.service.v1.ListLiveEventsRequest:
             type: object
-            properties: {}
+            properties:
+                gameId:
+                    type: string
+                requestPayload:
+                    type: string
         api.game.service.v1.ListLiveEventsResponse:
             type: object
             properties:

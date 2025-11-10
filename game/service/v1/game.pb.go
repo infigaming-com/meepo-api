@@ -9087,9 +9087,11 @@ func (x *GetGameInfoResponse) GetGameInfo() *GameInfo {
 }
 
 type ListLiveEventsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	GameId         string                 `protobuf:"bytes,1,opt,name=game_id,json=gameId,proto3" json:"game_id,omitempty"`
+	RequestPayload string                 `protobuf:"bytes,2,opt,name=request_payload,json=requestPayload,proto3" json:"request_payload,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *ListLiveEventsRequest) Reset() {
@@ -9120,6 +9122,20 @@ func (x *ListLiveEventsRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ListLiveEventsRequest.ProtoReflect.Descriptor instead.
 func (*ListLiveEventsRequest) Descriptor() ([]byte, []int) {
 	return file_game_service_v1_game_proto_rawDescGZIP(), []int{111}
+}
+
+func (x *ListLiveEventsRequest) GetGameId() string {
+	if x != nil {
+		return x.GameId
+	}
+	return ""
+}
+
+func (x *ListLiveEventsRequest) GetRequestPayload() string {
+	if x != nil {
+		return x.RequestPayload
+	}
+	return ""
 }
 
 type ListLiveEventsResponse struct {
@@ -13753,8 +13769,10 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\x12GetGameInfoRequest\x12\x17\n" +
 	"\agame_id\x18\x01 \x01(\tR\x06gameId\"Q\n" +
 	"\x13GetGameInfoResponse\x12:\n" +
-	"\tgame_info\x18\x01 \x01(\v2\x1d.api.game.service.v1.GameInfoR\bgameInfo\"\x17\n" +
-	"\x15ListLiveEventsRequest\"I\n" +
+	"\tgame_info\x18\x01 \x01(\v2\x1d.api.game.service.v1.GameInfoR\bgameInfo\"Y\n" +
+	"\x15ListLiveEventsRequest\x12\x17\n" +
+	"\agame_id\x18\x01 \x01(\tR\x06gameId\x12'\n" +
+	"\x0frequest_payload\x18\x02 \x01(\tR\x0erequestPayload\"I\n" +
 	"\x16ListLiveEventsResponse\x12/\n" +
 	"\x06events\x18\x01 \x03(\v2\x17.google.protobuf.StructR\x06events*_\n" +
 	"\x15TaxReportRecordStatus\x12!\n" +

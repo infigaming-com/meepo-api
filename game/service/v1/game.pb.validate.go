@@ -15641,6 +15641,10 @@ func (m *ListLiveEventsRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for GameId
+
+	// no validation rules for RequestPayload
+
 	if len(errors) > 0 {
 		return ListLiveEventsRequestMultiError(errors)
 	}

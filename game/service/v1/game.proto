@@ -1646,6 +1646,8 @@ message GetGameInfoResponse {
 }
 
 message ListLiveEventsRequest {
+	string game_id = 1;
+	string request_payload = 2;
 }
 
 message ListLiveEventsResponse {
