@@ -44,6 +44,42 @@ message GetReferralPlanResponse {
     optional ReferralPlan custom_referral_plan = 7;
 }
 
+message GetUserReferralConfigRequest {
+    string currency = 1;
+}
+
+message GetUserReferralConfigResponse {
+    // Referral plan owner operator context
+    api.common.OperatorContext referral_plan_owner_operator_context = 1;
+    string currency = 2;
+    // Referral plan used by the user, nil if no referral plan is set
+    optional ReferralPlan user_referral_plan = 3;
+    // Referral codes created by the user
+    repeated ReferralCode referral_codes = 4;
+}
+
+message ReferralCode {
+    int64 user_id = 1;
+    string user_name = 2;
+    string referral_code = 3;
+    string created_at = 4;
+    int64 referral_user_count = 5; // number of users who have used this referral code
+    string earning_amount_usd = 6; // amount of money earned by the user who has used this referral code
+    string earning_amount_reporting_currency = 7; // amount of money earned by the user who has used this referral code in reporting currency
+}
+
+message CreateUserReferralCodeRequest {
+    optional string referral_code = 1; // nil means backend will randomly generate a new code
+}
+
+message CreateUserReferralCodeResponse {
+    string referral_code = 1;
+}
+
+// ------------------------------------------------------------------------------------------------
+// Data structures
+// ------------------------------------------------------------------------------------------------
+
 // Complete referral plan configuration
 message ReferralPlan {
     bool enabled = 1;

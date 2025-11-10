@@ -508,9 +508,9 @@ type RegisterRequest struct {
 	// User ID Type
 	IdType *string `protobuf:"bytes,6,opt,name=id_type,json=idType,proto3,oneof" json:"id_type,omitempty"`
 	// campaign url
-	CampaignUrl   *string `protobuf:"bytes,7,opt,name=campaign_url,json=campaignUrl,proto3,oneof" json:"campaign_url,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	RegistrationUrl *string `protobuf:"bytes,7,opt,name=registration_url,json=registrationUrl,proto3,oneof" json:"registration_url,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *RegisterRequest) Reset() {
@@ -585,9 +585,9 @@ func (x *RegisterRequest) GetIdType() string {
 	return ""
 }
 
-func (x *RegisterRequest) GetCampaignUrl() string {
-	if x != nil && x.CampaignUrl != nil {
-		return *x.CampaignUrl
+func (x *RegisterRequest) GetRegistrationUrl() string {
+	if x != nil && x.RegistrationUrl != nil {
+		return *x.RegistrationUrl
 	}
 	return ""
 }
@@ -12084,21 +12084,21 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\aaddress\x18\x14 \x01(\tR\aaddress\x12F\n" +
 	"\ruser_identity\x18\x15 \x03(\v2!.api.user.service.v1.UserIdentityR\fuserIdentity\x12,\n" +
 	"\x03dob\x18\x16 \x01(\v2\x1a.google.protobuf.TimestampR\x03dob\x12\x18\n" +
-	"\acountry\x18\x17 \x01(\tR\acountry\"\xe8\x02\n" +
+	"\acountry\x18\x17 \x01(\tR\acountry\"\xf4\x02\n" +
 	"\x0fRegisterRequest\x12R\n" +
 	"\x11password_provider\x18\x01 \x01(\x0e2%.api.user.service.v1.PasswordProviderR\x10passwordProvider\x12\x17\n" +
 	"\aauth_id\x18\x02 \x01(\tR\x06authId\x12\x1a\n" +
 	"\bpassword\x18\x03 \x01(\tR\bpassword\x121\n" +
 	"\x03dob\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\x03dob\x88\x01\x01\x12 \n" +
 	"\tid_number\x18\x05 \x01(\tH\x01R\bidNumber\x88\x01\x01\x12\x1c\n" +
-	"\aid_type\x18\x06 \x01(\tH\x02R\x06idType\x88\x01\x01\x12&\n" +
-	"\fcampaign_url\x18\a \x01(\tH\x03R\vcampaignUrl\x88\x01\x01B\x06\n" +
+	"\aid_type\x18\x06 \x01(\tH\x02R\x06idType\x88\x01\x01\x12.\n" +
+	"\x10registration_url\x18\a \x01(\tH\x03R\x0fregistrationUrl\x88\x01\x01B\x06\n" +
 	"\x04_dobB\f\n" +
 	"\n" +
 	"_id_numberB\n" +
 	"\n" +
-	"\b_id_typeB\x0f\n" +
-	"\r_campaign_url\"\x97\x01\n" +
+	"\b_id_typeB\x13\n" +
+	"\x11_registration_url\"\x97\x01\n" +
 	"\fLoginRequest\x12R\n" +
 	"\x11password_provider\x18\x01 \x01(\x0e2%.api.user.service.v1.PasswordProviderR\x10passwordProvider\x12\x17\n" +
 	"\aauth_id\x18\x02 \x01(\tR\x06authId\x12\x1a\n" +

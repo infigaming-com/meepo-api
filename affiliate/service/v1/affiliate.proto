@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package api.affiliate.service.v1;
 
+import "google/api/annotations.proto";
 import "affiliate/service/v1/commission_plan.proto";
 import "affiliate/service/v1/referral_plan.proto";
 import "common/common.proto";
@@ -71,6 +72,20 @@ service Affiliate {
     rpc SetReferralPlan(SetReferralPlanRequest) returns (SetReferralPlanResponse) {}
 
     rpc GetReferralPlan(GetReferralPlanRequest) returns (GetReferralPlanResponse) {}
+
+    rpc GetUserReferralConfig(GetUserReferralConfigRequest) returns (GetUserReferralConfigResponse) {
+        option (google.api.http) = {
+            post: "/v1/affiliate/user/referral/config/get"
+            body: "*"
+        };
+    }
+
+    rpc CreateUserReferralCode(CreateUserReferralCodeRequest) returns (CreateUserReferralCodeResponse) {
+        option (google.api.http) = {
+            post: "/v1/affiliate/user/referral/code/create"
+            body: "*"
+        };
+    }
 }
 
 message ContactType {
