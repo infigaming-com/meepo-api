@@ -90,6 +90,13 @@ service Game {
 		};
 	};
 
+	rpc ListLiveEvents(ListLiveEventsRequest) returns (ListLiveEventsResponse) {
+		option (google.api.http) = {
+			post: "/v1/game/live-events/list"
+			body: "*"
+		};
+	};
+
 	rpc ExportBets(ExportBetsRequest) returns (ExportBetsResponse) {
 	}
 
@@ -1635,4 +1642,11 @@ message GetGameInfoRequest {
 
 message GetGameInfoResponse {
 	GameInfo game_info = 1;
+}
+
+message ListLiveEventsRequest {
+}
+
+message ListLiveEventsResponse {
+	repeated bytes events = 1;
 }

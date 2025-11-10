@@ -15619,6 +15619,210 @@ var _ interface {
 	ErrorName() string
 } = GetGameInfoResponseValidationError{}
 
+// Validate checks the field values on ListLiveEventsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListLiveEventsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListLiveEventsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListLiveEventsRequestMultiError, or nil if none found.
+func (m *ListLiveEventsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListLiveEventsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ListLiveEventsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListLiveEventsRequestMultiError is an error wrapping multiple validation
+// errors returned by ListLiveEventsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListLiveEventsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListLiveEventsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListLiveEventsRequestMultiError) AllErrors() []error { return m }
+
+// ListLiveEventsRequestValidationError is the validation error returned by
+// ListLiveEventsRequest.Validate if the designated constraints aren't met.
+type ListLiveEventsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListLiveEventsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListLiveEventsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListLiveEventsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListLiveEventsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListLiveEventsRequestValidationError) ErrorName() string {
+	return "ListLiveEventsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListLiveEventsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListLiveEventsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListLiveEventsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListLiveEventsRequestValidationError{}
+
+// Validate checks the field values on ListLiveEventsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListLiveEventsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListLiveEventsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListLiveEventsResponseMultiError, or nil if none found.
+func (m *ListLiveEventsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListLiveEventsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ListLiveEventsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListLiveEventsResponseMultiError is an error wrapping multiple validation
+// errors returned by ListLiveEventsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListLiveEventsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListLiveEventsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListLiveEventsResponseMultiError) AllErrors() []error { return m }
+
+// ListLiveEventsResponseValidationError is the validation error returned by
+// ListLiveEventsResponse.Validate if the designated constraints aren't met.
+type ListLiveEventsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListLiveEventsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListLiveEventsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListLiveEventsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListLiveEventsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListLiveEventsResponseValidationError) ErrorName() string {
+	return "ListLiveEventsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListLiveEventsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListLiveEventsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListLiveEventsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListLiveEventsResponseValidationError{}
+
 // Validate checks the field values on ListProvidersResponse_Provider with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

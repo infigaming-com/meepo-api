@@ -4818,6 +4818,8 @@ func (m *GetDailyLossbackStatusRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for Currency
+
 	if len(errors) > 0 {
 		return GetDailyLossbackStatusRequestMultiError(errors)
 	}
