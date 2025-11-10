@@ -14842,8 +14842,7 @@ components:
                 events:
                     type: array
                     items:
-                        type: string
-                        format: bytes
+                        type: object
         api.game.service.v1.ListMultipleBetsResponse:
             type: object
             properties:

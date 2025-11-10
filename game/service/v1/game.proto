@@ -3,6 +3,7 @@ syntax = "proto3";
 package api.game.service.v1;
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
 import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/game/service/v1;v1";
@@ -1648,5 +1649,5 @@ message ListLiveEventsRequest {
 }
 
 message ListLiveEventsResponse {
-	repeated bytes events = 1;
+	repeated google.protobuf.Struct events = 1;
 }
