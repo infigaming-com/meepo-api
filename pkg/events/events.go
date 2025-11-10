@@ -238,3 +238,15 @@ type AffiliateBillSettlementEvent struct {
 	OperatorContext         *common.OperatorContext `json:"operator_context,omitempty"`
 	CreatedAt               int64                   `json:"created_at"`
 }
+
+const AffiliateUserActionEventTopic = "affiliate.user.action"
+
+type AffiliateUserActionEvent struct {
+	UserID          int64                   `json:"user_id"`
+	EventID         int64                   `json:"event_id"`
+	EventType       string                  `json:"event_type"`
+	ChannelEvent    *string                 `json:"channel_event,omitempty"`
+	CustomName      *string                 `json:"custom_name,omitempty"`
+	OperatorContext *common.OperatorContext `json:"operator_context,omitempty"`
+	CreatedAt       int64                   `json:"created_at"`
+}
