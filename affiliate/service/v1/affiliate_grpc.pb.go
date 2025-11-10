@@ -40,6 +40,8 @@ const (
 	Affiliate_ListAffiliateBills_FullMethodName     = "/api.affiliate.service.v1.Affiliate/ListAffiliateBills"
 	Affiliate_SetReferralPlan_FullMethodName        = "/api.affiliate.service.v1.Affiliate/SetReferralPlan"
 	Affiliate_GetReferralPlan_FullMethodName        = "/api.affiliate.service.v1.Affiliate/GetReferralPlan"
+	Affiliate_GetUserReferralConfig_FullMethodName  = "/api.affiliate.service.v1.Affiliate/GetUserReferralConfig"
+	Affiliate_CreateUserReferralCode_FullMethodName = "/api.affiliate.service.v1.Affiliate/CreateUserReferralCode"
 )
 
 // AffiliateClient is the client API for Affiliate service.
@@ -67,6 +69,8 @@ type AffiliateClient interface {
 	ListAffiliateBills(ctx context.Context, in *ListAffiliateBillsRequest, opts ...grpc.CallOption) (*ListAffiliateBillsResponse, error)
 	SetReferralPlan(ctx context.Context, in *SetReferralPlanRequest, opts ...grpc.CallOption) (*SetReferralPlanResponse, error)
 	GetReferralPlan(ctx context.Context, in *GetReferralPlanRequest, opts ...grpc.CallOption) (*GetReferralPlanResponse, error)
+	GetUserReferralConfig(ctx context.Context, in *GetUserReferralConfigRequest, opts ...grpc.CallOption) (*GetUserReferralConfigResponse, error)
+	CreateUserReferralCode(ctx context.Context, in *CreateUserReferralCodeRequest, opts ...grpc.CallOption) (*CreateUserReferralCodeResponse, error)
 }
 
 type affiliateClient struct {
@@ -287,6 +291,26 @@ func (c *affiliateClient) GetReferralPlan(ctx context.Context, in *GetReferralPl
 	return out, nil
 }
 
+func (c *affiliateClient) GetUserReferralConfig(ctx context.Context, in *GetUserReferralConfigRequest, opts ...grpc.CallOption) (*GetUserReferralConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserReferralConfigResponse)
+	err := c.cc.Invoke(ctx, Affiliate_GetUserReferralConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) CreateUserReferralCode(ctx context.Context, in *CreateUserReferralCodeRequest, opts ...grpc.CallOption) (*CreateUserReferralCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateUserReferralCodeResponse)
+	err := c.cc.Invoke(ctx, Affiliate_CreateUserReferralCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AffiliateServer is the server API for Affiliate service.
 // All implementations must embed UnimplementedAffiliateServer
 // for forward compatibility.
@@ -312,6 +336,8 @@ type AffiliateServer interface {
 	ListAffiliateBills(context.Context, *ListAffiliateBillsRequest) (*ListAffiliateBillsResponse, error)
 	SetReferralPlan(context.Context, *SetReferralPlanRequest) (*SetReferralPlanResponse, error)
 	GetReferralPlan(context.Context, *GetReferralPlanRequest) (*GetReferralPlanResponse, error)
+	GetUserReferralConfig(context.Context, *GetUserReferralConfigRequest) (*GetUserReferralConfigResponse, error)
+	CreateUserReferralCode(context.Context, *CreateUserReferralCodeRequest) (*CreateUserReferralCodeResponse, error)
 	mustEmbedUnimplementedAffiliateServer()
 }
 
@@ -384,6 +410,12 @@ func (UnimplementedAffiliateServer) SetReferralPlan(context.Context, *SetReferra
 }
 func (UnimplementedAffiliateServer) GetReferralPlan(context.Context, *GetReferralPlanRequest) (*GetReferralPlanResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetReferralPlan not implemented")
+}
+func (UnimplementedAffiliateServer) GetUserReferralConfig(context.Context, *GetUserReferralConfigRequest) (*GetUserReferralConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserReferralConfig not implemented")
+}
+func (UnimplementedAffiliateServer) CreateUserReferralCode(context.Context, *CreateUserReferralCodeRequest) (*CreateUserReferralCodeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateUserReferralCode not implemented")
 }
 func (UnimplementedAffiliateServer) mustEmbedUnimplementedAffiliateServer() {}
 func (UnimplementedAffiliateServer) testEmbeddedByValue()                   {}
@@ -784,6 +816,42 @@ func _Affiliate_GetReferralPlan_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Affiliate_GetUserReferralConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserReferralConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).GetUserReferralConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_GetUserReferralConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).GetUserReferralConfig(ctx, req.(*GetUserReferralConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_CreateUserReferralCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateUserReferralCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).CreateUserReferralCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_CreateUserReferralCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).CreateUserReferralCode(ctx, req.(*CreateUserReferralCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Affiliate_ServiceDesc is the grpc.ServiceDesc for Affiliate service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -874,6 +942,14 @@ var Affiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetReferralPlan",
 			Handler:    _Affiliate_GetReferralPlan_Handler,
+		},
+		{
+			MethodName: "GetUserReferralConfig",
+			Handler:    _Affiliate_GetUserReferralConfig_Handler,
+		},
+		{
+			MethodName: "CreateUserReferralCode",
+			Handler:    _Affiliate_CreateUserReferralCode_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

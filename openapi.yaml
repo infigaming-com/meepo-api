@@ -6,6 +6,42 @@ info:
     title: ""
     version: 0.0.1
 paths:
+    /v1/affiliate/user/referral/code/create:
+        post:
+            tags:
+                - Affiliate
+            operationId: Affiliate_CreateUserReferralCode
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.affiliate.service.v1.CreateUserReferralCodeRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.CreateUserReferralCodeResponse'
+    /v1/affiliate/user/referral/config/get:
+        post:
+            tags:
+                - Affiliate
+            operationId: Affiliate_GetUserReferralConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralConfigResponse'
     /v1/backoffice/accounts/2fa/bind:
         post:
             tags:
@@ -6161,6 +6197,16 @@ components:
         api.affiliate.service.v1.CreateCommissionPlanResponse:
             type: object
             properties: {}
+        api.affiliate.service.v1.CreateUserReferralCodeRequest:
+            type: object
+            properties:
+                referralCode:
+                    type: string
+        api.affiliate.service.v1.CreateUserReferralCodeResponse:
+            type: object
+            properties:
+                referralCode:
+                    type: string
         api.affiliate.service.v1.DeleteAffiliateResponse:
             type: object
             properties: {}
@@ -6378,6 +6424,29 @@ components:
                     allOf:
                         - $ref: '#/components/schemas/api.affiliate.service.v1.ReferralPlan'
                     description: Custom referral plan (current operator's own config)
+        api.affiliate.service.v1.GetUserReferralConfigRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+        api.affiliate.service.v1.GetUserReferralConfigResponse:
+            type: object
+            properties:
+                referralPlanOwnerOperatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Referral plan owner operator context
+                currency:
+                    type: string
+                userReferralPlan:
+                    allOf:
+                        - $ref: '#/components/schemas/api.affiliate.service.v1.ReferralPlan'
+                    description: Referral plan used by the user, nil if no referral plan is set
+                referralCodes:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.ReferralCode'
+                    description: Referral codes created by the user
         api.affiliate.service.v1.InviteeReward:
             type: object
             properties:
@@ -6931,6 +7000,23 @@ components:
                 to:
                     type: string
                 rate:
+                    type: string
+        api.affiliate.service.v1.ReferralCode:
+            type: object
+            properties:
+                userId:
+                    type: string
+                userName:
+                    type: string
+                referralCode:
+                    type: string
+                createdAt:
+                    type: string
+                referralUserCount:
+                    type: string
+                earningAmountUsd:
+                    type: string
+                earningAmountReportingCurrency:
                     type: string
         api.affiliate.service.v1.ReferralPlan:
             type: object
@@ -16411,7 +16497,7 @@ components:
                 idType:
                     type: string
                     description: User ID Type
-                campaignUrl:
+                registrationUrl:
                     type: string
                     description: campaign url
             description: RegisterRequest contains the information needed to register a new user.
@@ -19357,6 +19443,7 @@ components:
                 description:
                     type: string
 tags:
+    - name: Affiliate
     - name: BackofficeAccount
     - name: BackofficeAffiliate
     - name: BackofficeAudit

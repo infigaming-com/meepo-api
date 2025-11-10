@@ -284,8 +284,8 @@ func (m *AddUserEvent) validate(all bool) error {
 
 	// no validation rules for RegisteredAt
 
-	if m.CampaignUrl != nil {
-		// no validation rules for CampaignUrl
+	if m.RegistrationUrl != nil {
+		// no validation rules for RegistrationUrl
 	}
 
 	if len(errors) > 0 {

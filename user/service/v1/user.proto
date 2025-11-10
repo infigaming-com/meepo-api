@@ -498,7 +498,7 @@ message RegisterRequest {
 	// User ID Type
 	optional string id_type = 6;
 	// campaign url
-	optional string campaign_url = 7;
+	optional string registration_url = 7;
 }
 
 // LoginRequest contains the credentials for user login.
