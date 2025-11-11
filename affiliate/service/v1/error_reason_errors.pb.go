@@ -323,16 +323,16 @@ func ErrorUpdateCampaignFailed(format string, args ...interface{}) *errors.Error
 	return errors.New(500, ErrorReason_UPDATE_CAMPAIGN_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
-func IsProcessUserRegistrationFailed(err error) bool {
+func IsProcessUserRegistrationWithCampaignFailed(err error) bool {
 	if err == nil {
 		return false
 	}
 	e := errors.FromError(err)
-	return e.Reason == ErrorReason_PROCESS_USER_REGISTRATION_FAILED.String() && e.Code == 500
+	return e.Reason == ErrorReason_PROCESS_USER_REGISTRATION_WITH_CAMPAIGN_FAILED.String() && e.Code == 500
 }
 
-func ErrorProcessUserRegistrationFailed(format string, args ...interface{}) *errors.Error {
-	return errors.New(500, ErrorReason_PROCESS_USER_REGISTRATION_FAILED.String(), fmt.Sprintf(format, args...))
+func ErrorProcessUserRegistrationWithCampaignFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROCESS_USER_REGISTRATION_WITH_CAMPAIGN_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
 func IsProcessUserDepositFailed(err error) bool {
@@ -585,4 +585,40 @@ func IsSetReferralPlanPermissionDenied(err error) bool {
 
 func ErrorSetReferralPlanPermissionDenied(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_SET_REFERRAL_PLAN_PERMISSION_DENIED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCreateUserReferralCodeFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREATE_USER_REFERRAL_CODE_FAILED.String() && e.Code == 500
+}
+
+func ErrorCreateUserReferralCodeFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREATE_USER_REFERRAL_CODE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetUserReferralConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_USER_REFERRAL_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetUserReferralConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_USER_REFERRAL_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsProcessUserRegistrationWithReferralCodeFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROCESS_USER_REGISTRATION_WITH_REFERRAL_CODE_FAILED.String() && e.Code == 500
+}
+
+func ErrorProcessUserRegistrationWithReferralCodeFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROCESS_USER_REGISTRATION_WITH_REFERRAL_CODE_FAILED.String(), fmt.Sprintf(format, args...))
 }
