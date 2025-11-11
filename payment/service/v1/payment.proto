@@ -196,7 +196,7 @@ message UpdatePaymentChannelRequest {
   // enable status
   optional bool enable = 10;
   // Configuration fields for the payment channel in JSON format
-  google.protobuf.Struct key = 11;
+  optional google.protobuf.Struct key = 11;
 }
 
 // Response for channel creation
