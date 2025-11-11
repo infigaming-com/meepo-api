@@ -25,54 +25,57 @@ const (
 type ErrorReason int32
 
 const (
-	ErrorReason_UNSPECIFIED                              ErrorReason = 0
-	ErrorReason_CREATE_COMMISSION_PLAN_FAILED            ErrorReason = 130001
-	ErrorReason_UPDATE_COMMISSION_PLAN_FAILED            ErrorReason = 130002
-	ErrorReason_DELETE_COMMISSION_PLAN_FAILED            ErrorReason = 130003
-	ErrorReason_CREATE_COMMISSION_PLAN_PERMISSION_DENIED ErrorReason = 130004
-	ErrorReason_UPDATE_COMMISSION_PLAN_PERMISSION_DENIED ErrorReason = 130005
-	ErrorReason_DELETE_COMMISSION_PLAN_PERMISSION_DENIED ErrorReason = 130006
-	ErrorReason_COMMISSION_PLAN_NOT_FOUND                ErrorReason = 130007
-	ErrorReason_GET_COMMISSION_PLAN_FAILED               ErrorReason = 130008
-	ErrorReason_GET_COMMISSION_PLAN_PERMISSION_DENIED    ErrorReason = 130009
-	ErrorReason_LIST_COMMISSION_PLANS_FAILED             ErrorReason = 130010
-	ErrorReason_USER_ROLE_INVALID                        ErrorReason = 130011
-	ErrorReason_INVALID_COMMISSION_PLAN_CONFIG           ErrorReason = 130012
-	ErrorReason_CREATE_AFFILIATE_FAILED                  ErrorReason = 130013
-	ErrorReason_GET_AFFILIATE_FAILED                     ErrorReason = 130014
-	ErrorReason_AFFILIATE_NOT_FOUND                      ErrorReason = 130015
-	ErrorReason_DELETE_AFFILIATE_FAILED                  ErrorReason = 130016
-	ErrorReason_LIST_AFFILIATES_FAILED                   ErrorReason = 130017
-	ErrorReason_UPDATE_AFFILIATE_FAILED                  ErrorReason = 130018
-	ErrorReason_CONVERT_CHANNEL_CONFIG_FAILED            ErrorReason = 130019
-	ErrorReason_CREATE_CAMPAIGN_FAILED                   ErrorReason = 130020
-	ErrorReason_CAMPAIGN_NOT_FOUND                       ErrorReason = 130021
-	ErrorReason_GET_CAMPAIGN_FAILED                      ErrorReason = 130022
-	ErrorReason_DELETE_CAMPAIGN_FAILED                   ErrorReason = 130023
-	ErrorReason_LIST_CAMPAIGNS_FAILED                    ErrorReason = 130024
-	ErrorReason_UPDATE_CAMPAIGN_FAILED                   ErrorReason = 130025
-	ErrorReason_PROCESS_USER_REGISTRATION_FAILED         ErrorReason = 130026
-	ErrorReason_PROCESS_USER_DEPOSIT_FAILED              ErrorReason = 130027
-	ErrorReason_PROCESS_USER_WITHDRAWAL_FAILED           ErrorReason = 130028
-	ErrorReason_LIST_EVENTS_FAILED                       ErrorReason = 130029
-	ErrorReason_LIST_COMMISSIONS_FAILED                  ErrorReason = 130030
-	ErrorReason_UPDATE_COMMISSION_FAILED                 ErrorReason = 130031
-	ErrorReason_GET_COMMISSION_FAILED                    ErrorReason = 130032
-	ErrorReason_COMMISSION_NOT_FOUND                     ErrorReason = 130033
-	ErrorReason_LIST_AFFILIATE_USERS_FAILED              ErrorReason = 130034
-	ErrorReason_PROCESS_GAME_TRANSACTION_FAILED          ErrorReason = 130035
-	ErrorReason_PROCESS_GAME_START_FAILED                ErrorReason = 130036
-	ErrorReason_PROCESS_BILL_FAILED                      ErrorReason = 130037
-	ErrorReason_CREATE_BILL_FAILED                       ErrorReason = 130038
-	ErrorReason_GET_BILL_FAILED                          ErrorReason = 130039
-	ErrorReason_UPDATE_BILL_FAILED                       ErrorReason = 130040
-	ErrorReason_PROCESS_BILL_SETTLEMENT_FAILED           ErrorReason = 130041
-	ErrorReason_LIST_BILLS_FAILED                        ErrorReason = 130042
-	ErrorReason_GET_AFFILIATE_DETAILS_FAILED             ErrorReason = 130043
-	ErrorReason_GET_REFERRAL_PLAN_FAILED                 ErrorReason = 130044
-	ErrorReason_GET_REFERRAL_PLAN_PERMISSION_DENIED      ErrorReason = 130045
-	ErrorReason_SET_REFERRAL_PLAN_FAILED                 ErrorReason = 130046
-	ErrorReason_SET_REFERRAL_PLAN_PERMISSION_DENIED      ErrorReason = 130047
+	ErrorReason_UNSPECIFIED                                         ErrorReason = 0
+	ErrorReason_CREATE_COMMISSION_PLAN_FAILED                       ErrorReason = 130001
+	ErrorReason_UPDATE_COMMISSION_PLAN_FAILED                       ErrorReason = 130002
+	ErrorReason_DELETE_COMMISSION_PLAN_FAILED                       ErrorReason = 130003
+	ErrorReason_CREATE_COMMISSION_PLAN_PERMISSION_DENIED            ErrorReason = 130004
+	ErrorReason_UPDATE_COMMISSION_PLAN_PERMISSION_DENIED            ErrorReason = 130005
+	ErrorReason_DELETE_COMMISSION_PLAN_PERMISSION_DENIED            ErrorReason = 130006
+	ErrorReason_COMMISSION_PLAN_NOT_FOUND                           ErrorReason = 130007
+	ErrorReason_GET_COMMISSION_PLAN_FAILED                          ErrorReason = 130008
+	ErrorReason_GET_COMMISSION_PLAN_PERMISSION_DENIED               ErrorReason = 130009
+	ErrorReason_LIST_COMMISSION_PLANS_FAILED                        ErrorReason = 130010
+	ErrorReason_USER_ROLE_INVALID                                   ErrorReason = 130011
+	ErrorReason_INVALID_COMMISSION_PLAN_CONFIG                      ErrorReason = 130012
+	ErrorReason_CREATE_AFFILIATE_FAILED                             ErrorReason = 130013
+	ErrorReason_GET_AFFILIATE_FAILED                                ErrorReason = 130014
+	ErrorReason_AFFILIATE_NOT_FOUND                                 ErrorReason = 130015
+	ErrorReason_DELETE_AFFILIATE_FAILED                             ErrorReason = 130016
+	ErrorReason_LIST_AFFILIATES_FAILED                              ErrorReason = 130017
+	ErrorReason_UPDATE_AFFILIATE_FAILED                             ErrorReason = 130018
+	ErrorReason_CONVERT_CHANNEL_CONFIG_FAILED                       ErrorReason = 130019
+	ErrorReason_CREATE_CAMPAIGN_FAILED                              ErrorReason = 130020
+	ErrorReason_CAMPAIGN_NOT_FOUND                                  ErrorReason = 130021
+	ErrorReason_GET_CAMPAIGN_FAILED                                 ErrorReason = 130022
+	ErrorReason_DELETE_CAMPAIGN_FAILED                              ErrorReason = 130023
+	ErrorReason_LIST_CAMPAIGNS_FAILED                               ErrorReason = 130024
+	ErrorReason_UPDATE_CAMPAIGN_FAILED                              ErrorReason = 130025
+	ErrorReason_PROCESS_USER_REGISTRATION_WITH_CAMPAIGN_FAILED      ErrorReason = 130026
+	ErrorReason_PROCESS_USER_DEPOSIT_FAILED                         ErrorReason = 130027
+	ErrorReason_PROCESS_USER_WITHDRAWAL_FAILED                      ErrorReason = 130028
+	ErrorReason_LIST_EVENTS_FAILED                                  ErrorReason = 130029
+	ErrorReason_LIST_COMMISSIONS_FAILED                             ErrorReason = 130030
+	ErrorReason_UPDATE_COMMISSION_FAILED                            ErrorReason = 130031
+	ErrorReason_GET_COMMISSION_FAILED                               ErrorReason = 130032
+	ErrorReason_COMMISSION_NOT_FOUND                                ErrorReason = 130033
+	ErrorReason_LIST_AFFILIATE_USERS_FAILED                         ErrorReason = 130034
+	ErrorReason_PROCESS_GAME_TRANSACTION_FAILED                     ErrorReason = 130035
+	ErrorReason_PROCESS_GAME_START_FAILED                           ErrorReason = 130036
+	ErrorReason_PROCESS_BILL_FAILED                                 ErrorReason = 130037
+	ErrorReason_CREATE_BILL_FAILED                                  ErrorReason = 130038
+	ErrorReason_GET_BILL_FAILED                                     ErrorReason = 130039
+	ErrorReason_UPDATE_BILL_FAILED                                  ErrorReason = 130040
+	ErrorReason_PROCESS_BILL_SETTLEMENT_FAILED                      ErrorReason = 130041
+	ErrorReason_LIST_BILLS_FAILED                                   ErrorReason = 130042
+	ErrorReason_GET_AFFILIATE_DETAILS_FAILED                        ErrorReason = 130043
+	ErrorReason_GET_REFERRAL_PLAN_FAILED                            ErrorReason = 130044
+	ErrorReason_GET_REFERRAL_PLAN_PERMISSION_DENIED                 ErrorReason = 130045
+	ErrorReason_SET_REFERRAL_PLAN_FAILED                            ErrorReason = 130046
+	ErrorReason_SET_REFERRAL_PLAN_PERMISSION_DENIED                 ErrorReason = 130047
+	ErrorReason_CREATE_USER_REFERRAL_CODE_FAILED                    ErrorReason = 130048
+	ErrorReason_GET_USER_REFERRAL_CONFIG_FAILED                     ErrorReason = 130049
+	ErrorReason_PROCESS_USER_REGISTRATION_WITH_REFERRAL_CODE_FAILED ErrorReason = 130050
 )
 
 // Enum value maps for ErrorReason.
@@ -104,7 +107,7 @@ var (
 		130023: "DELETE_CAMPAIGN_FAILED",
 		130024: "LIST_CAMPAIGNS_FAILED",
 		130025: "UPDATE_CAMPAIGN_FAILED",
-		130026: "PROCESS_USER_REGISTRATION_FAILED",
+		130026: "PROCESS_USER_REGISTRATION_WITH_CAMPAIGN_FAILED",
 		130027: "PROCESS_USER_DEPOSIT_FAILED",
 		130028: "PROCESS_USER_WITHDRAWAL_FAILED",
 		130029: "LIST_EVENTS_FAILED",
@@ -126,56 +129,62 @@ var (
 		130045: "GET_REFERRAL_PLAN_PERMISSION_DENIED",
 		130046: "SET_REFERRAL_PLAN_FAILED",
 		130047: "SET_REFERRAL_PLAN_PERMISSION_DENIED",
+		130048: "CREATE_USER_REFERRAL_CODE_FAILED",
+		130049: "GET_USER_REFERRAL_CONFIG_FAILED",
+		130050: "PROCESS_USER_REGISTRATION_WITH_REFERRAL_CODE_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
-		"UNSPECIFIED":                              0,
-		"CREATE_COMMISSION_PLAN_FAILED":            130001,
-		"UPDATE_COMMISSION_PLAN_FAILED":            130002,
-		"DELETE_COMMISSION_PLAN_FAILED":            130003,
-		"CREATE_COMMISSION_PLAN_PERMISSION_DENIED": 130004,
-		"UPDATE_COMMISSION_PLAN_PERMISSION_DENIED": 130005,
-		"DELETE_COMMISSION_PLAN_PERMISSION_DENIED": 130006,
-		"COMMISSION_PLAN_NOT_FOUND":                130007,
-		"GET_COMMISSION_PLAN_FAILED":               130008,
-		"GET_COMMISSION_PLAN_PERMISSION_DENIED":    130009,
-		"LIST_COMMISSION_PLANS_FAILED":             130010,
-		"USER_ROLE_INVALID":                        130011,
-		"INVALID_COMMISSION_PLAN_CONFIG":           130012,
-		"CREATE_AFFILIATE_FAILED":                  130013,
-		"GET_AFFILIATE_FAILED":                     130014,
-		"AFFILIATE_NOT_FOUND":                      130015,
-		"DELETE_AFFILIATE_FAILED":                  130016,
-		"LIST_AFFILIATES_FAILED":                   130017,
-		"UPDATE_AFFILIATE_FAILED":                  130018,
-		"CONVERT_CHANNEL_CONFIG_FAILED":            130019,
-		"CREATE_CAMPAIGN_FAILED":                   130020,
-		"CAMPAIGN_NOT_FOUND":                       130021,
-		"GET_CAMPAIGN_FAILED":                      130022,
-		"DELETE_CAMPAIGN_FAILED":                   130023,
-		"LIST_CAMPAIGNS_FAILED":                    130024,
-		"UPDATE_CAMPAIGN_FAILED":                   130025,
-		"PROCESS_USER_REGISTRATION_FAILED":         130026,
-		"PROCESS_USER_DEPOSIT_FAILED":              130027,
-		"PROCESS_USER_WITHDRAWAL_FAILED":           130028,
-		"LIST_EVENTS_FAILED":                       130029,
-		"LIST_COMMISSIONS_FAILED":                  130030,
-		"UPDATE_COMMISSION_FAILED":                 130031,
-		"GET_COMMISSION_FAILED":                    130032,
-		"COMMISSION_NOT_FOUND":                     130033,
-		"LIST_AFFILIATE_USERS_FAILED":              130034,
-		"PROCESS_GAME_TRANSACTION_FAILED":          130035,
-		"PROCESS_GAME_START_FAILED":                130036,
-		"PROCESS_BILL_FAILED":                      130037,
-		"CREATE_BILL_FAILED":                       130038,
-		"GET_BILL_FAILED":                          130039,
-		"UPDATE_BILL_FAILED":                       130040,
-		"PROCESS_BILL_SETTLEMENT_FAILED":           130041,
-		"LIST_BILLS_FAILED":                        130042,
-		"GET_AFFILIATE_DETAILS_FAILED":             130043,
-		"GET_REFERRAL_PLAN_FAILED":                 130044,
-		"GET_REFERRAL_PLAN_PERMISSION_DENIED":      130045,
-		"SET_REFERRAL_PLAN_FAILED":                 130046,
-		"SET_REFERRAL_PLAN_PERMISSION_DENIED":      130047,
+		"UNSPECIFIED":                                         0,
+		"CREATE_COMMISSION_PLAN_FAILED":                       130001,
+		"UPDATE_COMMISSION_PLAN_FAILED":                       130002,
+		"DELETE_COMMISSION_PLAN_FAILED":                       130003,
+		"CREATE_COMMISSION_PLAN_PERMISSION_DENIED":            130004,
+		"UPDATE_COMMISSION_PLAN_PERMISSION_DENIED":            130005,
+		"DELETE_COMMISSION_PLAN_PERMISSION_DENIED":            130006,
+		"COMMISSION_PLAN_NOT_FOUND":                           130007,
+		"GET_COMMISSION_PLAN_FAILED":                          130008,
+		"GET_COMMISSION_PLAN_PERMISSION_DENIED":               130009,
+		"LIST_COMMISSION_PLANS_FAILED":                        130010,
+		"USER_ROLE_INVALID":                                   130011,
+		"INVALID_COMMISSION_PLAN_CONFIG":                      130012,
+		"CREATE_AFFILIATE_FAILED":                             130013,
+		"GET_AFFILIATE_FAILED":                                130014,
+		"AFFILIATE_NOT_FOUND":                                 130015,
+		"DELETE_AFFILIATE_FAILED":                             130016,
+		"LIST_AFFILIATES_FAILED":                              130017,
+		"UPDATE_AFFILIATE_FAILED":                             130018,
+		"CONVERT_CHANNEL_CONFIG_FAILED":                       130019,
+		"CREATE_CAMPAIGN_FAILED":                              130020,
+		"CAMPAIGN_NOT_FOUND":                                  130021,
+		"GET_CAMPAIGN_FAILED":                                 130022,
+		"DELETE_CAMPAIGN_FAILED":                              130023,
+		"LIST_CAMPAIGNS_FAILED":                               130024,
+		"UPDATE_CAMPAIGN_FAILED":                              130025,
+		"PROCESS_USER_REGISTRATION_WITH_CAMPAIGN_FAILED":      130026,
+		"PROCESS_USER_DEPOSIT_FAILED":                         130027,
+		"PROCESS_USER_WITHDRAWAL_FAILED":                      130028,
+		"LIST_EVENTS_FAILED":                                  130029,
+		"LIST_COMMISSIONS_FAILED":                             130030,
+		"UPDATE_COMMISSION_FAILED":                            130031,
+		"GET_COMMISSION_FAILED":                               130032,
+		"COMMISSION_NOT_FOUND":                                130033,
+		"LIST_AFFILIATE_USERS_FAILED":                         130034,
+		"PROCESS_GAME_TRANSACTION_FAILED":                     130035,
+		"PROCESS_GAME_START_FAILED":                           130036,
+		"PROCESS_BILL_FAILED":                                 130037,
+		"CREATE_BILL_FAILED":                                  130038,
+		"GET_BILL_FAILED":                                     130039,
+		"UPDATE_BILL_FAILED":                                  130040,
+		"PROCESS_BILL_SETTLEMENT_FAILED":                      130041,
+		"LIST_BILLS_FAILED":                                   130042,
+		"GET_AFFILIATE_DETAILS_FAILED":                        130043,
+		"GET_REFERRAL_PLAN_FAILED":                            130044,
+		"GET_REFERRAL_PLAN_PERMISSION_DENIED":                 130045,
+		"SET_REFERRAL_PLAN_FAILED":                            130046,
+		"SET_REFERRAL_PLAN_PERMISSION_DENIED":                 130047,
+		"CREATE_USER_REFERRAL_CODE_FAILED":                    130048,
+		"GET_USER_REFERRAL_CONFIG_FAILED":                     130049,
+		"PROCESS_USER_REGISTRATION_WITH_REFERRAL_CODE_FAILED": 130050,
 	}
 )
 
@@ -210,7 +219,7 @@ var File_affiliate_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\xc6\f\n" +
+	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\xde\r\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1dCREATE_COMMISSION_PLAN_FAILED\x10\xd1\xf7\a\x12#\n" +
@@ -237,8 +246,8 @@ const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\x13GET_CAMPAIGN_FAILED\x10\xe6\xf7\a\x12\x1c\n" +
 	"\x16DELETE_CAMPAIGN_FAILED\x10\xe7\xf7\a\x12\x1b\n" +
 	"\x15LIST_CAMPAIGNS_FAILED\x10\xe8\xf7\a\x12\x1c\n" +
-	"\x16UPDATE_CAMPAIGN_FAILED\x10\xe9\xf7\a\x12&\n" +
-	" PROCESS_USER_REGISTRATION_FAILED\x10\xea\xf7\a\x12!\n" +
+	"\x16UPDATE_CAMPAIGN_FAILED\x10\xe9\xf7\a\x124\n" +
+	".PROCESS_USER_REGISTRATION_WITH_CAMPAIGN_FAILED\x10\xea\xf7\a\x12!\n" +
 	"\x1bPROCESS_USER_DEPOSIT_FAILED\x10\xeb\xf7\a\x12$\n" +
 	"\x1ePROCESS_USER_WITHDRAWAL_FAILED\x10\xec\xf7\a\x12\x18\n" +
 	"\x12LIST_EVENTS_FAILED\x10\xed\xf7\a\x12\x1d\n" +
@@ -259,7 +268,10 @@ const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\x18GET_REFERRAL_PLAN_FAILED\x10\xfc\xf7\a\x12)\n" +
 	"#GET_REFERRAL_PLAN_PERMISSION_DENIED\x10\xfd\xf7\a\x12\x1e\n" +
 	"\x18SET_REFERRAL_PLAN_FAILED\x10\xfe\xf7\a\x12)\n" +
-	"#SET_REFERRAL_PLAN_PERMISSION_DENIED\x10\xff\xf7\a\x1a\x04\xa0E\xf4\x03BY\n" +
+	"#SET_REFERRAL_PLAN_PERMISSION_DENIED\x10\xff\xf7\a\x12&\n" +
+	" CREATE_USER_REFERRAL_CODE_FAILED\x10\x80\xf8\a\x12%\n" +
+	"\x1fGET_USER_REFERRAL_CONFIG_FAILED\x10\x81\xf8\a\x129\n" +
+	"3PROCESS_USER_REGISTRATION_WITH_REFERRAL_CODE_FAILED\x10\x82\xf8\a\x1a\x04\xa0E\xf4\x03BY\n" +
 	"\x18api.affiliate.service.v1P\x01Z;github.com/infigaming-com/meepo-api/affiliate/service/v1;v1b\x06proto3"
 
 var (
