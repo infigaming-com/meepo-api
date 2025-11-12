@@ -1103,17 +1103,17 @@ type VipLevelConfigTemplate struct {
 	WeeklyRewardEnabled    bool   `protobuf:"varint,22,opt,name=weekly_reward_enabled,json=weeklyRewardEnabled,proto3" json:"weekly_reward_enabled,omitempty"`
 	WeeklyFixedRewardAmt   string `protobuf:"bytes,23,opt,name=weekly_fixed_reward_amt,json=weeklyFixedRewardAmt,proto3" json:"weekly_fixed_reward_amt,omitempty"`
 	WeeklyTurnoverRate     string `protobuf:"bytes,24,opt,name=weekly_turnover_rate,json=weeklyTurnoverRate,proto3" json:"weekly_turnover_rate,omitempty"`
-	WeeklyNetLossAmt       string `protobuf:"bytes,25,opt,name=weekly_net_loss_amt,json=weeklyNetLossAmt,proto3" json:"weekly_net_loss_amt,omitempty"`
+	WeeklyNetLossRate      string `protobuf:"bytes,25,opt,name=weekly_net_loss_rate,json=weeklyNetLossRate,proto3" json:"weekly_net_loss_rate,omitempty"`
 	WeeklyAdjustRangePct   string `protobuf:"bytes,26,opt,name=weekly_adjust_range_pct,json=weeklyAdjustRangePct,proto3" json:"weekly_adjust_range_pct,omitempty"`
-	WeeklyActiveDaysReward int32  `protobuf:"varint,27,opt,name=weekly_active_days_reward,json=weeklyActiveDaysReward,proto3" json:"weekly_active_days_reward,omitempty"`
+	WeeklyActiveDaysReward string `protobuf:"bytes,27,opt,name=weekly_active_days_reward,json=weeklyActiveDaysReward,proto3" json:"weekly_active_days_reward,omitempty"`
 	WeeklyWageringReq      string `protobuf:"bytes,28,opt,name=weekly_wagering_req,json=weeklyWageringReq,proto3" json:"weekly_wagering_req,omitempty"`
 	// 每月奖励
 	MonthlyRewardEnabled    bool   `protobuf:"varint,29,opt,name=monthly_reward_enabled,json=monthlyRewardEnabled,proto3" json:"monthly_reward_enabled,omitempty"`
 	MonthlyFixedRewardAmt   string `protobuf:"bytes,30,opt,name=monthly_fixed_reward_amt,json=monthlyFixedRewardAmt,proto3" json:"monthly_fixed_reward_amt,omitempty"`
 	MonthlyTurnoverRate     string `protobuf:"bytes,31,opt,name=monthly_turnover_rate,json=monthlyTurnoverRate,proto3" json:"monthly_turnover_rate,omitempty"`
-	MonthlyNetLossAmt       string `protobuf:"bytes,32,opt,name=monthly_net_loss_amt,json=monthlyNetLossAmt,proto3" json:"monthly_net_loss_amt,omitempty"`
+	MonthlyNetLossRate      string `protobuf:"bytes,32,opt,name=monthly_net_loss_rate,json=monthlyNetLossRate,proto3" json:"monthly_net_loss_rate,omitempty"`
 	MonthlyAdjustRangePct   string `protobuf:"bytes,33,opt,name=monthly_adjust_range_pct,json=monthlyAdjustRangePct,proto3" json:"monthly_adjust_range_pct,omitempty"`
-	MonthlyActiveDaysReward int32  `protobuf:"varint,34,opt,name=monthly_active_days_reward,json=monthlyActiveDaysReward,proto3" json:"monthly_active_days_reward,omitempty"`
+	MonthlyActiveDaysReward string `protobuf:"bytes,34,opt,name=monthly_active_days_reward,json=monthlyActiveDaysReward,proto3" json:"monthly_active_days_reward,omitempty"`
 	MonthlyWageringReq      string `protobuf:"bytes,35,opt,name=monthly_wagering_req,json=monthlyWageringReq,proto3" json:"monthly_wagering_req,omitempty"`
 	CreatedAt               int64  `protobuf:"varint,36,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt               int64  `protobuf:"varint,37,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
@@ -1329,9 +1329,9 @@ func (x *VipLevelConfigTemplate) GetWeeklyTurnoverRate() string {
 	return ""
 }
 
-func (x *VipLevelConfigTemplate) GetWeeklyNetLossAmt() string {
+func (x *VipLevelConfigTemplate) GetWeeklyNetLossRate() string {
 	if x != nil {
-		return x.WeeklyNetLossAmt
+		return x.WeeklyNetLossRate
 	}
 	return ""
 }
@@ -1343,11 +1343,11 @@ func (x *VipLevelConfigTemplate) GetWeeklyAdjustRangePct() string {
 	return ""
 }
 
-func (x *VipLevelConfigTemplate) GetWeeklyActiveDaysReward() int32 {
+func (x *VipLevelConfigTemplate) GetWeeklyActiveDaysReward() string {
 	if x != nil {
 		return x.WeeklyActiveDaysReward
 	}
-	return 0
+	return ""
 }
 
 func (x *VipLevelConfigTemplate) GetWeeklyWageringReq() string {
@@ -1378,9 +1378,9 @@ func (x *VipLevelConfigTemplate) GetMonthlyTurnoverRate() string {
 	return ""
 }
 
-func (x *VipLevelConfigTemplate) GetMonthlyNetLossAmt() string {
+func (x *VipLevelConfigTemplate) GetMonthlyNetLossRate() string {
 	if x != nil {
-		return x.MonthlyNetLossAmt
+		return x.MonthlyNetLossRate
 	}
 	return ""
 }
@@ -1392,11 +1392,11 @@ func (x *VipLevelConfigTemplate) GetMonthlyAdjustRangePct() string {
 	return ""
 }
 
-func (x *VipLevelConfigTemplate) GetMonthlyActiveDaysReward() int32 {
+func (x *VipLevelConfigTemplate) GetMonthlyActiveDaysReward() string {
 	if x != nil {
 		return x.MonthlyActiveDaysReward
 	}
-	return 0
+	return ""
 }
 
 func (x *VipLevelConfigTemplate) GetMonthlyWageringReq() string {
@@ -3282,7 +3282,7 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\x17UpdateVipSettingRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x128\n" +
 	"\asetting\x18\x02 \x01(\v2\x1e.api.vip.service.v1.VipSettingR\asetting\"\x1a\n" +
-	"\x18UpdateVipSettingResponse\"\xa9\x12\n" +
+	"\x18UpdateVipSettingResponse\"\xad\x12\n" +
 	"\x16VipLevelConfigTemplate\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12,\n" +
 	"\x12system_operator_id\x18\x02 \x01(\x03R\x10systemOperatorId\x120\n" +
@@ -3310,17 +3310,17 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\x12rakeback_daily_req\x18\x15 \x01(\tR\x10rakebackDailyReq\x122\n" +
 	"\x15weekly_reward_enabled\x18\x16 \x01(\bR\x13weeklyRewardEnabled\x125\n" +
 	"\x17weekly_fixed_reward_amt\x18\x17 \x01(\tR\x14weeklyFixedRewardAmt\x120\n" +
-	"\x14weekly_turnover_rate\x18\x18 \x01(\tR\x12weeklyTurnoverRate\x12-\n" +
-	"\x13weekly_net_loss_amt\x18\x19 \x01(\tR\x10weeklyNetLossAmt\x125\n" +
+	"\x14weekly_turnover_rate\x18\x18 \x01(\tR\x12weeklyTurnoverRate\x12/\n" +
+	"\x14weekly_net_loss_rate\x18\x19 \x01(\tR\x11weeklyNetLossRate\x125\n" +
 	"\x17weekly_adjust_range_pct\x18\x1a \x01(\tR\x14weeklyAdjustRangePct\x129\n" +
-	"\x19weekly_active_days_reward\x18\x1b \x01(\x05R\x16weeklyActiveDaysReward\x12.\n" +
+	"\x19weekly_active_days_reward\x18\x1b \x01(\tR\x16weeklyActiveDaysReward\x12.\n" +
 	"\x13weekly_wagering_req\x18\x1c \x01(\tR\x11weeklyWageringReq\x124\n" +
 	"\x16monthly_reward_enabled\x18\x1d \x01(\bR\x14monthlyRewardEnabled\x127\n" +
 	"\x18monthly_fixed_reward_amt\x18\x1e \x01(\tR\x15monthlyFixedRewardAmt\x122\n" +
-	"\x15monthly_turnover_rate\x18\x1f \x01(\tR\x13monthlyTurnoverRate\x12/\n" +
-	"\x14monthly_net_loss_amt\x18  \x01(\tR\x11monthlyNetLossAmt\x127\n" +
+	"\x15monthly_turnover_rate\x18\x1f \x01(\tR\x13monthlyTurnoverRate\x121\n" +
+	"\x15monthly_net_loss_rate\x18  \x01(\tR\x12monthlyNetLossRate\x127\n" +
 	"\x18monthly_adjust_range_pct\x18! \x01(\tR\x15monthlyAdjustRangePct\x12;\n" +
-	"\x1amonthly_active_days_reward\x18\" \x01(\x05R\x17monthlyActiveDaysReward\x120\n" +
+	"\x1amonthly_active_days_reward\x18\" \x01(\tR\x17monthlyActiveDaysReward\x120\n" +
 	"\x14monthly_wagering_req\x18# \x01(\tR\x12monthlyWageringReq\x12\x1d\n" +
 	"\n" +
 	"created_at\x18$ \x01(\x03R\tcreatedAt\x12\x1d\n" +

@@ -232,18 +232,18 @@ message VipLevelConfigTemplate {
   bool weekly_reward_enabled = 22;
   string weekly_fixed_reward_amt = 23;
   string weekly_turnover_rate = 24;
-  string weekly_net_loss_amt = 25;
+  string weekly_net_loss_rate = 25;
   string weekly_adjust_range_pct = 26;
-  int32 weekly_active_days_reward = 27;
+  string weekly_active_days_reward = 27;
   string weekly_wagering_req = 28;
 
   // 每月奖励
   bool monthly_reward_enabled = 29;
   string monthly_fixed_reward_amt = 30;
   string monthly_turnover_rate = 31;
-  string monthly_net_loss_amt = 32;
+  string monthly_net_loss_rate = 32;
   string monthly_adjust_range_pct = 33;
-  int32 monthly_active_days_reward = 34;
+  string monthly_active_days_reward = 34;
   string monthly_wagering_req = 35;
   
   int64 created_at = 36;
