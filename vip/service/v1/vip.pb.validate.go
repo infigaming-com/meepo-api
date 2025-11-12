@@ -1090,7 +1090,7 @@ func (m *VipLevelConfigTemplate) validate(all bool) error {
 
 	// no validation rules for WeeklyTurnoverRate
 
-	// no validation rules for WeeklyNetLossAmt
+	// no validation rules for WeeklyNetLossRate
 
 	// no validation rules for WeeklyAdjustRangePct
 
@@ -1104,7 +1104,7 @@ func (m *VipLevelConfigTemplate) validate(all bool) error {
 
 	// no validation rules for MonthlyTurnoverRate
 
-	// no validation rules for MonthlyNetLossAmt
+	// no validation rules for MonthlyNetLossRate
 
 	// no validation rules for MonthlyAdjustRangePct
 

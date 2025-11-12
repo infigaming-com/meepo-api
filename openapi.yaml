@@ -17138,13 +17138,12 @@ components:
                     type: string
                 weeklyTurnoverRate:
                     type: string
-                weeklyNetLossAmt:
+                weeklyNetLossRate:
                     type: string
                 weeklyAdjustRangePct:
                     type: string
                 weeklyActiveDaysReward:
-                    type: integer
-                    format: int32
+                    type: string
                 weeklyWageringReq:
                     type: string
                 monthlyRewardEnabled:
@@ -17154,13 +17153,12 @@ components:
                     type: string
                 monthlyTurnoverRate:
                     type: string
-                monthlyNetLossAmt:
+                monthlyNetLossRate:
                     type: string
                 monthlyAdjustRangePct:
                     type: string
                 monthlyActiveDaysReward:
-                    type: integer
-                    format: int32
+                    type: string
                 monthlyWageringReq:
                     type: string
                 createdAt:
