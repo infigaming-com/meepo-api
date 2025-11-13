@@ -622,3 +622,15 @@ func IsProcessUserRegistrationWithReferralCodeFailed(err error) bool {
 func ErrorProcessUserRegistrationWithReferralCodeFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_PROCESS_USER_REGISTRATION_WITH_REFERRAL_CODE_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsProcessFlatFeeCommissionFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROCESS_FLAT_FEE_COMMISSION_FAILED.String() && e.Code == 500
+}
+
+func ErrorProcessFlatFeeCommissionFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROCESS_FLAT_FEE_COMMISSION_FAILED.String(), fmt.Sprintf(format, args...))
+}
