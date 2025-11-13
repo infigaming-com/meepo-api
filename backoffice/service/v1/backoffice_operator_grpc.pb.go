@@ -59,7 +59,7 @@ type BackofficeOperatorClient interface {
 	// ListBottomOperators returns a list of bottom operators by operator context in the middleware
 	ListBottomOperators(ctx context.Context, in *ListBottomOperatorsRequest, opts ...grpc.CallOption) (*ListBottomOperatorsResponse, error)
 	// UpdateOperatorStatus updates the status of an operator
-	UpdateOperatorStatus(ctx context.Context, in *UpdateOperatorStatusRequest, opts ...grpc.CallOption) (*UpdateOperatorStatusResponse, error)
+	UpdateOperatorStatus(ctx context.Context, in *UpdateOperatorStatusRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorStatusResponse, error)
 	// List operators by admin email under specific operator
 	ListOperatorsByAdminEmail(ctx context.Context, in *ListOperatorsByAdminEmailRequest, opts ...grpc.CallOption) (*v1.ListOperatorsByAdminEmailResponse, error)
 	// AddOperatorByoSubdomain adds a byo subdomain for the given operator
@@ -157,9 +157,9 @@ func (c *backofficeOperatorClient) ListBottomOperators(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *backofficeOperatorClient) UpdateOperatorStatus(ctx context.Context, in *UpdateOperatorStatusRequest, opts ...grpc.CallOption) (*UpdateOperatorStatusResponse, error) {
+func (c *backofficeOperatorClient) UpdateOperatorStatus(ctx context.Context, in *UpdateOperatorStatusRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorStatusResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateOperatorStatusResponse)
+	out := new(v1.UpdateOperatorStatusResponse)
 	err := c.cc.Invoke(ctx, BackofficeOperator_UpdateOperatorStatus_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -304,7 +304,7 @@ type BackofficeOperatorServer interface {
 	// ListBottomOperators returns a list of bottom operators by operator context in the middleware
 	ListBottomOperators(context.Context, *ListBottomOperatorsRequest) (*ListBottomOperatorsResponse, error)
 	// UpdateOperatorStatus updates the status of an operator
-	UpdateOperatorStatus(context.Context, *UpdateOperatorStatusRequest) (*UpdateOperatorStatusResponse, error)
+	UpdateOperatorStatus(context.Context, *UpdateOperatorStatusRequest) (*v1.UpdateOperatorStatusResponse, error)
 	// List operators by admin email under specific operator
 	ListOperatorsByAdminEmail(context.Context, *ListOperatorsByAdminEmailRequest) (*v1.ListOperatorsByAdminEmailResponse, error)
 	// AddOperatorByoSubdomain adds a byo subdomain for the given operator
@@ -353,7 +353,7 @@ func (UnimplementedBackofficeOperatorServer) ListCompanyOperators(context.Contex
 func (UnimplementedBackofficeOperatorServer) ListBottomOperators(context.Context, *ListBottomOperatorsRequest) (*ListBottomOperatorsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBottomOperators not implemented")
 }
-func (UnimplementedBackofficeOperatorServer) UpdateOperatorStatus(context.Context, *UpdateOperatorStatusRequest) (*UpdateOperatorStatusResponse, error) {
+func (UnimplementedBackofficeOperatorServer) UpdateOperatorStatus(context.Context, *UpdateOperatorStatusRequest) (*v1.UpdateOperatorStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOperatorStatus not implemented")
 }
 func (UnimplementedBackofficeOperatorServer) ListOperatorsByAdminEmail(context.Context, *ListOperatorsByAdminEmailRequest) (*v1.ListOperatorsByAdminEmailResponse, error) {

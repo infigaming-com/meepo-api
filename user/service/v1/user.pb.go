@@ -7933,8 +7933,10 @@ type UpdateOperatorStatusRequest struct {
 	ActionStart *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=actionStart,proto3" json:"actionStart,omitempty"`
 	// action end
 	ActionEnd *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=actionEnd,proto3" json:"actionEnd,omitempty"`
+	// IP white list
+	IpWhiteList []string `protobuf:"bytes,5,rep,name=ipWhiteList,proto3" json:"ipWhiteList,omitempty"`
 	// operator context of the backoffice operator
-	OperatorContext *common.OperatorContext `protobuf:"bytes,5,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,6,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -7993,6 +7995,13 @@ func (x *UpdateOperatorStatusRequest) GetActionStart() *timestamppb.Timestamp {
 func (x *UpdateOperatorStatusRequest) GetActionEnd() *timestamppb.Timestamp {
 	if x != nil {
 		return x.ActionEnd
+	}
+	return nil
+}
+
+func (x *UpdateOperatorStatusRequest) GetIpWhiteList() []string {
+	if x != nil {
+		return x.IpWhiteList
 	}
 	return nil
 }
@@ -12837,13 +12846,14 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x15company_operator_name\x18\x04 \x01(\tR\x13companyOperatorName\x12\x12\n" +
 	"\x04mode\x18\x05 \x01(\tR\x04mode\x12\x16\n" +
 	"\x06status\x18\x06 \x01(\tR\x06status\x12\x1c\n" +
-	"\tsubdomain\x18\a \x01(\tR\tsubdomain\"\xca\x02\n" +
+	"\tsubdomain\x18\a \x01(\tR\tsubdomain\"\xec\x02\n" +
 	"\x1bUpdateOperatorStatusRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x16\n" +
 	"\x06action\x18\x02 \x01(\tR\x06action\x12<\n" +
 	"\vactionStart\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\vactionStart\x128\n" +
-	"\tactionEnd\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tactionEnd\x12F\n" +
-	"\x10operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"6\n" +
+	"\tactionEnd\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tactionEnd\x12 \n" +
+	"\vipWhiteList\x18\x05 \x03(\tR\vipWhiteList\x12F\n" +
+	"\x10operator_context\x18\x06 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"6\n" +
 	"\x1cUpdateOperatorStatusResponse\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\tR\x06status\"\x87\x01\n" +
 	"\x13ListAllUsersRequest\x12F\n" +

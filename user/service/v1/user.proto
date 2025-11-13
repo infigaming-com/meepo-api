@@ -1466,8 +1466,10 @@ message UpdateOperatorStatusRequest {
 	google.protobuf.Timestamp actionStart = 3; 
 	// action end
 	google.protobuf.Timestamp actionEnd = 4;
+	// IP white list
+	repeated string ipWhiteList = 5;
 	// operator context of the backoffice operator
-	api.common.OperatorContext operator_context = 5;
+	api.common.OperatorContext operator_context = 6;
 }
 
 message UpdateOperatorStatusResponse {
