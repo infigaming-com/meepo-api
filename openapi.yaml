@@ -8558,7 +8558,7 @@ components:
         api.backoffice.service.v1.GetOperatorBalanceRequest:
             type: object
             properties:
-                targetOperatorContext:
+                operatorContext:
                     $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.GetOperatorPaymentChannelPageRequest:
             type: object

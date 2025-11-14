@@ -578,7 +578,7 @@ message UpdateOperatorBalanceResponse {
 }
 
 message GetOperatorBalanceRequest {
-	api.common.OperatorContext target_operator_context = 1;
+	api.common.OperatorContext operator_context = 1;
 }
 
 message SetDepositRewardSequencesRequest {

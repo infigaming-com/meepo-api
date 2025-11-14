@@ -2357,10 +2357,10 @@ func (x *UpdateOperatorBalanceResponse) GetEnabled() bool {
 }
 
 type GetOperatorBalanceRequest struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *GetOperatorBalanceRequest) Reset() {
@@ -2393,9 +2393,9 @@ func (*GetOperatorBalanceRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_wallet_proto_rawDescGZIP(), []int{32}
 }
 
-func (x *GetOperatorBalanceRequest) GetTargetOperatorContext() *common.OperatorContext {
+func (x *GetOperatorBalanceRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.TargetOperatorContext
+		return x.OperatorContext
 	}
 	return nil
 }
@@ -4288,9 +4288,9 @@ const file_backoffice_service_v1_backoffice_wallet_proto_rawDesc = "" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x18\n" +
 	"\aenabled\x18\x03 \x01(\bR\aenabled\"9\n" +
 	"\x1dUpdateOperatorBalanceResponse\x12\x18\n" +
-	"\aenabled\x18\x01 \x01(\bR\aenabled\"p\n" +
-	"\x19GetOperatorBalanceRequest\x12S\n" +
-	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\"\xb3\x04\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabled\"c\n" +
+	"\x19GetOperatorBalanceRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xb3\x04\n" +
 	" SetDepositRewardSequencesRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12(\n" +
@@ -4616,7 +4616,7 @@ var file_backoffice_service_v1_backoffice_wallet_proto_depIdxs = []int32{
 	55, // 22: api.backoffice.service.v1.OperatorBalanceTransaction.updated_at:type_name -> google.protobuf.Timestamp
 	28, // 23: api.backoffice.service.v1.ListOperatorBalanceTransactionsResponse.transactions:type_name -> api.backoffice.service.v1.OperatorBalanceTransaction
 	56, // 24: api.backoffice.service.v1.UpdateOperatorBalanceRequest.target_operator_context:type_name -> api.common.OperatorContext
-	56, // 25: api.backoffice.service.v1.GetOperatorBalanceRequest.target_operator_context:type_name -> api.common.OperatorContext
+	56, // 25: api.backoffice.service.v1.GetOperatorBalanceRequest.operator_context:type_name -> api.common.OperatorContext
 	56, // 26: api.backoffice.service.v1.SetDepositRewardSequencesRequest.target_operator_context:type_name -> api.common.OperatorContext
 	58, // 27: api.backoffice.service.v1.SetDepositRewardSequencesRequest.welcome_reward_sequences:type_name -> api.wallet.service.v1.RewardSequence
 	58, // 28: api.backoffice.service.v1.SetDepositRewardSequencesRequest.daily_reward_sequences:type_name -> api.wallet.service.v1.RewardSequence
