@@ -21470,7 +21470,7 @@ func (m *RewardSequence_TierConfig) validate(all bool) error {
 
 	// no validation rules for MaxRewardAmount
 
-	// no validation rules for MaxWithdrawalAmount
+	// no validation rules for MaxWithdrawalMultiplier
 
 	if len(errors) > 0 {
 		return RewardSequence_TierConfigMultiError(errors)

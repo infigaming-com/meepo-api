@@ -11564,14 +11564,14 @@ func (x *GetOverviewDashboardFromWalletResponse_DepositMinusWithdraw) GetYesterd
 }
 
 type RewardSequence_TierConfig struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	MinDepositAmount    string                 `protobuf:"bytes,1,opt,name=min_deposit_amount,json=minDepositAmount,proto3" json:"min_deposit_amount,omitempty"`
-	MaxDepositAmount    string                 `protobuf:"bytes,2,opt,name=max_deposit_amount,json=maxDepositAmount,proto3" json:"max_deposit_amount,omitempty"`
-	RewardPercentage    string                 `protobuf:"bytes,3,opt,name=reward_percentage,json=rewardPercentage,proto3" json:"reward_percentage,omitempty"`
-	MaxRewardAmount     string                 `protobuf:"bytes,4,opt,name=max_reward_amount,json=maxRewardAmount,proto3" json:"max_reward_amount,omitempty"`
-	MaxWithdrawalAmount string                 `protobuf:"bytes,5,opt,name=max_withdrawal_amount,json=maxWithdrawalAmount,proto3" json:"max_withdrawal_amount,omitempty"` // only available for bonus reward
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"open.v1"`
+	MinDepositAmount        string                 `protobuf:"bytes,1,opt,name=min_deposit_amount,json=minDepositAmount,proto3" json:"min_deposit_amount,omitempty"`
+	MaxDepositAmount        string                 `protobuf:"bytes,2,opt,name=max_deposit_amount,json=maxDepositAmount,proto3" json:"max_deposit_amount,omitempty"`
+	RewardPercentage        string                 `protobuf:"bytes,3,opt,name=reward_percentage,json=rewardPercentage,proto3" json:"reward_percentage,omitempty"`
+	MaxRewardAmount         string                 `protobuf:"bytes,4,opt,name=max_reward_amount,json=maxRewardAmount,proto3" json:"max_reward_amount,omitempty"`
+	MaxWithdrawalMultiplier string                 `protobuf:"bytes,5,opt,name=max_withdrawal_multiplier,json=maxWithdrawalMultiplier,proto3" json:"max_withdrawal_multiplier,omitempty"` // only available for bonus reward
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *RewardSequence_TierConfig) Reset() {
@@ -11632,9 +11632,9 @@ func (x *RewardSequence_TierConfig) GetMaxRewardAmount() string {
 	return ""
 }
 
-func (x *RewardSequence_TierConfig) GetMaxWithdrawalAmount() string {
+func (x *RewardSequence_TierConfig) GetMaxWithdrawalMultiplier() string {
 	if x != nil {
-		return x.MaxWithdrawalAmount
+		return x.MaxWithdrawalMultiplier
 	}
 	return ""
 }
@@ -13521,7 +13521,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x0ftransaction_ids\x18\x01 \x03(\x03R\x0etransactionIds\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x84\x01\n" +
 	"+GetOperatorBalanceTransactionsByIdsResponse\x12U\n" +
-	"\ftransactions\x18\x01 \x03(\v21.api.wallet.service.v1.OperatorBalanceTransactionR\ftransactions\"\x9f\x05\n" +
+	"\ftransactions\x18\x01 \x03(\v21.api.wallet.service.v1.OperatorBalanceTransactionR\ftransactions\"\xa7\x05\n" +
 	"\x0eRewardSequence\x12#\n" +
 	"\rserial_number\x18\x01 \x01(\x05R\fserialNumber\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n" +
@@ -13533,14 +13533,14 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\ftier_configs\x18\a \x03(\v20.api.wallet.service.v1.RewardSequence.TierConfigR\vtierConfigs\x129\n" +
 	"\n" +
 	"start_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
-	"\bend_time\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x1a\xf5\x01\n" +
+	"\bend_time\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x1a\xfd\x01\n" +
 	"\n" +
 	"TierConfig\x12,\n" +
 	"\x12min_deposit_amount\x18\x01 \x01(\tR\x10minDepositAmount\x12,\n" +
 	"\x12max_deposit_amount\x18\x02 \x01(\tR\x10maxDepositAmount\x12+\n" +
 	"\x11reward_percentage\x18\x03 \x01(\tR\x10rewardPercentage\x12*\n" +
-	"\x11max_reward_amount\x18\x04 \x01(\tR\x0fmaxRewardAmount\x122\n" +
-	"\x15max_withdrawal_amount\x18\x05 \x01(\tR\x13maxWithdrawalAmount\"\xb1\x03\n" +
+	"\x11max_reward_amount\x18\x04 \x01(\tR\x0fmaxRewardAmount\x12:\n" +
+	"\x19max_withdrawal_multiplier\x18\x05 \x01(\tR\x17maxWithdrawalMultiplier\"\xb1\x03\n" +
 	"\x13DepositRewardConfig\x124\n" +
 	"\x16welcome_reward_enabled\x18\x01 \x01(\bR\x14welcomeRewardEnabled\x120\n" +
 	"\x14daily_reward_enabled\x18\x02 \x01(\bR\x12dailyRewardEnabled\x12_\n" +
