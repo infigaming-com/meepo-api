@@ -2623,7 +2623,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.UpdateOperatorStatusResponse'
+                                $ref: '#/components/schemas/api.user.service.v1.UpdateOperatorStatusResponse'
     /v1/backoffice/payment/channel/create:
         post:
             tags:
@@ -13467,20 +13467,25 @@ components:
             type: object
             properties:
                 targetOperatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: target operator context
                 action:
                     type: string
+                    description: action to update the status of target operator "pending", "live", "suspended", "request_to_close", "closed", "maintain"
                 actionStart:
                     type: string
+                    description: action start
                     format: date-time
                 actionEnd:
                     type: string
+                    description: action end
                     format: date-time
-        api.backoffice.service.v1.UpdateOperatorStatusResponse:
-            type: object
-            properties:
-                status:
-                    type: string
+                ipWhiteList:
+                    type: array
+                    items:
+                        type: string
+                    description: IP white list
         api.backoffice.service.v1.UpdatePaymentMethodRequest:
             type: object
             properties:
@@ -16673,6 +16678,12 @@ components:
         api.user.service.v1.UpdateOperatorAccountSettingsResponse:
             type: object
             properties: {}
+        api.user.service.v1.UpdateOperatorStatusResponse:
+            type: object
+            properties:
+                status:
+                    type: string
+                    description: status of target operator after update
         api.user.service.v1.UpdateUserIdentityRequest:
             type: object
             properties:

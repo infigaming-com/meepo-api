@@ -72,7 +72,7 @@ type BackofficeOperatorHTTPServer interface {
 	SetOperatorRegisterLimitConfig(context.Context, *SetOperatorRegisterLimitConfigRequest) (*v1.SetOperatorRegisterLimitConfigResponse, error)
 	UpdateOperatorAccountSettings(context.Context, *UpdateOperatorAccountSettingsRequest) (*v1.UpdateOperatorAccountSettingsResponse, error)
 	// UpdateOperatorStatus UpdateOperatorStatus updates the status of an operator
-	UpdateOperatorStatus(context.Context, *UpdateOperatorStatusRequest) (*UpdateOperatorStatusResponse, error)
+	UpdateOperatorStatus(context.Context, *UpdateOperatorStatusRequest) (*v1.UpdateOperatorStatusResponse, error)
 }
 
 func RegisterBackofficeOperatorHTTPServer(s *http.Server, srv BackofficeOperatorHTTPServer) {
@@ -270,7 +270,7 @@ func _BackofficeOperator_UpdateOperatorStatus0_HTTP_Handler(srv BackofficeOperat
 		if err != nil {
 			return err
 		}
-		reply := out.(*UpdateOperatorStatusResponse)
+		reply := out.(*v1.UpdateOperatorStatusResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -559,7 +559,7 @@ type BackofficeOperatorHTTPClient interface {
 	ListRetailerOperators(ctx context.Context, req *ListRetailerOperatorsRequest, opts ...http.CallOption) (rsp *ListRetailerOperatorsResponse, err error)
 	SetOperatorRegisterLimitConfig(ctx context.Context, req *SetOperatorRegisterLimitConfigRequest, opts ...http.CallOption) (rsp *v1.SetOperatorRegisterLimitConfigResponse, err error)
 	UpdateOperatorAccountSettings(ctx context.Context, req *UpdateOperatorAccountSettingsRequest, opts ...http.CallOption) (rsp *v1.UpdateOperatorAccountSettingsResponse, err error)
-	UpdateOperatorStatus(ctx context.Context, req *UpdateOperatorStatusRequest, opts ...http.CallOption) (rsp *UpdateOperatorStatusResponse, err error)
+	UpdateOperatorStatus(ctx context.Context, req *UpdateOperatorStatusRequest, opts ...http.CallOption) (rsp *v1.UpdateOperatorStatusResponse, err error)
 }
 
 type BackofficeOperatorHTTPClientImpl struct {
@@ -817,8 +817,8 @@ func (c *BackofficeOperatorHTTPClientImpl) UpdateOperatorAccountSettings(ctx con
 	return &out, nil
 }
 
-func (c *BackofficeOperatorHTTPClientImpl) UpdateOperatorStatus(ctx context.Context, in *UpdateOperatorStatusRequest, opts ...http.CallOption) (*UpdateOperatorStatusResponse, error) {
-	var out UpdateOperatorStatusResponse
+func (c *BackofficeOperatorHTTPClientImpl) UpdateOperatorStatus(ctx context.Context, in *UpdateOperatorStatusRequest, opts ...http.CallOption) (*v1.UpdateOperatorStatusResponse, error) {
+	var out v1.UpdateOperatorStatusResponse
 	pattern := "/v1/backoffice/operator/status/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeOperatorUpdateOperatorStatus))
