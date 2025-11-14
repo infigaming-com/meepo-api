@@ -1545,6 +1545,8 @@ func (m *GameCreditRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for OriginalTransactionTurnoverAmount
+
 	if m.OriginalTransactionType != nil {
 		// no validation rules for OriginalTransactionType
 	}

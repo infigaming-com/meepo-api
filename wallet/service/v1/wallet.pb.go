@@ -1051,20 +1051,21 @@ func (x *GameDebitResponse) GetAffectedCredits() []*AffectedCredit {
 }
 
 type GameCreditRequest struct {
-	state                   protoimpl.MessageState  `protogen:"open.v1"`
-	UserId                  int64                   `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Currency                string                  `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	SettlementCurrency      string                  `protobuf:"bytes,3,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
-	ReportingCurrency       string                  `protobuf:"bytes,4,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
-	ExchangeRate            string                  `protobuf:"bytes,5,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
-	TransactionType         string                  `protobuf:"bytes,6,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
-	TransactionId           int64                   `protobuf:"varint,7,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	OriginalTransactionId   int64                   `protobuf:"varint,8,opt,name=original_transaction_id,json=originalTransactionId,proto3" json:"original_transaction_id,omitempty"`
-	Amount                  string                  `protobuf:"bytes,9,opt,name=amount,proto3" json:"amount,omitempty"`
-	OperatorContext         *common.OperatorContext `protobuf:"bytes,10,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	OriginalTransactionType *string                 `protobuf:"bytes,11,opt,name=original_transaction_type,json=originalTransactionType,proto3,oneof" json:"original_transaction_type,omitempty"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	state                             protoimpl.MessageState  `protogen:"open.v1"`
+	UserId                            int64                   `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Currency                          string                  `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	SettlementCurrency                string                  `protobuf:"bytes,3,opt,name=settlement_currency,json=settlementCurrency,proto3" json:"settlement_currency,omitempty"`
+	ReportingCurrency                 string                  `protobuf:"bytes,4,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	ExchangeRate                      string                  `protobuf:"bytes,5,opt,name=exchange_rate,json=exchangeRate,proto3" json:"exchange_rate,omitempty"`
+	TransactionType                   string                  `protobuf:"bytes,6,opt,name=transaction_type,json=transactionType,proto3" json:"transaction_type,omitempty"`
+	TransactionId                     int64                   `protobuf:"varint,7,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	OriginalTransactionId             int64                   `protobuf:"varint,8,opt,name=original_transaction_id,json=originalTransactionId,proto3" json:"original_transaction_id,omitempty"`
+	Amount                            string                  `protobuf:"bytes,9,opt,name=amount,proto3" json:"amount,omitempty"`
+	OperatorContext                   *common.OperatorContext `protobuf:"bytes,10,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	OriginalTransactionType           *string                 `protobuf:"bytes,11,opt,name=original_transaction_type,json=originalTransactionType,proto3,oneof" json:"original_transaction_type,omitempty"`
+	OriginalTransactionTurnoverAmount string                  `protobuf:"bytes,12,opt,name=original_transaction_turnover_amount,json=originalTransactionTurnoverAmount,proto3" json:"original_transaction_turnover_amount,omitempty"`
+	unknownFields                     protoimpl.UnknownFields
+	sizeCache                         protoimpl.SizeCache
 }
 
 func (x *GameCreditRequest) Reset() {
@@ -1170,6 +1171,13 @@ func (x *GameCreditRequest) GetOperatorContext() *common.OperatorContext {
 func (x *GameCreditRequest) GetOriginalTransactionType() string {
 	if x != nil && x.OriginalTransactionType != nil {
 		return *x.OriginalTransactionType
+	}
+	return ""
+}
+
+func (x *GameCreditRequest) GetOriginalTransactionTurnoverAmount() string {
+	if x != nil {
+		return x.OriginalTransactionTurnoverAmount
 	}
 	return ""
 }
@@ -12837,7 +12845,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x1ecash_amount_reporting_currency\x18\f \x01(\tR\x1bcashAmountReportingCurrency\x12V\n" +
 	"(operator_bonus_amount_reporting_currency\x18\r \x01(\tR$operatorBonusAmountReportingCurrency\x12V\n" +
 	"(provider_bonus_amount_reporting_currency\x18\x0e \x01(\tR$providerBonusAmountReportingCurrency\x12P\n" +
-	"\x10affected_credits\x18\x0f \x03(\v2%.api.wallet.service.v1.AffectedCreditR\x0faffectedCredits\"\x96\x04\n" +
+	"\x10affected_credits\x18\x0f \x03(\v2%.api.wallet.service.v1.AffectedCreditR\x0faffectedCredits\"\xe7\x04\n" +
 	"\x11GameCreditRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12/\n" +
@@ -12850,7 +12858,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x06amount\x18\t \x01(\tR\x06amount\x12F\n" +
 	"\x10operator_context\x18\n" +
 	" \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12?\n" +
-	"\x19original_transaction_type\x18\v \x01(\tH\x00R\x17originalTransactionType\x88\x01\x01B\x1c\n" +
+	"\x19original_transaction_type\x18\v \x01(\tH\x00R\x17originalTransactionType\x88\x01\x01\x12O\n" +
+	"$original_transaction_turnover_amount\x18\f \x01(\tR!originalTransactionTurnoverAmountB\x1c\n" +
 	"\x1a_original_transaction_type\"\xb0\x06\n" +
 	"\x12GameCreditResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12#\n" +
