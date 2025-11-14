@@ -90,7 +90,7 @@ type BackofficeWalletClient interface {
 	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
 	UpdateOperatorBalance(ctx context.Context, in *UpdateOperatorBalanceRequest, opts ...grpc.CallOption) (*UpdateOperatorBalanceResponse, error)
 	// GetOperatorBalance gets the balances of an operator
-	GetOperatorBalance(ctx context.Context, in *v1.GetOperatorBalanceRequest, opts ...grpc.CallOption) (*v1.GetOperatorBalanceResponse, error)
+	GetOperatorBalance(ctx context.Context, in *GetOperatorBalanceRequest, opts ...grpc.CallOption) (*v1.GetOperatorBalanceResponse, error)
 	// SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
 	SetDepositRewardSequences(ctx context.Context, in *SetDepositRewardSequencesRequest, opts ...grpc.CallOption) (*v1.SetDepositRewardSequencesResponse, error)
 	// DeleteDepositRewardSequences deletes a deposit reward sequence of a operator currency config
@@ -307,7 +307,7 @@ func (c *backofficeWalletClient) UpdateOperatorBalance(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *backofficeWalletClient) GetOperatorBalance(ctx context.Context, in *v1.GetOperatorBalanceRequest, opts ...grpc.CallOption) (*v1.GetOperatorBalanceResponse, error) {
+func (c *backofficeWalletClient) GetOperatorBalance(ctx context.Context, in *GetOperatorBalanceRequest, opts ...grpc.CallOption) (*v1.GetOperatorBalanceResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.GetOperatorBalanceResponse)
 	err := c.cc.Invoke(ctx, BackofficeWallet_GetOperatorBalance_FullMethodName, in, out, cOpts...)
@@ -529,7 +529,7 @@ type BackofficeWalletServer interface {
 	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
 	UpdateOperatorBalance(context.Context, *UpdateOperatorBalanceRequest) (*UpdateOperatorBalanceResponse, error)
 	// GetOperatorBalance gets the balances of an operator
-	GetOperatorBalance(context.Context, *v1.GetOperatorBalanceRequest) (*v1.GetOperatorBalanceResponse, error)
+	GetOperatorBalance(context.Context, *GetOperatorBalanceRequest) (*v1.GetOperatorBalanceResponse, error)
 	// SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
 	SetDepositRewardSequences(context.Context, *SetDepositRewardSequencesRequest) (*v1.SetDepositRewardSequencesResponse, error)
 	// DeleteDepositRewardSequences deletes a deposit reward sequence of a operator currency config
@@ -627,7 +627,7 @@ func (UnimplementedBackofficeWalletServer) ListOperatorBalanceTransactions(conte
 func (UnimplementedBackofficeWalletServer) UpdateOperatorBalance(context.Context, *UpdateOperatorBalanceRequest) (*UpdateOperatorBalanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOperatorBalance not implemented")
 }
-func (UnimplementedBackofficeWalletServer) GetOperatorBalance(context.Context, *v1.GetOperatorBalanceRequest) (*v1.GetOperatorBalanceResponse, error) {
+func (UnimplementedBackofficeWalletServer) GetOperatorBalance(context.Context, *GetOperatorBalanceRequest) (*v1.GetOperatorBalanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorBalance not implemented")
 }
 func (UnimplementedBackofficeWalletServer) SetDepositRewardSequences(context.Context, *SetDepositRewardSequencesRequest) (*v1.SetDepositRewardSequencesResponse, error) {
@@ -1012,7 +1012,7 @@ func _BackofficeWallet_UpdateOperatorBalance_Handler(srv interface{}, ctx contex
 }
 
 func _BackofficeWallet_GetOperatorBalance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.GetOperatorBalanceRequest)
+	in := new(GetOperatorBalanceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1024,7 +1024,7 @@ func _BackofficeWallet_GetOperatorBalance_Handler(srv interface{}, ctx context.C
 		FullMethod: BackofficeWallet_GetOperatorBalance_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeWalletServer).GetOperatorBalance(ctx, req.(*v1.GetOperatorBalanceRequest))
+		return srv.(BackofficeWalletServer).GetOperatorBalance(ctx, req.(*GetOperatorBalanceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

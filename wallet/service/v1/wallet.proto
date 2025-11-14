@@ -374,6 +374,7 @@ message GameCreditRequest {
 	string amount = 9;
 	api.common.OperatorContext operator_context = 10;
 	optional string original_transaction_type = 11;
+	string original_transaction_turnover_amount = 12;
 }
 
 message GameCreditResponse {
@@ -992,7 +993,8 @@ message OperatorSettleResponse {
 }
 
 message GetOperatorBalanceRequest {
-	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 1;
+	api.common.OperatorContext initiator_operator_context = 2;
 }
 
 message GetOperatorBalanceResponse {

@@ -128,7 +128,7 @@ service BackofficeWallet {
 		};
 	}
 	// GetOperatorBalance gets the balances of an operator
-	rpc GetOperatorBalance(wallet.service.v1.GetOperatorBalanceRequest) returns (wallet.service.v1.GetOperatorBalanceResponse) {
+	rpc GetOperatorBalance(GetOperatorBalanceRequest) returns (wallet.service.v1.GetOperatorBalanceResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/operator/balance/get"
 			body: "*"
@@ -575,6 +575,10 @@ message UpdateOperatorBalanceRequest {
 
 message UpdateOperatorBalanceResponse {
 	bool enabled = 1;
+}
+
+message GetOperatorBalanceRequest {
+	api.common.OperatorContext operator_context = 1;
 }
 
 message SetDepositRewardSequencesRequest {

@@ -4392,7 +4392,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.wallet.service.v1.GetOperatorBalanceRequest'
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorBalanceRequest'
                 required: true
             responses:
                 "200":
@@ -8555,6 +8555,11 @@ components:
             description: |-
                 Request to get address
                  Used to get DC address
+        api.backoffice.service.v1.GetOperatorBalanceRequest:
+            type: object
+            properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.backoffice.service.v1.GetOperatorPaymentChannelPageRequest:
             type: object
             properties:
@@ -17656,11 +17661,6 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.wallet.service.v1.OperatorCurrencyConfig'
-        api.wallet.service.v1.GetOperatorBalanceRequest:
-            type: object
-            properties:
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
         api.wallet.service.v1.GetOperatorBalanceResponse:
             type: object
             properties:

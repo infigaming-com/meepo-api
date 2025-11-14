@@ -4356,6 +4356,137 @@ var _ interface {
 	ErrorName() string
 } = UpdateOperatorBalanceResponseValidationError{}
 
+// Validate checks the field values on GetOperatorBalanceRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetOperatorBalanceRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetOperatorBalanceRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetOperatorBalanceRequestMultiError, or nil if none found.
+func (m *GetOperatorBalanceRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOperatorBalanceRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetOperatorBalanceRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetOperatorBalanceRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetOperatorBalanceRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetOperatorBalanceRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOperatorBalanceRequestMultiError is an error wrapping multiple validation
+// errors returned by GetOperatorBalanceRequest.ValidateAll() if the
+// designated constraints aren't met.
+type GetOperatorBalanceRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOperatorBalanceRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOperatorBalanceRequestMultiError) AllErrors() []error { return m }
+
+// GetOperatorBalanceRequestValidationError is the validation error returned by
+// GetOperatorBalanceRequest.Validate if the designated constraints aren't met.
+type GetOperatorBalanceRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOperatorBalanceRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOperatorBalanceRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOperatorBalanceRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOperatorBalanceRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOperatorBalanceRequestValidationError) ErrorName() string {
+	return "GetOperatorBalanceRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOperatorBalanceRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOperatorBalanceRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOperatorBalanceRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOperatorBalanceRequestValidationError{}
+
 // Validate checks the field values on SetDepositRewardSequencesRequest with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the first error encountered is returned, or nil if there are
