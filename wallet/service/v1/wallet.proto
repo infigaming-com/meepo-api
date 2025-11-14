@@ -993,8 +993,7 @@ message OperatorSettleResponse {
 }
 
 message GetOperatorBalanceRequest {
-	api.common.OperatorContext target_operator_context = 1;
-	api.common.OperatorContext initiator_operator_context = 2;
+	api.common.OperatorContext operator_context = 1;
 }
 
 message GetOperatorBalanceResponse {
