@@ -18216,7 +18216,7 @@ components:
                     type: string
                 maxRewardAmount:
                     type: string
-                maxWithdrawalAmount:
+                maxWithdrawalMultiplier:
                     type: string
         api.wallet.service.v1.SetDepositRewardSequencesResponse:
             type: object
