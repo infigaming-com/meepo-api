@@ -79,7 +79,7 @@ type BackofficePaymentClient interface {
 	// Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
 	GetOperatorPaymentChannelPage(ctx context.Context, in *GetOperatorPaymentChannelPageRequest, opts ...grpc.CallOption) (*v1.GetPaymentChannelPageResponse, error)
 	// Update payment channel
-	UpdatePaymentMethod(ctx context.Context, in *v1.UpdatePaymentMethodRequest, opts ...grpc.CallOption) (*v1.CreatePaymentMethodResponse, error)
+	UpdatePaymentMethod(ctx context.Context, in *UpdatePaymentMethodRequest, opts ...grpc.CallOption) (*v1.CreatePaymentMethodResponse, error)
 }
 
 type backofficePaymentClient struct {
@@ -200,7 +200,7 @@ func (c *backofficePaymentClient) GetOperatorPaymentChannelPage(ctx context.Cont
 	return out, nil
 }
 
-func (c *backofficePaymentClient) UpdatePaymentMethod(ctx context.Context, in *v1.UpdatePaymentMethodRequest, opts ...grpc.CallOption) (*v1.CreatePaymentMethodResponse, error) {
+func (c *backofficePaymentClient) UpdatePaymentMethod(ctx context.Context, in *UpdatePaymentMethodRequest, opts ...grpc.CallOption) (*v1.CreatePaymentMethodResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.CreatePaymentMethodResponse)
 	err := c.cc.Invoke(ctx, BackofficePayment_UpdatePaymentMethod_FullMethodName, in, out, cOpts...)
@@ -255,7 +255,7 @@ type BackofficePaymentServer interface {
 	// Error code: GET_PAYMENT_CHANNEL_PAGE_FAILED(50003) - Failed to get payment channel page
 	GetOperatorPaymentChannelPage(context.Context, *GetOperatorPaymentChannelPageRequest) (*v1.GetPaymentChannelPageResponse, error)
 	// Update payment channel
-	UpdatePaymentMethod(context.Context, *v1.UpdatePaymentMethodRequest) (*v1.CreatePaymentMethodResponse, error)
+	UpdatePaymentMethod(context.Context, *UpdatePaymentMethodRequest) (*v1.CreatePaymentMethodResponse, error)
 	mustEmbedUnimplementedBackofficePaymentServer()
 }
 
@@ -299,7 +299,7 @@ func (UnimplementedBackofficePaymentServer) GetOperatorAddress(context.Context, 
 func (UnimplementedBackofficePaymentServer) GetOperatorPaymentChannelPage(context.Context, *GetOperatorPaymentChannelPageRequest) (*v1.GetPaymentChannelPageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorPaymentChannelPage not implemented")
 }
-func (UnimplementedBackofficePaymentServer) UpdatePaymentMethod(context.Context, *v1.UpdatePaymentMethodRequest) (*v1.CreatePaymentMethodResponse, error) {
+func (UnimplementedBackofficePaymentServer) UpdatePaymentMethod(context.Context, *UpdatePaymentMethodRequest) (*v1.CreatePaymentMethodResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePaymentMethod not implemented")
 }
 func (UnimplementedBackofficePaymentServer) mustEmbedUnimplementedBackofficePaymentServer() {}
@@ -522,7 +522,7 @@ func _BackofficePayment_GetOperatorPaymentChannelPage_Handler(srv interface{}, c
 }
 
 func _BackofficePayment_UpdatePaymentMethod_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.UpdatePaymentMethodRequest)
+	in := new(UpdatePaymentMethodRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -534,7 +534,7 @@ func _BackofficePayment_UpdatePaymentMethod_Handler(srv interface{}, ctx context
 		FullMethod: BackofficePayment_UpdatePaymentMethod_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficePaymentServer).UpdatePaymentMethod(ctx, req.(*v1.UpdatePaymentMethodRequest))
+		return srv.(BackofficePaymentServer).UpdatePaymentMethod(ctx, req.(*UpdatePaymentMethodRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

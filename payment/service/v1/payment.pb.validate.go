@@ -1215,8 +1215,6 @@ func (m *CreatePaymentChannelRequest) validate(all bool) error {
 
 	// no validation rules for PaymentMethodId
 
-	// no validation rules for Contact
-
 	// no validation rules for FixedFee
 
 	// no validation rules for FeeRate
@@ -1367,8 +1365,6 @@ func (m *UpdatePaymentChannelRequest) validate(all bool) error {
 
 	// no validation rules for PaymentChannelId
 
-	// no validation rules for Contact
-
 	// no validation rules for FixedFee
 
 	// no validation rules for FeeRate
@@ -1385,37 +1381,41 @@ func (m *UpdatePaymentChannelRequest) validate(all bool) error {
 
 	// no validation rules for MaxAmount
 
-	if all {
-		switch v := interface{}(m.GetKey()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, UpdatePaymentChannelRequestValidationError{
-					field:  "Key",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, UpdatePaymentChannelRequestValidationError{
-					field:  "Key",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetKey()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return UpdatePaymentChannelRequestValidationError{
-				field:  "Key",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	if m.Enable != nil {
 		// no validation rules for Enable
+	}
+
+	if m.Key != nil {
+
+		if all {
+			switch v := interface{}(m.GetKey()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, UpdatePaymentChannelRequestValidationError{
+						field:  "Key",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, UpdatePaymentChannelRequestValidationError{
+						field:  "Key",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetKey()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return UpdatePaymentChannelRequestValidationError{
+					field:  "Key",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
 	}
 
 	if len(errors) > 0 {
@@ -1722,8 +1722,6 @@ func (m *PaymentChannelInfo) validate(all bool) error {
 	}
 
 	// no validation rules for Enable
-
-	// no validation rules for Contact
 
 	// no validation rules for Eat
 
@@ -5588,6 +5586,59 @@ func (m *UpdatePaymentMethodRequest) validate(all bool) error {
 	// no validation rules for PaymentMethodId
 
 	// no validation rules for Status
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdatePaymentMethodRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdatePaymentMethodRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdatePaymentMethodRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.Contact != nil {
+		// no validation rules for Contact
+	}
+
+	if m.SysFixedFee != nil {
+		// no validation rules for SysFixedFee
+	}
+
+	if m.SysFeeRate != nil {
+		// no validation rules for SysFeeRate
+	}
+
+	if m.SysMinAmount != nil {
+		// no validation rules for SysMinAmount
+	}
+
+	if m.SysMaxAmount != nil {
+		// no validation rules for SysMaxAmount
+	}
+
+	if m.SysMinFee != nil {
+		// no validation rules for SysMinFee
+	}
 
 	if len(errors) > 0 {
 		return UpdatePaymentMethodRequestMultiError(errors)

@@ -334,3 +334,15 @@ func IsUserGameDisabledByAccountSetting(err error) bool {
 func ErrorUserGameDisabledByAccountSetting(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_USER_GAME_DISABLED_BY_ACCOUNT_SETTING.String(), fmt.Sprintf(format, args...))
 }
+
+func IsOperatorStatusInvalid(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_STATUS_INVALID.String() && e.Code == 500
+}
+
+func ErrorOperatorStatusInvalid(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_STATUS_INVALID.String(), fmt.Sprintf(format, args...))
+}

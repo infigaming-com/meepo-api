@@ -119,7 +119,7 @@ service BackofficePayment {
   }
 
   // Update payment channel
-	rpc UpdatePaymentMethod(payment.service.v1.UpdatePaymentMethodRequest) returns (payment.service.v1.CreatePaymentMethodResponse) {
+	rpc UpdatePaymentMethod(UpdatePaymentMethodRequest) returns (payment.service.v1.CreatePaymentMethodResponse) {
     option (google.api.http) = {
       post: "/v1/backoffice/payment/method/update"
       body: "*"
@@ -263,4 +263,23 @@ message GetOperatorPaymentChannelPageRequest {
   optional bool enabled = 12;
   // ID of the Operator connect with this channel
   api.common.OperatorContextFilters operator_context_filters = 13;
+}
+
+message UpdatePaymentMethodRequest {
+  // ID
+	string payment_method_id = 1;
+  // Currency Type
+  optional string contact = 2;
+  // Fixed Fee on the Amount
+  optional string sys_fixed_fee = 3;
+  // Rate Fee 
+  optional string sys_fee_rate = 4;
+  // Min Amount
+  optional string sys_min_amount = 5;
+  // Max Amount
+  optional string sys_max_amount = 6;
+  // Minmum Fee
+  optional string sys_min_fee = 7;
+	// status
+	bool status = 8;
 }

@@ -1372,6 +1372,7 @@ type AccountInfoResponse struct {
 	Subdomain           string                  `protobuf:"bytes,10,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
 	BackofficeSubdomain string                  `protobuf:"bytes,11,opt,name=backoffice_subdomain,json=backofficeSubdomain,proto3" json:"backoffice_subdomain,omitempty"`
 	OperatorMode        string                  `protobuf:"bytes,12,opt,name=operator_mode,json=operatorMode,proto3" json:"operator_mode,omitempty"`
+	UserId              int64                   `protobuf:"varint,13,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -1488,6 +1489,13 @@ func (x *AccountInfoResponse) GetOperatorMode() string {
 		return x.OperatorMode
 	}
 	return ""
+}
+
+func (x *AccountInfoResponse) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
 }
 
 type Role struct {
@@ -2578,7 +2586,7 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"#SendRegisterVerificationCodeRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\"&\n" +
 	"$SendRegisterVerificationCodeResponse\"\x14\n" +
-	"\x12AccountInfoRequest\"\x8c\x04\n" +
+	"\x12AccountInfoRequest\"\xa5\x04\n" +
 	"\x13AccountInfoResponse\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x16\n" +
@@ -2592,7 +2600,8 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\tsubdomain\x18\n" +
 	" \x01(\tR\tsubdomain\x121\n" +
 	"\x14backoffice_subdomain\x18\v \x01(\tR\x13backofficeSubdomain\x12#\n" +
-	"\roperator_mode\x18\f \x01(\tR\foperatorMode\"|\n" +
+	"\roperator_mode\x18\f \x01(\tR\foperatorMode\x12\x17\n" +
+	"\auser_id\x18\r \x01(\x03R\x06userId\"|\n" +
 	"\x04Role\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x17\n" +
 	"\arole_id\x18\x02 \x01(\x03R\x06roleId\x12G\n" +

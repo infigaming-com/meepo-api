@@ -67,7 +67,7 @@ service BackofficeOperator {
 	}
 
 	// UpdateOperatorStatus updates the status of an operator
-	rpc UpdateOperatorStatus(UpdateOperatorStatusRequest) returns (UpdateOperatorStatusResponse) {
+	rpc UpdateOperatorStatus(UpdateOperatorStatusRequest) returns (user.service.v1.UpdateOperatorStatusResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/operator/status/update"
 			body: "*"
@@ -317,15 +317,21 @@ message ListBottomOperatorsResponse {
 }
 
 message UpdateOperatorStatusRequest {
+	// target operator context
 	api.common.OperatorContext target_operator_context = 1; // target operator context
-	string action = 2; // action to update the status of target operator "pending", "live", "suspended", "request_to_close", "closed", "maintain",
+	// action to update the status of target operator "pending", "live", "suspended", "request_to_close", "closed", "maintain"
+	string action = 2;
+	// action start
 	google.protobuf.Timestamp actionStart = 3; // action start
+	// action end
 	google.protobuf.Timestamp actionEnd = 4; // action end
+	// IP white list
+	repeated string ipWhiteList = 5;
 }
 
-message UpdateOperatorStatusResponse {
-	string status = 1; // status of target operator after update
-}
+// message UpdateOperatorStatusResponse {
+// 	string status = 1; // status of target operator after update
+// }
 
 message ListOperatorsByAdminEmailRequest {
 	string email = 1;

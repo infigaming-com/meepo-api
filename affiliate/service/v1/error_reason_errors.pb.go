@@ -322,3 +322,315 @@ func IsUpdateCampaignFailed(err error) bool {
 func ErrorUpdateCampaignFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_UPDATE_CAMPAIGN_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsProcessUserRegistrationWithCampaignFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROCESS_USER_REGISTRATION_WITH_CAMPAIGN_FAILED.String() && e.Code == 500
+}
+
+func ErrorProcessUserRegistrationWithCampaignFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROCESS_USER_REGISTRATION_WITH_CAMPAIGN_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsProcessUserDepositFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROCESS_USER_DEPOSIT_FAILED.String() && e.Code == 500
+}
+
+func ErrorProcessUserDepositFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROCESS_USER_DEPOSIT_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsProcessUserWithdrawalFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROCESS_USER_WITHDRAWAL_FAILED.String() && e.Code == 500
+}
+
+func ErrorProcessUserWithdrawalFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROCESS_USER_WITHDRAWAL_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListEventsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_EVENTS_FAILED.String() && e.Code == 500
+}
+
+func ErrorListEventsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_EVENTS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListCommissionsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_COMMISSIONS_FAILED.String() && e.Code == 500
+}
+
+func ErrorListCommissionsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_COMMISSIONS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateCommissionFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_COMMISSION_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateCommissionFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_COMMISSION_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetCommissionFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_COMMISSION_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetCommissionFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_COMMISSION_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCommissionNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_COMMISSION_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorCommissionNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_COMMISSION_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListAffiliateUsersFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_AFFILIATE_USERS_FAILED.String() && e.Code == 500
+}
+
+func ErrorListAffiliateUsersFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_AFFILIATE_USERS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsProcessGameTransactionFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROCESS_GAME_TRANSACTION_FAILED.String() && e.Code == 500
+}
+
+func ErrorProcessGameTransactionFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROCESS_GAME_TRANSACTION_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsProcessGameStartFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROCESS_GAME_START_FAILED.String() && e.Code == 500
+}
+
+func ErrorProcessGameStartFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROCESS_GAME_START_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsProcessBillFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROCESS_BILL_FAILED.String() && e.Code == 500
+}
+
+func ErrorProcessBillFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROCESS_BILL_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCreateBillFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREATE_BILL_FAILED.String() && e.Code == 500
+}
+
+func ErrorCreateBillFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREATE_BILL_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetBillFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_BILL_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetBillFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_BILL_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdateBillFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_BILL_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdateBillFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_BILL_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsProcessBillSettlementFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROCESS_BILL_SETTLEMENT_FAILED.String() && e.Code == 500
+}
+
+func ErrorProcessBillSettlementFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROCESS_BILL_SETTLEMENT_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListBillsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_BILLS_FAILED.String() && e.Code == 500
+}
+
+func ErrorListBillsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_BILLS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetAffiliateDetailsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_AFFILIATE_DETAILS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetAffiliateDetailsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_AFFILIATE_DETAILS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetReferralPlanFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_REFERRAL_PLAN_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetReferralPlanFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_REFERRAL_PLAN_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetReferralPlanPermissionDenied(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_REFERRAL_PLAN_PERMISSION_DENIED.String() && e.Code == 500
+}
+
+func ErrorGetReferralPlanPermissionDenied(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_REFERRAL_PLAN_PERMISSION_DENIED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSetReferralPlanFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SET_REFERRAL_PLAN_FAILED.String() && e.Code == 500
+}
+
+func ErrorSetReferralPlanFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SET_REFERRAL_PLAN_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSetReferralPlanPermissionDenied(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SET_REFERRAL_PLAN_PERMISSION_DENIED.String() && e.Code == 500
+}
+
+func ErrorSetReferralPlanPermissionDenied(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SET_REFERRAL_PLAN_PERMISSION_DENIED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCreateUserReferralCodeFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREATE_USER_REFERRAL_CODE_FAILED.String() && e.Code == 500
+}
+
+func ErrorCreateUserReferralCodeFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREATE_USER_REFERRAL_CODE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsGetUserReferralConfigFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_USER_REFERRAL_CONFIG_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetUserReferralConfigFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_USER_REFERRAL_CONFIG_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsProcessUserRegistrationWithReferralCodeFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROCESS_USER_REGISTRATION_WITH_REFERRAL_CODE_FAILED.String() && e.Code == 500
+}
+
+func ErrorProcessUserRegistrationWithReferralCodeFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROCESS_USER_REGISTRATION_WITH_REFERRAL_CODE_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsProcessFlatFeeCommissionFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROCESS_FLAT_FEE_COMMISSION_FAILED.String() && e.Code == 500
+}
+
+func ErrorProcessFlatFeeCommissionFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROCESS_FLAT_FEE_COMMISSION_FAILED.String(), fmt.Sprintf(format, args...))
+}

@@ -562,6 +562,39 @@ func (m *CreditRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for InitiatorUserId
+
+	// no validation rules for OperatorReportingCurrency
+
+	if all {
+		switch v := interface{}(m.GetInitiatorOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreditRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreditRequestValidationError{
+					field:  "InitiatorOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetInitiatorOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreditRequestValidationError{
+				field:  "InitiatorOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if m.ExternalTransactionId != nil {
 		// no validation rules for ExternalTransactionId
 	}
@@ -778,7 +811,7 @@ func (m *DebitRequest) validate(all bool) error {
 
 	// no validation rules for TransactionId
 
-	// no validation rules for Cash
+	// no validation rules for Amount
 
 	if all {
 		switch v := interface{}(m.GetOperatorContext()).(type) {
@@ -808,6 +841,10 @@ func (m *DebitRequest) validate(all bool) error {
 			}
 		}
 	}
+
+	// no validation rules for InitiatorUserId
+
+	// no validation rules for Comment
 
 	if len(errors) > 0 {
 		return DebitRequestMultiError(errors)
@@ -1139,6 +1176,142 @@ var _ interface {
 	ErrorName() string
 } = GameDebitRequestValidationError{}
 
+// Validate checks the field values on AffectedCredit with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *AffectedCredit) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AffectedCredit with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in AffectedCreditMultiError,
+// or nil if none found.
+func (m *AffectedCredit) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AffectedCredit) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for CreditId
+
+	// no validation rules for SettlementCurrency
+
+	// no validation rules for Amount
+
+	// no validation rules for AmountSettlementCurrency
+
+	// no validation rules for AmountUsd
+
+	// no validation rules for AmountReportingCurrency
+
+	// no validation rules for CashAmount
+
+	// no validation rules for CashAmountSettlementCurrency
+
+	// no validation rules for CashAmountUsd
+
+	// no validation rules for CashAmountReportingCurrency
+
+	// no validation rules for OperatorBonusAmount
+
+	// no validation rules for OperatorBonusAmountSettlementCurrency
+
+	// no validation rules for OperatorBonusAmountUsd
+
+	// no validation rules for OperatorBonusAmountReportingCurrency
+
+	// no validation rules for ProviderBonusAmount
+
+	// no validation rules for ProviderBonusAmountSettlementCurrency
+
+	// no validation rules for ProviderBonusAmountUsd
+
+	// no validation rules for ProviderBonusAmountReportingCurrency
+
+	if len(errors) > 0 {
+		return AffectedCreditMultiError(errors)
+	}
+
+	return nil
+}
+
+// AffectedCreditMultiError is an error wrapping multiple validation errors
+// returned by AffectedCredit.ValidateAll() if the designated constraints
+// aren't met.
+type AffectedCreditMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AffectedCreditMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AffectedCreditMultiError) AllErrors() []error { return m }
+
+// AffectedCreditValidationError is the validation error returned by
+// AffectedCredit.Validate if the designated constraints aren't met.
+type AffectedCreditValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AffectedCreditValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AffectedCreditValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AffectedCreditValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AffectedCreditValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AffectedCreditValidationError) ErrorName() string { return "AffectedCreditValidationError" }
+
+// Error satisfies the builtin error interface
+func (e AffectedCreditValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAffectedCredit.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AffectedCreditValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AffectedCreditValidationError{}
+
 // Validate checks the field values on GameDebitResponse with the rules defined
 // in the proto definition for this message. If any rules are violated, the
 // first error encountered is returned, or nil if there are no violations.
@@ -1188,6 +1361,40 @@ func (m *GameDebitResponse) validate(all bool) error {
 	// no validation rules for OperatorBonusAmountReportingCurrency
 
 	// no validation rules for ProviderBonusAmountReportingCurrency
+
+	for idx, item := range m.GetAffectedCredits() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GameDebitResponseValidationError{
+						field:  fmt.Sprintf("AffectedCredits[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GameDebitResponseValidationError{
+						field:  fmt.Sprintf("AffectedCredits[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GameDebitResponseValidationError{
+					field:  fmt.Sprintf("AffectedCredits[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
 
 	if len(errors) > 0 {
 		return GameDebitResponseMultiError(errors)
@@ -1338,6 +1545,12 @@ func (m *GameCreditRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for OriginalTransactionTurnoverAmount
+
+	if m.OriginalTransactionType != nil {
+		// no validation rules for OriginalTransactionType
+	}
+
 	if len(errors) > 0 {
 		return GameCreditRequestMultiError(errors)
 	}
@@ -1467,6 +1680,40 @@ func (m *GameCreditResponse) validate(all bool) error {
 	// no validation rules for OperatorBonusAmountReportingCurrency
 
 	// no validation rules for ProviderBonusAmountReportingCurrency
+
+	for idx, item := range m.GetAffectedCredits() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GameCreditResponseValidationError{
+						field:  fmt.Sprintf("AffectedCredits[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GameCreditResponseValidationError{
+						field:  fmt.Sprintf("AffectedCredits[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GameCreditResponseValidationError{
+					field:  fmt.Sprintf("AffectedCredits[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
 
 	if len(errors) > 0 {
 		return GameCreditResponseMultiError(errors)
@@ -2367,6 +2614,40 @@ func (m *RollbackResponse) validate(all bool) error {
 	// no validation rules for OperatorBonusAmountReportingCurrency
 
 	// no validation rules for ProviderBonusAmountReportingCurrency
+
+	for idx, item := range m.GetAffectedCredits() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, RollbackResponseValidationError{
+						field:  fmt.Sprintf("AffectedCredits[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, RollbackResponseValidationError{
+						field:  fmt.Sprintf("AffectedCredits[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return RollbackResponseValidationError{
+					field:  fmt.Sprintf("AffectedCredits[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
 
 	if len(errors) > 0 {
 		return RollbackResponseMultiError(errors)
@@ -19115,6 +19396,343 @@ var _ interface {
 	ErrorName() string
 } = ExportManualJournalEntriesResponseValidationError{}
 
+// Validate checks the field values on ListTimeRangeDepositCreditsRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ListTimeRangeDepositCreditsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListTimeRangeDepositCreditsRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListTimeRangeDepositCreditsRequestMultiError, or nil if none found.
+func (m *ListTimeRangeDepositCreditsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListTimeRangeDepositCreditsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetStartTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListTimeRangeDepositCreditsRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListTimeRangeDepositCreditsRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListTimeRangeDepositCreditsRequestValidationError{
+				field:  "StartTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetEndTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListTimeRangeDepositCreditsRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListTimeRangeDepositCreditsRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListTimeRangeDepositCreditsRequestValidationError{
+				field:  "EndTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for UserId
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListTimeRangeDepositCreditsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListTimeRangeDepositCreditsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListTimeRangeDepositCreditsRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.Currency != nil {
+		// no validation rules for Currency
+	}
+
+	if len(errors) > 0 {
+		return ListTimeRangeDepositCreditsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListTimeRangeDepositCreditsRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// ListTimeRangeDepositCreditsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListTimeRangeDepositCreditsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListTimeRangeDepositCreditsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListTimeRangeDepositCreditsRequestMultiError) AllErrors() []error { return m }
+
+// ListTimeRangeDepositCreditsRequestValidationError is the validation error
+// returned by ListTimeRangeDepositCreditsRequest.Validate if the designated
+// constraints aren't met.
+type ListTimeRangeDepositCreditsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListTimeRangeDepositCreditsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListTimeRangeDepositCreditsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListTimeRangeDepositCreditsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListTimeRangeDepositCreditsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListTimeRangeDepositCreditsRequestValidationError) ErrorName() string {
+	return "ListTimeRangeDepositCreditsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListTimeRangeDepositCreditsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListTimeRangeDepositCreditsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListTimeRangeDepositCreditsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListTimeRangeDepositCreditsRequestValidationError{}
+
+// Validate checks the field values on ListTimeRangeDepositCreditsResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ListTimeRangeDepositCreditsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListTimeRangeDepositCreditsResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListTimeRangeDepositCreditsResponseMultiError, or nil if none found.
+func (m *ListTimeRangeDepositCreditsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListTimeRangeDepositCreditsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetCredits() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListTimeRangeDepositCreditsResponseValidationError{
+						field:  fmt.Sprintf("Credits[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListTimeRangeDepositCreditsResponseValidationError{
+						field:  fmt.Sprintf("Credits[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListTimeRangeDepositCreditsResponseValidationError{
+					field:  fmt.Sprintf("Credits[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ListTimeRangeDepositCreditsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListTimeRangeDepositCreditsResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// ListTimeRangeDepositCreditsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListTimeRangeDepositCreditsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListTimeRangeDepositCreditsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListTimeRangeDepositCreditsResponseMultiError) AllErrors() []error { return m }
+
+// ListTimeRangeDepositCreditsResponseValidationError is the validation error
+// returned by ListTimeRangeDepositCreditsResponse.Validate if the designated
+// constraints aren't met.
+type ListTimeRangeDepositCreditsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListTimeRangeDepositCreditsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListTimeRangeDepositCreditsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListTimeRangeDepositCreditsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListTimeRangeDepositCreditsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListTimeRangeDepositCreditsResponseValidationError) ErrorName() string {
+	return "ListTimeRangeDepositCreditsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListTimeRangeDepositCreditsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListTimeRangeDepositCreditsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListTimeRangeDepositCreditsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListTimeRangeDepositCreditsResponseValidationError{}
+
 // Validate checks the field values on GetUserBalancesResponse_Balance with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -20854,7 +21472,7 @@ func (m *RewardSequence_TierConfig) validate(all bool) error {
 
 	// no validation rules for MaxRewardAmount
 
-	// no validation rules for MaxWithdrawalAmount
+	// no validation rules for MaxWithdrawalMultiplier
 
 	if len(errors) > 0 {
 		return RewardSequence_TierConfigMultiError(errors)
@@ -21890,6 +22508,10 @@ func (m *ListManualJournalEntriesResponse_ManualJournalEntry) validate(all bool)
 
 	// no validation rules for AfterBalanceReportingCurrency
 
+	// no validation rules for InitiatorRealOperatorName
+
+	// no validation rules for TurnoverThreshold
+
 	if len(errors) > 0 {
 		return ListManualJournalEntriesResponse_ManualJournalEntryMultiError(errors)
 	}
@@ -21978,3 +22600,131 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListManualJournalEntriesResponse_ManualJournalEntryValidationError{}
+
+// Validate checks the field values on
+// ListTimeRangeDepositCreditsResponse_Credit with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ListTimeRangeDepositCreditsResponse_Credit) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ListTimeRangeDepositCreditsResponse_Credit with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// ListTimeRangeDepositCreditsResponse_CreditMultiError, or nil if none found.
+func (m *ListTimeRangeDepositCreditsResponse_Credit) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListTimeRangeDepositCreditsResponse_Credit) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for CreditId
+
+	// no validation rules for Currency
+
+	// no validation rules for Cash
+
+	// no validation rules for CashUsd
+
+	// no validation rules for CashReportingCurrency
+
+	// no validation rules for OperatorBonus
+
+	// no validation rules for OperatorBonusUsd
+
+	// no validation rules for OperatorBonusReportingCurrency
+
+	// no validation rules for ProviderBonus
+
+	// no validation rules for ProviderBonusUsd
+
+	// no validation rules for ProviderBonusReportingCurrency
+
+	if len(errors) > 0 {
+		return ListTimeRangeDepositCreditsResponse_CreditMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListTimeRangeDepositCreditsResponse_CreditMultiError is an error wrapping
+// multiple validation errors returned by
+// ListTimeRangeDepositCreditsResponse_Credit.ValidateAll() if the designated
+// constraints aren't met.
+type ListTimeRangeDepositCreditsResponse_CreditMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListTimeRangeDepositCreditsResponse_CreditMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListTimeRangeDepositCreditsResponse_CreditMultiError) AllErrors() []error { return m }
+
+// ListTimeRangeDepositCreditsResponse_CreditValidationError is the validation
+// error returned by ListTimeRangeDepositCreditsResponse_Credit.Validate if
+// the designated constraints aren't met.
+type ListTimeRangeDepositCreditsResponse_CreditValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListTimeRangeDepositCreditsResponse_CreditValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListTimeRangeDepositCreditsResponse_CreditValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListTimeRangeDepositCreditsResponse_CreditValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListTimeRangeDepositCreditsResponse_CreditValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListTimeRangeDepositCreditsResponse_CreditValidationError) ErrorName() string {
+	return "ListTimeRangeDepositCreditsResponse_CreditValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListTimeRangeDepositCreditsResponse_CreditValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListTimeRangeDepositCreditsResponse_Credit.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListTimeRangeDepositCreditsResponse_CreditValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListTimeRangeDepositCreditsResponse_CreditValidationError{}

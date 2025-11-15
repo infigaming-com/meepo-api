@@ -30,6 +30,7 @@ const OperationBackofficeUserGetUserResponsibleGamblingConfig = "/api.backoffice
 const OperationBackofficeUserGetUserTags = "/api.backoffice.service.v1.BackofficeUser/GetUserTags"
 const OperationBackofficeUserListUserComments = "/api.backoffice.service.v1.BackofficeUser/ListUserComments"
 const OperationBackofficeUserListUsers = "/api.backoffice.service.v1.BackofficeUser/ListUsers"
+const OperationBackofficeUserPreLaunchCheck = "/api.backoffice.service.v1.BackofficeUser/PreLaunchCheck"
 const OperationBackofficeUserSendEmailVerificationCode = "/api.backoffice.service.v1.BackofficeUser/SendEmailVerificationCode"
 const OperationBackofficeUserSetOperatorTags = "/api.backoffice.service.v1.BackofficeUser/SetOperatorTags"
 const OperationBackofficeUserSetOperatorTagsConfig = "/api.backoffice.service.v1.BackofficeUser/SetOperatorTagsConfig"
@@ -52,6 +53,7 @@ type BackofficeUserHTTPServer interface {
 	GetUserTags(context.Context, *GetUserTagsRequest) (*GetUserTagsResponse, error)
 	ListUserComments(context.Context, *ListUserCommentsRequest) (*ListUserCommentsResponse, error)
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
+	PreLaunchCheck(context.Context, *v1.PreLaunchCheckRequest) (*v1.PreLaunchCheckResponse, error)
 	SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error)
 	// SetOperatorTags SetOperatorTags sets or updates the tags for an operator.
 	SetOperatorTags(context.Context, *SetOperatorTagsRequest) (*SetOperatorTagsResponse, error)
@@ -84,6 +86,7 @@ func RegisterBackofficeUserHTTPServer(s *http.Server, srv BackofficeUserHTTPServ
 	r.POST("/v1/backoffice/user/responsible-gambling/config/get", _BackofficeUser_GetUserResponsibleGamblingConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/identity/set", _BackofficeUser_UserIdentityAudit0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/user/identity/list/get", _BackofficeUser_UserIdentityList0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/user/operator/prelaunch/check", _BackofficeUser_PreLaunchCheck0_HTTP_Handler(srv))
 }
 
 func _BackofficeUser_ListUsers0_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
@@ -460,6 +463,28 @@ func _BackofficeUser_UserIdentityList0_HTTP_Handler(srv BackofficeUserHTTPServer
 	}
 }
 
+func _BackofficeUser_PreLaunchCheck0_HTTP_Handler(srv BackofficeUserHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in v1.PreLaunchCheckRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeUserPreLaunchCheck)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.PreLaunchCheck(ctx, req.(*v1.PreLaunchCheckRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.PreLaunchCheckResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeUserHTTPClient interface {
 	AddUserComment(ctx context.Context, req *AddUserCommentRequest, opts ...http.CallOption) (rsp *AddUserCommentResponse, err error)
 	DeleteUserResponsibleGamblingConfig(ctx context.Context, req *DeleteUserResponsibleGamblingConfigRequest, opts ...http.CallOption) (rsp *v1.DeleteResponsibleGamblingConfigResponse, err error)
@@ -471,6 +496,7 @@ type BackofficeUserHTTPClient interface {
 	GetUserTags(ctx context.Context, req *GetUserTagsRequest, opts ...http.CallOption) (rsp *GetUserTagsResponse, err error)
 	ListUserComments(ctx context.Context, req *ListUserCommentsRequest, opts ...http.CallOption) (rsp *ListUserCommentsResponse, err error)
 	ListUsers(ctx context.Context, req *ListUsersRequest, opts ...http.CallOption) (rsp *ListUsersResponse, err error)
+	PreLaunchCheck(ctx context.Context, req *v1.PreLaunchCheckRequest, opts ...http.CallOption) (rsp *v1.PreLaunchCheckResponse, err error)
 	SendEmailVerificationCode(ctx context.Context, req *SendEmailVerificationCodeRequest, opts ...http.CallOption) (rsp *SendEmailVerificationCodeResponse, err error)
 	SetOperatorTags(ctx context.Context, req *SetOperatorTagsRequest, opts ...http.CallOption) (rsp *SetOperatorTagsResponse, err error)
 	SetOperatorTagsConfig(ctx context.Context, req *SetOperatorTagsConfigRequest, opts ...http.CallOption) (rsp *SetOperatorTagsConfigResponse, err error)
@@ -610,6 +636,19 @@ func (c *BackofficeUserHTTPClientImpl) ListUsers(ctx context.Context, in *ListUs
 	pattern := "/v1/backoffice/user/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeUserListUsers))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeUserHTTPClientImpl) PreLaunchCheck(ctx context.Context, in *v1.PreLaunchCheckRequest, opts ...http.CallOption) (*v1.PreLaunchCheckResponse, error) {
+	var out v1.PreLaunchCheckResponse
+	pattern := "/v1/backoffice/user/operator/prelaunch/check"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeUserPreLaunchCheck))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

@@ -48,10 +48,11 @@ message GetCommissionPlanResponse {
 
 message ListCommissionPlansRequest {
     api.common.OperatorContext operator_context = 1;
-    repeated string countries = 2; // not supported yet
-    optional int32 page = 3;
-    optional int32 page_size = 4;
-    optional string status = 5;
+    repeated string countries = 2;
+    optional int64 affiliate_id = 3;
+    optional int32 page = 4;
+    optional int32 page_size = 5;
+    optional string status = 6;
 }
 
 message ListCommissionPlansResponse {
@@ -128,7 +129,7 @@ message CountryCommissionGroup {
 }
 
 message ProgressiveCommission {
-    string metric = 1; // ftd_amount/monthly_ftd_count/total_deposits/deposits_amount
+    string metric = 1; // ftd_amount/ftd_count_in_period/total_deposits/deposits_amount
     repeated ProgressiveCommissionRange ranges = 2;
 }
 
@@ -139,7 +140,7 @@ message ProgressiveCommissionRange {
 }
 
 message ProgressiveByCountriesCommission {
-    string metric = 1; // ftd_amount/monthly_ftd_count/total_deposits/deposits_amount
+    string metric = 1; // ftd_amount/ftd_count_in_period/total_deposits/deposits_amount
     repeated CountryProgressiveGroup country_groups = 2;
     repeated ProgressiveCommissionRange other_countries_ranges = 3;
 }
@@ -219,7 +220,7 @@ message CPLConfig {
     optional FlatByCountriesCommission flat_by_countries = 4;
     optional ProgressiveCommission progressive = 5;
     optional ProgressiveByCountriesCommission progressive_by_countries = 6;
-    optional Qualification qualification = 7;
+    // optional Qualification qualification = 7;
     optional AdvancedOptions advanced_options = 8;
 }
 

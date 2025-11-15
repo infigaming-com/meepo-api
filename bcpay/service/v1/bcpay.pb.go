@@ -1879,7 +1879,8 @@ type AuditTransactionRequest struct {
 	TransactionId   int64                   `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	Audit           string                  `protobuf:"bytes,2,opt,name=audit,proto3" json:"audit,omitempty"`
 	UserId          int64                   `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	OperatorName    string                  `protobuf:"bytes,4,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,5,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1933,6 +1934,13 @@ func (x *AuditTransactionRequest) GetUserId() int64 {
 		return x.UserId
 	}
 	return 0
+}
+
+func (x *AuditTransactionRequest) GetOperatorName() string {
+	if x != nil {
+		return x.OperatorName
+	}
+	return ""
 }
 
 func (x *AuditTransactionRequest) GetOperatorContext() *common.OperatorContext {
@@ -2274,12 +2282,13 @@ const file_bcpay_service_v1_bcpay_proto_rawDesc = "" +
 	"\ftotal_failed\x18\x06 \x01(\x05R\vtotalFailed\x12#\n" +
 	"\rtotal_pending\x18\a \x01(\x05R\ftotalPending\x12\x1f\n" +
 	"\vtotal_count\x18\b \x01(\x05R\n" +
-	"totalCount\"\xb7\x01\n" +
+	"totalCount\"\xdc\x01\n" +
 	"\x17AuditTransactionRequest\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x14\n" +
 	"\x05audit\x18\x02 \x01(\tR\x05audit\x12\x17\n" +
-	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12F\n" +
-	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x1a\n" +
+	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12#\n" +
+	"\roperator_name\x18\x04 \x01(\tR\foperatorName\x12F\n" +
+	"\x10operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x1a\n" +
 	"\x18AuditTransactionResponse\"X\n" +
 	"\x1bAddNoteToTransactionRequest\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x12\n" +

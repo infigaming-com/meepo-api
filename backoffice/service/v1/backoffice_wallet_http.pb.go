@@ -77,7 +77,7 @@ type BackofficeWalletHTTPServer interface {
 	// GetGamificationCurrencyConfig GetGamificationCurrencyConfig returns the currency config and the deduction order config based on currency and operator context
 	GetGamificationCurrencyConfig(context.Context, *GetGamificationCurrencyConfigRequest) (*v1.GetGamificationCurrencyConfigResponse, error)
 	// GetOperatorBalance GetOperatorBalance gets the balances of an operator
-	GetOperatorBalance(context.Context, *v1.GetOperatorBalanceRequest) (*v1.GetOperatorBalanceResponse, error)
+	GetOperatorBalance(context.Context, *GetOperatorBalanceRequest) (*v1.GetOperatorBalanceResponse, error)
 	GetWalletCreditTransactions(context.Context, *GetWalletCreditTransactionsRequest) (*GetWalletCreditTransactionsResponse, error)
 	GetWalletCredits(context.Context, *GetWalletCreditsRequest) (*GetWalletCreditsResponse, error)
 	GetWallets(context.Context, *GetWalletsRequest) (*v1.GetWalletsResponse, error)
@@ -98,9 +98,9 @@ type BackofficeWalletHTTPServer interface {
 	// ListWalletResponsibleGamblingConfigs ListWalletResponsibleGamblingConfigs lists gambling configs for a user with all currencies
 	ListWalletResponsibleGamblingConfigs(context.Context, *ListWalletResponsibleGamblingConfigsRequest) (*v1.ListResponsibleGamblingConfigsResponse, error)
 	// ManualCredit ManualCredit
-	ManualCredit(context.Context, *CreditRequest) (*v1.CreditResponse, error)
+	ManualCredit(context.Context, *ManualCreditRequest) (*v1.CreditResponse, error)
 	// ManualDebit ManualDebit
-	ManualDebit(context.Context, *DebitRequest) (*v1.DebitResponse, error)
+	ManualDebit(context.Context, *ManualDebitRequest) (*v1.DebitResponse, error)
 	// OperatorBalanceFreeze OperatorFreeze freezes cash of an operator
 	OperatorBalanceFreeze(context.Context, *OperatorBalanceFreezeRequest) (*OperatorBalanceFreezeResponse, error)
 	// OperatorBalanceRollback OperatorRollback rolls back frozen cash of an operator
@@ -541,7 +541,7 @@ func _BackofficeWallet_UpdateOperatorBalance0_HTTP_Handler(srv BackofficeWalletH
 
 func _BackofficeWallet_GetOperatorBalance0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in v1.GetOperatorBalanceRequest
+		var in GetOperatorBalanceRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -550,7 +550,7 @@ func _BackofficeWallet_GetOperatorBalance0_HTTP_Handler(srv BackofficeWalletHTTP
 		}
 		http.SetOperation(ctx, OperationBackofficeWalletGetOperatorBalance)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetOperatorBalance(ctx, req.(*v1.GetOperatorBalanceRequest))
+			return srv.GetOperatorBalance(ctx, req.(*GetOperatorBalanceRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -871,7 +871,7 @@ func _BackofficeWallet_ExportFICAThresholdTransactions0_HTTP_Handler(srv Backoff
 
 func _BackofficeWallet_ManualCredit0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in CreditRequest
+		var in ManualCreditRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -880,7 +880,7 @@ func _BackofficeWallet_ManualCredit0_HTTP_Handler(srv BackofficeWalletHTTPServer
 		}
 		http.SetOperation(ctx, OperationBackofficeWalletManualCredit)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ManualCredit(ctx, req.(*CreditRequest))
+			return srv.ManualCredit(ctx, req.(*ManualCreditRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -893,7 +893,7 @@ func _BackofficeWallet_ManualCredit0_HTTP_Handler(srv BackofficeWalletHTTPServer
 
 func _BackofficeWallet_ManualDebit0_HTTP_Handler(srv BackofficeWalletHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in DebitRequest
+		var in ManualDebitRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -902,7 +902,7 @@ func _BackofficeWallet_ManualDebit0_HTTP_Handler(srv BackofficeWalletHTTPServer)
 		}
 		http.SetOperation(ctx, OperationBackofficeWalletManualDebit)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ManualDebit(ctx, req.(*DebitRequest))
+			return srv.ManualDebit(ctx, req.(*ManualDebitRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -968,7 +968,7 @@ type BackofficeWalletHTTPClient interface {
 	GetExchangeRates(ctx context.Context, req *GetExchangeRatesRequest, opts ...http.CallOption) (rsp *GetExchangeRatesResponse, err error)
 	GetFICAThresholdConfig(ctx context.Context, req *GetFICAThresholdConfigRequest, opts ...http.CallOption) (rsp *v1.GetFICAThresholdConfigResponse, err error)
 	GetGamificationCurrencyConfig(ctx context.Context, req *GetGamificationCurrencyConfigRequest, opts ...http.CallOption) (rsp *v1.GetGamificationCurrencyConfigResponse, err error)
-	GetOperatorBalance(ctx context.Context, req *v1.GetOperatorBalanceRequest, opts ...http.CallOption) (rsp *v1.GetOperatorBalanceResponse, err error)
+	GetOperatorBalance(ctx context.Context, req *GetOperatorBalanceRequest, opts ...http.CallOption) (rsp *v1.GetOperatorBalanceResponse, err error)
 	GetWalletCreditTransactions(ctx context.Context, req *GetWalletCreditTransactionsRequest, opts ...http.CallOption) (rsp *GetWalletCreditTransactionsResponse, err error)
 	GetWalletCredits(ctx context.Context, req *GetWalletCreditsRequest, opts ...http.CallOption) (rsp *GetWalletCreditsResponse, err error)
 	GetWallets(ctx context.Context, req *GetWalletsRequest, opts ...http.CallOption) (rsp *v1.GetWalletsResponse, err error)
@@ -980,8 +980,8 @@ type BackofficeWalletHTTPClient interface {
 	ListWalletBalanceTransactions(ctx context.Context, req *ListWalletBalanceTransactionsRequest, opts ...http.CallOption) (rsp *ListWalletBalanceTransactionsResponse, err error)
 	ListWalletCurrencies(ctx context.Context, req *ListWalletCurrenciesRequest, opts ...http.CallOption) (rsp *v1.ListCurrenciesResponse, err error)
 	ListWalletResponsibleGamblingConfigs(ctx context.Context, req *ListWalletResponsibleGamblingConfigsRequest, opts ...http.CallOption) (rsp *v1.ListResponsibleGamblingConfigsResponse, err error)
-	ManualCredit(ctx context.Context, req *CreditRequest, opts ...http.CallOption) (rsp *v1.CreditResponse, err error)
-	ManualDebit(ctx context.Context, req *DebitRequest, opts ...http.CallOption) (rsp *v1.DebitResponse, err error)
+	ManualCredit(ctx context.Context, req *ManualCreditRequest, opts ...http.CallOption) (rsp *v1.CreditResponse, err error)
+	ManualDebit(ctx context.Context, req *ManualDebitRequest, opts ...http.CallOption) (rsp *v1.DebitResponse, err error)
 	OperatorBalanceFreeze(ctx context.Context, req *OperatorBalanceFreezeRequest, opts ...http.CallOption) (rsp *OperatorBalanceFreezeResponse, err error)
 	OperatorBalanceRollback(ctx context.Context, req *OperatorBalanceRollbackRequest, opts ...http.CallOption) (rsp *OperatorBalanceRollbackResponse, err error)
 	OperatorBalanceSettle(ctx context.Context, req *OperatorBalanceSettleRequest, opts ...http.CallOption) (rsp *OperatorBalanceSettleResponse, err error)
@@ -1134,7 +1134,7 @@ func (c *BackofficeWalletHTTPClientImpl) GetGamificationCurrencyConfig(ctx conte
 	return &out, nil
 }
 
-func (c *BackofficeWalletHTTPClientImpl) GetOperatorBalance(ctx context.Context, in *v1.GetOperatorBalanceRequest, opts ...http.CallOption) (*v1.GetOperatorBalanceResponse, error) {
+func (c *BackofficeWalletHTTPClientImpl) GetOperatorBalance(ctx context.Context, in *GetOperatorBalanceRequest, opts ...http.CallOption) (*v1.GetOperatorBalanceResponse, error) {
 	var out v1.GetOperatorBalanceResponse
 	pattern := "/v1/backoffice/wallet/operator/balance/get"
 	path := binding.EncodeURL(pattern, in, false)
@@ -1290,7 +1290,7 @@ func (c *BackofficeWalletHTTPClientImpl) ListWalletResponsibleGamblingConfigs(ct
 	return &out, nil
 }
 
-func (c *BackofficeWalletHTTPClientImpl) ManualCredit(ctx context.Context, in *CreditRequest, opts ...http.CallOption) (*v1.CreditResponse, error) {
+func (c *BackofficeWalletHTTPClientImpl) ManualCredit(ctx context.Context, in *ManualCreditRequest, opts ...http.CallOption) (*v1.CreditResponse, error) {
 	var out v1.CreditResponse
 	pattern := "/v1/backoffice/wallet/manual/credit"
 	path := binding.EncodeURL(pattern, in, false)
@@ -1303,7 +1303,7 @@ func (c *BackofficeWalletHTTPClientImpl) ManualCredit(ctx context.Context, in *C
 	return &out, nil
 }
 
-func (c *BackofficeWalletHTTPClientImpl) ManualDebit(ctx context.Context, in *DebitRequest, opts ...http.CallOption) (*v1.DebitResponse, error) {
+func (c *BackofficeWalletHTTPClientImpl) ManualDebit(ctx context.Context, in *ManualDebitRequest, opts ...http.CallOption) (*v1.DebitResponse, error) {
 	var out v1.DebitResponse
 	pattern := "/v1/backoffice/wallet/manual/debit"
 	path := binding.EncodeURL(pattern, in, false)

@@ -37,6 +37,7 @@ const (
 	BackofficeUser_GetUserResponsibleGamblingConfig_FullMethodName    = "/api.backoffice.service.v1.BackofficeUser/GetUserResponsibleGamblingConfig"
 	BackofficeUser_UserIdentityAudit_FullMethodName                   = "/api.backoffice.service.v1.BackofficeUser/UserIdentityAudit"
 	BackofficeUser_UserIdentityList_FullMethodName                    = "/api.backoffice.service.v1.BackofficeUser/UserIdentityList"
+	BackofficeUser_PreLaunchCheck_FullMethodName                      = "/api.backoffice.service.v1.BackofficeUser/PreLaunchCheck"
 )
 
 // BackofficeUserClient is the client API for BackofficeUser service.
@@ -67,6 +68,7 @@ type BackofficeUserClient interface {
 	GetUserResponsibleGamblingConfig(ctx context.Context, in *GetUserResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*v1.GetResponsibleGamblingConfigResponse, error)
 	UserIdentityAudit(ctx context.Context, in *UserIdentityAuditRequest, opts ...grpc.CallOption) (*v1.UserIdentityAuditResponse, error)
 	UserIdentityList(ctx context.Context, in *UserIdentityListRequest, opts ...grpc.CallOption) (*v1.UserIdentityListResponse, error)
+	PreLaunchCheck(ctx context.Context, in *v1.PreLaunchCheckRequest, opts ...grpc.CallOption) (*v1.PreLaunchCheckResponse, error)
 }
 
 type backofficeUserClient struct {
@@ -247,6 +249,16 @@ func (c *backofficeUserClient) UserIdentityList(ctx context.Context, in *UserIde
 	return out, nil
 }
 
+func (c *backofficeUserClient) PreLaunchCheck(ctx context.Context, in *v1.PreLaunchCheckRequest, opts ...grpc.CallOption) (*v1.PreLaunchCheckResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.PreLaunchCheckResponse)
+	err := c.cc.Invoke(ctx, BackofficeUser_PreLaunchCheck_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeUserServer is the server API for BackofficeUser service.
 // All implementations must embed UnimplementedBackofficeUserServer
 // for forward compatibility.
@@ -275,6 +287,7 @@ type BackofficeUserServer interface {
 	GetUserResponsibleGamblingConfig(context.Context, *GetUserResponsibleGamblingConfigRequest) (*v1.GetResponsibleGamblingConfigResponse, error)
 	UserIdentityAudit(context.Context, *UserIdentityAuditRequest) (*v1.UserIdentityAuditResponse, error)
 	UserIdentityList(context.Context, *UserIdentityListRequest) (*v1.UserIdentityListResponse, error)
+	PreLaunchCheck(context.Context, *v1.PreLaunchCheckRequest) (*v1.PreLaunchCheckResponse, error)
 	mustEmbedUnimplementedBackofficeUserServer()
 }
 
@@ -335,6 +348,9 @@ func (UnimplementedBackofficeUserServer) UserIdentityAudit(context.Context, *Use
 }
 func (UnimplementedBackofficeUserServer) UserIdentityList(context.Context, *UserIdentityListRequest) (*v1.UserIdentityListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserIdentityList not implemented")
+}
+func (UnimplementedBackofficeUserServer) PreLaunchCheck(context.Context, *v1.PreLaunchCheckRequest) (*v1.PreLaunchCheckResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PreLaunchCheck not implemented")
 }
 func (UnimplementedBackofficeUserServer) mustEmbedUnimplementedBackofficeUserServer() {}
 func (UnimplementedBackofficeUserServer) testEmbeddedByValue()                        {}
@@ -663,6 +679,24 @@ func _BackofficeUser_UserIdentityList_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeUser_PreLaunchCheck_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.PreLaunchCheckRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeUserServer).PreLaunchCheck(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeUser_PreLaunchCheck_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeUserServer).PreLaunchCheck(ctx, req.(*v1.PreLaunchCheckRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeUser_ServiceDesc is the grpc.ServiceDesc for BackofficeUser service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -737,6 +771,10 @@ var BackofficeUser_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UserIdentityList",
 			Handler:    _BackofficeUser_UserIdentityList_Handler,
+		},
+		{
+			MethodName: "PreLaunchCheck",
+			Handler:    _BackofficeUser_PreLaunchCheck_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

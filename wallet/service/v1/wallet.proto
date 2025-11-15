@@ -214,6 +214,8 @@ service Wallet {
 	rpc ListManualJournalEntries(ListManualJournalEntriesRequest) returns (ListManualJournalEntriesResponse) {}
 
 	rpc ExportManualJournalEntries(ExportManualJournalEntriesRequest) returns (ExportManualJournalEntriesResponse) {}
+
+	rpc ListTimeRangeDepositCredits(ListTimeRangeDepositCreditsRequest) returns (ListTimeRangeDepositCreditsResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -278,6 +280,9 @@ message CreditRequest {
 	string comment = 9;
 	optional int64 external_transaction_id = 10;
 	api.common.OperatorContext operator_context = 11;
+	int64 initiator_user_id = 12;
+	string operator_reporting_currency =13;
+	api.common.OperatorContext initiator_operator_context = 14;
 }
 
 message CreditResponse {
@@ -292,8 +297,10 @@ message DebitRequest {
 	//   - "payment_withdraw"   - Payment withdraw transaction
 	string transaction_type = 4;
 	int64 transaction_id = 5;
-	string cash = 6;
+	string amount = 6;
 	api.common.OperatorContext operator_context = 7;
+	int64 initiator_user_id = 8;
+	string comment = 9;
 }
 
 message DebitResponse {
@@ -316,6 +323,27 @@ message GameDebitRequest {
 	optional bool allow_overdraft = 11;
 }
 
+message AffectedCredit {
+	int64 credit_id = 1;
+	string settlement_currency = 2; // currency of the credit
+	string amount = 3; // currency amount of the game transaction
+	string amount_settlement_currency = 4; // settlement currency amount of the wallet transaction
+	string amount_usd = 5;
+	string amount_reporting_currency = 6;
+	string cash_amount = 7; 
+	string cash_amount_settlement_currency = 8;
+	string cash_amount_usd = 9;
+	string cash_amount_reporting_currency = 10;
+	string operator_bonus_amount = 11;
+	string operator_bonus_amount_settlement_currency = 12;
+	string operator_bonus_amount_usd = 13;
+	string operator_bonus_amount_reporting_currency = 14;
+	string provider_bonus_amount = 15;
+	string provider_bonus_amount_settlement_currency = 16;
+	string provider_bonus_amount_usd = 17;
+	string provider_bonus_amount_reporting_currency = 18;
+}
+
 message GameDebitResponse {
 	int64 transaction_id = 1;
 	string exchange_rate = 2;
@@ -331,6 +359,7 @@ message GameDebitResponse {
 	string cash_amount_reporting_currency = 12;
 	string operator_bonus_amount_reporting_currency = 13;
 	string provider_bonus_amount_reporting_currency = 14;
+	repeated AffectedCredit affected_credits = 15;
 }
 
 message GameCreditRequest {
@@ -344,6 +373,8 @@ message GameCreditRequest {
 	int64 original_transaction_id = 8;
 	string amount = 9;
 	api.common.OperatorContext operator_context = 10;
+	optional string original_transaction_type = 11;
+	string original_transaction_turnover_amount = 12;
 }
 
 message GameCreditResponse {
@@ -361,6 +392,7 @@ message GameCreditResponse {
 	string cash_amount_reporting_currency = 12;
 	string operator_bonus_amount_reporting_currency = 13;
 	string provider_bonus_amount_reporting_currency = 14;
+	repeated AffectedCredit affected_credits = 15;
 }
 
 message ChannelInfo {
@@ -422,6 +454,7 @@ message RollbackResponse {
 	string cash_amount_reporting_currency = 11;
 	string operator_bonus_amount_reporting_currency = 12;
 	string provider_bonus_amount_reporting_currency = 13;
+	repeated AffectedCredit affected_credits = 14;
 }
 
 message GetWalletsRequest {
@@ -1087,7 +1120,7 @@ message RewardSequence {
 		string max_deposit_amount = 2;
 		string reward_percentage = 3;
 		string max_reward_amount = 4;
-		string max_withdrawal_amount = 5; // only available for bonus reward
+		string max_withdrawal_multiplier = 5; // only available for bonus reward
 	}
 	int32 serial_number = 1;
 	string name = 2;
@@ -1530,6 +1563,8 @@ message ListManualJournalEntriesResponse {
 		string after_balance = 15; // for this currency
 		string after_balance_usd = 16;
 		string after_balance_reporting_currency = 17;
+		string initiator_real_operator_name = 18;
+		string turnover_threshold = 19;
 	}
 	repeated ManualJournalEntry manual_journal_entries = 1;
 	int32 total = 2;
@@ -1551,4 +1586,29 @@ message ExportManualJournalEntriesRequest {
 
 message ExportManualJournalEntriesResponse {
 	int64 task_id = 1;
+}
+
+message ListTimeRangeDepositCreditsRequest {
+	google.protobuf.Timestamp start_time = 1;
+	google.protobuf.Timestamp end_time = 2;
+	optional string currency = 3;
+	int64 user_id = 4;
+	api.common.OperatorContext operator_context = 5;
+}
+
+message ListTimeRangeDepositCreditsResponse {
+	message Credit {
+		int64 credit_id = 1;
+		string currency = 2;
+		string cash = 3;
+		string cash_usd = 4;
+		string cash_reporting_currency = 5;
+		string operator_bonus = 6;
+		string operator_bonus_usd = 7;
+		string operator_bonus_reporting_currency = 8;
+		string provider_bonus = 9;
+		string provider_bonus_usd = 10;
+		string provider_bonus_reporting_currency = 11;
+	}
+	repeated Credit credits = 1;
 }

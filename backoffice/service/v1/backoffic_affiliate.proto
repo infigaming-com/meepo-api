@@ -5,11 +5,14 @@ package api.backoffice.service.v1;
 import "google/api/annotations.proto";
 import "affiliate/service/v1/commission_plan.proto";
 import "affiliate/service/v1/affiliate.proto";
+import "affiliate/service/v1/referral_plan.proto";
 import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
+
+import "google/protobuf/timestamp.proto";
 
 service BackofficeAffiliate {
 	
@@ -66,12 +69,6 @@ service BackofficeAffiliate {
 			body: "*"
 		};
 	}
-	rpc GetAffiliate(GetAffiliateRequest) returns (api.affiliate.service.v1.GetAffiliateResponse) {
-		option (google.api.http) = {
-			post: "/v1/backoffice/affiliate/get"
-			body: "*"
-		};
-	}
 	rpc ListAffiliates(ListAffiliatesRequest) returns (api.affiliate.service.v1.ListAffiliatesResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/list"
@@ -81,6 +78,12 @@ service BackofficeAffiliate {
 	rpc DeleteAffiliate(DeleteAffiliateRequest) returns (api.affiliate.service.v1.DeleteAffiliateResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/affiliate/delete"
+			body: "*"
+		};
+	}
+	rpc GetAffiliateDetails(GetAffiliateDetailsRequest) returns (api.affiliate.service.v1.GetAffiliateDetailsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/get/details"
 			body: "*"
 		};
 	}
@@ -117,6 +120,58 @@ service BackofficeAffiliate {
 			body: "*"
 		};
 	}
+
+	// -------------- Event --------------
+
+	rpc ListEvents(ListEventsRequest) returns (api.affiliate.service.v1.ListEventsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/event/list"
+			body: "*"
+		};
+	}
+
+	// -------------- Commission --------------
+
+	rpc ListCommissions(ListCommissionsRequest) returns (api.affiliate.service.v1.ListCommissionsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/commission/list"
+			body: "*"
+		};
+	}
+
+	// -------------- User --------------
+
+	rpc ListAffiliateUsers(ListAffiliateUsersRequest) returns (api.affiliate.service.v1.ListUsersResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/user/list"
+			body: "*"
+		};
+	}
+
+	// -------------- Affiliate Bill --------------
+
+	rpc ListAffiliateBills(ListAffiliateBillsRequest) returns (api.affiliate.service.v1.ListAffiliateBillsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/bill/list"
+			body: "*"
+		};
+	}
+
+	// -------------- Referral Plan --------------
+
+	rpc SetReferralPlan(SetReferralPlanRequest) returns (api.affiliate.service.v1.SetReferralPlanResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/referral/plan/set"
+			body: "*"
+		};
+	}
+
+	rpc GetReferralPlan(GetReferralPlanRequest) returns (api.affiliate.service.v1.GetReferralPlanResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/referral/plan/get"
+			body: "*"
+		};
+	}
 }
 
 // -------------- Commission Plan --------------
@@ -141,15 +196,22 @@ message GetCommissionPlanRequest {
 }
 
 message ListCommissionPlansRequest {
-	repeated string countries = 1; // not supported yet
-	optional int32 page = 2;
-	optional int32 page_size = 3;
-	optional string status = 4;
+	repeated string countries = 1;
+	optional int64 affiliate_id = 2;
+	optional int32 page = 3;
+	optional int32 page_size = 4;
+	optional string status = 5;
 }
 
 message DeleteCommissionPlanRequest {
 	int64 commission_plan_id = 1;
 	optional int64 alternative_commission_plan_id = 2; // not supported yet
+}
+
+message ListAllCommissionPlansRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	repeated string countries = 2; // not supported yet
+	optional string status = 3;
 }
 
 // -------------- Affiliate --------------
@@ -162,10 +224,6 @@ message CreateAffiliateRequest {
 message UpdateAffiliateRequest {
 	api.affiliate.service.v1.AffiliateInfo affiliate = 1;
 	int64 affiliate_id = 2;
-}
-
-message GetAffiliateRequest {
-	int64 affiliate_id = 1;
 }
 
 message ListAffiliatesRequest {
@@ -182,16 +240,20 @@ message DeleteAffiliateRequest {
 	int64 affiliate_id = 1;
 }
 
-message ListAllCommissionPlansRequest {
-	api.common.OperatorContext target_operator_context = 1;
-	repeated string countries = 2; // not supported yet
-	optional string status = 3;
+message GetAffiliateDetailsRequest {
+	int64 affiliate_id = 1;
 }
 
 // -------------- Campaign --------------
 
 message CreateCampaignRequest {
-	api.affiliate.service.v1.Campaign campaign = 1;
+    message Campaign {
+        string domain = 1;
+        string campaign_name = 2;
+        string channel_type = 3; // facebook/tiktok/kwai/appsflyer/adjust/agency/google_ads
+        api.affiliate.service.v1.ChannelConfig channel_config = 4;
+    }
+    Campaign campaign = 1;
 }
 
 message UpdateCampaignRequest {
@@ -203,21 +265,96 @@ message UpdateCampaignRequest {
 message ListCampaignsRequest {
     optional string campaign_name = 1;
     optional int64 campaign_id = 2;
-    optional bool enabled = 3;
-    optional int32 page = 4;
-    optional int32 page_size = 5;
-	api.common.OperatorContextFilters operator_context_filters = 6;
+	optional int64 affiliate_id = 3;
+    optional bool enabled = 4;
+    optional int32 page = 5;
+    optional int32 page_size = 6;
+	api.common.OperatorContextFilters operator_context_filters = 7;
 }
 
 message ListAffiliateCampaignsRequest {
     optional string campaign_name = 1;
     optional int64 campaign_id = 2;
-    optional bool enabled = 3;
-    optional int32 page = 4;
-    optional int32 page_size = 5;
+	optional int64 affiliate_id = 3;
+    optional bool enabled = 4;
+    optional int32 page = 5;
+    optional int32 page_size = 6;
 }
 
 message DeleteCampaignRequest {
 	int64 campaign_id = 1;
 }
-	
+
+// -------------- Event --------------
+
+message ListEventsRequest {
+	optional int64 affiliate_id = 1;
+	repeated string event_types = 2;
+	repeated string countries = 3;
+	repeated string currencies = 4;
+	google.protobuf.Timestamp start_time = 5;
+	google.protobuf.Timestamp end_time = 6;
+	optional int32 page = 7;
+	optional int32 page_size = 8;
+	api.common.OperatorContextFilters operator_context_filters = 9;
+}
+
+// -------------- Commission --------------
+
+message ListCommissionsRequest {
+	repeated int64 commission_plan_ids = 1; // OR logic: filter by commission plan IDs, match if ID is any of these values
+	optional int64 user_id = 2;
+	optional int64 affiliate_id = 3;
+	repeated string commission_subtypes = 4; // cpa/revshare/cpl/cpc/flat_fee, multiple subtypes are allowed
+	repeated string countries = 5;
+	optional int64 commission_id = 6;
+	optional int64 bill_id = 7;
+	google.protobuf.Timestamp start_time = 8;
+	google.protobuf.Timestamp end_time = 9;
+	optional string status = 10; // pending/approved/rejected
+	optional int32 page = 11;
+	optional int32 page_size = 12;
+	api.common.OperatorContextFilters operator_context_filters = 13;
+}
+
+// -------------- User --------------
+
+message ListAffiliateUsersRequest {
+	repeated string countries = 1;
+	google.protobuf.Timestamp ftd_start_time = 2;
+	google.protobuf.Timestamp ftd_end_time = 3;
+	optional int64 affiliate_id = 4;
+	google.protobuf.Timestamp registration_start_time = 5;
+	google.protobuf.Timestamp registration_end_time = 6;
+	optional int32 page = 7;
+	optional int32 page_size = 8;
+	api.common.OperatorContextFilters operator_context_filters = 9;
+}
+
+// -------------- Affiliate Bill --------------
+
+message ListAffiliateBillsRequest {
+    optional int64 affiliate_id = 1;
+    optional int64 bill_id = 2;
+    google.protobuf.Timestamp updated_at_start_time = 3;
+    google.protobuf.Timestamp updated_at_end_time = 4;
+    optional int32 page = 5;
+    optional int32 page_size = 6;
+    api.common.OperatorContextFilters operator_context_filters = 7;
+}
+
+// -------------- Referral Plan --------------
+
+message SetReferralPlanRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string currency = 2;
+	optional bool follow_parent = 3;
+	optional bool enabled = 4;
+	optional int32 max_tier = 5;
+	optional api.affiliate.service.v1.ReferralPlanConfig plan_config = 6;
+}
+
+message GetReferralPlanRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string currency = 2;
+}

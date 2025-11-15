@@ -2,12 +2,16 @@ syntax = "proto3";
 
 package api.affiliate.service.v1;
 
+import "google/api/annotations.proto";
 import "affiliate/service/v1/commission_plan.proto";
+import "affiliate/service/v1/referral_plan.proto";
 import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/affiliate/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.affiliate.service.v1";
+
+import "google/protobuf/timestamp.proto";
 
 service Affiliate {
 
@@ -31,11 +35,11 @@ service Affiliate {
 
     rpc UpdateAffiliate(UpdateAffiliateRequest) returns (UpdateAffiliateResponse) {}
 
-    rpc GetAffiliate(GetAffiliateRequest) returns (GetAffiliateResponse) {}
-
     rpc ListAffiliates(ListAffiliatesRequest) returns (ListAffiliatesResponse) {}
     
     rpc DeleteAffiliate(DeleteAffiliateRequest) returns (DeleteAffiliateResponse) {}
+
+    rpc GetAffiliateDetails(GetAffiliateDetailsRequest) returns (GetAffiliateDetailsResponse) {}
 
     // -------------- Campaign --------------
 
@@ -46,6 +50,42 @@ service Affiliate {
     rpc ListCampaigns(ListCampaignsRequest) returns (ListCampaignsResponse) {}
 
     rpc DeleteCampaign(DeleteCampaignRequest) returns (DeleteCampaignResponse) {}
+
+    // -------------- Event --------------
+
+    rpc ListEvents(ListEventsRequest) returns (ListEventsResponse) {}
+
+    // -------------- Commission --------------
+
+    rpc ListCommissions(ListCommissionsRequest) returns (ListCommissionsResponse) {}
+
+    // -------------- User --------------
+
+    rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {}
+
+    // -------------- Affiliate Bill --------------
+
+    rpc ListAffiliateBills(ListAffiliateBillsRequest) returns (ListAffiliateBillsResponse) {}
+
+    // -------------- Referral Plan --------------
+
+    rpc SetReferralPlan(SetReferralPlanRequest) returns (SetReferralPlanResponse) {}
+
+    rpc GetReferralPlan(GetReferralPlanRequest) returns (GetReferralPlanResponse) {}
+
+    rpc GetUserReferralConfig(GetUserReferralConfigRequest) returns (GetUserReferralConfigResponse) {
+        option (google.api.http) = {
+            post: "/v1/affiliate/user/referral/config/get"
+            body: "*"
+        };
+    }
+
+    rpc CreateUserReferralCode(CreateUserReferralCodeRequest) returns (CreateUserReferralCodeResponse) {
+        option (google.api.http) = {
+            post: "/v1/affiliate/user/referral/code/create"
+            body: "*"
+        };
+    }
 }
 
 message ContactType {
@@ -94,16 +134,6 @@ message UpdateAffiliateRequest {
 }
 
 message UpdateAffiliateResponse {
-}
-
-message GetAffiliateRequest {
-    int64 affiliate_id = 1;
-    api.common.OperatorContext initiator_operator_context = 2;
-}
-
-message GetAffiliateResponse {
-    AffiliateInfo affiliate = 1;
-    int64 affiliate_id = 2;
 }
 
 message ListAffiliatesRequest {
@@ -155,6 +185,54 @@ message DeleteAffiliateRequest {
 message DeleteAffiliateResponse {
 }
 
+message GetAffiliateDetailsRequest {
+    int64 affiliate_id = 1;
+    api.common.OperatorContext initiator_operator_context = 2;
+}
+
+message GetAffiliateDetailsResponse {
+    message AffiliateDetails {
+        message Referrer {
+            int64 affiliate_id = 1;
+            string affiliate_firstname = 2;
+            string affiliate_lastname = 3;
+            string affiliate_company_name = 4;
+            string sub_affiliate_commission_rate = 5; // percentage
+        }
+        message CommissionPlan {
+            int64 commission_plan_id = 1;
+            string commission_plan_name = 2;
+        }
+        int64 affiliate_id = 1;
+        string company_name = 2;
+        string status = 3;
+        repeated CommissionPlan commission_plans = 4;
+        string invoice_period = 5;
+        string photo_url = 6;
+        bool active = 7; // online status, not implemented
+        string last_login_ip = 8;
+        google.protobuf.Timestamp last_login_at = 9;
+        string firstname = 10;
+        string lastname = 11;
+        string phone = 12;
+        repeated ContactType contact_types = 13;
+        string country = 14; // country code
+        string region = 15;
+        string city = 16;
+        string post_code = 17;
+        string street = 18;
+        repeated int64 traffic_source_ids = 19; // not implemented
+        repeated int64 teammate_ids = 20; // not implemented
+        string internal_info = 21;
+        optional Referrer referrer = 22; // referred by who, not implemented
+        string pending_balance_usd = 23;
+        string pending_balance_reporting_currency = 24; // pending bill amount
+        string email = 25;
+        bool two_fa_enabled = 26;
+    }
+    AffiliateDetails affiliate_details = 1;
+}
+
 // -------------- Campaign --------------
 
 message Campaign {
@@ -162,13 +240,17 @@ message Campaign {
     string campaign_name = 2;
     string channel_type = 3; // facebook/tiktok/kwai/appsflyer/adjust/agency/google_ads
     ChannelConfig channel_config = 4;
-    string utm_source = 5;
-    string utm_medium = 6;
-    string utm_campaign = 7;
-    string utm_content = 8;
-    string utm_term = 9;
-    CustomParams custom_params = 10;
-    EventMappings event_mappings = 11;    
+    Params params = 5;
+    EventMappings event_mappings = 6;    
+}
+
+message Params {
+    message Parameter {
+        string name = 1;
+        string value = 2;
+    }
+    repeated Parameter predefined_parameters = 1;
+    repeated Parameter custom_parameters = 2;
 }
 
 message ChannelConfig {
@@ -262,16 +344,17 @@ message UpdateCampaignResponse {
 message ListCampaignsRequest {
     optional string campaign_name = 1;
     optional int64 campaign_id = 2;
-    optional bool enabled = 3;
-    optional int32 page = 4;
-    optional int32 page_size = 5;
-    optional int64 initiator_user_id = 6;
-    api.common.OperatorContext initiator_operator_context = 7;
-    api.common.OperatorContextFilters operator_context_filters = 8;
+    optional int64 affiliate_id = 3;
+    optional bool enabled = 4;
+    optional int32 page = 5;
+    optional int32 page_size = 6;
+    optional int64 initiator_user_id = 7;
+    api.common.OperatorContext initiator_operator_context = 8;
+    api.common.OperatorContextFilters operator_context_filters = 9;
 }
 
 message ListCampaignsResponse {
-    message Campaign {
+    message CampaignInfo {
         int64 campaign_id = 1;
         string affiliate_company_name = 2;
         int64 affiliate_id = 3;
@@ -282,10 +365,10 @@ message ListCampaignsResponse {
         string campaign_name = 8;
         string event_mappings_status = 9; // configured/not_configured/not_required
         int32 event_mappings_count = 10;
-        bool status = 11;
+        bool enabled = 11;
         Campaign campaign = 12;
     }
-    repeated Campaign campaigns = 1;
+    repeated CampaignInfo campaigns = 1;
     int32 total = 2;
     int32 total_enabled = 3;
     int32 total_disabled = 4;
@@ -299,4 +382,217 @@ message DeleteCampaignRequest {
 }
 
 message DeleteCampaignResponse {
+}
+
+message ListEventsRequest {
+    optional int64 affiliate_id = 1;
+    repeated string event_types = 2;
+    repeated string countries = 3;
+    repeated string currencies = 4;
+    google.protobuf.Timestamp start_time = 5;
+    google.protobuf.Timestamp end_time = 6;
+    optional int32 page = 7;
+    optional int32 page_size = 8;
+    int64 initiator_user_id = 9;
+    int64 initiator_role_id = 10;
+    api.common.OperatorContext initiator_operator_context = 11;
+    api.common.OperatorContextFilters operator_context_filters = 12;
+}
+
+message ListEventsResponse {
+    message Event {
+        message CommissionPlan {
+            int64 commission_plan_id = 1;
+            string commission_plan_name = 2;
+        }
+        string country = 1;
+        string campaign_name = 2;
+        int64 campaign_id = 3;
+        google.protobuf.Timestamp created_at = 4;
+        string event_type = 5;	// "register", "first_deposit", "first_qualification_deposit", "deposit", "withdrawal", "game_start", "game_bet", "game_win", "click_deposit"
+        repeated CommissionPlan commission_plans = 6;
+        string currency = 7;
+        string amount = 8;
+        string amount_usd = 9;
+        string amount_reporting_currency = 10;
+        int64 user_id = 11;
+        int64 event_id = 12;
+        int64 affiliate_id = 13;
+        string affiliate_name = 14;
+        string retailer_operator_name = 15;
+        string company_operator_name = 16;
+        string operator_name = 17;
+    }
+    repeated Event events = 1; 
+    int32 total = 2;
+    int32 page = 3;
+    int32 page_size = 4;
+}
+
+// -------------- Commission --------------
+
+message ListCommissionsRequest {
+    repeated int64 commission_plan_ids = 1; // OR logic: filter by commission plan IDs, match if ID is any of these values
+    optional int64 user_id = 2;
+    optional int64 affiliate_id = 3;
+    repeated string commission_subtypes = 4; // cpa/revshare/cpl/cpc/flat_fee, multiple subtypes are allowed
+    repeated string countries = 5;
+    optional int64 commission_id = 6;
+    optional int64 bill_id = 7;
+    google.protobuf.Timestamp start_time = 8;
+    google.protobuf.Timestamp end_time = 9;
+    optional string status = 10; // pending/approved/rejected
+    optional int32 page = 11;
+    optional int32 page_size = 12;
+    int64 initiator_user_id = 13;
+    int64 initiator_role_id = 14;
+    api.common.OperatorContext initiator_operator_context = 15;
+    api.common.OperatorContextFilters operator_context_filters = 16;
+}
+
+message ListCommissionsResponse {
+    message Commission {
+        int64 commission_id = 1;
+        string country = 2;
+        google.protobuf.Timestamp created_at = 3;
+        string status = 4; // pending/approved/rejected
+        bool paid = 5;
+        int64 commission_plan_id = 6;
+        string commission_plan_name = 7;
+        string commission_subtype = 8; // cpa/revshare/cpl/cpc/flat_fee
+        string reporting_currency = 9;
+        string revenue_usd = 10;
+        string revenue_reporting_currency = 11;
+        string commission_usd = 12;
+        string commission_reporting_currency = 13;
+        string adjust_amount_usd = 14;
+        string adjust_amount_reporting_currency = 15;
+        int64 affiliate_id = 16;
+        string affiliate_name = 17;
+        int64 user_id = 18;
+        string retailer_operator_name = 19;
+        string company_operator_name = 20;
+        string operator_name = 21;
+        int64 bill_id = 22;
+    }
+    repeated Commission commissions = 1;
+    int32 total = 2;
+    int32 total_pending = 3;
+    int32 total_approved = 4;
+    int32 total_rejected = 5;
+    int32 page = 6;
+    int32 page_size = 7;
+}
+
+// -------------- User --------------
+
+message ListUsersRequest {
+    repeated string countries = 1;
+    google.protobuf.Timestamp ftd_start_time = 2;
+    google.protobuf.Timestamp ftd_end_time = 3;
+    optional int64 affiliate_id = 4;
+    google.protobuf.Timestamp registration_start_time = 5;
+    google.protobuf.Timestamp registration_end_time = 6;
+    optional int32 page = 7;
+    optional int32 page_size = 8;
+    int64 initiator_user_id = 9;
+    int64 initiator_role_id = 10;
+    api.common.OperatorContext initiator_operator_context = 11;
+    api.common.OperatorContextFilters operator_context_filters = 12;
+}
+
+message ListUsersResponse {
+    message User {
+        int64 user_id = 1;
+        string country = 2;
+        int64 affiliate_id = 3;
+        string affiliate_name = 4;
+        string affiliate_company_name = 5;
+        string reporting_currency = 6;
+        string campaign_url = 7;
+        google.protobuf.Timestamp registered_at = 8;
+        google.protobuf.Timestamp ftd_at = 9;
+        string ftd_amount_usd = 10;
+        string ftd_amount_reporting_currency = 11;
+        int32 deposit_count = 12;
+        string deposit_amount_usd = 13;
+        string deposit_amount_reporting_currency = 14;
+        int32 withdrawal_count = 15;
+        string withdrawal_amount_usd = 16;
+        string withdrawal_amount_reporting_currency = 17;
+        string deposit_minus_withdrawal_amount_usd = 18; // deposit_amount - withdrawal_amount
+        string deposit_minus_withdrawal_amount_reporting_currency = 19; // deposit_amount - withdrawal_amount
+        int32 bet_count = 20;
+        string bet_amount_usd = 21;
+        string bet_amount_reporting_currency = 22;
+        string win_amount_usd = 23;
+        string win_amount_reporting_currency = 24;
+        string ggr_usd = 25;
+        string ggr_reporting_currency = 26;
+        string ngr_usd = 27;
+        string ngr_reporting_currency = 28;
+        string commission_usd = 29;
+        string commission_reporting_currency = 30;
+        string roi = 31; // percentage, ngr / commission
+    }
+    repeated User users = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 page_size = 4;
+}
+
+// -------------- Affiliate Bill --------------
+
+message ListAffiliateBillsRequest {
+    optional int64 affiliate_id = 1;
+    optional int64 bill_id = 2;
+    google.protobuf.Timestamp updated_at_start_time = 3;
+    google.protobuf.Timestamp updated_at_end_time = 4;
+    optional int32 page = 5;
+    optional int32 page_size = 6;
+    int64 initiator_user_id = 7;
+    int64 initiator_role_id = 8;
+    api.common.OperatorContext initiator_operator_context = 9;
+    api.common.OperatorContextFilters operator_context_filters = 10;
+}
+
+message ListAffiliateBillsResponse {
+    message AffiliateBill {
+        message BillDetail {
+            message BillItem {
+                string commission_plan_name = 1;
+                int64 commission_plan_id = 2;
+                string commission_subtype = 3; // cpa/revshare/cpl/cpc/flat_fee
+                int32 quantity = 4;
+                string price_usd = 5; // amount / quantity
+                string price_reporting_currency = 6; // amount / quantity
+                string amount_usd = 7; // amount
+                string amount_reporting_currency = 8; // amount
+            }
+            repeated BillItem bill_items = 1;
+            string total_amount_usd = 2;
+            string total_amount_reporting_currency = 3;
+            string vat_amount_usd = 4; // placeholder
+            string vat_amount_reporting_currency = 5; // placeholder
+        }
+        int64 affiliate_id = 1;
+        string affiliate_name = 2;
+        string affiliate_company_name = 3;
+        string retailer_operator_name = 4;
+        string company_operator_name = 5;
+        string operator_name = 6;
+        int64 bill_id = 7;
+        google.protobuf.Timestamp updated_at = 8;
+        string status = 9; // paid/unpaid
+        string amount_usd = 10;
+        string amount_reporting_currency = 11;
+        google.protobuf.Timestamp period_start_time = 12;
+        google.protobuf.Timestamp period_end_time = 13;
+        BillDetail bill_detail = 14;
+
+    }
+    repeated AffiliateBill affiliate_bills = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 page_size = 4;
 }

@@ -128,7 +128,7 @@ service BackofficeWallet {
 		};
 	}
 	// GetOperatorBalance gets the balances of an operator
-	rpc GetOperatorBalance(wallet.service.v1.GetOperatorBalanceRequest) returns (wallet.service.v1.GetOperatorBalanceResponse) {
+	rpc GetOperatorBalance(GetOperatorBalanceRequest) returns (wallet.service.v1.GetOperatorBalanceResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/operator/balance/get"
 			body: "*"
@@ -245,7 +245,7 @@ service BackofficeWallet {
 	}
 
 	// ManualCredit
-	rpc ManualCredit(CreditRequest) returns (wallet.service.v1.CreditResponse) {
+	rpc ManualCredit(ManualCreditRequest) returns (wallet.service.v1.CreditResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/manual/credit"
 			body: "*"
@@ -253,7 +253,7 @@ service BackofficeWallet {
 	}
 
 	// ManualDebit
-	rpc ManualDebit(DebitRequest) returns (wallet.service.v1.DebitResponse) {
+	rpc ManualDebit(ManualDebitRequest) returns (wallet.service.v1.DebitResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/manual/debit"
 			body: "*"
@@ -577,6 +577,10 @@ message UpdateOperatorBalanceResponse {
 	bool enabled = 1;
 }
 
+message GetOperatorBalanceRequest {
+	api.common.OperatorContext operator_context = 1;
+}
+
 message SetDepositRewardSequencesRequest {
 	api.common.OperatorContext target_operator_context = 1;
 	string currency = 2;
@@ -679,26 +683,25 @@ message ExportFICAThresholdTransactionsRequest {
 	api.common.OperatorContext target_operator_context = 8;
 }
 
-message CreditRequest {
+message ManualCreditRequest {
 	int64 user_id = 1;
 	string currency = 2;
-	string transaction_type = 3;
+	string transaction_type = 3; // manual_credit_cash, manual_credit_bonus
 	string cash_amount = 4;
 	string cash_turnover_threshold = 5;
 	string operator_bonus_amount = 6;
 	string operator_bonus_turnover_threshold = 7;
 	string operator_bonus_withdraw_limit = 8;
 	string comment = 9;
-	optional int64 external_transaction_id = 10;
 }
 
-message DebitRequest {
+message ManualDebitRequest {
 	int64 user_id = 1;
 	string currency = 2;
-	string reporting_currency = 3;
-	string transaction_type = 4;
-	int64 transaction_id = 5;
-	string cash = 6;
+	string transaction_type = 3; // manual_debit_cash, manual_debit_bonus
+	int64 transaction_id = 4;
+	string amount = 5;
+	string comment = 6;
 }
 
 message ListManualJournalEntriesRequest {

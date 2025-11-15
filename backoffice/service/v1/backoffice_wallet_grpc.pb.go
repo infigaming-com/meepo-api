@@ -90,7 +90,7 @@ type BackofficeWalletClient interface {
 	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
 	UpdateOperatorBalance(ctx context.Context, in *UpdateOperatorBalanceRequest, opts ...grpc.CallOption) (*UpdateOperatorBalanceResponse, error)
 	// GetOperatorBalance gets the balances of an operator
-	GetOperatorBalance(ctx context.Context, in *v1.GetOperatorBalanceRequest, opts ...grpc.CallOption) (*v1.GetOperatorBalanceResponse, error)
+	GetOperatorBalance(ctx context.Context, in *GetOperatorBalanceRequest, opts ...grpc.CallOption) (*v1.GetOperatorBalanceResponse, error)
 	// SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
 	SetDepositRewardSequences(ctx context.Context, in *SetDepositRewardSequencesRequest, opts ...grpc.CallOption) (*v1.SetDepositRewardSequencesResponse, error)
 	// DeleteDepositRewardSequences deletes a deposit reward sequence of a operator currency config
@@ -120,9 +120,9 @@ type BackofficeWalletClient interface {
 	// ExportFICAThresholdTransactions creates a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
 	ExportFICAThresholdTransactions(ctx context.Context, in *ExportFICAThresholdTransactionsRequest, opts ...grpc.CallOption) (*v1.ExportFICAThresholdTransactionsResponse, error)
 	// ManualCredit
-	ManualCredit(ctx context.Context, in *CreditRequest, opts ...grpc.CallOption) (*v1.CreditResponse, error)
+	ManualCredit(ctx context.Context, in *ManualCreditRequest, opts ...grpc.CallOption) (*v1.CreditResponse, error)
 	// ManualDebit
-	ManualDebit(ctx context.Context, in *DebitRequest, opts ...grpc.CallOption) (*v1.DebitResponse, error)
+	ManualDebit(ctx context.Context, in *ManualDebitRequest, opts ...grpc.CallOption) (*v1.DebitResponse, error)
 	// ListManualJournalEntries lists manual journal entries for all users
 	ListManualJournalEntries(ctx context.Context, in *ListManualJournalEntriesRequest, opts ...grpc.CallOption) (*v1.ListManualJournalEntriesResponse, error)
 	// ExportManualJournalEntries creates a task to exports manual journal entries for all users
@@ -307,7 +307,7 @@ func (c *backofficeWalletClient) UpdateOperatorBalance(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *backofficeWalletClient) GetOperatorBalance(ctx context.Context, in *v1.GetOperatorBalanceRequest, opts ...grpc.CallOption) (*v1.GetOperatorBalanceResponse, error) {
+func (c *backofficeWalletClient) GetOperatorBalance(ctx context.Context, in *GetOperatorBalanceRequest, opts ...grpc.CallOption) (*v1.GetOperatorBalanceResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.GetOperatorBalanceResponse)
 	err := c.cc.Invoke(ctx, BackofficeWallet_GetOperatorBalance_FullMethodName, in, out, cOpts...)
@@ -457,7 +457,7 @@ func (c *backofficeWalletClient) ExportFICAThresholdTransactions(ctx context.Con
 	return out, nil
 }
 
-func (c *backofficeWalletClient) ManualCredit(ctx context.Context, in *CreditRequest, opts ...grpc.CallOption) (*v1.CreditResponse, error) {
+func (c *backofficeWalletClient) ManualCredit(ctx context.Context, in *ManualCreditRequest, opts ...grpc.CallOption) (*v1.CreditResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.CreditResponse)
 	err := c.cc.Invoke(ctx, BackofficeWallet_ManualCredit_FullMethodName, in, out, cOpts...)
@@ -467,7 +467,7 @@ func (c *backofficeWalletClient) ManualCredit(ctx context.Context, in *CreditReq
 	return out, nil
 }
 
-func (c *backofficeWalletClient) ManualDebit(ctx context.Context, in *DebitRequest, opts ...grpc.CallOption) (*v1.DebitResponse, error) {
+func (c *backofficeWalletClient) ManualDebit(ctx context.Context, in *ManualDebitRequest, opts ...grpc.CallOption) (*v1.DebitResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(v1.DebitResponse)
 	err := c.cc.Invoke(ctx, BackofficeWallet_ManualDebit_FullMethodName, in, out, cOpts...)
@@ -529,7 +529,7 @@ type BackofficeWalletServer interface {
 	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
 	UpdateOperatorBalance(context.Context, *UpdateOperatorBalanceRequest) (*UpdateOperatorBalanceResponse, error)
 	// GetOperatorBalance gets the balances of an operator
-	GetOperatorBalance(context.Context, *v1.GetOperatorBalanceRequest) (*v1.GetOperatorBalanceResponse, error)
+	GetOperatorBalance(context.Context, *GetOperatorBalanceRequest) (*v1.GetOperatorBalanceResponse, error)
 	// SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
 	SetDepositRewardSequences(context.Context, *SetDepositRewardSequencesRequest) (*v1.SetDepositRewardSequencesResponse, error)
 	// DeleteDepositRewardSequences deletes a deposit reward sequence of a operator currency config
@@ -559,9 +559,9 @@ type BackofficeWalletServer interface {
 	// ExportFICAThresholdTransactions creates a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
 	ExportFICAThresholdTransactions(context.Context, *ExportFICAThresholdTransactionsRequest) (*v1.ExportFICAThresholdTransactionsResponse, error)
 	// ManualCredit
-	ManualCredit(context.Context, *CreditRequest) (*v1.CreditResponse, error)
+	ManualCredit(context.Context, *ManualCreditRequest) (*v1.CreditResponse, error)
 	// ManualDebit
-	ManualDebit(context.Context, *DebitRequest) (*v1.DebitResponse, error)
+	ManualDebit(context.Context, *ManualDebitRequest) (*v1.DebitResponse, error)
 	// ListManualJournalEntries lists manual journal entries for all users
 	ListManualJournalEntries(context.Context, *ListManualJournalEntriesRequest) (*v1.ListManualJournalEntriesResponse, error)
 	// ExportManualJournalEntries creates a task to exports manual journal entries for all users
@@ -627,7 +627,7 @@ func (UnimplementedBackofficeWalletServer) ListOperatorBalanceTransactions(conte
 func (UnimplementedBackofficeWalletServer) UpdateOperatorBalance(context.Context, *UpdateOperatorBalanceRequest) (*UpdateOperatorBalanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOperatorBalance not implemented")
 }
-func (UnimplementedBackofficeWalletServer) GetOperatorBalance(context.Context, *v1.GetOperatorBalanceRequest) (*v1.GetOperatorBalanceResponse, error) {
+func (UnimplementedBackofficeWalletServer) GetOperatorBalance(context.Context, *GetOperatorBalanceRequest) (*v1.GetOperatorBalanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorBalance not implemented")
 }
 func (UnimplementedBackofficeWalletServer) SetDepositRewardSequences(context.Context, *SetDepositRewardSequencesRequest) (*v1.SetDepositRewardSequencesResponse, error) {
@@ -672,10 +672,10 @@ func (UnimplementedBackofficeWalletServer) ListFICAThresholdTransactions(context
 func (UnimplementedBackofficeWalletServer) ExportFICAThresholdTransactions(context.Context, *ExportFICAThresholdTransactionsRequest) (*v1.ExportFICAThresholdTransactionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExportFICAThresholdTransactions not implemented")
 }
-func (UnimplementedBackofficeWalletServer) ManualCredit(context.Context, *CreditRequest) (*v1.CreditResponse, error) {
+func (UnimplementedBackofficeWalletServer) ManualCredit(context.Context, *ManualCreditRequest) (*v1.CreditResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ManualCredit not implemented")
 }
-func (UnimplementedBackofficeWalletServer) ManualDebit(context.Context, *DebitRequest) (*v1.DebitResponse, error) {
+func (UnimplementedBackofficeWalletServer) ManualDebit(context.Context, *ManualDebitRequest) (*v1.DebitResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ManualDebit not implemented")
 }
 func (UnimplementedBackofficeWalletServer) ListManualJournalEntries(context.Context, *ListManualJournalEntriesRequest) (*v1.ListManualJournalEntriesResponse, error) {
@@ -1012,7 +1012,7 @@ func _BackofficeWallet_UpdateOperatorBalance_Handler(srv interface{}, ctx contex
 }
 
 func _BackofficeWallet_GetOperatorBalance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(v1.GetOperatorBalanceRequest)
+	in := new(GetOperatorBalanceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1024,7 +1024,7 @@ func _BackofficeWallet_GetOperatorBalance_Handler(srv interface{}, ctx context.C
 		FullMethod: BackofficeWallet_GetOperatorBalance_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeWalletServer).GetOperatorBalance(ctx, req.(*v1.GetOperatorBalanceRequest))
+		return srv.(BackofficeWalletServer).GetOperatorBalance(ctx, req.(*GetOperatorBalanceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1282,7 +1282,7 @@ func _BackofficeWallet_ExportFICAThresholdTransactions_Handler(srv interface{}, 
 }
 
 func _BackofficeWallet_ManualCredit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreditRequest)
+	in := new(ManualCreditRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1294,13 +1294,13 @@ func _BackofficeWallet_ManualCredit_Handler(srv interface{}, ctx context.Context
 		FullMethod: BackofficeWallet_ManualCredit_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeWalletServer).ManualCredit(ctx, req.(*CreditRequest))
+		return srv.(BackofficeWalletServer).ManualCredit(ctx, req.(*ManualCreditRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _BackofficeWallet_ManualDebit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DebitRequest)
+	in := new(ManualDebitRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1312,7 +1312,7 @@ func _BackofficeWallet_ManualDebit_Handler(srv interface{}, ctx context.Context,
 		FullMethod: BackofficeWallet_ManualDebit_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackofficeWalletServer).ManualDebit(ctx, req.(*DebitRequest))
+		return srv.(BackofficeWalletServer).ManualDebit(ctx, req.(*ManualDebitRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

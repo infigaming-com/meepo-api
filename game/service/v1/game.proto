@@ -3,6 +3,7 @@ syntax = "proto3";
 package api.game.service.v1;
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
 import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/game/service/v1;v1";
@@ -86,6 +87,13 @@ service Game {
 	rpc ListBets(ListBetsRequest) returns (ListBetsResponse) {
 		option (google.api.http) = {
 			post: "/v1/game/bets/list"
+			body: "*"
+		};
+	};
+
+	rpc ListLiveEvents(ListLiveEventsRequest) returns (ListLiveEventsResponse) {
+		option (google.api.http) = {
+			post: "/v1/game/live-events/list"
 			body: "*"
 		};
 	};
@@ -184,6 +192,7 @@ service Game {
 	rpc UpdateGameBetDisplayConfig(UpdateGameBetDisplayConfigRequest) returns (UpdateGameBetDisplayConfigResponse) { }
 
 	rpc ListGameBetDisplayConfig(ListGameBetDisplayConfigRequest) returns (ListGameBetDisplayConfigResponse) { }
+
 	rpc GetGameInfo(GetGameInfoRequest) returns (GetGameInfoResponse) { }
 
 }
@@ -1587,36 +1596,35 @@ message BettingConfig {
 	repeated string bet_category = 1;
 	float mini_odds = 2;
 	repeated string currencies = 3;
+	bool enable = 4;
 }
 
 message AddGameBetDisplayConfigRequest {
 	string country = 1;
 	BettingConfig all_bet = 2;
 	BettingConfig high_wins = 3;
-	api.common.OperatorContext operator_context = 4;
+	api.common.OperatorContext target_operator_context = 4;
 }
 
 message AddGameBetDisplayConfigResponse {
 }
 
 message UpdateGameBetDisplayConfigRequest {
-	string country = 1;
-	optional BettingConfig all_bet = 2;
-	optional BettingConfig high_wins = 3;
-	api.common.OperatorContext operator_context = 4;
+	message Item {
+		string country = 1;
+		optional BettingConfig all_bet = 2;
+		optional BettingConfig high_wins = 3;
+	}
+	repeated Item list = 1;
+	bool enable = 2;
+	api.common.OperatorContext target_operator_context = 3;
 }
 
 message UpdateGameBetDisplayConfigResponse {
 }
 
 message ListGameBetDisplayConfigRequest {
-	message Item {
-		string country = 1;
-		BettingConfig all_bet = 2;
-		BettingConfig high_wins = 3;
-	}
-	repeated Item list = 1;
-	api.common.OperatorContext operator_context = 2;
+	api.common.OperatorContext target_operator_context = 1;
 }
 
 message ListGameBetDisplayConfigResponse {
@@ -1626,6 +1634,7 @@ message ListGameBetDisplayConfigResponse {
 		BettingConfig high_wins = 3;
 	}
 	repeated Item list = 1;
+	bool enable = 2;
 }
 
 message GetGameInfoRequest {
@@ -1634,4 +1643,13 @@ message GetGameInfoRequest {
 
 message GetGameInfoResponse {
 	GameInfo game_info = 1;
+}
+
+message ListLiveEventsRequest {
+	string game_id = 1;
+	google.protobuf.Struct request_payload = 2;
+}
+
+message ListLiveEventsResponse {
+	repeated google.protobuf.Struct events = 1;
 }

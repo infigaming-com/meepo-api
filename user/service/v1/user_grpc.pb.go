@@ -100,6 +100,8 @@ const (
 	User_GetClaimableVipRewards_FullMethodName          = "/api.user.service.v1.User/GetClaimableVipRewards"
 	User_ClaimVipReward_FullMethodName                  = "/api.user.service.v1.User/ClaimVipReward"
 	User_ConfirmClaimVipReward_FullMethodName           = "/api.user.service.v1.User/ConfirmClaimVipReward"
+	User_RequestDailyLossback_FullMethodName            = "/api.user.service.v1.User/RequestDailyLossback"
+	User_GetDailyLossbackStatus_FullMethodName          = "/api.user.service.v1.User/GetDailyLossbackStatus"
 )
 
 // UserClient is the client API for User service.
@@ -238,6 +240,8 @@ type UserClient interface {
 	GetClaimableVipRewards(ctx context.Context, in *GetClaimableVipRewardsRequest, opts ...grpc.CallOption) (*v1.GetClaimableVipRewardsResponse, error)
 	ClaimVipReward(ctx context.Context, in *ClaimVipRewardRequest, opts ...grpc.CallOption) (*v1.ClaimVipRewardResponse, error)
 	ConfirmClaimVipReward(ctx context.Context, in *ConfirmClaimVipRewardRequest, opts ...grpc.CallOption) (*v1.ConfirmClaimVipRewardResponse, error)
+	RequestDailyLossback(ctx context.Context, in *RequestDailyLossbackRequest, opts ...grpc.CallOption) (*v1.RequestDailyLossbackResponse, error)
+	GetDailyLossbackStatus(ctx context.Context, in *GetDailyLossbackStatusRequest, opts ...grpc.CallOption) (*v1.GetDailyLossbackStatusResponse, error)
 }
 
 type userClient struct {
@@ -1048,6 +1052,26 @@ func (c *userClient) ConfirmClaimVipReward(ctx context.Context, in *ConfirmClaim
 	return out, nil
 }
 
+func (c *userClient) RequestDailyLossback(ctx context.Context, in *RequestDailyLossbackRequest, opts ...grpc.CallOption) (*v1.RequestDailyLossbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.RequestDailyLossbackResponse)
+	err := c.cc.Invoke(ctx, User_RequestDailyLossback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetDailyLossbackStatus(ctx context.Context, in *GetDailyLossbackStatusRequest, opts ...grpc.CallOption) (*v1.GetDailyLossbackStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetDailyLossbackStatusResponse)
+	err := c.cc.Invoke(ctx, User_GetDailyLossbackStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -1184,6 +1208,8 @@ type UserServer interface {
 	GetClaimableVipRewards(context.Context, *GetClaimableVipRewardsRequest) (*v1.GetClaimableVipRewardsResponse, error)
 	ClaimVipReward(context.Context, *ClaimVipRewardRequest) (*v1.ClaimVipRewardResponse, error)
 	ConfirmClaimVipReward(context.Context, *ConfirmClaimVipRewardRequest) (*v1.ConfirmClaimVipRewardResponse, error)
+	RequestDailyLossback(context.Context, *RequestDailyLossbackRequest) (*v1.RequestDailyLossbackResponse, error)
+	GetDailyLossbackStatus(context.Context, *GetDailyLossbackStatusRequest) (*v1.GetDailyLossbackStatusResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -1433,6 +1459,12 @@ func (UnimplementedUserServer) ClaimVipReward(context.Context, *ClaimVipRewardRe
 }
 func (UnimplementedUserServer) ConfirmClaimVipReward(context.Context, *ConfirmClaimVipRewardRequest) (*v1.ConfirmClaimVipRewardResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ConfirmClaimVipReward not implemented")
+}
+func (UnimplementedUserServer) RequestDailyLossback(context.Context, *RequestDailyLossbackRequest) (*v1.RequestDailyLossbackResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RequestDailyLossback not implemented")
+}
+func (UnimplementedUserServer) GetDailyLossbackStatus(context.Context, *GetDailyLossbackStatusRequest) (*v1.GetDailyLossbackStatusResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDailyLossbackStatus not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -2895,6 +2927,42 @@ func _User_ConfirmClaimVipReward_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_RequestDailyLossback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestDailyLossbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).RequestDailyLossback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_RequestDailyLossback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).RequestDailyLossback(ctx, req.(*RequestDailyLossbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetDailyLossbackStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDailyLossbackStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetDailyLossbackStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetDailyLossbackStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetDailyLossbackStatus(ctx, req.(*GetDailyLossbackStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3221,6 +3289,14 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ConfirmClaimVipReward",
 			Handler:    _User_ConfirmClaimVipReward_Handler,
+		},
+		{
+			MethodName: "RequestDailyLossback",
+			Handler:    _User_RequestDailyLossback_Handler,
+		},
+		{
+			MethodName: "GetDailyLossbackStatus",
+			Handler:    _User_GetDailyLossbackStatus_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

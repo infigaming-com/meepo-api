@@ -280,6 +280,14 @@ func (m *AddUserEvent) validate(all bool) error {
 
 	// no validation rules for RoleId
 
+	// no validation rules for Country
+
+	// no validation rules for RegisteredAt
+
+	if m.RegistrationUrl != nil {
+		// no validation rules for RegistrationUrl
+	}
+
 	if len(errors) > 0 {
 		return AddUserEventMultiError(errors)
 	}

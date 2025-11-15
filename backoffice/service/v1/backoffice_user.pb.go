@@ -2435,7 +2435,7 @@ var File_backoffice_service_v1_backoffice_user_proto protoreflect.FileDescriptor
 
 const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\n" +
-	"+backoffice/service/v1/backoffice_user.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\x1a\x1auser/service/v1/user.proto\"\x8f\t\n" +
+	"+backoffice/service/v1/backoffice_user.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\x1a\x1auser/service/v1/user.proto\x1a\x1euser/service/v1/operator.proto\"\x8f\t\n" +
 	"\x10ListUsersRequest\x12\x1c\n" +
 	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x12\n" +
 	"\x04tags\x18\x02 \x03(\tR\x04tags\x12W\n" +
@@ -2693,7 +2693,7 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"\b_user_idB\t\n" +
 	"\a_statusB\r\n" +
 	"\v_start_timeB\v\n" +
-	"\t_end_time2\xda\x17\n" +
+	"\t_end_time2\xff\x18\n" +
 	"\x0eBackofficeUser\x12\x8b\x01\n" +
 	"\tListUsers\x12+.api.backoffice.service.v1.ListUsersRequest\x1a,.api.backoffice.service.v1.ListUsersResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/backoffice/user/list\x12\xa5\x01\n" +
 	"\x0fGetUserOverview\x121.api.backoffice.service.v1.GetUserOverviewRequest\x1a2.api.backoffice.service.v1.GetUserOverviewResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/user/overview/get\x12\x9b\x01\n" +
@@ -2712,7 +2712,8 @@ const file_backoffice_service_v1_backoffice_user_proto_rawDesc = "" +
 	"#DeleteUserResponsibleGamblingConfig\x12E.api.backoffice.service.v1.DeleteUserResponsibleGamblingConfigRequest\x1a<.api.user.service.v1.DeleteResponsibleGamblingConfigResponse\"A\x82\xd3\xe4\x93\x02;:\x01*\"6/v1/backoffice/user/responsible-gambling/config/delete\x12\xe1\x01\n" +
 	" GetUserResponsibleGamblingConfig\x12B.api.backoffice.service.v1.GetUserResponsibleGamblingConfigRequest\x1a9.api.user.service.v1.GetResponsibleGamblingConfigResponse\">\x82\xd3\xe4\x93\x028:\x01*\"3/v1/backoffice/user/responsible-gambling/config/get\x12\xa5\x01\n" +
 	"\x11UserIdentityAudit\x123.api.backoffice.service.v1.UserIdentityAuditRequest\x1a..api.user.service.v1.UserIdentityAuditResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/user/identity/set\x12\xa7\x01\n" +
-	"\x10UserIdentityList\x122.api.backoffice.service.v1.UserIdentityListRequest\x1a-.api.user.service.v1.UserIdentityListResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/user/identity/list/getB[\n" +
+	"\x10UserIdentityList\x122.api.backoffice.service.v1.UserIdentityListRequest\x1a-.api.user.service.v1.UserIdentityListResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/user/identity/list/get\x12\xa2\x01\n" +
+	"\x0ePreLaunchCheck\x12*.api.user.service.v1.PreLaunchCheckRequest\x1a+.api.user.service.v1.PreLaunchCheckResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/v1/backoffice/user/operator/prelaunch/checkB[\n" +
 	"\x19api.backoffice.service.v1P\x01Z<github.com/infigaming-com/meepo-api/backoffice/service/v1;v1b\x06proto3"
 
 var (
@@ -2764,11 +2765,13 @@ var file_backoffice_service_v1_backoffice_user_proto_goTypes = []any{
 	(*timestamppb.Timestamp)(nil),                      // 32: google.protobuf.Timestamp
 	(*common.OperatorContextFilters)(nil),              // 33: api.common.OperatorContextFilters
 	(*v1.UserIdentityRequest)(nil),                     // 34: api.user.service.v1.UserIdentityRequest
-	(*v1.GetUserProfileResponse)(nil),                  // 35: api.user.service.v1.GetUserProfileResponse
-	(*v1.DeleteResponsibleGamblingConfigResponse)(nil), // 36: api.user.service.v1.DeleteResponsibleGamblingConfigResponse
-	(*v1.GetResponsibleGamblingConfigResponse)(nil),    // 37: api.user.service.v1.GetResponsibleGamblingConfigResponse
-	(*v1.UserIdentityAuditResponse)(nil),               // 38: api.user.service.v1.UserIdentityAuditResponse
-	(*v1.UserIdentityListResponse)(nil),                // 39: api.user.service.v1.UserIdentityListResponse
+	(*v1.PreLaunchCheckRequest)(nil),                   // 35: api.user.service.v1.PreLaunchCheckRequest
+	(*v1.GetUserProfileResponse)(nil),                  // 36: api.user.service.v1.GetUserProfileResponse
+	(*v1.DeleteResponsibleGamblingConfigResponse)(nil), // 37: api.user.service.v1.DeleteResponsibleGamblingConfigResponse
+	(*v1.GetResponsibleGamblingConfigResponse)(nil),    // 38: api.user.service.v1.GetResponsibleGamblingConfigResponse
+	(*v1.UserIdentityAuditResponse)(nil),               // 39: api.user.service.v1.UserIdentityAuditResponse
+	(*v1.UserIdentityListResponse)(nil),                // 40: api.user.service.v1.UserIdentityListResponse
+	(*v1.PreLaunchCheckResponse)(nil),                  // 41: api.user.service.v1.PreLaunchCheckResponse
 }
 var file_backoffice_service_v1_backoffice_user_proto_depIdxs = []int32{
 	32, // 0: api.backoffice.service.v1.ListUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
@@ -2802,25 +2805,27 @@ var file_backoffice_service_v1_backoffice_user_proto_depIdxs = []int32{
 	26, // 28: api.backoffice.service.v1.BackofficeUser.GetUserResponsibleGamblingConfig:input_type -> api.backoffice.service.v1.GetUserResponsibleGamblingConfigRequest
 	27, // 29: api.backoffice.service.v1.BackofficeUser.UserIdentityAudit:input_type -> api.backoffice.service.v1.UserIdentityAuditRequest
 	28, // 30: api.backoffice.service.v1.BackofficeUser.UserIdentityList:input_type -> api.backoffice.service.v1.UserIdentityListRequest
-	1,  // 31: api.backoffice.service.v1.BackofficeUser.ListUsers:output_type -> api.backoffice.service.v1.ListUsersResponse
-	3,  // 32: api.backoffice.service.v1.BackofficeUser.GetUserOverview:output_type -> api.backoffice.service.v1.GetUserOverviewResponse
-	35, // 33: api.backoffice.service.v1.BackofficeUser.GetUserProfile:output_type -> api.user.service.v1.GetUserProfileResponse
-	6,  // 34: api.backoffice.service.v1.BackofficeUser.AddUserComment:output_type -> api.backoffice.service.v1.AddUserCommentResponse
-	8,  // 35: api.backoffice.service.v1.BackofficeUser.ListUserComments:output_type -> api.backoffice.service.v1.ListUserCommentsResponse
-	10, // 36: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:output_type -> api.backoffice.service.v1.SendEmailVerificationCodeResponse
-	12, // 37: api.backoffice.service.v1.BackofficeUser.UpdateUser:output_type -> api.backoffice.service.v1.UpdateUserResponse
-	14, // 38: api.backoffice.service.v1.BackofficeUser.SetOperatorTagsConfig:output_type -> api.backoffice.service.v1.SetOperatorTagsConfigResponse
-	16, // 39: api.backoffice.service.v1.BackofficeUser.SetOperatorTags:output_type -> api.backoffice.service.v1.SetOperatorTagsResponse
-	18, // 40: api.backoffice.service.v1.BackofficeUser.GetOperatorTagsConfig:output_type -> api.backoffice.service.v1.GetOperatorTagsConfigResponse
-	20, // 41: api.backoffice.service.v1.BackofficeUser.GetOperatorTags:output_type -> api.backoffice.service.v1.GetOperatorTagsResponse
-	22, // 42: api.backoffice.service.v1.BackofficeUser.GetUserTags:output_type -> api.backoffice.service.v1.GetUserTagsResponse
-	24, // 43: api.backoffice.service.v1.BackofficeUser.SetUserTags:output_type -> api.backoffice.service.v1.SetUserTagsResponse
-	36, // 44: api.backoffice.service.v1.BackofficeUser.DeleteUserResponsibleGamblingConfig:output_type -> api.user.service.v1.DeleteResponsibleGamblingConfigResponse
-	37, // 45: api.backoffice.service.v1.BackofficeUser.GetUserResponsibleGamblingConfig:output_type -> api.user.service.v1.GetResponsibleGamblingConfigResponse
-	38, // 46: api.backoffice.service.v1.BackofficeUser.UserIdentityAudit:output_type -> api.user.service.v1.UserIdentityAuditResponse
-	39, // 47: api.backoffice.service.v1.BackofficeUser.UserIdentityList:output_type -> api.user.service.v1.UserIdentityListResponse
-	31, // [31:48] is the sub-list for method output_type
-	14, // [14:31] is the sub-list for method input_type
+	35, // 31: api.backoffice.service.v1.BackofficeUser.PreLaunchCheck:input_type -> api.user.service.v1.PreLaunchCheckRequest
+	1,  // 32: api.backoffice.service.v1.BackofficeUser.ListUsers:output_type -> api.backoffice.service.v1.ListUsersResponse
+	3,  // 33: api.backoffice.service.v1.BackofficeUser.GetUserOverview:output_type -> api.backoffice.service.v1.GetUserOverviewResponse
+	36, // 34: api.backoffice.service.v1.BackofficeUser.GetUserProfile:output_type -> api.user.service.v1.GetUserProfileResponse
+	6,  // 35: api.backoffice.service.v1.BackofficeUser.AddUserComment:output_type -> api.backoffice.service.v1.AddUserCommentResponse
+	8,  // 36: api.backoffice.service.v1.BackofficeUser.ListUserComments:output_type -> api.backoffice.service.v1.ListUserCommentsResponse
+	10, // 37: api.backoffice.service.v1.BackofficeUser.SendEmailVerificationCode:output_type -> api.backoffice.service.v1.SendEmailVerificationCodeResponse
+	12, // 38: api.backoffice.service.v1.BackofficeUser.UpdateUser:output_type -> api.backoffice.service.v1.UpdateUserResponse
+	14, // 39: api.backoffice.service.v1.BackofficeUser.SetOperatorTagsConfig:output_type -> api.backoffice.service.v1.SetOperatorTagsConfigResponse
+	16, // 40: api.backoffice.service.v1.BackofficeUser.SetOperatorTags:output_type -> api.backoffice.service.v1.SetOperatorTagsResponse
+	18, // 41: api.backoffice.service.v1.BackofficeUser.GetOperatorTagsConfig:output_type -> api.backoffice.service.v1.GetOperatorTagsConfigResponse
+	20, // 42: api.backoffice.service.v1.BackofficeUser.GetOperatorTags:output_type -> api.backoffice.service.v1.GetOperatorTagsResponse
+	22, // 43: api.backoffice.service.v1.BackofficeUser.GetUserTags:output_type -> api.backoffice.service.v1.GetUserTagsResponse
+	24, // 44: api.backoffice.service.v1.BackofficeUser.SetUserTags:output_type -> api.backoffice.service.v1.SetUserTagsResponse
+	37, // 45: api.backoffice.service.v1.BackofficeUser.DeleteUserResponsibleGamblingConfig:output_type -> api.user.service.v1.DeleteResponsibleGamblingConfigResponse
+	38, // 46: api.backoffice.service.v1.BackofficeUser.GetUserResponsibleGamblingConfig:output_type -> api.user.service.v1.GetResponsibleGamblingConfigResponse
+	39, // 47: api.backoffice.service.v1.BackofficeUser.UserIdentityAudit:output_type -> api.user.service.v1.UserIdentityAuditResponse
+	40, // 48: api.backoffice.service.v1.BackofficeUser.UserIdentityList:output_type -> api.user.service.v1.UserIdentityListResponse
+	41, // 49: api.backoffice.service.v1.BackofficeUser.PreLaunchCheck:output_type -> api.user.service.v1.PreLaunchCheckResponse
+	32, // [32:50] is the sub-list for method output_type
+	14, // [14:32] is the sub-list for method input_type
 	14, // [14:14] is the sub-list for extension type_name
 	14, // [14:14] is the sub-list for extension extendee
 	0,  // [0:14] is the sub-list for field type_name

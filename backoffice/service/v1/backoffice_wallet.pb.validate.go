@@ -4356,6 +4356,137 @@ var _ interface {
 	ErrorName() string
 } = UpdateOperatorBalanceResponseValidationError{}
 
+// Validate checks the field values on GetOperatorBalanceRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetOperatorBalanceRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetOperatorBalanceRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetOperatorBalanceRequestMultiError, or nil if none found.
+func (m *GetOperatorBalanceRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOperatorBalanceRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetOperatorBalanceRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetOperatorBalanceRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetOperatorBalanceRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetOperatorBalanceRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOperatorBalanceRequestMultiError is an error wrapping multiple validation
+// errors returned by GetOperatorBalanceRequest.ValidateAll() if the
+// designated constraints aren't met.
+type GetOperatorBalanceRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOperatorBalanceRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOperatorBalanceRequestMultiError) AllErrors() []error { return m }
+
+// GetOperatorBalanceRequestValidationError is the validation error returned by
+// GetOperatorBalanceRequest.Validate if the designated constraints aren't met.
+type GetOperatorBalanceRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOperatorBalanceRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOperatorBalanceRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOperatorBalanceRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOperatorBalanceRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOperatorBalanceRequestValidationError) ErrorName() string {
+	return "GetOperatorBalanceRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOperatorBalanceRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOperatorBalanceRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOperatorBalanceRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOperatorBalanceRequestValidationError{}
+
 // Validate checks the field values on SetDepositRewardSequencesRequest with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the first error encountered is returned, or nil if there are
@@ -6752,22 +6883,22 @@ var _ interface {
 	ErrorName() string
 } = ExportFICAThresholdTransactionsRequestValidationError{}
 
-// Validate checks the field values on CreditRequest with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *CreditRequest) Validate() error {
+// Validate checks the field values on ManualCreditRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ManualCreditRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on CreditRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in CreditRequestMultiError, or
-// nil if none found.
-func (m *CreditRequest) ValidateAll() error {
+// ValidateAll checks the field values on ManualCreditRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ManualCreditRequestMultiError, or nil if none found.
+func (m *ManualCreditRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *CreditRequest) validate(all bool) error {
+func (m *ManualCreditRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -6792,24 +6923,20 @@ func (m *CreditRequest) validate(all bool) error {
 
 	// no validation rules for Comment
 
-	if m.ExternalTransactionId != nil {
-		// no validation rules for ExternalTransactionId
-	}
-
 	if len(errors) > 0 {
-		return CreditRequestMultiError(errors)
+		return ManualCreditRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// CreditRequestMultiError is an error wrapping multiple validation errors
-// returned by CreditRequest.ValidateAll() if the designated constraints
-// aren't met.
-type CreditRequestMultiError []error
+// ManualCreditRequestMultiError is an error wrapping multiple validation
+// errors returned by ManualCreditRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ManualCreditRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m CreditRequestMultiError) Error() string {
+func (m ManualCreditRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -6818,11 +6945,11 @@ func (m CreditRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m CreditRequestMultiError) AllErrors() []error { return m }
+func (m ManualCreditRequestMultiError) AllErrors() []error { return m }
 
-// CreditRequestValidationError is the validation error returned by
-// CreditRequest.Validate if the designated constraints aren't met.
-type CreditRequestValidationError struct {
+// ManualCreditRequestValidationError is the validation error returned by
+// ManualCreditRequest.Validate if the designated constraints aren't met.
+type ManualCreditRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -6830,22 +6957,24 @@ type CreditRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e CreditRequestValidationError) Field() string { return e.field }
+func (e ManualCreditRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e CreditRequestValidationError) Reason() string { return e.reason }
+func (e ManualCreditRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e CreditRequestValidationError) Cause() error { return e.cause }
+func (e ManualCreditRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e CreditRequestValidationError) Key() bool { return e.key }
+func (e ManualCreditRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e CreditRequestValidationError) ErrorName() string { return "CreditRequestValidationError" }
+func (e ManualCreditRequestValidationError) ErrorName() string {
+	return "ManualCreditRequestValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e CreditRequestValidationError) Error() string {
+func (e ManualCreditRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -6857,14 +6986,14 @@ func (e CreditRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sCreditRequest.%s: %s%s",
+		"invalid %sManualCreditRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = CreditRequestValidationError{}
+var _ error = ManualCreditRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -6872,24 +7001,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = CreditRequestValidationError{}
+} = ManualCreditRequestValidationError{}
 
-// Validate checks the field values on DebitRequest with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *DebitRequest) Validate() error {
+// Validate checks the field values on ManualDebitRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ManualDebitRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on DebitRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in DebitRequestMultiError, or
-// nil if none found.
-func (m *DebitRequest) ValidateAll() error {
+// ValidateAll checks the field values on ManualDebitRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ManualDebitRequestMultiError, or nil if none found.
+func (m *ManualDebitRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *DebitRequest) validate(all bool) error {
+func (m *ManualDebitRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -6900,27 +7029,28 @@ func (m *DebitRequest) validate(all bool) error {
 
 	// no validation rules for Currency
 
-	// no validation rules for ReportingCurrency
-
 	// no validation rules for TransactionType
 
 	// no validation rules for TransactionId
 
-	// no validation rules for Cash
+	// no validation rules for Amount
+
+	// no validation rules for Comment
 
 	if len(errors) > 0 {
-		return DebitRequestMultiError(errors)
+		return ManualDebitRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// DebitRequestMultiError is an error wrapping multiple validation errors
-// returned by DebitRequest.ValidateAll() if the designated constraints aren't met.
-type DebitRequestMultiError []error
+// ManualDebitRequestMultiError is an error wrapping multiple validation errors
+// returned by ManualDebitRequest.ValidateAll() if the designated constraints
+// aren't met.
+type ManualDebitRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m DebitRequestMultiError) Error() string {
+func (m ManualDebitRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -6929,11 +7059,11 @@ func (m DebitRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m DebitRequestMultiError) AllErrors() []error { return m }
+func (m ManualDebitRequestMultiError) AllErrors() []error { return m }
 
-// DebitRequestValidationError is the validation error returned by
-// DebitRequest.Validate if the designated constraints aren't met.
-type DebitRequestValidationError struct {
+// ManualDebitRequestValidationError is the validation error returned by
+// ManualDebitRequest.Validate if the designated constraints aren't met.
+type ManualDebitRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -6941,22 +7071,24 @@ type DebitRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e DebitRequestValidationError) Field() string { return e.field }
+func (e ManualDebitRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e DebitRequestValidationError) Reason() string { return e.reason }
+func (e ManualDebitRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e DebitRequestValidationError) Cause() error { return e.cause }
+func (e ManualDebitRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e DebitRequestValidationError) Key() bool { return e.key }
+func (e ManualDebitRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e DebitRequestValidationError) ErrorName() string { return "DebitRequestValidationError" }
+func (e ManualDebitRequestValidationError) ErrorName() string {
+	return "ManualDebitRequestValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e DebitRequestValidationError) Error() string {
+func (e ManualDebitRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -6968,14 +7100,14 @@ func (e DebitRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sDebitRequest.%s: %s%s",
+		"invalid %sManualDebitRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = DebitRequestValidationError{}
+var _ error = ManualDebitRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -6983,7 +7115,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = DebitRequestValidationError{}
+} = ManualDebitRequestValidationError{}
 
 // Validate checks the field values on ListManualJournalEntriesRequest with the
 // rules defined in the proto definition for this message. If any rules are
