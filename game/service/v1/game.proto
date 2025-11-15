@@ -197,6 +197,9 @@ service Game {
 
 	rpc GetUserActiveDays(GetUserActiveDaysRequest) returns (GetUserActiveDaysResponse) { }
 
+	rpc ListUserTurnoverByGame(ListUserTurnoverByGameRequest) returns (ListUserTurnoverByGameResponse) {
+	}
+
 }
 
 message CreateOperatorRequest {
@@ -1664,4 +1667,22 @@ message GetUserActiveDaysRequest {
 
 message GetUserActiveDaysResponse {
 	int64 active_days = 1;
+}
+
+message ListUserTurnoverByGameRequest {
+	int64 user_id = 1;
+	google.protobuf.Timestamp start_time = 2;
+	google.protobuf.Timestamp end_time = 3;
+	string reporting_currency = 4;
+}
+
+message ListUserTurnoverByGameResponse {
+	message Item {
+		string game_id = 1;
+		string turnover = 2;
+		string rtp = 3;
+		string house_edge = 4;
+	}
+
+	repeated Item items = 1;
 }

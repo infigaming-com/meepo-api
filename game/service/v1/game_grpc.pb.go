@@ -70,6 +70,7 @@ const (
 	Game_ListGameBetDisplayConfig_FullMethodName          = "/api.game.service.v1.Game/ListGameBetDisplayConfig"
 	Game_GetGameInfo_FullMethodName                       = "/api.game.service.v1.Game/GetGameInfo"
 	Game_GetUserActiveDays_FullMethodName                 = "/api.game.service.v1.Game/GetUserActiveDays"
+	Game_ListUserTurnoverByGame_FullMethodName            = "/api.game.service.v1.Game/ListUserTurnoverByGame"
 )
 
 // GameClient is the client API for Game service.
@@ -130,6 +131,7 @@ type GameClient interface {
 	ListGameBetDisplayConfig(ctx context.Context, in *ListGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*ListGameBetDisplayConfigResponse, error)
 	GetGameInfo(ctx context.Context, in *GetGameInfoRequest, opts ...grpc.CallOption) (*GetGameInfoResponse, error)
 	GetUserActiveDays(ctx context.Context, in *GetUserActiveDaysRequest, opts ...grpc.CallOption) (*GetUserActiveDaysResponse, error)
+	ListUserTurnoverByGame(ctx context.Context, in *ListUserTurnoverByGameRequest, opts ...grpc.CallOption) (*ListUserTurnoverByGameResponse, error)
 }
 
 type gameClient struct {
@@ -650,6 +652,16 @@ func (c *gameClient) GetUserActiveDays(ctx context.Context, in *GetUserActiveDay
 	return out, nil
 }
 
+func (c *gameClient) ListUserTurnoverByGame(ctx context.Context, in *ListUserTurnoverByGameRequest, opts ...grpc.CallOption) (*ListUserTurnoverByGameResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListUserTurnoverByGameResponse)
+	err := c.cc.Invoke(ctx, Game_ListUserTurnoverByGame_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GameServer is the server API for Game service.
 // All implementations must embed UnimplementedGameServer
 // for forward compatibility.
@@ -708,6 +720,7 @@ type GameServer interface {
 	ListGameBetDisplayConfig(context.Context, *ListGameBetDisplayConfigRequest) (*ListGameBetDisplayConfigResponse, error)
 	GetGameInfo(context.Context, *GetGameInfoRequest) (*GetGameInfoResponse, error)
 	GetUserActiveDays(context.Context, *GetUserActiveDaysRequest) (*GetUserActiveDaysResponse, error)
+	ListUserTurnoverByGame(context.Context, *ListUserTurnoverByGameRequest) (*ListUserTurnoverByGameResponse, error)
 	mustEmbedUnimplementedGameServer()
 }
 
@@ -870,6 +883,9 @@ func (UnimplementedGameServer) GetGameInfo(context.Context, *GetGameInfoRequest)
 }
 func (UnimplementedGameServer) GetUserActiveDays(context.Context, *GetUserActiveDaysRequest) (*GetUserActiveDaysResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserActiveDays not implemented")
+}
+func (UnimplementedGameServer) ListUserTurnoverByGame(context.Context, *ListUserTurnoverByGameRequest) (*ListUserTurnoverByGameResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListUserTurnoverByGame not implemented")
 }
 func (UnimplementedGameServer) mustEmbedUnimplementedGameServer() {}
 func (UnimplementedGameServer) testEmbeddedByValue()              {}
@@ -1810,6 +1826,24 @@ func _Game_GetUserActiveDays_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_ListUserTurnoverByGame_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListUserTurnoverByGameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).ListUserTurnoverByGame(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_ListUserTurnoverByGame_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).ListUserTurnoverByGame(ctx, req.(*ListUserTurnoverByGameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Game_ServiceDesc is the grpc.ServiceDesc for Game service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2020,6 +2054,10 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserActiveDays",
 			Handler:    _Game_GetUserActiveDays_Handler,
+		},
+		{
+			MethodName: "ListUserTurnoverByGame",
+			Handler:    _Game_ListUserTurnoverByGame_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

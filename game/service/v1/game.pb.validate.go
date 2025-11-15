@@ -16154,6 +16154,308 @@ var _ interface {
 	ErrorName() string
 } = GetUserActiveDaysResponseValidationError{}
 
+// Validate checks the field values on ListUserTurnoverByGameRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListUserTurnoverByGameRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListUserTurnoverByGameRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListUserTurnoverByGameRequestMultiError, or nil if none found.
+func (m *ListUserTurnoverByGameRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListUserTurnoverByGameRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	if all {
+		switch v := interface{}(m.GetStartTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListUserTurnoverByGameRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListUserTurnoverByGameRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListUserTurnoverByGameRequestValidationError{
+				field:  "StartTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetEndTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListUserTurnoverByGameRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListUserTurnoverByGameRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListUserTurnoverByGameRequestValidationError{
+				field:  "EndTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for ReportingCurrency
+
+	if len(errors) > 0 {
+		return ListUserTurnoverByGameRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListUserTurnoverByGameRequestMultiError is an error wrapping multiple
+// validation errors returned by ListUserTurnoverByGameRequest.ValidateAll()
+// if the designated constraints aren't met.
+type ListUserTurnoverByGameRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListUserTurnoverByGameRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListUserTurnoverByGameRequestMultiError) AllErrors() []error { return m }
+
+// ListUserTurnoverByGameRequestValidationError is the validation error
+// returned by ListUserTurnoverByGameRequest.Validate if the designated
+// constraints aren't met.
+type ListUserTurnoverByGameRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListUserTurnoverByGameRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListUserTurnoverByGameRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListUserTurnoverByGameRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListUserTurnoverByGameRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListUserTurnoverByGameRequestValidationError) ErrorName() string {
+	return "ListUserTurnoverByGameRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListUserTurnoverByGameRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListUserTurnoverByGameRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListUserTurnoverByGameRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListUserTurnoverByGameRequestValidationError{}
+
+// Validate checks the field values on ListUserTurnoverByGameResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListUserTurnoverByGameResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListUserTurnoverByGameResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListUserTurnoverByGameResponseMultiError, or nil if none found.
+func (m *ListUserTurnoverByGameResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListUserTurnoverByGameResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetItems() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListUserTurnoverByGameResponseValidationError{
+						field:  fmt.Sprintf("Items[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListUserTurnoverByGameResponseValidationError{
+						field:  fmt.Sprintf("Items[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListUserTurnoverByGameResponseValidationError{
+					field:  fmt.Sprintf("Items[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ListUserTurnoverByGameResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListUserTurnoverByGameResponseMultiError is an error wrapping multiple
+// validation errors returned by ListUserTurnoverByGameResponse.ValidateAll()
+// if the designated constraints aren't met.
+type ListUserTurnoverByGameResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListUserTurnoverByGameResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListUserTurnoverByGameResponseMultiError) AllErrors() []error { return m }
+
+// ListUserTurnoverByGameResponseValidationError is the validation error
+// returned by ListUserTurnoverByGameResponse.Validate if the designated
+// constraints aren't met.
+type ListUserTurnoverByGameResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListUserTurnoverByGameResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListUserTurnoverByGameResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListUserTurnoverByGameResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListUserTurnoverByGameResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListUserTurnoverByGameResponseValidationError) ErrorName() string {
+	return "ListUserTurnoverByGameResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListUserTurnoverByGameResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListUserTurnoverByGameResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListUserTurnoverByGameResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListUserTurnoverByGameResponseValidationError{}
+
 // Validate checks the field values on ListProvidersResponse_Provider with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -20134,3 +20436,116 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListGameBetDisplayConfigResponse_ItemValidationError{}
+
+// Validate checks the field values on ListUserTurnoverByGameResponse_Item with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ListUserTurnoverByGameResponse_Item) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListUserTurnoverByGameResponse_Item
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListUserTurnoverByGameResponse_ItemMultiError, or nil if none found.
+func (m *ListUserTurnoverByGameResponse_Item) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListUserTurnoverByGameResponse_Item) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for GameId
+
+	// no validation rules for Turnover
+
+	// no validation rules for Rtp
+
+	// no validation rules for HouseEdge
+
+	if len(errors) > 0 {
+		return ListUserTurnoverByGameResponse_ItemMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListUserTurnoverByGameResponse_ItemMultiError is an error wrapping multiple
+// validation errors returned by
+// ListUserTurnoverByGameResponse_Item.ValidateAll() if the designated
+// constraints aren't met.
+type ListUserTurnoverByGameResponse_ItemMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListUserTurnoverByGameResponse_ItemMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListUserTurnoverByGameResponse_ItemMultiError) AllErrors() []error { return m }
+
+// ListUserTurnoverByGameResponse_ItemValidationError is the validation error
+// returned by ListUserTurnoverByGameResponse_Item.Validate if the designated
+// constraints aren't met.
+type ListUserTurnoverByGameResponse_ItemValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListUserTurnoverByGameResponse_ItemValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListUserTurnoverByGameResponse_ItemValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListUserTurnoverByGameResponse_ItemValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListUserTurnoverByGameResponse_ItemValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListUserTurnoverByGameResponse_ItemValidationError) ErrorName() string {
+	return "ListUserTurnoverByGameResponse_ItemValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListUserTurnoverByGameResponse_ItemValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListUserTurnoverByGameResponse_Item.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListUserTurnoverByGameResponse_ItemValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListUserTurnoverByGameResponse_ItemValidationError{}
