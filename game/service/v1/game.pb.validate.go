@@ -15888,6 +15888,272 @@ var _ interface {
 	ErrorName() string
 } = ListLiveEventsResponseValidationError{}
 
+// Validate checks the field values on GetUserActiveDaysRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetUserActiveDaysRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserActiveDaysRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetUserActiveDaysRequestMultiError, or nil if none found.
+func (m *GetUserActiveDaysRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserActiveDaysRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	if all {
+		switch v := interface{}(m.GetStartTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetUserActiveDaysRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetUserActiveDaysRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetUserActiveDaysRequestValidationError{
+				field:  "StartTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetEndTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetUserActiveDaysRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetUserActiveDaysRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetUserActiveDaysRequestValidationError{
+				field:  "EndTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetUserActiveDaysRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserActiveDaysRequestMultiError is an error wrapping multiple validation
+// errors returned by GetUserActiveDaysRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetUserActiveDaysRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserActiveDaysRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserActiveDaysRequestMultiError) AllErrors() []error { return m }
+
+// GetUserActiveDaysRequestValidationError is the validation error returned by
+// GetUserActiveDaysRequest.Validate if the designated constraints aren't met.
+type GetUserActiveDaysRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserActiveDaysRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserActiveDaysRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserActiveDaysRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserActiveDaysRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserActiveDaysRequestValidationError) ErrorName() string {
+	return "GetUserActiveDaysRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserActiveDaysRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserActiveDaysRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserActiveDaysRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserActiveDaysRequestValidationError{}
+
+// Validate checks the field values on GetUserActiveDaysResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetUserActiveDaysResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserActiveDaysResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetUserActiveDaysResponseMultiError, or nil if none found.
+func (m *GetUserActiveDaysResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserActiveDaysResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ActiveDays
+
+	if len(errors) > 0 {
+		return GetUserActiveDaysResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserActiveDaysResponseMultiError is an error wrapping multiple validation
+// errors returned by GetUserActiveDaysResponse.ValidateAll() if the
+// designated constraints aren't met.
+type GetUserActiveDaysResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserActiveDaysResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserActiveDaysResponseMultiError) AllErrors() []error { return m }
+
+// GetUserActiveDaysResponseValidationError is the validation error returned by
+// GetUserActiveDaysResponse.Validate if the designated constraints aren't met.
+type GetUserActiveDaysResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserActiveDaysResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserActiveDaysResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserActiveDaysResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserActiveDaysResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserActiveDaysResponseValidationError) ErrorName() string {
+	return "GetUserActiveDaysResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserActiveDaysResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserActiveDaysResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserActiveDaysResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserActiveDaysResponseValidationError{}
+
 // Validate checks the field values on ListProvidersResponse_Provider with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

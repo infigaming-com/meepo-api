@@ -69,6 +69,7 @@ const (
 	Game_UpdateGameBetDisplayConfig_FullMethodName        = "/api.game.service.v1.Game/UpdateGameBetDisplayConfig"
 	Game_ListGameBetDisplayConfig_FullMethodName          = "/api.game.service.v1.Game/ListGameBetDisplayConfig"
 	Game_GetGameInfo_FullMethodName                       = "/api.game.service.v1.Game/GetGameInfo"
+	Game_GetUserActiveDays_FullMethodName                 = "/api.game.service.v1.Game/GetUserActiveDays"
 )
 
 // GameClient is the client API for Game service.
@@ -128,6 +129,7 @@ type GameClient interface {
 	UpdateGameBetDisplayConfig(ctx context.Context, in *UpdateGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*UpdateGameBetDisplayConfigResponse, error)
 	ListGameBetDisplayConfig(ctx context.Context, in *ListGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*ListGameBetDisplayConfigResponse, error)
 	GetGameInfo(ctx context.Context, in *GetGameInfoRequest, opts ...grpc.CallOption) (*GetGameInfoResponse, error)
+	GetUserActiveDays(ctx context.Context, in *GetUserActiveDaysRequest, opts ...grpc.CallOption) (*GetUserActiveDaysResponse, error)
 }
 
 type gameClient struct {
@@ -638,6 +640,16 @@ func (c *gameClient) GetGameInfo(ctx context.Context, in *GetGameInfoRequest, op
 	return out, nil
 }
 
+func (c *gameClient) GetUserActiveDays(ctx context.Context, in *GetUserActiveDaysRequest, opts ...grpc.CallOption) (*GetUserActiveDaysResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserActiveDaysResponse)
+	err := c.cc.Invoke(ctx, Game_GetUserActiveDays_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GameServer is the server API for Game service.
 // All implementations must embed UnimplementedGameServer
 // for forward compatibility.
@@ -695,6 +707,7 @@ type GameServer interface {
 	UpdateGameBetDisplayConfig(context.Context, *UpdateGameBetDisplayConfigRequest) (*UpdateGameBetDisplayConfigResponse, error)
 	ListGameBetDisplayConfig(context.Context, *ListGameBetDisplayConfigRequest) (*ListGameBetDisplayConfigResponse, error)
 	GetGameInfo(context.Context, *GetGameInfoRequest) (*GetGameInfoResponse, error)
+	GetUserActiveDays(context.Context, *GetUserActiveDaysRequest) (*GetUserActiveDaysResponse, error)
 	mustEmbedUnimplementedGameServer()
 }
 
@@ -854,6 +867,9 @@ func (UnimplementedGameServer) ListGameBetDisplayConfig(context.Context, *ListGa
 }
 func (UnimplementedGameServer) GetGameInfo(context.Context, *GetGameInfoRequest) (*GetGameInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGameInfo not implemented")
+}
+func (UnimplementedGameServer) GetUserActiveDays(context.Context, *GetUserActiveDaysRequest) (*GetUserActiveDaysResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserActiveDays not implemented")
 }
 func (UnimplementedGameServer) mustEmbedUnimplementedGameServer() {}
 func (UnimplementedGameServer) testEmbeddedByValue()              {}
@@ -1776,6 +1792,24 @@ func _Game_GetGameInfo_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_GetUserActiveDays_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserActiveDaysRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).GetUserActiveDays(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_GetUserActiveDays_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).GetUserActiveDays(ctx, req.(*GetUserActiveDaysRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Game_ServiceDesc is the grpc.ServiceDesc for Game service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1982,6 +2016,10 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetGameInfo",
 			Handler:    _Game_GetGameInfo_Handler,
+		},
+		{
+			MethodName: "GetUserActiveDays",
+			Handler:    _Game_GetUserActiveDays_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
