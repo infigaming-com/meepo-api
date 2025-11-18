@@ -2457,7 +2457,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListBottomOperatorsResponse'
+                                $ref: '#/components/schemas/api.user.service.v1.ListBottomOperatorsResponse'
     /v1/backoffice/operator/list/by-parent:
         post:
             tags:
@@ -2495,7 +2495,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListCompanyOperatorsResponse'
+                                $ref: '#/components/schemas/api.user.service.v1.ListCompanyOperatorsResponse'
     /v1/backoffice/operator/list/retailer:
         post:
             tags:
@@ -2514,7 +2514,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.backoffice.service.v1.ListRetailerOperatorsResponse'
+                                $ref: '#/components/schemas/api.user.service.v1.ListRetailerOperatorsResponse'
     /v1/backoffice/operator/register-limit-config/get:
         post:
             tags:
@@ -10141,31 +10141,6 @@ components:
                     type: array
                     items:
                         type: string
-        api.backoffice.service.v1.ListBottomOperatorsResponse:
-            type: object
-            properties:
-                operators:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListBottomOperatorsResponse_OperatorInfo'
-        api.backoffice.service.v1.ListBottomOperatorsResponse_OperatorInfo:
-            type: object
-            properties:
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-                bottomOperatorName:
-                    type: string
-                retailerOperatorName:
-                    type: string
-                companyOperatorName:
-                    type: string
-                mode:
-                    type: string
-                status:
-                    type: string
-                subdomain:
-                    type: string
-            description: OperatorInfo is the simplified information of a bottom operator, used for list bottom operators
         api.backoffice.service.v1.ListCampaignsRequest:
             type: object
             properties:
@@ -10262,31 +10237,6 @@ components:
                         type: string
                 includeCount:
                     type: boolean
-        api.backoffice.service.v1.ListCompanyOperatorsResponse:
-            type: object
-            properties:
-                companyOperators:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListCompanyOperatorsResponse_OperatorInfo'
-        api.backoffice.service.v1.ListCompanyOperatorsResponse_OperatorInfo:
-            type: object
-            properties:
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-                companyOperatorName:
-                    type: string
-                retailerOperatorName:
-                    type: string
-                bottomOperatorCount:
-                    type: integer
-                    format: int32
-                bottomLiveOperatorCount:
-                    type: integer
-                    format: int32
-                status:
-                    type: boolean
-            description: OperatorInfo is the simplified information of a company operator, used for list company operators
         api.backoffice.service.v1.ListCurrenciesRequest:
             type: object
             properties:
@@ -11716,34 +11666,6 @@ components:
             properties:
                 includeCount:
                     type: boolean
-        api.backoffice.service.v1.ListRetailerOperatorsResponse:
-            type: object
-            properties:
-                retailerOperators:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.backoffice.service.v1.ListRetailerOperatorsResponse_OperatorInfo'
-        api.backoffice.service.v1.ListRetailerOperatorsResponse_OperatorInfo:
-            type: object
-            properties:
-                operatorContext:
-                    $ref: '#/components/schemas/api.common.OperatorContext'
-                retailerOperatorName:
-                    type: string
-                companyOperatorCount:
-                    type: integer
-                    format: int32
-                bottomOperatorCount:
-                    type: integer
-                    format: int32
-                bottomLiveOperatorCount:
-                    type: integer
-                    format: int32
-                status:
-                    type: boolean
-                selfCoOperationEnabled:
-                    type: boolean
-            description: OperatorInfo is the simplified information of a retailer operator, used for list retailer operators
         api.backoffice.service.v1.ListRolesRequest:
             type: object
             properties:
@@ -16221,6 +16143,60 @@ components:
         api.user.service.v1.GetUserVipLevelRequest:
             type: object
             properties: {}
+        api.user.service.v1.ListBottomOperatorsResponse:
+            type: object
+            properties:
+                bottomOperators:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.ListBottomOperatorsResponse_OperatorInfo'
+        api.user.service.v1.ListBottomOperatorsResponse_OperatorInfo:
+            type: object
+            properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                bottomOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                mode:
+                    type: string
+                status:
+                    type: string
+                subdomain:
+                    type: string
+                reportingCurrency:
+                    type: string
+            description: OperatorInfo is the simplified information of a bottom operator, used for list bottom operators
+        api.user.service.v1.ListCompanyOperatorsResponse:
+            type: object
+            properties:
+                companyOperators:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.ListCompanyOperatorsResponse_OperatorInfo'
+        api.user.service.v1.ListCompanyOperatorsResponse_OperatorInfo:
+            type: object
+            properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
+                bottomOperatorCount:
+                    type: integer
+                    format: int32
+                bottomLiveOperatorCount:
+                    type: integer
+                    format: int32
+                status:
+                    type: boolean
+                reportingCurrency:
+                    type: string
+            description: OperatorInfo is the simplified information of a company operator, used for list company operators
         api.user.service.v1.ListOperatorByoDomainsResponse:
             type: object
             properties:
@@ -16285,6 +16261,36 @@ components:
                     format: date-time
                 source:
                     type: string
+        api.user.service.v1.ListRetailerOperatorsResponse:
+            type: object
+            properties:
+                retailerOperators:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.user.service.v1.ListRetailerOperatorsResponse_OperatorInfo'
+        api.user.service.v1.ListRetailerOperatorsResponse_OperatorInfo:
+            type: object
+            properties:
+                operatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                retailerOperatorName:
+                    type: string
+                companyOperatorCount:
+                    type: integer
+                    format: int32
+                bottomOperatorCount:
+                    type: integer
+                    format: int32
+                bottomLiveOperatorCount:
+                    type: integer
+                    format: int32
+                status:
+                    type: boolean
+                selfCoOperationEnabled:
+                    type: boolean
+                reportingCurrency:
+                    type: string
+            description: OperatorInfo is the simplified information of a retailer operator, used for list retailer operators
         api.user.service.v1.LoginRequest:
             type: object
             properties:
