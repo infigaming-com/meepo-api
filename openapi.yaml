@@ -4768,6 +4768,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.game.service.v1.RollbackResponse'
+    /v1/game/user/net-loss:
+        post:
+            tags:
+                - Game
+            operationId: Game_GetUserNetLoss
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.game.service.v1.GetUserNetLossRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.game.service.v1.GetUserNetLossResponse'
     /v1/payment/address/get:
         post:
             tags:
@@ -14712,6 +14730,30 @@ components:
                 updatedAt:
                     type: string
                     format: date-time
+        api.game.service.v1.GetUserNetLossRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                currency:
+                    type: string
+        api.game.service.v1.GetUserNetLossResponse:
+            type: object
+            properties:
+                totalBets:
+                    type: string
+                totalWins:
+                    type: string
+                netLoss:
+                    type: string
+                currency:
+                    type: string
         api.game.service.v1.ListBetsRequest:
             type: object
             properties:
