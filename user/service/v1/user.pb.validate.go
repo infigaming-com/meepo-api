@@ -24145,6 +24145,8 @@ func (m *ListRetailerOperatorsResponse_OperatorInfo) validate(all bool) error {
 
 	// no validation rules for SelfCoOperationEnabled
 
+	// no validation rules for ReportingCurrency
+
 	if len(errors) > 0 {
 		return ListRetailerOperatorsResponse_OperatorInfoMultiError(errors)
 	}
@@ -24289,6 +24291,8 @@ func (m *ListCompanyOperatorsResponse_OperatorInfo) validate(all bool) error {
 	// no validation rules for BottomLiveOperatorCount
 
 	// no validation rules for Status
+
+	// no validation rules for ReportingCurrency
 
 	if len(errors) > 0 {
 		return ListCompanyOperatorsResponse_OperatorInfoMultiError(errors)
@@ -24436,6 +24440,8 @@ func (m *ListBottomOperatorsResponse_OperatorInfo) validate(all bool) error {
 	// no validation rules for Status
 
 	// no validation rules for Subdomain
+
+	// no validation rules for ReportingCurrency
 
 	if len(errors) > 0 {
 		return ListBottomOperatorsResponse_OperatorInfoMultiError(errors)
