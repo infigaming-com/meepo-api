@@ -59,16 +59,16 @@ type BackofficeOperatorHTTPServer interface {
 	GetOperatorRegisterLimitConfig(context.Context, *GetOperatorRegisterLimitConfigRequest) (*v1.GetOperatorRegisterLimitConfigResponse, error)
 	ListAllOperators(context.Context, *ListAllOperatorsRequest) (*ListAllOperatorsResponse, error)
 	// ListBottomOperators ListBottomOperators returns a list of bottom operators by operator context in the middleware
-	ListBottomOperators(context.Context, *ListBottomOperatorsRequest) (*ListBottomOperatorsResponse, error)
+	ListBottomOperators(context.Context, *ListBottomOperatorsRequest) (*v1.ListBottomOperatorsResponse, error)
 	// ListCompanyOperators ListCompanies returns a list of companies by operator context in the middleware
-	ListCompanyOperators(context.Context, *ListCompanyOperatorsRequest) (*ListCompanyOperatorsResponse, error)
+	ListCompanyOperators(context.Context, *ListCompanyOperatorsRequest) (*v1.ListCompanyOperatorsResponse, error)
 	// ListOperatorsByAdminEmail List operators by admin email under specific operator
 	ListOperatorsByAdminEmail(context.Context, *ListOperatorsByAdminEmailRequest) (*v1.ListOperatorsByAdminEmailResponse, error)
 	// ListOperatorsByParentOperatorId ListOperatorsByParentOperatorId returns a list of operators by parent operator ID.
 	ListOperatorsByParentOperatorId(context.Context, *ListOperatorsByParentOperatorIdRequest) (*ListOperatorsByParentOperatorIdResponse, error)
 	ListRegisterLoginBlacklist(context.Context, *ListRegisterLoginBlacklistRequest) (*v1.ListRegisterLoginBlacklistResponse, error)
 	// ListRetailerOperators ListRetailers returns a list of retailers by operator context in the middleware
-	ListRetailerOperators(context.Context, *ListRetailerOperatorsRequest) (*ListRetailerOperatorsResponse, error)
+	ListRetailerOperators(context.Context, *ListRetailerOperatorsRequest) (*v1.ListRetailerOperatorsResponse, error)
 	SetOperatorRegisterLimitConfig(context.Context, *SetOperatorRegisterLimitConfigRequest) (*v1.SetOperatorRegisterLimitConfigResponse, error)
 	UpdateOperatorAccountSettings(context.Context, *UpdateOperatorAccountSettingsRequest) (*v1.UpdateOperatorAccountSettingsResponse, error)
 	// UpdateOperatorStatus UpdateOperatorStatus updates the status of an operator
@@ -204,7 +204,7 @@ func _BackofficeOperator_ListRetailerOperators0_HTTP_Handler(srv BackofficeOpera
 		if err != nil {
 			return err
 		}
-		reply := out.(*ListRetailerOperatorsResponse)
+		reply := out.(*v1.ListRetailerOperatorsResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -226,7 +226,7 @@ func _BackofficeOperator_ListCompanyOperators0_HTTP_Handler(srv BackofficeOperat
 		if err != nil {
 			return err
 		}
-		reply := out.(*ListCompanyOperatorsResponse)
+		reply := out.(*v1.ListCompanyOperatorsResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -248,7 +248,7 @@ func _BackofficeOperator_ListBottomOperators0_HTTP_Handler(srv BackofficeOperato
 		if err != nil {
 			return err
 		}
-		reply := out.(*ListBottomOperatorsResponse)
+		reply := out.(*v1.ListBottomOperatorsResponse)
 		return ctx.Result(200, reply)
 	}
 }
@@ -551,12 +551,12 @@ type BackofficeOperatorHTTPClient interface {
 	GetOperatorAccountSettings(ctx context.Context, req *GetOperatorAccountSettingsRequest, opts ...http.CallOption) (rsp *v1.GetOperatorAccountSettingsResponse, err error)
 	GetOperatorRegisterLimitConfig(ctx context.Context, req *GetOperatorRegisterLimitConfigRequest, opts ...http.CallOption) (rsp *v1.GetOperatorRegisterLimitConfigResponse, err error)
 	ListAllOperators(ctx context.Context, req *ListAllOperatorsRequest, opts ...http.CallOption) (rsp *ListAllOperatorsResponse, err error)
-	ListBottomOperators(ctx context.Context, req *ListBottomOperatorsRequest, opts ...http.CallOption) (rsp *ListBottomOperatorsResponse, err error)
-	ListCompanyOperators(ctx context.Context, req *ListCompanyOperatorsRequest, opts ...http.CallOption) (rsp *ListCompanyOperatorsResponse, err error)
+	ListBottomOperators(ctx context.Context, req *ListBottomOperatorsRequest, opts ...http.CallOption) (rsp *v1.ListBottomOperatorsResponse, err error)
+	ListCompanyOperators(ctx context.Context, req *ListCompanyOperatorsRequest, opts ...http.CallOption) (rsp *v1.ListCompanyOperatorsResponse, err error)
 	ListOperatorsByAdminEmail(ctx context.Context, req *ListOperatorsByAdminEmailRequest, opts ...http.CallOption) (rsp *v1.ListOperatorsByAdminEmailResponse, err error)
 	ListOperatorsByParentOperatorId(ctx context.Context, req *ListOperatorsByParentOperatorIdRequest, opts ...http.CallOption) (rsp *ListOperatorsByParentOperatorIdResponse, err error)
 	ListRegisterLoginBlacklist(ctx context.Context, req *ListRegisterLoginBlacklistRequest, opts ...http.CallOption) (rsp *v1.ListRegisterLoginBlacklistResponse, err error)
-	ListRetailerOperators(ctx context.Context, req *ListRetailerOperatorsRequest, opts ...http.CallOption) (rsp *ListRetailerOperatorsResponse, err error)
+	ListRetailerOperators(ctx context.Context, req *ListRetailerOperatorsRequest, opts ...http.CallOption) (rsp *v1.ListRetailerOperatorsResponse, err error)
 	SetOperatorRegisterLimitConfig(ctx context.Context, req *SetOperatorRegisterLimitConfigRequest, opts ...http.CallOption) (rsp *v1.SetOperatorRegisterLimitConfigResponse, err error)
 	UpdateOperatorAccountSettings(ctx context.Context, req *UpdateOperatorAccountSettingsRequest, opts ...http.CallOption) (rsp *v1.UpdateOperatorAccountSettingsResponse, err error)
 	UpdateOperatorStatus(ctx context.Context, req *UpdateOperatorStatusRequest, opts ...http.CallOption) (rsp *v1.UpdateOperatorStatusResponse, err error)
@@ -713,8 +713,8 @@ func (c *BackofficeOperatorHTTPClientImpl) ListAllOperators(ctx context.Context,
 	return &out, nil
 }
 
-func (c *BackofficeOperatorHTTPClientImpl) ListBottomOperators(ctx context.Context, in *ListBottomOperatorsRequest, opts ...http.CallOption) (*ListBottomOperatorsResponse, error) {
-	var out ListBottomOperatorsResponse
+func (c *BackofficeOperatorHTTPClientImpl) ListBottomOperators(ctx context.Context, in *ListBottomOperatorsRequest, opts ...http.CallOption) (*v1.ListBottomOperatorsResponse, error) {
+	var out v1.ListBottomOperatorsResponse
 	pattern := "/v1/backoffice/operator/list/bottom"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeOperatorListBottomOperators))
@@ -726,8 +726,8 @@ func (c *BackofficeOperatorHTTPClientImpl) ListBottomOperators(ctx context.Conte
 	return &out, nil
 }
 
-func (c *BackofficeOperatorHTTPClientImpl) ListCompanyOperators(ctx context.Context, in *ListCompanyOperatorsRequest, opts ...http.CallOption) (*ListCompanyOperatorsResponse, error) {
-	var out ListCompanyOperatorsResponse
+func (c *BackofficeOperatorHTTPClientImpl) ListCompanyOperators(ctx context.Context, in *ListCompanyOperatorsRequest, opts ...http.CallOption) (*v1.ListCompanyOperatorsResponse, error) {
+	var out v1.ListCompanyOperatorsResponse
 	pattern := "/v1/backoffice/operator/list/company"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeOperatorListCompanyOperators))
@@ -778,8 +778,8 @@ func (c *BackofficeOperatorHTTPClientImpl) ListRegisterLoginBlacklist(ctx contex
 	return &out, nil
 }
 
-func (c *BackofficeOperatorHTTPClientImpl) ListRetailerOperators(ctx context.Context, in *ListRetailerOperatorsRequest, opts ...http.CallOption) (*ListRetailerOperatorsResponse, error) {
-	var out ListRetailerOperatorsResponse
+func (c *BackofficeOperatorHTTPClientImpl) ListRetailerOperators(ctx context.Context, in *ListRetailerOperatorsRequest, opts ...http.CallOption) (*v1.ListRetailerOperatorsResponse, error) {
+	var out v1.ListRetailerOperatorsResponse
 	pattern := "/v1/backoffice/operator/list/retailer"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeOperatorListRetailerOperators))

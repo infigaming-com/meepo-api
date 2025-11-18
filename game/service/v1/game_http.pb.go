@@ -22,7 +22,6 @@ const _ = http.SupportPackageIsVersion1
 const OperationGameBalance = "/api.game.service.v1.Game/Balance"
 const OperationGameCreateSession = "/api.game.service.v1.Game/CreateSession"
 const OperationGameGetGame = "/api.game.service.v1.Game/GetGame"
-const OperationGameGetUserNetLoss = "/api.game.service.v1.Game/GetUserNetLoss"
 const OperationGameListBets = "/api.game.service.v1.Game/ListBets"
 const OperationGameListCategories = "/api.game.service.v1.Game/ListCategories"
 const OperationGameListGames = "/api.game.service.v1.Game/ListGames"
@@ -35,7 +34,6 @@ type GameHTTPServer interface {
 	Balance(context.Context, *BalanceRequest) (*BalanceResponse, error)
 	CreateSession(context.Context, *CreateSessionRequest) (*CreateSessionResponse, error)
 	GetGame(context.Context, *GetGameRequest) (*GetGameResponse, error)
-	GetUserNetLoss(context.Context, *GetUserNetLossRequest) (*GetUserNetLossResponse, error)
 	ListBets(context.Context, *ListBetsRequest) (*ListBetsResponse, error)
 	ListCategories(context.Context, *ListCategoriesRequest) (*ListCategoriesResponse, error)
 	ListGames(context.Context, *ListGamesRequest) (*ListGamesResponse, error)
@@ -57,7 +55,6 @@ func RegisterGameHTTPServer(s *http.Server, srv GameHTTPServer) {
 	r.POST("/v1/game/rollback", _Game_Rollback0_HTTP_Handler(srv))
 	r.POST("/v1/game/bets/list", _Game_ListBets0_HTTP_Handler(srv))
 	r.POST("/v1/game/live-events/list", _Game_ListLiveEvents0_HTTP_Handler(srv))
-	r.POST("/v1/game/user/net-loss", _Game_GetUserNetLoss0_HTTP_Handler(srv))
 }
 
 func _Game_ListProviders0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
@@ -280,33 +277,10 @@ func _Game_ListLiveEvents0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Contex
 	}
 }
 
-func _Game_GetUserNetLoss0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in GetUserNetLossRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationGameGetUserNetLoss)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetUserNetLoss(ctx, req.(*GetUserNetLossRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*GetUserNetLossResponse)
-		return ctx.Result(200, reply)
-	}
-}
-
 type GameHTTPClient interface {
 	Balance(ctx context.Context, req *BalanceRequest, opts ...http.CallOption) (rsp *BalanceResponse, err error)
 	CreateSession(ctx context.Context, req *CreateSessionRequest, opts ...http.CallOption) (rsp *CreateSessionResponse, err error)
 	GetGame(ctx context.Context, req *GetGameRequest, opts ...http.CallOption) (rsp *GetGameResponse, err error)
-	GetUserNetLoss(ctx context.Context, req *GetUserNetLossRequest, opts ...http.CallOption) (rsp *GetUserNetLossResponse, err error)
 	ListBets(ctx context.Context, req *ListBetsRequest, opts ...http.CallOption) (rsp *ListBetsResponse, err error)
 	ListCategories(ctx context.Context, req *ListCategoriesRequest, opts ...http.CallOption) (rsp *ListCategoriesResponse, err error)
 	ListGames(ctx context.Context, req *ListGamesRequest, opts ...http.CallOption) (rsp *ListGamesResponse, err error)
@@ -355,19 +329,6 @@ func (c *GameHTTPClientImpl) GetGame(ctx context.Context, in *GetGameRequest, op
 	pattern := "/v1/game/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationGameGetGame))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *GameHTTPClientImpl) GetUserNetLoss(ctx context.Context, in *GetUserNetLossRequest, opts ...http.CallOption) (*GetUserNetLossResponse, error) {
-	var out GetUserNetLossResponse
-	pattern := "/v1/game/user/net-loss"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationGameGetUserNetLoss))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

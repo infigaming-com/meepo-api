@@ -71,7 +71,6 @@ const (
 	Game_GetGameInfo_FullMethodName                       = "/api.game.service.v1.Game/GetGameInfo"
 	Game_GetUserActiveDays_FullMethodName                 = "/api.game.service.v1.Game/GetUserActiveDays"
 	Game_ListUserTurnoverByGame_FullMethodName            = "/api.game.service.v1.Game/ListUserTurnoverByGame"
-	Game_GetUserNetLoss_FullMethodName                    = "/api.game.service.v1.Game/GetUserNetLoss"
 )
 
 // GameClient is the client API for Game service.
@@ -133,7 +132,6 @@ type GameClient interface {
 	GetGameInfo(ctx context.Context, in *GetGameInfoRequest, opts ...grpc.CallOption) (*GetGameInfoResponse, error)
 	GetUserActiveDays(ctx context.Context, in *GetUserActiveDaysRequest, opts ...grpc.CallOption) (*GetUserActiveDaysResponse, error)
 	ListUserTurnoverByGame(ctx context.Context, in *ListUserTurnoverByGameRequest, opts ...grpc.CallOption) (*ListUserTurnoverByGameResponse, error)
-	GetUserNetLoss(ctx context.Context, in *GetUserNetLossRequest, opts ...grpc.CallOption) (*GetUserNetLossResponse, error)
 }
 
 type gameClient struct {
@@ -664,16 +662,6 @@ func (c *gameClient) ListUserTurnoverByGame(ctx context.Context, in *ListUserTur
 	return out, nil
 }
 
-func (c *gameClient) GetUserNetLoss(ctx context.Context, in *GetUserNetLossRequest, opts ...grpc.CallOption) (*GetUserNetLossResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetUserNetLossResponse)
-	err := c.cc.Invoke(ctx, Game_GetUserNetLoss_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // GameServer is the server API for Game service.
 // All implementations must embed UnimplementedGameServer
 // for forward compatibility.
@@ -733,7 +721,6 @@ type GameServer interface {
 	GetGameInfo(context.Context, *GetGameInfoRequest) (*GetGameInfoResponse, error)
 	GetUserActiveDays(context.Context, *GetUserActiveDaysRequest) (*GetUserActiveDaysResponse, error)
 	ListUserTurnoverByGame(context.Context, *ListUserTurnoverByGameRequest) (*ListUserTurnoverByGameResponse, error)
-	GetUserNetLoss(context.Context, *GetUserNetLossRequest) (*GetUserNetLossResponse, error)
 	mustEmbedUnimplementedGameServer()
 }
 
@@ -899,9 +886,6 @@ func (UnimplementedGameServer) GetUserActiveDays(context.Context, *GetUserActive
 }
 func (UnimplementedGameServer) ListUserTurnoverByGame(context.Context, *ListUserTurnoverByGameRequest) (*ListUserTurnoverByGameResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListUserTurnoverByGame not implemented")
-}
-func (UnimplementedGameServer) GetUserNetLoss(context.Context, *GetUserNetLossRequest) (*GetUserNetLossResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetUserNetLoss not implemented")
 }
 func (UnimplementedGameServer) mustEmbedUnimplementedGameServer() {}
 func (UnimplementedGameServer) testEmbeddedByValue()              {}
@@ -1860,24 +1844,6 @@ func _Game_ListUserTurnoverByGame_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Game_GetUserNetLoss_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetUserNetLossRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GameServer).GetUserNetLoss(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Game_GetUserNetLoss_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GameServer).GetUserNetLoss(ctx, req.(*GetUserNetLossRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // Game_ServiceDesc is the grpc.ServiceDesc for Game service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2092,10 +2058,6 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListUserTurnoverByGame",
 			Handler:    _Game_ListUserTurnoverByGame_Handler,
-		},
-		{
-			MethodName: "GetUserNetLoss",
-			Handler:    _Game_GetUserNetLoss_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
