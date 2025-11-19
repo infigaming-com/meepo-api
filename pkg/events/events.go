@@ -1,6 +1,10 @@
 package events
 
-import "github.com/infigaming-com/meepo-api/common"
+import (
+	"encoding/json"
+
+	"github.com/infigaming-com/meepo-api/common"
+)
 
 type IntegrityEventReportFileInfo struct {
 	FilePath string `json:"filePath"`
@@ -13,6 +17,46 @@ type IntegrityReportEvent struct {
 	PodNamespace string                         `json:"podNamespace"`
 	FileInfos    []IntegrityEventReportFileInfo `json:"fileInfos"`
 	CreatedAt    int64                          `json:"createdAt"`
+}
+
+const (
+	WEBSOCKET_MESSAGE_CLIENT   = 1
+	WEBSOCKET_MESSAGE_USER     = 2
+	WEBSOCKET_MESSAGE_OPERATOR = 3
+)
+
+type WebsocketMessageEvent struct {
+	ID      int64  `json:"ID"`
+	Channel string `json:"Channel"`
+	Type    int    `json:"Type"`
+	Message []byte `json:"Message"`
+}
+
+type WebsocketMessageMessage[T any] struct {
+	M string `json:"m"`
+	V string `json:"v"`
+	T string `json:"t"`
+	P T      `json:"p"`
+}
+
+func BuildWebsocketEvent[T any](id int64, command string, mssageType int, data T) (*WebsocketMessageEvent, error) {
+	message := WebsocketMessageMessage[T]{
+		M: command,
+		V: "1.0.0",
+		T: "",
+		P: data,
+	}
+
+	if jsonMessage, err := json.Marshal(&message); err != nil {
+		return nil, err
+	} else {
+		return &WebsocketMessageEvent{
+			ID:      id,
+			Channel: "",
+			Type:    mssageType,
+			Message: jsonMessage,
+		}, nil
+	}
 }
 
 type ClientOnlineStatusEvent struct {
@@ -216,6 +260,7 @@ const GameEventTopic = "game.events"
 const GameBetTopic = "game.bet"
 
 const GameBetBoardcastTopic = "game.bet.boardcast"
+const WEBSOCKET_PUSH_MESSAGE = "websocket.push.message"
 
 const GameBetUserTopic = "game.bet.user"
 

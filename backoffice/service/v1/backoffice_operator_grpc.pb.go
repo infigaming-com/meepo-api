@@ -53,11 +53,11 @@ type BackofficeOperatorClient interface {
 	// ListOperatorsByParentOperatorId returns a list of operators by parent operator ID.
 	ListOperatorsByParentOperatorId(ctx context.Context, in *ListOperatorsByParentOperatorIdRequest, opts ...grpc.CallOption) (*ListOperatorsByParentOperatorIdResponse, error)
 	// ListRetailers returns a list of retailers by operator context in the middleware
-	ListRetailerOperators(ctx context.Context, in *ListRetailerOperatorsRequest, opts ...grpc.CallOption) (*ListRetailerOperatorsResponse, error)
+	ListRetailerOperators(ctx context.Context, in *ListRetailerOperatorsRequest, opts ...grpc.CallOption) (*v1.ListRetailerOperatorsResponse, error)
 	// ListCompanies returns a list of companies by operator context in the middleware
-	ListCompanyOperators(ctx context.Context, in *ListCompanyOperatorsRequest, opts ...grpc.CallOption) (*ListCompanyOperatorsResponse, error)
+	ListCompanyOperators(ctx context.Context, in *ListCompanyOperatorsRequest, opts ...grpc.CallOption) (*v1.ListCompanyOperatorsResponse, error)
 	// ListBottomOperators returns a list of bottom operators by operator context in the middleware
-	ListBottomOperators(ctx context.Context, in *ListBottomOperatorsRequest, opts ...grpc.CallOption) (*ListBottomOperatorsResponse, error)
+	ListBottomOperators(ctx context.Context, in *ListBottomOperatorsRequest, opts ...grpc.CallOption) (*v1.ListBottomOperatorsResponse, error)
 	// UpdateOperatorStatus updates the status of an operator
 	UpdateOperatorStatus(ctx context.Context, in *UpdateOperatorStatusRequest, opts ...grpc.CallOption) (*v1.UpdateOperatorStatusResponse, error)
 	// List operators by admin email under specific operator
@@ -127,9 +127,9 @@ func (c *backofficeOperatorClient) ListOperatorsByParentOperatorId(ctx context.C
 	return out, nil
 }
 
-func (c *backofficeOperatorClient) ListRetailerOperators(ctx context.Context, in *ListRetailerOperatorsRequest, opts ...grpc.CallOption) (*ListRetailerOperatorsResponse, error) {
+func (c *backofficeOperatorClient) ListRetailerOperators(ctx context.Context, in *ListRetailerOperatorsRequest, opts ...grpc.CallOption) (*v1.ListRetailerOperatorsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListRetailerOperatorsResponse)
+	out := new(v1.ListRetailerOperatorsResponse)
 	err := c.cc.Invoke(ctx, BackofficeOperator_ListRetailerOperators_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -137,9 +137,9 @@ func (c *backofficeOperatorClient) ListRetailerOperators(ctx context.Context, in
 	return out, nil
 }
 
-func (c *backofficeOperatorClient) ListCompanyOperators(ctx context.Context, in *ListCompanyOperatorsRequest, opts ...grpc.CallOption) (*ListCompanyOperatorsResponse, error) {
+func (c *backofficeOperatorClient) ListCompanyOperators(ctx context.Context, in *ListCompanyOperatorsRequest, opts ...grpc.CallOption) (*v1.ListCompanyOperatorsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListCompanyOperatorsResponse)
+	out := new(v1.ListCompanyOperatorsResponse)
 	err := c.cc.Invoke(ctx, BackofficeOperator_ListCompanyOperators_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -147,9 +147,9 @@ func (c *backofficeOperatorClient) ListCompanyOperators(ctx context.Context, in 
 	return out, nil
 }
 
-func (c *backofficeOperatorClient) ListBottomOperators(ctx context.Context, in *ListBottomOperatorsRequest, opts ...grpc.CallOption) (*ListBottomOperatorsResponse, error) {
+func (c *backofficeOperatorClient) ListBottomOperators(ctx context.Context, in *ListBottomOperatorsRequest, opts ...grpc.CallOption) (*v1.ListBottomOperatorsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListBottomOperatorsResponse)
+	out := new(v1.ListBottomOperatorsResponse)
 	err := c.cc.Invoke(ctx, BackofficeOperator_ListBottomOperators_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -298,11 +298,11 @@ type BackofficeOperatorServer interface {
 	// ListOperatorsByParentOperatorId returns a list of operators by parent operator ID.
 	ListOperatorsByParentOperatorId(context.Context, *ListOperatorsByParentOperatorIdRequest) (*ListOperatorsByParentOperatorIdResponse, error)
 	// ListRetailers returns a list of retailers by operator context in the middleware
-	ListRetailerOperators(context.Context, *ListRetailerOperatorsRequest) (*ListRetailerOperatorsResponse, error)
+	ListRetailerOperators(context.Context, *ListRetailerOperatorsRequest) (*v1.ListRetailerOperatorsResponse, error)
 	// ListCompanies returns a list of companies by operator context in the middleware
-	ListCompanyOperators(context.Context, *ListCompanyOperatorsRequest) (*ListCompanyOperatorsResponse, error)
+	ListCompanyOperators(context.Context, *ListCompanyOperatorsRequest) (*v1.ListCompanyOperatorsResponse, error)
 	// ListBottomOperators returns a list of bottom operators by operator context in the middleware
-	ListBottomOperators(context.Context, *ListBottomOperatorsRequest) (*ListBottomOperatorsResponse, error)
+	ListBottomOperators(context.Context, *ListBottomOperatorsRequest) (*v1.ListBottomOperatorsResponse, error)
 	// UpdateOperatorStatus updates the status of an operator
 	UpdateOperatorStatus(context.Context, *UpdateOperatorStatusRequest) (*v1.UpdateOperatorStatusResponse, error)
 	// List operators by admin email under specific operator
@@ -344,13 +344,13 @@ func (UnimplementedBackofficeOperatorServer) GetCurrentOperatorDetails(context.C
 func (UnimplementedBackofficeOperatorServer) ListOperatorsByParentOperatorId(context.Context, *ListOperatorsByParentOperatorIdRequest) (*ListOperatorsByParentOperatorIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperatorsByParentOperatorId not implemented")
 }
-func (UnimplementedBackofficeOperatorServer) ListRetailerOperators(context.Context, *ListRetailerOperatorsRequest) (*ListRetailerOperatorsResponse, error) {
+func (UnimplementedBackofficeOperatorServer) ListRetailerOperators(context.Context, *ListRetailerOperatorsRequest) (*v1.ListRetailerOperatorsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListRetailerOperators not implemented")
 }
-func (UnimplementedBackofficeOperatorServer) ListCompanyOperators(context.Context, *ListCompanyOperatorsRequest) (*ListCompanyOperatorsResponse, error) {
+func (UnimplementedBackofficeOperatorServer) ListCompanyOperators(context.Context, *ListCompanyOperatorsRequest) (*v1.ListCompanyOperatorsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCompanyOperators not implemented")
 }
-func (UnimplementedBackofficeOperatorServer) ListBottomOperators(context.Context, *ListBottomOperatorsRequest) (*ListBottomOperatorsResponse, error) {
+func (UnimplementedBackofficeOperatorServer) ListBottomOperators(context.Context, *ListBottomOperatorsRequest) (*v1.ListBottomOperatorsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBottomOperators not implemented")
 }
 func (UnimplementedBackofficeOperatorServer) UpdateOperatorStatus(context.Context, *UpdateOperatorStatusRequest) (*v1.UpdateOperatorStatusResponse, error) {

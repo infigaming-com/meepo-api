@@ -216,6 +216,8 @@ service Wallet {
 	rpc ExportManualJournalEntries(ExportManualJournalEntriesRequest) returns (ExportManualJournalEntriesResponse) {}
 
 	rpc ListTimeRangeDepositCredits(ListTimeRangeDepositCreditsRequest) returns (ListTimeRangeDepositCreditsResponse) {}
+
+	rpc ListUserOverview(ListUserOverviewRequest) returns (ListUserOverviewResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -1611,4 +1613,19 @@ message ListTimeRangeDepositCreditsResponse {
 		string provider_bonus_reporting_currency = 11;
 	}
 	repeated Credit credits = 1;
+}
+
+message ListUserOverviewRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	repeated int64 user_ids = 3;
+}
+
+message ListUserOverviewResponse {
+	message UserOverview {
+		int64 user_id = 1;
+		string ngr_usd = 2; // cash bet - cash win
+		string ngr_reporting_currency = 3;
+	}
+	repeated UserOverview user_overviews = 1;
 }

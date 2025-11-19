@@ -78,6 +78,7 @@ const (
 	Wallet_ListManualJournalEntries_FullMethodName            = "/api.wallet.service.v1.Wallet/ListManualJournalEntries"
 	Wallet_ExportManualJournalEntries_FullMethodName          = "/api.wallet.service.v1.Wallet/ExportManualJournalEntries"
 	Wallet_ListTimeRangeDepositCredits_FullMethodName         = "/api.wallet.service.v1.Wallet/ListTimeRangeDepositCredits"
+	Wallet_ListUserOverview_FullMethodName                    = "/api.wallet.service.v1.Wallet/ListUserOverview"
 )
 
 // WalletClient is the client API for Wallet service.
@@ -184,6 +185,7 @@ type WalletClient interface {
 	ListManualJournalEntries(ctx context.Context, in *ListManualJournalEntriesRequest, opts ...grpc.CallOption) (*ListManualJournalEntriesResponse, error)
 	ExportManualJournalEntries(ctx context.Context, in *ExportManualJournalEntriesRequest, opts ...grpc.CallOption) (*ExportManualJournalEntriesResponse, error)
 	ListTimeRangeDepositCredits(ctx context.Context, in *ListTimeRangeDepositCreditsRequest, opts ...grpc.CallOption) (*ListTimeRangeDepositCreditsResponse, error)
+	ListUserOverview(ctx context.Context, in *ListUserOverviewRequest, opts ...grpc.CallOption) (*ListUserOverviewResponse, error)
 }
 
 type walletClient struct {
@@ -784,6 +786,16 @@ func (c *walletClient) ListTimeRangeDepositCredits(ctx context.Context, in *List
 	return out, nil
 }
 
+func (c *walletClient) ListUserOverview(ctx context.Context, in *ListUserOverviewRequest, opts ...grpc.CallOption) (*ListUserOverviewResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListUserOverviewResponse)
+	err := c.cc.Invoke(ctx, Wallet_ListUserOverview_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServer is the server API for Wallet service.
 // All implementations must embed UnimplementedWalletServer
 // for forward compatibility.
@@ -888,6 +900,7 @@ type WalletServer interface {
 	ListManualJournalEntries(context.Context, *ListManualJournalEntriesRequest) (*ListManualJournalEntriesResponse, error)
 	ExportManualJournalEntries(context.Context, *ExportManualJournalEntriesRequest) (*ExportManualJournalEntriesResponse, error)
 	ListTimeRangeDepositCredits(context.Context, *ListTimeRangeDepositCreditsRequest) (*ListTimeRangeDepositCreditsResponse, error)
+	ListUserOverview(context.Context, *ListUserOverviewRequest) (*ListUserOverviewResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -1074,6 +1087,9 @@ func (UnimplementedWalletServer) ExportManualJournalEntries(context.Context, *Ex
 }
 func (UnimplementedWalletServer) ListTimeRangeDepositCredits(context.Context, *ListTimeRangeDepositCreditsRequest) (*ListTimeRangeDepositCreditsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListTimeRangeDepositCredits not implemented")
+}
+func (UnimplementedWalletServer) ListUserOverview(context.Context, *ListUserOverviewRequest) (*ListUserOverviewResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListUserOverview not implemented")
 }
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
@@ -2158,6 +2174,24 @@ func _Wallet_ListTimeRangeDepositCredits_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_ListUserOverview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListUserOverviewRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).ListUserOverview(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_ListUserOverview_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).ListUserOverview(ctx, req.(*ListUserOverviewRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Wallet_ServiceDesc is the grpc.ServiceDesc for Wallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2400,6 +2434,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListTimeRangeDepositCredits",
 			Handler:    _Wallet_ListTimeRangeDepositCredits_Handler,
+		},
+		{
+			MethodName: "ListUserOverview",
+			Handler:    _Wallet_ListUserOverview_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -1414,6 +1414,7 @@ message ListRetailerOperatorsResponse {
 		int32 bottom_live_operator_count = 5;
 		bool status = 6;
 		bool self_co_operation_enabled = 7;
+		string reporting_currency = 8;
 	}
 	repeated OperatorInfo retailer_operators = 1;
 }
@@ -1433,6 +1434,7 @@ message ListCompanyOperatorsResponse {
 		int32 bottom_operator_count = 4;
 		int32 bottom_live_operator_count = 5;
 		bool status = 6;
+		string reporting_currency = 7;
 	}
 	repeated OperatorInfo company_operators = 1;
 }
@@ -1453,6 +1455,7 @@ message ListBottomOperatorsResponse {
 		string mode = 5;
 		string status = 6;
 		string subdomain = 7;
+		string reporting_currency = 8;
 	}
 	repeated OperatorInfo bottom_operators = 1;
 }

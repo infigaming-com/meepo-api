@@ -11578,6 +11578,7 @@ type ListRetailerOperatorsResponse_OperatorInfo struct {
 	BottomLiveOperatorCount int32                   `protobuf:"varint,5,opt,name=bottom_live_operator_count,json=bottomLiveOperatorCount,proto3" json:"bottom_live_operator_count,omitempty"`
 	Status                  bool                    `protobuf:"varint,6,opt,name=status,proto3" json:"status,omitempty"`
 	SelfCoOperationEnabled  bool                    `protobuf:"varint,7,opt,name=self_co_operation_enabled,json=selfCoOperationEnabled,proto3" json:"self_co_operation_enabled,omitempty"`
+	ReportingCurrency       string                  `protobuf:"bytes,8,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -11661,6 +11662,13 @@ func (x *ListRetailerOperatorsResponse_OperatorInfo) GetSelfCoOperationEnabled()
 	return false
 }
 
+func (x *ListRetailerOperatorsResponse_OperatorInfo) GetReportingCurrency() string {
+	if x != nil {
+		return x.ReportingCurrency
+	}
+	return ""
+}
+
 // OperatorInfo is the simplified information of a company operator, used for list company operators
 type ListCompanyOperatorsResponse_OperatorInfo struct {
 	state                   protoimpl.MessageState  `protogen:"open.v1"`
@@ -11670,6 +11678,7 @@ type ListCompanyOperatorsResponse_OperatorInfo struct {
 	BottomOperatorCount     int32                   `protobuf:"varint,4,opt,name=bottom_operator_count,json=bottomOperatorCount,proto3" json:"bottom_operator_count,omitempty"`
 	BottomLiveOperatorCount int32                   `protobuf:"varint,5,opt,name=bottom_live_operator_count,json=bottomLiveOperatorCount,proto3" json:"bottom_live_operator_count,omitempty"`
 	Status                  bool                    `protobuf:"varint,6,opt,name=status,proto3" json:"status,omitempty"`
+	ReportingCurrency       string                  `protobuf:"bytes,7,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -11746,6 +11755,13 @@ func (x *ListCompanyOperatorsResponse_OperatorInfo) GetStatus() bool {
 	return false
 }
 
+func (x *ListCompanyOperatorsResponse_OperatorInfo) GetReportingCurrency() string {
+	if x != nil {
+		return x.ReportingCurrency
+	}
+	return ""
+}
+
 // OperatorInfo is the simplified information of a bottom operator, used for list bottom operators
 type ListBottomOperatorsResponse_OperatorInfo struct {
 	state                protoimpl.MessageState  `protogen:"open.v1"`
@@ -11756,6 +11772,7 @@ type ListBottomOperatorsResponse_OperatorInfo struct {
 	Mode                 string                  `protobuf:"bytes,5,opt,name=mode,proto3" json:"mode,omitempty"`
 	Status               string                  `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"`
 	Subdomain            string                  `protobuf:"bytes,7,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
+	ReportingCurrency    string                  `protobuf:"bytes,8,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -11835,6 +11852,13 @@ func (x *ListBottomOperatorsResponse_OperatorInfo) GetStatus() string {
 func (x *ListBottomOperatorsResponse_OperatorInfo) GetSubdomain() string {
 	if x != nil {
 		return x.Subdomain
+	}
+	return ""
+}
+
+func (x *ListBottomOperatorsResponse_OperatorInfo) GetReportingCurrency() string {
+	if x != nil {
+		return x.ReportingCurrency
 	}
 	return ""
 }
@@ -12809,9 +12833,9 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\tpage_size\x18\t \x01(\x05R\bpageSize\"\x8b\x01\n" +
 	"\x1cListRetailerOperatorsRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12#\n" +
-	"\rinclude_count\x18\x02 \x01(\bR\fincludeCount\"\x98\x04\n" +
+	"\rinclude_count\x18\x02 \x01(\bR\fincludeCount\"\xc7\x04\n" +
 	"\x1dListRetailerOperatorsResponse\x12n\n" +
-	"\x12retailer_operators\x18\x01 \x03(\v2?.api.user.service.v1.ListRetailerOperatorsResponse.OperatorInfoR\x11retailerOperators\x1a\x86\x03\n" +
+	"\x12retailer_operators\x18\x01 \x03(\v2?.api.user.service.v1.ListRetailerOperatorsResponse.OperatorInfoR\x11retailerOperators\x1a\xb5\x03\n" +
 	"\fOperatorInfo\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x124\n" +
 	"\x16retailer_operator_name\x18\x02 \x01(\tR\x14retailerOperatorName\x124\n" +
@@ -12819,26 +12843,28 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x15bottom_operator_count\x18\x04 \x01(\x05R\x13bottomOperatorCount\x12;\n" +
 	"\x1abottom_live_operator_count\x18\x05 \x01(\x05R\x17bottomLiveOperatorCount\x12\x16\n" +
 	"\x06status\x18\x06 \x01(\bR\x06status\x129\n" +
-	"\x19self_co_operation_enabled\x18\a \x01(\bR\x16selfCoOperationEnabled\"\xbe\x01\n" +
+	"\x19self_co_operation_enabled\x18\a \x01(\bR\x16selfCoOperationEnabled\x12-\n" +
+	"\x12reporting_currency\x18\b \x01(\tR\x11reportingCurrency\"\xbe\x01\n" +
 	"\x1bListCompanyOperatorsRequest\x122\n" +
 	"\x15retailer_operator_ids\x18\x01 \x03(\x03R\x13retailerOperatorIds\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12#\n" +
-	"\rinclude_count\x18\x03 \x01(\bR\fincludeCount\"\xd7\x03\n" +
+	"\rinclude_count\x18\x03 \x01(\bR\fincludeCount\"\x86\x04\n" +
 	"\x1cListCompanyOperatorsResponse\x12k\n" +
-	"\x11company_operators\x18\x01 \x03(\v2>.api.user.service.v1.ListCompanyOperatorsResponse.OperatorInfoR\x10companyOperators\x1a\xc9\x02\n" +
+	"\x11company_operators\x18\x01 \x03(\v2>.api.user.service.v1.ListCompanyOperatorsResponse.OperatorInfoR\x10companyOperators\x1a\xf8\x02\n" +
 	"\fOperatorInfo\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x122\n" +
 	"\x15company_operator_name\x18\x02 \x01(\tR\x13companyOperatorName\x124\n" +
 	"\x16retailer_operator_name\x18\x03 \x01(\tR\x14retailerOperatorName\x122\n" +
 	"\x15bottom_operator_count\x18\x04 \x01(\x05R\x13bottomOperatorCount\x12;\n" +
 	"\x1abottom_live_operator_count\x18\x05 \x01(\x05R\x17bottomLiveOperatorCount\x12\x16\n" +
-	"\x06status\x18\x06 \x01(\bR\x06status\"\xca\x01\n" +
+	"\x06status\x18\x06 \x01(\bR\x06status\x12-\n" +
+	"\x12reporting_currency\x18\a \x01(\tR\x11reportingCurrency\"\xca\x01\n" +
 	"\x1aListBottomOperatorsRequest\x122\n" +
 	"\x15retailer_operator_ids\x18\x01 \x03(\x03R\x13retailerOperatorIds\x120\n" +
 	"\x14company_operator_ids\x18\x02 \x03(\x03R\x12companyOperatorIds\x12F\n" +
-	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xc6\x03\n" +
+	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xf5\x03\n" +
 	"\x1bListBottomOperatorsResponse\x12h\n" +
-	"\x10bottom_operators\x18\x01 \x03(\v2=.api.user.service.v1.ListBottomOperatorsResponse.OperatorInfoR\x0fbottomOperators\x1a\xbc\x02\n" +
+	"\x10bottom_operators\x18\x01 \x03(\v2=.api.user.service.v1.ListBottomOperatorsResponse.OperatorInfoR\x0fbottomOperators\x1a\xeb\x02\n" +
 	"\fOperatorInfo\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x120\n" +
 	"\x14bottom_operator_name\x18\x02 \x01(\tR\x12bottomOperatorName\x124\n" +
@@ -12846,7 +12872,8 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\x15company_operator_name\x18\x04 \x01(\tR\x13companyOperatorName\x12\x12\n" +
 	"\x04mode\x18\x05 \x01(\tR\x04mode\x12\x16\n" +
 	"\x06status\x18\x06 \x01(\tR\x06status\x12\x1c\n" +
-	"\tsubdomain\x18\a \x01(\tR\tsubdomain\"\xec\x02\n" +
+	"\tsubdomain\x18\a \x01(\tR\tsubdomain\x12-\n" +
+	"\x12reporting_currency\x18\b \x01(\tR\x11reportingCurrency\"\xec\x02\n" +
 	"\x1bUpdateOperatorStatusRequest\x12S\n" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x16\n" +
 	"\x06action\x18\x02 \x01(\tR\x06action\x12<\n" +
