@@ -2577,7 +2577,7 @@ func (x *ClaimVipRewardRequest) GetOperatorContext() *common.OperatorContext {
 
 type ClaimVipRewardResponse struct {
 	state                   protoimpl.MessageState `protogen:"open.v1"`
-	ClaimableAmount         int64                  `protobuf:"varint,1,opt,name=claimable_amount,json=claimableAmount,proto3" json:"claimable_amount,omitempty"`
+	ClaimableAmount         string                 `protobuf:"bytes,1,opt,name=claimable_amount,json=claimableAmount,proto3" json:"claimable_amount,omitempty"`
 	ClaimableAmountCurrency string                 `protobuf:"bytes,2,opt,name=claimable_amount_currency,json=claimableAmountCurrency,proto3" json:"claimable_amount_currency,omitempty"`
 	ClaimTransactionId      int64                  `protobuf:"varint,3,opt,name=claim_transaction_id,json=claimTransactionId,proto3" json:"claim_transaction_id,omitempty"`
 	unknownFields           protoimpl.UnknownFields
@@ -2614,11 +2614,11 @@ func (*ClaimVipRewardResponse) Descriptor() ([]byte, []int) {
 	return file_vip_service_v1_vip_proto_rawDescGZIP(), []int{26}
 }
 
-func (x *ClaimVipRewardResponse) GetClaimableAmount() int64 {
+func (x *ClaimVipRewardResponse) GetClaimableAmount() string {
 	if x != nil {
 		return x.ClaimableAmount
 	}
-	return 0
+	return ""
 }
 
 func (x *ClaimVipRewardResponse) GetClaimableAmountCurrency() string {
@@ -3420,7 +3420,7 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12F\n" +
 	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xb1\x01\n" +
 	"\x16ClaimVipRewardResponse\x12)\n" +
-	"\x10claimable_amount\x18\x01 \x01(\x03R\x0fclaimableAmount\x12:\n" +
+	"\x10claimable_amount\x18\x01 \x01(\tR\x0fclaimableAmount\x12:\n" +
 	"\x19claimable_amount_currency\x18\x02 \x01(\tR\x17claimableAmountCurrency\x120\n" +
 	"\x14claim_transaction_id\x18\x03 \x01(\x03R\x12claimTransactionId\"\x83\x01\n" +
 	"\x1dGetOperatorVipSettingsRequest\x12F\n" +
