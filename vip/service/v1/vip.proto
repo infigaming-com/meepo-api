@@ -376,7 +376,7 @@ message ClaimVipRewardRequest {
 }
 
 message ClaimVipRewardResponse {
-  int64 claimable_amount = 1;
+  string claimable_amount = 1;
   string claimable_amount_currency = 2;
   int64 claim_transaction_id = 3;
 }
