@@ -11752,19 +11752,20 @@ func (x *RewardSequence_TierConfig) GetMaxWithdrawalMultiplier() string {
 }
 
 type UserBalanceDetail_Credit struct {
-	state                          protoimpl.MessageState `protogen:"open.v1"`
-	CreditId                       int64                  `protobuf:"varint,1,opt,name=credit_id,json=creditId,proto3" json:"credit_id,omitempty"`
-	Cash                           string                 `protobuf:"bytes,2,opt,name=cash,proto3" json:"cash,omitempty"`
-	OperatorBonus                  string                 `protobuf:"bytes,3,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
-	ProviderBonus                  string                 `protobuf:"bytes,4,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
-	WithdrawableCash               string                 `protobuf:"bytes,5,opt,name=withdrawable_cash,json=withdrawableCash,proto3" json:"withdrawable_cash,omitempty"`
-	TransferableOperatorBonus      string                 `protobuf:"bytes,6,opt,name=transferable_operator_bonus,json=transferableOperatorBonus,proto3" json:"transferable_operator_bonus,omitempty"`
-	CashTurnover                   string                 `protobuf:"bytes,7,opt,name=cash_turnover,json=cashTurnover,proto3" json:"cash_turnover,omitempty"`
-	CashTurnoverThreshold          string                 `protobuf:"bytes,8,opt,name=cash_turnover_threshold,json=cashTurnoverThreshold,proto3" json:"cash_turnover_threshold,omitempty"`
-	OperatorBonusTurnover          string                 `protobuf:"bytes,9,opt,name=operator_bonus_turnover,json=operatorBonusTurnover,proto3" json:"operator_bonus_turnover,omitempty"`
-	OperatorBonusTurnoverThreshold string                 `protobuf:"bytes,10,opt,name=operator_bonus_turnover_threshold,json=operatorBonusTurnoverThreshold,proto3" json:"operator_bonus_turnover_threshold,omitempty"`
-	unknownFields                  protoimpl.UnknownFields
-	sizeCache                      protoimpl.SizeCache
+	state                                protoimpl.MessageState `protogen:"open.v1"`
+	CreditId                             int64                  `protobuf:"varint,1,opt,name=credit_id,json=creditId,proto3" json:"credit_id,omitempty"`
+	Cash                                 string                 `protobuf:"bytes,2,opt,name=cash,proto3" json:"cash,omitempty"`
+	OperatorBonus                        string                 `protobuf:"bytes,3,opt,name=operator_bonus,json=operatorBonus,proto3" json:"operator_bonus,omitempty"`
+	ProviderBonus                        string                 `protobuf:"bytes,4,opt,name=provider_bonus,json=providerBonus,proto3" json:"provider_bonus,omitempty"`
+	WithdrawableCash                     string                 `protobuf:"bytes,5,opt,name=withdrawable_cash,json=withdrawableCash,proto3" json:"withdrawable_cash,omitempty"`
+	TransferableOperatorBonus            string                 `protobuf:"bytes,6,opt,name=transferable_operator_bonus,json=transferableOperatorBonus,proto3" json:"transferable_operator_bonus,omitempty"`
+	CashTurnover                         string                 `protobuf:"bytes,7,opt,name=cash_turnover,json=cashTurnover,proto3" json:"cash_turnover,omitempty"`
+	CashTurnoverThreshold                string                 `protobuf:"bytes,8,opt,name=cash_turnover_threshold,json=cashTurnoverThreshold,proto3" json:"cash_turnover_threshold,omitempty"`
+	OperatorBonusTurnover                string                 `protobuf:"bytes,9,opt,name=operator_bonus_turnover,json=operatorBonusTurnover,proto3" json:"operator_bonus_turnover,omitempty"`
+	OperatorBonusTurnoverThreshold       string                 `protobuf:"bytes,10,opt,name=operator_bonus_turnover_threshold,json=operatorBonusTurnoverThreshold,proto3" json:"operator_bonus_turnover_threshold,omitempty"`
+	MaximumOperatorBonusWithdrawalAmount string                 `protobuf:"bytes,11,opt,name=maximum_operator_bonus_withdrawal_amount,json=maximumOperatorBonusWithdrawalAmount,proto3" json:"maximum_operator_bonus_withdrawal_amount,omitempty"`
+	unknownFields                        protoimpl.UnknownFields
+	sizeCache                            protoimpl.SizeCache
 }
 
 func (x *UserBalanceDetail_Credit) Reset() {
@@ -11863,6 +11864,13 @@ func (x *UserBalanceDetail_Credit) GetOperatorBonusTurnover() string {
 func (x *UserBalanceDetail_Credit) GetOperatorBonusTurnoverThreshold() string {
 	if x != nil {
 		return x.OperatorBonusTurnoverThreshold
+	}
+	return ""
+}
+
+func (x *UserBalanceDetail_Credit) GetMaximumOperatorBonusWithdrawalAmount() string {
+	if x != nil {
+		return x.MaximumOperatorBonusWithdrawalAmount
 	}
 	return ""
 }
@@ -13810,7 +13818,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\fbalance_cash\x18\x03 \x01(\tR\vbalanceCash\x12#\n" +
 	"\rbalance_bonus\x18\x04 \x01(\tR\fbalanceBonus\":\n" +
 	"\x1cGetUserBalanceDetailsRequest\x12\x1a\n" +
-	"\bcurrency\x18\x01 \x01(\tR\bcurrency\"\xd7\x06\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\"\xaf\a\n" +
 	"\x11UserBalanceDetail\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x1d\n" +
 	"\n" +
@@ -13819,7 +13827,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x14total_provider_bonus\x18\x04 \x01(\tR\x12totalProviderBonus\x126\n" +
 	"\x17total_withdrawable_cash\x18\x05 \x01(\tR\x15totalWithdrawableCash\x12I\n" +
 	"!total_transferable_operator_bonus\x18\x06 \x01(\tR\x1etotalTransferableOperatorBonus\x12I\n" +
-	"\acredits\x18\a \x03(\v2/.api.wallet.service.v1.UserBalanceDetail.CreditR\acredits\x1a\xd4\x03\n" +
+	"\acredits\x18\a \x03(\v2/.api.wallet.service.v1.UserBalanceDetail.CreditR\acredits\x1a\xac\x04\n" +
 	"\x06Credit\x12\x1b\n" +
 	"\tcredit_id\x18\x01 \x01(\x03R\bcreditId\x12\x12\n" +
 	"\x04cash\x18\x02 \x01(\tR\x04cash\x12%\n" +
@@ -13831,7 +13839,8 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x17cash_turnover_threshold\x18\b \x01(\tR\x15cashTurnoverThreshold\x126\n" +
 	"\x17operator_bonus_turnover\x18\t \x01(\tR\x15operatorBonusTurnover\x12I\n" +
 	"!operator_bonus_turnover_threshold\x18\n" +
-	" \x01(\tR\x1eoperatorBonusTurnoverThreshold\"a\n" +
+	" \x01(\tR\x1eoperatorBonusTurnoverThreshold\x12V\n" +
+	"(maximum_operator_bonus_withdrawal_amount\x18\v \x01(\tR$maximumOperatorBonusWithdrawalAmount\"a\n" +
 	"\x1dGetUserBalanceDetailsResponse\x12@\n" +
 	"\x06detail\x18\x01 \x01(\v2(.api.wallet.service.v1.UserBalanceDetailR\x06detail\"\xec\x04\n" +
 	"#AddResponsibleGamblingConfigRequest\x12\x1a\n" +

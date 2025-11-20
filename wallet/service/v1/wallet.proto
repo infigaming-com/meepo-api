@@ -1268,6 +1268,7 @@ message UserBalanceDetail {
 		string cash_turnover_threshold = 8;
 		string operator_bonus_turnover = 9;
 		string operator_bonus_turnover_threshold = 10;
+		string maximum_operator_bonus_withdrawal_amount = 11;
 	}
 	string currency = 1;
 	string total_cash = 2;
