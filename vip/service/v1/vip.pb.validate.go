@@ -3785,7 +3785,7 @@ func (m *ClaimVipRewardResponse) validate(all bool) error {
 
 	// no validation rules for ClaimableAmountCurrency
 
-	// no validation rules for ClaimTransactionId
+	// no validation rules for RewardId
 
 	if len(errors) > 0 {
 		return ClaimVipRewardResponseMultiError(errors)
@@ -4220,9 +4220,11 @@ func (m *ConfirmClaimVipRewardRequest) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for ClaimTransactionId
-
 	// no validation rules for ClaimCurrency
+
+	// no validation rules for RewardId
+
+	// no validation rules for RewardKind
 
 	if len(errors) > 0 {
 		return ConfirmClaimVipRewardRequestMultiError(errors)

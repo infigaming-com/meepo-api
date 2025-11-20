@@ -378,7 +378,7 @@ message ClaimVipRewardRequest {
 message ClaimVipRewardResponse {
   string claimable_amount = 1;
   string claimable_amount_currency = 2;
-  int64 claim_transaction_id = 3;
+  int64 reward_id = 3;
 }
 
 message GetOperatorVipSettingsRequest {
@@ -394,8 +394,9 @@ message GetOperatorVipSettingsResponse {
 message ConfirmClaimVipRewardRequest {
   int64 user_id = 1;
   api.common.OperatorContext operator_context = 2;
-  int64 claim_transaction_id = 3;
-  string claim_currency = 4;
+  string claim_currency = 3;
+  int64 reward_id = 4;
+  VipRewardKind reward_kind = 5;
 }
 
 message ConfirmClaimVipRewardResponse {

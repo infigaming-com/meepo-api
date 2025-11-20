@@ -16985,7 +16985,7 @@ components:
                     type: string
                 claimableAmountCurrency:
                     type: string
-                claimTransactionId:
+                rewardId:
                     type: string
         api.vip.service.v1.ConfirmClaimVipRewardResponse:
             type: object
