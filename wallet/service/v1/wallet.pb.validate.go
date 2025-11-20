@@ -21900,6 +21900,8 @@ func (m *UserBalanceDetail_Credit) validate(all bool) error {
 
 	// no validation rules for OperatorBonusTurnoverThreshold
 
+	// no validation rules for MaximumOperatorBonusWithdrawalAmount
+
 	if len(errors) > 0 {
 		return UserBalanceDetail_CreditMultiError(errors)
 	}

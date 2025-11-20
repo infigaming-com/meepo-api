@@ -18281,6 +18281,8 @@ components:
                     type: string
                 operatorBonusTurnoverThreshold:
                     type: string
+                maximumOperatorBonusWithdrawalAmount:
+                    type: string
         google.protobuf.ListValue:
             type: object
             properties:
