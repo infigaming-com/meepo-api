@@ -15829,10 +15829,21 @@ components:
         api.user.service.v1.ConfirmClaimVipRewardRequest:
             type: object
             properties:
-                claimTransactionId:
+                rewardId:
                     type: string
                 claimCurrency:
                     type: string
+                rewardKind:
+                    enum:
+                        - VIP_REWARD_KIND_UNSPECIFIED
+                        - VIP_REWARD_KIND_UPGRADE_BASE
+                        - VIP_REWARD_KIND_UPGRADE_INCREMENTAL
+                        - VIP_REWARD_KIND_RAKEBACK_INSTANT
+                        - VIP_REWARD_KIND_RAKEBACK_DAILY
+                        - VIP_REWARD_KIND_RAKEBACK_WEEKLY
+                        - VIP_REWARD_KIND_RAKEBACK_MONTHLY
+                    type: string
+                    format: enum
         api.user.service.v1.DeleteOperatorByoDomainResponse:
             type: object
             properties: {}
