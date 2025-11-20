@@ -21943,9 +21943,11 @@ func (m *ConfirmClaimVipRewardRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for ClaimTransactionId
+	// no validation rules for RewardId
 
 	// no validation rules for ClaimCurrency
+
+	// no validation rules for RewardKind
 
 	if len(errors) > 0 {
 		return ConfirmClaimVipRewardRequestMultiError(errors)

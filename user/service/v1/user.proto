@@ -1724,8 +1724,9 @@ message ClaimVipRewardRequest {
 }
 
 message ConfirmClaimVipRewardRequest {
-	int64 claim_transaction_id = 1;
+	int64 reward_id = 1;
 	string claim_currency = 2;
+	api.vip.service.v1.VipRewardKind reward_kind = 3;
 }
 
 message RequestDailyLossbackRequest {
