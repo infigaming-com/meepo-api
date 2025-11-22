@@ -9022,6 +9022,8 @@ func (m *UpdateRoleRequest) validate(all bool) error {
 
 	}
 
+	// no validation rules for CurrentRoleId
+
 	if len(errors) > 0 {
 		return UpdateRoleRequestMultiError(errors)
 	}
