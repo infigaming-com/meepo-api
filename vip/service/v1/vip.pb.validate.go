@@ -2763,6 +2763,8 @@ func (m *VipMember) validate(all bool) error {
 
 	// no validation rules for MonthlySlider
 
+	// no validation rules for NextLevelId
+
 	if len(errors) > 0 {
 		return VipMemberMultiError(errors)
 	}

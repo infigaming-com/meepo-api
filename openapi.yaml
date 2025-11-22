@@ -17251,6 +17251,8 @@ components:
                 monthlySlider:
                     type: integer
                     format: int32
+                nextLevelId:
+                    type: string
         api.vip.service.v1.VipSetting:
             type: object
             properties:

@@ -330,6 +330,7 @@ message VipMember {
   int64 last_instant_upgrade_at = 11;
   int32 weekly_slider = 12;
   int32 monthly_slider = 13;
+  int64 next_level_id = 14;
 }
 
 message GetUserVipLevelRequest {
