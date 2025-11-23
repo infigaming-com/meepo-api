@@ -17027,6 +17027,12 @@ components:
                     type: boolean
                 noUnsettledBets:
                     type: boolean
+                timeWindowStartHour:
+                    type: string
+                timeWindowEndHour:
+                    type: string
+                timeZone:
+                    type: string
         api.vip.service.v1.GetClaimableVipRewardsResponse:
             type: object
             properties:
@@ -17251,6 +17257,8 @@ components:
                 monthlySlider:
                     type: integer
                     format: int32
+                nextLevelId:
+                    type: string
         api.vip.service.v1.VipSetting:
             type: object
             properties:

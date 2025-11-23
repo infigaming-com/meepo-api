@@ -4919,6 +4919,7 @@ type UpdateRoleRequest struct {
 	RoleId        int64                  `protobuf:"varint,1,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Permissions   []*Permission          `protobuf:"bytes,3,rep,name=permissions,proto3" json:"permissions,omitempty"`
+	CurrentRoleId int64                  `protobuf:"varint,4,opt,name=current_role_id,json=currentRoleId,proto3" json:"current_role_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4972,6 +4973,13 @@ func (x *UpdateRoleRequest) GetPermissions() []*Permission {
 		return x.Permissions
 	}
 	return nil
+}
+
+func (x *UpdateRoleRequest) GetCurrentRoleId() int64 {
+	if x != nil {
+		return x.CurrentRoleId
+	}
+	return 0
 }
 
 type UpdateRoleResponse struct {
@@ -12612,11 +12620,12 @@ const file_user_service_v1_user_proto_rawDesc = "" +
 	"\voperator_id\x18\x01 \x01(\x03R\n" +
 	"operatorId\x12\x1c\n" +
 	"\tsubdomain\x18\x02 \x01(\tR\tsubdomain\x121\n" +
-	"\x14backoffice_subdomain\x18\x03 \x01(\tR\x13backofficeSubdomain\"\x83\x01\n" +
+	"\x14backoffice_subdomain\x18\x03 \x01(\tR\x13backofficeSubdomain\"\xab\x01\n" +
 	"\x11UpdateRoleRequest\x12\x17\n" +
 	"\arole_id\x18\x01 \x01(\x03R\x06roleId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12A\n" +
-	"\vpermissions\x18\x03 \x03(\v2\x1f.api.user.service.v1.PermissionR\vpermissions\"\x14\n" +
+	"\vpermissions\x18\x03 \x03(\v2\x1f.api.user.service.v1.PermissionR\vpermissions\x12&\n" +
+	"\x0fcurrent_role_id\x18\x04 \x01(\x03R\rcurrentRoleId\"\x14\n" +
 	"\x12UpdateRoleResponse\")\n" +
 	"\x0eGetRoleRequest\x12\x17\n" +
 	"\arole_id\x18\x01 \x01(\x03R\x06roleId\"@\n" +

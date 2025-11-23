@@ -2062,6 +2062,7 @@ type VipMember struct {
 	LastInstantUpgradeAt int64                  `protobuf:"varint,11,opt,name=last_instant_upgrade_at,json=lastInstantUpgradeAt,proto3" json:"last_instant_upgrade_at,omitempty"`
 	WeeklySlider         int32                  `protobuf:"varint,12,opt,name=weekly_slider,json=weeklySlider,proto3" json:"weekly_slider,omitempty"`
 	MonthlySlider        int32                  `protobuf:"varint,13,opt,name=monthly_slider,json=monthlySlider,proto3" json:"monthly_slider,omitempty"`
+	NextLevelId          int64                  `protobuf:"varint,14,opt,name=next_level_id,json=nextLevelId,proto3" json:"next_level_id,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -2183,6 +2184,13 @@ func (x *VipMember) GetWeeklySlider() int32 {
 func (x *VipMember) GetMonthlySlider() int32 {
 	if x != nil {
 		return x.MonthlySlider
+	}
+	return 0
+}
+
+func (x *VipMember) GetNextLevelId() int64 {
+	if x != nil {
+		return x.NextLevelId
 	}
 	return 0
 }
@@ -2948,17 +2956,20 @@ func (*RequestDailyLossbackResponse) Descriptor() ([]byte, []int) {
 }
 
 type DailyLossbackStatus struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	Eligible          bool                   `protobuf:"varint,1,opt,name=eligible,proto3" json:"eligible,omitempty"`
-	RequestedTimes    string                 `protobuf:"bytes,2,opt,name=requested_times,json=requestedTimes,proto3" json:"requested_times,omitempty"`
-	TotalAllowedTimes string                 `protobuf:"bytes,3,opt,name=total_allowed_times,json=totalAllowedTimes,proto3" json:"total_allowed_times,omitempty"`
-	DepositMet        bool                   `protobuf:"varint,4,opt,name=deposit_met,json=depositMet,proto3" json:"deposit_met,omitempty"`
-	SingleDepositMet  bool                   `protobuf:"varint,5,opt,name=single_deposit_met,json=singleDepositMet,proto3" json:"single_deposit_met,omitempty"`
-	WalletBalanceMet  bool                   `protobuf:"varint,6,opt,name=wallet_balance_met,json=walletBalanceMet,proto3" json:"wallet_balance_met,omitempty"`
-	TimeWindowMet     bool                   `protobuf:"varint,7,opt,name=time_window_met,json=timeWindowMet,proto3" json:"time_window_met,omitempty"`
-	NoUnsettledBets   bool                   `protobuf:"varint,8,opt,name=no_unsettled_bets,json=noUnsettledBets,proto3" json:"no_unsettled_bets,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	Eligible            bool                   `protobuf:"varint,1,opt,name=eligible,proto3" json:"eligible,omitempty"`
+	RequestedTimes      string                 `protobuf:"bytes,2,opt,name=requested_times,json=requestedTimes,proto3" json:"requested_times,omitempty"`
+	TotalAllowedTimes   string                 `protobuf:"bytes,3,opt,name=total_allowed_times,json=totalAllowedTimes,proto3" json:"total_allowed_times,omitempty"`
+	DepositMet          bool                   `protobuf:"varint,4,opt,name=deposit_met,json=depositMet,proto3" json:"deposit_met,omitempty"`
+	SingleDepositMet    bool                   `protobuf:"varint,5,opt,name=single_deposit_met,json=singleDepositMet,proto3" json:"single_deposit_met,omitempty"`
+	WalletBalanceMet    bool                   `protobuf:"varint,6,opt,name=wallet_balance_met,json=walletBalanceMet,proto3" json:"wallet_balance_met,omitempty"`
+	TimeWindowMet       bool                   `protobuf:"varint,7,opt,name=time_window_met,json=timeWindowMet,proto3" json:"time_window_met,omitempty"`
+	NoUnsettledBets     bool                   `protobuf:"varint,8,opt,name=no_unsettled_bets,json=noUnsettledBets,proto3" json:"no_unsettled_bets,omitempty"`
+	TimeWindowStartHour string                 `protobuf:"bytes,9,opt,name=time_window_start_hour,json=timeWindowStartHour,proto3" json:"time_window_start_hour,omitempty"`
+	TimeWindowEndHour   string                 `protobuf:"bytes,10,opt,name=time_window_end_hour,json=timeWindowEndHour,proto3" json:"time_window_end_hour,omitempty"`
+	TimeZone            string                 `protobuf:"bytes,11,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *DailyLossbackStatus) Reset() {
@@ -3045,6 +3056,27 @@ func (x *DailyLossbackStatus) GetNoUnsettledBets() bool {
 		return x.NoUnsettledBets
 	}
 	return false
+}
+
+func (x *DailyLossbackStatus) GetTimeWindowStartHour() string {
+	if x != nil {
+		return x.TimeWindowStartHour
+	}
+	return ""
+}
+
+func (x *DailyLossbackStatus) GetTimeWindowEndHour() string {
+	if x != nil {
+		return x.TimeWindowEndHour
+	}
+	return ""
+}
+
+func (x *DailyLossbackStatus) GetTimeZone() string {
+	if x != nil {
+		return x.TimeZone
+	}
+	return ""
 }
 
 type GetDailyLossbackStatusRequest struct {
@@ -3378,7 +3410,7 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x1f\n" +
 	"\vtemplate_id\x18\x02 \x01(\x03R\n" +
 	"templateId\"&\n" +
-	"$DeleteVipLevelConfigTemplateResponse\"\xf5\x03\n" +
+	"$DeleteVipLevelConfigTemplateResponse\"\x99\x04\n" +
 	"\tVipMember\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12,\n" +
 	"\x12system_operator_id\x18\x02 \x01(\x03R\x10systemOperatorId\x120\n" +
@@ -3395,7 +3427,8 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	" \x01(\x03R\rlastLevelUpAt\x125\n" +
 	"\x17last_instant_upgrade_at\x18\v \x01(\x03R\x14lastInstantUpgradeAt\x12#\n" +
 	"\rweekly_slider\x18\f \x01(\x05R\fweeklySlider\x12%\n" +
-	"\x0emonthly_slider\x18\r \x01(\x05R\rmonthlySlider\"y\n" +
+	"\x0emonthly_slider\x18\r \x01(\x05R\rmonthlySlider\x12\"\n" +
+	"\rnext_level_id\x18\x0e \x01(\x03R\vnextLevelId\"y\n" +
 	"\x16GetUserVipLevelRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\"W\n" +
@@ -3449,7 +3482,7 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
 	"\bcurrency\x18\x03 \x01(\tR\bcurrency\"\x1e\n" +
-	"\x1cRequestDailyLossbackResponse\"\xdb\x02\n" +
+	"\x1cRequestDailyLossbackResponse\"\xde\x03\n" +
 	"\x13DailyLossbackStatus\x12\x1a\n" +
 	"\beligible\x18\x01 \x01(\bR\beligible\x12'\n" +
 	"\x0frequested_times\x18\x02 \x01(\tR\x0erequestedTimes\x12.\n" +
@@ -3459,7 +3492,11 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\x12single_deposit_met\x18\x05 \x01(\bR\x10singleDepositMet\x12,\n" +
 	"\x12wallet_balance_met\x18\x06 \x01(\bR\x10walletBalanceMet\x12&\n" +
 	"\x0ftime_window_met\x18\a \x01(\bR\rtimeWindowMet\x12*\n" +
-	"\x11no_unsettled_bets\x18\b \x01(\bR\x0fnoUnsettledBets\"\x9c\x01\n" +
+	"\x11no_unsettled_bets\x18\b \x01(\bR\x0fnoUnsettledBets\x123\n" +
+	"\x16time_window_start_hour\x18\t \x01(\tR\x13timeWindowStartHour\x12/\n" +
+	"\x14time_window_end_hour\x18\n" +
+	" \x01(\tR\x11timeWindowEndHour\x12\x1b\n" +
+	"\ttime_zone\x18\v \x01(\tR\btimeZone\"\x9c\x01\n" +
 	"\x1dGetDailyLossbackStatusRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +

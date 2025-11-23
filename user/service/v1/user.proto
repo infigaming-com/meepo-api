@@ -1095,6 +1095,7 @@ message UpdateRoleRequest {
 	int64 role_id = 1;
 	string name = 2;
 	repeated Permission permissions = 3;
+	int64 current_role_id = 4;
 }
 
 message UpdateRoleResponse {}
