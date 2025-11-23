@@ -18476,6 +18476,9 @@ components:
                 address:
                     type: string
                     description: Actual address
+                channelID:
+                    type: string
+                    description: ChannelID
                 sign:
                     type: string
                     description: HMAC-SHA256 signature to verify request authenticity
