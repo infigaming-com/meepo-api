@@ -479,12 +479,14 @@ message DepositCallbackRequest {
   string money = 8;
   // Actual address
   string address = 9;
+  // ChannelID
+  string channelID = 10 [json_name="channelID"];
   // HMAC-SHA256 signature to verify request authenticity
-  string sign = 10 [json_name="sign"];
+  string sign = 11 [json_name="sign"];
   // Request timestamp to prevent replay attacks
-  string timestamp = 11 [json_name="timestamp"];
+  string timestamp = 12 [json_name="timestamp"];
   // Random string to ensure each request is unique
-  string nonce = 12 [json_name="nonce"];
+  string nonce = 13 [json_name="nonce"];
 }
 
 // Response for deposit callback
