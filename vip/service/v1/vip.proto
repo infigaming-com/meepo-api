@@ -421,6 +421,9 @@ message DailyLossbackStatus {
   bool wallet_balance_met = 6;
   bool time_window_met = 7;
   bool no_unsettled_bets = 8;
+  string time_window_start_hour = 9;
+  string time_window_end_hour = 10;
+  string time_zone = 11;
 }
 
 message GetDailyLossbackStatusRequest {

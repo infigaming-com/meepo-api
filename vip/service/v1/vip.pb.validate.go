@@ -4689,6 +4689,12 @@ func (m *DailyLossbackStatus) validate(all bool) error {
 
 	// no validation rules for NoUnsettledBets
 
+	// no validation rules for TimeWindowStartHour
+
+	// no validation rules for TimeWindowEndHour
+
+	// no validation rules for TimeZone
+
 	if len(errors) > 0 {
 		return DailyLossbackStatusMultiError(errors)
 	}
