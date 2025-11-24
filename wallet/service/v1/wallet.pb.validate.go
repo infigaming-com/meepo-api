@@ -20210,17 +20210,41 @@ func (m *GetUserGameTransactionsSummaryResponse) validate(all bool) error {
 
 	// no validation rules for WinCount
 
-	// no validation rules for BetAmount
+	// no validation rules for BetCashAmount
 
-	// no validation rules for BetAmountUsd
+	// no validation rules for BetCashAmountUsd
 
-	// no validation rules for BetAmountReportingCurrency
+	// no validation rules for BetCashAmountReportingCurrency
 
-	// no validation rules for WinAmount
+	// no validation rules for BetOperatorBonusAmount
 
-	// no validation rules for WinAmountUsd
+	// no validation rules for BetOperatorBonusAmountUsd
 
-	// no validation rules for WinAmountReportingCurrency
+	// no validation rules for BetOperatorBonusAmountReportingCurrency
+
+	// no validation rules for BetProviderBonusAmount
+
+	// no validation rules for BetProviderBonusAmountUsd
+
+	// no validation rules for BetProviderBonusAmountReportingCurrency
+
+	// no validation rules for WinCashAmount
+
+	// no validation rules for WinCashAmountUsd
+
+	// no validation rules for WinCashAmountReportingCurrency
+
+	// no validation rules for WinOperatorBonusAmount
+
+	// no validation rules for WinOperatorBonusAmountUsd
+
+	// no validation rules for WinOperatorBonusAmountReportingCurrency
+
+	// no validation rules for WinProviderBonusAmount
+
+	// no validation rules for WinProviderBonusAmountUsd
+
+	// no validation rules for WinProviderBonusAmountReportingCurrency
 
 	if len(errors) > 0 {
 		return GetUserGameTransactionsSummaryResponseMultiError(errors)
