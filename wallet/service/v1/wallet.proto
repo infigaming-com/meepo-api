@@ -218,6 +218,9 @@ service Wallet {
 	rpc ListTimeRangeDepositCredits(ListTimeRangeDepositCreditsRequest) returns (ListTimeRangeDepositCreditsResponse) {}
 
 	rpc ListUserOverview(ListUserOverviewRequest) returns (ListUserOverviewResponse) {}
+
+	// GetUserGameTransactionsSummary returns the summary of user's game transactions, mostly for exactly one game bet
+	rpc GetUserGameTransactionsSummary(GetUserGameTransactionsSummaryRequest) returns (GetUserGameTransactionsSummaryResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -323,7 +326,6 @@ message GameDebitRequest {
 	string turnover = 9;
 	api.common.OperatorContext operator_context = 10;
 	optional bool allow_overdraft = 11;
-	string game_house_edge = 12; // game house edge percentage
 }
 
 message AffectedCredit {
@@ -1630,4 +1632,22 @@ message ListUserOverviewResponse {
 		string ngr_reporting_currency = 3;
 	}
 	repeated UserOverview user_overviews = 1;
+}
+
+message GetUserGameTransactionsSummaryRequest {
+	int64 user_id = 1;
+	repeated int64 external_transaction_ids = 2;
+	string settlement_currency = 3;
+}
+
+message GetUserGameTransactionsSummaryResponse {
+	string ggr = 1;
+	string ggr_usd = 2;
+	string ggr_reporting_currency = 3;
+	string ngr = 4;
+	string ngr_usd = 5;
+	string ngr_reporting_currency = 6;
+	string wagering_amount = 7; // game bet and game bet rollback
+	string wagering_amount_usd = 8;
+	string wagering_amount_reporting_currency = 9;
 }

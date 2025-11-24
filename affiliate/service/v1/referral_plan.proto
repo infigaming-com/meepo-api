@@ -49,6 +49,21 @@ message GetUserReferralConfigRequest {
 }
 
 message GetUserReferralConfigResponse {
+    message ReferralRewards {
+        string available_referral_reward_amount = 1; // for this currency
+        string available_commission_reward_amount = 2;
+        string available_invitee_reward_amount = 3;
+        string total_received_referral_reward_amount = 4;
+        string total_received_commission_reward_amount = 5;
+        string total_received_invitee_reward_amount = 6;
+    }
+    message ReferralProgress {
+        map<int32, int32> conversion_count = 1; // map of tier number (1-10) to conversion count
+        map<int32, string> deposit_amount = 2; // map of tier number (1-10) to deposit amount
+        map<int32, string> wagering_amount = 3; // map of tier number (1-10) to wagering amount, focus on game bet and game bet rollback
+        map<int32, string> ggr_amount = 4; // map of tier number (1-10) to ggr, all of the game transactions
+        map<int32, string> ngr_amount = 5; // map of tier number (1-10) to ngr, all of the game transactions
+    }
     // Referral plan owner operator context
     api.common.OperatorContext referral_plan_owner_operator_context = 1;
     string currency = 2;
@@ -56,6 +71,9 @@ message GetUserReferralConfigResponse {
     optional ReferralPlan user_referral_plan = 3;
     // Referral codes created by the user
     repeated ReferralCode referral_codes = 4;
+    // Referral rewards for the user
+    ReferralRewards referral_rewards = 5;
+    ReferralProgress referral_progress = 6;
 }
 
 message ReferralCode {

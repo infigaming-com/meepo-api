@@ -932,6 +932,64 @@ func (m *GetUserReferralConfigResponse) validate(all bool) error {
 
 	}
 
+	if all {
+		switch v := interface{}(m.GetReferralRewards()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetUserReferralConfigResponseValidationError{
+					field:  "ReferralRewards",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetUserReferralConfigResponseValidationError{
+					field:  "ReferralRewards",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetReferralRewards()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetUserReferralConfigResponseValidationError{
+				field:  "ReferralRewards",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetReferralProgress()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetUserReferralConfigResponseValidationError{
+					field:  "ReferralProgress",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetUserReferralConfigResponseValidationError{
+					field:  "ReferralProgress",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetReferralProgress()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetUserReferralConfigResponseValidationError{
+				field:  "ReferralProgress",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if m.UserReferralPlan != nil {
 
 		if all {
@@ -3636,3 +3694,243 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = LossRevenueShareTierRewardValidationError{}
+
+// Validate checks the field values on
+// GetUserReferralConfigResponse_ReferralRewards with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *GetUserReferralConfigResponse_ReferralRewards) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetUserReferralConfigResponse_ReferralRewards with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// GetUserReferralConfigResponse_ReferralRewardsMultiError, or nil if none found.
+func (m *GetUserReferralConfigResponse_ReferralRewards) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserReferralConfigResponse_ReferralRewards) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AvailableReferralRewardAmount
+
+	// no validation rules for AvailableCommissionRewardAmount
+
+	// no validation rules for AvailableInviteeRewardAmount
+
+	// no validation rules for TotalReceivedReferralRewardAmount
+
+	// no validation rules for TotalReceivedCommissionRewardAmount
+
+	// no validation rules for TotalReceivedInviteeRewardAmount
+
+	if len(errors) > 0 {
+		return GetUserReferralConfigResponse_ReferralRewardsMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserReferralConfigResponse_ReferralRewardsMultiError is an error wrapping
+// multiple validation errors returned by
+// GetUserReferralConfigResponse_ReferralRewards.ValidateAll() if the
+// designated constraints aren't met.
+type GetUserReferralConfigResponse_ReferralRewardsMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserReferralConfigResponse_ReferralRewardsMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserReferralConfigResponse_ReferralRewardsMultiError) AllErrors() []error { return m }
+
+// GetUserReferralConfigResponse_ReferralRewardsValidationError is the
+// validation error returned by
+// GetUserReferralConfigResponse_ReferralRewards.Validate if the designated
+// constraints aren't met.
+type GetUserReferralConfigResponse_ReferralRewardsValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserReferralConfigResponse_ReferralRewardsValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserReferralConfigResponse_ReferralRewardsValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e GetUserReferralConfigResponse_ReferralRewardsValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserReferralConfigResponse_ReferralRewardsValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserReferralConfigResponse_ReferralRewardsValidationError) ErrorName() string {
+	return "GetUserReferralConfigResponse_ReferralRewardsValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserReferralConfigResponse_ReferralRewardsValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserReferralConfigResponse_ReferralRewards.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserReferralConfigResponse_ReferralRewardsValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserReferralConfigResponse_ReferralRewardsValidationError{}
+
+// Validate checks the field values on
+// GetUserReferralConfigResponse_ReferralProgress with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *GetUserReferralConfigResponse_ReferralProgress) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetUserReferralConfigResponse_ReferralProgress with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in
+// GetUserReferralConfigResponse_ReferralProgressMultiError, or nil if none found.
+func (m *GetUserReferralConfigResponse_ReferralProgress) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserReferralConfigResponse_ReferralProgress) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ConversionCount
+
+	// no validation rules for DepositAmount
+
+	// no validation rules for WageringAmount
+
+	// no validation rules for GgrAmount
+
+	// no validation rules for NgrAmount
+
+	if len(errors) > 0 {
+		return GetUserReferralConfigResponse_ReferralProgressMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserReferralConfigResponse_ReferralProgressMultiError is an error
+// wrapping multiple validation errors returned by
+// GetUserReferralConfigResponse_ReferralProgress.ValidateAll() if the
+// designated constraints aren't met.
+type GetUserReferralConfigResponse_ReferralProgressMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserReferralConfigResponse_ReferralProgressMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserReferralConfigResponse_ReferralProgressMultiError) AllErrors() []error { return m }
+
+// GetUserReferralConfigResponse_ReferralProgressValidationError is the
+// validation error returned by
+// GetUserReferralConfigResponse_ReferralProgress.Validate if the designated
+// constraints aren't met.
+type GetUserReferralConfigResponse_ReferralProgressValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserReferralConfigResponse_ReferralProgressValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserReferralConfigResponse_ReferralProgressValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e GetUserReferralConfigResponse_ReferralProgressValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserReferralConfigResponse_ReferralProgressValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserReferralConfigResponse_ReferralProgressValidationError) ErrorName() string {
+	return "GetUserReferralConfigResponse_ReferralProgressValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserReferralConfigResponse_ReferralProgressValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserReferralConfigResponse_ReferralProgress.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserReferralConfigResponse_ReferralProgressValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserReferralConfigResponse_ReferralProgressValidationError{}

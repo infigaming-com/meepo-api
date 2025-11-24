@@ -6465,6 +6465,51 @@ components:
                     items:
                         $ref: '#/components/schemas/api.affiliate.service.v1.ReferralCode'
                     description: Referral codes created by the user
+                referralRewards:
+                    allOf:
+                        - $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralConfigResponse_ReferralRewards'
+                    description: Referral rewards for the user
+                referralProgress:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralConfigResponse_ReferralProgress'
+        api.affiliate.service.v1.GetUserReferralConfigResponse_ReferralProgress:
+            type: object
+            properties:
+                conversionCount:
+                    type: object
+                    additionalProperties:
+                        type: integer
+                        format: int32
+                depositAmount:
+                    type: object
+                    additionalProperties:
+                        type: string
+                wageringAmount:
+                    type: object
+                    additionalProperties:
+                        type: string
+                ggrAmount:
+                    type: object
+                    additionalProperties:
+                        type: string
+                ngrAmount:
+                    type: object
+                    additionalProperties:
+                        type: string
+        api.affiliate.service.v1.GetUserReferralConfigResponse_ReferralRewards:
+            type: object
+            properties:
+                availableReferralRewardAmount:
+                    type: string
+                availableCommissionRewardAmount:
+                    type: string
+                availableInviteeRewardAmount:
+                    type: string
+                totalReceivedReferralRewardAmount:
+                    type: string
+                totalReceivedCommissionRewardAmount:
+                    type: string
+                totalReceivedInviteeRewardAmount:
+                    type: string
         api.affiliate.service.v1.InviteeReward:
             type: object
             properties:
