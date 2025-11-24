@@ -51,6 +51,7 @@ message ReviewTicketRequest {
 	// action: approve, reject, manual_payout
 	string action = 3;
 	string review_comment = 4;
+	api.common.OperatorContext operator_context = 5;
 }
 
 message ReviewTicketResponse {}
