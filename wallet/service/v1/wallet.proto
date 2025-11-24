@@ -323,6 +323,7 @@ message GameDebitRequest {
 	string turnover = 9;
 	api.common.OperatorContext operator_context = 10;
 	optional bool allow_overdraft = 11;
+	string game_house_edge = 12; // game house edge percentage
 }
 
 message AffectedCredit {

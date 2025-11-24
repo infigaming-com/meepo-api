@@ -634,3 +634,27 @@ func IsProcessFlatFeeCommissionFailed(err error) bool {
 func ErrorProcessFlatFeeCommissionFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_PROCESS_FLAT_FEE_COMMISSION_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsSettleReferralCommissionsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SETTLE_REFERRAL_COMMISSIONS_FAILED.String() && e.Code == 500
+}
+
+func ErrorSettleReferralCommissionsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SETTLE_REFERRAL_COMMISSIONS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsProcessReferralGameTransactionFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_PROCESS_REFERRAL_GAME_TRANSACTION_FAILED.String() && e.Code == 500
+}
+
+func ErrorProcessReferralGameTransactionFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_PROCESS_REFERRAL_GAME_TRANSACTION_FAILED.String(), fmt.Sprintf(format, args...))
+}

@@ -1094,6 +1094,8 @@ func (m *GameDebitRequest) validate(all bool) error {
 		}
 	}
 
+	// no validation rules for GameHouseEdge
+
 	if m.AllowOverdraft != nil {
 		// no validation rules for AllowOverdraft
 	}

@@ -77,6 +77,8 @@ const (
 	ErrorReason_GET_USER_REFERRAL_CONFIG_FAILED                     ErrorReason = 130049
 	ErrorReason_PROCESS_USER_REGISTRATION_WITH_REFERRAL_CODE_FAILED ErrorReason = 130050
 	ErrorReason_PROCESS_FLAT_FEE_COMMISSION_FAILED                  ErrorReason = 130051
+	ErrorReason_SETTLE_REFERRAL_COMMISSIONS_FAILED                  ErrorReason = 130052
+	ErrorReason_PROCESS_REFERRAL_GAME_TRANSACTION_FAILED            ErrorReason = 130053
 )
 
 // Enum value maps for ErrorReason.
@@ -134,6 +136,8 @@ var (
 		130049: "GET_USER_REFERRAL_CONFIG_FAILED",
 		130050: "PROCESS_USER_REGISTRATION_WITH_REFERRAL_CODE_FAILED",
 		130051: "PROCESS_FLAT_FEE_COMMISSION_FAILED",
+		130052: "SETTLE_REFERRAL_COMMISSIONS_FAILED",
+		130053: "PROCESS_REFERRAL_GAME_TRANSACTION_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                         0,
@@ -188,6 +192,8 @@ var (
 		"GET_USER_REFERRAL_CONFIG_FAILED":                     130049,
 		"PROCESS_USER_REGISTRATION_WITH_REFERRAL_CODE_FAILED": 130050,
 		"PROCESS_FLAT_FEE_COMMISSION_FAILED":                  130051,
+		"SETTLE_REFERRAL_COMMISSIONS_FAILED":                  130052,
+		"PROCESS_REFERRAL_GAME_TRANSACTION_FAILED":            130053,
 	}
 )
 
@@ -222,7 +228,7 @@ var File_affiliate_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\x88\x0e\n" +
+	"'affiliate/service/v1/error_reason.proto\x12\x18api.affiliate.service.v1\x1a\x13errors/errors.proto*\xe2\x0e\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1dCREATE_COMMISSION_PLAN_FAILED\x10\xd1\xf7\a\x12#\n" +
@@ -275,7 +281,9 @@ const file_affiliate_service_v1_error_reason_proto_rawDesc = "" +
 	" CREATE_USER_REFERRAL_CODE_FAILED\x10\x80\xf8\a\x12%\n" +
 	"\x1fGET_USER_REFERRAL_CONFIG_FAILED\x10\x81\xf8\a\x129\n" +
 	"3PROCESS_USER_REGISTRATION_WITH_REFERRAL_CODE_FAILED\x10\x82\xf8\a\x12(\n" +
-	"\"PROCESS_FLAT_FEE_COMMISSION_FAILED\x10\x83\xf8\a\x1a\x04\xa0E\xf4\x03BY\n" +
+	"\"PROCESS_FLAT_FEE_COMMISSION_FAILED\x10\x83\xf8\a\x12(\n" +
+	"\"SETTLE_REFERRAL_COMMISSIONS_FAILED\x10\x84\xf8\a\x12.\n" +
+	"(PROCESS_REFERRAL_GAME_TRANSACTION_FAILED\x10\x85\xf8\a\x1a\x04\xa0E\xf4\x03BY\n" +
 	"\x18api.affiliate.service.v1P\x01Z;github.com/infigaming-com/meepo-api/affiliate/service/v1;v1b\x06proto3"
 
 var (
