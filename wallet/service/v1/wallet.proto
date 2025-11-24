@@ -1650,4 +1650,13 @@ message GetUserGameTransactionsSummaryResponse {
 	string wagering_amount = 7; // game bet and game bet rollback
 	string wagering_amount_usd = 8;
 	string wagering_amount_reporting_currency = 9;
+	string cash_amount = 10;
+	string cash_amount_usd = 11;
+	string cash_amount_reporting_currency = 12;
+	string operator_bonus_amount = 13;
+	string operator_bonus_amount_usd = 14;
+	string operator_bonus_amount_reporting_currency = 15;
+	string provider_bonus_amount = 16;
+	string provider_bonus_amount_usd = 17;
+	string provider_bonus_amount_reporting_currency = 18;
 }

@@ -10374,18 +10374,27 @@ func (x *GetUserGameTransactionsSummaryRequest) GetSettlementCurrency() string {
 }
 
 type GetUserGameTransactionsSummaryResponse struct {
-	state                           protoimpl.MessageState `protogen:"open.v1"`
-	Ggr                             string                 `protobuf:"bytes,1,opt,name=ggr,proto3" json:"ggr,omitempty"`
-	GgrUsd                          string                 `protobuf:"bytes,2,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
-	GgrReportingCurrency            string                 `protobuf:"bytes,3,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
-	Ngr                             string                 `protobuf:"bytes,4,opt,name=ngr,proto3" json:"ngr,omitempty"`
-	NgrUsd                          string                 `protobuf:"bytes,5,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
-	NgrReportingCurrency            string                 `protobuf:"bytes,6,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
-	WageringAmount                  string                 `protobuf:"bytes,7,opt,name=wagering_amount,json=wageringAmount,proto3" json:"wagering_amount,omitempty"` // game bet and game bet rollback
-	WageringAmountUsd               string                 `protobuf:"bytes,8,opt,name=wagering_amount_usd,json=wageringAmountUsd,proto3" json:"wagering_amount_usd,omitempty"`
-	WageringAmountReportingCurrency string                 `protobuf:"bytes,9,opt,name=wagering_amount_reporting_currency,json=wageringAmountReportingCurrency,proto3" json:"wagering_amount_reporting_currency,omitempty"`
-	unknownFields                   protoimpl.UnknownFields
-	sizeCache                       protoimpl.SizeCache
+	state                                protoimpl.MessageState `protogen:"open.v1"`
+	Ggr                                  string                 `protobuf:"bytes,1,opt,name=ggr,proto3" json:"ggr,omitempty"`
+	GgrUsd                               string                 `protobuf:"bytes,2,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
+	GgrReportingCurrency                 string                 `protobuf:"bytes,3,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
+	Ngr                                  string                 `protobuf:"bytes,4,opt,name=ngr,proto3" json:"ngr,omitempty"`
+	NgrUsd                               string                 `protobuf:"bytes,5,opt,name=ngr_usd,json=ngrUsd,proto3" json:"ngr_usd,omitempty"`
+	NgrReportingCurrency                 string                 `protobuf:"bytes,6,opt,name=ngr_reporting_currency,json=ngrReportingCurrency,proto3" json:"ngr_reporting_currency,omitempty"`
+	WageringAmount                       string                 `protobuf:"bytes,7,opt,name=wagering_amount,json=wageringAmount,proto3" json:"wagering_amount,omitempty"` // game bet and game bet rollback
+	WageringAmountUsd                    string                 `protobuf:"bytes,8,opt,name=wagering_amount_usd,json=wageringAmountUsd,proto3" json:"wagering_amount_usd,omitempty"`
+	WageringAmountReportingCurrency      string                 `protobuf:"bytes,9,opt,name=wagering_amount_reporting_currency,json=wageringAmountReportingCurrency,proto3" json:"wagering_amount_reporting_currency,omitempty"`
+	CashAmount                           string                 `protobuf:"bytes,10,opt,name=cash_amount,json=cashAmount,proto3" json:"cash_amount,omitempty"`
+	CashAmountUsd                        string                 `protobuf:"bytes,11,opt,name=cash_amount_usd,json=cashAmountUsd,proto3" json:"cash_amount_usd,omitempty"`
+	CashAmountReportingCurrency          string                 `protobuf:"bytes,12,opt,name=cash_amount_reporting_currency,json=cashAmountReportingCurrency,proto3" json:"cash_amount_reporting_currency,omitempty"`
+	OperatorBonusAmount                  string                 `protobuf:"bytes,13,opt,name=operator_bonus_amount,json=operatorBonusAmount,proto3" json:"operator_bonus_amount,omitempty"`
+	OperatorBonusAmountUsd               string                 `protobuf:"bytes,14,opt,name=operator_bonus_amount_usd,json=operatorBonusAmountUsd,proto3" json:"operator_bonus_amount_usd,omitempty"`
+	OperatorBonusAmountReportingCurrency string                 `protobuf:"bytes,15,opt,name=operator_bonus_amount_reporting_currency,json=operatorBonusAmountReportingCurrency,proto3" json:"operator_bonus_amount_reporting_currency,omitempty"`
+	ProviderBonusAmount                  string                 `protobuf:"bytes,16,opt,name=provider_bonus_amount,json=providerBonusAmount,proto3" json:"provider_bonus_amount,omitempty"`
+	ProviderBonusAmountUsd               string                 `protobuf:"bytes,17,opt,name=provider_bonus_amount_usd,json=providerBonusAmountUsd,proto3" json:"provider_bonus_amount_usd,omitempty"`
+	ProviderBonusAmountReportingCurrency string                 `protobuf:"bytes,18,opt,name=provider_bonus_amount_reporting_currency,json=providerBonusAmountReportingCurrency,proto3" json:"provider_bonus_amount_reporting_currency,omitempty"`
+	unknownFields                        protoimpl.UnknownFields
+	sizeCache                            protoimpl.SizeCache
 }
 
 func (x *GetUserGameTransactionsSummaryResponse) Reset() {
@@ -10477,6 +10486,69 @@ func (x *GetUserGameTransactionsSummaryResponse) GetWageringAmountUsd() string {
 func (x *GetUserGameTransactionsSummaryResponse) GetWageringAmountReportingCurrency() string {
 	if x != nil {
 		return x.WageringAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetUserGameTransactionsSummaryResponse) GetCashAmount() string {
+	if x != nil {
+		return x.CashAmount
+	}
+	return ""
+}
+
+func (x *GetUserGameTransactionsSummaryResponse) GetCashAmountUsd() string {
+	if x != nil {
+		return x.CashAmountUsd
+	}
+	return ""
+}
+
+func (x *GetUserGameTransactionsSummaryResponse) GetCashAmountReportingCurrency() string {
+	if x != nil {
+		return x.CashAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetUserGameTransactionsSummaryResponse) GetOperatorBonusAmount() string {
+	if x != nil {
+		return x.OperatorBonusAmount
+	}
+	return ""
+}
+
+func (x *GetUserGameTransactionsSummaryResponse) GetOperatorBonusAmountUsd() string {
+	if x != nil {
+		return x.OperatorBonusAmountUsd
+	}
+	return ""
+}
+
+func (x *GetUserGameTransactionsSummaryResponse) GetOperatorBonusAmountReportingCurrency() string {
+	if x != nil {
+		return x.OperatorBonusAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetUserGameTransactionsSummaryResponse) GetProviderBonusAmount() string {
+	if x != nil {
+		return x.ProviderBonusAmount
+	}
+	return ""
+}
+
+func (x *GetUserGameTransactionsSummaryResponse) GetProviderBonusAmountUsd() string {
+	if x != nil {
+		return x.ProviderBonusAmountUsd
+	}
+	return ""
+}
+
+func (x *GetUserGameTransactionsSummaryResponse) GetProviderBonusAmountReportingCurrency() string {
+	if x != nil {
+		return x.ProviderBonusAmountReportingCurrency
 	}
 	return ""
 }
@@ -14375,7 +14447,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"%GetUserGameTransactionsSummaryRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x128\n" +
 	"\x18external_transaction_ids\x18\x02 \x03(\x03R\x16externalTransactionIds\x12/\n" +
-	"\x13settlement_currency\x18\x03 \x01(\tR\x12settlementCurrency\"\x90\x03\n" +
+	"\x13settlement_currency\x18\x03 \x01(\tR\x12settlementCurrency\"\xac\a\n" +
 	"&GetUserGameTransactionsSummaryResponse\x12\x10\n" +
 	"\x03ggr\x18\x01 \x01(\tR\x03ggr\x12\x17\n" +
 	"\aggr_usd\x18\x02 \x01(\tR\x06ggrUsd\x124\n" +
@@ -14385,7 +14457,18 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"\x16ngr_reporting_currency\x18\x06 \x01(\tR\x14ngrReportingCurrency\x12'\n" +
 	"\x0fwagering_amount\x18\a \x01(\tR\x0ewageringAmount\x12.\n" +
 	"\x13wagering_amount_usd\x18\b \x01(\tR\x11wageringAmountUsd\x12K\n" +
-	"\"wagering_amount_reporting_currency\x18\t \x01(\tR\x1fwageringAmountReportingCurrency2\x99C\n" +
+	"\"wagering_amount_reporting_currency\x18\t \x01(\tR\x1fwageringAmountReportingCurrency\x12\x1f\n" +
+	"\vcash_amount\x18\n" +
+	" \x01(\tR\n" +
+	"cashAmount\x12&\n" +
+	"\x0fcash_amount_usd\x18\v \x01(\tR\rcashAmountUsd\x12C\n" +
+	"\x1ecash_amount_reporting_currency\x18\f \x01(\tR\x1bcashAmountReportingCurrency\x122\n" +
+	"\x15operator_bonus_amount\x18\r \x01(\tR\x13operatorBonusAmount\x129\n" +
+	"\x19operator_bonus_amount_usd\x18\x0e \x01(\tR\x16operatorBonusAmountUsd\x12V\n" +
+	"(operator_bonus_amount_reporting_currency\x18\x0f \x01(\tR$operatorBonusAmountReportingCurrency\x122\n" +
+	"\x15provider_bonus_amount\x18\x10 \x01(\tR\x13providerBonusAmount\x129\n" +
+	"\x19provider_bonus_amount_usd\x18\x11 \x01(\tR\x16providerBonusAmountUsd\x12V\n" +
+	"(provider_bonus_amount_reporting_currency\x18\x12 \x01(\tR$providerBonusAmountReportingCurrency2\x99C\n" +
 	"\x06Wallet\x12\x95\x01\n" +
 	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/wallet/balances/list\x12o\n" +
 	"\x0eGetUserBalance\x12,.api.wallet.service.v1.GetUserBalanceRequest\x1a-.api.wallet.service.v1.GetUserBalanceResponse\"\x00\x12\xa9\x01\n" +
