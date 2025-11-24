@@ -20182,34 +20182,6 @@ func (m *GetUserGameTransactionsSummaryResponse) validate(all bool) error {
 
 	// no validation rules for NgrReportingCurrency
 
-	// no validation rules for WageringAmount
-
-	// no validation rules for WageringAmountUsd
-
-	// no validation rules for WageringAmountReportingCurrency
-
-	// no validation rules for CashAmount
-
-	// no validation rules for CashAmountUsd
-
-	// no validation rules for CashAmountReportingCurrency
-
-	// no validation rules for OperatorBonusAmount
-
-	// no validation rules for OperatorBonusAmountUsd
-
-	// no validation rules for OperatorBonusAmountReportingCurrency
-
-	// no validation rules for ProviderBonusAmount
-
-	// no validation rules for ProviderBonusAmountUsd
-
-	// no validation rules for ProviderBonusAmountReportingCurrency
-
-	// no validation rules for BetCount
-
-	// no validation rules for WinCount
-
 	// no validation rules for BetCashAmount
 
 	// no validation rules for BetCashAmountUsd
@@ -20227,6 +20199,10 @@ func (m *GetUserGameTransactionsSummaryResponse) validate(all bool) error {
 	// no validation rules for BetProviderBonusAmountUsd
 
 	// no validation rules for BetProviderBonusAmountReportingCurrency
+
+	// no validation rules for BetCount
+
+	// no validation rules for WinCount
 
 	// no validation rules for WinCashAmount
 
