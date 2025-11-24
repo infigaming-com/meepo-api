@@ -1659,4 +1659,12 @@ message GetUserGameTransactionsSummaryResponse {
 	string provider_bonus_amount = 16;
 	string provider_bonus_amount_usd = 17;
 	string provider_bonus_amount_reporting_currency = 18;
+	int32 bet_count = 19; // can be negative
+	int32 win_count = 20; // can be negative
+	string bet_amount = 21;
+	string bet_amount_usd = 22;
+	string bet_amount_reporting_currency = 23;
+	string win_amount = 24;
+	string win_amount_usd = 25;
+	string win_amount_reporting_currency = 26;
 }

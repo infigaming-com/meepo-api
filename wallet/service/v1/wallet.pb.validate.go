@@ -20206,6 +20206,22 @@ func (m *GetUserGameTransactionsSummaryResponse) validate(all bool) error {
 
 	// no validation rules for ProviderBonusAmountReportingCurrency
 
+	// no validation rules for BetCount
+
+	// no validation rules for WinCount
+
+	// no validation rules for BetAmount
+
+	// no validation rules for BetAmountUsd
+
+	// no validation rules for BetAmountReportingCurrency
+
+	// no validation rules for WinAmount
+
+	// no validation rules for WinAmountUsd
+
+	// no validation rules for WinAmountReportingCurrency
+
 	if len(errors) > 0 {
 		return GetUserGameTransactionsSummaryResponseMultiError(errors)
 	}

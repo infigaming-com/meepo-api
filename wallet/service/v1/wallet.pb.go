@@ -10393,6 +10393,14 @@ type GetUserGameTransactionsSummaryResponse struct {
 	ProviderBonusAmount                  string                 `protobuf:"bytes,16,opt,name=provider_bonus_amount,json=providerBonusAmount,proto3" json:"provider_bonus_amount,omitempty"`
 	ProviderBonusAmountUsd               string                 `protobuf:"bytes,17,opt,name=provider_bonus_amount_usd,json=providerBonusAmountUsd,proto3" json:"provider_bonus_amount_usd,omitempty"`
 	ProviderBonusAmountReportingCurrency string                 `protobuf:"bytes,18,opt,name=provider_bonus_amount_reporting_currency,json=providerBonusAmountReportingCurrency,proto3" json:"provider_bonus_amount_reporting_currency,omitempty"`
+	BetCount                             int32                  `protobuf:"varint,19,opt,name=bet_count,json=betCount,proto3" json:"bet_count,omitempty"` // can be negative
+	WinCount                             int32                  `protobuf:"varint,20,opt,name=win_count,json=winCount,proto3" json:"win_count,omitempty"` // can be negative
+	BetAmount                            string                 `protobuf:"bytes,21,opt,name=bet_amount,json=betAmount,proto3" json:"bet_amount,omitempty"`
+	BetAmountUsd                         string                 `protobuf:"bytes,22,opt,name=bet_amount_usd,json=betAmountUsd,proto3" json:"bet_amount_usd,omitempty"`
+	BetAmountReportingCurrency           string                 `protobuf:"bytes,23,opt,name=bet_amount_reporting_currency,json=betAmountReportingCurrency,proto3" json:"bet_amount_reporting_currency,omitempty"`
+	WinAmount                            string                 `protobuf:"bytes,24,opt,name=win_amount,json=winAmount,proto3" json:"win_amount,omitempty"`
+	WinAmountUsd                         string                 `protobuf:"bytes,25,opt,name=win_amount_usd,json=winAmountUsd,proto3" json:"win_amount_usd,omitempty"`
+	WinAmountReportingCurrency           string                 `protobuf:"bytes,26,opt,name=win_amount_reporting_currency,json=winAmountReportingCurrency,proto3" json:"win_amount_reporting_currency,omitempty"`
 	unknownFields                        protoimpl.UnknownFields
 	sizeCache                            protoimpl.SizeCache
 }
@@ -10549,6 +10557,62 @@ func (x *GetUserGameTransactionsSummaryResponse) GetProviderBonusAmountUsd() str
 func (x *GetUserGameTransactionsSummaryResponse) GetProviderBonusAmountReportingCurrency() string {
 	if x != nil {
 		return x.ProviderBonusAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetUserGameTransactionsSummaryResponse) GetBetCount() int32 {
+	if x != nil {
+		return x.BetCount
+	}
+	return 0
+}
+
+func (x *GetUserGameTransactionsSummaryResponse) GetWinCount() int32 {
+	if x != nil {
+		return x.WinCount
+	}
+	return 0
+}
+
+func (x *GetUserGameTransactionsSummaryResponse) GetBetAmount() string {
+	if x != nil {
+		return x.BetAmount
+	}
+	return ""
+}
+
+func (x *GetUserGameTransactionsSummaryResponse) GetBetAmountUsd() string {
+	if x != nil {
+		return x.BetAmountUsd
+	}
+	return ""
+}
+
+func (x *GetUserGameTransactionsSummaryResponse) GetBetAmountReportingCurrency() string {
+	if x != nil {
+		return x.BetAmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetUserGameTransactionsSummaryResponse) GetWinAmount() string {
+	if x != nil {
+		return x.WinAmount
+	}
+	return ""
+}
+
+func (x *GetUserGameTransactionsSummaryResponse) GetWinAmountUsd() string {
+	if x != nil {
+		return x.WinAmountUsd
+	}
+	return ""
+}
+
+func (x *GetUserGameTransactionsSummaryResponse) GetWinAmountReportingCurrency() string {
+	if x != nil {
+		return x.WinAmountReportingCurrency
 	}
 	return ""
 }
@@ -14447,7 +14511,7 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"%GetUserGameTransactionsSummaryRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x128\n" +
 	"\x18external_transaction_ids\x18\x02 \x03(\x03R\x16externalTransactionIds\x12/\n" +
-	"\x13settlement_currency\x18\x03 \x01(\tR\x12settlementCurrency\"\xac\a\n" +
+	"\x13settlement_currency\x18\x03 \x01(\tR\x12settlementCurrency\"\xf6\t\n" +
 	"&GetUserGameTransactionsSummaryResponse\x12\x10\n" +
 	"\x03ggr\x18\x01 \x01(\tR\x03ggr\x12\x17\n" +
 	"\aggr_usd\x18\x02 \x01(\tR\x06ggrUsd\x124\n" +
@@ -14468,7 +14532,17 @@ const file_wallet_service_v1_wallet_proto_rawDesc = "" +
 	"(operator_bonus_amount_reporting_currency\x18\x0f \x01(\tR$operatorBonusAmountReportingCurrency\x122\n" +
 	"\x15provider_bonus_amount\x18\x10 \x01(\tR\x13providerBonusAmount\x129\n" +
 	"\x19provider_bonus_amount_usd\x18\x11 \x01(\tR\x16providerBonusAmountUsd\x12V\n" +
-	"(provider_bonus_amount_reporting_currency\x18\x12 \x01(\tR$providerBonusAmountReportingCurrency2\x99C\n" +
+	"(provider_bonus_amount_reporting_currency\x18\x12 \x01(\tR$providerBonusAmountReportingCurrency\x12\x1b\n" +
+	"\tbet_count\x18\x13 \x01(\x05R\bbetCount\x12\x1b\n" +
+	"\twin_count\x18\x14 \x01(\x05R\bwinCount\x12\x1d\n" +
+	"\n" +
+	"bet_amount\x18\x15 \x01(\tR\tbetAmount\x12$\n" +
+	"\x0ebet_amount_usd\x18\x16 \x01(\tR\fbetAmountUsd\x12A\n" +
+	"\x1dbet_amount_reporting_currency\x18\x17 \x01(\tR\x1abetAmountReportingCurrency\x12\x1d\n" +
+	"\n" +
+	"win_amount\x18\x18 \x01(\tR\twinAmount\x12$\n" +
+	"\x0ewin_amount_usd\x18\x19 \x01(\tR\fwinAmountUsd\x12A\n" +
+	"\x1dwin_amount_reporting_currency\x18\x1a \x01(\tR\x1awinAmountReportingCurrency2\x99C\n" +
 	"\x06Wallet\x12\x95\x01\n" +
 	"\x0fGetUserBalances\x12-.api.wallet.service.v1.GetUserBalancesRequest\x1a..api.wallet.service.v1.GetUserBalancesResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/wallet/balances/list\x12o\n" +
 	"\x0eGetUserBalance\x12,.api.wallet.service.v1.GetUserBalanceRequest\x1a-.api.wallet.service.v1.GetUserBalanceResponse\"\x00\x12\xa9\x01\n" +
