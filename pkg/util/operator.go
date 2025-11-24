@@ -13,8 +13,8 @@ const (
 
 	//Operator mode: individual, co-opearation, internal-co-opearation
 	OperatorModeIndividual           = "individual"
-	OperatorModeCoOpearation         = "co-opearation"
-	OperatorModeInternalCoOpearation = "internal-co-opearation"
+	OperatorModeCoOpearation         = "co-operation"
+	OperatorModeInternalCoOperation = "internal-co-operation"
 
 	// Operator status: pending, live, suspended, request_to_close, closed
 	OperatorStatusPending        = "pending"
@@ -25,7 +25,8 @@ const (
 	OperatorStatusMaintain       = "maintain"
 
 	// Operator Admin Role
-	OperatorAdminRoleId         = 4
+	CoOpearationOperatorAdminRoleId = 5
+	IndividualOperatorAdminRoleId = 4
 	CompanyOperatorAdminRoleId  = 3
 	RetailerOperatorAdminRoleId = 2
 	SystemOperatorAdminRoleId   = 1

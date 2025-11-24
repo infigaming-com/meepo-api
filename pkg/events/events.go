@@ -190,6 +190,7 @@ type GameBetEvent struct {
 	SystemOperatorID                     int64          `json:"system_operator_id"`
 	RetailerOperatorID                   int64          `json:"retailer_operator_id"`
 	CompanyOperatorID                    int64          `json:"company_operator_id"`
+	GameTransactionIDs                   []int64        `json:"game_transaction_ids"`
 }
 
 type GameBetEventBoardcastItem struct {
@@ -267,6 +268,8 @@ const GameBetUserTopic = "game.bet.user"
 const GameBetClientTopic = "game.bet.client"
 
 const CreateSessionTopic = "game.create.session"
+
+const GameBetStatusSettled = "settled"
 
 // ------------------------------------------------------------
 // Affiliate events
