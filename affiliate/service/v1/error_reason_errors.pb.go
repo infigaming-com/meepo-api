@@ -682,3 +682,27 @@ func IsGetUserReferralStatsFailed(err error) bool {
 func ErrorGetUserReferralStatsFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_GET_USER_REFERRAL_STATS_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsGetUserReferralRewardsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_GET_USER_REFERRAL_REWARDS_FAILED.String() && e.Code == 500
+}
+
+func ErrorGetUserReferralRewardsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_GET_USER_REFERRAL_REWARDS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsClaimUserReferralRewardsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CLAIM_USER_REFERRAL_REWARDS_FAILED.String() && e.Code == 500
+}
+
+func ErrorClaimUserReferralRewardsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CLAIM_USER_REFERRAL_REWARDS_FAILED.String(), fmt.Sprintf(format, args...))
+}
