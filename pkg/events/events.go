@@ -148,6 +148,7 @@ type GameTransactionEvent struct {
 	Type                         string      `json:"type,omitempty"`
 	RollbackType                 string      `json:"rollback_type,omitempty"`
 	UpdateBalance                bool        `json:"update_balance,omitempty"`
+	RollbackOriginalAction       string      `json:"rollback_original_action,omitempty"`
 }
 
 type GameBetEvent struct {
