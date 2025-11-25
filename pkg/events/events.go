@@ -147,6 +147,7 @@ type GameTransactionEvent struct {
 	EventInfos                   []EventInfo `json:"event_infos,omitempty"`
 	Type                         string      `json:"type,omitempty"`
 	RollbackType                 string      `json:"rollback_type,omitempty"`
+	UpdateBalance                bool        `json:"update_balance,omitempty"`
 }
 
 type GameBetEvent struct {
@@ -298,3 +299,9 @@ type AffiliateUserActionEvent struct {
 	OperatorContext *common.OperatorContext `json:"operator_context,omitempty"`
 	CreatedAt       int64                   `json:"created_at"`
 }
+
+type OperatorSuspendEvent struct {
+	OperatorContext *common.OperatorContext `json:"operator_context,omitempty"`
+}
+
+const OperatorSuspendTopic = "operator.suspend"
