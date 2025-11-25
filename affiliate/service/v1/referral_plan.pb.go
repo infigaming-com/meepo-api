@@ -878,6 +878,190 @@ func (x *ListUserReferralRewardsResponse) GetPageSize() int32 {
 	return 0
 }
 
+type GetUserReferralRewardsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserReferralRewardsRequest) Reset() {
+	*x = GetUserReferralRewardsRequest{}
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserReferralRewardsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserReferralRewardsRequest) ProtoMessage() {}
+
+func (x *GetUserReferralRewardsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserReferralRewardsRequest.ProtoReflect.Descriptor instead.
+func (*GetUserReferralRewardsRequest) Descriptor() ([]byte, []int) {
+	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *GetUserReferralRewardsRequest) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+type GetUserReferralRewardsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Amount        string                 `protobuf:"bytes,1,opt,name=amount,proto3" json:"amount,omitempty"`
+	CommissionIds []int64                `protobuf:"varint,2,rep,packed,name=commission_ids,json=commissionIds,proto3" json:"commission_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserReferralRewardsResponse) Reset() {
+	*x = GetUserReferralRewardsResponse{}
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserReferralRewardsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserReferralRewardsResponse) ProtoMessage() {}
+
+func (x *GetUserReferralRewardsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserReferralRewardsResponse.ProtoReflect.Descriptor instead.
+func (*GetUserReferralRewardsResponse) Descriptor() ([]byte, []int) {
+	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *GetUserReferralRewardsResponse) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
+}
+
+func (x *GetUserReferralRewardsResponse) GetCommissionIds() []int64 {
+	if x != nil {
+		return x.CommissionIds
+	}
+	return nil
+}
+
+type ClaimUserReferralRewardsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	CommissionIds []int64                `protobuf:"varint,2,rep,packed,name=commission_ids,json=commissionIds,proto3" json:"commission_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ClaimUserReferralRewardsRequest) Reset() {
+	*x = ClaimUserReferralRewardsRequest{}
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClaimUserReferralRewardsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClaimUserReferralRewardsRequest) ProtoMessage() {}
+
+func (x *ClaimUserReferralRewardsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClaimUserReferralRewardsRequest.ProtoReflect.Descriptor instead.
+func (*ClaimUserReferralRewardsRequest) Descriptor() ([]byte, []int) {
+	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *ClaimUserReferralRewardsRequest) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *ClaimUserReferralRewardsRequest) GetCommissionIds() []int64 {
+	if x != nil {
+		return x.CommissionIds
+	}
+	return nil
+}
+
+type ClaimUserReferralRewardsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ClaimUserReferralRewardsResponse) Reset() {
+	*x = ClaimUserReferralRewardsResponse{}
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClaimUserReferralRewardsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClaimUserReferralRewardsResponse) ProtoMessage() {}
+
+func (x *ClaimUserReferralRewardsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClaimUserReferralRewardsResponse.ProtoReflect.Descriptor instead.
+func (*ClaimUserReferralRewardsResponse) Descriptor() ([]byte, []int) {
+	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{16}
+}
+
 // Complete referral plan configuration
 type ReferralPlan struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -890,7 +1074,7 @@ type ReferralPlan struct {
 
 func (x *ReferralPlan) Reset() {
 	*x = ReferralPlan{}
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[13]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -902,7 +1086,7 @@ func (x *ReferralPlan) String() string {
 func (*ReferralPlan) ProtoMessage() {}
 
 func (x *ReferralPlan) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[13]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -915,7 +1099,7 @@ func (x *ReferralPlan) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReferralPlan.ProtoReflect.Descriptor instead.
 func (*ReferralPlan) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{13}
+	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *ReferralPlan) GetEnabled() bool {
@@ -954,7 +1138,7 @@ type ReferralPlanConfig struct {
 
 func (x *ReferralPlanConfig) Reset() {
 	*x = ReferralPlanConfig{}
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[14]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -966,7 +1150,7 @@ func (x *ReferralPlanConfig) String() string {
 func (*ReferralPlanConfig) ProtoMessage() {}
 
 func (x *ReferralPlanConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[14]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -979,7 +1163,7 @@ func (x *ReferralPlanConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReferralPlanConfig.ProtoReflect.Descriptor instead.
 func (*ReferralPlanConfig) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{14}
+	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *ReferralPlanConfig) GetConversionConditions() *ConversionConditions {
@@ -1041,7 +1225,7 @@ type ConversionConditions struct {
 
 func (x *ConversionConditions) Reset() {
 	*x = ConversionConditions{}
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[15]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1053,7 +1237,7 @@ func (x *ConversionConditions) String() string {
 func (*ConversionConditions) ProtoMessage() {}
 
 func (x *ConversionConditions) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[15]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1066,7 +1250,7 @@ func (x *ConversionConditions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConversionConditions.ProtoReflect.Descriptor instead.
 func (*ConversionConditions) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{15}
+	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *ConversionConditions) GetEnabled() bool {
@@ -1143,7 +1327,7 @@ type ConversionReward struct {
 
 func (x *ConversionReward) Reset() {
 	*x = ConversionReward{}
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[16]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1155,7 +1339,7 @@ func (x *ConversionReward) String() string {
 func (*ConversionReward) ProtoMessage() {}
 
 func (x *ConversionReward) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[16]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1168,7 +1352,7 @@ func (x *ConversionReward) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConversionReward.ProtoReflect.Descriptor instead.
 func (*ConversionReward) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{16}
+	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *ConversionReward) GetEnabled() bool {
@@ -1194,7 +1378,7 @@ type ConversionTierRewards struct {
 
 func (x *ConversionTierRewards) Reset() {
 	*x = ConversionTierRewards{}
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[17]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1206,7 +1390,7 @@ func (x *ConversionTierRewards) String() string {
 func (*ConversionTierRewards) ProtoMessage() {}
 
 func (x *ConversionTierRewards) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[17]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1219,7 +1403,7 @@ func (x *ConversionTierRewards) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConversionTierRewards.ProtoReflect.Descriptor instead.
 func (*ConversionTierRewards) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{17}
+	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *ConversionTierRewards) GetRewards() []*ConversionTierReward {
@@ -1240,7 +1424,7 @@ type ConversionTierReward struct {
 
 func (x *ConversionTierReward) Reset() {
 	*x = ConversionTierReward{}
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[18]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1252,7 +1436,7 @@ func (x *ConversionTierReward) String() string {
 func (*ConversionTierReward) ProtoMessage() {}
 
 func (x *ConversionTierReward) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[18]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1265,7 +1449,7 @@ func (x *ConversionTierReward) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConversionTierReward.ProtoReflect.Descriptor instead.
 func (*ConversionTierReward) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{18}
+	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ConversionTierReward) GetFrom() string {
@@ -1299,7 +1483,7 @@ type InviteeReward struct {
 
 func (x *InviteeReward) Reset() {
 	*x = InviteeReward{}
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[19]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1311,7 +1495,7 @@ func (x *InviteeReward) String() string {
 func (*InviteeReward) ProtoMessage() {}
 
 func (x *InviteeReward) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[19]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1324,7 +1508,7 @@ func (x *InviteeReward) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InviteeReward.ProtoReflect.Descriptor instead.
 func (*InviteeReward) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{19}
+	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *InviteeReward) GetEnabled() bool {
@@ -1352,7 +1536,7 @@ type DepositCashback struct {
 
 func (x *DepositCashback) Reset() {
 	*x = DepositCashback{}
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[20]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1364,7 +1548,7 @@ func (x *DepositCashback) String() string {
 func (*DepositCashback) ProtoMessage() {}
 
 func (x *DepositCashback) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[20]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1377,7 +1561,7 @@ func (x *DepositCashback) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DepositCashback.ProtoReflect.Descriptor instead.
 func (*DepositCashback) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{20}
+	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *DepositCashback) GetEnabled() bool {
@@ -1404,7 +1588,7 @@ type DepositCashbackTierRewardConfig struct {
 
 func (x *DepositCashbackTierRewardConfig) Reset() {
 	*x = DepositCashbackTierRewardConfig{}
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[21]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1416,7 +1600,7 @@ func (x *DepositCashbackTierRewardConfig) String() string {
 func (*DepositCashbackTierRewardConfig) ProtoMessage() {}
 
 func (x *DepositCashbackTierRewardConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[21]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1429,7 +1613,7 @@ func (x *DepositCashbackTierRewardConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DepositCashbackTierRewardConfig.ProtoReflect.Descriptor instead.
 func (*DepositCashbackTierRewardConfig) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{21}
+	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *DepositCashbackTierRewardConfig) GetDailyLimitAmount() string {
@@ -1457,7 +1641,7 @@ type DepositCashbackTierReward struct {
 
 func (x *DepositCashbackTierReward) Reset() {
 	*x = DepositCashbackTierReward{}
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[22]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1469,7 +1653,7 @@ func (x *DepositCashbackTierReward) String() string {
 func (*DepositCashbackTierReward) ProtoMessage() {}
 
 func (x *DepositCashbackTierReward) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[22]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1482,7 +1666,7 @@ func (x *DepositCashbackTierReward) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DepositCashbackTierReward.ProtoReflect.Descriptor instead.
 func (*DepositCashbackTierReward) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{22}
+	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *DepositCashbackTierReward) GetFrom() string {
@@ -1519,7 +1703,7 @@ type WageringCommission struct {
 
 func (x *WageringCommission) Reset() {
 	*x = WageringCommission{}
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[23]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1531,7 +1715,7 @@ func (x *WageringCommission) String() string {
 func (*WageringCommission) ProtoMessage() {}
 
 func (x *WageringCommission) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[23]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1544,7 +1728,7 @@ func (x *WageringCommission) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WageringCommission.ProtoReflect.Descriptor instead.
 func (*WageringCommission) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{23}
+	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *WageringCommission) GetEnabled() bool {
@@ -1584,7 +1768,7 @@ type WageringCommissionTierRewards struct {
 
 func (x *WageringCommissionTierRewards) Reset() {
 	*x = WageringCommissionTierRewards{}
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[24]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1596,7 +1780,7 @@ func (x *WageringCommissionTierRewards) String() string {
 func (*WageringCommissionTierRewards) ProtoMessage() {}
 
 func (x *WageringCommissionTierRewards) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[24]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1609,7 +1793,7 @@ func (x *WageringCommissionTierRewards) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WageringCommissionTierRewards.ProtoReflect.Descriptor instead.
 func (*WageringCommissionTierRewards) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{24}
+	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *WageringCommissionTierRewards) GetRewards() []*WageringCommissionTierReward {
@@ -1630,7 +1814,7 @@ type WageringCommissionTierReward struct {
 
 func (x *WageringCommissionTierReward) Reset() {
 	*x = WageringCommissionTierReward{}
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[25]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1642,7 +1826,7 @@ func (x *WageringCommissionTierReward) String() string {
 func (*WageringCommissionTierReward) ProtoMessage() {}
 
 func (x *WageringCommissionTierReward) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[25]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1655,7 +1839,7 @@ func (x *WageringCommissionTierReward) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WageringCommissionTierReward.ProtoReflect.Descriptor instead.
 func (*WageringCommissionTierReward) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{25}
+	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *WageringCommissionTierReward) GetFrom() string {
@@ -1693,7 +1877,7 @@ type LossRevenueShare struct {
 
 func (x *LossRevenueShare) Reset() {
 	*x = LossRevenueShare{}
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[26]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1705,7 +1889,7 @@ func (x *LossRevenueShare) String() string {
 func (*LossRevenueShare) ProtoMessage() {}
 
 func (x *LossRevenueShare) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[26]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1718,7 +1902,7 @@ func (x *LossRevenueShare) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LossRevenueShare.ProtoReflect.Descriptor instead.
 func (*LossRevenueShare) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{26}
+	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *LossRevenueShare) GetEnabled() bool {
@@ -1765,7 +1949,7 @@ type LossRevenueShareTierRewards struct {
 
 func (x *LossRevenueShareTierRewards) Reset() {
 	*x = LossRevenueShareTierRewards{}
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[27]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1777,7 +1961,7 @@ func (x *LossRevenueShareTierRewards) String() string {
 func (*LossRevenueShareTierRewards) ProtoMessage() {}
 
 func (x *LossRevenueShareTierRewards) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[27]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1790,7 +1974,7 @@ func (x *LossRevenueShareTierRewards) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LossRevenueShareTierRewards.ProtoReflect.Descriptor instead.
 func (*LossRevenueShareTierRewards) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{27}
+	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *LossRevenueShareTierRewards) GetRewards() []*LossRevenueShareTierReward {
@@ -1811,7 +1995,7 @@ type LossRevenueShareTierReward struct {
 
 func (x *LossRevenueShareTierReward) Reset() {
 	*x = LossRevenueShareTierReward{}
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[28]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1823,7 +2007,7 @@ func (x *LossRevenueShareTierReward) String() string {
 func (*LossRevenueShareTierReward) ProtoMessage() {}
 
 func (x *LossRevenueShareTierReward) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[28]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1836,7 +2020,7 @@ func (x *LossRevenueShareTierReward) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LossRevenueShareTierReward.ProtoReflect.Descriptor instead.
 func (*LossRevenueShareTierReward) Descriptor() ([]byte, []int) {
-	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{28}
+	return file_affiliate_service_v1_referral_plan_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *LossRevenueShareTierReward) GetFrom() string {
@@ -1874,7 +2058,7 @@ type GetUserReferralStatsResponse_ReferralRewards struct {
 
 func (x *GetUserReferralStatsResponse_ReferralRewards) Reset() {
 	*x = GetUserReferralStatsResponse_ReferralRewards{}
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[29]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1886,7 +2070,7 @@ func (x *GetUserReferralStatsResponse_ReferralRewards) String() string {
 func (*GetUserReferralStatsResponse_ReferralRewards) ProtoMessage() {}
 
 func (x *GetUserReferralStatsResponse_ReferralRewards) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[29]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1957,7 +2141,7 @@ type GetUserReferralStatsResponse_ReferralProgress struct {
 
 func (x *GetUserReferralStatsResponse_ReferralProgress) Reset() {
 	*x = GetUserReferralStatsResponse_ReferralProgress{}
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[30]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1969,7 +2153,7 @@ func (x *GetUserReferralStatsResponse_ReferralProgress) String() string {
 func (*GetUserReferralStatsResponse_ReferralProgress) ProtoMessage() {}
 
 func (x *GetUserReferralStatsResponse_ReferralProgress) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[30]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2034,7 +2218,7 @@ type ListUserReferralRewardsResponse_ReferralReward struct {
 
 func (x *ListUserReferralRewardsResponse_ReferralReward) Reset() {
 	*x = ListUserReferralRewardsResponse_ReferralReward{}
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[36]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2046,7 +2230,7 @@ func (x *ListUserReferralRewardsResponse_ReferralReward) String() string {
 func (*ListUserReferralRewardsResponse_ReferralReward) ProtoMessage() {}
 
 func (x *ListUserReferralRewardsResponse_ReferralReward) ProtoReflect() protoreflect.Message {
-	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[36]
+	mi := &file_affiliate_service_v1_referral_plan_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2227,7 +2411,16 @@ const file_affiliate_service_v1_referral_plan_proto_rawDesc = "" +
 	"\x04tier\x18\x04 \x01(\x05R\x04tier\x12#\n" +
 	"\rreward_amount\x18\x05 \x01(\tR\frewardAmount\x129\n" +
 	"\n" +
-	"created_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x92\x01\n" +
+	"created_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\";\n" +
+	"\x1dGetUserReferralRewardsRequest\x12\x1a\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\"_\n" +
+	"\x1eGetUserReferralRewardsResponse\x12\x16\n" +
+	"\x06amount\x18\x01 \x01(\tR\x06amount\x12%\n" +
+	"\x0ecommission_ids\x18\x02 \x03(\x03R\rcommissionIds\"d\n" +
+	"\x1fClaimUserReferralRewardsRequest\x12\x1a\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12%\n" +
+	"\x0ecommission_ids\x18\x02 \x03(\x03R\rcommissionIds\"\"\n" +
+	" ClaimUserReferralRewardsResponse\"\x92\x01\n" +
 	"\fReferralPlan\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x19\n" +
 	"\bmax_tier\x18\x02 \x01(\x05R\amaxTier\x12M\n" +
@@ -2339,7 +2532,7 @@ func file_affiliate_service_v1_referral_plan_proto_rawDescGZIP() []byte {
 	return file_affiliate_service_v1_referral_plan_proto_rawDescData
 }
 
-var file_affiliate_service_v1_referral_plan_proto_msgTypes = make([]protoimpl.MessageInfo, 41)
+var file_affiliate_service_v1_referral_plan_proto_msgTypes = make([]protoimpl.MessageInfo, 45)
 var file_affiliate_service_v1_referral_plan_proto_goTypes = []any{
 	(*SetReferralPlanRequest)(nil),                        // 0: api.affiliate.service.v1.SetReferralPlanRequest
 	(*SetReferralPlanResponse)(nil),                       // 1: api.affiliate.service.v1.SetReferralPlanResponse
@@ -2354,80 +2547,84 @@ var file_affiliate_service_v1_referral_plan_proto_goTypes = []any{
 	(*CreateUserReferralCodeResponse)(nil),                // 10: api.affiliate.service.v1.CreateUserReferralCodeResponse
 	(*ListUserReferralRewardsRequest)(nil),                // 11: api.affiliate.service.v1.ListUserReferralRewardsRequest
 	(*ListUserReferralRewardsResponse)(nil),               // 12: api.affiliate.service.v1.ListUserReferralRewardsResponse
-	(*ReferralPlan)(nil),                                  // 13: api.affiliate.service.v1.ReferralPlan
-	(*ReferralPlanConfig)(nil),                            // 14: api.affiliate.service.v1.ReferralPlanConfig
-	(*ConversionConditions)(nil),                          // 15: api.affiliate.service.v1.ConversionConditions
-	(*ConversionReward)(nil),                              // 16: api.affiliate.service.v1.ConversionReward
-	(*ConversionTierRewards)(nil),                         // 17: api.affiliate.service.v1.ConversionTierRewards
-	(*ConversionTierReward)(nil),                          // 18: api.affiliate.service.v1.ConversionTierReward
-	(*InviteeReward)(nil),                                 // 19: api.affiliate.service.v1.InviteeReward
-	(*DepositCashback)(nil),                               // 20: api.affiliate.service.v1.DepositCashback
-	(*DepositCashbackTierRewardConfig)(nil),               // 21: api.affiliate.service.v1.DepositCashbackTierRewardConfig
-	(*DepositCashbackTierReward)(nil),                     // 22: api.affiliate.service.v1.DepositCashbackTierReward
-	(*WageringCommission)(nil),                            // 23: api.affiliate.service.v1.WageringCommission
-	(*WageringCommissionTierRewards)(nil),                 // 24: api.affiliate.service.v1.WageringCommissionTierRewards
-	(*WageringCommissionTierReward)(nil),                  // 25: api.affiliate.service.v1.WageringCommissionTierReward
-	(*LossRevenueShare)(nil),                              // 26: api.affiliate.service.v1.LossRevenueShare
-	(*LossRevenueShareTierRewards)(nil),                   // 27: api.affiliate.service.v1.LossRevenueShareTierRewards
-	(*LossRevenueShareTierReward)(nil),                    // 28: api.affiliate.service.v1.LossRevenueShareTierReward
-	(*GetUserReferralStatsResponse_ReferralRewards)(nil),  // 29: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralRewards
-	(*GetUserReferralStatsResponse_ReferralProgress)(nil), // 30: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress
-	nil, // 31: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.ConversionCountEntry
-	nil, // 32: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.DepositAmountEntry
-	nil, // 33: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.WageringAmountEntry
-	nil, // 34: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.GgrAmountEntry
-	nil, // 35: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.NgrAmountEntry
-	(*ListUserReferralRewardsResponse_ReferralReward)(nil), // 36: api.affiliate.service.v1.ListUserReferralRewardsResponse.ReferralReward
-	nil,                            // 37: api.affiliate.service.v1.ConversionReward.TierRewardsEntry
-	nil,                            // 38: api.affiliate.service.v1.DepositCashback.TierRewardConfigsEntry
-	nil,                            // 39: api.affiliate.service.v1.WageringCommission.TierRewardsEntry
-	nil,                            // 40: api.affiliate.service.v1.LossRevenueShare.TierRewardsEntry
-	(*common.OperatorContext)(nil), // 41: api.common.OperatorContext
-	(*timestamppb.Timestamp)(nil),  // 42: google.protobuf.Timestamp
+	(*GetUserReferralRewardsRequest)(nil),                 // 13: api.affiliate.service.v1.GetUserReferralRewardsRequest
+	(*GetUserReferralRewardsResponse)(nil),                // 14: api.affiliate.service.v1.GetUserReferralRewardsResponse
+	(*ClaimUserReferralRewardsRequest)(nil),               // 15: api.affiliate.service.v1.ClaimUserReferralRewardsRequest
+	(*ClaimUserReferralRewardsResponse)(nil),              // 16: api.affiliate.service.v1.ClaimUserReferralRewardsResponse
+	(*ReferralPlan)(nil),                                  // 17: api.affiliate.service.v1.ReferralPlan
+	(*ReferralPlanConfig)(nil),                            // 18: api.affiliate.service.v1.ReferralPlanConfig
+	(*ConversionConditions)(nil),                          // 19: api.affiliate.service.v1.ConversionConditions
+	(*ConversionReward)(nil),                              // 20: api.affiliate.service.v1.ConversionReward
+	(*ConversionTierRewards)(nil),                         // 21: api.affiliate.service.v1.ConversionTierRewards
+	(*ConversionTierReward)(nil),                          // 22: api.affiliate.service.v1.ConversionTierReward
+	(*InviteeReward)(nil),                                 // 23: api.affiliate.service.v1.InviteeReward
+	(*DepositCashback)(nil),                               // 24: api.affiliate.service.v1.DepositCashback
+	(*DepositCashbackTierRewardConfig)(nil),               // 25: api.affiliate.service.v1.DepositCashbackTierRewardConfig
+	(*DepositCashbackTierReward)(nil),                     // 26: api.affiliate.service.v1.DepositCashbackTierReward
+	(*WageringCommission)(nil),                            // 27: api.affiliate.service.v1.WageringCommission
+	(*WageringCommissionTierRewards)(nil),                 // 28: api.affiliate.service.v1.WageringCommissionTierRewards
+	(*WageringCommissionTierReward)(nil),                  // 29: api.affiliate.service.v1.WageringCommissionTierReward
+	(*LossRevenueShare)(nil),                              // 30: api.affiliate.service.v1.LossRevenueShare
+	(*LossRevenueShareTierRewards)(nil),                   // 31: api.affiliate.service.v1.LossRevenueShareTierRewards
+	(*LossRevenueShareTierReward)(nil),                    // 32: api.affiliate.service.v1.LossRevenueShareTierReward
+	(*GetUserReferralStatsResponse_ReferralRewards)(nil),  // 33: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralRewards
+	(*GetUserReferralStatsResponse_ReferralProgress)(nil), // 34: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress
+	nil, // 35: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.ConversionCountEntry
+	nil, // 36: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.DepositAmountEntry
+	nil, // 37: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.WageringAmountEntry
+	nil, // 38: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.GgrAmountEntry
+	nil, // 39: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.NgrAmountEntry
+	(*ListUserReferralRewardsResponse_ReferralReward)(nil), // 40: api.affiliate.service.v1.ListUserReferralRewardsResponse.ReferralReward
+	nil,                            // 41: api.affiliate.service.v1.ConversionReward.TierRewardsEntry
+	nil,                            // 42: api.affiliate.service.v1.DepositCashback.TierRewardConfigsEntry
+	nil,                            // 43: api.affiliate.service.v1.WageringCommission.TierRewardsEntry
+	nil,                            // 44: api.affiliate.service.v1.LossRevenueShare.TierRewardsEntry
+	(*common.OperatorContext)(nil), // 45: api.common.OperatorContext
+	(*timestamppb.Timestamp)(nil),  // 46: google.protobuf.Timestamp
 }
 var file_affiliate_service_v1_referral_plan_proto_depIdxs = []int32{
-	41, // 0: api.affiliate.service.v1.SetReferralPlanRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	41, // 1: api.affiliate.service.v1.SetReferralPlanRequest.target_operator_context:type_name -> api.common.OperatorContext
-	14, // 2: api.affiliate.service.v1.SetReferralPlanRequest.plan_config:type_name -> api.affiliate.service.v1.ReferralPlanConfig
-	41, // 3: api.affiliate.service.v1.GetReferralPlanRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	41, // 4: api.affiliate.service.v1.GetReferralPlanRequest.target_operator_context:type_name -> api.common.OperatorContext
-	41, // 5: api.affiliate.service.v1.GetReferralPlanResponse.custom_operator_context:type_name -> api.common.OperatorContext
-	41, // 6: api.affiliate.service.v1.GetReferralPlanResponse.inherited_operator_context:type_name -> api.common.OperatorContext
-	13, // 7: api.affiliate.service.v1.GetReferralPlanResponse.default_referral_plan:type_name -> api.affiliate.service.v1.ReferralPlan
-	13, // 8: api.affiliate.service.v1.GetReferralPlanResponse.custom_referral_plan:type_name -> api.affiliate.service.v1.ReferralPlan
-	41, // 9: api.affiliate.service.v1.GetUserReferralPlanResponse.referral_plan_owner_operator_context:type_name -> api.common.OperatorContext
-	13, // 10: api.affiliate.service.v1.GetUserReferralPlanResponse.user_referral_plan:type_name -> api.affiliate.service.v1.ReferralPlan
+	45, // 0: api.affiliate.service.v1.SetReferralPlanRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	45, // 1: api.affiliate.service.v1.SetReferralPlanRequest.target_operator_context:type_name -> api.common.OperatorContext
+	18, // 2: api.affiliate.service.v1.SetReferralPlanRequest.plan_config:type_name -> api.affiliate.service.v1.ReferralPlanConfig
+	45, // 3: api.affiliate.service.v1.GetReferralPlanRequest.initiator_operator_context:type_name -> api.common.OperatorContext
+	45, // 4: api.affiliate.service.v1.GetReferralPlanRequest.target_operator_context:type_name -> api.common.OperatorContext
+	45, // 5: api.affiliate.service.v1.GetReferralPlanResponse.custom_operator_context:type_name -> api.common.OperatorContext
+	45, // 6: api.affiliate.service.v1.GetReferralPlanResponse.inherited_operator_context:type_name -> api.common.OperatorContext
+	17, // 7: api.affiliate.service.v1.GetReferralPlanResponse.default_referral_plan:type_name -> api.affiliate.service.v1.ReferralPlan
+	17, // 8: api.affiliate.service.v1.GetReferralPlanResponse.custom_referral_plan:type_name -> api.affiliate.service.v1.ReferralPlan
+	45, // 9: api.affiliate.service.v1.GetUserReferralPlanResponse.referral_plan_owner_operator_context:type_name -> api.common.OperatorContext
+	17, // 10: api.affiliate.service.v1.GetUserReferralPlanResponse.user_referral_plan:type_name -> api.affiliate.service.v1.ReferralPlan
 	8,  // 11: api.affiliate.service.v1.GetUserReferralStatsResponse.referral_codes:type_name -> api.affiliate.service.v1.ReferralCode
-	29, // 12: api.affiliate.service.v1.GetUserReferralStatsResponse.referral_rewards:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralRewards
-	30, // 13: api.affiliate.service.v1.GetUserReferralStatsResponse.referral_progress:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress
-	42, // 14: api.affiliate.service.v1.ListUserReferralRewardsRequest.start_time:type_name -> google.protobuf.Timestamp
-	42, // 15: api.affiliate.service.v1.ListUserReferralRewardsRequest.end_time:type_name -> google.protobuf.Timestamp
-	36, // 16: api.affiliate.service.v1.ListUserReferralRewardsResponse.referral_rewards:type_name -> api.affiliate.service.v1.ListUserReferralRewardsResponse.ReferralReward
-	14, // 17: api.affiliate.service.v1.ReferralPlan.plan_config:type_name -> api.affiliate.service.v1.ReferralPlanConfig
-	15, // 18: api.affiliate.service.v1.ReferralPlanConfig.conversion_conditions:type_name -> api.affiliate.service.v1.ConversionConditions
-	16, // 19: api.affiliate.service.v1.ReferralPlanConfig.conversion_reward:type_name -> api.affiliate.service.v1.ConversionReward
-	19, // 20: api.affiliate.service.v1.ReferralPlanConfig.invitee_reward:type_name -> api.affiliate.service.v1.InviteeReward
-	20, // 21: api.affiliate.service.v1.ReferralPlanConfig.deposit_cashback:type_name -> api.affiliate.service.v1.DepositCashback
-	23, // 22: api.affiliate.service.v1.ReferralPlanConfig.wagering_commission:type_name -> api.affiliate.service.v1.WageringCommission
-	26, // 23: api.affiliate.service.v1.ReferralPlanConfig.loss_revenue_share:type_name -> api.affiliate.service.v1.LossRevenueShare
-	37, // 24: api.affiliate.service.v1.ConversionReward.tier_rewards:type_name -> api.affiliate.service.v1.ConversionReward.TierRewardsEntry
-	18, // 25: api.affiliate.service.v1.ConversionTierRewards.rewards:type_name -> api.affiliate.service.v1.ConversionTierReward
-	38, // 26: api.affiliate.service.v1.DepositCashback.tier_reward_configs:type_name -> api.affiliate.service.v1.DepositCashback.TierRewardConfigsEntry
-	22, // 27: api.affiliate.service.v1.DepositCashbackTierRewardConfig.tier_rewards:type_name -> api.affiliate.service.v1.DepositCashbackTierReward
-	39, // 28: api.affiliate.service.v1.WageringCommission.tier_rewards:type_name -> api.affiliate.service.v1.WageringCommission.TierRewardsEntry
-	25, // 29: api.affiliate.service.v1.WageringCommissionTierRewards.rewards:type_name -> api.affiliate.service.v1.WageringCommissionTierReward
-	40, // 30: api.affiliate.service.v1.LossRevenueShare.tier_rewards:type_name -> api.affiliate.service.v1.LossRevenueShare.TierRewardsEntry
-	28, // 31: api.affiliate.service.v1.LossRevenueShareTierRewards.rewards:type_name -> api.affiliate.service.v1.LossRevenueShareTierReward
-	31, // 32: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.conversion_count:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.ConversionCountEntry
-	32, // 33: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.deposit_amount:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.DepositAmountEntry
-	33, // 34: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.wagering_amount:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.WageringAmountEntry
-	34, // 35: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.ggr_amount:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.GgrAmountEntry
-	35, // 36: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.ngr_amount:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.NgrAmountEntry
-	42, // 37: api.affiliate.service.v1.ListUserReferralRewardsResponse.ReferralReward.created_at:type_name -> google.protobuf.Timestamp
-	17, // 38: api.affiliate.service.v1.ConversionReward.TierRewardsEntry.value:type_name -> api.affiliate.service.v1.ConversionTierRewards
-	21, // 39: api.affiliate.service.v1.DepositCashback.TierRewardConfigsEntry.value:type_name -> api.affiliate.service.v1.DepositCashbackTierRewardConfig
-	24, // 40: api.affiliate.service.v1.WageringCommission.TierRewardsEntry.value:type_name -> api.affiliate.service.v1.WageringCommissionTierRewards
-	27, // 41: api.affiliate.service.v1.LossRevenueShare.TierRewardsEntry.value:type_name -> api.affiliate.service.v1.LossRevenueShareTierRewards
+	33, // 12: api.affiliate.service.v1.GetUserReferralStatsResponse.referral_rewards:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralRewards
+	34, // 13: api.affiliate.service.v1.GetUserReferralStatsResponse.referral_progress:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress
+	46, // 14: api.affiliate.service.v1.ListUserReferralRewardsRequest.start_time:type_name -> google.protobuf.Timestamp
+	46, // 15: api.affiliate.service.v1.ListUserReferralRewardsRequest.end_time:type_name -> google.protobuf.Timestamp
+	40, // 16: api.affiliate.service.v1.ListUserReferralRewardsResponse.referral_rewards:type_name -> api.affiliate.service.v1.ListUserReferralRewardsResponse.ReferralReward
+	18, // 17: api.affiliate.service.v1.ReferralPlan.plan_config:type_name -> api.affiliate.service.v1.ReferralPlanConfig
+	19, // 18: api.affiliate.service.v1.ReferralPlanConfig.conversion_conditions:type_name -> api.affiliate.service.v1.ConversionConditions
+	20, // 19: api.affiliate.service.v1.ReferralPlanConfig.conversion_reward:type_name -> api.affiliate.service.v1.ConversionReward
+	23, // 20: api.affiliate.service.v1.ReferralPlanConfig.invitee_reward:type_name -> api.affiliate.service.v1.InviteeReward
+	24, // 21: api.affiliate.service.v1.ReferralPlanConfig.deposit_cashback:type_name -> api.affiliate.service.v1.DepositCashback
+	27, // 22: api.affiliate.service.v1.ReferralPlanConfig.wagering_commission:type_name -> api.affiliate.service.v1.WageringCommission
+	30, // 23: api.affiliate.service.v1.ReferralPlanConfig.loss_revenue_share:type_name -> api.affiliate.service.v1.LossRevenueShare
+	41, // 24: api.affiliate.service.v1.ConversionReward.tier_rewards:type_name -> api.affiliate.service.v1.ConversionReward.TierRewardsEntry
+	22, // 25: api.affiliate.service.v1.ConversionTierRewards.rewards:type_name -> api.affiliate.service.v1.ConversionTierReward
+	42, // 26: api.affiliate.service.v1.DepositCashback.tier_reward_configs:type_name -> api.affiliate.service.v1.DepositCashback.TierRewardConfigsEntry
+	26, // 27: api.affiliate.service.v1.DepositCashbackTierRewardConfig.tier_rewards:type_name -> api.affiliate.service.v1.DepositCashbackTierReward
+	43, // 28: api.affiliate.service.v1.WageringCommission.tier_rewards:type_name -> api.affiliate.service.v1.WageringCommission.TierRewardsEntry
+	29, // 29: api.affiliate.service.v1.WageringCommissionTierRewards.rewards:type_name -> api.affiliate.service.v1.WageringCommissionTierReward
+	44, // 30: api.affiliate.service.v1.LossRevenueShare.tier_rewards:type_name -> api.affiliate.service.v1.LossRevenueShare.TierRewardsEntry
+	32, // 31: api.affiliate.service.v1.LossRevenueShareTierRewards.rewards:type_name -> api.affiliate.service.v1.LossRevenueShareTierReward
+	35, // 32: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.conversion_count:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.ConversionCountEntry
+	36, // 33: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.deposit_amount:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.DepositAmountEntry
+	37, // 34: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.wagering_amount:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.WageringAmountEntry
+	38, // 35: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.ggr_amount:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.GgrAmountEntry
+	39, // 36: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.ngr_amount:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.NgrAmountEntry
+	46, // 37: api.affiliate.service.v1.ListUserReferralRewardsResponse.ReferralReward.created_at:type_name -> google.protobuf.Timestamp
+	21, // 38: api.affiliate.service.v1.ConversionReward.TierRewardsEntry.value:type_name -> api.affiliate.service.v1.ConversionTierRewards
+	25, // 39: api.affiliate.service.v1.DepositCashback.TierRewardConfigsEntry.value:type_name -> api.affiliate.service.v1.DepositCashbackTierRewardConfig
+	28, // 40: api.affiliate.service.v1.WageringCommission.TierRewardsEntry.value:type_name -> api.affiliate.service.v1.WageringCommissionTierRewards
+	31, // 41: api.affiliate.service.v1.LossRevenueShare.TierRewardsEntry.value:type_name -> api.affiliate.service.v1.LossRevenueShareTierRewards
 	42, // [42:42] is the sub-list for method output_type
 	42, // [42:42] is the sub-list for method input_type
 	42, // [42:42] is the sub-list for extension type_name
@@ -2445,19 +2642,19 @@ func file_affiliate_service_v1_referral_plan_proto_init() {
 	file_affiliate_service_v1_referral_plan_proto_msgTypes[5].OneofWrappers = []any{}
 	file_affiliate_service_v1_referral_plan_proto_msgTypes[9].OneofWrappers = []any{}
 	file_affiliate_service_v1_referral_plan_proto_msgTypes[11].OneofWrappers = []any{}
-	file_affiliate_service_v1_referral_plan_proto_msgTypes[14].OneofWrappers = []any{}
-	file_affiliate_service_v1_referral_plan_proto_msgTypes[15].OneofWrappers = []any{}
 	file_affiliate_service_v1_referral_plan_proto_msgTypes[18].OneofWrappers = []any{}
+	file_affiliate_service_v1_referral_plan_proto_msgTypes[19].OneofWrappers = []any{}
 	file_affiliate_service_v1_referral_plan_proto_msgTypes[22].OneofWrappers = []any{}
-	file_affiliate_service_v1_referral_plan_proto_msgTypes[25].OneofWrappers = []any{}
-	file_affiliate_service_v1_referral_plan_proto_msgTypes[28].OneofWrappers = []any{}
+	file_affiliate_service_v1_referral_plan_proto_msgTypes[26].OneofWrappers = []any{}
+	file_affiliate_service_v1_referral_plan_proto_msgTypes[29].OneofWrappers = []any{}
+	file_affiliate_service_v1_referral_plan_proto_msgTypes[32].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_affiliate_service_v1_referral_plan_proto_rawDesc), len(file_affiliate_service_v1_referral_plan_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   41,
+			NumMessages:   45,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

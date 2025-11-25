@@ -19,31 +19,33 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Affiliate_CreateCommissionPlan_FullMethodName    = "/api.affiliate.service.v1.Affiliate/CreateCommissionPlan"
-	Affiliate_UpdateCommissionPlan_FullMethodName    = "/api.affiliate.service.v1.Affiliate/UpdateCommissionPlan"
-	Affiliate_GetCommissionPlan_FullMethodName       = "/api.affiliate.service.v1.Affiliate/GetCommissionPlan"
-	Affiliate_ListCommissionPlans_FullMethodName     = "/api.affiliate.service.v1.Affiliate/ListCommissionPlans"
-	Affiliate_DeleteCommissionPlan_FullMethodName    = "/api.affiliate.service.v1.Affiliate/DeleteCommissionPlan"
-	Affiliate_ListAllCommissionPlans_FullMethodName  = "/api.affiliate.service.v1.Affiliate/ListAllCommissionPlans"
-	Affiliate_CreateAffiliate_FullMethodName         = "/api.affiliate.service.v1.Affiliate/CreateAffiliate"
-	Affiliate_UpdateAffiliate_FullMethodName         = "/api.affiliate.service.v1.Affiliate/UpdateAffiliate"
-	Affiliate_ListAffiliates_FullMethodName          = "/api.affiliate.service.v1.Affiliate/ListAffiliates"
-	Affiliate_DeleteAffiliate_FullMethodName         = "/api.affiliate.service.v1.Affiliate/DeleteAffiliate"
-	Affiliate_GetAffiliateDetails_FullMethodName     = "/api.affiliate.service.v1.Affiliate/GetAffiliateDetails"
-	Affiliate_CreateCampaign_FullMethodName          = "/api.affiliate.service.v1.Affiliate/CreateCampaign"
-	Affiliate_UpdateCampaign_FullMethodName          = "/api.affiliate.service.v1.Affiliate/UpdateCampaign"
-	Affiliate_ListCampaigns_FullMethodName           = "/api.affiliate.service.v1.Affiliate/ListCampaigns"
-	Affiliate_DeleteCampaign_FullMethodName          = "/api.affiliate.service.v1.Affiliate/DeleteCampaign"
-	Affiliate_ListEvents_FullMethodName              = "/api.affiliate.service.v1.Affiliate/ListEvents"
-	Affiliate_ListCommissions_FullMethodName         = "/api.affiliate.service.v1.Affiliate/ListCommissions"
-	Affiliate_ListUsers_FullMethodName               = "/api.affiliate.service.v1.Affiliate/ListUsers"
-	Affiliate_ListAffiliateBills_FullMethodName      = "/api.affiliate.service.v1.Affiliate/ListAffiliateBills"
-	Affiliate_SetReferralPlan_FullMethodName         = "/api.affiliate.service.v1.Affiliate/SetReferralPlan"
-	Affiliate_GetReferralPlan_FullMethodName         = "/api.affiliate.service.v1.Affiliate/GetReferralPlan"
-	Affiliate_GetUserReferralPlan_FullMethodName     = "/api.affiliate.service.v1.Affiliate/GetUserReferralPlan"
-	Affiliate_GetUserReferralStats_FullMethodName    = "/api.affiliate.service.v1.Affiliate/GetUserReferralStats"
-	Affiliate_CreateUserReferralCode_FullMethodName  = "/api.affiliate.service.v1.Affiliate/CreateUserReferralCode"
-	Affiliate_ListUserReferralRewards_FullMethodName = "/api.affiliate.service.v1.Affiliate/ListUserReferralRewards"
+	Affiliate_CreateCommissionPlan_FullMethodName     = "/api.affiliate.service.v1.Affiliate/CreateCommissionPlan"
+	Affiliate_UpdateCommissionPlan_FullMethodName     = "/api.affiliate.service.v1.Affiliate/UpdateCommissionPlan"
+	Affiliate_GetCommissionPlan_FullMethodName        = "/api.affiliate.service.v1.Affiliate/GetCommissionPlan"
+	Affiliate_ListCommissionPlans_FullMethodName      = "/api.affiliate.service.v1.Affiliate/ListCommissionPlans"
+	Affiliate_DeleteCommissionPlan_FullMethodName     = "/api.affiliate.service.v1.Affiliate/DeleteCommissionPlan"
+	Affiliate_ListAllCommissionPlans_FullMethodName   = "/api.affiliate.service.v1.Affiliate/ListAllCommissionPlans"
+	Affiliate_CreateAffiliate_FullMethodName          = "/api.affiliate.service.v1.Affiliate/CreateAffiliate"
+	Affiliate_UpdateAffiliate_FullMethodName          = "/api.affiliate.service.v1.Affiliate/UpdateAffiliate"
+	Affiliate_ListAffiliates_FullMethodName           = "/api.affiliate.service.v1.Affiliate/ListAffiliates"
+	Affiliate_DeleteAffiliate_FullMethodName          = "/api.affiliate.service.v1.Affiliate/DeleteAffiliate"
+	Affiliate_GetAffiliateDetails_FullMethodName      = "/api.affiliate.service.v1.Affiliate/GetAffiliateDetails"
+	Affiliate_CreateCampaign_FullMethodName           = "/api.affiliate.service.v1.Affiliate/CreateCampaign"
+	Affiliate_UpdateCampaign_FullMethodName           = "/api.affiliate.service.v1.Affiliate/UpdateCampaign"
+	Affiliate_ListCampaigns_FullMethodName            = "/api.affiliate.service.v1.Affiliate/ListCampaigns"
+	Affiliate_DeleteCampaign_FullMethodName           = "/api.affiliate.service.v1.Affiliate/DeleteCampaign"
+	Affiliate_ListEvents_FullMethodName               = "/api.affiliate.service.v1.Affiliate/ListEvents"
+	Affiliate_ListCommissions_FullMethodName          = "/api.affiliate.service.v1.Affiliate/ListCommissions"
+	Affiliate_ListUsers_FullMethodName                = "/api.affiliate.service.v1.Affiliate/ListUsers"
+	Affiliate_ListAffiliateBills_FullMethodName       = "/api.affiliate.service.v1.Affiliate/ListAffiliateBills"
+	Affiliate_SetReferralPlan_FullMethodName          = "/api.affiliate.service.v1.Affiliate/SetReferralPlan"
+	Affiliate_GetReferralPlan_FullMethodName          = "/api.affiliate.service.v1.Affiliate/GetReferralPlan"
+	Affiliate_GetUserReferralPlan_FullMethodName      = "/api.affiliate.service.v1.Affiliate/GetUserReferralPlan"
+	Affiliate_GetUserReferralStats_FullMethodName     = "/api.affiliate.service.v1.Affiliate/GetUserReferralStats"
+	Affiliate_CreateUserReferralCode_FullMethodName   = "/api.affiliate.service.v1.Affiliate/CreateUserReferralCode"
+	Affiliate_ListUserReferralRewards_FullMethodName  = "/api.affiliate.service.v1.Affiliate/ListUserReferralRewards"
+	Affiliate_GetUserReferralRewards_FullMethodName   = "/api.affiliate.service.v1.Affiliate/GetUserReferralRewards"
+	Affiliate_ClaimUserReferralRewards_FullMethodName = "/api.affiliate.service.v1.Affiliate/ClaimUserReferralRewards"
 )
 
 // AffiliateClient is the client API for Affiliate service.
@@ -75,6 +77,8 @@ type AffiliateClient interface {
 	GetUserReferralStats(ctx context.Context, in *GetUserReferralStatsRequest, opts ...grpc.CallOption) (*GetUserReferralStatsResponse, error)
 	CreateUserReferralCode(ctx context.Context, in *CreateUserReferralCodeRequest, opts ...grpc.CallOption) (*CreateUserReferralCodeResponse, error)
 	ListUserReferralRewards(ctx context.Context, in *ListUserReferralRewardsRequest, opts ...grpc.CallOption) (*ListUserReferralRewardsResponse, error)
+	GetUserReferralRewards(ctx context.Context, in *GetUserReferralRewardsRequest, opts ...grpc.CallOption) (*GetUserReferralRewardsResponse, error)
+	ClaimUserReferralRewards(ctx context.Context, in *ClaimUserReferralRewardsRequest, opts ...grpc.CallOption) (*ClaimUserReferralRewardsResponse, error)
 }
 
 type affiliateClient struct {
@@ -335,6 +339,26 @@ func (c *affiliateClient) ListUserReferralRewards(ctx context.Context, in *ListU
 	return out, nil
 }
 
+func (c *affiliateClient) GetUserReferralRewards(ctx context.Context, in *GetUserReferralRewardsRequest, opts ...grpc.CallOption) (*GetUserReferralRewardsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserReferralRewardsResponse)
+	err := c.cc.Invoke(ctx, Affiliate_GetUserReferralRewards_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) ClaimUserReferralRewards(ctx context.Context, in *ClaimUserReferralRewardsRequest, opts ...grpc.CallOption) (*ClaimUserReferralRewardsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ClaimUserReferralRewardsResponse)
+	err := c.cc.Invoke(ctx, Affiliate_ClaimUserReferralRewards_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AffiliateServer is the server API for Affiliate service.
 // All implementations must embed UnimplementedAffiliateServer
 // for forward compatibility.
@@ -364,6 +388,8 @@ type AffiliateServer interface {
 	GetUserReferralStats(context.Context, *GetUserReferralStatsRequest) (*GetUserReferralStatsResponse, error)
 	CreateUserReferralCode(context.Context, *CreateUserReferralCodeRequest) (*CreateUserReferralCodeResponse, error)
 	ListUserReferralRewards(context.Context, *ListUserReferralRewardsRequest) (*ListUserReferralRewardsResponse, error)
+	GetUserReferralRewards(context.Context, *GetUserReferralRewardsRequest) (*GetUserReferralRewardsResponse, error)
+	ClaimUserReferralRewards(context.Context, *ClaimUserReferralRewardsRequest) (*ClaimUserReferralRewardsResponse, error)
 	mustEmbedUnimplementedAffiliateServer()
 }
 
@@ -448,6 +474,12 @@ func (UnimplementedAffiliateServer) CreateUserReferralCode(context.Context, *Cre
 }
 func (UnimplementedAffiliateServer) ListUserReferralRewards(context.Context, *ListUserReferralRewardsRequest) (*ListUserReferralRewardsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListUserReferralRewards not implemented")
+}
+func (UnimplementedAffiliateServer) GetUserReferralRewards(context.Context, *GetUserReferralRewardsRequest) (*GetUserReferralRewardsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserReferralRewards not implemented")
+}
+func (UnimplementedAffiliateServer) ClaimUserReferralRewards(context.Context, *ClaimUserReferralRewardsRequest) (*ClaimUserReferralRewardsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ClaimUserReferralRewards not implemented")
 }
 func (UnimplementedAffiliateServer) mustEmbedUnimplementedAffiliateServer() {}
 func (UnimplementedAffiliateServer) testEmbeddedByValue()                   {}
@@ -920,6 +952,42 @@ func _Affiliate_ListUserReferralRewards_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Affiliate_GetUserReferralRewards_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserReferralRewardsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).GetUserReferralRewards(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_GetUserReferralRewards_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).GetUserReferralRewards(ctx, req.(*GetUserReferralRewardsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_ClaimUserReferralRewards_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClaimUserReferralRewardsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).ClaimUserReferralRewards(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_ClaimUserReferralRewards_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).ClaimUserReferralRewards(ctx, req.(*ClaimUserReferralRewardsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Affiliate_ServiceDesc is the grpc.ServiceDesc for Affiliate service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1026,6 +1094,14 @@ var Affiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListUserReferralRewards",
 			Handler:    _Affiliate_ListUserReferralRewards_Handler,
+		},
+		{
+			MethodName: "GetUserReferralRewards",
+			Handler:    _Affiliate_GetUserReferralRewards_Handler,
+		},
+		{
+			MethodName: "ClaimUserReferralRewards",
+			Handler:    _Affiliate_ClaimUserReferralRewards_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -129,6 +129,23 @@ message ListUserReferralRewardsResponse {
     int32 page_size = 4;
 }
 
+message GetUserReferralRewardsRequest {
+    string currency = 1;
+}
+
+message GetUserReferralRewardsResponse {
+    string amount = 1;
+    repeated int64 commission_ids = 2;
+}
+
+message ClaimUserReferralRewardsRequest {
+    string currency = 1;
+    repeated int64 commission_ids = 2;
+}
+
+message ClaimUserReferralRewardsResponse {
+}
+
 // ------------------------------------------------------------------------------------------------
 // Data structures
 // ------------------------------------------------------------------------------------------------

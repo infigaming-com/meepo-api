@@ -100,6 +100,20 @@ service Affiliate {
             body: "*"
         };
     }
+
+    rpc GetUserReferralRewards(GetUserReferralRewardsRequest) returns (GetUserReferralRewardsResponse) {
+        option (google.api.http) = {
+            post: "/v1/affiliate/user/referral/rewards/get"
+            body: "*"
+        };
+    }
+
+    rpc ClaimUserReferralRewards(ClaimUserReferralRewardsRequest) returns (ClaimUserReferralRewardsResponse) {
+        option (google.api.http) = {
+            post: "/v1/affiliate/user/referral/rewards/claim"
+            body: "*"
+        };
+    }
 }
 
 message ContactType {
