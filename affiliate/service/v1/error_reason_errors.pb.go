@@ -658,3 +658,15 @@ func IsProcessReferralGameTransactionFailed(err error) bool {
 func ErrorProcessReferralGameTransactionFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_PROCESS_REFERRAL_GAME_TRANSACTION_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsListUserReferralRewardsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_USER_REFERRAL_REWARDS_FAILED.String() && e.Code == 500
+}
+
+func ErrorListUserReferralRewardsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_USER_REFERRAL_REWARDS_FAILED.String(), fmt.Sprintf(format, args...))
+}

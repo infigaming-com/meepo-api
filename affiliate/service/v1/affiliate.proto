@@ -86,6 +86,13 @@ service Affiliate {
             body: "*"
         };
     }
+
+    rpc ListUserReferralRewards(ListUserReferralRewardsRequest) returns (ListUserReferralRewardsResponse) {
+        option (google.api.http) = {
+            post: "/v1/affiliate/user/referral/rewards/list"
+            body: "*"
+        };
+    }
 }
 
 message ContactType {

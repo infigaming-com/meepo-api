@@ -21,16 +21,19 @@ const _ = http.SupportPackageIsVersion1
 
 const OperationAffiliateCreateUserReferralCode = "/api.affiliate.service.v1.Affiliate/CreateUserReferralCode"
 const OperationAffiliateGetUserReferralConfig = "/api.affiliate.service.v1.Affiliate/GetUserReferralConfig"
+const OperationAffiliateListUserReferralRewards = "/api.affiliate.service.v1.Affiliate/ListUserReferralRewards"
 
 type AffiliateHTTPServer interface {
 	CreateUserReferralCode(context.Context, *CreateUserReferralCodeRequest) (*CreateUserReferralCodeResponse, error)
 	GetUserReferralConfig(context.Context, *GetUserReferralConfigRequest) (*GetUserReferralConfigResponse, error)
+	ListUserReferralRewards(context.Context, *ListUserReferralRewardsRequest) (*ListUserReferralRewardsResponse, error)
 }
 
 func RegisterAffiliateHTTPServer(s *http.Server, srv AffiliateHTTPServer) {
 	r := s.Route("/")
 	r.POST("/v1/affiliate/user/referral/config/get", _Affiliate_GetUserReferralConfig0_HTTP_Handler(srv))
 	r.POST("/v1/affiliate/user/referral/code/create", _Affiliate_CreateUserReferralCode0_HTTP_Handler(srv))
+	r.POST("/v1/affiliate/user/referral/rewards/list", _Affiliate_ListUserReferralRewards0_HTTP_Handler(srv))
 }
 
 func _Affiliate_GetUserReferralConfig0_HTTP_Handler(srv AffiliateHTTPServer) func(ctx http.Context) error {
@@ -77,9 +80,32 @@ func _Affiliate_CreateUserReferralCode0_HTTP_Handler(srv AffiliateHTTPServer) fu
 	}
 }
 
+func _Affiliate_ListUserReferralRewards0_HTTP_Handler(srv AffiliateHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListUserReferralRewardsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAffiliateListUserReferralRewards)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListUserReferralRewards(ctx, req.(*ListUserReferralRewardsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListUserReferralRewardsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type AffiliateHTTPClient interface {
 	CreateUserReferralCode(ctx context.Context, req *CreateUserReferralCodeRequest, opts ...http.CallOption) (rsp *CreateUserReferralCodeResponse, err error)
 	GetUserReferralConfig(ctx context.Context, req *GetUserReferralConfigRequest, opts ...http.CallOption) (rsp *GetUserReferralConfigResponse, err error)
+	ListUserReferralRewards(ctx context.Context, req *ListUserReferralRewardsRequest, opts ...http.CallOption) (rsp *ListUserReferralRewardsResponse, err error)
 }
 
 type AffiliateHTTPClientImpl struct {
@@ -108,6 +134,19 @@ func (c *AffiliateHTTPClientImpl) GetUserReferralConfig(ctx context.Context, in 
 	pattern := "/v1/affiliate/user/referral/config/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationAffiliateGetUserReferralConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *AffiliateHTTPClientImpl) ListUserReferralRewards(ctx context.Context, in *ListUserReferralRewardsRequest, opts ...http.CallOption) (*ListUserReferralRewardsResponse, error) {
+	var out ListUserReferralRewardsResponse
+	pattern := "/v1/affiliate/user/referral/rewards/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationAffiliateListUserReferralRewards))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

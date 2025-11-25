@@ -42,6 +42,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralConfigResponse'
+    /v1/affiliate/user/referral/rewards/list:
+        post:
+            tags:
+                - Affiliate
+            operationId: Affiliate_ListUserReferralRewards
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.affiliate.service.v1.ListUserReferralRewardsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListUserReferralRewardsResponse'
     /v1/backoffice/accounts/2fa/bind:
         post:
             tags:
@@ -6843,6 +6861,62 @@ components:
                     type: string
                 operatorName:
                     type: string
+        api.affiliate.service.v1.ListUserReferralRewardsRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+                rewardType:
+                    type: string
+                referralCode:
+                    type: string
+                userId:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.affiliate.service.v1.ListUserReferralRewardsResponse:
+            type: object
+            properties:
+                referralRewards:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.ListUserReferralRewardsResponse_ReferralReward'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.affiliate.service.v1.ListUserReferralRewardsResponse_ReferralReward:
+            type: object
+            properties:
+                userName:
+                    type: string
+                userId:
+                    type: string
+                referralCode:
+                    type: string
+                tier:
+                    type: integer
+                    format: int32
+                rewardAmount:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
         api.affiliate.service.v1.ListUsersResponse:
             type: object
             properties:

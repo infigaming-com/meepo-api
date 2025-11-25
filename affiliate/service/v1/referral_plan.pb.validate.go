@@ -1429,6 +1429,338 @@ var _ interface {
 	ErrorName() string
 } = CreateUserReferralCodeResponseValidationError{}
 
+// Validate checks the field values on ListUserReferralRewardsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListUserReferralRewardsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListUserReferralRewardsRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListUserReferralRewardsRequestMultiError, or nil if none found.
+func (m *ListUserReferralRewardsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListUserReferralRewardsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Currency
+
+	// no validation rules for RewardType
+
+	if m.ReferralCode != nil {
+		// no validation rules for ReferralCode
+	}
+
+	if m.UserId != nil {
+		// no validation rules for UserId
+	}
+
+	if m.StartTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetStartTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListUserReferralRewardsRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListUserReferralRewardsRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListUserReferralRewardsRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.EndTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetEndTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListUserReferralRewardsRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListUserReferralRewardsRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListUserReferralRewardsRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return ListUserReferralRewardsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListUserReferralRewardsRequestMultiError is an error wrapping multiple
+// validation errors returned by ListUserReferralRewardsRequest.ValidateAll()
+// if the designated constraints aren't met.
+type ListUserReferralRewardsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListUserReferralRewardsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListUserReferralRewardsRequestMultiError) AllErrors() []error { return m }
+
+// ListUserReferralRewardsRequestValidationError is the validation error
+// returned by ListUserReferralRewardsRequest.Validate if the designated
+// constraints aren't met.
+type ListUserReferralRewardsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListUserReferralRewardsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListUserReferralRewardsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListUserReferralRewardsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListUserReferralRewardsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListUserReferralRewardsRequestValidationError) ErrorName() string {
+	return "ListUserReferralRewardsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListUserReferralRewardsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListUserReferralRewardsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListUserReferralRewardsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListUserReferralRewardsRequestValidationError{}
+
+// Validate checks the field values on ListUserReferralRewardsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListUserReferralRewardsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListUserReferralRewardsResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// ListUserReferralRewardsResponseMultiError, or nil if none found.
+func (m *ListUserReferralRewardsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListUserReferralRewardsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetReferralRewards() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListUserReferralRewardsResponseValidationError{
+						field:  fmt.Sprintf("ReferralRewards[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListUserReferralRewardsResponseValidationError{
+						field:  fmt.Sprintf("ReferralRewards[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListUserReferralRewardsResponseValidationError{
+					field:  fmt.Sprintf("ReferralRewards[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Total
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	if len(errors) > 0 {
+		return ListUserReferralRewardsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListUserReferralRewardsResponseMultiError is an error wrapping multiple
+// validation errors returned by ListUserReferralRewardsResponse.ValidateAll()
+// if the designated constraints aren't met.
+type ListUserReferralRewardsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListUserReferralRewardsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListUserReferralRewardsResponseMultiError) AllErrors() []error { return m }
+
+// ListUserReferralRewardsResponseValidationError is the validation error
+// returned by ListUserReferralRewardsResponse.Validate if the designated
+// constraints aren't met.
+type ListUserReferralRewardsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListUserReferralRewardsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListUserReferralRewardsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListUserReferralRewardsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListUserReferralRewardsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListUserReferralRewardsResponseValidationError) ErrorName() string {
+	return "ListUserReferralRewardsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListUserReferralRewardsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListUserReferralRewardsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListUserReferralRewardsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListUserReferralRewardsResponseValidationError{}
+
 // Validate checks the field values on ReferralPlan with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -3934,3 +4266,151 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetUserReferralConfigResponse_ReferralProgressValidationError{}
+
+// Validate checks the field values on
+// ListUserReferralRewardsResponse_ReferralReward with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ListUserReferralRewardsResponse_ReferralReward) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ListUserReferralRewardsResponse_ReferralReward with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in
+// ListUserReferralRewardsResponse_ReferralRewardMultiError, or nil if none found.
+func (m *ListUserReferralRewardsResponse_ReferralReward) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListUserReferralRewardsResponse_ReferralReward) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserName
+
+	// no validation rules for UserId
+
+	// no validation rules for ReferralCode
+
+	// no validation rules for Tier
+
+	// no validation rules for RewardAmount
+
+	if all {
+		switch v := interface{}(m.GetCreatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListUserReferralRewardsResponse_ReferralRewardValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListUserReferralRewardsResponse_ReferralRewardValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListUserReferralRewardsResponse_ReferralRewardValidationError{
+				field:  "CreatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return ListUserReferralRewardsResponse_ReferralRewardMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListUserReferralRewardsResponse_ReferralRewardMultiError is an error
+// wrapping multiple validation errors returned by
+// ListUserReferralRewardsResponse_ReferralReward.ValidateAll() if the
+// designated constraints aren't met.
+type ListUserReferralRewardsResponse_ReferralRewardMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListUserReferralRewardsResponse_ReferralRewardMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListUserReferralRewardsResponse_ReferralRewardMultiError) AllErrors() []error { return m }
+
+// ListUserReferralRewardsResponse_ReferralRewardValidationError is the
+// validation error returned by
+// ListUserReferralRewardsResponse_ReferralReward.Validate if the designated
+// constraints aren't met.
+type ListUserReferralRewardsResponse_ReferralRewardValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListUserReferralRewardsResponse_ReferralRewardValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListUserReferralRewardsResponse_ReferralRewardValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e ListUserReferralRewardsResponse_ReferralRewardValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListUserReferralRewardsResponse_ReferralRewardValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListUserReferralRewardsResponse_ReferralRewardValidationError) ErrorName() string {
+	return "ListUserReferralRewardsResponse_ReferralRewardValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListUserReferralRewardsResponse_ReferralRewardValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListUserReferralRewardsResponse_ReferralReward.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListUserReferralRewardsResponse_ReferralRewardValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListUserReferralRewardsResponse_ReferralRewardValidationError{}
