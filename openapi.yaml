@@ -24,16 +24,16 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.CreateUserReferralCodeResponse'
-    /v1/affiliate/user/referral/config/get:
+    /v1/affiliate/user/referral/plan/get:
         post:
             tags:
                 - Affiliate
-            operationId: Affiliate_GetUserReferralConfig
+            operationId: Affiliate_GetUserReferralPlan
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralConfigRequest'
+                            $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralPlanRequest'
                 required: true
             responses:
                 "200":
@@ -41,7 +41,79 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralConfigResponse'
+                                $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralPlanResponse'
+    /v1/affiliate/user/referral/rewards/claim:
+        post:
+            tags:
+                - Affiliate
+            operationId: Affiliate_ClaimUserReferralRewards
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.affiliate.service.v1.ClaimUserReferralRewardsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ClaimUserReferralRewardsResponse'
+    /v1/affiliate/user/referral/rewards/get:
+        post:
+            tags:
+                - Affiliate
+            operationId: Affiliate_GetUserReferralRewards
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralRewardsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralRewardsResponse'
+    /v1/affiliate/user/referral/rewards/list:
+        post:
+            tags:
+                - Affiliate
+            operationId: Affiliate_ListUserReferralRewards
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.affiliate.service.v1.ListUserReferralRewardsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListUserReferralRewardsResponse'
+    /v1/affiliate/user/referral/stats/get:
+        post:
+            tags:
+                - Affiliate
+            operationId: Affiliate_GetUserReferralStats
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralStatsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralStatsResponse'
     /v1/backoffice/accounts/2fa/bind:
         post:
             tags:
@@ -6071,6 +6143,18 @@ components:
                     type: string
                 accessToken:
                     type: string
+        api.affiliate.service.v1.ClaimUserReferralRewardsRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+                commissionIds:
+                    type: array
+                    items:
+                        type: string
+        api.affiliate.service.v1.ClaimUserReferralRewardsResponse:
+            type: object
+            properties: {}
         api.affiliate.service.v1.CommissionPlan:
             type: object
             properties:
@@ -6442,12 +6526,12 @@ components:
                     allOf:
                         - $ref: '#/components/schemas/api.affiliate.service.v1.ReferralPlan'
                     description: Custom referral plan (current operator's own config)
-        api.affiliate.service.v1.GetUserReferralConfigRequest:
+        api.affiliate.service.v1.GetUserReferralPlanRequest:
             type: object
             properties:
                 currency:
                     type: string
-        api.affiliate.service.v1.GetUserReferralConfigResponse:
+        api.affiliate.service.v1.GetUserReferralPlanResponse:
             type: object
             properties:
                 referralPlanOwnerOperatorContext:
@@ -6460,11 +6544,78 @@ components:
                     allOf:
                         - $ref: '#/components/schemas/api.affiliate.service.v1.ReferralPlan'
                     description: Referral plan used by the user, nil if no referral plan is set
+        api.affiliate.service.v1.GetUserReferralRewardsRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+        api.affiliate.service.v1.GetUserReferralRewardsResponse:
+            type: object
+            properties:
+                amount:
+                    type: string
+                commissionIds:
+                    type: array
+                    items:
+                        type: string
+        api.affiliate.service.v1.GetUserReferralStatsRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+        api.affiliate.service.v1.GetUserReferralStatsResponse:
+            type: object
+            properties:
                 referralCodes:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.affiliate.service.v1.ReferralCode'
                     description: Referral codes created by the user
+                referralRewards:
+                    allOf:
+                        - $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralStatsResponse_ReferralRewards'
+                    description: Referral rewards for the user
+                referralProgress:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralStatsResponse_ReferralProgress'
+        api.affiliate.service.v1.GetUserReferralStatsResponse_ReferralProgress:
+            type: object
+            properties:
+                conversionCount:
+                    type: object
+                    additionalProperties:
+                        type: integer
+                        format: int32
+                depositAmount:
+                    type: object
+                    additionalProperties:
+                        type: string
+                wageringAmount:
+                    type: object
+                    additionalProperties:
+                        type: string
+                ggrAmount:
+                    type: object
+                    additionalProperties:
+                        type: string
+                ngrAmount:
+                    type: object
+                    additionalProperties:
+                        type: string
+        api.affiliate.service.v1.GetUserReferralStatsResponse_ReferralRewards:
+            type: object
+            properties:
+                availableReferralRewardAmount:
+                    type: string
+                availableCommissionRewardAmount:
+                    type: string
+                availableInviteeRewardAmount:
+                    type: string
+                totalReceivedReferralRewardAmount:
+                    type: string
+                totalReceivedCommissionRewardAmount:
+                    type: string
+                totalReceivedInviteeRewardAmount:
+                    type: string
         api.affiliate.service.v1.InviteeReward:
             type: object
             properties:
@@ -6798,6 +6949,62 @@ components:
                     type: string
                 operatorName:
                     type: string
+        api.affiliate.service.v1.ListUserReferralRewardsRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+                rewardType:
+                    type: string
+                referralCode:
+                    type: string
+                userId:
+                    type: string
+                startTime:
+                    type: string
+                    format: date-time
+                endTime:
+                    type: string
+                    format: date-time
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.affiliate.service.v1.ListUserReferralRewardsResponse:
+            type: object
+            properties:
+                referralRewards:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.ListUserReferralRewardsResponse_ReferralReward'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
+        api.affiliate.service.v1.ListUserReferralRewardsResponse_ReferralReward:
+            type: object
+            properties:
+                userName:
+                    type: string
+                userId:
+                    type: string
+                referralCode:
+                    type: string
+                tier:
+                    type: integer
+                    format: int32
+                rewardAmount:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
         api.affiliate.service.v1.ListUsersResponse:
             type: object
             properties:

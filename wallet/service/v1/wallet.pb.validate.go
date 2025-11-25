@@ -20037,6 +20037,273 @@ var _ interface {
 	ErrorName() string
 } = ListUserOverviewResponseValidationError{}
 
+// Validate checks the field values on GetUserGameTransactionsSummaryRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetUserGameTransactionsSummaryRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserGameTransactionsSummaryRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// GetUserGameTransactionsSummaryRequestMultiError, or nil if none found.
+func (m *GetUserGameTransactionsSummaryRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserGameTransactionsSummaryRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	// no validation rules for SettlementCurrency
+
+	if len(errors) > 0 {
+		return GetUserGameTransactionsSummaryRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserGameTransactionsSummaryRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// GetUserGameTransactionsSummaryRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetUserGameTransactionsSummaryRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserGameTransactionsSummaryRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserGameTransactionsSummaryRequestMultiError) AllErrors() []error { return m }
+
+// GetUserGameTransactionsSummaryRequestValidationError is the validation error
+// returned by GetUserGameTransactionsSummaryRequest.Validate if the
+// designated constraints aren't met.
+type GetUserGameTransactionsSummaryRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserGameTransactionsSummaryRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserGameTransactionsSummaryRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserGameTransactionsSummaryRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserGameTransactionsSummaryRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserGameTransactionsSummaryRequestValidationError) ErrorName() string {
+	return "GetUserGameTransactionsSummaryRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserGameTransactionsSummaryRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserGameTransactionsSummaryRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserGameTransactionsSummaryRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserGameTransactionsSummaryRequestValidationError{}
+
+// Validate checks the field values on GetUserGameTransactionsSummaryResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetUserGameTransactionsSummaryResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetUserGameTransactionsSummaryResponse with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// GetUserGameTransactionsSummaryResponseMultiError, or nil if none found.
+func (m *GetUserGameTransactionsSummaryResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserGameTransactionsSummaryResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Ggr
+
+	// no validation rules for GgrUsd
+
+	// no validation rules for GgrReportingCurrency
+
+	// no validation rules for Ngr
+
+	// no validation rules for NgrUsd
+
+	// no validation rules for NgrReportingCurrency
+
+	// no validation rules for BetCashAmount
+
+	// no validation rules for BetCashAmountUsd
+
+	// no validation rules for BetCashAmountReportingCurrency
+
+	// no validation rules for BetOperatorBonusAmount
+
+	// no validation rules for BetOperatorBonusAmountUsd
+
+	// no validation rules for BetOperatorBonusAmountReportingCurrency
+
+	// no validation rules for BetProviderBonusAmount
+
+	// no validation rules for BetProviderBonusAmountUsd
+
+	// no validation rules for BetProviderBonusAmountReportingCurrency
+
+	// no validation rules for BetCount
+
+	// no validation rules for WinCount
+
+	// no validation rules for WinCashAmount
+
+	// no validation rules for WinCashAmountUsd
+
+	// no validation rules for WinCashAmountReportingCurrency
+
+	// no validation rules for WinOperatorBonusAmount
+
+	// no validation rules for WinOperatorBonusAmountUsd
+
+	// no validation rules for WinOperatorBonusAmountReportingCurrency
+
+	// no validation rules for WinProviderBonusAmount
+
+	// no validation rules for WinProviderBonusAmountUsd
+
+	// no validation rules for WinProviderBonusAmountReportingCurrency
+
+	if len(errors) > 0 {
+		return GetUserGameTransactionsSummaryResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetUserGameTransactionsSummaryResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// GetUserGameTransactionsSummaryResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetUserGameTransactionsSummaryResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserGameTransactionsSummaryResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserGameTransactionsSummaryResponseMultiError) AllErrors() []error { return m }
+
+// GetUserGameTransactionsSummaryResponseValidationError is the validation
+// error returned by GetUserGameTransactionsSummaryResponse.Validate if the
+// designated constraints aren't met.
+type GetUserGameTransactionsSummaryResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserGameTransactionsSummaryResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserGameTransactionsSummaryResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserGameTransactionsSummaryResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserGameTransactionsSummaryResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserGameTransactionsSummaryResponseValidationError) ErrorName() string {
+	return "GetUserGameTransactionsSummaryResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserGameTransactionsSummaryResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserGameTransactionsSummaryResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserGameTransactionsSummaryResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserGameTransactionsSummaryResponseValidationError{}
+
 // Validate checks the field values on GetUserBalancesResponse_Balance with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

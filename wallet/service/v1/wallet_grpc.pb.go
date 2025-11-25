@@ -79,6 +79,7 @@ const (
 	Wallet_ExportManualJournalEntries_FullMethodName          = "/api.wallet.service.v1.Wallet/ExportManualJournalEntries"
 	Wallet_ListTimeRangeDepositCredits_FullMethodName         = "/api.wallet.service.v1.Wallet/ListTimeRangeDepositCredits"
 	Wallet_ListUserOverview_FullMethodName                    = "/api.wallet.service.v1.Wallet/ListUserOverview"
+	Wallet_GetUserGameTransactionsSummary_FullMethodName      = "/api.wallet.service.v1.Wallet/GetUserGameTransactionsSummary"
 )
 
 // WalletClient is the client API for Wallet service.
@@ -186,6 +187,8 @@ type WalletClient interface {
 	ExportManualJournalEntries(ctx context.Context, in *ExportManualJournalEntriesRequest, opts ...grpc.CallOption) (*ExportManualJournalEntriesResponse, error)
 	ListTimeRangeDepositCredits(ctx context.Context, in *ListTimeRangeDepositCreditsRequest, opts ...grpc.CallOption) (*ListTimeRangeDepositCreditsResponse, error)
 	ListUserOverview(ctx context.Context, in *ListUserOverviewRequest, opts ...grpc.CallOption) (*ListUserOverviewResponse, error)
+	// GetUserGameTransactionsSummary returns the summary of user's game transactions, mostly for exactly one game bet
+	GetUserGameTransactionsSummary(ctx context.Context, in *GetUserGameTransactionsSummaryRequest, opts ...grpc.CallOption) (*GetUserGameTransactionsSummaryResponse, error)
 }
 
 type walletClient struct {
@@ -796,6 +799,16 @@ func (c *walletClient) ListUserOverview(ctx context.Context, in *ListUserOvervie
 	return out, nil
 }
 
+func (c *walletClient) GetUserGameTransactionsSummary(ctx context.Context, in *GetUserGameTransactionsSummaryRequest, opts ...grpc.CallOption) (*GetUserGameTransactionsSummaryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserGameTransactionsSummaryResponse)
+	err := c.cc.Invoke(ctx, Wallet_GetUserGameTransactionsSummary_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServer is the server API for Wallet service.
 // All implementations must embed UnimplementedWalletServer
 // for forward compatibility.
@@ -901,6 +914,8 @@ type WalletServer interface {
 	ExportManualJournalEntries(context.Context, *ExportManualJournalEntriesRequest) (*ExportManualJournalEntriesResponse, error)
 	ListTimeRangeDepositCredits(context.Context, *ListTimeRangeDepositCreditsRequest) (*ListTimeRangeDepositCreditsResponse, error)
 	ListUserOverview(context.Context, *ListUserOverviewRequest) (*ListUserOverviewResponse, error)
+	// GetUserGameTransactionsSummary returns the summary of user's game transactions, mostly for exactly one game bet
+	GetUserGameTransactionsSummary(context.Context, *GetUserGameTransactionsSummaryRequest) (*GetUserGameTransactionsSummaryResponse, error)
 	mustEmbedUnimplementedWalletServer()
 }
 
@@ -1090,6 +1105,9 @@ func (UnimplementedWalletServer) ListTimeRangeDepositCredits(context.Context, *L
 }
 func (UnimplementedWalletServer) ListUserOverview(context.Context, *ListUserOverviewRequest) (*ListUserOverviewResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListUserOverview not implemented")
+}
+func (UnimplementedWalletServer) GetUserGameTransactionsSummary(context.Context, *GetUserGameTransactionsSummaryRequest) (*GetUserGameTransactionsSummaryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserGameTransactionsSummary not implemented")
 }
 func (UnimplementedWalletServer) mustEmbedUnimplementedWalletServer() {}
 func (UnimplementedWalletServer) testEmbeddedByValue()                {}
@@ -2192,6 +2210,24 @@ func _Wallet_ListUserOverview_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Wallet_GetUserGameTransactionsSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserGameTransactionsSummaryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).GetUserGameTransactionsSummary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_GetUserGameTransactionsSummary_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).GetUserGameTransactionsSummary(ctx, req.(*GetUserGameTransactionsSummaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Wallet_ServiceDesc is the grpc.ServiceDesc for Wallet service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2438,6 +2474,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListUserOverview",
 			Handler:    _Wallet_ListUserOverview_Handler,
+		},
+		{
+			MethodName: "GetUserGameTransactionsSummary",
+			Handler:    _Wallet_GetUserGameTransactionsSummary_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

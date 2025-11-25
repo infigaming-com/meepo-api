@@ -73,9 +73,16 @@ service Affiliate {
 
     rpc GetReferralPlan(GetReferralPlanRequest) returns (GetReferralPlanResponse) {}
 
-    rpc GetUserReferralConfig(GetUserReferralConfigRequest) returns (GetUserReferralConfigResponse) {
+    rpc GetUserReferralPlan(GetUserReferralPlanRequest) returns (GetUserReferralPlanResponse) {
         option (google.api.http) = {
-            post: "/v1/affiliate/user/referral/config/get"
+            post: "/v1/affiliate/user/referral/plan/get"
+            body: "*"
+        };
+    }
+
+    rpc GetUserReferralStats(GetUserReferralStatsRequest) returns (GetUserReferralStatsResponse) {
+        option (google.api.http) = {
+            post: "/v1/affiliate/user/referral/stats/get"
             body: "*"
         };
     }
@@ -83,6 +90,27 @@ service Affiliate {
     rpc CreateUserReferralCode(CreateUserReferralCodeRequest) returns (CreateUserReferralCodeResponse) {
         option (google.api.http) = {
             post: "/v1/affiliate/user/referral/code/create"
+            body: "*"
+        };
+    }
+
+    rpc ListUserReferralRewards(ListUserReferralRewardsRequest) returns (ListUserReferralRewardsResponse) {
+        option (google.api.http) = {
+            post: "/v1/affiliate/user/referral/rewards/list"
+            body: "*"
+        };
+    }
+
+    rpc GetUserReferralRewards(GetUserReferralRewardsRequest) returns (GetUserReferralRewardsResponse) {
+        option (google.api.http) = {
+            post: "/v1/affiliate/user/referral/rewards/get"
+            body: "*"
+        };
+    }
+
+    rpc ClaimUserReferralRewards(ClaimUserReferralRewardsRequest) returns (ClaimUserReferralRewardsResponse) {
+        option (google.api.http) = {
+            post: "/v1/affiliate/user/referral/rewards/claim"
             body: "*"
         };
     }

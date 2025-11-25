@@ -218,6 +218,9 @@ service Wallet {
 	rpc ListTimeRangeDepositCredits(ListTimeRangeDepositCreditsRequest) returns (ListTimeRangeDepositCreditsResponse) {}
 
 	rpc ListUserOverview(ListUserOverviewRequest) returns (ListUserOverviewResponse) {}
+
+	// GetUserGameTransactionsSummary returns the summary of user's game transactions, mostly for exactly one game bet
+	rpc GetUserGameTransactionsSummary(GetUserGameTransactionsSummaryRequest) returns (GetUserGameTransactionsSummaryResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -1629,4 +1632,39 @@ message ListUserOverviewResponse {
 		string ngr_reporting_currency = 3;
 	}
 	repeated UserOverview user_overviews = 1;
+}
+
+message GetUserGameTransactionsSummaryRequest {
+	int64 user_id = 1;
+	repeated int64 external_transaction_ids = 2;
+	string settlement_currency = 3;
+}
+
+message GetUserGameTransactionsSummaryResponse {
+	string ggr = 1;
+	string ggr_usd = 2;
+	string ggr_reporting_currency = 3;
+	string ngr = 4;
+	string ngr_usd = 5;
+	string ngr_reporting_currency = 6;
+	string bet_cash_amount = 7; // game bet and game bet rollback
+	string bet_cash_amount_usd = 8;
+	string bet_cash_amount_reporting_currency = 9;
+	string bet_operator_bonus_amount = 10;
+	string bet_operator_bonus_amount_usd = 11;
+	string bet_operator_bonus_amount_reporting_currency = 12;
+	string bet_provider_bonus_amount = 13;
+	string bet_provider_bonus_amount_usd = 14;
+	string bet_provider_bonus_amount_reporting_currency = 15;
+	int32 bet_count = 16; // can be negative
+	int32 win_count = 17; // can be negative
+	string win_cash_amount = 18;
+	string win_cash_amount_usd = 19;
+	string win_cash_amount_reporting_currency = 20;
+	string win_operator_bonus_amount = 21;
+	string win_operator_bonus_amount_usd = 22;
+	string win_operator_bonus_amount_reporting_currency = 23;
+	string win_provider_bonus_amount = 24;
+	string win_provider_bonus_amount_usd = 25;
+	string win_provider_bonus_amount_reporting_currency = 26;
 }
