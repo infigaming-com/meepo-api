@@ -46,11 +46,23 @@ message GetReferralPlanResponse {
     optional ReferralPlan custom_referral_plan = 7;
 }
 
-message GetUserReferralConfigRequest {
+message GetUserReferralPlanRequest {
     string currency = 1;
 }
 
-message GetUserReferralConfigResponse {
+message GetUserReferralPlanResponse {
+    // Referral plan owner operator context
+    api.common.OperatorContext referral_plan_owner_operator_context = 1;
+    string currency = 2;
+    // Referral plan used by the user, nil if no referral plan is set
+    optional ReferralPlan user_referral_plan = 3;
+}
+
+message GetUserReferralStatsRequest {
+    string currency = 1;
+}
+
+message GetUserReferralStatsResponse {
     message ReferralRewards {
         string available_referral_reward_amount = 1; // for this currency
         string available_commission_reward_amount = 2;
@@ -66,16 +78,11 @@ message GetUserReferralConfigResponse {
         map<int32, string> ggr_amount = 4; // map of tier number (1-10) to ggr, all of the game transactions
         map<int32, string> ngr_amount = 5; // map of tier number (1-10) to ngr, all of the game transactions
     }
-    // Referral plan owner operator context
-    api.common.OperatorContext referral_plan_owner_operator_context = 1;
-    string currency = 2;
-    // Referral plan used by the user, nil if no referral plan is set
-    optional ReferralPlan user_referral_plan = 3;
     // Referral codes created by the user
-    repeated ReferralCode referral_codes = 4;
+    repeated ReferralCode referral_codes = 1;
     // Referral rewards for the user
-    ReferralRewards referral_rewards = 5;
-    ReferralProgress referral_progress = 6;
+    ReferralRewards referral_rewards = 2;
+    ReferralProgress referral_progress = 3;
 }
 
 message ReferralCode {

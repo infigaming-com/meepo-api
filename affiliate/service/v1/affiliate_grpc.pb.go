@@ -40,7 +40,8 @@ const (
 	Affiliate_ListAffiliateBills_FullMethodName      = "/api.affiliate.service.v1.Affiliate/ListAffiliateBills"
 	Affiliate_SetReferralPlan_FullMethodName         = "/api.affiliate.service.v1.Affiliate/SetReferralPlan"
 	Affiliate_GetReferralPlan_FullMethodName         = "/api.affiliate.service.v1.Affiliate/GetReferralPlan"
-	Affiliate_GetUserReferralConfig_FullMethodName   = "/api.affiliate.service.v1.Affiliate/GetUserReferralConfig"
+	Affiliate_GetUserReferralPlan_FullMethodName     = "/api.affiliate.service.v1.Affiliate/GetUserReferralPlan"
+	Affiliate_GetUserReferralStats_FullMethodName    = "/api.affiliate.service.v1.Affiliate/GetUserReferralStats"
 	Affiliate_CreateUserReferralCode_FullMethodName  = "/api.affiliate.service.v1.Affiliate/CreateUserReferralCode"
 	Affiliate_ListUserReferralRewards_FullMethodName = "/api.affiliate.service.v1.Affiliate/ListUserReferralRewards"
 )
@@ -70,7 +71,8 @@ type AffiliateClient interface {
 	ListAffiliateBills(ctx context.Context, in *ListAffiliateBillsRequest, opts ...grpc.CallOption) (*ListAffiliateBillsResponse, error)
 	SetReferralPlan(ctx context.Context, in *SetReferralPlanRequest, opts ...grpc.CallOption) (*SetReferralPlanResponse, error)
 	GetReferralPlan(ctx context.Context, in *GetReferralPlanRequest, opts ...grpc.CallOption) (*GetReferralPlanResponse, error)
-	GetUserReferralConfig(ctx context.Context, in *GetUserReferralConfigRequest, opts ...grpc.CallOption) (*GetUserReferralConfigResponse, error)
+	GetUserReferralPlan(ctx context.Context, in *GetUserReferralPlanRequest, opts ...grpc.CallOption) (*GetUserReferralPlanResponse, error)
+	GetUserReferralStats(ctx context.Context, in *GetUserReferralStatsRequest, opts ...grpc.CallOption) (*GetUserReferralStatsResponse, error)
 	CreateUserReferralCode(ctx context.Context, in *CreateUserReferralCodeRequest, opts ...grpc.CallOption) (*CreateUserReferralCodeResponse, error)
 	ListUserReferralRewards(ctx context.Context, in *ListUserReferralRewardsRequest, opts ...grpc.CallOption) (*ListUserReferralRewardsResponse, error)
 }
@@ -293,10 +295,20 @@ func (c *affiliateClient) GetReferralPlan(ctx context.Context, in *GetReferralPl
 	return out, nil
 }
 
-func (c *affiliateClient) GetUserReferralConfig(ctx context.Context, in *GetUserReferralConfigRequest, opts ...grpc.CallOption) (*GetUserReferralConfigResponse, error) {
+func (c *affiliateClient) GetUserReferralPlan(ctx context.Context, in *GetUserReferralPlanRequest, opts ...grpc.CallOption) (*GetUserReferralPlanResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetUserReferralConfigResponse)
-	err := c.cc.Invoke(ctx, Affiliate_GetUserReferralConfig_FullMethodName, in, out, cOpts...)
+	out := new(GetUserReferralPlanResponse)
+	err := c.cc.Invoke(ctx, Affiliate_GetUserReferralPlan_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) GetUserReferralStats(ctx context.Context, in *GetUserReferralStatsRequest, opts ...grpc.CallOption) (*GetUserReferralStatsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserReferralStatsResponse)
+	err := c.cc.Invoke(ctx, Affiliate_GetUserReferralStats_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -348,7 +360,8 @@ type AffiliateServer interface {
 	ListAffiliateBills(context.Context, *ListAffiliateBillsRequest) (*ListAffiliateBillsResponse, error)
 	SetReferralPlan(context.Context, *SetReferralPlanRequest) (*SetReferralPlanResponse, error)
 	GetReferralPlan(context.Context, *GetReferralPlanRequest) (*GetReferralPlanResponse, error)
-	GetUserReferralConfig(context.Context, *GetUserReferralConfigRequest) (*GetUserReferralConfigResponse, error)
+	GetUserReferralPlan(context.Context, *GetUserReferralPlanRequest) (*GetUserReferralPlanResponse, error)
+	GetUserReferralStats(context.Context, *GetUserReferralStatsRequest) (*GetUserReferralStatsResponse, error)
 	CreateUserReferralCode(context.Context, *CreateUserReferralCodeRequest) (*CreateUserReferralCodeResponse, error)
 	ListUserReferralRewards(context.Context, *ListUserReferralRewardsRequest) (*ListUserReferralRewardsResponse, error)
 	mustEmbedUnimplementedAffiliateServer()
@@ -424,8 +437,11 @@ func (UnimplementedAffiliateServer) SetReferralPlan(context.Context, *SetReferra
 func (UnimplementedAffiliateServer) GetReferralPlan(context.Context, *GetReferralPlanRequest) (*GetReferralPlanResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetReferralPlan not implemented")
 }
-func (UnimplementedAffiliateServer) GetUserReferralConfig(context.Context, *GetUserReferralConfigRequest) (*GetUserReferralConfigResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetUserReferralConfig not implemented")
+func (UnimplementedAffiliateServer) GetUserReferralPlan(context.Context, *GetUserReferralPlanRequest) (*GetUserReferralPlanResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserReferralPlan not implemented")
+}
+func (UnimplementedAffiliateServer) GetUserReferralStats(context.Context, *GetUserReferralStatsRequest) (*GetUserReferralStatsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserReferralStats not implemented")
 }
 func (UnimplementedAffiliateServer) CreateUserReferralCode(context.Context, *CreateUserReferralCodeRequest) (*CreateUserReferralCodeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateUserReferralCode not implemented")
@@ -832,20 +848,38 @@ func _Affiliate_GetReferralPlan_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Affiliate_GetUserReferralConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetUserReferralConfigRequest)
+func _Affiliate_GetUserReferralPlan_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserReferralPlanRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AffiliateServer).GetUserReferralConfig(ctx, in)
+		return srv.(AffiliateServer).GetUserReferralPlan(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Affiliate_GetUserReferralConfig_FullMethodName,
+		FullMethod: Affiliate_GetUserReferralPlan_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AffiliateServer).GetUserReferralConfig(ctx, req.(*GetUserReferralConfigRequest))
+		return srv.(AffiliateServer).GetUserReferralPlan(ctx, req.(*GetUserReferralPlanRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_GetUserReferralStats_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserReferralStatsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).GetUserReferralStats(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_GetUserReferralStats_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).GetUserReferralStats(ctx, req.(*GetUserReferralStatsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -978,8 +1012,12 @@ var Affiliate_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Affiliate_GetReferralPlan_Handler,
 		},
 		{
-			MethodName: "GetUserReferralConfig",
-			Handler:    _Affiliate_GetUserReferralConfig_Handler,
+			MethodName: "GetUserReferralPlan",
+			Handler:    _Affiliate_GetUserReferralPlan_Handler,
+		},
+		{
+			MethodName: "GetUserReferralStats",
+			Handler:    _Affiliate_GetUserReferralStats_Handler,
 		},
 		{
 			MethodName: "CreateUserReferralCode",

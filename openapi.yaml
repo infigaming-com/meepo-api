@@ -24,16 +24,16 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.CreateUserReferralCodeResponse'
-    /v1/affiliate/user/referral/config/get:
+    /v1/affiliate/user/referral/plan/get:
         post:
             tags:
                 - Affiliate
-            operationId: Affiliate_GetUserReferralConfig
+            operationId: Affiliate_GetUserReferralPlan
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralConfigRequest'
+                            $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralPlanRequest'
                 required: true
             responses:
                 "200":
@@ -41,7 +41,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralConfigResponse'
+                                $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralPlanResponse'
     /v1/affiliate/user/referral/rewards/list:
         post:
             tags:
@@ -60,6 +60,24 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.ListUserReferralRewardsResponse'
+    /v1/affiliate/user/referral/stats/get:
+        post:
+            tags:
+                - Affiliate
+            operationId: Affiliate_GetUserReferralStats
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralStatsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralStatsResponse'
     /v1/backoffice/accounts/2fa/bind:
         post:
             tags:
@@ -6460,12 +6478,12 @@ components:
                     allOf:
                         - $ref: '#/components/schemas/api.affiliate.service.v1.ReferralPlan'
                     description: Custom referral plan (current operator's own config)
-        api.affiliate.service.v1.GetUserReferralConfigRequest:
+        api.affiliate.service.v1.GetUserReferralPlanRequest:
             type: object
             properties:
                 currency:
                     type: string
-        api.affiliate.service.v1.GetUserReferralConfigResponse:
+        api.affiliate.service.v1.GetUserReferralPlanResponse:
             type: object
             properties:
                 referralPlanOwnerOperatorContext:
@@ -6478,6 +6496,14 @@ components:
                     allOf:
                         - $ref: '#/components/schemas/api.affiliate.service.v1.ReferralPlan'
                     description: Referral plan used by the user, nil if no referral plan is set
+        api.affiliate.service.v1.GetUserReferralStatsRequest:
+            type: object
+            properties:
+                currency:
+                    type: string
+        api.affiliate.service.v1.GetUserReferralStatsResponse:
+            type: object
+            properties:
                 referralCodes:
                     type: array
                     items:
@@ -6485,11 +6511,11 @@ components:
                     description: Referral codes created by the user
                 referralRewards:
                     allOf:
-                        - $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralConfigResponse_ReferralRewards'
+                        - $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralStatsResponse_ReferralRewards'
                     description: Referral rewards for the user
                 referralProgress:
-                    $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralConfigResponse_ReferralProgress'
-        api.affiliate.service.v1.GetUserReferralConfigResponse_ReferralProgress:
+                    $ref: '#/components/schemas/api.affiliate.service.v1.GetUserReferralStatsResponse_ReferralProgress'
+        api.affiliate.service.v1.GetUserReferralStatsResponse_ReferralProgress:
             type: object
             properties:
                 conversionCount:
@@ -6513,7 +6539,7 @@ components:
                     type: object
                     additionalProperties:
                         type: string
-        api.affiliate.service.v1.GetUserReferralConfigResponse_ReferralRewards:
+        api.affiliate.service.v1.GetUserReferralStatsResponse_ReferralRewards:
             type: object
             properties:
                 availableReferralRewardAmount:
