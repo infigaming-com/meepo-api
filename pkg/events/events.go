@@ -301,8 +301,9 @@ type AffiliateUserActionEvent struct {
 	CreatedAt       int64                   `json:"created_at"`
 }
 
-type OperatorSuspendEvent struct {
+type OperatorStatusUpdateEvent struct {
 	OperatorContext *common.OperatorContext `json:"operator_context,omitempty"`
+	Status          string                  `json:"status"`
 }
 
-const OperatorSuspendTopic = "operator.suspend"
+const OperatorStatusUpdateTopic = "operator.status.update"
