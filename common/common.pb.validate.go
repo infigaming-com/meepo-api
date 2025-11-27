@@ -146,3 +146,207 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = OperatorContextValidationError{}
+
+// Validate checks the field values on OperatorContextFilters with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *OperatorContextFilters) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on OperatorContextFilters with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// OperatorContextFiltersMultiError, or nil if none found.
+func (m *OperatorContextFilters) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *OperatorContextFilters) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetOperatorContexts() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, OperatorContextFiltersValidationError{
+						field:  fmt.Sprintf("OperatorContexts[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, OperatorContextFiltersValidationError{
+						field:  fmt.Sprintf("OperatorContexts[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return OperatorContextFiltersValidationError{
+					field:  fmt.Sprintf("OperatorContexts[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	for idx, item := range m.GetCompanyOperatorContexts() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, OperatorContextFiltersValidationError{
+						field:  fmt.Sprintf("CompanyOperatorContexts[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, OperatorContextFiltersValidationError{
+						field:  fmt.Sprintf("CompanyOperatorContexts[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return OperatorContextFiltersValidationError{
+					field:  fmt.Sprintf("CompanyOperatorContexts[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	for idx, item := range m.GetRetailerOperatorContexts() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, OperatorContextFiltersValidationError{
+						field:  fmt.Sprintf("RetailerOperatorContexts[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, OperatorContextFiltersValidationError{
+						field:  fmt.Sprintf("RetailerOperatorContexts[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return OperatorContextFiltersValidationError{
+					field:  fmt.Sprintf("RetailerOperatorContexts[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return OperatorContextFiltersMultiError(errors)
+	}
+
+	return nil
+}
+
+// OperatorContextFiltersMultiError is an error wrapping multiple validation
+// errors returned by OperatorContextFilters.ValidateAll() if the designated
+// constraints aren't met.
+type OperatorContextFiltersMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m OperatorContextFiltersMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m OperatorContextFiltersMultiError) AllErrors() []error { return m }
+
+// OperatorContextFiltersValidationError is the validation error returned by
+// OperatorContextFilters.Validate if the designated constraints aren't met.
+type OperatorContextFiltersValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e OperatorContextFiltersValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e OperatorContextFiltersValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e OperatorContextFiltersValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e OperatorContextFiltersValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e OperatorContextFiltersValidationError) ErrorName() string {
+	return "OperatorContextFiltersValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e OperatorContextFiltersValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sOperatorContextFilters.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = OperatorContextFiltersValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = OperatorContextFiltersValidationError{}

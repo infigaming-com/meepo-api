@@ -3,6 +3,7 @@ syntax = "proto3";
 package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
+import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -15,6 +16,27 @@ service BackofficeFileStore {
 			body: "*"
 		};
 	}
+	rpc UploadRegisterLoginBlacklist(UploadRegisterLoginBlacklistRequest) returns (UploadRegisterLoginBlacklistResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/filestore/register-login-blacklist/upload"
+			body: "*"
+		};
+	}
+
+	rpc UploadVipLevelImage(UploadVipLevelImageRequest) returns (UploadVipLevelImageResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/filestore/vip-level-images/upload"
+			body: "*"
+		};
+	}
+
+	// Affiliate File Store
+	rpc UploadAffiliateRegistrationPhoto(UploadAffiliateRegistrationPhotoRequest) returns (UploadAffiliateRegistrationPhotoResponse) {
+        option (google.api.http) = {
+            post: "/v1/backoffice/filestore/affiliate/registration-photo/upload"
+            body: "*"
+        };
+	}
 }
 
 message UploadOperatorStaticFileRequest {
@@ -25,3 +47,33 @@ message UploadOperatorStaticFileRequest {
 }
 
 message UploadOperatorStaticFileResponse {}
+
+message UploadRegisterLoginBlacklistRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	bytes data = 2;
+	string id_type = 3;
+}
+
+message UploadRegisterLoginBlacklistResponse {}
+
+message UploadVipLevelImageRequest {
+	bytes data = 1;
+	string content_type = 2;
+	string file_path = 3;
+	string operator_type = 4;
+	string real_operator_id = 5;
+}
+
+message UploadVipLevelImageResponse {
+	string file_url = 1;
+}
+
+message UploadAffiliateRegistrationPhotoRequest {
+    bytes data = 1;
+    string content_type = 2;
+	string file_path = 3;
+}
+
+message UploadAffiliateRegistrationPhotoResponse {
+    string file_url = 1;
+}

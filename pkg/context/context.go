@@ -31,6 +31,72 @@ type OperatorIds struct {
 	OperatorType       string
 }
 
+type OperatorAccountPasswordSettings struct {
+	MinCharacters          int32
+	MinUppercaseCharacters int32
+	MinLowercaseCharacters int32
+	MinSpecialCharacters   int32
+	MinDigits              int32
+}
+
+type OperatorAccountSecuritySettings struct {
+	MaxPasswordRetries    int32
+	PasswordExpiryDays    int32
+	PasswordHistoryLimits int32
+}
+
+type OperatorAccountGameSettings struct {
+	NoGameWithoutDeposit bool
+	MinGameKYCLevel      int32
+}
+
+type OperatorAccountPaymentSettings struct {
+	MinDepositKYCLevel  int32
+	MinWithdrawKYCLevel int32
+}
+
+type OperatorAccountSettings struct {
+	PasswordExpiryDays int32
+}
+
+type OperatorConfig struct {
+	AccountSettings *OperatorAccountSettings
+}
+
+type OperatorInfo struct {
+	Id                    int64
+	OperatorName          string
+	ParentOperatorId      int64
+	ParentOperatorName    string
+	OperatorType          string
+	ExternalId            string
+	Subdomain             string
+	BackofficeSubdomain   string
+	BackofficeChildDomain string
+	DomainPool            []string
+	Enabled               bool
+	Mode                  string
+	OperatorKey           string
+	ReportingCurrency     string
+	BackofficeTimezone    string
+	SupportedLanguages    []string
+	SupportedCurrencies   []string
+	Status                string
+	IsMaintenance         bool
+	StatusStartTime       int64
+	StatusEndTime         int64
+	OperatorId            int64
+	CompanyOperatorId     int64
+	CompanyOperatorName   string
+	RetailerOperatorId    int64
+	RetailerOperatorName  string
+	SystemOperatorId      int64
+	SystemOperatorName    string
+	Config                *OperatorConfig
+	MinLaunchBalance      string
+	StatusLaunchWhitelist []string
+}
+
 func WithValue[T any](ctx context.Context, key string, value T) context.Context {
 	return context.WithValue(ctx, contextKey(key), value)
 }
@@ -71,6 +137,23 @@ func GetOperatorIds(ctx context.Context) (OperatorIds, bool) {
 	return Value[OperatorIds](ctx, "operatorIds")
 }
 
+func WithOperatorInfo(ctx context.Context, operatorInfo OperatorInfo) context.Context {
+	return WithValue(ctx, "operatorInfo", operatorInfo)
+}
+
+func GetOperatorInfo(ctx context.Context) (OperatorInfo, bool) {
+	return Value[OperatorInfo](ctx, "operatorInfo")
+}
+
+func GetOperatorContext(ctx context.Context) (*common.OperatorContext, bool) {
+	operatorIds, ok := GetOperatorIds(ctx)
+	if !ok {
+		return nil, false
+	}
+	operatorContext := operatorIds.GetOperatorContext()
+	return &operatorContext, true
+}
+
 func WithRequestInfo(ctx context.Context, requestInfo RequestInfo) context.Context {
 	return WithValue(ctx, "requestInfo", requestInfo)
 }
@@ -93,6 +176,19 @@ func (o *OperatorIds) GetRealOperatorIdAndType() (int64, string) {
 		// System level
 		return o.SystemOperatorId, util.OperatorTypeSystem
 	}
+}
+
+func NewOperatorIds(operatorId, companyOperatorId, retailerOperatorId, systemOperatorId int64) *OperatorIds {
+	operatorIds := &OperatorIds{
+		OperatorId:         operatorId,
+		CompanyOperatorId:  companyOperatorId,
+		RetailerOperatorId: retailerOperatorId,
+		SystemOperatorId:   systemOperatorId,
+	}
+	realOperatorId, operatorType := operatorIds.GetRealOperatorIdAndType()
+	operatorIds.RealOperatorId = realOperatorId
+	operatorIds.OperatorType = operatorType
+	return operatorIds
 }
 
 func (o *OperatorIds) GetOperatorContext() common.OperatorContext {
@@ -135,4 +231,31 @@ func IsOperatorIdsInOperatorContext(operatorIds OperatorIds, operatorContext *co
 		return operatorIds.SystemOperatorId == operatorContext.SystemOperatorId
 	}
 	return false
+}
+
+func IsTargetOperatorContextInOperatorContext(targetOperatorContext *common.OperatorContext, operatorContext *common.OperatorContext) bool {
+	if targetOperatorContext == nil {
+		return true
+	}
+	return IsOperatorIdsInOperatorContext(OperatorIdsFromOperatorContext(targetOperatorContext), operatorContext)
+}
+
+func NewOperatorContextWithIds(operatorId, companyOperatorId, retailerOperatorId, systemOperatorId int64) *common.OperatorContext {
+	operatorIds := NewOperatorIds(operatorId, companyOperatorId, retailerOperatorId, systemOperatorId)
+	operatorContext := operatorIds.GetOperatorContext()
+	return &operatorContext
+}
+
+func GetParentOperatorIdsSliceFromOperatorContext(operatorContext *common.OperatorContext) []int64 {
+	switch operatorContext.OperatorType {
+	case util.OperatorTypeOperator:
+		return []int64{operatorContext.CompanyOperatorId, operatorContext.RetailerOperatorId, operatorContext.SystemOperatorId}
+	case util.OperatorTypeCompany:
+		return []int64{operatorContext.RetailerOperatorId, operatorContext.SystemOperatorId}
+	case util.OperatorTypeRetailer:
+		return []int64{operatorContext.SystemOperatorId}
+	case util.OperatorTypeSystem:
+		return []int64{}
+	}
+	return []int64{}
 }

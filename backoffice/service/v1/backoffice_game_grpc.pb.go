@@ -8,6 +8,7 @@ package v1
 
 import (
 	context "context"
+	v1 "github.com/infigaming-com/meepo-api/game/service/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -19,22 +20,35 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeGame_ListProviders_FullMethodName             = "/api.backoffice.service.v1.BackofficeGame/ListProviders"
-	BackofficeGame_ListProvidersWithDetail_FullMethodName   = "/api.backoffice.service.v1.BackofficeGame/ListProvidersWithDetail"
-	BackofficeGame_ListCategories_FullMethodName            = "/api.backoffice.service.v1.BackofficeGame/ListCategories"
-	BackofficeGame_ListFeeGroups_FullMethodName             = "/api.backoffice.service.v1.BackofficeGame/ListFeeGroups"
-	BackofficeGame_ListTags_FullMethodName                  = "/api.backoffice.service.v1.BackofficeGame/ListTags"
-	BackofficeGame_ListThemes_FullMethodName                = "/api.backoffice.service.v1.BackofficeGame/ListThemes"
-	BackofficeGame_ListCurrencies_FullMethodName            = "/api.backoffice.service.v1.BackofficeGame/ListCurrencies"
-	BackofficeGame_ListBets_FullMethodName                  = "/api.backoffice.service.v1.BackofficeGame/ListBets"
-	BackofficeGame_GetBetById_FullMethodName                = "/api.backoffice.service.v1.BackofficeGame/GetBetById"
-	BackofficeGame_GetUserBetsOverview_FullMethodName       = "/api.backoffice.service.v1.BackofficeGame/GetUserBetsOverview"
-	BackofficeGame_GetGameTransactionsForBet_FullMethodName = "/api.backoffice.service.v1.BackofficeGame/GetGameTransactionsForBet"
-	BackofficeGame_ListGames_FullMethodName                 = "/api.backoffice.service.v1.BackofficeGame/ListGames"
-	BackofficeGame_UpdateGame_FullMethodName                = "/api.backoffice.service.v1.BackofficeGame/UpdateGame"
-	BackofficeGame_UpdateProvider_FullMethodName            = "/api.backoffice.service.v1.BackofficeGame/UpdateProvider"
-	BackofficeGame_ListProviderRates_FullMethodName         = "/api.backoffice.service.v1.BackofficeGame/ListProviderRates"
-	BackofficeGame_GetGameTransactionById_FullMethodName    = "/api.backoffice.service.v1.BackofficeGame/GetGameTransactionById"
+	BackofficeGame_ListProviders_FullMethodName               = "/api.backoffice.service.v1.BackofficeGame/ListProviders"
+	BackofficeGame_ListProvidersWithDetail_FullMethodName     = "/api.backoffice.service.v1.BackofficeGame/ListProvidersWithDetail"
+	BackofficeGame_ListCategories_FullMethodName              = "/api.backoffice.service.v1.BackofficeGame/ListCategories"
+	BackofficeGame_ListFeeGroups_FullMethodName               = "/api.backoffice.service.v1.BackofficeGame/ListFeeGroups"
+	BackofficeGame_ListTags_FullMethodName                    = "/api.backoffice.service.v1.BackofficeGame/ListTags"
+	BackofficeGame_ListThemes_FullMethodName                  = "/api.backoffice.service.v1.BackofficeGame/ListThemes"
+	BackofficeGame_ListCurrencies_FullMethodName              = "/api.backoffice.service.v1.BackofficeGame/ListCurrencies"
+	BackofficeGame_ListBets_FullMethodName                    = "/api.backoffice.service.v1.BackofficeGame/ListBets"
+	BackofficeGame_ExportBets_FullMethodName                  = "/api.backoffice.service.v1.BackofficeGame/ExportBets"
+	BackofficeGame_GetBetById_FullMethodName                  = "/api.backoffice.service.v1.BackofficeGame/GetBetById"
+	BackofficeGame_GetUserBetsOverview_FullMethodName         = "/api.backoffice.service.v1.BackofficeGame/GetUserBetsOverview"
+	BackofficeGame_GetGameTransactionsForBet_FullMethodName   = "/api.backoffice.service.v1.BackofficeGame/GetGameTransactionsForBet"
+	BackofficeGame_ListGames_FullMethodName                   = "/api.backoffice.service.v1.BackofficeGame/ListGames"
+	BackofficeGame_UpdateGame_FullMethodName                  = "/api.backoffice.service.v1.BackofficeGame/UpdateGame"
+	BackofficeGame_UpdateProvider_FullMethodName              = "/api.backoffice.service.v1.BackofficeGame/UpdateProvider"
+	BackofficeGame_ListProviderRates_FullMethodName           = "/api.backoffice.service.v1.BackofficeGame/ListProviderRates"
+	BackofficeGame_GetGameTransactionById_FullMethodName      = "/api.backoffice.service.v1.BackofficeGame/GetGameTransactionById"
+	BackofficeGame_ListUnpaidBets_FullMethodName              = "/api.backoffice.service.v1.BackofficeGame/ListUnpaidBets"
+	BackofficeGame_ExportUnpaidBets_FullMethodName            = "/api.backoffice.service.v1.BackofficeGame/ExportUnpaidBets"
+	BackofficeGame_ListMultipleBets_FullMethodName            = "/api.backoffice.service.v1.BackofficeGame/ListMultipleBets"
+	BackofficeGame_ExportMultipleBets_FullMethodName          = "/api.backoffice.service.v1.BackofficeGame/ExportMultipleBets"
+	BackofficeGame_ListStakeVarianceBets_FullMethodName       = "/api.backoffice.service.v1.BackofficeGame/ListStakeVarianceBets"
+	BackofficeGame_ExportStakeVarianceBets_FullMethodName     = "/api.backoffice.service.v1.BackofficeGame/ExportStakeVarianceBets"
+	BackofficeGame_ListCustomerStrikeReports_FullMethodName   = "/api.backoffice.service.v1.BackofficeGame/ListCustomerStrikeReports"
+	BackofficeGame_ExportCustomerStrikeReports_FullMethodName = "/api.backoffice.service.v1.BackofficeGame/ExportCustomerStrikeReports"
+	BackofficeGame_ExportSportEvents_FullMethodName           = "/api.backoffice.service.v1.BackofficeGame/ExportSportEvents"
+	BackofficeGame_AddGameBetDisplayConfig_FullMethodName     = "/api.backoffice.service.v1.BackofficeGame/AddGameBetDisplayConfig"
+	BackofficeGame_UpdateGameBetDisplayConfig_FullMethodName  = "/api.backoffice.service.v1.BackofficeGame/UpdateGameBetDisplayConfig"
+	BackofficeGame_ListGameBetDisplayConfig_FullMethodName    = "/api.backoffice.service.v1.BackofficeGame/ListGameBetDisplayConfig"
 )
 
 // BackofficeGameClient is the client API for BackofficeGame service.
@@ -55,14 +69,27 @@ type BackofficeGameClient interface {
 	ListThemes(ctx context.Context, in *ListThemesRequest, opts ...grpc.CallOption) (*ListThemesResponse, error)
 	ListCurrencies(ctx context.Context, in *ListCurrenciesRequest, opts ...grpc.CallOption) (*ListCurrenciesResponse, error)
 	ListBets(ctx context.Context, in *ListBetsRequest, opts ...grpc.CallOption) (*ListBetsResponse, error)
-	GetBetById(ctx context.Context, in *GetBetByIdRequest, opts ...grpc.CallOption) (*GetBetByIdResponse, error)
+	ExportBets(ctx context.Context, in *ExportBetsRequest, opts ...grpc.CallOption) (*v1.ExportBetsResponse, error)
+	GetBetById(ctx context.Context, in *GetBetByIdRequest, opts ...grpc.CallOption) (*v1.GetBetByIdResponse, error)
 	GetUserBetsOverview(ctx context.Context, in *GetUserBetsOverviewRequest, opts ...grpc.CallOption) (*GetUserBetsOverviewResponse, error)
 	GetGameTransactionsForBet(ctx context.Context, in *GetGameTransactionsForBetRequest, opts ...grpc.CallOption) (*GetGameTransactionsForBetResponse, error)
 	ListGames(ctx context.Context, in *ListGamesRequest, opts ...grpc.CallOption) (*ListGamesResponse, error)
 	UpdateGame(ctx context.Context, in *UpdateGameRequest, opts ...grpc.CallOption) (*UpdateGameResponse, error)
 	UpdateProvider(ctx context.Context, in *UpdateProviderRequest, opts ...grpc.CallOption) (*UpdateProviderResponse, error)
 	ListProviderRates(ctx context.Context, in *ListProviderRatesRequest, opts ...grpc.CallOption) (*ListProviderRatesResponse, error)
-	GetGameTransactionById(ctx context.Context, in *GetGameTransactionByIdRequest, opts ...grpc.CallOption) (*GetGameTransactionByIdResponse, error)
+	GetGameTransactionById(ctx context.Context, in *GetGameTransactionByIdRequest, opts ...grpc.CallOption) (*v1.GetGameTransactionByIdResponse, error)
+	ListUnpaidBets(ctx context.Context, in *ListUnpaidBetsRequest, opts ...grpc.CallOption) (*v1.ListUnpaidBetsResponse, error)
+	ExportUnpaidBets(ctx context.Context, in *ExportUnpaidBetsRequest, opts ...grpc.CallOption) (*v1.ExportUnpaidBetsResponse, error)
+	ListMultipleBets(ctx context.Context, in *ListMultipleBetsRequest, opts ...grpc.CallOption) (*v1.ListMultipleBetsResponse, error)
+	ExportMultipleBets(ctx context.Context, in *ExportMultipleBetsRequest, opts ...grpc.CallOption) (*v1.ExportMultipleBetsResponse, error)
+	ListStakeVarianceBets(ctx context.Context, in *ListStakeVarianceBetsRequest, opts ...grpc.CallOption) (*v1.ListStakeVarianceBetsResponse, error)
+	ExportStakeVarianceBets(ctx context.Context, in *ExportStakeVarianceBetsRequest, opts ...grpc.CallOption) (*v1.ExportStakeVarianceBetsResponse, error)
+	ListCustomerStrikeReports(ctx context.Context, in *ListCustomerStrikeReportsRequest, opts ...grpc.CallOption) (*v1.ListCustomerStrikeReportsResponse, error)
+	ExportCustomerStrikeReports(ctx context.Context, in *ExportCustomerStrikeReportsRequest, opts ...grpc.CallOption) (*v1.ExportCustomerStrikeReportsResponse, error)
+	ExportSportEvents(ctx context.Context, in *ExportSportEventsRequest, opts ...grpc.CallOption) (*v1.ExportSportEventsResponse, error)
+	AddGameBetDisplayConfig(ctx context.Context, in *v1.AddGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.AddGameBetDisplayConfigResponse, error)
+	UpdateGameBetDisplayConfig(ctx context.Context, in *v1.UpdateGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.UpdateGameBetDisplayConfigResponse, error)
+	ListGameBetDisplayConfig(ctx context.Context, in *v1.ListGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.ListGameBetDisplayConfigResponse, error)
 }
 
 type backofficeGameClient struct {
@@ -153,9 +180,19 @@ func (c *backofficeGameClient) ListBets(ctx context.Context, in *ListBetsRequest
 	return out, nil
 }
 
-func (c *backofficeGameClient) GetBetById(ctx context.Context, in *GetBetByIdRequest, opts ...grpc.CallOption) (*GetBetByIdResponse, error) {
+func (c *backofficeGameClient) ExportBets(ctx context.Context, in *ExportBetsRequest, opts ...grpc.CallOption) (*v1.ExportBetsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetBetByIdResponse)
+	out := new(v1.ExportBetsResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ExportBets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) GetBetById(ctx context.Context, in *GetBetByIdRequest, opts ...grpc.CallOption) (*v1.GetBetByIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetBetByIdResponse)
 	err := c.cc.Invoke(ctx, BackofficeGame_GetBetById_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -223,10 +260,130 @@ func (c *backofficeGameClient) ListProviderRates(ctx context.Context, in *ListPr
 	return out, nil
 }
 
-func (c *backofficeGameClient) GetGameTransactionById(ctx context.Context, in *GetGameTransactionByIdRequest, opts ...grpc.CallOption) (*GetGameTransactionByIdResponse, error) {
+func (c *backofficeGameClient) GetGameTransactionById(ctx context.Context, in *GetGameTransactionByIdRequest, opts ...grpc.CallOption) (*v1.GetGameTransactionByIdResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetGameTransactionByIdResponse)
+	out := new(v1.GetGameTransactionByIdResponse)
 	err := c.cc.Invoke(ctx, BackofficeGame_GetGameTransactionById_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) ListUnpaidBets(ctx context.Context, in *ListUnpaidBetsRequest, opts ...grpc.CallOption) (*v1.ListUnpaidBetsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListUnpaidBetsResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ListUnpaidBets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) ExportUnpaidBets(ctx context.Context, in *ExportUnpaidBetsRequest, opts ...grpc.CallOption) (*v1.ExportUnpaidBetsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ExportUnpaidBetsResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ExportUnpaidBets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) ListMultipleBets(ctx context.Context, in *ListMultipleBetsRequest, opts ...grpc.CallOption) (*v1.ListMultipleBetsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListMultipleBetsResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ListMultipleBets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) ExportMultipleBets(ctx context.Context, in *ExportMultipleBetsRequest, opts ...grpc.CallOption) (*v1.ExportMultipleBetsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ExportMultipleBetsResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ExportMultipleBets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) ListStakeVarianceBets(ctx context.Context, in *ListStakeVarianceBetsRequest, opts ...grpc.CallOption) (*v1.ListStakeVarianceBetsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListStakeVarianceBetsResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ListStakeVarianceBets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) ExportStakeVarianceBets(ctx context.Context, in *ExportStakeVarianceBetsRequest, opts ...grpc.CallOption) (*v1.ExportStakeVarianceBetsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ExportStakeVarianceBetsResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ExportStakeVarianceBets_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) ListCustomerStrikeReports(ctx context.Context, in *ListCustomerStrikeReportsRequest, opts ...grpc.CallOption) (*v1.ListCustomerStrikeReportsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListCustomerStrikeReportsResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ListCustomerStrikeReports_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) ExportCustomerStrikeReports(ctx context.Context, in *ExportCustomerStrikeReportsRequest, opts ...grpc.CallOption) (*v1.ExportCustomerStrikeReportsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ExportCustomerStrikeReportsResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ExportCustomerStrikeReports_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) ExportSportEvents(ctx context.Context, in *ExportSportEventsRequest, opts ...grpc.CallOption) (*v1.ExportSportEventsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ExportSportEventsResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ExportSportEvents_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) AddGameBetDisplayConfig(ctx context.Context, in *v1.AddGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.AddGameBetDisplayConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.AddGameBetDisplayConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_AddGameBetDisplayConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) UpdateGameBetDisplayConfig(ctx context.Context, in *v1.UpdateGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.UpdateGameBetDisplayConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.UpdateGameBetDisplayConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_UpdateGameBetDisplayConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeGameClient) ListGameBetDisplayConfig(ctx context.Context, in *v1.ListGameBetDisplayConfigRequest, opts ...grpc.CallOption) (*v1.ListGameBetDisplayConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ListGameBetDisplayConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeGame_ListGameBetDisplayConfig_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -251,14 +408,27 @@ type BackofficeGameServer interface {
 	ListThemes(context.Context, *ListThemesRequest) (*ListThemesResponse, error)
 	ListCurrencies(context.Context, *ListCurrenciesRequest) (*ListCurrenciesResponse, error)
 	ListBets(context.Context, *ListBetsRequest) (*ListBetsResponse, error)
-	GetBetById(context.Context, *GetBetByIdRequest) (*GetBetByIdResponse, error)
+	ExportBets(context.Context, *ExportBetsRequest) (*v1.ExportBetsResponse, error)
+	GetBetById(context.Context, *GetBetByIdRequest) (*v1.GetBetByIdResponse, error)
 	GetUserBetsOverview(context.Context, *GetUserBetsOverviewRequest) (*GetUserBetsOverviewResponse, error)
 	GetGameTransactionsForBet(context.Context, *GetGameTransactionsForBetRequest) (*GetGameTransactionsForBetResponse, error)
 	ListGames(context.Context, *ListGamesRequest) (*ListGamesResponse, error)
 	UpdateGame(context.Context, *UpdateGameRequest) (*UpdateGameResponse, error)
 	UpdateProvider(context.Context, *UpdateProviderRequest) (*UpdateProviderResponse, error)
 	ListProviderRates(context.Context, *ListProviderRatesRequest) (*ListProviderRatesResponse, error)
-	GetGameTransactionById(context.Context, *GetGameTransactionByIdRequest) (*GetGameTransactionByIdResponse, error)
+	GetGameTransactionById(context.Context, *GetGameTransactionByIdRequest) (*v1.GetGameTransactionByIdResponse, error)
+	ListUnpaidBets(context.Context, *ListUnpaidBetsRequest) (*v1.ListUnpaidBetsResponse, error)
+	ExportUnpaidBets(context.Context, *ExportUnpaidBetsRequest) (*v1.ExportUnpaidBetsResponse, error)
+	ListMultipleBets(context.Context, *ListMultipleBetsRequest) (*v1.ListMultipleBetsResponse, error)
+	ExportMultipleBets(context.Context, *ExportMultipleBetsRequest) (*v1.ExportMultipleBetsResponse, error)
+	ListStakeVarianceBets(context.Context, *ListStakeVarianceBetsRequest) (*v1.ListStakeVarianceBetsResponse, error)
+	ExportStakeVarianceBets(context.Context, *ExportStakeVarianceBetsRequest) (*v1.ExportStakeVarianceBetsResponse, error)
+	ListCustomerStrikeReports(context.Context, *ListCustomerStrikeReportsRequest) (*v1.ListCustomerStrikeReportsResponse, error)
+	ExportCustomerStrikeReports(context.Context, *ExportCustomerStrikeReportsRequest) (*v1.ExportCustomerStrikeReportsResponse, error)
+	ExportSportEvents(context.Context, *ExportSportEventsRequest) (*v1.ExportSportEventsResponse, error)
+	AddGameBetDisplayConfig(context.Context, *v1.AddGameBetDisplayConfigRequest) (*v1.AddGameBetDisplayConfigResponse, error)
+	UpdateGameBetDisplayConfig(context.Context, *v1.UpdateGameBetDisplayConfigRequest) (*v1.UpdateGameBetDisplayConfigResponse, error)
+	ListGameBetDisplayConfig(context.Context, *v1.ListGameBetDisplayConfigRequest) (*v1.ListGameBetDisplayConfigResponse, error)
 	mustEmbedUnimplementedBackofficeGameServer()
 }
 
@@ -293,7 +463,10 @@ func (UnimplementedBackofficeGameServer) ListCurrencies(context.Context, *ListCu
 func (UnimplementedBackofficeGameServer) ListBets(context.Context, *ListBetsRequest) (*ListBetsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBets not implemented")
 }
-func (UnimplementedBackofficeGameServer) GetBetById(context.Context, *GetBetByIdRequest) (*GetBetByIdResponse, error) {
+func (UnimplementedBackofficeGameServer) ExportBets(context.Context, *ExportBetsRequest) (*v1.ExportBetsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportBets not implemented")
+}
+func (UnimplementedBackofficeGameServer) GetBetById(context.Context, *GetBetByIdRequest) (*v1.GetBetByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBetById not implemented")
 }
 func (UnimplementedBackofficeGameServer) GetUserBetsOverview(context.Context, *GetUserBetsOverviewRequest) (*GetUserBetsOverviewResponse, error) {
@@ -314,8 +487,44 @@ func (UnimplementedBackofficeGameServer) UpdateProvider(context.Context, *Update
 func (UnimplementedBackofficeGameServer) ListProviderRates(context.Context, *ListProviderRatesRequest) (*ListProviderRatesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListProviderRates not implemented")
 }
-func (UnimplementedBackofficeGameServer) GetGameTransactionById(context.Context, *GetGameTransactionByIdRequest) (*GetGameTransactionByIdResponse, error) {
+func (UnimplementedBackofficeGameServer) GetGameTransactionById(context.Context, *GetGameTransactionByIdRequest) (*v1.GetGameTransactionByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGameTransactionById not implemented")
+}
+func (UnimplementedBackofficeGameServer) ListUnpaidBets(context.Context, *ListUnpaidBetsRequest) (*v1.ListUnpaidBetsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListUnpaidBets not implemented")
+}
+func (UnimplementedBackofficeGameServer) ExportUnpaidBets(context.Context, *ExportUnpaidBetsRequest) (*v1.ExportUnpaidBetsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportUnpaidBets not implemented")
+}
+func (UnimplementedBackofficeGameServer) ListMultipleBets(context.Context, *ListMultipleBetsRequest) (*v1.ListMultipleBetsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListMultipleBets not implemented")
+}
+func (UnimplementedBackofficeGameServer) ExportMultipleBets(context.Context, *ExportMultipleBetsRequest) (*v1.ExportMultipleBetsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportMultipleBets not implemented")
+}
+func (UnimplementedBackofficeGameServer) ListStakeVarianceBets(context.Context, *ListStakeVarianceBetsRequest) (*v1.ListStakeVarianceBetsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListStakeVarianceBets not implemented")
+}
+func (UnimplementedBackofficeGameServer) ExportStakeVarianceBets(context.Context, *ExportStakeVarianceBetsRequest) (*v1.ExportStakeVarianceBetsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportStakeVarianceBets not implemented")
+}
+func (UnimplementedBackofficeGameServer) ListCustomerStrikeReports(context.Context, *ListCustomerStrikeReportsRequest) (*v1.ListCustomerStrikeReportsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCustomerStrikeReports not implemented")
+}
+func (UnimplementedBackofficeGameServer) ExportCustomerStrikeReports(context.Context, *ExportCustomerStrikeReportsRequest) (*v1.ExportCustomerStrikeReportsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportCustomerStrikeReports not implemented")
+}
+func (UnimplementedBackofficeGameServer) ExportSportEvents(context.Context, *ExportSportEventsRequest) (*v1.ExportSportEventsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportSportEvents not implemented")
+}
+func (UnimplementedBackofficeGameServer) AddGameBetDisplayConfig(context.Context, *v1.AddGameBetDisplayConfigRequest) (*v1.AddGameBetDisplayConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddGameBetDisplayConfig not implemented")
+}
+func (UnimplementedBackofficeGameServer) UpdateGameBetDisplayConfig(context.Context, *v1.UpdateGameBetDisplayConfigRequest) (*v1.UpdateGameBetDisplayConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateGameBetDisplayConfig not implemented")
+}
+func (UnimplementedBackofficeGameServer) ListGameBetDisplayConfig(context.Context, *v1.ListGameBetDisplayConfigRequest) (*v1.ListGameBetDisplayConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListGameBetDisplayConfig not implemented")
 }
 func (UnimplementedBackofficeGameServer) mustEmbedUnimplementedBackofficeGameServer() {}
 func (UnimplementedBackofficeGameServer) testEmbeddedByValue()                        {}
@@ -482,6 +691,24 @@ func _BackofficeGame_ListBets_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeGame_ExportBets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportBetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ExportBets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ExportBets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ExportBets(ctx, req.(*ExportBetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _BackofficeGame_GetBetById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetBetByIdRequest)
 	if err := dec(in); err != nil {
@@ -626,6 +853,222 @@ func _BackofficeGame_GetGameTransactionById_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeGame_ListUnpaidBets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListUnpaidBetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ListUnpaidBets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ListUnpaidBets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ListUnpaidBets(ctx, req.(*ListUnpaidBetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_ExportUnpaidBets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportUnpaidBetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ExportUnpaidBets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ExportUnpaidBets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ExportUnpaidBets(ctx, req.(*ExportUnpaidBetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_ListMultipleBets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListMultipleBetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ListMultipleBets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ListMultipleBets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ListMultipleBets(ctx, req.(*ListMultipleBetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_ExportMultipleBets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportMultipleBetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ExportMultipleBets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ExportMultipleBets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ExportMultipleBets(ctx, req.(*ExportMultipleBetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_ListStakeVarianceBets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListStakeVarianceBetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ListStakeVarianceBets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ListStakeVarianceBets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ListStakeVarianceBets(ctx, req.(*ListStakeVarianceBetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_ExportStakeVarianceBets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportStakeVarianceBetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ExportStakeVarianceBets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ExportStakeVarianceBets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ExportStakeVarianceBets(ctx, req.(*ExportStakeVarianceBetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_ListCustomerStrikeReports_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCustomerStrikeReportsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ListCustomerStrikeReports(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ListCustomerStrikeReports_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ListCustomerStrikeReports(ctx, req.(*ListCustomerStrikeReportsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_ExportCustomerStrikeReports_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportCustomerStrikeReportsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ExportCustomerStrikeReports(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ExportCustomerStrikeReports_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ExportCustomerStrikeReports(ctx, req.(*ExportCustomerStrikeReportsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_ExportSportEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportSportEventsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ExportSportEvents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ExportSportEvents_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ExportSportEvents(ctx, req.(*ExportSportEventsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_AddGameBetDisplayConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.AddGameBetDisplayConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).AddGameBetDisplayConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_AddGameBetDisplayConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).AddGameBetDisplayConfig(ctx, req.(*v1.AddGameBetDisplayConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_UpdateGameBetDisplayConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.UpdateGameBetDisplayConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).UpdateGameBetDisplayConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_UpdateGameBetDisplayConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).UpdateGameBetDisplayConfig(ctx, req.(*v1.UpdateGameBetDisplayConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeGame_ListGameBetDisplayConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(v1.ListGameBetDisplayConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeGameServer).ListGameBetDisplayConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeGame_ListGameBetDisplayConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeGameServer).ListGameBetDisplayConfig(ctx, req.(*v1.ListGameBetDisplayConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeGame_ServiceDesc is the grpc.ServiceDesc for BackofficeGame service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -666,6 +1109,10 @@ var BackofficeGame_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BackofficeGame_ListBets_Handler,
 		},
 		{
+			MethodName: "ExportBets",
+			Handler:    _BackofficeGame_ExportBets_Handler,
+		},
+		{
 			MethodName: "GetBetById",
 			Handler:    _BackofficeGame_GetBetById_Handler,
 		},
@@ -696,6 +1143,54 @@ var BackofficeGame_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetGameTransactionById",
 			Handler:    _BackofficeGame_GetGameTransactionById_Handler,
+		},
+		{
+			MethodName: "ListUnpaidBets",
+			Handler:    _BackofficeGame_ListUnpaidBets_Handler,
+		},
+		{
+			MethodName: "ExportUnpaidBets",
+			Handler:    _BackofficeGame_ExportUnpaidBets_Handler,
+		},
+		{
+			MethodName: "ListMultipleBets",
+			Handler:    _BackofficeGame_ListMultipleBets_Handler,
+		},
+		{
+			MethodName: "ExportMultipleBets",
+			Handler:    _BackofficeGame_ExportMultipleBets_Handler,
+		},
+		{
+			MethodName: "ListStakeVarianceBets",
+			Handler:    _BackofficeGame_ListStakeVarianceBets_Handler,
+		},
+		{
+			MethodName: "ExportStakeVarianceBets",
+			Handler:    _BackofficeGame_ExportStakeVarianceBets_Handler,
+		},
+		{
+			MethodName: "ListCustomerStrikeReports",
+			Handler:    _BackofficeGame_ListCustomerStrikeReports_Handler,
+		},
+		{
+			MethodName: "ExportCustomerStrikeReports",
+			Handler:    _BackofficeGame_ExportCustomerStrikeReports_Handler,
+		},
+		{
+			MethodName: "ExportSportEvents",
+			Handler:    _BackofficeGame_ExportSportEvents_Handler,
+		},
+		{
+			MethodName: "AddGameBetDisplayConfig",
+			Handler:    _BackofficeGame_AddGameBetDisplayConfig_Handler,
+		},
+		{
+			MethodName: "UpdateGameBetDisplayConfig",
+			Handler:    _BackofficeGame_UpdateGameBetDisplayConfig_Handler,
+		},
+		{
+			MethodName: "ListGameBetDisplayConfig",
+			Handler:    _BackofficeGame_ListGameBetDisplayConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

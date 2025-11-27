@@ -5,6 +5,7 @@ package api.review.service.v1;
 import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
+import "common/common.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/review/service/v1;v1";
 option java_multiple_files = true;
@@ -18,17 +19,26 @@ service Review {
 			body: "*"
 		};
 	}
+	rpc CreateOperatorWithdraw(CreateOperatorWithdrawRequest) returns (CreateWithdrawResponse) {}
 	rpc ReviewTicket(ReviewTicketRequest) returns (ReviewTicketResponse) {}
 	rpc AddComment(AddCommentRequest) returns (AddCommentResponse) {}
 	// CancelTicket is used to manually cancel a ticket.
 	// Ticket is cancellable only in paying status.
 	rpc CancelTicket(CancelTicketRequest) returns (CancelTicketResponse) {}
 	rpc ListTickets(ListTicketsRequest) returns (ListTicketsResponse) {}
+	rpc ListOperatorTickets(ListOperatorTicketsRequest) returns (ListTicketsResponse) {}
 	rpc GetTicket(GetTicketRequest) returns (GetTicketResponse) {}
+	rpc GetOperatorTicket(GetOperatorTicketRequest) returns (GetOperatorTicketResponse) {}
 }
 
 message CreateWithdrawRequest {
 	google.protobuf.Struct request = 1;  // JSON data for REST API
+}
+
+message CreateOperatorWithdrawRequest {
+	int64 admin_user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+	google.protobuf.Struct request = 3;  // JSON data for REST API
 }
 
 message CreateWithdrawResponse {
@@ -41,6 +51,7 @@ message ReviewTicketRequest {
 	// action: approve, reject, manual_payout
 	string action = 3;
 	string review_comment = 4;
+	api.common.OperatorContext operator_context = 5;
 }
 
 message ReviewTicketResponse {}
@@ -64,8 +75,9 @@ message CancelTicketRequest {
 message CancelTicketResponse {}
 
 message ListTicketsRequest {
-	optional int64 user_id = 2;
-	optional int64 operator_id = 3;
+	optional int64 user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+	api.common.OperatorContextFilters operator_context_filters = 3;
 	optional int64 ticket_id = 4;
 	optional string currency = 5;
 	optional string status = 6;
@@ -75,44 +87,71 @@ message ListTicketsRequest {
 	optional int32 page_size = 10;
 }
 
+message ListOperatorTicketsRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContextFilters operator_context_filters = 2;
+	optional int64 ticket_id = 3;
+	optional string currency = 4;
+	optional string status = 5;
+	optional google.protobuf.Timestamp start_time = 6;
+	optional google.protobuf.Timestamp end_time = 7;
+	optional int32 page = 8;
+	optional int32 page_size = 9;
+}
+
 message ListTicketsResponse {
 	message Ticket {
 		google.protobuf.Timestamp created_at = 1;
-		string operator_name = 2;
-		int64 ticket_id = 3;
-		int64 user_id = 4;
-		int32 vip_level = 5;
-		repeated string user_tags = 6;
-		string before_balance = 7;
-		string before_balance_usd = 8;
-		string amount = 9;
-		string amount_usd = 10;
-		string after_balance = 11;
-		string after_balance_usd = 12;
-		string currency = 13;
-		string payment_channel = 14;
-		string protocol = 15;
-		string fee = 16;
-		string status = 17;	// pending, approved, rejected, manual_payout, paying, paid, failed
-		string reviewer_username = 18;
-		int32 review_duration = 19;
+		int64 ticket_id = 2;
+		int64 user_id = 3;
+		string operator_name = 4;
+		string company_operator_name = 5;
+		string retailer_operator_name = 6;
+		string system_operator_name = 7;
+		string real_operator_name = 8;
+		int32 vip_level = 9;
+		repeated string user_tags = 10;
+		string before_balance = 11;
+		string before_balance_usd = 12;
+		string before_balance_reporting_currency = 13;
+		string amount = 14;
+		string amount_usd = 15;
+		string amount_reporting_currency = 16;
+		string after_balance = 17;
+		string after_balance_usd = 18;
+		string after_balance_reporting_currency = 19;
+		string currency = 20;
+		string payment_channel = 21;
+		string protocol = 22;
+		string fee = 23;
+		string fee_usd = 24;
+		string fee_reporting_currency = 25;
+		string status = 26;	// pending, approved, rejected, manual_payout, paying, paid, failed
+		string reviewer_username = 27;
+		int32 review_duration = 28;
 	}
 	repeated Ticket tickets = 1;
 	int32 page = 2;
 	int32 page_size = 3;
 	int32 total_count = 4;
-	string total_amount = 5;
-	int32 total_pending_count = 6;
-	string total_pending_amount = 7;
-	int32 total_paying_count = 8;
-	string total_paying_amount = 9;
-	int32 total_paid_count = 10;
-	string total_paid_amount = 11;
-	int32 total_failed_count = 12;
-	string total_failed_amount = 13;
-	int32 total_rejected_count = 14;
-	string total_rejected_amount = 15;
-	int32 average_review_time = 16;
+	string total_amount_usd = 5;
+	string total_amount_reporting_currency = 6;
+	int32 total_pending_count = 7;
+	string total_pending_amount_usd = 8;
+	string total_pending_amount_reporting_currency = 9;
+	int32 total_paying_count = 10;
+	string total_paying_amount_usd = 11;
+	string total_paying_amount_reporting_currency = 12;
+	int32 total_paid_count = 13;
+	string total_paid_amount_usd = 14;
+	string total_paid_amount_reporting_currency = 15;
+	int32 total_failed_count = 16;
+	string total_failed_amount_usd = 17;
+	string total_failed_amount_reporting_currency = 18;
+	int32 total_rejected_count = 19;
+	string total_rejected_amount_usd = 20;
+	string total_rejected_amount_reporting_currency = 21;
+	int32 average_review_time = 22;
 }
 
 message GetTicketRequest {
@@ -120,42 +159,162 @@ message GetTicketRequest {
 	// Optional flag for including comments in the response or not.
 	// If not provided, the comments will not be included in the response.
 	optional bool include_comments = 2;
+	api.common.OperatorContext operator_context = 3;
 }
 
 message GetTicketResponse {
 	message Ticket {
 		int64 id = 1;
 		string type = 2;
-		string request = 3;
-		string response = 4;
-		int64 user_id = 5;
-		int64 operator_id = 6;
-		string currency = 7;
-		string ticket_status = 8;
-		int64 reviewer_user_id = 9;
-		string reviewer_comment = 10;
-		string payment_channel_id = 11;
-		string payment_channel_name = 12;
-		string payment_status = 13;
-		int64 payment_transaction_id = 14;
-		string payment_transaction_error = 15;
-		string wallet_status = 16;
-		int64 wallet_freeze_transaction_id = 17;
-		int64 wallet_settle_transaction_id = 18;
-		string wallet_settle_error = 19;
-		int64 wallet_rollback_transaction_id = 20;
-		string wallet_rollback_error = 21;
-		int64 created_at = 22;
-		int64 updated_at = 23;
-		int64 reviewed_at = 24;
+		string status = 3;
+		string operator_name = 4;
+		string company_operator_name = 5;
+		string retailer_operator_name = 6;
+		string system_operator_name = 7;
+		google.protobuf.Timestamp created_at = 8;
 	}
 	message Comment {
 		int64 id = 1;
 		int64 ticket_id = 2;
-		int64 author_user_id = 3;
+		string author_username = 3;
 		string content = 4;
-		int64 created_at = 5;
+		google.protobuf.Timestamp created_at = 5;
+	}
+	message UserInfo {
+		int64 user_id = 1;
+		int32 vip_level = 2;
+		repeated string user_tags = 3;
+		repeated string linked_accounts = 4;
+	}
+	message PaymentTransactionInfo {
+		string currency = 1;
+		string amount = 2;
+		string amount_usd = 3;
+		string amount_reporting_currency = 4;
+		string payment_channel = 5;
+		string protocol = 6;
+		string fee = 7;
+		string fee_usd = 8;
+		string fee_reporting_currency = 9;
+		google.protobuf.Struct extra = 10;
+		google.protobuf.ListValue schema = 11;
+		google.protobuf.Timestamp created_at = 12;
+	}
+	message WalletTransactionInfo{
+		int64 transaction_id = 1;
+		string amount = 2;
+		string amount_usd = 3;
+		string amount_reporting_currency = 4;
+		string before_balance = 5;
+		string before_balance_usd = 6;
+		string before_balance_reporting_currency = 7;
+		string after_balance = 8;
+		string after_balance_usd = 9;
+		string after_balance_reporting_currency = 10;
+		google.protobuf.Timestamp created_at = 11;
+	}
+	message WalletTransactionSummary {
+		string total_deposit_usd = 1;
+		string total_deposit_reporting_currency = 2;
+		string total_withdraw_usd = 3;
+		string total_withdraw_reporting_currency = 4;
+		string total_deposit_minus_withdraw_usd = 5;
+		string total_deposit_minus_withdraw_reporting_currency = 6;
+		string valid_turnover_usd = 7;
+		string valid_turnover_reporting_currency = 8;
+		int32 total_deposit_count = 9;
+		int32 total_withdraw_count = 10;
+		int32 today_withdraw_count = 11;
 	}
 	Ticket ticket = 1;
 	repeated Comment comments = 2;
+	UserInfo user_info = 3;
+	PaymentTransactionInfo payment_transaction_info = 4;
+	WalletTransactionInfo wallet_transaction_info = 5;
+	WalletTransactionSummary wallet_transaction_summary = 6;
+}
+
+message GetOperatorTicketRequest {
+	int64 ticket_id = 1;
+	// Optional flag for including comments in the response or not.
+	// If not provided, the comments will not be included in the response.
+	optional bool include_comments = 2;
+	api.common.OperatorContext operator_context = 3;
+}
+
+message GetOperatorTicketResponse {
+	message Ticket {
+		int64 id = 1;
+		string type = 2;
+		string status = 3;
+		string operator_name = 4;
+		string company_operator_name = 5;
+		string retailer_operator_name = 6;
+		string system_operator_name = 7;
+		google.protobuf.Timestamp created_at = 8;
+	}
+	message Comment {
+		int64 id = 1;
+		int64 ticket_id = 2;
+		string author_username = 3;
+		string content = 4;
+		google.protobuf.Timestamp created_at = 5;
+	}
+	message PaymentTransactionInfo {
+		string currency = 1;
+		string protocol = 2;
+		string address = 3;
+		string psp = 4;
+		string amount = 5;
+		string amount_usd = 6;
+		string amount_reporting_currency = 7;
+		string amount_sent = 8;
+		string amount_sent_usd = 9;
+		string amount_sent_reporting_currency = 10;
+		string gas = 11;
+		string fee = 12;
+		string fee_usd = 13;
+		string fee_reporting_currency = 14;
+		google.protobuf.Timestamp created_at = 15;
+	}
+	message WalletBalanceInfo {
+		string balance = 1;
+		string balance_usd = 2;
+		string balance_reporting_currency = 3;
+	}
+	message WalletTransactionInfo {
+		string before_balance = 1;
+		string before_balance_usd = 2;
+		string before_balance_reporting_currency = 3;
+		string after_balance = 4;
+		string after_balance_usd = 5;
+		string after_balance_reporting_currency = 6;
+		string amount = 7;
+		string amount_usd = 8;
+		string amount_reporting_currency = 9;
+	}
+	message WalletTransactionSummary {
+		string total_withdraw_usd = 1;
+		string total_withdraw_reporting_currency = 2;
+		string total_deposit_usd = 3;
+		string total_deposit_reporting_currency = 4;
+		string total_transfer_usd = 5;
+		string total_transfer_reporting_currency = 6;
+		string total_swap_out_usd = 7;
+		string total_swap_out_reporting_currency = 8;
+		string total_swap_in_usd = 9;
+		string total_swap_in_reporting_currency = 10;
+		string total_freeze_usd = 11;
+		string total_freeze_reporting_currency = 12;
+		string total_write_off_usd = 13;
+		string total_write_off_reporting_currency = 14;
+		string total_pending_usd = 15;
+		string total_pending_reporting_currency = 16;
+	}
+	Ticket ticket = 1;
+	repeated Comment comments = 2;
+	PaymentTransactionInfo payment_transaction_info = 3;
+	WalletBalanceInfo wallet_balance_info = 4;
+	WalletTransactionInfo wallet_transaction_info = 5;
+	WalletTransactionSummary wallet_transaction_summary = 6;
 }

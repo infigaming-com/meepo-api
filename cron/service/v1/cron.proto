@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package api.cron.service.v1;
+
+option go_package = "github.com/infigaming-com/meepo-api/cron/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.cron.service.v1";
+
+service Cron {
+	rpc CronJob (CronJobRequest) returns (CronJobResponse) {}
+}	
+
+message CronJobRequest {
+	string name = 1;
+	string param = 2;
+}
+
+message CronJobResponse {
+}

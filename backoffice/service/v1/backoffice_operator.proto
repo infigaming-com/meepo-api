@@ -3,7 +3,9 @@ syntax = "proto3";
 package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
 import "common/common.proto";
+import "user/service/v1/user.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
@@ -41,7 +43,7 @@ service BackofficeOperator {
 	}
 
 	// ListRetailers returns a list of retailers by operator context in the middleware
-	rpc ListRetailerOperators(ListRetailerOperatorsRequest) returns (ListRetailerOperatorsResponse) {
+	rpc ListRetailerOperators(ListRetailerOperatorsRequest) returns (user.service.v1.ListRetailerOperatorsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/operator/list/retailer"
 			body: "*"
@@ -49,7 +51,7 @@ service BackofficeOperator {
 	}
 
 	// ListCompanies returns a list of companies by operator context in the middleware
-	rpc ListCompanyOperators(ListCompanyOperatorsRequest) returns (ListCompanyOperatorsResponse) {
+	rpc ListCompanyOperators(ListCompanyOperatorsRequest) returns (user.service.v1.ListCompanyOperatorsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/operator/list/company"
 			body: "*"
@@ -57,7 +59,7 @@ service BackofficeOperator {
 	}
 
 	// ListBottomOperators returns a list of bottom operators by operator context in the middleware
-	rpc ListBottomOperators(ListBottomOperatorsRequest) returns (ListBottomOperatorsResponse) {
+	rpc ListBottomOperators(ListBottomOperatorsRequest) returns (user.service.v1.ListBottomOperatorsResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/operator/list/bottom"
 			body: "*"
@@ -65,12 +67,101 @@ service BackofficeOperator {
 	}
 
 	// UpdateOperatorStatus updates the status of an operator
-	rpc UpdateOperatorStatus(UpdateOperatorStatusRequest) returns (UpdateOperatorStatusResponse) {
+	rpc UpdateOperatorStatus(UpdateOperatorStatusRequest) returns (user.service.v1.UpdateOperatorStatusResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/operator/status/update"
 			body: "*"
 		};
 	}
+
+	// List operators by admin email under specific operator
+	rpc ListOperatorsByAdminEmail(ListOperatorsByAdminEmailRequest) returns (user.service.v1.ListOperatorsByAdminEmailResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/list-by-admin-email"
+			body: "*"
+		};
+	}
+
+	// AddOperatorByoSubdomain adds a byo subdomain for the given operator
+	rpc AddOperatorByoSubdomain(AddOperatorByoSubdomainRequest) returns (AddOperatorByoSubdomainResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/byo-subdomains/add"
+			body: "*"
+		};
+	}
+
+	// DeleteOperatorByoSubdomain deletes a byo subdomain for the given operator
+	rpc DeleteOperatorByoSubdomain(DeleteOperatorByoSubdomainRequest) returns (DeleteOperatorByoSubdomainResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/byo-subdomains/delete"
+			body: "*"
+		};
+	}
+
+	// AddOperatorBackofficeByoSubdomain adds a backoffice byo subdomain for the given operator
+	rpc AddOperatorBackofficeByoSubdomain(AddOperatorBackofficeByoSubdomainRequest) returns (AddOperatorBackofficeByoSubdomainResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/backoffice-byo-subdomains/add"
+			body: "*"
+		};
+	}
+
+	// DeleteOperatorBackofficeByoSubdomain deletes a backoffice byo subdomain for the given operator
+	rpc DeleteOperatorBackofficeByoSubdomain(DeleteOperatorBackofficeByoSubdomainRequest) returns (DeleteOperatorBackofficeByoSubdomainResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/backoffice-byo-subdomains/delete"
+			body: "*"
+		};
+	}
+
+	rpc GetOperatorAccountSettings(GetOperatorAccountSettingsRequest) returns (user.service.v1.GetOperatorAccountSettingsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/account-settings/get"
+			body: "*"
+		};
+	}
+
+	rpc UpdateOperatorAccountSettings(UpdateOperatorAccountSettingsRequest) returns (user.service.v1.UpdateOperatorAccountSettingsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/account-settings/update"
+			body: "*"
+		};
+	}
+	
+	rpc AddRegisterLoginBlacklist(AddRegisterLoginBlacklistRequest) returns (user.service.v1.AddRegisterLoginBlacklistResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/register-login-blacklist/add"
+			body: "*"
+		};
+	}
+	
+	rpc DeleteRegisterLoginBlacklist(DeleteRegisterLoginBlacklistRequest) returns (user.service.v1.DeleteRegisterLoginBlacklistResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/register-login-blacklist/delete"
+			body: "*"
+		};
+	}
+	
+	rpc ListRegisterLoginBlacklist(ListRegisterLoginBlacklistRequest) returns (user.service.v1.ListRegisterLoginBlacklistResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/register-login-blacklist/list"
+			body: "*"
+		};
+	}
+
+	rpc SetOperatorRegisterLimitConfig(SetOperatorRegisterLimitConfigRequest) returns (user.service.v1.SetOperatorRegisterLimitConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/register-limit-config/set"
+			body: "*"
+		};
+	}
+	
+	rpc GetOperatorRegisterLimitConfig(GetOperatorRegisterLimitConfigRequest) returns (user.service.v1.GetOperatorRegisterLimitConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/register-limit-config/get"
+			body: "*"
+		};
+	}	
 }
 
 message ListAllOperatorsRequest {
@@ -99,6 +190,7 @@ message CreateOperatorRequest {
 	string verification_code = 7;
 	repeated string supported_languages = 8;
 	repeated string supported_currencies = 9; // Contains Fiat and Crypto currencies
+	string template_name = 10;
 }
 
 message CreateOperatorResponse {
@@ -117,27 +209,30 @@ message OperatorDetails {
 	string external_id = 6;
 	string api_key = 7;
 	string subdomain = 8;
-	string backoffice_subdomain = 9;
-	string backoffice_child_domain = 10;
-	repeated string domain_pool = 11;
-	bool enabled = 12;
-	string mode = 13;
-	string operator_key = 14;
-	string reporting_currency = 15;
-	string backoffice_timezone = 16;
-	repeated string supported_languages = 17;
-	repeated string supported_currencies = 18;
-	string status = 19;
-	bool is_maintenance = 20;
-	int64 maintenance_start_time = 21;
-	int64 maintenance_end_time = 22;
-	int64 operator_id = 23; // operator id in the operator hierarchy
-	int64 company_operator_id = 24; // company operator id in the operator hierarchy
-	string company_operator_name = 25; // company operator name in the operator hierarchy, or empty string if not exists
-	int64 retailer_operator_id = 26; // retailer operator id in the operator hierarchy
-	string retailer_operator_name = 27; // retailer operator name in the operator hierarchy, or empty string if not exists
-	int64 system_operator_id = 28; // system operator id in the operator hierarchy
-	string system_operator_name = 29; // system operator name in the operator hierarchy, or empty string if not exists
+	repeated string byo_subdomains = 9;
+	string backoffice_subdomain = 10;
+	repeated string backoffice_byo_subdomains = 11;
+	string backoffice_child_domain = 12;
+	repeated string domain_pool = 13;
+	bool enabled = 14;
+	string mode = 15;
+	string operator_key = 16;
+	string reporting_currency = 17;
+	string backoffice_timezone = 18;
+	repeated string supported_languages = 19;
+	repeated string supported_currencies = 20;
+	string status = 21;
+	int64 status_start_time = 23;
+	int64 status_end_time = 24;
+	int64 operator_id = 25; // operator id in the operator hierarchy
+	int64 company_operator_id = 26; // company operator id in the operator hierarchy
+	string company_operator_name = 27; // company operator name in the operator hierarchy, or empty string if not exists
+	int64 retailer_operator_id = 28; // retailer operator id in the operator hierarchy
+	string retailer_operator_name = 29; // retailer operator name in the operator hierarchy, or empty string if not exists
+	int64 system_operator_id = 30; // system operator id in the operator hierarchy
+	string system_operator_name = 31; // system operator name in the operator hierarchy, or empty string if not exists
+	string config = 32;
+	string min_launch_balance = 33;
 }
 
 message GetCurrentOperatorDetailsRequest {
@@ -165,25 +260,13 @@ message ListOperatorsByParentOperatorIdResponse {
 	int32 page_size = 9;
 }
 
-message OperatorInfo {
-	int64 operator_id = 1;
-	string operator_name = 2;
-	string status = 3;
-}
-
 message ListRetailerOperatorsRequest {
-}
-
-message ListRetailerOperatorsResponse {
-	repeated OperatorInfo retailer_operators = 1;
+	bool include_count = 1;
 }
 
 message ListCompanyOperatorsRequest {
 	repeated int64 retailer_operator_ids = 1;
-}
-
-message ListCompanyOperatorsResponse {
-	repeated OperatorInfo company_operators = 1;
+	bool include_count = 2;
 }
 
 
@@ -192,17 +275,94 @@ message ListBottomOperatorsRequest {
 	repeated int64 company_operator_ids = 2;
 }
 
-message ListBottomOperatorsResponse {
-	repeated OperatorInfo operators = 1;
-}
-
 message UpdateOperatorStatusRequest {
-	int64 target_operator_id = 1; // target operator id
-	string target_operator_type = 2; // target operator type
-	api.common.OperatorContext target_operator_context = 3; // target operator context
-	string action = 4; // action to update the status of target operator
+	// target operator context
+	api.common.OperatorContext target_operator_context = 1; // target operator context
+	// action to update the status of target operator "pending", "live", "suspended", "request_to_close", "closed", "maintain"
+	string action = 2;
+	// action start
+	google.protobuf.Timestamp actionStart = 3; // action start
+	// action end
+	google.protobuf.Timestamp actionEnd = 4; // action end
+	// IP white list
+	repeated string ipWhiteList = 5;
 }
 
-message UpdateOperatorStatusResponse {
-	string status = 1; // status of target operator after update
+// message UpdateOperatorStatusResponse {
+// 	string status = 1; // status of target operator after update
+// }
+
+message ListOperatorsByAdminEmailRequest {
+	string email = 1;
 }
+
+message AddOperatorByoSubdomainRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string subdomain = 2;
+}
+
+message AddOperatorByoSubdomainResponse {
+}
+
+message DeleteOperatorByoSubdomainRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string subdomain = 2;
+}
+
+message DeleteOperatorByoSubdomainResponse {
+}
+
+message AddOperatorBackofficeByoSubdomainRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string subdomain = 2;
+}
+
+message AddOperatorBackofficeByoSubdomainResponse {
+}
+
+message DeleteOperatorBackofficeByoSubdomainRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string subdomain = 2;
+}
+
+message DeleteOperatorBackofficeByoSubdomainResponse {
+}
+
+message GetOperatorAccountSettingsRequest {
+	api.common.OperatorContext target_operator_context = 1;
+}
+
+message UpdateOperatorAccountSettingsRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	user.service.v1.OperatorAccountSettings account_settings = 2;
+}
+
+message AddRegisterLoginBlacklistRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string id_type = 2;
+	repeated string ids = 3;
+}
+
+message DeleteRegisterLoginBlacklistRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string id_type = 2;
+	repeated string ids = 3;
+}
+
+message ListRegisterLoginBlacklistRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string id_type = 2;
+	optional int32 page = 3;
+	optional int32 page_size = 4;
+}
+
+
+message SetOperatorRegisterLimitConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	map<string, user.service.v1.OperatorRegisterLimitConfig> config = 2;
+}
+
+message GetOperatorRegisterLimitConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+}
+

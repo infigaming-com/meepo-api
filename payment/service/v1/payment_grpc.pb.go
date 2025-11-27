@@ -19,24 +19,37 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Payment_GetSupportedPaymentMethodList_FullMethodName = "/payment.service.v1.Payment/GetSupportedPaymentMethodList"
-	Payment_CreatePaymentMethod_FullMethodName           = "/payment.service.v1.Payment/CreatePaymentMethod"
-	Payment_GetPaymentMethodList_FullMethodName          = "/payment.service.v1.Payment/GetPaymentMethodList"
-	Payment_DisablePaymentChannel_FullMethodName         = "/payment.service.v1.Payment/DisablePaymentChannel"
-	Payment_CreatePaymentChannel_FullMethodName          = "/payment.service.v1.Payment/CreatePaymentChannel"
-	Payment_GetAddress_FullMethodName                    = "/payment.service.v1.Payment/GetAddress"
-	Payment_InitiateDeposit_FullMethodName               = "/payment.service.v1.Payment/InitiateDeposit"
-	Payment_InitiateWithdraw_FullMethodName              = "/payment.service.v1.Payment/InitiateWithdraw"
-	Payment_DepositCallback_FullMethodName               = "/payment.service.v1.Payment/DepositCallback"
-	Payment_WithdrawCallback_FullMethodName              = "/payment.service.v1.Payment/WithdrawCallback"
-	Payment_GetOperatorAddress_FullMethodName            = "/payment.service.v1.Payment/GetOperatorAddress"
-	Payment_InitiateOperatorWithdraw_FullMethodName      = "/payment.service.v1.Payment/InitiateOperatorWithdraw"
-	Payment_OperatorDepositCallback_FullMethodName       = "/payment.service.v1.Payment/OperatorDepositCallback"
-	Payment_OperatorWithdrawCallback_FullMethodName      = "/payment.service.v1.Payment/OperatorWithdrawCallback"
-	Payment_GetTransactionPage_FullMethodName            = "/payment.service.v1.Payment/GetTransactionPage"
-	Payment_GetPaymentChannelPage_FullMethodName         = "/payment.service.v1.Payment/GetPaymentChannelPage"
-	Payment_GetTransactionDetailById_FullMethodName      = "/payment.service.v1.Payment/GetTransactionDetailById"
-	Payment_GetChannelsByIds_FullMethodName              = "/payment.service.v1.Payment/GetChannelsByIds"
+	Payment_GetSupportedPaymentMethodList_FullMethodName    = "/payment.service.v1.Payment/GetSupportedPaymentMethodList"
+	Payment_CreatePaymentMethod_FullMethodName              = "/payment.service.v1.Payment/CreatePaymentMethod"
+	Payment_GetPaymentMethodList_FullMethodName             = "/payment.service.v1.Payment/GetPaymentMethodList"
+	Payment_UpdatePaymentChannel_FullMethodName             = "/payment.service.v1.Payment/UpdatePaymentChannel"
+	Payment_CreatePaymentChannel_FullMethodName             = "/payment.service.v1.Payment/CreatePaymentChannel"
+	Payment_GetAddress_FullMethodName                       = "/payment.service.v1.Payment/GetAddress"
+	Payment_InitiateDeposit_FullMethodName                  = "/payment.service.v1.Payment/InitiateDeposit"
+	Payment_InitiateWithdraw_FullMethodName                 = "/payment.service.v1.Payment/InitiateWithdraw"
+	Payment_DepositCallback_FullMethodName                  = "/payment.service.v1.Payment/DepositCallback"
+	Payment_WithdrawCallback_FullMethodName                 = "/payment.service.v1.Payment/WithdrawCallback"
+	Payment_GetOperatorAddress_FullMethodName               = "/payment.service.v1.Payment/GetOperatorAddress"
+	Payment_InitiateOperatorWithdraw_FullMethodName         = "/payment.service.v1.Payment/InitiateOperatorWithdraw"
+	Payment_OperatorDepositCallback_FullMethodName          = "/payment.service.v1.Payment/OperatorDepositCallback"
+	Payment_OperatorWithdrawCallback_FullMethodName         = "/payment.service.v1.Payment/OperatorWithdrawCallback"
+	Payment_GetTransactionPage_FullMethodName               = "/payment.service.v1.Payment/GetTransactionPage"
+	Payment_GetPaymentChannelPage_FullMethodName            = "/payment.service.v1.Payment/GetPaymentChannelPage"
+	Payment_GetTransactionDetailById_FullMethodName         = "/payment.service.v1.Payment/GetTransactionDetailById"
+	Payment_GetOperatorTransactionPage_FullMethodName       = "/payment.service.v1.Payment/GetOperatorTransactionPage"
+	Payment_GetOperatorTransactionDetailById_FullMethodName = "/payment.service.v1.Payment/GetOperatorTransactionDetailById"
+	Payment_GetChannelsByIds_FullMethodName                 = "/payment.service.v1.Payment/GetChannelsByIds"
+	Payment_UpdatePaymentMethod_FullMethodName              = "/payment.service.v1.Payment/UpdatePaymentMethod"
+	Payment_GetOperatorPaymentChannelPage_FullMethodName    = "/payment.service.v1.Payment/GetOperatorPaymentChannelPage"
+	Payment_GetUserBankCardList_FullMethodName              = "/payment.service.v1.Payment/GetUserBankCardList"
+	Payment_AddUserBankCard_FullMethodName                  = "/payment.service.v1.Payment/AddUserBankCard"
+	Payment_UpdateUserBankCard_FullMethodName               = "/payment.service.v1.Payment/UpdateUserBankCard"
+	Payment_DeleteUsesrBankCard_FullMethodName              = "/payment.service.v1.Payment/DeleteUsesrBankCard"
+	Payment_GetBankSchema_FullMethodName                    = "/payment.service.v1.Payment/GetBankSchema"
+	Payment_BuyCryptoViaFiatCurrentList_FullMethodName      = "/payment.service.v1.Payment/BuyCryptoViaFiatCurrentList"
+	Payment_BuyCryptoViaFiatPriceQuery_FullMethodName       = "/payment.service.v1.Payment/BuyCryptoViaFiatPriceQuery"
+	Payment_BuyCryptoViaFiat_FullMethodName                 = "/payment.service.v1.Payment/BuyCryptoViaFiat"
+	Payment_GetResponsibleGamblingStatus_FullMethodName     = "/payment.service.v1.Payment/GetResponsibleGamblingStatus"
 )
 
 // PaymentClient is the client API for Payment service.
@@ -61,7 +74,7 @@ type PaymentClient interface {
 	// Create payment channel
 	// Creates a new payment channel with specified configuration
 	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-	DisablePaymentChannel(ctx context.Context, in *DisablePaymentChannelRequest, opts ...grpc.CallOption) (*DisablePaymentChannelResponse, error)
+	UpdatePaymentChannel(ctx context.Context, in *UpdatePaymentChannelRequest, opts ...grpc.CallOption) (*UpdatePaymentChannelResponse, error)
 	// Create payment channel
 	// Creates a new payment channel with specified configuration
 	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
@@ -112,7 +125,20 @@ type PaymentClient interface {
 	// Retrieves detailed information about a specific transaction
 	// Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
 	GetTransactionDetailById(ctx context.Context, in *GetTransactionDetailByIdRequest, opts ...grpc.CallOption) (*GetTransactionDetailByIdResponse, error)
+	GetOperatorTransactionPage(ctx context.Context, in *GetTransactionPageRequest, opts ...grpc.CallOption) (*GetTransactionPageResponse, error)
+	GetOperatorTransactionDetailById(ctx context.Context, in *GetTransactionDetailByIdRequest, opts ...grpc.CallOption) (*GetTransactionDetailByIdResponse, error)
 	GetChannelsByIds(ctx context.Context, in *GetChannelsByIdsRequest, opts ...grpc.CallOption) (*GetChannelsByIdsResponse, error)
+	UpdatePaymentMethod(ctx context.Context, in *UpdatePaymentMethodRequest, opts ...grpc.CallOption) (*CreatePaymentMethodResponse, error)
+	GetOperatorPaymentChannelPage(ctx context.Context, in *GetOperatorPaymentChannelPageRequest, opts ...grpc.CallOption) (*GetPaymentChannelPageResponse, error)
+	GetUserBankCardList(ctx context.Context, in *GetBankCardListRequest, opts ...grpc.CallOption) (*GetBankCardListResponse, error)
+	AddUserBankCard(ctx context.Context, in *AddBankCardRequest, opts ...grpc.CallOption) (*AddBankCardResponse, error)
+	UpdateUserBankCard(ctx context.Context, in *UpdateBankCardRequest, opts ...grpc.CallOption) (*UpdateBankCardResponse, error)
+	DeleteUsesrBankCard(ctx context.Context, in *DeleteBankCardRequest, opts ...grpc.CallOption) (*DeleteBankCardResponse, error)
+	GetBankSchema(ctx context.Context, in *GetBankSchemaRequest, opts ...grpc.CallOption) (*GetBankSchemaResponse, error)
+	BuyCryptoViaFiatCurrentList(ctx context.Context, in *BuyCryptoViaFiatCurrentListRequest, opts ...grpc.CallOption) (*BuyCryptoViaFiatCurrentListResponse, error)
+	BuyCryptoViaFiatPriceQuery(ctx context.Context, in *BuyCryptoViaFiatPriceQueryRequest, opts ...grpc.CallOption) (*BuyCryptoViaFiatPriceQueryResponse, error)
+	BuyCryptoViaFiat(ctx context.Context, in *BuyCryptoViaFiatRequest, opts ...grpc.CallOption) (*BuyCryptoViaFiatResponse, error)
+	GetResponsibleGamblingStatus(ctx context.Context, in *GetResponsibleGamblingStatusRequest, opts ...grpc.CallOption) (*GetResponsibleGamblingStatusResponse, error)
 }
 
 type paymentClient struct {
@@ -153,10 +179,10 @@ func (c *paymentClient) GetPaymentMethodList(ctx context.Context, in *GetPayment
 	return out, nil
 }
 
-func (c *paymentClient) DisablePaymentChannel(ctx context.Context, in *DisablePaymentChannelRequest, opts ...grpc.CallOption) (*DisablePaymentChannelResponse, error) {
+func (c *paymentClient) UpdatePaymentChannel(ctx context.Context, in *UpdatePaymentChannelRequest, opts ...grpc.CallOption) (*UpdatePaymentChannelResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DisablePaymentChannelResponse)
-	err := c.cc.Invoke(ctx, Payment_DisablePaymentChannel_FullMethodName, in, out, cOpts...)
+	out := new(UpdatePaymentChannelResponse)
+	err := c.cc.Invoke(ctx, Payment_UpdatePaymentChannel_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -293,10 +319,140 @@ func (c *paymentClient) GetTransactionDetailById(ctx context.Context, in *GetTra
 	return out, nil
 }
 
+func (c *paymentClient) GetOperatorTransactionPage(ctx context.Context, in *GetTransactionPageRequest, opts ...grpc.CallOption) (*GetTransactionPageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTransactionPageResponse)
+	err := c.cc.Invoke(ctx, Payment_GetOperatorTransactionPage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) GetOperatorTransactionDetailById(ctx context.Context, in *GetTransactionDetailByIdRequest, opts ...grpc.CallOption) (*GetTransactionDetailByIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTransactionDetailByIdResponse)
+	err := c.cc.Invoke(ctx, Payment_GetOperatorTransactionDetailById_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *paymentClient) GetChannelsByIds(ctx context.Context, in *GetChannelsByIdsRequest, opts ...grpc.CallOption) (*GetChannelsByIdsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetChannelsByIdsResponse)
 	err := c.cc.Invoke(ctx, Payment_GetChannelsByIds_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) UpdatePaymentMethod(ctx context.Context, in *UpdatePaymentMethodRequest, opts ...grpc.CallOption) (*CreatePaymentMethodResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreatePaymentMethodResponse)
+	err := c.cc.Invoke(ctx, Payment_UpdatePaymentMethod_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) GetOperatorPaymentChannelPage(ctx context.Context, in *GetOperatorPaymentChannelPageRequest, opts ...grpc.CallOption) (*GetPaymentChannelPageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPaymentChannelPageResponse)
+	err := c.cc.Invoke(ctx, Payment_GetOperatorPaymentChannelPage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) GetUserBankCardList(ctx context.Context, in *GetBankCardListRequest, opts ...grpc.CallOption) (*GetBankCardListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBankCardListResponse)
+	err := c.cc.Invoke(ctx, Payment_GetUserBankCardList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) AddUserBankCard(ctx context.Context, in *AddBankCardRequest, opts ...grpc.CallOption) (*AddBankCardResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddBankCardResponse)
+	err := c.cc.Invoke(ctx, Payment_AddUserBankCard_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) UpdateUserBankCard(ctx context.Context, in *UpdateBankCardRequest, opts ...grpc.CallOption) (*UpdateBankCardResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateBankCardResponse)
+	err := c.cc.Invoke(ctx, Payment_UpdateUserBankCard_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) DeleteUsesrBankCard(ctx context.Context, in *DeleteBankCardRequest, opts ...grpc.CallOption) (*DeleteBankCardResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteBankCardResponse)
+	err := c.cc.Invoke(ctx, Payment_DeleteUsesrBankCard_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) GetBankSchema(ctx context.Context, in *GetBankSchemaRequest, opts ...grpc.CallOption) (*GetBankSchemaResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBankSchemaResponse)
+	err := c.cc.Invoke(ctx, Payment_GetBankSchema_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) BuyCryptoViaFiatCurrentList(ctx context.Context, in *BuyCryptoViaFiatCurrentListRequest, opts ...grpc.CallOption) (*BuyCryptoViaFiatCurrentListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BuyCryptoViaFiatCurrentListResponse)
+	err := c.cc.Invoke(ctx, Payment_BuyCryptoViaFiatCurrentList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) BuyCryptoViaFiatPriceQuery(ctx context.Context, in *BuyCryptoViaFiatPriceQueryRequest, opts ...grpc.CallOption) (*BuyCryptoViaFiatPriceQueryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BuyCryptoViaFiatPriceQueryResponse)
+	err := c.cc.Invoke(ctx, Payment_BuyCryptoViaFiatPriceQuery_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) BuyCryptoViaFiat(ctx context.Context, in *BuyCryptoViaFiatRequest, opts ...grpc.CallOption) (*BuyCryptoViaFiatResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BuyCryptoViaFiatResponse)
+	err := c.cc.Invoke(ctx, Payment_BuyCryptoViaFiat_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentClient) GetResponsibleGamblingStatus(ctx context.Context, in *GetResponsibleGamblingStatusRequest, opts ...grpc.CallOption) (*GetResponsibleGamblingStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetResponsibleGamblingStatusResponse)
+	err := c.cc.Invoke(ctx, Payment_GetResponsibleGamblingStatus_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -325,7 +481,7 @@ type PaymentServer interface {
 	// Create payment channel
 	// Creates a new payment channel with specified configuration
 	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-	DisablePaymentChannel(context.Context, *DisablePaymentChannelRequest) (*DisablePaymentChannelResponse, error)
+	UpdatePaymentChannel(context.Context, *UpdatePaymentChannelRequest) (*UpdatePaymentChannelResponse, error)
 	// Create payment channel
 	// Creates a new payment channel with specified configuration
 	// Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
@@ -376,7 +532,20 @@ type PaymentServer interface {
 	// Retrieves detailed information about a specific transaction
 	// Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
 	GetTransactionDetailById(context.Context, *GetTransactionDetailByIdRequest) (*GetTransactionDetailByIdResponse, error)
+	GetOperatorTransactionPage(context.Context, *GetTransactionPageRequest) (*GetTransactionPageResponse, error)
+	GetOperatorTransactionDetailById(context.Context, *GetTransactionDetailByIdRequest) (*GetTransactionDetailByIdResponse, error)
 	GetChannelsByIds(context.Context, *GetChannelsByIdsRequest) (*GetChannelsByIdsResponse, error)
+	UpdatePaymentMethod(context.Context, *UpdatePaymentMethodRequest) (*CreatePaymentMethodResponse, error)
+	GetOperatorPaymentChannelPage(context.Context, *GetOperatorPaymentChannelPageRequest) (*GetPaymentChannelPageResponse, error)
+	GetUserBankCardList(context.Context, *GetBankCardListRequest) (*GetBankCardListResponse, error)
+	AddUserBankCard(context.Context, *AddBankCardRequest) (*AddBankCardResponse, error)
+	UpdateUserBankCard(context.Context, *UpdateBankCardRequest) (*UpdateBankCardResponse, error)
+	DeleteUsesrBankCard(context.Context, *DeleteBankCardRequest) (*DeleteBankCardResponse, error)
+	GetBankSchema(context.Context, *GetBankSchemaRequest) (*GetBankSchemaResponse, error)
+	BuyCryptoViaFiatCurrentList(context.Context, *BuyCryptoViaFiatCurrentListRequest) (*BuyCryptoViaFiatCurrentListResponse, error)
+	BuyCryptoViaFiatPriceQuery(context.Context, *BuyCryptoViaFiatPriceQueryRequest) (*BuyCryptoViaFiatPriceQueryResponse, error)
+	BuyCryptoViaFiat(context.Context, *BuyCryptoViaFiatRequest) (*BuyCryptoViaFiatResponse, error)
+	GetResponsibleGamblingStatus(context.Context, *GetResponsibleGamblingStatusRequest) (*GetResponsibleGamblingStatusResponse, error)
 	mustEmbedUnimplementedPaymentServer()
 }
 
@@ -396,8 +565,8 @@ func (UnimplementedPaymentServer) CreatePaymentMethod(context.Context, *CreatePa
 func (UnimplementedPaymentServer) GetPaymentMethodList(context.Context, *GetPaymentMethodListRequest) (*GetPaymentMethodListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPaymentMethodList not implemented")
 }
-func (UnimplementedPaymentServer) DisablePaymentChannel(context.Context, *DisablePaymentChannelRequest) (*DisablePaymentChannelResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DisablePaymentChannel not implemented")
+func (UnimplementedPaymentServer) UpdatePaymentChannel(context.Context, *UpdatePaymentChannelRequest) (*UpdatePaymentChannelResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePaymentChannel not implemented")
 }
 func (UnimplementedPaymentServer) CreatePaymentChannel(context.Context, *CreatePaymentChannelRequest) (*CreatePaymentChannelResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreatePaymentChannel not implemented")
@@ -438,8 +607,47 @@ func (UnimplementedPaymentServer) GetPaymentChannelPage(context.Context, *GetPay
 func (UnimplementedPaymentServer) GetTransactionDetailById(context.Context, *GetTransactionDetailByIdRequest) (*GetTransactionDetailByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTransactionDetailById not implemented")
 }
+func (UnimplementedPaymentServer) GetOperatorTransactionPage(context.Context, *GetTransactionPageRequest) (*GetTransactionPageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorTransactionPage not implemented")
+}
+func (UnimplementedPaymentServer) GetOperatorTransactionDetailById(context.Context, *GetTransactionDetailByIdRequest) (*GetTransactionDetailByIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorTransactionDetailById not implemented")
+}
 func (UnimplementedPaymentServer) GetChannelsByIds(context.Context, *GetChannelsByIdsRequest) (*GetChannelsByIdsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetChannelsByIds not implemented")
+}
+func (UnimplementedPaymentServer) UpdatePaymentMethod(context.Context, *UpdatePaymentMethodRequest) (*CreatePaymentMethodResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePaymentMethod not implemented")
+}
+func (UnimplementedPaymentServer) GetOperatorPaymentChannelPage(context.Context, *GetOperatorPaymentChannelPageRequest) (*GetPaymentChannelPageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorPaymentChannelPage not implemented")
+}
+func (UnimplementedPaymentServer) GetUserBankCardList(context.Context, *GetBankCardListRequest) (*GetBankCardListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserBankCardList not implemented")
+}
+func (UnimplementedPaymentServer) AddUserBankCard(context.Context, *AddBankCardRequest) (*AddBankCardResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddUserBankCard not implemented")
+}
+func (UnimplementedPaymentServer) UpdateUserBankCard(context.Context, *UpdateBankCardRequest) (*UpdateBankCardResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserBankCard not implemented")
+}
+func (UnimplementedPaymentServer) DeleteUsesrBankCard(context.Context, *DeleteBankCardRequest) (*DeleteBankCardResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteUsesrBankCard not implemented")
+}
+func (UnimplementedPaymentServer) GetBankSchema(context.Context, *GetBankSchemaRequest) (*GetBankSchemaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBankSchema not implemented")
+}
+func (UnimplementedPaymentServer) BuyCryptoViaFiatCurrentList(context.Context, *BuyCryptoViaFiatCurrentListRequest) (*BuyCryptoViaFiatCurrentListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BuyCryptoViaFiatCurrentList not implemented")
+}
+func (UnimplementedPaymentServer) BuyCryptoViaFiatPriceQuery(context.Context, *BuyCryptoViaFiatPriceQueryRequest) (*BuyCryptoViaFiatPriceQueryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BuyCryptoViaFiatPriceQuery not implemented")
+}
+func (UnimplementedPaymentServer) BuyCryptoViaFiat(context.Context, *BuyCryptoViaFiatRequest) (*BuyCryptoViaFiatResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BuyCryptoViaFiat not implemented")
+}
+func (UnimplementedPaymentServer) GetResponsibleGamblingStatus(context.Context, *GetResponsibleGamblingStatusRequest) (*GetResponsibleGamblingStatusResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetResponsibleGamblingStatus not implemented")
 }
 func (UnimplementedPaymentServer) mustEmbedUnimplementedPaymentServer() {}
 func (UnimplementedPaymentServer) testEmbeddedByValue()                 {}
@@ -516,20 +724,20 @@ func _Payment_GetPaymentMethodList_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Payment_DisablePaymentChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DisablePaymentChannelRequest)
+func _Payment_UpdatePaymentChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePaymentChannelRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PaymentServer).DisablePaymentChannel(ctx, in)
+		return srv.(PaymentServer).UpdatePaymentChannel(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Payment_DisablePaymentChannel_FullMethodName,
+		FullMethod: Payment_UpdatePaymentChannel_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentServer).DisablePaymentChannel(ctx, req.(*DisablePaymentChannelRequest))
+		return srv.(PaymentServer).UpdatePaymentChannel(ctx, req.(*UpdatePaymentChannelRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -768,6 +976,42 @@ func _Payment_GetTransactionDetailById_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Payment_GetOperatorTransactionPage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTransactionPageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).GetOperatorTransactionPage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_GetOperatorTransactionPage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).GetOperatorTransactionPage(ctx, req.(*GetTransactionPageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_GetOperatorTransactionDetailById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTransactionDetailByIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).GetOperatorTransactionDetailById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_GetOperatorTransactionDetailById_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).GetOperatorTransactionDetailById(ctx, req.(*GetTransactionDetailByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Payment_GetChannelsByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetChannelsByIdsRequest)
 	if err := dec(in); err != nil {
@@ -782,6 +1026,204 @@ func _Payment_GetChannelsByIds_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PaymentServer).GetChannelsByIds(ctx, req.(*GetChannelsByIdsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_UpdatePaymentMethod_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePaymentMethodRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).UpdatePaymentMethod(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_UpdatePaymentMethod_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).UpdatePaymentMethod(ctx, req.(*UpdatePaymentMethodRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_GetOperatorPaymentChannelPage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorPaymentChannelPageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).GetOperatorPaymentChannelPage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_GetOperatorPaymentChannelPage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).GetOperatorPaymentChannelPage(ctx, req.(*GetOperatorPaymentChannelPageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_GetUserBankCardList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBankCardListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).GetUserBankCardList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_GetUserBankCardList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).GetUserBankCardList(ctx, req.(*GetBankCardListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_AddUserBankCard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddBankCardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).AddUserBankCard(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_AddUserBankCard_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).AddUserBankCard(ctx, req.(*AddBankCardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_UpdateUserBankCard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateBankCardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).UpdateUserBankCard(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_UpdateUserBankCard_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).UpdateUserBankCard(ctx, req.(*UpdateBankCardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_DeleteUsesrBankCard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteBankCardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).DeleteUsesrBankCard(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_DeleteUsesrBankCard_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).DeleteUsesrBankCard(ctx, req.(*DeleteBankCardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_GetBankSchema_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBankSchemaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).GetBankSchema(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_GetBankSchema_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).GetBankSchema(ctx, req.(*GetBankSchemaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_BuyCryptoViaFiatCurrentList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BuyCryptoViaFiatCurrentListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).BuyCryptoViaFiatCurrentList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_BuyCryptoViaFiatCurrentList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).BuyCryptoViaFiatCurrentList(ctx, req.(*BuyCryptoViaFiatCurrentListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_BuyCryptoViaFiatPriceQuery_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BuyCryptoViaFiatPriceQueryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).BuyCryptoViaFiatPriceQuery(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_BuyCryptoViaFiatPriceQuery_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).BuyCryptoViaFiatPriceQuery(ctx, req.(*BuyCryptoViaFiatPriceQueryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_BuyCryptoViaFiat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BuyCryptoViaFiatRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).BuyCryptoViaFiat(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_BuyCryptoViaFiat_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).BuyCryptoViaFiat(ctx, req.(*BuyCryptoViaFiatRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Payment_GetResponsibleGamblingStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetResponsibleGamblingStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentServer).GetResponsibleGamblingStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Payment_GetResponsibleGamblingStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentServer).GetResponsibleGamblingStatus(ctx, req.(*GetResponsibleGamblingStatusRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -806,8 +1248,8 @@ var Payment_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Payment_GetPaymentMethodList_Handler,
 		},
 		{
-			MethodName: "DisablePaymentChannel",
-			Handler:    _Payment_DisablePaymentChannel_Handler,
+			MethodName: "UpdatePaymentChannel",
+			Handler:    _Payment_UpdatePaymentChannel_Handler,
 		},
 		{
 			MethodName: "CreatePaymentChannel",
@@ -862,8 +1304,60 @@ var Payment_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Payment_GetTransactionDetailById_Handler,
 		},
 		{
+			MethodName: "GetOperatorTransactionPage",
+			Handler:    _Payment_GetOperatorTransactionPage_Handler,
+		},
+		{
+			MethodName: "GetOperatorTransactionDetailById",
+			Handler:    _Payment_GetOperatorTransactionDetailById_Handler,
+		},
+		{
 			MethodName: "GetChannelsByIds",
 			Handler:    _Payment_GetChannelsByIds_Handler,
+		},
+		{
+			MethodName: "UpdatePaymentMethod",
+			Handler:    _Payment_UpdatePaymentMethod_Handler,
+		},
+		{
+			MethodName: "GetOperatorPaymentChannelPage",
+			Handler:    _Payment_GetOperatorPaymentChannelPage_Handler,
+		},
+		{
+			MethodName: "GetUserBankCardList",
+			Handler:    _Payment_GetUserBankCardList_Handler,
+		},
+		{
+			MethodName: "AddUserBankCard",
+			Handler:    _Payment_AddUserBankCard_Handler,
+		},
+		{
+			MethodName: "UpdateUserBankCard",
+			Handler:    _Payment_UpdateUserBankCard_Handler,
+		},
+		{
+			MethodName: "DeleteUsesrBankCard",
+			Handler:    _Payment_DeleteUsesrBankCard_Handler,
+		},
+		{
+			MethodName: "GetBankSchema",
+			Handler:    _Payment_GetBankSchema_Handler,
+		},
+		{
+			MethodName: "BuyCryptoViaFiatCurrentList",
+			Handler:    _Payment_BuyCryptoViaFiatCurrentList_Handler,
+		},
+		{
+			MethodName: "BuyCryptoViaFiatPriceQuery",
+			Handler:    _Payment_BuyCryptoViaFiatPriceQuery_Handler,
+		},
+		{
+			MethodName: "BuyCryptoViaFiat",
+			Handler:    _Payment_BuyCryptoViaFiat_Handler,
+		},
+		{
+			MethodName: "GetResponsibleGamblingStatus",
+			Handler:    _Payment_GetResponsibleGamblingStatus_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

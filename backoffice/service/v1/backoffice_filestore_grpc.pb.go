@@ -19,7 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeFileStore_UploadOperatorStaticFile_FullMethodName = "/api.backoffice.service.v1.BackofficeFileStore/UploadOperatorStaticFile"
+	BackofficeFileStore_UploadOperatorStaticFile_FullMethodName         = "/api.backoffice.service.v1.BackofficeFileStore/UploadOperatorStaticFile"
+	BackofficeFileStore_UploadRegisterLoginBlacklist_FullMethodName     = "/api.backoffice.service.v1.BackofficeFileStore/UploadRegisterLoginBlacklist"
+	BackofficeFileStore_UploadVipLevelImage_FullMethodName              = "/api.backoffice.service.v1.BackofficeFileStore/UploadVipLevelImage"
+	BackofficeFileStore_UploadAffiliateRegistrationPhoto_FullMethodName = "/api.backoffice.service.v1.BackofficeFileStore/UploadAffiliateRegistrationPhoto"
 )
 
 // BackofficeFileStoreClient is the client API for BackofficeFileStore service.
@@ -27,6 +30,10 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BackofficeFileStoreClient interface {
 	UploadOperatorStaticFile(ctx context.Context, in *UploadOperatorStaticFileRequest, opts ...grpc.CallOption) (*UploadOperatorStaticFileResponse, error)
+	UploadRegisterLoginBlacklist(ctx context.Context, in *UploadRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*UploadRegisterLoginBlacklistResponse, error)
+	UploadVipLevelImage(ctx context.Context, in *UploadVipLevelImageRequest, opts ...grpc.CallOption) (*UploadVipLevelImageResponse, error)
+	// Affiliate File Store
+	UploadAffiliateRegistrationPhoto(ctx context.Context, in *UploadAffiliateRegistrationPhotoRequest, opts ...grpc.CallOption) (*UploadAffiliateRegistrationPhotoResponse, error)
 }
 
 type backofficeFileStoreClient struct {
@@ -47,11 +54,45 @@ func (c *backofficeFileStoreClient) UploadOperatorStaticFile(ctx context.Context
 	return out, nil
 }
 
+func (c *backofficeFileStoreClient) UploadRegisterLoginBlacklist(ctx context.Context, in *UploadRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*UploadRegisterLoginBlacklistResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UploadRegisterLoginBlacklistResponse)
+	err := c.cc.Invoke(ctx, BackofficeFileStore_UploadRegisterLoginBlacklist_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeFileStoreClient) UploadVipLevelImage(ctx context.Context, in *UploadVipLevelImageRequest, opts ...grpc.CallOption) (*UploadVipLevelImageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UploadVipLevelImageResponse)
+	err := c.cc.Invoke(ctx, BackofficeFileStore_UploadVipLevelImage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeFileStoreClient) UploadAffiliateRegistrationPhoto(ctx context.Context, in *UploadAffiliateRegistrationPhotoRequest, opts ...grpc.CallOption) (*UploadAffiliateRegistrationPhotoResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UploadAffiliateRegistrationPhotoResponse)
+	err := c.cc.Invoke(ctx, BackofficeFileStore_UploadAffiliateRegistrationPhoto_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeFileStoreServer is the server API for BackofficeFileStore service.
 // All implementations must embed UnimplementedBackofficeFileStoreServer
 // for forward compatibility.
 type BackofficeFileStoreServer interface {
 	UploadOperatorStaticFile(context.Context, *UploadOperatorStaticFileRequest) (*UploadOperatorStaticFileResponse, error)
+	UploadRegisterLoginBlacklist(context.Context, *UploadRegisterLoginBlacklistRequest) (*UploadRegisterLoginBlacklistResponse, error)
+	UploadVipLevelImage(context.Context, *UploadVipLevelImageRequest) (*UploadVipLevelImageResponse, error)
+	// Affiliate File Store
+	UploadAffiliateRegistrationPhoto(context.Context, *UploadAffiliateRegistrationPhotoRequest) (*UploadAffiliateRegistrationPhotoResponse, error)
 	mustEmbedUnimplementedBackofficeFileStoreServer()
 }
 
@@ -64,6 +105,15 @@ type UnimplementedBackofficeFileStoreServer struct{}
 
 func (UnimplementedBackofficeFileStoreServer) UploadOperatorStaticFile(context.Context, *UploadOperatorStaticFileRequest) (*UploadOperatorStaticFileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UploadOperatorStaticFile not implemented")
+}
+func (UnimplementedBackofficeFileStoreServer) UploadRegisterLoginBlacklist(context.Context, *UploadRegisterLoginBlacklistRequest) (*UploadRegisterLoginBlacklistResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UploadRegisterLoginBlacklist not implemented")
+}
+func (UnimplementedBackofficeFileStoreServer) UploadVipLevelImage(context.Context, *UploadVipLevelImageRequest) (*UploadVipLevelImageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UploadVipLevelImage not implemented")
+}
+func (UnimplementedBackofficeFileStoreServer) UploadAffiliateRegistrationPhoto(context.Context, *UploadAffiliateRegistrationPhotoRequest) (*UploadAffiliateRegistrationPhotoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UploadAffiliateRegistrationPhoto not implemented")
 }
 func (UnimplementedBackofficeFileStoreServer) mustEmbedUnimplementedBackofficeFileStoreServer() {}
 func (UnimplementedBackofficeFileStoreServer) testEmbeddedByValue()                             {}
@@ -104,6 +154,60 @@ func _BackofficeFileStore_UploadOperatorStaticFile_Handler(srv interface{}, ctx 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeFileStore_UploadRegisterLoginBlacklist_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UploadRegisterLoginBlacklistRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeFileStoreServer).UploadRegisterLoginBlacklist(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeFileStore_UploadRegisterLoginBlacklist_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeFileStoreServer).UploadRegisterLoginBlacklist(ctx, req.(*UploadRegisterLoginBlacklistRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeFileStore_UploadVipLevelImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UploadVipLevelImageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeFileStoreServer).UploadVipLevelImage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeFileStore_UploadVipLevelImage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeFileStoreServer).UploadVipLevelImage(ctx, req.(*UploadVipLevelImageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeFileStore_UploadAffiliateRegistrationPhoto_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UploadAffiliateRegistrationPhotoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeFileStoreServer).UploadAffiliateRegistrationPhoto(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeFileStore_UploadAffiliateRegistrationPhoto_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeFileStoreServer).UploadAffiliateRegistrationPhoto(ctx, req.(*UploadAffiliateRegistrationPhotoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeFileStore_ServiceDesc is the grpc.ServiceDesc for BackofficeFileStore service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -114,6 +218,18 @@ var BackofficeFileStore_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UploadOperatorStaticFile",
 			Handler:    _BackofficeFileStore_UploadOperatorStaticFile_Handler,
+		},
+		{
+			MethodName: "UploadRegisterLoginBlacklist",
+			Handler:    _BackofficeFileStore_UploadRegisterLoginBlacklist_Handler,
+		},
+		{
+			MethodName: "UploadVipLevelImage",
+			Handler:    _BackofficeFileStore_UploadVipLevelImage_Handler,
+		},
+		{
+			MethodName: "UploadAffiliateRegistrationPhoto",
+			Handler:    _BackofficeFileStore_UploadAffiliateRegistrationPhoto_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

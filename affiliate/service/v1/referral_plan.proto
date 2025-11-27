@@ -1,0 +1,275 @@
+syntax = "proto3";
+
+package api.affiliate.service.v1;
+
+import "common/common.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/affiliate/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.affiliate.service.v1";
+
+import "google/protobuf/timestamp.proto";
+
+// SetReferralPlan creates or updates a referral plan
+message SetReferralPlanRequest {
+    api.common.OperatorContext initiator_operator_context = 1;
+    api.common.OperatorContext target_operator_context = 2;
+    int64 initiator_user_id = 3;
+    string currency = 4;
+    optional bool follow_parent = 5; // if target operator follows parent's (or system's) referral plan
+    optional bool enabled = 6; // target operator's referral plan's enabled
+    optional int32 max_tier = 7; // target operator's referral plan's max_tier
+    optional ReferralPlanConfig plan_config = 8; // target operator's referral plan's plan_config
+}
+
+message SetReferralPlanResponse {}
+
+// GetReferralPlan retrieves a referral plan by currency and operator contexts
+// Returns both the default (inherited) and custom configurations
+message GetReferralPlanRequest {
+    api.common.OperatorContext initiator_operator_context = 1;
+    api.common.OperatorContext target_operator_context = 2;
+    string currency = 3;
+}
+
+message GetReferralPlanResponse {
+    // Custom operator context - the operator who has custom config
+    api.common.OperatorContext custom_operator_context = 1;
+    string currency = 2;
+    // Inherited operator context - the operator from whom config is inherited
+    api.common.OperatorContext inherited_operator_context = 3;
+    string inherited_from_operator_name = 4;
+	bool follow_parent = 5;
+    // Default referral plan (inherited from parent/system)
+    optional ReferralPlan default_referral_plan = 6;
+    // Custom referral plan (current operator's own config)
+    optional ReferralPlan custom_referral_plan = 7;
+}
+
+message GetUserReferralPlanRequest {
+    string currency = 1;
+}
+
+message GetUserReferralPlanResponse {
+    // Referral plan owner operator context
+    api.common.OperatorContext referral_plan_owner_operator_context = 1;
+    string currency = 2;
+    // Referral plan used by the user, nil if no referral plan is set
+    optional ReferralPlan user_referral_plan = 3;
+}
+
+message GetUserReferralStatsRequest {
+    string currency = 1;
+}
+
+message GetUserReferralStatsResponse {
+    message ReferralRewards {
+        string available_referral_reward_amount = 1; // for this currency
+        string available_commission_reward_amount = 2;
+        string available_invitee_reward_amount = 3;
+        string total_received_referral_reward_amount = 4;
+        string total_received_commission_reward_amount = 5;
+        string total_received_invitee_reward_amount = 6;
+    }
+    message ReferralProgress {
+        map<int32, int32> conversion_count = 1; // map of tier number (1-10) to conversion count
+        map<int32, string> deposit_amount = 2; // map of tier number (1-10) to deposit amount
+        map<int32, string> wagering_amount = 3; // map of tier number (1-10) to wagering amount, focus on game bet and game bet rollback
+        map<int32, string> ggr_amount = 4; // map of tier number (1-10) to ggr, all of the game transactions
+        map<int32, string> ngr_amount = 5; // map of tier number (1-10) to ngr, all of the game transactions
+    }
+    // Referral codes created by the user
+    repeated ReferralCode referral_codes = 1;
+    // Referral rewards for the user
+    ReferralRewards referral_rewards = 2;
+    ReferralProgress referral_progress = 3;
+}
+
+message ReferralCode {
+    int64 user_id = 1;
+    string user_name = 2;
+    string referral_code = 3;
+    string created_at = 4;
+    int64 referral_user_count = 5; // number of users who have used this referral code
+    string earning_amount_usd = 6; // amount of money earned by the user who has used this referral code
+    string earning_amount_reporting_currency = 7; // amount of money earned by the user who has used this referral code in reporting currency
+}
+
+message CreateUserReferralCodeRequest {
+    optional string referral_code = 1; // nil means backend will randomly generate a new code
+}
+
+message CreateUserReferralCodeResponse {
+    string referral_code = 1;
+}
+
+message ListUserReferralRewardsRequest {
+    string currency = 1;
+    string reward_type = 2; // conversion_reward/deposit_cashback/wagering_commission/loss_revenue_share
+    optional string referral_code = 3;
+    optional int64 user_id = 4;
+    optional google.protobuf.Timestamp start_time = 6;
+    optional google.protobuf.Timestamp end_time = 7;
+    optional int32 page = 8;
+    optional int32 page_size = 9;
+}
+
+message ListUserReferralRewardsResponse {
+    message ReferralReward {
+        string user_name = 1;
+        int64 user_id = 2;
+        string referral_code = 3;
+        int32 tier = 4;
+        string reward_amount = 5;
+        google.protobuf.Timestamp created_at = 6;
+    }
+    repeated ReferralReward referral_rewards = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 page_size = 4;
+}
+
+message GetUserReferralRewardsRequest {
+    string currency = 1;
+}
+
+message GetUserReferralRewardsResponse {
+    string amount = 1;
+    repeated int64 commission_ids = 2;
+}
+
+message ClaimUserReferralRewardsRequest {
+    string currency = 1;
+    repeated int64 commission_ids = 2;
+}
+
+message ClaimUserReferralRewardsResponse {
+}
+
+// ------------------------------------------------------------------------------------------------
+// Data structures
+// ------------------------------------------------------------------------------------------------
+
+// Complete referral plan configuration
+message ReferralPlan {
+    bool enabled = 1;
+    int32 max_tier = 2;
+    ReferralPlanConfig plan_config = 3;
+}
+
+// Referral plan configuration
+message ReferralPlanConfig {
+    optional ConversionConditions conversion_conditions = 1;
+    optional ConversionReward conversion_reward = 2;
+    optional InviteeReward invitee_reward = 3;
+    optional DepositCashback deposit_cashback = 4;
+    optional WageringCommission wagering_commission = 5;
+    optional LossRevenueShare loss_revenue_share = 6;
+}
+
+// ------------------------------------------------------------------------------------------------
+// Conversion conditions and rewards
+// ------------------------------------------------------------------------------------------------
+
+message ConversionConditions {
+    bool enabled = 1;
+    optional string min_ftd_amount = 2;
+    optional int32 min_deposits_count = 3;
+    optional string min_deposits_amount = 4;
+    optional int32 min_bets_count = 5;
+    optional string min_bets_amount = 6;
+    optional int32 time_limit_after_registration_days = 7;
+    optional int32 time_limit_after_ftd_days = 8;
+    optional string allowed_player_statuses = 9;
+}
+
+message ConversionReward {
+    bool enabled = 1;
+    // Map of tier number (1-10) to tier rewards
+    map<int32, ConversionTierRewards> tier_rewards = 2;
+}
+
+message ConversionTierRewards {
+    repeated ConversionTierReward rewards = 1;
+}
+
+message ConversionTierReward {
+    string from = 1;
+    optional string to = 2; // nil indicates no upper limit
+    string reward_amount = 3;
+}
+
+// ------------------------------------------------------------------------------------------------
+// Invitee rewards
+// ------------------------------------------------------------------------------------------------
+
+message InviteeReward {
+    bool enabled = 1;
+    string reward_amount = 2;
+}
+
+// ------------------------------------------------------------------------------------------------
+// Deposit cashback
+// ------------------------------------------------------------------------------------------------
+
+message DepositCashback {
+    bool enabled = 1;
+    // Map of tier number (1-10) to tier reward config
+    map<int32, DepositCashbackTierRewardConfig> tier_reward_configs = 2;
+}
+
+message DepositCashbackTierRewardConfig {
+    string daily_limit_amount = 1;
+    repeated DepositCashbackTierReward tier_rewards = 2;
+}
+
+message DepositCashbackTierReward {
+    string from = 1;
+    optional string to = 2; // nil indicates no upper limit
+    string cashback_percentage = 3;
+}
+
+// ------------------------------------------------------------------------------------------------
+// Wagering commission
+// ------------------------------------------------------------------------------------------------
+
+message WageringCommission {
+    bool enabled = 1;
+    string max_game_house_edge = 2; // represent as a percentage, e.g. "35" for 35%
+    // Map of tier number (1-10) to tier rewards
+    map<int32, WageringCommissionTierRewards> tier_rewards = 3;
+    string period = 4; // real_time/daily/weekly/monthly
+}
+
+message WageringCommissionTierRewards {
+    repeated WageringCommissionTierReward rewards = 1;
+}
+
+message WageringCommissionTierReward {
+    string from = 1;
+    optional string to = 2; // nil indicates no upper limit
+    string rate = 3; // represent as a percentage, e.g. "35" for 35%
+}
+
+// ------------------------------------------------------------------------------------------------
+// Loss revenue share
+// ------------------------------------------------------------------------------------------------
+
+message LossRevenueShare {
+    bool enabled = 1;
+    string based_on = 2; // ggr/ngr
+    string negative_carryover = 3; // discard/carry_to_next_period
+    // Map of tier number (1-10) to tier rewards
+    map<int32, LossRevenueShareTierRewards> tier_rewards = 4;
+    string period = 5; // weekly/monthly
+}
+
+message LossRevenueShareTierRewards {
+    repeated LossRevenueShareTierReward rewards = 1;
+}
+
+message LossRevenueShareTierReward {
+    string from = 1;
+    optional string to = 2; // nil indicates no upper limit
+    string rate = 3; // represent as a percentage, e.g. "35" for 35%
+}

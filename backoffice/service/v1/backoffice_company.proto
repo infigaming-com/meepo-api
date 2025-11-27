@@ -34,3 +34,4 @@ message CreateCompanyResponse {
 	string token = 1;
 	string backoffice_subdomain = 2;
 }
+

@@ -35,6 +35,18 @@ func ErrorCallWalletServiceFailed(format string, args ...interface{}) *errors.Er
 	return errors.New(500, ErrorReason_CALL_WALLET_SERVICE_FAILED.String(), fmt.Sprintf(format, args...))
 }
 
+func IsOperatorIdsNotFoundInContext(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_IDS_NOT_FOUND_IN_CONTEXT.String() && e.Code == 500
+}
+
+func ErrorOperatorIdsNotFoundInContext(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_IDS_NOT_FOUND_IN_CONTEXT.String(), fmt.Sprintf(format, args...))
+}
+
 func IsUserInfoNotFoundInContext(err error) bool {
 	if err == nil {
 		return false
@@ -69,4 +81,76 @@ func IsReportGetDataError(err error) bool {
 
 func ErrorReportGetDataError(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_REPORT_GET_DATA_ERROR.String(), fmt.Sprintf(format, args...))
+}
+
+func IsOperatorContextPermissionDenied(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_OPERATOR_CONTEXT_PERMISSION_DENIED.String() && e.Code == 500
+}
+
+func ErrorOperatorContextPermissionDenied(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_OPERATOR_CONTEXT_PERMISSION_DENIED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCloudflareInvalidRequest(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CLOUDFLARE_INVALID_REQUEST.String() && e.Code == 500
+}
+
+func ErrorCloudflareInvalidRequest(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CLOUDFLARE_INVALID_REQUEST.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCloudflarePermissionDenied(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CLOUDFLARE_PERMISSION_DENIED.String() && e.Code == 500
+}
+
+func ErrorCloudflarePermissionDenied(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CLOUDFLARE_PERMISSION_DENIED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCloudflareConfigUnavailable(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CLOUDFLARE_CONFIG_UNAVAILABLE.String() && e.Code == 500
+}
+
+func ErrorCloudflareConfigUnavailable(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CLOUDFLARE_CONFIG_UNAVAILABLE.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCloudflareOperatorNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CLOUDFLARE_OPERATOR_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorCloudflareOperatorNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CLOUDFLARE_OPERATOR_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCloudflarePurgeFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CLOUDFLARE_PURGE_FAILED.String() && e.Code == 500
+}
+
+func ErrorCloudflarePurgeFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CLOUDFLARE_PURGE_FAILED.String(), fmt.Sprintf(format, args...))
 }

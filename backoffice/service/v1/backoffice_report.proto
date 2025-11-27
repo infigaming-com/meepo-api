@@ -3,13 +3,15 @@ syntax = "proto3";
 package api.backoffice.service.v1;
 
 import "google/api/annotations.proto";
+import "common/common.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
 
 service BackofficeReport {
-	rpc GetSummary(GetSummaryRequest) returns (GetSummaryResponse) {
+  rpc GetSummary(GetSummaryRequest) returns (GetSummaryResponse) {
       option (google.api.http) = {
           post: "/v1/backoffice/report/summary/get"
           body: "*"
@@ -27,7 +29,7 @@ service BackofficeReport {
           body: "*"
       };
   }
-  rpc ListGameData(GetGameDataRequest) returns (GetGameDataResponse) {
+  rpc ListGameData(ListGameDataRequest) returns (ListGameDataResponse) {
       option (google.api.http) = {
           post: "/v1/backoffice/report/game-data/list"
           body: "*"
@@ -39,7 +41,7 @@ service BackofficeReport {
           body: "*"
       };
   }
-  rpc ListPlayerGameData(GetPlayerGameDataRequest) returns (GetPlayerGameDataResponse) {
+  rpc ListPlayerGameData(ListPlayerGameDataRequest) returns (ListPlayerGameDataResponse) {
       option (google.api.http) = {
           post: "/v1/backoffice/report/player-game-data/list"
           body: "*"
@@ -88,6 +90,20 @@ service BackofficeReport {
           body: "*"
       };
   }
+	rpc ListSportEvents(ListSportEventsRequest) returns (ListSportEventsResponse) {
+      option (google.api.http) = {
+          post: "/v1/backoffice/report/sport-events/list"
+          body: "*"
+      };
+  }
+
+	rpc CustomerRecordReportDetail(CustomerRecordReportDetailRequest) returns (CustomerRecordReportDetailResponse) {
+      option (google.api.http) = {
+          post: "/v1/backoffice/report/customer-record/get"
+          body: "*"
+      };
+  }
+
 }
 
 message TimeRange{
@@ -98,9 +114,7 @@ message TimeRange{
 
 message GetSummaryRequest {
 	TimeRange time_range = 1;
-	repeated int64 retailer_operator_ids = 2;
-	repeated int64 group_operator_ids = 3;
-	repeated int64 operator_ids = 4;
+	api.common.OperatorContextFilters operator_context_filters = 2;
 	repeated string affiliate_codes = 5;
 	repeated string referral_codes = 6;
 	repeated string registration_countries = 7;
@@ -109,26 +123,35 @@ message GetSummaryRequest {
 message GetSummaryResponse {
 	int32 visits = 1;
 	int32 registered_users = 2;
-	string ftd = 3;
+	string ftd_usd = 3; // usd
 	string ftd_conversion_rate = 4;
-	string deposit_amount = 5;
-	string withdraw_amount = 6;
-	string deposit_minus_withdraw_amount = 7;
-	string average_ftd_amount = 8;
+	string deposit_amount_usd = 5; // usd
+	string withdraw_amount_usd = 6; // usd
+	string deposit_minus_withdraw_amount_usd = 7; // usd
+	string average_ftd_amount_usd = 8; // usd
 	string arpu_to_arppu_percentage = 9;
-	string turnover = 10;
-	string bonus = 11;
-	string ggr = 12;
-	string ngr = 13;
-	string arpu = 14;
-	string arppu = 15;
+	string turnover_usd = 10; // usd
+	string bonus_usd = 11; // usd
+	string ggr_usd = 12; // usd
+	string ngr_usd = 13; // usd
+	string arpu_usd = 14; // usd
+	string arppu_usd = 15; // usd
+	string ftd_reporting_currency = 16; // reporting currency
+	string deposit_amount_reporting_currency = 17; // reporting currency
+	string withdraw_amount_reporting_currency = 18; // reporting currency
+	string deposit_minus_withdraw_amount_reporting_currency = 19; // reporting currency
+	string average_ftd_amount_reporting_currency = 20; // reporting currency
+	string turnover_reporting_currency = 21; // reporting currency
+	string bonus_reporting_currency = 22; // reporting currency
+	string ggr_reporting_currency = 23; // reporting currency
+	string ngr_reporting_currency = 24; // reporting currency
+	string arpu_reporting_currency = 25; // reporting currency
+	string arppu_reporting_currency = 26; // reporting currency
 }
 
 message ListSummariesRequest {
 	TimeRange time_range = 1;
-	repeated int64 retailer_operator_ids = 2;
-	repeated int64 group_operator_ids = 3;
-	repeated int64 operator_ids = 4;
+	api.common.OperatorContextFilters operator_context_filters = 2;
 	repeated string affiliate_codes = 5;
 	repeated string referral_codes = 6;
 	repeated string registration_countries = 7;
@@ -140,46 +163,73 @@ message ListSummariesResponse {
 	message List {
 		string date = 1;
 		string operator_name = 2;
-		string country = 3;
-		int32 visits = 4;
-		int32 unique_visits = 5;
-		int32 registered_users = 6;
-		int32 deposited_users = 7;
-		int32 ftd_users = 8;
-		int32 repeated_deposited_users = 9;
-		string deposit_conversion_rate = 10;
-		int32 deposit_count = 11;
-		string deposit_amount = 12;
-		string arpu = 13;
-		string arppu = 14;
-		string average_ftd_amount = 15;
-		string withdraw_amount = 16;
-		int32 withdrawed_users = 17;
-		int32 ftw_users = 18;
-		string average_withdraw_amount = 19;
-		string ftw_amount = 20;
-		string average_ftw_amount = 21;
-		string wu_to_au_percentage = 22;
-		string wu_to_du_percentage = 23;
-		string deposit_minus_withdraw_amount = 24;
-		string w_to_d_percentage = 25;
-		string turnover = 26;
-		string deposit_bonus = 27;
-		string rebate_bonus = 28;
-		string loss_rebate = 29;
-		string vip_bonus = 30;
-		string other_bonus = 31;
-		string referral_commission = 32;
-		string deposit_fee_subsidy_amount = 33;
-		string player_withdraw_fee = 34;
-		string operator_withdraw_fee = 35;
-		string cash_balance = 36;
-		string bonus_balance = 37;
-		string locked_balance = 38;
-		string ggr = 39;
-		string ngr = 40;
-		string ggr_to_ngr_percentage = 41;
-		string house_edge_percentage = 42;
+		string company_operator_name = 3;
+		string retailer_operator_name = 4;
+		string system_operator_name = 5;
+		string country = 6;
+		int32 visits = 7;
+		int32 unique_visits = 8;
+		int32 registered_users = 9;
+		int32 deposited_users = 10;
+		int32 ftd_users = 11;
+		int32 repeated_deposited_users = 12;
+		string deposit_conversion_rate = 13;
+		int32 deposit_count = 14;
+		string deposit_amount_usd = 15; // usd
+		string arpu_usd = 16; // usd
+		string arppu_usd = 17; // usd
+		string average_ftd_amount_usd = 18; // usd
+		string withdraw_amount_usd = 19; // usd
+		int32 withdrawed_users = 20;
+		int32 ftw_users = 21;
+		string average_withdraw_amount_usd = 22; // usd
+		string ftw_amount_usd = 23; // usd
+		string average_ftw_amount_usd = 24; // usd
+		string wu_to_au_percentage = 25;
+		string wu_to_du_percentage = 26;
+		string deposit_minus_withdraw_amount_usd = 27; // usd
+		string w_to_d_percentage = 28;
+		string turnover_usd = 29; // usd
+		string deposit_bonus_usd = 30; // usd
+		string rebate_bonus_usd = 31; // usd
+		string loss_rebate_usd = 32; // usd
+		string vip_bonus_usd = 33; // usd
+		string other_bonus_usd = 34; // usd
+		string referral_commission_usd = 35; // usd
+		string deposit_fee_subsidy_amount_usd = 36; // usd
+		string player_withdraw_fee_usd = 37; // usd
+		string operator_withdraw_fee_usd = 38; // usd
+		string cash_balance_usd = 39; // usd
+		string bonus_balance_usd = 40; // usd
+		string locked_balance_usd = 41; // usd
+		string ggr_usd = 42; // usd
+		string ngr_usd = 43; // usd
+		string ggr_to_ngr_percentage = 44;
+		string house_edge_percentage = 45;
+		string deposit_amount_reporting_currency = 46; // reporting currency
+		string arpu_reporting_currency = 47; // reporting currency
+		string arppu_reporting_currency = 48; // reporting currency
+		string average_ftd_amount_reporting_currency = 49; // reporting currency
+		string withdraw_amount_reporting_currency = 50; // reporting currency
+		string average_withdraw_amount_reporting_currency = 51; // reporting currency
+		string ftw_amount_reporting_currency = 52; // reporting currency
+		string average_ftw_amount_reporting_currency = 53; // reporting currency
+		string deposit_minus_withdraw_amount_reporting_currency = 54; // reporting currency
+		string turnover_reporting_currency = 55; // reporting currency
+		string deposit_bonus_reporting_currency = 56; // reporting currency
+		string rebate_bonus_reporting_currency = 57; // reporting currency
+		string loss_rebate_reporting_currency = 58; // reporting currency
+		string vip_bonus_reporting_currency = 59; // reporting currency
+		string other_bonus_reporting_currency = 60; // reporting currency
+		string referral_commission_reporting_currency = 61; // reporting currency
+		string deposit_fee_subsidy_amount_reporting_currency = 62; // reporting currency
+		string player_withdraw_fee_reporting_currency = 63; // reporting currency
+		string operator_withdraw_fee_reporting_currency = 64; // reporting currency
+		string cash_balance_reporting_currency = 65; // reporting currency
+		string bonus_balance_reporting_currency = 66; // reporting currency
+		string locked_balance_reporting_currency = 67; // reporting currency
+		string ggr_reporting_currency = 68; // reporting currency
+		string ngr_reporting_currency = 69; // reporting currency
 	}
 	repeated List list = 1;
 	int32 page = 2;
@@ -189,60 +239,66 @@ message ListSummariesResponse {
 
 message GetGameSummaryRequest {
 	TimeRange time_range = 1;
-	repeated int64 operator_ids = 2;
-	repeated int64 retailer_operator_ids = 3;
-	repeated int64 group_operator_ids = 4;
-	repeated string provider_ids = 5;
-	repeated string game_categories = 6;
-	repeated string game_names = 7;
-	repeated string game_ids = 8;
-	repeated string currencies = 9;
+	api.common.OperatorContextFilters operator_context_filters = 2;
+	repeated string provider_ids = 3;
+	repeated string game_categories = 4;
+	repeated string game_names = 5;
+	repeated string game_ids = 6;
+	repeated string currencies = 7;
 }
 
 message GetGameSummaryResponse {
-	string turnover = 1;
-	string win_amount =  2;
-	string ggr = 3;
+	string turnover_usd = 1; // usd
+	string win_amount_usd = 2; // usd
+	string ggr_usd = 3; // usd
 	int32 bet_count = 4;
-	string average_bet_amount = 5;
+	string average_bet_amount_usd = 5; // usd
 	string rtp_percentage = 6;
+	string turnover_reporting_currency = 7; // reporting currency
+	string win_amount_reporting_currency = 8; // reporting currency
+	string ggr_reporting_currency = 9; // reporting currency
+	string average_bet_amount_reporting_currency = 10; // reporting currency
 }
 
-message GetGameDataRequest {
+message ListGameDataRequest {
 	TimeRange time_range = 1;
-	repeated int64 operator_ids = 2;
-	repeated int64 retailer_operator_ids = 3;
-	repeated int64 group_operator_ids = 4;
-	repeated string provider_ids = 5;
-	repeated string game_categories = 6;
-	repeated string game_names = 7;
-	repeated string game_ids = 8;
-	repeated string currencies = 9;
-	int32 page = 10;
-	int32 page_size = 11;
+	api.common.OperatorContextFilters operator_context_filters = 2;
+	repeated string provider_ids = 3;
+	repeated string game_categories = 4;
+	repeated string game_names = 5;
+	repeated string game_ids = 6;
+	repeated string currencies = 7;
+	int32 page = 8;
+	int32 page_size = 9;
 }
 
-message GetGameDataResponse {
+message ListGameDataResponse {
 	message List {
 		string date = 1;
-		string operator = 2;
-		string provider = 3;
-		string game_type = 4;
-		string game_name = 5;
-		string game_id = 6;
-		int32 player_count = 7;
-		string turnover = 8;
-		string turnover_usd = 9;
-		string turnover_percentage = 10;
-		string win_amount = 11;
-		string win_amount_usd = 12;
-		string ggr = 13;
-		string ggr_usd = 14;
-		string ggr_percentage = 15;
-		int32 bet_count = 16;
-		string average_bet_amount = 17;
-		string rtp_percentage = 18;
-		string settlement_currency = 19;
+		string operator_name = 2;
+		string company_operator_name = 3;
+		string retailer_operator_name = 4;
+		string system_operator_name = 5;
+		string provider = 6;
+		string game_type = 7;
+		string game_name = 8;
+		string game_id = 9;
+		int32 player_count = 10;
+		string turnover = 11;
+		string turnover_usd = 12;
+		string turnover_percentage = 13;
+		string win_amount = 14;
+		string win_amount_usd = 15;
+		string ggr = 16;
+		string ggr_usd = 17;
+		string ggr_percentage = 18;
+		int32 bet_count = 19;
+		string average_bet_amount = 20;
+		string rtp_percentage = 21;
+		string settlement_currency = 22;
+		string turnover_reporting_currency = 23; // reporting currency
+		string win_amount_reporting_currency = 24; // reporting currency
+		string ggr_reporting_currency = 25; // reporting currency
 	}
 	repeated List list = 7;
 	int32 page = 8;
@@ -252,62 +308,68 @@ message GetGameDataResponse {
 
 message GetPlayerGameSummaryRequest {
 	TimeRange time_range = 1;
-	repeated int64 retailer_operator_ids = 2;
-	repeated int64 group_operator_ids = 3;
-	repeated int64 operator_ids = 4;
-	repeated string provider_ids = 5;
-	repeated string game_categories = 6;
-	repeated string game_tags = 7;
-	repeated string game_names = 8;
-	repeated string game_ids = 9;
-	repeated string currencies = 10;
-	repeated int64 user_ids = 11;
+	api.common.OperatorContextFilters operator_context_filters = 2;
+	repeated string provider_ids = 3;
+	repeated string game_categories = 4;
+	repeated string game_tags = 5;
+	repeated string game_names = 6;
+	repeated string game_ids = 7;
+	repeated string currencies = 8;
+	repeated int64 user_ids = 9;
 }
 
 message GetPlayerGameSummaryResponse {
-	string turnover = 1;
-	string win_amount = 2;
-	string ggr = 3;
+	string turnover_usd = 1; // usd
+	string win_amount_usd = 2; // usd
+	string ggr_usd = 3; // usd
 	int32 bet_count = 4;
-	string average_bet_amount = 5;
+	string average_bet_amount_usd = 5; // usd
 	string rtp_percentage = 6;
+	string turnover_reporting_currency = 7; // reporting currency
+	string win_amount_reporting_currency = 8; // reporting currency
+	string ggr_reporting_currency = 9; // reporting currency
+	string average_bet_amount_reporting_currency = 10; // reporting currency
 }
 
-message GetPlayerGameDataRequest {
+message ListPlayerGameDataRequest {
 	TimeRange time_range = 1;
-	repeated int64 retailer_operator_ids = 2;
-	repeated int64 group_operator_ids = 3;
-	repeated int64 operator_ids = 4;
-	repeated string provider_ids = 5;
-	repeated string game_categories = 6;
-	repeated string game_tags = 7;
-	repeated string game_names = 8;
-	repeated string game_ids = 9;
-	repeated string currencies = 10;
-	repeated int64 user_ids = 11;
-	int32 page = 12;
-	int32 page_size = 13;
+	api.common.OperatorContextFilters operator_context_filters = 2;
+	repeated string provider_ids = 3;
+	repeated string game_categories = 4;
+	repeated string game_tags = 5;
+	repeated string game_names = 6;
+	repeated string game_ids = 7;
+	repeated string currencies = 8;
+	repeated int64 user_ids = 9;
+	int32 page = 10;
+	int32 page_size = 11;
 }
 
-message GetPlayerGameDataResponse {
+message ListPlayerGameDataResponse {
 	message List {
 		string date = 1;
-		string operator = 2;
-		string provider = 3;
-		string game_type = 4;
-		string game_id = 5;
-		string game_name = 6;
-		int64 user_id = 7;
-		string turnover = 8;
-		string turnover_usd = 9;
-		string win_amount = 10;
-		string win_amount_usd = 11;
-		string ggr = 12;
-		string ggr_usd = 13;
-		string rtp_percentage = 14;
-		int32 bet_count = 15;
-		string average_bet_amount = 16;
-		string settlement_currency = 17;
+		string operator_name = 2;
+		string company_operator_name = 3;
+		string retailer_operator_name = 4;
+		string system_operator_name = 5;
+		string provider = 6;
+		string game_type = 7;
+		string game_id = 8;
+		string game_name = 9;
+		int64 user_id = 10;
+		string turnover = 11;
+		string turnover_usd = 12;
+		string win_amount = 13;
+		string win_amount_usd = 14;
+		string ggr = 15;
+		string ggr_usd = 16;
+		string rtp_percentage = 17;
+		int32 bet_count = 18;
+		string average_bet_amount = 19;
+		string settlement_currency = 20;
+		string turnover_reporting_currency = 21; // reporting currency
+		string win_amount_reporting_currency = 22; // reporting currency
+		string ggr_reporting_currency = 23; // reporting currency
 	}
 	repeated List list = 7;
 	int32 page = 8;
@@ -317,9 +379,7 @@ message GetPlayerGameDataResponse {
 
 message GetDepositSummariesRequest {
 	TimeRange time_range = 1;
-	repeated int64 retailer_operator_ids = 2;
-	repeated int64 group_operator_ids = 3;
-	repeated int64 operator_ids = 4;
+	api.common.OperatorContextFilters operator_context_filters = 2;
 	repeated string currencies = 5;
 }
 
@@ -328,46 +388,54 @@ message GetDepositSummariesResponse {
 		string date = 1;
 		string currency = 2;
 		string deposit_success_rate = 3;  // decimal number between 0-100, two decimal places
-		string deposit_amount = 4;
+		string deposit_amount_usd = 4;
+		string deposit_amount_reporting_currency = 5;
 	}
 	repeated DepositSummary deposit_summaries = 1;
 }
 
 message ListDepositDetailsRequest {
 	TimeRange time_range = 1;
-	repeated int64 retailer_operator_ids = 2;
-	repeated int64 group_operator_ids = 3;
-	repeated int64 operator_ids = 4;
+	api.common.OperatorContextFilters operator_context_filters = 2;
 	repeated string currencies = 5;
-	int32 page = 6;
-	int32 page_size = 7;
+	optional int32 page = 6;
+	optional int32 page_size = 7;
 }
 
 message ListDepositDetailsResponse {
 	message Detail {
 		string date = 1;
 		string operator_name = 2;
-		string currency = 3;
-		string deposit_amount = 4;
-		string deposit_amount_usd = 5;
-		int32 deposit_users = 6;
-		string ftd_amount = 7;
-		string ftd_amount_usd = 8;
-		int32 ftd_users = 9;
-		string same_day_ftd_amount = 10;
-		string same_day_ftd_amount_usd = 11;
-		int32 same_day_ftd_users = 12;
-		string repeated_deposit_amount = 13;
-		string repeated_deposit_amount_usd = 14;
-		int32 repeated_deposit_users = 15;
-		int32 same_day_ftd = 16;
-		int32 non_same_day_ftd = 17;
-		string average_ftd_amount_for_same_day_registred_users = 18;
-		string average_ftd_amount_usd_for_same_day_registred_users = 19;
-		string average_ftd_amount_for_non_same_day_registred_users = 20;
-		string average_ftd_amount_usd_for_non_same_day_registred_users = 21;
-		string success_rate = 22; // decimal number between 0-100, two decimal places
-		string amount_proportion = 23; // decimal number between 0-100, two decimal places
+		string company_operator_name = 3;
+		string retailer_operator_name = 4;
+		string system_operator_name = 5;
+		string currency = 6;
+		string deposit_amount = 7;
+		string deposit_amount_usd = 8;
+		string deposit_amount_reporting_currency = 9;
+		int32 deposit_users = 10;
+		string ftd_amount = 11;
+		string ftd_amount_usd = 12;
+		string ftd_amount_reporting_currency = 13;
+		int32 ftd_users = 14;
+		string same_day_ftd_amount = 15;
+		string same_day_ftd_amount_usd = 16;
+		string same_day_ftd_amount_reporting_currency = 17;
+		int32 same_day_ftd_users = 18;
+		string repeated_deposit_amount = 19;
+		string repeated_deposit_amount_usd = 20;
+		string repeated_deposit_amount_reporting_currency = 21;
+		int32 repeated_deposit_users = 22;
+		int32 same_day_ftd = 23;
+		int32 non_same_day_ftd = 24;
+		string average_ftd_amount_for_same_day_registred_users = 25;
+		string average_ftd_amount_usd_for_same_day_registred_users = 26;
+		string average_ftd_amount_reporting_currency_for_same_day_registred_users = 27;
+		string average_ftd_amount_for_non_same_day_registred_users = 28;
+		string average_ftd_amount_usd_for_non_same_day_registred_users = 29;
+		string average_ftd_amount_reporting_currency_for_non_same_day_registred_users = 30;
+		string success_rate = 31; // decimal number between 0-100, two decimal places
+		string amount_proportion = 32; // decimal number between 0-100, two decimal places
 	}
 	repeated Detail details = 1;
 	int32 page = 2;
@@ -377,9 +445,7 @@ message ListDepositDetailsResponse {
 
 message GetWithdrawSummariesRequest {
 	TimeRange time_range = 1;
-	repeated int64 retailer_operator_ids = 2;
-	repeated int64 group_operator_ids = 3;
-	repeated int64 operator_ids = 4;
+	api.common.OperatorContextFilters operator_context_filters = 2;
 	repeated string currencies = 5;
 }
 
@@ -388,48 +454,58 @@ message GetWithdrawSummariesResponse {
 		string date = 1;
 		string currency = 2;
 		string withdraw_success_rate = 3;  // decimal number between 0-100, two decimal places
-		string withdraw_amount = 4;
+		string withdraw_amount_usd = 4;
+		string withdraw_amount_reporting_currency = 5;
 	}
 	repeated WithdrawSummary withdraw_summaries = 1;
 }
 
 message ListWithdrawDetailsRequest {
 	TimeRange time_range = 1;
-	repeated int64 retailer_operator_ids = 2;
-	repeated int64 group_operator_ids = 3;
-	repeated int64 operator_ids = 4;
+	api.common.OperatorContextFilters operator_context_filters = 2;
 	repeated string currencies = 5;
-	int32 page = 6;
-	int32 page_size = 7;
+	optional int32 page = 6;
+	optional int32 page_size = 7;
 }
 
 message ListWithdrawDetailsResponse {
 	message Detail {
 		string date = 1;
 		string operator_name = 2;
-		string currency = 3; 
-		string withdraw_amount = 4;
-		string withdraw_amount_usd = 5;
-		int32 withdraw_users = 6;
-		string ftw_amount = 7; 
-		string ftw_amount_usd = 8;
-		int32 ftw_users = 9;
-		string same_day_ftw_amount = 10;
-		string same_day_ftw_amount_usd = 11;
-		int32 same_day_ftw_users = 12;
-		string repeated_withdraw_amount = 13;
-		string repeated_withdraw_amount_usd = 14;
-		int32 repeated_withdraw_users = 15;
-		int32 same_day_ftw = 16;
-		int32 non_same_day_ftw = 17;
-		string average_ftw_amount_for_same_day_registred_users = 18;
-		string average_ftw_amount_usd_for_same_day_registred_users = 19;
-		string average_ftw_amount_for_non_same_day_registred_users = 20;
-		string average_ftw_amount_usd_for_non_same_day_registred_users = 21;
-		string success_rate = 22; // decimal number between 0-100, two decimal places
-		string deposit_minus_withdraw_amount = 23;
-		string deposit_minus_withdraw_amount_usd = 24;
-		string amount_proportion = 25; // decimal number between 0-100, two decimal places
+		string company_operator_name = 3;
+		string retailer_operator_name = 4;
+		string system_operator_name = 5;
+		string currency = 6; 
+		string reporting_currency = 7;
+		string withdraw_amount = 8;
+		string withdraw_amount_usd = 9;
+		string withdraw_amount_reporting_currency = 10;
+		int32 withdraw_users = 11;
+		string ftw_amount = 12; 
+		string ftw_amount_usd = 13;
+		string ftw_amount_reporting_currency = 14;
+		int32 ftw_users = 15;
+		string same_day_ftw_amount = 16;
+		string same_day_ftw_amount_usd = 17;
+		string same_day_ftw_amount_reporting_currency = 18;
+		int32 same_day_ftw_users = 19;
+		string repeated_withdraw_amount = 20;
+		string repeated_withdraw_amount_usd = 21;
+		string repeated_withdraw_amount_reporting_currency = 22;
+		int32 repeated_withdraw_users = 23;
+		int32 same_day_ftw = 24;
+		int32 non_same_day_ftw = 25;
+		string average_ftw_amount_for_same_day_registred_users = 26;
+		string average_ftw_amount_usd_for_same_day_registred_users = 27;
+		string average_ftw_amount_reporting_currency_for_same_day_registred_users = 28;
+		string average_ftw_amount_for_non_same_day_registred_users = 29;
+		string average_ftw_amount_usd_for_non_same_day_registred_users = 30;
+		string average_ftw_amount_reporting_currency_for_non_same_day_registred_users = 31;
+		string success_rate = 32; // decimal number between 0-100, two decimal places
+		string deposit_minus_withdraw_amount = 33;
+		string deposit_minus_withdraw_amount_usd = 34;
+		string deposit_minus_withdraw_amount_reporting_currency = 35;
+		string amount_proportion = 36; // decimal number between 0-100, two decimal places
 	}
 	repeated Detail details = 1;
 	int32 page = 2;
@@ -439,58 +515,72 @@ message ListWithdrawDetailsResponse {
 
 message ListRegisterRetentionRequest {
 	TimeRange time_range = 1;
-	repeated int64 retailer_operator_ids = 2;
-	repeated int64 group_operator_ids = 3;
-	repeated int64 operator_ids = 4;
-	int32 page = 5;
-	int32 page_size = 6;
+	api.common.OperatorContextFilters operator_context_filters = 2;
+	int32 page = 3;
+	int32 page_size = 4;
 }
 
 message ListRegisterRetentionResponse {
 	message List {
 		string date = 1;
 		string operator_name = 2;
-		int32 reg_users = 3;
-		int32 paid_users = 4;
-		int32 active_users = 5;
-		string deposit_convertion_rate = 6;
-		int32 arppu = 7;
-		int32 d1_active_users = 8;
-		int32 d2_active_users = 9;
-		int32 d3_active_users = 10;
-		int32 d4_active_users = 11;
-		int32 d5_active_users = 12;
-		int32 d6_active_users = 13;
-		int32 d7_active_users = 14;
-		int32 d15_active_users = 15;
-		int32 d30_active_users = 16;
-		int32 d45_active_users = 17;
-		int32 d60_active_users = 18;
-		int32 d120_active_users = 19;
-		int32 d1_paid_users = 20;
-		int32 d2_paid_users = 21;
-		int32 d3_paid_users = 22;
-		int32 d4_paid_users = 23;
-		int32 d5_paid_users = 24;
-		int32 d6_paid_users = 25;
-		int32 d7_paid_users = 26;
-		int32 d15_paid_users = 27;
-		int32 d30_paid_users = 28;
-		int32 d45_paid_users = 29;
-		int32 d60_paid_users = 30;
-		int32 d120_paid_users = 31;
-		string d1_paid_amt = 32;
-		string d2_paid_amt = 33;
-		string d3_paid_amt = 34;
-		string d4_paid_amt = 35;
-		string d5_paid_amt = 36;
-		string d6_paid_amt = 37;
-		string d7_paid_amt = 38;
-		string d15_paid_amt = 39;
-		string d30_paid_amt = 40;
-		string d45_paid_amt = 41;
-		string d60_paid_amt = 42;
-		string d120_paid_amt = 43;
+		string company_operator_name = 3;
+		string retailer_operator_name = 4;
+		string system_operator_name = 5;
+		int32 reg_users = 6;
+		int32 paid_users = 7;
+		int32 active_users = 8;
+		string deposit_convertion_rate = 9;
+		int32 arppu_usd = 10;
+		int32 arppu_reporting_currency = 11;
+		int32 d1_active_users = 12;
+		int32 d2_active_users = 13;
+		int32 d3_active_users = 14;
+		int32 d4_active_users = 15;
+		int32 d5_active_users = 16;
+		int32 d6_active_users = 17;
+		int32 d7_active_users = 18;
+		int32 d15_active_users = 19;
+		int32 d30_active_users = 20;
+		int32 d45_active_users = 21;
+		int32 d60_active_users = 22;
+		int32 d120_active_users = 23;
+		int32 d1_paid_users = 24;
+		int32 d2_paid_users = 25;
+		int32 d3_paid_users = 26;
+		int32 d4_paid_users = 27;
+		int32 d5_paid_users = 28;
+		int32 d6_paid_users = 29;
+		int32 d7_paid_users = 30;
+		int32 d15_paid_users = 31;
+		int32 d30_paid_users = 32;
+		int32 d45_paid_users = 33;
+		int32 d60_paid_users = 34;
+		int32 d120_paid_users = 35;
+		string d1_paid_amt_usd = 36;
+		string d1_paid_amt_reporting_currency = 37;
+		string d2_paid_amt_usd = 38;
+		string d2_paid_amt_reporting_currency = 39;
+		string d3_paid_amt_usd = 40;
+		string d3_paid_amt_reporting_currency = 41;
+		string d4_paid_amt_usd = 42;
+		string d4_paid_amt_reporting_currency = 43;
+		string d5_paid_amt_usd = 44;
+		string d5_paid_amt_reporting_currency = 45;
+		string d6_paid_amt_usd = 46;
+		string d6_paid_amt_reporting_currency = 47;
+		string d7_paid_amt_usd = 48;
+		string d7_paid_amt_reporting_currency = 49;
+		string d15_paid_amt_usd = 50;
+		string d15_paid_amt_reporting_currency = 51;
+		string d30_paid_amt_usd = 52;
+		string d30_paid_amt_reporting_currency = 53;
+		string d45_paid_amt_usd = 54;
+		string d45_paid_amt_reporting_currency = 55;
+		string d60_paid_amt_usd = 56;
+		string d60_paid_amt_reporting_currency = 57;
+		string d120_paid_amt_usd = 58;
+		string d120_paid_amt_reporting_currency = 59;
 
 	}
 	repeated List details = 1;
@@ -501,37 +591,43 @@ message ListRegisterRetentionResponse {
 
 message ListDepositVtgDetailsRequest {
 	TimeRange time_range = 1;
-	repeated int64 retailer_operator_ids = 2;
-	repeated int64 group_operator_ids = 3;
-	repeated int64 operator_ids = 4;
-	repeated string currencies = 5;
-	int32 page = 6;
-	int32 page_size = 7;
+	api.common.OperatorContextFilters operator_context_filters = 2;
+	repeated string currencies = 3;
+	int32 page = 4;
+	int32 page_size = 5;
 }
 
 message ListDepositVtgDetailsResponse {
 	message Detail {
 		string date = 1;
 		string operator_name = 2;
-		string currency = 3;
-		string deposit_amount = 4;
-		string deposit_amount_usd = 5;
-		int32 deposit_users = 6;
-		string ftd_amount = 7;
-		string ftd_amount_usd = 8;
-		int32 ftd_users = 9;
-		string same_day_ftd_amount = 10;
-		string same_day_ftd_amount_usd = 11;
-		int32 same_day_ftd_users = 12;
-		string repeated_deposit_amount = 13;
-		string repeated_deposit_amount_usd = 14;
-		int32 repeated_deposit_users = 15;
-		string same_day_ftd = 16;
-		string non_same_day_ftd = 17;
-		string average_ftd_amount_for_same_day_registred_users = 18;
-		string average_ftd_amount_usd_for_same_day_registred_users = 19;
-		string average_ftd_amount_for_non_same_day_registred_users = 20;
-		string average_ftd_amount_usd_for_non_same_day_registred_users = 21;
+		string company_operator_name = 3;
+		string retailer_operator_name = 4;
+		string system_operator_name = 5;
+		string currency = 6;
+		string deposit_amount = 7;
+		string deposit_amount_usd = 8;
+		string deposit_amount_reporting_currency = 9;
+		int32 deposit_users = 10;
+		string ftd_amount = 11;
+		string ftd_amount_usd = 12;
+		string ftd_amount_reporting_currency = 13;
+		int32 ftd_users = 14;
+		string same_day_ftd_amount = 15;
+		string same_day_ftd_amount_usd = 16;
+		string same_day_ftd_amount_reporting_currency = 17;
+		int32 same_day_ftd_users = 18;
+		int32 non_same_day_ftd_users = 19;
+		string repeated_deposit_amount = 20;
+		string repeated_deposit_amount_usd = 21;
+		string repeated_deposit_amount_reporting_currency = 22;
+		int32 repeated_deposit_users = 23;
+		string average_ftd_amount_for_same_day_registred_users = 24;
+		string average_ftd_amount_usd_for_same_day_registred_users = 25;
+		string average_ftd_amount_reporting_currency_for_same_day_registred_users = 26;
+		string average_ftd_amount_for_non_same_day_registred_users = 27;
+		string average_ftd_amount_usd_for_non_same_day_registred_users = 28;
+		string average_ftd_amount_reporting_currency_for_non_same_day_registred_users = 29;
 	}
 	repeated Detail daily_details = 1;
 	int32 page = 2;
@@ -541,42 +637,151 @@ message ListDepositVtgDetailsResponse {
 
 message ListWithdrawVtgDetailsRequest {
 	TimeRange time_range = 1;
-	repeated int64 retailer_operator_ids = 2;
-	repeated int64 group_operator_ids = 3;
-	repeated int64 operator_ids = 4;
-	repeated string currencies = 5;
-	int32 page = 6;
-	int32 page_size = 7;
+	api.common.OperatorContextFilters operator_context_filters = 2;
+	repeated string currencies = 3;
+	int32 page = 4;
+	int32 page_size = 5;
 }
 
 message ListWithdrawVtgDetailsResponse {
 	message Detail {
 		string date = 1;
 		string operator_name = 2;
-		string currency = 3;
-		string withdraw_amount = 4;
-		string withdraw_amount_usd = 5;
-		int32 withdraw_users = 6;
-		string ftw_amount = 7;
-		string ftw_amount_usd = 8;
-		int32 ftw_users = 9;
-		string same_day_ftw_amount = 10;
-		string same_day_ftw_amount_usd = 11;
-		int32 same_day_ftw_users = 12;
-		string repeated_withdraw_amount = 13;
-		string repeated_withdraw_amount_usd = 14;
-		int32 repeated_withdraw_users = 15;
-		int32 same_day_ftw = 16;
-		int32 non_same_day_ftw = 17;
-		string average_ftw_amount_for_same_day_registred_users = 18;
-		string average_ftw_amount_usd_for_same_day_registred_users = 19;
-		string average_ftw_amount_for_non_same_day_registred_users = 20;
-		string average_ftw_amount_usd_for_non_same_day_registred_users = 21;
-		string deposit_minus_withdraw_amount = 22;
-		string deposit_minus_withdraw_amount_usd = 23;
+		string company_operator_name = 3;
+		string retailer_operator_name = 4;
+		string system_operator_name = 5;
+		string currency = 6;
+		string withdraw_amount = 7;
+		string withdraw_amount_usd = 8;
+		string withdraw_amount_reporting_currency = 9;
+		int32 withdraw_users = 10;
+		string ftw_amount = 11;
+		string ftw_amount_usd = 12;
+		string ftw_amount_reporting_currency = 13;
+		int32 ftw_users = 14;
+		string same_day_ftw_amount = 15;
+		string same_day_ftw_amount_usd = 16;
+		string same_day_ftw_amount_reporting_currency = 17;
+		int32 same_day_ftw_users = 18;
+		int32 non_same_day_ftw_users = 19;
+		string repeated_withdraw_amount = 20;
+		string repeated_withdraw_amount_usd = 21;
+		string repeated_withdraw_amount_reporting_currency = 22;
+		int32 repeated_withdraw_users = 23;
+		string average_ftw_amount_for_same_day_registred_users = 24;
+		string average_ftw_amount_usd_for_same_day_registred_users = 25;
+		string average_ftw_amount_reporting_currency_for_same_day_registred_users = 26;
+		string average_ftw_amount_for_non_same_day_registred_users = 27;
+		string average_ftw_amount_usd_for_non_same_day_registred_users = 28;
+		string average_ftw_amount_reporting_currency_for_non_same_day_registred_users = 29;
+		string deposit_minus_withdraw_amount = 30;
+		string deposit_minus_withdraw_amount_usd = 31;
+		string deposit_minus_withdraw_amount_reporting_currency = 32;
 	}
 	repeated Detail daily_details = 1;
 	int32 page = 2;
 	int32 page_size = 3;
 	int32 total = 4;
+}
+
+message ListSportEventsRequest {
+	optional string start_time = 1;
+	optional string end_time = 2;
+	optional int32 page = 3;
+	optional int32 page_size = 4;
+	optional string event_name = 5; // Event name filter
+	optional string venue = 6; // Venue filter
+	optional string tournament = 7; // Tournament filter
+}
+
+message ListSportEventsResponse {
+	message SportEvent {
+		// Basic information
+		string event_id = 1; // e.g., "EV2025090901"
+		string event_name = 2; // e.g., "Premier League-Manchester United vs Chelsea Old Trafford | Premier League 2025/26"
+		string venue = 3; // Venue name
+		string tournament = 4; // Tournament name
+		
+		// Timing information (all in SAST timezone)
+		int64 carded_time = 5; // Carded Time
+		int64 first_bet_time = 6; // First Bet Time
+		int64 last_bet_time = 7; // Last Bet Time
+		int64 no_more_bets_time = 8; // No More Bets Time
+		int64 result_processing_time = 9; // Result Processing Time
+		int64 revised_official_carded_time = 10; // Revised Official Carded Time or null
+		string status = 11;
+	}
+	
+	repeated SportEvent events = 1;
+	
+	// Summary information
+	int32 total_count = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+	int32 total_pages = 5;
+}
+
+message CustomerRecordReportDetailRequest {
+	optional int64 user_id = 1;
+	optional int64 payment_transaction_id = 2;
+	optional int64 game_transaction_id = 3;
+	optional int64 game_bet_id = 4;
+}
+
+message CustomerRecordReportDetailResponse{
+	message UserDetail {
+		int64 user_id = 1;
+		string name = 2;
+		string phone = 3;
+		string id_type = 4;
+		string id_number = 5;
+		string address = 6;
+	}
+	message PaymentTransaction {
+		int64 payment_transaction_id = 1;
+		string psp_transaction_id = 2;
+		google.protobuf.Timestamp arrival_time = 3;
+		string payment_service_provider = 4;
+		string method_of_payment = 5;
+		string payment_channel = 6;
+		string currency = 7;
+		string amount = 8;
+		string processing_fee = 9;
+	}
+	message GameTransaction {
+		int64 game_transaction_id = 1; //id
+		string provider_transaction_id = 2;//provider_bet_id 
+		google.protobuf.Timestamp settlement_time = 3;//settle_time
+		// string venue_Tournament = 4;
+		string wager_type = 4;//wager_type
+		string bet_currency = 5;//currency
+		string bet_amount = 6;//bet_amount
+		// string payout_currency = 8; //
+		string payout_amount = 7; //win_amount
+		// string payout_settlement_currency = 9; 
+		string bet_settlement_currency = 8; //settlement_currency
+		string bet_settlement_amount = 9;// settlement_bet_amount
+		string valid_bet_amount = 10;//settlement_win_amount
+		string odds = 11;
+		string win_multiplier = 12;
+		string payout_settlement_amount = 13;
+	}
+	message EventSettlementInformation {
+		message MatchResults {
+			string name = 1;
+			string status = 2;
+			string selection = 3;
+			string result = 4;
+			google.protobuf.Timestamp event_start_time = 5;
+			string venue_tournament = 6;
+			string settlement_details = 7;
+		}
+		repeated MatchResults match_results = 1;
+	}
+
+	optional UserDetail user_detail = 1;
+	optional PaymentTransaction payment_transaction = 2;
+	optional GameTransaction game_transaction = 3;
+	optional EventSettlementInformation event_settlement_information = 4;
+	
 }

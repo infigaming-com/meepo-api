@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package api.user.service.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/user/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.user.service.v1";
+
+service UserFileStore {
+  rpc UploadKycFile(UploadKycRequest) returns (UploadKycResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/kyc/filestore/upload"
+			body: "*"
+		};
+	}
+}
+
+message UploadKycRequest {
+	bytes data = 1;
+	string content_type = 2;
+	string file_path = 3;
+	string id_type = 4;
+}
+
+message UploadKycResponse {
+  string file_url = 1;
+}

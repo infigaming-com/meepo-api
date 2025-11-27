@@ -19,15 +19,25 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationBackofficeFileStoreUploadAffiliateRegistrationPhoto = "/api.backoffice.service.v1.BackofficeFileStore/UploadAffiliateRegistrationPhoto"
 const OperationBackofficeFileStoreUploadOperatorStaticFile = "/api.backoffice.service.v1.BackofficeFileStore/UploadOperatorStaticFile"
+const OperationBackofficeFileStoreUploadRegisterLoginBlacklist = "/api.backoffice.service.v1.BackofficeFileStore/UploadRegisterLoginBlacklist"
+const OperationBackofficeFileStoreUploadVipLevelImage = "/api.backoffice.service.v1.BackofficeFileStore/UploadVipLevelImage"
 
 type BackofficeFileStoreHTTPServer interface {
+	// UploadAffiliateRegistrationPhoto Affiliate File Store
+	UploadAffiliateRegistrationPhoto(context.Context, *UploadAffiliateRegistrationPhotoRequest) (*UploadAffiliateRegistrationPhotoResponse, error)
 	UploadOperatorStaticFile(context.Context, *UploadOperatorStaticFileRequest) (*UploadOperatorStaticFileResponse, error)
+	UploadRegisterLoginBlacklist(context.Context, *UploadRegisterLoginBlacklistRequest) (*UploadRegisterLoginBlacklistResponse, error)
+	UploadVipLevelImage(context.Context, *UploadVipLevelImageRequest) (*UploadVipLevelImageResponse, error)
 }
 
 func RegisterBackofficeFileStoreHTTPServer(s *http.Server, srv BackofficeFileStoreHTTPServer) {
 	r := s.Route("/")
 	r.POST("/v1/backoffice/filestore/operator-static-files/upload", _BackofficeFileStore_UploadOperatorStaticFile0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/filestore/register-login-blacklist/upload", _BackofficeFileStore_UploadRegisterLoginBlacklist0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/filestore/vip-level-images/upload", _BackofficeFileStore_UploadVipLevelImage0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/filestore/affiliate/registration-photo/upload", _BackofficeFileStore_UploadAffiliateRegistrationPhoto0_HTTP_Handler(srv))
 }
 
 func _BackofficeFileStore_UploadOperatorStaticFile0_HTTP_Handler(srv BackofficeFileStoreHTTPServer) func(ctx http.Context) error {
@@ -52,8 +62,77 @@ func _BackofficeFileStore_UploadOperatorStaticFile0_HTTP_Handler(srv BackofficeF
 	}
 }
 
+func _BackofficeFileStore_UploadRegisterLoginBlacklist0_HTTP_Handler(srv BackofficeFileStoreHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UploadRegisterLoginBlacklistRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeFileStoreUploadRegisterLoginBlacklist)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UploadRegisterLoginBlacklist(ctx, req.(*UploadRegisterLoginBlacklistRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UploadRegisterLoginBlacklistResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeFileStore_UploadVipLevelImage0_HTTP_Handler(srv BackofficeFileStoreHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UploadVipLevelImageRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeFileStoreUploadVipLevelImage)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UploadVipLevelImage(ctx, req.(*UploadVipLevelImageRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UploadVipLevelImageResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeFileStore_UploadAffiliateRegistrationPhoto0_HTTP_Handler(srv BackofficeFileStoreHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UploadAffiliateRegistrationPhotoRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeFileStoreUploadAffiliateRegistrationPhoto)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UploadAffiliateRegistrationPhoto(ctx, req.(*UploadAffiliateRegistrationPhotoRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UploadAffiliateRegistrationPhotoResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeFileStoreHTTPClient interface {
+	UploadAffiliateRegistrationPhoto(ctx context.Context, req *UploadAffiliateRegistrationPhotoRequest, opts ...http.CallOption) (rsp *UploadAffiliateRegistrationPhotoResponse, err error)
 	UploadOperatorStaticFile(ctx context.Context, req *UploadOperatorStaticFileRequest, opts ...http.CallOption) (rsp *UploadOperatorStaticFileResponse, err error)
+	UploadRegisterLoginBlacklist(ctx context.Context, req *UploadRegisterLoginBlacklistRequest, opts ...http.CallOption) (rsp *UploadRegisterLoginBlacklistResponse, err error)
+	UploadVipLevelImage(ctx context.Context, req *UploadVipLevelImageRequest, opts ...http.CallOption) (rsp *UploadVipLevelImageResponse, err error)
 }
 
 type BackofficeFileStoreHTTPClientImpl struct {
@@ -64,11 +143,50 @@ func NewBackofficeFileStoreHTTPClient(client *http.Client) BackofficeFileStoreHT
 	return &BackofficeFileStoreHTTPClientImpl{client}
 }
 
+func (c *BackofficeFileStoreHTTPClientImpl) UploadAffiliateRegistrationPhoto(ctx context.Context, in *UploadAffiliateRegistrationPhotoRequest, opts ...http.CallOption) (*UploadAffiliateRegistrationPhotoResponse, error) {
+	var out UploadAffiliateRegistrationPhotoResponse
+	pattern := "/v1/backoffice/filestore/affiliate/registration-photo/upload"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeFileStoreUploadAffiliateRegistrationPhoto))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *BackofficeFileStoreHTTPClientImpl) UploadOperatorStaticFile(ctx context.Context, in *UploadOperatorStaticFileRequest, opts ...http.CallOption) (*UploadOperatorStaticFileResponse, error) {
 	var out UploadOperatorStaticFileResponse
 	pattern := "/v1/backoffice/filestore/operator-static-files/upload"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeFileStoreUploadOperatorStaticFile))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeFileStoreHTTPClientImpl) UploadRegisterLoginBlacklist(ctx context.Context, in *UploadRegisterLoginBlacklistRequest, opts ...http.CallOption) (*UploadRegisterLoginBlacklistResponse, error) {
+	var out UploadRegisterLoginBlacklistResponse
+	pattern := "/v1/backoffice/filestore/register-login-blacklist/upload"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeFileStoreUploadRegisterLoginBlacklist))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeFileStoreHTTPClientImpl) UploadVipLevelImage(ctx context.Context, in *UploadVipLevelImageRequest, opts ...http.CallOption) (*UploadVipLevelImageResponse, error) {
+	var out UploadVipLevelImageResponse
+	pattern := "/v1/backoffice/filestore/vip-level-images/upload"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeFileStoreUploadVipLevelImage))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

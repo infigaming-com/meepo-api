@@ -13,8 +13,8 @@ const (
 
 	//Operator mode: individual, co-opearation, internal-co-opearation
 	OperatorModeIndividual           = "individual"
-	OperatorModeCoOpearation         = "co-opearation"
-	OperatorModeInternalCoOpearation = "internal-co-opearation"
+	OperatorModeCoOpearation         = "co-operation"
+	OperatorModeInternalCoOperation = "internal-co-operation"
 
 	// Operator status: pending, live, suspended, request_to_close, closed
 	OperatorStatusPending        = "pending"
@@ -22,6 +22,29 @@ const (
 	OperatorStatusSuspended      = "suspended"
 	OperatorStatusRequestToClose = "request_to_close"
 	OperatorStatusClosed         = "closed"
+	OperatorStatusMaintain       = "maintain"
+
+	// Operator Admin Role
+	CoOpearationOperatorAdminRoleId = 5
+	IndividualOperatorAdminRoleId = 4
+	CompanyOperatorAdminRoleId  = 3
+	RetailerOperatorAdminRoleId = 2
+	SystemOperatorAdminRoleId   = 1
+
+	// Operator Player Role
+	PlayerRoleId = 0
+
+	// Affiliate Role
+	AffiliateRoleId = -1
+
+	// Operator Deduction Order
+	OperatorDeductionOrderCashFirst  = "cash_first"  // Cash first, then bonus
+	OperatorDeductionOrderBonusFirst = "bonus_first" // Bonus first, then cash
+	OperatorDeductionOrderMixed      = "mixed"       // Mixed, cash and bonus are used by ratio
+
+	// Operator template name
+	OperatorTemplateNameMobileOnly    = "mobile-only"
+	OperatorTemplateNameMobileDesktop = "mobile-desktop"
 )
 
 // BuildOperatorHierarchy builds a complete operator hierarchy path based on operatorId and parentIds
@@ -81,7 +104,7 @@ func GetActualOperatorId(operatorList []int64) int64 {
 	}
 
 	// Find the last non-zero ID from the beginning
-	for i := 0; i < len(operatorList); i++ {
+	for i := range operatorList {
 		if operatorList[i] != 0 {
 			return operatorList[i]
 		}

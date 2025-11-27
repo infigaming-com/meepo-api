@@ -25,33 +25,39 @@ const (
 type ErrorReason int32
 
 const (
-	ErrorReason_UNSPECIFIED                               ErrorReason = 0
-	ErrorReason_CONVERT_STRUCT_TO_JSON_FAILED             ErrorReason = 70000
-	ErrorReason_CONVERT_JSON_TO_STRUCT_FAILED             ErrorReason = 70001
-	ErrorReason_GET_USER_INFO_FROM_CONTEXT_FAILED         ErrorReason = 70002
-	ErrorReason_GENERATE_TICKET_ID_FAILED                 ErrorReason = 70003
-	ErrorReason_ADD_TICKET_FAILED                         ErrorReason = 70004
-	ErrorReason_INVALID_REVIEW_ACTION                     ErrorReason = 70005
-	ErrorReason_INITIATE_WITHDRAW_FAILED                  ErrorReason = 70006
-	ErrorReason_GET_TICKET_FAILED                         ErrorReason = 70007
-	ErrorReason_UPDATE_TICKET_FAILED                      ErrorReason = 70008
-	ErrorReason_ADD_COMMENT_FAILED                        ErrorReason = 70009
-	ErrorReason_LIST_TICKETS_FAILED                       ErrorReason = 70010
-	ErrorReason_GET_COMMENTS_FAILED                       ErrorReason = 70011
-	ErrorReason_LOCK_TICKET_FAILED                        ErrorReason = 70012
-	ErrorReason_UNMARSHAL_PAYMENT_WITHDRAW_REQUEST_FAILED ErrorReason = 70013
-	ErrorReason_MARSHAL_PAYMENT_WITHDRAW_RESPONSE_FAILED  ErrorReason = 70014
-	ErrorReason_TICKET_ALREADY_REVIEWED                   ErrorReason = 70015
-	ErrorReason_FREEZE_BALANCE_FAILED                     ErrorReason = 70016
-	ErrorReason_ROLLBACK_FREEZE_FAILED                    ErrorReason = 70017
-	ErrorReason_GET_CURRENCIES_FAILED                     ErrorReason = 70018
-	ErrorReason_INVALID_TICKET_STATUS                     ErrorReason = 70019
-	ErrorReason_SETTLE_FREEZE_FAILED                      ErrorReason = 70020
-	ErrorReason_GENERATE_COMMENT_ID_FAILED                ErrorReason = 70021
-	ErrorReason_GET_USERS_FAILED                          ErrorReason = 70022
-	ErrorReason_USER_NOT_FOUND                            ErrorReason = 70023
-	ErrorReason_WITHDRAW_BANNED_ON_USER                   ErrorReason = 70024
-	ErrorReason_GET_PAYMENT_CHANNEL_FAILED                ErrorReason = 70025
+	ErrorReason_UNSPECIFIED                                 ErrorReason = 0
+	ErrorReason_CONVERT_STRUCT_TO_JSON_FAILED               ErrorReason = 70000
+	ErrorReason_CONVERT_JSON_TO_STRUCT_FAILED               ErrorReason = 70001
+	ErrorReason_GET_USER_INFO_FROM_CONTEXT_FAILED           ErrorReason = 70002
+	ErrorReason_GENERATE_TICKET_ID_FAILED                   ErrorReason = 70003
+	ErrorReason_ADD_TICKET_FAILED                           ErrorReason = 70004
+	ErrorReason_INVALID_REVIEW_ACTION                       ErrorReason = 70005
+	ErrorReason_INITIATE_WITHDRAW_FAILED                    ErrorReason = 70006
+	ErrorReason_GET_TICKET_FAILED                           ErrorReason = 70007
+	ErrorReason_UPDATE_TICKET_FAILED                        ErrorReason = 70008
+	ErrorReason_ADD_COMMENT_FAILED                          ErrorReason = 70009
+	ErrorReason_LIST_TICKETS_FAILED                         ErrorReason = 70010
+	ErrorReason_GET_COMMENTS_FAILED                         ErrorReason = 70011
+	ErrorReason_LOCK_TICKET_FAILED                          ErrorReason = 70012
+	ErrorReason_UNMARSHAL_PAYMENT_WITHDRAW_REQUEST_FAILED   ErrorReason = 70013
+	ErrorReason_MARSHAL_PAYMENT_WITHDRAW_RESPONSE_FAILED    ErrorReason = 70014
+	ErrorReason_TICKET_ALREADY_REVIEWED                     ErrorReason = 70015
+	ErrorReason_FREEZE_BALANCE_FAILED                       ErrorReason = 70016
+	ErrorReason_ROLLBACK_FREEZE_FAILED                      ErrorReason = 70017
+	ErrorReason_GET_CURRENCIES_FAILED                       ErrorReason = 70018
+	ErrorReason_INVALID_TICKET_STATUS                       ErrorReason = 70019
+	ErrorReason_SETTLE_FREEZE_FAILED                        ErrorReason = 70020
+	ErrorReason_GENERATE_COMMENT_ID_FAILED                  ErrorReason = 70021
+	ErrorReason_GET_USERS_FAILED                            ErrorReason = 70022
+	ErrorReason_USER_NOT_FOUND                              ErrorReason = 70023
+	ErrorReason_WITHDRAW_BANNED_ON_USER                     ErrorReason = 70024
+	ErrorReason_GET_PAYMENT_CHANNEL_FAILED                  ErrorReason = 70025
+	ErrorReason_OPERATOR_PERMISSION_DENIED                  ErrorReason = 70026
+	ErrorReason_GET_OPERATOR_NAME_FAILED                    ErrorReason = 70027
+	ErrorReason_GET_WALLET_TRANSACTION_FAILED               ErrorReason = 70028
+	ErrorReason_GET_RESPONSIBLE_GAMBLING_STATUS_FAILED      ErrorReason = 70029
+	ErrorReason_WITHDRAW_RESTRICTED_BY_RESPONSIBLE_GAMBLING ErrorReason = 70030
+	ErrorReason_WITHDRAW_RESTRICTED_BY_ACCOUNT_SETTINGS     ErrorReason = 70031
 )
 
 // Enum value maps for ErrorReason.
@@ -84,35 +90,47 @@ var (
 		70023: "USER_NOT_FOUND",
 		70024: "WITHDRAW_BANNED_ON_USER",
 		70025: "GET_PAYMENT_CHANNEL_FAILED",
+		70026: "OPERATOR_PERMISSION_DENIED",
+		70027: "GET_OPERATOR_NAME_FAILED",
+		70028: "GET_WALLET_TRANSACTION_FAILED",
+		70029: "GET_RESPONSIBLE_GAMBLING_STATUS_FAILED",
+		70030: "WITHDRAW_RESTRICTED_BY_RESPONSIBLE_GAMBLING",
+		70031: "WITHDRAW_RESTRICTED_BY_ACCOUNT_SETTINGS",
 	}
 	ErrorReason_value = map[string]int32{
-		"UNSPECIFIED":                               0,
-		"CONVERT_STRUCT_TO_JSON_FAILED":             70000,
-		"CONVERT_JSON_TO_STRUCT_FAILED":             70001,
-		"GET_USER_INFO_FROM_CONTEXT_FAILED":         70002,
-		"GENERATE_TICKET_ID_FAILED":                 70003,
-		"ADD_TICKET_FAILED":                         70004,
-		"INVALID_REVIEW_ACTION":                     70005,
-		"INITIATE_WITHDRAW_FAILED":                  70006,
-		"GET_TICKET_FAILED":                         70007,
-		"UPDATE_TICKET_FAILED":                      70008,
-		"ADD_COMMENT_FAILED":                        70009,
-		"LIST_TICKETS_FAILED":                       70010,
-		"GET_COMMENTS_FAILED":                       70011,
-		"LOCK_TICKET_FAILED":                        70012,
-		"UNMARSHAL_PAYMENT_WITHDRAW_REQUEST_FAILED": 70013,
-		"MARSHAL_PAYMENT_WITHDRAW_RESPONSE_FAILED":  70014,
-		"TICKET_ALREADY_REVIEWED":                   70015,
-		"FREEZE_BALANCE_FAILED":                     70016,
-		"ROLLBACK_FREEZE_FAILED":                    70017,
-		"GET_CURRENCIES_FAILED":                     70018,
-		"INVALID_TICKET_STATUS":                     70019,
-		"SETTLE_FREEZE_FAILED":                      70020,
-		"GENERATE_COMMENT_ID_FAILED":                70021,
-		"GET_USERS_FAILED":                          70022,
-		"USER_NOT_FOUND":                            70023,
-		"WITHDRAW_BANNED_ON_USER":                   70024,
-		"GET_PAYMENT_CHANNEL_FAILED":                70025,
+		"UNSPECIFIED":                                 0,
+		"CONVERT_STRUCT_TO_JSON_FAILED":               70000,
+		"CONVERT_JSON_TO_STRUCT_FAILED":               70001,
+		"GET_USER_INFO_FROM_CONTEXT_FAILED":           70002,
+		"GENERATE_TICKET_ID_FAILED":                   70003,
+		"ADD_TICKET_FAILED":                           70004,
+		"INVALID_REVIEW_ACTION":                       70005,
+		"INITIATE_WITHDRAW_FAILED":                    70006,
+		"GET_TICKET_FAILED":                           70007,
+		"UPDATE_TICKET_FAILED":                        70008,
+		"ADD_COMMENT_FAILED":                          70009,
+		"LIST_TICKETS_FAILED":                         70010,
+		"GET_COMMENTS_FAILED":                         70011,
+		"LOCK_TICKET_FAILED":                          70012,
+		"UNMARSHAL_PAYMENT_WITHDRAW_REQUEST_FAILED":   70013,
+		"MARSHAL_PAYMENT_WITHDRAW_RESPONSE_FAILED":    70014,
+		"TICKET_ALREADY_REVIEWED":                     70015,
+		"FREEZE_BALANCE_FAILED":                       70016,
+		"ROLLBACK_FREEZE_FAILED":                      70017,
+		"GET_CURRENCIES_FAILED":                       70018,
+		"INVALID_TICKET_STATUS":                       70019,
+		"SETTLE_FREEZE_FAILED":                        70020,
+		"GENERATE_COMMENT_ID_FAILED":                  70021,
+		"GET_USERS_FAILED":                            70022,
+		"USER_NOT_FOUND":                              70023,
+		"WITHDRAW_BANNED_ON_USER":                     70024,
+		"GET_PAYMENT_CHANNEL_FAILED":                  70025,
+		"OPERATOR_PERMISSION_DENIED":                  70026,
+		"GET_OPERATOR_NAME_FAILED":                    70027,
+		"GET_WALLET_TRANSACTION_FAILED":               70028,
+		"GET_RESPONSIBLE_GAMBLING_STATUS_FAILED":      70029,
+		"WITHDRAW_RESTRICTED_BY_RESPONSIBLE_GAMBLING": 70030,
+		"WITHDRAW_RESTRICTED_BY_ACCOUNT_SETTINGS":     70031,
 	}
 )
 
@@ -147,7 +165,7 @@ var File_review_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_review_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$review/service/v1/error_reason.proto\x12\x15api.review.service.v1\x1a\x13errors/errors.proto*\xcf\x06\n" +
+	"$review/service/v1/error_reason.proto\x12\x15api.review.service.v1\x1a\x13errors/errors.proto*\xc6\b\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1dCONVERT_STRUCT_TO_JSON_FAILED\x10\xf0\xa2\x04\x12#\n" +
@@ -175,7 +193,13 @@ const file_review_service_v1_error_reason_proto_rawDesc = "" +
 	"\x10GET_USERS_FAILED\x10\x86\xa3\x04\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\x87\xa3\x04\x12\x1d\n" +
 	"\x17WITHDRAW_BANNED_ON_USER\x10\x88\xa3\x04\x12 \n" +
-	"\x1aGET_PAYMENT_CHANNEL_FAILED\x10\x89\xa3\x04\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\x1aGET_PAYMENT_CHANNEL_FAILED\x10\x89\xa3\x04\x12 \n" +
+	"\x1aOPERATOR_PERMISSION_DENIED\x10\x8a\xa3\x04\x12\x1e\n" +
+	"\x18GET_OPERATOR_NAME_FAILED\x10\x8b\xa3\x04\x12#\n" +
+	"\x1dGET_WALLET_TRANSACTION_FAILED\x10\x8c\xa3\x04\x12,\n" +
+	"&GET_RESPONSIBLE_GAMBLING_STATUS_FAILED\x10\x8d\xa3\x04\x121\n" +
+	"+WITHDRAW_RESTRICTED_BY_RESPONSIBLE_GAMBLING\x10\x8e\xa3\x04\x12-\n" +
+	"'WITHDRAW_RESTRICTED_BY_ACCOUNT_SETTINGS\x10\x8f\xa3\x04\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.review.service.v1P\x01Z8github.com/infigaming-com/meepo-api/review/service/v1;v1b\x06proto3"
 
 var (

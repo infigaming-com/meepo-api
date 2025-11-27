@@ -9,15 +9,17 @@ import (
 	khttp "github.com/go-kratos/kratos/v2/transport/http"
 	mctx "github.com/infigaming-com/meepo-api/pkg/context"
 	user "github.com/infigaming-com/meepo-api/user/service/v1"
+	"github.com/jinzhu/copier"
 )
 
-// OperatorIdMiddleware is a middleware that extract Origin and
-// get the operatorId with Origin from redis
-func OperatorIdMiddleware(path []string, userClient user.UserClient) middleware.Middleware {
+// OperatorIdMiddlewareWithPathIncluder is a middleware that extract Origin and
+// get the operatorId with Origin from redis, using a custom function to determine
+// which paths should be processed
+func OperatorIdMiddlewareWithPathIncluder(pathIncluder func(string) bool, userClient user.UserClient) middleware.Middleware {
 	return func(handler middleware.Handler) middleware.Handler {
 		return func(ctx context.Context, req any) (reply any, err error) {
 			if r, ok := khttp.RequestFromServerContext(ctx); ok {
-				if len(path) > 0 && !slices.Contains(path, r.URL.Path) {
+				if !pathIncluder(r.URL.Path) {
 					return handler(ctx, req)
 				}
 				origin := r.Header.Get("Origin")
@@ -25,7 +27,7 @@ func OperatorIdMiddleware(path []string, userClient user.UserClient) middleware.
 					return nil, errors.New(400, "BAD_REQUEST", "missing origin header")
 				}
 				// temporary use map to store origin and operatorId
-				resp, err := userClient.GetOperatorIdsByOrigin(ctx, &user.GetOperatorIdsByOriginRequest{
+				resp, err := userClient.GetOperatorInfoByOrigin(ctx, &user.GetOperatorInfoByOriginRequest{
 					Origin: origin,
 				})
 				if err != nil {
@@ -38,8 +40,20 @@ func OperatorIdMiddleware(path []string, userClient user.UserClient) middleware.
 				operatorIds := mctx.OperatorIdsFromOperatorContext(resp.OperatorContext)
 				operatorIds.RealOperatorId, operatorIds.OperatorType = operatorIds.GetRealOperatorIdAndType()
 				ctx = mctx.WithOperatorIds(ctx, operatorIds)
+
+				operatorInfo := mctx.OperatorInfo{}
+				copier.Copy(&operatorInfo, resp.OperatorDetail)
+				ctx = mctx.WithOperatorInfo(ctx, operatorInfo)
 			}
 			return handler(ctx, req)
 		}
 	}
+}
+
+// OperatorIdMiddlewareWithExcludePaths is a middleware that extract Origin and
+// get the operatorId with Origin from redis, excluding specific paths from processing
+func OperatorIdMiddlewareWithExcludePaths(excludePaths []string, userClient user.UserClient) middleware.Middleware {
+	return OperatorIdMiddlewareWithPathIncluder(func(path string) bool {
+		return !slices.Contains(excludePaths, path)
+	}, userClient)
 }

@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package api.backoffice.service.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.backoffice.service.v1";
+
+service BackofficeCloudflare {
+  rpc PurgeCache(PurgeCloudflareCacheRequest) returns (PurgeCloudflareCacheResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/cloudflare/purge"
+      body: "*"
+    };
+  }
+}
+
+message PurgeCloudflareCacheRequest {
+  int64 operator_id = 1;
+  repeated string files = 2;
+}
+
+message PurgeCloudflareCacheResponse {
+  bool success = 1;
+  string message = 2;
+  string error = 3;
+}

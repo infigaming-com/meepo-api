@@ -1,0 +1,437 @@
+syntax = "proto3";
+
+package api.vip.service.v1;
+
+// import "google/api/annotations.proto";
+import "common/common.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/vip/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.vip.service.v1";
+
+service Vip {
+
+  rpc GetVipSetting(GetVipSettingRequest) returns (GetVipSettingResponse) {
+  }
+
+  rpc UpdateVipSetting(UpdateVipSettingRequest) returns (UpdateVipSettingResponse);
+
+  rpc ListVipLevelConfigTemplates(ListVipLevelConfigTemplatesRequest) returns (ListVipLevelConfigTemplatesResponse) {
+  }
+
+  rpc GetVipLevelConfigTemplate(GetVipLevelConfigTemplateRequest) returns (GetVipLevelConfigTemplateResponse) {
+  }
+
+  rpc CreateVipLevelConfigTemplate(CreateVipLevelConfigTemplateRequest) returns (CreateVipLevelConfigTemplateResponse);
+  rpc UpdateVipLevelConfigTemplate(UpdateVipLevelConfigTemplateRequest) returns (UpdateVipLevelConfigTemplateResponse);
+  rpc DeleteVipLevelConfigTemplate(DeleteVipLevelConfigTemplateRequest) returns (DeleteVipLevelConfigTemplateResponse);
+
+  rpc GetOperatorVipSettings(GetOperatorVipSettingsRequest) returns (GetOperatorVipSettingsResponse) {
+  }
+
+  rpc GetUserVipLevel(GetUserVipLevelRequest) returns (GetUserVipLevelResponse) {
+  }
+
+  rpc UpdateVipRewardSlider(UpdateVipRewardSliderRequest) returns (UpdateVipRewardSliderResponse) {
+  }
+
+  rpc GetClaimableVipRewards(GetClaimableVipRewardsRequest) returns (GetClaimableVipRewardsResponse) {
+  }
+
+  rpc ClaimVipReward(ClaimVipRewardRequest) returns (ClaimVipRewardResponse) {
+  }
+
+  rpc ConfirmClaimVipReward(ConfirmClaimVipRewardRequest) returns (ConfirmClaimVipRewardResponse) {
+  }
+
+  rpc RequestDailyLossback(RequestDailyLossbackRequest) returns (RequestDailyLossbackResponse) {
+  }
+
+  rpc GetDailyLossbackStatus(GetDailyLossbackStatusRequest) returns (GetDailyLossbackStatusResponse) {
+  }
+
+}
+
+enum VipDisplayRule {
+  VIP_DISPLAY_RULE_UNSPECIFIED = 0;
+  VIP_DISPLAY_RULE_CUMULATIVE = 1;  // cumulative
+  VIP_DISPLAY_RULE_CURRENT = 2;     // current
+}
+
+enum VipRewardKind {
+  VIP_REWARD_KIND_UNSPECIFIED = 0;
+  VIP_REWARD_KIND_UPGRADE_BASE = 1;        // upgrade_base
+  VIP_REWARD_KIND_UPGRADE_INCREMENTAL = 2; // upgrade_incremental
+  VIP_REWARD_KIND_RAKEBACK_INSTANT = 3;    // rakeback_instant
+  VIP_REWARD_KIND_RAKEBACK_DAILY = 4;      // rakeback_daily
+  VIP_REWARD_KIND_RAKEBACK_WEEKLY = 5;     // rakeback_weekly
+  VIP_REWARD_KIND_RAKEBACK_MONTHLY = 6;    // rakeback_monthly
+}
+
+enum VipPayoutType {
+  VIP_PAYOUT_TYPE_UNSPECIFIED = 0;
+  VIP_PAYOUT_TYPE_CASH = 1;   // cash
+  VIP_PAYOUT_TYPE_BONUS = 2;  // bonus
+}
+
+enum VipResetPolicy {
+  VIP_RESET_POLICY_UNSPECIFIED = 0;
+  VIP_RESET_POLICY_NONE = 1;              // none
+  VIP_RESET_POLICY_RESET_ON_UPGRADE = 2;  // reset_on_upgrade
+  VIP_RESET_POLICY_RESET_NEXT_WEEK = 3;   // reset_next_week
+  VIP_RESET_POLICY_RESET_NEXT_MONTH = 4;  // reset_next_month
+}
+
+enum VipRewardStatus {
+  VIP_REWARD_STATUS_UNSPECIFIED = 0;
+  VIP_REWARD_STATUS_PENDING = 1;   // pending
+  VIP_REWARD_STATUS_ISSUED = 2;    // issued
+  VIP_REWARD_STATUS_EXPIRED = 3;   // expired
+  VIP_REWARD_STATUS_REVOKED = 4;   // revoked
+}
+
+enum VipRewardExpiryType {
+  VIP_REWARD_EXPIRY_TYPE_DAYS_HOURS = 0;            // days_hours
+  VIP_REWARD_EXPIRY_TYPE_NEVER = 1;                 // never
+  VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_UPGRADING = 2; // reset_when_upgrading
+  VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_NEXT_WEEK = 3; // reset_when_next_week
+  VIP_REWARD_EXPIRY_TYPE_RESET_WHEN_NEXT_MONTH = 4;// reset_when_next_month
+}
+
+message VipConfig {
+  int64 id = 1;
+  int64 system_operator_id = 2;
+  int64 retailer_operator_id = 3;
+  int64 company_operator_id = 4;
+  int64 operator_id = 5;
+  bool enabled = 6;
+}
+
+message VipSetting {
+  int64 id = 1;
+  int64 system_operator_id = 2;
+  int64 retailer_operator_id = 3;
+  int64 company_operator_id = 4;
+  int64 operator_id = 5;
+  
+  string base_currency = 6;
+  bool rewards_slider = 7;
+  bool follow_parent = 8;
+  bool enabled = 9;
+  
+  VipPayoutType upgrade_payout_type = 10;
+  VipPayoutType rakeback_instant_payout_type = 11;
+  VipPayoutType rakeback_daily_payout_type = 12;
+  VipPayoutType weekly_reward_payout_type = 13;
+  VipPayoutType monthly_reward_payout_type = 14;
+  VipPayoutType daily_lossback_payout_type = 15;
+  
+  string deposit_xp_rate = 16;
+  string wagering_xp_rate = 17;
+  string max_house_edge_limit_percent = 18;
+  string standard_xp_multiplier = 19;
+  
+  string timezone = 20;
+  string daily_issue_at = 21;
+  int32 weekly_issue_dow = 22;
+  string weekly_issue_at = 23;
+  int32 monthly_issue_dom = 24;
+  string monthly_issue_at = 25;
+  
+  int64 created_at = 26;
+  int64 updated_at = 27;
+  
+  // 1. Base Upgrade Reward Expiry
+  VipRewardExpiryType upgrade_base_expiry_type = 28;
+  int32 upgrade_base_expiry_days = 29;
+  int32 upgrade_base_expiry_hours = 30;
+  
+  // 2. Incremental Upgrade Reward Expiry
+  VipRewardExpiryType upgrade_incremental_expiry_type = 31;
+  int32 upgrade_incremental_expiry_days = 32;
+  int32 upgrade_incremental_expiry_hours = 33;
+  
+  // 3. Rakeback (Instant) Expiry
+  VipRewardExpiryType rakeback_instant_expiry_type = 34;
+  int32 rakeback_instant_expiry_days = 35;
+  int32 rakeback_instant_expiry_hours = 36;
+  
+  // 4. Rakeback (Daily) Expiry
+  VipRewardExpiryType rakeback_daily_expiry_type = 37;
+  int32 rakeback_daily_expiry_days = 38;
+  int32 rakeback_daily_expiry_hours = 39;
+  
+  // 5. Weekly Reward Expiry
+  VipRewardExpiryType weekly_reward_expiry_type = 40;
+  int32 weekly_reward_expiry_days = 41;
+  int32 weekly_reward_expiry_hours = 42;
+  
+  // 6. Monthly Reward Expiry
+  VipRewardExpiryType monthly_reward_expiry_type = 43;
+  int32 monthly_reward_expiry_days = 44;
+  int32 monthly_reward_expiry_hours = 45;
+}
+
+message GetVipSettingRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  string currency = 2;
+}
+
+message GetVipSettingResponse {
+  VipSetting default_setting = 1;
+  VipSetting custom_setting = 2;
+  bool follow_parent = 3;
+  api.common.OperatorContext custom_operator_context = 4;
+  api.common.OperatorContext inherited_operator_context = 5;
+  string inherited_from_operator_name = 6;
+  repeated VipLevelConfigTemplate default_templates = 7;
+  repeated VipLevelConfigTemplate custom_templates = 8;
+}
+
+message UpdateVipSettingRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  VipSetting setting = 2;
+}
+
+message UpdateVipSettingResponse {
+}
+
+message VipLevelConfigTemplate {
+  int64 id = 1;
+  int64 system_operator_id = 2;
+  int64 retailer_operator_id = 3;
+  int64 company_operator_id = 4;
+  int64 operator_id = 5;
+  
+  string name = 6;
+  int64 start_level = 7;
+  int64 end_level = 8;
+  
+  // 升级设置
+  string base_level_upgrade_xp = 9;
+  string incr_level_upgrade_xp = 10;
+  string base_upgrade_reward_amt = 11;
+  string incr_upgrade_reward_amt = 12;
+  string upgrade_reward_wagering_x = 13;
+  
+  // 等级维护要求
+  string weekly_xp_loss = 14;
+  string monthly_xp_loss = 15;
+  
+  // 即时返水
+  bool rakeback_instant_enabled = 16;
+  string rakeback_instant_rate = 17;
+  string rakeback_instant_req = 18;
+  
+  // 每日返水
+  bool rakeback_daily_enabled = 19;
+  string rakeback_daily_rate = 20;
+  string rakeback_daily_req = 21;
+  
+  // 每周奖励
+  bool weekly_reward_enabled = 22;
+  string weekly_fixed_reward_amt = 23;
+  string weekly_turnover_rate = 24;
+  string weekly_net_loss_rate = 25;
+  string weekly_adjust_range_pct = 26;
+  string weekly_active_days_reward = 27;
+  string weekly_wagering_req = 28;
+
+  // 每月奖励
+  bool monthly_reward_enabled = 29;
+  string monthly_fixed_reward_amt = 30;
+  string monthly_turnover_rate = 31;
+  string monthly_net_loss_rate = 32;
+  string monthly_adjust_range_pct = 33;
+  string monthly_active_days_reward = 34;
+  string monthly_wagering_req = 35;
+  
+  int64 created_at = 36;
+  int64 updated_at = 37;
+
+  string image_url = 38;
+  bool xp_loss_enabled = 39;
+
+  // Daily Lossback
+  bool daily_lossback_enabled = 40;
+  int32 daily_lossback_application_limit = 41;
+  string daily_lossback_balance_threshold = 42;
+  string daily_lossback_min_deposit_threshold = 43;
+  string daily_lossback_wagering_req = 44;
+  string daily_lossback_max_withdraw_multiple = 45;
+  repeated DailyLossbackRate daily_lossback_rates = 46;
+}
+
+message DailyLossbackRate {
+  string game_type = 1;
+  string rate_pct = 2;
+}
+
+message ListVipLevelConfigTemplatesRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 setting_id = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+}
+
+message ListVipLevelConfigTemplatesResponse {
+  repeated VipLevelConfigTemplate templates = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+}
+
+message GetVipLevelConfigTemplateRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 template_id = 2;
+}
+
+message GetVipLevelConfigTemplateResponse {
+  VipLevelConfigTemplate template = 1;
+}
+
+message CreateVipLevelConfigTemplateRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  VipLevelConfigTemplate template = 2;
+  int64 setting_id = 3;
+}
+
+message CreateVipLevelConfigTemplateResponse {
+  VipLevelConfigTemplate template = 1;
+}
+
+message UpdateVipLevelConfigTemplateRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  VipLevelConfigTemplate template = 2;
+}
+
+message UpdateVipLevelConfigTemplateResponse {
+}
+
+message DeleteVipLevelConfigTemplateRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 template_id = 2;
+}
+
+message DeleteVipLevelConfigTemplateResponse {
+}
+
+message VipMember {
+  int64 id = 1;
+  int64 system_operator_id = 2;
+  int64 retailer_operator_id = 3;
+  int64 company_operator_id = 4;
+  int64 operator_id = 5;
+  int64 user_id = 6;
+  int64 current_level_id = 7;
+  string current_xp = 8;
+  string total_xp = 9;
+  int64 last_level_up_at = 10;
+  int64 last_instant_upgrade_at = 11;
+  int32 weekly_slider = 12;
+  int32 monthly_slider = 13;
+  int64 next_level_id = 14;
+}
+
+message GetUserVipLevelRequest {
+  api.common.OperatorContext operator_context = 1;
+  int64 user_id = 2;
+}
+
+message GetUserVipLevelResponse {
+  VipMember vip_member = 1;
+}
+
+message UpdateVipRewardSliderRequest {
+  int64 rackback = 1;
+  int64 lossback = 2;
+  api.common.OperatorContext operator_context = 3;
+  int64 user_id = 4;
+  string type = 5; // weekly, monthly
+  string currency = 6;
+}
+
+message UpdateVipRewardSliderResponse {
+}
+
+message GetClaimableVipRewardsRequest {
+  int64 user_id = 1;
+  api.common.OperatorContext operator_context = 2;
+  string currency = 3;
+}
+
+message GetClaimableVipRewardsResponse {
+  repeated ClaimableVipReward claimable_rewards = 1;
+  message ClaimableVipReward {
+    VipRewardKind reward_kind = 1;
+    bool claimable = 2;
+    int64 claimable_at = 3;
+  }
+}
+
+message ClaimVipRewardRequest {
+  VipRewardKind reward_kind = 1;
+  string currency = 2;
+  int64 user_id = 3;
+  api.common.OperatorContext operator_context = 4;
+}
+
+message ClaimVipRewardResponse {
+  string claimable_amount = 1;
+  string claimable_amount_currency = 2;
+  int64 reward_id = 3;
+}
+
+message GetOperatorVipSettingsRequest {
+  api.common.OperatorContext operator_context = 1;
+  string currency = 2;
+}
+
+message GetOperatorVipSettingsResponse {
+  VipSetting setting = 1;
+  repeated VipLevelConfigTemplate vip_level_config_templates = 2;
+}
+
+message ConfirmClaimVipRewardRequest {
+  int64 user_id = 1;
+  api.common.OperatorContext operator_context = 2;
+  string claim_currency = 3;
+  int64 reward_id = 4;
+  VipRewardKind reward_kind = 5;
+}
+
+message ConfirmClaimVipRewardResponse {
+}
+
+message RequestDailyLossbackRequest {
+  int64 user_id = 1;
+  api.common.OperatorContext operator_context = 2;
+  string currency = 3;
+}
+
+message RequestDailyLossbackResponse {
+}
+
+message DailyLossbackStatus {
+  bool eligible = 1;
+  string requested_times = 2;
+  string total_allowed_times = 3;
+  bool deposit_met = 4;
+  bool single_deposit_met = 5;
+  bool wallet_balance_met = 6;
+  bool time_window_met = 7;
+  bool no_unsettled_bets = 8;
+  string time_window_start_hour = 9;
+  string time_window_end_hour = 10;
+  string time_zone = 11;
+}
+
+message GetDailyLossbackStatusRequest {
+  int64 user_id = 1;
+  api.common.OperatorContext operator_context = 2;
+  string currency = 3;
+}
+
+message GetDailyLossbackStatusResponse {
+  DailyLossbackStatus status = 1;
+}

@@ -5,6 +5,7 @@ package api.user.service.v1;
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "common/common.proto";
+import "vip/service/v1/vip.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/user/service/v1;v1";
 option java_multiple_files = true;
@@ -137,14 +138,47 @@ service User {
 			body: "*"
 		};
 	}
+
+	// Send password reset verification code to email
+	rpc SendPasswordResetCode(SendPasswordResetCodeRequest) returns (SendPasswordResetCodeResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/auth/password/reset-code/send"
+			body: "*"
+		};
+	}
+
+	// Reset password using verification code
+	rpc ResetPasswordWithCode(ResetPasswordWithCodeRequest) returns (ResetPasswordWithCodeResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/auth/password/reset"
+			body: "*"
+		};
+	}
 	
-	rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
+	rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
+    option (google.api.http) = {
+      post: "/v1/user/update"
+      body: "*"
+    };
+	}
+
+	rpc UpdateUserIdentity(UpdateUserIdentityRequest) returns (UpdateUserIdentityResponse) {
+    option (google.api.http) = {
+      post: "/v1/user/identity/update"
+      body: "*"
+    };
+	}
 
 	rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {}
 
 	rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
 
-	rpc VerifyEmail(VerifyEmailRequest) returns (VerifyEmailResponse) {}
+	rpc VerifyEmail(VerifyEmailRequest) returns (VerifyEmailResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/email/verify/get"
+			body: "*"
+		};
+	}
 	
 	rpc AddComment(AddCommentRequest) returns (AddCommentResponse) {}
 
@@ -169,6 +203,8 @@ service User {
 	rpc GetOperatorIdByOrigin(GetOperatorIdByOriginRequest) returns (GetOperatorIdByOriginResponse) {}
 
 	rpc GetOperatorIdsByOrigin(GetOperatorIdsByOriginRequest) returns (GetOperatorIdsByOriginResponse) {}
+
+	rpc GetOperatorInfoByOrigin(GetOperatorInfoByOriginRequest) returns (GetOperatorInfoByOriginResponse) {}
 
 	rpc GetOperator(GetOperatorRequest) returns (GetOperatorResponse) {
 	}
@@ -228,6 +264,137 @@ service User {
 	// UpdateOperatorStatus updates the status of an operator
 	rpc UpdateOperatorStatus(UpdateOperatorStatusRequest) returns (UpdateOperatorStatusResponse) {
 	}
+
+	// ListAllUsers returns a list of all users which belong to the operator context
+	rpc ListAllUsers(ListAllUsersRequest) returns (ListAllUsersResponse) {
+	}
+
+	// ListOperatorsByAdminEmail returns a list of (retailer, company, bottom) operators by admin email based on the operator context
+	rpc ListOperatorsByAdminEmail(ListOperatorsByAdminEmailRequest) returns (ListOperatorsByAdminEmailResponse) {
+	}
+
+	// ListOperatorDetails returns a list of operator details
+	rpc ListOperatorDetails(ListOperatorDetailsRequest) returns (ListOperatorDetailsResponse) {
+	}
+
+	// GetOperatorDetailsByUserId returns the operator details which the user belongs to
+	rpc GetOperatorDetailsByUserId(GetOperatorDetailsByUserIdRequest) returns (GetOperatorDetailsByUserIdResponse) {
+	}
+
+	rpc GetOperatorAccountSettings(GetOperatorAccountSettingsRequest) returns (GetOperatorAccountSettingsResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/operator/account-settings/get"
+			body: "*"
+		};
+	}
+
+	rpc UpdateOperatorAccountSettings(UpdateOperatorAccountSettingsRequest) returns (UpdateOperatorAccountSettingsResponse) {
+	}
+
+	rpc GetUserAccountSettingsStatus(GetUserAccountSettingsStatusRequest) returns (GetUserAccountSettingsStatusResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/account-settings/status/get"
+			body: "*"
+		};
+	}
+
+	rpc AddResponsibleGamblingConfig(AddResponsibleGamblingConfigRequest) returns (AddResponsibleGamblingConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/responsible-gambling/config/add"
+			body: "*"
+		};
+	}
+
+	rpc DeleteResponsibleGamblingConfig(DeleteResponsibleGamblingConfigRequest) returns (DeleteResponsibleGamblingConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/responsible-gambling/config/delete"
+			body: "*"
+		};
+	}
+
+	rpc GetResponsibleGamblingConfig(GetResponsibleGamblingConfigRequest) returns (GetResponsibleGamblingConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/responsible-gambling/config/get"
+			body: "*"
+		};
+	}
+	
+	rpc UserIdentityAudit(UserIdentityAuditRequest) returns (UserIdentityAuditResponse) { }
+
+	rpc UserIdentityList(UserIdentityListRequest) returns (UserIdentityListResponse) { }
+
+	rpc AddRegisterLoginBlacklist(AddRegisterLoginBlacklistRequest) returns (AddRegisterLoginBlacklistResponse) {}
+
+	rpc DeleteRegisterLoginBlacklist(DeleteRegisterLoginBlacklistRequest) returns (DeleteRegisterLoginBlacklistResponse) {}
+
+	rpc ListRegisterLoginBlacklist(ListRegisterLoginBlacklistRequest) returns (ListRegisterLoginBlacklistResponse) {}
+
+	rpc SetOperatorRegisterLimitConfig(SetOperatorRegisterLimitConfigRequest) returns (SetOperatorRegisterLimitConfigResponse) {}
+
+	rpc GetOperatorRegisterLimitConfig(GetOperatorRegisterLimitConfigRequest) returns (GetOperatorRegisterLimitConfigResponse) {}
+
+	rpc CloseAccount(CloseAccountRequest) returns (CloseAccountResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/account/update"
+			body: "*"
+		};
+	}
+
+	rpc GetOperatorVipSettings(GetOperatorVipSettingsRequest) returns (api.vip.service.v1.GetOperatorVipSettingsResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/vip/operator/settings/get"
+			body: "*"
+		};
+	}
+
+	rpc GetUserVipLevel(GetUserVipLevelRequest) returns (api.vip.service.v1.GetUserVipLevelResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/vip/level/get"
+			body: "*"
+		};
+	}
+
+	rpc UpdateVipRewardSlider(UpdateVipRewardSliderRequest) returns (api.vip.service.v1.UpdateVipRewardSliderResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/vip/reward/slider/update"
+			body: "*"
+		};
+	}
+
+	rpc GetClaimableVipRewards(GetClaimableVipRewardsRequest) returns (api.vip.service.v1.GetClaimableVipRewardsResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/vip/reward/claimable/get"
+			body: "*"
+		};
+	}
+
+	rpc ClaimVipReward(ClaimVipRewardRequest) returns (api.vip.service.v1.ClaimVipRewardResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/vip/reward/claim"
+			body: "*"
+		};
+	}
+
+	rpc ConfirmClaimVipReward(ConfirmClaimVipRewardRequest) returns (api.vip.service.v1.ConfirmClaimVipRewardResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/vip/reward/claim/confirm"
+			body: "*"
+		};
+	}
+
+	rpc RequestDailyLossback(RequestDailyLossbackRequest) returns (api.vip.service.v1.RequestDailyLossbackResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/vip/daily-lossback/request"
+			body: "*"
+		};
+	}
+
+	rpc GetDailyLossbackStatus(GetDailyLossbackStatusRequest) returns (api.vip.service.v1.GetDailyLossbackStatusResponse) {
+		option (google.api.http) = {
+			post: "/v1/user/vip/daily-lossback/status/get"
+			body: "*"
+		};
+	}
 }
 
 // UserInfo contains basic user information.
@@ -264,6 +431,20 @@ message UserInfo {
 	bool ban_withdraw = 15;
 	// role id
 	int64 role_id = 16;
+	// registered mobile
+	string registered_mobile = 17;
+	// registered email
+	string registered_email = 18;
+	// kyc_level
+	int32 kyc_level = 19;
+	// address
+	string address = 20;
+	// uesr identities
+	repeated UserIdentity user_identity = 21;
+	// user date of birth
+	google.protobuf.Timestamp dob = 22;
+	// user country
+	string country = 23;
 }
 
 // AuthType defines the type of authentication method.
@@ -310,6 +491,14 @@ message RegisterRequest {
 	string auth_id = 2;
 	// The password for the new account.
 	string password = 3;
+		// Date of birth of user
+	optional google.protobuf.Timestamp dob = 4;
+	// User ID info
+	optional string id_number = 5;
+	// User ID Type
+	optional string id_type = 6;
+	// campaign url
+	optional string registration_url = 7;
 }
 
 // LoginRequest contains the credentials for user login.
@@ -343,8 +532,8 @@ message LoginWithInfoRequest {
 	string auth_id = 2;
 	// The password for the account.
 	string password = 3;
-	// The operator ID to login with.
-	int64 operator_id = 4;
+	// The operator context to login with.
+	api.common.OperatorContext operator_context = 4;
 	// Http request info.
 	HttpRequestInfo http_request_info = 5;
 }
@@ -451,6 +640,8 @@ message SetOperatorTagsConfigRequest {
 	int64 operator_id = 1;
 	// Whether to follow parent operator's tags.
 	bool follow_parent = 2;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 3;
 }
 
 // SetOperatorTagsConfigResponse is an empty message indicating successful tag configuration.
@@ -462,6 +653,8 @@ message SetOperatorTagsRequest {
 	int64 operator_id = 1;
 	// The tag to add to the operator.
 	repeated string tags = 2;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 3;
 }
 
 // SetOperatorTagsResponse is an empty message indicating successful tag addition.
@@ -471,6 +664,8 @@ message SetOperatorTagsResponse {}
 message GetOperatorTagsConfigRequest {
 	// The ID of the operator to get tag configuration for.
 	int64 operator_id = 1;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 2;
 }
 
 // GetOperatorTagsConfigResponse contains the tag configuration settings, now only follow_parent flag.
@@ -483,6 +678,8 @@ message GetOperatorTagsConfigResponse {
 message GetOperatorTagsRequest {
 	// The ID of the operator to get tags for.
 	int64 operator_id = 1;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 2;
 }	
 
 // GetOperatorTagsResponse contains the list of tags associated with the operator or parent operator if follow_parent is true.
@@ -505,6 +702,8 @@ message GetUserTagsResponse {
 message GetUserTagsByIdRequest {
 	// The ID of the user to get tags for.
 	int64 user_id = 1;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 2;
 }
 
 // GetUserTagsByIdResponse contains the list of active tags associated with the user.
@@ -516,6 +715,8 @@ message GetUserTagsByIdResponse {
 message SetUserTagsByIdRequest {
 	int64 user_id = 1;
 	repeated string tags = 2;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 3;
 }
 
 message SetUserTagsByIdResponse {}
@@ -545,6 +746,46 @@ message SendEmailVerificationCodeRequest {
 
 message SendEmailVerificationCodeResponse {
 }
+
+message SendPasswordResetCodeRequest {
+	string email = 1;  // User's email address
+	optional api.common.OperatorContext operator_context = 2;  // Operator context
+}
+
+message SendPasswordResetCodeResponse {
+}
+
+message ResetPasswordWithCodeRequest {
+	string email = 1;           // User's email address
+	string verification_code = 2;  // Verification code received via email
+	string new_password = 3;    // New password
+	optional api.common.OperatorContext operator_context = 4;  // Operator context
+}
+
+message ResetPasswordWithCodeResponse {
+}
+
+message UserIdentityRequest {
+	// ID Type "Passport", "South African ID"
+	string id_type = 1;
+	string id_number = 2;
+	string image = 3;
+}
+
+message UserIdentity {
+	int64 id = 1;
+	int64 user_id = 2;
+	string id_type = 3;
+	string id_number = 4;
+	string image = 5;
+	string status = 6;
+	google.protobuf.Timestamp created_at = 7;
+	google.protobuf.Timestamp audited_at = 8;
+	string operator = 9;
+	string reviewer = 10;
+	int32 review_time = 11;
+}
+
 message UpdateUserRequest {
 	int64 user_id = 1;
 	optional string nickname = 2;
@@ -552,11 +793,40 @@ message UpdateUserRequest {
 	optional bool ban_login = 4;
 	optional bool ban_game = 5;
 	optional bool ban_withdraw = 6;
-	optional bool enabled = 7;
-	optional int64 role_id = 8;
+	optional bool locked = 7;
+	optional bool enabled = 8;
+	optional int64 role_id = 9;
+	optional string firstname = 10;
+	optional string lastname = 11;
+	optional string email = 12;
+	optional string mobile = 13;
+	optional UserIdentityRequest user_identity = 14;
+	optional string address = 15;
+	optional google.protobuf.Timestamp dob = 16;
+	optional bool email_verified = 17;
+	optional bool phone_verified = 18;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 19;
+	optional string campaign_url = 20;
+	optional int64 campaign_id = 21;
+	optional int64 affiliate_id = 22;
 }
 
 message UpdateUserResponse {
+}
+
+message UpdateUserIdentityRequest {
+	// User identity id
+	int64 id = 1;
+	// User ID Type
+	string id_type = 2;
+	// User ID Number
+	string id_number = 3;
+	// Image Url
+	string image = 4;
+}
+
+message UpdateUserIdentityResponse {
 }
 
 message ListUsersRequest {
@@ -565,61 +835,64 @@ message ListUsersRequest {
 	optional google.protobuf.Timestamp registration_start_time = 3;
 	optional google.protobuf.Timestamp registration_end_time = 4;
 	optional int32 vip_level = 5;
-	optional int64 retailer_operator_id = 6;
-	optional int64 group_operator_id = 7;
-	optional int64 operator_id = 8;
-	optional string country = 9;
+	optional string country = 6;
 	// optional int32 risk_level_min = 10;
 	// optional int32 risk_level_max = 11;
-	optional int32 kyc_level = 12;
+	optional int32 kyc_level = 7;
 	// optional bool has_made_deposit = 13;
-	optional string deposit_min = 14;
-	optional string deposit_max = 15;
-	optional string withdrawal_min = 16;
-	optional string withdrawal_max = 17;
-	optional bool ban_withdraw = 18;
-	optional bool ban_game = 19;
-	optional bool ban_login = 20;
-	optional string user_type = 21;
-	optional int64 role_id = 22;
-	optional bool online = 23;
-	optional bool enabled = 24;
-	optional string email = 25;
-	optional string mobile = 26;
-	optional int32 page = 27;
-	optional int32 page_size = 28;
+	optional string deposit_min = 8;
+	optional string deposit_max = 9;
+	optional string withdrawal_min = 10;
+	optional string withdrawal_max = 11;
+	optional bool ban_withdraw = 12;
+	optional bool ban_game = 13;
+	optional bool ban_login = 14;
+	optional string user_type = 15;
+	optional int64 role_id = 16;
+	optional bool online = 17;
+	optional bool enabled = 18;
+	optional string email = 19;
+	optional string mobile = 20;
+	optional int32 page = 21;
+	optional int32 page_size = 22;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 23;
+	api.common.OperatorContextFilters operator_context_filters = 24;
 }
 
 message ListUsersResponse {
 	message User {
-		string retailer = 1;
-		string group = 2;
-		string operator_name = 3;
-		int64 user_id = 4;
-		string username = 5;
-		string email = 6;
-		string mobile = 7;
-		int32 vip_level = 8;
-		int32 kyc_level = 9;
-		string deposit = 10;
-		string withdraw = 11;
-		repeated string tags = 12;
-		bool ban_withdraw = 13;
-		bool ban_game = 14;
-		bool ban_login = 15;
-		bool online = 16;
-		google.protobuf.Timestamp last_login_at = 17;
-		google.protobuf.Timestamp registered_at = 18;
+		string operator_name = 1;
+		string company_operator_name = 2;
+		string retailer_operator_name = 3;
+		string system_operator_name = 4;
+		int64 user_id = 5;
+		string username = 6;
+		string email = 7;
+		string mobile = 8;
+		int32 vip_level = 9;
+		int32 kyc_level = 10;
+		string deposit_usd = 11;
+		string withdraw_usd = 12;
+		string deposit_reporting_currency = 13;
+		string withdraw_reporting_currency = 14;
+		repeated string tags = 15;
+		bool ban_withdraw = 16;
+		bool ban_game = 17;
+		bool ban_login = 18;
+		bool online = 19;
+		google.protobuf.Timestamp last_login_at = 20;
+		google.protobuf.Timestamp registered_at = 21;
 		// int32 risk_level = 19;
 		// string referral_code = 20;
 		// string affiliate_code = 21;
 		string country = 22;
 		// string device = 23;
 		// string source = 24;
-		string registration_ip = 25;
-		bool enabled = 26;
-		google.protobuf.Timestamp created_at = 27;
-		Role role = 28;
+		string registration_ip = 23;
+		bool enabled = 24;
+		google.protobuf.Timestamp created_at = 25;
+		Role role = 26;
 	}
 	repeated User users = 1;
 	int32 page = 2;
@@ -655,6 +928,8 @@ message AddCommentRequest {
 	int64 user_id = 1;
 	int64 author_user_id = 2;
 	string content = 3;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 4;
 }
 
 message AddCommentResponse {
@@ -680,6 +955,8 @@ message GetUserProfileRequest {
 	int64 user_id = 1;
 	optional int32 login_page = 2;
 	optional int32 login_page_size = 3;
+	// The initial operator context.
+	api.common.OperatorContext operator_context = 4;
 }
 
 message GetUserProfileResponse {
@@ -718,6 +995,13 @@ message GetUserProfileResponse {
 		string content = 4;
 		google.protobuf.Timestamp created_at = 5;
 	}
+	message ChangeRecord {
+		google.protobuf.Timestamp changed_at = 1;
+		string new = 2;
+		string old = 3;
+		string ip = 4;
+		string reviewer = 5;
+	}
 	string nickname = 1;
 	int64 user_id = 2;
 	int32 vip_level = 3; // Not available for now, only return 1
@@ -725,13 +1009,30 @@ message GetUserProfileResponse {
 	bool ban_withdraw = 5;
 	bool ban_game = 6;
 	bool ban_login = 7;
-	RegistrationRecord registration_record = 8;
-	repeated LoginRecord login_records = 9;
-	repeated string tags = 10;
-	repeated Comment comments = 11;
-	int32 total_login_count = 12;
-	int32 login_page = 13;
-	int32 login_page_size = 14;
+	bool locked = 8;
+	RegistrationRecord registration_record = 9;
+	repeated LoginRecord login_records = 10;
+	repeated string tags = 11;
+	repeated Comment comments = 12;
+	int32 total_login_count = 13;
+	int32 login_page = 14;
+	int32 login_page_size = 15;
+	string registered_mobile = 16;
+	string registered_email = 17;
+	string first_name = 18;
+	string last_name = 19;
+	int32 kyc_level = 20;
+	bool email_verified = 21;
+	bool phone_verified = 22;
+	google.protobuf.Timestamp dob = 23;
+	string address = 24;
+	repeated UserIdentity user_identity = 25;
+	repeated ChangeRecord emailChangeHistory = 26;
+	repeated ChangeRecord phoneChangeHistory = 27;
+	// Email.
+	string login_email = 28;
+	// Mobile.
+	string login_mobile = 29;
 }
 
 message CreateRoleRequest {
@@ -781,6 +1082,7 @@ message CreateOperatorRequest {
 	optional string backoffice_timezone = 7;
 	repeated string supported_languages = 8;
 	repeated string supported_currencies = 9;
+	optional string template_name = 10;
 }
 
 message CreateOperatorResponse {
@@ -793,6 +1095,7 @@ message UpdateRoleRequest {
 	int64 role_id = 1;
 	string name = 2;
 	repeated Permission permissions = 3;
+	int64 current_role_id = 4;
 }
 
 message UpdateRoleResponse {}
@@ -806,6 +1109,8 @@ message GetRoleResponse {
 }
 
 message GetOverviewDashboardFromUserRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContextFilters operator_context_filters = 2;
 }
 
 message GetOverviewDashboardFromUserResponse {
@@ -846,6 +1151,16 @@ message GetOperatorIdsByOriginRequest {
 
 message GetOperatorIdsByOriginResponse {
 	api.common.OperatorContext operator_context = 1;
+}
+
+message GetOperatorInfoByOriginRequest {
+	string origin = 1;
+}
+
+message GetOperatorInfoByOriginResponse {
+	api.common.OperatorContext operator_context = 1;
+	OperatorDetails operatorDetail = 2;
+	OperatorDetails systemOperatorDetail = 3;
 }
 
 message GetOperatorRequest {
@@ -914,7 +1229,8 @@ message GetChildOperatorIdsResponse {
 message CheckEmailExistsRequest {
 	string email = 1;
 	int64 operator_id = 2;
-	string operator_type = 3; // "operator", "company", "retailer", "system"
+	// "operator", "company", "retailer", "system"
+	string operator_type = 3;
 }
 
 message CheckEmailExistsResponse {
@@ -953,6 +1269,68 @@ message CreateBusinessResponse {
 	int64 business_id = 1;
 }
 
+message OperatorAccountPasswordSettings {
+	int32 min_characters = 1;
+	int32 min_uppercase_characters = 2;
+	int32 min_lowercase_characters = 3;
+	int32 min_special_characters = 4;
+	int32 min_digits = 5;
+}
+
+message OperatorAccountSecuritySettings {
+	int32 max_password_retries = 1;
+	int32 password_expiry_days = 2;
+	int32 password_history_limits = 3;
+}
+
+message OperatorAccountGameSettings {
+	bool no_game_without_deposit = 1;
+	int32 min_game_kyc_level = 2;
+}
+
+message OperatorAccountPaymentSettings {
+	int32 min_deposit_kyc_level = 1;
+	int32 min_withdraw_kyc_level = 2;
+}
+
+message OperatorAccountSettings {
+	OperatorAccountPasswordSettings password_settings = 1;
+	OperatorAccountSecuritySettings security_settings = 2;
+	OperatorAccountGameSettings game_settings = 3;
+	OperatorAccountPaymentSettings payment_settings = 4;
+}
+
+message GetUserAccountSettingsStatusRequest {
+	int64 user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+}
+
+message UserAccountGameSettingsStatus {
+	bool no_game_without_deposit = 1;
+	int32 min_game_kyc_level = 2;
+	int32 deposit_count = 3;
+	int32 kyc_level = 4;
+}
+
+message UserAccountPaymentSettingsStatus {
+	int32 min_deposit_kyc_level = 1;
+	int32 min_withdraw_kyc_level = 2;
+	int32 kyc_level = 3;
+}
+
+message GetUserAccountSettingsStatusResponse {
+	bool allow_game = 1;
+	bool allow_deposit = 2;
+	bool allow_withdraw = 3;
+	UserAccountGameSettingsStatus game_settings_status = 4;
+	UserAccountPaymentSettingsStatus payment_settings_status = 5;
+}
+
+message OperatorConfig {
+	optional string swap_fee_percentage = 1;
+	optional OperatorAccountSettings account_settings = 2;
+}
+
 message OperatorDetails {
 	int64 id = 1; // real operator id
 	string operator_name = 2;
@@ -973,16 +1351,26 @@ message OperatorDetails {
 	repeated string supported_languages = 17;
 	repeated string supported_currencies = 18;
 	string status = 19;
-	bool is_maintenance = 20;
-	int64 maintenance_start_time = 21;
-	int64 maintenance_end_time = 22;
-	int64 operator_id = 23; // operator id in the operator hierarchy
-	int64 company_operator_id = 24; // company operator id in the operator hierarchy
-	string company_operator_name = 25; // company operator name in the operator hierarchy, or empty string if not exists
-	int64 retailer_operator_id = 26; // retailer operator id in the operator hierarchy
-	string retailer_operator_name = 27; // retailer operator name in the operator hierarchy, or empty string if not exists
-	int64 system_operator_id = 28; // system operator id in the operator hierarchy
-	string system_operator_name = 29; // system operator name in the operator hierarchy, or empty string if not exists
+	int64 status_start_time = 21;
+	int64 status_end_time = 22;
+	// operator id in the operator hierarchy
+	int64 operator_id = 23;
+	// company operator id in the operator hierarchy
+	int64 company_operator_id = 24;
+	// company operator name in the operator hierarchy, or empty string if not exists
+	string company_operator_name = 25;
+	// retailer operator id in the operator hierarchy
+	int64 retailer_operator_id = 26;
+	// retailer operator name in the operator hierarchy, or empty string if not exists
+	string retailer_operator_name = 27;
+	// system operator id in the operator hierarchy
+	int64 system_operator_id = 28;
+	// system operator name in the operator hierarchy, or empty string if not exists
+	string system_operator_name = 29;
+	OperatorConfig config = 30;
+	string min_launch_balance = 31;
+	repeated string status_launch_whitelist = 32;
+
 }
 
 message GetOperatorDetailsRequest {
@@ -1012,56 +1400,339 @@ message ListOperatorsByParentOperatorIdResponse {
 	int32 page_size = 9;
 }
 
-// OperatorInfo is the simplified information of an operator, used for list operators
-message OperatorInfo {
-	int64 operator_id = 1;
-	string operator_name = 2;
-	string status = 3;
-}
-
 message ListRetailerOperatorsRequest {
-	string operator_type = 1;
-	int64 actual_operator_id = 2;
-	api.common.OperatorContext operator_context = 3;
+	api.common.OperatorContext operator_context = 1;
+	bool include_count = 2;
 }
 
 message ListRetailerOperatorsResponse {
+	// OperatorInfo is the simplified information of a retailer operator, used for list retailer operators
+	message OperatorInfo {
+		api.common.OperatorContext operator_context = 1;
+		string retailer_operator_name = 2;
+		int32 company_operator_count = 3;
+		int32 bottom_operator_count = 4;
+		int32 bottom_live_operator_count = 5;
+		bool status = 6;
+		bool self_co_operation_enabled = 7;
+		string reporting_currency = 8;
+	}
 	repeated OperatorInfo retailer_operators = 1;
 }
 
 message ListCompanyOperatorsRequest {
-	string operator_type = 1;
-	int64 actual_operator_id = 2;
-	repeated int64 retailer_operator_ids = 3;
-	api.common.OperatorContext operator_context = 4;
+	repeated int64 retailer_operator_ids = 1;
+	api.common.OperatorContext operator_context = 2;
+	bool include_count = 3;
 }
 
 message ListCompanyOperatorsResponse {
+	// OperatorInfo is the simplified information of a company operator, used for list company operators
+	message OperatorInfo {
+		api.common.OperatorContext operator_context = 1;
+		string company_operator_name = 2;
+		string retailer_operator_name = 3;
+		int32 bottom_operator_count = 4;
+		int32 bottom_live_operator_count = 5;
+		bool status = 6;
+		string reporting_currency = 7;
+	}
 	repeated OperatorInfo company_operators = 1;
 }
 
 message ListBottomOperatorsRequest {
-	string operator_type = 1;
-	int64 actual_operator_id = 2;
-	repeated int64 retailer_operator_ids = 3;
-	repeated int64 company_operator_ids = 4;
-	api.common.OperatorContext operator_context = 5;
+	repeated int64 retailer_operator_ids = 1;
+	repeated int64 company_operator_ids = 2;
+	api.common.OperatorContext operator_context = 3;
 }
 
 message ListBottomOperatorsResponse {
-	repeated OperatorInfo operators = 1;
+	// OperatorInfo is the simplified information of a bottom operator, used for list bottom operators
+	message OperatorInfo {
+		api.common.OperatorContext operator_context = 1;
+		string bottom_operator_name = 2;
+		string retailer_operator_name = 3;
+		string company_operator_name = 4;
+		string mode = 5;
+		string status = 6;
+		string subdomain = 7;
+		string reporting_currency = 8;
+	}
+	repeated OperatorInfo bottom_operators = 1;
 }
 
 message UpdateOperatorStatusRequest {
-	int64 target_operator_id = 1; // target operator id
-	string target_operator_type = 2; // target operator type
-	api.common.OperatorContext target_operator_context = 3; // target operator context
-	string action = 4; // action to update the status of target operator
-	int64 operator_id = 5; // operator id of the backoffice operator
-	string operator_type = 6; // operator type of the backoffice operator
-	api.common.OperatorContext operator_context = 7; // operator context of the backoffice operator
+	// target operator context
+ 	api.common.OperatorContext target_operator_context = 1; 
+	// action to update the status of target operator "pending", "live", "suspended", "request_to_close", "closed", "maintain",
+ 	string action = 2; 
+	// action start
+	google.protobuf.Timestamp actionStart = 3; 
+	// action end
+	google.protobuf.Timestamp actionEnd = 4;
+	// IP white list
+	repeated string ipWhiteList = 5;
+	// operator context of the backoffice operator
+	api.common.OperatorContext operator_context = 6;
 }
 
 message UpdateOperatorStatusResponse {
-	string status = 1; // status of target operator after update
+	// status of target operator after update
+	string status = 1;
+}
+
+message ListAllUsersRequest {
+	api.common.OperatorContext operator_context = 1;
+	optional int64 role_id = 2;
+}
+
+message ListAllUsersResponse {
+	repeated UserInfo users = 1;
+}
+
+message ListOperatorsByAdminEmailRequest {
+	string email = 1;
+	api.common.OperatorContext operator_context = 2;
+}
+
+message ListOperatorsByAdminEmailResponse {
+	repeated OperatorDetails retailer_operator_details_list = 1;
+	repeated OperatorDetails company_operator_details_list = 2;
+	repeated OperatorDetails operator_details_list = 3;
+}
+
+message ListOperatorDetailsRequest {
+	// real operator ids list
+	repeated int64 operator_ids = 1;
+}
+
+message ListOperatorDetailsResponse {
+	repeated OperatorDetails operator_details_list = 1;
+}
+
+message GetOperatorDetailsByUserIdRequest {
+	int64 user_id = 1;
+}
+
+message GetOperatorDetailsByUserIdResponse {
+	OperatorDetails operator_details = 1;
+}
+
+message GetOperatorAccountSettingsRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+}
+
+message GetOperatorAccountSettingsResponse {
+	OperatorAccountSettings account_settings = 1;
+	string country = 2;
+	string client_ip = 3;
+}
+
+message UpdateOperatorAccountSettingsRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	OperatorAccountSettings account_settings = 3;
+}
+
+message UpdateOperatorAccountSettingsResponse {
+}
+
+message ResponsibleGamblingConfig {
+	message SelfExclusion {
+		google.protobuf.Timestamp start_time = 1;
+		google.protobuf.Timestamp end_time = 2;
+	}
+	message BreakInPlay {
+		google.protobuf.Timestamp start_time = 1;
+		google.protobuf.Timestamp end_time = 2;
+	}
+	message TimeLimits {
+		string time_zone = 1; // "UTC+X", "UTC-X"
+		string start_time = 2; // HH:mm:ss, works out every day
+		string end_time = 3; // HH:mm:ss, works out every day
+	}
+	optional SelfExclusion self_exclusion = 1;
+	optional BreakInPlay break_in_play = 2;
+	optional TimeLimits time_limits = 3;
+}
+
+message AddResponsibleGamblingConfigRequest {
+	ResponsibleGamblingConfig responsible_gambling_config = 1;
+}
+
+message AddResponsibleGamblingConfigResponse {
+}
+
+message DeleteResponsibleGamblingConfigRequest {
+	optional int64 user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+	// "self_exclusion", "break_in_play", "time_limits"
+	string limit_type = 3;
+}
+
+message DeleteResponsibleGamblingConfigResponse {
+}
+
+message GetResponsibleGamblingConfigRequest {
+	optional int64 user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+}
+
+message ResponsibleGamblingStatus {
+	bool login_allowed = 1;
+	bool deposit_allowed = 2;
+	bool withdrawal_allowed = 3;
+	bool game_bet_allowed = 4;
+	bool self_exclusion_active = 5; // indicates if self exclusion active in current time	
+	bool break_in_play_active = 6; // indicates if break in play active in current time
+	bool time_limits_active = 7; // indicates if time limits active in current time
+	google.protobuf.Timestamp time_limits_next_inactive_time = 8; // the very next time when time limits is inactive, exists if time_limits_active is true
+}
+
+message ResponsibleGamblingDeleteSchedule {
+	google.protobuf.Timestamp self_exclusion_delete_schedule_time = 1;
+	google.protobuf.Timestamp break_in_play_delete_schedule_time = 2;
+	google.protobuf.Timestamp time_limits_delete_schedule_time = 3;
+}
+
+message GetResponsibleGamblingConfigResponse {
+	ResponsibleGamblingConfig responsible_gambling_config = 1;
+	ResponsibleGamblingStatus responsible_gambling_status = 2;
+	ResponsibleGamblingDeleteSchedule responsible_gambling_delete_schedule = 3;
+}
+
+message UserIdentityAuditRequest {
+	// user identity id
+	int64 id = 1;
+	// audit "approved" or "declined"
+	string audit= 2;
+	api.common.OperatorContext operator_context = 3;
+}
+
+message UserIdentityAuditResponse {
+	
+}
+
+message UserIdentityListRequest {
+	optional int64 id = 1;
+	optional int64 user_id = 2;
+	optional string status = 3;
+	optional google.protobuf.Timestamp start_time = 4;
+	optional google.protobuf.Timestamp end_time = 5;
+	int32 page = 6;
+	int32 page_size = 7;
+	// The initial operator context.
+	api.common.OperatorContextFilters operator_context_filters = 8;
+	api.common.OperatorContext operator_context = 9;
+}
+
+message UserIdentityListResponse {
+	repeated UserIdentity user_identity = 1;
+	int32 total_count = 2;
+	int32 approved_count = 3;
+	int32 declined_count = 4;
+	int32 pending_count = 5;
+}
+
+message AddRegisterLoginBlacklistRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	string id_type = 3;
+	repeated string ids = 4;
+}
+
+message AddRegisterLoginBlacklistResponse {
+}
+
+message DeleteRegisterLoginBlacklistRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	string id_type = 3;
+	repeated string ids = 4;
+}
+
+message DeleteRegisterLoginBlacklistResponse {
+}
+
+message ListRegisterLoginBlacklistRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	string id_type = 4;
+	optional int32 page = 5;
+	optional int32 page_size = 6;
+}
+
+message ListRegisterLoginBlacklistResponse {
+	message RegisterLoginBlacklist {
+		string id = 1;
+		google.protobuf.Timestamp created_at = 2;
+		string source = 3;
+	}
+	repeated RegisterLoginBlacklist register_login_blacklists = 1;
+	int32 page = 2;
+	int32 page_size = 3;
+	int32 total = 4;
+}
+
+message OperatorRegisterLimitConfig {
+	int32 registration_limit_per_ip = 1;
+}
+
+message SetOperatorRegisterLimitConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	map<string, OperatorRegisterLimitConfig> config = 3;
+}
+
+message SetOperatorRegisterLimitConfigResponse {
+}
+
+message GetOperatorRegisterLimitConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+}
+
+message GetOperatorRegisterLimitConfigResponse {
+	map<string, OperatorRegisterLimitConfig> config = 1;
+}
+
+message CloseAccountRequest {
+	
+}
+
+message CloseAccountResponse {
+	
+}
+
+message GetOperatorVipSettingsRequest {
+}
+
+message GetUserVipLevelRequest {
+}
+
+message UpdateVipRewardSliderRequest {
+	int64 rackback = 1;
+	int64 lossback = 2;
+	string type = 3; // weekly, monthly
+}
+
+message GetClaimableVipRewardsRequest {
+}
+
+message ClaimVipRewardRequest {
+	api.vip.service.v1.VipRewardKind reward_kind = 1;
+}
+
+message ConfirmClaimVipRewardRequest {
+	int64 reward_id = 1;
+	string claim_currency = 2;
+	api.vip.service.v1.VipRewardKind reward_kind = 3;
+}
+
+message RequestDailyLossbackRequest {
+	string currency = 1;
+}
+
+message GetDailyLossbackStatusRequest {
 }

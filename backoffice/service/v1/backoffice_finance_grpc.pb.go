@@ -8,6 +8,7 @@ package v1
 
 import (
 	context "context"
+	v1 "github.com/infigaming-com/meepo-api/game/service/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -19,19 +20,29 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BackofficeFinance_ListInvoices_FullMethodName             = "/api.backoffice.service.v1.BackofficeFinance/ListInvoices"
-	BackofficeFinance_GetInvoiceDetail_FullMethodName         = "/api.backoffice.service.v1.BackofficeFinance/GetInvoiceDetail"
-	BackofficeFinance_ListOperatorRevenueShare_FullMethodName = "/api.backoffice.service.v1.BackofficeFinance/ListOperatorRevenueShare"
-	BackofficeFinance_ListThirdPartyFees_FullMethodName       = "/api.backoffice.service.v1.BackofficeFinance/ListThirdPartyFees"
-	BackofficeFinance_ListAdjustments_FullMethodName          = "/api.backoffice.service.v1.BackofficeFinance/ListAdjustments"
-	BackofficeFinance_ListMonthlyRevenueShare_FullMethodName  = "/api.backoffice.service.v1.BackofficeFinance/ListMonthlyRevenueShare"
-	BackofficeFinance_AddAdjustment_FullMethodName            = "/api.backoffice.service.v1.BackofficeFinance/AddAdjustment"
-	BackofficeFinance_ListAdjustmentConfigs_FullMethodName    = "/api.backoffice.service.v1.BackofficeFinance/ListAdjustmentConfigs"
-	BackofficeFinance_CreateAdjustmentConfig_FullMethodName   = "/api.backoffice.service.v1.BackofficeFinance/CreateAdjustmentConfig"
-	BackofficeFinance_UpdateAdjustmentConfig_FullMethodName   = "/api.backoffice.service.v1.BackofficeFinance/UpdateAdjustmentConfig"
-	BackofficeFinance_DeleteAdjustmentConfig_FullMethodName   = "/api.backoffice.service.v1.BackofficeFinance/DeleteAdjustmentConfig"
-	BackofficeFinance_SendInvoices_FullMethodName             = "/api.backoffice.service.v1.BackofficeFinance/SendInvoices"
-	BackofficeFinance_GetInvoiceSummary_FullMethodName        = "/api.backoffice.service.v1.BackofficeFinance/GetInvoiceSummary"
+	BackofficeFinance_ListInvoices_FullMethodName                    = "/api.backoffice.service.v1.BackofficeFinance/ListInvoices"
+	BackofficeFinance_GetInvoiceDetail_FullMethodName                = "/api.backoffice.service.v1.BackofficeFinance/GetInvoiceDetail"
+	BackofficeFinance_ListOperatorRevenueShare_FullMethodName        = "/api.backoffice.service.v1.BackofficeFinance/ListOperatorRevenueShare"
+	BackofficeFinance_ListThirdPartyFees_FullMethodName              = "/api.backoffice.service.v1.BackofficeFinance/ListThirdPartyFees"
+	BackofficeFinance_ListAdjustments_FullMethodName                 = "/api.backoffice.service.v1.BackofficeFinance/ListAdjustments"
+	BackofficeFinance_ListMonthlyRevenueShare_FullMethodName         = "/api.backoffice.service.v1.BackofficeFinance/ListMonthlyRevenueShare"
+	BackofficeFinance_AddAdjustment_FullMethodName                   = "/api.backoffice.service.v1.BackofficeFinance/AddAdjustment"
+	BackofficeFinance_ListAdjustmentConfigs_FullMethodName           = "/api.backoffice.service.v1.BackofficeFinance/ListAdjustmentConfigs"
+	BackofficeFinance_CreateAdjustmentConfig_FullMethodName          = "/api.backoffice.service.v1.BackofficeFinance/CreateAdjustmentConfig"
+	BackofficeFinance_UpdateAdjustmentConfig_FullMethodName          = "/api.backoffice.service.v1.BackofficeFinance/UpdateAdjustmentConfig"
+	BackofficeFinance_DeleteAdjustmentConfig_FullMethodName          = "/api.backoffice.service.v1.BackofficeFinance/DeleteAdjustmentConfig"
+	BackofficeFinance_SendInvoices_FullMethodName                    = "/api.backoffice.service.v1.BackofficeFinance/SendInvoices"
+	BackofficeFinance_GetInvoiceSummary_FullMethodName               = "/api.backoffice.service.v1.BackofficeFinance/GetInvoiceSummary"
+	BackofficeFinance_GetBalanceSummary_FullMethodName               = "/api.backoffice.service.v1.BackofficeFinance/GetBalanceSummary"
+	BackofficeFinance_GetBalancesSummary_FullMethodName              = "/api.backoffice.service.v1.BackofficeFinance/GetBalancesSummary"
+	BackofficeFinance_ListBillingPeriods_FullMethodName              = "/api.backoffice.service.v1.BackofficeFinance/ListBillingPeriods"
+	BackofficeFinance_ListBalanceMonthlyRevenueShares_FullMethodName = "/api.backoffice.service.v1.BackofficeFinance/ListBalanceMonthlyRevenueShares"
+	BackofficeFinance_ListBalancesSummary_FullMethodName             = "/api.backoffice.service.v1.BackofficeFinance/ListBalancesSummary"
+	BackofficeFinance_GetTaxReportConfig_FullMethodName              = "/api.backoffice.service.v1.BackofficeFinance/GetTaxReportConfig"
+	BackofficeFinance_UpdateTaxReportConfig_FullMethodName           = "/api.backoffice.service.v1.BackofficeFinance/UpdateTaxReportConfig"
+	BackofficeFinance_ListTaxReports_FullMethodName                  = "/api.backoffice.service.v1.BackofficeFinance/ListTaxReports"
+	BackofficeFinance_ExportTaxReports_FullMethodName                = "/api.backoffice.service.v1.BackofficeFinance/ExportTaxReports"
+	BackofficeFinance_UpdateTaxReport_FullMethodName                 = "/api.backoffice.service.v1.BackofficeFinance/UpdateTaxReport"
 )
 
 // BackofficeFinanceClient is the client API for BackofficeFinance service.
@@ -51,6 +62,16 @@ type BackofficeFinanceClient interface {
 	DeleteAdjustmentConfig(ctx context.Context, in *DeleteAdjustmentConfigRequest, opts ...grpc.CallOption) (*DeleteAdjustmentConfigResponse, error)
 	SendInvoices(ctx context.Context, in *SendInvoicesRequest, opts ...grpc.CallOption) (*SendInvoicesResponse, error)
 	GetInvoiceSummary(ctx context.Context, in *GetInvoiceSummaryRequest, opts ...grpc.CallOption) (*GetInvoiceSummaryResponse, error)
+	GetBalanceSummary(ctx context.Context, in *GetBalanceSummaryRequest, opts ...grpc.CallOption) (*GetBalanceSummaryResponse, error)
+	GetBalancesSummary(ctx context.Context, in *GetBalancesSummaryRequest, opts ...grpc.CallOption) (*GetBalancesSummaryResponse, error)
+	ListBillingPeriods(ctx context.Context, in *ListBillingPeriodsRequest, opts ...grpc.CallOption) (*ListBillingPeriodsResponse, error)
+	ListBalanceMonthlyRevenueShares(ctx context.Context, in *ListBalanceMonthlyRevenueSharesRequest, opts ...grpc.CallOption) (*ListBalanceMonthlyRevenueSharesResponse, error)
+	ListBalancesSummary(ctx context.Context, in *ListBalancesSummaryRequest, opts ...grpc.CallOption) (*ListBalancesSummaryResponse, error)
+	GetTaxReportConfig(ctx context.Context, in *GetTaxReportConfigRequest, opts ...grpc.CallOption) (*GetTaxReportConfigResponse, error)
+	UpdateTaxReportConfig(ctx context.Context, in *UpdateTaxReportConfigRequest, opts ...grpc.CallOption) (*UpdateTaxReportConfigResponse, error)
+	ListTaxReports(ctx context.Context, in *ListTaxReportsRequest, opts ...grpc.CallOption) (*ListTaxReportsResponse, error)
+	ExportTaxReports(ctx context.Context, in *ExportTaxReportsRequest, opts ...grpc.CallOption) (*v1.ExportTaxReportsResponse, error)
+	UpdateTaxReport(ctx context.Context, in *UpdateTaxReportRequest, opts ...grpc.CallOption) (*UpdateTaxReportResponse, error)
 }
 
 type backofficeFinanceClient struct {
@@ -191,6 +212,106 @@ func (c *backofficeFinanceClient) GetInvoiceSummary(ctx context.Context, in *Get
 	return out, nil
 }
 
+func (c *backofficeFinanceClient) GetBalanceSummary(ctx context.Context, in *GetBalanceSummaryRequest, opts ...grpc.CallOption) (*GetBalanceSummaryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBalanceSummaryResponse)
+	err := c.cc.Invoke(ctx, BackofficeFinance_GetBalanceSummary_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeFinanceClient) GetBalancesSummary(ctx context.Context, in *GetBalancesSummaryRequest, opts ...grpc.CallOption) (*GetBalancesSummaryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBalancesSummaryResponse)
+	err := c.cc.Invoke(ctx, BackofficeFinance_GetBalancesSummary_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeFinanceClient) ListBillingPeriods(ctx context.Context, in *ListBillingPeriodsRequest, opts ...grpc.CallOption) (*ListBillingPeriodsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListBillingPeriodsResponse)
+	err := c.cc.Invoke(ctx, BackofficeFinance_ListBillingPeriods_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeFinanceClient) ListBalanceMonthlyRevenueShares(ctx context.Context, in *ListBalanceMonthlyRevenueSharesRequest, opts ...grpc.CallOption) (*ListBalanceMonthlyRevenueSharesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListBalanceMonthlyRevenueSharesResponse)
+	err := c.cc.Invoke(ctx, BackofficeFinance_ListBalanceMonthlyRevenueShares_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeFinanceClient) ListBalancesSummary(ctx context.Context, in *ListBalancesSummaryRequest, opts ...grpc.CallOption) (*ListBalancesSummaryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListBalancesSummaryResponse)
+	err := c.cc.Invoke(ctx, BackofficeFinance_ListBalancesSummary_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeFinanceClient) GetTaxReportConfig(ctx context.Context, in *GetTaxReportConfigRequest, opts ...grpc.CallOption) (*GetTaxReportConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTaxReportConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeFinance_GetTaxReportConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeFinanceClient) UpdateTaxReportConfig(ctx context.Context, in *UpdateTaxReportConfigRequest, opts ...grpc.CallOption) (*UpdateTaxReportConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateTaxReportConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeFinance_UpdateTaxReportConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeFinanceClient) ListTaxReports(ctx context.Context, in *ListTaxReportsRequest, opts ...grpc.CallOption) (*ListTaxReportsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListTaxReportsResponse)
+	err := c.cc.Invoke(ctx, BackofficeFinance_ListTaxReports_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeFinanceClient) ExportTaxReports(ctx context.Context, in *ExportTaxReportsRequest, opts ...grpc.CallOption) (*v1.ExportTaxReportsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ExportTaxReportsResponse)
+	err := c.cc.Invoke(ctx, BackofficeFinance_ExportTaxReports_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeFinanceClient) UpdateTaxReport(ctx context.Context, in *UpdateTaxReportRequest, opts ...grpc.CallOption) (*UpdateTaxReportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateTaxReportResponse)
+	err := c.cc.Invoke(ctx, BackofficeFinance_UpdateTaxReport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeFinanceServer is the server API for BackofficeFinance service.
 // All implementations must embed UnimplementedBackofficeFinanceServer
 // for forward compatibility.
@@ -208,6 +329,16 @@ type BackofficeFinanceServer interface {
 	DeleteAdjustmentConfig(context.Context, *DeleteAdjustmentConfigRequest) (*DeleteAdjustmentConfigResponse, error)
 	SendInvoices(context.Context, *SendInvoicesRequest) (*SendInvoicesResponse, error)
 	GetInvoiceSummary(context.Context, *GetInvoiceSummaryRequest) (*GetInvoiceSummaryResponse, error)
+	GetBalanceSummary(context.Context, *GetBalanceSummaryRequest) (*GetBalanceSummaryResponse, error)
+	GetBalancesSummary(context.Context, *GetBalancesSummaryRequest) (*GetBalancesSummaryResponse, error)
+	ListBillingPeriods(context.Context, *ListBillingPeriodsRequest) (*ListBillingPeriodsResponse, error)
+	ListBalanceMonthlyRevenueShares(context.Context, *ListBalanceMonthlyRevenueSharesRequest) (*ListBalanceMonthlyRevenueSharesResponse, error)
+	ListBalancesSummary(context.Context, *ListBalancesSummaryRequest) (*ListBalancesSummaryResponse, error)
+	GetTaxReportConfig(context.Context, *GetTaxReportConfigRequest) (*GetTaxReportConfigResponse, error)
+	UpdateTaxReportConfig(context.Context, *UpdateTaxReportConfigRequest) (*UpdateTaxReportConfigResponse, error)
+	ListTaxReports(context.Context, *ListTaxReportsRequest) (*ListTaxReportsResponse, error)
+	ExportTaxReports(context.Context, *ExportTaxReportsRequest) (*v1.ExportTaxReportsResponse, error)
+	UpdateTaxReport(context.Context, *UpdateTaxReportRequest) (*UpdateTaxReportResponse, error)
 	mustEmbedUnimplementedBackofficeFinanceServer()
 }
 
@@ -256,6 +387,36 @@ func (UnimplementedBackofficeFinanceServer) SendInvoices(context.Context, *SendI
 }
 func (UnimplementedBackofficeFinanceServer) GetInvoiceSummary(context.Context, *GetInvoiceSummaryRequest) (*GetInvoiceSummaryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInvoiceSummary not implemented")
+}
+func (UnimplementedBackofficeFinanceServer) GetBalanceSummary(context.Context, *GetBalanceSummaryRequest) (*GetBalanceSummaryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBalanceSummary not implemented")
+}
+func (UnimplementedBackofficeFinanceServer) GetBalancesSummary(context.Context, *GetBalancesSummaryRequest) (*GetBalancesSummaryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBalancesSummary not implemented")
+}
+func (UnimplementedBackofficeFinanceServer) ListBillingPeriods(context.Context, *ListBillingPeriodsRequest) (*ListBillingPeriodsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBillingPeriods not implemented")
+}
+func (UnimplementedBackofficeFinanceServer) ListBalanceMonthlyRevenueShares(context.Context, *ListBalanceMonthlyRevenueSharesRequest) (*ListBalanceMonthlyRevenueSharesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBalanceMonthlyRevenueShares not implemented")
+}
+func (UnimplementedBackofficeFinanceServer) ListBalancesSummary(context.Context, *ListBalancesSummaryRequest) (*ListBalancesSummaryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBalancesSummary not implemented")
+}
+func (UnimplementedBackofficeFinanceServer) GetTaxReportConfig(context.Context, *GetTaxReportConfigRequest) (*GetTaxReportConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTaxReportConfig not implemented")
+}
+func (UnimplementedBackofficeFinanceServer) UpdateTaxReportConfig(context.Context, *UpdateTaxReportConfigRequest) (*UpdateTaxReportConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTaxReportConfig not implemented")
+}
+func (UnimplementedBackofficeFinanceServer) ListTaxReports(context.Context, *ListTaxReportsRequest) (*ListTaxReportsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTaxReports not implemented")
+}
+func (UnimplementedBackofficeFinanceServer) ExportTaxReports(context.Context, *ExportTaxReportsRequest) (*v1.ExportTaxReportsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportTaxReports not implemented")
+}
+func (UnimplementedBackofficeFinanceServer) UpdateTaxReport(context.Context, *UpdateTaxReportRequest) (*UpdateTaxReportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTaxReport not implemented")
 }
 func (UnimplementedBackofficeFinanceServer) mustEmbedUnimplementedBackofficeFinanceServer() {}
 func (UnimplementedBackofficeFinanceServer) testEmbeddedByValue()                           {}
@@ -512,6 +673,186 @@ func _BackofficeFinance_GetInvoiceSummary_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeFinance_GetBalanceSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBalanceSummaryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeFinanceServer).GetBalanceSummary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeFinance_GetBalanceSummary_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeFinanceServer).GetBalanceSummary(ctx, req.(*GetBalanceSummaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeFinance_GetBalancesSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBalancesSummaryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeFinanceServer).GetBalancesSummary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeFinance_GetBalancesSummary_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeFinanceServer).GetBalancesSummary(ctx, req.(*GetBalancesSummaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeFinance_ListBillingPeriods_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBillingPeriodsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeFinanceServer).ListBillingPeriods(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeFinance_ListBillingPeriods_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeFinanceServer).ListBillingPeriods(ctx, req.(*ListBillingPeriodsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeFinance_ListBalanceMonthlyRevenueShares_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBalanceMonthlyRevenueSharesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeFinanceServer).ListBalanceMonthlyRevenueShares(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeFinance_ListBalanceMonthlyRevenueShares_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeFinanceServer).ListBalanceMonthlyRevenueShares(ctx, req.(*ListBalanceMonthlyRevenueSharesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeFinance_ListBalancesSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBalancesSummaryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeFinanceServer).ListBalancesSummary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeFinance_ListBalancesSummary_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeFinanceServer).ListBalancesSummary(ctx, req.(*ListBalancesSummaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeFinance_GetTaxReportConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTaxReportConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeFinanceServer).GetTaxReportConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeFinance_GetTaxReportConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeFinanceServer).GetTaxReportConfig(ctx, req.(*GetTaxReportConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeFinance_UpdateTaxReportConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTaxReportConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeFinanceServer).UpdateTaxReportConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeFinance_UpdateTaxReportConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeFinanceServer).UpdateTaxReportConfig(ctx, req.(*UpdateTaxReportConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeFinance_ListTaxReports_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListTaxReportsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeFinanceServer).ListTaxReports(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeFinance_ListTaxReports_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeFinanceServer).ListTaxReports(ctx, req.(*ListTaxReportsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeFinance_ExportTaxReports_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportTaxReportsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeFinanceServer).ExportTaxReports(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeFinance_ExportTaxReports_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeFinanceServer).ExportTaxReports(ctx, req.(*ExportTaxReportsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeFinance_UpdateTaxReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTaxReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeFinanceServer).UpdateTaxReport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeFinance_UpdateTaxReport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeFinanceServer).UpdateTaxReport(ctx, req.(*UpdateTaxReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeFinance_ServiceDesc is the grpc.ServiceDesc for BackofficeFinance service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -570,6 +911,46 @@ var BackofficeFinance_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetInvoiceSummary",
 			Handler:    _BackofficeFinance_GetInvoiceSummary_Handler,
+		},
+		{
+			MethodName: "GetBalanceSummary",
+			Handler:    _BackofficeFinance_GetBalanceSummary_Handler,
+		},
+		{
+			MethodName: "GetBalancesSummary",
+			Handler:    _BackofficeFinance_GetBalancesSummary_Handler,
+		},
+		{
+			MethodName: "ListBillingPeriods",
+			Handler:    _BackofficeFinance_ListBillingPeriods_Handler,
+		},
+		{
+			MethodName: "ListBalanceMonthlyRevenueShares",
+			Handler:    _BackofficeFinance_ListBalanceMonthlyRevenueShares_Handler,
+		},
+		{
+			MethodName: "ListBalancesSummary",
+			Handler:    _BackofficeFinance_ListBalancesSummary_Handler,
+		},
+		{
+			MethodName: "GetTaxReportConfig",
+			Handler:    _BackofficeFinance_GetTaxReportConfig_Handler,
+		},
+		{
+			MethodName: "UpdateTaxReportConfig",
+			Handler:    _BackofficeFinance_UpdateTaxReportConfig_Handler,
+		},
+		{
+			MethodName: "ListTaxReports",
+			Handler:    _BackofficeFinance_ListTaxReports_Handler,
+		},
+		{
+			MethodName: "ExportTaxReports",
+			Handler:    _BackofficeFinance_ExportTaxReports_Handler,
+		},
+		{
+			MethodName: "UpdateTaxReport",
+			Handler:    _BackofficeFinance_UpdateTaxReport_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

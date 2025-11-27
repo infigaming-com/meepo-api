@@ -1,4 +1,5 @@
 syntax = "proto3";
+import "common/common.proto";
 
 package api.operator.service.v1;
 
@@ -18,15 +19,6 @@ service Operator {
 	}
 
 	rpc GetOperatorsByIds(GetOperatorsByIdsRequest) returns (GetOperatorsByIdsResponse) {
-	}
-
-	rpc AddOrUpdateCurrency(AddOrUpdateCurrencyRequest) returns (AddOrUpdateCurrencyResponse) {
-	}
-
-	rpc UpdateOperatorCurrency(UpdateOperatorCurrencyRequest) returns (UpdateOperatorCurrencyResponse) {
-	}
-
-	rpc GetOperatorCurrencies(GetOperatorCurrenciesRequest) returns (GetOperatorCurrenciesResponse) {
 	}
 
 	rpc AddOriginOperatorId(AddOriginOperatorIdRequest) returns (AddOriginOperatorIdResponse) {
@@ -85,6 +77,21 @@ service Operator {
 
 	rpc GetInvoiceSummary(GetInvoiceSummaryRequest) returns (GetInvoiceSummaryResponse) {
 	}
+
+	rpc GetBalanceSummary(GetBalanceSummaryRequest) returns (GetBalanceSummaryResponse) {
+	}
+
+	rpc GetBalancesSummary(GetBalancesSummaryRequest) returns (GetBalancesSummaryResponse) {
+	}
+
+	rpc ListBillingPeriods(ListBillingPeriodsRequest) returns (ListBillingPeriodsResponse) {
+	}
+
+	rpc ListBalanceMonthlyRevenueShares(ListBalanceMonthlyRevenueSharesRequest) returns (ListBalanceMonthlyRevenueSharesResponse) {
+	}
+
+	rpc ListBalancesSummary(ListBalancesSummaryRequest) returns (ListBalancesSummaryResponse) {
+	}
 }
 
 message AddOperatorRequest {
@@ -134,38 +141,6 @@ message GetOperatorsByIdsResponse {
 	repeated Operator operators = 1;
 }
 
-message AddOrUpdateCurrencyRequest {
-	string currency = 1;
-	bool enabled = 2;
-	bool hidden = 3;
-}
-
-message AddOrUpdateCurrencyResponse {}
-
-message UpdateOperatorCurrencyRequest {
-	int64 operator_id = 1;
-	string currency = 2;
-	bool enabled = 3;
-}
-
-message UpdateOperatorCurrencyResponse {}
-
-message GetOperatorCurrenciesRequest {
-	int64 operator_id = 1;
-	// Filter to return specific currencies only.
-	// If empty or not provided, all currencies will be returned
-	repeated string currencies = 2;
-}
-
-message GetOperatorCurrenciesResponse {
-	message Currency {
-		string currency = 1;
-		bool enabled = 2;
-		bool hidden = 3;
-	}
-	repeated Currency currencies = 1;
-}
-
 message AddOriginOperatorIdRequest {
 	string origin = 1;
 	int64 operator_id = 2;
@@ -211,13 +186,10 @@ message ListOperatorsResponse {
 }
 
 message ListInvoicesRequest {
-	// Filter by retailer
-	optional int64 retailer_id = 1;
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	api.common.OperatorContext operator_context = 2;
 	
-	// Filter by company
-	optional int64 company_id = 2;
-	
-	// Filter by month (format: YYYY-MM)
+	// Filter by month (format: YYYY-MM)	
 	optional string month = 3;
 	
 	// Search by invoice id
@@ -245,20 +217,20 @@ message ListInvoicesResponse {
 		string operator_name = 3;
 
 		// Retailer information
-		int64 retailer_id = 4;
-		string retailer_name = 5;
+		int64 retailer_operator_id = 4;
+		string retailer_operator_name = 5;
 
 		// Company information
-		int64 company_id = 6;
-		string company_name = 7;
+		int64 company_operator_id = 6;
+		string company_operator_name = 7;
 		
 		// Invoice details
 		string month = 8;
-		string retailer = 9;
-		string company = 10;
 		
 		// Financial information
-		string due_amount = 11;
+		string due_amount = 9;
+		string total_amount = 10;
+		string amount_paid = 11;
 		
 		// Payment status
 		enum PaymentStatus {
@@ -306,8 +278,8 @@ message GetInvoiceDetailResponse {
 		string game_provider_revenue_share = 6;
 		string third_party_cost = 7;
 		string feature_subscription = 8;
-		string revenue_share_disburse = 9;
-		string revenue_share_collet = 10;
+		string revenue_share_system = 9;
+		string revenue_share_operator = 10;
 		string adjustments = 11;
 		
 		// Financial summary
@@ -316,12 +288,12 @@ message GetInvoiceDetailResponse {
 		string due_amount = 14; // Remaining amount due
 
 		// Retailer information
-		int64 retailer_id = 15;
-		string retailer_name = 16;
+		int64 retailer_operator_id = 15;
+		string retailer_operator_name = 16;
 
 		// Company information
-		int64 company_id = 17;
-		string company_name = 18;
+		int64 company_operator_id = 17;
+		string company_operator_name = 18;
 		
 		// Operator information
 		int64 operator_id = 19;
@@ -332,21 +304,15 @@ message GetInvoiceDetailResponse {
 }
 
 message ListOperatorRevenueShareRequest {
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	api.common.OperatorContext operator_context = 2;
 	// Filter by invoice ID
-	optional int64 invoice_id = 1;
+	optional int64 invoice_id = 3;
 	
-	// Filter by retailer
-	optional int64 retailer_id = 2;
-	
-	// Filter by company
-	optional int64 company_id = 3;
-	
-	// Filter by operator
-	optional int64 operator_id = 4;
-	
-	// Pagination
-	optional int32 page = 5;
-	optional int32 page_size = 6;
+// Pagination
+	optional int32 page = 4;
+	optional int32 page_size = 5;
+	optional string period_key = 6;
 }
 
 message ListOperatorRevenueShareResponse {
@@ -386,21 +352,15 @@ message ListOperatorRevenueShareResponse {
 }
 
 message ListThirdPartyFeesRequest {
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	api.common.OperatorContext operator_context = 2;
 	// Filter by invoice ID
-	optional int64 invoice_id = 1;
-	
-	// Filter by retailer
-	optional int64 retailer_id = 2;
-	
-	// Filter by company
-	optional int64 company_id = 3;
-	
-	// Filter by operator
-	optional int64 operator_id = 4;
+	optional int64 invoice_id = 3;
 	
 	// Pagination
-	optional int32 page = 5;
-	optional int32 page_size = 6;
+	optional int32 page = 4;
+	optional int32 page_size = 5;
+	optional string period_key = 6;
 }
 
 message ListThirdPartyFeesResponse {
@@ -428,21 +388,15 @@ message ListThirdPartyFeesResponse {
 }
 
 message ListMonthlyRevenueShareRequest {
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	api.common.OperatorContext operator_context = 2;
 	// Filter by invoice ID
-	optional int64 invoice_id = 1;
-	
-	// Filter by retailer
-	optional int64 retailer_id = 2;
-	
-	// Filter by company
-	optional int64 company_id = 3;
-	
-	// Filter by operator
-	optional int64 operator_id = 4;
+	optional int64 invoice_id = 3;
 	
 	// Pagination
-	optional int32 page = 5;
-	optional int32 page_size = 6;
+	optional int32 page = 4;
+	optional int32 page_size = 5;
+	optional string period_key = 6;
 }
 
 message ListMonthlyRevenueShareResponse {
@@ -451,24 +405,29 @@ message ListMonthlyRevenueShareResponse {
 		int64 operator_id = 1;
 		string operator_name = 2;
 		string operator_mode = 3; // Individual, Co-Operation, Co-Operation (Self-Managed Payment)
+		string retailer_operator_id = 4;
+		string retailer_operator_name = 5;
+		string company_operator_id = 6;
+		string company_operator_name = 7;
 		
 		// Financial data
-		string deposits = 4; // Deposit amounts
-		string withdrawals = 5; // Withdrawal amounts
-		string balance = 6; // Current balance
-		string ngr = 7; // Net Gaming Revenue
-		string ggr = 8; // Gross Gaming Revenue
+		string deposits = 8; // Deposit amounts
+		string withdrawals = 9; // Withdrawal amounts
+		string balance = 10; // Current balance
+		string ngr = 11; // Net Gaming Revenue
+		string ggr = 12; // Gross Gaming Revenue
 		
 		// Revenue breakdown
-		string game_provider_rs = 9; // Game Provider Revenue Share
-		string third_party_fees = 10; // Other 3rd-Party Fees
-		string adjustments = 11; // Adjustments
-		string net_profit = 13; // Net Profit
+		string game_provider_rs = 13; // Game Provider Revenue Share
+		string third_party_fees = 14; // Other 3rd-Party Fees
+		string adjustments = 15; // Adjustments
+		string net_profit = 16; // Net Profit
 		
 		// Revenue share details
-		string rs_rate = 14; // Revenue Share Rate (e.g., "80%")
-		string revenue_share_disburse = 15; // Revenue Share (Disburse)
-		string revenue_share_collect = 16; // Revenue Share (Collect)
+		string rs_rate = 17; // Revenue Share Rate (e.g., "80%")
+		string revenue_share_system = 18; // Revenue Share System
+		string revenue_share_operator = 19; // Revenue Share Operator
+		string est_costs = 20; // Est. Costs
 	}
 	
 	repeated RevenueShareItem items = 1;
@@ -476,8 +435,9 @@ message ListMonthlyRevenueShareResponse {
 	// Summary totals
 	message Summary {
 		string subtotal = 1;
-		string revenue_share_disburse_total = 2;
-		string revenue_share_collect_total = 3;
+		string revenue_share_system_total = 2;
+		string revenue_share_operator_total = 3;
+		string est_costs_total = 4;
 	}
 	Summary summary = 2;
 	
@@ -490,8 +450,8 @@ message ListMonthlyRevenueShareResponse {
 message AddAdjustmentRequest {
 	// Basic information
 	string item = 1; // Adjustment item type
-	int64 retailer_id = 2; // Retailer ID
-	int64 company_id = 3; // Company ID
+	int64 retailer_operator_id = 2; // Retailer ID
+	int64 company_operator_id = 3; // Company ID
 	int64 operator_id = 4; // Operator ID
 	
 	// Financial information
@@ -499,6 +459,7 @@ message AddAdjustmentRequest {
 	string currency = 6; // Currency code (e.g., "USDT", "USD")
 	string amount = 7; // Adjustment amount as string to preserve precision
 	string description = 8; // Description of the adjustment
+	string period_key = 9; // Period key
 }
 
 message AddAdjustmentResponse {
@@ -543,21 +504,15 @@ message DeleteAdjustmentConfigResponse {
 }
 
 message ListAdjustmentsRequest {
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	api.common.OperatorContext operator_context = 2;
 	// Filter by invoice ID
-	optional int64 invoice_id = 1;
-	
-	// Filter by retailer
-	optional int64 retailer_id = 2;
-	
-	// Filter by company
-	optional int64 company_id = 3;
-	
-	// Filter by operator
-	optional int64 operator_id = 4;
+	optional int64 invoice_id = 3;
 	
 	// Pagination
-	optional int32 page = 5;
-	optional int32 page_size = 6;
+	optional int32 page = 4;
+	optional int32 page_size = 5;
+	optional string period_key = 6;
 }
 
 message ListAdjustmentsResponse {
@@ -593,6 +548,7 @@ message CreateAdjustmentConfigResponse {
 }
 
 message SendInvoicesRequest {
+	string period_key = 1;
 }
 
 message SendInvoicesResponse {
@@ -606,3 +562,137 @@ message GetInvoiceSummaryResponse {
 	string total_outcome = 2;
 	string billing_period = 3;
 }
+
+message GetBalanceSummaryRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContextFilters operator_context_filters = 2;
+}
+
+message GetBalanceSummaryResponse {
+	string balance = 1;
+	string est_net_share = 2;
+	string est_net_cost = 3;
+}
+
+message GetBalancesSummaryRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContextFilters operator_context_filters = 2;
+}
+
+message GetBalancesSummaryResponse {
+	string deposits = 1;
+	string withdrawals = 2;
+	string balance = 3;
+	string ngr = 4;
+	string game_provider_rs = 5;
+	string third_party_fees = 6;
+	string adjustments = 7;
+	string est_net_profit = 8;
+	string revenue_share_system = 9;
+	string revenue_share_operator = 10;
+	string est_net_costs = 11;
+}
+
+message ListBillingPeriodsRequest {
+	optional int32 page = 1;
+	optional int32 page_size = 2;
+}
+
+message ListBillingPeriodsResponse {
+	message BillingPeriod {
+		string start_time = 1;
+		string end_time = 2;
+		string status = 3;
+		string created_at = 4;
+		string updated_at = 5;
+		string period_key = 6;
+	}
+	repeated BillingPeriod billing_periods = 1;
+	int32 total_count = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}
+
+message ListBalanceMonthlyRevenueSharesRequest {
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	api.common.OperatorContext operator_context = 2;
+	optional int32 page = 3;
+	optional int32 page_size = 4;
+	enum Type {
+		TYPE_NET_SHARE = 0;
+		TYPE_EST_COSTS = 1;
+	}
+	Type type = 5;
+}
+
+message ListBalanceMonthlyRevenueSharesResponse {
+	message RevenueShareItem{
+		// Basic information
+		int64 operator_id = 1;
+		string operator_name = 2;
+		string operator_mode = 3; // Individual, Co-Operation, Co-Operation (Self-Managed Payment)
+		string retailer_operator_id = 4;
+		string retailer_operator_name = 5;
+		string company_operator_id = 6;
+		string company_operator_name = 7;
+		
+		// Financial data
+		string deposits = 8; // Deposit amounts
+		string withdrawals = 9; // Withdrawal amounts
+		string balance = 10; // Current balance
+		string ngr = 11; // Net Gaming Revenue
+		string ggr = 12; // Gross Gaming Revenue
+		
+		// Revenue breakdown
+		string game_provider_rs = 13; // Game Provider Revenue Share
+		string third_party_fees = 14; // Other 3rd-Party Fees
+		string adjustments = 15; // Adjustments
+		string net_profit = 16; // Net Profit
+
+		// Revenue share details
+		string rs_rate = 17; // Revenue Share Rate (e.g., "80%")
+		string revenue_share_system = 18; // Revenue Share System
+		string revenue_share_operator = 19; // Revenue Share Operator
+		string est_costs = 20; // Est. Costs
+		int64 id = 21;
+	}
+	
+	repeated RevenueShareItem items = 1;
+
+	// Pagination information
+	int32 total_count = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}
+
+message ListBalancesSummaryRequest {
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	api.common.OperatorContext operator_context = 2;
+	optional int32 page = 3;
+	optional int32 page_size = 4;
+}
+
+message ListBalancesSummaryResponse {
+	message BalanceSummary {
+		int64 retailer_operator_id = 4;
+		string retailer_operator_name = 5;
+		int64 company_operator_id = 6;
+		string company_operator_name = 7;
+		string deposits = 8;
+		string withdrawals = 9;
+		string balance = 10;
+		string ngr = 11;
+		string game_provider_rs = 12;
+		string third_party_fees = 13;
+		string adjustments = 14;
+		string est_net_profit = 15;
+		string revenue_share_system = 16;
+		string revenue_share_operator = 17;
+		string est_net_costs = 18;
+	}
+
+	repeated BalanceSummary balances = 1;
+	int32 total_count = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}	

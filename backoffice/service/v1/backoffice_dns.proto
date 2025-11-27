@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package api.backoffice.service.v1;
+
+import "google/api/annotations.proto";
+import "common/common.proto";
+import "user/service/v1/dns.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.backoffice.service.v1";
+
+service BackofficeDns {
+	rpc ListOperatorDomains(ListOperatorDomainsRequest) returns (user.service.v1.ListOperatorDomainsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/dns/domains/list"
+			body: "*"
+		};
+	}
+
+	rpc ListOperatorByoDomains(ListOperatorByoDomainsRequest) returns (user.service.v1.ListOperatorByoDomainsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/dns/byo-domains/list"
+			body: "*"
+		};
+	}
+
+	rpc AddOperatorByoDomain(AddOperatorByoDomainRequest) returns (user.service.v1.AddOperatorByoDomainResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/dns/byo-domains/add"
+			body: "*"
+		};
+	}
+
+	rpc DeleteOperatorByoDomain(DeleteOperatorByoDomainRequest) returns (user.service.v1.DeleteOperatorByoDomainResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/dns/byo-domains/delete"
+			body: "*"
+		};
+	}
+}
+
+message ListOperatorDomainsRequest {
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	optional string type = 2;
+}
+
+message ListOperatorByoDomainsRequest {
+	optional int32 page = 1;
+	optional int32 page_size = 2;
+}
+
+message AddOperatorByoDomainRequest {
+	string byo_domain = 1;
+	string domain = 2;
+	string acme_challenge_type = 3;
+}
+
+message DeleteOperatorByoDomainRequest {
+	string byo_domain = 1;
+}

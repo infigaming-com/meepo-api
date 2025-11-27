@@ -19,31 +19,33 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Operator_AddOperator_FullMethodName              = "/api.operator.service.v1.Operator/AddOperator"
-	Operator_UpdateOperator_FullMethodName           = "/api.operator.service.v1.Operator/UpdateOperator"
-	Operator_GetOperator_FullMethodName              = "/api.operator.service.v1.Operator/GetOperator"
-	Operator_GetOperatorsByIds_FullMethodName        = "/api.operator.service.v1.Operator/GetOperatorsByIds"
-	Operator_AddOrUpdateCurrency_FullMethodName      = "/api.operator.service.v1.Operator/AddOrUpdateCurrency"
-	Operator_UpdateOperatorCurrency_FullMethodName   = "/api.operator.service.v1.Operator/UpdateOperatorCurrency"
-	Operator_GetOperatorCurrencies_FullMethodName    = "/api.operator.service.v1.Operator/GetOperatorCurrencies"
-	Operator_AddOriginOperatorId_FullMethodName      = "/api.operator.service.v1.Operator/AddOriginOperatorId"
-	Operator_GetOperatorIdByOrigin_FullMethodName    = "/api.operator.service.v1.Operator/GetOperatorIdByOrigin"
-	Operator_DeleteOriginOperatorId_FullMethodName   = "/api.operator.service.v1.Operator/DeleteOriginOperatorId"
-	Operator_GetParentOperatorIds_FullMethodName     = "/api.operator.service.v1.Operator/GetParentOperatorIds"
-	Operator_ListOperators_FullMethodName            = "/api.operator.service.v1.Operator/ListOperators"
-	Operator_ListInvoices_FullMethodName             = "/api.operator.service.v1.Operator/ListInvoices"
-	Operator_GetInvoiceDetail_FullMethodName         = "/api.operator.service.v1.Operator/GetInvoiceDetail"
-	Operator_ListOperatorRevenueShare_FullMethodName = "/api.operator.service.v1.Operator/ListOperatorRevenueShare"
-	Operator_ListThirdPartyFees_FullMethodName       = "/api.operator.service.v1.Operator/ListThirdPartyFees"
-	Operator_ListAdjustments_FullMethodName          = "/api.operator.service.v1.Operator/ListAdjustments"
-	Operator_ListMonthlyRevenueShare_FullMethodName  = "/api.operator.service.v1.Operator/ListMonthlyRevenueShare"
-	Operator_AddAdjustment_FullMethodName            = "/api.operator.service.v1.Operator/AddAdjustment"
-	Operator_ListAdjustmentConfigs_FullMethodName    = "/api.operator.service.v1.Operator/ListAdjustmentConfigs"
-	Operator_CreateAdjustmentConfig_FullMethodName   = "/api.operator.service.v1.Operator/CreateAdjustmentConfig"
-	Operator_UpdateAdjustmentConfig_FullMethodName   = "/api.operator.service.v1.Operator/UpdateAdjustmentConfig"
-	Operator_DeleteAdjustmentConfig_FullMethodName   = "/api.operator.service.v1.Operator/DeleteAdjustmentConfig"
-	Operator_SendInvoices_FullMethodName             = "/api.operator.service.v1.Operator/SendInvoices"
-	Operator_GetInvoiceSummary_FullMethodName        = "/api.operator.service.v1.Operator/GetInvoiceSummary"
+	Operator_AddOperator_FullMethodName                     = "/api.operator.service.v1.Operator/AddOperator"
+	Operator_UpdateOperator_FullMethodName                  = "/api.operator.service.v1.Operator/UpdateOperator"
+	Operator_GetOperator_FullMethodName                     = "/api.operator.service.v1.Operator/GetOperator"
+	Operator_GetOperatorsByIds_FullMethodName               = "/api.operator.service.v1.Operator/GetOperatorsByIds"
+	Operator_AddOriginOperatorId_FullMethodName             = "/api.operator.service.v1.Operator/AddOriginOperatorId"
+	Operator_GetOperatorIdByOrigin_FullMethodName           = "/api.operator.service.v1.Operator/GetOperatorIdByOrigin"
+	Operator_DeleteOriginOperatorId_FullMethodName          = "/api.operator.service.v1.Operator/DeleteOriginOperatorId"
+	Operator_GetParentOperatorIds_FullMethodName            = "/api.operator.service.v1.Operator/GetParentOperatorIds"
+	Operator_ListOperators_FullMethodName                   = "/api.operator.service.v1.Operator/ListOperators"
+	Operator_ListInvoices_FullMethodName                    = "/api.operator.service.v1.Operator/ListInvoices"
+	Operator_GetInvoiceDetail_FullMethodName                = "/api.operator.service.v1.Operator/GetInvoiceDetail"
+	Operator_ListOperatorRevenueShare_FullMethodName        = "/api.operator.service.v1.Operator/ListOperatorRevenueShare"
+	Operator_ListThirdPartyFees_FullMethodName              = "/api.operator.service.v1.Operator/ListThirdPartyFees"
+	Operator_ListAdjustments_FullMethodName                 = "/api.operator.service.v1.Operator/ListAdjustments"
+	Operator_ListMonthlyRevenueShare_FullMethodName         = "/api.operator.service.v1.Operator/ListMonthlyRevenueShare"
+	Operator_AddAdjustment_FullMethodName                   = "/api.operator.service.v1.Operator/AddAdjustment"
+	Operator_ListAdjustmentConfigs_FullMethodName           = "/api.operator.service.v1.Operator/ListAdjustmentConfigs"
+	Operator_CreateAdjustmentConfig_FullMethodName          = "/api.operator.service.v1.Operator/CreateAdjustmentConfig"
+	Operator_UpdateAdjustmentConfig_FullMethodName          = "/api.operator.service.v1.Operator/UpdateAdjustmentConfig"
+	Operator_DeleteAdjustmentConfig_FullMethodName          = "/api.operator.service.v1.Operator/DeleteAdjustmentConfig"
+	Operator_SendInvoices_FullMethodName                    = "/api.operator.service.v1.Operator/SendInvoices"
+	Operator_GetInvoiceSummary_FullMethodName               = "/api.operator.service.v1.Operator/GetInvoiceSummary"
+	Operator_GetBalanceSummary_FullMethodName               = "/api.operator.service.v1.Operator/GetBalanceSummary"
+	Operator_GetBalancesSummary_FullMethodName              = "/api.operator.service.v1.Operator/GetBalancesSummary"
+	Operator_ListBillingPeriods_FullMethodName              = "/api.operator.service.v1.Operator/ListBillingPeriods"
+	Operator_ListBalanceMonthlyRevenueShares_FullMethodName = "/api.operator.service.v1.Operator/ListBalanceMonthlyRevenueShares"
+	Operator_ListBalancesSummary_FullMethodName             = "/api.operator.service.v1.Operator/ListBalancesSummary"
 )
 
 // OperatorClient is the client API for Operator service.
@@ -56,9 +58,6 @@ type OperatorClient interface {
 	UpdateOperator(ctx context.Context, in *UpdateOperatorRequest, opts ...grpc.CallOption) (*UpdateOperatorResponse, error)
 	GetOperator(ctx context.Context, in *GetOperatorRequest, opts ...grpc.CallOption) (*GetOperatorResponse, error)
 	GetOperatorsByIds(ctx context.Context, in *GetOperatorsByIdsRequest, opts ...grpc.CallOption) (*GetOperatorsByIdsResponse, error)
-	AddOrUpdateCurrency(ctx context.Context, in *AddOrUpdateCurrencyRequest, opts ...grpc.CallOption) (*AddOrUpdateCurrencyResponse, error)
-	UpdateOperatorCurrency(ctx context.Context, in *UpdateOperatorCurrencyRequest, opts ...grpc.CallOption) (*UpdateOperatorCurrencyResponse, error)
-	GetOperatorCurrencies(ctx context.Context, in *GetOperatorCurrenciesRequest, opts ...grpc.CallOption) (*GetOperatorCurrenciesResponse, error)
 	AddOriginOperatorId(ctx context.Context, in *AddOriginOperatorIdRequest, opts ...grpc.CallOption) (*AddOriginOperatorIdResponse, error)
 	GetOperatorIdByOrigin(ctx context.Context, in *GetOperatorIdByOriginRequest, opts ...grpc.CallOption) (*GetOperatorIdByOriginResponse, error)
 	DeleteOriginOperatorId(ctx context.Context, in *DeleteOriginOperatorIdRequest, opts ...grpc.CallOption) (*DeleteOriginOperatorIdResponse, error)
@@ -80,6 +79,11 @@ type OperatorClient interface {
 	DeleteAdjustmentConfig(ctx context.Context, in *DeleteAdjustmentConfigRequest, opts ...grpc.CallOption) (*DeleteAdjustmentConfigResponse, error)
 	SendInvoices(ctx context.Context, in *SendInvoicesRequest, opts ...grpc.CallOption) (*SendInvoicesResponse, error)
 	GetInvoiceSummary(ctx context.Context, in *GetInvoiceSummaryRequest, opts ...grpc.CallOption) (*GetInvoiceSummaryResponse, error)
+	GetBalanceSummary(ctx context.Context, in *GetBalanceSummaryRequest, opts ...grpc.CallOption) (*GetBalanceSummaryResponse, error)
+	GetBalancesSummary(ctx context.Context, in *GetBalancesSummaryRequest, opts ...grpc.CallOption) (*GetBalancesSummaryResponse, error)
+	ListBillingPeriods(ctx context.Context, in *ListBillingPeriodsRequest, opts ...grpc.CallOption) (*ListBillingPeriodsResponse, error)
+	ListBalanceMonthlyRevenueShares(ctx context.Context, in *ListBalanceMonthlyRevenueSharesRequest, opts ...grpc.CallOption) (*ListBalanceMonthlyRevenueSharesResponse, error)
+	ListBalancesSummary(ctx context.Context, in *ListBalancesSummaryRequest, opts ...grpc.CallOption) (*ListBalancesSummaryResponse, error)
 }
 
 type operatorClient struct {
@@ -124,36 +128,6 @@ func (c *operatorClient) GetOperatorsByIds(ctx context.Context, in *GetOperators
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetOperatorsByIdsResponse)
 	err := c.cc.Invoke(ctx, Operator_GetOperatorsByIds_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *operatorClient) AddOrUpdateCurrency(ctx context.Context, in *AddOrUpdateCurrencyRequest, opts ...grpc.CallOption) (*AddOrUpdateCurrencyResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AddOrUpdateCurrencyResponse)
-	err := c.cc.Invoke(ctx, Operator_AddOrUpdateCurrency_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *operatorClient) UpdateOperatorCurrency(ctx context.Context, in *UpdateOperatorCurrencyRequest, opts ...grpc.CallOption) (*UpdateOperatorCurrencyResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateOperatorCurrencyResponse)
-	err := c.cc.Invoke(ctx, Operator_UpdateOperatorCurrency_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *operatorClient) GetOperatorCurrencies(ctx context.Context, in *GetOperatorCurrenciesRequest, opts ...grpc.CallOption) (*GetOperatorCurrenciesResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetOperatorCurrenciesResponse)
-	err := c.cc.Invoke(ctx, Operator_GetOperatorCurrencies_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -340,6 +314,56 @@ func (c *operatorClient) GetInvoiceSummary(ctx context.Context, in *GetInvoiceSu
 	return out, nil
 }
 
+func (c *operatorClient) GetBalanceSummary(ctx context.Context, in *GetBalanceSummaryRequest, opts ...grpc.CallOption) (*GetBalanceSummaryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBalanceSummaryResponse)
+	err := c.cc.Invoke(ctx, Operator_GetBalanceSummary_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *operatorClient) GetBalancesSummary(ctx context.Context, in *GetBalancesSummaryRequest, opts ...grpc.CallOption) (*GetBalancesSummaryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBalancesSummaryResponse)
+	err := c.cc.Invoke(ctx, Operator_GetBalancesSummary_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *operatorClient) ListBillingPeriods(ctx context.Context, in *ListBillingPeriodsRequest, opts ...grpc.CallOption) (*ListBillingPeriodsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListBillingPeriodsResponse)
+	err := c.cc.Invoke(ctx, Operator_ListBillingPeriods_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *operatorClient) ListBalanceMonthlyRevenueShares(ctx context.Context, in *ListBalanceMonthlyRevenueSharesRequest, opts ...grpc.CallOption) (*ListBalanceMonthlyRevenueSharesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListBalanceMonthlyRevenueSharesResponse)
+	err := c.cc.Invoke(ctx, Operator_ListBalanceMonthlyRevenueShares_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *operatorClient) ListBalancesSummary(ctx context.Context, in *ListBalancesSummaryRequest, opts ...grpc.CallOption) (*ListBalancesSummaryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListBalancesSummaryResponse)
+	err := c.cc.Invoke(ctx, Operator_ListBalancesSummary_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OperatorServer is the server API for Operator service.
 // All implementations must embed UnimplementedOperatorServer
 // for forward compatibility.
@@ -350,9 +374,6 @@ type OperatorServer interface {
 	UpdateOperator(context.Context, *UpdateOperatorRequest) (*UpdateOperatorResponse, error)
 	GetOperator(context.Context, *GetOperatorRequest) (*GetOperatorResponse, error)
 	GetOperatorsByIds(context.Context, *GetOperatorsByIdsRequest) (*GetOperatorsByIdsResponse, error)
-	AddOrUpdateCurrency(context.Context, *AddOrUpdateCurrencyRequest) (*AddOrUpdateCurrencyResponse, error)
-	UpdateOperatorCurrency(context.Context, *UpdateOperatorCurrencyRequest) (*UpdateOperatorCurrencyResponse, error)
-	GetOperatorCurrencies(context.Context, *GetOperatorCurrenciesRequest) (*GetOperatorCurrenciesResponse, error)
 	AddOriginOperatorId(context.Context, *AddOriginOperatorIdRequest) (*AddOriginOperatorIdResponse, error)
 	GetOperatorIdByOrigin(context.Context, *GetOperatorIdByOriginRequest) (*GetOperatorIdByOriginResponse, error)
 	DeleteOriginOperatorId(context.Context, *DeleteOriginOperatorIdRequest) (*DeleteOriginOperatorIdResponse, error)
@@ -374,6 +395,11 @@ type OperatorServer interface {
 	DeleteAdjustmentConfig(context.Context, *DeleteAdjustmentConfigRequest) (*DeleteAdjustmentConfigResponse, error)
 	SendInvoices(context.Context, *SendInvoicesRequest) (*SendInvoicesResponse, error)
 	GetInvoiceSummary(context.Context, *GetInvoiceSummaryRequest) (*GetInvoiceSummaryResponse, error)
+	GetBalanceSummary(context.Context, *GetBalanceSummaryRequest) (*GetBalanceSummaryResponse, error)
+	GetBalancesSummary(context.Context, *GetBalancesSummaryRequest) (*GetBalancesSummaryResponse, error)
+	ListBillingPeriods(context.Context, *ListBillingPeriodsRequest) (*ListBillingPeriodsResponse, error)
+	ListBalanceMonthlyRevenueShares(context.Context, *ListBalanceMonthlyRevenueSharesRequest) (*ListBalanceMonthlyRevenueSharesResponse, error)
+	ListBalancesSummary(context.Context, *ListBalancesSummaryRequest) (*ListBalancesSummaryResponse, error)
 	mustEmbedUnimplementedOperatorServer()
 }
 
@@ -395,15 +421,6 @@ func (UnimplementedOperatorServer) GetOperator(context.Context, *GetOperatorRequ
 }
 func (UnimplementedOperatorServer) GetOperatorsByIds(context.Context, *GetOperatorsByIdsRequest) (*GetOperatorsByIdsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorsByIds not implemented")
-}
-func (UnimplementedOperatorServer) AddOrUpdateCurrency(context.Context, *AddOrUpdateCurrencyRequest) (*AddOrUpdateCurrencyResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddOrUpdateCurrency not implemented")
-}
-func (UnimplementedOperatorServer) UpdateOperatorCurrency(context.Context, *UpdateOperatorCurrencyRequest) (*UpdateOperatorCurrencyResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateOperatorCurrency not implemented")
-}
-func (UnimplementedOperatorServer) GetOperatorCurrencies(context.Context, *GetOperatorCurrenciesRequest) (*GetOperatorCurrenciesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorCurrencies not implemented")
 }
 func (UnimplementedOperatorServer) AddOriginOperatorId(context.Context, *AddOriginOperatorIdRequest) (*AddOriginOperatorIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddOriginOperatorId not implemented")
@@ -458,6 +475,21 @@ func (UnimplementedOperatorServer) SendInvoices(context.Context, *SendInvoicesRe
 }
 func (UnimplementedOperatorServer) GetInvoiceSummary(context.Context, *GetInvoiceSummaryRequest) (*GetInvoiceSummaryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInvoiceSummary not implemented")
+}
+func (UnimplementedOperatorServer) GetBalanceSummary(context.Context, *GetBalanceSummaryRequest) (*GetBalanceSummaryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBalanceSummary not implemented")
+}
+func (UnimplementedOperatorServer) GetBalancesSummary(context.Context, *GetBalancesSummaryRequest) (*GetBalancesSummaryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBalancesSummary not implemented")
+}
+func (UnimplementedOperatorServer) ListBillingPeriods(context.Context, *ListBillingPeriodsRequest) (*ListBillingPeriodsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBillingPeriods not implemented")
+}
+func (UnimplementedOperatorServer) ListBalanceMonthlyRevenueShares(context.Context, *ListBalanceMonthlyRevenueSharesRequest) (*ListBalanceMonthlyRevenueSharesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBalanceMonthlyRevenueShares not implemented")
+}
+func (UnimplementedOperatorServer) ListBalancesSummary(context.Context, *ListBalancesSummaryRequest) (*ListBalancesSummaryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBalancesSummary not implemented")
 }
 func (UnimplementedOperatorServer) mustEmbedUnimplementedOperatorServer() {}
 func (UnimplementedOperatorServer) testEmbeddedByValue()                  {}
@@ -548,60 +580,6 @@ func _Operator_GetOperatorsByIds_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(OperatorServer).GetOperatorsByIds(ctx, req.(*GetOperatorsByIdsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Operator_AddOrUpdateCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddOrUpdateCurrencyRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OperatorServer).AddOrUpdateCurrency(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Operator_AddOrUpdateCurrency_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OperatorServer).AddOrUpdateCurrency(ctx, req.(*AddOrUpdateCurrencyRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Operator_UpdateOperatorCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateOperatorCurrencyRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OperatorServer).UpdateOperatorCurrency(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Operator_UpdateOperatorCurrency_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OperatorServer).UpdateOperatorCurrency(ctx, req.(*UpdateOperatorCurrencyRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Operator_GetOperatorCurrencies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOperatorCurrenciesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OperatorServer).GetOperatorCurrencies(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Operator_GetOperatorCurrencies_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OperatorServer).GetOperatorCurrencies(ctx, req.(*GetOperatorCurrenciesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -930,6 +908,96 @@ func _Operator_GetInvoiceSummary_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Operator_GetBalanceSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBalanceSummaryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperatorServer).GetBalanceSummary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Operator_GetBalanceSummary_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperatorServer).GetBalanceSummary(ctx, req.(*GetBalanceSummaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Operator_GetBalancesSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBalancesSummaryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperatorServer).GetBalancesSummary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Operator_GetBalancesSummary_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperatorServer).GetBalancesSummary(ctx, req.(*GetBalancesSummaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Operator_ListBillingPeriods_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBillingPeriodsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperatorServer).ListBillingPeriods(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Operator_ListBillingPeriods_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperatorServer).ListBillingPeriods(ctx, req.(*ListBillingPeriodsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Operator_ListBalanceMonthlyRevenueShares_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBalanceMonthlyRevenueSharesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperatorServer).ListBalanceMonthlyRevenueShares(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Operator_ListBalanceMonthlyRevenueShares_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperatorServer).ListBalanceMonthlyRevenueShares(ctx, req.(*ListBalanceMonthlyRevenueSharesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Operator_ListBalancesSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBalancesSummaryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OperatorServer).ListBalancesSummary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Operator_ListBalancesSummary_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OperatorServer).ListBalancesSummary(ctx, req.(*ListBalancesSummaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Operator_ServiceDesc is the grpc.ServiceDesc for Operator service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -952,18 +1020,6 @@ var Operator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOperatorsByIds",
 			Handler:    _Operator_GetOperatorsByIds_Handler,
-		},
-		{
-			MethodName: "AddOrUpdateCurrency",
-			Handler:    _Operator_AddOrUpdateCurrency_Handler,
-		},
-		{
-			MethodName: "UpdateOperatorCurrency",
-			Handler:    _Operator_UpdateOperatorCurrency_Handler,
-		},
-		{
-			MethodName: "GetOperatorCurrencies",
-			Handler:    _Operator_GetOperatorCurrencies_Handler,
 		},
 		{
 			MethodName: "AddOriginOperatorId",
@@ -1036,6 +1092,26 @@ var Operator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetInvoiceSummary",
 			Handler:    _Operator_GetInvoiceSummary_Handler,
+		},
+		{
+			MethodName: "GetBalanceSummary",
+			Handler:    _Operator_GetBalanceSummary_Handler,
+		},
+		{
+			MethodName: "GetBalancesSummary",
+			Handler:    _Operator_GetBalancesSummary_Handler,
+		},
+		{
+			MethodName: "ListBillingPeriods",
+			Handler:    _Operator_ListBillingPeriods_Handler,
+		},
+		{
+			MethodName: "ListBalanceMonthlyRevenueShares",
+			Handler:    _Operator_ListBalanceMonthlyRevenueShares_Handler,
+		},
+		{
+			MethodName: "ListBalancesSummary",
+			Handler:    _Operator_ListBalancesSummary_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

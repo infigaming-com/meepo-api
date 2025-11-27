@@ -23,6 +23,14 @@ service Wallet {
 	rpc GetUserBalance (GetUserBalanceRequest) returns (GetUserBalanceResponse) {
 	}
 
+	// GetUserBalanceDetails returns the cash and credit details of every credit of the user balance(one currency only)
+	rpc GetUserBalanceDetails (GetUserBalanceDetailsRequest) returns (GetUserBalanceDetailsResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/balance/details"
+			body: "*"
+		};
+	}
+
 	rpc Credit (CreditRequest) returns (CreditResponse) {}
 
 	rpc Debit (DebitRequest) returns (DebitResponse) {}
@@ -52,6 +60,13 @@ service Wallet {
 
 	rpc GetExchangeRates (GetExchangeRatesRequest) returns (GetExchangeRatesResponse) {}
 
+	rpc GetExchangeRatesWithBaseCurrency (GetExchangeRatesWithBaseCurrencyRequest) returns (GetExchangeRatesWithBaseCurrencyResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/exchange-rates/base-currency"
+			body: "*"
+		};
+	}
+
 	// GetUserTransactionSummary returns the summary of user's transactions 
 	// It returns the total deposit, withdraw, deposit minus withdraw, valid bet
 	rpc GetUserTransactionSummary (GetUserTransactionSummaryRequest) returns (GetUserTransactionSummaryResponse) {}
@@ -78,23 +93,134 @@ service Wallet {
 
 	rpc UpdateUserCurrency (UpdateUserCurrencyRequest) returns (UpdateUserCurrencyResponse) {}
 
+	// List Bottom Operator Balances based on filter
+	rpc ListBottomOperatorBalances (ListBottomOperatorBalancesRequest) returns (ListBottomOperatorBalancesResponse) {}
+	
 	// Transfer cash from operator to its company operator
 	rpc OperatorTransfer (OperatorTransferRequest) returns (OperatorTransferResponse) {}
 
-	// Swap cash between two balances of the same operator
+	// Swap cash between two balances of the same company's operator
 	rpc OperatorSwap (OperatorSwapRequest) returns (OperatorSwapResponse) {}
 
 	// Freeze cash of a balance of an operator
-	rpc OperatorBalanceFreeze (OperatorBalanceFreezeRequest) returns (OperatorBalanceFreezeResponse) {}
+	rpc OperatorFreeze (OperatorFreezeRequest) returns (OperatorFreezeResponse) {}
 	
 	// Rollback frozen cash of an operator
-	rpc OperatorBalanceRollback (OperatorBalanceRollbackRequest) returns (OperatorBalanceRollbackResponse) {}
+	rpc OperatorRollback (OperatorRollbackRequest) returns (OperatorRollbackResponse) {}
 
 	// Settle frozen cash of an operator
-	rpc OperatorBalanceSettle (OperatorBalanceSettleRequest) returns (OperatorBalanceSettleResponse) {}
+	rpc OperatorSettle (OperatorSettleRequest) returns (OperatorSettleResponse) {}
 
-	// List Operator Balances based on filter
-	rpc ListOperatorBalances (ListOperatorBalancesRequest) returns (ListOperatorBalancesResponse) {}
+	// GetOperatorBalance gets the balances of an operator
+	rpc GetOperatorBalance(GetOperatorBalanceRequest) returns (GetOperatorBalanceResponse) {}
+
+	// List Operator Balance Transactions based on filter
+	rpc ListOperatorBalanceTransactions (ListOperatorBalanceTransactionsRequest) returns (ListOperatorBalanceTransactionsResponse) {}
+
+	// OperatorDebit is used to debit cash from an operator's balance
+	rpc OperatorDebit (OperatorDebitRequest) returns (OperatorDebitResponse) {}
+
+	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
+	rpc UpdateOperatorBalance(UpdateOperatorBalanceRequest) returns (UpdateOperatorBalanceResponse) {}
+
+	// GetOperatorTransactionSummary returns the summary of operator's transactions 
+	rpc GetOperatorTransactionSummary(GetOperatorTransactionSummaryRequest) returns (GetOperatorTransactionSummaryResponse) {}
+
+	// GetOperatorBalanceTransactionsByIds returns the balance transactions with specific transaction ids
+	rpc GetOperatorBalanceTransactionsByIds(GetOperatorBalanceTransactionsByIdsRequest) returns (GetOperatorBalanceTransactionsByIdsResponse) {}
+
+	// SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
+	rpc SetDepositRewardSequences(SetDepositRewardSequencesRequest) returns (SetDepositRewardSequencesResponse) {}
+
+	// DeleteDepositRewardSequences deletes a deposit reward sequence of a operator currency config
+	rpc DeleteDepositRewardSequences(DeleteDepositRewardSequencesRequest) returns (DeleteDepositRewardSequencesResponse) {}
+
+	// GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
+	rpc GetDepositRewardConfig(GetDepositRewardConfigRequest) returns (GetDepositRewardConfigResponse) {}
+
+	// GetUserDepositRewardSequence returns the current available deposit reward sequence of the user based on the user deposit stats
+	rpc GetUserDepositRewardSequence(GetUserDepositRewardSequenceRequest) returns (GetUserDepositRewardSequenceResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/deposit-reward/user-sequence"
+			body: "*"
+		};
+	}
+
+	// GetOperatorCurrencyConfig returns the currency config and the deduction order config based on currency and operator context
+	rpc GetGamificationCurrencyConfig(GetGamificationCurrencyConfigRequest) returns (GetGamificationCurrencyConfigResponse) {}
+
+	// UpdateGamificationCurrencyConfig updates the config of a operator and its currency
+	rpc UpdateOperatorCurrencyConfig(UpdateOperatorCurrencyConfigRequest) returns (UpdateOperatorCurrencyConfigResponse) {}
+
+	// UpdateDeductionOrder updates the deduction order config based on operator context
+	rpc UpdateDeductionOrder(UpdateDeductionOrderRequest) returns (UpdateDeductionOrderResponse) {}
+
+	// BonusTransfer is used to transfer from one credit's bonus to generate a new credit's cash
+	rpc BonusTransfer(BonusTransferRequest) returns (BonusTransferResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/bonus-transfer"
+			body: "*"
+		};
+	}
+
+	// AddResponsibleGamblingConfig adds gambling config for a user's currency
+	rpc AddResponsibleGamblingConfig(AddResponsibleGamblingConfigRequest) returns (AddResponsibleGamblingConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/responsible-gambling/config/add"
+			body: "*"
+		};
+	}
+
+	// DeleteResponsibleGamblingConfig deletes gambling config for a user's currency
+	rpc DeleteResponsibleGamblingConfig(DeleteResponsibleGamblingConfigRequest) returns (DeleteResponsibleGamblingConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/responsible-gambling/config/delete"
+			body: "*"
+		};
+	}
+
+	// ListResponsibleGamblingConfigs lists gambling configs for a user with all currencies
+	rpc ListResponsibleGamblingConfigs(ListResponsibleGamblingConfigsRequest) returns (ListResponsibleGamblingConfigsResponse) {
+		option (google.api.http) = {
+			post: "/v1/wallet/responsible-gambling/configs/list"
+			body: "*"
+		};
+	}
+
+	// GetResponsibleGamblingConfig gets gambling config and statusfor a user's currency
+	rpc GetResponsibleGamblingConfig(GetResponsibleGamblingConfigRequest) returns (GetResponsibleGamblingConfigResponse) {
+	}
+
+	// ListCustomerRecords lists customer records for all users (with deposit, withdraw, game bet, game win and manual credit(this is not supported yet))
+	rpc ListCustomerRecords(ListCustomerRecordsRequest) returns (ListCustomerRecordsResponse) {}
+
+	// ExportCustomerRecords create a task to exports customer records for all users (with deposit, withdraw, game bet, game win and manual credit(this is not supported yet))
+	rpc ExportCustomerRecords(ExportCustomerRecordsRequest) returns (ExportCustomerRecordsResponse) {}
+
+	// SetFICAThresholdConfig sets the FICA threshold config for an operator and its specific currency
+	rpc SetFICAThresholdConfig(SetFICAThresholdConfigRequest) returns (SetFICAThresholdConfigResponse) {}
+
+	// GetFICAThresholdConfig gets the FICA threshold config for an operator of all currencies
+	rpc GetFICAThresholdConfig(GetFICAThresholdConfigRequest) returns (GetFICAThresholdConfigResponse) {}
+
+	// ListFICAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
+	rpc ListFICAThresholdTransactions(ListFICAThresholdTransactionsRequest) returns (ListFICAThresholdTransactionsResponse) {}
+
+	// ExportFICAThresholdTransactions create a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
+	rpc ExportFICAThresholdTransactions(ExportFICAThresholdTransactionsRequest) returns (ExportFICAThresholdTransactionsResponse) {}
+
+	rpc ListBalancesByUserIds(ListBalancesByUserIdsRequest) returns (ListBalancesByUserIdsResponse) {}
+
+	rpc ListManualJournalEntries(ListManualJournalEntriesRequest) returns (ListManualJournalEntriesResponse) {}
+
+	rpc ExportManualJournalEntries(ExportManualJournalEntriesRequest) returns (ExportManualJournalEntriesResponse) {}
+
+	rpc ListTimeRangeDepositCredits(ListTimeRangeDepositCreditsRequest) returns (ListTimeRangeDepositCreditsResponse) {}
+
+	rpc ListUserOverview(ListUserOverviewRequest) returns (ListUserOverviewResponse) {}
+
+	// GetUserGameTransactionsSummary returns the summary of user's game transactions, mostly for exactly one game bet
+	rpc GetUserGameTransactionsSummary(GetUserGameTransactionsSummaryRequest) returns (GetUserGameTransactionsSummaryResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -107,6 +233,8 @@ message GetUserBalancesResponse {
 		string cash = 2;
 		string operator_bonus = 3;
 		string provider_bonus = 4;
+		string withdrawable_cash = 5;
+		string transferable_bonus = 6;
 	}
 	repeated Balance balances = 1;
 }
@@ -146,19 +274,20 @@ message GetUserBalanceResponse {
 //   - "payment_withdraw_rollback" - Payment withdraw transaction rollback
 
 message CreditRequest {
-	message Ratio {
-		string cash = 1;
-		string operator_bonus = 2;
-	}
-
 	int64 user_id = 1;
 	string currency = 2;
-	// Valid credit transaction types:
-	//   - "payment_deposit"    - Payment deposit transaction
 	string transaction_type = 3;
-	int64 transaction_id = 4;
-	string cash = 5;
-	api.common.OperatorContext operator_context = 6;
+	string cash_amount = 4;
+	string cash_turnover_threshold = 5;
+	string operator_bonus_amount = 6;
+	string operator_bonus_turnover_threshold = 7;
+	string operator_bonus_withdraw_limit = 8;
+	string comment = 9;
+	optional int64 external_transaction_id = 10;
+	api.common.OperatorContext operator_context = 11;
+	int64 initiator_user_id = 12;
+	string operator_reporting_currency =13;
+	api.common.OperatorContext initiator_operator_context = 14;
 }
 
 message CreditResponse {
@@ -168,12 +297,15 @@ message CreditResponse {
 message DebitRequest {
 	int64 user_id = 1;
 	string currency = 2;
+	string reporting_currency = 3;
 	// Valid debit transaction types:
 	//   - "payment_withdraw"   - Payment withdraw transaction
-	string transaction_type = 3;
-	int64 transaction_id = 4;
-	string cash = 5;
-	api.common.OperatorContext operator_context = 6;
+	string transaction_type = 4;
+	int64 transaction_id = 5;
+	string amount = 6;
+	api.common.OperatorContext operator_context = 7;
+	int64 initiator_user_id = 8;
+	string comment = 9;
 }
 
 message DebitResponse {
@@ -184,14 +316,37 @@ message GameDebitRequest {
 	int64 user_id = 1;
 	string currency = 2;
 	string settlement_currency = 3;
-	string exchange_rate = 4;
+	string reporting_currency = 4;
+	string exchange_rate = 5;
 	// Valid game debit transaction types:
 	//   - "game_bet"          - Game bet transaction
-	string transaction_type = 5;
-	int64 transaction_id = 6;
-	string amount = 7;
-	string turnover = 8;
-	api.common.OperatorContext operator_context = 9;
+	string transaction_type = 6;
+	int64 transaction_id = 7;
+	string amount = 8;
+	string turnover = 9;
+	api.common.OperatorContext operator_context = 10;
+	optional bool allow_overdraft = 11;
+}
+
+message AffectedCredit {
+	int64 credit_id = 1;
+	string settlement_currency = 2; // currency of the credit
+	string amount = 3; // currency amount of the game transaction
+	string amount_settlement_currency = 4; // settlement currency amount of the wallet transaction
+	string amount_usd = 5;
+	string amount_reporting_currency = 6;
+	string cash_amount = 7; 
+	string cash_amount_settlement_currency = 8;
+	string cash_amount_usd = 9;
+	string cash_amount_reporting_currency = 10;
+	string operator_bonus_amount = 11;
+	string operator_bonus_amount_settlement_currency = 12;
+	string operator_bonus_amount_usd = 13;
+	string operator_bonus_amount_reporting_currency = 14;
+	string provider_bonus_amount = 15;
+	string provider_bonus_amount_settlement_currency = 16;
+	string provider_bonus_amount_usd = 17;
+	string provider_bonus_amount_reporting_currency = 18;
 }
 
 message GameDebitResponse {
@@ -206,18 +361,25 @@ message GameDebitResponse {
 	string cash_amount_usd = 9;
 	string operator_bonus_amount_usd = 10;
 	string provider_bonus_amount_usd = 11;
+	string cash_amount_reporting_currency = 12;
+	string operator_bonus_amount_reporting_currency = 13;
+	string provider_bonus_amount_reporting_currency = 14;
+	repeated AffectedCredit affected_credits = 15;
 }
 
 message GameCreditRequest {
 	int64 user_id = 1;
 	string currency = 2;
 	string settlement_currency = 3;
-	string exchange_rate = 4;
-	string transaction_type = 5;
-	int64 transaction_id = 6;
-	int64 original_transaction_id = 7;
-	string amount = 8;
-	api.common.OperatorContext operator_context = 9;
+	string reporting_currency = 4;
+	string exchange_rate = 5;
+	string transaction_type = 6;
+	int64 transaction_id = 7;
+	int64 original_transaction_id = 8;
+	string amount = 9;
+	api.common.OperatorContext operator_context = 10;
+	optional string original_transaction_type = 11;
+	string original_transaction_turnover_amount = 12;
 }
 
 message GameCreditResponse {
@@ -232,17 +394,27 @@ message GameCreditResponse {
 	string cash_amount_usd = 9;
 	string operator_bonus_amount_usd = 10;
 	string provider_bonus_amount_usd = 11;
+	string cash_amount_reporting_currency = 12;
+	string operator_bonus_amount_reporting_currency = 13;
+	string provider_bonus_amount_reporting_currency = 14;
+	repeated AffectedCredit affected_credits = 15;
+}
+
+message ChannelInfo {
+	api.common.OperatorContext operator_context = 1;
 }
 
 message FreezeRequest {
 	int64 user_id = 1;
 	string currency = 2;
+	string reporting_currency = 3;
 	// Valid freeze transaction types:
 	//   - "payment_withdraw_freeze"   - Payment withdraw freeze transaction
-	string transaction_type = 3;
-	int64 transaction_id = 4;
-	string cash = 5;
-	api.common.OperatorContext operator_context = 6;
+	string transaction_type = 4;
+	int64 transaction_id = 5;
+	string cash = 6;
+	api.common.OperatorContext operator_context = 7;
+	ChannelInfo channel_info = 8;
 }
 
 message FreezeResponse {
@@ -255,6 +427,7 @@ message SettleRequest {
 	string transaction_type = 1;
 	int64 transaction_id = 2;
 	int64 original_transaction_id = 3;
+	ChannelInfo channel_info = 4;
 }
 
 message SettleResponse {
@@ -269,6 +442,7 @@ message RollbackRequest {
 	string transaction_type = 1;
 	int64 transaction_id = 2;
 	int64 original_transaction_id = 3;
+	ChannelInfo channel_info = 4;
 }
 
 message RollbackResponse {
@@ -282,6 +456,10 @@ message RollbackResponse {
 	string cash_amount_usd = 8;
 	string operator_bonus_amount_usd = 9;
 	string provider_bonus_amount_usd = 10;
+	string cash_amount_reporting_currency = 11;
+	string operator_bonus_amount_reporting_currency = 12;
+	string provider_bonus_amount_reporting_currency = 13;
+	repeated AffectedCredit affected_credits = 14;
 }
 
 message GetWalletsRequest {
@@ -292,11 +470,16 @@ message GetWalletsRequest {
 
 message GetWalletsResponse {
 	message TotalAssets {
-		string balance = 1;
-		string deposit = 2;
-		string withdraw = 3;
-		string deposit_minus_withdraw = 4;
-		string valid_turnover = 5;
+		string balance_usd = 1;
+		string deposit_usd = 2;
+		string withdraw_usd = 3;
+		string deposit_minus_withdraw_usd = 4;
+		string valid_turnover_usd = 5;
+		string balance_reporting_currency = 6;
+		string deposit_reporting_currency = 7;
+		string withdraw_reporting_currency = 8;
+		string deposit_minus_withdraw_reporting_currency = 9;
+		string valid_turnover_reporting_currency = 10;
 	}
 	message Credit {
 		google.protobuf.Timestamp created_at = 1;
@@ -305,11 +488,13 @@ message GetWalletsResponse {
 		string original_cash = 4;
 		string bonus = 5;
 		string original_bonus = 6;
-		string turnover_threshold = 7;
+		string turnover_threshold = 7; // cash turnover threshold + bonus turnover threshold
 		string turnover = 8;
 		string cash_turnover = 9;
 		string bonus_turnover = 10;
 		string turnover_multiplier = 11;
+		string cash_turnover_threshold = 12;
+		string bonus_turnover_threshold = 13;
 	}
 	message Wallet {
 		string currency = 1;
@@ -323,6 +508,10 @@ message GetWalletsResponse {
 		string bonus_turnover = 9;
 		string turnover_multiplier = 10;
 		repeated Credit credits = 11;
+		string cash_turnover_threshold = 12;
+		string bonus_turnover_threshold = 13;
+		string withdrawable_cash = 14;
+		string transferable_bonus = 15;
 	}
 	TotalAssets total_assets = 1;
 	repeated Wallet wallets = 2;
@@ -410,24 +599,33 @@ message GetWalletBalanceTransactionsByIdsResponse {
 		int64 related_transaction_id = 8;
 		string original_cash = 9;
 		string original_cash_usd = 10;
-		string cash = 11;
-		string cash_usd = 12;
-		string cash_amount = 13;
-		string cash_amount_usd = 14;
-		string original_operator_bonus = 15;
-		string original_operator_bonus_usd = 16;
-		string operator_bonus = 17;
-		string operator_bonus_usd = 18;
-		string operator_bonus_amount = 19;
-		string operator_bonus_amount_usd = 20;
-		string original_provider_bonus = 21;
-		string original_provider_bonus_usd = 22;
-		string provider_bonus = 23;
-		string provider_bonus_usd = 24;
-		string provider_bonus_amount = 25;
-		string provider_bonus_amount_usd = 26;
-		google.protobuf.Timestamp created_at = 27;
-		google.protobuf.Timestamp updated_at = 28;
+		string original_cash_reporting_currency = 11;
+		string cash = 12;
+		string cash_usd = 13;
+		string cash_reporting_currency = 14;
+		string cash_amount = 15;
+		string cash_amount_usd = 16;
+		string cash_amount_reporting_currency = 17;
+		string original_operator_bonus = 18;
+		string original_operator_bonus_usd = 19;
+		string original_operator_bonus_reporting_currency = 20;
+		string operator_bonus = 21;
+		string operator_bonus_usd = 22;
+		string operator_bonus_reporting_currency = 23;
+		string operator_bonus_amount = 24;
+		string operator_bonus_amount_usd = 25;
+		string operator_bonus_amount_reporting_currency = 26;
+		string original_provider_bonus = 27;
+		string original_provider_bonus_usd = 28;
+		string original_provider_bonus_reporting_currency = 29;
+		string provider_bonus = 30;
+		string provider_bonus_usd = 31;
+		string provider_bonus_reporting_currency = 32;
+		string provider_bonus_amount = 33;
+		string provider_bonus_amount_usd = 34;
+		string provider_bonus_amount_reporting_currency = 35;
+		google.protobuf.Timestamp created_at = 36;
+		google.protobuf.Timestamp updated_at = 37;
 	}
 	repeated BalanceTransaction balance_transactions = 1;
 }
@@ -457,7 +655,17 @@ message GetExchangeRatesRequest {
 }
 
 message GetExchangeRatesResponse {
-	// map key is source currency, value is target currency rate
+	// map key is currency code, value is currency exchange rate
+	map<string, string> exchange_rates = 1;
+}
+
+message GetExchangeRatesWithBaseCurrencyRequest {
+	repeated string currencies = 1;
+	optional string base_currency = 2; // USD if not provided
+}
+
+message GetExchangeRatesWithBaseCurrencyResponse {
+	// map key is currency code, value is currency exchange rate
 	map<string, string> exchange_rates = 1;
 }
 
@@ -470,14 +678,17 @@ message GetUserTransactionSummaryRequest {
 }
 
 message GetUserTransactionSummaryResponse {
-	string currency = 1;
-	string total_deposit = 2;
-	string total_withdraw = 3;
-	string deposit_minus_withdraw = 4;
-	string total_valid_bet = 5;
-	int32 total_deposit_count = 6;
-	int32 total_withdraw_count = 7;
-	int32 today_withdraw_count = 8;
+	string total_deposit_usd = 1;
+	string total_withdraw_usd = 2;
+	string deposit_minus_withdraw_usd = 3;
+	string total_valid_bet_usd = 4;
+	string total_deposit_reporting_currency = 5;
+	string total_withdraw_reporting_currency = 6;
+	string deposit_minus_withdraw_reporting_currency = 7;
+	string total_valid_bet_reporting_currency = 8;
+	int32 total_deposit_count = 9;
+	int32 total_withdraw_count = 10;
+	int32 today_withdraw_count = 11;
 }
 
 message GetBackofficeUserOverviewFromWalletRequest {
@@ -488,55 +699,82 @@ message GetBackofficeUserOverviewFromWalletRequest {
 }
 
 message GetBackofficeUserOverviewFromWalletResponse {
-	string balance = 1;
-	string deposit_minus_withdraw = 2;
-	string turnover = 3;
-	string cash_turnover = 4;
-	string bonus_turnover = 5;
-	string deposit = 6;
-	string last_deposit = 7;
+	string balance_usd = 1;
+	string deposit_minus_withdraw_usd = 2;
+	string turnover_usd = 3;
+	string cash_turnover_usd = 4;
+	string bonus_turnover_usd = 5;
+	string deposit_usd = 6;
+	string last_deposit_usd = 7;
 	int32 deposit_count = 8;
-	string withdraw = 9;
-	string last_withdraw = 10;
+	string withdraw_usd = 9;
+	string last_withdraw_usd = 10;
 	int32 withdraw_count = 11;
-	string bonus = 12; // Not available for now, only return 0
-	string valid_turnover = 13; // Not available for now, only return 0
-	string average_bet_amount = 14;
-	string ggr = 15;
+	string bonus_usd = 12; // Not available for now, only return 0
+	string valid_turnover_usd = 13; // Not available for now, only return 0
+	string average_bet_amount_usd = 14;
+	string ggr_usd = 15;
 	string ggr_percentage = 16; // Round to 2 decimal places
-	string manually_added_balance = 17; // Not available for now, only return 0
-	string bonus_claimed = 18; // Not available for now, only return 0
-	string ngr = 19;
+	string manually_added_balance_usd = 17; // Not available for now, only return 0
+	string bonus_claimed_usd = 18; // Not available for now, only return 0
+	string ngr_usd = 19;
 	string ggr_to_ngr_percentage = 20; // Round to 2 decimal places
 	string turnover_multiplier = 21; // Round to 2 decimal places
-	string deposit_to_withdraw_ratio = 22; // Round to 2 decimal places
+	string withdraw_to_deposit_ratio = 22; // Round to 2 decimal places
 	string rtp = 23; // Round to 2 decimal places
+	string balance_reporting_currency = 24;
+	string deposit_minus_withdraw_reporting_currency = 25;
+	string turnover_reporting_currency = 26;
+	string cash_turnover_reporting_currency = 27;
+	string bonus_turnover_reporting_currency = 28;
+	string deposit_reporting_currency = 29;
+	string last_deposit_reporting_currency = 30;
+	string withdraw_reporting_currency = 31;
+	string last_withdraw_reporting_currency = 32;
+	string bonus_reporting_currency = 33; // Not available for now, only return 0
+	string valid_turnover_reporting_currency = 34; // Not available for now, only return 0
+	string average_bet_amount_reporting_currency = 35;
+	string ggr_reporting_currency = 36;
+	string manually_added_balance_reporting_currency = 37; // Not available for now, only return 0
+	string bonus_claimed_reporting_currency = 38; // Not available for now, only return 0
+	string ngr_reporting_currency = 39;
 }
 
 message GetOverviewDashboardFromWalletRequest {
-	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	api.common.OperatorContext operator_context = 2; // define the basic range of operators
 }
 
 message GetOverviewDashboardFromWalletResponse {
 	message GGR {
-		string today = 1;
-		string yesterday = 2;
+		string today_usd = 1;
+		string yesterday_usd = 2;
+		string today_reporting_currency = 3;
+		string yesterday_reporting_currency = 4;
 	}
 	message NGR {
-		string today = 1;
-		string yesterday = 2;
+		string today_usd = 1;
+		string yesterday_usd = 2;
+		string today_reporting_currency = 3;
+		string yesterday_reporting_currency = 4;
 	}
 	message Deposit {
-		string today = 1;
-		string yesterday = 2;
+		string today_usd = 1;
+		string yesterday_usd = 2;
+		string today_reporting_currency = 3;
+		string yesterday_reporting_currency = 4;
 	}
 	message Withdraw {
-		string today = 1;
-		string yesterday = 2;
+		string today_usd = 1;
+		string yesterday_usd = 2;
+		string today_reporting_currency = 3;
+		string yesterday_reporting_currency = 4;
 	}
 	message DepositMinusWithdraw {
-		string today = 1;
-		string yesterday = 2;
+		string today_usd = 1;
+		string yesterday_usd = 2;
+		string today_reporting_currency = 3;
+		string yesterday_reporting_currency = 4;
 	}
 	GGR ggr = 1;
 	NGR ngr = 2;
@@ -553,10 +791,17 @@ message Currency {
 	string symbol = 5;
 	string icon = 6;
 	int32 decimal_places = 7;
+	string thousands_separator = 8; // placeholder for future use
+	string decimal_separator = 9; // placeholder for future use
+	bool aggregated_enabled = 10;
+	bool aggregated_hidden = 11;
+	bool parent_enabled = 12;
+	bool parent_hidden = 13;
 }
 
 message AddCurrencyRequest {
 	Currency currency = 1;
+	api.common.OperatorContext operator_context = 2;
 }
 
 message AddCurrencyResponse {}
@@ -575,6 +820,9 @@ message UpdateCurrencyResponse {}
 
 message GetCurrenciesRequest {
 	repeated string currencies = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	optional bool aggregated = 3; // include aggregated_enabled and aggregated_hidden fields
+	optional bool parent = 4; // include parent_enabled and parent_hidden fields, not implemented yet
 }
 
 message GetCurrenciesResponse {
@@ -585,6 +833,12 @@ message ListCurrenciesRequest {
 	repeated string currencies = 1;
 	optional bool enabled = 2;
 	optional bool hidden = 3;
+	api.common.OperatorContext initiator_operator_context = 4;
+	optional bool aggregated_enabled = 5;
+	optional bool aggregated_hidden = 6;
+	optional bool parent_enabled = 7;
+	optional bool parent_hidden = 8;
+	api.common.OperatorContext target_operator_context = 9;
 }
 
 message ListCurrenciesResponse {
@@ -592,6 +846,10 @@ message ListCurrenciesResponse {
 	int32 total = 2;
 	int32 total_enabled = 3;
 	int32 total_hidden = 4;
+	int32 total_enabled_aggregated = 5;
+	int32 total_hidden_aggregated = 6;
+	int32 total_enabled_parent = 7;
+	int32 total_hidden_parent = 8;
 }
 
 message UpdateOperatorCurrencyRequest {
@@ -603,7 +861,10 @@ message UpdateOperatorCurrencyRequest {
 	optional string symbol = 6;
 	optional string icon = 7;
 	optional int32 decimal_places = 8;
-	api.common.OperatorContext operator_context = 9;
+	api.common.OperatorContext initiator_operator_context = 9;
+	optional string thousands_separator = 10; // placeholder for future use
+	optional string decimal_separator = 11; // placeholder for future use
+	api.common.OperatorContext target_operator_context = 12;
 }
 
 message UpdateOperatorCurrencyResponse {}
@@ -617,14 +878,12 @@ message UpdateUserCurrencyRequest {
 
 message UpdateUserCurrencyResponse {}
 
-message ListOperatorBalancesRequest {
-	repeated int64 retailer_operator_ids = 1;
-	repeated int64 company_operator_ids = 2;
-	repeated int64 operator_ids = 3;
-	repeated string currencies = 4;
-	api.common.OperatorContext operator_context = 5;
-	optional int32 page = 6;
-	optional int32 page_size = 7; // default 20
+message ListBottomOperatorBalancesRequest {
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	repeated string currencies = 2;
+	api.common.OperatorContext operator_context = 3; // define the basic range of operators
+	optional int32 page = 4; // default 1
+	optional int32 page_size = 5; // default 20
 }
 
 message OperatorBalance {
@@ -636,15 +895,17 @@ message OperatorBalance {
 	string protocol = 6; // placeholder for future use
 	string cash = 7;
 	string cash_usd = 8;
-	bool enabled = 9;
+	string cash_reporting_currency = 9;
+	bool enabled = 10;
 }
 
-message ListOperatorBalancesResponse {
+message ListBottomOperatorBalancesResponse {
 	repeated OperatorBalance operator_balances = 1;
 	string total_cash_usd = 2;
-	int32 total = 3;
-	int32 page = 4;
-	int32 page_size = 5;
+	string total_cash_reporting_currency = 3;
+	int32 total = 4;
+	int32 page = 5;
+	int32 page_size = 6;
 }
 
 message OperatorTransferRequest {
@@ -654,9 +915,8 @@ message OperatorTransferRequest {
 	string reporting_currency = 4;
 	string target_currency = 5;
 	string target_reporting_currency = 6;
-	string exchange_rate = 7; // exchange rate of the currency to the target currency
-	string transaction_type = 8;
-	string cash_amount = 9;
+	string transaction_type = 7;
+	string cash_amount = 8;
 }
 
 message OperatorTransferResponse {
@@ -668,11 +928,11 @@ message OperatorTransferResponse {
 
 message OperatorSwapRequest {
 	api.common.OperatorContext operator_context = 1;
-	string currency = 2;
-	string reporting_currency = 3;
-	string target_currency = 4;
-	string target_reporting_currency = 5;
-	string exchange_rate = 6;
+	api.common.OperatorContext target_operator_context = 2;
+	string currency = 3;
+	string reporting_currency = 4;
+	string target_currency = 5;
+	string target_reporting_currency = 6;
 	string transaction_type = 7;
 	string cash_amount = 8;
 }
@@ -686,30 +946,32 @@ message OperatorSwapResponse {
 	string target_currency_balance_cash_reporting_currency = 6;
 }
 
-message OperatorBalanceFreezeRequest {
-	api.common.OperatorContext operator_context = 1;
-	string currency = 2;
-	string reporting_currency = 3;
-	string transaction_type = 4;
-	optional int64 external_transaction_id = 5;
-	string cash_amount = 6;
-	string memo = 7;
+message OperatorFreezeRequest {
+	api.common.OperatorContext operator_context = 1; // initiator operator context
+	api.common.OperatorContext target_operator_context = 2; // target operator context
+	string currency = 3;
+	string reporting_currency = 4;
+	string transaction_type = 5;
+	optional int64 external_transaction_id = 6;
+	string cash_amount = 7;
+	string memo = 8;
 }
 
-message OperatorBalanceFreezeResponse {
+message OperatorFreezeResponse {
 	int64 transaction_id = 1;
 	string cash = 2;
 }
 
-message OperatorBalanceRollbackRequest {
-	api.common.OperatorContext operator_context = 1;
-	optional int64 external_transaction_id = 2;
-	int64 original_transaction_id = 3;
-	string transaction_type = 4;
-	string memo = 5;
+message OperatorRollbackRequest {
+	api.common.OperatorContext operator_context = 1; // initiator operator context
+	api.common.OperatorContext target_operator_context = 2; // target operator context
+	optional int64 external_transaction_id = 3;
+	int64 original_transaction_id = 4;
+	string transaction_type = 5;
+	string memo = 6;
 }
 
-message OperatorBalanceRollbackResponse {
+message OperatorRollbackResponse {
 	int64 transaction_id = 1;
 	string cash = 2;
 	string cash_amount = 3;
@@ -717,17 +979,17 @@ message OperatorBalanceRollbackResponse {
 	string cash_amount_reporting_currency = 5;
 }
 
-message OperatorBalanceSettleRequest {
-	api.common.OperatorContext operator_context = 1;
-	string currency = 2;
-	string reporting_currency = 3;
+message OperatorSettleRequest {
+	api.common.OperatorContext operator_context = 1; // initiator operator context
+	api.common.OperatorContext target_operator_context = 2; // target operator context
+	string currency = 3;
 	optional int64 external_transaction_id = 4;
 	int64 original_transaction_id = 5;
 	string transaction_type = 6;
 	string memo = 7;
 }
 
-message OperatorBalanceSettleResponse {
+message OperatorSettleResponse {
 	int64 transaction_id = 1;
 	string cash = 2;
 	string cash_amount = 3;
@@ -735,5 +997,674 @@ message OperatorBalanceSettleResponse {
 	string cash_amount_reporting_currency = 5;
 }
 
+message GetOperatorBalanceRequest {
+	api.common.OperatorContext operator_context = 1;
+}
 
+message GetOperatorBalanceResponse {
+	repeated OperatorBalance operator_balances = 1;
+	string total_cash_usd = 2;
+	string total_cash_reporting_currency = 3;
+}
 
+message ListOperatorBalanceTransactionsRequest {
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	repeated string settlement_currencies = 2;
+	repeated string transaction_types = 3;
+	optional int64 transaction_id = 4;
+	optional google.protobuf.Timestamp start_time = 5;
+	optional google.protobuf.Timestamp end_time = 6;
+	api.common.OperatorContext operator_context = 7; // define the basic range of operators
+	string target_operator_type = 8;
+	optional int32 page = 9; // default 1
+	optional int32 page_size = 10; // default 20
+}
+
+message OperatorBalanceTransaction {
+	int64 transaction_id = 1;
+	int64 external_transaction_id = 2;
+	int64 related_transaction_id = 3;
+	api.common.OperatorContext operator_context = 4;
+	string system_operator_name = 5;
+	string retailer_operator_name = 6;
+	string company_operator_name = 7;
+	string operator_name = 8;
+	string currency = 9;
+	string settlement_currency = 10;
+	string reporting_currency = 11;
+	string before_balance = 12;
+	string before_balance_usd = 13;
+	string before_balance_reporting_currency = 14;
+	string after_balance = 15;
+	string after_balance_usd = 16;
+	string after_balance_reporting_currency = 17;
+	string cash_amount = 18;
+	string cash_amount_usd = 19;
+	string cash_amount_reporting_currency = 20;
+	string transaction_type = 21;
+	string status = 22;
+	string memo = 23;
+	string fee_amount = 24;
+	string fee_amount_usd = 25;
+	string fee_amount_reporting_currency = 26;
+	google.protobuf.Timestamp created_at = 27;
+	google.protobuf.Timestamp updated_at = 28;
+}
+
+message ListOperatorBalanceTransactionsResponse {
+	repeated OperatorBalanceTransaction transactions = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}
+
+message OperatorDebitRequest {
+	api.common.OperatorContext operator_context = 1;
+	string currency = 2;
+	string reporting_currency = 3;
+	string transaction_type = 4;
+	optional int64 external_transaction_id = 5;
+	string cash_amount = 6;
+}
+
+message OperatorDebitResponse {
+	int64 transaction_id = 1;
+	string cash = 2;
+}
+
+message UpdateOperatorBalanceRequest {
+	api.common.OperatorContext initial_operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	string currency = 3;
+	bool enabled = 4;
+}
+
+message UpdateOperatorBalanceResponse {
+	bool enabled = 1;
+}
+
+message GetOperatorTransactionSummaryRequest {
+	api.common.OperatorContext operator_context = 1;
+	optional string currency = 2;
+	optional int64 start_time = 3;
+	optional int64 end_time = 4;	
+}
+
+message GetOperatorTransactionSummaryResponse {
+	string total_withdraw_usd = 1;
+	string total_deposit_usd = 2;
+	string total_transfer_out_usd = 3;
+	string total_transfer_in_usd = 4;
+	string total_swap_out_usd = 5;
+	string total_swap_in_usd = 6;
+	string total_freeze_usd = 7;
+	string total_rollback_usd = 8;
+	string reporting_currency = 9;
+	string total_withdraw_reporting_currency = 10;
+	string total_deposit_reporting_currency = 11;
+	string total_transfer_out_reporting_currency = 12;
+	string total_transfer_in_reporting_currency = 13;
+	string total_swap_out_reporting_currency = 14;
+	string total_swap_in_reporting_currency = 15;
+	string total_freeze_reporting_currency = 16;
+	string total_rollback_reporting_currency = 17;
+}
+
+message GetOperatorBalanceTransactionsByIdsRequest {
+	repeated int64 transaction_ids = 1;
+	api.common.OperatorContext operator_context = 2;
+}
+
+message GetOperatorBalanceTransactionsByIdsResponse {
+	repeated OperatorBalanceTransaction transactions = 1;
+}
+
+message RewardSequence {
+	message TierConfig {
+		string min_deposit_amount = 1;
+		string max_deposit_amount = 2;
+		string reward_percentage = 3;
+		string max_reward_amount = 4;
+		string max_withdrawal_multiplier = 5; // only available for bonus reward
+	}
+	int32 serial_number = 1;
+	string name = 2;
+	bool enabled = 3;
+	string reward_type = 4; // cash or bonus
+	int32 wagering_requirement = 5; // coefficient
+	int64 reward_validity = 6; // milliseconds
+	repeated TierConfig tier_configs = 7;
+	google.protobuf.Timestamp start_time = 8;
+	google.protobuf.Timestamp end_time = 9;
+}
+
+// Deposit reward config for an operator with specific currency
+message DepositRewardConfig {
+	bool welcome_reward_enabled = 1;
+	bool daily_reward_enabled = 2;
+	repeated RewardSequence welcome_reward_sequences = 3;
+	repeated RewardSequence daily_reward_sequences = 4;
+	google.protobuf.Timestamp created_at = 5;
+	google.protobuf.Timestamp updated_at = 6;
+}
+
+message SetDepositRewardSequencesRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	int64 user_id = 3;
+	string currency = 4;
+	optional bool follow_parent = 5;
+	optional bool welcome_reward_enabled = 6;
+	optional bool daily_reward_enabled = 7;
+	repeated RewardSequence welcome_reward_sequences = 8;
+	repeated RewardSequence daily_reward_sequences = 9;
+}
+
+message SetDepositRewardSequencesResponse {}
+
+message DeleteDepositRewardSequencesRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	int64 user_id = 3;
+	string currency = 4;
+	repeated int32 welcome_reward_sequence_serial_numbers = 5;
+	repeated int32 daily_reward_sequence_serial_numbers = 6;
+}
+
+message DeleteDepositRewardSequencesResponse {}
+
+message GetDepositRewardConfigRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	string currency = 3;
+}
+
+message GetDepositRewardConfigResponse {
+	api.common.OperatorContext custom_operator_context = 1;
+	string currency = 2;
+	api.common.OperatorContext inherited_operator_context = 3;
+	string inherited_from_operator_name = 4;
+	bool follow_parent = 5;
+	int32 welcome_reward_sequences_min_count = 6;
+	int32 daily_reward_sequences_min_count = 7;
+	DepositRewardConfig default_deposit_reward_config = 8;
+	DepositRewardConfig custom_deposit_reward_config = 9;
+}
+
+message GetUserDepositRewardSequenceRequest {
+	string currency = 1;
+}
+
+message GetUserDepositRewardSequenceResponse {
+	string current_sequence_type = 1;
+	int32 welcome_reward_count = 2;
+	int32 daily_reward_count = 3;
+	RewardSequence current_reward_sequence = 4;
+}
+
+message GetGamificationCurrencyConfigRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+}
+
+message DeductionOrder {
+	string deduction_type = 1; // cash_first, bonus_first, mixed
+	optional string cash_ratio = 2;
+	optional string bonus_ratio = 3;
+}
+
+message OperatorCurrencyConfig {
+	string currency = 1;
+	optional int32 cash_withdrawal_wagering_requirement = 2;
+	optional bool bonus_enabled = 3;
+	optional string maximum_bonus_bet_limit = 4;
+	optional string wagering_unlock_priority = 5;
+}
+
+message GetGamificationCurrencyConfigResponse {
+	DeductionOrder deduction_order = 1;
+	repeated OperatorCurrencyConfig operator_currency_configs = 2;
+}
+
+message UpdateOperatorCurrencyConfigRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	OperatorCurrencyConfig operator_currency_config = 3;
+}
+
+message UpdateOperatorCurrencyConfigResponse {}
+
+message UpdateDeductionOrderRequest {
+	api.common.OperatorContext initiator_operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	DeductionOrder deduction_order = 3;
+}
+
+message UpdateDeductionOrderResponse {}
+
+message BonusTransferRequest {
+	int64 credit_id = 1;
+	string currency = 2;
+	string transaction_type = 3;
+}
+
+message BonusTransferResponse {
+	int64 transaction_id = 1;
+	string transferred_amount = 2;
+	string balance_cash = 3;
+	string balance_bonus = 4;
+}
+
+message GetUserBalanceDetailsRequest {
+	string currency = 1;
+}
+
+message UserBalanceDetail {
+	message Credit {
+		int64 credit_id = 1;
+		string cash = 2;
+		string operator_bonus = 3;
+		string provider_bonus = 4;
+		string withdrawable_cash = 5;
+		string transferable_operator_bonus = 6;
+		string cash_turnover = 7;
+		string cash_turnover_threshold = 8;
+		string operator_bonus_turnover = 9;
+		string operator_bonus_turnover_threshold = 10;
+		string maximum_operator_bonus_withdrawal_amount = 11;
+	}
+	string currency = 1;
+	string total_cash = 2;
+	string total_operator_bonus = 3;
+	string total_provider_bonus = 4;
+	string total_withdrawable_cash = 5;
+	string total_transferable_operator_bonus = 6;
+	repeated Credit credits = 7;
+}
+
+message GetUserBalanceDetailsResponse {
+	UserBalanceDetail detail = 1;
+}
+
+message AddResponsibleGamblingConfigRequest {
+	string currency = 1;
+	optional string deposit_limit = 2;
+	optional string withdrawal_limit = 3;
+	optional string daily_play_limit = 4;
+	optional string weekly_play_limit = 5;
+	optional string monthly_play_limit = 6;
+	optional string daily_loss_limit = 7;
+	optional string weekly_loss_limit = 8;
+	optional string monthly_loss_limit = 9;
+}
+
+message AddResponsibleGamblingConfigResponse {}
+
+message DeleteResponsibleGamblingConfigRequest {
+	optional int64 target_user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+	string currency = 3;
+	// deposit_limit, withdrawal_limit, daily_play_limit, weekly_play_limit, monthly_play_limit
+	// daily_loss_limit, weekly_loss_limit, monthly_loss_limit
+	string limit_type = 4;
+	optional int64 initiator_user_id = 5;
+}
+
+message DeleteResponsibleGamblingConfigResponse {}
+
+message ResponsibleGamblingConfig {
+	string currency = 1;
+	string deposit_limit = 2;
+	string withdrawal_limit = 3;
+	string daily_play_limit = 4;
+	string weekly_play_limit = 5;
+	string monthly_play_limit = 6;
+	string daily_loss_limit = 7;
+	string weekly_loss_limit = 8;
+	string monthly_loss_limit = 9;
+	google.protobuf.Timestamp deposit_limit_delete_schedule_time = 10;
+	google.protobuf.Timestamp withdrawal_limit_delete_schedule_time = 11;
+	google.protobuf.Timestamp daily_play_limit_delete_schedule_time = 12;
+	google.protobuf.Timestamp weekly_play_limit_delete_schedule_time = 13;
+	google.protobuf.Timestamp monthly_play_limit_delete_schedule_time = 14;
+	google.protobuf.Timestamp daily_loss_limit_delete_schedule_time = 15;
+	google.protobuf.Timestamp weekly_loss_limit_delete_schedule_time = 16;
+	google.protobuf.Timestamp monthly_loss_limit_delete_schedule_time = 17;
+}
+
+message ResponsibleGamblingStatus {
+	string currency = 1;
+	bool withdrawal_allowed = 2;
+	string withdrawal_usage = 3;
+	bool deposit_allowed = 4;
+	string deposit_usage = 5;
+	bool game_bet_allowed = 6;
+	string daily_play_usage = 7;
+	string weekly_play_usage = 8;
+	string monthly_play_usage = 9;
+	string daily_loss_usage = 10;
+	string weekly_loss_usage = 11;
+	string monthly_loss_usage = 12;
+}
+
+message ListResponsibleGamblingConfigsRequest {
+	optional int64 user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+}
+
+message ListResponsibleGamblingConfigsResponse {
+	repeated ResponsibleGamblingConfig responsible_gambling_configs = 1;
+	repeated ResponsibleGamblingStatus responsible_gambling_statuses = 2;
+}
+
+message GetResponsibleGamblingConfigRequest {
+	int64 user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+	string currency = 3;
+}
+
+message GetResponsibleGamblingConfigResponse {
+	ResponsibleGamblingConfig responsible_gambling_config = 1;
+}
+
+message ListCustomerRecordsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional int64 transaction_id = 4;
+	optional string transaction_type = 5;
+	optional int32 page = 6;
+	optional int32 page_size = 7;
+	api.common.OperatorContext operator_context = 8;
+	api.common.OperatorContextFilters operator_context_filters = 9;
+}
+
+message ListCustomerRecordsResponse {
+	message CustomerRecord {
+		google.protobuf.Timestamp date_time = 1;
+		string transaction_type = 2;
+		int64 user_id = 3;
+		int64 transaction_id = 4;
+		string currency = 5;
+		string amount_changed = 6;
+		string before_balance = 7;
+		string after_balance = 8;
+		int64 external_transaction_id = 9;
+		int64 operator_id = 10;
+		int64 company_operator_id = 11;
+		int64 retailer_operator_id = 12;
+		int64 system_operator_id = 13;
+		string operator_name = 14;
+		string company_operator_name = 15;
+		string retailer_operator_name = 16;
+		string system_operator_name = 17;
+	}
+	repeated CustomerRecord customer_records = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}
+
+message ExportCustomerRecordsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional int64 transaction_id = 4;
+	optional string transaction_type = 5;
+	string format = 6; // accepted values: csv, excel, pdf
+	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContext operator_context = 8;
+	api.common.OperatorContextFilters operator_context_filters = 9;
+	int64 initiator_user_id = 10;
+}
+
+message ExportCustomerRecordsResponse {
+	int64 task_id = 1;
+}
+
+message FICAThresholdConfig {
+	message Config {
+		string transaction_type = 1; // payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward
+		string threshold_amount = 2;
+	}
+	repeated Config configs = 1;
+}
+
+message SetFICAThresholdConfigRequest {
+	string currency = 1;
+	FICAThresholdConfig fica_threshold_config = 2;
+	api.common.OperatorContext operator_context = 3;
+	api.common.OperatorContext target_operator_context = 4;
+}
+
+message SetFICAThresholdConfigResponse {}
+
+message GetFICAThresholdConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+}
+
+message GetFICAThresholdConfigResponse {
+	map<string, FICAThresholdConfig> fica_threshold_configs = 1;
+}
+
+message ListFICAThresholdTransactionsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional string transaction_type = 3;
+	optional string currency = 4;
+	optional int32 kyc_level = 5;
+	optional int32 page = 6;
+	optional int32 page_size = 7;
+	api.common.OperatorContext operator_context = 8;
+	api.common.OperatorContext target_operator_context = 9;
+}
+
+message ListFICAThresholdTransactionsResponse {
+	message FICAThresholdTransaction {
+		string type = 1;
+		google.protobuf.Timestamp transaction_time = 2; // created_at
+		int64 transaction_id = 3;
+		string currency = 4;
+		string amount = 5;
+		string excess_amount = 6;
+		int64 user_id = 7;
+		string full_name = 8;
+		string id_type = 9;
+		string id_number = 10;
+		string mobile = 11;
+		string email = 12;
+		string address = 13;
+		int32 kyc_level = 14;
+		int64 external_transaction_id = 15;
+		int64 operator_id = 16;
+		int64 company_operator_id = 17;
+		int64 retailer_operator_id = 18;
+		int64 system_operator_id = 19;
+		string operator_name = 20;
+		string company_operator_name = 21;
+		string retailer_operator_name = 22;
+		string system_operator_name = 23;
+	}
+	repeated FICAThresholdTransaction threshold_transactions = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}
+
+message ExportFICAThresholdTransactionsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional string transaction_type = 3;
+	optional string currency = 4;
+	optional int32 kyc_level = 5;
+	string format = 6; // accepted values: csv, excel, pdf
+	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContext operator_context = 8;
+	api.common.OperatorContext target_operator_context = 9;
+	int64 initiator_user_id = 10;
+}
+
+message ExportFICAThresholdTransactionsResponse {
+	int64 task_id = 1;
+}
+
+message ListBalancesByUserIdsRequest {
+	repeated int64 user_ids = 1;
+	api.common.OperatorContext operator_context = 2;
+}
+
+message ListBalancesByUserIdsResponse {
+	message Balance {
+		string currency = 1;
+		string cash = 2;
+		string operator_bonus = 3;
+		string provider_bonus = 4;
+	}
+	message UserBalanceDetail {
+		repeated Balance balances = 1;
+		string total_balance = 2;
+		string total_balance_usd = 3;
+		string total_balance_reporting_currency = 4;
+		string total_cash = 5;
+		string total_cash_usd = 6;
+		string total_cash_reporting_currency = 7;
+		string total_operator_bonus = 8;
+		string total_operator_bonus_usd = 9;
+		string total_operator_bonus_reporting_currency = 10;
+		string total_provider_bonus = 11;
+		string total_provider_bonus_usd = 12;
+		string total_provider_bonus_reporting_currency = 13;
+	}
+	map<int64, UserBalanceDetail> user_balance_details = 1;
+}
+
+message ListManualJournalEntriesRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional string currency = 4;
+	optional int32 page = 5;
+	optional int32 page_size = 6;
+	api.common.OperatorContextFilters operator_context_filters = 7;
+	api.common.OperatorContext operator_context = 8;
+}
+
+message ListManualJournalEntriesResponse {
+	message ManualJournalEntry {
+		int64 id = 1;
+		int64 user_id = 2;
+		google.protobuf.Timestamp transaction_time = 3; // updated_at
+		int64 initiator_user_id = 4;
+		string initiator_user_name = 5;
+		string transaction_type = 6;
+		string description = 7;
+		string currency = 8;
+		string amount = 9;
+		string amount_usd = 10;
+		string amount_reporting_currency = 11;
+		string before_balance = 12; // for this currency
+		string before_balance_usd = 13;
+		string before_balance_reporting_currency = 14;
+		string after_balance = 15; // for this currency
+		string after_balance_usd = 16;
+		string after_balance_reporting_currency = 17;
+		string initiator_real_operator_name = 18;
+		string turnover_threshold = 19;
+	}
+	repeated ManualJournalEntry manual_journal_entries = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}
+
+message ExportManualJournalEntriesRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional string currency = 4;
+	string format = 5; // accepted values: csv, excel, pdf
+	string time_zone = 6; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContextFilters operator_context_filters = 7;
+	api.common.OperatorContext operator_context = 8;
+	int64 initiator_user_id = 9;
+}
+
+message ExportManualJournalEntriesResponse {
+	int64 task_id = 1;
+}
+
+message ListTimeRangeDepositCreditsRequest {
+	google.protobuf.Timestamp start_time = 1;
+	google.protobuf.Timestamp end_time = 2;
+	optional string currency = 3;
+	int64 user_id = 4;
+	api.common.OperatorContext operator_context = 5;
+}
+
+message ListTimeRangeDepositCreditsResponse {
+	message Credit {
+		int64 credit_id = 1;
+		string currency = 2;
+		string cash = 3;
+		string cash_usd = 4;
+		string cash_reporting_currency = 5;
+		string operator_bonus = 6;
+		string operator_bonus_usd = 7;
+		string operator_bonus_reporting_currency = 8;
+		string provider_bonus = 9;
+		string provider_bonus_usd = 10;
+		string provider_bonus_reporting_currency = 11;
+	}
+	repeated Credit credits = 1;
+}
+
+message ListUserOverviewRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	repeated int64 user_ids = 3;
+}
+
+message ListUserOverviewResponse {
+	message UserOverview {
+		int64 user_id = 1;
+		string ngr_usd = 2; // cash bet - cash win
+		string ngr_reporting_currency = 3;
+	}
+	repeated UserOverview user_overviews = 1;
+}
+
+message GetUserGameTransactionsSummaryRequest {
+	int64 user_id = 1;
+	repeated int64 external_transaction_ids = 2;
+	string settlement_currency = 3;
+}
+
+message GetUserGameTransactionsSummaryResponse {
+	string ggr = 1;
+	string ggr_usd = 2;
+	string ggr_reporting_currency = 3;
+	string ngr = 4;
+	string ngr_usd = 5;
+	string ngr_reporting_currency = 6;
+	string bet_cash_amount = 7; // game bet and game bet rollback
+	string bet_cash_amount_usd = 8;
+	string bet_cash_amount_reporting_currency = 9;
+	string bet_operator_bonus_amount = 10;
+	string bet_operator_bonus_amount_usd = 11;
+	string bet_operator_bonus_amount_reporting_currency = 12;
+	string bet_provider_bonus_amount = 13;
+	string bet_provider_bonus_amount_usd = 14;
+	string bet_provider_bonus_amount_reporting_currency = 15;
+	int32 bet_count = 16; // can be negative
+	int32 win_count = 17; // can be negative
+	string win_cash_amount = 18;
+	string win_cash_amount_usd = 19;
+	string win_cash_amount_reporting_currency = 20;
+	string win_operator_bonus_amount = 21;
+	string win_operator_bonus_amount_usd = 22;
+	string win_operator_bonus_amount_reporting_currency = 23;
+	string win_provider_bonus_amount = 24;
+	string win_provider_bonus_amount_usd = 25;
+	string win_provider_bonus_amount_reporting_currency = 26;
+}

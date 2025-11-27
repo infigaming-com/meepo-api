@@ -7,6 +7,7 @@
 package v1
 
 import (
+	common "github.com/infigaming-com/meepo-api/common"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -68,6 +69,66 @@ func (x *CreateWithdrawRequest) GetRequest() *structpb.Struct {
 	return nil
 }
 
+type CreateOperatorWithdrawRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	AdminUserId     int64                   `protobuf:"varint,1,opt,name=admin_user_id,json=adminUserId,proto3" json:"admin_user_id,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Request         *structpb.Struct        `protobuf:"bytes,3,opt,name=request,proto3" json:"request,omitempty"` // JSON data for REST API
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *CreateOperatorWithdrawRequest) Reset() {
+	*x = CreateOperatorWithdrawRequest{}
+	mi := &file_review_service_v1_review_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateOperatorWithdrawRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateOperatorWithdrawRequest) ProtoMessage() {}
+
+func (x *CreateOperatorWithdrawRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_review_service_v1_review_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateOperatorWithdrawRequest.ProtoReflect.Descriptor instead.
+func (*CreateOperatorWithdrawRequest) Descriptor() ([]byte, []int) {
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *CreateOperatorWithdrawRequest) GetAdminUserId() int64 {
+	if x != nil {
+		return x.AdminUserId
+	}
+	return 0
+}
+
+func (x *CreateOperatorWithdrawRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *CreateOperatorWithdrawRequest) GetRequest() *structpb.Struct {
+	if x != nil {
+		return x.Request
+	}
+	return nil
+}
+
 type CreateWithdrawResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TicketId      int64                  `protobuf:"varint,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
@@ -77,7 +138,7 @@ type CreateWithdrawResponse struct {
 
 func (x *CreateWithdrawResponse) Reset() {
 	*x = CreateWithdrawResponse{}
-	mi := &file_review_service_v1_review_proto_msgTypes[1]
+	mi := &file_review_service_v1_review_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -89,7 +150,7 @@ func (x *CreateWithdrawResponse) String() string {
 func (*CreateWithdrawResponse) ProtoMessage() {}
 
 func (x *CreateWithdrawResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_review_service_v1_review_proto_msgTypes[1]
+	mi := &file_review_service_v1_review_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -102,7 +163,7 @@ func (x *CreateWithdrawResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateWithdrawResponse.ProtoReflect.Descriptor instead.
 func (*CreateWithdrawResponse) Descriptor() ([]byte, []int) {
-	return file_review_service_v1_review_proto_rawDescGZIP(), []int{1}
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *CreateWithdrawResponse) GetTicketId() int64 {
@@ -117,15 +178,16 @@ type ReviewTicketRequest struct {
 	TicketId       int64                  `protobuf:"varint,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
 	ReviewerUserId int64                  `protobuf:"varint,2,opt,name=reviewer_user_id,json=reviewerUserId,proto3" json:"reviewer_user_id,omitempty"`
 	// action: approve, reject, manual_payout
-	Action        string `protobuf:"bytes,3,opt,name=action,proto3" json:"action,omitempty"`
-	ReviewComment string `protobuf:"bytes,4,opt,name=review_comment,json=reviewComment,proto3" json:"review_comment,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Action          string                  `protobuf:"bytes,3,opt,name=action,proto3" json:"action,omitempty"`
+	ReviewComment   string                  `protobuf:"bytes,4,opt,name=review_comment,json=reviewComment,proto3" json:"review_comment,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,5,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *ReviewTicketRequest) Reset() {
 	*x = ReviewTicketRequest{}
-	mi := &file_review_service_v1_review_proto_msgTypes[2]
+	mi := &file_review_service_v1_review_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -137,7 +199,7 @@ func (x *ReviewTicketRequest) String() string {
 func (*ReviewTicketRequest) ProtoMessage() {}
 
 func (x *ReviewTicketRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_review_service_v1_review_proto_msgTypes[2]
+	mi := &file_review_service_v1_review_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -150,7 +212,7 @@ func (x *ReviewTicketRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReviewTicketRequest.ProtoReflect.Descriptor instead.
 func (*ReviewTicketRequest) Descriptor() ([]byte, []int) {
-	return file_review_service_v1_review_proto_rawDescGZIP(), []int{2}
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *ReviewTicketRequest) GetTicketId() int64 {
@@ -181,6 +243,13 @@ func (x *ReviewTicketRequest) GetReviewComment() string {
 	return ""
 }
 
+func (x *ReviewTicketRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
 type ReviewTicketResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -189,7 +258,7 @@ type ReviewTicketResponse struct {
 
 func (x *ReviewTicketResponse) Reset() {
 	*x = ReviewTicketResponse{}
-	mi := &file_review_service_v1_review_proto_msgTypes[3]
+	mi := &file_review_service_v1_review_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -201,7 +270,7 @@ func (x *ReviewTicketResponse) String() string {
 func (*ReviewTicketResponse) ProtoMessage() {}
 
 func (x *ReviewTicketResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_review_service_v1_review_proto_msgTypes[3]
+	mi := &file_review_service_v1_review_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -214,7 +283,7 @@ func (x *ReviewTicketResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReviewTicketResponse.ProtoReflect.Descriptor instead.
 func (*ReviewTicketResponse) Descriptor() ([]byte, []int) {
-	return file_review_service_v1_review_proto_rawDescGZIP(), []int{3}
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{4}
 }
 
 type AddCommentRequest struct {
@@ -228,7 +297,7 @@ type AddCommentRequest struct {
 
 func (x *AddCommentRequest) Reset() {
 	*x = AddCommentRequest{}
-	mi := &file_review_service_v1_review_proto_msgTypes[4]
+	mi := &file_review_service_v1_review_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -240,7 +309,7 @@ func (x *AddCommentRequest) String() string {
 func (*AddCommentRequest) ProtoMessage() {}
 
 func (x *AddCommentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_review_service_v1_review_proto_msgTypes[4]
+	mi := &file_review_service_v1_review_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -253,7 +322,7 @@ func (x *AddCommentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddCommentRequest.ProtoReflect.Descriptor instead.
 func (*AddCommentRequest) Descriptor() ([]byte, []int) {
-	return file_review_service_v1_review_proto_rawDescGZIP(), []int{4}
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *AddCommentRequest) GetTicketId() int64 {
@@ -286,7 +355,7 @@ type AddCommentResponse struct {
 
 func (x *AddCommentResponse) Reset() {
 	*x = AddCommentResponse{}
-	mi := &file_review_service_v1_review_proto_msgTypes[5]
+	mi := &file_review_service_v1_review_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -298,7 +367,7 @@ func (x *AddCommentResponse) String() string {
 func (*AddCommentResponse) ProtoMessage() {}
 
 func (x *AddCommentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_review_service_v1_review_proto_msgTypes[5]
+	mi := &file_review_service_v1_review_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -311,7 +380,7 @@ func (x *AddCommentResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddCommentResponse.ProtoReflect.Descriptor instead.
 func (*AddCommentResponse) Descriptor() ([]byte, []int) {
-	return file_review_service_v1_review_proto_rawDescGZIP(), []int{5}
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *AddCommentResponse) GetCommentId() int64 {
@@ -332,7 +401,7 @@ type CancelTicketRequest struct {
 
 func (x *CancelTicketRequest) Reset() {
 	*x = CancelTicketRequest{}
-	mi := &file_review_service_v1_review_proto_msgTypes[6]
+	mi := &file_review_service_v1_review_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -344,7 +413,7 @@ func (x *CancelTicketRequest) String() string {
 func (*CancelTicketRequest) ProtoMessage() {}
 
 func (x *CancelTicketRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_review_service_v1_review_proto_msgTypes[6]
+	mi := &file_review_service_v1_review_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -357,7 +426,7 @@ func (x *CancelTicketRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CancelTicketRequest.ProtoReflect.Descriptor instead.
 func (*CancelTicketRequest) Descriptor() ([]byte, []int) {
-	return file_review_service_v1_review_proto_rawDescGZIP(), []int{6}
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *CancelTicketRequest) GetTicketId() int64 {
@@ -382,7 +451,7 @@ type CancelTicketResponse struct {
 
 func (x *CancelTicketResponse) Reset() {
 	*x = CancelTicketResponse{}
-	mi := &file_review_service_v1_review_proto_msgTypes[7]
+	mi := &file_review_service_v1_review_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -394,7 +463,7 @@ func (x *CancelTicketResponse) String() string {
 func (*CancelTicketResponse) ProtoMessage() {}
 
 func (x *CancelTicketResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_review_service_v1_review_proto_msgTypes[7]
+	mi := &file_review_service_v1_review_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -407,27 +476,28 @@ func (x *CancelTicketResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CancelTicketResponse.ProtoReflect.Descriptor instead.
 func (*CancelTicketResponse) Descriptor() ([]byte, []int) {
-	return file_review_service_v1_review_proto_rawDescGZIP(), []int{7}
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{8}
 }
 
 type ListTicketsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        *int64                 `protobuf:"varint,2,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
-	OperatorId    *int64                 `protobuf:"varint,3,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
-	TicketId      *int64                 `protobuf:"varint,4,opt,name=ticket_id,json=ticketId,proto3,oneof" json:"ticket_id,omitempty"`
-	Currency      *string                `protobuf:"bytes,5,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
-	Status        *string                `protobuf:"bytes,6,opt,name=status,proto3,oneof" json:"status,omitempty"`
-	StartTime     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime       *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	Page          *int32                 `protobuf:"varint,9,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize      *int32                 `protobuf:"varint,10,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	UserId                 *int64                         `protobuf:"varint,1,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	OperatorContext        *common.OperatorContext        `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,3,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	TicketId               *int64                         `protobuf:"varint,4,opt,name=ticket_id,json=ticketId,proto3,oneof" json:"ticket_id,omitempty"`
+	Currency               *string                        `protobuf:"bytes,5,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
+	Status                 *string                        `protobuf:"bytes,6,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	StartTime              *timestamppb.Timestamp         `protobuf:"bytes,7,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime                *timestamppb.Timestamp         `protobuf:"bytes,8,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	Page                   *int32                         `protobuf:"varint,9,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize               *int32                         `protobuf:"varint,10,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ListTicketsRequest) Reset() {
 	*x = ListTicketsRequest{}
-	mi := &file_review_service_v1_review_proto_msgTypes[8]
+	mi := &file_review_service_v1_review_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -439,7 +509,7 @@ func (x *ListTicketsRequest) String() string {
 func (*ListTicketsRequest) ProtoMessage() {}
 
 func (x *ListTicketsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_review_service_v1_review_proto_msgTypes[8]
+	mi := &file_review_service_v1_review_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -452,7 +522,7 @@ func (x *ListTicketsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTicketsRequest.ProtoReflect.Descriptor instead.
 func (*ListTicketsRequest) Descriptor() ([]byte, []int) {
-	return file_review_service_v1_review_proto_rawDescGZIP(), []int{8}
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ListTicketsRequest) GetUserId() int64 {
@@ -462,11 +532,18 @@ func (x *ListTicketsRequest) GetUserId() int64 {
 	return 0
 }
 
-func (x *ListTicketsRequest) GetOperatorId() int64 {
-	if x != nil && x.OperatorId != nil {
-		return *x.OperatorId
+func (x *ListTicketsRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
 	}
-	return 0
+	return nil
+}
+
+func (x *ListTicketsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
 }
 
 func (x *ListTicketsRequest) GetTicketId() int64 {
@@ -518,31 +595,145 @@ func (x *ListTicketsRequest) GetPageSize() int32 {
 	return 0
 }
 
+type ListOperatorTicketsRequest struct {
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	OperatorContext        *common.OperatorContext        `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,2,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	TicketId               *int64                         `protobuf:"varint,3,opt,name=ticket_id,json=ticketId,proto3,oneof" json:"ticket_id,omitempty"`
+	Currency               *string                        `protobuf:"bytes,4,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
+	Status                 *string                        `protobuf:"bytes,5,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	StartTime              *timestamppb.Timestamp         `protobuf:"bytes,6,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
+	EndTime                *timestamppb.Timestamp         `protobuf:"bytes,7,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
+	Page                   *int32                         `protobuf:"varint,8,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize               *int32                         `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *ListOperatorTicketsRequest) Reset() {
+	*x = ListOperatorTicketsRequest{}
+	mi := &file_review_service_v1_review_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListOperatorTicketsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListOperatorTicketsRequest) ProtoMessage() {}
+
+func (x *ListOperatorTicketsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_review_service_v1_review_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListOperatorTicketsRequest.ProtoReflect.Descriptor instead.
+func (*ListOperatorTicketsRequest) Descriptor() ([]byte, []int) {
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ListOperatorTicketsRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *ListOperatorTicketsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
+func (x *ListOperatorTicketsRequest) GetTicketId() int64 {
+	if x != nil && x.TicketId != nil {
+		return *x.TicketId
+	}
+	return 0
+}
+
+func (x *ListOperatorTicketsRequest) GetCurrency() string {
+	if x != nil && x.Currency != nil {
+		return *x.Currency
+	}
+	return ""
+}
+
+func (x *ListOperatorTicketsRequest) GetStatus() string {
+	if x != nil && x.Status != nil {
+		return *x.Status
+	}
+	return ""
+}
+
+func (x *ListOperatorTicketsRequest) GetStartTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.StartTime
+	}
+	return nil
+}
+
+func (x *ListOperatorTicketsRequest) GetEndTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndTime
+	}
+	return nil
+}
+
+func (x *ListOperatorTicketsRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListOperatorTicketsRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
 type ListTicketsResponse struct {
-	state               protoimpl.MessageState        `protogen:"open.v1"`
-	Tickets             []*ListTicketsResponse_Ticket `protobuf:"bytes,1,rep,name=tickets,proto3" json:"tickets,omitempty"`
-	Page                int32                         `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
-	PageSize            int32                         `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	TotalCount          int32                         `protobuf:"varint,4,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
-	TotalAmount         string                        `protobuf:"bytes,5,opt,name=total_amount,json=totalAmount,proto3" json:"total_amount,omitempty"`
-	TotalPendingCount   int32                         `protobuf:"varint,6,opt,name=total_pending_count,json=totalPendingCount,proto3" json:"total_pending_count,omitempty"`
-	TotalPendingAmount  string                        `protobuf:"bytes,7,opt,name=total_pending_amount,json=totalPendingAmount,proto3" json:"total_pending_amount,omitempty"`
-	TotalPayingCount    int32                         `protobuf:"varint,8,opt,name=total_paying_count,json=totalPayingCount,proto3" json:"total_paying_count,omitempty"`
-	TotalPayingAmount   string                        `protobuf:"bytes,9,opt,name=total_paying_amount,json=totalPayingAmount,proto3" json:"total_paying_amount,omitempty"`
-	TotalPaidCount      int32                         `protobuf:"varint,10,opt,name=total_paid_count,json=totalPaidCount,proto3" json:"total_paid_count,omitempty"`
-	TotalPaidAmount     string                        `protobuf:"bytes,11,opt,name=total_paid_amount,json=totalPaidAmount,proto3" json:"total_paid_amount,omitempty"`
-	TotalFailedCount    int32                         `protobuf:"varint,12,opt,name=total_failed_count,json=totalFailedCount,proto3" json:"total_failed_count,omitempty"`
-	TotalFailedAmount   string                        `protobuf:"bytes,13,opt,name=total_failed_amount,json=totalFailedAmount,proto3" json:"total_failed_amount,omitempty"`
-	TotalRejectedCount  int32                         `protobuf:"varint,14,opt,name=total_rejected_count,json=totalRejectedCount,proto3" json:"total_rejected_count,omitempty"`
-	TotalRejectedAmount string                        `protobuf:"bytes,15,opt,name=total_rejected_amount,json=totalRejectedAmount,proto3" json:"total_rejected_amount,omitempty"`
-	AverageReviewTime   int32                         `protobuf:"varint,16,opt,name=average_review_time,json=averageReviewTime,proto3" json:"average_review_time,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state                                protoimpl.MessageState        `protogen:"open.v1"`
+	Tickets                              []*ListTicketsResponse_Ticket `protobuf:"bytes,1,rep,name=tickets,proto3" json:"tickets,omitempty"`
+	Page                                 int32                         `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize                             int32                         `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	TotalCount                           int32                         `protobuf:"varint,4,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	TotalAmountUsd                       string                        `protobuf:"bytes,5,opt,name=total_amount_usd,json=totalAmountUsd,proto3" json:"total_amount_usd,omitempty"`
+	TotalAmountReportingCurrency         string                        `protobuf:"bytes,6,opt,name=total_amount_reporting_currency,json=totalAmountReportingCurrency,proto3" json:"total_amount_reporting_currency,omitempty"`
+	TotalPendingCount                    int32                         `protobuf:"varint,7,opt,name=total_pending_count,json=totalPendingCount,proto3" json:"total_pending_count,omitempty"`
+	TotalPendingAmountUsd                string                        `protobuf:"bytes,8,opt,name=total_pending_amount_usd,json=totalPendingAmountUsd,proto3" json:"total_pending_amount_usd,omitempty"`
+	TotalPendingAmountReportingCurrency  string                        `protobuf:"bytes,9,opt,name=total_pending_amount_reporting_currency,json=totalPendingAmountReportingCurrency,proto3" json:"total_pending_amount_reporting_currency,omitempty"`
+	TotalPayingCount                     int32                         `protobuf:"varint,10,opt,name=total_paying_count,json=totalPayingCount,proto3" json:"total_paying_count,omitempty"`
+	TotalPayingAmountUsd                 string                        `protobuf:"bytes,11,opt,name=total_paying_amount_usd,json=totalPayingAmountUsd,proto3" json:"total_paying_amount_usd,omitempty"`
+	TotalPayingAmountReportingCurrency   string                        `protobuf:"bytes,12,opt,name=total_paying_amount_reporting_currency,json=totalPayingAmountReportingCurrency,proto3" json:"total_paying_amount_reporting_currency,omitempty"`
+	TotalPaidCount                       int32                         `protobuf:"varint,13,opt,name=total_paid_count,json=totalPaidCount,proto3" json:"total_paid_count,omitempty"`
+	TotalPaidAmountUsd                   string                        `protobuf:"bytes,14,opt,name=total_paid_amount_usd,json=totalPaidAmountUsd,proto3" json:"total_paid_amount_usd,omitempty"`
+	TotalPaidAmountReportingCurrency     string                        `protobuf:"bytes,15,opt,name=total_paid_amount_reporting_currency,json=totalPaidAmountReportingCurrency,proto3" json:"total_paid_amount_reporting_currency,omitempty"`
+	TotalFailedCount                     int32                         `protobuf:"varint,16,opt,name=total_failed_count,json=totalFailedCount,proto3" json:"total_failed_count,omitempty"`
+	TotalFailedAmountUsd                 string                        `protobuf:"bytes,17,opt,name=total_failed_amount_usd,json=totalFailedAmountUsd,proto3" json:"total_failed_amount_usd,omitempty"`
+	TotalFailedAmountReportingCurrency   string                        `protobuf:"bytes,18,opt,name=total_failed_amount_reporting_currency,json=totalFailedAmountReportingCurrency,proto3" json:"total_failed_amount_reporting_currency,omitempty"`
+	TotalRejectedCount                   int32                         `protobuf:"varint,19,opt,name=total_rejected_count,json=totalRejectedCount,proto3" json:"total_rejected_count,omitempty"`
+	TotalRejectedAmountUsd               string                        `protobuf:"bytes,20,opt,name=total_rejected_amount_usd,json=totalRejectedAmountUsd,proto3" json:"total_rejected_amount_usd,omitempty"`
+	TotalRejectedAmountReportingCurrency string                        `protobuf:"bytes,21,opt,name=total_rejected_amount_reporting_currency,json=totalRejectedAmountReportingCurrency,proto3" json:"total_rejected_amount_reporting_currency,omitempty"`
+	AverageReviewTime                    int32                         `protobuf:"varint,22,opt,name=average_review_time,json=averageReviewTime,proto3" json:"average_review_time,omitempty"`
+	unknownFields                        protoimpl.UnknownFields
+	sizeCache                            protoimpl.SizeCache
 }
 
 func (x *ListTicketsResponse) Reset() {
 	*x = ListTicketsResponse{}
-	mi := &file_review_service_v1_review_proto_msgTypes[9]
+	mi := &file_review_service_v1_review_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -554,7 +745,7 @@ func (x *ListTicketsResponse) String() string {
 func (*ListTicketsResponse) ProtoMessage() {}
 
 func (x *ListTicketsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_review_service_v1_review_proto_msgTypes[9]
+	mi := &file_review_service_v1_review_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -567,7 +758,7 @@ func (x *ListTicketsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTicketsResponse.ProtoReflect.Descriptor instead.
 func (*ListTicketsResponse) Descriptor() ([]byte, []int) {
-	return file_review_service_v1_review_proto_rawDescGZIP(), []int{9}
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ListTicketsResponse) GetTickets() []*ListTicketsResponse_Ticket {
@@ -598,9 +789,16 @@ func (x *ListTicketsResponse) GetTotalCount() int32 {
 	return 0
 }
 
-func (x *ListTicketsResponse) GetTotalAmount() string {
+func (x *ListTicketsResponse) GetTotalAmountUsd() string {
 	if x != nil {
-		return x.TotalAmount
+		return x.TotalAmountUsd
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse) GetTotalAmountReportingCurrency() string {
+	if x != nil {
+		return x.TotalAmountReportingCurrency
 	}
 	return ""
 }
@@ -612,9 +810,16 @@ func (x *ListTicketsResponse) GetTotalPendingCount() int32 {
 	return 0
 }
 
-func (x *ListTicketsResponse) GetTotalPendingAmount() string {
+func (x *ListTicketsResponse) GetTotalPendingAmountUsd() string {
 	if x != nil {
-		return x.TotalPendingAmount
+		return x.TotalPendingAmountUsd
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse) GetTotalPendingAmountReportingCurrency() string {
+	if x != nil {
+		return x.TotalPendingAmountReportingCurrency
 	}
 	return ""
 }
@@ -626,9 +831,16 @@ func (x *ListTicketsResponse) GetTotalPayingCount() int32 {
 	return 0
 }
 
-func (x *ListTicketsResponse) GetTotalPayingAmount() string {
+func (x *ListTicketsResponse) GetTotalPayingAmountUsd() string {
 	if x != nil {
-		return x.TotalPayingAmount
+		return x.TotalPayingAmountUsd
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse) GetTotalPayingAmountReportingCurrency() string {
+	if x != nil {
+		return x.TotalPayingAmountReportingCurrency
 	}
 	return ""
 }
@@ -640,9 +852,16 @@ func (x *ListTicketsResponse) GetTotalPaidCount() int32 {
 	return 0
 }
 
-func (x *ListTicketsResponse) GetTotalPaidAmount() string {
+func (x *ListTicketsResponse) GetTotalPaidAmountUsd() string {
 	if x != nil {
-		return x.TotalPaidAmount
+		return x.TotalPaidAmountUsd
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse) GetTotalPaidAmountReportingCurrency() string {
+	if x != nil {
+		return x.TotalPaidAmountReportingCurrency
 	}
 	return ""
 }
@@ -654,9 +873,16 @@ func (x *ListTicketsResponse) GetTotalFailedCount() int32 {
 	return 0
 }
 
-func (x *ListTicketsResponse) GetTotalFailedAmount() string {
+func (x *ListTicketsResponse) GetTotalFailedAmountUsd() string {
 	if x != nil {
-		return x.TotalFailedAmount
+		return x.TotalFailedAmountUsd
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse) GetTotalFailedAmountReportingCurrency() string {
+	if x != nil {
+		return x.TotalFailedAmountReportingCurrency
 	}
 	return ""
 }
@@ -668,9 +894,16 @@ func (x *ListTicketsResponse) GetTotalRejectedCount() int32 {
 	return 0
 }
 
-func (x *ListTicketsResponse) GetTotalRejectedAmount() string {
+func (x *ListTicketsResponse) GetTotalRejectedAmountUsd() string {
 	if x != nil {
-		return x.TotalRejectedAmount
+		return x.TotalRejectedAmountUsd
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse) GetTotalRejectedAmountReportingCurrency() string {
+	if x != nil {
+		return x.TotalRejectedAmountReportingCurrency
 	}
 	return ""
 }
@@ -687,14 +920,15 @@ type GetTicketRequest struct {
 	TicketId int64                  `protobuf:"varint,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
 	// Optional flag for including comments in the response or not.
 	// If not provided, the comments will not be included in the response.
-	IncludeComments *bool `protobuf:"varint,2,opt,name=include_comments,json=includeComments,proto3,oneof" json:"include_comments,omitempty"`
+	IncludeComments *bool                   `protobuf:"varint,2,opt,name=include_comments,json=includeComments,proto3,oneof" json:"include_comments,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
 
 func (x *GetTicketRequest) Reset() {
 	*x = GetTicketRequest{}
-	mi := &file_review_service_v1_review_proto_msgTypes[10]
+	mi := &file_review_service_v1_review_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -706,7 +940,7 @@ func (x *GetTicketRequest) String() string {
 func (*GetTicketRequest) ProtoMessage() {}
 
 func (x *GetTicketRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_review_service_v1_review_proto_msgTypes[10]
+	mi := &file_review_service_v1_review_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -719,7 +953,7 @@ func (x *GetTicketRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTicketRequest.ProtoReflect.Descriptor instead.
 func (*GetTicketRequest) Descriptor() ([]byte, []int) {
-	return file_review_service_v1_review_proto_rawDescGZIP(), []int{10}
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GetTicketRequest) GetTicketId() int64 {
@@ -736,17 +970,28 @@ func (x *GetTicketRequest) GetIncludeComments() bool {
 	return false
 }
 
+func (x *GetTicketRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
 type GetTicketResponse struct {
-	state         protoimpl.MessageState       `protogen:"open.v1"`
-	Ticket        *GetTicketResponse_Ticket    `protobuf:"bytes,1,opt,name=ticket,proto3" json:"ticket,omitempty"`
-	Comments      []*GetTicketResponse_Comment `protobuf:"bytes,2,rep,name=comments,proto3" json:"comments,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState                      `protogen:"open.v1"`
+	Ticket                   *GetTicketResponse_Ticket                   `protobuf:"bytes,1,opt,name=ticket,proto3" json:"ticket,omitempty"`
+	Comments                 []*GetTicketResponse_Comment                `protobuf:"bytes,2,rep,name=comments,proto3" json:"comments,omitempty"`
+	UserInfo                 *GetTicketResponse_UserInfo                 `protobuf:"bytes,3,opt,name=user_info,json=userInfo,proto3" json:"user_info,omitempty"`
+	PaymentTransactionInfo   *GetTicketResponse_PaymentTransactionInfo   `protobuf:"bytes,4,opt,name=payment_transaction_info,json=paymentTransactionInfo,proto3" json:"payment_transaction_info,omitempty"`
+	WalletTransactionInfo    *GetTicketResponse_WalletTransactionInfo    `protobuf:"bytes,5,opt,name=wallet_transaction_info,json=walletTransactionInfo,proto3" json:"wallet_transaction_info,omitempty"`
+	WalletTransactionSummary *GetTicketResponse_WalletTransactionSummary `protobuf:"bytes,6,opt,name=wallet_transaction_summary,json=walletTransactionSummary,proto3" json:"wallet_transaction_summary,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *GetTicketResponse) Reset() {
 	*x = GetTicketResponse{}
-	mi := &file_review_service_v1_review_proto_msgTypes[11]
+	mi := &file_review_service_v1_review_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -758,7 +1003,7 @@ func (x *GetTicketResponse) String() string {
 func (*GetTicketResponse) ProtoMessage() {}
 
 func (x *GetTicketResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_review_service_v1_review_proto_msgTypes[11]
+	mi := &file_review_service_v1_review_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -771,7 +1016,7 @@ func (x *GetTicketResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTicketResponse.ProtoReflect.Descriptor instead.
 func (*GetTicketResponse) Descriptor() ([]byte, []int) {
-	return file_review_service_v1_review_proto_rawDescGZIP(), []int{11}
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *GetTicketResponse) GetTicket() *GetTicketResponse_Ticket {
@@ -788,34 +1033,217 @@ func (x *GetTicketResponse) GetComments() []*GetTicketResponse_Comment {
 	return nil
 }
 
+func (x *GetTicketResponse) GetUserInfo() *GetTicketResponse_UserInfo {
+	if x != nil {
+		return x.UserInfo
+	}
+	return nil
+}
+
+func (x *GetTicketResponse) GetPaymentTransactionInfo() *GetTicketResponse_PaymentTransactionInfo {
+	if x != nil {
+		return x.PaymentTransactionInfo
+	}
+	return nil
+}
+
+func (x *GetTicketResponse) GetWalletTransactionInfo() *GetTicketResponse_WalletTransactionInfo {
+	if x != nil {
+		return x.WalletTransactionInfo
+	}
+	return nil
+}
+
+func (x *GetTicketResponse) GetWalletTransactionSummary() *GetTicketResponse_WalletTransactionSummary {
+	if x != nil {
+		return x.WalletTransactionSummary
+	}
+	return nil
+}
+
+type GetOperatorTicketRequest struct {
+	state    protoimpl.MessageState `protogen:"open.v1"`
+	TicketId int64                  `protobuf:"varint,1,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	// Optional flag for including comments in the response or not.
+	// If not provided, the comments will not be included in the response.
+	IncludeComments *bool                   `protobuf:"varint,2,opt,name=include_comments,json=includeComments,proto3,oneof" json:"include_comments,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *GetOperatorTicketRequest) Reset() {
+	*x = GetOperatorTicketRequest{}
+	mi := &file_review_service_v1_review_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOperatorTicketRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOperatorTicketRequest) ProtoMessage() {}
+
+func (x *GetOperatorTicketRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_review_service_v1_review_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOperatorTicketRequest.ProtoReflect.Descriptor instead.
+func (*GetOperatorTicketRequest) Descriptor() ([]byte, []int) {
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *GetOperatorTicketRequest) GetTicketId() int64 {
+	if x != nil {
+		return x.TicketId
+	}
+	return 0
+}
+
+func (x *GetOperatorTicketRequest) GetIncludeComments() bool {
+	if x != nil && x.IncludeComments != nil {
+		return *x.IncludeComments
+	}
+	return false
+}
+
+func (x *GetOperatorTicketRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+type GetOperatorTicketResponse struct {
+	state                    protoimpl.MessageState                              `protogen:"open.v1"`
+	Ticket                   *GetOperatorTicketResponse_Ticket                   `protobuf:"bytes,1,opt,name=ticket,proto3" json:"ticket,omitempty"`
+	Comments                 []*GetOperatorTicketResponse_Comment                `protobuf:"bytes,2,rep,name=comments,proto3" json:"comments,omitempty"`
+	PaymentTransactionInfo   *GetOperatorTicketResponse_PaymentTransactionInfo   `protobuf:"bytes,3,opt,name=payment_transaction_info,json=paymentTransactionInfo,proto3" json:"payment_transaction_info,omitempty"`
+	WalletBalanceInfo        *GetOperatorTicketResponse_WalletBalanceInfo        `protobuf:"bytes,4,opt,name=wallet_balance_info,json=walletBalanceInfo,proto3" json:"wallet_balance_info,omitempty"`
+	WalletTransactionInfo    *GetOperatorTicketResponse_WalletTransactionInfo    `protobuf:"bytes,5,opt,name=wallet_transaction_info,json=walletTransactionInfo,proto3" json:"wallet_transaction_info,omitempty"`
+	WalletTransactionSummary *GetOperatorTicketResponse_WalletTransactionSummary `protobuf:"bytes,6,opt,name=wallet_transaction_summary,json=walletTransactionSummary,proto3" json:"wallet_transaction_summary,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
+}
+
+func (x *GetOperatorTicketResponse) Reset() {
+	*x = GetOperatorTicketResponse{}
+	mi := &file_review_service_v1_review_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOperatorTicketResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOperatorTicketResponse) ProtoMessage() {}
+
+func (x *GetOperatorTicketResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_review_service_v1_review_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOperatorTicketResponse.ProtoReflect.Descriptor instead.
+func (*GetOperatorTicketResponse) Descriptor() ([]byte, []int) {
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *GetOperatorTicketResponse) GetTicket() *GetOperatorTicketResponse_Ticket {
+	if x != nil {
+		return x.Ticket
+	}
+	return nil
+}
+
+func (x *GetOperatorTicketResponse) GetComments() []*GetOperatorTicketResponse_Comment {
+	if x != nil {
+		return x.Comments
+	}
+	return nil
+}
+
+func (x *GetOperatorTicketResponse) GetPaymentTransactionInfo() *GetOperatorTicketResponse_PaymentTransactionInfo {
+	if x != nil {
+		return x.PaymentTransactionInfo
+	}
+	return nil
+}
+
+func (x *GetOperatorTicketResponse) GetWalletBalanceInfo() *GetOperatorTicketResponse_WalletBalanceInfo {
+	if x != nil {
+		return x.WalletBalanceInfo
+	}
+	return nil
+}
+
+func (x *GetOperatorTicketResponse) GetWalletTransactionInfo() *GetOperatorTicketResponse_WalletTransactionInfo {
+	if x != nil {
+		return x.WalletTransactionInfo
+	}
+	return nil
+}
+
+func (x *GetOperatorTicketResponse) GetWalletTransactionSummary() *GetOperatorTicketResponse_WalletTransactionSummary {
+	if x != nil {
+		return x.WalletTransactionSummary
+	}
+	return nil
+}
+
 type ListTicketsResponse_Ticket struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	CreatedAt        *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	OperatorName     string                 `protobuf:"bytes,2,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	TicketId         int64                  `protobuf:"varint,3,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
-	UserId           int64                  `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	VipLevel         int32                  `protobuf:"varint,5,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
-	UserTags         []string               `protobuf:"bytes,6,rep,name=user_tags,json=userTags,proto3" json:"user_tags,omitempty"`
-	BeforeBalance    string                 `protobuf:"bytes,7,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
-	BeforeBalanceUsd string                 `protobuf:"bytes,8,opt,name=before_balance_usd,json=beforeBalanceUsd,proto3" json:"before_balance_usd,omitempty"`
-	Amount           string                 `protobuf:"bytes,9,opt,name=amount,proto3" json:"amount,omitempty"`
-	AmountUsd        string                 `protobuf:"bytes,10,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
-	AfterBalance     string                 `protobuf:"bytes,11,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
-	AfterBalanceUsd  string                 `protobuf:"bytes,12,opt,name=after_balance_usd,json=afterBalanceUsd,proto3" json:"after_balance_usd,omitempty"`
-	Currency         string                 `protobuf:"bytes,13,opt,name=currency,proto3" json:"currency,omitempty"`
-	PaymentChannel   string                 `protobuf:"bytes,14,opt,name=payment_channel,json=paymentChannel,proto3" json:"payment_channel,omitempty"`
-	Protocol         string                 `protobuf:"bytes,15,opt,name=protocol,proto3" json:"protocol,omitempty"`
-	Fee              string                 `protobuf:"bytes,16,opt,name=fee,proto3" json:"fee,omitempty"`
-	Status           string                 `protobuf:"bytes,17,opt,name=status,proto3" json:"status,omitempty"` // pending, approved, rejected, manual_payout, paying, paid, failed
-	ReviewerUsername string                 `protobuf:"bytes,18,opt,name=reviewer_username,json=reviewerUsername,proto3" json:"reviewer_username,omitempty"`
-	ReviewDuration   int32                  `protobuf:"varint,19,opt,name=review_duration,json=reviewDuration,proto3" json:"review_duration,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                          protoimpl.MessageState `protogen:"open.v1"`
+	CreatedAt                      *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	TicketId                       int64                  `protobuf:"varint,2,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	UserId                         int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OperatorName                   string                 `protobuf:"bytes,4,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	CompanyOperatorName            string                 `protobuf:"bytes,5,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	RetailerOperatorName           string                 `protobuf:"bytes,6,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	SystemOperatorName             string                 `protobuf:"bytes,7,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
+	RealOperatorName               string                 `protobuf:"bytes,8,opt,name=real_operator_name,json=realOperatorName,proto3" json:"real_operator_name,omitempty"`
+	VipLevel                       int32                  `protobuf:"varint,9,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
+	UserTags                       []string               `protobuf:"bytes,10,rep,name=user_tags,json=userTags,proto3" json:"user_tags,omitempty"`
+	BeforeBalance                  string                 `protobuf:"bytes,11,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
+	BeforeBalanceUsd               string                 `protobuf:"bytes,12,opt,name=before_balance_usd,json=beforeBalanceUsd,proto3" json:"before_balance_usd,omitempty"`
+	BeforeBalanceReportingCurrency string                 `protobuf:"bytes,13,opt,name=before_balance_reporting_currency,json=beforeBalanceReportingCurrency,proto3" json:"before_balance_reporting_currency,omitempty"`
+	Amount                         string                 `protobuf:"bytes,14,opt,name=amount,proto3" json:"amount,omitempty"`
+	AmountUsd                      string                 `protobuf:"bytes,15,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
+	AmountReportingCurrency        string                 `protobuf:"bytes,16,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
+	AfterBalance                   string                 `protobuf:"bytes,17,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
+	AfterBalanceUsd                string                 `protobuf:"bytes,18,opt,name=after_balance_usd,json=afterBalanceUsd,proto3" json:"after_balance_usd,omitempty"`
+	AfterBalanceReportingCurrency  string                 `protobuf:"bytes,19,opt,name=after_balance_reporting_currency,json=afterBalanceReportingCurrency,proto3" json:"after_balance_reporting_currency,omitempty"`
+	Currency                       string                 `protobuf:"bytes,20,opt,name=currency,proto3" json:"currency,omitempty"`
+	PaymentChannel                 string                 `protobuf:"bytes,21,opt,name=payment_channel,json=paymentChannel,proto3" json:"payment_channel,omitempty"`
+	Protocol                       string                 `protobuf:"bytes,22,opt,name=protocol,proto3" json:"protocol,omitempty"`
+	Fee                            string                 `protobuf:"bytes,23,opt,name=fee,proto3" json:"fee,omitempty"`
+	FeeUsd                         string                 `protobuf:"bytes,24,opt,name=fee_usd,json=feeUsd,proto3" json:"fee_usd,omitempty"`
+	FeeReportingCurrency           string                 `protobuf:"bytes,25,opt,name=fee_reporting_currency,json=feeReportingCurrency,proto3" json:"fee_reporting_currency,omitempty"`
+	Status                         string                 `protobuf:"bytes,26,opt,name=status,proto3" json:"status,omitempty"` // pending, approved, rejected, manual_payout, paying, paid, failed
+	ReviewerUsername               string                 `protobuf:"bytes,27,opt,name=reviewer_username,json=reviewerUsername,proto3" json:"reviewer_username,omitempty"`
+	ReviewDuration                 int32                  `protobuf:"varint,28,opt,name=review_duration,json=reviewDuration,proto3" json:"review_duration,omitempty"`
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
 func (x *ListTicketsResponse_Ticket) Reset() {
 	*x = ListTicketsResponse_Ticket{}
-	mi := &file_review_service_v1_review_proto_msgTypes[12]
+	mi := &file_review_service_v1_review_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -827,7 +1255,7 @@ func (x *ListTicketsResponse_Ticket) String() string {
 func (*ListTicketsResponse_Ticket) ProtoMessage() {}
 
 func (x *ListTicketsResponse_Ticket) ProtoReflect() protoreflect.Message {
-	mi := &file_review_service_v1_review_proto_msgTypes[12]
+	mi := &file_review_service_v1_review_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -840,7 +1268,7 @@ func (x *ListTicketsResponse_Ticket) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTicketsResponse_Ticket.ProtoReflect.Descriptor instead.
 func (*ListTicketsResponse_Ticket) Descriptor() ([]byte, []int) {
-	return file_review_service_v1_review_proto_rawDescGZIP(), []int{9, 0}
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{11, 0}
 }
 
 func (x *ListTicketsResponse_Ticket) GetCreatedAt() *timestamppb.Timestamp {
@@ -848,13 +1276,6 @@ func (x *ListTicketsResponse_Ticket) GetCreatedAt() *timestamppb.Timestamp {
 		return x.CreatedAt
 	}
 	return nil
-}
-
-func (x *ListTicketsResponse_Ticket) GetOperatorName() string {
-	if x != nil {
-		return x.OperatorName
-	}
-	return ""
 }
 
 func (x *ListTicketsResponse_Ticket) GetTicketId() int64 {
@@ -869,6 +1290,41 @@ func (x *ListTicketsResponse_Ticket) GetUserId() int64 {
 		return x.UserId
 	}
 	return 0
+}
+
+func (x *ListTicketsResponse_Ticket) GetOperatorName() string {
+	if x != nil {
+		return x.OperatorName
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse_Ticket) GetCompanyOperatorName() string {
+	if x != nil {
+		return x.CompanyOperatorName
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse_Ticket) GetRetailerOperatorName() string {
+	if x != nil {
+		return x.RetailerOperatorName
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse_Ticket) GetSystemOperatorName() string {
+	if x != nil {
+		return x.SystemOperatorName
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse_Ticket) GetRealOperatorName() string {
+	if x != nil {
+		return x.RealOperatorName
+	}
+	return ""
 }
 
 func (x *ListTicketsResponse_Ticket) GetVipLevel() int32 {
@@ -899,6 +1355,13 @@ func (x *ListTicketsResponse_Ticket) GetBeforeBalanceUsd() string {
 	return ""
 }
 
+func (x *ListTicketsResponse_Ticket) GetBeforeBalanceReportingCurrency() string {
+	if x != nil {
+		return x.BeforeBalanceReportingCurrency
+	}
+	return ""
+}
+
 func (x *ListTicketsResponse_Ticket) GetAmount() string {
 	if x != nil {
 		return x.Amount
@@ -913,6 +1376,13 @@ func (x *ListTicketsResponse_Ticket) GetAmountUsd() string {
 	return ""
 }
 
+func (x *ListTicketsResponse_Ticket) GetAmountReportingCurrency() string {
+	if x != nil {
+		return x.AmountReportingCurrency
+	}
+	return ""
+}
+
 func (x *ListTicketsResponse_Ticket) GetAfterBalance() string {
 	if x != nil {
 		return x.AfterBalance
@@ -923,6 +1393,13 @@ func (x *ListTicketsResponse_Ticket) GetAfterBalance() string {
 func (x *ListTicketsResponse_Ticket) GetAfterBalanceUsd() string {
 	if x != nil {
 		return x.AfterBalanceUsd
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse_Ticket) GetAfterBalanceReportingCurrency() string {
+	if x != nil {
+		return x.AfterBalanceReportingCurrency
 	}
 	return ""
 }
@@ -955,6 +1432,20 @@ func (x *ListTicketsResponse_Ticket) GetFee() string {
 	return ""
 }
 
+func (x *ListTicketsResponse_Ticket) GetFeeUsd() string {
+	if x != nil {
+		return x.FeeUsd
+	}
+	return ""
+}
+
+func (x *ListTicketsResponse_Ticket) GetFeeReportingCurrency() string {
+	if x != nil {
+		return x.FeeReportingCurrency
+	}
+	return ""
+}
+
 func (x *ListTicketsResponse_Ticket) GetStatus() string {
 	if x != nil {
 		return x.Status
@@ -977,38 +1468,22 @@ func (x *ListTicketsResponse_Ticket) GetReviewDuration() int32 {
 }
 
 type GetTicketResponse_Ticket struct {
-	state                       protoimpl.MessageState `protogen:"open.v1"`
-	Id                          int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Type                        string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
-	Request                     string                 `protobuf:"bytes,3,opt,name=request,proto3" json:"request,omitempty"`
-	Response                    string                 `protobuf:"bytes,4,opt,name=response,proto3" json:"response,omitempty"`
-	UserId                      int64                  `protobuf:"varint,5,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	OperatorId                  int64                  `protobuf:"varint,6,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	Currency                    string                 `protobuf:"bytes,7,opt,name=currency,proto3" json:"currency,omitempty"`
-	TicketStatus                string                 `protobuf:"bytes,8,opt,name=ticket_status,json=ticketStatus,proto3" json:"ticket_status,omitempty"`
-	ReviewerUserId              int64                  `protobuf:"varint,9,opt,name=reviewer_user_id,json=reviewerUserId,proto3" json:"reviewer_user_id,omitempty"`
-	ReviewerComment             string                 `protobuf:"bytes,10,opt,name=reviewer_comment,json=reviewerComment,proto3" json:"reviewer_comment,omitempty"`
-	PaymentChannelId            string                 `protobuf:"bytes,11,opt,name=payment_channel_id,json=paymentChannelId,proto3" json:"payment_channel_id,omitempty"`
-	PaymentChannelName          string                 `protobuf:"bytes,12,opt,name=payment_channel_name,json=paymentChannelName,proto3" json:"payment_channel_name,omitempty"`
-	PaymentStatus               string                 `protobuf:"bytes,13,opt,name=payment_status,json=paymentStatus,proto3" json:"payment_status,omitempty"`
-	PaymentTransactionId        int64                  `protobuf:"varint,14,opt,name=payment_transaction_id,json=paymentTransactionId,proto3" json:"payment_transaction_id,omitempty"`
-	PaymentTransactionError     string                 `protobuf:"bytes,15,opt,name=payment_transaction_error,json=paymentTransactionError,proto3" json:"payment_transaction_error,omitempty"`
-	WalletStatus                string                 `protobuf:"bytes,16,opt,name=wallet_status,json=walletStatus,proto3" json:"wallet_status,omitempty"`
-	WalletFreezeTransactionId   int64                  `protobuf:"varint,17,opt,name=wallet_freeze_transaction_id,json=walletFreezeTransactionId,proto3" json:"wallet_freeze_transaction_id,omitempty"`
-	WalletSettleTransactionId   int64                  `protobuf:"varint,18,opt,name=wallet_settle_transaction_id,json=walletSettleTransactionId,proto3" json:"wallet_settle_transaction_id,omitempty"`
-	WalletSettleError           string                 `protobuf:"bytes,19,opt,name=wallet_settle_error,json=walletSettleError,proto3" json:"wallet_settle_error,omitempty"`
-	WalletRollbackTransactionId int64                  `protobuf:"varint,20,opt,name=wallet_rollback_transaction_id,json=walletRollbackTransactionId,proto3" json:"wallet_rollback_transaction_id,omitempty"`
-	WalletRollbackError         string                 `protobuf:"bytes,21,opt,name=wallet_rollback_error,json=walletRollbackError,proto3" json:"wallet_rollback_error,omitempty"`
-	CreatedAt                   int64                  `protobuf:"varint,22,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt                   int64                  `protobuf:"varint,23,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	ReviewedAt                  int64                  `protobuf:"varint,24,opt,name=reviewed_at,json=reviewedAt,proto3" json:"reviewed_at,omitempty"`
-	unknownFields               protoimpl.UnknownFields
-	sizeCache                   protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	Id                   int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Type                 string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
+	Status               string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
+	OperatorName         string                 `protobuf:"bytes,4,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	CompanyOperatorName  string                 `protobuf:"bytes,5,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	RetailerOperatorName string                 `protobuf:"bytes,6,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	SystemOperatorName   string                 `protobuf:"bytes,7,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
+	CreatedAt            *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *GetTicketResponse_Ticket) Reset() {
 	*x = GetTicketResponse_Ticket{}
-	mi := &file_review_service_v1_review_proto_msgTypes[13]
+	mi := &file_review_service_v1_review_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1020,7 +1495,7 @@ func (x *GetTicketResponse_Ticket) String() string {
 func (*GetTicketResponse_Ticket) ProtoMessage() {}
 
 func (x *GetTicketResponse_Ticket) ProtoReflect() protoreflect.Message {
-	mi := &file_review_service_v1_review_proto_msgTypes[13]
+	mi := &file_review_service_v1_review_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1033,7 +1508,7 @@ func (x *GetTicketResponse_Ticket) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTicketResponse_Ticket.ProtoReflect.Descriptor instead.
 func (*GetTicketResponse_Ticket) Descriptor() ([]byte, []int) {
-	return file_review_service_v1_review_proto_rawDescGZIP(), []int{11, 0}
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{13, 0}
 }
 
 func (x *GetTicketResponse_Ticket) GetId() int64 {
@@ -1050,174 +1525,62 @@ func (x *GetTicketResponse_Ticket) GetType() string {
 	return ""
 }
 
-func (x *GetTicketResponse_Ticket) GetRequest() string {
+func (x *GetTicketResponse_Ticket) GetStatus() string {
 	if x != nil {
-		return x.Request
+		return x.Status
 	}
 	return ""
 }
 
-func (x *GetTicketResponse_Ticket) GetResponse() string {
+func (x *GetTicketResponse_Ticket) GetOperatorName() string {
 	if x != nil {
-		return x.Response
+		return x.OperatorName
 	}
 	return ""
 }
 
-func (x *GetTicketResponse_Ticket) GetUserId() int64 {
+func (x *GetTicketResponse_Ticket) GetCompanyOperatorName() string {
 	if x != nil {
-		return x.UserId
-	}
-	return 0
-}
-
-func (x *GetTicketResponse_Ticket) GetOperatorId() int64 {
-	if x != nil {
-		return x.OperatorId
-	}
-	return 0
-}
-
-func (x *GetTicketResponse_Ticket) GetCurrency() string {
-	if x != nil {
-		return x.Currency
+		return x.CompanyOperatorName
 	}
 	return ""
 }
 
-func (x *GetTicketResponse_Ticket) GetTicketStatus() string {
+func (x *GetTicketResponse_Ticket) GetRetailerOperatorName() string {
 	if x != nil {
-		return x.TicketStatus
+		return x.RetailerOperatorName
 	}
 	return ""
 }
 
-func (x *GetTicketResponse_Ticket) GetReviewerUserId() int64 {
+func (x *GetTicketResponse_Ticket) GetSystemOperatorName() string {
 	if x != nil {
-		return x.ReviewerUserId
-	}
-	return 0
-}
-
-func (x *GetTicketResponse_Ticket) GetReviewerComment() string {
-	if x != nil {
-		return x.ReviewerComment
+		return x.SystemOperatorName
 	}
 	return ""
 }
 
-func (x *GetTicketResponse_Ticket) GetPaymentChannelId() string {
-	if x != nil {
-		return x.PaymentChannelId
-	}
-	return ""
-}
-
-func (x *GetTicketResponse_Ticket) GetPaymentChannelName() string {
-	if x != nil {
-		return x.PaymentChannelName
-	}
-	return ""
-}
-
-func (x *GetTicketResponse_Ticket) GetPaymentStatus() string {
-	if x != nil {
-		return x.PaymentStatus
-	}
-	return ""
-}
-
-func (x *GetTicketResponse_Ticket) GetPaymentTransactionId() int64 {
-	if x != nil {
-		return x.PaymentTransactionId
-	}
-	return 0
-}
-
-func (x *GetTicketResponse_Ticket) GetPaymentTransactionError() string {
-	if x != nil {
-		return x.PaymentTransactionError
-	}
-	return ""
-}
-
-func (x *GetTicketResponse_Ticket) GetWalletStatus() string {
-	if x != nil {
-		return x.WalletStatus
-	}
-	return ""
-}
-
-func (x *GetTicketResponse_Ticket) GetWalletFreezeTransactionId() int64 {
-	if x != nil {
-		return x.WalletFreezeTransactionId
-	}
-	return 0
-}
-
-func (x *GetTicketResponse_Ticket) GetWalletSettleTransactionId() int64 {
-	if x != nil {
-		return x.WalletSettleTransactionId
-	}
-	return 0
-}
-
-func (x *GetTicketResponse_Ticket) GetWalletSettleError() string {
-	if x != nil {
-		return x.WalletSettleError
-	}
-	return ""
-}
-
-func (x *GetTicketResponse_Ticket) GetWalletRollbackTransactionId() int64 {
-	if x != nil {
-		return x.WalletRollbackTransactionId
-	}
-	return 0
-}
-
-func (x *GetTicketResponse_Ticket) GetWalletRollbackError() string {
-	if x != nil {
-		return x.WalletRollbackError
-	}
-	return ""
-}
-
-func (x *GetTicketResponse_Ticket) GetCreatedAt() int64 {
+func (x *GetTicketResponse_Ticket) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
 	}
-	return 0
-}
-
-func (x *GetTicketResponse_Ticket) GetUpdatedAt() int64 {
-	if x != nil {
-		return x.UpdatedAt
-	}
-	return 0
-}
-
-func (x *GetTicketResponse_Ticket) GetReviewedAt() int64 {
-	if x != nil {
-		return x.ReviewedAt
-	}
-	return 0
+	return nil
 }
 
 type GetTicketResponse_Comment struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	TicketId      int64                  `protobuf:"varint,2,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
-	AuthorUserId  int64                  `protobuf:"varint,3,opt,name=author_user_id,json=authorUserId,proto3" json:"author_user_id,omitempty"`
-	Content       string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
-	CreatedAt     int64                  `protobuf:"varint,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Id             int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	TicketId       int64                  `protobuf:"varint,2,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	AuthorUsername string                 `protobuf:"bytes,3,opt,name=author_username,json=authorUsername,proto3" json:"author_username,omitempty"`
+	Content        string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
+	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *GetTicketResponse_Comment) Reset() {
 	*x = GetTicketResponse_Comment{}
-	mi := &file_review_service_v1_review_proto_msgTypes[14]
+	mi := &file_review_service_v1_review_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1229,7 +1592,7 @@ func (x *GetTicketResponse_Comment) String() string {
 func (*GetTicketResponse_Comment) ProtoMessage() {}
 
 func (x *GetTicketResponse_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_review_service_v1_review_proto_msgTypes[14]
+	mi := &file_review_service_v1_review_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1242,7 +1605,7 @@ func (x *GetTicketResponse_Comment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTicketResponse_Comment.ProtoReflect.Descriptor instead.
 func (*GetTicketResponse_Comment) Descriptor() ([]byte, []int) {
-	return file_review_service_v1_review_proto_rawDescGZIP(), []int{11, 1}
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{13, 1}
 }
 
 func (x *GetTicketResponse_Comment) GetId() int64 {
@@ -1259,11 +1622,11 @@ func (x *GetTicketResponse_Comment) GetTicketId() int64 {
 	return 0
 }
 
-func (x *GetTicketResponse_Comment) GetAuthorUserId() int64 {
+func (x *GetTicketResponse_Comment) GetAuthorUsername() string {
 	if x != nil {
-		return x.AuthorUserId
+		return x.AuthorUsername
 	}
-	return 0
+	return ""
 }
 
 func (x *GetTicketResponse_Comment) GetContent() string {
@@ -1273,27 +1636,1144 @@ func (x *GetTicketResponse_Comment) GetContent() string {
 	return ""
 }
 
-func (x *GetTicketResponse_Comment) GetCreatedAt() int64 {
+func (x *GetTicketResponse_Comment) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
 	}
+	return nil
+}
+
+type GetTicketResponse_UserInfo struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	UserId         int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	VipLevel       int32                  `protobuf:"varint,2,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`
+	UserTags       []string               `protobuf:"bytes,3,rep,name=user_tags,json=userTags,proto3" json:"user_tags,omitempty"`
+	LinkedAccounts []string               `protobuf:"bytes,4,rep,name=linked_accounts,json=linkedAccounts,proto3" json:"linked_accounts,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *GetTicketResponse_UserInfo) Reset() {
+	*x = GetTicketResponse_UserInfo{}
+	mi := &file_review_service_v1_review_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTicketResponse_UserInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTicketResponse_UserInfo) ProtoMessage() {}
+
+func (x *GetTicketResponse_UserInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_review_service_v1_review_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTicketResponse_UserInfo.ProtoReflect.Descriptor instead.
+func (*GetTicketResponse_UserInfo) Descriptor() ([]byte, []int) {
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{13, 2}
+}
+
+func (x *GetTicketResponse_UserInfo) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
 	return 0
+}
+
+func (x *GetTicketResponse_UserInfo) GetVipLevel() int32 {
+	if x != nil {
+		return x.VipLevel
+	}
+	return 0
+}
+
+func (x *GetTicketResponse_UserInfo) GetUserTags() []string {
+	if x != nil {
+		return x.UserTags
+	}
+	return nil
+}
+
+func (x *GetTicketResponse_UserInfo) GetLinkedAccounts() []string {
+	if x != nil {
+		return x.LinkedAccounts
+	}
+	return nil
+}
+
+type GetTicketResponse_PaymentTransactionInfo struct {
+	state                   protoimpl.MessageState `protogen:"open.v1"`
+	Currency                string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	Amount                  string                 `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	AmountUsd               string                 `protobuf:"bytes,3,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
+	AmountReportingCurrency string                 `protobuf:"bytes,4,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
+	PaymentChannel          string                 `protobuf:"bytes,5,opt,name=payment_channel,json=paymentChannel,proto3" json:"payment_channel,omitempty"`
+	Protocol                string                 `protobuf:"bytes,6,opt,name=protocol,proto3" json:"protocol,omitempty"`
+	Fee                     string                 `protobuf:"bytes,7,opt,name=fee,proto3" json:"fee,omitempty"`
+	FeeUsd                  string                 `protobuf:"bytes,8,opt,name=fee_usd,json=feeUsd,proto3" json:"fee_usd,omitempty"`
+	FeeReportingCurrency    string                 `protobuf:"bytes,9,opt,name=fee_reporting_currency,json=feeReportingCurrency,proto3" json:"fee_reporting_currency,omitempty"`
+	Extra                   *structpb.Struct       `protobuf:"bytes,10,opt,name=extra,proto3" json:"extra,omitempty"`
+	Schema                  *structpb.ListValue    `protobuf:"bytes,11,opt,name=schema,proto3" json:"schema,omitempty"`
+	CreatedAt               *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
+}
+
+func (x *GetTicketResponse_PaymentTransactionInfo) Reset() {
+	*x = GetTicketResponse_PaymentTransactionInfo{}
+	mi := &file_review_service_v1_review_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTicketResponse_PaymentTransactionInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTicketResponse_PaymentTransactionInfo) ProtoMessage() {}
+
+func (x *GetTicketResponse_PaymentTransactionInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_review_service_v1_review_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTicketResponse_PaymentTransactionInfo.ProtoReflect.Descriptor instead.
+func (*GetTicketResponse_PaymentTransactionInfo) Descriptor() ([]byte, []int) {
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{13, 3}
+}
+
+func (x *GetTicketResponse_PaymentTransactionInfo) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_PaymentTransactionInfo) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_PaymentTransactionInfo) GetAmountUsd() string {
+	if x != nil {
+		return x.AmountUsd
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_PaymentTransactionInfo) GetAmountReportingCurrency() string {
+	if x != nil {
+		return x.AmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_PaymentTransactionInfo) GetPaymentChannel() string {
+	if x != nil {
+		return x.PaymentChannel
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_PaymentTransactionInfo) GetProtocol() string {
+	if x != nil {
+		return x.Protocol
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_PaymentTransactionInfo) GetFee() string {
+	if x != nil {
+		return x.Fee
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_PaymentTransactionInfo) GetFeeUsd() string {
+	if x != nil {
+		return x.FeeUsd
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_PaymentTransactionInfo) GetFeeReportingCurrency() string {
+	if x != nil {
+		return x.FeeReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_PaymentTransactionInfo) GetExtra() *structpb.Struct {
+	if x != nil {
+		return x.Extra
+	}
+	return nil
+}
+
+func (x *GetTicketResponse_PaymentTransactionInfo) GetSchema() *structpb.ListValue {
+	if x != nil {
+		return x.Schema
+	}
+	return nil
+}
+
+func (x *GetTicketResponse_PaymentTransactionInfo) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+type GetTicketResponse_WalletTransactionInfo struct {
+	state                          protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId                  int64                  `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	Amount                         string                 `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	AmountUsd                      string                 `protobuf:"bytes,3,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
+	AmountReportingCurrency        string                 `protobuf:"bytes,4,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
+	BeforeBalance                  string                 `protobuf:"bytes,5,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
+	BeforeBalanceUsd               string                 `protobuf:"bytes,6,opt,name=before_balance_usd,json=beforeBalanceUsd,proto3" json:"before_balance_usd,omitempty"`
+	BeforeBalanceReportingCurrency string                 `protobuf:"bytes,7,opt,name=before_balance_reporting_currency,json=beforeBalanceReportingCurrency,proto3" json:"before_balance_reporting_currency,omitempty"`
+	AfterBalance                   string                 `protobuf:"bytes,8,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
+	AfterBalanceUsd                string                 `protobuf:"bytes,9,opt,name=after_balance_usd,json=afterBalanceUsd,proto3" json:"after_balance_usd,omitempty"`
+	AfterBalanceReportingCurrency  string                 `protobuf:"bytes,10,opt,name=after_balance_reporting_currency,json=afterBalanceReportingCurrency,proto3" json:"after_balance_reporting_currency,omitempty"`
+	CreatedAt                      *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
+}
+
+func (x *GetTicketResponse_WalletTransactionInfo) Reset() {
+	*x = GetTicketResponse_WalletTransactionInfo{}
+	mi := &file_review_service_v1_review_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTicketResponse_WalletTransactionInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTicketResponse_WalletTransactionInfo) ProtoMessage() {}
+
+func (x *GetTicketResponse_WalletTransactionInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_review_service_v1_review_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTicketResponse_WalletTransactionInfo.ProtoReflect.Descriptor instead.
+func (*GetTicketResponse_WalletTransactionInfo) Descriptor() ([]byte, []int) {
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{13, 4}
+}
+
+func (x *GetTicketResponse_WalletTransactionInfo) GetTransactionId() int64 {
+	if x != nil {
+		return x.TransactionId
+	}
+	return 0
+}
+
+func (x *GetTicketResponse_WalletTransactionInfo) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WalletTransactionInfo) GetAmountUsd() string {
+	if x != nil {
+		return x.AmountUsd
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WalletTransactionInfo) GetAmountReportingCurrency() string {
+	if x != nil {
+		return x.AmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WalletTransactionInfo) GetBeforeBalance() string {
+	if x != nil {
+		return x.BeforeBalance
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WalletTransactionInfo) GetBeforeBalanceUsd() string {
+	if x != nil {
+		return x.BeforeBalanceUsd
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WalletTransactionInfo) GetBeforeBalanceReportingCurrency() string {
+	if x != nil {
+		return x.BeforeBalanceReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WalletTransactionInfo) GetAfterBalance() string {
+	if x != nil {
+		return x.AfterBalance
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WalletTransactionInfo) GetAfterBalanceUsd() string {
+	if x != nil {
+		return x.AfterBalanceUsd
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WalletTransactionInfo) GetAfterBalanceReportingCurrency() string {
+	if x != nil {
+		return x.AfterBalanceReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WalletTransactionInfo) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+type GetTicketResponse_WalletTransactionSummary struct {
+	state                                      protoimpl.MessageState `protogen:"open.v1"`
+	TotalDepositUsd                            string                 `protobuf:"bytes,1,opt,name=total_deposit_usd,json=totalDepositUsd,proto3" json:"total_deposit_usd,omitempty"`
+	TotalDepositReportingCurrency              string                 `protobuf:"bytes,2,opt,name=total_deposit_reporting_currency,json=totalDepositReportingCurrency,proto3" json:"total_deposit_reporting_currency,omitempty"`
+	TotalWithdrawUsd                           string                 `protobuf:"bytes,3,opt,name=total_withdraw_usd,json=totalWithdrawUsd,proto3" json:"total_withdraw_usd,omitempty"`
+	TotalWithdrawReportingCurrency             string                 `protobuf:"bytes,4,opt,name=total_withdraw_reporting_currency,json=totalWithdrawReportingCurrency,proto3" json:"total_withdraw_reporting_currency,omitempty"`
+	TotalDepositMinusWithdrawUsd               string                 `protobuf:"bytes,5,opt,name=total_deposit_minus_withdraw_usd,json=totalDepositMinusWithdrawUsd,proto3" json:"total_deposit_minus_withdraw_usd,omitempty"`
+	TotalDepositMinusWithdrawReportingCurrency string                 `protobuf:"bytes,6,opt,name=total_deposit_minus_withdraw_reporting_currency,json=totalDepositMinusWithdrawReportingCurrency,proto3" json:"total_deposit_minus_withdraw_reporting_currency,omitempty"`
+	ValidTurnoverUsd                           string                 `protobuf:"bytes,7,opt,name=valid_turnover_usd,json=validTurnoverUsd,proto3" json:"valid_turnover_usd,omitempty"`
+	ValidTurnoverReportingCurrency             string                 `protobuf:"bytes,8,opt,name=valid_turnover_reporting_currency,json=validTurnoverReportingCurrency,proto3" json:"valid_turnover_reporting_currency,omitempty"`
+	TotalDepositCount                          int32                  `protobuf:"varint,9,opt,name=total_deposit_count,json=totalDepositCount,proto3" json:"total_deposit_count,omitempty"`
+	TotalWithdrawCount                         int32                  `protobuf:"varint,10,opt,name=total_withdraw_count,json=totalWithdrawCount,proto3" json:"total_withdraw_count,omitempty"`
+	TodayWithdrawCount                         int32                  `protobuf:"varint,11,opt,name=today_withdraw_count,json=todayWithdrawCount,proto3" json:"today_withdraw_count,omitempty"`
+	unknownFields                              protoimpl.UnknownFields
+	sizeCache                                  protoimpl.SizeCache
+}
+
+func (x *GetTicketResponse_WalletTransactionSummary) Reset() {
+	*x = GetTicketResponse_WalletTransactionSummary{}
+	mi := &file_review_service_v1_review_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTicketResponse_WalletTransactionSummary) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTicketResponse_WalletTransactionSummary) ProtoMessage() {}
+
+func (x *GetTicketResponse_WalletTransactionSummary) ProtoReflect() protoreflect.Message {
+	mi := &file_review_service_v1_review_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTicketResponse_WalletTransactionSummary.ProtoReflect.Descriptor instead.
+func (*GetTicketResponse_WalletTransactionSummary) Descriptor() ([]byte, []int) {
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{13, 5}
+}
+
+func (x *GetTicketResponse_WalletTransactionSummary) GetTotalDepositUsd() string {
+	if x != nil {
+		return x.TotalDepositUsd
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WalletTransactionSummary) GetTotalDepositReportingCurrency() string {
+	if x != nil {
+		return x.TotalDepositReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WalletTransactionSummary) GetTotalWithdrawUsd() string {
+	if x != nil {
+		return x.TotalWithdrawUsd
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WalletTransactionSummary) GetTotalWithdrawReportingCurrency() string {
+	if x != nil {
+		return x.TotalWithdrawReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WalletTransactionSummary) GetTotalDepositMinusWithdrawUsd() string {
+	if x != nil {
+		return x.TotalDepositMinusWithdrawUsd
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WalletTransactionSummary) GetTotalDepositMinusWithdrawReportingCurrency() string {
+	if x != nil {
+		return x.TotalDepositMinusWithdrawReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WalletTransactionSummary) GetValidTurnoverUsd() string {
+	if x != nil {
+		return x.ValidTurnoverUsd
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WalletTransactionSummary) GetValidTurnoverReportingCurrency() string {
+	if x != nil {
+		return x.ValidTurnoverReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetTicketResponse_WalletTransactionSummary) GetTotalDepositCount() int32 {
+	if x != nil {
+		return x.TotalDepositCount
+	}
+	return 0
+}
+
+func (x *GetTicketResponse_WalletTransactionSummary) GetTotalWithdrawCount() int32 {
+	if x != nil {
+		return x.TotalWithdrawCount
+	}
+	return 0
+}
+
+func (x *GetTicketResponse_WalletTransactionSummary) GetTodayWithdrawCount() int32 {
+	if x != nil {
+		return x.TodayWithdrawCount
+	}
+	return 0
+}
+
+type GetOperatorTicketResponse_Ticket struct {
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	Id                   int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Type                 string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
+	Status               string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
+	OperatorName         string                 `protobuf:"bytes,4,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	CompanyOperatorName  string                 `protobuf:"bytes,5,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	RetailerOperatorName string                 `protobuf:"bytes,6,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	SystemOperatorName   string                 `protobuf:"bytes,7,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
+	CreatedAt            *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *GetOperatorTicketResponse_Ticket) Reset() {
+	*x = GetOperatorTicketResponse_Ticket{}
+	mi := &file_review_service_v1_review_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOperatorTicketResponse_Ticket) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOperatorTicketResponse_Ticket) ProtoMessage() {}
+
+func (x *GetOperatorTicketResponse_Ticket) ProtoReflect() protoreflect.Message {
+	mi := &file_review_service_v1_review_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOperatorTicketResponse_Ticket.ProtoReflect.Descriptor instead.
+func (*GetOperatorTicketResponse_Ticket) Descriptor() ([]byte, []int) {
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{15, 0}
+}
+
+func (x *GetOperatorTicketResponse_Ticket) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *GetOperatorTicketResponse_Ticket) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_Ticket) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_Ticket) GetOperatorName() string {
+	if x != nil {
+		return x.OperatorName
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_Ticket) GetCompanyOperatorName() string {
+	if x != nil {
+		return x.CompanyOperatorName
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_Ticket) GetRetailerOperatorName() string {
+	if x != nil {
+		return x.RetailerOperatorName
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_Ticket) GetSystemOperatorName() string {
+	if x != nil {
+		return x.SystemOperatorName
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_Ticket) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+type GetOperatorTicketResponse_Comment struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Id             int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	TicketId       int64                  `protobuf:"varint,2,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
+	AuthorUsername string                 `protobuf:"bytes,3,opt,name=author_username,json=authorUsername,proto3" json:"author_username,omitempty"`
+	Content        string                 `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
+	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *GetOperatorTicketResponse_Comment) Reset() {
+	*x = GetOperatorTicketResponse_Comment{}
+	mi := &file_review_service_v1_review_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOperatorTicketResponse_Comment) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOperatorTicketResponse_Comment) ProtoMessage() {}
+
+func (x *GetOperatorTicketResponse_Comment) ProtoReflect() protoreflect.Message {
+	mi := &file_review_service_v1_review_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOperatorTicketResponse_Comment.ProtoReflect.Descriptor instead.
+func (*GetOperatorTicketResponse_Comment) Descriptor() ([]byte, []int) {
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{15, 1}
+}
+
+func (x *GetOperatorTicketResponse_Comment) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *GetOperatorTicketResponse_Comment) GetTicketId() int64 {
+	if x != nil {
+		return x.TicketId
+	}
+	return 0
+}
+
+func (x *GetOperatorTicketResponse_Comment) GetAuthorUsername() string {
+	if x != nil {
+		return x.AuthorUsername
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_Comment) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_Comment) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+type GetOperatorTicketResponse_PaymentTransactionInfo struct {
+	state                       protoimpl.MessageState `protogen:"open.v1"`
+	Currency                    string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	Protocol                    string                 `protobuf:"bytes,2,opt,name=protocol,proto3" json:"protocol,omitempty"`
+	Address                     string                 `protobuf:"bytes,3,opt,name=address,proto3" json:"address,omitempty"`
+	Psp                         string                 `protobuf:"bytes,4,opt,name=psp,proto3" json:"psp,omitempty"`
+	Amount                      string                 `protobuf:"bytes,5,opt,name=amount,proto3" json:"amount,omitempty"`
+	AmountUsd                   string                 `protobuf:"bytes,6,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
+	AmountReportingCurrency     string                 `protobuf:"bytes,7,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
+	AmountSent                  string                 `protobuf:"bytes,8,opt,name=amount_sent,json=amountSent,proto3" json:"amount_sent,omitempty"`
+	AmountSentUsd               string                 `protobuf:"bytes,9,opt,name=amount_sent_usd,json=amountSentUsd,proto3" json:"amount_sent_usd,omitempty"`
+	AmountSentReportingCurrency string                 `protobuf:"bytes,10,opt,name=amount_sent_reporting_currency,json=amountSentReportingCurrency,proto3" json:"amount_sent_reporting_currency,omitempty"`
+	Gas                         string                 `protobuf:"bytes,11,opt,name=gas,proto3" json:"gas,omitempty"`
+	Fee                         string                 `protobuf:"bytes,12,opt,name=fee,proto3" json:"fee,omitempty"`
+	FeeUsd                      string                 `protobuf:"bytes,13,opt,name=fee_usd,json=feeUsd,proto3" json:"fee_usd,omitempty"`
+	FeeReportingCurrency        string                 `protobuf:"bytes,14,opt,name=fee_reporting_currency,json=feeReportingCurrency,proto3" json:"fee_reporting_currency,omitempty"`
+	CreatedAt                   *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
+}
+
+func (x *GetOperatorTicketResponse_PaymentTransactionInfo) Reset() {
+	*x = GetOperatorTicketResponse_PaymentTransactionInfo{}
+	mi := &file_review_service_v1_review_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOperatorTicketResponse_PaymentTransactionInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOperatorTicketResponse_PaymentTransactionInfo) ProtoMessage() {}
+
+func (x *GetOperatorTicketResponse_PaymentTransactionInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_review_service_v1_review_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOperatorTicketResponse_PaymentTransactionInfo.ProtoReflect.Descriptor instead.
+func (*GetOperatorTicketResponse_PaymentTransactionInfo) Descriptor() ([]byte, []int) {
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{15, 2}
+}
+
+func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetProtocol() string {
+	if x != nil {
+		return x.Protocol
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetPsp() string {
+	if x != nil {
+		return x.Psp
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetAmountUsd() string {
+	if x != nil {
+		return x.AmountUsd
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetAmountReportingCurrency() string {
+	if x != nil {
+		return x.AmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetAmountSent() string {
+	if x != nil {
+		return x.AmountSent
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetAmountSentUsd() string {
+	if x != nil {
+		return x.AmountSentUsd
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetAmountSentReportingCurrency() string {
+	if x != nil {
+		return x.AmountSentReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetGas() string {
+	if x != nil {
+		return x.Gas
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetFee() string {
+	if x != nil {
+		return x.Fee
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetFeeUsd() string {
+	if x != nil {
+		return x.FeeUsd
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetFeeReportingCurrency() string {
+	if x != nil {
+		return x.FeeReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_PaymentTransactionInfo) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+type GetOperatorTicketResponse_WalletBalanceInfo struct {
+	state                    protoimpl.MessageState `protogen:"open.v1"`
+	Balance                  string                 `protobuf:"bytes,1,opt,name=balance,proto3" json:"balance,omitempty"`
+	BalanceUsd               string                 `protobuf:"bytes,2,opt,name=balance_usd,json=balanceUsd,proto3" json:"balance_usd,omitempty"`
+	BalanceReportingCurrency string                 `protobuf:"bytes,3,opt,name=balance_reporting_currency,json=balanceReportingCurrency,proto3" json:"balance_reporting_currency,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
+}
+
+func (x *GetOperatorTicketResponse_WalletBalanceInfo) Reset() {
+	*x = GetOperatorTicketResponse_WalletBalanceInfo{}
+	mi := &file_review_service_v1_review_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOperatorTicketResponse_WalletBalanceInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOperatorTicketResponse_WalletBalanceInfo) ProtoMessage() {}
+
+func (x *GetOperatorTicketResponse_WalletBalanceInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_review_service_v1_review_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOperatorTicketResponse_WalletBalanceInfo.ProtoReflect.Descriptor instead.
+func (*GetOperatorTicketResponse_WalletBalanceInfo) Descriptor() ([]byte, []int) {
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{15, 3}
+}
+
+func (x *GetOperatorTicketResponse_WalletBalanceInfo) GetBalance() string {
+	if x != nil {
+		return x.Balance
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletBalanceInfo) GetBalanceUsd() string {
+	if x != nil {
+		return x.BalanceUsd
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletBalanceInfo) GetBalanceReportingCurrency() string {
+	if x != nil {
+		return x.BalanceReportingCurrency
+	}
+	return ""
+}
+
+type GetOperatorTicketResponse_WalletTransactionInfo struct {
+	state                          protoimpl.MessageState `protogen:"open.v1"`
+	BeforeBalance                  string                 `protobuf:"bytes,1,opt,name=before_balance,json=beforeBalance,proto3" json:"before_balance,omitempty"`
+	BeforeBalanceUsd               string                 `protobuf:"bytes,2,opt,name=before_balance_usd,json=beforeBalanceUsd,proto3" json:"before_balance_usd,omitempty"`
+	BeforeBalanceReportingCurrency string                 `protobuf:"bytes,3,opt,name=before_balance_reporting_currency,json=beforeBalanceReportingCurrency,proto3" json:"before_balance_reporting_currency,omitempty"`
+	AfterBalance                   string                 `protobuf:"bytes,4,opt,name=after_balance,json=afterBalance,proto3" json:"after_balance,omitempty"`
+	AfterBalanceUsd                string                 `protobuf:"bytes,5,opt,name=after_balance_usd,json=afterBalanceUsd,proto3" json:"after_balance_usd,omitempty"`
+	AfterBalanceReportingCurrency  string                 `protobuf:"bytes,6,opt,name=after_balance_reporting_currency,json=afterBalanceReportingCurrency,proto3" json:"after_balance_reporting_currency,omitempty"`
+	Amount                         string                 `protobuf:"bytes,7,opt,name=amount,proto3" json:"amount,omitempty"`
+	AmountUsd                      string                 `protobuf:"bytes,8,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
+	AmountReportingCurrency        string                 `protobuf:"bytes,9,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionInfo) Reset() {
+	*x = GetOperatorTicketResponse_WalletTransactionInfo{}
+	mi := &file_review_service_v1_review_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOperatorTicketResponse_WalletTransactionInfo) ProtoMessage() {}
+
+func (x *GetOperatorTicketResponse_WalletTransactionInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_review_service_v1_review_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOperatorTicketResponse_WalletTransactionInfo.ProtoReflect.Descriptor instead.
+func (*GetOperatorTicketResponse_WalletTransactionInfo) Descriptor() ([]byte, []int) {
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{15, 4}
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionInfo) GetBeforeBalance() string {
+	if x != nil {
+		return x.BeforeBalance
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionInfo) GetBeforeBalanceUsd() string {
+	if x != nil {
+		return x.BeforeBalanceUsd
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionInfo) GetBeforeBalanceReportingCurrency() string {
+	if x != nil {
+		return x.BeforeBalanceReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionInfo) GetAfterBalance() string {
+	if x != nil {
+		return x.AfterBalance
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionInfo) GetAfterBalanceUsd() string {
+	if x != nil {
+		return x.AfterBalanceUsd
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionInfo) GetAfterBalanceReportingCurrency() string {
+	if x != nil {
+		return x.AfterBalanceReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionInfo) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionInfo) GetAmountUsd() string {
+	if x != nil {
+		return x.AmountUsd
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionInfo) GetAmountReportingCurrency() string {
+	if x != nil {
+		return x.AmountReportingCurrency
+	}
+	return ""
+}
+
+type GetOperatorTicketResponse_WalletTransactionSummary struct {
+	state                          protoimpl.MessageState `protogen:"open.v1"`
+	TotalWithdrawUsd               string                 `protobuf:"bytes,1,opt,name=total_withdraw_usd,json=totalWithdrawUsd,proto3" json:"total_withdraw_usd,omitempty"`
+	TotalWithdrawReportingCurrency string                 `protobuf:"bytes,2,opt,name=total_withdraw_reporting_currency,json=totalWithdrawReportingCurrency,proto3" json:"total_withdraw_reporting_currency,omitempty"`
+	TotalDepositUsd                string                 `protobuf:"bytes,3,opt,name=total_deposit_usd,json=totalDepositUsd,proto3" json:"total_deposit_usd,omitempty"`
+	TotalDepositReportingCurrency  string                 `protobuf:"bytes,4,opt,name=total_deposit_reporting_currency,json=totalDepositReportingCurrency,proto3" json:"total_deposit_reporting_currency,omitempty"`
+	TotalTransferUsd               string                 `protobuf:"bytes,5,opt,name=total_transfer_usd,json=totalTransferUsd,proto3" json:"total_transfer_usd,omitempty"`
+	TotalTransferReportingCurrency string                 `protobuf:"bytes,6,opt,name=total_transfer_reporting_currency,json=totalTransferReportingCurrency,proto3" json:"total_transfer_reporting_currency,omitempty"`
+	TotalSwapOutUsd                string                 `protobuf:"bytes,7,opt,name=total_swap_out_usd,json=totalSwapOutUsd,proto3" json:"total_swap_out_usd,omitempty"`
+	TotalSwapOutReportingCurrency  string                 `protobuf:"bytes,8,opt,name=total_swap_out_reporting_currency,json=totalSwapOutReportingCurrency,proto3" json:"total_swap_out_reporting_currency,omitempty"`
+	TotalSwapInUsd                 string                 `protobuf:"bytes,9,opt,name=total_swap_in_usd,json=totalSwapInUsd,proto3" json:"total_swap_in_usd,omitempty"`
+	TotalSwapInReportingCurrency   string                 `protobuf:"bytes,10,opt,name=total_swap_in_reporting_currency,json=totalSwapInReportingCurrency,proto3" json:"total_swap_in_reporting_currency,omitempty"`
+	TotalFreezeUsd                 string                 `protobuf:"bytes,11,opt,name=total_freeze_usd,json=totalFreezeUsd,proto3" json:"total_freeze_usd,omitempty"`
+	TotalFreezeReportingCurrency   string                 `protobuf:"bytes,12,opt,name=total_freeze_reporting_currency,json=totalFreezeReportingCurrency,proto3" json:"total_freeze_reporting_currency,omitempty"`
+	TotalWriteOffUsd               string                 `protobuf:"bytes,13,opt,name=total_write_off_usd,json=totalWriteOffUsd,proto3" json:"total_write_off_usd,omitempty"`
+	TotalWriteOffReportingCurrency string                 `protobuf:"bytes,14,opt,name=total_write_off_reporting_currency,json=totalWriteOffReportingCurrency,proto3" json:"total_write_off_reporting_currency,omitempty"`
+	TotalPendingUsd                string                 `protobuf:"bytes,15,opt,name=total_pending_usd,json=totalPendingUsd,proto3" json:"total_pending_usd,omitempty"`
+	TotalPendingReportingCurrency  string                 `protobuf:"bytes,16,opt,name=total_pending_reporting_currency,json=totalPendingReportingCurrency,proto3" json:"total_pending_reporting_currency,omitempty"`
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionSummary) Reset() {
+	*x = GetOperatorTicketResponse_WalletTransactionSummary{}
+	mi := &file_review_service_v1_review_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionSummary) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOperatorTicketResponse_WalletTransactionSummary) ProtoMessage() {}
+
+func (x *GetOperatorTicketResponse_WalletTransactionSummary) ProtoReflect() protoreflect.Message {
+	mi := &file_review_service_v1_review_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOperatorTicketResponse_WalletTransactionSummary.ProtoReflect.Descriptor instead.
+func (*GetOperatorTicketResponse_WalletTransactionSummary) Descriptor() ([]byte, []int) {
+	return file_review_service_v1_review_proto_rawDescGZIP(), []int{15, 5}
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalWithdrawUsd() string {
+	if x != nil {
+		return x.TotalWithdrawUsd
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalWithdrawReportingCurrency() string {
+	if x != nil {
+		return x.TotalWithdrawReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalDepositUsd() string {
+	if x != nil {
+		return x.TotalDepositUsd
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalDepositReportingCurrency() string {
+	if x != nil {
+		return x.TotalDepositReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalTransferUsd() string {
+	if x != nil {
+		return x.TotalTransferUsd
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalTransferReportingCurrency() string {
+	if x != nil {
+		return x.TotalTransferReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalSwapOutUsd() string {
+	if x != nil {
+		return x.TotalSwapOutUsd
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalSwapOutReportingCurrency() string {
+	if x != nil {
+		return x.TotalSwapOutReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalSwapInUsd() string {
+	if x != nil {
+		return x.TotalSwapInUsd
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalSwapInReportingCurrency() string {
+	if x != nil {
+		return x.TotalSwapInReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalFreezeUsd() string {
+	if x != nil {
+		return x.TotalFreezeUsd
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalFreezeReportingCurrency() string {
+	if x != nil {
+		return x.TotalFreezeReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalWriteOffUsd() string {
+	if x != nil {
+		return x.TotalWriteOffUsd
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalWriteOffReportingCurrency() string {
+	if x != nil {
+		return x.TotalWriteOffReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalPendingUsd() string {
+	if x != nil {
+		return x.TotalPendingUsd
+	}
+	return ""
+}
+
+func (x *GetOperatorTicketResponse_WalletTransactionSummary) GetTotalPendingReportingCurrency() string {
+	if x != nil {
+		return x.TotalPendingReportingCurrency
+	}
+	return ""
 }
 
 var File_review_service_v1_review_proto protoreflect.FileDescriptor
 
 const file_review_service_v1_review_proto_rawDesc = "" +
 	"\n" +
-	"\x1ereview/service/v1/review.proto\x12\x15api.review.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"J\n" +
+	"\x1ereview/service/v1/review.proto\x12\x15api.review.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\"J\n" +
 	"\x15CreateWithdrawRequest\x121\n" +
-	"\arequest\x18\x01 \x01(\v2\x17.google.protobuf.StructR\arequest\"5\n" +
+	"\arequest\x18\x01 \x01(\v2\x17.google.protobuf.StructR\arequest\"\xbe\x01\n" +
+	"\x1dCreateOperatorWithdrawRequest\x12\"\n" +
+	"\radmin_user_id\x18\x01 \x01(\x03R\vadminUserId\x12F\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x121\n" +
+	"\arequest\x18\x03 \x01(\v2\x17.google.protobuf.StructR\arequest\"5\n" +
 	"\x16CreateWithdrawResponse\x12\x1b\n" +
-	"\tticket_id\x18\x01 \x01(\x03R\bticketId\"\x9b\x01\n" +
+	"\tticket_id\x18\x01 \x01(\x03R\bticketId\"\xe3\x01\n" +
 	"\x13ReviewTicketRequest\x12\x1b\n" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12(\n" +
 	"\x10reviewer_user_id\x18\x02 \x01(\x03R\x0ereviewerUserId\x12\x16\n" +
 	"\x06action\x18\x03 \x01(\tR\x06action\x12%\n" +
-	"\x0ereview_comment\x18\x04 \x01(\tR\rreviewComment\"\x16\n" +
+	"\x0ereview_comment\x18\x04 \x01(\tR\rreviewComment\x12F\n" +
+	"\x10operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\x16\n" +
 	"\x14ReviewTicketResponse\"p\n" +
 	"\x11AddCommentRequest\x12\x1b\n" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12$\n" +
@@ -1305,23 +2785,22 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\x13CancelTicketRequest\x12\x1b\n" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12*\n" +
 	"\x11canceller_user_id\x18\x02 \x01(\x03R\x0fcancellerUserId\"\x16\n" +
-	"\x14CancelTicketResponse\"\xe4\x03\n" +
+	"\x14CancelTicketResponse\"\xd4\x04\n" +
 	"\x12ListTicketsRequest\x12\x1c\n" +
-	"\auser_id\x18\x02 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12$\n" +
-	"\voperator_id\x18\x03 \x01(\x03H\x01R\n" +
-	"operatorId\x88\x01\x01\x12 \n" +
-	"\tticket_id\x18\x04 \x01(\x03H\x02R\bticketId\x88\x01\x01\x12\x1f\n" +
-	"\bcurrency\x18\x05 \x01(\tH\x03R\bcurrency\x88\x01\x01\x12\x1b\n" +
-	"\x06status\x18\x06 \x01(\tH\x04R\x06status\x88\x01\x01\x12>\n" +
+	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12F\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
+	"\x18operator_context_filters\x18\x03 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12 \n" +
+	"\tticket_id\x18\x04 \x01(\x03H\x01R\bticketId\x88\x01\x01\x12\x1f\n" +
+	"\bcurrency\x18\x05 \x01(\tH\x02R\bcurrency\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\x06 \x01(\tH\x03R\x06status\x88\x01\x01\x12>\n" +
 	"\n" +
-	"start_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x05R\tstartTime\x88\x01\x01\x12:\n" +
-	"\bend_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampH\x06R\aendTime\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\t \x01(\x05H\aR\x04page\x88\x01\x01\x12 \n" +
+	"start_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x04R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampH\x05R\aendTime\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\t \x01(\x05H\x06R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\n" +
-	" \x01(\x05H\bR\bpageSize\x88\x01\x01B\n" +
+	" \x01(\x05H\aR\bpageSize\x88\x01\x01B\n" +
 	"\n" +
-	"\b_user_idB\x0e\n" +
-	"\f_operator_idB\f\n" +
+	"\b_user_idB\f\n" +
 	"\n" +
 	"_ticket_idB\v\n" +
 	"\t_currencyB\t\n" +
@@ -1330,103 +2809,256 @@ const file_review_service_v1_review_proto_rawDesc = "" +
 	"\t_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xfa\n" +
+	"_page_size\"\xb2\x04\n" +
+	"\x1aListOperatorTicketsRequest\x12F\n" +
+	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\\\n" +
+	"\x18operator_context_filters\x18\x02 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12 \n" +
+	"\tticket_id\x18\x03 \x01(\x03H\x00R\bticketId\x88\x01\x01\x12\x1f\n" +
+	"\bcurrency\x18\x04 \x01(\tH\x01R\bcurrency\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\x05 \x01(\tH\x02R\x06status\x88\x01\x01\x12>\n" +
 	"\n" +
+	"start_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\tstartTime\x88\x01\x01\x12:\n" +
+	"\bend_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x04R\aendTime\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\b \x01(\x05H\x05R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\t \x01(\x05H\x06R\bpageSize\x88\x01\x01B\f\n" +
+	"\n" +
+	"_ticket_idB\v\n" +
+	"\t_currencyB\t\n" +
+	"\a_statusB\r\n" +
+	"\v_start_timeB\v\n" +
+	"\t_end_timeB\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\xfa\x12\n" +
 	"\x13ListTicketsResponse\x12K\n" +
 	"\atickets\x18\x01 \x03(\v21.api.review.service.v1.ListTicketsResponse.TicketR\atickets\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x1f\n" +
 	"\vtotal_count\x18\x04 \x01(\x05R\n" +
-	"totalCount\x12!\n" +
-	"\ftotal_amount\x18\x05 \x01(\tR\vtotalAmount\x12.\n" +
-	"\x13total_pending_count\x18\x06 \x01(\x05R\x11totalPendingCount\x120\n" +
-	"\x14total_pending_amount\x18\a \x01(\tR\x12totalPendingAmount\x12,\n" +
-	"\x12total_paying_count\x18\b \x01(\x05R\x10totalPayingCount\x12.\n" +
-	"\x13total_paying_amount\x18\t \x01(\tR\x11totalPayingAmount\x12(\n" +
-	"\x10total_paid_count\x18\n" +
-	" \x01(\x05R\x0etotalPaidCount\x12*\n" +
-	"\x11total_paid_amount\x18\v \x01(\tR\x0ftotalPaidAmount\x12,\n" +
-	"\x12total_failed_count\x18\f \x01(\x05R\x10totalFailedCount\x12.\n" +
-	"\x13total_failed_amount\x18\r \x01(\tR\x11totalFailedAmount\x120\n" +
-	"\x14total_rejected_count\x18\x0e \x01(\x05R\x12totalRejectedCount\x122\n" +
-	"\x15total_rejected_amount\x18\x0f \x01(\tR\x13totalRejectedAmount\x12.\n" +
-	"\x13average_review_time\x18\x10 \x01(\x05R\x11averageReviewTime\x1a\x96\x05\n" +
+	"totalCount\x12(\n" +
+	"\x10total_amount_usd\x18\x05 \x01(\tR\x0etotalAmountUsd\x12E\n" +
+	"\x1ftotal_amount_reporting_currency\x18\x06 \x01(\tR\x1ctotalAmountReportingCurrency\x12.\n" +
+	"\x13total_pending_count\x18\a \x01(\x05R\x11totalPendingCount\x127\n" +
+	"\x18total_pending_amount_usd\x18\b \x01(\tR\x15totalPendingAmountUsd\x12T\n" +
+	"'total_pending_amount_reporting_currency\x18\t \x01(\tR#totalPendingAmountReportingCurrency\x12,\n" +
+	"\x12total_paying_count\x18\n" +
+	" \x01(\x05R\x10totalPayingCount\x125\n" +
+	"\x17total_paying_amount_usd\x18\v \x01(\tR\x14totalPayingAmountUsd\x12R\n" +
+	"&total_paying_amount_reporting_currency\x18\f \x01(\tR\"totalPayingAmountReportingCurrency\x12(\n" +
+	"\x10total_paid_count\x18\r \x01(\x05R\x0etotalPaidCount\x121\n" +
+	"\x15total_paid_amount_usd\x18\x0e \x01(\tR\x12totalPaidAmountUsd\x12N\n" +
+	"$total_paid_amount_reporting_currency\x18\x0f \x01(\tR totalPaidAmountReportingCurrency\x12,\n" +
+	"\x12total_failed_count\x18\x10 \x01(\x05R\x10totalFailedCount\x125\n" +
+	"\x17total_failed_amount_usd\x18\x11 \x01(\tR\x14totalFailedAmountUsd\x12R\n" +
+	"&total_failed_amount_reporting_currency\x18\x12 \x01(\tR\"totalFailedAmountReportingCurrency\x120\n" +
+	"\x14total_rejected_count\x18\x13 \x01(\x05R\x12totalRejectedCount\x129\n" +
+	"\x19total_rejected_amount_usd\x18\x14 \x01(\tR\x16totalRejectedAmountUsd\x12V\n" +
+	"(total_rejected_amount_reporting_currency\x18\x15 \x01(\tR$totalRejectedAmountReportingCurrency\x12.\n" +
+	"\x13average_review_time\x18\x16 \x01(\x05R\x11averageReviewTime\x1a\xff\b\n" +
 	"\x06Ticket\x129\n" +
 	"\n" +
-	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12#\n" +
-	"\roperator_name\x18\x02 \x01(\tR\foperatorName\x12\x1b\n" +
-	"\tticket_id\x18\x03 \x01(\x03R\bticketId\x12\x17\n" +
-	"\auser_id\x18\x04 \x01(\x03R\x06userId\x12\x1b\n" +
-	"\tvip_level\x18\x05 \x01(\x05R\bvipLevel\x12\x1b\n" +
-	"\tuser_tags\x18\x06 \x03(\tR\buserTags\x12%\n" +
-	"\x0ebefore_balance\x18\a \x01(\tR\rbeforeBalance\x12,\n" +
-	"\x12before_balance_usd\x18\b \x01(\tR\x10beforeBalanceUsd\x12\x16\n" +
-	"\x06amount\x18\t \x01(\tR\x06amount\x12\x1d\n" +
+	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1b\n" +
+	"\tticket_id\x18\x02 \x01(\x03R\bticketId\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12#\n" +
+	"\roperator_name\x18\x04 \x01(\tR\foperatorName\x122\n" +
+	"\x15company_operator_name\x18\x05 \x01(\tR\x13companyOperatorName\x124\n" +
+	"\x16retailer_operator_name\x18\x06 \x01(\tR\x14retailerOperatorName\x120\n" +
+	"\x14system_operator_name\x18\a \x01(\tR\x12systemOperatorName\x12,\n" +
+	"\x12real_operator_name\x18\b \x01(\tR\x10realOperatorName\x12\x1b\n" +
+	"\tvip_level\x18\t \x01(\x05R\bvipLevel\x12\x1b\n" +
+	"\tuser_tags\x18\n" +
+	" \x03(\tR\buserTags\x12%\n" +
+	"\x0ebefore_balance\x18\v \x01(\tR\rbeforeBalance\x12,\n" +
+	"\x12before_balance_usd\x18\f \x01(\tR\x10beforeBalanceUsd\x12I\n" +
+	"!before_balance_reporting_currency\x18\r \x01(\tR\x1ebeforeBalanceReportingCurrency\x12\x16\n" +
+	"\x06amount\x18\x0e \x01(\tR\x06amount\x12\x1d\n" +
 	"\n" +
-	"amount_usd\x18\n" +
-	" \x01(\tR\tamountUsd\x12#\n" +
-	"\rafter_balance\x18\v \x01(\tR\fafterBalance\x12*\n" +
-	"\x11after_balance_usd\x18\f \x01(\tR\x0fafterBalanceUsd\x12\x1a\n" +
-	"\bcurrency\x18\r \x01(\tR\bcurrency\x12'\n" +
-	"\x0fpayment_channel\x18\x0e \x01(\tR\x0epaymentChannel\x12\x1a\n" +
-	"\bprotocol\x18\x0f \x01(\tR\bprotocol\x12\x10\n" +
-	"\x03fee\x18\x10 \x01(\tR\x03fee\x12\x16\n" +
-	"\x06status\x18\x11 \x01(\tR\x06status\x12+\n" +
-	"\x11reviewer_username\x18\x12 \x01(\tR\x10reviewerUsername\x12'\n" +
-	"\x0freview_duration\x18\x13 \x01(\x05R\x0ereviewDuration\"t\n" +
+	"amount_usd\x18\x0f \x01(\tR\tamountUsd\x12:\n" +
+	"\x19amount_reporting_currency\x18\x10 \x01(\tR\x17amountReportingCurrency\x12#\n" +
+	"\rafter_balance\x18\x11 \x01(\tR\fafterBalance\x12*\n" +
+	"\x11after_balance_usd\x18\x12 \x01(\tR\x0fafterBalanceUsd\x12G\n" +
+	" after_balance_reporting_currency\x18\x13 \x01(\tR\x1dafterBalanceReportingCurrency\x12\x1a\n" +
+	"\bcurrency\x18\x14 \x01(\tR\bcurrency\x12'\n" +
+	"\x0fpayment_channel\x18\x15 \x01(\tR\x0epaymentChannel\x12\x1a\n" +
+	"\bprotocol\x18\x16 \x01(\tR\bprotocol\x12\x10\n" +
+	"\x03fee\x18\x17 \x01(\tR\x03fee\x12\x17\n" +
+	"\afee_usd\x18\x18 \x01(\tR\x06feeUsd\x124\n" +
+	"\x16fee_reporting_currency\x18\x19 \x01(\tR\x14feeReportingCurrency\x12\x16\n" +
+	"\x06status\x18\x1a \x01(\tR\x06status\x12+\n" +
+	"\x11reviewer_username\x18\x1b \x01(\tR\x10reviewerUsername\x12'\n" +
+	"\x0freview_duration\x18\x1c \x01(\x05R\x0ereviewDuration\"\xbc\x01\n" +
 	"\x10GetTicketRequest\x12\x1b\n" +
 	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12.\n" +
-	"\x10include_comments\x18\x02 \x01(\bH\x00R\x0fincludeComments\x88\x01\x01B\x13\n" +
-	"\x11_include_comments\"\x9f\n" +
-	"\n" +
+	"\x10include_comments\x18\x02 \x01(\bH\x00R\x0fincludeComments\x88\x01\x01\x12F\n" +
+	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\x13\n" +
+	"\x11_include_comments\"\xcd\x17\n" +
 	"\x11GetTicketResponse\x12G\n" +
 	"\x06ticket\x18\x01 \x01(\v2/.api.review.service.v1.GetTicketResponse.TicketR\x06ticket\x12L\n" +
-	"\bcomments\x18\x02 \x03(\v20.api.review.service.v1.GetTicketResponse.CommentR\bcomments\x1a\xda\a\n" +
+	"\bcomments\x18\x02 \x03(\v20.api.review.service.v1.GetTicketResponse.CommentR\bcomments\x12N\n" +
+	"\tuser_info\x18\x03 \x01(\v21.api.review.service.v1.GetTicketResponse.UserInfoR\buserInfo\x12y\n" +
+	"\x18payment_transaction_info\x18\x04 \x01(\v2?.api.review.service.v1.GetTicketResponse.PaymentTransactionInfoR\x16paymentTransactionInfo\x12v\n" +
+	"\x17wallet_transaction_info\x18\x05 \x01(\v2>.api.review.service.v1.GetTicketResponse.WalletTransactionInfoR\x15walletTransactionInfo\x12\x7f\n" +
+	"\x1awallet_transaction_summary\x18\x06 \x01(\v2A.api.review.service.v1.GetTicketResponse.WalletTransactionSummaryR\x18walletTransactionSummary\x1a\xc0\x02\n" +
 	"\x06Ticket\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
-	"\x04type\x18\x02 \x01(\tR\x04type\x12\x18\n" +
-	"\arequest\x18\x03 \x01(\tR\arequest\x12\x1a\n" +
-	"\bresponse\x18\x04 \x01(\tR\bresponse\x12\x17\n" +
-	"\auser_id\x18\x05 \x01(\x03R\x06userId\x12\x1f\n" +
-	"\voperator_id\x18\x06 \x01(\x03R\n" +
-	"operatorId\x12\x1a\n" +
-	"\bcurrency\x18\a \x01(\tR\bcurrency\x12#\n" +
-	"\rticket_status\x18\b \x01(\tR\fticketStatus\x12(\n" +
-	"\x10reviewer_user_id\x18\t \x01(\x03R\x0ereviewerUserId\x12)\n" +
-	"\x10reviewer_comment\x18\n" +
-	" \x01(\tR\x0freviewerComment\x12,\n" +
-	"\x12payment_channel_id\x18\v \x01(\tR\x10paymentChannelId\x120\n" +
-	"\x14payment_channel_name\x18\f \x01(\tR\x12paymentChannelName\x12%\n" +
-	"\x0epayment_status\x18\r \x01(\tR\rpaymentStatus\x124\n" +
-	"\x16payment_transaction_id\x18\x0e \x01(\x03R\x14paymentTransactionId\x12:\n" +
-	"\x19payment_transaction_error\x18\x0f \x01(\tR\x17paymentTransactionError\x12#\n" +
-	"\rwallet_status\x18\x10 \x01(\tR\fwalletStatus\x12?\n" +
-	"\x1cwallet_freeze_transaction_id\x18\x11 \x01(\x03R\x19walletFreezeTransactionId\x12?\n" +
-	"\x1cwallet_settle_transaction_id\x18\x12 \x01(\x03R\x19walletSettleTransactionId\x12.\n" +
-	"\x13wallet_settle_error\x18\x13 \x01(\tR\x11walletSettleError\x12C\n" +
-	"\x1ewallet_rollback_transaction_id\x18\x14 \x01(\x03R\x1bwalletRollbackTransactionId\x122\n" +
-	"\x15wallet_rollback_error\x18\x15 \x01(\tR\x13walletRollbackError\x12\x1d\n" +
+	"\x04type\x18\x02 \x01(\tR\x04type\x12\x16\n" +
+	"\x06status\x18\x03 \x01(\tR\x06status\x12#\n" +
+	"\roperator_name\x18\x04 \x01(\tR\foperatorName\x122\n" +
+	"\x15company_operator_name\x18\x05 \x01(\tR\x13companyOperatorName\x124\n" +
+	"\x16retailer_operator_name\x18\x06 \x01(\tR\x14retailerOperatorName\x120\n" +
+	"\x14system_operator_name\x18\a \x01(\tR\x12systemOperatorName\x129\n" +
 	"\n" +
-	"created_at\x18\x16 \x01(\x03R\tcreatedAt\x12\x1d\n" +
-	"\n" +
-	"updated_at\x18\x17 \x01(\x03R\tupdatedAt\x12\x1f\n" +
-	"\vreviewed_at\x18\x18 \x01(\x03R\n" +
-	"reviewedAt\x1a\x95\x01\n" +
+	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a\xb4\x01\n" +
 	"\aComment\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +
-	"\tticket_id\x18\x02 \x01(\x03R\bticketId\x12$\n" +
-	"\x0eauthor_user_id\x18\x03 \x01(\x03R\fauthorUserId\x12\x18\n" +
-	"\acontent\x18\x04 \x01(\tR\acontent\x12\x1d\n" +
+	"\tticket_id\x18\x02 \x01(\x03R\bticketId\x12'\n" +
+	"\x0fauthor_username\x18\x03 \x01(\tR\x0eauthorUsername\x12\x18\n" +
+	"\acontent\x18\x04 \x01(\tR\acontent\x129\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\x03R\tcreatedAt2\x9d\x05\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a\x86\x01\n" +
+	"\bUserInfo\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1b\n" +
+	"\tvip_level\x18\x02 \x01(\x05R\bvipLevel\x12\x1b\n" +
+	"\tuser_tags\x18\x03 \x03(\tR\buserTags\x12'\n" +
+	"\x0flinked_accounts\x18\x04 \x03(\tR\x0elinkedAccounts\x1a\xeb\x03\n" +
+	"\x16PaymentTransactionInfo\x12\x1a\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x16\n" +
+	"\x06amount\x18\x02 \x01(\tR\x06amount\x12\x1d\n" +
+	"\n" +
+	"amount_usd\x18\x03 \x01(\tR\tamountUsd\x12:\n" +
+	"\x19amount_reporting_currency\x18\x04 \x01(\tR\x17amountReportingCurrency\x12'\n" +
+	"\x0fpayment_channel\x18\x05 \x01(\tR\x0epaymentChannel\x12\x1a\n" +
+	"\bprotocol\x18\x06 \x01(\tR\bprotocol\x12\x10\n" +
+	"\x03fee\x18\a \x01(\tR\x03fee\x12\x17\n" +
+	"\afee_usd\x18\b \x01(\tR\x06feeUsd\x124\n" +
+	"\x16fee_reporting_currency\x18\t \x01(\tR\x14feeReportingCurrency\x12-\n" +
+	"\x05extra\x18\n" +
+	" \x01(\v2\x17.google.protobuf.StructR\x05extra\x122\n" +
+	"\x06schema\x18\v \x01(\v2\x1a.google.protobuf.ListValueR\x06schema\x129\n" +
+	"\n" +
+	"created_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a\xa6\x04\n" +
+	"\x15WalletTransactionInfo\x12%\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12\x16\n" +
+	"\x06amount\x18\x02 \x01(\tR\x06amount\x12\x1d\n" +
+	"\n" +
+	"amount_usd\x18\x03 \x01(\tR\tamountUsd\x12:\n" +
+	"\x19amount_reporting_currency\x18\x04 \x01(\tR\x17amountReportingCurrency\x12%\n" +
+	"\x0ebefore_balance\x18\x05 \x01(\tR\rbeforeBalance\x12,\n" +
+	"\x12before_balance_usd\x18\x06 \x01(\tR\x10beforeBalanceUsd\x12I\n" +
+	"!before_balance_reporting_currency\x18\a \x01(\tR\x1ebeforeBalanceReportingCurrency\x12#\n" +
+	"\rafter_balance\x18\b \x01(\tR\fafterBalance\x12*\n" +
+	"\x11after_balance_usd\x18\t \x01(\tR\x0fafterBalanceUsd\x12G\n" +
+	" after_balance_reporting_currency\x18\n" +
+	" \x01(\tR\x1dafterBalanceReportingCurrency\x129\n" +
+	"\n" +
+	"created_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a\xc2\x05\n" +
+	"\x18WalletTransactionSummary\x12*\n" +
+	"\x11total_deposit_usd\x18\x01 \x01(\tR\x0ftotalDepositUsd\x12G\n" +
+	" total_deposit_reporting_currency\x18\x02 \x01(\tR\x1dtotalDepositReportingCurrency\x12,\n" +
+	"\x12total_withdraw_usd\x18\x03 \x01(\tR\x10totalWithdrawUsd\x12I\n" +
+	"!total_withdraw_reporting_currency\x18\x04 \x01(\tR\x1etotalWithdrawReportingCurrency\x12F\n" +
+	" total_deposit_minus_withdraw_usd\x18\x05 \x01(\tR\x1ctotalDepositMinusWithdrawUsd\x12c\n" +
+	"/total_deposit_minus_withdraw_reporting_currency\x18\x06 \x01(\tR*totalDepositMinusWithdrawReportingCurrency\x12,\n" +
+	"\x12valid_turnover_usd\x18\a \x01(\tR\x10validTurnoverUsd\x12I\n" +
+	"!valid_turnover_reporting_currency\x18\b \x01(\tR\x1evalidTurnoverReportingCurrency\x12.\n" +
+	"\x13total_deposit_count\x18\t \x01(\x05R\x11totalDepositCount\x120\n" +
+	"\x14total_withdraw_count\x18\n" +
+	" \x01(\x05R\x12totalWithdrawCount\x120\n" +
+	"\x14today_withdraw_count\x18\v \x01(\x05R\x12todayWithdrawCount\"\xc4\x01\n" +
+	"\x18GetOperatorTicketRequest\x12\x1b\n" +
+	"\tticket_id\x18\x01 \x01(\x03R\bticketId\x12.\n" +
+	"\x10include_comments\x18\x02 \x01(\bH\x00R\x0fincludeComments\x88\x01\x01\x12F\n" +
+	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\x13\n" +
+	"\x11_include_comments\"\x91\x1a\n" +
+	"\x19GetOperatorTicketResponse\x12O\n" +
+	"\x06ticket\x18\x01 \x01(\v27.api.review.service.v1.GetOperatorTicketResponse.TicketR\x06ticket\x12T\n" +
+	"\bcomments\x18\x02 \x03(\v28.api.review.service.v1.GetOperatorTicketResponse.CommentR\bcomments\x12\x81\x01\n" +
+	"\x18payment_transaction_info\x18\x03 \x01(\v2G.api.review.service.v1.GetOperatorTicketResponse.PaymentTransactionInfoR\x16paymentTransactionInfo\x12r\n" +
+	"\x13wallet_balance_info\x18\x04 \x01(\v2B.api.review.service.v1.GetOperatorTicketResponse.WalletBalanceInfoR\x11walletBalanceInfo\x12~\n" +
+	"\x17wallet_transaction_info\x18\x05 \x01(\v2F.api.review.service.v1.GetOperatorTicketResponse.WalletTransactionInfoR\x15walletTransactionInfo\x12\x87\x01\n" +
+	"\x1awallet_transaction_summary\x18\x06 \x01(\v2I.api.review.service.v1.GetOperatorTicketResponse.WalletTransactionSummaryR\x18walletTransactionSummary\x1a\xc0\x02\n" +
+	"\x06Ticket\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
+	"\x04type\x18\x02 \x01(\tR\x04type\x12\x16\n" +
+	"\x06status\x18\x03 \x01(\tR\x06status\x12#\n" +
+	"\roperator_name\x18\x04 \x01(\tR\foperatorName\x122\n" +
+	"\x15company_operator_name\x18\x05 \x01(\tR\x13companyOperatorName\x124\n" +
+	"\x16retailer_operator_name\x18\x06 \x01(\tR\x14retailerOperatorName\x120\n" +
+	"\x14system_operator_name\x18\a \x01(\tR\x12systemOperatorName\x129\n" +
+	"\n" +
+	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a\xb4\x01\n" +
+	"\aComment\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +
+	"\tticket_id\x18\x02 \x01(\x03R\bticketId\x12'\n" +
+	"\x0fauthor_username\x18\x03 \x01(\tR\x0eauthorUsername\x12\x18\n" +
+	"\acontent\x18\x04 \x01(\tR\acontent\x129\n" +
+	"\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a\xab\x04\n" +
+	"\x16PaymentTransactionInfo\x12\x1a\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x1a\n" +
+	"\bprotocol\x18\x02 \x01(\tR\bprotocol\x12\x18\n" +
+	"\aaddress\x18\x03 \x01(\tR\aaddress\x12\x10\n" +
+	"\x03psp\x18\x04 \x01(\tR\x03psp\x12\x16\n" +
+	"\x06amount\x18\x05 \x01(\tR\x06amount\x12\x1d\n" +
+	"\n" +
+	"amount_usd\x18\x06 \x01(\tR\tamountUsd\x12:\n" +
+	"\x19amount_reporting_currency\x18\a \x01(\tR\x17amountReportingCurrency\x12\x1f\n" +
+	"\vamount_sent\x18\b \x01(\tR\n" +
+	"amountSent\x12&\n" +
+	"\x0famount_sent_usd\x18\t \x01(\tR\ramountSentUsd\x12C\n" +
+	"\x1eamount_sent_reporting_currency\x18\n" +
+	" \x01(\tR\x1bamountSentReportingCurrency\x12\x10\n" +
+	"\x03gas\x18\v \x01(\tR\x03gas\x12\x10\n" +
+	"\x03fee\x18\f \x01(\tR\x03fee\x12\x17\n" +
+	"\afee_usd\x18\r \x01(\tR\x06feeUsd\x124\n" +
+	"\x16fee_reporting_currency\x18\x0e \x01(\tR\x14feeReportingCurrency\x129\n" +
+	"\n" +
+	"created_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a\x8c\x01\n" +
+	"\x11WalletBalanceInfo\x12\x18\n" +
+	"\abalance\x18\x01 \x01(\tR\abalance\x12\x1f\n" +
+	"\vbalance_usd\x18\x02 \x01(\tR\n" +
+	"balanceUsd\x12<\n" +
+	"\x1abalance_reporting_currency\x18\x03 \x01(\tR\x18balanceReportingCurrency\x1a\xc4\x03\n" +
+	"\x15WalletTransactionInfo\x12%\n" +
+	"\x0ebefore_balance\x18\x01 \x01(\tR\rbeforeBalance\x12,\n" +
+	"\x12before_balance_usd\x18\x02 \x01(\tR\x10beforeBalanceUsd\x12I\n" +
+	"!before_balance_reporting_currency\x18\x03 \x01(\tR\x1ebeforeBalanceReportingCurrency\x12#\n" +
+	"\rafter_balance\x18\x04 \x01(\tR\fafterBalance\x12*\n" +
+	"\x11after_balance_usd\x18\x05 \x01(\tR\x0fafterBalanceUsd\x12G\n" +
+	" after_balance_reporting_currency\x18\x06 \x01(\tR\x1dafterBalanceReportingCurrency\x12\x16\n" +
+	"\x06amount\x18\a \x01(\tR\x06amount\x12\x1d\n" +
+	"\n" +
+	"amount_usd\x18\b \x01(\tR\tamountUsd\x12:\n" +
+	"\x19amount_reporting_currency\x18\t \x01(\tR\x17amountReportingCurrency\x1a\xcc\a\n" +
+	"\x18WalletTransactionSummary\x12,\n" +
+	"\x12total_withdraw_usd\x18\x01 \x01(\tR\x10totalWithdrawUsd\x12I\n" +
+	"!total_withdraw_reporting_currency\x18\x02 \x01(\tR\x1etotalWithdrawReportingCurrency\x12*\n" +
+	"\x11total_deposit_usd\x18\x03 \x01(\tR\x0ftotalDepositUsd\x12G\n" +
+	" total_deposit_reporting_currency\x18\x04 \x01(\tR\x1dtotalDepositReportingCurrency\x12,\n" +
+	"\x12total_transfer_usd\x18\x05 \x01(\tR\x10totalTransferUsd\x12I\n" +
+	"!total_transfer_reporting_currency\x18\x06 \x01(\tR\x1etotalTransferReportingCurrency\x12+\n" +
+	"\x12total_swap_out_usd\x18\a \x01(\tR\x0ftotalSwapOutUsd\x12H\n" +
+	"!total_swap_out_reporting_currency\x18\b \x01(\tR\x1dtotalSwapOutReportingCurrency\x12)\n" +
+	"\x11total_swap_in_usd\x18\t \x01(\tR\x0etotalSwapInUsd\x12F\n" +
+	" total_swap_in_reporting_currency\x18\n" +
+	" \x01(\tR\x1ctotalSwapInReportingCurrency\x12(\n" +
+	"\x10total_freeze_usd\x18\v \x01(\tR\x0etotalFreezeUsd\x12E\n" +
+	"\x1ftotal_freeze_reporting_currency\x18\f \x01(\tR\x1ctotalFreezeReportingCurrency\x12-\n" +
+	"\x13total_write_off_usd\x18\r \x01(\tR\x10totalWriteOffUsd\x12J\n" +
+	"\"total_write_off_reporting_currency\x18\x0e \x01(\tR\x1etotalWriteOffReportingCurrency\x12*\n" +
+	"\x11total_pending_usd\x18\x0f \x01(\tR\x0ftotalPendingUsd\x12G\n" +
+	" total_pending_reporting_currency\x18\x10 \x01(\tR\x1dtotalPendingReportingCurrency2\x90\b\n" +
 	"\x06Review\x12\x8d\x01\n" +
-	"\x0eCreateWithdraw\x12,.api.review.service.v1.CreateWithdrawRequest\x1a-.api.review.service.v1.CreateWithdrawResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/review/withdraw\x12i\n" +
+	"\x0eCreateWithdraw\x12,.api.review.service.v1.CreateWithdrawRequest\x1a-.api.review.service.v1.CreateWithdrawResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/review/withdraw\x12\x7f\n" +
+	"\x16CreateOperatorWithdraw\x124.api.review.service.v1.CreateOperatorWithdrawRequest\x1a-.api.review.service.v1.CreateWithdrawResponse\"\x00\x12i\n" +
 	"\fReviewTicket\x12*.api.review.service.v1.ReviewTicketRequest\x1a+.api.review.service.v1.ReviewTicketResponse\"\x00\x12c\n" +
 	"\n" +
 	"AddComment\x12(.api.review.service.v1.AddCommentRequest\x1a).api.review.service.v1.AddCommentResponse\"\x00\x12i\n" +
 	"\fCancelTicket\x12*.api.review.service.v1.CancelTicketRequest\x1a+.api.review.service.v1.CancelTicketResponse\"\x00\x12f\n" +
-	"\vListTickets\x12).api.review.service.v1.ListTicketsRequest\x1a*.api.review.service.v1.ListTicketsResponse\"\x00\x12`\n" +
-	"\tGetTicket\x12'.api.review.service.v1.GetTicketRequest\x1a(.api.review.service.v1.GetTicketResponse\"\x00BS\n" +
+	"\vListTickets\x12).api.review.service.v1.ListTicketsRequest\x1a*.api.review.service.v1.ListTicketsResponse\"\x00\x12v\n" +
+	"\x13ListOperatorTickets\x121.api.review.service.v1.ListOperatorTicketsRequest\x1a*.api.review.service.v1.ListTicketsResponse\"\x00\x12`\n" +
+	"\tGetTicket\x12'.api.review.service.v1.GetTicketRequest\x1a(.api.review.service.v1.GetTicketResponse\"\x00\x12x\n" +
+	"\x11GetOperatorTicket\x12/.api.review.service.v1.GetOperatorTicketRequest\x1a0.api.review.service.v1.GetOperatorTicketResponse\"\x00BS\n" +
 	"\x15api.review.service.v1P\x01Z8github.com/infigaming-com/meepo-api/review/service/v1;v1b\x06proto3"
 
 var (
@@ -1441,51 +3073,104 @@ func file_review_service_v1_review_proto_rawDescGZIP() []byte {
 	return file_review_service_v1_review_proto_rawDescData
 }
 
-var file_review_service_v1_review_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_review_service_v1_review_proto_msgTypes = make([]protoimpl.MessageInfo, 29)
 var file_review_service_v1_review_proto_goTypes = []any{
-	(*CreateWithdrawRequest)(nil),      // 0: api.review.service.v1.CreateWithdrawRequest
-	(*CreateWithdrawResponse)(nil),     // 1: api.review.service.v1.CreateWithdrawResponse
-	(*ReviewTicketRequest)(nil),        // 2: api.review.service.v1.ReviewTicketRequest
-	(*ReviewTicketResponse)(nil),       // 3: api.review.service.v1.ReviewTicketResponse
-	(*AddCommentRequest)(nil),          // 4: api.review.service.v1.AddCommentRequest
-	(*AddCommentResponse)(nil),         // 5: api.review.service.v1.AddCommentResponse
-	(*CancelTicketRequest)(nil),        // 6: api.review.service.v1.CancelTicketRequest
-	(*CancelTicketResponse)(nil),       // 7: api.review.service.v1.CancelTicketResponse
-	(*ListTicketsRequest)(nil),         // 8: api.review.service.v1.ListTicketsRequest
-	(*ListTicketsResponse)(nil),        // 9: api.review.service.v1.ListTicketsResponse
-	(*GetTicketRequest)(nil),           // 10: api.review.service.v1.GetTicketRequest
-	(*GetTicketResponse)(nil),          // 11: api.review.service.v1.GetTicketResponse
-	(*ListTicketsResponse_Ticket)(nil), // 12: api.review.service.v1.ListTicketsResponse.Ticket
-	(*GetTicketResponse_Ticket)(nil),   // 13: api.review.service.v1.GetTicketResponse.Ticket
-	(*GetTicketResponse_Comment)(nil),  // 14: api.review.service.v1.GetTicketResponse.Comment
-	(*structpb.Struct)(nil),            // 15: google.protobuf.Struct
-	(*timestamppb.Timestamp)(nil),      // 16: google.protobuf.Timestamp
+	(*CreateWithdrawRequest)(nil),                              // 0: api.review.service.v1.CreateWithdrawRequest
+	(*CreateOperatorWithdrawRequest)(nil),                      // 1: api.review.service.v1.CreateOperatorWithdrawRequest
+	(*CreateWithdrawResponse)(nil),                             // 2: api.review.service.v1.CreateWithdrawResponse
+	(*ReviewTicketRequest)(nil),                                // 3: api.review.service.v1.ReviewTicketRequest
+	(*ReviewTicketResponse)(nil),                               // 4: api.review.service.v1.ReviewTicketResponse
+	(*AddCommentRequest)(nil),                                  // 5: api.review.service.v1.AddCommentRequest
+	(*AddCommentResponse)(nil),                                 // 6: api.review.service.v1.AddCommentResponse
+	(*CancelTicketRequest)(nil),                                // 7: api.review.service.v1.CancelTicketRequest
+	(*CancelTicketResponse)(nil),                               // 8: api.review.service.v1.CancelTicketResponse
+	(*ListTicketsRequest)(nil),                                 // 9: api.review.service.v1.ListTicketsRequest
+	(*ListOperatorTicketsRequest)(nil),                         // 10: api.review.service.v1.ListOperatorTicketsRequest
+	(*ListTicketsResponse)(nil),                                // 11: api.review.service.v1.ListTicketsResponse
+	(*GetTicketRequest)(nil),                                   // 12: api.review.service.v1.GetTicketRequest
+	(*GetTicketResponse)(nil),                                  // 13: api.review.service.v1.GetTicketResponse
+	(*GetOperatorTicketRequest)(nil),                           // 14: api.review.service.v1.GetOperatorTicketRequest
+	(*GetOperatorTicketResponse)(nil),                          // 15: api.review.service.v1.GetOperatorTicketResponse
+	(*ListTicketsResponse_Ticket)(nil),                         // 16: api.review.service.v1.ListTicketsResponse.Ticket
+	(*GetTicketResponse_Ticket)(nil),                           // 17: api.review.service.v1.GetTicketResponse.Ticket
+	(*GetTicketResponse_Comment)(nil),                          // 18: api.review.service.v1.GetTicketResponse.Comment
+	(*GetTicketResponse_UserInfo)(nil),                         // 19: api.review.service.v1.GetTicketResponse.UserInfo
+	(*GetTicketResponse_PaymentTransactionInfo)(nil),           // 20: api.review.service.v1.GetTicketResponse.PaymentTransactionInfo
+	(*GetTicketResponse_WalletTransactionInfo)(nil),            // 21: api.review.service.v1.GetTicketResponse.WalletTransactionInfo
+	(*GetTicketResponse_WalletTransactionSummary)(nil),         // 22: api.review.service.v1.GetTicketResponse.WalletTransactionSummary
+	(*GetOperatorTicketResponse_Ticket)(nil),                   // 23: api.review.service.v1.GetOperatorTicketResponse.Ticket
+	(*GetOperatorTicketResponse_Comment)(nil),                  // 24: api.review.service.v1.GetOperatorTicketResponse.Comment
+	(*GetOperatorTicketResponse_PaymentTransactionInfo)(nil),   // 25: api.review.service.v1.GetOperatorTicketResponse.PaymentTransactionInfo
+	(*GetOperatorTicketResponse_WalletBalanceInfo)(nil),        // 26: api.review.service.v1.GetOperatorTicketResponse.WalletBalanceInfo
+	(*GetOperatorTicketResponse_WalletTransactionInfo)(nil),    // 27: api.review.service.v1.GetOperatorTicketResponse.WalletTransactionInfo
+	(*GetOperatorTicketResponse_WalletTransactionSummary)(nil), // 28: api.review.service.v1.GetOperatorTicketResponse.WalletTransactionSummary
+	(*structpb.Struct)(nil),                                    // 29: google.protobuf.Struct
+	(*common.OperatorContext)(nil),                             // 30: api.common.OperatorContext
+	(*common.OperatorContextFilters)(nil),                      // 31: api.common.OperatorContextFilters
+	(*timestamppb.Timestamp)(nil),                              // 32: google.protobuf.Timestamp
+	(*structpb.ListValue)(nil),                                 // 33: google.protobuf.ListValue
 }
 var file_review_service_v1_review_proto_depIdxs = []int32{
-	15, // 0: api.review.service.v1.CreateWithdrawRequest.request:type_name -> google.protobuf.Struct
-	16, // 1: api.review.service.v1.ListTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
-	16, // 2: api.review.service.v1.ListTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
-	12, // 3: api.review.service.v1.ListTicketsResponse.tickets:type_name -> api.review.service.v1.ListTicketsResponse.Ticket
-	13, // 4: api.review.service.v1.GetTicketResponse.ticket:type_name -> api.review.service.v1.GetTicketResponse.Ticket
-	14, // 5: api.review.service.v1.GetTicketResponse.comments:type_name -> api.review.service.v1.GetTicketResponse.Comment
-	16, // 6: api.review.service.v1.ListTicketsResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
-	0,  // 7: api.review.service.v1.Review.CreateWithdraw:input_type -> api.review.service.v1.CreateWithdrawRequest
-	2,  // 8: api.review.service.v1.Review.ReviewTicket:input_type -> api.review.service.v1.ReviewTicketRequest
-	4,  // 9: api.review.service.v1.Review.AddComment:input_type -> api.review.service.v1.AddCommentRequest
-	6,  // 10: api.review.service.v1.Review.CancelTicket:input_type -> api.review.service.v1.CancelTicketRequest
-	8,  // 11: api.review.service.v1.Review.ListTickets:input_type -> api.review.service.v1.ListTicketsRequest
-	10, // 12: api.review.service.v1.Review.GetTicket:input_type -> api.review.service.v1.GetTicketRequest
-	1,  // 13: api.review.service.v1.Review.CreateWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
-	3,  // 14: api.review.service.v1.Review.ReviewTicket:output_type -> api.review.service.v1.ReviewTicketResponse
-	5,  // 15: api.review.service.v1.Review.AddComment:output_type -> api.review.service.v1.AddCommentResponse
-	7,  // 16: api.review.service.v1.Review.CancelTicket:output_type -> api.review.service.v1.CancelTicketResponse
-	9,  // 17: api.review.service.v1.Review.ListTickets:output_type -> api.review.service.v1.ListTicketsResponse
-	11, // 18: api.review.service.v1.Review.GetTicket:output_type -> api.review.service.v1.GetTicketResponse
-	13, // [13:19] is the sub-list for method output_type
-	7,  // [7:13] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	29, // 0: api.review.service.v1.CreateWithdrawRequest.request:type_name -> google.protobuf.Struct
+	30, // 1: api.review.service.v1.CreateOperatorWithdrawRequest.operator_context:type_name -> api.common.OperatorContext
+	29, // 2: api.review.service.v1.CreateOperatorWithdrawRequest.request:type_name -> google.protobuf.Struct
+	30, // 3: api.review.service.v1.ReviewTicketRequest.operator_context:type_name -> api.common.OperatorContext
+	30, // 4: api.review.service.v1.ListTicketsRequest.operator_context:type_name -> api.common.OperatorContext
+	31, // 5: api.review.service.v1.ListTicketsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	32, // 6: api.review.service.v1.ListTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
+	32, // 7: api.review.service.v1.ListTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
+	30, // 8: api.review.service.v1.ListOperatorTicketsRequest.operator_context:type_name -> api.common.OperatorContext
+	31, // 9: api.review.service.v1.ListOperatorTicketsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	32, // 10: api.review.service.v1.ListOperatorTicketsRequest.start_time:type_name -> google.protobuf.Timestamp
+	32, // 11: api.review.service.v1.ListOperatorTicketsRequest.end_time:type_name -> google.protobuf.Timestamp
+	16, // 12: api.review.service.v1.ListTicketsResponse.tickets:type_name -> api.review.service.v1.ListTicketsResponse.Ticket
+	30, // 13: api.review.service.v1.GetTicketRequest.operator_context:type_name -> api.common.OperatorContext
+	17, // 14: api.review.service.v1.GetTicketResponse.ticket:type_name -> api.review.service.v1.GetTicketResponse.Ticket
+	18, // 15: api.review.service.v1.GetTicketResponse.comments:type_name -> api.review.service.v1.GetTicketResponse.Comment
+	19, // 16: api.review.service.v1.GetTicketResponse.user_info:type_name -> api.review.service.v1.GetTicketResponse.UserInfo
+	20, // 17: api.review.service.v1.GetTicketResponse.payment_transaction_info:type_name -> api.review.service.v1.GetTicketResponse.PaymentTransactionInfo
+	21, // 18: api.review.service.v1.GetTicketResponse.wallet_transaction_info:type_name -> api.review.service.v1.GetTicketResponse.WalletTransactionInfo
+	22, // 19: api.review.service.v1.GetTicketResponse.wallet_transaction_summary:type_name -> api.review.service.v1.GetTicketResponse.WalletTransactionSummary
+	30, // 20: api.review.service.v1.GetOperatorTicketRequest.operator_context:type_name -> api.common.OperatorContext
+	23, // 21: api.review.service.v1.GetOperatorTicketResponse.ticket:type_name -> api.review.service.v1.GetOperatorTicketResponse.Ticket
+	24, // 22: api.review.service.v1.GetOperatorTicketResponse.comments:type_name -> api.review.service.v1.GetOperatorTicketResponse.Comment
+	25, // 23: api.review.service.v1.GetOperatorTicketResponse.payment_transaction_info:type_name -> api.review.service.v1.GetOperatorTicketResponse.PaymentTransactionInfo
+	26, // 24: api.review.service.v1.GetOperatorTicketResponse.wallet_balance_info:type_name -> api.review.service.v1.GetOperatorTicketResponse.WalletBalanceInfo
+	27, // 25: api.review.service.v1.GetOperatorTicketResponse.wallet_transaction_info:type_name -> api.review.service.v1.GetOperatorTicketResponse.WalletTransactionInfo
+	28, // 26: api.review.service.v1.GetOperatorTicketResponse.wallet_transaction_summary:type_name -> api.review.service.v1.GetOperatorTicketResponse.WalletTransactionSummary
+	32, // 27: api.review.service.v1.ListTicketsResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
+	32, // 28: api.review.service.v1.GetTicketResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
+	32, // 29: api.review.service.v1.GetTicketResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	29, // 30: api.review.service.v1.GetTicketResponse.PaymentTransactionInfo.extra:type_name -> google.protobuf.Struct
+	33, // 31: api.review.service.v1.GetTicketResponse.PaymentTransactionInfo.schema:type_name -> google.protobuf.ListValue
+	32, // 32: api.review.service.v1.GetTicketResponse.PaymentTransactionInfo.created_at:type_name -> google.protobuf.Timestamp
+	32, // 33: api.review.service.v1.GetTicketResponse.WalletTransactionInfo.created_at:type_name -> google.protobuf.Timestamp
+	32, // 34: api.review.service.v1.GetOperatorTicketResponse.Ticket.created_at:type_name -> google.protobuf.Timestamp
+	32, // 35: api.review.service.v1.GetOperatorTicketResponse.Comment.created_at:type_name -> google.protobuf.Timestamp
+	32, // 36: api.review.service.v1.GetOperatorTicketResponse.PaymentTransactionInfo.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 37: api.review.service.v1.Review.CreateWithdraw:input_type -> api.review.service.v1.CreateWithdrawRequest
+	1,  // 38: api.review.service.v1.Review.CreateOperatorWithdraw:input_type -> api.review.service.v1.CreateOperatorWithdrawRequest
+	3,  // 39: api.review.service.v1.Review.ReviewTicket:input_type -> api.review.service.v1.ReviewTicketRequest
+	5,  // 40: api.review.service.v1.Review.AddComment:input_type -> api.review.service.v1.AddCommentRequest
+	7,  // 41: api.review.service.v1.Review.CancelTicket:input_type -> api.review.service.v1.CancelTicketRequest
+	9,  // 42: api.review.service.v1.Review.ListTickets:input_type -> api.review.service.v1.ListTicketsRequest
+	10, // 43: api.review.service.v1.Review.ListOperatorTickets:input_type -> api.review.service.v1.ListOperatorTicketsRequest
+	12, // 44: api.review.service.v1.Review.GetTicket:input_type -> api.review.service.v1.GetTicketRequest
+	14, // 45: api.review.service.v1.Review.GetOperatorTicket:input_type -> api.review.service.v1.GetOperatorTicketRequest
+	2,  // 46: api.review.service.v1.Review.CreateWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
+	2,  // 47: api.review.service.v1.Review.CreateOperatorWithdraw:output_type -> api.review.service.v1.CreateWithdrawResponse
+	4,  // 48: api.review.service.v1.Review.ReviewTicket:output_type -> api.review.service.v1.ReviewTicketResponse
+	6,  // 49: api.review.service.v1.Review.AddComment:output_type -> api.review.service.v1.AddCommentResponse
+	8,  // 50: api.review.service.v1.Review.CancelTicket:output_type -> api.review.service.v1.CancelTicketResponse
+	11, // 51: api.review.service.v1.Review.ListTickets:output_type -> api.review.service.v1.ListTicketsResponse
+	11, // 52: api.review.service.v1.Review.ListOperatorTickets:output_type -> api.review.service.v1.ListTicketsResponse
+	13, // 53: api.review.service.v1.Review.GetTicket:output_type -> api.review.service.v1.GetTicketResponse
+	15, // 54: api.review.service.v1.Review.GetOperatorTicket:output_type -> api.review.service.v1.GetOperatorTicketResponse
+	46, // [46:55] is the sub-list for method output_type
+	37, // [37:46] is the sub-list for method input_type
+	37, // [37:37] is the sub-list for extension type_name
+	37, // [37:37] is the sub-list for extension extendee
+	0,  // [0:37] is the sub-list for field type_name
 }
 
 func init() { file_review_service_v1_review_proto_init() }
@@ -1493,15 +3178,17 @@ func file_review_service_v1_review_proto_init() {
 	if File_review_service_v1_review_proto != nil {
 		return
 	}
-	file_review_service_v1_review_proto_msgTypes[8].OneofWrappers = []any{}
+	file_review_service_v1_review_proto_msgTypes[9].OneofWrappers = []any{}
 	file_review_service_v1_review_proto_msgTypes[10].OneofWrappers = []any{}
+	file_review_service_v1_review_proto_msgTypes[12].OneofWrappers = []any{}
+	file_review_service_v1_review_proto_msgTypes[14].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_review_service_v1_review_proto_rawDesc), len(file_review_service_v1_review_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   15,
+			NumMessages:   29,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -1,11 +1,11 @@
 syntax = "proto3";
 
+package payment.service.v1;
+
 import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "common/common.proto";
-
-package payment.service.v1;
 
 option go_package = "github.com/infigaming-com/meepo-api/payment/service/v1;v1";
 option java_multiple_files = true;
@@ -19,6 +19,14 @@ message GetSupportedPaymentMethodListRequest {
 }
 
 message GetPaymentMethodListRequest {
+  string currency = 1;
+  string psp = 2;
+  // Page number to retrieve (1-based)
+  int32 page = 3;
+  // Number of items per page
+  int32 page_size = 4;
+  optional bool enabled = 5;
+	api.common.OperatorContext operator_context = 6;
 }
 
 // Details of a single payment method
@@ -28,109 +36,132 @@ message PaymentMethodInfo {
   string id = 1;
   // Currency code supported by this payment method (e.g., USD, EUR, CNY)
   string psp = 2;
-  string type = 3;
+  // Payin or Payout
+  string supported_type = 3;
+  // Currency like USD, VND
   string currency = 4;
+  // Currency type (e.g., Crypto, Fiat)
   string currency_type = 5;
+  // Contact
   string contact = 6;
   // Country code where this payment method is available
   string country = 7;
   // Name of the payment method (e.g., CreditCard, AliPay, WeChatPay)
-  string payment_method = 8 [json_name="paymentMethod"];
+  string payment_method = 8;
   // Fixed Fee on the Amount
-  string fixed_fee = 9;
+  string sys_fixed_fee = 9;
   // Rate Fee 
-  string fee_rate = 10;
+  string sys_fee_rate = 10;
   // Min Amount
-  string min_amount = 11;
+  string sys_min_amount = 11;
   // Max Amount
-  string max_amount = 12;
+  string sys_max_amount = 12;
+  // Minmum Fee
+  string sys_min_fee = 13;
   // Fixed Fee on the Amount
-  string psp_fixed_fee = 13;
+  string psp_fixed_fee = 14;
   // Rate Fee 
-  string psp_fee_rate = 14;
+  string psp_fee_rate = 15;
   // Min Amount
-  string psp_min_amount = 15;
+  string psp_min_amount = 16;
   // Max Amount
-  string psp_max_amount = 16;
-  bool enable = 17;
+  string psp_max_amount = 17;
+  // Minmum Fee
+  string psp_min_fee = 18;
+  // Status bool
+  bool enable = 19;
+  // Crypto network
+  string network = 20;
+  // Crypto protocol
+  string protocol = 21;
+  // Source operator
+  string source = 22;
+  // Average Time
+  int32 average_time = 23;
+  // Success Rate
+  string success_rate = 24;
   // JSON schema defining the required fields for this payment method
-  google.protobuf.Struct key_schema = 18 [json_name="keySchema"]; 
+  google.protobuf.ListValue key_schema = 25; 
+  string psp_id = 26;
 }
 
 // Response for payment method list
 // Contains a list of all available payment methods
 message GetSupportedPaymentMethodListResponse {
   // List of payment methods available
-  repeated PaymentMethodInfo payment_methods = 1 [json_name="paymentMethods"];
+  repeated PaymentMethodInfo payment_methods = 1;
 }
 
 // Response for payment method list
 // Contains a list of all available payment methods
 message GetPaymentMethodListResponse {
   // List of payment methods available
-  repeated PaymentMethodInfo payment_methods = 1 [json_name="paymentMethods"];
+  repeated PaymentMethodInfo payment_methods = 1;
+  // Current page number
+  int32 page = 2;
+  // Number of items per page
+  int32 page_size = 3;
+  // Total number of pages available
+  int32 total_pages = 4;
+  // The following fields are only populated for admin requests
+  // Total number of successful transactions
+  int32 total_on = 5;
+  // Total number of processing transactions
+  int32 total_off = 6;
 }
 
 // Request to create a payment channel
 // Used to create a new payment channel with specified merchant and method
 message CreatePaymentMethodRequest {
-  // ID of the Operator connect with this channel
-	api.common.OperatorContext operator_context = 1;
   // ID of the payment method to be used
-  string payment_method_id = 2 [json_name="paymentMethodId"];
+  string payment_method_id = 1;
   // Currency Type
-  string currency_type = 3;
-  // Contact Info email
-  string contact = 4;
+  string contact = 2;
   // Fixed Fee on the Amount
-  string fixed_fee = 5;
+  string sys_fixed_fee = 3;
   // Rate Fee 
-  string fee_rate = 6;
+  string sys_fee_rate = 4;
   // Min Amount
-  string min_amount = 7;
+  string sys_min_amount = 5;
   // Max Amount
-  string max_amount = 8;
-  // PSP Fixed Fee on the Amount
-  string psp_fixed_fee = 9;
-  // PSP Rate Fee 
-  string psp_fee_rate = 10;
-  // PSP Min Amount
-  string psp_min_amount = 11;
-  // PSP Max Amount
-  string psp_max_amount = 12;
-  // JSON schema defining the required fields for this payment method
-  google.protobuf.Struct key = 13;
+  string sys_max_amount = 6;
+  // Minmum Fee
+  string sys_min_fee = 7;
+  // ID of the Operator connect with this channel
+	api.common.OperatorContext operator_context = 8;
 }
 
 message CreatePaymentMethodResponse {
   PaymentMethodInfo payment_method = 1;
 }
 
-message DisablePaymentChannelResponse {
-  PaymentMethodInfo payment_methods = 1;
+message UpdatePaymentChannelResponse {
+  PaymentChannelInfo payment_methods = 1;
 }
 
 // Request to create a payment channel
 // Used to create a new payment channel with specified merchant and method
 message CreatePaymentChannelRequest {
   // ID of the merchant creating this channel
-  string merchant_id = 1 [json_name="merchantId"];
+  string merchant_id = 1;
   // ID of the Operator connect with this channel
-  string operator_id = 2;
+	api.common.OperatorContext operator_context = 2;
   // ID of the payment method to be used
-  string payment_method_id = 3 [json_name="paymentMethodId"];
-  // Type of channel (e.g., deposit, withdrawal)
-  string type = 4;
+  string payment_method_id = 3;
   // Contact Info email
-  string contact = 5;
+  // string contact = 4;
   // PSP Fixed Fee on the Amount
-  string psp_fixed_fee = 6;
+  string fixed_fee = 4;
   // PSP Rate Fee 
-  string psp_fee_rate = 7;
+  string fee_rate = 5;
+  // Minimum Fee 
+  string min_fee = 6;
   // User Fixed Fee on the Amount
-  string user_fixed_fee = 8;
+  string user_fixed_fee = 7;
   // User Rate Fee 
-  string user_fee_rate = 9;
+  string user_fee_rate = 8;
+  // Minimum Fee 
+  string user_min_fee = 9;
   // Min Amount
   string min_amount = 10;
   // Max Amount
@@ -141,72 +172,126 @@ message CreatePaymentChannelRequest {
 
 // Request to create a payment channel
 // Used to create a new payment channel with specified merchant and method
-message DisablePaymentChannelRequest {
-  // ID of the merchant creating this channel
-  string id = 1 [json_name="merchantId"];
+message UpdatePaymentChannelRequest {
+  // ID of the payment channel to be used
+  string payment_channel_id = 1;
+  // Contact Info email
+  // string contact = 2;
+  // PSP Fixed Fee on the Amount
+  string fixed_fee = 2;
+  // PSP Rate Fee 
+  string fee_rate = 3;
+  // PSP Min Fee 
+  string min_fee = 4;
+  // User Fixed Fee on the Amount
+  string user_fixed_fee = 5;
+  // User Rate Fee 
+  string user_fee_rate = 6;
+  // User Min Fee 
+  string user_min_fee = 7;
+  // Min Amount
+  string min_amount = 8;
+  // Max Amount
+  string max_amount = 9;
+  // enable status
+  optional bool enable = 10;
+  // Configuration fields for the payment channel in JSON format
+  optional google.protobuf.Struct key = 11;
 }
 
 // Response for channel creation
 // Returns the ID of the newly created payment channel
 message CreatePaymentChannelResponse {
   // Unique identifier for the created channel
-  string channel_id = 1 [json_name="channelId"];
+  string channel_id = 1;
 }
 
 // Payment channel information
 // Detailed information about a specific payment channel
 message PaymentChannelInfo {
   // Unique identifier for the channel
-  string channel_id = 1 [json_name="channelId"];
+  string channel_id = 1;
   // Type of the channel (e.g., online, offline)
-  string type = 2;
-  // Currency type (e.g., Crypto, Fiat)
-  string currency_type = 3;
+  string support_type = 2;
   // Services Prvider
-  string psp = 4;
+  string psp = 3;
   // Category of the channel (e.g., bank, e-wallet)
-  string category = 5;
-  // ID of the operator who owns this channel
-  string operator_id = 6 [json_name="operatorId"];
+  string category = 4;
   // Payment method used in this channel
-  string payment_method = 7 [json_name="paymentMethod"];
+  string payment_method = 5;
   // Tag for categorization or filtering
-  string tag = 8;
+  string tag = 6;
   // Display name of the channel
-  string name = 9;
+  string name = 7;
   // ID of the payment method used
-  string payment_method_id = 10 [json_name="paymentMethodId"];
+  string payment_method_id = 8;
   // Currency supported by this channel
-  string currency = 11;
+  string currency = 9;
+  // Currency type (e.g., Crypto, Fiat)
+  string currency_type = 10;
   // Crypto protocol supported by this channel
-  string protocol = 12;
+  string protocol = 11;
   // Crypto chian supported by this channel
-  string network = 13;
+  string network = 12;
   // Country where this channel is available
-  string country = 14;
+  string country = 13;
   // Specific method used (might be more detailed than payment_method)
-  string method = 15;
+  string method = 14;
   // URL to the logo image for this payment channel
-  string logo = 16;
+  string logo = 15;
   // Minimum amount allowed for deposit transactions
-  string min_deposit_amount = 17 [json_name="minDepositAmount"];
+  string min_amount = 16;
   // Maximum amount allowed for deposit transactions
-  string max_deposit_amount = 18 [json_name="maxDepositAmount"];
-  // Minimum amount allowed for withdrawal transactions
-  string min_withdraw_amount = 19 [json_name="minWithdrawAmount"];
-  // Maximum amount allowed for withdrawal transactions
-  string max_withdraw_amount = 20 [json_name="maxWithdrawAmount"];
-  // Estimated arrival time in minutes
-  int32 eat = 21;
-  // Fee
-  string fix_fee = 22;
-  string rate_fee = 23;
+  string max_amount = 17;
+  // Fixed Fee on the Amount
+  string fixed_fee = 18;
+  // Rate Fee 
+  string fee_rate = 19;
+  // Minimum Fee 
+  string min_fee = 20;
+  // Minimum amount allowed for deposit transactions
+  string psp_min_amount = 21;
+  // Maximum amount allowed for deposit transactions
+  string psp_max_amount = 22;
+  // Fixed Fee on the Amount
+  string psp_fixed_fee = 23;
+  // Rate Fee 
+  string psp_fee_rate = 24;
+  // Minimum Fee 
+  string psp_min_fee = 25;
+  // Minimum amount allowed for deposit transactions
+  string sys_min_amount = 26;
+  // Maximum amount allowed for deposit transactions
+  string sys_max_amount = 27;
+  // Fixed Fee on the Amount
+  string sys_fixed_fee = 28;
+  // Rate Fee 
+  string sys_fee_rate = 29;
+  // Minimum Fee 
+  string sys_min_fee = 30;
+  // Fixed Fee on the Amount
+  string user_fixed_fee = 31;
+  // Rate Fee 
+  string user_fee_rate = 32;
+  // Minimum Fee 
+  string user_min_fee = 33;
   // JSON schema defining deposit form fields required by this channel
-  google.protobuf.Struct deposit_schema = 24 [json_name="depositSchema"];
-  // JSON schema defining withdrawal form fields required by this channel
-  google.protobuf.Struct withdraw_schema = 25 [json_name="withdrawSchema"];
-  string source_type = 26;
-  bool enable = 27;
+  google.protobuf.ListValue schema = 34;
+  // Status bool
+  bool enable = 35;
+  // Contact
+  // string contact = 36;
+  int32 eat = 36;
+  int64 operator_id = 37;
+  int64 company_operator_id = 38;
+  int64 retailer_operator_id = 39;
+  int64 system_operator_id = 40;
+  string operator_name = 41;
+  string company_operator_name = 42;
+  string retailer_operator_name = 43;
+  string system_operator_name = 44;
+  string operator_type = 45;
+  string psp_id = 46;
 }
 
 // Request to initiate a deposit
@@ -274,14 +359,12 @@ message GetAddressResponse {
 // Used to get DC address
 message GetOperatorAddressRequest {
   // ID of the channel to use for this deposit
-  string channel_id = 1 [json_name="channelId"];
-
-  string target_currency = 2;
-
-  api.common.OperatorContext operator_context = 3;
+  string channel_id = 1;
+  api.common.OperatorContext target_operator_context = 2;
   // Additional information needed for the deposit
   // May include clientOrderId, productId, userInfo, etc.
-  google.protobuf.Struct extra = 4;
+  google.protobuf.Struct extra = 3;
+  api.common.OperatorContext operator_context = 4;
 
 }
 
@@ -291,8 +374,6 @@ message GetOperatorAddressResponse {
   message Data {
     // Crypto like btc, eth...
     string currency = 1;
-    // Target Currency
-    string target_currency = 2;
     // Crypto protocol
     string protocol = 3;
     // Crypto chain
@@ -310,12 +391,12 @@ message InitiateWithdrawRequest {
   string amount = 1;
   // Currency code for the transaction
   string currency = 2;
+  // Currency code for the transaction report
+  string reporting_currency = 3;
   // ID of the user who initiated the withdrawal
-  int64 user_id = 3 [json_name="userId"];
-  // ID of the operator who owns this channel
-  int64 operator_id = 4 [json_name="operatorId"];
+  int64 user_id = 4;
   // ID of the channel to use for withdrawal
-  string channel_id = 5 [json_name="channelId"];
+  string channel_id = 5;
   // ID of the operator who owns this channel
   api.common.OperatorContext operator_context = 6;
   // Additional information needed for the withdrawal
@@ -345,14 +426,21 @@ message InitiateOperatorWithdrawRequest {
   string amount = 1;
   // Currency code for the transaction
   string currency = 2;
-  string source_currency = 3;
-  // ID of the operator who owns this channel
-	api.common.OperatorContext operator_context = 4;
+  // Currency code for the transaction report
+  string reporting_currency = 3;
+  // admin user id
+  int64 admin_user_id = 4;  
+  // Target Operator ids
+  api.common.OperatorContext target_operator_context = 5;
+  // Operator ids
+  api.common.OperatorContext operator_context = 6;
   // ID of the channel to use for withdrawal
-  string channel_id = 5;
+  string channel_id = 7;
+  // memo of crypto
+  string memo = 8;
   // Additional information needed for the withdrawal
   // May include account details, clientId, note, etc.
-  google.protobuf.Struct extra = 6;
+  google.protobuf.Struct extra = 9;
 }
 
 // Response for withdrawal initiation
@@ -391,12 +479,14 @@ message DepositCallbackRequest {
   string money = 8;
   // Actual address
   string address = 9;
+  // ChannelID
+  string channelID = 10 [json_name="channelID"];
   // HMAC-SHA256 signature to verify request authenticity
-  string sign = 10 [json_name="sign"];
+  string sign = 11 [json_name="sign"];
   // Request timestamp to prevent replay attacks
-  string timestamp = 11 [json_name="timestamp"];
+  string timestamp = 12 [json_name="timestamp"];
   // Random string to ensure each request is unique
-  string nonce = 12 [json_name="nonce"];
+  string nonce = 13 [json_name="nonce"];
 }
 
 // Response for deposit callback
@@ -481,59 +571,81 @@ enum Sort {
 
 // Request source enum
 // Defines the source of the request
-enum RequestSource {
-  // Request from frontend user
-  REQUEST_SOURCE_FRONTEND = 0;
-  // Request from admin backend
-  REQUEST_SOURCE_ADMIN = 1;
-}
+// enum RequestSource {
+//   // Request from frontend user
+//   REQUEST_SOURCE_FRONTEND = 0;
+//   // Request from admin backend
+//   REQUEST_SOURCE_ADMIN = 1;
+// }
 
 // Channel type enum
 // Defines the purpose of a payment channel
 enum ChannelType {
+  // All Channel
+  CHANNEL_TYPE_ALL = 0;
   // Channel for depositing funds
-  CHANNEL_TYPE_DEPOSIT = 0;
+  CHANNEL_TYPE_DEPOSIT = 1;
   // Channel for withdrawing funds
-  CHANNEL_TYPE_WITHDRAW = 1;
+  CHANNEL_TYPE_WITHDRAW = 2;
 }
 
 // Transaction information
 // Detailed information about a specific transaction
 message TransactionInfo {
   // Unique identifier for the transaction
-  int64 transaction_id = 1 [json_name="transactionId"];
+  int64 transaction_id = 1;
   // Transaction ID from the operator's system
-  string pa_transaction_id = 2 [json_name="paTransactionId"];
+  string pa_transaction_id = 2;
   // Transaction ID from the payment gateway
-  string gateway_transaction_id = 3 [json_name="gatewayTransactionId"];
+  string gateway_transaction_id = 3;
   // Operator ID associated with the transaction
-  string operator_id = 4 [json_name="operatorId"];
+  int64 operator_id = 4;
+  int64 company_operator_id = 5;
+  int64 retailer_operator_id = 6;
+  int64 system_operator_id = 7;
+  string operator_name = 8;
+  string company_operator_name = 9;
+  string retailer_operator_name = 10;
+  string system_operator_name = 11;
   // ID of the user who initiated the transaction
-  int64 user_id = 5 [json_name="userId"];
+  int64 user_id = 12;
   // VIP level of the user
-  int32 vip = 6;
+  int32 vip = 13;
   // Transaction amount in smallest currency unit
-  string amount = 7;
+  string amount = 14;
   // Currency code for the transaction
-  string currency = 8;
+  string currency = 15;
   // Transaction fee in smallest currency unit
-  string fee = 9;
+  string processing_fee = 16;
   // Payment method used for the transaction
-  string payment_method = 10 [json_name="paymentMethod"];
+  string payment_method = 17;
   // Payment channel used for the transaction
-  string payment_channel = 11 [json_name="paymentChannel"];
+  string payment_channel = 18;
   // Crypto Protocol used for the transaction
-  string protocol = 12;
+  string protocol = 19;
   // Crypto Network used for the transaction
-  string network = 13;
+  string network = 20;
+  // Crypto Address
+  string address = 21;
   // Type of transaction (deposit or withdrawal)
-  TransactionType type = 14;
+  TransactionType type = 22;
   // Current status of the transaction
-  TransactionStatus status = 15;
+  TransactionStatus status = 23;
   // Timestamp when the transaction was created
-  google.protobuf.Timestamp created_at = 16 [json_name="createdAt"];
+  google.protobuf.Timestamp created_at = 24;
   // Timestamp when the transaction was last updated
-  google.protobuf.Timestamp updated_at = 17 [json_name="updatedAt"];
+  google.protobuf.Timestamp updated_at = 25;
+  // Transaction amount in USD
+  string amount_usd = 26;
+  // Transaction amount actually sent through
+  string amount_sent = 27;
+  string gas = 28;
+  string reporting_currency = 29;
+  string amount_reporting_currency = 30;
+  string amount_sent_reporting_currency = 31;
+  string processing_fee_reporting_currency = 32;
+  string amount_sent_usd = 33;
+  string processing_fee_usd = 34;
 }
 
 message TransactionDetail {
@@ -549,42 +661,38 @@ message GetTransactionPageRequest {
   // Page number to retrieve (1-based)
   int32 page = 1;
   // Number of items per page
-  int32 page_size = 2 [json_name="pageSize"];
-  
-  // Optional transaction ID filter
-  int64 transaction_id = 3 [json_name="transactionId"];
-  // Optional operator ID filter
-  string operator_id = 4 [json_name="operatorId"];
+  int32 page_size = 2;
+    // Optional transaction ID filter
+  int64 transaction_id = 3;
   // Optional currency filter
-  string currency = 5;
+  string currency = 4;
   // Optional payment method filter
-  string payment_method = 6 [json_name="paymentMethod"];
+  string payment_method = 5;
   // Optional payment channel filter
-  string payment_channel = 7 [json_name="paymentChannel"];
+  string payment_channel = 6;
   // Optional crypto protocol filter
-  string protocol = 8;
+  string protocol = 7;
   // Optional crypto network filter
-  string network = 9;
+  string network = 8;
   // Optional transaction type filter
-  TransactionType type = 10;
+  TransactionType type = 9;
   // Optional status filter
-  TransactionStatus status = 11;
+  TransactionStatus status = 10;
   // Optional agent filter
-  string agent = 12;
+  string agent = 11;
   // Optional start time for date range filter
-  google.protobuf.Timestamp start_time = 13 [json_name="startTime"];
+  google.protobuf.Timestamp start_time = 12;
   // Optional end time for date range filter
-  google.protobuf.Timestamp end_time = 14 [json_name="endTime"];
+  google.protobuf.Timestamp end_time = 13;
   // Optional sort direction
-  Sort sort = 15 [json_name="sort"];
-  // Source of the request (frontend or admin)
-  RequestSource source = 16 [json_name="source"];
-  // Optional user ID filter
-  int64 user_id = 17 [json_name="userId"];
+  Sort sort = 14;
   // Optional minimum amount filter
-  string min_amount = 18 [json_name="minAmount"];
+  string min_amount = 15;
   // Optional maximum amount filter
-  string max_amount = 19 [json_name="maxAmount"];
+  string max_amount = 16;
+  int64 user_id = 17;
+  api.common.OperatorContextFilters operator_context_filters = 18;
+  api.common.OperatorContext operator_context = 19;
 }
 
 // Response for transaction page
@@ -593,20 +701,20 @@ message GetTransactionPageResponse {
   // List of transactions matching the filter criteria
   repeated TransactionInfo transactions = 1;
   // Total number of transactions matching the filter criteria
-  int32 total_count = 2 [json_name="totalCount"];
+  int32 total_count = 2;
   // Current page number
   int32 page = 3;
   // Number of items per page
-  int32 page_size = 4 [json_name="pageSize"];
+  int32 page_size = 4;
   // Total number of pages available
-  int32 total_pages = 5 [json_name="totalPages"];
+  int32 total_pages = 5;
   // The following fields are only populated for admin requests
   // Total number of successful transactions
-  int32 total_successful = 6 [json_name="totalSuccessful"];
+  int32 total_successful = 6;
   // Total number of processing transactions
-  int32 total_processing = 7 [json_name="totalProcessing"];
+  int32 total_processing = 7;
   // Total number of failed transactions
-  int32 total_failed = 8 [json_name="totalFailed"];
+  int32 total_failed = 8;
 }
 
 // Request to get payment channel page
@@ -615,15 +723,15 @@ message GetPaymentChannelPageRequest {
   // Page number to retrieve (1-based)
   int32 page = 1;
   // Number of items per page
-  int32 page_size = 2 [json_name="pageSize"];
+  int32 page_size = 2;
     // Optional operator ID filter
-  string operator_id = 3 [json_name="operatorId"];
+  string operator_id = 3;
   // Optional channel type filter
   ChannelType type = 4;
   // Optional category filter
   string category = 5;
   // Optional payment method filter
-  string payment_method = 6 [json_name="paymentMethod"];
+  string payment_method = 6;
   // Optional currency filter
   string currency = 7;
   // Optional crypto protocol
@@ -632,23 +740,58 @@ message GetPaymentChannelPageRequest {
   string network = 9;
   // Optional country filter
   string country = 10;
+  // Source of operator type
+  string source = 11;
+  // Status ture or false
+  bool enabled = 12;
   // Optional sort direction
-  Sort sort = 11 [json_name="sort"];
+  Sort sort = 13;
+}
+// Operator to retrieve a paginated list of payment channels with optional filters
+message GetOperatorPaymentChannelPageRequest {
+  // Page number to retrieve (1-based)
+  int32 page = 1;
+  // Number of items per page
+  int32 page_size = 2;
+  // Optional channel type filter
+  ChannelType type = 3;
+  // Optional category filter
+  string category = 4;
+  // Optional payment method filter
+  string payment_method = 5;
+  // Optional currency filter
+  string currency = 6;
+  // Optional crypto protocol
+  string protocol = 7;
+  // Optional crypto network filter
+  string network = 8;
+  // Optional country filter
+  string country = 9;
+  // Source of operator type
+  string source = 10;
+  // Optional sort direction
+  Sort sort = 11;
+  // Status ture or false
+  optional bool enabled = 12;
+  // ID of the Operator connect with this channel
+  api.common.OperatorContextFilters operator_context_filters = 13;
+  // ID of the Operator connect with this channel
+	api.common.OperatorContext operator_context = 14;
 }
 
 // Response for payment channel page
 // Contains paginated list of payment channels and pagination metadata
 message GetPaymentChannelPageResponse {
   // List of payment channels matching the filter criteria
-  repeated PaymentChannelInfo payment_channels = 1 [json_name="paymentChannels"];
+  repeated PaymentChannelInfo payment_channels = 1;
   // Total number of channels matching the filter criteria
-  int32 total_count = 2 [json_name="totalCount"];
+  int32 total_count = 2;
   // Current page number
   int32 page = 3;
   // Number of items per page
-  int32 page_size = 4 [json_name="pageSize"];
+  int32 page_size = 4;
   // Total number of pages available
-  int32 total_pages = 5 [json_name="totalPages"];
+  int32 total_pages = 5;
   int32 total_enable_colnt = 6;
   int32 total_disable_count = 7;
 }
@@ -657,9 +800,9 @@ message GetPaymentChannelPageResponse {
 // Used to retrieve detailed information about a specific transaction
 message GetTransactionDetailByIdRequest {
   // Unique identifier for the transaction
-  int64 transaction_id = 1 [json_name="transactionId"];
-  // Source of the request (frontend or admin)
-  RequestSource source = 2 [json_name="source"];
+  int64 transaction_id = 1;
+  // // Source of the request (frontend or admin)
+  // RequestSource source = 2 [json_name="source"];
 }
 
 // Response for transaction detail
@@ -674,11 +817,167 @@ message GetChannelsByIdsRequest {
 }
 
 message GetChannelsByIdsResponse {
-	message Channel {
-		string channel_id = 1;
-		string name = 2;
+  repeated PaymentChannelInfo channels = 1;
+}
+
+message UpdatePaymentMethodRequest {
+  // ID
+	string payment_method_id = 1;
+  // Currency Type
+  optional string contact = 2;
+  // Fixed Fee on the Amount
+  optional string sys_fixed_fee = 3;
+  // Rate Fee 
+  optional string sys_fee_rate = 4;
+  // Min Amount
+  optional string sys_min_amount = 5;
+  // Max Amount
+  optional string sys_max_amount = 6;
+  // Minmum Fee
+  optional string sys_min_fee = 7;
+	// status
+	bool status = 8;
+  // ID of the Operator connect with this channel
+	api.common.OperatorContext operator_context = 9;
+}
+
+message UpdatePaymentMethodResponse {
+	repeated string channel_ids = 1;
+}
+
+message BankCard {
+  int64 id = 1;
+  string card_account = 2;
+  string card_account_firstname = 3;
+  string card_account_lastname = 4;
+  string card_iban = 5;
+  string currency = 6;
+  string country = 7;
+  bool enabled = 8;
+  google.protobuf.Struct card_detail = 9;
+}
+
+message GetBankCardListRequest {
+  
+}
+
+message GetBankCardListResponse {
+  repeated BankCard bank_card_lsit = 1;
+}
+
+message AddBankCardRequest {
+  string currency = 1;
+  string country = 2;
+  google.protobuf.Struct bank_card = 3;
+}
+
+message AddBankCardResponse {
+}
+
+message UpdateBankCardRequest {
+  int64 id = 1;
+  optional string currency = 2;
+  optional string country = 3;
+  optional bool enabled = 4;
+  google.protobuf.Struct bank_card = 5;
+}
+
+message UpdateBankCardResponse {
+}
+
+message DeleteBankCardRequest {
+  int64 bank_card_id = 1;
+}
+
+message DeleteBankCardResponse {
+}
+
+message GetBankAccountRequest {
+  string channel_id = 1;
+  // Additional information needed for the deposit
+  // May include clientOrderId, productId, userInfo, etc.
+  google.protobuf.Struct extra = 2;
+}
+
+message GetBankAccountResponse {
+	// operator id allocated by operator service
+	string notify_url = 1;
+	string reference_number = 2;
+	string bank_account_name = 3;
+	string bank_account_number = 4;
+}
+
+message GetBankSchemaRequest {
+	string currency = 1;
+}
+
+message GetBankSchemaResponse {
+  google.protobuf.ListValue schema = 1;
+}
+
+message Crypto {
+  string crypto = 1;
+	string network = 2;
+}
+
+message Currency {
+  string currency = 1;
+  string country = 2;
+  string payWayCode = 3;
+  string payWayName = 4;
+  float payMin = 5;
+  float payMax = 6;
+}
+
+message BuyCryptoViaFiatCurrentListRequest {
+}
+
+message BuyCryptoViaFiatCurrentListResponse {
+  // repeated currency list
+  repeated Currency currencies = 1;
+  // repeated crypto list
+  repeated PaymentChannelInfo crypto = 2;
+}
+
+message BuyCryptoViaFiatPriceQueryRequest {
+  string amount = 1;
+  string fiat = 2;
+  string payWayCode = 3;
+  string channel_id = 4;
+}
+
+message BuyCryptoViaFiatPriceQueryResponse {
+  string crypto = 1;
+  string cryptoPrice = 2;
+  string cryptoQuantity = 3;
+  string fiat = 4;
+  string rampFee = 5;
+  string networkFee = 6;
+}
+
+message BuyCryptoViaFiatRequest {
+  string amount = 1;
+  string fiatCurrency = 2;
+  string payWayCode = 3;
+  string channel_id = 4;
+}
+
+message BuyCryptoViaFiatResponse {
+  string pay_url = 1;
+}
+
+message GetResponsibleGamblingStatusRequest {
+	int64 user_id = 1;
+	api.common.OperatorContext operator_context = 2;
+}
+
+message GetResponsibleGamblingStatusResponse {
+	message ResponsibleGamblingStatus {
+    string currency = 1;
+    string withdrawal_usage = 2;
+    string deposit_usage = 3;
 	}
-	repeated Channel channels = 1;
+	repeated ResponsibleGamblingStatus responsible_gambling_statuses = 1;
 }
 
 // Payment Service
@@ -687,52 +986,27 @@ service Payment {
   // Get list of payment methods
   // Retrieves all available payment methods supported by the system
   // Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
-  rpc GetSupportedPaymentMethodList(GetSupportedPaymentMethodListRequest) returns (GetSupportedPaymentMethodListResponse) {
-    option (google.api.http) = {
-      post: "/v1/payment/supportedmethod/list"
-      body: "*"
-    };
-  }
+  rpc GetSupportedPaymentMethodList(GetSupportedPaymentMethodListRequest) returns (GetSupportedPaymentMethodListResponse) { }
 
   // Create payment channel
   // Creates a new payment channel with specified configuration
   // Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-  rpc CreatePaymentMethod(CreatePaymentMethodRequest) returns (CreatePaymentMethodResponse) {
-    option (google.api.http) = {
-      post: "/v1/payment/method/create"
-      body: "*"
-    };
-  }
+  rpc CreatePaymentMethod(CreatePaymentMethodRequest) returns (CreatePaymentMethodResponse) { }
 
   // Get list of payment methods
   // Retrieves all available payment methods supported by the system
   // Error code: GET_PAYMENT_METHOD_LIST_FAILED(50001) - Failed to get payment method list
-  rpc GetPaymentMethodList(GetPaymentMethodListRequest) returns (GetPaymentMethodListResponse) {
-    option (google.api.http) = {
-      post: "/v1/payment/method/list"
-      body: "*"
-    };
-  }
+  rpc GetPaymentMethodList(GetPaymentMethodListRequest) returns (GetPaymentMethodListResponse) { }
 
   // Create payment channel
   // Creates a new payment channel with specified configuration
   // Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-  rpc DisablePaymentChannel(DisablePaymentChannelRequest) returns (DisablePaymentChannelResponse) {
-    option (google.api.http) = {
-      post: "/v1/payment/channel/update"
-      body: "*"
-    };
-  }
+  rpc UpdatePaymentChannel(UpdatePaymentChannelRequest) returns (UpdatePaymentChannelResponse) { }
 
   // Create payment channel
   // Creates a new payment channel with specified configuration
   // Error code: CREATE_PAYMENT_CHANNEL_FAILED(50002) - Failed to create payment channel
-  rpc CreatePaymentChannel(CreatePaymentChannelRequest) returns (CreatePaymentChannelResponse) {
-    option (google.api.http) = {
-      post: "/v1/payment/channel/create"
-      body: "*"
-    };
-  }
+  rpc CreatePaymentChannel(CreatePaymentChannelRequest) returns (CreatePaymentChannelResponse) { }
 
   rpc GetAddress(GetAddressRequest) returns (GetAddressResponse) {
     option (google.api.http) = {
@@ -831,10 +1105,81 @@ service Payment {
   // Get transaction detail
   // Retrieves detailed information about a specific transaction
   // Error code: GET_TRANSACTION_DETAIL_FAILED(50009) - Failed to get transaction detail
-  rpc GetTransactionDetailById(GetTransactionDetailByIdRequest) returns (GetTransactionDetailByIdResponse) {
+  rpc GetTransactionDetailById(GetTransactionDetailByIdRequest) returns (GetTransactionDetailByIdResponse) { }
+
+  rpc GetOperatorTransactionPage(GetTransactionPageRequest) returns (GetTransactionPageResponse) { }
+
+  rpc GetOperatorTransactionDetailById(GetTransactionDetailByIdRequest) returns (GetTransactionDetailByIdResponse) { }
+  
+	rpc GetChannelsByIds(GetChannelsByIdsRequest) returns (GetChannelsByIdsResponse) { }
+
+	rpc UpdatePaymentMethod(UpdatePaymentMethodRequest) returns (CreatePaymentMethodResponse) { }
+
+  rpc GetOperatorPaymentChannelPage(GetOperatorPaymentChannelPageRequest) returns (GetPaymentChannelPageResponse) { }
+
+  rpc GetUserBankCardList(GetBankCardListRequest) returns (GetBankCardListResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/bankcard/list"
+      body: "*"
+    };
+  }
+
+  rpc AddUserBankCard(AddBankCardRequest) returns (AddBankCardResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/bankcard/add"
+      body: "*"
+    };
+  }
+
+  rpc UpdateUserBankCard(UpdateBankCardRequest) returns (UpdateBankCardResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/bankcard/update"
+      body: "*"
+    };
+  }
+
+  rpc DeleteUsesrBankCard(DeleteBankCardRequest) returns (DeleteBankCardResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/bankcard/delete"
+      body: "*"
+    };
+  }
+
+	// rpc GetDepositBankAccount(GetBankAccountRequest) returns (GetBankAccountResponse) {
+ //    option (google.api.http) = {
+ //      post: "/v1/payment/bankaccount/get"
+ //      body: "*"
+ //    };
+	// }
+
+	rpc GetBankSchema(GetBankSchemaRequest) returns (GetBankSchemaResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/bankinfo/schema/get"
+      body: "*"
+    };
+	}
+
+  rpc BuyCryptoViaFiatCurrentList(BuyCryptoViaFiatCurrentListRequest) returns (BuyCryptoViaFiatCurrentListResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/buycrypto/currency/list"
+      body: "*"
+    };
+  }
+
+  rpc BuyCryptoViaFiatPriceQuery(BuyCryptoViaFiatPriceQueryRequest) returns (BuyCryptoViaFiatPriceQueryResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/buycrypto/price/get"
+      body: "*"
+    };
+  }
+
+  rpc BuyCryptoViaFiat(BuyCryptoViaFiatRequest) returns (BuyCryptoViaFiatResponse) {
+    option (google.api.http) = {
+      post: "/v1/payment/buycrypto/add"
+      body: "*"
+    };
   }
 
   
-	rpc GetChannelsByIds(GetChannelsByIdsRequest) returns (GetChannelsByIdsResponse) {
-	}
+	rpc GetResponsibleGamblingStatus(GetResponsibleGamblingStatusRequest) returns (GetResponsibleGamblingStatusResponse) {}
 }

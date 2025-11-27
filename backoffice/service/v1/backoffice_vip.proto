@@ -1,0 +1,138 @@
+syntax = "proto3";
+
+package api.backoffice.service.v1;
+import "google/api/annotations.proto";
+import "common/common.proto";
+import "vip/service/v1/vip.proto";
+
+
+option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.backoffice.service.v1";
+
+// VIP系统服务
+service BackofficeVip {
+  // VIP设置管理
+  rpc GetVipSetting(GetVipSettingRequest) returns (vip.service.v1.GetVipSettingResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/vip/setting/get"
+      body: "*"
+    };
+  }
+
+  rpc UpdateVipSetting(UpdateVipSettingRequest) returns (UpdateVipSettingResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/vip/setting/update"
+      body: "*"
+    };
+  }
+
+  rpc GetVipLevelConfigTemplate(GetVipLevelConfigTemplateRequest) returns (GetVipLevelConfigTemplateResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/vip/level-config-template/get"
+      body: "*"
+    };
+  }
+
+  rpc CreateVipLevelConfigTemplate(CreateVipLevelConfigTemplateRequest) returns (CreateVipLevelConfigTemplateResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/vip/level-config-template/create"
+      body: "*"
+    };
+  }
+
+  rpc UpdateVipLevelConfigTemplate(UpdateVipLevelConfigTemplateRequest) returns (UpdateVipLevelConfigTemplateResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/vip/level-config-template/update"
+      body: "*"
+    };
+  }
+
+  rpc DeleteVipLevelConfigTemplate(DeleteVipLevelConfigTemplateRequest) returns (DeleteVipLevelConfigTemplateResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/vip/level-config-template/delete"
+      body: "*"
+    };
+  }
+
+  rpc GetVipConfig(GetVipConfigRequest) returns (GetVipConfigResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/vip/config/get"
+      body: "*"
+    };
+  }
+
+  // TODO： 获取follow parent
+  // 修改 follow parent
+  // TODO: VIP 等级配置是否跟随币种
+  // TODO: VIP 经验掉落 boolean 配置
+
+
+}
+
+message GetVipSettingRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  string currency = 2;
+}
+
+message GetVipSettingResponse {
+  api.vip.service.v1.VipSetting default_setting = 1;
+  api.vip.service.v1.VipSetting custom_setting = 2;
+  bool follow_parent = 3;
+  api.common.OperatorContext custom_operator_context = 4;
+  api.common.OperatorContext inherited_operator_context = 5;
+  string inherited_from_operator_name = 6;
+  repeated api.vip.service.v1.VipLevelConfigTemplate default_templates = 7;
+  repeated api.vip.service.v1.VipLevelConfigTemplate custom_templates = 8;
+}
+
+message UpdateVipSettingRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  api.vip.service.v1.VipSetting setting = 2;
+}
+
+message UpdateVipSettingResponse {
+}
+
+message GetVipLevelConfigTemplateRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 template_id = 2;
+}
+
+message GetVipLevelConfigTemplateResponse {
+  api.vip.service.v1.VipLevelConfigTemplate template = 1;
+}
+
+message CreateVipLevelConfigTemplateRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  api.vip.service.v1.VipLevelConfigTemplate template = 2;
+  int64 setting_id = 3;
+}
+
+message CreateVipLevelConfigTemplateResponse {
+  api.vip.service.v1.VipLevelConfigTemplate template = 1;
+}
+
+message UpdateVipLevelConfigTemplateRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  api.vip.service.v1.VipLevelConfigTemplate template = 2;
+}
+
+message UpdateVipLevelConfigTemplateResponse {
+}
+
+message DeleteVipLevelConfigTemplateRequest {
+  api.common.OperatorContext target_operator_context = 1;
+  int64 template_id = 2;
+}
+
+message DeleteVipLevelConfigTemplateResponse {
+}
+
+message GetVipConfigRequest {
+  api.common.OperatorContext target_operator_context = 1;
+}
+
+message GetVipConfigResponse {
+  api.vip.service.v1.VipConfig config = 1;
+}

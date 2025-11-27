@@ -98,6 +98,60 @@ const (
 	ErrorReason_USER_INFO_NOT_FOUND_IN_CONTEXT                                  ErrorReason = 30070
 	ErrorReason_OPERATOR_PERMISSION_DENIED                                      ErrorReason = 30071
 	ErrorReason_USER_NOT_IN_OPERATOR_CONTEXT                                    ErrorReason = 30072
+	ErrorReason_INVALID_TRANSFER_CURRENCY                                       ErrorReason = 30073
+	ErrorReason_QUERY_OPERATOR_BALANCE_TRANSACTIONS_FAILED                      ErrorReason = 30074
+	ErrorReason_OPERATOR_BALANCE_NOT_FOUND                                      ErrorReason = 30075
+	ErrorReason_GET_REPORTING_CURRENCY_FAILED                                   ErrorReason = 30076
+	ErrorReason_ADD_OPERATOR_CURRENCY_CONFIG_FAILED                             ErrorReason = 30077
+	ErrorReason_GET_OPERATOR_CURRENCY_CONFIG_FAILED                             ErrorReason = 30078
+	ErrorReason_SET_DEPOSIT_REWARD_SEQUENCES_FAILED                             ErrorReason = 30079
+	ErrorReason_ADD_USER_DEPOSIT_STATS_FAILED                                   ErrorReason = 30080
+	ErrorReason_DELETE_DEPOSIT_REWARD_SEQUENCE_FAILED                           ErrorReason = 30081
+	ErrorReason_INVALID_OPERATOR_MODE                                           ErrorReason = 30082
+	ErrorReason_INVALID_DEPOSIT_REWARD_CONFIG                                   ErrorReason = 30083
+	ErrorReason_INVALID_OPERATOR_CONTEXT                                        ErrorReason = 30084
+	ErrorReason_GET_OPERATOR_MIN_SEQUENCES_FAILED                               ErrorReason = 30085
+	ErrorReason_CREATE_OPERATOR_CURRENCY_CONFIG_FAILED                          ErrorReason = 30086
+	ErrorReason_UPDATE_OPERATOR_CURRENCY_CONFIG_FAILED                          ErrorReason = 30087
+	ErrorReason_GET_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED                      ErrorReason = 30088
+	ErrorReason_CREATE_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED                   ErrorReason = 30089
+	ErrorReason_UPDATE_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED                   ErrorReason = 30090
+	ErrorReason_LIST_OPERATOR_CURRENCY_CONFIGS_FAILED                           ErrorReason = 30091
+	ErrorReason_OPERATOR_DEDUCTION_ORDER_CONFIG_NOT_FOUND                       ErrorReason = 30092
+	ErrorReason_OPERATOR_CURRENCY_CONFIG_NOT_FOUND                              ErrorReason = 30093
+	ErrorReason_OPERATOR_CURRENCY_DEPOSIT_CONFIG_NOT_FOUND                      ErrorReason = 30094
+	ErrorReason_GET_OPERATOR_CURRENCY_DEPOSIT_CONFIG_FAILED                     ErrorReason = 30095
+	ErrorReason_GET_USER_DEPOSIT_STATS_FAILED                                   ErrorReason = 30096
+	ErrorReason_USER_DEPOSIT_STATS_NOT_FOUND                                    ErrorReason = 30097
+	ErrorReason_INVALID_OPERATOR_DEDUCTION_ORDER_CONFIG                         ErrorReason = 30098
+	ErrorReason_BONUS_TRANSFER_FAILED                                           ErrorReason = 30099
+	ErrorReason_INSUFFICIENT_BONUS_BALANCE                                      ErrorReason = 30100
+	ErrorReason_CREDIT_OWNERSHIP_MISMATCH                                       ErrorReason = 30101
+	ErrorReason_WITHDRAWAL_LIMIT_EXCEEDED                                       ErrorReason = 30102
+	ErrorReason_OPERATOR_WITHDRAW_ROLLBACK_EXISTS                               ErrorReason = 30103
+	ErrorReason_WALLET_RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND                    ErrorReason = 30104
+	ErrorReason_GET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED                   ErrorReason = 30105
+	ErrorReason_SET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED                   ErrorReason = 30106
+	ErrorReason_DELETE_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED                ErrorReason = 30107
+	ErrorReason_INVALID_GAMBLING_CONFIGLIMIT_TYPE                               ErrorReason = 30108
+	ErrorReason_CREATE_DELETE_TASK_FAILED                                       ErrorReason = 30109
+	ErrorReason_SCHEDULE_DELETE_TASK_FAILED                                     ErrorReason = 30110
+	ErrorReason_ADD_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED                   ErrorReason = 30111
+	ErrorReason_GET_USER_CREDITS_FAILED                                         ErrorReason = 30112
+	ErrorReason_LOCK_BALANCE_FAILED                                             ErrorReason = 30113
+	ErrorReason_LOCK_CREDIT_FAILED                                              ErrorReason = 30114
+	ErrorReason_GET_OPERATOR_CONTEXT_FAILED                                     ErrorReason = 30115
+	ErrorReason_USER_ID_REQUIRED                                                ErrorReason = 30116
+	ErrorReason_LOCK_GAMBLING_CONFIG_FAILED                                     ErrorReason = 30117
+	ErrorReason_LIST_GAMBLING_CONFIGS_FAILED                                    ErrorReason = 30118
+	ErrorReason_INVALID_TIME_RANGE                                              ErrorReason = 30119
+	ErrorReason_LIST_CUSTOMER_RECORDS_FAILED                                    ErrorReason = 30120
+	ErrorReason_GET_FICA_THRESHOLD_CONFIG_FAILED                                ErrorReason = 30121
+	ErrorReason_SET_FICA_THRESHOLD_CONFIG_FAILED                                ErrorReason = 30122
+	ErrorReason_INVALID_FICA_THRESHOLD_AMOUNT                                   ErrorReason = 30123
+	ErrorReason_INVALID_FICA_THRESHOLD_TRANSACTION_TYPE                         ErrorReason = 30124
+	ErrorReason_UPDATE_USER_DEPOSIT_STATS_FAILED                                ErrorReason = 30125
+	ErrorReason_LIST_TIME_RANGE_DEPOSIT_CREDITS_FAILED                          ErrorReason = 30126
 )
 
 // Enum value maps for ErrorReason.
@@ -176,6 +230,60 @@ var (
 		30070: "USER_INFO_NOT_FOUND_IN_CONTEXT",
 		30071: "OPERATOR_PERMISSION_DENIED",
 		30072: "USER_NOT_IN_OPERATOR_CONTEXT",
+		30073: "INVALID_TRANSFER_CURRENCY",
+		30074: "QUERY_OPERATOR_BALANCE_TRANSACTIONS_FAILED",
+		30075: "OPERATOR_BALANCE_NOT_FOUND",
+		30076: "GET_REPORTING_CURRENCY_FAILED",
+		30077: "ADD_OPERATOR_CURRENCY_CONFIG_FAILED",
+		30078: "GET_OPERATOR_CURRENCY_CONFIG_FAILED",
+		30079: "SET_DEPOSIT_REWARD_SEQUENCES_FAILED",
+		30080: "ADD_USER_DEPOSIT_STATS_FAILED",
+		30081: "DELETE_DEPOSIT_REWARD_SEQUENCE_FAILED",
+		30082: "INVALID_OPERATOR_MODE",
+		30083: "INVALID_DEPOSIT_REWARD_CONFIG",
+		30084: "INVALID_OPERATOR_CONTEXT",
+		30085: "GET_OPERATOR_MIN_SEQUENCES_FAILED",
+		30086: "CREATE_OPERATOR_CURRENCY_CONFIG_FAILED",
+		30087: "UPDATE_OPERATOR_CURRENCY_CONFIG_FAILED",
+		30088: "GET_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED",
+		30089: "CREATE_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED",
+		30090: "UPDATE_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED",
+		30091: "LIST_OPERATOR_CURRENCY_CONFIGS_FAILED",
+		30092: "OPERATOR_DEDUCTION_ORDER_CONFIG_NOT_FOUND",
+		30093: "OPERATOR_CURRENCY_CONFIG_NOT_FOUND",
+		30094: "OPERATOR_CURRENCY_DEPOSIT_CONFIG_NOT_FOUND",
+		30095: "GET_OPERATOR_CURRENCY_DEPOSIT_CONFIG_FAILED",
+		30096: "GET_USER_DEPOSIT_STATS_FAILED",
+		30097: "USER_DEPOSIT_STATS_NOT_FOUND",
+		30098: "INVALID_OPERATOR_DEDUCTION_ORDER_CONFIG",
+		30099: "BONUS_TRANSFER_FAILED",
+		30100: "INSUFFICIENT_BONUS_BALANCE",
+		30101: "CREDIT_OWNERSHIP_MISMATCH",
+		30102: "WITHDRAWAL_LIMIT_EXCEEDED",
+		30103: "OPERATOR_WITHDRAW_ROLLBACK_EXISTS",
+		30104: "WALLET_RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND",
+		30105: "GET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED",
+		30106: "SET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED",
+		30107: "DELETE_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED",
+		30108: "INVALID_GAMBLING_CONFIGLIMIT_TYPE",
+		30109: "CREATE_DELETE_TASK_FAILED",
+		30110: "SCHEDULE_DELETE_TASK_FAILED",
+		30111: "ADD_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED",
+		30112: "GET_USER_CREDITS_FAILED",
+		30113: "LOCK_BALANCE_FAILED",
+		30114: "LOCK_CREDIT_FAILED",
+		30115: "GET_OPERATOR_CONTEXT_FAILED",
+		30116: "USER_ID_REQUIRED",
+		30117: "LOCK_GAMBLING_CONFIG_FAILED",
+		30118: "LIST_GAMBLING_CONFIGS_FAILED",
+		30119: "INVALID_TIME_RANGE",
+		30120: "LIST_CUSTOMER_RECORDS_FAILED",
+		30121: "GET_FICA_THRESHOLD_CONFIG_FAILED",
+		30122: "SET_FICA_THRESHOLD_CONFIG_FAILED",
+		30123: "INVALID_FICA_THRESHOLD_AMOUNT",
+		30124: "INVALID_FICA_THRESHOLD_TRANSACTION_TYPE",
+		30125: "UPDATE_USER_DEPOSIT_STATS_FAILED",
+		30126: "LIST_TIME_RANGE_DEPOSIT_CREDITS_FAILED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                                     0,
@@ -251,6 +359,60 @@ var (
 		"USER_INFO_NOT_FOUND_IN_CONTEXT":                                  30070,
 		"OPERATOR_PERMISSION_DENIED":                                      30071,
 		"USER_NOT_IN_OPERATOR_CONTEXT":                                    30072,
+		"INVALID_TRANSFER_CURRENCY":                                       30073,
+		"QUERY_OPERATOR_BALANCE_TRANSACTIONS_FAILED":                      30074,
+		"OPERATOR_BALANCE_NOT_FOUND":                                      30075,
+		"GET_REPORTING_CURRENCY_FAILED":                                   30076,
+		"ADD_OPERATOR_CURRENCY_CONFIG_FAILED":                             30077,
+		"GET_OPERATOR_CURRENCY_CONFIG_FAILED":                             30078,
+		"SET_DEPOSIT_REWARD_SEQUENCES_FAILED":                             30079,
+		"ADD_USER_DEPOSIT_STATS_FAILED":                                   30080,
+		"DELETE_DEPOSIT_REWARD_SEQUENCE_FAILED":                           30081,
+		"INVALID_OPERATOR_MODE":                                           30082,
+		"INVALID_DEPOSIT_REWARD_CONFIG":                                   30083,
+		"INVALID_OPERATOR_CONTEXT":                                        30084,
+		"GET_OPERATOR_MIN_SEQUENCES_FAILED":                               30085,
+		"CREATE_OPERATOR_CURRENCY_CONFIG_FAILED":                          30086,
+		"UPDATE_OPERATOR_CURRENCY_CONFIG_FAILED":                          30087,
+		"GET_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED":                      30088,
+		"CREATE_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED":                   30089,
+		"UPDATE_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED":                   30090,
+		"LIST_OPERATOR_CURRENCY_CONFIGS_FAILED":                           30091,
+		"OPERATOR_DEDUCTION_ORDER_CONFIG_NOT_FOUND":                       30092,
+		"OPERATOR_CURRENCY_CONFIG_NOT_FOUND":                              30093,
+		"OPERATOR_CURRENCY_DEPOSIT_CONFIG_NOT_FOUND":                      30094,
+		"GET_OPERATOR_CURRENCY_DEPOSIT_CONFIG_FAILED":                     30095,
+		"GET_USER_DEPOSIT_STATS_FAILED":                                   30096,
+		"USER_DEPOSIT_STATS_NOT_FOUND":                                    30097,
+		"INVALID_OPERATOR_DEDUCTION_ORDER_CONFIG":                         30098,
+		"BONUS_TRANSFER_FAILED":                                           30099,
+		"INSUFFICIENT_BONUS_BALANCE":                                      30100,
+		"CREDIT_OWNERSHIP_MISMATCH":                                       30101,
+		"WITHDRAWAL_LIMIT_EXCEEDED":                                       30102,
+		"OPERATOR_WITHDRAW_ROLLBACK_EXISTS":                               30103,
+		"WALLET_RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND":                    30104,
+		"GET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED":                   30105,
+		"SET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED":                   30106,
+		"DELETE_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED":                30107,
+		"INVALID_GAMBLING_CONFIGLIMIT_TYPE":                               30108,
+		"CREATE_DELETE_TASK_FAILED":                                       30109,
+		"SCHEDULE_DELETE_TASK_FAILED":                                     30110,
+		"ADD_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED":                   30111,
+		"GET_USER_CREDITS_FAILED":                                         30112,
+		"LOCK_BALANCE_FAILED":                                             30113,
+		"LOCK_CREDIT_FAILED":                                              30114,
+		"GET_OPERATOR_CONTEXT_FAILED":                                     30115,
+		"USER_ID_REQUIRED":                                                30116,
+		"LOCK_GAMBLING_CONFIG_FAILED":                                     30117,
+		"LIST_GAMBLING_CONFIGS_FAILED":                                    30118,
+		"INVALID_TIME_RANGE":                                              30119,
+		"LIST_CUSTOMER_RECORDS_FAILED":                                    30120,
+		"GET_FICA_THRESHOLD_CONFIG_FAILED":                                30121,
+		"SET_FICA_THRESHOLD_CONFIG_FAILED":                                30122,
+		"INVALID_FICA_THRESHOLD_AMOUNT":                                   30123,
+		"INVALID_FICA_THRESHOLD_TRANSACTION_TYPE":                         30124,
+		"UPDATE_USER_DEPOSIT_STATS_FAILED":                                30125,
+		"LIST_TIME_RANGE_DEPOSIT_CREDITS_FAILED":                          30126,
 	}
 )
 
@@ -285,7 +447,7 @@ var File_wallet_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xf8\x15\n" +
+	"$wallet/service/v1/error_reason.proto\x12\x15api.wallet.service.v1\x1a\x13errors/errors.proto*\xfd&\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x0eUSER_NOT_FOUND\x10\xb1\xea\x01\x12\x13\n" +
@@ -359,7 +521,61 @@ const file_wallet_service_v1_error_reason_proto_rawDesc = "" +
 	"\x1eQUERY_OPERATOR_BALANCES_FAILED\x10\xf5\xea\x01\x12$\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\xf6\xea\x01\x12 \n" +
 	"\x1aOPERATOR_PERMISSION_DENIED\x10\xf7\xea\x01\x12\"\n" +
-	"\x1cUSER_NOT_IN_OPERATOR_CONTEXT\x10\xf8\xea\x01\x1a\x04\xa0E\xf4\x03BS\n" +
+	"\x1cUSER_NOT_IN_OPERATOR_CONTEXT\x10\xf8\xea\x01\x12\x1f\n" +
+	"\x19INVALID_TRANSFER_CURRENCY\x10\xf9\xea\x01\x120\n" +
+	"*QUERY_OPERATOR_BALANCE_TRANSACTIONS_FAILED\x10\xfa\xea\x01\x12 \n" +
+	"\x1aOPERATOR_BALANCE_NOT_FOUND\x10\xfb\xea\x01\x12#\n" +
+	"\x1dGET_REPORTING_CURRENCY_FAILED\x10\xfc\xea\x01\x12)\n" +
+	"#ADD_OPERATOR_CURRENCY_CONFIG_FAILED\x10\xfd\xea\x01\x12)\n" +
+	"#GET_OPERATOR_CURRENCY_CONFIG_FAILED\x10\xfe\xea\x01\x12)\n" +
+	"#SET_DEPOSIT_REWARD_SEQUENCES_FAILED\x10\xff\xea\x01\x12#\n" +
+	"\x1dADD_USER_DEPOSIT_STATS_FAILED\x10\x80\xeb\x01\x12+\n" +
+	"%DELETE_DEPOSIT_REWARD_SEQUENCE_FAILED\x10\x81\xeb\x01\x12\x1b\n" +
+	"\x15INVALID_OPERATOR_MODE\x10\x82\xeb\x01\x12#\n" +
+	"\x1dINVALID_DEPOSIT_REWARD_CONFIG\x10\x83\xeb\x01\x12\x1e\n" +
+	"\x18INVALID_OPERATOR_CONTEXT\x10\x84\xeb\x01\x12'\n" +
+	"!GET_OPERATOR_MIN_SEQUENCES_FAILED\x10\x85\xeb\x01\x12,\n" +
+	"&CREATE_OPERATOR_CURRENCY_CONFIG_FAILED\x10\x86\xeb\x01\x12,\n" +
+	"&UPDATE_OPERATOR_CURRENCY_CONFIG_FAILED\x10\x87\xeb\x01\x120\n" +
+	"*GET_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED\x10\x88\xeb\x01\x123\n" +
+	"-CREATE_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED\x10\x89\xeb\x01\x123\n" +
+	"-UPDATE_OPERATOR_DEDUCTION_ORDER_CONFIG_FAILED\x10\x8a\xeb\x01\x12+\n" +
+	"%LIST_OPERATOR_CURRENCY_CONFIGS_FAILED\x10\x8b\xeb\x01\x12/\n" +
+	")OPERATOR_DEDUCTION_ORDER_CONFIG_NOT_FOUND\x10\x8c\xeb\x01\x12(\n" +
+	"\"OPERATOR_CURRENCY_CONFIG_NOT_FOUND\x10\x8d\xeb\x01\x120\n" +
+	"*OPERATOR_CURRENCY_DEPOSIT_CONFIG_NOT_FOUND\x10\x8e\xeb\x01\x121\n" +
+	"+GET_OPERATOR_CURRENCY_DEPOSIT_CONFIG_FAILED\x10\x8f\xeb\x01\x12#\n" +
+	"\x1dGET_USER_DEPOSIT_STATS_FAILED\x10\x90\xeb\x01\x12\"\n" +
+	"\x1cUSER_DEPOSIT_STATS_NOT_FOUND\x10\x91\xeb\x01\x12-\n" +
+	"'INVALID_OPERATOR_DEDUCTION_ORDER_CONFIG\x10\x92\xeb\x01\x12\x1b\n" +
+	"\x15BONUS_TRANSFER_FAILED\x10\x93\xeb\x01\x12 \n" +
+	"\x1aINSUFFICIENT_BONUS_BALANCE\x10\x94\xeb\x01\x12\x1f\n" +
+	"\x19CREDIT_OWNERSHIP_MISMATCH\x10\x95\xeb\x01\x12\x1f\n" +
+	"\x19WITHDRAWAL_LIMIT_EXCEEDED\x10\x96\xeb\x01\x12'\n" +
+	"!OPERATOR_WITHDRAW_ROLLBACK_EXISTS\x10\x97\xeb\x01\x122\n" +
+	",WALLET_RESPONSIBLE_GAMBLING_CONFIG_NOT_FOUND\x10\x98\xeb\x01\x123\n" +
+	"-GET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED\x10\x99\xeb\x01\x123\n" +
+	"-SET_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED\x10\x9a\xeb\x01\x126\n" +
+	"0DELETE_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED\x10\x9b\xeb\x01\x12'\n" +
+	"!INVALID_GAMBLING_CONFIGLIMIT_TYPE\x10\x9c\xeb\x01\x12\x1f\n" +
+	"\x19CREATE_DELETE_TASK_FAILED\x10\x9d\xeb\x01\x12!\n" +
+	"\x1bSCHEDULE_DELETE_TASK_FAILED\x10\x9e\xeb\x01\x123\n" +
+	"-ADD_WALLET_RESPONSIBLE_GAMBLING_CONFIG_FAILED\x10\x9f\xeb\x01\x12\x1d\n" +
+	"\x17GET_USER_CREDITS_FAILED\x10\xa0\xeb\x01\x12\x19\n" +
+	"\x13LOCK_BALANCE_FAILED\x10\xa1\xeb\x01\x12\x18\n" +
+	"\x12LOCK_CREDIT_FAILED\x10\xa2\xeb\x01\x12!\n" +
+	"\x1bGET_OPERATOR_CONTEXT_FAILED\x10\xa3\xeb\x01\x12\x16\n" +
+	"\x10USER_ID_REQUIRED\x10\xa4\xeb\x01\x12!\n" +
+	"\x1bLOCK_GAMBLING_CONFIG_FAILED\x10\xa5\xeb\x01\x12\"\n" +
+	"\x1cLIST_GAMBLING_CONFIGS_FAILED\x10\xa6\xeb\x01\x12\x18\n" +
+	"\x12INVALID_TIME_RANGE\x10\xa7\xeb\x01\x12\"\n" +
+	"\x1cLIST_CUSTOMER_RECORDS_FAILED\x10\xa8\xeb\x01\x12&\n" +
+	" GET_FICA_THRESHOLD_CONFIG_FAILED\x10\xa9\xeb\x01\x12&\n" +
+	" SET_FICA_THRESHOLD_CONFIG_FAILED\x10\xaa\xeb\x01\x12#\n" +
+	"\x1dINVALID_FICA_THRESHOLD_AMOUNT\x10\xab\xeb\x01\x12-\n" +
+	"'INVALID_FICA_THRESHOLD_TRANSACTION_TYPE\x10\xac\xeb\x01\x12&\n" +
+	" UPDATE_USER_DEPOSIT_STATS_FAILED\x10\xad\xeb\x01\x12,\n" +
+	"&LIST_TIME_RANGE_DEPOSIT_CREDITS_FAILED\x10\xae\xeb\x01\x1a\x04\xa0E\xf4\x03BS\n" +
 	"\x15api.wallet.service.v1P\x01Z8github.com/infigaming-com/meepo-api/wallet/service/v1;v1b\x06proto3"
 
 var (

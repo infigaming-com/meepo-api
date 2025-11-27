@@ -25,6 +25,7 @@ type EventRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	SubscriptionId string                 `protobuf:"bytes,1,opt,name=subscription_id,json=subscriptionId,proto3" json:"subscription_id,omitempty"`
 	EventData      []byte                 `protobuf:"bytes,2,opt,name=event_data,json=eventData,proto3" json:"event_data,omitempty"`
+	MessageId      string                 `protobuf:"bytes,3,opt,name=message_id,json=messageId,proto3" json:"message_id,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -71,6 +72,13 @@ func (x *EventRequest) GetEventData() []byte {
 		return x.EventData
 	}
 	return nil
+}
+
+func (x *EventRequest) GetMessageId() string {
+	if x != nil {
+		return x.MessageId
+	}
+	return ""
 }
 
 type EventResponse struct {
@@ -120,6 +128,10 @@ type AddUserEvent struct {
 	Username           string                 `protobuf:"bytes,6,opt,name=username,proto3" json:"username,omitempty"`
 	Email              string                 `protobuf:"bytes,7,opt,name=email,proto3" json:"email,omitempty"`
 	Mobile             string                 `protobuf:"bytes,8,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	RoleId             int32                  `protobuf:"varint,9,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
+	RegistrationUrl    *string                `protobuf:"bytes,10,opt,name=registration_url,json=registrationUrl,proto3,oneof" json:"registration_url,omitempty"` // combined both campaign url and referral code
+	Country            string                 `protobuf:"bytes,11,opt,name=country,proto3" json:"country,omitempty"`
+	RegisteredAt       int64                  `protobuf:"varint,12,opt,name=registered_at,json=registeredAt,proto3" json:"registered_at,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -210,19 +222,48 @@ func (x *AddUserEvent) GetMobile() string {
 	return ""
 }
 
+func (x *AddUserEvent) GetRoleId() int32 {
+	if x != nil {
+		return x.RoleId
+	}
+	return 0
+}
+
+func (x *AddUserEvent) GetRegistrationUrl() string {
+	if x != nil && x.RegistrationUrl != nil {
+		return *x.RegistrationUrl
+	}
+	return ""
+}
+
+func (x *AddUserEvent) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *AddUserEvent) GetRegisteredAt() int64 {
+	if x != nil {
+		return x.RegisteredAt
+	}
+	return 0
+}
+
 // AddOperatorEvent is emitted when a operator is created.
 type AddOperatorEvent struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	RealOperatorId     int64                  `protobuf:"varint,1,opt,name=real_operator_id,json=realOperatorId,proto3" json:"real_operator_id,omitempty"`
-	OperatorId         int64                  `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	CompanyOperatorId  int64                  `protobuf:"varint,3,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
-	RetailerOperatorId int64                  `protobuf:"varint,4,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
-	SystemOperatorId   int64                  `protobuf:"varint,5,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
-	OperatorType       string                 `protobuf:"bytes,6,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
-	OperatorName       string                 `protobuf:"bytes,7,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	ReportingCurrency  string                 `protobuf:"bytes,8,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	RealOperatorId       int64                  `protobuf:"varint,1,opt,name=real_operator_id,json=realOperatorId,proto3" json:"real_operator_id,omitempty"`
+	OperatorId           int64                  `protobuf:"varint,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	CompanyOperatorId    int64                  `protobuf:"varint,3,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	RetailerOperatorId   int64                  `protobuf:"varint,4,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	SystemOperatorId     int64                  `protobuf:"varint,5,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
+	OperatorType         string                 `protobuf:"bytes,6,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
+	OperatorName         string                 `protobuf:"bytes,7,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	ReportingCurrency    string                 `protobuf:"bytes,8,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	SupportingCurrencies []string               `protobuf:"bytes,9,rep,name=supporting_currencies,json=supportingCurrencies,proto3" json:"supporting_currencies,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *AddOperatorEvent) Reset() {
@@ -311,16 +352,25 @@ func (x *AddOperatorEvent) GetReportingCurrency() string {
 	return ""
 }
 
+func (x *AddOperatorEvent) GetSupportingCurrencies() []string {
+	if x != nil {
+		return x.SupportingCurrencies
+	}
+	return nil
+}
+
 var File_user_service_v1_user_event_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_user_event_proto_rawDesc = "" +
 	"\n" +
-	" user/service/v1/user_event.proto\x12\x13api.user.service.v1\"V\n" +
+	" user/service/v1/user_event.proto\x12\x13api.user.service.v1\"u\n" +
 	"\fEventRequest\x12'\n" +
 	"\x0fsubscription_id\x18\x01 \x01(\tR\x0esubscriptionId\x12\x1d\n" +
 	"\n" +
-	"event_data\x18\x02 \x01(\fR\teventData\"\x0f\n" +
-	"\rEventResponse\"\xa2\x02\n" +
+	"event_data\x18\x02 \x01(\fR\teventData\x12\x1d\n" +
+	"\n" +
+	"message_id\x18\x03 \x01(\tR\tmessageId\"\x0f\n" +
+	"\rEventResponse\"\xbf\x03\n" +
 	"\fAddUserEvent\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
@@ -330,7 +380,13 @@ const file_user_service_v1_user_event_proto_rawDesc = "" +
 	"\x12system_operator_id\x18\x05 \x01(\x03R\x10systemOperatorId\x12\x1a\n" +
 	"\busername\x18\x06 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\a \x01(\tR\x05email\x12\x16\n" +
-	"\x06mobile\x18\b \x01(\tR\x06mobile\"\xe6\x02\n" +
+	"\x06mobile\x18\b \x01(\tR\x06mobile\x12\x17\n" +
+	"\arole_id\x18\t \x01(\x05R\x06roleId\x12.\n" +
+	"\x10registration_url\x18\n" +
+	" \x01(\tH\x00R\x0fregistrationUrl\x88\x01\x01\x12\x18\n" +
+	"\acountry\x18\v \x01(\tR\acountry\x12#\n" +
+	"\rregistered_at\x18\f \x01(\x03R\fregisteredAtB\x13\n" +
+	"\x11_registration_url\"\x9b\x03\n" +
 	"\x10AddOperatorEvent\x12(\n" +
 	"\x10real_operator_id\x18\x01 \x01(\x03R\x0erealOperatorId\x12\x1f\n" +
 	"\voperator_id\x18\x02 \x01(\x03R\n" +
@@ -340,7 +396,8 @@ const file_user_service_v1_user_event_proto_rawDesc = "" +
 	"\x12system_operator_id\x18\x05 \x01(\x03R\x10systemOperatorId\x12#\n" +
 	"\roperator_type\x18\x06 \x01(\tR\foperatorType\x12#\n" +
 	"\roperator_name\x18\a \x01(\tR\foperatorName\x12-\n" +
-	"\x12reporting_currency\x18\b \x01(\tR\x11reportingCurrency2]\n" +
+	"\x12reporting_currency\x18\b \x01(\tR\x11reportingCurrency\x123\n" +
+	"\x15supporting_currencies\x18\t \x03(\tR\x14supportingCurrencies2]\n" +
 	"\tUserEvent\x12P\n" +
 	"\x05Event\x12!.api.user.service.v1.EventRequest\x1a\".api.user.service.v1.EventResponse\"\x00BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
@@ -379,6 +436,7 @@ func file_user_service_v1_user_event_proto_init() {
 	if File_user_service_v1_user_event_proto != nil {
 		return
 	}
+	file_user_service_v1_user_event_proto_msgTypes[2].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

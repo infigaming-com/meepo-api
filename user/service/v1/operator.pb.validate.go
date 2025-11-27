@@ -242,3 +242,240 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = AddWhiteLabelOperatorResponseValidationError{}
+
+// Validate checks the field values on PreLaunchCheckRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *PreLaunchCheckRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PreLaunchCheckRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// PreLaunchCheckRequestMultiError, or nil if none found.
+func (m *PreLaunchCheckRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PreLaunchCheckRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, PreLaunchCheckRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, PreLaunchCheckRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return PreLaunchCheckRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return PreLaunchCheckRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// PreLaunchCheckRequestMultiError is an error wrapping multiple validation
+// errors returned by PreLaunchCheckRequest.ValidateAll() if the designated
+// constraints aren't met.
+type PreLaunchCheckRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PreLaunchCheckRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PreLaunchCheckRequestMultiError) AllErrors() []error { return m }
+
+// PreLaunchCheckRequestValidationError is the validation error returned by
+// PreLaunchCheckRequest.Validate if the designated constraints aren't met.
+type PreLaunchCheckRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PreLaunchCheckRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PreLaunchCheckRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PreLaunchCheckRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PreLaunchCheckRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PreLaunchCheckRequestValidationError) ErrorName() string {
+	return "PreLaunchCheckRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PreLaunchCheckRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPreLaunchCheckRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PreLaunchCheckRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PreLaunchCheckRequestValidationError{}
+
+// Validate checks the field values on PreLaunchCheckResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *PreLaunchCheckResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on PreLaunchCheckResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// PreLaunchCheckResponseMultiError, or nil if none found.
+func (m *PreLaunchCheckResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *PreLaunchCheckResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Balance
+
+	// no validation rules for Threshhold
+
+	if len(errors) > 0 {
+		return PreLaunchCheckResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// PreLaunchCheckResponseMultiError is an error wrapping multiple validation
+// errors returned by PreLaunchCheckResponse.ValidateAll() if the designated
+// constraints aren't met.
+type PreLaunchCheckResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PreLaunchCheckResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PreLaunchCheckResponseMultiError) AllErrors() []error { return m }
+
+// PreLaunchCheckResponseValidationError is the validation error returned by
+// PreLaunchCheckResponse.Validate if the designated constraints aren't met.
+type PreLaunchCheckResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PreLaunchCheckResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PreLaunchCheckResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PreLaunchCheckResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PreLaunchCheckResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PreLaunchCheckResponseValidationError) ErrorName() string {
+	return "PreLaunchCheckResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e PreLaunchCheckResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPreLaunchCheckResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PreLaunchCheckResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PreLaunchCheckResponseValidationError{}

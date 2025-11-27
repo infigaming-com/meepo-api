@@ -1,0 +1,154 @@
+syntax = "proto3";
+
+package api.backoffice.service.v1;
+
+import "google/api/annotations.proto";
+import "bcpay/service/v1/bcpay.proto";
+import "google/protobuf/struct.proto";
+// import "common/common.proto";
+
+option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.backoffice.service.v1";
+
+// BackofficeBcpay service
+// Provides methods for backoffice bcpay management
+service BackofficeBcpay {
+  
+	rpc GetMerchant(GetMerchantRequest) returns (bcpay.service.v1.GetMerchantResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/bcpay/merchant/get"
+      body: "*"
+    };
+  }
+
+	rpc CreateMerchant(CreateMerchantRequest) returns (bcpay.service.v1.CreateMerchantResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/bcpay/merchant/add"
+      body: "*"
+    };
+  }
+
+	rpc BankAccountList(BankAccountListRequest) returns (bcpay.service.v1.BankAccountListResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/bcpay/bankaccount/list"
+      body: "*"
+    };
+	}
+
+	rpc AddBankAccount(AddBankAccountRequest) returns (bcpay.service.v1.AddBankAccountResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/bcpay/bankaccount/add"
+      body: "*"
+    };
+	}
+
+	rpc UpdateBankAccount(UpdateBankAccountRequest) returns (bcpay.service.v1.UpdateBankAccountResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/bcpay/bankaccount/update"
+      body: "*"
+    };
+	}
+
+	rpc DeleteBankAccount(bcpay.service.v1.DeleteBankAccountRequest) returns (bcpay.service.v1.DeleteBankAccountResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/bcpay/bankaccount/delete"
+      body: "*"
+    };
+	}
+
+	rpc TransactionList(TransactionListRequest) returns (bcpay.service.v1.TransactionListResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/bcpay/transaction/list"
+      body: "*"
+    };
+	}
+
+	rpc AuditTransaction(AuditTransactionRequest) returns (bcpay.service.v1.AuditTransactionResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/bcpay/transaction/add"
+      body: "*"
+    };
+	}
+
+	rpc AddNoteToTransaction(bcpay.service.v1.AddNoteToTransactionRequest) returns (bcpay.service.v1.AddNoteToTransactionResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/bcpay/transaction/note/update"
+      body: "*"
+    };
+  }
+
+	rpc GetBankSchema(bcpay.service.v1.GetBankSchemaRequest) returns (bcpay.service.v1.GetBankSchemaResponse) {
+    option (google.api.http) = {
+      post: "/v1/backoffice/bcpay/bankinfoschema/get"
+      body: "*"
+    };
+	}
+}
+
+
+message GetMerchantRequest {
+}
+
+message CreateMerchantRequest {
+	string name = 1;
+}
+
+message BankAccountListRequest {
+  // Page number to retrieve (1-based)
+  int32 page = 1;
+  // Number of items per page
+  int32 page_size = 2;
+	optional string currency = 3;
+	optional string bank_account = 4;
+	optional string bank_account_firstname = 5;
+	optional string bank_account_lastname = 6;
+	optional string card_id = 7;
+	optional bool enabled = 8;
+}
+
+message AddBankAccountRequest {
+	string currency = 1;
+	string country = 2;
+	string max_amount = 3;
+	string max_amount_per_trans = 4;
+	int32 max_trans_limit = 5;
+	int32 priority = 6;
+  google.protobuf.Struct bank_info = 7;
+}
+
+message UpdateBankAccountRequest {
+	int64 id = 1;
+	optional string currency = 2;
+	optional string country = 3;
+	optional string max_amount = 4;
+	optional string max_amount_per_trans = 5;
+	optional int32 max_trans_limit = 6;
+	optional int32 priority = 7;
+	optional bool enabled = 8;
+  google.protobuf.Struct bank_info = 9;
+}
+
+message TransactionListRequest {
+  // Page number to retrieve (1-based)
+  int32 page = 1;
+  // Number of items per page
+  int32 page_size = 2;
+  // type "payin" "payout"
+	optional string type = 3;
+	// status "pending" "approved" "declined"
+	optional string status = 4;
+	optional int64 transaction_id = 5;
+	optional string deposit_bank_account_firstname = 6;
+	optional string deposit_bank_account_lastname = 7;
+	optional int64 user_id = 8;
+	optional string user_name = 9;
+	optional string user_bank_account_firstname = 10;
+	optional string user_bank_account_lastname = 11;
+}
+
+message AuditTransactionRequest {
+	int64 transaction_id = 1;
+	// audit a transaction "approved" or "delined"
+	string audit = 2;
+}

@@ -19,7 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Websocket_PushMessage_FullMethodName = "/api.websocket.service.v1.Websocket/PushMessage"
+	Websocket_PushClientMessage_FullMethodName   = "/api.websocket.service.v1.Websocket/PushClientMessage"
+	Websocket_PushUserMessage_FullMethodName     = "/api.websocket.service.v1.Websocket/PushUserMessage"
+	Websocket_PushOperatorMessage_FullMethodName = "/api.websocket.service.v1.Websocket/PushOperatorMessage"
 )
 
 // WebsocketClient is the client API for Websocket service.
@@ -28,7 +30,9 @@ const (
 //
 // User service provides authentication and user management functionality.
 type WebsocketClient interface {
-	PushMessage(ctx context.Context, in *PushMessageRequest, opts ...grpc.CallOption) (*PushMessageResponse, error)
+	PushClientMessage(ctx context.Context, in *PushClientMessageRequest, opts ...grpc.CallOption) (*PushClientMessageResponse, error)
+	PushUserMessage(ctx context.Context, in *PushUserMessageRequest, opts ...grpc.CallOption) (*PushUserMessageResponse, error)
+	PushOperatorMessage(ctx context.Context, in *PushOperatorMessageRequest, opts ...grpc.CallOption) (*PushOperatorMessageResponse, error)
 }
 
 type websocketClient struct {
@@ -39,10 +43,30 @@ func NewWebsocketClient(cc grpc.ClientConnInterface) WebsocketClient {
 	return &websocketClient{cc}
 }
 
-func (c *websocketClient) PushMessage(ctx context.Context, in *PushMessageRequest, opts ...grpc.CallOption) (*PushMessageResponse, error) {
+func (c *websocketClient) PushClientMessage(ctx context.Context, in *PushClientMessageRequest, opts ...grpc.CallOption) (*PushClientMessageResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(PushMessageResponse)
-	err := c.cc.Invoke(ctx, Websocket_PushMessage_FullMethodName, in, out, cOpts...)
+	out := new(PushClientMessageResponse)
+	err := c.cc.Invoke(ctx, Websocket_PushClientMessage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *websocketClient) PushUserMessage(ctx context.Context, in *PushUserMessageRequest, opts ...grpc.CallOption) (*PushUserMessageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PushUserMessageResponse)
+	err := c.cc.Invoke(ctx, Websocket_PushUserMessage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *websocketClient) PushOperatorMessage(ctx context.Context, in *PushOperatorMessageRequest, opts ...grpc.CallOption) (*PushOperatorMessageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PushOperatorMessageResponse)
+	err := c.cc.Invoke(ctx, Websocket_PushOperatorMessage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +79,9 @@ func (c *websocketClient) PushMessage(ctx context.Context, in *PushMessageReques
 //
 // User service provides authentication and user management functionality.
 type WebsocketServer interface {
-	PushMessage(context.Context, *PushMessageRequest) (*PushMessageResponse, error)
+	PushClientMessage(context.Context, *PushClientMessageRequest) (*PushClientMessageResponse, error)
+	PushUserMessage(context.Context, *PushUserMessageRequest) (*PushUserMessageResponse, error)
+	PushOperatorMessage(context.Context, *PushOperatorMessageRequest) (*PushOperatorMessageResponse, error)
 	mustEmbedUnimplementedWebsocketServer()
 }
 
@@ -66,8 +92,14 @@ type WebsocketServer interface {
 // pointer dereference when methods are called.
 type UnimplementedWebsocketServer struct{}
 
-func (UnimplementedWebsocketServer) PushMessage(context.Context, *PushMessageRequest) (*PushMessageResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PushMessage not implemented")
+func (UnimplementedWebsocketServer) PushClientMessage(context.Context, *PushClientMessageRequest) (*PushClientMessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PushClientMessage not implemented")
+}
+func (UnimplementedWebsocketServer) PushUserMessage(context.Context, *PushUserMessageRequest) (*PushUserMessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PushUserMessage not implemented")
+}
+func (UnimplementedWebsocketServer) PushOperatorMessage(context.Context, *PushOperatorMessageRequest) (*PushOperatorMessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PushOperatorMessage not implemented")
 }
 func (UnimplementedWebsocketServer) mustEmbedUnimplementedWebsocketServer() {}
 func (UnimplementedWebsocketServer) testEmbeddedByValue()                   {}
@@ -90,20 +122,56 @@ func RegisterWebsocketServer(s grpc.ServiceRegistrar, srv WebsocketServer) {
 	s.RegisterService(&Websocket_ServiceDesc, srv)
 }
 
-func _Websocket_PushMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PushMessageRequest)
+func _Websocket_PushClientMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PushClientMessageRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WebsocketServer).PushMessage(ctx, in)
+		return srv.(WebsocketServer).PushClientMessage(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Websocket_PushMessage_FullMethodName,
+		FullMethod: Websocket_PushClientMessage_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WebsocketServer).PushMessage(ctx, req.(*PushMessageRequest))
+		return srv.(WebsocketServer).PushClientMessage(ctx, req.(*PushClientMessageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Websocket_PushUserMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PushUserMessageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WebsocketServer).PushUserMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Websocket_PushUserMessage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WebsocketServer).PushUserMessage(ctx, req.(*PushUserMessageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Websocket_PushOperatorMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PushOperatorMessageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WebsocketServer).PushOperatorMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Websocket_PushOperatorMessage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WebsocketServer).PushOperatorMessage(ctx, req.(*PushOperatorMessageRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -116,8 +184,16 @@ var Websocket_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*WebsocketServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "PushMessage",
-			Handler:    _Websocket_PushMessage_Handler,
+			MethodName: "PushClientMessage",
+			Handler:    _Websocket_PushClientMessage_Handler,
+		},
+		{
+			MethodName: "PushUserMessage",
+			Handler:    _Websocket_PushUserMessage_Handler,
+		},
+		{
+			MethodName: "PushOperatorMessage",
+			Handler:    _Websocket_PushOperatorMessage_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

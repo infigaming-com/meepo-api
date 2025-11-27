@@ -5,13 +5,14 @@ package api.backoffice.service.v1;
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "common/common.proto";
+import "wallet/service/v1/wallet.proto";
 
 option go_package = "github.com/infigaming-com/meepo-api/backoffice/service/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.backoffice.service.v1";
 
 service BackofficeWallet {
-	rpc GetWallets(GetWalletsRequest) returns (GetWalletsResponse) {
+	rpc GetWallets(GetWalletsRequest) returns (wallet.service.v1.GetWalletsResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/wallet/get"
             body: "*"
@@ -50,20 +51,21 @@ service BackofficeWallet {
         };
 	};
 
-	rpc ListWalletCurrencies(ListWalletCurrenciesRequest) returns (ListWalletCurrenciesResponse) {
+	// ListWalletCurrencies call ListCurrencies in wallet service with aggregated and parent fields
+	rpc ListWalletCurrencies(ListWalletCurrenciesRequest) returns (wallet.service.v1.ListCurrenciesResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/wallet/currencies/list"
             body: "*"
         };
     }
-	rpc UpdateWalletCurrency(UpdateWalletCurrencyRequest) returns (UpdateWalletCurrencyResponse) {
+	rpc UpdateWalletCurrency(UpdateWalletCurrencyRequest) returns (wallet.service.v1.UpdateOperatorCurrencyResponse) {
         option (google.api.http) = {
             post: "/v1/backoffice/wallet/currencies/update"
             body: "*"
         };
     }
 	// ListOperatorBalances lists all operator balances which belong to the backoffice operator
-	rpc ListOperatorBalances(ListOperatorBalancesRequest) returns (ListOperatorBalancesResponse) {
+	rpc ListOperatorBalances(ListOperatorBalancesRequest) returns (wallet.service.v1.ListBottomOperatorBalancesResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/operator/balances/list"
 			body: "*"
@@ -76,38 +78,200 @@ service BackofficeWallet {
 			body: "*"
 		};
 	}
-	// OperatorTransfer transfers cash from one operator to its company operator
+	// OperatorTransfer transfers cash from one operator to its company operator, only allow USD, USDT, USDC, 1:1 exchange
 	rpc OperatorTransfer(OperatorTransferRequest) returns (OperatorTransferResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/operator/transfer"
 			body: "*"
 		};
 	}
-	// OperatorSwap swaps cash between two balances of the same operator
+	// OperatorSwap swaps cash between two balances of the same company's operator
 	rpc OperatorSwap(OperatorSwapRequest) returns (OperatorSwapResponse) {
 		option (google.api.http) = {
 			post: "/v1/backoffice/wallet/operator/swap"
 			body: "*"
 		};
 	}
-	// OperatorBalanceFreeze freezes cash of an operator
+	// OperatorFreeze freezes cash of an operator
 	rpc OperatorBalanceFreeze(OperatorBalanceFreezeRequest) returns (OperatorBalanceFreezeResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/wallet/operator/freeze"
+			post: "/v1/backoffice/wallet/operator/balance-freeze"
 			body: "*"
 		};
 	}
 	// OperatorRollback rolls back frozen cash of an operator
 	rpc OperatorBalanceRollback(OperatorBalanceRollbackRequest) returns (OperatorBalanceRollbackResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/wallet/operator/rollback"
+			post: "/v1/backoffice/wallet/operator/balance-rollback"
 			body: "*"
 		};
 	}
 	// OperatorSettle settles frozen cash of an operator
 	rpc OperatorBalanceSettle(OperatorBalanceSettleRequest) returns (OperatorBalanceSettleResponse) {
 		option (google.api.http) = {
-			post: "/v1/backoffice/wallet/operator/settle"
+			post: "/v1/backoffice/wallet/operator/balance-settle"
+			body: "*"
+		};
+	}
+	// ListOperatorBalanceTransactions lists the balance transactions of an operator
+	rpc ListOperatorBalanceTransactions(ListOperatorBalanceTransactionsRequest) returns (ListOperatorBalanceTransactionsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/transactions/list"
+			body: "*"
+		};
+	}
+	// UpdateOperatorBalance updates an operator balance， now only support update the enabled status
+	rpc UpdateOperatorBalance(UpdateOperatorBalanceRequest) returns (UpdateOperatorBalanceResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/balance/update"
+			body: "*"
+		};
+	}
+	// GetOperatorBalance gets the balances of an operator
+	rpc GetOperatorBalance(GetOperatorBalanceRequest) returns (wallet.service.v1.GetOperatorBalanceResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/operator/balance/get"
+			body: "*"
+		};
+	}
+	// SetDepositRewardSequences sets the deposit reward sequences of a operator currency config
+	rpc SetDepositRewardSequences(SetDepositRewardSequencesRequest) returns (wallet.service.v1.SetDepositRewardSequencesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/deposit-reward/sequences/set"
+			body: "*"
+		};
+	}
+	// DeleteDepositRewardSequences deletes a deposit reward sequence of a operator currency config
+	rpc DeleteDepositRewardSequences(DeleteDepositRewardSequencesRequest) returns (wallet.service.v1.DeleteDepositRewardSequencesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/deposit-reward/sequences/delete"
+			body: "*"
+		};
+	}
+	// GetDepositRewardConfig returns the default and custom deposit reward config based on currency and operator context
+	rpc GetDepositRewardConfig(GetDepositRewardConfigRequest) returns (wallet.service.v1.GetDepositRewardConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/deposit-reward/config/get"
+			body: "*"
+		};
+	}
+
+	// GetGamificationCurrencyConfig returns the currency config and the deduction order config based on currency and operator context
+	rpc GetGamificationCurrencyConfig(GetGamificationCurrencyConfigRequest) returns (wallet.service.v1.GetGamificationCurrencyConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/gamification/get"
+			body: "*"
+		};
+	}
+
+	// UpdateOperatorCurrencyConfig updates the config of a operator and its currency
+	rpc UpdateOperatorCurrencyConfig(UpdateOperatorCurrencyConfigRequest) returns (wallet.service.v1.UpdateOperatorCurrencyConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/currency/config/update"
+			body: "*"
+		};
+	}
+
+	// UpdateDeductionOrder updates the deduction order config based on operator context
+	rpc UpdateDeductionOrder(UpdateDeductionOrderRequest) returns (wallet.service.v1.UpdateDeductionOrderResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/deduction-order/update"
+			body: "*"
+		};
+	}
+
+	// DeleteWalletResponsibleGamblingConfig deletes gambling config for a user's currency
+	rpc DeleteWalletResponsibleGamblingConfig(DeleteWalletResponsibleGamblingConfigRequest) returns (wallet.service.v1.DeleteResponsibleGamblingConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/responsible-gambling/config/delete"
+			body: "*"
+		};
+	}
+
+	// ListWalletResponsibleGamblingConfigs lists gambling configs for a user with all currencies
+	rpc ListWalletResponsibleGamblingConfigs(ListWalletResponsibleGamblingConfigsRequest) returns (wallet.service.v1.ListResponsibleGamblingConfigsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/responsible-gambling/configs/list"
+			body: "*"
+		};
+	}
+
+	// ListCustomerRecords lists customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
+	rpc ListCustomerRecords(ListCustomerRecordsRequest) returns (wallet.service.v1.ListCustomerRecordsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/customer-records/list"
+			body: "*"
+		};
+	}
+
+	// ExportCustomerRecords creates a task to exports customer records for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win and manual credit(this is not supported yet))
+	rpc ExportCustomerRecords(ExportCustomerRecordsRequest) returns (wallet.service.v1.ExportCustomerRecordsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/customer-records/export"
+			body: "*"
+		};
+	}
+
+	// SetFICAThresholdConfig sets the FICA threshold config for an operator and its specific currency
+	rpc SetFICAThresholdConfig(SetFICAThresholdConfigRequest) returns (wallet.service.v1.SetFICAThresholdConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/fica/config/set"
+			body: "*"
+		};
+	}
+
+	// GetFICAThresholdConfig gets the FICA threshold config for an operator of all currencies
+	rpc GetFICAThresholdConfig(GetFICAThresholdConfigRequest) returns (wallet.service.v1.GetFICAThresholdConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/fica/config/get"
+			body: "*"
+		};
+	}
+
+	// ListFICAThresholdTransactions lists the threshold transactions (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward) for a currency
+	rpc ListFICAThresholdTransactions(ListFICAThresholdTransactionsRequest) returns (wallet.service.v1.ListFICAThresholdTransactionsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/fica/transactions/list"
+			body: "*"
+		};
+	}
+
+	// ExportFICAThresholdTransactions creates a task to exports FICA threshold transactions for all users (with payment_deposit, payment_withdraw_freeze, game_bet, game_win, deposit_reward)
+	rpc ExportFICAThresholdTransactions(ExportFICAThresholdTransactionsRequest) returns (wallet.service.v1.ExportFICAThresholdTransactionsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/fica/transactions/export"
+			body: "*"
+		};
+	}
+
+	// ManualCredit
+	rpc ManualCredit(ManualCreditRequest) returns (wallet.service.v1.CreditResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/manual/credit"
+			body: "*"
+		};
+	}
+
+	// ManualDebit
+	rpc ManualDebit(ManualDebitRequest) returns (wallet.service.v1.DebitResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/manual/debit"
+			body: "*"
+		};
+	}
+
+	// ListManualJournalEntries lists manual journal entries for all users
+	rpc ListManualJournalEntries(ListManualJournalEntriesRequest) returns (wallet.service.v1.ListManualJournalEntriesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/manual/journal-entries/list"
+			body: "*"
+		};
+	}
+
+	// ExportManualJournalEntries creates a task to exports manual journal entries for all users
+	rpc ExportManualJournalEntries(ExportManualJournalEntriesRequest) returns (wallet.service.v1.ExportManualJournalEntriesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/wallet/manual/journal-entries/export"
 			body: "*"
 		};
 	}
@@ -116,44 +280,6 @@ service BackofficeWallet {
 message GetWalletsRequest {
 	int64 user_id = 1;
 	repeated string currencies = 2;
-}
-
-message GetWalletsResponse {
-	message TotalAssets {
-		string balance = 1;
-		string deposit = 2;
-		string withdraw = 3;
-		string deposit_minus_withdraw = 4;
-		string valid_turnover = 5;
-	}
-	message Credit {
-		google.protobuf.Timestamp created_at = 1;
-		int64 transaction_id = 2;
-		string cash = 3;
-		string original_cash = 4;
-		string bonus = 5;
-		string original_bonus = 6;
-		string turnover_threshold = 7;
-		string turnover = 8;
-		string cash_turnover = 9;
-		string bonus_turnover = 10;
-		string turnover_multiplier = 11;
-	}
-	message Wallet {
-		string currency = 1;
-		string cash = 2;
-		string original_cash = 3;
-		string bonus = 4;
-		string original_bonus = 5;
-		string turnover_threshold = 6;
-		string turnover = 7;
-		string cash_turnover = 8;
-		string bonus_turnover = 9;
-		string turnover_multiplier = 10;
-		repeated Credit credits = 11;
-	}
-	TotalAssets total_assets = 1;
-	repeated Wallet wallets = 2;
 }
 
 message GetWalletCreditsRequest {
@@ -296,13 +422,11 @@ message ListWalletCurrenciesRequest {
 	repeated string currencies = 1;
 	optional bool enabled = 2;
 	optional bool hidden = 3;
-}
-
-message ListWalletCurrenciesResponse {
-	repeated WalletCurrency currencies = 1;
-	int32 total = 2;
-	int32 total_enabled = 3;
-	int32 total_hidden = 4;
+	optional bool aggregated_enabled = 4;
+	optional bool aggregated_hidden = 5;
+	optional bool parent_enabled = 6;
+	optional bool parent_hidden = 7;
+	api.common.OperatorContext target_operator_context = 8;
 }
 
 message UpdateWalletCurrencyRequest {
@@ -314,39 +438,16 @@ message UpdateWalletCurrencyRequest {
 	optional string icon = 6;
 	optional int32 decimal_places = 7;
 	optional int32 currency_decimal_places = 8;
-}
-
-message UpdateWalletCurrencyResponse {
-	WalletCurrency currency = 1;
+	optional string thousands_separator = 9; // placeholder for future use
+	optional string decimal_separator = 10; // placeholder for future use
+	api.common.OperatorContext target_operator_context = 11;
 }
 
 message ListOperatorBalancesRequest {
-	repeated int64 retailer_operator_ids = 1;
-	repeated int64 company_operator_ids = 2;
-	repeated int64 operator_ids = 3;
-	repeated string currencies = 4;
-	optional int32 page = 5; // default 1
-	optional int32 page_size = 6; // default 20
-}
-
-message OperatorBalance {
-	api.common.OperatorContext operator_context = 1;
-	string retailer_operator_name = 2;
-	string company_operator_name = 3;
-	string operator_name = 4;
-	string currency = 5;
-	string protocol = 6; // placeholder for future use
-	string cash = 7;
-	string cash_usd = 8;
-	bool enabled = 9;
-}
-
-message ListOperatorBalancesResponse {
-	repeated OperatorBalance operator_balances = 1;
-	string total_cash_usd = 2;
-	int32 total = 4;
-	int32 page = 5;
-	int32 page_size = 6;
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	repeated string currencies = 2;
+	optional int32 page = 3; // default 1
+	optional int32 page_size = 4; // default 20
 }
 
 message GetExchangeRatesRequest {
@@ -361,9 +462,7 @@ message GetExchangeRatesResponse {
 message OperatorTransferRequest {
 	api.common.OperatorContext operator_context = 1;
 	string currency = 2;
-	string target_currency = 3;
-	string exchange_rate = 4; // exchange rate of the currency to the target currency
-	string cash_amount = 5;
+	string cash_amount = 3;
 }
 
 message OperatorTransferResponse {
@@ -375,10 +474,10 @@ message OperatorTransferResponse {
 
 message OperatorSwapRequest {
 	api.common.OperatorContext operator_context = 1;
-	string currency = 2;
-	string target_currency = 3;
-	string exchange_rate = 4;
-	string cash_amount = 5;
+	api.common.OperatorContext target_operator_context = 2;
+	string currency = 3;
+	string target_currency = 4;
+	string cash_amount = 5; // cash amount of the operator's balance currency
 }
 
 message OperatorSwapResponse {
@@ -420,7 +519,7 @@ message OperatorBalanceSettleRequest {
 	api.common.OperatorContext operator_context = 1;
 	string currency = 2;
 	int64 original_transaction_id = 3;
-	string memo = 5;
+	string memo = 4;
 }
 
 message OperatorBalanceSettleResponse {
@@ -429,4 +528,198 @@ message OperatorBalanceSettleResponse {
 	string cash_amount = 3;
 	string cash_amount_usd = 4;
 	string cash_amount_reporting_currency = 5;
+}
+
+message ListOperatorBalanceTransactionsRequest {
+	api.common.OperatorContextFilters operator_context_filters = 1;
+	repeated string settlement_currencies = 2;
+	repeated string transaction_types = 3;
+	optional int64 transaction_id = 4;
+	string target_operator_type = 5;
+	optional google.protobuf.Timestamp start_time = 6;
+	optional google.protobuf.Timestamp end_time = 7;
+	optional int32 page = 8;
+	optional int32 page_size = 9;
+}
+
+message OperatorBalanceTransaction {
+	int64 transaction_id = 1;
+	api.common.OperatorContext operator_context = 2;
+	string retailer_operator_name = 3;
+	string company_operator_name = 4;
+	string operator_name = 5;
+	string settlement_currency = 6;
+	string before_balance = 7;
+	string after_balance = 8;
+	string cash_amount = 9;
+	string transaction_type = 10;
+	string status = 11;
+	string memo = 12;
+	string fee_amount = 13;
+	google.protobuf.Timestamp created_at = 14;
+	google.protobuf.Timestamp updated_at = 15;
+}
+
+message ListOperatorBalanceTransactionsResponse {
+	repeated OperatorBalanceTransaction transactions = 1;
+	int32 total = 2;
+	int32 page = 3;
+	int32 page_size = 4;
+}
+
+message UpdateOperatorBalanceRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string currency = 2;
+	bool enabled = 3;
+}
+
+message UpdateOperatorBalanceResponse {
+	bool enabled = 1;
+}
+
+message GetOperatorBalanceRequest {
+	api.common.OperatorContext operator_context = 1;
+}
+
+message SetDepositRewardSequencesRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string currency = 2;
+	optional bool follow_parent = 3;
+	optional bool welcome_reward_enabled = 4;
+	optional bool daily_reward_enabled = 5;
+	repeated wallet.service.v1.RewardSequence welcome_reward_sequences = 6;
+	repeated wallet.service.v1.RewardSequence daily_reward_sequences = 7;
+}
+
+message DeleteDepositRewardSequencesRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string currency = 2;
+	repeated wallet.service.v1.RewardSequence welcome_reward_sequences = 3; // the sequences to delete
+	repeated wallet.service.v1.RewardSequence daily_reward_sequences = 4; // the sequences to delete
+}
+
+message GetDepositRewardConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	string currency = 2;
+}
+
+message GetGamificationCurrencyConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+}
+
+message UpdateOperatorCurrencyConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	wallet.service.v1.OperatorCurrencyConfig operator_currency_config = 2;
+}
+
+message UpdateDeductionOrderRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	wallet.service.v1.DeductionOrder deduction_order = 2;
+}
+
+message DeleteWalletResponsibleGamblingConfigRequest {
+	int64 user_id = 1;
+	string currency = 2;
+	// deposit_limit, withdrawal_limit, daily_play_limit, weekly_play_limit, monthly_play_limit
+	// daily_loss_limit, weekly_loss_limit, monthly_loss_limit
+	string limit_type = 3;
+}
+
+message ListWalletResponsibleGamblingConfigsRequest {
+	int64 user_id = 1;
+}
+
+message ListCustomerRecordsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional int64 transaction_id = 4;
+	optional string transaction_type = 5;
+	optional int32 page = 6;
+	optional int32 page_size = 7;
+	api.common.OperatorContextFilters operator_context_filters = 8;
+}
+
+message ExportCustomerRecordsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional int64 transaction_id = 4;
+	optional string transaction_type = 5;
+	string format = 6; // accepted values: csv, excel, pdf
+	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContextFilters operator_context_filters = 8;
+}
+
+message SetFICAThresholdConfigRequest {
+	string currency = 1;
+	wallet.service.v1.FICAThresholdConfig fica_threshold_config = 2;
+	api.common.OperatorContext target_operator_context = 3;
+}
+
+message GetFICAThresholdConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+}
+
+message ListFICAThresholdTransactionsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional string transaction_type = 3;
+	optional string currency = 4;
+	optional int32 kyc_level = 5;
+	optional int32 page = 6;
+	optional int32 page_size = 7;
+	api.common.OperatorContext target_operator_context = 8;
+}
+
+message ExportFICAThresholdTransactionsRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional string transaction_type = 3;
+	optional string currency = 4;
+	optional int32 kyc_level = 5;
+	string format = 6; // accepted values: csv, excel, pdf
+	string time_zone = 7; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContext target_operator_context = 8;
+}
+
+message ManualCreditRequest {
+	int64 user_id = 1;
+	string currency = 2;
+	string transaction_type = 3; // manual_credit_cash, manual_credit_bonus
+	string cash_amount = 4;
+	string cash_turnover_threshold = 5;
+	string operator_bonus_amount = 6;
+	string operator_bonus_turnover_threshold = 7;
+	string operator_bonus_withdraw_limit = 8;
+	string comment = 9;
+}
+
+message ManualDebitRequest {
+	int64 user_id = 1;
+	string currency = 2;
+	string transaction_type = 3; // manual_debit_cash, manual_debit_bonus
+	int64 transaction_id = 4;
+	string amount = 5;
+	string comment = 6;
+}
+
+message ListManualJournalEntriesRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional string currency = 4;
+	optional int32 page = 5;
+	optional int32 page_size = 6;
+	api.common.OperatorContextFilters operator_context_filters = 7;
+}
+
+message ExportManualJournalEntriesRequest {
+	optional google.protobuf.Timestamp start_time = 1;
+	optional google.protobuf.Timestamp end_time = 2;
+	optional int64 user_id = 3;
+	optional string currency = 4;
+	string format = 5; // accepted values: csv, excel, pdf
+	string time_zone = 6; // e.g. UTC+0, UTC+8, etc.
+	api.common.OperatorContextFilters operator_context_filters = 7;
 }

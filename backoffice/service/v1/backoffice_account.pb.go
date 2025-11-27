@@ -7,6 +7,8 @@
 package v1
 
 import (
+	common "github.com/infigaming-com/meepo-api/common"
+	v1 "github.com/infigaming-com/meepo-api/wallet/service/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -520,6 +522,182 @@ func (*ResetPasswordResponse) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{11}
 }
 
+type SendPasswordResetCodeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"` // User's email address
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SendPasswordResetCodeRequest) Reset() {
+	*x = SendPasswordResetCodeRequest{}
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SendPasswordResetCodeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SendPasswordResetCodeRequest) ProtoMessage() {}
+
+func (x *SendPasswordResetCodeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SendPasswordResetCodeRequest.ProtoReflect.Descriptor instead.
+func (*SendPasswordResetCodeRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *SendPasswordResetCodeRequest) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+type SendPasswordResetCodeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SendPasswordResetCodeResponse) Reset() {
+	*x = SendPasswordResetCodeResponse{}
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SendPasswordResetCodeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SendPasswordResetCodeResponse) ProtoMessage() {}
+
+func (x *SendPasswordResetCodeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SendPasswordResetCodeResponse.ProtoReflect.Descriptor instead.
+func (*SendPasswordResetCodeResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{13}
+}
+
+type ResetPasswordWithCodeRequest struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Email            string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`                                               // User's email address
+	VerificationCode string                 `protobuf:"bytes,2,opt,name=verification_code,json=verificationCode,proto3" json:"verification_code,omitempty"` // Verification code received via email
+	NewPassword      string                 `protobuf:"bytes,3,opt,name=new_password,json=newPassword,proto3" json:"new_password,omitempty"`                // New password
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *ResetPasswordWithCodeRequest) Reset() {
+	*x = ResetPasswordWithCodeRequest{}
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResetPasswordWithCodeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResetPasswordWithCodeRequest) ProtoMessage() {}
+
+func (x *ResetPasswordWithCodeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResetPasswordWithCodeRequest.ProtoReflect.Descriptor instead.
+func (*ResetPasswordWithCodeRequest) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *ResetPasswordWithCodeRequest) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *ResetPasswordWithCodeRequest) GetVerificationCode() string {
+	if x != nil {
+		return x.VerificationCode
+	}
+	return ""
+}
+
+func (x *ResetPasswordWithCodeRequest) GetNewPassword() string {
+	if x != nil {
+		return x.NewPassword
+	}
+	return ""
+}
+
+type ResetPasswordWithCodeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResetPasswordWithCodeResponse) Reset() {
+	*x = ResetPasswordWithCodeResponse{}
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResetPasswordWithCodeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResetPasswordWithCodeResponse) ProtoMessage() {}
+
+func (x *ResetPasswordWithCodeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResetPasswordWithCodeResponse.ProtoReflect.Descriptor instead.
+func (*ResetPasswordWithCodeResponse) Descriptor() ([]byte, []int) {
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{15}
+}
+
 type Generate2FaRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -528,7 +706,7 @@ type Generate2FaRequest struct {
 
 func (x *Generate2FaRequest) Reset() {
 	*x = Generate2FaRequest{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[12]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -540,7 +718,7 @@ func (x *Generate2FaRequest) String() string {
 func (*Generate2FaRequest) ProtoMessage() {}
 
 func (x *Generate2FaRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[12]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -553,7 +731,7 @@ func (x *Generate2FaRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Generate2FaRequest.ProtoReflect.Descriptor instead.
 func (*Generate2FaRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{12}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{16}
 }
 
 type Generate2FaResponse struct {
@@ -564,7 +742,7 @@ type Generate2FaResponse struct {
 
 func (x *Generate2FaResponse) Reset() {
 	*x = Generate2FaResponse{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[13]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -576,7 +754,7 @@ func (x *Generate2FaResponse) String() string {
 func (*Generate2FaResponse) ProtoMessage() {}
 
 func (x *Generate2FaResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[13]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -589,7 +767,7 @@ func (x *Generate2FaResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Generate2FaResponse.ProtoReflect.Descriptor instead.
 func (*Generate2FaResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{13}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{17}
 }
 
 type Bind2FaRequest struct {
@@ -601,7 +779,7 @@ type Bind2FaRequest struct {
 
 func (x *Bind2FaRequest) Reset() {
 	*x = Bind2FaRequest{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[14]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -613,7 +791,7 @@ func (x *Bind2FaRequest) String() string {
 func (*Bind2FaRequest) ProtoMessage() {}
 
 func (x *Bind2FaRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[14]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -626,7 +804,7 @@ func (x *Bind2FaRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Bind2FaRequest.ProtoReflect.Descriptor instead.
 func (*Bind2FaRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{14}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *Bind2FaRequest) GetToken() string {
@@ -644,7 +822,7 @@ type Bind2FaResponse struct {
 
 func (x *Bind2FaResponse) Reset() {
 	*x = Bind2FaResponse{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[15]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -656,7 +834,7 @@ func (x *Bind2FaResponse) String() string {
 func (*Bind2FaResponse) ProtoMessage() {}
 
 func (x *Bind2FaResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[15]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -669,7 +847,7 @@ func (x *Bind2FaResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Bind2FaResponse.ProtoReflect.Descriptor instead.
 func (*Bind2FaResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{15}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{19}
 }
 
 type Unbind2FaRequest struct {
@@ -681,7 +859,7 @@ type Unbind2FaRequest struct {
 
 func (x *Unbind2FaRequest) Reset() {
 	*x = Unbind2FaRequest{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[16]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -693,7 +871,7 @@ func (x *Unbind2FaRequest) String() string {
 func (*Unbind2FaRequest) ProtoMessage() {}
 
 func (x *Unbind2FaRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[16]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -706,7 +884,7 @@ func (x *Unbind2FaRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Unbind2FaRequest.ProtoReflect.Descriptor instead.
 func (*Unbind2FaRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{16}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *Unbind2FaRequest) GetToken() string {
@@ -724,7 +902,7 @@ type Unbind2FaResponse struct {
 
 func (x *Unbind2FaResponse) Reset() {
 	*x = Unbind2FaResponse{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[17]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -736,7 +914,7 @@ func (x *Unbind2FaResponse) String() string {
 func (*Unbind2FaResponse) ProtoMessage() {}
 
 func (x *Unbind2FaResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[17]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -749,7 +927,7 @@ func (x *Unbind2FaResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Unbind2FaResponse.ProtoReflect.Descriptor instead.
 func (*Unbind2FaResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{17}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{21}
 }
 
 type UpdateAccountRequest struct {
@@ -763,7 +941,7 @@ type UpdateAccountRequest struct {
 
 func (x *UpdateAccountRequest) Reset() {
 	*x = UpdateAccountRequest{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[18]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -775,7 +953,7 @@ func (x *UpdateAccountRequest) String() string {
 func (*UpdateAccountRequest) ProtoMessage() {}
 
 func (x *UpdateAccountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[18]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -788,7 +966,7 @@ func (x *UpdateAccountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAccountRequest.ProtoReflect.Descriptor instead.
 func (*UpdateAccountRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{18}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *UpdateAccountRequest) GetUserId() int64 {
@@ -820,7 +998,7 @@ type UpdateAccountResponse struct {
 
 func (x *UpdateAccountResponse) Reset() {
 	*x = UpdateAccountResponse{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[19]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -832,7 +1010,7 @@ func (x *UpdateAccountResponse) String() string {
 func (*UpdateAccountResponse) ProtoMessage() {}
 
 func (x *UpdateAccountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[19]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -845,7 +1023,7 @@ func (x *UpdateAccountResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAccountResponse.ProtoReflect.Descriptor instead.
 func (*UpdateAccountResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{19}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{23}
 }
 
 type LoginRequest struct {
@@ -858,7 +1036,7 @@ type LoginRequest struct {
 
 func (x *LoginRequest) Reset() {
 	*x = LoginRequest{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[20]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -870,7 +1048,7 @@ func (x *LoginRequest) String() string {
 func (*LoginRequest) ProtoMessage() {}
 
 func (x *LoginRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[20]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -883,7 +1061,7 @@ func (x *LoginRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginRequest.ProtoReflect.Descriptor instead.
 func (*LoginRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{20}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *LoginRequest) GetEmail() string {
@@ -909,7 +1087,7 @@ type LoginResponse struct {
 
 func (x *LoginResponse) Reset() {
 	*x = LoginResponse{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[21]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -921,7 +1099,7 @@ func (x *LoginResponse) String() string {
 func (*LoginResponse) ProtoMessage() {}
 
 func (x *LoginResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[21]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -934,7 +1112,7 @@ func (x *LoginResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginResponse.ProtoReflect.Descriptor instead.
 func (*LoginResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{21}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *LoginResponse) GetToken() string {
@@ -957,7 +1135,7 @@ type RegisterRequest struct {
 
 func (x *RegisterRequest) Reset() {
 	*x = RegisterRequest{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[22]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -969,7 +1147,7 @@ func (x *RegisterRequest) String() string {
 func (*RegisterRequest) ProtoMessage() {}
 
 func (x *RegisterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[22]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -982,7 +1160,7 @@ func (x *RegisterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterRequest.ProtoReflect.Descriptor instead.
 func (*RegisterRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{22}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *RegisterRequest) GetUsername() string {
@@ -1029,7 +1207,7 @@ type RegisterResponse struct {
 
 func (x *RegisterResponse) Reset() {
 	*x = RegisterResponse{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[23]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1041,7 +1219,7 @@ func (x *RegisterResponse) String() string {
 func (*RegisterResponse) ProtoMessage() {}
 
 func (x *RegisterResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[23]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1054,7 +1232,7 @@ func (x *RegisterResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterResponse.ProtoReflect.Descriptor instead.
 func (*RegisterResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{23}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *RegisterResponse) GetToken() string {
@@ -1073,7 +1251,7 @@ type SendRegisterVerificationCodeRequest struct {
 
 func (x *SendRegisterVerificationCodeRequest) Reset() {
 	*x = SendRegisterVerificationCodeRequest{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[24]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1085,7 +1263,7 @@ func (x *SendRegisterVerificationCodeRequest) String() string {
 func (*SendRegisterVerificationCodeRequest) ProtoMessage() {}
 
 func (x *SendRegisterVerificationCodeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[24]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1098,7 +1276,7 @@ func (x *SendRegisterVerificationCodeRequest) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use SendRegisterVerificationCodeRequest.ProtoReflect.Descriptor instead.
 func (*SendRegisterVerificationCodeRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{24}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *SendRegisterVerificationCodeRequest) GetEmail() string {
@@ -1116,7 +1294,7 @@ type SendRegisterVerificationCodeResponse struct {
 
 func (x *SendRegisterVerificationCodeResponse) Reset() {
 	*x = SendRegisterVerificationCodeResponse{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[25]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1128,7 +1306,7 @@ func (x *SendRegisterVerificationCodeResponse) String() string {
 func (*SendRegisterVerificationCodeResponse) ProtoMessage() {}
 
 func (x *SendRegisterVerificationCodeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[25]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1141,7 +1319,7 @@ func (x *SendRegisterVerificationCodeResponse) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use SendRegisterVerificationCodeResponse.ProtoReflect.Descriptor instead.
 func (*SendRegisterVerificationCodeResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{25}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{29}
 }
 
 type AccountInfoRequest struct {
@@ -1152,7 +1330,7 @@ type AccountInfoRequest struct {
 
 func (x *AccountInfoRequest) Reset() {
 	*x = AccountInfoRequest{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[26]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1164,7 +1342,7 @@ func (x *AccountInfoRequest) String() string {
 func (*AccountInfoRequest) ProtoMessage() {}
 
 func (x *AccountInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[26]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1177,25 +1355,31 @@ func (x *AccountInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountInfoRequest.ProtoReflect.Descriptor instead.
 func (*AccountInfoRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{26}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{30}
 }
 
 type AccountInfoResponse struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	Username       string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
-	Email          string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
-	Mobile         string                 `protobuf:"bytes,3,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	EmailVerified  bool                   `protobuf:"varint,4,opt,name=email_verified,json=emailVerified,proto3" json:"email_verified,omitempty"`
-	MobileVerified bool                   `protobuf:"varint,5,opt,name=mobile_verified,json=mobileVerified,proto3" json:"mobile_verified,omitempty"`
-	Enabled        bool                   `protobuf:"varint,6,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	Role           *Role                  `protobuf:"bytes,7,opt,name=role,proto3" json:"role,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state               protoimpl.MessageState  `protogen:"open.v1"`
+	Username            string                  `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	Email               string                  `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
+	Mobile              string                  `protobuf:"bytes,3,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	EmailVerified       bool                    `protobuf:"varint,4,opt,name=email_verified,json=emailVerified,proto3" json:"email_verified,omitempty"`
+	MobileVerified      bool                    `protobuf:"varint,5,opt,name=mobile_verified,json=mobileVerified,proto3" json:"mobile_verified,omitempty"`
+	Enabled             bool                    `protobuf:"varint,6,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Role                *Role                   `protobuf:"bytes,7,opt,name=role,proto3" json:"role,omitempty"`
+	OperatorContext     *common.OperatorContext `protobuf:"bytes,8,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	ReportingCurrency   *v1.Currency            `protobuf:"bytes,9,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	Subdomain           string                  `protobuf:"bytes,10,opt,name=subdomain,proto3" json:"subdomain,omitempty"`
+	BackofficeSubdomain string                  `protobuf:"bytes,11,opt,name=backoffice_subdomain,json=backofficeSubdomain,proto3" json:"backoffice_subdomain,omitempty"`
+	OperatorMode        string                  `protobuf:"bytes,12,opt,name=operator_mode,json=operatorMode,proto3" json:"operator_mode,omitempty"`
+	UserId              int64                   `protobuf:"varint,13,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *AccountInfoResponse) Reset() {
 	*x = AccountInfoResponse{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[27]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1207,7 +1391,7 @@ func (x *AccountInfoResponse) String() string {
 func (*AccountInfoResponse) ProtoMessage() {}
 
 func (x *AccountInfoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[27]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1220,7 +1404,7 @@ func (x *AccountInfoResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountInfoResponse.ProtoReflect.Descriptor instead.
 func (*AccountInfoResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{27}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *AccountInfoResponse) GetUsername() string {
@@ -1272,6 +1456,48 @@ func (x *AccountInfoResponse) GetRole() *Role {
 	return nil
 }
 
+func (x *AccountInfoResponse) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+func (x *AccountInfoResponse) GetReportingCurrency() *v1.Currency {
+	if x != nil {
+		return x.ReportingCurrency
+	}
+	return nil
+}
+
+func (x *AccountInfoResponse) GetSubdomain() string {
+	if x != nil {
+		return x.Subdomain
+	}
+	return ""
+}
+
+func (x *AccountInfoResponse) GetBackofficeSubdomain() string {
+	if x != nil {
+		return x.BackofficeSubdomain
+	}
+	return ""
+}
+
+func (x *AccountInfoResponse) GetOperatorMode() string {
+	if x != nil {
+		return x.OperatorMode
+	}
+	return ""
+}
+
+func (x *AccountInfoResponse) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
 type Role struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
@@ -1283,7 +1509,7 @@ type Role struct {
 
 func (x *Role) Reset() {
 	*x = Role{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[28]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1295,7 +1521,7 @@ func (x *Role) String() string {
 func (*Role) ProtoMessage() {}
 
 func (x *Role) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[28]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1308,7 +1534,7 @@ func (x *Role) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Role.ProtoReflect.Descriptor instead.
 func (*Role) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{28}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *Role) GetName() string {
@@ -1344,7 +1570,7 @@ type Permission struct {
 
 func (x *Permission) Reset() {
 	*x = Permission{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[29]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1356,7 +1582,7 @@ func (x *Permission) String() string {
 func (*Permission) ProtoMessage() {}
 
 func (x *Permission) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[29]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1369,7 +1595,7 @@ func (x *Permission) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Permission.ProtoReflect.Descriptor instead.
 func (*Permission) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{29}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *Permission) GetModule() string {
@@ -1387,20 +1613,20 @@ func (x *Permission) GetActions() []string {
 }
 
 type ListAccountsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        *int64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
-	RoleId        *int64                 `protobuf:"varint,2,opt,name=role_id,json=roleId,proto3,oneof" json:"role_id,omitempty"`
-	OperatorId    *int64                 `protobuf:"varint,3,opt,name=operator_id,json=operatorId,proto3,oneof" json:"operator_id,omitempty"`
-	Enabled       *bool                  `protobuf:"varint,4,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
-	Page          *int32                 `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize      *int32                 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	UserId                 *int64                         `protobuf:"varint,2,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	RoleId                 *int64                         `protobuf:"varint,3,opt,name=role_id,json=roleId,proto3,oneof" json:"role_id,omitempty"`
+	Enabled                *bool                          `protobuf:"varint,4,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	Page                   *int32                         `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize               *int32                         `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ListAccountsRequest) Reset() {
 	*x = ListAccountsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[30]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1412,7 +1638,7 @@ func (x *ListAccountsRequest) String() string {
 func (*ListAccountsRequest) ProtoMessage() {}
 
 func (x *ListAccountsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[30]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1425,7 +1651,14 @@ func (x *ListAccountsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAccountsRequest.ProtoReflect.Descriptor instead.
 func (*ListAccountsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{30}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *ListAccountsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
 }
 
 func (x *ListAccountsRequest) GetUserId() int64 {
@@ -1438,13 +1671,6 @@ func (x *ListAccountsRequest) GetUserId() int64 {
 func (x *ListAccountsRequest) GetRoleId() int64 {
 	if x != nil && x.RoleId != nil {
 		return *x.RoleId
-	}
-	return 0
-}
-
-func (x *ListAccountsRequest) GetOperatorId() int64 {
-	if x != nil && x.OperatorId != nil {
-		return *x.OperatorId
 	}
 	return 0
 }
@@ -1484,7 +1710,7 @@ type ListAccountsResponse struct {
 
 func (x *ListAccountsResponse) Reset() {
 	*x = ListAccountsResponse{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[31]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1496,7 +1722,7 @@ func (x *ListAccountsResponse) String() string {
 func (*ListAccountsResponse) ProtoMessage() {}
 
 func (x *ListAccountsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[31]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1509,7 +1735,7 @@ func (x *ListAccountsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAccountsResponse.ProtoReflect.Descriptor instead.
 func (*ListAccountsResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{31}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *ListAccountsResponse) GetAccounts() []*ListAccountsResponse_Account {
@@ -1564,7 +1790,7 @@ type CreateRoleRequest struct {
 
 func (x *CreateRoleRequest) Reset() {
 	*x = CreateRoleRequest{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[32]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1576,7 +1802,7 @@ func (x *CreateRoleRequest) String() string {
 func (*CreateRoleRequest) ProtoMessage() {}
 
 func (x *CreateRoleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[32]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1589,7 +1815,7 @@ func (x *CreateRoleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateRoleRequest.ProtoReflect.Descriptor instead.
 func (*CreateRoleRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{32}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *CreateRoleRequest) GetName() string {
@@ -1614,7 +1840,7 @@ type CreateRoleResponse struct {
 
 func (x *CreateRoleResponse) Reset() {
 	*x = CreateRoleResponse{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[33]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1626,7 +1852,7 @@ func (x *CreateRoleResponse) String() string {
 func (*CreateRoleResponse) ProtoMessage() {}
 
 func (x *CreateRoleResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[33]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1639,7 +1865,7 @@ func (x *CreateRoleResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateRoleResponse.ProtoReflect.Descriptor instead.
 func (*CreateRoleResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{33}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{37}
 }
 
 type ListRolesRequest struct {
@@ -1652,7 +1878,7 @@ type ListRolesRequest struct {
 
 func (x *ListRolesRequest) Reset() {
 	*x = ListRolesRequest{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[34]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1664,7 +1890,7 @@ func (x *ListRolesRequest) String() string {
 func (*ListRolesRequest) ProtoMessage() {}
 
 func (x *ListRolesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[34]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1677,7 +1903,7 @@ func (x *ListRolesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListRolesRequest.ProtoReflect.Descriptor instead.
 func (*ListRolesRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{34}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *ListRolesRequest) GetPage() int32 {
@@ -1706,7 +1932,7 @@ type ListRolesResponse struct {
 
 func (x *ListRolesResponse) Reset() {
 	*x = ListRolesResponse{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[35]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1718,7 +1944,7 @@ func (x *ListRolesResponse) String() string {
 func (*ListRolesResponse) ProtoMessage() {}
 
 func (x *ListRolesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[35]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1731,7 +1957,7 @@ func (x *ListRolesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListRolesResponse.ProtoReflect.Descriptor instead.
 func (*ListRolesResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{35}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *ListRolesResponse) GetRoles() []*Role {
@@ -1773,7 +1999,7 @@ type UpdateRoleRequest struct {
 
 func (x *UpdateRoleRequest) Reset() {
 	*x = UpdateRoleRequest{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[36]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1785,7 +2011,7 @@ func (x *UpdateRoleRequest) String() string {
 func (*UpdateRoleRequest) ProtoMessage() {}
 
 func (x *UpdateRoleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[36]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1798,7 +2024,7 @@ func (x *UpdateRoleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateRoleRequest.ProtoReflect.Descriptor instead.
 func (*UpdateRoleRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{36}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *UpdateRoleRequest) GetRoleId() int64 {
@@ -1830,7 +2056,7 @@ type UpdateRoleResponse struct {
 
 func (x *UpdateRoleResponse) Reset() {
 	*x = UpdateRoleResponse{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[37]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1842,7 +2068,7 @@ func (x *UpdateRoleResponse) String() string {
 func (*UpdateRoleResponse) ProtoMessage() {}
 
 func (x *UpdateRoleResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[37]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1855,7 +2081,7 @@ func (x *UpdateRoleResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateRoleResponse.ProtoReflect.Descriptor instead.
 func (*UpdateRoleResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{37}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{41}
 }
 
 type DeleteRoleRequest struct {
@@ -1867,7 +2093,7 @@ type DeleteRoleRequest struct {
 
 func (x *DeleteRoleRequest) Reset() {
 	*x = DeleteRoleRequest{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[38]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1879,7 +2105,7 @@ func (x *DeleteRoleRequest) String() string {
 func (*DeleteRoleRequest) ProtoMessage() {}
 
 func (x *DeleteRoleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[38]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1892,7 +2118,7 @@ func (x *DeleteRoleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteRoleRequest.ProtoReflect.Descriptor instead.
 func (*DeleteRoleRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{38}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *DeleteRoleRequest) GetRoleId() int64 {
@@ -1910,7 +2136,7 @@ type DeleteRoleResponse struct {
 
 func (x *DeleteRoleResponse) Reset() {
 	*x = DeleteRoleResponse{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[39]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1922,7 +2148,7 @@ func (x *DeleteRoleResponse) String() string {
 func (*DeleteRoleResponse) ProtoMessage() {}
 
 func (x *DeleteRoleResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[39]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1935,7 +2161,7 @@ func (x *DeleteRoleResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteRoleResponse.ProtoReflect.Descriptor instead.
 func (*DeleteRoleResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{39}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{43}
 }
 
 type CheckEmailExistsRequest struct {
@@ -1947,7 +2173,7 @@ type CheckEmailExistsRequest struct {
 
 func (x *CheckEmailExistsRequest) Reset() {
 	*x = CheckEmailExistsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[40]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1959,7 +2185,7 @@ func (x *CheckEmailExistsRequest) String() string {
 func (*CheckEmailExistsRequest) ProtoMessage() {}
 
 func (x *CheckEmailExistsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[40]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1972,7 +2198,7 @@ func (x *CheckEmailExistsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckEmailExistsRequest.ProtoReflect.Descriptor instead.
 func (*CheckEmailExistsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{40}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *CheckEmailExistsRequest) GetEmail() string {
@@ -1991,7 +2217,7 @@ type CheckEmailExistsResponse struct {
 
 func (x *CheckEmailExistsResponse) Reset() {
 	*x = CheckEmailExistsResponse{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[41]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2003,7 +2229,7 @@ func (x *CheckEmailExistsResponse) String() string {
 func (*CheckEmailExistsResponse) ProtoMessage() {}
 
 func (x *CheckEmailExistsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[41]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2016,7 +2242,7 @@ func (x *CheckEmailExistsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckEmailExistsResponse.ProtoReflect.Descriptor instead.
 func (*CheckEmailExistsResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{41}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *CheckEmailExistsResponse) GetExists() bool {
@@ -2035,7 +2261,7 @@ type CheckSubdomainExistsRequest struct {
 
 func (x *CheckSubdomainExistsRequest) Reset() {
 	*x = CheckSubdomainExistsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[42]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2047,7 +2273,7 @@ func (x *CheckSubdomainExistsRequest) String() string {
 func (*CheckSubdomainExistsRequest) ProtoMessage() {}
 
 func (x *CheckSubdomainExistsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[42]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2060,7 +2286,7 @@ func (x *CheckSubdomainExistsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckSubdomainExistsRequest.ProtoReflect.Descriptor instead.
 func (*CheckSubdomainExistsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{42}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *CheckSubdomainExistsRequest) GetSubdomain() string {
@@ -2079,7 +2305,7 @@ type CheckSubdomainExistsResponse struct {
 
 func (x *CheckSubdomainExistsResponse) Reset() {
 	*x = CheckSubdomainExistsResponse{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[43]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2091,7 +2317,7 @@ func (x *CheckSubdomainExistsResponse) String() string {
 func (*CheckSubdomainExistsResponse) ProtoMessage() {}
 
 func (x *CheckSubdomainExistsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[43]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2104,7 +2330,7 @@ func (x *CheckSubdomainExistsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckSubdomainExistsResponse.ProtoReflect.Descriptor instead.
 func (*CheckSubdomainExistsResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{43}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *CheckSubdomainExistsResponse) GetExists() bool {
@@ -2123,7 +2349,7 @@ type CheckOperatorKeyExistsRequest struct {
 
 func (x *CheckOperatorKeyExistsRequest) Reset() {
 	*x = CheckOperatorKeyExistsRequest{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[44]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2135,7 +2361,7 @@ func (x *CheckOperatorKeyExistsRequest) String() string {
 func (*CheckOperatorKeyExistsRequest) ProtoMessage() {}
 
 func (x *CheckOperatorKeyExistsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[44]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2148,7 +2374,7 @@ func (x *CheckOperatorKeyExistsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckOperatorKeyExistsRequest.ProtoReflect.Descriptor instead.
 func (*CheckOperatorKeyExistsRequest) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{44}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *CheckOperatorKeyExistsRequest) GetOperatorKey() string {
@@ -2167,7 +2393,7 @@ type CheckOperatorKeyExistsResponse struct {
 
 func (x *CheckOperatorKeyExistsResponse) Reset() {
 	*x = CheckOperatorKeyExistsResponse{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[45]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2179,7 +2405,7 @@ func (x *CheckOperatorKeyExistsResponse) String() string {
 func (*CheckOperatorKeyExistsResponse) ProtoMessage() {}
 
 func (x *CheckOperatorKeyExistsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[45]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2192,7 +2418,7 @@ func (x *CheckOperatorKeyExistsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckOperatorKeyExistsResponse.ProtoReflect.Descriptor instead.
 func (*CheckOperatorKeyExistsResponse) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{45}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *CheckOperatorKeyExistsResponse) GetExists() bool {
@@ -2217,7 +2443,7 @@ type ListAccountsResponse_Account struct {
 
 func (x *ListAccountsResponse_Account) Reset() {
 	*x = ListAccountsResponse_Account{}
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[46]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2229,7 +2455,7 @@ func (x *ListAccountsResponse_Account) String() string {
 func (*ListAccountsResponse_Account) ProtoMessage() {}
 
 func (x *ListAccountsResponse_Account) ProtoReflect() protoreflect.Message {
-	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[46]
+	mi := &file_backoffice_service_v1_backoffice_account_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2242,7 +2468,7 @@ func (x *ListAccountsResponse_Account) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAccountsResponse_Account.ProtoReflect.Descriptor instead.
 func (*ListAccountsResponse_Account) Descriptor() ([]byte, []int) {
-	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{31, 0}
+	return file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP(), []int{35, 0}
 }
 
 func (x *ListAccountsResponse_Account) GetUserId() int64 {
@@ -2298,7 +2524,7 @@ var File_backoffice_service_v1_backoffice_account_proto protoreflect.FileDescrip
 
 const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\n" +
-	".backoffice/service/v1/backoffice_account.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x92\x01\n" +
+	".backoffice/service/v1/backoffice_account.proto\x12\x19api.backoffice.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\x1a\x1ewallet/service/v1/wallet.proto\"\x92\x01\n" +
 	"\x11AddAccountRequest\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x16\n" +
@@ -2318,7 +2544,15 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\x14VerifyMobileResponse\",\n" +
 	"\x14ResetPasswordRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\"\x17\n" +
-	"\x15ResetPasswordResponse\"\x14\n" +
+	"\x15ResetPasswordResponse\"4\n" +
+	"\x1cSendPasswordResetCodeRequest\x12\x14\n" +
+	"\x05email\x18\x01 \x01(\tR\x05email\"\x1f\n" +
+	"\x1dSendPasswordResetCodeResponse\"\x84\x01\n" +
+	"\x1cResetPasswordWithCodeRequest\x12\x14\n" +
+	"\x05email\x18\x01 \x01(\tR\x05email\x12+\n" +
+	"\x11verification_code\x18\x02 \x01(\tR\x10verificationCode\x12!\n" +
+	"\fnew_password\x18\x03 \x01(\tR\vnewPassword\"\x1f\n" +
+	"\x1dResetPasswordWithCodeResponse\"\x14\n" +
 	"\x12Generate2faRequest\"\x15\n" +
 	"\x13Generate2faResponse\"&\n" +
 	"\x0eBind2faRequest\x12\x14\n" +
@@ -2352,7 +2586,7 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"#SendRegisterVerificationCodeRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\"&\n" +
 	"$SendRegisterVerificationCodeResponse\"\x14\n" +
-	"\x12AccountInfoRequest\"\xfe\x01\n" +
+	"\x12AccountInfoRequest\"\xa5\x04\n" +
 	"\x13AccountInfoResponse\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x16\n" +
@@ -2360,7 +2594,14 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\x0eemail_verified\x18\x04 \x01(\bR\remailVerified\x12'\n" +
 	"\x0fmobile_verified\x18\x05 \x01(\bR\x0emobileVerified\x12\x18\n" +
 	"\aenabled\x18\x06 \x01(\bR\aenabled\x123\n" +
-	"\x04role\x18\a \x01(\v2\x1f.api.backoffice.service.v1.RoleR\x04role\"|\n" +
+	"\x04role\x18\a \x01(\v2\x1f.api.backoffice.service.v1.RoleR\x04role\x12F\n" +
+	"\x10operator_context\x18\b \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12N\n" +
+	"\x12reporting_currency\x18\t \x01(\v2\x1f.api.wallet.service.v1.CurrencyR\x11reportingCurrency\x12\x1c\n" +
+	"\tsubdomain\x18\n" +
+	" \x01(\tR\tsubdomain\x121\n" +
+	"\x14backoffice_subdomain\x18\v \x01(\tR\x13backofficeSubdomain\x12#\n" +
+	"\roperator_mode\x18\f \x01(\tR\foperatorMode\x12\x17\n" +
+	"\auser_id\x18\r \x01(\x03R\x06userId\"|\n" +
 	"\x04Role\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x17\n" +
 	"\arole_id\x18\x02 \x01(\x03R\x06roleId\x12G\n" +
@@ -2368,20 +2609,18 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\n" +
 	"Permission\x12\x16\n" +
 	"\x06module\x18\x01 \x01(\tR\x06module\x12\x18\n" +
-	"\aactions\x18\x02 \x03(\tR\aactions\"\x9c\x02\n" +
-	"\x13ListAccountsRequest\x12\x1c\n" +
-	"\auser_id\x18\x01 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x1c\n" +
-	"\arole_id\x18\x02 \x01(\x03H\x01R\x06roleId\x88\x01\x01\x12$\n" +
-	"\voperator_id\x18\x03 \x01(\x03H\x02R\n" +
-	"operatorId\x88\x01\x01\x12\x1d\n" +
-	"\aenabled\x18\x04 \x01(\bH\x03R\aenabled\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x05 \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x06 \x01(\x05H\x05R\bpageSize\x88\x01\x01B\n" +
+	"\aactions\x18\x02 \x03(\tR\aactions\"\xc4\x02\n" +
+	"\x13ListAccountsRequest\x12\\\n" +
+	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x1c\n" +
+	"\auser_id\x18\x02 \x01(\x03H\x00R\x06userId\x88\x01\x01\x12\x1c\n" +
+	"\arole_id\x18\x03 \x01(\x03H\x01R\x06roleId\x88\x01\x01\x12\x1d\n" +
+	"\aenabled\x18\x04 \x01(\bH\x02R\aenabled\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x05 \x01(\x05H\x03R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x06 \x01(\x05H\x04R\bpageSize\x88\x01\x01B\n" +
 	"\n" +
 	"\b_user_idB\n" +
 	"\n" +
-	"\b_role_idB\x0e\n" +
-	"\f_operator_idB\n" +
+	"\b_role_idB\n" +
 	"\n" +
 	"\b_enabledB\a\n" +
 	"\x05_pageB\f\n" +
@@ -2437,7 +2676,7 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\x1dCheckOperatorKeyExistsRequest\x12!\n" +
 	"\foperator_key\x18\x01 \x01(\tR\voperatorKey\"8\n" +
 	"\x1eCheckOperatorKeyExistsResponse\x12\x16\n" +
-	"\x06exists\x18\x01 \x01(\bR\x06exists2\xe9\x1c\n" +
+	"\x06exists\x18\x01 \x01(\bR\x06exists2\xfd\x1f\n" +
 	"\x11BackofficeAccount\x12\x91\x01\n" +
 	"\n" +
 	"AddAccount\x12,.api.backoffice.service.v1.AddAccountRequest\x1a-.api.backoffice.service.v1.AddAccountResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/backoffice/accounts/add\x12\xc6\x01\n" +
@@ -2445,7 +2684,9 @@ const file_backoffice_service_v1_backoffice_account_proto_rawDesc = "" +
 	"\vVerifyEmail\x12-.api.backoffice.service.v1.VerifyEmailRequest\x1a..api.backoffice.service.v1.VerifyEmailResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/accounts/email/verify\x12\xca\x01\n" +
 	"\x16SendMobileVerification\x128.api.backoffice.service.v1.SendMobileVerificationRequest\x1a9.api.backoffice.service.v1.SendMobileVerificationResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/accounts/mobile/verification/send\x12\xa1\x01\n" +
 	"\fVerifyMobile\x12..api.backoffice.service.v1.VerifyMobileRequest\x1a/.api.backoffice.service.v1.VerifyMobileResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/backoffice/accounts/mobile/verify\x12\xa5\x01\n" +
-	"\rResetPassword\x12/.api.backoffice.service.v1.ResetPasswordRequest\x1a0.api.backoffice.service.v1.ResetPasswordResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/v1/backoffice/accounts/password/reset\x12\x9d\x01\n" +
+	"\rResetPassword\x12/.api.backoffice.service.v1.ResetPasswordRequest\x1a0.api.backoffice.service.v1.ResetPasswordResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/v1/backoffice/accounts/password/reset\x12\xc7\x01\n" +
+	"\x15SendPasswordResetCode\x127.api.backoffice.service.v1.SendPasswordResetCodeRequest\x1a8.api.backoffice.service.v1.SendPasswordResetCodeResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/accounts/password/reset-code/send\x12\xc7\x01\n" +
+	"\x15ResetPasswordWithCode\x127.api.backoffice.service.v1.ResetPasswordWithCodeRequest\x1a8.api.backoffice.service.v1.ResetPasswordWithCodeResponse\";\x82\xd3\xe4\x93\x025:\x01*\"0/v1/backoffice/accounts/password/reset-with-code\x12\x9d\x01\n" +
 	"\vGenerate2fa\x12-.api.backoffice.service.v1.Generate2faRequest\x1a..api.backoffice.service.v1.Generate2faResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/backoffice/accounts/2fa/generate\x12\x8d\x01\n" +
 	"\aBind2fa\x12).api.backoffice.service.v1.Bind2faRequest\x1a*.api.backoffice.service.v1.Bind2faResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/backoffice/accounts/2fa/bind\x12\x95\x01\n" +
 	"\tUnbind2fa\x12+.api.backoffice.service.v1.Unbind2faRequest\x1a,.api.backoffice.service.v1.Unbind2faResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/backoffice/accounts/2fa/unbind\x12\x9d\x01\n" +
@@ -2479,7 +2720,7 @@ func file_backoffice_service_v1_backoffice_account_proto_rawDescGZIP() []byte {
 	return file_backoffice_service_v1_backoffice_account_proto_rawDescData
 }
 
-var file_backoffice_service_v1_backoffice_account_proto_msgTypes = make([]protoimpl.MessageInfo, 47)
+var file_backoffice_service_v1_backoffice_account_proto_msgTypes = make([]protoimpl.MessageInfo, 51)
 var file_backoffice_service_v1_backoffice_account_proto_goTypes = []any{
 	(*AddAccountRequest)(nil),                    // 0: api.backoffice.service.v1.AddAccountRequest
 	(*AddAccountResponse)(nil),                   // 1: api.backoffice.service.v1.AddAccountResponse
@@ -2493,101 +2734,115 @@ var file_backoffice_service_v1_backoffice_account_proto_goTypes = []any{
 	(*VerifyMobileResponse)(nil),                 // 9: api.backoffice.service.v1.VerifyMobileResponse
 	(*ResetPasswordRequest)(nil),                 // 10: api.backoffice.service.v1.ResetPasswordRequest
 	(*ResetPasswordResponse)(nil),                // 11: api.backoffice.service.v1.ResetPasswordResponse
-	(*Generate2FaRequest)(nil),                   // 12: api.backoffice.service.v1.Generate2faRequest
-	(*Generate2FaResponse)(nil),                  // 13: api.backoffice.service.v1.Generate2faResponse
-	(*Bind2FaRequest)(nil),                       // 14: api.backoffice.service.v1.Bind2faRequest
-	(*Bind2FaResponse)(nil),                      // 15: api.backoffice.service.v1.Bind2faResponse
-	(*Unbind2FaRequest)(nil),                     // 16: api.backoffice.service.v1.Unbind2faRequest
-	(*Unbind2FaResponse)(nil),                    // 17: api.backoffice.service.v1.Unbind2faResponse
-	(*UpdateAccountRequest)(nil),                 // 18: api.backoffice.service.v1.UpdateAccountRequest
-	(*UpdateAccountResponse)(nil),                // 19: api.backoffice.service.v1.UpdateAccountResponse
-	(*LoginRequest)(nil),                         // 20: api.backoffice.service.v1.LoginRequest
-	(*LoginResponse)(nil),                        // 21: api.backoffice.service.v1.LoginResponse
-	(*RegisterRequest)(nil),                      // 22: api.backoffice.service.v1.RegisterRequest
-	(*RegisterResponse)(nil),                     // 23: api.backoffice.service.v1.RegisterResponse
-	(*SendRegisterVerificationCodeRequest)(nil),  // 24: api.backoffice.service.v1.SendRegisterVerificationCodeRequest
-	(*SendRegisterVerificationCodeResponse)(nil), // 25: api.backoffice.service.v1.SendRegisterVerificationCodeResponse
-	(*AccountInfoRequest)(nil),                   // 26: api.backoffice.service.v1.AccountInfoRequest
-	(*AccountInfoResponse)(nil),                  // 27: api.backoffice.service.v1.AccountInfoResponse
-	(*Role)(nil),                                 // 28: api.backoffice.service.v1.Role
-	(*Permission)(nil),                           // 29: api.backoffice.service.v1.Permission
-	(*ListAccountsRequest)(nil),                  // 30: api.backoffice.service.v1.ListAccountsRequest
-	(*ListAccountsResponse)(nil),                 // 31: api.backoffice.service.v1.ListAccountsResponse
-	(*CreateRoleRequest)(nil),                    // 32: api.backoffice.service.v1.CreateRoleRequest
-	(*CreateRoleResponse)(nil),                   // 33: api.backoffice.service.v1.CreateRoleResponse
-	(*ListRolesRequest)(nil),                     // 34: api.backoffice.service.v1.ListRolesRequest
-	(*ListRolesResponse)(nil),                    // 35: api.backoffice.service.v1.ListRolesResponse
-	(*UpdateRoleRequest)(nil),                    // 36: api.backoffice.service.v1.UpdateRoleRequest
-	(*UpdateRoleResponse)(nil),                   // 37: api.backoffice.service.v1.UpdateRoleResponse
-	(*DeleteRoleRequest)(nil),                    // 38: api.backoffice.service.v1.DeleteRoleRequest
-	(*DeleteRoleResponse)(nil),                   // 39: api.backoffice.service.v1.DeleteRoleResponse
-	(*CheckEmailExistsRequest)(nil),              // 40: api.backoffice.service.v1.CheckEmailExistsRequest
-	(*CheckEmailExistsResponse)(nil),             // 41: api.backoffice.service.v1.CheckEmailExistsResponse
-	(*CheckSubdomainExistsRequest)(nil),          // 42: api.backoffice.service.v1.CheckSubdomainExistsRequest
-	(*CheckSubdomainExistsResponse)(nil),         // 43: api.backoffice.service.v1.CheckSubdomainExistsResponse
-	(*CheckOperatorKeyExistsRequest)(nil),        // 44: api.backoffice.service.v1.CheckOperatorKeyExistsRequest
-	(*CheckOperatorKeyExistsResponse)(nil),       // 45: api.backoffice.service.v1.CheckOperatorKeyExistsResponse
-	(*ListAccountsResponse_Account)(nil),         // 46: api.backoffice.service.v1.ListAccountsResponse.Account
-	(*timestamppb.Timestamp)(nil),                // 47: google.protobuf.Timestamp
+	(*SendPasswordResetCodeRequest)(nil),         // 12: api.backoffice.service.v1.SendPasswordResetCodeRequest
+	(*SendPasswordResetCodeResponse)(nil),        // 13: api.backoffice.service.v1.SendPasswordResetCodeResponse
+	(*ResetPasswordWithCodeRequest)(nil),         // 14: api.backoffice.service.v1.ResetPasswordWithCodeRequest
+	(*ResetPasswordWithCodeResponse)(nil),        // 15: api.backoffice.service.v1.ResetPasswordWithCodeResponse
+	(*Generate2FaRequest)(nil),                   // 16: api.backoffice.service.v1.Generate2faRequest
+	(*Generate2FaResponse)(nil),                  // 17: api.backoffice.service.v1.Generate2faResponse
+	(*Bind2FaRequest)(nil),                       // 18: api.backoffice.service.v1.Bind2faRequest
+	(*Bind2FaResponse)(nil),                      // 19: api.backoffice.service.v1.Bind2faResponse
+	(*Unbind2FaRequest)(nil),                     // 20: api.backoffice.service.v1.Unbind2faRequest
+	(*Unbind2FaResponse)(nil),                    // 21: api.backoffice.service.v1.Unbind2faResponse
+	(*UpdateAccountRequest)(nil),                 // 22: api.backoffice.service.v1.UpdateAccountRequest
+	(*UpdateAccountResponse)(nil),                // 23: api.backoffice.service.v1.UpdateAccountResponse
+	(*LoginRequest)(nil),                         // 24: api.backoffice.service.v1.LoginRequest
+	(*LoginResponse)(nil),                        // 25: api.backoffice.service.v1.LoginResponse
+	(*RegisterRequest)(nil),                      // 26: api.backoffice.service.v1.RegisterRequest
+	(*RegisterResponse)(nil),                     // 27: api.backoffice.service.v1.RegisterResponse
+	(*SendRegisterVerificationCodeRequest)(nil),  // 28: api.backoffice.service.v1.SendRegisterVerificationCodeRequest
+	(*SendRegisterVerificationCodeResponse)(nil), // 29: api.backoffice.service.v1.SendRegisterVerificationCodeResponse
+	(*AccountInfoRequest)(nil),                   // 30: api.backoffice.service.v1.AccountInfoRequest
+	(*AccountInfoResponse)(nil),                  // 31: api.backoffice.service.v1.AccountInfoResponse
+	(*Role)(nil),                                 // 32: api.backoffice.service.v1.Role
+	(*Permission)(nil),                           // 33: api.backoffice.service.v1.Permission
+	(*ListAccountsRequest)(nil),                  // 34: api.backoffice.service.v1.ListAccountsRequest
+	(*ListAccountsResponse)(nil),                 // 35: api.backoffice.service.v1.ListAccountsResponse
+	(*CreateRoleRequest)(nil),                    // 36: api.backoffice.service.v1.CreateRoleRequest
+	(*CreateRoleResponse)(nil),                   // 37: api.backoffice.service.v1.CreateRoleResponse
+	(*ListRolesRequest)(nil),                     // 38: api.backoffice.service.v1.ListRolesRequest
+	(*ListRolesResponse)(nil),                    // 39: api.backoffice.service.v1.ListRolesResponse
+	(*UpdateRoleRequest)(nil),                    // 40: api.backoffice.service.v1.UpdateRoleRequest
+	(*UpdateRoleResponse)(nil),                   // 41: api.backoffice.service.v1.UpdateRoleResponse
+	(*DeleteRoleRequest)(nil),                    // 42: api.backoffice.service.v1.DeleteRoleRequest
+	(*DeleteRoleResponse)(nil),                   // 43: api.backoffice.service.v1.DeleteRoleResponse
+	(*CheckEmailExistsRequest)(nil),              // 44: api.backoffice.service.v1.CheckEmailExistsRequest
+	(*CheckEmailExistsResponse)(nil),             // 45: api.backoffice.service.v1.CheckEmailExistsResponse
+	(*CheckSubdomainExistsRequest)(nil),          // 46: api.backoffice.service.v1.CheckSubdomainExistsRequest
+	(*CheckSubdomainExistsResponse)(nil),         // 47: api.backoffice.service.v1.CheckSubdomainExistsResponse
+	(*CheckOperatorKeyExistsRequest)(nil),        // 48: api.backoffice.service.v1.CheckOperatorKeyExistsRequest
+	(*CheckOperatorKeyExistsResponse)(nil),       // 49: api.backoffice.service.v1.CheckOperatorKeyExistsResponse
+	(*ListAccountsResponse_Account)(nil),         // 50: api.backoffice.service.v1.ListAccountsResponse.Account
+	(*common.OperatorContext)(nil),               // 51: api.common.OperatorContext
+	(*v1.Currency)(nil),                          // 52: api.wallet.service.v1.Currency
+	(*common.OperatorContextFilters)(nil),        // 53: api.common.OperatorContextFilters
+	(*timestamppb.Timestamp)(nil),                // 54: google.protobuf.Timestamp
 }
 var file_backoffice_service_v1_backoffice_account_proto_depIdxs = []int32{
-	28, // 0: api.backoffice.service.v1.AccountInfoResponse.role:type_name -> api.backoffice.service.v1.Role
-	29, // 1: api.backoffice.service.v1.Role.permissions:type_name -> api.backoffice.service.v1.Permission
-	46, // 2: api.backoffice.service.v1.ListAccountsResponse.accounts:type_name -> api.backoffice.service.v1.ListAccountsResponse.Account
-	29, // 3: api.backoffice.service.v1.CreateRoleRequest.permissions:type_name -> api.backoffice.service.v1.Permission
-	28, // 4: api.backoffice.service.v1.ListRolesResponse.roles:type_name -> api.backoffice.service.v1.Role
-	29, // 5: api.backoffice.service.v1.UpdateRoleRequest.permissions:type_name -> api.backoffice.service.v1.Permission
-	28, // 6: api.backoffice.service.v1.ListAccountsResponse.Account.role:type_name -> api.backoffice.service.v1.Role
-	47, // 7: api.backoffice.service.v1.ListAccountsResponse.Account.created_at:type_name -> google.protobuf.Timestamp
-	0,  // 8: api.backoffice.service.v1.BackofficeAccount.AddAccount:input_type -> api.backoffice.service.v1.AddAccountRequest
-	2,  // 9: api.backoffice.service.v1.BackofficeAccount.SendEmailVerification:input_type -> api.backoffice.service.v1.SendEmailVerificationRequest
-	4,  // 10: api.backoffice.service.v1.BackofficeAccount.VerifyEmail:input_type -> api.backoffice.service.v1.VerifyEmailRequest
-	6,  // 11: api.backoffice.service.v1.BackofficeAccount.SendMobileVerification:input_type -> api.backoffice.service.v1.SendMobileVerificationRequest
-	8,  // 12: api.backoffice.service.v1.BackofficeAccount.VerifyMobile:input_type -> api.backoffice.service.v1.VerifyMobileRequest
-	10, // 13: api.backoffice.service.v1.BackofficeAccount.ResetPassword:input_type -> api.backoffice.service.v1.ResetPasswordRequest
-	12, // 14: api.backoffice.service.v1.BackofficeAccount.Generate2fa:input_type -> api.backoffice.service.v1.Generate2faRequest
-	14, // 15: api.backoffice.service.v1.BackofficeAccount.Bind2fa:input_type -> api.backoffice.service.v1.Bind2faRequest
-	16, // 16: api.backoffice.service.v1.BackofficeAccount.Unbind2fa:input_type -> api.backoffice.service.v1.Unbind2faRequest
-	18, // 17: api.backoffice.service.v1.BackofficeAccount.UpdateAccount:input_type -> api.backoffice.service.v1.UpdateAccountRequest
-	20, // 18: api.backoffice.service.v1.BackofficeAccount.Login:input_type -> api.backoffice.service.v1.LoginRequest
-	22, // 19: api.backoffice.service.v1.BackofficeAccount.Register:input_type -> api.backoffice.service.v1.RegisterRequest
-	24, // 20: api.backoffice.service.v1.BackofficeAccount.SendRegisterVerificationCode:input_type -> api.backoffice.service.v1.SendRegisterVerificationCodeRequest
-	26, // 21: api.backoffice.service.v1.BackofficeAccount.AccountInfo:input_type -> api.backoffice.service.v1.AccountInfoRequest
-	30, // 22: api.backoffice.service.v1.BackofficeAccount.ListAccounts:input_type -> api.backoffice.service.v1.ListAccountsRequest
-	32, // 23: api.backoffice.service.v1.BackofficeAccount.CreateRole:input_type -> api.backoffice.service.v1.CreateRoleRequest
-	34, // 24: api.backoffice.service.v1.BackofficeAccount.ListRoles:input_type -> api.backoffice.service.v1.ListRolesRequest
-	36, // 25: api.backoffice.service.v1.BackofficeAccount.UpdateRole:input_type -> api.backoffice.service.v1.UpdateRoleRequest
-	38, // 26: api.backoffice.service.v1.BackofficeAccount.DeleteRole:input_type -> api.backoffice.service.v1.DeleteRoleRequest
-	40, // 27: api.backoffice.service.v1.BackofficeAccount.CheckEmailExists:input_type -> api.backoffice.service.v1.CheckEmailExistsRequest
-	42, // 28: api.backoffice.service.v1.BackofficeAccount.CheckSubdomainExists:input_type -> api.backoffice.service.v1.CheckSubdomainExistsRequest
-	44, // 29: api.backoffice.service.v1.BackofficeAccount.CheckOperatorKeyExists:input_type -> api.backoffice.service.v1.CheckOperatorKeyExistsRequest
-	1,  // 30: api.backoffice.service.v1.BackofficeAccount.AddAccount:output_type -> api.backoffice.service.v1.AddAccountResponse
-	3,  // 31: api.backoffice.service.v1.BackofficeAccount.SendEmailVerification:output_type -> api.backoffice.service.v1.SendEmailVerificationResponse
-	5,  // 32: api.backoffice.service.v1.BackofficeAccount.VerifyEmail:output_type -> api.backoffice.service.v1.VerifyEmailResponse
-	7,  // 33: api.backoffice.service.v1.BackofficeAccount.SendMobileVerification:output_type -> api.backoffice.service.v1.SendMobileVerificationResponse
-	9,  // 34: api.backoffice.service.v1.BackofficeAccount.VerifyMobile:output_type -> api.backoffice.service.v1.VerifyMobileResponse
-	11, // 35: api.backoffice.service.v1.BackofficeAccount.ResetPassword:output_type -> api.backoffice.service.v1.ResetPasswordResponse
-	13, // 36: api.backoffice.service.v1.BackofficeAccount.Generate2fa:output_type -> api.backoffice.service.v1.Generate2faResponse
-	15, // 37: api.backoffice.service.v1.BackofficeAccount.Bind2fa:output_type -> api.backoffice.service.v1.Bind2faResponse
-	17, // 38: api.backoffice.service.v1.BackofficeAccount.Unbind2fa:output_type -> api.backoffice.service.v1.Unbind2faResponse
-	19, // 39: api.backoffice.service.v1.BackofficeAccount.UpdateAccount:output_type -> api.backoffice.service.v1.UpdateAccountResponse
-	21, // 40: api.backoffice.service.v1.BackofficeAccount.Login:output_type -> api.backoffice.service.v1.LoginResponse
-	23, // 41: api.backoffice.service.v1.BackofficeAccount.Register:output_type -> api.backoffice.service.v1.RegisterResponse
-	25, // 42: api.backoffice.service.v1.BackofficeAccount.SendRegisterVerificationCode:output_type -> api.backoffice.service.v1.SendRegisterVerificationCodeResponse
-	27, // 43: api.backoffice.service.v1.BackofficeAccount.AccountInfo:output_type -> api.backoffice.service.v1.AccountInfoResponse
-	31, // 44: api.backoffice.service.v1.BackofficeAccount.ListAccounts:output_type -> api.backoffice.service.v1.ListAccountsResponse
-	33, // 45: api.backoffice.service.v1.BackofficeAccount.CreateRole:output_type -> api.backoffice.service.v1.CreateRoleResponse
-	35, // 46: api.backoffice.service.v1.BackofficeAccount.ListRoles:output_type -> api.backoffice.service.v1.ListRolesResponse
-	37, // 47: api.backoffice.service.v1.BackofficeAccount.UpdateRole:output_type -> api.backoffice.service.v1.UpdateRoleResponse
-	39, // 48: api.backoffice.service.v1.BackofficeAccount.DeleteRole:output_type -> api.backoffice.service.v1.DeleteRoleResponse
-	41, // 49: api.backoffice.service.v1.BackofficeAccount.CheckEmailExists:output_type -> api.backoffice.service.v1.CheckEmailExistsResponse
-	43, // 50: api.backoffice.service.v1.BackofficeAccount.CheckSubdomainExists:output_type -> api.backoffice.service.v1.CheckSubdomainExistsResponse
-	45, // 51: api.backoffice.service.v1.BackofficeAccount.CheckOperatorKeyExists:output_type -> api.backoffice.service.v1.CheckOperatorKeyExistsResponse
-	30, // [30:52] is the sub-list for method output_type
-	8,  // [8:30] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	32, // 0: api.backoffice.service.v1.AccountInfoResponse.role:type_name -> api.backoffice.service.v1.Role
+	51, // 1: api.backoffice.service.v1.AccountInfoResponse.operator_context:type_name -> api.common.OperatorContext
+	52, // 2: api.backoffice.service.v1.AccountInfoResponse.reporting_currency:type_name -> api.wallet.service.v1.Currency
+	33, // 3: api.backoffice.service.v1.Role.permissions:type_name -> api.backoffice.service.v1.Permission
+	53, // 4: api.backoffice.service.v1.ListAccountsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	50, // 5: api.backoffice.service.v1.ListAccountsResponse.accounts:type_name -> api.backoffice.service.v1.ListAccountsResponse.Account
+	33, // 6: api.backoffice.service.v1.CreateRoleRequest.permissions:type_name -> api.backoffice.service.v1.Permission
+	32, // 7: api.backoffice.service.v1.ListRolesResponse.roles:type_name -> api.backoffice.service.v1.Role
+	33, // 8: api.backoffice.service.v1.UpdateRoleRequest.permissions:type_name -> api.backoffice.service.v1.Permission
+	32, // 9: api.backoffice.service.v1.ListAccountsResponse.Account.role:type_name -> api.backoffice.service.v1.Role
+	54, // 10: api.backoffice.service.v1.ListAccountsResponse.Account.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 11: api.backoffice.service.v1.BackofficeAccount.AddAccount:input_type -> api.backoffice.service.v1.AddAccountRequest
+	2,  // 12: api.backoffice.service.v1.BackofficeAccount.SendEmailVerification:input_type -> api.backoffice.service.v1.SendEmailVerificationRequest
+	4,  // 13: api.backoffice.service.v1.BackofficeAccount.VerifyEmail:input_type -> api.backoffice.service.v1.VerifyEmailRequest
+	6,  // 14: api.backoffice.service.v1.BackofficeAccount.SendMobileVerification:input_type -> api.backoffice.service.v1.SendMobileVerificationRequest
+	8,  // 15: api.backoffice.service.v1.BackofficeAccount.VerifyMobile:input_type -> api.backoffice.service.v1.VerifyMobileRequest
+	10, // 16: api.backoffice.service.v1.BackofficeAccount.ResetPassword:input_type -> api.backoffice.service.v1.ResetPasswordRequest
+	12, // 17: api.backoffice.service.v1.BackofficeAccount.SendPasswordResetCode:input_type -> api.backoffice.service.v1.SendPasswordResetCodeRequest
+	14, // 18: api.backoffice.service.v1.BackofficeAccount.ResetPasswordWithCode:input_type -> api.backoffice.service.v1.ResetPasswordWithCodeRequest
+	16, // 19: api.backoffice.service.v1.BackofficeAccount.Generate2fa:input_type -> api.backoffice.service.v1.Generate2faRequest
+	18, // 20: api.backoffice.service.v1.BackofficeAccount.Bind2fa:input_type -> api.backoffice.service.v1.Bind2faRequest
+	20, // 21: api.backoffice.service.v1.BackofficeAccount.Unbind2fa:input_type -> api.backoffice.service.v1.Unbind2faRequest
+	22, // 22: api.backoffice.service.v1.BackofficeAccount.UpdateAccount:input_type -> api.backoffice.service.v1.UpdateAccountRequest
+	24, // 23: api.backoffice.service.v1.BackofficeAccount.Login:input_type -> api.backoffice.service.v1.LoginRequest
+	26, // 24: api.backoffice.service.v1.BackofficeAccount.Register:input_type -> api.backoffice.service.v1.RegisterRequest
+	28, // 25: api.backoffice.service.v1.BackofficeAccount.SendRegisterVerificationCode:input_type -> api.backoffice.service.v1.SendRegisterVerificationCodeRequest
+	30, // 26: api.backoffice.service.v1.BackofficeAccount.AccountInfo:input_type -> api.backoffice.service.v1.AccountInfoRequest
+	34, // 27: api.backoffice.service.v1.BackofficeAccount.ListAccounts:input_type -> api.backoffice.service.v1.ListAccountsRequest
+	36, // 28: api.backoffice.service.v1.BackofficeAccount.CreateRole:input_type -> api.backoffice.service.v1.CreateRoleRequest
+	38, // 29: api.backoffice.service.v1.BackofficeAccount.ListRoles:input_type -> api.backoffice.service.v1.ListRolesRequest
+	40, // 30: api.backoffice.service.v1.BackofficeAccount.UpdateRole:input_type -> api.backoffice.service.v1.UpdateRoleRequest
+	42, // 31: api.backoffice.service.v1.BackofficeAccount.DeleteRole:input_type -> api.backoffice.service.v1.DeleteRoleRequest
+	44, // 32: api.backoffice.service.v1.BackofficeAccount.CheckEmailExists:input_type -> api.backoffice.service.v1.CheckEmailExistsRequest
+	46, // 33: api.backoffice.service.v1.BackofficeAccount.CheckSubdomainExists:input_type -> api.backoffice.service.v1.CheckSubdomainExistsRequest
+	48, // 34: api.backoffice.service.v1.BackofficeAccount.CheckOperatorKeyExists:input_type -> api.backoffice.service.v1.CheckOperatorKeyExistsRequest
+	1,  // 35: api.backoffice.service.v1.BackofficeAccount.AddAccount:output_type -> api.backoffice.service.v1.AddAccountResponse
+	3,  // 36: api.backoffice.service.v1.BackofficeAccount.SendEmailVerification:output_type -> api.backoffice.service.v1.SendEmailVerificationResponse
+	5,  // 37: api.backoffice.service.v1.BackofficeAccount.VerifyEmail:output_type -> api.backoffice.service.v1.VerifyEmailResponse
+	7,  // 38: api.backoffice.service.v1.BackofficeAccount.SendMobileVerification:output_type -> api.backoffice.service.v1.SendMobileVerificationResponse
+	9,  // 39: api.backoffice.service.v1.BackofficeAccount.VerifyMobile:output_type -> api.backoffice.service.v1.VerifyMobileResponse
+	11, // 40: api.backoffice.service.v1.BackofficeAccount.ResetPassword:output_type -> api.backoffice.service.v1.ResetPasswordResponse
+	13, // 41: api.backoffice.service.v1.BackofficeAccount.SendPasswordResetCode:output_type -> api.backoffice.service.v1.SendPasswordResetCodeResponse
+	15, // 42: api.backoffice.service.v1.BackofficeAccount.ResetPasswordWithCode:output_type -> api.backoffice.service.v1.ResetPasswordWithCodeResponse
+	17, // 43: api.backoffice.service.v1.BackofficeAccount.Generate2fa:output_type -> api.backoffice.service.v1.Generate2faResponse
+	19, // 44: api.backoffice.service.v1.BackofficeAccount.Bind2fa:output_type -> api.backoffice.service.v1.Bind2faResponse
+	21, // 45: api.backoffice.service.v1.BackofficeAccount.Unbind2fa:output_type -> api.backoffice.service.v1.Unbind2faResponse
+	23, // 46: api.backoffice.service.v1.BackofficeAccount.UpdateAccount:output_type -> api.backoffice.service.v1.UpdateAccountResponse
+	25, // 47: api.backoffice.service.v1.BackofficeAccount.Login:output_type -> api.backoffice.service.v1.LoginResponse
+	27, // 48: api.backoffice.service.v1.BackofficeAccount.Register:output_type -> api.backoffice.service.v1.RegisterResponse
+	29, // 49: api.backoffice.service.v1.BackofficeAccount.SendRegisterVerificationCode:output_type -> api.backoffice.service.v1.SendRegisterVerificationCodeResponse
+	31, // 50: api.backoffice.service.v1.BackofficeAccount.AccountInfo:output_type -> api.backoffice.service.v1.AccountInfoResponse
+	35, // 51: api.backoffice.service.v1.BackofficeAccount.ListAccounts:output_type -> api.backoffice.service.v1.ListAccountsResponse
+	37, // 52: api.backoffice.service.v1.BackofficeAccount.CreateRole:output_type -> api.backoffice.service.v1.CreateRoleResponse
+	39, // 53: api.backoffice.service.v1.BackofficeAccount.ListRoles:output_type -> api.backoffice.service.v1.ListRolesResponse
+	41, // 54: api.backoffice.service.v1.BackofficeAccount.UpdateRole:output_type -> api.backoffice.service.v1.UpdateRoleResponse
+	43, // 55: api.backoffice.service.v1.BackofficeAccount.DeleteRole:output_type -> api.backoffice.service.v1.DeleteRoleResponse
+	45, // 56: api.backoffice.service.v1.BackofficeAccount.CheckEmailExists:output_type -> api.backoffice.service.v1.CheckEmailExistsResponse
+	47, // 57: api.backoffice.service.v1.BackofficeAccount.CheckSubdomainExists:output_type -> api.backoffice.service.v1.CheckSubdomainExistsResponse
+	49, // 58: api.backoffice.service.v1.BackofficeAccount.CheckOperatorKeyExists:output_type -> api.backoffice.service.v1.CheckOperatorKeyExistsResponse
+	35, // [35:59] is the sub-list for method output_type
+	11, // [11:35] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_account_proto_init() }
@@ -2595,16 +2850,16 @@ func file_backoffice_service_v1_backoffice_account_proto_init() {
 	if File_backoffice_service_v1_backoffice_account_proto != nil {
 		return
 	}
-	file_backoffice_service_v1_backoffice_account_proto_msgTypes[18].OneofWrappers = []any{}
-	file_backoffice_service_v1_backoffice_account_proto_msgTypes[30].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_account_proto_msgTypes[22].OneofWrappers = []any{}
 	file_backoffice_service_v1_backoffice_account_proto_msgTypes[34].OneofWrappers = []any{}
+	file_backoffice_service_v1_backoffice_account_proto_msgTypes[38].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_backoffice_service_v1_backoffice_account_proto_rawDesc), len(file_backoffice_service_v1_backoffice_account_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   47,
+			NumMessages:   51,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

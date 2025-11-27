@@ -19,25 +19,25 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationGameBackofficeListGames = "/api.game.service.v1.Game/BackofficeListGames"
 const OperationGameBalance = "/api.game.service.v1.Game/Balance"
 const OperationGameCreateSession = "/api.game.service.v1.Game/CreateSession"
 const OperationGameGetGame = "/api.game.service.v1.Game/GetGame"
 const OperationGameListBets = "/api.game.service.v1.Game/ListBets"
 const OperationGameListCategories = "/api.game.service.v1.Game/ListCategories"
 const OperationGameListGames = "/api.game.service.v1.Game/ListGames"
+const OperationGameListLiveEvents = "/api.game.service.v1.Game/ListLiveEvents"
 const OperationGameListProviders = "/api.game.service.v1.Game/ListProviders"
 const OperationGamePlay = "/api.game.service.v1.Game/Play"
 const OperationGameRollback = "/api.game.service.v1.Game/Rollback"
 
 type GameHTTPServer interface {
-	BackofficeListGames(context.Context, *BackofficeListGamesRequest) (*BackofficeListGamesResponse, error)
 	Balance(context.Context, *BalanceRequest) (*BalanceResponse, error)
 	CreateSession(context.Context, *CreateSessionRequest) (*CreateSessionResponse, error)
 	GetGame(context.Context, *GetGameRequest) (*GetGameResponse, error)
 	ListBets(context.Context, *ListBetsRequest) (*ListBetsResponse, error)
 	ListCategories(context.Context, *ListCategoriesRequest) (*ListCategoriesResponse, error)
 	ListGames(context.Context, *ListGamesRequest) (*ListGamesResponse, error)
+	ListLiveEvents(context.Context, *ListLiveEventsRequest) (*ListLiveEventsResponse, error)
 	ListProviders(context.Context, *ListProvidersRequest) (*ListProvidersResponse, error)
 	Play(context.Context, *PlayRequest) (*PlayResponse, error)
 	Rollback(context.Context, *RollbackRequest) (*RollbackResponse, error)
@@ -45,19 +45,19 @@ type GameHTTPServer interface {
 
 func RegisterGameHTTPServer(s *http.Server, srv GameHTTPServer) {
 	r := s.Route("/")
-	r.POST("/v1/game/providers/list", _Game_ListProviders1_HTTP_Handler(srv))
-	r.POST("/v1/game/categories/list", _Game_ListCategories1_HTTP_Handler(srv))
-	r.POST("/v1/game/list", _Game_ListGames1_HTTP_Handler(srv))
+	r.POST("/v1/game/providers/list", _Game_ListProviders0_HTTP_Handler(srv))
+	r.POST("/v1/game/categories/list", _Game_ListCategories0_HTTP_Handler(srv))
+	r.POST("/v1/game/list", _Game_ListGames0_HTTP_Handler(srv))
 	r.POST("/v1/game/get", _Game_GetGame0_HTTP_Handler(srv))
 	r.POST("/v1/game/create-session", _Game_CreateSession0_HTTP_Handler(srv))
 	r.POST("/v1/game/balance", _Game_Balance0_HTTP_Handler(srv))
 	r.POST("/v1/game/play", _Game_Play0_HTTP_Handler(srv))
 	r.POST("/v1/game/rollback", _Game_Rollback0_HTTP_Handler(srv))
-	r.POST("/v1/game/bets/list", _Game_ListBets1_HTTP_Handler(srv))
-	r.POST("/v1/game/backoffice/games/list", _Game_BackofficeListGames0_HTTP_Handler(srv))
+	r.POST("/v1/game/bets/list", _Game_ListBets0_HTTP_Handler(srv))
+	r.POST("/v1/game/live-events/list", _Game_ListLiveEvents0_HTTP_Handler(srv))
 }
 
-func _Game_ListProviders1_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
+func _Game_ListProviders0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListProvidersRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -79,7 +79,7 @@ func _Game_ListProviders1_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context
 	}
 }
 
-func _Game_ListCategories1_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
+func _Game_ListCategories0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListCategoriesRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -101,7 +101,7 @@ func _Game_ListCategories1_HTTP_Handler(srv GameHTTPServer) func(ctx http.Contex
 	}
 }
 
-func _Game_ListGames1_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
+func _Game_ListGames0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListGamesRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -233,7 +233,7 @@ func _Game_Rollback0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) err
 	}
 }
 
-func _Game_ListBets1_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
+func _Game_ListBets0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListBetsRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -255,36 +255,36 @@ func _Game_ListBets1_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) err
 	}
 }
 
-func _Game_BackofficeListGames0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
+func _Game_ListLiveEvents0_HTTP_Handler(srv GameHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in BackofficeListGamesRequest
+		var in ListLiveEventsRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationGameBackofficeListGames)
+		http.SetOperation(ctx, OperationGameListLiveEvents)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.BackofficeListGames(ctx, req.(*BackofficeListGamesRequest))
+			return srv.ListLiveEvents(ctx, req.(*ListLiveEventsRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*BackofficeListGamesResponse)
+		reply := out.(*ListLiveEventsResponse)
 		return ctx.Result(200, reply)
 	}
 }
 
 type GameHTTPClient interface {
-	BackofficeListGames(ctx context.Context, req *BackofficeListGamesRequest, opts ...http.CallOption) (rsp *BackofficeListGamesResponse, err error)
 	Balance(ctx context.Context, req *BalanceRequest, opts ...http.CallOption) (rsp *BalanceResponse, err error)
 	CreateSession(ctx context.Context, req *CreateSessionRequest, opts ...http.CallOption) (rsp *CreateSessionResponse, err error)
 	GetGame(ctx context.Context, req *GetGameRequest, opts ...http.CallOption) (rsp *GetGameResponse, err error)
 	ListBets(ctx context.Context, req *ListBetsRequest, opts ...http.CallOption) (rsp *ListBetsResponse, err error)
 	ListCategories(ctx context.Context, req *ListCategoriesRequest, opts ...http.CallOption) (rsp *ListCategoriesResponse, err error)
 	ListGames(ctx context.Context, req *ListGamesRequest, opts ...http.CallOption) (rsp *ListGamesResponse, err error)
+	ListLiveEvents(ctx context.Context, req *ListLiveEventsRequest, opts ...http.CallOption) (rsp *ListLiveEventsResponse, err error)
 	ListProviders(ctx context.Context, req *ListProvidersRequest, opts ...http.CallOption) (rsp *ListProvidersResponse, err error)
 	Play(ctx context.Context, req *PlayRequest, opts ...http.CallOption) (rsp *PlayResponse, err error)
 	Rollback(ctx context.Context, req *RollbackRequest, opts ...http.CallOption) (rsp *RollbackResponse, err error)
@@ -296,19 +296,6 @@ type GameHTTPClientImpl struct {
 
 func NewGameHTTPClient(client *http.Client) GameHTTPClient {
 	return &GameHTTPClientImpl{client}
-}
-
-func (c *GameHTTPClientImpl) BackofficeListGames(ctx context.Context, in *BackofficeListGamesRequest, opts ...http.CallOption) (*BackofficeListGamesResponse, error) {
-	var out BackofficeListGamesResponse
-	pattern := "/v1/game/backoffice/games/list"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationGameBackofficeListGames))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
 }
 
 func (c *GameHTTPClientImpl) Balance(ctx context.Context, in *BalanceRequest, opts ...http.CallOption) (*BalanceResponse, error) {
@@ -381,6 +368,19 @@ func (c *GameHTTPClientImpl) ListGames(ctx context.Context, in *ListGamesRequest
 	pattern := "/v1/game/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationGameListGames))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *GameHTTPClientImpl) ListLiveEvents(ctx context.Context, in *ListLiveEventsRequest, opts ...http.CallOption) (*ListLiveEventsResponse, error) {
+	var out ListLiveEventsResponse
+	pattern := "/v1/game/live-events/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationGameListLiveEvents))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

@@ -195,6 +195,35 @@ func (m *GetSummaryRequest) validate(all bool) error {
 		}
 	}
 
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetSummaryRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetSummaryRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetSummaryRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return GetSummaryRequestMultiError(errors)
 	}
@@ -301,31 +330,53 @@ func (m *GetSummaryResponse) validate(all bool) error {
 
 	// no validation rules for RegisteredUsers
 
-	// no validation rules for Ftd
+	// no validation rules for FtdUsd
 
 	// no validation rules for FtdConversionRate
 
-	// no validation rules for DepositAmount
+	// no validation rules for DepositAmountUsd
 
-	// no validation rules for WithdrawAmount
+	// no validation rules for WithdrawAmountUsd
 
-	// no validation rules for DepositMinusWithdrawAmount
+	// no validation rules for DepositMinusWithdrawAmountUsd
 
-	// no validation rules for AverageFtdAmount
+	// no validation rules for AverageFtdAmountUsd
 
 	// no validation rules for ArpuToArppuPercentage
 
-	// no validation rules for Turnover
+	// no validation rules for TurnoverUsd
 
-	// no validation rules for Bonus
+	// no validation rules for BonusUsd
 
-	// no validation rules for Ggr
+	// no validation rules for GgrUsd
 
-	// no validation rules for Ngr
+	// no validation rules for NgrUsd
 
-	// no validation rules for Arpu
+	// no validation rules for ArpuUsd
 
-	// no validation rules for Arppu
+	// no validation rules for ArppuUsd
+
+	// no validation rules for FtdReportingCurrency
+
+	// no validation rules for DepositAmountReportingCurrency
+
+	// no validation rules for WithdrawAmountReportingCurrency
+
+	// no validation rules for DepositMinusWithdrawAmountReportingCurrency
+
+	// no validation rules for AverageFtdAmountReportingCurrency
+
+	// no validation rules for TurnoverReportingCurrency
+
+	// no validation rules for BonusReportingCurrency
+
+	// no validation rules for GgrReportingCurrency
+
+	// no validation rules for NgrReportingCurrency
+
+	// no validation rules for ArpuReportingCurrency
+
+	// no validation rules for ArppuReportingCurrency
 
 	if len(errors) > 0 {
 		return GetSummaryResponseMultiError(errors)
@@ -452,6 +503,35 @@ func (m *ListSummariesRequest) validate(all bool) error {
 		if err := v.Validate(); err != nil {
 			return ListSummariesRequestValidationError{
 				field:  "TimeRange",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListSummariesRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListSummariesRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListSummariesRequestValidationError{
+				field:  "OperatorContextFilters",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -739,6 +819,35 @@ func (m *GetGameSummaryRequest) validate(all bool) error {
 		}
 	}
 
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetGameSummaryRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetGameSummaryRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetGameSummaryRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return GetGameSummaryRequestMultiError(errors)
 	}
@@ -841,17 +950,25 @@ func (m *GetGameSummaryResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Turnover
+	// no validation rules for TurnoverUsd
 
-	// no validation rules for WinAmount
+	// no validation rules for WinAmountUsd
 
-	// no validation rules for Ggr
+	// no validation rules for GgrUsd
 
 	// no validation rules for BetCount
 
-	// no validation rules for AverageBetAmount
+	// no validation rules for AverageBetAmountUsd
 
 	// no validation rules for RtpPercentage
+
+	// no validation rules for TurnoverReportingCurrency
+
+	// no validation rules for WinAmountReportingCurrency
+
+	// no validation rules for GgrReportingCurrency
+
+	// no validation rules for AverageBetAmountReportingCurrency
 
 	if len(errors) > 0 {
 		return GetGameSummaryResponseMultiError(errors)
@@ -933,22 +1050,22 @@ var _ interface {
 	ErrorName() string
 } = GetGameSummaryResponseValidationError{}
 
-// Validate checks the field values on GetGameDataRequest with the rules
+// Validate checks the field values on ListGameDataRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetGameDataRequest) Validate() error {
+func (m *ListGameDataRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetGameDataRequest with the rules
+// ValidateAll checks the field values on ListGameDataRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// GetGameDataRequestMultiError, or nil if none found.
-func (m *GetGameDataRequest) ValidateAll() error {
+// ListGameDataRequestMultiError, or nil if none found.
+func (m *ListGameDataRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetGameDataRequest) validate(all bool) error {
+func (m *ListGameDataRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -959,7 +1076,7 @@ func (m *GetGameDataRequest) validate(all bool) error {
 		switch v := interface{}(m.GetTimeRange()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetGameDataRequestValidationError{
+				errors = append(errors, ListGameDataRequestValidationError{
 					field:  "TimeRange",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -967,7 +1084,7 @@ func (m *GetGameDataRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, GetGameDataRequestValidationError{
+				errors = append(errors, ListGameDataRequestValidationError{
 					field:  "TimeRange",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -976,8 +1093,37 @@ func (m *GetGameDataRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetTimeRange()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return GetGameDataRequestValidationError{
+			return ListGameDataRequestValidationError{
 				field:  "TimeRange",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListGameDataRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListGameDataRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListGameDataRequestValidationError{
+				field:  "OperatorContextFilters",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -989,19 +1135,19 @@ func (m *GetGameDataRequest) validate(all bool) error {
 	// no validation rules for PageSize
 
 	if len(errors) > 0 {
-		return GetGameDataRequestMultiError(errors)
+		return ListGameDataRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetGameDataRequestMultiError is an error wrapping multiple validation errors
-// returned by GetGameDataRequest.ValidateAll() if the designated constraints
-// aren't met.
-type GetGameDataRequestMultiError []error
+// ListGameDataRequestMultiError is an error wrapping multiple validation
+// errors returned by ListGameDataRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListGameDataRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetGameDataRequestMultiError) Error() string {
+func (m ListGameDataRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1010,11 +1156,11 @@ func (m GetGameDataRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetGameDataRequestMultiError) AllErrors() []error { return m }
+func (m ListGameDataRequestMultiError) AllErrors() []error { return m }
 
-// GetGameDataRequestValidationError is the validation error returned by
-// GetGameDataRequest.Validate if the designated constraints aren't met.
-type GetGameDataRequestValidationError struct {
+// ListGameDataRequestValidationError is the validation error returned by
+// ListGameDataRequest.Validate if the designated constraints aren't met.
+type ListGameDataRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1022,24 +1168,24 @@ type GetGameDataRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetGameDataRequestValidationError) Field() string { return e.field }
+func (e ListGameDataRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetGameDataRequestValidationError) Reason() string { return e.reason }
+func (e ListGameDataRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetGameDataRequestValidationError) Cause() error { return e.cause }
+func (e ListGameDataRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetGameDataRequestValidationError) Key() bool { return e.key }
+func (e ListGameDataRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetGameDataRequestValidationError) ErrorName() string {
-	return "GetGameDataRequestValidationError"
+func (e ListGameDataRequestValidationError) ErrorName() string {
+	return "ListGameDataRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetGameDataRequestValidationError) Error() string {
+func (e ListGameDataRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1051,14 +1197,14 @@ func (e GetGameDataRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetGameDataRequest.%s: %s%s",
+		"invalid %sListGameDataRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetGameDataRequestValidationError{}
+var _ error = ListGameDataRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -1066,24 +1212,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetGameDataRequestValidationError{}
+} = ListGameDataRequestValidationError{}
 
-// Validate checks the field values on GetGameDataResponse with the rules
+// Validate checks the field values on ListGameDataResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetGameDataResponse) Validate() error {
+func (m *ListGameDataResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetGameDataResponse with the rules
+// ValidateAll checks the field values on ListGameDataResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// GetGameDataResponseMultiError, or nil if none found.
-func (m *GetGameDataResponse) ValidateAll() error {
+// ListGameDataResponseMultiError, or nil if none found.
+func (m *ListGameDataResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetGameDataResponse) validate(all bool) error {
+func (m *ListGameDataResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1097,7 +1243,7 @@ func (m *GetGameDataResponse) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, GetGameDataResponseValidationError{
+					errors = append(errors, ListGameDataResponseValidationError{
 						field:  fmt.Sprintf("List[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -1105,7 +1251,7 @@ func (m *GetGameDataResponse) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, GetGameDataResponseValidationError{
+					errors = append(errors, ListGameDataResponseValidationError{
 						field:  fmt.Sprintf("List[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -1114,7 +1260,7 @@ func (m *GetGameDataResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return GetGameDataResponseValidationError{
+				return ListGameDataResponseValidationError{
 					field:  fmt.Sprintf("List[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1131,19 +1277,19 @@ func (m *GetGameDataResponse) validate(all bool) error {
 	// no validation rules for Total
 
 	if len(errors) > 0 {
-		return GetGameDataResponseMultiError(errors)
+		return ListGameDataResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetGameDataResponseMultiError is an error wrapping multiple validation
-// errors returned by GetGameDataResponse.ValidateAll() if the designated
+// ListGameDataResponseMultiError is an error wrapping multiple validation
+// errors returned by ListGameDataResponse.ValidateAll() if the designated
 // constraints aren't met.
-type GetGameDataResponseMultiError []error
+type ListGameDataResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetGameDataResponseMultiError) Error() string {
+func (m ListGameDataResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1152,11 +1298,11 @@ func (m GetGameDataResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetGameDataResponseMultiError) AllErrors() []error { return m }
+func (m ListGameDataResponseMultiError) AllErrors() []error { return m }
 
-// GetGameDataResponseValidationError is the validation error returned by
-// GetGameDataResponse.Validate if the designated constraints aren't met.
-type GetGameDataResponseValidationError struct {
+// ListGameDataResponseValidationError is the validation error returned by
+// ListGameDataResponse.Validate if the designated constraints aren't met.
+type ListGameDataResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1164,24 +1310,24 @@ type GetGameDataResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetGameDataResponseValidationError) Field() string { return e.field }
+func (e ListGameDataResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetGameDataResponseValidationError) Reason() string { return e.reason }
+func (e ListGameDataResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetGameDataResponseValidationError) Cause() error { return e.cause }
+func (e ListGameDataResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetGameDataResponseValidationError) Key() bool { return e.key }
+func (e ListGameDataResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetGameDataResponseValidationError) ErrorName() string {
-	return "GetGameDataResponseValidationError"
+func (e ListGameDataResponseValidationError) ErrorName() string {
+	return "ListGameDataResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetGameDataResponseValidationError) Error() string {
+func (e ListGameDataResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1193,14 +1339,14 @@ func (e GetGameDataResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetGameDataResponse.%s: %s%s",
+		"invalid %sListGameDataResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetGameDataResponseValidationError{}
+var _ error = ListGameDataResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -1208,7 +1354,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetGameDataResponseValidationError{}
+} = ListGameDataResponseValidationError{}
 
 // Validate checks the field values on GetPlayerGameSummaryRequest with the
 // rules defined in the proto definition for this message. If any rules are
@@ -1255,6 +1401,35 @@ func (m *GetPlayerGameSummaryRequest) validate(all bool) error {
 		if err := v.Validate(); err != nil {
 			return GetPlayerGameSummaryRequestValidationError{
 				field:  "TimeRange",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetPlayerGameSummaryRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetPlayerGameSummaryRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetPlayerGameSummaryRequestValidationError{
+				field:  "OperatorContextFilters",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -1364,17 +1539,25 @@ func (m *GetPlayerGameSummaryResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Turnover
+	// no validation rules for TurnoverUsd
 
-	// no validation rules for WinAmount
+	// no validation rules for WinAmountUsd
 
-	// no validation rules for Ggr
+	// no validation rules for GgrUsd
 
 	// no validation rules for BetCount
 
-	// no validation rules for AverageBetAmount
+	// no validation rules for AverageBetAmountUsd
 
 	// no validation rules for RtpPercentage
+
+	// no validation rules for TurnoverReportingCurrency
+
+	// no validation rules for WinAmountReportingCurrency
+
+	// no validation rules for GgrReportingCurrency
+
+	// no validation rules for AverageBetAmountReportingCurrency
 
 	if len(errors) > 0 {
 		return GetPlayerGameSummaryResponseMultiError(errors)
@@ -1457,22 +1640,22 @@ var _ interface {
 	ErrorName() string
 } = GetPlayerGameSummaryResponseValidationError{}
 
-// Validate checks the field values on GetPlayerGameDataRequest with the rules
+// Validate checks the field values on ListPlayerGameDataRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetPlayerGameDataRequest) Validate() error {
+func (m *ListPlayerGameDataRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetPlayerGameDataRequest with the
+// ValidateAll checks the field values on ListPlayerGameDataRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// GetPlayerGameDataRequestMultiError, or nil if none found.
-func (m *GetPlayerGameDataRequest) ValidateAll() error {
+// ListPlayerGameDataRequestMultiError, or nil if none found.
+func (m *ListPlayerGameDataRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetPlayerGameDataRequest) validate(all bool) error {
+func (m *ListPlayerGameDataRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1483,7 +1666,7 @@ func (m *GetPlayerGameDataRequest) validate(all bool) error {
 		switch v := interface{}(m.GetTimeRange()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, GetPlayerGameDataRequestValidationError{
+				errors = append(errors, ListPlayerGameDataRequestValidationError{
 					field:  "TimeRange",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1491,7 +1674,7 @@ func (m *GetPlayerGameDataRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, GetPlayerGameDataRequestValidationError{
+				errors = append(errors, ListPlayerGameDataRequestValidationError{
 					field:  "TimeRange",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1500,8 +1683,37 @@ func (m *GetPlayerGameDataRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetTimeRange()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return GetPlayerGameDataRequestValidationError{
+			return ListPlayerGameDataRequestValidationError{
 				field:  "TimeRange",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListPlayerGameDataRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListPlayerGameDataRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListPlayerGameDataRequestValidationError{
+				field:  "OperatorContextFilters",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -1513,19 +1725,19 @@ func (m *GetPlayerGameDataRequest) validate(all bool) error {
 	// no validation rules for PageSize
 
 	if len(errors) > 0 {
-		return GetPlayerGameDataRequestMultiError(errors)
+		return ListPlayerGameDataRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetPlayerGameDataRequestMultiError is an error wrapping multiple validation
-// errors returned by GetPlayerGameDataRequest.ValidateAll() if the designated
-// constraints aren't met.
-type GetPlayerGameDataRequestMultiError []error
+// ListPlayerGameDataRequestMultiError is an error wrapping multiple validation
+// errors returned by ListPlayerGameDataRequest.ValidateAll() if the
+// designated constraints aren't met.
+type ListPlayerGameDataRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetPlayerGameDataRequestMultiError) Error() string {
+func (m ListPlayerGameDataRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1534,11 +1746,11 @@ func (m GetPlayerGameDataRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetPlayerGameDataRequestMultiError) AllErrors() []error { return m }
+func (m ListPlayerGameDataRequestMultiError) AllErrors() []error { return m }
 
-// GetPlayerGameDataRequestValidationError is the validation error returned by
-// GetPlayerGameDataRequest.Validate if the designated constraints aren't met.
-type GetPlayerGameDataRequestValidationError struct {
+// ListPlayerGameDataRequestValidationError is the validation error returned by
+// ListPlayerGameDataRequest.Validate if the designated constraints aren't met.
+type ListPlayerGameDataRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1546,24 +1758,24 @@ type GetPlayerGameDataRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetPlayerGameDataRequestValidationError) Field() string { return e.field }
+func (e ListPlayerGameDataRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetPlayerGameDataRequestValidationError) Reason() string { return e.reason }
+func (e ListPlayerGameDataRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetPlayerGameDataRequestValidationError) Cause() error { return e.cause }
+func (e ListPlayerGameDataRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetPlayerGameDataRequestValidationError) Key() bool { return e.key }
+func (e ListPlayerGameDataRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetPlayerGameDataRequestValidationError) ErrorName() string {
-	return "GetPlayerGameDataRequestValidationError"
+func (e ListPlayerGameDataRequestValidationError) ErrorName() string {
+	return "ListPlayerGameDataRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetPlayerGameDataRequestValidationError) Error() string {
+func (e ListPlayerGameDataRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1575,14 +1787,14 @@ func (e GetPlayerGameDataRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetPlayerGameDataRequest.%s: %s%s",
+		"invalid %sListPlayerGameDataRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetPlayerGameDataRequestValidationError{}
+var _ error = ListPlayerGameDataRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -1590,24 +1802,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetPlayerGameDataRequestValidationError{}
+} = ListPlayerGameDataRequestValidationError{}
 
-// Validate checks the field values on GetPlayerGameDataResponse with the rules
-// defined in the proto definition for this message. If any rules are
+// Validate checks the field values on ListPlayerGameDataResponse with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetPlayerGameDataResponse) Validate() error {
+func (m *ListPlayerGameDataResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetPlayerGameDataResponse with the
+// ValidateAll checks the field values on ListPlayerGameDataResponse with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// GetPlayerGameDataResponseMultiError, or nil if none found.
-func (m *GetPlayerGameDataResponse) ValidateAll() error {
+// ListPlayerGameDataResponseMultiError, or nil if none found.
+func (m *ListPlayerGameDataResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetPlayerGameDataResponse) validate(all bool) error {
+func (m *ListPlayerGameDataResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1621,7 +1833,7 @@ func (m *GetPlayerGameDataResponse) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, GetPlayerGameDataResponseValidationError{
+					errors = append(errors, ListPlayerGameDataResponseValidationError{
 						field:  fmt.Sprintf("List[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -1629,7 +1841,7 @@ func (m *GetPlayerGameDataResponse) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, GetPlayerGameDataResponseValidationError{
+					errors = append(errors, ListPlayerGameDataResponseValidationError{
 						field:  fmt.Sprintf("List[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -1638,7 +1850,7 @@ func (m *GetPlayerGameDataResponse) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return GetPlayerGameDataResponseValidationError{
+				return ListPlayerGameDataResponseValidationError{
 					field:  fmt.Sprintf("List[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -1655,19 +1867,19 @@ func (m *GetPlayerGameDataResponse) validate(all bool) error {
 	// no validation rules for Total
 
 	if len(errors) > 0 {
-		return GetPlayerGameDataResponseMultiError(errors)
+		return ListPlayerGameDataResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetPlayerGameDataResponseMultiError is an error wrapping multiple validation
-// errors returned by GetPlayerGameDataResponse.ValidateAll() if the
-// designated constraints aren't met.
-type GetPlayerGameDataResponseMultiError []error
+// ListPlayerGameDataResponseMultiError is an error wrapping multiple
+// validation errors returned by ListPlayerGameDataResponse.ValidateAll() if
+// the designated constraints aren't met.
+type ListPlayerGameDataResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetPlayerGameDataResponseMultiError) Error() string {
+func (m ListPlayerGameDataResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1676,11 +1888,11 @@ func (m GetPlayerGameDataResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetPlayerGameDataResponseMultiError) AllErrors() []error { return m }
+func (m ListPlayerGameDataResponseMultiError) AllErrors() []error { return m }
 
-// GetPlayerGameDataResponseValidationError is the validation error returned by
-// GetPlayerGameDataResponse.Validate if the designated constraints aren't met.
-type GetPlayerGameDataResponseValidationError struct {
+// ListPlayerGameDataResponseValidationError is the validation error returned
+// by ListPlayerGameDataResponse.Validate if the designated constraints aren't met.
+type ListPlayerGameDataResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1688,24 +1900,24 @@ type GetPlayerGameDataResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetPlayerGameDataResponseValidationError) Field() string { return e.field }
+func (e ListPlayerGameDataResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetPlayerGameDataResponseValidationError) Reason() string { return e.reason }
+func (e ListPlayerGameDataResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetPlayerGameDataResponseValidationError) Cause() error { return e.cause }
+func (e ListPlayerGameDataResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetPlayerGameDataResponseValidationError) Key() bool { return e.key }
+func (e ListPlayerGameDataResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetPlayerGameDataResponseValidationError) ErrorName() string {
-	return "GetPlayerGameDataResponseValidationError"
+func (e ListPlayerGameDataResponseValidationError) ErrorName() string {
+	return "ListPlayerGameDataResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetPlayerGameDataResponseValidationError) Error() string {
+func (e ListPlayerGameDataResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1717,14 +1929,14 @@ func (e GetPlayerGameDataResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetPlayerGameDataResponse.%s: %s%s",
+		"invalid %sListPlayerGameDataResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetPlayerGameDataResponseValidationError{}
+var _ error = ListPlayerGameDataResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -1732,7 +1944,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetPlayerGameDataResponseValidationError{}
+} = ListPlayerGameDataResponseValidationError{}
 
 // Validate checks the field values on GetDepositSummariesRequest with the
 // rules defined in the proto definition for this message. If any rules are
@@ -1779,6 +1991,35 @@ func (m *GetDepositSummariesRequest) validate(all bool) error {
 		if err := v.Validate(); err != nil {
 			return GetDepositSummariesRequestValidationError{
 				field:  "TimeRange",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetDepositSummariesRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetDepositSummariesRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetDepositSummariesRequestValidationError{
+				field:  "OperatorContextFilters",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -2053,9 +2294,42 @@ func (m *ListDepositDetailsRequest) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for Page
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListDepositDetailsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListDepositDetailsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListDepositDetailsRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
-	// no validation rules for PageSize
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
 
 	if len(errors) > 0 {
 		return ListDepositDetailsRequestMultiError(errors)
@@ -2324,6 +2598,35 @@ func (m *GetWithdrawSummariesRequest) validate(all bool) error {
 		if err := v.Validate(); err != nil {
 			return GetWithdrawSummariesRequestValidationError{
 				field:  "TimeRange",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetWithdrawSummariesRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetWithdrawSummariesRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetWithdrawSummariesRequestValidationError{
+				field:  "OperatorContextFilters",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -2599,9 +2902,42 @@ func (m *ListWithdrawDetailsRequest) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for Page
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListWithdrawDetailsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListWithdrawDetailsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListWithdrawDetailsRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
-	// no validation rules for PageSize
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
 
 	if len(errors) > 0 {
 		return ListWithdrawDetailsRequestMultiError(errors)
@@ -2871,6 +3207,35 @@ func (m *ListRegisterRetentionRequest) validate(all bool) error {
 		if err := v.Validate(); err != nil {
 			return ListRegisterRetentionRequestValidationError{
 				field:  "TimeRange",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListRegisterRetentionRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListRegisterRetentionRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListRegisterRetentionRequestValidationError{
+				field:  "OperatorContextFilters",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -3156,6 +3521,35 @@ func (m *ListDepositVtgDetailsRequest) validate(all bool) error {
 		}
 	}
 
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListDepositVtgDetailsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListDepositVtgDetailsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListDepositVtgDetailsRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	// no validation rules for Page
 
 	// no validation rules for PageSize
@@ -3435,6 +3829,35 @@ func (m *ListWithdrawVtgDetailsRequest) validate(all bool) error {
 		}
 	}
 
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListWithdrawVtgDetailsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListWithdrawVtgDetailsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListWithdrawVtgDetailsRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	// no validation rules for Page
 
 	// no validation rules for PageSize
@@ -3663,6 +4086,638 @@ var _ interface {
 	ErrorName() string
 } = ListWithdrawVtgDetailsResponseValidationError{}
 
+// Validate checks the field values on ListSportEventsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListSportEventsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListSportEventsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListSportEventsRequestMultiError, or nil if none found.
+func (m *ListSportEventsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListSportEventsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.StartTime != nil {
+		// no validation rules for StartTime
+	}
+
+	if m.EndTime != nil {
+		// no validation rules for EndTime
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if m.EventName != nil {
+		// no validation rules for EventName
+	}
+
+	if m.Venue != nil {
+		// no validation rules for Venue
+	}
+
+	if m.Tournament != nil {
+		// no validation rules for Tournament
+	}
+
+	if len(errors) > 0 {
+		return ListSportEventsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListSportEventsRequestMultiError is an error wrapping multiple validation
+// errors returned by ListSportEventsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListSportEventsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListSportEventsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListSportEventsRequestMultiError) AllErrors() []error { return m }
+
+// ListSportEventsRequestValidationError is the validation error returned by
+// ListSportEventsRequest.Validate if the designated constraints aren't met.
+type ListSportEventsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListSportEventsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListSportEventsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListSportEventsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListSportEventsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListSportEventsRequestValidationError) ErrorName() string {
+	return "ListSportEventsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListSportEventsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListSportEventsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListSportEventsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListSportEventsRequestValidationError{}
+
+// Validate checks the field values on ListSportEventsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListSportEventsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListSportEventsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListSportEventsResponseMultiError, or nil if none found.
+func (m *ListSportEventsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListSportEventsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetEvents() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListSportEventsResponseValidationError{
+						field:  fmt.Sprintf("Events[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListSportEventsResponseValidationError{
+						field:  fmt.Sprintf("Events[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListSportEventsResponseValidationError{
+					field:  fmt.Sprintf("Events[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for TotalCount
+
+	// no validation rules for Page
+
+	// no validation rules for PageSize
+
+	// no validation rules for TotalPages
+
+	if len(errors) > 0 {
+		return ListSportEventsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListSportEventsResponseMultiError is an error wrapping multiple validation
+// errors returned by ListSportEventsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListSportEventsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListSportEventsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListSportEventsResponseMultiError) AllErrors() []error { return m }
+
+// ListSportEventsResponseValidationError is the validation error returned by
+// ListSportEventsResponse.Validate if the designated constraints aren't met.
+type ListSportEventsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListSportEventsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListSportEventsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListSportEventsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListSportEventsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListSportEventsResponseValidationError) ErrorName() string {
+	return "ListSportEventsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListSportEventsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListSportEventsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListSportEventsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListSportEventsResponseValidationError{}
+
+// Validate checks the field values on CustomerRecordReportDetailRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *CustomerRecordReportDetailRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CustomerRecordReportDetailRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// CustomerRecordReportDetailRequestMultiError, or nil if none found.
+func (m *CustomerRecordReportDetailRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CustomerRecordReportDetailRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.UserId != nil {
+		// no validation rules for UserId
+	}
+
+	if m.PaymentTransactionId != nil {
+		// no validation rules for PaymentTransactionId
+	}
+
+	if m.GameTransactionId != nil {
+		// no validation rules for GameTransactionId
+	}
+
+	if m.GameBetId != nil {
+		// no validation rules for GameBetId
+	}
+
+	if len(errors) > 0 {
+		return CustomerRecordReportDetailRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CustomerRecordReportDetailRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// CustomerRecordReportDetailRequest.ValidateAll() if the designated
+// constraints aren't met.
+type CustomerRecordReportDetailRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CustomerRecordReportDetailRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CustomerRecordReportDetailRequestMultiError) AllErrors() []error { return m }
+
+// CustomerRecordReportDetailRequestValidationError is the validation error
+// returned by CustomerRecordReportDetailRequest.Validate if the designated
+// constraints aren't met.
+type CustomerRecordReportDetailRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CustomerRecordReportDetailRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CustomerRecordReportDetailRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CustomerRecordReportDetailRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CustomerRecordReportDetailRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CustomerRecordReportDetailRequestValidationError) ErrorName() string {
+	return "CustomerRecordReportDetailRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CustomerRecordReportDetailRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCustomerRecordReportDetailRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CustomerRecordReportDetailRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CustomerRecordReportDetailRequestValidationError{}
+
+// Validate checks the field values on CustomerRecordReportDetailResponse with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *CustomerRecordReportDetailResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CustomerRecordReportDetailResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// CustomerRecordReportDetailResponseMultiError, or nil if none found.
+func (m *CustomerRecordReportDetailResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CustomerRecordReportDetailResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.UserDetail != nil {
+
+		if all {
+			switch v := interface{}(m.GetUserDetail()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, CustomerRecordReportDetailResponseValidationError{
+						field:  "UserDetail",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, CustomerRecordReportDetailResponseValidationError{
+						field:  "UserDetail",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetUserDetail()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return CustomerRecordReportDetailResponseValidationError{
+					field:  "UserDetail",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.PaymentTransaction != nil {
+
+		if all {
+			switch v := interface{}(m.GetPaymentTransaction()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, CustomerRecordReportDetailResponseValidationError{
+						field:  "PaymentTransaction",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, CustomerRecordReportDetailResponseValidationError{
+						field:  "PaymentTransaction",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetPaymentTransaction()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return CustomerRecordReportDetailResponseValidationError{
+					field:  "PaymentTransaction",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.GameTransaction != nil {
+
+		if all {
+			switch v := interface{}(m.GetGameTransaction()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, CustomerRecordReportDetailResponseValidationError{
+						field:  "GameTransaction",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, CustomerRecordReportDetailResponseValidationError{
+						field:  "GameTransaction",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetGameTransaction()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return CustomerRecordReportDetailResponseValidationError{
+					field:  "GameTransaction",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.EventSettlementInformation != nil {
+
+		if all {
+			switch v := interface{}(m.GetEventSettlementInformation()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, CustomerRecordReportDetailResponseValidationError{
+						field:  "EventSettlementInformation",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, CustomerRecordReportDetailResponseValidationError{
+						field:  "EventSettlementInformation",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetEventSettlementInformation()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return CustomerRecordReportDetailResponseValidationError{
+					field:  "EventSettlementInformation",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return CustomerRecordReportDetailResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CustomerRecordReportDetailResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// CustomerRecordReportDetailResponse.ValidateAll() if the designated
+// constraints aren't met.
+type CustomerRecordReportDetailResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CustomerRecordReportDetailResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CustomerRecordReportDetailResponseMultiError) AllErrors() []error { return m }
+
+// CustomerRecordReportDetailResponseValidationError is the validation error
+// returned by CustomerRecordReportDetailResponse.Validate if the designated
+// constraints aren't met.
+type CustomerRecordReportDetailResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CustomerRecordReportDetailResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CustomerRecordReportDetailResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CustomerRecordReportDetailResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CustomerRecordReportDetailResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CustomerRecordReportDetailResponseValidationError) ErrorName() string {
+	return "CustomerRecordReportDetailResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CustomerRecordReportDetailResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCustomerRecordReportDetailResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CustomerRecordReportDetailResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CustomerRecordReportDetailResponseValidationError{}
+
 // Validate checks the field values on ListSummariesResponse_List with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -3689,6 +4744,12 @@ func (m *ListSummariesResponse_List) validate(all bool) error {
 
 	// no validation rules for OperatorName
 
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorName
+
 	// no validation rules for Country
 
 	// no validation rules for Visits
@@ -3707,67 +4768,115 @@ func (m *ListSummariesResponse_List) validate(all bool) error {
 
 	// no validation rules for DepositCount
 
-	// no validation rules for DepositAmount
+	// no validation rules for DepositAmountUsd
 
-	// no validation rules for Arpu
+	// no validation rules for ArpuUsd
 
-	// no validation rules for Arppu
+	// no validation rules for ArppuUsd
 
-	// no validation rules for AverageFtdAmount
+	// no validation rules for AverageFtdAmountUsd
 
-	// no validation rules for WithdrawAmount
+	// no validation rules for WithdrawAmountUsd
 
 	// no validation rules for WithdrawedUsers
 
 	// no validation rules for FtwUsers
 
-	// no validation rules for AverageWithdrawAmount
+	// no validation rules for AverageWithdrawAmountUsd
 
-	// no validation rules for FtwAmount
+	// no validation rules for FtwAmountUsd
 
-	// no validation rules for AverageFtwAmount
+	// no validation rules for AverageFtwAmountUsd
 
 	// no validation rules for WuToAuPercentage
 
 	// no validation rules for WuToDuPercentage
 
-	// no validation rules for DepositMinusWithdrawAmount
+	// no validation rules for DepositMinusWithdrawAmountUsd
 
 	// no validation rules for WToDPercentage
 
-	// no validation rules for Turnover
+	// no validation rules for TurnoverUsd
 
-	// no validation rules for DepositBonus
+	// no validation rules for DepositBonusUsd
 
-	// no validation rules for RebateBonus
+	// no validation rules for RebateBonusUsd
 
-	// no validation rules for LossRebate
+	// no validation rules for LossRebateUsd
 
-	// no validation rules for VipBonus
+	// no validation rules for VipBonusUsd
 
-	// no validation rules for OtherBonus
+	// no validation rules for OtherBonusUsd
 
-	// no validation rules for ReferralCommission
+	// no validation rules for ReferralCommissionUsd
 
-	// no validation rules for DepositFeeSubsidyAmount
+	// no validation rules for DepositFeeSubsidyAmountUsd
 
-	// no validation rules for PlayerWithdrawFee
+	// no validation rules for PlayerWithdrawFeeUsd
 
-	// no validation rules for OperatorWithdrawFee
+	// no validation rules for OperatorWithdrawFeeUsd
 
-	// no validation rules for CashBalance
+	// no validation rules for CashBalanceUsd
 
-	// no validation rules for BonusBalance
+	// no validation rules for BonusBalanceUsd
 
-	// no validation rules for LockedBalance
+	// no validation rules for LockedBalanceUsd
 
-	// no validation rules for Ggr
+	// no validation rules for GgrUsd
 
-	// no validation rules for Ngr
+	// no validation rules for NgrUsd
 
 	// no validation rules for GgrToNgrPercentage
 
 	// no validation rules for HouseEdgePercentage
+
+	// no validation rules for DepositAmountReportingCurrency
+
+	// no validation rules for ArpuReportingCurrency
+
+	// no validation rules for ArppuReportingCurrency
+
+	// no validation rules for AverageFtdAmountReportingCurrency
+
+	// no validation rules for WithdrawAmountReportingCurrency
+
+	// no validation rules for AverageWithdrawAmountReportingCurrency
+
+	// no validation rules for FtwAmountReportingCurrency
+
+	// no validation rules for AverageFtwAmountReportingCurrency
+
+	// no validation rules for DepositMinusWithdrawAmountReportingCurrency
+
+	// no validation rules for TurnoverReportingCurrency
+
+	// no validation rules for DepositBonusReportingCurrency
+
+	// no validation rules for RebateBonusReportingCurrency
+
+	// no validation rules for LossRebateReportingCurrency
+
+	// no validation rules for VipBonusReportingCurrency
+
+	// no validation rules for OtherBonusReportingCurrency
+
+	// no validation rules for ReferralCommissionReportingCurrency
+
+	// no validation rules for DepositFeeSubsidyAmountReportingCurrency
+
+	// no validation rules for PlayerWithdrawFeeReportingCurrency
+
+	// no validation rules for OperatorWithdrawFeeReportingCurrency
+
+	// no validation rules for CashBalanceReportingCurrency
+
+	// no validation rules for BonusBalanceReportingCurrency
+
+	// no validation rules for LockedBalanceReportingCurrency
+
+	// no validation rules for GgrReportingCurrency
+
+	// no validation rules for NgrReportingCurrency
 
 	if len(errors) > 0 {
 		return ListSummariesResponse_ListMultiError(errors)
@@ -3849,22 +4958,22 @@ var _ interface {
 	ErrorName() string
 } = ListSummariesResponse_ListValidationError{}
 
-// Validate checks the field values on GetGameDataResponse_List with the rules
+// Validate checks the field values on ListGameDataResponse_List with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetGameDataResponse_List) Validate() error {
+func (m *ListGameDataResponse_List) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetGameDataResponse_List with the
+// ValidateAll checks the field values on ListGameDataResponse_List with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// GetGameDataResponse_ListMultiError, or nil if none found.
-func (m *GetGameDataResponse_List) ValidateAll() error {
+// ListGameDataResponse_ListMultiError, or nil if none found.
+func (m *ListGameDataResponse_List) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetGameDataResponse_List) validate(all bool) error {
+func (m *ListGameDataResponse_List) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -3873,7 +4982,13 @@ func (m *GetGameDataResponse_List) validate(all bool) error {
 
 	// no validation rules for Date
 
-	// no validation rules for Operator
+	// no validation rules for OperatorName
+
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorName
 
 	// no validation rules for Provider
 
@@ -3909,20 +5024,26 @@ func (m *GetGameDataResponse_List) validate(all bool) error {
 
 	// no validation rules for SettlementCurrency
 
+	// no validation rules for TurnoverReportingCurrency
+
+	// no validation rules for WinAmountReportingCurrency
+
+	// no validation rules for GgrReportingCurrency
+
 	if len(errors) > 0 {
-		return GetGameDataResponse_ListMultiError(errors)
+		return ListGameDataResponse_ListMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetGameDataResponse_ListMultiError is an error wrapping multiple validation
-// errors returned by GetGameDataResponse_List.ValidateAll() if the designated
-// constraints aren't met.
-type GetGameDataResponse_ListMultiError []error
+// ListGameDataResponse_ListMultiError is an error wrapping multiple validation
+// errors returned by ListGameDataResponse_List.ValidateAll() if the
+// designated constraints aren't met.
+type ListGameDataResponse_ListMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetGameDataResponse_ListMultiError) Error() string {
+func (m ListGameDataResponse_ListMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -3931,11 +5052,11 @@ func (m GetGameDataResponse_ListMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetGameDataResponse_ListMultiError) AllErrors() []error { return m }
+func (m ListGameDataResponse_ListMultiError) AllErrors() []error { return m }
 
-// GetGameDataResponse_ListValidationError is the validation error returned by
-// GetGameDataResponse_List.Validate if the designated constraints aren't met.
-type GetGameDataResponse_ListValidationError struct {
+// ListGameDataResponse_ListValidationError is the validation error returned by
+// ListGameDataResponse_List.Validate if the designated constraints aren't met.
+type ListGameDataResponse_ListValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -3943,24 +5064,24 @@ type GetGameDataResponse_ListValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetGameDataResponse_ListValidationError) Field() string { return e.field }
+func (e ListGameDataResponse_ListValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetGameDataResponse_ListValidationError) Reason() string { return e.reason }
+func (e ListGameDataResponse_ListValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetGameDataResponse_ListValidationError) Cause() error { return e.cause }
+func (e ListGameDataResponse_ListValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetGameDataResponse_ListValidationError) Key() bool { return e.key }
+func (e ListGameDataResponse_ListValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetGameDataResponse_ListValidationError) ErrorName() string {
-	return "GetGameDataResponse_ListValidationError"
+func (e ListGameDataResponse_ListValidationError) ErrorName() string {
+	return "ListGameDataResponse_ListValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetGameDataResponse_ListValidationError) Error() string {
+func (e ListGameDataResponse_ListValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -3972,14 +5093,14 @@ func (e GetGameDataResponse_ListValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetGameDataResponse_List.%s: %s%s",
+		"invalid %sListGameDataResponse_List.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetGameDataResponse_ListValidationError{}
+var _ error = ListGameDataResponse_ListValidationError{}
 
 var _ interface {
 	Field() string
@@ -3987,24 +5108,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetGameDataResponse_ListValidationError{}
+} = ListGameDataResponse_ListValidationError{}
 
-// Validate checks the field values on GetPlayerGameDataResponse_List with the
+// Validate checks the field values on ListPlayerGameDataResponse_List with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetPlayerGameDataResponse_List) Validate() error {
+func (m *ListPlayerGameDataResponse_List) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetPlayerGameDataResponse_List with
+// ValidateAll checks the field values on ListPlayerGameDataResponse_List with
 // the rules defined in the proto definition for this message. If any rules
 // are violated, the result is a list of violation errors wrapped in
-// GetPlayerGameDataResponse_ListMultiError, or nil if none found.
-func (m *GetPlayerGameDataResponse_List) ValidateAll() error {
+// ListPlayerGameDataResponse_ListMultiError, or nil if none found.
+func (m *ListPlayerGameDataResponse_List) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetPlayerGameDataResponse_List) validate(all bool) error {
+func (m *ListPlayerGameDataResponse_List) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -4013,7 +5134,13 @@ func (m *GetPlayerGameDataResponse_List) validate(all bool) error {
 
 	// no validation rules for Date
 
-	// no validation rules for Operator
+	// no validation rules for OperatorName
+
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorName
 
 	// no validation rules for Provider
 
@@ -4045,20 +5172,26 @@ func (m *GetPlayerGameDataResponse_List) validate(all bool) error {
 
 	// no validation rules for SettlementCurrency
 
+	// no validation rules for TurnoverReportingCurrency
+
+	// no validation rules for WinAmountReportingCurrency
+
+	// no validation rules for GgrReportingCurrency
+
 	if len(errors) > 0 {
-		return GetPlayerGameDataResponse_ListMultiError(errors)
+		return ListPlayerGameDataResponse_ListMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetPlayerGameDataResponse_ListMultiError is an error wrapping multiple
-// validation errors returned by GetPlayerGameDataResponse_List.ValidateAll()
+// ListPlayerGameDataResponse_ListMultiError is an error wrapping multiple
+// validation errors returned by ListPlayerGameDataResponse_List.ValidateAll()
 // if the designated constraints aren't met.
-type GetPlayerGameDataResponse_ListMultiError []error
+type ListPlayerGameDataResponse_ListMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetPlayerGameDataResponse_ListMultiError) Error() string {
+func (m ListPlayerGameDataResponse_ListMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -4067,12 +5200,12 @@ func (m GetPlayerGameDataResponse_ListMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetPlayerGameDataResponse_ListMultiError) AllErrors() []error { return m }
+func (m ListPlayerGameDataResponse_ListMultiError) AllErrors() []error { return m }
 
-// GetPlayerGameDataResponse_ListValidationError is the validation error
-// returned by GetPlayerGameDataResponse_List.Validate if the designated
+// ListPlayerGameDataResponse_ListValidationError is the validation error
+// returned by ListPlayerGameDataResponse_List.Validate if the designated
 // constraints aren't met.
-type GetPlayerGameDataResponse_ListValidationError struct {
+type ListPlayerGameDataResponse_ListValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -4080,24 +5213,24 @@ type GetPlayerGameDataResponse_ListValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetPlayerGameDataResponse_ListValidationError) Field() string { return e.field }
+func (e ListPlayerGameDataResponse_ListValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetPlayerGameDataResponse_ListValidationError) Reason() string { return e.reason }
+func (e ListPlayerGameDataResponse_ListValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetPlayerGameDataResponse_ListValidationError) Cause() error { return e.cause }
+func (e ListPlayerGameDataResponse_ListValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetPlayerGameDataResponse_ListValidationError) Key() bool { return e.key }
+func (e ListPlayerGameDataResponse_ListValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetPlayerGameDataResponse_ListValidationError) ErrorName() string {
-	return "GetPlayerGameDataResponse_ListValidationError"
+func (e ListPlayerGameDataResponse_ListValidationError) ErrorName() string {
+	return "ListPlayerGameDataResponse_ListValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetPlayerGameDataResponse_ListValidationError) Error() string {
+func (e ListPlayerGameDataResponse_ListValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -4109,14 +5242,14 @@ func (e GetPlayerGameDataResponse_ListValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetPlayerGameDataResponse_List.%s: %s%s",
+		"invalid %sListPlayerGameDataResponse_List.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetPlayerGameDataResponse_ListValidationError{}
+var _ error = ListPlayerGameDataResponse_ListValidationError{}
 
 var _ interface {
 	Field() string
@@ -4124,7 +5257,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetPlayerGameDataResponse_ListValidationError{}
+} = ListPlayerGameDataResponse_ListValidationError{}
 
 // Validate checks the field values on
 // GetDepositSummariesResponse_DepositSummary with the rules defined in the
@@ -4156,7 +5289,9 @@ func (m *GetDepositSummariesResponse_DepositSummary) validate(all bool) error {
 
 	// no validation rules for DepositSuccessRate
 
-	// no validation rules for DepositAmount
+	// no validation rules for DepositAmountUsd
+
+	// no validation rules for DepositAmountReportingCurrency
 
 	if len(errors) > 0 {
 		return GetDepositSummariesResponse_DepositSummaryMultiError(errors)
@@ -4267,11 +5402,19 @@ func (m *ListDepositDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for OperatorName
 
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorName
+
 	// no validation rules for Currency
 
 	// no validation rules for DepositAmount
 
 	// no validation rules for DepositAmountUsd
+
+	// no validation rules for DepositAmountReportingCurrency
 
 	// no validation rules for DepositUsers
 
@@ -4279,17 +5422,23 @@ func (m *ListDepositDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for FtdAmountUsd
 
+	// no validation rules for FtdAmountReportingCurrency
+
 	// no validation rules for FtdUsers
 
 	// no validation rules for SameDayFtdAmount
 
 	// no validation rules for SameDayFtdAmountUsd
 
+	// no validation rules for SameDayFtdAmountReportingCurrency
+
 	// no validation rules for SameDayFtdUsers
 
 	// no validation rules for RepeatedDepositAmount
 
 	// no validation rules for RepeatedDepositAmountUsd
+
+	// no validation rules for RepeatedDepositAmountReportingCurrency
 
 	// no validation rules for RepeatedDepositUsers
 
@@ -4301,9 +5450,13 @@ func (m *ListDepositDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for AverageFtdAmountUsdForSameDayRegistredUsers
 
+	// no validation rules for AverageFtdAmountReportingCurrencyForSameDayRegistredUsers
+
 	// no validation rules for AverageFtdAmountForNonSameDayRegistredUsers
 
 	// no validation rules for AverageFtdAmountUsdForNonSameDayRegistredUsers
+
+	// no validation rules for AverageFtdAmountReportingCurrencyForNonSameDayRegistredUsers
 
 	// no validation rules for SuccessRate
 
@@ -4421,7 +5574,9 @@ func (m *GetWithdrawSummariesResponse_WithdrawSummary) validate(all bool) error 
 
 	// no validation rules for WithdrawSuccessRate
 
-	// no validation rules for WithdrawAmount
+	// no validation rules for WithdrawAmountUsd
+
+	// no validation rules for WithdrawAmountReportingCurrency
 
 	if len(errors) > 0 {
 		return GetWithdrawSummariesResponse_WithdrawSummaryMultiError(errors)
@@ -4533,11 +5688,21 @@ func (m *ListWithdrawDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for OperatorName
 
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorName
+
 	// no validation rules for Currency
+
+	// no validation rules for ReportingCurrency
 
 	// no validation rules for WithdrawAmount
 
 	// no validation rules for WithdrawAmountUsd
+
+	// no validation rules for WithdrawAmountReportingCurrency
 
 	// no validation rules for WithdrawUsers
 
@@ -4545,17 +5710,23 @@ func (m *ListWithdrawDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for FtwAmountUsd
 
+	// no validation rules for FtwAmountReportingCurrency
+
 	// no validation rules for FtwUsers
 
 	// no validation rules for SameDayFtwAmount
 
 	// no validation rules for SameDayFtwAmountUsd
 
+	// no validation rules for SameDayFtwAmountReportingCurrency
+
 	// no validation rules for SameDayFtwUsers
 
 	// no validation rules for RepeatedWithdrawAmount
 
 	// no validation rules for RepeatedWithdrawAmountUsd
+
+	// no validation rules for RepeatedWithdrawAmountReportingCurrency
 
 	// no validation rules for RepeatedWithdrawUsers
 
@@ -4567,15 +5738,21 @@ func (m *ListWithdrawDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for AverageFtwAmountUsdForSameDayRegistredUsers
 
+	// no validation rules for AverageFtwAmountReportingCurrencyForSameDayRegistredUsers
+
 	// no validation rules for AverageFtwAmountForNonSameDayRegistredUsers
 
 	// no validation rules for AverageFtwAmountUsdForNonSameDayRegistredUsers
+
+	// no validation rules for AverageFtwAmountReportingCurrencyForNonSameDayRegistredUsers
 
 	// no validation rules for SuccessRate
 
 	// no validation rules for DepositMinusWithdrawAmount
 
 	// no validation rules for DepositMinusWithdrawAmountUsd
+
+	// no validation rules for DepositMinusWithdrawAmountReportingCurrency
 
 	// no validation rules for AmountProportion
 
@@ -4688,6 +5865,12 @@ func (m *ListRegisterRetentionResponse_List) validate(all bool) error {
 
 	// no validation rules for OperatorName
 
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorName
+
 	// no validation rules for RegUsers
 
 	// no validation rules for PaidUsers
@@ -4696,7 +5879,9 @@ func (m *ListRegisterRetentionResponse_List) validate(all bool) error {
 
 	// no validation rules for DepositConvertionRate
 
-	// no validation rules for Arppu
+	// no validation rules for ArppuUsd
+
+	// no validation rules for ArppuReportingCurrency
 
 	// no validation rules for D1ActiveUsers
 
@@ -4746,29 +5931,53 @@ func (m *ListRegisterRetentionResponse_List) validate(all bool) error {
 
 	// no validation rules for D120PaidUsers
 
-	// no validation rules for D1PaidAmt
+	// no validation rules for D1PaidAmtUsd
 
-	// no validation rules for D2PaidAmt
+	// no validation rules for D1PaidAmtReportingCurrency
 
-	// no validation rules for D3PaidAmt
+	// no validation rules for D2PaidAmtUsd
 
-	// no validation rules for D4PaidAmt
+	// no validation rules for D2PaidAmtReportingCurrency
 
-	// no validation rules for D5PaidAmt
+	// no validation rules for D3PaidAmtUsd
 
-	// no validation rules for D6PaidAmt
+	// no validation rules for D3PaidAmtReportingCurrency
 
-	// no validation rules for D7PaidAmt
+	// no validation rules for D4PaidAmtUsd
 
-	// no validation rules for D15PaidAmt
+	// no validation rules for D4PaidAmtReportingCurrency
 
-	// no validation rules for D30PaidAmt
+	// no validation rules for D5PaidAmtUsd
 
-	// no validation rules for D45PaidAmt
+	// no validation rules for D5PaidAmtReportingCurrency
 
-	// no validation rules for D60PaidAmt
+	// no validation rules for D6PaidAmtUsd
 
-	// no validation rules for D120PaidAmt
+	// no validation rules for D6PaidAmtReportingCurrency
+
+	// no validation rules for D7PaidAmtUsd
+
+	// no validation rules for D7PaidAmtReportingCurrency
+
+	// no validation rules for D15PaidAmtUsd
+
+	// no validation rules for D15PaidAmtReportingCurrency
+
+	// no validation rules for D30PaidAmtUsd
+
+	// no validation rules for D30PaidAmtReportingCurrency
+
+	// no validation rules for D45PaidAmtUsd
+
+	// no validation rules for D45PaidAmtReportingCurrency
+
+	// no validation rules for D60PaidAmtUsd
+
+	// no validation rules for D60PaidAmtReportingCurrency
+
+	// no validation rules for D120PaidAmtUsd
+
+	// no validation rules for D120PaidAmtReportingCurrency
 
 	if len(errors) > 0 {
 		return ListRegisterRetentionResponse_ListMultiError(errors)
@@ -4879,11 +6088,19 @@ func (m *ListDepositVtgDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for OperatorName
 
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorName
+
 	// no validation rules for Currency
 
 	// no validation rules for DepositAmount
 
 	// no validation rules for DepositAmountUsd
+
+	// no validation rules for DepositAmountReportingCurrency
 
 	// no validation rules for DepositUsers
 
@@ -4891,31 +6108,39 @@ func (m *ListDepositVtgDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for FtdAmountUsd
 
+	// no validation rules for FtdAmountReportingCurrency
+
 	// no validation rules for FtdUsers
 
 	// no validation rules for SameDayFtdAmount
 
 	// no validation rules for SameDayFtdAmountUsd
 
+	// no validation rules for SameDayFtdAmountReportingCurrency
+
 	// no validation rules for SameDayFtdUsers
+
+	// no validation rules for NonSameDayFtdUsers
 
 	// no validation rules for RepeatedDepositAmount
 
 	// no validation rules for RepeatedDepositAmountUsd
 
+	// no validation rules for RepeatedDepositAmountReportingCurrency
+
 	// no validation rules for RepeatedDepositUsers
-
-	// no validation rules for SameDayFtd
-
-	// no validation rules for NonSameDayFtd
 
 	// no validation rules for AverageFtdAmountForSameDayRegistredUsers
 
 	// no validation rules for AverageFtdAmountUsdForSameDayRegistredUsers
 
+	// no validation rules for AverageFtdAmountReportingCurrencyForSameDayRegistredUsers
+
 	// no validation rules for AverageFtdAmountForNonSameDayRegistredUsers
 
 	// no validation rules for AverageFtdAmountUsdForNonSameDayRegistredUsers
+
+	// no validation rules for AverageFtdAmountReportingCurrencyForNonSameDayRegistredUsers
 
 	if len(errors) > 0 {
 		return ListDepositVtgDetailsResponse_DetailMultiError(errors)
@@ -5026,11 +6251,19 @@ func (m *ListWithdrawVtgDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for OperatorName
 
+	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
+
+	// no validation rules for SystemOperatorName
+
 	// no validation rules for Currency
 
 	// no validation rules for WithdrawAmount
 
 	// no validation rules for WithdrawAmountUsd
+
+	// no validation rules for WithdrawAmountReportingCurrency
 
 	// no validation rules for WithdrawUsers
 
@@ -5038,35 +6271,45 @@ func (m *ListWithdrawVtgDetailsResponse_Detail) validate(all bool) error {
 
 	// no validation rules for FtwAmountUsd
 
+	// no validation rules for FtwAmountReportingCurrency
+
 	// no validation rules for FtwUsers
 
 	// no validation rules for SameDayFtwAmount
 
 	// no validation rules for SameDayFtwAmountUsd
 
+	// no validation rules for SameDayFtwAmountReportingCurrency
+
 	// no validation rules for SameDayFtwUsers
+
+	// no validation rules for NonSameDayFtwUsers
 
 	// no validation rules for RepeatedWithdrawAmount
 
 	// no validation rules for RepeatedWithdrawAmountUsd
 
+	// no validation rules for RepeatedWithdrawAmountReportingCurrency
+
 	// no validation rules for RepeatedWithdrawUsers
-
-	// no validation rules for SameDayFtw
-
-	// no validation rules for NonSameDayFtw
 
 	// no validation rules for AverageFtwAmountForSameDayRegistredUsers
 
 	// no validation rules for AverageFtwAmountUsdForSameDayRegistredUsers
 
+	// no validation rules for AverageFtwAmountReportingCurrencyForSameDayRegistredUsers
+
 	// no validation rules for AverageFtwAmountForNonSameDayRegistredUsers
 
 	// no validation rules for AverageFtwAmountUsdForNonSameDayRegistredUsers
 
+	// no validation rules for AverageFtwAmountReportingCurrencyForNonSameDayRegistredUsers
+
 	// no validation rules for DepositMinusWithdrawAmount
 
 	// no validation rules for DepositMinusWithdrawAmountUsd
+
+	// no validation rules for DepositMinusWithdrawAmountReportingCurrency
 
 	if len(errors) > 0 {
 		return ListWithdrawVtgDetailsResponse_DetailMultiError(errors)
@@ -5149,3 +6392,893 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListWithdrawVtgDetailsResponse_DetailValidationError{}
+
+// Validate checks the field values on ListSportEventsResponse_SportEvent with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ListSportEventsResponse_SportEvent) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListSportEventsResponse_SportEvent
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListSportEventsResponse_SportEventMultiError, or nil if none found.
+func (m *ListSportEventsResponse_SportEvent) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListSportEventsResponse_SportEvent) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for EventId
+
+	// no validation rules for EventName
+
+	// no validation rules for Venue
+
+	// no validation rules for Tournament
+
+	// no validation rules for CardedTime
+
+	// no validation rules for FirstBetTime
+
+	// no validation rules for LastBetTime
+
+	// no validation rules for NoMoreBetsTime
+
+	// no validation rules for ResultProcessingTime
+
+	// no validation rules for RevisedOfficialCardedTime
+
+	// no validation rules for Status
+
+	if len(errors) > 0 {
+		return ListSportEventsResponse_SportEventMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListSportEventsResponse_SportEventMultiError is an error wrapping multiple
+// validation errors returned by
+// ListSportEventsResponse_SportEvent.ValidateAll() if the designated
+// constraints aren't met.
+type ListSportEventsResponse_SportEventMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListSportEventsResponse_SportEventMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListSportEventsResponse_SportEventMultiError) AllErrors() []error { return m }
+
+// ListSportEventsResponse_SportEventValidationError is the validation error
+// returned by ListSportEventsResponse_SportEvent.Validate if the designated
+// constraints aren't met.
+type ListSportEventsResponse_SportEventValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListSportEventsResponse_SportEventValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListSportEventsResponse_SportEventValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListSportEventsResponse_SportEventValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListSportEventsResponse_SportEventValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListSportEventsResponse_SportEventValidationError) ErrorName() string {
+	return "ListSportEventsResponse_SportEventValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListSportEventsResponse_SportEventValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListSportEventsResponse_SportEvent.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListSportEventsResponse_SportEventValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListSportEventsResponse_SportEventValidationError{}
+
+// Validate checks the field values on
+// CustomerRecordReportDetailResponse_UserDetail with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *CustomerRecordReportDetailResponse_UserDetail) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// CustomerRecordReportDetailResponse_UserDetail with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// CustomerRecordReportDetailResponse_UserDetailMultiError, or nil if none found.
+func (m *CustomerRecordReportDetailResponse_UserDetail) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CustomerRecordReportDetailResponse_UserDetail) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for UserId
+
+	// no validation rules for Name
+
+	// no validation rules for Phone
+
+	// no validation rules for IdType
+
+	// no validation rules for IdNumber
+
+	// no validation rules for Address
+
+	if len(errors) > 0 {
+		return CustomerRecordReportDetailResponse_UserDetailMultiError(errors)
+	}
+
+	return nil
+}
+
+// CustomerRecordReportDetailResponse_UserDetailMultiError is an error wrapping
+// multiple validation errors returned by
+// CustomerRecordReportDetailResponse_UserDetail.ValidateAll() if the
+// designated constraints aren't met.
+type CustomerRecordReportDetailResponse_UserDetailMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CustomerRecordReportDetailResponse_UserDetailMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CustomerRecordReportDetailResponse_UserDetailMultiError) AllErrors() []error { return m }
+
+// CustomerRecordReportDetailResponse_UserDetailValidationError is the
+// validation error returned by
+// CustomerRecordReportDetailResponse_UserDetail.Validate if the designated
+// constraints aren't met.
+type CustomerRecordReportDetailResponse_UserDetailValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CustomerRecordReportDetailResponse_UserDetailValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CustomerRecordReportDetailResponse_UserDetailValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e CustomerRecordReportDetailResponse_UserDetailValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CustomerRecordReportDetailResponse_UserDetailValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CustomerRecordReportDetailResponse_UserDetailValidationError) ErrorName() string {
+	return "CustomerRecordReportDetailResponse_UserDetailValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CustomerRecordReportDetailResponse_UserDetailValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCustomerRecordReportDetailResponse_UserDetail.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CustomerRecordReportDetailResponse_UserDetailValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CustomerRecordReportDetailResponse_UserDetailValidationError{}
+
+// Validate checks the field values on
+// CustomerRecordReportDetailResponse_PaymentTransaction with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CustomerRecordReportDetailResponse_PaymentTransaction) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// CustomerRecordReportDetailResponse_PaymentTransaction with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CustomerRecordReportDetailResponse_PaymentTransactionMultiError, or nil if
+// none found.
+func (m *CustomerRecordReportDetailResponse_PaymentTransaction) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CustomerRecordReportDetailResponse_PaymentTransaction) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for PaymentTransactionId
+
+	// no validation rules for PspTransactionId
+
+	if all {
+		switch v := interface{}(m.GetArrivalTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CustomerRecordReportDetailResponse_PaymentTransactionValidationError{
+					field:  "ArrivalTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CustomerRecordReportDetailResponse_PaymentTransactionValidationError{
+					field:  "ArrivalTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetArrivalTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CustomerRecordReportDetailResponse_PaymentTransactionValidationError{
+				field:  "ArrivalTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for PaymentServiceProvider
+
+	// no validation rules for MethodOfPayment
+
+	// no validation rules for PaymentChannel
+
+	// no validation rules for Currency
+
+	// no validation rules for Amount
+
+	// no validation rules for ProcessingFee
+
+	if len(errors) > 0 {
+		return CustomerRecordReportDetailResponse_PaymentTransactionMultiError(errors)
+	}
+
+	return nil
+}
+
+// CustomerRecordReportDetailResponse_PaymentTransactionMultiError is an error
+// wrapping multiple validation errors returned by
+// CustomerRecordReportDetailResponse_PaymentTransaction.ValidateAll() if the
+// designated constraints aren't met.
+type CustomerRecordReportDetailResponse_PaymentTransactionMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CustomerRecordReportDetailResponse_PaymentTransactionMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CustomerRecordReportDetailResponse_PaymentTransactionMultiError) AllErrors() []error {
+	return m
+}
+
+// CustomerRecordReportDetailResponse_PaymentTransactionValidationError is the
+// validation error returned by
+// CustomerRecordReportDetailResponse_PaymentTransaction.Validate if the
+// designated constraints aren't met.
+type CustomerRecordReportDetailResponse_PaymentTransactionValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CustomerRecordReportDetailResponse_PaymentTransactionValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e CustomerRecordReportDetailResponse_PaymentTransactionValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e CustomerRecordReportDetailResponse_PaymentTransactionValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e CustomerRecordReportDetailResponse_PaymentTransactionValidationError) Key() bool {
+	return e.key
+}
+
+// ErrorName returns error name.
+func (e CustomerRecordReportDetailResponse_PaymentTransactionValidationError) ErrorName() string {
+	return "CustomerRecordReportDetailResponse_PaymentTransactionValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CustomerRecordReportDetailResponse_PaymentTransactionValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCustomerRecordReportDetailResponse_PaymentTransaction.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CustomerRecordReportDetailResponse_PaymentTransactionValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CustomerRecordReportDetailResponse_PaymentTransactionValidationError{}
+
+// Validate checks the field values on
+// CustomerRecordReportDetailResponse_GameTransaction with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *CustomerRecordReportDetailResponse_GameTransaction) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// CustomerRecordReportDetailResponse_GameTransaction with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in
+// CustomerRecordReportDetailResponse_GameTransactionMultiError, or nil if
+// none found.
+func (m *CustomerRecordReportDetailResponse_GameTransaction) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CustomerRecordReportDetailResponse_GameTransaction) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for GameTransactionId
+
+	// no validation rules for ProviderTransactionId
+
+	if all {
+		switch v := interface{}(m.GetSettlementTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CustomerRecordReportDetailResponse_GameTransactionValidationError{
+					field:  "SettlementTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CustomerRecordReportDetailResponse_GameTransactionValidationError{
+					field:  "SettlementTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetSettlementTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CustomerRecordReportDetailResponse_GameTransactionValidationError{
+				field:  "SettlementTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for WagerType
+
+	// no validation rules for BetCurrency
+
+	// no validation rules for BetAmount
+
+	// no validation rules for PayoutAmount
+
+	// no validation rules for BetSettlementCurrency
+
+	// no validation rules for BetSettlementAmount
+
+	// no validation rules for ValidBetAmount
+
+	// no validation rules for Odds
+
+	// no validation rules for WinMultiplier
+
+	// no validation rules for PayoutSettlementAmount
+
+	if len(errors) > 0 {
+		return CustomerRecordReportDetailResponse_GameTransactionMultiError(errors)
+	}
+
+	return nil
+}
+
+// CustomerRecordReportDetailResponse_GameTransactionMultiError is an error
+// wrapping multiple validation errors returned by
+// CustomerRecordReportDetailResponse_GameTransaction.ValidateAll() if the
+// designated constraints aren't met.
+type CustomerRecordReportDetailResponse_GameTransactionMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CustomerRecordReportDetailResponse_GameTransactionMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CustomerRecordReportDetailResponse_GameTransactionMultiError) AllErrors() []error { return m }
+
+// CustomerRecordReportDetailResponse_GameTransactionValidationError is the
+// validation error returned by
+// CustomerRecordReportDetailResponse_GameTransaction.Validate if the
+// designated constraints aren't met.
+type CustomerRecordReportDetailResponse_GameTransactionValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CustomerRecordReportDetailResponse_GameTransactionValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e CustomerRecordReportDetailResponse_GameTransactionValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e CustomerRecordReportDetailResponse_GameTransactionValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e CustomerRecordReportDetailResponse_GameTransactionValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CustomerRecordReportDetailResponse_GameTransactionValidationError) ErrorName() string {
+	return "CustomerRecordReportDetailResponse_GameTransactionValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CustomerRecordReportDetailResponse_GameTransactionValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCustomerRecordReportDetailResponse_GameTransaction.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CustomerRecordReportDetailResponse_GameTransactionValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CustomerRecordReportDetailResponse_GameTransactionValidationError{}
+
+// Validate checks the field values on
+// CustomerRecordReportDetailResponse_EventSettlementInformation with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CustomerRecordReportDetailResponse_EventSettlementInformation) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// CustomerRecordReportDetailResponse_EventSettlementInformation with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CustomerRecordReportDetailResponse_EventSettlementInformationMultiError, or
+// nil if none found.
+func (m *CustomerRecordReportDetailResponse_EventSettlementInformation) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CustomerRecordReportDetailResponse_EventSettlementInformation) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetMatchResults() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, CustomerRecordReportDetailResponse_EventSettlementInformationValidationError{
+						field:  fmt.Sprintf("MatchResults[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, CustomerRecordReportDetailResponse_EventSettlementInformationValidationError{
+						field:  fmt.Sprintf("MatchResults[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return CustomerRecordReportDetailResponse_EventSettlementInformationValidationError{
+					field:  fmt.Sprintf("MatchResults[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return CustomerRecordReportDetailResponse_EventSettlementInformationMultiError(errors)
+	}
+
+	return nil
+}
+
+// CustomerRecordReportDetailResponse_EventSettlementInformationMultiError is
+// an error wrapping multiple validation errors returned by
+// CustomerRecordReportDetailResponse_EventSettlementInformation.ValidateAll()
+// if the designated constraints aren't met.
+type CustomerRecordReportDetailResponse_EventSettlementInformationMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CustomerRecordReportDetailResponse_EventSettlementInformationMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CustomerRecordReportDetailResponse_EventSettlementInformationMultiError) AllErrors() []error {
+	return m
+}
+
+// CustomerRecordReportDetailResponse_EventSettlementInformationValidationError
+// is the validation error returned by
+// CustomerRecordReportDetailResponse_EventSettlementInformation.Validate if
+// the designated constraints aren't met.
+type CustomerRecordReportDetailResponse_EventSettlementInformationValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CustomerRecordReportDetailResponse_EventSettlementInformationValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e CustomerRecordReportDetailResponse_EventSettlementInformationValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e CustomerRecordReportDetailResponse_EventSettlementInformationValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e CustomerRecordReportDetailResponse_EventSettlementInformationValidationError) Key() bool {
+	return e.key
+}
+
+// ErrorName returns error name.
+func (e CustomerRecordReportDetailResponse_EventSettlementInformationValidationError) ErrorName() string {
+	return "CustomerRecordReportDetailResponse_EventSettlementInformationValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CustomerRecordReportDetailResponse_EventSettlementInformationValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCustomerRecordReportDetailResponse_EventSettlementInformation.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CustomerRecordReportDetailResponse_EventSettlementInformationValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CustomerRecordReportDetailResponse_EventSettlementInformationValidationError{}
+
+// Validate checks the field values on
+// CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsMultiError,
+// or nil if none found.
+func (m *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Name
+
+	// no validation rules for Status
+
+	// no validation rules for Selection
+
+	// no validation rules for Result
+
+	if all {
+		switch v := interface{}(m.GetEventStartTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError{
+					field:  "EventStartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError{
+					field:  "EventStartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetEventStartTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError{
+				field:  "EventStartTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for VenueTournament
+
+	// no validation rules for SettlementDetails
+
+	if len(errors) > 0 {
+		return CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsMultiError(errors)
+	}
+
+	return nil
+}
+
+// CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsMultiError
+// is an error wrapping multiple validation errors returned by
+// CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults.ValidateAll()
+// if the designated constraints aren't met.
+type CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsMultiError) AllErrors() []error {
+	return m
+}
+
+// CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError
+// is the validation error returned by
+// CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults.Validate
+// if the designated constraints aren't met.
+type CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError) Key() bool {
+	return e.key
+}
+
+// ErrorName returns error name.
+func (e CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError) ErrorName() string {
+	return "CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCustomerRecordReportDetailResponse_EventSettlementInformation_MatchResults.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CustomerRecordReportDetailResponse_EventSettlementInformation_MatchResultsValidationError{}

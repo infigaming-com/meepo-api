@@ -10,6 +10,7 @@ import (
 	context "context"
 	http "github.com/go-kratos/kratos/v2/transport/http"
 	binding "github.com/go-kratos/kratos/v2/transport/http/binding"
+	v1 "github.com/infigaming-com/meepo-api/game/service/v1"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -22,31 +23,51 @@ const _ = http.SupportPackageIsVersion1
 const OperationBackofficeFinanceAddAdjustment = "/api.backoffice.service.v1.BackofficeFinance/AddAdjustment"
 const OperationBackofficeFinanceCreateAdjustmentConfig = "/api.backoffice.service.v1.BackofficeFinance/CreateAdjustmentConfig"
 const OperationBackofficeFinanceDeleteAdjustmentConfig = "/api.backoffice.service.v1.BackofficeFinance/DeleteAdjustmentConfig"
+const OperationBackofficeFinanceExportTaxReports = "/api.backoffice.service.v1.BackofficeFinance/ExportTaxReports"
+const OperationBackofficeFinanceGetBalanceSummary = "/api.backoffice.service.v1.BackofficeFinance/GetBalanceSummary"
+const OperationBackofficeFinanceGetBalancesSummary = "/api.backoffice.service.v1.BackofficeFinance/GetBalancesSummary"
 const OperationBackofficeFinanceGetInvoiceDetail = "/api.backoffice.service.v1.BackofficeFinance/GetInvoiceDetail"
 const OperationBackofficeFinanceGetInvoiceSummary = "/api.backoffice.service.v1.BackofficeFinance/GetInvoiceSummary"
+const OperationBackofficeFinanceGetTaxReportConfig = "/api.backoffice.service.v1.BackofficeFinance/GetTaxReportConfig"
 const OperationBackofficeFinanceListAdjustmentConfigs = "/api.backoffice.service.v1.BackofficeFinance/ListAdjustmentConfigs"
 const OperationBackofficeFinanceListAdjustments = "/api.backoffice.service.v1.BackofficeFinance/ListAdjustments"
+const OperationBackofficeFinanceListBalanceMonthlyRevenueShares = "/api.backoffice.service.v1.BackofficeFinance/ListBalanceMonthlyRevenueShares"
+const OperationBackofficeFinanceListBalancesSummary = "/api.backoffice.service.v1.BackofficeFinance/ListBalancesSummary"
+const OperationBackofficeFinanceListBillingPeriods = "/api.backoffice.service.v1.BackofficeFinance/ListBillingPeriods"
 const OperationBackofficeFinanceListInvoices = "/api.backoffice.service.v1.BackofficeFinance/ListInvoices"
 const OperationBackofficeFinanceListMonthlyRevenueShare = "/api.backoffice.service.v1.BackofficeFinance/ListMonthlyRevenueShare"
 const OperationBackofficeFinanceListOperatorRevenueShare = "/api.backoffice.service.v1.BackofficeFinance/ListOperatorRevenueShare"
+const OperationBackofficeFinanceListTaxReports = "/api.backoffice.service.v1.BackofficeFinance/ListTaxReports"
 const OperationBackofficeFinanceListThirdPartyFees = "/api.backoffice.service.v1.BackofficeFinance/ListThirdPartyFees"
 const OperationBackofficeFinanceSendInvoices = "/api.backoffice.service.v1.BackofficeFinance/SendInvoices"
 const OperationBackofficeFinanceUpdateAdjustmentConfig = "/api.backoffice.service.v1.BackofficeFinance/UpdateAdjustmentConfig"
+const OperationBackofficeFinanceUpdateTaxReport = "/api.backoffice.service.v1.BackofficeFinance/UpdateTaxReport"
+const OperationBackofficeFinanceUpdateTaxReportConfig = "/api.backoffice.service.v1.BackofficeFinance/UpdateTaxReportConfig"
 
 type BackofficeFinanceHTTPServer interface {
 	AddAdjustment(context.Context, *AddAdjustmentRequest) (*AddAdjustmentResponse, error)
 	CreateAdjustmentConfig(context.Context, *CreateAdjustmentConfigRequest) (*CreateAdjustmentConfigResponse, error)
 	DeleteAdjustmentConfig(context.Context, *DeleteAdjustmentConfigRequest) (*DeleteAdjustmentConfigResponse, error)
+	ExportTaxReports(context.Context, *ExportTaxReportsRequest) (*v1.ExportTaxReportsResponse, error)
+	GetBalanceSummary(context.Context, *GetBalanceSummaryRequest) (*GetBalanceSummaryResponse, error)
+	GetBalancesSummary(context.Context, *GetBalancesSummaryRequest) (*GetBalancesSummaryResponse, error)
 	GetInvoiceDetail(context.Context, *GetInvoiceDetailRequest) (*GetInvoiceDetailResponse, error)
 	GetInvoiceSummary(context.Context, *GetInvoiceSummaryRequest) (*GetInvoiceSummaryResponse, error)
+	GetTaxReportConfig(context.Context, *GetTaxReportConfigRequest) (*GetTaxReportConfigResponse, error)
 	ListAdjustmentConfigs(context.Context, *ListAdjustmentConfigsRequest) (*ListAdjustmentConfigsResponse, error)
 	ListAdjustments(context.Context, *ListAdjustmentsRequest) (*ListAdjustmentsResponse, error)
+	ListBalanceMonthlyRevenueShares(context.Context, *ListBalanceMonthlyRevenueSharesRequest) (*ListBalanceMonthlyRevenueSharesResponse, error)
+	ListBalancesSummary(context.Context, *ListBalancesSummaryRequest) (*ListBalancesSummaryResponse, error)
+	ListBillingPeriods(context.Context, *ListBillingPeriodsRequest) (*ListBillingPeriodsResponse, error)
 	ListInvoices(context.Context, *ListInvoicesRequest) (*ListInvoicesResponse, error)
 	ListMonthlyRevenueShare(context.Context, *ListMonthlyRevenueShareRequest) (*ListMonthlyRevenueShareResponse, error)
 	ListOperatorRevenueShare(context.Context, *ListOperatorRevenueShareRequest) (*ListOperatorRevenueShareResponse, error)
+	ListTaxReports(context.Context, *ListTaxReportsRequest) (*ListTaxReportsResponse, error)
 	ListThirdPartyFees(context.Context, *ListThirdPartyFeesRequest) (*ListThirdPartyFeesResponse, error)
 	SendInvoices(context.Context, *SendInvoicesRequest) (*SendInvoicesResponse, error)
 	UpdateAdjustmentConfig(context.Context, *UpdateAdjustmentConfigRequest) (*UpdateAdjustmentConfigResponse, error)
+	UpdateTaxReport(context.Context, *UpdateTaxReportRequest) (*UpdateTaxReportResponse, error)
+	UpdateTaxReportConfig(context.Context, *UpdateTaxReportConfigRequest) (*UpdateTaxReportConfigResponse, error)
 }
 
 func RegisterBackofficeFinanceHTTPServer(s *http.Server, srv BackofficeFinanceHTTPServer) {
@@ -64,6 +85,16 @@ func RegisterBackofficeFinanceHTTPServer(s *http.Server, srv BackofficeFinanceHT
 	r.POST("/v1/backoffice/finance/adjustment-configs/delete", _BackofficeFinance_DeleteAdjustmentConfig0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/finance/invoices/send", _BackofficeFinance_SendInvoices0_HTTP_Handler(srv))
 	r.POST("/v1/backoffice/finance/invoices/summary", _BackofficeFinance_GetInvoiceSummary0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/finance/balance/summary", _BackofficeFinance_GetBalanceSummary0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/finance/balances/summary", _BackofficeFinance_GetBalancesSummary0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/finance/billing-periods/list", _BackofficeFinance_ListBillingPeriods0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/finance/balance/monthly-revenue-shares/list", _BackofficeFinance_ListBalanceMonthlyRevenueShares0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/finance/balances/summary/list", _BackofficeFinance_ListBalancesSummary0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/finance/tax-report-configs/get", _BackofficeFinance_GetTaxReportConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/finance/tax-report-configs/update", _BackofficeFinance_UpdateTaxReportConfig0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/finance/tax-reports/list", _BackofficeFinance_ListTaxReports0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/finance/tax-reports/export", _BackofficeFinance_ExportTaxReports0_HTTP_Handler(srv))
+	r.POST("/v1/backoffice/finance/tax-reports/update", _BackofficeFinance_UpdateTaxReport0_HTTP_Handler(srv))
 }
 
 func _BackofficeFinance_ListInvoices0_HTTP_Handler(srv BackofficeFinanceHTTPServer) func(ctx http.Context) error {
@@ -352,20 +383,250 @@ func _BackofficeFinance_GetInvoiceSummary0_HTTP_Handler(srv BackofficeFinanceHTT
 	}
 }
 
+func _BackofficeFinance_GetBalanceSummary0_HTTP_Handler(srv BackofficeFinanceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetBalanceSummaryRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeFinanceGetBalanceSummary)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetBalanceSummary(ctx, req.(*GetBalanceSummaryRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetBalanceSummaryResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeFinance_GetBalancesSummary0_HTTP_Handler(srv BackofficeFinanceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetBalancesSummaryRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeFinanceGetBalancesSummary)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetBalancesSummary(ctx, req.(*GetBalancesSummaryRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetBalancesSummaryResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeFinance_ListBillingPeriods0_HTTP_Handler(srv BackofficeFinanceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListBillingPeriodsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeFinanceListBillingPeriods)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListBillingPeriods(ctx, req.(*ListBillingPeriodsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListBillingPeriodsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeFinance_ListBalanceMonthlyRevenueShares0_HTTP_Handler(srv BackofficeFinanceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListBalanceMonthlyRevenueSharesRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeFinanceListBalanceMonthlyRevenueShares)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListBalanceMonthlyRevenueShares(ctx, req.(*ListBalanceMonthlyRevenueSharesRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListBalanceMonthlyRevenueSharesResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeFinance_ListBalancesSummary0_HTTP_Handler(srv BackofficeFinanceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListBalancesSummaryRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeFinanceListBalancesSummary)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListBalancesSummary(ctx, req.(*ListBalancesSummaryRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListBalancesSummaryResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeFinance_GetTaxReportConfig0_HTTP_Handler(srv BackofficeFinanceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetTaxReportConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeFinanceGetTaxReportConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetTaxReportConfig(ctx, req.(*GetTaxReportConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetTaxReportConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeFinance_UpdateTaxReportConfig0_HTTP_Handler(srv BackofficeFinanceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateTaxReportConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeFinanceUpdateTaxReportConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateTaxReportConfig(ctx, req.(*UpdateTaxReportConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UpdateTaxReportConfigResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeFinance_ListTaxReports0_HTTP_Handler(srv BackofficeFinanceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListTaxReportsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeFinanceListTaxReports)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListTaxReports(ctx, req.(*ListTaxReportsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListTaxReportsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeFinance_ExportTaxReports0_HTTP_Handler(srv BackofficeFinanceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ExportTaxReportsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeFinanceExportTaxReports)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ExportTaxReports(ctx, req.(*ExportTaxReportsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*v1.ExportTaxReportsResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _BackofficeFinance_UpdateTaxReport0_HTTP_Handler(srv BackofficeFinanceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateTaxReportRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationBackofficeFinanceUpdateTaxReport)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateTaxReport(ctx, req.(*UpdateTaxReportRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UpdateTaxReportResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 type BackofficeFinanceHTTPClient interface {
 	AddAdjustment(ctx context.Context, req *AddAdjustmentRequest, opts ...http.CallOption) (rsp *AddAdjustmentResponse, err error)
 	CreateAdjustmentConfig(ctx context.Context, req *CreateAdjustmentConfigRequest, opts ...http.CallOption) (rsp *CreateAdjustmentConfigResponse, err error)
 	DeleteAdjustmentConfig(ctx context.Context, req *DeleteAdjustmentConfigRequest, opts ...http.CallOption) (rsp *DeleteAdjustmentConfigResponse, err error)
+	ExportTaxReports(ctx context.Context, req *ExportTaxReportsRequest, opts ...http.CallOption) (rsp *v1.ExportTaxReportsResponse, err error)
+	GetBalanceSummary(ctx context.Context, req *GetBalanceSummaryRequest, opts ...http.CallOption) (rsp *GetBalanceSummaryResponse, err error)
+	GetBalancesSummary(ctx context.Context, req *GetBalancesSummaryRequest, opts ...http.CallOption) (rsp *GetBalancesSummaryResponse, err error)
 	GetInvoiceDetail(ctx context.Context, req *GetInvoiceDetailRequest, opts ...http.CallOption) (rsp *GetInvoiceDetailResponse, err error)
 	GetInvoiceSummary(ctx context.Context, req *GetInvoiceSummaryRequest, opts ...http.CallOption) (rsp *GetInvoiceSummaryResponse, err error)
+	GetTaxReportConfig(ctx context.Context, req *GetTaxReportConfigRequest, opts ...http.CallOption) (rsp *GetTaxReportConfigResponse, err error)
 	ListAdjustmentConfigs(ctx context.Context, req *ListAdjustmentConfigsRequest, opts ...http.CallOption) (rsp *ListAdjustmentConfigsResponse, err error)
 	ListAdjustments(ctx context.Context, req *ListAdjustmentsRequest, opts ...http.CallOption) (rsp *ListAdjustmentsResponse, err error)
+	ListBalanceMonthlyRevenueShares(ctx context.Context, req *ListBalanceMonthlyRevenueSharesRequest, opts ...http.CallOption) (rsp *ListBalanceMonthlyRevenueSharesResponse, err error)
+	ListBalancesSummary(ctx context.Context, req *ListBalancesSummaryRequest, opts ...http.CallOption) (rsp *ListBalancesSummaryResponse, err error)
+	ListBillingPeriods(ctx context.Context, req *ListBillingPeriodsRequest, opts ...http.CallOption) (rsp *ListBillingPeriodsResponse, err error)
 	ListInvoices(ctx context.Context, req *ListInvoicesRequest, opts ...http.CallOption) (rsp *ListInvoicesResponse, err error)
 	ListMonthlyRevenueShare(ctx context.Context, req *ListMonthlyRevenueShareRequest, opts ...http.CallOption) (rsp *ListMonthlyRevenueShareResponse, err error)
 	ListOperatorRevenueShare(ctx context.Context, req *ListOperatorRevenueShareRequest, opts ...http.CallOption) (rsp *ListOperatorRevenueShareResponse, err error)
+	ListTaxReports(ctx context.Context, req *ListTaxReportsRequest, opts ...http.CallOption) (rsp *ListTaxReportsResponse, err error)
 	ListThirdPartyFees(ctx context.Context, req *ListThirdPartyFeesRequest, opts ...http.CallOption) (rsp *ListThirdPartyFeesResponse, err error)
 	SendInvoices(ctx context.Context, req *SendInvoicesRequest, opts ...http.CallOption) (rsp *SendInvoicesResponse, err error)
 	UpdateAdjustmentConfig(ctx context.Context, req *UpdateAdjustmentConfigRequest, opts ...http.CallOption) (rsp *UpdateAdjustmentConfigResponse, err error)
+	UpdateTaxReport(ctx context.Context, req *UpdateTaxReportRequest, opts ...http.CallOption) (rsp *UpdateTaxReportResponse, err error)
+	UpdateTaxReportConfig(ctx context.Context, req *UpdateTaxReportConfigRequest, opts ...http.CallOption) (rsp *UpdateTaxReportConfigResponse, err error)
 }
 
 type BackofficeFinanceHTTPClientImpl struct {
@@ -415,6 +676,45 @@ func (c *BackofficeFinanceHTTPClientImpl) DeleteAdjustmentConfig(ctx context.Con
 	return &out, nil
 }
 
+func (c *BackofficeFinanceHTTPClientImpl) ExportTaxReports(ctx context.Context, in *ExportTaxReportsRequest, opts ...http.CallOption) (*v1.ExportTaxReportsResponse, error) {
+	var out v1.ExportTaxReportsResponse
+	pattern := "/v1/backoffice/finance/tax-reports/export"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeFinanceExportTaxReports))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeFinanceHTTPClientImpl) GetBalanceSummary(ctx context.Context, in *GetBalanceSummaryRequest, opts ...http.CallOption) (*GetBalanceSummaryResponse, error) {
+	var out GetBalanceSummaryResponse
+	pattern := "/v1/backoffice/finance/balance/summary"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeFinanceGetBalanceSummary))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeFinanceHTTPClientImpl) GetBalancesSummary(ctx context.Context, in *GetBalancesSummaryRequest, opts ...http.CallOption) (*GetBalancesSummaryResponse, error) {
+	var out GetBalancesSummaryResponse
+	pattern := "/v1/backoffice/finance/balances/summary"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeFinanceGetBalancesSummary))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *BackofficeFinanceHTTPClientImpl) GetInvoiceDetail(ctx context.Context, in *GetInvoiceDetailRequest, opts ...http.CallOption) (*GetInvoiceDetailResponse, error) {
 	var out GetInvoiceDetailResponse
 	pattern := "/v1/backoffice/finance/invoice/detail"
@@ -441,6 +741,19 @@ func (c *BackofficeFinanceHTTPClientImpl) GetInvoiceSummary(ctx context.Context,
 	return &out, nil
 }
 
+func (c *BackofficeFinanceHTTPClientImpl) GetTaxReportConfig(ctx context.Context, in *GetTaxReportConfigRequest, opts ...http.CallOption) (*GetTaxReportConfigResponse, error) {
+	var out GetTaxReportConfigResponse
+	pattern := "/v1/backoffice/finance/tax-report-configs/get"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeFinanceGetTaxReportConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *BackofficeFinanceHTTPClientImpl) ListAdjustmentConfigs(ctx context.Context, in *ListAdjustmentConfigsRequest, opts ...http.CallOption) (*ListAdjustmentConfigsResponse, error) {
 	var out ListAdjustmentConfigsResponse
 	pattern := "/v1/backoffice/finance/adjustment-configs/list"
@@ -459,6 +772,45 @@ func (c *BackofficeFinanceHTTPClientImpl) ListAdjustments(ctx context.Context, i
 	pattern := "/v1/backoffice/finance/adjustments/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeFinanceListAdjustments))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeFinanceHTTPClientImpl) ListBalanceMonthlyRevenueShares(ctx context.Context, in *ListBalanceMonthlyRevenueSharesRequest, opts ...http.CallOption) (*ListBalanceMonthlyRevenueSharesResponse, error) {
+	var out ListBalanceMonthlyRevenueSharesResponse
+	pattern := "/v1/backoffice/finance/balance/monthly-revenue-shares/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeFinanceListBalanceMonthlyRevenueShares))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeFinanceHTTPClientImpl) ListBalancesSummary(ctx context.Context, in *ListBalancesSummaryRequest, opts ...http.CallOption) (*ListBalancesSummaryResponse, error) {
+	var out ListBalancesSummaryResponse
+	pattern := "/v1/backoffice/finance/balances/summary/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeFinanceListBalancesSummary))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeFinanceHTTPClientImpl) ListBillingPeriods(ctx context.Context, in *ListBillingPeriodsRequest, opts ...http.CallOption) (*ListBillingPeriodsResponse, error) {
+	var out ListBillingPeriodsResponse
+	pattern := "/v1/backoffice/finance/billing-periods/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeFinanceListBillingPeriods))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -506,6 +858,19 @@ func (c *BackofficeFinanceHTTPClientImpl) ListOperatorRevenueShare(ctx context.C
 	return &out, nil
 }
 
+func (c *BackofficeFinanceHTTPClientImpl) ListTaxReports(ctx context.Context, in *ListTaxReportsRequest, opts ...http.CallOption) (*ListTaxReportsResponse, error) {
+	var out ListTaxReportsResponse
+	pattern := "/v1/backoffice/finance/tax-reports/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeFinanceListTaxReports))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 func (c *BackofficeFinanceHTTPClientImpl) ListThirdPartyFees(ctx context.Context, in *ListThirdPartyFeesRequest, opts ...http.CallOption) (*ListThirdPartyFeesResponse, error) {
 	var out ListThirdPartyFeesResponse
 	pattern := "/v1/backoffice/finance/third-party-fees/list"
@@ -537,6 +902,32 @@ func (c *BackofficeFinanceHTTPClientImpl) UpdateAdjustmentConfig(ctx context.Con
 	pattern := "/v1/backoffice/finance/adjustment-configs/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBackofficeFinanceUpdateAdjustmentConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeFinanceHTTPClientImpl) UpdateTaxReport(ctx context.Context, in *UpdateTaxReportRequest, opts ...http.CallOption) (*UpdateTaxReportResponse, error) {
+	var out UpdateTaxReportResponse
+	pattern := "/v1/backoffice/finance/tax-reports/update"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeFinanceUpdateTaxReport))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+func (c *BackofficeFinanceHTTPClientImpl) UpdateTaxReportConfig(ctx context.Context, in *UpdateTaxReportConfigRequest, opts ...http.CallOption) (*UpdateTaxReportConfigResponse, error) {
+	var out UpdateTaxReportConfigResponse
+	pattern := "/v1/backoffice/finance/tax-report-configs/update"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationBackofficeFinanceUpdateTaxReportConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

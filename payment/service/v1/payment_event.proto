@@ -16,6 +16,7 @@ service PaymentEvent {
 message EventRequest {
 	string subscription_id = 1;
 	bytes event_data = 2;
+	string message_id = 3;
 }
 
 message EventResponse {}
@@ -29,11 +30,13 @@ message PaymentTransactionEvent {
 	string pa_transaction_id = 2;
 	string transaction_type = 3;
 	int64 user_id = 4;
-	api.common.OperatorContext operator_context = 6;
-	string currency = 8; // payment currency
-	string reporting_currency = 9;
-	string amount = 10; // cash amount of the currency
-	string status = 11; // payment status
+	api.common.OperatorContext operator_context = 5;
+	string currency = 6; // payment currency
+	string reporting_currency = 7;
+	string amount = 8; // cash amount of the currency
+	string status = 9; // payment status
+	int64 created_at = 10;
+	int64 settled_at = 11;
 	google.protobuf.Struct extra = 12;
 	ChannelInfo channel_info = 13;
 }
@@ -42,13 +45,16 @@ message OperatorPaymentTransactionEvent {
 	int64 transaction_id = 1; // payment transaction id
 	string pa_transaction_id = 2;
 	string transaction_type = 3;
-	api.common.OperatorContext operator_context = 5;
-	string currency = 7; // payment currency
-	string settlement_currency = 8; // wallet currency
-	string reporting_currency = 9;
-	string exchange_rate = 10; // exchange rate of the currency to the settlement currency
-	string amount = 11; // cash amount of the currency
-	string status = 12; // payment status
-	google.protobuf.Struct extra = 13;
-	ChannelInfo channel_info = 14;
+	api.common.OperatorContext target_operator_context = 4;
+	api.common.OperatorContext source_operator_context = 5;
+	string currency = 6; // payment currency
+	string settlement_currency = 7; // wallet currency
+	string reporting_currency = 8;
+	string exchange_rate = 9; // exchange rate of the currency to the settlement currency
+	string amount = 10; // cash amount of the currency
+	string status = 11; // payment status
+	int64 created_at = 12;
+	int64 settled_at = 13;
+	google.protobuf.Struct extra = 14;
+	ChannelInfo channel_info = 15;
 }

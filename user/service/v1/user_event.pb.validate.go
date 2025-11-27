@@ -61,6 +61,8 @@ func (m *EventRequest) validate(all bool) error {
 
 	// no validation rules for EventData
 
+	// no validation rules for MessageId
+
 	if len(errors) > 0 {
 		return EventRequestMultiError(errors)
 	}
@@ -275,6 +277,16 @@ func (m *AddUserEvent) validate(all bool) error {
 	// no validation rules for Email
 
 	// no validation rules for Mobile
+
+	// no validation rules for RoleId
+
+	// no validation rules for Country
+
+	// no validation rules for RegisteredAt
+
+	if m.RegistrationUrl != nil {
+		// no validation rules for RegistrationUrl
+	}
 
 	if len(errors) > 0 {
 		return AddUserEventMultiError(errors)

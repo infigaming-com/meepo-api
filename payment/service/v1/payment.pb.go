@@ -187,76 +187,30 @@ func (Sort) EnumDescriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{2}
 }
 
-// Request source enum
-// Defines the source of the request
-type RequestSource int32
-
-const (
-	// Request from frontend user
-	RequestSource_REQUEST_SOURCE_FRONTEND RequestSource = 0
-	// Request from admin backend
-	RequestSource_REQUEST_SOURCE_ADMIN RequestSource = 1
-)
-
-// Enum value maps for RequestSource.
-var (
-	RequestSource_name = map[int32]string{
-		0: "REQUEST_SOURCE_FRONTEND",
-		1: "REQUEST_SOURCE_ADMIN",
-	}
-	RequestSource_value = map[string]int32{
-		"REQUEST_SOURCE_FRONTEND": 0,
-		"REQUEST_SOURCE_ADMIN":    1,
-	}
-)
-
-func (x RequestSource) Enum() *RequestSource {
-	p := new(RequestSource)
-	*p = x
-	return p
-}
-
-func (x RequestSource) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (RequestSource) Descriptor() protoreflect.EnumDescriptor {
-	return file_payment_service_v1_payment_proto_enumTypes[3].Descriptor()
-}
-
-func (RequestSource) Type() protoreflect.EnumType {
-	return &file_payment_service_v1_payment_proto_enumTypes[3]
-}
-
-func (x RequestSource) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use RequestSource.Descriptor instead.
-func (RequestSource) EnumDescriptor() ([]byte, []int) {
-	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{3}
-}
-
 // Channel type enum
 // Defines the purpose of a payment channel
 type ChannelType int32
 
 const (
+	// All Channel
+	ChannelType_CHANNEL_TYPE_ALL ChannelType = 0
 	// Channel for depositing funds
-	ChannelType_CHANNEL_TYPE_DEPOSIT ChannelType = 0
+	ChannelType_CHANNEL_TYPE_DEPOSIT ChannelType = 1
 	// Channel for withdrawing funds
-	ChannelType_CHANNEL_TYPE_WITHDRAW ChannelType = 1
+	ChannelType_CHANNEL_TYPE_WITHDRAW ChannelType = 2
 )
 
 // Enum value maps for ChannelType.
 var (
 	ChannelType_name = map[int32]string{
-		0: "CHANNEL_TYPE_DEPOSIT",
-		1: "CHANNEL_TYPE_WITHDRAW",
+		0: "CHANNEL_TYPE_ALL",
+		1: "CHANNEL_TYPE_DEPOSIT",
+		2: "CHANNEL_TYPE_WITHDRAW",
 	}
 	ChannelType_value = map[string]int32{
-		"CHANNEL_TYPE_DEPOSIT":  0,
-		"CHANNEL_TYPE_WITHDRAW": 1,
+		"CHANNEL_TYPE_ALL":      0,
+		"CHANNEL_TYPE_DEPOSIT":  1,
+		"CHANNEL_TYPE_WITHDRAW": 2,
 	}
 )
 
@@ -271,11 +225,11 @@ func (x ChannelType) String() string {
 }
 
 func (ChannelType) Descriptor() protoreflect.EnumDescriptor {
-	return file_payment_service_v1_payment_proto_enumTypes[4].Descriptor()
+	return file_payment_service_v1_payment_proto_enumTypes[3].Descriptor()
 }
 
 func (ChannelType) Type() protoreflect.EnumType {
-	return &file_payment_service_v1_payment_proto_enumTypes[4]
+	return &file_payment_service_v1_payment_proto_enumTypes[3]
 }
 
 func (x ChannelType) Number() protoreflect.EnumNumber {
@@ -284,7 +238,7 @@ func (x ChannelType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ChannelType.Descriptor instead.
 func (ChannelType) EnumDescriptor() ([]byte, []int) {
-	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{4}
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{3}
 }
 
 // Request to get payment method list
@@ -335,9 +289,17 @@ func (x *GetSupportedPaymentMethodListRequest) GetCurrency() []string {
 }
 
 type GetPaymentMethodListRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state    protoimpl.MessageState `protogen:"open.v1"`
+	Currency string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	Psp      string                 `protobuf:"bytes,2,opt,name=psp,proto3" json:"psp,omitempty"`
+	// Page number to retrieve (1-based)
+	Page int32 `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	// Number of items per page
+	PageSize        int32                   `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Enabled         *bool                   `protobuf:"varint,5,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,6,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *GetPaymentMethodListRequest) Reset() {
@@ -370,6 +332,48 @@ func (*GetPaymentMethodListRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{1}
 }
 
+func (x *GetPaymentMethodListRequest) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *GetPaymentMethodListRequest) GetPsp() string {
+	if x != nil {
+		return x.Psp
+	}
+	return ""
+}
+
+func (x *GetPaymentMethodListRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *GetPaymentMethodListRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *GetPaymentMethodListRequest) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
+}
+
+func (x *GetPaymentMethodListRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
 // Details of a single payment method
 // Contains information about a specific payment method including its ID, currency, and required fields schema
 type PaymentMethodInfo struct {
@@ -377,34 +381,54 @@ type PaymentMethodInfo struct {
 	// Unique identifier for the payment method
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Currency code supported by this payment method (e.g., USD, EUR, CNY)
-	Psp          string `protobuf:"bytes,2,opt,name=psp,proto3" json:"psp,omitempty"`
-	Type         string `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
-	Currency     string `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
+	Psp string `protobuf:"bytes,2,opt,name=psp,proto3" json:"psp,omitempty"`
+	// Payin or Payout
+	SupportedType string `protobuf:"bytes,3,opt,name=supported_type,json=supportedType,proto3" json:"supported_type,omitempty"`
+	// Currency like USD, VND
+	Currency string `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
+	// Currency type (e.g., Crypto, Fiat)
 	CurrencyType string `protobuf:"bytes,5,opt,name=currency_type,json=currencyType,proto3" json:"currency_type,omitempty"`
-	Contact      string `protobuf:"bytes,6,opt,name=contact,proto3" json:"contact,omitempty"`
+	// Contact
+	Contact string `protobuf:"bytes,6,opt,name=contact,proto3" json:"contact,omitempty"`
 	// Country code where this payment method is available
 	Country string `protobuf:"bytes,7,opt,name=country,proto3" json:"country,omitempty"`
 	// Name of the payment method (e.g., CreditCard, AliPay, WeChatPay)
 	PaymentMethod string `protobuf:"bytes,8,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
 	// Fixed Fee on the Amount
-	FixedFee string `protobuf:"bytes,9,opt,name=fixed_fee,json=fixedFee,proto3" json:"fixed_fee,omitempty"`
+	SysFixedFee string `protobuf:"bytes,9,opt,name=sys_fixed_fee,json=sysFixedFee,proto3" json:"sys_fixed_fee,omitempty"`
 	// Rate Fee
-	FeeRate string `protobuf:"bytes,10,opt,name=fee_rate,json=feeRate,proto3" json:"fee_rate,omitempty"`
+	SysFeeRate string `protobuf:"bytes,10,opt,name=sys_fee_rate,json=sysFeeRate,proto3" json:"sys_fee_rate,omitempty"`
 	// Min Amount
-	MinAmount string `protobuf:"bytes,11,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
+	SysMinAmount string `protobuf:"bytes,11,opt,name=sys_min_amount,json=sysMinAmount,proto3" json:"sys_min_amount,omitempty"`
 	// Max Amount
-	MaxAmount string `protobuf:"bytes,12,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
+	SysMaxAmount string `protobuf:"bytes,12,opt,name=sys_max_amount,json=sysMaxAmount,proto3" json:"sys_max_amount,omitempty"`
+	// Minmum Fee
+	SysMinFee string `protobuf:"bytes,13,opt,name=sys_min_fee,json=sysMinFee,proto3" json:"sys_min_fee,omitempty"`
 	// Fixed Fee on the Amount
-	PspFixedFee string `protobuf:"bytes,13,opt,name=psp_fixed_fee,json=pspFixedFee,proto3" json:"psp_fixed_fee,omitempty"`
+	PspFixedFee string `protobuf:"bytes,14,opt,name=psp_fixed_fee,json=pspFixedFee,proto3" json:"psp_fixed_fee,omitempty"`
 	// Rate Fee
-	PspFeeRate string `protobuf:"bytes,14,opt,name=psp_fee_rate,json=pspFeeRate,proto3" json:"psp_fee_rate,omitempty"`
+	PspFeeRate string `protobuf:"bytes,15,opt,name=psp_fee_rate,json=pspFeeRate,proto3" json:"psp_fee_rate,omitempty"`
 	// Min Amount
-	PspMinAmount string `protobuf:"bytes,15,opt,name=psp_min_amount,json=pspMinAmount,proto3" json:"psp_min_amount,omitempty"`
+	PspMinAmount string `protobuf:"bytes,16,opt,name=psp_min_amount,json=pspMinAmount,proto3" json:"psp_min_amount,omitempty"`
 	// Max Amount
-	PspMaxAmount string `protobuf:"bytes,16,opt,name=psp_max_amount,json=pspMaxAmount,proto3" json:"psp_max_amount,omitempty"`
-	Enable       bool   `protobuf:"varint,17,opt,name=enable,proto3" json:"enable,omitempty"`
+	PspMaxAmount string `protobuf:"bytes,17,opt,name=psp_max_amount,json=pspMaxAmount,proto3" json:"psp_max_amount,omitempty"`
+	// Minmum Fee
+	PspMinFee string `protobuf:"bytes,18,opt,name=psp_min_fee,json=pspMinFee,proto3" json:"psp_min_fee,omitempty"`
+	// Status bool
+	Enable bool `protobuf:"varint,19,opt,name=enable,proto3" json:"enable,omitempty"`
+	// Crypto network
+	Network string `protobuf:"bytes,20,opt,name=network,proto3" json:"network,omitempty"`
+	// Crypto protocol
+	Protocol string `protobuf:"bytes,21,opt,name=protocol,proto3" json:"protocol,omitempty"`
+	// Source operator
+	Source string `protobuf:"bytes,22,opt,name=source,proto3" json:"source,omitempty"`
+	// Average Time
+	AverageTime int32 `protobuf:"varint,23,opt,name=average_time,json=averageTime,proto3" json:"average_time,omitempty"`
+	// Success Rate
+	SuccessRate string `protobuf:"bytes,24,opt,name=success_rate,json=successRate,proto3" json:"success_rate,omitempty"`
 	// JSON schema defining the required fields for this payment method
-	KeySchema     *structpb.Struct `protobuf:"bytes,18,opt,name=key_schema,json=keySchema,proto3" json:"key_schema,omitempty"`
+	KeySchema     *structpb.ListValue `protobuf:"bytes,25,opt,name=key_schema,json=keySchema,proto3" json:"key_schema,omitempty"`
+	PspId         string              `protobuf:"bytes,26,opt,name=psp_id,json=pspId,proto3" json:"psp_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -453,9 +477,9 @@ func (x *PaymentMethodInfo) GetPsp() string {
 	return ""
 }
 
-func (x *PaymentMethodInfo) GetType() string {
+func (x *PaymentMethodInfo) GetSupportedType() string {
 	if x != nil {
-		return x.Type
+		return x.SupportedType
 	}
 	return ""
 }
@@ -495,30 +519,37 @@ func (x *PaymentMethodInfo) GetPaymentMethod() string {
 	return ""
 }
 
-func (x *PaymentMethodInfo) GetFixedFee() string {
+func (x *PaymentMethodInfo) GetSysFixedFee() string {
 	if x != nil {
-		return x.FixedFee
+		return x.SysFixedFee
 	}
 	return ""
 }
 
-func (x *PaymentMethodInfo) GetFeeRate() string {
+func (x *PaymentMethodInfo) GetSysFeeRate() string {
 	if x != nil {
-		return x.FeeRate
+		return x.SysFeeRate
 	}
 	return ""
 }
 
-func (x *PaymentMethodInfo) GetMinAmount() string {
+func (x *PaymentMethodInfo) GetSysMinAmount() string {
 	if x != nil {
-		return x.MinAmount
+		return x.SysMinAmount
 	}
 	return ""
 }
 
-func (x *PaymentMethodInfo) GetMaxAmount() string {
+func (x *PaymentMethodInfo) GetSysMaxAmount() string {
 	if x != nil {
-		return x.MaxAmount
+		return x.SysMaxAmount
+	}
+	return ""
+}
+
+func (x *PaymentMethodInfo) GetSysMinFee() string {
+	if x != nil {
+		return x.SysMinFee
 	}
 	return ""
 }
@@ -551,6 +582,13 @@ func (x *PaymentMethodInfo) GetPspMaxAmount() string {
 	return ""
 }
 
+func (x *PaymentMethodInfo) GetPspMinFee() string {
+	if x != nil {
+		return x.PspMinFee
+	}
+	return ""
+}
+
 func (x *PaymentMethodInfo) GetEnable() bool {
 	if x != nil {
 		return x.Enable
@@ -558,11 +596,53 @@ func (x *PaymentMethodInfo) GetEnable() bool {
 	return false
 }
 
-func (x *PaymentMethodInfo) GetKeySchema() *structpb.Struct {
+func (x *PaymentMethodInfo) GetNetwork() string {
+	if x != nil {
+		return x.Network
+	}
+	return ""
+}
+
+func (x *PaymentMethodInfo) GetProtocol() string {
+	if x != nil {
+		return x.Protocol
+	}
+	return ""
+}
+
+func (x *PaymentMethodInfo) GetSource() string {
+	if x != nil {
+		return x.Source
+	}
+	return ""
+}
+
+func (x *PaymentMethodInfo) GetAverageTime() int32 {
+	if x != nil {
+		return x.AverageTime
+	}
+	return 0
+}
+
+func (x *PaymentMethodInfo) GetSuccessRate() string {
+	if x != nil {
+		return x.SuccessRate
+	}
+	return ""
+}
+
+func (x *PaymentMethodInfo) GetKeySchema() *structpb.ListValue {
 	if x != nil {
 		return x.KeySchema
 	}
 	return nil
+}
+
+func (x *PaymentMethodInfo) GetPspId() string {
+	if x != nil {
+		return x.PspId
+	}
+	return ""
 }
 
 // Response for payment method list
@@ -618,8 +698,19 @@ type GetPaymentMethodListResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// List of payment methods available
 	PaymentMethods []*PaymentMethodInfo `protobuf:"bytes,1,rep,name=payment_methods,json=paymentMethods,proto3" json:"payment_methods,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// Current page number
+	Page int32 `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	// Number of items per page
+	PageSize int32 `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Total number of pages available
+	TotalPages int32 `protobuf:"varint,4,opt,name=total_pages,json=totalPages,proto3" json:"total_pages,omitempty"`
+	// The following fields are only populated for admin requests
+	// Total number of successful transactions
+	TotalOn int32 `protobuf:"varint,5,opt,name=total_on,json=totalOn,proto3" json:"total_on,omitempty"`
+	// Total number of processing transactions
+	TotalOff      int32 `protobuf:"varint,6,opt,name=total_off,json=totalOff,proto3" json:"total_off,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetPaymentMethodListResponse) Reset() {
@@ -659,38 +750,63 @@ func (x *GetPaymentMethodListResponse) GetPaymentMethods() []*PaymentMethodInfo 
 	return nil
 }
 
+func (x *GetPaymentMethodListResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *GetPaymentMethodListResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *GetPaymentMethodListResponse) GetTotalPages() int32 {
+	if x != nil {
+		return x.TotalPages
+	}
+	return 0
+}
+
+func (x *GetPaymentMethodListResponse) GetTotalOn() int32 {
+	if x != nil {
+		return x.TotalOn
+	}
+	return 0
+}
+
+func (x *GetPaymentMethodListResponse) GetTotalOff() int32 {
+	if x != nil {
+		return x.TotalOff
+	}
+	return 0
+}
+
 // Request to create a payment channel
 // Used to create a new payment channel with specified merchant and method
 type CreatePaymentMethodRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Operator connect with this channel
-	OperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	// ID of the payment method to be used
-	PaymentMethodId string `protobuf:"bytes,2,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
+	PaymentMethodId string `protobuf:"bytes,1,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
 	// Currency Type
-	CurrencyType string `protobuf:"bytes,3,opt,name=currency_type,json=currencyType,proto3" json:"currency_type,omitempty"`
-	// Contact Info email
-	Contact string `protobuf:"bytes,4,opt,name=contact,proto3" json:"contact,omitempty"`
+	Contact string `protobuf:"bytes,2,opt,name=contact,proto3" json:"contact,omitempty"`
 	// Fixed Fee on the Amount
-	FixedFee string `protobuf:"bytes,5,opt,name=fixed_fee,json=fixedFee,proto3" json:"fixed_fee,omitempty"`
+	SysFixedFee string `protobuf:"bytes,3,opt,name=sys_fixed_fee,json=sysFixedFee,proto3" json:"sys_fixed_fee,omitempty"`
 	// Rate Fee
-	FeeRate string `protobuf:"bytes,6,opt,name=fee_rate,json=feeRate,proto3" json:"fee_rate,omitempty"`
+	SysFeeRate string `protobuf:"bytes,4,opt,name=sys_fee_rate,json=sysFeeRate,proto3" json:"sys_fee_rate,omitempty"`
 	// Min Amount
-	MinAmount string `protobuf:"bytes,7,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
+	SysMinAmount string `protobuf:"bytes,5,opt,name=sys_min_amount,json=sysMinAmount,proto3" json:"sys_min_amount,omitempty"`
 	// Max Amount
-	MaxAmount string `protobuf:"bytes,8,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
-	// PSP Fixed Fee on the Amount
-	PspFixedFee string `protobuf:"bytes,9,opt,name=psp_fixed_fee,json=pspFixedFee,proto3" json:"psp_fixed_fee,omitempty"`
-	// PSP Rate Fee
-	PspFeeRate string `protobuf:"bytes,10,opt,name=psp_fee_rate,json=pspFeeRate,proto3" json:"psp_fee_rate,omitempty"`
-	// PSP Min Amount
-	PspMinAmount string `protobuf:"bytes,11,opt,name=psp_min_amount,json=pspMinAmount,proto3" json:"psp_min_amount,omitempty"`
-	// PSP Max Amount
-	PspMaxAmount string `protobuf:"bytes,12,opt,name=psp_max_amount,json=pspMaxAmount,proto3" json:"psp_max_amount,omitempty"`
-	// JSON schema defining the required fields for this payment method
-	Key           *structpb.Struct `protobuf:"bytes,13,opt,name=key,proto3" json:"key,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	SysMaxAmount string `protobuf:"bytes,6,opt,name=sys_max_amount,json=sysMaxAmount,proto3" json:"sys_max_amount,omitempty"`
+	// Minmum Fee
+	SysMinFee string `protobuf:"bytes,7,opt,name=sys_min_fee,json=sysMinFee,proto3" json:"sys_min_fee,omitempty"`
+	// ID of the Operator connect with this channel
+	OperatorContext *common.OperatorContext `protobuf:"bytes,8,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *CreatePaymentMethodRequest) Reset() {
@@ -723,23 +839,9 @@ func (*CreatePaymentMethodRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *CreatePaymentMethodRequest) GetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.OperatorContext
-	}
-	return nil
-}
-
 func (x *CreatePaymentMethodRequest) GetPaymentMethodId() string {
 	if x != nil {
 		return x.PaymentMethodId
-	}
-	return ""
-}
-
-func (x *CreatePaymentMethodRequest) GetCurrencyType() string {
-	if x != nil {
-		return x.CurrencyType
 	}
 	return ""
 }
@@ -751,65 +853,44 @@ func (x *CreatePaymentMethodRequest) GetContact() string {
 	return ""
 }
 
-func (x *CreatePaymentMethodRequest) GetFixedFee() string {
+func (x *CreatePaymentMethodRequest) GetSysFixedFee() string {
 	if x != nil {
-		return x.FixedFee
+		return x.SysFixedFee
 	}
 	return ""
 }
 
-func (x *CreatePaymentMethodRequest) GetFeeRate() string {
+func (x *CreatePaymentMethodRequest) GetSysFeeRate() string {
 	if x != nil {
-		return x.FeeRate
+		return x.SysFeeRate
 	}
 	return ""
 }
 
-func (x *CreatePaymentMethodRequest) GetMinAmount() string {
+func (x *CreatePaymentMethodRequest) GetSysMinAmount() string {
 	if x != nil {
-		return x.MinAmount
+		return x.SysMinAmount
 	}
 	return ""
 }
 
-func (x *CreatePaymentMethodRequest) GetMaxAmount() string {
+func (x *CreatePaymentMethodRequest) GetSysMaxAmount() string {
 	if x != nil {
-		return x.MaxAmount
+		return x.SysMaxAmount
 	}
 	return ""
 }
 
-func (x *CreatePaymentMethodRequest) GetPspFixedFee() string {
+func (x *CreatePaymentMethodRequest) GetSysMinFee() string {
 	if x != nil {
-		return x.PspFixedFee
+		return x.SysMinFee
 	}
 	return ""
 }
 
-func (x *CreatePaymentMethodRequest) GetPspFeeRate() string {
+func (x *CreatePaymentMethodRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.PspFeeRate
-	}
-	return ""
-}
-
-func (x *CreatePaymentMethodRequest) GetPspMinAmount() string {
-	if x != nil {
-		return x.PspMinAmount
-	}
-	return ""
-}
-
-func (x *CreatePaymentMethodRequest) GetPspMaxAmount() string {
-	if x != nil {
-		return x.PspMaxAmount
-	}
-	return ""
-}
-
-func (x *CreatePaymentMethodRequest) GetKey() *structpb.Struct {
-	if x != nil {
-		return x.Key
+		return x.OperatorContext
 	}
 	return nil
 }
@@ -858,27 +939,27 @@ func (x *CreatePaymentMethodResponse) GetPaymentMethod() *PaymentMethodInfo {
 	return nil
 }
 
-type DisablePaymentChannelResponse struct {
+type UpdatePaymentChannelResponse struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	PaymentMethods *PaymentMethodInfo     `protobuf:"bytes,1,opt,name=payment_methods,json=paymentMethods,proto3" json:"payment_methods,omitempty"`
+	PaymentMethods *PaymentChannelInfo    `protobuf:"bytes,1,opt,name=payment_methods,json=paymentMethods,proto3" json:"payment_methods,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
 
-func (x *DisablePaymentChannelResponse) Reset() {
-	*x = DisablePaymentChannelResponse{}
+func (x *UpdatePaymentChannelResponse) Reset() {
+	*x = UpdatePaymentChannelResponse{}
 	mi := &file_payment_service_v1_payment_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DisablePaymentChannelResponse) String() string {
+func (x *UpdatePaymentChannelResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DisablePaymentChannelResponse) ProtoMessage() {}
+func (*UpdatePaymentChannelResponse) ProtoMessage() {}
 
-func (x *DisablePaymentChannelResponse) ProtoReflect() protoreflect.Message {
+func (x *UpdatePaymentChannelResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_payment_service_v1_payment_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -890,12 +971,12 @@ func (x *DisablePaymentChannelResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DisablePaymentChannelResponse.ProtoReflect.Descriptor instead.
-func (*DisablePaymentChannelResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdatePaymentChannelResponse.ProtoReflect.Descriptor instead.
+func (*UpdatePaymentChannelResponse) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *DisablePaymentChannelResponse) GetPaymentMethods() *PaymentMethodInfo {
+func (x *UpdatePaymentChannelResponse) GetPaymentMethods() *PaymentChannelInfo {
 	if x != nil {
 		return x.PaymentMethods
 	}
@@ -909,21 +990,23 @@ type CreatePaymentChannelRequest struct {
 	// ID of the merchant creating this channel
 	MerchantId string `protobuf:"bytes,1,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
 	// ID of the Operator connect with this channel
-	OperatorId string `protobuf:"bytes,2,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	// ID of the payment method to be used
 	PaymentMethodId string `protobuf:"bytes,3,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
-	// Type of channel (e.g., deposit, withdrawal)
-	Type string `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
 	// Contact Info email
-	Contact string `protobuf:"bytes,5,opt,name=contact,proto3" json:"contact,omitempty"`
+	// string contact = 4;
 	// PSP Fixed Fee on the Amount
-	PspFixedFee string `protobuf:"bytes,6,opt,name=psp_fixed_fee,json=pspFixedFee,proto3" json:"psp_fixed_fee,omitempty"`
+	FixedFee string `protobuf:"bytes,4,opt,name=fixed_fee,json=fixedFee,proto3" json:"fixed_fee,omitempty"`
 	// PSP Rate Fee
-	PspFeeRate string `protobuf:"bytes,7,opt,name=psp_fee_rate,json=pspFeeRate,proto3" json:"psp_fee_rate,omitempty"`
+	FeeRate string `protobuf:"bytes,5,opt,name=fee_rate,json=feeRate,proto3" json:"fee_rate,omitempty"`
+	// Minimum Fee
+	MinFee string `protobuf:"bytes,6,opt,name=min_fee,json=minFee,proto3" json:"min_fee,omitempty"`
 	// User Fixed Fee on the Amount
-	UserFixedFee string `protobuf:"bytes,8,opt,name=user_fixed_fee,json=userFixedFee,proto3" json:"user_fixed_fee,omitempty"`
+	UserFixedFee string `protobuf:"bytes,7,opt,name=user_fixed_fee,json=userFixedFee,proto3" json:"user_fixed_fee,omitempty"`
 	// User Rate Fee
-	UserFeeRate string `protobuf:"bytes,9,opt,name=user_fee_rate,json=userFeeRate,proto3" json:"user_fee_rate,omitempty"`
+	UserFeeRate string `protobuf:"bytes,8,opt,name=user_fee_rate,json=userFeeRate,proto3" json:"user_fee_rate,omitempty"`
+	// Minimum Fee
+	UserMinFee string `protobuf:"bytes,9,opt,name=user_min_fee,json=userMinFee,proto3" json:"user_min_fee,omitempty"`
 	// Min Amount
 	MinAmount string `protobuf:"bytes,10,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
 	// Max Amount
@@ -971,11 +1054,11 @@ func (x *CreatePaymentChannelRequest) GetMerchantId() string {
 	return ""
 }
 
-func (x *CreatePaymentChannelRequest) GetOperatorId() string {
+func (x *CreatePaymentChannelRequest) GetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.OperatorId
+		return x.OperatorContext
 	}
-	return ""
+	return nil
 }
 
 func (x *CreatePaymentChannelRequest) GetPaymentMethodId() string {
@@ -985,30 +1068,23 @@ func (x *CreatePaymentChannelRequest) GetPaymentMethodId() string {
 	return ""
 }
 
-func (x *CreatePaymentChannelRequest) GetType() string {
+func (x *CreatePaymentChannelRequest) GetFixedFee() string {
 	if x != nil {
-		return x.Type
+		return x.FixedFee
 	}
 	return ""
 }
 
-func (x *CreatePaymentChannelRequest) GetContact() string {
+func (x *CreatePaymentChannelRequest) GetFeeRate() string {
 	if x != nil {
-		return x.Contact
+		return x.FeeRate
 	}
 	return ""
 }
 
-func (x *CreatePaymentChannelRequest) GetPspFixedFee() string {
+func (x *CreatePaymentChannelRequest) GetMinFee() string {
 	if x != nil {
-		return x.PspFixedFee
-	}
-	return ""
-}
-
-func (x *CreatePaymentChannelRequest) GetPspFeeRate() string {
-	if x != nil {
-		return x.PspFeeRate
+		return x.MinFee
 	}
 	return ""
 }
@@ -1023,6 +1099,13 @@ func (x *CreatePaymentChannelRequest) GetUserFixedFee() string {
 func (x *CreatePaymentChannelRequest) GetUserFeeRate() string {
 	if x != nil {
 		return x.UserFeeRate
+	}
+	return ""
+}
+
+func (x *CreatePaymentChannelRequest) GetUserMinFee() string {
+	if x != nil {
+		return x.UserMinFee
 	}
 	return ""
 }
@@ -1050,28 +1133,50 @@ func (x *CreatePaymentChannelRequest) GetKey() *structpb.Struct {
 
 // Request to create a payment channel
 // Used to create a new payment channel with specified merchant and method
-type DisablePaymentChannelRequest struct {
+type UpdatePaymentChannelRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the merchant creating this channel
-	Id            string `protobuf:"bytes,1,opt,name=id,json=merchantId,proto3" json:"id,omitempty"`
+	// ID of the payment channel to be used
+	PaymentChannelId string `protobuf:"bytes,1,opt,name=payment_channel_id,json=paymentChannelId,proto3" json:"payment_channel_id,omitempty"`
+	// Contact Info email
+	// string contact = 2;
+	// PSP Fixed Fee on the Amount
+	FixedFee string `protobuf:"bytes,2,opt,name=fixed_fee,json=fixedFee,proto3" json:"fixed_fee,omitempty"`
+	// PSP Rate Fee
+	FeeRate string `protobuf:"bytes,3,opt,name=fee_rate,json=feeRate,proto3" json:"fee_rate,omitempty"`
+	// PSP Min Fee
+	MinFee string `protobuf:"bytes,4,opt,name=min_fee,json=minFee,proto3" json:"min_fee,omitempty"`
+	// User Fixed Fee on the Amount
+	UserFixedFee string `protobuf:"bytes,5,opt,name=user_fixed_fee,json=userFixedFee,proto3" json:"user_fixed_fee,omitempty"`
+	// User Rate Fee
+	UserFeeRate string `protobuf:"bytes,6,opt,name=user_fee_rate,json=userFeeRate,proto3" json:"user_fee_rate,omitempty"`
+	// User Min Fee
+	UserMinFee string `protobuf:"bytes,7,opt,name=user_min_fee,json=userMinFee,proto3" json:"user_min_fee,omitempty"`
+	// Min Amount
+	MinAmount string `protobuf:"bytes,8,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
+	// Max Amount
+	MaxAmount string `protobuf:"bytes,9,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
+	// enable status
+	Enable *bool `protobuf:"varint,10,opt,name=enable,proto3,oneof" json:"enable,omitempty"`
+	// Configuration fields for the payment channel in JSON format
+	Key           *structpb.Struct `protobuf:"bytes,11,opt,name=key,proto3,oneof" json:"key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DisablePaymentChannelRequest) Reset() {
-	*x = DisablePaymentChannelRequest{}
+func (x *UpdatePaymentChannelRequest) Reset() {
+	*x = UpdatePaymentChannelRequest{}
 	mi := &file_payment_service_v1_payment_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DisablePaymentChannelRequest) String() string {
+func (x *UpdatePaymentChannelRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DisablePaymentChannelRequest) ProtoMessage() {}
+func (*UpdatePaymentChannelRequest) ProtoMessage() {}
 
-func (x *DisablePaymentChannelRequest) ProtoReflect() protoreflect.Message {
+func (x *UpdatePaymentChannelRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_payment_service_v1_payment_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1083,16 +1188,86 @@ func (x *DisablePaymentChannelRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DisablePaymentChannelRequest.ProtoReflect.Descriptor instead.
-func (*DisablePaymentChannelRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdatePaymentChannelRequest.ProtoReflect.Descriptor instead.
+func (*UpdatePaymentChannelRequest) Descriptor() ([]byte, []int) {
 	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *DisablePaymentChannelRequest) GetId() string {
+func (x *UpdatePaymentChannelRequest) GetPaymentChannelId() string {
 	if x != nil {
-		return x.Id
+		return x.PaymentChannelId
 	}
 	return ""
+}
+
+func (x *UpdatePaymentChannelRequest) GetFixedFee() string {
+	if x != nil {
+		return x.FixedFee
+	}
+	return ""
+}
+
+func (x *UpdatePaymentChannelRequest) GetFeeRate() string {
+	if x != nil {
+		return x.FeeRate
+	}
+	return ""
+}
+
+func (x *UpdatePaymentChannelRequest) GetMinFee() string {
+	if x != nil {
+		return x.MinFee
+	}
+	return ""
+}
+
+func (x *UpdatePaymentChannelRequest) GetUserFixedFee() string {
+	if x != nil {
+		return x.UserFixedFee
+	}
+	return ""
+}
+
+func (x *UpdatePaymentChannelRequest) GetUserFeeRate() string {
+	if x != nil {
+		return x.UserFeeRate
+	}
+	return ""
+}
+
+func (x *UpdatePaymentChannelRequest) GetUserMinFee() string {
+	if x != nil {
+		return x.UserMinFee
+	}
+	return ""
+}
+
+func (x *UpdatePaymentChannelRequest) GetMinAmount() string {
+	if x != nil {
+		return x.MinAmount
+	}
+	return ""
+}
+
+func (x *UpdatePaymentChannelRequest) GetMaxAmount() string {
+	if x != nil {
+		return x.MaxAmount
+	}
+	return ""
+}
+
+func (x *UpdatePaymentChannelRequest) GetEnable() bool {
+	if x != nil && x.Enable != nil {
+		return *x.Enable
+	}
+	return false
+}
+
+func (x *UpdatePaymentChannelRequest) GetKey() *structpb.Struct {
+	if x != nil {
+		return x.Key
+	}
+	return nil
 }
 
 // Response for channel creation
@@ -1149,56 +1324,88 @@ type PaymentChannelInfo struct {
 	// Unique identifier for the channel
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	// Type of the channel (e.g., online, offline)
-	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
-	// Currency type (e.g., Crypto, Fiat)
-	CurrencyType string `protobuf:"bytes,3,opt,name=currency_type,json=currencyType,proto3" json:"currency_type,omitempty"`
+	SupportType string `protobuf:"bytes,2,opt,name=support_type,json=supportType,proto3" json:"support_type,omitempty"`
 	// Services Prvider
-	Psp string `protobuf:"bytes,4,opt,name=psp,proto3" json:"psp,omitempty"`
+	Psp string `protobuf:"bytes,3,opt,name=psp,proto3" json:"psp,omitempty"`
 	// Category of the channel (e.g., bank, e-wallet)
-	Category string `protobuf:"bytes,5,opt,name=category,proto3" json:"category,omitempty"`
-	// ID of the operator who owns this channel
-	OperatorId string `protobuf:"bytes,6,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	Category string `protobuf:"bytes,4,opt,name=category,proto3" json:"category,omitempty"`
 	// Payment method used in this channel
-	PaymentMethod string `protobuf:"bytes,7,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
+	PaymentMethod string `protobuf:"bytes,5,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
 	// Tag for categorization or filtering
-	Tag string `protobuf:"bytes,8,opt,name=tag,proto3" json:"tag,omitempty"`
+	Tag string `protobuf:"bytes,6,opt,name=tag,proto3" json:"tag,omitempty"`
 	// Display name of the channel
-	Name string `protobuf:"bytes,9,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,7,opt,name=name,proto3" json:"name,omitempty"`
 	// ID of the payment method used
-	PaymentMethodId string `protobuf:"bytes,10,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
+	PaymentMethodId string `protobuf:"bytes,8,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
 	// Currency supported by this channel
-	Currency string `protobuf:"bytes,11,opt,name=currency,proto3" json:"currency,omitempty"`
+	Currency string `protobuf:"bytes,9,opt,name=currency,proto3" json:"currency,omitempty"`
+	// Currency type (e.g., Crypto, Fiat)
+	CurrencyType string `protobuf:"bytes,10,opt,name=currency_type,json=currencyType,proto3" json:"currency_type,omitempty"`
 	// Crypto protocol supported by this channel
-	Protocol string `protobuf:"bytes,12,opt,name=protocol,proto3" json:"protocol,omitempty"`
+	Protocol string `protobuf:"bytes,11,opt,name=protocol,proto3" json:"protocol,omitempty"`
 	// Crypto chian supported by this channel
-	Network string `protobuf:"bytes,13,opt,name=network,proto3" json:"network,omitempty"`
+	Network string `protobuf:"bytes,12,opt,name=network,proto3" json:"network,omitempty"`
 	// Country where this channel is available
-	Country string `protobuf:"bytes,14,opt,name=country,proto3" json:"country,omitempty"`
+	Country string `protobuf:"bytes,13,opt,name=country,proto3" json:"country,omitempty"`
 	// Specific method used (might be more detailed than payment_method)
-	Method string `protobuf:"bytes,15,opt,name=method,proto3" json:"method,omitempty"`
+	Method string `protobuf:"bytes,14,opt,name=method,proto3" json:"method,omitempty"`
 	// URL to the logo image for this payment channel
-	Logo string `protobuf:"bytes,16,opt,name=logo,proto3" json:"logo,omitempty"`
+	Logo string `protobuf:"bytes,15,opt,name=logo,proto3" json:"logo,omitempty"`
 	// Minimum amount allowed for deposit transactions
-	MinDepositAmount string `protobuf:"bytes,17,opt,name=min_deposit_amount,json=minDepositAmount,proto3" json:"min_deposit_amount,omitempty"`
+	MinAmount string `protobuf:"bytes,16,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
 	// Maximum amount allowed for deposit transactions
-	MaxDepositAmount string `protobuf:"bytes,18,opt,name=max_deposit_amount,json=maxDepositAmount,proto3" json:"max_deposit_amount,omitempty"`
-	// Minimum amount allowed for withdrawal transactions
-	MinWithdrawAmount string `protobuf:"bytes,19,opt,name=min_withdraw_amount,json=minWithdrawAmount,proto3" json:"min_withdraw_amount,omitempty"`
-	// Maximum amount allowed for withdrawal transactions
-	MaxWithdrawAmount string `protobuf:"bytes,20,opt,name=max_withdraw_amount,json=maxWithdrawAmount,proto3" json:"max_withdraw_amount,omitempty"`
-	// Estimated arrival time in minutes
-	Eat int32 `protobuf:"varint,21,opt,name=eat,proto3" json:"eat,omitempty"`
-	// Fee
-	FixFee  string `protobuf:"bytes,22,opt,name=fix_fee,json=fixFee,proto3" json:"fix_fee,omitempty"`
-	RateFee string `protobuf:"bytes,23,opt,name=rate_fee,json=rateFee,proto3" json:"rate_fee,omitempty"`
+	MaxAmount string `protobuf:"bytes,17,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
+	// Fixed Fee on the Amount
+	FixedFee string `protobuf:"bytes,18,opt,name=fixed_fee,json=fixedFee,proto3" json:"fixed_fee,omitempty"`
+	// Rate Fee
+	FeeRate string `protobuf:"bytes,19,opt,name=fee_rate,json=feeRate,proto3" json:"fee_rate,omitempty"`
+	// Minimum Fee
+	MinFee string `protobuf:"bytes,20,opt,name=min_fee,json=minFee,proto3" json:"min_fee,omitempty"`
+	// Minimum amount allowed for deposit transactions
+	PspMinAmount string `protobuf:"bytes,21,opt,name=psp_min_amount,json=pspMinAmount,proto3" json:"psp_min_amount,omitempty"`
+	// Maximum amount allowed for deposit transactions
+	PspMaxAmount string `protobuf:"bytes,22,opt,name=psp_max_amount,json=pspMaxAmount,proto3" json:"psp_max_amount,omitempty"`
+	// Fixed Fee on the Amount
+	PspFixedFee string `protobuf:"bytes,23,opt,name=psp_fixed_fee,json=pspFixedFee,proto3" json:"psp_fixed_fee,omitempty"`
+	// Rate Fee
+	PspFeeRate string `protobuf:"bytes,24,opt,name=psp_fee_rate,json=pspFeeRate,proto3" json:"psp_fee_rate,omitempty"`
+	// Minimum Fee
+	PspMinFee string `protobuf:"bytes,25,opt,name=psp_min_fee,json=pspMinFee,proto3" json:"psp_min_fee,omitempty"`
+	// Minimum amount allowed for deposit transactions
+	SysMinAmount string `protobuf:"bytes,26,opt,name=sys_min_amount,json=sysMinAmount,proto3" json:"sys_min_amount,omitempty"`
+	// Maximum amount allowed for deposit transactions
+	SysMaxAmount string `protobuf:"bytes,27,opt,name=sys_max_amount,json=sysMaxAmount,proto3" json:"sys_max_amount,omitempty"`
+	// Fixed Fee on the Amount
+	SysFixedFee string `protobuf:"bytes,28,opt,name=sys_fixed_fee,json=sysFixedFee,proto3" json:"sys_fixed_fee,omitempty"`
+	// Rate Fee
+	SysFeeRate string `protobuf:"bytes,29,opt,name=sys_fee_rate,json=sysFeeRate,proto3" json:"sys_fee_rate,omitempty"`
+	// Minimum Fee
+	SysMinFee string `protobuf:"bytes,30,opt,name=sys_min_fee,json=sysMinFee,proto3" json:"sys_min_fee,omitempty"`
+	// Fixed Fee on the Amount
+	UserFixedFee string `protobuf:"bytes,31,opt,name=user_fixed_fee,json=userFixedFee,proto3" json:"user_fixed_fee,omitempty"`
+	// Rate Fee
+	UserFeeRate string `protobuf:"bytes,32,opt,name=user_fee_rate,json=userFeeRate,proto3" json:"user_fee_rate,omitempty"`
+	// Minimum Fee
+	UserMinFee string `protobuf:"bytes,33,opt,name=user_min_fee,json=userMinFee,proto3" json:"user_min_fee,omitempty"`
 	// JSON schema defining deposit form fields required by this channel
-	DepositSchema *structpb.Struct `protobuf:"bytes,24,opt,name=deposit_schema,json=depositSchema,proto3" json:"deposit_schema,omitempty"`
-	// JSON schema defining withdrawal form fields required by this channel
-	WithdrawSchema *structpb.Struct `protobuf:"bytes,25,opt,name=withdraw_schema,json=withdrawSchema,proto3" json:"withdraw_schema,omitempty"`
-	SourceType     string           `protobuf:"bytes,26,opt,name=source_type,json=sourceType,proto3" json:"source_type,omitempty"`
-	Enable         bool             `protobuf:"varint,27,opt,name=enable,proto3" json:"enable,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	Schema *structpb.ListValue `protobuf:"bytes,34,opt,name=schema,proto3" json:"schema,omitempty"`
+	// Status bool
+	Enable bool `protobuf:"varint,35,opt,name=enable,proto3" json:"enable,omitempty"`
+	// Contact
+	// string contact = 36;
+	Eat                  int32  `protobuf:"varint,36,opt,name=eat,proto3" json:"eat,omitempty"`
+	OperatorId           int64  `protobuf:"varint,37,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	CompanyOperatorId    int64  `protobuf:"varint,38,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	RetailerOperatorId   int64  `protobuf:"varint,39,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	SystemOperatorId     int64  `protobuf:"varint,40,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
+	OperatorName         string `protobuf:"bytes,41,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	CompanyOperatorName  string `protobuf:"bytes,42,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	RetailerOperatorName string `protobuf:"bytes,43,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	SystemOperatorName   string `protobuf:"bytes,44,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
+	OperatorType         string `protobuf:"bytes,45,opt,name=operator_type,json=operatorType,proto3" json:"operator_type,omitempty"`
+	PspId                string `protobuf:"bytes,46,opt,name=psp_id,json=pspId,proto3" json:"psp_id,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *PaymentChannelInfo) Reset() {
@@ -1238,16 +1445,9 @@ func (x *PaymentChannelInfo) GetChannelId() string {
 	return ""
 }
 
-func (x *PaymentChannelInfo) GetType() string {
+func (x *PaymentChannelInfo) GetSupportType() string {
 	if x != nil {
-		return x.Type
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetCurrencyType() string {
-	if x != nil {
-		return x.CurrencyType
+		return x.SupportType
 	}
 	return ""
 }
@@ -1262,13 +1462,6 @@ func (x *PaymentChannelInfo) GetPsp() string {
 func (x *PaymentChannelInfo) GetCategory() string {
 	if x != nil {
 		return x.Category
-	}
-	return ""
-}
-
-func (x *PaymentChannelInfo) GetOperatorId() string {
-	if x != nil {
-		return x.OperatorId
 	}
 	return ""
 }
@@ -1308,6 +1501,13 @@ func (x *PaymentChannelInfo) GetCurrency() string {
 	return ""
 }
 
+func (x *PaymentChannelInfo) GetCurrencyType() string {
+	if x != nil {
+		return x.CurrencyType
+	}
+	return ""
+}
+
 func (x *PaymentChannelInfo) GetProtocol() string {
 	if x != nil {
 		return x.Protocol
@@ -1343,32 +1543,144 @@ func (x *PaymentChannelInfo) GetLogo() string {
 	return ""
 }
 
-func (x *PaymentChannelInfo) GetMinDepositAmount() string {
+func (x *PaymentChannelInfo) GetMinAmount() string {
 	if x != nil {
-		return x.MinDepositAmount
+		return x.MinAmount
 	}
 	return ""
 }
 
-func (x *PaymentChannelInfo) GetMaxDepositAmount() string {
+func (x *PaymentChannelInfo) GetMaxAmount() string {
 	if x != nil {
-		return x.MaxDepositAmount
+		return x.MaxAmount
 	}
 	return ""
 }
 
-func (x *PaymentChannelInfo) GetMinWithdrawAmount() string {
+func (x *PaymentChannelInfo) GetFixedFee() string {
 	if x != nil {
-		return x.MinWithdrawAmount
+		return x.FixedFee
 	}
 	return ""
 }
 
-func (x *PaymentChannelInfo) GetMaxWithdrawAmount() string {
+func (x *PaymentChannelInfo) GetFeeRate() string {
 	if x != nil {
-		return x.MaxWithdrawAmount
+		return x.FeeRate
 	}
 	return ""
+}
+
+func (x *PaymentChannelInfo) GetMinFee() string {
+	if x != nil {
+		return x.MinFee
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetPspMinAmount() string {
+	if x != nil {
+		return x.PspMinAmount
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetPspMaxAmount() string {
+	if x != nil {
+		return x.PspMaxAmount
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetPspFixedFee() string {
+	if x != nil {
+		return x.PspFixedFee
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetPspFeeRate() string {
+	if x != nil {
+		return x.PspFeeRate
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetPspMinFee() string {
+	if x != nil {
+		return x.PspMinFee
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetSysMinAmount() string {
+	if x != nil {
+		return x.SysMinAmount
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetSysMaxAmount() string {
+	if x != nil {
+		return x.SysMaxAmount
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetSysFixedFee() string {
+	if x != nil {
+		return x.SysFixedFee
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetSysFeeRate() string {
+	if x != nil {
+		return x.SysFeeRate
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetSysMinFee() string {
+	if x != nil {
+		return x.SysMinFee
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetUserFixedFee() string {
+	if x != nil {
+		return x.UserFixedFee
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetUserFeeRate() string {
+	if x != nil {
+		return x.UserFeeRate
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetUserMinFee() string {
+	if x != nil {
+		return x.UserMinFee
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetSchema() *structpb.ListValue {
+	if x != nil {
+		return x.Schema
+	}
+	return nil
+}
+
+func (x *PaymentChannelInfo) GetEnable() bool {
+	if x != nil {
+		return x.Enable
+	}
+	return false
 }
 
 func (x *PaymentChannelInfo) GetEat() int32 {
@@ -1378,46 +1690,74 @@ func (x *PaymentChannelInfo) GetEat() int32 {
 	return 0
 }
 
-func (x *PaymentChannelInfo) GetFixFee() string {
+func (x *PaymentChannelInfo) GetOperatorId() int64 {
 	if x != nil {
-		return x.FixFee
+		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *PaymentChannelInfo) GetCompanyOperatorId() int64 {
+	if x != nil {
+		return x.CompanyOperatorId
+	}
+	return 0
+}
+
+func (x *PaymentChannelInfo) GetRetailerOperatorId() int64 {
+	if x != nil {
+		return x.RetailerOperatorId
+	}
+	return 0
+}
+
+func (x *PaymentChannelInfo) GetSystemOperatorId() int64 {
+	if x != nil {
+		return x.SystemOperatorId
+	}
+	return 0
+}
+
+func (x *PaymentChannelInfo) GetOperatorName() string {
+	if x != nil {
+		return x.OperatorName
 	}
 	return ""
 }
 
-func (x *PaymentChannelInfo) GetRateFee() string {
+func (x *PaymentChannelInfo) GetCompanyOperatorName() string {
 	if x != nil {
-		return x.RateFee
+		return x.CompanyOperatorName
 	}
 	return ""
 }
 
-func (x *PaymentChannelInfo) GetDepositSchema() *structpb.Struct {
+func (x *PaymentChannelInfo) GetRetailerOperatorName() string {
 	if x != nil {
-		return x.DepositSchema
-	}
-	return nil
-}
-
-func (x *PaymentChannelInfo) GetWithdrawSchema() *structpb.Struct {
-	if x != nil {
-		return x.WithdrawSchema
-	}
-	return nil
-}
-
-func (x *PaymentChannelInfo) GetSourceType() string {
-	if x != nil {
-		return x.SourceType
+		return x.RetailerOperatorName
 	}
 	return ""
 }
 
-func (x *PaymentChannelInfo) GetEnable() bool {
+func (x *PaymentChannelInfo) GetSystemOperatorName() string {
 	if x != nil {
-		return x.Enable
+		return x.SystemOperatorName
 	}
-	return false
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetOperatorType() string {
+	if x != nil {
+		return x.OperatorType
+	}
+	return ""
+}
+
+func (x *PaymentChannelInfo) GetPspId() string {
+	if x != nil {
+		return x.PspId
+	}
+	return ""
 }
 
 // Request to initiate a deposit
@@ -1713,14 +2053,14 @@ func (x *GetAddressResponse) GetData() *GetAddressResponse_Data {
 type GetOperatorAddressRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the channel to use for this deposit
-	ChannelId       string                  `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	TargetCurrency  string                  `protobuf:"bytes,2,opt,name=target_currency,json=targetCurrency,proto3" json:"target_currency,omitempty"`
-	OperatorContext *common.OperatorContext `protobuf:"bytes,3,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	ChannelId             string                  `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
 	// Additional information needed for the deposit
 	// May include clientOrderId, productId, userInfo, etc.
-	Extra         *structpb.Struct `protobuf:"bytes,4,opt,name=extra,proto3" json:"extra,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Extra           *structpb.Struct        `protobuf:"bytes,3,opt,name=extra,proto3" json:"extra,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *GetOperatorAddressRequest) Reset() {
@@ -1760,16 +2100,9 @@ func (x *GetOperatorAddressRequest) GetChannelId() string {
 	return ""
 }
 
-func (x *GetOperatorAddressRequest) GetTargetCurrency() string {
+func (x *GetOperatorAddressRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.TargetCurrency
-	}
-	return ""
-}
-
-func (x *GetOperatorAddressRequest) GetOperatorContext() *common.OperatorContext {
-	if x != nil {
-		return x.OperatorContext
+		return x.TargetOperatorContext
 	}
 	return nil
 }
@@ -1777,6 +2110,13 @@ func (x *GetOperatorAddressRequest) GetOperatorContext() *common.OperatorContext
 func (x *GetOperatorAddressRequest) GetExtra() *structpb.Struct {
 	if x != nil {
 		return x.Extra
+	}
+	return nil
+}
+
+func (x *GetOperatorAddressRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
 	}
 	return nil
 }
@@ -1835,10 +2175,10 @@ type InitiateWithdrawRequest struct {
 	Amount string `protobuf:"bytes,1,opt,name=amount,proto3" json:"amount,omitempty"`
 	// Currency code for the transaction
 	Currency string `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	// Currency code for the transaction report
+	ReportingCurrency string `protobuf:"bytes,3,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
 	// ID of the user who initiated the withdrawal
-	UserId int64 `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	// ID of the operator who owns this channel
-	OperatorId int64 `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	UserId int64 `protobuf:"varint,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	// ID of the channel to use for withdrawal
 	ChannelId string `protobuf:"bytes,5,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	// ID of the operator who owns this channel
@@ -1894,16 +2234,16 @@ func (x *InitiateWithdrawRequest) GetCurrency() string {
 	return ""
 }
 
+func (x *InitiateWithdrawRequest) GetReportingCurrency() string {
+	if x != nil {
+		return x.ReportingCurrency
+	}
+	return ""
+}
+
 func (x *InitiateWithdrawRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
-	}
-	return 0
-}
-
-func (x *InitiateWithdrawRequest) GetOperatorId() int64 {
-	if x != nil {
-		return x.OperatorId
 	}
 	return 0
 }
@@ -2019,15 +2359,22 @@ type InitiateOperatorWithdrawRequest struct {
 	// Amount to withdraw in smallest currency unit (e.g., cents)
 	Amount string `protobuf:"bytes,1,opt,name=amount,proto3" json:"amount,omitempty"`
 	// Currency code for the transaction
-	Currency       string `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
-	SourceCurrency string `protobuf:"bytes,3,opt,name=source_currency,json=sourceCurrency,proto3" json:"source_currency,omitempty"`
-	// ID of the operator who owns this channel
-	OperatorContext *common.OperatorContext `protobuf:"bytes,4,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	Currency string `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
+	// Currency code for the transaction report
+	ReportingCurrency string `protobuf:"bytes,3,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	// admin user id
+	AdminUserId int64 `protobuf:"varint,4,opt,name=admin_user_id,json=adminUserId,proto3" json:"admin_user_id,omitempty"`
+	// Target Operator ids
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,5,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	// Operator ids
+	OperatorContext *common.OperatorContext `protobuf:"bytes,6,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
 	// ID of the channel to use for withdrawal
-	ChannelId string `protobuf:"bytes,5,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	ChannelId string `protobuf:"bytes,7,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	// memo of crypto
+	Memo string `protobuf:"bytes,8,opt,name=memo,proto3" json:"memo,omitempty"`
 	// Additional information needed for the withdrawal
 	// May include account details, clientId, note, etc.
-	Extra         *structpb.Struct `protobuf:"bytes,6,opt,name=extra,proto3" json:"extra,omitempty"`
+	Extra         *structpb.Struct `protobuf:"bytes,9,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2076,11 +2423,25 @@ func (x *InitiateOperatorWithdrawRequest) GetCurrency() string {
 	return ""
 }
 
-func (x *InitiateOperatorWithdrawRequest) GetSourceCurrency() string {
+func (x *InitiateOperatorWithdrawRequest) GetReportingCurrency() string {
 	if x != nil {
-		return x.SourceCurrency
+		return x.ReportingCurrency
 	}
 	return ""
+}
+
+func (x *InitiateOperatorWithdrawRequest) GetAdminUserId() int64 {
+	if x != nil {
+		return x.AdminUserId
+	}
+	return 0
+}
+
+func (x *InitiateOperatorWithdrawRequest) GetTargetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.TargetOperatorContext
+	}
+	return nil
 }
 
 func (x *InitiateOperatorWithdrawRequest) GetOperatorContext() *common.OperatorContext {
@@ -2093,6 +2454,13 @@ func (x *InitiateOperatorWithdrawRequest) GetOperatorContext() *common.OperatorC
 func (x *InitiateOperatorWithdrawRequest) GetChannelId() string {
 	if x != nil {
 		return x.ChannelId
+	}
+	return ""
+}
+
+func (x *InitiateOperatorWithdrawRequest) GetMemo() string {
+	if x != nil {
+		return x.Memo
 	}
 	return ""
 }
@@ -2209,12 +2577,14 @@ type DepositCallbackRequest struct {
 	Money string `protobuf:"bytes,8,opt,name=money,proto3" json:"money,omitempty"`
 	// Actual address
 	Address string `protobuf:"bytes,9,opt,name=address,proto3" json:"address,omitempty"`
+	// ChannelID
+	ChannelID string `protobuf:"bytes,10,opt,name=channelID,proto3" json:"channelID,omitempty"`
 	// HMAC-SHA256 signature to verify request authenticity
-	Sign string `protobuf:"bytes,10,opt,name=sign,proto3" json:"sign,omitempty"`
+	Sign string `protobuf:"bytes,11,opt,name=sign,proto3" json:"sign,omitempty"`
 	// Request timestamp to prevent replay attacks
-	Timestamp string `protobuf:"bytes,11,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	Timestamp string `protobuf:"bytes,12,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
 	// Random string to ensure each request is unique
-	Nonce         string `protobuf:"bytes,12,opt,name=nonce,proto3" json:"nonce,omitempty"`
+	Nonce         string `protobuf:"bytes,13,opt,name=nonce,proto3" json:"nonce,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2308,6 +2678,13 @@ func (x *DepositCallbackRequest) GetMoney() string {
 func (x *DepositCallbackRequest) GetAddress() string {
 	if x != nil {
 		return x.Address
+	}
+	return ""
+}
+
+func (x *DepositCallbackRequest) GetChannelID() string {
+	if x != nil {
+		return x.ChannelID
 	}
 	return ""
 }
@@ -2602,35 +2979,55 @@ type TransactionInfo struct {
 	// Transaction ID from the payment gateway
 	GatewayTransactionId string `protobuf:"bytes,3,opt,name=gateway_transaction_id,json=gatewayTransactionId,proto3" json:"gateway_transaction_id,omitempty"`
 	// Operator ID associated with the transaction
-	OperatorId string `protobuf:"bytes,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	OperatorId           int64  `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	CompanyOperatorId    int64  `protobuf:"varint,5,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	RetailerOperatorId   int64  `protobuf:"varint,6,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	SystemOperatorId     int64  `protobuf:"varint,7,opt,name=system_operator_id,json=systemOperatorId,proto3" json:"system_operator_id,omitempty"`
+	OperatorName         string `protobuf:"bytes,8,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	CompanyOperatorName  string `protobuf:"bytes,9,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	RetailerOperatorName string `protobuf:"bytes,10,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	SystemOperatorName   string `protobuf:"bytes,11,opt,name=system_operator_name,json=systemOperatorName,proto3" json:"system_operator_name,omitempty"`
 	// ID of the user who initiated the transaction
-	UserId int64 `protobuf:"varint,5,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId int64 `protobuf:"varint,12,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	// VIP level of the user
-	Vip int32 `protobuf:"varint,6,opt,name=vip,proto3" json:"vip,omitempty"`
+	Vip int32 `protobuf:"varint,13,opt,name=vip,proto3" json:"vip,omitempty"`
 	// Transaction amount in smallest currency unit
-	Amount string `protobuf:"bytes,7,opt,name=amount,proto3" json:"amount,omitempty"`
+	Amount string `protobuf:"bytes,14,opt,name=amount,proto3" json:"amount,omitempty"`
 	// Currency code for the transaction
-	Currency string `protobuf:"bytes,8,opt,name=currency,proto3" json:"currency,omitempty"`
+	Currency string `protobuf:"bytes,15,opt,name=currency,proto3" json:"currency,omitempty"`
 	// Transaction fee in smallest currency unit
-	Fee string `protobuf:"bytes,9,opt,name=fee,proto3" json:"fee,omitempty"`
+	ProcessingFee string `protobuf:"bytes,16,opt,name=processing_fee,json=processingFee,proto3" json:"processing_fee,omitempty"`
 	// Payment method used for the transaction
-	PaymentMethod string `protobuf:"bytes,10,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
+	PaymentMethod string `protobuf:"bytes,17,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
 	// Payment channel used for the transaction
-	PaymentChannel string `protobuf:"bytes,11,opt,name=payment_channel,json=paymentChannel,proto3" json:"payment_channel,omitempty"`
+	PaymentChannel string `protobuf:"bytes,18,opt,name=payment_channel,json=paymentChannel,proto3" json:"payment_channel,omitempty"`
 	// Crypto Protocol used for the transaction
-	Protocol string `protobuf:"bytes,12,opt,name=protocol,proto3" json:"protocol,omitempty"`
+	Protocol string `protobuf:"bytes,19,opt,name=protocol,proto3" json:"protocol,omitempty"`
 	// Crypto Network used for the transaction
-	Network string `protobuf:"bytes,13,opt,name=network,proto3" json:"network,omitempty"`
+	Network string `protobuf:"bytes,20,opt,name=network,proto3" json:"network,omitempty"`
+	// Crypto Address
+	Address string `protobuf:"bytes,21,opt,name=address,proto3" json:"address,omitempty"`
 	// Type of transaction (deposit or withdrawal)
-	Type TransactionType `protobuf:"varint,14,opt,name=type,proto3,enum=payment.service.v1.TransactionType" json:"type,omitempty"`
+	Type TransactionType `protobuf:"varint,22,opt,name=type,proto3,enum=payment.service.v1.TransactionType" json:"type,omitempty"`
 	// Current status of the transaction
-	Status TransactionStatus `protobuf:"varint,15,opt,name=status,proto3,enum=payment.service.v1.TransactionStatus" json:"status,omitempty"`
+	Status TransactionStatus `protobuf:"varint,23,opt,name=status,proto3,enum=payment.service.v1.TransactionStatus" json:"status,omitempty"`
 	// Timestamp when the transaction was created
-	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,16,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,24,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// Timestamp when the transaction was last updated
-	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,17,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,25,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// Transaction amount in USD
+	AmountUsd string `protobuf:"bytes,26,opt,name=amount_usd,json=amountUsd,proto3" json:"amount_usd,omitempty"`
+	// Transaction amount actually sent through
+	AmountSent                     string `protobuf:"bytes,27,opt,name=amount_sent,json=amountSent,proto3" json:"amount_sent,omitempty"`
+	Gas                            string `protobuf:"bytes,28,opt,name=gas,proto3" json:"gas,omitempty"`
+	ReportingCurrency              string `protobuf:"bytes,29,opt,name=reporting_currency,json=reportingCurrency,proto3" json:"reporting_currency,omitempty"`
+	AmountReportingCurrency        string `protobuf:"bytes,30,opt,name=amount_reporting_currency,json=amountReportingCurrency,proto3" json:"amount_reporting_currency,omitempty"`
+	AmountSentReportingCurrency    string `protobuf:"bytes,31,opt,name=amount_sent_reporting_currency,json=amountSentReportingCurrency,proto3" json:"amount_sent_reporting_currency,omitempty"`
+	ProcessingFeeReportingCurrency string `protobuf:"bytes,32,opt,name=processing_fee_reporting_currency,json=processingFeeReportingCurrency,proto3" json:"processing_fee_reporting_currency,omitempty"`
+	AmountSentUsd                  string `protobuf:"bytes,33,opt,name=amount_sent_usd,json=amountSentUsd,proto3" json:"amount_sent_usd,omitempty"`
+	ProcessingFeeUsd               string `protobuf:"bytes,34,opt,name=processing_fee_usd,json=processingFeeUsd,proto3" json:"processing_fee_usd,omitempty"`
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
 func (x *TransactionInfo) Reset() {
@@ -2684,9 +3081,58 @@ func (x *TransactionInfo) GetGatewayTransactionId() string {
 	return ""
 }
 
-func (x *TransactionInfo) GetOperatorId() string {
+func (x *TransactionInfo) GetOperatorId() int64 {
 	if x != nil {
 		return x.OperatorId
+	}
+	return 0
+}
+
+func (x *TransactionInfo) GetCompanyOperatorId() int64 {
+	if x != nil {
+		return x.CompanyOperatorId
+	}
+	return 0
+}
+
+func (x *TransactionInfo) GetRetailerOperatorId() int64 {
+	if x != nil {
+		return x.RetailerOperatorId
+	}
+	return 0
+}
+
+func (x *TransactionInfo) GetSystemOperatorId() int64 {
+	if x != nil {
+		return x.SystemOperatorId
+	}
+	return 0
+}
+
+func (x *TransactionInfo) GetOperatorName() string {
+	if x != nil {
+		return x.OperatorName
+	}
+	return ""
+}
+
+func (x *TransactionInfo) GetCompanyOperatorName() string {
+	if x != nil {
+		return x.CompanyOperatorName
+	}
+	return ""
+}
+
+func (x *TransactionInfo) GetRetailerOperatorName() string {
+	if x != nil {
+		return x.RetailerOperatorName
+	}
+	return ""
+}
+
+func (x *TransactionInfo) GetSystemOperatorName() string {
+	if x != nil {
+		return x.SystemOperatorName
 	}
 	return ""
 }
@@ -2719,9 +3165,9 @@ func (x *TransactionInfo) GetCurrency() string {
 	return ""
 }
 
-func (x *TransactionInfo) GetFee() string {
+func (x *TransactionInfo) GetProcessingFee() string {
 	if x != nil {
-		return x.Fee
+		return x.ProcessingFee
 	}
 	return ""
 }
@@ -2754,6 +3200,13 @@ func (x *TransactionInfo) GetNetwork() string {
 	return ""
 }
 
+func (x *TransactionInfo) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
 func (x *TransactionInfo) GetType() TransactionType {
 	if x != nil {
 		return x.Type
@@ -2780,6 +3233,69 @@ func (x *TransactionInfo) GetUpdatedAt() *timestamppb.Timestamp {
 		return x.UpdatedAt
 	}
 	return nil
+}
+
+func (x *TransactionInfo) GetAmountUsd() string {
+	if x != nil {
+		return x.AmountUsd
+	}
+	return ""
+}
+
+func (x *TransactionInfo) GetAmountSent() string {
+	if x != nil {
+		return x.AmountSent
+	}
+	return ""
+}
+
+func (x *TransactionInfo) GetGas() string {
+	if x != nil {
+		return x.Gas
+	}
+	return ""
+}
+
+func (x *TransactionInfo) GetReportingCurrency() string {
+	if x != nil {
+		return x.ReportingCurrency
+	}
+	return ""
+}
+
+func (x *TransactionInfo) GetAmountReportingCurrency() string {
+	if x != nil {
+		return x.AmountReportingCurrency
+	}
+	return ""
+}
+
+func (x *TransactionInfo) GetAmountSentReportingCurrency() string {
+	if x != nil {
+		return x.AmountSentReportingCurrency
+	}
+	return ""
+}
+
+func (x *TransactionInfo) GetProcessingFeeReportingCurrency() string {
+	if x != nil {
+		return x.ProcessingFeeReportingCurrency
+	}
+	return ""
+}
+
+func (x *TransactionInfo) GetAmountSentUsd() string {
+	if x != nil {
+		return x.AmountSentUsd
+	}
+	return ""
+}
+
+func (x *TransactionInfo) GetProcessingFeeUsd() string {
+	if x != nil {
+		return x.ProcessingFeeUsd
+	}
+	return ""
 }
 
 type TransactionDetail struct {
@@ -2846,40 +3362,37 @@ type GetTransactionPageRequest struct {
 	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Optional transaction ID filter
 	TransactionId int64 `protobuf:"varint,3,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	// Optional operator ID filter
-	OperatorId string `protobuf:"bytes,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
 	// Optional currency filter
-	Currency string `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
+	Currency string `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
 	// Optional payment method filter
-	PaymentMethod string `protobuf:"bytes,6,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
+	PaymentMethod string `protobuf:"bytes,5,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
 	// Optional payment channel filter
-	PaymentChannel string `protobuf:"bytes,7,opt,name=payment_channel,json=paymentChannel,proto3" json:"payment_channel,omitempty"`
+	PaymentChannel string `protobuf:"bytes,6,opt,name=payment_channel,json=paymentChannel,proto3" json:"payment_channel,omitempty"`
 	// Optional crypto protocol filter
-	Protocol string `protobuf:"bytes,8,opt,name=protocol,proto3" json:"protocol,omitempty"`
+	Protocol string `protobuf:"bytes,7,opt,name=protocol,proto3" json:"protocol,omitempty"`
 	// Optional crypto network filter
-	Network string `protobuf:"bytes,9,opt,name=network,proto3" json:"network,omitempty"`
+	Network string `protobuf:"bytes,8,opt,name=network,proto3" json:"network,omitempty"`
 	// Optional transaction type filter
-	Type TransactionType `protobuf:"varint,10,opt,name=type,proto3,enum=payment.service.v1.TransactionType" json:"type,omitempty"`
+	Type TransactionType `protobuf:"varint,9,opt,name=type,proto3,enum=payment.service.v1.TransactionType" json:"type,omitempty"`
 	// Optional status filter
-	Status TransactionStatus `protobuf:"varint,11,opt,name=status,proto3,enum=payment.service.v1.TransactionStatus" json:"status,omitempty"`
+	Status TransactionStatus `protobuf:"varint,10,opt,name=status,proto3,enum=payment.service.v1.TransactionStatus" json:"status,omitempty"`
 	// Optional agent filter
-	Agent string `protobuf:"bytes,12,opt,name=agent,proto3" json:"agent,omitempty"`
+	Agent string `protobuf:"bytes,11,opt,name=agent,proto3" json:"agent,omitempty"`
 	// Optional start time for date range filter
-	StartTime *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
+	StartTime *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
 	// Optional end time for date range filter
-	EndTime *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	EndTime *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
 	// Optional sort direction
-	Sort Sort `protobuf:"varint,15,opt,name=sort,proto3,enum=payment.service.v1.Sort" json:"sort,omitempty"`
-	// Source of the request (frontend or admin)
-	Source RequestSource `protobuf:"varint,16,opt,name=source,proto3,enum=payment.service.v1.RequestSource" json:"source,omitempty"`
-	// Optional user ID filter
-	UserId int64 `protobuf:"varint,17,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Sort Sort `protobuf:"varint,14,opt,name=sort,proto3,enum=payment.service.v1.Sort" json:"sort,omitempty"`
 	// Optional minimum amount filter
-	MinAmount string `protobuf:"bytes,18,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
+	MinAmount string `protobuf:"bytes,15,opt,name=min_amount,json=minAmount,proto3" json:"min_amount,omitempty"`
 	// Optional maximum amount filter
-	MaxAmount     string `protobuf:"bytes,19,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	MaxAmount              string                         `protobuf:"bytes,16,opt,name=max_amount,json=maxAmount,proto3" json:"max_amount,omitempty"`
+	UserId                 int64                          `protobuf:"varint,17,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,18,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	OperatorContext        *common.OperatorContext        `protobuf:"bytes,19,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *GetTransactionPageRequest) Reset() {
@@ -2931,13 +3444,6 @@ func (x *GetTransactionPageRequest) GetTransactionId() int64 {
 		return x.TransactionId
 	}
 	return 0
-}
-
-func (x *GetTransactionPageRequest) GetOperatorId() string {
-	if x != nil {
-		return x.OperatorId
-	}
-	return ""
 }
 
 func (x *GetTransactionPageRequest) GetCurrency() string {
@@ -3017,20 +3523,6 @@ func (x *GetTransactionPageRequest) GetSort() Sort {
 	return Sort_DESC
 }
 
-func (x *GetTransactionPageRequest) GetSource() RequestSource {
-	if x != nil {
-		return x.Source
-	}
-	return RequestSource_REQUEST_SOURCE_FRONTEND
-}
-
-func (x *GetTransactionPageRequest) GetUserId() int64 {
-	if x != nil {
-		return x.UserId
-	}
-	return 0
-}
-
 func (x *GetTransactionPageRequest) GetMinAmount() string {
 	if x != nil {
 		return x.MinAmount
@@ -3043,6 +3535,27 @@ func (x *GetTransactionPageRequest) GetMaxAmount() string {
 		return x.MaxAmount
 	}
 	return ""
+}
+
+func (x *GetTransactionPageRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *GetTransactionPageRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
+func (x *GetTransactionPageRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
 }
 
 // Response for transaction page
@@ -3180,8 +3693,12 @@ type GetPaymentChannelPageRequest struct {
 	Network string `protobuf:"bytes,9,opt,name=network,proto3" json:"network,omitempty"`
 	// Optional country filter
 	Country string `protobuf:"bytes,10,opt,name=country,proto3" json:"country,omitempty"`
+	// Source of operator type
+	Source string `protobuf:"bytes,11,opt,name=source,proto3" json:"source,omitempty"`
+	// Status ture or false
+	Enabled bool `protobuf:"varint,12,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// Optional sort direction
-	Sort          Sort `protobuf:"varint,11,opt,name=sort,proto3,enum=payment.service.v1.Sort" json:"sort,omitempty"`
+	Sort          Sort `protobuf:"varint,13,opt,name=sort,proto3,enum=payment.service.v1.Sort" json:"sort,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3241,7 +3758,7 @@ func (x *GetPaymentChannelPageRequest) GetType() ChannelType {
 	if x != nil {
 		return x.Type
 	}
-	return ChannelType_CHANNEL_TYPE_DEPOSIT
+	return ChannelType_CHANNEL_TYPE_ALL
 }
 
 func (x *GetPaymentChannelPageRequest) GetCategory() string {
@@ -3286,11 +3803,188 @@ func (x *GetPaymentChannelPageRequest) GetCountry() string {
 	return ""
 }
 
+func (x *GetPaymentChannelPageRequest) GetSource() string {
+	if x != nil {
+		return x.Source
+	}
+	return ""
+}
+
+func (x *GetPaymentChannelPageRequest) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
 func (x *GetPaymentChannelPageRequest) GetSort() Sort {
 	if x != nil {
 		return x.Sort
 	}
 	return Sort_DESC
+}
+
+// Operator to retrieve a paginated list of payment channels with optional filters
+type GetOperatorPaymentChannelPageRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Page number to retrieve (1-based)
+	Page int32 `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	// Number of items per page
+	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Optional channel type filter
+	Type ChannelType `protobuf:"varint,3,opt,name=type,proto3,enum=payment.service.v1.ChannelType" json:"type,omitempty"`
+	// Optional category filter
+	Category string `protobuf:"bytes,4,opt,name=category,proto3" json:"category,omitempty"`
+	// Optional payment method filter
+	PaymentMethod string `protobuf:"bytes,5,opt,name=payment_method,json=paymentMethod,proto3" json:"payment_method,omitempty"`
+	// Optional currency filter
+	Currency string `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`
+	// Optional crypto protocol
+	Protocol string `protobuf:"bytes,7,opt,name=protocol,proto3" json:"protocol,omitempty"`
+	// Optional crypto network filter
+	Network string `protobuf:"bytes,8,opt,name=network,proto3" json:"network,omitempty"`
+	// Optional country filter
+	Country string `protobuf:"bytes,9,opt,name=country,proto3" json:"country,omitempty"`
+	// Source of operator type
+	Source string `protobuf:"bytes,10,opt,name=source,proto3" json:"source,omitempty"`
+	// Optional sort direction
+	Sort Sort `protobuf:"varint,11,opt,name=sort,proto3,enum=payment.service.v1.Sort" json:"sort,omitempty"`
+	// Status ture or false
+	Enabled *bool `protobuf:"varint,12,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	// ID of the Operator connect with this channel
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,13,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	// ID of the Operator connect with this channel
+	OperatorContext *common.OperatorContext `protobuf:"bytes,14,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *GetOperatorPaymentChannelPageRequest) Reset() {
+	*x = GetOperatorPaymentChannelPageRequest{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetOperatorPaymentChannelPageRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOperatorPaymentChannelPageRequest) ProtoMessage() {}
+
+func (x *GetOperatorPaymentChannelPageRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOperatorPaymentChannelPageRequest.ProtoReflect.Descriptor instead.
+func (*GetOperatorPaymentChannelPageRequest) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *GetOperatorPaymentChannelPageRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *GetOperatorPaymentChannelPageRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *GetOperatorPaymentChannelPageRequest) GetType() ChannelType {
+	if x != nil {
+		return x.Type
+	}
+	return ChannelType_CHANNEL_TYPE_ALL
+}
+
+func (x *GetOperatorPaymentChannelPageRequest) GetCategory() string {
+	if x != nil {
+		return x.Category
+	}
+	return ""
+}
+
+func (x *GetOperatorPaymentChannelPageRequest) GetPaymentMethod() string {
+	if x != nil {
+		return x.PaymentMethod
+	}
+	return ""
+}
+
+func (x *GetOperatorPaymentChannelPageRequest) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *GetOperatorPaymentChannelPageRequest) GetProtocol() string {
+	if x != nil {
+		return x.Protocol
+	}
+	return ""
+}
+
+func (x *GetOperatorPaymentChannelPageRequest) GetNetwork() string {
+	if x != nil {
+		return x.Network
+	}
+	return ""
+}
+
+func (x *GetOperatorPaymentChannelPageRequest) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *GetOperatorPaymentChannelPageRequest) GetSource() string {
+	if x != nil {
+		return x.Source
+	}
+	return ""
+}
+
+func (x *GetOperatorPaymentChannelPageRequest) GetSort() Sort {
+	if x != nil {
+		return x.Sort
+	}
+	return Sort_DESC
+}
+
+func (x *GetOperatorPaymentChannelPageRequest) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
+}
+
+func (x *GetOperatorPaymentChannelPageRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
+}
+
+func (x *GetOperatorPaymentChannelPageRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
 }
 
 // Response for payment channel page
@@ -3315,7 +4009,7 @@ type GetPaymentChannelPageResponse struct {
 
 func (x *GetPaymentChannelPageResponse) Reset() {
 	*x = GetPaymentChannelPageResponse{}
-	mi := &file_payment_service_v1_payment_proto_msgTypes[31]
+	mi := &file_payment_service_v1_payment_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3327,7 +4021,7 @@ func (x *GetPaymentChannelPageResponse) String() string {
 func (*GetPaymentChannelPageResponse) ProtoMessage() {}
 
 func (x *GetPaymentChannelPageResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_service_v1_payment_proto_msgTypes[31]
+	mi := &file_payment_service_v1_payment_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3340,7 +4034,7 @@ func (x *GetPaymentChannelPageResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPaymentChannelPageResponse.ProtoReflect.Descriptor instead.
 func (*GetPaymentChannelPageResponse) Descriptor() ([]byte, []int) {
-	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{31}
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *GetPaymentChannelPageResponse) GetPaymentChannels() []*PaymentChannelInfo {
@@ -3398,15 +4092,13 @@ type GetTransactionDetailByIdRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Unique identifier for the transaction
 	TransactionId int64 `protobuf:"varint,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	// Source of the request (frontend or admin)
-	Source        RequestSource `protobuf:"varint,2,opt,name=source,proto3,enum=payment.service.v1.RequestSource" json:"source,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetTransactionDetailByIdRequest) Reset() {
 	*x = GetTransactionDetailByIdRequest{}
-	mi := &file_payment_service_v1_payment_proto_msgTypes[32]
+	mi := &file_payment_service_v1_payment_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3418,7 +4110,7 @@ func (x *GetTransactionDetailByIdRequest) String() string {
 func (*GetTransactionDetailByIdRequest) ProtoMessage() {}
 
 func (x *GetTransactionDetailByIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_service_v1_payment_proto_msgTypes[32]
+	mi := &file_payment_service_v1_payment_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3431,7 +4123,7 @@ func (x *GetTransactionDetailByIdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTransactionDetailByIdRequest.ProtoReflect.Descriptor instead.
 func (*GetTransactionDetailByIdRequest) Descriptor() ([]byte, []int) {
-	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{32}
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *GetTransactionDetailByIdRequest) GetTransactionId() int64 {
@@ -3439,13 +4131,6 @@ func (x *GetTransactionDetailByIdRequest) GetTransactionId() int64 {
 		return x.TransactionId
 	}
 	return 0
-}
-
-func (x *GetTransactionDetailByIdRequest) GetSource() RequestSource {
-	if x != nil {
-		return x.Source
-	}
-	return RequestSource_REQUEST_SOURCE_FRONTEND
 }
 
 // Response for transaction detail
@@ -3460,7 +4145,7 @@ type GetTransactionDetailByIdResponse struct {
 
 func (x *GetTransactionDetailByIdResponse) Reset() {
 	*x = GetTransactionDetailByIdResponse{}
-	mi := &file_payment_service_v1_payment_proto_msgTypes[33]
+	mi := &file_payment_service_v1_payment_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3472,7 +4157,7 @@ func (x *GetTransactionDetailByIdResponse) String() string {
 func (*GetTransactionDetailByIdResponse) ProtoMessage() {}
 
 func (x *GetTransactionDetailByIdResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_service_v1_payment_proto_msgTypes[33]
+	mi := &file_payment_service_v1_payment_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3485,7 +4170,7 @@ func (x *GetTransactionDetailByIdResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTransactionDetailByIdResponse.ProtoReflect.Descriptor instead.
 func (*GetTransactionDetailByIdResponse) Descriptor() ([]byte, []int) {
-	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{33}
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *GetTransactionDetailByIdResponse) GetDetail() *TransactionDetail {
@@ -3504,7 +4189,7 @@ type GetChannelsByIdsRequest struct {
 
 func (x *GetChannelsByIdsRequest) Reset() {
 	*x = GetChannelsByIdsRequest{}
-	mi := &file_payment_service_v1_payment_proto_msgTypes[34]
+	mi := &file_payment_service_v1_payment_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3516,7 +4201,7 @@ func (x *GetChannelsByIdsRequest) String() string {
 func (*GetChannelsByIdsRequest) ProtoMessage() {}
 
 func (x *GetChannelsByIdsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_service_v1_payment_proto_msgTypes[34]
+	mi := &file_payment_service_v1_payment_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3529,7 +4214,7 @@ func (x *GetChannelsByIdsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetChannelsByIdsRequest.ProtoReflect.Descriptor instead.
 func (*GetChannelsByIdsRequest) Descriptor() ([]byte, []int) {
-	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{34}
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *GetChannelsByIdsRequest) GetChannelIds() []string {
@@ -3540,15 +4225,15 @@ func (x *GetChannelsByIdsRequest) GetChannelIds() []string {
 }
 
 type GetChannelsByIdsResponse struct {
-	state         protoimpl.MessageState              `protogen:"open.v1"`
-	Channels      []*GetChannelsByIdsResponse_Channel `protobuf:"bytes,1,rep,name=channels,proto3" json:"channels,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Channels      []*PaymentChannelInfo  `protobuf:"bytes,1,rep,name=channels,proto3" json:"channels,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetChannelsByIdsResponse) Reset() {
 	*x = GetChannelsByIdsResponse{}
-	mi := &file_payment_service_v1_payment_proto_msgTypes[35]
+	mi := &file_payment_service_v1_payment_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3560,7 +4245,7 @@ func (x *GetChannelsByIdsResponse) String() string {
 func (*GetChannelsByIdsResponse) ProtoMessage() {}
 
 func (x *GetChannelsByIdsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_service_v1_payment_proto_msgTypes[35]
+	mi := &file_payment_service_v1_payment_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3573,12 +4258,1446 @@ func (x *GetChannelsByIdsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetChannelsByIdsResponse.ProtoReflect.Descriptor instead.
 func (*GetChannelsByIdsResponse) Descriptor() ([]byte, []int) {
-	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{35}
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{36}
 }
 
-func (x *GetChannelsByIdsResponse) GetChannels() []*GetChannelsByIdsResponse_Channel {
+func (x *GetChannelsByIdsResponse) GetChannels() []*PaymentChannelInfo {
 	if x != nil {
 		return x.Channels
+	}
+	return nil
+}
+
+type UpdatePaymentMethodRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID
+	PaymentMethodId string `protobuf:"bytes,1,opt,name=payment_method_id,json=paymentMethodId,proto3" json:"payment_method_id,omitempty"`
+	// Currency Type
+	Contact *string `protobuf:"bytes,2,opt,name=contact,proto3,oneof" json:"contact,omitempty"`
+	// Fixed Fee on the Amount
+	SysFixedFee *string `protobuf:"bytes,3,opt,name=sys_fixed_fee,json=sysFixedFee,proto3,oneof" json:"sys_fixed_fee,omitempty"`
+	// Rate Fee
+	SysFeeRate *string `protobuf:"bytes,4,opt,name=sys_fee_rate,json=sysFeeRate,proto3,oneof" json:"sys_fee_rate,omitempty"`
+	// Min Amount
+	SysMinAmount *string `protobuf:"bytes,5,opt,name=sys_min_amount,json=sysMinAmount,proto3,oneof" json:"sys_min_amount,omitempty"`
+	// Max Amount
+	SysMaxAmount *string `protobuf:"bytes,6,opt,name=sys_max_amount,json=sysMaxAmount,proto3,oneof" json:"sys_max_amount,omitempty"`
+	// Minmum Fee
+	SysMinFee *string `protobuf:"bytes,7,opt,name=sys_min_fee,json=sysMinFee,proto3,oneof" json:"sys_min_fee,omitempty"`
+	// status
+	Status bool `protobuf:"varint,8,opt,name=status,proto3" json:"status,omitempty"`
+	// ID of the Operator connect with this channel
+	OperatorContext *common.OperatorContext `protobuf:"bytes,9,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *UpdatePaymentMethodRequest) Reset() {
+	*x = UpdatePaymentMethodRequest{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdatePaymentMethodRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdatePaymentMethodRequest) ProtoMessage() {}
+
+func (x *UpdatePaymentMethodRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdatePaymentMethodRequest.ProtoReflect.Descriptor instead.
+func (*UpdatePaymentMethodRequest) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *UpdatePaymentMethodRequest) GetPaymentMethodId() string {
+	if x != nil {
+		return x.PaymentMethodId
+	}
+	return ""
+}
+
+func (x *UpdatePaymentMethodRequest) GetContact() string {
+	if x != nil && x.Contact != nil {
+		return *x.Contact
+	}
+	return ""
+}
+
+func (x *UpdatePaymentMethodRequest) GetSysFixedFee() string {
+	if x != nil && x.SysFixedFee != nil {
+		return *x.SysFixedFee
+	}
+	return ""
+}
+
+func (x *UpdatePaymentMethodRequest) GetSysFeeRate() string {
+	if x != nil && x.SysFeeRate != nil {
+		return *x.SysFeeRate
+	}
+	return ""
+}
+
+func (x *UpdatePaymentMethodRequest) GetSysMinAmount() string {
+	if x != nil && x.SysMinAmount != nil {
+		return *x.SysMinAmount
+	}
+	return ""
+}
+
+func (x *UpdatePaymentMethodRequest) GetSysMaxAmount() string {
+	if x != nil && x.SysMaxAmount != nil {
+		return *x.SysMaxAmount
+	}
+	return ""
+}
+
+func (x *UpdatePaymentMethodRequest) GetSysMinFee() string {
+	if x != nil && x.SysMinFee != nil {
+		return *x.SysMinFee
+	}
+	return ""
+}
+
+func (x *UpdatePaymentMethodRequest) GetStatus() bool {
+	if x != nil {
+		return x.Status
+	}
+	return false
+}
+
+func (x *UpdatePaymentMethodRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+type UpdatePaymentMethodResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ChannelIds    []string               `protobuf:"bytes,1,rep,name=channel_ids,json=channelIds,proto3" json:"channel_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdatePaymentMethodResponse) Reset() {
+	*x = UpdatePaymentMethodResponse{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[38]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdatePaymentMethodResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdatePaymentMethodResponse) ProtoMessage() {}
+
+func (x *UpdatePaymentMethodResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[38]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdatePaymentMethodResponse.ProtoReflect.Descriptor instead.
+func (*UpdatePaymentMethodResponse) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{38}
+}
+
+func (x *UpdatePaymentMethodResponse) GetChannelIds() []string {
+	if x != nil {
+		return x.ChannelIds
+	}
+	return nil
+}
+
+type BankCard struct {
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	Id                   int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	CardAccount          string                 `protobuf:"bytes,2,opt,name=card_account,json=cardAccount,proto3" json:"card_account,omitempty"`
+	CardAccountFirstname string                 `protobuf:"bytes,3,opt,name=card_account_firstname,json=cardAccountFirstname,proto3" json:"card_account_firstname,omitempty"`
+	CardAccountLastname  string                 `protobuf:"bytes,4,opt,name=card_account_lastname,json=cardAccountLastname,proto3" json:"card_account_lastname,omitempty"`
+	CardIban             string                 `protobuf:"bytes,5,opt,name=card_iban,json=cardIban,proto3" json:"card_iban,omitempty"`
+	Currency             string                 `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`
+	Country              string                 `protobuf:"bytes,7,opt,name=country,proto3" json:"country,omitempty"`
+	Enabled              bool                   `protobuf:"varint,8,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	CardDetail           *structpb.Struct       `protobuf:"bytes,9,opt,name=card_detail,json=cardDetail,proto3" json:"card_detail,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *BankCard) Reset() {
+	*x = BankCard{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BankCard) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BankCard) ProtoMessage() {}
+
+func (x *BankCard) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BankCard.ProtoReflect.Descriptor instead.
+func (*BankCard) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{39}
+}
+
+func (x *BankCard) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *BankCard) GetCardAccount() string {
+	if x != nil {
+		return x.CardAccount
+	}
+	return ""
+}
+
+func (x *BankCard) GetCardAccountFirstname() string {
+	if x != nil {
+		return x.CardAccountFirstname
+	}
+	return ""
+}
+
+func (x *BankCard) GetCardAccountLastname() string {
+	if x != nil {
+		return x.CardAccountLastname
+	}
+	return ""
+}
+
+func (x *BankCard) GetCardIban() string {
+	if x != nil {
+		return x.CardIban
+	}
+	return ""
+}
+
+func (x *BankCard) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *BankCard) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *BankCard) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+func (x *BankCard) GetCardDetail() *structpb.Struct {
+	if x != nil {
+		return x.CardDetail
+	}
+	return nil
+}
+
+type GetBankCardListRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetBankCardListRequest) Reset() {
+	*x = GetBankCardListRequest{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[40]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetBankCardListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetBankCardListRequest) ProtoMessage() {}
+
+func (x *GetBankCardListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[40]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetBankCardListRequest.ProtoReflect.Descriptor instead.
+func (*GetBankCardListRequest) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{40}
+}
+
+type GetBankCardListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	BankCardLsit  []*BankCard            `protobuf:"bytes,1,rep,name=bank_card_lsit,json=bankCardLsit,proto3" json:"bank_card_lsit,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetBankCardListResponse) Reset() {
+	*x = GetBankCardListResponse{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[41]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetBankCardListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetBankCardListResponse) ProtoMessage() {}
+
+func (x *GetBankCardListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[41]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetBankCardListResponse.ProtoReflect.Descriptor instead.
+func (*GetBankCardListResponse) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{41}
+}
+
+func (x *GetBankCardListResponse) GetBankCardLsit() []*BankCard {
+	if x != nil {
+		return x.BankCardLsit
+	}
+	return nil
+}
+
+type AddBankCardRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	Country       string                 `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
+	BankCard      *structpb.Struct       `protobuf:"bytes,3,opt,name=bank_card,json=bankCard,proto3" json:"bank_card,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddBankCardRequest) Reset() {
+	*x = AddBankCardRequest{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[42]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddBankCardRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddBankCardRequest) ProtoMessage() {}
+
+func (x *AddBankCardRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[42]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddBankCardRequest.ProtoReflect.Descriptor instead.
+func (*AddBankCardRequest) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{42}
+}
+
+func (x *AddBankCardRequest) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *AddBankCardRequest) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *AddBankCardRequest) GetBankCard() *structpb.Struct {
+	if x != nil {
+		return x.BankCard
+	}
+	return nil
+}
+
+type AddBankCardResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddBankCardResponse) Reset() {
+	*x = AddBankCardResponse{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[43]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddBankCardResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddBankCardResponse) ProtoMessage() {}
+
+func (x *AddBankCardResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[43]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddBankCardResponse.ProtoReflect.Descriptor instead.
+func (*AddBankCardResponse) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{43}
+}
+
+type UpdateBankCardRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Currency      *string                `protobuf:"bytes,2,opt,name=currency,proto3,oneof" json:"currency,omitempty"`
+	Country       *string                `protobuf:"bytes,3,opt,name=country,proto3,oneof" json:"country,omitempty"`
+	Enabled       *bool                  `protobuf:"varint,4,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
+	BankCard      *structpb.Struct       `protobuf:"bytes,5,opt,name=bank_card,json=bankCard,proto3" json:"bank_card,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateBankCardRequest) Reset() {
+	*x = UpdateBankCardRequest{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[44]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateBankCardRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateBankCardRequest) ProtoMessage() {}
+
+func (x *UpdateBankCardRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[44]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateBankCardRequest.ProtoReflect.Descriptor instead.
+func (*UpdateBankCardRequest) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{44}
+}
+
+func (x *UpdateBankCardRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *UpdateBankCardRequest) GetCurrency() string {
+	if x != nil && x.Currency != nil {
+		return *x.Currency
+	}
+	return ""
+}
+
+func (x *UpdateBankCardRequest) GetCountry() string {
+	if x != nil && x.Country != nil {
+		return *x.Country
+	}
+	return ""
+}
+
+func (x *UpdateBankCardRequest) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
+}
+
+func (x *UpdateBankCardRequest) GetBankCard() *structpb.Struct {
+	if x != nil {
+		return x.BankCard
+	}
+	return nil
+}
+
+type UpdateBankCardResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateBankCardResponse) Reset() {
+	*x = UpdateBankCardResponse{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[45]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateBankCardResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateBankCardResponse) ProtoMessage() {}
+
+func (x *UpdateBankCardResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[45]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateBankCardResponse.ProtoReflect.Descriptor instead.
+func (*UpdateBankCardResponse) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{45}
+}
+
+type DeleteBankCardRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	BankCardId    int64                  `protobuf:"varint,1,opt,name=bank_card_id,json=bankCardId,proto3" json:"bank_card_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteBankCardRequest) Reset() {
+	*x = DeleteBankCardRequest{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[46]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteBankCardRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteBankCardRequest) ProtoMessage() {}
+
+func (x *DeleteBankCardRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[46]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteBankCardRequest.ProtoReflect.Descriptor instead.
+func (*DeleteBankCardRequest) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{46}
+}
+
+func (x *DeleteBankCardRequest) GetBankCardId() int64 {
+	if x != nil {
+		return x.BankCardId
+	}
+	return 0
+}
+
+type DeleteBankCardResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteBankCardResponse) Reset() {
+	*x = DeleteBankCardResponse{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[47]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteBankCardResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteBankCardResponse) ProtoMessage() {}
+
+func (x *DeleteBankCardResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[47]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteBankCardResponse.ProtoReflect.Descriptor instead.
+func (*DeleteBankCardResponse) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{47}
+}
+
+type GetBankAccountRequest struct {
+	state     protoimpl.MessageState `protogen:"open.v1"`
+	ChannelId string                 `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	// Additional information needed for the deposit
+	// May include clientOrderId, productId, userInfo, etc.
+	Extra         *structpb.Struct `protobuf:"bytes,2,opt,name=extra,proto3" json:"extra,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetBankAccountRequest) Reset() {
+	*x = GetBankAccountRequest{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[48]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetBankAccountRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetBankAccountRequest) ProtoMessage() {}
+
+func (x *GetBankAccountRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[48]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetBankAccountRequest.ProtoReflect.Descriptor instead.
+func (*GetBankAccountRequest) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{48}
+}
+
+func (x *GetBankAccountRequest) GetChannelId() string {
+	if x != nil {
+		return x.ChannelId
+	}
+	return ""
+}
+
+func (x *GetBankAccountRequest) GetExtra() *structpb.Struct {
+	if x != nil {
+		return x.Extra
+	}
+	return nil
+}
+
+type GetBankAccountResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// operator id allocated by operator service
+	NotifyUrl         string `protobuf:"bytes,1,opt,name=notify_url,json=notifyUrl,proto3" json:"notify_url,omitempty"`
+	ReferenceNumber   string `protobuf:"bytes,2,opt,name=reference_number,json=referenceNumber,proto3" json:"reference_number,omitempty"`
+	BankAccountName   string `protobuf:"bytes,3,opt,name=bank_account_name,json=bankAccountName,proto3" json:"bank_account_name,omitempty"`
+	BankAccountNumber string `protobuf:"bytes,4,opt,name=bank_account_number,json=bankAccountNumber,proto3" json:"bank_account_number,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *GetBankAccountResponse) Reset() {
+	*x = GetBankAccountResponse{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[49]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetBankAccountResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetBankAccountResponse) ProtoMessage() {}
+
+func (x *GetBankAccountResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[49]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetBankAccountResponse.ProtoReflect.Descriptor instead.
+func (*GetBankAccountResponse) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{49}
+}
+
+func (x *GetBankAccountResponse) GetNotifyUrl() string {
+	if x != nil {
+		return x.NotifyUrl
+	}
+	return ""
+}
+
+func (x *GetBankAccountResponse) GetReferenceNumber() string {
+	if x != nil {
+		return x.ReferenceNumber
+	}
+	return ""
+}
+
+func (x *GetBankAccountResponse) GetBankAccountName() string {
+	if x != nil {
+		return x.BankAccountName
+	}
+	return ""
+}
+
+func (x *GetBankAccountResponse) GetBankAccountNumber() string {
+	if x != nil {
+		return x.BankAccountNumber
+	}
+	return ""
+}
+
+type GetBankSchemaRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetBankSchemaRequest) Reset() {
+	*x = GetBankSchemaRequest{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[50]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetBankSchemaRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetBankSchemaRequest) ProtoMessage() {}
+
+func (x *GetBankSchemaRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[50]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetBankSchemaRequest.ProtoReflect.Descriptor instead.
+func (*GetBankSchemaRequest) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{50}
+}
+
+func (x *GetBankSchemaRequest) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+type GetBankSchemaResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Schema        *structpb.ListValue    `protobuf:"bytes,1,opt,name=schema,proto3" json:"schema,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetBankSchemaResponse) Reset() {
+	*x = GetBankSchemaResponse{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[51]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetBankSchemaResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetBankSchemaResponse) ProtoMessage() {}
+
+func (x *GetBankSchemaResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[51]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetBankSchemaResponse.ProtoReflect.Descriptor instead.
+func (*GetBankSchemaResponse) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{51}
+}
+
+func (x *GetBankSchemaResponse) GetSchema() *structpb.ListValue {
+	if x != nil {
+		return x.Schema
+	}
+	return nil
+}
+
+type Crypto struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Crypto        string                 `protobuf:"bytes,1,opt,name=crypto,proto3" json:"crypto,omitempty"`
+	Network       string                 `protobuf:"bytes,2,opt,name=network,proto3" json:"network,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Crypto) Reset() {
+	*x = Crypto{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[52]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Crypto) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Crypto) ProtoMessage() {}
+
+func (x *Crypto) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[52]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Crypto.ProtoReflect.Descriptor instead.
+func (*Crypto) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{52}
+}
+
+func (x *Crypto) GetCrypto() string {
+	if x != nil {
+		return x.Crypto
+	}
+	return ""
+}
+
+func (x *Crypto) GetNetwork() string {
+	if x != nil {
+		return x.Network
+	}
+	return ""
+}
+
+type Currency struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	Country       string                 `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
+	PayWayCode    string                 `protobuf:"bytes,3,opt,name=payWayCode,proto3" json:"payWayCode,omitempty"`
+	PayWayName    string                 `protobuf:"bytes,4,opt,name=payWayName,proto3" json:"payWayName,omitempty"`
+	PayMin        float32                `protobuf:"fixed32,5,opt,name=payMin,proto3" json:"payMin,omitempty"`
+	PayMax        float32                `protobuf:"fixed32,6,opt,name=payMax,proto3" json:"payMax,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Currency) Reset() {
+	*x = Currency{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[53]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Currency) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Currency) ProtoMessage() {}
+
+func (x *Currency) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[53]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Currency.ProtoReflect.Descriptor instead.
+func (*Currency) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{53}
+}
+
+func (x *Currency) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *Currency) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *Currency) GetPayWayCode() string {
+	if x != nil {
+		return x.PayWayCode
+	}
+	return ""
+}
+
+func (x *Currency) GetPayWayName() string {
+	if x != nil {
+		return x.PayWayName
+	}
+	return ""
+}
+
+func (x *Currency) GetPayMin() float32 {
+	if x != nil {
+		return x.PayMin
+	}
+	return 0
+}
+
+func (x *Currency) GetPayMax() float32 {
+	if x != nil {
+		return x.PayMax
+	}
+	return 0
+}
+
+type BuyCryptoViaFiatCurrentListRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BuyCryptoViaFiatCurrentListRequest) Reset() {
+	*x = BuyCryptoViaFiatCurrentListRequest{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[54]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BuyCryptoViaFiatCurrentListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BuyCryptoViaFiatCurrentListRequest) ProtoMessage() {}
+
+func (x *BuyCryptoViaFiatCurrentListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[54]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BuyCryptoViaFiatCurrentListRequest.ProtoReflect.Descriptor instead.
+func (*BuyCryptoViaFiatCurrentListRequest) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{54}
+}
+
+type BuyCryptoViaFiatCurrentListResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// repeated currency list
+	Currencies []*Currency `protobuf:"bytes,1,rep,name=currencies,proto3" json:"currencies,omitempty"`
+	// repeated crypto list
+	Crypto        []*PaymentChannelInfo `protobuf:"bytes,2,rep,name=crypto,proto3" json:"crypto,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BuyCryptoViaFiatCurrentListResponse) Reset() {
+	*x = BuyCryptoViaFiatCurrentListResponse{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[55]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BuyCryptoViaFiatCurrentListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BuyCryptoViaFiatCurrentListResponse) ProtoMessage() {}
+
+func (x *BuyCryptoViaFiatCurrentListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[55]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BuyCryptoViaFiatCurrentListResponse.ProtoReflect.Descriptor instead.
+func (*BuyCryptoViaFiatCurrentListResponse) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{55}
+}
+
+func (x *BuyCryptoViaFiatCurrentListResponse) GetCurrencies() []*Currency {
+	if x != nil {
+		return x.Currencies
+	}
+	return nil
+}
+
+func (x *BuyCryptoViaFiatCurrentListResponse) GetCrypto() []*PaymentChannelInfo {
+	if x != nil {
+		return x.Crypto
+	}
+	return nil
+}
+
+type BuyCryptoViaFiatPriceQueryRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Amount        string                 `protobuf:"bytes,1,opt,name=amount,proto3" json:"amount,omitempty"`
+	Fiat          string                 `protobuf:"bytes,2,opt,name=fiat,proto3" json:"fiat,omitempty"`
+	PayWayCode    string                 `protobuf:"bytes,3,opt,name=payWayCode,proto3" json:"payWayCode,omitempty"`
+	ChannelId     string                 `protobuf:"bytes,4,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BuyCryptoViaFiatPriceQueryRequest) Reset() {
+	*x = BuyCryptoViaFiatPriceQueryRequest{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[56]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BuyCryptoViaFiatPriceQueryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BuyCryptoViaFiatPriceQueryRequest) ProtoMessage() {}
+
+func (x *BuyCryptoViaFiatPriceQueryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[56]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BuyCryptoViaFiatPriceQueryRequest.ProtoReflect.Descriptor instead.
+func (*BuyCryptoViaFiatPriceQueryRequest) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{56}
+}
+
+func (x *BuyCryptoViaFiatPriceQueryRequest) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
+}
+
+func (x *BuyCryptoViaFiatPriceQueryRequest) GetFiat() string {
+	if x != nil {
+		return x.Fiat
+	}
+	return ""
+}
+
+func (x *BuyCryptoViaFiatPriceQueryRequest) GetPayWayCode() string {
+	if x != nil {
+		return x.PayWayCode
+	}
+	return ""
+}
+
+func (x *BuyCryptoViaFiatPriceQueryRequest) GetChannelId() string {
+	if x != nil {
+		return x.ChannelId
+	}
+	return ""
+}
+
+type BuyCryptoViaFiatPriceQueryResponse struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Crypto         string                 `protobuf:"bytes,1,opt,name=crypto,proto3" json:"crypto,omitempty"`
+	CryptoPrice    string                 `protobuf:"bytes,2,opt,name=cryptoPrice,proto3" json:"cryptoPrice,omitempty"`
+	CryptoQuantity string                 `protobuf:"bytes,3,opt,name=cryptoQuantity,proto3" json:"cryptoQuantity,omitempty"`
+	Fiat           string                 `protobuf:"bytes,4,opt,name=fiat,proto3" json:"fiat,omitempty"`
+	RampFee        string                 `protobuf:"bytes,5,opt,name=rampFee,proto3" json:"rampFee,omitempty"`
+	NetworkFee     string                 `protobuf:"bytes,6,opt,name=networkFee,proto3" json:"networkFee,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *BuyCryptoViaFiatPriceQueryResponse) Reset() {
+	*x = BuyCryptoViaFiatPriceQueryResponse{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[57]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BuyCryptoViaFiatPriceQueryResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BuyCryptoViaFiatPriceQueryResponse) ProtoMessage() {}
+
+func (x *BuyCryptoViaFiatPriceQueryResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[57]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BuyCryptoViaFiatPriceQueryResponse.ProtoReflect.Descriptor instead.
+func (*BuyCryptoViaFiatPriceQueryResponse) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{57}
+}
+
+func (x *BuyCryptoViaFiatPriceQueryResponse) GetCrypto() string {
+	if x != nil {
+		return x.Crypto
+	}
+	return ""
+}
+
+func (x *BuyCryptoViaFiatPriceQueryResponse) GetCryptoPrice() string {
+	if x != nil {
+		return x.CryptoPrice
+	}
+	return ""
+}
+
+func (x *BuyCryptoViaFiatPriceQueryResponse) GetCryptoQuantity() string {
+	if x != nil {
+		return x.CryptoQuantity
+	}
+	return ""
+}
+
+func (x *BuyCryptoViaFiatPriceQueryResponse) GetFiat() string {
+	if x != nil {
+		return x.Fiat
+	}
+	return ""
+}
+
+func (x *BuyCryptoViaFiatPriceQueryResponse) GetRampFee() string {
+	if x != nil {
+		return x.RampFee
+	}
+	return ""
+}
+
+func (x *BuyCryptoViaFiatPriceQueryResponse) GetNetworkFee() string {
+	if x != nil {
+		return x.NetworkFee
+	}
+	return ""
+}
+
+type BuyCryptoViaFiatRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Amount        string                 `protobuf:"bytes,1,opt,name=amount,proto3" json:"amount,omitempty"`
+	FiatCurrency  string                 `protobuf:"bytes,2,opt,name=fiatCurrency,proto3" json:"fiatCurrency,omitempty"`
+	PayWayCode    string                 `protobuf:"bytes,3,opt,name=payWayCode,proto3" json:"payWayCode,omitempty"`
+	ChannelId     string                 `protobuf:"bytes,4,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BuyCryptoViaFiatRequest) Reset() {
+	*x = BuyCryptoViaFiatRequest{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[58]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BuyCryptoViaFiatRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BuyCryptoViaFiatRequest) ProtoMessage() {}
+
+func (x *BuyCryptoViaFiatRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[58]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BuyCryptoViaFiatRequest.ProtoReflect.Descriptor instead.
+func (*BuyCryptoViaFiatRequest) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{58}
+}
+
+func (x *BuyCryptoViaFiatRequest) GetAmount() string {
+	if x != nil {
+		return x.Amount
+	}
+	return ""
+}
+
+func (x *BuyCryptoViaFiatRequest) GetFiatCurrency() string {
+	if x != nil {
+		return x.FiatCurrency
+	}
+	return ""
+}
+
+func (x *BuyCryptoViaFiatRequest) GetPayWayCode() string {
+	if x != nil {
+		return x.PayWayCode
+	}
+	return ""
+}
+
+func (x *BuyCryptoViaFiatRequest) GetChannelId() string {
+	if x != nil {
+		return x.ChannelId
+	}
+	return ""
+}
+
+type BuyCryptoViaFiatResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	PayUrl        string                 `protobuf:"bytes,1,opt,name=pay_url,json=payUrl,proto3" json:"pay_url,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BuyCryptoViaFiatResponse) Reset() {
+	*x = BuyCryptoViaFiatResponse{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[59]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BuyCryptoViaFiatResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BuyCryptoViaFiatResponse) ProtoMessage() {}
+
+func (x *BuyCryptoViaFiatResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[59]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BuyCryptoViaFiatResponse.ProtoReflect.Descriptor instead.
+func (*BuyCryptoViaFiatResponse) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{59}
+}
+
+func (x *BuyCryptoViaFiatResponse) GetPayUrl() string {
+	if x != nil {
+		return x.PayUrl
+	}
+	return ""
+}
+
+type GetResponsibleGamblingStatusRequest struct {
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	UserId          int64                   `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OperatorContext *common.OperatorContext `protobuf:"bytes,2,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *GetResponsibleGamblingStatusRequest) Reset() {
+	*x = GetResponsibleGamblingStatusRequest{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[60]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetResponsibleGamblingStatusRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetResponsibleGamblingStatusRequest) ProtoMessage() {}
+
+func (x *GetResponsibleGamblingStatusRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[60]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetResponsibleGamblingStatusRequest.ProtoReflect.Descriptor instead.
+func (*GetResponsibleGamblingStatusRequest) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{60}
+}
+
+func (x *GetResponsibleGamblingStatusRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *GetResponsibleGamblingStatusRequest) GetOperatorContext() *common.OperatorContext {
+	if x != nil {
+		return x.OperatorContext
+	}
+	return nil
+}
+
+type GetResponsibleGamblingStatusResponse struct {
+	state                       protoimpl.MessageState                                            `protogen:"open.v1"`
+	ResponsibleGamblingStatuses []*GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus `protobuf:"bytes,1,rep,name=responsible_gambling_statuses,json=responsibleGamblingStatuses,proto3" json:"responsible_gambling_statuses,omitempty"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
+}
+
+func (x *GetResponsibleGamblingStatusResponse) Reset() {
+	*x = GetResponsibleGamblingStatusResponse{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[61]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetResponsibleGamblingStatusResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetResponsibleGamblingStatusResponse) ProtoMessage() {}
+
+func (x *GetResponsibleGamblingStatusResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[61]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetResponsibleGamblingStatusResponse.ProtoReflect.Descriptor instead.
+func (*GetResponsibleGamblingStatusResponse) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{61}
+}
+
+func (x *GetResponsibleGamblingStatusResponse) GetResponsibleGamblingStatuses() []*GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus {
+	if x != nil {
+		return x.ResponsibleGamblingStatuses
 	}
 	return nil
 }
@@ -3599,7 +5718,7 @@ type GetAddressResponse_Data struct {
 
 func (x *GetAddressResponse_Data) Reset() {
 	*x = GetAddressResponse_Data{}
-	mi := &file_payment_service_v1_payment_proto_msgTypes[36]
+	mi := &file_payment_service_v1_payment_proto_msgTypes[62]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3611,7 +5730,7 @@ func (x *GetAddressResponse_Data) String() string {
 func (*GetAddressResponse_Data) ProtoMessage() {}
 
 func (x *GetAddressResponse_Data) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_service_v1_payment_proto_msgTypes[36]
+	mi := &file_payment_service_v1_payment_proto_msgTypes[62]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3659,8 +5778,6 @@ type GetOperatorAddressResponse_Data struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Crypto like btc, eth...
 	Currency string `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	// Target Currency
-	TargetCurrency string `protobuf:"bytes,2,opt,name=target_currency,json=targetCurrency,proto3" json:"target_currency,omitempty"`
 	// Crypto protocol
 	Protocol string `protobuf:"bytes,3,opt,name=protocol,proto3" json:"protocol,omitempty"`
 	// Crypto chain
@@ -3673,7 +5790,7 @@ type GetOperatorAddressResponse_Data struct {
 
 func (x *GetOperatorAddressResponse_Data) Reset() {
 	*x = GetOperatorAddressResponse_Data{}
-	mi := &file_payment_service_v1_payment_proto_msgTypes[37]
+	mi := &file_payment_service_v1_payment_proto_msgTypes[63]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3685,7 +5802,7 @@ func (x *GetOperatorAddressResponse_Data) String() string {
 func (*GetOperatorAddressResponse_Data) ProtoMessage() {}
 
 func (x *GetOperatorAddressResponse_Data) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_service_v1_payment_proto_msgTypes[37]
+	mi := &file_payment_service_v1_payment_proto_msgTypes[63]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3704,13 +5821,6 @@ func (*GetOperatorAddressResponse_Data) Descriptor() ([]byte, []int) {
 func (x *GetOperatorAddressResponse_Data) GetCurrency() string {
 	if x != nil {
 		return x.Currency
-	}
-	return ""
-}
-
-func (x *GetOperatorAddressResponse_Data) GetTargetCurrency() string {
-	if x != nil {
-		return x.TargetCurrency
 	}
 	return ""
 }
@@ -3736,29 +5846,30 @@ func (x *GetOperatorAddressResponse_Data) GetAddress() string {
 	return ""
 }
 
-type GetChannelsByIdsResponse_Channel struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ChannelId     string                 `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+type GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Currency        string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	WithdrawalUsage string                 `protobuf:"bytes,2,opt,name=withdrawal_usage,json=withdrawalUsage,proto3" json:"withdrawal_usage,omitempty"`
+	DepositUsage    string                 `protobuf:"bytes,3,opt,name=deposit_usage,json=depositUsage,proto3" json:"deposit_usage,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
-func (x *GetChannelsByIdsResponse_Channel) Reset() {
-	*x = GetChannelsByIdsResponse_Channel{}
-	mi := &file_payment_service_v1_payment_proto_msgTypes[38]
+func (x *GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus) Reset() {
+	*x = GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus{}
+	mi := &file_payment_service_v1_payment_proto_msgTypes[64]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetChannelsByIdsResponse_Channel) String() string {
+func (x *GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetChannelsByIdsResponse_Channel) ProtoMessage() {}
+func (*GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus) ProtoMessage() {}
 
-func (x *GetChannelsByIdsResponse_Channel) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_service_v1_payment_proto_msgTypes[38]
+func (x *GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_service_v1_payment_proto_msgTypes[64]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3769,21 +5880,28 @@ func (x *GetChannelsByIdsResponse_Channel) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetChannelsByIdsResponse_Channel.ProtoReflect.Descriptor instead.
-func (*GetChannelsByIdsResponse_Channel) Descriptor() ([]byte, []int) {
-	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{35, 0}
+// Deprecated: Use GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus.ProtoReflect.Descriptor instead.
+func (*GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus) Descriptor() ([]byte, []int) {
+	return file_payment_service_v1_payment_proto_rawDescGZIP(), []int{61, 0}
 }
 
-func (x *GetChannelsByIdsResponse_Channel) GetChannelId() string {
+func (x *GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus) GetCurrency() string {
 	if x != nil {
-		return x.ChannelId
+		return x.Currency
 	}
 	return ""
 }
 
-func (x *GetChannelsByIdsResponse_Channel) GetName() string {
+func (x *GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus) GetWithdrawalUsage() string {
 	if x != nil {
-		return x.Name
+		return x.WithdrawalUsage
+	}
+	return ""
+}
+
+func (x *GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus) GetDepositUsage() string {
+	if x != nil {
+		return x.DepositUsage
 	}
 	return ""
 }
@@ -3794,115 +5912,165 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\n" +
 	" payment/service/v1/payment.proto\x12\x12payment.service.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x13common/common.proto\"B\n" +
 	"$GetSupportedPaymentMethodListRequest\x12\x1a\n" +
-	"\bcurrency\x18\x01 \x03(\tR\bcurrency\"\x1d\n" +
-	"\x1bGetPaymentMethodListRequest\"\xbd\x04\n" +
+	"\bcurrency\x18\x01 \x03(\tR\bcurrency\"\xef\x01\n" +
+	"\x1bGetPaymentMethodListRequest\x12\x1a\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x10\n" +
+	"\x03psp\x18\x02 \x01(\tR\x03psp\x12\x12\n" +
+	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x12\x1d\n" +
+	"\aenabled\x18\x05 \x01(\bH\x00R\aenabled\x88\x01\x01\x12F\n" +
+	"\x10operator_context\x18\x06 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\n" +
+	"\n" +
+	"\b_enabled\"\xda\x06\n" +
 	"\x11PaymentMethodInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x10\n" +
-	"\x03psp\x18\x02 \x01(\tR\x03psp\x12\x12\n" +
-	"\x04type\x18\x03 \x01(\tR\x04type\x12\x1a\n" +
+	"\x03psp\x18\x02 \x01(\tR\x03psp\x12%\n" +
+	"\x0esupported_type\x18\x03 \x01(\tR\rsupportedType\x12\x1a\n" +
 	"\bcurrency\x18\x04 \x01(\tR\bcurrency\x12#\n" +
 	"\rcurrency_type\x18\x05 \x01(\tR\fcurrencyType\x12\x18\n" +
 	"\acontact\x18\x06 \x01(\tR\acontact\x12\x18\n" +
 	"\acountry\x18\a \x01(\tR\acountry\x12%\n" +
-	"\x0epayment_method\x18\b \x01(\tR\rpaymentMethod\x12\x1b\n" +
-	"\tfixed_fee\x18\t \x01(\tR\bfixedFee\x12\x19\n" +
-	"\bfee_rate\x18\n" +
-	" \x01(\tR\afeeRate\x12\x1d\n" +
-	"\n" +
-	"min_amount\x18\v \x01(\tR\tminAmount\x12\x1d\n" +
-	"\n" +
-	"max_amount\x18\f \x01(\tR\tmaxAmount\x12\"\n" +
-	"\rpsp_fixed_fee\x18\r \x01(\tR\vpspFixedFee\x12 \n" +
-	"\fpsp_fee_rate\x18\x0e \x01(\tR\n" +
-	"pspFeeRate\x12$\n" +
-	"\x0epsp_min_amount\x18\x0f \x01(\tR\fpspMinAmount\x12$\n" +
-	"\x0epsp_max_amount\x18\x10 \x01(\tR\fpspMaxAmount\x12\x16\n" +
-	"\x06enable\x18\x11 \x01(\bR\x06enable\x126\n" +
-	"\n" +
-	"key_schema\x18\x12 \x01(\v2\x17.google.protobuf.StructR\tkeySchema\"w\n" +
-	"%GetSupportedPaymentMethodListResponse\x12N\n" +
-	"\x0fpayment_methods\x18\x01 \x03(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"n\n" +
-	"\x1cGetPaymentMethodListResponse\x12N\n" +
-	"\x0fpayment_methods\x18\x01 \x03(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"\x82\x04\n" +
-	"\x1aCreatePaymentMethodRequest\x12F\n" +
-	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12*\n" +
-	"\x11payment_method_id\x18\x02 \x01(\tR\x0fpaymentMethodId\x12#\n" +
-	"\rcurrency_type\x18\x03 \x01(\tR\fcurrencyType\x12\x18\n" +
-	"\acontact\x18\x04 \x01(\tR\acontact\x12\x1b\n" +
-	"\tfixed_fee\x18\x05 \x01(\tR\bfixedFee\x12\x19\n" +
-	"\bfee_rate\x18\x06 \x01(\tR\afeeRate\x12\x1d\n" +
-	"\n" +
-	"min_amount\x18\a \x01(\tR\tminAmount\x12\x1d\n" +
-	"\n" +
-	"max_amount\x18\b \x01(\tR\tmaxAmount\x12\"\n" +
-	"\rpsp_fixed_fee\x18\t \x01(\tR\vpspFixedFee\x12 \n" +
-	"\fpsp_fee_rate\x18\n" +
+	"\x0epayment_method\x18\b \x01(\tR\rpaymentMethod\x12\"\n" +
+	"\rsys_fixed_fee\x18\t \x01(\tR\vsysFixedFee\x12 \n" +
+	"\fsys_fee_rate\x18\n" +
 	" \x01(\tR\n" +
+	"sysFeeRate\x12$\n" +
+	"\x0esys_min_amount\x18\v \x01(\tR\fsysMinAmount\x12$\n" +
+	"\x0esys_max_amount\x18\f \x01(\tR\fsysMaxAmount\x12\x1e\n" +
+	"\vsys_min_fee\x18\r \x01(\tR\tsysMinFee\x12\"\n" +
+	"\rpsp_fixed_fee\x18\x0e \x01(\tR\vpspFixedFee\x12 \n" +
+	"\fpsp_fee_rate\x18\x0f \x01(\tR\n" +
 	"pspFeeRate\x12$\n" +
-	"\x0epsp_min_amount\x18\v \x01(\tR\fpspMinAmount\x12$\n" +
-	"\x0epsp_max_amount\x18\f \x01(\tR\fpspMaxAmount\x12)\n" +
-	"\x03key\x18\r \x01(\v2\x17.google.protobuf.StructR\x03key\"k\n" +
+	"\x0epsp_min_amount\x18\x10 \x01(\tR\fpspMinAmount\x12$\n" +
+	"\x0epsp_max_amount\x18\x11 \x01(\tR\fpspMaxAmount\x12\x1e\n" +
+	"\vpsp_min_fee\x18\x12 \x01(\tR\tpspMinFee\x12\x16\n" +
+	"\x06enable\x18\x13 \x01(\bR\x06enable\x12\x18\n" +
+	"\anetwork\x18\x14 \x01(\tR\anetwork\x12\x1a\n" +
+	"\bprotocol\x18\x15 \x01(\tR\bprotocol\x12\x16\n" +
+	"\x06source\x18\x16 \x01(\tR\x06source\x12!\n" +
+	"\faverage_time\x18\x17 \x01(\x05R\vaverageTime\x12!\n" +
+	"\fsuccess_rate\x18\x18 \x01(\tR\vsuccessRate\x129\n" +
+	"\n" +
+	"key_schema\x18\x19 \x01(\v2\x1a.google.protobuf.ListValueR\tkeySchema\x12\x15\n" +
+	"\x06psp_id\x18\x1a \x01(\tR\x05pspId\"w\n" +
+	"%GetSupportedPaymentMethodListResponse\x12N\n" +
+	"\x0fpayment_methods\x18\x01 \x03(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"\xf8\x01\n" +
+	"\x1cGetPaymentMethodListResponse\x12N\n" +
+	"\x0fpayment_methods\x18\x01 \x03(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\x12\x12\n" +
+	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x1f\n" +
+	"\vtotal_pages\x18\x04 \x01(\x05R\n" +
+	"totalPages\x12\x19\n" +
+	"\btotal_on\x18\x05 \x01(\x05R\atotalOn\x12\x1b\n" +
+	"\ttotal_off\x18\x06 \x01(\x05R\btotalOff\"\xdc\x02\n" +
+	"\x1aCreatePaymentMethodRequest\x12*\n" +
+	"\x11payment_method_id\x18\x01 \x01(\tR\x0fpaymentMethodId\x12\x18\n" +
+	"\acontact\x18\x02 \x01(\tR\acontact\x12\"\n" +
+	"\rsys_fixed_fee\x18\x03 \x01(\tR\vsysFixedFee\x12 \n" +
+	"\fsys_fee_rate\x18\x04 \x01(\tR\n" +
+	"sysFeeRate\x12$\n" +
+	"\x0esys_min_amount\x18\x05 \x01(\tR\fsysMinAmount\x12$\n" +
+	"\x0esys_max_amount\x18\x06 \x01(\tR\fsysMaxAmount\x12\x1e\n" +
+	"\vsys_min_fee\x18\a \x01(\tR\tsysMinFee\x12F\n" +
+	"\x10operator_context\x18\b \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"k\n" +
 	"\x1bCreatePaymentMethodResponse\x12L\n" +
 	"\x0epayment_method\x18\x01 \x01(\v2%.payment.service.v1.PaymentMethodInfoR\rpaymentMethod\"o\n" +
-	"\x1dDisablePaymentChannelResponse\x12N\n" +
-	"\x0fpayment_methods\x18\x01 \x01(\v2%.payment.service.v1.PaymentMethodInfoR\x0epaymentMethods\"\xb2\x03\n" +
+	"\x1cUpdatePaymentChannelResponse\x12O\n" +
+	"\x0fpayment_methods\x18\x01 \x01(\v2&.payment.service.v1.PaymentChannelInfoR\x0epaymentMethods\"\xd8\x03\n" +
 	"\x1bCreatePaymentChannelRequest\x12\x1f\n" +
 	"\vmerchant_id\x18\x01 \x01(\tR\n" +
-	"merchantId\x12\x1f\n" +
-	"\voperator_id\x18\x02 \x01(\tR\n" +
-	"operatorId\x12*\n" +
-	"\x11payment_method_id\x18\x03 \x01(\tR\x0fpaymentMethodId\x12\x12\n" +
-	"\x04type\x18\x04 \x01(\tR\x04type\x12\x18\n" +
-	"\acontact\x18\x05 \x01(\tR\acontact\x12\"\n" +
-	"\rpsp_fixed_fee\x18\x06 \x01(\tR\vpspFixedFee\x12 \n" +
-	"\fpsp_fee_rate\x18\a \x01(\tR\n" +
-	"pspFeeRate\x12$\n" +
-	"\x0euser_fixed_fee\x18\b \x01(\tR\fuserFixedFee\x12\"\n" +
-	"\ruser_fee_rate\x18\t \x01(\tR\vuserFeeRate\x12\x1d\n" +
+	"merchantId\x12F\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12*\n" +
+	"\x11payment_method_id\x18\x03 \x01(\tR\x0fpaymentMethodId\x12\x1b\n" +
+	"\tfixed_fee\x18\x04 \x01(\tR\bfixedFee\x12\x19\n" +
+	"\bfee_rate\x18\x05 \x01(\tR\afeeRate\x12\x17\n" +
+	"\amin_fee\x18\x06 \x01(\tR\x06minFee\x12$\n" +
+	"\x0euser_fixed_fee\x18\a \x01(\tR\fuserFixedFee\x12\"\n" +
+	"\ruser_fee_rate\x18\b \x01(\tR\vuserFeeRate\x12 \n" +
+	"\fuser_min_fee\x18\t \x01(\tR\n" +
+	"userMinFee\x12\x1d\n" +
 	"\n" +
 	"min_amount\x18\n" +
 	" \x01(\tR\tminAmount\x12\x1d\n" +
 	"\n" +
 	"max_amount\x18\v \x01(\tR\tmaxAmount\x12)\n" +
-	"\x03key\x18\f \x01(\v2\x17.google.protobuf.StructR\x03key\"6\n" +
-	"\x1cDisablePaymentChannelRequest\x12\x16\n" +
-	"\x02id\x18\x01 \x01(\tR\n" +
-	"merchantId\"=\n" +
+	"\x03key\x18\f \x01(\v2\x17.google.protobuf.StructR\x03key\"\xa6\x03\n" +
+	"\x1bUpdatePaymentChannelRequest\x12,\n" +
+	"\x12payment_channel_id\x18\x01 \x01(\tR\x10paymentChannelId\x12\x1b\n" +
+	"\tfixed_fee\x18\x02 \x01(\tR\bfixedFee\x12\x19\n" +
+	"\bfee_rate\x18\x03 \x01(\tR\afeeRate\x12\x17\n" +
+	"\amin_fee\x18\x04 \x01(\tR\x06minFee\x12$\n" +
+	"\x0euser_fixed_fee\x18\x05 \x01(\tR\fuserFixedFee\x12\"\n" +
+	"\ruser_fee_rate\x18\x06 \x01(\tR\vuserFeeRate\x12 \n" +
+	"\fuser_min_fee\x18\a \x01(\tR\n" +
+	"userMinFee\x12\x1d\n" +
+	"\n" +
+	"min_amount\x18\b \x01(\tR\tminAmount\x12\x1d\n" +
+	"\n" +
+	"max_amount\x18\t \x01(\tR\tmaxAmount\x12\x1b\n" +
+	"\x06enable\x18\n" +
+	" \x01(\bH\x00R\x06enable\x88\x01\x01\x12.\n" +
+	"\x03key\x18\v \x01(\v2\x17.google.protobuf.StructH\x01R\x03key\x88\x01\x01B\t\n" +
+	"\a_enableB\x06\n" +
+	"\x04_key\"=\n" +
 	"\x1cCreatePaymentChannelResponse\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tR\tchannelId\"\x89\a\n" +
+	"channel_id\x18\x01 \x01(\tR\tchannelId\"\xa5\f\n" +
 	"\x12PaymentChannelInfo\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tR\tchannelId\x12\x12\n" +
-	"\x04type\x18\x02 \x01(\tR\x04type\x12#\n" +
-	"\rcurrency_type\x18\x03 \x01(\tR\fcurrencyType\x12\x10\n" +
-	"\x03psp\x18\x04 \x01(\tR\x03psp\x12\x1a\n" +
-	"\bcategory\x18\x05 \x01(\tR\bcategory\x12\x1f\n" +
-	"\voperator_id\x18\x06 \x01(\tR\n" +
-	"operatorId\x12%\n" +
-	"\x0epayment_method\x18\a \x01(\tR\rpaymentMethod\x12\x10\n" +
-	"\x03tag\x18\b \x01(\tR\x03tag\x12\x12\n" +
-	"\x04name\x18\t \x01(\tR\x04name\x12*\n" +
-	"\x11payment_method_id\x18\n" +
-	" \x01(\tR\x0fpaymentMethodId\x12\x1a\n" +
-	"\bcurrency\x18\v \x01(\tR\bcurrency\x12\x1a\n" +
-	"\bprotocol\x18\f \x01(\tR\bprotocol\x12\x18\n" +
-	"\anetwork\x18\r \x01(\tR\anetwork\x12\x18\n" +
-	"\acountry\x18\x0e \x01(\tR\acountry\x12\x16\n" +
-	"\x06method\x18\x0f \x01(\tR\x06method\x12\x12\n" +
-	"\x04logo\x18\x10 \x01(\tR\x04logo\x12,\n" +
-	"\x12min_deposit_amount\x18\x11 \x01(\tR\x10minDepositAmount\x12,\n" +
-	"\x12max_deposit_amount\x18\x12 \x01(\tR\x10maxDepositAmount\x12.\n" +
-	"\x13min_withdraw_amount\x18\x13 \x01(\tR\x11minWithdrawAmount\x12.\n" +
-	"\x13max_withdraw_amount\x18\x14 \x01(\tR\x11maxWithdrawAmount\x12\x10\n" +
-	"\x03eat\x18\x15 \x01(\x05R\x03eat\x12\x17\n" +
-	"\afix_fee\x18\x16 \x01(\tR\x06fixFee\x12\x19\n" +
-	"\brate_fee\x18\x17 \x01(\tR\arateFee\x12>\n" +
-	"\x0edeposit_schema\x18\x18 \x01(\v2\x17.google.protobuf.StructR\rdepositSchema\x12@\n" +
-	"\x0fwithdraw_schema\x18\x19 \x01(\v2\x17.google.protobuf.StructR\x0ewithdrawSchema\x12\x1f\n" +
-	"\vsource_type\x18\x1a \x01(\tR\n" +
-	"sourceType\x12\x16\n" +
-	"\x06enable\x18\x1b \x01(\bR\x06enable\"\x9a\x01\n" +
+	"channel_id\x18\x01 \x01(\tR\tchannelId\x12!\n" +
+	"\fsupport_type\x18\x02 \x01(\tR\vsupportType\x12\x10\n" +
+	"\x03psp\x18\x03 \x01(\tR\x03psp\x12\x1a\n" +
+	"\bcategory\x18\x04 \x01(\tR\bcategory\x12%\n" +
+	"\x0epayment_method\x18\x05 \x01(\tR\rpaymentMethod\x12\x10\n" +
+	"\x03tag\x18\x06 \x01(\tR\x03tag\x12\x12\n" +
+	"\x04name\x18\a \x01(\tR\x04name\x12*\n" +
+	"\x11payment_method_id\x18\b \x01(\tR\x0fpaymentMethodId\x12\x1a\n" +
+	"\bcurrency\x18\t \x01(\tR\bcurrency\x12#\n" +
+	"\rcurrency_type\x18\n" +
+	" \x01(\tR\fcurrencyType\x12\x1a\n" +
+	"\bprotocol\x18\v \x01(\tR\bprotocol\x12\x18\n" +
+	"\anetwork\x18\f \x01(\tR\anetwork\x12\x18\n" +
+	"\acountry\x18\r \x01(\tR\acountry\x12\x16\n" +
+	"\x06method\x18\x0e \x01(\tR\x06method\x12\x12\n" +
+	"\x04logo\x18\x0f \x01(\tR\x04logo\x12\x1d\n" +
+	"\n" +
+	"min_amount\x18\x10 \x01(\tR\tminAmount\x12\x1d\n" +
+	"\n" +
+	"max_amount\x18\x11 \x01(\tR\tmaxAmount\x12\x1b\n" +
+	"\tfixed_fee\x18\x12 \x01(\tR\bfixedFee\x12\x19\n" +
+	"\bfee_rate\x18\x13 \x01(\tR\afeeRate\x12\x17\n" +
+	"\amin_fee\x18\x14 \x01(\tR\x06minFee\x12$\n" +
+	"\x0epsp_min_amount\x18\x15 \x01(\tR\fpspMinAmount\x12$\n" +
+	"\x0epsp_max_amount\x18\x16 \x01(\tR\fpspMaxAmount\x12\"\n" +
+	"\rpsp_fixed_fee\x18\x17 \x01(\tR\vpspFixedFee\x12 \n" +
+	"\fpsp_fee_rate\x18\x18 \x01(\tR\n" +
+	"pspFeeRate\x12\x1e\n" +
+	"\vpsp_min_fee\x18\x19 \x01(\tR\tpspMinFee\x12$\n" +
+	"\x0esys_min_amount\x18\x1a \x01(\tR\fsysMinAmount\x12$\n" +
+	"\x0esys_max_amount\x18\x1b \x01(\tR\fsysMaxAmount\x12\"\n" +
+	"\rsys_fixed_fee\x18\x1c \x01(\tR\vsysFixedFee\x12 \n" +
+	"\fsys_fee_rate\x18\x1d \x01(\tR\n" +
+	"sysFeeRate\x12\x1e\n" +
+	"\vsys_min_fee\x18\x1e \x01(\tR\tsysMinFee\x12$\n" +
+	"\x0euser_fixed_fee\x18\x1f \x01(\tR\fuserFixedFee\x12\"\n" +
+	"\ruser_fee_rate\x18  \x01(\tR\vuserFeeRate\x12 \n" +
+	"\fuser_min_fee\x18! \x01(\tR\n" +
+	"userMinFee\x122\n" +
+	"\x06schema\x18\" \x01(\v2\x1a.google.protobuf.ListValueR\x06schema\x12\x16\n" +
+	"\x06enable\x18# \x01(\bR\x06enable\x12\x10\n" +
+	"\x03eat\x18$ \x01(\x05R\x03eat\x12\x1f\n" +
+	"\voperator_id\x18% \x01(\x03R\n" +
+	"operatorId\x12.\n" +
+	"\x13company_operator_id\x18& \x01(\x03R\x11companyOperatorId\x120\n" +
+	"\x14retailer_operator_id\x18' \x01(\x03R\x12retailerOperatorId\x12,\n" +
+	"\x12system_operator_id\x18( \x01(\x03R\x10systemOperatorId\x12#\n" +
+	"\roperator_name\x18) \x01(\tR\foperatorName\x122\n" +
+	"\x15company_operator_name\x18* \x01(\tR\x13companyOperatorName\x124\n" +
+	"\x16retailer_operator_name\x18+ \x01(\tR\x14retailerOperatorName\x120\n" +
+	"\x14system_operator_name\x18, \x01(\tR\x12systemOperatorName\x12#\n" +
+	"\roperator_type\x18- \x01(\tR\foperatorType\x12\x15\n" +
+	"\x06psp_id\x18. \x01(\tR\x05pspId\"\x9a\x01\n" +
 	"\x16InitiateDepositRequest\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x1a\n" +
 	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x1d\n" +
@@ -3929,27 +6097,25 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x1a\n" +
 	"\bprotocol\x18\x02 \x01(\tR\bprotocol\x12\x18\n" +
 	"\anetwork\x18\x03 \x01(\tR\anetwork\x12\x18\n" +
-	"\aaddress\x18\x04 \x01(\tR\aaddress\"\xda\x01\n" +
+	"\aaddress\x18\x04 \x01(\tR\aaddress\"\x86\x02\n" +
 	"\x19GetOperatorAddressRequest\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tR\tchannelId\x12'\n" +
-	"\x0ftarget_currency\x18\x02 \x01(\tR\x0etargetCurrency\x12F\n" +
-	"\x10operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12-\n" +
-	"\x05extra\x18\x04 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\x83\x02\n" +
+	"channel_id\x18\x01 \x01(\tR\tchannelId\x12S\n" +
+	"\x17target_operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12-\n" +
+	"\x05extra\x18\x03 \x01(\v2\x17.google.protobuf.StructR\x05extra\x12F\n" +
+	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xd9\x01\n" +
 	"\x1aGetOperatorAddressResponse\x12G\n" +
-	"\x04data\x18\x01 \x01(\v23.payment.service.v1.GetOperatorAddressResponse.DataR\x04data\x1a\x9b\x01\n" +
+	"\x04data\x18\x01 \x01(\v23.payment.service.v1.GetOperatorAddressResponse.DataR\x04data\x1ar\n" +
 	"\x04Data\x12\x1a\n" +
-	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12'\n" +
-	"\x0ftarget_currency\x18\x02 \x01(\tR\x0etargetCurrency\x12\x1a\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x1a\n" +
 	"\bprotocol\x18\x03 \x01(\tR\bprotocol\x12\x18\n" +
 	"\anetwork\x18\x04 \x01(\tR\anetwork\x12\x18\n" +
-	"\aaddress\x18\x05 \x01(\tR\aaddress\"\x9d\x02\n" +
+	"\aaddress\x18\x05 \x01(\tR\aaddress\"\xab\x02\n" +
 	"\x17InitiateWithdrawRequest\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12\x17\n" +
-	"\auser_id\x18\x03 \x01(\x03R\x06userId\x12\x1f\n" +
-	"\voperator_id\x18\x04 \x01(\x03R\n" +
-	"operatorId\x12\x1d\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12-\n" +
+	"\x12reporting_currency\x18\x03 \x01(\tR\x11reportingCurrency\x12\x17\n" +
+	"\auser_id\x18\x04 \x01(\x03R\x06userId\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x05 \x01(\tR\tchannelId\x12F\n" +
 	"\x10operator_context\x18\x06 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12-\n" +
@@ -3960,22 +6126,25 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x06amount\x18\x03 \x01(\tR\x06amount\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x129\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x94\x02\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xa7\x03\n" +
 	"\x1fInitiateOperatorWithdrawRequest\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x1a\n" +
-	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12'\n" +
-	"\x0fsource_currency\x18\x03 \x01(\tR\x0esourceCurrency\x12F\n" +
-	"\x10operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1d\n" +
+	"\bcurrency\x18\x02 \x01(\tR\bcurrency\x12-\n" +
+	"\x12reporting_currency\x18\x03 \x01(\tR\x11reportingCurrency\x12\"\n" +
+	"\radmin_user_id\x18\x04 \x01(\x03R\vadminUserId\x12S\n" +
+	"\x17target_operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12F\n" +
+	"\x10operator_context\x18\x06 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x05 \x01(\tR\tchannelId\x12-\n" +
-	"\x05extra\x18\x06 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xe0\x01\n" +
+	"channel_id\x18\a \x01(\tR\tchannelId\x12\x12\n" +
+	"\x04memo\x18\b \x01(\tR\x04memo\x12-\n" +
+	"\x05extra\x18\t \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xe0\x01\n" +
 	" InitiateOperatorWithdrawResponse\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
 	"\x11operator_order_no\x18\x02 \x01(\tR\x0foperatorOrderNo\x12\x16\n" +
 	"\x06amount\x18\x03 \x01(\tR\x06amount\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x129\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x84\x03\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xa2\x03\n" +
 	"\x16DepositCallbackRequest\x12(\n" +
 	"\x11pa_transaction_no\x18\x01 \x01(\x03R\rtransactionNo\x12(\n" +
 	"\x10gateway_order_no\x18\x02 \x01(\tR\x0egatewayOrderNo\x12'\n" +
@@ -3986,11 +6155,12 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"createTime\x12\x16\n" +
 	"\x06amount\x18\a \x01(\tR\x06amount\x12\x14\n" +
 	"\x05money\x18\b \x01(\tR\x05money\x12\x18\n" +
-	"\aaddress\x18\t \x01(\tR\aaddress\x12\x12\n" +
-	"\x04sign\x18\n" +
-	" \x01(\tR\x04sign\x12\x1c\n" +
-	"\ttimestamp\x18\v \x01(\tR\ttimestamp\x12\x14\n" +
-	"\x05nonce\x18\f \x01(\tR\x05nonce\"M\n" +
+	"\aaddress\x18\t \x01(\tR\aaddress\x12\x1c\n" +
+	"\tchannelID\x18\n" +
+	" \x01(\tR\tchannelID\x12\x12\n" +
+	"\x04sign\x18\v \x01(\tR\x04sign\x12\x1c\n" +
+	"\ttimestamp\x18\f \x01(\tR\ttimestamp\x12\x14\n" +
+	"\x05nonce\x18\r \x01(\tR\x05nonce\"M\n" +
 	"\x17DepositCallbackResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\"\x86\x03\n" +
@@ -4012,57 +6182,75 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x05nonce\x18\f \x01(\tR\x05nonce\"N\n" +
 	"\x18WithdrawCallbackResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"\xa0\x05\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"\xc3\v\n" +
 	"\x0fTransactionInfo\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x12*\n" +
 	"\x11pa_transaction_id\x18\x02 \x01(\tR\x0fpaTransactionId\x124\n" +
 	"\x16gateway_transaction_id\x18\x03 \x01(\tR\x14gatewayTransactionId\x12\x1f\n" +
-	"\voperator_id\x18\x04 \x01(\tR\n" +
-	"operatorId\x12\x17\n" +
-	"\auser_id\x18\x05 \x01(\x03R\x06userId\x12\x10\n" +
-	"\x03vip\x18\x06 \x01(\x05R\x03vip\x12\x16\n" +
-	"\x06amount\x18\a \x01(\tR\x06amount\x12\x1a\n" +
-	"\bcurrency\x18\b \x01(\tR\bcurrency\x12\x10\n" +
-	"\x03fee\x18\t \x01(\tR\x03fee\x12%\n" +
-	"\x0epayment_method\x18\n" +
-	" \x01(\tR\rpaymentMethod\x12'\n" +
-	"\x0fpayment_channel\x18\v \x01(\tR\x0epaymentChannel\x12\x1a\n" +
-	"\bprotocol\x18\f \x01(\tR\bprotocol\x12\x18\n" +
-	"\anetwork\x18\r \x01(\tR\anetwork\x127\n" +
-	"\x04type\x18\x0e \x01(\x0e2#.payment.service.v1.TransactionTypeR\x04type\x12=\n" +
-	"\x06status\x18\x0f \x01(\x0e2%.payment.service.v1.TransactionStatusR\x06status\x129\n" +
+	"\voperator_id\x18\x04 \x01(\x03R\n" +
+	"operatorId\x12.\n" +
+	"\x13company_operator_id\x18\x05 \x01(\x03R\x11companyOperatorId\x120\n" +
+	"\x14retailer_operator_id\x18\x06 \x01(\x03R\x12retailerOperatorId\x12,\n" +
+	"\x12system_operator_id\x18\a \x01(\x03R\x10systemOperatorId\x12#\n" +
+	"\roperator_name\x18\b \x01(\tR\foperatorName\x122\n" +
+	"\x15company_operator_name\x18\t \x01(\tR\x13companyOperatorName\x124\n" +
+	"\x16retailer_operator_name\x18\n" +
+	" \x01(\tR\x14retailerOperatorName\x120\n" +
+	"\x14system_operator_name\x18\v \x01(\tR\x12systemOperatorName\x12\x17\n" +
+	"\auser_id\x18\f \x01(\x03R\x06userId\x12\x10\n" +
+	"\x03vip\x18\r \x01(\x05R\x03vip\x12\x16\n" +
+	"\x06amount\x18\x0e \x01(\tR\x06amount\x12\x1a\n" +
+	"\bcurrency\x18\x0f \x01(\tR\bcurrency\x12%\n" +
+	"\x0eprocessing_fee\x18\x10 \x01(\tR\rprocessingFee\x12%\n" +
+	"\x0epayment_method\x18\x11 \x01(\tR\rpaymentMethod\x12'\n" +
+	"\x0fpayment_channel\x18\x12 \x01(\tR\x0epaymentChannel\x12\x1a\n" +
+	"\bprotocol\x18\x13 \x01(\tR\bprotocol\x12\x18\n" +
+	"\anetwork\x18\x14 \x01(\tR\anetwork\x12\x18\n" +
+	"\aaddress\x18\x15 \x01(\tR\aaddress\x127\n" +
+	"\x04type\x18\x16 \x01(\x0e2#.payment.service.v1.TransactionTypeR\x04type\x12=\n" +
+	"\x06status\x18\x17 \x01(\x0e2%.payment.service.v1.TransactionStatusR\x06status\x129\n" +
 	"\n" +
-	"created_at\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"created_at\x18\x18 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x11 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\x9c\x01\n" +
+	"updated_at\x18\x19 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12\x1d\n" +
+	"\n" +
+	"amount_usd\x18\x1a \x01(\tR\tamountUsd\x12\x1f\n" +
+	"\vamount_sent\x18\x1b \x01(\tR\n" +
+	"amountSent\x12\x10\n" +
+	"\x03gas\x18\x1c \x01(\tR\x03gas\x12-\n" +
+	"\x12reporting_currency\x18\x1d \x01(\tR\x11reportingCurrency\x12:\n" +
+	"\x19amount_reporting_currency\x18\x1e \x01(\tR\x17amountReportingCurrency\x12C\n" +
+	"\x1eamount_sent_reporting_currency\x18\x1f \x01(\tR\x1bamountSentReportingCurrency\x12I\n" +
+	"!processing_fee_reporting_currency\x18  \x01(\tR\x1eprocessingFeeReportingCurrency\x12&\n" +
+	"\x0famount_sent_usd\x18! \x01(\tR\ramountSentUsd\x12,\n" +
+	"\x12processing_fee_usd\x18\" \x01(\tR\x10processingFeeUsd\"\x9c\x01\n" +
 	"\x11TransactionDetail\x12E\n" +
 	"\vtransaction\x18\x01 \x01(\v2#.payment.service.v1.TransactionInfoR\vtransaction\x12@\n" +
-	"\achannel\x18\x02 \x01(\v2&.payment.service.v1.PaymentChannelInfoR\achannel\"\xf6\x05\n" +
+	"\achannel\x18\x02 \x01(\v2&.payment.service.v1.PaymentChannelInfoR\achannel\"\xc0\x06\n" +
 	"\x19GetTransactionPageRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12%\n" +
-	"\x0etransaction_id\x18\x03 \x01(\x03R\rtransactionId\x12\x1f\n" +
-	"\voperator_id\x18\x04 \x01(\tR\n" +
-	"operatorId\x12\x1a\n" +
-	"\bcurrency\x18\x05 \x01(\tR\bcurrency\x12%\n" +
-	"\x0epayment_method\x18\x06 \x01(\tR\rpaymentMethod\x12'\n" +
-	"\x0fpayment_channel\x18\a \x01(\tR\x0epaymentChannel\x12\x1a\n" +
-	"\bprotocol\x18\b \x01(\tR\bprotocol\x12\x18\n" +
-	"\anetwork\x18\t \x01(\tR\anetwork\x127\n" +
-	"\x04type\x18\n" +
-	" \x01(\x0e2#.payment.service.v1.TransactionTypeR\x04type\x12=\n" +
-	"\x06status\x18\v \x01(\x0e2%.payment.service.v1.TransactionStatusR\x06status\x12\x14\n" +
-	"\x05agent\x18\f \x01(\tR\x05agent\x129\n" +
+	"\x0etransaction_id\x18\x03 \x01(\x03R\rtransactionId\x12\x1a\n" +
+	"\bcurrency\x18\x04 \x01(\tR\bcurrency\x12%\n" +
+	"\x0epayment_method\x18\x05 \x01(\tR\rpaymentMethod\x12'\n" +
+	"\x0fpayment_channel\x18\x06 \x01(\tR\x0epaymentChannel\x12\x1a\n" +
+	"\bprotocol\x18\a \x01(\tR\bprotocol\x12\x18\n" +
+	"\anetwork\x18\b \x01(\tR\anetwork\x127\n" +
+	"\x04type\x18\t \x01(\x0e2#.payment.service.v1.TransactionTypeR\x04type\x12=\n" +
+	"\x06status\x18\n" +
+	" \x01(\x0e2%.payment.service.v1.TransactionStatusR\x06status\x12\x14\n" +
+	"\x05agent\x18\v \x01(\tR\x05agent\x129\n" +
 	"\n" +
-	"start_time\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
-	"\bend_time\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12,\n" +
-	"\x04sort\x18\x0f \x01(\x0e2\x18.payment.service.v1.SortR\x04sort\x129\n" +
-	"\x06source\x18\x10 \x01(\x0e2!.payment.service.v1.RequestSourceR\x06source\x12\x17\n" +
-	"\auser_id\x18\x11 \x01(\x03R\x06userId\x12\x1d\n" +
+	"start_time\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
+	"\bend_time\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x12,\n" +
+	"\x04sort\x18\x0e \x01(\x0e2\x18.payment.service.v1.SortR\x04sort\x12\x1d\n" +
 	"\n" +
-	"min_amount\x18\x12 \x01(\tR\tminAmount\x12\x1d\n" +
+	"min_amount\x18\x0f \x01(\tR\tminAmount\x12\x1d\n" +
 	"\n" +
-	"max_amount\x18\x13 \x01(\tR\tmaxAmount\"\xd1\x02\n" +
+	"max_amount\x18\x10 \x01(\tR\tmaxAmount\x12\x17\n" +
+	"\auser_id\x18\x11 \x01(\x03R\x06userId\x12\\\n" +
+	"\x18operator_context_filters\x18\x12 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
+	"\x10operator_context\x18\x13 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xd1\x02\n" +
 	"\x1aGetTransactionPageResponse\x12G\n" +
 	"\ftransactions\x18\x01 \x03(\v2#.payment.service.v1.TransactionInfoR\ftransactions\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
@@ -4073,7 +6261,7 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"totalPages\x12)\n" +
 	"\x10total_successful\x18\x06 \x01(\x05R\x0ftotalSuccessful\x12)\n" +
 	"\x10total_processing\x18\a \x01(\x05R\x0ftotalProcessing\x12!\n" +
-	"\ftotal_failed\x18\b \x01(\x05R\vtotalFailed\"\x82\x03\n" +
+	"\ftotal_failed\x18\b \x01(\x05R\vtotalFailed\"\xb4\x03\n" +
 	"\x1cGetPaymentChannelPageRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1f\n" +
@@ -4086,8 +6274,28 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\bprotocol\x18\b \x01(\tR\bprotocol\x12\x18\n" +
 	"\anetwork\x18\t \x01(\tR\anetwork\x12\x18\n" +
 	"\acountry\x18\n" +
-	" \x01(\tR\acountry\x12,\n" +
-	"\x04sort\x18\v \x01(\x0e2\x18.payment.service.v1.SortR\x04sort\"\xc3\x02\n" +
+	" \x01(\tR\acountry\x12\x16\n" +
+	"\x06source\x18\v \x01(\tR\x06source\x12\x18\n" +
+	"\aenabled\x18\f \x01(\bR\aenabled\x12,\n" +
+	"\x04sort\x18\r \x01(\x0e2\x18.payment.service.v1.SortR\x04sort\"\xd2\x04\n" +
+	"$GetOperatorPaymentChannelPageRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x123\n" +
+	"\x04type\x18\x03 \x01(\x0e2\x1f.payment.service.v1.ChannelTypeR\x04type\x12\x1a\n" +
+	"\bcategory\x18\x04 \x01(\tR\bcategory\x12%\n" +
+	"\x0epayment_method\x18\x05 \x01(\tR\rpaymentMethod\x12\x1a\n" +
+	"\bcurrency\x18\x06 \x01(\tR\bcurrency\x12\x1a\n" +
+	"\bprotocol\x18\a \x01(\tR\bprotocol\x12\x18\n" +
+	"\anetwork\x18\b \x01(\tR\anetwork\x12\x18\n" +
+	"\acountry\x18\t \x01(\tR\acountry\x12\x16\n" +
+	"\x06source\x18\n" +
+	" \x01(\tR\x06source\x12,\n" +
+	"\x04sort\x18\v \x01(\x0e2\x18.payment.service.v1.SortR\x04sort\x12\x1d\n" +
+	"\aenabled\x18\f \x01(\bH\x00R\aenabled\x88\x01\x01\x12\\\n" +
+	"\x18operator_context_filters\x18\r \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12F\n" +
+	"\x10operator_context\x18\x0e \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\n" +
+	"\n" +
+	"\b_enabled\"\xc3\x02\n" +
 	"\x1dGetPaymentChannelPageResponse\x12Q\n" +
 	"\x10payment_channels\x18\x01 \x03(\v2&.payment.service.v1.PaymentChannelInfoR\x0fpaymentChannels\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
@@ -4097,21 +6305,142 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\vtotal_pages\x18\x05 \x01(\x05R\n" +
 	"totalPages\x12,\n" +
 	"\x12total_enable_colnt\x18\x06 \x01(\x05R\x10totalEnableColnt\x12.\n" +
-	"\x13total_disable_count\x18\a \x01(\x05R\x11totalDisableCount\"\x83\x01\n" +
+	"\x13total_disable_count\x18\a \x01(\x05R\x11totalDisableCount\"H\n" +
 	"\x1fGetTransactionDetailByIdRequest\x12%\n" +
-	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\x129\n" +
-	"\x06source\x18\x02 \x01(\x0e2!.payment.service.v1.RequestSourceR\x06source\"a\n" +
+	"\x0etransaction_id\x18\x01 \x01(\x03R\rtransactionId\"a\n" +
 	" GetTransactionDetailByIdResponse\x12=\n" +
 	"\x06detail\x18\x01 \x01(\v2%.payment.service.v1.TransactionDetailR\x06detail\":\n" +
 	"\x17GetChannelsByIdsRequest\x12\x1f\n" +
 	"\vchannel_ids\x18\x01 \x03(\tR\n" +
-	"channelIds\"\xaa\x01\n" +
-	"\x18GetChannelsByIdsResponse\x12P\n" +
-	"\bchannels\x18\x01 \x03(\v24.payment.service.v1.GetChannelsByIdsResponse.ChannelR\bchannels\x1a<\n" +
-	"\aChannel\x12\x1d\n" +
+	"channelIds\"^\n" +
+	"\x18GetChannelsByIdsResponse\x12B\n" +
+	"\bchannels\x18\x01 \x03(\v2&.payment.service.v1.PaymentChannelInfoR\bchannels\"\xf7\x03\n" +
+	"\x1aUpdatePaymentMethodRequest\x12*\n" +
+	"\x11payment_method_id\x18\x01 \x01(\tR\x0fpaymentMethodId\x12\x1d\n" +
+	"\acontact\x18\x02 \x01(\tH\x00R\acontact\x88\x01\x01\x12'\n" +
+	"\rsys_fixed_fee\x18\x03 \x01(\tH\x01R\vsysFixedFee\x88\x01\x01\x12%\n" +
+	"\fsys_fee_rate\x18\x04 \x01(\tH\x02R\n" +
+	"sysFeeRate\x88\x01\x01\x12)\n" +
+	"\x0esys_min_amount\x18\x05 \x01(\tH\x03R\fsysMinAmount\x88\x01\x01\x12)\n" +
+	"\x0esys_max_amount\x18\x06 \x01(\tH\x04R\fsysMaxAmount\x88\x01\x01\x12#\n" +
+	"\vsys_min_fee\x18\a \x01(\tH\x05R\tsysMinFee\x88\x01\x01\x12\x16\n" +
+	"\x06status\x18\b \x01(\bR\x06status\x12F\n" +
+	"\x10operator_context\x18\t \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tR\tchannelId\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name*p\n" +
+	"\b_contactB\x10\n" +
+	"\x0e_sys_fixed_feeB\x0f\n" +
+	"\r_sys_fee_rateB\x11\n" +
+	"\x0f_sys_min_amountB\x11\n" +
+	"\x0f_sys_max_amountB\x0e\n" +
+	"\f_sys_min_fee\">\n" +
+	"\x1bUpdatePaymentMethodResponse\x12\x1f\n" +
+	"\vchannel_ids\x18\x01 \x03(\tR\n" +
+	"channelIds\"\xce\x02\n" +
+	"\bBankCard\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12!\n" +
+	"\fcard_account\x18\x02 \x01(\tR\vcardAccount\x124\n" +
+	"\x16card_account_firstname\x18\x03 \x01(\tR\x14cardAccountFirstname\x122\n" +
+	"\x15card_account_lastname\x18\x04 \x01(\tR\x13cardAccountLastname\x12\x1b\n" +
+	"\tcard_iban\x18\x05 \x01(\tR\bcardIban\x12\x1a\n" +
+	"\bcurrency\x18\x06 \x01(\tR\bcurrency\x12\x18\n" +
+	"\acountry\x18\a \x01(\tR\acountry\x12\x18\n" +
+	"\aenabled\x18\b \x01(\bR\aenabled\x128\n" +
+	"\vcard_detail\x18\t \x01(\v2\x17.google.protobuf.StructR\n" +
+	"cardDetail\"\x18\n" +
+	"\x16GetBankCardListRequest\"]\n" +
+	"\x17GetBankCardListResponse\x12B\n" +
+	"\x0ebank_card_lsit\x18\x01 \x03(\v2\x1c.payment.service.v1.BankCardR\fbankCardLsit\"\x80\x01\n" +
+	"\x12AddBankCardRequest\x12\x1a\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
+	"\acountry\x18\x02 \x01(\tR\acountry\x124\n" +
+	"\tbank_card\x18\x03 \x01(\v2\x17.google.protobuf.StructR\bbankCard\"\x15\n" +
+	"\x13AddBankCardResponse\"\xe1\x01\n" +
+	"\x15UpdateBankCardRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1f\n" +
+	"\bcurrency\x18\x02 \x01(\tH\x00R\bcurrency\x88\x01\x01\x12\x1d\n" +
+	"\acountry\x18\x03 \x01(\tH\x01R\acountry\x88\x01\x01\x12\x1d\n" +
+	"\aenabled\x18\x04 \x01(\bH\x02R\aenabled\x88\x01\x01\x124\n" +
+	"\tbank_card\x18\x05 \x01(\v2\x17.google.protobuf.StructR\bbankCardB\v\n" +
+	"\t_currencyB\n" +
+	"\n" +
+	"\b_countryB\n" +
+	"\n" +
+	"\b_enabled\"\x18\n" +
+	"\x16UpdateBankCardResponse\"9\n" +
+	"\x15DeleteBankCardRequest\x12 \n" +
+	"\fbank_card_id\x18\x01 \x01(\x03R\n" +
+	"bankCardId\"\x18\n" +
+	"\x16DeleteBankCardResponse\"e\n" +
+	"\x15GetBankAccountRequest\x12\x1d\n" +
+	"\n" +
+	"channel_id\x18\x01 \x01(\tR\tchannelId\x12-\n" +
+	"\x05extra\x18\x02 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xbe\x01\n" +
+	"\x16GetBankAccountResponse\x12\x1d\n" +
+	"\n" +
+	"notify_url\x18\x01 \x01(\tR\tnotifyUrl\x12)\n" +
+	"\x10reference_number\x18\x02 \x01(\tR\x0freferenceNumber\x12*\n" +
+	"\x11bank_account_name\x18\x03 \x01(\tR\x0fbankAccountName\x12.\n" +
+	"\x13bank_account_number\x18\x04 \x01(\tR\x11bankAccountNumber\"2\n" +
+	"\x14GetBankSchemaRequest\x12\x1a\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\"K\n" +
+	"\x15GetBankSchemaResponse\x122\n" +
+	"\x06schema\x18\x01 \x01(\v2\x1a.google.protobuf.ListValueR\x06schema\":\n" +
+	"\x06Crypto\x12\x16\n" +
+	"\x06crypto\x18\x01 \x01(\tR\x06crypto\x12\x18\n" +
+	"\anetwork\x18\x02 \x01(\tR\anetwork\"\xb0\x01\n" +
+	"\bCurrency\x12\x1a\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x18\n" +
+	"\acountry\x18\x02 \x01(\tR\acountry\x12\x1e\n" +
+	"\n" +
+	"payWayCode\x18\x03 \x01(\tR\n" +
+	"payWayCode\x12\x1e\n" +
+	"\n" +
+	"payWayName\x18\x04 \x01(\tR\n" +
+	"payWayName\x12\x16\n" +
+	"\x06payMin\x18\x05 \x01(\x02R\x06payMin\x12\x16\n" +
+	"\x06payMax\x18\x06 \x01(\x02R\x06payMax\"$\n" +
+	"\"BuyCryptoViaFiatCurrentListRequest\"\xa3\x01\n" +
+	"#BuyCryptoViaFiatCurrentListResponse\x12<\n" +
+	"\n" +
+	"currencies\x18\x01 \x03(\v2\x1c.payment.service.v1.CurrencyR\n" +
+	"currencies\x12>\n" +
+	"\x06crypto\x18\x02 \x03(\v2&.payment.service.v1.PaymentChannelInfoR\x06crypto\"\x8e\x01\n" +
+	"!BuyCryptoViaFiatPriceQueryRequest\x12\x16\n" +
+	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\x12\n" +
+	"\x04fiat\x18\x02 \x01(\tR\x04fiat\x12\x1e\n" +
+	"\n" +
+	"payWayCode\x18\x03 \x01(\tR\n" +
+	"payWayCode\x12\x1d\n" +
+	"\n" +
+	"channel_id\x18\x04 \x01(\tR\tchannelId\"\xd4\x01\n" +
+	"\"BuyCryptoViaFiatPriceQueryResponse\x12\x16\n" +
+	"\x06crypto\x18\x01 \x01(\tR\x06crypto\x12 \n" +
+	"\vcryptoPrice\x18\x02 \x01(\tR\vcryptoPrice\x12&\n" +
+	"\x0ecryptoQuantity\x18\x03 \x01(\tR\x0ecryptoQuantity\x12\x12\n" +
+	"\x04fiat\x18\x04 \x01(\tR\x04fiat\x12\x18\n" +
+	"\arampFee\x18\x05 \x01(\tR\arampFee\x12\x1e\n" +
+	"\n" +
+	"networkFee\x18\x06 \x01(\tR\n" +
+	"networkFee\"\x94\x01\n" +
+	"\x17BuyCryptoViaFiatRequest\x12\x16\n" +
+	"\x06amount\x18\x01 \x01(\tR\x06amount\x12\"\n" +
+	"\ffiatCurrency\x18\x02 \x01(\tR\ffiatCurrency\x12\x1e\n" +
+	"\n" +
+	"payWayCode\x18\x03 \x01(\tR\n" +
+	"payWayCode\x12\x1d\n" +
+	"\n" +
+	"channel_id\x18\x04 \x01(\tR\tchannelId\"3\n" +
+	"\x18BuyCryptoViaFiatResponse\x12\x17\n" +
+	"\apay_url\x18\x01 \x01(\tR\x06payUrl\"\x86\x01\n" +
+	"#GetResponsibleGamblingStatusRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12F\n" +
+	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\"\xc9\x02\n" +
+	"$GetResponsibleGamblingStatusResponse\x12\x96\x01\n" +
+	"\x1dresponsible_gambling_statuses\x18\x01 \x03(\v2R.payment.service.v1.GetResponsibleGamblingStatusResponse.ResponsibleGamblingStatusR\x1bresponsibleGamblingStatuses\x1a\x87\x01\n" +
+	"\x19ResponsibleGamblingStatus\x12\x1a\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12)\n" +
+	"\x10withdrawal_usage\x18\x02 \x01(\tR\x0fwithdrawalUsage\x12#\n" +
+	"\rdeposit_usage\x18\x03 \x01(\tR\fdepositUsage*p\n" +
 	"\x0fTransactionType\x12 \n" +
 	"\x1cTRANSACTION_TYPE_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18TRANSACTION_TYPE_DEPOSIT\x10\x01\x12\x1d\n" +
@@ -4123,19 +6452,17 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x19TRANSACTION_STATUS_FAILED\x10\x03*\x19\n" +
 	"\x04Sort\x12\b\n" +
 	"\x04DESC\x10\x00\x12\a\n" +
-	"\x03ASC\x10\x01*F\n" +
-	"\rRequestSource\x12\x1b\n" +
-	"\x17REQUEST_SOURCE_FRONTEND\x10\x00\x12\x18\n" +
-	"\x14REQUEST_SOURCE_ADMIN\x10\x01*B\n" +
-	"\vChannelType\x12\x18\n" +
-	"\x14CHANNEL_TYPE_DEPOSIT\x10\x00\x12\x19\n" +
-	"\x15CHANNEL_TYPE_WITHDRAW\x10\x012\x9e\x15\n" +
-	"\aPayment\x12\xc1\x01\n" +
-	"\x1dGetSupportedPaymentMethodList\x128.payment.service.v1.GetSupportedPaymentMethodListRequest\x1a9.payment.service.v1.GetSupportedPaymentMethodListResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/payment/supportedmethod/list\x12\x9c\x01\n" +
-	"\x13CreatePaymentMethod\x12..payment.service.v1.CreatePaymentMethodRequest\x1a/.payment.service.v1.CreatePaymentMethodResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/payment/method/create\x12\x9d\x01\n" +
-	"\x14GetPaymentMethodList\x12/.payment.service.v1.GetPaymentMethodListRequest\x1a0.payment.service.v1.GetPaymentMethodListResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v1/payment/method/list\x12\xa3\x01\n" +
-	"\x15DisablePaymentChannel\x120.payment.service.v1.DisablePaymentChannelRequest\x1a1.payment.service.v1.DisablePaymentChannelResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v1/payment/channel/update\x12\xa0\x01\n" +
-	"\x14CreatePaymentChannel\x12/.payment.service.v1.CreatePaymentChannelRequest\x1a0.payment.service.v1.CreatePaymentChannelResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v1/payment/channel/create\x12\x7f\n" +
+	"\x03ASC\x10\x01*X\n" +
+	"\vChannelType\x12\x14\n" +
+	"\x10CHANNEL_TYPE_ALL\x10\x00\x12\x18\n" +
+	"\x14CHANNEL_TYPE_DEPOSIT\x10\x01\x12\x19\n" +
+	"\x15CHANNEL_TYPE_WITHDRAW\x10\x022\x80#\n" +
+	"\aPayment\x12\x96\x01\n" +
+	"\x1dGetSupportedPaymentMethodList\x128.payment.service.v1.GetSupportedPaymentMethodListRequest\x1a9.payment.service.v1.GetSupportedPaymentMethodListResponse\"\x00\x12x\n" +
+	"\x13CreatePaymentMethod\x12..payment.service.v1.CreatePaymentMethodRequest\x1a/.payment.service.v1.CreatePaymentMethodResponse\"\x00\x12{\n" +
+	"\x14GetPaymentMethodList\x12/.payment.service.v1.GetPaymentMethodListRequest\x1a0.payment.service.v1.GetPaymentMethodListResponse\"\x00\x12{\n" +
+	"\x14UpdatePaymentChannel\x12/.payment.service.v1.UpdatePaymentChannelRequest\x1a0.payment.service.v1.UpdatePaymentChannelResponse\"\x00\x12{\n" +
+	"\x14CreatePaymentChannel\x12/.payment.service.v1.CreatePaymentChannelRequest\x1a0.payment.service.v1.CreatePaymentChannelResponse\"\x00\x12\x7f\n" +
 	"\n" +
 	"GetAddress\x12%.payment.service.v1.GetAddressRequest\x1a&.payment.service.v1.GetAddressResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v1/payment/address/get\x12\x93\x01\n" +
 	"\x0fInitiateDeposit\x12*.payment.service.v1.InitiateDepositRequest\x1a+.payment.service.v1.InitiateDepositResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/payment/deposit/initiate\x12o\n" +
@@ -4148,8 +6475,21 @@ const file_payment_service_v1_payment_proto_rawDesc = "" +
 	"\x18OperatorWithdrawCallback\x12+.payment.service.v1.WithdrawCallbackRequest\x1a,.payment.service.v1.WithdrawCallbackResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/v1/payment/operator/withdraw/callback\x12\x9c\x01\n" +
 	"\x12GetTransactionPage\x12-.payment.service.v1.GetTransactionPageRequest\x1a..payment.service.v1.GetTransactionPageResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/v1/payment/transaction/page\x12\xa1\x01\n" +
 	"\x15GetPaymentChannelPage\x120.payment.service.v1.GetPaymentChannelPageRequest\x1a1.payment.service.v1.GetPaymentChannelPageResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/payment/channel/page\x12\x87\x01\n" +
-	"\x18GetTransactionDetailById\x123.payment.service.v1.GetTransactionDetailByIdRequest\x1a4.payment.service.v1.GetTransactionDetailByIdResponse\"\x00\x12o\n" +
-	"\x10GetChannelsByIds\x12+.payment.service.v1.GetChannelsByIdsRequest\x1a,.payment.service.v1.GetChannelsByIdsResponse\"\x00BU\n" +
+	"\x18GetTransactionDetailById\x123.payment.service.v1.GetTransactionDetailByIdRequest\x1a4.payment.service.v1.GetTransactionDetailByIdResponse\"\x00\x12}\n" +
+	"\x1aGetOperatorTransactionPage\x12-.payment.service.v1.GetTransactionPageRequest\x1a..payment.service.v1.GetTransactionPageResponse\"\x00\x12\x8f\x01\n" +
+	" GetOperatorTransactionDetailById\x123.payment.service.v1.GetTransactionDetailByIdRequest\x1a4.payment.service.v1.GetTransactionDetailByIdResponse\"\x00\x12o\n" +
+	"\x10GetChannelsByIds\x12+.payment.service.v1.GetChannelsByIdsRequest\x1a,.payment.service.v1.GetChannelsByIdsResponse\"\x00\x12x\n" +
+	"\x13UpdatePaymentMethod\x12..payment.service.v1.UpdatePaymentMethodRequest\x1a/.payment.service.v1.CreatePaymentMethodResponse\"\x00\x12\x8e\x01\n" +
+	"\x1dGetOperatorPaymentChannelPage\x128.payment.service.v1.GetOperatorPaymentChannelPageRequest\x1a1.payment.service.v1.GetPaymentChannelPageResponse\"\x00\x12\x94\x01\n" +
+	"\x13GetUserBankCardList\x12*.payment.service.v1.GetBankCardListRequest\x1a+.payment.service.v1.GetBankCardListResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/payment/bankcard/list\x12\x87\x01\n" +
+	"\x0fAddUserBankCard\x12&.payment.service.v1.AddBankCardRequest\x1a'.payment.service.v1.AddBankCardResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/payment/bankcard/add\x12\x93\x01\n" +
+	"\x12UpdateUserBankCard\x12).payment.service.v1.UpdateBankCardRequest\x1a*.payment.service.v1.UpdateBankCardResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/payment/bankcard/update\x12\x94\x01\n" +
+	"\x13DeleteUsesrBankCard\x12).payment.service.v1.DeleteBankCardRequest\x1a*.payment.service.v1.DeleteBankCardResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/payment/bankcard/delete\x12\x90\x01\n" +
+	"\rGetBankSchema\x12(.payment.service.v1.GetBankSchemaRequest\x1a).payment.service.v1.GetBankSchemaResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/payment/bankinfo/schema/get\x12\xbe\x01\n" +
+	"\x1bBuyCryptoViaFiatCurrentList\x126.payment.service.v1.BuyCryptoViaFiatCurrentListRequest\x1a7.payment.service.v1.BuyCryptoViaFiatCurrentListResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/payment/buycrypto/currency/list\x12\xb7\x01\n" +
+	"\x1aBuyCryptoViaFiatPriceQuery\x125.payment.service.v1.BuyCryptoViaFiatPriceQueryRequest\x1a6.payment.service.v1.BuyCryptoViaFiatPriceQueryResponse\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/payment/buycrypto/price/get\x12\x93\x01\n" +
+	"\x10BuyCryptoViaFiat\x12+.payment.service.v1.BuyCryptoViaFiatRequest\x1a,.payment.service.v1.BuyCryptoViaFiatResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/payment/buycrypto/add\x12\x93\x01\n" +
+	"\x1cGetResponsibleGamblingStatus\x127.payment.service.v1.GetResponsibleGamblingStatusRequest\x1a8.payment.service.v1.GetResponsibleGamblingStatusResponse\"\x00BU\n" +
 	"\x16api.payment.service.v1P\x01Z9github.com/infigaming-com/meepo-api/payment/service/v1;v1b\x06proto3"
 
 var (
@@ -4164,142 +6504,213 @@ func file_payment_service_v1_payment_proto_rawDescGZIP() []byte {
 	return file_payment_service_v1_payment_proto_rawDescData
 }
 
-var file_payment_service_v1_payment_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_payment_service_v1_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 39)
+var file_payment_service_v1_payment_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
+var file_payment_service_v1_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 65)
 var file_payment_service_v1_payment_proto_goTypes = []any{
 	(TransactionType)(0),   // 0: payment.service.v1.TransactionType
 	(TransactionStatus)(0), // 1: payment.service.v1.TransactionStatus
 	(Sort)(0),              // 2: payment.service.v1.Sort
-	(RequestSource)(0),     // 3: payment.service.v1.RequestSource
-	(ChannelType)(0),       // 4: payment.service.v1.ChannelType
-	(*GetSupportedPaymentMethodListRequest)(nil),  // 5: payment.service.v1.GetSupportedPaymentMethodListRequest
-	(*GetPaymentMethodListRequest)(nil),           // 6: payment.service.v1.GetPaymentMethodListRequest
-	(*PaymentMethodInfo)(nil),                     // 7: payment.service.v1.PaymentMethodInfo
-	(*GetSupportedPaymentMethodListResponse)(nil), // 8: payment.service.v1.GetSupportedPaymentMethodListResponse
-	(*GetPaymentMethodListResponse)(nil),          // 9: payment.service.v1.GetPaymentMethodListResponse
-	(*CreatePaymentMethodRequest)(nil),            // 10: payment.service.v1.CreatePaymentMethodRequest
-	(*CreatePaymentMethodResponse)(nil),           // 11: payment.service.v1.CreatePaymentMethodResponse
-	(*DisablePaymentChannelResponse)(nil),         // 12: payment.service.v1.DisablePaymentChannelResponse
-	(*CreatePaymentChannelRequest)(nil),           // 13: payment.service.v1.CreatePaymentChannelRequest
-	(*DisablePaymentChannelRequest)(nil),          // 14: payment.service.v1.DisablePaymentChannelRequest
-	(*CreatePaymentChannelResponse)(nil),          // 15: payment.service.v1.CreatePaymentChannelResponse
-	(*PaymentChannelInfo)(nil),                    // 16: payment.service.v1.PaymentChannelInfo
-	(*InitiateDepositRequest)(nil),                // 17: payment.service.v1.InitiateDepositRequest
-	(*InitiateDepositResponse)(nil),               // 18: payment.service.v1.InitiateDepositResponse
-	(*GetAddressRequest)(nil),                     // 19: payment.service.v1.GetAddressRequest
-	(*GetAddressResponse)(nil),                    // 20: payment.service.v1.GetAddressResponse
-	(*GetOperatorAddressRequest)(nil),             // 21: payment.service.v1.GetOperatorAddressRequest
-	(*GetOperatorAddressResponse)(nil),            // 22: payment.service.v1.GetOperatorAddressResponse
-	(*InitiateWithdrawRequest)(nil),               // 23: payment.service.v1.InitiateWithdrawRequest
-	(*InitiateWithdrawResponse)(nil),              // 24: payment.service.v1.InitiateWithdrawResponse
-	(*InitiateOperatorWithdrawRequest)(nil),       // 25: payment.service.v1.InitiateOperatorWithdrawRequest
-	(*InitiateOperatorWithdrawResponse)(nil),      // 26: payment.service.v1.InitiateOperatorWithdrawResponse
-	(*DepositCallbackRequest)(nil),                // 27: payment.service.v1.DepositCallbackRequest
-	(*DepositCallbackResponse)(nil),               // 28: payment.service.v1.DepositCallbackResponse
-	(*WithdrawCallbackRequest)(nil),               // 29: payment.service.v1.WithdrawCallbackRequest
-	(*WithdrawCallbackResponse)(nil),              // 30: payment.service.v1.WithdrawCallbackResponse
-	(*TransactionInfo)(nil),                       // 31: payment.service.v1.TransactionInfo
-	(*TransactionDetail)(nil),                     // 32: payment.service.v1.TransactionDetail
-	(*GetTransactionPageRequest)(nil),             // 33: payment.service.v1.GetTransactionPageRequest
-	(*GetTransactionPageResponse)(nil),            // 34: payment.service.v1.GetTransactionPageResponse
-	(*GetPaymentChannelPageRequest)(nil),          // 35: payment.service.v1.GetPaymentChannelPageRequest
-	(*GetPaymentChannelPageResponse)(nil),         // 36: payment.service.v1.GetPaymentChannelPageResponse
-	(*GetTransactionDetailByIdRequest)(nil),       // 37: payment.service.v1.GetTransactionDetailByIdRequest
-	(*GetTransactionDetailByIdResponse)(nil),      // 38: payment.service.v1.GetTransactionDetailByIdResponse
-	(*GetChannelsByIdsRequest)(nil),               // 39: payment.service.v1.GetChannelsByIdsRequest
-	(*GetChannelsByIdsResponse)(nil),              // 40: payment.service.v1.GetChannelsByIdsResponse
-	(*GetAddressResponse_Data)(nil),               // 41: payment.service.v1.GetAddressResponse.Data
-	(*GetOperatorAddressResponse_Data)(nil),       // 42: payment.service.v1.GetOperatorAddressResponse.Data
-	(*GetChannelsByIdsResponse_Channel)(nil),      // 43: payment.service.v1.GetChannelsByIdsResponse.Channel
-	(*structpb.Struct)(nil),                       // 44: google.protobuf.Struct
-	(*common.OperatorContext)(nil),                // 45: api.common.OperatorContext
-	(*timestamppb.Timestamp)(nil),                 // 46: google.protobuf.Timestamp
+	(ChannelType)(0),       // 3: payment.service.v1.ChannelType
+	(*GetSupportedPaymentMethodListRequest)(nil),                           // 4: payment.service.v1.GetSupportedPaymentMethodListRequest
+	(*GetPaymentMethodListRequest)(nil),                                    // 5: payment.service.v1.GetPaymentMethodListRequest
+	(*PaymentMethodInfo)(nil),                                              // 6: payment.service.v1.PaymentMethodInfo
+	(*GetSupportedPaymentMethodListResponse)(nil),                          // 7: payment.service.v1.GetSupportedPaymentMethodListResponse
+	(*GetPaymentMethodListResponse)(nil),                                   // 8: payment.service.v1.GetPaymentMethodListResponse
+	(*CreatePaymentMethodRequest)(nil),                                     // 9: payment.service.v1.CreatePaymentMethodRequest
+	(*CreatePaymentMethodResponse)(nil),                                    // 10: payment.service.v1.CreatePaymentMethodResponse
+	(*UpdatePaymentChannelResponse)(nil),                                   // 11: payment.service.v1.UpdatePaymentChannelResponse
+	(*CreatePaymentChannelRequest)(nil),                                    // 12: payment.service.v1.CreatePaymentChannelRequest
+	(*UpdatePaymentChannelRequest)(nil),                                    // 13: payment.service.v1.UpdatePaymentChannelRequest
+	(*CreatePaymentChannelResponse)(nil),                                   // 14: payment.service.v1.CreatePaymentChannelResponse
+	(*PaymentChannelInfo)(nil),                                             // 15: payment.service.v1.PaymentChannelInfo
+	(*InitiateDepositRequest)(nil),                                         // 16: payment.service.v1.InitiateDepositRequest
+	(*InitiateDepositResponse)(nil),                                        // 17: payment.service.v1.InitiateDepositResponse
+	(*GetAddressRequest)(nil),                                              // 18: payment.service.v1.GetAddressRequest
+	(*GetAddressResponse)(nil),                                             // 19: payment.service.v1.GetAddressResponse
+	(*GetOperatorAddressRequest)(nil),                                      // 20: payment.service.v1.GetOperatorAddressRequest
+	(*GetOperatorAddressResponse)(nil),                                     // 21: payment.service.v1.GetOperatorAddressResponse
+	(*InitiateWithdrawRequest)(nil),                                        // 22: payment.service.v1.InitiateWithdrawRequest
+	(*InitiateWithdrawResponse)(nil),                                       // 23: payment.service.v1.InitiateWithdrawResponse
+	(*InitiateOperatorWithdrawRequest)(nil),                                // 24: payment.service.v1.InitiateOperatorWithdrawRequest
+	(*InitiateOperatorWithdrawResponse)(nil),                               // 25: payment.service.v1.InitiateOperatorWithdrawResponse
+	(*DepositCallbackRequest)(nil),                                         // 26: payment.service.v1.DepositCallbackRequest
+	(*DepositCallbackResponse)(nil),                                        // 27: payment.service.v1.DepositCallbackResponse
+	(*WithdrawCallbackRequest)(nil),                                        // 28: payment.service.v1.WithdrawCallbackRequest
+	(*WithdrawCallbackResponse)(nil),                                       // 29: payment.service.v1.WithdrawCallbackResponse
+	(*TransactionInfo)(nil),                                                // 30: payment.service.v1.TransactionInfo
+	(*TransactionDetail)(nil),                                              // 31: payment.service.v1.TransactionDetail
+	(*GetTransactionPageRequest)(nil),                                      // 32: payment.service.v1.GetTransactionPageRequest
+	(*GetTransactionPageResponse)(nil),                                     // 33: payment.service.v1.GetTransactionPageResponse
+	(*GetPaymentChannelPageRequest)(nil),                                   // 34: payment.service.v1.GetPaymentChannelPageRequest
+	(*GetOperatorPaymentChannelPageRequest)(nil),                           // 35: payment.service.v1.GetOperatorPaymentChannelPageRequest
+	(*GetPaymentChannelPageResponse)(nil),                                  // 36: payment.service.v1.GetPaymentChannelPageResponse
+	(*GetTransactionDetailByIdRequest)(nil),                                // 37: payment.service.v1.GetTransactionDetailByIdRequest
+	(*GetTransactionDetailByIdResponse)(nil),                               // 38: payment.service.v1.GetTransactionDetailByIdResponse
+	(*GetChannelsByIdsRequest)(nil),                                        // 39: payment.service.v1.GetChannelsByIdsRequest
+	(*GetChannelsByIdsResponse)(nil),                                       // 40: payment.service.v1.GetChannelsByIdsResponse
+	(*UpdatePaymentMethodRequest)(nil),                                     // 41: payment.service.v1.UpdatePaymentMethodRequest
+	(*UpdatePaymentMethodResponse)(nil),                                    // 42: payment.service.v1.UpdatePaymentMethodResponse
+	(*BankCard)(nil),                                                       // 43: payment.service.v1.BankCard
+	(*GetBankCardListRequest)(nil),                                         // 44: payment.service.v1.GetBankCardListRequest
+	(*GetBankCardListResponse)(nil),                                        // 45: payment.service.v1.GetBankCardListResponse
+	(*AddBankCardRequest)(nil),                                             // 46: payment.service.v1.AddBankCardRequest
+	(*AddBankCardResponse)(nil),                                            // 47: payment.service.v1.AddBankCardResponse
+	(*UpdateBankCardRequest)(nil),                                          // 48: payment.service.v1.UpdateBankCardRequest
+	(*UpdateBankCardResponse)(nil),                                         // 49: payment.service.v1.UpdateBankCardResponse
+	(*DeleteBankCardRequest)(nil),                                          // 50: payment.service.v1.DeleteBankCardRequest
+	(*DeleteBankCardResponse)(nil),                                         // 51: payment.service.v1.DeleteBankCardResponse
+	(*GetBankAccountRequest)(nil),                                          // 52: payment.service.v1.GetBankAccountRequest
+	(*GetBankAccountResponse)(nil),                                         // 53: payment.service.v1.GetBankAccountResponse
+	(*GetBankSchemaRequest)(nil),                                           // 54: payment.service.v1.GetBankSchemaRequest
+	(*GetBankSchemaResponse)(nil),                                          // 55: payment.service.v1.GetBankSchemaResponse
+	(*Crypto)(nil),                                                         // 56: payment.service.v1.Crypto
+	(*Currency)(nil),                                                       // 57: payment.service.v1.Currency
+	(*BuyCryptoViaFiatCurrentListRequest)(nil),                             // 58: payment.service.v1.BuyCryptoViaFiatCurrentListRequest
+	(*BuyCryptoViaFiatCurrentListResponse)(nil),                            // 59: payment.service.v1.BuyCryptoViaFiatCurrentListResponse
+	(*BuyCryptoViaFiatPriceQueryRequest)(nil),                              // 60: payment.service.v1.BuyCryptoViaFiatPriceQueryRequest
+	(*BuyCryptoViaFiatPriceQueryResponse)(nil),                             // 61: payment.service.v1.BuyCryptoViaFiatPriceQueryResponse
+	(*BuyCryptoViaFiatRequest)(nil),                                        // 62: payment.service.v1.BuyCryptoViaFiatRequest
+	(*BuyCryptoViaFiatResponse)(nil),                                       // 63: payment.service.v1.BuyCryptoViaFiatResponse
+	(*GetResponsibleGamblingStatusRequest)(nil),                            // 64: payment.service.v1.GetResponsibleGamblingStatusRequest
+	(*GetResponsibleGamblingStatusResponse)(nil),                           // 65: payment.service.v1.GetResponsibleGamblingStatusResponse
+	(*GetAddressResponse_Data)(nil),                                        // 66: payment.service.v1.GetAddressResponse.Data
+	(*GetOperatorAddressResponse_Data)(nil),                                // 67: payment.service.v1.GetOperatorAddressResponse.Data
+	(*GetResponsibleGamblingStatusResponse_ResponsibleGamblingStatus)(nil), // 68: payment.service.v1.GetResponsibleGamblingStatusResponse.ResponsibleGamblingStatus
+	(*common.OperatorContext)(nil),                                         // 69: api.common.OperatorContext
+	(*structpb.ListValue)(nil),                                             // 70: google.protobuf.ListValue
+	(*structpb.Struct)(nil),                                                // 71: google.protobuf.Struct
+	(*timestamppb.Timestamp)(nil),                                          // 72: google.protobuf.Timestamp
+	(*common.OperatorContextFilters)(nil),                                  // 73: api.common.OperatorContextFilters
 }
 var file_payment_service_v1_payment_proto_depIdxs = []int32{
-	44, // 0: payment.service.v1.PaymentMethodInfo.key_schema:type_name -> google.protobuf.Struct
-	7,  // 1: payment.service.v1.GetSupportedPaymentMethodListResponse.payment_methods:type_name -> payment.service.v1.PaymentMethodInfo
-	7,  // 2: payment.service.v1.GetPaymentMethodListResponse.payment_methods:type_name -> payment.service.v1.PaymentMethodInfo
-	45, // 3: payment.service.v1.CreatePaymentMethodRequest.operator_context:type_name -> api.common.OperatorContext
-	44, // 4: payment.service.v1.CreatePaymentMethodRequest.key:type_name -> google.protobuf.Struct
-	7,  // 5: payment.service.v1.CreatePaymentMethodResponse.payment_method:type_name -> payment.service.v1.PaymentMethodInfo
-	7,  // 6: payment.service.v1.DisablePaymentChannelResponse.payment_methods:type_name -> payment.service.v1.PaymentMethodInfo
-	44, // 7: payment.service.v1.CreatePaymentChannelRequest.key:type_name -> google.protobuf.Struct
-	44, // 8: payment.service.v1.PaymentChannelInfo.deposit_schema:type_name -> google.protobuf.Struct
-	44, // 9: payment.service.v1.PaymentChannelInfo.withdraw_schema:type_name -> google.protobuf.Struct
-	44, // 10: payment.service.v1.InitiateDepositRequest.extra:type_name -> google.protobuf.Struct
-	46, // 11: payment.service.v1.InitiateDepositResponse.created_at:type_name -> google.protobuf.Timestamp
-	44, // 12: payment.service.v1.InitiateDepositResponse.extra:type_name -> google.protobuf.Struct
-	44, // 13: payment.service.v1.GetAddressRequest.extra:type_name -> google.protobuf.Struct
-	41, // 14: payment.service.v1.GetAddressResponse.data:type_name -> payment.service.v1.GetAddressResponse.Data
-	45, // 15: payment.service.v1.GetOperatorAddressRequest.operator_context:type_name -> api.common.OperatorContext
-	44, // 16: payment.service.v1.GetOperatorAddressRequest.extra:type_name -> google.protobuf.Struct
-	42, // 17: payment.service.v1.GetOperatorAddressResponse.data:type_name -> payment.service.v1.GetOperatorAddressResponse.Data
-	45, // 18: payment.service.v1.InitiateWithdrawRequest.operator_context:type_name -> api.common.OperatorContext
-	44, // 19: payment.service.v1.InitiateWithdrawRequest.extra:type_name -> google.protobuf.Struct
-	46, // 20: payment.service.v1.InitiateWithdrawResponse.created_at:type_name -> google.protobuf.Timestamp
-	45, // 21: payment.service.v1.InitiateOperatorWithdrawRequest.operator_context:type_name -> api.common.OperatorContext
-	44, // 22: payment.service.v1.InitiateOperatorWithdrawRequest.extra:type_name -> google.protobuf.Struct
-	46, // 23: payment.service.v1.InitiateOperatorWithdrawResponse.created_at:type_name -> google.protobuf.Timestamp
-	0,  // 24: payment.service.v1.TransactionInfo.type:type_name -> payment.service.v1.TransactionType
-	1,  // 25: payment.service.v1.TransactionInfo.status:type_name -> payment.service.v1.TransactionStatus
-	46, // 26: payment.service.v1.TransactionInfo.created_at:type_name -> google.protobuf.Timestamp
-	46, // 27: payment.service.v1.TransactionInfo.updated_at:type_name -> google.protobuf.Timestamp
-	31, // 28: payment.service.v1.TransactionDetail.transaction:type_name -> payment.service.v1.TransactionInfo
-	16, // 29: payment.service.v1.TransactionDetail.channel:type_name -> payment.service.v1.PaymentChannelInfo
-	0,  // 30: payment.service.v1.GetTransactionPageRequest.type:type_name -> payment.service.v1.TransactionType
-	1,  // 31: payment.service.v1.GetTransactionPageRequest.status:type_name -> payment.service.v1.TransactionStatus
-	46, // 32: payment.service.v1.GetTransactionPageRequest.start_time:type_name -> google.protobuf.Timestamp
-	46, // 33: payment.service.v1.GetTransactionPageRequest.end_time:type_name -> google.protobuf.Timestamp
-	2,  // 34: payment.service.v1.GetTransactionPageRequest.sort:type_name -> payment.service.v1.Sort
-	3,  // 35: payment.service.v1.GetTransactionPageRequest.source:type_name -> payment.service.v1.RequestSource
-	31, // 36: payment.service.v1.GetTransactionPageResponse.transactions:type_name -> payment.service.v1.TransactionInfo
-	4,  // 37: payment.service.v1.GetPaymentChannelPageRequest.type:type_name -> payment.service.v1.ChannelType
-	2,  // 38: payment.service.v1.GetPaymentChannelPageRequest.sort:type_name -> payment.service.v1.Sort
-	16, // 39: payment.service.v1.GetPaymentChannelPageResponse.payment_channels:type_name -> payment.service.v1.PaymentChannelInfo
-	3,  // 40: payment.service.v1.GetTransactionDetailByIdRequest.source:type_name -> payment.service.v1.RequestSource
-	32, // 41: payment.service.v1.GetTransactionDetailByIdResponse.detail:type_name -> payment.service.v1.TransactionDetail
-	43, // 42: payment.service.v1.GetChannelsByIdsResponse.channels:type_name -> payment.service.v1.GetChannelsByIdsResponse.Channel
-	5,  // 43: payment.service.v1.Payment.GetSupportedPaymentMethodList:input_type -> payment.service.v1.GetSupportedPaymentMethodListRequest
-	10, // 44: payment.service.v1.Payment.CreatePaymentMethod:input_type -> payment.service.v1.CreatePaymentMethodRequest
-	6,  // 45: payment.service.v1.Payment.GetPaymentMethodList:input_type -> payment.service.v1.GetPaymentMethodListRequest
-	14, // 46: payment.service.v1.Payment.DisablePaymentChannel:input_type -> payment.service.v1.DisablePaymentChannelRequest
-	13, // 47: payment.service.v1.Payment.CreatePaymentChannel:input_type -> payment.service.v1.CreatePaymentChannelRequest
-	19, // 48: payment.service.v1.Payment.GetAddress:input_type -> payment.service.v1.GetAddressRequest
-	17, // 49: payment.service.v1.Payment.InitiateDeposit:input_type -> payment.service.v1.InitiateDepositRequest
-	23, // 50: payment.service.v1.Payment.InitiateWithdraw:input_type -> payment.service.v1.InitiateWithdrawRequest
-	27, // 51: payment.service.v1.Payment.DepositCallback:input_type -> payment.service.v1.DepositCallbackRequest
-	29, // 52: payment.service.v1.Payment.WithdrawCallback:input_type -> payment.service.v1.WithdrawCallbackRequest
-	21, // 53: payment.service.v1.Payment.GetOperatorAddress:input_type -> payment.service.v1.GetOperatorAddressRequest
-	25, // 54: payment.service.v1.Payment.InitiateOperatorWithdraw:input_type -> payment.service.v1.InitiateOperatorWithdrawRequest
-	27, // 55: payment.service.v1.Payment.OperatorDepositCallback:input_type -> payment.service.v1.DepositCallbackRequest
-	29, // 56: payment.service.v1.Payment.OperatorWithdrawCallback:input_type -> payment.service.v1.WithdrawCallbackRequest
-	33, // 57: payment.service.v1.Payment.GetTransactionPage:input_type -> payment.service.v1.GetTransactionPageRequest
-	35, // 58: payment.service.v1.Payment.GetPaymentChannelPage:input_type -> payment.service.v1.GetPaymentChannelPageRequest
-	37, // 59: payment.service.v1.Payment.GetTransactionDetailById:input_type -> payment.service.v1.GetTransactionDetailByIdRequest
-	39, // 60: payment.service.v1.Payment.GetChannelsByIds:input_type -> payment.service.v1.GetChannelsByIdsRequest
-	8,  // 61: payment.service.v1.Payment.GetSupportedPaymentMethodList:output_type -> payment.service.v1.GetSupportedPaymentMethodListResponse
-	11, // 62: payment.service.v1.Payment.CreatePaymentMethod:output_type -> payment.service.v1.CreatePaymentMethodResponse
-	9,  // 63: payment.service.v1.Payment.GetPaymentMethodList:output_type -> payment.service.v1.GetPaymentMethodListResponse
-	12, // 64: payment.service.v1.Payment.DisablePaymentChannel:output_type -> payment.service.v1.DisablePaymentChannelResponse
-	15, // 65: payment.service.v1.Payment.CreatePaymentChannel:output_type -> payment.service.v1.CreatePaymentChannelResponse
-	20, // 66: payment.service.v1.Payment.GetAddress:output_type -> payment.service.v1.GetAddressResponse
-	18, // 67: payment.service.v1.Payment.InitiateDeposit:output_type -> payment.service.v1.InitiateDepositResponse
-	24, // 68: payment.service.v1.Payment.InitiateWithdraw:output_type -> payment.service.v1.InitiateWithdrawResponse
-	28, // 69: payment.service.v1.Payment.DepositCallback:output_type -> payment.service.v1.DepositCallbackResponse
-	30, // 70: payment.service.v1.Payment.WithdrawCallback:output_type -> payment.service.v1.WithdrawCallbackResponse
-	22, // 71: payment.service.v1.Payment.GetOperatorAddress:output_type -> payment.service.v1.GetOperatorAddressResponse
-	26, // 72: payment.service.v1.Payment.InitiateOperatorWithdraw:output_type -> payment.service.v1.InitiateOperatorWithdrawResponse
-	28, // 73: payment.service.v1.Payment.OperatorDepositCallback:output_type -> payment.service.v1.DepositCallbackResponse
-	30, // 74: payment.service.v1.Payment.OperatorWithdrawCallback:output_type -> payment.service.v1.WithdrawCallbackResponse
-	34, // 75: payment.service.v1.Payment.GetTransactionPage:output_type -> payment.service.v1.GetTransactionPageResponse
-	36, // 76: payment.service.v1.Payment.GetPaymentChannelPage:output_type -> payment.service.v1.GetPaymentChannelPageResponse
-	38, // 77: payment.service.v1.Payment.GetTransactionDetailById:output_type -> payment.service.v1.GetTransactionDetailByIdResponse
-	40, // 78: payment.service.v1.Payment.GetChannelsByIds:output_type -> payment.service.v1.GetChannelsByIdsResponse
-	61, // [61:79] is the sub-list for method output_type
-	43, // [43:61] is the sub-list for method input_type
-	43, // [43:43] is the sub-list for extension type_name
-	43, // [43:43] is the sub-list for extension extendee
-	0,  // [0:43] is the sub-list for field type_name
+	69, // 0: payment.service.v1.GetPaymentMethodListRequest.operator_context:type_name -> api.common.OperatorContext
+	70, // 1: payment.service.v1.PaymentMethodInfo.key_schema:type_name -> google.protobuf.ListValue
+	6,  // 2: payment.service.v1.GetSupportedPaymentMethodListResponse.payment_methods:type_name -> payment.service.v1.PaymentMethodInfo
+	6,  // 3: payment.service.v1.GetPaymentMethodListResponse.payment_methods:type_name -> payment.service.v1.PaymentMethodInfo
+	69, // 4: payment.service.v1.CreatePaymentMethodRequest.operator_context:type_name -> api.common.OperatorContext
+	6,  // 5: payment.service.v1.CreatePaymentMethodResponse.payment_method:type_name -> payment.service.v1.PaymentMethodInfo
+	15, // 6: payment.service.v1.UpdatePaymentChannelResponse.payment_methods:type_name -> payment.service.v1.PaymentChannelInfo
+	69, // 7: payment.service.v1.CreatePaymentChannelRequest.operator_context:type_name -> api.common.OperatorContext
+	71, // 8: payment.service.v1.CreatePaymentChannelRequest.key:type_name -> google.protobuf.Struct
+	71, // 9: payment.service.v1.UpdatePaymentChannelRequest.key:type_name -> google.protobuf.Struct
+	70, // 10: payment.service.v1.PaymentChannelInfo.schema:type_name -> google.protobuf.ListValue
+	71, // 11: payment.service.v1.InitiateDepositRequest.extra:type_name -> google.protobuf.Struct
+	72, // 12: payment.service.v1.InitiateDepositResponse.created_at:type_name -> google.protobuf.Timestamp
+	71, // 13: payment.service.v1.InitiateDepositResponse.extra:type_name -> google.protobuf.Struct
+	71, // 14: payment.service.v1.GetAddressRequest.extra:type_name -> google.protobuf.Struct
+	66, // 15: payment.service.v1.GetAddressResponse.data:type_name -> payment.service.v1.GetAddressResponse.Data
+	69, // 16: payment.service.v1.GetOperatorAddressRequest.target_operator_context:type_name -> api.common.OperatorContext
+	71, // 17: payment.service.v1.GetOperatorAddressRequest.extra:type_name -> google.protobuf.Struct
+	69, // 18: payment.service.v1.GetOperatorAddressRequest.operator_context:type_name -> api.common.OperatorContext
+	67, // 19: payment.service.v1.GetOperatorAddressResponse.data:type_name -> payment.service.v1.GetOperatorAddressResponse.Data
+	69, // 20: payment.service.v1.InitiateWithdrawRequest.operator_context:type_name -> api.common.OperatorContext
+	71, // 21: payment.service.v1.InitiateWithdrawRequest.extra:type_name -> google.protobuf.Struct
+	72, // 22: payment.service.v1.InitiateWithdrawResponse.created_at:type_name -> google.protobuf.Timestamp
+	69, // 23: payment.service.v1.InitiateOperatorWithdrawRequest.target_operator_context:type_name -> api.common.OperatorContext
+	69, // 24: payment.service.v1.InitiateOperatorWithdrawRequest.operator_context:type_name -> api.common.OperatorContext
+	71, // 25: payment.service.v1.InitiateOperatorWithdrawRequest.extra:type_name -> google.protobuf.Struct
+	72, // 26: payment.service.v1.InitiateOperatorWithdrawResponse.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 27: payment.service.v1.TransactionInfo.type:type_name -> payment.service.v1.TransactionType
+	1,  // 28: payment.service.v1.TransactionInfo.status:type_name -> payment.service.v1.TransactionStatus
+	72, // 29: payment.service.v1.TransactionInfo.created_at:type_name -> google.protobuf.Timestamp
+	72, // 30: payment.service.v1.TransactionInfo.updated_at:type_name -> google.protobuf.Timestamp
+	30, // 31: payment.service.v1.TransactionDetail.transaction:type_name -> payment.service.v1.TransactionInfo
+	15, // 32: payment.service.v1.TransactionDetail.channel:type_name -> payment.service.v1.PaymentChannelInfo
+	0,  // 33: payment.service.v1.GetTransactionPageRequest.type:type_name -> payment.service.v1.TransactionType
+	1,  // 34: payment.service.v1.GetTransactionPageRequest.status:type_name -> payment.service.v1.TransactionStatus
+	72, // 35: payment.service.v1.GetTransactionPageRequest.start_time:type_name -> google.protobuf.Timestamp
+	72, // 36: payment.service.v1.GetTransactionPageRequest.end_time:type_name -> google.protobuf.Timestamp
+	2,  // 37: payment.service.v1.GetTransactionPageRequest.sort:type_name -> payment.service.v1.Sort
+	73, // 38: payment.service.v1.GetTransactionPageRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	69, // 39: payment.service.v1.GetTransactionPageRequest.operator_context:type_name -> api.common.OperatorContext
+	30, // 40: payment.service.v1.GetTransactionPageResponse.transactions:type_name -> payment.service.v1.TransactionInfo
+	3,  // 41: payment.service.v1.GetPaymentChannelPageRequest.type:type_name -> payment.service.v1.ChannelType
+	2,  // 42: payment.service.v1.GetPaymentChannelPageRequest.sort:type_name -> payment.service.v1.Sort
+	3,  // 43: payment.service.v1.GetOperatorPaymentChannelPageRequest.type:type_name -> payment.service.v1.ChannelType
+	2,  // 44: payment.service.v1.GetOperatorPaymentChannelPageRequest.sort:type_name -> payment.service.v1.Sort
+	73, // 45: payment.service.v1.GetOperatorPaymentChannelPageRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	69, // 46: payment.service.v1.GetOperatorPaymentChannelPageRequest.operator_context:type_name -> api.common.OperatorContext
+	15, // 47: payment.service.v1.GetPaymentChannelPageResponse.payment_channels:type_name -> payment.service.v1.PaymentChannelInfo
+	31, // 48: payment.service.v1.GetTransactionDetailByIdResponse.detail:type_name -> payment.service.v1.TransactionDetail
+	15, // 49: payment.service.v1.GetChannelsByIdsResponse.channels:type_name -> payment.service.v1.PaymentChannelInfo
+	69, // 50: payment.service.v1.UpdatePaymentMethodRequest.operator_context:type_name -> api.common.OperatorContext
+	71, // 51: payment.service.v1.BankCard.card_detail:type_name -> google.protobuf.Struct
+	43, // 52: payment.service.v1.GetBankCardListResponse.bank_card_lsit:type_name -> payment.service.v1.BankCard
+	71, // 53: payment.service.v1.AddBankCardRequest.bank_card:type_name -> google.protobuf.Struct
+	71, // 54: payment.service.v1.UpdateBankCardRequest.bank_card:type_name -> google.protobuf.Struct
+	71, // 55: payment.service.v1.GetBankAccountRequest.extra:type_name -> google.protobuf.Struct
+	70, // 56: payment.service.v1.GetBankSchemaResponse.schema:type_name -> google.protobuf.ListValue
+	57, // 57: payment.service.v1.BuyCryptoViaFiatCurrentListResponse.currencies:type_name -> payment.service.v1.Currency
+	15, // 58: payment.service.v1.BuyCryptoViaFiatCurrentListResponse.crypto:type_name -> payment.service.v1.PaymentChannelInfo
+	69, // 59: payment.service.v1.GetResponsibleGamblingStatusRequest.operator_context:type_name -> api.common.OperatorContext
+	68, // 60: payment.service.v1.GetResponsibleGamblingStatusResponse.responsible_gambling_statuses:type_name -> payment.service.v1.GetResponsibleGamblingStatusResponse.ResponsibleGamblingStatus
+	4,  // 61: payment.service.v1.Payment.GetSupportedPaymentMethodList:input_type -> payment.service.v1.GetSupportedPaymentMethodListRequest
+	9,  // 62: payment.service.v1.Payment.CreatePaymentMethod:input_type -> payment.service.v1.CreatePaymentMethodRequest
+	5,  // 63: payment.service.v1.Payment.GetPaymentMethodList:input_type -> payment.service.v1.GetPaymentMethodListRequest
+	13, // 64: payment.service.v1.Payment.UpdatePaymentChannel:input_type -> payment.service.v1.UpdatePaymentChannelRequest
+	12, // 65: payment.service.v1.Payment.CreatePaymentChannel:input_type -> payment.service.v1.CreatePaymentChannelRequest
+	18, // 66: payment.service.v1.Payment.GetAddress:input_type -> payment.service.v1.GetAddressRequest
+	16, // 67: payment.service.v1.Payment.InitiateDeposit:input_type -> payment.service.v1.InitiateDepositRequest
+	22, // 68: payment.service.v1.Payment.InitiateWithdraw:input_type -> payment.service.v1.InitiateWithdrawRequest
+	26, // 69: payment.service.v1.Payment.DepositCallback:input_type -> payment.service.v1.DepositCallbackRequest
+	28, // 70: payment.service.v1.Payment.WithdrawCallback:input_type -> payment.service.v1.WithdrawCallbackRequest
+	20, // 71: payment.service.v1.Payment.GetOperatorAddress:input_type -> payment.service.v1.GetOperatorAddressRequest
+	24, // 72: payment.service.v1.Payment.InitiateOperatorWithdraw:input_type -> payment.service.v1.InitiateOperatorWithdrawRequest
+	26, // 73: payment.service.v1.Payment.OperatorDepositCallback:input_type -> payment.service.v1.DepositCallbackRequest
+	28, // 74: payment.service.v1.Payment.OperatorWithdrawCallback:input_type -> payment.service.v1.WithdrawCallbackRequest
+	32, // 75: payment.service.v1.Payment.GetTransactionPage:input_type -> payment.service.v1.GetTransactionPageRequest
+	34, // 76: payment.service.v1.Payment.GetPaymentChannelPage:input_type -> payment.service.v1.GetPaymentChannelPageRequest
+	37, // 77: payment.service.v1.Payment.GetTransactionDetailById:input_type -> payment.service.v1.GetTransactionDetailByIdRequest
+	32, // 78: payment.service.v1.Payment.GetOperatorTransactionPage:input_type -> payment.service.v1.GetTransactionPageRequest
+	37, // 79: payment.service.v1.Payment.GetOperatorTransactionDetailById:input_type -> payment.service.v1.GetTransactionDetailByIdRequest
+	39, // 80: payment.service.v1.Payment.GetChannelsByIds:input_type -> payment.service.v1.GetChannelsByIdsRequest
+	41, // 81: payment.service.v1.Payment.UpdatePaymentMethod:input_type -> payment.service.v1.UpdatePaymentMethodRequest
+	35, // 82: payment.service.v1.Payment.GetOperatorPaymentChannelPage:input_type -> payment.service.v1.GetOperatorPaymentChannelPageRequest
+	44, // 83: payment.service.v1.Payment.GetUserBankCardList:input_type -> payment.service.v1.GetBankCardListRequest
+	46, // 84: payment.service.v1.Payment.AddUserBankCard:input_type -> payment.service.v1.AddBankCardRequest
+	48, // 85: payment.service.v1.Payment.UpdateUserBankCard:input_type -> payment.service.v1.UpdateBankCardRequest
+	50, // 86: payment.service.v1.Payment.DeleteUsesrBankCard:input_type -> payment.service.v1.DeleteBankCardRequest
+	54, // 87: payment.service.v1.Payment.GetBankSchema:input_type -> payment.service.v1.GetBankSchemaRequest
+	58, // 88: payment.service.v1.Payment.BuyCryptoViaFiatCurrentList:input_type -> payment.service.v1.BuyCryptoViaFiatCurrentListRequest
+	60, // 89: payment.service.v1.Payment.BuyCryptoViaFiatPriceQuery:input_type -> payment.service.v1.BuyCryptoViaFiatPriceQueryRequest
+	62, // 90: payment.service.v1.Payment.BuyCryptoViaFiat:input_type -> payment.service.v1.BuyCryptoViaFiatRequest
+	64, // 91: payment.service.v1.Payment.GetResponsibleGamblingStatus:input_type -> payment.service.v1.GetResponsibleGamblingStatusRequest
+	7,  // 92: payment.service.v1.Payment.GetSupportedPaymentMethodList:output_type -> payment.service.v1.GetSupportedPaymentMethodListResponse
+	10, // 93: payment.service.v1.Payment.CreatePaymentMethod:output_type -> payment.service.v1.CreatePaymentMethodResponse
+	8,  // 94: payment.service.v1.Payment.GetPaymentMethodList:output_type -> payment.service.v1.GetPaymentMethodListResponse
+	11, // 95: payment.service.v1.Payment.UpdatePaymentChannel:output_type -> payment.service.v1.UpdatePaymentChannelResponse
+	14, // 96: payment.service.v1.Payment.CreatePaymentChannel:output_type -> payment.service.v1.CreatePaymentChannelResponse
+	19, // 97: payment.service.v1.Payment.GetAddress:output_type -> payment.service.v1.GetAddressResponse
+	17, // 98: payment.service.v1.Payment.InitiateDeposit:output_type -> payment.service.v1.InitiateDepositResponse
+	23, // 99: payment.service.v1.Payment.InitiateWithdraw:output_type -> payment.service.v1.InitiateWithdrawResponse
+	27, // 100: payment.service.v1.Payment.DepositCallback:output_type -> payment.service.v1.DepositCallbackResponse
+	29, // 101: payment.service.v1.Payment.WithdrawCallback:output_type -> payment.service.v1.WithdrawCallbackResponse
+	21, // 102: payment.service.v1.Payment.GetOperatorAddress:output_type -> payment.service.v1.GetOperatorAddressResponse
+	25, // 103: payment.service.v1.Payment.InitiateOperatorWithdraw:output_type -> payment.service.v1.InitiateOperatorWithdrawResponse
+	27, // 104: payment.service.v1.Payment.OperatorDepositCallback:output_type -> payment.service.v1.DepositCallbackResponse
+	29, // 105: payment.service.v1.Payment.OperatorWithdrawCallback:output_type -> payment.service.v1.WithdrawCallbackResponse
+	33, // 106: payment.service.v1.Payment.GetTransactionPage:output_type -> payment.service.v1.GetTransactionPageResponse
+	36, // 107: payment.service.v1.Payment.GetPaymentChannelPage:output_type -> payment.service.v1.GetPaymentChannelPageResponse
+	38, // 108: payment.service.v1.Payment.GetTransactionDetailById:output_type -> payment.service.v1.GetTransactionDetailByIdResponse
+	33, // 109: payment.service.v1.Payment.GetOperatorTransactionPage:output_type -> payment.service.v1.GetTransactionPageResponse
+	38, // 110: payment.service.v1.Payment.GetOperatorTransactionDetailById:output_type -> payment.service.v1.GetTransactionDetailByIdResponse
+	40, // 111: payment.service.v1.Payment.GetChannelsByIds:output_type -> payment.service.v1.GetChannelsByIdsResponse
+	10, // 112: payment.service.v1.Payment.UpdatePaymentMethod:output_type -> payment.service.v1.CreatePaymentMethodResponse
+	36, // 113: payment.service.v1.Payment.GetOperatorPaymentChannelPage:output_type -> payment.service.v1.GetPaymentChannelPageResponse
+	45, // 114: payment.service.v1.Payment.GetUserBankCardList:output_type -> payment.service.v1.GetBankCardListResponse
+	47, // 115: payment.service.v1.Payment.AddUserBankCard:output_type -> payment.service.v1.AddBankCardResponse
+	49, // 116: payment.service.v1.Payment.UpdateUserBankCard:output_type -> payment.service.v1.UpdateBankCardResponse
+	51, // 117: payment.service.v1.Payment.DeleteUsesrBankCard:output_type -> payment.service.v1.DeleteBankCardResponse
+	55, // 118: payment.service.v1.Payment.GetBankSchema:output_type -> payment.service.v1.GetBankSchemaResponse
+	59, // 119: payment.service.v1.Payment.BuyCryptoViaFiatCurrentList:output_type -> payment.service.v1.BuyCryptoViaFiatCurrentListResponse
+	61, // 120: payment.service.v1.Payment.BuyCryptoViaFiatPriceQuery:output_type -> payment.service.v1.BuyCryptoViaFiatPriceQueryResponse
+	63, // 121: payment.service.v1.Payment.BuyCryptoViaFiat:output_type -> payment.service.v1.BuyCryptoViaFiatResponse
+	65, // 122: payment.service.v1.Payment.GetResponsibleGamblingStatus:output_type -> payment.service.v1.GetResponsibleGamblingStatusResponse
+	92, // [92:123] is the sub-list for method output_type
+	61, // [61:92] is the sub-list for method input_type
+	61, // [61:61] is the sub-list for extension type_name
+	61, // [61:61] is the sub-list for extension extendee
+	0,  // [0:61] is the sub-list for field type_name
 }
 
 func init() { file_payment_service_v1_payment_proto_init() }
@@ -4307,13 +6718,18 @@ func file_payment_service_v1_payment_proto_init() {
 	if File_payment_service_v1_payment_proto != nil {
 		return
 	}
+	file_payment_service_v1_payment_proto_msgTypes[1].OneofWrappers = []any{}
+	file_payment_service_v1_payment_proto_msgTypes[9].OneofWrappers = []any{}
+	file_payment_service_v1_payment_proto_msgTypes[31].OneofWrappers = []any{}
+	file_payment_service_v1_payment_proto_msgTypes[37].OneofWrappers = []any{}
+	file_payment_service_v1_payment_proto_msgTypes[44].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_payment_service_v1_payment_proto_rawDesc), len(file_payment_service_v1_payment_proto_rawDesc)),
-			NumEnums:      5,
-			NumMessages:   39,
+			NumEnums:      4,
+			NumMessages:   65,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

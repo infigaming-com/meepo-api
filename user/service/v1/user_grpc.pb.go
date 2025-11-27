@@ -8,6 +8,7 @@ package v1
 
 import (
 	context "context"
+	v1 "github.com/infigaming-com/meepo-api/vip/service/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -40,7 +41,10 @@ const (
 	User_CheckPermission_FullMethodName                 = "/api.user.service.v1.User/CheckPermission"
 	User_AddOperator_FullMethodName                     = "/api.user.service.v1.User/AddOperator"
 	User_SendEmailVerificationCode_FullMethodName       = "/api.user.service.v1.User/SendEmailVerificationCode"
+	User_SendPasswordResetCode_FullMethodName           = "/api.user.service.v1.User/SendPasswordResetCode"
+	User_ResetPasswordWithCode_FullMethodName           = "/api.user.service.v1.User/ResetPasswordWithCode"
 	User_UpdateUser_FullMethodName                      = "/api.user.service.v1.User/UpdateUser"
+	User_UpdateUserIdentity_FullMethodName              = "/api.user.service.v1.User/UpdateUserIdentity"
 	User_ListUsers_FullMethodName                       = "/api.user.service.v1.User/ListUsers"
 	User_CreateUser_FullMethodName                      = "/api.user.service.v1.User/CreateUser"
 	User_VerifyEmail_FullMethodName                     = "/api.user.service.v1.User/VerifyEmail"
@@ -56,6 +60,7 @@ const (
 	User_GetOverviewDashboardFromUser_FullMethodName    = "/api.user.service.v1.User/GetOverviewDashboardFromUser"
 	User_GetOperatorIdByOrigin_FullMethodName           = "/api.user.service.v1.User/GetOperatorIdByOrigin"
 	User_GetOperatorIdsByOrigin_FullMethodName          = "/api.user.service.v1.User/GetOperatorIdsByOrigin"
+	User_GetOperatorInfoByOrigin_FullMethodName         = "/api.user.service.v1.User/GetOperatorInfoByOrigin"
 	User_GetOperator_FullMethodName                     = "/api.user.service.v1.User/GetOperator"
 	User_GetOperatorsByIds_FullMethodName               = "/api.user.service.v1.User/GetOperatorsByIds"
 	User_ListAllOperators_FullMethodName                = "/api.user.service.v1.User/ListAllOperators"
@@ -71,6 +76,32 @@ const (
 	User_ListCompanyOperators_FullMethodName            = "/api.user.service.v1.User/ListCompanyOperators"
 	User_ListBottomOperators_FullMethodName             = "/api.user.service.v1.User/ListBottomOperators"
 	User_UpdateOperatorStatus_FullMethodName            = "/api.user.service.v1.User/UpdateOperatorStatus"
+	User_ListAllUsers_FullMethodName                    = "/api.user.service.v1.User/ListAllUsers"
+	User_ListOperatorsByAdminEmail_FullMethodName       = "/api.user.service.v1.User/ListOperatorsByAdminEmail"
+	User_ListOperatorDetails_FullMethodName             = "/api.user.service.v1.User/ListOperatorDetails"
+	User_GetOperatorDetailsByUserId_FullMethodName      = "/api.user.service.v1.User/GetOperatorDetailsByUserId"
+	User_GetOperatorAccountSettings_FullMethodName      = "/api.user.service.v1.User/GetOperatorAccountSettings"
+	User_UpdateOperatorAccountSettings_FullMethodName   = "/api.user.service.v1.User/UpdateOperatorAccountSettings"
+	User_GetUserAccountSettingsStatus_FullMethodName    = "/api.user.service.v1.User/GetUserAccountSettingsStatus"
+	User_AddResponsibleGamblingConfig_FullMethodName    = "/api.user.service.v1.User/AddResponsibleGamblingConfig"
+	User_DeleteResponsibleGamblingConfig_FullMethodName = "/api.user.service.v1.User/DeleteResponsibleGamblingConfig"
+	User_GetResponsibleGamblingConfig_FullMethodName    = "/api.user.service.v1.User/GetResponsibleGamblingConfig"
+	User_UserIdentityAudit_FullMethodName               = "/api.user.service.v1.User/UserIdentityAudit"
+	User_UserIdentityList_FullMethodName                = "/api.user.service.v1.User/UserIdentityList"
+	User_AddRegisterLoginBlacklist_FullMethodName       = "/api.user.service.v1.User/AddRegisterLoginBlacklist"
+	User_DeleteRegisterLoginBlacklist_FullMethodName    = "/api.user.service.v1.User/DeleteRegisterLoginBlacklist"
+	User_ListRegisterLoginBlacklist_FullMethodName      = "/api.user.service.v1.User/ListRegisterLoginBlacklist"
+	User_SetOperatorRegisterLimitConfig_FullMethodName  = "/api.user.service.v1.User/SetOperatorRegisterLimitConfig"
+	User_GetOperatorRegisterLimitConfig_FullMethodName  = "/api.user.service.v1.User/GetOperatorRegisterLimitConfig"
+	User_CloseAccount_FullMethodName                    = "/api.user.service.v1.User/CloseAccount"
+	User_GetOperatorVipSettings_FullMethodName          = "/api.user.service.v1.User/GetOperatorVipSettings"
+	User_GetUserVipLevel_FullMethodName                 = "/api.user.service.v1.User/GetUserVipLevel"
+	User_UpdateVipRewardSlider_FullMethodName           = "/api.user.service.v1.User/UpdateVipRewardSlider"
+	User_GetClaimableVipRewards_FullMethodName          = "/api.user.service.v1.User/GetClaimableVipRewards"
+	User_ClaimVipReward_FullMethodName                  = "/api.user.service.v1.User/ClaimVipReward"
+	User_ConfirmClaimVipReward_FullMethodName           = "/api.user.service.v1.User/ConfirmClaimVipReward"
+	User_RequestDailyLossback_FullMethodName            = "/api.user.service.v1.User/RequestDailyLossback"
+	User_GetDailyLossbackStatus_FullMethodName          = "/api.user.service.v1.User/GetDailyLossbackStatus"
 )
 
 // UserClient is the client API for User service.
@@ -130,7 +161,12 @@ type UserClient interface {
 	CheckPermission(ctx context.Context, in *CheckPermissionRequest, opts ...grpc.CallOption) (*CheckPermissionResponse, error)
 	AddOperator(ctx context.Context, in *AddOperatorRequest, opts ...grpc.CallOption) (*AddOperatorResponse, error)
 	SendEmailVerificationCode(ctx context.Context, in *SendEmailVerificationCodeRequest, opts ...grpc.CallOption) (*SendEmailVerificationCodeResponse, error)
+	// Send password reset verification code to email
+	SendPasswordResetCode(ctx context.Context, in *SendPasswordResetCodeRequest, opts ...grpc.CallOption) (*SendPasswordResetCodeResponse, error)
+	// Reset password using verification code
+	ResetPasswordWithCode(ctx context.Context, in *ResetPasswordWithCodeRequest, opts ...grpc.CallOption) (*ResetPasswordWithCodeResponse, error)
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
+	UpdateUserIdentity(ctx context.Context, in *UpdateUserIdentityRequest, opts ...grpc.CallOption) (*UpdateUserIdentityResponse, error)
 	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
 	VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...grpc.CallOption) (*VerifyEmailResponse, error)
@@ -146,6 +182,7 @@ type UserClient interface {
 	GetOverviewDashboardFromUser(ctx context.Context, in *GetOverviewDashboardFromUserRequest, opts ...grpc.CallOption) (*GetOverviewDashboardFromUserResponse, error)
 	GetOperatorIdByOrigin(ctx context.Context, in *GetOperatorIdByOriginRequest, opts ...grpc.CallOption) (*GetOperatorIdByOriginResponse, error)
 	GetOperatorIdsByOrigin(ctx context.Context, in *GetOperatorIdsByOriginRequest, opts ...grpc.CallOption) (*GetOperatorIdsByOriginResponse, error)
+	GetOperatorInfoByOrigin(ctx context.Context, in *GetOperatorInfoByOriginRequest, opts ...grpc.CallOption) (*GetOperatorInfoByOriginResponse, error)
 	GetOperator(ctx context.Context, in *GetOperatorRequest, opts ...grpc.CallOption) (*GetOperatorResponse, error)
 	GetOperatorsByIds(ctx context.Context, in *GetOperatorsByIdsRequest, opts ...grpc.CallOption) (*GetOperatorsByIdsResponse, error)
 	// ListOperators returns a list of operators based on the enabled status or all operators if the enabled status is not provided.
@@ -175,6 +212,36 @@ type UserClient interface {
 	ListBottomOperators(ctx context.Context, in *ListBottomOperatorsRequest, opts ...grpc.CallOption) (*ListBottomOperatorsResponse, error)
 	// UpdateOperatorStatus updates the status of an operator
 	UpdateOperatorStatus(ctx context.Context, in *UpdateOperatorStatusRequest, opts ...grpc.CallOption) (*UpdateOperatorStatusResponse, error)
+	// ListAllUsers returns a list of all users which belong to the operator context
+	ListAllUsers(ctx context.Context, in *ListAllUsersRequest, opts ...grpc.CallOption) (*ListAllUsersResponse, error)
+	// ListOperatorsByAdminEmail returns a list of (retailer, company, bottom) operators by admin email based on the operator context
+	ListOperatorsByAdminEmail(ctx context.Context, in *ListOperatorsByAdminEmailRequest, opts ...grpc.CallOption) (*ListOperatorsByAdminEmailResponse, error)
+	// ListOperatorDetails returns a list of operator details
+	ListOperatorDetails(ctx context.Context, in *ListOperatorDetailsRequest, opts ...grpc.CallOption) (*ListOperatorDetailsResponse, error)
+	// GetOperatorDetailsByUserId returns the operator details which the user belongs to
+	GetOperatorDetailsByUserId(ctx context.Context, in *GetOperatorDetailsByUserIdRequest, opts ...grpc.CallOption) (*GetOperatorDetailsByUserIdResponse, error)
+	GetOperatorAccountSettings(ctx context.Context, in *GetOperatorAccountSettingsRequest, opts ...grpc.CallOption) (*GetOperatorAccountSettingsResponse, error)
+	UpdateOperatorAccountSettings(ctx context.Context, in *UpdateOperatorAccountSettingsRequest, opts ...grpc.CallOption) (*UpdateOperatorAccountSettingsResponse, error)
+	GetUserAccountSettingsStatus(ctx context.Context, in *GetUserAccountSettingsStatusRequest, opts ...grpc.CallOption) (*GetUserAccountSettingsStatusResponse, error)
+	AddResponsibleGamblingConfig(ctx context.Context, in *AddResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*AddResponsibleGamblingConfigResponse, error)
+	DeleteResponsibleGamblingConfig(ctx context.Context, in *DeleteResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*DeleteResponsibleGamblingConfigResponse, error)
+	GetResponsibleGamblingConfig(ctx context.Context, in *GetResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*GetResponsibleGamblingConfigResponse, error)
+	UserIdentityAudit(ctx context.Context, in *UserIdentityAuditRequest, opts ...grpc.CallOption) (*UserIdentityAuditResponse, error)
+	UserIdentityList(ctx context.Context, in *UserIdentityListRequest, opts ...grpc.CallOption) (*UserIdentityListResponse, error)
+	AddRegisterLoginBlacklist(ctx context.Context, in *AddRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*AddRegisterLoginBlacklistResponse, error)
+	DeleteRegisterLoginBlacklist(ctx context.Context, in *DeleteRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*DeleteRegisterLoginBlacklistResponse, error)
+	ListRegisterLoginBlacklist(ctx context.Context, in *ListRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*ListRegisterLoginBlacklistResponse, error)
+	SetOperatorRegisterLimitConfig(ctx context.Context, in *SetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*SetOperatorRegisterLimitConfigResponse, error)
+	GetOperatorRegisterLimitConfig(ctx context.Context, in *GetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*GetOperatorRegisterLimitConfigResponse, error)
+	CloseAccount(ctx context.Context, in *CloseAccountRequest, opts ...grpc.CallOption) (*CloseAccountResponse, error)
+	GetOperatorVipSettings(ctx context.Context, in *GetOperatorVipSettingsRequest, opts ...grpc.CallOption) (*v1.GetOperatorVipSettingsResponse, error)
+	GetUserVipLevel(ctx context.Context, in *GetUserVipLevelRequest, opts ...grpc.CallOption) (*v1.GetUserVipLevelResponse, error)
+	UpdateVipRewardSlider(ctx context.Context, in *UpdateVipRewardSliderRequest, opts ...grpc.CallOption) (*v1.UpdateVipRewardSliderResponse, error)
+	GetClaimableVipRewards(ctx context.Context, in *GetClaimableVipRewardsRequest, opts ...grpc.CallOption) (*v1.GetClaimableVipRewardsResponse, error)
+	ClaimVipReward(ctx context.Context, in *ClaimVipRewardRequest, opts ...grpc.CallOption) (*v1.ClaimVipRewardResponse, error)
+	ConfirmClaimVipReward(ctx context.Context, in *ConfirmClaimVipRewardRequest, opts ...grpc.CallOption) (*v1.ConfirmClaimVipRewardResponse, error)
+	RequestDailyLossback(ctx context.Context, in *RequestDailyLossbackRequest, opts ...grpc.CallOption) (*v1.RequestDailyLossbackResponse, error)
+	GetDailyLossbackStatus(ctx context.Context, in *GetDailyLossbackStatusRequest, opts ...grpc.CallOption) (*v1.GetDailyLossbackStatusResponse, error)
 }
 
 type userClient struct {
@@ -395,10 +462,40 @@ func (c *userClient) SendEmailVerificationCode(ctx context.Context, in *SendEmai
 	return out, nil
 }
 
+func (c *userClient) SendPasswordResetCode(ctx context.Context, in *SendPasswordResetCodeRequest, opts ...grpc.CallOption) (*SendPasswordResetCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SendPasswordResetCodeResponse)
+	err := c.cc.Invoke(ctx, User_SendPasswordResetCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) ResetPasswordWithCode(ctx context.Context, in *ResetPasswordWithCodeRequest, opts ...grpc.CallOption) (*ResetPasswordWithCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResetPasswordWithCodeResponse)
+	err := c.cc.Invoke(ctx, User_ResetPasswordWithCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userClient) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateUserResponse)
 	err := c.cc.Invoke(ctx, User_UpdateUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) UpdateUserIdentity(ctx context.Context, in *UpdateUserIdentityRequest, opts ...grpc.CallOption) (*UpdateUserIdentityResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateUserIdentityResponse)
+	err := c.cc.Invoke(ctx, User_UpdateUserIdentity_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -555,6 +652,16 @@ func (c *userClient) GetOperatorIdsByOrigin(ctx context.Context, in *GetOperator
 	return out, nil
 }
 
+func (c *userClient) GetOperatorInfoByOrigin(ctx context.Context, in *GetOperatorInfoByOriginRequest, opts ...grpc.CallOption) (*GetOperatorInfoByOriginResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorInfoByOriginResponse)
+	err := c.cc.Invoke(ctx, User_GetOperatorInfoByOrigin_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userClient) GetOperator(ctx context.Context, in *GetOperatorRequest, opts ...grpc.CallOption) (*GetOperatorResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetOperatorResponse)
@@ -705,6 +812,266 @@ func (c *userClient) UpdateOperatorStatus(ctx context.Context, in *UpdateOperato
 	return out, nil
 }
 
+func (c *userClient) ListAllUsers(ctx context.Context, in *ListAllUsersRequest, opts ...grpc.CallOption) (*ListAllUsersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAllUsersResponse)
+	err := c.cc.Invoke(ctx, User_ListAllUsers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) ListOperatorsByAdminEmail(ctx context.Context, in *ListOperatorsByAdminEmailRequest, opts ...grpc.CallOption) (*ListOperatorsByAdminEmailResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListOperatorsByAdminEmailResponse)
+	err := c.cc.Invoke(ctx, User_ListOperatorsByAdminEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) ListOperatorDetails(ctx context.Context, in *ListOperatorDetailsRequest, opts ...grpc.CallOption) (*ListOperatorDetailsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListOperatorDetailsResponse)
+	err := c.cc.Invoke(ctx, User_ListOperatorDetails_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetOperatorDetailsByUserId(ctx context.Context, in *GetOperatorDetailsByUserIdRequest, opts ...grpc.CallOption) (*GetOperatorDetailsByUserIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorDetailsByUserIdResponse)
+	err := c.cc.Invoke(ctx, User_GetOperatorDetailsByUserId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetOperatorAccountSettings(ctx context.Context, in *GetOperatorAccountSettingsRequest, opts ...grpc.CallOption) (*GetOperatorAccountSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorAccountSettingsResponse)
+	err := c.cc.Invoke(ctx, User_GetOperatorAccountSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) UpdateOperatorAccountSettings(ctx context.Context, in *UpdateOperatorAccountSettingsRequest, opts ...grpc.CallOption) (*UpdateOperatorAccountSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateOperatorAccountSettingsResponse)
+	err := c.cc.Invoke(ctx, User_UpdateOperatorAccountSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetUserAccountSettingsStatus(ctx context.Context, in *GetUserAccountSettingsStatusRequest, opts ...grpc.CallOption) (*GetUserAccountSettingsStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserAccountSettingsStatusResponse)
+	err := c.cc.Invoke(ctx, User_GetUserAccountSettingsStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) AddResponsibleGamblingConfig(ctx context.Context, in *AddResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*AddResponsibleGamblingConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddResponsibleGamblingConfigResponse)
+	err := c.cc.Invoke(ctx, User_AddResponsibleGamblingConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) DeleteResponsibleGamblingConfig(ctx context.Context, in *DeleteResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*DeleteResponsibleGamblingConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteResponsibleGamblingConfigResponse)
+	err := c.cc.Invoke(ctx, User_DeleteResponsibleGamblingConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetResponsibleGamblingConfig(ctx context.Context, in *GetResponsibleGamblingConfigRequest, opts ...grpc.CallOption) (*GetResponsibleGamblingConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetResponsibleGamblingConfigResponse)
+	err := c.cc.Invoke(ctx, User_GetResponsibleGamblingConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) UserIdentityAudit(ctx context.Context, in *UserIdentityAuditRequest, opts ...grpc.CallOption) (*UserIdentityAuditResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UserIdentityAuditResponse)
+	err := c.cc.Invoke(ctx, User_UserIdentityAudit_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) UserIdentityList(ctx context.Context, in *UserIdentityListRequest, opts ...grpc.CallOption) (*UserIdentityListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UserIdentityListResponse)
+	err := c.cc.Invoke(ctx, User_UserIdentityList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) AddRegisterLoginBlacklist(ctx context.Context, in *AddRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*AddRegisterLoginBlacklistResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddRegisterLoginBlacklistResponse)
+	err := c.cc.Invoke(ctx, User_AddRegisterLoginBlacklist_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) DeleteRegisterLoginBlacklist(ctx context.Context, in *DeleteRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*DeleteRegisterLoginBlacklistResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteRegisterLoginBlacklistResponse)
+	err := c.cc.Invoke(ctx, User_DeleteRegisterLoginBlacklist_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) ListRegisterLoginBlacklist(ctx context.Context, in *ListRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*ListRegisterLoginBlacklistResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListRegisterLoginBlacklistResponse)
+	err := c.cc.Invoke(ctx, User_ListRegisterLoginBlacklist_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) SetOperatorRegisterLimitConfig(ctx context.Context, in *SetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*SetOperatorRegisterLimitConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetOperatorRegisterLimitConfigResponse)
+	err := c.cc.Invoke(ctx, User_SetOperatorRegisterLimitConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetOperatorRegisterLimitConfig(ctx context.Context, in *GetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*GetOperatorRegisterLimitConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorRegisterLimitConfigResponse)
+	err := c.cc.Invoke(ctx, User_GetOperatorRegisterLimitConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) CloseAccount(ctx context.Context, in *CloseAccountRequest, opts ...grpc.CallOption) (*CloseAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CloseAccountResponse)
+	err := c.cc.Invoke(ctx, User_CloseAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetOperatorVipSettings(ctx context.Context, in *GetOperatorVipSettingsRequest, opts ...grpc.CallOption) (*v1.GetOperatorVipSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetOperatorVipSettingsResponse)
+	err := c.cc.Invoke(ctx, User_GetOperatorVipSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetUserVipLevel(ctx context.Context, in *GetUserVipLevelRequest, opts ...grpc.CallOption) (*v1.GetUserVipLevelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetUserVipLevelResponse)
+	err := c.cc.Invoke(ctx, User_GetUserVipLevel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) UpdateVipRewardSlider(ctx context.Context, in *UpdateVipRewardSliderRequest, opts ...grpc.CallOption) (*v1.UpdateVipRewardSliderResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.UpdateVipRewardSliderResponse)
+	err := c.cc.Invoke(ctx, User_UpdateVipRewardSlider_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetClaimableVipRewards(ctx context.Context, in *GetClaimableVipRewardsRequest, opts ...grpc.CallOption) (*v1.GetClaimableVipRewardsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetClaimableVipRewardsResponse)
+	err := c.cc.Invoke(ctx, User_GetClaimableVipRewards_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) ClaimVipReward(ctx context.Context, in *ClaimVipRewardRequest, opts ...grpc.CallOption) (*v1.ClaimVipRewardResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ClaimVipRewardResponse)
+	err := c.cc.Invoke(ctx, User_ClaimVipReward_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) ConfirmClaimVipReward(ctx context.Context, in *ConfirmClaimVipRewardRequest, opts ...grpc.CallOption) (*v1.ConfirmClaimVipRewardResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ConfirmClaimVipRewardResponse)
+	err := c.cc.Invoke(ctx, User_ConfirmClaimVipReward_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) RequestDailyLossback(ctx context.Context, in *RequestDailyLossbackRequest, opts ...grpc.CallOption) (*v1.RequestDailyLossbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.RequestDailyLossbackResponse)
+	err := c.cc.Invoke(ctx, User_RequestDailyLossback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetDailyLossbackStatus(ctx context.Context, in *GetDailyLossbackStatusRequest, opts ...grpc.CallOption) (*v1.GetDailyLossbackStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetDailyLossbackStatusResponse)
+	err := c.cc.Invoke(ctx, User_GetDailyLossbackStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -762,7 +1129,12 @@ type UserServer interface {
 	CheckPermission(context.Context, *CheckPermissionRequest) (*CheckPermissionResponse, error)
 	AddOperator(context.Context, *AddOperatorRequest) (*AddOperatorResponse, error)
 	SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error)
+	// Send password reset verification code to email
+	SendPasswordResetCode(context.Context, *SendPasswordResetCodeRequest) (*SendPasswordResetCodeResponse, error)
+	// Reset password using verification code
+	ResetPasswordWithCode(context.Context, *ResetPasswordWithCodeRequest) (*ResetPasswordWithCodeResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
+	UpdateUserIdentity(context.Context, *UpdateUserIdentityRequest) (*UpdateUserIdentityResponse, error)
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
 	VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error)
@@ -778,6 +1150,7 @@ type UserServer interface {
 	GetOverviewDashboardFromUser(context.Context, *GetOverviewDashboardFromUserRequest) (*GetOverviewDashboardFromUserResponse, error)
 	GetOperatorIdByOrigin(context.Context, *GetOperatorIdByOriginRequest) (*GetOperatorIdByOriginResponse, error)
 	GetOperatorIdsByOrigin(context.Context, *GetOperatorIdsByOriginRequest) (*GetOperatorIdsByOriginResponse, error)
+	GetOperatorInfoByOrigin(context.Context, *GetOperatorInfoByOriginRequest) (*GetOperatorInfoByOriginResponse, error)
 	GetOperator(context.Context, *GetOperatorRequest) (*GetOperatorResponse, error)
 	GetOperatorsByIds(context.Context, *GetOperatorsByIdsRequest) (*GetOperatorsByIdsResponse, error)
 	// ListOperators returns a list of operators based on the enabled status or all operators if the enabled status is not provided.
@@ -807,6 +1180,36 @@ type UserServer interface {
 	ListBottomOperators(context.Context, *ListBottomOperatorsRequest) (*ListBottomOperatorsResponse, error)
 	// UpdateOperatorStatus updates the status of an operator
 	UpdateOperatorStatus(context.Context, *UpdateOperatorStatusRequest) (*UpdateOperatorStatusResponse, error)
+	// ListAllUsers returns a list of all users which belong to the operator context
+	ListAllUsers(context.Context, *ListAllUsersRequest) (*ListAllUsersResponse, error)
+	// ListOperatorsByAdminEmail returns a list of (retailer, company, bottom) operators by admin email based on the operator context
+	ListOperatorsByAdminEmail(context.Context, *ListOperatorsByAdminEmailRequest) (*ListOperatorsByAdminEmailResponse, error)
+	// ListOperatorDetails returns a list of operator details
+	ListOperatorDetails(context.Context, *ListOperatorDetailsRequest) (*ListOperatorDetailsResponse, error)
+	// GetOperatorDetailsByUserId returns the operator details which the user belongs to
+	GetOperatorDetailsByUserId(context.Context, *GetOperatorDetailsByUserIdRequest) (*GetOperatorDetailsByUserIdResponse, error)
+	GetOperatorAccountSettings(context.Context, *GetOperatorAccountSettingsRequest) (*GetOperatorAccountSettingsResponse, error)
+	UpdateOperatorAccountSettings(context.Context, *UpdateOperatorAccountSettingsRequest) (*UpdateOperatorAccountSettingsResponse, error)
+	GetUserAccountSettingsStatus(context.Context, *GetUserAccountSettingsStatusRequest) (*GetUserAccountSettingsStatusResponse, error)
+	AddResponsibleGamblingConfig(context.Context, *AddResponsibleGamblingConfigRequest) (*AddResponsibleGamblingConfigResponse, error)
+	DeleteResponsibleGamblingConfig(context.Context, *DeleteResponsibleGamblingConfigRequest) (*DeleteResponsibleGamblingConfigResponse, error)
+	GetResponsibleGamblingConfig(context.Context, *GetResponsibleGamblingConfigRequest) (*GetResponsibleGamblingConfigResponse, error)
+	UserIdentityAudit(context.Context, *UserIdentityAuditRequest) (*UserIdentityAuditResponse, error)
+	UserIdentityList(context.Context, *UserIdentityListRequest) (*UserIdentityListResponse, error)
+	AddRegisterLoginBlacklist(context.Context, *AddRegisterLoginBlacklistRequest) (*AddRegisterLoginBlacklistResponse, error)
+	DeleteRegisterLoginBlacklist(context.Context, *DeleteRegisterLoginBlacklistRequest) (*DeleteRegisterLoginBlacklistResponse, error)
+	ListRegisterLoginBlacklist(context.Context, *ListRegisterLoginBlacklistRequest) (*ListRegisterLoginBlacklistResponse, error)
+	SetOperatorRegisterLimitConfig(context.Context, *SetOperatorRegisterLimitConfigRequest) (*SetOperatorRegisterLimitConfigResponse, error)
+	GetOperatorRegisterLimitConfig(context.Context, *GetOperatorRegisterLimitConfigRequest) (*GetOperatorRegisterLimitConfigResponse, error)
+	CloseAccount(context.Context, *CloseAccountRequest) (*CloseAccountResponse, error)
+	GetOperatorVipSettings(context.Context, *GetOperatorVipSettingsRequest) (*v1.GetOperatorVipSettingsResponse, error)
+	GetUserVipLevel(context.Context, *GetUserVipLevelRequest) (*v1.GetUserVipLevelResponse, error)
+	UpdateVipRewardSlider(context.Context, *UpdateVipRewardSliderRequest) (*v1.UpdateVipRewardSliderResponse, error)
+	GetClaimableVipRewards(context.Context, *GetClaimableVipRewardsRequest) (*v1.GetClaimableVipRewardsResponse, error)
+	ClaimVipReward(context.Context, *ClaimVipRewardRequest) (*v1.ClaimVipRewardResponse, error)
+	ConfirmClaimVipReward(context.Context, *ConfirmClaimVipRewardRequest) (*v1.ConfirmClaimVipRewardResponse, error)
+	RequestDailyLossback(context.Context, *RequestDailyLossbackRequest) (*v1.RequestDailyLossbackResponse, error)
+	GetDailyLossbackStatus(context.Context, *GetDailyLossbackStatusRequest) (*v1.GetDailyLossbackStatusResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -880,8 +1283,17 @@ func (UnimplementedUserServer) AddOperator(context.Context, *AddOperatorRequest)
 func (UnimplementedUserServer) SendEmailVerificationCode(context.Context, *SendEmailVerificationCodeRequest) (*SendEmailVerificationCodeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendEmailVerificationCode not implemented")
 }
+func (UnimplementedUserServer) SendPasswordResetCode(context.Context, *SendPasswordResetCodeRequest) (*SendPasswordResetCodeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendPasswordResetCode not implemented")
+}
+func (UnimplementedUserServer) ResetPasswordWithCode(context.Context, *ResetPasswordWithCodeRequest) (*ResetPasswordWithCodeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ResetPasswordWithCode not implemented")
+}
 func (UnimplementedUserServer) UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
+}
+func (UnimplementedUserServer) UpdateUserIdentity(context.Context, *UpdateUserIdentityRequest) (*UpdateUserIdentityResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserIdentity not implemented")
 }
 func (UnimplementedUserServer) ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListUsers not implemented")
@@ -928,6 +1340,9 @@ func (UnimplementedUserServer) GetOperatorIdByOrigin(context.Context, *GetOperat
 func (UnimplementedUserServer) GetOperatorIdsByOrigin(context.Context, *GetOperatorIdsByOriginRequest) (*GetOperatorIdsByOriginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorIdsByOrigin not implemented")
 }
+func (UnimplementedUserServer) GetOperatorInfoByOrigin(context.Context, *GetOperatorInfoByOriginRequest) (*GetOperatorInfoByOriginResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorInfoByOrigin not implemented")
+}
 func (UnimplementedUserServer) GetOperator(context.Context, *GetOperatorRequest) (*GetOperatorResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperator not implemented")
 }
@@ -972,6 +1387,84 @@ func (UnimplementedUserServer) ListBottomOperators(context.Context, *ListBottomO
 }
 func (UnimplementedUserServer) UpdateOperatorStatus(context.Context, *UpdateOperatorStatusRequest) (*UpdateOperatorStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOperatorStatus not implemented")
+}
+func (UnimplementedUserServer) ListAllUsers(context.Context, *ListAllUsersRequest) (*ListAllUsersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAllUsers not implemented")
+}
+func (UnimplementedUserServer) ListOperatorsByAdminEmail(context.Context, *ListOperatorsByAdminEmailRequest) (*ListOperatorsByAdminEmailResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListOperatorsByAdminEmail not implemented")
+}
+func (UnimplementedUserServer) ListOperatorDetails(context.Context, *ListOperatorDetailsRequest) (*ListOperatorDetailsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListOperatorDetails not implemented")
+}
+func (UnimplementedUserServer) GetOperatorDetailsByUserId(context.Context, *GetOperatorDetailsByUserIdRequest) (*GetOperatorDetailsByUserIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorDetailsByUserId not implemented")
+}
+func (UnimplementedUserServer) GetOperatorAccountSettings(context.Context, *GetOperatorAccountSettingsRequest) (*GetOperatorAccountSettingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorAccountSettings not implemented")
+}
+func (UnimplementedUserServer) UpdateOperatorAccountSettings(context.Context, *UpdateOperatorAccountSettingsRequest) (*UpdateOperatorAccountSettingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOperatorAccountSettings not implemented")
+}
+func (UnimplementedUserServer) GetUserAccountSettingsStatus(context.Context, *GetUserAccountSettingsStatusRequest) (*GetUserAccountSettingsStatusResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserAccountSettingsStatus not implemented")
+}
+func (UnimplementedUserServer) AddResponsibleGamblingConfig(context.Context, *AddResponsibleGamblingConfigRequest) (*AddResponsibleGamblingConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddResponsibleGamblingConfig not implemented")
+}
+func (UnimplementedUserServer) DeleteResponsibleGamblingConfig(context.Context, *DeleteResponsibleGamblingConfigRequest) (*DeleteResponsibleGamblingConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteResponsibleGamblingConfig not implemented")
+}
+func (UnimplementedUserServer) GetResponsibleGamblingConfig(context.Context, *GetResponsibleGamblingConfigRequest) (*GetResponsibleGamblingConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetResponsibleGamblingConfig not implemented")
+}
+func (UnimplementedUserServer) UserIdentityAudit(context.Context, *UserIdentityAuditRequest) (*UserIdentityAuditResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserIdentityAudit not implemented")
+}
+func (UnimplementedUserServer) UserIdentityList(context.Context, *UserIdentityListRequest) (*UserIdentityListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserIdentityList not implemented")
+}
+func (UnimplementedUserServer) AddRegisterLoginBlacklist(context.Context, *AddRegisterLoginBlacklistRequest) (*AddRegisterLoginBlacklistResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddRegisterLoginBlacklist not implemented")
+}
+func (UnimplementedUserServer) DeleteRegisterLoginBlacklist(context.Context, *DeleteRegisterLoginBlacklistRequest) (*DeleteRegisterLoginBlacklistResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteRegisterLoginBlacklist not implemented")
+}
+func (UnimplementedUserServer) ListRegisterLoginBlacklist(context.Context, *ListRegisterLoginBlacklistRequest) (*ListRegisterLoginBlacklistResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListRegisterLoginBlacklist not implemented")
+}
+func (UnimplementedUserServer) SetOperatorRegisterLimitConfig(context.Context, *SetOperatorRegisterLimitConfigRequest) (*SetOperatorRegisterLimitConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetOperatorRegisterLimitConfig not implemented")
+}
+func (UnimplementedUserServer) GetOperatorRegisterLimitConfig(context.Context, *GetOperatorRegisterLimitConfigRequest) (*GetOperatorRegisterLimitConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorRegisterLimitConfig not implemented")
+}
+func (UnimplementedUserServer) CloseAccount(context.Context, *CloseAccountRequest) (*CloseAccountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CloseAccount not implemented")
+}
+func (UnimplementedUserServer) GetOperatorVipSettings(context.Context, *GetOperatorVipSettingsRequest) (*v1.GetOperatorVipSettingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorVipSettings not implemented")
+}
+func (UnimplementedUserServer) GetUserVipLevel(context.Context, *GetUserVipLevelRequest) (*v1.GetUserVipLevelResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserVipLevel not implemented")
+}
+func (UnimplementedUserServer) UpdateVipRewardSlider(context.Context, *UpdateVipRewardSliderRequest) (*v1.UpdateVipRewardSliderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateVipRewardSlider not implemented")
+}
+func (UnimplementedUserServer) GetClaimableVipRewards(context.Context, *GetClaimableVipRewardsRequest) (*v1.GetClaimableVipRewardsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetClaimableVipRewards not implemented")
+}
+func (UnimplementedUserServer) ClaimVipReward(context.Context, *ClaimVipRewardRequest) (*v1.ClaimVipRewardResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ClaimVipReward not implemented")
+}
+func (UnimplementedUserServer) ConfirmClaimVipReward(context.Context, *ConfirmClaimVipRewardRequest) (*v1.ConfirmClaimVipRewardResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConfirmClaimVipReward not implemented")
+}
+func (UnimplementedUserServer) RequestDailyLossback(context.Context, *RequestDailyLossbackRequest) (*v1.RequestDailyLossbackResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RequestDailyLossback not implemented")
+}
+func (UnimplementedUserServer) GetDailyLossbackStatus(context.Context, *GetDailyLossbackStatusRequest) (*v1.GetDailyLossbackStatusResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDailyLossbackStatus not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -1372,6 +1865,42 @@ func _User_SendEmailVerificationCode_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_SendPasswordResetCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendPasswordResetCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).SendPasswordResetCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_SendPasswordResetCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).SendPasswordResetCode(ctx, req.(*SendPasswordResetCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_ResetPasswordWithCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResetPasswordWithCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ResetPasswordWithCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ResetPasswordWithCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ResetPasswordWithCode(ctx, req.(*ResetPasswordWithCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _User_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateUserRequest)
 	if err := dec(in); err != nil {
@@ -1386,6 +1915,24 @@ func _User_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServer).UpdateUser(ctx, req.(*UpdateUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_UpdateUserIdentity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserIdentityRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).UpdateUserIdentity(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_UpdateUserIdentity_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).UpdateUserIdentity(ctx, req.(*UpdateUserIdentityRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1660,6 +2207,24 @@ func _User_GetOperatorIdsByOrigin_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_GetOperatorInfoByOrigin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorInfoByOriginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetOperatorInfoByOrigin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetOperatorInfoByOrigin_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetOperatorInfoByOrigin(ctx, req.(*GetOperatorInfoByOriginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _User_GetOperator_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetOperatorRequest)
 	if err := dec(in); err != nil {
@@ -1930,6 +2495,474 @@ func _User_UpdateOperatorStatus_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_ListAllUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAllUsersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ListAllUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ListAllUsers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ListAllUsers(ctx, req.(*ListAllUsersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_ListOperatorsByAdminEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOperatorsByAdminEmailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ListOperatorsByAdminEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ListOperatorsByAdminEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ListOperatorsByAdminEmail(ctx, req.(*ListOperatorsByAdminEmailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_ListOperatorDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOperatorDetailsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ListOperatorDetails(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ListOperatorDetails_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ListOperatorDetails(ctx, req.(*ListOperatorDetailsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetOperatorDetailsByUserId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorDetailsByUserIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetOperatorDetailsByUserId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetOperatorDetailsByUserId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetOperatorDetailsByUserId(ctx, req.(*GetOperatorDetailsByUserIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetOperatorAccountSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorAccountSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetOperatorAccountSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetOperatorAccountSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetOperatorAccountSettings(ctx, req.(*GetOperatorAccountSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_UpdateOperatorAccountSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOperatorAccountSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).UpdateOperatorAccountSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_UpdateOperatorAccountSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).UpdateOperatorAccountSettings(ctx, req.(*UpdateOperatorAccountSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetUserAccountSettingsStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserAccountSettingsStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetUserAccountSettingsStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetUserAccountSettingsStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetUserAccountSettingsStatus(ctx, req.(*GetUserAccountSettingsStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_AddResponsibleGamblingConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddResponsibleGamblingConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).AddResponsibleGamblingConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_AddResponsibleGamblingConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).AddResponsibleGamblingConfig(ctx, req.(*AddResponsibleGamblingConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_DeleteResponsibleGamblingConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteResponsibleGamblingConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).DeleteResponsibleGamblingConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_DeleteResponsibleGamblingConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).DeleteResponsibleGamblingConfig(ctx, req.(*DeleteResponsibleGamblingConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetResponsibleGamblingConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetResponsibleGamblingConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetResponsibleGamblingConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetResponsibleGamblingConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetResponsibleGamblingConfig(ctx, req.(*GetResponsibleGamblingConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_UserIdentityAudit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserIdentityAuditRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).UserIdentityAudit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_UserIdentityAudit_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).UserIdentityAudit(ctx, req.(*UserIdentityAuditRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_UserIdentityList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserIdentityListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).UserIdentityList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_UserIdentityList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).UserIdentityList(ctx, req.(*UserIdentityListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_AddRegisterLoginBlacklist_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddRegisterLoginBlacklistRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).AddRegisterLoginBlacklist(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_AddRegisterLoginBlacklist_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).AddRegisterLoginBlacklist(ctx, req.(*AddRegisterLoginBlacklistRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_DeleteRegisterLoginBlacklist_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteRegisterLoginBlacklistRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).DeleteRegisterLoginBlacklist(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_DeleteRegisterLoginBlacklist_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).DeleteRegisterLoginBlacklist(ctx, req.(*DeleteRegisterLoginBlacklistRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_ListRegisterLoginBlacklist_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListRegisterLoginBlacklistRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ListRegisterLoginBlacklist(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ListRegisterLoginBlacklist_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ListRegisterLoginBlacklist(ctx, req.(*ListRegisterLoginBlacklistRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_SetOperatorRegisterLimitConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetOperatorRegisterLimitConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).SetOperatorRegisterLimitConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_SetOperatorRegisterLimitConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).SetOperatorRegisterLimitConfig(ctx, req.(*SetOperatorRegisterLimitConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetOperatorRegisterLimitConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorRegisterLimitConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetOperatorRegisterLimitConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetOperatorRegisterLimitConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetOperatorRegisterLimitConfig(ctx, req.(*GetOperatorRegisterLimitConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_CloseAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CloseAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).CloseAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_CloseAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).CloseAccount(ctx, req.(*CloseAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetOperatorVipSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorVipSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetOperatorVipSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetOperatorVipSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetOperatorVipSettings(ctx, req.(*GetOperatorVipSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetUserVipLevel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserVipLevelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetUserVipLevel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetUserVipLevel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetUserVipLevel(ctx, req.(*GetUserVipLevelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_UpdateVipRewardSlider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateVipRewardSliderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).UpdateVipRewardSlider(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_UpdateVipRewardSlider_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).UpdateVipRewardSlider(ctx, req.(*UpdateVipRewardSliderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetClaimableVipRewards_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetClaimableVipRewardsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetClaimableVipRewards(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetClaimableVipRewards_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetClaimableVipRewards(ctx, req.(*GetClaimableVipRewardsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_ClaimVipReward_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClaimVipRewardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ClaimVipReward(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ClaimVipReward_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ClaimVipReward(ctx, req.(*ClaimVipRewardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_ConfirmClaimVipReward_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfirmClaimVipRewardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).ConfirmClaimVipReward(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_ConfirmClaimVipReward_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).ConfirmClaimVipReward(ctx, req.(*ConfirmClaimVipRewardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_RequestDailyLossback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RequestDailyLossbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).RequestDailyLossback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_RequestDailyLossback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).RequestDailyLossback(ctx, req.(*RequestDailyLossbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetDailyLossbackStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDailyLossbackStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetDailyLossbackStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetDailyLossbackStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetDailyLossbackStatus(ctx, req.(*GetDailyLossbackStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2022,8 +3055,20 @@ var User_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _User_SendEmailVerificationCode_Handler,
 		},
 		{
+			MethodName: "SendPasswordResetCode",
+			Handler:    _User_SendPasswordResetCode_Handler,
+		},
+		{
+			MethodName: "ResetPasswordWithCode",
+			Handler:    _User_ResetPasswordWithCode_Handler,
+		},
+		{
 			MethodName: "UpdateUser",
 			Handler:    _User_UpdateUser_Handler,
+		},
+		{
+			MethodName: "UpdateUserIdentity",
+			Handler:    _User_UpdateUserIdentity_Handler,
 		},
 		{
 			MethodName: "ListUsers",
@@ -2086,6 +3131,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _User_GetOperatorIdsByOrigin_Handler,
 		},
 		{
+			MethodName: "GetOperatorInfoByOrigin",
+			Handler:    _User_GetOperatorInfoByOrigin_Handler,
+		},
+		{
 			MethodName: "GetOperator",
 			Handler:    _User_GetOperator_Handler,
 		},
@@ -2144,6 +3193,110 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateOperatorStatus",
 			Handler:    _User_UpdateOperatorStatus_Handler,
+		},
+		{
+			MethodName: "ListAllUsers",
+			Handler:    _User_ListAllUsers_Handler,
+		},
+		{
+			MethodName: "ListOperatorsByAdminEmail",
+			Handler:    _User_ListOperatorsByAdminEmail_Handler,
+		},
+		{
+			MethodName: "ListOperatorDetails",
+			Handler:    _User_ListOperatorDetails_Handler,
+		},
+		{
+			MethodName: "GetOperatorDetailsByUserId",
+			Handler:    _User_GetOperatorDetailsByUserId_Handler,
+		},
+		{
+			MethodName: "GetOperatorAccountSettings",
+			Handler:    _User_GetOperatorAccountSettings_Handler,
+		},
+		{
+			MethodName: "UpdateOperatorAccountSettings",
+			Handler:    _User_UpdateOperatorAccountSettings_Handler,
+		},
+		{
+			MethodName: "GetUserAccountSettingsStatus",
+			Handler:    _User_GetUserAccountSettingsStatus_Handler,
+		},
+		{
+			MethodName: "AddResponsibleGamblingConfig",
+			Handler:    _User_AddResponsibleGamblingConfig_Handler,
+		},
+		{
+			MethodName: "DeleteResponsibleGamblingConfig",
+			Handler:    _User_DeleteResponsibleGamblingConfig_Handler,
+		},
+		{
+			MethodName: "GetResponsibleGamblingConfig",
+			Handler:    _User_GetResponsibleGamblingConfig_Handler,
+		},
+		{
+			MethodName: "UserIdentityAudit",
+			Handler:    _User_UserIdentityAudit_Handler,
+		},
+		{
+			MethodName: "UserIdentityList",
+			Handler:    _User_UserIdentityList_Handler,
+		},
+		{
+			MethodName: "AddRegisterLoginBlacklist",
+			Handler:    _User_AddRegisterLoginBlacklist_Handler,
+		},
+		{
+			MethodName: "DeleteRegisterLoginBlacklist",
+			Handler:    _User_DeleteRegisterLoginBlacklist_Handler,
+		},
+		{
+			MethodName: "ListRegisterLoginBlacklist",
+			Handler:    _User_ListRegisterLoginBlacklist_Handler,
+		},
+		{
+			MethodName: "SetOperatorRegisterLimitConfig",
+			Handler:    _User_SetOperatorRegisterLimitConfig_Handler,
+		},
+		{
+			MethodName: "GetOperatorRegisterLimitConfig",
+			Handler:    _User_GetOperatorRegisterLimitConfig_Handler,
+		},
+		{
+			MethodName: "CloseAccount",
+			Handler:    _User_CloseAccount_Handler,
+		},
+		{
+			MethodName: "GetOperatorVipSettings",
+			Handler:    _User_GetOperatorVipSettings_Handler,
+		},
+		{
+			MethodName: "GetUserVipLevel",
+			Handler:    _User_GetUserVipLevel_Handler,
+		},
+		{
+			MethodName: "UpdateVipRewardSlider",
+			Handler:    _User_UpdateVipRewardSlider_Handler,
+		},
+		{
+			MethodName: "GetClaimableVipRewards",
+			Handler:    _User_GetClaimableVipRewards_Handler,
+		},
+		{
+			MethodName: "ClaimVipReward",
+			Handler:    _User_ClaimVipReward_Handler,
+		},
+		{
+			MethodName: "ConfirmClaimVipReward",
+			Handler:    _User_ConfirmClaimVipReward_Handler,
+		},
+		{
+			MethodName: "RequestDailyLossback",
+			Handler:    _User_RequestDailyLossback_Handler,
+		},
+		{
+			MethodName: "GetDailyLossbackStatus",
+			Handler:    _User_GetDailyLossbackStatus_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

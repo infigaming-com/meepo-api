@@ -18,10 +18,10 @@ spec:
       certificateRefs:
       - name: meepoapi-xyz-tls
         namespace: meepo-dev
-  - name: meepoapi-xyz-stg-https
+  - name: meepoapi-xyz-gli-https
     protocol: HTTPS
     port: 443
-    hostname: "stg.meepoapi.xyz"
+    hostname: "gli.meepoapi.xyz"
     allowedRoutes:
       namespaces:
         from: All

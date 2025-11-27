@@ -5,80 +5,96 @@ metadata:
   namespace: meepo-dev
 spec:
   parentRefs:
-  - name: meepo-gateway
-    namespace: meepo-dev
+    - name: meepo-gateway
+      namespace: meepo-dev
   hostnames:
-  - "dev.meepoapi.xyz"
+    - "dev.meepoapi.xyz"
   rules:
-  - matches:
-    - path:
-        type: PathPrefix
-        value: "/v1/user"
-    backendRefs:
-    - name: user-svc
-      port: 8000
-      weight: 1
-  - matches:
-    - path:
-        type: PathPrefix
-        value: "/v1/operator"
-    backendRefs:
-    - name: operator-svc
-      port: 8000
-      weight: 1
-  - matches:
-    - path:
-        type: PathPrefix
-        value: "/v1/system"
-    backendRefs:
-    - name: system-svc
-      port: 8000
-      weight: 1
-  - matches:
-    - path:
-        type: PathPrefix
-        value: "/v1/game"
-    backendRefs:
-    - name: game-svc
-      port: 8000
-      weight: 1
-  - matches:
-    - path:
-        type: PathPrefix
-        value: "/v1/payment"
-    backendRefs:
-    - name: payment-svc
-      port: 8000
-      weight: 1
-  - matches:
-    - path:
-        type: PathPrefix
-        value: "/v1/wallet"
-    backendRefs:
-    - name: wallet-svc
-      port: 8000
-      weight: 1
-  - matches:
-    - path:
-        type: PathPrefix
-        value: "/v1/backoffice"
-    backendRefs:
-    - name: backoffice-svc
-      port: 8000
-      weight: 1
-  - matches:
-    - path:
-        type: PathPrefix
-        value: "/ws"
-    backendRefs:
-    - name: websocket-svc
-      port: 8000
-      weight: 1
-  - matches:
-    - path:
-        type: PathPrefix
-        value: "/v1/review"
-    backendRefs:
-    - name: review-svc
-      port: 8000
-      weight: 1
+    - matches:
+        - path:
+            type: PathPrefix
+            value: "/v1/user"
+      backendRefs:
+        - name: user-svc
+          port: 8000
+          weight: 1
+    - matches:
+        - path:
+            type: PathPrefix
+            value: "/v1/operator"
+      backendRefs:
+        - name: operator-svc
+          port: 8000
+          weight: 1
+    - matches:
+        - path:
+            type: PathPrefix
+            value: "/v1/system"
+      backendRefs:
+        - name: system-svc
+          port: 8000
+          weight: 1
+    - matches:
+        - path:
+            type: PathPrefix
+            value: "/v1/game"
+      backendRefs:
+        - name: game-svc
+          port: 8000
+          weight: 1
+    - matches:
+        - path:
+            type: PathPrefix
+            value: "/v1/payment"
+      backendRefs:
+        - name: payment-svc
+          port: 8000
+          weight: 1
+    - matches:
+        - path:
+            type: PathPrefix
+            value: "/v1/wallet"
+      backendRefs:
+        - name: wallet-svc
+          port: 8000
+          weight: 1
+    - matches:
+        - path:
+            type: PathPrefix
+            value: "/v1/backoffice"
+      backendRefs:
+        - name: backoffice-svc
+          port: 8000
+          weight: 1
+    - matches:
+        - path:
+            type: PathPrefix
+            value: "/ws"
+      backendRefs:
+        - name: websocket-svc
+          port: 8000
+          weight: 1
+    - matches:
+        - path:
+            type: PathPrefix
+            value: "/v1/bcpay"
+      backendRefs:
+        - name: bcpay-svc
+          port: 8000
+          weight: 1
+    - matches:
+        - path:
+            type: PathPrefix
+            value: "/v1/review"
+      backendRefs:
+        - name: review-svc
+          port: 8000
+          weight: 1
+    - matches:
+        - path:
+            type: PathPrefix
+            value: "/v1/affiliate"
+      backendRefs:
+        - name: affiliate-svc
+          port: 8000
+          weight: 1
