@@ -193,6 +193,7 @@ type GameBetEvent struct {
 	RetailerOperatorID                   int64          `json:"retailer_operator_id"`
 	CompanyOperatorID                    int64          `json:"company_operator_id"`
 	GameTransactionIDs                   []int64        `json:"game_transaction_ids"`
+	RTP                                  string         `json:"rtp"`
 }
 
 type GameBetEventBoardcastItem struct {
