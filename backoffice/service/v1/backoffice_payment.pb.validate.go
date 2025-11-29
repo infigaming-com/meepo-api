@@ -851,11 +851,11 @@ func (m *GetOperatorPaymentChannelPageRequest) validate(all bool) error {
 	// no validation rules for Sort
 
 	if all {
-		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, GetOperatorPaymentChannelPageRequestValidationError{
-					field:  "OperatorContextFilters",
+					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -863,16 +863,16 @@ func (m *GetOperatorPaymentChannelPageRequest) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, GetOperatorPaymentChannelPageRequestValidationError{
-					field:  "OperatorContextFilters",
+					field:  "TargetOperatorContext",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return GetOperatorPaymentChannelPageRequestValidationError{
-				field:  "OperatorContextFilters",
+				field:  "TargetOperatorContext",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}

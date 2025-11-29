@@ -262,7 +262,7 @@ message GetOperatorPaymentChannelPageRequest {
   // Status ture or false
   optional bool enabled = 12;
   // ID of the Operator connect with this channel
-  api.common.OperatorContextFilters operator_context_filters = 13;
+  api.common.OperatorContext target_operator_context = 13;
 }
 
 message UpdatePaymentMethodRequest {

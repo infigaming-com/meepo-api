@@ -641,9 +641,9 @@ type GetOperatorPaymentChannelPageRequest struct {
 	// Status ture or false
 	Enabled *bool `protobuf:"varint,12,opt,name=enabled,proto3,oneof" json:"enabled,omitempty"`
 	// ID of the Operator connect with this channel
-	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,13,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,13,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *GetOperatorPaymentChannelPageRequest) Reset() {
@@ -760,9 +760,9 @@ func (x *GetOperatorPaymentChannelPageRequest) GetEnabled() bool {
 	return false
 }
 
-func (x *GetOperatorPaymentChannelPageRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+func (x *GetOperatorPaymentChannelPageRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.OperatorContextFilters
+		return x.TargetOperatorContext
 	}
 	return nil
 }
@@ -942,7 +942,7 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\n" +
 	"max_amount\x18\x10 \x01(\tR\tmaxAmount\x12\x17\n" +
 	"\auser_id\x18\x11 \x01(\x03R\x06userId\x12\\\n" +
-	"\x18operator_context_filters\x18\x12 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\x8a\x04\n" +
+	"\x18operator_context_filters\x18\x12 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\x81\x04\n" +
 	"$GetOperatorPaymentChannelPageRequest\x12\x12\n" +
 	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x123\n" +
@@ -956,8 +956,8 @@ const file_backoffice_service_v1_backoffice_payment_proto_rawDesc = "" +
 	"\x06source\x18\n" +
 	" \x01(\tR\x06source\x12,\n" +
 	"\x04sort\x18\v \x01(\x0e2\x18.payment.service.v1.SortR\x04sort\x12\x1d\n" +
-	"\aenabled\x18\f \x01(\bH\x00R\aenabled\x88\x01\x01\x12\\\n" +
-	"\x18operator_context_filters\x18\r \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\n" +
+	"\aenabled\x18\f \x01(\bH\x00R\aenabled\x88\x01\x01\x12S\n" +
+	"\x17target_operator_context\x18\r \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContextB\n" +
 	"\n" +
 	"\b_enabled\"\xaf\x03\n" +
 	"\x1aUpdatePaymentMethodRequest\x12*\n" +
@@ -1046,7 +1046,7 @@ var file_backoffice_service_v1_backoffice_payment_proto_depIdxs = []int32{
 	13, // 8: api.backoffice.service.v1.GetTransactionPageRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
 	14, // 9: api.backoffice.service.v1.GetOperatorPaymentChannelPageRequest.type:type_name -> payment.service.v1.ChannelType
 	12, // 10: api.backoffice.service.v1.GetOperatorPaymentChannelPageRequest.sort:type_name -> payment.service.v1.Sort
-	13, // 11: api.backoffice.service.v1.GetOperatorPaymentChannelPageRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	7,  // 11: api.backoffice.service.v1.GetOperatorPaymentChannelPageRequest.target_operator_context:type_name -> api.common.OperatorContext
 	4,  // 12: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionPage:input_type -> api.backoffice.service.v1.GetTransactionPageRequest
 	15, // 13: api.backoffice.service.v1.BackofficePayment.GetPaymentTransactionById:input_type -> payment.service.v1.GetTransactionDetailByIdRequest
 	4,  // 14: api.backoffice.service.v1.BackofficePayment.GetPaymentOperatorTransactionPage:input_type -> api.backoffice.service.v1.GetTransactionPageRequest
