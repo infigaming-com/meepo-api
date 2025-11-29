@@ -777,6 +777,7 @@ message GetOperatorPaymentChannelPageRequest {
   api.common.OperatorContextFilters operator_context_filters = 13;
   // ID of the Operator connect with this channel
 	api.common.OperatorContext operator_context = 14;
+  api.common.OperatorContext target_operator_context = 15;
 }
 
 // Response for payment channel page
