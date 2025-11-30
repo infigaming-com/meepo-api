@@ -1698,6 +1698,8 @@ message GetDepositCreditsGGRRequest {
 	google.protobuf.Timestamp end_time = 3;
 	// 最小存款金额过滤，只有大于此金额的存款记录才会被计算
 	optional string min_deposit_amount = 4;
+	// operator context，用于 gRPC 调用
+	api.common.OperatorContext operator_context = 5;
 }
 
 // 获取指定时间范围内用户存款金额所产生的GGR响应
