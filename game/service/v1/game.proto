@@ -200,6 +200,10 @@ service Game {
 	rpc ListUserTurnoverByGame(ListUserTurnoverByGameRequest) returns (ListUserTurnoverByGameResponse) {
 	}
 
+	// 获取指定时间范围内用户存款金额所产生的GGR
+	rpc GetDepositCreditsGGR(GetDepositCreditsGGRRequest) returns (GetDepositCreditsGGRResponse) {
+	}
+
 }
 
 message CreateOperatorRequest {
@@ -1685,4 +1689,26 @@ message ListUserTurnoverByGameResponse {
 	}
 
 	repeated Item items = 1;
+}
+
+// 获取指定时间范围内用户存款金额所产生的GGR请求
+message GetDepositCreditsGGRRequest {
+	int64 user_id = 1;
+	google.protobuf.Timestamp start_time = 2;
+	google.protobuf.Timestamp end_time = 3;
+	// 最小存款金额过滤，只有大于此金额的存款记录才会被计算
+	optional string min_deposit_amount = 4;
+}
+
+// 获取指定时间范围内用户存款金额所产生的GGR响应
+message GetDepositCreditsGGRResponse {
+	message GameData {
+		string game_type = 1; // game category
+		string ggr_usd = 2;
+		string ggr_reporting_currency = 3;
+		string turnover_usd = 4;
+		string turnover_reporting_currency = 5;
+		string rtp = 6;
+	}
+	repeated GameData game_data = 1;
 }

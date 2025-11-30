@@ -71,6 +71,7 @@ const (
 	Game_GetGameInfo_FullMethodName                       = "/api.game.service.v1.Game/GetGameInfo"
 	Game_GetUserActiveDays_FullMethodName                 = "/api.game.service.v1.Game/GetUserActiveDays"
 	Game_ListUserTurnoverByGame_FullMethodName            = "/api.game.service.v1.Game/ListUserTurnoverByGame"
+	Game_GetDepositCreditsGGR_FullMethodName              = "/api.game.service.v1.Game/GetDepositCreditsGGR"
 )
 
 // GameClient is the client API for Game service.
@@ -132,6 +133,8 @@ type GameClient interface {
 	GetGameInfo(ctx context.Context, in *GetGameInfoRequest, opts ...grpc.CallOption) (*GetGameInfoResponse, error)
 	GetUserActiveDays(ctx context.Context, in *GetUserActiveDaysRequest, opts ...grpc.CallOption) (*GetUserActiveDaysResponse, error)
 	ListUserTurnoverByGame(ctx context.Context, in *ListUserTurnoverByGameRequest, opts ...grpc.CallOption) (*ListUserTurnoverByGameResponse, error)
+	// 获取指定时间范围内用户存款金额所产生的GGR
+	GetDepositCreditsGGR(ctx context.Context, in *GetDepositCreditsGGRRequest, opts ...grpc.CallOption) (*GetDepositCreditsGGRResponse, error)
 }
 
 type gameClient struct {
@@ -662,6 +665,16 @@ func (c *gameClient) ListUserTurnoverByGame(ctx context.Context, in *ListUserTur
 	return out, nil
 }
 
+func (c *gameClient) GetDepositCreditsGGR(ctx context.Context, in *GetDepositCreditsGGRRequest, opts ...grpc.CallOption) (*GetDepositCreditsGGRResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDepositCreditsGGRResponse)
+	err := c.cc.Invoke(ctx, Game_GetDepositCreditsGGR_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GameServer is the server API for Game service.
 // All implementations must embed UnimplementedGameServer
 // for forward compatibility.
@@ -721,6 +734,8 @@ type GameServer interface {
 	GetGameInfo(context.Context, *GetGameInfoRequest) (*GetGameInfoResponse, error)
 	GetUserActiveDays(context.Context, *GetUserActiveDaysRequest) (*GetUserActiveDaysResponse, error)
 	ListUserTurnoverByGame(context.Context, *ListUserTurnoverByGameRequest) (*ListUserTurnoverByGameResponse, error)
+	// 获取指定时间范围内用户存款金额所产生的GGR
+	GetDepositCreditsGGR(context.Context, *GetDepositCreditsGGRRequest) (*GetDepositCreditsGGRResponse, error)
 	mustEmbedUnimplementedGameServer()
 }
 
@@ -886,6 +901,9 @@ func (UnimplementedGameServer) GetUserActiveDays(context.Context, *GetUserActive
 }
 func (UnimplementedGameServer) ListUserTurnoverByGame(context.Context, *ListUserTurnoverByGameRequest) (*ListUserTurnoverByGameResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListUserTurnoverByGame not implemented")
+}
+func (UnimplementedGameServer) GetDepositCreditsGGR(context.Context, *GetDepositCreditsGGRRequest) (*GetDepositCreditsGGRResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDepositCreditsGGR not implemented")
 }
 func (UnimplementedGameServer) mustEmbedUnimplementedGameServer() {}
 func (UnimplementedGameServer) testEmbeddedByValue()              {}
@@ -1844,6 +1862,24 @@ func _Game_ListUserTurnoverByGame_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Game_GetDepositCreditsGGR_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDepositCreditsGGRRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GameServer).GetDepositCreditsGGR(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Game_GetDepositCreditsGGR_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GameServer).GetDepositCreditsGGR(ctx, req.(*GetDepositCreditsGGRRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Game_ServiceDesc is the grpc.ServiceDesc for Game service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2058,6 +2094,10 @@ var Game_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListUserTurnoverByGame",
 			Handler:    _Game_ListUserTurnoverByGame_Handler,
+		},
+		{
+			MethodName: "GetDepositCreditsGGR",
+			Handler:    _Game_GetDepositCreditsGGR_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
