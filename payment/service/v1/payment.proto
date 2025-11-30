@@ -197,6 +197,10 @@ message UpdatePaymentChannelRequest {
   optional bool enable = 10;
   // Configuration fields for the payment channel in JSON format
   optional google.protobuf.Struct key = 11;
+  // Who is performing the action
+  api.common.OperatorContext operator_context = 12;
+  // For which operator this enable/disable applies (for hierarchy control)
+  api.common.OperatorContext target_operator_context = 13;
 }
 
 // Response for channel creation
@@ -777,6 +781,8 @@ message GetOperatorPaymentChannelPageRequest {
   api.common.OperatorContextFilters operator_context_filters = 13;
   // ID of the Operator connect with this channel
 	api.common.OperatorContext operator_context = 14;
+  // Target operator context for hierarchy filtering
+  api.common.OperatorContext target_operator_context = 15;
 }
 
 // Response for payment channel page

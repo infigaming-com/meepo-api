@@ -19521,6 +19521,14 @@ components:
                 key:
                     type: object
                     description: Configuration fields for the payment channel in JSON format
+                operatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Who is performing the action
+                targetOperatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: For which operator this enable/disable applies (for hierarchy control)
             description: |-
                 Request to create a payment channel
                  Used to create a new payment channel with specified merchant and method
