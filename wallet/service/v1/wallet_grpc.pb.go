@@ -36,6 +36,7 @@ const (
 	Wallet_GetExchangeRates_FullMethodName                    = "/api.wallet.service.v1.Wallet/GetExchangeRates"
 	Wallet_GetExchangeRatesWithBaseCurrency_FullMethodName    = "/api.wallet.service.v1.Wallet/GetExchangeRatesWithBaseCurrency"
 	Wallet_GetUserTransactionSummary_FullMethodName           = "/api.wallet.service.v1.Wallet/GetUserTransactionSummary"
+	Wallet_ListUserTransactionSummaries_FullMethodName        = "/api.wallet.service.v1.Wallet/ListUserTransactionSummaries"
 	Wallet_GetBackofficeUserOverviewFromWallet_FullMethodName = "/api.wallet.service.v1.Wallet/GetBackofficeUserOverviewFromWallet"
 	Wallet_GetOverviewDashboardFromWallet_FullMethodName      = "/api.wallet.service.v1.Wallet/GetOverviewDashboardFromWallet"
 	Wallet_AddCurrency_FullMethodName                         = "/api.wallet.service.v1.Wallet/AddCurrency"
@@ -113,6 +114,8 @@ type WalletClient interface {
 	// GetUserTransactionSummary returns the summary of user's transactions
 	// It returns the total deposit, withdraw, deposit minus withdraw, valid bet
 	GetUserTransactionSummary(ctx context.Context, in *GetUserTransactionSummaryRequest, opts ...grpc.CallOption) (*GetUserTransactionSummaryResponse, error)
+	// ListUserTransactionSummaries returns the summaries of user's transactions, mostly for list user transactions page
+	ListUserTransactionSummaries(ctx context.Context, in *ListUserTransactionSummariesRequest, opts ...grpc.CallOption) (*ListUserTransactionSummariesResponse, error)
 	// GetUserOverview returns data for the overview of user's wallet
 	GetBackofficeUserOverviewFromWallet(ctx context.Context, in *GetBackofficeUserOverviewFromWalletRequest, opts ...grpc.CallOption) (*GetBackofficeUserOverviewFromWalletResponse, error)
 	GetOverviewDashboardFromWallet(ctx context.Context, in *GetOverviewDashboardFromWalletRequest, opts ...grpc.CallOption) (*GetOverviewDashboardFromWalletResponse, error)
@@ -363,6 +366,16 @@ func (c *walletClient) GetUserTransactionSummary(ctx context.Context, in *GetUse
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetUserTransactionSummaryResponse)
 	err := c.cc.Invoke(ctx, Wallet_GetUserTransactionSummary_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletClient) ListUserTransactionSummaries(ctx context.Context, in *ListUserTransactionSummariesRequest, opts ...grpc.CallOption) (*ListUserTransactionSummariesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListUserTransactionSummariesResponse)
+	err := c.cc.Invoke(ctx, Wallet_ListUserTransactionSummaries_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -840,6 +853,8 @@ type WalletServer interface {
 	// GetUserTransactionSummary returns the summary of user's transactions
 	// It returns the total deposit, withdraw, deposit minus withdraw, valid bet
 	GetUserTransactionSummary(context.Context, *GetUserTransactionSummaryRequest) (*GetUserTransactionSummaryResponse, error)
+	// ListUserTransactionSummaries returns the summaries of user's transactions, mostly for list user transactions page
+	ListUserTransactionSummaries(context.Context, *ListUserTransactionSummariesRequest) (*ListUserTransactionSummariesResponse, error)
 	// GetUserOverview returns data for the overview of user's wallet
 	GetBackofficeUserOverviewFromWallet(context.Context, *GetBackofficeUserOverviewFromWalletRequest) (*GetBackofficeUserOverviewFromWalletResponse, error)
 	GetOverviewDashboardFromWallet(context.Context, *GetOverviewDashboardFromWalletRequest) (*GetOverviewDashboardFromWalletResponse, error)
@@ -976,6 +991,9 @@ func (UnimplementedWalletServer) GetExchangeRatesWithBaseCurrency(context.Contex
 }
 func (UnimplementedWalletServer) GetUserTransactionSummary(context.Context, *GetUserTransactionSummaryRequest) (*GetUserTransactionSummaryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserTransactionSummary not implemented")
+}
+func (UnimplementedWalletServer) ListUserTransactionSummaries(context.Context, *ListUserTransactionSummariesRequest) (*ListUserTransactionSummariesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListUserTransactionSummaries not implemented")
 }
 func (UnimplementedWalletServer) GetBackofficeUserOverviewFromWallet(context.Context, *GetBackofficeUserOverviewFromWalletRequest) (*GetBackofficeUserOverviewFromWalletResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBackofficeUserOverviewFromWallet not implemented")
@@ -1432,6 +1450,24 @@ func _Wallet_GetUserTransactionSummary_Handler(srv interface{}, ctx context.Cont
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(WalletServer).GetUserTransactionSummary(ctx, req.(*GetUserTransactionSummaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Wallet_ListUserTransactionSummaries_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListUserTransactionSummariesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServer).ListUserTransactionSummaries(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Wallet_ListUserTransactionSummaries_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServer).ListUserTransactionSummaries(ctx, req.(*ListUserTransactionSummariesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2302,6 +2338,10 @@ var Wallet_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserTransactionSummary",
 			Handler:    _Wallet_GetUserTransactionSummary_Handler,
+		},
+		{
+			MethodName: "ListUserTransactionSummaries",
+			Handler:    _Wallet_ListUserTransactionSummaries_Handler,
 		},
 		{
 			MethodName: "GetBackofficeUserOverviewFromWallet",

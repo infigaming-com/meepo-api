@@ -71,6 +71,9 @@ service Wallet {
 	// It returns the total deposit, withdraw, deposit minus withdraw, valid bet
 	rpc GetUserTransactionSummary (GetUserTransactionSummaryRequest) returns (GetUserTransactionSummaryResponse) {}
 
+	// ListUserTransactionSummaries returns the summaries of user's transactions, mostly for list user transactions page
+	rpc ListUserTransactionSummaries (ListUserTransactionSummariesRequest) returns (ListUserTransactionSummariesResponse) {}
+
 	// GetUserOverview returns data for the overview of user's wallet
 	rpc GetBackofficeUserOverviewFromWallet (GetBackofficeUserOverviewFromWalletRequest) returns (GetBackofficeUserOverviewFromWalletResponse) {}
 
@@ -689,6 +692,32 @@ message GetUserTransactionSummaryResponse {
 	int32 total_deposit_count = 9;
 	int32 total_withdraw_count = 10;
 	int32 today_withdraw_count = 11;
+}
+
+message ListUserTransactionSummariesRequest {
+	repeated int64 user_ids = 1;
+	optional string currency = 2;
+	optional google.protobuf.Timestamp start_time = 3;
+	optional google.protobuf.Timestamp end_time = 4;
+	api.common.OperatorContext operator_context = 5;
+}
+
+message ListUserTransactionSummariesResponse {
+	message UserTransactionSummary {
+		string total_deposit_usd = 1;
+		string total_withdraw_usd = 2;
+		string deposit_minus_withdraw_usd = 3;
+		string total_valid_bet_usd = 4;
+		string total_deposit_reporting_currency = 5;
+		string total_withdraw_reporting_currency = 6;
+		string deposit_minus_withdraw_reporting_currency = 7;
+		string total_valid_bet_reporting_currency = 8;
+		int32 total_deposit_count = 9;
+		int32 total_withdraw_count = 10;
+		int32 today_withdraw_count = 11;
+		int64 user_id = 12;
+	}
+	repeated UserTransactionSummary user_transaction_summaries = 1;
 }
 
 message GetBackofficeUserOverviewFromWalletRequest {
