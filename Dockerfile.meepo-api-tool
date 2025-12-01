@@ -1,4 +1,4 @@
-FROM golang:1.23-alpine
+FROM golang:1.24.7-alpine
 
 # 安装必要的依赖
 RUN apk add --no-cache make unzip wget
@@ -7,7 +7,7 @@ RUN apk add --no-cache make unzip wget
 WORKDIR /tmp
 
 # 定义版本变量
-ENV PROTOC_VERSION=25.6
+ENV PROTOC_VERSION=29.3
 ENV PATH="/root/go/bin:${PATH}"
 RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-linux-x86_64.zip && \
     unzip protoc-${PROTOC_VERSION}-linux-x86_64.zip -d /usr/local && \
