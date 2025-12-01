@@ -547,6 +547,7 @@ message ListWalletBalanceTransactionsRequest {
 	optional int32 page = 6;
 	optional int32 page_size = 7;
 	api.common.OperatorContext operator_context = 8;
+	optional bool pagination = 9; // if not provided, default is true
 }
 
 message ListWalletBalanceTransactionsResponse {
@@ -578,6 +579,15 @@ message ListWalletBalanceTransactionsResponse {
 		string after_balance = 7;
 		string currency = 8;
 		int64 related_transaction_id = 9;
+		string cash_amount = 10;
+		string cash_amount_usd = 11;
+		string cash_amount_reporting_currency = 12;
+		string operator_bonus_amount = 13;
+		string operator_bonus_amount_usd = 14;
+		string operator_bonus_amount_reporting_currency = 15;
+		string provider_bonus_amount = 16;
+		string provider_bonus_amount_usd = 17;
+		string provider_bonus_amount_reporting_currency = 18;
 	}
 	repeated BalanceTransaction balance_transactions = 1;
 	int32 total = 2;

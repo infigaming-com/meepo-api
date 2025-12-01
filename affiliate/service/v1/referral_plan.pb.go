@@ -711,17 +711,18 @@ func (x *CreateUserReferralCodeResponse) GetReferralCode() string {
 }
 
 type ListUserReferralRewardsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Currency      string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
-	RewardType    string                 `protobuf:"bytes,2,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"` // conversion_reward/deposit_cashback/wagering_commission/loss_revenue_share
-	ReferralCode  *string                `protobuf:"bytes,3,opt,name=referral_code,json=referralCode,proto3,oneof" json:"referral_code,omitempty"`
-	UserId        *int64                 `protobuf:"varint,4,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
-	StartTime     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=start_time,json=startTime,proto3,oneof" json:"start_time,omitempty"`
-	EndTime       *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=end_time,json=endTime,proto3,oneof" json:"end_time,omitempty"`
-	Page          *int32                 `protobuf:"varint,8,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize      *int32                 `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	Currency              string                 `protobuf:"bytes,1,opt,name=currency,proto3" json:"currency,omitempty"`
+	RewardType            string                 `protobuf:"bytes,2,opt,name=reward_type,json=rewardType,proto3" json:"reward_type,omitempty"` // conversion_reward/deposit_cashback/wagering_commission/loss_revenue_share
+	ReferralCode          *string                `protobuf:"bytes,3,opt,name=referral_code,json=referralCode,proto3,oneof" json:"referral_code,omitempty"`
+	UserId                *int64                 `protobuf:"varint,4,opt,name=user_id,json=userId,proto3,oneof" json:"user_id,omitempty"`
+	Tier                  *int32                 `protobuf:"varint,5,opt,name=tier,proto3,oneof" json:"tier,omitempty"`
+	RegistrationStartTime *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=registration_start_time,json=registrationStartTime,proto3,oneof" json:"registration_start_time,omitempty"`
+	RegistrationEndTime   *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=registration_end_time,json=registrationEndTime,proto3,oneof" json:"registration_end_time,omitempty"`
+	Page                  *int32                 `protobuf:"varint,8,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize              *int32                 `protobuf:"varint,9,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *ListUserReferralRewardsRequest) Reset() {
@@ -782,16 +783,23 @@ func (x *ListUserReferralRewardsRequest) GetUserId() int64 {
 	return 0
 }
 
-func (x *ListUserReferralRewardsRequest) GetStartTime() *timestamppb.Timestamp {
+func (x *ListUserReferralRewardsRequest) GetTier() int32 {
+	if x != nil && x.Tier != nil {
+		return *x.Tier
+	}
+	return 0
+}
+
+func (x *ListUserReferralRewardsRequest) GetRegistrationStartTime() *timestamppb.Timestamp {
 	if x != nil {
-		return x.StartTime
+		return x.RegistrationStartTime
 	}
 	return nil
 }
 
-func (x *ListUserReferralRewardsRequest) GetEndTime() *timestamppb.Timestamp {
+func (x *ListUserReferralRewardsRequest) GetRegistrationEndTime() *timestamppb.Timestamp {
 	if x != nil {
-		return x.EndTime
+		return x.RegistrationEndTime
 	}
 	return nil
 }
@@ -2048,10 +2056,9 @@ type GetUserReferralStatsResponse_ReferralRewards struct {
 	state                               protoimpl.MessageState `protogen:"open.v1"`
 	AvailableReferralRewardAmount       string                 `protobuf:"bytes,1,opt,name=available_referral_reward_amount,json=availableReferralRewardAmount,proto3" json:"available_referral_reward_amount,omitempty"` // for this currency
 	AvailableCommissionRewardAmount     string                 `protobuf:"bytes,2,opt,name=available_commission_reward_amount,json=availableCommissionRewardAmount,proto3" json:"available_commission_reward_amount,omitempty"`
-	AvailableInviteeRewardAmount        string                 `protobuf:"bytes,3,opt,name=available_invitee_reward_amount,json=availableInviteeRewardAmount,proto3" json:"available_invitee_reward_amount,omitempty"`
-	TotalReceivedReferralRewardAmount   string                 `protobuf:"bytes,4,opt,name=total_received_referral_reward_amount,json=totalReceivedReferralRewardAmount,proto3" json:"total_received_referral_reward_amount,omitempty"`
-	TotalReceivedCommissionRewardAmount string                 `protobuf:"bytes,5,opt,name=total_received_commission_reward_amount,json=totalReceivedCommissionRewardAmount,proto3" json:"total_received_commission_reward_amount,omitempty"`
-	TotalReceivedInviteeRewardAmount    string                 `protobuf:"bytes,6,opt,name=total_received_invitee_reward_amount,json=totalReceivedInviteeRewardAmount,proto3" json:"total_received_invitee_reward_amount,omitempty"`
+	TotalReceivedReferralRewardAmount   string                 `protobuf:"bytes,3,opt,name=total_received_referral_reward_amount,json=totalReceivedReferralRewardAmount,proto3" json:"total_received_referral_reward_amount,omitempty"`
+	TotalReceivedCommissionRewardAmount string                 `protobuf:"bytes,4,opt,name=total_received_commission_reward_amount,json=totalReceivedCommissionRewardAmount,proto3" json:"total_received_commission_reward_amount,omitempty"`
+	TotalReceivedInviteeRewardAmount    string                 `protobuf:"bytes,5,opt,name=total_received_invitee_reward_amount,json=totalReceivedInviteeRewardAmount,proto3" json:"total_received_invitee_reward_amount,omitempty"`
 	unknownFields                       protoimpl.UnknownFields
 	sizeCache                           protoimpl.SizeCache
 }
@@ -2096,13 +2103,6 @@ func (x *GetUserReferralStatsResponse_ReferralRewards) GetAvailableReferralRewar
 func (x *GetUserReferralStatsResponse_ReferralRewards) GetAvailableCommissionRewardAmount() string {
 	if x != nil {
 		return x.AvailableCommissionRewardAmount
-	}
-	return ""
-}
-
-func (x *GetUserReferralStatsResponse_ReferralRewards) GetAvailableInviteeRewardAmount() string {
-	if x != nil {
-		return x.AvailableInviteeRewardAmount
 	}
 	return ""
 }
@@ -2205,15 +2205,15 @@ func (x *GetUserReferralStatsResponse_ReferralProgress) GetNgrAmount() map[int32
 }
 
 type ListUserReferralRewardsResponse_ReferralReward struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserName      string                 `protobuf:"bytes,1,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
-	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	ReferralCode  string                 `protobuf:"bytes,3,opt,name=referral_code,json=referralCode,proto3" json:"referral_code,omitempty"`
-	Tier          int32                  `protobuf:"varint,4,opt,name=tier,proto3" json:"tier,omitempty"`
-	RewardAmount  string                 `protobuf:"bytes,5,opt,name=reward_amount,json=rewardAmount,proto3" json:"reward_amount,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	UserName         string                 `protobuf:"bytes,1,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
+	UserId           int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	ReferralCode     string                 `protobuf:"bytes,3,opt,name=referral_code,json=referralCode,proto3" json:"referral_code,omitempty"`
+	Tier             int32                  `protobuf:"varint,4,opt,name=tier,proto3" json:"tier,omitempty"`
+	RewardAmount     string                 `protobuf:"bytes,5,opt,name=reward_amount,json=rewardAmount,proto3" json:"reward_amount,omitempty"`
+	RegistrationTime *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=registration_time,json=registrationTime,proto3" json:"registration_time,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *ListUserReferralRewardsResponse_ReferralReward) Reset() {
@@ -2281,9 +2281,9 @@ func (x *ListUserReferralRewardsResponse_ReferralReward) GetRewardAmount() strin
 	return ""
 }
 
-func (x *ListUserReferralRewardsResponse_ReferralReward) GetCreatedAt() *timestamppb.Timestamp {
+func (x *ListUserReferralRewardsResponse_ReferralReward) GetRegistrationTime() *timestamppb.Timestamp {
 	if x != nil {
-		return x.CreatedAt
+		return x.RegistrationTime
 	}
 	return nil
 }
@@ -2331,18 +2331,17 @@ const file_affiliate_service_v1_referral_plan_proto_rawDesc = "" +
 	"\x12user_referral_plan\x18\x03 \x01(\v2&.api.affiliate.service.v1.ReferralPlanH\x00R\x10userReferralPlan\x88\x01\x01B\x15\n" +
 	"\x13_user_referral_plan\"9\n" +
 	"\x1bGetUserReferralStatsRequest\x12\x1a\n" +
-	"\bcurrency\x18\x01 \x01(\tR\bcurrency\"\x9c\x0e\n" +
+	"\bcurrency\x18\x01 \x01(\tR\bcurrency\"\xd5\r\n" +
 	"\x1cGetUserReferralStatsResponse\x12M\n" +
 	"\x0ereferral_codes\x18\x01 \x03(\v2&.api.affiliate.service.v1.ReferralCodeR\rreferralCodes\x12q\n" +
 	"\x10referral_rewards\x18\x02 \x01(\v2F.api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralRewardsR\x0freferralRewards\x12t\n" +
-	"\x11referral_progress\x18\x03 \x01(\v2G.api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgressR\x10referralProgress\x1a\xe6\x03\n" +
+	"\x11referral_progress\x18\x03 \x01(\v2G.api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgressR\x10referralProgress\x1a\x9f\x03\n" +
 	"\x0fReferralRewards\x12G\n" +
 	" available_referral_reward_amount\x18\x01 \x01(\tR\x1davailableReferralRewardAmount\x12K\n" +
-	"\"available_commission_reward_amount\x18\x02 \x01(\tR\x1favailableCommissionRewardAmount\x12E\n" +
-	"\x1favailable_invitee_reward_amount\x18\x03 \x01(\tR\x1cavailableInviteeRewardAmount\x12P\n" +
-	"%total_received_referral_reward_amount\x18\x04 \x01(\tR!totalReceivedReferralRewardAmount\x12T\n" +
-	"'total_received_commission_reward_amount\x18\x05 \x01(\tR#totalReceivedCommissionRewardAmount\x12N\n" +
-	"$total_received_invitee_reward_amount\x18\x06 \x01(\tR totalReceivedInviteeRewardAmount\x1a\xda\a\n" +
+	"\"available_commission_reward_amount\x18\x02 \x01(\tR\x1favailableCommissionRewardAmount\x12P\n" +
+	"%total_received_referral_reward_amount\x18\x03 \x01(\tR!totalReceivedReferralRewardAmount\x12T\n" +
+	"'total_received_commission_reward_amount\x18\x04 \x01(\tR#totalReceivedCommissionRewardAmount\x12N\n" +
+	"$total_received_invitee_reward_amount\x18\x05 \x01(\tR totalReceivedInviteeRewardAmount\x1a\xda\a\n" +
 	"\x10ReferralProgress\x12\x87\x01\n" +
 	"\x10conversion_count\x18\x01 \x03(\v2\\.api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.ConversionCountEntryR\x0fconversionCount\x12\x81\x01\n" +
 	"\x0edeposit_amount\x18\x02 \x03(\v2Z.api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.DepositAmountEntryR\rdepositAmount\x12\x84\x01\n" +
@@ -2379,39 +2378,39 @@ const file_affiliate_service_v1_referral_plan_proto_rawDesc = "" +
 	"\rreferral_code\x18\x01 \x01(\tH\x00R\freferralCode\x88\x01\x01B\x10\n" +
 	"\x0e_referral_code\"E\n" +
 	"\x1eCreateUserReferralCodeResponse\x12#\n" +
-	"\rreferral_code\x18\x01 \x01(\tR\freferralCode\"\xad\x03\n" +
+	"\rreferral_code\x18\x01 \x01(\tR\freferralCode\"\x9b\x04\n" +
 	"\x1eListUserReferralRewardsRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\x12\x1f\n" +
 	"\vreward_type\x18\x02 \x01(\tR\n" +
 	"rewardType\x12(\n" +
 	"\rreferral_code\x18\x03 \x01(\tH\x00R\freferralCode\x88\x01\x01\x12\x1c\n" +
-	"\auser_id\x18\x04 \x01(\x03H\x01R\x06userId\x88\x01\x01\x12>\n" +
-	"\n" +
-	"start_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x02R\tstartTime\x88\x01\x01\x12:\n" +
-	"\bend_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x03R\aendTime\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\b \x01(\x05H\x04R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\t \x01(\x05H\x05R\bpageSize\x88\x01\x01B\x10\n" +
+	"\auser_id\x18\x04 \x01(\x03H\x01R\x06userId\x88\x01\x01\x12\x17\n" +
+	"\x04tier\x18\x05 \x01(\x05H\x02R\x04tier\x88\x01\x01\x12W\n" +
+	"\x17registration_start_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampH\x03R\x15registrationStartTime\x88\x01\x01\x12S\n" +
+	"\x15registration_end_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x04R\x13registrationEndTime\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\b \x01(\x05H\x05R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\t \x01(\x05H\x06R\bpageSize\x88\x01\x01B\x10\n" +
 	"\x0e_referral_codeB\n" +
 	"\n" +
-	"\b_user_idB\r\n" +
-	"\v_start_timeB\v\n" +
-	"\t_end_timeB\a\n" +
+	"\b_user_idB\a\n" +
+	"\x05_tierB\x1a\n" +
+	"\x18_registration_start_timeB\x18\n" +
+	"\x16_registration_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xbf\x03\n" +
+	"_page_size\"\xcd\x03\n" +
 	"\x1fListUserReferralRewardsResponse\x12s\n" +
 	"\x10referral_rewards\x18\x01 \x03(\v2H.api.affiliate.service.v1.ListUserReferralRewardsResponse.ReferralRewardR\x0freferralRewards\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xdf\x01\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xed\x01\n" +
 	"\x0eReferralReward\x12\x1b\n" +
 	"\tuser_name\x18\x01 \x01(\tR\buserName\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12#\n" +
 	"\rreferral_code\x18\x03 \x01(\tR\freferralCode\x12\x12\n" +
 	"\x04tier\x18\x04 \x01(\x05R\x04tier\x12#\n" +
-	"\rreward_amount\x18\x05 \x01(\tR\frewardAmount\x129\n" +
-	"\n" +
-	"created_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\";\n" +
+	"\rreward_amount\x18\x05 \x01(\tR\frewardAmount\x12G\n" +
+	"\x11registration_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x10registrationTime\";\n" +
 	"\x1dGetUserReferralRewardsRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\"_\n" +
 	"\x1eGetUserReferralRewardsResponse\x12\x16\n" +
@@ -2597,8 +2596,8 @@ var file_affiliate_service_v1_referral_plan_proto_depIdxs = []int32{
 	8,  // 11: api.affiliate.service.v1.GetUserReferralStatsResponse.referral_codes:type_name -> api.affiliate.service.v1.ReferralCode
 	33, // 12: api.affiliate.service.v1.GetUserReferralStatsResponse.referral_rewards:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralRewards
 	34, // 13: api.affiliate.service.v1.GetUserReferralStatsResponse.referral_progress:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress
-	46, // 14: api.affiliate.service.v1.ListUserReferralRewardsRequest.start_time:type_name -> google.protobuf.Timestamp
-	46, // 15: api.affiliate.service.v1.ListUserReferralRewardsRequest.end_time:type_name -> google.protobuf.Timestamp
+	46, // 14: api.affiliate.service.v1.ListUserReferralRewardsRequest.registration_start_time:type_name -> google.protobuf.Timestamp
+	46, // 15: api.affiliate.service.v1.ListUserReferralRewardsRequest.registration_end_time:type_name -> google.protobuf.Timestamp
 	40, // 16: api.affiliate.service.v1.ListUserReferralRewardsResponse.referral_rewards:type_name -> api.affiliate.service.v1.ListUserReferralRewardsResponse.ReferralReward
 	18, // 17: api.affiliate.service.v1.ReferralPlan.plan_config:type_name -> api.affiliate.service.v1.ReferralPlanConfig
 	19, // 18: api.affiliate.service.v1.ReferralPlanConfig.conversion_conditions:type_name -> api.affiliate.service.v1.ConversionConditions
@@ -2620,7 +2619,7 @@ var file_affiliate_service_v1_referral_plan_proto_depIdxs = []int32{
 	37, // 34: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.wagering_amount:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.WageringAmountEntry
 	38, // 35: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.ggr_amount:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.GgrAmountEntry
 	39, // 36: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.ngr_amount:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.NgrAmountEntry
-	46, // 37: api.affiliate.service.v1.ListUserReferralRewardsResponse.ReferralReward.created_at:type_name -> google.protobuf.Timestamp
+	46, // 37: api.affiliate.service.v1.ListUserReferralRewardsResponse.ReferralReward.registration_time:type_name -> google.protobuf.Timestamp
 	21, // 38: api.affiliate.service.v1.ConversionReward.TierRewardsEntry.value:type_name -> api.affiliate.service.v1.ConversionTierRewards
 	25, // 39: api.affiliate.service.v1.DepositCashback.TierRewardConfigsEntry.value:type_name -> api.affiliate.service.v1.DepositCashbackTierRewardConfig
 	28, // 40: api.affiliate.service.v1.WageringCommission.TierRewardsEntry.value:type_name -> api.affiliate.service.v1.WageringCommissionTierRewards
