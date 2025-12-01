@@ -4709,6 +4709,349 @@ var _ interface {
 	ErrorName() string
 } = GetUserTransactionSummaryResponseValidationError{}
 
+// Validate checks the field values on ListUserTransactionSummariesRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ListUserTransactionSummariesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListUserTransactionSummariesRequest
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListUserTransactionSummariesRequestMultiError, or nil if none found.
+func (m *ListUserTransactionSummariesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListUserTransactionSummariesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListUserTransactionSummariesRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListUserTransactionSummariesRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListUserTransactionSummariesRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.Currency != nil {
+		// no validation rules for Currency
+	}
+
+	if m.StartTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetStartTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListUserTransactionSummariesRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListUserTransactionSummariesRequestValidationError{
+						field:  "StartTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListUserTransactionSummariesRequestValidationError{
+					field:  "StartTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if m.EndTime != nil {
+
+		if all {
+			switch v := interface{}(m.GetEndTime()).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListUserTransactionSummariesRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListUserTransactionSummariesRequestValidationError{
+						field:  "EndTime",
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListUserTransactionSummariesRequestValidationError{
+					field:  "EndTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ListUserTransactionSummariesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListUserTransactionSummariesRequestMultiError is an error wrapping multiple
+// validation errors returned by
+// ListUserTransactionSummariesRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListUserTransactionSummariesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListUserTransactionSummariesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListUserTransactionSummariesRequestMultiError) AllErrors() []error { return m }
+
+// ListUserTransactionSummariesRequestValidationError is the validation error
+// returned by ListUserTransactionSummariesRequest.Validate if the designated
+// constraints aren't met.
+type ListUserTransactionSummariesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListUserTransactionSummariesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListUserTransactionSummariesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListUserTransactionSummariesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListUserTransactionSummariesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListUserTransactionSummariesRequestValidationError) ErrorName() string {
+	return "ListUserTransactionSummariesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListUserTransactionSummariesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListUserTransactionSummariesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListUserTransactionSummariesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListUserTransactionSummariesRequestValidationError{}
+
+// Validate checks the field values on ListUserTransactionSummariesResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ListUserTransactionSummariesResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListUserTransactionSummariesResponse
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListUserTransactionSummariesResponseMultiError, or nil if none found.
+func (m *ListUserTransactionSummariesResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListUserTransactionSummariesResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetUserTransactionSummaries() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListUserTransactionSummariesResponseValidationError{
+						field:  fmt.Sprintf("UserTransactionSummaries[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListUserTransactionSummariesResponseValidationError{
+						field:  fmt.Sprintf("UserTransactionSummaries[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListUserTransactionSummariesResponseValidationError{
+					field:  fmt.Sprintf("UserTransactionSummaries[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ListUserTransactionSummariesResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListUserTransactionSummariesResponseMultiError is an error wrapping multiple
+// validation errors returned by
+// ListUserTransactionSummariesResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListUserTransactionSummariesResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListUserTransactionSummariesResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListUserTransactionSummariesResponseMultiError) AllErrors() []error { return m }
+
+// ListUserTransactionSummariesResponseValidationError is the validation error
+// returned by ListUserTransactionSummariesResponse.Validate if the designated
+// constraints aren't met.
+type ListUserTransactionSummariesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListUserTransactionSummariesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListUserTransactionSummariesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListUserTransactionSummariesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListUserTransactionSummariesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListUserTransactionSummariesResponseValidationError) ErrorName() string {
+	return "ListUserTransactionSummariesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListUserTransactionSummariesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListUserTransactionSummariesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListUserTransactionSummariesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListUserTransactionSummariesResponseValidationError{}
+
 // Validate checks the field values on
 // GetBackofficeUserOverviewFromWalletRequest with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
@@ -21422,6 +21765,148 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetWalletCreditTransactionsResponse_CreditTransactionValidationError{}
+
+// Validate checks the field values on
+// ListUserTransactionSummariesResponse_UserTransactionSummary with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListUserTransactionSummariesResponse_UserTransactionSummary) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// ListUserTransactionSummariesResponse_UserTransactionSummary with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListUserTransactionSummariesResponse_UserTransactionSummaryMultiError, or
+// nil if none found.
+func (m *ListUserTransactionSummariesResponse_UserTransactionSummary) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListUserTransactionSummariesResponse_UserTransactionSummary) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for TotalDepositUsd
+
+	// no validation rules for TotalWithdrawUsd
+
+	// no validation rules for DepositMinusWithdrawUsd
+
+	// no validation rules for TotalValidBetUsd
+
+	// no validation rules for TotalDepositReportingCurrency
+
+	// no validation rules for TotalWithdrawReportingCurrency
+
+	// no validation rules for DepositMinusWithdrawReportingCurrency
+
+	// no validation rules for TotalValidBetReportingCurrency
+
+	// no validation rules for TotalDepositCount
+
+	// no validation rules for TotalWithdrawCount
+
+	// no validation rules for TodayWithdrawCount
+
+	// no validation rules for UserId
+
+	if len(errors) > 0 {
+		return ListUserTransactionSummariesResponse_UserTransactionSummaryMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListUserTransactionSummariesResponse_UserTransactionSummaryMultiError is an
+// error wrapping multiple validation errors returned by
+// ListUserTransactionSummariesResponse_UserTransactionSummary.ValidateAll()
+// if the designated constraints aren't met.
+type ListUserTransactionSummariesResponse_UserTransactionSummaryMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListUserTransactionSummariesResponse_UserTransactionSummaryMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListUserTransactionSummariesResponse_UserTransactionSummaryMultiError) AllErrors() []error {
+	return m
+}
+
+// ListUserTransactionSummariesResponse_UserTransactionSummaryValidationError
+// is the validation error returned by
+// ListUserTransactionSummariesResponse_UserTransactionSummary.Validate if the
+// designated constraints aren't met.
+type ListUserTransactionSummariesResponse_UserTransactionSummaryValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListUserTransactionSummariesResponse_UserTransactionSummaryValidationError) Field() string {
+	return e.field
+}
+
+// Reason function returns reason value.
+func (e ListUserTransactionSummariesResponse_UserTransactionSummaryValidationError) Reason() string {
+	return e.reason
+}
+
+// Cause function returns cause value.
+func (e ListUserTransactionSummariesResponse_UserTransactionSummaryValidationError) Cause() error {
+	return e.cause
+}
+
+// Key function returns key value.
+func (e ListUserTransactionSummariesResponse_UserTransactionSummaryValidationError) Key() bool {
+	return e.key
+}
+
+// ErrorName returns error name.
+func (e ListUserTransactionSummariesResponse_UserTransactionSummaryValidationError) ErrorName() string {
+	return "ListUserTransactionSummariesResponse_UserTransactionSummaryValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListUserTransactionSummariesResponse_UserTransactionSummaryValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListUserTransactionSummariesResponse_UserTransactionSummary.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListUserTransactionSummariesResponse_UserTransactionSummaryValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListUserTransactionSummariesResponse_UserTransactionSummaryValidationError{}
 
 // Validate checks the field values on
 // GetOverviewDashboardFromWalletResponse_GGR with the rules defined in the
