@@ -333,6 +333,10 @@ service User {
 
 	rpc GetOperatorRegisterLimitConfig(GetOperatorRegisterLimitConfigRequest) returns (GetOperatorRegisterLimitConfigResponse) {}
 
+	rpc SetOperatorRegistrationFieldConfig(SetOperatorRegistrationFieldConfigRequest) returns (SetOperatorRegistrationFieldConfigResponse) {}
+
+	rpc GetOperatorRegistrationFieldConfig(GetOperatorRegistrationFieldConfigRequest) returns (GetOperatorRegistrationFieldConfigResponse) {}
+
 	rpc CloseAccount(CloseAccountRequest) returns (CloseAccountResponse) {
 		option (google.api.http) = {
 			post: "/v1/user/account/update"
@@ -445,6 +449,12 @@ message UserInfo {
 	google.protobuf.Timestamp dob = 22;
 	// user country
 	string country = 23;
+	// user default currency
+	string default_currency = 24;
+	// user email verification status
+	bool email_verified = 25;
+	// user phone verification status
+	bool phone_verified = 26;
 }
 
 // AuthType defines the type of authentication method.
@@ -499,6 +509,22 @@ message RegisterRequest {
 	optional string id_type = 6;
 	// campaign url
 	optional string registration_url = 7;
+	// Preferred email (if different from auth_id)
+	optional string email = 8;
+	// Preferred phone (if different from auth_id)
+	optional string phone = 9;
+	// First name
+	optional string firstname = 10;
+	// Last name
+	optional string lastname = 11;
+	// Address
+	optional string address = 12;
+	// Preferred default currency
+	optional string default_currency = 13;
+	// Email verification code for verification-required operators
+	optional string email_verification_code = 14;
+	// Phone verification code for verification-required operators
+	optional string phone_verification_code = 15;
 }
 
 // LoginRequest contains the credentials for user login.
@@ -1679,6 +1705,22 @@ message OperatorRegisterLimitConfig {
 	int32 registration_limit_per_ip = 1;
 }
 
+message RegistrationFieldSet {
+	bool email = 1;
+	bool phone = 2;
+	bool name = 3;
+	bool address = 4;
+	bool email_verification = 5;
+	bool phone_verification = 6;
+	bool birthday = 7;
+	bool id_type = 8;
+}
+
+message RegistrationFieldPolicy {
+	RegistrationFieldSet registration = 1;
+	RegistrationFieldSet login = 2;
+}
+
 message SetOperatorRegisterLimitConfigRequest {
 	api.common.OperatorContext operator_context = 1;
 	api.common.OperatorContext target_operator_context = 2;
@@ -1695,6 +1737,23 @@ message GetOperatorRegisterLimitConfigRequest {
 
 message GetOperatorRegisterLimitConfigResponse {
 	map<string, OperatorRegisterLimitConfig> config = 1;
+}
+
+message SetOperatorRegistrationFieldConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+	map<string, RegistrationFieldPolicy> config = 3;
+}
+
+message SetOperatorRegistrationFieldConfigResponse {}
+
+message GetOperatorRegistrationFieldConfigRequest {
+	api.common.OperatorContext operator_context = 1;
+	api.common.OperatorContext target_operator_context = 2;
+}
+
+message GetOperatorRegistrationFieldConfigResponse {
+	map<string, RegistrationFieldPolicy> config = 1;
 }
 
 message CloseAccountRequest {
