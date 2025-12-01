@@ -7003,7 +7003,7 @@ components:
                     format: int32
                 rewardAmount:
                     type: string
-                createdAt:
+                registrationTime:
                     type: string
                     format: date-time
         api.affiliate.service.v1.ListUsersResponse:

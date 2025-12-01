@@ -121,7 +121,7 @@ message ListUserReferralRewardsResponse {
         string referral_code = 3;
         int32 tier = 4;
         string reward_amount = 5;
-        google.protobuf.Timestamp created_at = 6;
+        google.protobuf.Timestamp registration_time = 6;
     }
     repeated ReferralReward referral_rewards = 1;
     int32 total = 2;

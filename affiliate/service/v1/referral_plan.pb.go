@@ -2205,15 +2205,15 @@ func (x *GetUserReferralStatsResponse_ReferralProgress) GetNgrAmount() map[int32
 }
 
 type ListUserReferralRewardsResponse_ReferralReward struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserName      string                 `protobuf:"bytes,1,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
-	UserId        int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	ReferralCode  string                 `protobuf:"bytes,3,opt,name=referral_code,json=referralCode,proto3" json:"referral_code,omitempty"`
-	Tier          int32                  `protobuf:"varint,4,opt,name=tier,proto3" json:"tier,omitempty"`
-	RewardAmount  string                 `protobuf:"bytes,5,opt,name=reward_amount,json=rewardAmount,proto3" json:"reward_amount,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	UserName         string                 `protobuf:"bytes,1,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
+	UserId           int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	ReferralCode     string                 `protobuf:"bytes,3,opt,name=referral_code,json=referralCode,proto3" json:"referral_code,omitempty"`
+	Tier             int32                  `protobuf:"varint,4,opt,name=tier,proto3" json:"tier,omitempty"`
+	RewardAmount     string                 `protobuf:"bytes,5,opt,name=reward_amount,json=rewardAmount,proto3" json:"reward_amount,omitempty"`
+	RegistrationTime *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=registration_time,json=registrationTime,proto3" json:"registration_time,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *ListUserReferralRewardsResponse_ReferralReward) Reset() {
@@ -2281,9 +2281,9 @@ func (x *ListUserReferralRewardsResponse_ReferralReward) GetRewardAmount() strin
 	return ""
 }
 
-func (x *ListUserReferralRewardsResponse_ReferralReward) GetCreatedAt() *timestamppb.Timestamp {
+func (x *ListUserReferralRewardsResponse_ReferralReward) GetRegistrationTime() *timestamppb.Timestamp {
 	if x != nil {
-		return x.CreatedAt
+		return x.RegistrationTime
 	}
 	return nil
 }
@@ -2398,20 +2398,19 @@ const file_affiliate_service_v1_referral_plan_proto_rawDesc = "" +
 	"\x16_registration_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xbf\x03\n" +
+	"_page_size\"\xcd\x03\n" +
 	"\x1fListUserReferralRewardsResponse\x12s\n" +
 	"\x10referral_rewards\x18\x01 \x03(\v2H.api.affiliate.service.v1.ListUserReferralRewardsResponse.ReferralRewardR\x0freferralRewards\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xdf\x01\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xed\x01\n" +
 	"\x0eReferralReward\x12\x1b\n" +
 	"\tuser_name\x18\x01 \x01(\tR\buserName\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12#\n" +
 	"\rreferral_code\x18\x03 \x01(\tR\freferralCode\x12\x12\n" +
 	"\x04tier\x18\x04 \x01(\x05R\x04tier\x12#\n" +
-	"\rreward_amount\x18\x05 \x01(\tR\frewardAmount\x129\n" +
-	"\n" +
-	"created_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\";\n" +
+	"\rreward_amount\x18\x05 \x01(\tR\frewardAmount\x12G\n" +
+	"\x11registration_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x10registrationTime\";\n" +
 	"\x1dGetUserReferralRewardsRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\"_\n" +
 	"\x1eGetUserReferralRewardsResponse\x12\x16\n" +
@@ -2620,7 +2619,7 @@ var file_affiliate_service_v1_referral_plan_proto_depIdxs = []int32{
 	37, // 34: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.wagering_amount:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.WageringAmountEntry
 	38, // 35: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.ggr_amount:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.GgrAmountEntry
 	39, // 36: api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.ngr_amount:type_name -> api.affiliate.service.v1.GetUserReferralStatsResponse.ReferralProgress.NgrAmountEntry
-	46, // 37: api.affiliate.service.v1.ListUserReferralRewardsResponse.ReferralReward.created_at:type_name -> google.protobuf.Timestamp
+	46, // 37: api.affiliate.service.v1.ListUserReferralRewardsResponse.ReferralReward.registration_time:type_name -> google.protobuf.Timestamp
 	21, // 38: api.affiliate.service.v1.ConversionReward.TierRewardsEntry.value:type_name -> api.affiliate.service.v1.ConversionTierRewards
 	25, // 39: api.affiliate.service.v1.DepositCashback.TierRewardConfigsEntry.value:type_name -> api.affiliate.service.v1.DepositCashbackTierRewardConfig
 	28, // 40: api.affiliate.service.v1.WageringCommission.TierRewardsEntry.value:type_name -> api.affiliate.service.v1.WageringCommissionTierRewards
