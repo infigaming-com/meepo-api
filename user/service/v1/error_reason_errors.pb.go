@@ -1344,3 +1344,63 @@ func IsRegisterRequestDissatisfied(err error) bool {
 func ErrorRegisterRequestDissatisfied(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_REGISTER_REQUEST_DISSATISFIED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsRegistrationFieldRequired(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_REGISTRATION_FIELD_REQUIRED.String() && e.Code == 500
+}
+
+func ErrorRegistrationFieldRequired(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_REGISTRATION_FIELD_REQUIRED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidRegistrationFieldConfig(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_REGISTRATION_FIELD_CONFIG.String() && e.Code == 500
+}
+
+func ErrorInvalidRegistrationFieldConfig(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_REGISTRATION_FIELD_CONFIG.String(), fmt.Sprintf(format, args...))
+}
+
+func IsEmailOrPhoneRequired(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_EMAIL_OR_PHONE_REQUIRED.String() && e.Code == 500
+}
+
+func ErrorEmailOrPhoneRequired(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_EMAIL_OR_PHONE_REQUIRED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsContactVerificationRequired(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CONTACT_VERIFICATION_REQUIRED.String() && e.Code == 500
+}
+
+func ErrorContactVerificationRequired(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CONTACT_VERIFICATION_REQUIRED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDefaultCurrencyNotSupported(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DEFAULT_CURRENCY_NOT_SUPPORTED.String() && e.Code == 500
+}
+
+func ErrorDefaultCurrencyNotSupported(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DEFAULT_CURRENCY_NOT_SUPPORTED.String(), fmt.Sprintf(format, args...))
+}

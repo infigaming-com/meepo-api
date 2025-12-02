@@ -161,7 +161,21 @@ service BackofficeOperator {
 			post: "/v1/backoffice/operator/register-limit-config/get"
 			body: "*"
 		};
-	}	
+	}
+
+	rpc SetOperatorRegistrationFieldConfig(SetOperatorRegistrationFieldConfigRequest) returns (user.service.v1.SetOperatorRegistrationFieldConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/registration-field-config/set"
+			body: "*"
+		};
+	}
+
+	rpc GetOperatorRegistrationFieldConfig(GetOperatorRegistrationFieldConfigRequest) returns (user.service.v1.GetOperatorRegistrationFieldConfigResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/operator/registration-field-config/get"
+			body: "*"
+		};
+	}
 }
 
 message ListAllOperatorsRequest {
@@ -363,6 +377,15 @@ message SetOperatorRegisterLimitConfigRequest {
 }
 
 message GetOperatorRegisterLimitConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+}
+
+message SetOperatorRegistrationFieldConfigRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	map<string, user.service.v1.RegistrationFieldPolicy> config = 2;
+}
+
+message GetOperatorRegistrationFieldConfigRequest {
 	api.common.OperatorContext target_operator_context = 1;
 }
 

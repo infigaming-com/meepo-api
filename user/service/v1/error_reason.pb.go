@@ -136,6 +136,11 @@ const (
 	ErrorReason_REGISTRATION_PER_IP_LIMIT_EXCEEDED             ErrorReason = 10110
 	ErrorReason_USER_IN_SELF_EXCLUSION_PERIOD                  ErrorReason = 10111
 	ErrorReason_REGISTER_REQUEST_DISSATISFIED                  ErrorReason = 10112
+	ErrorReason_REGISTRATION_FIELD_REQUIRED                    ErrorReason = 10113
+	ErrorReason_INVALID_REGISTRATION_FIELD_CONFIG              ErrorReason = 10114
+	ErrorReason_EMAIL_OR_PHONE_REQUIRED                        ErrorReason = 10115
+	ErrorReason_CONTACT_VERIFICATION_REQUIRED                  ErrorReason = 10116
+	ErrorReason_DEFAULT_CURRENCY_NOT_SUPPORTED                 ErrorReason = 10117
 )
 
 // Enum value maps for ErrorReason.
@@ -252,6 +257,11 @@ var (
 		10110: "REGISTRATION_PER_IP_LIMIT_EXCEEDED",
 		10111: "USER_IN_SELF_EXCLUSION_PERIOD",
 		10112: "REGISTER_REQUEST_DISSATISFIED",
+		10113: "REGISTRATION_FIELD_REQUIRED",
+		10114: "INVALID_REGISTRATION_FIELD_CONFIG",
+		10115: "EMAIL_OR_PHONE_REQUIRED",
+		10116: "CONTACT_VERIFICATION_REQUIRED",
+		10117: "DEFAULT_CURRENCY_NOT_SUPPORTED",
 	}
 	ErrorReason_value = map[string]int32{
 		"UNSPECIFIED":                                    0,
@@ -365,6 +375,11 @@ var (
 		"REGISTRATION_PER_IP_LIMIT_EXCEEDED":             10110,
 		"USER_IN_SELF_EXCLUSION_PERIOD":                  10111,
 		"REGISTER_REQUEST_DISSATISFIED":                  10112,
+		"REGISTRATION_FIELD_REQUIRED":                    10113,
+		"INVALID_REGISTRATION_FIELD_CONFIG":              10114,
+		"EMAIL_OR_PHONE_REQUIRED":                        10115,
+		"CONTACT_VERIFICATION_REQUIRED":                  10116,
+		"DEFAULT_CURRENCY_NOT_SUPPORTED":                 10117,
 	}
 )
 
@@ -399,7 +414,7 @@ var File_user_service_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xc1\x1d\n" +
+	"\"user/service/v1/error_reason.proto\x12\x13api.user.service.v1\x1a\x13errors/errors.proto*\xf2\x1e\n" +
 	"\vErrorReason\x12\x0f\n" +
 	"\vUNSPECIFIED\x10\x00\x12#\n" +
 	"\x1eUSER_INFO_NOT_FOUND_IN_CONTEXT\x10\x90N\x12&\n" +
@@ -511,7 +526,12 @@ const file_user_service_v1_error_reason_proto_rawDesc = "" +
 	"\x16UPDATE_OPERATOR_FAILED\x10\xfdN\x12'\n" +
 	"\"REGISTRATION_PER_IP_LIMIT_EXCEEDED\x10\xfeN\x12\"\n" +
 	"\x1dUSER_IN_SELF_EXCLUSION_PERIOD\x10\xffN\x12\"\n" +
-	"\x1dREGISTER_REQUEST_DISSATISFIED\x10\x80O\x1a\x04\xa0E\xf4\x03BO\n" +
+	"\x1dREGISTER_REQUEST_DISSATISFIED\x10\x80O\x12 \n" +
+	"\x1bREGISTRATION_FIELD_REQUIRED\x10\x81O\x12&\n" +
+	"!INVALID_REGISTRATION_FIELD_CONFIG\x10\x82O\x12\x1c\n" +
+	"\x17EMAIL_OR_PHONE_REQUIRED\x10\x83O\x12\"\n" +
+	"\x1dCONTACT_VERIFICATION_REQUIRED\x10\x84O\x12#\n" +
+	"\x1eDEFAULT_CURRENCY_NOT_SUPPORTED\x10\x85O\x1a\x04\xa0E\xf4\x03BO\n" +
 	"\x13api.user.service.v1P\x01Z6github.com/infigaming-com/meepo-api/user/service/v1;v1b\x06proto3"
 
 var (
