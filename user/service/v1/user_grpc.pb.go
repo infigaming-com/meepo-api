@@ -20,88 +20,90 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	User_Register_FullMethodName                        = "/api.user.service.v1.User/Register"
-	User_Login_FullMethodName                           = "/api.user.service.v1.User/Login"
-	User_LoginWithInfo_FullMethodName                   = "/api.user.service.v1.User/LoginWithInfo"
-	User_RegisterOrLoginWithOAuth_FullMethodName        = "/api.user.service.v1.User/RegisterOrLoginWithOAuth"
-	User_RegisterOrLoginWithTelegram_FullMethodName     = "/api.user.service.v1.User/RegisterOrLoginWithTelegram"
-	User_RefreshToken_FullMethodName                    = "/api.user.service.v1.User/RefreshToken"
-	User_GetUser_FullMethodName                         = "/api.user.service.v1.User/GetUser"
-	User_GetUsersByIds_FullMethodName                   = "/api.user.service.v1.User/GetUsersByIds"
-	User_GetUserIdsByOperatorIds_FullMethodName         = "/api.user.service.v1.User/GetUserIdsByOperatorIds"
-	User_Logout_FullMethodName                          = "/api.user.service.v1.User/Logout"
-	User_IsTokenRevoked_FullMethodName                  = "/api.user.service.v1.User/IsTokenRevoked"
-	User_SetOperatorTagsConfig_FullMethodName           = "/api.user.service.v1.User/SetOperatorTagsConfig"
-	User_SetOperatorTags_FullMethodName                 = "/api.user.service.v1.User/SetOperatorTags"
-	User_GetOperatorTagsConfig_FullMethodName           = "/api.user.service.v1.User/GetOperatorTagsConfig"
-	User_GetOperatorTags_FullMethodName                 = "/api.user.service.v1.User/GetOperatorTags"
-	User_GetUserTags_FullMethodName                     = "/api.user.service.v1.User/GetUserTags"
-	User_GetUserTagsById_FullMethodName                 = "/api.user.service.v1.User/GetUserTagsById"
-	User_SetUserTagsById_FullMethodName                 = "/api.user.service.v1.User/SetUserTagsById"
-	User_CheckPermission_FullMethodName                 = "/api.user.service.v1.User/CheckPermission"
-	User_AddOperator_FullMethodName                     = "/api.user.service.v1.User/AddOperator"
-	User_SendEmailVerificationCode_FullMethodName       = "/api.user.service.v1.User/SendEmailVerificationCode"
-	User_SendPasswordResetCode_FullMethodName           = "/api.user.service.v1.User/SendPasswordResetCode"
-	User_ResetPasswordWithCode_FullMethodName           = "/api.user.service.v1.User/ResetPasswordWithCode"
-	User_UpdateUser_FullMethodName                      = "/api.user.service.v1.User/UpdateUser"
-	User_UpdateUserIdentity_FullMethodName              = "/api.user.service.v1.User/UpdateUserIdentity"
-	User_ListUsers_FullMethodName                       = "/api.user.service.v1.User/ListUsers"
-	User_CreateUser_FullMethodName                      = "/api.user.service.v1.User/CreateUser"
-	User_VerifyEmail_FullMethodName                     = "/api.user.service.v1.User/VerifyEmail"
-	User_AddComment_FullMethodName                      = "/api.user.service.v1.User/AddComment"
-	User_GetCommentsByUserId_FullMethodName             = "/api.user.service.v1.User/GetCommentsByUserId"
-	User_GetUserProfile_FullMethodName                  = "/api.user.service.v1.User/GetUserProfile"
-	User_CreateRole_FullMethodName                      = "/api.user.service.v1.User/CreateRole"
-	User_ListRoles_FullMethodName                       = "/api.user.service.v1.User/ListRoles"
-	User_CreateOperator_FullMethodName                  = "/api.user.service.v1.User/CreateOperator"
-	User_UpdateRole_FullMethodName                      = "/api.user.service.v1.User/UpdateRole"
-	User_GetRole_FullMethodName                         = "/api.user.service.v1.User/GetRole"
-	User_DeleteRole_FullMethodName                      = "/api.user.service.v1.User/DeleteRole"
-	User_GetOverviewDashboardFromUser_FullMethodName    = "/api.user.service.v1.User/GetOverviewDashboardFromUser"
-	User_GetOperatorIdByOrigin_FullMethodName           = "/api.user.service.v1.User/GetOperatorIdByOrigin"
-	User_GetOperatorIdsByOrigin_FullMethodName          = "/api.user.service.v1.User/GetOperatorIdsByOrigin"
-	User_GetOperatorInfoByOrigin_FullMethodName         = "/api.user.service.v1.User/GetOperatorInfoByOrigin"
-	User_GetOperator_FullMethodName                     = "/api.user.service.v1.User/GetOperator"
-	User_GetOperatorsByIds_FullMethodName               = "/api.user.service.v1.User/GetOperatorsByIds"
-	User_ListAllOperators_FullMethodName                = "/api.user.service.v1.User/ListAllOperators"
-	User_GetParentOperatorIds_FullMethodName            = "/api.user.service.v1.User/GetParentOperatorIds"
-	User_GetChildOperatorIds_FullMethodName             = "/api.user.service.v1.User/GetChildOperatorIds"
-	User_CheckEmailExists_FullMethodName                = "/api.user.service.v1.User/CheckEmailExists"
-	User_CheckSubdomainExists_FullMethodName            = "/api.user.service.v1.User/CheckSubdomainExists"
-	User_CheckOperatorKeyExists_FullMethodName          = "/api.user.service.v1.User/CheckOperatorKeyExists"
-	User_CreateBusiness_FullMethodName                  = "/api.user.service.v1.User/CreateBusiness"
-	User_GetOperatorDetails_FullMethodName              = "/api.user.service.v1.User/GetOperatorDetails"
-	User_ListOperatorsByParentOperatorId_FullMethodName = "/api.user.service.v1.User/ListOperatorsByParentOperatorId"
-	User_ListRetailerOperators_FullMethodName           = "/api.user.service.v1.User/ListRetailerOperators"
-	User_ListCompanyOperators_FullMethodName            = "/api.user.service.v1.User/ListCompanyOperators"
-	User_ListBottomOperators_FullMethodName             = "/api.user.service.v1.User/ListBottomOperators"
-	User_UpdateOperatorStatus_FullMethodName            = "/api.user.service.v1.User/UpdateOperatorStatus"
-	User_ListAllUsers_FullMethodName                    = "/api.user.service.v1.User/ListAllUsers"
-	User_ListOperatorsByAdminEmail_FullMethodName       = "/api.user.service.v1.User/ListOperatorsByAdminEmail"
-	User_ListOperatorDetails_FullMethodName             = "/api.user.service.v1.User/ListOperatorDetails"
-	User_GetOperatorDetailsByUserId_FullMethodName      = "/api.user.service.v1.User/GetOperatorDetailsByUserId"
-	User_GetOperatorAccountSettings_FullMethodName      = "/api.user.service.v1.User/GetOperatorAccountSettings"
-	User_UpdateOperatorAccountSettings_FullMethodName   = "/api.user.service.v1.User/UpdateOperatorAccountSettings"
-	User_GetUserAccountSettingsStatus_FullMethodName    = "/api.user.service.v1.User/GetUserAccountSettingsStatus"
-	User_AddResponsibleGamblingConfig_FullMethodName    = "/api.user.service.v1.User/AddResponsibleGamblingConfig"
-	User_DeleteResponsibleGamblingConfig_FullMethodName = "/api.user.service.v1.User/DeleteResponsibleGamblingConfig"
-	User_GetResponsibleGamblingConfig_FullMethodName    = "/api.user.service.v1.User/GetResponsibleGamblingConfig"
-	User_UserIdentityAudit_FullMethodName               = "/api.user.service.v1.User/UserIdentityAudit"
-	User_UserIdentityList_FullMethodName                = "/api.user.service.v1.User/UserIdentityList"
-	User_AddRegisterLoginBlacklist_FullMethodName       = "/api.user.service.v1.User/AddRegisterLoginBlacklist"
-	User_DeleteRegisterLoginBlacklist_FullMethodName    = "/api.user.service.v1.User/DeleteRegisterLoginBlacklist"
-	User_ListRegisterLoginBlacklist_FullMethodName      = "/api.user.service.v1.User/ListRegisterLoginBlacklist"
-	User_SetOperatorRegisterLimitConfig_FullMethodName  = "/api.user.service.v1.User/SetOperatorRegisterLimitConfig"
-	User_GetOperatorRegisterLimitConfig_FullMethodName  = "/api.user.service.v1.User/GetOperatorRegisterLimitConfig"
-	User_CloseAccount_FullMethodName                    = "/api.user.service.v1.User/CloseAccount"
-	User_GetOperatorVipSettings_FullMethodName          = "/api.user.service.v1.User/GetOperatorVipSettings"
-	User_GetUserVipLevel_FullMethodName                 = "/api.user.service.v1.User/GetUserVipLevel"
-	User_UpdateVipRewardSlider_FullMethodName           = "/api.user.service.v1.User/UpdateVipRewardSlider"
-	User_GetClaimableVipRewards_FullMethodName          = "/api.user.service.v1.User/GetClaimableVipRewards"
-	User_ClaimVipReward_FullMethodName                  = "/api.user.service.v1.User/ClaimVipReward"
-	User_ConfirmClaimVipReward_FullMethodName           = "/api.user.service.v1.User/ConfirmClaimVipReward"
-	User_RequestDailyLossback_FullMethodName            = "/api.user.service.v1.User/RequestDailyLossback"
-	User_GetDailyLossbackStatus_FullMethodName          = "/api.user.service.v1.User/GetDailyLossbackStatus"
+	User_Register_FullMethodName                           = "/api.user.service.v1.User/Register"
+	User_Login_FullMethodName                              = "/api.user.service.v1.User/Login"
+	User_LoginWithInfo_FullMethodName                      = "/api.user.service.v1.User/LoginWithInfo"
+	User_RegisterOrLoginWithOAuth_FullMethodName           = "/api.user.service.v1.User/RegisterOrLoginWithOAuth"
+	User_RegisterOrLoginWithTelegram_FullMethodName        = "/api.user.service.v1.User/RegisterOrLoginWithTelegram"
+	User_RefreshToken_FullMethodName                       = "/api.user.service.v1.User/RefreshToken"
+	User_GetUser_FullMethodName                            = "/api.user.service.v1.User/GetUser"
+	User_GetUsersByIds_FullMethodName                      = "/api.user.service.v1.User/GetUsersByIds"
+	User_GetUserIdsByOperatorIds_FullMethodName            = "/api.user.service.v1.User/GetUserIdsByOperatorIds"
+	User_Logout_FullMethodName                             = "/api.user.service.v1.User/Logout"
+	User_IsTokenRevoked_FullMethodName                     = "/api.user.service.v1.User/IsTokenRevoked"
+	User_SetOperatorTagsConfig_FullMethodName              = "/api.user.service.v1.User/SetOperatorTagsConfig"
+	User_SetOperatorTags_FullMethodName                    = "/api.user.service.v1.User/SetOperatorTags"
+	User_GetOperatorTagsConfig_FullMethodName              = "/api.user.service.v1.User/GetOperatorTagsConfig"
+	User_GetOperatorTags_FullMethodName                    = "/api.user.service.v1.User/GetOperatorTags"
+	User_GetUserTags_FullMethodName                        = "/api.user.service.v1.User/GetUserTags"
+	User_GetUserTagsById_FullMethodName                    = "/api.user.service.v1.User/GetUserTagsById"
+	User_SetUserTagsById_FullMethodName                    = "/api.user.service.v1.User/SetUserTagsById"
+	User_CheckPermission_FullMethodName                    = "/api.user.service.v1.User/CheckPermission"
+	User_AddOperator_FullMethodName                        = "/api.user.service.v1.User/AddOperator"
+	User_SendEmailVerificationCode_FullMethodName          = "/api.user.service.v1.User/SendEmailVerificationCode"
+	User_SendPasswordResetCode_FullMethodName              = "/api.user.service.v1.User/SendPasswordResetCode"
+	User_ResetPasswordWithCode_FullMethodName              = "/api.user.service.v1.User/ResetPasswordWithCode"
+	User_UpdateUser_FullMethodName                         = "/api.user.service.v1.User/UpdateUser"
+	User_UpdateUserIdentity_FullMethodName                 = "/api.user.service.v1.User/UpdateUserIdentity"
+	User_ListUsers_FullMethodName                          = "/api.user.service.v1.User/ListUsers"
+	User_CreateUser_FullMethodName                         = "/api.user.service.v1.User/CreateUser"
+	User_VerifyEmail_FullMethodName                        = "/api.user.service.v1.User/VerifyEmail"
+	User_AddComment_FullMethodName                         = "/api.user.service.v1.User/AddComment"
+	User_GetCommentsByUserId_FullMethodName                = "/api.user.service.v1.User/GetCommentsByUserId"
+	User_GetUserProfile_FullMethodName                     = "/api.user.service.v1.User/GetUserProfile"
+	User_CreateRole_FullMethodName                         = "/api.user.service.v1.User/CreateRole"
+	User_ListRoles_FullMethodName                          = "/api.user.service.v1.User/ListRoles"
+	User_CreateOperator_FullMethodName                     = "/api.user.service.v1.User/CreateOperator"
+	User_UpdateRole_FullMethodName                         = "/api.user.service.v1.User/UpdateRole"
+	User_GetRole_FullMethodName                            = "/api.user.service.v1.User/GetRole"
+	User_DeleteRole_FullMethodName                         = "/api.user.service.v1.User/DeleteRole"
+	User_GetOverviewDashboardFromUser_FullMethodName       = "/api.user.service.v1.User/GetOverviewDashboardFromUser"
+	User_GetOperatorIdByOrigin_FullMethodName              = "/api.user.service.v1.User/GetOperatorIdByOrigin"
+	User_GetOperatorIdsByOrigin_FullMethodName             = "/api.user.service.v1.User/GetOperatorIdsByOrigin"
+	User_GetOperatorInfoByOrigin_FullMethodName            = "/api.user.service.v1.User/GetOperatorInfoByOrigin"
+	User_GetOperator_FullMethodName                        = "/api.user.service.v1.User/GetOperator"
+	User_GetOperatorsByIds_FullMethodName                  = "/api.user.service.v1.User/GetOperatorsByIds"
+	User_ListAllOperators_FullMethodName                   = "/api.user.service.v1.User/ListAllOperators"
+	User_GetParentOperatorIds_FullMethodName               = "/api.user.service.v1.User/GetParentOperatorIds"
+	User_GetChildOperatorIds_FullMethodName                = "/api.user.service.v1.User/GetChildOperatorIds"
+	User_CheckEmailExists_FullMethodName                   = "/api.user.service.v1.User/CheckEmailExists"
+	User_CheckSubdomainExists_FullMethodName               = "/api.user.service.v1.User/CheckSubdomainExists"
+	User_CheckOperatorKeyExists_FullMethodName             = "/api.user.service.v1.User/CheckOperatorKeyExists"
+	User_CreateBusiness_FullMethodName                     = "/api.user.service.v1.User/CreateBusiness"
+	User_GetOperatorDetails_FullMethodName                 = "/api.user.service.v1.User/GetOperatorDetails"
+	User_ListOperatorsByParentOperatorId_FullMethodName    = "/api.user.service.v1.User/ListOperatorsByParentOperatorId"
+	User_ListRetailerOperators_FullMethodName              = "/api.user.service.v1.User/ListRetailerOperators"
+	User_ListCompanyOperators_FullMethodName               = "/api.user.service.v1.User/ListCompanyOperators"
+	User_ListBottomOperators_FullMethodName                = "/api.user.service.v1.User/ListBottomOperators"
+	User_UpdateOperatorStatus_FullMethodName               = "/api.user.service.v1.User/UpdateOperatorStatus"
+	User_ListAllUsers_FullMethodName                       = "/api.user.service.v1.User/ListAllUsers"
+	User_ListOperatorsByAdminEmail_FullMethodName          = "/api.user.service.v1.User/ListOperatorsByAdminEmail"
+	User_ListOperatorDetails_FullMethodName                = "/api.user.service.v1.User/ListOperatorDetails"
+	User_GetOperatorDetailsByUserId_FullMethodName         = "/api.user.service.v1.User/GetOperatorDetailsByUserId"
+	User_GetOperatorAccountSettings_FullMethodName         = "/api.user.service.v1.User/GetOperatorAccountSettings"
+	User_UpdateOperatorAccountSettings_FullMethodName      = "/api.user.service.v1.User/UpdateOperatorAccountSettings"
+	User_GetUserAccountSettingsStatus_FullMethodName       = "/api.user.service.v1.User/GetUserAccountSettingsStatus"
+	User_AddResponsibleGamblingConfig_FullMethodName       = "/api.user.service.v1.User/AddResponsibleGamblingConfig"
+	User_DeleteResponsibleGamblingConfig_FullMethodName    = "/api.user.service.v1.User/DeleteResponsibleGamblingConfig"
+	User_GetResponsibleGamblingConfig_FullMethodName       = "/api.user.service.v1.User/GetResponsibleGamblingConfig"
+	User_UserIdentityAudit_FullMethodName                  = "/api.user.service.v1.User/UserIdentityAudit"
+	User_UserIdentityList_FullMethodName                   = "/api.user.service.v1.User/UserIdentityList"
+	User_AddRegisterLoginBlacklist_FullMethodName          = "/api.user.service.v1.User/AddRegisterLoginBlacklist"
+	User_DeleteRegisterLoginBlacklist_FullMethodName       = "/api.user.service.v1.User/DeleteRegisterLoginBlacklist"
+	User_ListRegisterLoginBlacklist_FullMethodName         = "/api.user.service.v1.User/ListRegisterLoginBlacklist"
+	User_SetOperatorRegisterLimitConfig_FullMethodName     = "/api.user.service.v1.User/SetOperatorRegisterLimitConfig"
+	User_GetOperatorRegisterLimitConfig_FullMethodName     = "/api.user.service.v1.User/GetOperatorRegisterLimitConfig"
+	User_SetOperatorRegistrationFieldConfig_FullMethodName = "/api.user.service.v1.User/SetOperatorRegistrationFieldConfig"
+	User_GetOperatorRegistrationFieldConfig_FullMethodName = "/api.user.service.v1.User/GetOperatorRegistrationFieldConfig"
+	User_CloseAccount_FullMethodName                       = "/api.user.service.v1.User/CloseAccount"
+	User_GetOperatorVipSettings_FullMethodName             = "/api.user.service.v1.User/GetOperatorVipSettings"
+	User_GetUserVipLevel_FullMethodName                    = "/api.user.service.v1.User/GetUserVipLevel"
+	User_UpdateVipRewardSlider_FullMethodName              = "/api.user.service.v1.User/UpdateVipRewardSlider"
+	User_GetClaimableVipRewards_FullMethodName             = "/api.user.service.v1.User/GetClaimableVipRewards"
+	User_ClaimVipReward_FullMethodName                     = "/api.user.service.v1.User/ClaimVipReward"
+	User_ConfirmClaimVipReward_FullMethodName              = "/api.user.service.v1.User/ConfirmClaimVipReward"
+	User_RequestDailyLossback_FullMethodName               = "/api.user.service.v1.User/RequestDailyLossback"
+	User_GetDailyLossbackStatus_FullMethodName             = "/api.user.service.v1.User/GetDailyLossbackStatus"
 )
 
 // UserClient is the client API for User service.
@@ -233,6 +235,8 @@ type UserClient interface {
 	ListRegisterLoginBlacklist(ctx context.Context, in *ListRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*ListRegisterLoginBlacklistResponse, error)
 	SetOperatorRegisterLimitConfig(ctx context.Context, in *SetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*SetOperatorRegisterLimitConfigResponse, error)
 	GetOperatorRegisterLimitConfig(ctx context.Context, in *GetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*GetOperatorRegisterLimitConfigResponse, error)
+	SetOperatorRegistrationFieldConfig(ctx context.Context, in *SetOperatorRegistrationFieldConfigRequest, opts ...grpc.CallOption) (*SetOperatorRegistrationFieldConfigResponse, error)
+	GetOperatorRegistrationFieldConfig(ctx context.Context, in *GetOperatorRegistrationFieldConfigRequest, opts ...grpc.CallOption) (*GetOperatorRegistrationFieldConfigResponse, error)
 	CloseAccount(ctx context.Context, in *CloseAccountRequest, opts ...grpc.CallOption) (*CloseAccountResponse, error)
 	GetOperatorVipSettings(ctx context.Context, in *GetOperatorVipSettingsRequest, opts ...grpc.CallOption) (*v1.GetOperatorVipSettingsResponse, error)
 	GetUserVipLevel(ctx context.Context, in *GetUserVipLevelRequest, opts ...grpc.CallOption) (*v1.GetUserVipLevelResponse, error)
@@ -982,6 +986,26 @@ func (c *userClient) GetOperatorRegisterLimitConfig(ctx context.Context, in *Get
 	return out, nil
 }
 
+func (c *userClient) SetOperatorRegistrationFieldConfig(ctx context.Context, in *SetOperatorRegistrationFieldConfigRequest, opts ...grpc.CallOption) (*SetOperatorRegistrationFieldConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetOperatorRegistrationFieldConfigResponse)
+	err := c.cc.Invoke(ctx, User_SetOperatorRegistrationFieldConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetOperatorRegistrationFieldConfig(ctx context.Context, in *GetOperatorRegistrationFieldConfigRequest, opts ...grpc.CallOption) (*GetOperatorRegistrationFieldConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOperatorRegistrationFieldConfigResponse)
+	err := c.cc.Invoke(ctx, User_GetOperatorRegistrationFieldConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userClient) CloseAccount(ctx context.Context, in *CloseAccountRequest, opts ...grpc.CallOption) (*CloseAccountResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CloseAccountResponse)
@@ -1201,6 +1225,8 @@ type UserServer interface {
 	ListRegisterLoginBlacklist(context.Context, *ListRegisterLoginBlacklistRequest) (*ListRegisterLoginBlacklistResponse, error)
 	SetOperatorRegisterLimitConfig(context.Context, *SetOperatorRegisterLimitConfigRequest) (*SetOperatorRegisterLimitConfigResponse, error)
 	GetOperatorRegisterLimitConfig(context.Context, *GetOperatorRegisterLimitConfigRequest) (*GetOperatorRegisterLimitConfigResponse, error)
+	SetOperatorRegistrationFieldConfig(context.Context, *SetOperatorRegistrationFieldConfigRequest) (*SetOperatorRegistrationFieldConfigResponse, error)
+	GetOperatorRegistrationFieldConfig(context.Context, *GetOperatorRegistrationFieldConfigRequest) (*GetOperatorRegistrationFieldConfigResponse, error)
 	CloseAccount(context.Context, *CloseAccountRequest) (*CloseAccountResponse, error)
 	GetOperatorVipSettings(context.Context, *GetOperatorVipSettingsRequest) (*v1.GetOperatorVipSettingsResponse, error)
 	GetUserVipLevel(context.Context, *GetUserVipLevelRequest) (*v1.GetUserVipLevelResponse, error)
@@ -1438,6 +1464,12 @@ func (UnimplementedUserServer) SetOperatorRegisterLimitConfig(context.Context, *
 }
 func (UnimplementedUserServer) GetOperatorRegisterLimitConfig(context.Context, *GetOperatorRegisterLimitConfigRequest) (*GetOperatorRegisterLimitConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetOperatorRegisterLimitConfig not implemented")
+}
+func (UnimplementedUserServer) SetOperatorRegistrationFieldConfig(context.Context, *SetOperatorRegistrationFieldConfigRequest) (*SetOperatorRegistrationFieldConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetOperatorRegistrationFieldConfig not implemented")
+}
+func (UnimplementedUserServer) GetOperatorRegistrationFieldConfig(context.Context, *GetOperatorRegistrationFieldConfigRequest) (*GetOperatorRegistrationFieldConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOperatorRegistrationFieldConfig not implemented")
 }
 func (UnimplementedUserServer) CloseAccount(context.Context, *CloseAccountRequest) (*CloseAccountResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CloseAccount not implemented")
@@ -2801,6 +2833,42 @@ func _User_GetOperatorRegisterLimitConfig_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_SetOperatorRegistrationFieldConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetOperatorRegistrationFieldConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).SetOperatorRegistrationFieldConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_SetOperatorRegistrationFieldConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).SetOperatorRegistrationFieldConfig(ctx, req.(*SetOperatorRegistrationFieldConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetOperatorRegistrationFieldConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorRegistrationFieldConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetOperatorRegistrationFieldConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetOperatorRegistrationFieldConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetOperatorRegistrationFieldConfig(ctx, req.(*GetOperatorRegistrationFieldConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _User_CloseAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CloseAccountRequest)
 	if err := dec(in); err != nil {
@@ -3261,6 +3329,14 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOperatorRegisterLimitConfig",
 			Handler:    _User_GetOperatorRegisterLimitConfig_Handler,
+		},
+		{
+			MethodName: "SetOperatorRegistrationFieldConfig",
+			Handler:    _User_SetOperatorRegistrationFieldConfig_Handler,
+		},
+		{
+			MethodName: "GetOperatorRegistrationFieldConfig",
+			Handler:    _User_GetOperatorRegistrationFieldConfig_Handler,
 		},
 		{
 			MethodName: "CloseAccount",

@@ -40,6 +40,8 @@ const (
 	BackofficeOperator_ListRegisterLoginBlacklist_FullMethodName           = "/api.backoffice.service.v1.BackofficeOperator/ListRegisterLoginBlacklist"
 	BackofficeOperator_SetOperatorRegisterLimitConfig_FullMethodName       = "/api.backoffice.service.v1.BackofficeOperator/SetOperatorRegisterLimitConfig"
 	BackofficeOperator_GetOperatorRegisterLimitConfig_FullMethodName       = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorRegisterLimitConfig"
+	BackofficeOperator_SetOperatorRegistrationFieldConfig_FullMethodName   = "/api.backoffice.service.v1.BackofficeOperator/SetOperatorRegistrationFieldConfig"
+	BackofficeOperator_GetOperatorRegistrationFieldConfig_FullMethodName   = "/api.backoffice.service.v1.BackofficeOperator/GetOperatorRegistrationFieldConfig"
 )
 
 // BackofficeOperatorClient is the client API for BackofficeOperator service.
@@ -77,6 +79,8 @@ type BackofficeOperatorClient interface {
 	ListRegisterLoginBlacklist(ctx context.Context, in *ListRegisterLoginBlacklistRequest, opts ...grpc.CallOption) (*v1.ListRegisterLoginBlacklistResponse, error)
 	SetOperatorRegisterLimitConfig(ctx context.Context, in *SetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*v1.SetOperatorRegisterLimitConfigResponse, error)
 	GetOperatorRegisterLimitConfig(ctx context.Context, in *GetOperatorRegisterLimitConfigRequest, opts ...grpc.CallOption) (*v1.GetOperatorRegisterLimitConfigResponse, error)
+	SetOperatorRegistrationFieldConfig(ctx context.Context, in *SetOperatorRegistrationFieldConfigRequest, opts ...grpc.CallOption) (*v1.SetOperatorRegistrationFieldConfigResponse, error)
+	GetOperatorRegistrationFieldConfig(ctx context.Context, in *GetOperatorRegistrationFieldConfigRequest, opts ...grpc.CallOption) (*v1.GetOperatorRegistrationFieldConfigResponse, error)
 }
 
 type backofficeOperatorClient struct {
@@ -287,6 +291,26 @@ func (c *backofficeOperatorClient) GetOperatorRegisterLimitConfig(ctx context.Co
 	return out, nil
 }
 
+func (c *backofficeOperatorClient) SetOperatorRegistrationFieldConfig(ctx context.Context, in *SetOperatorRegistrationFieldConfigRequest, opts ...grpc.CallOption) (*v1.SetOperatorRegistrationFieldConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.SetOperatorRegistrationFieldConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_SetOperatorRegistrationFieldConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *backofficeOperatorClient) GetOperatorRegistrationFieldConfig(ctx context.Context, in *GetOperatorRegistrationFieldConfigRequest, opts ...grpc.CallOption) (*v1.GetOperatorRegistrationFieldConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GetOperatorRegistrationFieldConfigResponse)
+	err := c.cc.Invoke(ctx, BackofficeOperator_GetOperatorRegistrationFieldConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BackofficeOperatorServer is the server API for BackofficeOperator service.
 // All implementations must embed UnimplementedBackofficeOperatorServer
 // for forward compatibility.
@@ -322,6 +346,8 @@ type BackofficeOperatorServer interface {
 	ListRegisterLoginBlacklist(context.Context, *ListRegisterLoginBlacklistRequest) (*v1.ListRegisterLoginBlacklistResponse, error)
 	SetOperatorRegisterLimitConfig(context.Context, *SetOperatorRegisterLimitConfigRequest) (*v1.SetOperatorRegisterLimitConfigResponse, error)
 	GetOperatorRegisterLimitConfig(context.Context, *GetOperatorRegisterLimitConfigRequest) (*v1.GetOperatorRegisterLimitConfigResponse, error)
+	SetOperatorRegistrationFieldConfig(context.Context, *SetOperatorRegistrationFieldConfigRequest) (*v1.SetOperatorRegistrationFieldConfigResponse, error)
+	GetOperatorRegistrationFieldConfig(context.Context, *GetOperatorRegistrationFieldConfigRequest) (*v1.GetOperatorRegistrationFieldConfigResponse, error)
 	mustEmbedUnimplementedBackofficeOperatorServer()
 }
 
@@ -391,6 +417,12 @@ func (UnimplementedBackofficeOperatorServer) SetOperatorRegisterLimitConfig(cont
 }
 func (UnimplementedBackofficeOperatorServer) GetOperatorRegisterLimitConfig(context.Context, *GetOperatorRegisterLimitConfigRequest) (*v1.GetOperatorRegisterLimitConfigResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetOperatorRegisterLimitConfig not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) SetOperatorRegistrationFieldConfig(context.Context, *SetOperatorRegistrationFieldConfigRequest) (*v1.SetOperatorRegistrationFieldConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetOperatorRegistrationFieldConfig not implemented")
+}
+func (UnimplementedBackofficeOperatorServer) GetOperatorRegistrationFieldConfig(context.Context, *GetOperatorRegistrationFieldConfigRequest) (*v1.GetOperatorRegistrationFieldConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetOperatorRegistrationFieldConfig not implemented")
 }
 func (UnimplementedBackofficeOperatorServer) mustEmbedUnimplementedBackofficeOperatorServer() {}
 func (UnimplementedBackofficeOperatorServer) testEmbeddedByValue()                            {}
@@ -773,6 +805,42 @@ func _BackofficeOperator_GetOperatorRegisterLimitConfig_Handler(srv interface{},
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BackofficeOperator_SetOperatorRegistrationFieldConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetOperatorRegistrationFieldConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).SetOperatorRegistrationFieldConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_SetOperatorRegistrationFieldConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).SetOperatorRegistrationFieldConfig(ctx, req.(*SetOperatorRegistrationFieldConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BackofficeOperator_GetOperatorRegistrationFieldConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorRegistrationFieldConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackofficeOperatorServer).GetOperatorRegistrationFieldConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackofficeOperator_GetOperatorRegistrationFieldConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackofficeOperatorServer).GetOperatorRegistrationFieldConfig(ctx, req.(*GetOperatorRegistrationFieldConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BackofficeOperator_ServiceDesc is the grpc.ServiceDesc for BackofficeOperator service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -859,6 +927,14 @@ var BackofficeOperator_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOperatorRegisterLimitConfig",
 			Handler:    _BackofficeOperator_GetOperatorRegisterLimitConfig_Handler,
+		},
+		{
+			MethodName: "SetOperatorRegistrationFieldConfig",
+			Handler:    _BackofficeOperator_SetOperatorRegistrationFieldConfig_Handler,
+		},
+		{
+			MethodName: "GetOperatorRegistrationFieldConfig",
+			Handler:    _BackofficeOperator_GetOperatorRegistrationFieldConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
