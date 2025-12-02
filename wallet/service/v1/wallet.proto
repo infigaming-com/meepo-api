@@ -1654,6 +1654,15 @@ message ListTimeRangeDepositCreditsResponse {
 		string provider_bonus = 9;
 		string provider_bonus_usd = 10;
 		string provider_bonus_reporting_currency = 11;
+		string original_cash = 12;
+		string original_cash_usd = 13;
+		string original_cash_reporting_currency = 14;
+		string original_operator_bonus = 15;
+		string original_operator_bonus_usd = 16;
+		string original_operator_bonus_reporting_currency = 17;
+		string original_provider_bonus = 18;
+		string original_provider_bonus_usd = 19;
+		string original_provider_bonus_reporting_currency = 20;
 	}
 	repeated Credit credits = 1;
 }

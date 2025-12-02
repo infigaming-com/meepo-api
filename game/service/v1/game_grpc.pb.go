@@ -903,7 +903,7 @@ func (UnimplementedGameServer) ListUserTurnoverByGame(context.Context, *ListUser
 	return nil, status.Error(codes.Unimplemented, "method ListUserTurnoverByGame not implemented")
 }
 func (UnimplementedGameServer) GetDepositCreditsGGR(context.Context, *GetDepositCreditsGGRRequest) (*GetDepositCreditsGGRResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetDepositCreditsGGR not implemented")
+	return nil, status.Error(codes.Unimplemented, "method GetDepositCreditsGGR not implemented")
 }
 func (UnimplementedGameServer) mustEmbedUnimplementedGameServer() {}
 func (UnimplementedGameServer) testEmbeddedByValue()              {}

@@ -33,6 +33,7 @@ message AddUserEvent {
 	optional string registration_url = 10; // combined both campaign url and referral code
 	string country = 11;
 	int64 registered_at = 12;
+	string default_currency = 13; // passed from frontend, related to country
 }
 
 // AddOperatorEvent is emitted when a operator is created.

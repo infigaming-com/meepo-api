@@ -23727,6 +23727,24 @@ func (m *ListTimeRangeDepositCreditsResponse_Credit) validate(all bool) error {
 
 	// no validation rules for ProviderBonusReportingCurrency
 
+	// no validation rules for OriginalCash
+
+	// no validation rules for OriginalCashUsd
+
+	// no validation rules for OriginalCashReportingCurrency
+
+	// no validation rules for OriginalOperatorBonus
+
+	// no validation rules for OriginalOperatorBonusUsd
+
+	// no validation rules for OriginalOperatorBonusReportingCurrency
+
+	// no validation rules for OriginalProviderBonus
+
+	// no validation rules for OriginalProviderBonusUsd
+
+	// no validation rules for OriginalProviderBonusReportingCurrency
+
 	if len(errors) > 0 {
 		return ListTimeRangeDepositCreditsResponse_CreditMultiError(errors)
 	}
