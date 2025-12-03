@@ -12805,9 +12805,13 @@ type GetDepositCreditsGGRResponse_GameData struct {
 	GameType                  string                 `protobuf:"bytes,1,opt,name=game_type,json=gameType,proto3" json:"game_type,omitempty"` // game category
 	GgrUsd                    string                 `protobuf:"bytes,2,opt,name=ggr_usd,json=ggrUsd,proto3" json:"ggr_usd,omitempty"`
 	GgrReportingCurrency      string                 `protobuf:"bytes,3,opt,name=ggr_reporting_currency,json=ggrReportingCurrency,proto3" json:"ggr_reporting_currency,omitempty"`
-	TurnoverUsd               string                 `protobuf:"bytes,4,opt,name=turnover_usd,json=turnoverUsd,proto3" json:"turnover_usd,omitempty"`
-	TurnoverReportingCurrency string                 `protobuf:"bytes,5,opt,name=turnover_reporting_currency,json=turnoverReportingCurrency,proto3" json:"turnover_reporting_currency,omitempty"`
+	TurnoverUsd               string                 `protobuf:"bytes,4,opt,name=turnover_usd,json=turnoverUsd,proto3" json:"turnover_usd,omitempty"`                                             // total bet usd (same as total_bet_usd)
+	TurnoverReportingCurrency string                 `protobuf:"bytes,5,opt,name=turnover_reporting_currency,json=turnoverReportingCurrency,proto3" json:"turnover_reporting_currency,omitempty"` // total bet reporting currency (same as total_bet_reporting_currency)
 	Rtp                       string                 `protobuf:"bytes,6,opt,name=rtp,proto3" json:"rtp,omitempty"`
+	TotalBetUsd               string                 `protobuf:"bytes,7,opt,name=total_bet_usd,json=totalBetUsd,proto3" json:"total_bet_usd,omitempty"`                                              // bet + debit 的 USD 总和
+	TotalBetReportingCurrency string                 `protobuf:"bytes,8,opt,name=total_bet_reporting_currency,json=totalBetReportingCurrency,proto3" json:"total_bet_reporting_currency,omitempty"`  // bet + debit 的 reporting currency 总和
+	TotalWinUsd               string                 `protobuf:"bytes,9,opt,name=total_win_usd,json=totalWinUsd,proto3" json:"total_win_usd,omitempty"`                                              // win + credit 的 USD 总和
+	TotalWinReportingCurrency string                 `protobuf:"bytes,10,opt,name=total_win_reporting_currency,json=totalWinReportingCurrency,proto3" json:"total_win_reporting_currency,omitempty"` // win + credit 的 reporting currency 总和
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
 }
@@ -12880,6 +12884,34 @@ func (x *GetDepositCreditsGGRResponse_GameData) GetTurnoverReportingCurrency() s
 func (x *GetDepositCreditsGGRResponse_GameData) GetRtp() string {
 	if x != nil {
 		return x.Rtp
+	}
+	return ""
+}
+
+func (x *GetDepositCreditsGGRResponse_GameData) GetTotalBetUsd() string {
+	if x != nil {
+		return x.TotalBetUsd
+	}
+	return ""
+}
+
+func (x *GetDepositCreditsGGRResponse_GameData) GetTotalBetReportingCurrency() string {
+	if x != nil {
+		return x.TotalBetReportingCurrency
+	}
+	return ""
+}
+
+func (x *GetDepositCreditsGGRResponse_GameData) GetTotalWinUsd() string {
+	if x != nil {
+		return x.TotalWinUsd
+	}
+	return ""
+}
+
+func (x *GetDepositCreditsGGRResponse_GameData) GetTotalWinReportingCurrency() string {
+	if x != nil {
+		return x.TotalWinReportingCurrency
 	}
 	return ""
 }
@@ -14296,16 +14328,21 @@ const file_game_service_v1_game_proto_rawDesc = "" +
 	"\bend_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\x121\n" +
 	"\x12min_deposit_amount\x18\x04 \x01(\tH\x00R\x10minDepositAmount\x88\x01\x01\x12F\n" +
 	"\x10operator_context\x18\x05 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContextB\x15\n" +
-	"\x13_min_deposit_amount\"\xe5\x02\n" +
+	"\x13_min_deposit_amount\"\xaf\x04\n" +
 	"\x1cGetDepositCreditsGGRResponse\x12W\n" +
-	"\tgame_data\x18\x01 \x03(\v2:.api.game.service.v1.GetDepositCreditsGGRResponse.GameDataR\bgameData\x1a\xeb\x01\n" +
+	"\tgame_data\x18\x01 \x03(\v2:.api.game.service.v1.GetDepositCreditsGGRResponse.GameDataR\bgameData\x1a\xb5\x03\n" +
 	"\bGameData\x12\x1b\n" +
 	"\tgame_type\x18\x01 \x01(\tR\bgameType\x12\x17\n" +
 	"\aggr_usd\x18\x02 \x01(\tR\x06ggrUsd\x124\n" +
 	"\x16ggr_reporting_currency\x18\x03 \x01(\tR\x14ggrReportingCurrency\x12!\n" +
 	"\fturnover_usd\x18\x04 \x01(\tR\vturnoverUsd\x12>\n" +
 	"\x1bturnover_reporting_currency\x18\x05 \x01(\tR\x19turnoverReportingCurrency\x12\x10\n" +
-	"\x03rtp\x18\x06 \x01(\tR\x03rtp*_\n" +
+	"\x03rtp\x18\x06 \x01(\tR\x03rtp\x12\"\n" +
+	"\rtotal_bet_usd\x18\a \x01(\tR\vtotalBetUsd\x12?\n" +
+	"\x1ctotal_bet_reporting_currency\x18\b \x01(\tR\x19totalBetReportingCurrency\x12\"\n" +
+	"\rtotal_win_usd\x18\t \x01(\tR\vtotalWinUsd\x12?\n" +
+	"\x1ctotal_win_reporting_currency\x18\n" +
+	" \x01(\tR\x19totalWinReportingCurrency*_\n" +
 	"\x15TaxReportRecordStatus\x12!\n" +
 	"\x1dTaxReportRecordStatus_PENDING\x10\x00\x12#\n" +
 	"\x1fTaxReportRecordStatus_CONFIRMED\x10\x012\xcc2\n" +
