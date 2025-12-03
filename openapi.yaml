@@ -2677,6 +2677,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.user.service.v1.ListRegisterLoginBlacklistResponse'
+    /v1/backoffice/operator/registration-field-config/get:
+        post:
+            tags:
+                - BackofficeOperator
+            operationId: BackofficeOperator_GetOperatorRegistrationFieldConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.GetOperatorRegistrationFieldConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.GetOperatorRegistrationFieldConfigResponse'
+    /v1/backoffice/operator/registration-field-config/set:
+        post:
+            tags:
+                - BackofficeOperator
+            operationId: BackofficeOperator_SetOperatorRegistrationFieldConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetOperatorRegistrationFieldConfigRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.SetOperatorRegistrationFieldConfigResponse'
     /v1/backoffice/operator/status/update:
         post:
             tags:
@@ -6608,8 +6644,6 @@ components:
                     type: string
                 availableCommissionRewardAmount:
                     type: string
-                availableInviteeRewardAmount:
-                    type: string
                 totalReceivedReferralRewardAmount:
                     type: string
                 totalReceivedCommissionRewardAmount:
@@ -6960,10 +6994,13 @@ components:
                     type: string
                 userId:
                     type: string
-                startTime:
+                tier:
+                    type: integer
+                    format: int32
+                registrationStartTime:
                     type: string
                     format: date-time
-                endTime:
+                registrationEndTime:
                     type: string
                     format: date-time
                 page:
@@ -7002,7 +7039,7 @@ components:
                     format: int32
                 rewardAmount:
                     type: string
-                createdAt:
+                registrationTime:
                     type: string
                     format: date-time
         api.affiliate.service.v1.ListUsersResponse:
@@ -8823,6 +8860,11 @@ components:
                     description: ID of the Operator connect with this channel
             description: Used to retrieve a paginated list of payment channels with optional filters
         api.backoffice.service.v1.GetOperatorRegisterLimitConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+        api.backoffice.service.v1.GetOperatorRegistrationFieldConfigRequest:
             type: object
             properties:
                 targetOperatorContext:
@@ -13368,6 +13410,15 @@ components:
                     type: object
                     additionalProperties:
                         $ref: '#/components/schemas/api.user.service.v1.OperatorRegisterLimitConfig'
+        api.backoffice.service.v1.SetOperatorRegistrationFieldConfigRequest:
+            type: object
+            properties:
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
+                config:
+                    type: object
+                    additionalProperties:
+                        $ref: '#/components/schemas/api.user.service.v1.RegistrationFieldPolicy'
         api.backoffice.service.v1.SetOperatorTagsConfigRequest:
             type: object
             properties:
@@ -16126,6 +16177,13 @@ components:
                     type: object
                     additionalProperties:
                         $ref: '#/components/schemas/api.user.service.v1.OperatorRegisterLimitConfig'
+        api.user.service.v1.GetOperatorRegistrationFieldConfigResponse:
+            type: object
+            properties:
+                config:
+                    type: object
+                    additionalProperties:
+                        $ref: '#/components/schemas/api.user.service.v1.RegistrationFieldPolicy'
         api.user.service.v1.GetOperatorVipSettingsRequest:
             type: object
             properties: {}
@@ -16766,7 +16824,57 @@ components:
                 registrationUrl:
                     type: string
                     description: campaign url
+                email:
+                    type: string
+                    description: Preferred email (if different from auth_id)
+                phone:
+                    type: string
+                    description: Preferred phone (if different from auth_id)
+                firstname:
+                    type: string
+                    description: First name
+                lastname:
+                    type: string
+                    description: Last name
+                address:
+                    type: string
+                    description: Address
+                defaultCurrency:
+                    type: string
+                    description: Preferred default currency
+                emailVerificationCode:
+                    type: string
+                    description: Email verification code for verification-required operators
+                phoneVerificationCode:
+                    type: string
+                    description: Phone verification code for verification-required operators
             description: RegisterRequest contains the information needed to register a new user.
+        api.user.service.v1.RegistrationFieldPolicy:
+            type: object
+            properties:
+                registration:
+                    $ref: '#/components/schemas/api.user.service.v1.RegistrationFieldSet'
+                login:
+                    $ref: '#/components/schemas/api.user.service.v1.RegistrationFieldSet'
+        api.user.service.v1.RegistrationFieldSet:
+            type: object
+            properties:
+                email:
+                    type: boolean
+                phone:
+                    type: boolean
+                name:
+                    type: boolean
+                address:
+                    type: boolean
+                emailVerification:
+                    type: boolean
+                phoneVerification:
+                    type: boolean
+                birthday:
+                    type: boolean
+                idType:
+                    type: boolean
         api.user.service.v1.RequestDailyLossbackRequest:
             type: object
             properties:
@@ -16877,6 +16985,9 @@ components:
             type: object
             properties: {}
         api.user.service.v1.SetOperatorRegisterLimitConfigResponse:
+            type: object
+            properties: {}
+        api.user.service.v1.SetOperatorRegistrationFieldConfigResponse:
             type: object
             properties: {}
         api.user.service.v1.TelegramAuthRequest:
@@ -17172,6 +17283,15 @@ components:
                 country:
                     type: string
                     description: user country
+                defaultCurrency:
+                    type: string
+                    description: user default currency
+                emailVerified:
+                    type: boolean
+                    description: user email verification status
+                phoneVerified:
+                    type: boolean
+                    description: user phone verification status
             description: UserInfo contains basic user information.
         api.user.service.v1.ValidationRecord:
             type: object
@@ -19521,6 +19641,14 @@ components:
                 key:
                     type: object
                     description: Configuration fields for the payment channel in JSON format
+                operatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: Who is performing the action
+                targetOperatorContext:
+                    allOf:
+                        - $ref: '#/components/schemas/api.common.OperatorContext'
+                    description: For which operator this enable/disable applies (for hierarchy control)
             description: |-
                 Request to create a payment channel
                  Used to create a new payment channel with specified merchant and method

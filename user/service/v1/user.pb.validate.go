@@ -166,6 +166,12 @@ func (m *UserInfo) validate(all bool) error {
 
 	// no validation rules for Country
 
+	// no validation rules for DefaultCurrency
+
+	// no validation rules for EmailVerified
+
+	// no validation rules for PhoneVerified
+
 	if len(errors) > 0 {
 		return UserInfoMultiError(errors)
 	}
@@ -314,6 +320,38 @@ func (m *RegisterRequest) validate(all bool) error {
 
 	if m.RegistrationUrl != nil {
 		// no validation rules for RegistrationUrl
+	}
+
+	if m.Email != nil {
+		// no validation rules for Email
+	}
+
+	if m.Phone != nil {
+		// no validation rules for Phone
+	}
+
+	if m.Firstname != nil {
+		// no validation rules for Firstname
+	}
+
+	if m.Lastname != nil {
+		// no validation rules for Lastname
+	}
+
+	if m.Address != nil {
+		// no validation rules for Address
+	}
+
+	if m.DefaultCurrency != nil {
+		// no validation rules for DefaultCurrency
+	}
+
+	if m.EmailVerificationCode != nil {
+		// no validation rules for EmailVerificationCode
+	}
+
+	if m.PhoneVerificationCode != nil {
+		// no validation rules for PhoneVerificationCode
 	}
 
 	if len(errors) > 0 {
@@ -20568,6 +20606,284 @@ var _ interface {
 	ErrorName() string
 } = OperatorRegisterLimitConfigValidationError{}
 
+// Validate checks the field values on RegistrationFieldSet with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RegistrationFieldSet) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RegistrationFieldSet with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RegistrationFieldSetMultiError, or nil if none found.
+func (m *RegistrationFieldSet) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RegistrationFieldSet) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Email
+
+	// no validation rules for Phone
+
+	// no validation rules for Name
+
+	// no validation rules for Address
+
+	// no validation rules for EmailVerification
+
+	// no validation rules for PhoneVerification
+
+	// no validation rules for Birthday
+
+	// no validation rules for IdType
+
+	if len(errors) > 0 {
+		return RegistrationFieldSetMultiError(errors)
+	}
+
+	return nil
+}
+
+// RegistrationFieldSetMultiError is an error wrapping multiple validation
+// errors returned by RegistrationFieldSet.ValidateAll() if the designated
+// constraints aren't met.
+type RegistrationFieldSetMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RegistrationFieldSetMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RegistrationFieldSetMultiError) AllErrors() []error { return m }
+
+// RegistrationFieldSetValidationError is the validation error returned by
+// RegistrationFieldSet.Validate if the designated constraints aren't met.
+type RegistrationFieldSetValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RegistrationFieldSetValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RegistrationFieldSetValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RegistrationFieldSetValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RegistrationFieldSetValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RegistrationFieldSetValidationError) ErrorName() string {
+	return "RegistrationFieldSetValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RegistrationFieldSetValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRegistrationFieldSet.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RegistrationFieldSetValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RegistrationFieldSetValidationError{}
+
+// Validate checks the field values on RegistrationFieldPolicy with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RegistrationFieldPolicy) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RegistrationFieldPolicy with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RegistrationFieldPolicyMultiError, or nil if none found.
+func (m *RegistrationFieldPolicy) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RegistrationFieldPolicy) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetRegistration()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RegistrationFieldPolicyValidationError{
+					field:  "Registration",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RegistrationFieldPolicyValidationError{
+					field:  "Registration",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRegistration()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RegistrationFieldPolicyValidationError{
+				field:  "Registration",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetLogin()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RegistrationFieldPolicyValidationError{
+					field:  "Login",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RegistrationFieldPolicyValidationError{
+					field:  "Login",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetLogin()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RegistrationFieldPolicyValidationError{
+				field:  "Login",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return RegistrationFieldPolicyMultiError(errors)
+	}
+
+	return nil
+}
+
+// RegistrationFieldPolicyMultiError is an error wrapping multiple validation
+// errors returned by RegistrationFieldPolicy.ValidateAll() if the designated
+// constraints aren't met.
+type RegistrationFieldPolicyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RegistrationFieldPolicyMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RegistrationFieldPolicyMultiError) AllErrors() []error { return m }
+
+// RegistrationFieldPolicyValidationError is the validation error returned by
+// RegistrationFieldPolicy.Validate if the designated constraints aren't met.
+type RegistrationFieldPolicyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RegistrationFieldPolicyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RegistrationFieldPolicyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RegistrationFieldPolicyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RegistrationFieldPolicyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RegistrationFieldPolicyValidationError) ErrorName() string {
+	return "RegistrationFieldPolicyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RegistrationFieldPolicyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRegistrationFieldPolicy.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RegistrationFieldPolicyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RegistrationFieldPolicyValidationError{}
+
 // Validate checks the field values on SetOperatorRegisterLimitConfigRequest
 // with the rules defined in the proto definition for this message. If any
 // rules are violated, the first error encountered is returned, or nil if
@@ -21197,6 +21513,638 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetOperatorRegisterLimitConfigResponseValidationError{}
+
+// Validate checks the field values on
+// SetOperatorRegistrationFieldConfigRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *SetOperatorRegistrationFieldConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// SetOperatorRegistrationFieldConfigRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// SetOperatorRegistrationFieldConfigRequestMultiError, or nil if none found.
+func (m *SetOperatorRegistrationFieldConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetOperatorRegistrationFieldConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SetOperatorRegistrationFieldConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SetOperatorRegistrationFieldConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SetOperatorRegistrationFieldConfigRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, SetOperatorRegistrationFieldConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, SetOperatorRegistrationFieldConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return SetOperatorRegistrationFieldConfigRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	{
+		sorted_keys := make([]string, len(m.GetConfig()))
+		i := 0
+		for key := range m.GetConfig() {
+			sorted_keys[i] = key
+			i++
+		}
+		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
+		for _, key := range sorted_keys {
+			val := m.GetConfig()[key]
+			_ = val
+
+			// no validation rules for Config[key]
+
+			if all {
+				switch v := interface{}(val).(type) {
+				case interface{ ValidateAll() error }:
+					if err := v.ValidateAll(); err != nil {
+						errors = append(errors, SetOperatorRegistrationFieldConfigRequestValidationError{
+							field:  fmt.Sprintf("Config[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				case interface{ Validate() error }:
+					if err := v.Validate(); err != nil {
+						errors = append(errors, SetOperatorRegistrationFieldConfigRequestValidationError{
+							field:  fmt.Sprintf("Config[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				}
+			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
+				if err := v.Validate(); err != nil {
+					return SetOperatorRegistrationFieldConfigRequestValidationError{
+						field:  fmt.Sprintf("Config[%v]", key),
+						reason: "embedded message failed validation",
+						cause:  err,
+					}
+				}
+			}
+
+		}
+	}
+
+	if len(errors) > 0 {
+		return SetOperatorRegistrationFieldConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetOperatorRegistrationFieldConfigRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// SetOperatorRegistrationFieldConfigRequest.ValidateAll() if the designated
+// constraints aren't met.
+type SetOperatorRegistrationFieldConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetOperatorRegistrationFieldConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetOperatorRegistrationFieldConfigRequestMultiError) AllErrors() []error { return m }
+
+// SetOperatorRegistrationFieldConfigRequestValidationError is the validation
+// error returned by SetOperatorRegistrationFieldConfigRequest.Validate if the
+// designated constraints aren't met.
+type SetOperatorRegistrationFieldConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetOperatorRegistrationFieldConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetOperatorRegistrationFieldConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetOperatorRegistrationFieldConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetOperatorRegistrationFieldConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetOperatorRegistrationFieldConfigRequestValidationError) ErrorName() string {
+	return "SetOperatorRegistrationFieldConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetOperatorRegistrationFieldConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetOperatorRegistrationFieldConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetOperatorRegistrationFieldConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetOperatorRegistrationFieldConfigRequestValidationError{}
+
+// Validate checks the field values on
+// SetOperatorRegistrationFieldConfigResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *SetOperatorRegistrationFieldConfigResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// SetOperatorRegistrationFieldConfigResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// SetOperatorRegistrationFieldConfigResponseMultiError, or nil if none found.
+func (m *SetOperatorRegistrationFieldConfigResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetOperatorRegistrationFieldConfigResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return SetOperatorRegistrationFieldConfigResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetOperatorRegistrationFieldConfigResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// SetOperatorRegistrationFieldConfigResponse.ValidateAll() if the designated
+// constraints aren't met.
+type SetOperatorRegistrationFieldConfigResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetOperatorRegistrationFieldConfigResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetOperatorRegistrationFieldConfigResponseMultiError) AllErrors() []error { return m }
+
+// SetOperatorRegistrationFieldConfigResponseValidationError is the validation
+// error returned by SetOperatorRegistrationFieldConfigResponse.Validate if
+// the designated constraints aren't met.
+type SetOperatorRegistrationFieldConfigResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetOperatorRegistrationFieldConfigResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetOperatorRegistrationFieldConfigResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetOperatorRegistrationFieldConfigResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetOperatorRegistrationFieldConfigResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetOperatorRegistrationFieldConfigResponseValidationError) ErrorName() string {
+	return "SetOperatorRegistrationFieldConfigResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetOperatorRegistrationFieldConfigResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetOperatorRegistrationFieldConfigResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetOperatorRegistrationFieldConfigResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetOperatorRegistrationFieldConfigResponseValidationError{}
+
+// Validate checks the field values on
+// GetOperatorRegistrationFieldConfigRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *GetOperatorRegistrationFieldConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetOperatorRegistrationFieldConfigRequest with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// GetOperatorRegistrationFieldConfigRequestMultiError, or nil if none found.
+func (m *GetOperatorRegistrationFieldConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOperatorRegistrationFieldConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetOperatorRegistrationFieldConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetOperatorRegistrationFieldConfigRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetOperatorRegistrationFieldConfigRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetOperatorRegistrationFieldConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetOperatorRegistrationFieldConfigRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetOperatorRegistrationFieldConfigRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetOperatorRegistrationFieldConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOperatorRegistrationFieldConfigRequestMultiError is an error wrapping
+// multiple validation errors returned by
+// GetOperatorRegistrationFieldConfigRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetOperatorRegistrationFieldConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOperatorRegistrationFieldConfigRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOperatorRegistrationFieldConfigRequestMultiError) AllErrors() []error { return m }
+
+// GetOperatorRegistrationFieldConfigRequestValidationError is the validation
+// error returned by GetOperatorRegistrationFieldConfigRequest.Validate if the
+// designated constraints aren't met.
+type GetOperatorRegistrationFieldConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOperatorRegistrationFieldConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOperatorRegistrationFieldConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOperatorRegistrationFieldConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOperatorRegistrationFieldConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOperatorRegistrationFieldConfigRequestValidationError) ErrorName() string {
+	return "GetOperatorRegistrationFieldConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOperatorRegistrationFieldConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOperatorRegistrationFieldConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOperatorRegistrationFieldConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOperatorRegistrationFieldConfigRequestValidationError{}
+
+// Validate checks the field values on
+// GetOperatorRegistrationFieldConfigResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *GetOperatorRegistrationFieldConfigResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetOperatorRegistrationFieldConfigResponse with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// GetOperatorRegistrationFieldConfigResponseMultiError, or nil if none found.
+func (m *GetOperatorRegistrationFieldConfigResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetOperatorRegistrationFieldConfigResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	{
+		sorted_keys := make([]string, len(m.GetConfig()))
+		i := 0
+		for key := range m.GetConfig() {
+			sorted_keys[i] = key
+			i++
+		}
+		sort.Slice(sorted_keys, func(i, j int) bool { return sorted_keys[i] < sorted_keys[j] })
+		for _, key := range sorted_keys {
+			val := m.GetConfig()[key]
+			_ = val
+
+			// no validation rules for Config[key]
+
+			if all {
+				switch v := interface{}(val).(type) {
+				case interface{ ValidateAll() error }:
+					if err := v.ValidateAll(); err != nil {
+						errors = append(errors, GetOperatorRegistrationFieldConfigResponseValidationError{
+							field:  fmt.Sprintf("Config[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				case interface{ Validate() error }:
+					if err := v.Validate(); err != nil {
+						errors = append(errors, GetOperatorRegistrationFieldConfigResponseValidationError{
+							field:  fmt.Sprintf("Config[%v]", key),
+							reason: "embedded message failed validation",
+							cause:  err,
+						})
+					}
+				}
+			} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
+				if err := v.Validate(); err != nil {
+					return GetOperatorRegistrationFieldConfigResponseValidationError{
+						field:  fmt.Sprintf("Config[%v]", key),
+						reason: "embedded message failed validation",
+						cause:  err,
+					}
+				}
+			}
+
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetOperatorRegistrationFieldConfigResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetOperatorRegistrationFieldConfigResponseMultiError is an error wrapping
+// multiple validation errors returned by
+// GetOperatorRegistrationFieldConfigResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetOperatorRegistrationFieldConfigResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetOperatorRegistrationFieldConfigResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetOperatorRegistrationFieldConfigResponseMultiError) AllErrors() []error { return m }
+
+// GetOperatorRegistrationFieldConfigResponseValidationError is the validation
+// error returned by GetOperatorRegistrationFieldConfigResponse.Validate if
+// the designated constraints aren't met.
+type GetOperatorRegistrationFieldConfigResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetOperatorRegistrationFieldConfigResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetOperatorRegistrationFieldConfigResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetOperatorRegistrationFieldConfigResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetOperatorRegistrationFieldConfigResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetOperatorRegistrationFieldConfigResponseValidationError) ErrorName() string {
+	return "GetOperatorRegistrationFieldConfigResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetOperatorRegistrationFieldConfigResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetOperatorRegistrationFieldConfigResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetOperatorRegistrationFieldConfigResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetOperatorRegistrationFieldConfigResponseValidationError{}
 
 // Validate checks the field values on CloseAccountRequest with the rules
 // defined in the proto definition for this message. If any rules are

@@ -1670,14 +1670,18 @@ func (m *ListUserReferralRewardsRequest) validate(all bool) error {
 		// no validation rules for UserId
 	}
 
-	if m.StartTime != nil {
+	if m.Tier != nil {
+		// no validation rules for Tier
+	}
+
+	if m.RegistrationStartTime != nil {
 
 		if all {
-			switch v := interface{}(m.GetStartTime()).(type) {
+			switch v := interface{}(m.GetRegistrationStartTime()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, ListUserReferralRewardsRequestValidationError{
-						field:  "StartTime",
+						field:  "RegistrationStartTime",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1685,16 +1689,16 @@ func (m *ListUserReferralRewardsRequest) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, ListUserReferralRewardsRequestValidationError{
-						field:  "StartTime",
+						field:  "RegistrationStartTime",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
 				}
 			}
-		} else if v, ok := interface{}(m.GetStartTime()).(interface{ Validate() error }); ok {
+		} else if v, ok := interface{}(m.GetRegistrationStartTime()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return ListUserReferralRewardsRequestValidationError{
-					field:  "StartTime",
+					field:  "RegistrationStartTime",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -1703,14 +1707,14 @@ func (m *ListUserReferralRewardsRequest) validate(all bool) error {
 
 	}
 
-	if m.EndTime != nil {
+	if m.RegistrationEndTime != nil {
 
 		if all {
-			switch v := interface{}(m.GetEndTime()).(type) {
+			switch v := interface{}(m.GetRegistrationEndTime()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, ListUserReferralRewardsRequestValidationError{
-						field:  "EndTime",
+						field:  "RegistrationEndTime",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1718,16 +1722,16 @@ func (m *ListUserReferralRewardsRequest) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, ListUserReferralRewardsRequestValidationError{
-						field:  "EndTime",
+						field:  "RegistrationEndTime",
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
 				}
 			}
-		} else if v, ok := interface{}(m.GetEndTime()).(interface{ Validate() error }); ok {
+		} else if v, ok := interface{}(m.GetRegistrationEndTime()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return ListUserReferralRewardsRequestValidationError{
-					field:  "EndTime",
+					field:  "RegistrationEndTime",
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -4682,8 +4686,6 @@ func (m *GetUserReferralStatsResponse_ReferralRewards) validate(all bool) error 
 
 	// no validation rules for AvailableCommissionRewardAmount
 
-	// no validation rules for AvailableInviteeRewardAmount
-
 	// no validation rules for TotalReceivedReferralRewardAmount
 
 	// no validation rules for TotalReceivedCommissionRewardAmount
@@ -4927,11 +4929,11 @@ func (m *ListUserReferralRewardsResponse_ReferralReward) validate(all bool) erro
 	// no validation rules for RewardAmount
 
 	if all {
-		switch v := interface{}(m.GetCreatedAt()).(type) {
+		switch v := interface{}(m.GetRegistrationTime()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, ListUserReferralRewardsResponse_ReferralRewardValidationError{
-					field:  "CreatedAt",
+					field:  "RegistrationTime",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -4939,16 +4941,16 @@ func (m *ListUserReferralRewardsResponse_ReferralReward) validate(all bool) erro
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, ListUserReferralRewardsResponse_ReferralRewardValidationError{
-					field:  "CreatedAt",
+					field:  "RegistrationTime",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetRegistrationTime()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return ListUserReferralRewardsResponse_ReferralRewardValidationError{
-				field:  "CreatedAt",
+				field:  "RegistrationTime",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}

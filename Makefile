@@ -1,5 +1,5 @@
 GOHOSTOS:=$(shell go env GOHOSTOS)
-API_TOOL_VERSION?=0.0.2
+API_TOOL_VERSION?=0.0.3
 GO:=go
 
 ifeq ($(GOHOSTOS), windows)

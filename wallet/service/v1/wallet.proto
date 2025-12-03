@@ -71,6 +71,9 @@ service Wallet {
 	// It returns the total deposit, withdraw, deposit minus withdraw, valid bet
 	rpc GetUserTransactionSummary (GetUserTransactionSummaryRequest) returns (GetUserTransactionSummaryResponse) {}
 
+	// ListUserTransactionSummaries returns the summaries of user's transactions, mostly for list user transactions page
+	rpc ListUserTransactionSummaries (ListUserTransactionSummariesRequest) returns (ListUserTransactionSummariesResponse) {}
+
 	// GetUserOverview returns data for the overview of user's wallet
 	rpc GetBackofficeUserOverviewFromWallet (GetBackofficeUserOverviewFromWalletRequest) returns (GetBackofficeUserOverviewFromWalletResponse) {}
 
@@ -544,6 +547,7 @@ message ListWalletBalanceTransactionsRequest {
 	optional int32 page = 6;
 	optional int32 page_size = 7;
 	api.common.OperatorContext operator_context = 8;
+	optional bool pagination = 9; // if not provided, default is true
 }
 
 message ListWalletBalanceTransactionsResponse {
@@ -575,6 +579,15 @@ message ListWalletBalanceTransactionsResponse {
 		string after_balance = 7;
 		string currency = 8;
 		int64 related_transaction_id = 9;
+		string cash_amount = 10;
+		string cash_amount_usd = 11;
+		string cash_amount_reporting_currency = 12;
+		string operator_bonus_amount = 13;
+		string operator_bonus_amount_usd = 14;
+		string operator_bonus_amount_reporting_currency = 15;
+		string provider_bonus_amount = 16;
+		string provider_bonus_amount_usd = 17;
+		string provider_bonus_amount_reporting_currency = 18;
 	}
 	repeated BalanceTransaction balance_transactions = 1;
 	int32 total = 2;
@@ -689,6 +702,32 @@ message GetUserTransactionSummaryResponse {
 	int32 total_deposit_count = 9;
 	int32 total_withdraw_count = 10;
 	int32 today_withdraw_count = 11;
+}
+
+message ListUserTransactionSummariesRequest {
+	repeated int64 user_ids = 1;
+	optional string currency = 2;
+	optional google.protobuf.Timestamp start_time = 3;
+	optional google.protobuf.Timestamp end_time = 4;
+	api.common.OperatorContext operator_context = 5;
+}
+
+message ListUserTransactionSummariesResponse {
+	message UserTransactionSummary {
+		string total_deposit_usd = 1;
+		string total_withdraw_usd = 2;
+		string deposit_minus_withdraw_usd = 3;
+		string total_valid_bet_usd = 4;
+		string total_deposit_reporting_currency = 5;
+		string total_withdraw_reporting_currency = 6;
+		string deposit_minus_withdraw_reporting_currency = 7;
+		string total_valid_bet_reporting_currency = 8;
+		int32 total_deposit_count = 9;
+		int32 total_withdraw_count = 10;
+		int32 today_withdraw_count = 11;
+		int64 user_id = 12;
+	}
+	repeated UserTransactionSummary user_transaction_summaries = 1;
 }
 
 message GetBackofficeUserOverviewFromWalletRequest {
@@ -1615,6 +1654,15 @@ message ListTimeRangeDepositCreditsResponse {
 		string provider_bonus = 9;
 		string provider_bonus_usd = 10;
 		string provider_bonus_reporting_currency = 11;
+		string original_cash = 12;
+		string original_cash_usd = 13;
+		string original_cash_reporting_currency = 14;
+		string original_operator_bonus = 15;
+		string original_operator_bonus_usd = 16;
+		string original_operator_bonus_reporting_currency = 17;
+		string original_provider_bonus = 18;
+		string original_provider_bonus_usd = 19;
+		string original_provider_bonus_reporting_currency = 20;
 	}
 	repeated Credit credits = 1;
 }
