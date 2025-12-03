@@ -424,6 +424,7 @@ message DailyLossbackStatus {
   string time_window_start_hour = 9;
   string time_window_end_hour = 10;
   string time_zone = 11;
+  bool user_withdrawn_met = 12;
 }
 
 message GetDailyLossbackStatusRequest {

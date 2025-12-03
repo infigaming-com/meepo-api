@@ -17360,6 +17360,8 @@ components:
                     type: string
                 timeZone:
                     type: string
+                userWithdrawnMet:
+                    type: boolean
         api.vip.service.v1.GetClaimableVipRewardsResponse:
             type: object
             properties:
