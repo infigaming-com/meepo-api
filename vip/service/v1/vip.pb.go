@@ -2968,6 +2968,7 @@ type DailyLossbackStatus struct {
 	TimeWindowStartHour string                 `protobuf:"bytes,9,opt,name=time_window_start_hour,json=timeWindowStartHour,proto3" json:"time_window_start_hour,omitempty"`
 	TimeWindowEndHour   string                 `protobuf:"bytes,10,opt,name=time_window_end_hour,json=timeWindowEndHour,proto3" json:"time_window_end_hour,omitempty"`
 	TimeZone            string                 `protobuf:"bytes,11,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"`
+	UserWithdrawnMet    bool                   `protobuf:"varint,12,opt,name=user_withdrawn_met,json=userWithdrawnMet,proto3" json:"user_withdrawn_met,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -3077,6 +3078,13 @@ func (x *DailyLossbackStatus) GetTimeZone() string {
 		return x.TimeZone
 	}
 	return ""
+}
+
+func (x *DailyLossbackStatus) GetUserWithdrawnMet() bool {
+	if x != nil {
+		return x.UserWithdrawnMet
+	}
+	return false
 }
 
 type GetDailyLossbackStatusRequest struct {
@@ -3482,7 +3490,7 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
 	"\bcurrency\x18\x03 \x01(\tR\bcurrency\"\x1e\n" +
-	"\x1cRequestDailyLossbackResponse\"\xde\x03\n" +
+	"\x1cRequestDailyLossbackResponse\"\x8c\x04\n" +
 	"\x13DailyLossbackStatus\x12\x1a\n" +
 	"\beligible\x18\x01 \x01(\bR\beligible\x12'\n" +
 	"\x0frequested_times\x18\x02 \x01(\tR\x0erequestedTimes\x12.\n" +
@@ -3496,7 +3504,8 @@ const file_vip_service_v1_vip_proto_rawDesc = "" +
 	"\x16time_window_start_hour\x18\t \x01(\tR\x13timeWindowStartHour\x12/\n" +
 	"\x14time_window_end_hour\x18\n" +
 	" \x01(\tR\x11timeWindowEndHour\x12\x1b\n" +
-	"\ttime_zone\x18\v \x01(\tR\btimeZone\"\x9c\x01\n" +
+	"\ttime_zone\x18\v \x01(\tR\btimeZone\x12,\n" +
+	"\x12user_withdrawn_met\x18\f \x01(\bR\x10userWithdrawnMet\"\x9c\x01\n" +
 	"\x1dGetDailyLossbackStatusRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12F\n" +
 	"\x10operator_context\x18\x02 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12\x1a\n" +
