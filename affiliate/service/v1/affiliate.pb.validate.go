@@ -7838,7 +7838,7 @@ func (m *ChannelConfig_AgencyChannelConfig) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for CampaignId
+	// no validation rules for CampaignName
 
 	if len(errors) > 0 {
 		return ChannelConfig_AgencyChannelConfigMultiError(errors)

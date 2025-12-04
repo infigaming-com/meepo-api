@@ -316,7 +316,7 @@ message ChannelConfig {
         string bundle_id = 3;
     }
     message AgencyChannelConfig {
-        string campaign_id = 1;
+        string campaign_name = 1;
     }
     message GoogleAdsChannelConfig {
         string customer_id = 1;
