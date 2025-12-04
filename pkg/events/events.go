@@ -315,13 +315,14 @@ type AffiliateBillSettlementEvent struct {
 const AffiliateUserActionEventTopic = "affiliate.user.action"
 
 type AffiliateUserActionEvent struct {
-	UserID          int64                   `json:"user_id"`
-	EventID         int64                   `json:"event_id"`
-	EventType       string                  `json:"event_type"`
-	ChannelEvent    *string                 `json:"channel_event,omitempty"`
-	CustomName      *string                 `json:"custom_name,omitempty"`
-	OperatorContext *common.OperatorContext `json:"operator_context,omitempty"`
-	CreatedAt       int64                   `json:"created_at"`
+	UserID            int64                   `json:"user_id"`
+	EventID           int64                   `json:"event_id"`
+	EventType         string                  `json:"event_type"`
+	ChannelEvent      *string                 `json:"channel_event,omitempty"`
+	CustomName        *string                 `json:"custom_name,omitempty"`
+	PostbackEventType *string                 `json:"postback_event_type,omitempty"`
+	OperatorContext   *common.OperatorContext `json:"operator_context,omitempty"`
+	CreatedAt         int64                   `json:"created_at"`
 }
 
 type OperatorStatusUpdateEvent struct {

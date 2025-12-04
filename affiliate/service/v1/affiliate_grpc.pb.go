@@ -34,6 +34,10 @@ const (
 	Affiliate_UpdateCampaign_FullMethodName           = "/api.affiliate.service.v1.Affiliate/UpdateCampaign"
 	Affiliate_ListCampaigns_FullMethodName            = "/api.affiliate.service.v1.Affiliate/ListCampaigns"
 	Affiliate_DeleteCampaign_FullMethodName           = "/api.affiliate.service.v1.Affiliate/DeleteCampaign"
+	Affiliate_CreatePostback_FullMethodName           = "/api.affiliate.service.v1.Affiliate/CreatePostback"
+	Affiliate_UpdatePostback_FullMethodName           = "/api.affiliate.service.v1.Affiliate/UpdatePostback"
+	Affiliate_DeletePostback_FullMethodName           = "/api.affiliate.service.v1.Affiliate/DeletePostback"
+	Affiliate_ListPostbacks_FullMethodName            = "/api.affiliate.service.v1.Affiliate/ListPostbacks"
 	Affiliate_ListEvents_FullMethodName               = "/api.affiliate.service.v1.Affiliate/ListEvents"
 	Affiliate_ListCommissions_FullMethodName          = "/api.affiliate.service.v1.Affiliate/ListCommissions"
 	Affiliate_ListUsers_FullMethodName                = "/api.affiliate.service.v1.Affiliate/ListUsers"
@@ -67,6 +71,10 @@ type AffiliateClient interface {
 	UpdateCampaign(ctx context.Context, in *UpdateCampaignRequest, opts ...grpc.CallOption) (*UpdateCampaignResponse, error)
 	ListCampaigns(ctx context.Context, in *ListCampaignsRequest, opts ...grpc.CallOption) (*ListCampaignsResponse, error)
 	DeleteCampaign(ctx context.Context, in *DeleteCampaignRequest, opts ...grpc.CallOption) (*DeleteCampaignResponse, error)
+	CreatePostback(ctx context.Context, in *CreatePostbackRequest, opts ...grpc.CallOption) (*CreatePostbackResponse, error)
+	UpdatePostback(ctx context.Context, in *UpdatePostbackRequest, opts ...grpc.CallOption) (*UpdatePostbackResponse, error)
+	DeletePostback(ctx context.Context, in *DeletePostbackRequest, opts ...grpc.CallOption) (*DeletePostbackResponse, error)
+	ListPostbacks(ctx context.Context, in *ListPostbacksRequest, opts ...grpc.CallOption) (*ListPostbacksResponse, error)
 	ListEvents(ctx context.Context, in *ListEventsRequest, opts ...grpc.CallOption) (*ListEventsResponse, error)
 	ListCommissions(ctx context.Context, in *ListCommissionsRequest, opts ...grpc.CallOption) (*ListCommissionsResponse, error)
 	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
@@ -239,6 +247,46 @@ func (c *affiliateClient) DeleteCampaign(ctx context.Context, in *DeleteCampaign
 	return out, nil
 }
 
+func (c *affiliateClient) CreatePostback(ctx context.Context, in *CreatePostbackRequest, opts ...grpc.CallOption) (*CreatePostbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreatePostbackResponse)
+	err := c.cc.Invoke(ctx, Affiliate_CreatePostback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) UpdatePostback(ctx context.Context, in *UpdatePostbackRequest, opts ...grpc.CallOption) (*UpdatePostbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdatePostbackResponse)
+	err := c.cc.Invoke(ctx, Affiliate_UpdatePostback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) DeletePostback(ctx context.Context, in *DeletePostbackRequest, opts ...grpc.CallOption) (*DeletePostbackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeletePostbackResponse)
+	err := c.cc.Invoke(ctx, Affiliate_DeletePostback_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *affiliateClient) ListPostbacks(ctx context.Context, in *ListPostbacksRequest, opts ...grpc.CallOption) (*ListPostbacksResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListPostbacksResponse)
+	err := c.cc.Invoke(ctx, Affiliate_ListPostbacks_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *affiliateClient) ListEvents(ctx context.Context, in *ListEventsRequest, opts ...grpc.CallOption) (*ListEventsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListEventsResponse)
@@ -378,6 +426,10 @@ type AffiliateServer interface {
 	UpdateCampaign(context.Context, *UpdateCampaignRequest) (*UpdateCampaignResponse, error)
 	ListCampaigns(context.Context, *ListCampaignsRequest) (*ListCampaignsResponse, error)
 	DeleteCampaign(context.Context, *DeleteCampaignRequest) (*DeleteCampaignResponse, error)
+	CreatePostback(context.Context, *CreatePostbackRequest) (*CreatePostbackResponse, error)
+	UpdatePostback(context.Context, *UpdatePostbackRequest) (*UpdatePostbackResponse, error)
+	DeletePostback(context.Context, *DeletePostbackRequest) (*DeletePostbackResponse, error)
+	ListPostbacks(context.Context, *ListPostbacksRequest) (*ListPostbacksResponse, error)
 	ListEvents(context.Context, *ListEventsRequest) (*ListEventsResponse, error)
 	ListCommissions(context.Context, *ListCommissionsRequest) (*ListCommissionsResponse, error)
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
@@ -444,6 +496,18 @@ func (UnimplementedAffiliateServer) ListCampaigns(context.Context, *ListCampaign
 }
 func (UnimplementedAffiliateServer) DeleteCampaign(context.Context, *DeleteCampaignRequest) (*DeleteCampaignResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteCampaign not implemented")
+}
+func (UnimplementedAffiliateServer) CreatePostback(context.Context, *CreatePostbackRequest) (*CreatePostbackResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreatePostback not implemented")
+}
+func (UnimplementedAffiliateServer) UpdatePostback(context.Context, *UpdatePostbackRequest) (*UpdatePostbackResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdatePostback not implemented")
+}
+func (UnimplementedAffiliateServer) DeletePostback(context.Context, *DeletePostbackRequest) (*DeletePostbackResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeletePostback not implemented")
+}
+func (UnimplementedAffiliateServer) ListPostbacks(context.Context, *ListPostbacksRequest) (*ListPostbacksResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListPostbacks not implemented")
 }
 func (UnimplementedAffiliateServer) ListEvents(context.Context, *ListEventsRequest) (*ListEventsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListEvents not implemented")
@@ -772,6 +836,78 @@ func _Affiliate_DeleteCampaign_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Affiliate_CreatePostback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreatePostbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).CreatePostback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_CreatePostback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).CreatePostback(ctx, req.(*CreatePostbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_UpdatePostback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePostbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).UpdatePostback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_UpdatePostback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).UpdatePostback(ctx, req.(*UpdatePostbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_DeletePostback_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeletePostbackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).DeletePostback(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_DeletePostback_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).DeletePostback(ctx, req.(*DeletePostbackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Affiliate_ListPostbacks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPostbacksRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AffiliateServer).ListPostbacks(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Affiliate_ListPostbacks_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AffiliateServer).ListPostbacks(ctx, req.(*ListPostbacksRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Affiliate_ListEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListEventsRequest)
 	if err := dec(in); err != nil {
@@ -1054,6 +1190,22 @@ var Affiliate_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteCampaign",
 			Handler:    _Affiliate_DeleteCampaign_Handler,
+		},
+		{
+			MethodName: "CreatePostback",
+			Handler:    _Affiliate_CreatePostback_Handler,
+		},
+		{
+			MethodName: "UpdatePostback",
+			Handler:    _Affiliate_UpdatePostback_Handler,
+		},
+		{
+			MethodName: "DeletePostback",
+			Handler:    _Affiliate_DeletePostback_Handler,
+		},
+		{
+			MethodName: "ListPostbacks",
+			Handler:    _Affiliate_ListPostbacks_Handler,
 		},
 		{
 			MethodName: "ListEvents",
