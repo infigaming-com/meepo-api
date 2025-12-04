@@ -706,3 +706,159 @@ func IsClaimUserReferralRewardsFailed(err error) bool {
 func ErrorClaimUserReferralRewardsFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_CLAIM_USER_REFERRAL_REWARDS_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsPostbackPermissionDenied(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_POSTBACK_PERMISSION_DENIED.String() && e.Code == 500
+}
+
+func ErrorPostbackPermissionDenied(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_POSTBACK_PERMISSION_DENIED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsPostbackOwnershipDenied(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_POSTBACK_OWNERSHIP_DENIED.String() && e.Code == 500
+}
+
+func ErrorPostbackOwnershipDenied(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_POSTBACK_OWNERSHIP_DENIED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsPostbackNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_POSTBACK_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorPostbackNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_POSTBACK_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidPostbackName(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_POSTBACK_NAME.String() && e.Code == 500
+}
+
+func ErrorInvalidPostbackName(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_POSTBACK_NAME.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidPostbackStatus(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_POSTBACK_STATUS.String() && e.Code == 500
+}
+
+func ErrorInvalidPostbackStatus(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_POSTBACK_STATUS.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidPostbackActionType(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_POSTBACK_ACTION_TYPE.String() && e.Code == 500
+}
+
+func ErrorInvalidPostbackActionType(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_POSTBACK_ACTION_TYPE.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidPostbackUrl(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_POSTBACK_URL.String() && e.Code == 500
+}
+
+func ErrorInvalidPostbackUrl(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_POSTBACK_URL.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidPostbackRequestMethod(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_POSTBACK_REQUEST_METHOD.String() && e.Code == 500
+}
+
+func ErrorInvalidPostbackRequestMethod(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_POSTBACK_REQUEST_METHOD.String(), fmt.Sprintf(format, args...))
+}
+
+func IsInvalidPostbackCampaignIds(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_INVALID_POSTBACK_CAMPAIGN_IDS.String() && e.Code == 500
+}
+
+func ErrorInvalidPostbackCampaignIds(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_INVALID_POSTBACK_CAMPAIGN_IDS.String(), fmt.Sprintf(format, args...))
+}
+
+func IsCreatePostbackFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_CREATE_POSTBACK_FAILED.String() && e.Code == 500
+}
+
+func ErrorCreatePostbackFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_CREATE_POSTBACK_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsUpdatePostbackFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_UPDATE_POSTBACK_FAILED.String() && e.Code == 500
+}
+
+func ErrorUpdatePostbackFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_UPDATE_POSTBACK_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDeletePostbackFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DELETE_POSTBACK_FAILED.String() && e.Code == 500
+}
+
+func ErrorDeletePostbackFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DELETE_POSTBACK_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListPostbacksFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_POSTBACKS_FAILED.String() && e.Code == 500
+}
+
+func ErrorListPostbacksFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_POSTBACKS_FAILED.String(), fmt.Sprintf(format, args...))
+}

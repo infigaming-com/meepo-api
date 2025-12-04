@@ -121,6 +121,36 @@ service BackofficeAffiliate {
 		};
 	}
 
+	// -------------- Postback --------------
+
+	rpc CreatePostback(CreatePostbackRequest) returns (api.affiliate.service.v1.CreatePostbackResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/postback/create"
+			body: "*"
+		};
+	}
+
+	rpc UpdatePostback(UpdatePostbackRequest) returns (api.affiliate.service.v1.UpdatePostbackResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/postback/update"
+			body: "*"
+		};
+	}
+
+	rpc DeletePostback(DeletePostbackRequest) returns (api.affiliate.service.v1.DeletePostbackResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/postback/delete"
+			body: "*"
+		};
+	}
+
+	rpc ListPostbacks(ListPostbacksRequest) returns (api.affiliate.service.v1.ListPostbacksResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/postback/list"
+			body: "*"
+		};
+	}
+
 	// -------------- Event --------------
 
 	rpc ListEvents(ListEventsRequest) returns (api.affiliate.service.v1.ListEventsResponse) {
@@ -283,6 +313,38 @@ message ListAffiliateCampaignsRequest {
 
 message DeleteCampaignRequest {
 	int64 campaign_id = 1;
+}
+
+// -------------- Postback --------------
+
+message CreatePostbackRequest {
+    string postback_name = 1;
+    string status = 2; // active/inactive
+    repeated int64 campaign_ids = 3;
+    string action_type = 4; // register, deposit, first_deposit, withdrawal, game_start, game_bet
+    string postback_url = 5;
+    string request_method = 6; // GET/POST
+}
+
+message UpdatePostbackRequest {
+    int64 postback_id = 1;
+    string postback_name = 2;
+    string status = 3; // active/inactive
+    repeated int64 campaign_ids = 4;
+    string action_type = 5; // register, deposit, first_deposit, withdrawal, game_start, game_bet
+    string postback_url = 6;
+    string request_method = 7; // GET/POST
+}
+
+message DeletePostbackRequest {
+    int64 postback_id = 1;
+}
+
+message ListPostbacksRequest {
+    optional int64 affiliate_id = 1;
+    optional int32 page = 2;
+    optional int32 page_size = 3;
+    api.common.OperatorContextFilters operator_context_filters = 4;
 }
 
 // -------------- Event --------------
