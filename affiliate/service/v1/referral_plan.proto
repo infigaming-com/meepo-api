@@ -120,8 +120,10 @@ message ListUserReferralRewardsResponse {
         int64 user_id = 2;
         string referral_code = 3;
         int32 tier = 4;
-        string reward_amount = 5;
-        google.protobuf.Timestamp registration_time = 6;
+        string unpaid_reward_amount = 5;
+        string unclaimed_reward_amount = 6;
+        string claimed_reward_amount = 7;
+        google.protobuf.Timestamp registration_time = 8;
     }
     repeated ReferralReward referral_rewards = 1;
     int32 total = 2;

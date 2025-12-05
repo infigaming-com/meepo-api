@@ -7168,7 +7168,11 @@ components:
                 tier:
                     type: integer
                     format: int32
-                rewardAmount:
+                unpaidRewardAmount:
+                    type: string
+                unclaimedRewardAmount:
+                    type: string
+                claimedRewardAmount:
                     type: string
                 registrationTime:
                     type: string
