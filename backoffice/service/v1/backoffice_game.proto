@@ -202,6 +202,36 @@ service BackofficeGame {
 			body: "*"
 		};
 	}
+
+	// Freespins related APIs
+	rpc ListFreespinsProviders(ListFreespinsProvidersRequest) returns (game.service.v1.ListFreespinsProvidersResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/freespins/providers/list"
+			body: "*"
+		};
+	}
+
+	rpc ListFreespinsGames(ListFreespinsGamesRequest) returns (game.service.v1.ListFreespinsGamesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/freespins/games/list"
+			body: "*"
+		};
+	}
+
+	// Freebets related APIs
+	rpc ListFreebetTemplates(ListFreebetTemplatesRequest) returns (game.service.v1.ListFreebetTemplatesResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/freebets/templates/list"
+			body: "*"
+		};
+	}
+
+	rpc GetPlayerFreebets(GetPlayerFreebetsRequest) returns (game.service.v1.GetPlayerFreebetsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/game/freebets/player/get"
+			body: "*"
+		};
+	}
 }
 
 
@@ -623,4 +653,27 @@ message ExportCustomerStrikeReportsRequest {
 	string format = 2; // accepted values: csv, excel, pdf
 	string time_zone = 3; // e.g. UTC+0, UTC+8, etc.
 	api.common.OperatorContextFilters operator_context_filters = 4;
+}
+
+// ========== Freespins Messages ==========
+
+message ListFreespinsProvidersRequest {
+}
+
+message ListFreespinsGamesRequest {
+	string currency = 1;
+	string provider_id = 2;
+	optional int32 page = 3;
+	optional int32 page_size = 4;
+}
+
+// ========== Freebets Messages ==========
+
+message ListFreebetTemplatesRequest {
+	int32 page = 1;
+	int32 page_size = 2;
+}
+
+message GetPlayerFreebetsRequest {
+	string player_id = 1;
 }

@@ -224,6 +224,9 @@ service Wallet {
 
 	// GetUserGameTransactionsSummary returns the summary of user's game transactions, mostly for exactly one game bet
 	rpc GetUserGameTransactionsSummary(GetUserGameTransactionsSummaryRequest) returns (GetUserGameTransactionsSummaryResponse) {}
+
+	// CreditFreespinWin credits freespin win amount to user's wallet
+	rpc CreditFreespinWin(CreditFreespinWinRequest) returns (CreditFreespinWinResponse) {}
 }
 
 message GetUserBalancesRequest {
@@ -1706,4 +1709,25 @@ message GetUserGameTransactionsSummaryResponse {
 	string win_provider_bonus_amount = 24;
 	string win_provider_bonus_amount_usd = 25;
 	string win_provider_bonus_amount_reporting_currency = 26;
+}
+
+// ========== Freespin Win Messages ==========
+
+message CreditFreespinWinRequest {
+	int64 user_id = 1;
+	string currency = 2;
+	string amount = 3;
+	string freespin_id = 4;
+	string txn_id = 5;
+	string game_id = 6;
+	string round_id = 7;
+	int64 timestamp = 8;
+	api.common.OperatorContext operator_context = 9;
+}
+
+message CreditFreespinWinResponse {
+	int64 transaction_id = 1;
+	string balance = 2;
+	string bonus = 3;
+	int64 timestamp = 4;
 }
