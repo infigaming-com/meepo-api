@@ -2205,15 +2205,17 @@ func (x *GetUserReferralStatsResponse_ReferralProgress) GetNgrAmount() map[int32
 }
 
 type ListUserReferralRewardsResponse_ReferralReward struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	UserName         string                 `protobuf:"bytes,1,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
-	UserId           int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	ReferralCode     string                 `protobuf:"bytes,3,opt,name=referral_code,json=referralCode,proto3" json:"referral_code,omitempty"`
-	Tier             int32                  `protobuf:"varint,4,opt,name=tier,proto3" json:"tier,omitempty"`
-	RewardAmount     string                 `protobuf:"bytes,5,opt,name=reward_amount,json=rewardAmount,proto3" json:"reward_amount,omitempty"`
-	RegistrationTime *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=registration_time,json=registrationTime,proto3" json:"registration_time,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	UserName              string                 `protobuf:"bytes,1,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
+	UserId                int64                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	ReferralCode          string                 `protobuf:"bytes,3,opt,name=referral_code,json=referralCode,proto3" json:"referral_code,omitempty"`
+	Tier                  int32                  `protobuf:"varint,4,opt,name=tier,proto3" json:"tier,omitempty"`
+	UnpaidRewardAmount    string                 `protobuf:"bytes,5,opt,name=unpaid_reward_amount,json=unpaidRewardAmount,proto3" json:"unpaid_reward_amount,omitempty"`
+	UnclaimedRewardAmount string                 `protobuf:"bytes,6,opt,name=unclaimed_reward_amount,json=unclaimedRewardAmount,proto3" json:"unclaimed_reward_amount,omitempty"`
+	ClaimedRewardAmount   string                 `protobuf:"bytes,7,opt,name=claimed_reward_amount,json=claimedRewardAmount,proto3" json:"claimed_reward_amount,omitempty"`
+	RegistrationTime      *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=registration_time,json=registrationTime,proto3" json:"registration_time,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *ListUserReferralRewardsResponse_ReferralReward) Reset() {
@@ -2274,9 +2276,23 @@ func (x *ListUserReferralRewardsResponse_ReferralReward) GetTier() int32 {
 	return 0
 }
 
-func (x *ListUserReferralRewardsResponse_ReferralReward) GetRewardAmount() string {
+func (x *ListUserReferralRewardsResponse_ReferralReward) GetUnpaidRewardAmount() string {
 	if x != nil {
-		return x.RewardAmount
+		return x.UnpaidRewardAmount
+	}
+	return ""
+}
+
+func (x *ListUserReferralRewardsResponse_ReferralReward) GetUnclaimedRewardAmount() string {
+	if x != nil {
+		return x.UnclaimedRewardAmount
+	}
+	return ""
+}
+
+func (x *ListUserReferralRewardsResponse_ReferralReward) GetClaimedRewardAmount() string {
+	if x != nil {
+		return x.ClaimedRewardAmount
 	}
 	return ""
 }
@@ -2398,19 +2414,21 @@ const file_affiliate_service_v1_referral_plan_proto_rawDesc = "" +
 	"\x16_registration_end_timeB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xcd\x03\n" +
+	"_page_size\"\xc6\x04\n" +
 	"\x1fListUserReferralRewardsResponse\x12s\n" +
 	"\x10referral_rewards\x18\x01 \x03(\v2H.api.affiliate.service.v1.ListUserReferralRewardsResponse.ReferralRewardR\x0freferralRewards\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xed\x01\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x1a\xe6\x02\n" +
 	"\x0eReferralReward\x12\x1b\n" +
 	"\tuser_name\x18\x01 \x01(\tR\buserName\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12#\n" +
 	"\rreferral_code\x18\x03 \x01(\tR\freferralCode\x12\x12\n" +
-	"\x04tier\x18\x04 \x01(\x05R\x04tier\x12#\n" +
-	"\rreward_amount\x18\x05 \x01(\tR\frewardAmount\x12G\n" +
-	"\x11registration_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x10registrationTime\";\n" +
+	"\x04tier\x18\x04 \x01(\x05R\x04tier\x120\n" +
+	"\x14unpaid_reward_amount\x18\x05 \x01(\tR\x12unpaidRewardAmount\x126\n" +
+	"\x17unclaimed_reward_amount\x18\x06 \x01(\tR\x15unclaimedRewardAmount\x122\n" +
+	"\x15claimed_reward_amount\x18\a \x01(\tR\x13claimedRewardAmount\x12G\n" +
+	"\x11registration_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\x10registrationTime\";\n" +
 	"\x1dGetUserReferralRewardsRequest\x12\x1a\n" +
 	"\bcurrency\x18\x01 \x01(\tR\bcurrency\"_\n" +
 	"\x1eGetUserReferralRewardsResponse\x12\x16\n" +

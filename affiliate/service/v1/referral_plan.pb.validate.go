@@ -4926,7 +4926,11 @@ func (m *ListUserReferralRewardsResponse_ReferralReward) validate(all bool) erro
 
 	// no validation rules for Tier
 
-	// no validation rules for RewardAmount
+	// no validation rules for UnpaidRewardAmount
+
+	// no validation rules for UnclaimedRewardAmount
+
+	// no validation rules for ClaimedRewardAmount
 
 	if all {
 		switch v := interface{}(m.GetRegistrationTime()).(type) {
