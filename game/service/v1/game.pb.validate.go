@@ -20918,6 +20918,14 @@ func (m *GetDepositCreditsGGRResponse_GameData) validate(all bool) error {
 
 	// no validation rules for Rtp
 
+	// no validation rules for TotalBetUsd
+
+	// no validation rules for TotalBetReportingCurrency
+
+	// no validation rules for TotalWinUsd
+
+	// no validation rules for TotalWinReportingCurrency
+
 	if len(errors) > 0 {
 		return GetDepositCreditsGGRResponse_GameDataMultiError(errors)
 	}

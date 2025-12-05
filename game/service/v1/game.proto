@@ -1708,9 +1708,13 @@ message GetDepositCreditsGGRResponse {
 		string game_type = 1; // game category
 		string ggr_usd = 2;
 		string ggr_reporting_currency = 3;
-		string turnover_usd = 4;
-		string turnover_reporting_currency = 5;
+		string turnover_usd = 4; // total bet usd (same as total_bet_usd)
+		string turnover_reporting_currency = 5; // total bet reporting currency (same as total_bet_reporting_currency)
 		string rtp = 6;
+		string total_bet_usd = 7; // bet + debit 的 USD 总和
+		string total_bet_reporting_currency = 8; // bet + debit 的 reporting currency 总和
+		string total_win_usd = 9; // win + credit 的 USD 总和
+		string total_win_reporting_currency = 10; // win + credit 的 reporting currency 总和
 	}
 	repeated GameData game_data = 1;
 }
