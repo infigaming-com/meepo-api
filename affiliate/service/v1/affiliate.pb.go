@@ -4006,7 +4006,7 @@ func (x *ChannelConfig_AdjustChannelConfig) GetBundleId() string {
 
 type ChannelConfig_AgencyChannelConfig struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	CampaignId    string                 `protobuf:"bytes,1,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
+	CampaignName  string                 `protobuf:"bytes,1,opt,name=campaign_name,json=campaignName,proto3" json:"campaign_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4041,9 +4041,9 @@ func (*ChannelConfig_AgencyChannelConfig) Descriptor() ([]byte, []int) {
 	return file_affiliate_service_v1_affiliate_proto_rawDescGZIP(), []int{14, 5}
 }
 
-func (x *ChannelConfig_AgencyChannelConfig) GetCampaignId() string {
+func (x *ChannelConfig_AgencyChannelConfig) GetCampaignName() string {
 	if x != nil {
-		return x.CampaignId
+		return x.CampaignName
 	}
 	return ""
 }
@@ -5801,7 +5801,7 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x11custom_parameters\x18\x02 \x03(\v2*.api.affiliate.service.v1.Params.ParameterR\x10customParameters\x1a5\n" +
 	"\tParameter\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value\"\xbe\r\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value\"\xc2\r\n" +
 	"\rChannelConfig\x12z\n" +
 	"\x17facebook_channel_config\x18\x01 \x01(\v2=.api.affiliate.service.v1.ChannelConfig.FacebookChannelConfigH\x00R\x15facebookChannelConfig\x88\x01\x01\x12t\n" +
 	"\x15tiktok_channel_config\x18\x02 \x01(\v2;.api.affiliate.service.v1.ChannelConfig.TiktokChannelConfigH\x01R\x13tiktokChannelConfig\x88\x01\x01\x12n\n" +
@@ -5828,10 +5828,9 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x13AdjustChannelConfig\x12!\n" +
 	"\fapp_platform\x18\x01 \x01(\tR\vappPlatform\x12\x1b\n" +
 	"\tapp_token\x18\x02 \x01(\tR\bappToken\x12\x1b\n" +
-	"\tbundle_id\x18\x03 \x01(\tR\bbundleId\x1a6\n" +
-	"\x13AgencyChannelConfig\x12\x1f\n" +
-	"\vcampaign_id\x18\x01 \x01(\tR\n" +
-	"campaignId\x1af\n" +
+	"\tbundle_id\x18\x03 \x01(\tR\bbundleId\x1a:\n" +
+	"\x13AgencyChannelConfig\x12#\n" +
+	"\rcampaign_name\x18\x01 \x01(\tR\fcampaignName\x1af\n" +
 	"\x16GoogleAdsChannelConfig\x12\x1f\n" +
 	"\vcustomer_id\x18\x01 \x01(\tR\n" +
 	"customerId\x12+\n" +
