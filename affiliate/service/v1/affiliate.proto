@@ -61,6 +61,12 @@ service Affiliate {
 
     rpc ListPostbacks(ListPostbacksRequest) returns (ListPostbacksResponse) {}
 
+     // -------------- Affiliate Domain --------------
+
+     rpc ListAffiliateDomains(ListAffiliateDomainsRequest) returns (ListAffiliateDomainsResponse) {}
+
+     rpc SetAffiliateDomain(SetAffiliateDomainRequest) returns (SetAffiliateDomainResponse) {}
+
     // -------------- Event --------------
 
     rpc ListEvents(ListEventsRequest) returns (ListEventsResponse) {}
@@ -124,6 +130,7 @@ service Affiliate {
             body: "*"
         };
     }
+
 }
 
 message ContactType {
@@ -550,6 +557,36 @@ message ListPostbacksResponse {
     int32 page_size = 4;
 }
 
+// -------------- Affiliate Domain --------------
+
+message AffiliateDomain {
+    string domain = 1;
+    bool available_to_all = 2;
+    repeated int64 affiliate_ids = 3;
+    int64 operator_id = 4;
+    string operator_name = 5;
+    int64 company_operator_id = 6;
+    string company_operator_name = 7;
+}
+
+message ListAffiliateDomainsRequest {
+    int64 affiliate_id = 1;
+    api.common.OperatorContext initiator_operator_context = 2;
+}
+
+message ListAffiliateDomainsResponse {
+    repeated AffiliateDomain domains = 1;
+}
+
+message SetAffiliateDomainRequest {
+    string domain = 1;
+    optional bool available_to_all = 2;
+    repeated int64 affiliate_ids = 3;
+    api.common.OperatorContext initiator_operator_context = 4;
+}
+
+message SetAffiliateDomainResponse {}
+
 // -------------- Commission --------------
 
 message ListCommissionsRequest {
@@ -717,3 +754,4 @@ message ListAffiliateBillsResponse {
     int32 page = 3;
     int32 page_size = 4;
 }
+

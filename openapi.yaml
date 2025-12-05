@@ -802,6 +802,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.affiliate.service.v1.DeleteAffiliateResponse'
+    /v1/backoffice/affiliate/domain/list:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_ListAffiliateDomains
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.ListAffiliateDomainsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.ListAffiliateDomainsResponse'
+    /v1/backoffice/affiliate/domain/set:
+        post:
+            tags:
+                - BackofficeAffiliate
+            operationId: BackofficeAffiliate_SetAffiliateDomain
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.backoffice.service.v1.SetAffiliateDomainRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.affiliate.service.v1.SetAffiliateDomainResponse'
     /v1/backoffice/affiliate/event/list:
         post:
             tags:
@@ -6046,6 +6082,25 @@ components:
                     type: string
                 subAffiliateCommissionRate:
                     type: string
+        api.affiliate.service.v1.AffiliateDomain:
+            type: object
+            properties:
+                domain:
+                    type: string
+                availableToAll:
+                    type: boolean
+                affiliateIds:
+                    type: array
+                    items:
+                        type: string
+                operatorId:
+                    type: string
+                operatorName:
+                    type: string
+                companyOperatorId:
+                    type: string
+                companyOperatorName:
+                    type: string
         api.affiliate.service.v1.AffiliateInfo:
             type: object
             properties:
@@ -6787,6 +6842,13 @@ components:
                     format: date-time
                 billDetail:
                     $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateBill_BillDetail'
+        api.affiliate.service.v1.ListAffiliateDomainsResponse:
+            type: object
+            properties:
+                domains:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateDomain'
         api.affiliate.service.v1.ListAffiliatesResponse:
             type: object
             properties:
@@ -7470,6 +7532,9 @@ components:
                     $ref: '#/components/schemas/api.affiliate.service.v1.ProgressiveByCountriesRateCommission'
                 qualification:
                     $ref: '#/components/schemas/api.affiliate.service.v1.Qualification'
+        api.affiliate.service.v1.SetAffiliateDomainResponse:
+            type: object
+            properties: {}
         api.affiliate.service.v1.SetReferralPlanResponse:
             type: object
             properties: {}
@@ -10133,6 +10198,11 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.backoffice.service.v1.ListAffiliateDomainsRequest:
+            type: object
+            properties:
+                affiliateId:
+                    type: string
         api.backoffice.service.v1.ListAffiliateUsersRequest:
             type: object
             properties:
@@ -13542,6 +13612,17 @@ components:
         api.backoffice.service.v1.SendRegisterVerificationCodeResponse:
             type: object
             properties: {}
+        api.backoffice.service.v1.SetAffiliateDomainRequest:
+            type: object
+            properties:
+                domain:
+                    type: string
+                availableToAll:
+                    type: boolean
+                affiliateIds:
+                    type: array
+                    items:
+                        type: string
         api.backoffice.service.v1.SetDepositRewardSequencesRequest:
             type: object
             properties:
