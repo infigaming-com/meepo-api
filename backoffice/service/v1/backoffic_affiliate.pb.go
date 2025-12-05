@@ -1232,9 +1232,10 @@ func (x *DeletePostbackRequest) GetPostbackId() int64 {
 type ListPostbacksRequest struct {
 	state                  protoimpl.MessageState         `protogen:"open.v1"`
 	AffiliateId            *int64                         `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3,oneof" json:"affiliate_id,omitempty"`
-	Page                   *int32                         `protobuf:"varint,2,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize               *int32                         `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,4,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	Status                 *string                        `protobuf:"bytes,2,opt,name=status,proto3,oneof" json:"status,omitempty"` // active/inactive
+	Page                   *int32                         `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize               *int32                         `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,5,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -1274,6 +1275,13 @@ func (x *ListPostbacksRequest) GetAffiliateId() int64 {
 		return *x.AffiliateId
 	}
 	return 0
+}
+
+func (x *ListPostbacksRequest) GetStatus() string {
+	if x != nil && x.Status != nil {
+		return *x.Status
+	}
+	return ""
 }
 
 func (x *ListPostbacksRequest) GetPage() int32 {
@@ -2081,13 +2089,15 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"\x0erequest_method\x18\a \x01(\tR\rrequestMethod\"8\n" +
 	"\x15DeletePostbackRequest\x12\x1f\n" +
 	"\vpostback_id\x18\x01 \x01(\x03R\n" +
-	"postbackId\"\xff\x01\n" +
+	"postbackId\"\xa7\x02\n" +
 	"\x14ListPostbacksRequest\x12&\n" +
-	"\faffiliate_id\x18\x01 \x01(\x03H\x00R\vaffiliateId\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x02 \x01(\x05H\x01R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x03 \x01(\x05H\x02R\bpageSize\x88\x01\x01\x12\\\n" +
-	"\x18operator_context_filters\x18\x04 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\x0f\n" +
-	"\r_affiliate_idB\a\n" +
+	"\faffiliate_id\x18\x01 \x01(\x03H\x00R\vaffiliateId\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\x02 \x01(\tH\x01R\x06status\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x03 \x01(\x05H\x02R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x04 \x01(\x05H\x03R\bpageSize\x88\x01\x01\x12\\\n" +
+	"\x18operator_context_filters\x18\x05 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\x0f\n" +
+	"\r_affiliate_idB\t\n" +
+	"\a_statusB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_size\"\xcd\x03\n" +
