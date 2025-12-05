@@ -2327,12 +2327,13 @@ func (*DeletePostbackResponse) Descriptor() ([]byte, []int) {
 type ListPostbacksRequest struct {
 	state                    protoimpl.MessageState         `protogen:"open.v1"`
 	AffiliateId              *int64                         `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3,oneof" json:"affiliate_id,omitempty"`
-	Page                     *int32                         `protobuf:"varint,2,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize                 *int32                         `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	InitiatorUserId          int64                          `protobuf:"varint,4,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
-	InitiatorUserRoleId      int32                          `protobuf:"varint,5,opt,name=initiator_user_role_id,json=initiatorUserRoleId,proto3" json:"initiator_user_role_id,omitempty"`
-	InitiatorOperatorContext *common.OperatorContext        `protobuf:"bytes,6,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
-	OperatorContextFilters   *common.OperatorContextFilters `protobuf:"bytes,7,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	Status                   *string                        `protobuf:"bytes,2,opt,name=status,proto3,oneof" json:"status,omitempty"` // active/inactive
+	Page                     *int32                         `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize                 *int32                         `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	InitiatorUserId          int64                          `protobuf:"varint,5,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
+	InitiatorUserRoleId      int32                          `protobuf:"varint,6,opt,name=initiator_user_role_id,json=initiatorUserRoleId,proto3" json:"initiator_user_role_id,omitempty"`
+	InitiatorOperatorContext *common.OperatorContext        `protobuf:"bytes,7,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
+	OperatorContextFilters   *common.OperatorContextFilters `protobuf:"bytes,8,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -2372,6 +2373,13 @@ func (x *ListPostbacksRequest) GetAffiliateId() int64 {
 		return *x.AffiliateId
 	}
 	return 0
+}
+
+func (x *ListPostbacksRequest) GetStatus() string {
+	if x != nil && x.Status != nil {
+		return *x.Status
+	}
+	return ""
 }
 
 func (x *ListPostbacksRequest) GetPage() int32 {
@@ -6021,16 +6029,18 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\x11initiator_user_id\x18\x02 \x01(\x03R\x0finitiatorUserId\x123\n" +
 	"\x16initiator_user_role_id\x18\x03 \x01(\x05R\x13initiatorUserRoleId\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\"\x18\n" +
-	"\x16DeletePostbackResponse\"\xbb\x03\n" +
+	"\x16DeletePostbackResponse\"\xe3\x03\n" +
 	"\x14ListPostbacksRequest\x12&\n" +
-	"\faffiliate_id\x18\x01 \x01(\x03H\x00R\vaffiliateId\x88\x01\x01\x12\x17\n" +
-	"\x04page\x18\x02 \x01(\x05H\x01R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x03 \x01(\x05H\x02R\bpageSize\x88\x01\x01\x12*\n" +
-	"\x11initiator_user_id\x18\x04 \x01(\x03R\x0finitiatorUserId\x123\n" +
-	"\x16initiator_user_role_id\x18\x05 \x01(\x05R\x13initiatorUserRoleId\x12Y\n" +
-	"\x1ainitiator_operator_context\x18\x06 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12\\\n" +
-	"\x18operator_context_filters\x18\a \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\x0f\n" +
-	"\r_affiliate_idB\a\n" +
+	"\faffiliate_id\x18\x01 \x01(\x03H\x00R\vaffiliateId\x88\x01\x01\x12\x1b\n" +
+	"\x06status\x18\x02 \x01(\tH\x01R\x06status\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x03 \x01(\x05H\x02R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x04 \x01(\x05H\x03R\bpageSize\x88\x01\x01\x12*\n" +
+	"\x11initiator_user_id\x18\x05 \x01(\x03R\x0finitiatorUserId\x123\n" +
+	"\x16initiator_user_role_id\x18\x06 \x01(\x05R\x13initiatorUserRoleId\x12Y\n" +
+	"\x1ainitiator_operator_context\x18\a \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12\\\n" +
+	"\x18operator_context_filters\x18\b \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\x0f\n" +
+	"\r_affiliate_idB\t\n" +
+	"\a_statusB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_size\"\x9b\a\n" +

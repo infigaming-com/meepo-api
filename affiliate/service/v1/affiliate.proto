@@ -513,12 +513,13 @@ message DeletePostbackResponse {
 
 message ListPostbacksRequest {
     optional int64 affiliate_id = 1;
-    optional int32 page = 2;
-    optional int32 page_size = 3;
-    int64 initiator_user_id = 4;
-    int32 initiator_user_role_id = 5;
-    api.common.OperatorContext initiator_operator_context = 6;
-    api.common.OperatorContextFilters operator_context_filters = 7;
+    optional string status = 2; // active/inactive
+    optional int32 page = 3;
+    optional int32 page_size = 4;
+    int64 initiator_user_id = 5;
+    int32 initiator_user_role_id = 6;
+    api.common.OperatorContext initiator_operator_context = 7;
+    api.common.OperatorContextFilters operator_context_filters = 8;
 }
 
 message ListPostbacksResponse {
