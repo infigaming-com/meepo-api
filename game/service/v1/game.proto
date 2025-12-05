@@ -1704,17 +1704,30 @@ message GetDepositCreditsGGRRequest {
 
 // 获取指定时间范围内用户存款金额所产生的GGR响应
 message GetDepositCreditsGGRResponse {
+	// 按游戏类别分组的数据
 	message GameData {
 		string game_type = 1; // game category
 		string ggr_usd = 2;
 		string ggr_reporting_currency = 3;
-		string turnover_usd = 4; // total bet usd (same as total_bet_usd)
-		string turnover_reporting_currency = 5; // total bet reporting currency (same as total_bet_reporting_currency)
-		string rtp = 6;
-		string total_bet_usd = 7; // bet + debit 的 USD 总和
-		string total_bet_reporting_currency = 8; // bet + debit 的 reporting currency 总和
-		string total_win_usd = 9; // win + credit 的 USD 总和
-		string total_win_reporting_currency = 10; // win + credit 的 reporting currency 总和
+		string total_bet_usd = 4; // bet + debit 的 USD 总和
+		string total_bet_reporting_currency = 5; // bet + debit 的 reporting currency 总和
+		string total_win_usd = 6; // win + credit 的 USD 总和
+		string total_win_reporting_currency = 7; // win + credit 的 reporting currency 总和
+		string rtp = 8; // RTP (TotalWin / TotalBet * 100)
 	}
-	repeated GameData game_data = 1;
+	
+	// 按存款记录分组的数据
+	message DepositData {
+		int64 credit_id = 1; // 存款记录ID
+		string original_amount_reporting_currency = 2; // 原始存款金额 (reporting currency)
+		string total_ggr_usd = 3; // 该笔存款产生的总GGR (USD)
+		string total_ggr_reporting_currency = 4; // 该笔存款产生的总GGR (reporting currency)
+		string total_bet_usd = 5; // 该笔存款产生的总投注 (USD)
+		string total_bet_reporting_currency = 6; // 该笔存款产生的总投注 (reporting currency)
+		string total_win_usd = 7; // 该笔存款产生的总赢额 (USD)
+		string total_win_reporting_currency = 8; // 该笔存款产生的总赢额 (reporting currency)
+		repeated GameData game_data = 9; // 按游戏类别分组的详细数据
+	}
+	
+	repeated DepositData deposit_data = 1; // 按存款记录分组的数据列表
 }

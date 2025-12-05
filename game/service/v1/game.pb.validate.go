@@ -16674,7 +16674,7 @@ func (m *GetDepositCreditsGGRResponse) validate(all bool) error {
 
 	var errors []error
 
-	for idx, item := range m.GetGameData() {
+	for idx, item := range m.GetDepositData() {
 		_, _ = idx, item
 
 		if all {
@@ -16682,7 +16682,7 @@ func (m *GetDepositCreditsGGRResponse) validate(all bool) error {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, GetDepositCreditsGGRResponseValidationError{
-						field:  fmt.Sprintf("GameData[%v]", idx),
+						field:  fmt.Sprintf("DepositData[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -16690,7 +16690,7 @@ func (m *GetDepositCreditsGGRResponse) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, GetDepositCreditsGGRResponseValidationError{
-						field:  fmt.Sprintf("GameData[%v]", idx),
+						field:  fmt.Sprintf("DepositData[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -16699,7 +16699,7 @@ func (m *GetDepositCreditsGGRResponse) validate(all bool) error {
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return GetDepositCreditsGGRResponseValidationError{
-					field:  fmt.Sprintf("GameData[%v]", idx),
+					field:  fmt.Sprintf("DepositData[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -20912,12 +20912,6 @@ func (m *GetDepositCreditsGGRResponse_GameData) validate(all bool) error {
 
 	// no validation rules for GgrReportingCurrency
 
-	// no validation rules for TurnoverUsd
-
-	// no validation rules for TurnoverReportingCurrency
-
-	// no validation rules for Rtp
-
 	// no validation rules for TotalBetUsd
 
 	// no validation rules for TotalBetReportingCurrency
@@ -20925,6 +20919,8 @@ func (m *GetDepositCreditsGGRResponse_GameData) validate(all bool) error {
 	// no validation rules for TotalWinUsd
 
 	// no validation rules for TotalWinReportingCurrency
+
+	// no validation rules for Rtp
 
 	if len(errors) > 0 {
 		return GetDepositCreditsGGRResponse_GameDataMultiError(errors)
@@ -21007,3 +21003,159 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetDepositCreditsGGRResponse_GameDataValidationError{}
+
+// Validate checks the field values on GetDepositCreditsGGRResponse_DepositData
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetDepositCreditsGGRResponse_DepositData) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetDepositCreditsGGRResponse_DepositData with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in
+// GetDepositCreditsGGRResponse_DepositDataMultiError, or nil if none found.
+func (m *GetDepositCreditsGGRResponse_DepositData) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetDepositCreditsGGRResponse_DepositData) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for CreditId
+
+	// no validation rules for OriginalAmountReportingCurrency
+
+	// no validation rules for TotalGgrUsd
+
+	// no validation rules for TotalGgrReportingCurrency
+
+	// no validation rules for TotalBetUsd
+
+	// no validation rules for TotalBetReportingCurrency
+
+	// no validation rules for TotalWinUsd
+
+	// no validation rules for TotalWinReportingCurrency
+
+	for idx, item := range m.GetGameData() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetDepositCreditsGGRResponse_DepositDataValidationError{
+						field:  fmt.Sprintf("GameData[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetDepositCreditsGGRResponse_DepositDataValidationError{
+						field:  fmt.Sprintf("GameData[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetDepositCreditsGGRResponse_DepositDataValidationError{
+					field:  fmt.Sprintf("GameData[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetDepositCreditsGGRResponse_DepositDataMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetDepositCreditsGGRResponse_DepositDataMultiError is an error wrapping
+// multiple validation errors returned by
+// GetDepositCreditsGGRResponse_DepositData.ValidateAll() if the designated
+// constraints aren't met.
+type GetDepositCreditsGGRResponse_DepositDataMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetDepositCreditsGGRResponse_DepositDataMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetDepositCreditsGGRResponse_DepositDataMultiError) AllErrors() []error { return m }
+
+// GetDepositCreditsGGRResponse_DepositDataValidationError is the validation
+// error returned by GetDepositCreditsGGRResponse_DepositData.Validate if the
+// designated constraints aren't met.
+type GetDepositCreditsGGRResponse_DepositDataValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetDepositCreditsGGRResponse_DepositDataValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetDepositCreditsGGRResponse_DepositDataValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetDepositCreditsGGRResponse_DepositDataValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetDepositCreditsGGRResponse_DepositDataValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetDepositCreditsGGRResponse_DepositDataValidationError) ErrorName() string {
+	return "GetDepositCreditsGGRResponse_DepositDataValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetDepositCreditsGGRResponse_DepositDataValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetDepositCreditsGGRResponse_DepositData.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetDepositCreditsGGRResponse_DepositDataValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetDepositCreditsGGRResponse_DepositDataValidationError{}
