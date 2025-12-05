@@ -11745,6 +11745,8 @@ components:
             properties:
                 affiliateId:
                     type: string
+                status:
+                    type: string
                 page:
                     type: integer
                     format: int32

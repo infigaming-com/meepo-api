@@ -342,9 +342,10 @@ message DeletePostbackRequest {
 
 message ListPostbacksRequest {
     optional int64 affiliate_id = 1;
-    optional int32 page = 2;
-    optional int32 page_size = 3;
-    api.common.OperatorContextFilters operator_context_filters = 4;
+	optional string status = 2; // active/inactive
+    optional int32 page = 3;
+    optional int32 page_size = 4;
+    api.common.OperatorContextFilters operator_context_filters = 5;
 }
 
 // -------------- Event --------------
