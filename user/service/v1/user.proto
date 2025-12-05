@@ -1065,6 +1065,7 @@ message CreateRoleRequest {
 	string name = 1;
 	repeated Permission permissions = 2;
 	int64 user_id = 3;
+	common.OperatorContext operator_context = 4;
 }
 
 message Permission {
@@ -1077,6 +1078,7 @@ message CreateRoleResponse {}
 message ListRolesRequest {
 	optional int32 page = 1;
 	optional int32 page_size = 2;
+	common.OperatorContext operator_context = 3;
 }
 
 message Role {
@@ -1121,7 +1123,8 @@ message UpdateRoleRequest {
 	int64 role_id = 1;
 	string name = 2;
 	repeated Permission permissions = 3;
-	int64 current_role_id = 4;
+	common.OperatorContext operator_context = 4;
+	int64 user_id = 5;
 }
 
 message UpdateRoleResponse {}
