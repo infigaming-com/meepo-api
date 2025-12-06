@@ -10201,8 +10201,8 @@ components:
         api.backoffice.service.v1.ListAffiliateDomainsRequest:
             type: object
             properties:
-                affiliateId:
-                    type: string
+                operatorContextFilters:
+                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ListAffiliateUsersRequest:
             type: object
             properties:

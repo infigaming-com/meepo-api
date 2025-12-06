@@ -1306,10 +1306,10 @@ func (x *ListPostbacksRequest) GetOperatorContextFilters() *common.OperatorConte
 }
 
 type ListAffiliateDomainsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	AffiliateId   int64                  `protobuf:"varint,1,opt,name=affiliate_id,json=affiliateId,proto3" json:"affiliate_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ListAffiliateDomainsRequest) Reset() {
@@ -1342,11 +1342,11 @@ func (*ListAffiliateDomainsRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffic_affiliate_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *ListAffiliateDomainsRequest) GetAffiliateId() int64 {
+func (x *ListAffiliateDomainsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
 	if x != nil {
-		return x.AffiliateId
+		return x.OperatorContextFilters
 	}
-	return 0
+	return nil
 }
 
 type SetAffiliateDomainRequest struct {
@@ -2204,9 +2204,9 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"\a_statusB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"@\n" +
-	"\x1bListAffiliateDomainsRequest\x12!\n" +
-	"\faffiliate_id\x18\x01 \x01(\x03R\vaffiliateId\"\x9c\x01\n" +
+	"_page_size\"{\n" +
+	"\x1bListAffiliateDomainsRequest\x12\\\n" +
+	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"\x9c\x01\n" +
 	"\x19SetAffiliateDomainRequest\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12-\n" +
 	"\x10available_to_all\x18\x02 \x01(\bH\x00R\x0eavailableToAll\x88\x01\x01\x12#\n" +
@@ -2424,85 +2424,86 @@ var file_backoffice_service_v1_backoffic_affiliate_proto_depIdxs = []int32{
 	32, // 8: api.backoffice.service.v1.UpdateCampaignRequest.campaign:type_name -> api.affiliate.service.v1.Campaign
 	33, // 9: api.backoffice.service.v1.ListCampaignsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
 	33, // 10: api.backoffice.service.v1.ListPostbacksRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	34, // 11: api.backoffice.service.v1.ListEventsRequest.start_time:type_name -> google.protobuf.Timestamp
-	34, // 12: api.backoffice.service.v1.ListEventsRequest.end_time:type_name -> google.protobuf.Timestamp
-	33, // 13: api.backoffice.service.v1.ListEventsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	34, // 14: api.backoffice.service.v1.ListCommissionsRequest.start_time:type_name -> google.protobuf.Timestamp
-	34, // 15: api.backoffice.service.v1.ListCommissionsRequest.end_time:type_name -> google.protobuf.Timestamp
-	33, // 16: api.backoffice.service.v1.ListCommissionsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	34, // 17: api.backoffice.service.v1.ListAffiliateUsersRequest.ftd_start_time:type_name -> google.protobuf.Timestamp
-	34, // 18: api.backoffice.service.v1.ListAffiliateUsersRequest.ftd_end_time:type_name -> google.protobuf.Timestamp
-	34, // 19: api.backoffice.service.v1.ListAffiliateUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
-	34, // 20: api.backoffice.service.v1.ListAffiliateUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
-	33, // 21: api.backoffice.service.v1.ListAffiliateUsersRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	34, // 22: api.backoffice.service.v1.ListAffiliateBillsRequest.updated_at_start_time:type_name -> google.protobuf.Timestamp
-	34, // 23: api.backoffice.service.v1.ListAffiliateBillsRequest.updated_at_end_time:type_name -> google.protobuf.Timestamp
-	33, // 24: api.backoffice.service.v1.ListAffiliateBillsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	30, // 25: api.backoffice.service.v1.SetReferralPlanRequest.target_operator_context:type_name -> api.common.OperatorContext
-	35, // 26: api.backoffice.service.v1.SetReferralPlanRequest.plan_config:type_name -> api.affiliate.service.v1.ReferralPlanConfig
-	30, // 27: api.backoffice.service.v1.GetReferralPlanRequest.target_operator_context:type_name -> api.common.OperatorContext
-	36, // 28: api.backoffice.service.v1.CreateCampaignRequest.Campaign.channel_config:type_name -> api.affiliate.service.v1.ChannelConfig
-	0,  // 29: api.backoffice.service.v1.BackofficeAffiliate.CreateCommissionPlan:input_type -> api.backoffice.service.v1.CreateCommissionPlanRequest
-	1,  // 30: api.backoffice.service.v1.BackofficeAffiliate.UpdateCommissionPlan:input_type -> api.backoffice.service.v1.UpdateCommissionPlanRequest
-	2,  // 31: api.backoffice.service.v1.BackofficeAffiliate.GetCommissionPlan:input_type -> api.backoffice.service.v1.GetCommissionPlanRequest
-	3,  // 32: api.backoffice.service.v1.BackofficeAffiliate.ListCommissionPlans:input_type -> api.backoffice.service.v1.ListCommissionPlansRequest
-	4,  // 33: api.backoffice.service.v1.BackofficeAffiliate.DeleteCommissionPlan:input_type -> api.backoffice.service.v1.DeleteCommissionPlanRequest
-	5,  // 34: api.backoffice.service.v1.BackofficeAffiliate.ListAllCommissionPlans:input_type -> api.backoffice.service.v1.ListAllCommissionPlansRequest
-	6,  // 35: api.backoffice.service.v1.BackofficeAffiliate.CreateAffiliate:input_type -> api.backoffice.service.v1.CreateAffiliateRequest
-	7,  // 36: api.backoffice.service.v1.BackofficeAffiliate.UpdateAffiliate:input_type -> api.backoffice.service.v1.UpdateAffiliateRequest
-	8,  // 37: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliates:input_type -> api.backoffice.service.v1.ListAffiliatesRequest
-	9,  // 38: api.backoffice.service.v1.BackofficeAffiliate.DeleteAffiliate:input_type -> api.backoffice.service.v1.DeleteAffiliateRequest
-	10, // 39: api.backoffice.service.v1.BackofficeAffiliate.GetAffiliateDetails:input_type -> api.backoffice.service.v1.GetAffiliateDetailsRequest
-	11, // 40: api.backoffice.service.v1.BackofficeAffiliate.CreateCampaign:input_type -> api.backoffice.service.v1.CreateCampaignRequest
-	12, // 41: api.backoffice.service.v1.BackofficeAffiliate.UpdateCampaign:input_type -> api.backoffice.service.v1.UpdateCampaignRequest
-	13, // 42: api.backoffice.service.v1.BackofficeAffiliate.ListCampaigns:input_type -> api.backoffice.service.v1.ListCampaignsRequest
-	14, // 43: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateCampaigns:input_type -> api.backoffice.service.v1.ListAffiliateCampaignsRequest
-	15, // 44: api.backoffice.service.v1.BackofficeAffiliate.DeleteCampaign:input_type -> api.backoffice.service.v1.DeleteCampaignRequest
-	16, // 45: api.backoffice.service.v1.BackofficeAffiliate.CreatePostback:input_type -> api.backoffice.service.v1.CreatePostbackRequest
-	17, // 46: api.backoffice.service.v1.BackofficeAffiliate.UpdatePostback:input_type -> api.backoffice.service.v1.UpdatePostbackRequest
-	18, // 47: api.backoffice.service.v1.BackofficeAffiliate.DeletePostback:input_type -> api.backoffice.service.v1.DeletePostbackRequest
-	19, // 48: api.backoffice.service.v1.BackofficeAffiliate.ListPostbacks:input_type -> api.backoffice.service.v1.ListPostbacksRequest
-	20, // 49: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateDomains:input_type -> api.backoffice.service.v1.ListAffiliateDomainsRequest
-	21, // 50: api.backoffice.service.v1.BackofficeAffiliate.SetAffiliateDomain:input_type -> api.backoffice.service.v1.SetAffiliateDomainRequest
-	22, // 51: api.backoffice.service.v1.BackofficeAffiliate.ListEvents:input_type -> api.backoffice.service.v1.ListEventsRequest
-	23, // 52: api.backoffice.service.v1.BackofficeAffiliate.ListCommissions:input_type -> api.backoffice.service.v1.ListCommissionsRequest
-	24, // 53: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateUsers:input_type -> api.backoffice.service.v1.ListAffiliateUsersRequest
-	25, // 54: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateBills:input_type -> api.backoffice.service.v1.ListAffiliateBillsRequest
-	26, // 55: api.backoffice.service.v1.BackofficeAffiliate.SetReferralPlan:input_type -> api.backoffice.service.v1.SetReferralPlanRequest
-	27, // 56: api.backoffice.service.v1.BackofficeAffiliate.GetReferralPlan:input_type -> api.backoffice.service.v1.GetReferralPlanRequest
-	37, // 57: api.backoffice.service.v1.BackofficeAffiliate.CreateCommissionPlan:output_type -> api.affiliate.service.v1.CreateCommissionPlanResponse
-	38, // 58: api.backoffice.service.v1.BackofficeAffiliate.UpdateCommissionPlan:output_type -> api.affiliate.service.v1.UpdateCommissionPlanResponse
-	39, // 59: api.backoffice.service.v1.BackofficeAffiliate.GetCommissionPlan:output_type -> api.affiliate.service.v1.GetCommissionPlanResponse
-	40, // 60: api.backoffice.service.v1.BackofficeAffiliate.ListCommissionPlans:output_type -> api.affiliate.service.v1.ListCommissionPlansResponse
-	41, // 61: api.backoffice.service.v1.BackofficeAffiliate.DeleteCommissionPlan:output_type -> api.affiliate.service.v1.DeleteCommissionPlanResponse
-	42, // 62: api.backoffice.service.v1.BackofficeAffiliate.ListAllCommissionPlans:output_type -> api.affiliate.service.v1.ListAllCommissionPlansResponse
-	43, // 63: api.backoffice.service.v1.BackofficeAffiliate.CreateAffiliate:output_type -> api.affiliate.service.v1.CreateAffiliateResponse
-	44, // 64: api.backoffice.service.v1.BackofficeAffiliate.UpdateAffiliate:output_type -> api.affiliate.service.v1.UpdateAffiliateResponse
-	45, // 65: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliates:output_type -> api.affiliate.service.v1.ListAffiliatesResponse
-	46, // 66: api.backoffice.service.v1.BackofficeAffiliate.DeleteAffiliate:output_type -> api.affiliate.service.v1.DeleteAffiliateResponse
-	47, // 67: api.backoffice.service.v1.BackofficeAffiliate.GetAffiliateDetails:output_type -> api.affiliate.service.v1.GetAffiliateDetailsResponse
-	48, // 68: api.backoffice.service.v1.BackofficeAffiliate.CreateCampaign:output_type -> api.affiliate.service.v1.CreateCampaignResponse
-	49, // 69: api.backoffice.service.v1.BackofficeAffiliate.UpdateCampaign:output_type -> api.affiliate.service.v1.UpdateCampaignResponse
-	50, // 70: api.backoffice.service.v1.BackofficeAffiliate.ListCampaigns:output_type -> api.affiliate.service.v1.ListCampaignsResponse
-	50, // 71: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateCampaigns:output_type -> api.affiliate.service.v1.ListCampaignsResponse
-	51, // 72: api.backoffice.service.v1.BackofficeAffiliate.DeleteCampaign:output_type -> api.affiliate.service.v1.DeleteCampaignResponse
-	52, // 73: api.backoffice.service.v1.BackofficeAffiliate.CreatePostback:output_type -> api.affiliate.service.v1.CreatePostbackResponse
-	53, // 74: api.backoffice.service.v1.BackofficeAffiliate.UpdatePostback:output_type -> api.affiliate.service.v1.UpdatePostbackResponse
-	54, // 75: api.backoffice.service.v1.BackofficeAffiliate.DeletePostback:output_type -> api.affiliate.service.v1.DeletePostbackResponse
-	55, // 76: api.backoffice.service.v1.BackofficeAffiliate.ListPostbacks:output_type -> api.affiliate.service.v1.ListPostbacksResponse
-	56, // 77: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateDomains:output_type -> api.affiliate.service.v1.ListAffiliateDomainsResponse
-	57, // 78: api.backoffice.service.v1.BackofficeAffiliate.SetAffiliateDomain:output_type -> api.affiliate.service.v1.SetAffiliateDomainResponse
-	58, // 79: api.backoffice.service.v1.BackofficeAffiliate.ListEvents:output_type -> api.affiliate.service.v1.ListEventsResponse
-	59, // 80: api.backoffice.service.v1.BackofficeAffiliate.ListCommissions:output_type -> api.affiliate.service.v1.ListCommissionsResponse
-	60, // 81: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateUsers:output_type -> api.affiliate.service.v1.ListUsersResponse
-	61, // 82: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateBills:output_type -> api.affiliate.service.v1.ListAffiliateBillsResponse
-	62, // 83: api.backoffice.service.v1.BackofficeAffiliate.SetReferralPlan:output_type -> api.affiliate.service.v1.SetReferralPlanResponse
-	63, // 84: api.backoffice.service.v1.BackofficeAffiliate.GetReferralPlan:output_type -> api.affiliate.service.v1.GetReferralPlanResponse
-	57, // [57:85] is the sub-list for method output_type
-	29, // [29:57] is the sub-list for method input_type
-	29, // [29:29] is the sub-list for extension type_name
-	29, // [29:29] is the sub-list for extension extendee
-	0,  // [0:29] is the sub-list for field type_name
+	33, // 11: api.backoffice.service.v1.ListAffiliateDomainsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	34, // 12: api.backoffice.service.v1.ListEventsRequest.start_time:type_name -> google.protobuf.Timestamp
+	34, // 13: api.backoffice.service.v1.ListEventsRequest.end_time:type_name -> google.protobuf.Timestamp
+	33, // 14: api.backoffice.service.v1.ListEventsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	34, // 15: api.backoffice.service.v1.ListCommissionsRequest.start_time:type_name -> google.protobuf.Timestamp
+	34, // 16: api.backoffice.service.v1.ListCommissionsRequest.end_time:type_name -> google.protobuf.Timestamp
+	33, // 17: api.backoffice.service.v1.ListCommissionsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	34, // 18: api.backoffice.service.v1.ListAffiliateUsersRequest.ftd_start_time:type_name -> google.protobuf.Timestamp
+	34, // 19: api.backoffice.service.v1.ListAffiliateUsersRequest.ftd_end_time:type_name -> google.protobuf.Timestamp
+	34, // 20: api.backoffice.service.v1.ListAffiliateUsersRequest.registration_start_time:type_name -> google.protobuf.Timestamp
+	34, // 21: api.backoffice.service.v1.ListAffiliateUsersRequest.registration_end_time:type_name -> google.protobuf.Timestamp
+	33, // 22: api.backoffice.service.v1.ListAffiliateUsersRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	34, // 23: api.backoffice.service.v1.ListAffiliateBillsRequest.updated_at_start_time:type_name -> google.protobuf.Timestamp
+	34, // 24: api.backoffice.service.v1.ListAffiliateBillsRequest.updated_at_end_time:type_name -> google.protobuf.Timestamp
+	33, // 25: api.backoffice.service.v1.ListAffiliateBillsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	30, // 26: api.backoffice.service.v1.SetReferralPlanRequest.target_operator_context:type_name -> api.common.OperatorContext
+	35, // 27: api.backoffice.service.v1.SetReferralPlanRequest.plan_config:type_name -> api.affiliate.service.v1.ReferralPlanConfig
+	30, // 28: api.backoffice.service.v1.GetReferralPlanRequest.target_operator_context:type_name -> api.common.OperatorContext
+	36, // 29: api.backoffice.service.v1.CreateCampaignRequest.Campaign.channel_config:type_name -> api.affiliate.service.v1.ChannelConfig
+	0,  // 30: api.backoffice.service.v1.BackofficeAffiliate.CreateCommissionPlan:input_type -> api.backoffice.service.v1.CreateCommissionPlanRequest
+	1,  // 31: api.backoffice.service.v1.BackofficeAffiliate.UpdateCommissionPlan:input_type -> api.backoffice.service.v1.UpdateCommissionPlanRequest
+	2,  // 32: api.backoffice.service.v1.BackofficeAffiliate.GetCommissionPlan:input_type -> api.backoffice.service.v1.GetCommissionPlanRequest
+	3,  // 33: api.backoffice.service.v1.BackofficeAffiliate.ListCommissionPlans:input_type -> api.backoffice.service.v1.ListCommissionPlansRequest
+	4,  // 34: api.backoffice.service.v1.BackofficeAffiliate.DeleteCommissionPlan:input_type -> api.backoffice.service.v1.DeleteCommissionPlanRequest
+	5,  // 35: api.backoffice.service.v1.BackofficeAffiliate.ListAllCommissionPlans:input_type -> api.backoffice.service.v1.ListAllCommissionPlansRequest
+	6,  // 36: api.backoffice.service.v1.BackofficeAffiliate.CreateAffiliate:input_type -> api.backoffice.service.v1.CreateAffiliateRequest
+	7,  // 37: api.backoffice.service.v1.BackofficeAffiliate.UpdateAffiliate:input_type -> api.backoffice.service.v1.UpdateAffiliateRequest
+	8,  // 38: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliates:input_type -> api.backoffice.service.v1.ListAffiliatesRequest
+	9,  // 39: api.backoffice.service.v1.BackofficeAffiliate.DeleteAffiliate:input_type -> api.backoffice.service.v1.DeleteAffiliateRequest
+	10, // 40: api.backoffice.service.v1.BackofficeAffiliate.GetAffiliateDetails:input_type -> api.backoffice.service.v1.GetAffiliateDetailsRequest
+	11, // 41: api.backoffice.service.v1.BackofficeAffiliate.CreateCampaign:input_type -> api.backoffice.service.v1.CreateCampaignRequest
+	12, // 42: api.backoffice.service.v1.BackofficeAffiliate.UpdateCampaign:input_type -> api.backoffice.service.v1.UpdateCampaignRequest
+	13, // 43: api.backoffice.service.v1.BackofficeAffiliate.ListCampaigns:input_type -> api.backoffice.service.v1.ListCampaignsRequest
+	14, // 44: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateCampaigns:input_type -> api.backoffice.service.v1.ListAffiliateCampaignsRequest
+	15, // 45: api.backoffice.service.v1.BackofficeAffiliate.DeleteCampaign:input_type -> api.backoffice.service.v1.DeleteCampaignRequest
+	16, // 46: api.backoffice.service.v1.BackofficeAffiliate.CreatePostback:input_type -> api.backoffice.service.v1.CreatePostbackRequest
+	17, // 47: api.backoffice.service.v1.BackofficeAffiliate.UpdatePostback:input_type -> api.backoffice.service.v1.UpdatePostbackRequest
+	18, // 48: api.backoffice.service.v1.BackofficeAffiliate.DeletePostback:input_type -> api.backoffice.service.v1.DeletePostbackRequest
+	19, // 49: api.backoffice.service.v1.BackofficeAffiliate.ListPostbacks:input_type -> api.backoffice.service.v1.ListPostbacksRequest
+	20, // 50: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateDomains:input_type -> api.backoffice.service.v1.ListAffiliateDomainsRequest
+	21, // 51: api.backoffice.service.v1.BackofficeAffiliate.SetAffiliateDomain:input_type -> api.backoffice.service.v1.SetAffiliateDomainRequest
+	22, // 52: api.backoffice.service.v1.BackofficeAffiliate.ListEvents:input_type -> api.backoffice.service.v1.ListEventsRequest
+	23, // 53: api.backoffice.service.v1.BackofficeAffiliate.ListCommissions:input_type -> api.backoffice.service.v1.ListCommissionsRequest
+	24, // 54: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateUsers:input_type -> api.backoffice.service.v1.ListAffiliateUsersRequest
+	25, // 55: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateBills:input_type -> api.backoffice.service.v1.ListAffiliateBillsRequest
+	26, // 56: api.backoffice.service.v1.BackofficeAffiliate.SetReferralPlan:input_type -> api.backoffice.service.v1.SetReferralPlanRequest
+	27, // 57: api.backoffice.service.v1.BackofficeAffiliate.GetReferralPlan:input_type -> api.backoffice.service.v1.GetReferralPlanRequest
+	37, // 58: api.backoffice.service.v1.BackofficeAffiliate.CreateCommissionPlan:output_type -> api.affiliate.service.v1.CreateCommissionPlanResponse
+	38, // 59: api.backoffice.service.v1.BackofficeAffiliate.UpdateCommissionPlan:output_type -> api.affiliate.service.v1.UpdateCommissionPlanResponse
+	39, // 60: api.backoffice.service.v1.BackofficeAffiliate.GetCommissionPlan:output_type -> api.affiliate.service.v1.GetCommissionPlanResponse
+	40, // 61: api.backoffice.service.v1.BackofficeAffiliate.ListCommissionPlans:output_type -> api.affiliate.service.v1.ListCommissionPlansResponse
+	41, // 62: api.backoffice.service.v1.BackofficeAffiliate.DeleteCommissionPlan:output_type -> api.affiliate.service.v1.DeleteCommissionPlanResponse
+	42, // 63: api.backoffice.service.v1.BackofficeAffiliate.ListAllCommissionPlans:output_type -> api.affiliate.service.v1.ListAllCommissionPlansResponse
+	43, // 64: api.backoffice.service.v1.BackofficeAffiliate.CreateAffiliate:output_type -> api.affiliate.service.v1.CreateAffiliateResponse
+	44, // 65: api.backoffice.service.v1.BackofficeAffiliate.UpdateAffiliate:output_type -> api.affiliate.service.v1.UpdateAffiliateResponse
+	45, // 66: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliates:output_type -> api.affiliate.service.v1.ListAffiliatesResponse
+	46, // 67: api.backoffice.service.v1.BackofficeAffiliate.DeleteAffiliate:output_type -> api.affiliate.service.v1.DeleteAffiliateResponse
+	47, // 68: api.backoffice.service.v1.BackofficeAffiliate.GetAffiliateDetails:output_type -> api.affiliate.service.v1.GetAffiliateDetailsResponse
+	48, // 69: api.backoffice.service.v1.BackofficeAffiliate.CreateCampaign:output_type -> api.affiliate.service.v1.CreateCampaignResponse
+	49, // 70: api.backoffice.service.v1.BackofficeAffiliate.UpdateCampaign:output_type -> api.affiliate.service.v1.UpdateCampaignResponse
+	50, // 71: api.backoffice.service.v1.BackofficeAffiliate.ListCampaigns:output_type -> api.affiliate.service.v1.ListCampaignsResponse
+	50, // 72: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateCampaigns:output_type -> api.affiliate.service.v1.ListCampaignsResponse
+	51, // 73: api.backoffice.service.v1.BackofficeAffiliate.DeleteCampaign:output_type -> api.affiliate.service.v1.DeleteCampaignResponse
+	52, // 74: api.backoffice.service.v1.BackofficeAffiliate.CreatePostback:output_type -> api.affiliate.service.v1.CreatePostbackResponse
+	53, // 75: api.backoffice.service.v1.BackofficeAffiliate.UpdatePostback:output_type -> api.affiliate.service.v1.UpdatePostbackResponse
+	54, // 76: api.backoffice.service.v1.BackofficeAffiliate.DeletePostback:output_type -> api.affiliate.service.v1.DeletePostbackResponse
+	55, // 77: api.backoffice.service.v1.BackofficeAffiliate.ListPostbacks:output_type -> api.affiliate.service.v1.ListPostbacksResponse
+	56, // 78: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateDomains:output_type -> api.affiliate.service.v1.ListAffiliateDomainsResponse
+	57, // 79: api.backoffice.service.v1.BackofficeAffiliate.SetAffiliateDomain:output_type -> api.affiliate.service.v1.SetAffiliateDomainResponse
+	58, // 80: api.backoffice.service.v1.BackofficeAffiliate.ListEvents:output_type -> api.affiliate.service.v1.ListEventsResponse
+	59, // 81: api.backoffice.service.v1.BackofficeAffiliate.ListCommissions:output_type -> api.affiliate.service.v1.ListCommissionsResponse
+	60, // 82: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateUsers:output_type -> api.affiliate.service.v1.ListUsersResponse
+	61, // 83: api.backoffice.service.v1.BackofficeAffiliate.ListAffiliateBills:output_type -> api.affiliate.service.v1.ListAffiliateBillsResponse
+	62, // 84: api.backoffice.service.v1.BackofficeAffiliate.SetReferralPlan:output_type -> api.affiliate.service.v1.SetReferralPlanResponse
+	63, // 85: api.backoffice.service.v1.BackofficeAffiliate.GetReferralPlan:output_type -> api.affiliate.service.v1.GetReferralPlanResponse
+	58, // [58:86] is the sub-list for method output_type
+	30, // [30:58] is the sub-list for method input_type
+	30, // [30:30] is the sub-list for extension type_name
+	30, // [30:30] is the sub-list for extension extendee
+	0,  // [0:30] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffic_affiliate_proto_init() }
