@@ -87,6 +87,7 @@ message ListOperatorByoDomainsRequest {
 	optional string validation_status = 4;
 	optional int32 page = 5;
 	optional int32 page_size = 6;
+	optional bool pagination = 7; // if nil, pagination is true
 }
 
 message ListOperatorByoDomainsResponse {

@@ -862,3 +862,51 @@ func IsListPostbacksFailed(err error) bool {
 func ErrorListPostbacksFailed(format string, args ...interface{}) *errors.Error {
 	return errors.New(500, ErrorReason_LIST_POSTBACKS_FAILED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsDomainNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DOMAIN_NOT_FOUND.String() && e.Code == 500
+}
+
+func ErrorDomainNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DOMAIN_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}
+
+func IsDomainNotAuthorized(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_DOMAIN_NOT_AUTHORIZED.String() && e.Code == 500
+}
+
+func ErrorDomainNotAuthorized(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_DOMAIN_NOT_AUTHORIZED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsListAffiliateDomainsFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_LIST_AFFILIATE_DOMAINS_FAILED.String() && e.Code == 500
+}
+
+func ErrorListAffiliateDomainsFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_LIST_AFFILIATE_DOMAINS_FAILED.String(), fmt.Sprintf(format, args...))
+}
+
+func IsSetAffiliateDomainFailed(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_SET_AFFILIATE_DOMAIN_FAILED.String() && e.Code == 500
+}
+
+func ErrorSetAffiliateDomainFailed(format string, args ...interface{}) *errors.Error {
+	return errors.New(500, ErrorReason_SET_AFFILIATE_DOMAIN_FAILED.String(), fmt.Sprintf(format, args...))
+}

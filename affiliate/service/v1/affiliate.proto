@@ -61,6 +61,12 @@ service Affiliate {
 
     rpc ListPostbacks(ListPostbacksRequest) returns (ListPostbacksResponse) {}
 
+     // -------------- Affiliate Domain --------------
+
+     rpc ListAffiliateDomains(ListAffiliateDomainsRequest) returns (ListAffiliateDomainsResponse) {}
+
+     rpc SetAffiliateDomain(SetAffiliateDomainRequest) returns (SetAffiliateDomainResponse) {}
+
     // -------------- Event --------------
 
     rpc ListEvents(ListEventsRequest) returns (ListEventsResponse) {}
@@ -124,6 +130,7 @@ service Affiliate {
             body: "*"
         };
     }
+
 }
 
 message ContactType {
@@ -550,6 +557,54 @@ message ListPostbacksResponse {
     int32 page_size = 4;
 }
 
+// -------------- Affiliate Domain --------------
+
+
+
+// ListAffiliateDomains - returns domains based on initiator_role_id
+// For affiliate: returns only available domains (available_to_all and affiliate_ids are empty)
+// For operator: returns all domains with config details
+message ListAffiliateDomainsRequest {
+    int64 initiator_user_id = 1;
+    int64 initiator_role_id = 2;
+    api.common.OperatorContext initiator_operator_context = 3;
+    api.common.OperatorContext target_operator_context = 4;
+    optional int32 page = 5;
+    optional int32 page_size = 6;
+}
+
+message ListAffiliateDomainsResponse {
+    message AffiliateDomain {
+        message Affiliate {
+            int64 affiliate_id = 1;
+            string affiliate_name = 2;
+            string affiliate_company_name = 3;
+        }
+        string domain = 1;
+        bool available_to_all = 2;          // only visible to operator
+        repeated Affiliate affiliates = 3;   // only visible to operator
+        int64 operator_id = 4;
+        int64 company_operator_id = 6;
+        int64 retailer_operator_id = 7;
+        string operator_name = 8;
+        string company_operator_name = 9;
+        string retailer_operator_name = 10;
+    }
+    repeated AffiliateDomain domains = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 page_size = 4;
+}
+
+message SetAffiliateDomainRequest {
+    string domain = 1;
+    optional bool available_to_all = 2;
+    repeated int64 affiliate_ids = 3;
+    api.common.OperatorContext initiator_operator_context = 4;
+}
+
+message SetAffiliateDomainResponse {}
+
 // -------------- Commission --------------
 
 message ListCommissionsRequest {
@@ -717,3 +772,4 @@ message ListAffiliateBillsResponse {
     int32 page = 3;
     int32 page_size = 4;
 }
+
