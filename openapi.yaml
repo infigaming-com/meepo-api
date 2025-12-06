@@ -6853,6 +6853,15 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateDomain'
+                total:
+                    type: integer
+                    format: int32
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.affiliate.service.v1.ListAffiliatesResponse:
             type: object
             properties:
@@ -10207,6 +10216,12 @@ components:
             properties:
                 operatorContextFilters:
                     $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                page:
+                    type: integer
+                    format: int32
+                pageSize:
+                    type: integer
+                    format: int32
         api.backoffice.service.v1.ListAffiliateUsersRequest:
             type: object
             properties:

@@ -368,6 +368,8 @@ message ListPostbacksRequest {
 
 message ListAffiliateDomainsRequest {
 	api.common.OperatorContextFilters operator_context_filters = 1;
+	optional int32 page = 2;
+	optional int32 page_size = 3;
 }
 
 message SetAffiliateDomainRequest {

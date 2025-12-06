@@ -579,10 +579,15 @@ message ListAffiliateDomainsRequest {
     int64 initiator_role_id = 2;
     api.common.OperatorContext initiator_operator_context = 3;
     api.common.OperatorContextFilters operator_context_filters = 4;
+    optional int32 page = 5;
+    optional int32 page_size = 6;
 }
 
 message ListAffiliateDomainsResponse {
     repeated AffiliateDomain domains = 1;
+    int32 total = 2;
+    int32 page = 3;
+    int32 page_size = 4;
 }
 
 message SetAffiliateDomainRequest {

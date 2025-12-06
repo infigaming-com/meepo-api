@@ -2609,6 +2609,8 @@ type ListAffiliateDomainsRequest struct {
 	InitiatorRoleId          int64                          `protobuf:"varint,2,opt,name=initiator_role_id,json=initiatorRoleId,proto3" json:"initiator_role_id,omitempty"`
 	InitiatorOperatorContext *common.OperatorContext        `protobuf:"bytes,3,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
 	OperatorContextFilters   *common.OperatorContextFilters `protobuf:"bytes,4,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	Page                     *int32                         `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize                 *int32                         `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -2671,9 +2673,26 @@ func (x *ListAffiliateDomainsRequest) GetOperatorContextFilters() *common.Operat
 	return nil
 }
 
+func (x *ListAffiliateDomainsRequest) GetPage() int32 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
+func (x *ListAffiliateDomainsRequest) GetPageSize() int32 {
+	if x != nil && x.PageSize != nil {
+		return *x.PageSize
+	}
+	return 0
+}
+
 type ListAffiliateDomainsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Domains       []*AffiliateDomain     `protobuf:"bytes,1,rep,name=domains,proto3" json:"domains,omitempty"`
+	Total         int32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	Page          int32                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2713,6 +2732,27 @@ func (x *ListAffiliateDomainsResponse) GetDomains() []*AffiliateDomain {
 		return x.Domains
 	}
 	return nil
+}
+
+func (x *ListAffiliateDomainsResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+func (x *ListAffiliateDomainsResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListAffiliateDomainsResponse) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
 }
 
 type SetAffiliateDomainRequest struct {
@@ -6411,14 +6451,22 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\roperator_name\x18\b \x01(\tR\foperatorName\x122\n" +
 	"\x15company_operator_name\x18\t \x01(\tR\x13companyOperatorName\x124\n" +
 	"\x16retailer_operator_name\x18\n" +
-	" \x01(\tR\x14retailerOperatorName\"\xae\x02\n" +
+	" \x01(\tR\x14retailerOperatorName\"\x80\x03\n" +
 	"\x1bListAffiliateDomainsRequest\x12*\n" +
 	"\x11initiator_user_id\x18\x01 \x01(\x03R\x0finitiatorUserId\x12*\n" +
 	"\x11initiator_role_id\x18\x02 \x01(\x03R\x0finitiatorRoleId\x12Y\n" +
 	"\x1ainitiator_operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12\\\n" +
-	"\x18operator_context_filters\x18\x04 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\"c\n" +
+	"\x18operator_context_filters\x18\x04 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x17\n" +
+	"\x04page\x18\x05 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
+	"\tpage_size\x18\x06 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
+	"\x05_pageB\f\n" +
+	"\n" +
+	"_page_size\"\xaa\x01\n" +
 	"\x1cListAffiliateDomainsResponse\x12C\n" +
-	"\adomains\x18\x01 \x03(\v2).api.affiliate.service.v1.AffiliateDomainR\adomains\"\xf7\x01\n" +
+	"\adomains\x18\x01 \x03(\v2).api.affiliate.service.v1.AffiliateDomainR\adomains\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x05R\x05total\x12\x12\n" +
+	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"\xf7\x01\n" +
 	"\x19SetAffiliateDomainRequest\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12-\n" +
 	"\x10available_to_all\x18\x02 \x01(\bH\x00R\x0eavailableToAll\x88\x01\x01\x12#\n" +
@@ -6935,6 +6983,7 @@ func file_affiliate_service_v1_affiliate_proto_init() {
 	file_affiliate_service_v1_affiliate_proto_msgTypes[21].OneofWrappers = []any{}
 	file_affiliate_service_v1_affiliate_proto_msgTypes[25].OneofWrappers = []any{}
 	file_affiliate_service_v1_affiliate_proto_msgTypes[33].OneofWrappers = []any{}
+	file_affiliate_service_v1_affiliate_proto_msgTypes[36].OneofWrappers = []any{}
 	file_affiliate_service_v1_affiliate_proto_msgTypes[38].OneofWrappers = []any{}
 	file_affiliate_service_v1_affiliate_proto_msgTypes[40].OneofWrappers = []any{}
 	file_affiliate_service_v1_affiliate_proto_msgTypes[42].OneofWrappers = []any{}
