@@ -6082,28 +6082,14 @@ components:
                     type: string
                 subAffiliateCommissionRate:
                     type: string
-        api.affiliate.service.v1.AffiliateDomain:
+        api.affiliate.service.v1.AffiliateDomain_Affiliate:
             type: object
             properties:
-                domain:
+                affiliateId:
                     type: string
-                availableToAll:
-                    type: boolean
-                affiliateIds:
-                    type: array
-                    items:
-                        type: string
-                operatorId:
+                affiliateName:
                     type: string
-                companyOperatorId:
-                    type: string
-                retailerOperatorId:
-                    type: string
-                operatorName:
-                    type: string
-                companyOperatorName:
-                    type: string
-                retailerOperatorName:
+                affiliateCompanyName:
                     type: string
         api.affiliate.service.v1.AffiliateInfo:
             type: object
@@ -6852,7 +6838,7 @@ components:
                 domains:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateDomain'
+                        $ref: '#/components/schemas/api.affiliate.service.v1.ListAffiliateDomainsResponse_AffiliateDomain'
                 total:
                     type: integer
                     format: int32
@@ -6862,6 +6848,29 @@ components:
                 pageSize:
                     type: integer
                     format: int32
+        api.affiliate.service.v1.ListAffiliateDomainsResponse_AffiliateDomain:
+            type: object
+            properties:
+                domain:
+                    type: string
+                availableToAll:
+                    type: boolean
+                affiliates:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.affiliate.service.v1.AffiliateDomain_Affiliate'
+                operatorId:
+                    type: string
+                companyOperatorId:
+                    type: string
+                retailerOperatorId:
+                    type: string
+                operatorName:
+                    type: string
+                companyOperatorName:
+                    type: string
+                retailerOperatorName:
+                    type: string
         api.affiliate.service.v1.ListAffiliatesResponse:
             type: object
             properties:

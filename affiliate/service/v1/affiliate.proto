@@ -559,17 +559,7 @@ message ListPostbacksResponse {
 
 // -------------- Affiliate Domain --------------
 
-message AffiliateDomain {
-    string domain = 1;
-    bool available_to_all = 2;          // only visible to operator
-    repeated int64 affiliate_ids = 3;   // only visible to operator
-    int64 operator_id = 4;
-    int64 company_operator_id = 6;
-    int64 retailer_operator_id = 7;
-    string operator_name = 8;
-    string company_operator_name = 9;
-    string retailer_operator_name = 10;
-}
+
 
 // ListAffiliateDomains - returns domains based on initiator_role_id
 // For affiliate: returns only available domains (available_to_all and affiliate_ids are empty)
@@ -584,6 +574,22 @@ message ListAffiliateDomainsRequest {
 }
 
 message ListAffiliateDomainsResponse {
+    message AffiliateDomain {
+        message Affiliate {
+            int64 affiliate_id = 1;
+            string affiliate_name = 2;
+            string affiliate_company_name = 3;
+        }
+        string domain = 1;
+        bool available_to_all = 2;          // only visible to operator
+        repeated Affiliate affiliates = 3;   // only visible to operator
+        int64 operator_id = 4;
+        int64 company_operator_id = 6;
+        int64 retailer_operator_id = 7;
+        string operator_name = 8;
+        string company_operator_name = 9;
+        string retailer_operator_name = 10;
+    }
     repeated AffiliateDomain domains = 1;
     int32 total = 2;
     int32 page = 3;
