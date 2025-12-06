@@ -2496,13 +2496,13 @@ func (x *ListPostbacksResponse) GetPageSize() int32 {
 // For affiliate: returns only available domains (available_to_all and affiliate_ids are empty)
 // For operator: returns all domains with config details
 type ListAffiliateDomainsRequest struct {
-	state                    protoimpl.MessageState         `protogen:"open.v1"`
-	InitiatorUserId          int64                          `protobuf:"varint,1,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
-	InitiatorRoleId          int64                          `protobuf:"varint,2,opt,name=initiator_role_id,json=initiatorRoleId,proto3" json:"initiator_role_id,omitempty"`
-	InitiatorOperatorContext *common.OperatorContext        `protobuf:"bytes,3,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
-	OperatorContextFilters   *common.OperatorContextFilters `protobuf:"bytes,4,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	Page                     *int32                         `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize                 *int32                         `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	state                    protoimpl.MessageState  `protogen:"open.v1"`
+	InitiatorUserId          int64                   `protobuf:"varint,1,opt,name=initiator_user_id,json=initiatorUserId,proto3" json:"initiator_user_id,omitempty"`
+	InitiatorRoleId          int64                   `protobuf:"varint,2,opt,name=initiator_role_id,json=initiatorRoleId,proto3" json:"initiator_role_id,omitempty"`
+	InitiatorOperatorContext *common.OperatorContext `protobuf:"bytes,3,opt,name=initiator_operator_context,json=initiatorOperatorContext,proto3" json:"initiator_operator_context,omitempty"`
+	TargetOperatorContext    *common.OperatorContext `protobuf:"bytes,4,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Page                     *int32                  `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize                 *int32                  `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -2558,9 +2558,9 @@ func (x *ListAffiliateDomainsRequest) GetInitiatorOperatorContext() *common.Oper
 	return nil
 }
 
-func (x *ListAffiliateDomainsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+func (x *ListAffiliateDomainsRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.OperatorContextFilters
+		return x.TargetOperatorContext
 	}
 	return nil
 }
@@ -6499,12 +6499,12 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\bCampaign\x12\x1f\n" +
 	"\vcampaign_id\x18\x01 \x01(\x03R\n" +
 	"campaignId\x12#\n" +
-	"\rcampaign_name\x18\x02 \x01(\tR\fcampaignName\"\x80\x03\n" +
+	"\rcampaign_name\x18\x02 \x01(\tR\fcampaignName\"\xf7\x02\n" +
 	"\x1bListAffiliateDomainsRequest\x12*\n" +
 	"\x11initiator_user_id\x18\x01 \x01(\x03R\x0finitiatorUserId\x12*\n" +
 	"\x11initiator_role_id\x18\x02 \x01(\x03R\x0finitiatorRoleId\x12Y\n" +
-	"\x1ainitiator_operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12\\\n" +
-	"\x18operator_context_filters\x18\x04 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x17\n" +
+	"\x1ainitiator_operator_context\x18\x03 \x01(\v2\x1b.api.common.OperatorContextR\x18initiatorOperatorContext\x12S\n" +
+	"\x17target_operator_context\x18\x04 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x17\n" +
 	"\x04page\x18\x05 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\x06 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
@@ -6927,7 +6927,7 @@ var file_affiliate_service_v1_affiliate_proto_depIdxs = []int32{
 	73,  // 47: api.affiliate.service.v1.ListPostbacksRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
 	63,  // 48: api.affiliate.service.v1.ListPostbacksResponse.postbacks:type_name -> api.affiliate.service.v1.ListPostbacksResponse.Postback
 	72,  // 49: api.affiliate.service.v1.ListAffiliateDomainsRequest.initiator_operator_context:type_name -> api.common.OperatorContext
-	73,  // 50: api.affiliate.service.v1.ListAffiliateDomainsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	72,  // 50: api.affiliate.service.v1.ListAffiliateDomainsRequest.target_operator_context:type_name -> api.common.OperatorContext
 	65,  // 51: api.affiliate.service.v1.ListAffiliateDomainsResponse.domains:type_name -> api.affiliate.service.v1.ListAffiliateDomainsResponse.AffiliateDomain
 	72,  // 52: api.affiliate.service.v1.SetAffiliateDomainRequest.initiator_operator_context:type_name -> api.common.OperatorContext
 	74,  // 53: api.affiliate.service.v1.ListCommissionsRequest.start_time:type_name -> google.protobuf.Timestamp

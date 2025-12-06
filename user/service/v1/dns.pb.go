@@ -508,17 +508,16 @@ func (x *ByoDomainInfo) GetCreatedAt() *timestamppb.Timestamp {
 }
 
 type ListOperatorByoDomainsRequest struct {
-	state                  protoimpl.MessageState         `protogen:"open.v1"`
-	OperatorContext        *common.OperatorContext        `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
-	DomainType             *string                        `protobuf:"bytes,2,opt,name=domain_type,json=domainType,proto3,oneof" json:"domain_type,omitempty"`
-	Status                 *string                        `protobuf:"bytes,3,opt,name=status,proto3,oneof" json:"status,omitempty"`
-	ValidationStatus       *string                        `protobuf:"bytes,4,opt,name=validation_status,json=validationStatus,proto3,oneof" json:"validation_status,omitempty"`
-	Page                   *int32                         `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize               *int32                         `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	Pagination             *bool                          `protobuf:"varint,7,opt,name=pagination,proto3,oneof" json:"pagination,omitempty"`
-	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,8,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state            protoimpl.MessageState  `protogen:"open.v1"`
+	OperatorContext  *common.OperatorContext `protobuf:"bytes,1,opt,name=operator_context,json=operatorContext,proto3" json:"operator_context,omitempty"`
+	DomainType       *string                 `protobuf:"bytes,2,opt,name=domain_type,json=domainType,proto3,oneof" json:"domain_type,omitempty"`
+	Status           *string                 `protobuf:"bytes,3,opt,name=status,proto3,oneof" json:"status,omitempty"`
+	ValidationStatus *string                 `protobuf:"bytes,4,opt,name=validation_status,json=validationStatus,proto3,oneof" json:"validation_status,omitempty"`
+	Page             *int32                  `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize         *int32                  `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Pagination       *bool                   `protobuf:"varint,7,opt,name=pagination,proto3,oneof" json:"pagination,omitempty"` // if nil, pagination is true
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *ListOperatorByoDomainsRequest) Reset() {
@@ -598,13 +597,6 @@ func (x *ListOperatorByoDomainsRequest) GetPagination() bool {
 		return *x.Pagination
 	}
 	return false
-}
-
-func (x *ListOperatorByoDomainsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
-	if x != nil {
-		return x.OperatorContextFilters
-	}
-	return nil
 }
 
 type ListOperatorByoDomainsResponse struct {
@@ -946,7 +938,7 @@ const file_user_service_v1_dns_proto_rawDesc = "" +
 	"\x17target_real_operator_id\x18\x10 \x01(\x03R\x14targetRealOperatorId\x120\n" +
 	"\x14target_operator_type\x18\x11 \x01(\tR\x12targetOperatorType\x129\n" +
 	"\n" +
-	"created_at\x18\x12 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xf1\x03\n" +
+	"created_at\x18\x12 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x93\x03\n" +
 	"\x1dListOperatorByoDomainsRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12$\n" +
 	"\vdomain_type\x18\x02 \x01(\tH\x00R\n" +
@@ -957,8 +949,7 @@ const file_user_service_v1_dns_proto_rawDesc = "" +
 	"\tpage_size\x18\x06 \x01(\x05H\x04R\bpageSize\x88\x01\x01\x12#\n" +
 	"\n" +
 	"pagination\x18\a \x01(\bH\x05R\n" +
-	"pagination\x88\x01\x01\x12\\\n" +
-	"\x18operator_context_filters\x18\b \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\x0e\n" +
+	"pagination\x88\x01\x01B\x0e\n" +
 	"\f_domain_typeB\t\n" +
 	"\a_statusB\x14\n" +
 	"\x12_validation_statusB\a\n" +
@@ -1029,24 +1020,23 @@ var file_user_service_v1_dns_proto_depIdxs = []int32{
 	3,  // 3: api.user.service.v1.ByoDomainInfo.validation_records:type_name -> api.user.service.v1.ValidationRecord
 	13, // 4: api.user.service.v1.ByoDomainInfo.created_at:type_name -> google.protobuf.Timestamp
 	11, // 5: api.user.service.v1.ListOperatorByoDomainsRequest.operator_context:type_name -> api.common.OperatorContext
-	12, // 6: api.user.service.v1.ListOperatorByoDomainsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	4,  // 7: api.user.service.v1.ListOperatorByoDomainsResponse.data:type_name -> api.user.service.v1.ByoDomainInfo
-	11, // 8: api.user.service.v1.AddOperatorByoDomainRequest.operator_context:type_name -> api.common.OperatorContext
-	3,  // 9: api.user.service.v1.AddOperatorByoDomainResponse.validation_records:type_name -> api.user.service.v1.ValidationRecord
-	11, // 10: api.user.service.v1.DeleteOperatorByoDomainRequest.operator_context:type_name -> api.common.OperatorContext
-	1,  // 11: api.user.service.v1.Dns.ListOperatorDomains:input_type -> api.user.service.v1.ListOperatorDomainsRequest
-	5,  // 12: api.user.service.v1.Dns.ListOperatorByoDomains:input_type -> api.user.service.v1.ListOperatorByoDomainsRequest
-	7,  // 13: api.user.service.v1.Dns.AddOperatorByoDomain:input_type -> api.user.service.v1.AddOperatorByoDomainRequest
-	9,  // 14: api.user.service.v1.Dns.DeleteOperatorByoDomain:input_type -> api.user.service.v1.DeleteOperatorByoDomainRequest
-	2,  // 15: api.user.service.v1.Dns.ListOperatorDomains:output_type -> api.user.service.v1.ListOperatorDomainsResponse
-	6,  // 16: api.user.service.v1.Dns.ListOperatorByoDomains:output_type -> api.user.service.v1.ListOperatorByoDomainsResponse
-	8,  // 17: api.user.service.v1.Dns.AddOperatorByoDomain:output_type -> api.user.service.v1.AddOperatorByoDomainResponse
-	10, // 18: api.user.service.v1.Dns.DeleteOperatorByoDomain:output_type -> api.user.service.v1.DeleteOperatorByoDomainResponse
-	15, // [15:19] is the sub-list for method output_type
-	11, // [11:15] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	4,  // 6: api.user.service.v1.ListOperatorByoDomainsResponse.data:type_name -> api.user.service.v1.ByoDomainInfo
+	11, // 7: api.user.service.v1.AddOperatorByoDomainRequest.operator_context:type_name -> api.common.OperatorContext
+	3,  // 8: api.user.service.v1.AddOperatorByoDomainResponse.validation_records:type_name -> api.user.service.v1.ValidationRecord
+	11, // 9: api.user.service.v1.DeleteOperatorByoDomainRequest.operator_context:type_name -> api.common.OperatorContext
+	1,  // 10: api.user.service.v1.Dns.ListOperatorDomains:input_type -> api.user.service.v1.ListOperatorDomainsRequest
+	5,  // 11: api.user.service.v1.Dns.ListOperatorByoDomains:input_type -> api.user.service.v1.ListOperatorByoDomainsRequest
+	7,  // 12: api.user.service.v1.Dns.AddOperatorByoDomain:input_type -> api.user.service.v1.AddOperatorByoDomainRequest
+	9,  // 13: api.user.service.v1.Dns.DeleteOperatorByoDomain:input_type -> api.user.service.v1.DeleteOperatorByoDomainRequest
+	2,  // 14: api.user.service.v1.Dns.ListOperatorDomains:output_type -> api.user.service.v1.ListOperatorDomainsResponse
+	6,  // 15: api.user.service.v1.Dns.ListOperatorByoDomains:output_type -> api.user.service.v1.ListOperatorByoDomainsResponse
+	8,  // 16: api.user.service.v1.Dns.AddOperatorByoDomain:output_type -> api.user.service.v1.AddOperatorByoDomainResponse
+	10, // 17: api.user.service.v1.Dns.DeleteOperatorByoDomain:output_type -> api.user.service.v1.DeleteOperatorByoDomainResponse
+	14, // [14:18] is the sub-list for method output_type
+	10, // [10:14] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_user_service_v1_dns_proto_init() }

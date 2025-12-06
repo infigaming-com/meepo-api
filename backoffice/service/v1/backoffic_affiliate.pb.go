@@ -1306,12 +1306,12 @@ func (x *ListPostbacksRequest) GetOperatorContextFilters() *common.OperatorConte
 }
 
 type ListAffiliateDomainsRequest struct {
-	state                  protoimpl.MessageState         `protogen:"open.v1"`
-	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,1,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
-	Page                   *int32                         `protobuf:"varint,2,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize               *int32                         `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	TargetOperatorContext *common.OperatorContext `protobuf:"bytes,1,opt,name=target_operator_context,json=targetOperatorContext,proto3" json:"target_operator_context,omitempty"`
+	Page                  *int32                  `protobuf:"varint,2,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize              *int32                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *ListAffiliateDomainsRequest) Reset() {
@@ -1344,9 +1344,9 @@ func (*ListAffiliateDomainsRequest) Descriptor() ([]byte, []int) {
 	return file_backoffice_service_v1_backoffic_affiliate_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *ListAffiliateDomainsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+func (x *ListAffiliateDomainsRequest) GetTargetOperatorContext() *common.OperatorContext {
 	if x != nil {
-		return x.OperatorContextFilters
+		return x.TargetOperatorContext
 	}
 	return nil
 }
@@ -2220,9 +2220,9 @@ const file_backoffice_service_v1_backoffic_affiliate_proto_rawDesc = "" +
 	"\a_statusB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\xcd\x01\n" +
-	"\x1bListAffiliateDomainsRequest\x12\\\n" +
-	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x17\n" +
+	"_page_size\"\xc4\x01\n" +
+	"\x1bListAffiliateDomainsRequest\x12S\n" +
+	"\x17target_operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x15targetOperatorContext\x12\x17\n" +
 	"\x04page\x18\x02 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
 	"\tpage_size\x18\x03 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
 	"\x05_pageB\f\n" +
@@ -2445,7 +2445,7 @@ var file_backoffice_service_v1_backoffic_affiliate_proto_depIdxs = []int32{
 	32, // 8: api.backoffice.service.v1.UpdateCampaignRequest.campaign:type_name -> api.affiliate.service.v1.Campaign
 	33, // 9: api.backoffice.service.v1.ListCampaignsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
 	33, // 10: api.backoffice.service.v1.ListPostbacksRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	33, // 11: api.backoffice.service.v1.ListAffiliateDomainsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	30, // 11: api.backoffice.service.v1.ListAffiliateDomainsRequest.target_operator_context:type_name -> api.common.OperatorContext
 	34, // 12: api.backoffice.service.v1.ListEventsRequest.start_time:type_name -> google.protobuf.Timestamp
 	34, // 13: api.backoffice.service.v1.ListEventsRequest.end_time:type_name -> google.protobuf.Timestamp
 	33, // 14: api.backoffice.service.v1.ListEventsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters

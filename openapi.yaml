@@ -10223,8 +10223,8 @@ components:
         api.backoffice.service.v1.ListAffiliateDomainsRequest:
             type: object
             properties:
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
+                targetOperatorContext:
+                    $ref: '#/components/schemas/api.common.OperatorContext'
                 page:
                     type: integer
                     format: int32
@@ -11582,8 +11582,6 @@ components:
                 pageSize:
                     type: integer
                     format: int32
-                operatorContextFilters:
-                    $ref: '#/components/schemas/api.common.OperatorContextFilters'
         api.backoffice.service.v1.ListOperatorDomainsRequest:
             type: object
             properties:

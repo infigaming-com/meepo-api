@@ -568,7 +568,7 @@ message ListAffiliateDomainsRequest {
     int64 initiator_user_id = 1;
     int64 initiator_role_id = 2;
     api.common.OperatorContext initiator_operator_context = 3;
-    api.common.OperatorContextFilters operator_context_filters = 4;
+    api.common.OperatorContext target_operator_context = 4;
     optional int32 page = 5;
     optional int32 page_size = 6;
 }
