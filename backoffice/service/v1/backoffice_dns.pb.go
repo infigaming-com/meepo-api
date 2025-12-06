@@ -77,11 +77,12 @@ func (x *ListOperatorDomainsRequest) GetType() string {
 }
 
 type ListOperatorByoDomainsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Page          *int32                 `protobuf:"varint,1,opt,name=page,proto3,oneof" json:"page,omitempty"`
-	PageSize      *int32                 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState         `protogen:"open.v1"`
+	Page                   *int32                         `protobuf:"varint,1,opt,name=page,proto3,oneof" json:"page,omitempty"`
+	PageSize               *int32                         `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	OperatorContextFilters *common.OperatorContextFilters `protobuf:"bytes,3,opt,name=operator_context_filters,json=operatorContextFilters,proto3" json:"operator_context_filters,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ListOperatorByoDomainsRequest) Reset() {
@@ -126,6 +127,13 @@ func (x *ListOperatorByoDomainsRequest) GetPageSize() int32 {
 		return *x.PageSize
 	}
 	return 0
+}
+
+func (x *ListOperatorByoDomainsRequest) GetOperatorContextFilters() *common.OperatorContextFilters {
+	if x != nil {
+		return x.OperatorContextFilters
+	}
+	return nil
 }
 
 type AddOperatorByoDomainRequest struct {
@@ -240,10 +248,11 @@ const file_backoffice_service_v1_backoffice_dns_proto_rawDesc = "" +
 	"\x1aListOperatorDomainsRequest\x12\\\n" +
 	"\x18operator_context_filters\x18\x01 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFilters\x12\x17\n" +
 	"\x04type\x18\x02 \x01(\tH\x00R\x04type\x88\x01\x01B\a\n" +
-	"\x05_type\"q\n" +
+	"\x05_type\"\xcf\x01\n" +
 	"\x1dListOperatorByoDomainsRequest\x12\x17\n" +
 	"\x04page\x18\x01 \x01(\x05H\x00R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x02 \x01(\x05H\x01R\bpageSize\x88\x01\x01B\a\n" +
+	"\tpage_size\x18\x02 \x01(\x05H\x01R\bpageSize\x88\x01\x01\x12\\\n" +
+	"\x18operator_context_filters\x18\x03 \x01(\v2\".api.common.OperatorContextFiltersR\x16operatorContextFiltersB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
 	"_page_size\"\x84\x01\n" +
@@ -288,19 +297,20 @@ var file_backoffice_service_v1_backoffice_dns_proto_goTypes = []any{
 }
 var file_backoffice_service_v1_backoffice_dns_proto_depIdxs = []int32{
 	4, // 0: api.backoffice.service.v1.ListOperatorDomainsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
-	0, // 1: api.backoffice.service.v1.BackofficeDns.ListOperatorDomains:input_type -> api.backoffice.service.v1.ListOperatorDomainsRequest
-	1, // 2: api.backoffice.service.v1.BackofficeDns.ListOperatorByoDomains:input_type -> api.backoffice.service.v1.ListOperatorByoDomainsRequest
-	2, // 3: api.backoffice.service.v1.BackofficeDns.AddOperatorByoDomain:input_type -> api.backoffice.service.v1.AddOperatorByoDomainRequest
-	3, // 4: api.backoffice.service.v1.BackofficeDns.DeleteOperatorByoDomain:input_type -> api.backoffice.service.v1.DeleteOperatorByoDomainRequest
-	5, // 5: api.backoffice.service.v1.BackofficeDns.ListOperatorDomains:output_type -> api.user.service.v1.ListOperatorDomainsResponse
-	6, // 6: api.backoffice.service.v1.BackofficeDns.ListOperatorByoDomains:output_type -> api.user.service.v1.ListOperatorByoDomainsResponse
-	7, // 7: api.backoffice.service.v1.BackofficeDns.AddOperatorByoDomain:output_type -> api.user.service.v1.AddOperatorByoDomainResponse
-	8, // 8: api.backoffice.service.v1.BackofficeDns.DeleteOperatorByoDomain:output_type -> api.user.service.v1.DeleteOperatorByoDomainResponse
-	5, // [5:9] is the sub-list for method output_type
-	1, // [1:5] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	4, // 1: api.backoffice.service.v1.ListOperatorByoDomainsRequest.operator_context_filters:type_name -> api.common.OperatorContextFilters
+	0, // 2: api.backoffice.service.v1.BackofficeDns.ListOperatorDomains:input_type -> api.backoffice.service.v1.ListOperatorDomainsRequest
+	1, // 3: api.backoffice.service.v1.BackofficeDns.ListOperatorByoDomains:input_type -> api.backoffice.service.v1.ListOperatorByoDomainsRequest
+	2, // 4: api.backoffice.service.v1.BackofficeDns.AddOperatorByoDomain:input_type -> api.backoffice.service.v1.AddOperatorByoDomainRequest
+	3, // 5: api.backoffice.service.v1.BackofficeDns.DeleteOperatorByoDomain:input_type -> api.backoffice.service.v1.DeleteOperatorByoDomainRequest
+	5, // 6: api.backoffice.service.v1.BackofficeDns.ListOperatorDomains:output_type -> api.user.service.v1.ListOperatorDomainsResponse
+	6, // 7: api.backoffice.service.v1.BackofficeDns.ListOperatorByoDomains:output_type -> api.user.service.v1.ListOperatorByoDomainsResponse
+	7, // 8: api.backoffice.service.v1.BackofficeDns.AddOperatorByoDomain:output_type -> api.user.service.v1.AddOperatorByoDomainResponse
+	8, // 9: api.backoffice.service.v1.BackofficeDns.DeleteOperatorByoDomain:output_type -> api.user.service.v1.DeleteOperatorByoDomainResponse
+	6, // [6:10] is the sub-list for method output_type
+	2, // [2:6] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_backoffice_service_v1_backoffice_dns_proto_init() }

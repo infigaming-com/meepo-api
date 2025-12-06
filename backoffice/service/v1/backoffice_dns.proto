@@ -48,6 +48,7 @@ message ListOperatorDomainsRequest {
 message ListOperatorByoDomainsRequest {
 	optional int32 page = 1;
 	optional int32 page_size = 2;
+	api.common.OperatorContextFilters operator_context_filters = 3;
 }
 
 message AddOperatorByoDomainRequest {

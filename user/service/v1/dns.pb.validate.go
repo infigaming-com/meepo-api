@@ -813,6 +813,35 @@ func (m *ListOperatorByoDomainsRequest) validate(all bool) error {
 		}
 	}
 
+	if all {
+		switch v := interface{}(m.GetOperatorContextFilters()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListOperatorByoDomainsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListOperatorByoDomainsRequestValidationError{
+					field:  "OperatorContextFilters",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContextFilters()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListOperatorByoDomainsRequestValidationError{
+				field:  "OperatorContextFilters",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if m.DomainType != nil {
 		// no validation rules for DomainType
 	}
@@ -831,6 +860,10 @@ func (m *ListOperatorByoDomainsRequest) validate(all bool) error {
 
 	if m.PageSize != nil {
 		// no validation rules for PageSize
+	}
+
+	if m.Pagination != nil {
+		// no validation rules for Pagination
 	}
 
 	if len(errors) > 0 {
