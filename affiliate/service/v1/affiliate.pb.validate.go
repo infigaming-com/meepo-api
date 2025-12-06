@@ -5324,11 +5324,15 @@ func (m *AffiliateDomain) validate(all bool) error {
 
 	// no validation rules for OperatorId
 
-	// no validation rules for OperatorName
-
 	// no validation rules for CompanyOperatorId
 
+	// no validation rules for RetailerOperatorId
+
+	// no validation rules for OperatorName
+
 	// no validation rules for CompanyOperatorName
+
+	// no validation rules for RetailerOperatorName
 
 	if len(errors) > 0 {
 		return AffiliateDomainMultiError(errors)

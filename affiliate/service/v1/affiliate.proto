@@ -564,9 +564,11 @@ message AffiliateDomain {
     bool available_to_all = 2;          // only visible to operator
     repeated int64 affiliate_ids = 3;   // only visible to operator
     int64 operator_id = 4;
-    string operator_name = 5;
     int64 company_operator_id = 6;
-    string company_operator_name = 7;
+    int64 retailer_operator_id = 7;
+    string operator_name = 8;
+    string company_operator_name = 9;
+    string retailer_operator_name = 10;
 }
 
 // ListAffiliateDomains - returns domains based on initiator_role_id

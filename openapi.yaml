@@ -6095,11 +6095,15 @@ components:
                         type: string
                 operatorId:
                     type: string
-                operatorName:
-                    type: string
                 companyOperatorId:
                     type: string
+                retailerOperatorId:
+                    type: string
+                operatorName:
+                    type: string
                 companyOperatorName:
+                    type: string
+                retailerOperatorName:
                     type: string
         api.affiliate.service.v1.AffiliateInfo:
             type: object

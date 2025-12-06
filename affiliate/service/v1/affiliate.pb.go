@@ -2493,16 +2493,18 @@ func (x *ListPostbacksResponse) GetPageSize() int32 {
 }
 
 type AffiliateDomain struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	Domain              string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
-	AvailableToAll      bool                   `protobuf:"varint,2,opt,name=available_to_all,json=availableToAll,proto3" json:"available_to_all,omitempty"` // only visible to operator
-	AffiliateIds        []int64                `protobuf:"varint,3,rep,packed,name=affiliate_ids,json=affiliateIds,proto3" json:"affiliate_ids,omitempty"`  // only visible to operator
-	OperatorId          int64                  `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
-	OperatorName        string                 `protobuf:"bytes,5,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
-	CompanyOperatorId   int64                  `protobuf:"varint,6,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
-	CompanyOperatorName string                 `protobuf:"bytes,7,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	Domain               string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
+	AvailableToAll       bool                   `protobuf:"varint,2,opt,name=available_to_all,json=availableToAll,proto3" json:"available_to_all,omitempty"` // only visible to operator
+	AffiliateIds         []int64                `protobuf:"varint,3,rep,packed,name=affiliate_ids,json=affiliateIds,proto3" json:"affiliate_ids,omitempty"`  // only visible to operator
+	OperatorId           int64                  `protobuf:"varint,4,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	CompanyOperatorId    int64                  `protobuf:"varint,6,opt,name=company_operator_id,json=companyOperatorId,proto3" json:"company_operator_id,omitempty"`
+	RetailerOperatorId   int64                  `protobuf:"varint,7,opt,name=retailer_operator_id,json=retailerOperatorId,proto3" json:"retailer_operator_id,omitempty"`
+	OperatorName         string                 `protobuf:"bytes,8,opt,name=operator_name,json=operatorName,proto3" json:"operator_name,omitempty"`
+	CompanyOperatorName  string                 `protobuf:"bytes,9,opt,name=company_operator_name,json=companyOperatorName,proto3" json:"company_operator_name,omitempty"`
+	RetailerOperatorName string                 `protobuf:"bytes,10,opt,name=retailer_operator_name,json=retailerOperatorName,proto3" json:"retailer_operator_name,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *AffiliateDomain) Reset() {
@@ -2563,13 +2565,6 @@ func (x *AffiliateDomain) GetOperatorId() int64 {
 	return 0
 }
 
-func (x *AffiliateDomain) GetOperatorName() string {
-	if x != nil {
-		return x.OperatorName
-	}
-	return ""
-}
-
 func (x *AffiliateDomain) GetCompanyOperatorId() int64 {
 	if x != nil {
 		return x.CompanyOperatorId
@@ -2577,9 +2572,30 @@ func (x *AffiliateDomain) GetCompanyOperatorId() int64 {
 	return 0
 }
 
+func (x *AffiliateDomain) GetRetailerOperatorId() int64 {
+	if x != nil {
+		return x.RetailerOperatorId
+	}
+	return 0
+}
+
+func (x *AffiliateDomain) GetOperatorName() string {
+	if x != nil {
+		return x.OperatorName
+	}
+	return ""
+}
+
 func (x *AffiliateDomain) GetCompanyOperatorName() string {
 	if x != nil {
 		return x.CompanyOperatorName
+	}
+	return ""
+}
+
+func (x *AffiliateDomain) GetRetailerOperatorName() string {
+	if x != nil {
+		return x.RetailerOperatorName
 	}
 	return ""
 }
@@ -6383,16 +6399,19 @@ const file_affiliate_service_v1_affiliate_proto_rawDesc = "" +
 	"\bCampaign\x12\x1f\n" +
 	"\vcampaign_id\x18\x01 \x01(\x03R\n" +
 	"campaignId\x12#\n" +
-	"\rcampaign_name\x18\x02 \x01(\tR\fcampaignName\"\xa2\x02\n" +
+	"\rcampaign_name\x18\x02 \x01(\tR\fcampaignName\"\x8a\x03\n" +
 	"\x0fAffiliateDomain\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12(\n" +
 	"\x10available_to_all\x18\x02 \x01(\bR\x0eavailableToAll\x12#\n" +
 	"\raffiliate_ids\x18\x03 \x03(\x03R\faffiliateIds\x12\x1f\n" +
 	"\voperator_id\x18\x04 \x01(\x03R\n" +
-	"operatorId\x12#\n" +
-	"\roperator_name\x18\x05 \x01(\tR\foperatorName\x12.\n" +
-	"\x13company_operator_id\x18\x06 \x01(\x03R\x11companyOperatorId\x122\n" +
-	"\x15company_operator_name\x18\a \x01(\tR\x13companyOperatorName\"\xae\x02\n" +
+	"operatorId\x12.\n" +
+	"\x13company_operator_id\x18\x06 \x01(\x03R\x11companyOperatorId\x120\n" +
+	"\x14retailer_operator_id\x18\a \x01(\x03R\x12retailerOperatorId\x12#\n" +
+	"\roperator_name\x18\b \x01(\tR\foperatorName\x122\n" +
+	"\x15company_operator_name\x18\t \x01(\tR\x13companyOperatorName\x124\n" +
+	"\x16retailer_operator_name\x18\n" +
+	" \x01(\tR\x14retailerOperatorName\"\xae\x02\n" +
 	"\x1bListAffiliateDomainsRequest\x12*\n" +
 	"\x11initiator_user_id\x18\x01 \x01(\x03R\x0finitiatorUserId\x12*\n" +
 	"\x11initiator_role_id\x18\x02 \x01(\x03R\x0finitiatorRoleId\x12Y\n" +
