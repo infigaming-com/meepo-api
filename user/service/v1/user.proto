@@ -1162,6 +1162,7 @@ message GetOverviewDashboardFromUserResponse {
 
 message DeleteRoleRequest {
 	int64 role_id = 1;
+	common.OperatorContext operator_context = 2;
 }
 
 message DeleteRoleResponse {}
