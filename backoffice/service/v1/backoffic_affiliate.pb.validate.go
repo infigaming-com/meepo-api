@@ -2465,6 +2465,10 @@ func (m *ListPostbacksRequest) validate(all bool) error {
 		// no validation rules for AffiliateId
 	}
 
+	if m.Status != nil {
+		// no validation rules for Status
+	}
+
 	if m.Page != nil {
 		// no validation rules for Page
 	}
@@ -2552,6 +2556,254 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListPostbacksRequestValidationError{}
+
+// Validate checks the field values on ListAffiliateDomainsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListAffiliateDomainsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListAffiliateDomainsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListAffiliateDomainsRequestMultiError, or nil if none found.
+func (m *ListAffiliateDomainsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListAffiliateDomainsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetTargetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListAffiliateDomainsRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListAffiliateDomainsRequestValidationError{
+					field:  "TargetOperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTargetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListAffiliateDomainsRequestValidationError{
+				field:  "TargetOperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.Page != nil {
+		// no validation rules for Page
+	}
+
+	if m.PageSize != nil {
+		// no validation rules for PageSize
+	}
+
+	if len(errors) > 0 {
+		return ListAffiliateDomainsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListAffiliateDomainsRequestMultiError is an error wrapping multiple
+// validation errors returned by ListAffiliateDomainsRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ListAffiliateDomainsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListAffiliateDomainsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListAffiliateDomainsRequestMultiError) AllErrors() []error { return m }
+
+// ListAffiliateDomainsRequestValidationError is the validation error returned
+// by ListAffiliateDomainsRequest.Validate if the designated constraints
+// aren't met.
+type ListAffiliateDomainsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListAffiliateDomainsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListAffiliateDomainsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListAffiliateDomainsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListAffiliateDomainsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListAffiliateDomainsRequestValidationError) ErrorName() string {
+	return "ListAffiliateDomainsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListAffiliateDomainsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListAffiliateDomainsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListAffiliateDomainsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListAffiliateDomainsRequestValidationError{}
+
+// Validate checks the field values on SetAffiliateDomainRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SetAffiliateDomainRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SetAffiliateDomainRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SetAffiliateDomainRequestMultiError, or nil if none found.
+func (m *SetAffiliateDomainRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SetAffiliateDomainRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Domain
+
+	if m.AvailableToAll != nil {
+		// no validation rules for AvailableToAll
+	}
+
+	if len(errors) > 0 {
+		return SetAffiliateDomainRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SetAffiliateDomainRequestMultiError is an error wrapping multiple validation
+// errors returned by SetAffiliateDomainRequest.ValidateAll() if the
+// designated constraints aren't met.
+type SetAffiliateDomainRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SetAffiliateDomainRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SetAffiliateDomainRequestMultiError) AllErrors() []error { return m }
+
+// SetAffiliateDomainRequestValidationError is the validation error returned by
+// SetAffiliateDomainRequest.Validate if the designated constraints aren't met.
+type SetAffiliateDomainRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SetAffiliateDomainRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SetAffiliateDomainRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SetAffiliateDomainRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SetAffiliateDomainRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SetAffiliateDomainRequestValidationError) ErrorName() string {
+	return "SetAffiliateDomainRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SetAffiliateDomainRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSetAffiliateDomainRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SetAffiliateDomainRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SetAffiliateDomainRequestValidationError{}
 
 // Validate checks the field values on ListEventsRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, the

@@ -833,6 +833,10 @@ func (m *ListOperatorByoDomainsRequest) validate(all bool) error {
 		// no validation rules for PageSize
 	}
 
+	if m.Pagination != nil {
+		// no validation rules for Pagination
+	}
+
 	if len(errors) > 0 {
 		return ListOperatorByoDomainsRequestMultiError(errors)
 	}

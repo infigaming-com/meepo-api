@@ -515,6 +515,7 @@ type ListOperatorByoDomainsRequest struct {
 	ValidationStatus *string                 `protobuf:"bytes,4,opt,name=validation_status,json=validationStatus,proto3,oneof" json:"validation_status,omitempty"`
 	Page             *int32                  `protobuf:"varint,5,opt,name=page,proto3,oneof" json:"page,omitempty"`
 	PageSize         *int32                  `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3,oneof" json:"page_size,omitempty"`
+	Pagination       *bool                   `protobuf:"varint,7,opt,name=pagination,proto3,oneof" json:"pagination,omitempty"` // if nil, pagination is true
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -589,6 +590,13 @@ func (x *ListOperatorByoDomainsRequest) GetPageSize() int32 {
 		return *x.PageSize
 	}
 	return 0
+}
+
+func (x *ListOperatorByoDomainsRequest) GetPagination() bool {
+	if x != nil && x.Pagination != nil {
+		return *x.Pagination
+	}
+	return false
 }
 
 type ListOperatorByoDomainsResponse struct {
@@ -930,7 +938,7 @@ const file_user_service_v1_dns_proto_rawDesc = "" +
 	"\x17target_real_operator_id\x18\x10 \x01(\x03R\x14targetRealOperatorId\x120\n" +
 	"\x14target_operator_type\x18\x11 \x01(\tR\x12targetOperatorType\x129\n" +
 	"\n" +
-	"created_at\x18\x12 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xdf\x02\n" +
+	"created_at\x18\x12 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x93\x03\n" +
 	"\x1dListOperatorByoDomainsRequest\x12F\n" +
 	"\x10operator_context\x18\x01 \x01(\v2\x1b.api.common.OperatorContextR\x0foperatorContext\x12$\n" +
 	"\vdomain_type\x18\x02 \x01(\tH\x00R\n" +
@@ -938,13 +946,17 @@ const file_user_service_v1_dns_proto_rawDesc = "" +
 	"\x06status\x18\x03 \x01(\tH\x01R\x06status\x88\x01\x01\x120\n" +
 	"\x11validation_status\x18\x04 \x01(\tH\x02R\x10validationStatus\x88\x01\x01\x12\x17\n" +
 	"\x04page\x18\x05 \x01(\x05H\x03R\x04page\x88\x01\x01\x12 \n" +
-	"\tpage_size\x18\x06 \x01(\x05H\x04R\bpageSize\x88\x01\x01B\x0e\n" +
+	"\tpage_size\x18\x06 \x01(\x05H\x04R\bpageSize\x88\x01\x01\x12#\n" +
+	"\n" +
+	"pagination\x18\a \x01(\bH\x05R\n" +
+	"pagination\x88\x01\x01B\x0e\n" +
 	"\f_domain_typeB\t\n" +
 	"\a_statusB\x14\n" +
 	"\x12_validation_statusB\a\n" +
 	"\x05_pageB\f\n" +
 	"\n" +
-	"_page_size\"\x9f\x01\n" +
+	"_page_sizeB\r\n" +
+	"\v_pagination\"\x9f\x01\n" +
 	"\x1eListOperatorByoDomainsResponse\x126\n" +
 	"\x04data\x18\x01 \x03(\v2\".api.user.service.v1.ByoDomainInfoR\x04data\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x1b\n" +

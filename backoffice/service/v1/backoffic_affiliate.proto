@@ -151,6 +151,22 @@ service BackofficeAffiliate {
 		};
 	}
 
+	// -------------- Affiliate Domain --------------
+
+	rpc ListAffiliateDomains(ListAffiliateDomainsRequest) returns (api.affiliate.service.v1.ListAffiliateDomainsResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/domain/list"
+			body: "*"
+		};
+	}
+
+	rpc SetAffiliateDomain(SetAffiliateDomainRequest) returns (api.affiliate.service.v1.SetAffiliateDomainResponse) {
+		option (google.api.http) = {
+			post: "/v1/backoffice/affiliate/domain/set"
+			body: "*"
+		};
+	}
+
 	// -------------- Event --------------
 
 	rpc ListEvents(ListEventsRequest) returns (api.affiliate.service.v1.ListEventsResponse) {
@@ -342,9 +358,24 @@ message DeletePostbackRequest {
 
 message ListPostbacksRequest {
     optional int64 affiliate_id = 1;
-    optional int32 page = 2;
-    optional int32 page_size = 3;
-    api.common.OperatorContextFilters operator_context_filters = 4;
+	optional string status = 2; // active/inactive
+    optional int32 page = 3;
+    optional int32 page_size = 4;
+    api.common.OperatorContextFilters operator_context_filters = 5;
+}
+
+// -------------- Affiliate Domain --------------
+
+message ListAffiliateDomainsRequest {
+	api.common.OperatorContext target_operator_context = 1;
+	optional int32 page = 2;
+	optional int32 page_size = 3;
+}
+
+message SetAffiliateDomainRequest {
+	string domain = 1;
+	optional bool available_to_all = 2;
+	repeated int64 affiliate_ids = 3;
 }
 
 // -------------- Event --------------
