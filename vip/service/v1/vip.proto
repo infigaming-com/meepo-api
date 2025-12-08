@@ -50,6 +50,10 @@ service Vip {
   rpc GetDailyLossbackStatus(GetDailyLossbackStatusRequest) returns (GetDailyLossbackStatusResponse) {
   }
 
+  // 强制执行 VIP 奖励发放（跳过时间检查）
+  rpc ForceRunVipRewards(ForceRunVipRewardsRequest) returns (ForceRunVipRewardsResponse) {
+  }
+
 }
 
 enum VipDisplayRule {
@@ -435,4 +439,18 @@ message GetDailyLossbackStatusRequest {
 
 message GetDailyLossbackStatusResponse {
   DailyLossbackStatus status = 1;
+}
+
+// 强制执行 VIP 奖励发放请求
+message ForceRunVipRewardsRequest {
+  api.common.OperatorContext operator_context = 1;
+  bool include_daily = 2;
+  bool include_weekly = 3;
+  bool include_monthly = 4;
+}
+
+// 强制执行 VIP 奖励发放响应
+message ForceRunVipRewardsResponse {
+  bool success = 1;
+  string message = 2;
 }
