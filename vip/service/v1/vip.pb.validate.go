@@ -5045,6 +5045,249 @@ var _ interface {
 	ErrorName() string
 } = GetDailyLossbackStatusResponseValidationError{}
 
+// Validate checks the field values on ForceRunVipRewardsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ForceRunVipRewardsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ForceRunVipRewardsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ForceRunVipRewardsRequestMultiError, or nil if none found.
+func (m *ForceRunVipRewardsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ForceRunVipRewardsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetOperatorContext()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ForceRunVipRewardsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ForceRunVipRewardsRequestValidationError{
+					field:  "OperatorContext",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOperatorContext()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ForceRunVipRewardsRequestValidationError{
+				field:  "OperatorContext",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for IncludeDaily
+
+	// no validation rules for IncludeWeekly
+
+	// no validation rules for IncludeMonthly
+
+	if len(errors) > 0 {
+		return ForceRunVipRewardsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ForceRunVipRewardsRequestMultiError is an error wrapping multiple validation
+// errors returned by ForceRunVipRewardsRequest.ValidateAll() if the
+// designated constraints aren't met.
+type ForceRunVipRewardsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ForceRunVipRewardsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ForceRunVipRewardsRequestMultiError) AllErrors() []error { return m }
+
+// ForceRunVipRewardsRequestValidationError is the validation error returned by
+// ForceRunVipRewardsRequest.Validate if the designated constraints aren't met.
+type ForceRunVipRewardsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ForceRunVipRewardsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ForceRunVipRewardsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ForceRunVipRewardsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ForceRunVipRewardsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ForceRunVipRewardsRequestValidationError) ErrorName() string {
+	return "ForceRunVipRewardsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ForceRunVipRewardsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sForceRunVipRewardsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ForceRunVipRewardsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ForceRunVipRewardsRequestValidationError{}
+
+// Validate checks the field values on ForceRunVipRewardsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ForceRunVipRewardsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ForceRunVipRewardsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ForceRunVipRewardsResponseMultiError, or nil if none found.
+func (m *ForceRunVipRewardsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ForceRunVipRewardsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Success
+
+	// no validation rules for Message
+
+	if len(errors) > 0 {
+		return ForceRunVipRewardsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ForceRunVipRewardsResponseMultiError is an error wrapping multiple
+// validation errors returned by ForceRunVipRewardsResponse.ValidateAll() if
+// the designated constraints aren't met.
+type ForceRunVipRewardsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ForceRunVipRewardsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ForceRunVipRewardsResponseMultiError) AllErrors() []error { return m }
+
+// ForceRunVipRewardsResponseValidationError is the validation error returned
+// by ForceRunVipRewardsResponse.Validate if the designated constraints aren't met.
+type ForceRunVipRewardsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ForceRunVipRewardsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ForceRunVipRewardsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ForceRunVipRewardsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ForceRunVipRewardsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ForceRunVipRewardsResponseValidationError) ErrorName() string {
+	return "ForceRunVipRewardsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ForceRunVipRewardsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sForceRunVipRewardsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ForceRunVipRewardsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ForceRunVipRewardsResponseValidationError{}
+
 // Validate checks the field values on
 // GetClaimableVipRewardsResponse_ClaimableVipReward with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
